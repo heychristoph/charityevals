@@ -1,19 +1,21 @@
 {
   "id": "salvation-army-charityevals",
-  "name": "The Salvation Army USA (charityevals' estimate)",
+  "name": "The Salvation Army USA: services in the US (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
+  "beneficiaries": {"USA":1},
+  "beneficiaries_note": "Our build: the Salvation Army's services in the US (its overseas work has its own model).",
   "template": "domestic-services",
   "estimate_basis": "unit_cost",
   "charity": "salvation-army",
   "owner": "charityevals",
-  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, residential addiction recovery funded by its thrift stores, and community centres. Our model of every programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs and clients' fees left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed against the person's own alternative, recovery by remissions and deaths, and the community and church programmes by life satisfaction. The US work comes to a small fraction of a healthy year per $1,000, about a thousandth of the site's global-health median, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about $17,500, a 0.2% gain on the log scale, where a GiveDirectly transfer raises a Kenyan household's consumption by about 40%. About half of the US result comes from food, goods, money and services. The biggest uncertainties are what families would have got without the Salvation Army and how much the recovery programme changes. About 2% of the spending is overseas work (the World Service Office and support for the international Salvation Army), with no outcome data: valued at the median of the site's cash, humanitarian and livelihood models, discounted by the shared missing-data slider, it carries most of the result, because a dollar does hundreds of times more on the log scale in a poor country.",
+  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, housing placements, residential addiction recovery funded by its thrift stores, and community centres. Our model of every US programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs, clients' day-care fees and the overseas work (a draft model of its own, not yet published) left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed, recovery by remissions and deaths, and the community and church programmes by life satisfaction. It comes to about 0.003 years of healthy life per $1,000, about a thousandth of the site's global-health median, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about $18,000, a 0.2% gain on the log scale, where a GiveDirectly transfer raises a Kenyan household's consumption by about 40%. About half the result comes from food, goods, money and services, a quarter from shelter. Every branch is discounted for missing data, since none of the Salvation Army's services has a controlled evaluation: food, goods and money, shelter, placements, recovery, community programmes and worship. The biggest uncertainties are what families would have got without the Salvation Army, how well its counts reflect help delivered, and how much the recovery programme changes.",
   "source": {
     "publisher": "charityevals",
-    "title": "charityevals' estimate: The Salvation Army USA",
+    "title": "charityevals' estimate: The Salvation Army USA, services in the US",
     "url": "https://charityevals.org/salvation-army-charityevals",
-    "published": "2026-11-03",
-    "retrieved": "2026-11-03"
+    "published": "2026-11-04",
+    "retrieved": "2026-11-04"
   },
   "resources": [
     {
@@ -80,12 +82,6 @@
       "explainer": "The outcome in the family's shared unit, per dollar."
     },
     {
-      "id": "proxy",
-      "title": "Programmes with no outcome data",
-      "kind": "ours",
-      "explainer": "charityevals' standard step for a programme that publishes no outcome data at all: it is valued at the result per dollar of the same kind of work elsewhere on the site, read live, and counts less by the shared slider \"How much we count a programme we could only estimate from similar ones\" (docs/normalization.md 2.12). A programme with some outcome data is modelled from it in the chain above, with wide ranges, never here."
-    },
-    {
       "id": "donor",
       "title": "Your dollar's share",
       "kind": "ours",
@@ -98,98 +94,56 @@
       "section": "cost",
       "label": "US programme spending in fiscal 2025, net of the thrift stores' running costs and day-care fees",
       "format": "usd",
-      "explainer": "All four programme lines of the combined US accounts (corps community centres, rehabilitation, residential and institutional services, other social services), less what the Adult Rehabilitation Centers' thrift stores cost to run and less the day-care fees clients paid (their own money for a service valued below net of them), and less the overseas work paid through these accounts (the World Service Office and the territories' support for the international Salvation Army), which is valued in the proxy section. The stores are a self-financing trading arm: their sales pay for their own staff, trucks and rent, and only their net contribution pays for the recovery programme. Counting their gross running costs as charitable spending would make every donated dollar look as if it bought less help than it does. Fiscal year 1 October 2024 to 30 September 2025, the latest with audited accounts and service statistics for the same period.",
-      "formula": "program_expenses - thrift_store_costs - netted_fees - proxy_program_spend"
+      "explainer": "All four programme lines of the combined US accounts (corps community centres, rehabilitation, residential and institutional services, other social services), less what the Adult Rehabilitation Centers' thrift stores cost to run and less the day-care fees clients paid (their own money for a service valued below net of them), and less the overseas work paid through these accounts (the World Service Office and the territories' support for the international Salvation Army), which is modelled separately (salvation-army-charityevals-international) and weighted by its spending on the charity's page. The stores are a self-financing trading arm: their sales pay for their own staff, trucks and rent, and only their net contribution pays for the recovery programme. Counting their gross running costs as charitable spending would make every donated dollar look as if it bought less help than it does. Fiscal year 1 October 2024 to 30 September 2025, the latest with audited accounts and service statistics for the same period.",
+      "formula": "program_expenses - thrift_store_costs - netted_fees - overseas_spend"
     },
     {
       "id": "total_expenses",
       "section": "cost",
       "label": "Total expenses, fiscal 2025 (all programmes, management, fundraising)",
       "format": "usd",
-      "value": 4308454000,
-      "kind": "observed",
-      "source": {
-        "title": "The Salvation Army USA, 2026 National Annual Report: Financial Summary & Statistical Highlights (fiscal year ended 30 September 2025)",
-        "url": "https://dam.redshieldtoolkit.org/asset/3f64b200-2662-4124-b458-e21cb70e49cc/2026-National-Annual-Report.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 23, Unaudited Combined Statement of Activities",
-        "quote": "Total Expenses $ 4,308,454 $ 4,164,019 (dollars in thousands; 2025, 2024)"
-      },
-      "explainer": "The national combined statement adds up the audited statements of the six US corporations (National Headquarters, the World Service Office and the four territories), intercorporate transactions eliminated. The combination itself is unaudited; each part is audited. Dollars in thousands in the report."
+      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. The national combined statement adds up the audited statements of the six US corporations (National Headquarters, the World Service Office and the four territories), intercorporate transactions eliminated. The combination itself is unaudited; each part is audited. Dollars in thousands in the report.",
+      "formula": "@salvation_army.total_expenses"
     },
     {
       "id": "program_expenses",
       "section": "cost",
       "label": "Programme expenses, fiscal 2025 (all four programme lines)",
       "format": "usd",
-      "value": 3546330000,
-      "kind": "observed",
-      "source": {
-        "title": "The Salvation Army USA, 2026 National Annual Report: Financial Summary & Statistical Highlights (fiscal year ended 30 September 2025)",
-        "url": "https://dam.redshieldtoolkit.org/asset/3f64b200-2662-4124-b458-e21cb70e49cc/2026-National-Annual-Report.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 23, Unaudited Combined Statement of Activities",
-        "quote": "Total Program Services 3,546,330 3,442,283"
-      },
-      "explainer": "Corps community centres $893.5M, rehabilitation $739.6M, residential and institutional services $552.9M and other social services $1,360.3M (p. 23). These include donated food, toys and clothing at their fair value, which is right here: the goods are part of the help, and a donor's dollar buys a share of the whole bundle."
+      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. Corps community centres $893.5M, rehabilitation $739.6M, residential and institutional services $552.9M and other social services $1,360.3M (p. 23). These include donated food, toys and clothing at their fair value, which is right here: the goods are part of the help, and a donor's dollar buys a share of the whole bundle.",
+      "formula": "@salvation_army.program_expenses"
     },
     {
       "id": "rehab_expenses",
       "section": "cost",
       "label": "Rehabilitation programme expenses, fiscal 2025 (Adult Rehabilitation Centers and their thrift stores)",
       "format": "usd",
-      "value": 739591000,
-      "kind": "observed",
-      "source": {
-        "title": "The Salvation Army USA, 2026 National Annual Report: Financial Summary & Statistical Highlights (fiscal year ended 30 September 2025)",
-        "url": "https://dam.redshieldtoolkit.org/asset/3f64b200-2662-4124-b458-e21cb70e49cc/2026-National-Annual-Report.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 23, Unaudited Combined Statement of Activities",
-        "quote": "Rehabilitation 739,591 708,010"
-      },
-      "explainer": "The Adult Rehabilitation Centers' whole cost: the residential recovery programme and the thrift stores that fund it (the Western Territory's audited functional-expense statement shows the line is mostly salaries and occupancy, with almost no direct assistance, which is the stores' profile)."
+      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. The Adult Rehabilitation Centers' whole cost: the residential recovery programme and the thrift stores that fund it (the Western Territory's audited functional-expense statement shows the line is mostly salaries and occupancy, with almost no direct assistance, which is the stores' profile).",
+      "formula": "@salvation_army.rehab_expenses"
     },
     {
       "id": "rehab_treatment_share",
       "section": "cost",
       "label": "Share of rehabilitation expenses that is the recovery programme itself (not the stores)",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.25,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "No published split, so a judgment from three cross-checks. (1) Sales to the public were $553.2M in fiscal 2025 (p. 23); if store sales roughly cover the stores' own costs, the rest of the rehabilitation line, $186M or 25%, is the programme. (2) Beds × cost: the Eastern Territory runs 26 centres with 2,049 beds (saconnects.org, January 2026), so about 108 rehabilitation centres nationally hold roughly 8,500 beds; at $40-80 a bed-day for a work-therapy residence that is $125-250M, 17-34% of the line. (3) The one territory with public audited accounts, the Western, had sales to the public of $131.4M against a rehabilitation line of $150.1M in fiscal 2023 (statements pp. 5-6), which by the logic of (1) leaves 12.5%. Range 10-40%."
+      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. No published split, so a judgment from three cross-checks. (1) Sales to the public were $553.2M in fiscal 2025 (p. 23); if store sales roughly cover the stores' own costs, the rest of the rehabilitation line, $186M or 25%, is the programme. (2) Beds × cost: the Eastern Territory runs 26 centres with 2,049 beds (saconnects.org, January 2026), so about 108 rehabilitation centres nationally hold roughly 8,500 beds; at $40-80 a bed-day for a work-therapy residence that is $125-250M, 17-34% of the line. (3) The one territory with public audited accounts, the Western, had sales to the public of $131.4M against a rehabilitation line of $150.1M in fiscal 2023 (statements pp. 5-6), which by the logic of (1) leaves 12.5%. Range 10-40%.",
+      "formula": "@salvation_army.rehab_treatment_share"
     },
     {
       "id": "program_service_fees",
       "section": "cost",
       "label": "Programme service fees paid by clients, fiscal 2025",
       "format": "usd",
-      "value": 167075000,
-      "kind": "observed",
-      "source": {
-        "title": "The Salvation Army USA, 2026 National Annual Report: Financial Summary & Statistical Highlights (fiscal year ended 30 September 2025)",
-        "url": "https://dam.redshieldtoolkit.org/asset/3f64b200-2662-4124-b458-e21cb70e49cc/2026-National-Annual-Report.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 23, Unaudited Combined Statement of Activities",
-        "quote": "Program Service Fees 167,075 170,049"
-      },
-      "explainer": "Fees clients pay for services (sliding-fee day care, camps, Kroc centre memberships, rent in residences)."
+      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. Fees clients pay for services (sliding-fee day care, camps, Kroc centre memberships, rent in residences).",
+      "formula": "@salvation_army.program_service_fees"
     },
     {
       "id": "day_care_fee_share",
       "section": "cost",
       "label": "Share of programme fees that are day-care fees",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "No split is published. 67 day care centres with 17,617 participants at sliding fees of a few thousand dollars a year would collect $20-80M of the $167M; camps, Kroc memberships and residents' rent the rest. 30% (15-50%)."
+      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. No split is published. 67 day care centres with 17,617 participants at sliding fees of a few thousand dollars a year would collect $20-80M of the $167M; camps, Kroc memberships and residents' rent the rest. 30% (15-50%).",
+      "formula": "@salvation_army.day_care_fee_share"
     },
     {
       "id": "netted_fees",
@@ -198,6 +152,14 @@
       "format": "usd",
       "formula": "program_service_fees * day_care_fee_share",
       "explainer": "Day care is valued net of what families pay, so its fees come out of the cost. The other fees stay in: camps, memberships and residents' rent buy outcomes valued gross here (community wellbeing, shelter), so cost and value are both gross."
+    },
+    {
+      "id": "overseas_spend",
+      "section": "cost",
+      "label": "Overseas work paid through the US accounts (modelled separately)",
+      "format": "usd",
+      "formula": "@salvation_army.sawso_mission_support + @salvation_army.sawso_livelihoods + @salvation_army.sawso_relief + @salvation_army.sawso_education + @salvation_army.sawso_business_development + @salvation_army.sawso_health + @salvation_army.sawso_anti_trafficking + (@salvation_army.sait_us_self_denial_gbp + @salvation_army.sait_us_ihq_support_gbp + @salvation_army.sait_us_restricted_gbp) * @fx.usd_per_gbp_2024",
+      "explainer": "The World Service Office's programmes (fiscal 2025, by sector) and the US territories' world-services money to International Headquarters (the Self-Denial Fund, headquarters support and restricted gifts, mostly to the Officers' Support Endowment Fund, from the International Trust's accounts, pounds at the 2024 rate: the Trust's year to March 2025 is mostly 2024). It is spent abroad on other kinds of work, so it has a model of its own (salvation-army-charityevals-international), weighted by this spending on the charity's page; it is left out of this model's cost and outcomes."
     },
     {
       "id": "thrift_store_costs",
@@ -441,8 +403,8 @@
       "section": "effect",
       "label": "Financial help per household (US$)",
       "format": "usd",
-      "formula": "(wt_direct_assistance - wt_inkind_goods) / (financial_assistance_households * wt_share_of_households)",
-      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, about $24M) over its share of the households helped: about $73 a household, the national figure taken at the Western rate. Fiscal 2023 against fiscal 2025 households; bills paid on a household's behalf count at full value."
+      "formula": "(wt_direct_assistance - wt_inkind_goods) / (financial_assistance_households * wt_share_of_households) * @cpi.usa_2025 / @cpi.usa_2023",
+      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, about $24M) over its share of the households helped, put from fiscal-2023 into 2025 prices by the US consumer price index (Convention 8): about $76 a household, the national figure taken at the Western rate. Bills paid on a household's behalf count at full value."
     },
     {
       "id": "veterans_served",
@@ -519,17 +481,39 @@
       "explainer": "Job search help, training and placement."
     },
     {
-      "id": "employment_earnings_gain",
+      "id": "employment_gain_per_year",
       "section": "effect",
-      "label": "Extra earnings per person given employment help, over the gain's life (US$)",
+      "label": "Extra earnings in the first year per person given employment help (US$)",
       "format": "usd",
       "value": {
         "low": 0,
-        "best": 800,
-        "high": 3000
+        "best": 500,
+        "high": 1500
       },
       "kind": "judgment",
-      "explainer": "Light-touch job-search assistance in US randomised evaluations raises earnings by a few hundred to about $1,500 in the first year and fades within two or three (job clubs and reemployment services); $800 in all (0-3,000), present value at the shared rate, counted as this year's money (the 1-3% discount on the later part is inside the range)."
+      "explainer": "Light-touch job-search assistance in US randomised evaluations (job clubs, reemployment services) raises earnings by a few hundred to about $1,500 in the first year; most of the Salvation Army's help is lighter (referrals, job-readiness classes). $500 (0-1,500)."
+    },
+    {
+      "id": "employment_gain_years",
+      "section": "effect",
+      "label": "Years until people given job-search help and others earn the same (fade-out)",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "In the same evaluations the gain fades within two or three years, as the control group finds work too: 2 years (1-3)."
+    },
+    {
+      "id": "employment_earnings_gain",
+      "section": "effect",
+      "label": "Extra earnings per person given employment help, discounted over the gain's years (US$)",
+      "format": "usd",
+      "explainer": "The first year's gain over the years it lasts, discounted at the shared rate.",
+      "formula": "employment_gain_per_year * pv_annuity_due(1, $discount_rate, employment_gain_years)"
     },
     {
       "id": "medical_visits",
@@ -700,10 +684,10 @@
     {
       "id": "consumption_mean",
       "section": "effect",
-      "label": "Average consumption per person in the country (US$)",
+      "label": "Average consumption per person in the US, in fiscal-2025 dollars (US$)",
       "format": "usd",
-      "formula": "@united_states.consumption_per_person_2024",
-      "explainer": "The site's US figure (@united_states.consumption_per_person_2024), in 2024 dollars; fiscal 2025's prices are about 3% higher. The World Bank's 2025 consumer price index isn't published yet (@cpi.usa_2025 is missing), so the gap stays, well inside the range of the clients' share below."
+      "formula": "@united_states.consumption_per_person_2024 * @cpi.usa_2025 / @cpi.usa_2024",
+      "explainer": "The site's US figure (@united_states.consumption_per_person_2024, World Bank, 2024 dollars) put into 2025 prices by the US consumer price index (@cpi.usa_2025 / @cpi.usa_2024, about +2.6%, Convention 8), so it is in the same year's dollars as the help valued against it (fiscal 2025, October 2024 to September 2025)."
     },
     {
       "id": "recipients_consumption_share",
@@ -1165,11 +1149,11 @@
       "format": "small",
       "value": {
         "low": 0.005,
-        "best": 0.03,
-        "high": 0.1
+        "best": 0.015,
+        "high": 0.06
       },
       "kind": "judgment",
-      "explainer": "No controlled study of the centres. Anchors: the Western Territory admits about 7,500 people a year to its 24 centres and about a third graduate (Caring magazine, 31 October 2014, https://caringmagazine.org/?p=45715), so of ~155,000 people counted nationally perhaps 30-35,000 are admitted and 10-12,000 graduate. A 1978 follow-up of 97 men in a Salvation Army alcoholism programme (Evaluation of a Salvation Army alcoholism treatment program, Journal of Studies on Alcohol 39(7):1267-1275, doi:10.15288/jsa.1978.39.1267) found 42-77% abstinent six months after discharge, without a control group; residential treatment studies with comparison groups find gains of 10-30 percentage points in remission among those who stay, against natural remission of 5-15% a year. 30% extra remission for graduates and 3% for other admissions, over everyone counted: about 0.03, range 0.005-0.1."
+      "explainer": "No controlled study of the centres. Anchors: the Western Territory admits about 7,500 people a year to its 24 centres and about a third graduate (Caring magazine, 31 October 2014, https://caringmagazine.org/?p=45715), so of ~155,000 people counted nationally perhaps 30-35,000 are admitted and 10-12,000 graduate (about 7% of those counted), and 20-24,000 leave early (about 14%). Among people with alcohol use disorder who sought help, those who got treatment were about 20 percentage points more likely to be in remission three years on than those who didn't, selection included (Moos & Moos 2006, Addiction, doi:10.1111/j.1360-0443.2006.01310.x); reviews of residential treatment rate the evidence moderate, with outcomes better than or no different from other treatment (Reif et al. 2014, Psychiatric Services, doi:10.1176/appi.ps.201300242; de Andrade et al. 2019, Drug and Alcohol Dependence, doi:10.1016/j.drugalcdep.2019.03.031); most people who recover do so without treatment (Tucker et al. 2020, Alcohol Research: Current Reviews, doi:10.35946/arcr.v40.3.02). A 1978 follow-up of a Salvation Army programme found 42-77% abstinent six months after discharge, without a control group (Journal of Studies on Alcohol 39(7):1267-1275). 15 points for graduates (20 less selection) and 3 for those who leave early, over everyone counted: 0.07 × 0.15 + 0.14 × 0.03 = 0.015, range 0.005-0.06."
     },
     {
       "id": "rehab_disability_weight",
@@ -1291,7 +1275,7 @@
       },
       "kind": "judgment",
       "unit": "points",
-      "explainer": "Most participants come a few times; regular ones get company, activity and structure. Group activity and befriending trials for lonely older people and after-school programme studies find gains of 0.1-0.3 SD for the regulars (about 0.2-0.6 life-satisfaction points); spread over everyone counted, most of them occasional, 0.03 points (0.005-0.1)."
+      "explainer": "Most participants come a few times; regular ones get company, activity and structure. A meta-analysis of interventions for lonely older adults living in the community found group-based programmes reduce loneliness by 0.27 SD (95% CI 0.08-0.48; Shekelle et al. 2024, Journal of General Internal Medicine, doi:10.1007/s11606-023-08517-5); for the regulars that is about 0.2-0.5 life-satisfaction points. Spread over everyone counted, most of them occasional, 0.03 points (0.005-0.1)."
     },
     {
       "id": "community_effect_years",
@@ -1382,6 +1366,14 @@
       "explainer": "No study measures what Salvation Army clients would have got otherwise. Anchors from Feeding America's Hunger in America 2014 (https://www.gbfb.org/wp-content/uploads/2016/08/hunger-in-america-2014-full-report.pdf): 72.7% of food programmes had turned no client away in the past year (p. 79, Table 3-18), so a family not served by the Salvation Army could usually get food at another programme, which argues for a low share; but those programmes' food is itself limited by their donations, so a family served elsewhere takes food another family would have had, and only the part of the Salvation Army's help that other programmes' spare food and family would have covered is not additional. SNAP (54.8% of client households, p. 154) is the families' own baseline and is already in their consumption, not a substitute. The step: about half of the help replaces spare capacity or family help, half is additional: 50% (30-80%)."
     },
     {
+      "id": "aid_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, food, goods, money and services",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the counts (meals, items, households helped with bills) are the Salvation Army's own, but the value families get beyond what they would have had anyway is a judgment (the counterfactual, the cash-equivalence of in-kind help, the clients' consumption), with no controlled evaluation of these services. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
+    },
+    {
       "id": "shelter_evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, shelter",
@@ -1406,6 +1398,14 @@
       },
       "kind": "judgment",
       "explainer": "The same logic as the aid branch: another shelter's bed is a substitute only where beds stand empty. Year-round shelter beds in US cities are mostly full (HUD's Housing Inventory Count puts utilisation of emergency beds near or above 90%), and 36% of people homeless on a January 2024 night were unsheltered (HUD point-in-time count), so a person without a Salvation Army bed mostly takes no one else's bed: they sleep rough, or double up with family or friends (a roof, but often unstable). The step: about a tenth find a spare shelter bed and about two-fifths double up, half sleep rough: 50% (30-70%). The value and the deaths both count only for them; the placements' alternative reads the same share."
+    },
+    {
+      "id": "shelter_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, shelter",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: nights are counted, but the deaths a bed averts come from Boston cohorts of other shelters' clients and what a night replaces is a judgment; there is no evaluation of these shelters. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
     },
     {
       "id": "placement_evidence_adj",
@@ -1434,6 +1434,14 @@
       "explainer": "1: the years housed are trial differences against usual care, which already includes other agencies and leaving homelessness without help. Down to 0.8 where other programmes would have placed the same people with more support than the trials' usual care."
     },
     {
+      "id": "placement_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, housing placements",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: placements are counted, but the years housed they add come from trials of other programmes (a Housing First trial, the Family Options Study), not of these placements. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
+    },
+    {
       "id": "rehab_evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, recovery programme",
@@ -1458,6 +1466,14 @@
       },
       "kind": "judgment",
       "explainer": "The centres take people with no insurance and no money, but some would have found a public or Medicaid-funded programme. 70% (40-90%); the remission gain is against no treatment."
+    },
+    {
+      "id": "rehab_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, recovery programme",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: residents are counted, but the remission gain is a judgment anchored on the residential-treatment literature; the centres have no controlled evaluation. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
     },
     {
       "id": "community_evidence_adj",
@@ -1486,6 +1502,14 @@
       "explainer": "YMCAs, Boys & Girls Clubs, public parks and senior centres offer much the same in most towns: half."
     },
     {
+      "id": "community_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, community programmes",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: participants are counted, but the life-satisfaction gain is a judgment anchored on trials of more intensive programmes. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
+    },
+    {
       "id": "worship_evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, worship",
@@ -1512,20 +1536,28 @@
       "explainer": "Most members of a Salvation Army corps would belong to another church without it: 15% (5-40%)."
     },
     {
+      "id": "worship_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, worship",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: members are counted, but the life-satisfaction gain is a judgment from observational studies of churchgoing. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment: simple average of the branches, for reading only",
+      "label": "Evidence adjustment: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "explainer": "A simple average of the six branches' own evidence adjustments, for reading only: each branch applies its own row (aid_, shelter_, placement_, rehab_, community_, worship_evidence_adj). Not outcome-weighted: weighting needs each branch in healthy years, and a branch can be put into healthy years only through the fixed bridge rows (a units-of-value or WELLBY figure converted anywhere else is an exchange rate inside the model, INV-2), so the weights can't be computed without breaking that rule.",
-      "formula": "avg(aid_evidence_adj, shelter_evidence_adj, placement_evidence_adj, rehab_evidence_adj, community_evidence_adj, worship_evidence_adj)"
+      "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row (aid_evidence_adj, shelter_evidence_adj, placement_evidence_adj, rehab_evidence_adj, community_evidence_adj, worship_evidence_adj), weighted by its outcome before adjustments in healthy years (each branch through its unit's fixed bridge).",
+      "formula": "(aid_dalys_unadjusted * aid_evidence_adj + shelter_dalys_unadjusted * shelter_evidence_adj + placement_dalys_unadjusted * placement_evidence_adj + rehab_dalys_unadjusted * rehab_evidence_adj + community_dalys_unadjusted * community_evidence_adj + worship_dalys_unadjusted * worship_evidence_adj) / (aid_dalys_unadjusted + shelter_dalys_unadjusted + placement_dalys_unadjusted + rehab_dalys_unadjusted + community_dalys_unadjusted + worship_dalys_unadjusted)"
     },
     {
       "id": "counterfactual_adj",
       "section": "adjustments",
-      "label": "Counterfactual: simple average of the branches, for reading only",
+      "label": "Counterfactual: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "explainer": "A simple average of the six branches' own counterfactual shares, for reading only: each branch applies its own row (not outcome-weighted, for the reason under evidence_adj).",
-      "formula": "avg(aid_counterfactual_adj, shelter_counterfactual_adj, placement_counterfactual_adj, rehab_counterfactual_adj, community_counterfactual_adj, worship_counterfactual_adj)"
+      "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row (aid_counterfactual_adj, shelter_counterfactual_adj, placement_counterfactual_adj, rehab_counterfactual_adj, community_counterfactual_adj, worship_counterfactual_adj), weighted by its outcome before adjustments in healthy years (each branch through its unit's fixed bridge).",
+      "formula": "(aid_dalys_unadjusted * aid_counterfactual_adj + shelter_dalys_unadjusted * shelter_counterfactual_adj + placement_dalys_unadjusted * placement_counterfactual_adj + rehab_dalys_unadjusted * rehab_counterfactual_adj + community_dalys_unadjusted * community_counterfactual_adj + worship_dalys_unadjusted * worship_counterfactual_adj) / (aid_dalys_unadjusted + shelter_dalys_unadjusted + placement_dalys_unadjusted + rehab_dalys_unadjusted + community_dalys_unadjusted + worship_dalys_unadjusted)"
     },
     {
       "id": "volunteers",
@@ -1595,12 +1627,12 @@
       "label": "Delivery adjustment (fidelity, compliance, follow-through)",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.85,
+        "low": 0.7,
+        "best": 0.9,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The one row for count quality. Every count here is the charity's own administrative tally (touchpoints, meals converted from pounds of pantry food, nights held rather than slept), with no independent check; some double counting across units is likely. 85% (60-100%) for every branch."
+      "explainer": "The one row for count quality. Every count here is the charity's own administrative tally (touchpoints, meals converted from pounds of pantry food, nights held rather than slept), with no independent check; some double counting across units is likely. Cross-check of the largest count: the Western Territory recorded $109.3M of donated food and $5.7M of government food in fiscal 2023 (statements, note 7); scaled to the nation by its share of the households helped (wt_share_of_households, 24%), that is about $480M of food, or about 178M meals at the Thrifty Food Plan's $2.70 a meal, against 184M meals reported; donated food is valued below retail, so the food would make somewhat more meals, and some of it feeds shelter and centre residents counted as nights. The meal count holds up; the other counts are touchpoints with no such check. 90% (70-100%) for every branch."
     },
     {
       "id": "leverage_funging_adj",
@@ -1616,60 +1648,101 @@
       "explainer": "1: government grants are tied to contracts the Salvation Army delivers; a donation doesn't free government money for other uses or pull in much more. 0.9 if some local governments fund less where the Salvation Army is present."
     },
     {
+      "id": "net_assets_available",
+      "section": "adjustments",
+      "label": "Net assets available for operations, 30 September 2025",
+      "format": "usd",
+      "value": 554635000,
+      "kind": "observed",
+      "source": {
+        "title": "The Salvation Army USA, 2026 National Annual Report: Unaudited Combined Statement of Financial Position",
+        "url": "https://dam.redshieldtoolkit.org/asset/3f64b200-2662-4124-b458-e21cb70e49cc/2026-National-Annual-Report.pdf",
+        "retrieved": "2026-11-04",
+        "page": "p. 22",
+        "quote": "Available for Operations 554,635 654,499"
+      },
+      "explainer": "Unrestricted money not designated for buildings or specific programmes: what a new gift joins before it is spent. Endowments and designated funds are left out, since a new gift doesn't wait behind them."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a gift waits before it is spent",
+      "format": "number",
+      "unit": "years",
+      "formula": "net_assets_available / total_expenses",
+      "explainer": "Money available for operations over a year's spending: about seven weeks."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait before a gift is spent",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ (0 - gift_to_grant_years)",
+      "explainer": "The wait discounted at the shared rate, in every branch."
+    },
+    {
       "id": "aid_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, aid branch",
       "format": "multiple",
-      "formula": "aid_evidence_adj * aid_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
-      "explainer": "The branch's own evidence and counterfactual adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "aid_evidence_adj * aid_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * aid_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "shelter_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, shelter branch",
       "format": "multiple",
-      "formula": "shelter_evidence_adj * shelter_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
-      "explainer": "The branch's own evidence and counterfactual adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "shelter_evidence_adj * shelter_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * shelter_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "placement_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, placement branch",
       "format": "multiple",
-      "formula": "placement_evidence_adj * placement_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
-      "explainer": "The branch's own evidence and counterfactual adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "placement_evidence_adj * placement_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * placement_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "rehab_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, rehab branch",
       "format": "multiple",
-      "formula": "rehab_evidence_adj * rehab_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
-      "explainer": "The branch's own evidence and counterfactual adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "rehab_evidence_adj * rehab_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * rehab_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "community_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, community branch",
       "format": "multiple",
-      "formula": "community_evidence_adj * community_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
-      "explainer": "The branch's own evidence and counterfactual adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "community_evidence_adj * community_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * community_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
     },
     {
       "id": "worship_total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, worship branch",
       "format": "multiple",
-      "formula": "worship_evidence_adj * worship_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj",
-      "explainer": "The branch's own evidence and counterfactual adjustments times the shared credit, delivery and funging adjustments."
+      "formula": "worship_evidence_adj * worship_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * worship_missing_data_adj",
+      "explainer": "The branch's own evidence, counterfactual and missing-data adjustments times the shared credit, delivery, funging and wait adjustments."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount: outcome-weighted average of the branches, for reading only",
+      "format": "percent",
+      "formula": "(aid_dalys_unadjusted * aid_missing_data_adj + shelter_dalys_unadjusted * shelter_missing_data_adj + placement_dalys_unadjusted * placement_missing_data_adj + rehab_dalys_unadjusted * rehab_missing_data_adj + community_dalys_unadjusted * community_missing_data_adj + worship_dalys_unadjusted * worship_missing_data_adj) / (aid_dalys_unadjusted + shelter_dalys_unadjusted + placement_dalys_unadjusted + rehab_dalys_unadjusted + community_dalys_unadjusted + worship_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row (aid_missing_data_adj, shelter_missing_data_adj, placement_missing_data_adj, rehab_missing_data_adj, community_missing_data_adj, worship_missing_data_adj), weighted by its outcome before adjustments in healthy years (each branch through its unit's fixed bridge). Every branch is thin, so it equals the shared slider."
     },
     {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "All adjustments combined: simple average of the branches, for reading only",
+      "label": "All adjustments combined: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "avg(aid_total_adj, shelter_total_adj, placement_total_adj, rehab_total_adj, community_total_adj, worship_total_adj)",
-      "explainer": "A simple average of the six branches' combined adjustments, for reading only: each branch's own total reaches the result through the outcome rows (not outcome-weighted, for the reason under evidence_adj)."
+      "formula": "(aid_dalys + shelter_dalys + placement_dalys + rehab_dalys + community_dalys + worship_dalys) / (aid_dalys_unadjusted + shelter_dalys_unadjusted + placement_dalys_unadjusted + rehab_dalys_unadjusted + community_dalys_unadjusted + worship_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row (aid_total_adj, shelter_total_adj, placement_total_adj, rehab_total_adj, community_total_adj, worship_total_adj), weighted by its outcome before adjustments in healthy years (each branch through its unit's fixed bridge)."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -1682,15 +1755,72 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Not modelled, with signs: wellbeing of survivors, prisoners and disaster victims beyond the money value of their help, spiritual care, and the community ties corps build (+); the higher overdose risk of people who relapse after a stretch of abstinence (-); funging inside the organisation, unrestricted money drifting to the church's upkeep (-). They roughly cancel: 0 (-10% to +15%). Count quality is in implementation_adj, and every programme with a count is on a chain above."
+      "explainer": "Not modelled, with signs: wellbeing of survivors, prisoners and disaster victims beyond the money value of their help, spiritual care, and the community ties corps build (+); the higher overdose risk of people who relapse after a stretch of abstinence (-); funging inside the organisation, unrestricted money drifting to the church's upkeep (-). They roughly cancel: 0 (-10% to +15%). The 7.3 million personal connections (intake interviews, case management, information requests, p. 21) are how the counted help is delivered, not help of their own. Count quality is in implementation_adj, and every US programme with a count is on a chain above; the overseas work has its own model."
+    },
+    {
+      "id": "aid_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, food, goods, money and services (units of value, after the branch's adjustments)",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "people_reached * (ln_gain_per_person * $uov_per_ln_consumption + deaths_averted_per_person * value_per_death) * aid_total_adj"
+    },
+    {
+      "id": "shelter_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, shelter (units of value, after the branch's adjustments)",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "shelter_person_years * (shelter_ln_gain_per_person_year * $uov_per_ln_consumption + shelter_deaths_per_person_year * value_per_death) * shelter_total_adj"
+    },
+    {
+      "id": "placement_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, housing placements (units of value, after the branch's adjustments)",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "placements * placement_years_housed_gained * placement_share_outside_own_residences * placement_charity_resource_share * (placement_ln_gain_per_year * $uov_per_ln_consumption + placement_deaths_per_year_housed * value_per_death) * placement_total_adj"
+    },
+    {
+      "id": "rehab_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, recovery programme (units of value, after the branch's adjustments)",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "rehab_people * rehab_deaths_per_person * value_per_death * rehab_total_adj"
+    },
+    {
+      "id": "aid_wellbys",
+      "section": "bridges",
+      "label": "Life satisfaction gained, food, goods, money and services (WELLBYs, after the branch's adjustments)",
+      "format": "number",
+      "unit": "WELLBYs",
+      "formula": "people_reached * wellbys_per_person * aid_total_adj"
+    },
+    {
+      "id": "community_wellbys",
+      "section": "bridges",
+      "label": "Life satisfaction gained, community programmes (WELLBYs, after the branch's adjustments)",
+      "format": "number",
+      "unit": "WELLBYs",
+      "formula": "community_people * community_wellbys_per_person * community_total_adj"
+    },
+    {
+      "id": "worship_wellbys",
+      "section": "bridges",
+      "label": "Life satisfaction gained, worship (WELLBYs, after the branch's adjustments)",
+      "format": "number",
+      "unit": "WELLBYs",
+      "formula": "church_members * worship_wellbys_per_person * worship_total_adj"
     },
     {
       "id": "uov_bridged",
       "section": "bridges",
       "label": "Income gained and deaths averted, in GiveWell units of value (after each branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * (ln_gain_per_person * $uov_per_ln_consumption + deaths_averted_per_person * value_per_death) * aid_total_adj + shelter_person_years * (shelter_ln_gain_per_person_year * $uov_per_ln_consumption + shelter_deaths_per_person_year * value_per_death) * shelter_total_adj + placements * placement_years_housed_gained * placement_share_outside_own_residences * placement_charity_resource_share * (placement_ln_gain_per_year * $uov_per_ln_consumption + placement_deaths_per_year_housed * value_per_death) * placement_total_adj + rehab_people * rehab_deaths_per_person * value_per_death * rehab_total_adj",
-      "unit": "UoV"
+      "formula": "aid_uov + shelter_uov + placement_uov + rehab_uov",
+      "unit": "UoV",
+      "explainer": "The sum of the branches' units of value, each after its own adjustments."
     },
     {
       "id": "dalys_from_uov",
@@ -1706,8 +1836,9 @@
       "section": "bridges",
       "label": "Life satisfaction gained, in WELLBYs (after each branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * wellbys_per_person * aid_total_adj + community_people * community_wellbys_per_person * community_total_adj + church_members * worship_wellbys_per_person * worship_total_adj",
-      "unit": "WELLBYs"
+      "formula": "aid_wellbys + community_wellbys + worship_wellbys",
+      "unit": "WELLBYs",
+      "explainer": "The sum of the branches' WELLBYs, each after its own adjustments."
     },
     {
       "id": "dalys_from_wellby",
@@ -1719,12 +1850,200 @@
       "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
+      "id": "aid_uov_in_dalys",
+      "section": "bridges",
+      "label": "Food, goods, money and services: units of value in healthy years (for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "aid_uov / ($uov_per_daly)",
+      "explainer": "The branch's units of value through the fixed bridge (docs/normalization.md 2.6), only to weigh the canonical adjustment rows; the result goes through uov_bridged."
+    },
+    {
+      "id": "shelter_uov_in_dalys",
+      "section": "bridges",
+      "label": "Shelter: units of value in healthy years (for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "shelter_uov / ($uov_per_daly)",
+      "explainer": "The branch's units of value through the fixed bridge (docs/normalization.md 2.6), only to weigh the canonical adjustment rows; the result goes through uov_bridged."
+    },
+    {
+      "id": "placement_uov_in_dalys",
+      "section": "bridges",
+      "label": "Housing placements: units of value in healthy years (for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "placement_uov / ($uov_per_daly)",
+      "explainer": "The branch's units of value through the fixed bridge (docs/normalization.md 2.6), only to weigh the canonical adjustment rows; the result goes through uov_bridged."
+    },
+    {
+      "id": "rehab_uov_in_dalys",
+      "section": "bridges",
+      "label": "Recovery programme: units of value in healthy years (for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "rehab_uov / ($uov_per_daly)",
+      "explainer": "The branch's units of value through the fixed bridge (docs/normalization.md 2.6), only to weigh the canonical adjustment rows; the result goes through uov_bridged."
+    },
+    {
+      "id": "aid_wellbys_in_dalys",
+      "section": "bridges",
+      "label": "Food, goods, money and services: WELLBYs in healthy years (for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "aid_wellbys * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "explainer": "The branch's WELLBYs through the fixed bridge (docs/normalization.md 2.6), only to weigh the canonical adjustment rows; the result goes through wellbys_bridged."
+    },
+    {
+      "id": "community_wellbys_in_dalys",
+      "section": "bridges",
+      "label": "Community programmes: WELLBYs in healthy years (for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "community_wellbys * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "explainer": "The branch's WELLBYs through the fixed bridge (docs/normalization.md 2.6), only to weigh the canonical adjustment rows; the result goes through wellbys_bridged."
+    },
+    {
+      "id": "worship_wellbys_in_dalys",
+      "section": "bridges",
+      "label": "Worship: WELLBYs in healthy years (for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "worship_wellbys * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "explainer": "The branch's WELLBYs through the fixed bridge (docs/normalization.md 2.6), only to weigh the canonical adjustment rows; the result goes through wellbys_bridged."
+    },
+    {
+      "id": "aid_dalys",
+      "section": "bridges",
+      "label": "Healthy years, food, goods, money and services (after the branch's adjustments; for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "aid_uov_in_dalys + aid_wellbys_in_dalys + aid_dalys_direct",
+      "explainer": "The branch's share of the result before unmodelled benefits, the weight of its adjustments in the canonical rows."
+    },
+    {
+      "id": "aid_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, food, goods, money and services, before the branch's adjustments (weight only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "aid_dalys / aid_total_adj",
+      "explainer": "The branch's outcome before its adjustments: the weight of its adjustments in the outcome-weighted canonical rows (evidence_adj, counterfactual_adj, missing_data_adj, total_adj)."
+    },
+    {
+      "id": "shelter_dalys",
+      "section": "bridges",
+      "label": "Healthy years, shelter (after the branch's adjustments; for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "shelter_uov_in_dalys",
+      "explainer": "The branch's share of the result before unmodelled benefits, the weight of its adjustments in the canonical rows."
+    },
+    {
+      "id": "shelter_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, shelter, before the branch's adjustments (weight only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "shelter_dalys / shelter_total_adj",
+      "explainer": "The branch's outcome before its adjustments: the weight of its adjustments in the outcome-weighted canonical rows (evidence_adj, counterfactual_adj, missing_data_adj, total_adj)."
+    },
+    {
+      "id": "placement_dalys",
+      "section": "bridges",
+      "label": "Healthy years, housing placements (after the branch's adjustments; for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "placement_uov_in_dalys",
+      "explainer": "The branch's share of the result before unmodelled benefits, the weight of its adjustments in the canonical rows."
+    },
+    {
+      "id": "placement_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, housing placements, before the branch's adjustments (weight only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "placement_dalys / placement_total_adj",
+      "explainer": "The branch's outcome before its adjustments: the weight of its adjustments in the outcome-weighted canonical rows (evidence_adj, counterfactual_adj, missing_data_adj, total_adj)."
+    },
+    {
+      "id": "rehab_dalys",
+      "section": "bridges",
+      "label": "Healthy years, recovery programme (after the branch's adjustments; for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "rehab_uov_in_dalys + rehab_dalys_direct",
+      "explainer": "The branch's share of the result before unmodelled benefits, the weight of its adjustments in the canonical rows."
+    },
+    {
+      "id": "rehab_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, recovery programme, before the branch's adjustments (weight only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "rehab_dalys / rehab_total_adj",
+      "explainer": "The branch's outcome before its adjustments: the weight of its adjustments in the outcome-weighted canonical rows (evidence_adj, counterfactual_adj, missing_data_adj, total_adj)."
+    },
+    {
+      "id": "community_dalys",
+      "section": "bridges",
+      "label": "Healthy years, community programmes (after the branch's adjustments; for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "community_wellbys_in_dalys",
+      "explainer": "The branch's share of the result before unmodelled benefits, the weight of its adjustments in the canonical rows."
+    },
+    {
+      "id": "community_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, community programmes, before the branch's adjustments (weight only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "community_dalys / community_total_adj",
+      "explainer": "The branch's outcome before its adjustments: the weight of its adjustments in the outcome-weighted canonical rows (evidence_adj, counterfactual_adj, missing_data_adj, total_adj)."
+    },
+    {
+      "id": "worship_dalys",
+      "section": "bridges",
+      "label": "Healthy years, worship (after the branch's adjustments; for the weights only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "worship_wellbys_in_dalys",
+      "explainer": "The branch's share of the result before unmodelled benefits, the weight of its adjustments in the canonical rows."
+    },
+    {
+      "id": "worship_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, worship, before the branch's adjustments (weight only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "worship_dalys / worship_total_adj",
+      "explainer": "The branch's outcome before its adjustments: the weight of its adjustments in the outcome-weighted canonical rows (evidence_adj, counterfactual_adj, missing_data_adj, total_adj)."
+    },
+    {
+      "id": "aid_dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly, food, goods, money and services (after the branch's adjustments)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "people_reached * dalys_averted_per_person * aid_total_adj"
+    },
+    {
+      "id": "rehab_dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly, recovery programme (after the branch's adjustments)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "rehab_people * rehab_dalys_per_person * rehab_total_adj"
+    },
+    {
       "id": "dalys_direct",
       "section": "outcome",
       "label": "Healthy years counted directly (after each branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * dalys_averted_per_person * aid_total_adj + rehab_people * rehab_dalys_per_person * rehab_total_adj",
-      "unit": "DALYs"
+      "formula": "aid_dalys_direct + rehab_dalys_direct",
+      "unit": "DALYs",
+      "explainer": "The sum of the branches' healthy years counted directly (illness from alcohol and drug dependence), each after its own adjustments."
     },
     {
       "id": "outcome_total",
@@ -1842,80 +2161,9 @@
       "section": "donor",
       "label": "Years of healthy life per dollar you give",
       "format": "small",
-      "formula": "dalys_per_dollar * donor_cost_share * (1 - proxy_share) + proxy_in_dalys",
+      "formula": "dalys_per_dollar * donor_cost_share",
       "unit": "Years of healthy life / $",
-      "explainer": "The modelled programmes' result for their share of the spending, plus the programmes with no outcome data (the proxy section)."
-    },
-    {
-      "id": "sawso_expenses",
-      "section": "proxy",
-      "label": "The Salvation Army World Service Office's expenses, fiscal 2025",
-      "format": "usd",
-      "value": 21137446,
-      "kind": "observed",
-      "source": {
-        "title": "ProPublica Nonprofit Explorer: The Salvation Army World Service Office (EIN 13-2923701), Form 990",
-        "url": "https://projects.propublica.org/nonprofits/organizations/132923701",
-        "page": "fiscal year ending September 2025",
-        "quote": "Expenses $21,137,446",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "SAWSO is one of the six corporations in the national combination (p. 20) and runs programmes in some 50 countries: disaster relief and recovery (about 60% in fiscal 2023, Give.org), livelihoods, health, education and anti-trafficking. Its total expenses, about 97% programmes by its own account."
-    },
-    {
-      "id": "other_overseas_support",
-      "section": "proxy",
-      "label": "Territories' other support for the international Salvation Army, fiscal 2025",
-      "format": "usd",
-      "value": {
-        "low": 5000000,
-        "best": 20000000,
-        "high": 45000000
-      },
-      "kind": "judgment",
-      "explainer": "The territories also send 'world services support' abroad (the Western Territory $8.1M in fiscal 2023 and $15.9M in 2022, statements note 19), roughly $33M nationally at four times the Western figure; about $13M of the territories' giving goes to SAWSO (Give.org: contributions from the territories $13.1M), already in its expenses. The rest, $20M ($5-45M), funds the international Army's work overseas."
-    },
-    {
-      "id": "proxy_program_spend",
-      "section": "proxy",
-      "label": "Spending on overseas work, valued from comparable programmes",
-      "format": "usd",
-      "explainer": "The overseas work paid through the US accounts: the World Service Office's programmes and the territories' support for the international Salvation Army. It publishes no outcome counts the model could use, and its dollar works in poor countries, where the log scale makes it worth far more than US help, so it is valued at comparable programmes' result (Convention 12), not at a US client's consumption. Every US programme is on a chain above; holiday assistance and institutional care are inside the item, meal and shelter counts, and the 7.3 million personal connections (intake interviews, case management, information) are how the help is delivered.",
-      "formula": "sawso_expenses + other_overseas_support"
-    },
-    {
-      "id": "proxy_peer_result",
-      "section": "proxy",
-      "label": "Result per dollar of comparable programmes on the site (units of value per dollar you give)",
-      "format": "small",
-      "formula": "median(#givedirectly, #international-rescue-committee-founders-pledge, #village-enterprise-founders-pledge)",
-      "unit": "units of value / $",
-      "explainer": "The median of the site's models of the kinds of work SAWSO funds, read live: cash to poor households (GiveWell's GiveDirectly), humanitarian programmes (Founders Pledge's International Rescue Committee) and livelihoods (Founders Pledge's Village Enterprise). All in units of value per dollar."
-    },
-    {
-      "id": "proxy_share",
-      "section": "proxy",
-      "label": "Share of the programme spending here that has no outcome data",
-      "format": "percent",
-      "formula": "proxy_program_spend / (program_spend + proxy_program_spend)",
-      "explainer": "The modelled programmes' result counts for the rest of the spending."
-    },
-    {
-      "id": "proxy_per_donor_dollar",
-      "section": "proxy",
-      "label": "Units of value per dollar you give, from programmes with no outcome data",
-      "format": "small",
-      "formula": "proxy_share * proxy_peer_result * $missing_data_discount",
-      "unit": "units of value / $",
-      "explainer": "Comparable programmes' result for this share of the spending, counted less by the shared slider: missing data is always discounted, the same way in every model."
-    },
-    {
-      "id": "proxy_in_dalys",
-      "section": "proxy",
-      "label": "The same, in this model's unit (DALYs)",
-      "format": "small",
-      "formula": "proxy_per_donor_dollar / ($uov_per_daly)",
-      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6); the unit's conversion cancels it, so these programmes count exactly their peers' value. Don't edit it."
+      "explainer": "The result per dollar, less the share of the full cost that staff carry by working for less than they could earn elsewhere (when the shared slider counts it)."
     }
   ],
   "output": {
