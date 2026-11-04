@@ -647,14 +647,17 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     // A model that reads others live (`#id`, a meta charity's destinations) moves with every slider
     // they move: no independence is expected for those.
     const inherited = new Set(referencedModels(lib, m).flatMap((t) => usedAssumptions(lib, t)));
-    const check = (part: (a: Record<string, number>) => number, unit: string, animal: boolean, where: string) => {
+    const check = (part: (a: Record<string, number>) => number, unit: string, animal: boolean, where: string, whole?: number) => {
       const h0 = part(av);
       if (!Number.isFinite(h0) || h0 === 0) return;
+      // A bridged part is a difference of two headlines: its rounding is the whole headline's, so a
+      // part far smaller than the rest gets the tolerance of the whole.
+      const tol = whole === undefined ? 1e-9 : Math.max(1e-9, 1e-9 * Math.abs(whole / h0));
       for (const [a, shape] of expectations(unit, animal)) {
         if (shape === "independent" && inherited.has(a)) continue;
         const at = (k: number) => part({ ...av, [a]: av[a] * k });
         const h2 = at(1.5);
-        const ok = shape === "linear" ? close(h2, 1.5 * h0, 1e-9) && close(at(0.5), 0.5 * h0, 1e-9) : close(h2, h0, 1e-9);
+        const ok = shape === "linear" ? close(h2, 1.5 * h0, tol) && close(at(0.5), 0.5 * h0, tol) : close(h2, h0, tol);
         if (!ok)
           violations.push({ inv: "INV-10", model: m.id, where: `${where}$${a} ${shape}`, detail: `${where ? `the part bridged from ${unit} ` : "headline "}should be ${shape === "linear" ? "proportional to" : "independent of"} $${a}: ${fmt(h0)} at default, ${fmt(h2)} at ×1.5 (${fmt((h2 / h0 - 1) * 100)}%)` });
       }
@@ -662,7 +665,7 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     check((a) => headline(lib, m, a, held), m.output!.unit, m.cause === "animal-welfare", "");
     // WELLBY models' deaths are INV-17's; every other bridged part moves like a model of its own unit.
     for (const b of bridges) if (!isWellbyFromUov(m, m.byId.get(b.row)!))
-      check((a) => headline(lib, m, a) - headline(lib, m, a, { [b.input]: 0 }), b.from, b.from === "ced", `${b.row} `);
+      check((a) => headline(lib, m, a) - headline(lib, m, a, { [b.input]: 0 }), b.from, b.from === "ced", `${b.row} `, headline(lib, m, av));
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,

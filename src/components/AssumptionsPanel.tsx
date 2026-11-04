@@ -256,9 +256,11 @@ export function Markdown({ text }: { text: string }) {
     <>
       {text.split(/\n\n+/).map((para, i) => (
         <p key={i}>
-          {para.split(/(\*\*[^*]+\*\*)/).map((part, j) =>
-            part.startsWith("**") ? <strong key={j}>{part.slice(2, -2)}</strong> : part,
-          )}
+          {para.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/).map((part, j) => {
+            if (part.startsWith("**")) return <strong key={j}>{part.slice(2, -2)}</strong>;
+            const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/);
+            return link ? <a key={j} href={link[2]} target="_blank" rel="noopener">{link[1]}</a> : part;
+          })}
         </p>
       ))}
     </>
