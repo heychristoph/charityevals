@@ -1,8 +1,9 @@
 import type React from "react";
-import { useState } from "react";
-import { bulkRaw, lib, modelUrl } from "../lib/data";
-import { clearEdits, readEdits, setPageModels } from "../lib/edit-state";
-import { useResults } from "../lib/use-results";
+import { useMemo, useState } from "react";
+import { bulkRaw, lib, modelUrl, rawFacts } from "../lib/data";
+import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
+import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib/edit-state";
+import { useAssumptionValues, useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
 import ModelView from "./ModelView";
 
@@ -38,7 +39,30 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     }
     setOpen(mid);
   };
-  const ev = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
+  const evAll = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
+  // The rankings ignore page edits; here the open programme's figure follows them, and the whole
+  // charity is recombined from the parts shown (the rankings themselves don't move).
+  const av = useAssumptionValues();
+  const urlEdits = useEdits();
+  const ev = useMemo(() => {
+    if (!evAll || !open || !Object.keys(urlEdits).length) return evAll;
+    const part = evAll.programs.find((p) => p.result.model.id === open);
+    if (!part) return evAll;
+    const raw = part.result.model.bulk ? bulkRaw(open) : undefined;
+    const full: ResolvedModel | undefined = raw
+      ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(open)
+      : part.result.model.bulk ? undefined : part.result.model;
+    if (!full) return evAll;
+    const edits = editsFor(full, urlEdits, lib);
+    if (!Object.keys(edits).length) return evAll;
+    // A program of several locations moves by its edited model's own change.
+    const r = headline(lib, full, av, edits) / headline(lib, full, av);
+    if (!Number.isFinite(r)) return evAll;
+    const programs = evAll.programs.map((p) => (p === part ? { ...p, central: p.central * r } : p));
+    const w = programs.reduce((s, p) => s + (p.weight ?? 0), 0);
+    const central = evAll.basis === "weighted" && w > 0 ? programs.reduce((s, p) => s + (p.weight ?? 0) * p.central, 0) / w : evAll.central;
+    return { ...evAll, programs, central };
+  }, [evAll, open, urlEdits, av]);
   // Every programme on the page keeps its own edits in the URL (edit-state: setPageModels); set while
   // rendering, as the headline's island may filter the edits before this one's effects run.
   if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
