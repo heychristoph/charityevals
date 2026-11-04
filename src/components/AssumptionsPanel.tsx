@@ -112,7 +112,7 @@ function Slider({ row, value, compact }: { row: Row; value: number; compact: boo
     <div className={`assumption tip-host ${changed ? "changed" : ""}`} id={`a-${row.id}`}>
       <div className="assumption-head">
         {compact && row.explainer ? (
-          <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="Why this value"><Markdown text={row.explainer} /><Technical row={row} /></InfoTip></LabelWithTip>
+          <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="Why this value"><Markdown text={row.explainer} /></InfoTip></LabelWithTip>
         ) : <label htmlFor={id} className="assumption-name">{row.label}</label>}
         <ValueField row={row} value={value} best={best} log={scale.log && !scale.zero} />
       </div>
@@ -164,7 +164,7 @@ function Toggle({ row, value, compact }: { row: Row; value: number; compact: boo
       <div className="assumption-head">
         <span className="toggle-label">
           {compact && row.explainer ? (
-            <WithTip text={row.label}><InfoTip label="What this means"><Markdown text={row.explainer} /><Technical row={row} /></InfoTip></WithTip>
+            <WithTip text={row.label}><InfoTip label="What this means"><Markdown text={row.explainer} /></InfoTip></WithTip>
           ) : row.label}
         </span>
         <button
@@ -198,7 +198,7 @@ function CountrySelect({ row, value, compact }: { row: Row; value: number; compa
     <div className={`assumption country-row tip-host ${value !== best ? "changed" : ""}`} id={`a-${row.id}`}>
       <div className="assumption-head">
         {compact && row.explainer ? (
-          <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="What this means"><Markdown text={row.explainer} /><Technical row={row} /></InfoTip></LabelWithTip>
+          <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="What this means"><Markdown text={row.explainer} /></InfoTip></LabelWithTip>
         ) : <label htmlFor={id} className="assumption-name">{row.label}</label>}
       </div>
       <select
@@ -237,7 +237,7 @@ function Fixed({ row }: { row: Row }) {
   );
 }
 
-/** The jargon name, kept out of the label and shown once for readers who know it from evaluators' sheets. */
+/** The jargon name, kept out of the label: shown only on the full settings page, for readers who know it from evaluators' sheets. */
 function Technical({ row }: { row: Row }) {
   return row.technical ? <p className="technical muted">Technical name: {row.technical}</p> : null;
 }
