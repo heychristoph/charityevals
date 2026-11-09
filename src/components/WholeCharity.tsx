@@ -4,7 +4,7 @@ import { bulkRaw, lib, modelUrl, rawFacts } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
 import { combine, declaredLocations, locationWeights, locationsOf } from "../engine/ranking";
 import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib/edit-state";
-import { useAssumptionValues, useResults } from "../lib/use-results";
+import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
 import ModelView from "./ModelView";
 import { WaterfallInSlot } from "./Waterfall";
@@ -19,7 +19,7 @@ const pct = (x: number) => `${x >= 0.995 ? 100 : x < 0.01 ? (x * 100).toPrecisio
  * client:model when the main model is one. `children`: the evaluation's write-up. */
 export default function WholeCharity({ id, children }: { id: string; children?: React.ReactNode }) {
   const model = lib.models.get(id)!;
-  const { results } = useResults();
+  const { pages } = useResults();
   const [open, setOpen] = useState<string | undefined>(id);
   const [loading, setLoading] = useState<string | undefined>();
   const toggle = async (mid: string) => {
@@ -41,7 +41,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     }
     setOpen(mid);
   };
-  const evAll = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
+  const evAll = pageEvaluator(pages, model.charity, model.owner);
   // The rankings ignore page edits; here the open programme's figure follows them, and the whole
   // charity is recombined from the parts shown (the rankings themselves don't move).
   const av = useAssumptionValues();
@@ -164,9 +164,9 @@ function locationParts(m: ResolvedModel, av: Record<string, number>): { label: s
  * figure, above the model of the location the page is about. */
 export function Locations({ id }: { id: string }) {
   const model = lib.models.get(id)!;
-  const { results } = useResults();
+  const { pages } = useResults();
   const av = useAssumptionValues();
-  const ev = results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner);
+  const ev = pageEvaluator(pages, model.charity, model.owner);
   const p = ev?.programs.length === 1 ? ev.programs[0] : undefined;
   const locations = useMemo(() => (p?.locationBasis === "weighted" ? locationParts(p.result.model, av) : undefined), [p, av]);
   if (!ev || !locations) return null;

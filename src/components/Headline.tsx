@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
-import { useAssumptionValues, useResults } from "../lib/use-results";
+import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
 import { editsFor, setPageModels, useEdits } from "../lib/edit-state";
 import { formatYears } from "../lib/format";
 
@@ -27,8 +27,8 @@ export default function Headline({ id, bulk = false, main = false }: { id: strin
   const urlEdits = useEdits();
   const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
   const value = useMemo(() => headline(lib, model, av, edits), [model, av, edits]);
-  const { results } = useResults();
-  const ev = main ? results.find((r) => r.charity.id === model.charity)?.evaluators.find((e) => e.owner === model.owner) : undefined;
+  const { pages } = useResults();
+  const ev = main ? pageEvaluator(pages, model.charity, model.owner) : undefined;
 
   useEffect(() => {
     for (const el of document.querySelectorAll<HTMLElement>("[data-figure=headline]")) {

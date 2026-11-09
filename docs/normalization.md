@@ -1149,9 +1149,9 @@ the data (`common.old_estimate_years`, 5).
 **What it does.** With the toggle on, a model whose estimate is older than the cutoff (`estimateAge`, the
 same age as 2.11) doesn't count on the rankings (`tooOld`, src/engine/model.ts). An evaluator with none
 of its programmes' models left drops off the charity's line, and a charity with no evaluator left
-leaves the rankings (src/lib/use-results.ts `planAt`). A model's own result doesn't change, and nor does
-anything that reads it live (`#id`, `#owner:charity`): a meta charity's destinations keep their value. The model
-pages stay. The age discount still applies to what's left, and to everything when the toggle is off.
+leaves the rankings (src/lib/use-results.ts `computeResults`). A model's own result doesn't change, and nor does
+anything that reads it live (`#id`, `#owner:charity`): a meta charity's destinations keep their value. A
+charity's own pages show every programme, old ones included (`pageEvaluator`). The age discount still applies to what's left, and to everything when the toggle is off.
 
 **Effect at the defaults (as of 2026-11-02).** Of 123 ranked charities, 23 leave the rankings: ACE 2016
 (HSUS, Albert Schweitzer Foundation, ProVeg Deutschland, Vegan Outreach); Founders Pledge 2018–2020
