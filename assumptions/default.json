@@ -68,6 +68,20 @@
       "explainer": "With your country set, a life in your country counts fully, a life elsewhere in your part of the world counts less by this much, and one in the rest of the world less again. At 50%: your country 1, your region 0.5, the rest of the world 0.25.\n\nThe default, 0%, counts every life the same, as every charity evaluator does."
     },
     {
+      "id": "ignore_old_estimates",
+      "section": "evidence",
+      "label": "Leave out estimates over 5 years old",
+      "technical": "Exclude models older than common.old_estimate_years from the rankings",
+      "format": "toggle",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "On (the default), a charity is ranked only by estimates made in the last 5 years; one with only older estimates leaves the rankings. Off, every estimate counts, discounted for its age below."
+    },
+    {
       "id": "estimate_age_discount",
       "section": "evidence",
       "label": "An estimate counts … % less for each year since it was made",
@@ -402,6 +416,7 @@
   "common": {
     "unit": "uov",
     "benchmark": "givedirectly",
-    "estimate_age_as_of": "2026-11-02"
+    "estimate_age_as_of": "2026-11-02",
+    "old_estimate_years": 5
   }
 }

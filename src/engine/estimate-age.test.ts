@@ -2,7 +2,7 @@
 // modelConversion that the headline, the common result `#id` reads, sensitivity, uncertainty and the
 // tree all share; never in the evaluator view.
 import { describe, expect, it } from "vitest";
-import { ageFactor, assumptionValues, bottomLine, buildLibrary, compute, dateInYears, estimateAge, headline, usedAssumptions } from "./model";
+import { ageFactor, assumptionValues, bottomLine, buildLibrary, compute, dateInYears, estimateAge, headline, tooOld, usedAssumptions } from "./model";
 import { sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
 import { lookupFor, rootOf } from "./tree";
@@ -95,5 +95,30 @@ describe("an estimate's age", () => {
 
   it("INV-19 flags a model without a date", () => {
     expect(inv19(lib).violations.map(keyOf)).toEqual(["undated source.published"]);
+  });
+});
+
+describe("leaving old estimates out of the rankings (docs/normalization.md 2.15)", () => {
+  const withCutoff = buildLibrary([dest, meta, undated], {
+    ...assumptions,
+    rows: [...assumptions.rows, { id: "ignore_old_estimates", section: "g", label: "old", format: "toggle", value: { low: 0, best: 1, high: 1 }, kind: "judgment", explainer: "x" }],
+    common: { ...assumptions.common, old_estimate_years: 5 },
+  });
+  const on = assumptionValues(withCutoff.assumptions);
+  const get = (id: string) => withCutoff.models.get(id)!;
+
+  it("leaves out an estimate older than the cutoff while the toggle is on, and nothing when it's off", () => {
+    expect(withCutoff.errors).toEqual([]);
+    expect(tooOld(withCutoff, get("dest"), on)).toBe(true);
+    expect(tooOld(withCutoff, get("meta-org"), on)).toBe(false);
+    expect(tooOld(withCutoff, get("undated"), on)).toBe(false);
+    expect(tooOld(withCutoff, get("dest"), { ...on, ignore_old_estimates: 0 })).toBe(false);
+    // Without the cutoff in the data (an old commit's), nothing is left out.
+    expect(tooOld(lib, lib.models.get("dest")!, { ...av, ignore_old_estimates: 1 })).toBe(false);
+  });
+
+  it("doesn't change any model's result, or what reads it live", () => {
+    const off = { ...on, ignore_old_estimates: 0 };
+    for (const id of ["dest", "meta-org"]) expect(headline(withCutoff, get(id), on)).toBe(headline(withCutoff, get(id), off));
   });
 });

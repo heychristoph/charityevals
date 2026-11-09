@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { lib, primaryOf, rankedCharities } from "./data";
-import { assumptionValues, bottomLine, headline, type ResolvedModel } from "../engine/model";
+import { assumptionValues, bottomLine, headline, tooOld, type ResolvedModel } from "../engine/model";
 import { combine, combineLocations, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
@@ -105,12 +105,20 @@ export function useResults() {
 
 const plans = new Map(rankedCharities.map((c) => [c.id, rankingPlan(lib, c.id)]));
 
+/** A charity's plan at values `av`: with old estimates left out (`$ignore_old_estimates`), each
+ * evaluator keeps only its recent programs' models, and an evaluator with none left drops out. */
+function planAt(charity: string, av: Record<string, number>) {
+  return (plans.get(charity) ?? [])
+    .map((e) => ({ ...e, parts: e.parts.filter((p) => !tooOld(lib, p.model, av)) }))
+    .filter((e) => e.parts.length > 0);
+}
+
 /** A charity's figure for one evaluator at any values, by the same plan and combination as the rankings
  * (programs by weight, locations by funding), from each model's headline only: for the notes under a
  * page's headline, which compare the figure with one slider at its neutral setting. */
 export function figureOf(charity: string, owner: string, av: Record<string, number>): number {
   const c = lib.charities.get(charity);
-  const plan = plans.get(charity)?.find((e) => e.owner === owner);
+  const plan = planAt(charity, av).find((e) => e.owner === owner);
   if (!c || !plan) return NaN;
   const point = (m: ResolvedModel) => { const v = headline(lib, m, av); return { central: v, low: v, high: v }; };
   return combine(plan.parts.map((p) => {
@@ -138,21 +146,23 @@ function programResult(c: Charity, program: string, m: ResolvedModel, weight: nu
 }
 
 function computeResults(av: Record<string, number>) {
-  const results: CharityResult[] = rankedCharities.map((c) => {
-    const evaluators = plans.get(c.id)!.map(({ owner, parts }): EvaluatorResult => {
+  const results: CharityResult[] = rankedCharities.flatMap((c) => {
+    const plan = planAt(c.id, av);
+    if (!plan.length) return [];
+    const evaluators = plan.map(({ owner, parts }): EvaluatorResult => {
       const programs = parts.map((p) => programResult(c, p.program, p.model, p.weight, av));
       const flags = [...new Map(programs.flatMap((p) => p.result.flags).map((f) => [f.short, f])).values()];
       return { owner, ...combine(programs), programs, flags, theoretical: programs.every((p) => !!p.result.model.theoretical) };
     });
     const lead = evaluators.find((e) => e.owner === primaryOf(lib, c.id)?.owner) ?? evaluators[0];
-    return {
+    return [{
       charity: c,
       evaluators,
       primary: lead.owner,
       central: lead.central,
       low: Math.min(...evaluators.map((r) => r.low)),
       high: Math.max(...evaluators.map((r) => r.high)),
-    };
+    }];
   });
   results.sort((a, b) => b.central - a.central);
   return { av, results };

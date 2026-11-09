@@ -1138,6 +1138,30 @@ new audit rounds):
 
 One model moved by more than 2×: Habitat's awareness and advocacy model (0.0021 → 0.0071 years per $1,000), above. The five models held back or changed after their last audit (the Red Cross's measles and international relief, St. Jude's patient care, Habitat's awareness, the Salvation Army's overseas work) then had a verification round of only those changes (build-cea step 4); all passed (two after one more fix and round) and are published.
 
+### 2.15 Estimates over 5 years old leave the rankings (November 2026)
+
+ACE told us by email it hasn't reviewed HSUS, the Albert Schweitzer Foundation, Vegan Outreach
+or ProVeg Deutschland in many years, and suggested dropping them. The 5%-a-year discount (2.11) still
+counted their 2016 estimates at 61%. Owner decision 2026-11-09: a toggle under Your values → Evidence,
+"Leave out estimates over 5 years old" (`$ignore_old_estimates`), **on by default**, with the cutoff in
+the data (`common.old_estimate_years`, 5).
+
+**What it does.** With the toggle on, a model whose estimate is older than the cutoff (`estimateAge`, the
+same age as 2.11) doesn't count on the rankings (`tooOld`, src/engine/model.ts). An evaluator with none
+of its programmes' models left drops off the charity's line, and a charity with no evaluator left
+leaves the rankings (src/lib/use-results.ts `planAt`). A model's own result doesn't change, and nor does
+anything that reads it live (`#id`, `#owner:charity`): a meta charity's destinations keep their value. The model
+pages stay. The age discount still applies to what's left, and to everything when the toggle is off.
+
+**Effect at the defaults (as of 2026-11-02).** Of 123 ranked charities, 23 leave the rankings: ACE 2016
+(HSUS, Albert Schweitzer Foundation, ProVeg Deutschland, Vegan Outreach); Founders Pledge 2018–2020
+(Action for Happiness, Bandhan, Clean Air Task Force, Coalition for Rainforest Nations, Educational
+Initiatives, GAIN, Innovation in Government Initiative, Iodine Global Network, No Means No Worldwide,
+Village Enterprise, Winning Start); SoGive (Breast Cancer Now, Compassion UK, RNLI, Woodland Trust);
+Giving Green's Carbon180; Ambitious Impact's CEARCH and Kaya Guides; GiveWell's 2018 Results for
+Development sheet. Five more lose one old model and stay ranked by their others: ALIMA, DMI and Pure Earth
+(a GiveWell sheet), StrongMinds and The Humane League (Founders Pledge's).
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them

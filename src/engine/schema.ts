@@ -353,6 +353,8 @@ export const Assumptions = z
       /** The date an estimate's age is counted to (`$estimate_age_discount`, src/engine/model.ts estimateAge):
        * fixed in the data, bumped when the site's data is refreshed, never the build's clock. */
       estimate_age_as_of: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+      /** With `$ignore_old_estimates` on, a model older than this many years leaves the rankings. */
+      old_estimate_years: z.number().positive().optional(),
     }).strict(),
   })
   .strict();

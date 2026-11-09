@@ -606,6 +606,18 @@ export function ageFactor(lib: Library, m: ResolvedModel, a: Record<string, numb
   return n ? 1 / evaluate(n, (scope, name) => (scope === "assumption" ? a[name] ?? NaN : NaN)) : 1;
 }
 
+/** The toggle that leaves estimates older than `common.old_estimate_years` out of the rankings. */
+export const IGNORE_OLD = "ignore_old_estimates";
+
+/** Whether the rankings leave this model out at assumption values `a`: the toggle is on and the
+ * estimate is older than the cutoff (docs/normalization.md 2.15). Only which models rank changes; a
+ * model's own result, and anything that reads it live (`#id`), doesn't. */
+export function tooOld(lib: Library, m: ResolvedModel, a: Record<string, number>): boolean {
+  const cutoff = lib.assumptions.common.old_estimate_years;
+  if (!a[IGNORE_OLD] || cutoff === undefined) return false;
+  return (estimateAge(lib, m) ?? 0) > cutoff;
+}
+
 // --- Lives near and far (docs/normalization.md 2.13) ------------------------------------------------
 
 /** Where the reader lives: an ISO 3166 numeric code (facts/countries.json), 0 for not set. */
