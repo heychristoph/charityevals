@@ -1162,6 +1162,28 @@ Giving Green's Carbon180; Ambitious Impact's CEARCH and Kaya Guides; GiveWell's 
 Development sheet. Five more lose one old model and stay ranked by their others: ALIMA, DMI and Pure Earth
 (a GiveWell sheet), StrongMinds and The Humane League (Founders Pledge's).
 
+### 2.16 Side effects: rows in the model, one weight (November 2026)
+
+Owner decision 2026-11-10: side effects (good or harm beyond a programme's main chain: spillovers to
+other people, effects on other outcomes, displacement, system effects) are estimated as rows like any
+other, and one slider, "Side effects count … %" (`$side_effect_weight`, default 100%), says how much they
+count. No unvalued lists.
+
+**How.** A row marked `side_effect` (`added`: an amount or share added to the result; `factor`: a
+multiplier) is read through the weight by every row that reads it: `$side_effect_weight × row`, or
+`1 + $side_effect_weight × (row − 1)` (src/engine/model.ts `withSideEffectWeight`). The row keeps its
+own value, so an evaluator's sheet still reproduces, and the evaluator view counts it in full. A side
+effect computed from another is an error (it would be weighted twice).
+
+**What is marked** (by scripts at first, then by import-cea and build-cea): GiveWell's and SoGive's
+supplemental intervention-level items (morbidity, developmental and treatment-cost effects, drug
+resistance, herd immunity...), never their grantee-level adjustments (delivery risk) nor corrections
+(exchange rates, inflation, subnational, trial conditions) nor credit (funging and leverage stay on
+`$resource_shares`); spillovers to non-recipients, neighbours, household members and older children;
+our builds' unmodelled-benefit shares. Failure, no effect and backfire stay in the main chain.
+
+**Effect.** At 100% nothing moves. At 0%, 186 of 365 models move, median ×0.73.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them

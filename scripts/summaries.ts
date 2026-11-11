@@ -66,7 +66,8 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
         const { explainer: _e, source: _s, expected: _x, section: _c, format: _f, ...rest } = r;
         return { ...rest, label, ...("value" in rest || "published" in rest ? { explainer: "Input." } : {}) };
       }
-      return { id, label, value: values[id], kind: "estimate", explainer: "Folded." };
+      // A side effect keeps its mark: what reads it still reads it through the weight.
+      return { id, label, value: values[id], kind: "estimate", explainer: "Folded.", ...(r.side_effect ? { side_effect: r.side_effect } : {}) };
     });
     // Short ids: the browser never shows them. The bottom line keeps its own, for links and history.
     const short = new Map(rows.map((r, i) => [r.id as string, r.id === m.output!.row ? (r.id as string) : `r${i.toString(36)}`]));

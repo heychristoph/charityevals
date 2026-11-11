@@ -165,6 +165,7 @@ export function buildLibrary(
       rows[i] = merged;
     }
 
+    const sideEffects = new Map(rows.filter((r) => r.side_effect).map((r) => [r.id, r.side_effect!]));
     const resolved: ResolvedRow[] = [];
     for (const r of rows) {
       const { inheritedFrom, overridden, ...plain } = r;
@@ -180,7 +181,7 @@ export function buildLibrary(
           // assumptionDeps keeps the name the row wrote as well. factDeps are the facts the row wrote
           // (a derived assumption's own are the assumption's, checked below).
           const written = refs(parse(row.formula));
-          row.node = parse(expandDerived(assumptions, row.formula));
+          row.node = withSideEffectWeight(parse(expandDerived(assumptions, row.formula)), sideEffects);
           const used = refs(row.node);
           row.deps = [...used.rows];
           row.assumptionDeps = [...new Set([...written.assumptions, ...used.assumptions])];
@@ -195,6 +196,19 @@ export function buildLibrary(
     }
 
     const byId = new Map(resolved.map((r) => [r.id, r]));
+    // A side effect computed from another would be weighted twice.
+    for (const r of resolved) {
+      if (!r.side_effect) continue;
+      const seen = new Set<string>();
+      const stack = [...r.deps];
+      while (stack.length) {
+        const d = stack.pop()!;
+        if (seen.has(d)) continue;
+        seen.add(d);
+        if (sideEffects.has(d)) { errors.push(`${id}.${r.id}: a side effect computed from side effect ${d} would be weighted twice: mark only one`); break; }
+        stack.push(...(byId.get(d)?.deps ?? []));
+      }
+    }
     for (const r of resolved) {
       for (const d of r.deps) if (!byId.has(d)) errors.push(`${id}.${r.id}: unknown row ${d}`);
       for (const a of r.assumptionDeps) if (!assumptionIds.has(a)) errors.push(`${id}.${r.id}: unknown assumption $${a}`);
@@ -436,7 +450,40 @@ export function unitFormula(a: Assumptions, unit: string): string | undefined {
 
 /** The assumption values a view computes with: the evaluator view pins what the evaluator used. */
 export function viewAssumptions(m: ResolvedModel, av: Record<string, number>, view: View): Record<string, number> {
-  return view === "evaluator" && m.evaluator ? { ...av, ...m.evaluator.assumptions } : av;
+  if (view !== "evaluator") return av;
+  // The evaluator's own sheet counts its side effects in full.
+  const full: Record<string, number> = SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1 ? { [SIDE_EFFECT_WEIGHT]: 1 } : {};
+  return m.evaluator ? { ...av, ...full, ...m.evaluator.assumptions } : { ...av, ...full };
+}
+
+// --- Side effects ------------------------------------------------------------------------------------
+
+/** How much side effects count (rows marked `side_effect`): 1 in full, 0 not at all. */
+export const SIDE_EFFECT_WEIGHT = "side_effect_weight";
+
+/** A formula with every reference to a side-effect row of its model read through the weight:
+ * `added` as $side_effect_weight × row, `factor` as 1 + $side_effect_weight × (row − 1). The rows
+ * themselves keep their own values (an evaluator's sheet still reproduces); what reads them moves. */
+export function withSideEffectWeight(n: Node, sideEffects: Map<string, "added" | "factor">): Node {
+  if (!sideEffects.size) return n;
+  const w: Node = { type: "ref", scope: "assumption", name: SIDE_EFFECT_WEIGHT };
+  const walk = (x: Node): Node => {
+    switch (x.type) {
+      case "ref": {
+        const form = x.scope === "row" ? sideEffects.get(x.name) : undefined;
+        if (!form) return x;
+        const one: Node = { type: "num", value: 1 };
+        return form === "added"
+          ? { type: "bin", op: "*", left: w, right: x }
+          : { type: "bin", op: "+", left: one, right: { type: "bin", op: "*", left: w, right: { type: "bin", op: "-", left: x, right: one } } };
+      }
+      case "neg": return { ...x, arg: walk(x.arg) };
+      case "bin": return { ...x, left: walk(x.left), right: walk(x.right) };
+      case "call": return { ...x, args: x.args.map(walk) };
+      default: return x;
+    }
+  };
+  return walk(n);
 }
 
 /** An input row's value in a view: the evaluator view uses the published value where ours differs. */
@@ -765,9 +812,9 @@ const readers = new WeakMap<Record<string, number>, Record<string, number>>();
  * view the same with no discount for age or distance and missing data counted in full, so that view
  * never applies them, however deep. One object per `av`, so modelResult's cache still hits. */
 export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
-  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1))) return av;
+  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1))) return av;
   let r = readers.get(av);
-  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}) }));
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}) }));
   return r;
 }
 
@@ -829,7 +876,7 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads, never
   // weighs it by distance and never discounts an imported model for missing data.
-  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY].forEach((x) => used.delete(x));
+  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT].forEach((x) => used.delete(x));
   if (view === "evaluator" && !m.rows.some((r) => r.assumptionDeps.includes(MISSING_DATA_DISCOUNT))) used.delete(MISSING_DATA_DISCOUNT);
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)

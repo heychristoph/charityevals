@@ -75,6 +75,12 @@ const rowShape = {
   /** The value the original source reports for this row. `npm run check` fails when the model
    * doesn't reproduce it, which is how an import proves itself. */
   expected: z.number().optional(),
+  /** A side effect: good or harm beyond the programme's main chain (spillovers to others, effects on
+   * other outcomes, displacement, system effects). Every row that reads it reads it scaled by
+   * `$side_effect_weight` in our view (src/engine/model.ts withSideEffectWeight): `added`, an amount or
+   * share added to the result, times the weight; `factor`, a multiplier, its excess over 1 times the
+   * weight. The evaluator view counts it in full. */
+  side_effect: z.enum(["added", "factor"]).optional(),
 };
 
 export const Row = z
