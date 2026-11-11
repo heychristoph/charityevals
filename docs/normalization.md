@@ -1182,7 +1182,23 @@ resistance, herd immunity...), never their grantee-level adjustments (delivery r
 `$resource_shares`); spillovers to non-recipients, neighbours, household members and older children;
 our builds' unmodelled-benefit shares. Failure, no effect and backfire stay in the main chain.
 
-**Effect.** At 100% nothing moves. At 0%, 186 of 365 models move, median ×0.73.
+**Effect.** At 100% nothing moves. At 0%, 185 of 365 models move, median ×0.73.
+
+### 2.17 Programmes from the accounts, the chain from the formulas (November 2026)
+
+**Lines.** A charity's programmes are `lines` in charities/<id>.json, its accounts' finest published split,
+each with its money (`dollars`) and the models of it (`models`, a pattern over model ids); a line may have
+no model yet. `spending.programme` is the accounts' programme expenses. The rankings combine a charity's
+modelled lines by their money, as `programs` did (src/engine/ranking.ts); `coverage` is the money of the
+modelled lines over programme spending, shown on the charity's page with the lines not yet modelled.
+Every line gets a full model (owner decision 2026-11-10: no sampling, no short stand-ins).
+
+**Chain.** No theory-of-change field: src/engine/chain.ts flattens the bottom line into the factors it is
+the product of and names each by its step (reach, take-up, effect, evidence, would happen anyway, credit,
+how long it lasts, value, side effects, next dollar), from ids and labels, or a row's own `step` where
+they mislead. The model page shows it as one line of chips; a step every chain needs (reach, effect,
+evidence, would happen anyway, credit) with no row shows empty. A step the evaluator's sheet leaves out
+gets a row in our section, ×1 with its reason or a value.
 
 ## 3. Invariants
 
