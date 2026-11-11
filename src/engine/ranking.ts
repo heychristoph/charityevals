@@ -3,8 +3,8 @@
 //     breakeven, threshold and optionality analyses, sensitivity copies) never count, nor do an
 //     evaluator's stated upper bounds (a best case it calls unlikely, never a central estimate).
 //   - Within an evaluator, each program counts once: its newest model by source.published, hand-built
-//     or bulk import alike, hand-built first on the same date (newestFirst). A charity's `programs`
-//     say which models are which program; without them, all of an evaluator's models are one program.
+//     or bulk import alike, hand-built first on the same date (newestFirst). A charity's `lines`
+//     say which models are which programme; without them, all of an evaluator's models are one program.
 //     A model that matches no program, or a program at weight 0 (no money in the window, or not a
 //     program at all, e.g. an organisational grant), doesn't count.
 //   - A program's model with location variants counts as the funding-weighted mean of its locations:
@@ -46,12 +46,26 @@ export function isSideSheet(m: ResolvedModel): boolean {
   return SIDE_SHEET.test(`${m.id} ${m.name} ${m.source?.title ?? ""}`) || isValueOfInformation(m);
 }
 
-/** The program a model belongs to: "" for a charity without programs, undefined when it matches none. */
+/** The line (programme) a model belongs to: "" for a charity without lines, undefined when it matches none. */
 export function programOf(c: Charity, m: ResolvedModel): string | undefined {
-  if (!c.programs) return "";
-  // A pattern that is exactly this model's id wins: `<id>-charityevals-relief` belongs to the program
+  if (!c.lines) return "";
+  // A pattern that is exactly this model's id wins: `<id>-charityevals-relief` belongs to the line
   // named for it, not to `<id>-charityevals`, whose pattern also matches it as a regex.
-  return (c.programs.find((p) => p.models === m.id) ?? c.programs.find((p) => new RegExp(p.models).test(m.id)))?.id;
+  const modelled = c.lines.filter((p) => p.models !== undefined);
+  return (modelled.find((p) => p.models === m.id) ?? modelled.find((p) => new RegExp(p.models!).test(m.id)))?.id;
+}
+
+/** How much of a charity's programme spending its models cover: the money of the lines some ranked
+ * model matches, over its programme spending (or over all its lines' money where that is missing).
+ * Undefined without lines with money. */
+export function coverage(lib: Library, charity: string): { covered: number; total: number; share: number; unmodelled: { id: string; label: string; dollars: number }[] } | undefined {
+  const c = lib.charities.get(charity);
+  if (!c?.lines?.length || !c.lines.every((l) => l.dollars !== undefined)) return undefined;
+  const ranked = new Set(rankingPlan(lib, charity).flatMap((e) => e.parts.map((p) => p.program)));
+  const covered = c.lines.filter((l) => ranked.has(l.id)).reduce((s, l) => s + l.dollars!, 0);
+  const total = c.spending?.programme ?? c.lines.reduce((s, l) => s + l.dollars!, 0);
+  const unmodelled = c.lines.filter((l) => !ranked.has(l.id) && l.dollars! > 0).map((l) => ({ id: l.id, label: l.label, dollars: l.dollars! }));
+  return total > 0 ? { covered, total, share: Math.min(1, covered / total), unmodelled } : undefined;
 }
 
 const published = (m: ResolvedModel) => m.source?.published ?? "";
@@ -75,14 +89,14 @@ export function rankingPlan(lib: Library, charity: string): EvaluatorPlan[] {
   for (const m of newestFirst(modelsOf(lib, charity))) {
     if (!comparable(lib, m) || isSideSheet(m)) continue;
     const program = programOf(c, m);
-    if (program === undefined || c.programs?.find((p) => p.id === program)?.weight === 0) continue;
+    if (program === undefined || c.lines?.find((p) => p.id === program)?.dollars === 0) continue;
     const programs = byOwner.get(m.owner) ?? new Map<string, ResolvedModel>();
     byOwner.set(m.owner, programs);
     if (!programs.has(program)) programs.set(program, m);
   }
   return [...byOwner].map(([owner, programs]) => ({
     owner,
-    parts: [...programs].map(([program, model]) => ({ program, model, weight: c.programs?.find((p) => p.id === program)?.weight })),
+    parts: [...programs].map(([program, model]) => ({ program, model, weight: c.lines?.find((p) => p.id === program)?.dollars })),
   }));
 }
 

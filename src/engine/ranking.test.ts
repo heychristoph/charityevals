@@ -73,9 +73,9 @@ describe("ranking plan", () => {
     expect(programOf(ea, lib.models.get("evidence-action-india")!)).toBe("iron-folic-acid");
   });
 
-  it("every declared program matches at least one model", () => {
+  it("every line with models matches at least one model", () => {
     for (const c of lib.charities.values())
-      for (const p of c.programs ?? [])
+      for (const p of (c.lines ?? []).filter((l) => l.models !== undefined))
         expect([...lib.models.values()].some((m) => m.charity === c.id && m.kind === "charity" && programOf(c, m) === p.id), `${c.id}: ${p.id}`).toBe(true);
   });
 
@@ -87,13 +87,13 @@ describe("ranking plan", () => {
 });
 
 describe("funding weights (C2, C4)", () => {
-  it("weights every program of a charity, each with a source, or none", () => {
+  it("gives every line of a charity its money, each with a source, or none", () => {
     for (const c of lib.charities.values()) {
-      const ps = c.programs ?? [];
-      const weighted = ps.filter((p) => p.weight !== undefined);
+      const ps = c.lines ?? [];
+      const weighted = ps.filter((p) => p.dollars !== undefined);
       if (!weighted.length) continue;
       expect(weighted.length, c.id).toBe(ps.length);
-      for (const p of ps) expect(p.weight_source, `${c.id}: ${p.id}`).toMatch(/https:\/\//);
+      for (const p of ps) expect(p.source, `${c.id}: ${p.id}`).toMatch(/https:\/\//);
     }
   });
 

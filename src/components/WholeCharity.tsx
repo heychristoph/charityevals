@@ -80,7 +80,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   const rows = ev.programs
     .map((p) => {
       const share = weighted ? (p.weight ?? 0) / total : undefined;
-      return { p, label: charity.programs?.find((x) => x.id === p.program)?.label ?? plainModelName(p.result.model.name), share };
+      return { p, label: charity.lines?.find((x) => x.id === p.program)?.label ?? plainModelName(p.result.model.name), share };
     })
     .sort((a, b) => (b.share ?? 0) - (a.share ?? 0) || b.p.central - a.p.central);
 

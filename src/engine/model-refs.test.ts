@@ -102,7 +102,7 @@ describe("model references (#id)", () => {
     const prog = (id: string, x: number, unit = "u") => ({ ...model(id, [input("x", x), { id: "out", label: "out", formula: "x" }], unit), charity: "multi", owner: "ev" });
     const charity = {
       id: "multi", name: "Multi", cause: "global-health",
-      programs: [{ id: "a", label: "A", models: "^prog-a", weight: 3 }, { id: "b", label: "B", models: "^prog-b", weight: 1 }],
+      lines: [{ id: "a", label: "A", models: "^prog-a", dollars: 3 }, { id: "b", label: "B", models: "^prog-b", dollars: 1 }],
     };
     const other = { id: "other", name: "Other", cause: "global-health" };
     const mine = (x: object) => ({ ...x, charity: "other", owner: "ev" });

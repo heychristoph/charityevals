@@ -1,0 +1,69 @@
+---
+// How the impact happens, read off the model's formulas (src/engine/chain.ts): one line of steps per
+// programme, in the order a reader follows them. An adjustment shows its factor; a step the chain
+// needs but the model lacks shows empty.
+import { lib } from "../lib/data";
+import { chainOf, STEPS, STEP_LABELS, EXPECTED_STEPS, type Factor, type Programme, type StepName } from "../engine/chain";
+import { coverage } from "../engine/ranking";
+
+interface Props { modelId: string; main?: boolean }
+const model = lib.models.get(Astro.props.modelId)!;
+// On the charity's own page: how much of its programme spending has a model, and what hasn't.
+const cov = Astro.props.main ? coverage(lib, model.charity) : undefined;
+const usd = (x: number) => (x >= 1e9 ? `$${(x / 1e9).toFixed(1)}bn` : x >= 1e6 ? `$${(x / 1e6).toFixed(1)}m` : `$${Math.round(x / 1e3)}k`);
+const chain = chainOf(lib, model);
+// Steps whose factors are shares or multipliers: their product reads as one number.
+const RATIO: StepName[] = ["take_up", "evidence", "anyway", "credit", "side_effect", "next_dollar"];
+// The model is one programme (a charity's programmes are its lines): one line of steps. A step any
+// part of the result has is there; its number is the main path's (the largest part at each split).
+const every = (p: Programme): Factor[] => [...p.factors, ...(p.branches ?? []).flatMap(every)];
+const mainPath = (p: Programme): Factor[] => [...p.factors, ...(p.branches?.[0] ? mainPath(p.branches[0]) : [])];
+const top = chain?.programmes[0];
+const fs = chain && top ? [...chain.factors, ...chain.programmes.flatMap(every)] : [];
+const path = chain && top ? [...chain.factors, ...mainPath(top)] : [];
+const fmt = (v: number) => `×${v >= 0.995 && v < 1.005 ? "1" : v.toFixed(v < 0.1 ? 3 : 2)}`;
+const chips = fs.length === 0 ? [] : STEPS.filter((s) => fs.some((f) => f.step === s) || EXPECTED_STEPS.includes(s)).map((s) => {
+  const these = path.filter((f) => f.step === s);
+  const product = these.reduce((x, f) => x * (f.inv ? 1 / f.value : f.value), 1);
+  // Only shares and multipliers read as one number.
+  const ratio = RATIO.includes(s) && these.length > 0 && these.every((f) => f.value >= 0.05 && f.value <= 1.5) && Number.isFinite(product);
+  const named = fs.filter((f) => f.step === s).map((f) => f.label).filter((x, i, all) => x && all.indexOf(x) === i);
+  return { step: s, label: STEP_LABELS[s], empty: named.length === 0 && !fs.some((f) => f.step === s), value: ratio ? fmt(product) : "", title: named.slice(0, 6).join(" · ") };
+});
+---
+{chips.length > 0 && (
+  <section class="chain" aria-labelledby="chain-title">
+    <h2 id="chain-title" class="chain-title">How the impact happens</h2>
+    <ol class="chain-chips">
+      {chips.map((c) => (
+        <li class:list={["chip", `chip-${c.step}`, { empty: c.empty }]} title={c.empty ? `No row for this step in the model` : c.title}>
+          <span class="chip-step">{c.label}</span>{c.value && <span class="chip-value">{c.value}</span>}
+        </li>
+      ))}
+    </ol>
+    {cov && (
+      <p class:list={["chain-cov small", { partial: cov.share < 0.995 }]}>
+        <span class="chip chip-cov">Covers {Math.round(cov.share * 100)}% of programme spending</span>
+        {cov.unmodelled.length > 0 && <span class="chain-gap"> Not yet modelled: {cov.unmodelled.map((l) => `${l.label} (${usd(l.dollars)})`).join(", ")}</span>}
+      </p>
+    )}
+  </section>
+)}
+
+<style>
+  .chain { margin: 1.5rem 0 1rem; }
+  .chain-title { font: 600 0.8rem/1.2 var(--sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); opacity: 0.7; margin: 0 0 0.5rem; }
+  .chain-line + .chain-line { margin-top: 0.6rem; }
+  .chain-prog { margin: 0 0 0.25rem; font-family: var(--sans); }
+  .chain-share { font-variant-numeric: tabular-nums; opacity: 0.7; }
+  .chain-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 0; padding: 0; margin: 0; }
+  .chip { display: inline-flex; align-items: baseline; gap: 0.35em; font: 0.8rem/1.6 var(--sans); padding: 0 0.6em; border: 1px solid var(--rule-strong); border-radius: var(--radius); background: var(--paper); }
+  .chip + .chip { margin-left: 1.1em; position: relative; }
+  .chip + .chip::before { content: "→"; position: absolute; left: -1em; opacity: 0.45; }
+  .chip-value { font-variant-numeric: tabular-nums; color: var(--blue-ink); }
+  .chip.empty { border-style: dashed; color: var(--warn); background: transparent; }
+  .chip-side_effect { background: var(--blue-wash); }
+  .chain-cov { margin: 0.6rem 0 0; font-family: var(--sans); }
+  .chain-cov.partial .chip-cov { border-color: var(--warn); color: var(--warn); }
+  .chain-gap { opacity: 0.8; }
+</style>
