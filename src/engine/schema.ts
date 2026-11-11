@@ -81,7 +81,13 @@ const rowShape = {
    * share added to the result, times the weight; `factor`, a multiplier, its excess over 1 times the
    * weight. The evaluator view counts it in full. */
   side_effect: z.enum(["added", "factor"]).optional(),
+  /** The step of the theory of change this row is (src/engine/chain.ts), where its id and label don't
+   * say it plainly: the chain is read off the formulas, and only the step's name needs help. */
+  step: z.lazy(() => Step).optional(),
 };
+
+/** The steps of a theory of change, in the order a reader follows them (src/engine/chain.ts). */
+export const Step = z.enum(["cost", "reach", "take_up", "effect", "evidence", "anyway", "credit", "lasts", "value", "side_effect", "next_dollar"]);
 
 export const Row = z
   .object(rowShape)
@@ -150,24 +156,36 @@ export const Charity = z
     donate_via: z.string().optional(),
     summary: z.string().optional(),
     resources: z.array(Resource).default([]),
-    /** A charity that runs several programs an evaluator models separately (src/engine/ranking.ts).
-     * Each evaluator's newest model of each program counts on the rankings, combined by `weight`;
-     * a model that matches no program doesn't count. Without this, all of an evaluator's models are
-     * one program. */
-    programs: z
+    /** What the charity spends on its programmes, from its accounts: the total its lines are part of. */
+    spending: z
+      .object({
+        /** Programme expenses (no fundraising or management), in USD, for the year named. */
+        programme: z.number().positive(),
+        year: z.number().int(),
+        /** URL and page of the accounts. */
+        source: z.string(),
+      })
+      .strict()
+      .optional(),
+    /** The charity's programmes, from its accounts' finest published split (src/engine/ranking.ts):
+     * each line's money and the models of it. Each evaluator's newest model of each line counts on the
+     * rankings, the lines combined by their money; a line no model matches is a programme not yet
+     * modelled, shown in the coverage. Without lines, all of an evaluator's models are one programme. */
+    lines: z
       .array(
         z
           .object({
             id: z.string(),
             label: z.string(),
-            /** Regular expression over model ids, tried in order: a model belongs to the first program it matches. */
-            models: z.string(),
-            /** The program's share of the charity's funding, in any unit (e.g. dollars granted). Used only
-             * when every program has one; otherwise the evaluator's figure is the programs' median. 0: the
-             * program got no money in the window, so it doesn't count. */
-            weight: z.number().nonnegative().optional(),
-            /** URL and a one-line note on how the weight was reached. */
-            weight_source: z.string().optional(),
+            /** Regular expression over model ids, tried in order: a model belongs to the first line it
+             * matches. None: no model of this line yet. */
+            models: z.string().optional(),
+            /** The line's money in USD: the charity's spending on it, or, where the donate route is an
+             * evaluator's restricted fund, that fund's grants. Used only when every modelled line has one;
+             * otherwise the evaluator's figure is the lines' median. 0: no donated money reaches it. */
+            dollars: z.number().nonnegative().optional(),
+            /** URL and a one-line note on how the money was reached. */
+            source: z.string().optional(),
           })
           .strict(),
       )
