@@ -58,6 +58,11 @@
       "title": "Bottom line"
     },
     {
+      "id": "steps",
+      "title": "Steps HLI's model leaves out",
+      "kind": "ours"
+    },
+    {
       "id": "discounting",
       "title": "Discounting",
       "explainer": "charityevals' step, not HLI's. HLI counts a year of better wellbeing the same whenever it comes. In our view, later years count less at the discount rate under Your values, as in GiveWell's models; the evaluator view sets the rate to 0, so HLI's numbers reproduce."
@@ -126,6 +131,7 @@
     },
     {
       "id": "prior_time_adjustment_for_longterm_follow_ups",
+      "step": "lasts",
       "section": "ev_prior",
       "label": "Time adjustment for longterm follow-ups",
       "value": 1.544193,
@@ -152,6 +158,7 @@
     },
     {
       "id": "prior_range_restriction",
+      "step": "evidence",
       "section": "ev_prior",
       "label": "Range restriction",
       "value": 0.9234146,
@@ -185,6 +192,7 @@
     },
     {
       "id": "prior_dosage_adjustment",
+      "step": "evidence",
       "section": "ev_prior",
       "label": "Dosage adjustment",
       "value": 0.9002918,
@@ -198,6 +206,7 @@
     },
     {
       "id": "prior_other_moderators",
+      "step": "evidence",
       "section": "ev_prior",
       "label": "Other moderators (e.g., expertise)",
       "value": 0.7854523,
@@ -211,6 +220,7 @@
     },
     {
       "id": "prior_adults_versus_minors",
+      "step": "evidence",
       "section": "ev_prior",
       "label": "Adults versus minors",
       "value": 1.0,
@@ -224,6 +234,7 @@
     },
     {
       "id": "prior_ngo_versus_average_implementer",
+      "step": "evidence",
       "section": "ev_prior",
       "label": "NGO versus average implementer",
       "value": 1.0,
@@ -385,6 +396,7 @@
     },
     {
       "id": "rct_time_adjustment_for_longterm_follow_ups",
+      "step": "lasts",
       "section": "ev_rct",
       "label": "Time adjustment for longterm follow-ups",
       "value": 1.0,
@@ -411,6 +423,7 @@
     },
     {
       "id": "rct_range_restriction",
+      "step": "evidence",
       "section": "ev_rct",
       "label": "Range restriction",
       "value": 0.88,
@@ -444,6 +457,7 @@
     },
     {
       "id": "rct_dosage_adjustment",
+      "step": "evidence",
       "section": "ev_rct",
       "label": "Dosage adjustment",
       "value": 0.7729856,
@@ -457,6 +471,7 @@
     },
     {
       "id": "rct_other_moderators",
+      "step": "evidence",
       "section": "ev_rct",
       "label": "Other moderators (e.g., expertise)",
       "value": 1.0,
@@ -470,6 +485,7 @@
     },
     {
       "id": "rct_adults_versus_minors",
+      "step": "evidence",
       "section": "ev_rct",
       "label": "Adults versus minors",
       "value": 1.16344,
@@ -483,6 +499,7 @@
     },
     {
       "id": "rct_ngo_versus_average_implementer",
+      "step": "evidence",
       "section": "ev_rct",
       "label": "NGO versus average implementer",
       "value": 1.1577,
@@ -631,6 +648,7 @@
     },
     {
       "id": "me_time_adjustment_for_longterm_follow_ups",
+      "step": "lasts",
       "section": "ev_me",
       "label": "Time adjustment for longterm follow-ups",
       "value": 1.0,
@@ -657,6 +675,7 @@
     },
     {
       "id": "me_range_restriction",
+      "step": "evidence",
       "section": "ev_me",
       "label": "Range restriction",
       "value": 0.88,
@@ -690,6 +709,7 @@
     },
     {
       "id": "me_dosage_adjustment",
+      "step": "evidence",
       "section": "ev_me",
       "label": "Dosage adjustment",
       "value": 1.0,
@@ -703,6 +723,7 @@
     },
     {
       "id": "me_other_moderators",
+      "step": "evidence",
       "section": "ev_me",
       "label": "Other moderators (e.g., expertise)",
       "value": 1.0,
@@ -716,6 +737,7 @@
     },
     {
       "id": "me_adults_versus_minors",
+      "step": "evidence",
       "section": "ev_me",
       "label": "Adults versus minors",
       "value": 1.0,
@@ -729,6 +751,7 @@
     },
     {
       "id": "me_ngo_versus_average_implementer",
+      "step": "evidence",
       "section": "ev_me",
       "label": "NGO versus average implementer",
       "value": 1.0,
@@ -975,11 +998,32 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "counterfactual_adj",
+      "section": "steps",
+      "label": "Share of the effect that wouldn't have happened anyway",
+      "step": "anyway",
+      "format": "percent",
+      "value": 1,
+      "kind": "judgment",
+      "explainer": "HLI's effect is the trials' difference between therapy and care as usual, so what the people treated would have got anyway is already taken out: 1."
+    },
+    {
+      "id": "attribution_share",
+      "section": "steps",
+      "label": "StrongMinds' share of the resources behind the effect",
+      "step": "credit",
+      "format": "percent",
+      "value": { "low": 0.8, "best": 0.95, "high": 1 },
+      "published": 1,
+      "kind": "judgment",
+      "explainer": "Not in HLI's model (the evaluator view counts it at 1). HLI's cost is StrongMinds' own spending. Groups run with partners (government health workers, other NGOs) also use partners' staff time, which that cost leaves out. Judgment: partners' resources are about 5% of the whole (range 0-20%). Trial value, still to be sourced from the partner-delivered share of groups StrongMinds reports."
+    },
+    {
       "id": "wellbys_per_dollar",
       "section": "staff_pay",
       "label": "WELLBYs per dollar",
       "format": "small",
-      "formula": "(wellbys_per_1000 / 1000) * donor_cost_share",
+      "formula": "(wellbys_per_1000 / 1000) * donor_cost_share * counterfactual_adj * attribution_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],

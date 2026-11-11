@@ -4,7 +4,7 @@
 // model: the formulas are the chain, so it can't drift from the numbers.
 import type { Node } from "./expr";
 import { Step } from "./schema";
-import { compute, assumptionValues, type Library, type ResolvedModel } from "./model";
+import { compute, assumptionValues, missingDataFactor, SIDE_EFFECT_WEIGHT, type Library, type ResolvedModel } from "./model";
 import { passThrough, lookupFor, valueOfNode } from "./tree";
 
 /** The steps of a chain, in the order a reader follows them. */
@@ -37,11 +37,13 @@ const RULES: [StepName, RegExp][] = [
   ["take_up", /grantee[- _]level|confidence in funds|wastage|fraud|misappropriat/i],
   ["next_dollar", /marginal_vs_past|next dollar|marginal (dollar|funding)|room for more/i],
   ["credit", /attribution|leverage|fung|credit|crowd|salary|donor_cost_share|resource_shares|share of (the )?(resources|credit)|coalition|contribution/i],
-  ["anyway", /counterfactual|would (have|happen)|anyway|absence of|without the (program|charity)|business as usual/i],
-  ["evidence", /evidence|validity|replicab|bias|missing_data|publication|generaliz|external|internal/i],
+  ["anyway", /counterfactual|would (have|happen)|anyway|without the (program|charity)|business as usual/i],
+  ["evidence", /evidence|validity|replicab|bias|missing[_ ]data|isn't measured|publication|generaliz|external|internal/i],
   ["side_effect", /spillover|supplemental intervention|unmodelled|additional (program )?benefits|excluded effects/i],
   ["take_up", /adherence|complian|coverage|take[-_ ]?up|uptake|usage|fulfil|implementation|delivered|attendance|completion/i],
   ["lasts", /persist|duration|years? of (impact|benefit)|discount|annuity|npv|\bpv\b|lifetime|decay|wait|timing|years_until/i],
+  // A welfare change per animal or person is the effect, even in the outcome's unit.
+  ["effect", /averted per (hen|animal|broiler|chicken|fish|shrimp|person)|per hen-year moved|welfare change/i],
   ["value", /uov|units? of value|daly|wellby|moral|value (of|assigned)|ln[_ ]|log |consumption|income|\bsads?\b|species|welfare range|per person value|exchange|conversion|life_value/i],
   ["effect", /effect|reduc|efficacy|risk|mortality|incidence|avert|prevalen|impact|deaths?|cases?|improv|outcome|benefit/i],
   ["reach", /people|reached|recipient|beneficiar|treated|number|animals|hens|chickens|population|distribut|nets|households|children|patients|students|pledges|commitments|tonnes|hectares|acres/i],
@@ -72,7 +74,8 @@ function leaf(ctx: Ctx, n: Node, inv: boolean): Factor {
     const ref = `${n.scope === "assumption" ? "$" : n.scope === "fact" ? "@" : "#"}${n.name}`;
     const label = n.scope === "assumption" ? ctx.lib.assumptions.rows.find((r) => r.id === n.name)?.label ?? n.name
       : n.scope === "fact" ? ctx.lib.facts.get(n.name)?.label ?? n.name : n.name;
-    return { step: divStep(inv, n.scope === "model" ? "effect" : stepOf(n.name, label)), ref, label, value, ...(inv ? { inv } : {}) };
+    const step: StepName = n.scope === "model" ? "effect" : n.name === SIDE_EFFECT_WEIGHT ? "side_effect" : stepOf(n.name, label);
+    return { step: divStep(inv, step), ref, label, value, ...(inv ? { inv } : {}) };
   }
   // A formula that is no row of its own (a present value, a nested sum): named by the first row it
   // reads, a step by its function.
@@ -171,7 +174,9 @@ function programme(ctx: Ctx, n: Node, label: string, share: number): Programme {
   const p: Programme = { label, share, factors: cancel(out.factors) };
   if (out.sums.length && ctx.depth < MAX_DEPTH) {
     // The largest sum splits the chain into branches; any others stay one factor each.
-    const [main, ...rest] = out.sums.sort((a, b) => valueOfNode(b.node, ctx.look) - valueOfNode(a.node, ctx.look));
+    // Outcomes branch the chain; a sum of costs (a programme's spending lines) is one factor.
+    const isCost = (n: Node) => { const f = firstRef(n); return !!f && stepOf(f, ctx.m.byId.get(f)?.label) === "cost"; };
+    const [main, ...rest] = out.sums.sort((a, b) => Number(isCost(a.node)) - Number(isCost(b.node)) || valueOfNode(b.node, ctx.look) - valueOfNode(a.node, ctx.look));
     for (const s of rest) p.factors.push(leaf(ctx, s.node, false));
     const ts = termsOf(main.node);
     const vals = ts.map((t) => valueOfNode(t, ctx.look));
@@ -200,17 +205,15 @@ export function chainOf(lib: Library, m: ResolvedModel): Chain | undefined {
   const values = compute(lib, m, av);
   const look = lookupFor(lib, m, values, av, "charityevals");
   const top = programme({ lib, m, look, depth: 0, budget: { n: 400 } }, { type: "ref", scope: "row", name: m.output.row }, m.name, 1);
+  // An imported model's missing-data step sits in the headline, not its rows (docs/normalization.md
+  // 2.12): measured, it counts in full; thin, at the slider.
+  if (m.missing_data) top.factors.push({ step: "evidence", ref: "$missing_data_discount", label: "For the part of the result that isn't measured", value: missingDataFactor(lib, m, av) });
   const programmes = top.branches?.length ? top.branches : [{ ...top, factors: [] }];
-  const steps = (p: Programme): Set<StepName> => new Set([...top.factors, ...p.factors].map((f) => f.step));
-  const missing = EXPECTED_STEPS.filter((s) => programmes.some((p) => !leafSteps(p, steps(p)).has(s)));
+  // A step is there when any part of the result has it (a side effect's own branch needs no chain).
+  const every = (p: Programme): Factor[] => [...p.factors, ...(p.branches ?? []).flatMap(every)];
+  const has = new Set([...top.factors, ...programmes.flatMap(every)].map((f) => f.step));
+  const missing = EXPECTED_STEPS.filter((s) => !has.has(s));
   const chain: Chain = { factors: top.factors, programmes, missing };
   chains.set(m, chain);
   return chain;
-}
-
-/** Steps a programme's chain has, through its branches: a step any branch lacks counts as missing. */
-function leafSteps(p: Programme, above: Set<StepName>): Set<StepName> {
-  if (!p.branches?.length) return above;
-  const each = p.branches.map((b) => leafSteps(b, new Set([...above, ...b.factors.map((f) => f.step)])));
-  return new Set([...above, ...[...STEPS, "other" as const].filter((s) => each.every((e) => e.has(s)))]);
 }
