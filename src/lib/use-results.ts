@@ -156,7 +156,8 @@ function computeResults(av: Record<string, number>) {
       return [programs.length === e.programs.length ? e : evaluatorResult(e.owner, programs)];
     });
     if (!evaluators.length) return [];
-    const lead = evaluators.find((e) => e.owner === primaryOf(lib, c.id)?.owner) ?? evaluators[0];
+    // The lead: the charity's first plan (a composite of its lines, or its first evaluator).
+    const lead = evaluators.find((e) => e.owner === plans.get(c.id)?.[0]?.owner) ?? evaluators[0];
     return [{
       charity: c,
       evaluators,
@@ -172,6 +173,10 @@ function computeResults(av: Record<string, number>) {
 
 /** One evaluator's figure for a charity as its own pages show it: every programme, old estimates
  * included (the rankings may leave some out, `$ignore_old_estimates`). */
+export function pageLead(pages: Map<string, EvaluatorResult[]>, charity: string) {
+  return pages.get(charity)?.[0];
+}
+
 export function pageEvaluator(pages: Map<string, EvaluatorResult[]>, charity: string, owner: string) {
   return pages.get(charity)?.find((e) => e.owner === owner);
 }
