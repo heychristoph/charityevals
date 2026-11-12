@@ -211,6 +211,52 @@ export function refs(node: Node, out = { rows: new Set<string>(), assumptions: n
 
 export type Lookup = (scope: Scope, name: string) => number;
 
+/** What a compiled formula reads: rows by position (`v`), assumptions by name, and facts or other
+ * models through `other`. */
+export type Env = { v: number[]; a: Record<string, number>; other: (scope: Scope, name: string) => number };
+export type Compiled = (e: Env) => number;
+
+/** A formula as nested closures, rows read by position (`rowAt` gives it, -1 for none): the same
+ * operations in the same order as `evaluate`, so the same numbers, without walking the tree or
+ * looking names up on every evaluation. */
+export function compile(node: Node, rowAt: (name: string) => number): Compiled {
+  switch (node.type) {
+    case "num": { const x = node.value; return () => x; }
+    case "ref": {
+      const name = node.name;
+      if (node.scope === "row") { const j = rowAt(name); return j < 0 ? () => NaN : (e) => e.v[j]; }
+      if (node.scope === "assumption") return (e) => e.a[name] ?? NaN;
+      const scope = node.scope;
+      return (e) => e.other(scope, name);
+    }
+    case "neg": { const f = compile(node.arg, rowAt); return (e) => -f(e); }
+    case "call": {
+      const fn = FUNCTIONS[node.fn].fn;
+      const args = node.args.map((a) => compile(a, rowAt));
+      if (args.length === 1) { const [x] = args; return (e) => fn(x(e)); }
+      if (args.length === 2) { const [x, y] = args; return (e) => fn(x(e), y(e)); }
+      if (args.length === 3) { const [x, y, z] = args; return (e) => fn(x(e), y(e), z(e)); }
+      return (e) => fn(...args.map((f) => f(e)));
+    }
+    case "bin": {
+      const l = compile(node.left, rowAt), r = compile(node.right, rowAt);
+      switch (node.op) {
+        case "+": return (e) => l(e) + r(e);
+        case "-": return (e) => l(e) - r(e);
+        case "*": return (e) => l(e) * r(e);
+        case "/": return (e) => l(e) / r(e);
+        case "^": return (e) => l(e) ** r(e);
+        case "=": return (e) => (l(e) === r(e) ? 1 : 0);
+        case "<>": return (e) => (l(e) !== r(e) ? 1 : 0);
+        case "<": return (e) => (l(e) < r(e) ? 1 : 0);
+        case ">": return (e) => (l(e) > r(e) ? 1 : 0);
+        case "<=": return (e) => (l(e) <= r(e) ? 1 : 0);
+        case ">=": return (e) => (l(e) >= r(e) ? 1 : 0);
+      }
+    }
+  }
+}
+
 export function evaluate(node: Node, lookup: Lookup): number {
   switch (node.type) {
     case "num": return node.value;

@@ -26,6 +26,8 @@ export const lib = buildLibrary(
   rawFacts,
   Object.values(charityFiles).map((f) => f.default),
   owners,
+  // The server validates every file (and npm run check before it); the browser trusts what it built.
+  { trusted: !import.meta.env.SSR },
 );
 
 if (lib.errors.length) throw new Error(`Model errors (run npm run check):\n${lib.errors.join("\n")}`);

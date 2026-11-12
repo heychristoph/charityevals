@@ -1,4 +1,4 @@
-import { parse, refs, evaluate, type Node, type Scope } from "./expr";
+import { parse, refs, evaluate, compile, type Compiled, type Env, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, type ModelFile, type RowPatch, type Range } from "./schema";
 import { evaluatorFigure, evaluatorFigureModels } from "./ranking";
 import { byIso3 } from "./countries";
@@ -56,9 +56,16 @@ export function buildLibrary(
   rawOwners: unknown[] = [],
   /** Models outside this build that formulas may reference by `#id` (a page rebuilding one bulk model
    * in the browser passes the site's library). */
-  options: { models?: Map<string, ResolvedModel> } = {},
+  options: { models?: Map<string, ResolvedModel>; trusted?: boolean } = {},
 ): Library {
   const errors: string[] = [];
+  // `trusted`: data the build has already validated (npm run check), as the browser loads it: the
+  // schema checks are skipped and only the defaults they would fill are filled.
+  const trust = <S,>(schema: S, fill: (x: never) => unknown = (x) => x): S =>
+    options.trusted ? ({ safeParse: (x: never) => ({ success: true, data: fill(x) }) } as S) : schema;
+  const CharityS = trust(Charity, (c: object) => ({ resources: [], ...c }));
+  const OwnerS = trust(Owner), FactsS = trust(Facts), AssumptionsS = trust(Assumptions), RowS = trust(Row);
+  const ModelS = trust(Model, (m: object) => ({ resources: [], sections: [], ...m }));
   const parseAll = <T,>(raws: unknown[], schema: { safeParse: (x: unknown) => { success: boolean; data?: T; error?: { issues: { path: PropertyKey[]; message: string }[] } } }, what: string) => {
     const out = new Map<string, T>();
     for (const raw of raws) {
@@ -70,12 +77,12 @@ export function buildLibrary(
     }
     return out;
   };
-  const charities = parseAll<Charity>(rawCharities, Charity, "charity");
-  const owners = parseAll<Owner>(rawOwners, Owner, "owner");
+  const charities = parseAll<Charity>(rawCharities, CharityS, "charity");
+  const owners = parseAll<Owner>(rawOwners, OwnerS, "owner");
   for (const c of charities.values()) if (RESERVED_IDS.has(c.id)) errors.push(`charity ${c.id}: id is taken by a site page`);
   const facts = new Map<string, FactRow>();
   for (const raw of rawFacts) {
-    const parsed = Facts.safeParse(raw);
+    const parsed = FactsS.safeParse(raw);
     if (!parsed.success) {
       errors.push(`facts ${(raw as { id?: string })?.id ?? "?"}: ${parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`);
       continue;
@@ -85,7 +92,7 @@ export function buildLibrary(
       facts.set(`${parsed.data.id}.${r.id}`, { ...r, key: `${parsed.data.id}.${r.id}`, group: parsed.data.label });
     }
   }
-  const assumptionsParsed = Assumptions.safeParse(rawAssumptions);
+  const assumptionsParsed = AssumptionsS.safeParse(rawAssumptions);
   if (!assumptionsParsed.success) {
     errors.push(`assumptions: ${assumptionsParsed.error.message}`);
     return { models: new Map(), charities, owners, assumptions: { groups: [], rows: [], units: {}, common: { unit: "", benchmark: "" } }, facts, errors };
@@ -116,7 +123,7 @@ export function buildLibrary(
 
   const files = new Map<string, ModelFile>();
   for (const raw of rawModels) {
-    const parsed = Model.safeParse(raw);
+    const parsed = ModelS.safeParse(raw);
     if (!parsed.success) {
       const id = (raw as { id?: string })?.id ?? "?";
       errors.push(`${id}: ${parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`);
@@ -169,7 +176,7 @@ export function buildLibrary(
     const resolved: ResolvedRow[] = [];
     for (const r of rows) {
       const { inheritedFrom, overridden, ...plain } = r;
-      const check = Row.safeParse(plain);
+      const check = RowS.safeParse(plain);
       if (!check.success) {
         errors.push(`${id}: ${check.error.issues.map((i) => i.message).join("; ")}`);
         continue;
@@ -510,25 +517,151 @@ export function compute(
   inputs: Record<string, number> = {},
   view: View = "charityevals",
 ): Record<string, number> {
-  const a = viewAssumptions(m, av, view);
+  const { v, models } = run(lib, m, av, inputs, view);
+  const p = rowProgram(m);
   const vals: Record<string, number> = {};
-  // Another model's result is stored as "#id" beside the rows, so every later lookup over these values
-  // (the tree, uncertainty) reads the same number. It is always our view at the reader's values: the
-  // evaluator view of this model doesn't pin another model's rates, but it never discounts an estimate
-  // for its age or weighs it by distance (readerValues). A model read as a stand-in for this one's own
-  // work is read without its distance weight: this model's beneficiaries apply (refValues).
-  const lookup = (scope: Scope, n: string) =>
-    scope === "row" ? vals[n] ?? NaN
-    : scope === "assumption" ? a[n] ?? NaN
-    : scope === "model" ? (vals[`#${n}`] ??= inputs[`#${n}`] ?? modelResult(lib, n, refValues(m, av, view)))
-    : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
-  for (const id of m.order) {
-    const r = m.byId.get(id)!;
-    // The evaluator view takes a calculated row's published number over its formula: a row that reads
-    // a shared fact in our view keeps the evaluator's own figure there.
-    vals[id] = inputs[id] ?? (r.node && !(view === "evaluator" && r.published !== undefined) ? evaluate(r.node, lookup) : inputValue(r, view));
-  }
+  for (let k = 0; k < p.rows.length; k++) vals[p.rows[k].id] = v[k];
+  for (const [id, x] of Object.entries(models)) vals[`#${id}`] = x;
   return vals;
+}
+
+/** The rows a headline reads: the output and the rows its unit's conversion reads. */
+function headRows(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs: Record<string, number>, view: View): Record<string, number> {
+  const { v } = run(lib, m, av, inputs, view);
+  const p = rowProgram(m);
+  const out: Record<string, number> = {};
+  for (let i = 0; i < p.head.length; i++) out[p.head[i]] = v[p.at.get(p.head[i]) ?? -1];
+  return out;
+}
+
+type Graph = {
+  /** Per row: the rows (by position) that read it; and per fact and model, the rows that read it. */
+  users: number[][];
+  factReaders: Map<string, number[]>;
+  modelReaders: Map<string, number[]>;
+  /** Per row: it and every row computed from it, in computing order (filled as needed). */
+  down: Map<number, number[]>;
+};
+type Program = {
+  rows: ResolvedRow[];
+  at: Map<string, number>;
+  /** The rows a headline reads. */
+  head: string[];
+  /** Full runs so far: a model computed once (a page build, a check) is walked as it is; from the
+   * second run its formulas are compiled (`fns`), and its graph is built for the first partial run. */
+  runs: number;
+  fns?: (Compiled | undefined)[];
+  graph?: Graph;
+};
+const programs = new WeakMap<ResolvedModel, Program>();
+/** A model's rows in computing order. */
+function rowProgram(m: ResolvedModel): Program {
+  let p = programs.get(m);
+  if (!p) {
+    const at = new Map(m.order.map((id, k) => [id, k]));
+    programs.set(m, (p = { rows: m.order.map((id) => m.byId.get(id)!), at, head: m.output ? [m.output.row, ...m.conversionRows] : [], runs: 0 }));
+  }
+  return p;
+}
+
+/** Each formula compiled once (expr.ts compile). */
+function compiled(p: Program): (Compiled | undefined)[] {
+  return (p.fns ??= p.rows.map((r) => (r.node ? compile(r.node, (n) => p.at.get(n) ?? -1) : undefined)));
+}
+
+function graphOf(p: Program): Graph {
+  if (!p.graph) {
+    const users: number[][] = p.rows.map(() => []);
+    const factReaders = new Map<string, number[]>(), modelReaders = new Map<string, number[]>();
+    const add = (map: Map<string, number[]>, key: string, k: number) => { let l = map.get(key); if (!l) map.set(key, (l = [])); l.push(k); };
+    p.rows.forEach((r, k) => {
+      if (!r.node) return;
+      const u = refs(r.node);
+      for (const n of u.rows) { const j = p.at.get(n); if (j !== undefined) users[j].push(k); }
+      for (const f of u.facts) add(factReaders, f, k);
+      for (const d of u.models) add(modelReaders, d, k);
+    });
+    p.graph = { users, factReaders, modelReaders, down: new Map() };
+  }
+  return p.graph;
+}
+
+/** A row and every row computed from it, in computing order. */
+function downstream(g: Graph, k: number): number[] {
+  let d = g.down.get(k);
+  if (!d) {
+    const seen = new Set<number>([k]);
+    const stack = [k];
+    while (stack.length) for (const j of g.users[stack.pop()!]) if (!seen.has(j)) { seen.add(j); stack.push(j); }
+    g.down.set(k, (d = [...seen].sort((x, y) => x - y)));
+  }
+  return d;
+}
+
+/** Every row's value by position, and each model read live (`#id`). */
+type Run = { v: number[]; models: Record<string, number> };
+
+// A model's values with no inputs changed, per assumption values and view: a sensitivity swing or an
+// uncertainty step changes one input and recomputes only the rows that read it.
+const bases = new WeakMap<Record<string, number>, WeakMap<ResolvedModel, Partial<Record<View, Run>>>>();
+
+function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs: Record<string, number>, view: View): Run {
+  const p = rowProgram(m);
+  const a = viewAssumptions(m, av, view);
+  const keys = Object.keys(inputs);
+  let byModel = bases.get(av);
+  if (!byModel) bases.set(av, (byModel = new WeakMap()));
+  let byView = byModel.get(m);
+  if (!byView) byModel.set(m, (byView = {}));
+  const base = keys.length ? (byView[view] ??= run(lib, m, av, {}, view)) : undefined;
+  // Another model's result is kept beside the rows, so every later lookup over these values (the tree,
+  // uncertainty) reads the same number. It is always our view at the reader's values: the evaluator
+  // view of this model doesn't pin another model's rates, but it never discounts an estimate for its
+  // age or weighs it by distance (readerValues). A model read as a stand-in for this one's own work is
+  // read without its distance weight: this model's beneficiaries apply (refValues).
+  const models: Record<string, number> = base ? { ...base.models } : {};
+  for (const k of keys) if (k.startsWith("#")) models[k.slice(1)] = inputs[k];
+  const other = (scope: Scope, n: string) =>
+    scope === "model" ? (models[n] ??= inputs[`#${n}`] ?? modelResult(lib, n, refValues(m, av, view)))
+    : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
+  const n = p.rows.length;
+  const env: Env = { v: base ? base.v.slice() : new Array<number>(n).fill(NaN), a, other };
+  // The evaluator view takes a calculated row's published number over its formula: a row that reads a
+  // shared fact in our view keeps the evaluator's own figure there.
+  const formula = (k: number) => !!p.rows[k].node && !(view === "evaluator" && p.rows[k].published !== undefined);
+  if (!base) {
+    if (p.runs++ === 0) {
+      // The first run walks the formulas: compiling pays only for a model computed again.
+      const look = (scope: Scope, name: string) => (scope === "row" ? env.v[p.at.get(name) ?? -1] ?? NaN : scope === "assumption" ? a[name] ?? NaN : other(scope, name));
+      for (let k = 0; k < n; k++) {
+        const r = p.rows[k];
+        env.v[k] = inputs[r.id] ?? (formula(k) ? evaluate(r.node!, look) : inputValue(r, view));
+      }
+      return { v: env.v, models };
+    }
+    const fns = compiled(p);
+    for (let k = 0; k < n; k++) {
+      const r = p.rows[k];
+      env.v[k] = inputs[r.id] ?? (formula(k) ? fns[k]!(env) : inputValue(r, view));
+    }
+    return { v: env.v, models };
+  }
+  // From the base: only the rows given a value or reading a changed fact or model, and the rows
+  // computed from them, are recomputed, in computing order.
+  const g = graphOf(p), fns = compiled(p);
+  const roots: number[] = [];
+  for (const key of keys) {
+    if (key[0] === "@") roots.push(...(g.factReaders.get(key.slice(1)) ?? []));
+    else if (key[0] === "#") roots.push(...(g.modelReaders.get(key.slice(1)) ?? []));
+    else { const k = p.at.get(key); if (k !== undefined) roots.push(k); }
+  }
+  const affected = roots.length === 1 ? downstream(g, roots[0]) : [...new Set(roots.flatMap((k) => downstream(g, k)))].sort((x, y) => x - y);
+  for (const k of affected) {
+    const x = inputs[p.rows[k].id];
+    if (x !== undefined) env.v[k] = x;
+    else if (formula(k)) env.v[k] = fns[k]!(env);
+  }
+  return { v: env.v, models };
 }
 
 /** Whether a model's result can be put on the common scale and ranked. */
@@ -842,7 +975,7 @@ export function bottomLine(
   view: View = "charityevals",
 ) {
   if (!m.output) return { native: NaN, common: NaN };
-  const vals = compute(lib, m, av, inputs, view);
+  const vals = headRows(lib, m, av, inputs, view);
   const native = vals[m.output.row];
   const a = viewAssumptions(m, av, view);
   return { native, common: native * toCommon(lib, m.output.unit, a, vals, inputs) * ageFactor(lib, m, a, view) * distanceFactor(lib, m, a, view) * missingDataFactor(lib, m, a, view) };
@@ -858,7 +991,7 @@ export function headline(
   view: View = "charityevals",
 ): number {
   if (!m.output) return NaN;
-  const vals = compute(lib, m, av, inputs, view);
+  const vals = headRows(lib, m, av, inputs, view);
   const native = vals[m.output.row];
   const conv = modelConversion(lib, m, view);
   // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
