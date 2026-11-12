@@ -1190,8 +1190,10 @@ our builds' unmodelled-benefit shares. Failure, no effect and backfire stay in t
 each with its money (`dollars`) and the models of it (`models`, a pattern over model ids); a line may have
 no model yet. `spending.programme` is the accounts' programme expenses. The rankings combine a charity's
 modelled lines by their money, as `programs` did (src/engine/ranking.ts); `coverage` is the money of the
-modelled lines over programme spending, shown on the charity's page with the lines not yet modelled.
-Every line gets a full model (owner decision 2026-11-10: no sampling, no short stand-ins).
+modelled lines over programme spending, per evaluator, shown on its model's page with the lines it leaves out.
+Every line gets a full model (owner decision 2026-11-10: no sampling, no short stand-ins). Figures stay
+independent (owner, 2026-11-12): an evaluator's figure is only its own models, never filled in with
+another's; charityevals' own model of a charity covers every line itself.
 
 **Chain.** No theory-of-change field: src/engine/chain.ts flattens the bottom line into the factors it is
 the product of and names each by its step (reach, take-up, effect, evidence, would happen anyway, credit,

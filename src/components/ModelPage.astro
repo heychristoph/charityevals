@@ -80,7 +80,7 @@ const modelCount = new Set([...others, ...(family.length > 1 ? family : [])].map
 // A charity whose figure combines several programs shows them as one tree on its main page
 // (WholeCharity): the whole charity at the top, each program's model a branch, bulk imports included
 // (their file loads when their branch opens; the island waits for the main one's, client:model).
-const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, charity.id)[0]?.parts ?? [] : [];
+const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, charity.id).find((e) => e.owner === model.owner)?.parts ?? [] : [];
 const whole = parts.length > 1;
 // One programme funded in several locations: its combined figure above the model (WholeCharity: Locations).
 const located = parts.length === 1 && locationsOf(lib, parts[0].model).length > 1;

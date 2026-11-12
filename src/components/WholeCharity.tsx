@@ -4,7 +4,7 @@ import { bulkRaw, lib, modelUrl, rawFacts } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
 import { combine, declaredLocations, locationWeights, locationsOf } from "../engine/ranking";
 import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib/edit-state";
-import { pageLead, useAssumptionValues, useResults } from "../lib/use-results";
+import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
 import { formatYears, plainModelName } from "../lib/format";
 import ModelView from "./ModelView";
 import { WaterfallInSlot } from "./Waterfall";
@@ -41,7 +41,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     }
     setOpen(mid);
   };
-  const evAll = pageLead(pages, model.charity);
+  const evAll = pageEvaluator(pages, model.charity, model.owner);
   // The rankings ignore page edits; here the open programme's figure follows them, and the whole
   // charity is recombined from the parts shown (the rankings themselves don't move).
   const av = useAssumptionValues();
@@ -166,7 +166,7 @@ export function Locations({ id }: { id: string }) {
   const model = lib.models.get(id)!;
   const { pages } = useResults();
   const av = useAssumptionValues();
-  const ev = pageLead(pages, model.charity);
+  const ev = pageEvaluator(pages, model.charity, model.owner);
   const p = ev?.programs.length === 1 ? ev.programs[0] : undefined;
   const locations = useMemo(() => (p?.locationBasis === "weighted" ? locationParts(p.result.model, av) : undefined), [p, av]);
   if (!ev || !locations) return null;
