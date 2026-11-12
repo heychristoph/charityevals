@@ -1184,23 +1184,21 @@ our builds' unmodelled-benefit shares. Failure, no effect and backfire stay in t
 
 **Effect.** At 100% nothing moves. At 0%, 185 of 365 models move, median ×0.73.
 
-### 2.17 Programmes from the accounts, the chain from the formulas (November 2026)
+### 2.17 Programmes from the accounts; every way of having impact in the model (November 2026)
 
 **Lines.** A charity's programmes are `lines` in charities/<id>.json, its accounts' finest published split,
 each with its money (`dollars`) and the models of it (`models`, a pattern over model ids); a line may have
 no model yet. `spending.programme` is the accounts' programme expenses. The rankings combine a charity's
 modelled lines by their money, as `programs` did (src/engine/ranking.ts); `coverage` is the money of the
-modelled lines over programme spending, per evaluator, shown on its model's page with the lines it leaves out.
+modelled lines over programme spending, per evaluator: what each one's models leave out.
 Every line gets a full model (owner decision 2026-11-10: no sampling, no short stand-ins). Figures stay
 independent (owner, 2026-11-12): an evaluator's figure is only its own models, never filled in with
 another's; charityevals' own model of a charity covers every line itself.
 
-**Chain.** No theory-of-change field: src/engine/chain.ts flattens the bottom line into the factors it is
-the product of and names each by its step (reach, take-up, effect, evidence, would happen anyway, credit,
-how long it lasts, value, side effects, next dollar), from ids and labels, or a row's own `step` where
-they mislead. The model page shows it as one line of chips; a step every chain needs (reach, effect,
-evidence, would happen anyway, credit) with no row shows empty. A step the evaluator's sheet leaves out
-gets a row in our section, ×1 with its reason or a value.
+**No theory of change** (owner, 2026-11-12): no separate field or diagram; every way we think a charity
+has impact goes into its model as rows. A step an evaluator's sheet leaves out (what would have happened
+anyway, the charity's share of the credit) gets a row in our section, ×1 with its reason or a value, the
+evaluator's own figure in `published`; side effects as in 2.16.
 
 ## 3. Invariants
 
