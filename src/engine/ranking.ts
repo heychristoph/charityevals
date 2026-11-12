@@ -14,6 +14,7 @@
 //   - Several programs: funding-weighted mean where every program has a weight, else their median.
 import { assumptionValues, comparable, compute, modelsOf, type Library, type ResolvedModel } from "./model";
 import type { Charity } from "./schema";
+import type { Flag } from "./sensitivity";
 
 /** Matched against a model's id, name and source title. */
 export const SIDE_SHEET =
@@ -67,6 +68,25 @@ export function coverage(lib: Library, charity: string, owner: string): { covere
   const total = c.spending?.programme ?? c.lines.reduce((s, l) => s + l.dollars!, 0);
   const unmodelled = c.lines.filter((l) => !ranked.has(l.id) && l.dollars! > 0).map((l) => ({ id: l.id, label: l.label, dollars: l.dollars! }));
   return total > 0 ? { covered, total, share: Math.min(1, covered / total), unmodelled } : undefined;
+}
+
+/** Below this share of a charity's programme spending, an evaluator's figure carries a caveat. */
+export const COVERAGE_FLAG_BELOW = 0.9;
+const coverageFlags = new WeakMap<Library, Map<string, Flag | null>>();
+
+/** The caveat on a model whose evaluator's models leave part of the charity's programmes out: the figure
+ * still ranks (owner, 2026-11-12), flagged like any other caveat. */
+export function coverageFlag(lib: Library, m: ResolvedModel): Flag | undefined {
+  let cache = coverageFlags.get(lib);
+  if (!cache) coverageFlags.set(lib, (cache = new Map()));
+  const key = `${m.charity}:${m.owner}`;
+  if (!cache.has(key)) {
+    const c = coverage(lib, m.charity, m.owner);
+    cache.set(key, c && c.share < COVERAGE_FLAG_BELOW
+      ? { level: "warn", short: "partial coverage", text: `${lib.owners.get(m.owner)?.short ?? m.owner}'s models cover about ${Math.round(c.share * 100)}% of the money behind the charity's programmes; ${c.unmodelled.map((l) => l.label).join(", ")} ${c.unmodelled.length === 1 ? "isn't" : "aren't"} modelled` }
+      : null);
+  }
+  return cache.get(key) ?? undefined;
 }
 
 const published = (m: ResolvedModel) => m.source?.published ?? "";

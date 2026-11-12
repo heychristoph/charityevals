@@ -8,6 +8,7 @@ import ModelTree from "./ModelTree";
 import { WaterfallInSlot } from "./Waterfall";
 import { uncertainty } from "../engine/uncertainty";
 import { flags, sensitivity } from "../engine/sensitivity";
+import { coverageFlag } from "../engine/ranking";
 import "./model.css";
 
 /** `place`: the location the model covers, when it is one of several. `about`: who made the model and links to its spreadsheet, file and history, shown under the model.
@@ -29,7 +30,7 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
   const u = useMemo(() => uncertainty(lib, model, values, av, "charityevals", edits), [model, values, av, edits]);
   // The caveats describe the result on screen, so they follow the edits.
   const caveats = useMemo(
-    () => (Object.keys(edits).length ? flags(model, sensitivity(lib, model, av, "charityevals", edits)) : r.flags),
+    () => (Object.keys(edits).length ? [...flags(model, sensitivity(lib, model, av, "charityevals", edits)), ...[coverageFlag(lib, model)].filter((f) => !!f)] : r.flags),
     [model, av, edits, r.flags],
   );
 
