@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { lib, primaryOf, rankedCharities } from "./data";
 import { assumptionValues, bottomLine, headline, tooOld, type ResolvedModel } from "../engine/model";
-import { combine, combineLocations, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
+import { combine, combineLocations, coverageFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
 import { useOverrides } from "./assumption-state";
@@ -78,7 +78,8 @@ export function useResultsFor(models: ResolvedModel[]) {
 
 function resultOf(m: ResolvedModel, av: Record<string, number>): Result {
   const s = sensitivity(lib, m, av);
-  return { model: m, native: bottomLine(lib, m, av).native, central: s.central, low: s.jointLow, high: s.jointHigh, s, flags: flags(m, s) };
+  const cover = coverageFlag(lib, m);
+  return { model: m, native: bottomLine(lib, m, av).native, central: s.central, low: s.jointLow, high: s.jointHigh, s, flags: [...flags(m, s), ...(cover ? [cover] : [])] };
 }
 
 /** The full result for one model, including variants that aren't on the rankings. */
