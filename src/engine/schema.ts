@@ -81,13 +81,7 @@ const rowShape = {
    * share added to the result, times the weight; `factor`, a multiplier, its excess over 1 times the
    * weight. The evaluator view counts it in full. */
   side_effect: z.enum(["added", "factor"]).optional(),
-  /** The step of the theory of change this row is (src/engine/chain.ts), where its id and label don't
-   * say it plainly: the chain is read off the formulas, and only the step's name needs help. */
-  step: z.lazy(() => Step).optional(),
 };
-
-/** The steps of a theory of change, in the order a reader follows them (src/engine/chain.ts). */
-export const Step = z.enum(["cost", "reach", "take_up", "effect", "evidence", "anyway", "credit", "lasts", "value", "side_effect", "next_dollar"]);
 
 export const Row = z
   .object(rowShape)
