@@ -55,13 +55,14 @@ export function programOf(c: Charity, m: ResolvedModel): string | undefined {
   return (modelled.find((p) => p.models === m.id) ?? modelled.find((p) => new RegExp(p.models!).test(m.id)))?.id;
 }
 
-/** How much of a charity's programme spending its models cover: the money of the lines some ranked
+/** How much of a charity's programme spending one evaluator's models cover: the money of the lines its ranked
  * model matches, over its programme spending (or over all its lines' money where that is missing).
  * Undefined without lines with money. */
-export function coverage(lib: Library, charity: string): { covered: number; total: number; share: number; unmodelled: { id: string; label: string; dollars: number }[] } | undefined {
+export function coverage(lib: Library, charity: string, owner: string): { covered: number; total: number; share: number; unmodelled: { id: string; label: string; dollars: number }[] } | undefined {
   const c = lib.charities.get(charity);
   if (!c?.lines?.length || !c.lines.every((l) => l.dollars !== undefined)) return undefined;
-  const ranked = new Set(rankingPlan(lib, charity).flatMap((e) => e.parts.map((p) => p.program)));
+  // Each evaluator's figure is its own: what its models cover, never another's.
+  const ranked = new Set(rankingPlan(lib, charity).filter((e) => e.owner === owner).flatMap((e) => e.parts.map((p) => p.program)));
   const covered = c.lines.filter((l) => ranked.has(l.id)).reduce((s, l) => s + l.dollars!, 0);
   const total = c.spending?.programme ?? c.lines.reduce((s, l) => s + l.dollars!, 0);
   const unmodelled = c.lines.filter((l) => !ranked.has(l.id) && l.dollars! > 0).map((l) => ({ id: l.id, label: l.label, dollars: l.dollars! }));
@@ -79,9 +80,7 @@ export function newestFirst(models: ResolvedModel[]): ResolvedModel[] {
 }
 
 export type PlanPart = { program: string; model: ResolvedModel; weight?: number };
-/** `composite`: the whole charity, each line read from the first evaluator (owners.json order) that
- * models it, charityevals' own models filling the lines no evaluator does. */
-export type EvaluatorPlan = { owner: string; parts: PlanPart[]; composite?: boolean };
+export type EvaluatorPlan = { owner: string; parts: PlanPart[] };
 
 /** Per evaluator (owners.json order), the models that rank the charity: one per program. */
 export function rankingPlan(lib: Library, charity: string): EvaluatorPlan[] {
@@ -96,19 +95,10 @@ export function rankingPlan(lib: Library, charity: string): EvaluatorPlan[] {
     byOwner.set(m.owner, programs);
     if (!programs.has(program)) programs.set(program, m);
   }
-  const plans: EvaluatorPlan[] = [...byOwner].map(([owner, programs]) => ({
+  return [...byOwner].map(([owner, programs]) => ({
     owner,
     parts: [...programs].map(([program, model]) => ({ program, model, weight: c.lines?.find((p) => p.id === program)?.dollars })),
   }));
-  // Lines no single evaluator covers between them: the whole charity is charityevals' composite, and
-  // it leads (docs/normalization.md 2.17). Our own models of single lines are parts of it.
-  const covered = (p: EvaluatorPlan) => new Set(p.parts.map((x) => x.program));
-  const all = new Set(plans.flatMap((p) => [...covered(p)]));
-  if (c.lines && plans.length && all.size > Math.max(...plans.map((p) => covered(p).size))) {
-    const parts = c.lines.flatMap((l) => plans.flatMap((p) => p.parts.filter((x) => x.program === l.id)).slice(0, 1));
-    return [{ owner: "charityevals", parts, composite: true }, ...plans.filter((p) => p.owner !== "charityevals")];
-  }
-  return plans;
 }
 
 /** A model and its location variants. */
