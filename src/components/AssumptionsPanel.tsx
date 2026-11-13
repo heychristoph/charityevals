@@ -26,7 +26,7 @@ function scaleFor(r: Row) {
   // Every positive range is a ratio, so it runs on a log scale: halving and doubling the default are the
   // same distance. A range that starts at zero (the discount rate) stays linear. A log scale with a
   // zero stop gives 0 the first step and the log scale the rest.
-  const log = low > 0;
+  const log = low > 0 && !r.slider?.linear;
   const zero = log && !!r.slider?.zero;
   const first = zero ? 1 : 0;
   return {

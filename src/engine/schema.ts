@@ -45,8 +45,8 @@ const rowShape = {
   fixed: z.boolean().optional(),
   /** Shared assumptions only: the slider's ends, when they differ from the plausible range the
    * uncertainty uses. `zero` adds a stop at 0 below a log scale, for a weight some readers set to
-   * nothing at all. */
-  slider: z.object({ low: z.number().positive().optional(), high: z.number().positive().optional(), zero: z.boolean().optional() }).strict().optional(),
+   * nothing at all; `linear` keeps positive ends on a linear scale (a share either side of a midpoint). */
+  slider: z.object({ low: z.number().positive().optional(), high: z.number().positive().optional(), zero: z.boolean().optional(), linear: z.boolean().optional() }).strict().optional(),
   /** Shared assumptions only: how the reader sets it, when not a slider. `country`: a list of countries,
    * the value an ISO 3166 numeric code (facts/countries.json), 0 for none. */
   control: z.enum(["country"]).optional(),
