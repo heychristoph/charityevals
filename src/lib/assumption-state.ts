@@ -94,6 +94,25 @@ export function resetAssumptions() {
   listeners.forEach((l) => l());
 }
 
+/** The ready-made sets of values (assumptions/default.json `presets`). */
+export const PRESETS: { id: string; label: string; about: string; values: Overrides }[] = (assumptions as unknown as { presets?: typeof PRESETS }).presets ?? [];
+
+/** Every slider at a set's values, the rest at the defaults. */
+export function applyPreset(id: string) {
+  current = { ...(PRESETS.find((p) => p.id === id)?.values ?? {}) };
+  persist();
+  listeners.forEach((l) => l());
+}
+
+/** Which set the values are: "default" with none changed, a set's id when they are exactly its values,
+ * else "custom". */
+export function presetOf(o: Overrides): string {
+  const keys = Object.keys(o);
+  if (!keys.length) return "default";
+  const same = (a: number, b: number) => Math.abs(a - b) <= Math.abs(b) * 1e-6;
+  return PRESETS.find((p) => Object.keys(p.values).length === keys.length && keys.every((k) => k in p.values && same(o[k], p.values[k])))?.id ?? "custom";
+}
+
 const EMPTY: Overrides = {};
 
 export function useOverrides(): Overrides {

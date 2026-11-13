@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { upgrade } from "./assumption-state";
+import { upgrade, presetOf, PRESETS } from "./assumption-state";
 import { assumptionValues } from "../engine/model";
 import assumptions from "../../assumptions/default.json";
 
@@ -29,5 +29,25 @@ describe("the value of a life", () => {
 
   it("is worked out from the sliders, never set by a link", () => {
     expect(assumptionValues(assumptions as never, { life_value_multiplier: 3 }).life_value_multiplier).toBeUndefined();
+  });
+});
+
+describe("value sets", () => {
+  it("name the values: Default with none changed, a set when exactly its values, else Custom", () => {
+    expect(presetOf({})).toBe("default");
+    for (const p of PRESETS) expect(presetOf({ ...p.values })).toBe(p.id);
+    expect(presetOf({ ...PRESETS[0].values, discount_rate: 0.02 })).toBe("custom");
+    expect(presetOf({ discount_rate: 0.02 })).toBe("custom");
+  });
+
+  it("set only sliders that exist, within their ends", () => {
+    for (const p of PRESETS)
+      for (const [id, v] of Object.entries(p.values)) {
+        const r = assumptions.rows.find((x) => x.id === id) as { value: { low: number; high: number }; slider?: { low?: number; high?: number }; fixed?: boolean } | undefined;
+        expect(r, `${p.id}: ${id}`).toBeDefined();
+        expect(r!.fixed, `${p.id}: ${id}`).toBeFalsy();
+        expect(v).toBeGreaterThanOrEqual(Math.min(r!.slider?.low ?? r!.value.low, r!.value.low));
+        expect(v).toBeLessThanOrEqual(Math.max(r!.slider?.high ?? r!.value.high, r!.value.high));
+      }
   });
 });

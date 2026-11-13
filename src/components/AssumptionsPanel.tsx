@@ -6,7 +6,7 @@ import { pickValue } from "../engine/model";
 import { COUNTRIES, byCode } from "../engine/countries";
 import { formatAssumption, formatShown, parseTyped } from "../lib/format";
 import { useAssumptionValues } from "../lib/use-results";
-import { setAssumption, resetAssumptions, useOverrides } from "../lib/assumption-state";
+import { setAssumption, resetAssumptions, useOverrides, PRESETS, applyPreset, presetOf } from "../lib/assumption-state";
 import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
 import type { Row } from "../engine/schema";
 import InfoTip, { WithTip } from "./InfoTip";
@@ -267,6 +267,35 @@ export function Markdown({ text }: { text: string }) {
   );
 }
 
+/** Ready-made sets of values; moving any slider from one makes the values Custom. */
+function Presets({ overrides }: { overrides: Record<string, number> }) {
+  const active = presetOf(overrides);
+  const about = PRESETS.find((p) => p.id === active)?.about;
+  return (
+    <div className="presets">
+      <label className="presets-pick small">
+        <span>Values</span>
+        <select
+          value={active}
+          onChange={(e) => {
+            const id = e.target.value;
+            if (id === "custom") return;
+            cancelAssumptionEvents();
+            track("preset", { key: id });
+            if (id === "default") resetAssumptions();
+            else applyPreset(id);
+          }}
+        >
+          <option value="default">Default</option>
+          {PRESETS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+          {active === "custom" && <option value="custom">Custom</option>}
+        </select>
+      </label>
+      {about && <p className="presets-about small muted">{about}</p>}
+    </div>
+  );
+}
+
 export default function AssumptionsPanel({ compact = true, groups }: { compact?: boolean; groups?: string[] }) {
   const overrides = useOverrides();
   const [copied, setCopied] = useState(false);
@@ -332,6 +361,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
           </button>
         </div>
       </div>
+      {PRESETS.length > 0 && <Presets overrides={overrides} />}
       {shown.map((g) => {
         // Evidence-based rates aren't sliders: the side panel leaves them out, the full page lists them.
         const rows = lib.assumptions.rows.filter((r) => r.section === g.id && !(compact && r.fixed));
