@@ -1,13 +1,13 @@
 ---
 name: import-cea
-description: Import a published cost-effectiveness analysis (GiveWell, ACE, HLI, Rethink Priorities, Founders Pledge, a charity's own sheet) into a charityevals model JSON that reproduces the source's numbers in the evaluator view and reaches years of healthy life per $1,000 in our view by the standard steps. Use when asked to import, add, model or re-create a CEA from a Google Sheet, xlsx or write-up. For a charity with no evaluator CEA, use build-cea; to review a model, use audit-cea.
+description: Import a published cost-effectiveness analysis (GiveWell, ACE, HLI, Rethink Priorities, Founders Pledge, a charity's own sheet) into a charityevals model JSON that reproduces the source's numbers in the evaluator view and reaches years of healthy life per 1,000 dollars in our view by the standard steps. Use when asked to import, add, model or re-create a CEA from a Google Sheet, xlsx or write-up. For a charity with no evaluator CEA, use build-cea; to review a model, use audit-cea.
 ---
 
 # Import a CEA
 
 This skill turns an evaluator's published cost-effectiveness analysis into a charityevals model JSON
 with two views: the **evaluator view** reproduces every number of their sheet; **our view** carries
-their bottom line on to **years of healthy life per $1,000 donated**, the site's one scale, by the
+their bottom line on to **years of healthy life per 1,000 dollars donated**, the site's one scale, by the
 same steps as every other model, so charities rated by different evaluators can be ranked side by
 side. The loop: import, check that every number reproduces
 (`scripts/check.ts`), run the invariants, fix; audit-cea reviews it when asked. Terms (uov, SAD,
@@ -225,8 +225,8 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
   How the impact happens, How the model works, What drives the result, Where we differ from
   <evaluator>, Biggest uncertainties, What isn't modelled, Sources.
 - The summary opens with one plain sentence on what the charity does, then the result as a live
-  figure: `**<span data-figure="headline" data-model="<id>">130</span> years of healthy life per $1,000**`.
-- Results are always years of healthy life per $1,000, never multiples of GiveDirectly or another
+  figure: `**<span data-figure="headline" data-model="<id>">130</span> years of healthy life per 1,000 dollars**`.
+- Results are always years of healthy life per 1,000 dollars, never multiples of GiveDirectly or another
   benchmark (a multiple shifts whenever the benchmark's model does). A number that moves with the sliders is a live figure; a fixed number says whose it is
   ("ACE's own figure, 94"). No numbers copied from an old run of the model.
 - "Where we differ": one bullet per changed-for-consistency row and per step of ours (species
@@ -251,7 +251,7 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
 
 ## 9. Report
 
-The evaluator's result (native unit) and ours in years of healthy life per $1,000, in both views;
+The evaluator's result (native unit) and ours in years of healthy life per 1,000 dollars, in both views;
 how many `expected` values reproduce; the three biggest swings; every changed-for-consistency row
 (their number, ours); every judgment that isn't the source's (ranges added, rows merged, tabs
 skipped); funding weights added and their sources.

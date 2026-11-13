@@ -141,15 +141,16 @@ chicken-equivalent days            = Σ_s  days_s × welfare range_s / welfare r
 healthy years                      = chicken-equivalent days × $chicken_vs_person × $daly_per_sad
 ```
 
-- `$chicken_vs_person`: the chicken's weight against a person, stored as the real number (0.332,
-  Rethink Priorities' median for chickens). Old `animal_moral_weight` links are mapped to it.
+- `$chicken_vs_person`: the chicken's weight against a person, stored as the real number: by default
+  1/10,000 (what people's own spending on chicken welfare implies), 0.332 (Rethink Priorities' median) in
+  the Animal-focused value set. Old `animal_moral_weight` links are mapped to it.
 - Dogs and cats (November 2026, companion-animal models): Rethink Priorities publishes no figure, so
   `@welfare_ranges.dog_vs_chicken` and `cat_vs_chicken` are a ranged judgment anchored on Rethink's
   pig, the mammal it estimated (as cattle already are), labelled as ours.
 - `$daly_per_sad`: healthy life lost per day of a person's disabling pain (0.0011, about 10 hours).
 - `to_common` for `ced` = `$chicken_vs_person * $daly_per_sad * $uov_per_daly`.
-  At defaults, 1 chicken-equivalent day per dollar = 0.365 healthy years per $1,000. One AIM SAD
-  of a chicken (= 1/0.332 chicken days) = 1.1, as today.
+  1 chicken-equivalent day per dollar = 0.00011 healthy years per $1,000 at the default, 0.365 at
+  Rethink Priorities' 0.332.
 - The units `sad` and `animals_spared` stop being ranked units. They stay as native units in layer E.
 
 **Shared species table** (new facts/welfare_ranges.json). Rethink Priorities' welfare range
@@ -1204,7 +1205,8 @@ our builds' unmodelled-benefit shares. Failure, no effect and backfire stay in t
 
 ### 2.17 Programmes from the accounts; every way of having impact in the model (November 2026)
 
-**Lines.** A charity's programmes are `lines` in charities/<id>.json, its accounts' finest published split,
+**Lines.** A charity's programmes are `lines` in charities/<id>.json, its accounts' finest published split
+(a line may group several accounts lines that one model covers as branches; its `source` says so),
 each with its money (`dollars`) and the models of it (`models`, a pattern over model ids); a line may have
 no model yet. `spending.programme` is the accounts' programme expenses. The rankings combine a charity's
 modelled lines by their money, as `programs` did (src/engine/ranking.ts); `coverage` is the money of the

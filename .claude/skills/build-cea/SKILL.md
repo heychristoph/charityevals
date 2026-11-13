@@ -1,12 +1,12 @@
 ---
 name: build-cea
-description: Build charityevals' own cost-effectiveness analysis (CEA) for a charity from public evidence (annual reports, audited financials, program data, studies, evaluator reviews), as a model JSON from a fixed template per intervention family that ends in years of healthy life per $1,000 by the site's standard steps. Runs an independent audit (audit-cea skill, separate subagent) and fixes until no high-severity findings remain. Use when asked to model, evaluate, build a CEA for, or estimate the cost-effectiveness of a charity that has no evaluator CEA to import (to import a published CEA, use import-cea).
+description: Build charityevals' own cost-effectiveness analysis (CEA) for a charity from public evidence (annual reports, audited financials, program data, studies, evaluator reviews), as a model JSON from a fixed template per intervention family that ends in years of healthy life per 1,000 dollars by the site's standard steps. Runs an independent audit (audit-cea skill, separate subagent) and fixes until no high-severity findings remain. Use when asked to model, evaluate, build a CEA for, or estimate the cost-effectiveness of a charity that has no evaluator CEA to import (to import a published CEA, use import-cea).
 ---
 
 # Build a CEA
 
 This skill produces charityevals' own model of one charity, `models/<cause>/<charity>-charityevals.json`:
-from what the charity spent in a year and what that did to **years of healthy life per $1,000
+from what the charity spent in a year and what that did to **years of healthy life per 1,000 dollars
 donated**, the site's one scale. The loop: build from a template, have an independent auditor (audit-cea, in a
 fresh subagent) check it, fix what it finds, repeat until no high-severity finding remains. Terms
 (uov, SAD, canonical row, INV-n, Convention n): [glossary](references/templates.md#glossary).
@@ -15,7 +15,7 @@ fresh subagent) check it, fix what it finds, repeat until no high-severity findi
    household size, species weight, SADs figure, years a won reform counts, pledges kept and sign
    convention is the site's shared one (docs/normalization.md sections 2 and 3). Every slider moves
    every model it concerns; two models of a family differ only where the charities differ.
-2. **Best guesses**: a cautious figure beside another model's best guess ranks them unfairly; caution
+2. **Best guesses**: a cautious figure beside others' best guesses ranks unfairly; caution
    goes into the range.
 3. **Every number accounted for**: a sourced fact (URL, retrieval date, quote or page), a shared
    figure, or a labelled judgment (`kind: "judgment"`) with a reason, an anchor and a range.
@@ -42,7 +42,7 @@ enforce the mechanical rules (audit-model runs them, step 3).
   (Convention 4), else one model per family (`<charity>-charityevals-<program>`), each matching its
   line in `charities/<id>.json` (`spending`, `lines`: normalization.md 2.17). Grants to sister
   organisations count as the activities they fund. Never a case study, pilot or other year in place
-  of the programme: a donor funds the whole programme as it runs now. Thin or no outcome data: its
+  of the programme: donors fund the programme as it runs. Thin or no outcome data: its
   family's chain from the research on that kind of work, wide ranges, × `$missing_data_discount`
   (Convention 12), never another model's result. Nothing is left out.
 - An Ambitious Impact idea-stage model of this charity (`theoretical`) goes once yours is in models/:
@@ -81,7 +81,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
 
 - `id` `<charity>-charityevals`, `kind: "charity"`, `charity`, `owner: "charityevals"`, `template`,
   `cause`, `estimate_basis`, `summary` (2–4 plain sentences: what the charity does, where, the year,
-  the result in years of healthy life per $1,000, the biggest uncertainty, branches discounted for missing data),
+  the result in years of healthy life per 1,000 dollars, the biggest uncertainty, branches discounted for missing data),
   `source` (`publisher: "charityevals"`, `title`, `url: https://charityevals.org/<id>`, `published` =
   the build date, `retrieved`) and `resources`. No `evaluator` block.
 - `beneficiaries` (INV-20): add to OURS in scripts/beneficiary-countries.ts and run it.
@@ -169,7 +169,7 @@ for checked false positives, with reasons; the allowlist stays `{}`; in a sandbo
 don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`; not in an unattended run; many at once:
 import-cea references/batch.md).
 
-Report: the result (native unit; years per $1,000 with its range), year and programmes (weights; which
+Report: the result (native unit; years per 1,000 dollars with its range), year and programmes (weights; which
 are thin), top 3 swings, audit rounds with counts, facts or assumptions added.
 
 To change the templates: edit and run `scripts/gen-templates.py`, keep src/engine/templates.ts in step,
