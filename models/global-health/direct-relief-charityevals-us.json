@@ -415,17 +415,54 @@
       "explainer": "The medicines' value per patient-year, times the need ratio, times illness DALYs averted per marginal US health dollar."
     },
     {
+      "id": "us_disaster_grants",
+      "section": "effect",
+      "label": "US grants for disaster recovery, fiscal 2025",
+      "format": "usd",
+      "value": 13712000,
+      "kind": "observed",
+      "source": {
+        "title": "Direct Relief, Fiscal Year 2025 Annual Report (July 2024 to June 2025)",
+        "url": "https://www.directrelief.org/wp-content/uploads/2026/04/Direct-Relief-Annual-Report-FY-2025-Web.pdf",
+        "retrieved": "2026-11-13",
+        "page": "p. 44, Financial assistance",
+        "quote": "Los Angeles County Wildfires ($7.4 million), Hurricane Helene ($4.5 million), Turkey/Syria Earthquake ($3.3 million), Israel/Palestine Conflict ($1.2 million), Hurricane Milton ($1.2 million), and the Hawaii Wildfires ($612,000)"
+      },
+      "explainer": "Los Angeles wildfires $7.4m, Hurricane Helene $4.5m, Hurricane Milton $1.2m and the Hawaii wildfires $0.612m (annual report p. 44); the rest of the US grants go to health centres, free clinics and charitable pharmacies."
+    },
+    {
+      "id": "grt_clinic_need",
+      "section": "effect",
+      "label": "Clinic grants: health gained per dollar ÷ per marginal dollar of US health spending",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 1.2,
+        "high": 2.5
+      },
+      "kind": "judgment",
+      "explainer": "Grants to health centres, free clinics and charitable pharmacies pay for care of uninsured and underinsured patients, the same people as the medicines (need ratio 1.5), but also buildings, solar systems and programme costs further from care. Our judgment, 1.2 (0.6 to 2.5), a little below the medicines' ratio."
+    },
+    {
+      "id": "grt_disaster_need",
+      "section": "effect",
+      "label": "Disaster-recovery grants: health gained per dollar ÷ per marginal dollar of US health spending",
+      "format": "multiple",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Recovery grants after the fires and hurricanes pay for mobile clinics and mental health care (health), but also school enrichment, rental assistance and preparedness (little direct health): of the $7.4m for Los Angeles, $1.5m went to school-based counselling and enrichment and $1m to AltaMed's health services (annual report p. 18). Our judgment, 0.5 (0.2 to 1)."
+    },
+    {
       "id": "grt_need_vs_marginal",
       "section": "effect",
       "label": "Grants: health gained per dollar ÷ per marginal dollar of US health spending",
       "format": "multiple",
-      "value": {
-        "low": 0.4,
-        "best": 1,
-        "high": 2
-      },
-      "kind": "judgment",
-      "explainer": "Grants to health centres and free clinics (care for the uninsured), recovery after the Los Angeles fires and Hurricanes Helene and Milton (mental health, mobile clinics, rental assistance), solar power for clinics, maternal care. Some is less directly health. Our judgment, 1 (0.4 to 2)."
+      "formula": "(us_disaster_grants * grt_disaster_need + (us_grants - us_disaster_grants) * grt_clinic_need) / us_grants",
+      "explainer": "The clinic and disaster-recovery grants' ratios, weighted by their dollars."
     },
     {
       "id": "grt_dalys",
@@ -464,7 +501,7 @@
         "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "Vanness et al. rest on how much losing insurance raises mortality: the Oregon Health Insurance Experiment found no significant effect on mortality over two years, while Miller et al. (2021) found Medicaid expansion cut deaths among low-income adults. The estimate leans on the larger effects. That these medicines' outcomes aren't measured is in the missing-data step. Our judgment, 0.9 (0.6 to 1.1)."
+      "explainer": "Vanness et al. rest on how much losing insurance raises mortality: the Oregon Health Insurance Experiment could not detect an effect on mortality over two years, while Miller et al. (2021) found Medicaid expansion cut deaths among low-income adults. The estimate leans on the larger effects. That these medicines' outcomes aren't measured is in the missing-data step. Our judgment, 0.9 (0.6 to 1.1)."
     },
     {
       "id": "external_validity_adj",
@@ -704,16 +741,16 @@
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "The site's one value of a death, by age band, times your value of a life (multiplied by zero deaths here)."
+      "explainer": "The site's one value of a death, by age band, times your value of a life: adults under 65 here, the deaths in Vanness et al.'s estimate."
     },
     {
       "id": "uov_deaths",
       "section": "outcome",
-      "label": "Units of value from deaths averted (none)",
+      "label": "Units of value from deaths averted",
       "format": "number",
       "formula": "deaths_averted * value_per_death",
       "unit": "units of value",
-      "explainer": "Deaths times the value of a death, zero here."
+      "explainer": "Deaths averted by both branches times the value of a death by age: most of this model's result."
     },
     {
       "id": "uov_stillbirths",
