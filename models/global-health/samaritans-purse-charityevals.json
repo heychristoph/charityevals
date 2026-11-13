@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "samaritans-purse",
   "owner": "charityevals",
-  "summary": "Samaritan's Purse, an evangelical relief charity, spent $1.15 billion on its ministries in 2025 (audited accounts): $490 million on Operation Christmas Child's 10.9 million shoebox gifts to children abroad, $295 million on food, water, shelter and health care in crises abroad (Sudan, South Sudan, the DRC, Gaza, Ukraine, Myanmar, Jamaica), $185 million on US disaster relief and rebuilding, $72 million on mission hospitals and field hospitals, and $103 million on Christian education and other faith work, which the site's scale gives no value beyond its material aid. The result, about 0.06 years of healthy life per 1,000 dollars, is a third of the site's global-health median: almost all of it is goods valued as consumption (food rations of about four months a person abroad, the shoeboxes' contents at a fraction of their US retail value), with few deaths averted; US rebuilding counts little because a few thousand dollars means little to a US household and most of its Helene money waits years to be spent. Every branch is built from spending, Samaritan's Purse's own counts and judged costs, and discounted for missing data; the biggest uncertainties are that discount, the shoeboxes' worth to the children and the cost per person of the relief.",
+  "summary": "Samaritan's Purse, an evangelical relief charity, spent $1.15 billion on its ministries in 2025 (audited accounts): $490 million on Operation Christmas Child's 10.9 million shoebox gifts to children abroad, $295 million on food, water, shelter and health care in crises abroad (Sudan, South Sudan, the DRC, Gaza, Ukraine, Myanmar, Jamaica), $185 million on US disaster relief and rebuilding, $72 million on mission hospitals and field hospitals, and $103 million on Christian education and other faith work, which the site's scale gives no value beyond its material aid. The result, about 0.05 years of healthy life per 1,000 dollars, is about a quarter of the site's global-health median: almost all of it is goods valued as consumption (about four months of food rations a person abroad, half of them outside famine settings, and the shoeboxes' contents at about a third of their US retail value), with few deaths averted; US rebuilding counts little because a few thousand dollars means little to a US household and most of its Helene money waits years to be spent. Every branch is built from spending, Samaritan's Purse's own counts and judged costs, and discounted for missing data; the biggest uncertainties are that discount, the shoeboxes' worth to the children and the cost per person of the relief.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Samaritan's Purse",
@@ -353,12 +353,28 @@
       "explainer": "South Sudan's response is food-heavy and costly (remote, air and river transport, $203 a person); Ukraine's and the Middle East's food parcels and winter kits cost about as much per person, Jamaica's and Myanmar's emergency kits less. Judgment 1 (0.6-1.5)."
     },
     {
+      "id": "ss_wash_people",
+      "section": "reach",
+      "label": "People reached by water and hygiene in South Sudan, 2025",
+      "format": "integer",
+      "value": 60000,
+      "kind": "observed",
+      "source": {
+        "title": "Samaritan's Purse, Form 990 for 2025 (IRS e-file object 202632459349300243; also at https://projects.propublica.org/nonprofits/organizations/581437002/202632459349300243/full)",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202632459349300243_public.xml",
+        "retrieved": "2026-11-14",
+        "quote": "MORE THAN 60,000 PEOPLE RECEIVED HELP THROUGH OUR WATER, SANITATION, AND HYGIENE PROGRAMS",
+        "page": "Part III line 4c"
+      },
+      "explainer": "Counted, and costed, in the water branch, so their cost is taken out of South Sudan's cost per person fed."
+    },
+    {
       "id": "relief_cost_per_person",
       "section": "reach",
       "label": "Programme cost per person reached by relief abroad",
       "format": "usd",
-      "formula": "ss_spend / ss_food_people * relief_cost_ratio_vs_ss",
-      "explainer": "South Sudan's spending over the people it fed, about $203, applied to the rest of the relief."
+      "formula": "(ss_spend - ss_wash_people * wash_cost_per_person) / ss_food_people * relief_cost_ratio_vs_ss",
+      "explainer": "South Sudan's spending less its water work, over the people it fed, about $191, applied to the rest of the relief."
     },
     {
       "id": "relief_spend",
@@ -549,15 +565,15 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "Sorghum, maize, pulses and oil in South Sudan's and Sudan's markets cost about $0.4-1.2 a kg in 2025 after the currency collapses (WFP market monitors); the goods are valued at what they cost locally, not their procurement and transport cost. Judgment $0.70 ($0.40-1.20)."
+      "explainer": "A judgment, no price bulletin checked: a ration of mostly sorghum or maize with some pulses and oil, in South Sudan's and Sudan's crisis markets, where cereal prices rose several-fold after the currency collapses; the goods are valued at what they cost locally in 2025, not their procurement and transport cost. Judgment $0.70 a kg ($0.40-1.20)."
     },
     {
       "id": "value_delivered_per_person",
       "section": "effect",
-      "label": "Food delivered per person, at local prices (US$)",
+      "label": "Food delivered per person, at local prices (2024 US$)",
       "format": "usd",
-      "formula": "food_kg_per_person * food_price_per_kg",
-      "explainer": "About $42; the rest of the cost per person is transport, storage, staff and the health, water and livelihood work around the food."
+      "formula": "food_kg_per_person * food_price_per_kg * @cpi.usa_2024 / @cpi.usa_2025",
+      "explainer": "About $41 in 2024 prices, the price year of the consumption figures; the rest of the cost per person is transport, storage, staff and the health, water and livelihood work around the food."
     },
     {
       "id": "cons_ken",
@@ -615,18 +631,26 @@
     {
       "id": "baseline_consumption",
       "section": "effect",
-      "label": "Consumption per person per year of the people reached (2024 US$)",
+      "label": "Consumption per person per year of the people reached in famine-risk settings (2024 US$)",
       "format": "usd",
       "formula": "ssa_consumption * affected_consumption_share",
-      "explainer": "In market US dollars, like the goods' value, so no PPP factor is needed."
+      "explainer": "In market US dollars, like the goods' value, so no PPP factor is needed. The people reached elsewhere have their own row below."
+    },
+    {
+      "id": "other_consumption",
+      "section": "effect",
+      "label": "Consumption per person per year of the people reached elsewhere (2024 US$)",
+      "format": "usd",
+      "formula": "avg(@ukraine.consumption_per_person_2024 * @survey_consumption.survey_to_na_ukr, @lebanon.consumption_per_person_2024 * @survey_consumption.survey_to_na_world_median) * affected_consumption_share",
+      "explainer": "The other half (Ukraine, Lebanon and Syria, Myanmar, Jamaica): the site's national-accounts consumption for Ukraine and Lebanon, each times its survey-to-national-accounts ratio (Ukraine's own, Lebanon the world median), at the same crisis-hit share of the mean. Myanmar has no consumption fact; Jamaica's is higher. About $1,700."
     },
     {
       "id": "ln_gain_per_person",
       "section": "effect",
       "label": "ln(consumption) gain per person from the food",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person / baseline_consumption)",
-      "explainer": "A year's goods on the site's one log-income scale."
+      "formula": "(famine_setting_share * ln(1 + value_delivered_per_person / (baseline_consumption * years_exposed)) + (1 - famine_setting_share) * ln(1 + value_delivered_per_person / (other_consumption * years_exposed))) * years_exposed",
+      "explainer": "The food raises consumption over the months it lasts (years_exposed), on the site's one log-income scale, for each setting by its share of the people."
     },
     {
       "id": "diarrhoea_mortality",
@@ -766,14 +790,14 @@
         "high": 0.75
       },
       "kind": "judgment",
-      "explainer": "The rest is staff, travel, the nine disaster relief units, warehouses and volunteers' lodging. Grants to individuals and organisations are $96M of the line's $185M (Part IX lines 1-2; the line's grants are $72M, 4b), which pass almost entirely to households; volunteers' cleanup work has a market value but costs little. Judgment 50% (30-75%)."
+      "explainer": "The rest is staff, travel, the nine disaster relief units, warehouses and volunteers' lodging. The line's grants are $72M of its $185M (Part III 4b), which pass almost entirely to households and rebuilding partners; volunteers' cleanup work has a market value but costs little. Judgment 50% (30-75%)."
     },
     {
       "id": "us_value_per_household",
       "section": "effect",
-      "label": "Value delivered per US household (US$)",
+      "label": "Value delivered per US household (2024 US$)",
       "format": "usd",
-      "formula": "us_spend * us_value_share / us_households",
+      "formula": "us_spend * us_value_share / us_households * @cpi.usa_2024 / @cpi.usa_2025",
       "explainer": "About $10,000 a household: a mucked-out house is a few thousand dollars of work, a rebuilt home $150,000 or more."
     },
     {
@@ -891,18 +915,54 @@
       "explainer": "As in MSF's model: post-operative mortality is a few per cent. 40% (25-60%)."
     },
     {
+      "id": "med_general_disability_dalys",
+      "section": "effect",
+      "label": "Disability averted per general operation (DALYs)",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 1
+      },
+      "kind": "judgment",
+      "unit": "DALYs",
+      "explainer": "Fractures set, hernias and wounds repaired, obstetric fistulas closed: GBD's weights for untreated fractures are 0.1-0.3 for years. 0.3 (0.1-1), as in MSF's model."
+    },
+    {
+      "id": "med_cc_share",
+      "section": "effect",
+      "label": "Share of operations that are cataract or cleft surgery",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "About 1,200 cataract operations a year (10,000 since 2017) and 200 cleft repairs (2,300 since 2011, fact sheet) against some 24,000 operations modelled. Judgment 5% (2-10%)."
+    },
+    {
+      "id": "med_cc_dalys",
+      "section": "effect",
+      "label": "Disability averted per cataract or cleft operation, discounted (DALYs)",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1.5,
+        "high": 4
+      },
+      "kind": "judgment",
+      "unit": "DALYs",
+      "explainer": "Restored sight is worth GBD's blindness weight (about 0.19) for the patient's remaining years, mostly older adults with 8-15 years left, about 1-2 DALYs discounted; a repaired cleft lip lasts a lifetime but its weight is lower. Judgment 1.5 (0.5-4)."
+    },
+    {
       "id": "med_surgery_disability_dalys",
       "section": "effect",
       "label": "Disability averted per operation (DALYs)",
       "format": "number",
-      "value": {
-        "low": 0.15,
-        "best": 0.5,
-        "high": 1.5
-      },
-      "kind": "judgment",
+      "formula": "(1 - med_cc_share) * med_general_disability_dalys + med_cc_share * med_cc_dalys",
       "unit": "DALYs",
-      "explainer": "Above MSF's 0.3 because of the cataract and cleft operations: cataract surgery restores sight for years (GBD weight for blindness 0.187), a repaired cleft for a lifetime. Judgment 0.5 (0.15-1.5)."
+      "explainer": "General operations and the cataract and cleft operations, by their share."
     },
     {
       "id": "med_surgery_share_under5",
@@ -940,9 +1000,22 @@
       "explainer": "The site's values by age band, times your value of a life."
     },
     {
-      "id": "med_outpatient_risk_untreated",
+      "id": "med_field_share",
       "section": "effect",
-      "label": "Risk of death without an outpatient consultation",
+      "label": "Share of consultations in field hospitals and crisis clinics",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "The Emergency Field Hospital treated about 10,000 patients in Myanmar and Jamaica (fact sheet); most consultations are at mission hospitals and clinics in stable settings (Kenya, Cameroon, Papua New Guinea). Judgment 15% (5-30%)."
+    },
+    {
+      "id": "med_field_risk_untreated",
+      "section": "effect",
+      "label": "Risk of death without a consultation in a crisis setting",
       "format": "small",
       "value": {
         "low": 0.0007,
@@ -950,7 +1023,28 @@
         "high": 0.005
       },
       "kind": "judgment",
-      "explainer": "As in MSF's model: pneumonia and diarrhoea with dehydration among young children are a small share of consultations. 0.2% (0.07-0.5%)."
+      "explainer": "As in MSF's model for its crisis projects: pneumonia and diarrhoea with dehydration among young children are a small share of consultations. 0.2% (0.07-0.5%)."
+    },
+    {
+      "id": "med_stable_risk_untreated",
+      "section": "effect",
+      "label": "Risk of death without a consultation in a stable setting",
+      "format": "small",
+      "value": {
+        "low": 0.0005,
+        "best": 0.001,
+        "high": 0.002
+      },
+      "kind": "judgment",
+      "explainer": "Mission-hospital outpatients in stable countries have other care nearby and fewer acutely ill young children; half MSF's crisis figure. Judgment 0.1% (0.05-0.2%)."
+    },
+    {
+      "id": "med_outpatient_risk_untreated",
+      "section": "effect",
+      "label": "Risk of death without an outpatient consultation",
+      "format": "small",
+      "formula": "med_field_share * med_field_risk_untreated + (1 - med_field_share) * med_stable_risk_untreated",
+      "explainer": "Crisis and stable settings by their share."
     },
     {
       "id": "med_outpatient_risk_reduction",
@@ -1140,12 +1234,12 @@
       "label": "Value of the box's contents to the child, as a share of US retail",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.7
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Toys, school supplies, hygiene items and clothes chosen by US donors: the same goods cost far less in local markets than at US retail, and the child can't choose; the soap, toothbrush, pencils and clothing are useful, many toys less so. Judgment 40% (20-70%), a little below World Vision's 45% for donated goods abroad because a box's mix is chosen for a gift, not for need."
+      "explainer": "Two parts. Price: the same goods (soap, toothbrush, pencils, notebooks, a T-shirt, small toys) cost well under US big-box retail in local markets; donated clothing resold abroad fetches a fraction of its US price. Use: the child can't choose, and in the one randomised trial of donated goods to children, TOMS shoes in rural El Salvador (Wydick, Katz, Calvo and Janet 2018, World Bank Economic Review), the shoes largely replaced shoes the children would have had, with small benefits and a slight fall in local purchases; recipients of in-kind food in Mexico valued it below its cost where it didn't match what they would have bought (Cunha 2014, AEJ: Applied). Judgment 35% (15-60%): half the price gap times most of the goods used, the low end mostly toys displaced or unused, the high end useful items at near local value."
     },
     {
       "id": "occ_value_2024",
@@ -1274,11 +1368,19 @@
       "formula": "aid_spend * aid_value_share / aid_value_per_person"
     },
     {
+      "id": "aid_value_2024",
+      "section": "effect",
+      "label": "Aid per person, in 2024 US$",
+      "format": "usd",
+      "formula": "aid_value_per_person * @cpi.usa_2024 / @cpi.usa_2025",
+      "explainer": "In the price year of the consumption figures."
+    },
+    {
       "id": "aid_ln_gain_per_person",
       "section": "effect",
       "label": "ln(consumption) gain per person from the aid",
       "format": "number",
-      "formula": "ln(1 + aid_value_per_person / (occ_consumption / occ_recipient_consumption_share * affected_consumption_share))",
+      "formula": "ln(1 + aid_value_2024 / (occ_consumption / occ_recipient_consumption_share * affected_consumption_share))",
       "explainer": "Against the consumption of the same countries' poor (the boxes' country mix, at the crisis share of the mean)."
     },
     {
@@ -1544,11 +1646,24 @@
       "explainer": "Local churches and volunteers abroad receive, store and hand out the boxes and teach The Greatest Journey (305,538 teachers trained in 2025, Year-End Report), mostly unpaid. Judgment 10% (3-25%)."
     },
     {
+      "id": "occ_volunteer_rate_ratio",
+      "section": "adjustments",
+      "label": "Shared value of a volunteer hour over Samaritan's Purse's rate",
+      "format": "multiple",
+      "value": {
+        "low": 2,
+        "best": 3,
+        "high": 4.7
+      },
+      "kind": "judgment",
+      "explainer": "Samaritan's Purse values unskilled shoebox volunteers at rates 'ranging from minimum wage' (p. 22); the site values US volunteer hours at $36.14 (@united_states.volunteer_hour_value_2025), 5 times the $7.25 federal minimum wage and about 2 times a typical warehouse wage. Judgment 3 (2-4.7)."
+    },
+    {
       "id": "occ_attribution_share",
       "section": "adjustments",
       "label": "Shoeboxes: Samaritan's Purse's share of the resources",
       "format": "percent",
-      "formula": "occ_line / (occ_line * (1 + occ_partner_share) + occ_unrecorded_volunteers)",
+      "formula": "occ_line / (occ_line * (1 + occ_partner_share) + occ_unrecorded_volunteers * occ_volunteer_rate_ratio)",
       "explainer": "Its cost over all resources behind the boxes (Convention 2)."
     },
     {

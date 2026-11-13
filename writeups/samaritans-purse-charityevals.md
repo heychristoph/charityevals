@@ -1,6 +1,6 @@
 ### Summary
 
-Samaritan's Purse is an evangelical Christian relief organisation based in North Carolina. It runs emergency relief in wars and disasters abroad and disaster relief at home, mission hospitals and field hospitals, and Operation Christmas Child, which sends shoebox gifts to children in over 100 countries. Its work does about **<span data-figure="headline" data-model="samaritans-purse-charityevals">0.06</span> years of healthy life per 1,000 dollars**, about a third of the middle of the site's global-health charities.
+Samaritan's Purse is an evangelical Christian relief organisation based in North Carolina. It runs emergency relief in wars and disasters abroad and disaster relief at home, mission hospitals and field hospitals, and Operation Christmas Child, which sends shoebox gifts to children in over 100 countries. Its work does about **<span data-figure="headline" data-model="samaritans-purse-charityevals">0.05</span> years of healthy life per 1,000 dollars**, about a quarter of the middle of the site's global-health charities.
 
 Most of that is goods valued as what people consume: about four months of food rations a person abroad, and the shoeboxes' contents. Few deaths are averted. US rebuilding counts little: a few thousand dollars means little to an American household, and most of the Hurricane Helene money will wait years before it is spent. The Christian education and evangelism lines get no value on this scale beyond the material aid inside them. Samaritan's Purse publishes no outcome figures, so every part is built from its spending, its own counts and judged costs, and every part is discounted for missing data.
 
@@ -26,11 +26,11 @@ Figures are the audited consolidated accounts for 2025, with the US parent's For
 ### How the model works
 
 - **Cost**: each line's expenses from the audited accounts, with management and fundraising ($183 million) spread over all of them. Donated boxes and volunteer doctors' time are in the accounts, so they count as cost.
-- **Relief abroad**: people reached are spending divided by South Sudan's cost per person fed, about $200 (its $61 million over 302,000 people). The food is about 60 kg a person, roughly four months of full rations, valued at local market prices against crisis-hit consumption on the site's log-income scale. For the half of people judged to be in famine-risk settings, excess deaths are the gap between a crisis death rate and the countries' normal rate, a tenth of it averted over those months.
+- **Relief abroad**: people reached are spending divided by South Sudan's cost per person fed, about $190 (its $61 million, less its water work, over 302,000 people). The food is about 60 kg a person, roughly four months of full rations, valued at local market prices over those months on the site's log-income scale: against crisis-hit Sub-Saharan consumption for the half in famine-risk settings, and against Ukraine's and Lebanon's for the rest. For the half of people judged to be in famine-risk settings, excess deaths are the gap between a crisis death rate and the countries' normal rate, a tenth of it averted over those months.
 - **Clean water**: Samaritan's Purse's own count of people, a judged $60 a person, and the same diarrhoea and time-saving chain as World Vision's water model.
-- **Medical**: operations and consultations are spending over judged full costs. Their risks of death and the share averted are anchored on MSF's model, with more disability averted per operation because of the cataract and cleft surgery.
+- **Medical**: operations and consultations are spending over judged full costs. Their risks of death and the share averted are anchored on MSF's model, with the cataract and cleft operations' share of surgery valued for their restored sight and repaired lips, and a lower risk of death for outpatients in stable settings than in crises.
 - **Heart surgery**: a judged 70 children a year, half of whom would die without surgery. Credit is shared with the hospitals that donate the surgery.
-- **Shoeboxes**: each box is worth 40% of its US retail value to the child, against the consumption of poor children in Africa, Latin America and Asia.
+- **Shoeboxes**: each box is worth 35% of its US retail value to the child (local prices are lower, and a trial of donated shoes found they mostly replaced what children would have had), against the consumption of poor children in Africa, Latin America and Asia.
 - **US disaster relief**: a judged 9,000 households (5,580 families helped in deployments, the rebuilt homes and the grants to individuals). Half the spending reaches them, spread over three years at low-income US consumption. The money waits about 3.4 years: $613 million of restricted disaster funds against $185 million spent in the year.
 - **Faith lines**: a fifth judged to be material aid, valued as goods; the evangelism has no value on this scale but its cost stays in.
 - **Adjustments**: each branch has its own evidence, counterfactual and attribution rows and its own waits. Every branch is discounted for missing data.
@@ -38,8 +38,8 @@ Figures are the audited consolidated accounts for 2025, with the US parent's For
 ### What drives the result
 
 - **The missing-data slider**: every branch is thin, so it scales the whole result.
-- **The shoeboxes' worth to the children** (20% to 70% of retail): the shoeboxes are 40% of the result.
-- **The relief's cost per person and the food's local price**: relief abroad is the other 38%.
+- **The shoeboxes' worth to the children** (15% to 60% of retail): the shoeboxes are the largest branch.
+- **The relief's cost per person and the food's local price**: relief abroad is the next; with the shoeboxes, about three-quarters of the result.
 - **Recipients' consumption**, in the crises and among the shoebox children.
 
 ### Biggest uncertainties
@@ -56,6 +56,8 @@ Beyond a share in unmodelled benefits: deaths and illness averted by relief outs
 ### How this model was checked
 
 The mechanical audit (`scripts/audit-model.ts`) runs on the model, and independent auditors (a fresh agent each round, using the audit-cea skill) check it; the rounds are in `audits/samaritans-purse-charityevals/`.
+
+- **Round 1**: passed (no high finding). Fixed after it: relief abroad's food is valued against each setting's consumption (Ukraine's and Lebanon's for the half outside famine settings) and over the months it lasts, not a year; South Sudan's water work taken out of relief's cost per person; the shoeboxes' worth anchored on the TOMS shoe trial and in-kind transfer evidence (40% to 35%); 2025 prices put in 2024 dollars; surgery's disability built from the cataract and cleft share; outpatient risk split between crisis and stable settings; shoebox volunteers valued at the site's volunteer hour. Together these lowered the result by about a quarter. A verification round checked the changes.
 
 ### Sources
 
