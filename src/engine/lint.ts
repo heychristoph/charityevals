@@ -226,8 +226,11 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   }
 
   // The site's one way for each shared concept the family needs (docs/normalization.md 2.7-2.10).
+  // An accountability model credited only with hens already switched has no pledge to keep: its
+  // implementation_adj is 1 (templates.md, corporate-campaign accountability), which reads no fulfilment rate.
+  const observedOnly = (row: string) => family === "corporate-campaign" && row === "implementation_adj" && squash(m.byId.get(row)?.formula ?? "") === "1";
   for (const rd of spec.reads)
-    if (m.byId.has(rd.row) && !readsRef(m, rd.row, rd.ref))
+    if (m.byId.has(rd.row) && !observedOnly(rd.row) && !readsRef(m, rd.row, rd.ref))
       add(rd.severity ?? "high", "shared", `${rd.row} doesn't read ${rd.ref}`, `Read ${rd.ref}…: ${rd.why}.`, rd.row);
   if (unit === "tco2e")
     for (const r of CLIMATE_REQUIRED) if (!m.byId.has(r) || (r === "years_until_avoided" && !path.has(r)))

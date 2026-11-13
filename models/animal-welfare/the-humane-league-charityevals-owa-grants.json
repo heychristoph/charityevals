@@ -164,32 +164,32 @@
       "section": "cost",
       "label": "Total expenses (all programmes, management, fundraising), 2025",
       "format": "usd",
-      "value": 21609852,
+      "value": 21682964,
       "kind": "observed",
       "source": {
-        "title": "The Humane League, audited financial statements 2025",
-        "url": "https://assets.ctfassets.net/ww1ie0z745y7/3MRkx2O0dJW83bmfvo5rZa/56fa379bccf43148fb2b2a135fe72c62/Final_FS_-_230180_THL_AUD_1225.pdf",
-        "retrieved": "2026-11-13",
-        "page": "Statement of functional expenses (p. 5)",
-        "quote": "Total Expenses 14,620,067$ 4,300,517 $ 2,689,268 $ 21,609,852 $"
+        "title": "The Humane League, Form 990 for 2025",
+        "url": "https://projects.propublica.org/nonprofits/organizations/43817491/202621279349301542/full",
+        "page": "Part IX line 25, column (A)",
+        "quote": "Total functional expenses ... 21,682,964",
+        "retrieved": "2026-11-13"
       },
-      "explainer": "Audited statement of functional expenses for 2025. Cross-check: the Form 990's Part IX line 25 gives $21,682,964 on its own basis."
+      "explainer": "Total expenses for the same year, from the same return. The audited statements give $21,609,852 on their own basis; the Form 990 is used in all three THL models and the charity record."
     },
     {
       "id": "program_expenses",
       "section": "cost",
       "label": "Programme expenses (all programmes), 2025",
       "format": "usd",
-      "value": 14620067,
+      "value": 14619381,
       "kind": "observed",
       "source": {
-        "title": "The Humane League, audited financial statements 2025",
-        "url": "https://assets.ctfassets.net/ww1ie0z745y7/3MRkx2O0dJW83bmfvo5rZa/56fa379bccf43148fb2b2a135fe72c62/Final_FS_-_230180_THL_AUD_1225.pdf",
-        "retrieved": "2026-11-13",
-        "page": "Statement of functional expenses (p. 5)",
-        "quote": "Total Expenses 14,620,067$ 4,300,517 $ 2,689,268 $ 21,609,852 $"
+        "title": "The Humane League, Form 990 for 2025",
+        "url": "https://projects.propublica.org/nonprofits/organizations/43817491/202621279349301542/full",
+        "page": "Part IX line 25, column (B)",
+        "quote": "Total functional expenses ... 21,682,964 14,619,381 4,375,357 2,688,226",
+        "retrieved": "2026-11-13"
       },
-      "explainer": "The same statement's programme services column. Cross-check: the Form 990 gives $14,619,381 (Part III line 4a and Part IX line 25, column B)."
+      "explainer": "THL's programme service expenses for calendar 2025, from its Form 990 (grants included). The audited statements give $14,620,067 on their own basis; the Form 990 is used in all three THL models and the charity record."
     },
     {
       "id": "overhead_ratio",
@@ -517,7 +517,8 @@
         "retrieved": "2026-11-13",
         "quote": "United Kingdom,GBR,2025,82.70915"
       },
-      "explainer": "As above; DEFRA's last quarter of 2025 has enriched colony cages at 15.9% of throughput."
+      "explainer": "As above; DEFRA's last quarter of 2025 has enriched colony cages at 15.9% of throughput.",
+      "drawn_with": "uk_cage_free_2024"
     },
     {
       "id": "ukacc_hens_switched",
@@ -1111,15 +1112,15 @@
         "high": 3000000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: THL's annual report puts its global programmes at $5.2 million including the THL UK grant; the alliance's team, four regional summits and trainings, mentorship and the Fair and Fowl report are about a third of the rest."
+      "explainer": "Our judgment: THL's annual report (p. 17: Global Programs $5,204,000 with the THL UK grant; Education & Mobilization $4,664,000; US Public Policy & Corporate Engagement $2,498,000; OWA & APA Grants $1,991,000) leaves $3.05 million of global programmes after the THL UK grant, which ACE's global accountability block ($1.65 million in 2025 prices) and the alliance's running fill: about $1.5 million. ACE treats the Open Wing Alliance's coordination as paths of its own, outside cage-free accountability, so it is in THL's other programmes: the alliance's team, four regional summits, trainings (four Campaign Accelerators, 13 webinars, 19 campaign chats, 21 action parties), mentorship (27 mentees) and the Fair and Fowl report. The same judgment in THL's grants and other-programmes models."
     },
     {
       "id": "owa_resources",
       "section": "adjustments",
       "label": "All resources behind the alliance's wins abroad, 2025",
       "format": "usd",
-      "formula": "owa_staff * owa_staff_share_outside_us * owa_cost_per_staff * (1 + if($resource_shares, @staff_pay.share_advocacy * @staff_pay.gap_advocacy / (1 - @staff_pay.gap_advocacy), 0)) + owa_coordination_cost",
-      "explainer": "Members' campaign staff abroad (paid partly by these grants, partly by other funders, whose money is therefore already here) and THL's own running of the alliance. With credit by share of resources, the pay the members' campaigners forgo counts as their in-kind share too (the shared advocacy pay share and gap)."
+      "formula": "owa_staff * owa_staff_share_outside_us * owa_cost_per_staff * (1 + if($resource_shares, @staff_pay.share_advocacy * @staff_pay.gap_advocacy / (1 - @staff_pay.gap_advocacy), 0)) + owa_coordination_cost * (1 + if($resource_shares, @staff_pay.share_advocacy * @staff_pay.gap_advocacy / (1 - @staff_pay.gap_advocacy), 0))",
+      "explainer": "Members' campaign staff abroad (paid partly by THL's grants, partly by other funders, whose money is therefore already here) and THL's own running of the alliance. With credit by share of resources, the pay the campaigners on both sides forgo counts as an in-kind share too (the shared advocacy pay share and gap). The same formula in THL's grants and other-programmes models."
     },
     {
       "id": "owa_attribution_share_shared",
@@ -1311,7 +1312,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the share of these switches that wouldn't have come yet without the pressure. REWE restored its deadline eleven days after being named, so the pressure clearly moved the pledge; whether it moves the hens sooner is less sure. Anchor: pressed pledges are kept more than unpressed ones in Chicken Watch's tracker (92% of those due, against the 77% the site uses for hens)."
+      "explainer": "Our judgment, one question per switch: would it have come this year anyway? The anchor, pressed pledges kept at 92% (the Open Wing Alliance's tracker, 2025 Fair and Fowl report) against 77% for all due cage-free pledges (the site's shared rate), gives (0.92 - 0.77) / 0.92, about 0.16, for an average pressed pledge. The switches credited here come from companies that had stalled or gone silent (Subway, Walmart, Ahold Delhaize; REWE dropped its deadline), where pressure matters more than for a pledge already on track (THL UK's switches under passed UK deadlines take 0.2), so 0.3 (0.1-0.6). Each switch credited counts the shared years."
     },
     {
       "id": "owaacc_attribution_share_shared",
@@ -2093,10 +2094,10 @@
     {
       "id": "marginal_vs_past_average",
       "section": "donor",
-      "label": "How much the next dollar does compared with the average dollar so far",
+      "label": "How much The Humane League's next dollar does compared with its average so far",
       "format": "percent",
-      "formula": "$marginal_vs_past_average",
-      "explainer": "This model's cost per outcome is the grants' 2025 spending over the year's wins (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says.",
+      "formula": "@next_dollar.the_humane_league",
+      "explainer": "This model's cost per outcome is the grants' 2025 spending over the year's wins (estimate_basis past_average), so the next dollar is valued at THL's own next-dollar figure (room for more money × what the next dollar buys × how well it is run; docs/normalization.md 2.10), as in THL's other models: the grants are one more use of THL's next dollar. 1 in `published`: what the past average itself says.",
       "published": 1
     },
     {
