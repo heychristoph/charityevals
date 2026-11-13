@@ -25,6 +25,12 @@ describe("monte carlo", () => {
     expect(Math.log(d.q[9] / d.q[0])).toBeCloseTo(s, 0);
     expect(d.zero).toBe(0);
   });
+  it("on a page, an edited number is the reader's: fixed, not drawn", () => {
+    const lib = buildLibrary([model("m", [input("a", { low: 1, best: 4, high: 16 }), input("b", { low: 1, best: 9, high: 81 }), { id: "out", label: "out", formula: "a * b" }])], assumptions);
+    const m = lib.models.get("m")!;
+    const d = simulate(lib, m, 4000, undefined, { a: 5 })!;
+    expect(Math.log(d.q[18] / d.q[9])).toBeCloseTo(Math.log(9), 0);
+  });
   it("reads a 25th-75th percentile range as such: wider at 5-95%", () => {
     const at = (interval?: number) => {
       const lib = buildLibrary([model("m", [input("a", { low: 2, best: 4, high: 8 }, interval ? { interval } : {}), { id: "out", label: "out", formula: "a" }])], assumptions);

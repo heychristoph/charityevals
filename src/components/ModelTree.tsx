@@ -7,7 +7,7 @@ import { Fragment, useEffect, useMemo, useRef, useState, type KeyboardEvent, typ
 import { AlertTriangle, ChevronRight, ExternalLink, Search, X } from "lucide-react";
 import usage from "../../generated/usage.json";
 import { lib, modelFile, modelUrl } from "../lib/data";
-import { comparable, hasRange, headlineExprOf, pickValue, type ResolvedModel } from "../engine/model";
+import { comparable, hasRange, headlineExprOf, pickValue, type Library, type ResolvedModel } from "../engine/model";
 import type { Node } from "../engine/expr";
 import type { Row } from "../engine/schema";
 import { childrenOf, lookupFor, pathTo, pathToRef, rangedRowOf, rootOf, shapeOf, spreadShare, type TreeNode } from "../engine/tree";
@@ -517,14 +517,15 @@ function matches(m: ResolvedModel, q: string, used: Set<string>) {
 
 /** `place`: the location this model covers when it is one of several, named on the top row so it reads
  * apart from the page's headline, which may combine every funded location. */
-export default function ModelTree({ model, values, edits = {}, u, flags = [], place, children }: { model: ResolvedModel; values: Record<string, number>; edits?: Record<string, number>; u: Uncertainty; flags?: Flag[]; place?: string; children?: React.ReactNode }) {
+export default function ModelTree({ model, values, edits = {}, u, flags = [], place, engine = lib, children }: { model: ResolvedModel; values: Record<string, number>; edits?: Record<string, number>; u: Uncertainty; flags?: Flag[]; place?: string; engine?: Library; children?: React.ReactNode }) {
   const av = useAssumptionValues();
   const look = useMemo(() => lookupFor(lib, model, values, av, "charityevals", edits), [model, values, av, edits]);
   const editCount = Object.keys(edits).length;
   // The tree ends in the number at the top of the page: the model's result converted into years of
   // healthy life per $1,000, with the estimate's age discounted (headlineExprOf). Models in a unit nobody
   // converts end in their own result.
-  const toCommon = useMemo(() => (comparable(lib, model) ? headlineExprOf(lib, model, { type: "ref", scope: "row", name: model.output!.row }) : undefined), [model]);
+  // `engine`: the page's library, carrying its own simulation of this model when the reader has changed something.
+  const toCommon = useMemo(() => (comparable(engine, model) ? headlineExprOf(engine, model, { type: "ref", scope: "row", name: model.output!.row }) : undefined), [model, engine]);
   const root = useMemo(() => {
     const r = rootOf(model, look, toCommon);
     return place && r.label ? { ...r, label: `${r.label} in ${place}` } : r;

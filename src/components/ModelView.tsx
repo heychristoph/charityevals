@@ -1,8 +1,10 @@
 import type React from "react";
 import { useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { buildLibrary, compute } from "../engine/model";
+import { buildLibrary, compute, plausibleRange, type Library } from "../engine/model";
 import { useAssumptionValues, useResultFor } from "../lib/use-results";
+import { useOverrides } from "../lib/assumption-state";
+import { useLiveDistribution, withPageDistribution } from "../lib/live-distribution";
 import { editsFor, useEdits } from "../lib/edit-state";
 import ModelTree from "./ModelTree";
 import { WaterfallInSlot } from "./Waterfall";
@@ -28,16 +30,23 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
   const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
   const values = useMemo(() => compute(lib, model, av, edits), [model, av, edits]);
   const u = useMemo(() => uncertainty(lib, model, values, av, "charityevals", edits), [model, values, av, edits]);
-  // The caveats describe the result on screen, so they follow the edits.
-  const caveats = useMemo(
-    () => (Object.keys(edits).length ? [...flags(model, sensitivity(lib, model, av, "charityevals", edits)), ...[coverageFlag(lib, model)].filter((f) => !!f)] : r.flags),
-    [model, av, edits, r.flags],
-  );
+  // Once the reader changes a value or edits a number, the model is simulated again at theirs; the page's
+  // own library carries that simulation, so the rankings elsewhere on the page keep the build's.
+  const overrides = useOverrides();
+  const live = useLiveDistribution(lib, model, av, edits, Object.keys(edits).length > 0 || Object.keys(overrides).length > 0);
+  const engine: Library = useMemo(() => withPageDistribution(lib, model.id, live), [live, model.id]);
+  // The caveats describe the result on screen, so they follow the edits and the page's simulation.
+  const caveats = useMemo(() => {
+    if (!Object.keys(edits).length && !live) return r.flags;
+    const s = sensitivity(engine, model, av, "charityevals", edits);
+    const range = plausibleRange(engine, model, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
+    return [...flags(model, { ...s, jointLow: range.low, jointHigh: range.high }), ...[coverageFlag(lib, model)].filter((f) => !!f)];
+  }, [model, av, edits, r.flags, live, engine]);
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
-      <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats}>{about}</ModelTree>
-      {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} />}
+      <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats} engine={engine}>{about}</ModelTree>
+      {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} engine={engine} />}
 
       {children}
     </div>
