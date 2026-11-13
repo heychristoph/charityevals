@@ -1,0 +1,767 @@
+{
+  "id": "dogs-trust-charityevals-rabies",
+  "name": "Dogs Trust (rabies control)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"IND":0.4,"MWI":0.3,"KHM":0.3},
+  "beneficiaries_note": "Our build: WVS and Mission Rabies' dog vaccination; split over its main rabies countries (India, Malawi, Cambodia), a judgment: the report gives no doses by country.",
+  "template": "direct-health",
+  "estimate_basis": "unit_cost",
+  "charity": "dogs-trust",
+  "owner": "charityevals",
+  "summary": "Dogs Trust's sister charity Worldwide Veterinary Service and its Mission Rabies project vaccinated 2.2 million dogs against rabies in 2025, with Dogs Trust grants to rabies programmes in Malawi, Cambodia, Guinea and Bangladesh; this model takes about a quarter of Dogs Trust's international spending ($8.6m, a judgment) for that work. Human deaths averted per dose come from Mission Rabies' own programme in Goa, India, where 426,000 doses from 2013 to 2019 averted an estimated 80 deaths and human rabies fell to zero: about 0.26 years of healthy life per $1,000 at the defaults, roughly 10,000 times the figure for Dogs Trust's dog-welfare work. The biggest uncertainties are whether WVS's other, often one-off campaigns protect people as Goa's sustained one did (external validity 0.3 to 1.3), the share of international spending that goes on rabies, and the missing-data discount, since the effect was measured only in Goa.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: Dogs Trust's rabies control through Worldwide Veterinary Service (2025)",
+    "url": "https://charityevals.org/dogs-trust-charityevals-rabies",
+    "published": "2026-11-13",
+    "retrieved": "2026-11-13"
+  },
+  "resources": [
+    {
+      "title": "Dogs Trust Annual Report 2025",
+      "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "Gibson et al. 2022, Elimination of human rabies in Goa, India through an integrated One Health approach, Nature Communications 13:2788",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9120018",
+      "type": "study"
+    },
+    {
+      "title": "WHO rabies fact sheet",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/rabies",
+      "type": "data"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "spend_international_gbp",
+      "section": "cost",
+      "label": "International work (Ireland, Bosnia, WVS, overseas grants), 2025, pounds",
+      "format": "number",
+      "unit": "GBP",
+      "value": 26099000,
+      "kind": "observed",
+      "source": {
+        "title": "Dogs Trust Annual Report 2025 (year to 31 December 2025)",
+        "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+        "page": "p. 94 (PDF page 48), consolidated statement of financial activities, £000s",
+        "quote": "International work 7 24,345 1,754 26,099",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Dogs Trust's charitable expenditure on international work in 2025, including the consolidated sister charity Worldwide Veterinary Service (WVS) and its Mission Rabies project."
+    },
+    {
+      "id": "rabies_share_of_international",
+      "section": "cost",
+      "label": "Share of international spending on rabies control",
+      "format": "percent",
+      "formula": "@dogs_trust.rabies_share_of_international",
+      "explainer": "The shared split (facts/dogs_trust.json), read also by charityevals' main Dogs Trust model, which counts the rest of the international line."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on rabies control in 2025, US dollars",
+      "format": "usd",
+      "formula": "spend_international_gbp * rabies_share_of_international * @fx.usd_per_gbp_2025",
+      "explainer": "Dog vaccination, rabies education and surveillance by WVS/Mission Rabies and Dogs Trust's grants to rabies programmes, at the IRS's 2025 average rate."
+    },
+    {
+      "id": "total_expenses_gbp",
+      "section": "cost",
+      "label": "Total expenditure, 2025, pounds",
+      "format": "number",
+      "unit": "GBP",
+      "value": 162805000,
+      "kind": "observed",
+      "source": {
+        "title": "Dogs Trust Annual Report 2025 (year to 31 December 2025)",
+        "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+        "page": "p. 94 (PDF page 48), consolidated statement of financial activities, £000s",
+        "quote": "Total expenditure 7 149,906 12,899 162,805",
+        "retrieved": "2026-11-13"
+      }
+    },
+    {
+      "id": "program_expenses_gbp",
+      "section": "cost",
+      "label": "Expenditure on charitable activities, 2025, pounds",
+      "format": "number",
+      "unit": "GBP",
+      "value": 116941000,
+      "kind": "observed",
+      "source": {
+        "title": "Dogs Trust Annual Report 2025 (year to 31 December 2025)",
+        "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+        "page": "p. 103 (PDF page 52), note 7, analysis of expenditure, £000s",
+        "quote": "9,425 82,650 24,866 116,941 108,589",
+        "retrieved": "2026-11-13"
+      }
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "formula": "total_expenses_gbp * @fx.usd_per_gbp_2025"
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "formula": "program_expenses_gbp * @fx.usd_per_gbp_2025"
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads Dogs Trust's fundraising (£45.6m) over its charitable work in proportion to cost."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "Dogs vaccinated against rabies through WVS, 2025",
+      "format": "integer",
+      "value": 2200000,
+      "kind": "observed",
+      "source": {
+        "title": "Dogs Trust Annual Report 2025 (year to 31 December 2025)",
+        "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+        "page": "p. 33 (PDF page 17)",
+        "quote": "2.2 million dogs were vaccinated against rabies",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Doses given to dogs in WVS and Mission Rabies campaigns in 26 countries (India, Malawi, Cambodia and others), the unit this model counts. WVS's own count; governments and partners co-deliver some campaigns (attribution below)."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per dog vaccinated, including overhead",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: compare with the charity's own figure and with other models of the family."
+    },
+    {
+      "id": "goa_dog_population",
+      "section": "reach",
+      "label": "Dogs in Goa (estimate for 2017)",
+      "format": "integer",
+      "value": {
+        "low": 110000,
+        "best": 137353,
+        "high": 165000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Gibson et al. 2022, Elimination of human rabies in Goa, India through an integrated One Health approach, Nature Communications 13:2788",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9120018",
+        "page": "Results, dog vaccination",
+        "quote": "97,277 dogs vaccinated in an estimated population of 137,353 dogs",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Range ours, ±20% for a survey-based population estimate. Mission Rabies' (WVS's) programme in Goa, the one place its effect on human deaths has been measured: the dog population behind the deaths averted."
+    },
+    {
+      "id": "goa_doses",
+      "section": "reach",
+      "label": "Doses given to dogs in Goa, 2013-2019",
+      "format": "integer",
+      "value": 426119,
+      "kind": "observed",
+      "source": {
+        "title": "Gibson et al. 2022, Elimination of human rabies in Goa, India through an integrated One Health approach, Nature Communications 13:2788",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9120018",
+        "page": "Results, dog vaccination",
+        "quote": "426,119 doses were administered in total from 2013 to 2019",
+        "retrieved": "2026-11-13"
+      }
+    },
+    {
+      "id": "goa_programme_years",
+      "section": "reach",
+      "label": "Years of the Goa programme counted (2013-2019)",
+      "format": "number",
+      "unit": "years",
+      "value": 7,
+      "kind": "observed",
+      "source": {
+        "title": "Gibson et al. 2022, Elimination of human rabies in Goa, India through an integrated One Health approach, Nature Communications 13:2788",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9120018",
+        "page": "Results, public health impact",
+        "quote": "80 deaths averted from 2013 to 2019",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "2013 to 2019 inclusive, the period of the deaths-averted estimate."
+    },
+    {
+      "id": "goa_deaths_2014",
+      "section": "reach",
+      "label": "Human rabies deaths in Goa, 2014",
+      "format": "integer",
+      "value": 17,
+      "kind": "observed",
+      "source": {
+        "title": "Gibson et al. 2022, Elimination of human rabies in Goa, India through an integrated One Health approach, Nature Communications 13:2788",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9120018",
+        "page": "Results, public health impact, Fig. 7",
+        "quote": "17 in 2014, falling to zero in 2018 and 2019",
+        "retrieved": "2026-11-13"
+      }
+    },
+    {
+      "id": "goa_deaths_averted",
+      "section": "reach",
+      "label": "Human rabies deaths averted in Goa, 2013-2019",
+      "format": "integer",
+      "value": {
+        "low": 50,
+        "best": 80,
+        "high": 110
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Gibson et al. 2022, Elimination of human rabies in Goa, India through an integrated One Health approach, Nature Communications 13:2788",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9120018",
+        "page": "Results, public health impact",
+        "quote": "80 deaths averted from 2013 to 2019",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The paper's decision-tree estimate from bite-patient data against no programme; the range is ours (the paper's own interval is not given in the text read): 50 to 110."
+    },
+    {
+      "id": "years_of_coverage",
+      "section": "reach",
+      "label": "Dog-years of the population covered per dose (Goa: dogs × years ÷ doses)",
+      "format": "number",
+      "unit": "years",
+      "formula": "goa_dog_population * goa_programme_years / goa_doses",
+      "explainer": "Each dose in Goa stood for 2.3 dog-years of the whole population at the coverage reached (about 70%): vaccinated dogs protect unvaccinated ones by stopping transmission."
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "Human rabies deaths per dog per year (Goa, 2014)",
+      "format": "small",
+      "unit": "deaths / person-year",
+      "formula": "goa_deaths_2014 / goa_dog_population",
+      "explainer": "Deaths in Goa in 2014, early in the programme, over its dogs: 1.2 per 10,000 dogs a year. WVS's other places differ (external validity below)."
+    },
+    {
+      "id": "mortality_reduction",
+      "section": "effect",
+      "label": "Share of the 2014 death rate averted over the programme",
+      "format": "percent",
+      "formula": "goa_deaths_averted / (goa_deaths_2014 * goa_programme_years)",
+      "explainer": "80 deaths averted against 17 a year for 7 years: two thirds. Human deaths fell to zero in 2018 and 2019."
+    },
+    {
+      "id": "indirect_deaths_ratio",
+      "section": "effect",
+      "label": "Other deaths averted per rabies death averted",
+      "format": "number",
+      "formula": "0",
+      "explainer": "0: the effect counted is deaths from rabies itself; there is no indirect mortality channel."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Human deaths averted per dog vaccinated",
+      "format": "small",
+      "formula": "baseline_mortality_rate * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
+      "explainer": "1.9 per 10,000 doses in Goa (80 ÷ 426,119)."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of rabies deaths under age 5",
+      "format": "percent",
+      "explainer": "The shared age split of rabies deaths (facts/death_ages.json).",
+      "formula": "@death_ages.rabies_world_share_under5"
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Share aged 5-14 of deaths over 5",
+      "format": "percent",
+      "formula": "@death_ages.rabies_world_share_5_14 / (1 - @death_ages.rabies_world_share_under5)",
+      "explainer": "From the shared age split."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Share aged 15-49 of deaths over 15",
+      "format": "percent",
+      "explainer": "From the shared age split.",
+      "formula": "@death_ages.rabies_world_share_15_49 / (@death_ages.rabies_world_share_15_49 + @death_ages.rabies_world_share_50plus)"
+    },
+    {
+      "id": "morbidity_value_ratio",
+      "section": "effect",
+      "label": "Illness averted, as a share of the deaths' value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.02,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Rabies is almost always fatal, so there is little illness to avert: bites by rabid dogs (wounds, fear) and courses of post-exposure prophylaxis. Our judgment 2%, 0 to 5%."
+    },
+    {
+      "id": "stillbirths_averted_per_person",
+      "section": "effect",
+      "label": "Stillbirths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "0: rabies vaccination of dogs has no stillbirth channel."
+    },
+    {
+      "id": "ln_income_gain_per_year",
+      "section": "effect",
+      "label": "Later-life income gain per person reached, ln(consumption) per year",
+      "format": "small",
+      "unit": "ln / year",
+      "formula": "0",
+      "explainer": "0: no later-life income gain is claimed for dog vaccination."
+    },
+    {
+      "id": "years_until_income_gain",
+      "section": "effect",
+      "label": "Years until the income gain starts",
+      "format": "number",
+      "unit": "years",
+      "formula": "@givewell_shared.years_until_income_benefits_malaria",
+      "explainer": "the site's one figure for the program (@givewell_shared.years_until_income_benefits_malaria, _smc, _iron or _deworming); for a program none fits, an estimate input from the study, with its source and range."
+    },
+    {
+      "id": "years_income_gain_lasts",
+      "section": "effect",
+      "label": "Years the long-term income gain lasts",
+      "format": "number",
+      "unit": "years",
+      "explainer": "The site's one figure for how long a long-term income gain lasts (GiveWell's working years, 40), read by every model that counts one (INV-13).",
+      "formula": "@givewell_shared.long_term_benefit_years"
+    },
+    {
+      "id": "ln_income_gain_per_person",
+      "section": "effect",
+      "label": "Later-life income gain per person reached, present value",
+      "format": "small",
+      "unit": "ln-years",
+      "explainer": "Discounted at the shared rate, the wait included, so the result moves with it. Never type in a present value worked out elsewhere: rebuild it from its inputs.",
+      "formula": "pv_annuity_due(ln_income_gain_per_year, $discount_rate, years_income_gain_lasts) / (1 + $discount_rate) ^ years_until_income_gain"
+    },
+    {
+      "id": "resource_sharing_multiplier",
+      "section": "effect",
+      "label": "Resource sharing within households (multiplier on an earner's gain)",
+      "format": "multiple",
+      "explainer": "The site's one figure (GiveWell's): an earner's income gain is shared with the household, so it counts this many times. Read by every model that values a long-term income gain (INV-13).",
+      "formula": "@givewell_shared.resource_sharing_multiplier"
+    },
+    {
+      "id": "internal_validity_adj",
+      "section": "adjustments",
+      "label": "Internal validity of the Goa estimate",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "The deaths averted are modelled from bite-patient data against a no-vaccination counterfactual, not a controlled comparison; human deaths did fall to zero, so the direction is sure. 0.8, 0.6 to 0.95."
+    },
+    {
+      "id": "external_validity_adj",
+      "section": "adjustments",
+      "label": "External validity: WVS's other campaigns against Goa's",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.7,
+        "high": 1.3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Goa reached about 70% coverage year after year with surveillance; many of WVS's 2.2 million doses are in one-off or annual campaigns (Malawi, Cambodia) that reach less and lapse, but often where rabies kills more people per dog than Goa's 1.2 per 10,000 (Cambodia, Malawi). 0.7, 0.3 (thin campaigns, low incidence) to 1.3 (higher-incidence places)."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "formula": "internal_validity_adj * external_validity_adj",
+      "explainer": "The product of its two parts."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Governments vaccinate some dogs in these places anyway (India's national programme, Malawi's), and some doses go to dogs that would have been vaccinated. Our judgment 0.8, 0.5 to 0.95."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Governments supply vaccine, vaccinators or permits in several campaigns (Cambodia's agriculture department, Malawi's), and volunteers travel at their own cost (p. 34). Our judgment of WVS's share of all resources, 75%, 50% to 100%."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "explainer": "1: Goa's deaths averted per dose already include doses that didn't protect (cold chain, re-dosed dogs), so a delivery shortfall here would count twice (audit round 1).",
+      "formula": "1"
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Governments may spend a little less where WVS vaccinates (funging), or more once it shows results (Goa's state took over funding); 0.95, 0.85 to 1.05."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a donation waits before the charity spends it",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0,
+        "best": 0.25,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Dogs Trust spent about what it raised in 2025 (surplus £13.8m mostly from selling an office); a gift is spent within the year: 0.25, 0 to 1."
+    },
+    {
+      "id": "delay_years",
+      "section": "adjustments",
+      "label": "Years from the charity's spending to the intervention reaching people",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Campaigns run through the year; a quarter of a year from spending to the dose, 0.1 to 0.5."
+    },
+    {
+      "id": "benefit_midpoint_years",
+      "section": "adjustments",
+      "label": "Years from delivery to the middle of the protection",
+      "format": "number",
+      "formula": "years_of_coverage * 0.5",
+      "unit": "years",
+      "explainer": "The benefits come over the years of protection (a net's life, a season's doses), so they are discounted from its middle; 0 for a one-off effect such as a vaccine dose's."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait until the benefits come",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years + benefit_midpoint_years)",
+      "explainer": "Every wait is discounted at the shared rate, like every future benefit (the income gain's own wait is counted from delivery, in ln_income_gain_per_person)."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "The shared missing-data step (docs/normalization.md 2.12): WVS counts its doses, but the effect on human deaths was measured only in Goa, by a pre-post model rather than a controlled comparison, and not where most of 2025's doses were given; so the branch is thin."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "treatment_costs_share",
+      "section": "adjustments",
+      "label": "Treatment costs averted, as a share of value",
+      "format": "percent",
+      "explainer": "0: the Goa study saw no fall in post-exposure prophylaxis, the main treatment cost (it 'assumed that there was no reduction in PEP administration'); people bitten by any dog still get it.",
+      "formula": "0"
+    },
+    {
+      "id": "rebound_share",
+      "section": "adjustments",
+      "label": "Rebound malaria from lost immunity, as a share of value lost",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "0: no immunity is lost by people; the shared malaria rebound doesn't apply."
+    },
+    {
+      "id": "investment_of_income_share",
+      "section": "adjustments",
+      "label": "Investment of income increases, as a share of modelled value",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "0: no income gain to invest."
+    },
+    {
+      "id": "other_unmodelled_share",
+      "section": "adjustments",
+      "label": "Other effects: dogs and livestock spared rabies",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.01,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Dogs spared a rabid death (about a week of severe suffering) and livestock losses to rabies averted. Our judgment of their value against the human deaths, 1%, 0 to 5%: valued in healthy years at the site's animal weights, the dogs' days are worth well under 1% of the deaths. A side effect, weighed by the shared slider."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
+      "explainer": "Effects beyond the deaths, as a share of their value; a side effect, weighed by the shared slider.",
+      "side_effect": "added"
+    },
+    {
+      "id": "deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * total_adj"
+    },
+    {
+      "id": "value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights for the age band of each death averted (under five, 5–14, 15–49, 50 and over), times your multiplier on the value of a life: the site's one value of a death (docs/normalization.md 2.7).",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier"
+    },
+    {
+      "id": "uov_deaths",
+      "section": "outcome",
+      "label": "Units of value from deaths averted",
+      "format": "number",
+      "unit": "units of value",
+      "formula": "deaths_averted * value_per_death"
+    },
+    {
+      "id": "uov_stillbirths",
+      "section": "outcome",
+      "label": "Units of value from stillbirths averted",
+      "format": "number",
+      "unit": "units of value",
+      "explainer": "A stillbirth averted at the site's one value (@givewell_shared.uov_per_stillbirth, GiveWell's), times your multiplier on the value of a life.",
+      "formula": "people_reached * stillbirths_averted_per_person * total_adj * @givewell_shared.uov_per_stillbirth * $life_value_multiplier"
+    },
+    {
+      "id": "uov_income",
+      "section": "outcome",
+      "label": "Units of value from later-life income",
+      "format": "number",
+      "unit": "units of value",
+      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * total_adj * $uov_per_ln_consumption"
+    },
+    {
+      "id": "uov_morbidity",
+      "section": "outcome",
+      "label": "Units of value from illness averted",
+      "format": "number",
+      "unit": "units of value",
+      "explainer": "A share of the deaths' and income's value, the base GiveWell's supplementary share has.",
+      "formula": "(uov_deaths + uov_income) * morbidity_value_ratio"
+    },
+    {
+      "id": "dalys_illness_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "unit": "DALYs",
+      "formula": "0",
+      "explainer": "0: illness is counted once, in morbidity_value_ratio."
+    },
+    {
+      "id": "dalys_bridged",
+      "section": "bridges",
+      "label": "Illness averted, in DALYs",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "people_reached * dalys_illness_averted_per_person * total_adj"
+    },
+    {
+      "id": "uov_from_daly",
+      "section": "bridges",
+      "label": "Illness averted, in units of value",
+      "format": "number",
+      "unit": "units of value",
+      "explainer": "The bridge from DALYs into units of value: the unit's conversion cancels it, so illness counts as healthy years whatever \"Healthy year vs doubled-income year\" is set to.",
+      "formula": "dalys_bridged * ($uov_per_daly)"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Total units of value",
+      "format": "number",
+      "unit": "units of value",
+      "explainer": "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets; illness counted in DALYs comes in through its bridge.",
+      "formula": "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity + uov_from_daly"
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "outcome",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "unit": "units of value / $",
+      "formula": "outcome_total / cost_total"
+    },
+    {
+      "id": "staff_costs_gbp",
+      "section": "donor",
+      "label": "Staff costs, 2025, pounds",
+      "format": "number",
+      "unit": "GBP",
+      "value": 74269000,
+      "kind": "observed",
+      "source": {
+        "title": "Dogs Trust Annual Report 2025 (year to 31 December 2025)",
+        "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+        "page": "p. 105 (PDF page 53), note 8",
+        "quote": "Wages and salaries 61,152 57,816",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Wages £61.2m, social security £6.6m and pensions £6.5m: £74.3m, the whole group."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of cost",
+      "format": "percent",
+      "formula": "staff_costs_gbp / total_expenses_gbp",
+      "explainer": "The group's own share (Convention 1), 46%; WVS's own split isn't published."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "The shared gap for local delivery staff (@staff_pay.gap_local_delivery): most of WVS's vaccinators are local staff."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "format": "small",
+      "unit": "Units of value / $",
+      "formula": "uov_per_dollar * donor_cost_share"
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
+  }
+}
