@@ -39,7 +39,7 @@ Figures are the audited consolidated accounts for 2025, with the US parent's For
 
 - **The missing-data slider**: every branch is thin, so it scales the whole result.
 - **The shoeboxes' worth to the children** (15% to 60% of retail): the shoeboxes are the largest branch.
-- **The relief's cost per person and the food's local price**: relief abroad is the next; with the shoeboxes, about three-quarters of the result.
+- **The relief's cost per person and the food's local price**: relief abroad is the next largest.
 - **Recipients' consumption**, in the crises and among the shoebox children.
 
 ### Biggest uncertainties
