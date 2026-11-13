@@ -35,6 +35,8 @@ For an orchestrator running many import-cea or build-cea agents, and for each ag
   stated inputs, not a skip. (A build's sources live in its model and write-up: no inventory entry.)
 - A new ranged fact whose low or high equals a number in another model trips INV-4 there: check it's a
   coincidence and add a waiver with the reason.
+- Keeps its scratch files in a folder named by its model or charity id (agents may share a scratch
+  directory); its audits go in the repository, never only in scratch.
 - Reports the model ids it added, its charity's `lines` change, and anything it couldn't settle.
 
 ## Shared registers (merge by hand, one entry per model)
