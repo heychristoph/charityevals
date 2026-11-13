@@ -295,10 +295,14 @@ function Measure() {
 /** Ready-made sets of values; moving any slider from one makes the values Custom. */
 function Presets({ overrides }: { overrides: Record<string, number> }) {
   const active = presetOf(overrides);
-  const about = PRESETS.find((p) => p.id === active)?.about;
+  const about = active === "default"
+    ? "Our best guess for every value."
+    : active === "custom"
+    ? "Your own values: at least one slider differs from every set."
+    : PRESETS.find((p) => p.id === active)?.about;
   return (
-    <div className="presets">
-      <label className="presets-pick small">
+    <div className="presets-pick measure-pick small tip-host">
+      <label className="presets-pick">
         <span>Values</span>
         <select
           value={active}
@@ -316,7 +320,7 @@ function Presets({ overrides }: { overrides: Record<string, number> }) {
           {active === "custom" && <option value="custom">Custom</option>}
         </select>
       </label>
-      {about && <p className="presets-about small muted">{about}</p>}
+      <InfoTip label="What do these values do?">{about}</InfoTip>
     </div>
   );
 }
