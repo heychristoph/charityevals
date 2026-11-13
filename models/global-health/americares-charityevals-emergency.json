@@ -1,0 +1,851 @@
+{
+  "id": "americares-charityevals-emergency",
+  "name": "Americares: emergency programmes (charityevals' estimate)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"USA":0.35,"LBN":0.2275,"UKR":0.1479,"MMR":0.2746},
+  "beneficiaries_note": "Our build: emergency responses weighted by the build's own judged shares (US disasters 35%, the Middle East 23%, Ukraine 15%, Asia and Africa 27%), each valued at a stand-in country.",
+  "template": "humanitarian-relief",
+  "estimate_basis": "unit_cost",
+  "charity": "americares",
+  "owner": "charityevals",
+  "summary": "Americares, a US health and disaster-relief charity, responded to 30 emergencies in 22 countries in its fiscal year to June 2025 (Hurricanes Helene and Milton, the Los Angeles fires, Gaza, Ukraine, the Myanmar earthquake), spending 40.1 million dollars in cash plus 10.4 million of donated medicines and supplies, and counts 684,700 survivors helped. This model values the health care it restores as deaths and illness averted, and the goods, water and cash as consumption on the site's log scale, in about four stand-in places (the US a third); donated goods count in the credit share, not the cost. The result is about 0.04 years of healthy life per 1,000 dollars, far below the site's global-health median because a third of the work is in the US, where a few dollars of goods add little, and relief abroad averts few deaths for the people it reaches; it is mostly uncertainty. Deaths, illness and the value delivered are our judgments, so the model is discounted by the shared missing-data slider.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: Americares' emergency programmes",
+    "url": "https://charityevals.org/americares-charityevals-emergency",
+    "published": "2026-11-13",
+    "retrieved": "2026-11-13"
+  },
+  "resources": [
+    {
+      "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+      "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "Americares Annual Report 2025 (fiscal year July 2024 - June 2025)",
+      "url": "https://www.americares.org/wp-content/uploads/Americares-Annual-Report-FY2025-v2-2.pdf",
+      "type": "charity"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "em_expenses",
+      "section": "cost",
+      "label": "Emergency Programs: expenses, donated goods included (FY2025)",
+      "format": "usd",
+      "value": 50546000,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 8, consolidated statement of functional expenses, column Emergency Programs",
+        "quote": "Total functional expenses $ 1,763,666 $ 50,546",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Disaster and crisis response in the year to 30 June 2025: medicines and supplies, emergency health services and mobile clinics through partners, mental-health support, water, cash assistance, recovery and preparedness projects.",
+      "drawn_with": "program_expenses"
+    },
+    {
+      "id": "em_gik",
+      "section": "cost",
+      "label": "Emergency Programs: donated goods distributed (recorded value)",
+      "format": "usd",
+      "value": 10440000,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 8, column Emergency Programs",
+        "quote": "Distribution of donated medical and disaster supplies 1,729,225 10,440",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Donated medicines and relief supplies handed out in emergencies, at recorded (US wholesale) value: the donors' resources, in the credit share below, not the cost (Convention 2).",
+      "drawn_with": "program_expenses"
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Emergency Programs: cash spending (FY2025)",
+      "format": "usd",
+      "formula": "em_expenses - em_gik",
+      "explainer": "Americares' own spending on emergencies, 40.1 million dollars in the year to June 2025."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Programme expenses paid in cash (all programmes, FY2025)",
+      "format": "usd",
+      "value": 133068000,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 7, consolidated statement of activities",
+        "quote": "Other program expenses 133,068",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "All three programmes' spending without the donated goods distributed, in US dollars (the statements are in thousands): total program services 1,878,619 less distribution of donated medical and disaster supplies 1,745,551; the annual report shows the same figure as Total Program Services (without GIK) (p. 18). The donated goods (1,745.6 million dollars at recorded value) are drug companies' resources: they enter each branch's credit share, never the cost (Convention 2)."
+    },
+    {
+      "id": "mgmt_general",
+      "section": "cost",
+      "label": "Management and general (FY2025)",
+      "format": "usd",
+      "value": 15629000,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 7, consolidated statement of activities",
+        "quote": "Management and general 15,629",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "All cash."
+    },
+    {
+      "id": "fundraising",
+      "section": "cost",
+      "label": "Fundraising (FY2025)",
+      "format": "usd",
+      "value": 21991000,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 7",
+        "quote": "Fundraising 21,991",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "All cash."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses paid in cash",
+      "format": "usd",
+      "formula": "program_expenses + mgmt_general + fundraising",
+      "explainer": "About 170.7 million dollars: everything but the donated goods."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (cash total ÷ cash programme expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over the programmes' cash spending, as GiveWell and ACE do (about 1.28)."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the emergency programme, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "Disaster and crisis survivors helped",
+      "format": "integer",
+      "value": 684700,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Annual Report 2025 (fiscal year July 2024 - June 2025)",
+        "url": "https://www.americares.org/wp-content/uploads/Americares-Annual-Report-FY2025-v2-2.pdf",
+        "page": "p. 5, Emergency Programs, Impact by the numbers",
+        "quote": "684,700+ disaster and crisis survivors helped",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Americares' own count for FY2025, across 30 emergencies in 22 countries; people helped by partners it supplied or funded included. Not independently measured: the doubt is in the delivery and evidence rows."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per survivor helped",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: about 75 dollars a person, including overhead."
+    },
+    {
+      "id": "crisis_mortality_rate",
+      "section": "effect",
+      "label": "Death rate among the people reached during the crisis, without the response",
+      "format": "small",
+      "value": {
+        "low": 0.008,
+        "best": 0.012,
+        "high": 0.025
+      },
+      "kind": "judgment",
+      "explainer": "Americares' responses were mostly to sudden-onset disasters (Hurricanes Helene and Milton, the Los Angeles fires, typhoons in the Philippines, the Myanmar earthquake) and conflicts (Gaza, Ukraine, Lebanon, Sudan) (annual report pp. 5-8, 17). After the first days, death rates for the people reached rise only modestly above normal, except in Gaza and Sudan. As our American Red Cross relief model (1.2% a year, from 0.8% to 3%), slightly lower at the top since a third of the work was in the US: one rate for all the people reached, the US's smaller excess already averaged in.",
+      "unit": "deaths / person-year"
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "Death rate in the same population before the crisis",
+      "format": "small",
+      "value": {
+        "low": 0.006,
+        "best": 0.0075,
+        "high": 0.009
+      },
+      "kind": "judgment",
+      "explainer": "Crude death rates of 6-9 per 1,000 a year in the US and the middle-income countries served (UN World Population Prospects; the world's is about 7.6), as in our American Red Cross relief model.",
+      "unit": "deaths / person-year"
+    },
+    {
+      "id": "share_excess_averted",
+      "section": "effect",
+      "label": "Share of the excess deaths the response averts among the people reached",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.05,
+        "high": 0.12
+      },
+      "kind": "judgment",
+      "explainer": "Americares restores health care in emergencies (medicines to clinics that lost stock, mobile clinics, insulin and dialysis supplies after hurricanes), which prevents more deaths than relief items or cash: our American Red Cross relief model, mostly cash and goods, takes 3% (0-10%); MSF's medical emergency care far more. Our judgment, 5%, from 1% to 12%."
+    },
+    {
+      "id": "years_exposed",
+      "section": "effect",
+      "label": "Years of the crisis the response covers per person",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Emergency medicine and care cover the first weeks to months, when excess deaths happen: about three months, from one to six, as our American Red Cross relief model.",
+      "unit": "years"
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "(crisis_mortality_rate - baseline_mortality_rate) * share_excess_averted * years_exposed",
+      "explainer": "Excess deaths over the months covered, times the share the response averts."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Excess deaths after disasters in middle- and high-income countries fall mostly on the old and the chronically ill (people losing insulin, oxygen, dialysis); young children are a large share only in Gaza and Sudan. Our judgment, 20%, from 10% to 35%: below our American Red Cross relief model (30%) because a third of the work was in the US, where few disaster deaths are of young children."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "Older children have the lowest death rates of any age: about 10% of deaths over five, as in our American Red Cross relief model."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Health care after disasters averts mostly older adults' deaths (chronic disease cut off from care); working-age adults about 30%, below our American Red Cross relief model's 35% because of the US share. The rest at the 50-74 weight."
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "The site's one value of a death, by age band, times your value of a life."
+    },
+    {
+      "id": "consults_per_person",
+      "section": "effect",
+      "label": "Health consultations or treatments per survivor helped",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Part of the people reached get medical care (mobile clinics, restocked clinics, mental-health sessions); others get water, hygiene kits or cash. Our judgment, 0.3 treatments a person, from 0.1 to 0.6."
+    },
+    {
+      "id": "dalys_per_consult",
+      "section": "effect",
+      "label": "Illness averted per treatment in an emergency (DALYs)",
+      "format": "small",
+      "value": {
+        "low": 0.003,
+        "best": 0.01,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "explainer": "An infection or injury treated, a chronic condition kept under control after the disaster, psychological first aid: a disability-weight gain of 0.05-0.2 (GBD 2019) for a few weeks. Our judgment, 0.01 DALY, from 0.003 to 0.03, as the clinic patients in our model of Americares' health services.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dalys_illness_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "formula": "consults_per_person * dalys_per_consult",
+      "unit": "DALYs"
+    },
+    {
+      "id": "em_gik_local_ratio",
+      "section": "effect",
+      "label": "Donated relief goods: market price where used, as a share of recorded value",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.4,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Donated medicines are recorded at US wholesale prices (statements p. 13); in the US responses that is close to their market value, abroad generics cost a fraction. Our judgment, 40%, from 15% to 80%."
+    },
+    {
+      "id": "em_goods_share",
+      "section": "effect",
+      "label": "Share of the response's resources reaching people as goods, water or cash (not health care)",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The rest is health care (valued as deaths and illness averted above), staff, logistics and preparedness. Reference class from the Emergency Programs column (statements p. 8): other grants, awards, relief supplies and destruction 22.3 million and grants to other agencies 4.6 million dollars, 67% of its cash spending, are the ceiling for what reaches people (salaries are 20%, logistics and fees the rest); of that, we judge about half is health care (medicines bought, mobile clinics, partner clinics' grants), valued as deaths and illness above, and half goods, water and cash. The Los Angeles fires response, for one, gave 1 million dollars in cash to 5,500 survivors beside medicine, masks, water and 455,000 dollars of grants (annual report p. 6). Our judgment, 30%, from 15% to 50%."
+    },
+    {
+      "id": "value_delivered_per_person",
+      "section": "effect",
+      "label": "Food, water, hygiene items and cash delivered per person (US$)",
+      "format": "usd",
+      "formula": "(program_spend + em_gik * em_gik_local_ratio) * em_goods_share / people_reached",
+      "explainer": "Americares' cash and the donated goods at market value, the share reaching people as goods, water or cash, over the people reached: about 19 dollars at the best guesses."
+    },
+    {
+      "id": "w_usa",
+      "section": "effect",
+      "label": "Share of the response in the United States",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Americares' biggest FY2025 responses by its own account were US disasters (Hurricanes Helene and Milton, the Los Angeles fires; annual report pp. 6-7), with Gaza, Ukraine and 19 other countries abroad (p. 17). The accounts give no split. Our judgment, 35%, from 20% to 50%."
+    },
+    {
+      "id": "w_lebanon_of_rest",
+      "section": "effect",
+      "label": "Of the response abroad, share in the Middle East (stand-in Lebanon)",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The Middle East responses (Gaza, where Americares has supplied 35 tons of medicine and 1 million dollars to partners since October 2023, Lebanon, Syria, Yemen, Jordan; annual report pp. 8, 17) were among the largest abroad. The accounts give no split by country, so our judgment: 35% of the spending abroad, from 20% to 50%, valued at Lebanon's consumption (the region's stand-in, as in our American Red Cross relief model)."
+    },
+    {
+      "id": "w_ukraine_of_rest",
+      "section": "effect",
+      "label": "Of the rest abroad, share in Ukraine and Europe",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Ukraine and its neighbours (Poland, Romania, Moldova on the annual report's map, p. 17) have had an Americares response since 2022. The accounts give no split, so our judgment: 35% of what remains after the Middle East, from 20% to 50%, valued at Ukraine's consumption."
+    },
+    {
+      "id": "w_lebanon",
+      "section": "effect",
+      "label": "Weight: Middle East (Lebanon)",
+      "format": "percent",
+      "formula": "(1 - w_usa) * w_lebanon_of_rest"
+    },
+    {
+      "id": "w_ukraine",
+      "section": "effect",
+      "label": "Weight: Europe (Ukraine)",
+      "format": "percent",
+      "formula": "(1 - w_usa) * (1 - w_lebanon_of_rest) * w_ukraine_of_rest"
+    },
+    {
+      "id": "w_myanmar",
+      "section": "effect",
+      "label": "Weight: Asia and Africa (Myanmar)",
+      "format": "percent",
+      "formula": "(1 - w_usa) * (1 - w_lebanon_of_rest) * (1 - w_ukraine_of_rest)",
+      "explainer": "The rest: the Myanmar earthquake, Philippines typhoons, Sudan, Somalia, the DRC and Latin America, valued at Myanmar's consumption."
+    },
+    {
+      "id": "cpi_2017_vs_2024",
+      "section": "effect",
+      "label": "US prices 2017 over 2024",
+      "format": "number",
+      "formula": "@cpi.usa_2017 / @cpi.usa_2024",
+      "explainer": "Puts 2024-25 dollars into 2017 prices, the PPP base; it applies to goods and baselines alike, so it cancels in the log gains."
+    },
+    {
+      "id": "affected_consumption_share",
+      "section": "effect",
+      "label": "Affected households' consumption as a share of their country's survey mean",
+      "format": "percent",
+      "value": {
+        "low": 0.28,
+        "best": 0.42,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "As our American Red Cross relief model (World Bank PIP anchors there): disaster-affected households are poorer than average and lost income."
+    },
+    {
+      "id": "baseline_usa",
+      "section": "effect",
+      "label": "Baseline consumption, United States (2017 PPP $)",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024 * cpi_2017_vs_2024",
+      "explainer": "US survivors Americares helps are low-income (its partners are free clinics): the Consumer Expenditure Survey's spending per person times the lowest fifth's ratio (0.45), in 2017 prices (the US dollar is the PPP base). It plays the part of the affected share abroad (best 0.42, which it matches), from a US source instead of the World Bank anchors."
+    },
+    {
+      "id": "baseline_lebanon",
+      "section": "effect",
+      "label": "Baseline consumption, Lebanon (2017 PPP $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_world_median * @lebanon.consumption_per_person_2024 * @lebanon.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "National-accounts consumption on the survey scale (the shared median ratio), the affected share, in 2017 PPP prices."
+    },
+    {
+      "id": "baseline_ukraine",
+      "section": "effect",
+      "label": "Baseline consumption, Ukraine (2017 PPP $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_ukr * @ukraine.consumption_per_person_2024 * @ukraine.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "As Lebanon, with Ukraine's own survey ratio."
+    },
+    {
+      "id": "mmr_consumption_share_of_gdp",
+      "section": "effect",
+      "label": "Myanmar: household consumption as a share of GDP",
+      "format": "percent",
+      "value": {
+        "low": 0.55,
+        "best": 0.7,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "The World Bank has no consumption series for Myanmar; neighbouring Bangladesh's households consume 70% of GDP (NE.CON.PRVT.ZS, 2024), as our American Red Cross relief model."
+    },
+    {
+      "id": "baseline_myanmar",
+      "section": "effect",
+      "label": "Baseline consumption, Myanmar (2017 PPP $)",
+      "format": "usd",
+      "formula": "affected_consumption_share * @survey_consumption.survey_to_na_world_median * @myanmar.gdp_per_capita_2024 * mmr_consumption_share_of_gdp * @myanmar.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "GDP per person times the consumption share, on the survey scale, the affected share, in 2017 PPP prices."
+    },
+    {
+      "id": "ln_gain_usa",
+      "section": "effect",
+      "label": "ln gain, United States",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 / baseline_usa)"
+    },
+    {
+      "id": "ln_gain_lebanon",
+      "section": "effect",
+      "label": "ln gain, Lebanon",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @lebanon.ppp_factor_2017 / baseline_lebanon)"
+    },
+    {
+      "id": "ln_gain_ukraine",
+      "section": "effect",
+      "label": "ln gain, Ukraine",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @ukraine.ppp_factor_2017 / baseline_ukraine)"
+    },
+    {
+      "id": "ln_gain_myanmar",
+      "section": "effect",
+      "label": "ln gain, Myanmar",
+      "format": "number",
+      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @myanmar.ppp_factor_2017 / baseline_myanmar)"
+    },
+    {
+      "id": "ppp_factor",
+      "section": "effect",
+      "label": "PPP conversion (weighted, for reading)",
+      "format": "number",
+      "formula": "w_usa + w_lebanon * @lebanon.ppp_factor_2017 + w_ukraine * @ukraine.ppp_factor_2017 + w_myanmar * @myanmar.ppp_factor_2017",
+      "explainer": "The stand-in countries' shared PPP facts (the US's is 1, the base), weighted; the log gains use each country's own."
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "Consumption per person of the people reached (weighted, for reading)",
+      "format": "usd",
+      "formula": "w_usa * baseline_usa + w_lebanon * baseline_lebanon + w_ukraine * baseline_ukraine + w_myanmar * baseline_myanmar"
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person",
+      "format": "number",
+      "formula": "w_usa * ln_gain_usa + w_lebanon * ln_gain_lebanon + w_ukraine * ln_gain_ukraine + w_myanmar * ln_gain_myanmar",
+      "explainer": "Each stand-in country's log gain at its own consumption, weighted."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Goods and cash at cost need no effect study; the deaths and illness averted are judgments anchored on other responses, not measured. Our judgment, 0.8, as for the effects of our model of Americares' health services."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome other responders wouldn't have delivered",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "UN-coordinated appeals were 45.5% funded in 2024 (OCHA, as in our American Red Cross relief model), so abroad much of the need goes unmet; after US disasters FEMA, state agencies and many charities respond, so less is added there. Our judgment, half, from 30% to 80%."
+    },
+    {
+      "id": "em_partner_cost_vs_own",
+      "section": "adjustments",
+      "label": "Partners' own resources as a share of Americares' cash and goods",
+      "format": "multiple",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Americares works through local clinics and NGOs (Lestonnac Free Clinic distributed the Los Angeles cash; Gaza partners run the mobile clinics; annual report pp. 6, 8) whose staff, volunteers and facilities are their own. Our judgment, half as much again, from a fifth to as much: lower than for donated medicine to clinics in our main Americares model (as much again as the medicine's value), because in emergencies Americares more often pays for the delivery itself (its grants to partners are in its cash)."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "Americares' share of the resources behind the outcome",
+      "format": "number",
+      "formula": "program_spend / ((program_spend + em_gik * em_gik_local_ratio) * (1 + em_partner_cost_vs_own))",
+      "explainer": "Americares' cash against everything behind the response: its cash, the donated goods at market value (Convention 2: donated goods enter the credit share, not the cost) and partners' own resources. About 61%."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "number",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (fidelity, compliance, follow-through)",
+      "format": "percent",
+      "value": {
+        "low": 0.75,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "People counted as helped who got little (a single kit), supplies lost or expired in insecure settings. Our judgment, 90%."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.95,
+        "best": 1,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Others' fill-in is in the counterfactual; Americares took 3.1 million dollars of government grants (2% of cash revenue), so little public money is displaced or drawn in. 1."
+    },
+    {
+      "id": "cash_and_investments",
+      "section": "adjustments",
+      "label": "Cash and investments at year end",
+      "format": "usd",
+      "value": 54958000,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 6",
+        "quote": "Cash and cash equivalents $ 11,663 ... Investments 43,295",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Money held at 30 June 2025 (11.663 + 43.295 million dollars).",
+      "drawn_with": "program_expenses"
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a gift waits before it's spent",
+      "format": "number",
+      "formula": "cash_and_investments / total_expenses",
+      "unit": "years",
+      "explainer": "Money held over a year's cash spending: about 0.32 years."
+    },
+    {
+      "id": "delay_years",
+      "section": "adjustments",
+      "label": "Years from spending to the help arriving",
+      "format": "number",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Emergency supplies go out in days to weeks, recovery projects over months. Our judgment, 0.2 years.",
+      "unit": "years"
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years)",
+      "explainer": "The waits discounted at the shared rate."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "number",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: Americares counts people helped, but the deaths and illness averted and the goods' value per person are our judgments, not measured."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
+      "explainer": "The product of the adjustments above, the wait and the missing-data step included."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.1,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Preparedness and resilience work (climate toolkits for clinics, pre-positioned stock; annual report p. 7), mental-health support beyond the treatments counted and recovery projects (+); unneeded donated goods in disasters and funging inside Americares (−). Our judgment, +10%, from −10% to +30%.",
+      "side_effect": "added"
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Deaths averted and goods delivered, in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Deaths averted and goods delivered, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "0",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * dalys_illness_per_person",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "em_salaries",
+      "section": "donor",
+      "label": "Emergency Programs: salaries and payroll",
+      "format": "usd",
+      "value": 7971000,
+      "kind": "observed",
+      "source": {
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 8",
+        "quote": "Salaries and related payroll expenses $ 4,210 $ 7,971",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The emergency programme's own staff pay.",
+      "drawn_with": "program_expenses"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of programme cost",
+      "format": "percent",
+      "formula": "em_salaries / program_spend",
+      "explainer": "From the audited functional expenses: about 20% of the programme's cash spending."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_health_field",
+      "explainer": "The shared gap for health and field staff at nonprofits."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "unit": "Years of healthy life / $",
+      "explainer": "The result per dollar, for the share of the full cost that cash donations pay."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}
