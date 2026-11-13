@@ -853,7 +853,7 @@ ratio is (1 − B₀/B) / ln(B/B₀) for an organisation that has grown from B�
 tenfold, 21% after a hundredfold. No evaluator adjusts the ratio by an organisation's age or size: there is no
 age- or size-based adjustment here either (an open proposal, section 5, item 11).
 
-**Per charity (trial, November 2026).** The blanket 50% is a placeholder; each charity estimated from a past
+**Per charity (November 2026).** The blanket 50% is a placeholder; each charity estimated from a past
 average gets its own figure in facts/next_dollar.json, read by its models' `marginal_vs_past_average` row in
 place of the slider (`published` 1 keeps the evaluator view at 100%). It is a product of three factors, each
 from the charity's own evidence, with a range:
@@ -867,7 +867,9 @@ Missing evidence gives the neutral factor (room 0.7, use 0.7, run 1.0) with a wi
 funding moves within months, so each figure is dated (`source.retrieved`) and a model whose figure is over a
 year old carries a caveat. Trial: The Humane League 51% (30-80%), Wild Animal Initiative 32% (15-60%: two
 years of reserves), British Heart Foundation 39% (20-70%: reserves well above its own requirement). The other
-past averages still read the slider until they have their own figure; then the slider goes.
+past averages followed the same day (November 2026: 16 charities, 31-56% except St Jude 21% and The Nature
+Conservancy 24%, both holding years of spending in reserve), and the slider left the panel: it is a fixed 50% now
+read only by models not shown on the site (owners asked us not to publish them yet).
 
 ### 2.11 Old estimates count less: a slider for an estimate's age (November 2026)
 

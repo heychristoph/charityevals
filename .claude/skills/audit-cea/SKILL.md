@@ -40,7 +40,7 @@ don't flag**: every finding names the concrete fix.
 - `npx tsx scripts/summaries.ts`, then `npx tsx scripts/simulation-check.ts <id>`: an unstable simulation
   is **high** for a charityevals model, medium for an import; the inputs it prints are the usual cause.
 
-Copy every high and medium mechanical finding, then go beyond them: a rule broken under
+Copy every high and medium mechanical finding, then go further: a rule broken under
 other words is yours to find. Reading shared facts and sliders is never a finding, even in a blind run.
 
 ## 2. Structure and standard steps
@@ -148,9 +148,10 @@ so the severity rests on a number.
 ```
 # Audit: <model id>, round <n>
 Result: <x> <unit>/$ = <y> years of healthy life per $1,000 (combined range <lo>–<hi>); cause median <m> (×<r>). Verdict: <pass | fix needed>.
+Model-sha: <what `npx tsx scripts/audit-receipt.ts <id>` prints for the model you audited>
 Scope: <programmes and year modelled, against the charity's spending breakdown>
 Mechanical: lint <h/m/l>, invariants <violations or none>, normalization-audit <violations or none>
-Previous round: <each earlier finding: resolved / not resolved (a finding answered with a note, not a fix, is not resolved)>
+Previous round: <each earlier finding: resolved / not resolved (a note is not a fix)>
 
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
@@ -164,4 +165,4 @@ Previous round: <each earlier finding: resolved / not resolved (a finding answer
 
 Categories: structure, scope, normalization, source, double-counting, missing-adjustment, units,
 plausibility, sensitivity, comparability, presentation. Every finding has a concrete fix ("set X to Y,
-citing Z p. 12"), never "consider revisiting" or "flag". "Pass" means no high findings remain.
+citing Z p. 12"), never "consider revisiting" or "flag". "Pass": no high findings.

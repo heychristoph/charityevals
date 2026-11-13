@@ -32,7 +32,7 @@ from pathlib import Path
 
 MODELS = Path("models/grants/givewell")
 DEFAULTS = {r["id"]: (r["value"]["best"] if isinstance(r["value"], dict) else r["value"])
-            for r in json.loads(Path("assumptions/default.json").read_text())["rows"]}
+            for r in json.loads(Path("assumptions/default.json").read_text())["rows"] if "value" in r}
 FACTS = Path("facts")
 
 LIFE = re.compile(r"(value|units? of value|\buov\b|moral (value|weights?)).*\b(deaths?|lives?)\b|\bmoral weights?\b|value assigned to averting (the |a |one )?(\S+ )?death", re.I)

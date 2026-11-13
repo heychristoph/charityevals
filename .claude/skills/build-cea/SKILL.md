@@ -132,7 +132,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
   control group; say what isn't adjusted for. **Animals**: Convention 3 (reach is every animal under
   the commitments won or pressed, delivery only in the shared fulfilment rate, stocks as yearly flows).
 - **Summary**: say why when the result is over ten times its cause's median (INV-15). Far below: check
-  scope, reach and persistence first (audit-model prints the median).
+  scope, reach and persistence first.
 - **Write-up** `writeups/<id>.md` for the charity's main model, following import-cea section 7, plus
   "How this model was checked" (audit rounds and what changed).
 - **Charity record** `charities/<id>.json` if missing, with `spending` and `lines`.
@@ -148,7 +148,7 @@ list and previous findings (not your notes):
 ```
 Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
       prompt: "Use the audit-cea skill (.claude/skills/audit-cea/SKILL.md) to audit <path>.
-               Write the findings to <audit dir>/audit-r<n>.md. <blind list, if any, and
+               Write the findings to audits/<id>/audit-r<n>.md. <blind list, if any, and
                --exclude <ids> for audit-model.ts and normalization-audit.ts>. Don't edit the model.")
 ```
 
@@ -156,9 +156,9 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
    same problem, said in the next round's input); fix lows unless the fix would be wrong, and say why.
 2. Re-run `scripts/audit-model.ts`, then a **new** auditor (round n+1) with the previous findings.
 3. Stop at an audit with no high findings, or after **3 rounds**. **Verification round**: any change after
-   the last round (yours or a later rule's) gets a fresh auditor given the model, write-up, last
-   findings and the changes, checking only those. Publish only without a high; else fix and verify once
-   more, or keep it out of `models/` with the reason.
+   the last round gets a fresh auditor given the model, write-up, last
+   findings and the changes, checking only those. Publish only on a passing latest audit of the model as
+   it is (its `Model-sha`; a test checks); else fix and verify once more, or keep it out of `models/`.
 
 ## 5. Verify and report
 
