@@ -4,12 +4,12 @@
   "kind": "charity",
   "cause": "global-health",
   "beneficiaries": {"UKR":0.33,"PSE":0.08,"SYR":0.02,"LBN":0.02,"SDN":0.015,"HTI":0.01,"MEX":0.12,"GTM":0.05,"HND":0.05,"UGA":0.05,"NGA":0.05,"KEN":0.05,"IND":0.05,"PHL":0.05,"MWI":0.03,"SLE":0.025},
-  "beneficiaries_note": "Our build: international material aid by value (Ukraine $535m and the Middle East $193m of $1,633m, Sudan $23m, Haiti $12m: annual report FY2025 pp. 25-26, 43); the rest, about half, spread over Direct Relief's partners in Latin America, Africa and Asia (a judgment, its own reports name no split): the medicines and the grants are valued at the same health-system price per DALY, so shares of aid are shares of the result.",
+  "beneficiaries_note": "Our build: international material aid by value (Ukraine $535m and the Middle East $193m of $1,633m, Sudan $23m, Haiti $12m: annual report FY2025 pp. 25-26, 43); the rest, about half, spread over Direct Relief's partners in Latin America, Africa and Asia (a judgment, its own reports name no split): the shares are of aid, a stand-in for the shares of the result.",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "direct-relief",
   "owner": "charityevals",
-  "summary": "Direct Relief ships medicines and supplies that manufacturers donate, requested by health facilities, ministries and NGOs abroad, $1.6 billion at US wholesale value in the year to June 2025 (a third to Ukraine, an eighth to the Middle East), and gives $31m in grants to local health partners. This model values the medicines at local prices and the health they buy at what the recipient health systems' next dollar buys (a cost per DALY of about 30% of income per person), and credits Direct Relief with its own cash's share of the resources behind them, the donated goods being the manufacturers'; the grants count in full. The result, about 0.15 years of healthy life per $1,000, rests on judgments: how useful donated, often short-dated and branded stock is against the health system's marginal spending, and what the goods are worth locally. Both branches, medicines and grants, are discounted by the shared missing-data slider: nothing measures the health these medicines produce.",
+  "summary": "Direct Relief ships medicines and supplies that manufacturers donate, requested by health facilities, ministries and NGOs abroad, $1.6 billion at US wholesale value in the year to June 2025 (a third to Ukraine, an eighth to the Middle East), and gives $31m in grants to local health partners. This model values the medicines at local prices and the health they buy at what the recipient health systems' next dollar buys (a cost per DALY of about 30% of income per person), deaths valued by age, and credits Direct Relief with its own cash's share of the resources behind them, the donated goods being the manufacturers'; the grants count in full. The result, about 0.4 years of healthy life per $1,000, rests on judgments: how useful donated, often short-dated and branded stock is against the health system's marginal spending, and what the goods are worth locally. Both branches, medicines and grants, are discounted by the shared missing-data slider: nothing measures the health these medicines produce.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Direct Relief, medical aid abroad (fiscal 2025)",
@@ -203,7 +203,7 @@
       "format": "small",
       "formula": "0",
       "unit": "deaths / person-year",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per DALY averted, below), whose DALYs include years of life lost, so a separate death chain would count them twice."
+      "explainer": "Not used: the death rate the medicines change is not measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
     },
     {
       "id": "baseline_mortality_rate",
@@ -212,7 +212,7 @@
       "format": "small",
       "formula": "0",
       "unit": "deaths / person-year",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per DALY averted, below), whose DALYs include years of life lost, so a separate death chain would count them twice."
+      "explainer": "Not used: the death rate the medicines change is not measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
     },
     {
       "id": "share_excess_averted",
@@ -220,7 +220,7 @@
       "label": "Share of the excess deaths the response averts (not used)",
       "format": "percent",
       "formula": "0",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per DALY averted, below), whose DALYs include years of life lost, so a separate death chain would count them twice."
+      "explainer": "Not used: the death rate the medicines change is not measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
     },
     {
       "id": "years_exposed",
@@ -234,49 +234,49 @@
     {
       "id": "deaths_averted_per_person",
       "section": "effect",
-      "label": "Deaths averted per patient-year, outside the DALYs below (none)",
+      "label": "Deaths averted per patient-year of medicine (before adjustments)",
       "format": "small",
-      "formula": "(crisis_mortality_rate - baseline_mortality_rate) * share_excess_averted * years_exposed",
-      "explainer": "Excess deaths over the years covered times the share averted: zero here, since deaths are in the health-system DALYs."
+      "formula": "goods_local_value / people_reached * need_vs_marginal / cost_per_daly * (1 - yld_share) * deaths_per_daly",
+      "explainer": "The local value of the medicines per patient-year over the recipient health systems' cost per DALY, times the need ratio, the share that is deaths, times deaths per DALY."
     },
     {
       "id": "share_under5",
       "section": "effect",
-      "label": "Share of the deaths averted that are of children under five (not used)",
+      "label": "Share of the deaths averted that are of children under five",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.45,
-        "high": 0.6
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per DALY averted, below), whose DALYs include years of life lost, so a separate death chain would count them twice. The value is the template's, kept so the age bands stay defined."
+      "explainer": "Ukraine's and the Middle East's patients are mostly adults with chronic illness or injuries; partners in Africa, Haiti and Latin America treat child infections, and the midwife and perinatal kits newborns. Our judgment, 25% (10% to 40%)."
     },
     {
       "id": "share_5_14_of_over5",
       "section": "effect",
-      "label": "Of the deaths averted at five or older, share aged 5 to 14 (not used)",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.4
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.12
       },
       "kind": "judgment",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per DALY averted, below), whose DALYs include years of life lost, so a separate death chain would count them twice. The value is the template's."
+      "explainer": "Few deaths at these ages in any recipient country. Our judgment, 5% (2% to 12%)."
     },
     {
       "id": "share_15_49_of_over15",
       "section": "effect",
-      "label": "Of the deaths averted at 15 or older, share aged 15 to 49 (not used)",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.7
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.45
       },
       "kind": "judgment",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per DALY averted, below), whose DALYs include years of life lost, so a separate death chain would count them twice. The value is the template's."
+      "explainer": "Chronic-disease deaths (insulin, cancer drugs, cardiovascular medicines) are mostly at 50 and over; maternal deaths and war injuries at 15 to 49. Our judgment, 30% (15% to 45%)."
     },
     {
       "id": "value_per_death",
@@ -398,12 +398,12 @@
     {
       "id": "other_gdp_pc",
       "section": "effect",
-      "label": "Other recipient countries: GDP per person (current US$), weighted by aid",
+      "label": "Other recipient countries: GDP per person (current US$), the aid-weighted harmonic mean",
       "format": "usd",
       "value": {
-        "low": 1500,
-        "best": 3500,
-        "high": 6000
+        "low": 1200,
+        "best": 2000,
+        "high": 4000
       },
       "kind": "judgment",
       "source": {
@@ -413,15 +413,15 @@
         "page": "Lower middle income, Upper middle income, Low income, 2024",
         "quote": "Lower middle income 2024 2354.15; Upper middle income 2024 10443.35; Low income 2024 808.50"
       },
-      "explainer": "The other two thirds went to the Middle East ($193m: Gaza, Lebanon, Syria, annual report p. 26), Sudan ($23m), Haiti ($12m) and partners in Latin America, Africa and Asia (Mexico, Guatemala, Uganda, Nigeria, India among them). Anchor: World Bank group averages for 2024, lower-middle income $2,354, upper-middle $10,443, low income $809. Our judgment, $3,500, between the lower-middle average and Mexico and Lebanon's higher incomes."
+      "explainer": "The other two thirds went to the Middle East ($193m: Gaza, Lebanon, Syria, annual report p. 26), Sudan ($23m), Haiti ($12m) and partners in Latin America, Africa and Asia (Mexico, Guatemala, Honduras, Uganda, Nigeria, Kenya, India, the Philippines, Malawi, Sierra Leone). Because the health bought is value over cost per DALY, countries are pooled by the harmonic mean of income, which the poorer recipients pull down. Anchor: World Bank 2024 incomes weighted by the beneficiary split give $1,985 (harmonic; $4,664 arithmetic); group averages are $2,354 for lower-middle income, $10,443 upper-middle, $809 low income. Our judgment, $2,000 ($1,200 to $4,000)."
     },
     {
       "id": "gdp_pc_mix",
       "section": "effect",
-      "label": "Recipients' GDP per person, weighted by material aid",
+      "label": "Recipients' GDP per person, aid-weighted harmonic mean",
       "format": "usd",
-      "formula": "(ukraine_material_aid * ukraine_gdp_pc + (int_material_aid - ukraine_material_aid) * other_gdp_pc) / int_material_aid",
-      "explainer": "Ukraine's share of the aid at Ukraine's income, the rest at the others'."
+      "formula": "int_material_aid / (ukraine_material_aid / ukraine_gdp_pc + (int_material_aid - ukraine_material_aid) / other_gdp_pc)",
+      "explainer": "Ukraine's share of the aid at Ukraine's income, the rest at the others'; harmonic, since DALYs bought are value divided by cost per DALY."
     },
     {
       "id": "threshold_share_gdp",
@@ -452,6 +452,22 @@
       "explainer": "GDP per person times the threshold share."
     },
     {
+      "id": "yld_share",
+      "section": "effect",
+      "label": "Share of the DALYs bought at the margin that are illness (not deaths)",
+      "format": "percent",
+      "formula": "@death_ages.medicines_lmic_yld_share",
+      "explainer": "The shared figure for medicines in low- and middle-income health systems (facts/death_ages.json): the rest are deaths, valued by age."
+    },
+    {
+      "id": "deaths_per_daly",
+      "section": "effect",
+      "label": "Deaths per DALY of years of life lost",
+      "format": "small",
+      "formula": "@death_ages.medicines_lmic_deaths_per_daly",
+      "explainer": "The shared figure (facts/death_ages.json): turns the years of life lost back into deaths, so each is valued by age at the site's value of a death."
+    },
+    {
       "id": "need_vs_marginal",
       "section": "effect",
       "label": "Health gained per dollar of these medicines ÷ per marginal dollar of the health system",
@@ -462,16 +478,16 @@
         "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "Direct Relief ships what partners request, much of it to places where supply has broken down (Ukraine's war, Gaza, Sudan, Haiti, hurricane-hit islands), where medicines save more than the health system's least valuable spending (+). Against that, the mix follows what manufacturers give: short-dated and branded stock, some of it specialty products whose local value overstates what they do for the people treated, and some of it things a facility would not have bought (−). Our judgment, 1 (0.5 to 2.5)."
+      "explainer": "Direct Relief ships what partners request, much of it to places where supply has broken down (Ukraine's war, Gaza, Sudan, Haiti, hurricane-hit islands), where medicines save more than the health system's least valuable spending (+). Against that, the mix follows what manufacturers give: short-dated and branded stock, specialty products whose local value overstates what they do for the people treated, things a facility would not have bought (−). Unlike the US model (1.5), the threshold here is already the whole system's marginal spending in poor countries, where medicines are among the inputs most often missing. Our judgment, 1 (0.5 to 2.5)."
     },
     {
       "id": "dalys_illness_per_person",
       "section": "effect",
-      "label": "DALYs averted per patient-year of medicine (before adjustments)",
+      "label": "Illness averted per patient-year of medicine, in DALYs (before adjustments)",
       "format": "small",
-      "formula": "goods_local_value / people_reached * need_vs_marginal / cost_per_daly",
+      "formula": "goods_local_value / people_reached * need_vs_marginal / cost_per_daly * yld_share",
       "unit": "DALYs",
-      "explainer": "The local value of the medicines per patient-year, over the recipient health systems' cost per DALY, times the need ratio. Deaths and illness are both in it."
+      "explainer": "The same health bought, its years lived with disability: the share not lost to death."
     },
     {
       "id": "grt_need_vs_marginal",
@@ -487,35 +503,67 @@
       "explainer": "The grants fund local organisations' care: rehabilitation and mobile clinics in Ukraine, earthquake recovery and mental health in Turkey and Syria, maternal care, solar power for clinics, warehousing in the Middle East. Some is less directly health (solar systems, logistics, heat-risk data); the rest is care in crisis settings. Our judgment, 0.8."
     },
     {
+      "id": "ukraine_grants",
+      "section": "effect",
+      "label": "Grants for the crisis in Ukraine, fiscal 2025",
+      "format": "usd",
+      "value": 19700000,
+      "kind": "observed",
+      "source": {
+        "title": "Direct Relief, Fiscal Year 2025 Annual Report (July 2024 to June 2025)",
+        "url": "https://www.directrelief.org/wp-content/uploads/2026/04/Direct-Relief-Annual-Report-FY-2025-Web.pdf",
+        "retrieved": "2026-11-13",
+        "page": "p. 44, Financial assistance",
+        "quote": "including the crisis in Ukraine ($19.7 million)"
+      },
+      "explainer": "The largest part of the international grants, weighting their cost per DALY."
+    },
+    {
+      "id": "grt_cost_per_daly",
+      "section": "effect",
+      "label": "Grants: recipients' cost per DALY at the margin (US$)",
+      "format": "usd",
+      "formula": "threshold_share_gdp * int_grants / (ukraine_grants / ukraine_gdp_pc + (int_grants - ukraine_grants) / other_gdp_pc)",
+      "explainer": "Ukraine's share of the grants at Ukraine's income, the rest (Turkey and Syria, Israel and Palestine, and others) at the other recipients', harmonic, times the threshold share."
+    },
+    {
       "id": "grt_dalys",
       "section": "effect",
-      "label": "Grants: DALYs averted (before adjustments)",
+      "label": "Grants: illness averted, in DALYs (before adjustments)",
       "format": "number",
-      "formula": "int_grants * grt_need_vs_marginal / cost_per_daly",
+      "formula": "int_grants * grt_need_vs_marginal / grt_cost_per_daly * yld_share",
       "unit": "DALYs",
-      "explainer": "The grants over the recipients' cost per DALY, times the need ratio."
+      "explainer": "The grants over the recipients' cost per DALY, times the need ratio, the share not lost to death."
+    },
+    {
+      "id": "grt_deaths",
+      "section": "effect",
+      "label": "Grants: deaths averted (before adjustments)",
+      "format": "number",
+      "formula": "int_grants * grt_need_vs_marginal / grt_cost_per_daly * (1 - yld_share) * deaths_per_daly",
+      "explainer": "The grants' health bought, the share that is deaths, times deaths per DALY."
     },
     {
       "id": "med_dalys",
       "section": "effect",
-      "label": "Medicines: DALYs averted (before adjustments)",
+      "label": "Medicines: illness averted, in DALYs (before adjustments)",
       "format": "number",
       "formula": "people_reached * dalys_illness_per_person",
       "unit": "DALYs",
-      "explainer": "Patient-years times DALYs per patient-year."
+      "explainer": "Patient-years times illness DALYs per patient-year."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (how far the threshold's DALYs per dollar hold), a multiplier",
+      "label": "Evidence adjustment (bias in the threshold's health per dollar), a multiplier",
       "format": "multiple",
       "value": {
-        "low": 0.6,
-        "best": 0.85,
-        "high": 1
+        "low": 0.8,
+        "best": 1,
+        "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "The cost per DALY comes from cross-country models of what health spending buys, not from measuring these medicines; the published estimates have wide ranges and use mortality as the outcome. 0.85 (0.6 to 1), as for the other builds resting on such estimates; the doubt about these medicines in particular is in the need ratio."
+      "explainer": "The cost per DALY comes from cross-country estimates of how health spending changes mortality (Ochalek et al.; Woods et al.). Such estimates can be biased either way (spending follows need, which hides its effect; or richer countries spend and live longer for other reasons); we know of no evidence of a net direction. That the outcome isn't measured for these medicines is in the missing-data step. 1 (0.8 to 1.1)."
     },
     {
       "id": "counterfactual_adj",
@@ -523,12 +571,12 @@
       "label": "Share of the outcome that wouldn't have happened without Direct Relief",
       "format": "percent",
       "value": {
-        "low": 0.35,
-        "best": 0.6,
-        "high": 0.85
+        "low": 0.5,
+        "best": 0.75,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Medicines: other channels deliver donated medicines too (Americares, Project HOPE, MAP International, WHO and UNICEF supply in Ukraine and Gaza), and some partners would have bought some of the products. Grants: some partners would have found other funders. Ukraine's response was well funded; Sudan's and Haiti's were not. Our judgment, 0.6 for both branches."
+      "explainer": "Medicines: other channels deliver donated medicines too (Americares, Project HOPE, MAP International; WHO and UNICEF supply in Ukraine and Gaza), so some of the same products would have reached the same patients. (Products a partner would have bought free its budget, which the cost per DALY at the margin already values.) Grants: some partners would have found other funders; Ukraine's response was well funded, Sudan's and Haiti's were not. Our judgment, 0.75 (0.5 to 0.9) for both branches."
     },
     {
       "id": "attribution_share_shared",
@@ -560,12 +608,12 @@
       "label": "Medicines: share dispensed to patients before they expire",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.8,
+        "low": 0.7,
+        "best": 0.85,
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Much of the donated stock is short-dated: Direct Relief itself wrote off $197.9m of expired international stock (audited accounts p. 7), 12% of the donated goods it shipped abroad ($1,621.6m). Some of what partners receive expires on their shelves or is not what their patients need. Our judgment, 0.8."
+      "explainer": "Much donated stock is short-dated (Direct Relief writes off its own expired stock in its warehouse, $197.9m abroad in fiscal 2025, audited accounts p. 7: that never reaches partners and is not in the goods counted here). Some of what partners receive still expires on their shelves or is not what their patients need. Our judgment, 0.85 (0.7 to 0.95)."
     },
     {
       "id": "grt_implementation_adj",
@@ -695,10 +743,10 @@
     {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths and income in units of value (none here)",
+      "label": "Deaths averted, in units of value",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption) * med_total_adj",
-      "explainer": "People reached times deaths averted and goods as income, both zero here (deaths are in the DALYs)."
+      "formula": "(people_reached * deaths_averted_per_person * med_total_adj + grt_deaths * grt_total_adj) * value_per_death + people_reached * ln_gain_per_person * $uov_per_ln_consumption * med_total_adj",
+      "explainer": "Deaths averted by both branches, each after its own adjustments, at the site's value of a death by age; no goods are valued as income."
     },
     {
       "id": "dalys_from_uov",
@@ -727,7 +775,7 @@
     {
       "id": "dalys_direct",
       "section": "outcome",
-      "label": "DALYs averted, both branches, after adjustments",
+      "label": "Illness averted, both branches, after adjustments, in DALYs",
       "format": "number",
       "formula": "med_dalys * med_total_adj + grt_dalys * grt_total_adj",
       "explainer": "Medicines and grants, each with its own adjustments."

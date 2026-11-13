@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "direct-relief",
   "owner": "charityevals",
-  "summary": "In the US, Direct Relief gives donated medicines and supplies ($297m at wholesale value in the year to June 2025, much of it generics for chronic illness, naloxone and contraceptives) to about 2,000 health centres, free clinics and charitable pharmacies serving uninsured patients, and $37m in grants for clinics and disaster recovery (Los Angeles fires, Hurricanes Helene and Milton). The health they buy is priced at the US health system's cost per QALY at the margin ($104,000 in 2019 dollars, Vanness et al. 2021), raised by half for patients who would otherwise go without, and Direct Relief is credited with its own cash's share of the resources, the donated goods being the manufacturers'. The result, about 0.0014 years of healthy life per $1,000, is far below the site's median because health is bought at US prices: a year of healthy life costs about a hundred times more at the margin in the US than in the countries Direct Relief serves abroad. Both branches are discounted by the shared missing-data slider: nothing measures the health these medicines produce.",
+  "summary": "In the US, Direct Relief gives donated medicines and supplies ($297m at wholesale value in the year to June 2025, much of it generics for chronic illness, naloxone and contraceptives) to about 2,000 health centres, free clinics and charitable pharmacies serving uninsured patients, and $37m in grants for clinics and disaster recovery (Los Angeles fires, Hurricanes Helene and Milton). The health they buy is priced at what a marginal dollar of US health spending buys (5 deaths and 15 years of healthy life lost to illness per $10m in 2019 dollars, Vanness et al. 2021; deaths valued by age), raised by half for patients who would otherwise go without, and Direct Relief is credited with its own cash's share of the resources, the donated goods being the manufacturers'. The result, about 0.003 years of healthy life per $1,000, is far below the site's median because health is bought at US prices: a year of healthy life costs about a hundred times more at the margin in the US than in the countries Direct Relief serves abroad. Both branches are discounted by the shared missing-data slider: nothing measures the health these medicines produce.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Direct Relief, medicines and grants in the United States (fiscal 2025)",
@@ -200,7 +200,7 @@
       "label": "Baseline death rate (not used)",
       "format": "small",
       "formula": "0",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per QALY at the margin, below), whose health includes years of life saved, so a separate death chain would count them twice."
+      "explainer": "Not used: the death rate these medicines change isn't measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
     },
     {
       "id": "mortality_reduction",
@@ -208,7 +208,7 @@
       "label": "Mortality reduction (not used)",
       "format": "percent",
       "formula": "0",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per QALY at the margin, below), whose health includes years of life saved, so a separate death chain would count them twice."
+      "explainer": "Not used: the death rate these medicines change isn't measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
     },
     {
       "id": "indirect_deaths_ratio",
@@ -216,54 +216,44 @@
       "label": "Indirect deaths per direct death (not used)",
       "format": "number",
       "formula": "0",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per QALY at the margin, below), whose health includes years of life saved, so a separate death chain would count them twice."
+      "explainer": "Not used: the death rate these medicines change isn't measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
     },
     {
       "id": "deaths_averted_per_person",
       "section": "effect",
-      "label": "Deaths averted per patient-year outside the DALYs below (none)",
+      "label": "Deaths averted per patient-year of medicine (before adjustments)",
       "format": "small",
-      "formula": "baseline_mortality_rate * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
-      "explainer": "Zero: deaths are in the health-system figure, counted once."
+      "formula": "goods_local_value / people_reached * need_vs_marginal * deaths_per_dollar",
+      "explainer": "The medicines' value per patient-year, times the need ratio, times deaths averted per marginal US health dollar."
     },
     {
       "id": "share_under5",
       "section": "effect",
-      "label": "Share of deaths averted under five (not used)",
+      "label": "Share of deaths averted under five",
       "format": "percent",
-      "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 0.95
-      },
-      "kind": "judgment",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per QALY at the margin, below), whose health includes years of life saved, so a separate death chain would count them twice. The template's value, kept so the age bands stay defined."
+      "formula": "0",
+      "explainer": "None: the deaths in the threshold are of people losing insurance, adults under 65."
     },
     {
       "id": "share_5_14_of_over5",
       "section": "effect",
-      "label": "Of deaths at five or older, share aged 5 to 14 (not used)",
+      "label": "Of deaths at five or older, share aged 5 to 14",
       "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per QALY at the margin, below), whose health includes years of life saved, so a separate death chain would count them twice. The template's value."
+      "formula": "0",
+      "explainer": "None, as above."
     },
     {
       "id": "share_15_49_of_over15",
       "section": "effect",
-      "label": "Of deaths at 15 or older, share aged 15 to 49 (not used)",
+      "label": "Of deaths at 15 or older, share aged 15 to 49",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.7
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Not used: deaths averted are counted inside the health-system figure (cost per QALY at the margin, below), whose health includes years of life saved, so a separate death chain would count them twice. The template's value."
+      "explainer": "The threshold's deaths are of insured adults under 65; US deaths at 18 to 64 are concentrated at 50 to 64 (chronic disease). Our judgment, 30% (20% to 40%); the rest are valued at the 50 to 74 band."
     },
     {
       "id": "morbidity_value_ratio",
@@ -345,14 +335,14 @@
       "explainer": "The donated goods at the clinics' price plus what Direct Relief bought (at cost)."
     },
     {
-      "id": "us_threshold_2019",
+      "id": "vanness_deaths_per_10m",
       "section": "effect",
-      "label": "US health system's cost per QALY at the margin, 2019 dollars",
-      "format": "usd",
+      "label": "US deaths caused per $10m (2019 dollars) of extra health spending, at the margin",
+      "format": "number",
       "value": {
-        "low": 51000,
-        "best": 104000,
-        "high": 209000
+        "low": 3,
+        "best": 5,
+        "high": 11
       },
       "kind": "estimate",
       "source": {
@@ -360,17 +350,47 @@
         "url": "https://pure.psu.edu/en/publications/a-health-opportunity-cost-threshold-for-cost-effectiveness-analys/",
         "retrieved": "2026-11-13",
         "page": "Abstract, Results",
-        "quote": "implies a cost-effectiveness threshold of $104 000 per QALY (UI, $51 000 to $209 000 per QALY) in 2019 U.S. dollars"
+        "quote": "causing 5 deaths (UI, 3 to 11 deaths), 81 QALYs (UI, 40 to 170 QALYs) lost due to death"
       },
-      "explainer": "The health opportunity cost of US health spending: what a marginal dollar buys in health, estimated from how rising premiums make people drop insurance and the health that costs them. A QALY gained counts as a DALY averted."
+      "explainer": "The health opportunity cost of US health spending (Vanness et al. 2021): rising premiums make people drop insurance, and the care they lose costs lives. Read the other way, a marginal $10m of care saves these deaths.",
+      "interval": 0.95
     },
     {
-      "id": "cost_per_daly",
+      "id": "vanness_qaly_illness_per_10m",
       "section": "effect",
-      "label": "US cost per DALY averted at the margin, 2025 dollars",
-      "format": "usd",
-      "formula": "us_threshold_2019 * @cpi.usa_2025 / @cpi.usa_2019",
-      "explainer": "The 2019 figure in 2025 prices (Convention 8)."
+      "label": "US QALYs lost to illness per $10m (2019 dollars), at the margin",
+      "format": "number",
+      "value": {
+        "low": 6,
+        "best": 15,
+        "high": 32
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Vanness, Lomas, Ahn (2021), A Health Opportunity Cost Threshold for Cost-Effectiveness Analysis in the United States, Annals of Internal Medicine 174(1):25-32",
+        "url": "https://pure.psu.edu/en/publications/a-health-opportunity-cost-threshold-for-cost-effectiveness-analys/",
+        "retrieved": "2026-11-13",
+        "page": "Abstract, Results",
+        "quote": "15 QALYs (UI, 6 to 32 QALYs) lost due to illness"
+      },
+      "explainer": "The same estimate's health lost to illness; a QALY counts as a DALY averted. Deaths are valued by age through value_per_death, so the 81 QALYs lost to death in the same estimate are not used.",
+      "interval": 0.95
+    },
+    {
+      "id": "deaths_per_dollar",
+      "section": "effect",
+      "label": "Deaths averted per marginal US health dollar, 2025 dollars",
+      "format": "small",
+      "formula": "vanness_deaths_per_10m / (1e5 * 100) * @cpi.usa_2019 / @cpi.usa_2025",
+      "explainer": "Per $10m in 2019 prices, into 2025 prices (Convention 8)."
+    },
+    {
+      "id": "illness_dalys_per_dollar",
+      "section": "effect",
+      "label": "Illness DALYs averted per marginal US health dollar, 2025 dollars",
+      "format": "small",
+      "formula": "vanness_qaly_illness_per_10m / (1e5 * 100) * @cpi.usa_2019 / @cpi.usa_2025",
+      "explainer": "Per $10m in 2019 prices, into 2025 prices."
     },
     {
       "id": "need_vs_marginal",
@@ -383,16 +403,16 @@
         "high": 3
       },
       "kind": "judgment",
-      "explainer": "The threshold is the health lost when people lose insurance; the patients here are uninsured or underinsured people at free clinics and health centres who would otherwise go without some of these medicines, and some products are cheap and life-saving (481,000 doses of naloxone, annual report p. 33) (+). Against that, the mix follows what manufacturers give, and some of it replaces what the clinics would have bought anyway (−). Our judgment, 1.5 (0.7 to 3)."
+      "explainer": "The threshold is the health lost when marginal insured people lose coverage; the patients here are uninsured or underinsured people who would otherwise go without some of these medicines. Some products buy health far more cheaply than $104,000 a QALY: naloxone distribution (481,000 doses, annual report p. 33) has been estimated at about $400 a QALY (Coffin and Sullivan 2013), and contraception and insulin for people who can't afford it save money or lives (+). Against that, the mix follows what manufacturers give, short-dated and branded (−). Our judgment, 1.5 (0.7 to 3)."
     },
     {
       "id": "dalys_illness_averted_per_person",
       "section": "effect",
-      "label": "DALYs averted per patient-year of medicine (before adjustments)",
+      "label": "Illness averted per patient-year of medicine, in DALYs (before adjustments)",
       "format": "small",
-      "formula": "goods_local_value / people_reached * need_vs_marginal / cost_per_daly",
+      "formula": "goods_local_value / people_reached * need_vs_marginal * illness_dalys_per_dollar",
       "unit": "DALYs",
-      "explainer": "The medicines' value per patient-year over the US cost per DALY at the margin, times the need ratio; deaths and illness are both in it."
+      "explainer": "The medicines' value per patient-year, times the need ratio, times illness DALYs averted per marginal US health dollar."
     },
     {
       "id": "grt_need_vs_marginal",
@@ -410,33 +430,41 @@
     {
       "id": "grt_dalys",
       "section": "effect",
-      "label": "Grants: DALYs averted (before adjustments)",
+      "label": "Grants: illness averted, in DALYs (before adjustments)",
       "format": "number",
-      "formula": "us_grants * grt_need_vs_marginal / cost_per_daly",
+      "formula": "us_grants * grt_need_vs_marginal * illness_dalys_per_dollar",
       "unit": "DALYs",
-      "explainer": "The grants over the US cost per DALY at the margin, times the need ratio."
+      "explainer": "The grants times the need ratio times illness DALYs per marginal dollar."
+    },
+    {
+      "id": "grt_deaths",
+      "section": "effect",
+      "label": "Grants: deaths averted (before adjustments)",
+      "format": "number",
+      "formula": "us_grants * grt_need_vs_marginal * deaths_per_dollar",
+      "explainer": "The grants times the need ratio times deaths averted per marginal dollar."
     },
     {
       "id": "med_dalys",
       "section": "effect",
-      "label": "Medicines: DALYs averted (before adjustments)",
+      "label": "Medicines: illness averted, in DALYs (before adjustments)",
       "format": "number",
       "formula": "people_reached * dalys_illness_averted_per_person",
       "unit": "DALYs",
-      "explainer": "Patient-years times DALYs per patient-year."
+      "explainer": "Patient-years times illness DALYs per patient-year."
     },
     {
       "id": "internal_validity_adj",
       "section": "adjustments",
-      "label": "How far the threshold's health per dollar holds",
+      "label": "Bias in the threshold's deaths and illness per dollar",
       "format": "multiple",
       "value": {
         "low": 0.6,
-        "best": 0.85,
-        "high": 1
+        "best": 0.9,
+        "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "The threshold is a model estimate (insurance loss and the deaths it causes), with a wide interval; it is not measured for these medicines. 0.85 (0.6 to 1)."
+      "explainer": "Vanness et al. rest on how much losing insurance raises mortality: the Oregon Health Insurance Experiment found no significant effect on mortality over two years, while Miller et al. (2021) found Medicaid expansion cut deaths among low-income adults. The estimate leans on the larger effects. That these medicines' outcomes aren't measured is in the missing-data step. Our judgment, 0.9 (0.6 to 1.1)."
     },
     {
       "id": "external_validity_adj",
@@ -460,12 +488,12 @@
       "label": "Share of the outcome that wouldn't have happened without Direct Relief",
       "format": "percent",
       "value": {
-        "low": 0.25,
-        "best": 0.5,
-        "high": 0.8
+        "low": 0.35,
+        "best": 0.6,
+        "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "Uninsured patients can sometimes get medicines through manufacturers' patient-assistance programmes, Medicaid enrolment or the clinic's own 340B purchases, and other charities (Americares, Dispensary of Hope) supply clinics too; some grant-funded work would have found other funders. Our judgment, 0.5."
+      "explainer": "Some patients would get the same medicines through manufacturers' patient-assistance programmes or Medicaid enrolment, and other charities (Americares, Dispensary of Hope) supply the same clinics; some grant-funded work would have found other funders. (Products the clinic would have bought free its budget, which the threshold already values.) Our judgment, 0.6 (0.35 to 0.85)."
     },
     {
       "id": "attribution_share_shared",
@@ -664,10 +692,10 @@
     {
       "id": "deaths_averted",
       "section": "outcome",
-      "label": "Deaths averted outside the DALYs (none)",
+      "label": "Deaths averted, both branches, after adjustments",
       "format": "number",
-      "formula": "people_reached * deaths_averted_per_person * med_total_adj",
-      "explainer": "Zero, as deaths are in the DALYs."
+      "formula": "people_reached * deaths_averted_per_person * med_total_adj + grt_deaths * grt_total_adj",
+      "explainer": "Medicines and grants, each with its own adjustments."
     },
     {
       "id": "value_per_death",
@@ -734,11 +762,11 @@
     {
       "id": "outcome_total",
       "section": "outcome",
-      "label": "Total units of value",
+      "label": "Units of value in the year",
       "format": "number",
-      "formula": "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity + uov_from_daly",
+      "formula": "(uov_deaths + uov_stillbirths + uov_income + uov_from_daly) * (1 + unmodelled_benefits_adj) + uov_morbidity",
       "unit": "units of value",
-      "explainer": "Every outcome in units of value, side effects at the shared weight."
+      "explainer": "Deaths and illness (the DALYs bridged), side effects at the shared weight on all of them; the template's formula leaves the bridged DALYs outside the side-effect share, which here would make it count nothing."
     },
     {
       "id": "uov_per_dollar",
