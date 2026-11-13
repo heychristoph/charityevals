@@ -2,7 +2,7 @@
 
 The British Heart Foundation (BHF) is the UK's largest charitable funder of research into heart and circulatory disease. It also runs health information, support, CPR training and the national defibrillator network, funds pilots of new care in the NHS, and campaigns on policy. This is charityevals' own model of its research, its NHS pilots and its policy work in the year to 31 March 2026. Its information, support and CPR work is a separate model, [health and support](/british-heart-foundation-charityevals-health).
 
-We estimate **<span data-figure="headline" data-model="british-heart-foundation-charityevals">0.025</span> years of healthy life per $1,000** you give to this work. The health-and-support model gives **<span data-figure="headline" data-model="british-heart-foundation-charityevals-health">0.005</span>**. The charity's figure in the rankings weights the two by spending: about two thirds this model, one third health and support. Almost all of the research figure rests on judgment: how much of the world's heart disease a year of research averts, how many years sooner, and what share of the field BHF is. The range runs across several orders of magnitude. None of the three branches has measured outcomes for BHF's own spending, so each is discounted for missing data.
+We estimate **<span data-figure="headline" data-model="british-heart-foundation-charityevals">0.01</span> years of healthy life per $1,000** you give to this work. The health-and-support model gives **<span data-figure="headline" data-model="british-heart-foundation-charityevals-health">0.005</span>**. The charity's figure in the rankings weights the two by spending: about two thirds this model, one third health and support. Almost all of the research figure rests on judgment: how much of the world's heart disease a year of research averts, how many years sooner, and what share of the field BHF is. The range runs across several orders of magnitude. None of the three branches has measured outcomes for BHF's own spending, so each is discounted for missing data.
 
 ### What the charity does
 
@@ -30,8 +30,8 @@ Research is the medical-research template's chain:
 - **Burden:** the world's cardiovascular burden, 436 million DALYs a year (GBD 2023).
 - **Share averted:** what a year of the field's research averts once adopted, 0.3% a year (one judgment, 0.05% to 1%). Coronary deaths in England and Wales fell about 4% a year from 1981 to 2000, and treatments explain 42% of that. Rich countries carry a fifth of the world's burden, uptake elsewhere is lower, and about half of the gain is uptake of older advances rather than new research.
 - **Timing:** brought forward 5 years, after a 17-year wait.
-- **Adjustments:** our trust in the evidence (0.7), then BHF's share of the world's cardiovascular research funding (about 1%).
-- **Check:** a 9% return in UK health gains with a 17-year lag, the figure for UK cardiovascular research, implies about the same healthy years per pound as the chain. The model shows both rows.
+- **Adjustments:** our trust in the evidence (0.7), then BHF's share of the world's cardiovascular research funding, industry's included (about 0.5%).
+- **Check:** a 9% return in UK health gains with a 17-year lag, the figure for UK cardiovascular research, implies about twice the healthy years per pound of the chain. The model shows both rows.
 
 The implementation pilots follow the same chain at UK scale:
 
@@ -60,7 +60,7 @@ The result divides spending by what past work of the kind achieved, so it is a p
 - **The share of the burden a year of research averts:** moves the result about 14 times across its range.
 - **The missing-data discount and the next dollar against the past average** (your value judgments).
 - **Years brought forward:** 2 to 15 years.
-- **BHF's share of the field:** 0.5% to 2%.
+- **BHF's share of the field:** 0.3% to 0.8%.
 - **The discount rate:** a 17-year wait makes the result sensitive to it.
 
 Research is about 93% of the result, policy about 5% and the pilots about 2%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
@@ -68,7 +68,7 @@ Research is about 93% of the result, policy about 5% and the pilots about 2%. Th
 ### Biggest uncertainties
 
 - No study measures what one funder's research is worth. The chain is calibrated on returns-to-research studies: 9% a year in health gains for UK cardiovascular research, 10% for cancer. Their authors call these best-case figures, and they count only UK gains.
-- Credit is split by share of funding. Industry pays for more than half of all cardiovascular research, and we count all of it; BHF is about 1% of the total.
+- Credit is split by share of funding. Industry pays for most cardiovascular research, and we count all of it; BHF is about 0.5% of the total.
 - The smokefree-generation effect is modelled, not observed. New Zealand repealed its own ban before it took effect.
 - The pilots are new and report no outcomes yet. How often a pilot spreads, and how much its care achieves outside a trial, are our judgments.
 
@@ -110,6 +110,8 @@ Rebuild, independent audit round 1 (1 high, 6 medium, 7 low). What changed:
 - **Left as they are:** two reading-only reference rows the lint flags as unused, which hold the returns-to-research check. Research's spread by world population is the site's rule for global research.
 
 Rebuild, independent audit round 2: no high findings, 1 medium, 10 low. The auditor checked every new death-age fact against the source. The medium is that the family's other charityevals research model (St Jude) doesn't yet split its DALYs into deaths valued by age. The lows each move this result by 3% or less, so they are left as they are: weighting the research deaths by where the gains fall, five-year weights at 50–69, a UK illness share for smoking, and judged over-80 shares where data exists. Two wording fixes were made.
+
+Change of method (2026-11-13), from the audit of our Cancer Research UK model: industry's part of the field is now global pharmaceutical R&D times cardiovascular's share of it (about 7%, a judgment), as for cancer, instead of the share industry pays of all US medical research. BHF's share of the field fell from 1% to 0.5%, and the result by about half.
 
 ### Sources
 

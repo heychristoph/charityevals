@@ -31,7 +31,7 @@ Research is the medical-research template's chain, as in our [British Heart Foun
 - **Share averted:** what a year of the field's research averts once adopted, 0.13% a year (one judgment, 0.03% to 0.5%). The US cancer death rate fell 34% from 1991 to 2022. About half of that came from earlier detection and better treatment, the rest mostly from less smoking. Rich countries carry under a quarter of the world's cancer burden, uptake elsewhere is lower, and about half of the gain is uptake of older advances rather than new research.
 - **Timing:** brought forward 5 years, after a 15-year wait.
 - **Adjustments:** our trust in the evidence (0.7), then Cancer Research UK's share of the world's cancer research funding, about 0.6%. All funders together spend about $100bn a year: some $16bn from governments and charities, and some $85bn from industry, for which cancer is the largest area (38% of its new trials).
-- **Check:** the 10% return in UK health gains found for UK cancer research implies about 25 times the chain's figure per pound. That study credits UK research with UK gains generously and calls itself a best case. The world also spends several times as much on cancer research as on heart research, for a smaller burden. The model shows both rows.
+- **Check:** the 10% return in UK health gains found for UK cancer research implies about 30 times the chain's figure per pound. That study credits UK research with UK gains generously and calls itself a best case. The world also spends several times as much on cancer research as on heart research, for a smaller burden. The model shows both rows.
 
 The policy branch follows the government's impact assessment of the law, with the same figures as our British Heart Foundation model:
 
@@ -62,7 +62,7 @@ Research is about 57% of the result, policy about 36% and information about 6%. 
 
 ### Biggest uncertainties
 
-- No study measures what one funder's research is worth. The chain is calibrated on the record of falling cancer death rates and on returns-to-research studies, and the two disagree by about 25 times.
+- No study measures what one funder's research is worth. The chain is calibrated on the record of falling cancer death rates and on returns-to-research studies, and the two disagree by about 30 times.
 - Credit is split by share of funding. Industry pays for most cancer research, and we count all of it.
 - The smokefree-generation effect is modelled, not observed.
 - What a standing information service does to diagnosis has not been measured; campaign evaluations are before-and-after comparisons.
@@ -82,7 +82,12 @@ Mechanical checks: lint, the normalization invariants and the reference class (`
 
 Independent audit round 1 (1 high, 0 medium, 2 low). What changed:
 - **Cancer Research UK's share of the field:** industry's cancer research was scaled from the share industry pays of all US medical research. Cancer is industry's largest area (38% of its new trials), so industry's part is now global pharmaceutical R&D times cancer's share. The share fell from 1.5% to 0.6%, and the result from 0.003 to 0.002.
+- **Our British Heart Foundation model** counted industry the old way. It now counts cardiovascular's share of the industry's R&D too, which halves its result.
 - **Smaller fixes:** the half of the fall in cancer deaths credited to detection and treatment is labelled as our judgment; the royalty shares passed on are said to be counted as cost.
+
+Independent audit round 2: a pass, with no high findings, 1 medium and 2 low. What changed:
+- **The medium:** the British Heart Foundation change above.
+- **The lows:** the range of the share of the field now says what widens it beyond its anchors, and the check against the returns study gives the right ratio, about 30 times.
 
 ### Sources
 
