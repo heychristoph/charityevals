@@ -125,10 +125,14 @@ function summarise(xs: number[], draws: number): Distribution | undefined {
     return i + 1 < xs.length ? xs[i] * (1 - f) + xs[i + 1] * f : xs[i];
   };
   const round = (x: number) => Number(x.toPrecision(4));
+  const q = QUANTILES.map((p) => round(at(p)));
+  const mid = q[9], lo = q[0], hi = q[q.length - 1];
+  const unstable = !(mid > 1 / 3 && mid < 3) || hi / mid > 50 || (lo > 0 ? mid / lo > 50 : lo < -mid);
   return {
-    q: QUANTILES.map((p) => round(at(p))),
+    q,
     mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
     zero: round(xs.filter((x) => x <= 0).length / xs.length),
+    ...(unstable ? { unstable: true } : {}),
   };
 }
 

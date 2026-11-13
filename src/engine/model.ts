@@ -928,6 +928,10 @@ export type Distribution = {
   mean: number;
   /** The share of draws at zero or below: the chance the programme does no good (or harm). */
   zero: number;
+  /** The simulation can't be relied on: its middle is more than 3× from the best guess, or its range runs
+   * more than 50× either side of it (a small difference of large numbers, a ratio near zero). The model
+   * then counts at its best guess at every risk, and carries a caveat. */
+  unstable?: boolean;
 };
 
 const riskNodes = new WeakSet<Node>();
@@ -939,7 +943,7 @@ export const isRiskFactor = (n: Node) => riskNodes.has(n);
 export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
   if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_QUANTILE)) return undefined;
   const d = lib.distributions?.[m.id];
-  if (!d || !(d.q[MIDDLE] > 0)) return undefined;
+  if (!d || d.unstable || !(d.q[MIDDLE] > 0)) return undefined;
   const pts = QUANTILES.flatMap((p, i) => [num(p), num(d.q[i] / d.q[MIDDLE])]);
   const n: Node = { type: "call", fn: "interp", args: [assumption(RISK_QUANTILE), ...pts] };
   riskNodes.add(n);
@@ -949,9 +953,16 @@ export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityev
 
 /** A model's plausible range (5% to 95% of its simulation) around a headline `central` that already
  * carries the reader's risk factor: undefined without a simulation. */
+/** The caveat on a model whose simulation can't be relied on. */
+export function unstableFlag(lib: Library, m: ResolvedModel): { level: "warn"; short: string; text: string } | undefined {
+  return lib.distributions?.[m.id]?.unstable
+    ? { level: "warn", short: "unstable", text: "Small changes to its inputs swing its result wildly, so its range can't be simulated reliably and the risk setting doesn't move it" }
+    : undefined;
+}
+
 export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>): { low: number; high: number } | undefined {
   const d = lib.distributions?.[m.id];
-  if (!d || !(d.q[MIDDLE] > 0)) return undefined;
+  if (!d || d.unstable || !(d.q[MIDDLE] > 0)) return undefined;
   const best = central / riskFactor(lib, m, a);
   return { low: (best * d.q[0]) / d.q[MIDDLE], high: (best * d.q[QUANTILES.length - 1]) / d.q[MIDDLE] };
 }

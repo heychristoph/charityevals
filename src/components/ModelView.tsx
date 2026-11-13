@@ -1,7 +1,7 @@
 import type React from "react";
 import { useMemo } from "react";
 import { lib, rawFacts, bulkRaw } from "../lib/data";
-import { buildLibrary, compute, plausibleRange, type Library } from "../engine/model";
+import { buildLibrary, compute, plausibleRange, unstableFlag, type Library } from "../engine/model";
 import { useAssumptionValues, useResultFor } from "../lib/use-results";
 import { useOverrides } from "../lib/assumption-state";
 import { useLiveDistribution, withPageDistribution } from "../lib/live-distribution";
@@ -40,7 +40,7 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
     if (!Object.keys(edits).length && !live) return r.flags;
     const s = sensitivity(engine, model, av, "charityevals", edits);
     const range = plausibleRange(engine, model, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
-    return [...flags(model, { ...s, jointLow: range.low, jointHigh: range.high }), ...[coverageFlag(lib, model)].filter((f) => !!f)];
+    return [...flags(model, { ...s, jointLow: range.low, jointHigh: range.high }), ...[coverageFlag(lib, model), unstableFlag(engine, model)].filter((f) => !!f)];
   }, [model, av, edits, r.flags, live, engine]);
 
   return (

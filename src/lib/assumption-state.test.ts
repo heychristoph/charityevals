@@ -43,11 +43,13 @@ describe("value sets", () => {
   it("set only sliders that exist, within their ends", () => {
     for (const p of PRESETS)
       for (const [id, v] of Object.entries(p.values)) {
-        const r = assumptions.rows.find((x) => x.id === id) as { value: { low: number; high: number }; slider?: { low?: number; high?: number }; fixed?: boolean } | undefined;
+        const r = assumptions.rows.find((x) => x.id === id) as { value: number | { low: number; high: number }; slider?: { low?: number; high?: number }; fixed?: boolean } | undefined;
         expect(r, `${p.id}: ${id}`).toBeDefined();
         expect(r!.fixed, `${p.id}: ${id}`).toBeFalsy();
-        expect(v).toBeGreaterThanOrEqual(Math.min(r!.slider?.low ?? r!.value.low, r!.value.low));
-        expect(v).toBeLessThanOrEqual(Math.max(r!.slider?.high ?? r!.value.high, r!.value.high));
+        // The slider's ends where it has them, else the value's range.
+        const range = typeof r!.value === "number" ? { low: r!.value, high: r!.value } : r!.value;
+        expect(v).toBeGreaterThanOrEqual(r!.slider?.low ?? range.low);
+        expect(v).toBeLessThanOrEqual(r!.slider?.high ?? range.high);
       }
   });
 });
