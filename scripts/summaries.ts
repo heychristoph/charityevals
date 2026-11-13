@@ -75,7 +75,7 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
     const short = new Map(rows.map((r, i) => [r.id as string, r.id === m.output!.row ? (r.id as string) : `r${i.toString(36)}`]));
     // Leaves `$assumption`, `@fact.row` and `#model-id` alone.
     const rename = (f: string) => f.replace(/#[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?|(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => (w.startsWith("#") ? w : short.get(w) ?? w));
-    const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}) }));
+    const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}), ...(typeof r.drawn_with === "string" ? { drawn_with: short.get(r.drawn_with) ?? r.drawn_with } : {}) }));
     const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
     // A stand-in folds the native and species rows away, so its output names only the bottom line.
     const { native: _native, species: _species, ...output } = (raw.output ?? {}) as Record<string, unknown>;

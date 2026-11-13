@@ -120,6 +120,27 @@ function spreadOf(v: number, published: { low: number; high: number } | undefine
   return { spread: Math.abs(Math.log(high / low)) / 2, low: Math.min(low, high), high: Math.max(low, high) };
 }
 
+const yearIndexes_ = new WeakMap<ResolvedModel, Set<string>>();
+/** Rows compared with a timeline year (unit "Year") in a formula: the year a cost or impact period begins
+ * or ends, a position on the timeline, never an uncertain quantity (drawn as 2.07 instead of 2, a sheet's
+ * `if(year = begins_in_year, …)` drops a whole period). */
+function yearIndexes(m: ResolvedModel): Set<string> {
+  let out = yearIndexes_.get(m);
+  if (out) return out;
+  out = new Set<string>();
+  const isYearRow = (id: string) => m.byId.get(id)?.unit === "Year";
+  const cmp = /\b([a-z_][a-z0-9_]*)\s*(?:<=|>=|=|<|>)\s*([a-z_][a-z0-9_]*)\b/g;
+  for (const r of m.rows) {
+    if (!r.formula) continue;
+    for (const [, x, y] of r.formula.matchAll(cmp)) {
+      if (isYearRow(x) && m.byId.has(y)) out.add(y);
+      if (isYearRow(y) && m.byId.has(x)) out.add(x);
+    }
+  }
+  yearIndexes_.set(m, out);
+  return out;
+}
+
 export function uncertainty(lib: Library, m: ResolvedModel, values: Record<string, number>, av: Record<string, number>, view: View, inputs: Record<string, number> = {}): Uncertainty {
   const a = viewAssumptions(m, av, view);
   const feeding = rowsFeeding(m);
@@ -141,7 +162,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   }
   for (const id of feeding) {
     const r = m.byId.get(id);
-    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || r.unit === "Year" || CONSTANT.test(r.label) || isYear(r.label, id, values[id], hasRange(inputRange(r, view)))) continue;
+    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || r.unit === "Year" || yearIndexes(m).has(id) || CONSTANT.test(r.label) || isYear(r.label, id, values[id], hasRange(inputRange(r, view)))) continue;
     const range = inputRange(r, view);
     const source = sourceOf(r);
     const v = values[id];

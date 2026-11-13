@@ -49,13 +49,12 @@ every `expected` (the sheet's cached values).
   imported: unfinished".
 - An estimate made before the charity existed (an idea or incubation report) is shown only if the
   charity actually runs the modelled programme today (cite where it says so) and no model based on
-  the charity's actual data exists. Mark it `theoretical`, so the site flags it as purely
-  theoretical; otherwise record it in `inventory/` as "not shown" with the reason.
+  the charity's actual data exists. Mark it `theoretical` (`{ reason, runs, url, checked }`); otherwise
+  record it in `inventory/` as "not shown" with the reason.
 - An owner with `published: false` in owners.json asked us not to publish its models yet: don't import
   them; record them in `inventory/` as "not imported: owner's request".
 - The evaluator's write-up and its sheet. Record publisher, title, URL, sheet URL, `published`
-  (the ranking uses it), today as `retrieved`, and `license` as owners.json states it (its `permission`
-  note shows on the page).
+  (the ranking uses it), today as `retrieved`, and `license` (the source's own terms).
 - The write-up's CEA section explains why each number is what it is: that is explainer material.
 
 ## 2. Get the rows
@@ -70,9 +69,9 @@ every `expected` (the sheet's cached values).
   - GiveWell grant sheets: `scripts/import-givewell-grants.py` (runs `scripts/link-parameters.py`),
     then `python3 scripts/link-resource-shares.py`. Both only touch GiveWell models: for another
     evaluator, extend their patterns or link by hand.
-  - Then `npx tsx scripts/summaries.ts` (the browser stand-ins; `npm run check` fails when stale),
-    `npx tsx scripts/bulk-writeups.ts` (a generated write-up for charities with no other), and record
-    the import in `inventory/`.
+  - Then `scripts/missing-data.ts` (classified, §5), `scripts/beneficiary-countries.ts` (the model's
+    countries in `OURS`, INV-20), `scripts/summaries.ts`, `scripts/bulk-writeups.ts`, and record the
+    import in `inventory/`. Many at once: [references/batch.md](references/batch.md).
 
 ## 3. Reproduce the evaluator (layer E)
 
@@ -102,7 +101,7 @@ every `expected` (the sheet's cached values).
 - Where our view uses another number inside layer E (a shared fact, a correction): the row holds ours,
   `published` holds the evaluator's, and the explainer says "changed for consistency", their number
   and why. The evaluator view uses `published`, so the sheet still reproduces.
-- A program that doesn't fit: leave it out and say so, rather than force it.
+- A programme that fits no step gets a bridge to the scale (normalization.md 2.6) with ranged judgments.
 - **Mark** (normalization.md 2.16, 2.18) side-effect rows `side_effect` where the effect enters, and a
   chance that one event happens at all `single_event` (`{ with }` for chances that move together,
   `{ one_of }` for scenarios), never a yearly rate or a share of many.
@@ -149,9 +148,8 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
 - A floor in text ("more than 10x") is taken at the floor, labelled "at least".
 - **A past average is not the next dollar.** Where the model's cost-effectiveness is an organisation's (or
   programme's) past spending over what that spending won (campaign or policy wins, papers, money moved;
-  not a unit cost of delivery, not a projected budget), multiply by the charity's `@next_dollar.<charity>`
-  (facts/next_dollar.json, normalization.md 2.10; the slider `$marginal_vs_past_average` until written) in
-  an `ours` section (`published` 1). Set
+  not a unit cost of delivery, not a projected budget), multiply by `@next_dollar.<charity id, - as _>`
+  (facts/next_dollar.json; write it by normalization.md 2.10 if missing) in an `ours` section (`published` 1). Set
   the model's `estimate_basis`: `past_average`, `marginal` (the next grant or planned work) or
   `unit_cost` (a price per item delivered); INV-18 checks that only `past_average` reads the slider.
 - **Missing data** (normalization.md 2.12, INV-21): classify the model in scripts/missing-data.ts
@@ -201,7 +199,7 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   facts/sad_factors.json (one with a `change` note) reads the fact, with the evaluator's figure in
   `published`, as in step 3.
 - Outcomes not on the scale (papers, people reached, policy wins) need a bridge: our judgments, with
-  ranges and reasons, in an `ours` section. Without one the model is shown but not ranked.
+  ranges and reasons, in an `ours` section; a model without one isn't finished.
 
 ## 6. Ranking and the charity record
 
@@ -212,7 +210,8 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   charity), found by content as well as title (INV-16).
   The bottom line is the grant's own location column and the best-guess column, never a bound or
   scenario column (INV-16 checks the location against the sheet's title). One dot
-  per evaluator; the charity's row shows its primary evaluator's figure.
+  per evaluator; the charity's row shows its primary evaluator's figure. Where the charity has `lines`,
+  your model id must match a line's `models` pattern (edit the pattern), or it doesn't rank.
 - charities/<id>.json gets `spending` (programme expenses, USD, the year, the accounts' URL and page) and
   `lines` (the accounts' finest split, each with `dollars`, `source` and, where a model of it exists, a
   `models` pattern over model ids), summing to programme spending (normalization.md 2.17); other
@@ -251,7 +250,8 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
   its reason in src/engine/normalization-waivers.json; the allowlist stays empty. Remove stale waivers.
 - `npx tsx scripts/summaries.ts`, then `npx tsx scripts/simulation-check.ts <id>`: if unstable, fix the
   cause it prints in our view, else say so in the report (it ranks at its best guess, with a caveat).
-- `npm run check`, `npx vitest run`, `npx tsc --noEmit`; look at the page with `npm run dev`.
+- `npm run check`, `npx vitest run`, `npx tsc --noEmit`; look at the page with `npm run dev` (not in an
+  unattended run).
 
 ## 9. Report
 

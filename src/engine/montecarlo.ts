@@ -21,11 +21,13 @@ function rng(seed: number) {
 }
 const hash = (s: string) => [...s].reduce((h, c) => (Math.imul(h, 31) + c.charCodeAt(0)) >>> 0, 2166136261);
 
-type Spec = { key: string; draw: (z: number) => number };
+/** `group`: rows drawn together (`drawn_with`) share one z. */
+type Spec = { key: string; draw: (z: number) => number; group?: string };
 
 /** How to draw one input from a standard normal z: split at the best guess, so the best guess is the
  * median and an asymmetric range stays asymmetric. */
-function spec(d: Driver, best: number, interval: number | undefined, shape: string | undefined, share: boolean): Spec | undefined {
+/** `percent`: the row is a percentage (format percent): only then is a negative value an adjustment added to 1. */
+function spec(d: Driver, best: number, interval: number | undefined, shape: string | undefined, share: boolean, percent = false): Spec | undefined {
   if (!Number.isFinite(best)) return undefined;
   const z = interval ? normInv((1 + interval) / 2) : Z90;
   const clip = (x: number) => (share ? Math.min(1, Math.max(0, x)) : x);
@@ -33,7 +35,9 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
     // A default spread: symmetric in log space around the best guess; a negative share (an adjustment
     // added to 1) on the factor 1 + x, so it never takes away more than everything.
     const sd = (d.spread / Z90);
-    if (best > -1 && best < 0) return { key: d.key, draw: (g) => (1 + best) * Math.exp(g * sd) - 1 };
+    // A share stated as certain (0% or 100%) with no range stays so.
+    if (share && (best === 0 || best === 1)) return undefined;
+    if (percent && best > -1 && best < 0) return { key: d.key, draw: (g) => (1 + best) * Math.exp(g * sd) - 1 };
     // A share strictly between 0 and 1 spreads on its odds, so it never reaches 0% or 100%.
     if (best > 0 && best < 1 && d.high <= 1) {
       const logit = Math.log(best / (1 - best));
@@ -44,7 +48,7 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
   const { low, high } = d;
   // A share added to 1 (an adjustment of −42%, its range −72% to −19%) can't take away more than all of
   // it: drawn as the factor 1 + x, log-normal, so the factor stays positive.
-  if (shape !== "normal" && low > -1 && high < 1 && low < 0 && low <= best && best <= high) {
+  if (percent && shape !== "normal" && low > -1 && high < 1 && low < 0 && low <= best && best <= high) {
     const lo = Math.log((1 + best) / (1 + low)) / z, hi = Math.log((1 + high) / (1 + best)) / z;
     return { key: d.key, draw: (g) => clip((1 + best) * Math.exp(g * (g < 0 ? lo : hi)) - 1) };
   }
@@ -58,7 +62,7 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
 }
 
 /** What a simulation needs: the inputs to draw and the result to compare with. */
-type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; events: { id: string; p: number; key: string; one_of: boolean }[]; gauss: () => number; random: () => number };
+type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; events: { id: string; p: number; key: string; one_of: boolean }[]; groups: Set<string>; gauss: () => number; random: () => number };
 
 /** A simulation's plan at assumption values `av` (default: the site's) with the reader's edits fixed:
  * an edited number is the reader's, so it isn't drawn. Undefined for a model with no comparable result or
@@ -89,11 +93,11 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
       const r = m.byId.get(d.id);
       const best = values[d.id];
       const share = r?.format === "percent" && best >= 0 && best <= 1 && (typeof r.value !== "object" || (r.value.high ?? 1) <= 1);
-      const s = spec(d, best, r?.interval, r?.shape, !!share);
-      if (s) specs.push({ ...s, key: d.id });
+      const s = spec(d, best, r?.interval, r?.shape, !!share, r?.format === "percent");
+      if (s) specs.push({ ...s, key: d.id, ...(r?.drawn_with ? { group: r.drawn_with } : {}) });
     } else if (d.scope === "fact") {
       const f = lib.facts.get(d.id);
-      const s = f && spec(d, pickValue(f.value), f.interval, f.shape, false);
+      const s = f && spec(d, pickValue(f.value), f.interval, f.shape, false, f.format === "percent");
       if (s) specs.push({ ...s, key: `@${d.id}` });
     }
   }
@@ -111,7 +115,8 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     while (b === 0) b = random();
     return Math.sqrt(-2 * Math.log(a)) * Math.cos(2 * Math.PI * b);
   };
-  return { lib, m, av, edits, central, specs, events, gauss, random };
+  const groups = new Set(specs.flatMap((s) => (s.group ? [s.group] : [])));
+  return { lib, m, av, edits, central, specs, events, groups, gauss, random };
 }
 
 /** A miss is drawn as a vanishing chance rather than 0, a hit as all but certain: a model that divides by
@@ -124,7 +129,13 @@ const MISS = 1e-9;
 function drawInto(p: Plan, n: number, xs: number[], smooth: number[]) {
   for (let i = 0; i < n; i++) {
     const inputs: Record<string, number> = { ...p.edits };
-    for (const s of p.specs) inputs[s.key] = s.draw(p.gauss());
+    // Rows drawn together take one z per group (the group's own row included).
+    const zs: Record<string, number> = {};
+    const grouped = p.groups;
+    for (const s of p.specs) {
+      const g = s.group ?? (grouped.has(s.key) ? s.key : undefined);
+      inputs[s.key] = s.draw(g ? (zs[g] ??= p.gauss()) : p.gauss());
+    }
     if (p.events.length) {
       const y = headline(p.lib, p.m, p.av, inputs) / p.central;
       // One uniform draw per key: events sharing it happen together as far as their chances allow; a key's

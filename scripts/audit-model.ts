@@ -73,7 +73,8 @@ if (!m) {
 const av = assumptionValues(lib.assumptions);
 const findings: Finding[] = [
   ...own.map((e) => ({ severity: "high" as const, code: "schema", message: e, fix: "Fix the model file so it loads." })),
-  ...lintModel(lib, m, new Date()),
+  // The lint holds build-cea's rules: an evaluator's model is checked by the invariants instead (as check.ts does).
+  ...(m.owner === "charityevals" ? lintModel(lib, m, new Date()) : []),
 ].sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);
 
 // Results, ranges and swings are in years of healthy life per $1,000, as the site shows them.
