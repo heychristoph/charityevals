@@ -296,7 +296,7 @@ for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)
     const out: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(o)) {
       out[k] = v;
-      if (k === "cause" && want !== undefined) { out.beneficiaries = want; out.beneficiaries_note = d.note; }
+      if (k === "cause" && want !== undefined) { out.beneficiaries = want; out.beneficiaries_note = (d as { note?: string }).note; }
     }
     next = JSON.stringify(out, null, 2) + "\n";
   }
