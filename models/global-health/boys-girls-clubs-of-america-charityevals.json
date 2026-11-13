@@ -1,0 +1,865 @@
+{
+  "id": "boys-girls-clubs-of-america-charityevals",
+  "kind": "charity",
+  "cause": "global-health",
+  "template": "domestic-services",
+  "estimate_basis": "unit_cost",
+  "charity": "boys-girls-clubs-of-america",
+  "owner": "charityevals",
+  "summary": "Boys & Girls Clubs of America (BGCA) is the national organisation of about 1,000 local Club organisations, which run nearly 5,500 after-school and summer Clubs for 1.6 million members aged 5 to 18 and reach 2.57 million more children through outreach. In 2025 it spent $354 million on programmes: $213 million in grants to Clubs (two-thirds of it federal money passed through) and the rest on training, programme design, standards and help for new Clubs; all of it is modelled, as BGCA's share of the movement's member-years at the movement's cost per member, for 2025. Members' gains are built from the research on after-school programmes (no controlled evaluation of Clubs exists), valued by the adult earnings such gains predict (about 90% of the result), with the child care Clubs give parents (about 10%) and BGCA's advocacy for public funding as a small side effect; both branches are discounted for missing data. The result, about 0.029 years of healthy life per $1,000 (0.002 to 0.5), is under a tenth of the global-health median because the help goes to US families who consume around $24,000 a person a year, where on the site's log-income scale a dollar does far less than for a household on a few dollars a day, and a Club year costs about $1,700. The effect of a Club year on later earnings, the discount rate and the cost per member drive it.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: Boys & Girls Clubs of America",
+    "url": "https://charityevals.org/boys-girls-clubs-of-america-charityevals",
+    "published": "2026-11-14",
+    "retrieved": "2026-11-14"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "Boys & Girls Clubs of America and Subsidiaries, consolidated financial statements, years ended 31 December 2025 and 2024 (audited, signed 20 May 2026)",
+      "url": "https://www.bgca.org/wp-content/uploads/2026/06/BGCA-2025-Signed-Consolidated-FS-Only-5-20-26.pdf"
+    },
+    {
+      "type": "data",
+      "title": "Boys & Girls Clubs of America, 2025 Annual Report",
+      "url": "https://www.bgca.org/wp-content/uploads/2026/08/2025-BGCA-Annual-Report.pdf"
+    },
+    {
+      "type": "data",
+      "title": "Boys & Girls Clubs of America, Form 990 for 2024 (public disclosure copy)",
+      "url": "https://www.bgca.org/wp-content/uploads/2026/03/Public-Disclosure-Copy-BGCA-2024-990.pdf"
+    },
+    {
+      "type": "data",
+      "title": "Afterschool Alliance, America After 3PM 2020",
+      "url": "https://afterschoolalliance.org/documents/AA3PM-2020/National-AA3PM-2020-Fact-Sheet.pdf"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled programmes in 2025 (both programme lines)",
+      "format": "usd",
+      "explainer": "Both programme lines of the accounts, modelled together: grants passed to Clubs and BGCA's own services to them (branches below), and BGCA's advocacy for public funding, booked inside the two lines, whose cost is in this total but buys no member-years (nat_spend) and whose result is adv_value_share.",
+      "formula": "program_expenses"
+    },
+    {
+      "id": "grants_to_clubs",
+      "section": "cost",
+      "label": "Grants to member Clubs in 2025 (programme services)",
+      "format": "usd",
+      "value": 212770000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America and Subsidiaries, consolidated financial statements, years ended 31 December 2025 and 2024 (audited, signed 20 May 2026)",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/06/BGCA-2025-Signed-Consolidated-FS-Only-5-20-26.pdf",
+        "page": "Consolidated statement of functional expenses 2025, p. 6 (PDF p. 8), Awards and Grants, total programme services",
+        "quote": "Awards and Grants 71,600 141,170 212,770",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Awards and grants in the two programme lines in 2025 ($71,600 thousand + $141,170 thousand). Of it, $139,746 thousand is government grants passed through to Clubs (statement of activities: 'Includes Pass Through to Clubs for 2025 and 2024 of $139,746 and $181,400'), mostly the US Department of Justice's mentoring and youth-programme funds (OJJDP); the rest is private gifts BGCA raises and passes on. Clubs spend it on their own programmes, so it is modelled as what Clubs do with it (domestic-services pitfalls: grants to member charities)."
+    },
+    {
+      "id": "nat_spend",
+      "section": "cost",
+      "label": "BGCA's own services to Clubs in 2025 (training, programme design, standards, new Clubs)",
+      "format": "usd",
+      "formula": "program_spend - grants_to_clubs - @boys_girls_clubs_of_america.advocacy_cost_2025",
+      "explainer": "The rest of programme spending less the estimated cost of advocacy (facts/boys_girls_clubs_of_america.json): BGCA's staff and contractors who train Club staff (training conferences $6.5 million), write the national programmes, run safety and quality standards and the youth outcomes survey, and help open new Clubs."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 396021000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America and Subsidiaries, consolidated financial statements, years ended 31 December 2025 and 2024 (audited, signed 20 May 2026)",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/06/BGCA-2025-Signed-Consolidated-FS-Only-5-20-26.pdf",
+        "page": "Consolidated statement of functional expenses 2025, p. 6 (PDF p. 8)",
+        "quote": "Total Expenses by Function 178,112 175,883 353,995 23,028 18,998 42,026 396,021",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Total expenses by function in 2025: programmes, management and general ($23,028 thousand) and fundraising ($18,998 thousand, including the $2,435 thousand of special events' direct costs that the statement of activities nets against event revenue)."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 353995000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America and Subsidiaries, consolidated financial statements, years ended 31 December 2025 and 2024 (audited, signed 20 May 2026)",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/06/BGCA-2025-Signed-Consolidated-FS-Only-5-20-26.pdf",
+        "page": "Consolidated statement of activities, p. 5 (PDF p. 7)",
+        "quote": "Leadership Training, Development, and Support of Youth Programs 175,883",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Programme services in 2025, in thousands of dollars in the statements: on-site assistance to member Clubs and establishment of new Clubs $178,112 thousand plus leadership training, development and support of youth programmes $175,883 thousand = $353,995 thousand (the annual report's 'Total Program Services 353,995')."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "households_reached",
+      "section": "reach",
+      "label": "Members' households: one per member-year BGCA's spending pays for",
+      "format": "integer",
+      "explainer": "Members credited to BGCA's spending: its grants plus its own services (weighted by nat_vs_club_value) over what the movement spends per member. Counted per member, one child each.",
+      "formula": "members_credited"
+    },
+    {
+      "id": "members",
+      "section": "reach",
+      "label": "Club members in 2025 (movement-wide)",
+      "format": "integer",
+      "value": 1600000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America, 2025 Annual Report",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/08/2025-BGCA-Annual-Report.pdf",
+        "page": "p. 3, Scale & Reach",
+        "quote": "Clubs provide services to 1.6 million youth through membership and to an additional 2.57 million youth through community outreach",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Members of the roughly 1,000 local Club organisations and 480 youth centres on military installations, 2025. A member is registered for the year; most attend some days, not every day (daily_attendance)."
+    },
+    {
+      "id": "outreach_youth",
+      "section": "reach",
+      "label": "Youth reached through community outreach in 2025 (movement-wide)",
+      "format": "integer",
+      "value": 2570000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America, 2025 Annual Report",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/08/2025-BGCA-Annual-Report.pdf",
+        "page": "p. 3, Scale & Reach",
+        "quote": "an additional 2.57 million youth through community outreach in nearly 5,500 Club locations",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Children reached by events, sports leagues and school-day programmes without Club membership."
+    },
+    {
+      "id": "daily_attendance",
+      "section": "reach",
+      "label": "Children and teens at a Club on an average day, 2025",
+      "format": "integer",
+      "value": 445000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America, 2025 Annual Report",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/08/2025-BGCA-Annual-Report.pdf",
+        "page": "p. 3, At a Glance",
+        "quote": "Nearly 445,000 kids & teens engage with a Boys & Girls Club each day.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Used for how often a member comes (attendance_share)."
+    },
+    {
+      "id": "attendance_share",
+      "section": "reach",
+      "label": "Share of weekdays an average member attends",
+      "format": "percent",
+      "formula": "daily_attendance / members",
+      "explainer": "445,000 a day over 1.6 million members: about 28%, some 1.4 days a week on average (counting Club days as weekdays)."
+    },
+    {
+      "id": "cost_per_member_year",
+      "section": "reach",
+      "label": "The movement's spending per member per year (local Clubs plus BGCA's own services)",
+      "format": "usd",
+      "value": {
+        "low": 950,
+        "best": 1700,
+        "high": 2900
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: no movement-wide accounts are published. Anchors: Boys & Girls Clubs of Boston spent $31.5 million in the year to June 2023 (Form 990, ProPublica Nonprofit Explorer, https://projects.propublica.org/nonprofits/organizations/42103922) for about 13,000 to 14,000 young people (bgcb.org): about $2,300 each in a high-cost city; Boys & Girls Clubs of the Valley (Arizona) spent 'more than $15 million' to serve '13,000+ K-12 youth' in 2020-21 (Arizona State University's economic impact report, https://www.bgcaz.org/wp-content/uploads/2022/09/ASU-Economic-Impact-Report-Underscores-Boys-Girls-Clubs-of-the-Valleys-Positive-Outcomes-on-Youth-Community-2022.pdf): about $1,150, in a pandemic year; and the movement's 81,100 professional staff (annual report p. 4), mostly part-time, at about $20,000 a year each, would cost about $1.6 billion, some 60% of a youth-service budget, so about $2.7 billion in all, $1,700 per member. The anchors are local spending only; BGCA's own services add about $86 a member ($138 million over 1.6 million). $1,700, from $950 to $2,900. It includes the outreach work (outreach_weight) and BGCA's own services, so BGCA's share of the movement's member-years is its spending over this."
+    },
+    {
+      "id": "outreach_weight",
+      "section": "reach",
+      "label": "An outreach child's benefit as a share of a member's",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.03,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: outreach is a sports league, a school-day session or an event, a few hours in the year against a member's 50-odd days. 3%, from 0 to 10%. Outreach counts only through this row; its cost is inside cost_per_member_year."
+    },
+    {
+      "id": "nat_vs_club_value",
+      "section": "reach",
+      "label": "Value of a dollar of BGCA's own services against a dollar the Clubs spend",
+      "format": "multiple",
+      "value": {
+        "low": 0.4,
+        "best": 1,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, Convention 2 (credit by share of resources): BGCA's training, programme design, standards and help for new Clubs are part of the resources behind the movement's member-years, credited at the movement's average cost per member (1). The range is the doubt either way: national support is overhead to the Clubs and could do less than a dollar of Club staff time (0.4), or training and standards raise the quality of many Clubs' spending at once (1.5). No study measures it."
+    },
+    {
+      "id": "members_credited",
+      "section": "reach",
+      "label": "Members whose Club year BGCA's 2025 spending pays for",
+      "format": "number",
+      "formula": "(grants_to_clubs + nat_spend * nat_vs_club_value) / cost_per_member_year",
+      "explainer": "BGCA's grants and own services over the movement's spending per member: its share of the movement's members, by share of resources."
+    },
+    {
+      "id": "household_size",
+      "section": "reach",
+      "label": "People in a member's household",
+      "format": "number",
+      "formula": "@household_size.united_states",
+      "unit": "people",
+      "explainer": "The site's US household size, used by the parents' branch (members' families with children are larger; on the log scale for small amounts the size barely moves the result). The children's branch counts each child once (edu_children_reached): a child's earnings gain is their own, shared with the household later through the resource-sharing multiplier."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People in the credited members' households",
+      "format": "integer",
+      "formula": "households_reached * household_size",
+      "explainer": "Members' households times the US household size: the people the parents' branch counts."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: BGCA's full cost per person in the credited members' households, its own overhead included."
+    },
+    {
+      "id": "edu_children_reached",
+      "section": "reach",
+      "label": "Children's branch: children reached (member-years credited, outreach children at their weight)",
+      "format": "number",
+      "formula": "households_reached * (1 + outreach_youth / members * outreach_weight)",
+      "explainer": "Members credited (one per member's household), plus the outreach children their spending also reaches (2.57 million for 1.6 million members) at their weight."
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Life satisfaction gained per person per year while the effect lasts (points, 0-10)",
+      "format": "number",
+      "unit": "points",
+      "explainer": "0: no study of Clubs or after-school programmes measures life satisfaction. Children's social-emotional gains are in the effect size below, valued by the adult earnings they predict (as in the United Way model), so counting them as wellbeing too would count them twice.",
+      "formula": "0"
+    },
+    {
+      "id": "ls_effect_years",
+      "section": "effect",
+      "label": "Years the wellbeing effect lasts",
+      "format": "number",
+      "unit": "years",
+      "explainer": "Not used: the wellbeing branch is 0.",
+      "formula": "1"
+    },
+    {
+      "id": "wellbys_per_person",
+      "section": "effect",
+      "label": "WELLBYs per person reached, discounted",
+      "format": "number",
+      "formula": "ls_gain_per_person_year * pv_annuity_due(1, $discount_rate, ls_effect_years)",
+      "unit": "WELLBYs",
+      "explainer": "Point-years, discounted at the shared rate."
+    },
+    {
+      "id": "edu_effect_sd",
+      "section": "effect",
+      "label": "Children: effect of a year's Club membership, in standard deviations of school and behaviour outcomes",
+      "format": "number",
+      "value": {
+        "low": 0.02,
+        "best": 0.09,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, a blend of the after-school research. No controlled evaluation of Club membership exists; the effect is built from after-school programmes, the work Clubs do (Power Hour homework help, sports, arts, prevention programmes, mentoring). Durlak, Weissberg and Pachan's meta-analysis (American Journal of Community Psychology 2010, https://doi.org/10.1007/s10464-010-9300-6) finds 0.12 SD on grades and 0.17 on tests (Table 3) across 75 programmes, the effects in those using sequenced, active, focused and explicit (SAFE) skill training and the rest near zero; Kremer and others' Campbell-style meta-analysis of 24 studies with at-risk youth (Journal of Youth and Adolescence 2015, https://doi.org/10.1007/s10964-014-0226-4) finds 'Mean effects were small and non-significant for attendance and externalizing behaviors'; the national evaluation of 21st Century Community Learning Centers found no academic gains (James-Burdumy and others, Mathematica for the US Department of Education, 2005). Club-specific studies are non-experimental: Public/Private Ventures' 30-month study of teens (Arbreton and others, 'Making Every Day Count', 2009) links more frequent attendance with better outcomes. 0.09, the after-school figure the United Way model uses, between the null evaluations and Durlak's means; 0.02 to 0.2. How often members come is implementation_adj's question."
+    },
+    {
+      "id": "edu_earnings_per_sd",
+      "section": "effect",
+      "label": "Children: adult earnings gain per standard deviation of the childhood gain",
+      "format": "percent",
+      "formula": "@youth_programmes.earnings_gain_per_sd_childhood",
+      "explainer": "The shared figure for US youth programmes (Chetty, Friedman and Rockoff 2014): 10% (5% to 13%), below their 13% because much of the gain is social-emotional, which predicts earnings less than test gains."
+    },
+    {
+      "id": "edu_years_until_work",
+      "section": "effect",
+      "label": "Children: years from a Club year to working age",
+      "format": "number",
+      "value": {
+        "low": 8,
+        "best": 11,
+        "high": 15
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Our judgment from the members' ages (annual report p. 4): 41% aged 5 to 9, 29% 10 to 12, 18% 13 to 15, 8% 16 to 18; average about 10.5, so about 11 years to working age at about 22. From 8 to 15 years (work starting at 18 to 26). Every year is discounted at the shared rate."
+    },
+    {
+      "id": "edu_ln_gain_per_child",
+      "section": "effect",
+      "label": "Children: ln(consumption) gain per member-year, all working years, discounted",
+      "format": "number",
+      "formula": "ln(1 + edu_effect_sd * edu_earnings_per_sd) * pv_annuity_due(1, $discount_rate, @givewell_shared.long_term_benefit_years) / (1 + $discount_rate) ^ edu_years_until_work * @givewell_shared.resource_sharing_multiplier",
+      "explainer": "The proportional earnings gain on the log scale for each of the shared working years, discounted to the Club year at the shared rate and shared with the household (GiveWell's resource-sharing multiplier, as the United Way model does). A proportional gain is the same on the log scale whatever the adult's income. Taxes on the gain are not netted out, as in the site's other income models."
+    },
+    {
+      "id": "cc_weekly_price_2020",
+      "section": "effect",
+      "label": "Parents: average weekly fee of an after-school programme, 2020 (US$)",
+      "format": "usd",
+      "value": 99.4,
+      "kind": "observed",
+      "source": {
+        "title": "Afterschool Alliance, America After 3PM 2020, national fact sheet",
+        "url": "https://afterschoolalliance.org/documents/AA3PM-2020/National-AA3PM-2020-Fact-Sheet.pdf",
+        "page": "p. 2",
+        "quote": "$99.40 average weekly cost of afterschool programs, among parents who report that they pay a fee",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "What parents who pay for after-school care pay per week, from the national household survey of 31,000 families. The same survey: 78% of parents of children in programmes agree that the programme helps them keep their job."
+    },
+    {
+      "id": "cc_weeks",
+      "section": "effect",
+      "label": "Parents: weeks a year of Club care",
+      "format": "number",
+      "value": {
+        "low": 36,
+        "best": 42,
+        "high": 50
+      },
+      "kind": "judgment",
+      "unit": "weeks",
+      "explainer": "Our judgment: the school year's 36 weeks after school plus part of the summer, when many Clubs run full-day camps. 42, from 36 to 50."
+    },
+    {
+      "id": "cc_value_share",
+      "section": "effect",
+      "label": "Parents: share of that price that is a real gain to the family",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, the counterfactual of this branch (asked here only): families who would otherwise pay for care save the fee less the Club's own small one (most Clubs charge $0 to $50 a year: Boys & Girls Clubs of Boston waives it for 2025-26); families whose child would otherwise be home alone, with relatives or in a free school programme gain supervision and time they value below the market price. 30%, from 10% to 60%."
+    },
+    {
+      "id": "cc_value_per_household",
+      "section": "effect",
+      "label": "Parents: value of a member's year of Club care to the family (US$, 2025 prices)",
+      "format": "usd",
+      "formula": "cc_weekly_price_2020 * @cpi.usa_2025 / @cpi.usa_2020 * cc_weeks * attendance_share * cc_value_share",
+      "explainer": "The weekly price in 2025 dollars, times the weeks, times how often the member comes, times the share that is a real gain."
+    },
+    {
+      "id": "value_per_person",
+      "section": "effect",
+      "label": "Parents: value of the year's Club care per household member (US$)",
+      "format": "usd",
+      "explainer": "The child-care value spread over the household. The children's own gain is the earnings branch, a different change for different people.",
+      "formula": "cc_value_per_household / household_size"
+    },
+    {
+      "id": "consumption_mean",
+      "section": "effect",
+      "label": "Average consumption per person in the country by the household survey (US$)",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024",
+      "explainer": "The Consumer Expenditure Survey's consumption per person, 2024, in the same dollars as the value (2025's price change is small)."
+    },
+    {
+      "id": "poorest_fifth_consumption_share",
+      "section": "effect",
+      "label": "Anchor: consumption per person of the poorest fifth of US households, as a share of the average person's",
+      "format": "percent",
+      "formula": "@united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile",
+      "explainer": "Context: the poorest fifth spend 45% of the average household's (BLS 2024), in households of 1.6 people against 2.4: per person 0.67 of the average."
+    },
+    {
+      "id": "clients_vs_poorest_fifth",
+      "section": "effect",
+      "label": "Members' families' consumption per person relative to the poorest fifth's",
+      "format": "multiple",
+      "value": {
+        "low": 0.82,
+        "best": 1.1,
+        "high": 1.4
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: 63% of members live in households that qualify for free or reduced-price school lunch (annual report p. 4), under 185% of the poverty line, and families with children consume less per person than the average; the rest are near-poor and middle-income. 1.1 of the poorest fifth's 0.67 (0.74 of the average person's), from 0.82 to 1.4."
+    },
+    {
+      "id": "recipients_consumption_share",
+      "section": "effect",
+      "label": "The people served's consumption per person, as a share of the average",
+      "format": "percent",
+      "explainer": "The anchor times the judgment above.",
+      "formula": "poorest_fifth_consumption_share * clients_vs_poorest_fifth"
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "The people served's consumption per person (US$)",
+      "format": "usd",
+      "formula": "consumption_mean * recipients_consumption_share"
+    },
+    {
+      "id": "income_years",
+      "section": "effect",
+      "label": "Years the help keeps its money value for the people served",
+      "format": "number",
+      "unit": "years",
+      "explainer": "1: the year's care is worth its money in that year.",
+      "formula": "1"
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "Parents: ln(consumption) gain per household member from a member's year of care",
+      "format": "number",
+      "formula": "ln(1 + value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)",
+      "explainer": "The site's one log-income scale at the clients' own consumption: a dollar does far less for a US household than for one living on a few dollars a day."
+    },
+    {
+      "id": "dalys_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "unit": "DALYs",
+      "explainer": "0 in the main chain: Clubs' health outcomes (physical activity, meals, substance use) have no controlled evidence of their own; they are in unmodelled_benefits_adj.",
+      "formula": "0"
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "explainer": "0: no study finds deaths averted by after-school programmes; violence prevention is in unmodelled_benefits_adj.",
+      "formula": "0"
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.02,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Context, at zero weight while no deaths are counted (deaths_averted_per_person is 0): the members' ages, 5 to 18, so the chain stays complete."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Context, at zero weight while no deaths are counted (deaths_averted_per_person is 0): the members' ages, 5 to 18, so the chain stays complete."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Context, at zero weight while no deaths are counted (deaths_averted_per_person is 0): the members' ages, 5 to 18, so the chain stays complete."
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights by the age band of each death, times your value of a life: the site's one value of a death."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (validity of the after-school literature for the children's branch), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.65,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment on the internal validity of the literature chain, as in the United Way model's 0.85: Durlak and others' meta-analysis draws on many small, published evaluations, where publication bias and self-reported outcomes inflate effects; the large null evaluations (21st Century Community Learning Centers, Kremer and others) are already in the effect's range. Two doubts are counted elsewhere, once each: social-emotional gains predicting earnings less (the shared earnings figure) and whether members come as often as the studies' participants (implementation_adj). The parents' branch is at face value (its doubt is cc_value_share). 0.85, from 0.65 to 1."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "explainer": "1: the effect is against control groups whose children did what they would otherwise do, other programmes included; the parents' counterfactual is in cc_value_share. BGCA's money could be replaced by others: leverage_funging_adj.",
+      "formula": "1"
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "explainer": "Convention 2: the movement's paid spending (in cost_per_member_year) over all resources behind the member-years, volunteers' hours at the US value of a volunteer hour and donated space added. Grants from government and other funders to Clubs are in the paid spending and already shared through the cost per member.",
+      "formula": "1 / (1 + volunteers * volunteer_hours * @united_states.volunteer_hour_value_2025 / (members * cost_per_member_year) + inkind_space_share)"
+    },
+    {
+      "id": "volunteers",
+      "section": "adjustments",
+      "label": "Club volunteers in 2025",
+      "format": "integer",
+      "value": 160000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America, 2025 Annual Report",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/08/2025-BGCA-Annual-Report.pdf",
+        "page": "p. 4, About Our Club Kids & Staff",
+        "quote": "Volunteers 160,000",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Unpaid adults who coach, tutor and mentor at Clubs."
+    },
+    {
+      "id": "volunteer_hours",
+      "section": "adjustments",
+      "label": "Hours a year per volunteer",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 30,
+        "high": 80
+      },
+      "kind": "judgment",
+      "unit": "hours",
+      "explainer": "Our judgment: most Club volunteers coach a season or help at events; mentors give an hour a week. 30, from 10 to 80."
+    },
+    {
+      "id": "inkind_space_share",
+      "section": "adjustments",
+      "label": "Donated space and other in-kind help, as a share of the movement's spending",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: 2,650 of the 5,500 Club sites are in schools and 210 in public housing (annual report p. 3), usually rent-free; 480 are military youth centres run on bases. 5%, from 0 to 15%."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment (how often members come, against the studies' participants)",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: an average member attends about 28% of weekdays (attendance_share, about 1.4 days a week); participants in the after-school studies typically attended two to three days a week, and the Club-specific studies (Arbreton and others 2009; Anderson-Butcher and others 2003) find outcomes rise with attendance, a dose-response. 0.7, from 0.4 to 1. Applied to the children's branch; the parents' branch already counts attendance."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: Clubs make up part of a lost BGCA grant from local donors and other funders, as the United Way model's agencies do (0.85 there, Andreoni and Payne 2011 on how charities fundraise around grants); about two-thirds of BGCA's grants are restricted federal money passed through, which Clubs could not easily replace, so a little higher: 0.9, from 0.6 to 1."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (Convention 12): BGCA has no controlled evaluation of Club membership, its reach per dollar is a judged cost per member, and the effect comes from the research on after-school programmes. Both branches take the shared missing-data discount."
+    },
+    {
+      "id": "edu_total_adj",
+      "section": "adjustments",
+      "label": "Children's branch: all adjustments",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * missing_data_adj"
+    },
+    {
+      "id": "cc_total_adj",
+      "section": "adjustments",
+      "label": "Parents' branch: all adjustments",
+      "format": "multiple",
+      "formula": "counterfactual_adj * attribution_share * leverage_funging_adj * missing_data_adj"
+    },
+    {
+      "id": "edu_uov",
+      "section": "adjustments",
+      "label": "Children's branch: units of value before adjustments",
+      "format": "number",
+      "formula": "edu_children_reached * edu_ln_gain_per_child * $uov_per_ln_consumption",
+      "unit": "UoV"
+    },
+    {
+      "id": "cc_uov",
+      "section": "adjustments",
+      "label": "Parents' branch: units of value before adjustments",
+      "format": "number",
+      "formula": "people_reached * ln_gain_per_person * $uov_per_ln_consumption",
+      "unit": "UoV"
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(edu_uov * edu_total_adj + cc_uov * cc_total_adj) / (edu_uov + cc_uov)",
+      "explainer": "Outcome-weighted average of the two branches' adjustments, for reading only (Convention 4)."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, effects not modelled, each with its sign: less crime and violence among members beyond their own earnings (+; Schinke, Orlandi and Cole 1992, Journal of Community Psychology, found less drug activity and vandalism in public-housing estates with a new Club, a quasi-experiment, while Kremer and others 2015 find no significant effect on externalising behaviour); meals and snacks (+, mostly paid by the federal child nutrition programme), physical activity and substance-use prevention (+; Clubs' SMART Moves programme); teen pregnancy prevention (+); parents' extra earnings beyond the care's price (+, small at the log scale); members drawn from other youth programmes of similar value (−, partly in the effect's control groups already). +10%, from −5% to +30%.",
+      "side_effect": "added"
+    },
+    {
+      "id": "adv_value_share",
+      "section": "adjustments",
+      "label": "BGCA's advocacy for public funding of Clubs, as a share of the modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.02,
+        "best": 0.03,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "side_effect": "added",
+      "explainer": "Our judgment of what BGCA's advocacy adds, net of its cost to taxpayers. BGCA counts $406.1 million of public funding for Clubs in 2025 ($327.5 million won by state alliances of Clubs, $76.4 million by Clubs with BGCA's help, $2.2 million federal; annual report p. 4), from about $3 million of its own advocacy (facts/boys_girls_clubs_of_america.json; its Form 990 lobbying was $603,556 in 2024). The federal grants it passes through are in the grants branch, not here. Most such money recurs each year and would mostly come anyway (the Habitat for Humanity model's research on advocacy: about 15% of a coalition's money is its doing) and BGCA is one of several parties (the state alliances, Clubs, their boards): perhaps 15% × 30% × $406 million = about $18 million of extra public money for Clubs, six times its advocacy cost. But public money isn't free: on the site's log-income scale a dollar taken from taxpayers costs about 1.2 ÷ $58,500 of ln(consumption), while a Club dollar gains members and parents only a little more, after this model's adjustments, than it costs, so the net is small and could be below zero (as in the Habitat model's US branch). Worked through: $18 million is about 5% of BGCA's cost; a Club dollar gains about 4.3e-5 of ln(consumption) after this model's adjustments, against about 2e-5 for the taxpayer (1.2 ÷ (1.05 × $58,517), the Habitat model's cost of public funds and payer multiple), so about 55% of its value is net: 5% × 55% ≈ +3%, from −2% to +10%: a side effect, added to the modelled value. It is not a separate past-average model because its cost is under 1% of BGCA's spending and its net value near zero."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Children's earnings and parents' care, in GiveWell units of value (after each branch's adjustments)",
+      "format": "number",
+      "formula": "edu_uov * edu_total_adj + cc_uov * cc_total_adj + edu_children_reached * deaths_averted_per_person * value_per_death * edu_total_adj",
+      "unit": "UoV",
+      "explainer": "Each branch times its own adjustments (Convention 4); deaths are 0."
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "edu_children_reached * wellbys_per_person * edu_total_adj",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "edu_children_reached * dalys_averted_per_person * edu_total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj + adv_value_share)",
+      "unit": "DALYs",
+      "explainer": "Every outcome in healthy years by its own unit's conversion, each branch already times its adjustments in the bridges, plus the unmodelled effects and the advocacy's net value as shares."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "salaries_and_related",
+      "section": "donor",
+      "label": "BGCA's salaries, benefits and payroll taxes, 2025",
+      "format": "usd",
+      "value": 100300000,
+      "kind": "observed",
+      "source": {
+        "title": "Boys & Girls Clubs of America and Subsidiaries, consolidated financial statements, years ended 31 December 2025 and 2024 (audited, signed 20 May 2026)",
+        "url": "https://www.bgca.org/wp-content/uploads/2026/06/BGCA-2025-Signed-Consolidated-FS-Only-5-20-26.pdf",
+        "page": "Consolidated statement of functional expenses 2025, p. 6 (PDF p. 8)",
+        "quote": "Total Salaries and Related Expenses 55,973 18,849 74,822 13,240 12,238 25,478 100,300",
+        "retrieved": "2026-11-14"
+      }
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "BGCA's staff pay as a share of its total expenses",
+      "format": "percent",
+      "formula": "salaries_and_related / total_expenses",
+      "explainer": "BGCA's own salaries and related costs over its total expenses: about 25%. The Clubs' staff are theirs, inside the cost per member, not BGCA's."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "The shared gap for staff delivering services locally in rich countries: BGCA's staff are youth-development professionals training and supporting Club staff."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  },
+  "beneficiaries": {
+    "USA": 1
+  },
+  "beneficiaries_note": "Our build: Club members in the US (the 480 youth centres on US military installations abroad serve US service families).",
+  "name": "charityevals' estimate: Boys & Girls Clubs of America"
+}
