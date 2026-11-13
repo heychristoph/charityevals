@@ -1,33 +1,68 @@
 ---
 import Prose from "../layouts/Prose.astro";
 import Setting from "../components/Setting.tsx";
+import { ValueSets, Measures } from "../components/Choices.tsx";
 import { repo } from "../lib/site";
 ---
 
-<Prose title="How this works" active="method" description="Every charity is a model file, imported from an evaluator or built by us from public evidence, ranked in years of healthy life per $1,000 under values you set.">
+<Prose title="How this works" active="method" description="Every charity is a model file, imported from an evaluator or built by us from public evidence, ranked by the good the next $1,000 does, under values you set.">
   <p class="lede">
-    Every charity is ranked by a model: a public file of numbers and formulas that ends in <strong>years of healthy life per $1,000 donated</strong>. Most models come from charity evaluators; the rest we build. Every model then counts the same things the same way, at values you set.
+    Every charity is ranked by one question: <strong>how much good does the next $1,000 you give do?</strong> Each answer is a model, a public file of numbers and formulas. Most come from charity evaluators; the rest we build. Every model then counts the same things the same way, at values you set.
   </p>
 
   <ol class="flow" aria-label="From an evaluator's analysis to the rankings">
-    <li><span class="flow-n">1</span><strong>An evaluator's analysis</strong><span>imported so it reproduces their numbers, or built by us</span></li>
-    <li><span class="flow-n">2</span><strong>One way to count</strong><span>shared figures replace each evaluator's own conversions</span></li>
-    <li><span class="flow-n">3</span><strong>Years of healthy life</strong><span>every unit converted, mostly at rates you set</span></li>
-    <li><span class="flow-n">4</span><strong>Adjustments</strong><span>old, unmeasured or past-average estimates count less</span></li>
-    <li><span class="flow-n">5</span><strong>The rankings</strong><span>per $1,000 given today</span></li>
+    <li><a href="#sources"><span class="flow-n">1</span><strong>A model</strong><span>an evaluator's, rebuilt, or ours</span></a></li>
+    <li><a href="#views"><span class="flow-n">2</span><strong>Our version</strong><span>shared figures and your values replace the evaluator's</span></a></li>
+    <li><a href="#healthy-years"><span class="flow-n">3</span><strong>One scale</strong><span>years of healthy life, at rates you set</span></a></li>
+    <li><a href="#one-way"><span class="flow-n">4</span><strong>Adjustments</strong><span>side effects, unmeasured results, the next dollar, age, distance</span></a></li>
+    <li><a href="#risk"><span class="flow-n">5</span><strong>Risk</strong><span>the chance you accept that impact is lower</span></a></li>
+    <li><a href="#charity-figure"><span class="flow-n">6</span><strong>The rankings</strong><span>per $1,000 given today</span></a></li>
   </ol>
+
+  <h2 id="question">The question, and two ways of thinking about it</h2>
+
+  <h3 id="itn">Importance, neglectedness, tractability</h3>
+  <p>
+    Effective altruists often compare causes on three factors: how big the problem is, how few resources already go to it, and how much of it more effort would solve. <a href="https://80000hours.org/articles/problem-framework/">80,000 Hours</a> shows that multiplied together they give the good done per extra dollar, which is exactly what our models estimate, charity by charity. So we don't score the three separately: scoring them on top would count them twice. The framework is a rough guide where no direct estimate exists (as <a href="https://forum.effectivealtruism.org/posts/Eav7tedvX96Gk2uKE/the-itn-framework-cost-effectiveness-and-cause">Halstead</a> and <a href="https://forum.effectivealtruism.org/posts/MtCAsPMftvJqRBYzr/review-of-itn-critiques">a review of the critiques</a> argue). Here is where each factor lives in our models:
+  </p>
+  <div class="itn" role="table" aria-label="Where importance, neglectedness and tractability are in our models">
+    <div class="itn-row itn-head" role="row"><span role="columnheader">Factor</span><span role="columnheader">In our models</span></div>
+    <div class="itn-row" role="row"><strong role="cell"><a href="#healthy-years">Importance</a></strong><span role="cell">How much each person, animal or tonne helped is worth: the burden of the disease or harm, and your values for a life, income, wellbeing and animals.</span></div>
+    <div class="itn-row" role="row"><strong role="cell"><a href="#risk">Tractability</a></strong><span role="cell">The measured effect of the work, its chance of working at all, and what would have happened anyway.</span></div>
+    <div class="itn-row" role="row"><strong role="cell"><a href="#next-dollar">Neglectedness</a></strong><span role="cell">What the next dollar adds: other funders who would have paid, funders who would give less because you gave, and how much less the next dollar does than past ones. <em>Partly covered: see <a href="#not">what this is not</a>.</em></span></div>
+  </div>
+
+  <h3 id="multipliers">Effectiveness multiplies</h3>
+  <p>
+    Every model is a chain of factors multiplied together, so a charity strong on all of them beats one strong on most by a wide margin, and a tenfold error in any one is a tenfold error in the result. <a href="https://forum.effectivealtruism.org/posts/GzmJ2uiTx4gYhpcQK/effectiveness-is-a-conjunction-of-multipliers">Thomas Kwa</a> shows how these multipliers stack; his commenters add that in honest estimates each is smaller than it first looks. Both show up here: results span about a millionfold, which is why the rankings use a log scale, and each factor is estimated on its own, with its own range.
+  </p>
+  <div class="chain" aria-label="A model as a chain of factors multiplied together">
+    <span class="chain-t">People reached per $</span><span class="chain-op">×</span>
+    <span class="chain-t">Effect on each</span><span class="chain-op">×</span>
+    <span class="chain-t">What that effect is worth</span><span class="chain-op">×</span>
+    <span class="chain-t">Chance it works</span><span class="chain-op">×</span>
+    <span class="chain-t">The share that's the charity's doing</span><span class="chain-op">×</span>
+    <span class="chain-t">What the next dollar adds</span><span class="chain-op">=</span>
+    <span class="chain-t chain-r">Good per $1,000</span>
+  </div>
+  <p class="small muted">
+    Kwa's other multipliers are yours, not the charity's: how much you earn, give and risk. We rank where a given dollar goes.
+  </p>
 
   <h2 id="sources">Where models come from</h2>
   <p>
-    Most are <a href="#imported-models">imported</a> from <a href="/evaluators/givewell">GiveWell</a>, <a href="/evaluators/ace">Animal Charity Evaluators</a>, the <a href="/evaluators/hli">Happier Lives Institute</a>, <a href="/evaluators/founders-pledge">Founders Pledge</a>, <a href="/evaluators/ambitious-impact">Ambitious Impact</a>, <a href="/evaluators/sogive">SoGive</a> and <a href="/evaluators">others</a>. Inputs are marked <strong>observed</strong>, <strong>estimate</strong> or <strong>judgment</strong>, and most cite their source; each model's history page shows every change.
+    <strong>Imported:</strong> every public cost-effectiveness model we found and could read, from <a href="/evaluators/givewell">GiveWell</a>, <a href="/evaluators/ace">Animal Charity Evaluators</a>, the <a href="/evaluators/hli">Happier Lives Institute</a>, <a href="/evaluators/ambitious-impact">Ambitious Impact</a>, <a href="/evaluators/sogive">SoGive</a> and <a href="/evaluators">others</a> (the <a href={`${repo}/tree/main/inventory`}>inventory</a> lists everything and why anything was left out). Each spreadsheet is traced from its bottom line, and every calculated row must match the sheet, or the build fails.
+  </p>
+  <p id="our-models">
+    <strong>Ours:</strong> where no evaluator has looked, an AI agent builds the model by a fixed, published method from the charity's accounts and reports and the research on its kind of work. It covers every programme the money pays for, weighted by spending, and every way the work does good or harm, with every number traced to a source or stated as a judgment with a range. A separate AI reviewer checks it against its sources, for up to three rounds, and it is published only once no serious finding is left. Built blind for seven charities evaluators have analysed, four landed within 3× of the evaluator (<a href={`${repo}/blob/main/docs/eval-skills.md`}>details</a>).
   </p>
   <p id="views">
-    We keep each evaluator's analysis as published, so it still reproduces, but rank our version of it: the site's shared figures and your values in place of the evaluator's own. A row where we use a different number is marked "changed for consistency"; open it to see the evaluator's. The page of each imported model starts from the evaluator's own final figure and shows, step by step, how it becomes ours.
+    Inputs are marked <strong>observed</strong>, <strong>estimate</strong> or <strong>judgment</strong>, and each model's history page shows every change. We keep each evaluator's analysis as published, so it still reproduces, but rank our version: the site's shared figures and your values in place of the evaluator's own. A row where we use a different number is marked "changed for consistency". Each model page starts from the evaluator's own final figure and shows, step by step, how it becomes ours.
   </p>
 
-  <h2 id="healthy-years">One unit: years of healthy life</h2>
+  <h2 id="healthy-years">One scale: years of healthy life</h2>
   <p>
-    A year of healthy life is one person living one more year in full health (a DALY averted). Evaluators count in other units, so each is converted:
+    Every model ends on one scale: <strong>years of healthy life</strong>, one person living one more year in full health (a DALY averted). Evaluators count in other units, so each is converted:
   </p>
   <div class="units">
     <div class="unit"><span class="unit-from">Doubled income for a year</span><span class="unit-by">GiveWell</span></div>
@@ -38,12 +73,12 @@ import { repo } from "../lib/site";
   </div>
   <Setting client:load ids={["uov_per_daly", "daly_per_child_death"]} />
   <p class="small muted">
-    Deaths at other ages count in GiveWell's proportions by age: a school-age child's a little more, an adult's over 50 much less. At the defaults, cash transfers from GiveDirectly come to about 4 healthy years per $1,000, the Against Malaria Foundation to about 23.
+    Deaths at other ages count in GiveWell's proportions by age: a school-age child's a little more, an adult's over 50 much less.
   </p>
 
   <h3 id="wellbeing">Life satisfaction</h3>
   <p>
-    The default makes a year of depression one step lighter count the same through life satisfaction as through the disability weights health researchers use, so both routes agree.
+    The default makes a year of depression one standard deviation milder count the same through life satisfaction as through health researchers' disability weights: a point of life satisfaction for a year is about 24 healthy days.
   </p>
   <Setting client:load ids={["daly_per_wellby"]} />
 
@@ -58,19 +93,25 @@ import { repo } from "../lib/site";
 
   <h3 id="climate">Climate</h3>
   <p>
-    A tonne of CO₂ is valued by the deaths it causes: about 1.9 per 10,000 tonnes (Rethink Priorities), three quarters from the air pollution of burning fuel and a quarter from heat. Pollution deaths come at once, but only tonnes from burning less fuel avert them; heat deaths come about 60 years later and are discounted. These are fixed figures, not sliders. Damage that isn't death, such as lost harvests, counts as zero, so climate figures are probably low.
+    A tonne of CO₂ is valued by the deaths it causes: about 1.9 per 10,000 tonnes (Rethink Priorities), three quarters from the air pollution of burning fuel and a quarter from heat. Pollution deaths come at once, but only tonnes from burning less fuel avert them; heat deaths come about 60 years later and are discounted. Damage that isn't death, such as lost harvests, counts as zero, so climate figures are probably low.
   </p>
+
+  <h3 id="measures">Which measure you see</h3>
+  <p>
+    The rankings can show the same figures in three measures. Each is the healthy-year figure times one rate, so the order never changes, only the numbers:
+  </p>
+  <Measures client:load />
 
   <h2 id="one-way">Adjustments</h2>
   <p>
-    The same rules apply to ours and the evaluators' models alike. The evaluator's own final figure, where each model page starts, has none of them.
+    The same rules apply to every model, ours and the evaluators'.
   </p>
 
-  <h3 id="estimate-age">Old estimates count less</h3>
+  <h3 id="side-effects">Side effects</h3>
   <p>
-    Evaluators re-check what they recommend every year or two; an estimate nobody renewed is less likely to hold. Estimates over 5 years old are left out of the rankings unless you switch them back on. At 5% a year a 2-year-old estimate counts 91%, a 10-year-old one 61%. Age runs to the date the data was last refreshed, so figures don't drift by themselves.
+    Besides what a programme is for, it often does other good or harm: to people around those it helps, to other health outcomes, or by pushing work elsewhere. Each is an estimate in the model like any other number, and this sets how much they count.
   </p>
-  <Setting client:load ids={["ignore_old_estimates", "estimate_age_discount"]} />
+  <Setting client:load ids={["side_effect_weight"]} />
 
   <h3 id="missing-data">Results nobody measured</h3>
   <p>
@@ -78,21 +119,21 @@ import { repo } from "../lib/site";
   </p>
   <Setting client:load ids={["missing_data_discount"]} />
 
-  <h3 id="risk">Risk</h3>
+  <h3 id="next-dollar">The next dollar, and reforms</h3>
   <p>
-    Every result has a plausible range. At 50% each charity counts at its best guess; below 50% at a figure it beats more often, so charities with very uncertain results drop and predictable ones barely move; above 50% long shots gain.
-  </p>
-  <Setting client:load ids={["risk_quantile"]} />
-
-  <h3>Past averages and reforms</h3>
-  <p>
-    Only for the models these apply to. An organisation's past spending over everything it achieved is an average; the next dollar usually does less. A won reform counts only for the years before it would have come anyway, after the wait until it takes effect.
+    Most models estimate the next grant or the cost of one more unit of work. Some divide everything an organisation achieved by everything it spent: an average, and the next dollar usually does less. A won reform counts only for the years before it would have come anyway, after the wait until it takes effect.
   </p>
   <Setting client:load ids={["marginal_vs_past_average", "win_years_counted"]} />
 
+  <h3 id="estimate-age">Old estimates</h3>
+  <p>
+    Evaluators re-check what they recommend every year or two; an estimate nobody renewed is less likely to hold. Estimates over 5 years old are left out unless you switch them back on. At 5% a year a 2-year-old estimate counts 91%, a 4-year-old one 82%.
+  </p>
+  <Setting client:load ids={["ignore_old_estimates", "estimate_age_discount"]} />
+
   <h3 id="near-and-far">The future, and lives far away</h3>
   <p>
-    Future good is discounted, a wait before it starts included. Future generations count through the same rate: at its floor of 0.1% a year lost for ever counts about 1,000 years, at 4% about 25. By default a life counts the same wherever it is; set where you live to count lives further away less.
+    Future good is discounted, a wait before it starts included. Future generations count through the same rate: at its floor of 0.1% a year a loss for ever counts about 1,000 years, at 4% about 25. By default a life counts the same wherever it is; set where you live and a discount to count lives further away less.
   </p>
   <Setting client:load ids={["discount_rate", "home_country", "distance_discount"]} />
 
@@ -102,9 +143,46 @@ import { repo } from "../lib/site";
   </p>
   <Setting client:load ids={["resource_shares"]} />
 
+  <h2 id="risk">Risk and long shots</h2>
+  <p>
+    No result is known exactly. For every model we draw its uncertain inputs 1,000 times, each across its source's range or a default spread where none is given, with your values held fixed, and keep the spread of results. Where a model rests on one event happening at all (a new charity succeeding, a law passing), that event is drawn as happens or doesn't, so a long shot's outcomes are mostly nothing and sometimes a lot.
+  </p>
+  <figure class="risk-fig">
+    <svg viewBox="0 0 460 150" role="img" aria-labelledby="risk-title">
+      <title id="risk-title">A sure thing's outcomes cluster around its best guess; a 1-in-4 long shot's outcomes are nothing three times in four and four times the best guess once in four</title>
+      <text x="0" y="22" class="rk-l">Sure thing</text>
+      <path d="M170 50 C 180 50, 183 14, 190 14 C 197 14, 200 50, 210 50 Z" class="rk-sure" />
+      <text x="0" y="102" class="rk-l">1-in-4 long shot</text>
+      <rect x="120" y="66" width="18" height="44" class="rk-shot" />
+      <path d="M333 110 C 350 110, 360 92, 373 92 C 386 92, 396 110, 413 110 Z" class="rk-shot" />
+      <text x="129" y="126" text-anchor="middle" class="rk-t">nothing, 3 in 4</text>
+      <text x="373" y="126" text-anchor="middle" class="rk-t">4× best guess, 1 in 4</text>
+      <line x1="190" y1="6" x2="190" y2="140" class="rk-best" />
+      <text x="190" y="148" text-anchor="middle" class="rk-t">best guess (both)</text>
+    </svg>
+  </figure>
+  <p>
+    Both have the same best guess, which counts every chance at its odds: a 1-in-4 chance of 4 is 1. The slider sets how much risk you accept that the real impact is lower than the figure counted. At 20%, the real impact is lower one time in five; at 80%, four times in five.
+  </p>
+  <div class="risk-table" role="table" aria-label="The two examples at three risk settings">
+    <div role="row"><span role="columnheader">Accept a risk of</span><span role="columnheader">20%</span><span role="columnheader">50% (default)</span><span role="columnheader">80%</span></div>
+    <div role="row"><span role="rowheader">Sure thing</span><span role="cell">a little below best</span><span role="cell">about best</span><span role="cell">a little above</span></div>
+    <div role="row"><span role="rowheader">Long shot</span><span role="cell">0</span><span role="cell">0</span><span role="cell">4× best</span></div>
+  </div>
+  <Setting client:load ids={["risk_quantile"]} />
+  <p id="hits">
+    <a href="https://coefficientgiving.org/research/hits-based-giving/">Hits-based giving</a> (Coefficient Giving, formerly Open Philanthropy) argues for accepting that most bets fail when the few that succeed do far more. At the default 50%, a long shot with less than even odds counts as 0. The <a href="#value-sets">Hits-based value set</a> counts unmeasured results in full and accepts an 80% risk, so a long shot with better than 1-in-5 odds counts at its payoff.
+  </p>
+
+  <h2 id="value-sets">Value sets</h2>
+  <p>
+    Each set is a few of the values above, chosen together for one point of view. Pick one here or in Your values; change any slider afterwards and you have your own set.
+  </p>
+  <ValueSets client:load />
+
   <h2 id="charity-figure">A charity's figure</h2>
   <p>
-    A charity with several programmes, or one programme in several countries, gets the funding-weighted average of them. The Against Malaria Foundation at the defaults, for example:
+    A charity with several programmes, or one programme in several countries, gets the spending-weighted average of them, where the split is published. The Against Malaria Foundation at the defaults, for example:
   </p>
   <div class="eq" aria-label="Against Malaria Foundation: 80% of 24 plus 12% of 22 plus 6% of 8 plus 2% of 12 is about 23">
     <span class="eq-term"><b>80%</b> × 24<small>DRC</small></span><span class="eq-op">+</span>
@@ -114,40 +192,32 @@ import { repo } from "../lib/site";
     <span class="eq-term eq-result"><b>23</b><small>the charity</small></span>
   </div>
   <p>
-    A charity with analyses from several evaluators shows each as its own dot; its number is the newest analysis from the first of them in a fixed order (GiveWell first, ours last). Charities that move money to others (fundraisers, effective-giving groups) are worth what that money does where it goes, read live from those charities' models. Ambitious Impact estimates made before a charity existed are shown only if it runs that programme today, marked <a href="#theoretical">purely theoretical</a>.
+    Each evaluator's figure stands on its own; we never blend evaluators. A charity analysed by several shows each as its own dot, and its number is the newest analysis from the first of them in a fixed order (GiveWell first, ours last). Where an evaluator's models cover less than 90% of the money behind a charity's programmes, the figure still ranks, with a warning naming what's missing. Charities that move money to others (fundraisers, effective-giving groups) are worth what that money does where it goes. Ambitious Impact estimates made before a charity existed are shown only if it runs that programme today, marked <a href="#theoretical">purely theoretical</a>.
   </p>
 
   <h2 id="ranges">Ranges and warning signs</h2>
   <figure class="range-fig">
     <svg viewBox="0 0 440 64" role="img" aria-labelledby="range-title">
-      <title id="range-title">A result's dot on its bar: the dot uses every best guess, the bar runs from every input at its low end to every input at its high end</title>
+      <title id="range-title">A result's dot on its bar: the dot is the figure at your risk setting, the bar runs from 5% to 95% of the simulated outcomes</title>
       <rect x="70" y="24" width="300" height="10" rx="5" class="rf-bar" />
       <circle cx="190" cy="29" r="8" class="rf-dot" />
-      <text x="70" y="56" class="rf-t">every input low</text>
-      <text x="370" y="56" text-anchor="end" class="rf-t">every input high</text>
-      <text x="190" y="14" text-anchor="middle" class="rf-t">best guesses</text>
+      <text x="70" y="56" class="rf-t">1 in 20 lower</text>
+      <text x="370" y="56" text-anchor="end" class="rf-t">1 in 20 higher</text>
+      <text x="190" y="14" text-anchor="middle" class="rf-t">the figure counted</text>
     </svg>
   </figure>
   <p id="theoretical">
-    Rankings use the dot. The bar is deliberately wide, not a 90% interval. A warning sign marks a charity whose range spans over 100×, whose uncertainty is mostly judgment, whose analysis is over 18 months old, or whose model is purely theoretical. On each model page, every number shows its share of the uncertainty; "Reveal uncertainties" opens the ones behind most of it.
-  </p>
-
-  <h2 id="imported-models">Imported and our own models</h2>
-  <p>
-    <strong>Imported:</strong> every public cost-effectiveness model we found and could read, from GiveWell's grant pages and the other evaluators (the <a href={`${repo}/tree/main/inventory`}>inventory</a> lists everything and why anything was left out). Each spreadsheet is traced from its bottom line, and every calculated row must match the sheet, or the build fails. A few evaluators published only report figures, not a sheet; those models rebuild the figures and say so.
-  </p>
-  <p id="our-models">
-    <strong>Ours:</strong> where no evaluator has looked, an AI agent builds the model by a fixed, published method, from the charity's accounts and reports and the research on its kind of work, never another charity's result. It covers every programme the money pays for, weighted by spending, with every number traced to a source or stated as a judgment with a range. A separate AI reviewer then checks it against its sources; it is fixed and checked again, for up to three rounds, and published only once no serious finding is left. Built blind for seven charities evaluators have analysed, four landed within 3× of the evaluator (<a href={`${repo}/blob/main/docs/eval-skills.md`}>details</a>).
+    Rankings use the dot; the bar is the simulated range from 5% to 95%. Where small changes to a model's inputs swing its result wildly (a small difference of large numbers), the simulation isn't used: the figure stays at its best guess at every risk setting, and the bar runs from every input at its worst end to every input at its best. A warning sign marks a charity whose range spans over 100×, whose uncertainty is mostly judgment, whose analysis is over 18 months old, whose models leave programmes out, whose simulation can't be relied on, or whose model is purely theoretical. On each model page every number shows its share of the uncertainty.
   </p>
 
   <h2 id="judgments">Fixed judgments</h2>
   <p>
-    A judgment that concerns only a few models is a fixed figure rather than a slider, such as how long until a tonne's heat deaths come, stand-ins for species Rethink Priorities hasn't estimated (cows, dogs, cats), or the share of corporate pledges companies keep. Each is marked "judgment" wherever it is used, with a range the bars use. Evidence-based rates are listed with sources under <a href="/data">shared data</a>.
+    A judgment that concerns only a few models is a fixed figure rather than a slider, such as how long until a tonne's heat deaths come, stand-ins for species Rethink Priorities hasn't estimated, or the share of corporate pledges companies keep. Each is marked "judgment" wherever it is used, with a range. Evidence-based rates are listed with sources under <a href="/data">shared data</a>.
   </p>
 
-  <h2>What this is not</h2>
+  <h2 id="not">What this is not</h2>
   <p>
-    Not any evaluator's recommendation, and not endorsed by any evaluator or charity listed. Cost-effectiveness is one input to a giving decision; room for more funding and how well a charity is run matter too, and aren't modelled yet.
+    Not any evaluator's recommendation, and not endorsed by any evaluator or charity listed. Cost-effectiveness is one input to a giving decision. How well a charity is run isn't modelled, and the next dollar is still one share for every charity estimated from past averages, not a figure per charity.
   </p>
 </Prose>
 
@@ -164,7 +234,7 @@ import { repo } from "../lib/site";
     padding: 0 !important;
     margin: var(--s5) 0 !important;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--s2);
   }
   .flow li {
@@ -185,6 +255,15 @@ import { repo } from "../lib/site";
   }
   .flow li span:last-child {
     color: var(--ink-2);
+  }
+  .flow li a {
+    display: grid;
+    gap: 4px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .flow li a:hover strong {
+    text-decoration: underline;
   }
   .flow-n {
     font: 650 13px/1 var(--sans);
@@ -274,5 +353,148 @@ import { repo } from "../lib/site";
   .rf-t {
     font: 12px var(--sans);
     fill: var(--ink-2);
+  }
+  .itn {
+    display: grid;
+    margin: var(--s4) 0;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .itn-row {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: var(--s3);
+    padding: var(--s2) var(--s3);
+    border-top: 1px solid var(--rule);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .itn-row:first-child {
+    border-top: 0;
+  }
+  .itn-head {
+    background: var(--paper-2);
+    font: 600 13px/1.3 var(--sans);
+    color: var(--ink-3);
+  }
+  @media (max-width: 560px) {
+    .itn-row {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+    .itn-head {
+      display: none;
+    }
+  }
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s2);
+    margin: var(--s4) 0 var(--s2);
+  }
+  .chain-t {
+    padding: var(--s2) var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  .chain-r {
+    border-color: var(--cause-global-health);
+    color: var(--cause-global-health);
+    font-weight: 650;
+  }
+  .chain-op {
+    font: 400 20px/1 var(--serif);
+    color: var(--ink-3);
+  }
+  :global(.choices) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s2);
+    margin: var(--s4) 0;
+  }
+  :global(.choice) {
+    display: grid;
+    align-content: start;
+    gap: 4px;
+    padding: var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    text-align: left;
+    font: 14px/1.4 var(--sans);
+    cursor: pointer;
+  }
+  :global(.choice span) {
+    color: var(--ink-2);
+    font-size: 13px;
+  }
+  :global(.choice[aria-pressed="true"]) {
+    border-color: var(--blue);
+    box-shadow: inset 0 0 0 1px var(--blue);
+  }
+  :global(.choice:hover) {
+    border-color: var(--ink-3);
+  }
+  @media (max-width: 560px) {
+    :global(.choices) {
+      grid-template-columns: 1fr;
+    }
+  }
+  .risk-fig {
+    margin: var(--s4) 0;
+    max-width: 460px;
+  }
+  .risk-fig svg {
+    width: 100%;
+    height: auto;
+  }
+  .rk-sure {
+    fill: var(--cause-global-health);
+    opacity: 0.75;
+  }
+  .rk-shot {
+    fill: var(--blue);
+    opacity: 0.75;
+  }
+  .rk-best {
+    stroke: var(--ink-3);
+    stroke-dasharray: 3 3;
+  }
+  .rk-l {
+    font: 600 12px var(--sans);
+    fill: var(--ink-2);
+  }
+  .rk-t {
+    font: 11px var(--sans);
+    fill: var(--ink-2);
+  }
+  .risk-table {
+    display: grid;
+    margin: var(--s3) 0 var(--s4);
+    font-size: 14px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .risk-table > div {
+    display: grid;
+    grid-template-columns: 8.5rem repeat(3, minmax(0, 1fr));
+    gap: var(--s2);
+    padding: var(--s2) var(--s3);
+    border-top: 1px solid var(--rule);
+  }
+  .risk-table > div:first-child {
+    border-top: 0;
+    background: var(--paper-2);
+    font: 600 13px/1.3 var(--sans);
+    color: var(--ink-3);
+  }
+  .risk-table [role="rowheader"] {
+    font-weight: 600;
   }
 </style>
