@@ -1,7 +1,8 @@
 import { lib, modelUrl } from "../lib/data";
 import { comparable } from "../engine/model";
-import { useResultsFor } from "../lib/use-results";
-import { formatYears, plainModelName } from "../lib/format";
+import { useAssumptionValues, useResultsFor } from "../lib/use-results";
+import { useFigure } from "../lib/metric";
+import { plainModelName } from "../lib/format";
 import InfoTip, { WithTip } from "./InfoTip";
 
 const month = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "short", timeZone: "UTC" }) : "");
@@ -13,6 +14,7 @@ const month = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { yea
 export default function VariantList({ ids, current, dated = false, names = {} }: { ids: string[]; current: string; dated?: boolean; names?: Record<string, string> }) {
   const models = ids.map((id) => lib.models.get(id)!);
   const results = useResultsFor(models);
+  const fig = useFigure(lib, useAssumptionValues());
   const rows = dated ? ids.map((id) => results.find((r) => r.model.id === id)!) : results;
   return (
     <>
@@ -21,7 +23,7 @@ export default function VariantList({ ids, current, dated = false, names = {} }:
           <li key={model.id} className={model.id === current ? "current" : ""}>
             <a href={modelUrl(lib, model)}>{names[model.id] ?? plainModelName(model.name)}</a>
             {dated && <span className="muted small">{lib.owners.get(model.owner)?.short} · {month(model.source?.published)}{model.theoretical ? " · purely theoretical" : ""}</span>}
-            <span className="num">{comparable(lib, model) ? formatYears(central) : "not ranked"}</span>
+            <span className="num">{comparable(lib, model) ? fig.format(central) : "not ranked"}</span>
           </li>
         ))}
       </ol>

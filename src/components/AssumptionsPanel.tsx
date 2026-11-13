@@ -10,6 +10,7 @@ import { setAssumption, resetAssumptions, useOverrides, PRESETS, applyPreset, pr
 import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
 import type { Row } from "../engine/schema";
 import InfoTip, { WithTip } from "./InfoTip";
+import { METRICS, setMetric, useMetricId } from "../lib/metric";
 import "./assumptions.css";
 
 const STEPS = 400;
@@ -267,6 +268,35 @@ export function Markdown({ text }: { text: string }) {
   );
 }
 
+/** What the figures are shown in: one factor for every charity, so the order never changes. */
+function Measure() {
+  const active = useMetricId();
+  const group = useId();
+  return (
+    <fieldset className="measure small">
+      <legend>Measure in</legend>
+      {METRICS.map((m) => (
+        <span key={m.id} className="measure-option tip-host">
+          <label>
+            <input
+              type="radio"
+              name={group}
+              value={m.id}
+              checked={active === m.id}
+              onChange={() => {
+                track("metric", { key: m.id });
+                setMetric(m.id);
+              }}
+            />
+            {m.label}
+          </label>
+          <InfoTip label={`What's ${m.label.toLowerCase()}?`}>{m.about}</InfoTip>
+        </span>
+      ))}
+    </fieldset>
+  );
+}
+
 /** Ready-made sets of values; moving any slider from one makes the values Custom. */
 function Presets({ overrides }: { overrides: Record<string, number> }) {
   const active = presetOf(overrides);
@@ -362,6 +392,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
         </div>
       </div>
       {PRESETS.length > 0 && <Presets overrides={overrides} />}
+      <Measure />
       {shown.map((g) => {
         // Evidence-based rates aren't sliders: the side panel leaves them out, the full page lists them.
         const rows = lib.assumptions.rows.filter((r) => r.section === g.id && !(compact && r.fixed));
