@@ -32,7 +32,9 @@ For an orchestrator running many import-cea or build-cea agents, and for each ag
 - Records every source it looked at in `inventory/<owner>-models.json` (a new evaluator gets a new file and
   a line in inventory/README.md): `{ "title", "report", "sheet", "published", "charity", "status":
   "imported" | "not imported: <reason>", "model_id" }`. Text-only figures get a minimal model from the
-  stated inputs, not a skip.
+  stated inputs, not a skip. (A build's sources live in its model and write-up: no inventory entry.)
+- A new ranged fact whose low or high equals a number in another model trips INV-4 there: check it's a
+  coincidence and add a waiver with the reason.
 - Reports the model ids it added, its charity's `lines` change, and anything it couldn't settle.
 
 ## Shared registers (merge by hand, one entry per model)

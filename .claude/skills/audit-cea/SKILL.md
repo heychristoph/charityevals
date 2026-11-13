@@ -5,15 +5,15 @@ description: Independently audit a charityevals cost-effectiveness model (models
 
 # Audit a CEA
 
-This skill checks one cost-effectiveness model (result in **years of healthy life per $1,000
+This skill checks one cost-effectiveness model (result in **years of healthy life per 1,000 dollars
 donated**) and produces a findings list, each finding with a severity and a concrete fix. It is the
 middle of build-cea's loop (build → independent audit → fix, until no high-severity finding remains),
 run in a fresh subagent, and also audits any imported model. Terms:
 [glossary](../build-cea/references/templates.md#glossary).
 
-You are the independent reviewer: check the explainers, don't trust them. You **don't edit the
+You are the independent reviewer: check explainers, don't trust them. You **don't edit the
 model**; you write findings its builder can act on. Work only from the model, its write-up, the blind
-list and the previous round's findings, never the builder's notes or research log, so your check
+list and the previous round's findings, never the builder's notes, so your check
 doesn't inherit the builder's reasoning.
 
 Inputs: the model path; optionally the write-up path, the previous round's findings, a blind list
@@ -147,7 +147,7 @@ so the severity rests on a number.
 
 ```
 # Audit: <model id>, round <n>
-Result: <x> <unit>/$ = <y> years of healthy life per $1,000 (combined range <lo>–<hi>); cause median <m> (×<r>). Verdict: <pass | fix needed>.
+Result: <x> <unit>/$ = <y> years of healthy life per 1,000 dollars (combined range <lo>–<hi>); cause median <m> (×<r>). Verdict: <pass | fix needed>.
 Model-sha: <what `npx tsx scripts/audit-receipt.ts <id>` prints for the model you audited>
 Scope: <programmes and year modelled, against the charity's spending breakdown>
 Mechanical: lint <h/m/l>, invariants <violations or none>, normalization-audit <violations or none>
