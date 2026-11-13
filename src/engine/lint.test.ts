@@ -69,6 +69,10 @@ describe("lint", () => {
   it("flags pledges kept not read from the shared fulfilment rate", () => {
     expect(codes(withRow(base(), "implementation_adj", typed("implementation_adj", { low: 0.6, best: 0.8, high: 0.95 })))).toContain("shared:implementation_adj");
   });
+  it("accepts implementation_adj = 1 for observed switches only, not a typed rate", () => {
+    expect(codes(withRow(base(), "implementation_adj", { formula: "1" }))).not.toContain("shared:implementation_adj");
+    expect(codes(withRow(base(), "implementation_adj", { formula: "0.9" }))).toContain("shared:implementation_adj");
+  });
   it("flags a SADs figure typed in instead of the shared per-change figure", () => {
     expect(codes(withRow(base(), "sads_per_animal_year", typed("sads_per_animal_year", 12, "estimate")))).toContain("shared:sads_per_animal_year");
   });

@@ -6,8 +6,8 @@ existing pledges (`acc_` branch) beside new pledges (`new_`).
 - **Accountability on a stock of existing pledges** (`acc_`): one year's pressure gets one year's share
   of the compliance it causes, anchored on the observed pace:
   - `acc_switched_per_year`: animals that came out of cages in the year under the pledges pressed (published
-    by the charity or a tracker). Observed switches are delivered already: no
-    `implementation_adj`, no division by years of pressure. Without a count: the pressed stock (all
+    by the charity or a tracker). Observed switches are delivered already:
+    `implementation_adj` = 1, no division by years of pressure. Without a count: the pressed stock (all
     animals under the pledges) × `implementation_adj` ÷ `acc_years_pressed` (start of the pressure to
     the deadlines, a judgment).
   - `acc_counterfactual_adj`: the share of those switches that wouldn't have come *yet* without the
