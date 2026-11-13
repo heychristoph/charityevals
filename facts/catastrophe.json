@@ -316,7 +316,7 @@
   },
   {
    "id": "ai_extinction_cut_per_million",
-   "label": "AI: share of the yearly extinction risk a typical $1 million of work removes, while it counts",
+   "label": "AI misalignment: share of the yearly misalignment extinction risk a typical $1 million of work removes, while it counts",
    "unit": "share per $1M",
    "format": "small",
    "value": {
@@ -331,11 +331,11 @@
     "retrieved": "2026-11-13",
     "page": "Small-scale AI Misalignment Project: $200k-1M, 96.4% chance of no effect, else a relative cut of 1e-6 to 5.5e-5 in extinction and catastrophe risk"
    },
-   "explainer": "Rethink Priorities' preset for a typical project against AI risk, as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening)."
+   "explainer": "Rethink Priorities' preset for a typical project against AI misalignment (its Small-scale AI Misalignment Project), which cuts only the misalignment share of AI risk (1 − ai_misuse_share_of_risk; work against misuse has its own preset, ai_misuse_*_cut_per_million), as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening)."
   },
   {
    "id": "ai_catastrophe_cut_per_million",
-   "label": "AI: share of the yearly catastrophe risk a typical $1 million of work removes, while it counts",
+   "label": "AI misalignment: share of the yearly misalignment catastrophe risk a typical $1 million of work removes, while it counts",
    "unit": "share per $1M",
    "format": "small",
    "value": {
@@ -350,7 +350,7 @@
     "retrieved": "2026-11-13",
     "page": "Small-scale AI Misalignment Project: $200k-1M, 96.4% chance of no effect, else a relative cut of 1e-6 to 5.5e-5 in extinction and catastrophe risk"
    },
-   "explainer": "Rethink Priorities' preset for a typical project against AI risk, as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening)."
+   "explainer": "Rethink Priorities' preset for a typical project against AI misalignment (its Small-scale AI Misalignment Project), which cuts only the misalignment share of AI risk (1 − ai_misuse_share_of_risk; work against misuse has its own preset, ai_misuse_*_cut_per_million), as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening)."
   },
   {
    "id": "ai_misuse_extinction_cut_per_million",
@@ -392,22 +392,60 @@
   },
   {
    "id": "ai_misuse_share_of_risk",
-   "label": "AI: share of AI catastrophe risk that comes from misuse rather than misalignment",
+   "label": "AI: share of AI extinction risk that comes from misuse rather than misalignment",
    "unit": "share",
    "format": "percent",
    "value": {
     "low": 0.05,
     "best": 0.1,
-    "high": 0.5
+    "high": 0.2
    },
    "kind": "estimate",
    "source": {
     "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, long-term parameters",
     "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/world/longterm_params.py",
     "retrieved": "2026-11-14",
-    "page": "DEFAULT_AI_MISUSE_TO_MISALIGNMENT_RISK_PROP = 1/9"
+    "page": "DEFAULT_AI_MISUSE_TO_MISALIGNMENT_RISK_PROP = 1/9 ('AI default risks split as 90% misalignment and 10% misuse in the absence of specific estimates'); DEFAULT_ERAS era 3: misalignment 0.2, misuse 0.05"
    },
-   "explainer": "Rethink Priorities splits AI risk into misalignment and misuse at 1 to 9, so misuse is 10% of it, its default. Range ours: 5% to 50%, the high end Rethink's own alternative scenario sets with a larger misuse share. A model's AI branch cuts this share at the misuse preset's rate (ai_misuse_*_cut_per_million) for its misuse work and the rest at the misalignment rate for its other AI work."
+   "explainer": "Rethink Priorities splits AI extinction risk into misalignment and misuse at 9 to 1, so misuse is 10% of it, its default 'in the absence of specific estimates'. High end 20%, the split of its long-run era (misuse 0.05 against misalignment 0.2); low end 5%, ours. Survivable catastrophes split differently, because Rethink gives misuse many more of them per extinction (ai_misuse_catastrophe_vs_extinction, ai_misalignment_catastrophe_vs_extinction). A model's AI branch cuts the misuse part at the misuse preset's rate (ai_misuse_*_cut_per_million) for its misuse work and the rest at the misalignment rate for its other AI work."
+  },
+  {
+   "id": "ai_misuse_catastrophe_vs_extinction",
+   "label": "AI misuse: catastrophes (over 10% of people die) per extinction, in Rethink Priorities' model",
+   "unit": "×",
+   "format": "multiple",
+   "value": {
+    "low": 25,
+    "best": 50,
+    "high": 100
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, long-term parameters",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/world/longterm_params.py",
+    "retrieved": "2026-11-14",
+    "page": "DEFAULT_CATASTROPHE_EXTINCTION_RISK_RATIOS: AI misuse 50, AI misalignment 2"
+   },
+   "explainer": "Rethink's ratio of non-extinction catastrophes to extinctions for AI misuse (50, as for pandemics) against 2 for misalignment: misuse mostly kills part of humanity, misalignment mostly all of it. Used only to split the AI catastrophe risk between misuse and misalignment (with ai_misuse_share_of_risk): at the defaults misuse is 0.1 × 50 ÷ (0.1 × 50 + 0.9 × 2) = 74% of survivable AI catastrophes. The total of AI catastrophes stays the tournament's (ai_catastrophe_vs_extinction). Range ours, half to double."
+  },
+  {
+   "id": "ai_misalignment_catastrophe_vs_extinction",
+   "label": "AI misalignment: catastrophes (over 10% of people die) per extinction, in Rethink Priorities' model",
+   "unit": "×",
+   "format": "multiple",
+   "value": {
+    "low": 1,
+    "best": 2,
+    "high": 4
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, long-term parameters",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/world/longterm_params.py",
+    "retrieved": "2026-11-14",
+    "page": "DEFAULT_CATASTROPHE_EXTINCTION_RISK_RATIOS: AI misuse 50, AI misalignment 2"
+   },
+   "explainer": "Rethink's ratio of non-extinction catastrophes to extinctions for AI misalignment, 2 (misuse 50). Used only to split the AI catastrophe risk between misuse and misalignment, as ai_misuse_catastrophe_vs_extinction. Range ours, half to double."
   },
   {
    "id": "bio_extinction_cut_per_million",

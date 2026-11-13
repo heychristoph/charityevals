@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "center-for-ai-safety",
   "owner": "charityevals",
-  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam, circuit breakers), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 0.28 years of healthy life per $1,000, from 0.008 to 10 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model: its misuse preset for the quarter of the work against misuse, its misalignment preset for the rest; the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is far below the Nuclear Threat Initiative (21) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's misuse cut per dollar (a placeholder, ten times either way), the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam, circuit breakers), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 1.5 years of healthy life per $1,000, from 0.03 to 67 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model: its misuse preset for the quarter of the work against misuse, which gives most of the result because misuse causes most survivable AI catastrophes in Rethink's model, its misalignment preset for the rest; the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is far below the Nuclear Threat Initiative (21) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's misuse cut per dollar (a placeholder, ten times either way), the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Center for AI Safety",
@@ -37,6 +37,11 @@
       "title": "Humanity's Last Exam (Center for AI Safety and Scale AI)",
       "url": "https://lastexam.ai/",
       "type": "charity"
+    },
+    {
+      "title": "Google, Gemini 2.5: Our most intelligent AI model (25 March 2025), reporting Humanity's Last Exam",
+      "url": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
+      "type": "study"
     }
   ],
   "sections": [
@@ -277,11 +282,20 @@
     {
       "id": "ai_misuse_risk_share",
       "section": "effect",
-      "label": "AI: share of the risk that comes from misuse rather than misalignment",
+      "label": "AI: share of the extinction risk that comes from misuse rather than misalignment",
       "format": "percent",
       "formula": "@catastrophe.ai_misuse_share_of_risk",
       "unit": "share",
-      "explainer": "Rethink Priorities' split of AI risk (misuse 10%, misalignment 90%; shared). Misuse work cuts only this share, at Rethink's misuse preset; other AI work cuts only the rest, at its misalignment preset."
+      "explainer": "Rethink Priorities' split of AI extinction risk (misuse 10%, misalignment 90%; shared). Misuse work cuts only this share, at Rethink's misuse preset; other AI work cuts only the rest, at its misalignment preset."
+    },
+    {
+      "id": "ai_misuse_catastrophe_risk_share",
+      "section": "effect",
+      "label": "AI: share of the survivable catastrophe risk that comes from misuse",
+      "format": "percent",
+      "formula": "ai_misuse_risk_share * @catastrophe.ai_misuse_catastrophe_vs_extinction / (ai_misuse_risk_share * @catastrophe.ai_misuse_catastrophe_vs_extinction + (1 - ai_misuse_risk_share) * @catastrophe.ai_misalignment_catastrophe_vs_extinction)",
+      "unit": "share",
+      "explainer": "Misuse's share of survivable AI catastrophes: Rethink Priorities gives misuse 50 catastrophes per extinction and misalignment 2 (shared), so misuse's 10% of extinction risk is about 74% of the catastrophes the world survives. The total stays the tournament's."
     },
     {
       "value": {
@@ -319,9 +333,9 @@
       "section": "effect",
       "label": "AI: deaths averted a year by a typical $1 million of work, while its cut counts",
       "format": "small",
-      "formula": "((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_extinction_per_year * deaths_if_extinct + ((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_catastrophe_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_catastrophe_cut_per_million) * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
+      "formula": "((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_extinction_per_year * deaths_if_extinct + ((1 - ai_misuse_cost_share) * (1 - ai_misuse_catastrophe_risk_share) * @catastrophe.ai_catastrophe_cut_per_million + ai_misuse_cost_share * ai_misuse_catastrophe_risk_share * @catastrophe.ai_misuse_catastrophe_cut_per_million) * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
       "unit": "deaths / year",
-      "explainer": "The share of each yearly risk a typical $1 million of AI work removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries: misuse work at Rethink's misuse preset on the misuse share of the risk, other AI work at its misalignment preset on the rest, weighted by ai_misuse_cost_share. The catastrophe figure also applies to the smaller size."
+      "explainer": "The share of each yearly risk a typical $1 million of AI work removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries: misuse work at Rethink's misuse preset on the misuse share of each risk (ai_misuse_risk_share for extinction, ai_misuse_catastrophe_risk_share for survivable catastrophes), other AI work at its misalignment preset on the rest, weighted by ai_misuse_cost_share. The catastrophe figure also applies to the smaller size."
     },
     {
       "id": "ai_future_per_million",
@@ -842,7 +856,7 @@
       "label": "Field-building: the alumni's added work, in dollars of typical work",
       "format": "usd",
       "formula": "fb_people * fb_share_working * pv_annuity_due(1, $discount_rate, fb_work_years) * @catastrophe.cost_per_work_year",
-      "explainer": "Work-years added × what a year of such work costs its employer (@catastrophe.cost_per_work_year), so it is valued at the area's typical dollar."
+      "explainer": "Work-years added × what a year of such work costs its employer (@catastrophe.cost_per_work_year), valued at CAIS's own mix of AI work (ai_misuse_cost_share through ai_deaths_per_million), our judgment of where alumni go."
     },
     {
       "id": "fb_credit_share",
@@ -1020,12 +1034,12 @@
       "label": "Compute cluster: CAIS's share of the resources behind the papers",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.45,
-        "high": 0.7
+        "low": 0.27,
+        "best": 0.41,
+        "high": 0.65
       },
       "kind": "judgment",
-      "explainer": "The cluster's papers (121 by 2024 from over 400 researchers, 990 Part III line 4a) are written by outside researchers on CAIS's compute: about 60 papers a year at half a researcher-year each is $3M to $7.5M of their time (students at about $100,000, the family's $250,000 for senior staff) against $2.95M of compute. Our judgment, 45% (30% to 70%)."
+      "explainer": "The cluster's papers (121 by 2024 from over 400 researchers, 990 Part III line 4a) are written by outside researchers on CAIS's compute: about 60 papers a year at half a researcher-year each is $3M to $7.5M of their time (students at about $100,000, the family's $250,000 for senior staff) against $2.95M of compute, of which $256,598 came back as programme revenue (Part III line 4a), outside money in the cluster. Our judgment, 41% (27% to 65%)."
     },
     {
       "id": "attr_research",
@@ -1058,7 +1072,7 @@
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "explainer": "CAIS's share of the resources behind the outputs evidence_adj is judged on, weighted by each programme's spending: the compute cluster (outside researchers write its papers), research (benchmarks made with Scale AI and outside experts) and advocacy and field-building (CAIS's own). About 0.63, below NTI's 0.85 because half of CAIS's spending supports other people's research.",
+      "explainer": "CAIS's share of the resources behind the outputs evidence_adj is judged on, weighted by each programme's spending: the compute cluster (outside researchers write its papers), research (benchmarks made with Scale AI and outside experts) and advocacy and field-building (CAIS's own). About 0.62, below NTI's 0.85 because half of CAIS's spending supports other people's research.",
       "formula": "(spend_cluster * attr_cluster + spend_research * attr_research + (spend_advocacy + spend_field) * attr_other) / (spend_cluster + spend_research + spend_advocacy + spend_field)"
     },
     {
