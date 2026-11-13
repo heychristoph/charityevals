@@ -7,7 +7,7 @@
   "estimate_basis": "unit_cost",
   "charity": "wounded-warrior-project",
   "owner": "charityevals",
-  "summary": "Wounded Warrior Project serves post-9/11 veterans injured in service and their families in the United States: it wins VA disability benefits for them, places them in jobs, gives emergency grants and financial counselling, runs social and fitness events, pays for in-home care for the most severely injured, funds other veteran charities and lobbies Congress. Our model of every programme but mental health in fiscal 2025 ($175.9M of $274.6M programme spending; mental health is wounded-warrior-project-charityevals-mental-health) values the benefits won, jobs, grants and care on the site's log-income scale, the benefits net of what they cost taxpayers, the events by life satisfaction, and the Major Richard Star Act's chance of passing; it comes to about 0.01 years of healthy life per $1,000, far below the site's global-health median (about a thirtieth of it) because the help goes to US households that already consume about $27,000 a person, and most VA awards it helps win would have come through another free representative or later. Over four-fifths of the result is the benefits service ($263.7M of awards in WWP's own unexplained 'economic impact' figure), net of what the awards cost taxpayers and of the VA's own cost of deciding the claims. Every branch but the emergency grants is discounted for missing data: benefits, Warriors to Work, financial readiness, connection, physical health, the Independence Program, community partnerships and advocacy. The biggest uncertainties are how many years of payments an award adds over what veterans would have won anyway and how far below average the veterans' consumption is; with every judgment at its ends the result spans over a thousandfold, so it is mostly uncertainty.",
+  "summary": "Wounded Warrior Project serves post-9/11 veterans injured in service and their families in the United States: it wins VA disability benefits for them, places them in jobs, gives emergency grants and financial counselling, runs social and fitness events, pays for in-home care for the most severely injured, funds other veteran charities and lobbies Congress. Our model of every programme but mental health in fiscal 2025 ($175.9M of $274.6M programme spending; mental health is wounded-warrior-project-charityevals-mental-health) values the benefits won, jobs, grants and care on the site's log-income scale, the benefits net of what they cost taxpayers, the events by life satisfaction, and the Major Richard Star Act's chance of passing; it comes to about 0.01 years of healthy life per $1,000, far below the site's global-health median (about a thirtieth of it) because the help goes to US households that already consume about $27,000 a person, and most VA awards it helps win would have come through another free representative or later. Over four-fifths of the result is the benefits service ($263.7M of awards in WWP's own unexplained 'economic impact' figure), net of what the awards cost taxpayers, with credit shared with the VA's own cost of deciding the claims. Every branch but the emergency grants is discounted for missing data: benefits, Warriors to Work, financial readiness, connection, physical health, the Independence Program, community partnerships and advocacy. The biggest uncertainties are how many years of payments an award adds over what veterans would have won anyway and how far below average the veterans' consumption is; with every judgment at its ends the result spans over a thousandfold, so it is mostly uncertainty.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Wounded Warrior Project, programmes other than mental health",
@@ -380,7 +380,7 @@
         "high": 25
       },
       "kind": "judgment",
-      "explainer": "Service-connected ratings are rarely reduced and are paid for life (post-9/11 veterans are about 40, with over 35 years ahead). But most awards WWP's help changes would have come later anyway, through another representative or a later claim; for those the gain is the years brought forward. 10 years (3-25) averaged over both, discounted below; whether an award would have come at the same time without WWP is ben_counterfactual_adj."
+      "explainer": "Service-connected ratings are rarely reduced and are paid for life: a 40-year-old US man expects about 38 more years (Social Security period life table), about 20 years discounted at the shared rate. But most awards WWP's help changes would have come later anyway, through another representative, a supplemental claim (decided in about four to five months) or an appeal to the Board (years); for those the gain is the months or years brought forward. 10 years (3-25) averaged over both, discounted below; whether an award would have come at the same time without WWP is ben_counterfactual_adj."
     },
     {
       "id": "ben_ln_gain_per_person",
@@ -446,12 +446,12 @@
       "label": "VA's cost of deciding a disability claim (US$)",
       "format": "usd",
       "value": {
-        "low": 800,
-        "best": 1500,
-        "high": 3000
+        "low": 700,
+        "best": 1000,
+        "high": 1400
       },
       "kind": "judgment",
-      "explainer": "The Veterans Benefits Administration's general operating expenses for compensation (about $4 billion a year in recent budgets) over the 2 to 2.5 million disability claims it completes a year: about $1,500 a claim (800-3,000), the government staff time behind each award (Convention 2)."
+      "explainer": "The Veterans Benefits Administration's whole General Operating Expenses account (about $4 billion a year, per the VA Inspector General's reviews) over the roughly 3 million claims it completed in fiscal 2025 is about $1,330 a claim; part of the account pays for education, home loans and other benefits, so a disability claim's share is lower: $1,000 (700-1,400), the government staff time behind each award (Convention 2)."
     },
     {
       "id": "ben_attribution_share",
@@ -467,7 +467,7 @@
       "label": "Deaths averted per person reached, emergency grants branch (before adjustments)",
       "format": "small",
       "formula": "0",
-      "explainer": "0: no evidence that a one-off grant or the income from any branch averts deaths at these incomes; the suicide-prevention claims for connection are in the unmodelled share."
+      "explainer": "0: no evidence that a one-off grant averts deaths at these incomes. The connection branch's suicides averted are their own rows (con_deaths_per_person)."
     },
     {
       "id": "dalys_averted_per_person",
@@ -979,7 +979,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "In-home care and therapy are worth roughly their price to a household that needs them (care it would otherwise buy or a spouse would give unpaid), less for alternative therapies (art, music, equine) the household wouldn't buy at that price. 0.7 (0.4-1)."
+      "explainer": "In-home care and therapy are worth roughly their price to a household that needs them (care it would otherwise buy), less for alternative therapies (art, music, equine) the household wouldn't buy at that price. 0.7 (0.4-1). The spouse's relief from unpaid care is the respite row, not counted here."
     },
     {
       "id": "ind_consumption_share",
@@ -1289,8 +1289,8 @@
       "section": "adjustments",
       "label": "WWP's share of the resources behind the outcome",
       "format": "percent",
-      "formula": "wwp_share_of_cash * program_spend / (program_spend + psa_other_programmes)",
-      "explainer": "WWP's share of the cash and volunteer time, times its spending over its spending plus the donated public service announcements the auditors allocate to these programmes (Convention 2)."
+      "formula": "wwp_share_of_cash * cost_total / (cost_total + psa_other_programmes)",
+      "explainer": "WWP's share of the cash and volunteer time, times its full cost over its full cost plus the donated public service announcements the auditors allocate to these programmes (Convention 2)."
     },
     {
       "id": "wwp_share_of_cash",
@@ -1359,6 +1359,22 @@
       "explainer": "1: audited cash paid to counted recipients, nothing to discount for delivery."
     },
     {
+      "id": "adv_implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment, advocacy",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1: no count of attendees to discount; the chances are judgments with their own ranges."
+    },
+    {
+      "id": "cp_implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment, community partnerships",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1: the grants are audited dollars; what reaches veterans is cp_service_share."
+    },
+    {
       "id": "leverage_funging_adj",
       "section": "adjustments",
       "label": "Leverage and funging",
@@ -1390,7 +1406,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Free VA-accredited representation is everywhere: DAV, the VFW, the American Legion and county veteran service officers file most claims, and veterans can file alone. Represented claimants win more often, but much of that is who seeks help. WWP's help changes the award (or its timing, counted in income_years) for perhaps 40% of its awards (20-70%)."
+      "explainer": "Free VA-accredited representation is everywhere: DAV, the VFW, the American Legion and county veteran service officers file most claims, and veterans can file alone. WWP reports an 83% approval rate on its claims in fiscal 2024 (87% in fiscal 2022, impact reports), above the VA's grant rate for disability issues overall (well under two-thirds of issues decided are granted), but much of that gap is which claims a representative takes on and who seeks help. WWP's help changes the award, or its timing (counted in ben_income_years), for perhaps 40% of its awards (20-70%)."
     },
     {
       "id": "ben_missing_data_adj",
@@ -1692,7 +1708,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, community partnerships",
       "format": "multiple",
-      "formula": "cp_evidence_adj * cp_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * cp_missing_data_adj"
+      "formula": "cp_evidence_adj * cp_counterfactual_adj * attribution_share * cp_implementation_adj * leverage_funging_adj * wait_discount * cp_missing_data_adj"
     },
     {
       "id": "adv_evidence_adj",
@@ -1733,7 +1749,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, advocacy",
       "format": "multiple",
-      "formula": "adv_evidence_adj * adv_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * adv_missing_data_adj"
+      "formula": "adv_evidence_adj * adv_counterfactual_adj * attribution_share * adv_implementation_adj * leverage_funging_adj * wait_discount * adv_missing_data_adj"
     },
     {
       "id": "evidence_adj",
