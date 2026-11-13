@@ -274,12 +274,27 @@ for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)
   // The fields as this script writes them (one line each), or an object spread over lines by a JSON
   // pretty-printer (`"beneficiaries": {` … `},`), which a one-line match would cut in half.
   let next = text
-    .replace(/^[ \t]+"beneficiaries": \{\n(?:[ \t]+"[A-Za-z]+": [0-9.e-]+,?\n)*[ \t]+\},\n/m, "")
+    .replace(/^[ \t]+"beneficiaries": \{\n(?:[ \t]+"[^"\n]+": [0-9.e-]+,?\n)*[ \t]+\},?\n/m, "")
     .replace(/^[ \t]+"beneficiaries(_note)?": .*\n/gm, "");
   if ("b" in d) {
     const b = typeof d.b === "object" && Object.keys(d.b).length === 1 && d.b.world === 1 ? "world" : d.b;
     next = next.replace(/^([ \t]+)"cause": "[a-z-]+",\n/m, (line, indent: string) => `${line}${indent}"beneficiaries": ${JSON.stringify(b)},\n${indent}"beneficiaries_note": ${JSON.stringify(d.note)},\n`);
     if (!next.includes('"beneficiaries"')) throw new Error(`${m.id}: no top-level "cause" line to write after`);
+  }
+  // A layout the text edit doesn't know (keys with spaces, a last field without a comma): rewrite the parsed
+  // object instead, fields in their old order with the two written after "cause".
+  let parsed: Record<string, unknown> | undefined;
+  try { parsed = JSON.parse(next); } catch { /* rewritten below */ }
+  const want = "b" in d ? (typeof d.b === "object" && Object.keys(d.b).length === 1 && d.b.world === 1 ? "world" : d.b) : undefined;
+  if (!parsed || JSON.stringify(parsed.beneficiaries) !== JSON.stringify(want)) {
+    const o = JSON.parse(text) as Record<string, unknown>;
+    delete o.beneficiaries; delete o.beneficiaries_note;
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(o)) {
+      out[k] = v;
+      if (k === "cause" && want !== undefined) { out.beneficiaries = want; out.beneficiaries_note = d.note; }
+    }
+    next = JSON.stringify(out, null, 2) + "\n";
   }
   if (next !== text) {
     changed++;
