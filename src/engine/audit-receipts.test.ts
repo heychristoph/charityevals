@@ -29,7 +29,7 @@ describe("audit receipts", () => {
     it(`${id}: its latest audit passes on the model as it is now`, () => {
       const text = latestAudit(id);
       expect(text, `no audits/${id}/audit-r<n>.md`).toBeDefined();
-      expect(text!, "the latest round's verdict").toMatch(/Verdict:\s*pass\b/i);
+      expect(text!, "the latest round's verdict").toMatch(/Verdict:[\s*_]*pass\b/i);
       expect(/Model-sha:\s*([0-9a-f]{64})/.exec(text!)?.[1], "the model or write-up changed after the audit: run a verification round").toBe(modelSha(id));
     });
 

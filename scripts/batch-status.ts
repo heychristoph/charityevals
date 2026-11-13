@@ -40,7 +40,7 @@ function audit(id: string): string {
   const rounds = existsSync(dir) ? readdirSync(dir).filter((f) => /^audit-r\d+\.md$/.test(f)).sort((a, b) => parseInt(b.slice(7)) - parseInt(a.slice(7))) : [];
   if (!rounds.length) return "no audit";
   const text = readFileSync(join(dir, rounds[0]), "utf8");
-  const verdict = /Verdict:\s*(pass|fix needed)/i.exec(text)?.[1]?.toLowerCase() ?? "no verdict";
+  const verdict = /Verdict:[\s*_]*(pass|fix needed)/i.exec(text)?.[1]?.toLowerCase() ?? "no verdict";
   const current = /Model-sha:\s*([0-9a-f]{64})/.exec(text)?.[1] === modelSha(id);
   return `${rounds[0].replace(".md", "")} ${verdict}${current ? "" : ", model changed since"}`;
 }
