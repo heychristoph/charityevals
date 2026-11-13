@@ -69,7 +69,7 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
   value_livelihoods: {
     id: "value_livelihoods", format: "small", formula: lw,
     label: "Value of a dollar to livelihoods charities (live), units of value",
-    explainer: "The livelihoods charities with an evaluator's model on this site, each at its live result under your values, with equal weights: GiveDirectly (GiveWell), Bandhan's graduation programme and Village Enterprise, Raising the Village and One Acre Fund (GiveWell).",
+    explainer: "The livelihoods charities with an evaluator's model on this site, each at its live result under your values, with equal weights: GiveDirectly, Raising the Village and One Acre Fund (all GiveWell's).",
   },
   value_tlycs_recommended: {
     id: "value_tlycs_recommended", format: "small", formula: tl,

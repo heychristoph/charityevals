@@ -276,6 +276,9 @@ export function buildLibrary(
   }
 
   for (const id of files.keys()) resolve(id);
+  // Evaluators who asked us not to publish their models yet (owners.json `published: false`): their models,
+  // variants included, leave the library.
+  for (const [id, m] of models) if (owners.get(m.owner)?.published === false) models.delete(id);
 
   // `#model-id`: another model's live result. It must exist (here or in `options.models`), report in a
   // unit that converts to the common one, and no chain of references may come back to the model.
