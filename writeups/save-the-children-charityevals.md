@@ -26,7 +26,7 @@ Gains for children reached by protection work who have no disorder, fewer child 
 
 ### How this model was checked
 
-Built with charityevals' humanitarian-relief template on 13 November 2026, as a portfolio of branches over Save the Children UK's grants to Save the Children International (Convention 4); the mechanical audit passes. Round 1 of the independent audit passed with five medium findings, all fixed: the cost of a child-year of education rose from $80 to $130 (GPE's grants per child), every branch now shares credit with the resources others put in, the health cost is anchored on the children the report counts, and the education evidence adjustment on the paper's small-study gap. The result fell from 0.29 to 0.21. Round 2 checked the changes.
+Built with charityevals' humanitarian-relief template on 13 November 2026, as a portfolio of branches over Save the Children UK's grants to Save the Children International (Convention 4); the mechanical audit passes. Round 1 of the independent audit passed with five medium findings; four were fixed and the emergency deaths' age shares kept as ranged judgments (the shared splits have none for crises, and they move the result by about 2%): the cost of a child-year of education rose from $80 to $130 (GPE's grants per child), every branch now shares credit with the resources others put in, the health cost is anchored on the children the report counts, and the education evidence adjustment on the paper's small-study gap. The result fell from 0.29 to 0.21. Round 2 checked the changes and passed.
 
 ### Sources
 

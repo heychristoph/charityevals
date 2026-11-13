@@ -24,7 +24,7 @@ Awareness work for the public is counted as cost with no result of its own beyon
 
 ### How this model was checked
 
-Built with charityevals' policy-research-meta template on 13 November 2026; the mechanical audit passes. Round 1 of the independent audit passed with four medium findings: Elrha's humanitarian dollar now counts at 0.3 of cash, not 1 (anchored on charityevals' relief models), and the Gavi counterfactual and the other campaigns' share are anchored in their explainers. The share of advocacy spending in earlier years stays a ranged judgment, as their accounts weren't read. The result fell from 0.49 to 0.43. Round 2 checked the changes.
+Built with charityevals' policy-research-meta template on 13 November 2026; the mechanical audit passes. Round 1 of the independent audit passed with four medium findings: Elrha's humanitarian dollar now counts at 0.3 of cash, not 1 (anchored on charityevals' relief models), and the Gavi counterfactual and the other campaigns' share are anchored in their explainers. The share of advocacy spending in earlier years stays a ranged judgment, as their accounts weren't read. The result fell from 0.49 to 0.43. Round 2 checked the changes and passed, keeping the earlier years' spending as its one medium finding.
 
 ### Sources
 
