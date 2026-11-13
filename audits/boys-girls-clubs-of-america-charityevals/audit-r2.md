@@ -1,7 +1,7 @@
 # Audit: boys-girls-clubs-of-america-charityevals, round 2
 
 Result: 2.87e-5 daly/$ = 0.0287 years of healthy life per $1,000 (combined range 0.0018–0.457); cause median 0.3585 (×0.080). Verdict: **pass**.
-Model-sha: a2a5f3048c2df87594adbfe76d1dac186403abcccde8c3026c4f0e08f6420067
+Model-sha: d589e3d32b1bc775b6e296b79d777cb5be5d01512687cc81f2c0aab8fb0840a2
 
 Scope: unchanged and still right. Both programme lines ($353,995k) are modelled; `total_expenses` is now the functional total $396,021k (= 353,995 + 23,028 + 18,998), so `overhead_ratio` is 1.1187 and cost_total $396.0m.
 
