@@ -32,7 +32,7 @@ The adjustments apply to all branches:
 |---|---|---|
 | How far a typical project's effect applies to CAIS's work | 1.2 | Labs use its benchmarks; the cluster's projects vary in relevance |
 | Work no one else would have done now | 0.65 | 70% of cluster users said their projects needed it; others also build benchmarks |
-| CAIS's share of the resources behind its outputs | 0.62 | Outside researchers write the cluster's papers; benchmarks were made with Scale AI |
+| CAIS's share of the resources behind its outputs | 0.61 | Outside researchers write the cluster's papers; benchmarks were made with Scale AI |
 | Funging by large funders | 0.85 | Large AI safety funders fill gaps |
 | Missing data | slider | Nothing about CAIS's effect on the risk is measured |
 
