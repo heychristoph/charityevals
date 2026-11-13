@@ -39,9 +39,9 @@ export type Library = {
   assumptions: Assumptions;
   facts: Map<string, FactRow>;
   errors: string[];
-  /** Per model, the half-width in log space of its result's plausible range (a 90% range), value
-   * judgments left out: what $risk_quantile moves a result by (generated/risk-spreads.json). */
-  spreads?: Record<string, number>;
+  /** Per model, its result as a distribution from a Monte Carlo at the defaults, value judgments left out:
+   * what $risk_quantile and the plausible ranges read (generated/distributions.json). */
+  distributions?: Record<string, Distribution>;
 };
 
 /** Model pages live at /<id>, so these ids are taken by the site's own pages. */
@@ -59,7 +59,7 @@ export function buildLibrary(
   rawOwners: unknown[] = [],
   /** Models outside this build that formulas may reference by `#id` (a page rebuilding one bulk model
    * in the browser passes the site's library). */
-  options: { models?: Map<string, ResolvedModel>; trusted?: boolean; spreads?: Record<string, number> } = {},
+  options: { models?: Map<string, ResolvedModel>; trusted?: boolean; distributions?: Record<string, Distribution> } = {},
 ): Library {
   const errors: string[] = [];
   // `trusted`: data the build has already validated (npm run check), as the browser loads it: the
@@ -309,7 +309,7 @@ export function buildLibrary(
   };
   for (const id of models.keys()) visit(id, []);
   if (!models.has(assumptions.common.benchmark)) errors.push(`assumptions: benchmark model ${assumptions.common.benchmark} doesn't exist`);
-  return { models, charities, owners, assumptions, facts, errors, spreads: options.spreads };
+  return { models, charities, owners, assumptions, facts, errors, distributions: options.distributions };
 }
 
 /** Models a model's formulas reference directly (`#id`). */
@@ -916,23 +916,44 @@ export function missingDataFactor(lib: Library, m: ResolvedModel, a: Record<stri
 /** The share of risk the reader accepts that a charity's real impact is lower than shown: 50% counts its
  * best guess, less counts a surer, lower figure, more a likelier-to-miss, higher one. */
 export const RISK_QUANTILE = "risk_quantile";
-/** A 90% range spans this many standard deviations either side of its middle. */
-const Z90 = 1.6448536269514722;
+/** The shares of a model's simulated result stored (src/engine/montecarlo.ts): 5% to 95% in steps of 5. */
+export const QUANTILES = Array.from({ length: 19 }, (_, i) => (i + 1) / 20);
+const MIDDLE = 9;
+
+/** A model's result as a distribution, from its Monte Carlo at the defaults (generated/distributions.json). */
+export type Distribution = {
+  /** The result at each of QUANTILES, as a multiple of the best guess (the model at its best values). */
+  q: number[];
+  /** The average result, as a multiple of the best guess. */
+  mean: number;
+  /** The share of draws at zero or below: the chance the programme does no good (or harm). */
+  zero: number;
+};
 
 const riskNodes = new WeakSet<Node>();
 export const isRiskFactor = (n: Node) => riskNodes.has(n);
 
-/** The factor for the reader's risk: exp(norm_inv($risk_quantile) × the model's spread ÷ Z90), the
- * point of its log-normal range below which that share of it lies; exactly 1 at 50%. Undefined in the
- * evaluator view, without the slider (an old commit's library) or a spread for the model. */
+/** The factor for the reader's risk: the model's simulated result at $risk_quantile, over its simulated
+ * middle, so 50% is the best guess and the shape around it is the simulation's. Undefined in the
+ * evaluator view, without the slider (an old commit's library) or a simulation of the model. */
 export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
   if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_QUANTILE)) return undefined;
-  const s = lib.spreads?.[m.id];
-  if (!s) return undefined;
-  const n: Node = { type: "call", fn: "exp", args: [{ type: "bin", op: "*", left: { type: "call", fn: "norm_inv", args: [assumption(RISK_QUANTILE)] }, right: num(s / Z90) }] };
+  const d = lib.distributions?.[m.id];
+  if (!d || !(d.q[MIDDLE] > 0)) return undefined;
+  const pts = QUANTILES.flatMap((p, i) => [num(p), num(d.q[i] / d.q[MIDDLE])]);
+  const n: Node = { type: "call", fn: "interp", args: [assumption(RISK_QUANTILE), ...pts] };
   riskNodes.add(n);
   factorLabels.set(n, "For the risk you accept that the impact is lower");
   return n;
+}
+
+/** A model's plausible range (5% to 95% of its simulation) around a headline `central` that already
+ * carries the reader's risk factor: undefined without a simulation. */
+export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>): { low: number; high: number } | undefined {
+  const d = lib.distributions?.[m.id];
+  if (!d || !(d.q[MIDDLE] > 0)) return undefined;
+  const best = central / riskFactor(lib, m, a);
+  return { low: (best * d.q[0]) / d.q[MIDDLE], high: (best * d.q[QUANTILES.length - 1]) / d.q[MIDDLE] };
 }
 
 /** The risk factor at assumption values `a` (the view's own): 1 where none applies. */

@@ -19,7 +19,14 @@ const lib = buildLibrary(walk(join(root, "models")).map(read), assumptions,
   walk(join(root, "facts")).map(read), walk(join(root, "charities")).map(read), read(join(root, "owners.json")));
 const allowlist: Allowlist = read(join(import.meta.dirname, "normalization-allowlist.json"));
 const waivers: Waivers = read(join(import.meta.dirname, "normalization-waivers.json"));
-const { reports, stale } = applyWaivers(checkAll(lib), waivers);
+const { reports, stale: allStale } = applyWaivers(checkAll(lib), waivers);
+// An unpublished evaluator's models (owners.json `published: false`) leave the library; their waivers
+// stay for when they are published.
+const raws: { id: string; owner?: string; extends?: string }[] = walk(join(root, "models")).map(read);
+const unpublished = new Set((read(join(root, "owners.json")) as { id: string; published?: boolean }[]).filter((o) => o.published === false).map((o) => o.id));
+const ownerOf = new Map(raws.map((m) => [m.id, m.owner]));
+const hiddenModels = new Set(raws.filter((m) => unpublished.has(m.owner ?? ownerOf.get(m.extends ?? "") ?? "")).map((m) => m.id));
+const stale = allStale.filter((s) => !hiddenModels.has(s.split(" ")[1]));
 
 
 describe("normalization invariants", () => {

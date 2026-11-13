@@ -10,14 +10,14 @@
 // hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Library } from "../src/engine/model";
-import { uncertainty } from "../src/engine/uncertainty";
+import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Distribution, type Library } from "../src/engine/model";
+import { simulate } from "../src/engine/montecarlo";
 import { isValueOfInformation } from "../src/engine/ranking";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
 const usageOut = join(root, "generated/usage.json");
-const spreadsOut = join(root, "generated/risk-spreads.json");
+const distributionsOut = join(root, "generated/distributions.json");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
 const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
   const p = join(d, f);
@@ -96,25 +96,21 @@ function same(a: unknown, b: unknown): boolean {
   return a === b;
 }
 
-/** Per model, the half-width in log space of its result's 90% plausible range at the defaults, in our
- * view, with the reader's own value judgments (the shared assumptions) left out: what the risk slider
- * ($risk_quantile, docs/normalization.md 2.18) moves a result by. Rounded, so the file only changes when
- * a model does. */
-export function riskSpreads(lib: Library): Record<string, number> {
-  const av = assumptionValues(lib.assumptions);
-  const out: Record<string, number> = {};
+/** Per model, its result as a distribution from a Monte Carlo at the defaults (src/engine/montecarlo.ts),
+ * the reader's own value judgments left out: what the risk slider ($risk_quantile) and the plausible
+ * ranges read (docs/normalization.md 2.18). Seeded by model id, so the file only changes when a model does. */
+export function distributions(lib: Library): Record<string, Distribution> {
+  const out: Record<string, Distribution> = {};
   for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id))) {
     if (!comparable(lib, m)) continue;
-    const u = uncertainty(lib, m, compute(lib, m, av), av, "charityevals");
-    // Past ×100 either way the log-normal reading breaks down (a range through zero on a small input): capped there.
-    const s = Math.min(Math.log(100), Math.sqrt(u.total * (1 - (u.bySource.assumption ?? 0))));
-    if (Number.isFinite(s) && s > 0) out[m.id] = Number(s.toPrecision(4));
+    const d = simulate(lib, m);
+    if (d) out[m.id] = d;
   }
   return out;
 }
 
 const built = library();
-for (const [file, fresh] of [[out, summaries(built)], [usageOut, factUsage(built.lib)], [spreadsOut, riskSpreads(built.lib)]] as const) {
+for (const [file, fresh] of [[out, summaries(built)], [usageOut, factUsage(built.lib)], [distributionsOut, distributions(built.lib)]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
       console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts`);
