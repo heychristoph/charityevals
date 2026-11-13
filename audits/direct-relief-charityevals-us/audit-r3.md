@@ -23,6 +23,6 @@ Result: 6.248e-6 uov/$ = 0.003124 years of healthy life per $1,000 (combined ran
 
 No high or medium findings. check.ts and normalization-audit were not re-run beyond audit-model (the round-2 pass stands; the changes touch one formula, two explainers and one template formula). generated/ untouched.
 
-Model-sha: af6753247875253ee370d04bc5d9477fcc3d4dab64a0ae830275cf798f409478
+Model-sha: 89a2f67940cde47e882fdc3741af6d08e23a2ae1efb92dc285d00f490797fa28
 
 **Verdict: pass** (0 high, 0 medium, 2 low).
