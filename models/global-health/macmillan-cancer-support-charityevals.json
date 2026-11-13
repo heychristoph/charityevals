@@ -236,7 +236,7 @@
       "label": "Charitable spending in 2025, all five areas: direct and support costs plus grants paid in cash",
       "format": "usd",
       "formula": "(direct_costs_gbp + support_costs_gbp + grants_paid_gbp + grants_individuals_gbp) * usd_per_gbp",
-      "explainer": "The year to 31 December 2025, the latest audited year, matching the reach counts below. Grants are counted as paid (£56.6m to institutions on note 21's commitments, plus £1.4m of grants to individuals, recognised when paid and so not in note 21), not as committed (£32.0m new, less £11.7m of old grants released and plus £3.8m of discounting, which make the statement's £104.2m): Macmillan books a multi-year grant in full the year it commits it, so services running in 2025 (information and support centres, Improving the Cancer Journey, community groups) were partly paid for by commitments booked in earlier years, and the cash paid is what the year's work cost. The five areas' in-year figures below split the year's activities for the reach of the system and community branches."
+      "explainer": "The year to 31 December 2025, the latest audited year, matching the reach counts below. Grants are counted as paid (£56.6m to institutions on note 21's commitments, plus £1.4m of grants to individuals, recognised when paid and so not in note 21), not as committed (£32.0m new, less £11.7m of old grants released, plus £3.8m of discounting: £24.1m of grant expenditure in the statement's £104.2m of charitable spending): Macmillan books a multi-year grant in full the year it commits it, so services running in 2025 (information and support centres, Improving the Cancer Journey, community groups) were partly paid for by commitments booked in earlier years, and the cash paid is what the year's work cost. The five areas' in-year figures below split the year's activities for the reach of the system and community branches."
     },
     {
       "id": "raising_income_gbp",
@@ -737,7 +737,7 @@
         "high": 0.1
       },
       "kind": "judgment",
-      "explainer": "Judgment. The professionals' posts are paid by the NHS (Macmillan moved away from funding posts); what this money buys is conferences, e-learning (1,700 attended virtual events), development grants and the eHNA care-planning platform. A small share of their patients get noticeably better personalised or psychological care because of it: 3% (0.5%-10%)."
+      "explainer": "Judgment. Posts in their first years paid by Macmillan's grants are credited in the posts branch; the rest are paid by the NHS (Macmillan moved away from funding posts). What this area's money buys is conferences, e-learning (1,700 attended virtual events), development grants and the eHNA care-planning platform. A small share of their patients get noticeably better personalised or psychological care because of it: 3% (0.5%-10%)."
     },
     {
       "id": "prof_effect_sd",
@@ -1225,6 +1225,14 @@
       "explainer": "Thin: no measure of how Macmillan's learning offer changes patients' care."
     },
     {
+      "id": "posts_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount: posts paid for by grants",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the share of grants that paid for posts, the posts' caseloads and their patients' gain are judged; no measure of what the posts did."
+    },
+    {
       "id": "system_missing_data_adj",
       "section": "adjustments",
       "label": "Missing-data discount: system transformation and communities",
@@ -1290,7 +1298,7 @@
       "section": "adjustments",
       "label": "Adjustments: funded posts",
       "format": "percent",
-      "formula": "support_evidence_adj * posts_counterfactual_adj * attribution_share * leverage_funging_adj * prof_missing_data_adj",
+      "formula": "support_evidence_adj * posts_counterfactual_adj * attribution_share * leverage_funging_adj * wait_discount * posts_missing_data_adj",
       "explainer": ""
     },
     {
@@ -1371,7 +1379,7 @@
       "label": "WELLBYs: patients of posts Macmillan's grants paid for, adjusted",
       "format": "number",
       "formula": "posts_funded * patients_per_professional * prof_wellbys_per_patient * posts_total_adj",
-      "explainer": "Each post-year's patients get specialist care against none, at the professionals' effect and duration (a full gain, not the learning offer's small share)."
+      "explainer": "Each post-year's patients get specialist care against none, at the professionals' effect and duration (a full gain, not the learning offer's small share). That effect is anchored on better care against usual care, so using it for a specialist against none is an assumption, likely on the low side."
     },
     {
       "id": "system_wellbys",
