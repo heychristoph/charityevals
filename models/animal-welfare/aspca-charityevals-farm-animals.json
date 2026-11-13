@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "aspca",
   "owner": "charityevals",
-  "summary": "The ASPCA's farm animal welfare team, a small part of its $422m spending in 2025 (about $8m with its share of public education, our judgment), lobbied against federal and state rollbacks of the laws that keep hens out of cages and sows out of crates, and pushed shoppers, farmers and producers toward higher-welfare products and in-ovo sexed eggs. At the site's defaults it comes to about 0.00007 years of healthy life per $1,000, below the median animal charity: the defence matters for some 70 million hens, but the ASPCA is one of several groups in it and its 2025 work moved the chance of an override only a little. The biggest uncertainties are those chances and the share of the ASPCA's policy spending that goes on farm animals, which the accounts don't give; the result is mostly uncertainty, spanning several orders of magnitude, and both branches are discounted for missing outcome data.",
+  "summary": "The ASPCA's farm animal welfare team, a small part of its $422m spending in 2025 (about $8m with its share of public education, our judgment), lobbied against federal and state rollbacks of the laws that keep hens out of cages and sows out of crates, and pushed shoppers, farmers and producers toward higher-welfare products and in-ovo sexed eggs. At the site's defaults it comes to about 0.00004 years of healthy life per $1,000, far below the median animal charity because the defence, which matters for some 70 million hens, is shared with a coalition in which the ASPCA's own spending (about $1.5m of lobbying and outreach) is a small part, its 2025 work moved the chance of an override only a little, and its large reserves make the next dollar worth less than the average. The biggest uncertainties are those chances and the share of the ASPCA's policy spending that goes on farm animals, which the accounts don't give; the result is mostly uncertainty, spanning several orders of magnitude, and both branches are discounted for missing outcome data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: ASPCA farm animal welfare (defending state cage and crate laws, higher-welfare market work, 2025)",
@@ -177,17 +177,46 @@
       "formula": "program_spend * overhead_ratio"
     },
     {
-      "id": "def_spend_share",
+      "id": "lobbying_total",
       "section": "cost",
-      "label": "Share of the farm work spent defending state farm-animal laws",
+      "label": "The ASPCA's lobbying on every issue, 2025",
+      "format": "usd",
+      "value": 1850614,
+      "kind": "observed",
+      "source": {
+        "title": "ASPCA Form 990 for 2025",
+        "url": "https://www.aspca.org/sites/default/files/2025-aspca-form-990-pdc.pdf",
+        "page": "Schedule C, Part II-B, line 1j (total of lines 1a-1i)",
+        "quote": "597,316 1,850,614",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Media $81,594, mailings $39,805, publications $7,772, grants for lobbying $216,967, direct contact $784,388, rallies and lobby days $122,772, other $597,316: every issue, from puppy mills, horse slaughter, housing and telehealth to the farm laws."
+    },
+    {
+      "id": "farm_share_of_lobbying",
+      "section": "cost",
+      "label": "Share of the ASPCA's 2025 lobbying spent defending farm-animal laws",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.7
+        "low": 0.25,
+        "best": 0.4,
+        "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Our judgment from what the ASPCA reports for 2025: its farm policy work was mostly against federal and state rollbacks of cage and crate laws (the EATS-style Farm Bill language, the July 2025 House Agriculture hearing on Proposition 12, state repeal bills), the rest the higher-welfare market (Shop With Your Heart, farmers, in-ovo sexed eggs, grants). Half, 30% to 70%."
+      "explainer": "Our judgment: Schedule O names, for 2025, three California puppy-mill laws, New York's pet-shop law, the SAFE Act on horse slaughter, housing, telehealth and disaster bills beside the farm preemption fight, the largest single federal campaign. 40%, 25% to 60%."
+    },
+    {
+      "id": "def_nonlobbying_spend",
+      "section": "cost",
+      "label": "Defence work not reported as lobbying, 2025",
+      "format": "usd",
+      "value": {
+        "low": 300000,
+        "best": 800000,
+        "high": 2000000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the farm team's coalition work, farmer outreach (the farmers it gathered on Proposition 12 before the July 2025 House hearing) and communications on the defence that fall outside the lobbying definition; a few staff's time at about $150,000 each with overheads, the anchor of facts/aspca.json. $0.8m, $0.3m to $2m. The rest of the farm budget is the market branch, the Crate Free Illinois grant and the opposition to faster slaughter lines; the last two won nothing in 2025 and add no modelled outcome."
     },
     {
       "id": "us_laying_hens",
@@ -238,7 +267,7 @@
       "value": {
         "low": 400000,
         "best": 700000,
-        "high": 900000
+        "high": 950000
       },
       "kind": "estimate",
       "source": {
@@ -248,7 +277,7 @@
         "quote": "approximately 700,000 sows would be needed to meet historical demand levels in California",
         "retrieved": "2026-11-13"
       },
-      "explainer": "Sows housed to Proposition 12's standard to supply California; low end the 400,000 compliant sows reported at the law's start."
+      "explainer": "Sows housed to Proposition 12's standard to supply California; low end the 400,000 compliant sows reported at the law's start, high end adding the sows supplying Massachusetts under Question 3."
     },
     {
       "id": "def_state_factor",
@@ -257,15 +286,15 @@
       "format": "multiple",
       "value": {
         "low": 1,
-        "best": 1.1,
-        "high": 1.3
+        "best": 1.02,
+        "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "Our judgment: in 2025 Arizona's governor vetoed a bill to repeal its cage-free law and repeal bills in Colorado and Michigan failed (ASPCA, 'What lawmakers did for farm animals in 2025'), while Nevada passed an emergency suspension. Arizona's flock is a few million hens against the 70 million under the sales laws: 1.1, 1 to 1.3.",
+      "explainer": "Our judgment from the ASPCA's review of the year: repeal bills in Colorado and Michigan (whose laws cover over 12 million birds) 'failed to gain any traction', so they were at small risk; Arizona's governor vetoed a repeal but the law was already delayed to 2034, outside the years counted; Nevada passed an emergency suspension. 1.02, 1 to 1.1.",
       "source": {
         "title": "ASPCA, What lawmakers did for farm animals in 2025",
         "url": "https://www.aspca.org/news/what-lawmakers-did-farm-animals-2025",
-        "quote": "Confinement bans on battery cages took effect in Colorado and Michigan",
+        "quote": "Fortunately, similar 'repeal' bills in Colorado and Michigan failed to gain any traction.",
         "retrieved": "2026-11-13"
       }
     },
@@ -343,11 +372,11 @@
         "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as in charityevals' models of The Humane League: EATS-style language was in the House Farm Bill drafts of 2024-25 and the ASPCA testified against it at the July 2025 House Agriculture hearing on Proposition 12; the coalition (Humane World for Animals, the ASPCA, The Humane League and others) gathered letters from more than 200 members of Congress against it. Without that opposition we put an override in the next Farm Bill at 30%. One event, drawn as happens or doesn't.",
+      "explainer": "Our judgment, as in charityevals' models of The Humane League: EATS-style language was in the House Farm Bill drafts of 2024-25, and ahead of the July 2025 House Agriculture hearing on Proposition 12 the ASPCA gathered farmers' testimony against it; the coalition (Humane World for Animals, the ASPCA, The Humane League and others) gathered letters from more than 200 members of Congress against it. Without that opposition we put an override in the next Farm Bill at 30%. One event, drawn as happens or doesn't.",
       "source": {
         "title": "ASPCA press release: U.S. House Agriculture Committee holds hearing on Proposition 12 (July 2025)",
         "url": "https://www.aspca.org/about-us/press-releases/us-house-agriculture-committee-holds-hearing-proposition-12",
-        "quote": "the ASPCA and farmers urged the House Agriculture Committee to preserve state animal protection laws",
+        "quote": "calling on Congress to protect state animal protection laws that have improved the lives of millions of farm animals",
         "retrieved": "2026-11-13"
       },
       "single_event": {
@@ -355,24 +384,20 @@
       }
     },
     {
-      "id": "def_risk_cut",
-      "section": "effect",
-      "label": "Share of the override risk the coalition's 2025 opposition removed",
-      "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.17,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, matching charityevals' models of The Humane League (30% without the opposition, 25% with: a sixth of the risk). Research on lobbying finds most campaigns change nothing (Baumgartner and colleagues, 2009); organised constituent contact moved legislators' support by about 12 points in a field experiment (Bergan and Cole, 2015). 17%, 5% to 35%. As a share, so the chance with the opposition can't exceed the chance without it."
-    },
-    {
       "id": "def_p_override_with",
       "section": "effect",
       "label": "Chance it passes with the coalition's 2025 opposition",
       "format": "percent",
-      "formula": "def_p_override_without * (1 - def_risk_cut)"
+      "value": {
+        "low": 0.08,
+        "best": 0.25,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as in charityevals' models of The Humane League (the same event): the year's opposition takes about 5 points off (a sixth of the risk). Research on lobbying finds most campaigns change nothing (Baumgartner and colleagues, 2009); organised constituent contact moved legislators' support by about 12 points in a field experiment (Bergan and Cole, 2015). Drawn together with the chance without it.",
+      "single_event": {
+        "with": "eats"
+      }
     },
     {
       "id": "def_raw",
@@ -393,7 +418,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as in charityevals' models of The Humane League (0.9), about the counts only (that the outcome isn't measured is the missing-data step): hens are taken by population share, and some of those states' supply is under in-state housing laws an override wouldn't touch."
+      "explainer": "Our judgment, as in charityevals' models of The Humane League (0.9), about the counts only (that the outcome isn't measured is the missing-data step, and in-state housing laws are in the revert share): the hens are the states' share of the population, not a count of the flocks supplying them, and the sows a trade body's estimate of demand. 0.9, 0.7 to 1."
     },
     {
       "id": "def_counterfactual_adj",
@@ -406,22 +431,29 @@
     {
       "id": "def_spend",
       "section": "adjustments",
-      "label": "Defence: the ASPCA's spending on it",
+      "label": "Defence: the ASPCA's spending on it (programme spending, before overhead)",
       "format": "usd",
-      "formula": "program_spend * def_spend_share"
+      "formula": "lobbying_total * farm_share_of_lobbying + def_nonlobbying_spend"
+    },
+    {
+      "id": "def_coalition_spend",
+      "section": "adjustments",
+      "label": "Defence: the whole coalition's spending on defending the state laws, 2025 (programme spending, before overhead)",
+      "format": "usd",
+      "value": {
+        "low": 3500000,
+        "best": 8500000,
+        "high": 20500000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, set to the total charityevals' model of The Humane League's other programmes implies for the same fight (its $8m for every other group, the ASPCA included, plus THL's own $0.44m), so the two charities' credit comes from one coalition total: Humane World for Animals, the ASPCA, THL, Animal Wellness Action, Mercy For Animals and others, with farm and state allies; federal lobbying, litigation and campaigns. $8.5m, $3.5m to $20.5m."
     },
     {
       "id": "def_others_spend",
       "section": "adjustments",
-      "label": "Defence: other groups' spending on defending the state laws, 2025",
+      "label": "Defence: other groups' spending on it",
       "format": "usd",
-      "value": {
-        "low": 4000000,
-        "best": 10000000,
-        "high": 25000000
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: the coalition is led by Humane World for Animals with the ASPCA, The Humane League, Animal Wellness Action, Mercy For Animals and others, plus farm and state allies; their federal lobbying, litigation and campaigns on these laws. $10m, $4m to $25m."
+      "formula": "max(def_coalition_spend - def_spend, 0)"
     },
     {
       "id": "def_attribution_share_shared",
@@ -463,7 +495,7 @@
     {
       "id": "mkt_hen_years",
       "section": "reach",
-      "label": "Market: hen-years a year moved out of cages by the ASPCA's market work",
+      "label": "Market: hen-years a year in the shift the ASPCA's guide, farmer work and in-ovo advocacy touch (before what would have happened anyway and others' share)",
       "format": "integer",
       "value": {
         "low": 50000,
@@ -471,7 +503,7 @@
         "high": 2000000
       },
       "kind": "judgment",
-      "explainer": "Our judgment. The ASPCA's Shop With Your Heart guide steers shoppers and buyers to eggs, chicken, pork and beef under meaningful welfare certifications, it works with independent higher-welfare farmers and funds them (Fund to End Factory Farming, $160,305 to seven projects in 2025), and it championed in-ovo sexed eggs, on sale in 15 states from 2025 (Form 990 Schedule O, line 4c). It publishes no count of animals affected. We express it as hens moved from cages to cage-free housing: 300,000 hen-years a year (about 0.1% of the flock), 50,000 to 2 million.",
+      "explainer": "Our judgment. The ASPCA's Shop With Your Heart guide steers shoppers and buyers to eggs, chicken, pork and beef under meaningful welfare certifications, it works with independent higher-welfare farmers, its Fund to End Factory Farming gave $160,305 to seven projects in 2025 (community and environmental groups opposing factory-farm pollution), and it championed in-ovo sexed eggs, on sale in 15 states from 2025 (Form 990 Schedule O, line 4c). It publishes no count of animals affected. We express it as hens moved from cages to cage-free housing: 300,000 hen-years a year (about 0.1% of the flock), 50,000 to 2 million.",
       "source": {
         "title": "ASPCA, Announcing: 2025 Fund to End Factory Farming grantees",
         "url": "https://www.aspca.org/news/announcing-2025-fund-end-factory-farming-grantees",
@@ -683,10 +715,10 @@
     {
       "id": "implementation_adj",
       "section": "adjustments",
-      "label": "Implementation adj (outcome-weighted average of the branches)",
+      "label": "Delivery adjustment",
       "format": "percent",
-      "formula": "(def_raw * 1 + mkt_raw * mkt_implementation_adj) / raw_total",
-      "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own. Neither branch counts company pledges, so the shared rate of pledges kept (@sad_factors.commitment_fulfilment_cage_free) doesn't apply: the defence counts hens and sows under state laws already in force (the sales bans are enforced at retail), the market branch hen-years actually moved."
+      "formula": "1",
+      "explainer": "1, the outcome-weighted average of the branches (both 1), for reading only: neither branch counts company pledges, so the shared rate of pledges kept (@sad_factors.commitment_fulfilment_cage_free) doesn't apply. The defence counts hens and sows under state laws already in force (the sales bans are enforced at retail), the market branch hen-years actually moved."
     },
     {
       "id": "missing_data_adj",
@@ -744,9 +776,9 @@
     {
       "id": "staff_compensation",
       "section": "donor",
-      "label": "Compensation, 2025 (all functions)",
+      "label": "Compensation in policy, response and engagement, 2025",
       "format": "usd",
-      "value": 128850415,
+      "value": 29639804,
       "kind": "observed",
       "source": {
         "title": "ASPCA consolidated financial statements, years ended 31 December 2025 and 2024 (audited)",
@@ -759,9 +791,9 @@
     {
       "id": "staff_benefits",
       "section": "donor",
-      "label": "Employee benefits, 2025 (all functions)",
+      "label": "Employee benefits in policy, response and engagement, 2025",
       "format": "usd",
-      "value": 40183189,
+      "value": 9250361,
       "kind": "observed",
       "source": {
         "title": "ASPCA consolidated financial statements, years ended 31 December 2025 and 2024 (audited)",
@@ -776,8 +808,8 @@
       "section": "donor",
       "label": "Staff pay as a share of cost",
       "format": "percent",
-      "formula": "(staff_compensation + staff_benefits) / total_expenses",
-      "explainer": "The ASPCA's own: pay and benefits over total expenses."
+      "formula": "(staff_compensation + staff_benefits) / pre_spend",
+      "explainer": "The line that holds the farm team: its pay and benefits over its spending (Convention 1)."
     },
     {
       "id": "salary_gap",

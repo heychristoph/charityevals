@@ -11,7 +11,7 @@
   "estimate_basis": "unit_cost",
   "charity": "aspca",
   "owner": "charityevals",
-  "summary": "The ASPCA, the oldest US animal welfare charity, placed about 70,900 animals in homes in 2025 (including relocation from crowded shelters), treated 109,700 animals in its hospital and low-cost clinics, supported 129,200 spay/neuter surgeries, ran Animal Poison Control, rescued animals from disasters and cruelty cases, gave $29m in grants to shelters, trained vets and shelter staff, ran national adoption campaigns and won puppy-mill laws; this model covers all of that except its farm-animal work, which has its own model. At the site's defaults it comes to about 0.00007 years of healthy life per $1,000, below the median animal charity: care for one dog or cat at a time reaches few animals per dollar, and most of the result is the life satisfaction of owners whose pets the low-cost clinics treat. The biggest uncertainty is that owners' gain and how much suffering each kind of care spares an animal, all our judgment; every branch is discounted for missing outcome data.",
+  "summary": "The ASPCA, the oldest US animal welfare charity, placed about 70,900 animals in homes in 2025 (including relocation from crowded shelters), treated 109,700 animals in its hospital and low-cost clinics, supported 129,200 spay/neuter surgeries, ran Animal Poison Control, rescued animals from disasters and cruelty cases, gave $29m in grants to shelters, trained vets and shelter staff, ran national adoption campaigns and won puppy-mill laws; this model covers all of that except its farm-animal work, which has its own model. At the site's defaults it comes to about 0.00009 years of healthy life per $1,000, below the median animal charity: care for one dog or cat at a time reaches few animals per dollar, and nearly all of the result is the life satisfaction of owners whose pets the low-cost clinics treat, feed or keep at home. The biggest uncertainty is that owners' gain and how much suffering each kind of care spares an animal, all our judgment, so the result is mostly uncertainty, spanning about three orders of magnitude; every branch is discounted for missing outcome data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: ASPCA (shelters, veterinary care, neutering, cruelty and disaster response, grants, education and policy for dogs, cats and horses, 2025)",
@@ -204,28 +204,65 @@
       "formula": "program_spend * overhead_ratio"
     },
     {
-      "id": "svs_fees",
+      "id": "apc_fees",
       "section": "cost",
-      "label": "Shelter and veterinary service fees paid by owners and adopters, 2025",
+      "label": "Animal Poison Control fees, 2025",
       "format": "usd",
-      "value": 29649269,
+      "value": 26947784,
       "kind": "observed",
       "source": {
-        "title": "ASPCA consolidated financial statements, years ended 31 December 2025 and 2024 (audited)",
-        "url": "https://www.aspca.org/sites/default/files/2025-aspca-final-issued-audited-financials.pdf",
-        "page": "p. 7, consolidated statement of activities",
-        "quote": "Shelter and veterinary service fees 29,649,269 - 29,649,269 26,971,133",
+        "title": "ASPCA Form 990 for 2025",
+        "url": "https://www.aspca.org/sites/default/files/2025-aspca-form-990-pdc.pdf",
+        "page": "Part VIII, line 2a",
+        "quote": "ANIMAL POISON CONTROL CENTER FEES 900099 26,947,784",
         "retrieved": "2026-11-13"
       },
-      "explainer": "Clinic, adoption and poison-control fees. They pay for part of the shelter and veterinary work: resources from the people served, not from donors (Convention 2), so they lower the credit of the branches that line pays for."
+      "explainer": "Paid by callers and by the companies (pet insurers, microchip firms) that buy the service for their customers: resources from the people served, not from donors (Convention 2), so they lower poison control's credit."
     },
     {
-      "id": "svs_donor_share",
-      "section": "adjustments",
-      "label": "Share of shelter and veterinary spending not paid by fees",
+      "id": "clinic_fees",
+      "section": "cost",
+      "label": "Clinic, hospital, spay/neuter and adoption fees, 2025",
+      "format": "usd",
+      "value": 2565278,
+      "kind": "observed",
+      "source": {
+        "title": "ASPCA Form 990 for 2025",
+        "url": "https://www.aspca.org/sites/default/files/2025-aspca-form-990-pdc.pdf",
+        "page": "Part VIII, lines 2b-2e",
+        "quote": "MOBILE CLINIC VET & CLINIC REV. 900099 1,023,249",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Mobile and community clinics $1,023,249, the Spay/Neuter Alliance $893,636, the animal hospital $495,524 and adoption fees $152,869 (the audited total, $29,649,269, is $136,207 more; the gap is small and left out). They lower the credit of the care, placement and neutering branches."
+    },
+    {
+      "id": "apc_cost_share",
+      "section": "cost",
+      "label": "Share of the shelter and veterinary line spent on Animal Poison Control",
       "format": "percent",
-      "formula": "1 - svs_fees / svs_spend",
-      "explainer": "The donors' share of the resources behind the clinic, adoption, poison-control and neutering branches."
+      "value": {
+        "low": 0.12,
+        "best": 0.18,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the accounts don't split the line. Poison control's fees ($26.9m) are run as a service that roughly pays its way; a call centre of toxicologists and vets handling 334,500 cases at about $85 each comes to about $28m, 18% of the $158.3m line, from 12% (fees more than cover it) to 25%."
+    },
+    {
+      "id": "apc_donor_share",
+      "section": "adjustments",
+      "label": "Share of poison control's cost not paid by fees",
+      "format": "percent",
+      "formula": "max(1 - apc_fees / (svs_spend * apc_cost_share), 0)",
+      "explainer": "The donors' share of the resources behind the poison-control branch."
+    },
+    {
+      "id": "clinic_donor_share",
+      "section": "adjustments",
+      "label": "Share of the clinics', adoption centre's and spay/neuter costs not paid by fees",
+      "format": "percent",
+      "formula": "1 - clinic_fees / (svs_spend * (1 - apc_cost_share) - grants_svs)",
+      "explainer": "The donors' share of the resources behind the care, placement and neutering branches: the line less poison control and grants, against the clinic, hospital, spay/neuter and adoption fees."
     },
     {
       "id": "reh_animals_helped",
@@ -254,7 +291,20 @@
         "high": 0.03
       },
       "kind": "judgment",
-      "explainer": "Our judgment on Ambitious Impact's pain scale (disabling 1, hurtful 0.1, annoying 0.01), the same as for Dogs Trust's rehoming because the change is the same: a screened home with vet care against the likely alternative (a crowded shelter, the street, a home that gave the animal up, private resale) is about two hours of hurtful-level distress a day less plus untreated illness, 0.01 days of disabling pain a day, from 0.003 (animals whose alternative was a settled home) to 0.03 (animals with untreated illness or severe stress). An animal that would otherwise have been put down counts nothing either way: deaths are not suffering. No study measures it."
+      "explainer": "Our judgment on Ambitious Impact's pain scale (disabling 1, hurtful 0.1, annoying 0.01), the same as for Dogs Trust's rehoming because the change is the same: a screened home with vet care against the likely alternative (a crowded shelter, the street, a home that gave the animal up, private resale) is about two hours of hurtful-level distress a day less plus untreated illness, 0.01 days of disabling pain a day, from 0.003 (animals whose alternative was a settled home) to 0.03 (animals with untreated illness or severe stress). An animal that would otherwise have been put down counts nothing either way: deaths are not suffering. Net of a relocated animal's transport stress and disease risk (a day or two of hurtful distress against years of the new life, under 0.1% of the gain). No study measures it."
+    },
+    {
+      "id": "reh_placed_share",
+      "section": "reach",
+      "label": "Placements: share of the count that are full placements",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the 2025 annual report describes the 70,000+ as helped through 'adoption, relocation, pre-adoption spay/neuter and other placement support', so some animals only had a pre-adoption surgery (already among the 129,200) or a smaller piece of help; 85%, 70% to 100%."
     },
     {
       "id": "reh_years_better_life",
@@ -291,7 +341,7 @@
       "section": "effect",
       "label": "Placements: days of pain spared before adjustments",
       "format": "number",
-      "formula": "reh_animals_helped * reh_pain_days_per_animal",
+      "formula": "reh_animals_helped * reh_placed_share * reh_pain_days_per_animal",
       "unit": "days"
     },
     {
@@ -338,7 +388,7 @@
       "section": "adjustments",
       "label": "Placements: the ASPCA's donors' share of the resources behind the outcome",
       "format": "percent",
-      "formula": "svs_donor_share * reh_partner_share",
+      "formula": "clinic_donor_share * reh_partner_share",
       "explainer": "Its share beside partners, volunteers and others, times the share of the spending not paid by fees where the shelter and veterinary line pays."
     },
     {
@@ -460,7 +510,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the community clinics serve owners who can't afford private vets, many of whom would otherwise delay or skip care; patients of the full-service hospital would more often be treated elsewhere. 50%, 30% to 80%."
+      "explainer": "Our judgment. Reference class: the Access to Veterinary Care Coalition's 2018 national survey (University of Tennessee, reported by the AVMA) found that about 28% of US pet-owning households couldn't get the veterinary care their pets needed in the previous two years, cost being the barrier for 74% of sick-pet care; the community clinics select for those owners, while the hospital's clients (a small share of the fees) would more often be treated elsewhere. We put half the care as care that wouldn't otherwise have happened in time, 30% to 80%."
     },
     {
       "id": "vet_partner_share",
@@ -480,7 +530,7 @@
       "section": "adjustments",
       "label": "Veterinary care: the ASPCA's donors' share of the resources behind the outcome",
       "format": "percent",
-      "formula": "svs_donor_share * vet_partner_share",
+      "formula": "clinic_donor_share * vet_partner_share",
       "explainer": "Its share beside partners, volunteers and others, times the share of the spending not paid by fees where the shelter and veterinary line pays."
     },
     {
@@ -553,7 +603,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment: most exposures are harmless or minor and the call mostly saves a needless vet visit; in some the right decontamination or antidote early spares days of vomiting, seizures or organ damage. 0.2 days of disabling pain an animal on average, 0.02 to 1. The anxiety and cost spared owners is not counted.",
+      "explainer": "Our judgment: most exposures are harmless or minor and the call mostly saves a needless vet visit; in some the right decontamination or antidote early spares days of vomiting, seizures or organ damage. 0.2 days of disabling pain an animal on average, 0.02 to 1. The owners' relief is counted in the people's rows (apc_owner_gain_share).",
       "unit": "days"
     },
     {
@@ -608,7 +658,7 @@
       "section": "adjustments",
       "label": "Poison control: the ASPCA's donors' share of the resources behind the outcome",
       "format": "percent",
-      "formula": "svs_donor_share * apc_partner_share",
+      "formula": "apc_donor_share * apc_partner_share",
       "explainer": "Its share beside partners, volunteers and others, times the share of the spending not paid by fees where the shelter and veterinary line pays."
     },
     {
@@ -865,7 +915,7 @@
       "section": "adjustments",
       "label": "Neutering: the ASPCA's donors' share of the resources behind the outcome",
       "format": "percent",
-      "formula": "svs_donor_share * neu_partner_share",
+      "formula": "clinic_donor_share * neu_partner_share",
       "explainer": "Its share beside partners, volunteers and others, times the share of the spending not paid by fees where the shelter and veterinary line pays."
     },
     {
@@ -925,7 +975,7 @@
         "quote": "HELPED MORE THAN 20,700 ANIMALS AFFECTED BY DISASTERS AND OTHER EMERGENCIES THROUGH RESCUE, RESPONSE AND RECOVERY EFFORTS",
         "retrieved": "2026-11-13"
       },
-      "explainer": "Including the California wildfires (a $5m response and preparedness fund)."
+      "explainer": "Including the California wildfires (a $5m response and preparedness fund). The annual report puts this count as 'disasters, emergencies and suspected cruelty', so the branch counts it less the cruelty-case animals, which have their own branch."
     },
     {
       "id": "dis_pain_days_per_animal",
@@ -987,7 +1037,7 @@
       "section": "effect",
       "label": "Disaster response and pet food: days of pain spared before adjustments",
       "format": "number",
-      "formula": "dis_animals_helped * dis_pain_days_per_animal + food_meals / food_meals_per_pet_day * food_suffering_per_pet_day",
+      "formula": "(dis_animals_helped - crl_animals_helped) * dis_pain_days_per_animal + food_meals / food_meals_per_pet_day * food_suffering_per_pet_day",
       "unit": "days"
     },
     {
@@ -1259,7 +1309,23 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Our judgment from the grant purposes the ASPCA lists (disaster response, live-release, spay/neuter, surrender prevention, farm animals, horses; Form 990 Schedule I): the spay/neuter grants are inside the 129,200 surgeries and disaster grants inside the response branch, so only the rest counts here. Farm grants (Food Animal Concerns Trust, the Veterinary Association for Farm Animal Welfare, the Fund to End Factory Farming, about $0.3m) are in the farm-animal model's share."
+      "explainer": "Our judgment from the grant purposes the ASPCA lists (disaster response, live-release, spay/neuter, surrender prevention, farm animals, horses; Form 990 Schedule I): the spay/neuter grants are inside the 129,200 surgeries and disaster grants inside the response branch, so only the rest counts here. The grantees' outcomes are their own, outside the ASPCA's 70,900 placements."
+    },
+    {
+      "id": "farm_grants",
+      "section": "reach",
+      "label": "Grants for farm animals, 2025 (left to the farm-animal model)",
+      "format": "usd",
+      "value": 280965,
+      "kind": "observed",
+      "source": {
+        "title": "ASPCA Form 990 for 2025",
+        "url": "https://www.aspca.org/sites/default/files/2025-aspca-form-990-pdc.pdf",
+        "page": "Schedule I, Part II",
+        "quote": "VETERINARY ASSOCIATION FOR FARM ANIMAL WELFARE 333 WEST BROWN DEER RD. UNIT G #481, MILWAUKEE, WI 53217 93-1583316 501(C)(3) 48,660",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The Fund to End Factory Farming's $160,305 (ASPCA news, 2025 grantees), Food Animal Concerns Trust $72,000 and the Veterinary Association for Farm Animal Welfare $48,660 (Schedule I): their outcomes belong to the farm-animal model, so they come off the policy line's grants here."
     },
     {
       "id": "grt_cost_per_outcome",
@@ -1279,7 +1345,7 @@
       "section": "reach",
       "label": "Grants: extra animals placed or kept in their homes",
       "format": "integer",
-      "formula": "(grants_svs + grants_pre) * grt_live_share / grt_cost_per_outcome"
+      "formula": "(grants_svs + grants_pre - farm_grants) * grt_live_share / grt_cost_per_outcome"
     },
     {
       "id": "grt_raw",
@@ -1421,7 +1487,7 @@
         "high": 150
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as for the vets Dogs Trust's sister charity trains: a vet does thousands of consultations a year; the training changes a few dozen."
+      "explainer": "Our judgment, as for the vets the Dogs Trust model's training branch counts: a vet does thousands of consultations a year; the training changes a few dozen."
     },
     {
       "id": "trn_years_in_practice",
@@ -1434,7 +1500,7 @@
         "high": 15
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as for the vets Dogs Trust's sister charity trains (5 years), because skills fade and staff move on: 2 years for a short course, 15 for a vet who keeps the practice for a career.",
+      "explainer": "Our judgment, as for the vets the Dogs Trust model's training branch counts (5 years), because skills fade and staff move on: 2 years for a short course, 15 for a vet who keeps the practice for a career.",
       "unit": "years"
     },
     {
@@ -1620,7 +1686,7 @@
         "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "Our judgment: veterinary telehealth in Ohio, pets in housing and disaster plans, and the work to ban horse slaughter (the SAFE Act won a House majority of sponsors but didn't pass), and the 100,700 advocates who took action. 1.5, 1 to 2.5."
+      "explainer": "Our judgment: the year's other wins, veterinary telehealth in Ohio and policies keeping pets in housing and in disaster plans, with the 100,700 advocates who took action. The work for a federal ban on horse slaughter (the SAFE Act gained a House majority of sponsors but didn't pass) gets no credit until it passes. 1.5, 1 to 2.5."
     },
     {
       "id": "pol_raw",
@@ -1991,9 +2057,22 @@
       "unit": "Days of pain spared / $"
     },
     {
+      "id": "vet_owned_share",
+      "section": "reach",
+      "label": "People: share of the animals given veterinary care that have an owner",
+      "format": "percent",
+      "value": {
+        "low": 0.55,
+        "best": 0.75,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the 109,700 were treated 'through its hospital, adoption center, community veterinary clinics, sheltering operations, rehabilitation facilities' (Form 990 Schedule O, line 4a); shelter, rehabilitation and relocation animals have no owner, while the community clinics and the hospital, most of the volume, serve owned pets. 75%, 55% to 90%."
+    },
+    {
       "id": "own_share_eased",
       "section": "effect",
-      "label": "People: share of owners of treated animals whose worry or money trouble the care eases",
+      "label": "People: share of owners helped whose worry or money trouble the help eases",
       "format": "percent",
       "value": {
         "low": 0.2,
@@ -2001,7 +2080,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the community clinics, pet food and surrender-prevention help exist to keep pets with owners who can't afford care; the hospital's clients are less often in need."
+      "explainer": "Our judgment. Anchor: about 28% of US pet-owning households couldn't get the veterinary care their pets needed in the previous two years, mostly for cost (Access to Veterinary Care Coalition 2018 survey, reported by the AVMA); the community clinics, pet food and surrender-prevention help select for those owners, so the share among the ASPCA's clients is well above 28%: half, 20% (most clients would have paid a private vet without strain) to 80%. Of owned animals only (vet_owned_share)."
     },
     {
       "id": "own_ls_gain",
@@ -2014,7 +2093,59 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Our judgment. Reference class: caregiver burden in owners of sick animals (Spitznagel et al., Veterinary Record 2017, found higher stress and depression than in owners of healthy animals); relief from a pet's untreated illness or the threat of giving it up for a few months is a small share of a point, 0.05 points for a year, 0.01 to 0.2. Adopters' own gain is counted as 0, as for Dogs Trust: studies of pet ownership find no consistent effect on wellbeing."
+      "explainer": "Our judgment below a reference class. Spitznagel et al. (Veterinary Record 2017) found owners of sick animals had higher caregiver burden, stress and depression scores and lower quality of life than owners of healthy ones; they report scale scores, not life satisfaction. If the gap is about a third of a standard deviation of wellbeing, and life satisfaction's SD is about 2 points on the 0-10 scale, it is about 0.6 points while the pet is ill or at risk; over a month or two (a tenth of a year) that is 0.06 point-years, which we round down to 0.05 because the clinics also relieve some of it in owners who would have paid elsewhere. 0.01 to 0.2 (a longer illness or a pet kept from surrender). Adopters' own gain is counted as 0, as for Dogs Trust: studies of pet ownership find no consistent effect on wellbeing."
+    },
+    {
+      "id": "food_days_per_household",
+      "section": "effect",
+      "label": "People: days of pet food each household gets",
+      "format": "percent",
+      "value": {
+        "low": 10,
+        "best": 30,
+        "high": 90
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: pet food banks and disaster distributions give a few weeks' food at a time, some households coming back; 30 days, 10 to 90."
+    },
+    {
+      "id": "dis_owned_share",
+      "section": "effect",
+      "label": "People: share of the disaster animals that have an owner",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: in disasters the ASPCA shelters evacuated families' pets and rescues strays and shelter animals moved out of harm's way; half, 30% to 80%."
+    },
+    {
+      "id": "apc_owner_gain_share",
+      "section": "effect",
+      "label": "People: a poison-control call's relief to an owner, as a share of a treated pet's",
+      "format": "percent",
+      "value": {
+        "low": 0.03,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: a call settles an acute scare in minutes and often saves a vet bill, against weeks of worry over a sick pet; a tenth, 3% to 30%."
+    },
+    {
+      "id": "grt_kept_share",
+      "section": "effect",
+      "label": "People: share of the grants' extra outcomes that keep a pet with its owner",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the grant purposes include surrender-prevention programmes that help owners keep their pets (Form 990 Schedule I); the rest are shelter placements, whose adopters count 0. 30%, 10% to 50%."
     },
     {
       "id": "people_missing_data_adj",
@@ -2027,10 +2158,10 @@
     {
       "id": "wellbys_people",
       "section": "outcome",
-      "label": "WELLBYs for owners whose pets are treated or kept at home",
+      "label": "WELLBYs for owners whose pets are treated, fed, rescued or kept at home",
       "format": "number",
-      "formula": "vet_animals_helped * own_share_eased * own_ls_gain * vet_counterfactual_adj * vet_attribution_share * vet_implementation_adj * people_missing_data_adj",
-      "explainer": "Owners the clinics aim at (the ASPCA's 'keep pets and people together'), so not a side effect; the care's counterfactual, credit and delivery apply.",
+      "formula": "own_share_eased * own_ls_gain * (vet_animals_helped * vet_owned_share * vet_counterfactual_adj * vet_attribution_share * vet_implementation_adj + food_meals / food_meals_per_pet_day / food_days_per_household * dis_counterfactual_adj * dis_attribution_share * dis_implementation_adj + (dis_animals_helped - crl_animals_helped) * dis_owned_share * dis_counterfactual_adj * dis_attribution_share * dis_implementation_adj + apc_animals_helped * apc_owner_gain_share * apc_counterfactual_adj * apc_attribution_share * apc_implementation_adj + grt_outcomes * grt_kept_share * grt_counterfactual_adj * grt_attribution_share * grt_implementation_adj) * people_missing_data_adj",
+      "explainer": "Owners the work aims at (the ASPCA's 'keep pets and people together'), so not a side effect: owners of pets treated at the clinics and hospital, households given pet food, families whose pets were rescued or sheltered in disasters, callers to poison control and owners kept with their pets by surrender-prevention grants. Each carries its branch's counterfactual, credit and delivery.",
       "unit": "WELLBYs"
     },
     {
