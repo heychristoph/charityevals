@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { lib } from "../lib/data";
-import { assumptionValues, headline, unitFormula, type ResolvedModel } from "../engine/model";
+import { assumptionValues, headline, unitFormula, type Library, type ResolvedModel } from "../engine/model";
 import { parse, type Node } from "../engine/expr";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
 import { formatYears } from "../lib/format";
@@ -97,15 +97,15 @@ const KIND: Record<Step["kind"], string> = {
  * bar on one log scale, labelled with how much it multiplies the figure, linked to where it lives. A
  * model with no evaluator starts from itself at the site's defaults. The reader's own edits to the
  * model's numbers are the last step. */
-export default function Waterfall({ model, av, edits }: { model: ResolvedModel; av: Record<string, number>; edits: Record<string, number> }) {
+export default function Waterfall({ model, av, edits, engine = lib }: { model: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; engine?: Library }) {
   const w = useMemo(() => {
-    const out = waterfall(lib, model, av);
+    const out = waterfall(engine, model, av);
     if (!out || !Object.keys(edits).length) return out;
-    const to = headline(lib, model, av, edits);
+    const to = headline(engine, model, av, edits);
     return Number.isFinite(to) && to !== out.end
       ? { ...out, steps: [...out.steps, { kind: "yours" as const, label: "Your edits to this model's numbers", from: out.end, to }], end: to }
       : out;
-  }, [model, av, edits]);
+  }, [model, av, edits, engine]);
   if (!w || !w.steps.length) return null;
   const points = [w.startValue, ...w.steps.map((s) => s.to)];
   const positive = points.every((x) => Number.isFinite(x) && x > 0);
@@ -205,7 +205,7 @@ export default function Waterfall({ model, av, edits }: { model: ResolvedModel; 
 
 /** The waterfall in the page's evaluation section (the `[data-waterfall="<model id>"]` slot the page
  * renders there), from the model's island, which has the model, the reader's values and their edits. */
-export function WaterfallInSlot(props: { model: ResolvedModel; av: Record<string, number>; edits: Record<string, number> }) {
+export function WaterfallInSlot(props: { model: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; engine?: Library }) {
   const [slot, setSlot] = useState<Element | null>(null);
   useEffect(() => setSlot(document.querySelector(`[data-waterfall="${CSS.escape(props.model.id)}"]`)), [props.model.id]);
   return slot ? createPortal(<Waterfall {...props} />, slot) : null;

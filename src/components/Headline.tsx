@@ -4,6 +4,7 @@ import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
 import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
 import { editsFor, setPageModels, useEdits } from "../lib/edit-state";
 import { useFigure } from "../lib/metric";
+import { usePageDistribution, withPageDistribution } from "../lib/live-distribution";
 
 const built = new Map<string, ResolvedModel>();
 /** A bulk model in full (its page loads the file before hydrating); any other model as the library has it. */
@@ -26,7 +27,9 @@ export default function Headline({ id, bulk = false, main = false }: { id: strin
   const av = useAssumptionValues();
   const urlEdits = useEdits();
   const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
-  const value = useMemo(() => headline(lib, model, av, edits), [model, av, edits]);
+  // The page's own simulation of the model, once the reader has changed something (lib/live-distribution.ts).
+  const page = usePageDistribution(model.id);
+  const value = useMemo(() => headline(withPageDistribution(lib, model.id, page), model, av, edits), [model, av, edits, page]);
   const { pages } = useResults();
   const fig = useFigure(lib, av);
   const ev = main ? pageEvaluator(pages, model.charity, model.owner) : undefined;

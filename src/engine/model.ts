@@ -962,7 +962,7 @@ export function riskFactor(lib: Library, m: ResolvedModel, a: Record<string, num
   return n ? evaluate(n, (scope, name) => (scope === "assumption" ? a[name] ?? NaN : NaN)) : 1;
 }
 
-const modelConversions = new WeakMap<ResolvedModel, Partial<Record<View, Node | undefined>>>();
+const modelConversions = new WeakMap<ResolvedModel, Partial<Record<View, { d: Distribution | undefined; node: Node | undefined }>>>();
 
 /** What turns a model's result per dollar into its headline in a view: the unit's conversion
  * (headlineConversion) and, in our view, the factor for the estimate's age, the distance weight and an
@@ -972,9 +972,14 @@ const modelConversions = new WeakMap<ResolvedModel, Partial<Record<View, Node | 
 export function modelConversion(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
   let byView = modelConversions.get(m);
   if (!byView) modelConversions.set(m, (byView = {}));
-  if (view in byView) return byView[view];
+  // A page may carry its own simulation of the model (its reader's edits): the conversion follows it.
+  const d = lib.distributions?.[m.id];
+  const hit = byView[view];
+  if (hit && hit.d === d) return hit.node;
   const conv = m.output ? headlineConversion(lib, m.output.unit) : undefined;
-  return (byView[view] = conv && withReaderFactors(lib, m, conv, view));
+  const node = conv && withReaderFactors(lib, m, conv, view);
+  byView[view] = { d, node };
+  return node;
 }
 
 /** A conversion (or a headline formula) divided by the age divisor and times the distance weight and

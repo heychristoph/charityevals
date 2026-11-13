@@ -4,7 +4,7 @@
 // draw. Run at build time (scripts/summaries.ts → generated/distributions.json); the browser only scales
 // the stored shape with the reader's values, so the risk slider and the ranges cost nothing to move.
 import { normInv } from "./expr";
-import { QUANTILES, assumptionValues, compute, headline, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
+import { QUANTILES, RISK_QUANTILE, assumptionValues, compute, headline, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
 import { uncertainty, type Driver } from "./uncertainty";
 
 const Z90 = 1.6448536269514722;
@@ -57,17 +57,24 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
   return { key: d.key, draw: (g) => clip(best * Math.exp(g * (g < 0 ? lo : hi))) };
 }
 
-/** The model's result as a distribution at the defaults, in our view. Undefined for a model with no
- * comparable result or no uncertain input. */
-export function simulate(lib: Library, m: ResolvedModel, draws = 1000): Distribution | undefined {
+/** What a simulation needs: the inputs to draw and the result to compare with. */
+type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; gauss: () => number };
+
+/** A simulation's plan at assumption values `av` (default: the site's) with the reader's edits fixed:
+ * an edited number is the reader's, so it isn't drawn. Undefined for a model with no comparable result or
+ * no uncertain input. */
+function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edits: Record<string, number> = {}): Plan | undefined {
   if (!m.output) return undefined;
-  const av = assumptionValues(lib.assumptions);
-  const central = headline(lib, m, av);
+  // The reader's risk is applied to the result, never inside the draws.
+  const av = { ...(avIn ?? assumptionValues(lib.assumptions)), [RISK_QUANTILE]: 0.5 };
+  const central = headline(lib, m, av, edits);
   if (!Number.isFinite(central) || central === 0) return undefined;
-  const values = compute(lib, m, av);
-  const u = uncertainty(lib, m, values, av, "charityevals");
-  // The inputs that carry 99.9% of the variance, value judgments left out: the rest move nothing.
-  const drivers = u.drivers.filter((d) => d.source !== "assumption").sort((a, b) => b.contribution - a.contribution);
+  const values = compute(lib, m, av, edits);
+  const u = uncertainty(lib, m, values, av, "charityevals", edits);
+  // The inputs that carry 99.9% of the variance, value judgments and the reader's edits left out.
+  const drivers = u.drivers
+    .filter((d) => d.source !== "assumption" && !((d.scope === "fact" ? `@${d.id}` : d.id) in edits))
+    .sort((a, b) => b.contribution - a.contribution);
   const total = drivers.reduce((s, d) => s + d.contribution, 0);
   const kept: Driver[] = [];
   let acc = 0;
@@ -98,13 +105,19 @@ export function simulate(lib: Library, m: ResolvedModel, draws = 1000): Distribu
     while (b === 0) b = random();
     return Math.sqrt(-2 * Math.log(a)) * Math.cos(2 * Math.PI * b);
   };
-  const xs: number[] = [];
-  for (let i = 0; i < draws; i++) {
-    const inputs: Record<string, number> = {};
-    for (const s of specs) inputs[s.key] = s.draw(gauss());
-    const x = headline(lib, m, av, inputs) / central;
+  return { lib, m, av, edits, central, specs, gauss };
+}
+
+function drawInto(p: Plan, n: number, xs: number[]) {
+  for (let i = 0; i < n; i++) {
+    const inputs: Record<string, number> = { ...p.edits };
+    for (const s of p.specs) inputs[s.key] = s.draw(p.gauss());
+    const x = headline(p.lib, p.m, p.av, inputs) / p.central;
     if (Number.isFinite(x)) xs.push(x);
   }
+}
+
+function summarise(xs: number[], draws: number): Distribution | undefined {
   if (xs.length < draws / 2) return undefined;
   xs.sort((a, b) => a - b);
   const at = (p: number) => {
@@ -119,3 +132,28 @@ export function simulate(lib: Library, m: ResolvedModel, draws = 1000): Distribu
   };
 }
 
+/** The model's result as a distribution, in our view: at the site's defaults (the build's), or at the
+ * reader's values `av` with their `edits` fixed. Seeded by model id, so the same values give the same
+ * shape. Undefined for a model with no comparable result or no uncertain input. */
+export function simulate(lib: Library, m: ResolvedModel, draws = 1000, av?: Record<string, number>, edits: Record<string, number> = {}): Distribution | undefined {
+  const p = plan(lib, m, av, edits);
+  if (!p) return undefined;
+  const xs: number[] = [];
+  drawInto(p, draws, xs);
+  return summarise(xs, draws);
+}
+
+/** The same, in batches that give the page back between them (a model page re-simulating after the
+ * reader's edits): resolves undefined once `cancelled()` turns true. */
+export async function simulateInSteps(lib: Library, m: ResolvedModel, av: Record<string, number>, edits: Record<string, number>, cancelled: () => boolean, draws = 1000): Promise<Distribution | undefined> {
+  const p = plan(lib, m, av, edits);
+  if (!p) return undefined;
+  const xs: number[] = [];
+  const batch = 50;
+  for (let done = 0; done < draws; done += batch) {
+    if (cancelled()) return undefined;
+    drawInto(p, Math.min(batch, draws - done), xs);
+    await new Promise((r) => setTimeout(r, 0));
+  }
+  return cancelled() ? undefined : summarise(xs, draws);
+}
