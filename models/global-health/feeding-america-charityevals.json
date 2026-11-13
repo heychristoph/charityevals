@@ -11,7 +11,7 @@
   "estimate_basis": "unit_cost",
   "charity": "feeding-america",
   "owner": "charityevals",
-  "summary": "Feeding America sources donated food from about 600 national food companies for the US network of more than 200 food banks and 60,000 pantries, funds and supports those food banks, and helps people apply for SNAP. In the year to June 2025 it spent $222 million of its own money on this and passed on 2.4 billion pounds of donated food (about 2 billion meals), which, valued at what it saves the households who eat it on the site's log-income scale and credited by Feeding America's small share of the resources behind it (the donors' food at $4.6 billion and the food banks' and pantries' cost of handing it out), with the SNAP enrolments its grants help cause, comes to about 0.01 years of healthy life per $1,000. It is far below the global-health median because the people helped are in the US, where $90 of food a year is a small share of what a household spends, and because most of the resources behind the food are others'. About two thirds is the food, a third SNAP help; both branches are discounted for missing data. The biggest uncertainties are how much of the food would have reached people without Feeding America, how poor the people served are, and how many SNAP enrolments the help causes.",
+  "summary": "Feeding America sources donated food from about 600 national food companies for the US network of more than 250 food banks and 60,000 pantries, funds and supports those food banks, and helps people apply for SNAP. In the year to June 2025 it spent $222 million of its own money on this and passed on 2.4 billion pounds of donated food (about 2 billion meals), which, valued at what it saves the households who eat it on the site's log-income scale and credited by Feeding America's small share of the resources behind it (the donors' food at about $5.7 billion at retail and the food banks' and pantries' cost of handing it out), with the SNAP enrolments its grants help cause and the landfill emissions the donated food avoids, comes to about 0.018 years of healthy life per $1,000. It is far below the global-health median because the people helped are in the US, where $90 of food a year is a small share of what even a poor household spends, and because most of the resources behind the food are others'. About two thirds is the food, most of the rest SNAP help; both branches are discounted for missing data. The biggest uncertainties are how much of the food would have reached people without Feeding America, how poor the people served are, and how many SNAP enrolments the help causes.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Feeding America, food network programmes (FY2025)",
@@ -310,13 +310,8 @@
       "section": "effect",
       "label": "The people served's consumption per person, as a share of the average",
       "format": "percent",
-      "value": {
-        "low": 0.45,
-        "best": 0.6,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "Anchored on the poorest fifth: its spending per household is 45% of the average (@united_states.ce_lowest_quintile_vs_all_2024), about 67% per person since its households are smaller (1.6 people against 2.4). Pantry users are mostly at or below the poorest fifth's incomes (most food banks' cut-off is about 185 to 200% of the poverty line), so 0.6, range 0.45 to 0.75."
+      "explainer": "The shared figure for people getting US food aid, pantry food or SNAP (@united_states.food_aid_recipients_consumption_share, 30%, range 20-50%): pantry clients are mostly at or below the poverty line, poorer than the poorest fifth of households on average. The Salvation Army build reads the same figure.",
+      "formula": "@united_states.food_aid_recipients_consumption_share"
     },
     {
       "id": "baseline_consumption",
@@ -456,7 +451,7 @@
         "quote": "Monthly benefits averaged $188.30 per person and $353.43 per household.",
         "retrieved": "2026-11-13"
       },
-      "explainer": "The national average; the benefit falls as income rises, and the newly enrolled are about average."
+      "explainer": "The national average benefit per household; the households the help enrols get less (snap_marginal_benefit_ratio)."
     },
     {
       "id": "snap_benefit_per_person_year",
@@ -464,6 +459,35 @@
       "label": "SNAP: benefit per person per year (US$)",
       "format": "usd",
       "formula": "snap_benefit_household_month * 12 / snap_people_per_household"
+    },
+    {
+      "id": "snap_marginal_benefit_ratio",
+      "section": "effect",
+      "label": "SNAP: benefit of the households the help enrols, against the average benefit",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Households enrolled by outreach are less needy than those who enrol unaided and get smaller benefits on average (Finkelstein and Notowidigdo 2019 find the marginal enrollees in their trial less poor and with lower benefits than existing participants). 0.8, range 0.6 to 1."
+    },
+    {
+      "id": "snap_cash_equivalence",
+      "section": "effect",
+      "label": "SNAP: what a dollar of benefits is worth against a dollar of cash",
+      "format": "percent",
+      "formula": "@snap.cash_equivalence",
+      "explainer": "The shared figure (@snap.cash_equivalence, 0.95): most SNAP households spend more on food than their benefit, so it frees cash. The advocacy model reads the same figure."
+    },
+    {
+      "id": "snap_benefit_share",
+      "section": "effect",
+      "label": "SNAP: share of the programme's cost paid out as benefits",
+      "format": "percent",
+      "formula": "@snap.benefit_share",
+      "explainer": "The shared figure (@snap.benefit_share, 0.92): taxpayers pay the administration too, so the payers' cost is the benefit over this. The advocacy model reads the same figure."
     },
     {
       "id": "snap_years",
@@ -476,7 +500,7 @@
         "high": 3
       },
       "kind": "judgment",
-      "explainer": "New entrants' spells are short (many leave within a year) but many come back; 1.5 years, range 9 months to 3 years. Recertification needs no further help from the food bank.",
+      "explainer": "New entrants' spells are short: USDA's studies of SNAP participation dynamics find many spells end within a year, and many who leave come back later. 1.5 years, range 9 months to 3 years. Recertification needs no further help from the food bank.",
       "unit": "years"
     },
     {
@@ -491,42 +515,32 @@
       "section": "effect",
       "label": "SNAP: ln(consumption) gain per person enrolled, discounted",
       "format": "number",
-      "formula": "ln(1 + snap_benefit_per_person_year / baseline_consumption) * pv_annuity_due(1, $discount_rate, snap_years)",
-      "explainer": "The benefit at the same clients' consumption as the food branch, over the years on the programme, discounted. SNAP is spent on food the household would mostly buy anyway, so it counts as cash."
+      "formula": "snap_cash_equivalence * ln(1 + snap_benefit_per_person_year * snap_marginal_benefit_ratio / baseline_consumption) * pv_annuity_due(1, $discount_rate, snap_years)",
+      "explainer": "The benefit of the households the help enrols, at the shared value of SNAP against cash, at the same clients' consumption as the food branch, over the years on the programme, discounted."
     },
     {
       "id": "mcpf",
       "section": "effect",
       "label": "Marginal cost of public funds: what a dollar of public money costs those who pay, in dollars",
       "format": "multiple",
-      "value": {
-        "low": 1.0,
-        "best": 1.2,
-        "high": 1.5
-      },
-      "kind": "judgment",
-      "explainer": "Raising a dollar of tax costs the economy more than a dollar through the work and spending it discourages: estimates for rich countries' taxes run from about 1.1 to 1.5 (Dahlby 2008, The Marginal Cost of Public Funds). 1.2, range 1 to 1.5: the same judgment as the Habitat for Humanity advocacy build's."
+      "explainer": "The shared marginal cost of public funds (@public_finance.mcpf: OMB's 25 cents of excess burden per dollar of US tax, 1.25, range 1 to 1.5): what a dollar of SNAP costs the taxpayers who pay for it.",
+      "formula": "@public_finance.mcpf"
     },
     {
       "id": "payer_multiple",
       "section": "effect",
       "label": "How the federal taxes behind SNAP fall, relative to a tax proportional to consumption",
       "format": "multiple",
-      "value": {
-        "low": 1.0,
-        "best": 1.4,
-        "high": 2.0
-      },
-      "kind": "judgment",
-      "explainer": "On the log scale a dollar taken from someone costs 1 over their consumption; a tax proportional to consumption costs 1 over the national-accounts mean (a multiple of 1), a progressive one less (above 1). SNAP is federal money, paid for by the federal income tax and borrowing, which fall mostly on richer households: 1.4, range 1 (borrowing repaid by everyone alike) to 2. The Habitat advocacy build's 1.6 high end for federal or income-tax money is inside this range."
+      "explainer": "The shared figure for how US federal taxes fall (@public_finance.us_federal_payer_multiple, 1.4, range 1 to 2): SNAP is paid for by the federal income tax and borrowing, which fall mostly on richer households.",
+      "formula": "@public_finance.us_federal_payer_multiple"
     },
     {
       "id": "snap_payer_cost_per_person",
       "section": "effect",
       "label": "SNAP: ln(consumption) given up by those who pay, per person enrolled",
       "format": "number",
-      "formula": "snap_benefit_per_person_year * mcpf / (payer_multiple * @united_states.consumption_per_person_2024) * pv_annuity_due(1, $discount_rate, snap_years)",
-      "explainer": "The benefit is a transfer from taxpayers: what it costs them on the same log scale, at the national-accounts consumption per person, as the Habitat advocacy build counts government money."
+      "formula": "snap_benefit_per_person_year * snap_marginal_benefit_ratio / snap_benefit_share * mcpf / (payer_multiple * @united_states.consumption_per_person_2024) * pv_annuity_due(1, $discount_rate, snap_years)",
+      "explainer": "The benefit and its administration are a transfer from taxpayers: what they cost them on the same log scale, at the national-accounts consumption per person, times the cost of raising public money, as the advocacy model and the Habitat for Humanity advocacy build count government money."
     },
     {
       "id": "snap_net_ln_per_person",
@@ -569,10 +583,10 @@
       "value": {
         "low": 0.1,
         "best": 0.25,
-        "high": 0.6
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Member food banks and their 60,000 partner pantries and meal programmes collect, sort, store and hand out the food, with paid staff, trucks, warehouses and volunteers (valued at the US volunteer hour, @united_states.volunteer_hour_value_2025). The shared maintenance fee food banks may charge pantries to recover handling costs is about 20 cents a pound, which covers part of their cost; 25 cents in all, range 10 to 60 cents."
+      "explainer": "Member food banks and their 60,000 partner pantries and meal programmes collect, sort, store and hand out the food, with paid staff, trucks, warehouses and volunteers (most pantries are run by volunteers, valued at the US volunteer hour, @united_states.volunteer_hour_value_2025, $36). The shared maintenance fee food banks may charge pantries is about 20 cents a pound and covers only part of the food banks' cost; with the pantries' volunteer hours, 25 cents in all, range 10 to 80 cents."
     },
     {
       "id": "snap_program_share",
@@ -588,12 +602,25 @@
       "explainer": "The programs line ($37 million, a sixth of the modelled cost) pays for SNAP outreach, child hunger and food-as-medicine grants; about a third of it for SNAP help is about 6% of the whole cost, range 3% to 12%."
     },
     {
+      "id": "cost_per_assisted_application",
+      "section": "adjustments",
+      "label": "SNAP: cost of the network's help per application (all funders, US$)",
+      "format": "usd",
+      "value": {
+        "low": 75,
+        "best": 150,
+        "high": 300
+      },
+      "kind": "judgment",
+      "explainer": "Screening, help with the forms and documents, and follow-up through the interview: a few hours of trained staff or volunteer time per application, with outreach to find the applicants. $150, range $75 to $300. Food banks' outreach is paid for largely by state SNAP outreach contracts (half federally reimbursed) and their own funds; Feeding America's grants are the rest."
+    },
+    {
       "id": "food_attribution_share",
       "section": "adjustments",
       "label": "Food: Feeding America's share of the resources behind the food reaching people",
       "format": "percent",
-      "formula": "cost_total * (1 - snap_program_share) / (cost_total * (1 - snap_program_share) + @feeding_america.donated_food_value_fy2025 + fa_pounds * distribution_cost_per_lb)",
-      "explainer": "Convention 2: Feeding America's own cash against the donors' food at its audited wholesale value and the members' and pantries' cost of handing it out. Credit goes by share of resources, so Feeding America is credited with about 5% of the food's value."
+      "formula": "cost_total * (1 - snap_program_share) / (cost_total * (1 - snap_program_share) + @feeding_america.donated_food_value_fy2025 * retail_vs_wholesale + fa_pounds * distribution_cost_per_lb)",
+      "explainer": "Convention 2: Feeding America's own cash against the donors' food at its retail value (the audited wholesale value times the same retail mark-up the effect uses, as the family recipe asks) and the members' and pantries' cost of handing it out. Credit goes by share of resources, so Feeding America is credited with about 4% of the food's value. The programs line's child hunger and food-as-medicine grants pay for handing out network food to children and patients (backpacks, school and clinic pantries), so they are part of this branch's cost and its food."
     },
     {
       "id": "snap_evidence_adj",
@@ -618,28 +645,16 @@
         "best": 0.35,
         "high": 0.65
       },
-      "kind": "estimate",
-      "source": {
-        "title": "Finkelstein and Notowidigdo 2019, Take-up and Targeting: Experimental Evidence from SNAP (NBER w24652)",
-        "url": "https://www.nber.org/papers/w24652",
-        "quote": "Only 6 percent of the control group enrolls in SNAP over the next 9 months",
-        "retrieved": "2026-11-13",
-        "note": "against 11 percent of the Information Only group and 18 percent of the Information Plus Assistance group."
-      },
-      "explainer": "In the trial, application help raised enrolment among eligible older people from 6% to 18%: two thirds of the assisted group's enrolments were caused by the outreach. People who come to a food bank for help are readier to apply, so a smaller share: 0.35, range 0.15 to 0.65."
+      "kind": "judgment",
+      "explainer": "Anchored on the one trial of SNAP application help, Finkelstein and Notowidigdo 2019 (NBER w24652): enrolment among eligible older people was 6% in the control group and 18% with information plus application help, so two thirds of the assisted group's enrolments were caused by the help. People who come to a food bank for help are readier to apply on their own, so a smaller share: 0.35, range 0.15 to 0.65."
     },
     {
       "id": "snap_attribution_share",
       "section": "adjustments",
       "label": "SNAP: Feeding America's share of the resources behind the network's SNAP help",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.25,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "The members' SNAP outreach is paid for largely by state outreach contracts (half federally reimbursed) and the food banks' own funds; Feeding America's grants are one part. 0.25, range 0.1 to 0.5."
+      "explainer": "Feeding America's share of the resources behind the network's SNAP help: its own cost on SNAP over the cost of all the help (Convention 2), so the credit follows the cost assumed to go to SNAP.",
+      "formula": "cost_total * snap_program_share / (snap_applications * cost_per_assisted_application)"
     },
     {
       "id": "implementation_adj",
@@ -647,12 +662,12 @@
       "label": "Delivery adjustment: share of the food passed on that is eaten",
       "format": "percent",
       "value": {
-        "low": 0.75,
-        "best": 0.9,
-        "high": 0.97
+        "low": 0.85,
+        "best": 0.95,
+        "high": 0.99
       },
       "kind": "judgment",
-      "explainer": "Some donated food spoils or is thrown away at the food bank, the pantry or at home (much is near its date). 0.9, range 0.75 to 0.97. Food only."
+      "explainer": "Share of the food passed on that reaches households: some donated food spoils or is thrown away at the food bank or pantry (much is near its date). 0.95, range 0.85 to 0.99. Food unused at home is in inkind_cash_equivalence, not here. Food only."
     },
     {
       "id": "leverage_funging_adj",
@@ -762,12 +777,64 @@
       "format": "percent",
       "value": {
         "low": -0.05,
-        "best": 0.1,
-        "high": 0.3
+        "best": -0.01,
+        "high": 0.05
       },
       "kind": "judgment",
-      "explainer": "(+) Feeding America's grants, trucks, cold storage, technology and training also help the members move their own, purchased and USDA food (about two thirds of the network's 5.9 billion meals), +6%; (+) food kept out of landfill (about 1.1 million tonnes a year, whose methane would otherwise warm the climate), +2%; (+) food-as-medicine and child hunger programmes beyond SNAP help, +2%; (-) donated food that displaces sales by grocers and so some farm income, and pantries' food replacing what families would have got from other charities, -1%. 10%, range -5% to +30%.",
+      "explainer": "(-) donated food that displaces grocers' sales and so some farm and store income, and pantry food replacing what families would have got from other charities, -1%; (+) volunteers' own wellbeing from volunteering, not counted, up to +3%. -1%, range -5% to +5%. Not here: the grants' help to members moving their own food (their cost is already in the resource-share credit), the child hunger and food-as-medicine grants (part of the food branch), and food kept out of landfill (its own row, below).",
       "side_effect": "added"
+    },
+    {
+      "id": "tonnes_per_pound",
+      "section": "effect",
+      "label": "Tonnes per pound",
+      "format": "small",
+      "value": 0.00045359237,
+      "kind": "observed",
+      "source": {
+        "title": "NIST, SI units: mass (the international avoirdupois pound)",
+        "url": "https://www.nist.gov/pml/owm/si-units-mass",
+        "page": "the pound is defined as exactly 0.453 592 37 kilogram",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The definition of the pound, to turn the pounds of donated food into metric tonnes of food kept out of the waste stream."
+    },
+    {
+      "id": "landfill_share",
+      "section": "effect",
+      "label": "Share of the donated food that would otherwise have gone to landfill",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Without donation, unsold food from manufacturers and retailers goes partly to landfill and partly to animal feed, composting, anaerobic digestion or salvage sellers; in the US most wasted food is landfilled. 30%, range 10% to 60%."
+    },
+    {
+      "id": "tco2e_per_tonne_food_landfilled",
+      "section": "effect",
+      "label": "Tonnes of CO2e from landfilling a tonne of food (net of landfill gas capture)",
+      "format": "number",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "unit": "tCO2e",
+      "explainer": "Food in a landfill rots into methane, part of it captured. EPA's Waste Reduction Model puts landfilled food waste at roughly half a tonne of CO2e per short ton, net of gas capture; 0.5, range 0.3 to 0.8 (lower with good capture, higher over 20 years). The emissions of producing the food are not counted: the food was produced either way."
+    },
+    {
+      "id": "landfill_tco2e_averted",
+      "section": "effect",
+      "label": "Food: landfill emissions averted, Feeding America's credit (t CO2e)",
+      "format": "number",
+      "unit": "tCO2e",
+      "side_effect": "added",
+      "formula": "fa_pounds * tonnes_per_pound * landfill_share * tco2e_per_tonne_food_landfilled * food_counterfactual_adj * food_attribution_share * food_missing_data_adj",
+      "explainer": "A side effect: food passed on instead of landfilled, with Feeding America's credit share, the share that it caused and the missing-data step of the food branch."
     },
     {
       "id": "food_uov",
@@ -904,9 +971,9 @@
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj) + dalys_from_tco2e",
       "unit": "DALYs",
-      "explainer": "Every outcome, each in healthy years by its own unit's conversion, each branch after its own adjustments, plus the unmodelled share."
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, each branch after its own adjustments, plus the unmodelled share and the landfill emissions averted."
     },
     {
       "id": "dalys_per_dollar",
@@ -953,6 +1020,75 @@
       "format": "small",
       "formula": "dalys_per_dollar * donor_cost_share",
       "unit": "Years of healthy life / $"
+    },
+    {
+      "id": "fuel_share",
+      "section": "bridges",
+      "label": "Share of these tonnes from burning less fossil fuel near people",
+      "format": "percent",
+      "value": 0,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: emissions inventory",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "0: rotting food carries no smoke (the climate skeleton's row, docs/normalization.md 2.5)."
+    },
+    {
+      "id": "fuel_smoke_factor",
+      "section": "bridges",
+      "label": "Air-pollution deaths per tonne of this fuel, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.02,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: deaths per TWh study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "Not used here: fuel_share is 0, so the smoke factor doesn't count (the climate skeleton's row)."
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "bridges",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "fuel_share * fuel_smoke_factor",
+      "explainer": "Read by the tonnes' bridge, as by the tco2e unit's conversion."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "bridges",
+      "label": "Air-pollution deaths averted per tonne, counted directly (none here)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
+    },
+    {
+      "id": "tco2e_bridged",
+      "section": "bridges",
+      "label": "Landfill emissions averted, in tonnes of CO2e (after adjustments)",
+      "format": "number",
+      "unit": "tCO2e",
+      "formula": "landfill_tco2e_averted"
+    },
+    {
+      "id": "dalys_from_tco2e",
+      "section": "bridges",
+      "label": "Climate, in healthy years",
+      "format": "number",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     }
   ],
   "output": {
