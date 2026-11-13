@@ -1920,13 +1920,22 @@
       "explainer": "The forest branches' risk-years after their adjustments, per discounted year of protection: about one in a hundred billion a year. For reading and the bounds check; the branches' uov rows carry it."
     },
     {
+      "id": "future_years_per_person",
+      "section": "effect",
+      "label": "Discounted future years of healthy life per person of the long-run population, if the future ends now",
+      "format": "number",
+      "formula": "(1 - (1 + $discount_rate) ^ -@catastrophe.life_expectancy_now) / (ln(1 + $discount_rate) * ln(1 + $discount_rate) * @catastrophe.life_expectancy_now)",
+      "unit": "years",
+      "explainer": "The site's one count of future generations (docs/normalization.md 2.19): the healthy years of people not yet born, discounted for ever at the shared rate. People alive now die in the catastrophe and are counted as deaths, so this stream rises from nothing to the long-run population over one lifetime (@catastrophe.life_expectancy_now) and then runs on: about 8 years at the default 4%, about 960 at the 0.1% floor. Fixed; don't edit."
+    },
+    {
       "id": "future_dalys_averted",
       "section": "effect",
       "label": "Catastrophic risk: future years of healthy life kept, discounted",
       "format": "number",
       "unit": "DALYs",
-      "formula": "(deal_risk_years * deal_credit + prot_risk_years * prot_credit + zdc_risk_years * zdc_credit) * future_share_lost * @catastrophe.world_population_long_run / $discount_rate",
-      "explainer": "Every later year's healthy life the catastrophe would take (the long-run world population × the share lost), discounted for ever at the shared rate; 0 at the best guess (future_share_lost). Already credited by branch."
+      "formula": "(deal_risk_years * deal_credit + prot_risk_years * prot_credit + zdc_risk_years * zdc_credit) * future_share_lost * @catastrophe.world_population_long_run * future_years_per_person",
+      "explainer": "Every later year's healthy life the catastrophe would take from people not yet born (the long-run world population × the share lost × future_years_per_person), discounted for ever at the shared rate; 0 at the best guess (future_share_lost). Already credited by branch."
     },
     {
       "id": "ocean_attribution_share",

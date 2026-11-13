@@ -26,6 +26,8 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
                     each other unit's outcome through one fixed bridge row (src/engine/bridges.ts,
                     docs/normalization.md 2.6); companion-animals  days of pain -> ced_dog / ced_cat
                     with @welfare_ranges (the raw species step)
+  catastrophic-risk  yearly chances by size (@catastrophe, $ai_catastrophe_chance), a typical dollar's cut,
+                    deaths by the world's age split, the future through future_years_per_person
   every skeleton    missing_data_adj in total_adj (a branch's <branch>_missing_data_adj): the shared
                     $missing_data_discount where the outcome isn't measured for this charity, else 1 with
                     the reason (docs/normalization.md 2.12)
@@ -499,6 +501,14 @@ T["policy-research-meta-climate"] = model("policy-research-meta", "climate polic
 # --- outcomes in several units (the new families) --------------------------------------------
 VPD = "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier"
 
+# Future generations (docs/normalization.md 2.19): the discounted healthy years of people not yet born, per person of
+# the long-run population, if humanity's future ends now. The people alive are counted as deaths, so the stream rises
+# from nothing to the long-run population over one lifetime (a linear ramp, closed form), then runs for ever:
+# (1 - e^-dL) / (d^2 L) with d = ln(1 + rate); 1/d - L/2 at a rate near 0.
+FUTURE = "(1 - (1 + $discount_rate) ^ -@catastrophe.life_expectancy_now) / (ln(1 + $discount_rate) * ln(1 + $discount_rate) * @catastrophe.life_expectancy_now)"
+FUTURE_ROW = f("future_years_per_person", "effect", "Discounted future years of healthy life per person of the long-run population, if the future ends now", FUTURE,
+    "The site's one count of future generations (docs/normalization.md 2.19): the healthy years of people not yet born, discounted for ever at the shared rate. People alive now die in the catastrophe and are counted as deaths, so this stream rises from nothing to the long-run population over one lifetime (@catastrophe.life_expectancy_now) and then runs on: about 8 years at the default 4%, about 960 at the 0.1% floor. Fixed; don't edit.", "number", "years")
+
 def age_rows(section, under5, what):
     return [
         inp("share_under5", section, f"Share of {what} that are of children under five", under5, "estimate",
@@ -509,9 +519,9 @@ def age_rows(section, under5, what):
             "the rest at 50 and over (GiveWell's 50-74 weight; for deaths mostly above 75, as in rich-country care, a mix of @moral_weights.givewell_age_75_79 … _85_plus by the deaths' ages instead).", "percent", source=src("WHO Global Health Estimates / IHME GBD")),
     ]
 
-def multi(inputs, direct, unmodelled=True, extra_outcome=()):
+def multi(inputs, direct, unmodelled=True, extra_outcome=(), side=("unmodelled_benefits_adj",)):
     """Bridges for every unit a family counts in (`inputs`: unit -> (formula, label)), summed with the DALYs
-    counted directly into outcome_total, in DALYs."""
+    counted directly into outcome_total, in DALYs; `side`: the added shares (side effects) in the last factor."""
     rows, parts = [], ["dalys_direct"]
     for unit, (formula, label) in inputs.items():
         p = PREFIX_OF[unit]
@@ -521,7 +531,7 @@ def multi(inputs, direct, unmodelled=True, extra_outcome=()):
         parts.append(f"dalys_from_{unit}")
     rows.append(f("dalys_direct", "outcome", "Healthy years counted directly (before adjustments)", direct, None, "number", "DALYs"))
     rows += list(extra_outcome)
-    rows.append(f("outcome_total", "outcome", "Years of healthy life", f"({' + '.join(parts)}) * total_adj" + (" * (1 + unmodelled_benefits_adj)" if unmodelled else ""),
+    rows.append(f("outcome_total", "outcome", "Years of healthy life", f"({' + '.join(parts)}) * total_adj" + (f" * (1 + {' + '.join(side)})" if unmodelled else ""),
                   "Every outcome, each in healthy years by its own unit's conversion, times the adjustments.", "number", "DALYs"))
     rows.append(f("dalys_per_dollar", "outcome", "Years of healthy life per dollar", "outcome_total / cost_total", None, "small", "DALYs / $"))
     return rows
@@ -710,8 +720,9 @@ T["conservation"] = model("conservation", "conservation of land, water and speci
           "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number. Future generations are the next two rows.", "number", "units of value"),
         inp("future_share_lost", "effect", "Catastrophic risk: share of every later year's healthy life the catastrophe would take", {"low": 0, "best": 0, "high": 0.001}, "judgment",
             "0 for a catastrophe the world recovers from (its deaths are counted above); 1 for one that ends humanity's future; between for one that permanently shrinks it. Anchor on published scenario studies; usually 0 for conservation.", "percent"),
-        f("future_dalys_averted", "effect", "Catastrophic risk: future years of healthy life kept, discounted", "annual_risk_reduction * protection_years * future_share_lost * @catastrophe.world_population_long_run / $discount_rate",
-          "Every later year's healthy life the catastrophe would take (the long-run world population × the share lost), discounted for ever at the shared rate: the yearly loss ÷ $discount_rate. How much future generations count is your discount rate.", "number", "DALYs"),
+        FUTURE_ROW,
+        f("future_dalys_averted", "effect", "Catastrophic risk: future years of healthy life kept, discounted", "annual_risk_reduction * protection_years * future_share_lost * @catastrophe.world_population_long_run * future_years_per_person",
+          "Every later year's healthy life the catastrophe would take from people not yet born (the long-run world population × the share lost), discounted for ever at the shared rate. How much future generations count is your discount rate.", "number", "DALYs"),
     ] + adj_rows(leverage=True, unmodelled=True, counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.2, "best": 0.5, "high": 0.8}, "judgment",
             "the share of the land that would have been lost without the protection (the baseline loss rate over the years protected, from matched comparisons of protected and unprotected sites), and that no one else would have protected. Name the study.", "percent")) + multi({
         "uov": ("livelihood_people * ln_gain_per_person_year * protection_years * $uov_per_ln_consumption + catastrophe_deaths * annual_risk_reduction * protection_years * catastrophe_value_per_death", "Livelihoods and catastrophic risk"),
@@ -753,9 +764,125 @@ T["rights-advocacy"] = model("rights-advocacy", "rights and advocacy", "daly", "
     }, "people_affected_per_year * dalys_per_person_year * p_success * discounted_years") + donor_rows("dalys", "Years of healthy life", "advocacy", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
     "what the charity does, its theory of change from the wins to people's lives, " + BOTTOM, "past_average", sections=MULTI_SECTIONS)
 
+# --- catastrophic-risk -----------------------------------------------------------------------
+# AI, pandemics and nuclear war (docs/normalization.md 2.19, references/families/catastrophic-risk.md). Each area's
+# yearly chance of a catastrophe by size (extinction-level, one that kills a share of people, a smaller one) is
+# shared (@catastrophe, the AI chance the slider $ai_catastrophe_chance); the charity's work cuts it by a relative
+# share: a typical dollar's cut (@catastrophe.<area>_*_cut_per_million) for field work, a judged cut for a policy won,
+# work-years for people trained; every cut counts $win_years_counted years, discounted. Deaths are valued like every
+# death (world age split), the future lost by future_years_per_person.
+AREAS = [("ai", "AI", "$ai_catastrophe_chance / forecast_years", "$ai_catastrophe_chance * (@catastrophe.ai_catastrophe_vs_extinction - 1) / forecast_years", 0.3,
+          "AI (technical safety research, evaluations, AI governance and policy)"),
+         ("bio", "Pandemics", "@catastrophe.bio_extinction_by_2100 / forecast_years", "(@catastrophe.bio_catastrophe_by_2100 - @catastrophe.bio_extinction_by_2100) / forecast_years", 0.3,
+          "pandemics (biosecurity, DNA synthesis screening, biosafety policy, preparedness)"),
+         ("nuclear", "Nuclear war", "@catastrophe.nuclear_extinction_by_2100 / forecast_years", "(@catastrophe.nuclear_catastrophe_by_2100 - @catastrophe.nuclear_extinction_by_2100) / forecast_years", 0.2,
+          "nuclear war (arms control, diplomacy, materials security, resilience such as food after a nuclear winter)")]
+
+def area_rows(a, name, ext, cat, share, what):
+    small = {"bio": ("@catastrophe.pandemic_probability_covid_scale", "@catastrophe.covid_excess_deaths")}.get(a)
+    rows = [
+        f(f"{a}_extinction_per_year", "effect", f"{name}: yearly chance of a catastrophe that ends humanity's future", ext,
+          "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament" + (", the AI chance your slider" if a == "ai" else "") + "). Fixed; don't edit.", "small", "per year"),
+        f(f"{a}_catastrophe_per_year", "effect", f"{name}: yearly chance of a catastrophe the world survives (over 10% of people die)", cat,
+          "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit.", "small", "per year"),
+    ]
+    if small:
+        rows += [f(f"{a}_smaller_per_year", "effect", f"{name}: yearly chance of a smaller catastrophe (a COVID-scale pandemic)", small[0], "The shared yearly chance of a pandemic as deadly as COVID-19 (@catastrophe.pandemic_probability_covid_scale). Fixed.", "small", "per year"),
+                 f(f"{a}_smaller_deaths", "effect", f"{name}: deaths in a smaller catastrophe", small[1], "WHO's excess deaths of COVID-19's first two years (@catastrophe.covid_excess_deaths). Fixed.", "integer", "deaths")]
+    else:
+        rows += [inp(f"{a}_smaller_per_year", "effect", f"{name}: yearly chance of a smaller catastrophe", 0, "estimate",
+                     f"a smaller {name.lower()} disaster the work also lowers (a single nuclear detonation in a city, a limited war; an AI incident that kills thousands), per year, from a published forecast or record, and its deaths in the next row; 0 with this reason where none is sourced. A shared figure another model could reuse goes into facts/catastrophe.json and is read here.", "small", "per year", src("forecast / historical record")),
+                 inp(f"{a}_smaller_deaths", "effect", f"{name}: deaths in a smaller catastrophe", 0, "estimate", "the deaths in the smaller disaster above, from the same source; 0 when the row above is 0.", "integer", "deaths", src("scenario study"))]
+    rows += [
+        f(f"{a}_deaths_if_catastrophe", "effect", f"{name}: deaths in a catastrophe the world survives", f"@catastrophe.world_population_now * @catastrophe.{a}_catastrophe_death_share",
+          "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed.", "integer", "deaths"),
+        f(f"{a}_deaths_per_year", "effect", f"{name}: expected deaths a year from these catastrophes", f"{a}_extinction_per_year * deaths_if_extinct + {a}_catastrophe_per_year * {a}_deaths_if_catastrophe + {a}_smaller_per_year * {a}_smaller_deaths", "Each size's yearly chance × the people it kills.", "number", "deaths / year"),
+        f(f"{a}_future_per_year", "effect", f"{name}: expected future healthy years lost a year (extinction-level)", f"{a}_extinction_per_year * future_dalys_if_extinct", "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others.", "number", "DALYs / year"),
+        f(f"{a}_deaths_per_million", "effect", f"{name}: deaths averted a year by a typical $1 million of work, while its cut counts",
+          f"@catastrophe.{a}_extinction_cut_per_million * {a}_extinction_per_year * deaths_if_extinct + @catastrophe.{a}_catastrophe_cut_per_million * ({a}_catastrophe_per_year * {a}_deaths_if_catastrophe + {a}_smaller_per_year * {a}_smaller_deaths)",
+          "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit.", "small", "deaths / year"),
+        f(f"{a}_future_per_million", "effect", f"{name}: future healthy years kept a year by a typical $1 million of work", f"@catastrophe.{a}_extinction_cut_per_million * {a}_future_per_year", None, "small", "DALYs / year"),
+        inp(f"{a}_cost_share", "effect", f"{name}: share of the cost spent on work against {name.lower()} risk (research, evaluations, convening, advocacy)", share, "estimate",
+            f"the share of the modelled spending on {what}, from the charity's programme expenses (Form 990 Part III, the accounts' programme notes), overhead spread alike. Leave out the spending behind a specific win counted in the policy branch (pol_cost_share) and on training counted in fb_cost_share, so nothing counts twice. 0 with the reason where the charity does none.", "percent", source=src("Form 990 Part III / annual accounts")),
+        inp(f"{a}_years_until_effect", "effect", f"{name}: years from the spending until the work cuts the risk", {"low": 0, "best": 1, "high": 3}, "judgment",
+            "from the spending to the work's effect (a paper read, an evaluation run, a norm adopted); discounted at the shared rate.", "number", "years"),
+        f(f"{a}_discounted_years", "effect", f"{name}: discounted years the cut counts", f"pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -{a}_years_until_effect", None, "number", "years"),
+        f(f"{a}_deaths_averted", "effect", f"{name}: deaths averted by the work (expected, before adjustments)", f"cost_total * {a}_cost_share / 1e6 * {a}_deaths_per_million * {a}_discounted_years", None, "small", "deaths"),
+        f(f"{a}_future_dalys", "effect", f"{name}: future healthy years kept (expected, before adjustments)", f"cost_total * {a}_cost_share / 1e6 * {a}_future_per_million * {a}_discounted_years", None, "number", "DALYs"),
+    ]
+    return rows
+
+CR_POINT = "TEMPLATE: point it at the area of the {what} (ai_, bio_ or nuclear_{row}); several areas: a weighted sum with a weight row."
+T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (AI, pandemics, nuclear war)", "daly", "dalys", "Years of healthy life", "catastrophic-risk",
+    cost_rows() + [
+        f("forecast_years", "effect", "Years the shared forecasts cover", "@catastrophe.xpt_end_year - @catastrophe.xpt_forecast_year", "From the year the chances were forecast to 2100: turns a chance by 2100 into a yearly one. Fixed.", "number", "years"),
+        f("deaths_if_extinct", "effect", "Deaths in a catastrophe that ends humanity's future", "@catastrophe.world_population_now", "Everyone alive. Fixed.", "integer", "deaths"),
+        f("share_under5", "effect", "Share of the deaths that are of children under five", "@death_ages.population_world_share_under5", "A global catastrophe kills every age alike: the world's age split (@death_ages.population_world_*). Fixed.", "percent"),
+        f("share_5_14_of_over5", "effect", "Of the deaths at five or older, share aged 5 to 14", "@death_ages.population_world_share_5_14_of_over5", None, "percent"),
+        f("share_15_49_of_over15", "effect", "Of the deaths at 15 or older, share aged 15 to 49", "@death_ages.population_world_share_15_49_of_over15", None, "percent"),
+        f("value_per_death", "effect", "Value of a death averted (units of value)", VPD, "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size.", "number", "units of value"),
+        FUTURE_ROW,
+        f("future_dalys_if_extinct", "effect", "Future healthy years lost if humanity's future ends", "@catastrophe.world_population_long_run * future_years_per_person",
+          "The long-run world population's healthy years, of people not yet born, discounted at the shared rate: your discount rate is how much future generations count.", "number", "DALYs"),
+        f("years_of_impact", "effect", "Years a cut in the risk counts before it would have come anyway", "$win_years_counted",
+          "The site's one answer (docs/normalization.md 2.9): work, a won policy or a trained person's career brings a cut in the risk forward by these years; Rethink Priorities' 15-25 years of persistence is replaced by it.", "number", "years"),
+    ] + [r for a in AREAS for r in area_rows(*a)] + [
+        inp("pol_cost_share", "effect", "Policy win: share of the cost spent on the campaign that won it", 0.1, "estimate",
+            "the spending behind the specific win below (a treaty, law, regulation, standard or institution launched), left out of the areas' shares; 0 with the reason without such a win in the year. Several wins: a pol2_ branch each. Feeds only the check cost_shares_total.", "percent", source=src("charity report / accounts")),
+        inp("pol_wins", "reach", "Policy win: wins of this kind in the year", 1, "observed",
+            "treaties, laws, regulations, standards or institutions won or launched in the year that the policy branch values (one kind per branch; a pol2_ branch for another); 0, with the reason, without one: then the branch counts nothing.", "integer", source=src("charity report / official record")),
+        inp("pol_p_success", "effect", "Policy win: chance it happens because of this work", {"low": 0.05, "best": 0.3, "high": 0.7}, "judgment",
+            "for a pending bill, treaty or standard, the chance of winning from a reference class (similar measures passed or failed); for a win already in the year, 1 (then delete single_event) and the charity's share of the cause in attribution_share_shared. Name the reference class.", "percent"),
+        inp("pol_relative_cut", "effect", "Policy win: share of the area's yearly risk it removes while in force", {"low": 0.001, "best": 0.01, "high": 0.05}, "judgment",
+            "how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use) and on Rethink Priorities' cut per project (@catastrophe.<area>_catastrophe_cut_per_million × its cost). Name the anchor.", "percent"),
+        inp("pol_years_until_effect", "effect", "Policy win: years until it takes effect", {"low": 0, "best": 1, "high": 3}, "judgment", "from the win to entry into force; discounted at the shared rate.", "number", "years"),
+        f("pol_discounted_years", "effect", "Policy win: discounted years the cut counts", "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -pol_years_until_effect", None, "number", "years"),
+        f("pol_deaths_per_year", "effect", "Policy win: expected deaths a year from the area's catastrophes", "nuclear_deaths_per_year", CR_POINT.format(what="win", row="deaths_per_year"), "number", "deaths / year"),
+        f("pol_future_per_year", "effect", "Policy win: expected future healthy years lost a year in the area", "nuclear_future_per_year", CR_POINT.format(what="win", row="future_per_year"), "number", "DALYs / year"),
+        f("pol_deaths_averted", "effect", "Policy win: deaths averted (expected, before adjustments)", "pol_wins * pol_p_success * pol_relative_cut * pol_deaths_per_year * pol_discounted_years", None, "small", "deaths"),
+        f("pol_future_dalys", "effect", "Policy win: future healthy years kept (expected, before adjustments)", "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years", None, "number", "DALYs"),
+        inp("fb_cost_share", "effect", "Field-building: share of the cost spent training or placing people", 0.1, "estimate",
+            "fellowships, courses, mentorship and career advice for people who go on to work on these risks; 0 with the reason without such a programme. Feeds the check cost_shares_total; the branch's value comes from the people trained.", "percent", source=src("charity report / accounts")),
+        inp("fb_people", "reach", "Field-building: people trained or placed in the year", 100, "observed",
+            "people who completed the programme in the year (not applicants or sign-ups), from the charity's report.", "integer", source=src("charity report")),
+        inp("fb_share_working", "effect", "Field-building: share who go on to work on these risks because of it", {"low": 0.05, "best": 0.2, "high": 0.4}, "estimate",
+            "alumni in roles on these risks a year or more later (the charity's alumni survey, with response bias in mind) minus those who would have got there anyway (their plans before, a comparison group). Name the survey.", "percent", source=src("alumni survey")),
+        inp("fb_work_years", "effect", "Field-building: years each stays in the work", {"low": 2, "best": 5, "high": 10}, "estimate",
+            "from alumni follow-ups or the field's turnover; discounted at the shared rate.", "number", "years", src("alumni follow-up")),
+        f("fb_work_dollars", "effect", "Field-building: the alumni's added work, in dollars of typical work", "fb_people * fb_share_working * pv_annuity_due(1, $discount_rate, fb_work_years) * @catastrophe.cost_per_work_year",
+          "Work-years added × what a year of such work costs its employer (@catastrophe.cost_per_work_year), so it is valued at the area's typical dollar.", "usd"),
+        inp("fb_credit_share", "effect", "Field-building: the training's share of the credit for that work", {"low": 0.1, "best": 0.3, "high": 0.6}, "judgment",
+            "the employers pay for the work itself: the training's cost over training plus the employers' cost of the work-years is the anchor (credit by share of resources); name it.", "percent"),
+        f("fb_deaths_per_million", "effect", "Field-building: deaths averted a year by a typical $1 million of the alumni's work", "ai_deaths_per_million", CR_POINT.format(what="alumni's work", row="deaths_per_million"), "small", "deaths / year"),
+        f("fb_future_per_million", "effect", "Field-building: future healthy years kept a year by a typical $1 million of the alumni's work", "ai_future_per_million", CR_POINT.format(what="alumni's work", row="future_per_million"), "small", "DALYs / year"),
+        f("fb_deaths_averted", "effect", "Field-building: deaths averted (expected, before adjustments)", "fb_work_dollars / 1e6 * fb_credit_share * fb_deaths_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)", None, "small", "deaths"),
+        f("fb_future_dalys", "effect", "Field-building: future healthy years kept (expected, before adjustments)", "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)", None, "number", "DALYs"),
+        f("cost_shares_total", "effect", "Check: the cost shares add up to all the modelled spending", "ai_cost_share + bio_cost_share + nuclear_cost_share + pol_cost_share + fb_cost_share",
+          "Must be 1: every dollar of the modelled programme is in exactly one branch.", "percent"),
+        f("deaths_averted", "effect", "Deaths averted, every branch (expected, before adjustments)", "ai_deaths_averted + bio_deaths_averted + nuclear_deaths_averted + pol_deaths_averted + fb_deaths_averted", None, "small", "deaths"),
+        f("future_dalys_averted", "effect", "Future healthy years kept, every branch (expected, before adjustments)", "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys", None, "number", "DALYs"),
+    ] + adj_rows(implementation=False, leverage=True,
+        evidence_rows=[inp("evidence_adj", "adjustments", "How far the typical project's effect applies to this charity's work", {"low": 0.3, "best": 0.7, "high": 1.2}, "judgment",
+            "a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities): above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project.", "multiple")],
+        counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the work no one else would have done now", {"low": 0.4, "best": 0.7, "high": 0.95}, "judgment",
+            "the share of the work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes.", "percent"),
+        unmodelled_rows=[
+            inp("unmodelled_benefits_adj", "adjustments", "Benefits not modelled, as a share of modelled value", {"low": 0, "best": 0.05, "high": 0.2}, "judgment",
+                "good beyond the catastrophes counted, each named with its size: preparedness that also cuts ordinary outbreaks, materials security that also cuts radiological terrorism, safety work that also cuts everyday harm from AI.", "percent"),
+            inp("speedup_harm_share", "adjustments", "Harm: speeding up dangerous capabilities, as a share of modelled value", {"low": -0.3, "best": 0, "high": 0}, "judgment",
+                "beyond a typical project's chance of backfiring (already in the shared cut per dollar, Rethink Priorities' 70% chance of the intended sign), work that also advances what it guards against (safety research or evaluations that help build more capable AI, gain-of-function research done for preparedness, a race it provokes), a negative share; 0 with the reason where the work is no riskier than a typical project (most nuclear diplomacy). Anchor: Rethink's backfire step is worth −23% of a typical project's value, so −0.1 to −0.3 is for work clearly riskier than that (capabilities-adjacent research, dangerous-capability evaluations).", "percent"),
+            inp("hazard_harm_share", "adjustments", "Harm: information hazards and attention, as a share of modelled value", {"low": -0.1, "best": 0, "high": 0}, "judgment",
+                "beyond a typical project's backfire, published threat analyses, red-teaming results or advocacy that show bad actors a path or draw them to a weapon, a negative share; 0 with the reason where nothing sensitive is published.", "percent"),
+        ]) + multi({
+        "uov": ("deaths_averted * value_per_death * (1 + @catastrophe.nondeath_losses_vs_deaths)", "Deaths averted (and losses beyond them, 0 by default)"),
+    }, "future_dalys_averted", side=("unmodelled_benefits_adj", "speedup_harm_share", "hazard_harm_share")) + donor_rows("dalys", "Years of healthy life", "research", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
+    "what the charity does against which risks (AI, pandemics, nuclear war), the year, which branches carry the result (field work, a policy win, people trained), " + BOTTOM + " Say that the result rests on shared forecasts and a typical project's effect, so it moves with the AI slider and the discount rate.", "past_average", sections=MULTI_SECTIONS)
+for r in T["catastrophic-risk"]["rows"]:
+    if r["id"] == "pol_p_success": r["single_event"] = True
+
 # Side effects (docs/normalization.md 2.16): rows that add good or harm beyond the programme's main chain,
 # read through $side_effect_weight in our view.
-SIDE_EFFECTS = {"unmodelled_benefits_adj": "added", "uov_spillovers": "added", "household_multiplier": "factor"}
+SIDE_EFFECTS = {"unmodelled_benefits_adj": "added", "uov_spillovers": "added", "household_multiplier": "factor", "speedup_harm_share": "added", "hazard_harm_share": "added"}
 
 os.makedirs(OUT, exist_ok=True)
 for name, m in T.items():

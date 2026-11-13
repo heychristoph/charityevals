@@ -37,14 +37,14 @@ enforce the mechanical rules (audit-model runs them, step 3).
   [references/templates.md](references/templates.md) (its **Conventions** first). Skim a model of the
   family or intervention unless the blind list forbids it.
 - A charityevals model of the charity exists already: update it.
-- **What to model: every programme** (owner, 2026-11-03), in the latest year with audited financials
+- **What to model: every programme**, in the latest year with audited financials
   and reach for the same period, main programme first: branches of one model when they share a family
   (Convention 4), else one model per family (`<charity>-charityevals-<program>`), each matching its
   line in `charities/<id>.json` (`spending`, `lines`: normalization.md 2.17). Grants to sister
   organisations count as the activities they fund. Never a case study, pilot or other year in place
-  of the programme: donors fund the programme as it runs. Thin or no outcome data: its
-  family's chain from the research on that kind of work, wide ranges, × `$missing_data_discount`
-  (Convention 12), never another model's result. Nothing is left out.
+  of the programme. Thin or no outcome data: its
+  family's chain from the research, wide ranges, × `$missing_data_discount` (Convention 12), never
+  another model's result.
 - An Ambitious Impact idea-stage model of this charity (`theoretical`) goes once yours is in models/:
   add its id and reason to `REMOVE` in scripts/aim-theoretical.py and run it. Yours is never `theoretical`.
 
@@ -64,6 +64,7 @@ enforce the mechanical rules (audit-model runs them, step 3).
 | `companion-animals` | shelters, rehoming, neutering, vet care for dogs and cats | pain days → ced | unit_cost |
 | `conservation` | land, water and species protection | tco2e, uov, WELLBYs, DALYs, ced → daly | unit_cost |
 | `rights-advocacy` | litigation, laws changed, people released | WELLBYs, uov, DALYs → daly | past_average |
+| `catastrophic-risk` | AI safety, biosecurity, nuclear risk: research, evaluations, policy, field-building | uov, DALYs → daly | past_average |
 
 Hospitals and hospices in rich countries: `direct-health` with illness in DALYs, or `wellbeing`, at the
 country's costs and rates. Each new family's chain, shared figures and pitfalls:

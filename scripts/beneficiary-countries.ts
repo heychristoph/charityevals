@@ -69,6 +69,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "dogs-trust-charityevals-rabies": { b: { IND: 0.5, MWI: 0.25, KHM: 0.1, BGD: 0.05, GIN: 0.05, TLS: 0.04, LAO: 0.01 }, note: "Our build: WVS and Mission Rabies' dog vaccination by 2025 doses: India over half and Cambodia 221,391 (Mission Rabies' 2025 review), Laos 21,500; the rest over Malawi and the grant countries by grant size (a judgment)." },
   "aspca-charityevals": { b: { USA: 1 }, note: "Our build: the ASPCA works only in the United States (owners and their dogs, cats and horses)." },
   "aspca-charityevals-farm-animals": { b: { USA: 1 }, note: "Our build: US hens and sows under state laws and higher-welfare purchases." },
+  "nuclear-threat-initiative-charityevals": { b: "world", note: "Our build: a global catastrophe (nuclear war, a pandemic) kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "better-futures-guide-aim": { b: "destinations", note: "Moves money: each livelihoods charity it reads live brings its own countries." },
   "cearch-aim": { b: "destinations", note: "Moves money: each GiveWell top charity it reads live brings its own countries." },
 };
