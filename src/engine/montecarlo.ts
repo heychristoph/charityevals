@@ -4,7 +4,7 @@
 // draw. Run at build time (scripts/summaries.ts → generated/distributions.json); the browser only scales
 // the stored shape with the reader's values, so the risk slider and the ranges cost nothing to move.
 import { normInv } from "./expr";
-import { QUANTILES, RISK_QUANTILE, assumptionValues, compute, headline, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
+import { QUANTILES, RISK_OFF, RISK_QUANTILE, assumptionValues, compute, headline, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
 import { uncertainty, type Driver } from "./uncertainty";
 
 const Z90 = 1.6448536269514722;
@@ -58,7 +58,7 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
 }
 
 /** What a simulation needs: the inputs to draw and the result to compare with. */
-type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; gauss: () => number };
+type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; events: { id: string; p: number; key: string; one_of: boolean }[]; gauss: () => number; random: () => number };
 
 /** A simulation's plan at assumption values `av` (default: the site's) with the reader's edits fixed:
  * an edited number is the reader's, so it isn't drawn. Undefined for a model with no comparable result or
@@ -66,7 +66,7 @@ type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits:
 function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edits: Record<string, number> = {}): Plan | undefined {
   if (!m.output) return undefined;
   // The reader's risk is applied to the result, never inside the draws.
-  const av = { ...(avIn ?? assumptionValues(lib.assumptions)), [RISK_QUANTILE]: 0.5 };
+  const av = { ...(avIn ?? assumptionValues(lib.assumptions)), [RISK_QUANTILE]: RISK_OFF };
   const central = headline(lib, m, av, edits);
   if (!Number.isFinite(central) || central === 0) return undefined;
   const values = compute(lib, m, av, edits);
@@ -97,7 +97,13 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
       if (s) specs.push({ ...s, key: `@${d.id}` });
     }
   }
-  if (!specs.length) return undefined;
+  // Single-event chances: drawn as happens or doesn't, at their (drawn) value; an edited one too.
+  const events = m.rows.flatMap((r) => {
+    const s = r.single_event, p = values[r.id];
+    if (!s || !(p >= 0 && p <= 1)) return [];
+    return [{ id: r.id, p, key: s === true ? `.${r.id}` : "with" in s ? s.with : s.one_of, one_of: s !== true && "one_of" in s }];
+  });
+  if (!specs.length && !events.length) return undefined;
   const random = rng(hash(m.id));
   const gauss = () => {
     let a = 0, b = 0;
@@ -105,34 +111,66 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     while (b === 0) b = random();
     return Math.sqrt(-2 * Math.log(a)) * Math.cos(2 * Math.PI * b);
   };
-  return { lib, m, av, edits, central, specs, gauss };
+  return { lib, m, av, edits, central, specs, events, gauss, random };
 }
 
-function drawInto(p: Plan, n: number, xs: number[]) {
+/** A miss is drawn as a vanishing chance rather than 0, a hit as all but certain: a model that divides by
+ * the chance (a cost per success, 1/p) or by its complement (scenarios given no failure, 1/(1 − p))
+ * then reads either as next to no result or the full one, never as no number. */
+const MISS = 1e-9;
+
+/** `n` draws into `xs`; with single-event chances also into `smooth`, the same draws with each chance at
+ * its value (what the risk factor is anchored on). */
+function drawInto(p: Plan, n: number, xs: number[], smooth: number[]) {
   for (let i = 0; i < n; i++) {
     const inputs: Record<string, number> = { ...p.edits };
     for (const s of p.specs) inputs[s.key] = s.draw(p.gauss());
-    const x = headline(p.lib, p.m, p.av, inputs) / p.central;
-    if (Number.isFinite(x)) xs.push(x);
+    if (p.events.length) {
+      const y = headline(p.lib, p.m, p.av, inputs) / p.central;
+      // One uniform draw per key: events sharing it happen together as far as their chances allow; a key's
+      // scenarios (one_of) split it, so exactly one happens.
+      const u: Record<string, number> = {}, below: Record<string, number> = {};
+      for (const e of p.events) {
+        const x = (u[e.key] ??= p.random()), q = inputs[e.id] ?? e.p;
+        if (e.one_of) {
+          const from = below[e.key] ?? 0;
+          below[e.key] = from + q;
+          inputs[e.id] = x >= from && x < from + q ? 1 - MISS : MISS;
+        } else inputs[e.id] = x < q ? 1 - MISS : MISS;
+      }
+      const x = headline(p.lib, p.m, p.av, inputs) / p.central;
+      if (Number.isFinite(x) && Number.isFinite(y)) (xs.push(x), smooth.push(y));
+    } else {
+      const x = headline(p.lib, p.m, p.av, inputs) / p.central;
+      if (Number.isFinite(x)) xs.push(x);
+    }
   }
 }
 
-function summarise(xs: number[], draws: number): Distribution | undefined {
-  if (xs.length < draws / 2) return undefined;
+// A miss drawn as a vanishing chance stores as 0.
+const round = (x: number) => (Math.abs(x) < 1e-6 ? 0 : Number(x.toPrecision(4)));
+function quantiles(xs: number[]) {
   xs.sort((a, b) => a - b);
   const at = (p: number) => {
     const k = p * (xs.length - 1), i = Math.floor(k), f = k - i;
     return i + 1 < xs.length ? xs[i] * (1 - f) + xs[i + 1] * f : xs[i];
   };
-  const round = (x: number) => Number(x.toPrecision(4));
-  const q = QUANTILES.map((p) => round(at(p)));
-  const mid = q[9], lo = q[0], hi = q[q.length - 1];
+  return QUANTILES.map((p) => round(at(p)));
+}
+
+function summarise(xs: number[], smooth: number[], draws: number): Distribution | undefined {
+  if (xs.length < draws / 2) return undefined;
+  const q = quantiles(xs);
+  // Reliability is judged on the smooth draws: a long shot's yes/no is meant to swing.
+  const s = smooth.length ? quantiles(smooth) : q;
+  const mid = s[9], lo = s[0], hi = s[s.length - 1];
   const unstable = !(mid > 1 / 3 && mid < 3) || hi / mid > 50 || (lo > 0 ? mid / lo > 50 : lo < -mid);
   return {
     q,
     mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
-    zero: round(xs.filter((x) => x <= 0).length / xs.length),
+    zero: round(xs.filter((x) => x <= 1e-6).length / xs.length),
     ...(unstable ? { unstable: true } : {}),
+    ...(smooth.length ? { middle: mid } : {}),
   };
 }
 
@@ -142,9 +180,9 @@ function summarise(xs: number[], draws: number): Distribution | undefined {
 export function simulate(lib: Library, m: ResolvedModel, draws = 1000, av?: Record<string, number>, edits: Record<string, number> = {}): Distribution | undefined {
   const p = plan(lib, m, av, edits);
   if (!p) return undefined;
-  const xs: number[] = [];
-  drawInto(p, draws, xs);
-  return summarise(xs, draws);
+  const xs: number[] = [], smooth: number[] = [];
+  drawInto(p, draws, xs, smooth);
+  return summarise(xs, smooth, draws);
 }
 
 /** The same, in batches that give the page back between them (a model page re-simulating after the
@@ -152,12 +190,12 @@ export function simulate(lib: Library, m: ResolvedModel, draws = 1000, av?: Reco
 export async function simulateInSteps(lib: Library, m: ResolvedModel, av: Record<string, number>, edits: Record<string, number>, cancelled: () => boolean, draws = 1000): Promise<Distribution | undefined> {
   const p = plan(lib, m, av, edits);
   if (!p) return undefined;
-  const xs: number[] = [];
+  const xs: number[] = [], smooth: number[] = [];
   const batch = 50;
   for (let done = 0; done < draws; done += batch) {
     if (cancelled()) return undefined;
-    drawInto(p, Math.min(batch, draws - done), xs);
+    drawInto(p, Math.min(batch, draws - done), xs, smooth);
     await new Promise((r) => setTimeout(r, 0));
   }
-  return cancelled() ? undefined : summarise(xs, draws);
+  return cancelled() ? undefined : summarise(xs, smooth, draws);
 }

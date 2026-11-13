@@ -50,7 +50,7 @@ export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] 
       // A ranged shared fact is uncertain too: folding it would drop it from the browser's ranges.
       const rangedFact = r.factDeps.some((f) => hasRange(lib.facts.get(f)?.value));
       // Another model's live result (`#id`) moves with the sliders: the stand-in keeps the reference.
-      if (r.assumptionDeps.length || r.modelDeps.length || rangedFact || typeof r.value === "object" || r.range || published.has(id) || r.deps.some((d) => live.has(d))) live.add(id);
+      if (r.single_event || r.assumptionDeps.length || r.modelDeps.length || rangedFact || typeof r.value === "object" || r.range || published.has(id) || r.deps.some((d) => live.has(d))) live.add(id);
     }
     const seen = new Set<string>();
     const visit = (id: string) => {

@@ -108,14 +108,15 @@ export default function Waterfall({ model, av, edits, engine = lib }: { model: R
   }, [model, av, edits, engine]);
   if (!w || !w.steps.length) return null;
   const points = [w.startValue, ...w.steps.map((s) => s.to)];
-  const positive = points.every((x) => Number.isFinite(x) && x > 0);
-  if (!positive) return null;
+  // A long shot below its chance ends at 0 (the risk step): 0 sits at the axis's start.
+  const above = points.filter((x) => x > 0);
+  if (!points.every((x) => Number.isFinite(x) && x >= 0) || !(w.startValue > 0)) return null;
   // The axis starts a little below the lowest point, so the smallest total still shows as a bar.
-  const top = Math.log(Math.max(...points)), bottom = Math.log(Math.min(...points));
+  const top = Math.log(Math.max(...above)), bottom = Math.log(Math.min(...above));
   const lo = bottom - 0.25 * (top - bottom || 1), hi = top;
   const span = hi - lo;
   // Each bar's left and right edge on the shared log axis, as percentages (a hairline where it barely moves).
-  const pos = (x: number) => ((Math.log(x) - lo) / span) * 100;
+  const pos = (x: number) => (x > 0 ? ((Math.log(x) - lo) / span) * 100 : 0);
   const bar = (a: number, b: number) => {
     const l = Math.min(pos(a), pos(b)), r = Math.max(pos(a), pos(b));
     return { left: `${l}%`, width: `max(2px, ${r - l}%)` };

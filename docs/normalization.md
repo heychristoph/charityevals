@@ -1229,11 +1229,28 @@ more than 50× either side of it (a result that is a small difference of large n
 zero: 26 models, mostly GiveWell sheets), the simulation isn't used: the model counts at its best guess at
 every risk setting, its range falls back to every ranged input at its end, and it carries a caveat.
 
-**Best guess, not average.** The ranking stays on the best guess. Where success or failure is a row (a
-chance of success), the best guess already counts it as its expected value; what remains between best
-guess and simulated average is the skew of the uncertain inputs, under ×1.14 for half the models and
-×1.6 for nine in ten. The Hits-based value set (unmeasured results in full, risk 80%) is the lens for
-long shots.
+**Single events.** A row that is the chance one event happens at all (a new charity succeeds, a law passes,
+GiveWell funds the follow-on), not a share of many people or projects, is marked `single_event`, and the
+simulation draws it as happens or doesn't: a 1-in-4 long shot is about 0 at every risk up to 75% and its
+payoff (4× the best guess) above. Events that move together share a key (`{ with }`: with and without
+the charity, one event under several funding bars, drawn so the likelier happens whenever the less likely
+does); a model's scenarios split one draw (`{ one_of }`). A miss is drawn as a vanishing chance and a hit
+as all but certain, so a cost per success (1/p) or scenarios given no failure (1/(1 − p)) stay numbers.
+The risk factor divides by the middle of the same draws with each chance at its value (`middle`), so 50%
+is the best guess for every model without such a row; the unstable test reads those smooth draws too.
+Because 50% is no longer always ×1, `RISK_OFF` (−1) turns the factor off: a model read by another
+(`#id`), the simulation's own runs and the waterfall's start. Not marked: yearly rates (a law passing
+anyway each year, a chance per year), shares across many grants or companies, GiveWell's in-line
+chlorination schedule (each period's chance subtracted from the last, which a yes/no draw turns negative)
+and New Incentives' 2017 scenarios (their remainder split evenly in a formula). November 2026: 264 rows in
+28 models; 8 show about 0 at the default 50%. Where a model is a ratio of expected good to expected cost
+(Ambitious Impact's cost per successful charity), a draw's figure is that world's own good over its own
+cost, so the simulated average can sit below the best guess.
+
+**Best guess, not average.** The ranking stays on the best guess where no single event is drawn. What
+remains between best guess and simulated average elsewhere is the skew of the uncertain inputs, under
+×1.14 for half the models and ×1.6 for nine in ten. The Hits-based value set (unmeasured results in
+full, risk 80%) is the lens for long shots.
 
 ## 3. Invariants
 

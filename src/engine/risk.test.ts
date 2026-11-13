@@ -2,7 +2,7 @@
 // its log-normal plausible range, 1 at 50%, never in the evaluator view.
 import { describe, expect, it } from "vitest";
 import { normInv } from "./expr";
-import { QUANTILES, assumptionValues, buildLibrary, bottomLine, headline, plausibleRange, usedAssumptions } from "./model";
+import { QUANTILES, RISK_OFF, assumptionValues, buildLibrary, bottomLine, headline, plausibleRange, usedAssumptions } from "./model";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -45,5 +45,19 @@ describe("risk", () => {
     expect(headline(lib, m("wide"), at(0.05), {}, "evaluator")).toBe(headline(lib, m("wide"), av, {}, "evaluator"));
     expect(usedAssumptions(lib, m("wide"))).toContain("risk_quantile");
     expect(usedAssumptions(lib, m("wide"), "evaluator")).not.toContain("risk_quantile");
+  });
+
+  it("a long shot shows 0 below its chance and its payoff above; off, its best guess", () => {
+    // A 1-in-4 chance of 4× the best guess; its smooth middle at the best guess.
+    const q = QUANTILES.map((p) => (p < 0.75 ? 0 : 4));
+    const shot = buildLibrary([model("shot")], assumptions, [], [], [], { distributions: { shot: { q, mean: 1, zero: 0.75, middle: 1 } } });
+    const s = shot.models.get("shot")!;
+    const best = headline(shot, s, at(RISK_OFF));
+    expect(best).toBe(2000);
+    expect(headline(shot, s, at(0.5))).toBe(0);
+    expect(headline(shot, s, at(0.9)) / best).toBe(4);
+    const r = plausibleRange(shot, s, 0, at(0.5))!;
+    expect(r.low).toBe(0);
+    expect(r.high / best).toBe(4);
   });
 });

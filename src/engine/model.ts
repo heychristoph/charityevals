@@ -917,6 +917,9 @@ export function missingDataFactor(lib: Library, m: ResolvedModel, a: Record<stri
  * best guess, less counts a surer, lower figure, more a likelier-to-miss, higher one. */
 export const RISK_QUANTILE = "risk_quantile";
 /** The shares of a model's simulated result stored (src/engine/montecarlo.ts): 5% to 95% in steps of 5. */
+/** The risk value that turns the risk factor off (exactly 1): a model read by another (`#id`), the
+ * simulation's own runs and the waterfall's start. 50% isn't neutral: a long shot's middle is 0. */
+export const RISK_OFF = -1;
 export const QUANTILES = Array.from({ length: 19 }, (_, i) => (i + 1) / 20);
 const MIDDLE = 9;
 
@@ -932,7 +935,15 @@ export type Distribution = {
    * more than 50× either side of it (a small difference of large numbers, a ratio near zero). The model
    * then counts at its best guess at every risk, and carries a caveat. */
   unstable?: boolean;
+  /** For a model with single-event chances: the middle of the same draws with each chance counted at its
+   * value instead of happening or not, as a multiple of the best guess. The risk factor divides by it, so
+   * the shape around the best guess is the smooth one's and a long shot's yes/no sits on top. */
+  middle?: number;
 };
+
+/** What the risk factor divides by: the smooth middle (the best guess at 50% for a model without
+ * single-event chances). */
+const anchorOf = (d: Distribution) => d.middle ?? d.q[MIDDLE];
 
 const riskNodes = new WeakSet<Node>();
 export const isRiskFactor = (n: Node) => riskNodes.has(n);
@@ -943,8 +954,9 @@ export const isRiskFactor = (n: Node) => riskNodes.has(n);
 export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
   if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_QUANTILE)) return undefined;
   const d = lib.distributions?.[m.id];
-  if (!d || d.unstable || !(d.q[MIDDLE] > 0)) return undefined;
-  const pts = QUANTILES.flatMap((p, i) => [num(p), num(d.q[i] / d.q[MIDDLE])]);
+  if (!d || d.unstable || !(anchorOf(d) > 0)) return undefined;
+  // RISK_OFF (below every stored share) reads 1: the factor off.
+  const pts = [num(RISK_OFF), num(1), ...QUANTILES.flatMap((p, i) => [num(p), num(d.q[i] / anchorOf(d))])];
   const n: Node = { type: "call", fn: "interp", args: [assumption(RISK_QUANTILE), ...pts] };
   riskNodes.add(n);
   factorLabels.set(n, "For the risk you accept that the impact is lower");
@@ -962,9 +974,11 @@ export function unstableFlag(lib: Library, m: ResolvedModel): { level: "warn"; s
 
 export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>): { low: number; high: number } | undefined {
   const d = lib.distributions?.[m.id];
-  if (!d || d.unstable || !(d.q[MIDDLE] > 0)) return undefined;
-  const best = central / riskFactor(lib, m, a);
-  return { low: (best * d.q[0]) / d.q[MIDDLE], high: (best * d.q[QUANTILES.length - 1]) / d.q[MIDDLE] };
+  if (!d || d.unstable || !(anchorOf(d) > 0)) return undefined;
+  // The best guess from the headline: undefined where the risk factor is 0 (a long shot below its chance).
+  const f = riskFactor(lib, m, a);
+  const best = f > 0 ? central / f : headline(lib, m, { ...a, [RISK_QUANTILE]: RISK_OFF });
+  return { low: (best * d.q[0]) / anchorOf(d), high: (best * d.q[QUANTILES.length - 1]) / anchorOf(d) };
 }
 
 /** The risk factor at assumption values `a` (the view's own): 1 where none applies. */
@@ -1020,10 +1034,10 @@ const readers = new WeakMap<Record<string, number>, Record<string, number>>();
  * view the same with no discount for age or distance and missing data counted in full, so that view
  * never applies them, however deep. One object per `av`, so modelResult's cache still hits. */
 export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
-  const riskMoves = RISK_QUANTILE in av && av[RISK_QUANTILE] !== 0.5;
+  const riskMoves = RISK_QUANTILE in av && av[RISK_QUANTILE] !== RISK_OFF;
   if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1) && !riskMoves)) return av;
   let r = readers.get(av);
-  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: 0.5 } : {}) }));
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: RISK_OFF } : {}) }));
   return r;
 }
 
@@ -1036,10 +1050,10 @@ const neutral = new WeakMap<Record<string, number>, Record<string, number>>();
 export function refValues(m: ResolvedModel, av: Record<string, number>, view: View): Record<string, number> {
   const r = readerValues(av, view);
   const missingMoves = MISSING_DATA_DISCOUNT in r && r[MISSING_DATA_DISCOUNT] !== 1;
-  const riskMoves = RISK_QUANTILE in r && r[RISK_QUANTILE] !== 0.5;
+  const riskMoves = RISK_QUANTILE in r && r[RISK_QUANTILE] !== RISK_OFF;
   if (m.beneficiaries === "destinations" || (!r[DISTANCE_DISCOUNT] && !missingMoves && !riskMoves)) return r;
   let n = neutral.get(r);
-  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_QUANTILE in r ? { [RISK_QUANTILE]: 0.5 } : {}) }));
+  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_QUANTILE in r ? { [RISK_QUANTILE]: RISK_OFF } : {}) }));
   return n;
 }
 
