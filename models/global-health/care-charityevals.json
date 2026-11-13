@@ -3,13 +3,60 @@
   "name": "CARE USA: humanitarian and development programmes (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"ETH":0.037982,"SDN":0.037981,"SSD":0.037981,"SOM":0.037981,"NGA":0.037981,"NER":0.037981,"MLI":0.037981,"TCD":0.037981,"COD":0.037981,"UGA":0.037981,"KEN":0.037981,"MWI":0.037981,"MOZ":0.037981,"ZWE":0.037981,"MDG":0.037981,"TZA":0.037981,"YEM":0.028104,"SYR":0.028104,"PSE":0.028104,"LBN":0.028104,"JOR":0.028104,"IRQ":0.028104,"AFG":0.02082,"BGD":0.02082,"NPL":0.02082,"IND":0.02082,"PAK":0.02082,"MMR":0.006361,"PHL":0.006361,"KHM":0.006361,"LAO":0.006361,"VNM":0.006361,"IDN":0.006361,"TLS":0.006361,"TUR":0.017694,"UKR":0.017694,"HTI":0.007116,"GTM":0.007116,"HND":0.007116,"SLV":0.007116,"PER":0.002296,"ECU":0.002296,"COL":0.002296,"VEN":0.002296,"GEO":0.001008,"ARM":0.001008},
+  "beneficiaries": {
+    "ETH": 0.037982,
+    "SDN": 0.037981,
+    "SSD": 0.037981,
+    "SOM": 0.037981,
+    "NGA": 0.037981,
+    "NER": 0.037981,
+    "MLI": 0.037981,
+    "TCD": 0.037981,
+    "COD": 0.037981,
+    "UGA": 0.037981,
+    "KEN": 0.037981,
+    "MWI": 0.037981,
+    "MOZ": 0.037981,
+    "ZWE": 0.037981,
+    "MDG": 0.037981,
+    "TZA": 0.037981,
+    "YEM": 0.028104,
+    "SYR": 0.028104,
+    "PSE": 0.028104,
+    "LBN": 0.028104,
+    "JOR": 0.028104,
+    "IRQ": 0.028104,
+    "AFG": 0.02082,
+    "BGD": 0.02082,
+    "NPL": 0.02082,
+    "IND": 0.02082,
+    "PAK": 0.02082,
+    "MMR": 0.006361,
+    "PHL": 0.006361,
+    "KHM": 0.006361,
+    "LAO": 0.006361,
+    "VNM": 0.006361,
+    "IDN": 0.006361,
+    "TLS": 0.006361,
+    "TUR": 0.017694,
+    "UKR": 0.017694,
+    "HTI": 0.007116,
+    "GTM": 0.007116,
+    "HND": 0.007116,
+    "SLV": 0.007116,
+    "PER": 0.002296,
+    "ECU": 0.002296,
+    "COL": 0.002296,
+    "VEN": 0.002296,
+    "GEO": 0.001008,
+    "ARM": 0.001008
+  },
   "beneficiaries_note": "Our build: CARE USA's spending abroad by region from its Form 990 Schedule F Part I (Sub-Saharan Africa 61%, the Middle East and North Africa 17%, South Asia 10%, East Asia and the Pacific 4%, Europe 4% (Turkey and Ukraine), Central America and the Caribbean 3%, South America 1%), each region split equally over CARE's main programme countries there (a judgment: no country split is published); public information aims at the same people.",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "care",
   "owner": "charityevals",
-  "summary": "CARE USA spent $748 million on programmes in its fiscal year to June 2025: $397 million on emergency response (largest in Ethiopia, Turkey, Yemen and Sudan), $344 million on development (food security, health, savings groups for women, water and education) and $7 million on public information, mostly through its own country offices and local partners. CARE reports people reached for the whole confederation but no outcome data for its own spending, so every branch is built from spending, a judged cost per person anchored on the confederation's reach, and the research on that kind of work, and every branch is discounted for missing data. Relief (food, cash and goods for about 15 million people, with a few excess crisis deaths averted) is about half the result; the biggest uncertainties are the share of excess crisis deaths the response averts, the missing-data discount and what the maternal and newborn work achieves at scale.",
+  "summary": "CARE USA spent $748 million on programmes in its fiscal year to June 2025: $397 million on emergency response (largest in Ethiopia, Turkey, Yemen and Sudan), $344 million on development (food security, health, savings groups for women, water and education) and $7 million on public information, mostly through its own country offices and local partners. CARE reports people reached for the whole confederation but no outcome data for its own spending, so every branch is built from spending, a judged cost per person anchored on the confederation's reach, and the research on that kind of work, and every branch is discounted for missing data. Relief (food, cash and goods for about 15 million people, with a few excess crisis deaths averted) is about three-fifths of the result, savings groups for women about a sixth; the biggest uncertainties are the missing-data discount, how much savings groups raise consumption, and how poor the crisis-affected people are and what others would have given them anyway.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: CARE USA, humanitarian and development programmes",
@@ -453,10 +500,32 @@
     {
       "id": "food_people",
       "section": "reach",
-      "label": "People reached by food security and resilience work",
+      "label": "Participants reached by food security and resilience work",
       "format": "number",
       "formula": "food_spend / food_cost_per_person",
-      "explainer": "People reached by food security and resilience work.",
+      "explainer": "Participants as CARE counts them (farmers, group members, mothers in nutrition groups).",
+      "unit": "people"
+    },
+    {
+      "id": "food_household_share",
+      "section": "reach",
+      "label": "Share of the participants' household members who share the gain, beyond the participant",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Farm output and income are shared by the household, as for savings-group members (household_size); but CARE counts participants, and some households have two participants counted (couples in farmer groups) or the gain is the participant's own (nutrition counselling). Half the other members (20-90%)."
+    },
+    {
+      "id": "food_beneficiaries",
+      "section": "reach",
+      "label": "People sharing the food security gains",
+      "format": "number",
+      "formula": "food_people * (1 + (household_size - 1) * food_household_share)",
+      "explainer": "Each participant and a share of the rest of the household: about 2.7 people per participant.",
       "unit": "people"
     },
     {
@@ -977,7 +1046,7 @@
     {
       "id": "food_consumption_gain",
       "section": "effect",
-      "label": "Consumption gain per person reached by food security and resilience work",
+      "label": "Consumption gain per household member reached by food security and resilience work",
       "format": "percent",
       "value": {
         "low": 0,
@@ -1116,7 +1185,7 @@
     {
       "id": "relief_evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment, relief",
+      "label": "Evidence adjustment, relief deaths averted",
       "format": "multiple",
       "value": {
         "low": 0.7,
@@ -1124,7 +1193,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The value is mostly goods at their cost, which needs no effect study; the deaths averted rest on weak evidence, already wide in share_excess_averted. 0.85 (0.7-1), as for World Vision."
+      "explainer": "Applies to the deaths averted only: they rest on weak evidence, already wide in share_excess_averted, and the studies are of other settings. The goods' value needs no effect study and isn't discounted here. 0.85 (0.7-1)."
     },
     {
       "id": "relief_counterfactual_adj",
@@ -1142,7 +1211,7 @@
     {
       "id": "relief_attribution_share",
       "section": "adjustments",
-      "label": "CARE's share of the resources behind the relief",
+      "label": "CARE's share of the resources behind the deaths averted",
       "format": "percent",
       "value": {
         "low": 0.65,
@@ -1150,7 +1219,20 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Part of the relief is US government and WFP food that CARE distributes: the donors' procurement, shipping beyond the $12.8M of freight on CARE's books, storage and staff are outside CARE's costs; local partners add their own volunteers. 80% (65-95%), a little under World Vision's 85% because CARE works more through local partners ($89.6M of humanitarian subgrants)."
+      "explainer": "The deaths averted come from the whole response the people got: part is US government and WFP food that CARE distributes, whose procurement, shipping beyond the $12.8M of freight on CARE's books, storage and staff are outside CARE's costs, and local partners and other agencies add their own services. 80% (65-95%)."
+    },
+    {
+      "id": "relief_goods_attribution_share",
+      "section": "adjustments",
+      "label": "CARE's share of the resources behind the goods' value",
+      "format": "percent",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The goods are valued at a share of CARE's own spending (relief_goods_value_share), so the donors' off-book costs don't enter the value counted; only local partners' and volunteers' own contributions to delivering it do. 95% (85-100%)."
     },
     {
       "id": "health_evidence_adj",
@@ -1270,6 +1352,19 @@
       "explainer": "The gain is from reviews of farmer training with wide variation; CARE's programmes have uncontrolled evaluations. 0.7 (0.4-1)."
     },
     {
+      "id": "food_attribution_share",
+      "section": "adjustments",
+      "label": "CARE's share of the resources behind the food security gains",
+      "format": "percent",
+      "value": {
+        "low": 0.65,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Farmers' own inputs and labour are theirs (not a co-funder's), but government extension workers and co-funded projects share in the training. 85% (65-100%)."
+    },
+    {
       "id": "food_counterfactual_adj",
       "section": "adjustments",
       "label": "Counterfactual, food security",
@@ -1296,6 +1391,19 @@
       "explainer": "The learning gain is from trials of somewhat different programmes and the chain to earnings is long. 0.6 (0.3-1)."
     },
     {
+      "id": "education_attribution_share",
+      "section": "adjustments",
+      "label": "CARE's share of the resources behind the education gains",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Community-based schools use community-provided space and are later taken over by government teachers; girls' programmes run with schools. 80% (60-100%)."
+    },
+    {
       "id": "education_counterfactual_adj",
       "section": "adjustments",
       "label": "Counterfactual, education",
@@ -1314,12 +1422,12 @@
       "label": "Delivery adjustment (fidelity, compliance, follow-through)",
       "format": "percent",
       "value": {
-        "low": 0.7,
-        "best": 0.85,
+        "low": 0.65,
+        "best": 0.82,
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Reach is CARE's own count or a judgment from its spending; aid diverted, people counted twice and programmes delivered below design. CARE is audited by Ernst & Young and its US grants by the single audit. 85% (70-95%), for every branch. In 2025 US stop-work orders ended about $130M of active awards early (annual report, letter from the CFO), so some of the year's spending bought half-finished work: in the range."
+      "explainer": "Reach is CARE's own count or a judgment from its spending; aid diverted, people counted twice and programmes delivered below design. CARE is audited by Ernst & Young and its US grants by the single audit. In 2025 US stop-work orders in 32 countries ended about $130M of active awards early (FY2025 annual report, letter from the CFO), so some of the year's spending bought half-finished work: 3 points below the usual 85%. 82% (65-95%), for every branch."
     },
     {
       "id": "leverage_funging_adj",
@@ -1367,12 +1475,28 @@
       "explainer": "Cash received before it is spent on the awards it was given for."
     },
     {
+      "id": "endowment_net_assets",
+      "section": "adjustments",
+      "label": "Donor-restricted endowments, 30 June 2025",
+      "format": "usd",
+      "value": 33252000,
+      "kind": "observed",
+      "source": {
+        "title": "CARE (Cooperative for Assistance and Relief Everywhere, Inc. and Subsidiaries), Consolidated Financial Statements, years ended 30 June 2025 and 2024 (Ernst & Young, 14 November 2025)",
+        "url": "https://www.care.org/wp-content/uploads/2025/11/2025-CARE-Financial-Statements.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 20, note 7 (in thousands)",
+        "quote": "Endowment net assets, end of year $ 33,252 $ 31,454"
+      },
+      "explainer": "Endowments held for their income, not programme money waiting to be spent; taken out of the restricted net assets below."
+    },
+    {
       "id": "gift_to_grant_years",
       "section": "adjustments",
       "label": "Years between a gift and its spending",
       "format": "number",
-      "formula": "(restricted_programme_net_assets + donor_advances) / program_expenses",
-      "explainer": "Unspent programme money over a year's programme spending, the template's recipe: about 0.33 years.",
+      "formula": "(restricted_programme_net_assets - endowment_net_assets + donor_advances) / program_expenses",
+      "explainer": "Unspent programme money (restricted net assets less trusts and endowments, plus donor advances) over a year's programme spending, the template's recipe: about 0.28 years.",
       "unit": "years"
     },
     {
@@ -1456,10 +1580,18 @@
     {
       "id": "relief_total_adj",
       "section": "adjustments",
-      "label": "All adjustments, relief",
+      "label": "All adjustments, relief deaths averted",
       "format": "percent",
       "formula": "relief_evidence_adj * relief_counterfactual_adj * relief_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * relief_missing_data_adj",
-      "explainer": "All adjustments, relief."
+      "explainer": "All adjustments to the deaths averted (and the illness counted directly, 0 here)."
+    },
+    {
+      "id": "relief_goods_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments, relief goods",
+      "format": "percent",
+      "formula": "relief_counterfactual_adj * relief_goods_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * relief_missing_data_adj",
+      "explainer": "All adjustments to the goods' value: no evidence step (goods at a share of their cost need no effect study)."
     },
     {
       "id": "health_total_adj",
@@ -1490,7 +1622,7 @@
       "section": "adjustments",
       "label": "All adjustments, food security",
       "format": "percent",
-      "formula": "food_evidence_adj * food_counterfactual_adj * implementation_adj * leverage_funging_adj * wait_discount * food_missing_data_adj",
+      "formula": "food_evidence_adj * food_counterfactual_adj * food_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * food_missing_data_adj",
       "explainer": "All adjustments, food security."
     },
     {
@@ -1498,7 +1630,7 @@
       "section": "adjustments",
       "label": "All adjustments, education",
       "format": "percent",
-      "formula": "education_evidence_adj * education_counterfactual_adj * implementation_adj * leverage_funging_adj * wait_discount * education_missing_data_adj",
+      "formula": "education_evidence_adj * education_counterfactual_adj * education_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * education_missing_data_adj",
       "explainer": "All adjustments, education."
     },
     {
@@ -1514,7 +1646,7 @@
       "section": "adjustments",
       "label": "Attribution (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(relief_dalys_unadjusted * relief_attribution_share + health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + livelihood_dalys_unadjusted + food_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + food_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * relief_attribution_share + health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + livelihood_dalys_unadjusted + food_dalys_unadjusted * food_attribution_share + education_dalys_unadjusted * education_attribution_share + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + food_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1568,7 +1700,7 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "Part of the relief is emergency health care, malnutrition treatment and gender-based violence services, whose illness averted isn't in the deaths or the goods' value; relief is about half the result. +3% (0 to +8%).",
+      "explainer": "Part of the relief is emergency health care, malnutrition treatment and gender-based violence services, whose illness averted isn't in the deaths or the goods' value; relief is about three-fifths of the result. +3% (0 to +8%).",
       "side_effect": "added"
     },
     {
@@ -1612,8 +1744,8 @@
       "section": "bridges",
       "label": "Relief, units of value",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption) * relief_total_adj",
-      "explainer": "Deaths averted and goods delivered, adjusted.",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death * relief_total_adj + ln_gain_per_person * $uov_per_ln_consumption * relief_goods_total_adj)",
+      "explainer": "Deaths averted and goods delivered, each with its own adjustments.",
       "unit": "UoV"
     },
     {
@@ -1648,8 +1780,8 @@
       "section": "bridges",
       "label": "Food security, units of value",
       "format": "number",
-      "formula": "food_people * food_ln_gain_per_person * $uov_per_ln_consumption * food_total_adj",
-      "explainer": "Consumption gains of the people reached, adjusted.",
+      "formula": "food_beneficiaries * food_ln_gain_per_person * $uov_per_ln_consumption * food_total_adj",
+      "explainer": "Consumption gains of the participants' households, adjusted.",
       "unit": "UoV"
     },
     {
@@ -1770,12 +1902,21 @@
       "unit": "DALYs"
     },
     {
+      "id": "relief_uov_unadjusted",
+      "section": "bridges",
+      "label": "Relief, units of value, before adjustments",
+      "format": "number",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
+      "explainer": "Deaths averted and goods delivered before their adjustments.",
+      "unit": "UoV"
+    },
+    {
       "id": "relief_dalys_unadjusted",
       "section": "bridges",
       "label": "Relief in healthy years, before adjustments",
       "format": "number",
-      "formula": "relief_dalys / relief_total_adj",
-      "explainer": "The weight of this branch in the reading-only averages.",
+      "formula": "relief_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "The weight of this branch in the reading-only averages: deaths and goods before their adjustments.",
       "unit": "DALYs"
     },
     {
