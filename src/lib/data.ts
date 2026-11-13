@@ -8,7 +8,7 @@ import { buildLibrary, modelsOf, type Library, type ResolvedModel } from "../eng
 import { primaryModel, rankingPlan } from "../engine/ranking";
 import assumptions from "../../assumptions/default.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
-import riskSpreads from "../../generated/risk-spreads.json";
+import distributions from "../../generated/distributions.json";
 
 const files = import.meta.glob<{ default: unknown }>(["../../models/**/*.json", "!../../models/grants/**"], { eager: true });
 const bulkFiles = import.meta.env.SSR ? import.meta.glob<{ default: { id: string } }>("../../models/grants/**/*.json", { eager: true }) : {};
@@ -28,7 +28,7 @@ export const lib = buildLibrary(
   Object.values(charityFiles).map((f) => f.default),
   owners,
   // The server validates every file (and npm run check before it); the browser trusts what it built.
-  { trusted: !import.meta.env.SSR, spreads: riskSpreads },
+  { trusted: !import.meta.env.SSR, distributions },
 );
 
 if (lib.errors.length) throw new Error(`Model errors (run npm run check):\n${lib.errors.join("\n")}`);

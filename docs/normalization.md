@@ -1203,14 +1203,26 @@ evaluator's own figure in `published`; side effects as in 2.16.
 ### 2.18 Risk: how sure the counted figure is (November 2026)
 
 One slider, "Accept a … % risk that the real impact is lower than shown" (`$risk_quantile`, 5–95%,
-default 50%). Each model's result counts at that share of its plausible range, read as log-normal:
-× exp(norm_inv(share) × spread ÷ 1.645) (src/engine/model.ts `riskNode`, in the headline beside the
-age, distance and missing-data factors; never in the evaluator view). The spread is the half log-width of
-the model's 90% range from the uncertainty engine, as audit-model's combined range, with the reader's own
-value judgments (shared assumptions) left out, computed at the defaults by scripts/summaries.ts into
-generated/risk-spreads.json and capped at ×100 either way, past which the log-normal reading breaks down
-(a range through zero on a small input). 50% is the best guess; below it risk-averse; above it risk-seeking.
-Not yet in it: an explicit chance that a programme does nothing, which smooth ranges don't show.
+default 50%). Each model's result counts at that share of its simulated distribution, over the
+distribution's middle, so 50% is the best guess (src/engine/model.ts `riskNode`, in the headline beside
+the age, distance and missing-data factors; never in the evaluator view). Below 50% is risk-averse,
+above risk-seeking. The rankings' plausible range is the same distribution's 5% to 95%.
+
+**Ranges as their sources state them.** A range's `interval` is the share of the time the true value lies
+inside it (default 0.9; GiveWell's 25th–75th percentiles 0.5), its `shape` how it spreads (log-normal by
+default, normal for a range through zero, or as the source's tool states: ACE's Guesstimate cells).
+The uncertainty engine reads every range at its interval.
+
+**The simulation** (src/engine/montecarlo.ts, run by scripts/summaries.ts into generated/distributions.json,
+seeded by model id): at the defaults, in our view, 1,000 draws of the inputs that carry 99.9% of the
+model's variance, the reader's own value judgments (the sliders) held fixed. Each input is split at its
+best guess, so an asymmetric range stays asymmetric. Inputs without a range take the default spread by
+kind (judgment ×1.5, estimate ×1.3, data ×1.1), a share on its odds so it stays between 0 and 1; a
+negative share added to 1 (an adjustment of −40%) on the factor 1 + x, so it never takes away more than
+everything; calendar years never vary. Stored per model: the result at 5%, 10%, …, 95% and its average, as
+multiples of the best guess, and the share of draws at zero or below. The browser scales this shape with
+the reader's values. Where the reader's values change a model's structure, not just its size, the shape
+is approximate.
 
 ## 3. Invariants
 

@@ -9,7 +9,7 @@
 // so it runs on 8,000-row models in the browser. Default spreads only feed this view; the joint low and
 // high on the rankings use published ranges alone.
 
-import { evaluate, refs, type Node, type Scope } from "./expr";
+import { evaluate, normInv, refs, type Node, type Scope } from "./expr";
 import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, hasRange, inputRange, modelConversion, modelResult, pickValue, refValues, referencedModels, usedAssumptions, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
 import { rowsFeeding } from "./sensitivity";
 
@@ -26,6 +26,8 @@ const JUDGMENT = /adjust|validity|replicab|counterfactual|leverage|fung|crowd|di
 const DATA = /\bcosts?\b|spent|spending|expenditure|budget|price|population|number of|enrol|census|exchange rate|inflation|\bgdp\b|salar|wage/i;
 // Fixed conversions carry no uncertainty of their own.
 const CONSTANT = /days (in|per) (a )?year|weeks (in|per) (a )?year|months (in|per) (a )?year|hours (in|per) (a )?day|unit conversion/i;
+/** A calendar year (a survey's or a grant's): a date, never an uncertain quantity. */
+const isYear = (label: string, id: string, v: number) => Number.isInteger(v) && v >= 1900 && v <= 2100 && /year/i.test(`${label} ${id}`);
 
 export function sourceOf(r: Pick<ResolvedRow, "kind" | "label">): Exclude<Source, "assumption"> {
   if (r.kind === "judgment") return "judgment";
@@ -85,6 +87,14 @@ export type Uncertainty = {
 };
 
 const H = 0.01;
+
+/** Every spread is a 90% range's half log-width; a range covering another share of the time (GiveWell's
+ * 25th-75th percentiles: `interval` 0.5) is widened or narrowed to the 90% it implies. */
+const Z90 = 1.6448536269514722;
+export const toNinety = (interval: number | undefined) => (interval ? Z90 / normInv((1 + interval) / 2) : 1);
+function scaled<T extends { spread: number }>(s: T | undefined, interval: number | undefined): T | undefined {
+  return s && interval ? { ...s, spread: s.spread * toNinety(interval) } : s;
+}
 /** Step for a calculated row whose central value happens to be zero. */
 const ZERO_STEP = 1e-6;
 
@@ -119,18 +129,18 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   for (const id of feeding) {
     const r = m.byId.get(id);
     if (!r?.node || !r.range) continue;
-    const s = spreadOf(values[id], { low: r.range.low, high: r.range.high }, 1);
+    const s = scaled(spreadOf(values[id], { low: r.range.low, high: r.range.high }, 1), r.interval);
     if (!s || !(s.spread > 0)) continue;
     ranged.add(id);
     leaves.set(`row:${id}`, { key: `row:${id}`, scope: "row", id, label: r.label || id, source: sourceOf(r), published: true, ...s });
   }
   for (const id of feeding) {
     const r = m.byId.get(id);
-    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || CONSTANT.test(r.label)) continue;
+    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || CONSTANT.test(r.label) || isYear(r.label, id, values[id])) continue;
     const range = inputRange(r, view);
     const source = sourceOf(r);
     const v = values[id];
-    const s = spreadOf(v, hasRange(range) ? { low: pickValue(range, "low"), high: pickValue(range, "high") } : undefined, DEFAULT_FACTOR[source]);
+    const s = scaled(spreadOf(v, hasRange(range) ? { low: pickValue(range, "low"), high: pickValue(range, "high") } : undefined, DEFAULT_FACTOR[source]), hasRange(range) ? r.interval : undefined);
     if (s && s.spread > 0) leaves.set(`row:${id}`, { key: `row:${id}`, scope: "row", id, label: r.label || id, source, published: hasRange(range), ...s });
   }
   const assumptionIds = new Set<string>();
@@ -167,7 +177,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   for (const key of factIds) {
     const f = lib.facts.get(key);
     if (!f) continue;
-    const s = spreadOf(pickValue(f.value), hasRange(f.value) ? { low: pickValue(f.value, "low"), high: pickValue(f.value, "high") } : undefined, DEFAULT_FACTOR.data);
+    const s = scaled(spreadOf(pickValue(f.value), hasRange(f.value) ? { low: pickValue(f.value, "low"), high: pickValue(f.value, "high") } : undefined, DEFAULT_FACTOR.data), hasRange(f.value) ? f.interval : undefined);
     if (s && s.spread > 0) leaves.set(`fact:${key}`, { key: `fact:${key}`, scope: "fact", id: key, label: `${f.label} (${f.group})`, source: "data", published: hasRange(f.value), ...s });
   }
   // A source's spread in its own units: the log half-width times its value, or the absolute

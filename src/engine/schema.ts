@@ -81,6 +81,12 @@ const rowShape = {
    * share added to the result, times the weight; `factor`, a multiplier, its excess over 1 times the
    * weight. The evaluator view counts it in full. */
   side_effect: z.enum(["added", "factor"]).optional(),
+  /** What the row's range means (its low/high, or `range` on a calculated row): the share of the time the
+   * true value lies inside it. Default 0.9; GiveWell's 25th–75th percentiles are 0.5. */
+  interval: z.number().gt(0).lt(1).optional(),
+  /** How the range spreads around the best guess, where the source says: `lognormal` (the default for
+   * positive ranges), `normal` (the default for a range through zero) or `beta` (a share). */
+  shape: z.enum(["lognormal", "normal", "beta"]).optional(),
 };
 
 export const Row = z

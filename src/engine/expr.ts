@@ -83,8 +83,21 @@ export function normInv(p: number): number {
   return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
 }
 
+/** y at x along points (x1, y1), (x2, y2), ... with x rising: linear between them, held at the ends. */
+function interp(x: number, ...pts: number[]): number {
+  const n = pts.length >> 1;
+  if (!n) return NaN;
+  if (x <= pts[0]) return pts[1];
+  for (let i = 1; i < n; i++) {
+    const x0 = pts[2 * i - 2], y0 = pts[2 * i - 1], x1 = pts[2 * i], y1 = pts[2 * i + 1];
+    if (x <= x1) return y0 + ((x - x0) / (x1 - x0)) * (y1 - y0);
+  }
+  return pts[2 * n - 1];
+}
+
 export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: number[]) => number; doc: string }> = {
   norm_inv: { arity: [1, 1], fn: normInv, doc: "norm_inv(p): the standard normal quantile, the z below which a share p lies" },
+  interp: { arity: [3, 99], fn: interp, doc: "interp(x, x1, y1, x2, y2, ...): y at x along the points, straight between them, held at the ends" },
   ln: { arity: [1, 1], fn: Math.log, doc: "natural log" },
   log10: { arity: [1, 1], fn: Math.log10, doc: "base-10 log" },
   exp: { arity: [1, 1], fn: Math.exp, doc: "e^x" },

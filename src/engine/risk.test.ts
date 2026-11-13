@@ -2,7 +2,7 @@
 // its log-normal plausible range, 1 at 50%, never in the evaluator view.
 import { describe, expect, it } from "vitest";
 import { normInv } from "./expr";
-import { assumptionValues, buildLibrary, bottomLine, headline, usedAssumptions } from "./model";
+import { QUANTILES, assumptionValues, buildLibrary, bottomLine, headline, plausibleRange, usedAssumptions } from "./model";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -14,8 +14,10 @@ const assumptions = {
   common: { unit: "u", benchmark: "none" },
 };
 const model = (id: string) => ({ id, name: id, kind: "charity", cause: "global-health", rows: [{ id: "out", label: "out", value: 2, kind: "judgment", explainer: "x" }], output: { row: "out", unit: "u", label: "per $" }, evaluator: { name: "E", assumptions: {} } });
+// A simulated result: the best guess's multiple at 5%, 10%, ..., 95%, log-normal with half log-width S at 5-95%.
 const S = 1.2;
-const lib = buildLibrary([model("wide"), model("none")], assumptions, [], [], [], { spreads: { wide: S } });
+const Q = QUANTILES.map((p) => Math.exp((normInv(p) / 1.6448536269514722) * S));
+const lib = buildLibrary([model("wide"), model("none")], assumptions, [], [], [], { distributions: { wide: { q: Q, mean: 1, zero: 0 } } });
 const av = assumptionValues(lib.assumptions);
 const at = (q: number) => ({ ...av, risk_quantile: q });
 const m = (id: string) => lib.models.get(id)!;
@@ -32,8 +34,13 @@ describe("risk", () => {
     expect(headline(lib, m("wide"), at(0.05)) / best).toBeCloseTo(Math.exp(-S), 6);
     expect(headline(lib, m("wide"), at(0.95)) / best).toBeCloseTo(Math.exp(S), 6);
     expect(bottomLine(lib, m("wide"), at(0.05)).common / bottomLine(lib, m("wide"), av).common).toBeCloseTo(Math.exp(-S), 6);
+    // Between stored shares, straight interpolation; the plausible range doesn't move with the slider.
+    expect(headline(lib, m("wide"), at(0.125)) / best).toBeCloseTo((Q[1] + Q[2]) / 2, 6);
+    const r = plausibleRange(lib, m("wide"), headline(lib, m("wide"), at(0.2)), at(0.2))!;
+    expect(r.low / best).toBeCloseTo(Math.exp(-S), 6);
+    expect(r.high / best).toBeCloseTo(Math.exp(S), 6);
   });
-  it("moves nothing without a spread, and never the evaluator view", () => {
+  it("moves nothing without a simulation, and never the evaluator view", () => {
     expect(headline(lib, m("none"), at(0.05))).toBe(headline(lib, m("none"), av));
     expect(headline(lib, m("wide"), at(0.05), {}, "evaluator")).toBe(headline(lib, m("wide"), av, {}, "evaluator"));
     expect(usedAssumptions(lib, m("wide"))).toContain("risk_quantile");
