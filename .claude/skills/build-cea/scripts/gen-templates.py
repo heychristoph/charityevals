@@ -753,8 +753,14 @@ T["rights-advocacy"] = model("rights-advocacy", "rights and advocacy", "daly", "
     }, "people_affected_per_year * dalys_per_person_year * p_success * discounted_years") + donor_rows("dalys", "Years of healthy life", "advocacy", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
     "what the charity does, its theory of change from the wins to people's lives, " + BOTTOM, "past_average", sections=MULTI_SECTIONS)
 
+# Side effects (docs/normalization.md 2.16): rows that add good or harm beyond the programme's main chain,
+# read through $side_effect_weight in our view.
+SIDE_EFFECTS = {"unmodelled_benefits_adj": "added", "uov_spillovers": "added", "household_multiplier": "factor"}
+
 os.makedirs(OUT, exist_ok=True)
 for name, m in T.items():
+    for r in m["rows"]:
+        if r["id"] in SIDE_EFFECTS: r["side_effect"] = SIDE_EFFECTS[r["id"]]
     with open(os.path.join(OUT, f"{name}.json"), "w") as fh:
         json.dump(m, fh, indent=2, ensure_ascii=False)
         fh.write("\n")

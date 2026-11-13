@@ -3,9 +3,14 @@
   "name": "Sinergia Animal",
   "kind": "charity",
   "cause": "animal-welfare",
-  "beneficiaries": {"BRA":1},
+  "beneficiaries": {
+    "BRA": 1
+  },
   "beneficiaries_note": "The countries the model's summary names: Brazil.",
-  "missing_data": {"thin_share":1,"note":"Thin: ACE's estimate of a campaign or outreach programme: the animals or people its work reached and the welfare change per animal are ACE's judgments (pledges won, meals swapped, welfare footprints), with no controlled evaluation of the charity."},
+  "missing_data": {
+    "thin_share": 1,
+    "note": "Thin: ACE's estimate of a campaign or outreach programme: the animals or people its work reached and the welfare change per animal are ACE's judgments (pledges won, meals swapped, welfare footprints), with no controlled evaluation of the charity."
+  },
   "estimate_basis": "past_average",
   "charity": "sinergia-animal",
   "owner": "ace",
@@ -266,19 +271,89 @@
       "explainer": "Sows and piglets a year covered by each producer's commitment, times ACE's SADs per animal for the improvement, summed over the producers whose transition deadline is 2023 (Aurora, BRF, JBS, Master Agroindustrial, Pif Paf): 37.95M. Reproduces ACE's sheet: each producer's all-years total is this times its years brought forward, discounted at 4%."
     },
     {
+      "id": "sads_per_sow_year_group_housing",
+      "section": "pig_welfare",
+      "label": "SADs averted per sow-year in group housing instead of gestation crates",
+      "format": "number",
+      "formula": "@sad_factors.sads_per_sow_year_group_housing",
+      "published": 16.72,
+      "explainer": "Changed for consistency: the shared figure for this change (16.71, Ambitious Impact's 2024 SADs as ACE used them), where ACE's producer sheet types 16.72."
+    },
+    {
+      "id": "piglet_sads_per_year_one_mutilation",
+      "section": "pig_welfare",
+      "label": "SADs averted per piglet a year without one mutilation",
+      "format": "number",
+      "value": 14.7,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!AC3:AC12"
+      },
+      "explainer": "ACE's figure per piglet for the producers whose commitments are due in 2029 and 2031."
+    },
+    {
+      "id": "sows_committed_2029",
+      "section": "pig_welfare",
+      "label": "Sows a year under Alegra's commitment (due 2029)",
+      "format": "integer",
+      "value": 30535,
+      "kind": "observed",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!M3:M12"
+      }
+    },
+    {
+      "id": "piglets_committed_2029",
+      "section": "pig_welfare",
+      "label": "Piglets a year under Alegra's commitment (due 2029)",
+      "format": "integer",
+      "value": 916050,
+      "kind": "observed",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!O3:O12"
+      }
+    },
+    {
+      "id": "sows_committed_2031",
+      "section": "pig_welfare",
+      "label": "Sows a year under Alibem's commitment (due 2031)",
+      "format": "integer",
+      "value": 80100,
+      "kind": "observed",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!M3:M12"
+      }
+    },
+    {
+      "id": "piglets_committed_2031",
+      "section": "pig_welfare",
+      "label": "Piglets a year under Alibem's commitment (due 2031)",
+      "format": "integer",
+      "value": 2403000,
+      "kind": "observed",
+      "source": {
+        "title": "ACE pig producer estimates",
+        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
+        "cell": "Pig commitments!O3:O12"
+      }
+    },
+    {
       "id": "pig_sads_per_year_from_2029",
       "section": "pig_welfare",
       "label": "SADs a year from commitments due in 2029, before sharing credit",
       "unit": "SADs",
       "format": "integer",
-      "value": 13976480,
-      "kind": "estimate",
-      "source": {
-        "title": "ACE pig producer estimates",
-        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
-        "cell": "Pig commitments!M3:M12, O3:O12, AB3:AC12, R3:S12"
-      },
-      "explainer": "As above, for Alegra (transition deadline 2029): 30,535 sows × 16.72 SADs + 916,050 piglets × 14.70."
+      "explainer": "Alegra (transition deadline 2029): sows a year × the SADs a sow is spared in group housing, plus piglets × ACE's figure per piglet.",
+      "formula": "sows_committed_2029 * sads_per_sow_year_group_housing + piglets_committed_2029 * piglet_sads_per_year_one_mutilation",
+      "expected": 13976480
     },
     {
       "id": "pig_sads_per_year_from_2031",
@@ -286,14 +361,9 @@
       "label": "SADs a year from commitments due in 2031, before sharing credit",
       "unit": "SADs",
       "format": "integer",
-      "value": 36663372,
-      "kind": "estimate",
-      "source": {
-        "title": "ACE pig producer estimates",
-        "url": "https://docs.google.com/spreadsheets/d/1O8ph5b5r-V3_yXR7JcoF2z4k669ukh765xn6kAAgOmk/edit",
-        "cell": "Pig commitments!M3:M12, O3:O12, AB3:AC12, R3:S12"
-      },
-      "explainer": "As above, for Alibem (transition deadline 2031): 80,100 sows × 16.72 SADs + 2,403,000 piglets × 14.70."
+      "explainer": "Alibem (transition deadline 2031): sows a year × the SADs a sow is spared in group housing, plus piglets × ACE's figure per piglet.",
+      "formula": "sows_committed_2031 * sads_per_sow_year_group_housing + piglets_committed_2031 * piglet_sads_per_year_one_mutilation",
+      "expected": 36663372
     },
     {
       "id": "pig_years_counted",

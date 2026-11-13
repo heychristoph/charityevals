@@ -51,9 +51,11 @@ every `expected` (the sheet's cached values).
   charity actually runs the modelled programme today (cite where it says so) and no model based on
   the charity's actual data exists. Mark it `theoretical`, so the site flags it as purely
   theoretical; otherwise record it in `inventory/` as "not shown" with the reason.
+- An owner with `published: false` in owners.json asked us not to publish its models yet: don't import
+  them; record them in `inventory/` as "not imported: owner's request".
 - The evaluator's write-up and its sheet. Record publisher, title, URL, sheet URL, `published`
-  (the ranking uses it), today as `retrieved`, and `license` (GiveWell: CC BY-NC-SA 3.0 US; ACE:
-  unclear, say so).
+  (the ranking uses it), today as `retrieved`, and `license` as owners.json states it (its `permission`
+  note shows on the page).
 - The write-up's CEA section explains why each number is what it is: that is explainer material.
 
 ## 2. Get the rows
@@ -81,8 +83,10 @@ every `expected` (the sheet's cached values).
 - Inputs: `kind` (`observed`, `estimate`, `judgment`) and `source.cell` always, plus title/url where
   the sheet names one. A subjective figure is `judgment` whoever made it: an evaluator's guessed
   probability or "best guess" cost, a credit or responsibility share, years a win counts, a moral
-  weight. The page labels every judgment row, and every row that reads a judgment fact. Ranges only from the source (GiveWell Inputs tab, ACE bounds, RP intervals);
-  a range you add says "range is ours".
+  weight; a figure read from a dataset (GBD, a survey, accounts) is `observed`. Ranges only from the
+  source (GiveWell Inputs tab, ACE bounds, RP intervals), with what they mean: `interval` (GiveWell's
+  25th-75th percentiles 0.5; default 0.9) and `shape` where the source's tool says; a range you add says
+  "range is ours". Never a range on a calendar year or a timeline index (unit "Year").
 - Formulas in src/engine/expr.ts syntax; a missing function goes into `FUNCTIONS` with a test.
 - `expected` = the sheet's cached value on every formula row, including the evaluator's bottom line.
   Set `output.native` to that row and its unit (INV-6: the evaluator's bottom line reproduces).
@@ -99,6 +103,9 @@ every `expected` (the sheet's cached values).
   `published` holds the evaluator's, and the explainer says "changed for consistency", their number
   and why. The evaluator view uses `published`, so the sheet still reproduces.
 - A program that doesn't fit: leave it out and say so, rather than force it.
+- **Mark** (normalization.md 2.16, 2.18) side-effect rows `side_effect` where the effect enters, and a
+  chance that one event happens at all `single_event` (`{ with }` for chances that move together,
+  `{ one_of }` for scenarios), never a yearly rate or a share of many.
 
 ## 4. Shared levers (layer A), pinned in the evaluator view
 
@@ -108,18 +115,10 @@ every `expected` (the sheet's cached values).
 their `uov_per_ln_consumption` where the sheet uses its own, and for AIM (Ambitious
 Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) with `rp_species_weights: 0`.
 
-- **Deaths** read `$life_value_multiplier`: `@moral_weights.<age band> * $life_value_multiplier` in every
-  model, the band of the death's age (under five, 5–14, 15–49, 50–74; `_over5` only for unknown ages;
-  deaths of many ages, as in climate and GBD DALYs, through an `@death_ages` mix). In a WELLBY model (HLI)
-  deaths are valued in units of value and enter WELLBYs only through the sanctioned row
-  `wellbys_from_uov = uov_valued_outside_wellbys / ($daly_per_wellby * $uov_per_daly)` in an `ours` section, which the unit's conversion
-  cancels, so deaths don't move with the WELLBY slider (INV-17); the evaluator's own death value (years
-  above a neutral point) stays in `published` for the evaluator view (normalization.md 2.3).
-- **Depression** is anchored on the GBD disability weights: PHQ-9 points read
-  `@depression.dalys_per_phq9_point_year`, one SD is `@depression.phq9_sd` points; HLI's SD-years stay in
-  WELLBYs (`@wellby_factors.wellbys_per_sd_year`), and the WELLBY slider's default is calibrated so both
-  routes agree. The WELLBY slider is `$daly_per_wellby` (healthy years per WELLBY, 0.0653), so the calibration holds at any `$uov_per_daly`; HLI models pin `daly_per_wellby` at 0.575 (GiveDirectly, Kenya) in the evaluator view.
-  Household spillovers of therapy read `@wellby_factors` household size and ratio in every model.
+- **Deaths** read `@moral_weights.<age band> * $life_value_multiplier` (a `@death_ages` mix for many ages);
+  in a WELLBY model only through `wellbys_from_uov` in an `ours` section (INV-17, normalization.md 2.3).
+- **Depression** reads the shared GBD anchor (`@depression.*`, `@wellby_factors.*`; normalization.md 2.3);
+  HLI models pin `daly_per_wellby` at 0.575 in the evaluator view.
 - **Future benefits** read `$discount_rate`. A frozen present value (a cached `=PV(…)`) is rebuilt
   from the sheet's inputs (`pv`, `pv_annuity_due`) with the sheet's value as `expected`. Decay rates
   and "opportunities get worse" rates are the sheet's own inputs, not the discount rate. An evaluator
@@ -150,8 +149,9 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
 - A floor in text ("more than 10x") is taken at the floor, labelled "at least".
 - **A past average is not the next dollar.** Where the model's cost-effectiveness is an organisation's (or
   programme's) past spending over what that spending won (campaign or policy wins, papers, money moved;
-  not a unit cost of delivery, not a projected budget), multiply by the slider `$marginal_vs_past_average` in
-  an `ours` section (`published` 1), as the retrospective climate models and the money-moving charities do. Set
+  not a unit cost of delivery, not a projected budget), multiply by the charity's `@next_dollar.<charity>`
+  (facts/next_dollar.json, normalization.md 2.10; the slider `$marginal_vs_past_average` until written) in
+  an `ours` section (`published` 1). Set
   the model's `estimate_basis`: `past_average`, `marginal` (the next grant or planned work) or
   `unit_cost` (a price per item delivered); INV-18 checks that only `past_average` reads the slider.
 - **Missing data** (normalization.md 2.12, INV-21): classify the model in scripts/missing-data.ts
@@ -162,11 +162,9 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   `extra_deaths_per_tco2e` in an `ours` section, each sourced or a ranged judgment.
 - Counterfactuals subtracting what the founders or money would have done elsewhere aren't used in our
   view (the ranking is that comparison); funging and leverage follow section 4's lever.
-- **Life-equivalents** (GiveWell's 2017/2019 sheets, Founders Pledge's child-life equivalents): GiveDirectly's
-  cost per life-equivalent reads `@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar`
-  (the sheet's 11,663 in `published`), so steps stated as multiples of cash keep their multiple; a cost per life-equivalent the sheet labels
-  as a multiple of cash ("$2,000, ~5x cash") is a cash multiple at the sheet's own ratio: GiveDirectly's cost / ($11,663 / $2,000)
-  (dollar figure in `published`); only a figure with no cash meaning counts as an under-five death; per-outcome rows (deaths, income, YLDs) read the shared versions directly.
+- **Life-equivalents** (GiveWell's 2017/2019 sheets): GiveDirectly's cost per life-equivalent reads
+  `@moral_weights.uov_per_death_under5 * $life_value_multiplier / @cash.uov_per_dollar` (the sheet's in
+  `published`); one labelled as a multiple of cash stays a cash multiple at the sheet's own ratio.
 - **Years of benefit** a sheet sums at face value are discounted: `pv_annuity_due(1, years_discount_rate, years)` with
   `years_discount_rate = $discount_rate` (`published` = the evaluator's rate, 0 if none); an "opportunities get worse"
   rate stays and `$discount_rate` goes on top (INV-9b catches years summed at face value). Pin in `evaluator.assumptions` only what some row reads (INV-5b).
@@ -186,16 +184,17 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   `career_change_value`.
 - Every row between `output.native` and `output.row` sits in a section with `kind: "ours"` and has
   no `expected` (INV-7).
+- **Every way the work has impact** is in the model: a step the evaluator leaves out (what would have
+  happened anyway, the charity's credit, a side effect) gets a row in our section, ×1 with its reason or a
+  value.
 - A ranked model more than ten times the median of its peers (same cause and intervention) says why in
   its `summary` ("more than ten times its peers because …"; INV-15). Best guess kept; the reason stated.
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,
   shares from facts such as `@sad_factors.meal_sads_share_<s>`), convert each with
   `ced_<s> = sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024)`
   copied exactly, sum them into the output, and list the species in `output.species`. `<v>` is the
-  SAD version (2024 or 2025) whose weights are built into the figure the row divides *in our view*
-  (a shared `@sad_factors` fact says its basis in its note; ACE's 2025 sheets use 2025 SADs, its
-  2024 sheets and the 2024 meal sheet 2024 SADs). Figures of two versions for one species: a second
-  pair `sads_<s>_<v>` / `ced_<s>_<v>`. Counts that
+  SAD version whose weights are built into the figure the row divides in our view (the fact's note says);
+  two versions for one species: a second pair `sads_<s>_<v>` / `ced_<s>_<v>`. Counts that
   aren't SADs use `ced_<s> = pain_days_<s> * @welfare_ranges.<s>_vs_chicken`. Only `ced_*` rows read
   `@welfare_ranges` or `@aim_sads`.
 - **One SADs figure per physical change** (SAME-CHANGE): a row giving SADs for a change in
@@ -214,10 +213,12 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   The bottom line is the grant's own location column and the best-guess column, never a bound or
   scenario column (INV-16 checks the location against the sheet's title). One dot
   per evaluator; the charity's row shows its primary evaluator's figure.
-- A charity whose evaluator models several programs gets `programs` in charities/<id>.json (model-id
-  pattern, `weight` = funding share, `weight_source` = URL and a one-line note). A model with location
-  variants gets `locations` (every location, unfunded ones at 0, each with `weight_source`). Cite the
-  grant or budget pages; never guess a weight.
+- charities/<id>.json gets `spending` (programme expenses, USD, the year, the accounts' URL and page) and
+  `lines` (the accounts' finest split, each with `dollars`, `source` and, where a model of it exists, a
+  `models` pattern over model ids), summing to programme spending (normalization.md 2.17); other
+  currencies at facts/fx.json's rate. Each evaluator's figure stands alone, never blended with another's;
+  under 90% coverage it carries a caveat. A model with location variants gets `locations` (every
+  location, unfunded ones at 0, each with `weight_source`). Never guess a figure.
 
 ## 7. Write-up
 
@@ -248,6 +249,8 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
   one SADs figure per physical change). Fix it. A flag you have
   checked by hand and found false (a coincidence of values, a word used otherwise) gets a waiver with
   its reason in src/engine/normalization-waivers.json; the allowlist stays empty. Remove stale waivers.
+- `npx tsx scripts/summaries.ts`, then `npx tsx scripts/simulation-check.ts <id>`: if unstable, fix the
+  cause it prints in our view, else say so in the report (it ranks at its best guess, with a caveat).
 - `npm run check`, `npx vitest run`, `npx tsc --noEmit`; look at the page with `npm run dev`.
 
 ## 9. Report

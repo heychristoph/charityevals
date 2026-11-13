@@ -164,7 +164,9 @@ function summarise(xs: number[], smooth: number[], draws: number): Distribution 
   // Reliability is judged on the smooth draws: a long shot's yes/no is meant to swing.
   const s = smooth.length ? quantiles(smooth) : q;
   const mid = s[9], lo = s[0], hi = s[s.length - 1];
-  const unstable = !(mid > 1 / 3 && mid < 3) || hi / mid > 50 || (lo > 0 ? mid / lo > 50 : lo < -mid);
+  // Broken, not just wide: the middle far from the best guess, or an end more than 100× from it (either
+  // way, harm included: a grant can do worse than the money's alternative).
+  const unstable = !(mid > 1 / 3 && mid < 3) || hi / mid > 100 || (lo > 0 ? mid / lo > 100 : -lo / mid > 100);
   return {
     q,
     mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),

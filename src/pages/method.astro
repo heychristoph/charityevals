@@ -42,8 +42,30 @@ const example = `{
 
 <Prose title="How this works" active="method" description="Every charity is a model file, imported from an evaluator or built by us from public evidence, ranked by the good the next $1,000 does, under values you set.">
   <p class="lede">
-    Every charity is ranked by one question: <strong>how much good does the next $1,000 you give do?</strong> Each answer is a model, a public file of numbers and formulas. Most come from charity evaluators; the rest we build. Every model then counts the same things the same way, at values you set.
+    The aim is to put every charity in <strong>one comparable, quantitative framework</strong>: one question, <strong>how much good does the next $1,000 you give do?</strong>, answered for each the same way. Each answer is a model, a public file of numbers and formulas. Most come from charity evaluators; the rest we build.
   </p>
+  <p id="why">
+    Evaluators each count in their own units, with their own rates and rules, so their numbers can't be set side by side: a malaria charity, an animal campaign and a therapy programme are rated on different scales. Putting them on one lets you compare across causes and evaluators.
+  </p>
+  <div class="pros-cons">
+    <div>
+      <h3 class="pc-h">What it gives you</h3>
+      <ul>
+        <li>Charities from any cause or evaluator side by side.</li>
+        <li>Every assumption written down, with its source, and the value judgments yours to change.</li>
+        <li>The same rules for everyone, so a gap between two charities comes from their work, not their evaluator's method.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="pc-h">What it costs</h3>
+      <ul>
+        <li>One number looks more precise than it is; the ranges and warnings are part of the answer.</li>
+        <li>What's hard to measure gets only a rough estimate, which tends to favour work that is easy to count.</li>
+        <li>Comparing causes needs value judgments (a chicken against a person, health against income) that no data settles.</li>
+        <li>Models of very different depth sit side by side.</li>
+      </ul>
+    </div>
+  </div>
 
   <ol class="flow" aria-label="From an evaluator's analysis to the rankings">
     <li><a href="#sources"><span class="flow-n">1</span><strong>A model</strong><span>an evaluator's, rebuilt, or ours</span></a></li>
@@ -156,7 +178,7 @@ const example = `{
 
   <h3 id="next-dollar">The next dollar, and reforms</h3>
   <p>
-    Most models estimate the next grant or the cost of one more unit of work. Some divide everything an organisation achieved by everything it spent: an average, and the next dollar usually does less. A won reform counts only for the years before it would have come anyway, after the wait until it takes effect.
+    Most models estimate the next grant or the cost of one more unit of work. Some divide everything an organisation achieved by everything it spent: an average, and the next dollar usually does less. How much less is being estimated charity by charity, from how much room it has for more money, what the next dollar buys and how well it is run; where that isn't done yet, the setting below applies. A won reform counts only for the years before it would have come anyway, after the wait until it takes effect.
   </p>
   <Setting client:load ids={["marginal_vs_past_average", "win_years_counted"]} />
 
@@ -252,7 +274,7 @@ const example = `{
 
   <h2 id="not">What this is not</h2>
   <p>
-    Not any evaluator's recommendation, and not endorsed by any evaluator or charity listed. Cost-effectiveness is one input to a giving decision. How well a charity is run isn't modelled, and the next dollar is still one share for every charity estimated from past averages, not a figure per charity.
+    Not any evaluator's recommendation, and not endorsed by any evaluator or charity listed. Cost-effectiveness is one input to a giving decision. How well a charity is run counts only through its next-dollar figure, and most charities estimated from past averages don't have their own figure yet.
   </p>
   <h2 id="files">The model files</h2>
   <p>
@@ -593,5 +615,33 @@ const example = `{
     color: var(--ink-3);
     font-size: 13px;
     margin-left: 6px;
+  }
+  .pros-cons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s3);
+    margin: var(--s3) 0 var(--s4);
+  }
+  .pros-cons > div {
+    padding: var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+  .pros-cons ul {
+    margin: 0 !important;
+    padding-left: 1.1em !important;
+    font-size: 15px;
+  }
+  .pros-cons li {
+    margin: 4px 0 !important;
+  }
+  :global(.wrap h3.pc-h) {
+    margin: 0 0 var(--s2);
+    font-size: 15px;
+  }
+  @media (max-width: 640px) {
+    .pros-cons {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

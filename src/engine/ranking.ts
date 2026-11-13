@@ -72,6 +72,20 @@ export function coverage(lib: Library, charity: string, owner: string): { covere
 
 /** Below this share of a charity's programme spending, an evaluator's figure carries a caveat. */
 export const COVERAGE_FLAG_BELOW = 0.9;
+/** The caveat on a model whose charity's next-dollar figure (facts/next_dollar.json) is over a year old:
+ * room for more funding moves fast (docs/normalization.md 2.10). */
+export function nextDollarFlag(lib: Library, m: ResolvedModel, today = new Date()): Flag | undefined {
+  for (const r of m.rows)
+    for (const f of r.factDeps) {
+      if (!f.startsWith("next_dollar.")) continue;
+      const at = lib.facts.get(f)?.source?.retrieved;
+      if (!at) continue;
+      const months = (today.getTime() - new Date(at).getTime()) / (30.44 * 86400000);
+      if (months > 12) return { level: "warn", short: "old next-dollar figure", text: `How much the next dollar does was last checked ${Math.round(months)} months ago` };
+    }
+  return undefined;
+}
+
 const coverageFlags = new WeakMap<Library, Map<string, Flag | null>>();
 
 /** The caveat on a model whose evaluator's models leave part of the charity's programmes out: the figure

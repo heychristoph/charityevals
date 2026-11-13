@@ -853,6 +853,22 @@ ratio is (1 − B₀/B) / ln(B/B₀) for an organisation that has grown from B�
 tenfold, 21% after a hundredfold. No evaluator adjusts the ratio by an organisation's age or size: there is no
 age- or size-based adjustment here either (an open proposal, section 5, item 11).
 
+**Per charity (trial, November 2026).** The blanket 50% is a placeholder; each charity estimated from a past
+average gets its own figure in facts/next_dollar.json, read by its models' `marginal_vs_past_average` row in
+place of the slider (`published` 1 keeps the evaluator view at 100%). It is a product of three factors, each
+from the charity's own evidence, with a range:
+- *room* (0.3-1.0): is money the constraint? A stated funding gap or an evaluator's room-for-more-funding
+  finding, reserves in months of spending, revenue against spending over recent years.
+- *use* (0.4-1.0): what the next dollar buys against the average: the same proven work at the same cost, or
+  harder ground (new countries, campaign targets that resisted, the easy wins already won).
+- *run* (0.8-1.1): how well the organisation is run: an evaluator's assessment of its health and leadership,
+  turnover, its record against its own targets. How well a charity is run is counted here, not separately.
+Missing evidence gives the neutral factor (room 0.7, use 0.7, run 1.0) with a wide range. Room for more
+funding moves within months, so each figure is dated (`source.retrieved`) and a model whose figure is over a
+year old carries a caveat. Trial: The Humane League 51% (30-80%), Wild Animal Initiative 32% (15-60%: two
+years of reserves), British Heart Foundation 39% (20-70%: reserves well above its own requirement). The other
+past averages still read the slider until they have their own figure; then the slider goes.
+
 ### 2.11 Old estimates count less: a slider for an estimate's age (November 2026)
 
 The rankings use each evaluator's newest model of a charity however old it is (src/engine/ranking.ts). HSUS's
@@ -1219,14 +1235,20 @@ model's variance, the reader's own value judgments (the sliders) held fixed. Eac
 best guess, so an asymmetric range stays asymmetric. Inputs without a range take the default spread by
 kind (judgment ×1.5, estimate ×1.3, data ×1.1), a share on its odds so it stays between 0 and 1; a
 negative share added to 1 (an adjustment of −40%) on the factor 1 + x, so it never takes away more than
-everything; calendar years never vary. Stored per model: the result at 5%, 10%, …, 95% and its average, as
+everything; calendar years never vary (a row or fact named a year, a whole number from 1950 to 2150 without
+a published range, such a number named for a time, or a row in unit "Year": a sheet's timeline index). Stored per model: the result at 5%, 10%, …, 95% and its average, as
 multiples of the best guess, and the share of draws at zero or below. The browser scales this shape with
 the reader's values. Where the reader's values change a model's structure, not just its size, the shape
 is approximate. On a model's page the simulation runs again at the reader's values and edits.
 
 **Unstable simulations.** Where the simulated middle is more than 3× from the best guess, or the range runs
-more than 50× either side of it (a result that is a small difference of large numbers, or a ratio near
-zero: 26 models, mostly GiveWell sheets), the simulation isn't used: the model counts at its best guess at
+more than 100× either side of it, harm included (a result that is a small difference of large numbers, or a
+ratio near zero), the simulation isn't used. Most of the first 26 were calendar years drawn as uncertain
+(fixed above) or results that honestly run below zero (a grant that does worse than the money's alternative),
+which the 50× test of the first version wrongly caught. Left (November 2026): Better Season Project (farmers'
+own costs in the denominator: a net near zero; its monthly income falls are floored at −90% so the log stays
+defined, a floor no best guess reaches) and Evidence Action's iron and folic acid in India (a trend compounded
+from yearly burden figures drawn independently). For these the model counts at its best guess at
 every risk setting, its range falls back to every ranged input at its end, and it carries a caveat.
 
 **Single events.** A row that is the chance one event happens at all (a new charity succeeds, a law passes,
@@ -1240,12 +1262,14 @@ The risk factor divides by the middle of the same draws with each chance at its 
 is the best guess for every model without such a row; the unstable test reads those smooth draws too.
 Because 50% is no longer always ×1, `RISK_OFF` (−1) turns the factor off: a model read by another
 (`#id`), the simulation's own runs and the waterfall's start. Not marked: yearly rates (a law passing
-anyway each year, a chance per year), shares across many grants or companies, GiveWell's in-line
-chlorination schedule (each period's chance subtracted from the last, which a yes/no draw turns negative)
-and New Incentives' 2017 scenarios (their remainder split evenly in a formula). November 2026: 264 rows in
-28 models; 8 show about 0 at the default 50%. Where a model is a ratio of expected good to expected cost
+anyway each year, a chance per year), and shares across many grants or companies. November 2026: 343 rows in
+30 models; 8 show about 0 at the default 50%. Where a model is a ratio of expected good to expected cost
 (Ambitious Impact's cost per successful charity), a draw's figure is that world's own good over its own
-cost, so the simulated average can sit below the best guess.
+cost, so the simulated average can sit below the best guess. GiveWell's in-line chlorination marks each
+state's chance the programme is still running at each stage, drawn together so a later stage never
+outlives an earlier one; New Incentives' 2017 scenarios are one of four.
+St Jude's education and training spending, a remainder of four large expense lines that a few percent on each
+swung below zero, is one reported figure.
 
 **Best guess, not average.** The ranking stays on the best guess where no single event is drawn. What
 remains between best guess and simulated average elsewhere is the skew of the uncertain inputs, under

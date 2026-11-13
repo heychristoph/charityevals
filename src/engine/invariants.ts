@@ -1195,8 +1195,12 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
       violations.push({ inv: "INV-18", model: m.id, where: "estimate_basis", detail: "no estimate_basis: say whether the result is a past_average, marginal or unit_cost estimate" });
       continue;
     }
+    // A charity's own next-dollar figure (facts/next_dollar.json) stands in for the shared slider.
+    const own = m.rows.filter((r) => r.factDeps.some((f) => f.startsWith("next_dollar.")));
     const readers = m.rows.filter((r) => r.assumptionDeps.includes(A));
     if (basis !== "past_average") {
+      for (const r of own)
+        violations.push({ inv: "INV-18", model: m.id, where: `${r.id} next_dollar`, detail: `reads a next-dollar figure, but its estimate is ${basis}: diminishing returns twice` });
       for (const r of readers)
         violations.push({ inv: "INV-18", model: m.id, where: `${r.id} $${A}`, detail: `reads $${A}, but its estimate is ${basis}: already about the next dollar, so the slider would count diminishing returns twice` });
       // Nor through anything else, unless through another model it reads live.
@@ -1208,6 +1212,17 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
       continue;
     }
     const path = rowsFeeding(m);
+    const ownOnPath = own.filter((r) => path.has(r.id));
+    if (ownOnPath.length) {
+      const f = ownOnPath[0].factDeps.find((x) => x.startsWith("next_dollar."))!;
+      const v = pickValue(lib.facts.get(f)?.value);
+      const h0 = headline(lib, m, av), h1 = headline(lib, m, av, { [`@${f}`]: v * 0.5 });
+      if (!(Number.isFinite(h0) && h1 < h0))
+        violations.push({ inv: "INV-18", model: m.id, where: `@${f} moves`, detail: `halving the charity's next-dollar figure doesn't lower our headline (${fmt(h0)} → ${fmt(h1)})` });
+      for (const r of ownOnPath) if (r.published === undefined)
+        violations.push({ inv: "INV-18", model: m.id, where: `${r.id} evaluator view`, detail: "reads a next-dollar figure with no `published` value: the evaluator view must keep the evaluator's 1" });
+      continue;
+    }
     if (!readers.some((r) => path.has(r.id))) {
       violations.push({ inv: "INV-18", model: m.id, where: `$${A}`, detail: `a past average, but no row on the path to the output reads $${A}` });
       continue;

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { lib, primaryOf, rankedCharities } from "./data";
 import { assumptionValues, bottomLine, headline, plausibleRange, tooOld, unstableFlag, type ResolvedModel } from "../engine/model";
-import { combine, combineLocations, coverageFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
+import { combine, combineLocations, coverageFlag, nextDollarFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
 import { useOverrides } from "./assumption-state";
@@ -80,10 +80,11 @@ function resultOf(m: ResolvedModel, av: Record<string, number>): Result {
   const s = sensitivity(lib, m, av);
   const cover = coverageFlag(lib, m);
   const shaky = unstableFlag(lib, m);
+  const stale = nextDollarFlag(lib, m);
   // The plausible range is the model's simulated 5% to 95% (src/engine/montecarlo.ts), where it has one;
   // otherwise every ranged input at its end together.
   const range = plausibleRange(lib, m, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
-  return { model: m, native: bottomLine(lib, m, av).native, central: s.central, low: range.low, high: range.high, s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...(cover ? [cover] : []), ...(shaky ? [shaky] : [])] };
+  return { model: m, native: bottomLine(lib, m, av).native, central: s.central, low: range.low, high: range.high, s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...(cover ? [cover] : []), ...(shaky ? [shaky] : []), ...(stale ? [stale] : [])] };
 }
 
 /** The full result for one model, including variants that aren't on the rankings. */
