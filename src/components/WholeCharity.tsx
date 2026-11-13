@@ -5,7 +5,8 @@ import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
 import { combine, declaredLocations, locationWeights, locationsOf } from "../engine/ranking";
 import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib/edit-state";
 import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
-import { formatYears, plainModelName } from "../lib/format";
+import { plainModelName } from "../lib/format";
+import { useFigure } from "../lib/metric";
 import ModelView from "./ModelView";
 import { WaterfallInSlot } from "./Waterfall";
 
@@ -45,6 +46,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   // The rankings ignore page edits; here the open programme's figure follows them, and the whole
   // charity is recombined from the parts shown (the rankings themselves don't move).
   const av = useAssumptionValues();
+  const fig = useFigure(lib, av);
   const urlEdits = useEdits();
   const ev = useMemo(() => {
     if (!evAll || !open || !Object.keys(urlEdits).length) return evAll;
@@ -87,8 +89,8 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   return (
     <div className="whole" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
       <div className="whole-root">
-        <span className="whole-root-label">Years of healthy life per $1,000, the whole charity</span>
-        <span className="whole-root-value num">{formatYears(ev.central)}</span>
+        <span className="whole-root-label">{fig.metric.unit}, the whole charity</span>
+        <span className="whole-root-value num">{fig.format(ev.central)}</span>
       </div>
       <p className="whole-lede small">
         {weighted
@@ -107,8 +109,8 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
                 <span className="whole-part-label">{label}</span>
                 <span className="whole-part-math num">
                   {share !== undefined && <>{pct(share)} × </>}
-                  {formatYears(p.central)}
-                  {adds !== undefined && <> = <strong>{formatYears(adds)}</strong>{ev.central > 0 && <span className="muted"> ({pct(adds / ev.central)} of the total)</span>}</>}
+                  {fig.format(p.central)}
+                  {adds !== undefined && <> = <strong>{fig.format(adds)}</strong>{ev.central > 0 && <span className="muted"> ({pct(adds / ev.central)} of the total)</span>}</>}
                 </span>
               </button>
               {here && (
@@ -166,6 +168,7 @@ export function Locations({ id }: { id: string }) {
   const model = lib.models.get(id)!;
   const { pages } = useResults();
   const av = useAssumptionValues();
+  const fig = useFigure(lib, av);
   const ev = pageEvaluator(pages, model.charity, model.owner);
   const p = ev?.programs.length === 1 ? ev.programs[0] : undefined;
   const locations = useMemo(() => (p?.locationBasis === "weighted" ? locationParts(p.result.model, av) : undefined), [p, av]);
@@ -173,8 +176,8 @@ export function Locations({ id }: { id: string }) {
   return (
     <div className="whole whole-locations" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
       <div className="whole-root">
-        <span className="whole-root-label">Years of healthy life per $1,000, the whole charity</span>
-        <span className="whole-root-value num">{formatYears(ev.central)}</span>
+        <span className="whole-root-label">{fig.metric.unit}, the whole charity</span>
+        <span className="whole-root-value num">{fig.format(ev.central)}</span>
       </div>
       <ul className="whole-parts">
         {locations.map((l) => (
@@ -183,7 +186,7 @@ export function Locations({ id }: { id: string }) {
               <span className="whole-part-label">{l.label}</span>
               <span className="whole-part-math num">
                 {l.share !== undefined && <>{pct(l.share)} × </>}
-                {formatYears(l.central)}
+                {fig.format(l.central)}
               </span>
             </div>
           </li>

@@ -3,7 +3,7 @@ import { lib, rawFacts, bulkRaw } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
 import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
 import { editsFor, setPageModels, useEdits } from "../lib/edit-state";
-import { formatYears } from "../lib/format";
+import { useFigure } from "../lib/metric";
 
 const built = new Map<string, ResolvedModel>();
 /** A bulk model in full (its page loads the file before hydrating); any other model as the library has it. */
@@ -28,6 +28,7 @@ export default function Headline({ id, bulk = false, main = false }: { id: strin
   const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
   const value = useMemo(() => headline(lib, model, av, edits), [model, av, edits]);
   const { pages } = useResults();
+  const fig = useFigure(lib, av);
   const ev = main ? pageEvaluator(pages, model.charity, model.owner) : undefined;
 
   useEffect(() => {
@@ -35,9 +36,9 @@ export default function Headline({ id, bulk = false, main = false }: { id: strin
       const m = lib.models.get(el.dataset.model ?? id);
       if (!m) continue;
       const v = m.id === model.id ? value : headline(lib, m, av);
-      if (Number.isFinite(v)) el.textContent = formatYears(v);
+      if (Number.isFinite(v)) el.textContent = fig.format(v);
     }
-  }, [value, av, id, model.id]);
+  }, [value, av, id, model.id, fig]);
 
   // A whole-charity page edits each programme's own model; their edits stay in the URL (edit-state).
   if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);

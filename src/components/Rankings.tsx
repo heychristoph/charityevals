@@ -3,9 +3,9 @@ import { AlertTriangle } from "lucide-react";
 import { lib } from "../lib/data";
 import { useResults } from "../lib/use-results";
 import type { Basis } from "../engine/ranking";
-import { formatYears } from "../lib/format";
+import { useFigure, type Figure } from "../lib/metric";
 import { THEORETICAL_TEXT } from "../engine/sensitivity";
-import { DOMAIN, TICKS, xFor, tickLabel, clipSpan, pctStr } from "./scale";
+import { DOMAIN, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import CharityLogo from "./CharityLogo";
 import InfoTip from "./InfoTip";
 import "./rankings.css";
@@ -18,6 +18,19 @@ export const CAUSE_LABEL: Record<string, string> = {
 };
 
 const pct = (v: number) => pctStr(xFor(v, 100));
+
+/** Gridlines at the powers of ten of the chosen measure, placed on the one healthy-years scale: the
+ * bars never move, only what the axis reads. Every third one is labelled bold, as before. */
+function ticksFor(fig: Figure): { at: number; label: string; major: boolean }[] {
+  const out: { at: number; label: string; major: boolean }[] = [];
+  const f = fig.factor;
+  if (!(f > 0)) return out;
+  for (let k = Math.ceil(Math.log10(DOMAIN[0] * f) - 1e-9); k <= Math.floor(Math.log10(DOMAIN[1] * f) + 1e-9); k++) {
+    const t = 10 ** k;
+    out.push({ at: t / f, label: `${fig.metric.prefix ?? ""}${tickLabel(t)}${fig.metric.suffix ?? ""}`, major: ((k % 3) + 3) % 3 === 0 });
+  }
+  return out;
+}
 
 /** Narrowest range bar, in % of the track: a range narrower than the dot would hide behind it. */
 const MIN_SPAN = 4;
@@ -78,7 +91,9 @@ function useFlip(order: string) {
 
 /** The rankings; a hub page shows them filtered to one cause or one evaluator's charities. */
 export default function Rankings({ cause, owner }: { cause?: string; owner?: string }) {
-  const { results: all } = useResults();
+  const { results: all, av } = useResults();
+  const fig = useFigure(lib, av);
+  const ticks = ticksFor(fig);
   const results = all.filter((r) => (!cause || r.charity.cause === cause) && (!owner || r.evaluators.some((x) => x.owner === owner)));
   const flipRef = useFlip(results.map((r) => r.charity.id).join());
 
@@ -86,15 +101,13 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
     <figure className="rankings" aria-labelledby="rankings-caption">
       <div className="r-axis">
         <div className="r-unit tip-host">
-          <span id="rankings-caption">Healthy years per $1,000</span>{"\u00a0"}<InfoTip label="What's a healthy year?">
-            One person living one more year in full health, what researchers call a DALY. Preventing a death or an illness adds
-            these years; so does lifting a family out of poverty or sparing animals from suffering, converted at exchange rates
-            you can change. <a href="/method#healthy-years">More</a>
+          <span id="rankings-caption">{fig.metric.unit}</span>{"\u00a0"}<InfoTip label={`What's ${fig.metric.label.toLowerCase()}?`}>
+            {fig.metric.about}{fig.metric.id === "daly" && <> <a href="/method#healthy-years">More</a></>}
           </InfoTip>
         </div>
         <div className="r-track" aria-hidden>
-          {TICKS.map((t, k) => (
-            <span key={t} className={`r-tick num ${(TICKS.length - 1 - k) % 3 ? "r-tick-minor" : ""}`} style={{ left: pct(t) }}>{tickLabel(t)}</span>
+          {ticks.map((t) => (
+            <span key={t.label} className={`r-tick num ${t.major ? "" : "r-tick-minor"}`} style={{ left: pct(t.at) }}>{t.label}</span>
           ))}
         </div>
         <div />
@@ -146,10 +159,10 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
               <div
                 className={`r-track ${multi ? "r-track-multi" : ""}`}
                 role="img"
-                aria-label={`${c.name}: ${r.evaluators.map((x, k) => `${owners[k].name} ${formatYears(x.central)}${x.theoretical ? " (purely theoretical)" : ""}`).join(", ")} years of healthy life per $1,000; range ${formatYears(r.low)} to ${formatYears(r.high)}`}
+                aria-label={`${c.name}: ${r.evaluators.map((x, k) => `${owners[k].name} ${fig.format(x.central)}${x.theoretical ? " (purely theoretical)" : ""}`).join(", ")} ${fig.metric.unit.toLowerCase()}; range ${fig.format(r.low)} to ${fig.format(r.high)}`}
               >
-                {TICKS.map((t) => (
-                  <span key={t} className="r-grid" style={{ left: pct(t) }} />
+                {ticks.map((t) => (
+                  <span key={t.label} className="r-grid" style={{ left: pct(t.at) }} />
                 ))}
                 <span
                   className="r-bar"
@@ -157,7 +170,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
                 />
                 {r.evaluators.map((x, k) => (
                   <span key={x.owner} className="r-dot-layer" style={{ transform: `translateX(${pct(x.central)})`, ["--lane" as string]: multi ? `${k % 2 ? LANE : -LANE}px` : undefined }}>
-                    <span className={`r-dot ${multi ? "r-dot-owner" : ""} ${multi && x.owner !== r.primary ? "r-dot-other" : ""} ${x.theoretical ? "r-dot-theory" : ""}`} title={`${owners[k].name}: ${formatYears(x.central)}${BASIS[x.basis](x.programs.length)}${x.theoretical ? " (purely theoretical: an estimate made before the charity existed)" : ""}`}>
+                    <span className={`r-dot ${multi ? "r-dot-owner" : ""} ${multi && x.owner !== r.primary ? "r-dot-other" : ""} ${x.theoretical ? "r-dot-theory" : ""}`} title={`${owners[k].name}: ${fig.format(x.central)}${BASIS[x.basis](x.programs.length)}${x.theoretical ? " (purely theoretical: an estimate made before the charity existed)" : ""}`}>
                       {multi && <span className="r-dot-label">{owners[k].short}</span>}
                     </span>
                   </span>
@@ -165,7 +178,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
               </div>
 
               <div className="r-value">
-                <span className="r-central num">{formatYears(r.central)}</span>
+                <span className="r-central num">{fig.format(r.central)}</span>
               </div>
 
             </li>
