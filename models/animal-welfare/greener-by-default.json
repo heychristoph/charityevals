@@ -1,0 +1,918 @@
+{
+  "id": "greener-by-default",
+  "name": "Greener by Default",
+  "kind": "charity",
+  "cause": "animal-welfare",
+  "beneficiaries": {
+    "USA": 0.8,
+    "GBR": 0.2
+  },
+  "beneficiaries_note": "Where the meals are served: mostly US institutions, with UK hospitals (Sodexo UK, Nuffield Health).",
+  "missing_data": {
+    "thin_share": 1,
+    "note": "Thin: ACE's estimate of a campaign or outreach programme: the animals or people its work reached and the welfare change per animal are ACE's judgments (pledges won, meals swapped, welfare footprints), with no controlled evaluation of the charity."
+  },
+  "estimate_basis": "past_average",
+  "charity": "greener-by-default",
+  "owner": "ace",
+  "summary": "Helps hospitals, universities, stadiums and corporate cafeterias in the United States and United Kingdom serve plant-based meals by default. A re-implementation of Animal Charity Evaluators' 2026 cost-effectiveness sheet: its Healthcare, Business & Industry and College & University programmes against all of Greener by Default's 2025 to mid-2026 spending, research included. One hospital engagement carries about 90% of the modelled impact. It is far below the median of its peers because ACE's own estimate is low (2.1 SADs per dollar, against 5.7 to 31 for its 2026 cage-free reviews) and about 44% of it falls on shrimp, which count at a tenth of a chicken.",
+  "source": {
+    "publisher": "Animal Charity Evaluators",
+    "title": "Greener by Default review (2026)",
+    "url": "https://animalcharityevaluators.org/charity-review/greener-by-default/",
+    "sheet": "https://docs.google.com/spreadsheets/d/1Eb0GU-1DdQVtKwT5DEYVNSDKtIWX3ylNZpu2XYLSUHU/edit",
+    "published": "2026-11-05",
+    "retrieved": "2026-11-13",
+    "license": "© Animal Charity Evaluators, all rights reserved (ACE's terms of use); published with ACE's permission"
+  },
+  "sections": [
+    {
+      "id": "cross",
+      "title": "Cross-cutting parameters"
+    },
+    {
+      "id": "benefits",
+      "title": "Benefits",
+      "explainer": "ACE's totals for each programme. The engagement rows behind them are redacted in the public sheet."
+    },
+    {
+      "id": "costs",
+      "title": "Costs (2025 and 2026 to date)",
+      "explainer": "Each programme's share of 2025 and January–June 2026 spending, with overhead at 2025's ratio."
+    },
+    {
+      "id": "bottom",
+      "title": "Cost-effectiveness",
+      "explainer": "ACE's bottom line is the overall SADs averted per dollar with the research program's cost included."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "explainer": "charityevals adjustments on top of ACE's model.",
+      "kind": "ours"
+    },
+    {
+      "id": "species",
+      "title": "In chicken pain days",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for every animal model, not ACE's. The meals replaced spare shrimp, chickens, fish and mammals; each species' share of the SADs is counted in days of a chicken's disabling pain with Rethink Priorities' welfare ranges. How a chicken's suffering compares with a person's is the one animal slider, under Your values."
+    }
+  ],
+  "rows": [
+    {
+      "id": "discount_rate",
+      "section": "cross",
+      "label": "Annual discount rate",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "expected": 0.014,
+      "source": {
+        "title": "ACE (ACE standard estimate, 2026 methodology decision)",
+        "cell": "CEA!C3"
+      },
+      "explainer": "Your discount rate (Timing, under Your values). ACE fixes 1.4% for all its 2026 models."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "cross",
+      "label": "Years of impact",
+      "unit": "years",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "published": {
+        "low": 3,
+        "best": 5,
+        "high": 10
+      },
+      "source": {
+        "title": "ACE (Guess, based loosely on its 2025 BFF CEA)",
+        "cell": "CEA!B4:D4"
+      },
+      "explainer": "Changed for consistency: an institution switching its menus to plant-based defaults is a won change of policy, so the years it counts read the shared \"Years a won reform counts before it would have come anyway\", like every model crediting a won reform. ACE's own guess, 5 years (3 to 10), is kept as the evaluator's."
+    },
+    {
+      "id": "time_factor",
+      "section": "cross",
+      "label": "Time discount factor (over the years of impact)",
+      "format": "percent",
+      "formula": "(1 - (1 + discount_rate) ^ -years_of_impact) / ((1 - 1 / (1 + discount_rate)) * years_of_impact)",
+      "expected": 0.9727652134,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C5"
+      },
+      "explainer": "The average discount over the years of impact: year 1 undiscounted, each later year less."
+    },
+    {
+      "id": "ace_discounted_years",
+      "section": "cross",
+      "label": "Discounted years each engagement counts in ACE's sheet",
+      "unit": "years",
+      "format": "number",
+      "value": 4.863826067,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C4 × CEA!C5"
+      },
+      "explainer": "ACE's 5 years times its 0.973 discount factor: the discounted years inside each engagement's total below. The engagement rows are redacted in the public sheet, so the totals are typed in; this row lets our view rescale them when the years or the discount rate change."
+    },
+    {
+      "id": "years_scale",
+      "section": "cross",
+      "label": "Rescaling of ACE's totals to our years and discount",
+      "format": "number",
+      "formula": "years_of_impact * time_factor / ace_discounted_years",
+      "published": 1,
+      "explainer": "1 in the evaluator view. In ours, ACE's engagement totals are scaled by the discounted years we count over the ones ACE counted, since every engagement uses the same cross-cutting years and rate."
+    },
+    {
+      "id": "animals_hc_sheet",
+      "section": "benefits",
+      "label": "Healthcare: total animals helped in ACE's sheet (net; discounted)",
+      "format": "integer",
+      "value": 4344886.868939343,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (calculated from redacted engagement rows)",
+        "cell": "CEA!C15"
+      },
+      "explainer": "Hospitals and their food-service companies serving plant-based meals by default to patients (Sodexo and Nuffield Health in the UK, some 400 US hospitals). One engagement carries about 90% of the modelled impact; it collects no procurement data, so ACE applies its standard US meal replacement estimate. ACE's total over its engagements, typed in because the engagement rows are redacted (Greener by Default marked them confidential)."
+    },
+    {
+      "id": "sads_hc_sheet",
+      "section": "benefits",
+      "label": "Healthcare: total SADs averted in ACE's sheet (net; discounted)",
+      "format": "integer",
+      "value": 8551750.964159532,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (calculated from redacted engagement rows)",
+        "cell": "CEA!C16"
+      },
+      "explainer": "ACE's total; the credit Greener by Default gets for increases in some animal products (a quarter of its credit for decreases, ACE's guess) is inside it."
+    },
+    {
+      "id": "animals_hc",
+      "section": "benefits",
+      "label": "Healthcare: total animals helped (net; discounted)",
+      "format": "integer",
+      "formula": "animals_hc_sheet * years_scale",
+      "expected": 4344886.868939343,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C15"
+      }
+    },
+    {
+      "id": "sads_hc",
+      "section": "benefits",
+      "label": "Healthcare: total SADs averted (net; discounted)",
+      "format": "integer",
+      "formula": "sads_hc_sheet * years_scale",
+      "expected": 8551750.964159532,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C16"
+      }
+    },
+    {
+      "id": "animals_bi_sheet",
+      "section": "benefits",
+      "label": "Business & Industry: total animals helped in ACE's sheet (net; discounted)",
+      "format": "integer",
+      "value": 47471.24270397767,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (calculated from redacted engagement rows)",
+        "cell": "CEA!C20"
+      },
+      "explainer": "Corporate dining, stadiums, convention centres and cultural institutions (a meat reduction commitment across 300 US venues). ACE's total over its engagements, typed in because the engagement rows are redacted (Greener by Default marked them confidential)."
+    },
+    {
+      "id": "sads_bi_sheet",
+      "section": "benefits",
+      "label": "Business & Industry: total SADs averted in ACE's sheet (net; discounted)",
+      "format": "integer",
+      "value": 110500.25387669432,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (calculated from redacted engagement rows)",
+        "cell": "CEA!C21"
+      },
+      "explainer": "ACE's total; the credit Greener by Default gets for increases in some animal products (a quarter of its credit for decreases, ACE's guess) is inside it."
+    },
+    {
+      "id": "animals_bi",
+      "section": "benefits",
+      "label": "Business & Industry: total animals helped (net; discounted)",
+      "format": "integer",
+      "formula": "animals_bi_sheet * years_scale",
+      "expected": 47471.24270397767,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C20"
+      }
+    },
+    {
+      "id": "sads_bi",
+      "section": "benefits",
+      "label": "Business & Industry: total SADs averted (net; discounted)",
+      "format": "integer",
+      "formula": "sads_bi_sheet * years_scale",
+      "expected": 110500.25387669432,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C21"
+      }
+    },
+    {
+      "id": "animals_cu_sheet",
+      "section": "benefits",
+      "label": "College & University: total animals helped in ACE's sheet (net; discounted)",
+      "format": "integer",
+      "value": -123919.17086080393,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (calculated from redacted engagement rows)",
+        "cell": "CEA!C26"
+      },
+      "explainer": "University dining. ACE's best guess nets more animals than it spares (more poultry, eggs or fish alongside less beef), but fewer SADs. ACE's total over its engagements, typed in because the engagement rows are redacted (Greener by Default marked them confidential)."
+    },
+    {
+      "id": "sads_cu_sheet",
+      "section": "benefits",
+      "label": "College & University: total SADs averted in ACE's sheet (net; discounted)",
+      "format": "integer",
+      "value": 24571.39395345529,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE (calculated from redacted engagement rows)",
+        "cell": "CEA!C27"
+      },
+      "explainer": "ACE's total; the credit Greener by Default gets for increases in some animal products (a quarter of its credit for decreases, ACE's guess) is inside it."
+    },
+    {
+      "id": "animals_cu",
+      "section": "benefits",
+      "label": "College & University: total animals helped (net; discounted)",
+      "format": "integer",
+      "formula": "animals_cu_sheet * years_scale",
+      "expected": -123919.17086080393,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C26"
+      }
+    },
+    {
+      "id": "sads_cu",
+      "section": "benefits",
+      "label": "College & University: total SADs averted (net; discounted)",
+      "format": "integer",
+      "formula": "sads_cu_sheet * years_scale",
+      "expected": 24571.39395345529,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C27"
+      }
+    },
+    {
+      "id": "animals_total",
+      "section": "benefits",
+      "label": "Total animals helped, all modelled engagements (net; discounted)",
+      "format": "integer",
+      "formula": "animals_hc + animals_bi + animals_cu",
+      "expected": 4268438.941,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C10"
+      }
+    },
+    {
+      "id": "sads_total",
+      "section": "benefits",
+      "label": "Total SADs averted, all modelled engagements (net; discounted)",
+      "format": "integer",
+      "formula": "sads_hc + sads_bi + sads_cu",
+      "expected": 8686822.612,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C11"
+      }
+    },
+    {
+      "id": "prog_2025",
+      "section": "costs",
+      "label": "2025 total programmatic expenditure",
+      "format": "usd",
+      "value": 1625233,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD-reported, application financials)",
+        "cell": "CEA!C31"
+      }
+    },
+    {
+      "id": "total_2025",
+      "section": "costs",
+      "label": "2025 total expenditure including non-programmatic",
+      "format": "usd",
+      "value": 1869336,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD-reported, application financials)",
+        "cell": "CEA!C32"
+      }
+    },
+    {
+      "id": "prog_2026",
+      "section": "costs",
+      "label": "2026 programmatic expenditure, January to June",
+      "format": "usd",
+      "value": 1909000,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD-reported activity spending, GBD Master Doc / TOC table)",
+        "cell": "CEA!C33"
+      },
+      "explainer": "The sum of Greener by Default's reported activity spending from January to June 2026 (ACE: likely a slight underestimate)."
+    },
+    {
+      "id": "share25_hc",
+      "section": "costs",
+      "label": "2025 Healthcare share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.3822674419,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2025 activity spending)",
+        "cell": "CEA!C34"
+      }
+    },
+    {
+      "id": "share26_hc",
+      "section": "costs",
+      "label": "2026 Healthcare share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.3771608172,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2026 activity spending to date)",
+        "cell": "CEA!C35"
+      }
+    },
+    {
+      "id": "share25_bi",
+      "section": "costs",
+      "label": "2025 Business & Industry share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.3219476744,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2025 activity spending)",
+        "cell": "CEA!C36"
+      }
+    },
+    {
+      "id": "share26_bi",
+      "section": "costs",
+      "label": "2026 Business & Industry share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.313253012,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2026 activity spending to date)",
+        "cell": "CEA!C37"
+      }
+    },
+    {
+      "id": "share25_cu",
+      "section": "costs",
+      "label": "2025 College & University share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.2100290698,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2025 activity spending)",
+        "cell": "CEA!C38"
+      }
+    },
+    {
+      "id": "share26_cu",
+      "section": "costs",
+      "label": "2026 College & University share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.2016762703,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2026 activity spending to date)",
+        "cell": "CEA!C39"
+      }
+    },
+    {
+      "id": "share25_res",
+      "section": "costs",
+      "label": "2025 Research share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.08575581395,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2025 activity spending)",
+        "cell": "CEA!C40"
+      }
+    },
+    {
+      "id": "share26_res",
+      "section": "costs",
+      "label": "2026 Research share of programmatic expenditure",
+      "format": "percent",
+      "value": 0.1079099005,
+      "kind": "observed",
+      "source": {
+        "title": "ACE (GBD Master Doc / TOC table, 2026 activity spending to date)",
+        "cell": "CEA!C41"
+      }
+    },
+    {
+      "id": "spend_hc",
+      "section": "costs",
+      "label": "2025-26 Healthcare program spend",
+      "format": "usd",
+      "formula": "share25_hc * prog_2025 + share26_hc * prog_2026",
+      "expected": 1341273.661,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C42"
+      }
+    },
+    {
+      "id": "spend_bi",
+      "section": "costs",
+      "label": "2025-26 Business & Industry program spend",
+      "format": "usd",
+      "formula": "share25_bi * prog_2025 + share26_bi * prog_2026",
+      "expected": 1121239.985,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C43"
+      }
+    },
+    {
+      "id": "spend_cu",
+      "section": "costs",
+      "label": "2025-26 College & University program spend",
+      "format": "usd",
+      "formula": "share25_cu * prog_2025 + share26_cu * prog_2026",
+      "expected": 726346.1751,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C44"
+      }
+    },
+    {
+      "id": "spend_res",
+      "section": "costs",
+      "label": "2025-26 Research program spend",
+      "format": "usd",
+      "formula": "share25_res * prog_2025 + share26_res * prog_2026",
+      "expected": 345373.1788,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C45"
+      }
+    },
+    {
+      "id": "overhead_multiplier",
+      "section": "costs",
+      "label": "Overhead multiplier (total / programmatic)",
+      "format": "number",
+      "formula": "total_2025 / prog_2025",
+      "expected": 1.150195695,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C46"
+      },
+      "explainer": "From 2025 alone, since 2026 overhead figures are missing."
+    },
+    {
+      "id": "cost_hc",
+      "section": "costs",
+      "label": "2025-26 Healthcare cost including overhead",
+      "format": "usd",
+      "formula": "overhead_multiplier * spend_hc",
+      "expected": 1542727.191,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C47"
+      }
+    },
+    {
+      "id": "cost_bi",
+      "section": "costs",
+      "label": "2025-26 Business & Industry cost including overhead",
+      "format": "usd",
+      "formula": "overhead_multiplier * spend_bi",
+      "expected": 1289645.404,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C48"
+      }
+    },
+    {
+      "id": "cost_cu",
+      "section": "costs",
+      "label": "2025-26 College & University cost including overhead",
+      "format": "usd",
+      "formula": "overhead_multiplier * spend_cu",
+      "expected": 835440.2437,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C49"
+      }
+    },
+    {
+      "id": "cost_res",
+      "section": "costs",
+      "label": "2025-26 Research cost including overhead",
+      "format": "usd",
+      "formula": "overhead_multiplier * spend_res",
+      "expected": 397246.7434,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C50"
+      }
+    },
+    {
+      "id": "cost_no_research",
+      "section": "costs",
+      "label": "2025-26 total estimated cost including overhead, without the research program",
+      "format": "usd",
+      "formula": "cost_hc + cost_bi + cost_cu",
+      "expected": 3667812.838,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C51"
+      }
+    },
+    {
+      "id": "cost_total",
+      "section": "costs",
+      "label": "2025-26 total estimated cost including overhead",
+      "format": "usd",
+      "formula": "cost_hc + cost_bi + cost_cu + cost_res",
+      "expected": 4065059.582,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C52"
+      },
+      "explainer": "All of Greener by Default's spending: ACE counts the research program as support for the other three."
+    },
+    {
+      "id": "animals_per_dollar_hc",
+      "section": "bottom",
+      "label": "Healthcare: animals helped per dollar",
+      "format": "number",
+      "formula": "animals_hc / cost_hc",
+      "expected": 2.816367595,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C55"
+      }
+    },
+    {
+      "id": "sads_per_dollar_hc",
+      "section": "bottom",
+      "label": "Healthcare: SADs averted per dollar",
+      "format": "number",
+      "formula": "sads_hc / cost_hc",
+      "expected": 5.543268449,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C56"
+      }
+    },
+    {
+      "id": "animals_per_dollar_bi",
+      "section": "bottom",
+      "label": "Business & Industry: animals helped per dollar",
+      "format": "number",
+      "formula": "animals_bi / cost_bi",
+      "expected": 0.03680953119,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C57"
+      }
+    },
+    {
+      "id": "sads_per_dollar_bi",
+      "section": "bottom",
+      "label": "Business & Industry: SADs averted per dollar",
+      "format": "number",
+      "formula": "sads_bi / cost_bi",
+      "expected": 0.08568266407,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C58"
+      }
+    },
+    {
+      "id": "animals_per_dollar_cu",
+      "section": "bottom",
+      "label": "College & University: animals helped per dollar",
+      "format": "number",
+      "formula": "animals_cu / cost_cu",
+      "expected": -0.1483279885,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C59"
+      }
+    },
+    {
+      "id": "sads_per_dollar_cu",
+      "section": "bottom",
+      "label": "College & University: SADs averted per dollar",
+      "format": "number",
+      "formula": "sads_cu / cost_cu",
+      "expected": 0.02941131234,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C60"
+      }
+    },
+    {
+      "id": "animals_per_dollar",
+      "section": "bottom",
+      "label": "Overall: animals helped per dollar (research cost included)",
+      "format": "number",
+      "formula": "animals_total / cost_total",
+      "expected": 1.050031089,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C61"
+      }
+    },
+    {
+      "id": "sads_per_dollar",
+      "section": "bottom",
+      "label": "Overall: SADs averted per dollar (research cost included)",
+      "format": "number",
+      "formula": "sads_total / cost_total",
+      "expected": 2.136948411,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C62"
+      }
+    },
+    {
+      "id": "animals_per_dollar_no_research",
+      "section": "bottom",
+      "label": "Overall: animals helped per dollar (research cost excluded)",
+      "format": "number",
+      "formula": "animals_total / cost_no_research",
+      "expected": 1.16375593,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C63"
+      }
+    },
+    {
+      "id": "sads_per_dollar_no_research",
+      "section": "bottom",
+      "label": "Overall: SADs averted per dollar (research cost excluded)",
+      "format": "number",
+      "formula": "sads_total / cost_no_research",
+      "expected": 2.368393098,
+      "source": {
+        "title": "ACE",
+        "cell": "CEA!C64"
+      }
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "explainer": "Advocacy is mostly people, so staff pay is usually most of the budget. We haven't seen this charity's breakdown; the default is the same guess we use for other animal advocacy groups. Range is ours.",
+      "formula": "@staff_pay.share_advocacy"
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable for-profit jobs",
+      "format": "percent",
+      "explainer": "Campaigners, researchers and negotiators could typically earn considerably more in comparable for-profit roles. Range is ours.",
+      "formula": "@staff_pay.gap_advocacy"
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "@next_dollar.greener_by_default",
+      "published": 1,
+      "explainer": "Greener by Default's own figure (shared data, next_dollar): how much its next dollar does compared with the past average this estimate starts from, from how much room it has for more money, what the next dollar buys and how well it is run (docs/normalization.md 2.10). The evaluator view keeps 100%."
+    },
+    {
+      "id": "sads_per_donor_dollar",
+      "section": "donor",
+      "label": "SADs averted per dollar you give",
+      "format": "number",
+      "formula": "sads_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "explainer": "A marginal dollar is counted at the share of the past average you set (row above)."
+    },
+    {
+      "id": "production_response",
+      "section": "species",
+      "label": "Fall in production per meal not eaten",
+      "format": "percent",
+      "formula": "@sad_factors.production_response",
+      "published": 1,
+      "explainer": "Changed for consistency: when fewer meals with animal products are eaten, prices fall and others eat a little more, so production falls by less (facts: sad_factors.production_response). Every diet-change model multiplies the suffering of meals replaced by it. ACE counts one meal less served as one meal less produced (1), kept in the evaluator view."
+    },
+    {
+      "id": "sads_excl_shrimp",
+      "section": "species",
+      "label": "ACE's result without shrimp (SADs per dollar)",
+      "format": "number",
+      "value": 1.19,
+      "kind": "estimate",
+      "source": {
+        "title": "ACE, CEA Context tab (robustness): 'Excluding shrimps from the estimate results in 1.19 SADs/$'",
+        "cell": "Context!A3"
+      },
+      "explainer": "ACE notes that shrimp is about 53% of its standard US meal replacement estimate, though not plausibly half the animal impact of a hospital entrée."
+    },
+    {
+      "id": "shrimp_share",
+      "section": "species",
+      "label": "Share of the SADs that falls on shrimp",
+      "format": "percent",
+      "formula": "1 - sads_excl_shrimp * years_scale / sads_per_dollar",
+      "explainer": "One minus ACE's result without shrimp over its result with it (both on the same years): 44%. ACE puts shrimp at about 53% of its standard meal estimate, which carries about 90% of the result."
+    },
+    {
+      "id": "chicken_share_rest",
+      "section": "species",
+      "label": "Share of the non-shrimp SADs that falls on chickens",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.65,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Ours. ACE doesn't publish the species split of its 2026 US meal estimate. From ACE's 2026 SADs per animal (a fast-growing broiler 5.2, a battery-caged hen 29.5 a year, a farmed salmon 44.3 a year, a sow 104 a year, a dairy cow 853 a year) and US consumption per person (about 25 broilers and 1 hen's eggs a year, a few farmed fish, a small share of a pig and a cow), chickens carry about two thirds of the rest. Range is ours."
+    },
+    {
+      "id": "fish_share_rest",
+      "section": "species",
+      "label": "Share of the non-shrimp, non-chicken SADs that falls on fish",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.57,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Ours, from the same rough reckoning: farmed fish about a fifth of the non-shrimp SADs, mammals (pigs and cattle, counted as pigs, as the shared meal shares do) about a sixth. Range is ours."
+    },
+    {
+      "id": "pain_days_shrimp",
+      "section": "species",
+      "label": "Pain days averted per dollar you give: shrimp",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * production_response * shrimp_share",
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+    },
+    {
+      "id": "ced_shrimp",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: shrimp",
+      "format": "number",
+      "formula": "pain_days_shrimp * @welfare_ranges.shrimp_vs_chicken",
+      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+    },
+    {
+      "id": "pain_days_chicken",
+      "section": "species",
+      "label": "Pain days averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * production_response * (1 - shrimp_share) * chicken_share_rest",
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+    },
+    {
+      "id": "ced_chicken",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
+      "format": "number",
+      "formula": "pain_days_chicken * @welfare_ranges.chicken_vs_chicken",
+      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+    },
+    {
+      "id": "pain_days_fish",
+      "section": "species",
+      "label": "Pain days averted per dollar you give: fish",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * production_response * (1 - shrimp_share) * (1 - chicken_share_rest) * fish_share_rest",
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+    },
+    {
+      "id": "ced_fish",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: fish",
+      "format": "number",
+      "formula": "pain_days_fish * @welfare_ranges.fish_vs_chicken",
+      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+    },
+    {
+      "id": "pain_days_pig",
+      "section": "species",
+      "label": "Pain days averted per dollar you give: pigs and other mammals",
+      "format": "number",
+      "formula": "sads_per_donor_dollar * production_response * (1 - shrimp_share) * (1 - chicken_share_rest) * (1 - fish_share_rest)",
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+    },
+    {
+      "id": "ced_pig",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give: pigs and other mammals",
+      "format": "number",
+      "formula": "pain_days_pig * @welfare_ranges.pig_vs_chicken",
+      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+    },
+    {
+      "id": "ced_per_donor_dollar",
+      "section": "species",
+      "label": "Chicken-equivalent pain days averted per dollar you give",
+      "format": "number",
+      "formula": "ced_shrimp + ced_chicken + ced_fish + ced_pig",
+      "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+    }
+  ],
+  "output": {
+    "row": "ced_per_donor_dollar",
+    "unit": "ced",
+    "label": "Chicken-equivalent pain days averted per dollar you give",
+    "native": {
+      "row": "sads_per_dollar",
+      "unit": "sad"
+    },
+    "species": [
+      "shrimp",
+      "chicken",
+      "fish",
+      "pig"
+    ]
+  },
+  "evaluator": {
+    "name": "ACE",
+    "assumptions": {
+      "discount_rate": 0.014,
+      "resource_shares": 0,
+      "chicken_vs_person": 0.463966
+    }
+  },
+  "resources": [
+    {
+      "title": "ACE charity review (2026)",
+      "url": "https://animalcharityevaluators.org/charity-review/greener-by-default/",
+      "type": "evaluation",
+      "note": "The full evaluation."
+    },
+    {
+      "title": "ACE's 2026 evaluation supplement",
+      "url": "https://animalcharityevaluators.org/charity-reviews/evaluating-charities/process-archive/2026-evaluation-process/greener-by-default/",
+      "type": "evaluation"
+    },
+    {
+      "title": "ACE's cost-effectiveness spreadsheet (2026)",
+      "url": "https://docs.google.com/spreadsheets/d/1Eb0GU-1DdQVtKwT5DEYVNSDKtIWX3ylNZpu2XYLSUHU/edit",
+      "type": "model",
+      "note": "The model this page reproduces."
+    },
+    {
+      "title": "Greener by Default 2026 financials and future plans (ACE)",
+      "url": "https://docs.google.com/spreadsheets/d/1MrRPXmSOO0cSkCaOodHd2IRjMI149idR93rhBo-00-o/edit",
+      "type": "evaluation"
+    },
+    {
+      "title": "ACE's 2026 SADs summary",
+      "url": "https://docs.google.com/spreadsheets/d/14D-LlxdO88dVXyY9FlNJd6oJfX9PCCIJCKavTERTQEU/edit",
+      "type": "study"
+    }
+  ]
+}
