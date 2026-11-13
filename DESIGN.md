@@ -15,7 +15,7 @@ colors:
   warn: "#8a6700"
   cause-global-health: "#2e7d5b"
   cause-animal-welfare: "#b0532a"
-  cause-ai-safety: "#6a4bb3"
+  cause-catastrophic-risk: "#6a4bb3"
 typography:
   display:
     fontFamily: "Source Serif 4 Variable, Georgia, serif"
@@ -160,7 +160,7 @@ A cool, near-neutral paper-and-ink palette with one interactive blue, one judgme
 - **Judgment Amber** (warn): sensitivity flag icons, the judgment kind mark and label, and references to shared assumptions inside formulas. It means "this rests on a value judgment or needs caution", never "click here".
 
 ### Tertiary (categorical cause inks)
-- **Global Health Green** (cause-global-health), **Animal Welfare Rust** (cause-animal-welfare), **AI Safety Violet** (cause-ai-safety): set as a local `--cause` custom property on a row or page and used for that cause's interval dot, its bar (mixed 32% into white on strips, 45% on tornado bars), its cause label, its bottom-line figure and its MiniRanking name.
+- **Global Health Green** (cause-global-health), **Animal Welfare Rust** (cause-animal-welfare), **Catastrophic Risk Violet** (cause-catastrophic-risk): set as a local `--cause` custom property on a row or page and used for that cause's interval dot, its bar (mixed 32% into white on strips, 45% on tornado bars), its cause label, its bottom-line figure and its MiniRanking name.
 
 ### Neutral
 - **Paper** (paper): page ground, ranking rows, formula blocks, the slider thumb fill and the ring around interval dots.

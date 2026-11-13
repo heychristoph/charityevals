@@ -1,0 +1,1116 @@
+{
+  "id": "template-catastrophic-risk",
+  "name": "Template: global catastrophic risks (AI, pandemics, nuclear war)",
+  "kind": "template",
+  "cause": "catastrophic-risk",
+  "template": "catastrophic-risk",
+  "estimate_basis": "past_average",
+  "charity": "template-charity",
+  "owner": "charityevals",
+  "summary": "TEMPLATE: what the charity does against which risks (AI, pandemics, nuclear war), the year, which branches carry the result (field work, a policy win, people trained), the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\"). Say that the result rests on shared forecasts and a typical project's effect, so it moves with the AI slider and the discount rate.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: global catastrophic risks (AI, pandemics, nuclear war)",
+    "url": "https://charityevals.org/template-catastrophic-risk",
+    "published": "2026-11-04",
+    "retrieved": "2026-01-01"
+  },
+  "resources": [],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the modelled program(s) in the year modelled",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program expenses, in US dollars, for the activities modelled below and the same year as the reach numbers (say the year in the label and the summary). Cite the audited statement of functional expenses (or the annual report) and the page. Other currencies: a row in local currency times @fx.usd_per_<cur>_<year> (the IRS yearly average, else the World Bank's; add the fact with scripts/link-fx.py), never a typed rate."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programs, management, fundraising)",
+      "format": "usd",
+      "value": 1200000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: total expenses for the same year, from the same document."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programs)",
+      "format": "usd",
+      "value": 1000000,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: program-service expenses for the same year, from the same document."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "forecast_years",
+      "section": "effect",
+      "label": "Years the shared forecasts cover",
+      "format": "number",
+      "formula": "@catastrophe.xpt_end_year - @catastrophe.xpt_forecast_year",
+      "unit": "years",
+      "explainer": "From the year the chances were forecast to 2100: turns a chance by 2100 into a yearly one. Fixed."
+    },
+    {
+      "id": "deaths_if_extinct",
+      "section": "effect",
+      "label": "Deaths in a catastrophe that ends humanity's future",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now",
+      "unit": "deaths",
+      "explainer": "Everyone alive. Fixed."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths that are of children under five",
+      "format": "percent",
+      "formula": "@death_ages.population_world_share_under5",
+      "explainer": "A global catastrophe kills every age alike: the world's age split (@death_ages.population_world_*). Fixed."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths at five or older, share aged 5 to 14",
+      "format": "percent",
+      "formula": "@death_ages.population_world_share_5_14_of_over5"
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "formula": "@death_ages.population_world_share_15_49_of_over15"
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size."
+    },
+    {
+      "id": "future_years_per_person",
+      "section": "effect",
+      "label": "Discounted future years of healthy life per person of the long-run population, if the future ends now",
+      "format": "number",
+      "formula": "(1 - (1 + $discount_rate) ^ -@catastrophe.life_expectancy_now) / (ln(1 + $discount_rate) * ln(1 + $discount_rate) * @catastrophe.life_expectancy_now)",
+      "unit": "years",
+      "explainer": "The site's one count of future generations (docs/normalization.md 2.19): the healthy years of people not yet born, discounted for ever at the shared rate. People alive now die in the catastrophe and are counted as deaths, so this stream rises from nothing to the long-run population over one lifetime (@catastrophe.life_expectancy_now) and then runs on: about 8 years at the default 4%, about 960 at the 0.1% floor. Fixed; don't edit."
+    },
+    {
+      "id": "future_dalys_if_extinct",
+      "section": "effect",
+      "label": "Future healthy years lost if humanity's future ends",
+      "format": "number",
+      "formula": "@catastrophe.world_population_long_run * future_years_per_person",
+      "unit": "DALYs",
+      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate: your discount rate is how much future generations count."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "effect",
+      "label": "Years a cut in the risk counts before it would have come anyway",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "unit": "years",
+      "explainer": "The site's one answer (docs/normalization.md 2.9): work, a won policy or a trained person's career brings a cut in the risk forward by these years; Rethink Priorities' 15-25 years of persistence is replaced by it."
+    },
+    {
+      "id": "ai_extinction_per_year",
+      "section": "effect",
+      "label": "AI: yearly chance of a catastrophe that ends humanity's future",
+      "format": "small",
+      "formula": "$ai_catastrophe_chance / forecast_years",
+      "unit": "per year",
+      "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament, the AI chance your slider). Fixed; don't edit."
+    },
+    {
+      "id": "ai_catastrophe_per_year",
+      "section": "effect",
+      "label": "AI: yearly chance of a catastrophe the world survives (over 10% of people die)",
+      "format": "small",
+      "formula": "$ai_catastrophe_chance * (@catastrophe.ai_catastrophe_vs_extinction - 1) / forecast_years",
+      "unit": "per year",
+      "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
+    },
+    {
+      "id": "ai_smaller_per_year",
+      "section": "effect",
+      "label": "AI: yearly chance of a smaller catastrophe",
+      "format": "small",
+      "value": 0,
+      "kind": "estimate",
+      "unit": "per year",
+      "source": {
+        "title": "TEMPLATE: forecast / historical record",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: a smaller ai disaster the work also lowers (a single nuclear detonation in a city, a limited war; an AI incident that kills thousands), per year, from a published forecast or record, and its deaths in the next row; 0 with this reason where none is sourced. A shared figure another model could reuse goes into facts/catastrophe.json and is read here."
+    },
+    {
+      "id": "ai_smaller_deaths",
+      "section": "effect",
+      "label": "AI: deaths in a smaller catastrophe",
+      "format": "integer",
+      "value": 0,
+      "kind": "estimate",
+      "unit": "deaths",
+      "source": {
+        "title": "TEMPLATE: scenario study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the deaths in the smaller disaster above, from the same source; 0 when the row above is 0."
+    },
+    {
+      "id": "ai_deaths_if_catastrophe",
+      "section": "effect",
+      "label": "AI: deaths in a catastrophe the world survives",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now * @catastrophe.ai_catastrophe_death_share",
+      "unit": "deaths",
+      "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
+    },
+    {
+      "id": "ai_deaths_per_year",
+      "section": "effect",
+      "label": "AI: expected deaths a year from these catastrophes",
+      "format": "number",
+      "formula": "ai_extinction_per_year * deaths_if_extinct + ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths",
+      "unit": "deaths / year",
+      "explainer": "Each size's yearly chance × the people it kills."
+    },
+    {
+      "id": "ai_future_per_year",
+      "section": "effect",
+      "label": "AI: expected future healthy years lost a year (extinction-level)",
+      "format": "number",
+      "formula": "ai_extinction_per_year * future_dalys_if_extinct",
+      "unit": "DALYs / year",
+      "explainer": "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others."
+    },
+    {
+      "id": "ai_deaths_per_million",
+      "section": "effect",
+      "label": "AI: deaths averted a year by a typical $1 million of work, while its cut counts",
+      "format": "small",
+      "formula": "@catastrophe.ai_extinction_cut_per_million * ai_extinction_per_year * deaths_if_extinct + @catastrophe.ai_catastrophe_cut_per_million * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
+      "unit": "deaths / year",
+      "explainer": "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit."
+    },
+    {
+      "id": "ai_future_per_million",
+      "section": "effect",
+      "label": "AI: future healthy years kept a year by a typical $1 million of work",
+      "format": "small",
+      "formula": "@catastrophe.ai_extinction_cut_per_million * ai_future_per_year",
+      "unit": "DALYs / year"
+    },
+    {
+      "id": "ai_cost_share",
+      "section": "effect",
+      "label": "AI: share of the cost spent on work against ai risk (research, evaluations, convening, advocacy)",
+      "format": "percent",
+      "value": 0.3,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: Form 990 Part III / annual accounts",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the share of the modelled spending on AI (technical safety research, evaluations, AI governance and policy), from the charity's programme expenses (Form 990 Part III, the accounts' programme notes), overhead spread alike. Leave out the spending behind a specific win counted in the policy branch (pol_cost_share) and on training counted in fb_cost_share, so nothing counts twice. 0 with the reason where the charity does none."
+    },
+    {
+      "id": "ai_years_until_effect",
+      "section": "effect",
+      "label": "AI: years from the spending until the work cuts the risk",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: from the spending to the work's effect (a paper read, an evaluation run, a norm adopted); discounted at the shared rate."
+    },
+    {
+      "id": "ai_discounted_years",
+      "section": "effect",
+      "label": "AI: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -ai_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "ai_deaths_averted",
+      "section": "effect",
+      "label": "AI: deaths averted by the work (expected, before adjustments)",
+      "format": "small",
+      "formula": "cost_total * ai_cost_share / 1e6 * ai_deaths_per_million * ai_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "ai_future_dalys",
+      "section": "effect",
+      "label": "AI: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "bio_extinction_per_year",
+      "section": "effect",
+      "label": "Pandemics: yearly chance of a catastrophe that ends humanity's future",
+      "format": "small",
+      "formula": "@catastrophe.bio_extinction_by_2100 / forecast_years",
+      "unit": "per year",
+      "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament). Fixed; don't edit."
+    },
+    {
+      "id": "bio_catastrophe_per_year",
+      "section": "effect",
+      "label": "Pandemics: yearly chance of a catastrophe the world survives (over 10% of people die)",
+      "format": "small",
+      "formula": "(@catastrophe.bio_catastrophe_by_2100 - @catastrophe.bio_extinction_by_2100) / forecast_years",
+      "unit": "per year",
+      "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
+    },
+    {
+      "id": "bio_smaller_per_year",
+      "section": "effect",
+      "label": "Pandemics: yearly chance of a smaller catastrophe (a COVID-scale pandemic)",
+      "format": "small",
+      "formula": "@catastrophe.pandemic_probability_covid_scale",
+      "unit": "per year",
+      "explainer": "The shared yearly chance of a pandemic as deadly as COVID-19 (@catastrophe.pandemic_probability_covid_scale). Fixed."
+    },
+    {
+      "id": "bio_smaller_deaths",
+      "section": "effect",
+      "label": "Pandemics: deaths in a smaller catastrophe",
+      "format": "integer",
+      "formula": "@catastrophe.covid_excess_deaths",
+      "unit": "deaths",
+      "explainer": "WHO's excess deaths of COVID-19's first two years (@catastrophe.covid_excess_deaths). Fixed."
+    },
+    {
+      "id": "bio_deaths_if_catastrophe",
+      "section": "effect",
+      "label": "Pandemics: deaths in a catastrophe the world survives",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now * @catastrophe.bio_catastrophe_death_share",
+      "unit": "deaths",
+      "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
+    },
+    {
+      "id": "bio_deaths_per_year",
+      "section": "effect",
+      "label": "Pandemics: expected deaths a year from these catastrophes",
+      "format": "number",
+      "formula": "bio_extinction_per_year * deaths_if_extinct + bio_catastrophe_per_year * bio_deaths_if_catastrophe + bio_smaller_per_year * bio_smaller_deaths",
+      "unit": "deaths / year",
+      "explainer": "Each size's yearly chance × the people it kills."
+    },
+    {
+      "id": "bio_future_per_year",
+      "section": "effect",
+      "label": "Pandemics: expected future healthy years lost a year (extinction-level)",
+      "format": "number",
+      "formula": "bio_extinction_per_year * future_dalys_if_extinct",
+      "unit": "DALYs / year",
+      "explainer": "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others."
+    },
+    {
+      "id": "bio_deaths_per_million",
+      "section": "effect",
+      "label": "Pandemics: deaths averted a year by a typical $1 million of work, while its cut counts",
+      "format": "small",
+      "formula": "@catastrophe.bio_extinction_cut_per_million * bio_extinction_per_year * deaths_if_extinct + @catastrophe.bio_catastrophe_cut_per_million * (bio_catastrophe_per_year * bio_deaths_if_catastrophe + bio_smaller_per_year * bio_smaller_deaths)",
+      "unit": "deaths / year",
+      "explainer": "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit."
+    },
+    {
+      "id": "bio_future_per_million",
+      "section": "effect",
+      "label": "Pandemics: future healthy years kept a year by a typical $1 million of work",
+      "format": "small",
+      "formula": "@catastrophe.bio_extinction_cut_per_million * bio_future_per_year",
+      "unit": "DALYs / year"
+    },
+    {
+      "id": "bio_cost_share",
+      "section": "effect",
+      "label": "Pandemics: share of the cost spent on work against pandemics risk (research, evaluations, convening, advocacy)",
+      "format": "percent",
+      "value": 0.3,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: Form 990 Part III / annual accounts",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the share of the modelled spending on pandemics (biosecurity, DNA synthesis screening, biosafety policy, preparedness), from the charity's programme expenses (Form 990 Part III, the accounts' programme notes), overhead spread alike. Leave out the spending behind a specific win counted in the policy branch (pol_cost_share) and on training counted in fb_cost_share, so nothing counts twice. 0 with the reason where the charity does none."
+    },
+    {
+      "id": "bio_years_until_effect",
+      "section": "effect",
+      "label": "Pandemics: years from the spending until the work cuts the risk",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: from the spending to the work's effect (a paper read, an evaluation run, a norm adopted); discounted at the shared rate."
+    },
+    {
+      "id": "bio_discounted_years",
+      "section": "effect",
+      "label": "Pandemics: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -bio_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "bio_deaths_averted",
+      "section": "effect",
+      "label": "Pandemics: deaths averted by the work (expected, before adjustments)",
+      "format": "small",
+      "formula": "cost_total * bio_cost_share / 1e6 * bio_deaths_per_million * bio_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "bio_future_dalys",
+      "section": "effect",
+      "label": "Pandemics: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "nuclear_extinction_per_year",
+      "section": "effect",
+      "label": "Nuclear war: yearly chance of a catastrophe that ends humanity's future",
+      "format": "small",
+      "formula": "@catastrophe.nuclear_extinction_by_2100 / forecast_years",
+      "unit": "per year",
+      "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament). Fixed; don't edit."
+    },
+    {
+      "id": "nuclear_catastrophe_per_year",
+      "section": "effect",
+      "label": "Nuclear war: yearly chance of a catastrophe the world survives (over 10% of people die)",
+      "format": "small",
+      "formula": "(@catastrophe.nuclear_catastrophe_by_2100 - @catastrophe.nuclear_extinction_by_2100) / forecast_years",
+      "unit": "per year",
+      "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
+    },
+    {
+      "id": "nuclear_smaller_per_year",
+      "section": "effect",
+      "label": "Nuclear war: yearly chance of a smaller catastrophe",
+      "format": "small",
+      "value": 0,
+      "kind": "estimate",
+      "unit": "per year",
+      "source": {
+        "title": "TEMPLATE: forecast / historical record",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: a smaller nuclear war disaster the work also lowers (a single nuclear detonation in a city, a limited war; an AI incident that kills thousands), per year, from a published forecast or record, and its deaths in the next row; 0 with this reason where none is sourced. A shared figure another model could reuse goes into facts/catastrophe.json and is read here."
+    },
+    {
+      "id": "nuclear_smaller_deaths",
+      "section": "effect",
+      "label": "Nuclear war: deaths in a smaller catastrophe",
+      "format": "integer",
+      "value": 0,
+      "kind": "estimate",
+      "unit": "deaths",
+      "source": {
+        "title": "TEMPLATE: scenario study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the deaths in the smaller disaster above, from the same source; 0 when the row above is 0."
+    },
+    {
+      "id": "nuclear_deaths_if_catastrophe",
+      "section": "effect",
+      "label": "Nuclear war: deaths in a catastrophe the world survives",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now * @catastrophe.nuclear_catastrophe_death_share",
+      "unit": "deaths",
+      "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
+    },
+    {
+      "id": "nuclear_deaths_per_year",
+      "section": "effect",
+      "label": "Nuclear war: expected deaths a year from these catastrophes",
+      "format": "number",
+      "formula": "nuclear_extinction_per_year * deaths_if_extinct + nuclear_catastrophe_per_year * nuclear_deaths_if_catastrophe + nuclear_smaller_per_year * nuclear_smaller_deaths",
+      "unit": "deaths / year",
+      "explainer": "Each size's yearly chance × the people it kills."
+    },
+    {
+      "id": "nuclear_future_per_year",
+      "section": "effect",
+      "label": "Nuclear war: expected future healthy years lost a year (extinction-level)",
+      "format": "number",
+      "formula": "nuclear_extinction_per_year * future_dalys_if_extinct",
+      "unit": "DALYs / year",
+      "explainer": "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others."
+    },
+    {
+      "id": "nuclear_deaths_per_million",
+      "section": "effect",
+      "label": "Nuclear war: deaths averted a year by a typical $1 million of work, while its cut counts",
+      "format": "small",
+      "formula": "@catastrophe.nuclear_extinction_cut_per_million * nuclear_extinction_per_year * deaths_if_extinct + @catastrophe.nuclear_catastrophe_cut_per_million * (nuclear_catastrophe_per_year * nuclear_deaths_if_catastrophe + nuclear_smaller_per_year * nuclear_smaller_deaths)",
+      "unit": "deaths / year",
+      "explainer": "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit."
+    },
+    {
+      "id": "nuclear_future_per_million",
+      "section": "effect",
+      "label": "Nuclear war: future healthy years kept a year by a typical $1 million of work",
+      "format": "small",
+      "formula": "@catastrophe.nuclear_extinction_cut_per_million * nuclear_future_per_year",
+      "unit": "DALYs / year"
+    },
+    {
+      "id": "nuclear_cost_share",
+      "section": "effect",
+      "label": "Nuclear war: share of the cost spent on work against nuclear war risk (research, evaluations, convening, advocacy)",
+      "format": "percent",
+      "value": 0.2,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: Form 990 Part III / annual accounts",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the share of the modelled spending on nuclear war (arms control, diplomacy, materials security, resilience such as food after a nuclear winter), from the charity's programme expenses (Form 990 Part III, the accounts' programme notes), overhead spread alike. Leave out the spending behind a specific win counted in the policy branch (pol_cost_share) and on training counted in fb_cost_share, so nothing counts twice. 0 with the reason where the charity does none."
+    },
+    {
+      "id": "nuclear_years_until_effect",
+      "section": "effect",
+      "label": "Nuclear war: years from the spending until the work cuts the risk",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: from the spending to the work's effect (a paper read, an evaluation run, a norm adopted); discounted at the shared rate."
+    },
+    {
+      "id": "nuclear_discounted_years",
+      "section": "effect",
+      "label": "Nuclear war: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -nuclear_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "nuclear_deaths_averted",
+      "section": "effect",
+      "label": "Nuclear war: deaths averted by the work (expected, before adjustments)",
+      "format": "small",
+      "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_deaths_per_million * nuclear_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "nuclear_future_dalys",
+      "section": "effect",
+      "label": "Nuclear war: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "pol_cost_share",
+      "section": "effect",
+      "label": "Policy win: share of the cost spent on the campaign that won it",
+      "format": "percent",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: charity report / accounts",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the spending behind the specific win below (a treaty, law, regulation, standard or institution launched), left out of the areas' shares; 0 with the reason without such a win in the year. Several wins: a pol2_ branch each. Feeds only the check cost_shares_total."
+    },
+    {
+      "id": "pol_wins",
+      "section": "reach",
+      "label": "Policy win: wins of this kind in the year",
+      "format": "integer",
+      "value": 1,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity report / official record",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: treaties, laws, regulations, standards or institutions won or launched in the year that the policy branch values (one kind per branch; a pol2_ branch for another); 0, with the reason, without one: then the branch counts nothing."
+    },
+    {
+      "id": "pol_p_success",
+      "section": "effect",
+      "label": "Policy win: chance it happens because of this work",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.3,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: for a pending bill, treaty or standard, the chance of winning from a reference class (similar measures passed or failed); for a win already in the year, 1 (then delete single_event) and the charity's share of the cause in attribution_share_shared. Name the reference class.",
+      "single_event": true
+    },
+    {
+      "id": "pol_relative_cut",
+      "section": "effect",
+      "label": "Policy win: share of the area's yearly risk it removes while in force",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.01,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use) and on Rethink Priorities' cut per project (@catastrophe.<area>_catastrophe_cut_per_million × its cost). Name the anchor."
+    },
+    {
+      "id": "pol_years_until_effect",
+      "section": "effect",
+      "label": "Policy win: years until it takes effect",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "TEMPLATE: from the win to entry into force; discounted at the shared rate."
+    },
+    {
+      "id": "pol_discounted_years",
+      "section": "effect",
+      "label": "Policy win: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -pol_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "pol_deaths_per_year",
+      "section": "effect",
+      "label": "Policy win: expected deaths a year from the area's catastrophes",
+      "format": "number",
+      "formula": "nuclear_deaths_per_year",
+      "unit": "deaths / year",
+      "explainer": "TEMPLATE: point it at the area of the win (ai_, bio_ or nuclear_deaths_per_year); several areas: a weighted sum with a weight row."
+    },
+    {
+      "id": "pol_future_per_year",
+      "section": "effect",
+      "label": "Policy win: expected future healthy years lost a year in the area",
+      "format": "number",
+      "formula": "nuclear_future_per_year",
+      "unit": "DALYs / year",
+      "explainer": "TEMPLATE: point it at the area of the win (ai_, bio_ or nuclear_future_per_year); several areas: a weighted sum with a weight row."
+    },
+    {
+      "id": "pol_deaths_averted",
+      "section": "effect",
+      "label": "Policy win: deaths averted (expected, before adjustments)",
+      "format": "small",
+      "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_deaths_per_year * pol_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "pol_future_dalys",
+      "section": "effect",
+      "label": "Policy win: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "fb_cost_share",
+      "section": "effect",
+      "label": "Field-building: share of the cost spent training or placing people",
+      "format": "percent",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: charity report / accounts",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: fellowships, courses, mentorship and career advice for people who go on to work on these risks; 0 with the reason without such a programme. Feeds the check cost_shares_total; the branch's value comes from the people trained."
+    },
+    {
+      "id": "fb_people",
+      "section": "reach",
+      "label": "Field-building: people trained or placed in the year",
+      "format": "integer",
+      "value": 100,
+      "kind": "observed",
+      "source": {
+        "title": "TEMPLATE: charity report",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: people who completed the programme in the year (not applicants or sign-ups), from the charity's report."
+    },
+    {
+      "id": "fb_share_working",
+      "section": "effect",
+      "label": "Field-building: share who go on to work on these risks because of it",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.4
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: alumni survey",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: alumni in roles on these risks a year or more later (the charity's alumni survey, with response bias in mind) minus those who would have got there anyway (their plans before, a comparison group). Name the survey."
+    },
+    {
+      "id": "fb_work_years",
+      "section": "effect",
+      "label": "Field-building: years each stays in the work",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 5,
+        "high": 10
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: alumni follow-up",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: from alumni follow-ups or the field's turnover; discounted at the shared rate."
+    },
+    {
+      "id": "fb_work_dollars",
+      "section": "effect",
+      "label": "Field-building: the alumni's added work, in dollars of typical work",
+      "format": "usd",
+      "formula": "fb_people * fb_share_working * pv_annuity_due(1, $discount_rate, fb_work_years) * @catastrophe.cost_per_work_year",
+      "explainer": "Work-years added × what a year of such work costs its employer (@catastrophe.cost_per_work_year), so it is valued at the area's typical dollar."
+    },
+    {
+      "id": "fb_credit_share",
+      "section": "effect",
+      "label": "Field-building: the training's share of the credit for that work",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the employers pay for the work itself: the training's cost over training plus the employers' cost of the work-years is the anchor (credit by share of resources); name it."
+    },
+    {
+      "id": "fb_deaths_per_million",
+      "section": "effect",
+      "label": "Field-building: deaths averted a year by a typical $1 million of the alumni's work",
+      "format": "small",
+      "formula": "ai_deaths_per_million",
+      "unit": "deaths / year",
+      "explainer": "TEMPLATE: point it at the area of the alumni's work (ai_, bio_ or nuclear_deaths_per_million); several areas: a weighted sum with a weight row."
+    },
+    {
+      "id": "fb_future_per_million",
+      "section": "effect",
+      "label": "Field-building: future healthy years kept a year by a typical $1 million of the alumni's work",
+      "format": "small",
+      "formula": "ai_future_per_million",
+      "unit": "DALYs / year",
+      "explainer": "TEMPLATE: point it at the area of the alumni's work (ai_, bio_ or nuclear_future_per_million); several areas: a weighted sum with a weight row."
+    },
+    {
+      "id": "fb_deaths_averted",
+      "section": "effect",
+      "label": "Field-building: deaths averted (expected, before adjustments)",
+      "format": "small",
+      "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_deaths_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "deaths"
+    },
+    {
+      "id": "fb_future_dalys",
+      "section": "effect",
+      "label": "Field-building: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "DALYs"
+    },
+    {
+      "id": "cost_shares_total",
+      "section": "effect",
+      "label": "Check: the cost shares add up to all the modelled spending",
+      "format": "percent",
+      "formula": "ai_cost_share + bio_cost_share + nuclear_cost_share + pol_cost_share + fb_cost_share",
+      "explainer": "Must be 1: every dollar of the modelled programme is in exactly one branch."
+    },
+    {
+      "id": "deaths_averted",
+      "section": "effect",
+      "label": "Deaths averted, every branch (expected, before adjustments)",
+      "format": "small",
+      "formula": "ai_deaths_averted + bio_deaths_averted + nuclear_deaths_averted + pol_deaths_averted + fb_deaths_averted",
+      "unit": "deaths"
+    },
+    {
+      "id": "future_dalys_averted",
+      "section": "effect",
+      "label": "Future healthy years kept, every branch (expected, before adjustments)",
+      "format": "number",
+      "formula": "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys",
+      "unit": "DALYs"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "How far the typical project's effect applies to this charity's work",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.7,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities): above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when this branch's outcome rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * leverage_funging_adj * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: good beyond the catastrophes counted, each named with its size: preparedness that also cuts ordinary outbreaks, materials security that also cuts radiological terrorism, safety work that also cuts everyday harm from AI.",
+      "side_effect": "added"
+    },
+    {
+      "id": "speedup_harm_share",
+      "section": "adjustments",
+      "label": "Harm: speeding up dangerous capabilities, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.3,
+        "best": 0,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: beyond a typical project's chance of backfiring (already in the shared cut per dollar, Rethink Priorities' 70% chance of the intended sign), work that also advances what it guards against (safety research or evaluations that help build more capable AI, gain-of-function research done for preparedness, a race it provokes), a negative share; 0 with the reason where the work is no riskier than a typical project (most nuclear diplomacy). Anchor: Rethink's backfire step is worth −23% of a typical project's value, so −0.1 to −0.3 is for work clearly riskier than that (capabilities-adjacent research, dangerous-capability evaluations).",
+      "side_effect": "added"
+    },
+    {
+      "id": "hazard_harm_share",
+      "section": "adjustments",
+      "label": "Harm: information hazards and attention, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.1,
+        "best": 0,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: beyond a typical project's backfire, published threat analyses, red-teaming results or advocacy that show bad actors a path or draw them to a weapon, a negative share; 0 with the reason where nothing sensitive is published.",
+      "side_effect": "added"
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Deaths averted (and losses beyond them, 0 by default), in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "deaths_averted * value_per_death * (1 + @catastrophe.nondeath_losses_vs_deaths)",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Deaths averted (and losses beyond them, 0 by default), in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "future_dalys_averted",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov) * total_adj * (1 + unmodelled_benefits_adj + speedup_harm_share + hazard_harm_share)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_research_policy",
+      "explainer": "TEMPLATE: the shared default for this kind of work (@staff_pay.share_research_policy; facts/staff_pay.json has one per kind: goods, staff-delivered, research and policy, advocacy, media). Where the charity's financials give salaries and benefits, use them instead: an estimate input (salaries ÷ total expenses, Form 990 Part IX lines 5–9) with its source."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_research_policy",
+      "explainer": "TEMPLATE: the shared pay gap for this kind of work (@staff_pay.gap_research_policy); pick the fact that fits the staff (local delivery, health and field, research and policy, advocacy, media, UK charity). Don't type a gap in."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "$marginal_vs_past_average",
+      "published": 1,
+      "explainer": "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}
