@@ -353,6 +353,63 @@
    "explainer": "Rethink Priorities' preset for a typical project against AI risk, as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening)."
   },
   {
+   "id": "ai_misuse_extinction_cut_per_million",
+   "label": "AI misuse: share of the yearly misuse extinction risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 1.039e-06,
+    "best": 1.039e-05,
+    "high": 0.0001039
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-14",
+    "page": "Small-scale AI Misuse Project: prob_no_effect 0.95, effect_on_xrisk lognorm 1e-4 to 5e-3, effect_on_catastrophic_risk lognorm 1e-2 to 5e-2, cost lognorm $200k-20M"
+   },
+   "explainer": "Rethink Priorities' preset for a typical small project against AI misuse (accidental misuse or intentional harmful use: evaluations of dangerous knowledge, defences against misuse), as its expected value per $1 million of the misuse part of AI risk, computed exactly as the misalignment preset's ai_extinction_cut_per_million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges) × 0.772, Rethink's backfire step: 0.05 × the mean extinction cut 0.00143 ÷ $5.33M × 0.772. It cuts only the misuse share of AI risk (ai_misuse_share_of_risk), and the misalignment preset only the rest. The range is ours, ten times either way, as for the other presets (Rethink calls its x-risk inputs placeholders)."
+  },
+  {
+   "id": "ai_misuse_catastrophe_cut_per_million",
+   "label": "AI misuse: share of the yearly misuse catastrophe risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 1.826e-05,
+    "best": 0.0001826,
+    "high": 0.001826
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-14",
+    "page": "Small-scale AI Misuse Project: prob_no_effect 0.95, effect_on_xrisk lognorm 1e-4 to 5e-3, effect_on_catastrophic_risk lognorm 1e-2 to 5e-2, cost lognorm $200k-20M"
+   },
+   "explainer": "Rethink Priorities' preset for a typical small project against AI misuse (accidental misuse or intentional harmful use: evaluations of dangerous knowledge, defences against misuse), as its expected value per $1 million of the misuse part of AI risk, computed exactly as the misalignment preset's ai_catastrophe_cut_per_million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges) × 0.772, Rethink's backfire step: 0.05 × the mean catastrophe cut 0.0252 ÷ $5.33M × 0.772. It cuts only the misuse share of AI risk (ai_misuse_share_of_risk), and the misalignment preset only the rest. The range is ours, ten times either way, as for the other presets (Rethink calls its x-risk inputs placeholders)."
+  },
+  {
+   "id": "ai_misuse_share_of_risk",
+   "label": "AI: share of AI catastrophe risk that comes from misuse rather than misalignment",
+   "unit": "share",
+   "format": "percent",
+   "value": {
+    "low": 0.05,
+    "best": 0.1,
+    "high": 0.5
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, long-term parameters",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/world/longterm_params.py",
+    "retrieved": "2026-11-14",
+    "page": "DEFAULT_AI_MISUSE_TO_MISALIGNMENT_RISK_PROP = 1/9"
+   },
+   "explainer": "Rethink Priorities splits AI risk into misalignment and misuse at 1 to 9, so misuse is 10% of it, its default. Range ours: 5% to 50%, the high end Rethink's own alternative scenario sets with a larger misuse share. A model's AI branch cuts this share at the misuse preset's rate (ai_misuse_*_cut_per_million) for its misuse work and the rest at the misalignment rate for its other AI work."
+  },
+  {
    "id": "bio_extinction_cut_per_million",
    "label": "Pandemics: share of the yearly extinction risk a typical $1 million of work removes, while it counts",
    "unit": "share per $1M",

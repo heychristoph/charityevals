@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "center-for-ai-safety",
   "owner": "charityevals",
-  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 0.13 years of healthy life per $1,000, from 0.004 to 4 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is far below the Nuclear Threat Initiative (21) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's AI cut per dollar (a placeholder, ten times either way) and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam, circuit breakers), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 0.28 years of healthy life per $1,000, from 0.008 to 10 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model: its misuse preset for the quarter of the work against misuse, its misalignment preset for the rest; the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is far below the Nuclear Threat Initiative (21) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's misuse cut per dollar (a placeholder, ten times either way), the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Center for AI Safety",
@@ -275,6 +275,28 @@
       "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
     },
     {
+      "id": "ai_misuse_risk_share",
+      "section": "effect",
+      "label": "AI: share of the risk that comes from misuse rather than misalignment",
+      "format": "percent",
+      "formula": "@catastrophe.ai_misuse_share_of_risk",
+      "unit": "share",
+      "explainer": "Rethink Priorities' split of AI risk (misuse 10%, misalignment 90%; shared). Misuse work cuts only this share, at Rethink's misuse preset; other AI work cuts only the rest, at its misalignment preset."
+    },
+    {
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "The share of CAIS's AI spending that is work against misuse. Research names three outputs for 2024 (990 Part III line 4b): WMDP, a benchmark of hazardous knowledge, and circuit breakers, a defence against harmful outputs under attack, are misuse work; Humanity's Last Exam measures capabilities in general. So about half of research ($0.58M of $1.17M), plus perhaps a fifth of the compute cluster's projects (robustness and jailbreak research) ($0.59M), none of advocacy: about $1.2M of $4.9M, 25%, our judgment, 10% to 40%; CAIS publishes no split of its projects.",
+      "id": "ai_misuse_cost_share",
+      "section": "effect",
+      "label": "AI: share of the AI spending on work against misuse (dangerous-capability evaluations, defences against misuse)",
+      "format": "percent"
+    },
+    {
       "id": "ai_deaths_per_year",
       "section": "effect",
       "label": "AI: expected deaths a year from these catastrophes",
@@ -297,25 +319,26 @@
       "section": "effect",
       "label": "AI: deaths averted a year by a typical $1 million of work, while its cut counts",
       "format": "small",
-      "formula": "@catastrophe.ai_extinction_cut_per_million * ai_extinction_per_year * deaths_if_extinct + @catastrophe.ai_catastrophe_cut_per_million * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
+      "formula": "((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_extinction_per_year * deaths_if_extinct + ((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_catastrophe_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_catastrophe_cut_per_million) * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
       "unit": "deaths / year",
-      "explainer": "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit."
+      "explainer": "The share of each yearly risk a typical $1 million of AI work removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries: misuse work at Rethink's misuse preset on the misuse share of the risk, other AI work at its misalignment preset on the rest, weighted by ai_misuse_cost_share. The catastrophe figure also applies to the smaller size."
     },
     {
       "id": "ai_future_per_million",
       "section": "effect",
       "label": "AI: future healthy years kept a year by a typical $1 million of work",
       "format": "small",
-      "formula": "@catastrophe.ai_extinction_cut_per_million * ai_future_per_year",
-      "unit": "DALYs / year"
+      "formula": "((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_future_per_year",
+      "unit": "DALYs / year",
+      "explainer": "As ai_deaths_per_million, for the future lost in an extinction-level catastrophe: the two presets' extinction cuts weighted by ai_misuse_cost_share, each on its share of the risk."
     },
     {
       "id": "ai_cost_share",
       "section": "effect",
       "label": "AI: share of the cost spent on work against ai risk (research, evaluations, convening, advocacy)",
       "format": "percent",
-      "explainer": "Everything but field-building is work against AI risk: the compute cluster, research (benchmarks such as WMDP and Humanity's Last Exam, circuit breakers) and advocacy (newsletter, media, research translation for policymakers), $4,893,453 of the $5,413,838 the return describes, with the undescribed line 4c spread in proportion. The remainder of field-building's share, so the shares add to 1.",
-      "formula": "1 - fb_cost_share"
+      "explainer": "Everything but field-building is work against AI risk: the compute cluster, research (benchmarks such as WMDP and Humanity's Last Exam, circuit breakers) and advocacy (newsletter, media, research translation for policymakers), $4,893,453 of the $5,413,838 the return describes, with the undescribed line 4c spread in proportion. The remainder after the other branches' shares (field-building; policy, pandemics and nuclear are 0), so the shares add to 1.",
+      "formula": "1 - fb_cost_share - pol_cost_share - bio_cost_share - nuclear_cost_share"
     },
     {
       "id": "ai_years_until_effect",
@@ -441,7 +464,7 @@
       "label": "Pandemics: share of the cost spent on work against pandemics risk (research, evaluations, convening, advocacy)",
       "format": "percent",
       "value": 0,
-      "kind": "estimate",
+      "kind": "observed",
       "source": {
         "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
         "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
@@ -589,7 +612,7 @@
       "label": "Nuclear war: share of the cost spent on work against nuclear war risk (research, evaluations, convening, advocacy)",
       "format": "percent",
       "value": 0,
-      "kind": "estimate",
+      "kind": "observed",
       "source": {
         "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
         "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
@@ -643,7 +666,7 @@
       "label": "Policy win: share of the cost spent on the campaign that won it",
       "format": "percent",
       "value": 0,
-      "kind": "estimate",
+      "kind": "observed",
       "source": {
         "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
         "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
@@ -903,7 +926,7 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "How far Rethink Priorities' typical small AI project applies to CAIS's work. Above typical: its outputs are used by the labs and the field: WMDP appears in Google DeepMind's Gemini 2.5 Pro model card (Epoch AI's review), Humanity's Last Exam (with Scale AI, nearly 1,000 contributors) is reported for the frontier models of OpenAI, Google, xAI and Anthropic (lastexam.ai), and by 2024 over 400 researchers had used the compute cluster for 121 papers with over 5,000 citations (990 Part III line 4a); its 2023 Statement on AI Risk, outside the year, shows its reach. Below typical: the cluster funds outside projects of uneven relevance to catastrophic risk, and Epoch finds WMDP less informative than newer tests. Net 1.2, the family's ceiling (src/engine/templates.ts), our judgment, 0.4 to 1.2, against the Nuclear Threat Initiative's 0.8; without the ceiling we would put it a little higher.",
+      "explainer": "How far Rethink Priorities' typical small AI project applies to CAIS's work. Above typical: its outputs are used by the labs and the field: WMDP appears in Google DeepMind's Gemini 2.5 Pro model card (Epoch AI's review), Humanity's Last Exam (with Scale AI, nearly 1,000 contributors) is reported by labs for their frontier models (Google's Gemini 2.5 Pro launch: 'a state-of-the-art 18.8%') and CAIS's leaderboard scores the others, and by 2024 over 400 researchers had used the compute cluster for 121 papers with over 5,000 citations (990 Part III line 4a); its 2023 Statement on AI Risk, outside the year, shows its reach. Below typical: the cluster funds outside projects of uneven relevance to catastrophic risk, and Epoch finds WMDP less informative than newer tests. Net 1.2, the family's ceiling (src/engine/templates.ts), our judgment, 0.4 to 1.2, against the Nuclear Threat Initiative's 0.8; without the ceiling we would put it a little higher.",
       "source": {
         "title": "Epoch AI, Do the biorisk evaluations of AI labs actually measure the risk of developing bioweapons? (13 June 2025)",
         "url": "https://epoch.ai/gradient-updates/do-the-biorisk-evaluations-of-ai-labs-actually-measure-the-risk-of-developing-bioweapons",
@@ -932,17 +955,111 @@
       }
     },
     {
+      "id": "spend_cluster",
+      "section": "adjustments",
+      "label": "Compute cluster spending in 2024",
+      "format": "usd",
+      "value": 2947497,
+      "kind": "observed",
+      "source": {
+        "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
+        "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
+        "page": "Part III line 4a: expenses 2,947,497",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The compute cluster's expenses, a weight in the attribution blend."
+    },
+    {
+      "id": "spend_research",
+      "section": "adjustments",
+      "label": "Research spending in 2024",
+      "format": "usd",
+      "value": 1168082,
+      "kind": "observed",
+      "source": {
+        "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
+        "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
+        "page": "Part III line 4b: expenses 1,168,082",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Research's expenses, a weight in the attribution blend."
+    },
+    {
+      "id": "spend_advocacy",
+      "section": "adjustments",
+      "label": "Advocacy spending in 2024",
+      "format": "usd",
+      "value": 777874,
+      "kind": "observed",
+      "source": {
+        "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
+        "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
+        "page": "Part III line 4d additional data: Advocacy, expenses 777,874",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Advocacy's expenses, a weight in the attribution blend."
+    },
+    {
+      "id": "spend_field",
+      "section": "adjustments",
+      "label": "Field-building spending in 2024",
+      "format": "usd",
+      "value": 520385,
+      "kind": "observed",
+      "source": {
+        "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
+        "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
+        "page": "Part III line 4d additional data: Field Building, expenses 520,385",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Field-building's expenses, a weight in the attribution blend (the undescribed line 4c is spread in proportion, so it leaves the weights unchanged)."
+    },
+    {
+      "id": "attr_cluster",
+      "section": "adjustments",
+      "label": "Compute cluster: CAIS's share of the resources behind the papers",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.45,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "The cluster's papers (121 by 2024 from over 400 researchers, 990 Part III line 4a) are written by outside researchers on CAIS's compute: about 60 papers a year at half a researcher-year each is $3M to $7.5M of their time (students at about $100,000, the family's $250,000 for senior staff) against $2.95M of compute. Our judgment, 45% (30% to 70%)."
+    },
+    {
+      "id": "attr_research",
+      "section": "adjustments",
+      "label": "Research: CAIS's share of the resources behind its outputs",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.75,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Humanity's Last Exam was made with Scale AI and nearly 1,000 outside experts, WMDP with Scale AI and academic co-authors; circuit breakers and the other papers are mostly CAIS's own staff. Our judgment, 75% (60% to 90%)."
+    },
+    {
+      "id": "attr_other",
+      "section": "adjustments",
+      "label": "Advocacy and field-building: CAIS's share of the resources behind them",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The newsletter, media work, textbook and course are CAIS's own; SafeBench's prizes came from Schmidt Sciences and conference workshops use the conferences' venues. Our judgment, 95% (80% to 100%)."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "value": {
-        "low": 0.6,
-        "best": 0.85,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "CAIS's share of the resources behind the outputs evidence_adj is judged on: Humanity's Last Exam and WMDP were made with Scale AI and many outside contributors, the cluster's papers are written by outside researchers on its compute, SafeBench's prizes came from Schmidt Sciences; the research staff and advocacy are CAIS's own. Our judgment, 0.85 (0.6 to 1), as for NTI."
+      "explainer": "CAIS's share of the resources behind the outputs evidence_adj is judged on, weighted by each programme's spending: the compute cluster (outside researchers write its papers), research (benchmarks made with Scale AI and outside experts) and advocacy and field-building (CAIS's own). About 0.63, below NTI's 0.85 because half of CAIS's spending supports other people's research.",
+      "formula": "(spend_cluster * attr_cluster + spend_research * attr_research + (spend_advocacy + spend_field) * attr_other) / (spend_cluster + spend_research + spend_advocacy + spend_field)"
     },
     {
       "id": "attribution_share",
