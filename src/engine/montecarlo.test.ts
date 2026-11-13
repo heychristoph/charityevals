@@ -43,4 +43,29 @@ describe("monte carlo", () => {
     const lib = buildLibrary([model("m", [input("adj", { low: -0.9, best: -0.5, high: -0.1 }, { interval: 0.5 }), { id: "out", label: "out", formula: "10 * (1 + adj)" }])], assumptions);
     expect(simulate(lib, lib.models.get("m")!, 4000)!.zero).toBe(0);
   });
+
+  it("draws a single event's chance as happens or doesn't: a 1-in-4 long shot is 0 below 75% and 4× its best guess above", () => {
+    const lib = buildLibrary([model("m", [input("v", { low: 50, best: 100, high: 200 }), input("p", 0.25, { format: "percent", single_event: true }), { id: "out", label: "out", formula: "v * p" }])], assumptions);
+    const d = simulate(lib, lib.models.get("m")!, 4000)!;
+    expect(d.middle).toBeCloseTo(1, 1);
+    expect(d.q[9]).toBeLessThan(1e-6);
+    expect(d.q[13]).toBeLessThan(1e-6);
+    expect(d.q[16] / d.middle!).toBeGreaterThan(3);
+    expect(d.mean).toBeCloseTo(1.08, 0);
+    expect(d.zero).toBeCloseTo(0.75, 1);
+  });
+  it("events sharing a key happen together: with the charity at least whenever without it", () => {
+    const ev = { format: "percent", single_event: { with: "law" } };
+    const lib = buildLibrary([model("m", [input("with", 0.3, ev), input("without", 0.1, ev), { id: "out", label: "out", formula: "with - without" }])], assumptions);
+    const d = simulate(lib, lib.models.get("m")!, 4000)!;
+    expect(d.q[0]).toBeGreaterThan(-1e-6);
+    expect(d.zero).toBeCloseTo(0.8, 1);
+  });
+  it("exactly one of a key's scenarios happens", () => {
+    const sc = { format: "percent", single_event: { one_of: "s" } };
+    const lib = buildLibrary([model("m", [input("a", 0.5, sc), input("b", 0.3, sc), input("c", 0.2, sc), { id: "out", label: "out", formula: "a + b + c" }])], assumptions);
+    const d = simulate(lib, lib.models.get("m")!, 2000)!;
+    expect(d.q[0]).toBeCloseTo(1, 5);
+    expect(d.q[18]).toBeCloseTo(1, 5);
+  });
 });

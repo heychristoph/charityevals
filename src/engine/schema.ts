@@ -87,6 +87,12 @@ const rowShape = {
   /** How the range spreads around the best guess, where the source says: `lognormal` (the default for
    * positive ranges), `normal` (the default for a range through zero) or `beta` (a share). */
   shape: z.enum(["lognormal", "normal", "beta"]).optional(),
+  /** A chance that one event happens at all (the new charity succeeds, the law passes), not a share of
+   * many people or projects: the simulation draws it as happens (1) or doesn't (0), so a long shot shows 0
+   * at a low risk and its full payoff at a high one. `true`, on its own; `{ with }`, events sharing the
+   * key happen together as far as their chances allow (with and without the charity, the same event
+   * under another funding bar); `{ one_of }`, exactly one of the key's scenarios happens. */
+  single_event: z.union([z.literal(true), z.object({ with: z.string() }).strict(), z.object({ one_of: z.string() }).strict()]).optional(),
 };
 
 export const Row = z
