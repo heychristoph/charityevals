@@ -1,6 +1,6 @@
 // Every charityevals model is published only with a passing audit on its current content (build-cea's audit
 // loop, audit-cea's output): the latest audits/<id>/audit-r<n>.md says "Verdict: pass" and carries the
-// fingerprint scripts/audit-receipt.ts prints for the model and its write-up as they are now. An edit after
+// fingerprint scripts/audit-receipt.ts prints for the model as it is now. An edit after
 // the audit changes the fingerprint and needs a verification round. Models built before receipts are listed
 // in audits/grandfathered.json.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
@@ -30,7 +30,7 @@ describe("audit receipts", () => {
       const text = latestAudit(id);
       expect(text, `no audits/${id}/audit-r<n>.md`).toBeDefined();
       expect(text!, "the latest round's verdict").toMatch(/Verdict:[\s*_]*pass\b/i);
-      expect(/Model-sha:\s*([0-9a-f]{64})/.exec(text!)?.[1], "the model or write-up changed after the audit: run a verification round").toBe(modelSha(id));
+      expect(/Model-sha:\s*([0-9a-f]{64})/.exec(text!)?.[1], "the model changed after the audit: run a verification round").toBe(modelSha(id));
     });
 
   it("lists only models that exist and lack a passing receipt", () => {
