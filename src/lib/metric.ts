@@ -3,10 +3,10 @@
 // charity, so the order never changes. The factors read the shared sliders and facts, so a measure moves
 // with them as the figures do (docs/normalization.md 2.7).
 import { useMemo, useSyncExternalStore } from "react";
-import { pickValue, type Library } from "../engine/model";
+import type { Library } from "../engine/model";
 import { formatYears } from "./format";
 
-export type MetricId = "daly" | "dollars" | "wellby" | "cash";
+export type MetricId = "daly" | "dollars" | "wellby";
 
 export type Metric = {
   id: MetricId;
@@ -50,14 +50,6 @@ export const METRICS: Metric[] = [
     unit: "WELLBYs per $1,000",
     about: "One point more life satisfaction, on a scale of 0 to 10, for one person for a year. Healthy years become WELLBYs at the rate you set under Your values.",
     factor: (_lib, av) => 1 / av.daly_per_wellby,
-  },
-  {
-    id: "cash",
-    label: "Multiples of cash",
-    unit: "Times as much good as cash",
-    about: "How many times as much good as giving the same money as cash to a very poor household (GiveWell's benchmark, from GiveDirectly's transfers). 10× means your $1 does what $10 in cash would.",
-    suffix: "×",
-    factor: (lib, av) => (av.uov_per_daly / 1000) / pickValue(lib.facts.get("cash.uov_per_dollar")?.value),
   },
 ];
 

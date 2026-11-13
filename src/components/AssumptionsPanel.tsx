@@ -10,7 +10,7 @@ import { setAssumption, resetAssumptions, useOverrides, PRESETS, applyPreset, pr
 import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
 import type { Row } from "../engine/schema";
 import InfoTip, { WithTip } from "./InfoTip";
-import { METRICS, setMetric, useMetricId } from "../lib/metric";
+import { METRICS, setMetric, useMetricId, type MetricId } from "../lib/metric";
 import "./assumptions.css";
 
 const STEPS = 400;
@@ -270,30 +270,25 @@ export function Markdown({ text }: { text: string }) {
 
 /** What the figures are shown in: one factor for every charity, so the order never changes. */
 function Measure() {
-  const active = useMetricId();
-  const group = useId();
+  const id = useMetricId();
+  const active = METRICS.find((m) => m.id === id) ?? METRICS[0];
   return (
-    <fieldset className="measure small">
-      <legend>Measure in</legend>
-      {METRICS.map((m) => (
-        <span key={m.id} className="measure-option tip-host">
-          <label>
-            <input
-              type="radio"
-              name={group}
-              value={m.id}
-              checked={active === m.id}
-              onChange={() => {
-                track("metric", { key: m.id });
-                setMetric(m.id);
-              }}
-            />
-            {m.label}
-          </label>
-          <InfoTip label={`What's ${m.label.toLowerCase()}?`}>{m.about}</InfoTip>
-        </span>
-      ))}
-    </fieldset>
+    <div className="presets-pick measure-pick small tip-host">
+      <label className="presets-pick">
+        <span>Measure</span>
+        <select
+          value={active.id}
+          onChange={(e) => {
+            const id = e.target.value as MetricId;
+            track("metric", { key: id });
+            setMetric(id);
+          }}
+        >
+          {METRICS.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
+        </select>
+      </label>
+      <InfoTip label={`What's ${active.label.toLowerCase()}?`}>{active.about}</InfoTip>
+    </div>
   );
 }
 

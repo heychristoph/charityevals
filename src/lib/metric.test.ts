@@ -19,12 +19,10 @@ describe("measures", () => {
     expect(factor("dollars")).toBeCloseTo((2 / 1000) / (1.4426950408889634 / REFERENCE_INCOME), 6);
     expect(factor("dollars", { ...av, uov_per_daly: 4 })).toBeCloseTo(2 * factor("dollars"), 9);
   });
-  it("WELLBYs follow the WELLBY rate, multiples of cash the cash benchmark", () => {
+  it("WELLBYs follow the WELLBY rate", () => {
     expect(factor("wellby")).toBeCloseTo(1 / av.daly_per_wellby, 12);
-    expect(factor("cash")).toBeCloseTo((2 / 1000) / 0.00335, 9);
   });
   it("formats with the measure's sign", () => {
     expect(figureIn(METRICS.find((m) => m.id === "dollars")!, 100).format(28)).toBe("$2,800");
-    expect(figureIn(METRICS.find((m) => m.id === "cash")!, 0.5).format(40)).toBe("20×");
   });
 });
