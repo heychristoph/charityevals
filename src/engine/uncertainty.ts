@@ -26,8 +26,13 @@ const JUDGMENT = /adjust|validity|replicab|counterfactual|leverage|fung|crowd|di
 const DATA = /\bcosts?\b|spent|spending|expenditure|budget|price|population|number of|enrol|census|exchange rate|inflation|\bgdp\b|salar|wage/i;
 // Fixed conversions carry no uncertainty of their own.
 const CONSTANT = /days (in|per) (a )?year|weeks (in|per) (a )?year|months (in|per) (a )?year|hours (in|per) (a )?day|unit conversion/i;
-/** A calendar year (a survey's or a grant's): a date, never an uncertain quantity. */
-const isYear = (label: string, id: string, v: number) => Number.isInteger(v) && v >= 1900 && v <= 2100 && /year/i.test(`${label} ${id}`);
+/** A calendar year (a survey's, a grant's, when a reform takes effect), or a row in unit "Year" (a sheet's
+ * timeline index: year 1, 2, 3): a date, never an uncertain
+ * quantity. Named a year, or a whole number between 1950 and 2150 with no published range (a sheet's
+ * year header, "Trend", "2031"), or such a number named for a time (when, date). */
+const isYear = (label: string, id: string, v: number, ranged = false) =>
+  (Number.isInteger(v) && v >= 1900 && v <= 2100 && /year/i.test(`${label} ${id}`)) ||
+  (!ranged && v >= 1950 && v <= 2150 && (Number.isInteger(v) || /year|when|date|trend/i.test(`${label} ${id}`)));
 
 export function sourceOf(r: Pick<ResolvedRow, "kind" | "label">): Exclude<Source, "assumption"> {
   if (r.kind === "judgment") return "judgment";
@@ -136,7 +141,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   }
   for (const id of feeding) {
     const r = m.byId.get(id);
-    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || CONSTANT.test(r.label) || isYear(r.label, id, values[id])) continue;
+    if (!r || (r.node && !(view === "evaluator" && r.published !== undefined)) || r.format === "toggle" || r.unit === "Year" || CONSTANT.test(r.label) || isYear(r.label, id, values[id], hasRange(inputRange(r, view)))) continue;
     const range = inputRange(r, view);
     const source = sourceOf(r);
     const v = values[id];
@@ -176,7 +181,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   }
   for (const key of factIds) {
     const f = lib.facts.get(key);
-    if (!f) continue;
+    if (!f || isYear(f.label, key, pickValue(f.value), hasRange(f.value))) continue;
     const s = scaled(spreadOf(pickValue(f.value), hasRange(f.value) ? { low: pickValue(f.value, "low"), high: pickValue(f.value, "high") } : undefined, DEFAULT_FACTOR.data), hasRange(f.value) ? f.interval : undefined);
     if (s && s.spread > 0) leaves.set(`fact:${key}`, { key: `fact:${key}`, scope: "fact", id: key, label: `${f.label} (${f.group})`, source: "data", published: hasRange(f.value), ...s });
   }

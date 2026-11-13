@@ -28,23 +28,20 @@ don't flag**: every finding names the concrete fix.
 
 ## 1. Mechanical pass (any violation is high)
 
-- `npx tsx scripts/audit-model.ts <path> [--exclude id,id]`: the lint, every invariant on the model
-  (drafts too), the result with its `Combined range` and joint low–high (glossary), the tornado, the
-  peers, the cause's median and same-family rows. For an evaluator model, ignore the lint codes that only
-  apply to charityevals models (owner, template, required-row, unit, output, sections, donor, species,
-  shared, published).
+- `npx tsx scripts/audit-model.ts <path> [--exclude id,id]`: the lint, every invariant, the result and
+  range, the tornado, the peers and the cause's median. For an evaluator model, ignore the lint codes that
+  only apply to charityevals models (owner, template, required-row, unit, output, sections, donor,
+  species, shared, published).
 - `npx tsx scripts/check.ts <id>` (in models/): `expected` values (the sheet's own numbers) reproduce
   in the evaluator view.
 - `npx tsx scripts/normalization-audit.ts [--exclude id,id]` (model in models/; run it in the
-  background): any violation for this model is **high**. In a sandbox it skips models that don't load
-  (and says which): that is not a finding. A waiver is acceptable only for a checked false positive, with
-  its reason in src/engine/normalization-waivers.json; one covering a real problem is high. The
-  allowlist stays `{}`. Each check's `how` in the report says what it sees and misses.
+  background): any violation for this model is **high** (models it skips in a sandbox are not). A
+  waiver is acceptable only for a checked false positive, with its reason; the allowlist stays `{}`.
+- `npx tsx scripts/summaries.ts`, then `npx tsx scripts/simulation-check.ts <id>`: an unstable simulation
+  is **high** for a charityevals model, medium for an import; the inputs it prints are the usual cause.
 
-Copy every high and medium mechanical finding with its fix, then go beyond them: the checks read labels
-and values, so a rule broken under other words is yours to find. Shared facts and
-sliders are the site's one answer for every model, even in a blind run and wherever their sources are:
-reading them is never a finding.
+Copy every high and medium mechanical finding with its fix, then go beyond them: a rule broken under
+other words is yours to find. Reading shared facts and sliders is never a finding, even in a blind run.
 
 ## 2. Structure and standard steps
 
@@ -55,20 +52,18 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
   template's; added rows feed canonical rows; the family fits (a misfiled family is high); every shared
   row the template reads is still read (a template row replaced by a typed number is high).
 - **Scope** (high when it moves the result >25% or the model is of something else): build-cea step 0
-  (every programme, weighted by spending, none left out; grants to sister organisations split by what
-  they fund; the latest year with audited financials and reach, stated in the summary; no case study
-  or pilot standing in; a programme with thin or no outcome data on its family's chain from the
-  research literature with wide ranges, never another model's result as its value; Convention 12). Check the charity's spending breakdown yourself; a programme missing is high.
+  (every programme, none left out; the latest year with audited financials and reach; no case study or
+  pilot standing in; thin data on its family's chain, never another model's result; Convention 12).
+  Check the accounts yourself: a programme missing is high; charities/<id>.json `spending` and `lines`
+  match them (normalization.md 2.17).
 - **Every model** (docs/normalization.md is the rule; these are the usual breaches):
   - output in uov, daly, wellby, ced or tco2e; `output.native` set; rows after it in `ours` sections;
     `source.published` the estimate's date;
   - `estimate_basis` right for what the dollar is (INV-18, only past averages read the next-dollar
     slider; Convention 11): a past average's cost and wins from the same period, in one year's prices
     (`@cpi`); a wrong basis is high;
-  - one consistent way: every conversion (exchange rate between outcomes, value of a death, depression,
-    cash benchmark, currency rate, household size, discount, species weight, supplementary shares) reads
-    the shared version in our view, the evaluator's figure in `published`; name the shared version in
-    the fix;
+  - one consistent way: every conversion reads the shared version in our view, the evaluator's figure
+    in `published`; name the shared version in the fix;
   - deaths by age band (an `@death_ages` mix, or WHO Global Health Estimates shares) × `$life_value_multiplier`; in a WELLBY
     model only through `wellbys_from_uov` (INV-17, so deaths don't move with the WELLBY rate); suicides
     averted from the treated population's rate, fading and discounted with the effect;
@@ -86,13 +81,18 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
     effect already net of care as usual (`counterfactual_adj` 1);
   - climate, money moved and careers: the shared rows (normalization.md 2.5, 2.8; INV-12, valued one way);
   - signs and one question per adjustment (Convention 5);
+  - every way the work does good or harm is a row: side effects estimated and tagged `side_effect`
+    (normalization.md 2.16), a step the evaluator leaves out given a row in our section; a known effect
+    left out is missing-adjustment;
+  - the simulation (2.18): ranges' `interval` and `shape` as the source states; one-off chances tagged
+    `single_event`, no yearly rate or share of many; no range on a year; no remainder of large figures;
+  - a past average reads the charity's `@next_dollar` figure (2.10), sourced and dated within a year;
   - missing data (Convention 12, glossary "measured / thin", both ways): a thin branch at 1 is high; so
     is a branch at the slider whose reach the charity counts and whose effect is an RCT's of the same
     intervention delivered the same way (thin over-applied); a judged baseline or counterfactual never makes it thin;
-  - best guesses, every subjective choice a ranged `judgment` naming its anchor; a blend of charity
-    trial and the literature by precision weights;
+  - best guesses, every subjective choice a ranged `judgment` naming its anchor;
   - an idea-stage model only while no model of the charity's actual work exists, `theoretical`; ours never;
-  - an import's rows unchanged except visible overwrites.
+  - an import unchanged except visible overwrites.
 
 ## 3. Sources: fetch and verify
 

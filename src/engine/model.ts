@@ -932,7 +932,7 @@ export type Distribution = {
   /** The share of draws at zero or below: the chance the programme does no good (or harm). */
   zero: number;
   /** The simulation can't be relied on: its middle is more than 3× from the best guess, or its range runs
-   * more than 50× either side of it (a small difference of large numbers, a ratio near zero). The model
+   * more than 100× either side of it, harm included (a small difference of large numbers, a ratio near zero). The model
    * then counts at its best guess at every risk, and carries a caveat. */
   unstable?: boolean;
   /** For a model with single-event chances: the middle of the same draws with each chance counted at its

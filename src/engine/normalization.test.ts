@@ -177,7 +177,7 @@ describe("invariant checks", () => {
     // On the site: every charity model says what its dollar is, and the slider's readers are exactly the past averages.
     const charities = [...lib.models.values()].filter((t) => t.kind === "charity");
     expect(charities.filter((t) => !t.estimate_basis).map((t) => t.id)).toEqual([]);
-    const readers = charities.filter((t) => t.rows.some((r) => r.assumptionDeps.includes("marginal_vs_past_average"))).map((t) => t.id).sort();
+    const readers = charities.filter((t) => t.rows.some((r) => r.assumptionDeps.includes("marginal_vs_past_average") || r.factDeps.some((f) => f.startsWith("next_dollar.")))).map((t) => t.id).sort();
     expect(readers).toEqual(charities.filter((t) => t.estimate_basis === "past_average").map((t) => t.id).sort());
   });
 

@@ -328,6 +328,8 @@ def ci_ranges(b):
         else:
             rr["value"] = {"low": min(lo, rr["value"]), "best": rr["value"], "high": max(hi, rr["value"])}
             rr["explainer"] = rr.get("explainer", "") + f"\n\nRange: {note}."
+        # A 25th-75th percentile range covers half the outcomes (docs/normalization.md 2.18).
+        rr["interval"] = 0.5
         n += 1
     return n
 

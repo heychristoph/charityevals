@@ -54,7 +54,7 @@ def convert(space, spec):
         bm = re.fullmatch(r"=?\s*beta\(\s*([\d.]+)\s*,\s*([\d.]+)\s*\)", expr, re.I)
         if bm:
             lo, best, hi = beta_interval(float(bm.group(1)), float(bm.group(2)))
-            row.update({"value": {"low": lo, "best": best, "high": hi}, "kind": "judgment", "source": src,
+            row.update({"value": {"low": lo, "best": best, "high": hi}, "kind": "judgment", "source": src, "shape": "beta",
                         "explainer": f"Beta({bm.group(1)}, {bm.group(2)}) in Guesstimate: best guess is its mean, range its 90% interval."})
         elif expr.startswith("="):
             f = re.sub(r"\$\{metric:([0-9a-f-]+)\}", lambda x: ids[x.group(1)], expr[1:])
@@ -64,6 +64,7 @@ def convert(space, spec):
             a, b = (number(x) for x in re.split(r"\bto\b", expr))
             best = math.sqrt(a * b) if kind == "LOGNORMAL" and a > 0 and b > 0 else (a + b) / 2
             row.update({"value": {"low": a, "best": best, "high": b}, "kind": "judgment", "source": src,
+                        "shape": "lognormal" if kind == "LOGNORMAL" else "normal",
                         "explainer": f"ACE's 90% interval, {expr} ({'lognormal' if kind == 'LOGNORMAL' else 'normal'}). The best guess is its median."})
         elif expr:
             row.update({"value": number(expr), "kind": "estimate", "source": src})

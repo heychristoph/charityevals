@@ -75,6 +75,8 @@ describe("ranking plan", () => {
 
   it("every line with models matches at least one model", () => {
     for (const c of lib.charities.values())
+      // A charity whose only models are unpublished (owners.json `published: false`) has none here.
+      if ([...lib.models.values()].some((m) => m.charity === c.id))
       for (const p of (c.lines ?? []).filter((l) => l.models !== undefined))
         expect([...lib.models.values()].some((m) => m.charity === c.id && m.kind === "charity" && programOf(c, m) === p.id), `${c.id}: ${p.id}`).toBe(true);
   });

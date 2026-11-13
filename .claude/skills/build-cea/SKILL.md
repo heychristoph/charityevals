@@ -19,8 +19,7 @@ fresh subagent) check it, fix what it finds, repeat until no high-severity findi
    goes into the range.
 3. **Every number accounted for**: a sourced fact (URL, retrieval date, quote or page), a shared
    figure, or a labelled judgment (`kind: "judgment"`) with a reason, an anchor and a range.
-   Formulas hold no constants beyond `ALLOWED_LITERALS` (src/engine/lint.ts), never one beside a lever
-   (a slider): a typed constant hides a choice the checks and the reader can't see.
+   Formulas hold no constants beyond `ALLOWED_LITERALS` (src/engine/lint.ts), never one beside a lever.
 4. **Faithful to the evidence**: thin evidence gets a wide range and a plain sentence.
 5. **Fix, don't flag.** An inconsistency you find (model, template, shared fact) is fixed.
 
@@ -31,28 +30,23 @@ enforce the mechanical rules (audit-model runs them, step 3).
 ## 0. Scope and setup
 
 - Inputs: the charity's name or website; optionally an output path, a **blind list** (sources you must
-  not read, for test runs: docs/eval-skills.md) and a date
-  to use as today.
-- **Blind runs and shared facts.** Shared facts and sliders always win, even from an evaluator's sheet:
-  they are the site's one answer for every model, so reading them isn't peeking. Don't open their
-  source links or use any evaluator figure for this charity you happen to see.
+  not read, for test runs: docs/eval-skills.md) and a date to use as today. Shared facts and sliders are
+  the site's one answer, so reading them in a blind run isn't peeking; don't open their source links or
+  use an evaluator's figure for this charity you happen to see.
 - Read assumptions/default.json, the facts/*.json labels, src/engine/templates.ts and
   [references/templates.md](references/templates.md) (its **Conventions** first). Skim a model of the
   family or intervention unless the blind list forbids it.
 - A charityevals model of the charity exists already: update it.
 - **What to model: every programme** (owner, 2026-11-03), in the latest year with audited financials
   and reach for the same period, main programme first: branches of one model when they share a family
-  (Convention 4), else one model per family (`<charity>-charityevals-<program>`), weighted by spending
-  in `charities/<id>.json` `programs` with `weight_source` (import-cea section 6). Grants to sister
-  organisations count as the activities they fund (a small portfolio across families: one model, a
-  branch per sector, Convention 4). Never a case study, pilot or other year in place
+  (Convention 4), else one model per family (`<charity>-charityevals-<program>`), each matching its
+  line in `charities/<id>.json` (`spending`, `lines`: normalization.md 2.17). Grants to sister
+  organisations count as the activities they fund. Never a case study, pilot or other year in place
   of the programme: a donor funds the whole programme as it runs now. Thin or no outcome data: its
   family's chain from the research on that kind of work, wide ranges, × `$missing_data_discount`
   (Convention 12), never another model's result. Nothing is left out.
-- An Ambitious Impact (AIM) idea-stage model of this charity marked `theoretical` (made before the
-  charity ran the work) is shown only while no model of its actual work exists: once yours is in
-  models/, remove it and record it in inventory/ambitious-impact-models.json
-  (scripts/aim-theoretical.py). Yours is never `theoretical`.
+- An Ambitious Impact idea-stage model of this charity (`theoretical`) goes once yours is in models/:
+  remove it and record it (scripts/aim-theoretical.py). Yours is never `theoretical`.
 
 ## 1. Pick the template family
 
@@ -96,20 +90,15 @@ Copy `templates/<family>.json` to the output path and fill it in.
   the row reads and when to change it. A branch that doesn't apply stays at 0 with an explainer saying
   why. Added rows feed canonical rows.
 - **Inputs** (the lint checks the fields): `observed` and `estimate` cite `source.url`, `retrieved` and
-  `quote` or `page`, the source's interval as the range; a `judgment` has a range and an explainer with
-  the reason and the anchor (another model's value, a published estimate).
+  `quote` or `page`; a `judgment` has a range and an explainer with its reason and anchor.
 - **Shared numbers** come from `@facts` and `$assumptions`, never retyped, or sliders and fact updates
   miss the copy (INV-4, INV-13, INV-14: no typed copy, one value per concept):
   - deaths `@moral_weights.<age band>` (an `@death_ages` mix for many ages), stillbirths
     `@givewell_shared.uov_per_stillbirth`, both × `$life_value_multiplier`;
   - income ln(consumption) × `$uov_per_ln_consumption`; GiveWell's house constants `@givewell_shared.*`
     and supplementary figures `@givewell_common.*`;
-  - household size `@household_size.<place>`; rich countries' consumption `@united_states.*`; PPP
-    `@<country>.ppp_factor_2017`; currency `@fx.usd_per_<cur>_<year>`, other years' prices
-    `@cpi.<iso3>_<year>` (Convention 8);
-  - cash multiples × `@cash.uov_per_dollar`; money to GiveDirectly `#givedirectly` (live);
-  - depression: SD-years × `@wellby_factors.wellbys_per_sd_year`, points ÷ `@depression.phq9_sd`,
-    therapy spillovers `@wellby_factors.household_spillover_ratio_psychotherapy`;
+  - household size, consumption, PPP, currency (`@fx`) and prices (`@cpi`, Convention 8) from facts;
+  - cash multiples × `@cash.uov_per_dollar`; depression through `@wellby_factors` and `@depression`;
   - animals `@sad_factors.*`: one figure per physical change, pledges kept
     (`commitment_fulfilment_cage_free` / `_broiler`), `production_response`, `sads_per_meal_replaced`,
     `meal_sads_share_<s>`; species weights only in the `ced_*` rows;
@@ -122,7 +111,9 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - a won reform counts `$win_years_counted` years, the wait until it takes effect discounted; coalition
     credit is the charity's share of all groups' resources (Convention 2);
   - `estimate_basis` (INV-18, Convention 11): a `past_average` keeps the template's
-    `marginal_vs_past_average` row; change the basis only for a reason you write down;
+    `marginal_vs_past_average` row, its formula the charity's own `@next_dollar.<charity>` (write it in
+    facts/next_dollar.json by normalization.md 2.10: room × use × run, sourced, dated, ranged); change the
+    basis only for a reason you write down;
   - money moved goes through the shared rows of src/engine/moved-money.ts word for word
     (`python3 scripts/moved-money.py <model> <destination set> net`), destinations live (`#model-id`);
     career changes through `career_change_value` (INV-12);
@@ -131,9 +122,14 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - no exchange rate between outcomes inside the model (INV-2): the output unit's conversion does
     that once; another unit's outcome enters only through the template's bridge rows (2.6);
   - animal families, the species step: SADs → `sads_<s>` → `ced_<s>` with the SAD version of the
-    figure it divides (cage-to-aviary and meals 2024; enriched cages, broilers and shrimp 2025), a pair
-    per species and version, the species split a sourced fact or ranged judgment;
+    figure it divides (templates.md), the species split a sourced fact or ranged judgment;
   - climate: the climate skeleton's `years_until_avoided` and `conversion` rows (normalization.md 2.5).
+- **Every way the work does good or harm is a row**: side effects are estimated rows tagged
+  `side_effect` (normalization.md 2.16), never a list.
+- **Ranges and the simulation** (normalization.md 2.18): each range's `interval` and `shape` as the
+  source states; a chance that one event happens at all is `single_event` (`{ with }`, `{ one_of }`),
+  never a yearly rate or a share of many; no range on a year (unit "Year"); a reported figure, not a
+  remainder of large ones; no net near zero as a denominator.
 - **Adjustments**: Convention 5 (one question each, signs); an RCT's effect is already net of its
   control group; say what isn't adjusted for. **Animals**: Convention 3 (reach is every animal under
   the commitments won or pressed, delivery only in the shared fulfilment rate, stocks as yearly flows).
@@ -141,10 +137,9 @@ Copy `templates/<family>.json` to the output path and fill it in.
   scope, reach and persistence first (audit-model prints the median).
 - **Write-up** `writeups/<id>.md` for the charity's main model, following import-cea section 7, plus
   "How this model was checked" (audit rounds and what changed).
-- **Charity record** `charities/<id>.json` if missing, with `programs` and weights for several
-  modelled programmes.
+- **Charity record** `charities/<id>.json` if missing, with `spending` and `lines`.
 
-As you go: `npx tsx scripts/audit-model.ts <path>` (every check, the result, tornado and peers; exit
+As you go: `npx tsx scripts/audit-model.ts <path>` (exit
 1 on a high finding), then `npx tsx scripts/check.ts <id>` once in models/.
 
 ## 4. Audit loop (independent)
@@ -169,14 +164,14 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
 
 ## 5. Verify and report
 
-`npx tsx scripts/check.ts <id>`, `npm run check`, `npx vitest run`, `npx tsc --noEmit`,
+`npx tsx scripts/check.ts <id>`, `npx tsx scripts/summaries.ts` (the simulations), `npx tsx
+scripts/simulation-check.ts <id>` (exit 0: stable, single events drawn), `npm run check`, `npx vitest run`, `npx tsc --noEmit`,
 `npx tsx scripts/normalization-audit.ts [--exclude <ids>]` (no violation for the model; waivers only
 for checked false positives, with reasons; the allowlist stays `{}`; in a sandbox it skips models that
 don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`).
 
-Report: the result (native unit; years per $1,000 with the `Combined range`, glossary), year and
-programmes (weights; which are thin), top 3 swings, share of judgment, audit rounds with counts, facts
-or assumptions added.
+Report: the result (native unit; years per $1,000 with its range), year and programmes (weights; which
+are thin), top 3 swings, audit rounds with counts, facts or assumptions added.
 
 To change the templates: edit and run `scripts/gen-templates.py`, keep src/engine/templates.ts in step,
 run `npx vitest run src/engine/templates.test.ts src/engine/lint.test.ts`.
