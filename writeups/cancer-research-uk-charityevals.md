@@ -89,6 +89,8 @@ Independent audit round 2: a pass, with no high findings, 1 medium and 2 low. Wh
 - **The medium:** the British Heart Foundation change above.
 - **The lows:** the range of the share of the field now says what widens it beyond its anchors, and the check against the returns study gives the right ratio, about 30 times.
 
+Verification round 3: a pass. It corrected one figure in the share of the field's explainer and the British Heart Foundation write-up's branch shares; a last verification checked those.
+
 ### Sources
 
 - [Cancer Research UK, Annual report and accounts 2025/26](https://downloads.ctfassets.net/u7vsjnoopqo5/5mIQtPIZ43jHIbMTdSfRYe/21a6487f12a000bcab5e7c43daa6908a/Cancer_Research_UK_annual_report_and_accounts_2025-26.pdf) (research spend p. 9; financial review p. 8-13; policy and information p. 26-29, 34-35; reserves p. 51-52; statement of financial activities p. 78; notes 4, 5 and 9, p. 88-90)

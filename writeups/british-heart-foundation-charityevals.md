@@ -63,7 +63,7 @@ The result divides spending by what past work of the kind achieved, so it is a p
 - **BHF's share of the field:** 0.3% to 0.8%.
 - **The discount rate:** a 17-year wait makes the result sensitive to it.
 
-Research is about 93% of the result, policy about 5% and the pilots about 2%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
+Research is about 87% of the result, policy about 9% and the pilots about 4%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
 
 ### Biggest uncertainties
 
@@ -91,7 +91,7 @@ First build (2026-11-03), independent audit round 1 (3 high, 4 medium, 11 low). 
 - **Smaller fixes:** a counterfactual for trainees who would have trained elsewhere, a lower defibrillator survival gain for home arrests, and clearer anchors and sources.
 
 First build, independent audit round 2: no high findings, 3 medium, 7 low. What changed:
-- **BHF's share of the field:** now counts all of industry's research, which leaves it at 1%.
+- **BHF's share of the field:** now counts all of industry's research, which leaves it at 1% (superseded by the change of method below).
 - **Smoking cut:** re-anchored on the impact assessment's scenarios (8 points, 2.5 to 9.2), with leakage counted once.
 - **Healthcare Implementation Fund:** left proxied then, which this rebuild has fixed.
 
