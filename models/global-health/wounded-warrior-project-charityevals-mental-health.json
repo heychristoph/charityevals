@@ -307,9 +307,9 @@
     {
       "id": "opt_people",
       "section": "reach",
-      "label": "People in the centres' outpatient therapy (veterans and family)",
+      "label": "Veterans in the centres' outpatient therapy",
       "format": "integer",
-      "formula": "opt_veterans + opt_family"
+      "formula": "opt_veterans"
     },
     {
       "id": "sup_people",
@@ -323,7 +323,7 @@
       "section": "reach",
       "label": "Cost per person reached (all branches)",
       "format": "usd",
-      "formula": "cost_total / (people_reached + opt_people + cns_people + sup_people)",
+      "formula": "cost_total / (people_reached + opt_people + opt_family + cns_people + sup_people)",
       "explainer": "Context: about $11,000 a person across everyone counted, far more for the intensive programmes (WWP's grants alone come to about $9,000 for each of the 3,909 Warrior Care Network veterans, before WWP's own costs)."
     },
     {
@@ -393,7 +393,7 @@
         "page": "Results",
         "quote": "Effect sizes for change in PCL-5 (d = 1.26) and PHQ-9 (d = 0.91) reflected large improvements from baseline to post-treatment, and moderate to large improvements from baseline to 12-month follow-up (d = 0.98 and d = 0.69, respectively)"
       },
-      "explainer": "Warrior Care Network's veterans kept 78% of the PTSD gain and 76% of the depression gain a year on (d 1.26 to 0.98, and 0.91 to 0.69). A straight fade keeping 76% of the depression gain at a year (the scale the WELLBYs use) reaches zero at 1 / (1 - 0.76) = 4.2 years (4.35 on the PTSD scale). Range: 2 years if the 29% who answered at 12 months were the ones who did well (the authors call low follow-up completion a limitation) to 8 if the gains plateau, as longer follow-ups of CPT suggest."
+      "explainer": "Warrior Care Network's veterans kept 78% of the PTSD gain and 76% of the depression gain a year on (d 1.26 to 0.98, and 0.91 to 0.69). A straight fade keeping 76% of the depression gain at a year (the scale the WELLBYs use) reaches zero at 1 / (1 - 0.76) = 4.2 years (4.5 on the PTSD scale). Range: 2 years if the 29% who answered at 12 months were the ones who did well (the authors call low follow-up completion a limitation) to 8 if the gains plateau, as longer follow-ups of CPT suggest."
     },
     {
       "id": "effect_decay_sd_per_year",
@@ -464,13 +464,26 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "The centres' weekly outpatient therapy is the format the trials behind the prior used (8 to 12 weekly sessions of CPT or PE), but outside trials many patients stop early or never start the trauma-focused part: in a systematic review of 26 studies only 28% of outpatients with PTSD began trauma-centred CBT (van den Berk Clark et al. 2019, Psychiatric Services 70:1031), and fewer finish, against 90% completing the intensive programmes; those who stop keep part of the gain. This row is the whole delivery gap for the branch (implementation_adj is not applied again). 0.6 (0.35-0.9).",
+      "explainer": "What each outpatient got isn't reported (the 990 says only 'traditional outpatient therapy'): at these specialist centres much of it is weekly CPT or PE, the format of the trials behind the prior, but outside trials many patients stop early or never start the trauma-focused part. In a systematic review of 26 studies 28% of patients in general outpatient mental health settings began trauma-centred CBT, more where staff use it routinely, as in specialist clinics (van den Berk Clark et al. 2019, Psychiatric Services 70(8):703-713), against 90% completing the intensive programmes; those who stop keep part of the gain. This row is the whole delivery gap for the branch (implementation_adj is not applied again), and the branch stays thin. 0.6 (0.35-0.9).",
       "source": {
-        "title": "van den Berk Clark et al. (2019), Factors associated with receipt of cognitive-behavioral therapy or prolonged exposure therapy among individuals with PTSD, Psychiatric Services",
+        "title": "van den Berk Clark et al. (2019), Factors associated with receipt of cognitive-behavioral therapy or prolonged exposure therapy among individuals with PTSD, Psychiatric Services 70(8):703-713",
         "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6702958/",
         "retrieved": "2026-11-14",
         "quote": "The average weighted initiation rate was 6% in larger hospital systems with a high rate of trauma and 28% in outpatient mental health settings"
       }
+    },
+    {
+      "id": "opt_family_dose_vs_iop",
+      "section": "effect",
+      "label": "Effect of the centres' treatment and psychoeducation for family members, as a share of the intensive programmes'",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Family members get treatment and psychoeducation, not a veteran's PTSD course: psychoeducation and support for family carers of people with mental illness give small to moderate effects on carers' distress in trials (around 0.2-0.4 SD), about a third of the veterans' therapy effect. 0.3 (0.1-0.6)."
     },
     {
       "id": "cns_dose_vs_iop",
@@ -557,11 +570,11 @@
       "format": "multiple",
       "value": {
         "low": 0.45,
-        "best": 0.75,
-        "high": 1
+        "best": 0.64,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Trust in the trials' effect for these programmes: small trials and likely publication bias in the review (ten trials, 524 people), and the one trial of the two-week massed format, which is in the pool, found about half the pooled effect (0.58 against 1.22 SD, against minimal contact rather than a waitlist). 0.75 (0.45-1), anchored on HLI's psychotherapy discounts (0.5-0.7) with a large trial of the same format in hand. The conversion of a depression-scale effect into life satisfaction is the site's (@wellby_factors.wellbys_per_sd_year), not adjusted again here; the gap between a waitlist and the veterans' real alternative is in iop_counterfactual_adj."
+      "explainer": "Trust in the trials' effect for these programmes. The one large trial of the two-week massed format (Foa et al. 2018, inside the pool) found about half the pooled effect (0.58 against 1.22 SD); weighting it by precision against the rest of the pool (about 1.31 SD, SE 0.31) gives 0.70 of the pooled figure, and the rest of the pool's small trials and likely publication bias take about 0.85 off its share: 0.64 (0.45-0.9), within HLI's psychotherapy discounts (0.5-0.7). The conversion of a depression-scale effect into life satisfaction is the site's (@wellby_factors.wellbys_per_sd_year), not adjusted again here; the gap between a waitlist and the veterans' real alternative is in the counterfactual."
     },
     {
       "id": "iop_counterfactual_adj",
@@ -583,11 +596,11 @@
       "format": "multiple",
       "value": {
         "low": 0.45,
-        "best": 0.75,
-        "high": 1
+        "best": 0.64,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "As the intensive programmes (0.75), with the dose differences in opt_dose_vs_iop and cns_dose_vs_iop."
+      "explainer": "As the intensive programmes (0.64), with the dose differences in opt_dose_vs_iop, opt_family_dose_vs_iop and cns_dose_vs_iop."
     },
     {
       "id": "opt_counterfactual_adj",
@@ -633,8 +646,8 @@
       "section": "adjustments",
       "label": "WWP's share of the resources behind the outcome",
       "format": "percent",
-      "formula": "wwp_share_of_cash * cost_total / (cost_total + psa_mental_health)",
-      "explainer": "WWP's share of the cash behind the programmes, times its full cost over its full cost plus the donated public service announcements that recruit veterans into them (Convention 2)."
+      "formula": "wwp_share_of_cash * cost_total / (cost_total + wwp_share_of_cash * psa_mental_health)",
+      "explainer": "WWP's share of the resources: its share of the cash behind the programmes, with the donated public service announcements that recruit veterans set against all that cash (WWP's full cost over its share), Convention 2."
     },
     {
       "id": "wwp_share_of_cash",
@@ -690,7 +703,7 @@
         "retrieved": "2026-11-14",
         "quote": "Completion rates for the ITP are high (90.8%)"
       },
-      "explainer": "Share of those starting who complete: 90.8% at Rush's three-week programme. People who stop early keep part of the gain, so 0.9 (0.8-0.97). Used for every branch (WWP's counts are of people served, not completers)."
+      "explainer": "Share of those starting who complete: 90.8% at Rush's three-week programme. People who stop early keep part of the gain, so 0.9 (0.8-0.97). Used for the intensive programmes only: the therapy branch's delivery gap is in its dose rows and the support branch's effect is set for the dose delivered."
     },
     {
       "id": "gift_to_grant_years",
@@ -756,7 +769,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, support branch",
       "format": "multiple",
-      "formula": "sup_evidence_adj * sup_counterfactual_adj * attribution_share * implementation_adj * wait_discount * sup_missing_data_adj"
+      "formula": "sup_evidence_adj * sup_counterfactual_adj * attribution_share * wait_discount * sup_missing_data_adj"
     },
     {
       "id": "evidence_adj",
@@ -957,7 +970,7 @@
       "section": "outcome",
       "label": "Therapy branch (centres' outpatient therapy and WWP-paid counselling), WELLBYs before adjustments",
       "format": "number",
-      "formula": "(opt_people * opt_wellbys_per_person + cns_people * cns_wellbys_per_person) * household_multiplier",
+      "formula": "(opt_people * opt_wellbys_per_person + opt_family * wellbys_per_person * opt_family_dose_vs_iop + cns_people * cns_wellbys_per_person) * household_multiplier",
       "unit": "WELLBYs"
     },
     {
