@@ -1,0 +1,967 @@
+{
+  "id": "feeding-america-charityevals",
+  "name": "Feeding America: food network (charityevals' estimate)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {
+    "USA": 1
+  },
+  "beneficiaries_note": "Our build: Feeding America's food network and SNAP help in the US.",
+  "template": "domestic-services",
+  "estimate_basis": "unit_cost",
+  "charity": "feeding-america",
+  "owner": "charityevals",
+  "summary": "Feeding America sources donated food from about 600 national food companies for the US network of more than 200 food banks and 60,000 pantries, funds and supports those food banks, and helps people apply for SNAP. In the year to June 2025 it spent $222 million of its own money on this and passed on 2.4 billion pounds of donated food (about 2 billion meals), which, valued at what it saves the households who eat it on the site's log-income scale and credited by Feeding America's small share of the resources behind it (the donors' food at $4.6 billion and the food banks' and pantries' cost of handing it out), with the SNAP enrolments its grants help cause, comes to about 0.01 years of healthy life per $1,000. It is far below the global-health median because the people helped are in the US, where $90 of food a year is a small share of what a household spends, and because most of the resources behind the food are others'. About two thirds is the food, a third SNAP help; both branches are discounted for missing data. The biggest uncertainties are how much of the food would have reached people without Feeding America, how poor the people served are, and how many SNAP enrolments the help causes.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: Feeding America, food network programmes (FY2025)",
+    "url": "https://charityevals.org/feeding-america-charityevals",
+    "published": "2026-11-13",
+    "retrieved": "2026-11-13"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "Feeding America, financial report June 30, 2025 (audited)",
+      "url": "https://www.feedingamerica.org/sites/default/files/2025-11/Feeding%20America_25%20FS_Final.pdf"
+    },
+    {
+      "type": "charity",
+      "title": "Feeding America, 2025 annual report (fiscal year to 30 June 2025)",
+      "url": "https://www.feedingamerica.org/sites/default/files/2025-12/FA_25AnnReport_DIGITAL_final.pdf"
+    },
+    {
+      "type": "data",
+      "title": "Feeding America, Charitable Food Assistance Participation in 2023",
+      "url": "https://www.feedingamerica.org/research/charitable-food-assistance-participation"
+    },
+    {
+      "type": "study",
+      "title": "Finkelstein and Notowidigdo 2019, Take-up and Targeting: Experimental Evidence from SNAP",
+      "url": "https://www.nber.org/papers/w24652"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on the food network programmes, FY2025 (year to 30 June 2025), net of what members paid back",
+      "format": "usd",
+      "formula": "@feeding_america.member_services_cash_fy2025 + @feeding_america.food_procurement_cash_fy2025 + @feeding_america.programs_cash_fy2025 - @feeding_america.food_procurement_revenue_fy2025",
+      "explainer": "Member services, food procurement and programs, the three lines that get food and food help to people, in Feeding America's own cash (the audited statement of functional expenses before donated goods), less the food procurement revenue the member food banks paid back for food and transport bought for them: their own money passing through Feeding America's books. Fiscal year 1 July 2024 to 30 June 2025, the latest with both audited accounts and the annual report's reach. The donated food itself ($4.58 billion at wholesale) is the food donors' resource and enters the credit share below, not this cost. Policy and advocacy, research and analysis and public awareness have their own model (feeding-america-charityevals-advocacy)."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses in cash, net of members' repayments, FY2025",
+      "format": "usd",
+      "formula": "@feeding_america.total_expenses_cash_fy2025 - @feeding_america.food_procurement_revenue_fy2025",
+      "explainer": "All of Feeding America's cash expenses (programmes, management, fundraising), before the donated food, media and services it books at fair value, less the members' repayments for food bought on their behalf."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Programme expenses in cash, net of members' repayments, FY2025",
+      "format": "usd",
+      "formula": "@feeding_america.program_expenses_cash_fy2025 - @feeding_america.food_procurement_revenue_fy2025",
+      "explainer": "All six programme lines in cash, less the members' repayments: the base over which management and fundraising ($82 million) are spread."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the food network programmes, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "fa_pounds",
+      "section": "reach",
+      "label": "Pounds of donated food Feeding America passed to its member food banks, FY2025",
+      "format": "integer",
+      "formula": "@feeding_america.pounds_donated_fy2025",
+      "unit": "pounds",
+      "explainer": "The audited count of donated food under Feeding America's national donor contracts and given to it directly. The members' own food, purchases and USDA food are not counted here: Feeding America's grants and services help the members move that too, a benefit not credited (it is in the unmodelled share)."
+    },
+    {
+      "id": "pounds_per_meal",
+      "section": "reach",
+      "label": "Pounds of food per meal (Feeding America's conversion)",
+      "format": "number",
+      "value": 1.2,
+      "kind": "observed",
+      "source": {
+        "title": "Feeding America, 2025 annual report (fiscal year to 30 June 2025)",
+        "url": "https://www.feedingamerica.org/sites/default/files/2025-12/FA_25AnnReport_DIGITAL_final.pdf",
+        "page": "p. 3, footnote",
+        "quote": "A meal from Feeding America is 1.2 pounds of product, based on USDA guidelines.",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Context only, not on the result's path: Feeding America's own conversion from pounds to meals, used to state the meals; the food's value is counted per pound.",
+      "unit": "pounds"
+    },
+    {
+      "id": "fa_meals",
+      "section": "reach",
+      "label": "Meals in the food Feeding America passed on (context)",
+      "format": "integer",
+      "formula": "fa_pounds / pounds_per_meal",
+      "explainer": "For reading: about 2 billion of the network's 5.9 billion meals in FY2025."
+    },
+    {
+      "id": "people_served",
+      "section": "reach",
+      "label": "People who got charitable food at least once in the year (Feeding America's estimate, 2023)",
+      "format": "number",
+      "value": {
+        "low": 40000000,
+        "best": 50000000,
+        "high": 55000000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Feeding America, Charitable Food Assistance Participation in 2023",
+        "url": "https://www.feedingamerica.org/research/charitable-food-assistance-participation",
+        "quote": "Feeding America estimates more than 50 million people received charitable food assistance sometime in 2023",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Unique people who got food from a charitable source one or more times in 2023 (Current Population Survey module), the latest estimate; the network's food is spread over them. Range: 40 million (some go to food programmes outside the network) to 55 million (growth to 2025)."
+    },
+    {
+      "id": "household_size",
+      "section": "reach",
+      "label": "People per household",
+      "format": "number",
+      "formula": "@household_size.united_states",
+      "unit": "people",
+      "explainer": "The site's US household size: the help is food for the household, and people_served counts people, so households are people over this."
+    },
+    {
+      "id": "households_reached",
+      "section": "reach",
+      "label": "Households served in the year",
+      "format": "integer",
+      "formula": "people_served / household_size",
+      "explainer": "People served over the household size: the households sharing the network's food. Not visits: Feeding America's estimate counts each person once."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached",
+      "format": "integer",
+      "formula": "households_reached * household_size"
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: compare with the charity's own figure and with other models of the family."
+    },
+    {
+      "id": "snap_applications",
+      "section": "reach",
+      "label": "SNAP applications the network helped people make, FY2025",
+      "format": "number",
+      "value": 312000,
+      "kind": "observed",
+      "source": {
+        "title": "Feeding America, 2025 annual report (fiscal year to 30 June 2025)",
+        "url": "https://www.feedingamerica.org/sites/default/files/2025-12/FA_25AnnReport_DIGITAL_final.pdf",
+        "page": "p. 3",
+        "quote": "312,000 SNAP APPLICATIONS assisted by the network to help people access the food they need",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Applications for SNAP (food stamps) the member food banks helped people complete, the network's count; the programs line's grants pay for part of this work."
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Life satisfaction gained per person per year (points, 0-10)",
+      "format": "number",
+      "formula": "0",
+      "unit": "points",
+      "explainer": "0: the food is counted as the money it saves the household on the log-income scale below; a wellbeing effect of the same food would count the same change twice (no trial of food pantries measures life satisfaction against a control group)."
+    },
+    {
+      "id": "ls_effect_years",
+      "section": "effect",
+      "label": "Years the wellbeing effect lasts",
+      "format": "number",
+      "formula": "1",
+      "unit": "years",
+      "explainer": "1: no wellbeing branch (above), so this only keeps the template's row."
+    },
+    {
+      "id": "wellbys_per_person",
+      "section": "effect",
+      "label": "WELLBYs per person reached, discounted",
+      "format": "number",
+      "formula": "ls_gain_per_person_year * pv_annuity_due(1, $discount_rate, ls_effect_years)",
+      "unit": "WELLBYs",
+      "explainer": "Point-years, discounted at the shared rate."
+    },
+    {
+      "id": "value_per_lb_wholesale",
+      "section": "effect",
+      "label": "Wholesale value of a pound of the donated food (US$)",
+      "format": "usd",
+      "formula": "@feeding_america.fair_value_per_lb_fy2025",
+      "explainer": "Feeding America's audited fair value, from national wholesalers' prices for the mix of products donated."
+    },
+    {
+      "id": "retail_vs_wholesale",
+      "section": "effect",
+      "label": "What the same food costs a household at a store, against the wholesale value",
+      "format": "multiple",
+      "value": {
+        "low": 1.1,
+        "best": 1.25,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "explainer": "The household would otherwise buy the food at retail, above the wholesale catalogue prices the fair value uses: grocers' gross margins of roughly a fifth to a third of sales put retail at about 1.25 times wholesale. Range 1.1 (discount stores) to 1.5 (convenience stores, small rural shops)."
+    },
+    {
+      "id": "inkind_cash_equivalence",
+      "section": "effect",
+      "label": "What a dollar of donated food is worth to the household against a dollar of cash",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Pantry food is chosen by others: some items go unused or replace cheaper ones. Most of it frees money the household would spend on food anyway (about $90 a person a year against food budgets of thousands), so it is close to cash. 0.8, the same judgment as the Salvation Army build's food and goods (0.6 to 1), range 0.6 to 0.95."
+    },
+    {
+      "id": "food_value",
+      "section": "effect",
+      "label": "Value of the food Feeding America passed on, to the people who ate it (US$)",
+      "format": "usd",
+      "formula": "fa_pounds * value_per_lb_wholesale * retail_vs_wholesale * inkind_cash_equivalence"
+    },
+    {
+      "id": "value_per_person",
+      "section": "effect",
+      "label": "Value received per person in the year (US$)",
+      "format": "usd",
+      "formula": "food_value / people_reached",
+      "explainer": "The food Feeding America passed on, at what it saves the household, spread over everyone the network's food reaches."
+    },
+    {
+      "id": "consumption_mean",
+      "section": "effect",
+      "label": "Average consumption per person in the country by the household survey (US$)",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024",
+      "explainer": "The Consumer Expenditure Survey's spending per person in the US, 2024: the household-survey base whose income-fifth ratio scales it to the people served."
+    },
+    {
+      "id": "recipients_consumption_share",
+      "section": "effect",
+      "label": "The people served's consumption per person, as a share of the average",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Anchored on the poorest fifth: its spending per household is 45% of the average (@united_states.ce_lowest_quintile_vs_all_2024), about 67% per person since its households are smaller (1.6 people against 2.4). Pantry users are mostly at or below the poorest fifth's incomes (most food banks' cut-off is about 185 to 200% of the poverty line), so 0.6, range 0.45 to 0.75."
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "The people served's consumption per person (US$)",
+      "format": "usd",
+      "formula": "consumption_mean * recipients_consumption_share"
+    },
+    {
+      "id": "income_years",
+      "section": "effect",
+      "label": "Years the help keeps its money value for the people served",
+      "format": "number",
+      "formula": "1",
+      "unit": "years",
+      "explainer": "1: a year's food is eaten within the year."
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, discounted",
+      "format": "number",
+      "formula": "ln(1 + value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)",
+      "explainer": "The site's one log-income scale at the clients' own consumption: a dollar does far less for a US household than for one living on a few dollars a day."
+    },
+    {
+      "id": "dalys_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs (before adjustments)",
+      "format": "small",
+      "formula": "0",
+      "unit": "DALYs",
+      "explainer": "0: studies link food insecurity with worse health, but none measures a health gain from food pantries against a control group; what health the food buys is part of the money it saves, counted above."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (before adjustments)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "0: no evidence that pantry food averts deaths in the US, where starvation is very rare; the template's age rows below only keep the shared value of a death."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted that are of children under five",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "0: no deaths are counted (above); kept so the shared value of a death stays in the model."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths averted at five or older, share aged 5 to 14",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "0: no deaths are counted (above); kept so the shared value of a death stays in the model."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "formula": "0.5",
+      "explainer": "Half: no deaths are counted (above), so this has no effect; kept so the shared value of a death stays in the model."
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights by the age band of each death, times your value of a life: the site's one value of a death."
+    },
+    {
+      "id": "snap_approval_share",
+      "section": "effect",
+      "label": "SNAP: share of the applications helped that are approved",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "No published approval rate for the network's assisted applications; the help is aimed at people screened as likely eligible, but many applications fail on paperwork or interviews. 0.6, range 0.4 to 0.8."
+    },
+    {
+      "id": "snap_participants",
+      "section": "effect",
+      "label": "SNAP: people participating each month, FY2025",
+      "format": "number",
+      "value": 42400000,
+      "kind": "observed",
+      "source": {
+        "title": "Congressional Research Service, SNAP: A Primer on Eligibility and Benefits (R42505, 4 November 2026)",
+        "url": "https://www.everycrsreport.com/files/2026-11-04_R42505_48e7f73c63e62171b99cf10728a3a779b1ee6d3b.html",
+        "quote": "In FY2025, an average of 42.4 million individuals in 22.6 million households participated in SNAP each month.",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "With the households below, the average SNAP household's size (about 1.9 people)."
+    },
+    {
+      "id": "snap_households",
+      "section": "effect",
+      "label": "SNAP: households participating each month, FY2025",
+      "format": "number",
+      "value": 22600000,
+      "kind": "observed",
+      "source": {
+        "title": "Congressional Research Service, SNAP: A Primer on Eligibility and Benefits (R42505, 4 November 2026)",
+        "url": "https://www.everycrsreport.com/files/2026-11-04_R42505_48e7f73c63e62171b99cf10728a3a779b1ee6d3b.html",
+        "quote": "In FY2025, an average of 42.4 million individuals in 22.6 million households participated in SNAP each month.",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The same sentence: households, to turn applications (one per household) into people."
+    },
+    {
+      "id": "snap_people_per_household",
+      "section": "effect",
+      "label": "SNAP: people per participating household",
+      "format": "number",
+      "formula": "snap_participants / snap_households",
+      "unit": "people"
+    },
+    {
+      "id": "snap_benefit_household_month",
+      "section": "effect",
+      "label": "SNAP: average monthly benefit per household, FY2025 (US$)",
+      "format": "usd",
+      "value": 353.43,
+      "kind": "observed",
+      "source": {
+        "title": "Congressional Research Service, SNAP: A Primer on Eligibility and Benefits (R42505, 4 November 2026)",
+        "url": "https://www.everycrsreport.com/files/2026-11-04_R42505_48e7f73c63e62171b99cf10728a3a779b1ee6d3b.html",
+        "quote": "Monthly benefits averaged $188.30 per person and $353.43 per household.",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The national average; the benefit falls as income rises, and the newly enrolled are about average."
+    },
+    {
+      "id": "snap_benefit_per_person_year",
+      "section": "effect",
+      "label": "SNAP: benefit per person per year (US$)",
+      "format": "usd",
+      "formula": "snap_benefit_household_month * 12 / snap_people_per_household"
+    },
+    {
+      "id": "snap_years",
+      "section": "effect",
+      "label": "SNAP: years a household helped to enrol stays on the programme",
+      "format": "number",
+      "value": {
+        "low": 0.75,
+        "best": 1.5,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "New entrants' spells are short (many leave within a year) but many come back; 1.5 years, range 9 months to 3 years. Recertification needs no further help from the food bank.",
+      "unit": "years"
+    },
+    {
+      "id": "snap_people",
+      "section": "effect",
+      "label": "SNAP: people enrolled through the applications helped",
+      "format": "integer",
+      "formula": "snap_applications * snap_approval_share * snap_people_per_household"
+    },
+    {
+      "id": "snap_gross_ln_per_person",
+      "section": "effect",
+      "label": "SNAP: ln(consumption) gain per person enrolled, discounted",
+      "format": "number",
+      "formula": "ln(1 + snap_benefit_per_person_year / baseline_consumption) * pv_annuity_due(1, $discount_rate, snap_years)",
+      "explainer": "The benefit at the same clients' consumption as the food branch, over the years on the programme, discounted. SNAP is spent on food the household would mostly buy anyway, so it counts as cash."
+    },
+    {
+      "id": "mcpf",
+      "section": "effect",
+      "label": "Marginal cost of public funds: what a dollar of public money costs those who pay, in dollars",
+      "format": "multiple",
+      "value": {
+        "low": 1.0,
+        "best": 1.2,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "explainer": "Raising a dollar of tax costs the economy more than a dollar through the work and spending it discourages: estimates for rich countries' taxes run from about 1.1 to 1.5 (Dahlby 2008, The Marginal Cost of Public Funds). 1.2, range 1 to 1.5: the same judgment as the Habitat for Humanity advocacy build's."
+    },
+    {
+      "id": "payer_multiple",
+      "section": "effect",
+      "label": "How the federal taxes behind SNAP fall, relative to a tax proportional to consumption",
+      "format": "multiple",
+      "value": {
+        "low": 1.0,
+        "best": 1.4,
+        "high": 2.0
+      },
+      "kind": "judgment",
+      "explainer": "On the log scale a dollar taken from someone costs 1 over their consumption; a tax proportional to consumption costs 1 over the national-accounts mean (a multiple of 1), a progressive one less (above 1). SNAP is federal money, paid for by the federal income tax and borrowing, which fall mostly on richer households: 1.4, range 1 (borrowing repaid by everyone alike) to 2. The Habitat advocacy build's 1.6 high end for federal or income-tax money is inside this range."
+    },
+    {
+      "id": "snap_payer_cost_per_person",
+      "section": "effect",
+      "label": "SNAP: ln(consumption) given up by those who pay, per person enrolled",
+      "format": "number",
+      "formula": "snap_benefit_per_person_year * mcpf / (payer_multiple * @united_states.consumption_per_person_2024) * pv_annuity_due(1, $discount_rate, snap_years)",
+      "explainer": "The benefit is a transfer from taxpayers: what it costs them on the same log scale, at the national-accounts consumption per person, as the Habitat advocacy build counts government money."
+    },
+    {
+      "id": "snap_net_ln_per_person",
+      "section": "effect",
+      "label": "SNAP: net ln(consumption) gain per person enrolled",
+      "format": "number",
+      "formula": "snap_gross_ln_per_person - snap_payer_cost_per_person"
+    },
+    {
+      "id": "food_evidence_adj",
+      "section": "adjustments",
+      "label": "Food: evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The pounds and their value are audited and the value of food to a household is its price; the doubts are about the food mix (some items low in value to the household, such as beverages and snacks) beyond the in-kind discount above. 0.95, range 0.8 to 1, near the Salvation Army build's food and goods (0.9 to 1)."
+    },
+    {
+      "id": "food_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Food: share that wouldn't have reached people without Feeding America",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Without Feeding America's national contracts and retail pickup programme, some donors would give straight to local food banks or other networks and some food would go to salvage, animal feed or landfill; and people helped would partly turn to other pantries or family. 0.5, range 0.25 to 0.8, as the Salvation Army build's food and goods (0.3 to 0.8)."
+    },
+    {
+      "id": "distribution_cost_per_lb",
+      "section": "adjustments",
+      "label": "Food banks' and pantries' cost to store and hand out a pound, including volunteers' time (US$)",
+      "format": "usd",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Member food banks and their 60,000 partner pantries and meal programmes collect, sort, store and hand out the food, with paid staff, trucks, warehouses and volunteers (valued at the US volunteer hour, @united_states.volunteer_hour_value_2025). The shared maintenance fee food banks may charge pantries to recover handling costs is about 20 cents a pound, which covers part of their cost; 25 cents in all, range 10 to 60 cents."
+    },
+    {
+      "id": "snap_program_share",
+      "section": "adjustments",
+      "label": "Share of Feeding America's cost behind its SNAP work",
+      "format": "percent",
+      "value": {
+        "low": 0.03,
+        "best": 0.06,
+        "high": 0.12
+      },
+      "kind": "judgment",
+      "explainer": "The programs line ($37 million, a sixth of the modelled cost) pays for SNAP outreach, child hunger and food-as-medicine grants; about a third of it for SNAP help is about 6% of the whole cost, range 3% to 12%."
+    },
+    {
+      "id": "food_attribution_share",
+      "section": "adjustments",
+      "label": "Food: Feeding America's share of the resources behind the food reaching people",
+      "format": "percent",
+      "formula": "cost_total * (1 - snap_program_share) / (cost_total * (1 - snap_program_share) + @feeding_america.donated_food_value_fy2025 + fa_pounds * distribution_cost_per_lb)",
+      "explainer": "Convention 2: Feeding America's own cash against the donors' food at its audited wholesale value and the members' and pantries' cost of handing it out. Credit goes by share of resources, so Feeding America is credited with about 5% of the food's value."
+    },
+    {
+      "id": "snap_evidence_adj",
+      "section": "adjustments",
+      "label": "SNAP: evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The network's own count of applications helped, with no published audit; the benefit and its value are from national data. 0.8, range 0.6 to 1."
+    },
+    {
+      "id": "snap_counterfactual_adj",
+      "section": "adjustments",
+      "label": "SNAP: share of the enrolments that the help caused",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.65
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Finkelstein and Notowidigdo 2019, Take-up and Targeting: Experimental Evidence from SNAP (NBER w24652)",
+        "url": "https://www.nber.org/papers/w24652",
+        "quote": "Only 6 percent of the control group enrolls in SNAP over the next 9 months",
+        "retrieved": "2026-11-13",
+        "note": "against 11 percent of the Information Only group and 18 percent of the Information Plus Assistance group."
+      },
+      "explainer": "In the trial, application help raised enrolment among eligible older people from 6% to 18%: two thirds of the assisted group's enrolments were caused by the outreach. People who come to a food bank for help are readier to apply, so a smaller share: 0.35, range 0.15 to 0.65."
+    },
+    {
+      "id": "snap_attribution_share",
+      "section": "adjustments",
+      "label": "SNAP: Feeding America's share of the resources behind the network's SNAP help",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The members' SNAP outreach is paid for largely by state outreach contracts (half federally reimbursed) and the food banks' own funds; Feeding America's grants are one part. 0.25, range 0.1 to 0.5."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment: share of the food passed on that is eaten",
+      "format": "percent",
+      "value": {
+        "low": 0.75,
+        "best": 0.9,
+        "high": 0.97
+      },
+      "kind": "judgment",
+      "explainer": "Some donated food spoils or is thrown away at the food bank, the pantry or at home (much is near its date). 0.9, range 0.75 to 0.97. Food only."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.9,
+        "best": 1,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "1: Feeding America's money is not replaced by government; its grants may pull in members' own money (above 1) or fund what they would have paid for anyway (below). As the Salvation Army build."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a dollar given waits before it is spent",
+      "format": "number",
+      "formula": "@feeding_america.net_assets_fy2025 / total_expenses",
+      "unit": "years",
+      "explainer": "Net assets over a year's cash spending: about a year and a half of money in hand, so a gift is spent that much later on average."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait before a gift is spent",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ (0 - gift_to_grant_years)"
+    },
+    {
+      "id": "food_missing_data_adj",
+      "section": "adjustments",
+      "label": "Food: counted less where the outcome isn't measured",
+      "format": "number",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the pounds are audited, but who eats the food is spread over a national estimate of participants and its value to them (retail mark-up, in-kind discount) is a judgment, with no measurement for Feeding America's food."
+    },
+    {
+      "id": "snap_missing_data_adj",
+      "section": "adjustments",
+      "label": "SNAP: counted less where the outcome isn't measured",
+      "format": "number",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the applications are the network's count, approvals and the share caused are judged from one trial of other outreach."
+    },
+    {
+      "id": "food_total_adj",
+      "section": "adjustments",
+      "label": "Food: adjustments combined",
+      "format": "multiple",
+      "formula": "food_evidence_adj * food_counterfactual_adj * food_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * food_missing_data_adj"
+    },
+    {
+      "id": "snap_total_adj",
+      "section": "adjustments",
+      "label": "SNAP: adjustments combined",
+      "format": "multiple",
+      "formula": "snap_evidence_adj * snap_counterfactual_adj * snap_attribution_share * leverage_funging_adj * wait_discount * snap_missing_data_adj"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(food_dalys_unadjusted * food_evidence_adj + snap_dalys_unadjusted * snap_evidence_adj) / (food_dalys_unadjusted + snap_dalys_unadjusted)"
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(food_dalys_unadjusted * food_counterfactual_adj + snap_dalys_unadjusted * snap_counterfactual_adj) / (food_dalys_unadjusted + snap_dalys_unadjusted)"
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "Feeding America's share of the resources (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(food_dalys_unadjusted * food_attribution_share + snap_dalys_unadjusted * snap_attribution_share) / (food_dalys_unadjusted + snap_dalys_unadjusted)"
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "attribution_share_shared"
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data step (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(food_dalys_unadjusted * food_missing_data_adj + snap_dalys_unadjusted * snap_missing_data_adj) / (food_dalys_unadjusted + snap_dalys_unadjusted)"
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(food_dalys + snap_dalys) / (food_dalys_unadjusted + snap_dalys_unadjusted)"
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "(+) Feeding America's grants, trucks, cold storage, technology and training also help the members move their own, purchased and USDA food (about two thirds of the network's 5.9 billion meals), +6%; (+) food kept out of landfill (about 1.1 million tonnes a year, whose methane would otherwise warm the climate), +2%; (+) food-as-medicine and child hunger programmes beyond SNAP help, +2%; (-) donated food that displaces sales by grocers and so some farm income, and pantries' food replacing what families would have got from other charities, -1%. 10%, range -5% to +30%.",
+      "side_effect": "added"
+    },
+    {
+      "id": "food_uov",
+      "section": "bridges",
+      "label": "Food: income gained and deaths averted, after adjustments (units of value)",
+      "format": "number",
+      "formula": "people_reached * (ln_gain_per_person * $uov_per_ln_consumption + deaths_averted_per_person * value_per_death) * food_total_adj",
+      "unit": "UoV"
+    },
+    {
+      "id": "snap_uov",
+      "section": "bridges",
+      "label": "SNAP: net income gained, after adjustments (units of value)",
+      "format": "number",
+      "formula": "snap_people * snap_net_ln_per_person * $uov_per_ln_consumption * snap_total_adj",
+      "unit": "UoV"
+    },
+    {
+      "id": "food_wellbys",
+      "section": "bridges",
+      "label": "Food: life satisfaction gained, after adjustments (WELLBYs)",
+      "format": "number",
+      "formula": "people_reached * wellbys_per_person * food_total_adj",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in GiveWell units of value (after each branch's adjustments)",
+      "format": "number",
+      "formula": "food_uov + snap_uov",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in wellbeing-adjusted life years (after adjustments)",
+      "format": "number",
+      "formula": "food_wellbys",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "food_uov_in_dalys",
+      "section": "bridges",
+      "label": "Food: units of value in healthy years",
+      "format": "number",
+      "formula": "food_uov / ($uov_per_daly)",
+      "unit": "DALYs"
+    },
+    {
+      "id": "food_wellbys_in_dalys",
+      "section": "bridges",
+      "label": "Food: WELLBYs in healthy years",
+      "format": "number",
+      "formula": "food_wellbys * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs"
+    },
+    {
+      "id": "snap_uov_in_dalys",
+      "section": "bridges",
+      "label": "SNAP: units of value in healthy years",
+      "format": "number",
+      "formula": "snap_uov / ($uov_per_daly)",
+      "unit": "DALYs"
+    },
+    {
+      "id": "food_dalys",
+      "section": "bridges",
+      "label": "Healthy years, food (after the branch's adjustments)",
+      "format": "number",
+      "formula": "food_uov_in_dalys + food_wellbys_in_dalys + food_dalys_direct",
+      "unit": "DALYs"
+    },
+    {
+      "id": "food_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, food, before the branch's adjustments",
+      "format": "number",
+      "formula": "food_dalys / food_total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "snap_dalys",
+      "section": "bridges",
+      "label": "Healthy years, SNAP (after the branch's adjustments)",
+      "format": "number",
+      "formula": "snap_uov_in_dalys",
+      "unit": "DALYs"
+    },
+    {
+      "id": "snap_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, SNAP, before the branch's adjustments",
+      "format": "number",
+      "formula": "snap_dalys / snap_total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "food_dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly, food (after adjustments)",
+      "format": "number",
+      "formula": "people_reached * dalys_averted_per_person * food_total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly",
+      "format": "number",
+      "formula": "food_dalys_direct",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, each branch after its own adjustments, plus the unmodelled share."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of programme cost",
+      "format": "percent",
+      "formula": "@feeding_america.salaries_member_food_programs_fy2025 / program_spend",
+      "explainer": "The three lines' own salaries and benefits over their net cash spending (13%), Feeding America's figure in place of the shared default (Convention 1)."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "The shared gap for staff delivering services at home: Feeding America's staff run logistics, grants and partnerships at US nonprofit pay."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}
