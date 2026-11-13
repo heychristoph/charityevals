@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "world-vision",
   "owner": "charityevals",
-  "summary": "World Vision US (World Vision, Inc.) spent $988 million on international programmes in its fiscal year to September 2025, almost all as grants to World Vision field offices (71% in Sub-Saharan Africa): child-sponsorship community development (health and nutrition, clean water, livelihoods, education) and food-crisis and disaster response, much of it WFP food and US government grants; plus $3.4 million of advocacy on global poverty. World Vision US publishes no outcome figures for its own spending, so each branch is built from its spending, judged costs per person and the research on that kind of work, and every branch is discounted for missing data. About half the result is relief (food and cash for some 15 million people at the partnership's $30 a person, with a few excess crisis deaths averted), a fifth livelihoods, 15% child health and 8% water: 0.34 years of healthy life per $1,000, near the site's global-health median. The biggest uncertainties are the missing-data discount, how much livelihoods work raises consumption, and the share of excess crisis deaths that food assistance averts.",
+  "summary": "World Vision US (World Vision, Inc.) spent $988 million on international programmes in its fiscal year to September 2025, almost all as grants to World Vision field offices (71% in Sub-Saharan Africa): child-sponsorship community development (health and nutrition, clean water, livelihoods, education) and food-crisis and disaster response, much of it WFP food and US government grants; plus $3.4 million of advocacy on global poverty. World Vision US publishes no outcome figures for its own spending, so each branch is built from its spending, judged costs per person and the research on that kind of work, and every branch is discounted for missing data. About half the result is relief (food and cash for some 15 million people at the partnership's $30 a person, with a few excess crisis deaths averted), then livelihoods, child health and water: near the site's global-health median. The biggest uncertainties are the missing-data discount, how much livelihoods work raises consumption, and the share of excess crisis deaths that food assistance averts.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: World Vision US, international programmes",
@@ -208,12 +208,28 @@
       "explainer": "Context: the relief branch's full cost per person, overhead included."
     },
     {
+      "id": "gik_abroad",
+      "section": "reach",
+      "label": "Donated goods shipped abroad (non-food), fiscal 2025",
+      "format": "usd",
+      "value": 43261126,
+      "kind": "observed",
+      "source": {
+        "title": "World Vision, Inc., Form 990 for the year ended 30 September 2025 (IRS e-file, object id 202611209349301676)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/951922279/202611209349301676/full",
+        "retrieved": "2026-11-13",
+        "page": "Schedule F Part II, non-cash assistance",
+        "quote": "NonCashAssistanceAmt by DescriptionOfNonCashAsstTxt: APPAREL & FURNITURE 9,793,961; SHOES & APPAREL 7,757,619; MEDICAL PRODUCTS & APPAREL 5,459,751; ... (all non-cash grants 260,888,132 less FOOD COMMODITIES 217,208,346 and FOOD 418,660)"
+      },
+      "explainer": "Clothing, shoes, furniture, household fixtures, toys, school and medical supplies sent to field offices at US wholesale value: a goods branch of its own. The food commodities ($217.2M) are relief, inside relief_share."
+    },
+    {
       "id": "dev_spend",
       "section": "reach",
       "label": "Development spending (child sponsorship and grants), fiscal 2025",
       "format": "usd",
-      "formula": "intl_spend * (1 - relief_share)",
-      "explainer": "The rest of the international line: World Vision's area programmes funded by child sponsorship and grants (health and nutrition, water and sanitation, education, child protection, livelihoods, faith)."
+      "formula": "intl_spend * (1 - relief_share) - gik_abroad",
+      "explainer": "The rest of the international line less the donated goods shipped abroad: World Vision's area programmes funded by child sponsorship and grants (health and nutrition, water and sanitation, education, child protection, livelihoods, faith)."
     },
     {
       "id": "health_share",
@@ -310,12 +326,12 @@
       "label": "Cost per person given a new water supply (with sanitation and hygiene work)",
       "format": "usd",
       "value": {
-        "low": 30,
-        "best": 60,
-        "high": 150
+        "low": 50,
+        "best": 100,
+        "high": 200
       },
       "kind": "judgment",
-      "explainer": "Boreholes with hand pumps cost about $15-40 per person served in rural Africa; piped schemes, school and clinic water, latrines and hygiene promotion add to it. Cross-check: the partnership's 2.8 million people given clean water in fiscal 2025 at this branch's spending would be $50-80 a person if World Vision US paid for most of them. Judgment $60 ($30-150)."
+      "explainer": "Anchored on the partnership's reach: World Vision gave 2.8 million people clean water in fiscal 2025 (Global Annual Report 2025, p. 8); World Vision US pays for about a third of the partnership's development money (its development spending here against the partnership's $1,662M), so at its share of the reach about $100 a person, in line with rural boreholes ($15-40 a person) plus piped schemes, school and clinic water, latrines and hygiene work. Higher if World Vision US funds more than its share of the water points, lower if it funds more of them. Judgment $100 ($50-200)."
     },
     {
       "id": "wash_people",
@@ -339,12 +355,12 @@
       "label": "Cost per household reached by livelihoods work (savings groups, farming, graduation)",
       "format": "usd",
       "value": {
-        "low": 20,
-        "best": 45,
-        "high": 120
+        "low": 110,
+        "best": 180,
+        "high": 400
       },
       "kind": "judgment",
-      "explainer": "Savings groups cost $20-40 a member to form and train (the VSLA trials' costs); farming and land-restoration support costs a little more per household; ultra-poor graduation, a small part, $500-1,500. Judgment $45 ($20-120)."
+      "explainer": "Anchored on the partnership's reach: 1.7 million savings-group members, about 700,000 families in farming and resilience work and 150,000 ultra-poor households (Global Annual Report 2025, p. 11), against World Vision US's share of the partnership's development money (about a third): about $180 a household, more than savings groups alone cost to form ($20-40 a member) because farming support, land restoration and graduation ($500-1,500 a household) are dearer. Judgment $180 ($110-400)."
     },
     {
       "id": "livelihood_members",
@@ -455,39 +471,24 @@
       "section": "effect",
       "label": "Share of the deaths averted that are of children under five",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.46,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Deaths in food crises fall mostly on young children: 40-60% under five in mortality surveys (the family's guidance); World Vision says half of those it assisted were children. Judgment 46% (30-60%)."
+      "formula": "@death_ages.diarrhoea_ssa_share_under5",
+      "explainer": "The site's WHO Global Health Estimates split of diarrhoeal deaths in Sub-Saharan Africa (facts/death_ages.json) stands in for excess crisis deaths, which are mostly hunger-worsened infections: 55% under five, within the 40-60% the family's guidance gives for crises."
     },
     {
       "id": "share_5_14_of_over5",
       "section": "effect",
       "label": "Of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.17,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Older children die least of any age but are a large share of these young populations: judgment 17% (8-30%)."
+      "formula": "@death_ages.diarrhoea_ssa_share_5_14 / (1 - @death_ages.diarrhoea_ssa_share_under5)",
+      "explainer": "From the same split."
     },
     {
       "id": "share_15_49_of_over15",
       "section": "effect",
       "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.46,
-        "high": 0.62
-      },
-      "kind": "judgment",
-      "explainer": "Young populations (median age under 20 in South Sudan and the DRC): about half of adult deaths are under 50. Judgment 46% (30-62%); the rest valued at the 50-74 band."
+      "formula": "@death_ages.diarrhoea_ssa_share_15_49 / (@death_ages.diarrhoea_ssa_share_15_49 + @death_ages.diarrhoea_ssa_share_50plus)",
+      "explainer": "From the same split; the rest valued at the 50-74 band."
     },
     {
       "id": "value_per_death",
@@ -527,14 +528,6 @@
       "format": "usd",
       "formula": "relief_cost_per_person * relief_goods_value_share",
       "explainer": "What each person gets, at local value: about $19. The food's value is counted in full here as well as the deaths it averts, since the deaths averted are a small share of the people fed."
-    },
-    {
-      "id": "ppp_factor",
-      "section": "effect",
-      "label": "PPP conversion (not used: the log gain is taken in market US$)",
-      "format": "number",
-      "formula": "avg(@south_sudan.ppp_factor_2017, @drc.ppp_factor_2017, @sudan.ppp_factor_2017)",
-      "explainer": "For reading: the relief and the baseline below are both in market US dollars, so the conversion would cancel in the log gain."
     },
     {
       "id": "cons_ken",
@@ -1021,6 +1014,48 @@
       "explainer": "US global health and humanitarian aid is in part highly cost-effective (vaccines, malaria, HIV) and in part less so than cash; judgment 1× (0.3-2.5×) of @cash.uov_per_dollar."
     },
     {
+      "id": "gik_value_per_person",
+      "section": "effect",
+      "label": "Donated goods per person who gets them (US wholesale value)",
+      "format": "usd",
+      "value": {
+        "low": 10,
+        "best": 30,
+        "high": 80
+      },
+      "kind": "judgment",
+      "explainer": "A few items of clothing, shoes or household goods per person in a distribution; furniture and fixtures go to schools and clinics. Judgment $30 ($10-80)."
+    },
+    {
+      "id": "gik_people",
+      "section": "effect",
+      "label": "People who get donated goods",
+      "format": "integer",
+      "formula": "gik_abroad / gik_value_per_person",
+      "explainer": "People who get donated goods."
+    },
+    {
+      "id": "gik_inkind_equivalence",
+      "section": "effect",
+      "label": "What the goods are worth to the people who get them, as a share of their US wholesale value",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.45,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "US wholesale value is far above what the same goods cost in a local market in Africa or Central America (second-hand clothing sells for a fraction), and people can't choose what they get. Judgment 45% (25-75%), below the domestic model's 60% for goods given in the US."
+    },
+    {
+      "id": "gik_ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person from the goods",
+      "format": "number",
+      "formula": "ln(1 + gik_value_per_person * gik_inkind_equivalence / ssa_consumption)",
+      "explainer": "At the stand-in countries' average consumption, the people in World Vision's area programmes."
+    },
+    {
       "id": "relief_evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, relief",
@@ -1039,12 +1074,25 @@
       "label": "Counterfactual, relief",
       "format": "percent",
       "value": {
-        "low": 0.35,
-        "best": 0.6,
-        "high": 0.85
+        "low": 0.45,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "World Vision is WFP's largest NGO partner; without it WFP and donors would use another partner for part of the food, and response plans were about half funded in 2025 (OCHA). 60% (35-85%)."
+      "explainer": "The question is whether the people reached would have been fed or helped anyway, not who delivers. UN humanitarian appeals were well under half funded in 2025 after the US cuts, and food pipelines in Sudan, South Sudan, Somalia and the DRC were cut to part rations, so another agency would rarely have filled the gap; but World Vision's WFP food would partly have gone through another partner to the same people. 70% (45-90%)."
+    },
+    {
+      "id": "relief_attribution_share",
+      "section": "adjustments",
+      "label": "World Vision's share of the resources, relief",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "World Vision distributes WFP and US government food whose procurement, shipping and WFP's own costs are only partly on its books (the commodities are, at their value; WFP's associated costs for in-kind food add 15-30%). Communities' volunteers help with distributions. World Vision's share of all the resources behind the food reaching people: 85% (70-100%)."
     },
     {
       "id": "health_evidence_adj",
@@ -1151,6 +1199,32 @@
       "explainer": "The households are chosen as among the poorest in World Vision's areas, where few other savings, farming or graduation programmes run, and the gain is measured against comparison households that mostly got none; some would have joined a group formed by another NGO or the government's extension service. 90%, from 70% (other programmes common, as in parts of Kenya and Uganda) to 100% (none)."
     },
     {
+      "id": "gik_evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment, gik",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The value is the goods at a judged share of their recorded value, which needs no effect study; 0.95 (0.85-1) for valuations that may not match what was given."
+    },
+    {
+      "id": "gik_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Counterfactual, gik",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Some of the goods would have reached the same people through another charity or the second-hand market at a lower price. 75% (50-95%)."
+    },
+    {
       "id": "education_evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, education",
@@ -1181,8 +1255,8 @@
       "section": "adjustments",
       "label": "This charity's share of the resources: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + relief_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
-      "explainer": "Outcome-weighted average of the branches, for reading only: health and water share credit with governments and communities (their own rows); relief, livelihoods and education are World Vision's own spending (US government and WFP grants included, as they are in its cost), so 1."
+      "formula": "(relief_dalys_unadjusted * relief_attribution_share + health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only: relief, health and water share credit with WFP, governments and communities (their own rows); livelihoods, education and the goods are World Vision's own spending, so 1."
     },
     {
       "id": "attribution_share",
@@ -1224,13 +1298,13 @@
       "label": "Years between a gift and its spending abroad",
       "format": "number",
       "value": {
-        "low": 0.2,
-        "best": 0.5,
-        "high": 1
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.6
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Sponsorship gifts are passed on monthly; restricted relief gifts and the reserves (the combined statements hold $354.8M received for relief and development, unspent) wait months. Judgment 0.5 years (0.2-1)."
+      "explainer": "Unspent funds over a year's spending, as the template's recipe: the combined statements hold $354.8M received for relief and development and $224.3M of restricted relief, development and sponsorship funds (note 13), against $2.2 billion of international programme spending a year: about 0.25 years; sponsorship gifts go monthly. Judgment 0.3 years (0.15-0.6)."
     },
     {
       "id": "delay_years",
@@ -1295,6 +1369,14 @@
       "explainer": "Thin: children reached are spending over a judged cost; the learning gain is World Vision's uncontrolled monitoring and other programmes' trials. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
     },
     {
+      "id": "gik_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, gik",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: World Vision US publishes no count of the people its goods abroad reach; reach and value are judgments. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
+    },
+    {
       "id": "awareness_missing_data_adj",
       "section": "adjustments",
       "label": "Missing-data discount, awareness",
@@ -1307,7 +1389,7 @@
       "section": "adjustments",
       "label": "All adjustments, relief",
       "format": "multiple",
-      "formula": "relief_evidence_adj * relief_counterfactual_adj * implementation_adj * leverage_funging_adj * wait_discount * relief_missing_data_adj",
+      "formula": "relief_evidence_adj * relief_counterfactual_adj * relief_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * relief_missing_data_adj",
       "explainer": "The product of the branch's adjustments."
     },
     {
@@ -1343,6 +1425,14 @@
       "explainer": "The product of the branch's adjustments."
     },
     {
+      "id": "gik_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments, gik",
+      "format": "multiple",
+      "formula": "gik_evidence_adj * gik_counterfactual_adj * implementation_adj * leverage_funging_adj * wait_discount * gik_missing_data_adj",
+      "explainer": "The product of the branch's adjustments."
+    },
+    {
       "id": "awareness_total_adj",
       "section": "adjustments",
       "label": "All adjustments, awareness",
@@ -1355,7 +1445,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "(relief_dalys_unadjusted * relief_evidence_adj + health_dalys_unadjusted * health_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + livelihood_dalys_unadjusted * livelihood_evidence_adj + education_dalys_unadjusted * education_evidence_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * relief_evidence_adj + health_dalys_unadjusted * health_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + livelihood_dalys_unadjusted * livelihood_evidence_adj + education_dalys_unadjusted * education_evidence_adj + gik_dalys_unadjusted * gik_evidence_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row; awareness has none (1)."
     },
     {
@@ -1363,7 +1453,7 @@
       "section": "adjustments",
       "label": "Counterfactual: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(relief_dalys_unadjusted * relief_counterfactual_adj + health_dalys_unadjusted * health_counterfactual_adj + wash_dalys_unadjusted * wash_counterfactual_adj + livelihood_dalys_unadjusted * livelihood_counterfactual_adj + education_dalys_unadjusted * education_counterfactual_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * relief_counterfactual_adj + health_dalys_unadjusted * health_counterfactual_adj + wash_dalys_unadjusted * wash_counterfactual_adj + livelihood_dalys_unadjusted * livelihood_counterfactual_adj + education_dalys_unadjusted * education_counterfactual_adj + gik_dalys_unadjusted * gik_counterfactual_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only; awareness has none (1)."
     },
     {
@@ -1371,7 +1461,7 @@
       "section": "adjustments",
       "label": "Missing-data discount: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(relief_dalys_unadjusted * relief_missing_data_adj + health_dalys_unadjusted * health_missing_data_adj + wash_dalys_unadjusted * wash_missing_data_adj + livelihood_dalys_unadjusted * livelihood_missing_data_adj + education_dalys_unadjusted * education_missing_data_adj + awareness_dalys_unadjusted * awareness_missing_data_adj) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * relief_missing_data_adj + health_dalys_unadjusted * health_missing_data_adj + wash_dalys_unadjusted * wash_missing_data_adj + livelihood_dalys_unadjusted * livelihood_missing_data_adj + education_dalys_unadjusted * education_missing_data_adj + gik_dalys_unadjusted * gik_missing_data_adj + awareness_dalys_unadjusted * awareness_missing_data_adj) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: every branch is thin."
     },
     {
@@ -1379,22 +1469,72 @@
       "section": "adjustments",
       "label": "All adjustments combined: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "(relief_dalys + health_dalys + wash_dalys + livelihood_dalys + education_dalys + awareness_dalys) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys + health_dalys + wash_dalys + livelihood_dalys + education_dalys + gik_dalys + awareness_dalys) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own total, weighted by its outcome before adjustments in healthy years."
+    },
+    {
+      "id": "ue_sanitation_share",
+      "section": "adjustments",
+      "label": "Unmodelled: sanitation's and hygiene's own health effects",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": 0,
+        "best": 0.025,
+        "high": 0.06
+      },
+      "kind": "judgment",
+      "explainer": "Latrines and handwashing come with the water work and cut diarrhoea beyond the water itself (Wolf et al. 2022); the water branch is about a tenth of the result, so about a quarter to a half of it again: +2.5% (0 to +6%)."
+    },
+    {
+      "id": "ue_empowerment_share",
+      "section": "adjustments",
+      "label": "Unmodelled: women's empowerment and resilience from savings groups",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": 0,
+        "best": 0.01,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "explainer": "Savings-group trials find gains in women's say in household decisions and in coping with shocks, not valued in consumption: +1% (0 to +3%) of the result."
+    },
+    {
+      "id": "ue_food_aid_market_share",
+      "section": "adjustments",
+      "label": "Unmodelled: food aid's harm to local farmers' prices",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": -0.03,
+        "best": -0.01,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Imported food rations can lower local grain prices for farmers near distributions; most of the relief is in deficit areas where the effect is small: -1% (-3% to 0)."
+    },
+    {
+      "id": "ue_dependency_share",
+      "section": "adjustments",
+      "label": "Unmodelled: aid dependency and displaced local initiative",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": -0.03,
+        "best": -0.01,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Long-running area programmes (15 years and more) may crowd out local government services or community self-help: -1% (-3% to 0)."
     },
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "side_effect": "added",
-      "value": {
-        "low": -0.1,
-        "best": 0.05,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "Not modelled, with signs: child protection work (birth registration, ending child marriage), sanitation's and hygiene's own health effects, women's empowerment from savings groups, sponsors' letters and the dignity of being chosen, land restored (+); funging and reserves beyond the waits above, aid dependency and market effects of food aid, the cost of faith work that has no value here (-). Judgment +5% (-10% to +20%)."
+      "formula": "ue_sanitation_share + ue_empowerment_share + ue_food_aid_market_share + ue_dependency_share",
+      "explainer": "The signed items above, each sized against the branch it belongs to. Child protection is already bought inside the education branch's spending, faith work is given no value through faith_share, and funging is in leverage_funging_adj, so none is counted here again."
     },
     {
       "id": "relief_uov",
@@ -1442,6 +1582,15 @@
       "explainer": "Education: later earnings, in units of value (adjusted)."
     },
     {
+      "id": "gik_uov",
+      "section": "bridges",
+      "label": "Donated goods abroad: their value to the people who get them, in units of value (adjusted)",
+      "format": "number",
+      "formula": "gik_people * gik_ln_gain_per_person * $uov_per_ln_consumption * gik_total_adj",
+      "unit": "UoV",
+      "explainer": "Donated goods abroad: their value to the people who get them, in units of value (adjusted)."
+    },
+    {
       "id": "awareness_uov",
       "section": "bridges",
       "label": "Advocacy: US aid kept, valued against cash, in units of value (adjusted)",
@@ -1455,7 +1604,7 @@
       "section": "bridges",
       "label": "Every branch, in GiveWell units of value (adjusted)",
       "format": "number",
-      "formula": "relief_uov + health_uov + wash_uov + livelihood_uov + education_uov + awareness_uov",
+      "formula": "relief_uov + health_uov + wash_uov + livelihood_uov + education_uov + gik_uov + awareness_uov",
       "unit": "UoV",
       "explainer": "Every branch, in GiveWell units of value (adjusted)."
     },
@@ -1532,6 +1681,15 @@
       "explainer": "Education: later earnings, in healthy years."
     },
     {
+      "id": "gik_dalys",
+      "section": "bridges",
+      "label": "Donated goods abroad: their value to the people who get them, in healthy years",
+      "format": "number",
+      "formula": "gik_uov / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "Donated goods abroad: their value to the people who get them, in healthy years."
+    },
+    {
       "id": "awareness_dalys",
       "section": "bridges",
       "label": "Advocacy: US aid kept, valued against cash, in healthy years",
@@ -1582,6 +1740,15 @@
       "label": "Education: later earnings, in healthy years before adjustments",
       "format": "number",
       "formula": "education_dalys / education_total_adj",
+      "unit": "DALYs",
+      "explainer": "For the outcome-weighted averages only."
+    },
+    {
+      "id": "gik_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Donated goods abroad: their value to the people who get them, in healthy years before adjustments",
+      "format": "number",
+      "formula": "gik_dalys / gik_total_adj",
       "unit": "DALYs",
       "explainer": "For the outcome-weighted averages only."
     },

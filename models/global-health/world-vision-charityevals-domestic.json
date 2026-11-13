@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "world-vision",
   "owner": "charityevals",
-  "summary": "World Vision US's domestic programmes ($231 million in fiscal 2025) pass donated corporate goods (clothing, household goods, school and building supplies: $163 million at wholesale value) to US churches, schools and nonprofits from its warehouses. Valued on the site's one log-income scale at low-income Americans' consumption, at 60% of their recorded value as goods given in kind, a dollar does about 0.004 years of healthy life per $1,000, far below the global-health median because the goods go to people in a rich country, where they add little to consumption, not because the work is badly run. World Vision US publishes no count of the households its goods reach, so reach is the goods' value over a judged amount per household and the model is discounted for missing data; the biggest uncertainties are what the goods are worth to families and how many would have reached them anyway.",
+  "summary": "World Vision US's domestic programmes ($231 million in fiscal 2025) pass donated corporate goods (clothing, household goods, school and building supplies: $206 million at wholesale value) to US churches, schools and nonprofits from its warehouses. Valued on the site's one log-income scale at low-income Americans' consumption, at 60% of their recorded value as goods given in kind, a dollar does about 0.004 years of healthy life per $1,000, far below the global-health median because the goods go to people in a rich country, where they add little to consumption, not because the work is badly run. World Vision US publishes no count of the households its goods reach, so reach is the goods' value over a judged amount per household and the model is discounted for missing data; the biggest uncertainties are what the goods are worth to families and how many would have reached them anyway.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: World Vision US, domestic programmes",
@@ -107,10 +107,10 @@
     {
       "id": "goods_granted",
       "section": "reach",
-      "label": "Donated goods passed to US partners, fiscal 2025",
+      "label": "Donated goods handed out in the US, fiscal 2025",
       "format": "usd",
-      "formula": "@world_vision.domestic_goods_granted",
-      "explainer": "Household goods, clothing, toys, building supplies, hygiene and school supplies at wholesale value (Schedule M lists $189.0M of clothing and household goods received, $22.3M building supplies, $19.3M toys, $3.2M school supplies, part of them sent abroad)."
+      "formula": "@world_vision.domestic_gik_expense",
+      "explainer": "Household goods, clothing, toys, building supplies, hygiene and school supplies at wholesale value (KPMG note 16: domestic gifts-in-kind used, $206.0M)."
     },
     {
       "id": "goods_per_household",
@@ -188,7 +188,7 @@
     {
       "id": "inkind_cash_equivalence",
       "section": "effect",
-      "label": "What the goods are worth to the family, as a share of their wholesale value",
+      "label": "What the goods are worth to the family, as a share of their recorded value",
       "format": "percent",
       "value": {
         "low": 0.4,
@@ -196,7 +196,7 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "Corporate surplus goods given in kind: families can't choose what they get, some items go unused, and wholesale value is below what a family would pay at discount retail. Anchored on the literature valuing in-kind transfers (80-95% of face value for food stamps, less for goods the family wouldn't have bought) and on the Salvation Army model's 80% for food and clothing it picks: 60% (40-85%)."
+      "explainer": "Two questions only: choice (families can't pick what they get, so goods they wouldn't have bought are worth less to them than their price: the literature values in-kind transfers at 80-95% of face value for food stamps, less for goods outside the usual budget) and the donors' own wholesale valuation of surplus stock, which may overstate what the goods would sell for. Unused goods are in implementation_adj, not here. Anchored on the Salvation Army model's 80% for food and clothing it buys, lower for corporate surplus: 60% (40-85%)."
     },
     {
       "id": "value_per_person",
@@ -215,17 +215,33 @@
       "explainer": "The site's US survey consumption per person."
     },
     {
+      "id": "poorest_fifth_per_person_share",
+      "section": "effect",
+      "label": "Poorest fifth's consumption per person, as a share of the US average",
+      "format": "percent",
+      "formula": "@united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile",
+      "explainer": "The site's per-person anchor, as the Red Cross and Habitat models compute it: the poorest fifth's household spending over the average, per person (poorer households are smaller)."
+    },
+    {
+      "id": "recipients_vs_poorest_fifth",
+      "section": "effect",
+      "label": "Recipients' consumption per person against the poorest fifth's",
+      "format": "multiple",
+      "value": {
+        "low": 0.45,
+        "best": 0.67,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Families with children in Title I school districts and disaster-hit households are larger than the poorest fifth's average household (1.6 people), so their spending per person is lower; some recipients are better off. Judgment 0.67 (0.45-1.05)."
+    },
+    {
       "id": "recipients_consumption_share",
       "section": "effect",
       "label": "Recipients' consumption per person, as a share of the US average",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.45,
-        "high": 0.7
-      },
-      "kind": "judgment",
-      "explainer": "Partners serve low-income families, schools in poor districts (Title I) and disaster-hit households: about the poorest fifth, whose household spending is 45% of the average (@united_states.ce_lowest_quintile_vs_all_2024; per person higher, as poorer households are smaller, but these are families with children). Judgment 45% (30-70%)."
+      "formula": "poorest_fifth_per_person_share * recipients_vs_poorest_fifth",
+      "explainer": "The anchor times the judged gap: about 0.45."
     },
     {
       "id": "baseline_consumption",
@@ -308,25 +324,59 @@
       "label": "Evidence adjustment",
       "format": "multiple",
       "value": {
-        "low": 0.8,
-        "best": 0.95,
+        "low": 0.9,
+        "best": 1,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The value is the goods at a judged share of their recorded value, which needs no effect study; 0.95 (0.8-1) for valuations that may not match what was given."
+      "explainer": "1: the value is the goods at a judged share of their recorded value, which needs no effect study; the valuation doubt is in inkind_cash_equivalence and unused goods in implementation_adj. 0.9 at the low end for a recorded value that may not match what was handed out."
+    },
+    {
+      "id": "cf_other_charity_share",
+      "section": "adjustments",
+      "label": "Share of the goods that would have reached similar families through another charity",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Without World Vision, corporate surplus goes to other in-kind networks (Good360 and similar), sale to liquidators, or landfill. Good360 and World Vision compete for the same donors; judgment a quarter (10-45%) would have reached similar families anyway."
+    },
+    {
+      "id": "cf_liquidation_share",
+      "section": "adjustments",
+      "label": "Share that would have been sold off cheaply instead",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "Liquidators and discount stores sell surplus at a fraction of wholesale, some of it to low-income buyers. Judgment 25% (10-40%); the rest is destroyed or landfilled."
+    },
+    {
+      "id": "cf_liquidation_value_share",
+      "section": "adjustments",
+      "label": "Share of the goods' value low-income buyers would have got from the sold-off goods",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Discounted goods give buyers some of the value (they pay most of it) and only some buyers are poor. Judgment 30% (10-50%)."
     },
     {
       "id": "counterfactual_adj",
       "section": "adjustments",
       "label": "Share of the goods families wouldn't have got anyway",
       "format": "percent",
-      "value": {
-        "low": 0.4,
-        "best": 0.65,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "Without World Vision, much corporate surplus would still reach families through other in-kind charities (Good360, food banks' non-food lines) or discount sale; some would be destroyed. 65% (40-90%)."
+      "formula": "1 - cf_other_charity_share - cf_liquidation_share * cf_liquidation_value_share",
+      "explainer": "What the families gain that the goods' other uses wouldn't have given similar families: about 67% at the best guesses."
     },
     {
       "id": "attribution_share_shared",
@@ -392,18 +442,54 @@
       "explainer": "The product of the adjustments above."
     },
     {
+      "id": "ue_school_share",
+      "section": "adjustments",
+      "label": "Unmodelled: school supplies' gain in attendance and teachers' time",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": 0,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "School and office supplies are about 1.5% of the domestic goods (KPMG note 16: $3.2M of $206M received); their learning and teachers' time saved beyond their value: +0.3% (0 to +1%)."
+    },
+    {
+      "id": "ue_disaster_share",
+      "section": "adjustments",
+      "label": "Unmodelled: goods arriving when a disaster leaves families short",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": 0,
+        "best": 0.01,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "explainer": "Goods after hurricanes and floods are worth more than their price while shops are shut: +1% (0 to +3%)."
+    },
+    {
+      "id": "ue_displacement_share",
+      "section": "adjustments",
+      "label": "Unmodelled: free goods displacing local shops' sales",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": -0.02,
+        "best": -0.005,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Free clothing and household goods take some sales from small local shops and thrift stores: -0.5% (-2% to 0)."
+    },
+    {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "side_effect": "added",
-      "value": {
-        "low": -0.05,
-        "best": 0.05,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "Not modelled: home repairs that last more than a year and disaster-recovery supplies (+), teachers' time saved and school attendance (+); goods that displace local purchases from small shops (-). +5% (-5% to +20%)."
+      "formula": "ue_school_share + ue_disaster_share + ue_displacement_share",
+      "explainer": "The signed items above. Home repairs' lasting value is not here: a durable good's price already covers its years of use."
     },
     {
       "id": "uov_bridged",
