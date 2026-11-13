@@ -3,13 +3,22 @@
   "name": "Dogs Trust",
   "kind": "charity",
   "cause": "animal-welfare",
-  "beneficiaries": {"GBR":0.97,"IND":0.009,"THA":0.007,"LKA":0.003,"MWI":0.003,"BIH":0.003,"KHM":0.003,"BGR":0.002},
-  "beneficiaries_note": "Our build: by share of the result at the defaults. people in the UK (Freedom's survivors and their children, behaviour-line owners: about 97%) and UK and Irish dogs (under 1%); overseas treatment and neutering (about 3%) spread over WVS's and the grantees' main countries by grant size (a judgment).",
+  "beneficiaries": {
+    "GBR": 0.845,
+    "IND": 0.05,
+    "THA": 0.04,
+    "LKA": 0.015,
+    "MWI": 0.015,
+    "BIH": 0.015,
+    "KHM": 0.015,
+    "BGR": 0.005
+  },
+  "beneficiaries_note": "Our build: by share of the result at the defaults. people in the UK (behaviour-line owners, Freedom's survivors and their children, homeless owners: about 84%) and UK and Irish dogs (under 1%); fewer dog bites and overseas treatment, neutering and training (about 15%) spread over WVS's and the grantees' main countries by grant size (a judgment).",
   "template": "companion-animals",
   "estimate_basis": "unit_cost",
   "charity": "dogs-trust",
   "owner": "charityevals",
-  "summary": "Dogs Trust, the UK's largest dog welfare charity, rehomed about 10,000 dogs in the UK and Ireland in 2025, ran a behaviour support line and other prevention services, fostered dogs for people escaping domestic abuse, campaigned for the 2025 law against puppy smuggling, and through its sister charity Worldwide Veterinary Service treated and sterilised dogs overseas; this model covers all of that except rabies vaccination, which has its own model. At the site's defaults it comes to about 0.00003 years of healthy life per $1,000, far below the median animal charity because care for individual dogs reaches few animals per dollar: $203m for about 756,000 days of a dog's disabling pain spared, nine tenths of them from neutering overseas, and at the default weight on animal suffering the dogs' days count less than the side effects for people: survivors of domestic abuse (and their children) who could leave because Freedom kept their dog, and owners whose dog's behaviour problem was eased (together about 97% of the result, judgments). The biggest uncertainties are that side effect, how much a rehomed or neutered dog's life improves (our judgment, with no study measuring it), and the weight on animal suffering; every branch is discounted for missing data.",
+  "summary": "Dogs Trust, the UK's largest dog welfare charity, rehomed about 10,000 dogs in the UK and Ireland in 2025, ran a behaviour support line and other prevention services, fostered dogs for people escaping domestic abuse, campaigned for the 2025 law against puppy smuggling, and through its sister charity Worldwide Veterinary Service treated and sterilised dogs overseas; this model covers all of that except rabies vaccination, which has its own model. At the site's defaults it comes to about 0.00005 years of healthy life per $1,000, far below the median animal charity because care for individual dogs reaches few animals per dollar: about $205m for a few hundred thousand days of a dog's disabling pain spared, most of them from neutering and treatment overseas, and at the default weight on animal suffering the dogs' days count less than the people the work also helps: owners given behaviour advice, survivors of domestic abuse (and their children) who could leave because Freedom kept their dog, and homeless owners (together most of the result, judgments), and fewer people bitten where neutering shrinks free-roaming populations (a side effect). The biggest uncertainties are the people's gains, how much a rehomed or neutered dog's life improves (our judgment, with no study measuring it), and the weight on animal suffering; every branch is discounted for missing data, and the model's own ranges together span more than a thousandfold, so the figure is mostly uncertainty.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Dogs Trust (rehoming, prevention, international dog welfare and campaigns, 2025)",
@@ -866,6 +875,153 @@
       "formula": "trt_raw * trt_total_adj"
     },
     {
+      "id": "trn_vets_trained",
+      "section": "reach",
+      "label": "Veterinary professionals trained by WVS, 2025",
+      "format": "integer",
+      "value": 4907,
+      "kind": "observed",
+      "source": {
+        "title": "Dogs Trust Annual Report 2025 (year to 31 December 2025)",
+        "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+        "page": "p. 33 (PDF page 17)",
+        "quote": "4,907 veterinary professionals were trained",
+        "retrieved": "2026-11-13"
+      }
+    },
+    {
+      "id": "trn_extra_animals_per_year",
+      "section": "effect",
+      "label": "Training: animals a year treated better because of the training, per person trained",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 30,
+        "high": 150
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: WVS says each vet trained helps thousands over a career (p. 33), but many trainees are already practising and the course changes a part of their work: 30 animals a year treated better (with less pain or a working treatment), 5 (short courses, few patients) to 150 (new surgeons in busy practice)."
+    },
+    {
+      "id": "trn_years_in_practice",
+      "section": "effect",
+      "label": "Training: years the skill is used",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 2,
+        "best": 5,
+        "high": 15
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: skills fade and people leave the work; 5 years, 2 to 15."
+    },
+    {
+      "id": "trn_share_of_treatment_effect",
+      "section": "effect",
+      "label": "Training: pain spared per better-treated animal, as a share of a WVS treatment's",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: better care than they'd have had from the same vet untrained, not care against none: 30% of a WVS treatment's days (trt_pain_days_per_animal), 10% to 60%."
+    },
+    {
+      "id": "trn_raw",
+      "section": "effect",
+      "label": "Training: days of pain spared before adjustments",
+      "format": "number",
+      "unit": "days",
+      "formula": "trn_vets_trained * trn_extra_animals_per_year * pv_annuity_due(1, $discount_rate, trn_years_in_practice) * trn_share_of_treatment_effect * trt_pain_days_per_animal",
+      "explainer": "Bosnia's ~500 vets trained over a decade and WVS's education of 5 million people aren't counted separately; their small yearly share is within these ranges."
+    },
+    {
+      "id": "trn_evidence_adj",
+      "section": "adjustments",
+      "label": "Training: evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "0.6, below the care branches: no follow-up of trainees' practice is published; 0.4 if little of the training is used, 0.8 if close to right."
+    },
+    {
+      "id": "trn_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Training: share that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: some trainees would have learnt elsewhere (universities, other NGOs' courses); 0.7, 0.4 to 0.9."
+    },
+    {
+      "id": "trn_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Training: Dogs Trust's share of the resources",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "As for treatment: training centres' partners and trainees' own time share the cost; 0.6, 0.4 to 0.9."
+    },
+    {
+      "id": "trn_attribution_share",
+      "section": "adjustments",
+      "label": "Training: share of credit used",
+      "format": "percent",
+      "formula": "trn_attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "trn_implementation_adj",
+      "section": "adjustments",
+      "label": "Training: delivery adjustment",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Some counted trainees attend only part of a course: 0.8, 0.6 to 1."
+    },
+    {
+      "id": "trn_missing_data_adj",
+      "section": "adjustments",
+      "label": "Training: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "The shared missing-data step (docs/normalization.md 2.12): trainees are counted, the effect on animals is our judgment."
+    },
+    {
+      "id": "trn_total_adj",
+      "section": "adjustments",
+      "label": "Training: all adjustments combined",
+      "format": "multiple",
+      "formula": "trn_evidence_adj * trn_counterfactual_adj * trn_attribution_share * trn_implementation_adj * trn_missing_data_adj"
+    },
+    {
+      "id": "trn_outcome",
+      "section": "outcome",
+      "label": "Training: days of disabling pain spared",
+      "format": "number",
+      "unit": "days",
+      "formula": "trn_raw * trn_total_adj"
+    },
+    {
       "id": "wvs_sterilisations",
       "section": "reach",
       "label": "Animals sterilised by WVS, 2025",
@@ -886,12 +1042,12 @@
       "label": "Sterilisations paid for by Dogs Trust's grants to overseas organisations, 2025",
       "format": "integer",
       "value": {
-        "low": 5000,
-        "best": 20000,
-        "high": 50000
+        "low": 4000,
+        "best": 12000,
+        "high": 30000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the accounts list £8.7m of grants (note 7(a)) without what they bought. Soi Dog (£1.7m), Hope & Animal Trust (£1.3m), Dogstar (£0.75m), AR Sofia (£0.4m) and smaller groups run neutering programmes; if about £3m of the grants went on sterilisation at £100 to £300 each with surgery, follow-up and catching, that is 10,000 to 30,000. 20,000, 5,000 to 50,000."
+      "explainer": "Our judgment: the accounts list £8.7m of grants (note 7(a)) without what they bought. Soi Dog (£1.7m), Hope & Animal Trust (£1.3m), Dogstar (£0.75m), AR Sofia (£0.4m) and smaller groups run catch-neuter-vaccinate programmes (counted here, not in the rabies model); if about £2.5m of the grants paid for sterilisation at £150 to £400 each all-in (surgery, catching, kennelling, follow-up: our judgment), that is 6,000 to 17,000 operations paid for in full. 12,000, 4,000 to 30,000. These are the operations Dogs Trust's money paid for, so the neutering branch's attribution applies to WVS's 43,444 only in substance; it is applied to all, a small understatement."
     },
     {
       "id": "bosnia_neuters",
@@ -935,17 +1091,133 @@
       "explainer": "WVS's count, Ireland's vouchers, and our judgments for the grants and Bosnia. No UK neutering programme was reported for 2025."
     },
     {
+      "id": "neu_female_share",
+      "section": "effect",
+      "label": "Neutering: share of sterilisations that are females",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: catch-neuter programmes target bitches (and spay queens), but catch whatever they can; 60%, 40% to 80%. Males' sterilisation averts no births on its own in a population with spare males."
+    },
+    {
+      "id": "neu_litters_per_year",
+      "section": "effect",
+      "label": "Neutering: litters a breeding female has a year",
+      "format": "number",
+      "value": {
+        "low": 0.7,
+        "best": 1,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: free-ranging bitches breed about once a year (some twice, some skip); 1, 0.7 to 1.5."
+    },
+    {
+      "id": "neu_pups_per_litter",
+      "section": "effect",
+      "label": "Neutering: pups per litter at first count (West Bengal)",
+      "format": "number",
+      "value": {
+        "low": 3,
+        "best": 3.83,
+        "high": 5
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Paul et al. 2016, High early life mortality in free-ranging dogs is largely influenced by humans, Scientific Reports 6:19641",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4726281",
+        "page": "Abstract",
+        "quote": "364 pups from 95 litters",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "364 pups in 95 litters = 3.83 a litter when first counted (some die before); 3 to 5 for other places and earlier deaths."
+    },
+    {
+      "id": "neu_breeding_years",
+      "section": "effect",
+      "label": "Neutering: breeding years left to a sterilised animal",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: free-roaming adults live a few years; animals sterilised as young adults have about 2 breeding years left, 1 to 4. Counted undiscounted within those years (short)."
+    },
+    {
+      "id": "neu_net_of_rebound",
+      "section": "effect",
+      "label": "Neutering: share of averted births not made up by other dogs",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: where food and shelter hold a population, fewer births raise other pups' survival and immigration; half the averted births stay averted, 20% to 80%. Anchor: sustained programmes cut free-roaming numbers by a quarter to most over years (85% in Sarajevo with enforcement and rehoming, p. 37)."
+    },
+    {
       "id": "births_averted_per_neuter",
       "section": "effect",
       "label": "Unowned animals' births averted per neutering",
       "format": "number",
+      "explainer": "Births a sterilisation averts, net of rebound: the share female × litters a year × pups a litter × remaining breeding years × the share not made up by other dogs breeding or surviving more.",
+      "formula": "neu_female_share * neu_litters_per_year * neu_pups_per_litter * neu_breeding_years * neu_net_of_rebound"
+    },
+    {
+      "id": "neu_pup_death_share",
+      "section": "effect",
+      "label": "Neutering: share of free-ranging pups that die before reproductive age",
+      "format": "percent",
       "value": {
-        "low": 0.5,
-        "best": 2,
-        "high": 5
+        "low": 0.7,
+        "best": 0.81,
+        "high": 0.9
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Paul et al. 2016, High early life mortality in free-ranging dogs is largely influenced by humans, Scientific Reports 6:19641",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4726281",
+        "page": "Abstract",
+        "quote": "~19% of the 364 pups from 95 observed litters surviving till the reproductive age",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "81% die before seven months in West Bengal; 70% to 90% for other places."
+    },
+    {
+      "id": "neu_pain_days_early_death",
+      "section": "effect",
+      "label": "Neutering: days of disabling pain in a pup's life that ends early",
+      "format": "number",
+      "unit": "days",
+      "value": {
+        "low": 2,
+        "best": 8,
+        "high": 25
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the template's anchor: about half of sterilisations are females, a free-roaming bitch has one or two litters of five or six a year, but in a population held by food and shelter most extra pups die young and the rest replace others (rebound), so net births averted per sterilisation over the animal's remaining breeding years are about 2, 0.5 to 5. Long-run programmes show populations falling by a quarter to most over years (85% fewer free-roaming dogs in Sarajevo after 115,000 neuterings, p. 37), but that mixes in rehoming and enforcement."
+      "explainer": "Our judgment: pups die of disease (parvovirus, distemper), starvation, cold and road traffic (63% of deaths human-influenced, Paul et al.); a few days of severe illness or injury plus weeks of hunger at a hurtful level: 8 days of disabling pain, 2 to 25."
+    },
+    {
+      "id": "neu_pain_days_adult_life",
+      "section": "effect",
+      "label": "Neutering: days of disabling pain in a surviving free-ranging dog's life",
+      "format": "number",
+      "unit": "days",
+      "value": {
+        "low": 15,
+        "best": 50,
+        "high": 150
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: a free-roaming adult lives a few years with mange, wounds, transmissible tumours, parasites and hunger at a hurtful level part of the time (0.1 a day for a month or two a year) and dies of injury or disease: 50 days, 15 to 150."
     },
     {
       "id": "pain_days_per_unowned_life",
@@ -953,13 +1225,23 @@
       "label": "Days of disabling pain in the life of an unowned animal that isn't born",
       "format": "number",
       "unit": "days",
+      "explainer": "A birth averted spares either a pup's short life ending in death (most) or an adult's hard life on the street, weighted by Paul et al.'s survival.",
+      "formula": "neu_pup_death_share * neu_pain_days_early_death + (1 - neu_pup_death_share) * neu_pain_days_adult_life"
+    },
+    {
+      "id": "neu_own_days_per_neuter",
+      "section": "effect",
+      "label": "Neutering: the sterilised animal's own days of pain spared, net of surgery",
+      "format": "number",
+      "unit": "days",
       "value": {
-        "low": 10,
-        "best": 40,
-        "high": 120
+        "low": -2,
+        "best": 1,
+        "high": 4
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the template's anchor: most free-roaming pups die within months of disease, starvation or injury, and survivors live with mange, wounds and parasites; about 40 days of disabling pain in a short life, 10 to 120. Net of good days only where measured (not here)."
+      "shape": "normal",
+      "explainer": "Our judgment: a bitch spared pregnancies and nursing in poor condition (about 3 days a litter, 60% females, 2 litters) gains about 3.6 days, against about 2 days of post-operative pain where analgesia is thin: net +1, −2 (painful surgery, few pregnancies avoided) to +4."
     },
     {
       "id": "neuter_pain_days",
@@ -969,6 +1251,14 @@
       "unit": "days",
       "formula": "neuters * births_averted_per_neuter * pain_days_per_unowned_life * (1 + $discount_rate) ^ -1",
       "explainer": "The births come about a year later, discounted at the shared rate."
+    },
+    {
+      "id": "neu_own_raw",
+      "section": "effect",
+      "label": "Neutering: the sterilised animals' own days, before adjustments",
+      "format": "number",
+      "unit": "days",
+      "formula": "neuters * neu_own_days_per_neuter"
     },
     {
       "id": "neu_evidence_adj",
@@ -981,7 +1271,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "0.6, 0.4 to 0.8: how much population falls with neutering varies with coverage and immigration; the births averted are a population-model judgment."
+      "explainer": "0.6, below the care branches' 0.7: births averted rest on a population judgment (rebound, breeding years) with only litter size and pup survival measured; 0.4 if rebound is stronger than we assume, 0.8 if close to right."
     },
     {
       "id": "neu_counterfactual_adj",
@@ -1051,7 +1341,7 @@
       "label": "Neutering: days of disabling pain spared",
       "format": "number",
       "unit": "days",
-      "formula": "neuter_pain_days * neu_total_adj"
+      "formula": "(neuter_pain_days + neu_own_raw) * neu_total_adj"
     },
     {
       "id": "pol_dogs_per_year",
@@ -1117,12 +1407,25 @@
       "explainer": "The win came at the end of a campaign of more than ten years; 2025's spending gets its share of it, not the whole (Convention 11, a past average's cost and wins from the same period). Our judgment 15%, 8% to 30%: the final year's parliamentary push cost more than an average year."
     },
     {
+      "id": "pol_other_laws_factor",
+      "section": "effect",
+      "label": "Policy: all 2025 wins against the import Act alone",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 1.3,
+        "high": 2
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: Dogs Trust's campaigning also shaped the Renters' Rights Act (tenants able to keep pets, fewer dogs given up for housing), the Housing (Scotland) Act and the Dog Theft (Scotland) Bill (the report's 'four major legislative changes', PDF pages 26 and 30); together about 30% more than the import Act, 1 (little effect on dogs' days) to 2."
+    },
+    {
       "id": "pol_raw",
       "section": "effect",
       "label": "Policy: days of pain spared before adjustments",
       "format": "number",
       "unit": "days",
-      "formula": "pol_dogs_per_year * pol_pain_days_per_dog * pol_discounted_years * pol_year_share"
+      "formula": "pol_dogs_per_year * pol_pain_days_per_dog * pol_discounted_years * pol_year_share * pol_other_laws_factor"
     },
     {
       "id": "pol_evidence_adj",
@@ -1208,7 +1511,7 @@
       "label": "Days of pain spared before adjustments, all branches",
       "format": "number",
       "unit": "days",
-      "formula": "reh_raw + sup_raw + prev_raw + trt_raw + neuter_pain_days + pol_raw"
+      "formula": "reh_raw + sup_raw + prev_raw + trt_raw + trn_raw + (neuter_pain_days + neu_own_raw) + pol_raw"
     },
     {
       "id": "animals_helped",
@@ -1249,7 +1552,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches)",
       "format": "multiple",
-      "formula": "(reh_raw * reh_evidence_adj + sup_raw * sup_evidence_adj + prev_raw * prev_evidence_adj + trt_raw * trt_evidence_adj + neuter_pain_days * neu_evidence_adj + pol_raw * pol_evidence_adj) / raw_total",
+      "formula": "(reh_raw * reh_evidence_adj + sup_raw * sup_evidence_adj + prev_raw * prev_evidence_adj + trt_raw * trt_evidence_adj + trn_raw * trn_evidence_adj + (neuter_pain_days + neu_own_raw) * neu_evidence_adj + pol_raw * pol_evidence_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
     },
     {
@@ -1257,7 +1560,7 @@
       "section": "adjustments",
       "label": "Share that wouldn't have happened anyway (outcome-weighted average of the branches)",
       "format": "percent",
-      "formula": "(reh_raw * reh_counterfactual_adj + sup_raw * sup_counterfactual_adj + prev_raw * prev_counterfactual_adj + trt_raw * trt_counterfactual_adj + neuter_pain_days * neu_counterfactual_adj + pol_raw * pol_counterfactual_adj) / raw_total",
+      "formula": "(reh_raw * reh_counterfactual_adj + sup_raw * sup_counterfactual_adj + prev_raw * prev_counterfactual_adj + trt_raw * trt_counterfactual_adj + trn_raw * trn_counterfactual_adj + (neuter_pain_days + neu_own_raw) * neu_counterfactual_adj + pol_raw * pol_counterfactual_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
     },
     {
@@ -1265,7 +1568,7 @@
       "section": "adjustments",
       "label": "Dogs Trust's share of the resources behind the outcome (outcome-weighted average of the branches)",
       "format": "percent",
-      "formula": "(reh_raw * reh_attribution_share_shared + sup_raw * sup_attribution_share_shared + prev_raw * prev_attribution_share_shared + trt_raw * trt_attribution_share_shared + neuter_pain_days * neu_attribution_share_shared + pol_raw * pol_attribution_share_shared) / raw_total",
+      "formula": "(reh_raw * reh_attribution_share_shared + sup_raw * sup_attribution_share_shared + prev_raw * prev_attribution_share_shared + trt_raw * trt_attribution_share_shared + trn_raw * trn_attribution_share_shared + (neuter_pain_days + neu_own_raw) * neu_attribution_share_shared + pol_raw * pol_attribution_share_shared) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
     },
     {
@@ -1273,7 +1576,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches)",
       "format": "percent",
-      "formula": "(reh_raw * reh_attribution_share + sup_raw * sup_attribution_share + prev_raw * prev_attribution_share + trt_raw * trt_attribution_share + neuter_pain_days * neu_attribution_share + pol_raw * pol_attribution_share) / raw_total",
+      "formula": "(reh_raw * reh_attribution_share + sup_raw * sup_attribution_share + prev_raw * prev_attribution_share + trt_raw * trt_attribution_share + trn_raw * trn_attribution_share + (neuter_pain_days + neu_own_raw) * neu_attribution_share + pol_raw * pol_attribution_share) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
     },
     {
@@ -1281,7 +1584,7 @@
       "section": "adjustments",
       "label": "Delivery adjustment (outcome-weighted average of the branches)",
       "format": "percent",
-      "formula": "(reh_raw * reh_implementation_adj + sup_raw * sup_implementation_adj + prev_raw * prev_implementation_adj + trt_raw * trt_implementation_adj + neuter_pain_days * neu_implementation_adj + pol_raw * pol_implementation_adj) / raw_total",
+      "formula": "(reh_raw * reh_implementation_adj + sup_raw * sup_implementation_adj + prev_raw * prev_implementation_adj + trt_raw * trt_implementation_adj + trn_raw * trn_implementation_adj + (neuter_pain_days + neu_own_raw) * neu_implementation_adj + pol_raw * pol_implementation_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
     },
     {
@@ -1289,7 +1592,7 @@
       "section": "adjustments",
       "label": "Counted less where the outcome isn't measured (outcome-weighted average of the branches)",
       "format": "percent",
-      "formula": "(reh_raw * reh_missing_data_adj + sup_raw * sup_missing_data_adj + prev_raw * prev_missing_data_adj + trt_raw * trt_missing_data_adj + neuter_pain_days * neu_missing_data_adj + pol_raw * pol_missing_data_adj) / raw_total",
+      "formula": "(reh_raw * reh_missing_data_adj + sup_raw * sup_missing_data_adj + prev_raw * prev_missing_data_adj + trt_raw * trt_missing_data_adj + trn_raw * trn_missing_data_adj + (neuter_pain_days + neu_own_raw) * neu_missing_data_adj + pol_raw * pol_missing_data_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
     },
     {
@@ -1297,7 +1600,7 @@
       "section": "adjustments",
       "label": "All adjustments combined (outcome-weighted average of the branches)",
       "format": "multiple",
-      "formula": "(reh_outcome + sup_outcome + prev_outcome + trt_outcome + neu_outcome + pol_outcome) / raw_total",
+      "formula": "(reh_outcome + sup_outcome + prev_outcome + trt_outcome + trn_outcome + neu_outcome + pol_outcome) / raw_total",
       "explainer": "The outcome-weighted average of the branches' combined adjustments, for reading only (prevention's research share included)."
     },
     {
@@ -1306,7 +1609,7 @@
       "label": "Days of disabling pain spared",
       "format": "number",
       "unit": "days",
-      "formula": "reh_outcome + sup_outcome + prev_outcome + trt_outcome + neu_outcome + pol_outcome"
+      "formula": "reh_outcome + sup_outcome + prev_outcome + trt_outcome + trn_outcome + neu_outcome + pol_outcome"
     },
     {
       "id": "pain_days_per_dollar",
@@ -1397,7 +1700,7 @@
         "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "Our judgment: intimate-partner violence is associated with life satisfaction about one point lower on the 0-10 scale in population surveys; leaving recovers part of it in the first year. 0.8, 0.2 to 1.5."
+      "explainer": "Our judgment anchored on Pawłowska-Muc et al. 2023 (Frontiers in Public Health, https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2023.1073612/full): 305 Polish women experiencing domestic violence scored 13.78 on the Satisfaction With Life Scale (5 to 35) against 21.04 for 305 who weren't, about 2.4 points on a 0-10 scale; cross-sectional, so part of the gap is other differences, and leaving recovers part of the rest within the first year: 0.8 points, 0.2 to 1.5."
     },
     {
       "id": "freedom_credit",
@@ -1405,12 +1708,12 @@
       "label": "Share of survivors who would not have left without the dog's foster care",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.4
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Our judgment of the counterfactual only: concern for a pet keeps many survivors from leaving (p. 21), but most would leave anyway with refuges', police and support workers' help, or later: 15%, 5% to 40%. Anchor: very few refuges take pets (p. 21)."
+      "explainer": "The one counterfactual question for survivors: the share of the gain that wouldn't have happened without the dog's foster care, counting those who would have left later in proportion to the time gained. Anchor: Freedom exists because very few refuges take pets and survivors face 'an impossible choice: remain at risk or leave their dog behind' (p. 21); most survivors would still leave, many later. 25%, 10% to 50%."
     },
     {
       "id": "freedom_attribution_share_shared",
@@ -1436,7 +1739,7 @@
     {
       "id": "freedom_years_gain",
       "section": "effect",
-      "label": "Years the survivor's life-satisfaction gain lasts",
+      "label": "Years the survivor's life-satisfaction gain lasts (persistence only)",
       "format": "number",
       "unit": "years",
       "value": {
@@ -1445,7 +1748,7 @@
         "high": 4
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the gap closes as life without abuse settles and as the counterfactual survivor leaves later; 1.5 years, 0.5 to 4 (audit round 1 asked for this row in place of a hidden one year)."
+      "explainer": "How long a gain once made persists, not when the survivor would otherwise have left (that is in freedom_credit): 1.5 years, 0.5 to 4, discounted at the shared rate."
     },
     {
       "id": "freedom_children_per_survivor",
@@ -1478,21 +1781,65 @@
       "section": "reach",
       "label": "Owners helped by the behaviour services (excluding Dog School)",
       "format": "integer",
-      "formula": "bsl_dogs + coaching_dogs + clinical_dogs",
-      "explainer": "About one owner per dog; the report says more than 9,500 owners had behaviour advice (p. 7), so this may overstate, which the gain's range covers. Dog School owners are left out: classes for puppies mostly without a problem."
+      "explainer": "Owners given behaviour advice (the line, coaching and clinical cases share owners with several dogs); Dog School owners are left out (puppy classes, mostly no problem).",
+      "value": 9500,
+      "kind": "observed",
+      "source": {
+        "title": "Dogs Trust Annual Report 2025 (year to 31 December 2025)",
+        "url": "https://docs.dogstrust.org.uk/Annual-Report-2025.pdf",
+        "page": "p. 6 (PDF page 4)",
+        "quote": "supported more than 9,500 owners with expert behaviour advice",
+        "retrieved": "2026-11-13"
+      }
     },
     {
       "id": "prev_owner_ls_gain",
       "section": "effect",
-      "label": "Life satisfaction gained by an owner whose dog's behaviour is helped, point-years",
+      "label": "Life satisfaction gained a year by an owner whose dog's problem eases, points",
+      "format": "number",
+      "value": {
+        "low": 0.03,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Reference class: caregiver burden in owners of animals with chronic or behavioural problems, which Spitznagel et al. (Veterinary Record 2017) found raised owners' stress and depression scores against owners of healthy animals; we put relief from a dog's daily separation distress or aggression at 0.1 points of life satisfaction a year, a tenth of the gap the site's sources give for moderate life strains, 0.03 to 0.3. Applies only to the owners whose problem eases (prev_owner_share_eased), for as long as the dog's improvement lasts (prev_years_better_life), discounted."
+    },
+    {
+      "id": "prev_owner_share_eased",
+      "section": "effect",
+      "label": "Share of advised owners whose dog's problem eases",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.33,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, the same third the prevention branch's per-dog effect assumes (prev_suffering_share_avoided): behaviour advice resolves or eases a problem in a minority of cases; 33%, 15% to 50%."
+    },
+    {
+      "id": "homeless_owner_ls_gain",
+      "section": "effect",
+      "label": "Life satisfaction gained by a homeless owner whose dog is treated or who can keep it in accommodation, point-years",
       "format": "number",
       "value": {
         "low": 0,
-        "best": 0.02,
-        "high": 0.1
+        "best": 0.05,
+        "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Our judgment: living with a dog's separation distress or aggression is a daily stress; advice that eases it in about a third of cases is worth about 0.06 points for a year there, 0.02 on average, 0 to 0.1. No study measures it."
+      "explainer": "Our judgment: for people experiencing homelessness a dog is often their main companion (p. 20); free vet care and dog-friendly services keep them together and lift a worry: 0.05 point-years per owner helped, 0 to 0.2. One owner per dog helped."
+    },
+    {
+      "id": "wellbys_freedom_children",
+      "section": "outcome",
+      "label": "WELLBYs for the children who leave with survivors",
+      "format": "number",
+      "unit": "WELLBYs",
+      "side_effect": "added",
+      "formula": "freedom_people_safe * freedom_children_per_survivor * child_gain_share * freedom_ls_gain * pv_annuity_due(1, $discount_rate, freedom_years_gain) * freedom_credit * freedom_attribution_share * people_missing_data_adj",
+      "explainer": "A household spillover (normalization.md 2.16), weighed by the shared slider."
     },
     {
       "id": "people_missing_data_adj",
@@ -1505,12 +1852,77 @@
     {
       "id": "wellbys_people",
       "section": "outcome",
-      "label": "WELLBYs for people: Freedom survivors and their children, and owners helped with behaviour",
+      "label": "WELLBYs for people: Freedom survivors and their children, owners given behaviour advice, homeless owners",
       "format": "number",
       "unit": "WELLBYs",
-      "formula": "(freedom_people_safe * freedom_ls_gain * freedom_years_gain * (1 + freedom_children_per_survivor * child_gain_share) * freedom_credit * freedom_attribution_share + prev_owners * prev_owner_ls_gain * prev_counterfactual_adj * prev_attribution_share * prev_implementation_adj) * people_missing_data_adj",
+      "formula": "(freedom_people_safe * freedom_ls_gain * pv_annuity_due(1, $discount_rate, freedom_years_gain) * freedom_credit * freedom_attribution_share + prev_owners * prev_owner_share_eased * prev_owner_ls_gain * pv_annuity_due(1, $discount_rate, prev_years_better_life) * prev_counterfactual_adj * prev_attribution_share * prev_implementation_adj + homeless_vet_dogs * homeless_owner_ls_gain * sup_counterfactual_adj * sup_attribution_share * sup_implementation_adj) * people_missing_data_adj + wellbys_freedom_children",
+      "explainer": "People the work aims at (Freedom exists for survivors; prevention for dogs and owners living together; Together Through Homelessness for owners), so not a side effect, except the children (their own row, a spillover). Each gain is discounted over its years and carries its branch's counterfactual, credit and delivery; thin data (× people_missing_data_adj). Adopters' own life satisfaction is counted as 0: studies of pet ownership and wellbeing find no consistent effect."
+    },
+    {
+      "id": "bite_dog_years_averted",
+      "section": "effect",
+      "label": "Free-roaming dog-years averted by neutering",
+      "format": "number",
+      "unit": "dog-years",
+      "formula": "neuters * births_averted_per_neuter * (1 - neu_pup_death_share) * neu_adult_years * neu_total_adj"
+    },
+    {
+      "id": "neu_adult_years",
+      "section": "effect",
+      "label": "Years a surviving free-roaming dog lives as an adult",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 6
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: free-roaming adults live a few years; 3, 1 to 6."
+    },
+    {
+      "id": "bites_per_dog_year",
+      "section": "effect",
+      "label": "People bitten per free-roaming dog-year",
+      "format": "number",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.06
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: bite incidence of a few per thousand people a year where free-roaming dogs number about one per 10 to 20 people gives about 0.02 bites per dog-year, 0.005 to 0.06. Anchor: Dogs Trust Bosnia's 75% fall in reported bites alongside 85% fewer free-roaming dogs in Sarajevo (p. 37), bites moving with numbers."
+    },
+    {
+      "id": "dalys_per_bite",
+      "section": "effect",
+      "label": "Healthy years lost per dog bite (injury, not rabies)",
+      "format": "number",
+      "value": {
+        "low": 0.002,
+        "best": 0.008,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: most bites are minor wounds healed in weeks (disability weight about 0.05 for a few weeks), some need surgery or leave scars, and each costs a course of post-exposure shots: 0.008 healthy years, 0.002 to 0.03. Rabies deaths are in the rabies model, not here."
+    },
+    {
+      "id": "dalys_bites_per_donor_dollar",
+      "section": "species",
+      "label": "Healthy years from fewer dog bites, per dollar you give",
+      "format": "small",
+      "unit": "DALYs / $",
       "side_effect": "added",
-      "explainer": "A side effect for people, weighed by the shared slider: survivors (and the children who leave with them) who could leave because Freedom kept their dog, and owners whose dog's behaviour the advice eased (with the prevention branch's own counterfactual, credit and delivery); thin data (× people_missing_data_adj). Adopters' own life satisfaction is counted as 0: studies of pet ownership and wellbeing find no consistent effect."
+      "formula": "bite_dog_years_averted * bites_per_dog_year * dalys_per_bite / cost_total * donor_cost_share",
+      "explainer": "A side effect for people of fewer free-roaming dogs (normalization.md 2.16), weighed by the shared slider."
+    },
+    {
+      "id": "ced_from_daly",
+      "section": "species",
+      "label": "Fewer dog bites, in chicken-equivalent pain days per dollar you give",
+      "format": "number",
+      "formula": "dalys_bites_per_donor_dollar * ($uov_per_daly) / ($chicken_vs_person * $daly_per_sad * $uov_per_daly)",
+      "explainer": "The bridge from DALYs into this model's unit (docs/normalization.md 2.6)."
     },
     {
       "id": "wellbys_bridged",
@@ -1539,14 +1951,14 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "WVS and the grantees work mostly with dogs (Dogs Trust's money is for dogs), with cats and some working animals; our judgment 75%, 60% to 90%. The rest is counted on the cat's weight."
+      "explainer": "WVS and the grantees work mostly with dogs (Dogs Trust's money is for dogs), with cats and some working equines; our judgment 75%, 60% to 90%. The rest is counted on the cat's weight, which is the same stand-in (a pig's) as the dog's, so working equines are not undervalued against dogs."
     },
     {
       "id": "share_dog",
       "section": "species",
       "label": "Share of the days spared that are dogs'",
       "format": "percent",
-      "formula": "(reh_outcome + sup_outcome + prev_outcome + pol_outcome + (trt_outcome + neu_outcome) * intl_share_dog) / outcome_total",
+      "formula": "(reh_outcome + sup_outcome + prev_outcome + pol_outcome + (trt_outcome + trn_outcome + neu_outcome) * intl_share_dog) / outcome_total",
       "explainer": "Every UK, Irish and policy branch is dogs; overseas treatment and neutering are dogs at intl_share_dog. Weighted by days spared."
     },
     {
@@ -1591,9 +2003,9 @@
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give",
       "format": "small",
-      "formula": "ced_dog + ced_cat + ced_from_wellby",
+      "formula": "ced_dog + ced_cat + ced_from_wellby + ced_from_daly",
       "unit": "chicken pain days / $",
-      "explainer": "Every species, already in chicken pain days, plus the people's WELLBYs through their bridge."
+      "explainer": "Every species, already in chicken pain days, plus the people's WELLBYs and DALYs through their bridges."
     }
   ],
   "output": {
