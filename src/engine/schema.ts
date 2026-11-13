@@ -363,6 +363,9 @@ export const Assumptions = z
   .object({
     groups: z.array(AssumptionGroup),
     rows: z.array(Row),
+    /** Ready-made sets of values (the values panel's picker): each sets these sliders, the rest stay at
+     * the defaults. A reader who moves a slider from a set is on Custom. */
+    presets: z.array(z.object({ id: z.string(), label: z.string(), about: z.string(), values: z.record(z.string(), z.number()) }).strict()).optional(),
     units: z.record(z.string(), Unit),
     common: z.object({
       unit: z.string(),
