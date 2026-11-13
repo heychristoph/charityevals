@@ -7,7 +7,7 @@ Each sheet is downloaded as xlsx (once), converted by convert-sheet.py from its 
 written to models/grants/givewell/<id>.json; link-parameters.py --only then ties the new models to the
 shared assumptions (shared facts: the scripts it prints next). The manifest gets each import's row counts back.
 """
-import importlib.util, json, re, subprocess, sys
+import datetime, importlib.util, json, re, subprocess, sys
 from pathlib import Path
 
 spec = importlib.util.spec_from_file_location("convert_sheet", Path(__file__).with_name("convert-sheet.py"))
@@ -74,7 +74,7 @@ for e in manifest:
          "summary": f"GiveWell's spreadsheet \"{name}\", linked from {'its grant page' if len(pages) == 1 else f'{len(pages)} of its grant pages'}. "
                     "Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
          "source": {"publisher": "GiveWell", "title": e["title"], "url": pages[0] if pages else e["url"], "sheet": e["url"],
-                    **({"published": sheet_date(e)} if sheet_date(e) else {}), "retrieved": "2026-10-27",
+                    **({"published": sheet_date(e)} if sheet_date(e) else {}), "retrieved": datetime.date.today().isoformat(),
                     "license": "CC BY-NC-SA 3.0 US"},
          "evaluator": {"name": "GiveWell", "assumptions": {"resource_shares": 0}},
          "resources": [{"title": e["title"], "url": e["url"], "type": "model", "note": "The spreadsheet this page reproduces."}]

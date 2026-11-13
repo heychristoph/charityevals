@@ -65,7 +65,9 @@ export function coverage(lib: Library, charity: string, owner: string): { covere
   // Each evaluator's figure is its own: what its models cover, never another's.
   const ranked = new Set(rankingPlan(lib, charity).filter((e) => e.owner === owner).flatMap((e) => e.parts.map((p) => p.program)));
   const covered = c.lines.filter((l) => ranked.has(l.id)).reduce((s, l) => s + l.dollars!, 0);
-  const total = c.spending?.programme ?? c.lines.reduce((s, l) => s + l.dollars!, 0);
+  // Donated money only: programme spending less lines no donated money reaches (0: paid by their own income).
+  const selfFunded = c.spending ? c.lines.filter((l) => l.dollars === 0).length : 0;
+  const total = c.spending && !selfFunded ? c.spending.programme : c.lines.reduce((s, l) => s + l.dollars!, 0);
   const unmodelled = c.lines.filter((l) => !ranked.has(l.id) && l.dollars! > 0).map((l) => ({ id: l.id, label: l.label, dollars: l.dollars! }));
   return total > 0 ? { covered, total, share: Math.min(1, covered / total), unmodelled } : undefined;
 }

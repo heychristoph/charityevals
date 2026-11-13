@@ -24,13 +24,9 @@ conversions 2.7, money moved 2.8, won reforms 2.9, the invariants in section 3, 
 2026-10-30 and 2026-10-31). It is the rulebook; this skill only says how to apply it. The checks are
 src/engine/invariants.ts; the schema is src/engine/schema.ts.
 
-Worked examples to copy:
-- models/animal-welfare/sinergia-animal.json: species step, shared per-change SAD figures as
-  "changed for consistency" overwrites with ACE's number in `published`, several species from one figure.
-- models/global-health/malaria-consortium-smc.json: `output.native`, `ours` section, PV rebuilt
-  on `$discount_rate` with GiveWell's rate pinned, credit by share of resources.
-- models/global-health/taimaka-hli.json, models/grants/hli/: our discounting and value-of-life levers
-  on an evaluator that has neither, pinned to the Happier Lives Institute's (HLI) values.
+Worked examples to copy: the newest import of the same evaluator and kind of sheet (its links are the
+ones yours needs); models/global-health/malaria-consortium-smc.json (`output.native`, `ours` section, PV
+on `$discount_rate`, credit by share of resources).
 
 **One consistent way** (owner, 2026-10-31; INV-2c checks it): wherever charityevals has its own
 version of a conversion (an exchange rate between outcomes, a DALY definition, value of life,
@@ -59,7 +55,7 @@ every `expected` (the sheet's cached values).
 
 ## 2. Get the rows
 
-- **By hand** (hand-built model): `python3 -I scripts/sheet-dump.py "<sheet url>" --cols A:F > dump.jsonl`
+- **By hand** (hand-built model): `.venv/bin/python -I scripts/sheet-dump.py "<sheet url>" --cols A:F > dump.jsonl`
   in a scratch folder. Read the main tab fully; follow cross-tab references only until you can tell
   a leaf (copy the value, cite the cell) from a step worth modelling.
 - **In bulk**: `python3 scripts/convert-sheet.py sheet.xlsx --spec spec.json --out models/grants/<owner>`
@@ -67,10 +63,11 @@ every `expected` (the sheet's cached values).
   `bulk: true`, and still follow every rule below. The spec sets `estimate_basis` (what the dollar
   is: `past_average`, `marginal` or `unit_cost`; section 5); the GiveWell importer sets `marginal`.
   - GiveWell grant sheets: `scripts/import-givewell-grants.py` (runs `scripts/link-parameters.py`),
-    then `python3 scripts/link-resource-shares.py`. Both only touch GiveWell models: for another
-    evaluator, extend their patterns or link by hand.
-  - Then `scripts/missing-data.ts` (classified, §5), `scripts/beneficiary-countries.ts` (the model's
-    countries in `OURS`, INV-20), `scripts/summaries.ts`, `scripts/bulk-writeups.ts`, and record the
+    then `python3 scripts/link-resource-shares.py`. The other link-*.py scripts rewrite every model:
+    don't run them; copy the newest sibling's links by hand (deaths, discount, `@cash`, shared facts).
+  - A multiple of cash taken from the sheet's own live GiveDirectly tab converts with that tab's
+    figure, not `@cash` (else valuing income more lowers the result).
+  - Then `scripts/missing-data.ts` (classified, §5), `scripts/beneficiary-countries.ts` (INV-20), `scripts/summaries.ts`, `scripts/bulk-writeups.ts`, and record the
     import in `inventory/`. Many at once: [references/batch.md](references/batch.md).
 
 ## 3. Reproduce the evaluator (layer E)
@@ -248,10 +245,9 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
   one SADs figure per physical change). Fix it. A flag you have
   checked by hand and found false (a coincidence of values, a word used otherwise) gets a waiver with
   its reason in src/engine/normalization-waivers.json; the allowlist stays empty. Remove stale waivers.
-- `npx tsx scripts/summaries.ts`, then `npx tsx scripts/simulation-check.ts <id>`: if unstable, fix the
-  cause it prints in our view, else say so in the report (it ranks at its best guess, with a caveat).
-- `npm run check`, `npx vitest run`, `npx tsc --noEmit`; look at the page with `npm run dev` (not in an
-  unattended run).
+- `npx tsx scripts/simulation-check.ts <id>`: if unstable, fix the cause it prints in our view.
+- `npx tsx scripts/summaries.ts`, `npm run check`, `npx vitest run`, `npx tsc --noEmit`, the page
+  (`npm run dev`); in a batch run these come after merging (references/batch.md).
 
 ## 9. Report
 

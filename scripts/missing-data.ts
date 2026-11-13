@@ -192,7 +192,8 @@ for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)
   if (m.kind === "template" || !comparable(lib, m) || m.owner === "charityevals") continue;
   const path = raws.get(m.id)!;
   const text = readFileSync(path, "utf8");
-  let next = text.replace(/^[ \t]+"missing_data": .*\n/m, "");
+  // The field on one line or spread over several (a file written with indent): the whole object goes.
+  let next = text.replace(/^[ \t]+"missing_data": (?:\{[^{}]*\}|.*),?[ \t]*\n/m, "");
   // Variants inherit their parent's, unless named here.
   if (m.kind !== "variant" || BY_ID[m.id]) {
     const rule = classify(m);
