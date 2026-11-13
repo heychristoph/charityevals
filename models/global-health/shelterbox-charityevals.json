@@ -4,27 +4,27 @@
   "kind": "charity",
   "cause": "global-health",
   "beneficiaries": {
-    "SYR": 0.1431,
-    "YEM": 0.1425,
-    "CMR": 0.1348,
-    "TCD": 0.1058,
-    "SOM": 0.0946,
-    "ETH": 0.0677,
-    "BFA": 0.0536,
-    "PSE": 0.0421,
-    "PHL": 0.1057,
-    "MMR": 0.0404,
-    "AFG": 0.0379,
-    "PAK": 0.0166,
-    "BGD": 0.0106,
-    "JAM": 0.0046
+    "SYR": 0.1593,
+    "YEM": 0.1587,
+    "TCD": 0.1178,
+    "SOM": 0.1054,
+    "BFA": 0.0597,
+    "PSE": 0.0469,
+    "CMR": 0.0789,
+    "ETH": 0.0401,
+    "PHL": 0.1142,
+    "MMR": 0.0436,
+    "AFG": 0.0409,
+    "PAK": 0.018,
+    "BGD": 0.0115,
+    "JAM": 0.005
   },
-  "beneficiaries_note": "Our build: by share of the result at the defaults, low-income conflict and displacement settings (Mozambique stand-in) about 78% and Asia and the Caribbean (Bangladesh stand-in) 22%, each spread over its countries by 2025 grants to partners (note 5 of the accounts; Ukraine and Malawi, under 0.2%, left out).",
+  "beneficiaries_note": "Our build: by share of the result at the defaults, the poorest conflict and displacement settings (Mozambique stand-in: Syria, Yemen, Chad, Somalia, Burkina Faso, Gaza) about 65% and the rest (Bangladesh stand-in: Cameroon, Ethiopia, Asia and Jamaica) 35%, each spread over its countries by 2025 grants to partners (note 5 of the accounts; Ukraine and Malawi, under 0.2%, left out).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "shelterbox",
   "owner": "charityevals",
-  "summary": "ShelterBox, a UK disaster-relief charity, gave emergency shelter, household items and cash to more than 231,000 people in 17 countries and territories in 2025, about three fifths of them in conflict and displacement (Syria, Yemen, Cameroon, Chad, Somalia, Gaza) and the rest after disasters (Hurricane Melissa in Jamaica, typhoons in the Philippines, earthquakes in Myanmar and Afghanistan), spending 16.1 million pounds on the programme and 4.8 million on fundraising. This model values the shelter and items as consumption on the site's log scale at two stand-in places' consumption, and adds the few deaths and illnesses they avert. The result is about 0.3 years of healthy life per 1,000 dollars, above most relief models on the site because the aid goes to very poor people, where 46 dollars of goods a person counts for much. The biggest uncertainties are the poorest households' consumption and how much of the spending reaches people as goods; the effect on deaths and illness is our judgment, so the model is discounted by the shared missing-data slider.",
+  "summary": "ShelterBox, a UK disaster-relief charity, gave emergency shelter, household items and cash to more than 231,000 people in 17 countries and territories in 2025, about two thirds of them in conflict and displacement (Syria, Yemen, Cameroon, Chad, Somalia, Gaza) and the rest after disasters (Hurricane Melissa in Jamaica, typhoons in the Philippines, earthquakes in Myanmar and Afghanistan), spending 16.1 million pounds on the programme, 4.8 million on fundraising and, through its US affiliate, 4.3 million dollars more. This model values the shelter and items as consumption on the site's log scale at two stand-in places' consumption (durable shelter spread over its years), adds the few deaths and illnesses they avert, and subtracts the climate harm of making and shipping them. The result is about 0.2 years of healthy life per 1,000 dollars, above most relief models on the site because the aid goes to very poor people, where 46 dollars of goods a person counts for much. The biggest uncertainties are the poorest households' consumption and how much of the spending reaches people as goods; the effect on deaths and illness is our judgment, so the model is discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: ShelterBox's emergency shelter",
@@ -47,6 +47,11 @@
       "title": "Maynard, Parker and Twigg (2017), The effectiveness and efficiency of interventions supporting shelter self-recovery following humanitarian crises: executive summary",
       "url": "https://fic.tufts.edu/wp-content/uploads/Shelter-Executive-Summary.pdf",
       "type": "study"
+    },
+    {
+      "title": "Shelterbox USA, Inc.: audited financial statements, 2025 and 2024",
+      "url": "https://shelterboxusa.org/wp-content/uploads/2026/08/2025-Financial-Statements-Shelterbox-USA.pdf",
+      "type": "charity"
     },
     {
       "title": "OCHA Financial Tracking Service: 2025 response plans by cluster",
@@ -162,12 +167,52 @@
       "explainer": "ShelterBox has one programme in its accounts (charitable activities), so this equals the modelled spending."
     },
     {
+      "id": "usa_total_expenses",
+      "section": "cost",
+      "label": "ShelterBox USA: total expenses, 2025 (dollars)",
+      "format": "usd",
+      "value": 15081825,
+      "kind": "observed",
+      "source": {
+        "title": "Shelterbox USA, Inc.: audited financial statements, years ended December 31, 2025 and 2024",
+        "url": "https://shelterboxusa.org/wp-content/uploads/2026/08/2025-Financial-Statements-Shelterbox-USA.pdf",
+        "page": "p. 5, statement of activities; p. 6, statement of functional expenses",
+        "quote": "Total expenses $ 12,025,312 $ 1,792,957 $ 1,263,556 $ 15,081,825",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "ShelterBox USA is a separate US charity that raises money for ShelterBox Trust: most of the Trust's affiliate income (8.414m pounds, note 2). Its management, fundraising and US staff, training and travel are the cost of raising the money that reaches the programme through it, so they count as overhead here."
+    },
+    {
+      "id": "usa_grants_to_trust",
+      "section": "cost",
+      "label": "ShelterBox USA: grants remitted to ShelterBox Trust, 2025 (dollars)",
+      "format": "usd",
+      "value": 10749327,
+      "kind": "observed",
+      "source": {
+        "title": "Shelterbox USA, Inc.: audited financial statements, years ended December 31, 2025 and 2024",
+        "url": "https://shelterboxusa.org/wp-content/uploads/2026/08/2025-Financial-Statements-Shelterbox-USA.pdf",
+        "page": "p. 6, statement of functional expenses; notes",
+        "quote": "Grant funds remitted to the Trust for the years ended December 31, 2025 and 2024 were $10,749,327 and $9,421,671",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "What ShelterBox USA passed on to the Trust; already in the Trust's spending above, so it is taken out of ShelterBox USA's expenses to leave its own costs. The other 12 affiliates passed on about 0.3m dollars and most are run by volunteers: left out."
+    },
+    {
+      "id": "affiliate_costs_usd",
+      "section": "cost",
+      "label": "ShelterBox USA's own costs (management, fundraising, US programme staff)",
+      "format": "usd",
+      "formula": "usa_total_expenses - usa_grants_to_trust",
+      "explainer": "About 4.3 million dollars: the affiliate's costs beyond what it passed on."
+    },
+    {
       "id": "total_expenses",
       "section": "cost",
-      "label": "Total expenses (programme and fundraising), gifts in kind excluded",
+      "label": "Total expenses (programme, fundraising, ShelterBox USA's own costs), gifts in kind excluded",
       "format": "usd",
-      "formula": "(charitable_gbp + raising_gbp - gik_gbp) * @fx.usd_per_gbp_2025",
-      "explainer": "Total expenditure of 21.584m pounds (statement of financial activities p. 46) less gifts in kind, in dollars."
+      "formula": "(charitable_gbp + raising_gbp - gik_gbp) * @fx.usd_per_gbp_2025 + affiliate_costs_usd",
+      "explainer": "Total expenditure of 21.584m pounds (statement of financial activities p. 46) less gifts in kind, in dollars, plus ShelterBox USA's own costs."
     },
     {
       "id": "overhead_ratio",
@@ -455,15 +500,15 @@
     {
       "id": "w_low_income",
       "section": "effect",
-      "label": "Share of the people reached in low-income conflict and displacement settings (valued at the Mozambique stand-in)",
+      "label": "Share of the people reached in the poorest conflict and displacement settings (valued at the Mozambique stand-in)",
       "format": "percent",
       "value": {
-        "low": 0.5,
-        "best": 0.62,
-        "high": 0.75
+        "low": 0.33,
+        "best": 0.45,
+        "high": 0.58
       },
       "kind": "judgment",
-      "explainer": "The grants (note 5, p. 54) went 4.783m of 7.183m pounds (67%) to partners in Africa (Chad, Cameroon, Somalia, Burkina Faso, Ethiopia, Malawi: 2.777m), the Middle East (Syria, Yemen, Gaza: 1.999m) and Ukraine (7k), and 2.400m to Asia and the Caribbean (Philippines, Myanmar, Afghanistan, Pakistan, Bangladesh, Jamaica). ShelterBox's own deliveries from its warehouses in Barbados, Cebu and Pakistan went mostly to Jamaica, the Philippines and Pakistan, so the people are less weighted to Africa and the Middle East than the grants. Our judgment, 62%, from 50% to 75%. These people are valued at Mozambique's consumption (486 dollars a person, close to Chad's, Somalia's, Yemen's and Syria's), the rest at Bangladesh's (a middle stand-in between Myanmar and Afghanistan below and the Philippines and Jamaica above)."
+      "explainer": "The grants (note 5, p. 54) went 3.558m of 7.183m pounds (50%) to partners in the poorest settings: Chad, Somalia, Burkina Faso and Malawi (1.552m), Syria, Yemen and Gaza (1.999m) and Ukraine (7k), whose household consumption is close to Mozambique's (486 dollars a person in 2024; Chad's, Somalia's and Yemen's are similar, Syria's and Gaza's have collapsed). The rest went to Cameroon and Ethiopia (1.225m; World Bank household consumption per person 1,329 and 910 dollars in 2024, NE.CON.PRVT.CD over SP.POP.TOTL) and to Asia and the Caribbean (2.400m: the Philippines, Myanmar, Afghanistan, Pakistan, Bangladesh, Jamaica), valued at Bangladesh's (1,819 dollars, a middle stand-in between Myanmar, Afghanistan and Ethiopia below and Cameroon, the Philippines and Jamaica above). ShelterBox's own deliveries from its warehouses in Barbados, Cebu and Pakistan went mostly to Jamaica, the Philippines and Pakistan, so the people are less weighted to the poorest group than the grants. Our judgment, 45%, from 33% to 58%."
     },
     {
       "id": "baseline_low",
@@ -476,7 +521,7 @@
     {
       "id": "baseline_mid",
       "section": "effect",
-      "label": "Consumption per person of the people reached in Asia and the Caribbean (2017 PPP $), Bangladesh stand-in",
+      "label": "Consumption per person of the people reached in Cameroon, Ethiopia, Asia and the Caribbean (2017 PPP $), Bangladesh stand-in",
       "format": "usd",
       "formula": "affected_consumption_share * @survey_consumption.survey_to_na_bgd * @bangladesh.consumption_per_person_2024 * @bangladesh.ppp_factor_2017 * cpi_2017_vs_2024",
       "explainer": "Bangladesh's household consumption per person on the survey scale, at the affected households' share, in 2017 prices and PPP."
@@ -498,12 +543,63 @@
       "explainer": "The two baselines weighted by the people, for reading; the log gain is taken for each stand-in."
     },
     {
+      "id": "durable_value_share",
+      "section": "effect",
+      "label": "Share of the value delivered that is durable shelter or repairs lasting beyond the year",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Part of the work builds or repairs shelter that lasts years: in Somalia 200 durable and 130 mudbrick shelters (p. 13), mudbrick homes in Chad (p. 10), thousands of rural homes repaired in Myanmar (p. 10), transitional shelters and storm strapping in the Philippines (p. 11), roof repairs in Jamaica (p. 15). Tents, tarpaulins and household items are used up within about a year. Our judgment, a fifth of the value, from a tenth to 35%."
+    },
+    {
+      "id": "durable_life_years",
+      "section": "effect",
+      "label": "Years a durable shelter or repair is used",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 8
+      },
+      "kind": "judgment",
+      "explainer": "Mudbrick and timber-framed shelters with plinths and repaired roofs last several years with upkeep, less where families are displaced again. Our judgment, four years, from two to eight.",
+      "unit": "years"
+    },
+    {
+      "id": "x_low",
+      "section": "effect",
+      "label": "Value delivered as a share of a year's consumption, poorest settings",
+      "format": "number",
+      "formula": "value_delivered_per_person * cpi_2017_vs_2025 * @mozambique.ppp_factor_2017 / baseline_low",
+      "explainer": "The aid per person over the Mozambique stand-in's yearly consumption, both in 2017 PPP dollars."
+    },
+    {
+      "id": "x_mid",
+      "section": "effect",
+      "label": "Value delivered as a share of a year's consumption, the other settings",
+      "format": "number",
+      "formula": "value_delivered_per_person * cpi_2017_vs_2025 * @bangladesh.ppp_factor_2017 / baseline_mid",
+      "explainer": "The aid per person over the Bangladesh stand-in's yearly consumption."
+    },
+    {
       "id": "ln_gain_low",
       "section": "effect",
-      "label": "ln(consumption) gain per person, low-income settings",
+      "label": "ln(consumption) gain per person, poorest settings",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2025 * @mozambique.ppp_factor_2017 / baseline_low)",
-      "explainer": "A year's aid at the Mozambique stand-in's consumption."
+      "formula": "(1 - durable_value_share) * ln(1 + x_low) + durable_value_share * pv_annuity_due(1, $discount_rate, durable_life_years) * ln(1 + x_low / durable_life_years)",
+      "explainer": "Items used within the year as one year's consumption; durable shelter's value spread evenly over its years of use, each year discounted."
+    },
+    {
+      "id": "ln_gain_mid",
+      "section": "effect",
+      "label": "ln(consumption) gain per person, the other settings",
+      "format": "number",
+      "formula": "(1 - durable_value_share) * ln(1 + x_mid) + durable_value_share * pv_annuity_due(1, $discount_rate, durable_life_years) * ln(1 + x_mid / durable_life_years)",
+      "explainer": "As for the poorest settings, at the Bangladesh stand-in's consumption."
     },
     {
       "id": "ln_gain_mid",
@@ -520,6 +616,30 @@
       "format": "number",
       "formula": "w_low_income * ln_gain_low + (1 - w_low_income) * ln_gain_mid",
       "explainer": "Each stand-in's log gain at its own consumption, weighted by the people."
+    },
+    {
+      "id": "tco2e_per_usd_goods",
+      "section": "effect",
+      "label": "Emissions of making and shipping the aid, per dollar delivered",
+      "format": "small",
+      "value": {
+        "low": 0.0004,
+        "best": 0.0008,
+        "high": 0.0015
+      },
+      "kind": "judgment",
+      "explainer": "ShelterBox's tent life-cycle study puts a family tent at about 385 kg of CO2e over its life (annual report p. 17), and shelter items are about three quarters of its emissions; at a few hundred dollars a tent delivered that is about 1 kg a dollar. Cash, local materials and labour carry less. Our judgment, 0.8 kg (0.0008 t) a dollar of aid, from 0.4 to 1.5 kg.",
+      "unit": "tCO2e / $"
+    },
+    {
+      "id": "tco2e_from_aid",
+      "section": "effect",
+      "label": "Emissions of the aid delivered in the year",
+      "format": "number",
+      "formula": "people_reached * value_delivered_per_person * tco2e_per_usd_goods",
+      "unit": "tCO2e",
+      "explainer": "A harm, a side effect: tonnes of CO2e from making and shipping the year's aid.",
+      "side_effect": "added"
     },
     {
       "id": "evidence_adj",
@@ -627,19 +747,6 @@
       "explainer": "The product of the adjustments above."
     },
     {
-      "id": "durable_shelter_share",
-      "section": "adjustments",
-      "label": "Durable and mudbrick shelters lasting beyond the year, as a share of modelled value",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.06,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "Part of the work builds shelters that last years (in Somalia 200 durable and 130 mudbrick shelters, p. 13; mudbrick homes in Chad, p. 10; pakka houses in Pakistan in 2024), while the goods are counted as one year's consumption. Our judgment: a tenth of the value in shelters that give about another year and a half of use, discounted, 6% of the modelled value, from 0 to 15%."
-    },
-    {
       "id": "preparedness_share",
       "section": "adjustments",
       "label": "Preparedness, training and tenancy support, as a share of modelled value",
@@ -655,24 +762,58 @@
     {
       "id": "harms_share",
       "section": "adjustments",
-      "label": "Harms not modelled (funging, crowding out local markets, emissions), as a share of modelled value",
+      "label": "Harms not modelled (funging, crowding out local markets), as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": -0.06,
-        "best": -0.02,
+        "low": -0.05,
+        "best": -0.015,
         "high": 0
       },
       "kind": "judgment",
-      "explainer": "Restricted gifts that let ShelterBox move unrestricted money elsewhere (all its work is the same kind, so little), items crowding out local traders, and the emissions of tents and freight (a tent's footprint is about 385 kg of CO2e, p. 17; at the site's deaths per tonne this is well under 1% of a family's value). Our judgment, -2%, from -6% to 0."
+      "explainer": "Restricted gifts that let ShelterBox move unrestricted money elsewhere (all its work is the same kind, so little) and items crowding out local traders. The emissions of the aid are counted in the climate rows below. Our judgment, -1.5%, from -5% to 0."
     },
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "durable_shelter_share + preparedness_share + harms_share",
-      "explainer": "The three shares above, summed with their signs.",
+      "formula": "preparedness_share + harms_share",
+      "explainer": "The two shares above, summed with their signs.",
       "side_effect": "added"
+    },
+    {
+      "id": "air_pollution_weight",
+      "section": "bridges",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "0",
+      "explainer": "0: the emissions are mostly from factories making polyester and polyethylene goods and from ocean and air freight, far from the people the smoke would harm, so only the shared heat deaths per tonne count (the climate skeleton's air-pollution weight, docs/normalization.md 2.5)."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "bridges",
+      "label": "Air-pollution deaths averted per tonne, counted directly (none here)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
+    },
+    {
+      "id": "tco2e_bridged",
+      "section": "bridges",
+      "label": "Climate: the aid's emissions, as tonnes of CO2e averted (negative; before adjustments)",
+      "format": "number",
+      "formula": "0 - tco2e_from_aid",
+      "unit": "t CO₂e",
+      "explainer": "The emissions enter as negative tonnes averted."
+    },
+    {
+      "id": "dalys_from_tco2e",
+      "section": "bridges",
+      "label": "Climate, in healthy years",
+      "format": "number",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
       "id": "uov_bridged",
@@ -717,21 +858,21 @@
       "unit": "DALYs"
     },
     {
-      "id": "outcome_total",
-      "section": "outcome",
-      "label": "Years of healthy life",
-      "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
-      "unit": "DALYs",
-      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
-    },
-    {
       "id": "dalys_per_dollar",
       "section": "outcome",
       "label": "Years of healthy life per dollar",
       "format": "small",
       "formula": "outcome_total / cost_total",
       "unit": "DALYs / $"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby + dalys_from_tco2e) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion (the aid's emissions as negative tonnes), times the adjustments: the emissions count as far as the aid itself is ShelterBox's doing."
     },
     {
       "id": "staff_costs_gbp",
@@ -751,12 +892,28 @@
       "unit": "GBP"
     },
     {
+      "id": "usa_staff_usd",
+      "section": "donor",
+      "label": "ShelterBox USA: salaries, taxes and benefits, 2025 (dollars)",
+      "format": "usd",
+      "value": 2821178,
+      "kind": "observed",
+      "source": {
+        "title": "Shelterbox USA, Inc.: audited financial statements, years ended December 31, 2025 and 2024",
+        "url": "https://shelterboxusa.org/wp-content/uploads/2026/08/2025-Financial-Statements-Shelterbox-USA.pdf",
+        "page": "p. 6, statement of functional expenses",
+        "quote": "Salaries, taxes and benefits $ 913,781 $ 1,126,380 $ 781,017 $ 2,821,178",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The affiliate's staff, whose costs are in the overhead above."
+    },
+    {
       "id": "staff_cost_share",
       "section": "donor",
       "label": "Staff pay as a share of program cost",
       "format": "percent",
-      "formula": "staff_costs_gbp * @fx.usd_per_gbp_2025 / total_expenses",
-      "explainer": "ShelterBox's own share from its audited accounts: staff costs over total expenses (gifts in kind excluded), about 35%."
+      "formula": "(staff_costs_gbp * @fx.usd_per_gbp_2025 + usa_staff_usd) / total_expenses",
+      "explainer": "ShelterBox's own share from its audited accounts and ShelterBox USA's: both staff costs over total expenses (gifts in kind excluded), about 37%."
     },
     {
       "id": "salary_gap",
@@ -764,7 +921,7 @@
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
       "formula": "@staff_pay.gap_uk_charity",
-      "explainer": "The shared pay gap for UK charity staff (@staff_pay.gap_uk_charity): almost all of ShelterBox's 142 staff are employed by the UK charity in Truro."
+      "explainer": "The shared pay gap for UK charity staff (@staff_pay.gap_uk_charity): most of the staff are the Trust's 142 in Truro; ShelterBox USA's US staff (about a quarter of the pay) are at a similar nonprofit discount."
     },
     {
       "id": "salary_sacrifice",
