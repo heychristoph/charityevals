@@ -6,8 +6,10 @@ For an orchestrator running many import-cea or build-cea agents, and for each ag
 
 - Agents' worktrees start from the remote's `main`: push the commit the batch starts from, or each agent
   must fast-forward to local `main` first (below).
-- `python3 -m venv .venv && .venv/bin/pip install openpyxl`: the sheet scripts run as
-  `.venv/bin/python -I scripts/…` (`-I` hides packages installed with `--user`).
+- `python3 -m venv .venv && .venv/bin/pip install openpyxl` in the main checkout: the sheet scripts run
+  as `.venv/bin/python -I scripts/…` (`-I` hides packages installed with `--user`). In a worktree `.venv`
+  isn't there (it isn't committed): use the main checkout's, `"$(git rev-parse --path-format=absolute
+  --git-common-dir)/../.venv/bin/python" -I scripts/…`.
 - `npm ci`, then `npm run check` and `npx vitest run` pass on the starting commit: a failure you inherit
   looks like yours.
 - Write the batch list, `[{ "charity", "kind": "build" | "import", "branch" }]`, to a file outside the
