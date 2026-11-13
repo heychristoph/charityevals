@@ -4,7 +4,7 @@ World Vision is a Christian humanitarian organisation. World Vision US raises mo
 
 About half of that is relief: food and cash for people in food crises, and a few deaths averted. Livelihoods work, child health and nutrition, clean water and education make up the rest. World Vision US publishes no outcome figures for its own spending, so every part is built from its spending, judged costs per person and the research on that kind of work. Every part is discounted for missing data.
 
-Its US programme passes donated goods to churches, schools and nonprofits. It does about <span data-figure="headline" data-model="world-vision-charityevals-domestic">0.004</span> per 1,000 dollars, because the goods go to people in a rich country, where they add little to what a family consumes.
+Its US programme passes donated goods to churches, schools and nonprofits. It does about <span data-figure="headline" data-model="world-vision-charityevals-domestic">0.006</span> per 1,000 dollars, because the goods go to people in a rich country, where they add little to what a family consumes.
 
 ### What the charity does
 
@@ -20,7 +20,7 @@ Figures are World Vision US's Form 990 for the year to 30 September 2025:
 2. Community health workers' visits in pregnancy and after birth cut newborn deaths and stillbirths; malnutrition treatment, nets and child health care avert some later child deaths.
 3. A new water point cuts diarrhoeal deaths a little and saves hours of fetching water.
 4. Savings groups and farming support raise household consumption a little; reading programmes raise learning and, later, earnings.
-5. Donated goods in the US save low-income families some spending.
+5. Donated clothing, household goods and supplies, shipped abroad or handed out in the US, save families some spending.
 6. Advocacy may keep a little US foreign aid.
 
 ### How the model works
@@ -29,7 +29,7 @@ Figures are World Vision US's Form 990 for the year to 30 September 2025:
 - **The split**: World Vision US doesn't say how its international money divides. We judge 45% relief, a bit above the whole World Vision partnership's 39%, since World Vision US receives the partnership's US public grants. We split the development money by judgment: 30% health and nutrition, 25% water, 6% church work (no value on this scale), the rest livelihoods and education. Donated goods shipped abroad are taken out first and valued as goods.
 - **Relief**: people reached are the spending at the partnership's cost per person reached ($1,060 million for 35.6 million people). Excess deaths in the crisis are the gap between a crisis death rate and the countries' normal rate, a tenth of it averted over about two months. The food and cash are also valued on the site's log-income scale at crisis-affected people's consumption.
 - **Health**: children covered are spending over a judged $150 per child. Newborn deaths and stillbirths fall by the Cochrane review's effect for community newborn packages. Later child deaths fall by a judged 6%.
-- **Water**: people served are spending over a judged $100 a person, anchored on the partnership's 2.8 million people given water and World Vision US's share of the development money. Diarrhoeal deaths fall by a judged 12% over the water point's working years, discounted. Time saved is worth about 1% of consumption.
+- **Water**: people served are spending over a judged $150 a person, anchored on the partnership's 2.8 million people given water and World Vision US's share of the development money. Diarrhoeal deaths fall by a judged 12% over the water point's working years, discounted. Time saved is worth about 1% of consumption.
 - **Livelihoods and education**: households reached over a judged $180 each (anchored the same way on the partnership's reach), a 1.5% consumption gain for two years; children reached over a judged cost, a small learning gain carried into adult earnings.
 - **Goods shipped abroad** ($43 million of clothing, furniture and supplies): their value to the people who get them, at 45% of US wholesale value, on the log-income scale.
 - **Domestic**: the goods' value over a judged $180 per household, worth 60% of that to the family, on the log-income scale at low-income American families' consumption (the poorest fifth's per person, judged lower for families with children); a third of the goods would have reached similar families anyway.
@@ -58,6 +58,7 @@ Beyond a share in unmodelled benefits: child protection (birth registration, end
 The mechanical audit (`scripts/audit-model.ts`) runs on both models, and independent auditors (a fresh agent each round, using the audit-cea skill) checked them; the rounds are in `audits/world-vision-charityevals/` and `audits/world-vision-charityevals-domestic/`.
 
 - **Round 1**: one high finding in the international model and two in the domestic one. The unmodelled-benefits share was a typed 5% shared by several models and counted funging and faith twice; it is now a sum of signed, sized items in both. The domestic goods were understated: KPMG's note on gifts-in-kind used at home ($206 million) replaced the 990's grants line ($163 million). Mediums fixed: livelihoods and water costs per person anchored on the partnership's reach (they had implied more people than the whole partnership reported), donated goods abroad split out as their own branch, relief given an attribution share for WFP's costs off World Vision's books and a counterfactual about who would have been helped, the crisis deaths' ages taken from the site's WHO split, and the domestic model's consumption anchor, counterfactual and overlapping adjustments reworked. Together these lowered the international result by about a fifth and raised the domestic one by about a third.
+- **Round 2** (verification, both models): no high finding. Fixed after it: the domestic summary's stale figure, the water cost per person ($100 to $150, by its own anchor's arithmetic), and explainer wording; a third, short verification round checked those changes.
 
 ### Sources
 
