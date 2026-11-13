@@ -1,6 +1,6 @@
 ### Summary
 
-The Machine Intelligence Research Institute (MIRI) works to prevent extinction from AI smarter than humans. Since 2024 it has worked mainly through communications and governance research rather than technical alignment research. Our model of both its programmes in 2025 comes to **<span data-figure="headline" data-model="machine-intelligence-research-institute-charityevals">0.087</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.003 to about 3.
+The Machine Intelligence Research Institute (MIRI) works to prevent extinction from AI smarter than humans. Since 2024 it has worked mainly through communications and governance research rather than technical alignment research. Our model of both its programmes in 2025 comes to **<span data-figure="headline" data-model="machine-intelligence-research-institute-charityevals">0.064</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.002 to about 3.
 
 ### What the charity does
 
@@ -35,11 +35,11 @@ MIRI roughly tripled its reserves in 2026 and is well above its two-year target,
 
 ### What drives the result
 
-The result is about 240 times lower than the Nuclear Threat Initiative's. The main reason is that Rethink's typical AI project cuts its risk between a 150th and a 400th as much per dollar as a typical nuclear or pandemic project. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment, nine tenths of AI risk. MIRI's own adjustments are close to NTI's. Deaths of people alive now are almost 90% of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 1.4.
+The result is about 330 times lower than the Nuclear Threat Initiative's. The main reason is that Rethink's typical AI project cuts its risk far less per dollar than a typical nuclear or pandemic project: a 170th to a 260th as much for extinction, and about a thousandth as much for catastrophes the world survives. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment. In its model that is nine tenths of the risk of extinction from AI but only about a quarter of the catastrophes the world survives, most of which come from misuse. MIRI's own adjustments are close to NTI's. Deaths of people alive now are about 85% of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 1.4.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.011 to 0.58.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.008 to 0.43.
 - **How much a dollar of AI safety work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way.
 - **The discount rate and the years a cut counts.** These are shared sliders.
 - **Whether the book changes policy.** Its reach is measured; its effect on governments is not.
@@ -52,7 +52,7 @@ The result is about 240 times lower than the Nuclear Threat Initiative's. The ma
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. Round 1 of the independent audit found one high issue: the shared cut per dollar for AI came from Rethink's misalignment project but was applied to all AI risk. The shared figure now counts only misalignment's nine tenths, for every model, which lowers this result by a tenth. The round also corrected the write-up's account of what drives the result, and netted the office-sharing fees out of overhead. Independent audits are in audits/machine-intelligence-research-institute-charityevals/.
+The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. Round 1 of the independent audit found one high issue: the shared cut per dollar for AI came from Rethink's misalignment project but was applied to all AI risk. The shared figure now counts only misalignment's nine tenths, for every model, which lowered this result by a tenth. The round also corrected the write-up's account of what drives the result, and netted the office-sharing fees out of overhead. Round 2 found that the same nine tenths had been applied to catastrophes the world survives, where Rethink's model makes misalignment only about a quarter. The shared figure for those catastrophes now uses that quarter, which lowered this result by about a quarter. Independent audits are in audits/machine-intelligence-research-institute-charityevals/.
 
 ### Sources
 
