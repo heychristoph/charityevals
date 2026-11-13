@@ -13,7 +13,7 @@ import "./rankings.css";
 export const CAUSE_LABEL: Record<string, string> = {
   "global-health": "Global health",
   "animal-welfare": "Animal welfare",
-  "ai-safety": "AI safety",
+  "catastrophic-risk": "Catastrophic risk",
   climate: "Climate",
 };
 

@@ -1,0 +1,868 @@
+{
+  "id": "direct-relief-charityevals-us",
+  "name": "Direct Relief: medicines and grants for US safety-net clinics",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"USA":1},
+  "beneficiaries_note": "Our build: medicines and grants for US safety-net clinics and disaster recovery, all in the United States and its territories.",
+  "template": "direct-health",
+  "estimate_basis": "unit_cost",
+  "charity": "direct-relief",
+  "owner": "charityevals",
+  "summary": "In the US, Direct Relief gives donated medicines and supplies ($297m at wholesale value in the year to June 2025, much of it generics for chronic illness, naloxone and contraceptives) to about 2,000 health centres, free clinics and charitable pharmacies serving uninsured patients, and $37m in grants for clinics and disaster recovery (Los Angeles fires, Hurricanes Helene and Milton). The health they buy is priced at what a marginal dollar of US health spending buys (5 deaths and 15 years of healthy life lost to illness per $10m in 2019 dollars, Vanness et al. 2021; deaths valued by age), raised by half for patients who would otherwise go without, and Direct Relief is credited with its own cash's share of the resources, the donated goods being the manufacturers'. The result, about 0.003 years of healthy life per $1,000, is far below the site's median because health is bought at US prices: a year of healthy life costs about a hundred times more at the margin in the US than in the countries Direct Relief serves abroad. Both branches are discounted by the shared missing-data slider: nothing measures the health these medicines produce.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: Direct Relief, medicines and grants in the United States (fiscal 2025)",
+    "url": "https://charityevals.org/direct-relief-charityevals-us",
+    "published": "2026-11-13",
+    "retrieved": "2026-11-13"
+  },
+  "resources": [
+    {
+      "title": "Direct Relief and Affiliates, Report of Independent Auditors and Consolidated Financial Statements, June 30, 2025 and 2024 (Baker Tilly, audited)",
+      "url": "https://www.directrelief.org/wp-content/uploads/2026/01/Direct-Relief-2025-Audit-FS-Report-Final.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "Direct Relief, Fiscal Year 2025 Annual Report (July 2024 to June 2025)",
+      "url": "https://www.directrelief.org/wp-content/uploads/2026/04/Direct-Relief-Annual-Report-FY-2025-Web.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "Vanness, Lomas, Ahn (2021), A Health Opportunity Cost Threshold for Cost-Effectiveness Analysis in the United States, Annals of Internal Medicine 174(1):25-32",
+      "url": "https://pure.psu.edu/en/publications/a-health-opportunity-cost-threshold-for-cost-effectiveness-analys/",
+      "type": "study"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "us_donated_goods",
+      "section": "cost",
+      "label": "US: donated medicines and supplies distributed (wholesale value)",
+      "format": "usd",
+      "value": 296794000,
+      "kind": "observed",
+      "source": {
+        "title": "Direct Relief and Affiliates, Report of Independent Auditors and Consolidated Financial Statements, June 30, 2025 and 2024 (Baker Tilly, audited)",
+        "url": "https://www.directrelief.org/wp-content/uploads/2026/01/Direct-Relief-2025-Audit-FS-Report-Final.pdf",
+        "retrieved": "2026-11-13",
+        "page": "p. 7 (thousands)",
+        "quote": "supplies distributed - donated 296,794 1,621,563 1,918,357"
+      },
+      "explainer": "Goods given by manufacturers, valued at wholesale acquisition cost (p. 15): the manufacturers' resources, which enter the credit share (attribution_share_shared), not the cost."
+    },
+    {
+      "id": "us_grants",
+      "section": "cost",
+      "label": "US: cash grants to clinics and community organisations",
+      "format": "usd",
+      "value": 37482000,
+      "kind": "observed",
+      "source": {
+        "title": "Direct Relief and Affiliates, Report of Independent Auditors and Consolidated Financial Statements, June 30, 2025 and 2024 (Baker Tilly, audited)",
+        "url": "https://www.directrelief.org/wp-content/uploads/2026/01/Direct-Relief-2025-Audit-FS-Report-Final.pdf",
+        "retrieved": "2026-11-13",
+        "page": "p. 7 (thousands)",
+        "quote": "Grants and stipends 37,482 31,273 68,755"
+      },
+      "explainer": "Grants to health centres, free clinics and charitable pharmacies and for disasters (Los Angeles wildfires $7.4m, Hurricane Helene $4.5m, Hurricane Milton $1.2m: annual report p. 44). Their own branch (grt_)."
+    },
+    {
+      "id": "us_procured",
+      "section": "cost",
+      "label": "US: medicines and supplies Direct Relief bought",
+      "format": "usd",
+      "value": 3003000,
+      "kind": "observed",
+      "source": {
+        "title": "Direct Relief and Affiliates, Report of Independent Auditors and Consolidated Financial Statements, June 30, 2025 and 2024 (Baker Tilly, audited)",
+        "url": "https://www.directrelief.org/wp-content/uploads/2026/01/Direct-Relief-2025-Audit-FS-Report-Final.pdf",
+        "retrieved": "2026-11-13",
+        "page": "p. 7 (thousands)",
+        "quote": "supplies distributed - procured 3,003 11,540 14,543"
+      },
+      "explainer": "Bought with Direct Relief's cash, so in its cost; added to the donated goods' value at cost."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "US programme spending in cash, fiscal 2025",
+      "format": "usd",
+      "value": 52636000,
+      "kind": "observed",
+      "source": {
+        "title": "Direct Relief and Affiliates, Report of Independent Auditors and Consolidated Financial Statements, June 30, 2025 and 2024 (Baker Tilly, audited)",
+        "url": "https://www.directrelief.org/wp-content/uploads/2026/01/Direct-Relief-2025-Audit-FS-Report-Final.pdf",
+        "retrieved": "2026-11-13",
+        "page": "p. 7 (thousands)",
+        "quote": "Total functional expenses June 30, 2025 402,371 $ 1,890,911 $ 2,293,282 $"
+      },
+      "explainer": "Direct Relief's own spending on its US programme in the year to 30 June 2025, the latest with audited accounts: grants, bought medicines, freight, warehousing and staff. The USA column, $402,371k, less donated goods distributed ($296,794k), expired donated stock written off ($52,595k) and donated freight ($346k). Donated goods enter the credit share instead (Convention 2)."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses in cash, fiscal 2025 (all programmes, administration and fundraising)",
+      "format": "usd",
+      "formula": "@direct_relief.cash_total_expenses",
+      "explainer": "The shared Direct Relief figure: total expenses less every non-cash item."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Programme expenses in cash, fiscal 2025 (USA and international)",
+      "format": "usd",
+      "formula": "@direct_relief.cash_program_expenses",
+      "explainer": "The shared Direct Relief figure: programme expenses less the non-cash items."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ programme expenses, cash)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programmes in proportion to their cash cost."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the US programme, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio",
+      "explainer": "Cash programme spending times the overhead multiplier."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "Patient-years of medicine delivered in the US (defined daily doses ÷ 365)",
+      "format": "integer",
+      "formula": "@direct_relief.ddd_total * (1 - @direct_relief.int_ddd_share) / 365",
+      "explainer": "The year's defined daily doses not sent abroad, over 365: reach as years of treatment, dispensed by about 2,000 US partners (annual report p. 16), mostly community health centres, free and charitable clinics and pharmacies."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per patient-year of medicine delivered",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: Direct Relief's cash per patient-year of medicine its US partners received."
+    },
+    {
+      "id": "years_of_coverage",
+      "section": "reach",
+      "label": "Years each patient-year of medicine covers",
+      "format": "number",
+      "formula": "1",
+      "explainer": "One: reach is already counted in patient-years of treatment."
+    },
+    {
+      "id": "baseline_mortality_rate",
+      "section": "effect",
+      "label": "Baseline death rate (not used)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "Not used: the death rate these medicines change isn't measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
+    },
+    {
+      "id": "mortality_reduction",
+      "section": "effect",
+      "label": "Mortality reduction (not used)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "Not used: the death rate these medicines change isn't measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
+    },
+    {
+      "id": "indirect_deaths_ratio",
+      "section": "effect",
+      "label": "Indirect deaths per direct death (not used)",
+      "format": "number",
+      "formula": "0",
+      "explainer": "Not used: the death rate these medicines change isn't measured; deaths averted come from the health-system figure instead (deaths_averted_per_person)."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per patient-year of medicine (before adjustments)",
+      "format": "small",
+      "formula": "goods_local_value / people_reached * need_vs_marginal * deaths_per_dollar",
+      "explainer": "The medicines' value per patient-year, times the need ratio, times deaths averted per marginal US health dollar."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of deaths averted under five",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "None: the deaths in the threshold are of people losing insurance, adults under 65."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of deaths at five or older, share aged 5 to 14",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "None, as above."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of deaths at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "The threshold's deaths are of insured adults under 65; US deaths at 18 to 64 are concentrated at 50 to 64 (chronic disease). Our judgment, 30% (20% to 40%); the rest are valued at the 50 to 74 band."
+    },
+    {
+      "id": "morbidity_value_ratio",
+      "section": "effect",
+      "label": "Illness as a share of deaths' and income's value (none)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "Zero: illness is counted once, in the DALYs below (high-income-care.md)."
+    },
+    {
+      "id": "stillbirths_averted_per_person",
+      "section": "effect",
+      "label": "Stillbirths averted counted separately (none)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "Zero: any are inside the health-system figure, counted once."
+    },
+    {
+      "id": "ln_income_gain_per_year",
+      "section": "effect",
+      "label": "Later-life income gain (none)",
+      "format": "number",
+      "formula": "0",
+      "explainer": "Zero: no income effect is modelled separately for treatment of chronic illness in adults."
+    },
+    {
+      "id": "years_until_income_gain",
+      "section": "effect",
+      "label": "Years until the income gain (not used)",
+      "format": "number",
+      "formula": "0",
+      "explainer": "Not used, as the income gain is zero; kept so the income rows stay defined."
+    },
+    {
+      "id": "years_income_gain_lasts",
+      "section": "effect",
+      "label": "Years the long-term income gain lasts",
+      "format": "number",
+      "formula": "@givewell_shared.long_term_benefit_years",
+      "unit": "years",
+      "explainer": "The shared figure; multiplied by a zero income gain here."
+    },
+    {
+      "id": "ln_income_gain_per_person",
+      "section": "effect",
+      "label": "Later-life income gain per person reached, present value",
+      "format": "small",
+      "formula": "pv_annuity_due(ln_income_gain_per_year, $discount_rate, years_income_gain_lasts) / (1 + $discount_rate) ^ years_until_income_gain",
+      "unit": "ln-years",
+      "explainer": "Discounted at the shared rate; zero here, as the income gain is zero."
+    },
+    {
+      "id": "resource_sharing_multiplier",
+      "section": "effect",
+      "label": "Resource sharing within households (multiplier on an earner's gain)",
+      "format": "multiple",
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "explainer": "The shared figure; multiplied by a zero income gain here."
+    },
+    {
+      "id": "us_price_ratio",
+      "section": "effect",
+      "label": "What the clinics would otherwise pay for these products ÷ their wholesale value",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.6,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Safety-net clinics buy through the 340B programme, whose ceiling prices are at least 23.1% below the average manufacturer price for brand drugs and lower for generics, and patients get manufacturers' assistance programmes: wholesale acquisition cost overstates what the goods would cost the system that uses them. Our judgment, 0.6 (0.35 to 1)."
+    },
+    {
+      "id": "goods_local_value",
+      "section": "effect",
+      "label": "Medicines and supplies delivered in the US, at what the clinics would pay",
+      "format": "usd",
+      "formula": "us_donated_goods * us_price_ratio + us_procured",
+      "explainer": "The donated goods at the clinics' price plus what Direct Relief bought (at cost)."
+    },
+    {
+      "id": "vanness_deaths_per_10m",
+      "section": "effect",
+      "label": "US deaths caused per $10m (2019 dollars) of extra health spending, at the margin",
+      "format": "number",
+      "value": {
+        "low": 3,
+        "best": 5,
+        "high": 11
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Vanness, Lomas, Ahn (2021), A Health Opportunity Cost Threshold for Cost-Effectiveness Analysis in the United States, Annals of Internal Medicine 174(1):25-32",
+        "url": "https://pure.psu.edu/en/publications/a-health-opportunity-cost-threshold-for-cost-effectiveness-analys/",
+        "retrieved": "2026-11-13",
+        "page": "Abstract, Results",
+        "quote": "causing 5 deaths (UI, 3 to 11 deaths), 81 QALYs (UI, 40 to 170 QALYs) lost due to death"
+      },
+      "explainer": "The health opportunity cost of US health spending (Vanness et al. 2021): rising premiums make people drop insurance, and the care they lose costs lives. Read the other way, a marginal $10m of care saves these deaths.",
+      "interval": 0.95
+    },
+    {
+      "id": "vanness_qaly_illness_per_10m",
+      "section": "effect",
+      "label": "US QALYs lost to illness per $10m (2019 dollars), at the margin",
+      "format": "number",
+      "value": {
+        "low": 6,
+        "best": 15,
+        "high": 32
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Vanness, Lomas, Ahn (2021), A Health Opportunity Cost Threshold for Cost-Effectiveness Analysis in the United States, Annals of Internal Medicine 174(1):25-32",
+        "url": "https://pure.psu.edu/en/publications/a-health-opportunity-cost-threshold-for-cost-effectiveness-analys/",
+        "retrieved": "2026-11-13",
+        "page": "Abstract, Results",
+        "quote": "15 QALYs (UI, 6 to 32 QALYs) lost due to illness"
+      },
+      "explainer": "The same estimate's health lost to illness; a QALY counts as a DALY averted. Deaths are valued by age through value_per_death, so the 81 QALYs lost to death in the same estimate are not used.",
+      "interval": 0.95
+    },
+    {
+      "id": "deaths_per_dollar",
+      "section": "effect",
+      "label": "Deaths averted per marginal US health dollar, 2025 dollars",
+      "format": "small",
+      "formula": "vanness_deaths_per_10m / (1e5 * 100) * @cpi.usa_2019 / @cpi.usa_2025",
+      "explainer": "Per $10m in 2019 prices, into 2025 prices (Convention 8)."
+    },
+    {
+      "id": "illness_dalys_per_dollar",
+      "section": "effect",
+      "label": "Illness DALYs averted per marginal US health dollar, 2025 dollars",
+      "format": "small",
+      "formula": "vanness_qaly_illness_per_10m / (1e5 * 100) * @cpi.usa_2019 / @cpi.usa_2025",
+      "explainer": "Per $10m in 2019 prices, into 2025 prices."
+    },
+    {
+      "id": "need_vs_marginal",
+      "section": "effect",
+      "label": "Health gained per dollar of these medicines ÷ per marginal dollar of US health spending",
+      "format": "multiple",
+      "value": {
+        "low": 0.7,
+        "best": 1.5,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "The threshold is the health lost when marginal insured people lose coverage; the patients here are uninsured or underinsured people who would otherwise go without some of these medicines. Some products buy health far more cheaply than $104,000 a QALY: naloxone distribution (481,000 doses, annual report p. 33) has been estimated at about $400 a QALY (Coffin and Sullivan 2013), and contraception and insulin for people who can't afford it save money or lives (+). Against that, the mix follows what manufacturers give, short-dated and branded (−). Our judgment, 1.5 (0.7 to 3)."
+    },
+    {
+      "id": "dalys_illness_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per patient-year of medicine, in DALYs (before adjustments)",
+      "format": "small",
+      "formula": "goods_local_value / people_reached * need_vs_marginal * illness_dalys_per_dollar",
+      "unit": "DALYs",
+      "explainer": "The medicines' value per patient-year, times the need ratio, times illness DALYs averted per marginal US health dollar."
+    },
+    {
+      "id": "us_disaster_grants",
+      "section": "effect",
+      "label": "US grants for disaster recovery, fiscal 2025",
+      "format": "usd",
+      "value": 13712000,
+      "kind": "observed",
+      "source": {
+        "title": "Direct Relief, Fiscal Year 2025 Annual Report (July 2024 to June 2025)",
+        "url": "https://www.directrelief.org/wp-content/uploads/2026/04/Direct-Relief-Annual-Report-FY-2025-Web.pdf",
+        "retrieved": "2026-11-13",
+        "page": "p. 44, Financial assistance",
+        "quote": "Los Angeles County Wildfires ($7.4 million), Hurricane Helene ($4.5 million), Turkey/Syria Earthquake ($3.3 million), Israel/Palestine Conflict ($1.2 million), Hurricane Milton ($1.2 million), and the Hawaii Wildfires ($612,000)"
+      },
+      "explainer": "Los Angeles wildfires $7.4m, Hurricane Helene $4.5m, Hurricane Milton $1.2m and the Hawaii wildfires $0.612m (annual report p. 44); the rest of the US grants go to health centres, free clinics and charitable pharmacies."
+    },
+    {
+      "id": "grt_clinic_need",
+      "section": "effect",
+      "label": "Clinic grants: health gained per dollar ÷ per marginal dollar of US health spending",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 1.2,
+        "high": 2.5
+      },
+      "kind": "judgment",
+      "explainer": "Grants to health centres, free clinics and charitable pharmacies pay for care of uninsured and underinsured patients, the same people as the medicines (need ratio 1.5), but also buildings, solar systems and programme costs further from care. Our judgment, 1.2 (0.6 to 2.5), a little below the medicines' ratio."
+    },
+    {
+      "id": "grt_disaster_need",
+      "section": "effect",
+      "label": "Disaster-recovery grants: health gained per dollar ÷ per marginal dollar of US health spending",
+      "format": "multiple",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Recovery grants after the fires and hurricanes pay for mobile clinics and mental health care (health), but also school enrichment, rental assistance and preparedness (little direct health): of the $7.4m for Los Angeles, $1.5m went to school-based counselling and enrichment and $1m to AltaMed's health services (annual report p. 18). Our judgment, 0.5 (0.2 to 1)."
+    },
+    {
+      "id": "grt_need_vs_marginal",
+      "section": "effect",
+      "label": "Grants: health gained per dollar ÷ per marginal dollar of US health spending",
+      "format": "multiple",
+      "formula": "(us_disaster_grants * grt_disaster_need + (us_grants - us_disaster_grants) * grt_clinic_need) / us_grants",
+      "explainer": "The clinic and disaster-recovery grants' ratios, weighted by their dollars."
+    },
+    {
+      "id": "grt_dalys",
+      "section": "effect",
+      "label": "Grants: illness averted, in DALYs (before adjustments)",
+      "format": "number",
+      "formula": "us_grants * grt_need_vs_marginal * illness_dalys_per_dollar",
+      "unit": "DALYs",
+      "explainer": "The grants times the need ratio times illness DALYs per marginal dollar."
+    },
+    {
+      "id": "grt_deaths",
+      "section": "effect",
+      "label": "Grants: deaths averted (before adjustments)",
+      "format": "number",
+      "formula": "us_grants * grt_need_vs_marginal * deaths_per_dollar",
+      "explainer": "The grants times the need ratio times deaths averted per marginal dollar."
+    },
+    {
+      "id": "med_dalys",
+      "section": "effect",
+      "label": "Medicines: illness averted, in DALYs (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * dalys_illness_averted_per_person",
+      "unit": "DALYs",
+      "explainer": "Patient-years times illness DALYs per patient-year."
+    },
+    {
+      "id": "internal_validity_adj",
+      "section": "adjustments",
+      "label": "Bias in the threshold's deaths and illness per dollar",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.9,
+        "high": 1.1
+      },
+      "kind": "judgment",
+      "explainer": "Vanness et al. rest on how much losing insurance raises mortality: the Oregon Health Insurance Experiment could not detect an effect on mortality over two years, while Miller et al. (2021) found Medicaid expansion cut deaths among low-income adults. The estimate leans on the larger effects. That these medicines' outcomes aren't measured is in the missing-data step. Our judgment, 0.9 (0.6 to 1.1)."
+    },
+    {
+      "id": "external_validity_adj",
+      "section": "adjustments",
+      "label": "Fit to these patients",
+      "format": "multiple",
+      "formula": "1",
+      "explainer": "One: how these medicines and patients differ from the marginal insured patient is in the need ratio."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment",
+      "format": "multiple",
+      "formula": "internal_validity_adj * external_validity_adj",
+      "explainer": "Internal times external validity."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened without Direct Relief",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Some patients would get the same medicines through manufacturers' patient-assistance programmes or Medicaid enrolment, and other charities (Americares, Dispensary of Hope) supply the same clinics; some grant-funded work would have found other funders. (Products the clinic would have bought free its budget, which the threshold already values.) Our judgment, 0.6 (0.35 to 0.85)."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "Medicines: Direct Relief's share of the resources behind them",
+      "format": "percent",
+      "formula": "(program_spend - us_grants) * overhead_ratio / ((program_spend - us_grants) * overhead_ratio + us_donated_goods * us_price_ratio)",
+      "explainer": "Convention 2: Direct Relief's cash for sourcing, storing and shipping (its US programme less grants, with overhead) over that cash plus the donated goods at the clinics' price. The clinics' staff time is inside the cost per DALY at the margin."
+    },
+    {
+      "id": "grt_attribution_share",
+      "section": "adjustments",
+      "label": "Grants: Direct Relief's share of the resources",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "One: the grant buys care at the system's cost per DALY, every input included."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(med_dalys * attribution_share_shared + grt_dalys * grt_attribution_share) / (med_dalys + grt_dalys)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Medicines: share dispensed to patients before they expire",
+      "format": "percent",
+      "value": {
+        "low": 0.65,
+        "best": 0.85,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Direct Relief wrote off $52.6m of expired US stock (audited accounts p. 7), 18% of the donated goods it shipped in the US ($296.8m); some of what clinics receive also expires on their shelves. Our judgment, 0.85."
+    },
+    {
+      "id": "grt_implementation_adj",
+      "section": "adjustments",
+      "label": "Grants: share spent as planned",
+      "format": "percent",
+      "value": {
+        "low": 0.75,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Grants go to vetted partners with milestone reviews before later payments (audited accounts p. 14). Our judgment, 0.9."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.9,
+        "best": 1,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Direct Relief takes no government money; a donation neither displaces nor draws in other money much. 1."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a gift waits before it is spent",
+      "format": "number",
+      "formula": "@direct_relief.gift_to_grant_years",
+      "explainer": "The shared Direct Relief figure (facts/direct_relief.json), read by both models."
+    },
+    {
+      "id": "delay_years",
+      "section": "adjustments",
+      "label": "Years from shipment to use",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Domestic shipping to clinics takes days to weeks; our judgment, a tenth of a year."
+    },
+    {
+      "id": "benefit_midpoint_years",
+      "section": "adjustments",
+      "label": "Half of the year over which a patient-year of medicine is taken",
+      "format": "number",
+      "formula": "years_of_coverage * 0.5",
+      "explainer": "The middle of the year of treatment."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years + benefit_midpoint_years)",
+      "explainer": "The gift's wait, delivery and the middle of the year of treatment, discounted at the shared rate."
+    },
+    {
+      "id": "med_missing_data_adj",
+      "section": "adjustments",
+      "label": "Medicines: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (Convention 12): doses are counted, but the health they produce is a judgment through the system's cost per QALY, not measured for these patients."
+    },
+    {
+      "id": "grt_missing_data_adj",
+      "section": "adjustments",
+      "label": "Grants: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: no outcome data for the grant-funded care."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(med_dalys * med_missing_data_adj + grt_dalys * grt_missing_data_adj) / (med_dalys + grt_dalys)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "med_total_adj",
+      "section": "adjustments",
+      "label": "Medicines: all adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share_shared * implementation_adj * leverage_funging_adj * wait_discount * med_missing_data_adj",
+      "explainer": "The medicines branch's adjustments."
+    },
+    {
+      "id": "grt_total_adj",
+      "section": "adjustments",
+      "label": "Grants: all adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * grt_attribution_share * grt_implementation_adj * leverage_funging_adj * wait_discount * grt_missing_data_adj",
+      "explainer": "The grants branch's adjustments."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(med_dalys * med_total_adj + grt_dalys * grt_total_adj) / (med_dalys + grt_dalys)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "treatment_costs_share",
+      "section": "adjustments",
+      "label": "Treatment costs averted (none counted)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "Zero: this is treatment, and money the clinics save is already counted through the cost per DALY at the margin."
+    },
+    {
+      "id": "rebound_share",
+      "section": "adjustments",
+      "label": "Rebound effects (none)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "Zero: no immunity effect for these medicines, which treat rather than prevent."
+    },
+    {
+      "id": "investment_of_income_share",
+      "section": "adjustments",
+      "label": "Investment of income (none)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "Zero: no income gain is modelled for these patients."
+    },
+    {
+      "id": "other_unmodelled_share",
+      "section": "adjustments",
+      "label": "Other benefits and harms not modelled",
+      "format": "percent",
+      "value": {
+        "low": -0.1,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "Benefits: hurricane preparedness packs pre-positioned at clinics, cold-chain and solar-power support keeping clinics open in outages, money patients save (+). Harms: the disposal burden of short-dated stock at clinics (−). Net +5% (−10% to +15%)."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
+      "explainer": "The rows above, summed: they add to the modelled value as one share.",
+      "side_effect": "added"
+    },
+    {
+      "id": "deaths_averted",
+      "section": "outcome",
+      "label": "Deaths averted, both branches, after adjustments",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * med_total_adj + grt_deaths * grt_total_adj",
+      "explainer": "Medicines and grants, each with its own adjustments."
+    },
+    {
+      "id": "value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "The site's one value of a death, by age band, times your value of a life: adults under 65 here, the deaths in Vanness et al.'s estimate."
+    },
+    {
+      "id": "uov_deaths",
+      "section": "outcome",
+      "label": "Units of value from deaths averted",
+      "format": "number",
+      "formula": "deaths_averted * value_per_death",
+      "unit": "units of value",
+      "explainer": "Deaths averted by both branches times the value of a death by age: most of this model's result."
+    },
+    {
+      "id": "uov_stillbirths",
+      "section": "outcome",
+      "label": "Units of value from stillbirths (none)",
+      "format": "number",
+      "formula": "people_reached * stillbirths_averted_per_person * med_total_adj * @givewell_shared.uov_per_stillbirth * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "Zero stillbirths counted separately."
+    },
+    {
+      "id": "uov_income",
+      "section": "outcome",
+      "label": "Units of value from later-life income (none)",
+      "format": "number",
+      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * med_total_adj * $uov_per_ln_consumption",
+      "unit": "units of value",
+      "explainer": "Zero income gain."
+    },
+    {
+      "id": "uov_morbidity",
+      "section": "outcome",
+      "label": "Units of value from illness, as a share (none)",
+      "format": "number",
+      "formula": "(uov_deaths + uov_income) * morbidity_value_ratio",
+      "unit": "units of value",
+      "explainer": "Zero: illness is in the DALYs."
+    },
+    {
+      "id": "dalys_bridged",
+      "section": "bridges",
+      "label": "DALYs averted, both branches, after adjustments",
+      "format": "number",
+      "formula": "med_dalys * med_total_adj + grt_dalys * grt_total_adj",
+      "explainer": "Medicines and grants, each with its own adjustments."
+    },
+    {
+      "id": "uov_from_daly",
+      "section": "bridges",
+      "label": "Illness averted, in units of value",
+      "format": "number",
+      "formula": "dalys_bridged * ($uov_per_daly)",
+      "unit": "units of value",
+      "explainer": "DALYs into units of value at the shared rate (docs/normalization.md 2.6)."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Units of value in the year",
+      "format": "number",
+      "formula": "(uov_deaths + uov_stillbirths + uov_income + uov_from_daly) * (1 + unmodelled_benefits_adj) + uov_morbidity",
+      "unit": "units of value",
+      "explainer": "Deaths and illness (the DALYs bridged), side effects at the shared weight on all of them; the template's formula leaves the bridged DALYs outside the side-effect share, which here would make it count nothing."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "outcome",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "units of value / $",
+      "explainer": "Outcome over cost."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff's share of the cash cost",
+      "format": "percent",
+      "formula": "@direct_relief.compensation_total / total_expenses",
+      "explainer": "Convention 1: Direct Relief's pay and benefits over its cash expenses."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "How much less staff earn than they could elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "The shared figure for staff of a delivery organisation."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)",
+      "explainer": "Counted with credit by share of resources."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "Your dollar's share of the full cost."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "format": "small",
+      "formula": "uov_per_dollar * donor_cost_share",
+      "unit": "Units of value / $",
+      "explainer": "The headline, in units of value per dollar."
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
+  }
+}

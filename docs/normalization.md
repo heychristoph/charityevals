@@ -1206,6 +1206,32 @@ remains between best guess and simulated average elsewhere is the skew of the un
 ×1.14 for half the models and ×1.6 for nine in ten. The Hits-based value set (unmeasured results in
 full, risk 80%) is the lens for long shots.
 
+### 2.19 Catastrophic risks: chances, sizes, a typical dollar's cut (November 2026)
+
+The `catastrophic-risk` build-cea family (AI, pandemics, nuclear war; .claude/skills/build-cea/references/families/catastrophic-risk.md)
+values a charity's work as a cut in the yearly chance of catastrophes of three sizes, each from shared figures in
+facts/catastrophe.json. **Chances**: the Existential Risk Persuasion Tournament's medians by 2100 (Karger et al.
+2023), spread evenly over 2022-2100; the domain experts' figure is the best guess and the superforecasters' the low
+end, the rule the owner set for AI, whose extinction-level chance is the slider `$ai_catastrophe_chance` (Your
+values, 3%, 0.01-20%; catastrophes it survives × `ai_catastrophe_vs_extinction`). **Sizes**: extinction-level (all
+8.14 billion alive die and the future is lost); a catastrophe the world survives (over 10% die:
+`<area>_catastrophe_death_share`, nuclear 45% after Xia et al.'s famine estimates, pandemics 15%, AI 25%); smaller
+ones where a shared forecast exists (a COVID-scale pandemic, 2% a year). **The cut**: Rethink Priorities'
+cross-cause model's typical small project per area, as a relative cut per $1 million (expected value, its
+backfire step × 0.772 included), counted `$win_years_counted` years (2.9) in place of Rethink's 15-25 years of
+persistence, the wait discounted; the charity's own outputs enter through `evidence_adj`, a specific win through
+the policy branch, people trained through their work-years at `cost_per_work_year`. **Value**: deaths by the
+world's age split (`@death_ages.population_world_*`) at the one value of a death, losses beyond deaths a fact set
+to 0 so it shows (`nondeath_losses_vs_deaths`); the future through `future_years_per_person`, the discounted years
+of people not yet born per person of the long-run population (a stream rising over one lifetime,
+`life_expectancy_now`, to `world_population_long_run`): about 8 at the default 4%, 960 at the 0.1% floor. The
+earlier `world_population_long_run / $discount_rate` (conservation, 2026-11-03) also counted the remaining years
+of people alive now, already valued as deaths; conservation reads the new row too (The Nature Conservancy's
+future share is 0 at its best guess, so its headline is unchanged). Every branch is thin
+(`$missing_data_discount`) and a `past_average` (`@next_dollar.<id>`). The cause `ai-safety`, which no model
+used, is now `catastrophic-risk` ("Catastrophic risk"). First model: the Nuclear Threat Initiative, 21 years of
+healthy life per $1,000 at the defaults (1.1-410).
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
@@ -1516,4 +1542,4 @@ like every death, by age band × `$life_value_multiplier`. Future generations ne
 the years of healthy life a catastrophe would take from every later year (`@catastrophe.world_population_long_run`,
 the UN's 2100 projection, × the share of the future lost) are discounted at `$discount_rate`, so the
 discount rate is how much they count; its floor is 0.1% (was 0), so an endless future stays finite
-(the yearly loss ÷ the rate: 1,000 years' worth at 0.1%, 25 at the default 4%).
+(since 2.19 the discounted years of people not yet born: about 960 years' worth at 0.1%, 8 at the default 4%).

@@ -1,0 +1,608 @@
+{
+  "id": "world-vision-charityevals-domestic",
+  "name": "World Vision US: domestic programmes (charityevals' estimate)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"USA":1},
+  "beneficiaries_note": "Our build: donated goods passed to US churches, schools and nonprofits.",
+  "template": "domestic-services",
+  "estimate_basis": "unit_cost",
+  "charity": "world-vision",
+  "owner": "charityevals",
+  "summary": "World Vision US's domestic programmes ($231 million in fiscal 2025) pass donated corporate goods (clothing, household goods, school and building supplies: $206 million at wholesale value) to US churches, schools and nonprofits from its warehouses. Valued on the site's one log-income scale at low-income Americans' consumption, at 60% of their recorded value as goods given in kind, a dollar does far less than a dollar abroad: far below the global-health median because the goods go to people in a rich country, where they add little to consumption, not because the work is badly run. World Vision US publishes no count of the households its goods reach, so reach is the goods' value over a judged amount per household and the model is discounted for missing data; the biggest uncertainties are what the goods are worth to families and how many would have reached them anyway.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: World Vision US, domestic programmes",
+    "url": "https://charityevals.org/world-vision-charityevals-domestic",
+    "published": "2026-11-13",
+    "retrieved": "2026-11-13"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "World Vision, Inc., Form 990 for the year ended 30 September 2025 (IRS e-file, object id 202611209349301676)",
+      "url": "https://projects.propublica.org/nonprofits/organizations/951922279/202611209349301676/full"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Domestic programmes, fiscal 2025",
+      "format": "usd",
+      "formula": "@world_vision.domestic_expenses",
+      "explainer": "The shared figure (facts/world_vision.json) from World Vision US's Form 990: donated goods passed to US churches, schools and nonprofits, and the warehouses, freight and staff behind them."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses (all programmes, management, fundraising)",
+      "format": "usd",
+      "formula": "@world_vision.total_expenses",
+      "explainer": "World Vision US's total functional expenses, fiscal 2025 (Form 990 Part IX)."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Program expenses (all programmes)",
+      "format": "usd",
+      "formula": "@world_vision.program_expenses",
+      "explainer": "All three programme lines, same statement."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "World Vision US's management and fundraising spread over its programmes by cost, as in its international model."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio",
+      "explainer": "The domestic line plus its share of overhead. The donated goods are in it at the wholesale value World Vision records them at."
+    },
+    {
+      "id": "goods_granted",
+      "section": "reach",
+      "label": "Donated goods handed out in the US, fiscal 2025",
+      "format": "usd",
+      "formula": "@world_vision.domestic_gik_expense",
+      "explainer": "Household goods, clothing, toys, building supplies, hygiene and school supplies at wholesale value (KPMG note 16: domestic gifts-in-kind used, $206.0M)."
+    },
+    {
+      "id": "goods_per_household",
+      "section": "reach",
+      "label": "Goods value per household reached in a year (wholesale)",
+      "format": "usd",
+      "value": {
+        "low": 60,
+        "best": 180,
+        "high": 500
+      },
+      "kind": "judgment",
+      "explainer": "World Vision US publishes no count of the US households its goods reach. Partners hand out a few bags of clothing, hygiene kits, school supplies or household goods per family; building supplies for home repairs and disaster recovery go to fewer households at higher value. Judgment $180 a household a year ($60-500)."
+    },
+    {
+      "id": "households_reached",
+      "section": "reach",
+      "label": "Households reached in the year",
+      "format": "integer",
+      "formula": "goods_granted / goods_per_household",
+      "explainer": "Goods handed out over the value per household: about 1.1 million households at the best guesses."
+    },
+    {
+      "id": "household_size",
+      "section": "reach",
+      "label": "People per household",
+      "format": "number",
+      "formula": "@household_size.united_states",
+      "unit": "people",
+      "explainer": "The site's US household size: families with children are the main recipients (school supplies, clothing), larger than the poorest fifth's average of 1.6."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached",
+      "format": "integer",
+      "formula": "households_reached * household_size",
+      "explainer": "People reached."
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context."
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Life-satisfaction gain per person-year",
+      "format": "number",
+      "formula": "0",
+      "unit": "points",
+      "explainer": "0: the goods' value is counted below as income; counting their relief as wellbeing too would count it twice."
+    },
+    {
+      "id": "ls_effect_years",
+      "section": "effect",
+      "label": "Years the wellbeing effect lasts",
+      "format": "number",
+      "formula": "1",
+      "unit": "years",
+      "explainer": "Not used (no wellbeing effect counted)."
+    },
+    {
+      "id": "wellbys_per_person",
+      "section": "effect",
+      "label": "WELLBYs per person",
+      "format": "number",
+      "formula": "ls_gain_per_person_year * pv_annuity_due(1, $discount_rate, ls_effect_years)",
+      "unit": "WELLBYs",
+      "explainer": "Point-years, discounted at the shared rate."
+    },
+    {
+      "id": "inkind_cash_equivalence",
+      "section": "effect",
+      "label": "What the goods are worth to the family, as a share of their recorded value",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Two questions only: choice (families can't pick what they get, so goods they wouldn't have bought are worth less to them than their price: the literature values in-kind transfers at 80-95% of face value for food stamps, less for goods outside the usual budget) and the donors' own wholesale valuation of surplus stock, which may overstate what the goods would sell for. Unused goods are in implementation_adj, not here. Anchored on the Salvation Army model's 80% for food and clothing it buys, lower for corporate surplus: 60% (40-85%)."
+    },
+    {
+      "id": "value_per_person",
+      "section": "effect",
+      "label": "Value of the goods to each person, per year (US$)",
+      "format": "usd",
+      "formula": "goods_per_household * inkind_cash_equivalence / household_size",
+      "explainer": "About $45 a person a year at the best guesses."
+    },
+    {
+      "id": "consumption_mean",
+      "section": "effect",
+      "label": "US consumption per person (Consumer Expenditure Survey)",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024",
+      "explainer": "The site's US survey consumption per person."
+    },
+    {
+      "id": "poorest_fifth_per_person_share",
+      "section": "effect",
+      "label": "Poorest fifth's consumption per person, as a share of the US average",
+      "format": "percent",
+      "formula": "@united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile",
+      "explainer": "The site's per-person anchor, as the Red Cross and Habitat models compute it: the poorest fifth's household spending over the average, per person (poorer households are smaller)."
+    },
+    {
+      "id": "recipients_vs_poorest_fifth",
+      "section": "effect",
+      "label": "Recipients' consumption per person against the poorest fifth's",
+      "format": "multiple",
+      "value": {
+        "low": 0.45,
+        "best": 0.67,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Families with children in Title I school districts and disaster-hit households are larger than the poorest fifth's average household (1.6 people), so their spending per person is lower; some recipients are better off. Judgment 0.67 (0.45-1.05)."
+    },
+    {
+      "id": "recipients_consumption_share",
+      "section": "effect",
+      "label": "Recipients' consumption per person, as a share of the US average",
+      "format": "percent",
+      "formula": "poorest_fifth_per_person_share * recipients_vs_poorest_fifth",
+      "explainer": "The anchor times the judged gap: about 0.45."
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "Recipients' consumption per person per year",
+      "format": "usd",
+      "formula": "consumption_mean * recipients_consumption_share",
+      "explainer": "Recipients' consumption per person per year."
+    },
+    {
+      "id": "income_years",
+      "section": "effect",
+      "label": "Years the gain counts",
+      "format": "number",
+      "formula": "1",
+      "unit": "years",
+      "explainer": "1: a year's goods."
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person",
+      "format": "number",
+      "formula": "ln(1 + value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)",
+      "explainer": "The site's one log-income scale at the recipients' own consumption."
+    },
+    {
+      "id": "dalys_averted_per_person",
+      "section": "effect",
+      "label": "Health gained per person (DALYs)",
+      "format": "small",
+      "formula": "0",
+      "unit": "DALYs",
+      "explainer": "0: no evidence that donated household goods, clothing or supplies change health in the US."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person",
+      "format": "small",
+      "formula": "0",
+      "explainer": "0: none expected from these goods."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of deaths under five (not used)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "No deaths averted are counted."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Share of deaths 5-14 (not used)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "No deaths averted are counted."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Share of deaths 15-49 (not used)",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "No deaths averted are counted."
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights by the age band of each death, times your value of a life: the site's one value of a death."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.9,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "1: the value is the goods at a judged share of their recorded value, which needs no effect study; the valuation doubt is in inkind_cash_equivalence and unused goods in implementation_adj. 0.9 at the low end for a recorded value that may not match what was handed out."
+    },
+    {
+      "id": "cf_other_charity_share",
+      "section": "adjustments",
+      "label": "Share of the goods that would have reached similar families through another charity",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Without World Vision, corporate surplus goes to other in-kind networks (Good360 and similar), sale to liquidators, or landfill. Good360 and World Vision compete for the same donors; judgment a quarter (10-45%) would have reached similar families anyway."
+    },
+    {
+      "id": "cf_liquidation_share",
+      "section": "adjustments",
+      "label": "Share that would have been sold off cheaply instead",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "Liquidators and discount stores sell surplus at a fraction of wholesale, some of it to low-income buyers. Judgment 25% (10-40%); the rest is destroyed or landfilled."
+    },
+    {
+      "id": "cf_liquidation_value_share",
+      "section": "adjustments",
+      "label": "Share of the goods' value low-income buyers would have got from the sold-off goods",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Discounted goods give buyers some of the value (they pay most of it) and only some buyers are poor. Judgment 30% (10-50%)."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the goods families wouldn't have got anyway",
+      "format": "percent",
+      "formula": "1 - cf_other_charity_share - cf_liquidation_share * cf_liquidation_value_share",
+      "explainer": "What the families gain that the goods' other uses wouldn't have given similar families: about 67% at the best guesses."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "World Vision's share of the resources behind the goods reaching families",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.85,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "The goods are in World Vision's cost; partner churches and schools add volunteer time and space to hand them out (World Vision US counts 28,224 volunteers across all its work, 990 Part I). 85% (70-95%)."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Share of the goods that reach families and get used",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.85,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Some goods sit in partners' storage, go unused or are passed on. 85% (70-95%)."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.95,
+        "best": 1,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "The goods are donated; cash pays for the logistics that bring them in, so a dollar's leverage is in the goods' value already. 1 (0.95-1.05)."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: World Vision US publishes no count of the households its US goods reach; reach and value are judgments. So it is counted less by the shared slider, the same way in every model (docs/normalization.md 2.12)."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "ue_school_share",
+      "section": "adjustments",
+      "label": "Unmodelled: school supplies' gain in attendance and teachers' time",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": 0,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "School and office supplies are about 1-1.5% of the domestic goods (KPMG note 16: $3.2M of school and office supplies received in all, against $206M of goods used at home); their learning and teachers' time saved beyond their value: +0.3% (0 to +1%)."
+    },
+    {
+      "id": "ue_disaster_share",
+      "section": "adjustments",
+      "label": "Unmodelled: goods arriving when a disaster leaves families short",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": 0,
+        "best": 0.01,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "explainer": "Goods after hurricanes and floods are worth more than their price while shops are shut: +1% (0 to +3%)."
+    },
+    {
+      "id": "ue_displacement_share",
+      "section": "adjustments",
+      "label": "Unmodelled: free goods displacing local shops' sales",
+      "format": "percent",
+      "side_effect": "added",
+      "value": {
+        "low": -0.02,
+        "best": -0.005,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Free clothing and household goods take some sales from small local shops and thrift stores: -0.5% (-2% to 0)."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "formula": "ue_school_share + ue_disaster_share + ue_displacement_share",
+      "explainer": "The signed items above. Home repairs' lasting value is not here: a durable good's price already covers its years of use."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * (ln_gain_per_person * $uov_per_ln_consumption + deaths_averted_per_person * value_per_death)",
+      "unit": "UoV",
+      "explainer": "Income gained and deaths averted, in GiveWell units of value (before adjustments)."
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in wellbeing-adjusted life years (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * wellbys_per_person",
+      "unit": "WELLBYs",
+      "explainer": "Life satisfaction gained, in wellbeing-adjusted life years (before adjustments)."
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * dalys_averted_per_person",
+      "unit": "DALYs",
+      "explainer": "Healthy years counted directly (before adjustments)."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $",
+      "explainer": "Years of healthy life per dollar."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_goods",
+      "explainer": "The site's share for programmes that hand out goods (@staff_pay.share_goods): most of the cost is the donated goods themselves."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_local_delivery",
+      "explainer": "The shared pay gap for local delivery staff (@staff_pay.gap_local_delivery): warehouse and programme staff."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)",
+      "explainer": "Salary forgone by staff (in-kind donation)."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "Share of the full cost paid by cash donations."
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "unit": "Years of healthy life / $",
+      "explainer": "Years of healthy life per dollar you give."
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}

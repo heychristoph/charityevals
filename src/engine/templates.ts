@@ -276,6 +276,42 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     "past_average",
     [...WON_REFORM, { row: "uov_bridged", ref: "$uov_per_ln_consumption", why: "income gains are valued at the shared value of a doubled income, on the site's one log scale" }, { row: "released_value", ref: "$discount_rate", why: "a released person's years are discounted at the shared rate" }],
   ),
+  "catastrophic-risk": spec(
+    "Global catastrophic risks (AI, pandemics, nuclear war)",
+    "daly",
+    "dalys",
+    [
+      "forecast_years", "deaths_if_extinct", "share_under5", "value_per_death", "future_years_per_person", "future_dalys_if_extinct", "years_of_impact",
+      ...["ai", "bio", "nuclear"].flatMap((a) => [`${a}_extinction_per_year`, `${a}_catastrophe_per_year`, `${a}_deaths_if_catastrophe`, `${a}_smaller_per_year`, `${a}_deaths_per_million`, `${a}_future_per_million`, `${a}_cost_share`, `${a}_discounted_years`, `${a}_deaths_averted`, `${a}_future_dalys`]),
+      "pol_cost_share", "pol_wins", "pol_p_success", "pol_relative_cut", "pol_discounted_years", "pol_deaths_averted", "pol_future_dalys",
+      "fb_cost_share", "fb_people", "fb_share_working", "fb_work_dollars", "fb_credit_share", "fb_deaths_averted", "fb_future_dalys",
+      "cost_shares_total", "deaths_averted", "future_dalys_averted", "leverage_funging_adj", "unmodelled_benefits_adj", "speedup_harm_share", "hazard_harm_share",
+      "uov_bridged", "dalys_from_uov", "dalys_direct",
+    ],
+    {
+      cost_shares_total: [0.99, 1.01],
+      ai_cost_share: [0, 1], bio_cost_share: [0, 1], nuclear_cost_share: [0, 1], pol_cost_share: [0, 1], fb_cost_share: [0, 1],
+      pol_p_success: [0, 1], pol_relative_cut: [0, 0.5], fb_share_working: [0, 1], fb_credit_share: [0, 1],
+      speedup_harm_share: [-0.6, 0], hazard_harm_share: [-0.6, 0],
+      ai_extinction_per_year: [0, 0.01], bio_extinction_per_year: [0, 0.01], nuclear_extinction_per_year: [0, 0.01],
+    },
+    "past_average",
+    [
+      { row: "value_per_death", ref: "@moral_weights.", why: "a catastrophe's deaths are valued at GiveWell's moral weight for each age band (@moral_weights), the site's one value of a death" },
+      { row: "value_per_death", ref: "$life_value_multiplier", why: "every death moves with the value-of-a-life slider" },
+      { row: "share_under5", ref: "@death_ages.population_world_", why: "a global catastrophe kills every age alike: the world's age split", severity: "medium" },
+      { row: "future_years_per_person", ref: "$discount_rate", why: "future generations count only through the shared discount rate (docs/normalization.md 2.19)" },
+      { row: "future_dalys_if_extinct", ref: "@catastrophe.world_population_long_run", why: "the future lost is the site's one long-run population" },
+      { row: "ai_extinction_per_year", ref: "$ai_catastrophe_chance", why: "the chance of AI catastrophe is the reader's slider" },
+      { row: "bio_extinction_per_year", ref: "@catastrophe.bio_extinction_by_2100", why: "pandemics' chance is the site's one forecast" },
+      { row: "nuclear_extinction_per_year", ref: "@catastrophe.nuclear_extinction_by_2100", why: "nuclear war's chance is the site's one forecast" },
+      { row: "ai_deaths_per_million", ref: "@catastrophe.ai_extinction_cut_per_million", why: "a typical dollar's cut in the risk is the site's one figure per area" },
+      { row: "bio_deaths_per_million", ref: "@catastrophe.bio_extinction_cut_per_million", why: "a typical dollar's cut in the risk is the site's one figure per area" },
+      { row: "nuclear_deaths_per_million", ref: "@catastrophe.nuclear_extinction_cut_per_million", why: "a typical dollar's cut in the risk is the site's one figure per area" },
+      { row: "years_of_impact", ref: "$win_years_counted", why: "a cut in the risk counts the site's one number of years ($win_years_counted, docs/normalization.md 2.9)" },
+      { row: "pol_discounted_years", ref: "$discount_rate", why: "the years counted and the wait before them are discounted at the shared rate" },
+    ],
+  ),
 };
 
 /** A policy-research-meta model reports in its downstream unit: uov, wellby, ced (via SADs and the

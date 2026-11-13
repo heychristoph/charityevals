@@ -1,6 +1,6 @@
 {
  "id": "catastrophe",
- "label": "Catastrophic risk: the future a catastrophe could cost",
+ "label": "Catastrophic risk: chances, sizes and the future a catastrophe could cost",
  "rows": [
   {
    "id": "world_population_long_run",
@@ -19,7 +19,7 @@
     "quote": "After reaching this peak, it is expected to gradually decline to around 10.2 billion by the century's end.",
     "retrieved": "2026-11-03"
    },
-   "explainer": "People alive in each future year, the yearly stream of healthy life a catastrophe that shrinks or ends humanity's future would cost: the UN's 2100 projection as the best guess (after its peak of about 10.3 billion in the mid-2080s). The range is ours: a lower population if decline continues past 2100, a higher one if it doesn't. Every model's future loss is this stream discounted at the shared rate (your discount rate is how much future generations count)."
+   "explainer": "People alive in each future year, the yearly stream of healthy life a catastrophe that shrinks or ends humanity's future would cost: the UN's 2100 projection as the best guess (after its peak of about 10.3 billion in the mid-2080s). The range is ours: a lower population if decline continues past 2100, a higher one if it doesn't. Every model's future loss is this stream of people not yet born, discounted at the shared rate (your discount rate is how much future generations count): the people alive now are counted as deaths, so the stream counts only those born later, rising over a lifetime (life_expectancy_now) to this level."
   },
   {
    "id": "pandemic_probability_covid_scale",
@@ -77,6 +77,375 @@
     "retrieved": "2026-11-03"
    },
    "explainer": "IPBES's expert workshop: land-use change (deforestation, settlement in wild areas, expansion of crops and livestock) drove the emergence of more than 30% of new diseases reported since 1960. The range is ours: an expert synthesis, not a measured share."
+  },
+  {
+   "id": "xpt_forecast_year",
+   "label": "Year the tournament's forecasts were made",
+   "unit": "year",
+   "format": "integer",
+   "value": 2022,
+   "kind": "observed",
+   "source": {
+    "title": "Forecasting Research Institute, Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (Karger et al., 2023), Tables 2 and 3",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "retrieved": "2026-11-13",
+    "page": "p. 4: the tournament ran from June to October 2022"
+   },
+   "explainer": "The Existential Risk Persuasion Tournament asked in 2022 for the chance of each catastrophe by 2100; a chance by 2100 over the years from 2022 is the yearly chance the catastrophic-risk models use (spread evenly over the years, a simplification: most forecasters put more of the AI risk later)."
+  },
+  {
+   "id": "xpt_end_year",
+   "label": "Year the tournament's forecasts run to",
+   "unit": "year",
+   "format": "integer",
+   "value": 2100,
+   "kind": "observed",
+   "source": {
+    "title": "Forecasting Research Institute, Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (Karger et al., 2023), Tables 2 and 3",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "retrieved": "2026-11-13",
+    "page": "p. 16-17",
+    "quote": "Median forecasts from the XPT on questions of whether AI, pathogens, nuclear war, or non-anthropogenic risks will, by 2100, cause humanity to go extinct."
+   },
+   "explainer": "The forecasts' horizon; with xpt_forecast_year it turns a chance by 2100 into a yearly chance."
+  },
+  {
+   "id": "ai_catastrophe_vs_extinction",
+   "label": "AI: chance of a catastrophe (over 10% of people die) per chance of extinction",
+   "unit": "×",
+   "format": "multiple",
+   "value": {
+    "low": 4,
+    "best": 4,
+    "high": 5.6
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Forecasting Research Institute, Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (Karger et al., 2023), Tables 2 and 3",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "retrieved": "2026-11-13",
+    "page": "p. 16-17, Tables 2 and 3",
+    "quote": "AI catastrophe 2.13% [1.83, 3.00]% 12% [4.0, 18.5]%"
+   },
+   "explainer": "How many AI catastrophes that kill over a tenth of humanity (extinction included) the tournament expects per AI-caused extinction: the domain experts' 12% over 3% (4), the best guess because the slider \"Chance AI ends humanity's future by 2100\" starts at their 3%; the superforecasters' 2.13% over 0.38% (5.6) the high end. The slider sets the extinction-level chance; this ratio adds the catastrophes the world survives."
+  },
+  {
+   "id": "bio_extinction_by_2100",
+   "label": "Pandemics (engineered and natural): chance they end humanity's future by 2100",
+   "unit": "probability",
+   "format": "percent",
+   "value": {
+    "low": 0.000118,
+    "best": 0.0101,
+    "high": 0.0111
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Forecasting Research Institute, Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (Karger et al., 2023), Tables 2 and 3",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "retrieved": "2026-11-13",
+    "page": "p. 17, Table 3",
+    "quote": "Engineered pathogen extinction 0.01% [0.005, 0.052]% 1% [0.12, 1.09]%"
+   },
+   "explainer": "Engineered plus natural pathogens, extinction (fewer than 5,000 people left) by 2100: the domain experts' medians (1% + 0.01%) as the best guess, as for AI (the slider's default is the experts'); the superforecasters' (0.01% + 0.0018%) the low end; the top of the experts' bootstrapped intervals (1.09% + 0.02%) the high end. The two groups differ a hundredfold here, the tournament's widest gap. The pathogen questions were asked in a one-shot survey after the tournament (footnote 31), not in the tournament itself. The experts' figure as the best guess is the rule the owner set for AI (2026-11-04: the slider starts at the experts' 3%), applied to every area; the superforecasters' lower figure is the range's low end."
+  },
+  {
+   "id": "bio_catastrophe_by_2100",
+   "label": "Pandemics (engineered and natural): chance one kills over 10% of people by 2100",
+   "unit": "probability",
+   "format": "percent",
+   "value": {
+    "low": 0.018,
+    "best": 0.0385,
+    "high": 0.07
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Forecasting Research Institute, Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (Karger et al., 2023), Tables 2 and 3",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "retrieved": "2026-11-13",
+    "page": "p. 16, Table 2",
+    "quote": "Engineered pathogen catastrophe 0.8% [0.5, 1.0]% 3% [1, 5]%"
+   },
+   "explainer": "Engineered plus natural pathogens causing a catastrophe (over 10% of the people alive die within five years; extinction included) by 2100: the domain experts' 3% + 0.85% as the best guess, the superforecasters' 0.8% + 1% the low end, the tops of the experts' intervals (5% + 2%) the high end. The pathogen questions were asked in a one-shot survey after the tournament (footnote 31), not in the tournament itself. The experts' figure as the best guess is the rule the owner set for AI (2026-11-04: the slider starts at the experts' 3%), applied to every area; the superforecasters' lower figure is the range's low end."
+  },
+  {
+   "id": "nuclear_extinction_by_2100",
+   "label": "Nuclear war: chance it ends humanity's future by 2100",
+   "unit": "probability",
+   "format": "percent",
+   "value": {
+    "low": 0.00074,
+    "best": 0.0055,
+    "high": 0.014
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Forecasting Research Institute, Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (Karger et al., 2023), Tables 2 and 3",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "retrieved": "2026-11-13",
+    "page": "p. 17, Table 3",
+    "quote": "Nuclear extinction 0.074% [0.025, 0.100]% 0.55% [0.075, 1.400]%"
+   },
+   "explainer": "Domain experts' median (0.55%) as the best guess, as for AI and pandemics; superforecasters' 0.074% the low end; the top of the experts' interval (1.4%) the high end. The experts' figure as the best guess is the rule the owner set for AI (2026-11-04: the slider starts at the experts' 3%), applied to every area; the superforecasters' lower figure is the range's low end."
+  },
+  {
+   "id": "nuclear_catastrophe_by_2100",
+   "label": "Nuclear war: chance it kills over 10% of people by 2100",
+   "unit": "probability",
+   "format": "percent",
+   "value": {
+    "low": 0.04,
+    "best": 0.08,
+    "high": 0.11
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Forecasting Research Institute, Forecasting Existential Risks: Evidence from a Long-Run Forecasting Tournament (Karger et al., 2023), Tables 2 and 3",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "retrieved": "2026-11-13",
+    "page": "p. 16, Table 2",
+    "quote": "Nuclear catastrophe 4% [3, 5]% 8% [5, 11]%"
+   },
+   "explainer": "Domain experts' median (8%) as the best guess; superforecasters' 4% the low end; the top of the experts' interval (11%) the high end. Most of the deaths in such a war would come from famine after the smoke cools the climate (nuclear winter), not the blasts. The experts' figure as the best guess is the rule the owner set for AI (2026-11-04: the slider starts at the experts' 3%), applied to every area; the superforecasters' lower figure is the range's low end."
+  },
+  {
+   "id": "nuclear_catastrophe_death_share",
+   "label": "Nuclear war: share of people who die in a catastrophe the world survives",
+   "unit": "share",
+   "format": "percent",
+   "value": {
+    "low": 0.15,
+    "best": 0.45,
+    "high": 0.85
+   },
+   "kind": "judgment",
+   "source": {
+    "title": "Xia et al. 2022, Global food insecurity and famine from reduced crop, marine fishery and livestock production due to climate disruption from nuclear war soot (Nature Food)",
+    "url": "https://www.nature.com/articles/s43016-022-00573-0",
+    "retrieved": "2026-11-13",
+    "note": "Xia et al., Table 1: the India-Pakistan wars above the 10% threshold kill 15%, 23%, 33% and 40% of people by famine, the large US-Russia war 81-85%; Rethink Priorities' cross-cause model puts a nuclear catastrophe's intensity at 36-96% of people."
+   },
+   "explainer": "A nuclear war that kills over 10% of people would do so mostly through famine after the soot cools the climate: our judgment 45%, between Xia et al.'s regional wars above the threshold (15-40%) and a large US-Russia war (81-85%), the range spanning both."
+  },
+  {
+   "id": "bio_catastrophe_death_share",
+   "label": "Pandemics: share of people who die in a catastrophe the world survives",
+   "unit": "share",
+   "format": "percent",
+   "value": {
+    "low": 0.1,
+    "best": 0.15,
+    "high": 0.4
+   },
+   "kind": "judgment",
+   "source": {
+    "title": "charityevals' judgment, anchored on the tournament's 10% threshold and the deadliest pandemics on record",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "page": "p. 16, Table 2 (catastrophe: over 10% of humans die within 5 years)",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "A pandemic that kills over 10% of people: most such outcomes sit near the threshold (the 1918 influenza killed perhaps 2-5% of the world; the Black Death a third of Europe), so 15%, from the 10% threshold to 40% for an engineered pathogen. Our judgment."
+  },
+  {
+   "id": "ai_catastrophe_death_share",
+   "label": "AI: share of people who die in a catastrophe the world survives",
+   "unit": "share",
+   "format": "percent",
+   "value": {
+    "low": 0.1,
+    "best": 0.25,
+    "high": 0.65
+   },
+   "kind": "judgment",
+   "source": {
+    "title": "charityevals' judgment, anchored on the tournament's 10% threshold",
+    "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+    "page": "p. 16, Table 2",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "An AI catastrophe that kills over 10% of people but not everyone has no published size: a quarter, from the threshold to about two thirds. Our judgment."
+  },
+  {
+   "id": "nondeath_losses_vs_deaths",
+   "label": "Losses beyond deaths in a catastrophe, as a share of the deaths' value",
+   "unit": "share",
+   "format": "percent",
+   "value": {
+    "low": 0,
+    "best": 0,
+    "high": 0.3
+   },
+   "kind": "judgment",
+   "source": {
+    "title": "charityevals' judgment (docs/normalization.md 2.19)",
+    "note": "As climate's nondeath_damages_vs_deaths: stated as a fact set to 0 so it shows.",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "Survivors' lost income and health, injuries and the births lost while the world recovers are not counted: our judgment, stated as a fact set to 0 so it shows (as for climate's damages beyond deaths), the reason the default is likely low. The high end, 30% of the deaths' value, if survivors lose years of consumption. Read on every death averted, extinction-level ones included (where no one survives to lose income), so its high end overstates by a few percent; 0 at the default."
+  },
+  {
+   "id": "world_population_now",
+   "label": "World population now",
+   "unit": "people",
+   "format": "integer",
+   "value": 8140897523,
+   "kind": "observed",
+   "source": {
+    "title": "World Bank, World Development Indicators: Population, total (SP.POP.TOTL), World, 2024",
+    "url": "https://api.worldbank.org/v2/country/WLD/indicator/SP.POP.TOTL?format=json&date=2024",
+    "page": "World, 2024: 8,140,897,523",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "The people an extinction-level catastrophe would kill, and the base of a smaller catastrophe's deaths (× catastrophe_death_share). World Bank figure from the UN's World Population Prospects."
+  },
+  {
+   "id": "life_expectancy_now",
+   "label": "Life expectancy at birth, world",
+   "unit": "years",
+   "format": "number",
+   "value": 73.48,
+   "kind": "observed",
+   "source": {
+    "title": "World Bank, World Development Indicators: Life expectancy at birth, total (SP.DYN.LE00.IN), World, 2024",
+    "url": "https://api.worldbank.org/v2/country/WLD/indicator/SP.DYN.LE00.IN?format=json&date=2024",
+    "page": "World, 2024: 73.48 years",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "How long the people alive now would have lived on: over this many years the future generations' stream rises from nothing to the long-run population, so an extinction's future loss counts only people not yet born (those alive now are counted as deaths)."
+  },
+  {
+   "id": "ai_extinction_cut_per_million",
+   "label": "AI: share of the yearly extinction risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 7.712e-08,
+    "best": 7.712e-07,
+    "high": 7.712e-06
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-14",
+    "page": "Small-scale AI Misalignment Project: $200k-1M, 96.4% chance of no effect, else a relative cut of 1e-6 to 5.5e-5 in extinction and catastrophe risk; applied by Rethink to misalignment risk only, 90% of AI risk (ccm/world/longterm_params.py lines 87-99: 'AI default risks split as 90% misalignment and 10% misuse')"
+   },
+   "explainer": "Rethink Priorities' preset for a typical project against AI misalignment, as its expected value per $1 million of all AI risk: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.9, misalignment's share of AI risk in Rethink's model (it applies the preset's cut to misalignment risk only; the misuse tenth is untouched) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink extrapolated the small project's cut linearly from its AI misalignment megaproject, OpenAI's Superalignment team at $8-28B for a 50-80% cut, and took a similar chance of no effect, 96.4% against the megaproject's 97.3%; the extinction and catastrophe cuts are drawn independently here, a slight widening). Catastrophes the world survives take Rethink's own split for them (ai_catastrophe_cut_per_million, 32% of their deaths)."
+  },
+  {
+   "id": "ai_catastrophe_cut_per_million",
+   "label": "AI: share of the yearly catastrophe risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 2.742e-08,
+    "best": 2.742e-07,
+    "high": 2.742e-06
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-14",
+    "page": "Small-scale AI Misalignment Project: $200k-1M, 96.4% chance of no effect, else a relative cut of 1e-6 to 5.5e-5 in extinction and catastrophe risk; applied by Rethink to misalignment risk only (ccm/world/longterm_params.py lines 87-99: 'AI default risks split as 90% misalignment and 10% misuse', catastrophes per extinction 2 for misalignment and 50 for misuse), share of people killed 36-96% (mean 0.66) for misalignment and 5-96% (mean 0.505) for misuse; so misalignment is 0.9 x 2 x 0.66 / (0.9 x 2 x 0.66 + 0.1 x 50 x 0.505) = 32% of the deaths in AI catastrophes the world survives"
+   },
+   "explainer": "Rethink Priorities' preset for a typical project against AI misalignment, as its expected value per $1 million of all AI risk: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.32, misalignment's share of the deaths in AI catastrophes the world survives in Rethink's model (it applies the preset's cut to misalignment risk only: misalignment is 90% of AI extinction risk, Rethink expects 2 survivable catastrophes per extinction from misalignment against 50 from misuse, and a misalignment catastrophe kills more, a mean 66% of people against 50.5%, so 0.9 × 2 × 0.66 ÷ (0.9 × 2 × 0.66 + 0.1 × 50 × 0.505)) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink extrapolated the small project's cut linearly from its AI misalignment megaproject, OpenAI's Superalignment team at $8-28B for a 50-80% cut, and took a similar chance of no effect, 96.4% against the megaproject's 97.3%; the extinction and catastrophe cuts are drawn independently here, a slight widening). The tournament doesn't split catastrophes by type, so Rethink's split is used for them as it is for extinction (ai_extinction_cut_per_million takes its 90%); Rethink's misalignment ratio against the tournament's three survivable catastrophes per extinction would give about 0.6 instead, inside the range."
+  },
+  {
+   "id": "bio_extinction_cut_per_million",
+   "label": "Pandemics: share of the yearly extinction risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 1.305e-05,
+    "best": 0.0001305,
+    "high": 0.001305
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-13",
+    "page": "Small-scale Biorisk Project: $0.5-10M, 60% chance of no effect, else a relative cut of 1e-4 to 5e-3 in extinction risk and 1e-3 to 5e-3 in catastrophe risk"
+   },
+   "explainer": "Rethink Priorities' preset for a typical project against pandemics risk, as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening). Rethink's preset is for engineered pandemics; it is applied to natural and COVID-scale pandemics too, a judgment (natural and COVID-scale pandemics are about a third of a pandemic branch's value)."
+  },
+  {
+   "id": "bio_catastrophe_cut_per_million",
+   "label": "Pandemics: share of the yearly catastrophe risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 2.301e-05,
+    "best": 0.0002301,
+    "high": 0.002301
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-13",
+    "page": "Small-scale Biorisk Project: $0.5-10M, 60% chance of no effect, else a relative cut of 1e-4 to 5e-3 in extinction risk and 1e-3 to 5e-3 in catastrophe risk"
+   },
+   "explainer": "Rethink Priorities' preset for a typical project against pandemics risk, as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening). Rethink's preset is for engineered pandemics; it is applied to natural and COVID-scale pandemics too, a judgment (natural and COVID-scale pandemics are about a third of a pandemic branch's value)."
+  },
+  {
+   "id": "nuclear_extinction_cut_per_million",
+   "label": "Nuclear war: share of the yearly extinction risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 2.023e-05,
+    "best": 0.0002023,
+    "high": 0.002023
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-13",
+    "page": "Small-scale Nuclear Safety Project: $5-20M, 80% chance of no effect, else a relative cut of 1e-3 to 5e-2 in extinction risk and 1e-2 to 5e-2 in catastrophe risk"
+   },
+   "explainer": "Rethink Priorities' preset for a typical project against nuclear war risk, as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening)."
+  },
+  {
+   "id": "nuclear_catastrophe_cut_per_million",
+   "label": "Nuclear war: share of the yearly catastrophe risk a typical $1 million of work removes, while it counts",
+   "unit": "share per $1M",
+   "format": "small",
+   "value": {
+    "low": 3.559e-05,
+    "best": 0.0003559,
+    "high": 0.003559
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model, x-risk interventions (small-scale project presets)",
+    "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public/blob/main/ccm/interventions/intervention_definitions/xrisk_interventions.py",
+    "retrieved": "2026-11-13",
+    "page": "Small-scale Nuclear Safety Project: $5-20M, 80% chance of no effect, else a relative cut of 1e-3 to 5e-2 in extinction risk and 1e-2 to 5e-2 in catastrophe risk"
+   },
+   "explainer": "Rethink Priorities' preset for a typical project against nuclear war risk, as its expected value per $1 million: (1 − chance of no effect) × the mean relative cut ÷ the mean cost (lognormal means of its 90% ranges: the ratio of means, as a donor's average dollar, not Rethink's mean of per-project ratios) × 0.772, Rethink's backfire step (a 70% chance the effect has the intended sign, harm at 30% of its size when it doesn't: (0.7 − 0.3 × 0.3) ÷ (0.7 + 0.3 × 0.3)). So a typical project's chance of doing harm is in this figure; a model's harm rows add only harms beyond a typical project's. Rethink applies the cut to each year of risk while the effect persists (15-25 years); here the years are the site's one answer, $win_years_counted, discounted. The range is ours, ten times either way: Rethink calls its x-risk inputs placeholders, and its AI figure is two orders of magnitude below its pandemic and nuclear ones (Rethink gives no reason; the extinction and catastrophe cuts are drawn independently here, a slight widening)."
+  },
+  {
+   "id": "cost_per_work_year",
+   "label": "Cost of a year of full-time work on catastrophic risks",
+   "unit": "usd",
+   "format": "usd",
+   "value": {
+    "low": 150000,
+    "best": 250000,
+    "high": 400000
+   },
+   "kind": "judgment",
+   "source": {
+    "title": "charityevals' judgment, anchored on AI safety field size and funding (McAleese 2025) and research organisations' Form 990s",
+    "url": "https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025",
+    "note": "About 1,100 full-time AI safety staff in 2025 against $110-190M of philanthropy in 2024 (McAleese) gives $100-170k a head before labs' higher pay; policy organisations' total expenses per employee run $250-300k.",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "What an employer spends for a year of a researcher's or policy professional's work on these risks, overheads included: turns a field-building charity's added work-years into dollars of typical work, valued at the area's cut per $1 million. Our judgment."
   }
  ]
 }

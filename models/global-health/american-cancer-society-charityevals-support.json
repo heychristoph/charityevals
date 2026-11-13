@@ -1,0 +1,1079 @@
+{
+ "id": "american-cancer-society-charityevals-support",
+ "name": "American Cancer Society: Hope Lodge, rides to treatment and the helpline (charityevals, 2025-26)",
+ "kind": "charity",
+ "cause": "global-health",
+ "beneficiaries": {"USA":1},
+ "beneficiaries_note": "Our build: Hope Lodge lodging, Road To Recovery rides and the helpline and information for patients in the US.",
+ "template": "domestic-services",
+ "estimate_basis": "unit_cost",
+ "charity": "american-cancer-society",
+ "owner": "charityevals",
+ "summary": "The American Cancer Society's patient services in the US, year to March 2026: free lodging at its Hope Lodge communities (565,000 nights), Road To Recovery volunteer rides to treatment (93,000 rides for 7,500 patients) and its 24/7 helpline (284,000 calls, chats, emails and texts) with online information and peer support, about $235m of its $426m patient-support line (the rest, prevention and screening promotion, is in the research-and-policy model). Lodging and rides are valued as money saved, on the site's log scale for patients' households, plus a small judged chance that they keep a patient's treatment on track; information and support as a small, short wellbeing gain scaled down from trials of psychosocial support for people with cancer. The result, about 0.004 years of healthy life per $1,000, is far below the site's global-health median because a few thousand dollars saved is a small gain to a US household and a call is a small dose of support; every branch is discounted for missing data, since ACS counts nights, rides and contacts but measures no outcomes. How often lodging and rides keep treatment on track and how much a call or a page helps are the biggest uncertainties, and the result is mostly uncertainty.",
+ "source": {
+  "publisher": "charityevals",
+  "title": "charityevals' estimate: American Cancer Society: Hope Lodge, rides to treatment and the helpline (charityevals, 2025-26)",
+  "url": "https://charityevals.org/american-cancer-society-charityevals-support",
+  "published": "2026-11-13",
+  "retrieved": "2026-11-13"
+ },
+ "resources": [
+  {
+   "title": "American Cancer Society, Consolidated Financial Statements, year ended March 31, 2026",
+   "url": "https://www.cancer.org/content/dam/cancer-org/online-documents/en/pdf/policies/combined-financials-2026.pdf",
+   "type": "charity",
+   "note": "Audited (BDO USA): statement of activities (p. 7), functional expenses (p. 8), liquidity (p. 17), contributed nonfinancial assets (note 4, p. 18), joint costs (note 5, p. 19). ACS moved its year end from December to March in 2025."
+  },
+  {
+   "title": "American Cancer Society, Our impact",
+   "url": "https://www.cancer.org/about-us/what-we-do/our-impact.html",
+   "type": "charity",
+   "note": "Hope Lodge nights and savings, Road To Recovery rides, new research grants ($123.9m in fiscal 2026), advocacy figures."
+  },
+  {
+   "title": "American Cancer Society, Help save lives (impact April 2025 to March 2026)",
+   "url": "https://www.cancer.org/donate/hope",
+   "type": "charity",
+   "note": "Nights of lodging, rides, helpline contacts and active research grants for the year."
+  },
+  {
+   "title": "WHO Global Health Estimates 2023, malignant neoplasms (cause 610), deaths, YLL, YLD and DALYs by country and age, via WHO's public data API",
+   "url": "https://xmart-api-public.who.int/DEX_CMS/GHE_FULL?$filter=DIM_GHECAUSE_CODE%20eq%20610%20and%20DIM_SEX_CODE%20eq%20'TOTAL'%20and%20DIM_YEAR_CODE%20eq%202023",
+   "type": "data",
+   "note": "Cancer deaths, YLL, YLD and DALYs by age, world and United States, 2023."
+  }
+ ],
+ "sections": [
+  {
+   "id": "cost",
+   "title": "Cost",
+   "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+  },
+  {
+   "id": "reach",
+   "title": "Reach",
+   "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+  },
+  {
+   "id": "effect",
+   "title": "Effect per unit",
+   "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+  },
+  {
+   "id": "adjustments",
+   "title": "Adjustments",
+   "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+  },
+  {
+   "id": "bridges",
+   "title": "Other outcomes, in this model's unit",
+   "kind": "ours",
+   "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+  },
+  {
+   "id": "outcome",
+   "title": "Outcome",
+   "explainer": "The outcome in the family's shared unit, per dollar."
+  },
+  {
+   "id": "donor",
+   "title": "Your dollar's share",
+   "kind": "ours",
+   "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+  }
+ ],
+ "rows": [
+  {
+   "id": "support_spend",
+   "section": "cost",
+   "label": "Patient-support expenses (shared fact)",
+   "format": "usd",
+   "formula": "@american_cancer_society.patient_support_fy2026",
+   "explainer": "The accounts' patient-support line (facts: american_cancer_society)."
+  },
+  {
+   "id": "prevention_share_of_support",
+   "section": "cost",
+   "label": "Share of patient support that is prevention and early detection (shared judgment)",
+   "format": "percent",
+   "formula": "@american_cancer_society.prevention_share_of_support",
+   "explainer": "Modelled in the research-and-policy model's screening branch."
+  },
+  {
+   "id": "program_spend",
+   "section": "cost",
+   "label": "Patient services spending",
+   "format": "usd",
+   "formula": "support_spend * (1 - prevention_share_of_support)",
+   "explainer": "Hope Lodge lodging, Road To Recovery rides, and the helpline, information and peer support."
+  },
+  {
+   "id": "lodge_share",
+   "section": "cost",
+   "label": "Share of patient services that is Hope Lodge",
+   "format": "percent",
+   "value": {
+    "low": 0.15,
+    "best": 0.25,
+    "high": 0.35
+   },
+   "kind": "judgment",
+   "explainer": "The accounts' 'Hope Lodge and community facilities' line is $29.9m in patient support (p. 8), mostly the 30-odd lodges' buildings, plus their staff and depreciation of the lodges ($14.6m of depreciation in patient support): about $55-60m of the services' $235m. 25%, 15% to 35%."
+  },
+  {
+   "id": "rides_share",
+   "section": "cost",
+   "label": "Share of patient services that is Road To Recovery",
+   "format": "percent",
+   "value": {
+    "low": 0.02,
+    "best": 0.04,
+    "high": 0.08
+   },
+   "kind": "judgment",
+   "explainer": "Volunteer drivers give the rides; ACS pays for coordination staff, the scheduling platform and, in some areas, paid ride partners. About $9m; 2% to 8%."
+  },
+  {
+   "id": "info_share",
+   "section": "cost",
+   "label": "Share of patient services that is the helpline, information and support",
+   "format": "percent",
+   "formula": "1 - lodge_share - rides_share",
+   "explainer": "The rest: the 24/7 National Cancer Information Center, cancer.org's information, online communities, Reach To Recovery peer support and navigation."
+  },
+  {
+   "id": "total_expenses",
+   "section": "cost",
+   "label": "Total expenses (programme, management and fundraising)",
+   "format": "usd",
+   "value": 830207000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Consolidated Financial Statements, year ended March 31, 2026 (BDO USA, issued September 25, 2026)",
+    "url": "https://www.cancer.org/content/dam/cancer-org/online-documents/en/pdf/policies/combined-financials-2026.pdf",
+    "page": "p. 7",
+    "quote": "Total expenses 830,207 - 830,207",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "Exchange expenses left out on both sides, as in the research model."
+  },
+  {
+   "id": "program_expenses",
+   "section": "cost",
+   "label": "Mission programme expenses",
+   "format": "usd",
+   "value": 674811000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Consolidated Financial Statements, year ended March 31, 2026 (BDO USA, issued September 25, 2026)",
+    "url": "https://www.cancer.org/content/dam/cancer-org/online-documents/en/pdf/policies/combined-financials-2026.pdf",
+    "page": "p. 7",
+    "quote": "Total mission program services 674,811 - 674,811",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "Patient support, research and advocacy."
+  },
+  {
+   "id": "overhead_ratio",
+   "section": "cost",
+   "label": "Total over programme expenses",
+   "format": "multiple",
+   "formula": "total_expenses / program_expenses",
+   "explainer": "Management and fundraising spread over every programme by cost."
+  },
+  {
+   "id": "cost_total",
+   "section": "cost",
+   "label": "Full cost of patient services",
+   "format": "usd",
+   "formula": "program_spend * overhead_ratio",
+   "explainer": "Programme spending plus its share of management and fundraising."
+  },
+  {
+   "id": "lodge_nights",
+   "section": "reach",
+   "label": "Hope Lodge: free nights of lodging, April 2025 to March 2026",
+   "format": "integer",
+   "value": 565000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Help save lives (donation page: impact April 2025 through March 2026)",
+    "url": "https://www.cancer.org/donate/hope",
+    "quote": "565,000 nights of free lodging provided",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "ACS's own count, the same year as the accounts."
+  },
+  {
+   "id": "lodge_saved_usd",
+   "section": "reach",
+   "label": "Hope Lodge: what the nights saved patients and families (ACS's figure)",
+   "format": "usd",
+   "value": 85600000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Our impact",
+    "url": "https://www.cancer.org/about-us/what-we-do/our-impact.html",
+    "quote": "saved cancer patients and their families $85.6 million",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "ACS's valuation of the nights at local lodging prices, about $152 a night."
+  },
+  {
+   "id": "lodge_nights_per_stay",
+   "section": "reach",
+   "label": "Hope Lodge: nights per stay (one patient with a caregiver)",
+   "format": "number",
+   "value": {
+    "low": 10,
+    "best": 20,
+    "high": 35
+   },
+   "kind": "judgment",
+   "explainer": "Guests are patients travelling for weeks of radiation or chemotherapy, or a transplant, with a caregiver; a five- to seven-week radiation course is 25-35 nights, shorter treatments fewer. 20 nights, 10 to 35."
+  },
+  {
+   "id": "lodge_households",
+   "section": "reach",
+   "label": "Hope Lodge: stays a year",
+   "format": "integer",
+   "formula": "lodge_nights / lodge_nights_per_stay",
+   "explainer": "Each stay is one household helped."
+  },
+  {
+   "id": "rides_given",
+   "section": "reach",
+   "label": "Road To Recovery: rides to treatment, April 2025 to March 2026",
+   "format": "integer",
+   "value": 93000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Help save lives (donation page: impact April 2025 through March 2026)",
+    "url": "https://www.cancer.org/donate/hope",
+    "quote": "93,000 rides to treatment provided through Road To Recovery",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "ACS's own count."
+  },
+  {
+   "id": "rides_patients",
+   "section": "reach",
+   "label": "Road To Recovery: patients given rides",
+   "format": "integer",
+   "value": 7500,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Our impact",
+    "url": "https://www.cancer.org/about-us/what-we-do/our-impact.html",
+    "quote": "more than 7,500 patients received 93,000 rides",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "ACS's own count."
+  },
+  {
+   "id": "info_contacts",
+   "section": "reach",
+   "label": "Helpline: calls, chats, emails and texts, April 2025 to March 2026",
+   "format": "integer",
+   "value": 284000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Help save lives (donation page: impact April 2025 through March 2026)",
+    "url": "https://www.cancer.org/donate/hope",
+    "quote": "284,000 calls, chats, emails, and SMS texts through our 24/7 helpline",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "ACS's own count."
+  },
+  {
+   "id": "info_contacts_per_person",
+   "section": "reach",
+   "label": "Helpline: contacts per person",
+   "format": "number",
+   "value": {
+    "low": 1.1,
+    "best": 1.5,
+    "high": 2.5
+   },
+   "kind": "judgment",
+   "explainer": "Most callers call once; some return through treatment. 1.5, 1.1 to 2.5."
+  },
+  {
+   "id": "info_helpline_people",
+   "section": "reach",
+   "label": "Helpline: people helped",
+   "format": "integer",
+   "formula": "info_contacts / info_contacts_per_person",
+   "explainer": "Patients, caregivers and people worried about cancer."
+  },
+  {
+   "id": "info_other_people",
+   "section": "reach",
+   "label": "Information and peer support: other patients and caregivers helped a year",
+   "format": "integer",
+   "value": {
+    "low": 300000,
+    "best": 1000000,
+    "high": 3000000
+   },
+   "kind": "judgment",
+   "explainer": "cancer.org's treatment and side-effect pages, the Cancer Survivors Network, Reach To Recovery peer visits and the ACS CARES app reach many more people than the helpline; ACS publishes no count. Of the US's roughly 2 million new diagnoses a year and their caregivers, about a million use ACS information in a way that matters to them; 300,000 to 3 million."
+  },
+  {
+   "id": "households_reached",
+   "section": "reach",
+   "label": "Households helped",
+   "format": "integer",
+   "formula": "lodge_households + rides_patients + info_helpline_people + info_other_people",
+   "explainer": "Stays, ride patients and people informed, each a household."
+  },
+  {
+   "id": "household_size",
+   "section": "reach",
+   "label": "People per household",
+   "format": "number",
+   "formula": "@household_size.united_states",
+   "explainer": "The site's figure (persons per consumer unit); a patient and family share what is saved.",
+   "unit": "people"
+  },
+  {
+   "id": "people_reached",
+   "section": "reach",
+   "label": "People reached",
+   "format": "integer",
+   "formula": "households_reached * household_size",
+   "explainer": "For reading; each branch counts its own."
+  },
+  {
+   "id": "cost_per_person",
+   "section": "reach",
+   "label": "Cost per person reached",
+   "format": "usd",
+   "formula": "cost_total / people_reached",
+   "explainer": "For reading."
+  },
+  {
+   "id": "consumption_mean",
+   "section": "effect",
+   "label": "Household spending per person, United States",
+   "format": "usd",
+   "formula": "@united_states.ce_expenditure_per_person_2024",
+   "explainer": "The site's survey consumption (Consumer Expenditure Survey)."
+  },
+  {
+   "id": "recipients_consumption_share",
+   "section": "effect",
+   "label": "Patients' households' spending per person, as a share of the US average",
+   "format": "percent",
+   "value": {
+    "low": 0.5,
+    "best": 0.8,
+    "high": 1
+   },
+   "kind": "judgment",
+   "explainer": "Cancer patients are older and sicker than average and many travelling patients are rural; Hope Lodge and Road To Recovery serve anyone, with priority to those who can't pay. 80%, 50% to 100%; the lowest fifth's 45% (@united_states.ce_lowest_quintile_vs_all_2024) is the floor."
+  },
+  {
+   "id": "baseline_consumption",
+   "section": "effect",
+   "label": "Patients' spending per person",
+   "format": "usd",
+   "formula": "consumption_mean * recipients_consumption_share",
+   "explainer": "On the site's one log scale."
+  },
+  {
+   "id": "lodge_value_per_night",
+   "section": "effect",
+   "label": "Hope Lodge: value of a night at local prices",
+   "format": "usd",
+   "formula": "lodge_saved_usd / lodge_nights",
+   "explainer": "ACS's figure per night."
+  },
+  {
+   "id": "cash_equivalent_share",
+   "section": "effect",
+   "label": "What a free night or ride is worth to the family, as a share of its price",
+   "format": "percent",
+   "value": {
+    "low": 0.6,
+    "best": 0.8,
+    "high": 0.95
+   },
+   "kind": "judgment",
+   "explainer": "Help in kind is worth less than its price in cash, because the family can't spend it on something else: 80%, 60% to 95%, as the Habitat for Humanity model's cash-equivalent share. Families who would have stayed with relatives or driven themselves are in the counterfactual rows, not here."
+  },
+  {
+   "id": "lodge_value_per_person",
+   "section": "effect",
+   "label": "Hope Lodge: value per person in the household",
+   "format": "usd",
+   "formula": "lodge_nights_per_stay * lodge_value_per_night * cash_equivalent_share / household_size",
+   "explainer": "One stay's value, shared over the household."
+  },
+  {
+   "id": "lodge_ln_gain_per_person",
+   "section": "effect",
+   "label": "Hope Lodge: log-consumption gain per person",
+   "format": "small",
+   "formula": "ln(1 + lodge_value_per_person / baseline_consumption)",
+   "explainer": "A one-off saving in the year of treatment."
+  },
+  {
+   "id": "lodge_deaths_averted_per_household",
+   "section": "effect",
+   "label": "Hope Lodge: cancer deaths averted per stay",
+   "format": "small",
+   "value": {
+    "low": 0,
+    "best": 0.002,
+    "high": 0.008
+   },
+   "kind": "judgment",
+   "explainer": "Free lodging lets some patients take treatment at a distant specialist centre or finish a course they would otherwise cut short. A review of the literature on distance and cancer care (Ambroggi et al., The Oncologist 2015) found that longer travel goes with more advanced disease at diagnosis, less adequate treatment and worse survival in most of the studies it covers, all observational; no trial measures lodging. If 5% of guests would otherwise have had worse or incomplete treatment and that costs 4% of them their life, 0.002; 0 to 0.008."
+  },
+  {
+   "id": "rides_value_per_ride",
+   "section": "effect",
+   "label": "Road To Recovery: price of a ride to treatment (round trip)",
+   "format": "usd",
+   "value": {
+    "low": 20,
+    "best": 35,
+    "high": 60
+   },
+   "kind": "judgment",
+   "explainer": "A round trip of about 20 miles by taxi or rideshare in the US; $20 to $60."
+  },
+  {
+   "id": "rides_value_per_person",
+   "section": "effect",
+   "label": "Road To Recovery: value per person in the household",
+   "format": "usd",
+   "formula": "rides_given / rides_patients * rides_value_per_ride * cash_equivalent_share / household_size",
+   "explainer": "A year's rides, shared over the household."
+  },
+  {
+   "id": "rides_ln_gain_per_person",
+   "section": "effect",
+   "label": "Road To Recovery: log-consumption gain per person",
+   "format": "small",
+   "formula": "ln(1 + rides_value_per_person / baseline_consumption)",
+   "explainer": "Over the treatment year."
+  },
+  {
+   "id": "rides_deaths_averted_per_patient",
+   "section": "effect",
+   "label": "Road To Recovery: cancer deaths averted per patient given rides",
+   "format": "small",
+   "value": {
+    "low": 0,
+    "best": 0.003,
+    "high": 0.01
+   },
+   "kind": "judgment",
+   "explainer": "Transport barriers cause missed and delayed treatment (Syed, Gerber and Sharp, J Community Health 2013: reported by 3% to 67% of patients across studies); delayed treatment raises mortality a few percent per month of delay for common cancers (Hanna et al., BMJ 2020). If one in ten ride users would otherwise miss or delay treatment and that costs 3% of them their life, 0.003; 0 to 0.01."
+  },
+  {
+   "id": "info_sd_gain_helpline",
+   "section": "effect",
+   "label": "Helpline: gain in wellbeing per person (standard deviations)",
+   "format": "number",
+   "value": {
+    "low": 0.0075,
+    "best": 0.025,
+    "high": 0.075
+   },
+   "kind": "judgment",
+   "explainer": "Psychosocial and educational interventions for people with cancer improve distress and quality of life by about 0.25 standard deviations over several sessions (Faller et al., J Clin Oncol 2013); one or two calls with a cancer information specialist are about a tenth of that dose, as the British Heart Foundation's helpline (0.03 to 0.3 of a trial's dose). 0.025, 0.0075 to 0.075."
+  },
+  {
+   "id": "info_sd_gain_other",
+   "section": "effect",
+   "label": "Other information and peer support: gain in wellbeing per person (standard deviations)",
+   "format": "number",
+   "value": {
+    "low": 0.00075,
+    "best": 0.0025,
+    "high": 0.0075
+   },
+   "kind": "judgment",
+   "explainer": "Reading trusted pages or a peer visit is about a hundredth of a trial's dose, as the British Heart Foundation's reading dose (0.003 to 0.03): 0.0025, 0.00075 to 0.0075."
+  },
+  {
+   "id": "info_patient_share",
+   "section": "effect",
+   "label": "Helpline and information: share of the people helped who are patients or their close caregivers",
+   "format": "percent",
+   "value": {
+    "low": 0.5,
+    "best": 0.7,
+    "high": 0.85
+   },
+   "kind": "judgment",
+   "explainer": "The trials' effect is for people with cancer; the helpline and pages also serve people worried about symptoms, students and professionals. 70%, 50% to 85% (the British Heart Foundation's information branch counts only patients, 22% of its readers, because most of its readers are the general public)."
+  },
+  {
+   "id": "ls_effect_years",
+   "section": "effect",
+   "label": "Years the wellbeing gain lasts",
+   "format": "number",
+   "value": {
+    "low": 0.25,
+    "best": 0.5,
+    "high": 1
+   },
+   "kind": "judgment",
+   "explainer": "Support around a diagnosis or treatment helps for the months it lasts; 6 months, 3 to 12.",
+   "unit": "years"
+  },
+  {
+   "id": "info_wellbys_helpline",
+   "section": "effect",
+   "label": "Helpline: WELLBYs per person",
+   "format": "number",
+   "formula": "info_sd_gain_helpline * @wellby_factors.wellbys_per_sd_year * pv_annuity_due(1, $discount_rate, ls_effect_years)",
+   "explainer": "Standard-deviation years at the site's shared rate.",
+   "unit": "WELLBYs"
+  },
+  {
+   "id": "info_wellbys_other",
+   "section": "effect",
+   "label": "Other information: WELLBYs per person",
+   "format": "number",
+   "formula": "info_sd_gain_other * @wellby_factors.wellbys_per_sd_year * pv_annuity_due(1, $discount_rate, ls_effect_years)",
+   "explainer": "As the helpline.",
+   "unit": "WELLBYs"
+  },
+  {
+   "id": "ls_gain_per_person_year",
+   "section": "effect",
+   "label": "Wellbeing gain per person reached (life-satisfaction points, for reading)",
+   "format": "number",
+   "formula": "(info_helpline_people * info_sd_gain_helpline + info_other_people * info_sd_gain_other) * @wellby_factors.wellbys_per_sd_year / people_reached",
+   "explainer": "Averaged over everyone reached, for reading."
+  },
+  {
+   "id": "wellbys_per_person",
+   "section": "effect",
+   "label": "WELLBYs per person reached (for reading)",
+   "format": "number",
+   "formula": "(info_helpline_people * info_wellbys_helpline + info_other_people * info_wellbys_other) / people_reached",
+   "explainer": "For reading; the branches count their own.",
+   "unit": "WELLBYs"
+  },
+  {
+   "id": "value_per_person",
+   "section": "effect",
+   "label": "Value per person reached (for reading)",
+   "format": "usd",
+   "formula": "(lodge_households * household_size * lodge_value_per_person + rides_patients * household_size * rides_value_per_person) / people_reached",
+   "explainer": "For reading."
+  },
+  {
+   "id": "income_years",
+   "section": "effect",
+   "label": "Years the money gain lasts",
+   "format": "number",
+   "formula": "1",
+   "explainer": "A saving in the treatment year.",
+   "unit": "years"
+  },
+  {
+   "id": "ln_gain_per_person",
+   "section": "effect",
+   "label": "Log-consumption gain per person reached (for reading)",
+   "format": "small",
+   "formula": "(lodge_households * lodge_ln_gain_per_person + rides_patients * rides_ln_gain_per_person) * household_size / people_reached",
+   "explainer": "For reading; the branches count their own."
+  },
+  {
+   "id": "dalys_averted_per_person",
+   "section": "effect",
+   "label": "Illness averted per person",
+   "format": "number",
+   "formula": "0",
+   "explainer": "The health gain is counted as deaths averted below; illness averted is left at 0: a patient kept alive lives on with the illness of cancer and its treatment, so better-completed treatment may add illness as well as remove it (7% of US cancer DALYs are illness).",
+   "unit": "DALYs"
+  },
+  {
+   "id": "deaths_averted_per_person",
+   "section": "effect",
+   "label": "Deaths averted per person reached (for reading)",
+   "format": "small",
+   "formula": "(lodge_households * lodge_deaths_averted_per_household + rides_patients * rides_deaths_averted_per_patient) / people_reached",
+   "explainer": "For reading."
+  },
+  {
+   "id": "value_70plus",
+   "section": "effect",
+   "label": "value of a cancer death at 70 or older (United States, units of value)",
+   "format": "number",
+   "formula": "(1 - @death_ages.cancer_share_80plus_of_70plus_usa) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cancer_share_80plus_of_70plus_usa * @moral_weights.givewell_age_80_84",
+   "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over (80-84; 85 and over has the same weight), mixed by the share of these deaths at 80 or older (WHO GHE 2023)."
+  },
+  {
+   "id": "value_per_death",
+   "section": "effect",
+   "label": "value of a cancer death averted (units of value)",
+   "format": "number",
+   "formula": "(@death_ages.cancer_share_under5_usa * @moral_weights.uov_per_death_under5 + @death_ages.cancer_share_5_14_usa * @moral_weights.uov_per_death_age_5_14 + @death_ages.cancer_share_15_49_usa * @moral_weights.uov_per_death_age_15_49 + @death_ages.cancer_share_50_69_usa * @moral_weights.uov_per_death_age_50_74 + @death_ages.cancer_share_70plus_usa * value_70plus) * $life_value_multiplier",
+   "explainer": "Every death the site counts is valued by the age it happens at (docs/normalization.md, decision 2026-10-31 #4): GiveWell's moral weights by age over the ages of cancer deaths (in the United States, WHO GHE 2023, facts: death_ages), 50-69 at the 50-74 band and 70 and over at the five-year weights, times the value-of-a-life slider."
+  },
+  {
+   "id": "evidence_adj",
+   "section": "adjustments",
+   "label": "Evidence adjustment (for reading)",
+   "format": "multiple",
+   "formula": "(lodge_raw * lodge_evidence_adj + rides_raw * rides_evidence_adj + info_raw * info_evidence_adj) / (lodge_raw + rides_raw + info_raw)",
+   "explainer": "Outcome-weighted average of the branches, for reading only."
+  },
+  {
+   "id": "lodge_evidence_adj",
+   "section": "adjustments",
+   "label": "Hope Lodge: evidence adjustment",
+   "format": "multiple",
+   "formula": "1",
+   "explainer": "The money saved is counted at ACS's own prices with the cash-equivalent share; the health part's doubt is in its range."
+  },
+  {
+   "id": "rides_evidence_adj",
+   "section": "adjustments",
+   "label": "Road To Recovery: evidence adjustment",
+   "format": "multiple",
+   "formula": "1",
+   "explainer": "As Hope Lodge."
+  },
+  {
+   "id": "info_evidence_adj",
+   "section": "adjustments",
+   "label": "Helpline and information: evidence adjustment",
+   "format": "multiple",
+   "value": {
+    "low": 0.4,
+    "best": 0.7,
+    "high": 0.95
+   },
+   "kind": "judgment",
+   "explainer": "The dose is in the effect rows; this is trust in the trials' effect itself: psycho-oncology trials are small and their pooled effects shrink in larger and better-blinded studies, and the people who call or read are self-selected, so their gain may differ from trial participants'. 0.7, 0.4 to 0.95."
+  },
+  {
+   "id": "lodge_counterfactual_adj",
+   "section": "adjustments",
+   "label": "Hope Lodge: share of the saving that wouldn't have come anyway",
+   "format": "percent",
+   "value": {
+    "low": 0.5,
+    "best": 0.7,
+    "high": 0.9
+   },
+   "kind": "judgment",
+   "explainer": "Some hospitals have their own subsidised lodging, some guests would have stayed with relatives for free or found a cheaper room, and some would have travelled daily: 70%, 50% to 90%."
+  },
+  {
+   "id": "rides_counterfactual_adj",
+   "section": "adjustments",
+   "label": "Road To Recovery: share of rides not otherwise free",
+   "format": "percent",
+   "value": {
+    "low": 0.4,
+    "best": 0.6,
+    "high": 0.85
+   },
+   "kind": "judgment",
+   "explainer": "Medicaid covers non-emergency transport for its members, some hospitals offer rides, and some patients would have been driven by family; 60%, 40% to 85%."
+  },
+  {
+   "id": "info_counterfactual_adj",
+   "section": "adjustments",
+   "label": "Helpline and information: share not otherwise got from the care team or other sources",
+   "format": "percent",
+   "value": {
+    "low": 0.3,
+    "best": 0.55,
+    "high": 0.8
+   },
+   "kind": "judgment",
+   "explainer": "Patients also get information from their oncologists, nurses, the National Cancer Institute's Cancer Information Service and other charities: 55%, 30% to 80%, as the British Heart Foundation's information branch."
+  },
+  {
+   "id": "counterfactual_adj",
+   "section": "adjustments",
+   "label": "Counterfactual (for reading)",
+   "format": "percent",
+   "formula": "(lodge_raw * lodge_counterfactual_adj + rides_raw * rides_counterfactual_adj + info_raw * info_counterfactual_adj) / (lodge_raw + rides_raw + info_raw)",
+   "explainer": "Outcome-weighted average of the branches, for reading only."
+  },
+  {
+   "id": "lodge_attribution_share",
+   "section": "adjustments",
+   "label": "Hope Lodge: ACS's share of the resources",
+   "format": "percent",
+   "formula": "1 - lodge_donated_share",
+   "explainer": "Land leases and patient lodging given in kind are other people's resources (Convention 2)."
+  },
+  {
+   "id": "lodge_donated",
+   "section": "adjustments",
+   "label": "Hope Lodge: land leases given in kind",
+   "format": "usd",
+   "value": 3634000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Consolidated Financial Statements, year ended March 31, 2026 (BDO USA, issued September 25, 2026)",
+    "url": "https://www.cancer.org/content/dam/cancer-org/online-documents/en/pdf/policies/combined-financials-2026.pdf",
+    "page": "p. 18 (note 4)",
+    "quote": "Land leases for Hope Lodge facilities Licensed real estate appraisal Hope Lodge facilities - 3,634",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "Land leases for Hope Lodges contributed in kind; they are in ACS's expenses at their value, so they are a share of the cost, not an addition. The $2.7m of donated 'patient lodging' in the same note is probably hotel rooms given for patients, not Hope Lodge nights, and is left out."
+  },
+  {
+   "id": "lodge_donated_share",
+   "section": "adjustments",
+   "label": "Hope Lodge: in-kind share of its cost",
+   "format": "percent",
+   "formula": "lodge_donated / (program_spend * lodge_share)",
+   "explainer": "In-kind gifts over the branch's spending."
+  },
+  {
+   "id": "rides_hours_per_ride",
+   "section": "adjustments",
+   "label": "Road To Recovery: volunteer hours per ride",
+   "format": "number",
+   "value": {
+    "low": 1,
+    "best": 2,
+    "high": 3
+   },
+   "kind": "judgment",
+   "explainer": "Driving to the patient, to the clinic, waiting or returning: about 2 hours, 1 to 3."
+  },
+  {
+   "id": "rides_volunteer_value",
+   "section": "adjustments",
+   "label": "Road To Recovery: value of the volunteers' time",
+   "format": "usd",
+   "formula": "rides_given * rides_hours_per_ride * @united_states.volunteer_hour_value_2025",
+   "explainer": "At the site's US volunteer-hour value (Independent Sector, 2025)."
+  },
+  {
+   "id": "rides_attribution_share",
+   "section": "adjustments",
+   "label": "Road To Recovery: ACS's share of the resources",
+   "format": "percent",
+   "formula": "program_spend * rides_share * overhead_ratio / (program_spend * rides_share * overhead_ratio + rides_volunteer_value)",
+   "explainer": "ACS's cost over its cost plus the volunteer drivers' time (Convention 2)."
+  },
+  {
+   "id": "info_attribution_share",
+   "section": "adjustments",
+   "label": "Helpline and information: ACS's share of the resources",
+   "format": "percent",
+   "formula": "1",
+   "explainer": "Delivered by ACS's own staff."
+  },
+  {
+   "id": "attribution_share_shared",
+   "section": "adjustments",
+   "label": "Share of the resources (for reading)",
+   "format": "percent",
+   "formula": "(lodge_raw * lodge_attribution_share + rides_raw * rides_attribution_share + info_raw * info_attribution_share) / (lodge_raw + rides_raw + info_raw)",
+   "explainer": "Outcome-weighted average of the branches, for reading only."
+  },
+  {
+   "id": "attribution_share",
+   "section": "adjustments",
+   "label": "Attribution share (outcome-weighted average of the branches, for reading only)",
+   "format": "percent",
+   "formula": "attribution_share_shared",
+   "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
+  },
+  {
+   "id": "implementation_adj",
+   "section": "adjustments",
+   "label": "Share of reported reach that gets the help as counted (information branch only)",
+   "format": "percent",
+   "value": {
+    "low": 0.8,
+    "best": 0.9,
+    "high": 1
+   },
+   "kind": "judgment",
+   "explainer": "ACS's own counts of contacts: some are repeat or misdirected contacts, and some are bookings for lodging or rides already counted in those branches. Applied to the information branch only: a night or ride counted is delivered. 90%, 80% to 100%."
+  },
+  {
+   "id": "leverage_funging_adj",
+   "section": "adjustments",
+   "label": "Funging: others would have paid anyway (below 1)",
+   "format": "multiple",
+   "value": {
+    "low": 0.85,
+    "best": 0.95,
+    "high": 1.05
+   },
+   "kind": "judgment",
+   "explainer": "ACS's lodging and rides are funded by restricted gifts and events that might otherwise go elsewhere in cancer care; little leverage. 0.95, 0.85 to 1.05, the template's default."
+  },
+  {
+   "id": "lodge_missing_data_adj",
+   "section": "adjustments",
+   "label": "lodge: discount for missing outcome data",
+   "format": "percent",
+   "formula": "$missing_data_discount",
+   "explainer": "Thin: ACS counts nights, rides and contacts but measures no outcome, and the effect is judged from other studies (Convention 12)."
+  },
+  {
+   "id": "rides_missing_data_adj",
+   "section": "adjustments",
+   "label": "rides: discount for missing outcome data",
+   "format": "percent",
+   "formula": "$missing_data_discount",
+   "explainer": "Thin: ACS counts nights, rides and contacts but measures no outcome, and the effect is judged from other studies (Convention 12)."
+  },
+  {
+   "id": "info_missing_data_adj",
+   "section": "adjustments",
+   "label": "info: discount for missing outcome data",
+   "format": "percent",
+   "formula": "$missing_data_discount",
+   "explainer": "Thin: ACS counts nights, rides and contacts but measures no outcome, and the effect is judged from other studies (Convention 12)."
+  },
+  {
+   "id": "missing_data_adj",
+   "section": "adjustments",
+   "label": "Missing data (for reading)",
+   "format": "percent",
+   "formula": "(lodge_raw * lodge_missing_data_adj + rides_raw * rides_missing_data_adj + info_raw * info_missing_data_adj) / (lodge_raw + rides_raw + info_raw)",
+   "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
+  },
+  {
+   "id": "lodge_total_adj",
+   "section": "adjustments",
+   "label": "lodge: all adjustments combined",
+   "format": "multiple",
+   "formula": "lodge_evidence_adj * lodge_counterfactual_adj * lodge_attribution_share * leverage_funging_adj * lodge_missing_data_adj",
+   "explainer": "The branch's product of adjustments."
+  },
+  {
+   "id": "rides_total_adj",
+   "section": "adjustments",
+   "label": "rides: all adjustments combined",
+   "format": "multiple",
+   "formula": "rides_evidence_adj * rides_counterfactual_adj * rides_attribution_share * leverage_funging_adj * rides_missing_data_adj",
+   "explainer": "The branch's product of adjustments."
+  },
+  {
+   "id": "info_total_adj",
+   "section": "adjustments",
+   "label": "info: all adjustments combined",
+   "format": "multiple",
+   "formula": "info_evidence_adj * info_counterfactual_adj * info_attribution_share * implementation_adj * leverage_funging_adj * info_missing_data_adj",
+   "explainer": "The branch's product of adjustments."
+  },
+  {
+   "id": "lodge_uov",
+   "section": "adjustments",
+   "label": "Hope Lodge: money saved and deaths averted (units of value, before adjustments)",
+   "format": "number",
+   "formula": "lodge_households * (household_size * lodge_ln_gain_per_person * $uov_per_ln_consumption + lodge_deaths_averted_per_household * value_per_death)",
+   "explainer": "Money on the site's log scale, deaths by age.",
+   "unit": "UoV"
+  },
+  {
+   "id": "rides_uov",
+   "section": "adjustments",
+   "label": "Road To Recovery: money saved and deaths averted (units of value, before adjustments)",
+   "format": "number",
+   "formula": "rides_patients * (household_size * rides_ln_gain_per_person * $uov_per_ln_consumption + rides_deaths_averted_per_patient * value_per_death)",
+   "explainer": "As Hope Lodge.",
+   "unit": "UoV"
+  },
+  {
+   "id": "info_wellbys",
+   "section": "adjustments",
+   "label": "Helpline and information: WELLBYs (before adjustments)",
+   "format": "number",
+   "formula": "(info_helpline_people * info_wellbys_helpline + info_other_people * info_wellbys_other) * info_patient_share",
+   "explainer": "Wellbeing of the patients and caregivers helped.",
+   "unit": "WELLBYs"
+  },
+  {
+   "id": "lodge_raw",
+   "section": "bridges",
+   "label": "Hope Lodge: healthy years before adjustments (for weighting)",
+   "format": "number",
+   "formula": "lodge_uov / ($uov_per_daly)",
+   "explainer": "For the reading averages only.",
+   "unit": "DALYs"
+  },
+  {
+   "id": "rides_raw",
+   "section": "bridges",
+   "label": "Road To Recovery: healthy years before adjustments (for weighting)",
+   "format": "number",
+   "formula": "rides_uov / ($uov_per_daly)",
+   "explainer": "For the reading averages only.",
+   "unit": "DALYs"
+  },
+  {
+   "id": "info_raw",
+   "section": "bridges",
+   "label": "Helpline: healthy years before adjustments (for weighting)",
+   "format": "number",
+   "formula": "info_wellbys * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+   "explainer": "For the reading averages only.",
+   "unit": "DALYs"
+  },
+  {
+   "id": "total_adj",
+   "section": "adjustments",
+   "label": "All adjustments combined (for reading)",
+   "format": "multiple",
+   "formula": "(lodge_raw * lodge_total_adj + rides_raw * rides_total_adj + info_raw * info_total_adj) / (lodge_raw + rides_raw + info_raw)",
+   "explainer": "Outcome-weighted average of the branches, for reading only; each branch applies its own."
+  },
+  {
+   "id": "unmodelled_benefits_adj",
+   "section": "adjustments",
+   "label": "Benefits and harms not modelled, as a share of modelled value",
+   "format": "percent",
+   "value": {
+    "low": -0.05,
+    "best": 0.1,
+    "high": 0.3
+   },
+   "kind": "judgment",
+   "explainer": "Not counted: the company of other patients at Hope Lodge and its staff's support (wellbeing, left out to avoid counting the lodging twice), the volunteers' own wellbeing from driving, navigation that gets patients to treatment sooner after a helpline call, the caregivers' time saved. Harms: none known beyond the funging above. 10%, -5% to 30%.",
+   "side_effect": "added"
+  },
+  {
+   "id": "uov_bridged",
+   "section": "bridges",
+   "label": "Money saved and deaths averted, in units of value",
+   "format": "number",
+   "formula": "lodge_uov * lodge_total_adj + rides_uov * rides_total_adj",
+   "explainer": "Each branch with its own adjustments.",
+   "unit": "UoV"
+  },
+  {
+   "id": "dalys_from_uov",
+   "section": "bridges",
+   "label": "In healthy years",
+   "format": "number",
+   "formula": "uov_bridged / ($uov_per_daly)",
+   "explainer": "The site's fixed bridge from units of value.",
+   "unit": "DALYs"
+  },
+  {
+   "id": "wellbys_bridged",
+   "section": "bridges",
+   "label": "Wellbeing gained (WELLBYs)",
+   "format": "number",
+   "formula": "info_wellbys * info_total_adj",
+   "explainer": "The information branch, with its adjustments.",
+   "unit": "WELLBYs"
+  },
+  {
+   "id": "dalys_from_wellby",
+   "section": "bridges",
+   "label": "Wellbeing gained, in healthy years",
+   "format": "number",
+   "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+   "explainer": "The site's fixed bridge from WELLBYs.",
+   "unit": "DALYs"
+  },
+  {
+   "id": "dalys_direct",
+   "section": "outcome",
+   "label": "Healthy years counted directly",
+   "format": "number",
+   "formula": "people_reached * dalys_averted_per_person",
+   "explainer": "None (deaths and money go through the bridges).",
+   "unit": "DALYs"
+  },
+  {
+   "id": "outcome_total",
+   "section": "outcome",
+   "label": "Years of healthy life",
+   "format": "number",
+   "formula": "(dalys_direct * total_adj + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
+   "explainer": "The branches through the bridges, already adjusted branch by branch (Convention 4), times the unmodelled share.",
+   "unit": "DALYs"
+  },
+  {
+   "id": "dalys_per_dollar",
+   "section": "outcome",
+   "label": "Years of healthy life per dollar",
+   "format": "small",
+   "formula": "outcome_total / cost_total",
+   "explainer": "Over the full cost.",
+   "unit": "DALYs / $"
+  },
+  {
+   "id": "personnel_support_overhead",
+   "section": "donor",
+   "label": "Personnel costs in management and fundraising",
+   "format": "usd",
+   "value": 89072000,
+   "kind": "observed",
+   "source": {
+    "title": "American Cancer Society, Consolidated Financial Statements, year ended March 31, 2026 (BDO USA, issued September 25, 2026)",
+    "url": "https://www.cancer.org/content/dam/cancer-org/online-documents/en/pdf/policies/combined-financials-2026.pdf",
+    "page": "p. 8",
+    "quote": "Personnel costs 212,686 $ 35,086 $ 34,013 $ 281,785 $ 13,935 $ 75,137 $ 89,072",
+    "retrieved": "2026-11-13"
+   },
+   "explainer": "Spread over the programmes like the overhead."
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "donor",
+   "label": "ACS's own staff pay as a share of the full cost",
+   "format": "percent",
+   "formula": "(@american_cancer_society.patient_support_personnel_fy2026 * (1 - prevention_share_of_support) + personnel_support_overhead * program_spend / program_expenses) / cost_total",
+   "explainer": "The charity's own share from its functional expenses (Convention 1): patient-support staff outside prevention, plus management and fundraising staff spread by cost."
+  },
+  {
+   "id": "salary_gap",
+   "section": "donor",
+   "label": "Pay gap against comparable jobs",
+   "format": "percent",
+   "formula": "@staff_pay.gap_health_field",
+   "explainer": "The site's figure for health and field staff at nonprofits (the template's)."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "donor",
+   "label": "Staff's forgone pay",
+   "format": "usd",
+   "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)",
+   "explainer": "Counted with credit by share of resources."
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "donor",
+   "label": "Your dollar's share of the full cost",
+   "format": "percent",
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources."
+  },
+  {
+   "id": "dalys_per_donor_dollar",
+   "section": "donor",
+   "label": "Years of healthy life per dollar you give",
+   "format": "small",
+   "formula": "dalys_per_dollar * donor_cost_share",
+   "explainer": "The headline (unit cost: no next-dollar factor).",
+   "unit": "Years of healthy life / $"
+  }
+ ],
+ "output": {
+  "row": "dalys_per_donor_dollar",
+  "unit": "daly",
+  "label": "Years of healthy life per dollar you give",
+  "native": {
+   "row": "dalys_per_dollar",
+   "unit": "daly"
+  }
+ }
+}

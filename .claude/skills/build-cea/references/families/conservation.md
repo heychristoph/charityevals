@@ -14,7 +14,7 @@ health         health_people × dalys_per_person_year × years    → dalys_dire
 livelihoods    livelihood_people × ln_gain_per_person_year × years × $uov_per_ln_consumption
 catastrophe    catastrophe_deaths × annual_risk_reduction × years × catastrophe_value_per_death
 future         annual_risk_reduction × years × future_share_lost × @catastrophe.world_population_long_run
-               ÷ $discount_rate                                  (DALYs, counted directly)
+               × future_years_per_person                         (DALYs, counted directly)
                                                                 → uov_bridged → dalys_from_uov
 wellbeing      nature_people × ls_gain_per_person_year × years  → wellbys_bridged → dalys_from_wellby
 wild animals   wild_animal_years × wild_pain_days_per_animal_year × years × @welfare_ranges.<s>_vs_chicken
@@ -32,8 +32,8 @@ bridge applies the shared deaths per tonne, heat-death delay and value of a deat
   `$climate_heat_death_delay`, `@death_ages.heat_share_*`, `@climate.nondeath_damages_vs_deaths`).
 - `@moral_weights.*` by age band × `$life_value_multiplier` for catastrophe deaths: valued like every
   death, with no premium for their number. Future generations: the years a catastrophe would take
-  from every later year (`future_share_lost`, 0 unless it shrinks or ends the future), discounted at
-  `$discount_rate`, whose 0.1% floor keeps an endless future finite.
+  from people not yet born (`future_share_lost`, 0 unless it shrinks or ends the future), discounted at
+  `$discount_rate` (`future_years_per_person`, the catastrophic-risk family's row).
 - `$uov_per_ln_consumption`, `@wellby_factors.wellbys_per_sd_year`, `@gbd_disability_weights.*`,
   `@welfare_ranges.*` (only in `ced_<s>`), `$discount_rate` on every year.
 
