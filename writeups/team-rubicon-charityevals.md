@@ -18,8 +18,8 @@ The good is mostly the work itself. A household that would have had to pay a con
 
 ### How the model works
 
-- **Response work.** The volunteer hours spent working for the people served, valued at what the same work would cost to buy, spread over the households served (judged at 45 hours each) and valued at their consumption. The clients are taken as a little better off than America's poorest fifth: Team Rubicon targets socially vulnerable places, but most of its clients own their homes. This branch is about 70% of the result.
-- **Rebuilt homes.** 16 homes at a judged market cost of the rebuild, as housing over 25 years for the 26 people living in them. The $1 million grant to SBP counts as the share of SBP's homes it paid for.
+- **Response work.** The volunteer hours spent working for the people served, valued at what the same work would cost to buy, spread over the households served (judged at 45 hours each) and valued at their consumption. The clients are taken as a little better off than America's poorest fifth: Team Rubicon targets socially vulnerable places, but most of its clients own their homes. This branch is about three-quarters of the result.
+- **Rebuilt homes.** 16 homes at a judged market cost of the rebuild, without the volunteers' own labour (that is already valued in the response work), as housing over 25 years for the 26 people living in them. The $1 million grant to SBP counts as the share of SBP's homes it paid for.
 - **Volunteers' wellbeing.** About 6,000 deployed volunteers, each gaining a small amount of life satisfaction for the year, discounted for people who would have volunteered elsewhere.
 - **Resilience.** Training and recruiting is what makes the response work possible, so its cost counts against the response result rather than being given a result of its own.
 - **Credit.** Team Rubicon's cash is about 60% of the resources behind the work. Credit is shared with the volunteers' unpaid hours (at the US value of a volunteer hour), donated goods and services, part of the donated advertising, and partners' loaned equipment and hosting.
@@ -37,13 +37,17 @@ The missing-data and income-to-health sliders move it most. After them come the 
 
 ### What isn't modelled
 
-The model leaves out mould-related illness averted by prompt muck-outs, injuries averted by clearing roads for emergency vehicles, careers from the workforce training, and volunteers trained in 2024 who serve in later years. It also leaves out injuries to volunteers and work taken from local contractors. These are in one share of +10%, from −5% to +30%.
+The model leaves out mould-related illness averted by prompt muck-outs, injuries averted by clearing roads for emergency vehicles, careers from the workforce training, and service projects for food banks, shelters and other organisations, whose clients get the work but whose hours aren't valued. It also leaves out injuries to volunteers and work taken from local contractors. These are in one share of +10%, from −5% to +30%.
 
 Team Rubicon International LLC brought in $987,488, but the Form 990 reports under $10,000 of programme activity outside the US in 2024, so no foreign operation is modelled.
 
 ### How this model was checked
 
-AUDIT_PLACEHOLDER
+Three independent audits, kept in audits/team-rubicon-charityevals/.
+
+- **Round 1** found one high and one medium problem. The value of an hour's work had a best guess below its own anchors: it is now their product, 1.4 times the volunteer-hour wage. The rebuild cost per home had been worked out wrong: it is now re-anchored on rebuild prices. Seven smaller fixes followed. The rebuilt homes no longer count the volunteers' labour twice. The delivery discount now applies only to the response work. Donated supplies are no longer counted twice. The donated advertising is now discounted for its rate-card valuation only.
+- **Round 2** passed. Its three small points were fixed: the home value now takes out the labour share of the price, a stock-type benefit was dropped, and this write-up was brought in line.
+- **A verification round** checked those last changes.
 
 ### Sources
 
