@@ -10,7 +10,7 @@
   "estimate_basis": "unit_cost",
   "charity": "team-rubicon",
   "owner": "charityevals",
-  "summary": "Team Rubicon sends veteran-led volunteer crews (Greyshirts) to US disasters to clear debris and roads, muck out flooded homes, tarp roofs and cut fallen trees, trains and recruits them (its Resilience programme), and rebuilds a few homes years after a disaster. All three programmes are modelled for 2024 (the latest audited year: $38.8 million in cash; the audited statements' $74 million adds $35.7 million of donated goods and services, mostly advertising space at rate-card prices, which counts as others' resources): the volunteers' 284,485 hours valued at what the same work would cost to buy (about two-thirds of the result), 16 rebuilt homes and a $1 million rebuilding grant to SBP (about 30%), and the volunteers' own wellbeing as a side effect (4%). The result, about 0.001 years of healthy life per $1,000 (0.0002 to 0.005), is under a hundredth of the median global-health charity on the site because the help goes to US households, whose consumption the site's log-income scale makes a dollar do little for, and because the cash cost per volunteer hour (about $140) is several times the value of the hour's work. Every branch is discounted for missing data: Team Rubicon counts hours and homes but not the households served or the value of the work to them. The biggest uncertainties are what the work is worth to those served and what others would have done for them anyway.",
+  "summary": "Team Rubicon sends veteran-led volunteer crews (Greyshirts) to US disasters to clear debris and roads, muck out flooded homes, tarp roofs and cut fallen trees, trains and recruits them (its Resilience programme), and rebuilds a few homes years after a disaster. All three programmes are modelled for 2024 (the latest audited year: $38.8 million in cash; the audited statements' $74 million adds $35.7 million of donated goods and services, mostly advertising space at rate-card prices, which counts as others' resources): the volunteers' 284,485 hours valued at what the same work would cost to buy (about 70% of the result), 16 rebuilt homes and a $1 million rebuilding grant to SBP (about a quarter), and the volunteers' own wellbeing as a side effect (3%). The result, about 0.001 years of healthy life per $1,000 (0.0003 to 0.006), is under a hundredth of the median global-health charity on the site because the help goes to US households, whose consumption the site's log-income scale makes a dollar do little for, and because the cash cost per volunteer hour (about $140) is several times the value of the hour's work. Every branch is discounted for missing data: Team Rubicon counts hours and homes but not the households served or the value of the work to them. The biggest uncertainties are what the work is worth to those served and what others would have done for them anyway.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Team Rubicon's disaster response, volunteer training and home rebuilding (2024)",
@@ -94,7 +94,7 @@
         "page": "Part IX, line 25, column (B), p. 10; Part III lines 4a-4c, p. 2",
         "quote": "Total functional expenses ... 27,209,194."
       },
-      "explainer": "What Team Rubicon spent on its programmes in 2024 without donated goods and services: Response $19.29 million, Resiliency $4.16 million and Rebuild (long-term recovery) $3.77 million. The audited statements book $61.14 million of programme expenses because they include $35.66 million of donated goods and services at their stated value, $30.89 million of it advertising space donated to the Resilience programme at 'standard bill rates' (audited statements, note 10); the Form 990 leaves donated services out. Its cash totals reconcile to the audited ones: $74,351,135 less $35,664,829 is $38,686,306, against the 990's $38,818,406 (0.3% apart). A donor's dollar buys the cash work; the donated goods and services are others' resources and lower Team Rubicon's credit (attribution_share_shared), as Convention 2 asks. All three programmes are modelled here, as branches: Response (disaster response, recovery and mitigation operations, the one 'humanitarian' operation and local service projects), Resilience (training and recruiting volunteers, whose result is the Response work), and Rebuild."
+      "explainer": "What Team Rubicon spent on its programmes in 2024 without donated services (the Form 990's figures): Response $19.29 million, Resiliency $4.16 million and Rebuild (long-term recovery) $3.77 million. The audited statements book $61.14 million of programme expenses because they include $35.66 million of donated goods and services at their stated value, $30.89 million of it advertising space donated to the Resilience programme at 'standard bill rates' (audited statements, note 10); the Form 990 leaves donated services out but keeps donated goods ($1.06 million of supplies). Its totals reconcile to the audited ones: $74,351,135 less $35,664,829 is $38,686,306, against the 990's $38,818,406. A donor's dollar buys this work; the donated services are others' resources and lower Team Rubicon's credit (attribution_share_shared), as Convention 2 asks. All three programmes are modelled here, as branches: Response (disaster response, recovery and mitigation operations, the one 'humanitarian' operation and local service projects), Resilience (training and recruiting volunteers, whose result is the Response work), and Rebuild."
     },
     {
       "id": "total_expenses",
@@ -193,12 +193,28 @@
       "explainer": "Donated advertising, software ($2.11 million), professional services ($0.75 million), transport ($0.86 million: airlines and vehicles) and supplies ($1.06 million)."
     },
     {
+      "id": "inkind_supplies",
+      "section": "cost",
+      "label": "Donated supplies, 2024",
+      "format": "usd",
+      "value": 1059206,
+      "kind": "observed",
+      "source": {
+        "title": "Team Rubicon, Inc. and Team Rubicon International LLC, consolidated financial statements, year ended December 31, 2024 (audited by Green Hasson & Janks, 12 November 2025)",
+        "url": "https://afd-e7wowbklhrmjo-anaaahfpavfhejfu.z01.azurefd.net/app/uploads/2025/11/FS-TeamRubicon-123124-Final-Signed.pdf",
+        "retrieved": "2026-11-14",
+        "page": "Note 10, In-kind contributions, p. 16",
+        "quote": "Supplies Fair value for similar or Response identical goods 1,059,206"
+      },
+      "explainer": "Donated goods used in the Response programme. The Form 990 leaves out donated services and use of facilities but keeps donated goods (the audited Response line less the 990's is exactly the donated transport, $858,580), so the supplies are already in program_spend and are not counted again below."
+    },
+    {
       "id": "inkind_ops",
       "section": "cost",
-      "label": "Donated goods and services other than advertising",
+      "label": "Donated services other than advertising",
       "format": "usd",
-      "formula": "inkind_total - inkind_media",
-      "explainer": "Software, professional services, transport and supplies, used in the operations and their support: counted at their stated value as others' resources behind the work."
+      "formula": "inkind_total - inkind_media - inkind_supplies",
+      "explainer": "Software, professional services and transport, used in the operations and their support: counted at their stated value as others' resources behind the work (the supplies are in program_spend already)."
     },
     {
       "id": "vol_hours",
@@ -223,12 +239,12 @@
       "label": "Share of the hours spent working for the people and places served",
       "format": "percent",
       "value": {
-        "low": 0.55,
+        "low": 0.45,
         "best": 0.75,
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Our judgment: part of the volunteer hours goes to travel, check-in, standby, base-camp logistics and supervision, and part of the 902 service projects is work for organisations (food banks, cemeteries, scout camps, trails) rather than for disaster-hit households. Team Rubicon counts all of it as labour delivered. 75%, from 55% to 90%."
+      "explainer": "Our judgment: part of the volunteer hours goes to travel, check-in, standby, base-camp logistics and supervision, and part of the 902 service projects is work for organisations (food banks, cemeteries, scout camps, trails) rather than for disaster-hit households. Team Rubicon counts all of it as labour delivered, and doesn't say whether training time (nearly 30,000 trainings, many during operations: annual report pp. 22-23) is logged as hours. The work for organisations' clients is in unmodelled_benefits_adj. 75%, from 45% to 90%."
     },
     {
       "id": "hours_per_household",
@@ -332,7 +348,7 @@
         "high": 150000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: SBP's rebuilds use volunteers and AmeriCorps members, so their cash cost is below Team Rubicon's own (about $110,000 a home: Rebuild's $3.77 million less the grant, over 16 homes, with workforce training in the same line), but a disaster rebuild of a damaged house still runs to tens of thousands of dollars in materials and trades. $75,000, from $40,000 to $150,000."
+      "explainer": "Our judgment: SBP's rebuilds use volunteers and AmeriCorps members, so their cost is below Team Rubicon's own cash spending per home (about $173,000: Rebuild's $3,765,066 less the $1 million grant, over 16 homes, with workforce training and programme staff in the same line), but a disaster rebuild of a damaged house still runs to tens of thousands of dollars in materials and trades. $75,000, from $40,000 to $150,000."
     },
     {
       "id": "sbp_homes",
@@ -383,12 +399,12 @@
       "label": "Response: what the same work would cost to buy, per volunteer hour, as a multiple of that wage",
       "format": "multiple",
       "value": {
-        "low": 0.6,
-        "best": 1.0,
-        "high": 1.6
+        "low": 0.9,
+        "best": 1.4,
+        "high": 2.0
       },
       "kind": "judgment",
-      "explainer": "Our judgment: what a household would pay a contractor for the same debris removal, muck-out, tree work or tarping. Contractors charge well above the wage per worker-hour (equipment, insurance, overhead, margin: often 1.5 to 2.5 times it), but trained professionals do more per hour than volunteer crews (perhaps 0.6 to 0.8 of the work), and part of the hours are leaders' and sawyers' skilled work. 1, from 0.6 to 1.6."
+      "explainer": "Our judgment, as the product of two parts: what a household would pay a contractor per worker-hour for the same debris removal, muck-out, tree work or tarping, as a multiple of the production wage with benefits (equipment, insurance, overhead and margin: 1.5 to 2.5 times it, best 2), times how much of a professional's work a volunteer crew does in an hour (0.6 to 0.8, best 0.7; trained sawyers, heavy-equipment operators and leaders do more). The product is 1.4, from 0.9 to 2.0. Neither part has a published source for this work; both are judgments."
     },
     {
       "id": "resp_inkind_value",
@@ -483,15 +499,15 @@
     {
       "id": "ltr_value_per_home",
       "section": "effect",
-      "label": "Rebuild: market cost of the rebuild work per home",
+      "label": "Rebuild: market cost of the rebuild work per home, without the volunteers' labour",
       "format": "usd",
       "value": {
-        "low": 50000,
-        "best": 100000,
-        "high": 180000
+        "low": 70000,
+        "best": 130000,
+        "high": 200000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: what it would cost the owner to have the house rebuilt or substantially repaired by contractors (materials, trades, the volunteers' work at market rates). Team Rubicon's own cash spending was about $110,000 a home (Rebuild's $3.77 million less the $1 million grant, over 16 homes, workforce training included). $100,000, from $50,000 to $180,000."
+      "explainer": "Our judgment: what it would cost the owner to have the house rebuilt or substantially repaired by contractors, leaving out the volunteers' own labour (their hours are in vol_hours and valued in the response branch, so they are not counted twice). Team Rubicon's own cash spending was about $173,000 a home (Rebuild's $3,765,066 less the $1 million grant, over 16 homes), but that includes workforce training and programme staff; a modest rebuilt or gutted-and-restored house of 1,000 to 1,500 square feet costs roughly $100 to $150 a square foot in materials and trades. $130,000, from $70,000 to $200,000."
     },
     {
       "id": "ltr_years",
@@ -838,12 +854,12 @@
       "label": "Share of the donated advertising's stated value that counts as a resource behind the work",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.4
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the advertising is valued at rate-card prices, while donated public-service space is mostly unsold inventory worth a fraction of that, and it serves fundraising and the brand as much as recruiting the volunteers who do the work. 15%, from 5% to 40%."
+      "explainer": "Our judgment on valuation only: the advertising is valued at the media's standard bill rates (audited statements, note 10), while donated public-service space is mostly unsold inventory and off-peak slots worth a fraction of the rate card. Whatever it serves (recruiting, fundraising, the brand) it is a resource behind the work at its real worth, as the fundraising cash in cost_total is. 30%, from 10% to 60%."
     },
     {
       "id": "attribution_share_shared",
@@ -888,7 +904,7 @@
     {
       "id": "implementation_adj",
       "section": "adjustments",
-      "label": "Share of the counted work actually delivered",
+      "label": "Response: share of the counted work actually delivered",
       "format": "percent",
       "value": {
         "low": 0.85,
@@ -896,7 +912,7 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "Our judgment: hours logged that did not end in finished work (jobs left part-done when an operation closed, rework). 0.95, from 0.85 to 1."
+      "explainer": "Our judgment, for the response branch only: hours logged that did not end in finished work (jobs left part-done when an operation closed, rework). 0.95, from 0.85 to 1. The rebuilt homes are counted as completed, SBP's homes as the grant's share of its cost and the volunteers' gain as theirs, so the other branches take 1."
     },
     {
       "id": "leverage_funging_adj",
@@ -964,7 +980,7 @@
       "section": "adjustments",
       "label": "Rebuild: all adjustments",
       "format": "percent",
-      "formula": "ltr_evidence_adj * ltr_counterfactual_adj * ltr_attribution_share * implementation_adj * leverage_funging_adj * ltr_missing_data_adj",
+      "formula": "ltr_evidence_adj * ltr_counterfactual_adj * ltr_attribution_share * leverage_funging_adj * ltr_missing_data_adj",
       "explainer": ""
     },
     {
@@ -972,7 +988,7 @@
       "section": "adjustments",
       "label": "SBP grant: all adjustments",
       "format": "percent",
-      "formula": "ltr_evidence_adj * sbp_counterfactual_adj * sbp_attribution_share * implementation_adj * sbp_leverage_funging_adj * sbp_missing_data_adj",
+      "formula": "ltr_evidence_adj * sbp_counterfactual_adj * sbp_attribution_share * sbp_leverage_funging_adj * sbp_missing_data_adj",
       "explainer": ""
     },
     {
@@ -980,7 +996,7 @@
       "section": "adjustments",
       "label": "Volunteers: all adjustments",
       "format": "percent",
-      "formula": "vol_evidence_adj * vol_counterfactual_adj * vol_attribution_share * implementation_adj * leverage_funging_adj * vol_missing_data_adj",
+      "formula": "vol_evidence_adj * vol_counterfactual_adj * vol_attribution_share * leverage_funging_adj * vol_missing_data_adj",
       "explainer": ""
     },
     {
@@ -1034,7 +1050,7 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "Our judgment, each effect with its sign: respiratory illness from mould averted by prompt muck-outs (+); injuries and deaths averted by clearing roads for emergency vehicles and tarping roofs (+); careers from the workforce-development training in the Rebuild line (+); volunteers trained in 2024 (9,475 by the Resilience programme) who serve in later years, a stock the year's cost builds (+); fire departments, scout camps and local volunteers trained as sawyers who then work locally (+); injuries to volunteers from chainsaws, heat and debris (-); work that local contractors would have been paid for (-, small, since the clients mostly couldn't pay). +10%, from -5% to +30%.",
+      "explainer": "Our judgment, each effect with its sign: respiratory illness from mould averted by prompt muck-outs (+); injuries and deaths averted by clearing roads for emergency vehicles and tarping roofs (+); careers from the workforce-development training in the Rebuild line (+); service projects for organisations (food banks, youth and veterans' shelters, scout camps), whose clients get the work though the hours are not valued above (+); fire departments, scout camps and local volunteers trained as sawyers who then work locally (+); injuries to volunteers from chainsaws, heat and debris (-); work that local contractors would have been paid for (-, small, since the clients mostly couldn't pay). +10%, from -5% to +30%.",
       "side_effect": "added"
     },
     {

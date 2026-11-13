@@ -18,11 +18,11 @@ The good is mostly the work itself. A household that would have had to pay a con
 
 ### How the model works
 
-- **Response work.** The volunteer hours spent working for the people served, valued at what the same work would cost to buy, spread over the households served (judged at 45 hours each) and valued at their consumption. The clients are taken as a little better off than America's poorest fifth: Team Rubicon targets socially vulnerable places, but most of its clients own their homes. This branch is about two-thirds of the result.
+- **Response work.** The volunteer hours spent working for the people served, valued at what the same work would cost to buy, spread over the households served (judged at 45 hours each) and valued at their consumption. The clients are taken as a little better off than America's poorest fifth: Team Rubicon targets socially vulnerable places, but most of its clients own their homes. This branch is about 70% of the result.
 - **Rebuilt homes.** 16 homes at a judged market cost of the rebuild, as housing over 25 years for the 26 people living in them. The $1 million grant to SBP counts as the share of SBP's homes it paid for.
 - **Volunteers' wellbeing.** About 6,000 deployed volunteers, each gaining a small amount of life satisfaction for the year, discounted for people who would have volunteered elsewhere.
 - **Resilience.** Training and recruiting is what makes the response work possible, so its cost counts against the response result rather than being given a result of its own.
-- **Credit.** Team Rubicon's cash is about two-thirds of the resources behind the work. Credit is shared with the volunteers' unpaid hours (at the US value of a volunteer hour), donated goods and services, part of the donated advertising, and partners' loaned equipment and hosting.
+- **Credit.** Team Rubicon's cash is about 60% of the resources behind the work. Credit is shared with the volunteers' unpaid hours (at the US value of a volunteer hour), donated goods and services, part of the donated advertising, and partners' loaned equipment and hosting.
 - **Missing data.** Every branch takes the site's missing-data step. Team Rubicon counts hours and homes, but not the households it serves or what the work is worth to them.
 
 ### What drives the result
