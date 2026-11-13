@@ -3,6 +3,41 @@ import Prose from "../layouts/Prose.astro";
 import Setting from "../components/Setting.tsx";
 import { ValueSets, Measures } from "../components/Choices.tsx";
 import { repo } from "../lib/site";
+
+// The file-format example at the end: a valid model (about 5.8 healthy years per $1,000 at the defaults).
+const example = `{
+  "id": "example-nets",
+  "name": "Example: bed nets (simplified)",
+  "kind": "charity",
+  "cause": "global-health",
+  "rows": [
+    {
+      "id": "cost_per_net",
+      "label": "Cost of one net, delivered ($)",
+      "value": 5,
+      "kind": "observed",
+      "source": { "title": "The charity's accounts", "url": "https://example.org/accounts" }
+    },
+    {
+      "id": "deaths_per_1000_nets",
+      "label": "Children's deaths averted per 1,000 nets",
+      "value": { "low": 0.2, "best": 0.5, "high": 1 },
+      "kind": "estimate",
+      "explainer": "From the trials of nets, scaled to today's malaria deaths where the nets go."
+    },
+    {
+      "id": "deaths_per_dollar",
+      "label": "Deaths averted per dollar",
+      "formula": "deaths_per_1000_nets / 1000 / cost_per_net"
+    },
+    {
+      "id": "healthy_years_per_dollar",
+      "label": "Years of healthy life per dollar",
+      "formula": "deaths_per_dollar * $daly_per_child_death"
+    }
+  ],
+  "output": { "row": "healthy_years_per_dollar", "unit": "daly", "label": "Years of healthy life per dollar" }
+}`;
 ---
 
 <Prose title="How this works" active="method" description="Every charity is a model file, imported from an evaluator or built by us from public evidence, ranked by the good the next $1,000 does, under values you set.">
@@ -218,6 +253,30 @@ import { repo } from "../lib/site";
   <h2 id="not">What this is not</h2>
   <p>
     Not any evaluator's recommendation, and not endorsed by any evaluator or charity listed. Cost-effectiveness is one input to a giving decision. How well a charity is run isn't modelled, and the next dollar is still one share for every charity estimated from past averages, not a figure per charity.
+  </p>
+  <h2 id="files">The model files</h2>
+  <p>
+    Each model is one JSON file in the <a href={`${repo}/tree/main/models`}>repository</a>: a flat list of rows, like the cells of a spreadsheet. A row either holds a number (<code>value</code>, with a range where the source gives one, its <code>kind</code> and its source) or calculates one (<code>formula</code>, naming other rows by their <code>id</code>). <code>output</code> names the row the ranking reads and its unit. A simplified example:
+  </p>
+  <pre class="json"><code>{example}</code></pre>
+  <p>
+    Rows are flat rather than nested because one number often feeds several others (a quarter of all rows do), as in a spreadsheet. The model page draws the tree from the formulas, starting at the output:
+  </p>
+  <ul class="tree" aria-label="The example as a tree">
+    <li><code>healthy_years_per_dollar</code>
+      <ul>
+        <li><code>deaths_per_dollar</code>
+          <ul>
+            <li><code>deaths_per_1000_nets</code> <span>0.2 to 1, best 0.5</span></li>
+            <li><code>cost_per_net</code> <span>$5</span></li>
+          </ul>
+        </li>
+        <li><code>$daly_per_child_death</code> <span>your value</span></li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    In a formula, <code>$name</code> reads one of your values, <code>@file.row</code> a shared figure from <a href="/data">shared data</a>, and <code>#model-id</code> another model's result. The full format is defined in <a href={`${repo}/blob/main/src/engine/schema.ts`}>schema.ts</a>.
   </p>
 </Prose>
 
@@ -496,5 +555,43 @@ import { repo } from "../lib/site";
   }
   .risk-table [role="rowheader"] {
     font-weight: 600;
+  }
+  .json {
+    margin: var(--s4) 0;
+    padding: var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+    font-size: 12.5px;
+    line-height: 1.45;
+    overflow-x: auto;
+  }
+  .tree,
+  .tree ul {
+    list-style: none;
+    margin: 0;
+    padding-left: var(--s4);
+  }
+  .tree {
+    margin: var(--s3) 0 var(--s4) !important;
+    padding-left: 0 !important;
+  }
+  .tree li {
+    position: relative;
+    margin: 4px 0 !important;
+    font-size: 14px;
+  }
+  .tree ul li::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--s3));
+    top: 0.75em;
+    width: 10px;
+    border-top: 1px solid var(--rule);
+  }
+  .tree span {
+    color: var(--ink-3);
+    font-size: 13px;
+    margin-left: 6px;
   }
 </style>
