@@ -240,7 +240,7 @@
       "label": "Context: the audited parts, combined",
       "format": "usd",
       "formula": "chapters_total_expenses + national_total_expenses - national_distributions_to_chapters - chapter_assessments - donated_media_reported",
-      "explainer": "Check on the annual report's combined figure: chapters plus national office, less the money passing between them both ways and the donated advertising, is about $345 million, 2% below the $352.5 million used (the report's own eliminations aren't published). The report's 'Total Expenses' of $500.6 million for the combined enterprise is about the chapters' and national office's totals added without eliminations ($502.6 million, donated media included). Chapters book little donated media of their own (Metro New York and Western New York: $2,476 of advertising and media in fiscal 2025), so the national office's $67.8 million is all of it."
+      "explainer": "Check on the annual report's combined figure: chapters plus national office, less the money passing between them both ways and the donated advertising, is about $345 million, 2% below the $352.5 million used (the report's own eliminations aren't published). The report's 'Total Expenses' of $500.6 million for the combined enterprise is about the chapters' and national office's totals added without eliminations ($502.6 million, donated media included). Chapters book little or no donated media of their own (Metro New York and Western New York's in-kind contributions, note 2 of its fiscal 2025 statements, are wish travel and goods, professional services and special-event items, with no advertising), so the national office's $67.8 million is about all of it."
     },
     {
       "id": "people_reached",
@@ -377,7 +377,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Our judgment: about seven in ten US children live with two parents; a serious illness strains some marriages, so 0.7, from 0.6 to 0.8."
+      "explainer": "Our judgment: about seven in ten US children live with two parents (US Census Bureau, America's Families and Living Arrangements, table C3: about 71% in 2023, https://www.census.gov/data/tables/2023/demo/families/cps-2023.html); a serious illness strains some marriages, so 0.7, from 0.6 to 0.8."
     },
     {
       "id": "household_size",
@@ -385,7 +385,7 @@
       "label": "Household size of a wish child",
       "format": "number",
       "formula": "two_parent_share * @household_size.united_states_married_with_children_6_17 + (1 - two_parent_share) * @household_size.united_states_one_parent_with_children",
-      "explainer": "Every wish child lives with a family, so the household is a family's with children, not the US average of 2.4 (which counts single people and couples without children): the site's sizes for married couples with school-age children (@household_size.united_states_married_with_children_6_17, 4.2) and one-parent households (@household_size.united_states_one_parent_with_children, 3.0), from the same survey as the US average, mixed by the share with two parents: about 3.8."
+      "explainer": "Every wish child lives with a family, so the household is a family's with children, not the US average of 2.4 (which counts single people and couples without children): the site's sizes for married couples with school-age children (@household_size.united_states_married_with_children_6_17, 4.2; most wish children are of school age, and all married couples with children average 4.0) and one-parent households (@household_size.united_states_one_parent_with_children, 3.0), from the same survey as the US average, mixed by the share with two parents: about 3.8."
     },
     {
       "id": "household_multiplier",
@@ -406,7 +406,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the product of two parts. Internal validity 0.65: one small trial (66 children), unblinded, with self- and parent-reported outcomes and many measures reported (the largest, positive affect, not used); small positive trials shrink on replication. External validity 0.75: the trial's children had cancer, were 5 to 12 and lived in Israel; Make-A-Wish America's are 2½ to 17 with many critical illnesses (some too young or too ill to report, anticipate or take in a wish as the trial's children did; some wishes smaller, a gift rather than a trip), and its wishes are similar in kind (trips, meetings, gifts). 0.65 × 0.75 ≈ 0.5, from 0.3 to 0.8. Anchor: the site's psychotherapy models discount single-trial effects by a half or more (HLI's StrongMinds and Friendship Bench analyses shrink a charity's own trial towards the literature by about that much)."
+      "explainer": "Our judgment, the product of two parts. Internal validity 0.65: one small trial (66 children), unblinded, with self- and parent-reported outcomes and many measures reported (the largest, positive affect, not used); small positive trials shrink on replication. External validity 0.75: the trial's children had cancer, were 5 to 12 and lived in Israel; Make-A-Wish America's are 2½ to 17 with many critical illnesses (some too young or too ill to report, anticipate or take in a wish as the trial's children did), and its wishes are similar in kind (trips, meetings, gifts). 0.65 × 0.75 ≈ 0.5, from 0.3 to 0.8. Anchor: the site's psychotherapy models discount single-trial effects by a half or more (HLI's StrongMinds and Friendship Bench analyses shrink a charity's own trial towards the literature by about that much)."
     },
     {
       "id": "counterfactual_adj",
@@ -579,7 +579,24 @@
         "quote": "Wish recipients were 1.9 times more likely to have fewer emergency department visits",
         "retrieved": "2026-11-13"
       },
-      "explainer": "Our judgment from the one study: 496 children granted a wish at Nationwide Children's Hospital (2011-2016) against 496 matched on age, sex, disease and complexity; over two years the wish children were 2.5 times as likely to have fewer unplanned admissions and 1.9 times as likely to have fewer emergency visits, and 2.2 to 2.3 times as likely to have a fall in charges larger than the average wish cost ($10,130). It is observational at one hospital (a wish may be granted when a child's illness has steadied), the savings are in charges, which run well above costs, and the abstract gives no average. $750 of costs per wish, from 0 (selection explains it all) to $4,000; most of it within two years, so undiscounted."
+      "explainer": "Our judgment from the one study: 496 children granted a wish at Nationwide Children's Hospital (2011-2016) against 496 matched on age, sex, disease and complexity; over two years the wish children were 2.5 times as likely to have fewer unplanned admissions and 1.9 times as likely to have fewer emergency visits, and 2.2 to 2.3 times as likely to have a fall in charges larger than the average wish cost ($10,130). It is observational at one hospital (a wish may be granted when a child's illness has steadied), the savings are in charges, which run well above costs, and the abstract gives no average. $750 of costs per wish over the two years, from 0 (selection explains it all) to $4,000; spread evenly over the two years and discounted (hospital_years)."
+    },
+    {
+      "id": "hospital_years",
+      "section": "deaths",
+      "label": "Years over which the hospital savings were observed",
+      "format": "number",
+      "value": 2,
+      "kind": "observed",
+      "unit": "years",
+      "source": {
+        "title": "Patel et al. (2019), Impact of a Make-A-Wish experience on healthcare utilization, Pediatric Research 85(5):634-638 (abstract)",
+        "url": "https://ohiostate.elsevierpure.com/en/publications/impact-of-a-make-a-wish-experience-on-healthcare-utilization/",
+        "page": "abstract",
+        "quote": "associated impact on healthcare utilization and costs across 2 years",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The study's follow-up: utilization and costs across 2 years after the wish (Patel et al. 2019). The savings are spread evenly over these years and discounted at the shared rate."
     },
     {
       "id": "payer_multiple",
@@ -587,20 +604,20 @@
       "label": "How the health costs saved are spread, relative to consumption",
       "format": "multiple",
       "value": {
-        "low": 0.75,
-        "best": 1.05,
-        "high": 1.6
+        "low": 0.7,
+        "best": 1,
+        "high": 1.4
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as for US public money in the Habitat for Humanity awareness model (us_payer_multiple): the savings go to insurers, Medicaid and families, and so to premiums and taxes, which fall roughly in proportion to consumption. 1.05, from 0.75 to 1.6."
+      "explainer": "Our judgment from the payer mix, on the scale of the Habitat for Humanity awareness model's us_payer_multiple (1 = a cost proportional to consumption). Children's hospital care is paid by private insurers (premiums per worker, regressive: below 1), Medicaid and CHIP (taxes, near proportional to consumption, but each public dollar saved also saves its cost of raising: above 1) and families' own out-of-pocket costs (close to 1). About 1, from 0.7 to 1.4."
     },
     {
       "id": "hospital_uov",
       "section": "deaths",
       "label": "Hospital costs saved, in units of value",
       "format": "number",
-      "formula": "people_reached * hospital_savings_per_wish * total_adj * $uov_per_ln_consumption / (payer_multiple * @united_states.consumption_per_person_2024)",
-      "explainer": "Money saved spread over the many who pay for US health care, each gaining its share of their consumption on the site's log scale (the log curve is straight for small amounts), as the site values US public money: savings over the national-accounts consumption per person (@united_states.consumption_per_person_2024), times the shared value of a doubled income, with the credit and counterfactual adjustments."
+      "formula": "people_reached * hospital_savings_per_wish / hospital_years * pv_annuity_due(1, $discount_rate, hospital_years) * counterfactual_adj * attribution_share * implementation_adj * missing_data_adj * $uov_per_ln_consumption / (payer_multiple * @united_states.consumption_per_person_2024)",
+      "explainer": "Money saved spread over the many who pay for US health care, each gaining its share of their consumption on the site's log scale (the log curve is straight for small amounts), as the site values US public money: savings over the national-accounts consumption per person (@united_states.consumption_per_person_2024), times the shared value of a doubled income, spread over the years observed and discounted, with the counterfactual, credit, delivery and missing-data adjustments. Not evidence_adj, which is about the quality-of-life trial: the savings judgment carries its own doubt about selection."
     },
     {
       "id": "uov_valued_outside_wellbys",
