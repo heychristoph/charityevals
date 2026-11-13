@@ -1,6 +1,6 @@
 # Audit: american-cancer-society-charityevals, round 2 (verification of round 1's fixes)
 
-Model-sha: 6be6201439ee13acd9bb14cb58a22438c89b2362f5451a27fe358a844287ba36
+Model-sha: 4426a45dd370f4fc5e4a542a47cf6a5ada941c883a5db88b29094441999a46e7
 
 Result: 3.327e-6 daly/$ = 0.00333 years of healthy life per $1,000 (combined range 3.1e-4 to 0.035); global-health median 0.338 (x0.0098). The write-up's headline 0.0033 matches. Mechanical: `audit-model.ts` 0 high / 0 medium / 4 low (two context rows flagged unused, far-below and spread, all explained or acknowledged in the summary), no invariant violated. Only the diff since round 1 was checked.
 

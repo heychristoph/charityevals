@@ -1,7 +1,7 @@
 # Audit: feeding-america-charityevals, round 2
 
 Result: 1.830e-5 daly/$ = 0.01830 years of healthy life per $1,000 (combined range 0.0036–0.094); cause median 0.253 (×0.072). Verdict: **pass**.
-Model-sha: 1e90c9cca8d224c5b4f090fd0eee1d33ce526e883fea2fba1eaeb21b6480ce70
+Model-sha: f42a96650afef9b5b215278de7f74f03f84db5507addf8e84816e00cd2aa7d08
 
 Scope: unchanged from round 1: member services, food procurement and programs, FY2025, in Feeding America's own cash less the members' repayments, $221.5m × overhead 1.303 = cost_total $288.7m. The advocacy model takes the other $48.9m, so costs are disjoint. The child hunger and food-as-medicine grants are now argued to be part of the food branch (they hand out network food), with their cost in `food_attribution_share`'s numerator. That settles finding 6 as an alternative fix: their food is already in the pounds counted, and the health effect of food is stated as not modelled. Split at the defaults, from scratch runs with each branch's counterfactual at ~0: food (with the tiny landfill part) 0.0100 (55%), SNAP 0.0082 (45%).
 
