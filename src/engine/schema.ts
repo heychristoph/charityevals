@@ -133,6 +133,9 @@ export const Owner = z
     url: z.string().url(),
     kind: z.enum(["evaluator", "charityevals"]),
     about: z.string().optional(),
+    /** false: the evaluator has asked us not to publish its models yet. They stay in models/ but leave the
+     * library, so no page, ranking or other model shows or reads them. */
+    published: z.boolean().optional(),
   })
   .strict();
 export type Owner = z.infer<typeof Owner>;

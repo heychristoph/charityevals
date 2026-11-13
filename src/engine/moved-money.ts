@@ -32,7 +32,8 @@ export const GLOBAL_HEALTH_DESTINATIONS = ["against-malaria-foundation", "malari
 /** Livelihoods charities with an evaluator's live model on the site, for an organisation that moves money
  * to livelihoods charities (Better Futures Guide). Equal weights: none of them has a published share yet. */
 export const LIVELIHOODS_DESTINATIONS = [
-  "givedirectly", "bandhan-founders-pledge", "village-enterprise-founders-pledge", "raising-the-village-2024", "one-acre-fund-seedlings-2022",
+  // Founders Pledge's Bandhan and Village Enterprise models are out while FP's models aren't published (owners.json).
+  "givedirectly", "raising-the-village-2024", "one-acre-fund-seedlings-2022",
 ];
 /** The Life You Can Save's own split of the money it moved in 2025 (facts/meta.json tlycs_moved_2025_*),
  * each charity at its main model on the site (GiveDirectly at #givedirectly, as everywhere in meta
@@ -76,7 +77,7 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
   value_livelihoods: {
     id: "value_livelihoods", format: "small", formula: lw,
     label: "Value of a dollar to livelihoods charities (live), units of value",
-    explainer: "The livelihoods charities with an evaluator's model on this site, each at its live result under your values, with equal weights: GiveDirectly (GiveWell), Bandhan's graduation programme and Village Enterprise (Founders Pledge), Raising the Village and One Acre Fund (GiveWell).",
+    explainer: "The livelihoods charities with an evaluator's model on this site, each at its live result under your values, with equal weights: GiveDirectly, Raising the Village and One Acre Fund (all GiveWell's).",
   },
   value_tlycs_recommended: {
     id: "value_tlycs_recommended", format: "small", formula: tl,
