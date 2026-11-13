@@ -1,7 +1,7 @@
 # Audit: cancer-research-uk-charityevals, round 4 (verification)
 
 Result: 1.662e-6 daly/$ = 0.00166 years of healthy life per $1,000, unchanged (the changes since round 3 are one explainer, two write-ups). Verdict: pass.
-Model-sha: de60b46fc2fdbbbde0afb33203642da69a637eab9bc75c8903bc80c1e0b162ea
+Model-sha: 6db3935641cd122a3d56d30c9d580d393df3f34f43f2616212dbad9f8febfaa6
 
 Scope: only the changes since round 3 (git diff 593699e 052ad7c -- models writeups): the `research_attribution_share_shared` explainer, the BHF write-up's branch shares and superseded history line, and the CRUK write-up's round-3 note.
 

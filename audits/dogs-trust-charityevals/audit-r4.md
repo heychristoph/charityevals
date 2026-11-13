@@ -1,7 +1,7 @@
 # Audit: dogs-trust-charityevals, round 4
 
 Result: 0.4858 ced/$ = 5.34e-5 years of healthy life per $1,000 (combined range 8.6e-6 – 3.3e-4); cause median 7.43e-4 (×0.072). Verdict: pass.
-Model-sha: 8f8c98077bf87fe3db51c430ee4061e31c92c835f19458321abc0e0d9fadce31
+Model-sha: 71a3145115f62738095b6d1462d109803e2d93dd9cd924aa47781ae82b5c0190
 
 Scope: unchanged from round 3 (rehoming, prevention, brand and 80% of international work, year to 31 Dec 2025; the rabies model takes the other 20%). This round checks only whether round 3's high is settled and whether the change and the text updates brought new problems.
 

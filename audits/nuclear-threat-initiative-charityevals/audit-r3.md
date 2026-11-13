@@ -1,7 +1,7 @@
 # Audit: nuclear-threat-initiative-charityevals, round 3 (verification)
 
 Result: 0.02102 daly/$ = 21.0 years of healthy life per $1,000 (combined range 1.08 – 410); no cause median (still the only model in catastrophic-risk). Verdict: pass.
-Model-sha: cfdc2405e585b354869ce6b927dec0ad6c17f70cf97637157608080d83adf86e
+Model-sha: 36e690d02ea9dfab80756c00936d444ed1f75fb897d1915dc224e06a920f002f
 
 Scope: only the changes since round 2 (audit-r2.md) and the write-up's "How this model was checked" paragraph.
 

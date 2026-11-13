@@ -3,14 +3,14 @@
 // The SHA-256 of the model's content (not its write-up, which is prose about it and may be reworded), so an
 // edit to the model after the audit shows: src/engine/audit-receipts.test.ts fails a charityevals model whose latest audit
 // (audits/<id>/audit-r<n>.md) isn't a pass on the current fingerprint. The content, not the file's bytes: keys
-// sorted, layout ignored, and the fields the after-merge scripts write (`beneficiaries`, `missing_data`) left
+// sorted, layout ignored, and the fields the after-merge scripts write (`beneficiaries`, `beneficiaries_note`, `missing_data`) left
 // out, so running them doesn't void an audit.
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const root = join(import.meta.dirname, "..");
-const TOOL_WRITTEN = new Set(["beneficiaries", "missing_data"]);
+const TOOL_WRITTEN = new Set(["beneficiaries", "beneficiaries_note", "missing_data"]);
 
 function walk(d: string): string[] {
   return readdirSync(d).flatMap((f) => {

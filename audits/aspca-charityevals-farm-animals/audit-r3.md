@@ -1,7 +1,7 @@
 # Audit: aspca-charityevals-farm-animals, round 3
 
 Result: 0.3714 ced/$ = 4.085e-5 years of healthy life per $1,000 (combined range 3.38e-8 – 4.94e-2); cause median 4.872e-4 (×0.084). Verdict: pass.
-Model-sha: 2ceed9c1d18e9c3998af87cbc0473a9a4d5f23f7f218a00c1eed73e70631fd15
+Model-sha: 080cd58ecea05c349c563133f850402796b5df64504653bbe91360333877ec7f
 
 Scope: unchanged from round 2. This round checks only the changes made since round 2 and whether they brought new problems. 0 high, 1 medium (carried), 1 low (carried); no new findings.
 

@@ -1,7 +1,7 @@
 # Audit: feeding-america-charityevals-advocacy, round 2
 
 Result: 2.084e-4 uov/$ = 0.1042 years of healthy life per $1,000 (combined range 0.0093 – 1.165); cause median 0.2528 (×0.41). Verdict: **pass**.
-Model-sha: df37c8aa008d07d04d58a23b4f282b47cd53c144a9bb180aa51a63927b79813f
+Model-sha: bdd0d6b73ec2ec0d7e47a936c07a117978f5f26c1d86fbecf69263bc77668494
 
 Mechanical: audit-model 0 high / 0 medium / 2 low (counterfactual_adj and total_adj are summaries of the branches, not applied: their labels already say "for reading only"; add the same words to their explainers, which are missing). check.ts: all models valid. Branch structure (three branches, each its own counterfactual and total_adj, summed in `outcome_total`) is consistent; the shared figures (@snap.benefit_share, @snap.cash_equivalence, @public_funds.mcpf, @public_funds.us_federal_payer_multiple, @united_states.food_aid_recipients_consumption_share) are read, and the food network model reads the same ones (10 reads there). generated/ not rewritten.
 
