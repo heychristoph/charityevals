@@ -3,6 +3,6 @@ Animal Charity Evaluators published one public model of this charity's work, in 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Vegan Outreach: 2016 estimate (ACE)](/vegan-outreach) | [ACE](/evaluators/ace) | November 2016 | <span data-figure="headline" data-model="vegan-outreach-ace-2016">3.3</span> | none: built from the published figures |
+| [Vegan Outreach: 2016 estimate (ACE)](/vegan-outreach) | [ACE](/evaluators/ace) | November 2016 | <span data-figure="headline" data-model="vegan-outreach-ace-2016">0.00099</span> | none: built from the published figures |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

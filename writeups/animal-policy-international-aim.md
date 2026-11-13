@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in October 2
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Animal Policy International: banning low-welfare animal imports into New Zealand (Ambitious Impact, 2022 idea report)](/animal-policy-international) | [AIM](/evaluators/ambitious-impact) | October 2022 | <span data-figure="headline" data-model="animal-policy-international-aim">5.4</span> | 245, 40 kept fixed |
+| [Animal Policy International: banning low-welfare animal imports into New Zealand (Ambitious Impact, 2022 idea report)](/animal-policy-international) | [AIM](/evaluators/ambitious-impact) | October 2022 | <span data-figure="headline" data-model="animal-policy-international-aim">0.0016</span> | 245, 40 kept fixed |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Animal Policy International existed, not of the charity's own results. It is shown because Animal Policy International runs the programme today ([checked October 2026](https://www.animalpolicyinternational.org/)) and no model of its actual work exists yet.
 

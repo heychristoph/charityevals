@@ -1,7 +1,7 @@
 # Audit: dogs-trust-charityevals-rabies, round 3
 
 Result: 4.834e-4 uov/$ = 0.2417 years of healthy life per $1,000 (combined range 0.041–1.415); global-health median 0.403 (×0.60). Verdict: pass (0 high).
-Model-sha: 2605bcd5482e1f83750baef3812afe583ea814c3f814d901130d51796a02f9ab
+Model-sha: 896f9689b972e3c9e5db1bcfb352dd995115161681e81191722a15392dd79b2a
 
 Scope: unchanged from round 2 (the "rabies" line, 20% of the 2025 international line, $6.877m; sister model takes the rest). Round 3 checks only the round-2 highs and mediums and what the changes introduced.
 

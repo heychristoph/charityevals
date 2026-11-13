@@ -3,6 +3,6 @@ Animal Charity Evaluators published one public model of this charity's work, in 
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [HSUS Farm Animal Protection Campaign: 2016 estimate (ACE)](/humane-society-of-the-united-states) | [ACE](/evaluators/ace) | November 2016 | <span data-figure="headline" data-model="humane-society-of-the-united-states-ace-2016">200</span> | none: built from the published figures |
+| [HSUS Farm Animal Protection Campaign: 2016 estimate (ACE)](/humane-society-of-the-united-states) | [ACE](/evaluators/ace) | November 2016 | <span data-figure="headline" data-model="humane-society-of-the-united-states-ace-2016">0.059</span> | none: built from the published figures |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).
