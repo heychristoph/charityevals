@@ -1,6 +1,6 @@
 # Audit: americares-charityevals-emergency, round 2 (verification)
 Result: 3.670e-5 DALY/$ = 0.0367 years of healthy life per 1,000 dollars (combined range 0.0074–0.183, as in round 1); cause median 0.338 (x0.11). Verdict: pass.
-Model-sha: c50717f426f89269734d18803e214abc867dd73d7bb3c485a0e8d227bb1d5531
+Model-sha: dec0731473ba2ceffff82ed9bcc68db4b7d3ab3be8abca3f9ff60c2dedd8ad84
 Scope: unchanged from round 1 (Emergency Programs, FY2025, cash expenses only; donated goods in the credit share).
 Mechanical: audit-model 0 findings (no high, medium or low); result identical to round 1 (the edits are explainers, a source change and a row-order move). Normalization-audit wrote nothing to generated/.
 Previous round: F1 resolved, F2 resolved, F3 resolved, F4 resolved, F5 resolved, F6 resolved (details below).
