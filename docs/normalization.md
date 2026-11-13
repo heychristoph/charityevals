@@ -1222,7 +1222,18 @@ negative share added to 1 (an adjustment of −40%) on the factor 1 + x, so it n
 everything; calendar years never vary. Stored per model: the result at 5%, 10%, …, 95% and its average, as
 multiples of the best guess, and the share of draws at zero or below. The browser scales this shape with
 the reader's values. Where the reader's values change a model's structure, not just its size, the shape
-is approximate.
+is approximate. On a model's page the simulation runs again at the reader's values and edits.
+
+**Unstable simulations.** Where the simulated middle is more than 3× from the best guess, or the range runs
+more than 50× either side of it (a result that is a small difference of large numbers, or a ratio near
+zero: 26 models, mostly GiveWell sheets), the simulation isn't used: the model counts at its best guess at
+every risk setting, its range falls back to every ranged input at its end, and it carries a caveat.
+
+**Best guess, not average.** The ranking stays on the best guess. Where success or failure is a row (a
+chance of success), the best guess already counts it as its expected value; what remains between best
+guess and simulated average is the skew of the uncertain inputs, under ×1.14 for half the models and
+×1.6 for nine in ten. The Hits-based value set (unmeasured results in full, risk 80%) is the lens for
+long shots.
 
 ## 3. Invariants
 
