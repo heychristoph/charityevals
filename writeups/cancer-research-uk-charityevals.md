@@ -2,7 +2,7 @@
 
 Cancer Research UK is the world's largest charitable funder of cancer research. It also campaigns on cancer policy and runs public cancer information. This is charityevals' own model of all its charitable work in the year to 31 March 2026: research, policy and information.
 
-We estimate **<span data-figure="headline" data-model="cancer-research-uk-charityevals">0.003</span> years of healthy life per $1,000** you give. Almost all of it rests on judgment: how much of the world's cancer a year of research averts, how many years sooner, and what share of the field Cancer Research UK is. The range runs across several orders of magnitude. None of the three branches has measured outcomes for Cancer Research UK's own spending, so each is discounted for missing data.
+We estimate **<span data-figure="headline" data-model="cancer-research-uk-charityevals">0.002</span> years of healthy life per $1,000** you give. Almost all of it rests on judgment: how much of the world's cancer a year of research averts, how many years sooner, and what share of the field Cancer Research UK is. The range runs across several orders of magnitude. None of the three branches has measured outcomes for Cancer Research UK's own spending, so each is discounted for missing data.
 
 ### What the charity does
 
@@ -30,8 +30,8 @@ Research is the medical-research template's chain, as in our [British Heart Foun
 - **Burden:** the world's cancer burden, 255 million DALYs a year (WHO Global Health Estimates 2021).
 - **Share averted:** what a year of the field's research averts once adopted, 0.13% a year (one judgment, 0.03% to 0.5%). The US cancer death rate fell 34% from 1991 to 2022. About half of that came from earlier detection and better treatment, the rest mostly from less smoking. Rich countries carry under a quarter of the world's cancer burden, uptake elsewhere is lower, and about half of the gain is uptake of older advances rather than new research.
 - **Timing:** brought forward 5 years, after a 15-year wait.
-- **Adjustments:** our trust in the evidence (0.7), then Cancer Research UK's share of the world's cancer research funding, about 1.5%. All funders together spend about $38bn a year, counting industry.
-- **Check:** the 10% return in UK health gains found for UK cancer research implies about ten times the chain's figure per pound. That study credits UK research with UK gains generously and calls itself a best case. The world also spends about three times as much on cancer research as on heart research, for a smaller burden. The model shows both rows.
+- **Adjustments:** our trust in the evidence (0.7), then Cancer Research UK's share of the world's cancer research funding, about 0.6%. All funders together spend about $100bn a year: some $16bn from governments and charities, and some $85bn from industry, for which cancer is the largest area (38% of its new trials).
+- **Check:** the 10% return in UK health gains found for UK cancer research implies about 25 times the chain's figure per pound. That study credits UK research with UK gains generously and calls itself a best case. The world also spends several times as much on cancer research as on heart research, for a smaller burden. The model shows both rows.
 
 The policy branch follows the government's impact assessment of the law, with the same figures as our British Heart Foundation model:
 
@@ -55,15 +55,15 @@ Each branch is multiplied by the shared "How much we count a programme whose res
 - **The missing-data discount** (your value judgment).
 - **The share of the burden a year of research averts:** 0.03% to 0.5%.
 - **The discount rate:** a 15-year wait makes the result sensitive to it.
-- **Years brought forward** (2 to 15) and **Cancer Research UK's share of the field** (0.6% to 3.5%).
+- **Years brought forward** (2 to 15) and **Cancer Research UK's share of the field** (0.3% to 1.2%).
 - **The next dollar against the past average:** 30% to 85%.
 
-Research is about 77% of the result, policy about 20% and information about 3%. Per pound, the policy work does about ten times as well as research, but it is a small part of the spending.
+Research is about 57% of the result, policy about 36% and information about 6%. Per pound, the policy work does about twenty times as well as research and the information work about twice as well, but together they are 7% of the spending.
 
 ### Biggest uncertainties
 
-- No study measures what one funder's research is worth. The chain is calibrated on the record of falling cancer death rates and on returns-to-research studies, and the two disagree by about ten times.
-- Credit is split by share of funding. Industry pays for more than half of all cancer research, and we count all of it.
+- No study measures what one funder's research is worth. The chain is calibrated on the record of falling cancer death rates and on returns-to-research studies, and the two disagree by about 25 times.
+- Credit is split by share of funding. Industry pays for most cancer research, and we count all of it.
 - The smokefree-generation effect is modelled, not observed.
 - What a standing information service does to diagnosis has not been measured; campaign evaluations are before-and-after comparisons.
 
@@ -78,7 +78,11 @@ These get a share of the unmodelled benefits (10%, -5% to 30%), not a chain of t
 
 ### How this model was checked
 
-Mechanical checks: lint, the normalization invariants and the reference class (`scripts/audit-model.ts`). Independent audit rounds follow below.
+Mechanical checks: lint, the normalization invariants and the reference class (`scripts/audit-model.ts`).
+
+Independent audit round 1 (1 high, 0 medium, 2 low). What changed:
+- **Cancer Research UK's share of the field:** industry's cancer research was scaled from the share industry pays of all US medical research. Cancer is industry's largest area (38% of its new trials), so industry's part is now global pharmaceutical R&D times cancer's share. The share fell from 1.5% to 0.6%, and the result from 0.003 to 0.002.
+- **Smaller fixes:** the half of the fall in cancer deaths credited to detection and treatment is labelled as our judgment; the royalty shares passed on are said to be counted as cost.
 
 ### Sources
 
@@ -88,4 +92,5 @@ Mechanical checks: lint, the normalization invariants and the reference class (`
 - [Glover et al. 2014, returns to UK cancer research](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4058434/fullTextXML)
 - [American Cancer Society, Cancer statistics 2025](https://pressroom.cancer.org/2025CancerFactsandFigures)
 - [National Cancer Institute, Fact Book FY2024](https://www.cancer.gov/about-nci/budget/fact-book/archive/fy24-fact-book.pdf)
+- [IQVIA, therapeutic areas driving clinical trial growth (2026)](https://www.iqvia.com/blogs/2026/05/therapeutic-areas-driving-clinical-trial-growth); [BioSpace on 2024 pharmaceutical R&D (Evaluate Pharma)](https://www.biospace.com/business/undeterred-by-political-economic-headwinds-pharma-ups-r-d-investment-in-2024-and-beyond)
 - Moses et al., JAMA 2015 (who pays for medical research); Ironmonger et al., Br J Cancer 2015 (Be Clear on Cancer lung campaign); Wong, Siah and Lo, Biostatistics 2019 (drug development success rates)
