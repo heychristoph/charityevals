@@ -3,6 +3,8 @@
   "name": "Americares: medicine donations and health services (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
+  "beneficiaries": {"USA":0.1735,"COL":0.1775,"SLV":0.1775,"IND":0.1775,"HTI":0.0735,"LBR":0.0735,"MWI":0.0735,"PHL":0.0735},
+  "beneficiaries_note": "Our build: shares of the result by branch at the defaults (clinics 41%, medicine donations to clinics 29%, health-worker training 28%, the US patient-assistance programme 1%); clinics split equally over Colombia, El Salvador, India and the US, donations 20% US (restricted gifts' split, statements note 7) and the rest, with the training, equally over the seven programme countries named in the annual report (Colombia, El Salvador, India, Haiti, Liberia, Malawi, the Philippines): a judgment, as Americares publishes no country split.",
   "template": "direct-health",
   "estimate_basis": "unit_cost",
   "charity": "americares",
@@ -75,13 +77,13 @@
       "value": 133068000,
       "kind": "observed",
       "source": {
-        "title": "Americares Annual Report 2025 (fiscal year July 2024 - June 2025)",
-        "url": "https://www.americares.org/wp-content/uploads/Americares-Annual-Report-FY2025-v2-2.pdf",
-        "page": "p. 18, Fiscal Year 2025 Financial Results",
-        "quote": "Total Program Services (without GIK) 133,068",
+        "title": "Americares Foundation, Inc. and Affiliate: consolidated financial statements, years ended June 30, 2025 and 2024 (Grant Thornton, audited)",
+        "url": "https://www.americares.org/wp-content/uploads/2025-Americares-Foundation-UG.pdf",
+        "page": "p. 7, consolidated statement of activities",
+        "quote": "Other program expenses 133,068",
         "retrieved": "2026-11-13"
       },
-      "explainer": "All three programmes' spending without the donated goods (gifts in kind) distributed, in US dollars (the report is in thousands): the same figure as the audited statement of activities' other program expenses (p. 7). The donated goods (1,745.6 million dollars at recorded value) are drug companies' resources: they enter each branch's credit share, never the cost (Convention 2)."
+      "explainer": "All three programmes' spending without the donated goods distributed, in US dollars (the statements are in thousands): total program services 1,878,619 less distribution of donated medical and disaster supplies 1,745,551; the annual report shows the same figure as Total Program Services (without GIK) (p. 18). The donated goods (1,745.6 million dollars at recorded value) are drug companies' resources: they enter each branch's credit share, never the cost (Convention 2)."
     },
     {
       "id": "mgmt_general",
@@ -320,7 +322,7 @@
         "quote": "1.9M people helped by medicine alone* (*estimated)",
         "retrieved": "2026-11-13"
       },
-      "explainer": "Americares' own estimate of the people its donated medicine helped in FY2025; we read it as including the Patient Assistance Program's patients, so they are taken out below (if it doesn't, the clinic branch is about an eighth too small)."
+      "explainer": "Americares' own estimate of the people its donated medicine helped in FY2025; we read it as including the Patient Assistance Program's patients, so they are taken out below (if it doesn't, the clinic branch is about an eighth too small). 'Medicine alone' reads as people helped by medicine without Americares' own care, so the clinics' patients (counted below) aren't taken out; if some are inside the 1.9 million, the overlap is under a tenth of them, about 3% of the result."
     },
     {
       "id": "don_people",
@@ -445,13 +447,8 @@
       "section": "effect",
       "label": "Assistance-programme deaths averted: share aged 15-49 (rest 50-74)",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Chronic-disease deaths of uninsured working-age adults are mostly at 50-64 (Medicare covers most people from 65). Our judgment, 30% under 50, the rest at the 50-74 weight."
+      "formula": "@death_ages.cvd_share_15_49_gbr / (@death_ages.cvd_share_15_49_gbr + @death_ages.cvd_share_50_69_gbr)",
+      "explainer": "The patients are uninsured adults under 65 (Medicare covers most people from 65) with chronic disease, mostly cardiovascular and metabolic: the shared rich-country split of cardiovascular deaths between 15-49 and 50-69 (WHO Global Health Estimates, the UK's, the nearest the site holds to the US) gives about 13% under 50, the rest at the 50-74 weight."
     },
     {
       "id": "pap_value_per_death",
@@ -556,7 +553,7 @@
         "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Partner facilities treat all ages; young children die most of infections in poor countries, while US clinics and chronic-disease drugs serve adults. Our judgment, 20%, from 10% to 40%."
+      "explainer": "Partner facilities treat all ages; young children die most of infections in poor countries, while US clinics and chronic-disease drugs serve adults. Anchors from the shared splits: under-fives are 55% of diarrhoea and 63% of malaria deaths in sub-Saharan Africa but 0.2% of cardiovascular deaths worldwide (@death_ages); the donated medicine treats both kinds. Our judgment, 20%, from 10% to 40%."
     },
     {
       "id": "don_share_5_14_of_over5",
@@ -582,7 +579,7 @@
         "high": 0.55
       },
       "kind": "judgment",
-      "explainer": "Adult deaths from treatable conditions in low- and middle-income countries fall about evenly between working ages and 50-plus (chronic disease); the rest at the 50-74 weight."
+      "explainer": "Adult deaths from treatable conditions in low- and middle-income countries fall between working ages and 50-plus: 15-49 are 37% of adult diarrhoea and 68% of adult HIV deaths in sub-Saharan Africa but 7% of cardiovascular deaths worldwide (@death_ages shares). Our judgment for the mix, 40%, from 25% to 55%; the rest at the 50-74 weight."
     },
     {
       "id": "don_value_per_death",
@@ -748,7 +745,7 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "The clinics mostly serve adults with chronic disease; the India and Colombia clinics see children too. Our judgment, 15%."
+      "explainer": "The clinics mostly serve adults with chronic disease; the India and Colombia clinics see children too. Between the shared splits for cardiovascular deaths (0.2% under five) and infections (over half, @death_ages). Our judgment, 15%, from 5% to 30%."
     },
     {
       "id": "hs_value_per_death",
@@ -831,7 +828,7 @@
         "high": 0.001
       },
       "kind": "judgment",
-      "explainer": "Training alone raises health workers' adherence to guidelines by about 10 percentage points on average (Rowe et al. 2018, Lancet Global Health systematic review); against 0.01-0.03 DALYs at stake in a typical primary-care patient's illness, a few hundredths of that is averted. Our judgment, 0.0002 DALY a patient, from 0.00005 to 0.001; deaths are in this figure.",
+      "explainer": "Training alone raises health workers' adherence to guidelines by about 10 percentage points on average (Rowe et al. 2018, Lancet Global Health systematic review, https://doi.org/10.1016/S2214-109X(18)30398-X); against 0.01-0.03 DALYs at stake in a typical primary-care patient's illness, a few hundredths of that is averted. Our judgment, 0.0002 DALY a patient, from 0.00005 to 0.001; deaths are in this figure.",
       "unit": "DALYs"
     },
     {
@@ -855,7 +852,7 @@
       "format": "number",
       "formula": "proj_workers_trained * proj_patients_per_worker * proj_dalys_per_patient * pv_annuity_due(1, $discount_rate, proj_skill_years)",
       "unit": "DALYs",
-      "explainer": "Trained workers × their patients × the gain per patient over the years it lasts, discounted. The projects' water, mental-health and climate-resilience work is valued through the same trained workers and the unmodelled share."
+      "explainer": "Trained workers × their patients × the gain per patient over the years it lasts, discounted. The projects' water, mental-health and climate-resilience work is valued through the same trained workers and the unmodelled share. Some trainees work in partner clinics that also get donated medicine; the gain here is better care, a different effect from the medicine, so the overlap (at most a few percent of the result) is accepted."
     },
     {
       "id": "proj_counterfactual_adj",
@@ -1418,16 +1415,5 @@
       "row": "uov_per_dollar",
       "unit": "uov"
     }
-  },
-  "beneficiaries": {
-    "USA": 0.1735,
-    "COL": 0.1775,
-    "SLV": 0.1775,
-    "IND": 0.1775,
-    "HTI": 0.0735,
-    "LBR": 0.0735,
-    "MWI": 0.0735,
-    "PHL": 0.0735
-  },
-  "beneficiaries_note": "Our build: shares of the result by branch at the defaults (clinics 41%, medicine donations to clinics 29%, health-worker training 28%, the US patient-assistance programme 1%); clinics split equally over Colombia, El Salvador, India and the US, donations 20% US (restricted gifts' split, statements note 7) and the rest, with the training, equally over the seven programme countries named in the annual report (Colombia, El Salvador, India, Haiti, Liberia, Malawi, the Philippines): a judgment, as Americares publishes no country split."
+  }
 }

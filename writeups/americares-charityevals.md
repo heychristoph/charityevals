@@ -33,7 +33,7 @@ The missing-data slider, then how much a trained health worker's patients gain, 
 
 - What donated medicine does for patients against a stock-out: no study measures it.
 - How many of the 1.9 million patients the medicine helped would have been treated anyway.
-- How Americares' clinics and project spending divide (the accounts give one figure for both).
+- What a trained health worker's patients gain: the training branch is over a quarter of the result and rests on the research on training alone.
 - Where the emergency money went: the accounts give no split by country.
 
 ### What isn't modelled
@@ -42,7 +42,7 @@ Supply-chain and disaster-preparedness support to partner clinics, recovery proj
 
 ### How this model was checked
 
-AUDIT_ROUNDS
+Each model had an independent audit (audits/americares-charityevals/ and audits/americares-charityevals-emergency/). Round 1 passed both with no high findings. The fixes that followed: the assistance programme's deaths split by age from the shared cardiovascular split instead of our guess, the other age splits anchored on the shared splits, the emergency goods share anchored on the programme's own expense lines, the cash programme total cited from the audited statement, and the overlaps between branches stated. A verification round checked those changes.
 
 ### Sources
 
