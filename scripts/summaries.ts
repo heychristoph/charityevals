@@ -10,12 +10,14 @@
 // hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, compute, factUsage, hasRange } from "../src/engine/model";
+import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Library } from "../src/engine/model";
+import { uncertainty } from "../src/engine/uncertainty";
 import { isValueOfInformation } from "../src/engine/ranking";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
 const usageOut = join(root, "generated/usage.json");
+const spreadsOut = join(root, "generated/risk-spreads.json");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
 const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
   const p = join(d, f);
@@ -94,8 +96,25 @@ function same(a: unknown, b: unknown): boolean {
   return a === b;
 }
 
+/** Per model, the half-width in log space of its result's 90% plausible range at the defaults, in our
+ * view, with the reader's own value judgments (the shared assumptions) left out: what the risk slider
+ * ($risk_quantile, docs/normalization.md 2.18) moves a result by. Rounded, so the file only changes when
+ * a model does. */
+export function riskSpreads(lib: Library): Record<string, number> {
+  const av = assumptionValues(lib.assumptions);
+  const out: Record<string, number> = {};
+  for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id))) {
+    if (!comparable(lib, m)) continue;
+    const u = uncertainty(lib, m, compute(lib, m, av), av, "charityevals");
+    // Past ×100 either way the log-normal reading breaks down (a range through zero on a small input): capped there.
+    const s = Math.min(Math.log(100), Math.sqrt(u.total * (1 - (u.bySource.assumption ?? 0))));
+    if (Number.isFinite(s) && s > 0) out[m.id] = Number(s.toPrecision(4));
+  }
+  return out;
+}
+
 const built = library();
-for (const [file, fresh] of [[out, summaries(built)], [usageOut, factUsage(built.lib)]] as const) {
+for (const [file, fresh] of [[out, summaries(built)], [usageOut, factUsage(built.lib)], [spreadsOut, riskSpreads(built.lib)]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
       console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts`);

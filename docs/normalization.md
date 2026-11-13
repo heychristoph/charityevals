@@ -1200,6 +1200,18 @@ has impact goes into its model as rows. A step an evaluator's sheet leaves out (
 anyway, the charity's share of the credit) gets a row in our section, ×1 with its reason or a value, the
 evaluator's own figure in `published`; side effects as in 2.16.
 
+### 2.18 Risk: how sure the counted figure is (November 2026)
+
+One slider, "Accept a … % risk that the real impact is lower than shown" (`$risk_quantile`, 5–95%,
+default 50%). Each model's result counts at that share of its plausible range, read as log-normal:
+× exp(norm_inv(share) × spread ÷ 1.645) (src/engine/model.ts `riskNode`, in the headline beside the
+age, distance and missing-data factors; never in the evaluator view). The spread is the half log-width of
+the model's 90% range from the uncertainty engine, as audit-model's combined range, with the reader's own
+value judgments (shared assumptions) left out, computed at the defaults by scripts/summaries.ts into
+generated/risk-spreads.json and capped at ×100 either way, past which the log-normal reading breaks down
+(a range through zero on a small input). 50% is the best guess; below it risk-averse; above it risk-seeking.
+Not yet in it: an explicit chance that a programme does nothing, which smooth ranges don't show.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them

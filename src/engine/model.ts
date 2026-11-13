@@ -39,6 +39,9 @@ export type Library = {
   assumptions: Assumptions;
   facts: Map<string, FactRow>;
   errors: string[];
+  /** Per model, the half-width in log space of its result's plausible range (a 90% range), value
+   * judgments left out: what $risk_quantile moves a result by (generated/risk-spreads.json). */
+  spreads?: Record<string, number>;
 };
 
 /** Model pages live at /<id>, so these ids are taken by the site's own pages. */
@@ -56,7 +59,7 @@ export function buildLibrary(
   rawOwners: unknown[] = [],
   /** Models outside this build that formulas may reference by `#id` (a page rebuilding one bulk model
    * in the browser passes the site's library). */
-  options: { models?: Map<string, ResolvedModel>; trusted?: boolean } = {},
+  options: { models?: Map<string, ResolvedModel>; trusted?: boolean; spreads?: Record<string, number> } = {},
 ): Library {
   const errors: string[] = [];
   // `trusted`: data the build has already validated (npm run check), as the browser loads it: the
@@ -303,7 +306,7 @@ export function buildLibrary(
   };
   for (const id of models.keys()) visit(id, []);
   if (!models.has(assumptions.common.benchmark)) errors.push(`assumptions: benchmark model ${assumptions.common.benchmark} doesn't exist`);
-  return { models, charities, owners, assumptions, facts, errors };
+  return { models, charities, owners, assumptions, facts, errors, spreads: options.spreads };
 }
 
 /** Models a model's formulas reference directly (`#id`). */
@@ -905,6 +908,36 @@ export function missingDataFactor(lib: Library, m: ResolvedModel, a: Record<stri
   return n ? evaluate(n, (scope, name) => (scope === "assumption" ? a[name] ?? NaN : NaN)) : 1;
 }
 
+// --- Risk (docs/normalization.md 2.18) ---------------------------------------------------------------
+
+/** The share of risk the reader accepts that a charity's real impact is lower than shown: 50% counts its
+ * best guess, less counts a surer, lower figure, more a likelier-to-miss, higher one. */
+export const RISK_QUANTILE = "risk_quantile";
+/** A 90% range spans this many standard deviations either side of its middle. */
+const Z90 = 1.6448536269514722;
+
+const riskNodes = new WeakSet<Node>();
+export const isRiskFactor = (n: Node) => riskNodes.has(n);
+
+/** The factor for the reader's risk: exp(norm_inv($risk_quantile) × the model's spread ÷ Z90), the
+ * point of its log-normal range below which that share of it lies; exactly 1 at 50%. Undefined in the
+ * evaluator view, without the slider (an old commit's library) or a spread for the model. */
+export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
+  if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_QUANTILE)) return undefined;
+  const s = lib.spreads?.[m.id];
+  if (!s) return undefined;
+  const n: Node = { type: "call", fn: "exp", args: [{ type: "bin", op: "*", left: { type: "call", fn: "norm_inv", args: [assumption(RISK_QUANTILE)] }, right: num(s / Z90) }] };
+  riskNodes.add(n);
+  factorLabels.set(n, "For the risk you accept that the impact is lower");
+  return n;
+}
+
+/** The risk factor at assumption values `a` (the view's own): 1 where none applies. */
+export function riskFactor(lib: Library, m: ResolvedModel, a: Record<string, number>, view: View = "charityevals"): number {
+  const n = riskNode(lib, m, view);
+  return n ? evaluate(n, (scope, name) => (scope === "assumption" ? a[name] ?? NaN : NaN)) : 1;
+}
+
 const modelConversions = new WeakMap<ResolvedModel, Partial<Record<View, Node | undefined>>>();
 
 /** What turns a model's result per dollar into its headline in a view: the unit's conversion
@@ -926,9 +959,11 @@ function withReaderFactors(lib: Library, m: ResolvedModel, n: Node, view: View):
   const age = ageDivisorNode(lib, m, view);
   const dist = distanceNode(lib, m, view);
   const missing = missingDataNode(lib, m, view);
+  const risk = riskNode(lib, m, view);
   const aged: Node = age ? { type: "bin", op: "/", left: n, right: age } : n;
   const weighed: Node = dist ? { type: "bin", op: "*", left: aged, right: dist } : aged;
-  return missing ? { type: "bin", op: "*", left: weighed, right: missing } : weighed;
+  const thin: Node = missing ? { type: "bin", op: "*", left: weighed, right: missing } : weighed;
+  return risk ? { type: "bin", op: "*", left: thin, right: risk } : thin;
 }
 
 /** The headline as a formula over `result` (a model's own result per dollar, e.g. its output row):
@@ -945,9 +980,10 @@ const readers = new WeakMap<Record<string, number>, Record<string, number>>();
  * view the same with no discount for age or distance and missing data counted in full, so that view
  * never applies them, however deep. One object per `av`, so modelResult's cache still hits. */
 export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
-  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1))) return av;
+  const riskMoves = RISK_QUANTILE in av && av[RISK_QUANTILE] !== 0.5;
+  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1) && !riskMoves)) return av;
   let r = readers.get(av);
-  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}) }));
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: 0.5 } : {}) }));
   return r;
 }
 
@@ -960,9 +996,10 @@ const neutral = new WeakMap<Record<string, number>, Record<string, number>>();
 export function refValues(m: ResolvedModel, av: Record<string, number>, view: View): Record<string, number> {
   const r = readerValues(av, view);
   const missingMoves = MISSING_DATA_DISCOUNT in r && r[MISSING_DATA_DISCOUNT] !== 1;
-  if (m.beneficiaries === "destinations" || (!r[DISTANCE_DISCOUNT] && !missingMoves)) return r;
+  const riskMoves = RISK_QUANTILE in r && r[RISK_QUANTILE] !== 0.5;
+  if (m.beneficiaries === "destinations" || (!r[DISTANCE_DISCOUNT] && !missingMoves && !riskMoves)) return r;
   let n = neutral.get(r);
-  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}) }));
+  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_QUANTILE in r ? { [RISK_QUANTILE]: 0.5 } : {}) }));
   return n;
 }
 
@@ -978,7 +1015,7 @@ export function bottomLine(
   const vals = headRows(lib, m, av, inputs, view);
   const native = vals[m.output.row];
   const a = viewAssumptions(m, av, view);
-  return { native, common: native * toCommon(lib, m.output.unit, a, vals, inputs) * ageFactor(lib, m, a, view) * distanceFactor(lib, m, a, view) * missingDataFactor(lib, m, a, view) };
+  return { native, common: native * toCommon(lib, m.output.unit, a, vals, inputs) * ageFactor(lib, m, a, view) * distanceFactor(lib, m, a, view) * missingDataFactor(lib, m, a, view) * riskFactor(lib, m, a, view) };
 }
 
 /** The model's result as the site shows it: years of healthy life per $1,000 where its unit converts,
@@ -1009,7 +1046,7 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads, never
   // weighs it by distance and never discounts an imported model for missing data.
-  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT].forEach((x) => used.delete(x));
+  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT, RISK_QUANTILE].forEach((x) => used.delete(x));
   if (view === "evaluator" && !m.rows.some((r) => r.assumptionDeps.includes(MISSING_DATA_DISCOUNT))) used.delete(MISSING_DATA_DISCOUNT);
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)
