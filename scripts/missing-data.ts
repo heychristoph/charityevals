@@ -126,7 +126,7 @@ const GIVEWELL: [RegExp, Rule][] = [
   [/^against-malaria-foundation|insecticide-treated-net|llins/, M("the nets distributed are counted, and the effect is from randomised trials of the same nets.")],
   [/^malaria-consortium|seasonal-malaria-chemoprevention|smc/, M("the campaigns count the children reached, and the effect is from randomised trials of the same chemoprevention (and of vitamin A, where co-delivered).")],
   [/^helen-keller|vitamin-a/, M("the campaigns count the children dosed, and the effect is from randomised trials of vitamin A supplementation.")],
-  [/^nutrition-international-(2024-chad|chad)/, M("the campaigns count the children dosed, and the effect is from randomised trials of vitamin A supplementation.")],
+  [/^nutrition-international-(2024-chad|chad|vitamin-a-chad)/, M("the campaigns count the children dosed, and the effect is from randomised trials of vitamin A supplementation.")],
   [/^new-incentives/, M("New Incentives counts the infants enrolled, and the effect on vaccination is from a randomised trial of its own programme.")],
   [/^givedirectly/, M("GiveDirectly counts its recipients, and the effect is from randomised trials of its own transfers.")],
   [/deworm|^sightsavers/, M("the treatments are counted, and the effect is from randomised trials of school-based deworming.")],
