@@ -1,6 +1,6 @@
 ### Summary
 
-The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **<span data-figure="headline" data-model="center-for-ai-safety-charityevals">1.5</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.03 to about 67.
+The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **<span data-figure="headline" data-model="center-for-ai-safety-charityevals">1.4</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.03 to about 61.
 
 ### What the charity does
 
@@ -18,7 +18,7 @@ The **CAIS Action Fund** is a separate 501(c)(4) lobbying organisation, and gift
 
 AI carries a yearly chance of catastrophe: the site's shared 3% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. Both are spread evenly over the years to 2100. You can move the 3% with a slider.
 
-CAIS's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. Rethink has two kinds of AI project. Work against misuse, such as tests of dangerous knowledge and defences against attacks, cuts the misuse part of the risk. Other work cuts the misalignment part. In Rethink's model misuse is 10% of the risk that AI ends humanity's future, but about three quarters of the catastrophes the world survives, because misuse mostly kills part of humanity. We take about a quarter of CAIS's AI spending as misuse work: WMDP, circuit breakers and some of the cluster's projects. Rethink's misuse projects cut far more risk per dollar, so this quarter gives most of the result. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
+CAIS's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. Rethink has two kinds of AI project. Work against misuse, such as tests of dangerous knowledge and defences against attacks, cuts the misuse part of the risk. Other work cuts the misalignment part. In Rethink's model misuse is 10% of the risk that AI ends humanity's future, but about two thirds of the deaths in catastrophes the world survives, because misuse mostly kills part of humanity. We take about a quarter of CAIS's AI spending as misuse work: WMDP, circuit breakers and some of the cluster's projects. Rethink's misuse projects cut far more risk per dollar, so this quarter gives most of the result. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
 
 The deaths averted are valued like every death on the site, across the world's age groups. An AI catastrophe the world survives is taken to kill 25% of people. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
 
@@ -42,13 +42,13 @@ CAIS holds about a year and a half of spending in reserve after two years of sur
 
 ### What drives the result
 
-The result is far below the Nuclear Threat Initiative's 21. That is because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects; nothing particular to CAIS causes it. Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 3. The course adds under a tenth.
+The result is far below the Nuclear Threat Initiative's 21. That is because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects; nothing particular to CAIS causes it. Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 2.8. The course adds under a tenth.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.4% to 20% by 2100, which moves the result from 0.2 to 9.7.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.2 to 14, the largest swing.
-- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (0.6 to 2.3).
+- **How likely an AI catastrophe is.** The slider runs from 0.4% to 20% by 2100, which moves the result from 0.2 to 9.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.2 to 13, the largest swing.
+- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (0.6 to 2.1).
 - **The discount rate and the years a cut counts.** Each moves the result several-fold.
 - **How CAIS's work compares with a typical project.** Its benchmarks are widely used, but use isn't the same as lower risk.
 

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "center-for-ai-safety",
   "owner": "charityevals",
-  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam, circuit breakers), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 1.5 years of healthy life per $1,000, from 0.03 to 67 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model: its misuse preset for the quarter of the work against misuse, which gives most of the result because misuse causes most survivable AI catastrophes in Rethink's model, its misalignment preset for the rest; the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is far below the Nuclear Threat Initiative (21) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's misuse cut per dollar (a placeholder, ten times either way), the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam, circuit breakers), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 1.4 years of healthy life per $1,000, from 0.03 to 61 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model: its misuse preset for the quarter of the work against misuse, which gives most of the result because misuse causes most deaths in survivable AI catastrophes in Rethink's model, its misalignment preset for the rest; the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is far below the Nuclear Threat Initiative (21) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's misuse cut per dollar (a placeholder, ten times either way), the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Center for AI Safety",
@@ -280,24 +280,6 @@
       "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
     },
     {
-      "id": "ai_misuse_risk_share",
-      "section": "effect",
-      "label": "AI: share of the extinction risk that comes from misuse rather than misalignment",
-      "format": "percent",
-      "formula": "@catastrophe.ai_misuse_share_of_risk",
-      "unit": "share",
-      "explainer": "Rethink Priorities' split of AI extinction risk (misuse 10%, misalignment 90%; shared). Misuse work cuts only this share, at Rethink's misuse preset; other AI work cuts only the rest, at its misalignment preset."
-    },
-    {
-      "id": "ai_misuse_catastrophe_risk_share",
-      "section": "effect",
-      "label": "AI: share of the survivable catastrophe risk that comes from misuse",
-      "format": "percent",
-      "formula": "ai_misuse_risk_share * @catastrophe.ai_misuse_catastrophe_vs_extinction / (ai_misuse_risk_share * @catastrophe.ai_misuse_catastrophe_vs_extinction + (1 - ai_misuse_risk_share) * @catastrophe.ai_misalignment_catastrophe_vs_extinction)",
-      "unit": "share",
-      "explainer": "Misuse's share of survivable AI catastrophes: Rethink Priorities gives misuse 50 catastrophes per extinction and misalignment 2 (shared), so misuse's 10% of extinction risk is about 74% of the catastrophes the world survives. The total stays the tournament's."
-    },
-    {
       "value": {
         "low": 0.1,
         "best": 0.25,
@@ -333,18 +315,18 @@
       "section": "effect",
       "label": "AI: deaths averted a year by a typical $1 million of work, while its cut counts",
       "format": "small",
-      "formula": "((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_extinction_per_year * deaths_if_extinct + ((1 - ai_misuse_cost_share) * (1 - ai_misuse_catastrophe_risk_share) * @catastrophe.ai_catastrophe_cut_per_million + ai_misuse_cost_share * ai_misuse_catastrophe_risk_share * @catastrophe.ai_misuse_catastrophe_cut_per_million) * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
+      "formula": "((1 - ai_misuse_cost_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_extinction_per_year * deaths_if_extinct + ((1 - ai_misuse_cost_share) * @catastrophe.ai_catastrophe_cut_per_million + ai_misuse_cost_share * @catastrophe.ai_misuse_catastrophe_cut_per_million) * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
       "unit": "deaths / year",
-      "explainer": "The share of each yearly risk a typical $1 million of AI work removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries: misuse work at Rethink's misuse preset on the misuse share of each risk (ai_misuse_risk_share for extinction, ai_misuse_catastrophe_risk_share for survivable catastrophes), other AI work at its misalignment preset on the rest, weighted by ai_misuse_cost_share. The catastrophe figure also applies to the smaller size."
+      "explainer": "The share of each yearly AI risk a typical $1 million of AI work removes (Rethink Priorities' cross-cause model, its backfire step and each preset's share of the risk included; shared), × the deaths that risk carries: misuse work at Rethink's misuse preset, other AI work at its misalignment preset, weighted by ai_misuse_cost_share. The catastrophe figure also applies to the smaller size."
     },
     {
       "id": "ai_future_per_million",
       "section": "effect",
       "label": "AI: future healthy years kept a year by a typical $1 million of work",
       "format": "small",
-      "formula": "((1 - ai_misuse_cost_share) * (1 - ai_misuse_risk_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * ai_misuse_risk_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_future_per_year",
+      "formula": "((1 - ai_misuse_cost_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_future_per_year",
       "unit": "DALYs / year",
-      "explainer": "As ai_deaths_per_million, for the future lost in an extinction-level catastrophe: the two presets' extinction cuts weighted by ai_misuse_cost_share, each on its share of the risk."
+      "explainer": "As ai_deaths_per_million, for the future lost in an extinction-level catastrophe: the two presets' extinction cuts weighted by ai_misuse_cost_share."
     },
     {
       "id": "ai_cost_share",

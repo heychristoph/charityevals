@@ -297,8 +297,8 @@ T["direct-health"] = model("direct-health", "direct health (deaths and illness a
         f("dalys_bridged", "bridges", "Illness averted, in DALYs", "people_reached * dalys_illness_averted_per_person * total_adj", None, "number", "DALYs"),
         f("uov_from_daly", "bridges", "Illness averted, in units of value", bridge("dalys_bridged", "daly", "uov"),
           "The bridge from DALYs into units of value: the unit's conversion cancels it, so illness counts as healthy years whatever \"Healthy year vs doubled-income year\" is set to.", "number", "units of value"),
-        f("outcome_total", "outcome", "Total units of value", "(uov_deaths + uov_stillbirths + uov_income) * (1 + unmodelled_benefits_adj) + uov_morbidity + uov_from_daly",
-          "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets; illness counted in DALYs comes in through its bridge.", "number", "units of value"),
+        f("outcome_total", "outcome", "Total units of value", "(uov_deaths + uov_stillbirths + uov_income + uov_from_daly) * (1 + unmodelled_benefits_adj) + uov_morbidity",
+          "Illness and the other supplementary shares add to the modelled value side by side, as one sum of shares does in GiveWell's sheets; illness counted in DALYs comes in through its bridge, inside the side-effect share like every other outcome.", "number", "units of value"),
         f("uov_per_dollar", "outcome", "Units of value per dollar", "outcome_total / cost_total", None, "small", "units of value / $"),
     ] + donor_rows("uov", "Units of value", "goods") + donor_tail("uov", "Units of value"),
     "what the charity does, where, " + BOTTOM, "unit_cost", sections=SECTIONS[:4] + [BRIDGE_SECTION] + SECTIONS[4:])
