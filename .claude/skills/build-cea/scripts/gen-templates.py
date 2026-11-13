@@ -761,6 +761,8 @@ os.makedirs(OUT, exist_ok=True)
 for name, m in T.items():
     for r in m["rows"]:
         if r["id"] in SIDE_EFFECTS: r["side_effect"] = SIDE_EFFECTS[r["id"]]
+        if r["id"] in ("p_success", "adv_p_success"):
+            r["explainer"] += " One chance (one bill, one case, one research bet): tag the row `single_event: true`; a share across many grants or campaigns: no tag (normalization.md 2.18)."
     with open(os.path.join(OUT, f"{name}.json"), "w") as fh:
         json.dump(m, fh, indent=2, ensure_ascii=False)
         fh.write("\n")

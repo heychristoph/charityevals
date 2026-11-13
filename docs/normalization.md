@@ -1245,10 +1245,14 @@ is approximate. On a model's page the simulation runs again at the reader's valu
 more than 100× either side of it, harm included (a result that is a small difference of large numbers, or a
 ratio near zero), the simulation isn't used. Most of the first 26 were calendar years drawn as uncertain
 (fixed above) or results that honestly run below zero (a grant that does worse than the money's alternative),
-which the 50× test of the first version wrongly caught. Left (November 2026): Better Season Project (farmers'
-own costs in the denominator: a net near zero; its monthly income falls are floored at −90% so the log stays
-defined, a floor no best guess reaches) and Evidence Action's iron and folic acid in India (a trend compounded
-from yearly burden figures drawn independently). For these the model counts at its best guess at
+which the 50× test of the first version wrongly caught. The rest had causes in how inputs were drawn, now
+fixed for every model: a negative number is an adjustment added to 1 only where the row is a percentage (a
+regression slope of −0.03 drawn as one swung to +0.56); a share stated as certain (0% or 100%) with no range
+stays so; a row compared with a timeline year in a formula (the year a cost period begins) is a position,
+never drawn; figures of one series from one source in other years or places (`drawn_with: <row id>`) share
+one draw, so a trend taken from their differences doesn't swing (Evidence Action's iron and folic acid in
+India); Better Season Project's monthly income falls are floored at −90%, which no best guess reaches, so
+the log stays defined. None is unstable (November 2026). Where one is, the model counts at its best guess at
 every risk setting, its range falls back to every ranged input at its end, and it carries a caveat.
 
 **Single events.** A row that is the chance one event happens at all (a new charity succeeds, a law passes,
@@ -1291,7 +1295,7 @@ shrinks).
 | INV-4 | No literal stands in for a shared number. | An input row whose value is within 0.2% of a fact's or assumption's low/best/high (0.003355 for `@cash`'s 0.00335) and whose label resembles the shared label, or uses one of its synonyms (ln(consumption) or a doubled income for `$uov_per_ln_consumption`; a DALY or disability weight, "(DW)", for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for `@cash`), must be a formula reading the fact, with the evaluator's literal in `published`. Facts made from identical labels (facts/givewell_common.json, staff_pay.json) match only rows with that label (the sheet's wording, in `source.quote` where the fact's own label has been rewritten), on their best value. Also: no formula contains a constant equal to a fact or assumption value (distinctive, or under a close label; exponents and one- or two-digit constants under labels only loosely alike are arithmetic). |
 | INV-5 | The evaluator view uses the evaluator's own rates. | For every model with an `evaluator`, every non-toggle assumption read inside layer E is either pinned in `evaluator.assumptions` or has a default equal to the evaluator's value (check: `expected` still reproduces when the assumption is moved ±50% in the charityevals view only). |
 | INV-6 | The evaluator's bottom line reproduces. | Model declares `output.native` (the native row). That row, or its direct inputs, carry `expected`; `scripts/check.ts` already checks `expected` in the evaluator view. |
-| INV-7 | Our rows are visibly ours. | Every row strictly between `output.native` and `output.row` is in a section of kind `accounting`, `bridge` or `conversion`, and has no `expected`. Every row upstream of `native` is in an evaluator section. |
+| INV-7 | Our rows are visibly ours. | Every row strictly between `output.native` and `output.row` is in a section of kind `ours` and has no `expected`. Every row upstream of `native` is in an evaluator section. |
 | INV-8 | One view, one set of numbers. | `headline(m, av, {}, "evaluator")` converts with `viewAssumptions(m, av, "evaluator")`, not `av` (fails today: see 4.2). |
 | INV-9b | Benefits over several years are discounted. | Each input on the path whose label counts years a benefit lasts (years of change/impact/benefit/funding, number of years, duration) is moved ×1.25 at a 0% and an 8% rate: if the headline rises by the same factor at both, the years are summed at face value. |
 | INV-5b | Every evaluator pin is read. | Each key of `evaluator.assumptions` is read by some row or by the unit's conversion; an unread pin is a lever the model should read or dead weight. |

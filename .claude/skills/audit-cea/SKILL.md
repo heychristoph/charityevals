@@ -40,7 +40,7 @@ don't flag**: every finding names the concrete fix.
 - `npx tsx scripts/summaries.ts`, then `npx tsx scripts/simulation-check.ts <id>`: an unstable simulation
   is **high** for a charityevals model, medium for an import; the inputs it prints are the usual cause.
 
-Copy every high and medium mechanical finding with its fix, then go beyond them: a rule broken under
+Copy every high and medium mechanical finding, then go beyond them: a rule broken under
 other words is yours to find. Reading shared facts and sliders is never a finding, even in a blind run.
 
 ## 2. Structure and standard steps
@@ -86,7 +86,8 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
     left out is missing-adjustment;
   - the simulation (2.18): ranges' `interval` and `shape` as the source states; one-off chances tagged
     `single_event`, no yearly rate or share of many; no range on a year; no remainder of large figures;
-  - a past average reads the charity's `@next_dollar` figure (2.10), sourced and dated within a year;
+  - a past average reads the charity's `@next_dollar` figure (2.10), sourced and dated within a year
+    (the slider instead: medium);
   - missing data (Convention 12, glossary "measured / thin", both ways): a thin branch at 1 is high; so
     is a branch at the slider whose reach the charity counts and whose effect is an RCT's of the same
     intervention delivered the same way (thin over-applied); a judged baseline or counterfactual never makes it thin;

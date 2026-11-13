@@ -73,6 +73,14 @@ describe("ranking plan", () => {
     expect(programOf(ea, lib.models.get("evidence-action-india")!)).toBe("iron-folic-acid");
   });
 
+  it("every model of a charity with lines matches a line, or it wouldn't rank", () => {
+    for (const m of lib.models.values()) {
+      const c = lib.charities.get(m.charity);
+      if (m.kind !== "charity" || !c?.lines?.length || isSideSheet(m)) continue;
+      expect(programOf(c, m), m.id).toBeDefined();
+    }
+  });
+
   it("every line with models matches at least one model", () => {
     for (const c of lib.charities.values())
       // A charity whose only models are unpublished (owners.json `published: false`) has none here.

@@ -57,7 +57,7 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 | `leverage_funging_adj` | others would have paid anyway (<1), or the money pulls others in (>1) | funding-gap data; judgment |
 | `unmodelled_benefits_adj` | effects not modelled, as a share of modelled value, each with its sign | list each |
 | `staff_cost_share`, `salary_gap` | staff's forgone pay, counted with credit by share of resources | salaries ÷ expenses from the financials, else `@staff_pay.share_<kind>`; the gap always `@staff_pay.gap_<kind>` |
-| `marginal_vs_past_average` | past averages only: `@next_dollar.<charity>` (`published` 1): the easiest wins come first | the charity's own figure, else the slider (normalization.md 2.10) |
+| `marginal_vs_past_average` | past averages only: `@next_dollar.<charity id, - as _>` (`published` 1): the easiest wins come first | the charity's own figure (normalization.md 2.10), written if missing |
 | `years_of_impact`, `years_until_effect`, `wait_discount` | won reforms: `$win_years_counted` (years the win brought the change forward) and the discounted wait | the shared slider; the commitments' deadlines |
 
 ## Conventions (all families)

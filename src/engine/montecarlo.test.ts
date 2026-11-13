@@ -40,7 +40,7 @@ describe("monte carlo", () => {
     expect(at(0.5) / at()).toBeCloseTo(1.6448536 / normInv(0.75), 0);
   });
   it("never lets a negative share take away more than everything", () => {
-    const lib = buildLibrary([model("m", [input("adj", { low: -0.9, best: -0.5, high: -0.1 }, { interval: 0.5 }), { id: "out", label: "out", formula: "10 * (1 + adj)" }])], assumptions);
+    const lib = buildLibrary([model("m", [input("adj", { low: -0.9, best: -0.5, high: -0.1 }, { interval: 0.5, format: "percent" }), { id: "out", label: "out", formula: "10 * (1 + adj)" }])], assumptions);
     expect(simulate(lib, lib.models.get("m")!, 4000)!.zero).toBe(0);
   });
 
@@ -67,5 +67,15 @@ describe("monte carlo", () => {
     const d = simulate(lib, lib.models.get("m")!, 2000)!;
     expect(d.q[0]).toBeCloseTo(1, 5);
     expect(d.q[18]).toBeCloseTo(1, 5);
+  });
+  it("draws one series together (drawn_with), so a trend from its differences doesn't swing", () => {
+    const lib = buildLibrary([model("m", [input("y2016", 100), input("y2019", 97, { drawn_with: "y2016" }), { id: "out", label: "out", formula: "y2019 / y2016" }])], assumptions);
+    const d = simulate(lib, lib.models.get("m")!, 2000);
+    expect(d === undefined || (Math.abs(d.q[0] - 1) < 1e-9 && Math.abs(d.q[18] - 1) < 1e-9)).toBe(true);
+  });
+  it("draws a negative number as an adjustment added to 1 only where it is a percentage", () => {
+    const lib = buildLibrary([model("m", [input("slope", -0.03), input("x", 10), { id: "out", label: "out", formula: "x * exp(slope * 10)" }])], assumptions);
+    const d = simulate(lib, lib.models.get("m")!, 2000)!;
+    expect(d.q[18] / d.q[9]).toBeLessThan(2);
   });
 });

@@ -46,7 +46,7 @@ enforce the mechanical rules (audit-model runs them, step 3).
   family's chain from the research on that kind of work, wide ranges, × `$missing_data_discount`
   (Convention 12), never another model's result. Nothing is left out.
 - An Ambitious Impact idea-stage model of this charity (`theoretical`) goes once yours is in models/:
-  remove it and record it (scripts/aim-theoretical.py). Yours is never `theoretical`.
+  add its id and reason to `REMOVE` in scripts/aim-theoretical.py and run it. Yours is never `theoretical`.
 
 ## 1. Pick the template family
 
@@ -85,8 +85,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
   `source` (`publisher: "charityevals"`, `title`, `url: https://charityevals.org/<id>`, `published` =
   the build date, `retrieved`) and `resources`. No `evaluator` block.
 - `beneficiaries` (INV-20): add to OURS in scripts/beneficiary-countries.ts and run it.
-- **Keep every canonical row id, `output` and the section kinds**, so the model compares row by row
-  with its family. Replace every `TEMPLATE:` explainer and example value; each says which shared figure
+- **Keep every canonical row id, `output` and the section kinds**. Replace every `TEMPLATE:` explainer and example value; each says which shared figure
   the row reads and when to change it. A branch that doesn't apply stays at 0 with an explainer saying
   why. Added rows feed canonical rows.
 - **Inputs** (the lint checks the fields): `observed` and `estimate` cite `source.url`, `retrieved` and
@@ -110,12 +109,11 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - every future benefit, and every wait before it, reads `$discount_rate`; never a typed present value;
   - a won reform counts `$win_years_counted` years, the wait until it takes effect discounted; coalition
     credit is the charity's share of all groups' resources (Convention 2);
-  - `estimate_basis` (INV-18, Convention 11): a `past_average` keeps the template's
-    `marginal_vs_past_average` row, its formula the charity's own `@next_dollar.<charity>` (write it in
-    facts/next_dollar.json by normalization.md 2.10: room × use × run, sourced, dated, ranged); change the
-    basis only for a reason you write down;
+  - `estimate_basis` (INV-18, Convention 11): a `past_average` keeps or adds the
+    `marginal_vs_past_average` row (corporate-campaign.json), formula `@next_dollar.<charity id, - as _>`
+    (write it by normalization.md 2.10 if missing); change the basis only for a reason you write down;
   - money moved goes through the shared rows of src/engine/moved-money.ts word for word
-    (`python3 scripts/moved-money.py <model> <destination set> net`), destinations live (`#model-id`);
+    (`python3 scripts/moved-money.py <model> <set> net`), destinations live;
     career changes through `career_change_value` (INV-12);
   - deaths outside a uov model enter only through its bridge from uov (`wellbys_from_uov`, INV-17);
   - every branch's `missing_data_adj`: `$missing_data_discount` unless measured (Convention 12);
@@ -128,8 +126,8 @@ Copy `templates/<family>.json` to the output path and fill it in.
   `side_effect` (normalization.md 2.16), never a list.
 - **Ranges and the simulation** (normalization.md 2.18): each range's `interval` and `shape` as the
   source states; a chance that one event happens at all is `single_event` (`{ with }`, `{ one_of }`),
-  never a yearly rate or a share of many; no range on a year (unit "Year"); a reported figure, not a
-  remainder of large ones; no net near zero as a denominator.
+  never a yearly rate or a share of many; one series' figures from one source `drawn_with` its first;
+  no range on a year (unit "Year"); a reported figure, not a remainder of large ones.
 - **Adjustments**: Convention 5 (one question each, signs); an RCT's effect is already net of its
   control group; say what isn't adjusted for. **Animals**: Convention 3 (reach is every animal under
   the commitments won or pressed, delivery only in the shared fulfilment rate, stocks as yearly flows).
@@ -168,7 +166,8 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
 scripts/simulation-check.ts <id>` (exit 0: stable, single events drawn), `npm run check`, `npx vitest run`, `npx tsc --noEmit`,
 `npx tsx scripts/normalization-audit.ts [--exclude <ids>]` (no violation for the model; waivers only
 for checked false positives, with reasons; the allowlist stays `{}`; in a sandbox it skips models that
-don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`).
+don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`; not in an unattended run; many at once:
+import-cea references/batch.md).
 
 Report: the result (native unit; years per $1,000 with its range), year and programmes (weights; which
 are thin), top 3 swings, audit rounds with counts, facts or assumptions added.

@@ -92,6 +92,9 @@ const rowShape = {
    * at a low risk and its full payoff at a high one. `true`, on its own; `{ with }`, events sharing the
    * key happen together as far as their chances allow (with and without the charity, the same event
    * under another funding bar); `{ one_of }`, exactly one of the key's scenarios happens. */
+  /** Drawn with another row of this model (its id): the same series in another year or place, from one
+   * source, so the simulation moves them together instead of letting their differences swing. */
+  drawn_with: z.string().optional(),
   single_event: z.union([z.literal(true), z.object({ with: z.string() }).strict(), z.object({ one_of: z.string() }).strict()]).optional(),
 };
 
