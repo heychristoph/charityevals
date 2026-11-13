@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "save-the-children",
   "owner": "charityevals",
-  "summary": "Save the Children UK's advocacy and awareness work (£13.5m in 2025) and Elrha, its subsidiary that funds humanitarian research (£11.2m). None publishes a measured result, so each is built from what it won or funds, with ranged judgments, and all four branches are counted at half by the shared missing-data slider: the abolition of the UK's two-child limit on Universal Credit (announced November 2025, from April 2026) as affected families' gain in log income less the payers' loss, the 2026-2030 Gavi pledges and the Nutrition for Growth commitments as the value of the extra aid net of what it displaces, and Elrha's grants as the humanitarian spending improved by studies that change practice. It comes to about 0.49 years of healthy life per $1,000 (combined range 0.07-3.4), about six times charityevals' estimate for MSF's advocacy and a little above the site's global-health median, mostly from the Gavi pledges (about three fifths of the result), then Elrha (a fifth), Nutrition for Growth and the two-child limit; the result is mostly uncertainty, judgments on what campaigning adds to pledges driving it. The biggest uncertainties are how much of each win the campaigners caused and Save the Children's share of the campaigning.",
+  "summary": "Save the Children UK's advocacy and awareness work (£13.5m in 2025) and Elrha, its subsidiary that funds humanitarian research (£11.2m). None publishes a measured result, so each is built from what it won or funds, with ranged judgments, and all four branches are counted at half by the shared missing-data slider: the abolition of the UK's two-child limit on Universal Credit (announced November 2025, from April 2026) as affected families' gain in log income less the payers' loss, the 2026-2030 Gavi pledges and the Nutrition for Growth commitments as the value of the extra aid net of what it displaces, and Elrha's grants as the humanitarian spending improved by studies that change practice. It comes to about 0.43 years of healthy life per $1,000 (combined range 0.06-3.1), about six times charityevals' estimate for MSF's advocacy and a little above the site's global-health median, mostly from the Gavi pledges (about seven tenths of the result), then Nutrition for Growth, the two-child limit and Elrha; the result is mostly uncertainty, judgments on what campaigning adds to pledges driving it. The biggest uncertainties are how much of each win the campaigners caused and Save the Children's share of the campaigning.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Save the Children UK, advocacy and humanitarian research (2025)",
@@ -183,7 +183,7 @@
         "quote": "Almost 1.7 million children (1,665,540) are impacted by the two-child limit, in 469,780 households.",
         "retrieved": "2026-11-13"
       },
-      "explainer": "Households on Universal Credit with a third or later child born after April 2017 (DWP, Universal Credit claimants: statistics on the two child limit policy, April 2025, published 10 July 2025). They gain the child element for those children from April 2026. The count grows each year; the cost below is the first year's, so the two match."
+      "explainer": "Households on Universal Credit with a third or later child born after April 2017 (DWP, Universal Credit claimants: statistics on the two child limit policy, April 2025, published 10 July 2025). They gain the child element for those children from April 2026. The count grows each year; the cost below is the first year's (2026-27), set against the latest count before it."
     },
     {
       "id": "tcl_children",
@@ -205,13 +205,15 @@
       "section": "reach",
       "label": "Two-child limit: share of the households that are couples",
       "format": "percent",
-      "value": {
-        "low": 0.4,
-        "best": 0.46,
-        "high": 0.55
+      "value": 0.46,
+      "kind": "observed",
+      "source": {
+        "title": "Save the Children UK, Statement: new figures show 40,000 more children affected by two-child limit (on DWP statistics, April 2025)",
+        "url": "https://www.savethechildren.org.uk/news/media-centre/press-releases/2025/statement-new-figures-show-40000-more-children-affected-two",
+        "quote": "just under half (46%) are couple households",
+        "retrieved": "2026-11-13"
       },
-      "kind": "judgment",
-      "explainer": "Judgment 46% (40-55%): DWP's April 2025 release reports just under half of affected households as couples and just over half as single parents (as reported in coverage of the release; the table itself wasn't re-read)."
+      "explainer": "From the same DWP release, as quoted by Save the Children; the rest (54%) are single-adult households."
     },
     {
       "id": "tcl_household_size",
@@ -306,7 +308,7 @@
       "format": "number",
       "formula": "0 - tcl_cost_gbp * @fx.usd_per_gbp_2025 * tcl_taxpayer_share / @united_kingdom.consumption_per_person_2024 * $uov_per_ln_consumption",
       "unit": "units of value",
-      "explainer": "A side effect: the money comes from other households, at about the average UK consumption, so its loss on the log scale is the cost over average consumption per person (a small loss spread over many). About half the families' gain, because they consume about 40% of the average per person.",
+      "explainer": "A side effect: the money comes from other households, at about the average UK consumption, so its loss on the log scale is the cost over average consumption per person (a small loss spread over many). About a third of the families' gain: they consume about 40% of the average per person, and part of the cost is not a loss to anyone entitled.",
       "side_effect": "added"
     },
     {
@@ -440,7 +442,7 @@
     {
       "id": "adv_aid_vs_cash",
       "section": "effect",
-      "label": "Value of a dollar of other aid, or of a humanitarian dollar, as a multiple of cash to the very poor",
+      "label": "Value of a dollar of other aid, as a multiple of cash to the very poor",
       "format": "multiple",
       "value": {
         "low": 0.5,
@@ -448,7 +450,7 @@
         "high": 2
       },
       "kind": "judgment",
-      "explainer": "Judgment 1× (0.5-2×), as for charityevals' MSF advocacy model: aid is a mix of better and worse uses than cash given directly."
+      "explainer": "Judgment 1× (0.5-2×), as for charityevals' MSF advocacy model: the aid a bigger pledge displaces is a mix of better and worse uses than cash given directly."
     },
     {
       "id": "adv_displaced_value_per_dollar",
@@ -608,7 +610,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 30% (0-100%) of the modelled wins: the other campaigns of 2025 (against the UK aid cut, on debt, child marriage costing endorsed by 54 African governments, the Comprehensive School Safety Framework's 85 endorsing governments, children in the COP30 text, online safety) had no measured result; most changed words, not money."
+      "explainer": "Judgment 30% (0-100%) of the modelled wins: the other campaigns of 2025 (against the UK aid cut, on debt, child marriage costing endorsed by 54 African governments, the Comprehensive School Safety Framework's 85 endorsing governments, children in the COP30 text, online safety) had no measured result; most changed words, not money. Anchor: the annual report names about nine campaigns in 2025 (pp. 13-23), three of which moved money and are modelled; if each of the other six is worth a twentieth of an average modelled win, together they add 30%; 0 if none mattered, 100% if they are worth as much as the money wins."
     },
     {
       "id": "elrha_grant_share",
@@ -683,11 +685,24 @@
       "explainer": "Judgment 10% (3-30%): a better protocol or targeting rule does somewhat more with the same money."
     },
     {
+      "id": "elrha_aid_vs_cash",
+      "section": "effect",
+      "label": "Elrha: value of a humanitarian dollar, as a multiple of cash to the very poor",
+      "format": "multiple",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 0.3x (0.1-1x): charityevals' estimates of humanitarian responses come to about a fifth of cash per dollar after their own adjustments, the missing-data step aside (Save the Children's emergencies branch about 0.2x, MSF's relief distributions about 0.4x); research improves the health, water and protection spending of responses, which sits towards the top of that range."
+    },
+    {
       "id": "elrha_value_per_dollar",
       "section": "effect",
       "label": "Elrha: value of a humanitarian dollar (units of value)",
       "format": "small",
-      "formula": "adv_aid_vs_cash * @cash.uov_per_dollar",
+      "formula": "elrha_aid_vs_cash * @cash.uov_per_dollar",
       "unit": "units of value / $",
       "explainer": "The multiple above × the site's value of a dollar of cash."
     },
@@ -799,7 +814,7 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "Judgment 3% (1-8%) of the pledges added by civil society's campaign as a whole: donors set pledges in finance and foreign ministries against their aid budgets; advocacy moves the margin. No study measures it."
+      "explainer": "Judgment 3% (1-8%) of the pledges added by civil society's campaign as a whole: donors set pledges in finance and foreign ministries against their aid budgets; advocacy moves the margin. Anchor: the 2025 pledges ($9bn) fell $3bn short of the $12bn target, with the US withdrawn; if the campaign moved a tenth of a gap of that size that donors might otherwise have left open, that is $0.3bn, 3% of the pledges. 1% if ministries had decided before the campaign, 8% if it held two or three large donors' pledges up. No study measures it."
     },
     {
       "id": "gavi_attribution_share",
@@ -1167,7 +1182,7 @@
       "label": "Staff pay as a share of cost",
       "format": "percent",
       "formula": "@save_the_children.staff_costs_gbp_2025 / @save_the_children.total_expenditure_gbp_2025",
-      "explainer": "Save the Children UK's own share from its accounts (Convention 1), about 20%, read by both its models; advocacy is staff-heavier than the average line, but the accounts don't split staff by line."
+      "explainer": "Save the Children UK's own share from its accounts (Convention 1), about 20%, read by both its models; advocacy is staff-heavier than the average line (note 7(a): staff costs £6.9m of £13.5m), but the step uses the charity-wide share, as its programmes model does."
     },
     {
       "id": "salary_gap",

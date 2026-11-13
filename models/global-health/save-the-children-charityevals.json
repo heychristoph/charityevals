@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "save-the-children",
   "owner": "charityevals",
-  "summary": "Save the Children UK's programmes in 2025 (£209m of its £234m charitable spending, mostly passed to Save the Children International, which runs the country work): education in crises (£80m), emergency response (£38m, with the Start Network's pooled fund), health and immunisation (£40m), livelihoods (£20m), child protection (£17m), nutrition (£14m) and a little UK child-poverty work. It publishes no count of people reached by each line and no controlled evaluation of its own, so every branch is built from its spending and the research on its kind of work (the median effect of education programmes, mortality in crises, child mortality and immunisation, treatment of severe malnutrition, livelihood trials, mental health in conflict) with wide ranges, and every branch is discounted for missing data. It comes to about 0.29 years of healthy life per $1,000 (combined range 0.04-2.0), a little below the site's global-health median and above charityevals' Salvation Army and American Red Cross overseas models: half from education (later earnings), a fifth from treating severe malnutrition, then emergencies, livelihoods and health; the result is mostly uncertainty, judged costs per child and effects driving it. The biggest uncertainties are what each line costs per child reached and how much of a child's risk of death the health and nutrition work removes.",
+  "summary": "Save the Children UK's programmes in 2025 (£209m of its £234m charitable spending, mostly passed to Save the Children International, which runs the country work): education in crises (£80m), emergency response (£38m, with the Start Network's pooled fund), health and immunisation (£40m), livelihoods (£20m), child protection (£17m), nutrition (£14m) and a little UK child-poverty work. It counts reach for some projects but not for each line's spending, and publishes no controlled evaluation of its own, so every branch is built from its spending and the research on its kind of work (the median effect of education programmes, mortality in crises, child mortality and immunisation, treatment of severe malnutrition, livelihood trials, mental health in conflict) with wide ranges, and every branch is discounted for missing data. It comes to about 0.21 years of healthy life per $1,000 (combined range 0.04-1.1), about half the site's global-health median and close to charityevals' Salvation Army overseas model: a third from education (later earnings), a third from treating severe malnutrition, then emergencies, health and livelihoods; the result is mostly uncertainty, judged costs per child and effects driving it. The biggest uncertainties are what each line costs per child reached and how much of a child's risk of death the health and nutrition work removes.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Save the Children UK, programmes (2025)",
@@ -400,7 +400,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Judgment 45% (30-60%): crisis deaths are young, and Save the Children's responses aim at children; the family guide's range from mortality surveys."
+      "explainer": "Judgment 45% (30-60%): crisis deaths are young, and Save the Children's responses aim at children; the family guide's range from mortality surveys. The shared age splits (facts/death_ages.json) have none for crisis deaths, and these shares move the whole result by about 2%, so they stay ranged judgments."
     },
     {
       "id": "share_5_14_of_over5",
@@ -535,10 +535,15 @@
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "Save the Children UK's share of the resources behind the outcome",
+      "label": "Emergencies: Save the Children UK's share of the resources behind the outcome",
       "format": "percent",
-      "formula": "1",
-      "explainer": "1: reach in every branch is Save the Children UK's own spending over the full cost of a unit (a person, a child, a household), so other funders' and partners' resources add reach not counted here; sharing credit again would count them twice. The health and nutrition branches share credit for the vaccines, food and government staff that others pay for, below."
+      "value": {
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 90% (70-100%), Convention 2: reach is Save the Children UK's own spending over the full cost of a person reached, but responses also use government health staff, UN supplies (water, food pipelines) and partners' volunteers. The canonical row is the emergencies branch's; each other branch has its own share below."
     },
     {
       "id": "attribution_share",
@@ -547,6 +552,58 @@
       "format": "percent",
       "formula": "attribution_share_shared",
       "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "edu_attribution_share",
+      "section": "adjustments",
+      "label": "Education: Save the Children UK's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 80% (60-100%), Convention 2: GPE's grants are Save the Children UK's own income (in its cost), but the learning also uses government schools and teachers, community volunteers who run the clubs and families' time."
+    },
+    {
+      "id": "liv_attribution_share",
+      "section": "adjustments",
+      "label": "Livelihoods: Save the Children UK's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 80% (60-100%), Convention 2: households' own savings and labour, government extension services and the private partners (the vanilla companies in Madagascar) add to the programme's money."
+    },
+    {
+      "id": "pro_attribution_share",
+      "section": "adjustments",
+      "label": "Protection: Save the Children UK's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 80% (60-100%), Convention 2: community child-protection committees and peer educators are volunteers, and survivors' care uses government health facilities."
+    },
+    {
+      "id": "uk_attribution_share",
+      "section": "adjustments",
+      "label": "UK programmes: Save the Children UK's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 90% (70-100%), Convention 2: Family Grants and baby banks are delivered through local partners and volunteers."
     },
     {
       "id": "implementation_adj",
@@ -600,7 +657,7 @@
         "high": 80
       },
       "kind": "judgment",
-      "explainer": "Judgment $30 ($12-80): no count of children reached by the line is published (the BOOST programme alone has reached 92,000 children in Nigeria and 57,000 in Ethiopia to date, p. 15). Anchor: routine immunisation costs about $25-50 per fully immunised child to deliver in low-income countries beyond the vaccines Gavi supplies (the Immunization Delivery Cost Catalogue's range), and community health support a few dollars a child a year."
+      "explainer": "Judgment $30 ($12-80): the report counts part of the line's reach: Gavi-funded vaccine supply in Sudan reached 967,434 children in 2025 and the BOOST programme about 150,000 in Ethiopia and Nigeria (pp. 7, 15, 31); $30 implies 1.7 million children for the whole line, consistent with those counts plus the community health work. The effect per child is still judged, so the branch stays thin. Anchor: routine immunisation costs about $25-50 per fully immunised child to deliver in low-income countries beyond the vaccines Gavi supplies (the Immunization Delivery Cost Catalogue's range), and community health support a few dollars a child a year."
     },
     {
       "id": "hlt_children",
@@ -872,12 +929,12 @@
       "label": "Education: cost per child reached for a year",
       "format": "usd",
       "value": {
-        "low": 30,
-        "best": 80,
-        "high": 200
+        "low": 60,
+        "best": 130,
+        "high": 250
       },
       "kind": "judgment",
-      "explainer": "Judgment $80 ($30-200): learning clubs, temporary learning spaces, teacher training and school support in crises; no count of children for the line is published (19,000 children enrolled in Nigeria's learning clubs in 2025, 12,000 in the DRC's catch-up clubs, pp. 17-18). Anchor: education-in-emergencies programmes cost roughly $50-150 a child a year; a school place in a poor country is about $400 a year (as in charityevals' Salvation Army model), and these programmes pay for a part of one."
+      "explainer": "Judgment $130 ($60-250): the line is mostly Global Partnership for Education grants for out-of-school children in Afghanistan, Myanmar and Yemen; GPE's accelerated grant of $20m for about 150,000 out-of-school children is about $133 a child, and the report names programmes aiming at nearly 190,000 children (p. 33), 19,000 enrolled in Nigeria's learning clubs and 12,000 in the DRC's catch-up clubs (pp. 17-18). $60 for cheap learning clubs, $250 where a grant pays for several years of schooling or construction; a school place in a poor country is about $400 a year (charityevals' Salvation Army model)."
     },
     {
       "id": "edu_children",
@@ -982,7 +1039,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "0.6 (0.3-1): published effects of small studies run above what programmes do at scale (Evans & Yuan 2022), and in conflict settings (Afghanistan, Yemen, Myanmar) schooling is often interrupted. As the Salvation Army education branch."
+      "explainer": "0.6 (0.3-1): Evans & Yuan (2022) find the median effect in the smallest quarter of studies almost three times that in the largest, so programmes at scale do about 0.04-0.06 SD, roughly 0.6 of the all-study median; in conflict settings (Afghanistan, Yemen, Myanmar) schooling is often interrupted. As the Salvation Army education branch."
     },
     {
       "id": "edu_counterfactual_adj",
@@ -1010,7 +1067,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, education",
       "format": "multiple",
-      "formula": "edu_evidence_adj * edu_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * edu_missing_data_adj"
+      "formula": "edu_evidence_adj * edu_counterfactual_adj * edu_attribution_share * implementation_adj * leverage_funging_adj * edu_missing_data_adj"
     },
     {
       "id": "liv_cost_per_household",
@@ -1068,7 +1125,7 @@
       "explainer": "Judgment 2 years (1-4): livelihood gains fade after the programme; assets and skills keep part of them."
     },
     {
-      "id": "liv_ppp_note",
+      "id": "liv_ln_gain_per_person",
       "section": "effect",
       "label": "Livelihoods: gain in ln(consumption) per person, discounted over its years",
       "format": "small",
@@ -1114,7 +1171,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, livelihoods",
       "format": "multiple",
-      "formula": "liv_evidence_adj * liv_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * liv_missing_data_adj"
+      "formula": "liv_evidence_adj * liv_counterfactual_adj * liv_attribution_share * implementation_adj * leverage_funging_adj * liv_missing_data_adj"
     },
     {
       "id": "pro_cost_per_child",
@@ -1230,7 +1287,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, protection",
       "format": "multiple",
-      "formula": "pro_evidence_adj * pro_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * pro_missing_data_adj"
+      "formula": "pro_evidence_adj * pro_counterfactual_adj * pro_attribution_share * implementation_adj * leverage_funging_adj * pro_missing_data_adj"
     },
     {
       "id": "uk_cash_equivalence",
@@ -1324,7 +1381,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, UK programmes",
       "format": "multiple",
-      "formula": "uk_evidence_adj * uk_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * uk_missing_data_adj"
+      "formula": "uk_evidence_adj * uk_counterfactual_adj * uk_attribution_share * implementation_adj * leverage_funging_adj * uk_missing_data_adj"
     },
     {
       "id": "evidence_adj",
@@ -1410,7 +1467,7 @@
       "section": "bridges",
       "label": "Income gained, livelihoods (units of value, after the branch's adjustments)",
       "format": "number",
-      "formula": "liv_households * liv_household_size * liv_ppp_note * $uov_per_ln_consumption * liv_total_adj",
+      "formula": "liv_households * liv_household_size * liv_ln_gain_per_person * $uov_per_ln_consumption * liv_total_adj",
       "unit": "UoV"
     },
     {
