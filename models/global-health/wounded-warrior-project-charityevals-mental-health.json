@@ -7,7 +7,7 @@
   "estimate_basis": "unit_cost",
   "charity": "wounded-warrior-project",
   "owner": "charityevals",
-  "summary": "Wounded Warrior Project pays four academic medical centres (Warrior Care Network) to run two- and three-week intensive PTSD programmes and outpatient therapy for post-9/11 veterans, and runs its own counselling, Project Odyssey retreats, WWP Talk calls and case coordination. Our model of its mental health spending in fiscal 2025 ($98.7M; 1,286 veterans in the intensive programmes, about 12,000 others) takes the effect from trials of trauma-focused therapy in military personnel (0.85 SD on depression measures at the end of treatment, fading over about three years) and adds the suicides it averts; it comes to about 0.0015 years of healthy life per $1,000, under a hundredth of the site's global-health median, because each veteran costs about $10,000 and a WELLBY is worth a fifteenth of a healthy year at the site's rate. The therapy and support branches are discounted for missing data (no controlled evaluation of WWP's outpatient therapy, counselling, Project Odyssey or WWP Talk); the intensive programmes are measured. The biggest uncertainties are how long the effect lasts and how much of it the VA's own PTSD care would have given anyway.",
+  "summary": "Wounded Warrior Project pays four academic medical centres (Warrior Care Network) to run two- and three-week intensive PTSD programmes and outpatient therapy for post-9/11 veterans, and runs its own counselling, Project Odyssey retreats, WWP Talk calls and case coordination. Our model of its mental health spending in fiscal 2025 ($98.7M; 1,286 veterans in the intensive programmes, about 12,000 others) takes the effect from trials of trauma-focused therapy in military personnel blended with the one controlled trial of the two-week format (about 0.59 SD on depression measures at the end of treatment, fading over about four years) and adds the suicides it averts; it comes to about 0.0012 years of healthy life per $1,000, far below the site's global-health median (under a hundredth of it) because each veteran costs about $10,000 and a WELLBY is worth a fifteenth of a healthy year at the site's rate. The therapy and support branches are discounted for missing data (no controlled evaluation of WWP's outpatient therapy, counselling, Project Odyssey or WWP Talk); the intensive programmes are measured. The biggest uncertainties are how long the effect lasts and how much of it the VA's own PTSD care would have given anyway.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Wounded Warrior Project, mental health programmes",
@@ -110,7 +110,7 @@
         "page": "Schedule O, Part III line 4a",
         "quote": "TOTAL BRAIN HEALTH AND MENTAL HEALTH WELLNESS PROGRAMS EXPENSES WERE $98,748,548, INCLUDING GRANTS OF $35,419,052"
       },
-      "explainer": "Everything WWP spent on mental health in the year: its grants to the four academic medical centres of Warrior Care Network ($35.4M), Project Odyssey retreats, WWP Talk, triage and counselling, and complex case coordination, with their staff and their share of the direct-response mail and television WWP's auditors allocate to programmes. The Form 990's figure, not the audited statements' $122.0M: the audited figure adds donated public service announcements at the media's rate card ($63.8M across all programmes), which no donor pays for and which we leave out of cost and credit alike (the 990 lists the same cash spending as the audited statements otherwise)."
+      "explainer": "Everything WWP spent on mental health in the year: its grants to the four academic medical centres of Warrior Care Network ($35.4M), Project Odyssey retreats, WWP Talk, triage and counselling, and complex case coordination, with their staff and their share of the direct-response mail and television WWP's auditors allocate to programmes. The Form 990's figure, not the audited statements' $122.0M: the audited figure adds $23.0M of donated public service announcements at the media's rate card, which are others' in-kind resources (counted in attribution_share_shared, Convention 2), not WWP's cost."
     },
     {
       "id": "total_expenses",
@@ -150,7 +150,7 @@
       "label": "Overhead multiplier (total ÷ programme expenses)",
       "format": "multiple",
       "formula": "total_expenses / program_expenses",
-      "explainer": "Spreads management ($24.3M) and fundraising ($91.4M) over the programmes by their cost, as GiveWell and ACE do. Fundraising is a third of the total, so each programme dollar carries 42 cents of overhead."
+      "explainer": "Spreads management ($24.3M) and fundraising ($91.4M) over the programmes by their cost, as GiveWell and ACE do. Fundraising is nearly a quarter of the total, so each programme dollar carries 42 cents of overhead."
     },
     {
       "id": "cost_total",
@@ -208,11 +208,11 @@
       "explainer": "Treatment and psychoeducation for family members. Part of the therapy branch, at the same lower dose."
     },
     {
-      "id": "opt_counselled",
+      "id": "cns_sessions",
       "section": "reach",
-      "label": "Warriors and family members served by WWP's triage and counselling",
+      "label": "Counselling sessions WWP paid for",
       "format": "integer",
-      "value": 4204,
+      "value": 22149,
       "kind": "observed",
       "source": {
         "title": "Wounded Warrior Project, Form 990 for the year ended 30 September 2025",
@@ -221,7 +221,40 @@
         "page": "Schedule O, Part III line 4a",
         "quote": "4,204 TOTAL WARRIOR AND FAMILY SUPPORT MEMBERS WERE SERVED THROUGH MENTAL HEALTH OUTREACH AND REFERRALS, AND 22,149 COUNSELING SESSIONS DELIVERED"
       },
-      "explainer": "WWP's triage team refers people to counselling it pays for: 22,149 sessions over 4,204 people, about five sessions each. Part of the therapy branch."
+      "explainer": "WWP's triage team served 4,204 people through outreach and referrals and delivered 22,149 counselling sessions. The 4,204 include people only referred elsewhere (some of them counted again in the other branches), so the counselled are reached through the sessions instead."
+    },
+    {
+      "id": "cns_sessions_per_person",
+      "section": "reach",
+      "label": "Counselling sessions per person counselled",
+      "format": "number",
+      "value": {
+        "low": 4,
+        "best": 6,
+        "high": 10
+      },
+      "kind": "judgment",
+      "explainer": "Not reported. Short-term counselling courses paid by employee-assistance and veteran programmes run 4 to 10 sessions; 22,149 sessions over the 4,204 served would be 5.3 if everyone had some. 6 (4-10): fewer people than the 4,204, since some were only referred."
+    },
+    {
+      "id": "cns_people",
+      "section": "reach",
+      "label": "People counselled",
+      "format": "integer",
+      "formula": "cns_sessions / cns_sessions_per_person"
+    },
+    {
+      "id": "cns_veteran_share",
+      "section": "reach",
+      "label": "Share of the counselled who are veterans",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "WWP's registrants are 242,500 warriors and 58,848 family members (990 Part III), 80% warriors. 0.8 (0.6-0.95). Used for the suicides only."
     },
     {
       "id": "sup_odyssey",
@@ -274,9 +307,9 @@
     {
       "id": "opt_people",
       "section": "reach",
-      "label": "People in the therapy branch",
+      "label": "People in the centres' outpatient therapy (veterans and family)",
       "format": "integer",
-      "formula": "opt_veterans + opt_family + opt_counselled"
+      "formula": "opt_veterans + opt_family"
     },
     {
       "id": "sup_people",
@@ -290,8 +323,8 @@
       "section": "reach",
       "label": "Cost per person reached (all branches)",
       "format": "usd",
-      "formula": "cost_total / (people_reached + opt_people + sup_people)",
-      "explainer": "Context: about $10,700 a person across all 13,353 counted, far more for the intensive programmes (WWP's grants alone come to about $9,000 for each of the 3,909 Warrior Care Network veterans, before WWP's own costs)."
+      "formula": "cost_total / (people_reached + opt_people + cns_people + sup_people)",
+      "explainer": "Context: about $11,000 a person across everyone counted, far more for the intensive programmes (WWP's grants alone come to about $9,000 for each of the 3,909 Warrior Care Network veterans, before WWP's own costs)."
     },
     {
       "id": "prior_effect_sd_ptsd",
@@ -311,7 +344,69 @@
         "page": "Abstract (Europe PMC copy, PMC6853217)",
         "quote": "CBT with a trauma focus (CBT-TF) was associated with the largest evidence of effect when compared to waitlist/usual care in reducing PTSD symptoms post treatment (10 studies; n = 524; SMD -1.22, -1.78 to -0.66)."
       },
-      "explainer": "The prior for the intensive programmes: a Cochrane-method review of 24 trials in active-duty and ex-serving personnel, the treatments Warrior Care Network delivers (CPT, Prolonged Exposure) in their usual weekly format, at the end of treatment. Range the 95% CI. Warrior Care Network has no controlled trial of its own; its programme data (Held et al. 2021, 452 veterans at Rush: PCL-5 falling about 22 points from about 56, roughly 1.8 baseline SDs, with no control group) are a check: they sit above the trials' controlled effect, as uncontrolled pre-post change does. Delivering the same therapy daily over two or three weeks gave the same results as weekly in a trial of 370 active-duty soldiers (Foa et al. 2018, JAMA 319:354, massed against spaced Prolonged Exposure), so the weekly trials stand for the intensive format."
+      "explainer": "The prior for the intensive programmes: a Cochrane-method review of 24 trials in active-duty and ex-serving personnel, the treatments Warrior Care Network delivers (CPT, Prolonged Exposure) in their usual weekly format, at the end of treatment. Range the 95% CI (interval 0.95). Warrior Care Network has no controlled trial of its own; its programme data (Held et al. 2021, 452 veterans at Rush: PCL-5 falling about 22 points from about 56, roughly 1.8 baseline SDs, no control group) are a check: they sit above the trials' controlled effect, as uncontrolled pre-post change does.",
+      "interval": 0.95
+    },
+    {
+      "id": "prior_effect_se",
+      "section": "effect",
+      "label": "Standard error of the prior (SD)",
+      "format": "number",
+      "value": 0.286,
+      "kind": "estimate",
+      "source": {
+        "title": "Kitchiner et al. (2019), European Journal of Psychotraumatology",
+        "url": "https://europepmc.org/article/MED/31762951",
+        "retrieved": "2026-11-14",
+        "page": "Abstract",
+        "quote": "SMD -1.22, -1.78 to -0.66"
+      },
+      "explainer": "The 95% CI's width over 3.92: (1.78 - 0.66) / 3.92 = 0.286. The review publishes no prediction interval, so the pooled CI is used."
+    },
+    {
+      "id": "rct_effect_sd",
+      "section": "effect",
+      "label": "Effect of two-week massed Prolonged Exposure against minimal contact in soldiers (SD)",
+      "format": "number",
+      "value": {
+        "low": 0.11,
+        "best": 0.58,
+        "high": 1.05
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Foa et al. (2018), Effect of prolonged exposure therapy delivered over 2 weeks vs 8 weeks vs present-centered therapy on PTSD symptom severity in military personnel: a randomized clinical trial, JAMA 319(4):354-364",
+        "url": "https://europepmc.org/article/MED/29362795",
+        "retrieved": "2026-11-14",
+        "page": "Abstract",
+        "quote": "difference in decrease, 3.70 [95% CI, 0.72 to 6.68]"
+      },
+      "explainer": "The trial of the intensive format closest to Warrior Care Network's: 10 sessions of Prolonged Exposure in two weeks for 370 active-duty soldiers, against minimal-contact control two weeks after treatment: 3.70 points on the PSS-I (95% CI 0.72 to 6.68) over the baseline SD of 6.36 ('mean baseline PSS-I score, 25.49 [6.36]') = 0.58 SD (0.11 to 1.05; interval 0.95).",
+      "interval": 0.95
+    },
+    {
+      "id": "rct_effect_se",
+      "section": "effect",
+      "label": "Standard error of the massed-therapy trial's effect (SD)",
+      "format": "number",
+      "value": 0.239,
+      "kind": "estimate",
+      "source": {
+        "title": "Foa et al. (2018), JAMA 319(4):354-364",
+        "url": "https://europepmc.org/article/MED/29362795",
+        "retrieved": "2026-11-14",
+        "page": "Abstract",
+        "quote": "difference in decrease, 3.70 [95% CI, 0.72 to 6.68]"
+      },
+      "explainer": "The CI's width over 3.92, in baseline SDs: (6.68 - 0.72) / 3.92 / 6.36 = 0.239."
+    },
+    {
+      "id": "rct_weight",
+      "section": "effect",
+      "label": "Weight of the massed-therapy trial in the blend",
+      "format": "percent",
+      "formula": "(1/(rct_effect_se*rct_effect_se))/(1/(rct_effect_se*rct_effect_se)+1/(prior_effect_se*prior_effect_se))",
+      "explainer": "The template's blend by precision: the trial gets about 59%, the review 41%."
     },
     {
       "id": "depression_vs_ptsd_effect",
@@ -338,8 +433,8 @@
       "section": "effect",
       "label": "Initial effect on depression and wellbeing measures (SD)",
       "format": "number",
-      "formula": "prior_effect_sd_ptsd * depression_vs_ptsd_effect",
-      "explainer": "The trials' PTSD effect on the depression scale: about 0.85 SD at the end of treatment, before the adjustments (evidence, counterfactual, completion)."
+      "formula": "(rct_weight * rct_effect_sd + (1 - rct_weight) * prior_effect_sd_ptsd) * depression_vs_ptsd_effect",
+      "explainer": "The precision-weighted blend of the review and the massed-format trial (about 0.84 SD on PTSD), put on the depression scale: about 0.59 SD at the end of treatment, before the adjustments (evidence, counterfactual, completion)."
     },
     {
       "id": "effect_duration_years",
@@ -347,19 +442,19 @@
       "label": "Years until the effect has faded to nothing (linear fade)",
       "format": "number",
       "value": {
-        "low": 1.5,
-        "best": 3,
-        "high": 6
+        "low": 2,
+        "best": 4.2,
+        "high": 8
       },
       "kind": "estimate",
       "source": {
         "title": "Held et al. (2024), European Journal of Psychotraumatology",
         "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11110869/",
         "retrieved": "2026-11-14",
-        "page": "Abstract",
-        "quote": "Participants across both ITPs reported large PTSD (d = 0.98) and moderate to large depression symptom reductions (d = 0.69) from baseline to 12-month follow-up."
+        "page": "Results",
+        "quote": "Effect sizes for change in PCL-5 (d = 1.26) and PHQ-9 (d = 0.91) reflected large improvements from baseline to post-treatment, and moderate to large improvements from baseline to 12-month follow-up (d = 0.98 and d = 0.69, respectively)"
       },
-      "explainer": "Warrior Care Network's veterans kept most of the gain a year on (d = 0.98 for PTSD at 12 months against well above 1 at the end of treatment, uncontrolled and with low follow-up completion, which the authors call a limitation), so the effect is still about two-thirds there at a year. A straight fade reaching zero after 3 years fits that; 1.5 years if those followed up were the ones who did well, 6 if the gains hold as the trials' longer follow-ups of CPT suggest. HLI's psychotherapy estimates last a few years too."
+      "explainer": "Warrior Care Network's veterans kept 78% of the PTSD gain and 76% of the depression gain a year on (d 1.26 to 0.98, and 0.91 to 0.69). A straight fade keeping 77% at a year reaches zero at 1 / (1 - 0.77) = 4.2 years. Range: 2 years if the 29% who answered at 12 months were the ones who did well (the authors call low follow-up completion a limitation) to 8 if the gains plateau, as longer follow-ups of CPT suggest."
     },
     {
       "id": "effect_decay_sd_per_year",
@@ -422,22 +517,43 @@
     {
       "id": "opt_dose_vs_iop",
       "section": "effect",
-      "label": "Effect of the outpatient therapy and counselling, as a share of the intensive programmes'",
+      "label": "Effect of the centres' weekly outpatient therapy, as a share of the intensive programmes'",
       "format": "percent",
       "value": {
-        "low": 0.25,
-        "best": 0.5,
-        "high": 0.8
+        "low": 0.35,
+        "best": 0.6,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Weekly outpatient therapy at the four centres and WWP-paid counselling (about five sessions a person: 22,149 sessions over 4,204 people) is the same kind of care at a lower and less certain dose: the trials behind the prior gave 8 to 12 sessions of trauma-focused therapy, the intensive programmes about 50 hours, and many outpatients come for other problems (depression, substance use, family strain). Half the intensive programmes' effect (25-80%), anchored on the dose-response of PTSD therapy, where people who stop early keep part of the gain."
+      "explainer": "The centres' weekly outpatient therapy is the format the trials behind the prior used (8 to 12 weekly sessions of CPT or PE), but outside trials many patients stop early: in VA care fewer than a third of those who start CPT or PE complete eight sessions, against 90% completing the intensive programmes, and those who stop keep part of the gain; some outpatients are treated for other problems. 0.6 (0.35-0.9)."
+    },
+    {
+      "id": "cns_dose_vs_iop",
+      "section": "effect",
+      "label": "Effect of WWP-paid counselling, as a share of the intensive programmes'",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "About six sessions of general counselling from community providers, not necessarily trauma-focused: about half a full course of the trials' therapy, of a less specific kind. Anchor: in the PTSD trials, non-trauma-focused therapies (present-centred therapy, supportive counselling) give roughly half the effect of trauma-focused CBT against waitlist (Kitchiner et al. 2019 compare them directly). Half of 0.6 for the shorter course: 0.35 (0.15-0.6)."
     },
     {
       "id": "opt_wellbys_per_person",
       "section": "effect",
-      "label": "WELLBYs per person in the therapy branch",
+      "label": "WELLBYs per person in the centres' outpatient therapy",
       "format": "number",
       "formula": "wellbys_per_person * opt_dose_vs_iop",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "cns_wellbys_per_person",
+      "section": "effect",
+      "label": "WELLBYs per person counselled",
+      "format": "number",
+      "formula": "wellbys_per_person * cns_dose_vs_iop",
       "unit": "WELLBYs"
     },
     {
@@ -495,12 +611,12 @@
       "label": "Evidence adjustment, intensive programmes",
       "format": "multiple",
       "value": {
-        "low": 0.35,
-        "best": 0.6,
-        "high": 0.9
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Two parts. Trust in the trials' effect, 0.75: ten small trials (524 people), mostly against waitlists, which give larger effects than usual care, and likely publication bias; Kitchiner and colleagues note effects in military samples are already lower than in civilians. Mapping a PTSD-and-depression effect onto life satisfaction, 0.8: the site's rate is for depression and wellbeing scales, and part of a symptom change doesn't reach life satisfaction for people whose lives are also shaped by injuries and pain. Product 0.6 (0.35-0.9), as for the therapy models anchored on HLI's psychotherapy discounts (0.5-0.7). After all adjustments the branch counts about 0.85 × 0.6 × 0.7 × 0.9 ≈ 0.32 SD at the end of treatment, about a sixth of the programmes' own uncontrolled change."
+      "explainer": "Two parts. Trust in the blended effect, 0.85: small trials and likely publication bias in the review (the massed-format trial is large and pre-registered); the gap between a waitlist control and the veterans' real alternative is in iop_counterfactual_adj only (Convention 5). Mapping a PTSD-and-depression effect onto life satisfaction, 0.8: the site's rate is for depression and wellbeing scales, and part of a symptom change doesn't reach life satisfaction for people whose lives are also shaped by injuries and pain. Product 0.7 (0.4-0.95), against HLI's psychotherapy discounts (0.5-0.7). After all adjustments the branch counts about 0.59 × 0.7 × 0.7 × 0.9 ≈ 0.26 SD at the end of treatment, about a seventh of the programmes' own uncontrolled change."
     },
     {
       "id": "iop_counterfactual_adj",
@@ -521,12 +637,12 @@
       "label": "Evidence adjustment, therapy branch",
       "format": "multiple",
       "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 0.9
+        "low": 0.35,
+        "best": 0.7,
+        "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "As the intensive programmes (0.6), with the dose difference in opt_dose_vs_iop."
+      "explainer": "As the intensive programmes (0.7), with the dose differences in opt_dose_vs_iop and cns_dose_vs_iop."
     },
     {
       "id": "opt_counterfactual_adj",
@@ -572,13 +688,37 @@
       "section": "adjustments",
       "label": "WWP's share of the resources behind the outcome",
       "format": "percent",
+      "formula": "wwp_share_of_cash * program_spend / (program_spend + psa_mental_health)",
+      "explainer": "WWP's share of the cash behind the programmes, times its spending over its spending plus the donated public service announcements that recruit veterans into them (Convention 2)."
+    },
+    {
+      "id": "wwp_share_of_cash",
+      "section": "adjustments",
+      "label": "WWP's share of the money behind the programmes",
+      "format": "percent",
       "value": {
         "low": 0.6,
         "best": 0.85,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "WWP's grants pay for the Warrior Care Network programmes at no cost to veterans, but the four academic centres bring their own money too (Home Base raises its own funds; the centres' research grants and infrastructure), and some outpatient care is billed to TRICARE or VA Community Care. Peer leaders volunteer (2,491 volunteers across WWP, 990 Part I line 6). 0.85 (0.6-1)."
+      "explainer": "WWP's grants pay for the Warrior Care Network programmes at no cost to veterans and are most of the four centres' veteran-programme money (the network was created by WWP's $100M-plus commitment in 2015 and its 2023 renewal), but the centres bring their own too (Home Base also raises funds from the Red Sox Foundation and Massachusetts General Hospital; the centres' research grants and buildings), and some outpatient care is billed to TRICARE or VA Community Care. Peer leaders volunteer (2,491 volunteers across WWP, 990 Part I line 6). 0.85 (0.6-1)."
+    },
+    {
+      "id": "psa_mental_health",
+      "section": "adjustments",
+      "label": "Donated public service announcements allocated to mental health (fair value)",
+      "format": "usd",
+      "value": 22995874,
+      "kind": "observed",
+      "source": {
+        "title": "Wounded Warrior Project, audited consolidated financial statements, year ended 30 September 2025 (Grant Thornton)",
+        "url": "https://www.woundedwarriorproject.org/media/ba0hoqdy/2025-wounded-warrior-project-consolidated-financial-statements.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 5, statement of functional expenses; note 9",
+        "quote": "Public service announcements 9,610,311 4,648,917 22,995,874"
+      },
+      "explainer": "Airtime donated at the media's rate card, which the auditors allocate to the mental health column; note 9 says PSAs make 'warriors and their families aware of the free programs and services available to them', so they are others' resources behind enrolment."
     },
     {
       "id": "attribution_share",
@@ -603,10 +743,9 @@
         "title": "Held et al. (2021), Treatment response trajectories in a three-week CPT-based intensive treatment for veterans with PTSD, Journal of Psychiatric Research 141:226",
         "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8364877/",
         "retrieved": "2026-11-14",
-        "page": "Results",
-        "quote": "The completion rate was 90.8%"
+        "quote": "Completion rates for the ITP are high (90.8%)"
       },
-      "explainer": "Share of those starting who complete: 90.8% at Rush's three-week programme; Warrior Care Network reports about 95% across its sites. People who stop early keep part of the gain, so 0.9 (0.8-0.97). Used for every branch (WWP's counts are of people served, not completers)."
+      "explainer": "Share of those starting who complete: 90.8% at Rush's three-week programme. People who stop early keep part of the gain, so 0.9 (0.8-0.97). Used for every branch (WWP's counts are of people served, not completers)."
     },
     {
       "id": "gift_to_grant_years",
@@ -708,12 +847,12 @@
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": -0.05,
-        "best": 0.05,
-        "high": 0.2
+        "low": -0.03,
+        "best": 0.025,
+        "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "Not modelled, with signs: lower substance use, better sleep and return to work after PTSD treatment (+, partly inside the depression effect already); the support branch's suicides averted (+, small, not estimated); WWP's grants funging the four centres' other funding or VA spending on the same veterans (-); veterans waiting for a place in an intensive programme instead of starting therapy elsewhere (-). Net 0.05 (-0.05 to 0.2).",
+      "explainer": "What remains unmodelled, sized: lower substance use and better sleep and return to work after PTSD treatment beyond the depression effect (+0.03: about a quarter of veterans in the intensive programmes have a substance use problem, and gains there partly show up in depression scores already); veterans waiting for a place in an intensive programme instead of starting therapy elsewhere sooner (-0.005: waits are days to weeks). Net 0.025 (-0.03 to 0.08). Co-funders' money is in attribution_share_shared, not here.",
       "side_effect": "added"
     },
     {
@@ -722,18 +861,18 @@
       "label": "Yearly suicide rate of US veterans",
       "format": "small",
       "value": {
-        "low": 0.000347,
-        "best": 0.0004,
-        "high": 0.000476
+        "low": 0.0003,
+        "best": 0.00036,
+        "high": 0.00047
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
-        "title": "RAND (2025), Suicide Among Veterans (summarising the VA's 2024 National Veteran Suicide Prevention Annual Report, 2022 data)",
-        "url": "https://www.rand.org/pubs/perspectives/PEA1363-1-v2.html",
+        "title": "US Department of Veterans Affairs (December 2024), VA releases annual Veteran suicide prevention report analyzing 2001-2022 data",
+        "url": "https://www.va.gov/wilmington-health-care/news-releases/va-releases-annual-veteran-suicide-prevention-report-analyzing-2001-2022-data/",
         "retrieved": "2026-11-14",
-        "quote": "In 2022, the suicide rate among 18–34-year-olds remained the highest among all age groups, at 47.6 per 100,000"
+        "quote": "there were 6,407 suicides among Veterans in 2022"
       },
-      "explainer": "Per person per year (per 100,000 ÷ 100,000). The VA's 2022 rates: 34.7 per 100,000 for all veterans and 47.6 for ages 18-34; the veterans treated are mostly 35-55 (mean age 45 in Ptak et al. 2025), between the two. 40 per 100,000 (34.7-47.6), before the excess risk of PTSD below."
+      "explainer": "Per person per year. The VA counted 6,407 veteran suicides in 2022 among about 18 million veterans, about 35 per 100,000, and 46.2 per 100,000 among service members who left in 2021; the veterans treated are mostly 35-55, younger than veterans overall, whose rates are higher. 36 per 100,000 (30-47)."
     },
     {
       "id": "ptsd_suicide_rr",
@@ -747,6 +886,27 @@
       },
       "kind": "judgment",
       "explainer": "Studies of US veterans find PTSD associated with roughly 1.5 to 2.5 times the suicide rate after adjusting for other psychiatric conditions, much higher unadjusted (Krysinska and Lester 2010, Archives of Suicide Research 14:1, meta-analysis of PTSD and suicide; Conner et al. 2014 and Gradus 2017 in veteran and Danish cohorts). 2 (1.3-4)."
+    },
+    {
+      "id": "veteran_ptsd_prevalence",
+      "section": "deaths",
+      "label": "Share of US veterans with PTSD",
+      "format": "percent",
+      "value": {
+        "low": 0.07,
+        "best": 0.12,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "To take the excess out of the all-veteran rate: the National Center for PTSD puts PTSD in a given year at about 5-7% of all veterans and 15-29% of post-9/11 veterans depending on the era; post-9/11 veterans are a fifth of all veterans. 0.12 (0.07-0.2)."
+    },
+    {
+      "id": "no_ptsd_suicide_rate",
+      "section": "deaths",
+      "label": "Yearly suicide rate of veterans without PTSD",
+      "format": "small",
+      "formula": "veteran_suicide_rate / (1 + veteran_ptsd_prevalence * (ptsd_suicide_rr - 1))",
+      "explainer": "The all-veteran rate with PTSD's excess taken out, so (RR - 1) is applied to the right base."
     },
     {
       "id": "share_excess_removed",
@@ -766,7 +926,7 @@
       "section": "deaths",
       "label": "Suicides averted per veteran in the intensive programmes (before adjustments)",
       "format": "small",
-      "formula": "veteran_suicide_rate * (ptsd_suicide_rr - 1) * share_excess_removed * 0.5 * effect_duration_years * discount_factor",
+      "formula": "no_ptsd_suicide_rate * (ptsd_suicide_rr - 1) * share_excess_removed * 0.5 * effect_duration_years * discount_factor",
       "explainer": "The site's recipe (templates.md, wellbeing): the yearly rate × the excess risk × the share removed, over the effect's years as it fades, discounted like the WELLBYs."
     },
     {
@@ -775,7 +935,25 @@
       "label": "Suicides averted per person in the therapy branch (before adjustments)",
       "format": "small",
       "formula": "deaths_averted_per_person * opt_dose_vs_iop",
-      "explainer": "At the therapy branch's lower dose. The support branch's are in the unmodelled share."
+      "explainer": "At the outpatient therapy's dose; counted for the veterans only (opt_veterans), not the family members."
+    },
+    {
+      "id": "cns_deaths_per_person",
+      "section": "deaths",
+      "label": "Suicides averted per person counselled (before adjustments)",
+      "format": "small",
+      "formula": "deaths_averted_per_person * cns_dose_vs_iop * cns_veteran_share",
+      "explainer": "At counselling's dose, veterans only.",
+      "side_effect": "added"
+    },
+    {
+      "id": "sup_deaths_per_person",
+      "section": "deaths",
+      "label": "Suicides averted per person in the support branch (before adjustments)",
+      "format": "small",
+      "formula": "deaths_averted_per_person * (sup_effect_sd * sup_effect_duration_years * sup_discount_factor) / (initial_effect_sd * effect_duration_years * discount_factor)",
+      "explainer": "The same recipe at the support branch's smaller and shorter effect (its SD-years over the intensive programmes').",
+      "side_effect": "added"
     },
     {
       "id": "share_deaths_15_49",
@@ -811,7 +989,7 @@
       "section": "deaths",
       "label": "Deaths averted, in units of value (adjusted)",
       "format": "number",
-      "formula": "(people_reached * deaths_averted_per_person * iop_total_adj + opt_people * opt_deaths_per_person * opt_total_adj) * value_per_death",
+      "formula": "(people_reached * deaths_averted_per_person * iop_total_adj + (opt_veterans * opt_deaths_per_person + cns_people * cns_deaths_per_person) * opt_total_adj + sup_people * sup_deaths_per_person * sup_total_adj) * value_per_death",
       "unit": "UoV"
     },
     {
@@ -834,9 +1012,9 @@
     {
       "id": "opt_wellbys_unadjusted",
       "section": "outcome",
-      "label": "Therapy branch, WELLBYs before adjustments",
+      "label": "Therapy branch (centres' outpatient therapy and WWP-paid counselling), WELLBYs before adjustments",
       "format": "number",
-      "formula": "opt_people * opt_wellbys_per_person * household_multiplier",
+      "formula": "(opt_people * opt_wellbys_per_person + cns_people * cns_wellbys_per_person) * household_multiplier",
       "unit": "WELLBYs"
     },
     {
