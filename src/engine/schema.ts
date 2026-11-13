@@ -142,6 +142,9 @@ export const Owner = z
     /** false: the evaluator has asked us not to publish its models yet. They stay in models/ but leave the
      * library, so no page, ranking or other model shows or reads them. */
     published: z.boolean().optional(),
+    /** Set when the evaluator gave us permission to publish its models (its licence alone doesn't allow
+     * it): shown beside the licence on its models' pages and on its evaluator page. */
+    permission: z.string().optional(),
   })
   .strict();
 export type Owner = z.infer<typeof Owner>;
