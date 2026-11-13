@@ -3,11 +3,20 @@
   "name": "World Central Kitchen: emergency meals (charityevals)",
   "kind": "charity",
   "cause": "global-health",
+  "beneficiaries": {
+    "PSE": 0.7068,
+    "HTI": 0.1128,
+    "UKR": 0.0983,
+    "MMR": 0.0555,
+    "JAM": 0.0214,
+    "USA": 0.0052
+  },
+  "beneficiaries_note": "Our build: shares of the result at the defaults by branch (Gaza 71%, crises in poorer countries 29%, rich-country disasters under 1%), the poorer-country branch split by its places' spending weights from the Form 990's Schedule F times their log gains (Haiti, Jamaica, Ukraine standing in for the middle-income places, Myanmar for East Asia); the rich-country branch at the US.",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "world-central-kitchen",
   "owner": "charityevals",
-  "summary": "World Central Kitchen cooks and delivers hot meals after disasters and in wars; in 2025 it spent 372.5 million dollars on this, its only programme, and served 130 to 179 million meals, about 70% of them in Gaza, the rest mostly in Haiti, Ukraine, Jamaica, Myanmar and US and European disasters. The model values the meals as food on the site's log-income scale and, in Gaza and poorer countries' crises, as a share of the excess deaths from hunger they avert, in three branches split by the Form 990's regions: about 0.14 years of healthy life per 1,000 dollars at the defaults, three quarters of it from Gaza. The biggest uncertainties are how much of the food in Gaza others would have brought in through the same crossings, and how little people there had without it; no study measures what the meals do, so every branch is discounted for missing data.",
+  "summary": "World Central Kitchen cooks and delivers hot meals after disasters and in wars; in 2025 it spent 372.5 million dollars on this, its only programme, and served 130 to 179 million meals, about 70% of them in Gaza, the rest mostly in Haiti, Ukraine, Jamaica, Myanmar and US and European disasters. The model values the meals as food on the site's log-income scale and, in Gaza and poorer countries' crises, as a share of the excess deaths from hunger they avert, in three branches split by the Form 990's regions: about 0.09 years of healthy life per 1,000 dollars at the defaults, 70% of it from Gaza. Each branch's food is valued from its share of the food bill, over the months people were fed. The biggest uncertainties are how much of the food in Gaza others would have brought in through the same crossings, and how little people there had without it; no study measures what the meals do, so every branch is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: World Central Kitchen's emergency meals (2025)",
@@ -450,7 +459,7 @@
       "label": "Share of the year's meals served in Gaza",
       "format": "percent",
       "value": {
-        "low": 0.5,
+        "low": 0.45,
         "best": 0.7,
         "high": 0.82
       },
@@ -461,7 +470,7 @@
         "retrieved": "2026-11-14",
         "quote": "over 272 million meals"
       },
-      "explainer": "From the charity's dated Gaza counts: 70 million meals by October 2024 (its Middle East timeline), 122 million in Gaza and the West Bank by 3 March 2025, and 272 million by 11 February 2026, when it served a million meals a day (in early 2026 the article body says 220 million hot meals, the footer 272 million meals, which include bread). Taking out about 40 million in early 2026 and the 20 million or so of January and February 2025 leaves roughly 110 to 140 million in Gaza in 2025: about 70% of 179 million, from 50% to 82%."
+      "explainer": "From the charity's dated Gaza counts: 70 million meals by October 2024 (its Middle East timeline), 122 million in Gaza and the West Bank by 3 March 2025, and 272 million by 11 February 2026, when it served a million meals a day (two series: the release's body says over 220 million hot meals, its footer and the milestone page 272 million meals, with 73 million loaves of bread counted apart). Taking out about 40 million in early 2026 and the 20 million or so of January and February 2025 leaves roughly 110 to 140 million meals in Gaza in 2025 on the 272 million series, about 70% of 179 million; on the hot-meal series about 85 million, 47%. About 70%, from 45% to 82%. It sets how long each person was fed, not the food's value, which comes from the branch's spending."
     },
     {
       "id": "hi_cost_per_meal_vs_lm",
@@ -555,12 +564,12 @@
       "explainer": "The food line of the programme's functional expenses: what the ingredients and purchased meals cost."
     },
     {
-      "id": "food_cost_per_meal",
+      "id": "food_share_of_programme",
       "section": "reach",
-      "label": "Food cost per meal (US$, 2025)",
-      "format": "usd",
-      "formula": "food_expense / total_meals",
-      "explainer": "What the food in a meal cost the charity: about 1.50 dollars. The meal's value to the person eating it is taken as this, the price of the food at normal prices, not the far higher prices in Gaza's markets during the blockade (which would value it many times higher) nor the full delivered cost (which counts cooking and logistics as value)."
+      "label": "Food's share of programme spending",
+      "format": "percent",
+      "formula": "food_expense / program_expenses",
+      "explainer": "The food bill over programme spending: about 71%. Each branch's food is its spending times this share, so all the food valued adds up to the food bill. The meals' value to the people eating them is the food's cost at normal prices, not the far higher prices in Gaza's markets during the blockade (which would value it many times higher) nor the full delivered cost (which would count cooking and logistics as value). Gaza's meals likely held more food than this average share gives it (its kitchens are cheaper per meal) and US meals less; the split is not published."
     },
     {
       "id": "crisis_mortality_rate",
@@ -572,7 +581,7 @@
         "best": 0.01,
         "high": 0.025
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "unit": "deaths / person-year",
       "source": {
         "title": "RNZ / Reuters, 'Gaza deaths in war's first 15 months higher than reported, study says' (20 February 2026), on Spagat et al., The Lancet Global Health",
@@ -580,7 +589,7 @@
         "retrieved": "2026-11-14",
         "quote": "There were an estimated 16,300 non-violent deaths during the first 15 months of the war"
       },
-      "explainer": "The first independent survey of deaths in Gaza (Spagat et al., Lancet Global Health, 2026; 2,000 households, interviews from 30 December 2024) estimated 16,300 non-violent deaths in the war's first 15 months: about 0.006 a person-year in some 2.1 million people. 2025 was worse: the March to May blockade and the famine the IPC confirmed for Gaza Governorate in August. Without the charity's meals (a large share of what its recipients ate) the rate would have been higher again. About 0.010, from 0.006 (the 2023-24 rate) to 0.025 (near the IPC famine threshold of 2 deaths per 10,000 a day, 0.073, in parts only). Violent deaths are left out: meals don't avert them."
+      "explainer": "The first independent survey of deaths in Gaza (Spagat et al., Lancet Global Health, 2026; 2,000 households, interviews from 30 December 2024) estimated 16,300 non-violent deaths in the war's first 15 months: about 0.006 a person-year in some 2.1 million people. 2025 was worse: the March to May blockade and the famine the IPC confirmed for Gaza Governorate in August. Without the charity's meals (a large share of what its recipients ate) the rate would have been higher again. Our judgment for 2025, anchored on the survey's 0.006 for 2023-24 and the IPC's famine classification of August 2025: about 0.010, from 0.006 (the 2023-24 rate) to 0.025 (near the IPC famine threshold of 2 deaths per 10,000 a day, 0.073, in parts only). Violent deaths are left out: meals don't avert them."
     },
     {
       "id": "baseline_mortality_rate",
@@ -699,8 +708,8 @@
       "section": "effect",
       "label": "Food delivered per person in Gaza in the year (US$)",
       "format": "usd",
-      "formula": "gz_meals / people_reached * food_cost_per_meal",
-      "explainer": "Meals per person times the food cost of a meal: about 190 dollars a year. Valued as consumption on top of the deaths averted: fewer than one person in a thousand fed is a death averted, so the consumption value is almost all to people who would have survived anyway (GiveWell likewise adds cash transfers' mortality effect to their consumption value)."
+      "formula": "gz_spend * food_share_of_programme / people_reached",
+      "explainer": "The Gaza branch's spending times food's share, over the people fed: about 135 dollars each (about 1.10 dollars a meal). Valued as consumption on top of the deaths averted: fewer than one person in a thousand fed is a death averted, so the consumption value is almost all to people who would have survived anyway (GiveWell likewise adds cash transfers' mortality effect to their consumption value)."
     },
     {
       "id": "ppp_factor",
@@ -734,8 +743,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per person in Gaza",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2025 * ppp_factor / baseline_consumption)",
-      "explainer": "A year's meals on the site's one log-income scale."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2025 * ppp_factor / (baseline_consumption * years_exposed))",
+      "explainer": "The food on the site's one log-income scale over the time it was eaten: the meals raise consumption during the third of a year each person is fed (years_exposed), so the gain is years_exposed × ln(1 + food ÷ the consumption of that period)."
     },
     {
       "id": "lm_meals_per_person",
@@ -901,32 +910,49 @@
       "formula": "affected_consumption_share * @survey_consumption.survey_to_na_world_median * @myanmar.gdp_per_capita_2024 * mmr_consumption_share_of_gdp * @myanmar.ppp_factor_2017 * cpi_2017_vs_2024"
     },
     {
+      "id": "lm_value_per_meal",
+      "section": "effect",
+      "label": "Crises in poorer countries: food per meal (US$, 2025)",
+      "format": "usd",
+      "formula": "lm_spend * food_share_of_programme / lm_meals",
+      "explainer": "The branch's spending times food's share, over its meals."
+    },
+    {
+      "id": "lm_years_fed",
+      "section": "effect",
+      "label": "Crises in poorer countries: years each person was fed",
+      "format": "number",
+      "formula": "lm_meals_per_person / (365 * meals_per_person_day)",
+      "unit": "years",
+      "explainer": "Meals per person over meals a day, in years: the period the food's gain is spread over."
+    },
+    {
       "id": "ln_gain_haiti",
       "section": "effect",
       "label": "Haiti: ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + lm_meals_per_person * food_cost_per_meal * cpi_2017_vs_2025 * @haiti.ppp_factor_2017 / baseline_haiti)"
+      "formula": "lm_years_fed * ln(1 + lm_meals_per_person * lm_value_per_meal * cpi_2017_vs_2025 * @haiti.ppp_factor_2017 / (baseline_haiti * lm_years_fed))"
     },
     {
       "id": "ln_gain_jamaica",
       "section": "effect",
       "label": "Jamaica: ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + lm_meals_per_person * food_cost_per_meal * cpi_2017_vs_2025 * @jamaica.ppp_factor_2017 / baseline_jamaica)"
+      "formula": "lm_years_fed * ln(1 + lm_meals_per_person * lm_value_per_meal * cpi_2017_vs_2025 * @jamaica.ppp_factor_2017 / (baseline_jamaica * lm_years_fed))"
     },
     {
       "id": "ln_gain_ukraine",
       "section": "effect",
       "label": "Ukraine: ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + lm_meals_per_person * food_cost_per_meal * cpi_2017_vs_2025 * @ukraine.ppp_factor_2017 / baseline_ukraine)"
+      "formula": "lm_years_fed * ln(1 + lm_meals_per_person * lm_value_per_meal * cpi_2017_vs_2025 * @ukraine.ppp_factor_2017 / (baseline_ukraine * lm_years_fed))"
     },
     {
       "id": "ln_gain_myanmar",
       "section": "effect",
       "label": "Myanmar: ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + lm_meals_per_person * food_cost_per_meal * cpi_2017_vs_2025 * @myanmar.ppp_factor_2017 / baseline_myanmar)"
+      "formula": "lm_years_fed * ln(1 + lm_meals_per_person * lm_value_per_meal * cpi_2017_vs_2025 * @myanmar.ppp_factor_2017 / (baseline_myanmar * lm_years_fed))"
     },
     {
       "id": "lm_ln_gain_per_person",
@@ -961,8 +987,17 @@
       "section": "effect",
       "label": "Rich-country disasters: value of a meal (US$, 2025)",
       "format": "usd",
-      "formula": "food_cost_per_meal * hi_cost_per_meal_vs_lm",
-      "explainer": "The food cost of a meal times the higher cost of a meal there (restaurant and food-truck meals at US prices)."
+      "formula": "hi_spend * food_share_of_programme / hi_meals",
+      "explainer": "The branch's spending times food's share, over its meals (restaurant and food-truck meals at US prices)."
+    },
+    {
+      "id": "hi_years_fed",
+      "section": "effect",
+      "label": "Rich-country disasters: years each person was fed",
+      "format": "number",
+      "formula": "hi_meals_per_person / (365 * meals_per_person_day)",
+      "unit": "years",
+      "explainer": "Meals per person over meals a day, in years."
     },
     {
       "id": "hi_affected_consumption_share",
@@ -989,7 +1024,7 @@
       "section": "effect",
       "label": "Rich-country disasters: ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + hi_meals_per_person * hi_value_per_meal * cpi_2017_vs_2025 / hi_baseline)",
+      "formula": "hi_years_fed * ln(1 + hi_meals_per_person * hi_value_per_meal * cpi_2017_vs_2025 / (hi_baseline * hi_years_fed))",
       "explainer": "No deaths are counted here: US and European disaster deaths come from the event itself, heat, cold or lost medical care, not hunger, and stores and other relief reopen within days; the meals' value is consumption."
     },
     {
@@ -1003,7 +1038,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "How far to trust the meal count and the effect chain: the count is the charity's own (looting and diversion at distributions are in delivery below), and the log-consumption value of food to people this hungry is a standard but untested use of the scale. About 0.85, from 0.6 to 1, as our relief models (American Red Cross 0.95, Americares 0.8)."
+      "explainer": "How far to trust the meal count and the chain's inputs in this setting: the count is the charity's own and unaudited (the accounts say 179 million meals, its review 130 million), and the food's value rests on the branch's share of the food bill, which is not published by place. Looting and diversion are in delivery below, and that no study measures the meals' effect is the missing-data step's, not this one's. About 0.85, from 0.6 to 1, as our relief models (American Red Cross 0.95, Americares 0.8)."
     },
     {
       "id": "gz_counterfactual_adj",
@@ -1016,7 +1051,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "What limited food in Gaza in 2025 was access (crossings, truck numbers, the March-May blockade), not money: WFP and others had food waiting at the borders, so part of the food the charity brought in used crossing capacity others could have used. Against that, it cooked (fuel and kitchens were scarce), ran its own corridors (Jordan, Cyprus by sea) and bought some food locally. About half, from 25% to 80%."
+      "explainer": "What limited food in Gaza in 2025 was access (crossings, truck numbers, the March-May blockade), not money: WFP and others had food waiting at the borders, so part of the food the charity brought in used crossing capacity others could have used. Against that, it cooked (fuel and kitchens were scarce), ran its own corridors (Jordan, Cyprus by sea) and bought some food locally. We found no count of its trucks against all food trucks into Gaza in 2025 (the UN2720 dashboard covers only UN-mechanism cargo and its figures are disputed). Anchored on our relief models' counterfactuals (Americares 0.5, American Red Cross 0.6, Doctors Without Borders relief 0.72), lowered for the crossing constraint: about half, from 25% to 80%."
     },
     {
       "id": "lm_evidence_adj",
@@ -1029,7 +1064,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "As in Gaza: the charity's own counts and a judged effect. About 0.85, from 0.6 to 1."
+      "explainer": "As in Gaza: the charity's own, unaudited counts and a food value from an unpublished split of the food bill. About 0.85, from 0.6 to 1."
     },
     {
       "id": "lm_counterfactual_adj",
@@ -1281,7 +1316,7 @@
         "high": 0
       },
       "kind": "judgment",
-      "explainer": "Crowds and danger at distribution points, and the risk to staff (seven were killed in an air strike in April 2024); relief that undercuts local food sellers where markets work; restricted gifts that let the charity hold larger reserves. About -5%, from -12% to 0."
+      "explainer": "Crowds and danger at distribution points, and the risk to staff (seven were killed in an air strike in April 2024); relief that undercuts local food sellers where markets work. (Money held in reserve is in the wait discount.) About -5%, from -12% to 0."
     },
     {
       "id": "dignity_share",
@@ -1463,15 +1498,15 @@
     {
       "id": "subcontractors",
       "section": "donor",
-      "label": "Subcontractors, programme, 2025",
+      "label": "Subcontractors, all functions, 2025",
       "format": "usd",
-      "value": 29379687,
+      "value": 29599785,
       "kind": "observed",
       "source": {
         "title": "World Central Kitchen, Inc. and Affiliate: consolidated financial statements, December 31, 2025 and 2024 (Grant Thornton, audited)",
         "url": "https://wck.org/wp-content/uploads/2026/09/FY2025-World-Central-Kitchen-Financial-Statements.pdf",
         "retrieved": "2026-11-14",
-        "page": "p. 8",
+        "page": "p. 8, functional expenses 2025, Total column",
         "quote": "Subcontractors 29,379,687 192,911 27,187 29,599,785"
       },
       "drawn_with": "program_expenses"
@@ -1536,14 +1571,5 @@
       "row": "dalys_per_dollar",
       "unit": "daly"
     }
-  },
-  "beneficiaries": {
-    "PSE": 0.7598,
-    "HTI": 0.0926,
-    "UKR": 0.0729,
-    "MMR": 0.0577,
-    "JAM": 0.014,
-    "USA": 0.003
-  },
-  "beneficiaries_note": "Our build: shares of the result at the defaults by branch (Gaza 76%, crises in poorer countries 24%, rich-country disasters under 1%), the poorer-country branch split by its places' spending weights from the Form 990's Schedule F times their log gains (Haiti, Jamaica, Ukraine standing in for the middle-income places, Myanmar for East Asia); the rich-country branch at the US."
+  }
 }

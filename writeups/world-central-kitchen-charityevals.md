@@ -1,6 +1,6 @@
 ### Summary
 
-World Central Kitchen, founded by the chef José Andrés, cooks and delivers hot meals to people hit by disasters and wars. Our model of its 2025 relief work, 372.5 million dollars and 130 to 179 million meals, gives **<span data-figure="headline" data-model="world-central-kitchen-charityevals">0.14</span> years of healthy life per 1,000 dollars**, a little below the median of the site's global-health charities. Three quarters of it comes from Gaza, where the meals fed about a million people through a year of blockade and famine.
+World Central Kitchen, founded by the chef José Andrés, cooks and delivers hot meals to people hit by disasters and wars. Our model of its 2025 relief work, 372.5 million dollars and 130 to 179 million meals, gives **<span data-figure="headline" data-model="world-central-kitchen-charityevals">0.09</span> years of healthy life per 1,000 dollars**, below the median of the site's global-health charities. About 70% of it comes from Gaza, where the meals fed about a million people through a year of blockade and famine.
 
 ### What the charity does
 
@@ -20,8 +20,8 @@ A meal is food that people in a crisis would otherwise go without or pay for out
 The model has three branches, split by the Form 990's regions: Gaza and the Middle East, crises in poorer countries (Haiti, Jamaica, Ukraine, Myanmar and smaller places), and disasters in rich countries (the US and Europe). In each:
 
 - **Meals and people.** The year's meals are divided between the branches by the charity's dated Gaza counts (about 70% in Gaza) and by each branch's spending and cost per meal. Gaza's meals went to about a million people, about a third of a year each; elsewhere people got fewer meals.
-- **Food as consumption.** Each meal is worth the food in it, about 1.50 dollars (the food bill over the meals), counted as consumption against what people had without it, on the site's log-income scale. In Gaza that was very little: we take about 1.60 international dollars a day.
-- **Deaths averted.** In Gaza, deaths from causes other than violence above the pre-war rate (about 0.010 a person-year in 2025, from the first independent mortality survey of the war, against 0.003 before it), of which a daily hot meal averts about 15% for the people it reaches. In the poorer countries' crises the excess is smaller and the meals avert less of it (5%). In rich-country disasters no deaths are counted.
+- **Food as consumption.** Each branch's food is its spending times the food bill's share of programme spending (71%), so the food valued adds up to what the charity spent on food: about 135 dollars per person in Gaza. It counts as consumption against what people had without it, on the site's log-income scale, over the months they were fed. In Gaza people had very little: we take about 1.60 international dollars a day.
+- **Deaths averted.** In Gaza, deaths from causes other than violence above the pre-war rate (the first independent mortality survey of the war found about 0.006 a person-year in its first 15 months; we take 0.010 for 2025, the year of the blockade and famine, against 0.003 before the war), of which a daily hot meal averts about 15% for the people it reaches. In the poorer countries' crises the excess is smaller and the meals avert less of it (5%). In rich-country disasters no deaths are counted.
 - **Adjustments.** What other agencies would have delivered anyway (in Gaza about half, because access through the crossings, not money, limited food; in US disasters most), meals that didn't reach the people counted (convoys looted, spoilage), the charity's share of the resources (its volunteers and UN logistics are others'), the half year its money waits, and the shared discount for outcomes nobody measured.
 - **Side effects.** Wages for local cooks and restaurants (+5%), the time, fuel and dignity of a cooked meal (+5%), and harms at crowded distributions or to local food sellers (−5%).
 
@@ -33,7 +33,7 @@ The shared discount for unmeasured outcomes, then how much food in Gaza others w
 
 - How many of the meals in Gaza other agencies would have delivered: food waited at the borders for most of 2025.
 - What people in Gaza had to eat without the charity: output per person there fell to 161 dollars in 2024, and almost all food came from aid.
-- How many meals there were: the accounts say more than 179 million, the Form 990 and the charity's review more than 130 million, and nobody checks the count independently.
+- How many meals there were: the accounts say more than 179 million, the Form 990 and the charity's review more than 130 million, and nobody checks the count independently. It changes the result little, since the food is valued from the food bill; it sets only how long each person was fed.
 - How much of the war's excess mortality in 2025 came from hunger and how much a meal a day prevents: no survey covers 2025 yet.
 
 ### What isn't modelled
@@ -42,7 +42,7 @@ Lives lost to violence, which meals can't prevent. The charity's advocacy for ac
 
 ### How this model was checked
 
-An independent audit (audits/world-central-kitchen-charityevals/). The rounds and what changed are listed there.
+Independent audits (audits/world-central-kitchen-charityevals/). Round 1 found that the food's log gain was spread over a whole year although people were fed for a third of a year or less, and that valuing every meal at the average food cost gave Gaza more food than its spending could buy; both were fixed (the food now counted over the months fed, and each branch's food from its own spending), lowering the result by a third. It also asked for anchors on the Gaza counterfactual and the 2025 death rate, now in the model.
 
 ### Sources
 
