@@ -53,7 +53,7 @@
   "id": "INV-3",
   "title": "Every animal model passes through the species step, once per species, from the shared table",
   "status": "checked",
-  "checked": 17,
+  "checked": 18,
   "violations": [],
   "how": "Animal models must report in ced and declare output.species. For each species s there is a row ced_<s> whose formula equals the standard template (AIM SADs: sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024), v the SAD version, 2024 or 2025, whose weight is built into the figure; a second version for the same species goes in ced_<s>_<v> on sads_<s>_<v>; raw days: pain_days_<s> * @welfare_ranges.<s>_vs_chicken) up to whitespace, reads @welfare_ranges.<s>_vs_chicken and feeds the output. No other row reads @welfare_ranges.* or @aim_sads.*. Not checked: that every path from a SAD or pain-day row to the output passes through a ced_* row (rows carry no unit to tell).",
   "waived": 0,
@@ -64,186 +64,11 @@
   "title": "No literal stands in for a shared fact or assumption",
   "status": "partial",
   "checked": 329,
-  "violations": [
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-burkina-faso",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-cameroon",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-cote-d-ivoire",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-drc",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-guinea",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-madagascar",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-mali",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-niger",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-adamawa",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-akwa-ibom",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-anambra",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-benue",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-delta",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-ebonyi",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-edo",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-ekiti",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-fct-abuja",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-imo",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-kaduna",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-kebbi",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-kogi",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-nasarawa",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-niger",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-ogun",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-osun",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-plateau",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-rivers",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-sokoto",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   },
-   {
-    "inv": "INV-4",
-    "model": "helen-keller-vas-nigeria-taraba",
-    "where": "benefits_from_other_programs_supported_by_our_funding_2 = @givewell_common.benefits_from_other_programs_vas",
-    "detail": "input \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\" = 0.18 is a literal copy of @givewell_common.benefits_from_other_programs_vas (0.18, \"Benefits from other programs supported by our funding (e.g. deworming, immunizations)\")"
-   }
-  ],
+  "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 65364,
-   "input equals a house-constant fact but under another label": 17326,
-   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7958,
+   "input equals a shared value but its label doesn't resemble the shared one's": 59872,
+   "input equals a house-constant fact but under another label": 17263,
+   "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 7891,
    "round value (one significant digit) and labels only loosely alike": 105,
    "input within 0.2% of a shared value (not equal) and labels only loosely alike": 19,
    "shared label too generic (under three significant words) for a loose match": 8,
@@ -252,43 +77,13 @@
   },
   "how": "Facts have no `match` pattern yet, so (a) an input row is flagged when its value equals a fact's or assumption's low/best/high (within 0.2%) AND its id+label shares at least two significant words (half the smaller label) with the fact's label, or uses one of the synonyms for it (ln(consumption) or a doubled income for $uov_per_ln_consumption; a DALY or disability weight or (DW) for the GBD weights; GiveDirectly's cost-effectiveness or a cash benchmark for @cash); near-equal (not equal) values without a synonym, one-significant-digit values (0.5, 1000) and facts with generic labels (\"Average household size\") need closer labels (50%, 60%, 75% of the larger word set); a country fact (givewell_kenya…) only matches rows naming that country; (b) a formula constant outside lint's ALLOWED_LITERALS is flagged when it equals a fact's or assumption's best value exactly and either has 5+ significant digits and isn't an integer (116.25262, 73.1914) or the row label resembles the shared label. Rows a model wrote itself only (variants: overrides). The evaluator's own number is still a violation: it belongs in `published` on a row that reads the fact. Heuristic by nature (values and words, not meaning); it can't see a copy whose label uses other words (\"CFR\" for case fatality rate), a copy rounded beyond 0.1% or rescaled (a percent written as 12, a rate per 1,000), a short formula constant under an unlike label, a shared number that isn't in facts/ or assumptions yet, or a country fact for a place outside its list; and a matching label can still be a coincidence (normalization-waivers.json).",
   "waived": 49,
-  "failing_models": [
-   "helen-keller-vas-burkina-faso",
-   "helen-keller-vas-cameroon",
-   "helen-keller-vas-cote-d-ivoire",
-   "helen-keller-vas-drc",
-   "helen-keller-vas-guinea",
-   "helen-keller-vas-madagascar",
-   "helen-keller-vas-mali",
-   "helen-keller-vas-niger",
-   "helen-keller-vas-nigeria-adamawa",
-   "helen-keller-vas-nigeria-akwa-ibom",
-   "helen-keller-vas-nigeria-anambra",
-   "helen-keller-vas-nigeria-benue",
-   "helen-keller-vas-nigeria-delta",
-   "helen-keller-vas-nigeria-ebonyi",
-   "helen-keller-vas-nigeria-edo",
-   "helen-keller-vas-nigeria-ekiti",
-   "helen-keller-vas-nigeria-fct-abuja",
-   "helen-keller-vas-nigeria-imo",
-   "helen-keller-vas-nigeria-kaduna",
-   "helen-keller-vas-nigeria-kebbi",
-   "helen-keller-vas-nigeria-kogi",
-   "helen-keller-vas-nigeria-nasarawa",
-   "helen-keller-vas-nigeria-niger",
-   "helen-keller-vas-nigeria-ogun",
-   "helen-keller-vas-nigeria-osun",
-   "helen-keller-vas-nigeria-plateau",
-   "helen-keller-vas-nigeria-rivers",
-   "helen-keller-vas-nigeria-sokoto",
-   "helen-keller-vas-nigeria-taraba"
-  ]
+  "failing_models": []
  },
  {
   "id": "INV-5",
   "title": "The evaluator view uses the evaluator's own rates",
   "status": "checked",
-  "checked": 309,
+  "checked": 308,
   "violations": [],
   "how": "Every evaluator model with an output (variants too, with their own inputs) must declare output.native; its evaluator layer is the native row, every row feeding it and every other row outside sections of kind \"ours\". Each non-toggle assumption a row in that layer reads is moved to ×0.5 and ×1.5 in our view (0 → 0.5 and 1): no row of the layer may move in the evaluator view, so every `expected` still reproduces and the bottom line stays the evaluator's. A pin in evaluator.assumptions passes by construction; an unpinned assumption passes only if no evaluator row's value depends on it. Each toggle the layer reads (GiveWell's leverage and funging switches on $resource_shares) must be pinned, so the evaluator view sees the evaluator's position.",
   "waived": 0,
@@ -298,7 +93,7 @@
   "id": "INV-6",
   "title": "The evaluator's bottom line reproduces",
   "status": "checked",
-  "checked": 211,
+  "checked": 210,
   "violations": [],
   "how": "Every evaluator model with an output (not variants: they inherit output.native and don't inherit `expected`) declares output.native, and that row or one of its direct inputs carries `expected`; scripts/check.ts checks those values reproduce in the evaluator view.",
   "waived": 13,
@@ -308,7 +103,7 @@
   "id": "INV-7",
   "title": "Our rows are visibly ours",
   "status": "checked",
-  "checked": 211,
+  "checked": 210,
   "violations": [],
   "how": "Every evaluator model with an output (not variants: rows and sections are the parent's) declares output.native, and the output uses it. The output uses the native row (or, for a result split by species, every direct input of it). Every row that feeds the output and is computed, directly or not, from the native row or one of its direct inputs (without feeding the native row itself) is in a section of kind \"ours\" and has no `expected`; no row in the layer is in one of ours (rows switched by a toggle inside the evaluator's layer stay the evaluator's: INV-5 checks the toggle is pinned). Not checked: inputs of our steps that aren't computed from the bottom line (GiveWell's value of cash, staff-pay judgments; ours by section), and evaluator rows beside the bottom line that a bridge reads (ACE 2016's hen-years; INV-5 still holds them to the evaluator's rates).",
   "waived": 0,
@@ -318,7 +113,7 @@
   "id": "INV-8",
   "title": "One view, one set of numbers",
   "status": "checked",
-  "checked": 309,
+  "checked": 308,
   "violations": [],
   "how": "headline(m, av, {}, \"evaluator\") against compute(evaluator view)[output] × the unit's conversion evaluated with viewAssumptions(m, av, \"evaluator\"). Fails wherever a pin changes a rate in the conversion ($uov_per_daly for uov models).",
   "waived": 0,
@@ -348,7 +143,7 @@
   "id": "INV-5b",
   "title": "Every evaluator pin is read",
   "status": "checked",
-  "checked": 309,
+  "checked": 308,
   "violations": [],
   "how": "For every model with evaluator.assumptions, each pinned assumption must be read by some row of the model (inherited rows count) or by its output unit's conversion. An unread pin is either a lever the model should read (a death valued without $life_value_multiplier, years without $discount_rate) or dead weight to drop.",
   "waived": 0,
@@ -368,7 +163,7 @@
   "id": "SAME-CHANGE",
   "title": "Same physical change, same SADs figure",
   "status": "partial",
-  "checked": 12,
+  "checked": 13,
   "violations": [],
   "how": "Rows in animal models whose label states SADs per unit for one of 5 transitions (hen-battery-to-cage-free, hen-enriched-to-cage-free, broiler-bcc, meal-replaced, shrimp-stunned), matched by label keywords (the explainer only tells battery from enriched cages). Each must read its shared fact in facts/sad_factors.json; shrimp stunning has no fact yet, so every shrimp-stunned row fails while the models disagree. Not matched: \"animals spared → SADs\" and \"years of farmed life → SADs\" ratios (Good Food Fund's $sads_per_animal_spared, ACE 2016's caged-hen 28.9 per year), which are spread over formulas and are a different quantity from a transition; per-dollar rows (the species step's sads_<s> split, \"SADs per dollar you give: chickens\") and shares of SADs by species or SAD version, which are results, not a transition's figure.",
   "waived": 0,
@@ -398,7 +193,7 @@
   "id": "INV-13",
   "title": "Same concept, same value across models",
   "status": "partial",
-  "checked": 118,
+  "checked": 117,
   "violations": [],
   "how": "Rows on the path to the output (not variants) whose label names one of 19 concepts several evaluators state (resource-sharing, treatment-costs-averted, investment-of-income, long-term-benefit-years, wage-gain-per-iq-point, cf-value-government, cf-value-global-fund, cf-value-gavi, income-to-mortality-ratio, value-of-cyp, value-of-stillbirth, indirect-deaths-malaria, malaria-morbidity, indirect-deaths-diarrhea, household-spillover-therapy, household-size, commitment-fulfilment, prior-weight-education, depression-per-phq9-point) must read the concept's shared fact (or be computed from a row that does), with the evaluator's own figure in `published`. A literal equal to the shared value is a copy; a literal that differs is the same question answered another way. A place or year the shared facts don't cover is the only reason to keep a different literal, recorded as a waiver with the reason. Labels stand in for meaning: a concept under other words isn't seen.",
   "waived": 37,
@@ -408,7 +203,7 @@
   "id": "INV-14",
   "title": "No house constant without a shared fact",
   "status": "partial",
-  "checked": 9829,
+  "checked": 9818,
   "violations": [],
   "how": "Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and \"overall\" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (0, 1, 0.5, 100, 1000, 100000, 1000000, 12, 52, 365, 365.25, 0.000001: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, \"10x bar\" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.",
   "waived": 0,
@@ -418,7 +213,7 @@
   "id": "INV-15",
   "title": "A ranked model far above its peers says why",
   "status": "checked",
-  "checked": 132,
+  "checked": 133,
   "violations": [],
   "how": "For every model the rankings use (rankingPlan), at the defaults in our view: if its headline is more than 10× the median of the other ranked models of the same cause (at least three), its summary must state the reason in the words \"more than ten times its peers because …\". The best guess stays; the outlier is explained where readers meet it.",
   "waived": 0,
@@ -428,7 +223,7 @@
   "id": "INV-16",
   "title": "Side sheets never rank; the ranked column is the grant's",
   "status": "partial",
-  "checked": 132,
+  "checked": 133,
   "violations": [],
   "how": "For every model the rankings use: at most one row on its path may read like a value-of-information or decision sheet (future funding bar, reallocated funding, value of information, the probability a decision changes, P(… x cash)); two or more and the sheet values what a grant lets the funder learn, so it must be a side sheet (src/engine/ranking.ts SIDE_SHEET or VOI_ROW). And where the native row's label ends in a place in parentheses (GiveWell's \"Final cost-effectiveness estimate (Chad)\"), the model's name, id or source title must name that place too when it names any: otherwise the importer took another location's column.",
   "waived": 0,
