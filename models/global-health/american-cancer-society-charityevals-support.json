@@ -397,12 +397,12 @@
    "label": "What a free night or ride is worth to the family, as a share of its price",
    "format": "percent",
    "value": {
-    "low": 0.5,
-    "best": 0.7,
-    "high": 0.9
+    "low": 0.6,
+    "best": 0.8,
+    "high": 0.95
    },
    "kind": "judgment",
-   "explainer": "Families would not all have paid the full hotel or taxi price (some would have stayed with relatives, driven, or found cheaper rooms), and lodging tied to treatment is worth less than cash: 70%, 50% to 90%, as the Habitat for Humanity model's share for subsidised housing."
+   "explainer": "Help in kind is worth less than its price in cash, because the family can't spend it on something else: 80%, 60% to 95%, as the Habitat for Humanity model's cash-equivalent share. Families who would have stayed with relatives or driven themselves are in the counterfactual rows, not here."
   },
   {
    "id": "lodge_value_per_person",
@@ -431,7 +431,7 @@
     "high": 0.008
    },
    "kind": "judgment",
-   "explainer": "Free lodging lets some patients take treatment at a distant specialist centre or finish a course they would otherwise cut short; travel burden is linked to more incomplete radiation courses and lower survival in observational studies, but no trial measures lodging. If 5% of guests would otherwise have had worse or incomplete treatment and that costs 4% of them their life, 0.002; 0 to 0.008."
+   "explainer": "Free lodging lets some patients take treatment at a distant specialist centre or finish a course they would otherwise cut short. A review of the literature on distance and cancer care (Ambroggi et al., The Oncologist 2015) found that longer travel goes with more advanced disease at diagnosis, less adequate treatment and worse survival in most of the studies it covers, all observational; no trial measures lodging. If 5% of guests would otherwise have had worse or incomplete treatment and that costs 4% of them their life, 0.002; 0 to 0.008."
   },
   {
    "id": "rides_value_per_ride",
@@ -481,12 +481,12 @@
    "label": "Helpline: gain in wellbeing per person (standard deviations)",
    "format": "number",
    "value": {
-    "low": 0.01,
-    "best": 0.05,
-    "high": 0.15
+    "low": 0.0075,
+    "best": 0.025,
+    "high": 0.075
    },
    "kind": "judgment",
-   "explainer": "Psychosocial and educational interventions for people with cancer improve distress and quality of life by about 0.2-0.3 standard deviations over several sessions (Faller et al., J Clin Oncol 2013); one or two calls with a cancer information specialist are a fraction of that dose. 0.05, 0.01 to 0.15."
+   "explainer": "Psychosocial and educational interventions for people with cancer improve distress and quality of life by about 0.25 standard deviations over several sessions (Faller et al., J Clin Oncol 2013); one or two calls with a cancer information specialist are about a tenth of that dose, as the British Heart Foundation's helpline (0.03 to 0.3 of a trial's dose). 0.025, 0.0075 to 0.075."
   },
   {
    "id": "info_sd_gain_other",
@@ -494,12 +494,25 @@
    "label": "Other information and peer support: gain in wellbeing per person (standard deviations)",
    "format": "number",
    "value": {
-    "low": 0.002,
-    "best": 0.01,
-    "high": 0.04
+    "low": 0.00075,
+    "best": 0.0025,
+    "high": 0.0075
    },
    "kind": "judgment",
-   "explainer": "Reading trusted pages or a peer visit is a smaller dose than a call: a fifth of it, 0.002 to 0.04."
+   "explainer": "Reading trusted pages or a peer visit is about a hundredth of a trial's dose, as the British Heart Foundation's reading dose (0.003 to 0.03): 0.0025, 0.00075 to 0.0075."
+  },
+  {
+   "id": "info_patient_share",
+   "section": "effect",
+   "label": "Helpline and information: share of the people helped who are patients or their close caregivers",
+   "format": "percent",
+   "value": {
+    "low": 0.5,
+    "best": 0.7,
+    "high": 0.85
+   },
+   "kind": "judgment",
+   "explainer": "The trials' effect is for people with cancer; the helpline and pages also serve people worried about symptoms, students and professionals. 70%, 50% to 85% (the British Heart Foundation's information branch counts only patients, 22% of its readers, because most of its readers are the general public)."
   },
   {
    "id": "ls_effect_years",
@@ -581,7 +594,7 @@
    "label": "Illness averted per person",
    "format": "number",
    "formula": "0",
-   "explainer": "The health gain is counted as deaths averted below; illness averted is left at 0 (the deaths dominate a cancer's DALYs, 7% are illness in the US).",
+   "explainer": "The health gain is counted as deaths averted below; illness averted is left at 0: a patient kept alive lives on with the illness of cancer and its treatment, so better-completed treatment may add illness as well as remove it (7% of US cancer DALYs are illness).",
    "unit": "DALYs"
   },
   {
@@ -638,30 +651,17 @@
    "label": "Helpline and information: evidence adjustment",
    "format": "multiple",
    "value": {
-    "low": 0.35,
-    "best": 0.6,
-    "high": 0.9
+    "low": 0.4,
+    "best": 0.7,
+    "high": 0.95
    },
    "kind": "judgment",
-   "explainer": "The effect is scaled down from multi-session trials, as the British Heart Foundation's information branch: 0.6, 0.35 to 0.9."
+   "explainer": "The dose is in the effect rows; this is trust in the trials' effect itself: psycho-oncology trials are small and their pooled effects shrink in larger and better-blinded studies, and the people who call or read are self-selected, so their gain may differ from trial participants'. 0.7, 0.4 to 0.95."
   },
   {
    "id": "lodge_counterfactual_adj",
    "section": "adjustments",
-   "label": "Hope Lodge: share of stays that wouldn't have been free anyway",
-   "format": "percent",
-   "value": {
-    "low": 0.6,
-    "best": 0.8,
-    "high": 0.95
-   },
-   "kind": "judgment",
-   "explainer": "Some hospitals have their own subsidised lodging and some guests would have stayed with family for free (that part is already in the cash-equivalent share); 80%, 60% to 95%."
-  },
-  {
-   "id": "rides_counterfactual_adj",
-   "section": "adjustments",
-   "label": "Road To Recovery: share of rides not otherwise free",
+   "label": "Hope Lodge: share of the saving that wouldn't have come anyway",
    "format": "percent",
    "value": {
     "low": 0.5,
@@ -669,7 +669,20 @@
     "high": 0.9
    },
    "kind": "judgment",
-   "explainer": "Medicaid covers non-emergency transport for its members and some hospitals offer rides; 70%, 50% to 90%."
+   "explainer": "Some hospitals have their own subsidised lodging, some guests would have stayed with relatives for free or found a cheaper room, and some would have travelled daily: 70%, 50% to 90%."
+  },
+  {
+   "id": "rides_counterfactual_adj",
+   "section": "adjustments",
+   "label": "Road To Recovery: share of rides not otherwise free",
+   "format": "percent",
+   "value": {
+    "low": 0.4,
+    "best": 0.6,
+    "high": 0.85
+   },
+   "kind": "judgment",
+   "explainer": "Medicaid covers non-emergency transport for its members, some hospitals offer rides, and some patients would have been driven by family; 60%, 40% to 85%."
   },
   {
    "id": "info_counterfactual_adj",
@@ -703,9 +716,9 @@
   {
    "id": "lodge_donated",
    "section": "adjustments",
-   "label": "Hope Lodge: land leases and lodging given in kind",
+   "label": "Hope Lodge: land leases given in kind",
    "format": "usd",
-   "value": 6334000,
+   "value": 3634000,
    "kind": "observed",
    "source": {
     "title": "American Cancer Society, Consolidated Financial Statements, year ended March 31, 2026 (BDO USA, issued September 25, 2026)",
@@ -714,7 +727,7 @@
     "quote": "Land leases for Hope Lodge facilities Licensed real estate appraisal Hope Lodge facilities - 3,634",
     "retrieved": "2026-11-13"
    },
-   "explainer": "Land leases ($3.634m) and patient lodging ($2.7m) contributed in kind for Hope Lodges and patient support; they are in ACS's expenses at their value, so they are a share of the cost, not an addition."
+   "explainer": "Land leases for Hope Lodges contributed in kind; they are in ACS's expenses at their value, so they are a share of the cost, not an addition. The $2.7m of donated 'patient lodging' in the same note is probably hotel rooms given for patients, not Hope Lodge nights, and is left out."
   },
   {
    "id": "lodge_donated_share",
@@ -780,7 +793,7 @@
   {
    "id": "implementation_adj",
    "section": "adjustments",
-   "label": "Share of reported reach that gets the help as counted",
+   "label": "Share of reported reach that gets the help as counted (information branch only)",
    "format": "percent",
    "value": {
     "low": 0.8,
@@ -788,7 +801,7 @@
     "high": 1
    },
    "kind": "judgment",
-   "explainer": "ACS's own counts of nights, rides and contacts; a night or ride counted is delivered, the doubt is in how contacts are counted. 90%, 80% to 100%."
+   "explainer": "ACS's own counts of contacts: some are repeat or misdirected contacts, and some are bookings for lodging or rides already counted in those branches. Applied to the information branch only: a night or ride counted is delivered. 90%, 80% to 100%."
   },
   {
    "id": "leverage_funging_adj",
@@ -840,7 +853,7 @@
    "section": "adjustments",
    "label": "lodge: all adjustments combined",
    "format": "multiple",
-   "formula": "lodge_evidence_adj * lodge_counterfactual_adj * lodge_attribution_share * implementation_adj * leverage_funging_adj * lodge_missing_data_adj",
+   "formula": "lodge_evidence_adj * lodge_counterfactual_adj * lodge_attribution_share * leverage_funging_adj * lodge_missing_data_adj",
    "explainer": "The branch's product of adjustments."
   },
   {
@@ -848,7 +861,7 @@
    "section": "adjustments",
    "label": "rides: all adjustments combined",
    "format": "multiple",
-   "formula": "rides_evidence_adj * rides_counterfactual_adj * rides_attribution_share * implementation_adj * leverage_funging_adj * rides_missing_data_adj",
+   "formula": "rides_evidence_adj * rides_counterfactual_adj * rides_attribution_share * leverage_funging_adj * rides_missing_data_adj",
    "explainer": "The branch's product of adjustments."
   },
   {
@@ -882,8 +895,8 @@
    "section": "adjustments",
    "label": "Helpline and information: WELLBYs (before adjustments)",
    "format": "number",
-   "formula": "info_helpline_people * info_wellbys_helpline + info_other_people * info_wellbys_other",
-   "explainer": "Wellbeing of the people helped.",
+   "formula": "(info_helpline_people * info_wellbys_helpline + info_other_people * info_wellbys_other) * info_patient_share",
+   "explainer": "Wellbeing of the patients and caregivers helped.",
    "unit": "WELLBYs"
   },
   {
