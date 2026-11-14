@@ -3,13 +3,15 @@
   "name": "Protect Democracy: defending US democracy (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: the US's people, whose government the work defends; the spillover abroad (a side-effect share of the US value) isn't assigned to countries.",
   "template": "rights-advocacy",
   "estimate_basis": "past_average",
   "charity": "protect-democracy",
   "owner": "charityevals",
-  "summary": "Protect Democracy litigates, builds tools and coalitions and writes policy to keep the United States from sliding into a more authoritarian government ($34.4 million in 2024). Its year of work is counted as its share of the money behind the US pro-democracy field's work against backsliding (about 1.3%) times the share of the forecast chance of the US leaving the democracies before 2030 (about 11%) that a year of the field's work removes (judged 4.5%); the loss is the income democracy brings (Acemoglu et al. 2019), building over 25 years, put off by the years a win counts and lasting until the slide would be undone (5% a year), and democracy's other goods. A smaller branch counts its work for proportional representation (about a fifth of the result). With its next dollar at 35% of the average that comes to about 0.02 years of healthy life per 1,000 dollars, about a quarter of the site's global-health median. The result is mostly uncertainty, its own ranges spanning over ten thousandfold; the biggest is the field's effect on that chance, a judgment with no study behind it. Both branches are discounted by the shared missing-data slider.",
+  "summary": "Protect Democracy litigates, builds tools and coalitions and writes policy to keep the United States from sliding into a more authoritarian government ($34.4 million in 2024). Its year of work is counted as its share of the money behind the US pro-democracy field's work against backsliding (about 1.3%) times the share of the forecast chance of the US leaving the democracies before 2030 (about 11%) that a year of the field's work removes (judged 4.5%); the loss is the income democracy brings (Acemoglu et al. 2019), building over 25 years, put off by the years a win counts and lasting until the slide would be undone (5% a year), and democracy's other goods. A smaller branch counts its work for proportional representation (about a twelfth of the result). With its next dollar at 35% of the average that comes to about 0.02 years of healthy life per 1,000 dollars, about a quarter of the site's global-health median. The result is mostly uncertainty, its own ranges spanning over ten thousandfold; the biggest is the field's effect on that chance, a judgment with no study behind it. Both branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Protect Democracy",
@@ -101,17 +103,8 @@
       "section": "cost",
       "label": "Total expenses, calendar 2024",
       "format": "usd",
-      "value": 34368875,
-      "kind": "observed",
-      "source": {
-        "title": "Protect Democracy Project, Form 990 for calendar year 2024 (public disclosure copy, filed November 2025)",
-        "url": "https://protectdemocracy.org/wp-content/uploads/2025/11/FY24-990-PDP-Public-Disclosure-Copy-without-Schedule-B.pdf",
-        "page": "Part I, line 18 (PDF p. 2)",
-        "quote": "Total expenses. Add lines 13-17 (must equal Part IX, column (A), line 25)",
-        "note": "$34,368,875 in 2024 ($22,051,673 in 2023).",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "All of the year's expenses, from the same return."
+      "explainer": "The shared figure from the same return ($34,368,875, Part I line 18), read by the FairVote model too, which divides credit for proportional representation by Protect Democracy's spending.",
+      "formula": "@democracy.protect_democracy_expenses_2024"
     },
     {
       "id": "program_spend",
@@ -158,13 +151,8 @@
       "section": "effect",
       "label": "Share of the programme spent on proportional representation",
       "format": "percent",
-      "value": {
-        "low": 0.03,
-        "best": 0.07,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "Protect Democracy lists four areas of work (Protecting Free & Fair Elections; Stopping the Consolidation of Power; Building Pro-Democracy Collective Action; Shaping the Democracy of Tomorrow, its own page). The last includes its work for proportional representation (research, a Democracy Journal symposium with Democracy Fund, a grant to Fix Our House) and its AI for Democracy Action Lab, which works on AI threats to elections and is counted in the backsliding branch; the return gives no split. Judged 7% (3% to 15%): part of the smallest of four areas, as its page and grants show; the rest is the backsliding branch."
+      "formula": "@democracy.protect_democracy_pr_share",
+      "explainer": "The shared figure (7%, 3% to 15%), read by the FairVote model too: Protect Democracy lists four areas of work (Protecting Free & Fair Elections; Stopping the Consolidation of Power; Building Pro-Democracy Collective Action; Shaping the Democracy of Tomorrow, its own page); the last includes its work for proportional representation (research, a Democracy Journal symposium with Democracy Fund, a grant to Fix Our House) and its AI for Democracy Action Lab, which is counted in the backsliding branch; the return gives no split. The rest is the backsliding branch."
     },
     {
       "id": "bs_spend_share",
@@ -284,28 +272,18 @@
     {
       "id": "ref_people_covered",
       "section": "effect",
-      "label": "People newly governed under proportional representation per year of the movement's work",
+      "label": "People newly governed under proportional representation per year of the movement's work (2016-2025)",
       "format": "integer",
-      "value": {
-        "low": 50000,
-        "best": 230000,
-        "high": 2000000
-      },
-      "kind": "judgment",
-      "explainer": "Proportional representation in the US is won city by city for now: Portland, Oregon (about 650,000 people) voted for multi-member districts with ranked ballots in November 2022, and no state or the US House has followed (the 1967 single-member district law stands). About one such city every two to four years of the whole movement's work gives 160,000 to 325,000 people a year in expectation, about 230,000 in the middle; from 50,000 (no new adoption for a decade) to 2 million (a large city or a small state's legislature within the years counted). Judgment."
+      "formula": "@democracy.us_pr_people_covered_per_year",
+      "explainer": "The shared figure, read by the FairVote model too: the movement's 2016-2025 record, about 103,000 people a year (85,000 to 115,000), Portland, Oregon's 2022 reform most of it."
     },
     {
       "id": "ref_gain_share",
       "section": "effect",
       "label": "Share of democracy's income gain a switch to proportional representation brings",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.05,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "A reform within a democracy gets a ranged share of the democratization gain, never the whole (the family's rule). No study finds a robust income effect of proportional representation in rich democracies; its case is fewer wasted votes, more parties and less polarization, which Protect Democracy argues lowers the risk of backsliding. Judged 5% (1% to 15%) of the gain from becoming a democracy, a small change in who is elected against a change of regime."
+      "formula": "@democracy.pr_gain_share",
+      "explainer": "The shared figure (5%, 1% to 15%), read by the FairVote model too: a reform within a democracy gets a ranged share of the democratization gain, never the whole (the family's rule); no study finds a robust income effect of proportional representation in rich democracies."
     },
     {
       "id": "ref_ln_gain",
@@ -321,13 +299,8 @@
       "section": "effect",
       "label": "Years from the win until the new system is first used",
       "format": "number",
-      "value": {
-        "low": 1,
-        "best": 2,
-        "high": 4
-      },
-      "kind": "judgment",
-      "explainer": "Portland voted in November 2022 and first elected its council under the new system in November 2024: two years (1 to 4).",
+      "formula": "@democracy.pr_years_until_effect",
+      "explainer": "The shared figure: two years (1 to 4), as in Portland (voted November 2022, first used November 2024).",
       "unit": "years"
     },
     {
@@ -481,13 +454,8 @@
       "section": "adjustments",
       "label": "Evidence adjustment, reform branch",
       "format": "multiple",
-      "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "The reform's share of the gain is already a ranged judgment; this is the doubt that proportional representation in US cities changes outcomes at all (few cases, first used in 2024). Judged 0.6 (0.3 to 0.9); it is above the backsliding branch's 0.48 only because it measures a different doubt."
+      "formula": "@democracy.pr_evidence_adj",
+      "explainer": "The shared figure (0.6, 0.3 to 0.9), read by the FairVote model too: the doubt that proportional representation in US cities changes outcomes at all (few cases, first used in 2024); above the backsliding branch's 0.48 only because it measures a different doubt."
     },
     {
       "id": "bs_counterfactual_adj",
@@ -546,63 +514,12 @@
       "explainer": "Its 2024 spending on this work over the field's (Convention 2: share of resources, never an equal split): about 1.3%. It applies whichever way credit is shared."
     },
     {
-      "id": "fairvote_expenses_2023",
-      "section": "adjustments",
-      "label": "FairVote's total expenses, 2023",
-      "format": "usd",
-      "value": 6871703,
-      "kind": "observed",
-      "source": {
-        "title": "ProPublica Nonprofit Explorer, FairVote (EIN 54-1635649), Form 990 for 2023 (API)",
-        "url": "https://projects.propublica.org/nonprofits/organizations/541635649",
-        "page": "Form 990 Part I line 18 (via the Explorer's data)",
-        "quote": "totfuncexpns: 6871703",
-        "note": "Revenue $7,666,359; 2022 expenses $5,352,841.",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "The largest US electoral-reform organisation's whole spending, most of it for ranked-choice voting rather than proportional representation; the anchor for the movement's resources below."
-    },
-    {
-      "id": "fairvote_pr_share",
-      "section": "adjustments",
-      "label": "Share of FairVote's spending on proportional representation",
-      "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.33,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "FairVote works mostly for single-winner ranked-choice voting, and also for the Fair Representation Act (multi-member House districts with ranked ballots) and multi-winner ranked voting in cities. Judged a third (15% to 60%)."
-    },
-    {
-      "id": "other_pr_resources",
-      "section": "adjustments",
-      "label": "Other groups' yearly spending for proportional representation",
-      "format": "usd",
-      "value": {
-        "low": 1500000,
-        "best": 3700000,
-        "high": 10000000
-      },
-      "kind": "judgment",
-      "explainer": "Fix Our House (a small new group: Protect Democracy granted it $15,000 in 2024), New America's political reform programme, local campaigns such as Portland's 2022 measure, and funders' own staff. Judged $3.7 million a year ($1.5 million to $10 million), about FairVote's part again plus a little."
-    },
-    {
-      "id": "ref_movement_resources_other",
-      "section": "adjustments",
-      "label": "Other organisations' yearly spending for proportional representation",
-      "format": "usd",
-      "formula": "fairvote_expenses_2023 * @cpi.usa_2024 / @cpi.usa_2023 * fairvote_pr_share + other_pr_resources",
-      "explainer": "FairVote's part (its 2023 spending in 2024 prices; its 2024 return is filed but only as a PDF behind a bot check) plus the other groups': about $6 million a year."
-    },
-    {
       "id": "ref_attribution_share",
       "section": "adjustments",
       "label": "Protect Democracy's share of the proportional-representation movement's resources",
       "format": "percent",
-      "formula": "cost_total * ref_spend_share / (cost_total * ref_spend_share + ref_movement_resources_other)",
-      "explainer": "Its spending on this work over the movement's, its own included (Convention 2): about 29%."
+      "formula": "cost_total * ref_spend_share / @democracy.us_pr_movement_resources_per_year",
+      "explainer": "Its 2024 spending on this work (about $2.4 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, its own and FairVote's included; Convention 2), the denominator the FairVote model divides by too: about 71%. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
     },
     {
       "id": "bs_missing_data_adj",
@@ -621,19 +538,35 @@
       "explainer": "The shared missing-data step: the reach is a judgment and the effect is judged."
     },
     {
-      "id": "implementation_adj",
+      "id": "bs_implementation_adj",
       "section": "adjustments",
-      "label": "Share of the win that is enforced",
+      "label": "Share of the win that is enforced, backsliding branch",
       "format": "percent",
       "formula": "1",
-      "explainer": "1: an averted slide and an adopted voting system leave nothing to enforce; partial slides are in bs_severity."
+      "explainer": "1: an averted slide leaves nothing to enforce; partial slides are in bs_severity."
+    },
+    {
+      "id": "ref_implementation_adj",
+      "section": "adjustments",
+      "label": "Share of a full switch that the places counted get, reform branch",
+      "format": "percent",
+      "formula": "@democracy.pr_offices_share * @democracy.local_offices_weight",
+      "explainer": "The shared figures, read by the FairVote model too: the adopting places use proportional representation for about 82% of their own elections (Portland, Oregon its whole council, Arlington County only its board), and a city's own elections are about half of a full switch (@democracy.local_offices_weight): about 41%."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Share of the win that is enforced (outcome-weighted, for reading only)",
+      "format": "percent",
+      "formula": "(bs_value * bs_implementation_adj + ref_value * ref_implementation_adj) / (bs_value + ref_value)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
       "id": "bs_total_adj",
       "section": "adjustments",
       "label": "All adjustments, backsliding branch",
       "format": "multiple",
-      "formula": "bs_evidence_adj * bs_counterfactual_adj * bs_attribution_share * implementation_adj * bs_missing_data_adj",
+      "formula": "bs_evidence_adj * bs_counterfactual_adj * bs_attribution_share * bs_implementation_adj * bs_missing_data_adj",
       "explainer": "The product of the branch's adjustments."
     },
     {
@@ -641,7 +574,7 @@
       "section": "adjustments",
       "label": "All adjustments, reform branch",
       "format": "multiple",
-      "formula": "ref_evidence_adj * ref_counterfactual_adj * ref_attribution_share * implementation_adj * ref_missing_data_adj",
+      "formula": "ref_evidence_adj * ref_counterfactual_adj * ref_attribution_share * ref_implementation_adj * ref_missing_data_adj",
       "explainer": "The product of the branch's adjustments."
     },
     {
@@ -698,7 +631,7 @@
       "label": "Side effect: the good of democracy beyond income, as a share of the income value",
       "format": "percent",
       "formula": "@democracy.slide_beyond_income_share",
-      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide. Backsliding branch only: the reform branch has its own (ref_side_factor).",
       "side_effect": "added"
     },
     {
@@ -725,8 +658,26 @@
       "label": "Side effect: backlash and polarization the work provokes",
       "format": "percent",
       "formula": "@democracy.democracy_work_backlash_share",
-      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide. Backsliding branch only: the reform branch has its own (ref_side_factor).",
       "side_effect": "added"
+    },
+    {
+      "id": "ref_ue_democratic_goods",
+      "section": "adjustments",
+      "label": "Side effect, reform branch: fairer elections valued beyond income, as a share of the income value",
+      "format": "percent",
+      "formula": "@democracy.electoral_reform_democratic_goods",
+      "side_effect": "added",
+      "explainer": "The shared figure for a won voting-method reform (20%, 5% to 60%), read by the FairVote model too: below ue_freedom_wellbeing's 30%, which belongs to an averted slide, because a change of voting method within a democracy touches no basic freedoms."
+    },
+    {
+      "id": "ref_ue_backlash",
+      "section": "adjustments",
+      "label": "Side effect, reform branch: bans and counter-measures the win provokes",
+      "format": "percent",
+      "formula": "@democracy.electoral_reform_backlash",
+      "side_effect": "added",
+      "explainer": "The shared figure for a won voting-method reform (−10%, −30% to 0), read by the FairVote model too: state bans on ranked-choice voting close places to future reform."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -734,7 +685,7 @@
       "label": "Benefits and harms not in the main chain, as a share of modelled value",
       "format": "percent",
       "formula": "ue_freedom_wellbeing + ue_backlash",
-      "explainer": "The two side effects of both branches (democracy's goods beyond income, backlash), each with its sign and weighted by the side-effects slider; the two that belong only to an averted slide enter the backsliding branch through bs_slide_side_factor."
+      "explainer": "The backsliding branch's two shared-form side effects (democracy's goods beyond income, backlash), each with its sign and weighted by the side-effects slider; bs_slide_side_factor adds that branch's slide-only two, and ref_side_factor swaps in the reform branch's own (the shared figures for a voting-method reform)."
     },
     {
       "id": "bs_slide_side_factor",
@@ -743,6 +694,14 @@
       "format": "multiple",
       "formula": "1 + (ue_violence_averted + ue_global_spillover) / (1 + ue_freedom_wellbeing + ue_backlash)",
       "explainer": "Repression averted and the pull of US democracy abroad belong to an averted slide, not to proportional representation: this factor adds them to the backsliding branch only, so with outcome_total's (1 + unmodelled_benefits_adj) the branch counts 1 + all four side effects, the reform branch 1 + the other two."
+    },
+    {
+      "id": "ref_side_factor",
+      "section": "bridges",
+      "label": "Reform branch: its own side effects, as a factor",
+      "format": "multiple",
+      "formula": "(1 + ref_ue_democratic_goods + ref_ue_backlash) / (1 + ue_freedom_wellbeing + ue_backlash)",
+      "explainer": "With outcome_total's (1 + unmodelled_benefits_adj), the reform branch counts 1 + the shared side effects of a won voting-method reform (as the FairVote model does), not the averted slide's."
     },
     {
       "id": "bs_uov",
@@ -757,7 +716,7 @@
       "section": "bridges",
       "label": "Reform branch, units of value after adjustments",
       "format": "number",
-      "formula": "ref_value * ref_total_adj",
+      "formula": "ref_value * ref_total_adj * ref_side_factor",
       "unit": "UoV"
     },
     {
