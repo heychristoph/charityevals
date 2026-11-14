@@ -526,11 +526,19 @@
    "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
   },
   {
+   "id": "shifted_dollar_value",
+   "section": "moved_money",
+   "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+   "format": "small",
+   "formula": "moved_dollar_value - prior_dollar_value",
+   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+  },
+  {
    "id": "moved_value",
    "section": "effect",
    "label": "Value of the money ACE moved, units of value",
    "format": "small",
-   "formula": "(donors_moved * moved_wait_discount * moved_dollar_net_value + grantmakers_moved * (moved_dollar_value - prior_dollar_value)) * (1 + moved_side_effects)",
+   "formula": "(donors_moved * moved_wait_discount * moved_dollar_net_value + grantmakers_moved * shifted_dollar_value) * (1 + moved_side_effects)",
    "unit": "units of value",
    "explainer": "Donors' money moved (money through ACE after its wait) × the net value of a dollar moved, and the grantmakers' funding, all shifted, at the gain over an ordinary animal charity (moved_dollar_value − prior_dollar_value), with the side effects."
   },
