@@ -1,6 +1,6 @@
 # Audit: allfed-charityevals, round 2
 Result: 0.02574 daly/$ = 25.7 years of healthy life per 1,000 dollars (combined range 0.88–750); Verdict: pass.
-Model-sha: 8e7c3632800911fe45c9a983aa3e965bf48137cfd253da7cc01cf59e8baeb9a9
+Model-sha: 90e172dd70115b57b2357cc21d95f9fd6d58bb929aa9175e7c0b57c92be6643d
 Scope: verification round. Only the round 1 fixes were checked, for correctness and for new problems.
 Mechanical: audit-model reports the numbers above; check.ts "all models valid". The next-dollar low end now shows 12.41 and the famine share's low end 16.77 in the tornado.
 
@@ -21,3 +21,5 @@ Mechanical: audit-model reports the numbers above; check.ts "all models valid". 
 None. The write-up's figures match the live run: headline 26 (25.7), range "about 0.9 to about 750" (0.88–750), the largest swing 3.4 to 250 (3.40–249), 0.1% discount rate "about 52" (51.8). The summary matches (26; 0.9 to 750). The "How this model was checked" section states the round 1 outcome and that a verification round checked the fixes.
 
 Verdict: pass. 0 high, 0 medium, 0 low.
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
