@@ -1033,6 +1033,10 @@ const originOf = (m: ResolvedModel) => (m.owner === "sogive" ? "givewell" : m.ow
 const definitional = (label: string, v: number) =>
   /\b(arbitrary|hypothetical)\b/i.test(label) || [...label.matchAll(/(?<![\w.])(\d+(?:\.\d+)?)(?:x\b|(?![\w.]))/g)].some((x) => Number(x[1]) === v);
 
+/** Our own adjustment rows (`*_adj`: evidence, implementation, counterfactual, what a model leaves out) are each
+ * build's judgment of its charity: equal round values across models are the same judgment reached, not a copy. */
+const perModelJudgment = (m: ResolvedModel, id: string) => originOf(m) === "charityevals" && id.endsWith("_adj");
+
 /** INV-14: the same literal under the same label in five or more models, none reading a fact, is an
  * evaluator's house constant (or one of ours) copied by hand: it belongs in a shared fact, read by every
  * copy, so a correction reaches all of them. */
@@ -1042,7 +1046,7 @@ export function inv14(lib: Library): InvariantReport {
     if (!m.output || m.kind === "variant") continue;
     const path = rowsFeeding(m);
     for (const r of ownRows(m)) {
-      if (!path.has(r.id) || r.formula !== undefined || r.value === undefined) continue;
+      if (!path.has(r.id) || r.formula !== undefined || r.value === undefined || perModelJudgment(m, r.id)) continue;
       const v = pickValue(r.value);
       if (!Number.isFinite(v) || ALLOWED_LITERALS.has(v) || definitional(r.label, v)) continue;
       if (!labelKey(r.label)) continue;

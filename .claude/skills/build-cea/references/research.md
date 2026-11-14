@@ -5,8 +5,8 @@ fields and the auditor's checks. Terms: [templates.md](templates.md#glossary).
 
 WebFetch doesn't parse most PDFs: download them into your scratch directory (its own empty folder)
 and read them with the Read tool, page by page (`pages`). Many publishers (PubMed, ScienceDirect,
-Cochrane) show bot checks: use the PMC or Europe PMC copy, the authors' preprint, or the abstract,
-and say which you used. Never bypass a bot check. For every number you take, log: URL, retrieval date,
+Cochrane) show bot checks: use the PMC copy, a preprint or the abstract,
+and say which. Never bypass a bot check; if the latest accounts sit only behind one, stop and name the file. For every number you take, log: URL, retrieval date,
 page/table, a verbatim quote of at most one sentence, and the number as you'll enter it (unit,
 currency, year).
 
