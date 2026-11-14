@@ -24,7 +24,7 @@ Each part has its own adjustments:
 
 | Adjustment | Grants | Own work | Fellowship |
 |---|---|---|---|
-| Share aimed at nuclear-war risk | 0.86 | 0.75 | 1 |
+| Share of the spending counted | 0.86 | 0.75 | 1 |
 | How far a typical project's effect applies | 0.8 | 0.6 | 1 |
 | Work other groups would not have done now | 0.7 | 0.7 | 0.8 |
 | Work other funders would not have paid for | 0.8 | 1 | 1 |
@@ -54,7 +54,7 @@ The grants bring about two thirds of the result, Ploughshares' own work about a 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with each part's adjustments applied to its own value. The independent audit rounds are in audits/ploughshares-fund-charityevals/.
+The model was built from the catastrophic-risk template, with each part's adjustments applied to its own value. Round 1 of the independent audit passed with two medium findings, both fixed. The first was the cost of running the grants, which had been counted again as Ploughshares' own work. The second was a missing question: would the grantees' other funders have paid. Fixing them moved the result from 32 to 26. Round 2 passed with small source and wording fixes, which a verification round checked. The rounds are in audits/ploughshares-fund-charityevals/.
 
 ### Sources
 
