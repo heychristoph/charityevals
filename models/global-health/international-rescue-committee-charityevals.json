@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "international-rescue-committee",
   "owner": "charityevals",
-  "summary": "The International Rescue Committee's work in crisis-affected countries (Crisis Response, Recovery and Development: $754m of its $1.14bn programme spending in the year to September 2025), split by sector from its own outcome split: health care at 2,713 supported facilities, nutrition treatment for 638,187 children and 85,163 mothers, about 8 million vaccine doses, water for 2.5 million people, $52.5m in cash to 1.5 million people, livelihoods, women's and children's protection, and learning for 602,546 children. It comes to about 0.45 years of healthy life per $1,000 (combined range 0.13-1.5), about six times the site's global-health median and twice charityevals' Save the Children model, because more of its money goes to treating malnutrition and cash, whose reach it counts: nutrition gives about a third, other health care a quarter and cash a fifth. The biggest uncertainties are the deaths averted per child treated and what health care costs per person covered; every branch but cash is discounted for missing data (no controlled measure of the IRC's own effect).",
+  "summary": "The International Rescue Committee's work in crisis-affected countries (Crisis Response, Recovery and Development: $754m of its $1.14bn programme spending in the year to September 2025), split by sector from its own outcome split: health care at 2,713 supported facilities, contraception, nutrition treatment for 638,187 children and 85,163 mothers, about 8 million vaccine doses, water for 2.5 million people, $52.5m in cash to 1.5 million people, livelihoods, women's and children's protection, and learning for 602,546 children. It comes to about 0.39 years of healthy life per $1,000 (combined range 0.11-1.3), about four times the site's global-health median and twice charityevals' Save the Children model, because more of its money goes to treating malnutrition and cash, whose reach it counts: nutrition gives about two fifths, other health care and cash about a sixth each, contraception a tenth. The biggest uncertainties are the deaths averted per child treated and what health care costs per person covered; every branch but cash is discounted for missing data (no controlled measure of the IRC's own effect).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: International Rescue Committee, crisis response, recovery and development (year to September 2025)",
@@ -94,7 +94,7 @@
       "source": {
         "title": "International Rescue Committee, Inc. and Subsidiaries, consolidated financial statements, year ended September 30, 2025 (audited by KPMG LLP)",
         "url": "https://www.rescue.org/irc-document/irc-financial-statement-fy-2025",
-        "page": "p. 4, consolidated statement of activities (amounts in thousands)",
+        "page": "printed p. 4 (PDF p. 5), consolidated statement of activities (amounts in thousands)",
         "quote": "Crisis Response, Recovery and Development (CRRD) 753,979",
         "retrieved": "2026-11-14"
       },
@@ -110,7 +110,7 @@
       "source": {
         "title": "International Rescue Committee, Inc. and Subsidiaries, consolidated financial statements, year ended September 30, 2025 (audited by KPMG LLP)",
         "url": "https://www.rescue.org/irc-document/irc-financial-statement-fy-2025",
-        "page": "p. 4, consolidated statement of activities (amounts in thousands)",
+        "page": "printed p. 4 (PDF p. 5), consolidated statement of activities (amounts in thousands)",
         "quote": "Total program services 1,141,420",
         "retrieved": "2026-11-14"
       },
@@ -126,7 +126,7 @@
       "source": {
         "title": "International Rescue Committee, Inc. and Subsidiaries, consolidated financial statements, year ended September 30, 2025 (audited by KPMG LLP)",
         "url": "https://www.rescue.org/irc-document/irc-financial-statement-fy-2025",
-        "page": "p. 4, consolidated statement of activities (amounts in thousands)",
+        "page": "printed p. 4 (PDF p. 5), consolidated statement of activities (amounts in thousands)",
         "quote": "Total operating expenses 1,329,749",
         "retrieved": "2026-11-14"
       },
@@ -142,7 +142,7 @@
       "source": {
         "title": "International Rescue Committee, Inc. and Subsidiaries, consolidated financial statements, year ended September 30, 2025 (audited by KPMG LLP)",
         "url": "https://www.rescue.org/irc-document/irc-financial-statement-fy-2025",
-        "page": "p. 5, consolidated statement of functional expenses (amounts in thousands)",
+        "page": "printed p. 5 (PDF p. 6), consolidated statement of functional expenses (amounts in thousands)",
         "quote": "Personnel $ 133,161 30,628 56,334 13,357 57,010 290,490 192,480 11,714 204,194 494,684 79,744 34,898 114,642 609,326",
         "retrieved": "2026-11-14"
       },
@@ -267,10 +267,10 @@
     {
       "id": "hlt_spend",
       "section": "cost",
-      "label": "Other health care spending: primary, reproductive and mental health care (US$)",
+      "label": "Other health care spending: primary, maternal and mental health care (US$)",
       "format": "usd",
-      "formula": "health_spend - nut_spend - vax_spend - wash_spend",
-      "explainer": "Health spending less nutrition, vaccination and water, each costed from its reported reach below."
+      "formula": "health_spend - fp_spend - nut_spend - vax_spend - wash_spend",
+      "explainer": "Health spending less family planning, nutrition, vaccination and water, each costed below."
     },
     {
       "id": "people_reached",
@@ -278,7 +278,7 @@
       "label": "Other health care: people covered by IRC-supported care for a year",
       "format": "number",
       "formula": "hlt_spend / hlt_cost_per_person",
-      "explainer": "Other health spending ÷ the cost per person covered: about 12 million people, within the 20.5 million the IRC and its partners reached directly in crisis countries."
+      "explainer": "Other health spending ÷ the cost per person covered: about 13 million people. As a check, the branches' reach (other care 13m, water 2.5m, cash 1.5m, nutrition 0.7m, education 0.6m, vaccination 0.8m) sums to about 19 million before overlap, against the 20.5 million the IRC and its partners reached directly in crisis countries."
     },
     {
       "id": "cost_per_person",
@@ -289,17 +289,51 @@
       "explainer": "For reading: the branch's cost per person with its share of overhead."
     },
     {
+      "id": "acute_share",
+      "section": "effect",
+      "label": "Share of the people covered who live in acute crises",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 35% (20-50%): the acute emergencies of 2025 (Sudan, eastern DRC, Gaza, South Sudan's border areas, Somalia's drought) against the protracted crises and displacement settings that make up most of the IRC's 40 countries (Nigeria, Afghanistan, Kenya's camps, Syria, Yemen, Ethiopia, Latin America, Ukraine). Africa is 57% of CRRD spending by region (statement of functional expenses), most of it in protracted settings."
+    },
+    {
+      "id": "acute_mortality_multiple",
+      "section": "effect",
+      "label": "Death rate in acute crises, as a multiple of the normal rate",
+      "format": "multiple",
+      "value": {
+        "low": 2,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 3× (2-5×): Sphere calls a doubling of the baseline crude death rate an emergency; mortality surveys in camps and besieged areas commonly find 0.5-1 deaths per 10,000 a day against a baseline of about 0.2-0.25, 2-4.5 times."
+    },
+    {
+      "id": "protracted_mortality_multiple",
+      "section": "effect",
+      "label": "Death rate in protracted crises, as a multiple of the normal rate",
+      "format": "multiple",
+      "value": {
+        "low": 1.1,
+        "best": 1.3,
+        "high": 1.6
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 1.3× (1.1-1.6×): protracted displacement settings run close to, but above, their country's normal rate; surveys there mostly find crude death rates below Sphere's emergency threshold."
+    },
+    {
       "id": "crisis_mortality_rate",
       "section": "effect",
       "label": "Death rate among the people covered, during the crisis, without the response",
       "format": "small",
-      "value": {
-        "low": 0.012,
-        "best": 0.02,
-        "high": 0.04
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 0.02 (0.012-0.04) a person-year, the same as charityevals' Save the Children model: Sphere's emergency threshold is a crude death rate of 1 per 10,000 a day (0.037 a year); the IRC's 2025 settings run from acute crises above it (Sudan, Gaza, eastern DRC) to protracted ones close to the baseline (Somalia, South Sudan, Nigeria, Afghanistan).",
+      "formula": "baseline_mortality_rate * (acute_share * acute_mortality_multiple + (1 - acute_share) * protracted_mortality_multiple)",
+      "explainer": "The normal rate × the mix of acute and protracted settings: about 0.016 a person-year, within the 0.014-0.018 of charityevals' CARE, Mercy Corps and Samaritan's Purse models.",
       "unit": "deaths / person-year"
     },
     {
@@ -351,39 +385,24 @@
       "section": "effect",
       "label": "Share of the deaths averted that are of children under five",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.45,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 45% (30-60%), as in charityevals' Save the Children model: crisis deaths are young; child health is the bulk of the curative caseload."
+      "formula": "@death_ages.diarrhoea_ssa_share_under5",
+      "explainer": "A stand-in, as in charityevals' Mercy Corps, Samaritan's Purse and World Vision models: the site's WHO-based split of diarrhoeal deaths in sub-Saharan Africa (facts/death_ages.json), for excess crisis deaths, which are mostly infections worsened by hunger and displacement: 55% under five. No all-cause split for the crisis countries is in the site's facts."
     },
     {
       "id": "share_5_14_of_over5",
       "section": "effect",
       "label": "Share of deaths over five that are of children 5-14",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 20% (10-40%), as for Save the Children: older children are a smaller share of crisis deaths than of the population."
+      "formula": "@death_ages.diarrhoea_ssa_share_5_14 / (1 - @death_ages.diarrhoea_ssa_share_under5)",
+      "explainer": "From the same stand-in split."
     },
     {
       "id": "share_15_49_of_over15",
       "section": "effect",
       "label": "Share of adult deaths that are at 15-49",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.7
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 50% (30-70%): maternal deaths and young adults' infections against older adults' chronic disease."
+      "formula": "@death_ages.diarrhoea_ssa_share_15_49 / (@death_ages.diarrhoea_ssa_share_15_49 + @death_ages.diarrhoea_ssa_share_50plus)",
+      "explainer": "From the same stand-in split; the rest valued at the 50-74 band."
     },
     {
       "id": "value_per_death",
@@ -420,16 +439,8 @@
       "section": "effect",
       "label": "Other health care: value of goods handed out per person, beyond care (US$)",
       "format": "usd",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "International Rescue Committee, 2025 Annual Report, Executive Summary",
-        "url": "https://www.rescue.org/sites/default/files/2026-08/PO2605_2025%20Annual%20Report_Exec%20Summary.pdf",
-        "page": "p. 4, IRC Impact in 2025",
-        "quote": "2,713 static and mobile health facilities supported",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "Zero: care is valued as the deaths and illness it averts. Cash and the goods of the economic programmes are in their own branches."
+      "formula": "0",
+      "explainer": "Zero by construction: care is valued as the deaths and illness it averts. Cash and the goods of the economic programmes are in their own branches."
     },
     {
       "id": "ppp_factor",
@@ -550,6 +561,111 @@
       "explainer": "The branch's adjustments multiplied."
     },
     {
+      "id": "fp_share_of_health",
+      "section": "cost",
+      "label": "Share of health spending on contraception",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 5% (2-10%): contraception is one of the four interventions the IRC says it will scale first (2025 Annual Report, Executive Summary p. 8: nutrition, immunization, contraception and cash), delivered inside its reproductive health care; no spending or count of users is published."
+    },
+    {
+      "id": "fp_spend",
+      "section": "cost",
+      "label": "Family planning spending (US$)",
+      "format": "usd",
+      "formula": "health_spend * fp_share_of_health",
+      "explainer": "Health spending × the contraception share."
+    },
+    {
+      "id": "fp_cost_per_cyp",
+      "section": "reach",
+      "label": "Family planning: the IRC's cost per couple-year of protection (US$)",
+      "format": "usd",
+      "value": {
+        "low": 12,
+        "best": 30,
+        "high": 80
+      },
+      "kind": "judgment",
+      "explainer": "Judgment $30 ($12-80): the IRC's staff, training and outreach per couple-year of protection, the contraceptives mostly from UNFPA; large public-sector and social-marketing programmes in low-income countries run at about $5-20 a couple-year, and crisis settings with mobile outreach and few clients a provider cost more."
+    },
+    {
+      "id": "fp_cyp",
+      "section": "reach",
+      "label": "Family planning: couple-years of protection provided",
+      "format": "number",
+      "formula": "fp_spend / fp_cost_per_cyp",
+      "explainer": "Spending ÷ the cost per couple-year."
+    },
+    {
+      "id": "fp_uov_per_cyp",
+      "section": "effect",
+      "label": "Family planning: value of a couple-year of protection (units of value)",
+      "format": "number",
+      "formula": "@givewell_shared.uov_per_cyp_low_income",
+      "explainer": "GiveWell's shared value of a year of modern contraception in low-income countries (deaths averted, income and wellbeing of unintended births avoided). Its deaths part (maternal and infant deaths of pregnancies averted) is a different channel from the excess crisis deaths other health care averts, so neither is counted twice."
+    },
+    {
+      "id": "fp_evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment, family planning",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 0.8 (0.6-1): the value per couple-year is GiveWell's modelled figure for stable settings; in crises, pregnancies averted per couple-year may be fewer (spacing already wider after displacement) or more (unmet need higher)."
+    },
+    {
+      "id": "fp_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Counterfactual, family planning",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 60% (40-85%): some users would switch from other providers or methods; in camps and conflict areas few others offer long-acting methods."
+    },
+    {
+      "id": "fp_attribution_share",
+      "section": "adjustments",
+      "label": "The IRC's share of all resources behind the contraception",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 60% (40-80%): the contraceptives come mostly from UNFPA and the ministry staff deliver part of it."
+    },
+    {
+      "id": "fp_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, family planning",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: no count of users or couple-years; reach is spending over a judged cost. Counted less by the shared slider."
+    },
+    {
+      "id": "fp_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments, family planning",
+      "format": "multiple",
+      "formula": "fp_evidence_adj * fp_counterfactual_adj * fp_attribution_share * implementation_adj * leverage_funging_adj * fp_missing_data_adj",
+      "explainer": "The branch's adjustments multiplied."
+    },
+    {
       "id": "nut_children",
       "section": "reach",
       "label": "Children under five admitted to nutrition treatment, 2025",
@@ -563,7 +679,7 @@
         "quote": "638,187 children under 5 admitted",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Admissions counted by the IRC; most are treated as outpatients under the simplified (combined) protocol for severe and moderate wasting."
+      "explainer": "Admissions counted by the IRC; most are treated as outpatients under the simplified (combined) protocol for severe and moderate wasting. The report doesn't say whether '2025' is the fiscal or the calendar year; every reach count here is taken as the fiscal year of the accounts (October 2024 to September 2025)."
     },
     {
       "id": "nut_plw",
@@ -592,7 +708,7 @@
         "high": 200
       },
       "kind": "judgment",
-      "explainer": "Judgment $110 (60-200): GiveWell's 2023 IRC standard-protocol sheet costs a child with severe wasting at about $55 to the IRC in Burkina Faso (cost_per_child_with_sam_switching_from_no_treatment_to_irc_b, before RUTF from UNICEF), and charityevals' Save the Children model $200 with supplies; insecure settings (Sudan, Gaza, Somalia) cost more than Burkina Faso."
+      "explainer": "Judgment $110 (60-200): GiveWell's 'Malnutrition treatment CEA (IRC standard protocol), 2023' costs a child with severe wasting at about $55 to the IRC in Burkina Faso, before ready-to-use food from UNICEF, and charityevals' Save the Children model $200 with supplies; insecure settings (Sudan, Gaza, Somalia) cost more than Burkina Faso."
     },
     {
       "id": "nut_spend",
@@ -613,7 +729,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Judgment 50% (30-70%): the simplified protocol admits both severe and moderate wasting; severe cases are about a third of wasted children in surveys but a larger share of admissions, since screening finds them first."
+      "explainer": "Judgment 50% (30-70%): severely wasted children are about 30% of all wasted children worldwide (UNICEF/WHO/World Bank joint malnutrition estimates, 2023: 13.7 of 45 million), but a larger share of admissions, since screening finds them first and moderate cases are often referred to WFP's supplementary feeding instead; the IRC publishes no split of its 638,187 admissions."
     },
     {
       "id": "nut_cfr_untreated",
@@ -626,7 +742,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Judgment 10% (4-20%), the same as charityevals' Save the Children model: children with severe wasting die many times more often than others; cohort studies put untreated case fatality from a few to over 20%, highest with oedema and in crises."
+      "explainer": "Judgment 10% (4-20%), the same as charityevals' Save the Children model: in pooled cohorts children with severe wasting die about 11 times as often as others (Olofin et al. 2013, PLoS ONE, ten prospective studies); at a crisis under-five death rate of 1.5-2% a year, over an untreated episode of several months, that is roughly 5-15%. GiveWell's shared figure for Chad, a mortality ratio of 7 for untreated severe wasting (@givewell_chad.mortality_ratio_for_children_6_59_months_with_untreated_sam), is a check on the same order."
     },
     {
       "id": "nut_treatment_effect",
@@ -652,7 +768,7 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Judgment 20% (10-35%): GiveWell's IRC sheets put untreated-vs-treated mortality ratios at about 1.7 for moderate wasting against 3.3 for severe (models/grants/givewell/international-rescue-committee-malnutrition-treatment-irc-standard.json), on a baseline risk several times lower."
+      "explainer": "Judgment 20% (10-35%): GiveWell's IRC sheets put untreated-vs-treated mortality ratios at about 1.7 for moderate wasting against 3.3 for severe (its 2023 IRC standard-protocol sheet), on a baseline risk several times lower."
     },
     {
       "id": "nut_plw_relative_value",
@@ -1004,6 +1120,43 @@
       "explainer": "Judgment 10% (0-30%): diarrhoeal illness and cholera outbreaks averted; the time saved fetching water is in unmodelled_benefits_adj."
     },
     {
+      "id": "wash_hours_saved",
+      "section": "effect",
+      "label": "Water: hours of fetching water saved per person a year",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 15,
+        "high": 40
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 15 hours (5-40) a person a year: households without a nearby source spend about half an hour or more a day fetching water (WHO/UNICEF JMP); a new or repaired water point saves part of that, spread over the household's members; trucking to camps saves less.",
+      "unit": "hours"
+    },
+    {
+      "id": "wash_hours_per_year",
+      "section": "effect",
+      "label": "Water: working hours in a year, to value an hour at consumption",
+      "format": "number",
+      "value": {
+        "low": 1500,
+        "best": 2000,
+        "high": 2500
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 2,000 hours (1,500-2,500): an hour saved is valued at a year's consumption ÷ a working year, so the gain is ln(1 + hours saved ÷ hours a year) on the site's log-income scale.",
+      "unit": "hours"
+    },
+    {
+      "id": "wash_time_ln_per_person",
+      "section": "effect",
+      "label": "Water: gain in ln(consumption) from time saved, per person",
+      "format": "small",
+      "formula": "ln(1 + wash_hours_saved / wash_hours_per_year)",
+      "explainer": "A side effect of the water supply: time freed for work, school or care, valued at consumption. Read at the shared side-effect weight.",
+      "side_effect": "added"
+    },
+    {
       "id": "wash_evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, water",
@@ -1120,12 +1273,34 @@
       "explainer": "About $34 a person."
     },
     {
+      "id": "cash_price_level",
+      "section": "effect",
+      "label": "Cash: 2025 US dollars in 2017 prices",
+      "format": "multiple",
+      "formula": "@cpi.usa_2017 / @cpi.usa_2025",
+      "explainer": "US consumer prices 2017 ÷ 2025, so 2025 dollars are set against consumption in 2017 international dollars."
+    },
+    {
+      "id": "cash_years_covered",
+      "section": "effect",
+      "label": "Cash: time the cash covers needs (years)",
+      "format": "number",
+      "value": {
+        "low": 0.083,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 3 months (1-6): the IRC's emergency cash is mostly one to three monthly payments, its anticipatory cash up to five months (the Somalia drought response in the 2025 Annual Report).",
+      "unit": "years"
+    },
+    {
       "id": "cash_ln_gain_per_person",
       "section": "effect",
       "label": "Cash: gain in ln(consumption) per person",
       "format": "small",
-      "formula": "ln(1 + cash_per_person * ppp_factor / baseline_consumption)",
-      "explainer": "The cash at local prices against a year's consumption: spent within months in emergencies."
+      "formula": "cash_years_covered * ln(1 + cash_per_person * cash_price_level * ppp_factor / (baseline_consumption * cash_years_covered))",
+      "explainer": "The site's rule for a transfer used within a year: the months covered × ln(1 + the cash at local prices ÷ the consumption of those months), as in charityevals' Mercy Corps and CARE models."
     },
     {
       "id": "cash_market_effects_share",
@@ -1369,12 +1544,33 @@
       "explainer": "Judgment 5 (3-10): case management and group sessions run over several weeks; some come once for information or a dignity kit."
     },
     {
-      "id": "pro_people",
+      "id": "pro_people_counted",
       "section": "reach",
-      "label": "Protection: women, girls and children reached",
+      "label": "Protection: women, girls and children counted in safe spaces",
       "format": "number",
       "formula": "pro_visits / pro_visits_per_woman + pro_children",
       "explainer": "Unique women and girls (visits ÷ visits each) plus children."
+    },
+    {
+      "id": "pro_cost_per_person",
+      "section": "reach",
+      "label": "Protection: cost per person reached by all safety work (US$)",
+      "format": "usd",
+      "value": {
+        "low": 60,
+        "best": 150,
+        "high": 400
+      },
+      "kind": "judgment",
+      "explainer": "Judgment $150 ($60-400): gender-based violence case management, child protection case work, legal aid and community protection; a case handled over months costs hundreds of dollars, group sessions and information far less."
+    },
+    {
+      "id": "pro_people",
+      "section": "reach",
+      "label": "Protection: people reached by the safety work",
+      "format": "number",
+      "formula": "max(pro_people_counted, pro_spend / pro_cost_per_person)",
+      "explainer": "The safety spending ÷ the cost per person, at least the counted safe-space reach: the counts cover only safe spaces, not the child protection, legal and case work the rest of the line pays for."
     },
     {
       "id": "pro_share_distressed",
@@ -1394,7 +1590,8 @@
         "quote": "The mean prevalence of mental disorders (depression, anxiety, post-traumatic stress disorder, bipolar disorder, and schizophrenia) was 22.1% (95% UI 18.8-25.7) at any point in time in the conflict-affected populations assessed.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "The WHO's prevalence of depression, anxiety, post-traumatic stress, bipolar disorder and schizophrenia in conflict-affected populations (uncertainty interval as the range), as in charityevals' Save the Children model."
+      "explainer": "The WHO's prevalence of depression, anxiety, post-traumatic stress, bipolar disorder and schizophrenia in conflict-affected populations (uncertainty interval as the range), as in charityevals' Save the Children model.",
+      "interval": 0.95
     },
     {
       "id": "pro_effect_sd",
@@ -1597,7 +1794,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 0.6 (0.3-1), as for Save the Children: trials mostly outside crises; schooling in emergencies is disrupted."
+      "explainer": "Judgment 0.6 (0.3-1), as for Save the Children: Evans & Yuan find the median effect of small trials several times that of large ones, and most trials are outside crises, where schooling is disrupted."
     },
     {
       "id": "edu_counterfactual_adj",
@@ -1646,7 +1843,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "(hlt_dalys_unadjusted * hlt_evidence_adj + nut_dalys_unadjusted * nut_evidence_adj + vax_dalys_unadjusted * vax_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + cash_dalys_unadjusted * cash_evidence_adj + liv_dalys_unadjusted * liv_evidence_adj + pro_dalys_unadjusted * pro_evidence_adj + edu_dalys_unadjusted * edu_evidence_adj) / (hlt_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
+      "formula": "(hlt_dalys_unadjusted * hlt_evidence_adj + fp_dalys_unadjusted * fp_evidence_adj + nut_dalys_unadjusted * nut_evidence_adj + vax_dalys_unadjusted * vax_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + cash_dalys_unadjusted * cash_evidence_adj + liv_dalys_unadjusted * liv_evidence_adj + pro_dalys_unadjusted * pro_evidence_adj + edu_dalys_unadjusted * edu_evidence_adj) / (hlt_dalys_unadjusted + fp_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row, weighted by its outcome before adjustments in healthy years (each through its unit's fixed bridge)."
     },
     {
@@ -1654,7 +1851,7 @@
       "section": "adjustments",
       "label": "Counterfactual: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(hlt_dalys_unadjusted * hlt_counterfactual_adj + nut_dalys_unadjusted * nut_counterfactual_adj + vax_dalys_unadjusted * vax_counterfactual_adj + wash_dalys_unadjusted * wash_counterfactual_adj + cash_dalys_unadjusted * cash_counterfactual_adj + liv_dalys_unadjusted * liv_counterfactual_adj + pro_dalys_unadjusted * pro_counterfactual_adj + edu_dalys_unadjusted * edu_counterfactual_adj) / (hlt_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
+      "formula": "(hlt_dalys_unadjusted * hlt_counterfactual_adj + fp_dalys_unadjusted * fp_counterfactual_adj + nut_dalys_unadjusted * nut_counterfactual_adj + vax_dalys_unadjusted * vax_counterfactual_adj + wash_dalys_unadjusted * wash_counterfactual_adj + cash_dalys_unadjusted * cash_counterfactual_adj + liv_dalys_unadjusted * liv_counterfactual_adj + pro_dalys_unadjusted * pro_counterfactual_adj + edu_dalys_unadjusted * edu_counterfactual_adj) / (hlt_dalys_unadjusted + fp_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row, weighted by its outcome before adjustments in healthy years (each through its unit's fixed bridge)."
     },
     {
@@ -1662,7 +1859,7 @@
       "section": "adjustments",
       "label": "Missing-data discount: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(hlt_dalys_unadjusted * hlt_missing_data_adj + nut_dalys_unadjusted * nut_missing_data_adj + vax_dalys_unadjusted * vax_missing_data_adj + wash_dalys_unadjusted * wash_missing_data_adj + cash_dalys_unadjusted * cash_missing_data_adj + liv_dalys_unadjusted * liv_missing_data_adj + pro_dalys_unadjusted * pro_missing_data_adj + edu_dalys_unadjusted * edu_missing_data_adj) / (hlt_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
+      "formula": "(hlt_dalys_unadjusted * hlt_missing_data_adj + fp_dalys_unadjusted * fp_missing_data_adj + nut_dalys_unadjusted * nut_missing_data_adj + vax_dalys_unadjusted * vax_missing_data_adj + wash_dalys_unadjusted * wash_missing_data_adj + cash_dalys_unadjusted * cash_missing_data_adj + liv_dalys_unadjusted * liv_missing_data_adj + pro_dalys_unadjusted * pro_missing_data_adj + edu_dalys_unadjusted * edu_missing_data_adj) / (hlt_dalys_unadjusted + fp_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row, weighted by its outcome before adjustments in healthy years (each through its unit's fixed bridge)."
     },
     {
@@ -1670,22 +1867,72 @@
       "section": "adjustments",
       "label": "All adjustments combined: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "(hlt_dalys + nut_dalys + vax_dalys + wash_dalys + cash_dalys + liv_dalys + pro_dalys + edu_dalys) / (hlt_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
+      "formula": "(hlt_dalys + fp_dalys + nut_dalys + vax_dalys + wash_dalys + cash_dalys + liv_dalys + pro_dalys + edu_dalys) / (hlt_dalys_unadjusted + fp_dalys_unadjusted + nut_dalys_unadjusted + vax_dalys_unadjusted + wash_dalys_unadjusted + cash_dalys_unadjusted + liv_dalys_unadjusted + pro_dalys_unadjusted + edu_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row, weighted by its outcome before adjustments in healthy years (each through its unit's fixed bridge)."
+    },
+    {
+      "id": "se_violence_share",
+      "section": "adjustments",
+      "label": "Side effect: violence prevented by protection and safe spaces, as a share of the result",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.005,
+        "high": 0.02
+      },
+      "kind": "judgment",
+      "explainer": "Protection is valued only through mental health; violence it prevents (community programmes in IRC trials have mixed effects on intimate-partner violence) is a small further gain. +0.5% (0 to +2%), against protection's small share of the result.",
+      "side_effect": "added"
+    },
+    {
+      "id": "se_research_share",
+      "section": "adjustments",
+      "label": "Side effect: the IRC's research (Airbel Impact Lab, cost analyses) used by others, as a share of the result",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.01,
+        "high": 0.04
+      },
+      "kind": "judgment",
+      "explainer": "The IRC says it produces a fifth of humanitarian impact evidence (2025 Annual Report p. 10); other agencies adopting cheaper protocols (the simplified malnutrition protocol, cash) gain from it. +1% (0 to +4%).",
+      "side_effect": "added"
+    },
+    {
+      "id": "se_diversion_share",
+      "section": "adjustments",
+      "label": "Side effect: aid diverted or lost in conflict zones, as a share of the result",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": -0.02,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Aid taken by armed groups, fraud and losses in transit; humanitarian agencies' reported losses run around 1-3% of spending, more in the hardest places (Sudan, Somalia, Gaza). -2% (-5% to 0).",
+      "side_effect": "added"
+    },
+    {
+      "id": "se_safeguarding_share",
+      "section": "adjustments",
+      "label": "Side effect: harm from safeguarding failures, as a share of the result",
+      "format": "percent",
+      "value": {
+        "low": -0.02,
+        "best": -0.005,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Sexual exploitation and abuse by aid workers and contractors, reported across the sector each year. -0.5% (-2% to 0).",
+      "side_effect": "added"
     },
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
-      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "label": "Side effects not in the branches, as a share of the modelled result",
       "format": "percent",
-      "value": {
-        "low": -0.1,
-        "best": 0.05,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "Not modelled, with signs: contraception and safe births in the reproductive health work beyond the deaths counted, violence prevented by the women's protection work, time saved fetching water, and the research the IRC runs with Airbel (it says it produces a fifth of humanitarian impact evidence) (+); aid diverted in conflict zones, safeguarding failures and programmes abandoned mid-course after the 2025 funding cuts (-). Judgment +5% (-10% to +20%).",
-      "side_effect": "added"
+      "formula": "se_violence_share + se_research_share + se_diversion_share + se_safeguarding_share",
+      "explainer": "The signed side effects above, each estimated against the result; contraception is its own branch, time saved fetching water is in the water branch and market effects in the cash branch, and programmes cut short by the 2025 funding cuts are in implementation_adj, so none is counted here again."
     },
     {
       "id": "hlt_uov",
@@ -1694,6 +1941,14 @@
       "format": "number",
       "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption) * hlt_total_adj",
       "explainer": "People covered × deaths averted × value, after the branch's adjustments."
+    },
+    {
+      "id": "fp_uov",
+      "section": "bridges",
+      "label": "Family planning: units of value, after adjustments",
+      "format": "number",
+      "formula": "fp_cyp * fp_uov_per_cyp * fp_total_adj",
+      "explainer": "Couple-years × the shared value of one."
     },
     {
       "id": "nut_uov",
@@ -1716,8 +1971,8 @@
       "section": "bridges",
       "label": "Water: units of value, after adjustments",
       "format": "number",
-      "formula": "wash_people * wash_deaths_per_person * value_per_death_under5 * (1 + wash_morbidity_value_ratio) * wash_total_adj",
-      "explainer": "People × deaths averted × value, with illness."
+      "formula": "wash_people * (wash_deaths_per_person * value_per_death_under5 * (1 + wash_morbidity_value_ratio) + wash_time_ln_per_person * $uov_per_ln_consumption) * wash_total_adj",
+      "explainer": "People × (deaths averted × value, with illness + time saved on the log-income scale, a side effect)."
     },
     {
       "id": "cash_uov",
@@ -1748,7 +2003,7 @@
       "section": "bridges",
       "label": "All units of value, after adjustments",
       "format": "number",
-      "formula": "hlt_uov + nut_uov + vax_uov + wash_uov + cash_uov + liv_uov + edu_uov",
+      "formula": "hlt_uov + fp_uov + nut_uov + vax_uov + wash_uov + cash_uov + liv_uov + edu_uov",
       "explainer": "Sum of the branches in units of value."
     },
     {
@@ -1789,6 +2044,14 @@
       "label": "Healthy years, hlt branch, after adjustments",
       "format": "number",
       "formula": "hlt_dalys_from_uov + dalys_direct",
+      "explainer": "The branch's outcome in healthy years, through its unit's bridge."
+    },
+    {
+      "id": "fp_dalys",
+      "section": "bridges",
+      "label": "Healthy years, fp branch, after adjustments",
+      "format": "number",
+      "formula": "fp_uov / ($uov_per_daly)",
       "explainer": "The branch's outcome in healthy years, through its unit's bridge."
     },
     {
@@ -1853,6 +2116,14 @@
       "label": "Healthy years, hlt branch, before adjustments",
       "format": "number",
       "formula": "hlt_dalys / hlt_total_adj",
+      "explainer": "For the outcome-weighted averages."
+    },
+    {
+      "id": "fp_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Healthy years, fp branch, before adjustments",
+      "format": "number",
+      "formula": "fp_dalys / fp_total_adj",
       "explainer": "For the outcome-weighted averages."
     },
     {
@@ -1926,7 +2197,7 @@
       "label": "Healthy years, all branches",
       "format": "number",
       "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
-      "explainer": "The branches' healthy years (each already adjusted), plus benefits not modelled (a side effect, read at the side-effect weight).",
+      "explainer": "The branches' healthy years (each already adjusted), plus the side effects not in the branches (each read at the shared side-effect weight).",
       "unit": "DALYs"
     },
     {

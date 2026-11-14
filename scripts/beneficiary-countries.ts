@@ -106,7 +106,7 @@ const WORLD: Record<string, string> = {
  * the report). Charities working across many low- and middle-income countries with no main one are
  * spread by world population. */
 const MAIN: Record<string, { b: Record<string, number> | "world"; note: string }> = {
-  "international-rescue-committee-voi-irc-mini-incubator-june-27-2024": { b: { NGA: 1 }, note: "Nothing in the sheet says where; the IRC's GiveWell-funded health pilots run in West and Central Africa: Nigeria, the country GiveWell's other IRC models named most." },
+  "international-rescue-committee-voi-irc-mini-incubator-june-27-2024": { b: { TCD: 1 }, note: "Nothing in the sheet says where; it is linked from GiveWell's September 2024 grant for desk-based scoping of vaccination programmes, whose follow-on grant (April 2026) funds vaccination outreach in Salamat and Sila, Chad." },
   "atlas-ai-atlasai-target-pop-optionality-voi": { b: { NGA: 1 }, note: "Targeting vitamin A supplementation; the sheet's one place named is Nigeria (its notes speak of Nigerian populations)." },
   "evidence-action-syphilis-screen-treat-in-pregnant-women": { b: { ZMB: 0.5, CMR: 0.5 }, note: "Evidence Action's syphilis screening in pregnancy runs in Zambia and Cameroon (its other syphilis models), sharing equally." },
   "dansk-vegetarisk-forening": { b: { DNK: 1 }, note: "Dansk Vegetarisk Forening works in Denmark." },

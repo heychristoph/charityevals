@@ -4,27 +4,29 @@ The International Rescue Committee spent $1.33 billion in the year to September 
 
 ### How the model works
 
-**Nutrition** (about a third of the result). The IRC admitted 638,187 children under five and 85,163 pregnant or lactating women for treatment. Its own cost is about $110 an admission; UNICEF and WFP supply most of the therapeutic food. Half the children are severely wasted. Untreated, about 10% of them die, and treatment averts 60% of those deaths. A moderately wasted child counts at a fifth of that. These are the same figures as charityevals' Save the Children model.
+**Nutrition** (about two fifths of the result). The IRC admitted 638,187 children under five and 85,163 pregnant or lactating women for treatment. Its own cost is about $110 an admission; UNICEF and WFP supply most of the therapeutic food. Half the children are severely wasted. Untreated, about 10% of them die, and treatment averts 60% of those deaths. A moderately wasted child counts at a fifth of that. These are the same figures as charityevals' Save the Children model.
 
-**Other health care** (about a quarter). This is primary, reproductive and mental health care at 2,713 supported facilities, about $330 million once nutrition, vaccination and water are taken out. At $25 a person covered for a year, that is about 13 million people. Their death rate in the crisis is 0.02 a year against a normal 0.008, and the care averts 10% of the excess.
+**Other health care** (about a sixth). This is primary, maternal and mental health care at 2,713 supported facilities, about $300 million once contraception, nutrition, vaccination and water are taken out. At $25 a person covered for a year, that is about 12 million people. A third of them live in acute crises, where deaths run at three times the normal rate, and the rest in protracted ones at 1.3 times. The care averts 10% of the excess.
 
-**Cash** (about a fifth). The IRC gave $52.5 million in cash and vouchers to 1.5 million people, about $34 each. Delivery costs a further 25 cents a dollar. Recipients live on about $700 a year at international prices. This branch is the one measured part of the model: the dollars and the people are counted, and the transfer is itself the benefit.
+**Cash** (about a sixth). The IRC gave $52.5 million in cash and vouchers to 1.5 million people, about $34 each. Delivery costs a further 25 cents a dollar. The cash covers about three months of needs for people who live on about $700 a year at international prices. This branch is the one measured part of the model: the dollars and the people are counted, and the transfer is itself the benefit.
 
-**Vaccination, education, livelihoods, water and protection.** The IRC-led REACH consortium delivers about 8 million doses a year at about $1 a dose. Gavi and UNICEF pay for the vaccines, so the IRC gets a quarter of the credit. Education reaches 602,546 children, at the median learning gain of education trials. Livelihoods spends what is left of the economic budget. Water reaches 2.5 million people. Women's and children's protection counts its mental-health gains in WELLBYs.
+**Contraception** (about a tenth). It is one of the four interventions the IRC says it will scale first, but it publishes no count. We put it at 5% of health spending, at $30 a couple-year of protection, each valued at GiveWell's figure for low-income countries.
+
+**Vaccination, education, livelihoods, water and protection.** The IRC-led REACH consortium delivers about 8 million doses a year at about $1 a dose. Gavi and UNICEF pay for the vaccines, so the IRC gets a quarter of the credit. Education reaches 602,546 children, at the median learning gain of education trials. Livelihoods spends what is left of the economic budget. Water reaches 2.5 million people and also saves the time spent fetching it. Protection counts its mental-health gains in WELLBYs for everyone its spending reaches, not only those counted in safe spaces.
 
 Every branch has the same delivery adjustment (85%) and funging factor (1). Every branch but cash takes the missing-data discount.
 
 ### What drives the result
 
-The missing-data slider comes first. Next are the death rate of severely wasted children without treatment, the value of a child's death, the crisis death rate and the share of it care averts, and the cost of health care per person covered. The combined range runs from about 0.13 to 1.5 healthy years per $1,000. About six times the site's global-health median, this is twice Save the Children: more of the IRC's money goes to malnutrition treatment and cash, whose reach it counts.
+The missing-data slider comes first. Next are the death rate of severely wasted children without treatment, the value of a child's death, the cost of health care per person covered, and the share of excess deaths the care averts. The combined range runs from about 0.11 to 1.3 healthy years per $1,000. That is about four times the site's global-health median and twice Save the Children: more of the IRC's money goes to malnutrition treatment and cash, whose reach it counts.
 
-### What isn't modelled
+### Side effects
 
-Not modelled (+): contraception and safe births beyond the deaths counted, violence prevented by protection work, time saved fetching water, and the IRC's research. Not modelled (-): aid diverted in conflict zones, safeguarding failures, and programmes cut short by the 2025 US funding cuts. Together these are judged at +5%.
+Time saved fetching water and cash's effects on local markets are rows in their branches. Four more are estimated against the result: violence prevented (+0.5%), the IRC's research used by others (+1%), aid diverted in conflict zones (−2%) and safeguarding failures (−0.5%). All of them count at the site's side-effect weight.
 
 ### How this model was checked
 
-Built with charityevals' humanitarian-relief template on 14 November 2026, with eight branches over the crisis line (Convention 4). The mechanical audit passes. The independent audit rounds are in `audits/international-rescue-committee-charityevals/`.
+Built with charityevals' humanitarian-relief template on 14 November 2026, with nine branches over the crisis line (Convention 4). Round 1 of the independent audit had one high finding: the typed unmodelled-benefits share, now replaced by estimated side-effect rows. It also had five medium findings, all fixed: the age mix of deaths now reads the shared stand-in, the crisis death rate is split into acute and protracted settings, nutrition's judgments are anchored, the zero for goods is no longer labelled observed, and side effects are estimated. The lows are fixed too: the price level for cash, the months cash covers, the interval for mental-health prevalence, and reach counted from spending for protection. Contraception, found on the way, became its own branch. Together the changes moved the result from 0.45 to 0.39. The rounds are in `audits/international-rescue-committee-charityevals/`.
 
 ### Sources
 
