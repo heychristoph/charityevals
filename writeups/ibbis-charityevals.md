@@ -11,7 +11,7 @@ The International Biosecurity and Biosafety Initiative for Science is a Swiss fo
 - **The Global DNA Synthesis Map.** A public map of where DNA is made, who screens it and which rules apply, launched in December 2025.
 - **Policy and workshops.** Briefings and submissions in the EU (screening is in the draft EU Biotech Act), the UK and the US, and workshops for companies and regulators in Tanzania, Nigeria and South Africa.
 
-IBBIS publishes no accounts. A Swiss foundation need not, and its website, annual letter and register entry give no figures. Its spending is built from its staff: about 7.5 people on average in 2025, growing to a full-time team of 10, plus fellows, part of whose time it pays. Each work-year is costed at the site's shared figure, $250,000 with overheads, plus a fifth for events and grants. That comes to about $2.4 million.
+IBBIS publishes no accounts. A Swiss foundation need not, and its website, annual letter and register entry give no figures. Its spending is built from its staff: about 7.5 people on average in 2025, growing to a full-time team of 10, plus fellows, part of whose time it pays. Each work-year is costed at the site's shared figure, $250,000 with overheads, plus a fifth for events and grants. That comes to about $2.3 million.
 
 ### How the impact happens
 
@@ -55,7 +55,7 @@ Pandemics that end humanity's future bring about half the result, mostly through
 
 ### How this model was checked
 
-AUDIT
+The model was built from the catastrophic-risk template, with our SecureBio and Johns Hopkins Center for Health Security models as the nearest examples. Round 1 of the independent audit checked the figures against IBBIS's annual letter and its Manifund page and found one high issue: ten rows still carried the template's placeholder sources. They now cite the forecasting tournament and IBBIS's own pages. A medium issue was in this write-up: it said most of the result came from catastrophes the world survives, but about half comes from pandemics that end humanity's future. That was corrected here and in the SecureBio and Johns Hopkins write-ups. The low issues were fixed too: the evidence wording, the comparison with Johns Hopkins, and fellows paid by their own programmes, now left out of IBBIS's cost. Round 2 passed with two low issues. Fellows may already be in the team of 10, so fewer are added, and Sentinel Bio's 2026 grant is now in the next-dollar note. A verification round checked those changes. The rounds are in audits/ibbis-charityevals/.
 
 ### Sources
 
