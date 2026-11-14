@@ -45,7 +45,7 @@ The value of a dollar of work depends on the cause. A donation now buys today's 
 - **The AI sliders**: how likely an AI catastrophe is, and how many years a win counts, move the AI models and so this one.
 - **Pay given up, years stayed and the share caused**: each moves the result threefold to sixfold across its range.
 - **The next dollar**: 15% to 75% moves it fivefold.
-- **The split by cause**: a career in biosecurity or global health counts far more than one in AI safety, because the site's AI models come out low. Most of the result comes from the tenth of careers outside AI.
+- **The split by cause**: a career in biosecurity or global health counts far more than one in AI safety, because the site's AI models come out low. Most of the result comes from the tenth of careers outside AI; biosecurity and nuclear careers alone carry about half of it.
 
 ### Biggest uncertainties
 
