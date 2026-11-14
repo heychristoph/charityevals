@@ -18,7 +18,7 @@ A typical project cuts that risk by a share per dollar, taken from Rethink Prior
 
 ### How the model works
 
-A grant dollar counts as a typical dollar of the grantee's nuclear work. None of the grantees has a model on the site yet. Once one does, its grant will read that model's figure instead. Ploughshares' own coordination and communications count on the same path. The fellowship counts the work it adds: about 1 in 10 fellows staying longer in the field or moving up because of it, over five years. The fellowship's share of the credit for that work is its cost against the fellows' added work, about a third.
+A grant dollar counts as a typical dollar of the grantee's nuclear work. The one grantee with its own model here, the Arms Control Association, comes out the same within 2%. Ploughshares' own coordination and communications count on the same path. The fellowship counts the work it adds: about 1 in 10 fellows staying longer in the field or moving up because of it, over five years. The fellowship's share of the credit for that work is its cost against the fellows' added work, about a third.
 
 Each part has its own adjustments:
 
