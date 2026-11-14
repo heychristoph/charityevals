@@ -369,7 +369,7 @@
     "high": 0.4
    },
    "kind": "judgment",
-   "explainer": "Our judgment: the survey is voluntary after each donation, and 4,714 complete answers over 2019–2022 came from a platform that had about 12,000 donors a year by 2024, many giving several times; its evaluation gives no response rate. 20% (8% to 40%), anchored on GiveWell's 2015 survey covering 42% of its surveyed donors' giving, an email survey with follow-up, where a pop-up after a donation reaches fewer."
+   "explainer": "Our judgment, anchored on its own donor counts: 4,714 complete answers over 2019–2022 against roughly 23,000 donor-years in those years (more than 9,000 donors in 2021, by its review of that year; fewer in 2019–2020, as donations grew from €2.84M in 2020 to €18.86M in 2021; more in 2022), about a fifth of donors; many give several times a year and answers are not weighted by gift size, so the share of donations covered is lower or higher depending on who answers. Its evaluation gives no response rate. 20% (8% to 40%)."
   },
   {
    "id": "survey_response_adj",
@@ -469,81 +469,18 @@
    "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
   },
   {
-   "id": "ues_held_start_eur",
-   "section": "reach",
-   "label": "Donations held for charities by Effektiv Spenden Germany at the start of 2025 (€)",
-   "format": "number",
-   "value": 10972402.77,
-   "kind": "observed",
-   "source": {
-    "title": "UES – Gemeinnützige GmbH für effektives Spenden, Jahresabschluss zum 31. Dezember 2025",
-    "url": "https://effektiv-spenden.org/documents/Jahresabschluss-UES-Gemeinnuetzige-GmbH-fuer-effektives-Spenden-2025.pdf",
-    "page": "Bilanz, p. 2 (Vorjahr)",
-    "quote": "Bestand der erhaltenen aber noch nicht weitergeleiteten Spenden ... 10.972.402,77",
-    "retrieved": "2026-11-14"
-   },
-   "explainer": "Donations received but not yet passed on, at 31 December 2024.",
-   "unit": "EUR"
-  },
-  {
-   "id": "ues_held_end_eur",
-   "section": "reach",
-   "label": "Donations held for charities by Effektiv Spenden Germany at the end of 2025 (€)",
-   "format": "number",
-   "value": 17193145.5,
-   "kind": "observed",
-   "source": {
-    "title": "UES – Gemeinnützige GmbH für effektives Spenden, Jahresabschluss zum 31. Dezember 2025",
-    "url": "https://effektiv-spenden.org/documents/Jahresabschluss-UES-Gemeinnuetzige-GmbH-fuer-effektives-Spenden-2025.pdf",
-    "page": "Bilanz, p. 2",
-    "quote": "Bestand der erhaltenen aber noch nicht weitergeleiteten Spenden 17.193.145,50",
-    "retrieved": "2026-11-14"
-   },
-   "explainer": "Mostly fund donations waiting for the next half-yearly allocation.",
-   "unit": "EUR"
-  },
-  {
-   "id": "ess_held_start_chf",
-   "section": "reach",
-   "label": "Grants received for the next year held by Effektiv Spenden Switzerland at the start of 2025 (CHF)",
-   "format": "number",
-   "value": 3060858,
-   "kind": "observed",
-   "source": {
-    "title": "Effektiv Spenden Schweiz (ESS), Bericht der Revisionsstelle zur eingeschränkten Revision, Jahresrechnung 2025",
-    "url": "https://drive.google.com/file/d/1jDkMkI2TYvsEMuBa_kSsslLDikQ4nqn7/view",
-    "page": "Bilanz per 31. Dezember 2025, p. 2 (2024 column)",
-    "quote": "Erhaltene Fördergelder für Folgejahr 3’171’424 ... 3’060’858",
-    "retrieved": "2026-11-14"
-   },
-   "explainer": "At 31 December 2024.",
-   "unit": "CHF"
-  },
-  {
-   "id": "ess_held_end_chf",
-   "section": "reach",
-   "label": "Grants received for the next year held by Effektiv Spenden Switzerland at the end of 2025 (CHF)",
-   "format": "number",
-   "value": 3171424,
-   "kind": "observed",
-   "source": {
-    "title": "Effektiv Spenden Schweiz (ESS), Bericht der Revisionsstelle zur eingeschränkten Revision, Jahresrechnung 2025",
-    "url": "https://drive.google.com/file/d/1jDkMkI2TYvsEMuBa_kSsslLDikQ4nqn7/view",
-    "page": "Bilanz per 31. Dezember 2025, p. 2",
-    "quote": "Erhaltene Fördergelder für Folgejahr 3’171’424",
-    "retrieved": "2026-11-14"
-   },
-   "explainer": "At 31 December 2025.",
-   "unit": "CHF"
-  },
-  {
    "id": "grant_wait_years",
    "section": "reach",
-   "label": "Average time a donation waits before it reaches the charity (years)",
+   "label": "Average time a platform donation waits before it reaches the charity (years)",
    "format": "number",
-   "formula": "((ues_held_start_eur + ues_held_end_eur) * 0.5 * @fx.usd_per_eur_2025 + (ess_held_start_chf + ess_held_end_chf) * 0.5 * @fx.usd_per_chf_2025) / recorded_donations",
-   "unit": "years",
-   "explainer": "The average balance held over the year divided by the year's donations (the time money spends in a stock is the stock over the flow): about 0.6 years, since its funds allocate twice a year."
+   "value": {
+    "low": 0.1,
+    "best": 0.35,
+    "high": 0.62
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment: its funds allocate twice a year, so fund money waits about a quarter of a year on average plus the time to pay out, while gifts to a named charity are passed on within weeks. The year-end balances held for charities over the year's donations, (€10.97M at the start and €17.19M at the end of 2025 in Germany, UES Bilanz p. 2; CHF 3.06M and 3.17M in Switzerland, ESS Bilanz p. 2) ÷ $32M, give 0.62 years, the high end: December's giving peak inflates both balances. 0.35 years (0.1 to 0.62).",
+   "unit": "years"
   },
   {
    "id": "moved_wait_discount",
@@ -563,14 +500,7 @@
     "best": 0.003,
     "high": 0.01
    },
-   "kind": "estimate",
-   "source": {
-    "title": "TEMPLATE: charityevals model of the downstream intervention",
-    "url": "https://example.org/REPLACE",
-    "page": "REPLACE: page/table",
-    "quote": "REPLACE: verbatim sentence",
-    "retrieved": "2026-01-01"
-   },
+   "kind": "judgment",
    "explainer": "Unused: the policy branch is 0 (units_affected_per_year), so this row multiplies nothing. It keeps the template's figure and range (a typical policy win's value and chance from the family's reference classes) only so the canonical row exists; changing it moves no result."
   },
   {
@@ -677,8 +607,8 @@
    "section": "moved_money",
    "label": "Value of a dollar to the charities Effektiv Spenden's donors gave to (its 2025 split by cause, live), units of value",
    "format": "small",
-   "formula": "(@meta.es_moved_2025_share_poverty * (@meta.es_poverty_2024_share_fund * value_global_health + @meta.es_poverty_2024_share_givedirectly * #givewell:givedirectly + @meta.es_poverty_2024_share_malaria_consortium * #givewell:malaria-consortium + @meta.es_poverty_2024_share_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_poverty_2024_share_deworm_the_world * #givewell:evidence-action) / (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_givedirectly + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation + @meta.es_poverty_2024_share_deworm_the_world) + @meta.es_moved_2025_share_climate * #charityevals:clean-air-task-force + @meta.es_moved_2025_share_animals * #ace:the-humane-league + @meta.es_moved_2025_share_future * avg(#charityevals:center-for-ai-safety, #charityevals:far-ai, #charityevals:govai, #charityevals:johns-hopkins-center-for-health-security, #charityevals:machine-intelligence-research-institute, #charityevals:metr, #charityevals:nuclear-threat-initiative, #charityevals:redwood-research, #charityevals:securebio) + @meta.es_moved_2025_share_democracy * avg(#charityevals:brennan-center-for-justice, #charityevals:protect-democracy, #charityevals:fairvote, #charityevals:transparency-international)) / (@meta.es_moved_2025_share_poverty + @meta.es_moved_2025_share_climate + @meta.es_moved_2025_share_animals + @meta.es_moved_2025_share_future + @meta.es_moved_2025_share_democracy)",
-   "explainer": "Where its donors' money went in 2025 by cause (Transparenz page), each cause at its recipients' figures on the rankings under your values, by the site's rule for a split (normalization.md 2.8). Fighting poverty (48%): its 2024 split within the cause, the latest it publishes (its poverty fund, which follows GiveWell's All Grants Fund, at GiveWell's Top Charities, value_global_health; GiveDirectly, Malaria Consortium, Against Malaria Foundation and Deworm the World at Evidence Action's figure, weighted by their money; the other 14.7% take their average). Climate (21%): Clean Air Task Force, the one recipient with a published model here (our own); its fund, which follows Founders Pledge's Climate Fund, and Future Cleantech Architects, Future Matters and the Good Food Institute take its figure (Founders Pledge's and Giving Green's models of them are not published). Animal welfare (7%): The Humane League (ACE's figure, the one the rankings show), the one modelled recipient; its fund, which follows the EA Animal Welfare Fund, Rethink Priorities and the rest take its figure. Catastrophic risks (12%): none of its recipients (its Longview-advised funds, Safe AI Forum, Civic AI Security Program, Future Matters) has a model, so the site's nine catastrophic-risk charity models, equal weights. Democracy (9%): none of its recipients (HateAid, CORRECTIV, Campact; from August 2025 Power for Democracies' picks) has a model, so the site's four democracy models, equal weights. Meta organisations (2.4%) take the average of the rest."
+   "formula": "(@meta.es_moved_2025_share_poverty * ((1 - @meta.es_ch_share_2025) * (@meta.es_poverty_2024_share_fund * value_global_health + @meta.es_poverty_2024_share_givedirectly * #givewell:givedirectly + @meta.es_poverty_2024_share_malaria_consortium * #givewell:malaria-consortium + @meta.es_poverty_2024_share_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_poverty_2024_share_deworm_the_world * #givewell:evidence-action) / (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_givedirectly + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation + @meta.es_poverty_2024_share_deworm_the_world) + @meta.es_ch_share_2025 * (@meta.es_ch_2025_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_ch_2025_evidence_action * #givewell:evidence-action + @meta.es_ch_2025_givedirectly * #givewell:givedirectly + @meta.es_ch_2025_helen_keller_intl * #givewell:helen-keller-intl + @meta.es_ch_2025_malaria_consortium * #givewell:malaria-consortium + @meta.es_ch_2025_new_incentives * #givewell:new-incentives + @meta.es_ch_2025_strongminds * #hli:strongminds + @meta.es_ch_2025_lafiya_nigeria * #givewell:lafiya-nigeria) / (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_evidence_action + @meta.es_ch_2025_givedirectly + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives + @meta.es_ch_2025_strongminds + @meta.es_ch_2025_lafiya_nigeria)) + @meta.es_moved_2025_share_climate * #charityevals:clean-air-task-force + @meta.es_moved_2025_share_animals * ((1 - @meta.es_ch_share_2025) * #ace:the-humane-league + @meta.es_ch_share_2025 * (@meta.es_ch_2025_the_humane_league * #ace:the-humane-league + @meta.es_ch_2025_sinergia_animal * #ace:sinergia-animal + @meta.es_ch_2025_wild_animal_initiative * #ace:wild-animal-initiative) / (@meta.es_ch_2025_the_humane_league + @meta.es_ch_2025_sinergia_animal + @meta.es_ch_2025_wild_animal_initiative)) + @meta.es_moved_2025_share_future * ((1 - @meta.es_ch_share_2025) * avg(#charityevals:center-for-ai-safety, #charityevals:far-ai, #charityevals:govai, #charityevals:johns-hopkins-center-for-health-security, #charityevals:machine-intelligence-research-institute, #charityevals:metr, #charityevals:nuclear-threat-initiative, #charityevals:redwood-research, #charityevals:securebio) + @meta.es_ch_share_2025 * #charityevals:metr) + @meta.es_moved_2025_share_democracy * avg(#charityevals:brennan-center-for-justice, #charityevals:protect-democracy, #charityevals:fairvote, #charityevals:transparency-international)) / (@meta.es_moved_2025_share_poverty + @meta.es_moved_2025_share_climate + @meta.es_moved_2025_share_animals + @meta.es_moved_2025_share_future + @meta.es_moved_2025_share_democracy)",
+   "explainer": "Where its donors' money went in 2025 by cause (Transparenz page), each cause at its recipients' figures on the rankings under your values, by the site's rule for a split (normalization.md 2.8). Within each cause two recipient lists are blended by the Swiss association's share of the 2025 money (27%): the organisation-wide 2024 split, the latest it publishes for the whole organisation, and the Swiss association's 2025 grants by recipient (audited accounts, the only recipient-level list for 2025); in each, recipients without a model here take the average of the modelled ones in their cause. Fighting poverty (48%): 2024, its poverty fund (which follows GiveWell's All Grants Fund) at GiveWell's Top Charities (value_global_health), GiveDirectly, Malaria Consortium, Against Malaria Foundation and Deworm the World (Evidence Action's figure) by their money; Swiss 2025, Evidence Action, Helen Keller Intl, GiveDirectly, StrongMinds, Against Malaria Foundation, Malaria Consortium, New Incentives and Lafiya by their grants. Climate (21%): Clean Air Task Force (our model) is the one recipient in either list with a published model here; its fund (which follows Founders Pledge's Climate Fund), Future Cleantech Architects, the Good Food Institute, DEPLOY/US and the rest take its figure (Founders Pledge's and Giving Green's models of them are not published). Animal welfare (7%): 2024, The Humane League (ACE's figure, the one the rankings show), the one modelled recipient, its fund (which follows the EA Animal Welfare Fund) and Rethink Priorities taking its figure; Swiss 2025, The Humane League, Sinergia Animal and Wild Animal Initiative by their grants. Catastrophic risks (12%): 2024, none of its recipients (its Longview-advised funds, Safe AI Forum, Civic AI Security Program, Future Matters) has a model, so the site's nine catastrophic-risk charity models, equal weights; Swiss 2025, METR, the one modelled recipient. Democracy (9%): none of its recipients (HateAid, CORRECTIV, Campact; from August 2025 Power for Democracies' picks) has a model, so the site's four democracy models, equal weights. Meta organisations (2.4%) take the average of the rest."
   },
   {
    "id": "moved_side_effects",
