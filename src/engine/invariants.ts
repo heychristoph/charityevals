@@ -10,7 +10,7 @@ import {
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
-import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
+import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SUCCESS_FACT, isDestinationMix, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
@@ -859,6 +859,8 @@ export function inv12(lib: Library): InvariantReport {
         violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_value", detail: `values money moved (${moved.slice(0, 2).map((r) => `"${r.label}"`).join(", ") || m.output!.native?.unit}) but its result doesn't go through the shared moved_dollar_value: write the shared rows (python3 scripts/moved-money.py) and read them` });
       } else if (!MOVED_DOLLAR_FORMULAS.some((f) => sameFormula(v.formula, f))) {
         violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_value formula", detail: `moved_dollar_value is ${v.formula ?? "an input"}, not the shared formula` });
+      } else if (sameFormula(v.formula, OWN_SPLIT.formula) && !isDestinationMix(m.byId.get("value_destinations")?.formula)) {
+        violations.push({ inv: "INV-12", model: m.id, where: "value_destinations", detail: `value_destinations is ${m.byId.get("value_destinations")?.formula ?? "missing"}: it may hold only @meta money by recipient or cause, live results (#id), the shared destination rows, avg() and arithmetic` });
       }
       for (const [id, t] of Object.entries(MOVED_MONEY_ROWS)) {
         const r = m.byId.get(id);
@@ -1368,7 +1370,10 @@ export function inv21(lib: Library, av = assumptionValues(lib.assumptions)): Inv
       if (m.missing_data) violations.push({ inv: "INV-21", model: m.id, where: "missing_data", detail: "a charityevals model carries missing_data: its branches' missing_data_adj rows apply the slider, so the field would count it twice" });
       if (!markers.length) { violations.push({ inv: "INV-21", model: m.id, where: "missing_data_adj", detail: "no missing_data_adj row: every branch says whether its outcome is measured (templates.md Convention 12)" }); continue; }
       const h1 = headline(lib, m, one);
-      const flat = headline(lib, m, av, Object.fromEntries(markers.map((r) => [r.id, 1])));
+      // Models it reads live (a meta charity's destinations) bring their own step: held at their value at 1.
+      const atOne = compute(lib, m, one);
+      const held = Object.fromEntries(modelDepsOf(m).map((x) => [`#${x}`, atOne[`#${x}`]]));
+      const flat = headline(lib, m, av, { ...held, ...Object.fromEntries(markers.map((r) => [r.id, 1])) });
       if (Number.isFinite(h1) && !close(h1, flat, 1e-9)) violations.push({ inv: "INV-21", model: m.id, where: "at 1", detail: `headline ${fmt(h1)} at $${D} = 1, ${fmt(flat)} with every marker at 1: the slider moves the result outside its markers` });
       continue;
     }

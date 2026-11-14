@@ -50,3 +50,33 @@ policy-research-meta instead; the result is the same chain.
 - **Losses and backlash**: a negative share in `unmodelled_benefits_adj` where evidence shows them.
 - A rights charity's media and public-education spending is part of the campaign that wins, not a
   separate reach count.
+
+## Democracy and governance
+
+Voting methods, election rules, voter access, anti-corruption and checks on power: the wins branch,
+with better government as an income gain per person governed, `ln(1 + gain)` in
+`ln_gain_per_person_year` (the uov bridge). The shared figures are in facts/democracy.json:
+
+- **Backsliding averted or democratization**: `@democracy.democratization_gdp_gain`, built up over
+  `democratization_years_to_effect` (the average share reached in the years counted, a ranged judgment),
+  × the chance the work changes the outcome.
+- **Less corruption**: `@democracy.bribery_share_gdp` × the share of its cost removed, ranged; bribes
+  are a transfer, so say what that share stands for.
+- **Better-run spending**: public investment per person × `public_investment_efficiency_gap_<advanced
+  | emerging | low_income>` × the share a reform closes.
+- **A reform within a democracy** (voting method, districting, campaign finance, registration): a ranged
+  share of the democratization gain, anchored on studies of that reform's effect on who is elected or
+  what is decided; never the whole gain. Turnout, registration and voter information count through that
+  change, not per vote.
+- **Years**: `pv_annuity_due(1, $discount_rate + @democracy.electoral_reform_repeal_rate,
+  years_of_impact)` (`years_of_impact` reads `$win_years_counted`; repeal is a separate question from
+  "would have come anyway"); a reform already repealed counts its years in force instead.
+- **Pending campaigns**: `p_success` from `@democracy.lobbied_issue_change_rate`, moved by the issue's
+  own record (a jurisdiction's past ballot measures, a court's rulings), `single_event` for one measure.
+- **Coalitions**: credit is the charity's share of the money behind the win (Convention 2): the ballot
+  committee's donors in the campaign-finance filings, else the named coalition members' spending on it
+  (their 990s), the charity's in-kind staff time counted; never an equal split. A measure put on the
+  ballot by the charity's own petition wouldn't have been voted on without it: that is the counterfactual,
+  `$win_years_counted` already saying it would have come some day.
+- **Backlash** (bans or counter-measures a win provokes, as at state level against local wins): a
+  negative `unmodelled_benefits_adj` share where the record shows it.

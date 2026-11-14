@@ -137,7 +137,7 @@ def donor_rows(prefix, unit_label, staff, marginal=False):
     ]
     if marginal:
         rows.append(f("marginal_vs_past_average", "donor", "How much the next dollar does compared with the average dollar so far", "$marginal_vs_past_average",
-                      "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says.", "percent", published=1))
+                      "TEMPLATE: replace the formula with `@next_dollar.<charity id, - as _>`, the charity's own figure written by docs/normalization.md 2.10 (room × use × run) in facts/next_dollar.json; the slider here is only a placeholder that loads. This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued as a share of the average. 1 in `published`: what the past average itself says.", "percent", published=1))
     return rows
 
 UNITS = json.load(open(os.path.join(ROOT, "assumptions", "default.json")))["units"]

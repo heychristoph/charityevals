@@ -36,13 +36,11 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 - **Invariant (INV-n)**: a site-wide rule over every model (docs/normalization.md section 3); the **lint** (src/engine/lint.ts) checks one model. **Convention n**: the rules below.
 - **Measured / thin** (a branch's outcome for this charity): *measured* when the charity's own count of
   who got the intervention meets an effect from its own controlled evaluation or trials of the same
-  intervention delivered the same way: doses or nets counted and the RCTs' effect; a clinic's counted
-  malaria or HIV patients and the trials of the drugs it gives (an untreated risk is a baseline, not the
-  effect). *Thin*: reach a judgment (spending over an assumed cost, a projection), an effect judged (care
-  with no trial against none: feeding centres, surgery) or from other delivery (household trials for
-  emergency water), or no outcome data. Thin takes `$missing_data_discount`; a judged baseline,
-  counterfactual or attribution has its own row and never makes a branch thin.
-- **Combined range**: audit-model's, every input's range as independent log-space errors. Joint low–high (every input at an end) is the extreme.
+  intervention delivered the same way (nets counted and the RCTs' effect; a clinic's counted patients
+  and the drugs' trials). *Thin*: reach judged (spending over an assumed cost), an effect judged (care
+  with no trial against none) or from other delivery, or no outcome data. Thin takes
+  `$missing_data_discount`; a judged baseline, counterfactual or attribution never makes a branch thin.
+- **Combined range**: audit-model's, every input's range as independent log-space errors.
 
 ## What each shared row means
 
@@ -82,9 +80,8 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    are their outcome-weighted averages, labelled "outcome-weighted average of the branches, for reading only".
    No row upstream of `outcome_total` may read those averages (a formula cycle): rows multiplying by
    `total_adj` take each branch's `<branch>_total_adj` and are summed; `<branch>_outcome` reads the
-   bridges' result, never a conversion slider (INV-2b). A small grant portfolio across families
-   (overseas grants to sister organisations for livelihoods, schools, health, relief) may be one model,
-   a branch per sector, each on its family's chain and shared figures (bridges for units).
+   bridges' result, never a conversion slider (INV-2b). A small grant portfolio across families may be
+   one model, a branch per sector on its family's chain (bridges for units).
 5. **One question per adjustment**, so no doubt is counted twice. Years brought forward and the
    counterfactual are one question: a change that would have come anyway gets zero years or a zero
    counterfactual, not both. Completion and dosage lower `implementation_adj` only where the evidence
@@ -101,9 +98,7 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 9. **Year and programme**: as SKILL.md step 0. A newer run-rate is context or a range end, never
    silently the best guess.
 10. **Judgment anchors**: a judgment that drives the result names its reference class in the explainer.
-11. **Estimate basis**: keep the template's unless the dollar is another kind, and say why (a unit price
-    per item installed is `unit_cost`; won menu or procurement changes against what winning them cost,
-    `past_average`). A past average's cost and wins come from the *same period*: `program_spend ×
+11. **Estimate basis**: keep the template's unless the dollar is another kind, and say why. A past average's cost and wins come from the *same period*: `program_spend ×
     average_spend_vs_year`, the average real spending over the wins' years (Convention 8) ÷ the
     modelled year's. Years without published accounts: a ranged judgment anchored on the nearest one.
 12. **Every programme is modelled; missing data is discounted.** Thin or no outcome data: the family's
@@ -236,12 +231,11 @@ split by `@sad_factors.meal_sads_share_<s>`.
   two studies.
 - **Basis**: Convention 11 (estimate basis); a year's trainings, events or pledges against that year's
   spending are `unit_cost`.
-- **A stock of running wins.** When the charity reports only the meals a year still served under all
-  changes won so far (or a cumulative total), the wins per year are `(meals a year still running +
-  meals a year of changes that lapsed) ÷ the campaign's years`, against the average real spending over
-  the same years. Never the year's flow ÷ the changes' average age.
+- **A stock of running wins** (only the meals a year still served under all changes won so far): wins
+  per year = `(meals a year still running + lapsed) ÷ the campaign's years`, against the average real
+  spending over those years; never the flow ÷ the changes' average age.
 - Self-reported change: social desirability and attrition in `evidence_adj`. Institutional changes:
-  `implementation_adj` is the share of pledged meals served. Production response always applies.
+  `implementation_adj` is the share of pledged meals served.
 
 ## policy-research-meta (uov, wellby, SADs → ced or tco2e; past_average)
 
@@ -251,14 +245,24 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
   `$win_years_counted` × the discounted wait, × adjustments. The value per unit-year uses the shared
   figures a direct model would, or reads the downstream model live (`#model-id`). `p_success` needs a
   reference class.
-- **Money moved or raised**: `money_moved × moved_dollar_net_value`, the shared rows word for word
-  (`python3 scripts/moved-money.py` for another destination set); a not-yet-proven organisation takes
-  `@meta.success_chance_new_org` and the shared success step.
+- **Money moved or raised**: `money_moved × moved_dollar_net_value` (rules below).
 - **Aid or public money won or kept** is worth what that aid does: its known use's figure (a downstream
   model live, `@givewell_shared.cf_value_*`, or recipients' gain less payers' cost), else
   `@aid_value.humanitarian_vs_cash` or `@aid_value.oda_vs_cash` × `@cash.uov_per_dollar`; never a model's own multiple.
-- **Career changes**: `careers_changed × career_change_value × careers_missing_data_adj`. Money
-  moved is measured dollars: no missing-data step.
+- **Career changes**: `careers_changed × career_change_value × careers_missing_data_adj`.
 - Downstream WELLBYs: rename `uov_*` to `wellbys_*`, unit `wellby`. Animals: `sads_*` and the species
   section. Climate (`tco2e`, tonnes of CO₂-equivalent averted): the climate skeleton (normalization.md 2.5).
 - Usually dominated by judgment; say so in the summary.
+
+**Money moved** (shared rows word for word: `python3 scripts/moved-money.py <model> <set> net`):
+
+- `money_moved` = donations recorded × recording (unrecorded giving) × own effect (its donor survey,
+  else `@meta.own_effect_share`); never an evaluator's multiplier or effectiveness step.
+- Pledges: new pledges × yearly giving × discounted years by `@meta.pledge_recording_*`
+  (floor + (first − floor) × (1 − decay)^t).
+- A published split is `value_destinations` (set `own-split`, weights `@meta.<org>_moved_*`, INV-12):
+  recipients live (`#id`, `#owner:charity`), funds that follow an evaluator at its charities; the rest
+  at their cause's modelled average (none modelled: the site's models of that cause); meta and
+  unmodelled causes the average of the rest; below the organisation's own bar,
+  `@meta.prior_vs_cash × #givedirectly`. No split: the cause's set. Not yet proven:
+  `@meta.success_chance_new_org` and the success step. No missing-data step.
