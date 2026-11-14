@@ -18,7 +18,7 @@ The health and nature model values EPA's deaths at the ages of rich-country hear
 
 ### What drives the result
 
-Climate: the US methane rule gives about half of the value, the EU regulation about 30%, the Inflation Reduction Act's tonnes about 10% and the money it won for households about 5%; the repealed rules and MethaneSAT the rest. Methane's tonnes count for their own, earlier warming and the ozone methane forms (the shared conversion), which is why methane rules dominate. Health and nature: the lead-pipe rule gives about 55%, the soot standard most of the rest.
+Climate: the US methane rule gives about half of the value, the EU regulation about a quarter, the Inflation Reduction Act's tonnes about 10% and the money it won for households about 5%; the repealed rules and MethaneSAT the rest. Methane's tonnes count for their own, earlier warming and the ozone methane forms (the shared conversion), which is why methane rules dominate. Health and nature: the lead-pipe rule gives about 55%, the soot standard most of the rest.
 
 ### Biggest uncertainties
 
