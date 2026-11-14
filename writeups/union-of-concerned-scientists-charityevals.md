@@ -1,6 +1,6 @@
 ### Summary
 
-The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in three parts. Its nuclear-weapons and science-and-democracy work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals">16</span> years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from about 0.7 to about 370. Its climate, transport and western states work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-climate">0.0015</span>**, about $180 per tonne of CO₂e averted. Its food and farm work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-food">0.0004</span>**. All three rest on judgments about how much of each outcome is due to UCS.
+The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in three parts. Its nuclear-weapons and science-and-democracy work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals">16</span> years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from about 0.7 to about 370. Its climate, transport and western states work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-climate">0.0015</span>**, about $180 per tonne of CO₂e averted. Its food and farm work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-food">0.0003</span>**. All three rest on judgments about how much of each outcome is due to UCS.
 
 ### What the charity does
 
@@ -44,7 +44,7 @@ UCS's net assets were about 17 months of spending in September 2025, and its don
 
 The nuclear work is about half the first model's cost and almost all its value. The result is below the Arms Control Association's 41, because only half this spending is on nuclear risk and the next dollar counts for less. It is above the Federation of American Scientists' 1.4, which spends only about 3% on nuclear work.
 
-The climate result is near our other climate advocacy models: the Environmental Defense Fund 0.0019 and Clean Air Task Force 0.0067. About half of it comes from the Inflation Reduction Act. The food result is low because the lawsuit was unlikely to win, the government and four other groups fought it, and only farmed wetlands were at stake.
+The climate result is near our other climate advocacy models: the Environmental Defense Fund 0.0020 and Clean Air Task Force 0.0067. About half of it comes from the Inflation Reduction Act. The food result is far below our other environmental models because the lawsuit was unlikely to win, the government and four other groups fought it, only farmed wetlands were at stake and they drain slowly, and the flood damage averted is money for US households.
 
 ### Biggest uncertainties
 
@@ -52,6 +52,7 @@ The climate result is near our other climate advocacy models: the Environmental 
 - **How many years a cut or a won policy counts.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The share of people who die in a war the world survives runs from 15% to 85%.
 - **UCS's share of each climate win, and how much of each survives.** These are judgments.
+- **UCS's share of the wetland defence.** It was not a party to the case; its 1% share moves the food result ten times either way.
 
 ### What isn't modelled
 
@@ -67,7 +68,7 @@ The three models were built from their family templates: the catastrophic-risk o
 - Union of Concerned Scientists, Form 990s for the years to September 2022 to 2025, and its audited statements.
 - Union of Concerned Scientists, 2025 Annual Report.
 - California Air Resources Board, Advanced Clean Cars II announcement (August 2022), and its 2026 cap-and-invest rulemaking notice.
-- Iowa Environmental Council, on the 2025 wetland ruling; DTN, on UCS's wetland analysis (December 2024).
+- Iowa Environmental Council and Food & Water Watch, on the 2025 wetland ruling; DTN, on UCS's wetland analysis (December 2024).
 - Bistline et al., Science (2023), on the Inflation Reduction Act's cuts by sector.
 - Karger et al., Forecasting Existential Risks (Forecasting Research Institute, 2023).
 - Rethink Priorities, Cross-Cause Cost-Effectiveness Model.

@@ -7,7 +7,7 @@
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, $5.1M with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year was part of the case for the federal wetland protections (Swampbuster) that a court upheld in May 2025 against a challenge filed in 2024; its other work is a share. At the defaults a dollar given keeps about 0.0004 years of healthy life per $1,000 (flood damage averted, valued as consumption to the average American), from 0.000007 to 0.02 on the combined range. It is small because the challenge was unlikely to succeed, the government and four other groups fought the case (UCS, not a party, is credited with 1%), only farmed wetlands are at stake and drain slowly, and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the chance the challenge would have won and the drainage rate each move it several times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
+  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, $5.1M with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year was part of the case for the federal wetland protections (Swampbuster) that a court upheld in May 2025 against a challenge filed in 2024; its other work is a share. At the defaults a dollar given keeps about 0.0003 years of healthy life per $1,000 (flood damage averted, valued as consumption to the average American), from 0.000005 to 0.014 on the combined range. It is far below its peers because the challenge was unlikely to succeed, the government and four other groups fought the case (UCS, not a party, is credited with 1%), only farmed wetlands are at stake and drain slowly, and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the chance the challenge would have won and the drainage rate each move it several times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Union of Concerned Scientists (food and farms)",
@@ -194,17 +194,34 @@
       "explainer": "The shared years a won reform counts ($win_years_counted): the protections kept count for the years before the question would have been settled anyway; the drainage builds up over them (wetland_share_lost)."
     },
     {
+      "id": "year_discount_factor",
+      "section": "effect",
+      "label": "One year's discount factor",
+      "format": "number",
+      "formula": "(1 + $discount_rate) ^ -1",
+      "explainer": "The shared discount rate, as a factor per year."
+    },
+    {
+      "id": "buildup_years",
+      "section": "effect",
+      "label": "Average years of drainage built up over the years counted, discounted",
+      "format": "number",
+      "formula": "(1 - (years_of_impact + 1) * year_discount_factor ^ years_of_impact + years_of_impact * year_discount_factor ^ (years_of_impact + 1)) / ((1 - year_discount_factor) * (1 - year_discount_factor)) / pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "years",
+      "explainer": "In year t of the years counted, t years' drainage is gone: the discounted sum of 1, 2, … over the years counted (an increasing annuity), over the discounted years themselves, so the build-up is weighted like the years it multiplies. About 2.9 at 5 years and 4%."
+    },
+    {
       "id": "farmed_wetland_share",
       "section": "effect",
       "label": "Share of the wetlands Swampbuster protects (farmed land of farmers in USDA programmes)",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.6
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Swampbuster binds only farmers who take USDA programme benefits, on wetlands on or next to farmland; the region's other wetlands are public, unfarmed or under state law (Minnesota's Wetland Conservation Act, Wisconsin's wetland rules). 40% (20% to 60%), our judgment for the Upper Midwest, where most land is farmed and most farmers take USDA benefits."
+      "explainer": "Swampbuster binds only farmers who take USDA programme benefits, on wetlands on or next to farmland; the region's other wetlands are forested, public or under state law (Minnesota's Wetland Conservation Act, Wisconsin's wetland rules). Nationally about a sixth of non-federal wetlands sit on cropland, pasture and conservation-reserve land and most on forest land (USDA's 1997 National Resources Inventory); the share is higher in the farmed prairie-pothole parts of the Upper Midwest (Iowa, the Dakotas, southern Minnesota) and lower in the forested north. 30% (15% to 50%), our judgment."
     },
     {
       "id": "drain_rate_per_year",
@@ -217,15 +234,21 @@
         "high": 0.01
       },
       "kind": "judgment",
-      "explainer": "The US lost wetlands at about half a percent a year at the 1950s-1970s peak of farm drainage, before Swampbuster (US Fish and Wildlife Service, Status and Trends of Wetlands, 1950s to 1970s); with high crop prices and tile drainage cheap, farmers freed of the rule would drain at about that rate: 0.5% a year (0.2% to 1%), our judgment."
+      "explainer": "Before Swampbuster (1985) the US lost inland wetlands at about half a percent a year, mostly drained for farming (Fish and Wildlife Service, 1950s-1970s); with high crop prices and cheap tile drainage, farmers freed of the rule would drain at about that rate: 0.5% a year (0.2% to 1%), our judgment. With the farmed share, about 0.15% of the region's wetlands a year, below the pre-1985 national rate because most of the region's wetlands aren't farmed.",
+      "source": {
+        "title": "Frayer et al. (1983), Status and Trends of Wetlands and Deepwater Habitats in the Conterminous United States, 1950s to 1970s (US Fish and Wildlife Service)",
+        "url": "https://www.fws.gov/sites/default/files/documents/Status-and-Trends-of-Wetlands-and-Deepwater-Habitats-in-the-Conterminous-United-States-1950s-to-1970s.pdf",
+        "retrieved": "2026-11-14",
+        "note": "Losses of palustrine (inland, mostly farmable) wetlands of about 4.5 million hectares (11 million acres) between the mid-1950s and mid-1970s: about half a million acres, some half a percent, a year, mostly to agriculture."
+      }
     },
     {
       "id": "wetland_share_lost",
       "section": "effect",
       "label": "Average share of the flood protection lost over the years counted if the protections fell",
       "format": "percent",
-      "explainer": "Drainage builds up: in year t of the years counted, t years' drainage is gone, so the average share lost is the protected share × the yearly rate × (years + 1) ÷ 2 (the years counted are the shared slider). Wetlands' flood protection is taken as proportional to their area.",
-      "formula": "farmed_wetland_share * drain_rate_per_year * (years_of_impact + 1) * 0.5"
+      "explainer": "Drainage builds up: the protected share × the yearly rate × the average years of drainage built up over the years counted (buildup_years, weighted like the discounted years). Wetlands' flood protection is taken as proportional to their area.",
+      "formula": "farmed_wetland_share * drain_rate_per_year * buildup_years"
     },
     {
       "id": "value_per_dollar_us",
@@ -264,13 +287,13 @@
       "label": "Years from the win until the policy takes effect",
       "format": "number",
       "value": {
-        "low": 0,
-        "best": 1,
+        "low": 1,
+        "best": 2,
         "high": 3
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Had the challenge succeeded (a ruling in 2025, appeals after), drainage would follow within about a year or two: 1 (0 to 3), our judgment; discounted at the shared rate."
+      "explainer": "Had the challenge won in the end, it would have been after appeals (a year or two), and drainage would follow: 2 (1 to 3) years, our judgment; discounted at the shared rate."
     },
     {
       "id": "wait_discount",
@@ -321,12 +344,13 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "The district court's ruling (29 May 2025) is final: no appeal was filed by the July 2025 deadline. A new challenge later is the shared years a win counts, not asked again here. 0.9 (0.7 to 1.0), our judgment: the government, which also defended the rule, might have won alone on the same grounds (the case turned on the spending power and on exhausting administrative remedies).",
+      "explainer": "The district court's ruling (29 May 2025) is final: no appeal was filed by the July 2025 deadline. But it rested partly on the plaintiffs not exhausting USDA's own appeals, and the same backers could bring a new case, so the ruling removed most, not all, of the risk in the years counted: 0.9 (0.7 to 1.0), our judgment. Who else defended the rule (the government, four groups) is the credit share, not asked here.",
       "source": {
         "title": "Food & Water Watch (5 August 2025), on the final ruling in CTM Holdings v. USDA",
         "url": "https://www.foodandwaterwatch.org/?p=13137",
         "retrieved": "2026-11-14",
-        "note": "The plaintiffs did not appeal; the judgment stands."
+        "quote": "Pacific Legal Foundation could file a new case challenging Swampbuster in the future.",
+        "note": "Also: \"The decision not to appeal means that the district court decision is final and binding.\""
       }
     },
     {
@@ -384,7 +408,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "The rest of the programme and the win's other goods, each a share of the wetland branch's value: fertilizer (nitrogen) analysis and advocacy, whose cuts in nitrous oxide and nitrate pollution would count in tonnes and health; the San Joaquin Valley groundwater recommendations; the farm bill's conservation programmes and farmworkers' heat and pesticide protections; analysis of the costs of tariffs to farmers; and, from the wetlands kept, nitrate removal, habitat, the carbon drainage would release, and Sodbuster's protection of erodible land (decided in the same case). None has a counted win of the year, so each counts only for the chance it moves a later rule: together half the wetland branch's value, 50% (15% to 60%), our judgment, inside the family's bounds.",
+      "explainer": "The rest of the programme and the win's other goods, each a share of the wetland branch's value: fertilizer (nitrogen) analysis and advocacy, whose cuts in nitrous oxide and nitrate pollution would count in tonnes and health; the San Joaquin Valley groundwater recommendations; the farm bill's conservation programmes and farmworkers' heat and pesticide protections; analysis of the costs of tariffs to farmers; and, from the wetlands kept, nitrate removal, habitat, the carbon drainage would release, and Sodbuster's protection of erodible land (decided in the same case). The programme's other work has no counted win of the year, so it counts only for the chance it moves a later rule; the wetlands' other goods ride on the same small chance and credit as their flood protection: together half the wetland branch's value, 50% (15% to 60%), our judgment, inside the family's bounds.",
       "source": {
         "title": "Union of Concerned Scientists, 2025 Annual Report (fiscal year 1 October 2024 to 30 September 2025)",
         "url": "https://www.ucs.org/sites/default/files/2025-11/2025-UCS-annual-report.pdf",

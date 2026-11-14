@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "environmental-defense-fund",
   "owner": "charityevals",
-  "summary": "The Environmental Defense Fund (EDF; New York, with offices in Europe, China, India, Mexico, Indonesia and Japan) uses science, economics, law and advocacy for environmental policy; this model covers its climate and regional work ($120.6M in its year to September 2025, $169M with its share of core capacities) and counts the largest climate policies it worked on that were won in October 2021 to September 2025 (EPA's oil and gas methane rule, the EU Methane Regulation, the Inflation Reduction Act, EPA's power-plant and vehicle standards) and its MethaneSAT satellite, lost after 15 months, whose cost is added to the period's. At the defaults a dollar given averts about 0.0044 tonnes of CO₂e (about $230 a tonne), 0.0019 years of healthy life per $1,000, over four-fifths of it from the two methane rules, whose tonnes count for methane's own, earlier warming and the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (EDF is credited with 2% to 25% of the advocacy behind each), the US rules and the law's credits have since been delayed, cut back or repealed, and EDF's climate spending is large. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "The Environmental Defense Fund (EDF; New York, with offices in Europe, China, India, Mexico, Indonesia and Japan) uses science, economics, law and advocacy for environmental policy; this model covers its climate and regional work ($120.6M in its year to September 2025, $169M with its share of core capacities) and counts the largest climate policies it worked on that were won in October 2021 to September 2025 (EPA's oil and gas methane rule, the EU Methane Regulation, the Inflation Reduction Act, EPA's power-plant and vehicle standards) and its MethaneSAT satellite, lost after 15 months, whose cost is added to the period's. At the defaults a dollar given averts about 0.0045 tonnes of CO₂e (about $220 a tonne), 0.0020 years of healthy life per $1,000, over four-fifths of it from the two methane rules, whose tonnes count for methane's own, earlier warming and the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (EDF is credited with 2% to 25% of the advocacy behind each), the US rules and the law's credits have since been delayed, cut back or repealed, and EDF's climate spending is large. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Environmental Defense Fund (climate)",
@@ -790,6 +790,40 @@
       "unit": "years"
     },
     {
+      "id": "usmeth_win_year",
+      "section": "effect",
+      "label": "EPA oil and gas methane rule: year the win was final",
+      "format": "integer",
+      "value": 2023,
+      "kind": "observed",
+      "source": {
+        "title": "US EPA (2023), Regulatory Impact Analysis for the final oil and natural gas standards",
+        "url": "https://www.epa.gov/system/files/documents/2023-12/eo12866_oil-and-gas-nsps-eg-climate-review-2060-av16-ria-20231130.pdf",
+        "retrieved": "2026-11-14",
+        "page": "title page (final rule, signed 2 December 2023)",
+        "note": "The RIA counts cuts from 2024 to 2038."
+      },
+      "explainer": "EPA signed the final rule in December 2023; its estimate runs from 2024.",
+      "unit": "Year"
+    },
+    {
+      "id": "usmeth_years_until_avoided",
+      "section": "effect",
+      "label": "EPA oil and gas methane rule: years from the win until its tonnes start",
+      "format": "number",
+      "formula": "usmeth_first_year - usmeth_win_year",
+      "unit": "years",
+      "explainer": "The win's own dates (climate.md: a policy with its own compliance dates uses them), in place of the shared wait."
+    },
+    {
+      "id": "usmeth_discounted_years",
+      "section": "effect",
+      "label": "EPA oil and gas methane rule: discounted years counted, after the wait",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -usmeth_years_until_avoided",
+      "unit": "years"
+    },
+    {
       "id": "pwr_win_year",
       "section": "effect",
       "label": "EPA power-plant standards: year the win was final",
@@ -889,7 +923,7 @@
       "section": "effect",
       "label": "EPA methane rule: expected tonnes before adjustments",
       "format": "number",
-      "formula": "usmeth_tonnes_per_year * p_success * discounted_years",
+      "formula": "usmeth_tonnes_per_year * p_success * usmeth_discounted_years",
       "unit": "t CO₂e"
     },
     {
