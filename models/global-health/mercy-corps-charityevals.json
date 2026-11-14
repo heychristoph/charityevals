@@ -41,7 +41,7 @@
   "estimate_basis": "unit_cost",
   "charity": "mercy-corps",
   "owner": "charityevals",
-  "summary": "Mercy Corps (renamed Prosper Global in 2026) spent $509 million on programmes in its year to June 2025, half of it in Sub-Saharan Africa: livelihoods and market systems ($207M), emergency relief ($138M, mostly cash, water and supplies through partners in Sudan, Gaza, Ukraine and elsewhere), peace, governance and education ($90M), health and nutrition ($43M) and recovery ($31M). It counts people reached (over 36 million) but publishes no controlled measure of what its spending achieved, so every branch is built from its spending, its reach or a judged cost per person and the research on that kind of work, and every branch is discounted for missing data. It comes to about 0.18 years of healthy life per $1,000 (combined range 0.03-0.95: the result is mostly uncertainty), below the site's global-health median and near World Vision and Save the Children: half from livelihoods (small consumption gains spread over the 19 million people its economic programmes reach), a third from relief (cash and goods, and a few excess crisis deaths averted), little from water, nutrition, education and peace work. The biggest uncertainties are how much the livelihood programmes raise consumption for the many people they reach only indirectly, the missing-data discount, and crisis-affected people's consumption.",
+  "summary": "Mercy Corps (renamed Prosper Global in 2026) spent $509 million on programmes in its year to June 2025, half of it in Sub-Saharan Africa: livelihoods and market systems ($207M), emergency relief ($138M, mostly cash, water and supplies through partners in Sudan, Gaza, Ukraine and elsewhere), peace, governance and education ($90M), health and nutrition ($43M) and recovery ($31M). It counts people reached (over 36 million) but publishes no controlled measure of what its spending achieved, so every branch is built from its spending, its reach or a judged cost per person and the research on that kind of work, and every branch is discounted for missing data. It comes to about 0.17 years of healthy life per $1,000 (combined range 0.03-0.94: the result is mostly uncertainty), below the site's global-health median and near World Vision and Save the Children: half from livelihoods (small consumption gains spread over the 19 million people its economic programmes reach), a third from relief (cash and goods, and a few excess crisis deaths averted), little from water, nutrition, education and peace work. The biggest uncertainties are how much the livelihood programmes raise consumption for the many people they reach only indirectly, the missing-data discount, and crisis-affected people's consumption.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Mercy Corps, all programmes",
@@ -807,8 +807,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per person reached by relief",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person / baseline_consumption)",
-      "explainer": "A year's goods on the site's one log-income scale."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person / (baseline_consumption * years_exposed))",
+      "explainer": "The cash and goods on the site's one log-income scale over the time they are used: they raise consumption during the months each person is covered (years_exposed), so the gain is years_exposed × ln(1 + value ÷ the consumption of that period), the site's rule for a transfer used within a year."
     },
     {
       "id": "rec_value_share",
@@ -884,12 +884,26 @@
       "explainer": "GiveWell's GiveDirectly model counts part of the invested principal as consumed at the end; livestock and tools depreciate, and recurring droughts and fighting destroy assets. Judgment 30% (0-60%)."
     },
     {
+      "id": "rec_consumption_years",
+      "section": "effect",
+      "label": "Years over which the consumed part of a recovery grant is spent",
+      "format": "number",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Recovery cash and vouchers tide a household over until a harvest or until a business restarts: a season, often paid in two or three instalments. Judgment half a year (a quarter to a full year).",
+      "unit": "years"
+    },
+    {
       "id": "rec_ln_gain_per_person",
       "section": "effect",
       "label": "ln(consumption) gain per person reached by recovery, discounted",
       "format": "small",
-      "formula": "ln(1 + rec_value_per_person * (1 - rec_invested_share) / baseline_consumption) + ln(1 + rec_value_per_person * rec_invested_share * rec_return_rate / baseline_consumption) * pv_annuity_due(1, $discount_rate, rec_return_years) * (1 + $discount_rate) ^ (0 - 1) + ln(1 + rec_value_per_person * rec_invested_share * rec_principal_recovered / baseline_consumption) * (1 + $discount_rate) ^ (0 - rec_return_years)",
-      "explainer": "The consumed part in the first year, then the invested part's yearly return for its years, starting a year later, and what is left of the principal consumed at the end, all discounted at the shared rate."
+      "formula": "rec_consumption_years * ln(1 + rec_value_per_person * (1 - rec_invested_share) / (baseline_consumption * rec_consumption_years)) + ln(1 + rec_value_per_person * rec_invested_share * rec_return_rate / baseline_consumption) * pv_annuity_due(1, $discount_rate, rec_return_years) * (1 + $discount_rate) ^ (0 - 1) + ln(1 + rec_value_per_person * rec_invested_share * rec_principal_recovered / baseline_consumption) * (1 + $discount_rate) ^ (0 - rec_return_years)",
+      "explainer": "The consumed part over the months it is spent (the site's rule for a transfer used within a year: t × ln(1 + value ÷ the consumption of those months)), then the invested part's yearly return for its years, starting a year later, and what is left of the principal consumed at the end, all discounted at the shared rate."
     },
     {
       "id": "income_mortality_uov_ratio",
@@ -963,7 +977,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Mercy Corps calls its outcome figures 'participant reach' (Mercy Corps Europe's report, p. 22, a table of the programmes Mercy Corps Europe funds), but its global count of 19 million (p. 25) is wider, and many market, savings-group and resilience programmes count every household member or several members of one household. Judgment 20% (0-60%) of direct participants counted alone, whose households' other members gain too."
+      "explainer": "Mercy Corps' published counts are mostly of everyone in the households served: cash recipients are counted as individuals in their households (the Sudan consortium's '1.9M individuals' reached by multipurpose cash, Mercy Corps Europe's report p. 24) and livelihood results as households (Georgia's ALCP: '9,169 rural households' increasing their income, p. 26), which become people when the outcome areas are totalled. Programmes that count only the person trained or funded (savings-group members, youth skills, small-business grants) are the minority of the livelihood line. Judgment a fifth (0-60%): at 0 every count already includes the household; the high end if most of the 19 million are trainees and members counted alone. This is why the multiplier is near 1.7, not the full household size that World Vision's and Save the Children's models apply to counts of households."
     },
     {
       "id": "liv_household_gain_multiplier",
