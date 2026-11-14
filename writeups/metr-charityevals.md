@@ -1,10 +1,10 @@
 ### Summary
 
-METR (Model Evaluation and Threat Research) measures what frontier AI agents can do on their own, and whether the companies that build them could lose control of them. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="metr-charityevals">0.05</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.003 to about 0.4.
+METR (Model Evaluation and Threat Research) measures what frontier AI agents can do on their own, and whether the companies that build them could lose control of them. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="metr-charityevals">0.06</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.004 to about 0.5.
 
 ### What the charity does
 
-METR began as ARC Evals, a team inside the Alignment Research Center, and 2024 was its first year as a charity of its own. It spent $8.2 million that year, according to its Form 990 (its statements were audited). Its one programme cost $6.9 million:
+METR began as ARC Evals, a team inside the Alignment Research Center, and became a charity of its own in 2024. Its first Form 990 covers May to December 2024: it spent $8.2 million in those eight months (its statements were audited). Its one programme cost $6.9 million:
 
 - **Evaluations before release.** With OpenAI and Anthropic, it tested GPT-4o, o1-preview and Claude 3.5 Sonnet for autonomous abilities before or soon after release.
 - **Measurement research.** It built task suites timed against human experts and RE-Bench, which compares AI agents with people on AI research tasks. It pays contractors to build tasks and to set the human baselines ($1.1 million).
@@ -31,22 +31,22 @@ All the work counts as work against AI escaping control. Some of its tasks are c
 | How far a typical project's effect applies to METR's work | 1.2 | Labs run its evaluations on their models before release; the family's upper bound |
 | Work no one else would have done now | 0.65 | Government AI safety institutes and lab teams also test models before release |
 | METR's share of the resources behind its work | 0.7 | The companies give model access, staff time and free tokens |
-| Funging by its main funders | 0.85 | Large funders such as The Audacious Project fill gaps |
+| Funging by its main funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about METR's effect on the risk is measured |
 
 Side effects: other benefits add 10% (its measures inform governments and the public about AI progress). Two harms subtract 10% and 2%. A report that finds nothing dangerous can make a release look safe, and its benchmarks give developers targets and feed the race. Its published methods show a little about building autonomous agents.
 
-METR ended 2024 with net assets of $5.4 million, under a year of spending. But The Audacious Project committed about $17 million in October 2024, and METR raised commitments of about $71 million in the six months to August 2026. Money is not its main constraint, so the next dollar counts at 28% of the past average.
+METR ended 2024 with net assets of $5.4 million, about five months of spending. But The Audacious Project committed about $17 million in October 2024, and METR raised commitments of about $71 million in the six months to August 2026. Money is not its main constraint, so the next dollar counts at 28% of the past average.
 
 ### What drives the result
 
-The result is under a tenth of the median for this cause and close to Redwood Research's (0.05) and MIRI's (0.07). The reason is that all of METR's work is against AI escaping control. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
+The result is under a tenth of the median for this cause and close to Redwood Research's (0.07) and MIRI's (0.07). The reason is that all of METR's work is against AI escaping control. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.006 to 0.32.
-- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.013 to 0.40.
-- **Whether any of the work counts as misuse work.** If the cybersecurity tasks counted as misuse work (about 10% of the work), the result would be 0.44.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.007 to 0.38.
+- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.015 to 0.47.
+- **Whether any of the work counts as misuse work.** If the cybersecurity tasks counted as misuse work (about 10% of the work), the result would be 0.52.
 - **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 1.
 
 ### What isn't modelled
@@ -57,7 +57,7 @@ The result is under a tenth of the median for this cause and close to Redwood Re
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with Redwood Research's model as the worked example.
+The model was built from the catastrophic-risk template, with Redwood Research's model as the worked example. Round 1 of the independent audit passed with two medium findings, both fixed: the tax return covers only May to December 2024, and the funging adjustment asked again whether money is the constraint, which the next-dollar figure already asks. Funging is now 1 here and in every catastrophic-risk model, raising this result from 0.048 to 0.057. Independent audits are in audits/metr-charityevals/.
 
 ### Sources
 
