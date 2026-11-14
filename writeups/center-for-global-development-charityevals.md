@@ -1,6 +1,6 @@
 ### Summary
 
-The Center for Global Development (CGD) is a think tank whose economists research and argue for better aid and development policy. Our model counts its work since 2002 against three changes it helped bring about: the advance market commitment that brought pneumococcal vaccine to poor countries early, the development banks' recent capital reforms, and the design of the US Millennium Challenge Corporation. It comes to **<span data-figure="headline" data-model="center-for-global-development-charityevals">1.0</span> years of healthy life per 1,000 dollars**, more than ten times the site's global-health median, because the vaccine branch counts child deaths averted across a programme reaching tens of millions of children a year, of which a small credited share still outweighs CGD's budget. It is a very uncertain figure: CGD's share of the credit and the years a win counts are our judgments.
+The Center for Global Development (CGD) is a think tank whose economists research and argue for better aid and development policy. Our model counts its work since 2002 against three changes it helped bring about: the advance market commitment that brought pneumococcal vaccine to poor countries early, the development banks' recent capital reforms, and the design of the US Millennium Challenge Corporation. It comes to **<span data-figure="headline" data-model="center-for-global-development-charityevals">1.6</span> years of healthy life per 1,000 dollars**, more than ten times the site's global-health median, because the vaccine branch counts child deaths averted across a programme reaching tens of millions of children a year, of which a small credited share still outweighs CGD's budget. It is a very uncertain figure: CGD's share of the credit and the years a win counts are our judgments.
 
 ### What the charity does
 
@@ -13,14 +13,15 @@ Ideas become policy when governments and agencies adopt them. An advance market 
 ### How the model works
 
 - **Cost:** an average year of spending since 2002 from the audited accounts (CGD Europe included from 2014), in 2025 prices, with 2002-2004 judged before the shared price index begins. That comes to 80% of 2025's spending.
-- **Pneumococcal vaccine (about three quarters of the result):**
+- **Pneumococcal vaccine (about 80% of the result):**
   - 33 million children a year got the vaccine with Gavi's support in 2015-2019; the AMC's evaluation estimates 260,000 child deaths averted for the first 49 million children;
-  - each death averted is valued at the site's value of a child's death; the vaccine money (doses, delivery and the donors' US$1.5 billion top-up) is subtracted at what it would have done as other aid;
+  - each death averted is valued at the site's value of a child's death, with the children's later income gain and GiveWell's shared supplements (illness, treatment costs, investment of income, protection of the unvaccinated, less replacement by other strains), together about 70% more;
+  - the money spent is subtracted at what it would otherwise have done: the doses (US$3.00 each) and the donors' US$1.5 billion top-up at GiveWell's figure for a dollar of Gavi spending, delivery at its figure for a country's own health spending;
   - the AMC gets 40% of the credit for the faster spread (the evaluation names other causes too), CGD 15% of the AMC;
-  - we trust the modelled deaths at 70%; illness averted adds GiveWell's shared 6%.
-- **Development banks' capital reforms (about a fifth):** the banks' US$200 billion of extra lending capacity, lent over about ten years, 60% of it used; a dollar lent is worth its grant element, judged 15% of a dollar of aid, at the site's shared value of aid; CGD gets 5% of the credit; extra debt risk takes away 5%.
-- **Millennium Challenge Corporation (2%):** its US$930 million a year, judged 10% better used than other aid because of the design CGD argued for, CGD credited with 10%; reforms countries make to qualify add 10%.
-- **All three** count for the years a won reform counts on the site, after a discounted wait, are spread over the 24 years of work, and are discounted by the shared missing-data slider, as no study measures CGD's part. Its other work (3ie, the Commitment to Development Index, labour mobility, Nigeria's debt relief, health technology assessment, education) adds a judged 40%.
+  - we trust the modelled deaths at 70%.
+- **Development banks' capital reforms (about 17%):** the banks' US$200 billion of extra lending capacity, trusted at 80%, lent over about ten years, 60% of it used; a dollar lent is worth its grant element, judged 15% of a dollar of aid, at the site's shared value of aid of unknown use; CGD gets 5% of the credit; extra debt risk takes away 5%.
+- **Millennium Challenge Corporation (3%):** its US$18 billion of compacts since 2005, about US$0.9 billion a year, judged 10% better used than other aid because of the design CGD argued for, CGD credited with 10%; reforms countries make to qualify add 2% of MCC's whole value.
+- **All three** count for the years a won reform counts on the site, after a discounted wait, are spread over the 24 years of work, and are discounted by the shared missing-data slider, as no study measures CGD's part. Its other work (3ie, the Commitment to Development Index, labour mobility, Nigeria's debt relief, health technology assessment, education) adds a judged 40%, anchored on the spread of the three modelled wins.
 - **The next dollar** is valued at 36% of the average: CGD holds about 21 months of spending in reserve and its biggest wins are behind it.
 
 ### What drives the result
@@ -39,7 +40,7 @@ CGD's other wins enter only as a share of the three modelled; none is valued on 
 
 ### How this model was checked
 
-Audit rounds are listed in audits/center-for-global-development-charityevals/.
+Audit rounds are listed in audits/center-for-global-development-charityevals/. Round 1 found two high, two medium and four low issues. The vaccine branch now counts the children's later income and GiveWell's shared supplements on the deaths' value, as the site's other child-vaccine models do, and values the vaccine money at Gavi's and governments' figures, since its use is known. The banks' and MCC's evidence adjustments no longer discount twice; the dose price, MCC's yearly funding (from compacts signed) and the size of the MCC effect were corrected, and the other work's share is anchored. Together these took the result from 1.0 to 1.6.
 
 ### Sources
 
