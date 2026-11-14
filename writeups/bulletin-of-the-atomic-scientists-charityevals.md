@@ -20,7 +20,7 @@ Each risk carries a yearly chance of catastrophe, taken from the experts' foreca
 
 A typical project cuts each risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths are valued across the world's age groups like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, which count only through the discount rate.
 
-Climate coverage is valued in tonnes of greenhouse gas kept out of the air. We start from the climate funds' best picks, about $2 a tonne (Rethink Priorities' summary), and judge that a typical climate dollar does about 4% as much. The site's one conversion then turns tonnes into deaths.
+Climate coverage is valued at the site's own average for a dollar of climate work: the mean of the climate charities on the rankings, whose tonnes of greenhouse gas kept out of the air are already turned into healthy years by the site's one conversion.
 
 ### How the model works
 
@@ -62,13 +62,12 @@ The result is below the Arms Control Association's 41, the Nuclear Threat Initia
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with a climate branch added that counts tonnes of greenhouse gas. Round 1 of the independent audit passed with four medium and three small findings, all fixed. The split between areas now follows the year's 316 articles instead of the next year's projects. The nuclear work gets the site's figure for public-facing work. The climate tonnes start from a shared, published cost per tonne instead of another of our models. Three sources and two small figures were corrected. Round 2 passed with five small findings, all fixed, and a final round checked those fixes. The rounds are in audits/bulletin-of-the-atomic-scientists-charityevals/.
+The model was built from the catastrophic-risk template, with a climate branch added that reads the site's climate average. Round 1 of the independent audit passed with four medium and three small findings, all fixed. The split between areas now follows the year's 316 articles instead of the next year's projects. The nuclear work gets the site's figure for public-facing work. The climate branch first started from a shared, published cost per tonne; it now reads the site's own climate average (the result moved from 16.1485 to 16.1487 years per $1,000). Three sources and two small figures were corrected. Round 2 passed with five small findings, all fixed, and a final round checked those fixes. The rounds are in audits/bulletin-of-the-atomic-scientists-charityevals/.
 
 ### Sources
 
 - Bulletin of the Atomic Scientists Form 990 for the year ended June 2025 (IRS e-file data).
 - Bulletin of the Atomic Scientists, 2024 and 2025 Annual Reports, and its staff page.
 - Bulletin of the Atomic Scientists, topic listings for July 2024 to June 2025.
-- Clare & Vargas, Can climate change be more cost-effective than the best GHD interventions? (Rethink Priorities, 2026).
 - Karger et al., Forecasting Existential Risks (Forecasting Research Institute, 2023).
 - Rethink Priorities, Cross-Cause Cost-Effectiveness Model.
