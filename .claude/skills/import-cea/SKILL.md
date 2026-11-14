@@ -154,7 +154,7 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   weak-evidence haircut becomes 1 in our view (`SWAPS`, theirs in `published`).
 - **Climate** (normalization.md 2.5): the output is tonnes per dollar (`1 / cost per tonne`, in `tco2e`);
   rows `years_until_avoided` (wait discounted at `$discount_rate`), `air_pollution_weight` and
-  `extra_deaths_per_tco2e` in an `ours` section, each sourced or a ranged judgment.
+  `extra_deaths_per_tco2e` and `methane_share` (methane's part of the tonnes) in an `ours` section, each sourced or a ranged judgment.
 - Counterfactuals subtracting what the founders or money would have done elsewhere aren't used in our
   view (the ranking is that comparison); funging and leverage follow section 4's lever.
 - **Life-equivalents** (GiveWell's 2017/2019 sheets): GiveDirectly's cost per life-equivalent reads

@@ -1,6 +1,6 @@
 ### Summary
 
-Clean Air Task Force (CATF) does research and advocacy for climate policy, from methane rules to advanced nuclear power. Our model counts the six biggest policies it worked on that were won between 2022 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="clean-air-task-force-charityevals">0.0064</span> years of healthy life per $1,000**. Nearly all of that comes from two methane rules. The result is low for two reasons: CATF shares each win with many other groups and with what governments would have done anyway, and the US rules have since been weakened or repealed.
+Clean Air Task Force (CATF) does research and advocacy for climate policy, from methane rules to advanced nuclear power. Our model counts the six biggest policies it worked on that were won between 2022 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="clean-air-task-force-charityevals">0.0066</span> years of healthy life per $1,000**. Nearly all of that comes from two methane rules. The result is low for two reasons: CATF shares each win with many other groups and with what governments would have done anyway, and the US rules have since been weakened or repealed.
 
 ### What the charity does
 
@@ -28,7 +28,7 @@ For each win: tonnes a year × the share of a won policy that is advocacy's doin
 
 The wins are added up and spread over the four years. Then come the shared evidence and missing-data steps, other work not modelled (+30%) and small side effects: local smog cut by the methane rule (+1%), extra oil from captured CO₂, nuclear risk. The total is divided by a typical year's spending in 2022-2025. The next dollar is valued at 39% of that average: CATF holds about 13 months of spending in reserve, and its next dollar goes to harder ground, like defending rules, Europe's implementation and new fields.
 
-Each tonne counts for its heat deaths. Methane also forms ground-level ozone worldwide within about a decade, which kills people with lung and heart disease; a shared figure counts those deaths per tonne of methane, and at the defaults they are worth about two and a half times the methane’s discounted heat deaths. New reactors and the power-plant rules cut US power-plant smoke, but at the shared US figures that is very little.
+Each tonne counts for its heat deaths. Methane's come sooner than CO₂'s, within decades, so they are discounted less. Methane also forms ground-level ozone worldwide, which kills people with lung and heart disease; at the defaults those deaths are worth about as much as its heat deaths. Both use the site's shared methane figures. New reactors and the power-plant rules cut US power-plant smoke, but at the shared US figures that is very little.
 
 ### What drives the result
 
@@ -39,7 +39,7 @@ The EU regulation gives about half the modelled tonnes, the US methane rule abou
 - **How much of a win is advocacy's doing.** The shared 30% runs from 10% to 60%, and CATF's own share of each win is our judgment.
 - **Whether the rules survive.** EPA has delayed and loosened the methane rule and repealed most of the power-plant standards. The EU has proposed more flexibility in its import standard.
 - **Reshuffled trade.** Exporters could send their cleanest gas to Europe and the rest elsewhere. We count half the import cut as real.
-- **Methane's timing.** The site's conversion treats a tonne of methane like a tonne of CO₂, with heat deaths decades away. Methane warms within one to two decades, so the shared discount rate moves these tonnes more than it should.
+- **Methane's ozone deaths per tonne.** The shared figure runs from a third to three times its best guess.
 
 ### What isn't modelled
 
@@ -47,7 +47,7 @@ Wins before 2022 aren't counted: the US methane and coal-plant rules of the 2010
 
 ### How this model was checked
 
-Independent audits are in audits/clean-air-task-force-charityevals/. Round 1 found methane's ozone deaths missing; they now come from a shared figure, which raised the result about 3.5 times. It also re-anchored the carbon-capture tonnes on Princeton's REPEAT projection, used EPA's own figures for the coal plants' smoke and the methane rule's local smog, and moved the EU import limit's date to 2031.
+Independent audits are in audits/clean-air-task-force-charityevals/. Round 1 found methane's ozone deaths missing; they now come from a shared figure, which raised the result about 3.5 times. It also re-anchored the carbon-capture tonnes on Princeton's REPEAT projection, used EPA's own figures for the coal plants' smoke and the methane rule's local smog, and moved the EU import limit's date to 2031. Round 4 checked the site-wide methane change: methane's heat deaths on their own timing and its ozone discounted over methane's lifetime, both in the shared conversion (+3.5%).
 
 ### Sources
 

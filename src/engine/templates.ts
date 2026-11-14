@@ -259,7 +259,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     "Conservation of land, water and species",
     "daly",
     "dalys",
-    ["hectares_protected", "tco2e_per_hectare_year", "years_protected", "years_until_avoided", "air_pollution_weight", "extra_deaths_per_tco2e", "tco2e_bridged", "dalys_from_tco2e", "health_people", "dalys_per_person_year", "livelihood_people", "ln_gain_per_person_year", "nature_people", "ls_gain_per_person_year", "ced_bridged", "dalys_from_ced", "catastrophe_deaths", "annual_risk_reduction", "catastrophe_value_per_death", "implementation_adj", "leverage_funging_adj", "unmodelled_benefits_adj", ...BRIDGED],
+    ["hectares_protected", "tco2e_per_hectare_year", "years_protected", "years_until_avoided", "air_pollution_weight", "extra_deaths_per_tco2e", "methane_share", "tco2e_bridged", "dalys_from_tco2e", "health_people", "dalys_per_person_year", "livelihood_people", "ln_gain_per_person_year", "nature_people", "ls_gain_per_person_year", "ced_bridged", "dalys_from_ced", "catastrophe_deaths", "annual_risk_reduction", "catastrophe_value_per_death", "implementation_adj", "leverage_funging_adj", "unmodelled_benefits_adj", ...BRIDGED],
     { annual_risk_reduction: [0, 0.01], years_protected: [0, 100], tco2e_per_hectare_year: [0, 50] },
     "unit_cost",
     [
@@ -332,4 +332,4 @@ export function perDollarIds(family: Family, unit: string): { perDollar: string;
 }
 
 /** Rows a tco2e model needs beyond its family's (docs/normalization.md 2.5). */
-export const CLIMATE_REQUIRED = ["years_until_avoided", "air_pollution_weight", "extra_deaths_per_tco2e"];
+export const CLIMATE_REQUIRED = ["years_until_avoided", "air_pollution_weight", "extra_deaths_per_tco2e", "methane_share"];
