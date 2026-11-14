@@ -3,22 +3,13 @@
   "name": "Refugees International (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {
-    "HTI": 0.32,
-    "SDN": 0.33,
-    "TCD": 0.04,
-    "CRI": 0.05,
-    "UKR": 0.08,
-    "PSE": 0.08,
-    "USA": 0.07,
-    "UGA": 0.03
-  },
-  "beneficiaries_note": "Our build: shares of the result by branch at the defaults. Haitians paroled into the US (about a third, counted as Haiti's), Sudan's humanitarian response and access from Chad (about 37%), asylum seekers' work permits in Costa Rica (under 5%); the other campaigns (about 30%) over Ukraine, Gaza, the US and Uganda by the annual report's emphasis (a judgment).",
+  "beneficiaries": {"HTI":0.42,"SDN":0.21,"TCD":0.02,"CRI":0.06,"UKR":0.08,"PSE":0.08,"USA":0.1,"UGA":0.03},
+  "beneficiaries_note": "Our build: shares of the result by branch at the defaults. Haitians paroled into the US (about 42%, counted as Haiti's), Sudan's humanitarian response and access from Chad (about 23%), asylum seekers' work permits in Costa Rica (about 5%); the other campaigns (about 30%) over Ukraine, Gaza, the US and Uganda by the annual report's emphasis (a judgment).",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "refugees-international",
   "owner": "charityevals",
-  "summary": "Refugees International, a Washington advocacy group that takes no government money, spent $4.5m on advocacy and strategic outreach in 2024 (its latest full audited year). No outcome is measured, so each of its main 2024 results is built from public data and ranged judgments and counted at half by the shared missing-data slider: the roughly 97,000 Haitians paroled into the US that year under pathways it pressed for, valued by their gain in consumption and health, and their remittances home, for the years they stay; Sudan's $1.9bn 2024 humanitarian response, of which advocacy is credited with a small share, net of the aid it displaced, plus access and diplomacy; and Costa Rica's June 2024 reform giving asylum seekers work permits, from a study of regularisation in Colombia; other campaigns add 40%. It comes to about 0.16 years of healthy life per $1,000 (combined range 0.02-1.3), a little above the site's global-health median and between charityevals' estimates for MSF's and Save the Children's advocacy, about half from Haiti and half from Sudan. The result is mostly uncertainty: the biggest questions are how much of each result advocacy caused, Refugees International's share of the advocacy, and how long the parolees stay.",
+  "summary": "Refugees International, a Washington advocacy group that takes no government money, spent $4.5m on advocacy and strategic outreach in 2024 (its latest full audited year). No outcome is measured, so each of its main 2024 results is built from public data and ranged judgments and counted at half by the shared missing-data slider: the roughly 97,000 Haitians paroled into the US that year under pathways it pressed for, valued by their gain in consumption and health, and their remittances home, for the years they stay; Sudan's $1.9bn 2024 humanitarian response, of which advocacy is credited with a small share, net of the aid it displaced, and the aid the reopened Adre crossing let through; and Costa Rica's June 2024 reform giving asylum seekers work permits, from a study of regularisation in Colombia; other campaigns add 42%. It comes to about 0.13 years of healthy life per $1,000 (combined range 0.02-1.1), about one and a half times the site's global-health median and between charityevals' estimates for MSF's and Save the Children's advocacy: about two fifths from Haiti, a quarter from Sudan, a twentieth from Costa Rica and the rest from the other campaigns. The result is mostly uncertainty: the biggest questions are how much of each result advocacy caused, Refugees International's share of the advocacy, and how long the parolees stay.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Refugees International, advocacy and strategic outreach (2024)",
@@ -269,28 +260,15 @@
       "label": "Haiti: Haitians paroled into the US in 2024",
       "format": "integer",
       "formula": "(hai_arrived_to_oct2024 - hai_arrived_to_jan2024) * 12 / hai_months_counted",
-      "explainer": "The nine months' arrivals scaled to a year: about 97,000, close to Refugees International's own 'over 100,000 Haitians' for 2024 (financial statements, note 1, p. 8). The processes were briefly paused in July-August 2024 for vetting checks, which the scaling averages in. These are the people Refugees International's advocacy for the Haitian parole pathway is credited with helping, below. Its accounts also claim the expansion of family-reunification parole for Haitians and Cubans; those arrivals (a few thousand a year, not published by year in a source we could read) are left to the other campaigns' share."
-    },
-    {
-      "id": "hai_us_consumption_vs_lowest_fifth",
-      "section": "effect",
-      "label": "Haiti: parolees' consumption per person in the US, relative to the lowest-income fifth of US households",
-      "format": "multiple",
-      "value": {
-        "low": 0.6,
-        "best": 1,
-        "high": 1.4
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 1 (0.6-1.4): newly arrived parolees had work authorisation and a US sponsor, mostly in low-wage jobs, so they consume about as the lowest-income fifth of US households does; lower in the first months and for large families, higher for those with family support."
+      "explainer": "The nine months' arrivals scaled to a year: about 97,000, close to Refugees International's own 'over 100,000 Haitians' for 2024 (financial statements, note 1, p. 8). The processes were briefly paused in July-August 2024 for vetting checks, which the scaling averages in. These are the people Refugees International's advocacy for the Haitian parole pathway is credited with helping, below. Its accounts also claim the expansion of family-reunification parole for Haitians and Cubans; those arrivals (a few thousand a year, not published by year in a source we could read) are in the other campaigns' share (below)."
     },
     {
       "id": "hai_us_consumption",
       "section": "effect",
       "label": "Haiti: parolees' consumption per person in the US (US$ a year)",
       "format": "usd",
-      "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024 * hai_us_consumption_vs_lowest_fifth",
-      "explainer": "The Consumer Expenditure Survey's spending per person (the site's US baseline, docs/normalization.md 2.14) times the lowest fifth's share, about $14,600, times the judgment above."
+      "formula": "@united_states.ce_expenditure_per_person_2024 * @irap.destination_consumption_share",
+      "explainer": "The Consumer Expenditure Survey's spending per person (the site's US baseline, docs/normalization.md 2.14) times the shared share for refugees and migrants who reach a rich country (@irap.destination_consumption_share, 0.45, from 0.3 to 0.7, anchored on the lowest-income fifth's spending), as charityevals' IRAP models do: about $14,700. Parolees had work authorisation and a US sponsor, mostly in low-wage jobs."
     },
     {
       "id": "hai_baseline_vs_average",
@@ -436,13 +414,57 @@
       "explainer": "Judgment 70% (40-90%): without the lawful pathway some would have crossed irregularly (Haitians were among the largest groups at the southern border in 2021-2022) and some would have gone to other countries (Chile, Brazil, the Dominican Republic) with smaller gains; most had no other way to leave."
     },
     {
+      "id": "hai_share_minor",
+      "section": "effect",
+      "label": "Haiti: share of the parolees' deaths averted that are of children",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 20% (10-35%): families came with their children under the processes, but the adult death-rate gap is the one counted and children's death rates are lower; their deaths are valued at the 5-14 band."
+    },
+    {
+      "id": "hai_share_15_49_of_adults",
+      "section": "effect",
+      "label": "Haiti: share of adults' deaths averted that are under 50",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 60% (40-80%): the gap counted is of ages 15 to 60, where death rates rise with age, so much of it falls at 50-59 (valued at the 50-74 band); most parolees are young adults."
+    },
+    {
+      "id": "hai_value_per_death",
+      "section": "effect",
+      "label": "Haiti: value of a death averted among parolees (units of value)",
+      "format": "number",
+      "formula": "(hai_share_minor * @moral_weights.uov_per_death_age_5_14 + (1 - hai_share_minor) * (hai_share_15_49_of_adults * @moral_weights.uov_per_death_age_15_49 + (1 - hai_share_15_49_of_adults) * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "The shared moral weights by age band, mixed by the shares above, times the value-of-life slider, as charityevals' IRAP models value deaths."
+    },
+    {
+      "id": "hai_own_value_per_person_year",
+      "section": "effect",
+      "label": "Haiti: parolee's own gain per year in the US (units of value)",
+      "format": "small",
+      "formula": "hai_share_not_otherwise_in_us * (hai_ln_gain * $uov_per_ln_consumption + hai_deaths_averted_per_person_year * hai_value_per_death)",
+      "unit": "units of value",
+      "explainer": "The log-consumption gain plus the deaths averted, for the share who wouldn't otherwise have come."
+    },
+    {
       "id": "hai_value_per_person_year",
       "section": "effect",
       "label": "Haiti: value per parolee per year in the US (units of value)",
       "format": "small",
-      "formula": "hai_share_not_otherwise_in_us * (hai_ln_gain * $uov_per_ln_consumption + hai_deaths_averted_per_person_year * @moral_weights.uov_per_death_age_15_49 * $life_value_multiplier + hai_remittance_value_per_person_year)",
+      "formula": "hai_own_value_per_person_year + hai_share_not_otherwise_in_us * hai_remittance_value_per_person_year",
       "unit": "units of value",
-      "explainer": "The log-consumption gain, the deaths averted and the remittances home (a side effect), each death valued at the shared moral weight for ages 15-49 (most parolees are working-age adults; children came with them) times the value-of-life slider, for the share who wouldn't otherwise have come."
+      "explainer": "The parolee's own gain plus the remittances home (a side effect), for the share who wouldn't otherwise have come."
     },
     {
       "id": "hai_years_in_us",
@@ -513,25 +535,25 @@
     {
       "id": "hai_origin_loss_share",
       "section": "effect",
-      "label": "Haiti: loss to Haiti from the departure of skilled people, as a share of the parolees' gain",
+      "label": "Haiti: loss to Haiti from the departure of skilled people, as a share of the parolees' own gain",
       "format": "percent",
       "value": {
-        "low": -0.15,
-        "best": -0.05,
-        "high": -0.01
+        "low": -0.2,
+        "best": -0.07,
+        "high": -0.02
       },
       "kind": "judgment",
       "side_effect": "added",
-      "explainer": "A side effect: nurses, teachers and other skilled workers were among those who left. Judgment -5% (-15% to -1%): the parolees are a small share of Haiti's workforce (about 1%), and remittances (above) offset part of it. A share of the parolees' whole gain."
+      "explainer": "A side effect: nurses, teachers and other skilled workers were among those who left. Judgment -7% (-20% to -2%) of the parolees' own gain: the parolees are a small share of Haiti's workforce (about 1%); gross of remittances, which are their own row."
     },
     {
       "id": "hai_value_per_year",
       "section": "effect",
       "label": "Haiti: value of 2024's parolees (units of value)",
       "format": "number",
-      "formula": "units_hai_per_year * hai_value_per_person_year * hai_discounted_years * (1 + hai_origin_loss_share)",
+      "formula": "units_hai_per_year * hai_discounted_years * (hai_value_per_person_year + hai_own_value_per_person_year * hai_origin_loss_share)",
       "unit": "units of value",
-      "explainer": "Parolees × value per person-year × discounted years, less the loss to Haiti (a side effect). A year's arrivals against a year's spending (the pathways had to be defended each year: a Texas-led lawsuit against them was dismissed in March 2024)."
+      "explainer": "Parolees × discounted years × (value per person-year less the loss to Haiti, a side effect on the parolees' own gain). A year's arrivals against a year's spending (the pathways had to be defended each year: a Texas-led lawsuit against them was dismissed in March 2024)."
     },
     {
       "id": "sdn_funding_2024",
@@ -547,7 +569,7 @@
         "note": "Read from the FTS public API, https://api.hpc.tools/v1/public/fts/flow?planId=1188&groupby=plan",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Funding reported to OCHA's Financial Tracking Service against Sudan's 2024 Humanitarian Response Plan ($2.70bn required, about 70% funded; 2023's plan was about 43% funded). Refugees International's 'Speak Out on Sudan' campaign with diaspora groups pressed for aid, access and diplomacy throughout 2024."
+      "explainer": "Funding reported to OCHA's Financial Tracking Service against Sudan's 2024 Humanitarian Response Plan ($2.70bn required, about 70% funded; 2023's plan was 51% funded, $1.32bn of $2.57bn, FTS plan 1123). Refugees International's 'Speak Out on Sudan' campaign with diaspora groups pressed for aid, access and diplomacy throughout 2024."
     },
     {
       "id": "sdn_response_vs_average",
@@ -567,8 +589,8 @@
       "section": "effect",
       "label": "Sudan: value of a dollar of the response, as a multiple of cash",
       "format": "multiple",
-      "formula": "@humanitarian.response_dollar_vs_cash * sdn_response_vs_average",
-      "explainer": "The site's shared value of a dollar of an average humanitarian response (facts/humanitarian.json, 0.3× cash) times Sudan's famine premium above."
+      "formula": "@aid_value.humanitarian_vs_cash * sdn_response_vs_average",
+      "explainer": "The site's shared value of a dollar of humanitarian aid (@aid_value.humanitarian_vs_cash, 0.2× cash: the site's relief models before their missing-data step; docs/normalization.md 2.20) times Sudan's famine premium above."
     },
     {
       "id": "sdn_value_per_dollar",
@@ -597,23 +619,10 @@
       "section": "effect",
       "label": "Sudan: value of the other aid displaced, per dollar (units of value)",
       "format": "small",
-      "formula": "0 - sdn_displaced_share * @humanitarian.response_dollar_vs_cash * @cash.uov_per_dollar",
+      "formula": "0 - sdn_displaced_share * @aid_value.humanitarian_vs_cash * @cash.uov_per_dollar",
       "unit": "units of value / $",
       "side_effect": "added",
-      "explainer": "A side effect: the displaced aid's value, lost, at the shared value of an average humanitarian response (the other crises it is taken from)."
-    },
-    {
-      "id": "sdn_access_ratio",
-      "section": "effect",
-      "label": "Sudan: access and diplomacy, as a share of the gross funding effect",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.5,
-        "high": 2
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 50% (0-200%): besides funding, the campaign pressed for aid access (the Adre crossing from Chad, reopened in August 2024), the US special envoy (appointed February 2024), the US determination of atrocities and genocide, and pressure on the UAE over arms to the RSF. None has a measured effect; 0 if they changed nothing on the ground, 200% if reopened crossings did more than the money. A share of the funding's gross value, before the aid it displaces (access doesn't depend on whose budget paid)."
+      "explainer": "A side effect: the displaced aid's value, lost, at the shared value of a dollar of humanitarian aid (@aid_value.humanitarian_vs_cash: the other crises it is taken from)."
     },
     {
       "id": "sdn_years_until_spent",
@@ -642,9 +651,31 @@
       "section": "effect",
       "label": "Sudan: value of the 2024 response funding (units of value)",
       "format": "number",
-      "formula": "sdn_funding_2024 * (sdn_value_per_dollar * (1 + sdn_access_ratio) + sdn_displaced_value_per_dollar) * sdn_wait_discount",
+      "formula": "sdn_funding_2024 * (sdn_value_per_dollar + sdn_displaced_value_per_dollar) * sdn_wait_discount",
       "unit": "units of value",
-      "explainer": "Funding × (the value of a dollar, with access and diplomacy on top, less the aid it displaces), discounted for the wait. A year's funding against a year's spending; the share advocacy added and Refugees International's part are below."
+      "explainer": "Funding × (the value of a dollar less the aid it displaces), discounted for the wait. A year's funding against a year's spending; the share advocacy added and Refugees International's part are below."
+    },
+    {
+      "id": "acc_aid_unlocked_share",
+      "section": "effect",
+      "label": "Sudan access: share of 2024's response that reached people only through the access the campaign pressed for",
+      "format": "percent",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 2% (0.5-8%): the campaign pressed for the Adre crossing from Chad (reopened on 15 August 2024 after six months closed), the main route into Darfur, and for access across the lines; a part of the year's aid went through it after August, and some would have gone through Tine or across lines anyway. Cross-check: charityevals' NRC advocacy model takes access gains as 5% more aid let through in 15% of the areas (0.75%)."
+    },
+    {
+      "id": "acc_value_per_year",
+      "section": "effect",
+      "label": "Sudan access: value of the aid let through (units of value)",
+      "format": "number",
+      "formula": "sdn_funding_2024 * acc_aid_unlocked_share * sdn_value_per_dollar * sdn_wait_discount",
+      "unit": "units of value",
+      "explainer": "The year's funding × the share let through by the access gains × the value of a dollar of Sudan's response, discounted like the funding. No aid is displaced: access lets the same money reach more people. The envoy, the genocide determination and pressure on the UAE are in the other campaigns' share."
     },
     {
       "id": "cri_permits_per_year",
@@ -832,15 +863,15 @@
     {
       "id": "other_wins_ratio",
       "section": "effect",
-      "label": "Other campaigns' results, as a share of the three modelled",
+      "label": "Other campaigns' results, as a share of the three modelled campaigns",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.4,
+        "low": 0.11,
+        "best": 0.42,
         "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "Judgment 40% (10-150%): the 2024 annual report names other work with no measured result: localisation of aid in Ukraine (two reports it says led to more aid from state donors directly to Ukrainian organisations), the Gaza scorecard with seven other agencies on aid obstruction, LGBTQ+ refugees' access to jobs in Costa Rica, the Destination Reception Assistance Act it helped draft and the #LetAsylumSeekersWork bill (neither passed), climate displacement at COP29 and in Uganda's adaptation plan, the Refugee Fellows, and the Refugee Advocacy Lab's public support for US resettlement (about 500 state and local officials' letter). Anchor: these eight other campaigns against the three modelled, each worth 15% of an average modelled win: 8 × 15% / 3 = 40%; 10% at 4% each (they mostly changed words), 150% at 55% each (Ukraine's localisation moved large sums)."
+      "explainer": "Judgment 42% (11-150%): the 2024 annual report names other work with no measured result: localisation of aid in Ukraine (two reports it says led to more aid from state donors directly to Ukrainian organisations), the Gaza scorecard with seven other agencies on aid obstruction, LGBTQ+ refugees' access to jobs in Costa Rica, the Destination Reception Assistance Act it helped draft and the #LetAsylumSeekersWork bill (neither passed), climate displacement at COP29 and in Uganda's adaptation plan, the Refugee Fellows, the Refugee Advocacy Lab's public support for US resettlement (about 500 state and local officials' letter), and family-reunification parole for Haitians and Cubans (a few thousand arrivals a year, against the 97,000 counted above). The US envoy, the genocide determination and pressure on the UAE over Sudan are here too. Anchor: the eight other campaigns against the three modelled, each worth 15% of an average modelled win, plus family reunification at 5%: (8 × 15% + 5%) / 3 = 42%; 11% at 4% each and 1% (they mostly changed words), 150% at 55% each and 10% (Ukraine's localisation moved large sums)."
     },
     {
       "id": "hai_evidence_adj",
@@ -866,7 +897,7 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "Judgment 10% (3-30%): the processes were the administration's own border policy, launched in January 2023 alongside expulsions at the border; advocates pressed for Haitians' inclusion, family reunification and keeping the pathway open. 3% if it would have run the same without them, 30% if advocacy kept it going against the 2024 lawsuit and political pressure."
+      "explainer": "Judgment 10% (3-30%): the processes were the administration's own border policy, launched in January 2023 alongside expulsions at the border; advocates pressed for Haitians' inclusion, family reunification and keeping the pathway open. 3% if it would have run the same without them, 30% if advocacy kept it going against the 2024 lawsuit and political pressure. Reference class: charityevals' IRAP advocacy model credits advocacy with 8% of the US refugee programme's rebuild; a little more here, since advocates shaped who the pathway covered."
     },
     {
       "id": "hai_attribution_share",
@@ -879,7 +910,7 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Judgment 5% (2-15%): many groups pressed for the Haitian pathways (Haitian Bridge Alliance, Welcome.US, the resettlement agencies, IRAP, HIAS, the Haitian diaspora, members of Congress); Refugees International names its part in its 2024 accounts, as one of several Washington voices."
+      "explainer": "Judgment 5% (2-15%): many groups pressed for the Haitian pathways (Haitian Bridge Alliance, Welcome.US, the resettlement agencies, IRAP, HIAS, the Haitian diaspora, members of Congress); Refugees International names its part in its 2024 accounts, as one of several Washington voices. Reference class: charityevals' IRAP advocacy model gives IRAP 6% (2-15%) of the coalition rebuilding US refugee admissions, the same kind of question for a US pathway."
     },
     {
       "id": "hai_missing_data_adj",
@@ -902,13 +933,8 @@
       "section": "adjustments",
       "label": "Sudan: evidence adjustment",
       "format": "multiple",
-      "value": {
-        "low": 0.4,
-        "best": 0.7,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "0.7 (0.4-1): the value of a dollar of the response is a judgment, not measured for Sudan's 2024 plan."
+      "explainer": "1: the dollar's value is the shared figure, already net of the relief models' own evidence adjustments; Sudan's difference from the average is sdn_response_vs_average, and the lack of measurement is the missing-data step (one question per adjustment, Convention 5).",
+      "formula": "1"
     },
     {
       "id": "sdn_counterfactual_adj",
@@ -921,7 +947,7 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "Judgment 3% (1-8%) of 2024's Sudan funding added by advocacy as a whole: funding rose from 43% of the plan in 2023 to about 70% in 2024, mostly from the famine and the scale of the war; advocates moved the margin, as for charityevals' Save the Children Gavi branch (3%). 1% if donors would have given the same, 8% if the campaign held up the US's and other large donors' pledges."
+      "explainer": "Judgment 3% (1-8%) of 2024's Sudan funding added by advocacy as a whole: funding rose from 51% of the plan in 2023 (FTS, plan 1123) to 70% in 2024, mostly from the famine and the scale of the war; advocates moved the margin, as for charityevals' Save the Children Gavi branch (3%). 1% if donors would have given the same, 8% if the campaign held up the US's and other large donors' pledges."
     },
     {
       "id": "sdn_attribution_share",
@@ -930,11 +956,11 @@
       "format": "percent",
       "value": {
         "low": 0.02,
-        "best": 0.05,
+        "best": 0.045,
         "high": 0.12
       },
       "kind": "judgment",
-      "explainer": "Judgment 5% (2-12%): Refugees International was one of the main US voices on Sudan in 2024 (its President testified and led the 'Speak Out on Sudan' campaign with diaspora groups), beside the IRC, NRC, MSF, Oxfam, Save the Children, Mercy Corps, Human Rights Watch, Amnesty and the UN agencies themselves."
+      "explainer": "Judgment 4.5% (2-12%): Refugees International's leverage is in Washington, and the US gave 45% of the 2024 plan's funding (FTS, plan 1188 by donor: the US government $738.9m and the State Department $106.6m of $1,889m); of US advocacy on Sudan it had about a tenth, one of about ten groups: 45% × 10% = 4.5%. It was one of the main US voices on Sudan in 2024 (its President testified and led the 'Speak Out on Sudan' campaign with diaspora groups), beside the IRC, NRC, MSF, Oxfam, Save the Children, Mercy Corps, Human Rights Watch, Amnesty and the UN agencies themselves."
     },
     {
       "id": "sdn_missing_data_adj",
@@ -958,12 +984,12 @@
       "label": "Costa Rica: evidence adjustment",
       "format": "multiple",
       "value": {
-        "low": 0.3,
-        "best": 0.6,
+        "low": 0.5,
+        "best": 0.8,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "0.6 (0.3-1): the effect is from a Colombian regularisation that gave more than a work permit, applied to a narrower change in another country."
+      "explainer": "0.8 (0.5-1): external validity only (the narrower change is cri_work_permit_share_of_effect): Venezuelans in Colombia, not Nicaraguans in Costa Rica, and the published paper's 48% against the working paper's 60%."
     },
     {
       "id": "cri_counterfactual_adj",
@@ -1008,11 +1034,66 @@
       "explainer": "The product of the branch's adjustments."
     },
     {
+      "id": "acc_evidence_adj",
+      "section": "adjustments",
+      "label": "Sudan access: evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "0.7 (0.4-1): whether the reopened crossing's aid reached people who would otherwise have gone without (diversion, other routes) isn't measured; the dollar's value is the shared figure and the premium above."
+    },
+    {
+      "id": "acc_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Sudan access: share that wouldn't have happened without the advocacy",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 20% (5-50%) of the access gains due to advocacy at all: the crossing reopened under the Sudanese authorities' decision after UN, US and donor pressure; as charityevals' NRC advocacy model takes for its access gains (20%, 5-50%)."
+    },
+    {
+      "id": "acc_attribution_share",
+      "section": "adjustments",
+      "label": "Sudan access: Refugees International's share of the advocacy",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.045,
+        "high": 0.12
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 4.5% (2-12%): as for the funding, Refugees International's share of the advocacy, through the US government's pressure."
+    },
+    {
+      "id": "acc_missing_data_adj",
+      "section": "adjustments",
+      "label": "Sudan access: missing-data discount",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: no measured effect of the advocacy on access. Counted less by the shared slider (docs/normalization.md 2.12)."
+    },
+    {
+      "id": "acc_total_adj",
+      "section": "adjustments",
+      "label": "Sudan access: all adjustments combined",
+      "format": "multiple",
+      "formula": "acc_evidence_adj * acc_counterfactual_adj * acc_attribution_share * acc_missing_data_adj",
+      "explainer": "The product of the branch's adjustments."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(hai_value_per_year * hai_total_adj * hai_evidence_adj + sdn_value_per_year * sdn_total_adj * sdn_evidence_adj + cri_value_per_year * cri_total_adj * cri_evidence_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + cri_value_per_year * cri_total_adj)",
+      "formula": "(hai_value_per_year * hai_total_adj * hai_evidence_adj + sdn_value_per_year * sdn_total_adj * sdn_evidence_adj + acc_value_per_year * acc_total_adj * acc_evidence_adj + cri_value_per_year * cri_total_adj * cri_evidence_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + acc_value_per_year * acc_total_adj + cri_value_per_year * cri_total_adj)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1020,7 +1101,7 @@
       "section": "adjustments",
       "label": "Counterfactual (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(hai_value_per_year * hai_total_adj * hai_counterfactual_adj + sdn_value_per_year * sdn_total_adj * sdn_counterfactual_adj + cri_value_per_year * cri_total_adj * cri_counterfactual_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + cri_value_per_year * cri_total_adj)",
+      "formula": "(hai_value_per_year * hai_total_adj * hai_counterfactual_adj + sdn_value_per_year * sdn_total_adj * sdn_counterfactual_adj + acc_value_per_year * acc_total_adj * acc_counterfactual_adj + cri_value_per_year * cri_total_adj * cri_counterfactual_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + acc_value_per_year * acc_total_adj + cri_value_per_year * cri_total_adj)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1028,7 +1109,7 @@
       "section": "adjustments",
       "label": "Share of the resources behind the outcome (outcome-weighted average, for reading only)",
       "format": "percent",
-      "formula": "(hai_value_per_year * hai_total_adj * hai_attribution_share + sdn_value_per_year * sdn_total_adj * sdn_attribution_share + cri_value_per_year * cri_total_adj * cri_attribution_share) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + cri_value_per_year * cri_total_adj)",
+      "formula": "(hai_value_per_year * hai_total_adj * hai_attribution_share + sdn_value_per_year * sdn_total_adj * sdn_attribution_share + acc_value_per_year * acc_total_adj * acc_attribution_share + cri_value_per_year * cri_total_adj * cri_attribution_share) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + acc_value_per_year * acc_total_adj + cri_value_per_year * cri_total_adj)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1044,7 +1125,7 @@
       "section": "adjustments",
       "label": "Missing-data discount (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(hai_value_per_year * hai_total_adj * hai_missing_data_adj + sdn_value_per_year * sdn_total_adj * sdn_missing_data_adj + cri_value_per_year * cri_total_adj * cri_missing_data_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + cri_value_per_year * cri_total_adj)",
+      "formula": "(hai_value_per_year * hai_total_adj * hai_missing_data_adj + sdn_value_per_year * sdn_total_adj * sdn_missing_data_adj + acc_value_per_year * acc_total_adj * acc_missing_data_adj + cri_value_per_year * cri_total_adj * cri_missing_data_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + acc_value_per_year * acc_total_adj + cri_value_per_year * cri_total_adj)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1052,7 +1133,7 @@
       "section": "adjustments",
       "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(hai_value_per_year * hai_total_adj * hai_total_adj + sdn_value_per_year * sdn_total_adj * sdn_total_adj + cri_value_per_year * cri_total_adj * cri_total_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + cri_value_per_year * cri_total_adj)",
+      "formula": "(hai_value_per_year * hai_total_adj * hai_total_adj + sdn_value_per_year * sdn_total_adj * sdn_total_adj + acc_value_per_year * acc_total_adj * acc_total_adj + cri_value_per_year * cri_total_adj * cri_total_adj) / (hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + acc_value_per_year * acc_total_adj + cri_value_per_year * cri_total_adj)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1200,7 +1281,7 @@
       "section": "outcome",
       "label": "Total value (units of value)",
       "format": "number",
-      "formula": "(hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + cri_value_per_year * cri_total_adj) * (1 + other_wins_ratio) + moved_value + careers_value",
+      "formula": "(hai_value_per_year * hai_total_adj + sdn_value_per_year * sdn_total_adj + acc_value_per_year * acc_total_adj + cri_value_per_year * cri_total_adj) * (1 + other_wins_ratio) + moved_value + careers_value",
       "unit": "units of value",
       "explainer": "The three campaign results, each with its own adjustments, plus the other campaigns' share."
     },
