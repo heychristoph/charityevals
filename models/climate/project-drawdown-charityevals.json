@@ -3,13 +3,13 @@
   "name": "Project Drawdown (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": "world",
-  "beneficiaries_note": "Our build: a tonne of greenhouse gas kept out of the air spares people everywhere (heat deaths), so the result is spread by world population.",
+  "beneficiaries": "destinations",
+  "beneficiaries_note": "Changes others' spending: the climate charities its guidance moves funders' giving to, read live, bring their own countries (the companies', investors' and public branches' tonnes, a few per cent of the result, spare people everywhere).",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "project-drawdown",
   "owner": "charityevals",
-  "summary": "Project Drawdown (Saint Paul, Minnesota) researches which climate solutions matter most (Drawdown Explorer, the Drawdown Roadmap) and guides philanthropists, companies and investors toward them, with storytelling for the public; this model values that information by the money it changed in 2023-2025: funders' climate giving as the site values shifted money (the gain of a dollar at the climate charities on the rankings over an ordinary one), companies' and investors' money by the difference in tonnes per dollar between the new and old use, against its spending over those years ($5.6M in 2025). At the defaults a dollar given averts the equivalent of about 0.03 tonnes of CO₂e, about 0.014 years of healthy life per $1,000, nearly all of it from funders' giving; it is several times the climate median because a shifted dollar is valued at the ranked climate charities' figures, forest protection among them. The result is mostly uncertainty: how much giving follows its guidance, how much is its doing rather than other advisers', and how an ordinary climate charity compares with the ranked ones; every branch is discounted for missing data, since no decision it changed is counted or followed up.",
+  "summary": "Project Drawdown (Saint Paul, Minnesota) researches which climate solutions matter most (Drawdown Explorer, the Drawdown Roadmap) and guides philanthropists, companies and investors toward them, with storytelling for the public; this model values that information by the money it changed in 2023-2025: funders' climate giving as the site values shifted money (the gain of a dollar at the climate charities on the rankings over an ordinary one), companies' and investors' money by the difference in tonnes per dollar between the new and old use, against its spending over those years ($5.6M in 2025). At the defaults a dollar given averts the equivalent of about 0.01 tonnes of CO₂e, about 0.005 years of healthy life per $1,000, nine-tenths of it from funders' giving; it is above the climate median because a shifted dollar is valued at the ranked climate charities' figures, forest protection among them. The result is mostly uncertainty: how much giving follows its guidance, how much is its doing rather than other advisers', and how an ordinary climate charity compares with the ranked ones; every branch is discounted for missing data, since no decision it changed is counted or followed up.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Project Drawdown",
@@ -163,9 +163,9 @@
       "formula": "program_spend * overhead_ratio"
     },
     {
-      "id": "total_expenses_2023",
+      "id": "total_expenses_2023_reported",
       "section": "cost",
-      "label": "Total expenses, 2023 (Form 990)",
+      "label": "Total expenses, 2023, as reported (Form 990, donated services included)",
       "format": "usd",
       "value": 5081083,
       "kind": "observed",
@@ -173,10 +173,34 @@
         "title": "ProPublica Nonprofit Explorer, Project Drawdown (EIN 38-3705448), Form 990 summaries",
         "url": "https://projects.propublica.org/nonprofits/organizations/383705448",
         "page": "Form 990 for 2023 (tax period ending December 2023), total functional expenses",
-        "note": "Total expenses $5,081,083, as ProPublica's data from the IRS lists it.",
+        "note": "Total expenses $5,081,083, as ProPublica's data from the IRS lists it; Schedule D Part XII gives the audited total as the same 5081083 (TotExpnsEtcAuditedFinclStmtAmt).",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Total expenses on the Form 990 in the first year of the period (2023: the Drawdown Roadmap), the same basis as 2025's. Its audited total for 2023 is the same figure (annual update p. 10, 'Total Expenses $5,081,083'), so that year's accounts appear to leave the donated services ($648,993) out of expenses."
+      "explainer": "The 2023 Form 990's total expenses, the same as its audited total; unlike 2024's and 2025's, it doesn't take the donated services out (Schedule D reconciles them out of revenue only)."
+    },
+    {
+      "id": "donated_services_2023",
+      "section": "cost",
+      "label": "Donated services, 2023",
+      "format": "usd",
+      "value": 648993,
+      "kind": "observed",
+      "source": {
+        "title": "Project Drawdown, Form 990 for 2023 (IRS e-file XML, object 202403189349308650)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_11A.zip",
+        "page": "Schedule D Part XI line 2b (DonatedServicesAndUseFcltsAmt)",
+        "quote": "648993",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Donated services and use of facilities in 2023, from the 2023 Form 990's Schedule D (reconciliation of revenue with the audited statements), taken out of 2023's expenses so the year is on the same basis as 2024 and 2025."
+    },
+    {
+      "id": "total_expenses_2023",
+      "section": "cost",
+      "label": "Total expenses, 2023 (donated services left out)",
+      "format": "usd",
+      "formula": "total_expenses_2023_reported - donated_services_2023",
+      "explainer": "Total expenses in the first year of the period (2023: the Drawdown Roadmap), on the same basis as 2025's: without donated services."
     },
     {
       "id": "total_expenses_2024",
@@ -285,7 +309,7 @@
         "high": 0.025
       },
       "kind": "judgment",
-      "explainer": "Our judgment, 0.5% (0.1% to 2.5%): about $75M of a year's giving, gross, before what would have happened anyway and others' part; counted once, in the year it is given, like every money-moved figure on the site. Anchors: its own claim that the Drawdown Capital Coalition and its science have 'helped guide billions of dollars' (annual update p. 6, cumulative since 2017; 'guided' money includes money that would have gone there anyway, and its testimonials are ones it chose, so the best guess stays well below it); funders who say they set their climate grantmaking with it (the Mighty Arrow Family Foundation, the Ray C. Anderson Foundation; ReFED on food-waste funding, annual update p. 8, p. 5); its reach (115,000 newsletter subscribers, 12,500 downloads of its publications a year, 2 million views of its videos, year-end report p. 9). Its own funders, foundations giving $4M-$7M a year, are among the readers."
+      "explainer": "Our judgment, 0.5% (0.1% to 2.5%): about $75M of a year's giving, gross, before what would have happened anyway and others' part; counted once, in the year it is given, like every money-moved figure on the site: at a steady pace of work, a year's flow stands for the 2023-2025 choices over the years they last, so no years are counted. Giving still following the 2017 book's choices is held out of the best guess, as its cost is. Anchors: its own claim that the Drawdown Capital Coalition and its science have 'helped guide billions of dollars' (annual update p. 6, cumulative since 2017; 'guided' money includes money that would have gone there anyway, and its testimonials are ones it chose, so the best guess stays well below it); funders who say they set their climate grantmaking with it (the Mighty Arrow Family Foundation, the Ray C. Anderson Foundation; ReFED on food-waste funding, annual update p. 8, p. 5); its reach (115,000 newsletter subscribers, 12,500 downloads of its publications a year, 2 million views of its videos, year-end report p. 9). Its own funders, foundations giving $4M-$7M a year, are among the readers."
     },
     {
       "id": "phil_money_shifted",
@@ -419,10 +443,10 @@
     {
       "id": "years_until_avoided",
       "section": "effect",
-      "label": "Years from a company's or investor's decision until the reallocated money is spent",
+      "label": "Years from a company's, investor's or household's decision until the change takes effect",
       "format": "number",
       "unit": "years",
-      "explainer": "Our judgment, 1 year (0.5 to 3): a company's new strategy reaches its next budget, a fund's its next rebalancing. The tonnes per dollar above already count each option's own waits (the site's climate models discount them), so only this wait is added; discounted at the shared rate.",
+      "explainer": "Our judgment, 1 year (0.5 to 3): a company's new strategy reaches its next budget, a fund's its next rebalancing; a household's change starts within the year, so the public branch's wait is a little long (under 0.1% of the result). The tonnes per dollar above already count each option's own waits (the site's climate models discount them), so only this wait is added; discounted at the shared rate.",
       "value": {
         "low": 0.5,
         "best": 1,
@@ -571,7 +595,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
-      "explainer": "Our judgment, 1 (0.8 to 1.1): there is no study effect to discount here. That nothing Drawdown changed is counted is the missing-data step below; the money, gains and shares are best guesses, the self-chosen testimonials already lowering them; advice that points money to worse options is in the gains' low ends.",
+      "explainer": "Our judgment, 1 (0.8 to 1.1): there is no study effect to discount here. That nothing Drawdown changed is counted is the missing-data step below; the money, gains and shares are best guesses, the self-chosen testimonials already lowering them. For the funders' branch the gain is the site's shared one and money moved takes no effectiveness step (templates.md, Money moved); for the companies' and investors' branches, advice that points money to worse options is in the gains' low ends.",
       "value": {
         "low": 0.8,
         "best": 1,
