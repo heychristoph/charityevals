@@ -1,6 +1,6 @@
 # Audit: redwood-research-charityevals, round 7 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 6.847e-5 daly/$ = 0.0685 years of healthy life per 1,000 dollars (simulation 5%-95%: 0.0046-0.655; audit-model's combined range is far wider); cause median 0.958 (x0.071). Verdict: pass.
-Model-sha: 65d2f04dc274a21653d0cea76aef5db84f82016bc513dc3f4d285367a495157a
+Model-sha: 56c8107c1be5a6f575a209f8c5c6c69023f4a752e6a157924acd76a52fb93296
 Scope: unchanged; scoped to the two merged changes, both present and consistent.
 Mechanical: lint 0 high / 0 medium (four range lows, two unused lows, far-below low whose reason the summary gives); invariants none; normalization-audit none (full run, 0 violations; generated output restored); check.ts passes; simulation-check stable (5% 0.067, 95% 9.57 x best guess).
 Previous round: round 6 had no open findings.
@@ -19,3 +19,5 @@ None re-fetched: no new facts; both changes are shared-fact or structural.
 
 ## Drivers
 AI catastrophe chance, misalignment cut per dollar, discount rate, years a cut counts, misuse share. Unchanged.
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

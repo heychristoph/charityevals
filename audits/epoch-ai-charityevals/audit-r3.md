@@ -20,4 +20,6 @@ Bottom line 0.07019 (summary and headline 0.07). Own-range joint 0.001154 to 0.8
 Minor, no fix needed: the write-up says clients' fees are "about $1 million" for $990,000, which is a fair rounding.
 
 Verdict: PASS. No findings.
-Model-sha: 9acdac013ea1448dd9b3a16d2979e9790fffba4df934088339b90f74c6ec5ed8
+Model-sha: c6acccb9dcfe062b62e1cb709b644a56c998302196544ef3f148bb0940ad5e95
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

@@ -14,4 +14,6 @@ Previous round:
 None needed; no source, figure or value changed.
 
 Verdict: pass (no findings)
-Model-sha: 319f2f0d5b5bd828232c7872b6eb45001220e7705f077b59f46c4abf664eb562
+Model-sha: 27d64b99c8238790ce0e53be42ca7be48ddb60e05aa90d480ae7b2d8f7354184
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

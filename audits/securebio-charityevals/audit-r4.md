@@ -9,6 +9,8 @@ Checked only the change since round 3: evidence_adj applied per branch, weighted
 
 New findings: none.
 
-Model-sha: 4c365bb60ac49e271c0bd20be1976225586af84e38ab00b173e21e4307532e77
+Model-sha: cf35481ab32ecb875ff38b613760e138d7e798508e5e20a6b04a1dff5c7b9c5f
 
 **Verdict: pass**
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
