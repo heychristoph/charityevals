@@ -15,6 +15,8 @@ Scope: the change to attribution_share_shared since round 7 (attribution applied
 ## Findings
 New findings: none.
 
-Model-sha: 045ae5e7d89ecfe42a7e6f8d677061e99ca9457e5d7b6e92bdac9b81eb13f19d
+Model-sha: 861bba5a72861bca06c7ce5dfa5d72eb6eab1c0595dfd8f6f4ab21f7594d1f1d
 
 **Verdict: pass**
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

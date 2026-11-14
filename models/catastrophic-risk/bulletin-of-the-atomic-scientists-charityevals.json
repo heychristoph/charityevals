@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "bulletin-of-the-atomic-scientists",
   "owner": "charityevals",
-  "summary": "The Bulletin of the Atomic Scientists (Chicago) publishes expert journalism on nuclear weapons, climate change, biological threats and AI on its open website and in its magazine, and sets the Doomsday Clock each January; this model covers all its programmes in the year to June 2025 ($3.5M spent). At the defaults it averts about 16 years of healthy life per $1,000, from 0.8 to 340 on the combined range: 96% of that is the nuclear coverage (about 45% of the cost, by the year's articles), valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts) times how far public-facing work applies, with deaths valued like every death and the future lost counted through the discount rate; the pandemic coverage adds 4% and the AI coverage under 1%, and the climate coverage, valued in tonnes of CO₂e at a typical climate dollar, almost nothing. It is more than ten times its peers because its nuclear coverage is valued at a typical nuclear project's cut per dollar, hundreds of times a typical AI misalignment project's, and most of its peers work on AI. It is below the Arms Control Association, the Nuclear Threat Initiative and Ploughshares Fund because under half its spending is on nuclear risk and journalism is further from decisions than their briefs, diplomacy and grants. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the years a cut counts and with how the spending splits between areas, which the accounts don't report. Every branch is discounted for missing data: no outcome of the work is measured.",
+  "summary": "The Bulletin of the Atomic Scientists (Chicago) publishes expert journalism on nuclear weapons, climate change, biological threats and AI on its open website and in its magazine, and sets the Doomsday Clock each January; this model covers all its programmes in the year to June 2025 ($3.5M spent). At the defaults it averts about 16 years of healthy life per $1,000, from 0.8 to 340 on the combined range: 96% of that is the nuclear coverage (about 45% of the cost, by the year's articles), valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts) times how far public-facing work applies, with deaths valued like every death and the future lost counted through the discount rate; the pandemic coverage adds 4% and the AI coverage under 1%, and the climate coverage, valued at the site's own average for a dollar of climate work, almost nothing. It is more than ten times its peers because its nuclear coverage is valued at a typical nuclear project's cut per dollar, hundreds of times a typical AI misalignment project's, and most of its peers work on AI. It is below the Arms Control Association, the Nuclear Threat Initiative and Ploughshares Fund because under half its spending is on nuclear risk and journalism is further from decisions than their briefs, diplomacy and grants. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the years a cut counts and with how the spending splits between areas, which the accounts don't report. Every branch is discounted for missing data: no outcome of the work is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Bulletin of the Atomic Scientists",
@@ -42,11 +42,6 @@
       "title": "Bulletin of the Atomic Scientists, topic listings (nuclear risk, climate change, disruptive technologies, biosecurity, nuclear energy)",
       "url": "https://thebulletin.org/nuclear-risk/",
       "type": "charity"
-    },
-    {
-      "title": "Rethink Priorities, Can climate change be more cost-effective than the best GHD interventions? (Clare & Vargas, 2026)",
-      "url": "https://rethinkpriorities.org/research-area/climate-change-versus-ghd-interventions/",
-      "type": "study"
     },
     {
       "title": "Forecasting Existential Risks (Existential Risk Persuasion Tournament, 2023)",
@@ -703,89 +698,22 @@
       "explainer": "The climate-change coverage (cuts to US climate science, wildfires, carbon sinks, solar power) and the Clock statement's climate section: 22% (15% to 28%), a little under its 23.9% of the year's articles because the Clock and the Notebook lean to the nuclear side. The return reports one programme, so the areas are split by what the Bulletin published in the fiscal year: its topic listings hold 316 articles dated 1 July 2024 to 30 June 2025 (162 under nuclear risk, 33 of them also under nuclear energy; 84 under climate change; 96 under disruptive technologies, 50 of them under biosecurity). Counted once each, an article under two topics split equally: nuclear war 43.5%, climate 23.9%, the biosecurity listing 14.3% (about a third of it US vaccine politics, malaria, tuberculosis and gene-therapy prices rather than pandemics), AI 6.9%, other technology and politics (government efficiency, Mars, Signal, elections) 6.3%, and civil nuclear power, waste and radiation compensation 5.1%. Articles stand in for cost: each area has one editor (staff page), and the Clock statement and the Nuclear Notebook add a little to the nuclear share."
     },
     {
-      "id": "climate_top_tco2e_per_million",
+      "id": "climate_value_per_dollar",
       "section": "effect",
-      "label": "Climate: tonnes of CO₂e $1 million averts at the climate funds' recommended work",
-      "format": "number",
-      "unit": "t CO₂e",
-      "formula": "1e6 / @climate.top_climate_fund_usd_per_tco2e",
-      "explainer": "One over the shared cost per tonne of the hits-based climate funds' recommended advocacy and innovation work (@climate.top_climate_fund_usd_per_tco2e, Rethink Priorities' summary): about 500,000 tonnes per $1 million, over the years the policies and technologies are in effect."
+      "label": "Climate: value of a dollar of typical climate work (units of value)",
+      "format": "small",
+      "formula": "#cause:climate",
+      "unit": "units of value / $",
+      "explainer": "The site's own climate average: the equal-weight mean of the climate charities on the rankings, per dollar, in units of value (its tonnes already valued by the climate skeleton, normalization.md 2.5, 2.8). Not a Rethink figure or a bridge of the model's own. Fixed."
     },
     {
-      "id": "climate_fund_tonne_years",
+      "id": "climate_uov",
       "section": "effect",
-      "label": "Climate: years of emissions behind the funds' cost per tonne",
+      "label": "Climate: value of the climate work (units of value, before adjustments)",
       "format": "number",
-      "unit": "years",
-      "value": {
-        "low": 10,
-        "best": 20,
-        "high": 40
-      },
-      "kind": "judgment",
-      "explainer": "Rethink's brief states no period for the funds' tonnes; our reading is that they are a policy's or technology's emissions over its years in effect, so they are spread over 20 years (10 to 40), our judgment, anchored on the climate wins whose tonnes the site has: EPA's 2024 power-plant standards 2028-2047 (20 years), its vehicle standards 2027-2055 (29), California's Advanced Clean Cars II 2026-2040 (15) and cap-and-invest extension 2027-2046 (20). The site then counts the shared years a cut counts, as for every won reform."
-    },
-    {
-      "id": "climate_typical_vs_top",
-      "section": "effect",
-      "label": "Climate: a typical climate dollar compared with the funds' recommended work",
-      "format": "multiple",
-      "value": {
-        "low": 0.004,
-        "best": 0.04,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "The funds' figure is their best picks; a typical dollar of climate analysis and advocacy does far less, since most of it backs policies that don't pass and shares each win with many groups: 4% (0.4% to 40%), our judgment, the range ten times either way as for the shared cuts in the other areas. Cross-check: our Union of Concerned Scientists climate model, campaigning behind five named US wins, comes to about 5,600 tonnes per $1 million given, about 34,000 before its missing-data step (0.5) and next-dollar factor (0.33), some 7,000 a year over the five counted years: about 28% of the funds' 25,000 a year; a typical climate dollar has no named win, so about a seventh of that."
-    },
-    {
-      "id": "climate_tco2e_per_year_per_million",
-      "section": "effect",
-      "label": "Climate: tonnes of CO₂e a year a typical $1 million of climate public-interest work cuts, once in effect",
-      "format": "number",
-      "unit": "t CO₂e / year",
-      "formula": "climate_top_tco2e_per_million / climate_fund_tonne_years * climate_typical_vs_top",
-      "explainer": "The funds' tonnes per $1 million a year, × how far a typical climate dollar trails them: about 1,000 tonnes a year. How far journalism trails campaigning work is climate_evidence_adj; whether others would have written the articles is climate_counterfactual_adj."
-    },
-    {
-      "id": "climate_uptake_years",
-      "section": "effect",
-      "label": "Climate: years from the coverage to a policy it helps",
-      "format": "number",
-      "unit": "years",
-      "value": {
-        "low": 0,
-        "best": 1,
-        "high": 3
-      },
-      "kind": "judgment",
-      "explainer": "From the year's articles to a policy decision they help bring about: about a year, our judgment, 0 to 3, as the other branches; the policy's own wait until its tonnes are avoided is the shared figure added in climate_years_until_effect."
-    },
-    {
-      "id": "climate_years_until_effect",
-      "section": "effect",
-      "label": "Climate: years until the tonnes are avoided",
-      "format": "number",
-      "unit": "years",
-      "formula": "climate_uptake_years + @climate.years_until_avoided_regulation",
-      "explainer": "The coverage's uptake plus the shared wait from a won climate rule to its tonnes (@climate.years_until_avoided_regulation); discounted at the shared rate."
-    },
-    {
-      "id": "climate_discounted_years",
-      "section": "effect",
-      "label": "Climate: discounted years the cut counts",
-      "format": "number",
-      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -climate_years_until_effect",
-      "explainer": "The shared years a cut counts ($win_years_counted), each discounted, after the wait."
-    },
-    {
-      "id": "climate_tco2e",
-      "section": "effect",
-      "label": "Climate: tonnes of CO₂e averted (before adjustments)",
-      "format": "number",
-      "unit": "t CO₂e",
-      "formula": "cost_total * climate_cost_share / 1e6 * climate_tco2e_per_year_per_million * climate_discounted_years",
-      "explainer": "The climate spending in millions × tonnes a year per $1 million × the discounted years they count."
+      "formula": "cost_total * climate_cost_share * climate_value_per_dollar",
+      "unit": "UoV",
+      "explainer": "The climate spending × a typical climate dollar's value; how far this charity's climate work beats or trails a typical dollar is climate_evidence_adj. The average already counts its own wait and years."
     },
     {
       "id": "other_cost_share",
@@ -939,14 +867,9 @@
       "section": "effect",
       "label": "Field-building: years each stays in the work",
       "format": "number",
-      "value": {
-        "low": 2,
-        "best": 5,
-        "high": 10
-      },
-      "kind": "judgment",
       "unit": "years",
-      "explainer": "Not used: fb_people is 0 (the fellowships are valued with the programme spending); the template's range kept for the switched-on check: years in such roles, from alumni follow-ups or the field's turnover; discounted at the shared rate."
+      "explainer": "Not used here: the field-building branch counts nothing (fb_people is 0). Reads the family's shared figure (@catastrophe.field_work_years) so the branch works if switched on.",
+      "formula": "@catastrophe.field_work_years"
     },
     {
       "id": "fb_work_dollars",
@@ -1104,8 +1027,8 @@
       "label": "Weight: healthy years from the climate coverage (before adjustments)",
       "format": "number",
       "unit": "DALYs",
-      "formula": "dalys_from_tco2e",
-      "explainer": "The branch's tonnes in healthy years, by the tonnes' bridge: the weight its adjustments carry."
+      "formula": "climate_uov * dalys_per_death_value",
+      "explainer": "The branch's value in healthy years, by the same bridge: the weight its adjustments carry. Fixed."
     },
     {
       "id": "w_total",
@@ -1191,7 +1114,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "How far the typical climate dollar of climate_tco2e_per_year_per_million (analysis and advocacy behind policy) applies to the Bulletin's climate journalism: explanatory articles in a field with many larger climate outlets, with no policy uptake named. 0.3 (0.1 to 0.7), our judgment, well below its nuclear coverage's 0.6, because the anchor is campaigning work and climate has far more of it."
+      "explainer": "How far the typical climate dollar (the site's climate average, climate_value_per_dollar: analysis and advocacy behind policy) applies to the Bulletin's climate journalism: explanatory articles in a field with many larger climate outlets, with no policy uptake named. 0.3 (0.1 to 0.7), our judgment, well below its nuclear coverage's 0.6, because the anchor is campaigning work and climate has far more of it."
     },
     {
       "id": "nuclear_counterfactual_adj",
@@ -1400,7 +1323,7 @@
       "label": "Counted less where the outcome isn't measured for this charity",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin: no outcome of the Bulletin's work is measured, on the risks (a typical project's cut and forecast chances) or on emissions (the climate branch's tonnes are judged), so the shared missing-data step applies to every branch (docs/normalization.md 2.12)."
+      "explainer": "Thin: no outcome of the Bulletin's work is measured, on the risks (a typical project's cut and forecast chances) or on the climate coverage (valued at the site's climate average), so the shared missing-data step applies to every branch (docs/normalization.md 2.12)."
     },
     {
       "id": "total_adj",
@@ -1455,9 +1378,9 @@
     {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths averted (and losses beyond them, 0 by default), in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted (and losses beyond them, 0 by default) and the climate work, in GiveWell units of value (before adjustments)",
       "format": "number",
-      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths)",
+      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths) + climate_uov",
       "unit": "UoV"
     },
     {
@@ -1468,78 +1391,6 @@
       "formula": "uov_bridged / ($uov_per_daly)",
       "unit": "DALYs",
       "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
-    },
-    {
-      "id": "fuel_share",
-      "section": "bridges",
-      "label": "Climate: share of these tonnes from burning less fossil fuel near people",
-      "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.75,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "The tonnes a typical climate policy cuts come mostly from burning less coal, oil and gas (power, transport, buildings), the rest from methane leaks, land and industrial gases: 75% (50% to 90%), our judgment, weighted by tonnes before waits and years counted."
-    },
-    {
-      "id": "fuel_smoke_factor",
-      "section": "bridges",
-      "label": "Climate: air-pollution deaths per tonne of this fuel, relative to the fossil-fuel average",
-      "format": "number",
-      "value": {
-        "low": 0.03,
-        "best": 0.4,
-        "high": 1.2
-      },
-      "kind": "judgment",
-      "explainer": "The tonnes behind the funds' cost per tonne come from policies and technologies in the US, Europe and Asia; US cuts carry little smoke per tonne (@climate.us_power_smoke_factor 0.013, us_vehicle_smoke_factor 0.04, us_coal_power_smoke_factor 0.067 of the average), cuts in coal-heavy Asia about the average or more. 0.4 (0.03 to 1.2), our judgment, a blend weighted towards rich countries, where most of the funds' recommended work and the Bulletin's climate coverage are."
-    },
-    {
-      "id": "air_pollution_weight",
-      "section": "bridges",
-      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
-      "format": "number",
-      "formula": "fuel_share * fuel_smoke_factor",
-      "explainer": "Read by the tonnes' bridge, as by the tco2e unit's conversion."
-    },
-    {
-      "id": "extra_deaths_per_tco2e",
-      "section": "bridges",
-      "label": "Air-pollution deaths averted per tonne, counted directly (none here)",
-      "format": "small",
-      "formula": "0",
-      "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
-    },
-    {
-      "id": "methane_share",
-      "section": "bridges",
-      "label": "Climate: share of these tonnes that are methane",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Methane's part of the CO₂e tonnes a typical climate policy cuts (oil and gas leaks, landfill, livestock): 10% (0 to 25%), our judgment, below its roughly one-fifth of world emissions because most policies the coverage bears on are about energy; the bridge values it by methane's own timing and ozone (docs/normalization.md 2.5)."
-    },
-    {
-      "id": "tco2e_bridged",
-      "section": "bridges",
-      "label": "Climate coverage, in tonnes of CO₂-equivalent averted (before adjustments)",
-      "format": "number",
-      "formula": "climate_tco2e",
-      "unit": "t CO₂e"
-    },
-    {
-      "id": "dalys_from_tco2e",
-      "section": "bridges",
-      "label": "Climate coverage, in healthy years",
-      "format": "number",
-      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
-      "unit": "DALYs",
-      "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
       "id": "dalys_direct",
@@ -1554,7 +1405,7 @@
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_tco2e) * total_adj * (1 + unmodelled_benefits_adj + speedup_harm_share + hazard_harm_share)",
+      "formula": "(dalys_direct + dalys_from_uov) * total_adj * (1 + unmodelled_benefits_adj + speedup_harm_share + hazard_harm_share)",
       "unit": "DALYs",
       "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
     },
