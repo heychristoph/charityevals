@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "animal-charity-evaluators",
  "owner": "charityevals",
- "summary": "Animal Charity Evaluators evaluates animal advocacy charities, recommends the most effective, and passes donors' money to them through its Recommended Charity Fund and to small groups through its Movement Grants; this model covers all its own spending in its year to March 2025 ($1.72M, the $4.6M of grants it passed on being the recipients' cost). Of the $13.5M of giving it traced that year, its own surveys and our non-response step suggest it caused about 38%, some $5.1M or three dollars per dollar it spends, each dollar valued at its Recommended Charities' and the animal-welfare charities' figures on this site (ACE's own evaluations of them), half counted as new money and the rest only for its gain over an ordinary animal charity, and the next dollar at 36% of the past average: about 0.0017 years of healthy life per $1,000, as small as the animal charities it funds at the site's animal weights. The result moves most with the animal weights, its next-dollar figure, how much of its estimate rests on donors who answered and what an ordinary animal charity would have done with shifted money; no branch is discounted for missing data, since money moved is counted.",
+ "summary": "Animal Charity Evaluators evaluates animal advocacy charities, recommends the most effective, and passes donors' money to them through its Recommended Charity Fund and to small groups through its Movement Grants; this model covers all its own spending in its year to March 2025 ($1.72M, the $4.6M of grants it passed on being the recipients' cost). Of the $13.5M of giving it traced that year, its own surveys, with unrecorded gifts and our non-response step, suggest it caused about $4.7M, plus $1.1M of grantmakers' funding it steered: about $5.8M, between three and four dollars per dollar it spends, each dollar valued at its Recommended Charities' figures on this site (ACE's own evaluations of them) weighted by its fund's split, half of donors' money counted as new and the rest only for its gain over an ordinary animal charity, and the next dollar at 36% of the past average: about 0.002 years of healthy life per $1,000, as small as the animal charities it funds at the site's animal weights. The result moves most with the animal weights, its next-dollar figure, how much of its estimate rests on donors who answered and what an ordinary animal charity would have done with shifted money; no branch is discounted for missing data, since money moved is counted.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Animal Charity Evaluators",
@@ -31,6 +31,11 @@
   {
    "title": "Animal Charity Evaluators, Support ACE as a meta-fundraiser and evaluator (EA Forum, 18 November 2025)",
    "url": "https://forum.effectivealtruism.org/posts/ekWMbubYfgBFmw7wj/support-ace-as-a-meta-fundraiser-and-evaluator",
+   "type": "charity"
+  },
+  {
+   "title": "Animal Charity Evaluators, Recommended Charity Fund: Past Distributions",
+   "url": "https://animalcharityevaluators.org/donate/donor-resources/recommended-charity-fund/past-distributions/",
    "type": "charity"
   },
   {
@@ -261,10 +266,23 @@
   {
    "id": "ace_counterfactual_share",
    "section": "reach",
-   "label": "Share of those donations ACE estimates it caused",
+   "label": "Share of donors' recorded giving ACE estimates it caused",
    "format": "percent",
-   "formula": "(@meta.ace_counterfactual_2024_25_recommended + @meta.ace_counterfactual_2024_25_movement_grants) / recorded_donations",
-   "explainer": "Its own estimates: $6.4M of the $12.3M to Recommended Charities 'would not have been received' without it, and $0.84M of the $1.2M of Movement Grants, from its surveys of donors who give to its Recommended Charities directly, of grantmakers and of past Recommended Charities and grantees: 54%. That is the shared own-effect question (normalization.md 2.8: the organisation's own survey), new money and money shifted from other charities together; whether it is new is the separate new-money share."
+   "formula": "(@meta.ace_counterfactual_2024_25_recommended + @meta.ace_counterfactual_2024_25_movement_grants - @meta.ace_counterfactual_2024_25_grantmakers) / recorded_donations",
+   "explainer": "Its own estimates: $6.4M of the $12.3M to Recommended Charities 'would not have been received' without it, and $0.84M of the $1.2M of Movement Grants, from its surveys of donors who give to its Recommended Charities directly, of grantmakers and of past Recommended Charities and grantees. The $1.1M of grantmakers' funding it counts is taken out here and counted on its own (grantmakers_moved): 45% of the recorded giving. That is the shared own-effect question (normalization.md 2.8: the organisation's own survey), new money and money shifted from other charities together; whether it is new is the separate new-money share. Grantmakers' gross influenced funding isn't published, so it stays in the denominator, which understates the share slightly."
+  },
+  {
+   "id": "recording_adj",
+   "section": "reach",
+   "label": "Unrecorded giving: ACE-influenced donations it has no data on, as a multiple of what it recorded",
+   "format": "number",
+   "value": {
+    "low": 1.0,
+    "best": 1.1,
+    "high": 1.3
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment: ACE gives its figure as 'at least $12.3 million' and calls its cumulative total 'likely an underestimate' (its December 2024 announcement of the influenced-giving reports), since donors who give to a Recommended Charity without saying why aren't counted. 1.1 (1.0 to 1.3): no published figure for what it misses; the low end takes its count as complete, the high end allows that direct gifts from donors who never say why are a large uncounted group."
   },
   {
    "id": "survey_response_share",
@@ -290,18 +308,34 @@
   {
    "id": "donor_own_effect",
    "section": "reach",
-   "label": "Share of the recorded giving ACE caused (its own effect)",
+   "label": "Share of donors' recorded giving ACE caused (its own effect)",
    "format": "percent",
    "formula": "ace_counterfactual_share * survey_response_adj",
-   "explainer": "ACE's own estimate with the shared non-response step: about 38%, beside the shared 30% for a meta charity without a survey and GiveWell's 59% from its own survey."
+   "explainer": "ACE's own estimate with the shared non-response step: about 32%, beside the shared 30% for a meta charity without a survey and GiveWell's 59% from its own survey."
+  },
+  {
+   "id": "donors_moved",
+   "section": "reach",
+   "label": "Donors' money ACE moved that would not otherwise have reached the charities (US$)",
+   "format": "usd",
+   "formula": "recorded_donations * recording_adj * donor_own_effect",
+   "explainer": "Recorded giving, with the unrecorded part, times its own effect: about $4.7M."
+  },
+  {
+   "id": "grantmakers_moved",
+   "section": "reach",
+   "label": "Grantmakers' funding ACE's recommendations steered to its Recommended Charities (US$)",
+   "format": "usd",
+   "formula": "@meta.ace_counterfactual_2024_25_grantmakers",
+   "explainer": "$1.1M that grantmakers told ACE its recommendations influenced: they answered directly, so no survey-response step; valued below as shifted money only, since grantmakers fund animal work anyway (as the site's GiveWell model treats Open Philanthropy's money)."
   },
   {
    "id": "money_moved",
    "section": "reach",
    "label": "Money ACE moved to animal charities that would not otherwise have reached them, April 2024 – March 2025 (US$)",
    "format": "usd",
-   "formula": "recorded_donations * donor_own_effect",
-   "explainer": "Donations to its Recommended Charities and Movement Grants net of what would have reached them anyway: about $5.1M, three dollars for each dollar of its own costs. ACE's own figure of $6.05 per dollar is for its evaluation spending only and before the non-response step."
+   "formula": "donors_moved + grantmakers_moved",
+   "explainer": "Donations to its Recommended Charities and Movement Grants net of what would have reached them anyway, and the grantmakers' funding it steered: about $5.8M, between three and four dollars for each dollar of its own costs. ACE's own figure of $6.05 per dollar is for its evaluation spending only and before the non-response step."
   },
   {
    "id": "moved_per_dollar",
@@ -434,8 +468,8 @@
    "section": "moved_money",
    "label": "Value of a dollar to the charities ACE moves money to (its own split, live), units of value",
    "format": "small",
-   "formula": "(@meta.ace_counterfactual_2024_25_recommended * avg(#ace:the-humane-league, #ace:wild-animal-initiative, #ace:shrimp-welfare-project, #ace:sinergia-animal, #ace:ciftlik-hayvanlarini-koruma-dernegi, #ace:dansk-vegetarisk-forening, #ace:good-food-fund, #ace:aquatic-life-institute) + @meta.ace_counterfactual_2024_25_movement_grants * #cause:animal-welfare) / (@meta.ace_counterfactual_2024_25_recommended + @meta.ace_counterfactual_2024_25_movement_grants)",
-   "explainer": "Where the money ACE caused went in its fiscal year 2024–25, by its own figures (facts/meta.json ace_counterfactual_2024_25_*): $6.4M to its Recommended Charities and $0.84M as Movement Grants. The Recommended Charities are its 11 of November 2024, the ones its February 2025 fund round paid; eight have a figure on the rankings, each read there under your values (The Humane League, Wild Animal Initiative, Shrimp Welfare Project, Sinergia Animal, Çiftlik Hayvanlarını Koruma Derneği, Dansk Vegetarisk Forening, Good Food Fund, Aquatic Life Institute), with equal weights since ACE publishes no split of the giving it influenced by charity; the three without a model (Faunalytics, Legal Impact for Chickens, New Roots Institute) take their average and drop out. Each figure on the rankings is ACE's own evaluation of that charity, the site's rule for any destination (normalization.md 2.8), not an independent check of ACE. The Movement Grants' 32 small groups have no model: the animal-welfare charities on the rankings, equal weights (#cause:animal-welfare), money movers and ACE itself left out."
+   "formula": "(@meta.ace_rcf_2024_25_the_humane_league * #ace:the-humane-league + @meta.ace_rcf_2024_25_wild_animal_initiative * #ace:wild-animal-initiative + @meta.ace_rcf_2024_25_shrimp_welfare_project * #ace:shrimp-welfare-project + @meta.ace_rcf_2024_25_sinergia_animal * #ace:sinergia-animal + @meta.ace_rcf_2024_25_ciftlik_hayvanlarini_koruma_dernegi * #ace:ciftlik-hayvanlarini-koruma-dernegi + @meta.ace_rcf_2024_25_dansk_vegetarisk_forening * #ace:dansk-vegetarisk-forening + @meta.ace_rcf_2024_25_good_food_fund * #ace:good-food-fund + @meta.ace_rcf_2024_25_aquatic_life_institute * #ace:aquatic-life-institute) / (@meta.ace_rcf_2024_25_the_humane_league + @meta.ace_rcf_2024_25_wild_animal_initiative + @meta.ace_rcf_2024_25_shrimp_welfare_project + @meta.ace_rcf_2024_25_sinergia_animal + @meta.ace_rcf_2024_25_ciftlik_hayvanlarini_koruma_dernegi + @meta.ace_rcf_2024_25_dansk_vegetarisk_forening + @meta.ace_rcf_2024_25_good_food_fund + @meta.ace_rcf_2024_25_aquatic_life_institute)",
+   "explainer": "Where the money ACE caused went in its fiscal year 2024–25 ($6.4M to its Recommended Charities, $0.84M as Movement Grants), by the site's rule for an organisation's own split (normalization.md 2.8). Its only per-charity split is its Recommended Charity Fund's two distributions of the year (July 2024 and February 2025, $2.36M; facts/meta.json ace_rcf_2024_25_*), which weight the eight Recommended Charities with a figure on the rankings, each read there under your values (The Humane League, Wild Animal Initiative, Shrimp Welfare Project, Sinergia Animal, Çiftlik Hayvanlarını Koruma Derneği, Dansk Vegetarisk Forening, Good Food Fund, Aquatic Life Institute); the giving it influenced directly is assumed to split the same way. Recipients without a model take the modelled average within the split and drop out: Faunalytics, Fish Welfare Initiative, Legal Impact for Chickens, New Roots Institute and The Good Food Institute among the Recommended Charities, and the Movement Grants' 32 small groups. Each figure on the rankings is ACE's own evaluation of that charity, the site's rule for any destination, not an independent check of ACE."
   },
   {
    "id": "value_global_health",
@@ -490,8 +524,8 @@
    "section": "moved_money",
    "label": "Value of a dollar where ACE's shifted money would otherwise have gone (an ordinary animal charity), units of value",
    "format": "small",
-   "formula": "ordinary_vs_ranked_ratio * #cause:animal-welfare",
-   "explainer": "Money ACE shifts was going to animal charities anyway: its counterfactual counts gifts its Recommended Charities 'would not have received', and donors who give to animals because of ACE but would have given to animals without it moved between animal charities. So the ordinary charity it would have reached is an animal charity: the shared rule's ratio of an ordinary charity to its cause's ranked charities, applied to the animal-welfare charities on the rankings. The shared prior_dollar_value (GiveDirectly) prices shifted money for donors who would otherwise give to global health; read here, every dollar ACE shifts would count as a loss of about 4 healthy years per $1,000, for a choice between animal charities its donors never faced."
+   "formula": "ordinary_vs_ranked_ratio * moved_dollar_value",
+   "explainer": "Money ACE shifts was going to animal charities anyway: its counterfactual counts gifts its Recommended Charities 'would not have received', and donors who give to animals because of ACE but would have given to animals without it moved between animal charities. So where it would have gone is an ordinary animal charity, priced by the shared rule's own ratio of an ordinary charity to the charities the money goes to (ordinary_vs_ranked_ratio), applied to ACE's destinations; for an organisation moving money to GiveWell's Top Charities this is exactly the shared prior_dollar_value. The shared row itself (GiveDirectly) prices shifted money for donors who would otherwise give to global health; read here, every dollar ACE shifts would count as a loss of about 4 healthy years per $1,000, for a choice between causes its donors never faced. The shared moved_money rows are kept word for word but off the path; the engine change that would make this the shared rule for single-cause organisations outside global health is outside a model build's files."
   },
   {
    "id": "moved_dollar_net_value_animals",
@@ -520,9 +554,9 @@
    "section": "effect",
    "label": "Value of the money ACE moved, units of value",
    "format": "small",
-   "formula": "money_moved * moved_wait_discount * moved_dollar_net_value_animals * (1 + moved_side_effects)",
+   "formula": "(donors_moved * moved_wait_discount * moved_dollar_net_value_animals + grantmakers_moved * (moved_dollar_value - prior_dollar_value_animals)) * (1 + moved_side_effects)",
    "unit": "units of value",
-   "explainer": "Money moved (money through ACE after its wait) × the net value of a dollar moved, with the side effects."
+   "explainer": "Donors' money moved (money through ACE after its wait) × the net value of a dollar moved, and the grantmakers' funding at the gain over an ordinary animal charity, with the side effects."
   },
   {
    "id": "careers_changed",
@@ -747,7 +781,7 @@
    "label": "How much the next dollar does compared with the average dollar so far",
    "format": "percent",
    "formula": "@next_dollar.animal_charity_evaluators",
-   "explainer": "ACE's own figure (facts/next_dollar.json): 36% (15–70%). It holds about 1.3 years of its own costs without donor restrictions and a two-year restricted grant, and says a further dollar would most likely go to advertising, sponsorships and events, newer ways to reach donors than the recommendations its past average rests on.",
+   "explainer": "ACE's own figure (facts/next_dollar.json): 36% (15–70%). It holds about 1.3 years of its own costs without donor restrictions and $783,333 of time-restricted grants, and says a further dollar would most likely go to advertising, sponsorships and events, newer ways to reach donors than the recommendations its past average rests on.",
    "published": 1
   },
   {
@@ -755,8 +789,8 @@
    "section": "donor",
    "label": "Donors' share of the resources behind the outcome",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share + inkind_advertising, 0))",
-   "explainer": "With credit by share of resources on, ACE's cost shares the outcome with its staff's forgone pay, the donors' new money it moved and Google's donated advertising (a co-funder's in-kind gift, Convention 2)."
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + donors_moved * new_money_share + inkind_advertising, 0))",
+   "explainer": "With credit by share of resources on, ACE's cost shares the outcome with its staff's forgone pay, the donors' new money it moved (grantmakers' funding is all shifted) and Google's donated advertising (a co-funder's in-kind gift, Convention 2)."
   },
   {
    "id": "uov_per_donor_dollar",
