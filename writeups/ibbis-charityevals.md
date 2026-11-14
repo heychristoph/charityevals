@@ -11,7 +11,7 @@ The International Biosecurity and Biosafety Initiative for Science is a Swiss fo
 - **The Global DNA Synthesis Map.** A public map of where DNA is made, who screens it and which rules apply, launched in December 2025.
 - **Policy and workshops.** Briefings and submissions in the EU (screening is in the draft EU Biotech Act), the UK and the US, and workshops for companies and regulators in Tanzania, Nigeria and South Africa.
 
-IBBIS publishes no accounts. A Swiss foundation need not, and its website, annual letter and register entry give no figures. Its spending is built from its staff: about 7.5 people on average in 2025, growing to a full-time team of 10, plus fellows. Each work-year is costed at the site's shared figure, $250,000 with overheads, plus a fifth for events and grants. That comes to about $2.6 million.
+IBBIS publishes no accounts. A Swiss foundation need not, and its website, annual letter and register entry give no figures. Its spending is built from its staff: about 7.5 people on average in 2025, growing to a full-time team of 10, plus fellows, part of whose time it pays. Each work-year is costed at the site's shared figure, $250,000 with overheads, plus a fifth for events and grants. That comes to about $2.4 million.
 
 ### How the impact happens
 
@@ -38,7 +38,7 @@ IBBIS is raising money in small grants for named work, and Founders Pledge's 202
 
 ### What drives the result
 
-Most of the result comes from catastrophes the world survives and from COVID-scale pandemics. At the default 4% discount rate the future counts for only about 8 years of the long-run population; at 0.1% the result rises to about 115. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike. The result sits a little above our SecureBio and Johns Hopkins Center for Health Security models, mainly because IBBIS's next dollar counts for more.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 115. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike. The result sits a little above our SecureBio model's, mainly because IBBIS's next dollar counts for more (60% against 49%), and above our Johns Hopkins Center for Health Security model's, whose outbreak analytics count for less per dollar and whose main funder may give less if others give more.
 
 ### Biggest uncertainties
 

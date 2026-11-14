@@ -3,13 +3,11 @@
   "name": "IBBIS (International Biosecurity and Biosafety Initiative for Science)",
   "kind": "charity",
   "cause": "catastrophic-risk",
-  "beneficiaries": "world",
-  "beneficiaries_note": "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population.",
   "template": "catastrophic-risk",
   "estimate_basis": "past_average",
   "charity": "ibbis",
   "owner": "charityevals",
-  "summary": "IBBIS, a Geneva foundation launched in 2024 out of NTI | bio, works to stop DNA synthesis being used to make pandemic pathogens: a free open-source screening tool (commec) synthesis providers install, a screening evaluation portal with NIST, two expert consortia on screening standards, the Global DNA Synthesis Map, policy engagement and in-country workshops. This model of all its work in 2025 comes to about 8.3 years of healthy life per $1,000, from 0.4 to 160 on the combined range: each dollar is valued as a typical project's cut in the forecast pandemic risk (Rethink Priorities' cross-cause model; the Existential Risk Persuasion Tournament's experts), deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. IBBIS publishes no accounts, so its spending (about $2.6M) is built from its staff; the result per dollar barely depends on it. The biggest uncertainties are the years a cut counts, the discount rate and how much a typical dollar cuts the risk (the range runs ten times either way); the one branch is discounted for missing data, since no outcome of the work on the risk is measured.",
+  "summary": "IBBIS, a Geneva foundation launched in 2024 out of NTI | bio, works to stop DNA synthesis being used to make pandemic pathogens: a free open-source screening tool (commec) synthesis providers install, a screening evaluation portal with NIST, two expert consortia on screening standards, the Global DNA Synthesis Map, policy engagement and in-country workshops. This model of all its work in 2025 comes to about 8.3 years of healthy life per $1,000, from 0.4 to 160 on the combined range: each dollar is valued as a typical project's cut in the forecast pandemic risk (Rethink Priorities' cross-cause model; the Existential Risk Persuasion Tournament's experts), deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. IBBIS publishes no accounts, so its spending (about $2.4M) is built from its staff; the result per dollar barely depends on it. The biggest uncertainties are the years a cut counts, the discount rate and how much a typical dollar cuts the risk (the range runs ten times either way); the one branch is discounted for missing data, since no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: IBBIS",
@@ -17,6 +15,8 @@
     "published": "2026-11-14",
     "retrieved": "2026-11-14"
   },
+  "beneficiaries": "world",
+  "beneficiaries_note": "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population.",
   "resources": [
     {
       "title": "IBBIS: about",
@@ -140,6 +140,19 @@
       "explainer": "Beyond the core staff: technical fellows (two are listed on its people page) and part-time contractors on the screening tool and outreach. Our judgment, 1 full-time equivalent (0.5 to 2)."
     },
     {
+      "id": "fellows_paid_share",
+      "section": "cost",
+      "label": "Share of the fellows' and contractors' time IBBIS pays for",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.6,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Some fellows come from AI-and-biosecurity fellowship programmes that may pay their stipends; contractors IBBIS pays itself. Our judgment, 60% (20% if most fellows are paid by their programmes, to all of it). The unpaid rest is others' resources, inside bio_attribution_share."
+    },
+    {
       "id": "other_costs_ratio",
       "section": "cost",
       "label": "Total spending over the cost of its work-years",
@@ -157,8 +170,8 @@
       "section": "cost",
       "label": "Spending in 2025 (estimated from its staff: no accounts are published)",
       "format": "usd",
-      "explainer": "IBBIS's 2025 spending, built from its staff (Convention 1: no accounts or budget are published): full-time equivalents × what a year of such work costs its employer, overheads included (@catastrophe.cost_per_work_year, the shared figure, which also covers Geneva's high salaries in its range) × its other costs. About $2.6M. Every programme is in it: the free screening tool commec and the screening evaluation portal run with NIST, customer-screening resources, the standards consortia (DSSC, SBRC), the Global DNA Synthesis Map, policy engagement (EU, UK, US) and in-country workshops. The result per dollar barely depends on this figure: every dollar is valued as pandemic field work at the shared rate.",
-      "formula": "(core_staff_fte + fellows_fte) * @catastrophe.cost_per_work_year * other_costs_ratio"
+      "explainer": "IBBIS's 2025 spending, built from its staff (Convention 1: no accounts or budget are published): full-time equivalents IBBIS pays for × what a year of such work costs its employer, overheads included (@catastrophe.cost_per_work_year, the shared figure, which also covers Geneva's high salaries in its range) × its other costs. About $2.4M. Every programme is in it: the free screening tool commec and the screening evaluation portal run with NIST, customer-screening resources, the standards consortia (DSSC, SBRC), the Global DNA Synthesis Map, policy engagement (EU, UK, US) and in-country workshops. The result per dollar barely depends on this figure: every dollar is valued as pandemic field work at the shared rate.",
+      "formula": "(core_staff_fte + fellows_fte * fellows_paid_share) * @catastrophe.cost_per_work_year * other_costs_ratio"
     },
     {
       "id": "total_expenses",
@@ -294,11 +307,10 @@
       "kind": "estimate",
       "unit": "per year",
       "source": {
-        "title": "TEMPLATE: forecast / historical record",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "charityevals: no published forecast of a smaller disaster of this kind",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "page": "Tables 2-3 forecast only catastrophes over 10% and extinction",
+        "retrieved": "2026-11-14"
       },
       "explainer": "Not used: IBBIS spends nothing on AI risk (its cost share is 0); no smaller AI size is counted."
     },
@@ -311,11 +323,10 @@
       "kind": "estimate",
       "unit": "deaths",
       "source": {
-        "title": "TEMPLATE: scenario study",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "charityevals: no published forecast of a smaller disaster of this kind",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "page": "Tables 2-3 forecast only catastrophes over 10% and extinction",
+        "retrieved": "2026-11-14"
       },
       "explainer": "Not used (see ai_smaller_per_year)."
     },
@@ -385,11 +396,10 @@
       "value": 0,
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: Form 990 Part III / annual accounts",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "IBBIS, About (history and legal status)",
+        "url": "https://ibbis.bio/about/",
+        "retrieved": "2026-11-14",
+        "quote": "Currently, our work focuses on mapping where synthetic DNA is being made; providing tools so that anyone, anywhere can screen what is being ordered and by whom; and supporting global biosecurity through international standards, regional policy dialogues, and industry best practices."
       },
       "explainer": "0: no work aimed at AI risk itself; work on AI-designed biological sequences is valued in the pandemic area."
     },
@@ -592,11 +602,10 @@
       "kind": "estimate",
       "unit": "per year",
       "source": {
-        "title": "TEMPLATE: forecast / historical record",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "charityevals: no published forecast of a smaller disaster of this kind",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "page": "Tables 2-3 forecast only catastrophes over 10% and extinction",
+        "retrieved": "2026-11-14"
       },
       "explainer": "Not used: IBBIS spends nothing on nuclear risk."
     },
@@ -609,11 +618,10 @@
       "kind": "estimate",
       "unit": "deaths",
       "source": {
-        "title": "TEMPLATE: scenario study",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "charityevals: no published forecast of a smaller disaster of this kind",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "page": "Tables 2-3 forecast only catastrophes over 10% and extinction",
+        "retrieved": "2026-11-14"
       },
       "explainer": "Not used (see nuclear_smaller_per_year)."
     },
@@ -669,11 +677,10 @@
       "value": 0,
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: Form 990 Part III / annual accounts",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "IBBIS, About (history and legal status)",
+        "url": "https://ibbis.bio/about/",
+        "retrieved": "2026-11-14",
+        "quote": "Currently, our work focuses on mapping where synthetic DNA is being made; providing tools so that anyone, anywhere can screen what is being ordered and by whom; and supporting global biosecurity through international standards, regional policy dialogues, and industry best practices."
       },
       "explainer": "0: no nuclear work."
     },
@@ -723,11 +730,11 @@
       "value": 0,
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: charity report / accounts",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "IBBIS, 2025 Annual Letter from the Executive Director (Piers Millett, April 2026)",
+        "url": "https://ibbis.bio/wp-content/uploads/2026/04/Annual-Letter-Executive-Director-1.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 3",
+        "quote": "If adopted, this would make screening mandatory in all 27 EU countries."
       },
       "explainer": "No specific law, standard or institution was won in 2025: the draft EU Biotech Act that would make screening mandatory (December 2025, IBBIS among the groups pressing for it) is pending, and its consortia and map are its own work, so every dollar is valued as pandemic field work: 0."
     },
@@ -838,11 +845,10 @@
       "value": 0,
       "kind": "estimate",
       "source": {
-        "title": "TEMPLATE: charity report / accounts",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+        "title": "IBBIS, About (history and legal status)",
+        "url": "https://ibbis.bio/about/",
+        "retrieved": "2026-11-14",
+        "quote": "Currently, our work focuses on mapping where synthetic DNA is being made; providing tools so that anyone, anywhere can screen what is being ordered and by whom; and supporting global biosecurity through international standards, regional policy dialogues, and industry best practices."
       },
       "explainer": "0: its workshops and trainings (for DNA synthesis companies, regulators and biosafety professionals) improve how screening is done rather than move people into careers on the risk, so they are valued as pandemic field work."
     },
@@ -873,13 +879,6 @@
         "high": 0.4
       },
       "kind": "judgment",
-      "source": {
-        "title": "TEMPLATE: alumni survey",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
       "explainer": "Not used: the branch counts nothing (fb_people is 0); the template's range kept."
     },
     {
@@ -894,13 +893,6 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "source": {
-        "title": "TEMPLATE: alumni follow-up",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
       "explainer": "Not used: the branch counts nothing (fb_people is 0); the template's range kept."
     },
     {
@@ -1085,7 +1077,7 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "Its outputs are taken up a little more than a typical project's: commec, the free open-source screening tool, is in use by synthesis providers (Dynegene and the Shenzhen Institutes of Advanced Technology in China, a Latin American provider screening every order) and met industry standards in independent benchmarking in 2025; the screening evaluation portal it runs with NIST did more than 15 evaluations; its two consortia drew about 30 and over 60 experts and its draft guide implements ISO 20688-2. But adoption is a handful of providers (most orders are screened by large providers' own tools), screening stops only actors who order DNA, and the standards and the EU Biotech Act were not yet in force. 0.8, our judgment, 0.3 to 1.2; as our Nuclear Threat Initiative model (0.8) and near SecureBio's (0.75, whose SecureDNA screening was still in testing in 2024) and the Johns Hopkins Center for Health Security's (0.73), so the same kind of screening work gets the same credit."
+      "explainer": "Its outputs show some uptake, but on balance a little less than a typical project's: commec, the free open-source screening tool, is in use by synthesis providers (Dynegene and the Shenzhen Institutes of Advanced Technology in China, a Latin American provider screening every order) and met industry standards in independent benchmarking in 2025; the screening evaluation portal it runs with NIST did more than 15 evaluations; its two consortia drew about 30 and over 60 experts and its draft guide implements ISO 20688-2. But adoption is a handful of providers (most orders are screened by large providers' own tools), screening stops only actors who order DNA, and the standards and the EU Biotech Act were not yet in force. 0.8, our judgment, 0.3 to 1.2; as our Nuclear Threat Initiative model (0.8) and near SecureBio's (0.75, whose SecureDNA screening was still in testing in 2024) and the Johns Hopkins Center for Health Security's (0.73), so the same kind of screening work gets the same credit."
     },
     {
       "id": "nuclear_evidence_adj",
@@ -1215,7 +1207,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "IBBIS's share of the resources behind its outputs: its consortia run on members' unpaid expert time (about 30 in the DSSC, over 60 in the SBRC), the 2025 study on AI-redesigned toxins was led by Microsoft with Twist and IDT, NIST writes the evaluation portal's test sets, and the map and workshops had co-hosts (Asia Centre for Health Security, Tianjin University, Nigeria's biosafety agency). About 90 experts giving 2 to 5% of a year at a work-year's cost is $0.5M to $1.1M beside IBBIS's $2.6M. 0.75, our judgment, 0.5 to 0.95. The Nuclear Threat Initiative's 2025 grant to IBBIS ($38,343, its Form 990's Schedule F) is inside IBBIS's spending here and counted in NTI's model at NTI's rate: each model values its own dollars, so nothing adds twice; the screening tool's development under NTI's incubation (2019 to 2023) belongs to those years, not to either 2025 model."
+      "explainer": "IBBIS's share of the resources behind its outputs: its consortia run on members' unpaid expert time (about 30 in the DSSC, over 60 in the SBRC), the 2025 study on AI-redesigned toxins was led by Microsoft with Twist and IDT, NIST writes the evaluation portal's test sets, and the map and workshops had co-hosts (Asia Centre for Health Security, Tianjin University, Nigeria's biosafety agency). About 90 experts giving 2 to 5% of a year at a work-year's cost is $0.5M to $1.1M beside IBBIS's $2.4M; fellows' time paid by their own programmes adds a little. 0.75, our judgment, 0.5 to 0.95. The Nuclear Threat Initiative's 2025 grant to IBBIS ($38,343, its Form 990's Schedule F) is inside IBBIS's spending here and counted in NTI's model at NTI's rate: each model values its own dollars, so nothing adds twice; the screening tool's development under NTI's incubation (2019 to 2023) belongs to those years, not to either 2025 model."
     },
     {
       "id": "nuclear_attribution_share",
