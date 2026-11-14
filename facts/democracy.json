@@ -1,0 +1,138 @@
+{
+  "id": "democracy",
+  "label": "Democracy, governance and electoral reform (shared)",
+  "rows": [
+    {
+      "id": "democratization_gdp_gain",
+      "label": "Long-run gain in GDP per capita from a permanent transition to democracy (share)",
+      "unit": "share",
+      "format": "percent",
+      "value": { "low": 0.071, "best": 0.2124, "high": 0.354 },
+      "interval": 0.95,
+      "shape": "normal",
+      "kind": "estimate",
+      "source": {
+        "title": "Acemoglu, Naidu, Restrepo and Robinson (2019), Democracy Does Cause Growth, Journal of Political Economy 127(1): 47-100",
+        "url": "https://economics.mit.edu/sites/default/files/publications/Democracy%20Does%20Cause%20Growth.pdf",
+        "page": "p. 59 (text) and p. 60 (table 2, column 3, the preferred specification)",
+        "quote": "the implied long-run impact is a 21.24 percent (standard error = 7.21 percent) increase in GDP per capita",
+        "note": "Range: the 95% interval from the standard error (21.24 ± 1.96 × 7.21). Panel of 175 countries, 1960-2010, with country fixed effects; the propensity-score and doubly robust estimates plateau at about 24% (p. 76). With country-specific trends the long-run effect is 6.1% (p. 70, note 13), inside the range.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "What a country gains in income per person, in the long run, from becoming and staying a democracy rather than staying a non-democracy: about a fifth (7% to 35%). The anchor for valuing a better or worse functioning democracy: work that keeps a democracy from sliding into autocracy averts a loss of this size; a smaller reform within a democracy gets a ranged share of it, said and anchored in its model. Income gains enter as ln(1 + gain × share) per person-year × $uov_per_ln_consumption, after the build-up (democratization_years_to_effect)."
+    },
+    {
+      "id": "democratization_years_to_effect",
+      "label": "Years until most of democracy's income gain is realized",
+      "unit": "years",
+      "format": "number",
+      "value": { "low": 20, "best": 25, "high": 30 },
+      "kind": "estimate",
+      "source": {
+        "title": "Acemoglu, Naidu, Restrepo and Robinson (2019), Democracy Does Cause Growth, Journal of Political Economy 127(1): 47-100",
+        "url": "https://economics.mit.edu/sites/default/files/publications/Democracy%20Does%20Cause%20Growth.pdf",
+        "page": "p. 59 and p. 76",
+        "quote": "We find that 25–30 years after a transition to democracy, most of the long-run gains from democracy in terms of GDP are realized",
+        "note": "Low: the semiparametric estimates plateau between 20 and 25 years (p. 76).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Democracy's income gain builds up over about 25 years (20 to 30). A model crediting a change in how well a country is governed counts the gain as it builds (about half on average over the build-up, a ranged judgment in the model), discounted at $discount_rate, not the full long-run gain from the first year."
+    },
+    {
+      "id": "bribery_share_gdp",
+      "label": "Bribes paid each year, as a share of GDP (world)",
+      "unit": "share",
+      "format": "percent",
+      "value": { "low": 0.015, "best": 0.02, "high": 0.027 },
+      "kind": "estimate",
+      "source": {
+        "title": "IMF Survey, Fighting Corruption Critical for Growth and Macroeconomic Stability (on IMF Staff Discussion Note SDN/16/05, Corruption: Costs and Mitigating Strategies), 11 May 2016",
+        "url": "https://www.imf.org/external/pubs/ft/survey/so/2016/res051116a.htm",
+        "quote": "A recent estimate put the annual cost of bribery at around $1.5 to $2 trillion (roughly 2 percent of global GDP).",
+        "note": "High: $2 trillion over 2015 world GDP of about $75 trillion. Low: our judgment, for countries with less bribery than the world average. The IMF note adds that the economic and social costs of corruption, through lost revenue and growth, could be larger than the bribes themselves.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "About 2% of the world's income is paid in bribes each year (1.5% to 2.7%). A bribe is mostly a transfer, so it is a measure of how much is at stake, not the loss itself: a model of anti-corruption work values what changes (revenue collected, spending reaching its purpose, investment) with a ranged share of this, anchored and said. Country-specific figures, where published, replace it in that model with the reason."
+    },
+    {
+      "id": "public_investment_efficiency_gap_advanced",
+      "label": "Share of public investment's potential value lost to inefficiency, advanced economies",
+      "unit": "share",
+      "format": "percent",
+      "value": { "low": 0.08, "best": 0.13, "high": 0.2 },
+      "kind": "estimate",
+      "source": {
+        "title": "IMF Survey, Closing Efficiency Gaps Means Big Gains for Public Investment (on IMF Policy Paper, Making Public Investment More Efficient, June 2015)",
+        "url": "https://www.imf.org/en/news/articles/2015/09/28/04/53/sonew061815a",
+        "quote": "AEs facing a gap of 13 percent on average.",
+        "note": "134 countries. The range is our judgment around the IMF's average: the paper gives no interval. The survey adds that strengthening public investment management could close up to two-thirds of the gaps.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "In rich countries about an eighth of what public investment could deliver is lost to poor selection, management and corruption (8% to 20%). With the two rows below, the anchor for valuing better-run government: the money at stake is public spending × the gap, and a reform closes a ranged share of it."
+    },
+    {
+      "id": "public_investment_efficiency_gap_emerging",
+      "label": "Share of public investment's potential value lost to inefficiency, emerging markets",
+      "unit": "share",
+      "format": "percent",
+      "value": { "low": 0.18, "best": 0.27, "high": 0.36 },
+      "kind": "estimate",
+      "source": {
+        "title": "IMF Survey, Closing Efficiency Gaps Means Big Gains for Public Investment (on IMF Policy Paper, Making Public Investment More Efficient, June 2015)",
+        "url": "https://www.imf.org/en/news/articles/2015/09/28/04/53/sonew061815a",
+        "quote": "EMs facing a gap of 27 percent.",
+        "note": "The range is our judgment around the IMF's average: the paper gives no interval.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "In emerging markets about a quarter of public investment's potential value is lost (18% to 36%)."
+    },
+    {
+      "id": "public_investment_efficiency_gap_low_income",
+      "label": "Share of public investment's potential value lost to inefficiency, low-income developing countries",
+      "unit": "share",
+      "format": "percent",
+      "value": { "low": 0.3, "best": 0.4, "high": 0.5 },
+      "kind": "estimate",
+      "source": {
+        "title": "IMF Survey, Closing Efficiency Gaps Means Big Gains for Public Investment (on IMF Policy Paper, Making Public Investment More Efficient, June 2015)",
+        "url": "https://www.imf.org/en/news/articles/2015/09/28/04/53/sonew061815a",
+        "quote": "LIDCs facing a gap of 40 percent.",
+        "note": "The range is our judgment around the IMF's average: the paper gives no interval.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "In low-income developing countries about two fifths of public investment's potential value is lost (30% to 50%)."
+    },
+    {
+      "id": "electoral_reform_repeal_rate",
+      "label": "Chance per year that a won electoral or governance reform is repealed or overridden",
+      "unit": "share / year",
+      "format": "percent",
+      "value": { "low": 0.01, "best": 0.03, "high": 0.08 },
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' judgment, anchored on the record of US local voting-method reforms (Wikipedia, Ranked-choice voting in the United States, sections Repeals and Bans on use; Wikipedia, Approval voting)",
+        "url": "https://en.wikipedia.org/wiki/Ranked-choice_voting_in_the_United_States",
+        "quote": "As of March 2026, ranked-choice voting has also been banned in nineteen states.",
+        "note": "Modern local reforms: about 47 US cities used ranked-choice voting in April 2025; repealed after 2 to 7 years were Ann Arbor (1974-1976), Pierce County (2006-2009), Burlington (2005-2010), Aspen (2007-2010) and North Carolina's judicial pilot (2006-2013), and Telluride later: roughly 1-2% a year before the state bans of 2022-2026 (the page's list of banning states names 18). Approval voting: Fargo (adopted 2018) ended by North Dakota's 2025 ban after 7 years; St. Louis (2020) kept it when voters passed Proposition R in 2022 (the Center for Election Science, https://electionscience.org/education/st-louis-success: 'passed with 69% support') and was exempted from Missouri's 2024 Amendment 7 (KCUR, 5 November 2024, https://www.kcur.org/politics-elections-and-government/2024-11-05/missouri-amendment-7-ranked-choice-voting-noncitizen: 'St. Louis will continue to use approval voting because it was implemented before the Amendment 7 ban'): one repeal in about 13 city-years. Early 20th-century proportional representation (single transferable vote): used in about 24 US cities before 1940 (the same page, History), Ohio's five repealed after 10 to 34 years (1915-1960), and Cambridge, Massachusetts still using it: roughly 4% a year. 3% a year, from 1% (a reform entrenched in a constitution or charter) to 8% (a recent reform facing a hostile state legislature).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Won reforms of how elections or governments work are often undone: by the voters, a city council, or a state that bans them. 3% a year (1% to 8%). A model counts a won reform's years with this hazard beside the discount rate: pv_annuity_due(1, $discount_rate + @democracy.electoral_reform_repeal_rate, years_of_impact), years_of_impact being the template row that reads $win_years_counted. Repeal and 'would have come anyway' are separate questions: the reform may be undone before the years counted run out. A reform already repealed counts the years it was in force, not this rate."
+    },
+    {
+      "id": "lobbied_issue_change_rate",
+      "label": "Share of contested policy issues on which policy changed within about four years",
+      "unit": "share",
+      "format": "percent",
+      "value": { "low": 0.3, "best": 0.4, "high": 0.5 },
+      "kind": "estimate",
+      "source": {
+        "title": "Baumgartner, Berry, Hojnacki, Kimball and Leech (2009), Lobbying and Policy Change: Who Wins, Who Loses, and Why (University of Chicago Press), publisher's synopsis",
+        "url": "https://fbaum.unc.edu/books/lobby/lobbying-synopsis.htm",
+        "quote": "sixty percent of recent lobbying campaigns failed to change policy despite millions of dollars spent trying",
+        "note": "98 US federal issues, sampled at random from those lobbyists were working on (the book's design). The synopsis adds that resources explain less than five percent of the difference between successful and unsuccessful efforts. Range: our judgment.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "A reference class for p_success: on a contested issue, policy changed about 40% of the time (30% to 50%) over a few years, whoever lobbied, and the side with more money was hardly likelier to win. A pending campaign's chance starts here and moves with the issue's own record; a win already in takes the charity's share of its cause instead (Convention 2)."
+    }
+  ]
+}
