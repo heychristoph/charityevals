@@ -3,11 +3,13 @@
   "name": "SilverLining (charityevals)",
   "kind": "charity",
   "cause": "climate",
+  "beneficiaries": "world",
+  "beneficiaries_note": "Our build: cooling the planet, if research leads to its use, spares heat deaths everywhere, so the result is spread by world population, as for every tonne of CO₂ kept out of the air.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "silverlining",
   "owner": "charityevals",
-  "summary": "SilverLining (Washington, DC) funds and coordinates research on solar radiation modification (cooling the planet by reflecting a little sunlight) and presses governments to research and govern it; this model values that work by the research it added in 2019-2024: its own grants and science, other funders' money it directed, and the US federal research line (NOAA's Earth's Radiation Budget, about $8M a year since 2020) its policy work helped start, against its spending over those years ($6.5M in 2024). A dollar of the field's research is worth a share of the heat deaths a use of cooling would avert, put into tonnes of CO₂ by how much a tonne warms: a 30% chance of a use this century, 0.6°C for 50 years, research adding a tenth of its benefit by improving the decision, over all the field's funding until then. At the defaults a dollar given averts the heat deaths of about 0.7 tonnes of CO₂, about 0.085 years of healthy life per $1,000; it is more than ten times its peers because cooling acts on the warming itself, so the decision research informs weighs hundreds of billions of tonnes, and the field informing it is small (about $44M a year). The result is mostly uncertainty, resting on judgments no study settles (how much research improves that decision, whether cooling is used at all), and every branch is discounted for missing data.",
+  "summary": "SilverLining (Washington, DC) funds and coordinates research on solar radiation modification (cooling the planet by reflecting a little sunlight) and works with governments and others on how it is researched and governed; this model values what it added to that field in 2019-2024: its own research grants and science, its engagement work and grants abroad, other funders' money it directed, and the US federal research line (NOAA's Earth's Radiation Budget, about $8M a year since 2020) its policy work helped start, against its spending over those years ($6.5M in 2024). A dollar of the field's work is worth a share of the heat deaths a use of cooling would avert, put into tonnes of CO₂ by how much a tonne warms: a 30% chance of a use this century, 0.6°C for 50 years, the field's work adding a tenth of its benefit by improving how it is used, over all the field's funding until then. At the defaults a dollar given averts the heat deaths of about 1.1 tonnes of CO₂, about 0.14 years of healthy life per $1,000; it is more than ten times its peers because cooling acts on the warming itself, so the decision the field informs weighs hundreds of billions of tonnes, and the field is small (about $44M a year). Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. The result is mostly uncertainty, resting on judgments no study settles (how much the field's work improves a use, whether there is one), and every branch is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: SilverLining",
@@ -293,11 +295,11 @@
       }
     },
     {
-      "id": "res_grants_period",
+      "id": "grants_period",
       "section": "reach",
-      "label": "Research grants made by its research initiative, 2020-2024",
+      "label": "Grants made by its research initiative, 2020-2024",
       "format": "usd",
-      "explainer": "The research initiative's grants over its first five years (to February 2025): climate-model studies of stratospheric aerosols and marine cloud brightening (the ARISE-SAI simulations with NCAR, the University of Washington's marine cloud brightening programme), observations (the Hunga eruption balloon campaign), and grants to groups in Africa and the Arctic for research and engagement. The Form 990s show $890,848 in 2023 and $1,883,807 in 2024 (Part I line 13), consistent with the total.",
+      "explainer": "The research initiative's grants over its first five years (to February 2025): climate-model studies of stratospheric aerosols and marine cloud brightening (the ARISE-SAI simulations with NCAR, the University of Washington's marine cloud brightening programme), observations (the Hunga eruption balloon campaign), and grants to groups in Africa and the Arctic for engagement, communications and research. The Form 990s show $890,848 in 2023 and $1,883,807 in 2024 (Part I line 13), consistent with the total. Split below into research and engagement by 2024's split.",
       "value": 7000000,
       "kind": "observed",
       "source": {
@@ -309,11 +311,90 @@
       }
     },
     {
+      "id": "grants_2024",
+      "section": "reach",
+      "label": "Grants paid, 2024",
+      "format": "usd",
+      "explainer": "All grants in 2024, booked under research and innovation (Part III line 4b).",
+      "value": 1883807,
+      "kind": "observed",
+      "source": {
+        "title": "SilverLining, Form 990 for 2024 (IRS e-file XML, batch 2025_TEOS_XML_11C)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11C.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part I line 13 (CYGrantsAndSimilarPaidAmt)",
+        "quote": "1883807"
+      }
+    },
+    {
+      "id": "engagement_grants_2024",
+      "section": "reach",
+      "label": "Grants to groups abroad for engagement, communications and advocacy, 2024",
+      "format": "usd",
+      "explainer": "The grants whose stated purpose is engagement, communications and advocacy with the promotion of research, rather than research itself: counted in the engagement branch.",
+      "value": 687149,
+      "kind": "observed",
+      "source": {
+        "title": "SilverLining, Form 990 for 2024 (IRS e-file XML, batch 2025_TEOS_XML_11C)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11C.zip",
+        "retrieved": "2026-11-14",
+        "page": "Schedule F Part II (two grants: $200,000 for Africa and the Global South, $487,149 for Arctic Indigenous communities)",
+        "quote": "SUPPORT WORK IN AFRICA AND THE GLOBAL SOUTH IN YOUTH ENGAGEMENT, COMMUNICATIONS, ADVOCACY AND PROMOTION OF SCIENTIFIC RESEARCH ON SRM/CLIMATE INTERVENTION"
+      }
+    },
+    {
+      "id": "eng_grant_share",
+      "section": "reach",
+      "label": "Share of grants that fund engagement rather than research (2024's split)",
+      "format": "percent",
+      "explainer": "2024's split applied to the period's grants: 36%. Earlier years' grants went mostly to modelling, so this may count a little too much of them as engagement.",
+      "formula": "engagement_grants_2024 / grants_2024"
+    },
+    {
+      "id": "res_grants_period",
+      "section": "reach",
+      "label": "Research grants, 2020-2024",
+      "format": "usd",
+      "formula": "grants_period * (1 - eng_grant_share)"
+    },
+    {
+      "id": "engagement_line_2024",
+      "section": "reach",
+      "label": "Stakeholder engagement programme, 2024",
+      "format": "usd",
+      "explainer": "Media engagement, web and social media, events, and outreach programmes for different groups (and development, as the return describes it).",
+      "value": 1109970,
+      "kind": "observed",
+      "source": {
+        "title": "SilverLining, Form 990 for 2024 (IRS e-file XML, batch 2025_TEOS_XML_11C)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11C.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III line 4c (ProgSrvcAccomActy3Grp ExpenseAmt)",
+        "quote": "1109970"
+      }
+    },
+    {
+      "id": "eng_spend_share",
+      "section": "reach",
+      "label": "Stakeholder engagement's share of total spending (2024's split)",
+      "format": "percent",
+      "explainer": "Applied to the period's spending.",
+      "formula": "engagement_line_2024 / total_expenses"
+    },
+    {
+      "id": "eng_field_dollars",
+      "section": "reach",
+      "label": "Engagement it did or funded, 2019-2024",
+      "format": "usd",
+      "explainer": "Its own stakeholder engagement over the period plus the engagement grants: field work like the rest of the field's awareness-building and advocacy (21% of the field's funding, SRM360).",
+      "formula": "eng_spend_share * period_spend_nominal + grants_period * eng_grant_share"
+    },
+    {
       "id": "res_inhouse_share",
       "section": "reach",
       "label": "Share of its other spending that is its own science",
       "format": "percent",
-      "explainer": "Our judgment, 20% (5% to 40%): of the spending that isn't grants, the part that is research it does or coordinates itself (its chief climate scientist, the research roadmap, convening of research groups, publication support), counted like the grants. Anchor: the chief climate scientist's pay ($452,000, Part VII) is 10% of 2024's non-grant spending ($4.6M); research coordination staff and contractors (a research strategy consultant, $110,700) add to it. The rest is policy, engagement, communications and overhead, valued only through what they won.",
+      "explainer": "Our judgment, 20% (5% to 40%): of the spending that is neither grants nor stakeholder engagement, the part that is research it does or coordinates itself (its chief climate scientist, the research roadmap, convening of research groups, publication support), counted like the grants. Anchor: the chief climate scientist's pay ($452,000, Part VII) is 13% of 2024's spending outside grants and engagement ($3.5M); research coordination staff and contractors (a research strategy consultant, $110,700) add to it. The rest is policy, communications and overhead, valued through what they won.",
       "value": {
         "low": 0.05,
         "best": 0.2,
@@ -326,7 +407,7 @@
       "section": "reach",
       "label": "Its own science, 2019-2024",
       "format": "usd",
-      "formula": "res_inhouse_share * (period_spend_nominal - res_grants_period)"
+      "formula": "res_inhouse_share * (period_spend_nominal * (1 - eng_spend_share) - grants_period)"
     },
     {
       "id": "res_field_dollars",
@@ -334,6 +415,19 @@
       "label": "Research it funded or did, 2019-2024",
       "format": "usd",
       "formula": "res_grants_period + res_inhouse_dollars"
+    },
+    {
+      "id": "dir_federal_share",
+      "section": "reach",
+      "label": "Share of the directed money that was federal money already counted in the policy branch",
+      "format": "percent",
+      "explainer": "Our judgment, 10% (2% to 30%): its impact page doesn't say who the money came from, and it names NOAA as lead of a campaign it facilitated (the Hunga eruption balloons); federal money is counted in the policy branch, so it is taken out here.",
+      "value": {
+        "low": 0.02,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment"
     },
     {
       "id": "dir_money_period",
@@ -388,13 +482,16 @@
       "section": "reach",
       "label": "NOAA Earth's Radiation Budget, fiscal year 2022",
       "format": "usd",
-      "explainer": "Our judgment, $9M ($7M to $11M): NOAA's page names no change between fiscal years 2021 ($9M) and 2023 ($9.5M), so 2022 was most likely the 2021 level; the House had proposed $11M (AIP FYI, FY22 budget outlook).",
-      "value": {
-        "low": 7000000,
-        "best": 9000000,
-        "high": 11000000
-      },
-      "kind": "judgment"
+      "explainer": "$9M: AIP gives fiscal 2023's $9.5M as a $500,000 increase on fiscal 2022, and NOAA's page names no change between 2021 ($9M) and 2023.",
+      "value": 9000000,
+      "kind": "observed",
+      "source": {
+        "title": "AIP FYI (2023), FY23 Budget Outcomes: National Oceanic and Atmospheric Administration",
+        "url": "https://www.aip.org/fyi/2023/fy23-budget-outcomes-national-oceanic-and-atmospheric-administration",
+        "retrieved": "2026-11-14",
+        "page": "Earth's radiation budget paragraph",
+        "quote": "a $500,000 increase"
+      }
     },
     {
       "id": "noaa_fy23",
@@ -451,6 +548,33 @@
       "formula": "(noaa_fy20 + noaa_fy21 + noaa_fy22 + noaa_fy23 + noaa_fy24) / noaa_fiscal_years"
     },
     {
+      "id": "noaa_srm_share",
+      "section": "reach",
+      "label": "Share of the line counted as solar radiation modification work, as the field's funding tracker counts it",
+      "format": "percent",
+      "explainer": "Our judgment, 55% (35% to 100%): the line also studies natural changes to sunlight reaching the Earth (volcanoes, wildfire smoke, rocket exhaust), which the field's funding tracker leaves out as adjacent work; its overview puts all US government funding at $39.0M through 2030 (SRM360, SRM funding overview), less than the line's $41M for 2020-2024 alone. Only the share counted the same way as the field's total ($44M a year) is a field dollar here.",
+      "value": {
+        "low": 0.35,
+        "best": 0.55,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "SRM360, SRM funding overview",
+        "url": "https://srm360.org/article/srm-funding-overview/",
+        "page": "government funding by country",
+        "quote": "The US ($39.0m) will be 3rd largest",
+        "retrieved": "2026-11-14"
+      }
+    },
+    {
+      "id": "noaa_srm_dollars",
+      "section": "reach",
+      "label": "The line's yearly money counted as field work",
+      "format": "usd",
+      "formula": "noaa_yearly * noaa_srm_share"
+    },
+    {
       "id": "cooling_c",
       "section": "effect",
       "label": "Cooling if solar radiation modification is used, averaged over its years",
@@ -490,7 +614,7 @@
       "section": "effect",
       "label": "Chance solar radiation modification is used at a climate-relevant scale this century",
       "format": "percent",
-      "explainer": "Our judgment, 30% (10% to 60%): 66% of 120 IPCC-contributing researchers who answered a 2025 survey expect a large-scale deployment attempt this century; an attempt is not a sustained use of the size above, and respondents chose to answer, so the best guess is about half of it. Not marked a single event: like the catastrophe chances by 2100 (facts: catastrophe), it is a forecast about the world every dollar of the field faces, not a bet this charity makes, and better research also has value in the worlds where it is not used (a harmful use avoided, in decision_value_share).",
+      "explainer": "Our judgment, 30% (10% to 60%): 66% of 120 IPCC-contributing researchers who answered a 2025 survey expect a large-scale deployment attempt this century; an attempt is not a sustained use of the size above, and respondents chose to answer, so the best guess is about half of it. A single event (normalization.md 2.18): cooling is used this century or it isn't, so at the default risk setting the counted figure is near zero, and above 70% the full payoff counts.",
       "value": {
         "low": 0.1,
         "best": 0.3,
@@ -503,14 +627,15 @@
         "retrieved": "2026-11-14",
         "quote": "a similar proportion expect a large-scale deployment attempt this century",
         "page": "survey results chart"
-      }
+      },
+      "single_event": true
     },
     {
       "id": "decision_value_share",
       "section": "effect",
-      "label": "Share of the cooling's benefit the field's research adds through better decisions",
+      "label": "Share of the cooling's benefit the field's work (research, governance, advocacy) adds through better decisions",
       "format": "percent",
-      "explainer": "Our judgment, 10% (2% to 30%): research does not cool the planet; it changes whether, when and how cooling is used. Its value is the difference between the decisions made with it and without it: a well-designed use (injection sites and amounts that limit regional harms such as shifted monsoons, an end that avoids a sudden rebound) instead of a crude one, and a harmful use avoided. We count that as a share of the gross benefit of the use. No study estimates it; the anchor is that without research a use would still be possible (it is cheap) but blind, and that survey respondents name unknown consequences as the main risk (80%, SRM360's summary of the 2025 survey).",
+      "explainer": "Our judgment, 10% (2% to 30%): the field's work does not cool the planet; it changes when and how cooling is used. Its value, in the worlds where cooling is used, is the difference between the use made with it and without it: a well-designed, governed use (injection sites and amounts that limit regional harms such as shifted monsoons, an end that avoids a sudden rebound) instead of a crude one. We count that as a share of the gross benefit of the use, and divide it by all the field's funding (research about half of it, awareness and advocacy a fifth), so it is the share all that work adds. Value in worlds where cooling is never used (a harmful use talked out of) is not counted. No study estimates it; the anchor is that without research a use would still be possible (it is cheap) but blind, and that survey respondents name unknown consequences as the main risk (80%, SRM360's summary of the 2025 survey).",
       "value": {
         "low": 0.02,
         "best": 0.1,
@@ -595,7 +720,7 @@
       "section": "effect",
       "label": "Tonnes a typical dollar of the field's work is worth",
       "format": "small",
-      "explainer": "The chance of use × the tonnes its heat deaths equal × the share research adds, over all the field's funding until the decision: an average dollar of the field. SilverLining's dollars enter below at this value, with their own adjustments. At the defaults about 4 tonnes a dollar (25 cents a tonne) before any adjustment, against $0.50-3.50 a tonne for the climate funds' best picks (facts: climate, top_climate_fund_usd_per_tco2e): cheaper because cooling would offset the warming of hundreds of billions of tonnes at once, and the field whose research shapes that decision spends about $44M a year. This is why the model is far above the climate median (its peers' tonnes are each a policy's emissions cut); after its adjustments it is near the climate funds' best picks.",
+      "explainer": "The chance of use × the tonnes its heat deaths equal × the share the field's work adds, over all the field's funding until the decision: an average dollar of the field. SilverLining's dollars enter below at this value, with their own adjustments. At the defaults about 4 tonnes a dollar before the timing correction (×2.6, timing_adj) and any adjustment, 10 cents a tonne after the correction, against $0.50-3.50 a tonne for the climate funds' best picks (facts: climate, top_climate_fund_usd_per_tco2e): cheaper because cooling would offset the warming of hundreds of billions of tonnes at once, and the field whose research shapes that decision spends about $44M a year. This is why the model is far above the climate median (its peers' tonnes are each a policy's emissions cut); after its adjustments (about 90 cents a tonne) it is near the climate funds' best picks.",
       "formula": "p_deployment * tco2e_equiv_if_used * decision_value_share / field_total_to_decision",
       "unit": "t CO₂e / $"
     },
@@ -604,7 +729,7 @@
       "section": "effect",
       "label": "Probability the outcome happens because of this work",
       "format": "percent",
-      "explainer": "1: the grants were made, the money directed and the federal line won in the period; the chances (of use, of research mattering) are in the value of a field dollar above.",
+      "explainer": "1 for the research, engagement and directed-money branches: the grants were made, the work done and the money directed in the period; the chances (of use, of the work mattering) are in the value of a field dollar above. The federal line takes the shared advocacy share instead (pol_p_success).",
       "formula": "1"
     },
     {
@@ -621,7 +746,7 @@
       "section": "effect",
       "label": "Years from the work until the heat deaths it averts start to count",
       "format": "number",
-      "explainer": "Our judgment, 0 (0 to 15): the deaths come while cooling is used (about 2040 to 2090, centred some 40 years from now); the shared conversion already counts a tonne's heat deaths 60 years after it is avoided, a little later than that, so no further wait is added (which counts these deaths slightly later than they come). The high end is a use that starts late in the century.",
+      "explainer": "Our judgment, 0 (0 to 15): the deaths come while cooling is used, before a tonne's would (the shared conversion counts a tonne's heat deaths at its own delay), so there is no further wait; deaths_earlier_years corrects for how much sooner they come. The high end is a use that starts late in the century.",
       "value": {
         "low": 0,
         "best": 0,
@@ -629,6 +754,28 @@
       },
       "kind": "judgment",
       "unit": "years"
+    },
+    {
+      "id": "deaths_earlier_years",
+      "section": "effect",
+      "label": "Years sooner the cooling's heat deaths come than a tonne's",
+      "format": "number",
+      "explainer": "Our judgment, 24 years (15 to 35): the shared conversion discounts a tonne's heat deaths as if they all came 60 years after it is avoided, the discount-weighted middle of a flat stream of deaths over 2020-2300 at 4% (such a stream is worth 0.093 of deaths today, against 1.04^-60 = 0.095). A use of 50 years starting about 18 years after the period's middle (field_years_to_decision less the years already past) has its discount-weighted middle about 36 years out: 24 years sooner. Low end a use starting in the 2050s, high end one starting in the 2030s. At lower discount rates the correction shrinks with the rate, as it should (its effect is (1 + rate) to this power).",
+      "value": {
+        "low": 15,
+        "best": 24,
+        "high": 35
+      },
+      "kind": "judgment",
+      "unit": "years"
+    },
+    {
+      "id": "timing_adj",
+      "section": "effect",
+      "label": "Correction for the cooling's heat deaths coming sooner than a tonne's",
+      "format": "multiple",
+      "explainer": "The years sooner, at the shared discount rate: 2.6 at 4%, 1.3 at 1%, nearly 1 at 0.1%.",
+      "formula": "(1 + $discount_rate) ^ deaths_earlier_years"
     },
     {
       "id": "wait_discount",
@@ -659,20 +806,36 @@
       "section": "effect",
       "label": "Its other policy results, as a share of the federal line's value",
       "format": "percent",
-      "explainer": "Our judgment, 30% (5% to 100%): the White House's congressionally mandated research plan (2023), which it says its advocacy supported; research it funded that informed the UN ozone assessment (2022) and UN Environment Programme's One Atmosphere report (2023); and its engagement of scientists and officials in Africa, the Global South and the Arctic. They shape the decisions research informs, as the federal line does, but no money or rule follows from them.",
+      "explainer": "Our judgment, 15% (5% to 50%): the White House's congressionally mandated research plan (2023), which it says its advocacy supported, and its other work with officials in the US and abroad. They shape the decisions the field's work informs, as the federal line does, but no money or rule follows from them. Research it funded that informed UN reports is in the research branch, and its engagement abroad in the engagement branch, so neither is counted here.",
       "value": {
         "low": 0.05,
-        "best": 0.3,
-        "high": 1
+        "best": 0.15,
+        "high": 0.5
       },
       "kind": "judgment"
+    },
+    {
+      "id": "pol_p_success",
+      "section": "effect",
+      "label": "Federal line: share of the win due to advocacy at all",
+      "format": "percent",
+      "explainer": "The site's one figure for a won climate policy (facts: climate, advocacy_share_of_policy_win): the part of a win already in that is due to all advocates together; SilverLining's share among them is pol_group_share.",
+      "formula": "@climate.advocacy_share_of_policy_win"
     },
     {
       "id": "res_downstream",
       "section": "effect",
       "label": "Research branch: tonnes of its research, before adjustments",
       "format": "number",
-      "formula": "res_field_dollars * tco2e_per_field_dollar * p_success * wait_discount",
+      "formula": "res_field_dollars * tco2e_per_field_dollar * p_success * wait_discount * timing_adj",
+      "unit": "t CO₂e"
+    },
+    {
+      "id": "eng_downstream",
+      "section": "effect",
+      "label": "Engagement branch: tonnes of its engagement, before adjustments",
+      "format": "number",
+      "formula": "eng_field_dollars * tco2e_per_field_dollar * p_success * wait_discount * timing_adj",
       "unit": "t CO₂e"
     },
     {
@@ -680,7 +843,7 @@
       "section": "effect",
       "label": "Directed money: tonnes of the research it steered, before adjustments",
       "format": "number",
-      "formula": "dir_money_period * tco2e_per_field_dollar * p_success * wait_discount",
+      "formula": "dir_money_period * (1 - dir_federal_share) * tco2e_per_field_dollar * p_success * wait_discount * timing_adj",
       "unit": "t CO₂e"
     },
     {
@@ -688,7 +851,7 @@
       "section": "effect",
       "label": "Policy branch: tonnes of the federal research line and its other policy results, before adjustments",
       "format": "number",
-      "formula": "noaa_yearly * (1 + pol_other_outputs_ratio) * tco2e_per_field_dollar * p_success * discounted_years",
+      "formula": "noaa_srm_dollars * (1 + pol_other_outputs_ratio) * tco2e_per_field_dollar * pol_p_success * discounted_years * timing_adj",
       "unit": "t CO₂e"
     },
     {
@@ -696,7 +859,7 @@
       "section": "effect",
       "label": "All branches, before adjustments",
       "format": "number",
-      "formula": "res_downstream + dir_downstream + pol_downstream",
+      "formula": "res_downstream + eng_downstream + dir_downstream + pol_downstream",
       "unit": "t CO₂e"
     },
     {
@@ -796,13 +959,13 @@
     {
       "id": "pol_group_share",
       "section": "adjustments",
-      "label": "Federal line: SilverLining and its lobbying arm's share of the work behind it",
+      "label": "Federal line: SilverLining and its lobbying arm's share of all advocates' work behind it",
       "format": "percent",
-      "explainer": "Our judgment, 30% (10% to 60%): it was one of only two organisations to disclose lobbying on solar geoengineering in the decade to 2023 (the other Carnegie Mellon University, in 2013: E&E News, 2 March 2023, 'Blocking sun rays finds support in the Senate'), and its director consulted on the bill behind the line (MIT Technology Review); the decision was Congress's, with NOAA's own scientists, members such as Rep. McNerney and the National Academies' 2021 call for a federal programme behind it.",
+      "explainer": "Our judgment, 60% (30% to 90%): the advocates' part of the win as a whole is the shared figure (pol_p_success); among advocates, it was one of only two organisations to disclose lobbying on solar geoengineering in the decade to 2023 (the other Carnegie Mellon University, in 2013: E&E News, 2 March 2023, 'Blocking sun rays finds support in the Senate'), and its director advised Rep. McNerney's office on his bill for a formal NOAA programme, introduced as the first money passed (MIT Technology Review). Other advocates: researchers who testified and wrote for it, and the National Academies' 2021 call for a federal programme.",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
       },
       "kind": "judgment",
       "source": {
@@ -814,11 +977,28 @@
       }
     },
     {
+      "id": "policy_programme_2024",
+      "section": "adjustments",
+      "label": "SilverLining's policy programme, 2024",
+      "format": "usd",
+      "explainer": "Research and analysis on US and international policy, convening and education: SilverLining's own work behind the federal line, beside its lobbying arm's.",
+      "value": 1441366,
+      "kind": "observed",
+      "source": {
+        "title": "SilverLining, Form 990 for 2024 (IRS e-file XML, batch 2025_TEOS_XML_11C)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11C.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III line 4a (ExpenseAmt)",
+        "quote": "1441366"
+      }
+    },
+    {
       "id": "c3_share_of_group",
       "section": "adjustments",
-      "label": "SilverLining's share of its own and its lobbying arm's spending, 2024",
+      "label": "SilverLining's share of its own policy work and its lobbying arm's spending, 2024",
       "format": "percent",
-      "formula": "total_expenses / (total_expenses + c4_total_expenses_2024)"
+      "explainer": "The resources behind the line on its side are SilverLining's policy programme and SilverLining Policy's lobbying ($343,000 of its $406,000 programme spending to a lobbying firm, on the US national research effort); a gift to SilverLining funds only the first.",
+      "formula": "policy_programme_2024 / (policy_programme_2024 + c4_total_expenses_2024)"
     },
     {
       "id": "pol_attribution_share_shared",
@@ -836,11 +1016,45 @@
       "formula": "pol_attribution_share_shared"
     },
     {
+      "id": "eng_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Engagement: share that wouldn't have happened anyway, and does what the field's engagement does",
+      "format": "percent",
+      "explainer": "Our judgment, 60% (30% to 90%): the engagement line includes development and media work that serves its own fundraising and profile as much as the field's decisions, and other groups (the Degrees Initiative, the Alliance for Just Deliberation on Solar Geoengineering) also engage the Global South; below the research branch's 80%.",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment"
+    },
+    {
+      "id": "eng_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Engagement: its share of the resources behind the work",
+      "format": "percent",
+      "explainer": "Our judgment, 80% (50% to 100%): partners abroad (the grantees in Africa and the Arctic, co-hosts of its workshops such as AIMS and NCAR) add their own staff and time.",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment"
+    },
+    {
+      "id": "eng_attribution_share",
+      "section": "adjustments",
+      "label": "Engagement: share of credit used",
+      "format": "percent",
+      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
+      "formula": "eng_attribution_share_shared"
+    },
+    {
       "id": "missing_data_adj",
       "section": "adjustments",
       "label": "Counted less where the outcome isn't measured for this charity",
       "format": "percent",
-      "explainer": "The shared missing-data step (docs/normalization.md 2.12), every branch: the value of research rests on judgments (the chance of use, the share research adds), with no measured outcome for SilverLining's work.",
+      "explainer": "The shared missing-data step (docs/normalization.md 2.12), every branch: the value of the field's work rests on judgments (the chance of use, the share the work adds), with no measured outcome for SilverLining's work.",
       "formula": "$missing_data_discount"
     },
     {
@@ -849,6 +1063,13 @@
       "label": "Research: all adjustments",
       "format": "multiple",
       "formula": "evidence_adj * res_counterfactual_adj * res_attribution_share * missing_data_adj"
+    },
+    {
+      "id": "eng_total_adj",
+      "section": "adjustments",
+      "label": "Engagement: all adjustments",
+      "format": "multiple",
+      "formula": "evidence_adj * eng_counterfactual_adj * eng_attribution_share * missing_data_adj"
     },
     {
       "id": "dir_total_adj",
@@ -870,7 +1091,7 @@
       "label": "Share that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
       "explainer": "The outcome-weighted average of the branches' own rows, for reading only: each branch applies its own, and no row on the way to the outcome reads this one.",
-      "formula": "(res_downstream * res_counterfactual_adj + dir_downstream * dir_counterfactual_adj + pol_downstream * pol_counterfactual_adj) / downstream_value"
+      "formula": "(res_downstream * res_counterfactual_adj + eng_downstream * eng_counterfactual_adj + dir_downstream * dir_counterfactual_adj + pol_downstream * pol_counterfactual_adj) / downstream_value"
     },
     {
       "id": "attribution_share_shared",
@@ -878,7 +1099,7 @@
       "label": "Its share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
       "explainer": "The outcome-weighted average of the branches' own rows, for reading only: each branch applies its own, and no row on the way to the outcome reads this one.",
-      "formula": "(res_downstream * res_counterfactual_adj * res_attribution_share_shared + dir_downstream * dir_counterfactual_adj * dir_attribution_share_shared + pol_downstream * pol_counterfactual_adj * pol_attribution_share_shared) / (res_downstream * res_counterfactual_adj + dir_downstream * dir_counterfactual_adj + pol_downstream * pol_counterfactual_adj)"
+      "formula": "(res_downstream * res_counterfactual_adj * res_attribution_share_shared + eng_downstream * eng_counterfactual_adj * eng_attribution_share_shared + dir_downstream * dir_counterfactual_adj * dir_attribution_share_shared + pol_downstream * pol_counterfactual_adj * pol_attribution_share_shared) / (res_downstream * res_counterfactual_adj + eng_downstream * eng_counterfactual_adj + dir_downstream * dir_counterfactual_adj + pol_downstream * pol_counterfactual_adj)"
     },
     {
       "id": "attribution_share",
@@ -894,7 +1115,7 @@
       "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
       "explainer": "The outcome-weighted average of the branches' own rows, for reading only: each branch applies its own, and no row on the way to the outcome reads this one.",
-      "formula": "(res_downstream * res_total_adj + dir_downstream * dir_total_adj + pol_downstream * pol_total_adj) / downstream_value"
+      "formula": "(res_downstream * res_total_adj + eng_downstream * eng_total_adj + dir_downstream * dir_total_adj + pol_downstream * pol_total_adj) / downstream_value"
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -985,7 +1206,7 @@
       "label": "Tonnes of CO₂e whose heat deaths it averts, per year of 2019-2024",
       "format": "number",
       "explainer": "The three branches after their adjustments, with the side effects, over the period's years.",
-      "formula": "(res_downstream * res_total_adj + dir_downstream * dir_total_adj + pol_downstream * pol_total_adj) * (1 + unmodelled_benefits_adj + moral_hazard_share + premature_use_share) / period_years",
+      "formula": "(res_downstream * res_total_adj + eng_downstream * eng_total_adj + dir_downstream * dir_total_adj + pol_downstream * pol_total_adj) * (1 + unmodelled_benefits_adj + moral_hazard_share + premature_use_share) / period_years",
       "unit": "t CO₂e"
     },
     {
@@ -1069,7 +1290,5 @@
       "row": "tco2e_per_dollar",
       "unit": "tco2e"
     }
-  },
-  "beneficiaries": "world",
-  "beneficiaries_note": "Our build: cooling the planet, if research leads to its use, spares heat deaths everywhere, so the result is spread by world population, as for every tonne of CO₂ kept out of the air."
+  }
 }
