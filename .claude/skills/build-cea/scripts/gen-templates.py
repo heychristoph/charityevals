@@ -33,7 +33,7 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
                     $missing_data_discount where the outcome isn't measured for this charity, else 1 with
                     the reason (docs/normalization.md 2.12)
 """
-import json, os, subprocess, sys
+import json, os, re, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".."))
@@ -835,6 +835,9 @@ def area_rows(a, name, ext, cat, share, what):
     ]
     return rows
 
+CR_POL = ("TEMPLATE: the area's extinction-to-catastrophe mix of the {what}, defaulting to a typical project's: the {what} a typical $1 million averts a year (the area's *_{row}_per_million) over its cut "
+          "in the catastrophe risk (@catastrophe.<area>_catastrophe_cut_per_million), so pol_relative_cut (a share of the catastrophe risk) cuts the extinction-level and the survivable risk in the proportion a typical project does. "
+          "Point both at the win's area (nuclear_, ai_ or bio_); replace with the area's own yearly figure (<area>_{row}_per_year) only where the measure acts on one size alone (name which), several areas: a weighted sum with a weight row.")
 CR_POINT = "TEMPLATE: point it at the area of the {what} (ai_, bio_ or nuclear_{row}); several areas: a weighted sum with a weight row."
 
 # Adjustments branch by branch: a branch's value per dollar differs (by area, and for a win or people trained),
@@ -902,8 +905,8 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
             "how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use). Calibrate it per risk, since a typical dollar's cut differs by orders of magnitude between areas (the default 1% fits nuclear policy, about $30 million of typical nuclear work, but is tens of billions of dollars of typical AI misalignment work): everyone's resources behind the measure (all its drafters and campaigners, not only the charity) × the area's cut per $1 million (@catastrophe.<area>_catastrophe_cut_per_million, and the extinction one for the future) is a typical project's cut, then a named multiple of it for how much more directly the measure acts. Check both sizes: pol_relative_cut ÷ each cut per $1 million is the millions of typical work it equals, to set against those resources and the field's yearly spending. Name the anchors.", "percent"),
         inp("pol_years_until_effect", "effect", "Policy win: years until it takes effect", {"low": 0, "best": 1, "high": 3}, "judgment", "from the win to entry into force; discounted at the shared rate.", "number", "years"),
         f("pol_discounted_years", "effect", "Policy win: discounted years the cut counts", "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -pol_years_until_effect", None, "number", "years"),
-        f("pol_deaths_per_year", "effect", "Policy win: expected deaths a year from the area's catastrophes", "nuclear_deaths_per_year", CR_POINT.format(what="win", row="deaths_per_year"), "number", "deaths / year"),
-        f("pol_future_per_year", "effect", "Policy win: expected future healthy years lost a year in the area", "nuclear_future_per_year", CR_POINT.format(what="win", row="future_per_year"), "number", "DALYs / year"),
+        f("pol_deaths_per_year", "effect", "Policy win: expected deaths a year from the area's catastrophes", "nuclear_deaths_per_million / @catastrophe.nuclear_catastrophe_cut_per_million", CR_POL.format(row="deaths", what="deaths"), "number", "deaths / year"),
+        f("pol_future_per_year", "effect", "Policy win: expected future healthy years lost a year in the area", "nuclear_future_per_million / @catastrophe.nuclear_catastrophe_cut_per_million", CR_POL.format(row="future", what="future healthy years"), "number", "DALYs / year"),
         f("pol_deaths_averted", "effect", "Policy win: deaths averted (expected, before adjustments)", "pol_wins * pol_p_success * pol_relative_cut * pol_deaths_per_year * pol_discounted_years", None, "small", "deaths"),
         f("pol_future_dalys", "effect", "Policy win: future healthy years kept (expected, before adjustments)", "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years", None, "number", "DALYs"),
         inp("fb_cost_share", "effect", "Field-building: share of the cost spent training or placing people", 0.1, "estimate",
@@ -953,6 +956,15 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
     "what the charity does against which risks (AI, pandemics, nuclear war), the year, which branches carry the result (field work, a policy win, people trained), " + BOTTOM + " Say that the result rests on shared forecasts and a typical project's effect, so it moves with the AI slider and the discount rate.", "past_average", sections=MULTI_SECTIONS)
 for r in T["catastrophic-risk"]["rows"]:
     if r["id"] == "pol_p_success": r["single_event"] = True
+    # Rows unused by default (smaller sizes at 0, field-building) carry no placeholder source: a judgment until
+    # the model switches them on, when the builder relabels them observed/estimate and cites the document.
+    if re.fullmatch(r"(ai|bio|nuclear)_smaller_(per_year|deaths)|fb_(cost_share|people|share_working|work_years)", r["id"]) and r.get("value") is not None:
+        r.pop("source", None)
+        r["kind"] = "judgment"
+        v = r["value"]
+        if not isinstance(v, dict):
+            r["value"] = {"low": 0, "best": 0, "high": 0.01 if r["id"].endswith("per_year") else 1000000} if v == 0 else {"low": v / 2, "best": v, "high": v * 2}
+        r["explainer"] += " Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
 
 # Side effects (docs/normalization.md 2.16): rows that add good or harm beyond the programme's main chain,
 # read through $side_effect_weight in our view.
