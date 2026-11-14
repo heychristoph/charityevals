@@ -416,7 +416,7 @@
    "explainer": "Its own effect (the shared rule, facts/meta.json own_effect_share: the organisation's own donor survey where it has one): the respondents who would not have given or would have given elsewhere (66%), non-respondents at the shared share, large gifts at their lower influence. About 31%, beside its own best guess of 32% (which also folds in how much better the recommended charities are, a step the shared rows take here). The survey is from 2019–2022, three years before the money counted."
   },
   {
-   "id": "platform_moved",
+   "id": "money_moved",
    "section": "reach",
    "label": "Platform donations Effektiv Spenden caused, 2025 (US$)",
    "format": "usd",
@@ -454,11 +454,11 @@
    "explainer": "Advised gifts × the share its advice changed, at the 2025 rate."
   },
   {
-   "id": "money_moved",
+   "id": "informed_money",
    "section": "reach",
    "label": "Advised donations its advice redirected, 2025 (US$), valued as all shifted",
    "format": "usd",
-   "explainer": "The money the shared informed_money_value row reads: advised gifts its advice redirected, given anyway, so valued only for the gain over where they would have gone, after the evidence and missing-data steps. Platform donations it caused (platform_moved, about $10M) are valued separately as money moved, net of where shifted money would have gone. Its 10% Pledge (with Giving What We Can) is given through the platform and counted there, not again.",
+   "explainer": "The money the shared informed_money_value row reads: advised gifts its advice redirected, given anyway, so valued only for the gain over where they would have gone, after the evidence and missing-data steps. Platform donations it caused (money_moved, about $10M) are valued separately as money moved, net of where shifted money would have gone. Its 10% Pledge (with Giving What We Can) is given through the platform and counted there, not again.",
    "formula": "advised_moved"
   },
   {
@@ -466,7 +466,7 @@
    "section": "reach",
    "label": "Money moved per dollar of the charity's cost",
    "format": "multiple",
-   "formula": "(platform_moved + money_moved) / cost_total",
+   "formula": "(money_moved + informed_money) / cost_total",
    "explainer": "Context: platform donations it caused plus advised gifts it redirected, per dollar of its costs (about eight)."
   },
   {
@@ -608,7 +608,7 @@
    "section": "moved_money",
    "label": "Value of the spending its research or advice changed (all shifted money), units of value",
    "format": "small",
-   "formula": "money_moved * shifted_dollar_value * evidence_adj * missing_data_adj",
+   "formula": "informed_money * shifted_dollar_value * evidence_adj * missing_data_adj",
    "explainer": "Spending its research or advice changed, at a judged share of the money it informed: all of it would have been spent anyway, so it counts for the gain over where it would have gone, discounted for weak evidence and for an outcome not measured for this charity (docs/normalization.md 2.8, 2.12)."
   },
   {
@@ -646,7 +646,7 @@
    "section": "effect",
    "label": "Value of the money moved (units of value)",
    "format": "number",
-   "formula": "(platform_moved * moved_wait_discount * moved_dollar_net_value + informed_money_value) * (1 + moved_side_effects)",
+   "formula": "(money_moved * moved_wait_discount * moved_dollar_net_value + informed_money_value) * (1 + moved_side_effects)",
    "unit": "units of value",
    "explainer": "Platform donations it caused, after their wait, × the net value of a dollar moved, plus the advised gifts it redirected (all shifted, with the evidence and missing-data steps), with the side effects."
   },
@@ -850,7 +850,7 @@
    "section": "donor",
    "label": "Share of the full cost paid by cash donations",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + platform_moved * new_money_share, 0))",
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))",
    "explainer": "With credit by share of resources: staff's forgone pay and the new money its platform donors gave share the outcome with your dollar; advised gifts, all shifted, add no resources."
   },
   {

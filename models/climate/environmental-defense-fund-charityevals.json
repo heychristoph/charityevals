@@ -3,13 +3,13 @@
   "name": "Environmental Defense Fund: climate (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": "world",
-  "beneficiaries_note": "Our build: a tonne of greenhouse gas kept out of the air spares people everywhere, so the result is spread by world population; the small US power-plant and vehicle smoke share is left in the world figure.",
+  "beneficiaries": {"world":0.954,"USA":0.046},
+  "beneficiaries_note": "Our build: shares of the result at the defaults. The public money the Inflation Reduction Act won for US households (4.6%) is in the United States; the tonnes (95.4%) spare people everywhere, spread by world population, the small US power-plant and vehicle smoke share left in the world figure.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "environmental-defense-fund",
   "owner": "charityevals",
-  "summary": "The Environmental Defense Fund (EDF; New York, with offices in Europe, China, India, Mexico, Indonesia and Japan) uses science, economics, law and advocacy for environmental policy; this model covers its climate and regional work ($120.6M in its year to September 2025, $169M with its share of core capacities) and counts the largest climate policies it worked on that were won in October 2021 to September 2025 (EPA's oil and gas methane rule, the EU Methane Regulation, the Inflation Reduction Act, EPA's power-plant and vehicle standards) and its MethaneSAT satellite, lost after 15 months, whose cost is added to the period's. At the defaults a dollar given averts about 0.0045 tonnes of CO₂e (about $220 a tonne), 0.0020 years of healthy life per $1,000, over four-fifths of it from the two methane rules, whose tonnes count for methane's own, earlier warming and the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (EDF is credited with 2% to 25% of the advocacy behind each), the US rules and the law's credits have since been delayed, cut back or repealed, and EDF's climate spending is large. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "The Environmental Defense Fund (EDF; New York, with offices in Europe, China, India, Mexico, Indonesia and Japan) uses science, economics, law and advocacy for environmental policy; this model covers its climate and regional work ($120.6M in its year to September 2025, $169M with its share of core capacities) and counts the largest climate policies it worked on that were won in October 2021 to September 2025 (EPA's oil and gas methane rule, the EU Methane Regulation, the Inflation Reduction Act, EPA's power-plant and vehicle standards) and its MethaneSAT satellite, lost after 15 months, whose cost is added to the period's. At the defaults a dollar given averts about 0.0045 tonnes of CO₂e (about $220 a tonne), and the public money the Inflation Reduction Act won for US households' home rebates and credits, valued as the recipients' gain less the taxpayers' cost, adds about 5%: 0.0021 years of healthy life per $1,000, about four-fifths of it from the two methane rules, whose tonnes count for methane's own, earlier warming and the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (EDF is credited with 2% to 25% of the advocacy behind each), the US rules and the law's credits have since been delayed, cut back or repealed, and EDF's climate spending is large. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Environmental Defense Fund (climate)",
@@ -65,6 +65,12 @@
       "title": "Air pollution these tonnes carry",
       "kind": "ours",
       "explainer": "Every tonne avoids its heat deaths; a tonne from burning less fossil fuel near people also avoids air-pollution deaths, and methane counts by its own timing and ozone. These rows say how much of the shared rates applies to EDF's tonnes (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in tonnes",
+      "kind": "ours",
+      "explainer": "The public money won for US households (units of value) is counted in its own unit and enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
     },
     {
       "id": "outcome",
@@ -1256,6 +1262,62 @@
       "formula": "evidence_adj * ira_counterfactual_adj * ira_attribution_share * ira_implementation_adj * missing_data_adj"
     },
     {
+      "id": "ira_payer_cost_per_dollar",
+      "section": "adjustments",
+      "label": "ln(consumption) given up by taxpayers per dollar of federal money",
+      "format": "small",
+      "formula": "@public_funds.mcpf / (@public_funds.us_federal_payer_multiple * @united_states.consumption_per_person_2024)",
+      "explainer": "The shared cost of public money (facts: public_funds.mcpf, 1.2) over how federal taxes fall (public_funds.us_federal_payer_multiple, 1.4) times national-accounts consumption per person, as Rewiring America's model counts it."
+    },
+    {
+      "id": "ira_rebate_uov",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act's home rebates: recipients' gain less taxpayers' cost, units of value",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(@climate.ira_home_electrification_rebates_usd + @climate.ira_home_efficiency_rebates_usd) * @climate.ira_home_rebates_paid_share * (1 / (@climate.ira_home_rebates_recipient_consumption_ratio * @united_states.ce_expenditure_per_person_2024) - ira_payer_cost_per_dollar) * $uov_per_ln_consumption * (1 + $discount_rate) ^ -@climate.ira_home_rebates_years_until_paid",
+      "explainer": "The law's $8.8 billion of home rebates (facts: climate.ira_home_*), the share paid to households, valued as their gain less the taxpayers' cost (docs/normalization.md 2.20) and discounted to the middle of the payouts, as Rewiring America's model counts them. A fixed sum, counted once."
+    },
+    {
+      "id": "ira_credit_years_counted",
+      "section": "adjustments",
+      "label": "Years of the larger home credits counted (the shared years a won reform counts, at most the years they paid)",
+      "format": "number",
+      "unit": "years",
+      "formula": "min($win_years_counted, @climate.ira_home_credits_years)"
+    },
+    {
+      "id": "ira_credit_uov",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act's larger home credits: claimants' gain less taxpayers' cost, units of value",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(@climate.ira_home_credits_increment_2023_usd * min(ira_credit_years_counted, 1) + @climate.ira_home_credits_increment_2024_2025_usd_per_year * (pv_annuity_due(1, $discount_rate, ira_credit_years_counted) - min(ira_credit_years_counted, 1))) * (1 / (@climate.ira_home_credits_recipient_consumption_ratio * @united_states.ce_expenditure_per_person_2024) - ira_payer_cost_per_dollar) * $uov_per_ln_consumption * (1 + $discount_rate) ^ -@climate.ira_home_credits_years_until_paid",
+      "explainer": "The law's increase in the two home credits (25C, 25D; facts: climate.ira_home_credits_*), year by year over the years counted, valued as the claimants' gain less the taxpayers' cost and discounted from the first claims, as Rewiring America's model counts them."
+    },
+    {
+      "id": "ira_household_focus_adj",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act's home rebates and credits: EDF's share of the advocacy behind them, relative to its share behind the whole law",
+      "format": "multiple",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "EDF and EDF Action campaigned for the bill as a whole and for its methane programme; the home rebates and credits were Rewiring America's and the solar industry's asks, so only its support for the package carries over to them: half its share of the whole law (0.2 to 1), our judgment. The tonnes keep the whole law's share: the home provisions are about 2% of them."
+    },
+    {
+      "id": "ira_transfer_uov_per_year",
+      "section": "adjustments",
+      "label": "Public money won for households, units of value per year of the period (after the law's branch steps)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(ira_rebate_uov + ira_credit_uov) * ira_attribution_share * ira_household_focus_adj * p_success * ira_counterfactual_adj * missing_data_adj / period_years",
+      "explainer": "The law's branch steps for the money: advocacy's share of the win, EDF's share of the advocacy behind the home provisions, what wouldn't have come anyway and the missing-data step, spread over the period's four years. The tonnes' evidence and delivery steps are left out, as in Rewiring America's model: the money is a sum in the statute and the claims Treasury counted, its delivery in the paid share."
+    },
+    {
       "id": "msat_total_adj",
       "section": "adjustments",
       "label": "MethaneSAT: all adjustments combined",
@@ -1412,13 +1474,22 @@
       "formula": "@climate.us_oil_gas_methane_rule_voc_deaths_per_year"
     },
     {
+      "id": "tco2e_from_uov",
+      "section": "bridges",
+      "label": "Public money won for households, in tonnes of CO₂e",
+      "format": "number",
+      "unit": "t CO₂e / year",
+      "formula": "ira_transfer_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "explainer": "The households' gain enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6): it moves with the value of consumption, not with the climate sliders."
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂e averted per year of the period",
       "format": "number",
-      "formula": "(eumr_downstream * eumr_total_adj + usmeth_downstream * usmeth_total_adj + pwr_downstream * pwr_total_adj + veh_downstream * veh_total_adj + ira_downstream * ira_total_adj + msat_downstream * msat_total_adj) / period_years * (1 + unmodelled_benefits_adj)",
+      "formula": "(eumr_downstream * eumr_total_adj + usmeth_downstream * usmeth_total_adj + pwr_downstream * pwr_total_adj + veh_downstream * veh_total_adj + ira_downstream * ira_total_adj + msat_downstream * msat_total_adj) / period_years * (1 + unmodelled_benefits_adj) + tco2e_from_uov",
       "unit": "t CO₂e / year",
-      "explainer": "Each win's expected tonnes × its own adjustments, summed, spread over the period's four years, with the other wins added as a share."
+      "explainer": "Each win's expected tonnes × its own adjustments, summed, spread over the period's four years, with the other wins added as a share, plus the public money won for households in tonnes."
     },
     {
       "id": "tco2e_per_dollar",

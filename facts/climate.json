@@ -1099,6 +1099,283 @@
         "retrieved": "2026-11-14"
       },
       "explainer": "What a dollar does for the climate at the hits-based climate funds' recommended organisations (policy advocacy and support for new technologies), as Rethink Priorities summarises them: $0.50 to $3.50 a tonne, median about $2. It describes the funds' best picks, not a typical climate dollar: a model that values ordinary climate work starts from it and says, as a ranged judgment, how far that work trails it. The brief states no period for the tonnes; our reading is that they are a policy's or technology's emissions over its years in effect."
+    },
+    {
+      "id": "us_heat_pump_tco2e_per_household_year",
+      "label": "Tonnes of CO₂e a year one US home cuts by switching its heating to an air-source heat pump",
+      "unit": "t CO₂e / household / year",
+      "format": "number",
+      "value": {
+        "low": 2.5,
+        "best": 3.3,
+        "high": 4.4
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Wilson, Munankarmi, Less, Reyna & Rothgeb (2024), Heat pumps for all? Distributions of the costs and benefits of residential air-source heat pumps in the United States, Joule 8: 1000-1035 (as reported by Canary Media, 11 March 2024)",
+        "url": "https://www.canarymedia.com/articles/heat-pumps/yes-heat-pumps-slash-emissions-even-if-powered-by-a-dirty-grid",
+        "quote": "2.5 to 4.4 metric tons of CO2 equivalent per year per housing unit",
+        "note": "The paper (DOI 10.1016/j.joule.2024.01.022; the journal page and NREL's copy didn't load for us) simulates 550,000 representative US homes in NREL's ResStock: a heat pump cuts a home's energy emissions by 36% to 64% on average, counting the extra power plants' emissions, over three heat-pump efficiency levels. Refrigerant leaks add about 0.07 tonnes a year on average (same article).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "What a home's switch to a heat pump does to its yearly emissions, the extra electricity's emissions taken off: NREL's simulation of the whole US housing stock finds 2.5 to 4.4 tonnes of CO₂e a year per home on average across its three heat-pump efficiency levels (Wilson et al. 2024). Best guess 3.3, the middle on a log scale. The range is the efficiency scenarios, not a confidence interval; homes switching from gas, oil or propane cut more than the stock's average, homes already on electric resistance less. Read by every model that counts US homes electrified."
+    },
+    {
+      "id": "us_home_electrification_smoke_factor",
+      "label": "Air-pollution deaths per tonne cut by electrifying US homes, relative to the fossil-fuel average",
+      "unit": "multiple",
+      "format": "number",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.06
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Dedoussi, Eastham, Monier & Barrett (2020), Premature mortality related to United States cross-state air pollution, Nature 578: 261-265",
+        "url": "https://www.nature.com/articles/s41586-020-1983-8",
+        "note": "By 2018 the commercial and residential sector's emissions caused about twice the cross-state premature deaths of power generation's (abstract), after power plants' sulphur fell; that sector includes wood burning, which gas heating doesn't have. Read with climate.us_power_smoke_factor (0.013, scrubbed US power plants).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "A home that switches from a gas furnace to a heat pump stops burning gas at ground level near people (nitrogen oxides, which form fine particles) and draws more power from plants that mostly have scrubbers. Per net tonne cut that is more smoke avoided than a tonne from US power alone (0.013 of the world average, climate.us_power_smoke_factor): Dedoussi et al. (2020) find building combustion now causes more US air-pollution deaths than power plants, though much of it is wood. Our judgment, 0.02 of the world fossil-fuel average (0.005 to 0.06). Read by every model whose tonnes come from US homes electrified."
+    },
+    {
+      "id": "us_home_electrification_methane_share",
+      "label": "Share of the tonnes a US home cuts by electrifying that are methane",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "OpenStudio-HPXML documentation (the simulation engine of NREL's ResStock), Workflow inputs: emissions scenarios",
+        "url": "https://openstudio-hpxml.readthedocs.io/en/latest/workflow_inputs.html",
+        "quote": "include both combustion and pre-combustion (e.g., methane leakage for natural gas) emissions",
+        "note": "Default fossil-fuel factors from ANSI/RESNET/ICC 301-2022 Addendum B: natural gas 147.3 lb CO₂e per MBtu, against about 117 for combustion alone. Leak rate behind it: Alvarez et al. (2018), Science 361: 186-188, about 2.3% of US gross gas production.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Gas a home stops burning also stops leaking upstream. ResStock, behind NREL's per-home heat-pump tonnes (climate.us_heat_pump_tco2e_per_household_year), counts gas at 147.3 lb CO₂e per MBtu including pre-combustion methane leakage, against about 117 for combustion alone: about a fifth of the gas side is upstream methane, consistent with the 2.3% leak rate Alvarez et al. (2018) measured. Less the methane behind the gas plants that make part of the added electricity, 10% to 20% of the net cut. Our judgment, 15% (5% to 25%), the shared conversion valuing that share by methane's own warming and ozone."
+    },
+    {
+      "id": "tcre_c_per_tco2",
+      "label": "Warming per tonne of CO₂ emitted (transient climate response to cumulative emissions)",
+      "unit": "°C per tonne CO₂",
+      "format": "small",
+      "value": {
+        "low": 2.7e-13,
+        "best": 4.5e-13,
+        "high": 6.3e-13
+      },
+      "interval": 0.66,
+      "kind": "estimate",
+      "source": {
+        "title": "IPCC (2021), Climate Change 2021: The Physical Science Basis, Summary for Policymakers",
+        "url": "https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_SPM.pdf",
+        "page": "D.1.1, p. 28",
+        "quote": "Each 1000 GtCO2 of cumulative CO2 emissions is assessed to likely cause a 0.27°C to 0.63°C increase in global surface temperature with a best estimate of 0.45°C.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The IPCC's best estimate, 0.45°C per 1,000 billion tonnes of CO₂, per tonne; the range is its likely (66%) range. Warming from a tonne stays about level for centuries once emitted (the near-linear relationship the IPCC assesses), so a tonne's heat deaths are this warming over the years they are counted. Read by models that put cooling (solar radiation modification) on the scale of tonnes: a cooling of C degrees for Y years is worth the heat deaths of C × Y ÷ (this × the years a tonne's heat deaths are counted) tonnes."
+    },
+    {
+      "id": "heat_mcc_emission_year",
+      "label": "Year of the extra tonne whose heat deaths Rethink Priorities counted",
+      "unit": "year",
+      "format": "integer",
+      "value": 2020,
+      "kind": "observed",
+      "source": {
+        "title": "Clare & Vargas (2026), Cross-cause cost-effectiveness: climate change versus global health and development interventions, Rethink Priorities",
+        "url": "https://rethinkpriorities.org/wp-content/uploads/2026/05/Publication-Version-Climate-x-GHD.pdf",
+        "page": "Calculating the Mortality Cost of Carbon: Heat-Related Deaths, p. 16-17",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "deaths_per_tco2e_heat is the heat deaths of one more tonne emitted in 2020, counted until 2300 (heat_mcc_end_year): the years over which a tonne's warming causes the deaths the site counts."
+    },
+    {
+      "id": "heat_mcc_end_year",
+      "label": "Last year in which Rethink Priorities counted a tonne's heat deaths",
+      "unit": "year",
+      "format": "integer",
+      "value": 2300,
+      "kind": "observed",
+      "source": {
+        "title": "Clare & Vargas (2026), Cross-cause cost-effectiveness: climate change versus global health and development interventions, Rethink Priorities",
+        "url": "https://rethinkpriorities.org/wp-content/uploads/2026/05/Publication-Version-Climate-x-GHD.pdf",
+        "page": "Calculating the Mortality Cost of Carbon: Heat-Related Deaths, p. 16-17",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Rethink Priorities ran the GIVE model to 2300, without discounting; with heat_mcc_emission_year it gives the years a tonne's heat deaths are spread over."
+    },
+    {
+      "id": "ira_home_electrification_rebates_usd",
+      "label": "Inflation Reduction Act (2022): home-electrification rebates (HEEHRA, now HEAR)",
+      "unit": "usd",
+      "format": "usd",
+      "value": 4500000000,
+      "kind": "observed",
+      "source": {
+        "title": "Canary Media (2022), Climate bill could spur market transformation in home electrification (16 August 2022)",
+        "url": "https://canarymedia.com/articles/electrification/climate-bill-could-spur-market-transformation-in-home-electrification",
+        "retrieved": "2026-11-14",
+        "quote": "$4.5 billion in direct rebates"
+      },
+      "explainer": "Point-of-sale rebates for low- and moderate-income households installing heat pumps, heat-pump water heaters, induction stoves, panels and wiring: $4.5 billion. Read by every model that counts the public money the law won for households."
+    },
+    {
+      "id": "ira_home_efficiency_rebates_usd",
+      "label": "Inflation Reduction Act (2022): whole-home efficiency rebates (HOMES)",
+      "unit": "usd",
+      "format": "usd",
+      "value": 4300000000,
+      "kind": "observed",
+      "source": {
+        "title": "Canary Media (2022), Climate bill could spur market transformation in home electrification (16 August 2022)",
+        "url": "https://canarymedia.com/articles/electrification/climate-bill-could-spur-market-transformation-in-home-electrification",
+        "retrieved": "2026-11-14",
+        "quote": "It allocates $4.3 billion to states"
+      },
+      "explainer": "Rebates for whole-home energy savings, doubled for low- and moderate-income homes: $4.3 billion to the states."
+    },
+    {
+      "id": "ira_home_rebates_paid_share",
+      "label": "Inflation Reduction Act's home rebates: share of the money that reaches households",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.55,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Utility Dive (2026), DOE issues guidance ending gas-to-electric appliance rebates (2 June 2026), on DOE's revised Home Energy Rebates guidance of 29 May 2026",
+        "url": "https://www.utilitydive.com/news/doe-issues-guidance-gas-electric-appliance-rebate/821720/",
+        "retrieved": "2026-11-14",
+        "quote": "ending the ability for households to qualify for rebates when replacing fossil fuel-fired appliances with electric alternatives"
+      },
+      "explainer": "States may keep up to a fifth for administration and outreach; only about a dozen states and DC had launched by mid-2026, DOE's May 2026 guidance made states rework their programmes and dropped switches from gas from the electrification rebates, and money unspent when the programmes close in September 2031 goes back. 55% (30% to 80%), our judgment."
+    },
+    {
+      "id": "ira_home_rebates_years_until_paid",
+      "label": "Inflation Reduction Act's home rebates: years from the law (2022) to the middle of the payouts",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 4,
+        "best": 5.5,
+        "high": 7
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Utility Dive (2026), DOE issues guidance ending gas-to-electric appliance rebates (2 June 2026), on DOE's revised Home Energy Rebates guidance of 29 May 2026",
+        "url": "https://www.utilitydive.com/news/doe-issues-guidance-gas-electric-appliance-rebate/821720/",
+        "retrieved": "2026-11-14",
+        "quote": "ending the ability for households to qualify for rebates when replacing fossil fuel-fired appliances with electric alternatives"
+      },
+      "explainer": "The states' programmes opened slowly from late 2024 and were reworked after DOE's May 2026 guidance; the money runs to 2031, so the middle of the payouts is about 2027-28, five and a half years after the law (4 to 7), our judgment."
+    },
+    {
+      "id": "ira_home_rebates_recipient_consumption_ratio",
+      "label": "Inflation Reduction Act's home rebates: recipients' consumption per person, relative to the US survey average",
+      "unit": "multiple",
+      "format": "multiple",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "The electrification rebates go only to households under 150% of the area's median income, in full under 80%, and HOMES doubles its rebate under 80%. Households in the bottom two income fifths spend about half to two-thirds of the average per person; 0.6 (0.45 to 0.85) of the survey average (united_states.ce_expenditure_per_person_2024), our judgment."
+    },
+    {
+      "id": "ira_home_credits_increment_2023_usd",
+      "label": "Inflation Reduction Act: its increase in the two home credits (25C, 25D), tax year 2023",
+      "unit": "usd",
+      "format": "usd",
+      "value": {
+        "low": 3200000000,
+        "best": 3800000000,
+        "high": 4200000000
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "US Treasury (2024), More than 3.4 million American families benefitted from $8.4 billion in residential clean energy and energy efficient home improvement credits in 2023 (press release jy2521, 7 August 2024)",
+        "url": "https://home.treasury.gov/news/press-releases/jy2521",
+        "retrieved": "2026-11-14",
+        "note": "Tax year 2023: about $6.3 billion of the residential clean energy credit (25D) and $2.1 billion of the energy efficient home improvement credit (25C); preliminary. Before the law, 25D was set to expire at the end of 2023 and 25C had expired after 2021 (CRS Insight IN12423)."
+      },
+      "explainer": "What the law added in 2023: 25D would have paid 22% instead of 30% (about $1.7B of the $6.3B claimed), and 25C had lapsed after 2021, so all its $2.1B. About $3.8B ($3.2B to $4.2B), our judgment from Treasury's 2023 claims."
+    },
+    {
+      "id": "ira_home_credits_increment_2024_2025_usd_per_year",
+      "label": "Inflation Reduction Act: its increase in the two home credits (25C, 25D), a year in 2024-2025",
+      "unit": "USD / year",
+      "format": "usd",
+      "value": {
+        "low": 6000000000,
+        "best": 8400000000,
+        "high": 11000000000
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Congressional Research Service (2026), Preliminary data on the IRA residential clean energy credit, Insight IN12423 (updated 13 April 2026)",
+        "url": "https://www.everycrsreport.com/reports/IN12423.html",
+        "retrieved": "2026-11-14",
+        "quote": "the RCEC reduced federal revenues by $6.3 billion in tax year 2023",
+        "note": "Before the law the credits were scheduled to expire at the end of 2023 (25D) and 2021 (25C), so both are wholly the law's from 2024."
+      },
+      "explainer": "Without the law neither credit would have existed in 2024 and 2025, so all of both counts: about 2023's $8.4B a year ($6B to $11B), the top for the rush before the credits ended, our judgment."
+    },
+    {
+      "id": "ira_home_credits_years",
+      "label": "Inflation Reduction Act: years its larger home credits paid (2023-2025)",
+      "unit": "years",
+      "format": "number",
+      "value": 3,
+      "kind": "observed",
+      "source": {
+        "title": "US Internal Revenue Service (2025), FAQs for modification of sections 25C, 25D, 25E, 30C, 30D, 45L, 45W and 179D under Public Law 119-21",
+        "url": "https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-act-obbb",
+        "retrieved": "2026-11-14",
+        "page": "25C: not allowed for property placed in service after 31 December 2025; 25D: expenditures after 31 December 2025"
+      },
+      "explainer": "The larger credits applied from 2023 and the 2025 budget law ended both after 2025."
+    },
+    {
+      "id": "ira_home_credits_years_until_paid",
+      "label": "Inflation Reduction Act: years from the law (2022) until the first larger home credits are claimed",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 1.5,
+        "high": 2
+      },
+      "kind": "judgment",
+      "explainer": "Credits for 2023 are claimed on returns filed in early 2024, about a year and a half after the law (1 to 2), our judgment; later years follow a year apart in the annuity."
+    },
+    {
+      "id": "ira_home_credits_recipient_consumption_ratio",
+      "label": "Inflation Reduction Act's home credits: claimants' consumption per person, relative to the US survey average",
+      "unit": "multiple",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 1.3,
+        "high": 1.8
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Congressional Research Service (2026), Preliminary data on the IRA residential clean energy credit, Insight IN12423 (updated 13 April 2026)",
+        "url": "https://www.everycrsreport.com/reports/IN12423.html",
+        "retrieved": "2026-11-14",
+        "quote": "taxpayers with incomes of $100,000 or more received 67% of RCEC benefits"
+      },
+      "explainer": "Homeowners with tax to offset: two-thirds of the residential clean energy credit's money went to incomes of $100,000 or more (CRS), and the home-improvement credit's claimants are similar homeowners. 1.3 (1 to 1.8) times the survey average spending per person, our judgment."
     }
   ]
 }
