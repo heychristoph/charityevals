@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "refugee-council",
   "owner": "charityevals",
-  "summary": "The Refugee Council's advocacy and awareness raising (research, policy, parliamentary work, campaigns, media and its new brand: £4.3m over the two years to March 2025) is counted as a past average against what those years won: the government's pilot doubling the move-on period for newly recognised refugees from 28 to 56 days (December 2024 to September 2025, then 42 days for good), and the restart of asylum processing with the Rwanda plan scrapped. Valued as extra days of housing and support for about 31,600 refugees a year and as claims decided instead of left in limbo for about 29,000 arrivals a year, with 30% of the move-on change and 5% of the other caused by campaigning, the Refugee Council's share of the campaigners 25% and 12%, and its next dollar at 42% of the average, a dollar does about 0.008 years of healthy life per $1,000 (combined range 0.0009-0.07). That is far below the global-health median because the people helped are in the UK and most of the change came from the new government's own plans. The result is mostly judgment (how much of each win campaigning caused spans ten-fold) and is discounted for missing data.",
+  "summary": "The Refugee Council's advocacy and awareness raising (research, policy, parliamentary work, campaigns, media and its new brand: £4.3m over the two years to March 2025) is counted as a past average against what those years won: the government's pilot doubling the move-on period for newly recognised refugees from 28 to 56 days (from December 2024; ended for single adults in September 2025), and the restart of asylum processing with the Rwanda plan scrapped. Valued as extra days of housing and support for about 31,600 refugees a year over the pilot and as claims decided instead of left in limbo for about 29,000 arrivals a year, with 30% of the move-on change and 5% of the other caused by campaigning, the Refugee Council's share of the campaigners 25% and 12%, and its next dollar at 42% of the average, a dollar does about 0.003 years of healthy life per $1,000 (combined range 0.0004-0.02). That is far below the global-health median because the people helped are in the UK and most of the change came from the new government's own plans. The result is mostly judgment (how much of each win campaigning caused spans ten-fold) and is discounted for missing data; any lasting change to the move-on period after March 2025 is left for the next year's accounts.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Refugee Council (UK), advocacy and awareness raising (years to March 2024 and 2025)",
@@ -192,17 +192,21 @@
     {
       "id": "grants_per_year",
       "section": "reach",
-      "label": "People granted protection or other leave at initial decision, year to March 2025",
+      "label": "People granted protection or other leave at initial decision in a year",
       "format": "integer",
-      "value": 45084,
-      "kind": "observed",
+      "value": {
+        "low": 35000,
+        "best": 45084,
+        "high": 70000
+      },
+      "kind": "estimate",
       "source": {
         "title": "Home Office, Immigration system statistics, year ending March 2025: How many people are granted asylum in the UK?",
         "url": "https://www.gov.uk/government/statistics/immigration-system-statistics-year-ending-march-2025/how-many-people-are-granted-asylum-in-the-uk",
         "retrieved": "2026-11-14",
         "quote": "In the year ending March 2025, 45,084 people were granted refugee protection or other leave at initial decision"
       },
-      "explainer": "Main applicants and dependants: the people who move on from asylum support when their claim is granted."
+      "explainer": "Main applicants and dependants: the people who move on from asylum support when their claim is granted. 45,084 in the year to March 2025, 35% fewer than the year before; the range runs from a slower year to the previous year's pace."
     },
     {
       "id": "mvo_support_share",
@@ -255,7 +259,7 @@
         "best": 0.85,
         "high": 1.25
       },
-      "kind": "judgment",
+      "kind": "estimate",
       "unit": "years",
       "source": {
         "title": "Home Office, Evaluation of the initiatives to enhance the move on process (June 2026)",
@@ -264,21 +268,7 @@
         "page": "1.4",
         "quote": "the pilot extending the move on period from 28 to 56 days ended on 1 September 2025 for single adults"
       },
-      "explainer": "From 9 December 2024 to 1 September 2025 for single adults (0.73 years), longer for families, pregnant women, people over 65 and disabled people, who kept 56 days until the 42-day period replaced it in March 2026 (1.25 years). Most refugees moving on are single adults: 0.85 (0.72-1.25)."
-    },
-    {
-      "id": "mvo_lasting_days",
-      "section": "effect",
-      "label": "Extra days in asylum support under the 42-day period that replaced the pilot",
-      "format": "number",
-      "value": {
-        "low": 3,
-        "best": 7,
-        "high": 12
-      },
-      "kind": "judgment",
-      "unit": "days",
-      "explainer": "Judgment 7 days (3-12): from March 2026 every newly recognised refugee gets 42 days rather than the old 28, half the pilot's 28 extra days; the pilot's 28 extra days lengthened the median stay by 15, so 14 extra days lengthen it by about 7. Counted as a lasting change, the site's years for a won reform."
+      "explainer": "From 9 December 2024 to 1 September 2025 for single adults (0.73 years); families, pregnant women, people over 65 and disabled people kept 56 days after that (up to about 1.25 years). Most refugees moving on are single adults: 0.85 (0.72-1.25)."
     },
     {
       "id": "mvo_value_per_day_gbp",
@@ -326,15 +316,15 @@
     {
       "id": "ln_gain_per_person_year",
       "section": "effect",
-      "label": "ln(consumption) gain per refugee per year from the lasting 42-day period",
+      "label": "ln(consumption) gain per refugee per year from a lasting change to the move-on period",
       "format": "number",
-      "formula": "mvo_lasting_days / 365 * mvo_ln_per_day_year",
-      "explainer": "The lasting change's gain for each year's refugees, counted for the site's years of a won reform below."
+      "formula": "0",
+      "explainer": "0: the pilot ended for single adults in September 2025, and any later lasting change falls after the two years whose spending is counted (Convention 11: cost and wins from the same period); it is counted when the next year's accounts are modelled. The pilot's own spell is counted above."
     },
     {
       "id": "people_affected_per_year",
       "section": "reach",
-      "label": "Refugees moving on each year under the lasting change",
+      "label": "Refugees moving on each year",
       "format": "integer",
       "formula": "mvo_people"
     },
@@ -387,7 +377,7 @@
       },
       "kind": "judgment",
       "unit": "points",
-      "explainer": "Judgment 0.4 points (0.1-1): in panel surveys of refugees in Germany, insecure legal status and long waits are associated with lower life satisfaction by a few tenths of a point; the Refugee Council's own client surveys show people in the asylum system much less likely to report improvements (p. 14). The gain is for everyone covered: those granted gain status, those refused at least a decision; the right to work and benefits that come with status are in this gain, not counted again."
+      "explainer": "Judgment 0.4 points (0.1-1): the Refugee Council's own repeated surveys of about 800 clients find people in the asylum system far less likely than refugees to report improvements (31% against 55% more confident dealing with unexpected events, 20% against 45% worrying less, p. 14), and the report puts it down to the asylum system's uncertainty and insecurity; anchor at the high end: charityevals' IRC resettlement model takes 1 point (0.3-2) for being reunited with close family, a larger change than a decision on a claim. The gain is for everyone covered: those granted gain status, those refused at least a decision; the right to work and benefits that come with status are in this gain, not counted again."
     },
     {
       "id": "ima_limbo_years",
@@ -463,7 +453,7 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Judgment a quarter of a year (0 to 9 months): the government restarted processing in July 2024 and the pilot began in December 2024; the 42-day period in March 2026."
+      "explainer": "Judgment a quarter of a year (0 to 9 months): the government restarted processing in July 2024 and the pilot began in December 2024."
     },
     {
       "id": "wait_discount",
@@ -698,7 +688,7 @@
       "format": "number",
       "formula": "people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years + mvo_pilot_uov",
       "unit": "UoV",
-      "explainer": "The lasting 42-day period over the site's years for a won reform, plus the pilot's spell."
+      "explainer": "A lasting change over the site's years for a won reform (0 here, see ln_gain_per_person_year), plus the pilot's spell."
     },
     {
       "id": "uov_bridged",

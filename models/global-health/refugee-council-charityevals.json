@@ -11,7 +11,7 @@
   "estimate_basis": "unit_cost",
   "charity": "refugee-council",
   "owner": "charityevals",
-  "summary": "The Refugee Council is the UK's national refugee charity; this model covers its four service lines in the year to March 2025 (£12.25m): casework for about 1,700 refugees resettled with English councils, advice, housing and asylum-support help for about 6,500 people seeking asylum and newly recognised refugees, and advice, reception and youth work for 7,022 separated children and young people. It comes to about 0.003 years of healthy life per $1,000 (combined range 0.0006-0.015), far below the global-health median, like charityevals' other social-service models in rich countries: the help is valued at its money and wellbeing worth to clients in the UK, who consume many times what the people overseas aid reaches do, and councils and the Home Office would commission much of it from someone else. About 70% of the result is the integration and destitution branch (support secured, homelessness averted), a quarter resettlement and the rest children's services, including children moved from adult hotels into care after age-dispute challenges. The biggest uncertainties are what the help is worth to each client and how much others would have given anyway; every branch is discounted for missing data, since no outcome is measured against a comparison group.",
+  "summary": "The Refugee Council is the UK's national refugee charity; this model covers its four service lines in the year to March 2025 (£12.25m): casework for about 1,700 refugees resettled with English councils, advice, housing and asylum-support help for about 6,500 people seeking asylum and newly recognised refugees, and advice, reception and youth work for 7,022 separated children and young people. It comes to about 0.002 years of healthy life per $1,000 (combined range 0.0004-0.009), far below the global-health median, like charityevals' other social-service models in rich countries: the help is valued at its money and wellbeing worth to clients in the UK, who consume many times what the people overseas aid reaches do, and councils and the Home Office would commission much of it from someone else. About half the result is resettlement (benefits and earnings brought forward), two-fifths integration and destitution (support secured, homelessness averted) and the rest children's services, including children moved from adult hotels into care after age-dispute challenges. The biggest uncertainties are what the help is worth to each client and how much others would have given anyway; every branch is discounted for missing data, since no outcome is measured against a comparison group.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Refugee Council (UK), resettlement, children's services, integration and destitution (year to March 2025)",
@@ -272,7 +272,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Judgment 40% (25-60%): the report counts resettled and newly recognised refugees together (4,320). Resettlement spends more than twice Integration's money (£5.3m against £2.4m) but its casework is far more intensive per person (councils commission a caseworker per family for a year or more), while Integration's clients include many one-off advice contacts and all 3,927 asylum clients. 40% gives about £3,100 a resettled client and about £370 an integration or destitution client."
+      "explainer": "Judgment 40% (25-60%): the report counts resettled and newly recognised refugees together (4,320). Resettlement spends more than twice Integration's money (£5.3m against £2.4m) but its casework is far more intensive per person (councils commission a caseworker per family for a year or more), while Integration's clients include many one-off advice contacts and all 3,927 asylum clients. 40% gives about £3,100 a resettled client and about £430 an integration or destitution client."
     },
     {
       "id": "res_people",
@@ -317,7 +317,7 @@
       "label": "Cost per person reached",
       "format": "usd",
       "formula": "cost_total / people_reached",
-      "explainer": "Context: about $1,150 a person across the three branches (the IRC's US resettlement services, the nearest peer, about $1,400)."
+      "explainer": "Context: compare the IRC's US resettlement services, the nearest peer, about $1,400 a person."
     },
     {
       "id": "res_benefits_gbp",
@@ -381,13 +381,8 @@
       "section": "effect",
       "label": "Resettled refugees' consumption per person, as a share of the average",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.25,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 25% (15-40%), as charityevals' IRC resettlement model takes for newcomers in the US: anchored on the poorest fifth of households at 45% of the average per household (@united_states.ce_lowest_quintile_vs_all_2024, the site's only quintile figure); resettled refugees in their first year live on Universal Credit (£393 a month for a single adult) with council-arranged housing, below the poorest fifth's average."
+      "formula": "@united_kingdom.asylum_recipients_consumption_share",
+      "explainer": "The shared figure for refugees and people seeking asylum in the UK (18%, 10-30%): resettled refugees in their first year live on Universal Credit with council-arranged housing, as newly recognised refugees do. Read by every model of help to them, so they value the same people the same way."
     },
     {
       "id": "baseline_consumption",
@@ -414,18 +409,74 @@
       "explainer": "The site's one log-income scale at the clients' own consumption."
     },
     {
-      "id": "int_value_gbp",
+      "id": "int_changed_share",
       "section": "effect",
-      "label": "Asylum support, benefits and entitlements an integration or destitution client gets sooner or wouldn't have got (£)",
+      "label": "Share of integration and destitution clients whose asylum support or benefit claim the help changes",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 15% (5-30%): the teams help people apply for asylum support, get it reinstated after an incorrect refusal or eviction notice, and make Universal Credit claims before asylum support ends 28 days after a grant (pp. 9-11); most clients come for advice, information or a referral that changes no payment. Anchor: the asylum project and Infoline are advice services, where a minority of contacts are casework."
+    },
+    {
+      "id": "int_weeks_secured",
+      "section": "effect",
+      "label": "Weeks of support or benefit secured for those clients",
       "format": "number",
       "value": {
-        "low": 80,
-        "best": 200,
-        "high": 500
+        "low": 2,
+        "best": 4,
+        "high": 10
+      },
+      "kind": "judgment",
+      "unit": "weeks",
+      "explainer": "Judgment 4 weeks (2-10): a claim made or a refusal overturned sooner, a gap between asylum support ending and Universal Credit's first payment (five weeks after a claim) closed, or support kept that would have stopped."
+    },
+    {
+      "id": "int_weekly_value_gbp",
+      "section": "effect",
+      "label": "Value of a week of the support secured (£)",
+      "format": "number",
+      "value": {
+        "low": 45,
+        "best": 60,
+        "high": 95
       },
       "kind": "judgment",
       "unit": "GBP",
-      "explainer": "Judgment £200 (£80-500): help applying for asylum support (£49.18 a week for self-catered accommodation, gov.uk) and getting it reinstated after an incorrect refusal, HC2 certificates for free prescriptions and dental care, and, for newly recognised refugees, Universal Credit claims made before asylum support ends 28 days after the decision. Averaged over everyone counted, many of whom get one piece of advice; a few weeks of support for the minority whose claim the help changes."
+      "source": {
+        "title": "GOV.UK, Asylum support: what you'll get",
+        "url": "https://www.gov.uk/asylum-support/what-youll-get",
+        "retrieved": "2026-11-14",
+        "quote": "You'll usually get £49.18 for each person in your household."
+      },
+      "explainer": "Judgment £60 (£45-95): asylum support is £49.18 a week for self-catered accommodation (gov.uk) and comes with the housing; Universal Credit's standard allowance for a single adult over 25 was £393 a month (about £90 a week) in 2024/25; most clients changed are in the asylum system."
+    },
+    {
+      "id": "int_health_access_gbp",
+      "section": "effect",
+      "label": "Value of free prescriptions and dental care secured, averaged over every client (£)",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 15,
+        "high": 40
+      },
+      "kind": "judgment",
+      "unit": "GBP",
+      "explainer": "Judgment £15 (£5-40): HC2 certificates (free prescriptions, dental treatment and sight tests) and help reaching a GP or dentist (p. 9), worth tens of pounds a year to the clients who get them, averaged over everyone counted. The health gain itself is in dalys_averted_per_person."
+    },
+    {
+      "id": "int_value_gbp",
+      "section": "effect",
+      "label": "Support and entitlements secured per integration or destitution client (£)",
+      "format": "number",
+      "formula": "int_changed_share * int_weeks_secured * int_weekly_value_gbp + int_health_access_gbp",
+      "unit": "GBP",
+      "explainer": "The clients whose payments change × the weeks × a week's value, plus health access averaged over everyone: about £50 a client."
     },
     {
       "id": "int_consumption_share",
@@ -504,7 +555,7 @@
       "label": "ln(consumption) gain per client so helped",
       "format": "number",
       "formula": "int_homeless_years * ln(1 + int_roof_value_gbp_per_night * usd_per_gbp * 365 / int_baseline_consumption)",
-      "explainer": "A roof for those weeks only: t × ln(1 + v ÷ (b × t)), the value used up over t years (domestic-services family), at the clients' own consumption."
+      "explainer": "A roof for those weeks only: t × ln(1 + a year's worth of the nightly value ÷ b), the same as t × ln(1 + v ÷ (b × t)) with v the value of the t years' nights (domestic-services family), at the clients' own consumption."
     },
     {
       "id": "rough_sleeping_share",
@@ -818,7 +869,7 @@
         "high": 1.05
       },
       "kind": "judgment",
-      "explainer": "Judgment 0.9 (0.75-1.05): 88% of these lines' money is restricted (council and Home Office contracts, grants); a donor's unrestricted pound mostly tops up children's services and integration, where contracts leave gaps, and may partly replace money a funder would otherwise give."
+      "explainer": "Judgment 0.9 (0.75-1.05): 76% of these lines' spending is restricted (£9.3m of £12.25m) (council and Home Office contracts, grants); a donor's unrestricted pound mostly tops up children's services and integration, where contracts leave gaps, and may partly replace money a funder would otherwise give."
     },
     {
       "id": "res_missing_data_adj",

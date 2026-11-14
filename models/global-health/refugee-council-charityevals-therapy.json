@@ -11,7 +11,7 @@
   "estimate_basis": "unit_cost",
   "charity": "refugee-council",
   "owner": "charityevals",
-  "summary": "The Refugee Council's Therapeutic Services (£1.74m in the year to March 2025) gave one-to-one, group, child and family therapy to 303 refugees and people seeking asylum who had been through trauma, plus an uncounted number of children in its MyView service (judged about 100). The effect is the Cochrane-method review of psychosocial interventions for refugees (Turrini et al. 2019: about 1 SD on depression against waitlist or usual care), fading over about a year and a half, cut to about a sixth by trust in small heterogeneous trials, the mix of therapies delivered, what clients would have got anyway and incomplete courses, plus the suicides it averts. It comes to about 0.002 years of healthy life per $1,000 (combined range 0.0004-0.015), far below the global-health median because each person costs about $6,400 and a WELLBY is worth a fifteenth of a healthy year at the site's rate. The branch is discounted for missing data (no evaluation of the Refugee Council's own therapy); the biggest uncertainties are how much of the trials' effect carries over and how long it lasts.",
+  "summary": "The Refugee Council's Therapeutic Services (£1.74m in the year to March 2025) gave one-to-one, group, child and family therapy to 303 refugees and people seeking asylum who had been through trauma, plus an uncounted number of children in its MyView service (judged about 50). The effect is the Cochrane-method review of psychosocial interventions for refugees (Turrini et al. 2019: about 1 SD on depression against waitlist or usual care), fading over about a year and a half, cut to about 0.3 of that by trust in small heterogeneous trials, what clients would have got anyway, the Refugee Council's share of the credit and incomplete courses, plus the suicides it averts. It comes to about 0.003 years of healthy life per $1,000 (combined range 0.0004-0.016), far below the global-health median because each person costs about $7,000 and a WELLBY is worth a fifteenth of a healthy year at the site's rate. The branch is discounted for missing data (no evaluation of the Refugee Council's own therapy, which mixes psychotherapy, art and music therapy and groups rather than the trials' protocols); the biggest uncertainties are how much of the trials' effect carries over and how long it lasts.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Refugee Council (UK), therapeutic services (year to March 2025)",
@@ -190,11 +190,11 @@
       "format": "integer",
       "value": {
         "low": 0,
-        "best": 100,
-        "high": 250
+        "best": 50,
+        "high": 200
       },
       "kind": "judgment",
-      "explainer": "Judgment 100 (0-250): MyView, the therapy service for children who arrive alone (psychotherapy, art and music therapy, p. 8), is described with no count; it may be inside the 303 (then 0) or paid from Children's Services. The line costs about £5,700 for each of the 303, several times a course of therapy (15 sessions at £100-150 is £1,500-2,250), which suggests more clients than counted."
+      "explainer": "Judgment 50 (0-200): MyView, the therapy service for children who arrive alone (psychotherapy, art and music therapy, p. 8), is described in the children's section with no count, and the accounts don't say which line pays its therapists. If Children's Services pays it, its children are counted here against a cost that isn't (the low end, 0, removes them; charityevals' services model counts those children's general advice gain only, not therapy). The Therapeutic Services line costs about £5,700 for each of the 303 counted, several times a course of therapy (15 sessions at £100-150 is £1,500-2,250), which suggests some clients beyond the count: 50, between the two readings."
     },
     {
       "id": "people_reached",
@@ -209,7 +209,7 @@
       "label": "Cost per person",
       "format": "usd",
       "formula": "cost_total / people_reached",
-      "explainer": "Context: about $5,500 a person; charityevals' Wounded Warrior Project mental health model about $11,000, StrongMinds' group therapy in Africa under $100."
+      "explainer": "Context: several thousand dollars a person; charityevals' Wounded Warrior Project mental health model about $11,000."
     },
     {
       "id": "initial_effect_sd",
@@ -315,9 +315,9 @@
       "label": "Evidence adjustment (internal and external validity)",
       "format": "multiple",
       "value": {
-        "low": 0.25,
-        "best": 0.45,
-        "high": 0.7
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.75
       },
       "kind": "judgment",
       "source": {
@@ -327,7 +327,7 @@
         "page": "p. 382, Results",
         "quote": "Removing the five studies with outlier results (Hinton et al., 2004, 2005, 2009; Acarturk et al., 2015, 2016) the overall estimate remained significant (SMD = −0.33"
       },
-      "explainer": "Judgment 0.45 (0.25-0.7). Internal: small trials with lack of blinding, high heterogeneity, and five outlier trials whose removal more than halves the PTSD effect (0.71 to 0.33 SD); about 0.6. External: the trials deliver protocol-based trauma therapy, while the Refugee Council's therapy mixes psychotherapy, art and music therapy and groups, for clients still in the asylum system; about 0.75. After every adjustment the effect counted is about a sixth of the review's 1.02 SD. Anchor: charityevals' Wounded Warrior Project model takes 0.6 for trials of the very therapies it delivers."
+      "explainer": "Judgment 0.5 (0.3-0.75). Internal: small trials with lack of blinding, high heterogeneity, and five outlier trials whose removal more than halves the PTSD effect (0.71 to 0.33 SD); about 0.6. External, for population and setting only: the trials' refugees are similar, but many of the Refugee Council's clients are still in the asylum system with its continuing stresses; about 0.85. That the therapies delivered aren't the trials' protocols is the missing-data step's question, not counted here. After this, the counterfactual, the share of credit and delivery, the effect counted is about 0.3 of the review's 1.02 SD (0.15 with the missing-data discount). Anchor: charityevals' Wounded Warrior Project model takes 0.6 for trials of the very therapies it delivers."
     },
     {
       "id": "counterfactual_adj",
@@ -335,12 +335,12 @@
       "label": "Share of the effect that wouldn't have happened anyway",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 0.95
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 80% (60-95%): the trials' effect is already against waitlist or usual care. Below 1 for NHS Talking Therapies and specialist trauma services some clients would have reached instead; refugees reach them less (language, waiting lists, people moved between asylum hotels)."
+      "explainer": "Judgment 90% (70-100%): the trials' effect is already against waitlist or usual care, which in high-income settings includes access to public mental-health services. Below 1 only for clients who would have got specialist trauma therapy elsewhere and the trials' controls didn't: NHS Talking Therapies take self-referrals, but refugees reach them less (language, waiting lists, people moved between asylum hotels). No access rate for refugees is published; anchor: charityevals' Wounded Warrior Project model takes 0.7 for veterans with free VA trauma therapy on offer, higher here where specialist care is harder to reach."
     },
     {
       "id": "attribution_share_shared",
@@ -422,7 +422,7 @@
         "retrieved": "2026-11-14",
         "quote": "There were 6,069 suicides registered in England and Wales (11.4 deaths per 100,000 people) in 2023"
       },
-      "explainer": "England and Wales's age-standardised rate in 2023, 11.4 per 100,000 (17.4 for men). Refugees' own rate in the UK is not published; studies in Scandinavia find refugees' suicide rates similar to or below natives'. The range runs from the female-heavy groups (lower) to young men in insecure status (higher)."
+      "explainer": "England and Wales's age-standardised rate in 2023, 11.4 per 100,000 (17.4 for men). Refugees' own rate in the UK is not published. The range runs from the female-heavy groups (lower) to young men in insecure status (higher)."
     },
     {
       "id": "depression_suicide_rr",
@@ -435,7 +435,7 @@
         "high": 15
       },
       "kind": "judgment",
-      "explainer": "Judgment 5 (2-15): meta-analyses put the standardised mortality ratio for suicide in major depression at about 20 (Harris and Barraclough 1997), but clients of trauma services are a mix of severity and the excess depends on how many have major depression; 5 is a mid-point between community samples (about 2-3) and treated major depression."
+      "explainer": "Judgment 5 (2-15): the meta-analysis of Harris and Barraclough (1997, British Journal of Psychiatry 170:205-228, doi:10.1192/bjp.170.3.205) puts the standardised mortality ratio for suicide in major depression at about 20, but clients of trauma services are a mix of severity and the excess depends on how many have major depression; 5 is a mid-point between community samples (about 2-3) and treated major depression."
     },
     {
       "id": "share_excess_removed",
