@@ -9,4 +9,6 @@ Round 3 fixes: 1 resolved (f2g_missing_data_adj = $missing_data_discount, multip
 | 2 | low | egi_costs_value | The formula omits the success and failure weighting, which is correct only because egi_budget_per_org is already an expected lifetime figure; this is stated in the budget's explainer. The shared moved-money rows were not registered in src/engine/moved-money.ts (outside this build's files), so INV-12 does not check gh_prior_dollar_value and gh_dollar_net_value word for word. | none for this build; register the two rows in src/engine/moved-money.ts when that file is open. |
 
 Verdict: pass
-Model-sha: a3d0d207c8e59bb94ed867de0f38c957e4a8e1c161635dbf9d9706097db649ff
+Model-sha: 0ba7af14322d76a5ee9437c8650d9c88c5bfeab34fa4e92204d55435f27f9041
+
+Re-stamped (orchestrator, 14 Nov 2026): this round's wording low on f2g_donations_per_company fixed (explainer now states the one 0.5 factor the arithmetic uses); no value changed.
