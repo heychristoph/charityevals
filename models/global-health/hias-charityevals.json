@@ -396,7 +396,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Reference class: removals against final removal orders. Before 2025 ICE removed a few hundred thousand people a year against a backlog of over a million with final orders, so most who lost stayed for years (a removed share of perhaps a fifth); since 2025 removals, detention and 'third-country' deportations have risen sharply (annual report PDF p. 5) and asylum seekers with known addresses are the easiest to find. 40% (15-70%). Our judgment."
+      "explainer": "Reference class: removals against final removal orders. ICE counted 1,445,549 people on its non-detained docket with final removal orders in November 2024 (ICE figures reported by Fox News, https://www.foxnews.com/politics/new-data-reveals-america-has-tens-thousands-noncitizens-from-us-adversary-deportation-orders, about 55% of them executable) against about 270,000 removals a year (ICE annual report, fiscal 2024), so most who lost stayed for years (a removed share of perhaps a fifth a year of the executable orders); since 2025 removals, detention and 'third-country' deportations have risen sharply (annual report PDF p. 5) and asylum seekers with known addresses are the easiest to find. 40% (15-70%). Our judgment."
     },
     {
       "id": "cons_ppp_hnd",
@@ -436,12 +436,25 @@
       "explainer": "Most asylum seekers in US immigration courts are from Latin America; HIAS's New York and Silver Spring clients include many Africans (Cameroon in the annual report's story) and Afghans. 55% (35-75%). Our judgment."
     },
     {
+      "id": "leg_central_america_share",
+      "section": "effect",
+      "label": "Of the Latin American clients, share from Central America",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Honduras, Guatemala and El Salvador are among the largest asylum nationalities in US courts, with Venezuela, Colombia and Ecuador from South America. Half (30-75%). Our judgment."
+    },
+    {
       "id": "leg_cons_origin",
       "section": "effect",
       "label": "Consumption per person in the clients' countries of origin (PPP dollars)",
       "format": "usd",
-      "formula": "leg_latam_share * avg(cons_ppp_hnd, cons_ppp_per) + (1 - leg_latam_share) * cons_ppp_ken",
-      "explainer": "Honduras and Peru stand in for Latin America, Kenya for Africa and Asia (a richer stand-in than Cameroon or Afghanistan, so the gain is if anything understated)."
+      "formula": "leg_latam_share * (leg_central_america_share * cons_ppp_hnd + (1 - leg_central_america_share) * cons_ppp_per) + (1 - leg_latam_share) * cons_ppp_ken",
+      "explainer": "Honduras stands in for Central America, Peru for South America, Kenya for Africa and Asia (a richer stand-in than Cameroon or Afghanistan, so the gain is if anything understated)."
     },
     {
       "id": "leg_consumption_share_stayed",
@@ -474,7 +487,7 @@
         "high": 0.12
       },
       "kind": "judgment",
-      "explainer": "Migrants in the US send roughly 5-10% of their income home; asylum seekers with families left behind among them. 6% (2-12%). Our judgment."
+      "explainer": "Latin American migrants in the US send money home about 13 times a year (Inter-American Dialogue, https://thedialogue.org/press-release/remittances-to-latin-america-and-the-caribbean-grew-over-8-in-2017-according-to-new-research-by-the-inter-american-dialogue), around $300 each time for the median Mexican sender (NPR, 10 February 2017), roughly a tenth of a low-wage income; newly arrived asylum seekers earn and send less at first. 6% (2-12%) of consumption. Our judgment."
     },
     {
       "id": "origin_household_size",
@@ -496,7 +509,7 @@
         "high": 5
       },
       "kind": "judgment",
-      "explainer": "Asylum cases in the backlogged immigration courts take years to decide, and removal follows the final order: 3 years (1-5). Our judgment.",
+      "explainer": "Pending immigration court cases had waited 1,424 days, about 3.9 years, on average in March 2024 (TRAC, reported at https://gigafact.org/fact-briefs/is-the-waiting-period-for-an-immigration-asylum-hearing-six-to-eight-years), and completed asylum cases took 1,016 days in fiscal 2023; courts sped up decisions in 2025, and removal follows the final order: 3 years (1-5). Our judgment.",
       "unit": "years"
     },
     {
@@ -518,8 +531,8 @@
       "section": "effect",
       "label": "ln(consumption) value of staying rather than being removed, discounted from the removal",
       "format": "number",
-      "formula": "(ln(leg_cons_stayed / leg_cons_origin) + origin_household_size * ln(1 + leg_remit_share * leg_cons_stayed / (leg_cons_origin * origin_household_size))) * pv_annuity_due(1, $discount_rate, leg_years_stayed) * (1 + $discount_rate) ^ (0 - leg_wait_years)",
-      "explainer": "The site's log-income scale at each person's own consumption: the US level the client lives at against their country of origin, and the family at home's gain from the remittances, each year they stay, counted from when a removal would have come."
+      "formula": "(ln(leg_cons_stayed * (1 - leg_remit_share) / leg_cons_origin) + origin_household_size * ln(1 + leg_remit_share * leg_cons_stayed / (leg_cons_origin * origin_household_size))) * pv_annuity_due(1, $discount_rate, leg_years_stayed) * (1 + $discount_rate) ^ (0 - leg_wait_years)",
+      "explainer": "The site's log-income scale at each person's own consumption: the US level the client lives at, less what they send home, against their country of origin, and the family at home's gain from the remittances, each year they stay, counted from when a removal would have come."
     },
     {
       "id": "leg_ln_gain",
@@ -560,7 +573,7 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "The other half: families reunited, green cards and work permits won, which ease worry and separation. Studies of family separation among refugees find large distress; one point-year of life satisfaction is about the gap a reunion closes in the worst cases. A tenth of a point (0-0.3) averaged over all such clients, most of whose cases would succeed anyway or bring smaller relief. Our judgment.",
+      "explainer": "The other half: families reunited and green cards won, which ease worry and separation (work permits' income is a side-effect row). Studies of family separation among refugees find large distress; one point-year of life satisfaction is about the gap a reunion closes in the worst cases. A tenth of a point (0-0.3) averaged over all such clients, most of whose cases would succeed anyway or bring smaller relief. Our judgment.",
       "unit": "points"
     },
     {
@@ -695,11 +708,11 @@
       "format": "percent",
       "value": {
         "low": 0.3,
-        "best": 0.45,
+        "best": 0.4,
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Federal awards were suspended on 24 January 2025 (statements note 1), four of the fiscal year's twelve months in, when arrivals and spending ran at the 2024 pace; US spending fell from $91 million to $80 million over the year (Exhibit B). 45% (30-60%). Our judgment."
+      "explainer": "Federal awards were suspended on 24 January 2025 (statements note 1), four of the fiscal year's twelve months in: four months at fiscal 2024's $91.1 million a year is $30.4 million of the year's $80.4 million (Exhibit B), 38%, a little more if spending wound down after the suspension. 40% (30-60%). Our judgment."
     },
     {
       "id": "rst_cf_pre",
@@ -725,7 +738,7 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "After January 2025, HIAS's private money kept case management and emergency help going for refugees already here whom federal programmes had dropped; other agencies were cutting too, and the courts later restored some funding. 60% (30-85%). Our judgment."
+      "explainer": "After January 2025, HIAS's private money kept case management and emergency help going for refugees already here whom federal programmes had dropped; other agencies were cutting too. 60% (30-85%). Our judgment."
     },
     {
       "id": "rst_counterfactual_adj",

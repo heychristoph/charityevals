@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "hias",
   "owner": "charityevals",
-  "summary": "HIAS spends about $3 million a year (our estimate, inside its US accounts line) on US advocacy, community engagement and litigation, chiefly as a plaintiff in Pacito v. Trump against the January 2025 suspension of refugee admissions, which forced the admission of more than a hundred approved refugees in 2025 before the Ninth Circuit reversed most of the injunction in March 2026. We value the pending case as a small chance (2%) of restoring about 10,000 admissions a year for the years a win counts, fiscal 2025 carrying half of the case's cost, and the 2025 admissions as won, each refugee gaining the US level of consumption over decades against the level where they wait, with HIAS credited 15% of the litigation; at HIAS's own next-dollar figure (49%) it comes to about 0.3 years of healthy life per $1,000, above the global-health median because a refugee resettled in the US gains several doublings of consumption for decades. The result is mostly uncertainty (the chance of success, HIAS's share and the years a win counts span over a thousandfold), and it is discounted for missing data.",
+  "summary": "HIAS spends about $3 million a year (our estimate, inside its US accounts line) on US advocacy, community engagement and litigation, chiefly as a plaintiff in Pacito v. Trump against the January 2025 suspension of refugee admissions, which let more than 80 approved refugees travel in 2025 before the Ninth Circuit reversed most of the injunction in March 2026. We value the pending case as a small chance (2%) of restoring about 10,000 admissions a year for the years a win counts, fiscal 2025 carrying half of the case's cost, and the 2025 admissions as won, each refugee gaining the US level of consumption over decades against the level where they wait, with HIAS credited 15% of the litigation; at HIAS's own next-dollar figure (49%) it comes to about 0.3 years of healthy life per $1,000, above the global-health median because a refugee resettled in the US gains several doublings of consumption for decades. The result is mostly uncertainty (the chance of success, HIAS's share and the years a win counts span over a thousandfold), and it is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: HIAS, US advocacy, community engagement and litigation",
@@ -356,15 +356,31 @@
     {
       "id": "pac_admitted",
       "section": "reach",
-      "label": "Refugees admitted in 2025 because of the Pacito v. Trump injunction",
+      "label": "Refugees resettled under the Pacito v. Trump injunctions by August 2025",
       "format": "integer",
+      "value": 80,
+      "kind": "observed",
+      "source": {
+        "title": "IRAP, Impact Under Fire: 2025 Annual Report (fiscal year September 2024 to August 2025)",
+        "url": "https://e1.nmcdn.io/assets/irap/wp-content/uploads/2025/12/IRAP-2025-Annnual-Report.pdf",
+        "page": "p. 4, IRAP is Not Backing Down",
+        "quote": "More than 80 refugees who would have otherwise been stuck in limbo have since successfully resettled and reunited with their families thanks to injunctions secured through our lawsuit.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The same count as charityevals' model of IRAP's litigation, which shares the credit; HIAS's annual report calls it 'a small number of vulnerable refugees in the summer of 2025' (PDF p. 8), and IRAP's 5 March 2026 page says more than a hundred by then (https://refugeerights.org/news-resources/ninth-circuit-rules-government-must-fund-domestic-refugee-resettlement-services-reverses-order-requiring-continued-refugee-processing), some after HIAS's fiscal year."
+    },
+    {
+      "id": "pac_counterfactual_adj",
+      "section": "reach",
+      "label": "Share of the injunction's admissions that wouldn't have happened anyway",
+      "format": "percent",
       "value": {
-        "low": 100,
-        "best": 150,
-        "high": 400
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "The case 'was responsible for forcing the Trump administration to resettle a small number of vulnerable refugees in the summer of 2025' (annual report PDF p. 8); IRAP reports more than a hundred admitted under the injunction, refugees already approved and booked to travel. 150 (100-400). Our judgment."
+      "explainer": "A few might have travelled under the ban's case-by-case exceptions or after a later lifting: 70% (40-90%), as in charityevals' model of IRAP's litigation. Our judgment."
     },
     {
       "id": "pend_refugees",
@@ -379,7 +395,7 @@
       "section": "reach",
       "label": "Refugees counted in all",
       "format": "number",
-      "formula": "pend_refugees + pac_admitted"
+      "formula": "pend_refugees + pac_admitted * pac_counterfactual_adj"
     },
     {
       "id": "released_people",
@@ -431,10 +447,10 @@
     {
       "id": "counterfactual_adj",
       "section": "adjustments",
-      "label": "Share that wouldn't have happened anyway",
+      "label": "Share that wouldn't have happened anyway (weighted average, for reading only)",
       "format": "percent",
-      "formula": "1",
-      "explainer": "One: whether the change would have come anyway is the question the years counted answer (Convention 5), and the 2025 admissions would not have happened without the injunction."
+      "formula": "(pend_refugees + pac_admitted * pac_counterfactual_adj) / (pend_refugees + pac_admitted)",
+      "explainer": "For reading only: the pending win counts 1 here, since whether it would come anyway is the question the years counted answer (Convention 5); the injunction's admissions carry pac_counterfactual_adj, applied in refugees_counted."
     },
     {
       "id": "attribution_share_shared",
@@ -481,9 +497,9 @@
     {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "All adjustments combined (enforcement applied in the pending win's count)",
+      "label": "All adjustments combined (enforcement and the counterfactual applied in the refugees counted)",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * missing_data_adj"
+      "formula": "evidence_adj * attribution_share * missing_data_adj"
     },
     {
       "id": "ue_aid_share",
@@ -586,7 +602,7 @@
       "section": "bridges",
       "label": "Life satisfaction gained, in WELLBYs (before adjustments)",
       "format": "number",
-      "formula": "people_affected_per_year * ls_gain_per_person_year * p_success * discounted_years + released_people * released_value",
+      "formula": "refugees_counted * ls_gain_per_person_year + released_people * released_value",
       "unit": "WELLBYs"
     },
     {

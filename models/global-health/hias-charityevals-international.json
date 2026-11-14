@@ -4,7 +4,7 @@
   "kind": "charity",
   "cause": "global-health",
   "beneficiaries": {"TCD":0.4,"KEN":0.05,"COL":0.16,"ECU":0.12,"PAN":0.05,"MEX":0.03,"VEN":0.03,"CRI":0.02,"UKR":0.06,"MDA":0.02,"ISR":0.02,"GRC":0.02,"AUT":0.02},
-  "beneficiaries_note": "Our build: HIAS's country programmes, weighted by the people each served in 2025 (Form 990 Schedule O: Chad 257,700, Colombia 36,700, Ukraine and Moldova 32,300, Panama 23,000, Ecuador about 21,000, Costa Rica 6,700) and smaller programmes in Mexico, Venezuela, Kenya, Israel and Greece, and the Resettlement Support Center in Austria; a judgment, as HIAS publishes no spending by country.",
+  "beneficiaries_note": "Our build: HIAS's country programmes weighted by our judgment of where the spending and the result go, as HIAS publishes no spending by country: Chad (257,700 served, many through cheap camp-wide services, and most of the cash), then Colombia, Ecuador and Panama (36,700, about 21,000 and 23,000 served, with more cash per person and the legal work), Ukraine and Moldova (32,300), Costa Rica, Mexico, Venezuela, Kenya, Israel, Greece and the Resettlement Support Center in Austria (Form 990 Schedule O).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "hias",
@@ -260,7 +260,7 @@
         "high": 1500
       },
       "kind": "judgment",
-      "explainer": "HIAS ran the State Department's Resettlement Support Center in Vienna (statements note 1: the grants 'expired' on 31 December 2025; a director on the Form 990's Part VII), which processes mainly Iranian religious minorities under the Lautenberg programme, a few hundred to a few thousand a year. Departures stopped with the January 2025 suspension, so only October 2024 to January 2025 counts: 400 (100-1,500). Our judgment."
+      "explainer": "A judgment: HIAS publishes no count and we found no published departures from Austria. Basis: HIAS ran the State Department's Resettlement Support Center in Vienna (statements note 1: the grants 'expired' on 31 December 2025; a director on the Form 990's Part VII), whose caseload is mainly Iranian religious minorities under the Lautenberg programme; US admissions of Iranian refugees were a few thousand a year before 2017 and far fewer since. Departures stopped with the January 2025 suspension, so only October 2024 to January 2025 counts, four months: about 400 at roughly 1,200 a year (100 at a few hundred a year, 1,500 at the pre-2017 pace). 400 (100-1,500)."
     },
     {
       "id": "reach_period_adj",
@@ -428,18 +428,46 @@
     {
       "id": "value_delivered_per_person",
       "section": "effect",
-      "label": "Cash and goods delivered per person (2024 US dollars)",
+      "label": "Cash and goods delivered per person, average (2024 US dollars)",
       "format": "usd",
       "formula": "(intl_payments * cva_payment_cash_share + intl_supplies * cva_supplies_share) / (cva_people * reach_period_adj)",
       "explainer": "The fiscal year's cash and goods over the fiscal year's recipients."
+    },
+    {
+      "id": "lac_value_ratio",
+      "section": "effect",
+      "label": "Cash per person in Latin America, as a multiple of Chad's",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 1.5,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Ecuador's and Colombia's voucher and multipurpose cash programmes pay more per person than camp transfers in eastern Chad, where prices and transfer values are lower. 1.5 (1-3). Our judgment."
+    },
+    {
+      "id": "value_chad",
+      "section": "effect",
+      "label": "Cash and goods per person in Chad (2024 US dollars)",
+      "format": "usd",
+      "formula": "value_delivered_per_person / (cva_chad_share + (1 - cva_chad_share) * lac_value_ratio)",
+      "explainer": "The average split so that Latin American recipients get lac_value_ratio times as much; the total is unchanged."
+    },
+    {
+      "id": "value_lac",
+      "section": "effect",
+      "label": "Cash and goods per person in Latin America (2024 US dollars)",
+      "format": "usd",
+      "formula": "value_chad * lac_value_ratio"
     },
     {
       "id": "ln_gain_per_person",
       "section": "effect",
       "label": "ln(consumption) gain per person from the cash and goods",
       "format": "number",
-      "formula": "cva_chad_share * ln(1 + value_delivered_per_person / cons_africa) + (1 - cva_chad_share) * ln(1 + value_delivered_per_person / cons_lac)",
-      "explainer": "The year's gain on the site's log-income scale, in each place at its own consumption."
+      "formula": "cva_chad_share * ln(1 + value_chad / cons_africa) + (1 - cva_chad_share) * ln(1 + value_lac / cons_lac)",
+      "explainer": "The year's gain on the site's log-income scale, in each place at its own transfer and consumption."
     },
     {
       "id": "crisis_mortality_rate",
@@ -674,6 +702,19 @@
       "unit": "WELLBYs"
     },
     {
+      "id": "cp_direct_share",
+      "section": "effect",
+      "label": "Share of the children given direct services (case management, child-friendly spaces, groups)",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "The rest are reached by awareness campaigns, as for the mental-health and violence branches' indirect reach. 60% (30-90%). Our judgment."
+    },
+    {
       "id": "cp_new_share",
       "section": "effect",
       "label": "Share of the children not already counted in another branch's benefit",
@@ -697,14 +738,14 @@
         "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Focused psychosocial support for children in humanitarian settings lowers post-traumatic stress by about 0.33 SD and shows no consistent effect on depression (Purgato et al. 2018, Lancet Global Health); child-friendly spaces and awareness do less. 0.2 SD (0.05-0.4). Our judgment."
+      "explainer": "Focused psychosocial support for children in humanitarian settings lowers post-traumatic stress by 0.33 SD (95% CI 0.14-0.52) in an individual-participant meta-analysis of 11 trials, less for displaced children (Purgato et al. 2018, Lancet Global Health 6:e390, https://doi.org/10.1016/S2214-109X(18)30046-9); HIAS's child-friendly spaces and case management are less structured. 0.2 SD (0.05-0.4). Our judgment."
     },
     {
       "id": "cp_wellbys_per_child",
       "section": "effect",
       "label": "WELLBYs per child counted, discounted",
       "format": "number",
-      "formula": "cp_new_share * share_distressed * cp_effect_sd * @wellby_factors.wellbys_per_sd_year * pv_annuity_due(1, $discount_rate, mh_effect_years)",
+      "formula": "cp_direct_share * cp_new_share * share_distressed * cp_effect_sd * @wellby_factors.wellbys_per_sd_year * pv_annuity_due(1, $discount_rate, mh_effect_years)",
       "unit": "WELLBYs"
     },
     {
@@ -959,7 +1000,7 @@
       "label": "cva: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (Convention 12): HIAS counts the people reached (the Resettlement Support Center's departures are our judgment), but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (Convention 12): HIAS counts the people reached, but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
     },
     {
       "id": "mh_evidence_adj",
@@ -1006,7 +1047,7 @@
       "label": "mh: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (Convention 12): HIAS counts the people reached (the Resettlement Support Center's departures are our judgment), but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (Convention 12): HIAS counts the people reached, but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
     },
     {
       "id": "gbv_evidence_adj",
@@ -1053,7 +1094,7 @@
       "label": "gbv: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (Convention 12): HIAS counts the people reached (the Resettlement Support Center's departures are our judgment), but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (Convention 12): HIAS counts the people reached, but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
     },
     {
       "id": "cp_evidence_adj",
@@ -1100,7 +1141,7 @@
       "label": "cp: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (Convention 12): HIAS counts the people reached (the Resettlement Support Center's departures are our judgment), but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (Convention 12): HIAS counts the people reached, but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
     },
     {
       "id": "leg_evidence_adj",
@@ -1147,7 +1188,7 @@
       "label": "leg: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (Convention 12): HIAS counts the people reached (the Resettlement Support Center's departures are our judgment), but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (Convention 12): HIAS counts the people reached, but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
     },
     {
       "id": "eco_evidence_adj",
@@ -1194,7 +1235,7 @@
       "label": "eco: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (Convention 12): HIAS counts the people reached (the Resettlement Support Center's departures are our judgment), but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (Convention 12): HIAS counts the people reached, but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
     },
     {
       "id": "rsc_evidence_adj",
@@ -1241,7 +1282,7 @@
       "label": "rsc: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (Convention 12): HIAS counts the people reached (the Resettlement Support Center's departures are our judgment), but publishes no controlled measure of what its own work did for them; the effect is from research on other programmes, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (Convention 12): the departures are our judgment (HIAS publishes no count) and the gain is judged from survey figures, so the branch reads the shared missing-data slider."
     },
     {
       "id": "implementation_adj",
