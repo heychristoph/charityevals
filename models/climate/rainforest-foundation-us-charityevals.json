@@ -3,13 +3,13 @@
   "name": "Rainforest Foundation US (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"world":0.7066,"PER":0.2135,"GUY":0.0557,"BRA":0.019,"PAN":0.0052},
-  "beneficiaries_note": "Our build: by share of the result at the defaults. The forest's pandemic risk and carbon (71%) spread by world population; the patrollers' pay to their households (29%) by where the patrollers are: Peru 291 of 400 (the 2025 report), the rest over Guyana, Brazil and Panama by the acres patrolled there.",
+  "beneficiaries": {"world":0.7536,"PER":0.1793,"GUY":0.0467,"BRA":0.016,"PAN":0.0044},
+  "beneficiaries_note": "Our build: by share of the result at the defaults. The forest’s pandemic risk and carbon (75%) spread by world population; the patrollers’ pay to their households (25%) by where the patrollers are: Peru 291 of 400 (the 2025 report), the rest over Guyana, Brazil and Panama by the acres patrolled there.",
   "template": "conservation",
   "estimate_basis": "unit_cost",
   "charity": "rainforest-foundation-us",
   "owner": "charityevals",
-  "summary": "Rainforest Foundation US backs Indigenous peoples in Peru, Brazil, Guyana and Panama to secure and defend their forest: titling their land, training and paying community patrollers who act on satellite deforestation alerts, and strengthening and funding their own organisations. We model all of its 2025 programme spending ($9.3 million) in three branches: the forest the year's monitoring and organisational support keeps in 7.9 million hectares of territories, anchored on a randomised trial of RFUS's own programme in Peru; the forest titles won and advanced keep; and the patrollers' pay to their households. The result is about 0.009 years of healthy life per $1,000, a little over half of it a small cut in pandemic risk from forest kept, the least grounded step, a third the patrollers' pay and the rest the forest's carbon, which is worth little in healthy years. The biggest uncertainties are how much of the territories' loss the thinly spread patrols prevent and whether forest loss drives pandemics; every branch takes the missing-data discount, since nothing is measured against comparable land today, and the result is mostly uncertainty (combined range about 0.001-0.07).",
+  "summary": "Rainforest Foundation US backs Indigenous peoples in Peru, Brazil, Guyana and Panama to secure and defend their forest: titling their land, training and paying community patrollers who act on satellite deforestation alerts, and strengthening and funding their own organisations. We model all of its 2025 programme spending ($9.3 million) in four branches: the forest the year's monitoring keeps in Peru's territories, where the programme is the one a randomised trial of RFUS's own work measured; the forest its thinner monitoring and organisational support keep in Guyana, Brazil and Panama; the forest titles won and advanced keep; and the patrollers' pay to their households. The result is about 0.014 years of healthy life per $1,000, three fifths of it a small cut in pandemic risk from forest kept, the least grounded step, a quarter the patrollers' pay and the rest the forest's carbon, which is worth little in healthy years; Peru's territories are over half of it. The biggest uncertainties are how much of the loss the patrols prevent and whether forest loss drives pandemics; every branch but Peru's territories takes the missing-data discount, and the result is mostly uncertainty (combined range about 0.003-0.08).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Rainforest Foundation US",
@@ -140,7 +140,7 @@
       "label": "Overhead multiplier (total ÷ program expenses)",
       "format": "multiple",
       "formula": "total_expenses / program_expenses",
-      "explainer": "Spreads raising funds over the programmes. Support and governance costs are already split 70:30 between programmes and fundraising in the accounts (note 9)."
+      "explainer": "Spreads management and fundraising over the programmes. Shared costs are allocated by staff time and effort (note 2, p. 12)."
     },
     {
       "id": "cost_total",
@@ -242,12 +242,30 @@
       "explainer": "The forest of the Indigenous territories in Panama whose community patrollers and organisations RFUS trained and financed in 2025: a stock that the year's support covers, not land newly protected (Convention 3: one year of support against one year's cost, so years_protected is 1). RFUS's own count; the report gives 19.6 million acres across the four countries, of which these four figures add up to 19.4 million."
     },
     {
+      "id": "terpe_ha",
+      "section": "reach",
+      "label": "Peru territories: hectares under RFUS-supported monitoring",
+      "format": "integer",
+      "unit": "ha",
+      "formula": "ter_per_acres * ha_per_acre",
+      "explainer": "About 1.05 million hectares in Loreto and Ucayali."
+    },
+    {
+      "id": "tero_ha",
+      "section": "reach",
+      "label": "Other territories (Guyana, Brazil, Panama): hectares under the monitoring and organisations RFUS supports",
+      "format": "integer",
+      "unit": "ha",
+      "formula": "(ter_guy_acres + ter_bra_acres + ter_pan_acres) * ha_per_acre",
+      "explainer": "About 6.8 million hectares, 70% of them in Guyana."
+    },
+    {
       "id": "ter_ha",
       "section": "reach",
       "label": "Territories: hectares under the monitoring and organisations RFUS supports",
       "format": "integer",
       "unit": "ha",
-      "formula": "(ter_guy_acres + ter_bra_acres + ter_per_acres + ter_pan_acres) * ha_per_acre",
+      "formula": "terpe_ha + tero_ha",
       "explainer": "The four countries' acres in hectares: about 7.9 million."
     },
     {
@@ -300,7 +318,7 @@
         "quote": "Land tenure security strengthened for over 2 million acres",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Titles won, plus steps towards titles: boundaries demarcated and georeferenced, title-extension claims filed (Paramakatoi in Guyana's North Pakaraimas, about 625,000 acres), 990,297 acres in Peru, tenure work in Panama (300,000 acres in 2024). RFUS's own count."
+      "explainer": "Titles won, plus steps towards titles in 2025: boundaries demarcated and georeferenced and title-extension claims filed. The report names 990,297 acres in Peru and Paramakatoi's claim in Guyana's North Pakaraimas (about 625,000 acres); the rest it doesn't break down. RFUS's own count."
     },
     {
       "id": "land_advanced_ha",
@@ -359,7 +377,15 @@
         "quote": "Forest monitors received a daily stipend of $8 while out on patrols.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "The trial's rate in Loreto in 2018-2019; pay may have risen since and differs by country (Guyana's and Brazil's wages are higher, Panama's too). Range $6-15."
+      "explainer": "The trial's rate in Loreto in 2018-2019, in 2019 dollars (liv_stipend_2025 brings it to 2025 prices); pay differs by country (Guyana's and Brazil's wages are higher, Panama's too). Range $6-15."
+    },
+    {
+      "id": "liv_stipend_2025",
+      "section": "reach",
+      "label": "Livelihoods: patrollers' pay per patrol day, 2025 US$",
+      "format": "usd",
+      "formula": "liv_stipend_per_day * @cpi.usa_2025 / @cpi.usa_2019",
+      "explainer": "The trial's rate brought to 2025 prices with US consumer prices (Convention 8), about $10."
     },
     {
       "id": "liv_net_gain_share",
@@ -379,8 +405,8 @@
       "section": "reach",
       "label": "Livelihoods: net income to patrollers' households in the year, US$",
       "format": "usd",
-      "formula": "liv_patrollers * liv_patrol_days * liv_stipend_per_day * liv_net_gain_share",
-      "explainer": "About $100,000: a small part of the $3.77 million of partner and community costs, most of which pays for equipment, travel, meetings and the partner organisations' own staff (counted in the forest branches' cost, not as income)."
+      "formula": "liv_patrollers * liv_patrol_days * liv_stipend_2025 * liv_net_gain_share",
+      "explainer": "About $120,000: a small part of the $3.77 million of partner and community costs, most of which pays for equipment, travel, meetings and the partner organisations' own staff (counted in the forest branches' cost, not as income)."
     },
     {
       "id": "livelihood_people",
@@ -526,7 +552,15 @@
       "label": "Territories: share of the forest lost a year without the support, area-weighted",
       "format": "percent",
       "formula": "(ter_guy_acres * ter_guy_loss_rate + ter_bra_acres * ter_bra_loss_rate + ter_per_acres * ter_per_loss_rate + ter_pan_acres * ter_pan_loss_rate) / (ter_guy_acres + ter_bra_acres + ter_per_acres + ter_pan_acres)",
-      "explainer": "About 0.1% a year: Guyana's low rate on 60% of the area pulls it well below the Peruvian trial's 0.25%."
+      "explainer": "For reading only: about 0.1% a year. Guyana's low rate on 60% of the area pulls it well below the Peruvian trial's 0.25%."
+    },
+    {
+      "id": "tero_baseline_loss_rate",
+      "section": "effect",
+      "label": "Other territories: share of the forest lost a year without the support, area-weighted",
+      "format": "percent",
+      "formula": "(ter_guy_acres * ter_guy_loss_rate + ter_bra_acres * ter_bra_loss_rate + ter_pan_acres * ter_pan_loss_rate) / (ter_guy_acres + ter_bra_acres + ter_pan_acres)",
+      "explainer": "Guyana, Brazil and Panama by area: about 0.08% a year."
     },
     {
       "id": "tco2e_per_hectare_year",
@@ -535,25 +569,43 @@
       "format": "number",
       "unit": "t CO₂e / ha / year",
       "formula": "ter_baseline_loss_rate * permanence_share * tco2_per_ha_lost",
-      "explainer": "The loss the support works against × the share kept for good × CO₂ per hectare lost; the share the support actually prevents is ter_counterfactual_adj."
+      "explainer": "For reading only: the loss the support works against × the share kept for good × CO₂ per hectare lost, across all four countries; each territories branch computes its own below, and the share the support actually prevents is its counterfactual row."
     },
     {
-      "id": "ter_lasting_loss_ha_per_year",
+      "id": "terpe_lasting_loss_ha_per_year",
       "section": "effect",
-      "label": "Territories: at-risk hectares a year that would be lost for good",
+      "label": "Peru territories: at-risk hectares a year that would be lost for good",
       "format": "number",
       "unit": "ha",
-      "formula": "ter_ha * ter_baseline_loss_rate * permanence_share",
+      "formula": "terpe_ha * ter_per_loss_rate * permanence_share",
       "explainer": "Before the share the support prevents and the other adjustments."
     },
     {
-      "id": "ter_tco2e",
+      "id": "tero_lasting_loss_ha_per_year",
       "section": "effect",
-      "label": "Territories: CO₂ at stake, before adjustments",
+      "label": "Other territories: at-risk hectares a year that would be lost for good",
+      "format": "number",
+      "unit": "ha",
+      "formula": "tero_ha * tero_baseline_loss_rate * permanence_share",
+      "explainer": "Before the share the support prevents and the other adjustments."
+    },
+    {
+      "id": "terpe_tco2e",
+      "section": "effect",
+      "label": "Peru territories: CO₂ at stake, before adjustments",
       "format": "number",
       "unit": "t CO₂e",
-      "formula": "ter_ha * tco2e_per_hectare_year * protection_years",
-      "explainer": "Hectares × tonnes per hectare-year × the discounted year."
+      "formula": "terpe_lasting_loss_ha_per_year * tco2_per_ha_lost * protection_years",
+      "explainer": "Hectares lost for good a year × CO₂ per hectare × the discounted year."
+    },
+    {
+      "id": "tero_tco2e",
+      "section": "effect",
+      "label": "Other territories: CO₂ at stake, before adjustments",
+      "format": "number",
+      "unit": "t CO₂e",
+      "formula": "tero_lasting_loss_ha_per_year * tco2_per_ha_lost * protection_years",
+      "explainer": "Hectares lost for good a year × CO₂ per hectare × the discounted year."
     },
     {
       "id": "land_advance_title_equivalent",
@@ -597,7 +649,7 @@
       "format": "number",
       "unit": "years",
       "formula": "$win_years_counted",
-      "explainer": "A title is a won legal status: most of these communities would get title eventually, through the government's own programmes and other groups' help, so RFUS's work counts for the years it brings the title forward, the site's shared years for a won reform (docs/normalization.md 2.9)."
+      "explainer": "A title is a won legal status: most of these communities would get title eventually, through the government's own programmes and other groups' help, so RFUS's work counts for the years it brings the title forward, the site's shared years for a won reform (docs/normalization.md 2.9). Titling is a steady yearly output of paid legal and mapping work (75,000 acres titled in 2024, 67,762 in 2025), so it is a unit cost like the rest of the model, not a one-off campaign win."
     },
     {
       "id": "land_protection_years",
@@ -672,7 +724,7 @@
       "label": "Catastrophic risk: fall in the catastrophe's yearly probability from the year's work",
       "format": "small",
       "explainer": "The forest kept for good after each branch's adjustments × the risk per hectare: the fall in the yearly chance of a COVID-scale pandemic. For reading and the bounds check; the branches' pandemic rows carry it.",
-      "formula": "(ter_lasting_loss_ha_per_year * ter_credit + land_lasting_loss_ha_per_year * land_credit) * risk_per_ha_year"
+      "formula": "(terpe_lasting_loss_ha_per_year * terpe_credit + tero_lasting_loss_ha_per_year * tero_credit + land_lasting_loss_ha_per_year * land_credit) * risk_per_ha_year"
     },
     {
       "id": "share_under5",
@@ -725,12 +777,21 @@
       "explainer": "The site's one count of future generations (docs/normalization.md 2.19): the healthy years of people not yet born, discounted for ever at the shared rate. People alive now die in the catastrophe and are counted as deaths, so this stream rises from nothing to the long-run population over one lifetime (@catastrophe.life_expectancy_now) and then runs on: about 8 years at the default 4%, about 960 at the 0.1% floor. Fixed; don't edit."
     },
     {
-      "id": "ter_uov_pandemic",
+      "id": "terpe_uov_pandemic",
       "section": "effect",
-      "label": "Territories: pandemic deaths averted, in units of value (before adjustments)",
+      "label": "Peru territories: pandemic deaths averted, in units of value (before adjustments)",
       "format": "number",
       "unit": "UoV",
-      "formula": "ter_lasting_loss_ha_per_year * risk_per_ha_year * protection_years * catastrophe_deaths * catastrophe_value_per_death",
+      "formula": "terpe_lasting_loss_ha_per_year * risk_per_ha_year * protection_years * catastrophe_deaths * catastrophe_value_per_death",
+      "explainer": "The forest kept for good × the risk cut per hectare × the discounted year × the pandemic's deaths × the value of a death."
+    },
+    {
+      "id": "tero_uov_pandemic",
+      "section": "effect",
+      "label": "Other territories: pandemic deaths averted, in units of value (before adjustments)",
+      "format": "number",
+      "unit": "UoV",
+      "formula": "tero_lasting_loss_ha_per_year * risk_per_ha_year * protection_years * catastrophe_deaths * catastrophe_value_per_death",
       "explainer": "The forest kept for good × the risk cut per hectare × the discounted year × the pandemic's deaths × the value of a death."
     },
     {
@@ -747,7 +808,7 @@
       "section": "effect",
       "label": "Catastrophic risk: future years of healthy life kept, discounted",
       "format": "number",
-      "formula": "(ter_lasting_loss_ha_per_year * protection_years * ter_credit + land_lasting_loss_ha_per_year * land_protection_years * land_credit) * risk_per_ha_year * future_share_lost * @catastrophe.world_population_long_run * future_years_per_person",
+      "formula": "((terpe_lasting_loss_ha_per_year * terpe_credit + tero_lasting_loss_ha_per_year * tero_credit) * protection_years + land_lasting_loss_ha_per_year * land_protection_years * land_credit) * risk_per_ha_year * future_share_lost * @catastrophe.world_population_long_run * future_years_per_person",
       "unit": "DALYs",
       "explainer": "Every later year's healthy life the pandemic would take from people not yet born, discounted for ever at the shared rate; 0 at the best guess (future_share_lost). Already credited by each forest branch."
     },
@@ -844,48 +905,87 @@
       "explainer": "0: the species step for wild animals, not reached here (wild_animal_years is 0)."
     },
     {
-      "id": "ter_evidence_adj",
+      "id": "terpe_evidence_adj",
       "section": "adjustments",
-      "label": "Territories: evidence adjustment (internal and external validity)",
+      "label": "Peru territories: evidence adjustment (internal and external validity)",
       "format": "multiple",
       "value": {
-        "low": 0.4,
-        "best": 0.7,
+        "low": 0.5,
+        "best": 0.85,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The effect comes from a randomised trial of RFUS's own programme (Slough et al. 2021), but an imprecise one (first-year 95% interval from −19.4 to +2.6 hectares a community; the six-country Metaketa trials of community monitoring found smaller effects on average), in Loreto, applied to Guyana, Brazil and Panama (×0.85); the loss rates and CO₂ per hectare are national and tropical averages, not the territories' own (×0.85). Together 0.7 (0.4-1), as for Cool Earth's forest branch."
+      "explainer": "The effect comes from a randomised trial of this programme in this region (Slough et al. 2021), but an imprecise one: the first-year 95% interval runs from −19.4 to +2.6 hectares a community, and the six-country Metaketa trials of community monitoring found smaller effects on average, so a large point estimate likely overstates (×0.85). The loss rate and CO₂ per hectare are averages standing in as best guesses, their spread in their own ranges. 0.85 (0.5-1)."
     },
     {
-      "id": "ter_counterfactual_adj",
+      "id": "tero_evidence_adj",
       "section": "adjustments",
-      "label": "Territories: share of the at-risk loss the support prevents",
-      "format": "percent",
+      "label": "Other territories: evidence adjustment (internal and external validity)",
+      "format": "multiple",
       "value": {
-        "low": 0.05,
-        "best": 0.2,
-        "high": 0.45
+        "low": 0.45,
+        "best": 0.75,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Anchors: in the trial, alerts, training and paid patrols cut tree-cover loss by 52% in the first year and 37% over two years against control communities (Slough et al. 2021), with three monitors for an average 6,493 hectares (about 2,200 each). In 2025 some 400 patrollers cover 7.9 million hectares (about 20,000 each), so most of the land is watched far more thinly; the organisational strengthening (councils that pursue illegal miners in Guyana, legal defence, fire brigades in Roraima) adds protection the trial didn't test. Indigenous territories already keep their forest far better than other land, which is in the baseline rates, not RFUS's credit. Our judgment 20% (5-45%), below the trial's two-year 37% for the thinner cover, near Cool Earth's 30%."
+      "explainer": "The trial's imprecise estimate (×0.85, as for Peru), carried from Loreto's river communities to Guyana's, Brazil's and Panama's territories, with other threats (gold mining, ranching) and other organisations doing the work (×0.9). 0.75 (0.45-1)."
     },
     {
-      "id": "ter_attribution_share",
+      "id": "terpe_counterfactual_adj",
       "section": "adjustments",
-      "label": "Territories: RFUS's share of the resources behind the forest kept",
+      "label": "Peru territories: share of the at-risk loss the support prevents",
       "format": "percent",
       "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.9
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "The communities' own patrols and unpaid time, their federations (ORPIO, AIDESEP, CIR, APA, SRDC, the North Pakaraimas and Upper Mazaruni district councils), other funders of the same organisations (Norway's NICFI through Norad, the Swedish Postcode Foundation, Nia Tero, the Samueli Foundation: about $7 million to APA and SRDC over a decade, partly through RFUS) and governments' own enforcement work beside RFUS's money (Convention 2). APA's budget is now $1.7 million a year and SRDC's $1.1 million, much of it raised directly. Our judgment 60% (40-90%), a little below Cool Earth's 70%, since RFUS's partners have more funders of their own."
+      "explainer": "Anchor: in the trial, alerts, training and paid patrols cut tree-cover loss by 52% in the first year and 37% over two years against control communities (Slough et al. 2021), with three monitors for an average 6,493 hectares (about 2,200 each). In 2025 Peru's 291 monitors cover about 3,600 hectares each, 1.7 times the trial's, and the second-year effect was smaller (−3.3 against −8.4 hectares). Indigenous territories already keep their forest far better than other land, which is in the baseline rate, not RFUS's credit. Our judgment 30% (10-50%), below the trial's two-year 37%."
     },
     {
-      "id": "ter_implementation_adj",
+      "id": "tero_counterfactual_adj",
       "section": "adjustments",
-      "label": "Territories: delivery adjustment",
+      "label": "Other territories: share of the at-risk loss the support prevents",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.12,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "About 110 patrollers cover 6.8 million hectares, some 62,000 each, nearly 30 times the trial's density, so the trial's 37% (Slough et al. 2021) can't carry over; what does more of the work here is the organisations RFUS strengthens and funds: Guyana's district councils pursuing illegal miners (arrests and equipment seized in 2025), drone mapping of a concession on community land, Roraima's fire brigades. Our judgment 12% (2-30%), a third of the trial's effect."
+    },
+    {
+      "id": "terpe_attribution_share",
+      "section": "adjustments",
+      "label": "Peru territories: RFUS's share of the resources behind the forest kept",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Convention 2, the resources behind the effect the trial measures: RFUS designed and ran the programme and pays the monitors, their phones, training and alerts' delivery (Slough et al. 2021: 'the NGO that designed and implemented the monitoring program'); beside it, the federations' coordination (ORPIO and its member federations) and the community assemblies' unpaid time in deciding and acting on what the monitors find, and Peru's own alert platform (Geobosques). Paid monitor time is RFUS's. Our judgment 75% (50-95%)."
+    },
+    {
+      "id": "tero_attribution_share",
+      "section": "adjustments",
+      "label": "Other territories: RFUS's share of the resources behind the forest kept",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Convention 2, built roughly from the resources the 2025 report names (https://rainforestfoundation.org/about/financials-transparency/2025-annual-report/, Guyana): the Amerindian Peoples Association's budget is now $1.7 million a year and the South Rupununi District Council's $1.1 million, while RFUS's combined direct and intermediated funding to the two over a decade was about $7 million, from Norway's NICFI through Norad, the Swedish Postcode Foundation, Nia Tero and the Samueli Foundation: roughly $0.7 million a year of $2.8 million, a quarter, though RFUS's own staff and support add to it. Guyana is 70% of this branch's area. Brazil's and Panama's partners (CIR, GeoIndígena and others) have their own funders and state agencies; the communities' unpaid patrols and governments' enforcement count too. Our judgment 40% (25-70%)."
+    },
+    {
+      "id": "terpe_implementation_adj",
+      "section": "adjustments",
+      "label": "Peru territories: delivery adjustment",
       "format": "percent",
       "value": {
         "low": 0.7,
@@ -896,9 +996,36 @@
       "explainer": "The acres are RFUS's own count of land its partners patrol, not independently checked; in the trial three of 39 communities never started (one uninterested, two unsafe to reach), and that slippage is inside the trial's effect, so the delivery gap here is the patchier cover of large territories. 90% (70-100%)."
     },
     {
-      "id": "ter_unmodelled_benefits_adj",
+      "id": "tero_implementation_adj",
       "section": "adjustments",
-      "label": "Territories: benefits and harms not modelled, as a share of the branch",
+      "label": "Other territories: delivery adjustment",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The acres are RFUS's own count of land its partners patrol, not independently checked; in the trial three of 39 communities never started (one uninterested, two unsafe to reach), and that slippage is inside the trial's effect, so the delivery gap here is the patchier cover of large territories. 90% (70-100%)."
+    },
+    {
+      "id": "terpe_unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Peru territories: benefits and harms not modelled, as a share of the branch",
+      "format": "percent",
+      "value": {
+        "low": -0.3,
+        "best": 0,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "side_effect": "added",
+      "explainer": "Negative: leakage, clearing pushed onto forest outside the communities (the trial found no displacement in buffer areas, imprecisely; studies of protected areas find from none to about 40%). Positive: the environmental-crime complaints RFUS trains communities to file, and Peru's draft national strategy for Indigenous adaptation to fires and droughts, biodiversity and water. Net 0 (−30% to +30%)."
+    },
+    {
+      "id": "tero_unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Other territories: benefits and harms not modelled, as a share of the branch",
       "format": "percent",
       "value": {
         "low": -0.3,
@@ -907,30 +1034,54 @@
       },
       "kind": "judgment",
       "side_effect": "added",
-      "explainer": "Negative: leakage, clearing pushed onto forest outside the territories (the trial found no displacement in buffer areas, imprecisely; studies of protected areas find from none to about 40%). Positive: RFUS's global work (the Indigenous direct-finance mechanism of the Tropical Forest Forever Facility, which earmarks at least 20% for Indigenous peoples and local communities; the COP30 pledge to secure land), less mercury from illegal mining in Guyana, fire brigades in Roraima, biodiversity and water. Net +5% (−30% to +40%)."
+      "explainer": "Negative: leakage, as for Peru. Positive: RFUS's global work (the Indigenous direct-finance mechanism of the Tropical Forest Forever Facility, which earmarks at least 20% for Indigenous peoples and local communities; the COP30 pledge to secure land), less mercury from illegal mining in Guyana, biodiversity and water. Net +5% (−30% to +40%)."
     },
     {
-      "id": "ter_missing_data_adj",
+      "id": "terpe_missing_data_adj",
       "section": "adjustments",
-      "label": "Territories: discount for outcomes not measured",
+      "label": "Peru territories: discount for outcomes not measured",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1, measured (Convention 12): RFUS's count of who got the programme (291 monitors over 2.6 million acres) meets its own randomised evaluation of the same programme, delivered the same way in the same region (Slough et al. 2021)."
+    },
+    {
+      "id": "tero_missing_data_adj",
+      "section": "adjustments",
+      "label": "Other territories: discount for outcomes not measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "The trial measured the programme in Loreto in 2018-2019; nobody measures the 2025 territories' loss against comparable land without the support, so the branch rests on the research and judgment (Convention 12)."
+      "explainer": "No evaluation of RFUS's support in Guyana, Brazil or Panama; the branch rests on the Peruvian trial, far thinner patrols and judgment (Convention 12)."
     },
     {
-      "id": "ter_total_adj",
+      "id": "terpe_total_adj",
       "section": "adjustments",
-      "label": "Territories: product of the adjustments",
+      "label": "Peru territories: product of the adjustments",
       "format": "multiple",
-      "formula": "ter_evidence_adj * ter_counterfactual_adj * ter_attribution_share * ter_implementation_adj * ter_missing_data_adj",
+      "formula": "terpe_evidence_adj * terpe_counterfactual_adj * terpe_attribution_share * terpe_implementation_adj * terpe_missing_data_adj",
       "explainer": "The branch's adjustments multiplied."
     },
     {
-      "id": "ter_credit",
+      "id": "terpe_credit",
       "section": "adjustments",
-      "label": "Territories: credit, with the unmodelled share",
+      "label": "Peru territories: credit, with the unmodelled share",
       "format": "multiple",
-      "formula": "ter_total_adj * (1 + ter_unmodelled_benefits_adj)",
+      "formula": "terpe_total_adj * (1 + terpe_unmodelled_benefits_adj)",
+      "explainer": "The adjustments × (1 + the unmodelled share; the side-effect slider weights that share)."
+    },
+    {
+      "id": "tero_total_adj",
+      "section": "adjustments",
+      "label": "Other territories: product of the adjustments",
+      "format": "multiple",
+      "formula": "tero_evidence_adj * tero_counterfactual_adj * tero_attribution_share * tero_implementation_adj * tero_missing_data_adj",
+      "explainer": "The branch's adjustments multiplied."
+    },
+    {
+      "id": "tero_credit",
+      "section": "adjustments",
+      "label": "Other territories: credit, with the unmodelled share",
+      "format": "multiple",
+      "formula": "tero_total_adj * (1 + tero_unmodelled_benefits_adj)",
       "explainer": "The adjustments × (1 + the unmodelled share; the side-effect slider weights that share)."
     },
     {
@@ -1047,7 +1198,7 @@
     {
       "id": "liv_attribution_share",
       "section": "adjustments",
-      "label": "Livelihoods: Cool Earth's share of the resources behind the cash",
+      "label": "Livelihoods: RFUS's share of the resources behind the pay",
       "format": "percent",
       "formula": "1",
       "explainer": "1: RFUS pays the patrollers."
@@ -1156,12 +1307,21 @@
       "explainer": "Read off the bridge rows, only to weight the branch averages below; nothing on the path reads it."
     },
     {
-      "id": "ter_dalys_raw",
+      "id": "terpe_dalys_raw",
       "section": "adjustments",
-      "label": "Territories: healthy years before adjustments (for the averages only)",
+      "label": "Peru territories: healthy years before adjustments (for the averages only)",
       "format": "number",
       "unit": "DALYs",
-      "formula": "ter_tco2e * tco2e_value_here + ter_uov_pandemic * uov_value_here",
+      "formula": "terpe_tco2e * tco2e_value_here + terpe_uov_pandemic * uov_value_here",
+      "explainer": "Weights for the averages below; nothing on the path reads it."
+    },
+    {
+      "id": "tero_dalys_raw",
+      "section": "adjustments",
+      "label": "Other territories: healthy years before adjustments (for the averages only)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "tero_tco2e * tco2e_value_here + tero_uov_pandemic * uov_value_here",
       "explainer": "Weights for the averages below; nothing on the path reads it."
     },
     {
@@ -1187,24 +1347,24 @@
       "section": "adjustments",
       "label": "Evidence adjustment: weighted average of the branches",
       "format": "multiple",
-      "formula": "(ter_dalys_raw * ter_evidence_adj + land_dalys_raw * land_evidence_adj + liv_dalys_raw * liv_evidence_adj) / (ter_dalys_raw + land_dalys_raw + liv_dalys_raw)",
-      "explainer": "Outcome-weighted average of the three branches, for reading only: each branch applies its own row (Convention 4), weighted by its healthy years before adjustments."
+      "formula": "(terpe_dalys_raw * terpe_evidence_adj + tero_dalys_raw * tero_evidence_adj + land_dalys_raw * land_evidence_adj + liv_dalys_raw * liv_evidence_adj) / (terpe_dalys_raw + tero_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "Outcome-weighted average of the four branches, for reading only: each branch applies its own row (Convention 4), weighted by its healthy years before adjustments."
     },
     {
       "id": "counterfactual_adj",
       "section": "adjustments",
       "label": "Counterfactual: weighted average of the branches",
       "format": "percent",
-      "formula": "(ter_dalys_raw * ter_counterfactual_adj + land_dalys_raw * land_counterfactual_adj + liv_dalys_raw * liv_counterfactual_adj) / (ter_dalys_raw + land_dalys_raw + liv_dalys_raw)",
-      "explainer": "Outcome-weighted average of the three branches, for reading only: each branch applies its own row (Convention 4), weighted by its healthy years before adjustments."
+      "formula": "(terpe_dalys_raw * terpe_counterfactual_adj + tero_dalys_raw * tero_counterfactual_adj + land_dalys_raw * land_counterfactual_adj + liv_dalys_raw * liv_counterfactual_adj) / (terpe_dalys_raw + tero_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "Outcome-weighted average of the four branches, for reading only: each branch applies its own row (Convention 4), weighted by its healthy years before adjustments."
     },
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "Cool Earth's share of the resources: weighted average of the branches",
+      "label": "RFUS's share of the resources: weighted average of the branches",
       "format": "percent",
-      "formula": "(ter_dalys_raw * ter_attribution_share + land_dalys_raw * land_attribution_share + liv_dalys_raw * liv_attribution_share) / (ter_dalys_raw + land_dalys_raw + liv_dalys_raw)",
-      "explainer": "Outcome-weighted average of the three branches, for reading only: each branch applies its own row (Convention 4), weighted by its healthy years before adjustments."
+      "formula": "(terpe_dalys_raw * terpe_attribution_share + tero_dalys_raw * tero_attribution_share + land_dalys_raw * land_attribution_share + liv_dalys_raw * liv_attribution_share) / (terpe_dalys_raw + tero_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "Outcome-weighted average of the four branches, for reading only: each branch applies its own row (Convention 4), weighted by its healthy years before adjustments."
     },
     {
       "id": "attribution_share",
@@ -1219,8 +1379,8 @@
       "section": "adjustments",
       "label": "Delivery: weighted average of the branches",
       "format": "percent",
-      "formula": "(ter_dalys_raw * ter_implementation_adj + land_dalys_raw * land_implementation_adj + liv_dalys_raw * liv_implementation_adj) / (ter_dalys_raw + land_dalys_raw + liv_dalys_raw)",
-      "explainer": "Outcome-weighted average of the three branches, for reading only."
+      "formula": "(terpe_dalys_raw * terpe_implementation_adj + tero_dalys_raw * tero_implementation_adj + land_dalys_raw * land_implementation_adj + liv_dalys_raw * liv_implementation_adj) / (terpe_dalys_raw + tero_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "Outcome-weighted average of the four branches, for reading only."
     },
     {
       "id": "leverage_funging_adj",
@@ -1240,24 +1400,24 @@
       "section": "adjustments",
       "label": "Missing-data discount: weighted average of the branches",
       "format": "percent",
-      "formula": "(ter_dalys_raw * ter_missing_data_adj + land_dalys_raw * land_missing_data_adj + liv_dalys_raw * liv_missing_data_adj) / (ter_dalys_raw + land_dalys_raw + liv_dalys_raw)",
-      "explainer": "Outcome-weighted average of the three branches, for reading only."
+      "formula": "(terpe_dalys_raw * terpe_missing_data_adj + tero_dalys_raw * tero_missing_data_adj + land_dalys_raw * land_missing_data_adj + liv_dalys_raw * liv_missing_data_adj) / (terpe_dalys_raw + tero_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "Outcome-weighted average of the four branches, for reading only."
     },
     {
       "id": "total_adj",
       "section": "adjustments",
       "label": "All adjustments combined: weighted average of the branches",
       "format": "multiple",
-      "formula": "(ter_dalys_raw * ter_total_adj + land_dalys_raw * land_total_adj + liv_dalys_raw * liv_total_adj) / (ter_dalys_raw + land_dalys_raw + liv_dalys_raw)",
-      "explainer": "Outcome-weighted average of the three branches, for reading only."
+      "formula": "(terpe_dalys_raw * terpe_total_adj + tero_dalys_raw * tero_total_adj + land_dalys_raw * land_total_adj + liv_dalys_raw * liv_total_adj) / (terpe_dalys_raw + tero_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "Outcome-weighted average of the four branches, for reading only."
     },
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
       "label": "Effects not modelled: weighted average of the branches",
       "format": "percent",
-      "formula": "(ter_dalys_raw * ter_unmodelled_benefits_adj + land_dalys_raw * land_unmodelled_benefits_adj + liv_dalys_raw * liv_unmodelled_benefits_adj) / (ter_dalys_raw + land_dalys_raw + liv_dalys_raw)",
-      "explainer": "Outcome-weighted average of the three branches, for reading only."
+      "formula": "(terpe_dalys_raw * terpe_unmodelled_benefits_adj + tero_dalys_raw * tero_unmodelled_benefits_adj + land_dalys_raw * land_unmodelled_benefits_adj + liv_dalys_raw * liv_unmodelled_benefits_adj) / (terpe_dalys_raw + tero_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "Outcome-weighted average of the four branches, for reading only."
     },
     {
       "id": "methane_share",
@@ -1304,7 +1464,7 @@
       "section": "bridges",
       "label": "Livelihoods and catastrophic risk, in GiveWell units of value (before adjustments)",
       "format": "number",
-      "formula": "ter_uov_pandemic * ter_credit + land_uov_pandemic * land_credit + liv_uov * liv_credit",
+      "formula": "terpe_uov_pandemic * terpe_credit + tero_uov_pandemic * tero_credit + land_uov_pandemic * land_credit + liv_uov * liv_credit",
       "unit": "UoV",
       "explainer": "Each branch's units of value × that branch's credit: the pandemic risk the forest kept cuts, and the patrollers' pay to their households."
     },
@@ -1340,7 +1500,7 @@
       "section": "bridges",
       "label": "Climate, in tonnes of CO₂-equivalent averted (before adjustments)",
       "format": "number",
-      "formula": "ter_tco2e * ter_credit + land_tco2e * land_credit",
+      "formula": "terpe_tco2e * terpe_credit + tero_tco2e * tero_credit + land_tco2e * land_credit",
       "unit": "t CO₂e",
       "explainer": "Each forest branch's tonnes × its credit."
     },
@@ -1409,7 +1569,7 @@
       "label": "Pay gap versus comparable jobs elsewhere",
       "format": "percent",
       "formula": "@staff_pay.gap_advocacy",
-      "explainer": "The shared pay gap for conservation and campaigning NGO staff (@staff_pay.gap_advocacy): Cool Earth's UK team are fundraisers, campaigners and programme managers; the hubs' local staff earn about local NGO rates (inside the range)."
+      "explainer": "The shared pay gap for conservation and campaigning NGO staff (@staff_pay.gap_advocacy): RFUS's staff are programme, legal and fundraising staff in New York and RFUS Peru's team in Iquitos and Lima."
     },
     {
       "id": "salary_sacrifice",
