@@ -41,7 +41,7 @@
   "estimate_basis": "unit_cost",
   "charity": "mercy-corps",
   "owner": "charityevals",
-  "summary": "Mercy Corps (renamed Prosper Global in 2026) spent $509 million on programmes in its year to June 2025, half of it in Sub-Saharan Africa: livelihoods and market systems ($207M), emergency relief ($138M, mostly cash, water and supplies through partners in Sudan, Gaza, Ukraine and elsewhere), peace, governance and education ($90M), health and nutrition ($43M) and recovery ($31M). It counts people reached (over 36 million) but publishes no controlled measure of what its spending achieved, so every branch is built from its spending, its reach or a judged cost per person and the research on that kind of work, and every branch is discounted for missing data. It comes to about 0.17 years of healthy life per $1,000 (combined range 0.03-0.9: the result is mostly uncertainty), below the site's global-health median and near World Vision and Save the Children: half from livelihoods (small consumption gains spread over the 19 million people its economic programmes reach), a third from relief (cash and goods, and a few excess crisis deaths averted), little from water, nutrition, education and peace work. The biggest uncertainties are how much the livelihood programmes raise consumption for the many people they reach only indirectly, the missing-data discount, and crisis-affected people's consumption.",
+  "summary": "Mercy Corps (renamed Prosper Global in 2026) spent $509 million on programmes in its year to June 2025, half of it in Sub-Saharan Africa: livelihoods and market systems ($207M), emergency relief ($138M, mostly cash, water and supplies through partners in Sudan, Gaza, Ukraine and elsewhere), peace, governance and education ($90M), health and nutrition ($43M) and recovery ($31M). It counts people reached (over 36 million) but publishes no controlled measure of what its spending achieved, so every branch is built from its spending, its reach or a judged cost per person and the research on that kind of work, and every branch is discounted for missing data. It comes to about 0.18 years of healthy life per $1,000 (combined range 0.03-0.95: the result is mostly uncertainty), below the site's global-health median and near World Vision and Save the Children: half from livelihoods (small consumption gains spread over the 19 million people its economic programmes reach), a third from relief (cash and goods, and a few excess crisis deaths averted), little from water, nutrition, education and peace work. The biggest uncertainties are how much the livelihood programmes raise consumption for the many people they reach only indirectly, the missing-data discount, and crisis-affected people's consumption.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Mercy Corps, all programmes",
@@ -257,7 +257,7 @@
         "high": 60
       },
       "kind": "judgment",
-      "explainer": "Mercy Corps' counts don't match the relief line: its Form 990 says relief reached '37.6 million people across programs' (Part III line 4b), the same as its organisation-wide total, and its food-security (19 million) and water-security (10 million) counts span the relief, recovery and health lines (Mercy Corps Europe's report, pp. 24, 29); its US entity paid $34.1M of cash grants to about a million people (Schedule F Part III). Anchors: across all its work it reached over 36 million people (p. 14) on $509M of programmes, $14 a person; the World Vision partnership's relief and rehabilitation cost $30 a person reached (its 2025 report); a month of multipurpose cash in Ukraine or Sudan costs far more per person, emergency water and hygiene supplies in Gaza or Darfur much less. Judgment $25 ($10-60)."
+      "explainer": "Mercy Corps' counts don't match the relief line: its Form 990 says relief reached '37.6 million people across programs' (Part III line 4b), the same as its organisation-wide total, and its food-security (19 million) and water-security (10 million) counts span the relief, recovery and health lines (Mercy Corps Europe's report, pp. 24, 29); its US entity paid $34.1M of cash grants to about a million people (Schedule F Part III). Anchors: across all its work it reached over 36 million people (p. 14) on $509M of programmes, $14 a person; the World Vision partnership's relief and rehabilitation cost $30 a person reached (charityevals' World Vision model, row relief_cost_per_person: $1,060M for 35.6 million people); a month of multipurpose cash in Ukraine or Sudan costs far more per person, emergency water and hygiene supplies in Gaza or Darfur much less. Judgment $25 ($10-60)."
     },
     {
       "id": "people_reached",
@@ -944,17 +944,34 @@
       "explainer": "Someone who opens a mobile-money account or buys from a supported input dealer gains much less than a trained farmer; few market-systems evaluations isolate it. Judgment 10% (0-30%)."
     },
     {
+      "id": "liv_household_size",
+      "section": "effect",
+      "label": "People per household where the livelihood programmes run",
+      "format": "number",
+      "formula": "avg(@household_size.nigeria, @household_size.kenya_rural, @household_size.uganda_rural)",
+      "unit": "people",
+      "explainer": "The site's household sizes for three of Mercy Corps' larger African programme countries."
+    },
+    {
+      "id": "liv_participant_only_share",
+      "section": "effect",
+      "label": "Share of direct participants counted without their household members",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.2,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Mercy Corps calls its outcome figures 'participant reach' (Mercy Corps Europe's report, p. 22, a table of the programmes Mercy Corps Europe funds), but its global count of 19 million (p. 25) is wider, and many market, savings-group and resilience programmes count every household member or several members of one household. Judgment 20% (0-60%) of direct participants counted alone, whose households' other members gain too."
+    },
+    {
       "id": "liv_household_gain_multiplier",
       "section": "effect",
       "label": "People whose consumption rises per direct participant counted",
       "format": "multiple",
-      "value": {
-        "low": 1,
-        "best": 1.5,
-        "high": 3
-      },
-      "kind": "judgment",
-      "explainer": "A direct participant's higher income is shared by the household; Mercy Corps counts participants (p. 22), and households average 4.5 people in Nigeria (facts/household_size.json), but some programmes count every household member and others several members of one household. Judgment 1.5 (1-3), applied to direct participants only."
+      "formula": "1 + liv_participant_only_share * (liv_household_size - 1)",
+      "explainer": "Direct participants counted alone share the gain with their households (the shared household size); those counted with their households already are: about 1.7 at the defaults."
     },
     {
       "id": "liv_years",
