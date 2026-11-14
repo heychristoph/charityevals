@@ -47,7 +47,7 @@ function movedMoney(m: ResolvedModel, name: string): string | undefined {
   if (!v) return undefined;
   const owner = lib.owners.get(m.owner)!.name;
   const where = sameFormula(v.formula, LIVELIHOODS_ONLY.formula)
-    ? "the livelihoods charities the site models (it has published no list of its own yet), each at its live result on this site (GiveDirectly, Bandhan, Village Enterprise, Raising the Village, One Acre Fund)"
+    ? "the livelihoods charities on the rankings (it has published no list of its own yet), weighted equally, each at its live result on this site"
     : sameFormula(v.formula, TLYCS_SPLIT.formula)
       ? "its own published split of the money it moved, each charity at its live result on this site"
       : "GiveWell's Top Charities, each at its live result on this site (where its money goes: its work is in global health and poverty)";
