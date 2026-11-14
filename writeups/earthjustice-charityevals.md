@@ -2,7 +2,7 @@
 
 Earthjustice is the largest US non-profit environmental law firm. It represents community, health and environmental groups and tribes for free, in court, before federal agencies and before state utility commissions. We model its three focus areas separately, each against what it spent on that area over its fiscal years 2022 to 2025:
 
-- **Climate and clean energy:** **<span data-figure="headline" data-model="earthjustice-charityevals">0.0024</span> years of healthy life per $1,000**, about $185 a tonne of CO₂e averted.
+- **Climate and clean energy:** **<span data-figure="headline" data-model="earthjustice-charityevals">0.0024</span> years of healthy life per $1,000**, about $180 a tonne of CO₂e averted.
 - **Healthy communities:** **<span data-figure="headline" data-model="earthjustice-charityevals-health">0.015</span> years of healthy life per $1,000**, from cleaner air and drinking water.
 - **Biodiversity:** **<span data-figure="headline" data-model="earthjustice-charityevals-biodiversity">0.0000007</span> years of healthy life per $1,000**, from the Tongass forest's carbon.
 
