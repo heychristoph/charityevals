@@ -77,7 +77,13 @@ The forest's judgments (the loss rate, what the support changes, permanence) bar
 
 ### How this model was checked
 
-AUDITS
+Independent auditors checked the model in four rounds; the receipts are in audits/cool-earth-charityevals/.
+
+- **Round 1** found that Cool Earth's "£2m given directly to communities" can't all be cash: the accounts' staff and project notes leave about £1.2 million. The cash is now that estimate, which lowered the result by about a third. The round also added the deaths the cash averts and its gains to others, and took the people reached from Cool Earth's own count.
+- **Round 2** passed. It moved the deaths averted onto GiveWell's 2024 analysis of GiveDirectly and capped the cash at what the accounts allow. It also set the forest's baseline loss from Cool Earth's own record, which lowered the forest branch.
+- **Rounds 3 and 4** verified those changes. One explainer figure without a source was removed.
+
+The site's shared figures for tropical forest loss, the pandemic risk of deforestation and a COVID-scale pandemic's ages were moved into shared data in this build. The Nature Conservancy's model reads them too, with its result unchanged.
 
 ### Sources
 
