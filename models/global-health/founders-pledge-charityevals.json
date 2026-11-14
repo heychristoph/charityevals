@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "founders-pledge",
  "owner": "charityevals",
- "summary": "Founders Pledge runs a pledge community of entrepreneurs, researches where to give, advises members and ultra-wealthy Philanthropy Partners and runs donor-advised and public funds; this model covers its whole group's 2025 operating costs ($12.1M across its UK charity and US and German entities; the $317M of grants it passed on are the recipients' cost). At the defaults it averts about 3.6 years of healthy life per $1,000: of the $196M granted to its recommended charities in 2025, the site's shared share for a meta charity without a donor survey credits it with causing 30% of its funds' $55M and of its members' roughly $75M (half of that new money), and with redirecting 30% of its Philanthropy Partners' roughly $66M of advised giving, valued only for the gain and discounted for missing data (the one branch so discounted); each dollar is valued at the site's ranked charities in its causes, climate (31.5%), education and health (58.5%, at the global-health charities, since no education charity has a published model here) and catastrophic risks (2.8%). It is more than ten times its peers because it moves about sixteen dollars to recommended charities for each dollar it spends: it sits above the charities it funds, not among typical global-health programmes. The result moves most with where shifted money would otherwise have gone (an ordinary charity is worth nearly two-thirds of the global-health charities' average here, so shifted money gains little), the next dollar (33% of the 2025 average) and the share of giving it caused; its climate third adds almost nothing, because the site's climate charities rank far below its global-health charities in healthy years.",
+ "summary": "Founders Pledge runs a pledge community of entrepreneurs, researches where to give, advises members and ultra-wealthy Philanthropy Partners and runs donor-advised and public funds; this model covers its whole group's 2025 operating costs ($12.1M across its UK charity and US and German entities; the $317M of grants it passed on are the recipients' cost). At the defaults it averts about 8.7 years of healthy life per $1,000: of the $196M granted to its recommended charities in 2025, the site's shared share for a meta charity without a donor survey credits it with causing 30% of its funds' $55M and of its members' roughly $62M (half of that new money), and with redirecting 30% of its Philanthropy Partners' roughly $79M of advised giving, valued only for the gain and discounted for missing data (the one branch so discounted); each dollar is valued by its cause split, health (27.4%) at its grantees with a figure on the rankings (Evidence Action, Helen Keller Intl and three more), climate (31.5%) at Clean Air Task Force, catastrophic risks (2.8%) at SecureBio and education (31.1%) at the global-health charities, since none of its education grantees has a published model here. Its members' other giving it caused ($163M went to charities it doesn't recommend) adds about a quarter, at an ordinary charity's value. It is more than ten times its peers because it moves about sixteen dollars to recommended charities for each dollar it spends: it sits above the charities it funds, not among typical global-health programmes. The result moves most with the next dollar (33% of the 2025 average) and the share of giving it caused; its climate third adds almost nothing, because the site's climate charities rank far below its global-health charities in healthy years.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Founders Pledge",
@@ -222,7 +222,7 @@
     "quote": "Through our members, our Philanthropy Partners and the wider public, more than $196M (£149M) was granted to our recommended HIFO.",
     "note": "Its impact report gives the same figure ('Donated to high-impact funding opportunities: $196M', +37% on 2024, 2025 Impact Summary). HIFO: its 'high-impact funding opportunities', 65 live recommendations at the end of 2025 (trustees' report, p. 5)."
    },
-   "explainer": "The year's flow of money to the charities it recommends, from all its channels: grants from members' donor-advised funds, its pooled funds, and Philanthropy Partners' giving on its advice. A flow against the year's cost (Convention 3): a past pledge fulfilled this year counts this year, and the period's new pledges ($1.54B from 275 members) aren't counted on top, so nothing is counted twice. Of the $359M its community gave in 2025, the other $163M went to charities it doesn't recommend: those count only in the side effects."
+   "explainer": "The year's flow of money to the charities it recommends, from all its channels: grants from members' donor-advised funds, its pooled funds, and Philanthropy Partners' giving on its advice. A flow against the year's cost (Convention 3): a past pledge fulfilled this year counts this year, and the period's new pledges ($1.54B from 275 members) aren't counted on top, so nothing is counted twice. Of the $359M its community gave in 2025, the other $163M went to charities it doesn't recommend: those count in a row of their own (other_giving_value)."
   },
   {
    "id": "climate_fund_granted",
@@ -270,7 +270,7 @@
     "page": "Rapid Response Fund",
     "quote": "we mobilized more than $13 million in six months to high-impact programs"
    },
-   "explainer": "A temporary fund for programmes left without money by the suspension of US foreign aid, February to August 2025."
+   "explainer": "A temporary fund for programmes left without money by the suspension of US foreign aid, February to August 2025, launched together with The Life You Can Save. The accounts say Founders Pledge 'mobilised and disbursed some $13M', inside the $196M; fund and member money are valued alike here, so how the $13M splits between them changes nothing."
   },
   {
    "id": "cif_granted",
@@ -335,11 +335,11 @@
    "format": "percent",
    "value": {
     "low": 0,
-    "best": 0.25,
+    "best": 0.1,
     "high": 0.55
    },
    "kind": "judgment",
-   "explainer": "Our judgment, 25% (0% to 55%). The $50M Climate Fund donation of 2025 came from a non-member, the kind of donor its Philanthropy Partnerships serve, and the fund granted $38.8M in the year; if that donor is one of the partners, part of the $88M is fund money, counted in fund_grants. The accounts don't say: the low end is no overlap, the high end most of the fund's grants."
+   "explainer": "Our judgment, 10% (0% to 55%). The sentence (accounts p. 5) is about five new partnerships in 2025. The $50M Climate Fund donation of 2025 came from a non-member who had already given $40M in 2024 (p. 9: '2024 saw a transformative $40m donation from a non-member … underlined this year by a second donation of $50m'), so not a new partner, and that gift was 'split between our Climate fund and supporting our operations' (p. 6). Some new partners may still have given through the funds; the high end is the reading that the $88M covers all partners, the Climate Fund donor among them."
   },
   {
    "id": "partner_advised",
@@ -476,8 +476,48 @@
    "section": "moved_money",
    "label": "Value of a dollar to the causes Founders Pledge directs money to (its 2025 split, live), units of value",
    "format": "small",
-   "formula": "(@meta.fp_moved_2025_climate * #cause:climate + (@meta.fp_moved_2025_education + @meta.fp_moved_2025_health) * #cause:global-health + @meta.fp_moved_2025_gcr * #cause:catastrophic-risk) / (@meta.fp_moved_2025_climate + @meta.fp_moved_2025_education + @meta.fp_moved_2025_health + @meta.fp_moved_2025_gcr)",
-   "explainer": "Where its recommended charities' 2025 money went by cause (its impact report, facts/meta.json fp_moved_2025_*): climate 31.5%, education 31.1%, health and economic empowerment 27.4%, global catastrophic risks 2.8%; each cause at the site's ranked charities in it under your values, equal weights (#cause:climate, #cause:global-health, #cause:catastrophic-risk), by the site's rule for a split (normalization.md 2.8). Education charities are filed under global health and none has a published model here (the site's models of them are an unpublished evaluator's), so education takes the global-health charities. Its split is by cause only, so named recipients aren't read one by one. 'System change' (4.6%), 'global security' (1.0%) and the unlabelled slivers (about 1.6%) have no model here and take the average of the rest. The same split values the fund, member and partner money alike."
+   "formula": "(@meta.fp_moved_2025_climate * #charityevals:clean-air-task-force + @meta.fp_moved_2025_education * #cause:global-health + @meta.fp_moved_2025_health * (@meta.fp_grants_2025_evidence_action * #givewell:evidence-action + @meta.fp_grants_2025_chai * #givewell:clinton-health-access-initiative + @meta.fp_grants_2025_fika * #givewell:fika + @meta.fp_grants_2025_precision_development * #givewell:precision-development + @meta.fp_grants_2025_helen_keller_intl * #givewell:helen-keller-intl) / (@meta.fp_grants_2025_evidence_action + @meta.fp_grants_2025_chai + @meta.fp_grants_2025_fika + @meta.fp_grants_2025_precision_development + @meta.fp_grants_2025_helen_keller_intl) + @meta.fp_moved_2025_gcr * #charityevals:securebio) / (@meta.fp_moved_2025_climate + @meta.fp_moved_2025_education + @meta.fp_moved_2025_health + @meta.fp_moved_2025_gcr)",
+   "explainer": "Where its recommended charities' 2025 money went by cause (its impact report, facts/meta.json fp_moved_2025_*): climate 31.5%, education 31.1%, health and economic empowerment 27.4%, global catastrophic risks 2.8%, by the site's rule for a split (normalization.md 2.8). Within each cause, its grantees with a model here, from its audited list of 2025 grants of £1M or more (note 10, facts/meta.json fp_grants_2025_*), each at its figure on the rankings under your values: health and economic empowerment at Evidence Action, Clinton Health Access Initiative, Fika, Precision Development and Helen Keller Intl weighted by their 2025 grants (GiveWell's figures), its unmodelled grantees there (Raising the Village, Bandhan, Fortification Foundation and others) taking their average; climate at Clean Air Task Force and catastrophic risks at SecureBio, each its cause's only modelled grantee. Education charities are filed under global health and none of its education grantees has a published model here (the site's models of them are an unpublished evaluator's), so education takes the global-health charities on the rankings, equal weights (#cause:global-health). 'System change' (4.6%: its institutional and governance grants; the one with a model here, CGD Europe's £1.27M, is a separate charity from the Center for Global Development modelled here), 'global security' (1.0%: no published list of what it covers) and the unlabelled slivers (about 1.6%) take the average of the rest. The same split values the fund, member and partner money alike."
+  },
+  {
+   "id": "community_moved",
+   "section": "reach",
+   "label": "Money its community gave to charities through its donor-advised funds, pooled funds and other channels, 2025 (US$)",
+   "format": "usd",
+   "value": 359000000,
+   "kind": "observed",
+   "source": {
+    "title": "Founders Pledge Ltd (charity 1162201), Trustees' Report and Consolidated Financial Statements for the year ended 31 December 2025 (audited, Crowe U.K. LLP)",
+    "url": "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5061733/accounts-and-annual-returns",
+    "retrieved": "2026-11-14",
+    "page": "Trustees' report, Our Achievements, p. 4",
+    "quote": "In 2025, our community guided more than $359M (£272M) to the charitable sector, through Founders Pledge's Donor Advised Funds (DAFs), Thematic Funds or other giving channels.",
+    "note": "The impact summary gives the same $359M 'Moved to the charitable sector in 2025'."
+   },
+   "explainer": "All giving through it, to recommended charities and others; the $196M to recommended charities is inside it."
+  },
+  {
+   "id": "other_end_charity_share",
+   "section": "reach",
+   "label": "Share of its community's other giving that reached charities doing the work (not other donor-advised funds)",
+   "format": "percent",
+   "value": {
+    "low": 0.8,
+    "best": 0.93,
+    "high": 1
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment, 93% (80% to 100%), anchored on its audited list of 2025 grants of £1M or more (note 10): transfers to other donor-advised funds and grantmakers (Fidelity Charitable £6.2M, Daffy £1.5M, UBS Optimus Foundation £1.5M, about £9M of the list's £125M outside its recommendations) pass money on to be granted again, not to the work."
+  },
+  {
+   "id": "other_giving_value",
+   "section": "effect",
+   "label": "Value of the other giving it caused, to charities it doesn't recommend (units of value)",
+   "format": "number",
+   "unit": "units of value",
+   "formula": "(community_moved - hifo_granted) * other_end_charity_share * member_own_effect * new_money_share * @meta.prior_vs_cash * #givedirectly",
+   "side_effect": "added",
+   "explainer": "Its members' giving to charities it doesn't recommend ($163M in 2025), counted as Giving What We Can's model counts its donors' giving below its bar: the share it caused (the shared 30%), only the new half (shifted money between ordinary charities gains nothing), at an ordinary charity's value (the shared multiple of GiveDirectly's live result), after the share that reached end charities."
   },
   {
    "id": "moved_side_effects",
@@ -486,12 +526,12 @@
    "format": "percent",
    "value": {
     "low": -0.05,
-    "best": 0.08,
-    "high": 0.25
+    "best": 0.03,
+    "high": 0.2
    },
    "kind": "judgment",
    "side_effect": "added",
-   "explainer": "Good and harm of its own beyond the money counted: members' other giving it caused ($163M of its community's $359M in 2025 went to charities it doesn't recommend; the 30% it caused, half of it new money, at an ordinary charity's value is about +5% of the modelled value at the defaults), its public research and funds followed by other platforms' donors (Effektiv Spenden's climate fund follows its Climate Fund) and its pledge norm among founders (positive); money parked in donor-advised funds for years (its restricted funds rose by £73M in 2025), donor attention drawn from other good uses and a few advisers steering much of a field's private money (negative). The recipients' own risks are in their figures already. 8% (−5% to +25%), our judgment, anchored on the +5% arithmetic and Giving What We Can's, Effektiv Spenden's and Longview's 5% for the same kind of effects."
+   "explainer": "Good and harm of its own beyond the money counted, its members' other giving being a row of its own (other_giving_value): its public research and funds followed by other platforms' donors (Effektiv Spenden's climate fund follows its Climate Fund) and its pledge norm among founders (positive); money parked in donor-advised funds for years (its restricted funds rose by £73M in 2025), donor attention drawn from other good uses and a few advisers steering much of a field's private money (negative). The recipients' own risks are in their figures already. 3% (−5% to +20%), our judgment, anchored on Giving What We Can's, Effektiv Spenden's and Longview's 5% for the same kind of effects, less here as the largest of them is counted in its own row."
   },
   {
    "id": "new_money_share",
@@ -500,14 +540,6 @@
    "format": "percent",
    "formula": "@meta.new_money_share",
    "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
-  },
-  {
-   "id": "value_global_health",
-   "section": "moved_money",
-   "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
-   "format": "small",
-   "formula": "@meta.gw_weight_amf * #givewell:against-malaria-foundation + @meta.gw_weight_smc * #givewell:malaria-consortium + @meta.gw_weight_vas * #givewell:helen-keller-intl + @meta.gw_weight_ni * #givewell:new-incentives",
-   "explainer": "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium, Helen Keller Intl, New Incentives), each at GiveWell's figure for the charity on the rankings (its programmes and locations weighted by funding) under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%)."
   },
   {
    "id": "moved_dollar_value",
@@ -555,8 +587,8 @@
    "label": "Value of the money Founders Pledge moved and changed (units of value)",
    "format": "number",
    "unit": "units of value",
-   "formula": "((fund_moved + member_moved) * moved_dollar_net_value + informed_money_value) * (1 + moved_side_effects)",
-   "explainer": "Fund and member money it caused, net of where shifted money would have gone (new money in full), plus partners' giving its advice redirected, all shifted, after the evidence and missing-data steps; with the side effects."
+   "formula": "((fund_moved + member_moved) * moved_dollar_net_value + informed_money_value) * (1 + moved_side_effects) + other_giving_value",
+   "explainer": "Fund and member money it caused, net of where shifted money would have gone (new money in full), plus partners' giving its advice redirected, all shifted, after the evidence and missing-data steps, with the side effects; plus the other giving it caused, valued in its own row."
   },
   {
    "id": "evidence_adj",
