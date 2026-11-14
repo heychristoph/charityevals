@@ -17,7 +17,9 @@
 // Every destination is read at the figure the site ranks its charity by: the charity's primary
 // evaluator's programme- and location-weighted figure, `#owner:charity` (src/engine/ranking.ts
 // evaluatorFigure), never one of its models alone (a median location sheet can be a fifth of it). A
-// model read by its id (`#id`) only where its charity has no figure on the rankings.
+// model read by its id (`#id`) only where its charity has no figure on the rankings. A cause's or area's
+// charities on the rankings, equal weights, are `#cause:x` (ranking.ts causeFigure): money that goes to a
+// cause with no recipient modelled.
 //
 // GiveDirectly, two reads: money that goes to GiveDirectly is a destination like any other, at the
 // figure the rankings show (#givewell:givedirectly, GiveWell's five-country aggregate, 0.00993 units of
@@ -41,12 +43,10 @@ export const MOVED_MONEY_SECTION = {
 
 /** GiveWell's four Top Charities, each at GiveWell's figure for the charity, weighted by GiveWell's 2024 funding. */
 export const GLOBAL_HEALTH_DESTINATIONS = ["givewell:against-malaria-foundation", "givewell:malaria-consortium", "givewell:helen-keller-intl", "givewell:new-incentives"];
-/** Livelihoods charities with an evaluator's live model on the site, for an organisation that moves money
- * to livelihoods charities (Better Futures Guide). Equal weights: none of them has a published share yet.
- * Raising the Village has no figure on the rankings (GiveWell's sheet sizes a research grant), so its model. */
-export const LIVELIHOODS_DESTINATIONS = [
-  GIVEDIRECTLY, "raising-the-village-2024", "givewell:one-acre-fund",
-];
+/** The livelihoods charities on the rankings (`area: "livelihoods"`), for an organisation that moves money
+ * to livelihoods charities (Better Futures Guide): `#cause:livelihoods`, equal weights, none of them having
+ * a published share yet. */
+export const LIVELIHOODS = "cause:livelihoods";
 /** The Life You Can Save's own split of the money it moved in 2025 (facts/meta.json tlycs_moved_2025_*),
  * each charity at the figure the rankings show for it (`#owner:charity`). A charity whose only model is
  * an unpublished evaluator's (Founders Pledge, Giving Green), or that has no figure on the rankings
@@ -72,7 +72,7 @@ export type TemplateRow = { id: string; label: string; format: "small" | "percen
 
 const [amf, mc, hk, ni] = GLOBAL_HEALTH_DESTINATIONS;
 const gh = `@meta.gw_weight_amf * #${amf} + @meta.gw_weight_smc * #${mc} + @meta.gw_weight_vas * #${hk} + @meta.gw_weight_ni * #${ni}`;
-const lw = `avg(${LIVELIHOODS_DESTINATIONS.map((id) => `#${id}`).join(", ")})`;
+const lw = `#${LIVELIHOODS}`;
 const tl = `(${TLYCS_DESTINATIONS.map(([k, id]) => `@meta.tlycs_moved_2025_${k} * #${id}`).join(" + ")}) / (${TLYCS_DESTINATIONS.map(([k]) => `@meta.tlycs_moved_2025_${k}`).join(" + ")})`;
 
 export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
@@ -84,7 +84,7 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
   value_livelihoods: {
     id: "value_livelihoods", format: "small", formula: lw,
     label: "Value of a dollar to livelihoods charities (live), units of value",
-    explainer: "The livelihoods charities with an evaluator's model on this site, each at its figure on the rankings under your values, with equal weights: GiveDirectly, Raising the Village (not on the rankings: its model) and One Acre Fund (all GiveWell's).",
+    explainer: "The livelihoods charities on the rankings, each at its figure there under your values, with equal weights (#cause:livelihoods: whichever the site ranks, so it follows new models).",
   },
   value_tlycs_recommended: {
     id: "value_tlycs_recommended", format: "small", formula: tl,

@@ -133,7 +133,11 @@ if (Number.isFinite(causeMedian) && Number.isFinite(years)) {
 // needs the full rankings and is checked above against the cause's median instead.
 const liveIds = (x: Record<string, unknown>): string[] => {
   const text = ((x.rows ?? []) as { formula?: string }[]).map((r) => r.formula ?? "").join(" ");
-  const ids = [...text.matchAll(/#([a-z0-9-]+)(?::([a-z0-9-]+))?/g)].flatMap(([, a, b]) => (b ? allModels.filter((y) => y.charity === b && y.owner === a).map((y) => y.id as string) : [a]));
+  // `#cause:x`: every model of the charities in cause or area x; `#owner:charity`: that evaluator's models of it.
+  const inCause = (c: string) => new Set(charities.filter((y) => y.cause === c || y.area === c).map((y) => y.id));
+  const ids = [...text.matchAll(/#([a-z0-9-]+)(?::([a-z0-9-]+))?/g)].flatMap(([, a, b]) => (!b ? [a]
+    : a === "cause" ? allModels.filter((y) => inCause(b).has(y.charity)).map((y) => y.id as string)
+    : allModels.filter((y) => y.charity === b && y.owner === a).map((y) => y.id as string)));
   return typeof x.extends === "string" ? [...ids, x.extends] : ids;
 };
 const allModels: Record<string, unknown>[] = walk(join(root, "models")).map(read).filter((x) => x.id !== raw.id && !exclude.has(x.id) && !(exclude.has(x.charity) && x.owner !== "charityevals"));
