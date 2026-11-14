@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "effektiv-spenden",
  "owner": "charityevals",
- "summary": "Effektiv Spenden runs a donation platform for Germany, Switzerland and Austria that passes tax-deductible gifts on to charities recommended by evaluators, with its own funds and donor advice; this model covers all its spending in 2025 ($1.34M across its German, Swiss and Austrian entities). At the defaults it averts about 26 years of healthy life per $1,000: of the $32M donors gave through it, its own donor survey suggests it caused about 31% (giving that would not have happened or would have gone to an ordinary charity), which with the gifts its advice steered comes to about $11M, eight dollars per dollar it spends, each dollar valued at the causes its donors chose (48% to fighting poverty, mostly GiveWell's charities; climate, animal welfare, catastrophic risks and democracy at the site's far lower figures for their recipients), half of it counted as new money, after the wait for its funds' half-yearly grants, and the next dollar at 32% of the past average. It is more than ten times its peers because it moves about eight dollars, half of it to top global-health charities, for each dollar it spends: it sits above the charities it funds, not among typical global-health programmes. The result moves most with its next-dollar figure, the discount rate, how far its survey's non-respondents were influenced and where shifted money would otherwise have gone; no branch is discounted for missing data, since money moved is counted.",
+ "summary": "Effektiv Spenden runs a donation platform for Germany, Switzerland and Austria that passes tax-deductible gifts on to charities recommended by evaluators, with its own funds and donor advice; this model covers all its spending in 2025 ($1.34M across its German, Swiss and Austrian entities). At the defaults it averts about 24 years of healthy life per $1,000: of the $32M donors gave through it, its own donor survey suggests it caused about 31% (giving that would not have happened or would have gone to an ordinary charity), which with the gifts its advice steered comes to about $11M, eight dollars per dollar it spends, each dollar valued at the causes its donors chose (48% to fighting poverty, mostly GiveWell's charities; climate, animal welfare, catastrophic risks and democracy at the site's far lower figures for their recipients), half of the platform giving counted as new money and the advised gifts only for the gain over where they would have gone, after the wait for its funds' half-yearly grants, and the next dollar at 32% of the past average. It is more than ten times its peers because it moves about eight dollars, half of it to top global-health charities, for each dollar it spends: it sits above the charities it funds, not among typical global-health programmes. The result moves most with its next-dollar figure, the discount rate, how far its survey's non-respondents were influenced and where shifted money would otherwise have gone; no branch is discounted for missing data, since money moved is counted.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Effektiv Spenden",
@@ -440,33 +440,34 @@
   {
    "id": "advised_own_effect",
    "section": "reach",
-   "label": "Share of advised donations Effektiv Spenden caused",
+   "label": "Share of advised donations whose destination Effektiv Spenden's advice changed",
    "format": "percent",
    "formula": "@meta.own_effect_share",
-   "explainer": "No survey of advised donors: the shared figure for a meta charity without one (30%, 15% to 45%)."
+   "explainer": "No survey of advised donors: the shared figure for a meta charity without one (30%, 15% to 45%), read as the share of the advised gifts its advice redirected. People who ask a giving platform for advice were giving anyway, so none of it counts as new money (templates.md: research or advice that changes where money is spent is all shifted)."
   },
   {
    "id": "advised_moved",
    "section": "reach",
-   "label": "Advised donations Effektiv Spenden caused, 2025 (US$)",
+   "label": "Advised donations whose destination its advice changed, 2025 (US$)",
    "format": "usd",
-   "formula": "advised_donations_eur * @fx.usd_per_eur_2025 * advised_own_effect"
+   "formula": "advised_donations_eur * @fx.usd_per_eur_2025 * advised_own_effect",
+   "explainer": "Advised gifts × the share its advice changed, at the 2025 rate."
   },
   {
    "id": "money_moved",
    "section": "reach",
-   "label": "Money moved for other charities, 2025, caused by Effektiv Spenden (US$)",
+   "label": "Advised donations its advice redirected, 2025 (US$), valued as all shifted",
    "format": "usd",
-   "explainer": "Platform donations and advised gifts, each net of what donors would have given to effective charities anyway: about $11M, eight dollars for each dollar of its costs. Its 10% Pledge (with Giving What We Can) is given through the platform and counted there, not again.",
-   "formula": "platform_moved + advised_moved"
+   "explainer": "The money the shared informed_money_value row reads: advised gifts its advice redirected, given anyway, so valued only for the gain over where they would have gone, after the evidence and missing-data steps. Platform donations it caused (platform_moved, about $10M) are valued separately as money moved, net of where shifted money would have gone. Its 10% Pledge (with Giving What We Can) is given through the platform and counted there, not again.",
+   "formula": "advised_moved"
   },
   {
    "id": "moved_per_dollar",
    "section": "reach",
    "label": "Money moved per dollar of the charity's cost",
    "format": "multiple",
-   "formula": "money_moved / cost_total",
-   "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+   "formula": "(platform_moved + money_moved) / cost_total",
+   "explainer": "Context: platform donations it caused plus advised gifts it redirected, per dollar of its costs (about eight)."
   },
   {
    "id": "grant_wait_years",
@@ -563,6 +564,14 @@
    "formula": "units_affected_per_year * value_per_unit_year * p_success * discounted_years"
   },
   {
+   "id": "new_money_share",
+   "section": "moved_money",
+   "label": "Share of money moved that is new money",
+   "format": "percent",
+   "formula": "@meta.new_money_share",
+   "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
+  },
+  {
    "id": "value_global_health",
    "section": "moved_money",
    "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
@@ -587,12 +596,20 @@
    "explainer": "Our judgment. Shifted money was going to be given anyway; it is credited only for the gain. Where it would have gone is valued at GiveDirectly's live result (GiveWell's model), as Ambitious Impact does, times a shared multiple (1×, from 0 to 3×)."
   },
   {
-   "id": "new_money_share",
+   "id": "shifted_dollar_value",
    "section": "moved_money",
-   "label": "Share of money moved that is new money",
-   "format": "percent",
-   "formula": "@meta.new_money_share",
-   "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
+   "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+   "format": "small",
+   "formula": "moved_dollar_value - prior_dollar_value",
+   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+  },
+  {
+   "id": "informed_money_value",
+   "section": "moved_money",
+   "label": "Value of the spending its research or advice changed (all shifted money), units of value",
+   "format": "small",
+   "formula": "money_moved * shifted_dollar_value * evidence_adj * missing_data_adj",
+   "explainer": "Spending its research or advice changed, at a judged share of the money it informed: all of it would have been spent anyway, so it counts for the gain over where it would have gone, discounted for weak evidence and for an outcome not measured for this charity (docs/normalization.md 2.8, 2.12)."
   },
   {
    "id": "moved_dollar_net_value",
@@ -629,9 +646,9 @@
    "section": "effect",
    "label": "Value of the money moved (units of value)",
    "format": "number",
-   "formula": "(platform_moved * moved_wait_discount + advised_moved) * moved_dollar_net_value * (1 + moved_side_effects)",
+   "formula": "(platform_moved * moved_wait_discount * moved_dollar_net_value + informed_money_value) * (1 + moved_side_effects)",
    "unit": "units of value",
-   "explainer": "Money moved (platform donations after their wait) × the net value of a dollar moved, with the side effects."
+   "explainer": "Platform donations it caused, after their wait, × the net value of a dollar moved, plus the advised gifts it redirected (all shifted, with the evidence and missing-data steps), with the side effects."
   },
   {
    "id": "careers_changed",
@@ -727,7 +744,7 @@
     "high": 0.9
    },
    "kind": "judgment",
-   "explainer": "Applies to the policy branch only, which is 0 here; the money moved has its own steps (own effect, new money, destinations). Kept at the template's figure."
+   "explainer": "Applies to the advised gifts its advice redirected (informed_money_value) and to the empty policy branch: nobody counts what its advice changed, so how far the redirected gifts do what their recipients' figures say is uncertain. 0.7 (0.5 to 0.9), the template's figure, as for Longview Philanthropy's advised money and 80,000 Hours. Platform donations have their own steps (its survey, new money, destinations)."
   },
   {
    "id": "counterfactual_adj",
@@ -769,7 +786,7 @@
    "label": "Counted less where the outcome isn't measured for this charity",
    "format": "percent",
    "formula": "$missing_data_discount",
-   "explainer": "Only the empty policy branch reads it. Money moved is counted dollars (its accounts' donations passed on and its survey of who caused them): no missing-data step; each destination read live brings its own."
+   "explainer": "The site's missing-data discount (Convention 12) for the advised gifts, whose redirection is judged, not counted, and for the empty policy branch. Platform donations are counted dollars (its accounts' donations passed on and its survey of who caused them): no missing-data step; each destination read live brings its own."
   },
   {
    "id": "total_adj",
@@ -786,7 +803,7 @@
    "format": "number",
    "formula": "downstream_value * total_adj + moved_value + careers_value",
    "unit": "units of value",
-   "explainer": "The adjustments apply to the policy and research branch; money moved counts its counterfactual through the shared new-money share (its dollars are measured, so no missing-data step), career changes through their own share and missing-data step."
+   "explainer": "The adjustments apply to the empty policy branch; platform money counts its counterfactual through its survey and the shared new-money share (counted dollars, no missing-data step), advised gifts through the evidence and missing-data steps of the informed rows."
   },
   {
    "id": "uov_per_dollar",
@@ -833,7 +850,8 @@
    "section": "donor",
    "label": "Share of the full cost paid by cash donations",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + platform_moved * new_money_share, 0))",
+   "explainer": "With credit by share of resources: staff's forgone pay and the new money its platform donors gave share the outcome with your dollar; advised gifts, all shifted, add no resources."
   },
   {
    "id": "uov_per_donor_dollar",

@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "longview-philanthropy",
  "owner": "charityevals",
- "summary": "Longview Philanthropy advises major donors on reducing catastrophic risks from advanced AI, nuclear weapons and biological threats, recommends grants and runs regranting funds; this model covers its US and UK entities' 2025 operating costs ($6.9M; the grants they passed on are the grantees' cost). At the defaults it averts about 1.6 years of healthy life per $1,000: of the $27M donors gave through its funds, the site's shared share for a meta charity without a donor survey credits it with causing 30%, and of the roughly $28M more it says its advice directed from donors' own foundations we judge it changed where 30% went, counted only for the gain over an ordinary charity of the same areas and discounted for missing data (the one branch so discounted); each dollar is valued at the site's AI (75% of the money, our judgment), nuclear (15%) and biosecurity (10%) charities. The result moves most with where shifted money would otherwise have gone, the share that went to nuclear work (whose charities rank some thirty times above the AI charities here), the discount rate and the next dollar (36% of the 2025 average).",
+ "summary": "Longview Philanthropy advises major donors on reducing catastrophic risks from advanced AI, nuclear weapons and biological threats, recommends grants and runs regranting funds; this model covers its US and UK entities' 2025 operating costs ($6.9M; the grants they passed on are the grantees' cost). At the defaults it averts about 1.25 years of healthy life per $1,000: of the $27M donors gave through its funds, the site's shared share for a meta charity without a donor survey credits it with causing 30%, and of the roughly $28M more it says its advice directed from donors' own foundations the same share counts as redirected, valued only for the gain over an ordinary charity of the same areas and discounted for missing data (the one branch so discounted); each dollar is valued at the site's AI (81% of the money, our blend of its itemised grants and a judgment), nuclear (12%) and biosecurity (3%) charities. The result moves most with where shifted money would otherwise have gone, the share that went to nuclear work (whose charities rank some thirty times above the AI charities here), the discount rate and the next dollar (36% of the 2025 average).",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Longview Philanthropy",
@@ -168,7 +168,7 @@
    "id": "uk_total_expenditure_gbp",
    "section": "cost",
    "label": "Longview Inc Ltd (UK): total expenditure, 2025 (£)",
-   "format": "usd",
+   "format": "number",
    "value": 13203131,
    "kind": "observed",
    "source": {
@@ -185,7 +185,7 @@
    "id": "uk_grants_gbp",
    "section": "cost",
    "label": "Longview Inc Ltd (UK): grants made, 2025 (£)",
-   "format": "usd",
+   "format": "number",
    "value": 10262123,
    "kind": "observed",
    "source": {
@@ -203,7 +203,7 @@
    "id": "uk_charitable_gbp",
    "section": "cost",
    "label": "Longview Inc Ltd (UK): charitable activities, 2025 (£)",
-   "format": "usd",
+   "format": "number",
    "value": 13105993,
    "kind": "observed",
    "source": {
@@ -220,7 +220,7 @@
    "id": "uk_staff_costs_gbp",
    "section": "cost",
    "label": "Longview Inc Ltd (UK): staff costs, 2025 (£)",
-   "format": "usd",
+   "format": "number",
    "value": 1071372,
    "kind": "observed",
    "source": {
@@ -312,11 +312,11 @@
    "format": "percent",
    "value": {
     "low": 0,
-    "best": 0.1,
-    "high": 1
+    "best": 0.05,
+    "high": 0.5
    },
    "kind": "judgment",
-   "explainer": "Our judgment, 10% (0% to 100%): the US Form 990 files no Schedule R (no related organisations in 2025) and the UK accounts report no related-party transactions besides directors' pay (note 13, p. 17); the US entity became the UK company's member only in October 2026 (Companies House resolution, 13 October 2026). Both point away from a transfer between them, but the grant's size and region fit one, so the range runs to all of it."
+   "explainer": "Our judgment, 5% (0% to 50%). Schedule F calls the grant 'general support', which would have reached the UK company as unrestricted income, and the UK company's unrestricted donations in 2025 were £2,054 (note 2, p. 13); the US Form 990 files no Schedule R (no related organisations in 2025), the UK accounts report no related-party transactions besides directors' pay (note 13, p. 17), and the US entity became the UK company's member only in October 2026 (Companies House resolution, 13 October 2026). A transfer recorded as restricted income under another label is still possible, given the grant's size and region, so the range runs to half of it."
   },
   {
    "id": "grants_paid",
@@ -340,7 +340,7 @@
     "page": "post text",
     "quote": "$1.5M contributed by 2,171 donors in 2025"
    },
-   "explainer": "Donations to Longview's public fund are donations to Giving What We Can, granted on Longview's recommendations (fund page disclosures), so they aren't in either entity's books; the fund made six grants in 2025, and closed to new donations in 2026."
+   "explainer": "Donations to Longview's public fund are donations to Giving What We Can, which pays the grantees on Longview's recommendations ('All funds are disbursed based on recommendations by Longview Philanthropy', fund page disclosures), so they aren't in either entity's books. The 2025 donations stand in for the fund's 2025 grants (six grants, in its 2025 report, which can't be opened without sign-in); the fund closed to new donations in 2026. Donations to the Nuclear Weapons Policy Fund through Giving What We Can are not published and sit in the advised remainder below."
   },
   {
    "id": "fund_donations",
@@ -393,20 +393,15 @@
    "label": "Money donors gave from their own vehicles on Longview's recommendations, 2025 (US$)",
    "format": "usd",
    "formula": "total_directed - fund_donations",
-   "explainer": "The directed total less the money through its funds: grants major donors made themselves after its advice. The funds' money is an audited count, so the remainder is never below $23M."
+   "explainer": "The directed total less the money through its funds: grants major donors made themselves after its advice, plus any Nuclear Weapons Policy Fund donations made through Giving What We Can (not published, so they can't be moved to the fund money). The funds' money is an audited count, so the remainder is never below $23M."
   },
   {
    "id": "advised_share_changed",
    "section": "reach",
    "label": "Share of the advised money whose destination Longview's advice changed",
    "format": "percent",
-   "value": {
-    "low": 0.1,
-    "best": 0.3,
-    "high": 0.5
-   },
-   "kind": "judgment",
-   "explainer": "Our judgment, 30% (10% to 50%), anchored on the shared own effect of a meta charity on its donors' giving (30%, 15% to 45%): donors who ask for its recommendations already give to these risks, and some would have funded the same organisations on their own or on Coefficient Giving's (formerly Open Philanthropy's) lead; its written grant cases and quantitative predictions are made to change what they fund. Lower than a donor survey would show for small donors (a large donor's own staff weigh its advice), higher than research read by many funders (Rethink Priorities' worldview work, 3%)."
+   "explainer": "No survey of the donors it advises: the site's shared figure for a meta charity without one (30%, 15% to 45%), read as the share of the advised money whose destination its advice changed, as for Effektiv Spenden's advised gifts. None of it counts as new money: the people it advises are existing givers of $1M or more a year who were giving anyway (templates.md: advice that changes where money is spent is all shifted); new philanthropists drawn in by its convenings are in the side effects.",
+   "formula": "@meta.own_effect_share"
   },
   {
    "id": "money_moved",
@@ -520,7 +515,7 @@
    "label": "Value of a dollar to the causes Longview directs money to (live), units of value",
    "format": "small",
    "formula": "(@meta.longview_2025_share_ai * (@meta.longview_2025_metr_share_of_ai * #charityevals:metr + (1 - @meta.longview_2025_metr_share_of_ai) * #cause:ai) + @meta.longview_2025_share_nuclear * #cause:nuclear + @meta.longview_2025_share_bio * #cause:biosecurity) / (@meta.longview_2025_share_ai + @meta.longview_2025_share_nuclear + @meta.longview_2025_share_bio)",
-   "explainer": "Where its directed money went in 2025, by area (our judgment, facts/meta.json longview_2025_share_*: AI 75%, nuclear 15%, biosecurity 10%), each area at its charities' figures on the rankings under your values (#cause:ai, #cause:nuclear, #cause:biosecurity, equal weights), by the site's rule for a split (normalization.md 2.8): of its itemised grantees only METR has a model here, read at its own figure for its 3% of the AI grants; the rest have none and take their area's charities. The $6.2M of US grants it doesn't classify, the unitemised UK grants and its Digital Sentience Fund (a cause with no model here) are valued at the average of these."
+   "explainer": "Where its directed money went in 2025, by area (our judgment, a dollar-weighted blend of its itemised US grants and a judged split of the rest, facts/meta.json longview_2025_share_*: AI 81%, nuclear 12%, biosecurity 3%), each area at its charities' figures on the rankings under your values (#cause:ai, #cause:nuclear, #cause:biosecurity, equal weights), by the site's rule for a split (normalization.md 2.8). Of its itemised grantees only METR has a model here, read at its own figure for its 3.4% of the AI grants; the rest have none and take their area's charities. Digital sentience (its Digital Sentience Fund and two US grants), a cause with no model here, and Rethink Priorities' grant (a money mover) drop out at the average of the rest."
   },
   {
    "id": "moved_dollar_value",
@@ -568,12 +563,12 @@
    "label": "Side effects of the money directed, as a share of its value",
    "format": "percent",
    "value": {
-    "low": -0.1,
+    "low": -0.05,
     "best": 0.05,
     "high": 0.2
    },
    "kind": "judgment",
-   "explainer": "Good and harm beyond the money counted: its convenings and donor education draw new philanthropists to these risks and its grant reports inform other funders (positive); grants in a young field can backfire (AI work that speeds capabilities or hands an advantage to one lab, nuclear dialogue that legitimises a hard line), and a few advisers steering much of a field's private money narrows its views (negative). 5% (−10% to +20%) of the modelled value, our judgment, anchored on Effektiv Spenden's and Giving What We Can's 5% for the same kind of effects, with a lower end for a field where harm is possible.",
+   "explainer": "Good and harm of Longview's own beyond the money counted: its convenings and donor education draw new philanthropists to these risks and its grant reports inform other funders (positive); a few advisers steering much of a field's private money narrows its views and its bets (negative). The grantees' own chance of backfiring is in their figures already. 5% (−5% to +20%) of the modelled value, our judgment, anchored on Effektiv Spenden's and Giving What We Can's 5% for the same kind of effects.",
    "side_effect": "added"
   },
   {
@@ -673,7 +668,7 @@
     "high": 0.9
    },
    "kind": "judgment",
-   "explainer": "Applies to the advised money its advice changed (informed_money_value) and to the empty policy branch: how far the redirected giving does what its area's charities on the rankings do, given that nobody measures what its advice changed or how its grantees compare with the ranked ones. 0.7 (0.5 to 0.9), the template's figure, as for Effektiv Spenden and 80,000 Hours; above Rethink Priorities' 0.6 for research, since its recommendations name the grant."
+   "explainer": "Applies to the advised money its advice changed (informed_money_value) and to the empty policy branch: how far the redirected giving does what its area's charities on the rankings do, given that nobody measures what its advice changed or how its grantees compare with the ranked ones. 0.7 (0.5 to 0.9), the template's figure, as for Effektiv Spenden and 80,000 Hours; above Rethink Priorities' 0.6 for research, since its recommendations name the grant; Effektiv Spenden's advised gifts take the same 0.7."
   },
   {
    "id": "counterfactual_adj",
