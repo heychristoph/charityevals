@@ -35,7 +35,7 @@
   "estimate_basis": "unit_cost",
   "charity": "usa-for-unhcr",
   "owner": "charityevals",
-  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.8 million as donated clothes, hygiene kits, software and transport, and $8.2 million on awareness work; fundraising took $26.6 million, so each dollar granted costs about $1.51 of donations. The grants are valued as UNHCR's 2025 programme mix (its audited impact areas, split further by judgment): cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about 0.061 years of healthy life per $1,000 (combined range 0.014-0.26: the result is mostly uncertainty), about two-thirds of the site's global-health median and below charityevals' Save the Children and World Vision models, mostly because a third of each dollar pays for fundraising and management in the US and a quarter of UNHCR's for its own support costs; the biggest uncertainties are the missing-data discount, how many refugees' papers bring them rights, and how poor the people reached are.",
+  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.8 million as donated clothes, hygiene kits, software and transport, and $8.2 million on awareness work; fundraising took $26.6 million, so each dollar granted costs about $1.51 of donations. The grants are valued as UNHCR's 2025 programme mix (its audited impact areas, split further by judgment): cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about 0.062 years of healthy life per $1,000 (combined range 0.014-0.27: the result is mostly uncertainty), about 60% of the site's global-health median and below charityevals' Save the Children and World Vision models, mostly because a third of each dollar pays for fundraising and management in the US and a quarter of UNHCR's for its own support costs; the biggest uncertainties are the missing-data discount, how many refugees' papers bring them rights, and how poor the people reached are.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: USA for UNHCR (2025)",
@@ -323,23 +323,6 @@
       "explainer": "Everything else: registration and documentation, refugee status determination, protection policy and law, gender-based violence, child protection, safety and access to justice, community engagement; about 40%, impact area 1 (31%) and impact area 3 (14%) less livelihoods."
     },
     {
-      "id": "unhcr_exp_all",
-      "section": "reach",
-      "label": "UNHCR's total 2025 expenditure ($ millions)",
-      "format": "number",
-      "value": 3830.4,
-      "kind": "observed",
-      "source": {
-        "title": "UNHCR, Financial report and audited financial statements for the year ended 31 December 2025 and report of the Board of Auditors (A/81/5/Add.6)",
-        "url": "https://digitallibrary.un.org/record/4126985/files/A_81_5_Add.6-EN.pdf",
-        "quote": "Total expenditure 3 830.4 100.0 4 932.6 100.0",
-        "retrieved": "2026-11-14",
-        "page": "Table IV.4, p. 98"
-      },
-      "explainer": "Programme, programme support, management and the Junior Professional Officers Programme.",
-      "unit": "$ millions"
-    },
-    {
       "id": "unhcr_exp_programme",
       "section": "reach",
       "label": "UNHCR's 2025 expenditure on programme, before support and management ($ millions)",
@@ -361,8 +344,8 @@
       "section": "reach",
       "label": "UNHCR's full cost per dollar of programme delivery",
       "format": "multiple",
-      "formula": "unhcr_exp_all / unhcr_exp_programme",
-      "explainer": "About 1.38: programme support (22%) and management (5.6%) on top of delivery. The sector shares include them, so every judged delivery cost below is multiplied by it before dividing the spending."
+      "formula": "unhcr_exp_total / unhcr_exp_programme",
+      "explainer": "About 1.38: programme support (22%) and management (5.6%) on top of delivery, over the same programmed total as the sector shares. The sector shares include them, so every judged delivery cost below is multiplied by it before dividing the spending."
     },
     {
       "id": "rel_spend",
@@ -991,15 +974,15 @@
     {
       "id": "liv_years",
       "section": "effect",
-      "label": "Years the gain lasts",
+      "label": "Years a refugee household's livelihood gain lasts",
       "format": "number",
       "value": {
         "low": 1,
-        "best": 2,
-        "high": 4
+        "best": 2.5,
+        "high": 5
       },
       "kind": "judgment",
-      "explainer": "Gains fade after the programme; assets and skills keep part. As Save the Children's livelihoods.",
+      "explainer": "Graduation trials still find consumption gains three years on (Banerjee et al. 2015), but UNHCR's cheaper training and grants fade sooner, and refugees' moves and work restrictions cut gains short. Judgment 2.5 years, from 1 (training alone, fading in a year) to 5 (a lasting business or job).",
       "unit": "years"
     },
     {
@@ -1129,7 +1112,7 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "Most refugees UNHCR registers already have, or never get, the rights papers could bring: hosts decide on work and services, and UNHCR's documents mostly confirm status. The share for whom this year's registration, documents or legal help opens legal work or public services is small: some new arrivals, refugee status decisions and legal cases won, and hosts that tie rights to UNHCR papers. Judgment 2% (0.5-8%), so that documents do less per dollar than relief cash, which reaches people directly."
+      "explainer": "Most refugees UNHCR documents in a year are already registered (renewals, verification) or in hosts that grant no rights on UNHCR papers. Anchors: new asylum claims and recognitions are a few million a year against about 40 million refugees and asylum-seekers under UNHCR's care, so under a tenth of those documented are new; about half of refugees live in hosts whose law gives some right to work, though few use it in practice (the Global Refugee Work Rights reports of the Center for Global Development and Refugees International); and only part of a regularisation's gain follows papers that bring services without a work permit. About 8% new × 50% in such hosts × half the gain: judgment 2% (0.5-8%)."
     },
     {
       "id": "pro_doc_rights_gain",

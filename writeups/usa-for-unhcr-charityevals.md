@@ -1,6 +1,6 @@
 ### Summary
 
-USA for UNHCR raises money from Americans for UNHCR, the UN refugee agency. In 2025 it spent $95.5 million: $44.3 million as cash grants to UNHCR's operations, $10.8 million as donated clothes, hygiene kits, software and transport, and $8.2 million on awareness work in the US. Fundraising took $26.6 million and management $5.6 million, so each dollar that reaches the programmes costs about $1.51 of donations. We value the grants as what UNHCR did with its money in 2025, sector by sector, and estimate **<span data-figure="headline" data-model="usa-for-unhcr-charityevals">0.061</span> years of healthy life per $1,000**, about two-thirds of the site's global-health median. UNHCR counts its resettlement departures but not who this money reached otherwise, so every branch is built from judged costs per person and the research on its kind of work, with wide ranges, and counted at half by the site's shared missing-data slider. We use USA for UNHCR's 2025 Form 990 because the audited statements on its website are behind a bot check.
+USA for UNHCR raises money from Americans for UNHCR, the UN refugee agency. In 2025 it spent $95.5 million: $44.3 million as cash grants to UNHCR's operations, $10.8 million as donated clothes, hygiene kits, software and transport, and $8.2 million on awareness work in the US. Fundraising took $26.6 million and management $5.6 million, so each dollar that reaches the programmes costs about $1.51 of donations. We value the grants as what UNHCR did with its money in 2025, sector by sector, and estimate **<span data-figure="headline" data-model="usa-for-unhcr-charityevals">0.062</span> years of healthy life per $1,000**, about 60% of the site's global-health median. UNHCR counts its resettlement departures but not who this money reached otherwise, so every branch is built from judged costs per person and the research on its kind of work, with wide ranges, and counted at half by the site's shared missing-data slider. We use USA for UNHCR's 2025 Form 990 because the audited statements on its website are behind a bot check.
 
 ### How the model works
 
@@ -12,7 +12,7 @@ USA for UNHCR raises money from Americans for UNHCR, the UN refugee agency. In 2
 
 **Health** (about a tenth). Care costs a $15 delivery cost a person-year in camps. It removes 12% of a 0.006 yearly death rate, plus illness as a share of the deaths' value.
 
-**Education, livelihoods and solutions** (an eighth together). Education costs $150 a child and is valued through later earnings, as in Save the Children's model. Livelihoods cost $250 a household for a 4% consumption gain over two years. Resettlement costs about $1,700 a refugee: UNHCR's resettlement spending over its 37,237 departures in 2025. It is worth the lifetime gain from a refugee's consumption to the lowest US quintile's. UNHCR's share of the credit is 20%, and only 30% wouldn't have happened anyway, because states set the number of places. Returns cost $250 a person and are valued as cash.
+**Education, livelihoods and solutions** (an eighth together). Education costs $150 a child and is valued through later earnings, as in Save the Children's model. Livelihoods cost $250 a household for a 4% consumption gain over two and a half years. Resettlement costs about $1,700 a refugee: UNHCR's resettlement spending over its 37,237 departures in 2025. It is worth the lifetime gain from a refugee's consumption to the lowest US quintile's. UNHCR's share of the credit is 20%, and only 30% wouldn't have happened anyway, because states set the number of places. Returns cost $250 a person and are valued as cash.
 
 **Gifts in kind** (about a seventh). Clothes and kits count at 45% of their US value, abroad at refugees' consumption and in the US at the lowest quintile's. Software and transport count at half of what the same cash does through UNHCR.
 
@@ -22,7 +22,7 @@ Every branch shares credit with host governments, partners and others' resources
 
 ### What drives the result
 
-The missing-data slider and the value of a healthy year in units of value come first. Then the share of refugees whose papers bring rights and what documents cost. Then how poor the people reached are, against their hosts. The combined range runs from 0.014 to 0.26.
+The missing-data slider and the value of a healthy year in units of value come first. Then the share of refugees whose papers bring rights and what documents cost. Then how poor the people reached are, against their hosts. The combined range runs from 0.014 to 0.27.
 
 ### What isn't modelled
 
@@ -41,7 +41,7 @@ Built with charityevals' humanitarian-relief template on 14 November 2026, as a 
 - Resettlement's cost comes from UNHCR's audited departures.
 - Resettled consumption reads the shared US figures.
 
-The result fell from 0.094 to 0.061. A verification round checked the changes; the rounds are in audits/usa-for-unhcr-charityevals/.
+The result fell from 0.094 to 0.061. Round 2 verified these fixes and asked for three more: livelihoods' duration got its own reasoned figure (2.5 years), the share of refugees whose papers bring rights is anchored on new registrations and hosts' work rights, and UNHCR's support markup uses the same total as the sector shares. The result is 0.062. Round 3 checked those changes; the rounds are in audits/usa-for-unhcr-charityevals/.
 
 ### Sources
 
