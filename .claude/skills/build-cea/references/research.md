@@ -13,19 +13,19 @@ currency, year).
 ## Money (cost section, donor section)
 
 - Start with the charity's own financials page (audited statements, 990s it hosts): open the listing
-  page and take the latest audited year it links, never a guessed URL for a year (a missing file isn't
-  proof the year is unaudited). ProPublica's PDF and XML downloads are often behind a bot check.
+  page and take the latest audited year it links, never a guessed URL (a missing file isn't
+  proof the year is unaudited). ProPublica's downloads often show a bot check; the IRS bulk 990 XML (index CSV, range-read zip) works.
 - US charities: Form 990 via ProPublica Nonprofit Explorer (`projects.propublica.org/nonprofits`),
   Part IX (functional expenses: program, management, fundraising; salaries lines 5–9). UK: Charity
   Commission register (accounts PDF). Elsewhere: the audited statements on the charity's site.
 - Use the latest complete fiscal year for which you also have reach numbers (cost and reach must
-  describe the same work); note the fiscal year end. If the charity reports program costs per activity, use them for `program_spend`.
+  describe the same work); note the fiscal year end. Program costs per activity, where reported, go in `program_spend`.
 - Currency: the local-currency amount times `@fx.usd_per_<cur>_<year>` (the IRS yearly average
   where the IRS lists the currency, else the World Bank's official rate; `scripts/link-fx.py` adds a
   missing year), never a typed rate or a constant in a formula.
 - Programmes: list every programme with its spending for the year (the statement of functional
-  expenses or the annual report's breakdown); you model every one, weighted by
-  spending (SKILL.md step 0); note which have thin or no outcome data (templates.md Convention 12).
+  expenses or the annual report's breakdown); model every one, by
+  spending (SKILL.md step 0); note which have thin outcome data (templates.md Convention 12).
 
 ## Reach (reach section)
 

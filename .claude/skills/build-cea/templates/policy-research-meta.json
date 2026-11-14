@@ -313,41 +313,17 @@
       "section": "careers",
       "label": "Pay a career changer gives up per year (US$)",
       "format": "usd",
-      "value": {
-        "low": 5000,
-        "best": 15000,
-        "high": 30000
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: salary survey",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: what they could earn elsewhere less what they take, per year."
+      "formula": "@meta.career_forgone_pay_default",
+      "explainer": "TEMPLATE: the site's shared default (facts/meta.json) while careers_changed is 0; a charity that changes careers replaces it with an input: what they could earn elsewhere less what they take, per year, from a salary survey."
     },
     {
       "id": "career_years_stayed",
       "section": "careers",
       "label": "Years a career changer stays in high-impact work",
       "format": "number",
-      "value": {
-        "low": 2,
-        "best": 5,
-        "high": 10
-      },
-      "kind": "estimate",
+      "formula": "@meta.career_years_stayed_default",
       "unit": "years",
-      "source": {
-        "title": "TEMPLATE: follow-up survey",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: from the charity's follow-up survey or a labelled reference class."
+      "explainer": "TEMPLATE: the site's shared default (facts/meta.json) while careers_changed is 0; else an input from the charity's follow-up survey or a labelled reference class."
     },
     {
       "id": "career_years",
@@ -372,13 +348,8 @@
       "section": "careers",
       "label": "Share of the career changes the charity caused",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the changes that wouldn't have happened without the charity, from its own survey of what people would have done, or a labelled reference class."
+      "formula": "@meta.career_counterfactual_share_default",
+      "explainer": "TEMPLATE: the site's shared default (facts/meta.json) while careers_changed is 0; else an input: the share of the changes that wouldn't have happened without the charity, from its own survey of what people would have done, or a labelled reference class."
     },
     {
       "id": "career_change_value",
@@ -515,7 +486,7 @@
       "format": "percent",
       "formula": "$marginal_vs_past_average",
       "published": 1,
-      "explainer": "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says."
+      "explainer": "TEMPLATE: replace the formula with `@next_dollar.<charity id, - as _>`, the charity's own figure written by docs/normalization.md 2.10 (room × use × run) in facts/next_dollar.json; the slider here is only a placeholder that loads. This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued as a share of the average. 1 in `published`: what the past average itself says."
     },
     {
       "id": "donor_cost_share",
