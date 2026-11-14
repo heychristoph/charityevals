@@ -1,0 +1,1526 @@
+{
+  "id": "blueprint-biosecurity-charityevals",
+  "name": "Blueprint Biosecurity (charityevals)",
+  "kind": "charity",
+  "cause": "catastrophic-risk",
+  "beneficiaries": "world",
+  "beneficiaries_note": "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population.",
+  "template": "catastrophic-risk",
+  "estimate_basis": "past_average",
+  "charity": "blueprint-biosecurity",
+  "owner": "charityevals",
+  "summary": "Blueprint Biosecurity (Washington, DC) works on defences against any airborne pandemic: far-UVC light, glycol vapours and other ways to clean indoor air, and pandemic-grade reusable respirators, through research syntheses ('Blueprints') and research grants to universities. This model of all its work in 2024 (its latest Form 990, $3.10M) comes to about 5.8 years of healthy life per $1,000, from 0.3 to 113 on the combined range: each dollar is valued as a typical pandemic project's cut in the forecast risk (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), weighted by how far each programme's outputs were taken up, deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. The biggest uncertainties are the discount rate, the years a cut counts and how much a typical dollar cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the next dollar counts at 35% of the past average because its main funder has since raised its support several-fold. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: Blueprint Biosecurity",
+    "url": "https://charityevals.org/blueprint-biosecurity-charityevals",
+    "published": "2026-11-14",
+    "retrieved": "2026-11-14"
+  },
+  "resources": [
+    {
+      "title": "Blueprint Biosecurity: donate",
+      "url": "https://blueprintbiosecurity.org/contact-us/",
+      "type": "charity"
+    },
+    {
+      "title": "Blueprint Biosecurity, Form 990 for 2024 (ProPublica Nonprofit Explorer)",
+      "url": "https://projects.propublica.org/nonprofits/organizations/932385426",
+      "type": "data"
+    },
+    {
+      "title": "Blueprint Biosecurity, 2025 Annual Report",
+      "url": "https://blueprintbiosecurity.org/wp-content/uploads/2026/02/Blueprint-Biosecurity-2025-Annual-Report-.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "Blueprint Biosecurity, Next-Gen PPE Blueprint (2024)",
+      "url": "https://blueprintbiosecurity.org/works/nextgenppe/",
+      "type": "charity"
+    },
+    {
+      "title": "Blueprint Biosecurity, Bioresilience Fund: funded projects",
+      "url": "https://blueprintbiosecurity.org/blueprint-bioresilience-fund/",
+      "type": "charity"
+    },
+    {
+      "title": "Forecasting Existential Risks (Existential Risk Persuasion Tournament, 2023)",
+      "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+      "type": "study"
+    },
+    {
+      "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model (x-risk interventions)",
+      "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public",
+      "type": "model"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Blueprint Biosecurity's programme spending in 2024 (every programme)",
+      "format": "usd",
+      "explainer": "Every programme in the 2024 Form 990 (the latest filed; calendar year; its statements are audited, Part XII): far-UVC, biosecurity and government affairs, other built-environment transmission suppression (glycol vapours) and protective equipment, which add to Part IX line 25 column B exactly. Its research grants to universities (Schedule I lists only $12,500 to Johns Hopkins for a far-UVC workshop; the others are paid as contracts, Part IX line 11g) are inside them.",
+      "formula": "uvc_spend + govt_spend + bets_spend + ppe_spend"
+    },
+    {
+      "id": "uvc_spend",
+      "section": "cost",
+      "label": "Far-UVC programme, 2024",
+      "format": "usd",
+      "value": 1137594,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III line 4a (ExpenseAmt), grants $12,500",
+        "quote": "FAR-UVC - THE FAR-UVC PROGRAM AIMS TO ACCELERATE WIDESPREAD ADOPTION OF THIS BREAKTHROUGH TECHNOLOGY."
+      },
+      "explainer": "Research synthesis toward the Blueprint for Far-UVC (published 2025) and the year's far-UVC research grants: eye tolerance (Shimane University $59,840, Columbia University $137,120), indoor air chemistry (MIT $25,000, Penn State $47,700), airborne inactivation (Penn State $58,650), a transmission model (Imperial College London, £50,000) and a workshop at the Johns Hopkins Center for Health Security ($12,500)."
+    },
+    {
+      "id": "govt_spend",
+      "section": "cost",
+      "label": "Biosecurity, pandemic prevention and government affairs, 2024",
+      "format": "usd",
+      "value": 573656,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III line 4b (ExpenseAmt)",
+        "quote": "BIOSECURITY, PANDEMIC PREVENTION, AND GOVERNMENT AFFAIRS - THE ORGANIZATION MITIGATES PANDEMIC RISK THROUGH COMPREHENSIVE STAKEHOLDER EDUCATION, STRATEGIC PLANNING, AND COLLABORATIVE PROGRAM EXECUTION ACROSS RESEARCH AND PILOT INITIATIVES."
+      },
+      "explainer": "Stakeholder education, strategy and partnerships across the programmes; its government affairs function was set up in 2025 (annual report, p. 8)."
+    },
+    {
+      "id": "bets_spend",
+      "section": "cost",
+      "label": "Built-environment transmission suppression (glycol vapours), 2024",
+      "format": "usd",
+      "value": 366052,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III line 4c (ExpenseAmt)",
+        "quote": "THE ORGANIZATION'S RESEARCH TEAM EVALUATES INTERVENTIONS FOR SUPPRESSING TRANSMISSION OF AIRBORNE PATHOGENS, SUCH AS GLYCOLS."
+      },
+      "explainer": "Desk research and expert interviews on other ways to clean indoor air, mainly glycol vapours, which led to its 2026 glycol research grants (seven, $4.36M, Bioresilience Fund page)."
+    },
+    {
+      "id": "ppe_spend",
+      "section": "cost",
+      "label": "Personal protective equipment, 2024",
+      "format": "usd",
+      "value": 321609,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III line 4d (other programme services, ExpenseAmt)",
+        "quote": "THE PPE PROGRAM NOW FOCUSES ON ADVANCING THE STOCKPILING AND MANUFACTURING OF HIGHLY PROTECTIVE REUSABLE RESPIRATORS TO BOLSTER PREPAREDNESS."
+      },
+      "explainer": "The Next-Gen PPE Blueprint and its companion report, Towards a Theory of Pandemic-Proof PPE (May 2024, with Gryphon Scientific, paid $165,211 in 2024, Part VII), and work on stockpiling reusable elastomeric respirators."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses, 2024",
+      "format": "usd",
+      "value": 3095622,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part IX line 25 column A (TotalFunctionalExpensesGrp); Part I line 18",
+        "quote": "3095622"
+      },
+      "explainer": "All expenses in 2024: programmes $2,398,911, management $599,771, fundraising $96,940. The same total as the audited statements (Schedule D Part XII)."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Programme expenses, 2024",
+      "format": "usd",
+      "value": 2398911,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part IX line 25 column B; Part III line 4e",
+        "quote": "2398911"
+      },
+      "explainer": "Programme-service expenses, Part IX column B, the sum of the four programmes above."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "forecast_years",
+      "section": "effect",
+      "label": "Years the shared forecasts cover",
+      "format": "number",
+      "formula": "@catastrophe.xpt_end_year - @catastrophe.xpt_forecast_year",
+      "unit": "years",
+      "explainer": "From the year the chances were forecast to 2100: turns a chance by 2100 into a yearly one. Fixed."
+    },
+    {
+      "id": "deaths_if_extinct",
+      "section": "effect",
+      "label": "Deaths in a catastrophe that ends humanity's future",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now",
+      "unit": "deaths",
+      "explainer": "Everyone alive. Fixed."
+    },
+    {
+      "id": "share_under5",
+      "section": "effect",
+      "label": "Share of the deaths that are of children under five",
+      "format": "percent",
+      "formula": "@death_ages.population_world_share_under5",
+      "explainer": "A global catastrophe kills every age alike: the world's age split (@death_ages.population_world_*). Fixed."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Of the deaths at five or older, share aged 5 to 14",
+      "format": "percent",
+      "formula": "@death_ages.population_world_share_5_14_of_over5"
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Of the deaths at 15 or older, share aged 15 to 49",
+      "format": "percent",
+      "formula": "@death_ages.population_world_share_15_49_of_over15"
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size."
+    },
+    {
+      "id": "future_years_per_person",
+      "section": "effect",
+      "label": "Discounted future years of healthy life per person of the long-run population, if the future ends now",
+      "format": "number",
+      "formula": "(1 - (1 + $discount_rate) ^ -@catastrophe.life_expectancy_now) / (ln(1 + $discount_rate) * ln(1 + $discount_rate) * @catastrophe.life_expectancy_now)",
+      "unit": "years",
+      "explainer": "The site's one count of future generations (docs/normalization.md 2.19): the healthy years of people not yet born, discounted for ever at the shared rate. People alive now die in the catastrophe and are counted as deaths, so this stream rises from nothing to the long-run population over one lifetime (@catastrophe.life_expectancy_now) and then runs on: about 8 years at the default 4%, about 960 at the 0.1% floor. Fixed; don't edit."
+    },
+    {
+      "id": "future_dalys_if_extinct",
+      "section": "effect",
+      "label": "Future healthy years lost if humanity's future ends",
+      "format": "number",
+      "formula": "@catastrophe.world_population_long_run * future_years_per_person",
+      "unit": "DALYs",
+      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate: your discount rate is how much future generations count."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "effect",
+      "label": "Years a cut in the risk counts before it would have come anyway",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "unit": "years",
+      "explainer": "The site's one answer (docs/normalization.md 2.9): work, a won policy or a trained person's career brings a cut in the risk forward by these years; Rethink Priorities' 15-25 years of persistence is replaced by it."
+    },
+    {
+      "id": "ai_extinction_per_year",
+      "section": "effect",
+      "label": "AI: yearly chance of a catastrophe that ends humanity's future",
+      "format": "small",
+      "formula": "$ai_catastrophe_chance / forecast_years",
+      "unit": "per year",
+      "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament, the AI chance your slider). Fixed; don't edit."
+    },
+    {
+      "id": "ai_catastrophe_per_year",
+      "section": "effect",
+      "label": "AI: yearly chance of a catastrophe the world survives (over 10% of people die)",
+      "format": "small",
+      "formula": "$ai_catastrophe_chance * (@catastrophe.ai_catastrophe_vs_extinction - 1) / forecast_years",
+      "unit": "per year",
+      "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
+    },
+    {
+      "id": "ai_smaller_per_year",
+      "section": "effect",
+      "label": "AI: yearly chance of a smaller catastrophe",
+      "format": "small",
+      "kind": "observed",
+      "unit": "per year",
+      "source": {
+        "title": "Karger et al. (2023), Forecasting Existential Risk: Evidence from a Long-Run Forecasting Tournament",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "retrieved": "2026-11-14",
+        "page": "Tables 2-3: forecasts only for catastrophes (over 10% of people die) and extinction"
+      },
+      "explainer": "No unconditional forecast of a smaller AI disaster (one that kills fewer than 10% of people) is on the site: 0, as in every catastrophic-risk model; smaller harms from AI are in unmodelled_benefits_adj.",
+      "value": 0
+    },
+    {
+      "id": "ai_smaller_deaths",
+      "section": "effect",
+      "label": "AI: deaths in a smaller catastrophe",
+      "format": "integer",
+      "kind": "observed",
+      "unit": "deaths",
+      "source": {
+        "title": "Karger et al. (2023), Forecasting Existential Risk: Evidence from a Long-Run Forecasting Tournament",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "retrieved": "2026-11-14",
+        "page": "Tables 2-3"
+      },
+      "explainer": "0, as ai_smaller_per_year.",
+      "value": 0
+    },
+    {
+      "id": "ai_deaths_if_catastrophe",
+      "section": "effect",
+      "label": "AI: deaths in a catastrophe the world survives",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now * @catastrophe.ai_catastrophe_death_share",
+      "unit": "deaths",
+      "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
+    },
+    {
+      "id": "ai_misuse_cost_share",
+      "section": "effect",
+      "label": "AI: share of the AI spending on work against misuse (dangerous-capability evaluations, defences against misuse)",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no AI work (ai_cost_share is 0); the template's default kept."
+    },
+    {
+      "id": "ai_deaths_per_year",
+      "section": "effect",
+      "label": "AI: expected deaths a year from these catastrophes",
+      "format": "number",
+      "formula": "ai_extinction_per_year * deaths_if_extinct + ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths",
+      "unit": "deaths / year",
+      "explainer": "Each size's yearly chance × the people it kills."
+    },
+    {
+      "id": "ai_future_per_year",
+      "section": "effect",
+      "label": "AI: expected future healthy years lost a year (extinction-level)",
+      "format": "number",
+      "formula": "ai_extinction_per_year * future_dalys_if_extinct",
+      "unit": "DALYs / year",
+      "explainer": "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others."
+    },
+    {
+      "id": "ai_deaths_per_million",
+      "section": "effect",
+      "label": "AI: deaths averted a year by a typical $1 million of work, while its cut counts",
+      "format": "small",
+      "formula": "((1 - ai_misuse_cost_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_extinction_per_year * deaths_if_extinct + ((1 - ai_misuse_cost_share) * @catastrophe.ai_catastrophe_cut_per_million + ai_misuse_cost_share * @catastrophe.ai_misuse_catastrophe_cut_per_million) * (ai_catastrophe_per_year * ai_deaths_if_catastrophe + ai_smaller_per_year * ai_smaller_deaths)",
+      "unit": "deaths / year",
+      "explainer": "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries: misuse work at Rethink's misuse preset, other AI work at its misalignment preset, weighted by ai_misuse_cost_share. The catastrophe figure also applies to the smaller size. Fixed; don't edit."
+    },
+    {
+      "id": "ai_future_per_million",
+      "section": "effect",
+      "label": "AI: future healthy years kept a year by a typical $1 million of work",
+      "format": "small",
+      "formula": "((1 - ai_misuse_cost_share) * @catastrophe.ai_extinction_cut_per_million + ai_misuse_cost_share * @catastrophe.ai_misuse_extinction_cut_per_million) * ai_future_per_year",
+      "unit": "DALYs / year",
+      "explainer": "As ai_deaths_per_million, for the future lost in an extinction-level catastrophe: the two presets' extinction cuts weighted by ai_misuse_cost_share."
+    },
+    {
+      "id": "ai_cost_share",
+      "section": "effect",
+      "label": "AI: share of the cost spent on work against ai risk (research, evaluations, convening, advocacy)",
+      "format": "percent",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III lines 4a-4d: far-UVC, biosecurity and government affairs, built-environment transmission suppression, PPE",
+        "quote": "TO RESEARCH & ADVANCE INTERVENTIONS TO PREVENT PANDEMICS & ADDRESS BIOLOGICAL THREATS."
+      },
+      "explainer": "Blueprint does no AI work: every programme is against pandemics. 0."
+    },
+    {
+      "id": "ai_years_until_effect",
+      "section": "effect",
+      "label": "AI: years from the spending until the work cuts the risk",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Not used: Blueprint spends nothing on AI (ai_cost_share is 0). About a year, 0 to 3, the family's default; discounted at the shared rate."
+    },
+    {
+      "id": "ai_discounted_years",
+      "section": "effect",
+      "label": "AI: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -ai_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "ai_deaths_averted",
+      "section": "effect",
+      "label": "AI: deaths averted by the work (expected, before adjustments)",
+      "format": "small",
+      "formula": "cost_total * ai_cost_share / 1e6 * ai_deaths_per_million * ai_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "ai_future_dalys",
+      "section": "effect",
+      "label": "AI: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "bio_extinction_per_year",
+      "section": "effect",
+      "label": "Pandemics: yearly chance of a catastrophe that ends humanity's future",
+      "format": "small",
+      "formula": "@catastrophe.bio_extinction_by_2100 / forecast_years",
+      "unit": "per year",
+      "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament). Fixed; don't edit."
+    },
+    {
+      "id": "bio_catastrophe_per_year",
+      "section": "effect",
+      "label": "Pandemics: yearly chance of a catastrophe the world survives (over 10% of people die)",
+      "format": "small",
+      "formula": "(@catastrophe.bio_catastrophe_by_2100 - @catastrophe.bio_extinction_by_2100) / forecast_years",
+      "unit": "per year",
+      "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
+    },
+    {
+      "id": "bio_smaller_per_year",
+      "section": "effect",
+      "label": "Pandemics: yearly chance of a smaller catastrophe (a COVID-scale pandemic)",
+      "format": "small",
+      "formula": "@catastrophe.pandemic_probability_covid_scale",
+      "unit": "per year",
+      "explainer": "The shared yearly chance of a pandemic as deadly as COVID-19 (@catastrophe.pandemic_probability_covid_scale). Fixed."
+    },
+    {
+      "id": "bio_smaller_deaths",
+      "section": "effect",
+      "label": "Pandemics: deaths in a smaller catastrophe",
+      "format": "integer",
+      "formula": "@catastrophe.covid_excess_deaths",
+      "unit": "deaths",
+      "explainer": "WHO's excess deaths of COVID-19's first two years (@catastrophe.covid_excess_deaths). Fixed."
+    },
+    {
+      "id": "bio_deaths_if_catastrophe",
+      "section": "effect",
+      "label": "Pandemics: deaths in a catastrophe the world survives",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now * @catastrophe.bio_catastrophe_death_share",
+      "unit": "deaths",
+      "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
+    },
+    {
+      "id": "bio_deaths_per_year",
+      "section": "effect",
+      "label": "Pandemics: expected deaths a year from these catastrophes",
+      "format": "number",
+      "formula": "bio_extinction_per_year * deaths_if_extinct + bio_catastrophe_per_year * bio_deaths_if_catastrophe + bio_smaller_per_year * bio_smaller_deaths",
+      "unit": "deaths / year",
+      "explainer": "Each size's yearly chance × the people it kills."
+    },
+    {
+      "id": "bio_future_per_year",
+      "section": "effect",
+      "label": "Pandemics: expected future healthy years lost a year (extinction-level)",
+      "format": "number",
+      "formula": "bio_extinction_per_year * future_dalys_if_extinct",
+      "unit": "DALYs / year",
+      "explainer": "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others."
+    },
+    {
+      "id": "bio_deaths_per_million",
+      "section": "effect",
+      "label": "Pandemics: deaths averted a year by a typical $1 million of work, while its cut counts",
+      "format": "small",
+      "formula": "@catastrophe.bio_extinction_cut_per_million * bio_extinction_per_year * deaths_if_extinct + @catastrophe.bio_catastrophe_cut_per_million * (bio_catastrophe_per_year * bio_deaths_if_catastrophe + bio_smaller_per_year * bio_smaller_deaths)",
+      "unit": "deaths / year",
+      "explainer": "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit."
+    },
+    {
+      "id": "bio_future_per_million",
+      "section": "effect",
+      "label": "Pandemics: future healthy years kept a year by a typical $1 million of work",
+      "format": "small",
+      "formula": "@catastrophe.bio_extinction_cut_per_million * bio_future_per_year",
+      "unit": "DALYs / year"
+    },
+    {
+      "id": "bio_covid_scale_share",
+      "section": "effect",
+      "label": "Pandemics: share of those deaths averted that are in a COVID-scale pandemic",
+      "format": "percent",
+      "formula": "@catastrophe.bio_catastrophe_cut_per_million * bio_smaller_per_year * bio_smaller_deaths / bio_deaths_per_million",
+      "explainer": "The COVID-scale size's part of the deaths a typical $1 million of pandemic work averts: valued at COVID-19's age mix (covid_value_per_death), the rest at the world's. Fixed; don't edit."
+    },
+    {
+      "id": "bio_cost_share",
+      "section": "effect",
+      "label": "Pandemics: share of the cost spent on work against pandemics risk (research, evaluations, convening, advocacy)",
+      "format": "percent",
+      "explainer": "Every dollar is pandemic work (Part III: far-UVC, glycol vapours and other indoor air cleaning, respirators, and the biosecurity and government affairs work around them), with no AI, nuclear, specific policy win or training spending (the rows below, each sourced), so the remainder of those, 1; the formula keeps every cost share on the result's path.",
+      "formula": "1 - ai_cost_share - nuclear_cost_share - pol_cost_share - fb_cost_share"
+    },
+    {
+      "id": "bio_years_until_effect",
+      "section": "effect",
+      "label": "Pandemics: years from the spending until the work cuts the risk",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 2,
+        "high": 5
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "From the year's spending to its effect on the risk: the far-UVC eye-safety, air-chemistry and inactivation studies funded in 2024 report in 2025-2026 (the July 2026 programme update has most still ongoing or 'publication pending'), and the Blueprints feed stockpile and building decisions only after that; the PPE Blueprint was cited within months (Federation of American Scientists, October 2024). About two years, our judgment, 0.5 to 5, longer than SecureBio's 1.5 because Blueprint's work is research before deployment; discounted at the shared rate."
+    },
+    {
+      "id": "bio_discounted_years",
+      "section": "effect",
+      "label": "Pandemics: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -bio_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "bio_deaths_averted",
+      "section": "effect",
+      "label": "Pandemics: deaths averted by the work (expected, before adjustments)",
+      "format": "small",
+      "formula": "cost_total * bio_cost_share / 1e6 * bio_deaths_per_million * bio_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "bio_future_dalys",
+      "section": "effect",
+      "label": "Pandemics: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "nuclear_extinction_per_year",
+      "section": "effect",
+      "label": "Nuclear war: yearly chance of a catastrophe that ends humanity's future",
+      "format": "small",
+      "formula": "@catastrophe.nuclear_extinction_by_2100 / forecast_years",
+      "unit": "per year",
+      "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament). Fixed; don't edit."
+    },
+    {
+      "id": "nuclear_catastrophe_per_year",
+      "section": "effect",
+      "label": "Nuclear war: yearly chance of a catastrophe the world survives (over 10% of people die)",
+      "format": "small",
+      "formula": "(@catastrophe.nuclear_catastrophe_by_2100 - @catastrophe.nuclear_extinction_by_2100) / forecast_years",
+      "unit": "per year",
+      "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
+    },
+    {
+      "id": "nuclear_smaller_per_year",
+      "section": "effect",
+      "label": "Nuclear war: yearly chance of a smaller catastrophe",
+      "format": "small",
+      "kind": "observed",
+      "unit": "per year",
+      "source": {
+        "title": "Karger et al. (2023), Forecasting Existential Risk: Evidence from a Long-Run Forecasting Tournament",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "retrieved": "2026-11-14",
+        "page": "Tables 2-3"
+      },
+      "explainer": "No shared forecast of a single nuclear detonation; Blueprint does no nuclear work (nuclear_cost_share 0), so 0.",
+      "value": 0
+    },
+    {
+      "id": "nuclear_smaller_deaths",
+      "section": "effect",
+      "label": "Nuclear war: deaths in a smaller catastrophe",
+      "format": "integer",
+      "kind": "observed",
+      "unit": "deaths",
+      "source": {
+        "title": "Karger et al. (2023), Forecasting Existential Risk: Evidence from a Long-Run Forecasting Tournament",
+        "url": "https://forecastingresearch.org/pdf/existential-risk-persuasion-tournament.pdf",
+        "retrieved": "2026-11-14",
+        "page": "Tables 2-3"
+      },
+      "explainer": "0, as nuclear_smaller_per_year.",
+      "value": 0
+    },
+    {
+      "id": "nuclear_deaths_if_catastrophe",
+      "section": "effect",
+      "label": "Nuclear war: deaths in a catastrophe the world survives",
+      "format": "integer",
+      "formula": "@catastrophe.world_population_now * @catastrophe.nuclear_catastrophe_death_share",
+      "unit": "deaths",
+      "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
+    },
+    {
+      "id": "nuclear_deaths_per_year",
+      "section": "effect",
+      "label": "Nuclear war: expected deaths a year from these catastrophes",
+      "format": "number",
+      "formula": "nuclear_extinction_per_year * deaths_if_extinct + nuclear_catastrophe_per_year * nuclear_deaths_if_catastrophe + nuclear_smaller_per_year * nuclear_smaller_deaths",
+      "unit": "deaths / year",
+      "explainer": "Each size's yearly chance × the people it kills."
+    },
+    {
+      "id": "nuclear_future_per_year",
+      "section": "effect",
+      "label": "Nuclear war: expected future healthy years lost a year (extinction-level)",
+      "format": "number",
+      "formula": "nuclear_extinction_per_year * future_dalys_if_extinct",
+      "unit": "DALYs / year",
+      "explainer": "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others."
+    },
+    {
+      "id": "nuclear_deaths_per_million",
+      "section": "effect",
+      "label": "Nuclear war: deaths averted a year by a typical $1 million of work, while its cut counts",
+      "format": "small",
+      "formula": "@catastrophe.nuclear_extinction_cut_per_million * nuclear_extinction_per_year * deaths_if_extinct + @catastrophe.nuclear_catastrophe_cut_per_million * (nuclear_catastrophe_per_year * nuclear_deaths_if_catastrophe + nuclear_smaller_per_year * nuclear_smaller_deaths)",
+      "unit": "deaths / year",
+      "explainer": "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit."
+    },
+    {
+      "id": "nuclear_future_per_million",
+      "section": "effect",
+      "label": "Nuclear war: future healthy years kept a year by a typical $1 million of work",
+      "format": "small",
+      "formula": "@catastrophe.nuclear_extinction_cut_per_million * nuclear_future_per_year",
+      "unit": "DALYs / year"
+    },
+    {
+      "id": "nuclear_cost_share",
+      "section": "effect",
+      "label": "Nuclear war: share of the cost spent on work against nuclear war risk (research, evaluations, convening, advocacy)",
+      "format": "percent",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III lines 4a-4d: far-UVC, biosecurity and government affairs, built-environment transmission suppression, PPE",
+        "quote": "TO RESEARCH & ADVANCE INTERVENTIONS TO PREVENT PANDEMICS & ADDRESS BIOLOGICAL THREATS."
+      },
+      "explainer": "No nuclear war work: 0."
+    },
+    {
+      "id": "nuclear_years_until_effect",
+      "section": "effect",
+      "label": "Nuclear war: years from the spending until the work cuts the risk",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Not used: Blueprint spends nothing on nuclear war (nuclear_cost_share is 0). About a year, our judgment, 0 to 3, the family's default; discounted at the shared rate."
+    },
+    {
+      "id": "nuclear_discounted_years",
+      "section": "effect",
+      "label": "Nuclear war: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -nuclear_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "nuclear_deaths_averted",
+      "section": "effect",
+      "label": "Nuclear war: deaths averted by the work (expected, before adjustments)",
+      "format": "small",
+      "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_deaths_per_million * nuclear_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "nuclear_future_dalys",
+      "section": "effect",
+      "label": "Nuclear war: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "pol_cost_share",
+      "section": "effect",
+      "label": "Policy win: share of the cost spent on the campaign that won it",
+      "format": "percent",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, 2025 Annual Report (February 2026)",
+        "url": "https://blueprintbiosecurity.org/wp-content/uploads/2026/02/Blueprint-Biosecurity-2025-Annual-Report-.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 8, Government Affairs Highlights",
+        "quote": "In 2025, the organization launched a government affairs function to translate evidence-based findings on pandemic preparedness and response countermeasures into sustained federal policy and funding pathways."
+      },
+      "explainer": "No treaty, law, standard or institution won in 2024 is Blueprint's to count: its government affairs function began in 2025, and the mentions of reusable respirators it reports in the FY2026 appropriations bills (six, one in the enacted Agriculture bill) are 2025 work and report language, not a measure in force; they are uptake of the PPE work, in ppe_evidence_adj. 0, so the policy branch counts nothing."
+    },
+    {
+      "id": "pol_wins",
+      "section": "reach",
+      "label": "Policy win: wins of this kind in the year",
+      "format": "integer",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, 2025 Annual Report (February 2026)",
+        "url": "https://blueprintbiosecurity.org/wp-content/uploads/2026/02/Blueprint-Biosecurity-2025-Annual-Report-.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 8, Government Affairs Highlights",
+        "quote": "In 2025, the organization launched a government affairs function to translate evidence-based findings on pandemic preparedness and response countermeasures into sustained federal policy and funding pathways."
+      },
+      "explainer": "0: no specific win counted for 2024 (see pol_cost_share)."
+    },
+    {
+      "id": "pol_p_success",
+      "section": "effect",
+      "label": "Policy win: chance it happens because of this work",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.3,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Not used: the policy branch counts nothing for Blueprint in 2024 (pol_wins is 0); the template's range kept.",
+      "single_event": true
+    },
+    {
+      "id": "pol_relative_cut",
+      "section": "effect",
+      "label": "Policy win: share of the area's yearly risk it removes while in force",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.01,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Not used: the policy branch counts nothing for Blueprint in 2024 (pol_wins is 0); the template's range kept."
+    },
+    {
+      "id": "pol_years_until_effect",
+      "section": "effect",
+      "label": "Policy win: years until it takes effect",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Not used: the policy branch counts nothing for Blueprint in 2024 (pol_wins is 0); the template's range kept."
+    },
+    {
+      "id": "pol_discounted_years",
+      "section": "effect",
+      "label": "Policy win: discounted years the cut counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -pol_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "pol_deaths_per_year",
+      "section": "effect",
+      "label": "Policy win: expected deaths a year from the area's catastrophes",
+      "format": "number",
+      "formula": "bio_deaths_per_year",
+      "unit": "deaths / year",
+      "explainer": "The policy branch would act on pandemics, Blueprint's only area. Counts nothing while pol_wins is 0."
+    },
+    {
+      "id": "pol_future_per_year",
+      "section": "effect",
+      "label": "Policy win: expected future healthy years lost a year in the area",
+      "format": "number",
+      "formula": "bio_future_per_year",
+      "unit": "DALYs / year",
+      "explainer": "As pol_deaths_per_year."
+    },
+    {
+      "id": "pol_deaths_averted",
+      "section": "effect",
+      "label": "Policy win: deaths averted (expected, before adjustments)",
+      "format": "small",
+      "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_deaths_per_year * pol_discounted_years",
+      "unit": "deaths"
+    },
+    {
+      "id": "pol_future_dalys",
+      "section": "effect",
+      "label": "Policy win: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
+      "unit": "DALYs"
+    },
+    {
+      "id": "fb_cost_share",
+      "section": "effect",
+      "label": "Field-building: share of the cost spent training or placing people",
+      "format": "percent",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III lines 4a-4d: no fellowship or training programme"
+      },
+      "explainer": "Blueprint ran no training or placement programme in 2024 (its fellows are staff); 0."
+    },
+    {
+      "id": "fb_people",
+      "section": "reach",
+      "label": "Field-building: people trained or placed in the year",
+      "format": "integer",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part III lines 4a-4d: no fellowship or training programme"
+      },
+      "explainer": "0, as fb_cost_share."
+    },
+    {
+      "id": "fb_share_working",
+      "section": "effect",
+      "label": "Field-building: share who go on to work on these risks because of it",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "Not used: the field-building branch counts nothing (fb_people is 0); the template's range kept."
+    },
+    {
+      "id": "fb_work_years",
+      "section": "effect",
+      "label": "Field-building: years each stays in the work",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 5,
+        "high": 10
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Not used: the field-building branch counts nothing (fb_people is 0); the template's range kept."
+    },
+    {
+      "id": "fb_work_dollars",
+      "section": "effect",
+      "label": "Field-building: the alumni's added work, in dollars of typical work",
+      "format": "usd",
+      "formula": "fb_people * fb_share_working * pv_annuity_due(1, $discount_rate, fb_work_years) * @catastrophe.cost_per_work_year",
+      "explainer": "Work-years added × what a year of such work costs its employer (@catastrophe.cost_per_work_year), so it is valued at the area's typical dollar."
+    },
+    {
+      "id": "fb_credit_share",
+      "section": "effect",
+      "label": "Field-building: the training's share of the credit for that work",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Not used: the field-building branch counts nothing (fb_people is 0); the template's range kept."
+    },
+    {
+      "id": "fb_deaths_per_million",
+      "section": "effect",
+      "label": "Field-building: deaths averted a year by a typical $1 million of the alumni's work",
+      "format": "small",
+      "formula": "bio_deaths_per_million",
+      "unit": "deaths / year",
+      "explainer": "Alumni would work on pandemics, Blueprint's area. Counts nothing while fb_people is 0."
+    },
+    {
+      "id": "fb_future_per_million",
+      "section": "effect",
+      "label": "Field-building: future healthy years kept a year by a typical $1 million of the alumni's work",
+      "format": "small",
+      "formula": "bio_future_per_million",
+      "unit": "DALYs / year",
+      "explainer": "As fb_deaths_per_million."
+    },
+    {
+      "id": "fb_deaths_averted",
+      "section": "effect",
+      "label": "Field-building: deaths averted (expected, before adjustments)",
+      "format": "small",
+      "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_deaths_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "deaths"
+    },
+    {
+      "id": "fb_future_dalys",
+      "section": "effect",
+      "label": "Field-building: future healthy years kept (expected, before adjustments)",
+      "format": "number",
+      "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "DALYs"
+    },
+    {
+      "id": "cost_shares_total",
+      "section": "effect",
+      "label": "Check: the cost shares add up to all the modelled spending",
+      "format": "percent",
+      "formula": "ai_cost_share + bio_cost_share + nuclear_cost_share + pol_cost_share + fb_cost_share",
+      "explainer": "Must be 1: every dollar of the modelled programme is in exactly one branch."
+    },
+    {
+      "id": "deaths_averted",
+      "section": "effect",
+      "label": "Deaths averted, every branch (expected, before adjustments)",
+      "format": "small",
+      "formula": "ai_deaths_averted + bio_deaths_averted + nuclear_deaths_averted + pol_deaths_averted + fb_deaths_averted",
+      "unit": "deaths"
+    },
+    {
+      "id": "covid_scale_deaths_averted",
+      "section": "effect",
+      "label": "Deaths averted that are in a COVID-scale pandemic (a part of deaths_averted)",
+      "format": "small",
+      "formula": "bio_deaths_averted * bio_covid_scale_share",
+      "unit": "deaths",
+      "explainer": "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size (a catastrophe that kills a share of the world, extinction) at the world's. A policy or field-building branch pointed at the pandemic area adds its deaths averted × bio_covid_scale_share here. Fixed."
+    },
+    {
+      "id": "covid_value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted in a COVID-scale pandemic (units of value)",
+      "format": "number",
+      "formula": "(@death_ages.covid_scale_share_under5 * @moral_weights.uov_per_death_under5 + (1 - @death_ages.covid_scale_share_under5) * (@death_ages.covid_scale_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.covid_scale_share_5_14_of_over5) * (@death_ages.covid_scale_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - @death_ages.covid_scale_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed."
+    },
+    {
+      "id": "future_dalys_averted",
+      "section": "effect",
+      "label": "Future healthy years kept, every branch (expected, before adjustments)",
+      "format": "number",
+      "formula": "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dalys_per_death_value",
+      "section": "adjustments",
+      "label": "Healthy years per unit of value of the deaths averted (for the weights below)",
+      "format": "small",
+      "formula": "dalys_from_uov / ((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death)",
+      "explainer": "The bridge's healthy years over the deaths' value: turns each branch's deaths into healthy years for the weights. Fixed."
+    },
+    {
+      "id": "w_ai",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the AI work (before adjustments)",
+      "format": "number",
+      "formula": "ai_deaths_averted * value_per_death * dalys_per_death_value + ai_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_bio",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the pandemic work (before adjustments)",
+      "format": "number",
+      "formula": "bio_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + bio_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years (the COVID-scale part at COVID-19's age mix), plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_nuclear",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the nuclear work (before adjustments)",
+      "format": "number",
+      "formula": "nuclear_deaths_averted * value_per_death * dalys_per_death_value + nuclear_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_pol",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the policy win (before adjustments)",
+      "format": "number",
+      "formula": "pol_deaths_averted * value_per_death * dalys_per_death_value + pol_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted), plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_fb",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the people trained (before adjustments)",
+      "format": "number",
+      "formula": "fb_deaths_averted * value_per_death * dalys_per_death_value + fb_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted), plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_total",
+      "section": "adjustments",
+      "label": "Weight: healthy years from every branch (before adjustments)",
+      "format": "number",
+      "formula": "w_ai + w_bio + w_nuclear + w_pol + w_fb",
+      "unit": "DALYs"
+    },
+    {
+      "id": "uvc_evidence_adj",
+      "section": "adjustments",
+      "label": "Far-UVC: uptake against a typical pandemic project",
+      "format": "multiple",
+      "value": {
+        "low": 0.4,
+        "best": 0.8,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "How far a typical pandemic project's cut per dollar applies to the far-UVC work: it commissions the studies that stand between far-UVC and deployment (eye tolerance, indoor air chemistry, airborne inactivation, transmission models) and wrote the Blueprint for Far-UVC (published 2025), which its 2025 annual report calls field-defining; but no deployment, guidance or standard has yet followed, and the main real-world efficacy studies (EXHALE, DEMIST, a tuberculosis transmission study) report in 2026. Research a step before uptake: 0.8, our judgment, a little above the template's 0.7 for typical research because the studies target the stated barriers; 0.4 to 1.2, as SecureBio's detection work (0.75)."
+    },
+    {
+      "id": "govt_evidence_adj",
+      "section": "adjustments",
+      "label": "Biosecurity and government affairs: uptake against a typical pandemic project",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.7,
+        "high": 1.1
+      },
+      "kind": "judgment",
+      "explainer": "Stakeholder education, strategy and partnerships around the programmes in 2024, before its government affairs team began (2025): no output of its own to judge, so the template's 0.7 for typical work, 0.3 to 1.1."
+    },
+    {
+      "id": "bets_evidence_adj",
+      "section": "adjustments",
+      "label": "Glycol vapours and other air cleaning: uptake against a typical pandemic project",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 1.1
+      },
+      "kind": "judgment",
+      "explainer": "Desk research on an underexplored technology: glycol vapours were studied in the 1940s and have open questions on safety and effect in occupied rooms (annual report, p. 7). The 2024 work led to a funded research programme (seven grants in 2026), but whether any of it ends in deployment is further off than for far-UVC or respirators: 0.6, our judgment, below the template's 0.7, 0.3 to 1.1."
+    },
+    {
+      "id": "ppe_evidence_adj",
+      "section": "adjustments",
+      "label": "Protective equipment: uptake against a typical pandemic project",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1.0,
+        "high": 1.3
+      },
+      "kind": "judgment",
+      "explainer": "The Next-Gen PPE Blueprint and Towards a Theory of Pandemic-Proof PPE (2024) were taken up quickly: the Federation of American Scientists' proposal for caches of reusable respirators (October 2024) takes its figures from them, and the stockpiling of reusable respirators it argues for is named six times in the FY2026 appropriations bills, once in the enacted Agriculture bill (2025, report language, not funding). Uptake by policy above typical, but the mentions are non-binding and a year later: 1, a typical project's, our judgment, 0.5 to 1.3, as the Johns Hopkins Center for Health Security's policy research (0.9)."
+    },
+    {
+      "id": "ai_evidence_adj",
+      "section": "adjustments",
+      "label": "AI field work: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no AI work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, 0.5 to 1.2 (the family's bounds)."
+    },
+    {
+      "id": "bio_evidence_adj",
+      "section": "adjustments",
+      "label": "Pandemic field work: how far the typical project's effect applies",
+      "format": "multiple",
+      "explainer": "Each programme's multiplier (the four rows above) weighted by its spending: within one branch every dollar carries the same typical cut, so spending is the right weight here. About 0.8.",
+      "formula": "(uvc_spend * uvc_evidence_adj + govt_spend * govt_evidence_adj + bets_spend * bets_evidence_adj + ppe_spend * ppe_evidence_adj) / program_spend"
+    },
+    {
+      "id": "nuclear_evidence_adj",
+      "section": "adjustments",
+      "label": "Nuclear field work: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no nuclear work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, 0.5 to 1.2 (the family's bounds)."
+    },
+    {
+      "id": "pol_evidence_adj",
+      "section": "adjustments",
+      "label": "Policy win: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no policy campaign with a win in 2024 (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, 0.5 to 1.2 (the family's bounds)."
+    },
+    {
+      "id": "fb_evidence_adj",
+      "section": "adjustments",
+      "label": "Field-building: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no training (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, 0.5 to 1.2 (the family's bounds)."
+    },
+    {
+      "id": "ai_counterfactual_adj",
+      "section": "adjustments",
+      "label": "AI field work: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no AI work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others would have done it."
+    },
+    {
+      "id": "bio_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "The share of the work no one else would have done now. Blueprint is the main organisation working only on far-UVC, other indoor air cleaning and pandemic-grade respirators, but others are close: Coefficient Giving (formerly Open Philanthropy), its main funder, also funds far-UVC studies directly (the University of Pretoria's tuberculosis study, February 2025), 1Day Sooner and the Johns Hopkins Center for Health Security work on far-UVC, and NIOSH's respirator laboratory and Gryphon Scientific on respirators. 0.7, our judgment, as for SecureBio and the Johns Hopkins Center (0.7), 0.4 to 0.9."
+    },
+    {
+      "id": "nuclear_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no nuclear work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others would have done it."
+    },
+    {
+      "id": "pol_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Policy win: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no policy campaign with a win in 2024 (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others would have done it."
+    },
+    {
+      "id": "fb_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Field-building: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no training (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others would have done it."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no AI work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
+    },
+    {
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Blueprint pays for the work it funds in full (contractors and research grants are in its spending), but universities add researchers' time and overheads beyond the grants, co-authors at other institutions contribute, and the 2024 far-UVC studies sit within a field others fund too. Its share of the resources behind the outcomes: 0.85, our judgment, as SecureBio's partners' share, 0.6 to 1."
+    },
+    {
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no nuclear work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
+    },
+    {
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no policy campaign with a win in 2024 (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: Blueprint does no training (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "How far the typical project's effect applies to this charity's work",
+      "format": "multiple",
+      "formula": "(w_ai * ai_evidence_adj + w_bio * bio_evidence_adj + w_nuclear * nuclear_evidence_adj + w_pol * pol_evidence_adj + w_fb * fb_evidence_adj) / (w_total)",
+      "explainer": "Applied: each branch's own multiplier (<branch>_evidence_adj), weighted by the branches' healthy years (w_<branch>), so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the work no one else would have done now",
+      "format": "percent",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / (w_total * evidence_adj)",
+      "explainer": "Applied: each branch's own share (<branch>_counterfactual_adj), weighted by the branches' healthy years (w_<branch>) after evidence_adj, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
+      "explainer": "Applied: each branch's own share (<branch>_attribution_share), weighted by the branches' healthy years (w_<branch>) after the earlier factors, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.85,
+        "best": 1,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Whether Coefficient Giving, most of Blueprint's money, would give less if small donors gave more is the room factor of @next_dollar.blueprint_biosecurity (docs/normalization.md 2.10), so it isn't asked again here (one question per adjustment): 1, our judgment, as for every catastrophic-risk model; 0.85 to 1.05."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: no outcome of Blueprint's work on the risk is measured (reports, grants and studies are outputs; citations and appropriations mentions are uptake); the cut per dollar is a typical project's from Rethink Priorities' model and the chances are forecasts, so the shared missing-data step applies (docs/normalization.md 2.12)."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * leverage_funging_adj * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits not modelled, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.15,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Good beyond the pandemics counted: the technologies Blueprint works on are also everyday infection control. Far-UVC and upper-room germicidal light are used against tuberculosis in clinics and shelters, cleaner indoor air cuts seasonal influenza and COVID-19 transmission, and stockpiled reusable respirators also protect workers in wildfire smoke and ordinary outbreaks. Its research makes such use likelier and safer, less a small harm: far-UVC can add ozone and secondary particles indoors if deployed before that research settles it (the work it funds at MIT, Penn State and Colorado State). Net 15% of the modelled value, our judgment, 2% to 50%: above the family's 5-10% for preparedness work (SecureBio, METR, Epoch AI) because these are tools with use between pandemics, not only in one.",
+      "side_effect": "added"
+    },
+    {
+      "id": "speedup_harm_share",
+      "section": "adjustments",
+      "label": "Harm: speeding up dangerous capabilities, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.02,
+        "best": 0,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Beyond a typical project's backfire (in the shared cut): nothing in Blueprint's work advances dangerous biology; it studies defences (light, vapours, respirators) against any airborne pathogen. 0, down to -2% for the small chance its testing of how pathogens are inactivated helps someone, our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "hazard_harm_share",
+      "section": "adjustments",
+      "label": "Harm: information hazards and attention, as a share of modelled value",
+      "format": "percent",
+      "value": {
+        "low": -0.02,
+        "best": 0,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Beyond a typical project's backfire: Blueprint publishes no threat analyses; its reports describe defences and the gaps in stockpiles, which a bad actor learns little from. 0, down to -2%, our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Deaths averted (and losses beyond them, 0 by default), in GiveWell units of value (before adjustments)",
+      "format": "number",
+      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths)",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Deaths averted (and losses beyond them, 0 by default), in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "future_dalys_averted",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov) * total_adj * (1 + unmodelled_benefits_adj + speedup_harm_share + hazard_harm_share)",
+      "unit": "DALYs",
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_comp",
+      "section": "donor",
+      "label": "Staff pay and benefits, 2024",
+      "format": "usd",
+      "value": 1626504,
+      "kind": "observed",
+      "source": {
+        "title": "Blueprint Biosecurity, Form 990 for 2024 (IRS e-file XML, object 202503189349311100)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part IX lines 5-10 (officers $280,913, other salaries $1,055,046, pension $95,106, benefits $92,440, payroll taxes $102,999); Part I line 15",
+        "quote": "1626504"
+      },
+      "explainer": "Salaries, benefits and payroll taxes of its ten employees in 2024 (Part I line 5)."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of program cost",
+      "format": "percent",
+      "formula": "staff_comp / total_expenses",
+      "explainer": "Blueprint's own staff pay (the row above) over all its 2024 expenses, about 53%. Its contractors (Booz Allen Hamilton $296,084, Gryphon Scientific $165,211, subject-matter experts $570,815) are firms or experts paid at market rates, so they give up no pay."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_research_policy",
+      "explainer": "The shared pay gap for research and policy staff (@staff_pay.gap_research_policy)."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "@next_dollar.blueprint_biosecurity",
+      "published": 1,
+      "explainer": "Blueprint Biosecurity's own figure (facts/next_dollar.json, docs/normalization.md 2.10): room × use × run. 1 in `published`: the past average itself."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}
