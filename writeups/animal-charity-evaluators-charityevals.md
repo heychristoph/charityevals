@@ -1,6 +1,6 @@
 ### Summary
 
-Animal Charity Evaluators (ACE) evaluates animal advocacy charities, recommends the ones it finds most effective, and passes donors' money to them. This model is of a gift for ACE's own work, not of the money that passes through it to other charities. It comes to **<span data-figure="headline" data-model="animal-charity-evaluators-charityevals">0.0021</span> years of healthy life per $1,000**. Each dollar ACE spent led to between three and four dollars of giving it caused. That giving goes to animal charities, which at the site's animal weights do very little per dollar on the common scale, so ACE does too.
+Animal Charity Evaluators (ACE) evaluates animal advocacy charities, recommends the ones it finds most effective, and passes donors' money to them. This model is of a gift for ACE's own work, not of the money that passes through it to other charities. It comes to **<span data-figure="headline" data-model="animal-charity-evaluators-charityevals">0.0017</span> years of healthy life per $1,000**. Each dollar ACE spent led to about three dollars of giving it caused. That giving goes to animal charities, which at the site's animal weights do very little per dollar on the common scale, so ACE does too.
 
 ### What the charity does
 
@@ -14,18 +14,18 @@ ACE does no animal work itself. It finds charities it thinks do the most good, a
 
 ### How the model works
 
-The model starts from the $13.5 million of giving ACE traced in the year, plus a tenth for gifts it has no record of. It takes ACE's own estimate of the share donors gave because of it, from its surveys of donors, grantmakers and charities. Then it applies the site's rule for an organisation's own survey: people who didn't answer are counted at half the influence of those who did. ACE publishes no response rates, so we judge that about 40% of the giving was covered. That leaves about $4.7 million from donors. The $1.1 million from grantmakers is added as they reported it.
+The model starts from the $13.5 million of giving ACE traced in the year, plus a tenth of the direct gifts for those it has no record of. It takes ACE's own estimate of the share donors gave because of it, from its surveys of donors, grantmakers and charities. Then it applies the site's rule for an organisation's own survey: people who didn't answer are counted at half the influence of those who did. ACE publishes no response rates, so we judge that about 40% of the giving was covered. That leaves about $4.6 million from donors. The $1.1 million from grantmakers is added as they reported it.
 
 Each dollar moved is valued at ACE's Recommended Charities, read live from their figures on this site. They are weighted by what its Recommended Charity Fund paid each in the year. Eight have a figure on the rankings. The others, and the Movement Grants' small groups, take their average. Those figures are ACE's own evaluations, because that is what the rankings show, so this model is not an independent check of ACE's choices.
 
 Half of donors' money counts as new giving. The rest, and all of the grantmakers' money, counts only for what it gains over an ordinary animal charity. The site's usual rule compares shifted money with GiveDirectly, which fits donors who would otherwise give to global health. Applied to ACE, every dollar it shifts would count as a loss, for a choice between causes its donors never faced. So the model keeps that rule's ratio of an ordinary charity to the charities the money goes to, about 13%, and applies it to ACE's charities.
 
-A further dollar is assumed to do 36% as much as ACE's average dollar so far.
+A further dollar is assumed to do 30% as much as ACE's average dollar so far.
 
 ### What drives the result
 
 - **The animal weights.** Everything ACE moves goes to animals, so the result scales with how much the site counts animal suffering against human health.
-- **Its next-dollar figure (36%, 15–70%).** ACE holds about 1.3 years of its own costs, and says extra money would mostly go to advertising and events.
+- **Its next-dollar figure (30%, 10–72%).** ACE holds about 1.3 years of its own costs. Extra money would go to advertising and events, and to the restructuring of its recommendations and grantmaking it announced in October 2026.
 - **The non-response step.** Counting every donor at full influence would raise donors' money moved by about two fifths.
 - **The split between charities.** The Humane League's figure is about 5 times the next charity's.
 
@@ -41,7 +41,7 @@ Side effects are one row, 10% (−10% to +30%) of the value. On the plus side: i
 
 ### How this model was checked
 
-Audit rounds are recorded in audits/animal-charity-evaluators-charityevals/. Round 1 found two high and three medium problems. The Movement Grants now take the Recommended Charities' average instead of the whole animal cause. The charities are weighted by ACE's fund split instead of equally. Shifted money is compared with ACE's own destinations rather than the whole cause. Unrecorded gifts were added, and grantmakers' money is counted on its own.
+Audit rounds are recorded in audits/animal-charity-evaluators-charityevals/. Round 1 found two high and three medium problems. The Movement Grants now take the Recommended Charities' average instead of the whole animal cause. The charities are weighted by ACE's fund split instead of equally. Shifted money is compared with ACE's own destinations rather than the whole cause. Unrecorded gifts were added, and grantmakers' money is counted on its own. Round 2 passed, with no high findings. After it, the next-dollar figure was cut from 36% to 30% for ACE's restructuring, and unrecorded gifts were limited to direct gifts.
 
 ### Sources
 

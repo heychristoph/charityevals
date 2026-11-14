@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "animal-charity-evaluators",
  "owner": "charityevals",
- "summary": "Animal Charity Evaluators evaluates animal advocacy charities, recommends the most effective, and passes donors' money to them through its Recommended Charity Fund and to small groups through its Movement Grants; this model covers all its own spending in its year to March 2025 ($1.72M, the $4.6M of grants it passed on being the recipients' cost). Of the $13.5M of giving it traced that year, its own surveys, with unrecorded gifts and our non-response step, suggest it caused about $4.7M, plus $1.1M of grantmakers' funding it steered: about $5.8M, between three and four dollars per dollar it spends, each dollar valued at its Recommended Charities' figures on this site (ACE's own evaluations of them) weighted by its fund's split, half of donors' money counted as new and the rest only for its gain over an ordinary animal charity, and the next dollar at 36% of the past average: about 0.002 years of healthy life per $1,000, as small as the animal charities it funds at the site's animal weights. The result moves most with the animal weights, its next-dollar figure, how much of its estimate rests on donors who answered and what an ordinary animal charity would have done with shifted money; no branch is discounted for missing data, since money moved is counted.",
+ "summary": "Animal Charity Evaluators evaluates animal advocacy charities, recommends the most effective, and passes donors' money to them through its Recommended Charity Fund and to small groups through its Movement Grants; this model covers all its own spending in its year to March 2025 ($1.72M; the $4.6M of grants it passed on are the recipients' cost). By its own surveys, with unrecorded gifts and our non-response step, it caused about $5.7M of giving to animal charities that year, three dollars per dollar it spends, valued at its Recommended Charities' figures on this site (ACE's own evaluations of them) weighted by its fund's split, shifted money only for its gain over an ordinary animal charity, and the next dollar at 30% of the past average: about 0.0017 years of healthy life per $1,000, as small as the animal charities it funds at the site's animal weights. The result moves most with the animal weights and its next-dollar figure; no branch is discounted for missing data, since money moved is counted.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Animal Charity Evaluators",
@@ -269,7 +269,7 @@
    "label": "Share of donors' recorded giving ACE estimates it caused",
    "format": "percent",
    "formula": "(@meta.ace_counterfactual_2024_25_recommended + @meta.ace_counterfactual_2024_25_movement_grants - @meta.ace_counterfactual_2024_25_grantmakers) / recorded_donations",
-   "explainer": "Its own estimates: $6.4M of the $12.3M to Recommended Charities 'would not have been received' without it, and $0.84M of the $1.2M of Movement Grants, from its surveys of donors who give to its Recommended Charities directly, of grantmakers and of past Recommended Charities and grantees. The $1.1M of grantmakers' funding it counts is taken out here and counted on its own (grantmakers_moved): 45% of the recorded giving. That is the shared own-effect question (normalization.md 2.8: the organisation's own survey), new money and money shifted from other charities together; whether it is new is the separate new-money share. Grantmakers' gross influenced funding isn't published, so it stays in the denominator, which understates the share slightly."
+   "explainer": "Its own estimates: $6.4M of the $12.3M to Recommended Charities 'would not have been received' without it, and $0.84M of the $1.2M of Movement Grants, from its surveys of donors who give to its Recommended Charities directly, of grantmakers and of past Recommended Charities and grantees. The $1.1M of grantmakers' funding it counts is taken out here and counted on its own (grantmakers_moved): 45% of the recorded giving. That is the shared own-effect question (normalization.md 2.8: the organisation's own survey), new money and money shifted from other charities together; whether it is new is the separate new-money share. Grantmakers' gross influenced funding isn't published, so it stays in the denominator: the share shown is slightly low; the dollars it caused are not."
   },
   {
    "id": "recording_adj",
@@ -282,7 +282,7 @@
     "high": 1.3
    },
    "kind": "judgment",
-   "explainer": "Our judgment: ACE gives its figure as 'at least $12.3 million' and calls its cumulative total 'likely an underestimate' (its December 2024 announcement of the influenced-giving reports), since donors who give to a Recommended Charity without saying why aren't counted. 1.1 (1.0 to 1.3): no published figure for what it misses; the low end takes its count as complete, the high end allows that direct gifts from donors who never say why are a large uncounted group."
+   "explainer": "Our judgment: ACE gives its figure as 'at least $12.3 million' and calls its cumulative total 'likely an underestimate' (its December 2024 announcement of the influenced-giving reports), since donors who give to a Recommended Charity without saying why aren't counted. 1.1 (1.0 to 1.3), applied to the direct gifts only (recorded giving less what came through its own funds, through_ace_donations): no published figure for what it misses; the low end takes its count as complete, the high end allows that direct gifts from donors who never say why are a large uncounted group."
   },
   {
    "id": "survey_response_share",
@@ -318,8 +318,8 @@
    "section": "reach",
    "label": "Donors' money ACE moved that would not otherwise have reached the charities (US$)",
    "format": "usd",
-   "formula": "recorded_donations * recording_adj * donor_own_effect",
-   "explainer": "Recorded giving, with the unrecorded part, times its own effect: about $4.7M."
+   "formula": "(recorded_donations + (recorded_donations - through_ace_donations) * (recording_adj - 1)) * donor_own_effect",
+   "explainer": "Recorded giving, with the unrecorded part of the direct gifts (giving through ACE's own funds is in its accounts), times its own effect: about $4.6M."
   },
   {
    "id": "grantmakers_moved",
@@ -335,7 +335,7 @@
    "label": "Money ACE moved to animal charities that would not otherwise have reached them, April 2024 – March 2025 (US$)",
    "format": "usd",
    "formula": "donors_moved + grantmakers_moved",
-   "explainer": "Donations to its Recommended Charities and Movement Grants net of what would have reached them anyway, and the grantmakers' funding it steered: about $5.8M, between three and four dollars for each dollar of its own costs. ACE's own figure of $6.05 per dollar is for its evaluation spending only and before the non-response step."
+   "explainer": "Donations to its Recommended Charities and Movement Grants net of what would have reached them anyway, and the grantmakers' funding it steered: about $5.7M, three dollars for each dollar of its own costs. ACE's own figure of $6.05 per dollar is for its evaluation spending only and before the non-response step."
   },
   {
    "id": "moved_per_dollar",
@@ -380,7 +380,7 @@
     "high": 0.5
    },
    "kind": "judgment",
-   "explainer": "Our judgment: its Recommended Charity Fund pays out twice a year (August and February; $1,837,466 in February 2025, its fundraising post) and Movement Grants run in rounds, so a gift waits about a quarter of a year on average plus the time to pay out. Its year-end balance held for charities ($625,554 for Recommended Charities and $1.45M for Movement Grants, Note 8, p. 12) against the $5.04M received gives about 0.4 years, inflated by December's giving peak; 0.3 years (0.1 to 0.5).",
+   "explainer": "Our judgment: its Recommended Charity Fund pays out twice a year (August and February; $1,837,446 in February 2025, its fundraising post) and Movement Grants run in rounds, so a gift waits about a quarter of a year on average plus the time to pay out. Its year-end balance held for charities ($625,554 for Recommended Charities and $1.45M for Movement Grants, Note 8, p. 12) against the $5.04M received gives about 0.4 years, inflated by December's giving peak; 0.3 years (0.1 to 0.5).",
    "unit": "years"
   },
   {
@@ -566,9 +566,9 @@
    "value": 0,
    "kind": "observed",
    "source": {
-    "title": "Animal Charity Evaluators, Support ACE as a meta-fundraiser and evaluator (EA Forum, 18 November 2025)",
-    "url": "https://forum.effectivealtruism.org/posts/ekWMbubYfgBFmw7wj/support-ace-as-a-meta-fundraiser-and-evaluator",
-    "quote": "For every dollar ACE spent on our charity evaluations and recommendations, we generated $6.05",
+    "title": "Animal Charity Evaluators, Giving Metrics",
+    "url": "https://animalcharityevaluators.org/about/impact/giving-metrics/",
+    "page": "Charity Evaluations and Movement Grants sections: donations and grants only",
     "retrieved": "2026-11-14"
    },
    "explainer": "0: ACE moves money, not people; its own metrics count donations and grants only."
@@ -781,7 +781,7 @@
    "label": "How much the next dollar does compared with the average dollar so far",
    "format": "percent",
    "formula": "@next_dollar.animal_charity_evaluators",
-   "explainer": "ACE's own figure (facts/next_dollar.json): 36% (15–70%). It holds about 1.3 years of its own costs without donor restrictions and $783,333 of time-restricted grants, and says a further dollar would most likely go to advertising, sponsorships and events, newer ways to reach donors than the recommendations its past average rests on.",
+   "explainer": "ACE's own figure (facts/next_dollar.json): 30% (10–72%). It holds about 1.3 years of its own costs without donor restrictions and $783,333 of time-restricted grants; a further dollar would go to advertising and events and, from October 2026, to restructuring its recommendations and grantmaking, whose results its past average doesn't measure.",
    "published": 1
   },
   {
