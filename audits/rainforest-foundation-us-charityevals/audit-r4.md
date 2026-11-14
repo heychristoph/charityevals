@@ -1,0 +1,34 @@
+# Audit: rainforest-foundation-us-charityevals, round 4 (verification)
+Result: 1.157e-5 daly/$ = 0.01157 years of healthy life per 1,000 dollars (combined range 0.0022-0.060). Verdict: pass.
+Scope: the changes in commit bc48e00 only (A, B, beneficiaries, write-up table). The full battery was not re-run.
+
+Mechanical: audit-model 0 invariant violations; only warnings (range spans a wide factor, 90% of the uncertainty from judgments) and an info line, as in round 3. check.ts: all models valid.
+
+## Checks
+| Change | Check | Status |
+|---|---|---|
+| A. `tero_attribution_share` 0.45 to 0.38 (25-75%) | 0.7 x 40% + 0.3 x 30% = 37%, so 38% is consistent with the explainer; the Guyana 30-50% (say 40%) and 30% elsewhere are stated judgments. The round-3 finding A is resolved. | resolved |
+| B. `glob_attribution_share` count | RFUS about $1.3M of roughly $8-15M (stated as "about 1.3 of 12", 10.8%) against 10% (3-30%): consistent, the guesses are labelled as guesses. The round-3 finding B is resolved. | resolved |
+| C. `glob_ha` | No change needed, as round 3 said. | n/a |
+| Write-up table | Elsewhere share 38%, matches the row. | ok |
+| Beneficiaries | Branch shares below: pay 29.9%, so world 0.7005, Peru 0.299 x 291/400 = 0.2178, Guyana 0.0568, Brazil 0.0194, Panama 0.0054. These match the model and scripts/beneficiary-countries.ts (the two agree). | ok |
+
+## Figures against the model
+Branch shares at the defaults, from scratch copies with each branch's credit set to 0 (base 0.01157):
+
+| Branch | Share | Summary / write-up says |
+|---|---|---|
+| Peru's territories | 49.1% | "about half" |
+| Other territories | 8.5% | none stated |
+| Global work | 3.5% | "about 3%" (3.46%; a rounding, fine) |
+| Titles | 9.0% | none stated |
+| Patrollers' pay | 29.9% | "three tenths" |
+| Pandemic risk (risk_per_ha_year zeroed) | 56.2% | "nearly three fifths" |
+
+The headline 0.01157 rounds to the 0.012 in the summary and write-up.
+
+## New findings
+None.
+
+Verdict: pass (0 high, 0 medium, 0 low).
+Model-sha: a1b9d204fe25ae427b3c0419523e5753faf94d1b43a8d426bea51a296747531e
