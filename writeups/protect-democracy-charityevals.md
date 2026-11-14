@@ -19,7 +19,7 @@ Forecasters give the US about an 11% chance of falling to a "hybrid regime" befo
   - a slide to a hybrid regime counts as 60% of the full loss, and the cross-country effect counts at 0.8 for a rich country;
   - a year of the field's work removes a judged 4.5% of the 11% chance;
   - Protect Democracy's credit is its share of the money behind that work, about 1.3%. The field is $3 billion a year of foundation money, scaled up for other donors, with the work that acts less directly counted at a fifth.
-- **Proportional-representation branch (about 7% of spending):** about 230,000 people a year newly governed under proportional representation in expectation, as when Portland, Oregon, adopted it in 2022. The reform is worth a judged 5% of democracy's gain. Protect Democracy's share of the movement's money is about 29%. This branch is about a sixth of the result.
+- **Proportional-representation branch (about 7% of spending):** about 230,000 people a year newly governed under proportional representation in expectation, as when Portland, Oregon, adopted it in 2022. The reform is worth a judged 5% of democracy's gain. Protect Democracy's share of the movement's money is about 29%. This branch is about a fifth of the result.
 - **Side effects:** the good of democracy beyond income (+30%) and backlash (−5%) in both branches; repression averted (+5%) and effects on democracy abroad (+20%) in the backsliding branch only. Each is a share of the income value.
 - **Next dollar:** 35% of the average. Protect Democracy held $93 million of net assets at the end of 2024, about 2.7 years of spending, almost all of it unrestricted.
 
@@ -30,6 +30,9 @@ Forecasters give the US about an 11% chance of falling to a "hybrid regime" befo
 3. Democracy's long-run income gain (7% to 35%).
 4. The forecast chance of a slide (5% to 28%).
 5. People newly governed under proportional representation each year (50,000 to 2 million).
+6. How much of the full loss a slide to a hybrid regime brings (30% to 100%).
+7. The share of the field's money doing work like Protect Democracy's (20% to 70%).
+8. The yearly chance a slide is undone (2% to 10%).
 
 ### Biggest uncertainties
 
