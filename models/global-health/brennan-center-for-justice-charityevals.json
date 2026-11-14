@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "brennan-center-for-justice",
   "owner": "charityevals",
-  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Three branches: its 1.2% share of the litigation that ended the emergency tariffs in February 2026 (about 0.12% of long-run US GDP restored, and more than as much again for trading partners, China above all), half of it done in the year; its 2% share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up; and its 1.6% share of the reform field's part in the fall in incarceration, valued by prisoners' wellbeing and shortened lives. With its next dollar at 32% of the average (it holds about two years of spending in liquid reserves), it comes to about 0.07 years of healthy life per 1,000 dollars, four fifths of it from the tariff ruling. The result is mostly uncertainty (the Center's share of the tariff litigation, the years a win counts, the field's effect on the breakdown risk; the model's own ranges alone span several hundredfold), and all three branches are discounted by the shared missing-data slider.",
+  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Four branches: its 1.2% share of the litigation that ended the emergency tariffs in February 2026 (about 0.12% of long-run US GDP restored, and more than as much again for trading partners, China above all), half of it done in the year; its direct work against a slide (about a third of its democracy spending), 0.7% of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up; the rest of its democracy spending (voting rights, redistricting, money in politics), counted as reform work only, at the figures the Common Cause Education Fund model uses for reforms within a democracy, never also against a slide; and its 1.6% share of the reform field's part in the fall in incarceration, valued by prisoners' wellbeing and shortened lives. With its next dollar at 32% of the average (it holds about two years of spending in liquid reserves), it comes to about 0.07 years of healthy life per 1,000 dollars, four fifths of it from the tariff ruling. The result is mostly uncertainty (the Center's share of the tariff litigation, the years a win counts, the field's effect on the breakdown risk, how much a reform dollar does against a redistricting dollar; the model's own ranges alone span several hundredfold), and all branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Brennan Center for Justice",
@@ -83,7 +83,7 @@
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "The Brennan Center's own spending in the year to 30 June 2025 on its six programme columns, with its share of management and fundraising, split between the democracy work (Democracy, Liberty and National Security: the breakdown-risk and tariff branches) and the justice branch by their direct spending. From the audited statement of functional expenses; donated legal services are left out."
+      "explainer": "The Brennan Center's own spending in the year to 30 June 2025 on its six programme columns, with its share of management and fundraising, split between the democracy work (Democracy, Liberty and National Security) and the justice branch by their direct spending, and the democracy work between direct work against a slide and reform work (voting rights, redistricting, money in politics and similar, valued in the reform branch alone). From the audited statement of functional expenses; donated legal services are left out."
     },
     {
       "id": "reach",
@@ -93,7 +93,7 @@
     {
       "id": "effect",
       "title": "Effect per unit",
-      "explainer": "What the work changes: the chance that US democracy breaks down, valued by the income a breakdown would cost; the income the emergency tariffs cost the US and its trading partners until the courts struck them down; and years out of prison, valued by wellbeing and the deaths that prison causes. Each counts the whole field's or the whole litigation's effect; the Center's share is in the adjustments."
+      "explainer": "What the work changes: the chance that US democracy breaks down, valued by the income a breakdown would cost; the income a reform within a democracy brings, at the Common Cause Education Fund model's figures; the income the emergency tariffs cost the US and its trading partners until the courts struck them down; and years out of prison, valued by wellbeing and the deaths that prison causes. Each counts the whole field's or the whole litigation's effect; the Center's share is in the adjustments."
     },
     {
       "id": "adjustments",
@@ -286,6 +286,55 @@
       "formula": "cost_total * dem_cost_share"
     },
     {
+      "id": "lns_direct_share",
+      "section": "cost",
+      "label": "Share of Liberty and National Security work that checks executive power directly (against a slide)",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Emergency powers, the military at home and the checks on a president are direct work against a slide (the field's 'direct' dollar); surveillance and secrecy reform is reform work, valued in the reform branch. Judged 80% (60% to 100%)."
+    },
+    {
+      "id": "dem_direct_in_democracy",
+      "section": "cost",
+      "label": "Share of the Democracy programme that acts on a slide directly (election protection, defending election officials, courts)",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "Of the Democracy programme, election security, defending election officials and the courts act on a slide directly (the field's 'direct' dollar); voting rights and access, redistricting and money in politics are reforms within a democracy, valued in the reform branch alone and never also against a slide (the family's rule). Judged 25% (10% to 40%). Anchor: the Protect Democracy model's direct work (election-official training, litigation and accountability) and the Common Cause Education Fund model's 35% for its whole programme; Brennan's democracy programme is mostly voting-rights and money-in-politics policy."
+    },
+    {
+      "id": "dem_direct_share",
+      "section": "cost",
+      "label": "Share of the democracy cost that acts on a slide directly",
+      "format": "percent",
+      "formula": "(lns_fy2025 * lns_direct_share + dem_fy2025 * dem_direct_in_democracy) / (dem_fy2025 + lns_fy2025)",
+      "explainer": "Direct work over the democracy cost (communications, fellows and advocacy follow the same split): about a third."
+    },
+    {
+      "id": "dem_slide_cost",
+      "section": "cost",
+      "label": "Cost of the direct work against a slide, including overhead",
+      "format": "usd",
+      "formula": "dem_cost * dem_direct_share"
+    },
+    {
+      "id": "ref_cost",
+      "section": "cost",
+      "label": "Cost of the reform work (voting rights, redistricting, money in politics and similar), including overhead",
+      "format": "usd",
+      "formula": "dem_cost * (1 - dem_direct_share)",
+      "explainer": "The rest of the democracy cost: reforms within a democracy, valued in the reform branch at the figures the Common Cause Education Fund model uses (the redistricting movement's, scaled by the shared relative effect of other reforms)."
+    },
+    {
       "id": "jus_cost",
       "section": "cost",
       "label": "Cost of the justice branch, including its share of communications, fellows, advocacy and overhead",
@@ -450,8 +499,8 @@
       "section": "adjustments",
       "label": "The Brennan Center's share of the field's resources",
       "format": "percent",
-      "formula": "dem_cost / dem_field_spending",
-      "explainer": "Its democracy cost over the field's effect-weighted resources (Convention 2): about 2%. All of its democracy work counts as direct (elections, courts, checks on power). Its donated legal services ($2.8 million) are other resources inside the field's total."
+      "formula": "dem_slide_cost / dem_field_spending",
+      "explainer": "Its direct democracy cost (dem_slide_cost) over the field's effect-weighted resources (Convention 2): under 1%. Only direct work against a slide counts here; its reform work is valued in the reform branch alone. Its tariff briefs' dollars sit in Liberty and National Security too; the tariff branch is valued by brief share, so the overlap (under 0.5%) is left."
     },
     {
       "id": "dem_evidence_adj",
@@ -747,6 +796,176 @@
       "format": "percent",
       "formula": "0",
       "explainer": "0: the trading partners' gains are in the main chain (tar_abroad_multiple), and the tariff revenue lost is a transfer replaced by other taxes or borrowing; nothing else is known to be left out."
+    },
+    {
+      "id": "ref_people_per_year",
+      "section": "reach",
+      "label": "People newly governed by a reform of the redistricting movement's size per year",
+      "format": "number",
+      "formula": "(@democracy.redistricting_people_strong + @democracy.redistricting_people_weak) / @democracy.redistricting_window_years",
+      "explainer": "The reform work is valued at the figures the Common Cause Education Fund model uses for reforms within a US democracy: the redistricting movement's wins per year (2008-2025), scaled by the relative effect of other reforms.",
+      "unit": "people"
+    },
+    {
+      "id": "ref_gain_share",
+      "section": "effect",
+      "label": "Share of democracy's income gain a redistricting commission brings",
+      "format": "percent",
+      "formula": "@democracy.redistricting_gain_share"
+    },
+    {
+      "id": "ref_ln_gain",
+      "section": "effect",
+      "label": "Income gained per person-year once the effect is fully built, ln(consumption) (reform branch)",
+      "format": "number",
+      "formula": "ln(1 + dem_gain_at_stake * ref_gain_share)"
+    },
+    {
+      "id": "ref_years_until_effect",
+      "section": "effect",
+      "label": "Years from a year's work until a won reform takes effect",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 8
+      },
+      "kind": "judgment",
+      "explainer": "A campaign takes about a year to win, and the reform takes effect after the next election or census cycle (the Common Cause Education Fund model's 4 years, 2 to 8).",
+      "unit": "years"
+    },
+    {
+      "id": "ref_wait_discount",
+      "section": "effect",
+      "label": "Discount for the wait (reform branch)",
+      "format": "number",
+      "formula": "(1 + $discount_rate) ^ (0 - ref_years_until_effect)"
+    },
+    {
+      "id": "ref_rate",
+      "section": "effect",
+      "label": "Discount rate plus repeal hazard (reform branch)",
+      "format": "percent",
+      "formula": "$discount_rate + @democracy.electoral_reform_repeal_rate"
+    },
+    {
+      "id": "ref_discounted_years",
+      "section": "effect",
+      "label": "Discounted full-effect years a won reform counts (its ramp brought forward)",
+      "format": "number",
+      "formula": "(1 - (1 + ref_rate) ^ (0 - years_of_impact)) * (1 - (1 + ref_rate) ^ (0 - dem_ramp_years)) / (ln(1 + ref_rate) * ln(1 + ref_rate) * dem_ramp_years) * ref_wait_discount",
+      "explainer": "The shifted ramp: the reform brought forward by the years counted moves its whole build-up, at the discount rate plus the repeal hazard, after the wait."
+    },
+    {
+      "id": "ref_value",
+      "section": "effect",
+      "label": "Units of value per year of the redistricting movement's work (before adjustments)",
+      "format": "number",
+      "formula": "ref_people_per_year * ref_ln_gain * $uov_per_ln_consumption * ref_discounted_years",
+      "unit": "UoV"
+    },
+    {
+      "id": "ref_relative_effect",
+      "section": "effect",
+      "label": "A dollar of reform work against a dollar of the redistricting movement",
+      "format": "multiple",
+      "formula": "@democracy.other_reform_relative_effect",
+      "explainer": "Voting rights, voting access, money in politics and the like count through any change in who is elected or what is decided, a quarter as much per dollar as the redistricting movement (the shared figure)."
+    },
+    {
+      "id": "ref_uov",
+      "section": "effect",
+      "label": "Units of value per year of reform work the size of the redistricting movement (before adjustments)",
+      "format": "number",
+      "formula": "ref_value * ref_relative_effect",
+      "unit": "UoV"
+    },
+    {
+      "id": "ref_movement_real",
+      "section": "adjustments",
+      "label": "The redistricting movement's yearly spending in 2025 prices",
+      "format": "usd",
+      "formula": "@democracy.redistricting_movement_resources * @cpi.usa_2025 / @cpi.usa_2024"
+    },
+    {
+      "id": "ref_attribution_share",
+      "section": "adjustments",
+      "label": "The Brennan Center's reform spending as a multiple of the redistricting movement's yearly spending",
+      "format": "multiple",
+      "formula": "ref_cost / ref_movement_real",
+      "explainer": "Reform value scales with dollars, as in the Common Cause Education Fund model (Convention 2, same movement figure); the Center's reform spending is about one and a half times the movement's, so this is not a share of anything. Each reform dollar is credited a quarter of a movement dollar's effect (ref_relative_effect), so the branch comes to about 0.4 movement-years. Diminishing returns to a larger programme are not modelled."
+    },
+    {
+      "id": "ref_weak_delivery",
+      "section": "adjustments",
+      "label": "Share of an independent commission's effect the weaker reforms deliver",
+      "format": "percent",
+      "formula": "@democracy.redistricting_weak_delivery"
+    },
+    {
+      "id": "ref_implementation_adj",
+      "section": "adjustments",
+      "label": "Share of a full commission's effect the reformed states get",
+      "format": "percent",
+      "formula": "(@democracy.redistricting_people_strong + @democracy.redistricting_people_weak * ref_weak_delivery) / (@democracy.redistricting_people_strong + @democracy.redistricting_people_weak)"
+    },
+    {
+      "id": "ref_evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment, reform branch",
+      "format": "multiple",
+      "formula": "@democracy.redistricting_evidence_adj"
+    },
+    {
+      "id": "ref_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the reform outcome that wouldn't have happened anyway",
+      "format": "multiple",
+      "formula": "1"
+    },
+    {
+      "id": "ref_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, reform branch",
+      "format": "multiple",
+      "formula": "$missing_data_discount"
+    },
+    {
+      "id": "ref_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments, reform branch",
+      "format": "multiple",
+      "formula": "ref_evidence_adj * ref_counterfactual_adj * ref_attribution_share * ref_implementation_adj * ref_missing_data_adj"
+    },
+    {
+      "id": "ref_ue_democratic_goods",
+      "section": "adjustments",
+      "label": "Side effect: fairer elections valued beyond income, reform branch",
+      "format": "percent",
+      "formula": "@democracy.electoral_reform_democratic_goods",
+      "side_effect": "added"
+    },
+    {
+      "id": "ref_ue_backlash",
+      "section": "adjustments",
+      "label": "Side effect: bans and counter-measures, reform branch",
+      "format": "percent",
+      "formula": "@democracy.electoral_reform_backlash",
+      "side_effect": "added"
+    },
+    {
+      "id": "ref_p_success",
+      "section": "effect",
+      "label": "Chance or share of the reform outcome the work causes",
+      "format": "multiple",
+      "formula": "1"
+    },
+    {
+      "id": "ref_unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Reform side effects, summed",
+      "format": "percent",
+      "formula": "ref_ue_democratic_goods + ref_ue_backlash"
     },
     {
       "id": "jus_people",
@@ -1082,6 +1301,14 @@
       "unit": "UoV"
     },
     {
+      "id": "ref_uov_adj",
+      "section": "outcome",
+      "label": "Reform branch, units of value (adjusted, side effects added)",
+      "format": "number",
+      "formula": "ref_uov * ref_total_adj * (1 + ref_unmodelled_benefits_adj)",
+      "unit": "UoV"
+    },
+    {
       "id": "jus_uov_adj",
       "section": "bridges",
       "label": "Justice branch deaths averted, units of value (adjusted, side effects added)",
@@ -1094,7 +1321,7 @@
       "section": "bridges",
       "label": "Income and deaths, in GiveWell units of value (adjusted)",
       "format": "number",
-      "formula": "dem_uov_adj + tar_uov_adj + jus_uov_adj",
+      "formula": "dem_uov_adj + tar_uov_adj + ref_uov_adj + jus_uov_adj",
       "unit": "UoV"
     },
     {
@@ -1140,6 +1367,13 @@
       "unit": "DALYs"
     },
     {
+      "id": "ref_dalys",
+      "section": "outcome",
+      "label": "Reform branch, healthy years",
+      "format": "number",
+      "formula": "dalys_from_uov * ref_uov_adj / uov_bridged"
+    },
+    {
       "id": "jus_dalys",
       "section": "outcome",
       "label": "Justice branch, healthy years",
@@ -1164,6 +1398,13 @@
       "unit": "DALYs"
     },
     {
+      "id": "ref_raw",
+      "section": "outcome",
+      "label": "Reform branch, healthy years before adjustments (weight for the averages)",
+      "format": "number",
+      "formula": "ref_dalys / (ref_total_adj * (1 + ref_unmodelled_benefits_adj))"
+    },
+    {
       "id": "jus_raw",
       "section": "outcome",
       "label": "Justice branch, healthy years before adjustments (weight for the averages)",
@@ -1176,7 +1417,7 @@
       "section": "outcome",
       "label": "All branches, healthy years before adjustments",
       "format": "number",
-      "formula": "dem_raw + tar_raw + jus_raw",
+      "formula": "dem_raw + tar_raw + ref_raw + jus_raw",
       "unit": "DALYs"
     },
     {
@@ -1227,7 +1468,7 @@
       "section": "effect",
       "label": "Years until the work takes effect (outcome-weighted average of the branches, for reading only)",
       "format": "number",
-      "formula": "(dem_raw * dem_years_until_effect + tar_raw * tar_years_until_effect + jus_raw * jus_years_until_effect) / raw_total",
+      "formula": "(dem_raw * dem_years_until_effect + tar_raw * tar_years_until_effect + ref_raw * ref_years_until_effect + jus_raw * jus_years_until_effect) / raw_total",
       "unit": "years"
     },
     {
@@ -1235,7 +1476,7 @@
       "section": "effect",
       "label": "Discount for the wait (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_wait_discount + tar_raw * tar_wait_discount + jus_raw * jus_wait_discount) / raw_total"
+      "formula": "(dem_raw * dem_wait_discount + tar_raw * tar_wait_discount + ref_raw * ref_wait_discount + jus_raw * jus_wait_discount) / raw_total"
     },
     {
       "id": "dem_discounted_years",
@@ -1251,7 +1492,7 @@
       "section": "effect",
       "label": "Discounted years of impact (outcome-weighted average of the branches, for reading only)",
       "format": "number",
-      "formula": "(dem_raw * dem_discounted_years + tar_raw * tar_discounted_years + jus_raw * jus_discounted_years) / raw_total",
+      "formula": "(dem_raw * dem_discounted_years + tar_raw * tar_discounted_years + ref_raw * ref_discounted_years + jus_raw * jus_discounted_years) / raw_total",
       "unit": "years"
     },
     {
@@ -1259,7 +1500,7 @@
       "section": "effect",
       "label": "Chance or share of each outcome the work causes (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_p_success + tar_raw * tar_p_success + jus_raw * jus_p_success) / raw_total"
+      "formula": "(dem_raw * dem_p_success + tar_raw * tar_p_success + ref_raw * ref_p_success + jus_raw * jus_p_success) / raw_total"
     },
     {
       "id": "released_people",
@@ -1300,7 +1541,7 @@
       "section": "adjustments",
       "label": "Share of the win that is enforced (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_implementation_adj + tar_raw * tar_implementation_adj + jus_raw * jus_implementation_adj) / raw_total",
+      "formula": "(dem_raw * dem_implementation_adj + tar_raw * tar_implementation_adj + ref_raw * ref_implementation_adj + jus_raw * jus_implementation_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own (all 1)."
     },
     {
@@ -1308,7 +1549,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(dem_raw * dem_evidence_adj + tar_raw * tar_evidence_adj + jus_raw * jus_evidence_adj) / raw_total",
+      "formula": "(dem_raw * dem_evidence_adj + tar_raw * tar_evidence_adj + ref_raw * ref_evidence_adj + jus_raw * jus_evidence_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
@@ -1316,7 +1557,7 @@
       "section": "adjustments",
       "label": "Share that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_counterfactual_adj + tar_raw * tar_counterfactual_adj + jus_raw * jus_counterfactual_adj) / raw_total",
+      "formula": "(dem_raw * dem_counterfactual_adj + tar_raw * tar_counterfactual_adj + ref_raw * ref_counterfactual_adj + jus_raw * jus_counterfactual_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own (all 1)."
     },
     {
@@ -1324,7 +1565,7 @@
       "section": "adjustments",
       "label": "The Brennan Center's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_attribution_share + tar_raw * tar_attribution_share + jus_raw * jus_attribution_share) / raw_total",
+      "formula": "(dem_raw * dem_attribution_share + tar_raw * tar_attribution_share + ref_raw * ref_attribution_share + jus_raw * jus_attribution_share) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
@@ -1340,7 +1581,7 @@
       "section": "adjustments",
       "label": "Missing-data discount (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_missing_data_adj + tar_raw * tar_missing_data_adj + jus_raw * jus_missing_data_adj) / raw_total",
+      "formula": "(dem_raw * dem_missing_data_adj + tar_raw * tar_missing_data_adj + ref_raw * ref_missing_data_adj + jus_raw * jus_missing_data_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: all three branches are thin and each applies $missing_data_discount itself."
     },
     {
@@ -1348,7 +1589,7 @@
       "section": "adjustments",
       "label": "All adjustments (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(dem_raw * dem_total_adj + tar_raw * tar_total_adj + jus_raw * jus_total_adj) / raw_total",
+      "formula": "(dem_raw * dem_total_adj + tar_raw * tar_total_adj + ref_raw * ref_total_adj + jus_raw * jus_total_adj) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
@@ -1356,7 +1597,7 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_total_adj * dem_unmodelled_benefits_adj + tar_raw * tar_total_adj * tar_unmodelled_benefits_adj + jus_raw * jus_total_adj * jus_unmodelled_benefits_adj) / (dem_raw * dem_total_adj + tar_raw * tar_total_adj + jus_raw * jus_total_adj)",
+      "formula": "(dem_raw * dem_total_adj * dem_unmodelled_benefits_adj + tar_raw * tar_total_adj * tar_unmodelled_benefits_adj + ref_raw * ref_total_adj * ref_unmodelled_benefits_adj + jus_raw * jus_total_adj * jus_unmodelled_benefits_adj) / (dem_raw * dem_total_adj + tar_raw * tar_total_adj + ref_raw * ref_total_adj + jus_raw * jus_total_adj)",
       "explainer": "The outcome-weighted average of the branches, for reading only: each branch adds its own side effects (dem_unmodelled_benefits_adj, tar_unmodelled_benefits_adj, jus_unmodelled_benefits_adj) in its bridge row, so outcome_total doesn't apply this again."
     },
     {
