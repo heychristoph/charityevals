@@ -3,7 +3,9 @@
   "name": "Prison Policy Initiative (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: incarcerated people and their families in the United States (federal phone caps, state free-call laws, decarceration).",
   "template": "rights-advocacy",
   "estimate_basis": "past_average",
@@ -258,7 +260,7 @@
     {
       "id": "fed_owner_multiple",
       "section": "effect",
-      "label": "Federal caps: phone-company owners' consumption as a multiple of the national average",
+      "label": "Federal caps: phone-company owners' consumption as a multiple of the US survey average per person",
       "format": "multiple",
       "value": {
         "low": 1,
@@ -266,7 +268,7 @@
         "high": 4
       },
       "kind": "judgment",
-      "explainer": "The part of the savings that comes out of the phone companies' margins falls on their owners, mostly private-equity funds and their investors, who are well off: 2 times the national-accounts average, from 1 to 4."
+      "explainer": "The part of the savings that comes out of the phone companies' margins falls on their owners, mostly private-equity funds and their investors, who are well off: 2 times the survey average per person (@united_states.ce_expenditure_per_person_2024, the base rule 2.14 gives groups), from 1 to 4, the multiple California YIMBY's model judges for landlords (2, from 1.2 to 3.5)."
     },
     {
       "id": "fed_commission_share",
@@ -286,9 +288,9 @@
       "section": "effect",
       "label": "Federal caps: value of a dollar families save, net of what the payers lose (units of value)",
       "format": "small",
-      "formula": "$uov_per_ln_consumption * (1 / family_consumption - fed_commission_share * @public_funds.mcpf / (@public_funds.us_state_local_payer_multiple * @united_states.consumption_per_person_2024) - (1 - fed_commission_share) / (fed_owner_multiple * @united_states.consumption_per_person_2024))",
+      "formula": "$uov_per_ln_consumption * (1 / family_consumption - fed_commission_share * @public_funds.mcpf / (@public_funds.us_state_local_payer_multiple * @united_states.consumption_per_person_2024) - (1 - fed_commission_share) / (fed_owner_multiple * @united_states.ce_expenditure_per_person_2024))",
       "unit": "UoV / $",
-      "explainer": "On the site's log scale a small change in consumption is worth the dollars over consumption per person (spread over a household, household size cancels): the families' gain less the payers' loss, the payers at the national-accounts mean (the site's rule for everyone's consumption): lost commissions as state and local money (the shared payer multiple and cost of public funds), the providers' share at their owners' multiple."
+      "explainer": "On the site's log scale a small change in consumption is worth the dollars over consumption per person (spread over a household, household size cancels): the families' gain less the payers' loss. The taxpayers (lost commissions as state and local money, at the shared payer multiple and cost of public funds) are at the national-accounts mean, the one group rule 2.14 puts on that base; the phone companies' owners are a group, so at the survey average times their multiple."
     },
     {
       "id": "st_uov_per_dollar",
