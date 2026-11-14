@@ -1002,13 +1002,8 @@
       "section": "adjustments",
       "label": "EPA vehicle standards: share of the tonnes that wouldn't have happened anyway",
       "format": "percent",
-      "value": {
-        "low": 0.4,
-        "best": 0.7,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "Share of EPA's estimate that wouldn't have happened anyway: carmakers' own electric-vehicle plans, California's and other states' rules and the tax credits then in force would have cut part of the tonnes; EPA's baseline holds the earlier standards. Our judgment, 70% (40% to 90%)."
+      "explainer": "The shared figure (facts: climate.us_light_medium_vehicle_rule_2024_counterfactual): one value for every model that counts this win.",
+      "formula": "@climate.us_light_medium_vehicle_rule_2024_counterfactual"
     },
     {
       "id": "veh_attribution_share_shared",
@@ -1035,32 +1030,16 @@
       "section": "adjustments",
       "label": "EPA vehicle standards: share of the win's tonnes delivered",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.05,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "EPA rescinded the endangerment finding and repealed every vehicle greenhouse-gas standard in February 2026; the 2025 budget law also ended the electric-vehicle credits. What remains is the chance the courts restore the standards or a later administration reissues them within the years counted. Our judgment, 5% (1% to 20%), like the repealed power-plant standards.",
-      "source": {
-        "title": "Jones Day (2026), EPA finalizes repeal of greenhouse gas endangerment finding",
-        "url": "https://www.jonesday.com/en/insights/2026/02/epa-finalizes-repeal-of-greenhouse-gas-endangerment-finding",
-        "note": "Final rule signed in February 2026 rescinding the 2009 endangerment finding and repealing the motor-vehicle greenhouse-gas standards.",
-        "retrieved": "2026-11-14"
-      }
+      "explainer": "The shared figure (facts: climate.us_light_medium_vehicle_rule_2024_delivered_share): one value for every model that counts this win.",
+      "formula": "@climate.us_light_medium_vehicle_rule_2024_delivered_share"
     },
     {
       "id": "ira_counterfactual_adj",
       "section": "adjustments",
       "label": "Inflation Reduction Act: share of the tonnes that wouldn't have happened anyway",
       "format": "percent",
-      "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 1.0
-      },
-      "kind": "judgment",
-      "explainer": "REPEAT's projection is against the policies already in force in 2022; some of the clean power would have come on falling costs alone, and the credits pay some projects that would have been built anyway. Our judgment, 80% (60% to 100%)."
+      "explainer": "The shared figure (facts: climate.ira_counterfactual): one value for every model that counts this win.",
+      "formula": "@climate.ira_counterfactual"
     },
     {
       "id": "ira_attribution_share_shared",
@@ -1087,19 +1066,8 @@
       "section": "adjustments",
       "label": "Inflation Reduction Act: share of the projected tonnes delivered",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.35,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "The 2025 budget law ended the wind and solar credits for projects starting after 2027, the electric-vehicle credits in 2025 and the methane fee, and REPEAT's own analysis put the cut in new clean power by 2035 at 57% to 72%; projections of the credits had also run ahead of what was built. Our judgment, 35% of the projected cut delivered (15% to 60%).",
-      "source": {
-        "title": "Carbon Brief (2025), Trump's 'big beautiful bill' blows US emissions goal by 7bn tonnes (REPEAT Project modelling)",
-        "url": "https://www.carbonbrief.org/chart-trumps-big-beautiful-bill-blows-us-emissions-goal-by-7bn-tonnes/",
-        "note": "REPEAT (3 July 2025): with the law's rollbacks US emissions fall only about 3% below current levels by 2030.",
-        "retrieved": "2026-11-14"
-      }
+      "explainer": "The shared figure (facts: climate.ira_delivered_share): one value for every model that counts this win.",
+      "formula": "@climate.ira_delivered_share"
     },
     {
       "id": "msat_counterfactual_adj",
@@ -1330,25 +1298,12 @@
       "explainer": "Power plants and vehicles burn less fuel (the Inflation Reduction Act's tonnes are mostly clean power displacing coal and gas); methane leaks carry no fuel smoke."
     },
     {
-      "id": "veh_smoke_factor",
-      "section": "conversion",
-      "label": "Air-pollution deaths per tonne cut from US cars and light trucks, relative to the fossil-fuel average",
-      "format": "number",
-      "value": {
-        "low": 0.02,
-        "best": 0.04,
-        "high": 0.1
-      },
-      "kind": "judgment",
-      "explainer": "EPA's own analysis of the 2024 vehicle standards projects up to 2,500 fewer premature deaths a year from fine particles by 2055 against cuts of a few hundred million tonnes of CO₂ a year, about 0.04 of the world fossil-fuel average (1.46 per 10,000 tonnes); the electricity replacing petrol carries some smoke of its own. Our judgment, 0.04 (0.02 to 0.1)."
-    },
-    {
       "id": "fuel_smoke_factor",
       "section": "conversion",
       "label": "Air-pollution deaths per tonne of these fuel tonnes, relative to the fossil-fuel average",
       "format": "number",
-      "formula": "(pwr_expected_tonnes * @climate.us_coal_power_smoke_factor + veh_expected_tonnes * veh_smoke_factor + ira_expected_tonnes * @climate.us_power_smoke_factor) / (pwr_expected_tonnes + veh_expected_tonnes + ira_expected_tonnes)",
-      "explainer": "Per fuel and place: the power-plant standards' tonnes are coal plants' (facts: climate.us_coal_power_smoke_factor, as in Clean Air Task Force's model); the vehicle standards' are cars' (row above); the Inflation Reduction Act's are the US power mix's (facts: climate.us_power_smoke_factor, from the law's health modelling). Weighted by each branch's expected tonnes."
+      "formula": "(pwr_expected_tonnes * @climate.us_coal_power_smoke_factor + veh_expected_tonnes * @climate.us_vehicle_smoke_factor + ira_expected_tonnes * @climate.us_power_smoke_factor) / (pwr_expected_tonnes + veh_expected_tonnes + ira_expected_tonnes)",
+      "explainer": "Per fuel and place: the power-plant standards' tonnes are coal plants' (facts: climate.us_coal_power_smoke_factor, as in Clean Air Task Force's model); the vehicle standards' are cars' (facts: climate.us_vehicle_smoke_factor); the Inflation Reduction Act's are the US power mix's (facts: climate.us_power_smoke_factor, from the law's health modelling). Weighted by each branch's expected tonnes."
     },
     {
       "id": "air_pollution_weight",
