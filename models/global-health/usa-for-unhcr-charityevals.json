@@ -35,7 +35,7 @@
   "estimate_basis": "unit_cost",
   "charity": "usa-for-unhcr",
   "owner": "charityevals",
-  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.8 million as donated clothes, hygiene kits, software and transport, and $8.2 million on awareness work; fundraising took $26.6 million, so each dollar granted costs about $1.51 of donations. The grants are valued as UNHCR's 2025 programme mix from its audited accounts: cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about 0.094 years of healthy life per $1,000 (combined range 0.02-0.45: the result is mostly uncertainty), near the site's global-health median and close to charityevals' Save the Children and World Vision models; the biggest uncertainties are the missing-data discount, what registration and documents are worth to refugees, and UNHCR's cost per person reached.",
+  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.8 million as donated clothes, hygiene kits, software and transport, and $8.2 million on awareness work; fundraising took $26.6 million, so each dollar granted costs about $1.51 of donations. The grants are valued as UNHCR's 2025 programme mix (its audited impact areas, split further by judgment): cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about 0.061 years of healthy life per $1,000 (combined range 0.014-0.26: the result is mostly uncertainty), about two-thirds of the site's global-health median and below charityevals' Save the Children and World Vision models, mostly because a third of each dollar pays for fundraising and management in the US and a quarter of UNHCR's for its own support costs; the biggest uncertainties are the missing-data discount, how many refugees' papers bring them rights, and how poor the people reached are.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: USA for UNHCR (2025)",
@@ -243,17 +243,29 @@
       "unit": "$ millions"
     },
     {
+      "id": "unhcr_exp_ia2",
+      "section": "reach",
+      "label": "UNHCR's 2025 expenditure on impact area 2, realizing rights in safe environments ($ millions)",
+      "format": "number",
+      "value": 1707.6,
+      "kind": "observed",
+      "source": {
+        "title": "UNHCR, Financial report and audited financial statements for the year ended 31 December 2025 and report of the Board of Auditors (A/81/5/Add.6)",
+        "url": "https://digitallibrary.un.org/record/4126985/files/A_81_5_Add.6-EN.pdf",
+        "quote": "Impact area 2 4 624.6 1 714.3 1 707.6",
+        "retrieved": "2026-11-14",
+        "page": "Table IV.3, p. 97"
+      },
+      "explainer": "Basic needs (cash and core relief items), shelter and settlements, health, education, water and sanitation.",
+      "unit": "$ millions"
+    },
+    {
       "id": "rel_share",
       "section": "reach",
       "label": "Share of UNHCR's spending on basic needs, shelter and water (relief)",
       "format": "percent",
-      "value": {
-        "low": 0.22,
-        "best": 0.29,
-        "high": 0.36
-      },
-      "kind": "judgment",
-      "explainer": "UNHCR doesn't split its audited expenditure finer than four impact areas. Anchors: its Global Report 2025 puts the well-being and basic needs outcome area (cash and core relief items) at $689M (18% of $3,822M) and shelter and settlements at about $285M (7.5%); water and sanitation is smaller (3-5%). Judgment 29% (22-36%)."
+      "formula": "unhcr_exp_ia2 / unhcr_exp_total - hlt_share - edu_share",
+      "explainer": "The audited impact area 2 (45% of spending) less the judged health and education shares: about 33%. Cross-check: UNHCR's Global Report 2025 puts the basic needs outcome area at $689M (18%) and shelter at about $285M (7.5%), with water 3-5%."
     },
     {
       "id": "hlt_share",
@@ -308,7 +320,49 @@
       "label": "Share of UNHCR's spending on protection (the rest)",
       "format": "percent",
       "formula": "1 - rel_share - hlt_share - edu_share - liv_share - sol_share",
-      "explainer": "Everything else: registration and documentation, refugee status determination, protection policy and law, gender-based violence, child protection, safety and access to justice, community engagement; about 43%, close to impact area 1's 31% plus most of impact area 3 (14%)."
+      "explainer": "Everything else: registration and documentation, refugee status determination, protection policy and law, gender-based violence, child protection, safety and access to justice, community engagement; about 40%, impact area 1 (31%) and impact area 3 (14%) less livelihoods."
+    },
+    {
+      "id": "unhcr_exp_all",
+      "section": "reach",
+      "label": "UNHCR's total 2025 expenditure ($ millions)",
+      "format": "number",
+      "value": 3830.4,
+      "kind": "observed",
+      "source": {
+        "title": "UNHCR, Financial report and audited financial statements for the year ended 31 December 2025 and report of the Board of Auditors (A/81/5/Add.6)",
+        "url": "https://digitallibrary.un.org/record/4126985/files/A_81_5_Add.6-EN.pdf",
+        "quote": "Total expenditure 3 830.4 100.0 4 932.6 100.0",
+        "retrieved": "2026-11-14",
+        "page": "Table IV.4, p. 98"
+      },
+      "explainer": "Programme, programme support, management and the Junior Professional Officers Programme.",
+      "unit": "$ millions"
+    },
+    {
+      "id": "unhcr_exp_programme",
+      "section": "reach",
+      "label": "UNHCR's 2025 expenditure on programme, before support and management ($ millions)",
+      "format": "number",
+      "value": 2766.8,
+      "kind": "observed",
+      "source": {
+        "title": "UNHCR, Financial report and audited financial statements for the year ended 31 December 2025 and report of the Board of Auditors (A/81/5/Add.6)",
+        "url": "https://digitallibrary.un.org/record/4126985/files/A_81_5_Add.6-EN.pdf",
+        "quote": "Programme 2 766.8 72.2 3 818.1 77.4",
+        "retrieved": "2026-11-14",
+        "page": "Table IV.4, p. 98"
+      },
+      "explainer": "The delivery cost the judged unit costs below are anchored on.",
+      "unit": "$ millions"
+    },
+    {
+      "id": "unhcr_support_markup",
+      "section": "reach",
+      "label": "UNHCR's full cost per dollar of programme delivery",
+      "format": "multiple",
+      "formula": "unhcr_exp_all / unhcr_exp_programme",
+      "explainer": "About 1.38: programme support (22%) and management (5.6%) on top of delivery. The sector shares include them, so every judged delivery cost below is multiplied by it before dividing the spending."
     },
     {
       "id": "rel_spend",
@@ -369,7 +423,7 @@
         "high": 150
       },
       "kind": "judgment",
-      "explainer": "UNHCR delivered $481M of cash itself in 2025 (A/81/5/Add.6, note 6.3) plus more through partners and $269M of relief supplies; its cash grants run from one-off winter or emergency payments of $50-150 a person to monthly help in the Middle East, and shelter kits cost more. With support costs: judgment $60 a person ($30-150). Reference class: $30 for World Vision's relief, $40 for Save the Children's emergencies."
+      "explainer": "Already a full cost, support included: UNHCR delivered $481M of cash itself in 2025 (A/81/5/Add.6, note 6.3) plus more through partners and $269M of relief supplies; its cash grants run from one-off winter or emergency payments of $50-150 a person to monthly help in the Middle East, and shelter kits cost more. With support costs: judgment $60 a person ($30-150). Reference class: $30 for World Vision's relief, $40 for Save the Children's emergencies."
     },
     {
       "id": "people_reached",
@@ -536,25 +590,188 @@
       "explainer": "Turns 2025 dollars into 2017 dollars before the 2017 PPP factor (Convention 8)."
     },
     {
+      "id": "grants_africa",
+      "section": "effect",
+      "label": "USA for UNHCR's 2025 grants to Sub-Saharan Africa",
+      "format": "usd",
+      "value": 19689744,
+      "kind": "observed",
+      "source": {
+        "title": "USA for UNHCR (United States Association for UNHCR), Form 990 for calendar 2025 (filed August 2026; Part XII: financial statements audited), IRS e-file XML",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202622319349300112_public.xml",
+        "quote": "<RegionTxt>Sub-Saharan Africa</RegionTxt> ... <RegionTotalExpendituresAmt>19689744</RegionTotalExpendituresAmt>",
+        "retrieved": "2026-11-14",
+        "page": "Schedule F Part I"
+      },
+      "explainer": "Schedule F Part I, used only to weight the stand-in countries below; the Americas and East Asia (10%) are spread over the four in proportion."
+    },
+    {
+      "id": "grants_mena",
+      "section": "effect",
+      "label": "USA for UNHCR's 2025 grants to the Middle East and North Africa",
+      "format": "usd",
+      "value": 12112708,
+      "kind": "observed",
+      "source": {
+        "title": "USA for UNHCR (United States Association for UNHCR), Form 990 for calendar 2025 (filed August 2026; Part XII: financial statements audited), IRS e-file XML",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202622319349300112_public.xml",
+        "quote": "<RegionTxt>Middle East and North Africa</RegionTxt> ... <RegionTotalExpendituresAmt>12112708</RegionTotalExpendituresAmt>",
+        "retrieved": "2026-11-14",
+        "page": "Schedule F Part I"
+      },
+      "explainer": "Schedule F Part I, used only to weight the stand-in countries below; the Americas and East Asia (10%) are spread over the four in proportion."
+    },
+    {
+      "id": "grants_south_asia",
+      "section": "effect",
+      "label": "USA for UNHCR's 2025 grants to South Asia",
+      "format": "usd",
+      "value": 8201757,
+      "kind": "observed",
+      "source": {
+        "title": "USA for UNHCR (United States Association for UNHCR), Form 990 for calendar 2025 (filed August 2026; Part XII: financial statements audited), IRS e-file XML",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202622319349300112_public.xml",
+        "quote": "<RegionTxt>South Asia</RegionTxt> ... <RegionTotalExpendituresAmt>8201757</RegionTotalExpendituresAmt>",
+        "retrieved": "2026-11-14",
+        "page": "Schedule F Part I"
+      },
+      "explainer": "Schedule F Part I, used only to weight the stand-in countries below; the Americas and East Asia (10%) are spread over the four in proportion."
+    },
+    {
+      "id": "grants_europe",
+      "section": "effect",
+      "label": "USA for UNHCR's 2025 grants to Europe",
+      "format": "usd",
+      "value": 6044819,
+      "kind": "observed",
+      "source": {
+        "title": "USA for UNHCR (United States Association for UNHCR), Form 990 for calendar 2025 (filed August 2026; Part XII: financial statements audited), IRS e-file XML",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202622319349300112_public.xml",
+        "quote": "<RegionTxt>Europe</RegionTxt> ... <RegionTotalExpendituresAmt>6044819</RegionTotalExpendituresAmt>",
+        "retrieved": "2026-11-14",
+        "page": "Schedule F Part I"
+      },
+      "explainer": "Schedule F Part I, used only to weight the stand-in countries below; the Americas and East Asia (10%) are spread over the four in proportion."
+    },
+    {
+      "id": "grants_russia_neighbours",
+      "section": "effect",
+      "label": "USA for UNHCR's 2025 grants to Russia and neighbouring states",
+      "format": "usd",
+      "value": 2218259,
+      "kind": "observed",
+      "source": {
+        "title": "USA for UNHCR (United States Association for UNHCR), Form 990 for calendar 2025 (filed August 2026; Part XII: financial statements audited), IRS e-file XML",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202622319349300112_public.xml",
+        "quote": "<RegionTxt>Russia and Neighboring States</RegionTxt> ... <RegionTotalExpendituresAmt>2218259</RegionTotalExpendituresAmt>",
+        "retrieved": "2026-11-14",
+        "page": "Schedule F Part I"
+      },
+      "explainer": "Schedule F Part I, used only to weight the stand-in countries below; the Americas and East Asia (10%) are spread over the four in proportion."
+    },
+    {
+      "id": "grants_four_regions",
+      "section": "effect",
+      "label": "Grants to the four regions with stand-in countries",
+      "format": "usd",
+      "formula": "grants_africa + grants_mena + grants_south_asia + grants_europe + grants_russia_neighbours"
+    },
+    {
+      "id": "w_kenya",
+      "section": "effect",
+      "label": "Weight of Kenya (stand-in for Sub-Saharan Africa)",
+      "format": "percent",
+      "formula": "grants_africa / grants_four_regions"
+    },
+    {
+      "id": "w_lebanon",
+      "section": "effect",
+      "label": "Weight of Lebanon (stand-in for the Middle East)",
+      "format": "percent",
+      "formula": "grants_mena / grants_four_regions"
+    },
+    {
+      "id": "w_bangladesh",
+      "section": "effect",
+      "label": "Weight of Bangladesh (stand-in for South Asia)",
+      "format": "percent",
+      "formula": "grants_south_asia / grants_four_regions"
+    },
+    {
+      "id": "w_ukraine",
+      "section": "effect",
+      "label": "Weight of Ukraine (stand-in for Europe and its neighbours)",
+      "format": "percent",
+      "formula": "(grants_europe + grants_russia_neighbours) / grants_four_regions"
+    },
+    {
       "id": "ppp_factor",
       "section": "effect",
       "label": "PPP conversion (2017 international $ per US $)",
       "format": "multiple",
-      "formula": "avg(@sudan.ppp_factor_2017, @bangladesh.ppp_factor_2017, @lebanon.ppp_factor_2017, @ukraine.ppp_factor_2017)",
-      "explainer": "The site's factors for four of the largest places UNHCR's relief reaches (Sudan and its neighbours, Bangladesh's Rohingya camps, Lebanon, Ukraine)."
+      "formula": "w_kenya * @kenya.ppp_factor_2017 + w_lebanon * @lebanon.ppp_factor_2017 + w_bangladesh * @bangladesh.ppp_factor_2017 + w_ukraine * @ukraine.ppp_factor_2017",
+      "explainer": "The site's factors for four stand-in countries (Kenya for the African camps, Lebanon, Bangladesh, Ukraine), weighted by USA for UNHCR's grants by region."
+    },
+    {
+      "id": "cpi_2017_vs_2024",
+      "section": "effect",
+      "label": "US prices of 2017 per 2024 dollar",
+      "format": "multiple",
+      "formula": "@cpi.usa_2017 / @cpi.usa_2024",
+      "explainer": "Puts the 2024 national-accounts figures into 2017 prices, the PPP factors' base."
+    },
+    {
+      "id": "refugee_consumption_share",
+      "section": "effect",
+      "label": "Refugees' consumption as a share of their host country's survey mean",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.45,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Refugees consume well below their hosts: most Syrian refugees in Lebanon live below the survival minimum expenditure basket (UNHCR, UNICEF and WFP's yearly vulnerability assessment), refugees in Kenya's and Uganda's camps live mostly on aid rations, Rohingya in Cox's Bazar below Bangladesh's poor; Ukrainians displaced in Ukraine nearer the national mean. Judgment 45% (25-75%), anchored on the American Red Cross international model's share for disaster-affected households (42%, 28-70%)."
+    },
+    {
+      "id": "baseline_kenya",
+      "section": "effect",
+      "label": "Baseline consumption, Kenya stand-in (2017 PPP $)",
+      "format": "usd",
+      "formula": "refugee_consumption_share * @survey_consumption.ken_survey_mean_2021ppp_day * 365 * @survey_consumption.ken_real_growth_survey_to_2024 * @survey_consumption.ken_consumption_price_level_2024 * @kenya.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "The World Bank's household-survey mean for Kenya (2021 PPP $ a day) a year, grown to 2024, into 2024 US$ by the price level, then into the 2017 PPP base like the relief."
+    },
+    {
+      "id": "baseline_lebanon",
+      "section": "effect",
+      "label": "Baseline consumption, Lebanon stand-in (2017 PPP $)",
+      "format": "usd",
+      "formula": "refugee_consumption_share * @survey_consumption.survey_to_na_world_median * @lebanon.consumption_per_person_2024 * @lebanon.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "National-accounts consumption on the survey scale (the shared world-median ratio), as the American Red Cross international model."
+    },
+    {
+      "id": "baseline_bangladesh",
+      "section": "effect",
+      "label": "Baseline consumption, Bangladesh stand-in (2017 PPP $)",
+      "format": "usd",
+      "formula": "refugee_consumption_share * @survey_consumption.survey_to_na_bgd * @bangladesh.consumption_per_person_2024 * @bangladesh.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "As the American Red Cross international model."
+    },
+    {
+      "id": "baseline_ukraine",
+      "section": "effect",
+      "label": "Baseline consumption, Ukraine stand-in (2017 PPP $)",
+      "format": "usd",
+      "formula": "refugee_consumption_share * @survey_consumption.survey_to_na_ukr * @ukraine.consumption_per_person_2024 * @ukraine.ppp_factor_2017 * cpi_2017_vs_2024",
+      "explainer": "As the American Red Cross international model."
     },
     {
       "id": "baseline_consumption",
       "section": "effect",
       "label": "Consumption per person per year of the people reached (2017 PPP $)",
       "format": "usd",
-      "value": {
-        "low": 500,
-        "best": 900,
-        "high": 1500
-      },
-      "kind": "judgment",
-      "explainer": "Refugees in camps in Africa and Bangladesh live near or below the extreme-poverty line ($785 a year); those in Lebanon, Jordan and Ukraine on more, though most Syrian refugees in Lebanon are below its poverty line. Judgment $900 a year ($500-1,500)."
+      "formula": "w_kenya * baseline_kenya + w_lebanon * baseline_lebanon + w_bangladesh * baseline_bangladesh + w_ukraine * baseline_ukraine",
+      "explainer": "The stand-in countries' refugee baselines, weighted by the grants' regions (normalization.md 2.14: survey consumption of the people served)."
     },
     {
       "id": "ln_gain_per_person",
@@ -567,7 +784,7 @@
     {
       "id": "hlt_cost_per_person",
       "section": "reach",
-      "label": "UNHCR's cost per person-year of health and nutrition care",
+      "label": "UNHCR's cost per person-year of health and nutrition care (delivery, before support costs)",
       "format": "usd",
       "value": {
         "low": 6,
@@ -582,7 +799,7 @@
       "section": "reach",
       "label": "Person-years of health care funded",
       "format": "integer",
-      "formula": "hlt_spend / hlt_cost_per_person"
+      "formula": "hlt_spend / (hlt_cost_per_person * unhcr_support_markup)"
     },
     {
       "id": "hlt_mortality_rate",
@@ -635,7 +852,7 @@
     {
       "id": "edu_cost_per_child",
       "section": "reach",
-      "label": "UNHCR's cost per refugee child supported in school for a year",
+      "label": "UNHCR's cost per refugee child supported in school for a year (delivery, before support costs)",
       "format": "usd",
       "value": {
         "low": 60,
@@ -650,7 +867,7 @@
       "section": "reach",
       "label": "Refugee children supported",
       "format": "integer",
-      "formula": "edu_spend / edu_cost_per_child"
+      "formula": "edu_spend / (edu_cost_per_child * unhcr_support_markup)"
     },
     {
       "id": "edu_learning_gain_sd",
@@ -733,7 +950,7 @@
     {
       "id": "liv_cost_per_household",
       "section": "reach",
-      "label": "UNHCR's cost per refugee household in livelihood support",
+      "label": "UNHCR's cost per refugee household in livelihood support (delivery, before support costs)",
       "format": "usd",
       "value": {
         "low": 100,
@@ -748,7 +965,7 @@
       "section": "reach",
       "label": "Refugee households supported",
       "format": "integer",
-      "formula": "liv_spend / liv_cost_per_household"
+      "formula": "liv_spend / (liv_cost_per_household * unhcr_support_markup)"
     },
     {
       "id": "liv_household_size",
@@ -809,7 +1026,7 @@
     {
       "id": "pro_cost_per_person",
       "section": "reach",
-      "label": "Cost per person given protection services",
+      "label": "Cost per person given protection services (delivery, before support costs)",
       "format": "usd",
       "value": {
         "low": 30,
@@ -824,7 +1041,7 @@
       "section": "reach",
       "label": "People given protection services",
       "format": "integer",
-      "formula": "pro_spend * pro_services_share / pro_cost_per_person"
+      "formula": "pro_spend * pro_services_share / (pro_cost_per_person * unhcr_support_markup)"
     },
     {
       "id": "pro_share_distressed",
@@ -884,7 +1101,7 @@
     {
       "id": "pro_doc_cost_per_person",
       "section": "reach",
-      "label": "Cost per refugee registered, documented or given legal help",
+      "label": "Cost per refugee registered, documented or given legal help (delivery, before support costs)",
       "format": "usd",
       "value": {
         "low": 10,
@@ -899,20 +1116,48 @@
       "section": "reach",
       "label": "Refugees registered, documented or given legal help",
       "format": "integer",
-      "formula": "pro_spend * (1 - pro_services_share) / pro_doc_cost_per_person"
+      "formula": "pro_spend * (1 - pro_services_share) / (pro_doc_cost_per_person * unhcr_support_markup)"
+    },
+    {
+      "id": "pro_doc_rights_share",
+      "section": "effect",
+      "label": "Share of people documented whose papers bring legal work or host services they wouldn't otherwise get",
+      "format": "percent",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "Most refugees UNHCR registers already have, or never get, the rights papers could bring: hosts decide on work and services, and UNHCR's documents mostly confirm status. The share for whom this year's registration, documents or legal help opens legal work or public services is small: some new arrivals, refugee status decisions and legal cases won, and hosts that tie rights to UNHCR papers. Judgment 2% (0.5-8%), so that documents do less per dollar than relief cash, which reaches people directly."
+    },
+    {
+      "id": "pro_doc_rights_gain",
+      "section": "effect",
+      "label": "Consumption gain from gaining legal status (regularisation)",
+      "format": "percent",
+      "value": {
+        "low": 0.18,
+        "best": 0.48,
+        "high": 0.6
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Ibáñez, Moya, Ortega, Rozo & Urbina (2024), Life out of the Shadows: The Impacts of Regularization Programs on the Lives of Forced Migrants",
+        "url": "https://poverty-action.org/sites/default/files/2025-05/Ib%C3%A1%C3%B1ez%20et%20al.%20%282024%29%20Life%20Out%20of%20The%20Shadows%20%282%29_0.pdf",
+        "quote": "we find the program induced improvements of 48% and 22% in consumption per capita and labor income, respectively",
+        "retrieved": "2026-11-14",
+        "page": "p. 4"
+      },
+      "explainer": "Colombia's Permiso Especial de Permanencia for Venezuelan migrants, a regression-discontinuity estimate; the range from the earlier drafts' 18% to the 2022 working paper's 60%. A full residence and work permit, more than most papers bring."
     },
     {
       "id": "pro_doc_gain",
       "section": "effect",
-      "label": "Consumption gain from registration, documents and legal status",
+      "label": "Consumption gain per person documented",
       "format": "percent",
-      "value": {
-        "low": 0.003,
-        "best": 0.015,
-        "high": 0.06
-      },
-      "kind": "judgment",
-      "explainer": "Registration and papers open aid, schools, clinics and in some hosts legal work; Colombia's regularisation of Venezuelan migrants raised their consumption and incomes substantially (Ibáñez et al. 2024), but most registration gives far less than a work permit, hosts decide on rights, and access to UNHCR's own aid is already counted in the other branches. Judgment 1.5% (0.3-6%)."
+      "formula": "pro_doc_rights_share * pro_doc_rights_gain",
+      "explainer": "The share whose papers bring rights times the regularisation effect: about 1% at the best guesses, for a few years."
     },
     {
       "id": "pro_doc_years",
@@ -925,7 +1170,7 @@
         "high": 6
       },
       "kind": "judgment",
-      "explainer": "Documents last years; displacement lasts a decade on average, but rights are often withdrawn.",
+      "explainer": "Papers and status last years; displacement lasts a decade on average, but rights are often withdrawn. Judgment 3 years (1-6).",
       "unit": "years"
     },
     {
@@ -963,17 +1208,28 @@
       "explainer": "UNHCR identifies, interviews and refers refugees to resettlement states; departures fell in 2025 when the US suspended its programme. The rest is voluntary repatriation (return cash grants, notably to Syria and Afghanistan) and local integration. Judgment 15% (8-25%)."
     },
     {
+      "id": "unhcr_departures_2025",
+      "section": "reach",
+      "label": "Refugees resettled with UNHCR's help in 2025",
+      "format": "integer",
+      "value": 37237,
+      "kind": "observed",
+      "source": {
+        "title": "UNHCR, Financial report and audited financial statements for the year ended 31 December 2025 and report of the Board of Auditors (A/81/5/Add.6)",
+        "url": "https://digitallibrary.un.org/record/4126985/files/A_81_5_Add.6-EN.pdf",
+        "quote": "Departures 58 452 96 262 116 420 37 237",
+        "retrieved": "2026-11-14",
+        "page": "Table II.8, p. 58"
+      },
+      "explainer": "UNHCR's count of resettlement departures (the last figure is 2025), down from 116,420 in 2024 when the US suspended its programme."
+    },
+    {
       "id": "sol_cost_per_departure",
       "section": "reach",
-      "label": "UNHCR's cost per refugee resettled",
+      "label": "UNHCR's full cost per refugee resettled",
       "format": "usd",
-      "value": {
-        "low": 800,
-        "best": 1500,
-        "high": 4000
-      },
-      "kind": "judgment",
-      "explainer": "Case identification, interviews, referral and departure support; UNHCR's resettlement staff and partners. Judgment $1,500 a person ($800-4,000)."
+      "formula": "unhcr_exp_solutions * 1e6 * sol_resettle_share / unhcr_departures_2025",
+      "explainer": "UNHCR's resettlement spending (its solutions spending × the resettlement share) over its 2025 departures: about $1,700, support costs included."
     },
     {
       "id": "sol_departures",
@@ -983,17 +1239,25 @@
       "formula": "sol_spend * sol_resettle_share / sol_cost_per_departure"
     },
     {
-      "id": "sol_resettled_consumption",
+      "id": "sol_resettled_vs_low_quintile",
       "section": "effect",
-      "label": "Consumption per person after resettlement (2017 PPP $)",
-      "format": "usd",
+      "label": "Resettled refugees' consumption over the lowest US quintile's",
+      "format": "multiple",
       "value": {
-        "low": 6000,
-        "best": 12000,
-        "high": 25000
+        "low": 0.6,
+        "best": 1,
+        "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "Resettled refugees in the US, Canada, Europe and Australia earn far below natives at first and catch up over a decade; household consumption per person of $6,000-25,000 a year. Judgment $12,000."
+      "explainer": "Resettled refugees earn far below natives at first and catch up over a decade (most departures went to the US, Canada, Europe and Australia); the lowest US quintile's spending is the anchor. Judgment 1 (0.6-1.5)."
+    },
+    {
+      "id": "sol_resettled_consumption",
+      "section": "effect",
+      "label": "Consumption per person after resettlement (2017 US$, PPP 1)",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024 * @cpi.usa_2017 / @cpi.usa_2024 * sol_resettled_vs_low_quintile",
+      "explainer": "The site's US consumer expenditure per person (BLS, 2024) at the lowest quintile's share, in 2017 dollars (the PPP base, a US dollar being one international dollar): about $11,400."
     },
     {
       "id": "sol_resettle_ln_gain",
@@ -1006,7 +1270,7 @@
     {
       "id": "sol_return_cost_per_person",
       "section": "reach",
-      "label": "UNHCR's cost per refugee helped home or to integrate locally",
+      "label": "UNHCR's cost per refugee helped home or to integrate locally (delivery, before support costs)",
       "format": "usd",
       "value": {
         "low": 120,
@@ -1014,14 +1278,14 @@
         "high": 600
       },
       "kind": "judgment",
-      "explainer": "Return cash grants are $100-400 a person (Afghanistan, Syria, Burundi) with transport and reintegration help; local integration (documents, land, naturalisation) varies. Judgment $250 ($120-600)."
+      "explainer": "Return cash grants are $100-400 a person (Afghanistan, Syria, Burundi) with transport and reintegration help; local integration (documents, land, naturalisation) varies. Judgment $250 ($120-600), the delivery cost; the full cost adds UNHCR's support markup."
     },
     {
       "id": "sol_return_people",
       "section": "reach",
       "label": "Refugees helped home or to integrate locally",
       "format": "integer",
-      "formula": "sol_spend * (1 - sol_resettle_share) / sol_return_cost_per_person"
+      "formula": "sol_spend * (1 - sol_resettle_share) / (sol_return_cost_per_person * unhcr_support_markup)"
     },
     {
       "id": "sol_return_ln_gain",
@@ -1058,11 +1322,42 @@
       "explainer": "A few items of new clothing or a hygiene kit per person. As World Vision's gifts in kind."
     },
     {
+      "id": "gik_us_goods",
+      "section": "reach",
+      "label": "Donated clothes given to US refugee groups in 2025",
+      "format": "usd",
+      "value": 771969,
+      "kind": "observed",
+      "source": {
+        "title": "USA for UNHCR (United States Association for UNHCR), Form 990 for calendar 2025 (filed August 2026; Part XII: financial statements audited), IRS e-file XML",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202622319349300112_public.xml",
+        "quote": "<NonCashAssistanceAmt>628085</NonCashAssistanceAmt> (Good360) and <NonCashAssistanceAmt>143884</NonCashAssistanceAmt> (IRC), 'New clothes for refugees'",
+        "retrieved": "2026-11-14",
+        "page": "Schedule I Part II"
+      },
+      "explainer": "Schedule I: $628,085 to Good360 and $143,884 to the International Rescue Committee, for refugees in the US; valued at US consumption below."
+    },
+    {
+      "id": "gik_us_people",
+      "section": "reach",
+      "label": "Refugees in the US who get donated clothes",
+      "format": "integer",
+      "formula": "gik_us_goods / gik_value_per_person"
+    },
+    {
       "id": "gik_people",
       "section": "reach",
-      "label": "Refugees who get donated goods",
+      "label": "Refugees abroad who get donated goods",
       "format": "integer",
-      "formula": "gik_spend * gik_goods_share / gik_value_per_person"
+      "formula": "(gik_spend * gik_goods_share - gik_us_goods) / gik_value_per_person"
+    },
+    {
+      "id": "gik_us_ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per refugee in the US given clothes",
+      "format": "number",
+      "formula": "ln(1 + gik_value_per_person * gik_inkind_equivalence / (@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024))",
+      "explainer": "At the lowest US quintile's spending per person (BLS 2024); both in current dollars."
     },
     {
       "id": "gik_inkind_equivalence",
@@ -1587,8 +1882,8 @@
       "section": "adjustments",
       "label": "aw: all adjustments combined",
       "format": "multiple",
-      "formula": "aw_missing_data_adj * wait_discount",
-      "explainer": "The money brought in is already USA for UNHCR's credited effect and is valued at UNHCR's adjusted result below, so only the wait and the missing-data step apply."
+      "formula": "aw_missing_data_adj * implementation_adj * leverage_funging_adj * wait_discount",
+      "explainer": "The money brought in is USA for UNHCR's credited effect, valued at UNHCR's result per dollar before delivery, funging, wait and missing data, which apply here once; UNHCR's branches' own evidence, counterfactual and credit stay in that value."
     },
     {
       "id": "ue_host_share",
@@ -1692,11 +1987,28 @@
       "unit": "WELLBYs"
     },
     {
+      "id": "unhcr_uov_per_dollar_gross",
+      "section": "bridges",
+      "label": "UNHCR's units of value per dollar of grants, before delivery, funging, wait and missing-data steps",
+      "format": "number",
+      "formula": "unhcr_uov / unhcr_grants / (implementation_adj * leverage_funging_adj * wait_discount * rel_missing_data_adj)",
+      "explainer": "Every grant branch applies these four steps (each branch's missing-data marker is the same slider as relief's), so dividing them out is exact; the gifts-in-kind services and awareness apply their own once.",
+      "unit": "UoV / $"
+    },
+    {
+      "id": "unhcr_wellbys_per_dollar_gross",
+      "section": "bridges",
+      "label": "UNHCR's WELLBYs per dollar of grants, before the same steps",
+      "format": "number",
+      "formula": "unhcr_wellbys / unhcr_grants / (implementation_adj * leverage_funging_adj * wait_discount * rel_missing_data_adj)",
+      "unit": "WELLBYs / $"
+    },
+    {
       "id": "gik_uov",
       "section": "bridges",
       "label": "Gifts in kind: goods and services, in units of value (adjusted)",
       "format": "number",
-      "formula": "(gik_people * gik_ln_gain_per_person * $uov_per_ln_consumption + gik_spend * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_uov / unhcr_grants) * gik_total_adj",
+      "formula": "((gik_people * gik_ln_gain_per_person + gik_us_people * gik_us_ln_gain_per_person) * $uov_per_ln_consumption + gik_spend * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_uov_per_dollar_gross) * gik_total_adj",
       "explainer": "Clothes and kits as consumption; donated IT and transport at a share of what the same in cash to UNHCR does (UNHCR's units of value per dollar of grants).",
       "unit": "UoV"
     },
@@ -1705,7 +2017,7 @@
       "section": "bridges",
       "label": "Gifts in kind: the protection WELLBYs of the IT and transport's UNHCR-dollar equivalent",
       "format": "number",
-      "formula": "gik_spend * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_wellbys / unhcr_grants * gik_total_adj",
+      "formula": "gik_spend * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_wellbys_per_dollar_gross * gik_total_adj",
       "unit": "WELLBYs"
     },
     {
@@ -1713,8 +2025,8 @@
       "section": "bridges",
       "label": "Awareness: extra money for UNHCR, in units of value (adjusted)",
       "format": "number",
-      "formula": "aw_spend * aw_money_per_dollar * unhcr_uov / unhcr_grants * aw_total_adj",
-      "explainer": "Valued at what a dollar of USA for UNHCR's grants does in this model.",
+      "formula": "aw_spend * aw_money_per_dollar * unhcr_uov_per_dollar_gross * aw_total_adj",
+      "explainer": "Valued at what a dollar of USA for UNHCR's grants does in this model before the steps this branch applies itself.",
       "unit": "UoV"
     },
     {
@@ -1722,7 +2034,7 @@
       "section": "bridges",
       "label": "Awareness: the protection WELLBYs of the extra money",
       "format": "number",
-      "formula": "aw_spend * aw_money_per_dollar * unhcr_wellbys / unhcr_grants * aw_total_adj",
+      "formula": "aw_spend * aw_money_per_dollar * unhcr_wellbys_per_dollar_gross * aw_total_adj",
       "unit": "WELLBYs"
     },
     {
