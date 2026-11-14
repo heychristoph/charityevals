@@ -1,25 +1,25 @@
 ### Summary
 
-The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="johns-hopkins-center-for-health-security-charityevals">7</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 130.
+The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="johns-hopkins-center-for-health-security-charityevals">7.6</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 134.
 
 ### What the charity does
 
-The Center is part of Johns Hopkins University, so a gift goes through the university's form for the Center. It publishes no accounts or budget of its own. We built its 2025 budget, about $14.9 million, from the grants its funders publish, each spread over its term:
+The Center is part of Johns Hopkins University, so a gift goes through the university's form for the Center. It publishes no accounts or budget of its own. We built its 2025 budget, about $13.8 million, from the grants its funders publish, each spread over its term:
 
-| Funder | Grant | A year |
+| Funder | Grant | In 2025 |
 |---|---|---|
 | Coefficient Giving (formerly Open Philanthropy), general support | $10 million over three years, from March 2023 | $3.3 million |
 | CDC, the Center for Outbreak Response Innovation (CORI) | $23.5 million over five years, from 2023 | $4.7 million |
-| Coefficient Giving, doctoral programme | $3.9 million over three years, from September 2022 | $1.3 million |
-| Sentinel Bio, general support | $1.1 million, November 2024 | $1.1 million |
+| Coefficient Giving, doctoral programme | $3.9 million over three years, from September 2022 | $0.9 million (to about September) |
+| Sentinel Bio, general support | $1.1 million, November 2024, term not stated | $0.7 million (over a judged 1.5 years) |
 
-That is about $10.4 million a year. We judge these grants to be 70% of the budget (45% to 95%); the rest comes from funders who publish no amounts.
+That is about $9.7 million in 2025. We judge these grants to be 70% of the budget (45% to 95%); the rest comes from funders who publish no amounts. The university keeps 4% of every gift, and the School of Public Health takes a further share it doesn't publish (we take 4%), so about 92% of a gift reaches the Center.
 
 The money pays for three kinds of work:
 
 - **Biosecurity and pandemic policy.** Research and advocacy on DNA synthesis screening and on AI that could help design biological weapons. In December 2025 a senior scholar, Jassi Pannu, testified to Congress for gene synthesis legislation. The Center also runs pandemic exercises and publishes the journal Health Security.
 - **CORI: about a third of the budget.** It builds outbreak risk assessments (for example measles and mpox), forecasting tools and a network of health departments testing outbreak response.
-- **Training: about 11%.** The Emerging Leaders in Biosecurity fellowship took 31 mid-career professionals in 2025, and a Coefficient Giving grant pays doctoral scholarships.
+- **Training: about 10%.** The Emerging Leaders in Biosecurity fellowship took 31 mid-career professionals in 2025, and a Coefficient Giving grant pays doctoral scholarships.
 
 ### How the impact happens
 
@@ -39,36 +39,36 @@ The adjustments apply to all branches:
 
 | Adjustment | Value | Reason |
 |---|---|---|
-| How far a typical project's effect applies | 0.9 for policy work, 0.4 for CORI (about 0.75 overall) | The Center's research is taken up widely. CORI is aimed at ordinary outbreaks, a thinner path to a catastrophe |
+| How far a typical project's effect applies | 0.9 for policy work, 0.4 for CORI (about 0.73 overall) | The Center's research is taken up widely. CORI is aimed at ordinary outbreaks, a thinner path to a catastrophe |
 | Work no one else would have done now | 0.7 | Other groups also work on biosecurity policy and outbreak analytics |
 | The Center's share of the resources | 0.85 | CORI works with CDC's own staff |
-| Funging by large funders | 0.85 | Coefficient Giving dominates its unrestricted money |
+| Funging by large funders | 0.9 | Coefficient Giving dominates its unrestricted money |
 | Missing data | slider | Nothing about the Center's effect on the risk is measured |
 
-Side effects: other benefits +15%, mainly CORI's help to health departments in ordinary outbreaks. Harm −2%: the Center's 2019 coronavirus exercise, Event 201, became a focus of conspiracy theories about COVID-19, and published pathogen analyses carry some risk of misuse.
+Side effects: other benefits +5%, mainly CORI's help to health departments in ordinary outbreaks. Harm −2%: the Center's 2019 coronavirus exercise, Event 201, became a focus of conspiracy theories about COVID-19, and published pathogen analyses carry some risk of misuse.
 
-The Center's main funder halved its general support in 2023, and that grant ends in 2026, so money is likelier than usual to be the constraint. The next dollar counts at 53% of the past average.
+The Center's main funder halved its general support in 2023, and that grant ends in 2026, so money is likelier than usual to be the constraint. CORI is paid by a restricted CDC grant, so a gift buys the policy research and training, which the model values more highly. The next dollar counts at 64% of the past average.
 
 ### What drives the result
 
-Most of the result comes from catastrophes the world survives and from COVID-scale pandemics, because at the default 4% discount rate the future counts for only about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 98. The result is below our Nuclear Threat Initiative model's because the Center works only on pandemics: Rethink's typical nuclear project averts more deaths per dollar than a typical biosecurity one.
+Most of the result comes from catastrophes the world survives and from COVID-scale pandemics, because at the default 4% discount rate the future counts for only about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 104. The result is below our Nuclear Threat Initiative model's because the Center works only on pandemics: Rethink's typical nuclear project averts more deaths per dollar than a typical biosecurity one.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 4 to 42.
-- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.5 to 22.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 4 to 45.
+- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.6 to 23.
 - **The Center's budget.** We built it from its grants. The result barely moves with it, because the cut is counted per dollar; only the training's share depends on it.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 
 ### What isn't modelled
 
-- The good CORI and the Center's preparedness research do in ordinary outbreaks is a 15% share of the benefits, not a branch of its own.
+- The good CORI and the Center's preparedness research do in ordinary outbreaks is a 5% share of the benefits, not a branch of its own.
 - The Center's work on AI and biological weapons is valued with the pandemic area, as in our Nuclear Threat Initiative model, not as AI risk.
 - Losses beyond deaths, such as survivors' lost income and health, are a shared figure set to 0.
 
 ### How this model was checked
 
-AUDIT_PLACEHOLDER
+The model was built from the catastrophic-risk template, starting from our Nuclear Threat Initiative model. Round 1 of the independent audit found no high issues and two medium ones. The first was the next-dollar figure: a gift cannot buy CORI, which a restricted CDC grant pays for, so it now buys the higher-valued policy work and the figure rose from 53% to 64%. The second was the other benefits, now 5% with an anchor instead of 15%. The low findings were fixed too: the university's and the School's assessments on gifts, funging at 0.9 as for the Nuclear Threat Initiative, and the grant terms. A verification round checked those changes. The rounds are in audits/johns-hopkins-center-for-health-security-charityevals/.
 
 ### Sources
 

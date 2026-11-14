@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "johns-hopkins-center-for-health-security",
   "owner": "charityevals",
-  "summary": "The Johns Hopkins Center for Health Security (Baltimore), part of Johns Hopkins University, works to prevent and prepare for pandemics: biosecurity policy research and advocacy, outbreak analytics for CDC and health departments (CORI) and training. Gifts go through the university's form for the Center; it publishes no accounts, so this model of all its work in 2025 builds its budget (about $14.9M) from its published grants. At the defaults it averts about 7 years of healthy life per $1,000, from 0.4 to 130 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate and the years a cut counts. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Johns Hopkins Center for Health Security (Baltimore), part of Johns Hopkins University, works to prevent and prepare for pandemics: biosecurity policy research and advocacy, outbreak analytics for CDC and health departments (CORI) and training. Gifts go through the university's form for the Center; it publishes no accounts, so this model of all its work in 2025 builds its budget (about $13.8M) from its published grants. At the defaults it averts about 7.6 years of healthy life per $1,000, from 0.4 to 134 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate and the years a cut counts. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Johns Hopkins Center for Health Security",
@@ -98,7 +98,7 @@
         "page": "Amount $10,000,000; date March 2023; 'over three years'; follows the September 2019 grant",
         "quote": "to support its work on biosecurity and to reduce global catastrophic risks posed by pandemics"
       },
-      "explainer": "The Center's largest unrestricted funder: Coefficient Giving (Open Philanthropy until 2025) gave $16M over three years in 2017, $20.2M in 2019 and $10M over three years in March 2023, running through early 2026, so it covers 2025. Wikipedia gives the same amounts (renewed for $20 million in 2019 and $10 million in 2023)."
+      "explainer": "The Center's largest unrestricted funder: Coefficient Giving (Open Philanthropy until 2025) gave $16M over three years in 2017, about $19.9M in 2019 and $10M over three years in March 2023, running through early 2026, so it covers 2025. Wikipedia gives the same amounts (renewed for $20 million in 2019 and $10 million in 2023)."
     },
     {
       "id": "cg_general_years",
@@ -178,7 +178,26 @@
         "retrieved": "2026-11-14",
         "page": "'over three years'"
       },
-      "explainer": "Its term as stated: a third of it is a year's money (2025 had about nine months of it; the range of known_funding_share covers the difference)."
+      "explainer": "Its term as stated: a third of it is a year's money, of which 2025 had the share in cg_education_share_2025."
+    },
+    {
+      "id": "cg_education_share_2025",
+      "section": "cost",
+      "label": "Share of 2025 the doctoral-programme grant covers",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.71,
+        "high": 0.8
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Coefficient Giving grant record, as mirrored by Longterm Wiki: Johns Hopkins Center for Health Security, Educational Degree Program (2022)",
+        "url": "https://www.longtermwiki.com/grants/4zYlHGook4",
+        "retrieved": "2026-11-14",
+        "page": "Sep 2022, 'over three years': it runs to about September 2025"
+      },
+      "explainer": "Three years from September 2022 end around September 2025: about eight and a half of 2025's twelve months (71%), from 60% to 80% since the exact start and end months aren't published and scholarships run by academic year."
     },
     {
       "id": "sentinel_grant",
@@ -194,15 +213,29 @@
         "page": "$1,076,000 in general support, November 2024",
         "quote": "to strengthen its pandemic prevention research and advocacy"
       },
-      "explainer": "A donor advised by Sentinel Bio gave $1,076,000 in general support in November 2024; no term is stated, so it is counted as one year's money, spent in 2025 (our reading)."
+      "explainer": "A donor advised by Sentinel Bio gave $1,076,000 in general support in November 2024; no term is stated (sentinel_years)."
+    },
+    {
+      "id": "sentinel_years",
+      "section": "cost",
+      "label": "Years the Sentinel Bio grant covers",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 1.5,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "No term is stated for the November 2024 grant; general-support grants of this size usually run one to two years. Our judgment, 1.5 years (1 to 3), spread evenly."
     },
     {
       "id": "known_funding_per_year",
       "section": "cost",
       "label": "The Center's yearly money from its published grants",
       "format": "usd",
-      "formula": "cg_general_grant / cg_general_years + cdc_cori_grant / cdc_cori_years + cg_education_grant / cg_education_years + sentinel_grant",
-      "explainer": "Each published grant spread over its term: about $10.4M a year. The Center is part of Johns Hopkins University and publishes no accounts or budget of its own (its annual reports, the last for 2019 and 2020, give none), so its spending is built from what its funders publish."
+      "formula": "cg_general_grant / cg_general_years + cdc_cori_grant / cdc_cori_years + cg_education_grant / cg_education_years * cg_education_share_2025 + sentinel_grant / sentinel_years",
+      "explainer": "Each published grant spread over its term: about $9.7M in 2025. The Center is part of Johns Hopkins University and publishes no accounts or budget of its own (its annual reports, the last for 2019 and 2020, give none), so its spending is built from what its funders publish."
     },
     {
       "id": "known_funding_share",
@@ -905,7 +938,7 @@
       "section": "effect",
       "label": "The Center's yearly spending on training",
       "format": "usd",
-      "formula": "cg_education_grant / cg_education_years + elbi_hss_cost",
+      "formula": "cg_education_grant / cg_education_years * cg_education_share_2025 + elbi_hss_cost",
       "explainer": "The doctoral-programme grant's yearly share plus the fellowship and scholars."
     },
     {
@@ -913,7 +946,7 @@
       "section": "effect",
       "label": "Field-building: share of the cost spent training or placing people",
       "format": "percent",
-      "explainer": "Training's share of the budget: about 11%. It leaves the pandemic area's share, so nothing counts twice.",
+      "explainer": "Training's share of the budget: about 10%. It leaves the pandemic area's share, so nothing counts twice.",
       "formula": "education_per_year / program_spend"
     },
     {
@@ -943,7 +976,7 @@
         "high": 6
       },
       "kind": "judgment",
-      "explainer": "The grant's $1.3M a year pays PhD scholarships and DrPH capstones; at about $90,000 a student-year over a four-to-five-year degree that is about 3 degrees' worth a year. Our judgment, 3 (1.5 to 6); the Center publishes no count."
+      "explainer": "The grant's $1.3M a year (about $0.9M in 2025) pays PhD scholarships and DrPH capstones; at about $90,000 a student-year over a four-to-five-year degree that is about 3 degrees' worth a year. Our judgment, 3 (1.5 to 6); the Center publishes no count."
     },
     {
       "id": "elbi_share_working",
@@ -1099,7 +1132,7 @@
       "label": "Share of the budget on CORI's outbreak analytics",
       "format": "percent",
       "formula": "cdc_cori_grant / cdc_cori_years / program_spend",
-      "explainer": "CDC's yearly money for CORI over the budget: about 32%."
+      "explainer": "CDC's yearly money for CORI over the budget: about 34%."
     },
     {
       "id": "policy_evidence_adj",
@@ -1175,12 +1208,12 @@
       "label": "Leverage and funging",
       "format": "multiple",
       "value": {
-        "low": 0.6,
-        "best": 0.85,
+        "low": 0.7,
+        "best": 0.9,
         "high": 1.05
       },
       "kind": "judgment",
-      "explainer": "Coefficient Giving is the Center's main unrestricted funder and may give less if small donors give more (its 2023 renewal was half the 2019 one), and a gift through Johns Hopkins could free university money for other uses; nothing suggests the university cuts its support. 0.85 (0.6 to 1.05), our judgment, a little below the Nuclear Threat Initiative's 0.9 because one funder dominates."
+      "explainer": "Coefficient Giving, the Center's main unrestricted funder, may give less if small donors give more, and a gift through Johns Hopkins could free university money for other uses; no sign of either is published (its smaller 2023 renewal is read as money getting scarcer, in the next-dollar figure). 0.9 (0.7 to 1.05), our judgment, as for the Nuclear Threat Initiative."
     },
     {
       "id": "missing_data_adj",
@@ -1205,11 +1238,11 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.15,
-        "high": 0.4
+        "best": 0.05,
+        "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Good beyond the pandemics counted: CORI's analytics and the Center's preparedness research help health departments in ordinary outbreaks (measles, mpox, H5N1), far smaller than COVID-scale and outside the chain, and the journal Health Security serves the field. 15% (0 to 40%) of the modelled value, our judgment: CORI is about a third of the budget.",
+      "explainer": "Good beyond the pandemics counted: CORI's analytics and the Center's preparedness research help health departments in ordinary outbreaks (measles, mpox, H5N1), far smaller than COVID-scale and outside the chain, and the journal Health Security serves the field. No outbreak deaths averted are measured. Anchor: at 5% this is about 2 years of healthy life per $1,000 of CORI's spending, in the range of the site's rich-country services and research models (cancer research and refugee services about 2, the American Red Cross about 4.5); 0 to 20% (up to about 7.5), our judgment.",
       "side_effect": "added"
     },
     {
@@ -1315,6 +1348,35 @@
       "explainer": "The Center's own figure (facts/next_dollar.json, docs/normalization.md 2.10): room × use × run. 1 in `published`: the past average itself."
     },
     {
+      "id": "gift_assessment",
+      "section": "donor",
+      "label": "Johns Hopkins University's assessment on gifts",
+      "format": "percent",
+      "value": 0.04,
+      "kind": "observed",
+      "source": {
+        "title": "Johns Hopkins University, Giving: frequently asked questions (Wayback Machine copy of 13 May 2026)",
+        "url": "https://giving.jhu.edu/faqs",
+        "retrieved": "2026-11-14",
+        "quote": "Johns Hopkins applies a one-time assessment to all gifts",
+        "page": "'currently 4 percent'"
+      },
+      "explainer": "The university keeps 4% of every gift for its fundraising costs (since April 2010, Johns Hopkins' finance office); the budget the model starts from is grant money, so this leak of a donor's own dollar is counted here."
+    },
+    {
+      "id": "school_assessment",
+      "section": "donor",
+      "label": "The Bloomberg School's further assessment on non-scholarship gifts",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.04,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "The same FAQ: the Bloomberg School of Public Health takes an additional assessment on non-scholarship gifts, at a rate it doesn't publish. Our judgment, 4% (1% to 8%), anchored on the university's own 4%."
+    },
+    {
       "id": "donor_cost_share",
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
@@ -1326,7 +1388,7 @@
       "section": "donor",
       "label": "Years of healthy life per dollar you give",
       "format": "small",
-      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average * (1 - gift_assessment - school_assessment)",
       "unit": "Years of healthy life / $"
     }
   ],
