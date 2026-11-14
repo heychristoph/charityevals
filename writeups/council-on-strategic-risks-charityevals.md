@@ -1,6 +1,6 @@
 ### Summary
 
-The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="council-on-strategic-risks-charityevals">12</span> years of healthy life per $1,000**. About 70% of that comes from the nuclear work, about a quarter of the cost. A fifth comes from the biological work, about a third of the cost. The plausible range runs from about 0.8 to about 180.
+The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="council-on-strategic-risks-charityevals">12</span> years of healthy life per $1,000**. About 63% of that comes from the nuclear work, about a quarter of the cost. A fifth comes from the biological work, about a third of the cost, and 17% from the fellowships. The plausible range runs from about 0.8 to about 180.
 
 ### What the charity does
 
@@ -36,7 +36,7 @@ CSR holds about two months of spending in unrestricted reserves, but most of its
 
 ### What drives the result
 
-The nuclear work brings 71% of the result, the biological work 21%, the fellowships 8% and the climate-security work under 0.01%. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe. The result is about twice the median of the site's catastrophic-risk models. It sits between the Johns Hopkins Center for Health Security, which works only on pandemics, and the Nuclear Threat Initiative, which spends more of its money on nuclear risk.
+After each part's adjustments, the nuclear work brings 63% of the result, the biological work 20%, the fellowships 17% and the climate-security work under 0.01%. The fellowships count for more than their 8% of the cost because their adjustments are light: the alumni's work is already valued at a typical dollar of the field's work. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe. The result is about twice the median of the site's catastrophic-risk models. It sits between the Johns Hopkins Center for Health Security, which works only on pandemics, and the Nuclear Threat Initiative, which spends more of its money on nuclear risk.
 
 ### Biggest uncertainties
 
@@ -52,7 +52,7 @@ The nuclear work brings 71% of the result, the biological work 21%, the fellowsh
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the climate-security branch from our Federation of American Scientists model. Round 1 of the independent audit checked every source and found the figures right. Its one high finding was that the years a fellow stays in the work had been typed into many models. That figure is now one shared figure that every catastrophic-risk model reads, with the same value. Its smaller findings were fixed too. The Nolan Center's biological share was set from the grant's arithmetic (65% to 60%). The lab's climate-nuclear project got its own, lower multiplier. The climate-security budgets are now those of 2025. The rounds are in audits/council-on-strategic-risks-charityevals/.
+The model was built from the catastrophic-risk template, with the climate-security branch from our Federation of American Scientists model. Round 1 of the independent audit checked every source and found the figures right. Its one high finding was that the years a fellow stays in the work had been typed into many models. That figure is now one shared figure that every catastrophic-risk model reads, with the same value. Its smaller findings were fixed too. The Nolan Center's biological share was set from the grant's arithmetic (65% to 60%). The lab's climate-nuclear project got its own, lower multiplier. The climate-security budgets are now those of 2025. Round 2 passed. Its smaller findings were fixed: the branch shares are now given after each branch's adjustments, and the switched-off policy branch values pandemic deaths at the same age mix as the biological work. A verification round checked those fixes. The rounds are in audits/council-on-strategic-risks-charityevals/.
 
 ### Sources
 

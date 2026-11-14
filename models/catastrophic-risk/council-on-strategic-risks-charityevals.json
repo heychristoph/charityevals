@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "council-on-strategic-risks",
   "owner": "charityevals",
-  "summary": "The Council on Strategic Risks (Washington DC) works against biological weapons and pandemics, nuclear risks and the security risks of climate change: its Nolan Center on Strategic Weapons (policy, dialogues with allied governments and four fellowships), its Center for Climate and Security and a small Converging Risks Lab; this model covers all its programmes in 2025 ($5.2M spent). At the defaults it averts about 12 years of healthy life per $1,000, from 0.8 to 180 on the combined range: about 70% of that is the nuclear work (about a quarter of the cost) and a fifth the biological work (about a third), each dollar valued as a typical project's cut in the forecast risks of nuclear war and pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the fellowships add 8%, and the climate-security work (over a third of the cost), valued as better use of the public money it bears on, almost nothing. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way), and CSR doesn't say how the Nolan Center's spending splits between biological and nuclear work. Every branch is discounted for missing data: no outcome of the work is measured.",
+  "summary": "The Council on Strategic Risks (Washington DC) works against biological weapons and pandemics, nuclear risks and the security risks of climate change: its Nolan Center on Strategic Weapons (policy, dialogues with allied governments and four fellowships), its Center for Climate and Security and a small Converging Risks Lab; this model covers all its programmes in 2025 ($5.2M spent). At the defaults it averts about 12 years of healthy life per $1,000, from 0.8 to 180 on the combined range: after each branch's adjustments, about 63% of that is the nuclear work (about a quarter of the cost) and a fifth the biological work (about a third), each dollar valued as a typical project's cut in the forecast risks of nuclear war and pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the fellowships (8% of the cost) add 17%, counted through the work their alumni add, and the climate-security work (over a third of the cost), valued as better use of the public money it bears on, almost nothing. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way), and CSR doesn't say how the Nolan Center's spending splits between biological and nuclear work. Every branch is discounted for missing data: no outcome of the work is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Council on Strategic Risks",
@@ -998,7 +998,7 @@
         "high": 3000
       },
       "kind": "judgment",
-      "explainer": "The yearly public budgets whose use a dollar of the work bears on in 2025: before that year the US Defense Department's request for fiscal 2024 \"proposes $5.1 billion in funding for 'enhancing combat capability and mitigating climate risk'\", $3.7 billion of it for installation resilience (Congressional Research Service, IF12161, updated 6 April 2023, https://www.everycrsreport.com/reports/IF12161.html); in 2025 the administration ended most of the department's climate programmes, so the US part is taken at half that at most, beside allied militaries' and NATO's climate-security work through the International Military Council on Climate and Security. Against about $1.7M a year of the work with overhead, $2-3 billion would be about 1,500 dollars per dollar; others work on it too, so 500, from 50 to 3,000 (the fiscal 2024 budget, all of it), our judgment."
+      "explainer": "The yearly public budgets whose use a dollar of the work bears on in 2025: before that year the US Defense Department's request for fiscal 2024 \"proposes $5.1 billion in funding for 'enhancing combat capability and mitigating climate risk'\", $3.7 billion of it for installation resilience (Congressional Research Service, IF12161, updated 6 April 2023, https://www.everycrsreport.com/reports/IF12161.html); in 2025 the administration ended most of the department's climate programmes, so the US part is taken at half that at most, beside allied militaries' and NATO's climate-security work through the International Military Council on Climate and Security. Against about $1.9M a year of the work with overhead, $2-3 billion would be about 1,100 to 1,600 dollars per dollar; others work on it too, so 500, from 50 to 3,000 (the fiscal 2024 budget, all of it), our judgment."
     },
     {
       "id": "gov_efficiency_gap",
@@ -1082,9 +1082,9 @@
       "section": "effect",
       "label": "Deaths averted that are in a COVID-scale pandemic (a part of deaths_averted)",
       "format": "small",
-      "formula": "bio_deaths_averted * bio_covid_scale_share + fb_deaths_averted * fb_covid_scale_share",
+      "formula": "bio_deaths_averted * bio_covid_scale_share + pol_deaths_averted * bio_covid_scale_share + fb_deaths_averted * fb_covid_scale_share",
       "unit": "deaths",
-      "explainer": "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size at the world's. The field-building branch adds its pandemic part here (fb_covid_scale_share)."
+      "explainer": "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size at the world's. The policy branch (pointed at pandemics) adds its deaths × bio_covid_scale_share and the field-building branch its pandemic part (fb_covid_scale_share)."
     },
     {
       "id": "covid_value_per_death",
@@ -1143,9 +1143,9 @@
       "section": "adjustments",
       "label": "Weight: healthy years from the policy win (before adjustments)",
       "format": "number",
-      "formula": "pol_deaths_averted * value_per_death * dalys_per_death_value + pol_future_dalys",
+      "formula": "pol_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + pol_future_dalys",
       "unit": "DALYs",
-      "explainer": "The branch's deaths averted in healthy years (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted), plus its future healthy years kept: the weight its adjustments carry. Fixed."
+      "explainer": "The policy branch's deaths averted in healthy years (pointed at pandemics, its COVID-scale part at COVID-19's age mix), plus its future healthy years kept; 0 here (pol_wins 0)."
     },
     {
       "id": "w_fb",
@@ -1500,7 +1500,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Good beyond what is counted, each part a share of the modelled value (about 70% of it the nuclear branch's): work against a single detonation or a limited nuclear war, which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0), 4% (6% of the nuclear value, as the Federation of American Scientists' model); chemical weapons, which the Nolan Center covers in its framing but with no programme, 0.5%; the climate-security work's benefits beyond better public spending (militaries' disaster response, which its MiRCH tracker follows, conflict and displacement that planning may avert, militaries' own emissions), 0.5%: its counted value is under 0.1% of the total, so even a hundredfold more stays small. 5% (0 to 20%) in all, our judgment, a little below the Federation of American Scientists' 8% and NTI's 10%, whose nuclear work is a larger part of their value.",
+      "explainer": "Good beyond what is counted, each part a share of the modelled value (about 60% of it, after adjustments, the nuclear branch's): work against a single detonation or a limited nuclear war, which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0), 4% (6% of the nuclear value, as the Federation of American Scientists' model); chemical weapons, which the Nolan Center covers in its framing but with no programme, 0.5%; the climate-security work's benefits beyond better public spending (militaries' disaster response, which its MiRCH tracker follows, conflict and displacement that planning may avert, militaries' own emissions), 0.5%: its counted value is under 0.1% of the total, so even a hundredfold more stays small. 5% (0 to 20%) in all, our judgment, a little below the Federation of American Scientists' 8% and NTI's 10%, whose nuclear work is a larger part of their value.",
       "side_effect": "added"
     },
     {
