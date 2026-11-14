@@ -29,7 +29,7 @@ Every dollar counts as a typical dollar of nuclear work, except about 2% on biol
 | The Association's share of the resources | 0.9 |
 | Missing-data discount | 0.5 |
 
-The first two match what our Ploughshares Fund model gives its grants to the same kind of work, the Association among them. The share of resources is below 1 because outside authors write for the journal and scientists give their time unpaid. Ploughshares' $178,000 grant is part of the Association's costs, so a donor here and Ploughshares each get credit only for their own dollars.
+The first two match what our Ploughshares Fund model gives its grants to the same kind of work, the Association among them. The share of resources is below 1 because outside authors write for the journal and scientists give their time unpaid. Ploughshares' two grants ($178,000) are part of the Association's costs, so a donor here and Ploughshares each get credit only for their own dollars.
 
 Side effects add 10%: work against a single detonation or a limited war, which has no shared forecast, and the conventional and chemical arms work. No harm is added beyond a typical project's chance of backfiring.
 
@@ -37,7 +37,7 @@ The Association has under nine months of reserves and ran deficits in both of th
 
 ### What drives the result
 
-Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 150. The result is above Ploughshares Fund's 26 and the Nuclear Threat Initiative's 23. Nearly all the Association's work is on nuclear risk, and none of it is grants that another funder might have paid for.
+Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 150. The result is above Ploughshares Fund's 26 and the Nuclear Threat Initiative's 23. Nearly all the Association's work is on nuclear risk, none of it is grants that another funder might have paid for, and its smaller reserves make the next dollar count for more.
 
 ### Biggest uncertainties
 
@@ -53,7 +53,7 @@ Deaths in a war the world survives bring almost all of the result. At the defaul
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template. The rounds of the independent audit are in audits/arms-control-association-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit passed with six small findings, all fixed: a worked count of the unpaid time behind the work, a better source for the absence of a policy win, and clearer reasons why the result sits above its peers. It also checked that no dollar is counted both here and in the Ploughshares Fund model. A verification round checked the fixes. The rounds are in audits/arms-control-association-charityevals/.
 
 ### Sources
 
