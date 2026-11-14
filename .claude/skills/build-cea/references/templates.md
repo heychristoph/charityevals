@@ -265,3 +265,6 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
   list); meta and unmodelled causes the average of the rest; below the organisation's own bar,
   `@meta.prior_vs_cash × #givedirectly`. No split: the cause's set. Not yet proven:
   `@meta.success_chance_new_org` and the success step. No missing-data step.
+- Research or advice that changes where money is spent (a judged share of the money it informed): all
+  shifted, `informed_money_value` (set `informed`: evidence and missing-data steps), not net value. A split
+  across causes: the prior by the same shares (cause `<share fact>=<cause>,...`).

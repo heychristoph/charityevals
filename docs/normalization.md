@@ -611,7 +611,7 @@ success  = @meta.success_chance_new_org = 55.7% (50–63.5%)                   f
   have gone is GiveDirectly's live result (Ambitious Impact's assumption), times a shared multiple
   with a range from 0 (ordinary charities) to 3 (GiveWell's bar). For a model filed under another
   cause, an ordinary charity of that cause (below, November 2026). Money all shifted (a grantmaker's)
-  earns `moved_dollar_value - prior_dollar_value` and adds no new money to the credit by share of resources.
+  earns `shifted_dollar_value = moved_dollar_value - prior_dollar_value` and adds no new money to the credit by share of resources.
 - *A result already counterfactual.* CEARCH's bottom line is in dollars of "equivalent donations to
   today's top-tier EA charities", already net of what the money would have done: it is multiplied by V,
   not by the net value.
@@ -749,6 +749,19 @@ shifted, as half new in its credit by share of resources: now donors' money only
 | Animal Charity Evaluators (ours) | 0.0017 → 0.0011 (an ordinary animal charity 0.44 → 2.21 × 10⁻⁶ units of value: 60% of the ranked animal charities' mean, 3.69 × 10⁻⁶, against 13% of ACE's own picks, 3.38 × 10⁻⁶) | — |
 | 80,000 Hours (ours) | 1.20 → 1.20 (moves no money) | — |
 | GiveWell (ours) | 36.0 → 36.0; with credit by share of resources 28.4 → 28.6 | — |
+
+**November 2026: spending research changed; a mover across causes.**
+
+- *Research or advice that changes where money goes*, at a judged share of the money it informed, is
+  all shifted money with the evidence and missing-data steps (2.12): `informed_money_value = money_moved ×
+  shifted_dollar_value × evidence_adj × missing_data_adj`, in place of `moved_dollar_net_value`
+  (`moved-money.py <model> own-split informed <cause>`). Every gain of money all shifted reads the shared
+  `shifted_dollar_value` (GiveWell's and ACE's grantmakers' money too).
+- *A mover whose split spans causes*: shifted money would have gone to an ordinary charity of each cause,
+  in the split's shares: `@meta.prior_vs_cash × #givedirectly / #cause:global-health × Σ share × #cause:c
+  / Σ share` (`priorDollarValueMix`; script cause `<share fact>=<cause>,...`).
+- INV-12 checks both; Rethink Priorities' four waivers are gone, 80,000 Hours takes the split prior. No
+  result moved.
 
 ### 2.9 Won reforms: one way (October 2026)
 
@@ -1230,7 +1243,8 @@ our builds' unmodelled-benefit shares. Failure, no effect and backfire stay in t
 **Lines.** A charity's programmes are `lines` in charities/<id>.json, its accounts' finest published split
 (a line may group several accounts lines that one model covers as branches; its `source` says so),
 each with its money (`dollars`) and the models of it (`models`, a pattern over model ids); a line may have
-no model yet. `spending.programme` is the accounts' programme expenses. The rankings combine a charity's
+no model yet. `spending.programme` is the accounts' programme expenses, less consolidated sponsored or
+incubated projects (their own money, not the charity's). The rankings combine a charity's
 modelled lines by their money, as `programs` did (src/engine/ranking.ts); `coverage` is the money of the
 modelled lines over programme spending, per evaluator: what each one's models leave out.
 Every line gets a full model (owner decision 2026-11-10: no sampling, no short stand-ins). Figures stay

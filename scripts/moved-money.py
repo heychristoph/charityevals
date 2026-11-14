@@ -4,7 +4,7 @@ in their own section, from src/engine/moved-money.ts (via scripts/moved-money.ts
 are replaced; the model's other rows are left alone (rewire them by hand to read moved_dollar_value or
 moved_dollar_net_value). INV-12 checks the result.
 
-    python3 scripts/moved-money.py <model.json> <global-health|livelihoods|tlycs|own-split> [net [<cause>]]
+    python3 scripts/moved-money.py <model.json> <global-health|livelihoods|tlycs|own-split> [net|informed [<cause> | <fact>=<cause>,...]]
 """
 import json
 import subprocess
@@ -31,4 +31,4 @@ at = next((i for i, s in enumerate(sections) if s["id"] == reader), len(sections
 sections[at:at] = [shared["section"]]
 m["sections"] = sections
 Path(path).write_text(json.dumps(m, indent=indent, ensure_ascii=False) + "\n")
-print(f"{m['id']}: {len(shared['rows'])} shared rows ({scope}{', net' if rest else ''})")
+print(f"{m['id']}: {len(shared['rows'])} shared rows ({scope}{', ' + ' '.join(rest) if rest else ''})")
