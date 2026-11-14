@@ -2,9 +2,9 @@
 
 Earthjustice is the largest US non-profit environmental law firm. It represents community, health and environmental groups and tribes for free, in court, before federal agencies and before state utility commissions. We model its three focus areas separately, each against what it spent on that area over its fiscal years 2022 to 2025:
 
-- **Climate and clean energy:** **<span data-figure="headline" data-model="earthjustice-charityevals">0.0025</span> years of healthy life per $1,000**, about $175 a tonne of CO₂e averted.
-- **Healthy communities:** **<span data-figure="headline" data-model="earthjustice-charityevals-health">0.018</span> years of healthy life per $1,000**, from cleaner air and drinking water.
-- **Biodiversity:** **<span data-figure="headline" data-model="earthjustice-charityevals-biodiversity">0.000006</span> years of healthy life per $1,000**, from the Tongass forest's carbon.
+- **Climate and clean energy:** **<span data-figure="headline" data-model="earthjustice-charityevals">0.0024</span> years of healthy life per $1,000**, about $185 a tonne of CO₂e averted.
+- **Healthy communities:** **<span data-figure="headline" data-model="earthjustice-charityevals-health">0.015</span> years of healthy life per $1,000**, from cleaner air and drinking water.
+- **Biodiversity:** **<span data-figure="headline" data-model="earthjustice-charityevals-biodiversity">0.0000007</span> years of healthy life per $1,000**, from the Tongass forest's carbon.
 
 All three are low for the same reasons. Earthjustice is one of many groups behind each rule. Advocacy is only one cause of a rule. And the federal rules it won are now being weakened or repealed.
 
@@ -32,9 +32,9 @@ Earthjustice sues agencies to make them act, defends their rules against industr
 
 For each win: the tonnes or deaths a year once it takes effect, × the share of a won policy due to advocacy (the site's shared 30%) × the shared 5 years a won reform counts, discounted after the wait until it takes effect. That is then multiplied by the share that wouldn't have happened anyway, Earthjustice's share of all the groups' work, and the share actually delivered.
 
-The wins are added up and spread over the four years. Then come the shared evidence and missing-data steps, and a share for other wins of the period too small to model one by one (+50% in each model). The total is divided by a typical year's spending on that area.
+The wins are added up and spread over the four years. Then come the shared evidence and missing-data steps, and a share for other wins of the period too small to model one by one (+50% for climate and health, +20% for biodiversity). The total is divided by a typical year's spending on that area.
 
-Deaths are valued by age, like every death on the site: air-pollution deaths by their ages, PFAS deaths by the ages of US cancer deaths. Tonnes go through the site's climate conversion. The methane rule's tonnes count for methane's own, earlier warming and the ozone it forms. The coal tonnes also count the air pollution of US coal plants.
+Deaths are valued by age, like every death on the site: PM2.5 deaths at the ages of rich-country heart deaths, PFAS deaths at the ages of US cancer deaths (infants for the birth-weight deaths). Illness averted comes from the site’s shared figures for each kind of death. Tonnes go through the site's climate conversion. The methane rule's tonnes count for methane's own, earlier warming and the ozone it forms. The coal tonnes also count the air pollution of US coal plants.
 
 The next dollar is valued at 35% of the period's average. Earthjustice holds about four months of spending in liquid assets plus a $201 million board-designated fund, and more of its next dollar goes to defending rules in less favourable courts.
 
@@ -42,18 +42,18 @@ The next dollar is valued at 35% of the period's average. Earthjustice holds abo
 
 In the climate model, the methane rule and the coal closings each give about half the value; the power-plant standards, mostly repealed, give little. In the health model, the PM2.5 standard gives nearly all of it. The shared value judgments move all three models most: the years a won reform counts, the discount rate and the missing-data step. Then come the share of a policy due to advocacy and Earthjustice's own shares.
 
-The biodiversity model is far below other conservation models. Forest carbon carries no air pollution, its heat deaths come decades later, logging would have reached a small part of the area, and the protection is under threat again.
+The biodiversity model is far below other conservation models. The Forest Service expected the 2020 exemption to change overall logging little, so the restored protection spares about a hundred hectares a year. Much of that timber is cut elsewhere instead, and the protection is under threat again.
 
 ### Biggest uncertainties
 
 - **Earthjustice's share of each win.** It is one of many groups, and every share is our judgment.
 - **Whether the rules survive.** EPA has delayed the methane rule, repealed most of the power-plant standards, asked the court to vacate the PM2.5 standard and proposed cutting back the PFAS standards. The national Roadless Rule is being rescinded.
 - **The coal closings.** How much of them advocacy caused, and how much the closed plants ran, are both judgments.
-- **The Tongass logging.** No published projection of what the 2020 exemption would have cut was found, so the logging share is a wide judgment.
+- **The Tongass logging.** The Forest Service expected overall harvest to change little; how much moves into roadless old growth is a wide judgment.
 
 ### What isn't modelled
 
-Wins before July 2021 aren't counted, and neither is their cost. Smaller wins of the period count only through the +50% share in each model. These include vehicle standards, gas plants blocked, building electrification and efficiency programmes, offshore lease sales, chemical-plant and coal-ash rules, community enforcement, gray wolves and other species.
+Wins before July 2021 aren't counted, and neither is their cost. Smaller wins of the period count only through the share for other wins. These include vehicle standards, gas plants blocked, building electrification and efficiency programmes, offshore lease sales, chemical-plant and coal-ash rules, community enforcement. Gray wolves and other species count nothing: their welfare effect is unknown.
 
 Compliance costs to industry and water systems aren't counted, as in the site's other policy models. For the PFAS standards EPA puts them near the benefits' dollar value. Species and wild animals count only where a welfare effect is known: we don't know whether more wild animals alive is good or bad for them, so they count nothing.
 
@@ -66,4 +66,4 @@ Independent audits are in audits/earthjustice-charityevals/, audits/earthjustice
 - Earthjustice, audited financial statements for the years to June 2025, 2024, 2023 and 2022; Annual Report, fiscal year 2025.
 - US EPA: the methane rule (2023), the power-plant standards (2024), the PM NAAQS overview (2024) and the PFAS drinking-water costs and benefits (2024); GAO-25-107897; Harvard's Environmental and Energy Law Program regulatory tracker.
 - US EIA, Today in Energy (coal retirements 2022-2025) and CO₂ per kWh by fuel.
-- KTOO (2023), the Tongass Roadless Rule restored.
+- KTOO (2023), the Tongass Roadless Rule restored; Congressional Research Service R46505 (2020); Wear & Murray (2004), timber leakage; Leighty et al. (2006), Tongass carbon.
