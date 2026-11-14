@@ -1,0 +1,21 @@
+# Audit: fair-tax-foundation-charityevals, round 3 (scoped verification of round 2's fixes)
+Result: 0.0660 uov/$ = 0.066 years of healthy life per 1,000 dollars (model's own ranges 11.8 million× joint low to high); cause median 0.0642 (this model ×1.03). Verdict: pass.
+Scope: only round 2's three findings and the rows, beneficiaries, summary and write-up lines they changed. Not re-audited: everything round 2 passed.
+Mechanical: audit-model lint 1 low (spread, as the summary says), 0 high or medium; check.ts all models valid.
+
+Round 2 findings:
+1. resolved: `a_umic_share` 13% (7% to 25%). Repsol's EUR 684 million upper-middle income accrual less EUR 484 million for Libya and Algeria (ring-fenced oil tax) leaves Peru 83 + Indonesia 70 + Colombia 30 + Brazil 16 + Mexico 1 = EUR 200 million, 4.2% of the certified EUR 4.8 billion; with a judged ~8% for Iberdrola's Brazil and Mexico, about 12-13%. The Libya row is the quoted source line. The explainer states the judgment and the reason Iberdrola's reports could not be read.
+2. resolved: `a_changed_share` is a formula, `pressure_share_removed` (0.9, 0.4 to 1.0, estimate) times `voluntary_vs_pressure` (0.17, 0.03 to 0.45, judgment) = 0.153, as the explainer says ("about 15%"). Re-read in the extracted working paper: abstract, "3.7 percentage point increase" in ETRs of noncompliant relative to compliant firms; footnote 22, 29.3% against 32.5% unadjusted pre-pressure ETRs, a 3.2-point gap. The explainer's figures match. The effect (3.7) exceeds the gap (3.2), so "about all" with 90% best and 100% high is a reasonable reading; the ETR gap is a proxy for avoidance, not a measure of it (finding 1).
+3. resolved: `c_evidence_adj` explainer says 0.65, equal to `a_evidence_adj` (0.65 in the engine).
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | low | source | pressure_share_removed | The source page says "p. 1 (abstract)" and the quote is the abstract's; the 3.2-point gap is the unadjusted ETR difference between named and other firms, which only approximates the avoidance gap (compliant firms are not avoidance-free), so "gave up about all" is a reading. | Working paper text, abstract and footnote 22. | Say in the explainer that the gap is a proxy. | 0 (range 40% to 100% already carries it). |
+| 2 | low | text | write-up, line 42 | The round-1 sentence still says the upper-middle income share is "(10% to 22%)"; the range is now 7% to 25% and the share 13%. | Write-up line 42 against `a_umic_share`. | Update to "(7% to 25%)" or drop the range. | 0. |
+
+Beneficiaries recomputed from the engine at the defaults: branch outcomes a 95.92, c 34.80, b 1.91 (total 132.62). Certification's upper-middle income share of value = 0.13 x 2.054e-4 / (0.13 x 2.054e-4 + 0.87 x 3.116e-5) = 49.6%; benchmarking's (0.15) 53.8%; the UK campaign is all UK. Upper-middle income = (95.92 x 0.496 + 34.80 x 0.538) / 132.62 = 50.0%; high income 48.6% from the two certification and index branches plus the UK campaign 1.4% = 50.0%. The model's beneficiaries (PER 0.069, IDN 0.058, COL 0.025, BRA 0.297, MEX 0.051 = 0.500; GBR 0.231, ESP 0.146, USA 0.039, NOR 0.034, DNK 0.015, FIN 0.015, SWE 0.010, NLD 0.010 = 0.500) sum to 1.000, and the `OURS` entry in `scripts/beneficiary-countries.ts` matches them and the note (50% / 50%; UK 23%, Spain 15%, others 12%). Within the upper-middle income half, Peru's 0.069 = 83/200 of Repsol's EUR 200 million share of about 4.2 points of the 13, consistent. The summary's figures (an eighth paid in upper-middle income countries, "half the result", about seven times per dollar, 0.07, "over a million-fold" against audit-model's 11.8 million) agree with the rows; the write-up's 13%, 45% of Repsol's tax (684 / 1,530), the 17% and "about all", 65% and 50% trust, and the 2% and 15% lines are right.
+
+Result check: 0.0660 against round 2: the upper-middle income share moves from about 10% to 13% on certification only, and the mark's effect now rests on 0.9 x 0.17 = 15.3%; the headline stays within 3% of the cause median, and no row moves the result by more than 2×.
+
+Verdict: pass (no high or medium; two low)
+Model-sha: 9d343d5dacd576108b2fc83272095384261e1832f827ede7c7883ae91e972703
