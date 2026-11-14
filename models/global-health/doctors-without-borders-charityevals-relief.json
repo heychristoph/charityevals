@@ -656,8 +656,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * price_2017_per_2025 * ppp_factor / baseline_consumption)",
-      "explainer": "A year's goods on the site's one log-income scale."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * price_2017_per_2025 * ppp_factor / (baseline_consumption * years_exposed))",
+      "explainer": "The items other than nets on the site's one log-income scale over the months they are used (years_exposed, the months they protect a family): years_exposed × ln(1 + value ÷ the consumption of those months), the site's rule for goods used within a year."
     },
     {
       "id": "sar_people_rescued",
@@ -1048,7 +1048,7 @@
     {
       "id": "wellbys_bridged",
       "section": "bridges",
-      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years",
       "format": "number",
       "formula": "0",
       "unit": "WELLBYs"
