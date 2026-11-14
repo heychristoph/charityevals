@@ -14,7 +14,7 @@
   "estimate_basis": "past_average",
   "charity": "environmental-defense-fund",
   "owner": "charityevals",
-  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, $110M with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (up to 4,500 deaths a year avoided, upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about 0.0015 years of healthy life per $1,000, three-fifths from the lead-pipe rule and most of the rest from the soot standard; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
+  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, $110M with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (up to 4,500 deaths a year avoided, upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about 0.0016 years of healthy life per $1,000, three-fifths from the lead-pipe rule and most of the rest from the soot standard; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Environmental Defense Fund (health and nature)",
@@ -454,8 +454,8 @@
       "section": "cost",
       "label": "Average yearly spending on these programmes FY2022-2025, in 2025 prices, ÷ FY2025's",
       "format": "multiple",
-      "formula": "(total_expenses_2022 * @cpi.usa_2025 / @cpi.usa_2022 * (1 - core_climate_share) + total_expenses_2023 * @cpi.usa_2025 / @cpi.usa_2023 * (1 - core_climate_share_2023) + total_expenses_2024 * @cpi.usa_2025 / @cpi.usa_2024 * (1 - core_climate_share_2024) + total_expenses * (1 - core_climate_share)) / period_years / (total_expenses * (1 - core_climate_share))",
-      "explainer": "A past average's cost and wins come from the same period (templates.md Convention 11): each fiscal year's total expenses in 2025 prices (US consumer prices by calendar year, facts: cpi; EDF's years end in September) × these programmes' share of that year's programme areas (FY2023 and FY2024 from their own statements; FY2022, whose statements group the programmes differently, at FY2025's mix), averaged and divided by FY2025's."
+      "formula": "(total_expenses_2022 * @cpi.usa_2025 / @cpi.usa_2022 * @environmental_defense_fund.health_nature_share_2022 + total_expenses_2023 * @cpi.usa_2025 / @cpi.usa_2023 * (1 - core_climate_share_2023) + total_expenses_2024 * @cpi.usa_2025 / @cpi.usa_2024 * (1 - core_climate_share_2024) + total_expenses * (1 - core_climate_share)) / period_years / (total_expenses * (1 - core_climate_share))",
+      "explainer": "A past average's cost and wins come from the same period (templates.md Convention 11): each fiscal year's total expenses in 2025 prices (US consumer prices by calendar year, facts: cpi; EDF's years end in September) × these programmes' share of that year's programme areas (FY2023 and FY2024 from their own statements; FY2022, whose statements group the programmes differently, a shared judgment within the observed years: facts: environmental_defense_fund.health_nature_share_2022), averaged and divided by FY2025's."
     },
     {
       "id": "cost_total",
@@ -651,18 +651,18 @@
       "section": "effect",
       "label": "Value of a heart or lung death at 70 or older (units of value)",
       "format": "number",
-      "formula": "(1 - @death_ages.cvd_share_80plus_of_70plus_gbr) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cvd_share_80plus_of_70plus_gbr * @moral_weights.givewell_age_80_84",
+      "formula": "(1 - @death_ages.cvd_share_80plus_of_70plus_usa) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cvd_share_80plus_of_70plus_usa * @moral_weights.givewell_age_80_84",
       "unit": "units of value",
-      "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of cardiovascular deaths at 70 or older that are at 80 or older, as in the British Heart Foundation model (families/high-income-care.md)."
+      "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of US cardiovascular deaths at 70 or older that are at 80 or older, as in the British Heart Foundation model (families/high-income-care.md)."
     },
     {
       "id": "rich_value_per_death",
       "section": "effect",
-      "label": "Value of an adult heart or lung death averted in a rich country (units of value)",
+      "label": "Value of an adult heart or lung death averted in the US (units of value)",
       "format": "number",
-      "formula": "(@death_ages.cvd_share_under5_gbr * @moral_weights.uov_per_death_under5 + @death_ages.cvd_share_5_14_gbr * @moral_weights.uov_per_death_age_5_14 + @death_ages.cvd_share_15_49_gbr * @moral_weights.uov_per_death_age_15_49 + @death_ages.cvd_share_50_69_gbr * @moral_weights.uov_per_death_age_50_74 + @death_ages.cvd_share_70plus_gbr * rich_value_70plus) * $life_value_multiplier",
+      "formula": "(@death_ages.cvd_share_under5_usa * @moral_weights.uov_per_death_under5 + @death_ages.cvd_share_5_14_usa * @moral_weights.uov_per_death_age_5_14 + @death_ages.cvd_share_15_49_usa * @moral_weights.uov_per_death_age_15_49 + @death_ages.cvd_share_50_69_usa * @moral_weights.uov_per_death_age_50_74 + @death_ages.cvd_share_70plus_usa * rich_value_70plus) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "The ages of cardiovascular deaths in a rich country (facts: death_ages, the UK's, the nearest the site holds; US heart deaths come a little younger, so this is slightly low) valued by GiveWell's weights by age, × the value-of-a-life slider. EPA's soot deaths are mostly heart and lung deaths of older adults, and the lead-pipe rule's are heart-disease deaths, so both branches use it."
+      "explainer": "The ages of US cardiovascular deaths (facts: death_ages, GBD 2023: 74% at 70 or older) valued by GiveWell's weights by age, × the value-of-a-life slider. EPA's soot deaths are mostly heart and lung deaths of older adults, and the lead-pipe rule's are heart-disease deaths, so both branches use it."
     },
     {
       "id": "pm_value_per_death",
@@ -671,7 +671,7 @@
       "format": "number",
       "formula": "rich_value_per_death",
       "unit": "units of value",
-      "explainer": "The rich-country value of a heart or lung death (row above)."
+      "explainer": "The US value of a heart or lung death (row above)."
     },
     {
       "id": "pm_illness_share",
@@ -718,7 +718,7 @@
       "format": "number",
       "formula": "rich_value_per_death",
       "unit": "units of value",
-      "explainer": "The rich-country value of a heart death (rows above)."
+      "explainer": "The US value of a heart death (rows above)."
     },
     {
       "id": "iq_wage_gain",
@@ -731,7 +731,7 @@
     {
       "id": "resource_sharing",
       "section": "effect",
-      "label": "Share of an earnings gain shared with the household",
+      "label": "Household sharing multiplier on an earnings gain",
       "format": "multiple",
       "formula": "@givewell_shared.resource_sharing_multiplier",
       "explainer": "The shared multiplier for later-life income gains shared within the household (facts: givewell_shared), as the site's other US models apply it."
@@ -779,12 +779,12 @@
         "high": 11
       },
       "kind": "judgment",
-      "explainer": "Utilities must start replacing in November 2027 and finish by December 2037; the middle of the replacements is about 2032, eight years after the rule. Our judgment, 8 years (5 to 11).",
+      "explainer": "Utilities must start replacing in November 2027 and finish within ten years; the middle of the replacements is about 2032, eight years after the rule. Our judgment, 8 years (5 to 11).",
       "unit": "years",
       "source": {
-        "title": "US EPA, Lead and Copper Rule Improvements (rule page)",
-        "url": "https://www.epa.gov/ground-water-and-drinking-water/lead-and-copper-rule-improvements",
-        "note": "Compliance from 1 November 2027; ten years to replace lead and galvanized lines (by 31 December 2037 in EPA's 2026 access guidance).",
+        "title": "US EPA (2024), National Primary Drinking Water Regulations for Lead and Copper: Improvements (LCRI), final rule, 89 FR 86418 (30 October 2024)",
+        "url": "https://www.federalregister.gov/citation/89-FR-86418",
+        "note": "Compliance from 1 November 2027; most systems must replace lead and galvanized service lines within 10 years of that date.",
         "retrieved": "2026-11-14"
       }
     },
@@ -999,11 +999,11 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "EDF was among the leaders: it convened the Lead Service Line Replacement Collaborative of public health, water utility and environmental groups, and its health team pressed for full replacement for a decade; NRDC (Flint and Newark litigation), Earthjustice, the BlueGreen Alliance, community groups and parts of the water industry worked for it too. Our judgment, 20% (8% to 35%).",
+      "explainer": "EDF's health team pressed for full replacement of lead service lines for a decade (analyses of the lines' numbers and costs, petitions, comments on the 2021 and 2024 rules) and sits on the steering committee of the Lead Service Line Replacement Collaborative, a forum of public health, water utility, environmental and housing groups (facilitated by RESOLVE; not itself an advocacy group). Others pressing for the rule: NRDC (Flint and Newark litigation), Earthjustice, the BlueGreen Alliance, community groups and parts of the water industry. Reference class: EDF was one of the three to five national groups that led on the file, against many smaller ones. Our judgment, 20% (8% to 35%).",
       "source": {
-        "title": "Lead Service Line Replacement Collaborative (convened by EDF with public health, water utility, environmental and housing groups)",
-        "url": "https://www.lslr-collaborative.org/",
-        "note": "EDF's release of 8 October 2024 (https://www.edf.org/media/edf-applauds-historic-us-epa-rule-eliminate-lead-pipes) welcomes the rule.",
+        "title": "Lead Service Line Replacement Collaborative, About (archived 4 January 2025)",
+        "url": "https://web.archive.org/web/20250104/https://www.lslr-collaborative.org/",
+        "note": "EDF one of five steering-committee members, RESOLVE the facilitator; the Collaborative describes itself as not an advocacy organization. EDF's release of 8 October 2024 (https://www.edf.org/media/edf-applauds-historic-us-epa-rule-eliminate-lead-pipes) welcomes the rule.",
         "retrieved": "2026-11-14"
       }
     },
@@ -1025,7 +1025,13 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "The administration said in February 2026 it will keep the ten-year deadline, but federal funding for lead lines ends in 2026, small systems get leeway and lines the utility can't reach are excused. Our judgment, 60% (35% to 85%)."
+      "explainer": "The rule stands and EPA's 2026 implementation guidance works to the ten-year deadline, but federal funding for lead lines ends in 2026, small systems get leeway and lines the utility can't reach are excused. Our judgment, 60% (35% to 85%).",
+      "source": {
+        "title": "US EPA (2026), Lead and Copper Rule Improvements: tips for accessing service lines (draft for comment)",
+        "url": "https://www.epa.gov/system/files/documents/2026-04/forcomment_lcri_access-tips_1.pdf",
+        "note": "EPA's April 2026 guidance to utilities for meeting the rule's replacement requirements.",
+        "retrieved": "2026-11-14"
+      }
     },
     {
       "id": "lslr_disturbance_share",
