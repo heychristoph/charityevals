@@ -44,8 +44,9 @@ const walk = (d: string): string[] =>
     return statSync(p).isDirectory() ? walk(p) : f.endsWith(".json") ? [p] : [];
   });
 
-// Hand-built models only: bulk imports are thousands of rows and not a fair reference class.
-const repoModels = walk(join(root, "models")).filter((p) => !p.includes("/models/grants/")).map(read);
+// Bulk imports (models/grants/) load too, so a meta model can read GiveWell's grantees live
+// (`#givewell:<charity>`); the reference classes below skip them (`!x.bulk`): not a fair comparison.
+const repoModels = walk(join(root, "models")).map(read);
 const path = existsSync(target) ? resolve(target) : undefined;
 const raw = path ? read(path) : repoModels.find((m) => m.id === target);
 if (!raw) {

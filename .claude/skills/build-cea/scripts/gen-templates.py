@@ -816,6 +816,12 @@ def area_rows(a, name, ext, cat, share, what):
           "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries" + (": misuse work at Rethink's misuse preset, other AI work at its misalignment preset, weighted by ai_misuse_cost_share" if a == "ai" else "") + ". The catastrophe figure also applies to the smaller size. Fixed; don't edit.", "small", "deaths / year"),
         f(f"{a}_future_per_million", "effect", f"{name}: future healthy years kept a year by a typical $1 million of work", f"{cut('extinction')} * {a}_future_per_year",
           "As ai_deaths_per_million, for the future lost in an extinction-level catastrophe: the two presets' extinction cuts weighted by ai_misuse_cost_share." if a == "ai" else None, "small", "DALYs / year"),
+    ]
+    if a == "bio":
+        rows += [f("bio_covid_scale_share", "effect", "Pandemics: share of those deaths averted that are in a COVID-scale pandemic",
+                   f"@catastrophe.bio_catastrophe_cut_per_million * bio_smaller_per_year * bio_smaller_deaths / bio_deaths_per_million",
+                   "The COVID-scale size's part of the deaths a typical $1 million of pandemic work averts: valued at COVID-19's age mix (covid_value_per_death), the rest at the world's. Fixed; don't edit.", "percent")]
+    rows += [
         inp(f"{a}_cost_share", "effect", f"{name}: share of the cost spent on work against {name.lower()} risk (research, evaluations, convening, advocacy)", share, "estimate",
             f"the share of the modelled spending on {what}, from the charity's programme expenses (Form 990 Part III, the accounts' programme notes), overhead spread alike. Leave out the spending behind a specific win counted in the policy branch (pol_cost_share) and on training counted in fb_cost_share, so nothing counts twice. 0 with the reason where the charity does none.", "percent", source=src("Form 990 Part III / annual accounts")),
         inp(f"{a}_years_until_effect", "effect", f"{name}: years from the spending until the work cuts the risk", {"low": 0, "best": 1, "high": 3}, "judgment",
@@ -874,6 +880,11 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
         f("cost_shares_total", "effect", "Check: the cost shares add up to all the modelled spending", "ai_cost_share + bio_cost_share + nuclear_cost_share + pol_cost_share + fb_cost_share",
           "Must be 1: every dollar of the modelled programme is in exactly one branch.", "percent"),
         f("deaths_averted", "effect", "Deaths averted, every branch (expected, before adjustments)", "ai_deaths_averted + bio_deaths_averted + nuclear_deaths_averted + pol_deaths_averted + fb_deaths_averted", None, "small", "deaths"),
+        f("covid_scale_deaths_averted", "effect", "Deaths averted that are in a COVID-scale pandemic (a part of deaths_averted)", "bio_deaths_averted * bio_covid_scale_share",
+          "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size (a catastrophe that kills a share of the world, extinction) at the world's. A policy or field-building branch pointed at the pandemic area adds its deaths averted × bio_covid_scale_share here. Fixed.", "small", "deaths"),
+        f("covid_value_per_death", "effect", "Value of a death averted in a COVID-scale pandemic (units of value)",
+          VPD.replace("share_under5", "@death_ages.covid_scale_share_under5").replace("share_5_14_of_over5", "@death_ages.covid_scale_share_5_14_of_over5").replace("share_15_49_of_over15", "@death_ages.covid_scale_share_15_49_of_over15"),
+          "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed.", "number", "units of value"),
         f("future_dalys_averted", "effect", "Future healthy years kept, every branch (expected, before adjustments)", "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys", None, "number", "DALYs"),
     ] + adj_rows(implementation=False, leverage=True,
         evidence_rows=[inp("evidence_adj", "adjustments", "How far the typical project's effect applies to this charity's work", {"low": 0.3, "best": 0.7, "high": 1.2}, "judgment",
@@ -888,7 +899,7 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
             inp("hazard_harm_share", "adjustments", "Harm: information hazards and attention, as a share of modelled value", {"low": -0.1, "best": 0, "high": 0}, "judgment",
                 "beyond a typical project's backfire, published threat analyses, red-teaming results or advocacy that show bad actors a path or draw them to a weapon, a negative share; 0 with the reason where nothing sensitive is published.", "percent"),
         ]) + multi({
-        "uov": ("deaths_averted * value_per_death * (1 + @catastrophe.nondeath_losses_vs_deaths)", "Deaths averted (and losses beyond them, 0 by default)"),
+        "uov": ("((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths)", "Deaths averted (and losses beyond them, 0 by default)"),
     }, "future_dalys_averted", side=("unmodelled_benefits_adj", "speedup_harm_share", "hazard_harm_share")) + donor_rows("dalys", "Years of healthy life", "research", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
     "what the charity does against which risks (AI, pandemics, nuclear war), the year, which branches carry the result (field work, a policy win, people trained), " + BOTTOM + " Say that the result rests on shared forecasts and a typical project's effect, so it moves with the AI slider and the discount rate.", "past_average", sections=MULTI_SECTIONS)
 for r in T["catastrophic-risk"]["rows"]:
