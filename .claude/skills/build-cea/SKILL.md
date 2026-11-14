@@ -98,7 +98,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - income ln(consumption) × `$uov_per_ln_consumption`; GiveWell's house constants `@givewell_shared.*`
     and supplementary figures `@givewell_common.*`;
   - household size, consumption, PPP, currency (`@fx`) and prices (`@cpi`, Convention 8) from facts;
-  - cash multiples × `@cash.uov_per_dollar`; depression through `@wellby_factors` and `@depression`;
+  - cash multiples × `@cash.uov_per_dollar`; aid of no known use won or kept `@aid_value.*`; depression through `@wellby_factors` and `@depression`;
   - animals `@sad_factors.*`: one figure per physical change, pledges kept
     (`commitment_fulfilment_cage_free` / `_broiler`), `production_response`, `sads_per_meal_replaced`,
     `meal_sads_share_<s>`; species weights only in the `ced_*` rows;

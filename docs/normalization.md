@@ -1232,6 +1232,24 @@ future share is 0 at its best guess, so its headline is unchanged). Every branch
 used, is now `catastrophic-risk` ("Catastrophic risk"). First model: the Nuclear Threat Initiative, 21 years of
 healthy life per $1,000 at the defaults (1.1-410).
 
+### 2.20 Aid won or kept: what that aid does per dollar (November 2026)
+
+A dollar of aid or public money a model's work wins, keeps, displaces or improves is valued at what that aid
+does per dollar. Where its use is known, that use's figure: a downstream model read live, GiveWell's
+`@givewell_shared.cf_value_*` (Gavi pledges, buyers' savings, nutrition commitments at the government-spending
+figure), money to a
+modelled agency at that model's value, domestic benefits as the recipients' gain less the payers' cost. Else
+one of two shared figures in facts/aid_value.json × `@cash.uov_per_dollar`: `humanitarian_vs_cash` 0.2
+(0.05-0.8; the site's 17 relief models before their missing-data step, median 0.21) and `oda_vs_cash` 1
+(0.4-2; a donor's whole aid budget: health at GiveWell's Global Fund and Gavi figures, humanitarian at 0.2,
+other development about 0.5 after cash-benchmarking trials). Before, models typed 1× (0.3-2.5×), 0.3×,
+0.25× or their own charity's programmes × 1.1. At the defaults: MSF's advocacy 0.075 → 0.065 years per
+$1,000 (awareness-raising's humanitarian dollar 1× → 0.2×), the Norwegian Refugee Council's advocacy
+0.0146 → 0.0132 (NRC's programmes × 1.1 → the shared figure: the appeals' money funds every kind of
+relief), Save the Children's advocacy 0.426 → 0.417 (Elrha 0.3× → 0.2×; displaced aid 1× → `oda_vs_cash`),
+NRC's programmes 0.2044 → 0.2039 (NORCAP 0.25× → 0.2×), CARE's and World Vision's US aid unchanged at 1×
+(range 0.3-2.5 → 0.4-2). Each changed model had a verification round.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
