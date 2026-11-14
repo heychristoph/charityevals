@@ -1,7 +1,7 @@
 # catastrophic-risk (uov, DALYs → daly; past_average)
 
-Charities against global catastrophes: AI, pandemics and nuclear war. One model covers several areas; a
-regrantor is policy-research-meta's money moved, read live.
+AI, pandemics and nuclear war. One model covers several areas; a
+regrantor is money moved, read live.
 
 ## The chain
 
@@ -28,7 +28,8 @@ Why this shape:
   discount rate (`future_years_per_person`). People alive now count as deaths, never twice.
 - **A typical dollar, then this charity.** The cut per dollar is Rethink Priorities' typical project per
   area, its backfire step included. The charity enters through its spending and each branch's evidence
-  multiplier: how far its outputs beat or trail a typical project. No free-hand multiplier.
+  multiplier: how far its outputs beat or trail a typical project. No free-hand multiplier. Spending far
+  above a typical project (about $30M a year) takes `<a>_scale_adj` from its measured outcome.
 - **Adjustments by branch.** Branches differ in value per dollar, so each has its own evidence,
   counterfactual and attribution; the canonical rows chain them weighted by each branch's healthy years
   (`w_<branch>`), never by spending (right only within one branch).
@@ -41,7 +42,7 @@ Why this shape:
   of AI misalignment work. Start from everyone's resources behind the measure × the area's cuts per $1
   million (both sizes), then a named multiple. People trained go in field-building, at their work's
   typical dollar, the training credited its share.
-- **Years.** Every cut counts `$win_years_counted` years (normalization.md 2.9), not Rethink's 15–25,
+- **Years.** Every cut counts `$win_years_counted` years (normalization.md 2.9),
   the wait discounted; that someone else would do the work now is `counterfactual_adj`.
 - **Basis.** `past_average`, reading `@next_dollar.<id>` (normalization.md 2.10).
 
@@ -72,10 +73,9 @@ A smaller AI or nuclear size needs a sourced forecast in facts/; else a named sh
 
 ## Pitfalls
 
-- **Thin by nature**: every branch takes `$missing_data_discount`.
+- **Thin**: every branch takes `$missing_data_discount`.
 - **Don't count a typical project's backfire twice**: it is in the shared cut. `speedup_harm_share` and
   `hazard_harm_share` (side effects) are only for work clearly riskier than typical (capabilities-
   adjacent research, dangerous-capability evaluations, published threat analyses).
 - **Don't** type a funder's dollars-per-basis-point bar, an evaluator's value of the future, or a
-  premium for a catastrophe's size; compare the implied cost per basis point with those bars in the
-  write-up only.
+  premium for a catastrophe's size; compare with those bars in the write-up only.
