@@ -254,6 +254,9 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
 - **Money moved or raised**: `money_moved × moved_dollar_net_value`, the shared rows word for word
   (`python3 scripts/moved-money.py` for another destination set); a not-yet-proven organisation takes
   `@meta.success_chance_new_org` and the shared success step.
+- **Aid or public money won or kept** is worth what that aid does: its known use's figure (a downstream
+  model live, `@givewell_shared.cf_value_*`, or recipients' gain less payers' cost), else
+  `@aid_value.humanitarian_vs_cash` or `@aid_value.oda_vs_cash` × `@cash.uov_per_dollar`; never a model's own multiple.
 - **Career changes**: `careers_changed × career_change_value × careers_missing_data_adj`. Money
   moved is measured dollars: no missing-data step.
 - Downstream WELLBYs: rename `uov_*` to `wellbys_*`, unit `wellby`. Animals: `sads_*` and the species
