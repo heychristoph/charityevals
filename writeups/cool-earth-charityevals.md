@@ -1,10 +1,10 @@
 ### Summary
 
-Cool Earth backs Indigenous and local communities in Peru, Papua New Guinea and Cameroon to keep their rainforest standing, mostly with cash given directly to households and community committees. Our model of its year to 31 January 2026 comes to **<span data-figure="headline" data-model="cool-earth-charityevals">0.15</span> years of healthy life per $1,000**.
+Cool Earth backs Indigenous and local communities in Peru, Papua New Guinea and Cameroon to keep their rainforest standing, mostly with cash given directly to households and community committees. Our model of its year to 31 January 2026 comes to **<span data-figure="headline" data-model="cool-earth-charityevals">0.11</span> years of healthy life per $1,000**.
 
 That is far above the site's other climate models, and almost all of it is the cash, not the forest:
 
-- About £2 million of the year's £3.3 million of programme spending went straight to communities. They are among the poorest people in Peru and Papua New Guinea, so the money raises their consumption by a lot. The model values that the way it values any cash transfer.
+- About £1.2 million of the year's £3.3 million of programme spending reached communities as cash. They are among the poorest people in Peru and Papua New Guinea, so the money raises their consumption by a lot. The model values that the way it values any cash transfer.
 - The forest kept is worth little in healthy years, as land carbon is everywhere on the site. And how much clearing Cool Earth's support actually prevents is a judgment.
 
 Neither branch is measured against a comparison group, so both take the site's missing-data discount.
@@ -37,25 +37,35 @@ The [model](/cool-earth/cool-earth-charityevals) follows the site's conservation
 
 The pandemic risk uses the same shared figures as the site's other forest model.
 
-**The cash.** £2 million shared by about 30,000 people (a judgment: Cool Earth counts 59,000 people in its partnerships), whose consumption we put at 35% of Peru's average, about $1,000 a person a year. The cash raises that by about 8%, on the site's log-consumption scale. Credit and the counterfactual are 1: the cash is Cool Earth's own, and no one else would have given it.
+**The cash.** Cool Earth says it gave £2 million directly to communities. Its accounts suggest about £1.2 million of that was cash. The rest is the hubs' local staff, equipment and non-cash projects.
+
+We take the cash as shared by about 40,000 people. That is a judgment: Cool Earth counts 103,000 Indigenous people supported. We put their consumption at 35% of Peru's average, about $1,000 a person a year, and the cash raises it by about 4%, on the site's log-consumption scale.
+
+Two side effects are added, as for other cash:
+
+- child deaths averted, GiveWell's shared +4%;
+- gains to traders and others where the money is spent, +10%.
+
+Credit and the counterfactual are 1: the cash is Cool Earth's own, and no one else would have given it.
 
 **A unit cost.** The year's spending keeps the year's partnerships going, and more money buys more partnerships at about the same cost: Cool Earth's plan to 2030 is 2 million hectares for about £8.4 million a year. So the model has no next-dollar factor.
 
 ### What drives the result
 
-At the defaults, the cash is about 93% of the result. The pandemic risk is about 6% and the forest's carbon about 1%. The biggest swings are:
+At the defaults, the cash is about 90% of the result. The pandemic risk is about 8% and the forest's carbon about 2%. The biggest swings are:
 
 - the missing-data discount;
 - how many units of value make a healthy year;
 - how poor the communities are (the consumption share);
-- the shared value of a doubled consumption.
+- how much of the money is cash.
 
 The forest's judgments (the loss rate, what the support changes, permanence) barely move the total.
 
 ### Biggest uncertainties
 
 - **How poor the communities are.** No survey of the partnerships' consumption is published; the share of Peru's average is our judgment.
-- **What the support does to the forest.** Cool Earth reports that 99% of its partnerships' forest still stands, but Indigenous territories keep their forest well anyway (Sze et al. 2022: 2.5 times less loss than other land). No study compares the partnerships with similar forest without them.
+- **How much is cash.** Cool Earth publishes no figure for cash disbursed. The £1.2 million is our reading of its accounts, between £0.8 million and its own £2 million.
+- **What the support does to the forest.** Cool Earth's satellite comparison finds three times less loss than in comparable areas. Most of those areas aren't Indigenous land, and Indigenous land keeps its forest well anyway (Sze et al. 2022: 2.5 times less loss than other land). No study compares the partnerships with similar Indigenous forest without the support.
 - **Pandemic risk from forest loss** is the least grounded number. It is a shared judgment, and it is small here.
 
 ### What isn't modelled
