@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-bail-project",
   "owner": "charityevals",
-  "summary": "The Bail Project's policy, public-education and research work (about $5 million a year with overhead, fiscal 2023-2025) campaigns in the states where it bails people out, and its wins of those years are counted as a past average: shares of the defeat of Texas's 2023 bail-denial amendment and bill (held off two years, until Proposition 3 and SB 9 passed in 2025, plus a twentieth of Proposition 3's effect through the protections it carries), of the defeat of two further denial amendments in 2025, and of blocking a year's bills against charitable bail in Florida and Oklahoma, each valued as the detention, sentences, lost earnings, jail costs and deaths avoided, with the bail model's shared figures, the Texas measures sized on Harris County's projection for Proposition 3; the campaigns it lost count nothing. The result is about 0.005 years of healthy life per 1,000 dollars, far below the median of the site's global-health models because the wins are defensive and short-lived, the charity's share of the coalitions is small and the next dollar counts at 29% of the average, with years of spending in reserve. Every branch is discounted for missing data, and the result is mostly uncertainty: how much detention the defeated measures would have added and how much of their defeat is the campaign's.",
+  "summary": "The Bail Project's policy, public-education and research work (about $5 million a year with overhead, fiscal 2023-2025) campaigns in the states where it bails people out, and its wins of those years are counted as a past average: shares of the defeat of Texas's 2023 bail-denial amendment and personal-bond bill (held off two years, until Proposition 3 and SB 9 passed in 2025, plus a twentieth of Proposition 3's effect through the protections it carries), of the defeat of two further denial amendments in 2025 (sized on their sponsor's own figure), and of blocking a year's bills against charitable bail in Florida and Oklahoma, each valued as the detention, sentences, lost earnings, jail costs and deaths avoided, with the bail model's shared figures, the Texas measures sized on Harris County's flow of eligible defendants and its prosecutors' first months of no-bail hearings; the campaigns it lost count nothing. The result is about 0.003 years of healthy life per 1,000 dollars, far below the median of the site's global-health models because the wins are defensive and short-lived, the charity's share of the coalitions is small and the next dollar counts at 29% of the average, with years of spending in reserve. Every branch is discounted for missing data, and the result is mostly uncertainty: how much detention the defeated measures would have added and how much of their defeat is the campaign's.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Bail Project, policy, public education and research",
@@ -101,8 +101,8 @@
       "value": 10270968,
       "kind": "observed",
       "source": {
-        "title": "The Bail Project, Form 990 for July 2024 to June 2025 (IRS e-file 202620619349300142, EIN 81-4985512)",
-        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2026/2026_TEOS_XML_03A.zip",
+        "title": "The Bail Project, Form 990 for July 2024 to June 2025 (ProPublica Nonprofit Explorer, EIN 81-4985512; IRS e-file 202620619349300142 in the IRS bulk archive 2026_TEOS_XML_03A.zip)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/814985512",
         "retrieved": "2026-11-14",
         "page": "Part IX, line 25, column (B)",
         "quote": "Total functional expenses: program service expenses 10,270,968",
@@ -118,8 +118,8 @@
       "value": 13872645,
       "kind": "observed",
       "source": {
-        "title": "The Bail Project, Form 990 for July 2024 to June 2025 (IRS e-file 202620619349300142, EIN 81-4985512)",
-        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2026/2026_TEOS_XML_03A.zip",
+        "title": "The Bail Project, Form 990 for July 2024 to June 2025 (ProPublica Nonprofit Explorer, EIN 81-4985512; IRS e-file 202620619349300142 in the IRS bulk archive 2026_TEOS_XML_03A.zip)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/814985512",
         "retrieved": "2026-11-14",
         "page": "Part I, line 18",
         "quote": "Total expenses 13,872,645"
@@ -259,6 +259,14 @@
       "explainer": "The shared years of life lost per year incarcerated, as a share of a remaining life of 40 years, at the shared share for jail (half), discounted for the years until the deaths."
     },
     {
+      "id": "deaths_per_long_detention_year",
+      "section": "effect",
+      "label": "Deaths caused per year of pretrial detention lasting months",
+      "format": "number",
+      "formula": "@incarceration.life_years_lost_per_year_incarcerated / @incarceration.remaining_life_in_prison * @incarceration.long_pretrial_mortality_vs_prison * (1 + $discount_rate) ^ (0 - @incarceration.years_until_prison_deaths)",
+      "explainer": "As above at the shared share for detention of months (0.7), for the Texas measures, whose people would be held for months."
+    },
+    {
       "id": "value_per_death",
       "section": "effect",
       "label": "Value of a death averted (units of value)",
@@ -326,37 +334,40 @@
       "explainer": "The jail population the Texas measures would have added to."
     },
     {
-      "id": "harris_full_denial_add",
+      "id": "harris_eligible_released",
       "section": "reach",
-      "label": "Rise in Harris County's jail population if every defendant eligible under the 2025 bail laws were denied bail",
+      "label": "Harris County defendants with charges listed in Proposition 3 released on bond in 2025",
       "format": "integer",
-      "value": {
-        "low": 1500,
-        "best": 1900,
-        "high": 2500
-      },
-      "kind": "estimate",
+      "value": 2400,
+      "kind": "observed",
       "source": {
         "title": "KWBU (Houston Public Media), Texas' new bail laws could increase Harris County's jail population, court case backlog, 3 January 2026",
         "url": "https://www.kwbu.org/news-from-across-texas/2026-01-03/texas-new-bail-laws-could-increase-harris-countys-jail-population-court-case-backlog",
         "retrieved": "2026-11-14",
-        "quote": "the jail population could grow by more than 1,900 inmates by the end of 2026 if defendants accused of certain crimes outlined in the new bail legislation are denied bail",
-        "note": "From the county's presentation to Commissioners Court; officials said prosecutors are unlikely to request denial for most defendants."
+        "quote": "About 2,400 defendants with a criminal charge specified under the proposition were released on bond throughout 2025",
+        "note": "The county's projection of 'more than 1,900 inmates by the end of 2026' if all were denied bail is these 2,400 at the 280-day average stay for those charges (2,400 x 280 / 365), a check on the rows below."
       },
-      "explainer": "Harris County's own projection for Proposition 3 (SJR 5) and SB 9: the most the new denial powers could add there; 'more than 1,900', so 1,500 to 2,500 for a projection a year ahead."
+      "explainer": "The yearly flow of people the denial powers could hold, from Harris County's presentation to Commissioners Court."
     },
     {
       "id": "harris_jail_population",
       "section": "reach",
-      "label": "People in Harris County's jail on an average day, 2023-2025",
+      "label": "People in Harris County's jail on an average day, 2025",
       "format": "integer",
       "value": {
-        "low": 8000,
-        "best": 9500,
-        "high": 10500
+        "low": 8581,
+        "best": 9000,
+        "high": 9905
       },
-      "kind": "judgment",
-      "explainer": "The county's daily population reports put its jail at about 9,000 to 10,000 people in 2023-2025, with some held in other counties' jails: 9,500 (8,000 to 10,500), our judgment from those reports."
+      "kind": "estimate",
+      "source": {
+        "title": "Fox 26 Houston, Harris County officials detail impact of new bail laws on jail capacity, staffing",
+        "url": "https://www.fox26houston.com/news/harris-county-officials-detail-impact-new-bail-laws-jail-capacity-staffing",
+        "retrieved": "2026-11-14",
+        "quote": "closing November at 8,581",
+        "note": "The county's figures: 9,905 on 2 February, 8,961 on 15 May and 8,581 at the end of November 2025, falling through the year. The statewide 70,325 is for 2023 (Texas Commission on Jail Standards), when Harris held about the same."
+      },
+      "explainer": "Harris County's average daily jail population in 2025: about 9,000 (8,581 to 9,905)."
     },
     {
       "id": "harris_share_of_texas_jails",
@@ -369,23 +380,38 @@
     {
       "id": "denial_sought_share",
       "section": "reach",
-      "label": "Share of eligible defendants prosecutors would get held without bail",
+      "label": "Share of eligible defendants prosecutors get held without bail",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.01,
+        "best": 0.05,
+        "high": 0.2
       },
-      "kind": "judgment",
-      "explainer": "Harris County officials expect prosecutors not to seek denial for most eligible defendants (KWBU, 3 January 2026); several high-level felony defendants were denied bail in the first weeks. Our judgment: 30% (10% to 60%)."
+      "kind": "estimate",
+      "source": {
+        "title": "Houston Chronicle on the Patrick Scott bail hearing, January 2026",
+        "url": "https://preview-prod.w.houstonchronicle.com/news/houston-texas/crime/article/patrick-scott-metro-bus-shooting-bail-21306648.php",
+        "retrieved": "2026-11-14",
+        "quote": "The latest hearing was the fourth requested by District Attorney Sean Teare's office",
+        "note": "Four requests in the two months after Proposition 3 took effect (19 November 2025), against about 200 eligible defendants released on bond a month in 2025 (KWBU); only offences after that date qualify, so use may grow."
+      },
+      "explainer": "A few percent of eligible defendants in Harris County's first months, with room to grow as eligible cases accumulate: 5% (1% to 20%)."
+    },
+    {
+      "id": "prop3_people_per_year",
+      "section": "reach",
+      "label": "Texas: people a year held without bail under Proposition 3 statewide",
+      "format": "integer",
+      "formula": "harris_eligible_released / harris_share_of_texas_jails * denial_sought_share",
+      "explainer": "Harris's eligible flow, scaled to the state by its share of the jail population, times the share prosecutors get held: about 900 people a year."
     },
     {
       "id": "prop3_detyears_per_year",
       "section": "reach",
-      "label": "Texas: person-years of detention a year the 2025 bail-denial amendment adds statewide",
+      "label": "Texas: person-years of detention a year Proposition 3 adds statewide",
       "format": "integer",
-      "formula": "harris_full_denial_add / harris_share_of_texas_jails * denial_sought_share",
-      "explainer": "Harris's most, scaled to the state by its share of jail population, times the share prosecutors use: about 4,400 people held at any one time, 6% of Texas's jail population."
+      "formula": "prop3_people_per_year * tx_days_held / 365",
+      "explainer": "People held times the extra days each is held."
     },
     {
       "id": "tx_days_held",
@@ -398,13 +424,13 @@
         "high": 280
       },
       "kind": "judgment",
-      "explainer": "Harris County estimates an average stay of 280 days for people held under the new authority (Fox 26 Houston, from the county's analysis); some would have paid bail weeks or months in, so the extra time is less: 200 days (120 to 280), our judgment.",
+      "explainer": "For defendants charged with the listed offences the average stay in Harris County's jail is 280 days (KWBU and Fox 26 Houston, from the county's analysis); people held without bail stay about that long, and some would have paid bail weeks or months in, so the extra time is less: 200 days (120 to 280), our judgment.",
       "unit": "days"
     },
     {
       "id": "tx_vs_prop3",
       "section": "reach",
-      "label": "Texas 2023: detention the defeated SJR 44 and SB 1318 would have added, against Proposition 3's",
+      "label": "Texas 2023: denial of bail under the defeated SJR 44, against Proposition 3's",
       "format": "multiple",
       "value": {
         "low": 0.6,
@@ -412,15 +438,57 @@
         "high": 1.3
       },
       "kind": "judgment",
-      "explainer": "SJR 44 as passed by the Senate covered any violent offence, the House committee's version five offences mostly with a deadly weapon; Proposition 3 sits between, and SB 1318's limits on personal bonds came back as SB 9 in 2025. Similar in scope: 1 (0.6 to 1.3), our judgment."
+      "explainer": "SJR 44 as passed by the Senate covered any violent offence, the House committee's version five offences mostly with a deadly weapon; Proposition 3 sits between. Similar in scope: 1 (0.6 to 1.3), our judgment."
+    },
+    {
+      "id": "personal_bond_share",
+      "section": "reach",
+      "label": "Texas 2023: share of listed-offence defendants released on personal bonds",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "SB 1318 (and SB 9, its return in 2025) bars personal bonds, release without money, for the listed offences. In Texas most felony defendants released post cash or surety bail; personal bonds go to a minority: our judgment, 25% (10% to 50%)."
+    },
+    {
+      "id": "cash_bail_unable_share",
+      "section": "reach",
+      "label": "Texas 2023: share of them who couldn't post the cash bail set instead",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "People given personal bonds are often those without money; the charity's own clients can't pay a $3,000 bail. Our judgment: 30% (10% to 50%), held until their case closes. This term doesn't scale with prosecutors' denial motions."
+    },
+    {
+      "id": "sb1318_people_per_year",
+      "section": "reach",
+      "label": "Texas 2023: people a year SB 1318 would have held on cash bail they couldn't pay",
+      "format": "integer",
+      "formula": "harris_eligible_released / harris_share_of_texas_jails * personal_bond_share * cash_bail_unable_share",
+      "explainer": "The statewide eligible flow on personal bonds who couldn't pay."
+    },
+    {
+      "id": "tx_people_per_year",
+      "section": "reach",
+      "label": "Texas 2023: people a year who would have been held",
+      "format": "integer",
+      "formula": "prop3_people_per_year * tx_vs_prop3 + sb1318_people_per_year",
+      "explainer": "Denial under SJR 44 plus the cash-bail holds under SB 1318."
     },
     {
       "id": "tx_detyears_per_year",
       "section": "reach",
       "label": "Texas 2023: person-years of detention a year the defeated measures would have added",
       "format": "integer",
-      "formula": "prop3_detyears_per_year * tx_vs_prop3",
-      "explainer": "People held at any one time is person-years a year."
+      "formula": "tx_people_per_year * tx_days_held / 365",
+      "explainer": "People held times the extra days each is held."
     },
     {
       "id": "tx_delay_years",
@@ -434,7 +502,12 @@
       },
       "kind": "judgment",
       "explainer": "SB 1318 would have taken effect on 1 September 2023 and its content returned in SB 9 from 1 September 2025; SJR 44 would have gone to the November 2023 ballot and Proposition 3, approved on 4 November 2025, applies to offences from 19 November 2025 (Texas District and County Attorneys Association). About two years, as a won reform later repealed counts its years in force.",
-      "unit": "years"
+      "unit": "years",
+      "source": {
+        "title": "CBS News Texas, Texans approve Proposition 3, expanding judges' power to deny bail in violent, sexual felony cases",
+        "url": "https://www.cbsnews.com/texas/news/texas-voters-expanded-bail-denial",
+        "retrieved": "2026-11-14"
+      }
     },
     {
       "id": "tx_years_until_effect",
@@ -448,7 +521,12 @@
       },
       "kind": "judgment",
       "explainer": "Both measures died on the House floor on 23 May 2023, the deadline for Senate bills; they would have applied from September to late November 2023: 0.4 years (0.25 to 0.5).",
-      "unit": "years"
+      "unit": "years",
+      "source": {
+        "title": "Texas Legislature Online, history of SJR 44 (88th Legislature)",
+        "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=88R&Bill=SJR44",
+        "retrieved": "2026-11-14"
+      }
     },
     {
       "id": "tx_mitigation_share",
@@ -531,25 +609,68 @@
       "explainer": "The product of the branch's adjustments."
     },
     {
-      "id": "t25_vs_prop3",
+      "id": "texas_population",
       "section": "reach",
-      "label": "Texas 2025: detention the defeated SJR 87 and SJR 1 would have added, against Proposition 3's",
-      "format": "multiple",
+      "label": "Population of Texas, 2024",
+      "format": "integer",
+      "value": 31290831,
+      "kind": "observed",
+      "source": {
+        "title": "US Census Bureau, QuickFacts: Texas, population estimate July 1, 2024",
+        "url": "https://www.census.gov/quickfacts/fact/table/TX/PST045224",
+        "retrieved": "2026-11-14",
+        "quote": "Population estimates, July 1, 2024 31,290,831"
+      },
+      "explainer": "The base for the sponsor's size of SJR 87's class."
+    },
+    {
+      "id": "sjr87_class_share",
+      "section": "reach",
+      "label": "Texas 2025: people a year SJR 87 would have denied bail, as a share of Texas's population",
+      "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.6,
-        "high": 1.5
+        "low": 4.2e-05,
+        "best": 8.4e-05,
+        "high": 0.000168
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Texas Tribune, Proposal to automatically deny bail to some previously accused of felonies falls in Texas House, 26 May 2025",
+        "url": "https://www.texastribune.org/2025/05/26/texas-house-bail-repeat-offenders/",
+        "retrieved": "2026-11-14",
+        "quote": "an effective class of people that amounts to 0.0084% of our population",
+        "note": "The sponsor, Rep. Mitch Little; SJR 87 would have denied bail automatically to people accused of nine listed felonies with a prior felony conviction or already out on bond."
+      },
+      "explainer": "The sponsor's own size, unverified, so half to twice it."
+    },
+    {
+      "id": "sjr1_noncitizen_share",
+      "section": "reach",
+      "label": "Texas 2025: share of listed-offence defendants SJR 1 would have denied bail as non-citizens without legal status",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.1
       },
       "kind": "judgment",
-      "explainer": "SJR 87 would have denied bail automatically to people with certain prior convictions or already out on bail, SJR 1 to non-citizens charged with some felonies; the charity reported both defeated (statement of 3 June 2025), and the House failed to pass automatic denial for repeat offenders. Repeat defendants are many but the measure's final scope was unsettled: 0.6 of Proposition 3 (0.2 to 1.5), our judgment."
+      "explainer": "SJR 1 would have denied bail to people in the country illegally charged with some felonies; such people are a few percent of felony defendants: 5% (2% to 10%), our judgment."
+    },
+    {
+      "id": "t25_people_per_year",
+      "section": "reach",
+      "label": "Texas 2025: people a year the defeated SJR 87 and SJR 1 would have held",
+      "format": "integer",
+      "formula": "(texas_population * sjr87_class_share + harris_eligible_released / harris_share_of_texas_jails * sjr1_noncitizen_share) * (1 - denial_sought_share)",
+      "explainer": "SJR 87's class and SJR 1's non-citizens, less those prosecutors already get held under Proposition 3 (the offences overlap)."
     },
     {
       "id": "t25_detyears_per_year",
       "section": "reach",
       "label": "Texas 2025: person-years of detention a year the defeated measures would have added",
       "format": "integer",
-      "formula": "prop3_detyears_per_year * t25_vs_prop3",
-      "explainer": "People held at any one time."
+      "formula": "t25_people_per_year * tx_days_held / 365",
+      "explainer": "People held times the extra days each is held."
     },
     {
       "id": "t25_delay_years",
@@ -647,14 +768,6 @@
       "explainer": "The product of the branch's adjustments."
     },
     {
-      "id": "tx_people_per_year",
-      "section": "reach",
-      "label": "Texas 2023: people a year who would have been held",
-      "format": "integer",
-      "formula": "tx_detyears_per_year * 365 / tx_days_held",
-      "explainer": "Person-years over the days each would have been held."
-    },
-    {
       "id": "tx_housing_wellbys",
       "section": "effect",
       "label": "Texas 2023: homes kept, WELLBYs a year",
@@ -662,14 +775,6 @@
       "formula": "0",
       "unit": "WELLBYs",
       "explainer": "Not counted for people held for months under denial of bail: a home lost then is in the shared life-satisfaction loss of the months inside and in the earnings of release."
-    },
-    {
-      "id": "t25_people_per_year",
-      "section": "reach",
-      "label": "Texas 2025: people a year who would have been held",
-      "format": "integer",
-      "formula": "t25_detyears_per_year * 365 / tx_days_held",
-      "explainer": "Person-years over the days each would have been held."
     },
     {
       "id": "t25_housing_wellbys",
@@ -685,8 +790,8 @@
       "section": "reach",
       "label": "The charity's bailouts a year (fiscal 2025)",
       "format": "integer",
-      "formula": "(@the_bail_project.days_prevented_cum_fy2025 - @the_bail_project.days_prevented_cum_fy2024) / (@the_bail_project.days_prevented_cum_fy2025 / @the_bail_project.bailouts_cum_fy2025)",
-      "explainer": "The year's days over the days per bailout, as in the bail model: about 2,050."
+      "formula": "@the_bail_project.bailouts_fy2025",
+      "explainer": "The shared estimate, as in the bail model: about 3,300."
     },
     {
       "id": "cb_site_share",
@@ -720,7 +825,7 @@
       "label": "Florida and Oklahoma: charitable bailouts a year the bills threatened",
       "format": "integer",
       "formula": "cb_tbp_bailouts * cb_site_share * (1 + cb_other_funds_ratio)",
-      "explainer": "About 900."
+      "explainer": "About 1,400."
     },
     {
       "id": "cb_lost_share",
@@ -748,9 +853,9 @@
       "section": "reach",
       "label": "Days of detention avoided per bailout",
       "format": "number",
-      "formula": "@the_bail_project.days_prevented_cum_fy2025 / @the_bail_project.bailouts_cum_fy2025",
+      "formula": "@the_bail_project.days_prevented_fy2025 / @the_bail_project.bailouts_fy2025",
       "unit": "days",
-      "explainer": "The charity's own 40 days per bailout."
+      "explainer": "The charity's own days over the year's bailouts, as in the bail model: about 25."
     },
     {
       "id": "cb_detyears_per_year",
@@ -872,7 +977,7 @@
       "section": "bridges",
       "label": "Texas 2023: income, public money and deaths a year of campaigning, in units of value, adjusted",
       "format": "number",
-      "formula": "(tx_people_per_year * ln_gain_per_release * $uov_per_ln_consumption + (tx_detyears_per_year + tx_people_per_year * sentence_years_per_release) * (365 * @incarceration.jail_cost_per_day * public_uov_per_dollar + deaths_per_detention_year * value_per_death)) * tx_discounted_years * tx_total_adj / campaign_years",
+      "formula": "(tx_people_per_year * ln_gain_per_release * $uov_per_ln_consumption + (tx_detyears_per_year + tx_people_per_year * sentence_years_per_release) * (365 * @incarceration.jail_cost_per_day * public_uov_per_dollar + deaths_per_long_detention_year * value_per_death)) * tx_discounted_years * tx_total_adj / campaign_years",
       "unit": "UoV",
       "explainer": "Released people's earnings, the jail costs saved on detention and sentence days (the shared marginal cost of a day) and the deaths detention causes, over the years counted, adjusted, per year of campaigns."
     },
@@ -899,7 +1004,7 @@
       "section": "bridges",
       "label": "Texas 2025: income, public money and deaths a year of campaigning, in units of value, adjusted",
       "format": "number",
-      "formula": "(t25_people_per_year * ln_gain_per_release * $uov_per_ln_consumption + (t25_detyears_per_year + t25_people_per_year * sentence_years_per_release) * (365 * @incarceration.jail_cost_per_day * public_uov_per_dollar + deaths_per_detention_year * value_per_death)) * t25_discounted_years * t25_total_adj / campaign_years",
+      "formula": "(t25_people_per_year * ln_gain_per_release * $uov_per_ln_consumption + (t25_detyears_per_year + t25_people_per_year * sentence_years_per_release) * (365 * @incarceration.jail_cost_per_day * public_uov_per_dollar + deaths_per_long_detention_year * value_per_death)) * t25_discounted_years * t25_total_adj / campaign_years",
       "unit": "UoV",
       "explainer": "Released people's earnings, the jail costs saved on detention and sentence days (the shared marginal cost of a day) and the deaths detention causes, over the years counted, adjusted, per year of campaigns."
     },
@@ -1116,10 +1221,24 @@
     {
       "id": "ue_family",
       "section": "adjustments",
-      "label": "Side effect: children and partners spared a parent's detention, as a share of the value",
+      "label": "Side effect: children and partners spared a parent's detention, as a share of the Florida and Oklahoma branch's value",
       "format": "percent",
       "formula": "@the_bail_project.family_spillover_share",
-      "explainer": "The shared figure, as in the bail model: 10% (0 to 30%).",
+      "explainer": "The shared figure for weeks of detention, as in the bail model: 10% (0 to 30%).",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_family_tx",
+      "section": "adjustments",
+      "label": "Side effect: children and partners spared a parent's months of detention, as a share of the Texas branches' value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Months held before trial cost children care and income as a prison term does: Prison Policy Initiative's ue_dec_family, 15% (0 to 30%).",
       "side_effect": "added"
     },
     {
@@ -1150,8 +1269,8 @@
       "section": "adjustments",
       "label": "Side effects, as a share of the value",
       "format": "percent",
-      "formula": "ue_losses + ue_family + ((tx_weight + t25_weight) * ue_crime_tx + cb_weight * ue_crime_cb) / (tx_weight + t25_weight + cb_weight)",
-      "explainer": "The side effects above, the crime rows weighted by their branches' adjusted incarceration avoided, each read through the side-effect weight."
+      "formula": "ue_losses + ((tx_weight + t25_weight) * (ue_crime_tx + ue_family_tx) + cb_weight * (ue_crime_cb + ue_family)) / (tx_weight + t25_weight + cb_weight)",
+      "explainer": "The side effects above, the crime and family rows weighted by their branches' adjusted incarceration avoided, each read through the side-effect weight."
     },
     {
       "id": "uov_bridged",
@@ -1220,8 +1339,8 @@
       "value": 10160787,
       "kind": "observed",
       "source": {
-        "title": "The Bail Project, Form 990 for July 2024 to June 2025 (IRS e-file 202620619349300142, EIN 81-4985512)",
-        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2026/2026_TEOS_XML_03A.zip",
+        "title": "The Bail Project, Form 990 for July 2024 to June 2025 (ProPublica Nonprofit Explorer, EIN 81-4985512; IRS e-file 202620619349300142 in the IRS bulk archive 2026_TEOS_XML_03A.zip)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/814985512",
         "retrieved": "2026-11-14",
         "page": "Part I, line 15",
         "quote": "Salaries, other compensation, employee benefits 10,160,787"
