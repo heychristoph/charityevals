@@ -193,6 +193,82 @@
         "retrieved": "2026-11-14"
       },
       "explainer": "As jail_mortality_vs_prison, for people held before trial for months (denial of bail, cash bail they can't pay): the deaths in jail still cluster in the first days after admission, before most such detention is decided, but months inside bring most of the cumulative harm to health, work and family that a prison term does. Our judgment: 0.7 of the prison rate per year (0.3 to 1.2). Read by every model that counts months of pretrial detention avoided."
+    },
+    {
+      "id": "family_share_of_incarceration_value",
+      "label": "Harm to families and children, as a share of the value of a prison-year averted",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Wakefield and Wildeman (2013), Children of the Prison Boom: Mass Incarceration and the Future of American Inequality, Oxford University Press",
+        "url": "https://global.oup.com/academic/product/children-of-the-prison-boom-9780199989225",
+        "retrieved": "2026-11-14",
+        "note": "Parental incarceration harms children's wellbeing and behaviour and partners' income; no study puts it on the life-satisfaction or death scale of the prison-year itself, so the share is our judgment."
+      },
+      "explainer": "Partners and children of a person in prison lose income, contact and care: 15% of the value of the prison-year (its life satisfaction and the deaths it causes), from 0 to 40%. Read as a side effect by every model that frees people or keeps them out of prison."
+    },
+    {
+      "id": "earnings_share_of_incarceration_value",
+      "label": "Earnings lost after release, as a share of the value of a prison-year averted",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Western (2002), The impact of incarceration on wage mobility and inequality, American Sociological Review 67(4): 526-546",
+        "url": "https://doi.org/10.2307/3088944",
+        "retrieved": "2026-11-14",
+        "note": "Prison lowers later wages and wage growth; the life-satisfaction gap of a year inside is measured during the year, so later earnings are outside it. The share is our judgment."
+      },
+      "explainer": "A year in prison lowers earnings after release (a record, lost work experience), which the life-satisfaction gap measured inside does not cover: 10% of the value of the prison-year, from 0 to 30%. Read as a side effect by every model that frees people or keeps them out of prison."
+    },
+    {
+      "id": "remaining_life_freed_after_long_prison",
+      "label": "Remaining life expectancy of a person freed around 45 after a long prison term (years)",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 21,
+        "best": 26,
+        "high": 31
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Arias and Xu, United States Life Tables, 2022, National Vital Statistics Reports 74(2), Table 2 (males)",
+        "url": "https://www.lifetable.de/File/GetDocument/data%5CUSA%5CUSA000020222022CU1.pdf",
+        "retrieved": "2026-11-14",
+        "quote": "45–46. . . 0.004140 92,667 384 92,475 3,092,472 33.4",
+        "page": "Table 2 (life table for males), age 45-46; the Human Life-Table Database copy of NVSR 74(2)",
+        "note": "US men of 45 have 33.4 years left in 2022 (50: 29.1); people after long prison terms die younger (Patterson 2013), so ours is lower, a judgment."
+      },
+      "explainer": "People exonerated after long terms are 45 on average when freed: US men of 45 have 33.4 years left (2022 life table), people after 16 years inside fewer: 26 years, from 21 to 31. Turns years of life lost into a share of a death for people freed at these ages (the 40 years of remaining_life_in_prison is for the younger prison population)."
+    },
+    {
+      "id": "life_years_lost_per_year_long_term",
+      "label": "Years of life lost per extra year in prison, for people already serving long terms",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Patterson (2013), The dose-response of time served in prison on mortality: New York State, 1989-2003, American Journal of Public Health 103(3): 523-528",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3673515/",
+        "retrieved": "2026-11-14",
+        "note": "Patterson's 2 years per year comes from parolees who served under 2 years on average (terms of up to 10 years) and cannot run on linearly. The gap between the life table at 45 (33.4 years) and the 26 years left to people freed at 45 after 16 years inside (remaining_life_freed_after_long_prison) is about 7.4 years, or 0.46 a year served. Our judgment."
+      },
+      "explainer": "Each further year inside, for someone already serving a long term, costs less life than Patterson's 2 years for short terms: 0.5 years, from 0.2 to 1.2, matching the life-table gap of people freed at 45 after 16 years (about 0.46 a year). Read by models that free people late in long sentences; the 2-year figure stays for the shorter terms reforms and decarceration avert."
     }
   ]
 }
