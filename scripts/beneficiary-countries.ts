@@ -146,6 +146,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "80000-hours-charityevals": { b: "destinations", note: "Moves people: each cause its plan changes go into, read live, brings its own countries." },
   "givewell-charityevals": { b: "destinations", note: "Moves money: each charity it funds, read live, brings its own countries." },
   "effektiv-spenden-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
+  "animal-charity-evaluators-charityevals": { b: "destinations", note: "Moves money: each animal charity it reaches, read live, brings its own countries." },
 };
 /** Research and standard-setting whose good reaches the whole world. */
 const WORLD: Record<string, string> = {
