@@ -1,6 +1,6 @@
 ### Summary
 
-The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about 0.0018 years of healthy life per $1,000 (about $230 a tonne of CO₂e), the health and nature work about 0.0019.
+The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about 0.0020 years of healthy life per $1,000 (about $220 a tonne of CO₂e), the health and nature work about 0.0019.
 
 ### What the charity does
 
