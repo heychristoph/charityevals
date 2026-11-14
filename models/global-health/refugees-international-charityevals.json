@@ -18,7 +18,7 @@
   "estimate_basis": "past_average",
   "charity": "refugees-international",
   "owner": "charityevals",
-  "summary": "Refugees International, a Washington advocacy group that takes no government money, spent $4.5m on advocacy and strategic outreach in 2024 (its latest full audited year). No outcome is measured, so each of its main 2024 results is built from public data and ranged judgments and counted at half by the shared missing-data slider: the roughly 97,000 Haitians paroled into the US that year under pathways it pressed for, valued by their gain in consumption and safety for the years they stay; Sudan's $1.9bn 2024 humanitarian response, of which advocacy is credited with a small share, net of the aid it displaced, plus access and diplomacy; and Costa Rica's June 2024 reform giving asylum seekers work permits, from a study of regularisation in Colombia; other campaigns add 40%. It comes to about 0.11 years of healthy life per $1,000 (combined range 0.01-0.9), about the site's global-health median, between charityevals' estimates for MSF's and Save the Children's advocacy, roughly half from Sudan and half from Haiti. The result is mostly uncertainty: the biggest questions are how much of each result advocacy caused, Refugees International's share of the advocacy, and how long the parolees stay.",
+  "summary": "Refugees International, a Washington advocacy group that takes no government money, spent $4.5m on advocacy and strategic outreach in 2024 (its latest full audited year). No outcome is measured, so each of its main 2024 results is built from public data and ranged judgments and counted at half by the shared missing-data slider: the roughly 97,000 Haitians paroled into the US that year under pathways it pressed for, valued by their gain in consumption and health, and their remittances home, for the years they stay; Sudan's $1.9bn 2024 humanitarian response, of which advocacy is credited with a small share, net of the aid it displaced, plus access and diplomacy; and Costa Rica's June 2024 reform giving asylum seekers work permits, from a study of regularisation in Colombia; other campaigns add 40%. It comes to about 0.16 years of healthy life per $1,000 (combined range 0.02-1.3), a little above the site's global-health median and between charityevals' estimates for MSF's and Save the Children's advocacy, about half from Haiti and half from Sudan. The result is mostly uncertainty: the biggest questions are how much of each result advocacy caused, Refugees International's share of the advocacy, and how long the parolees stay.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Refugees International, advocacy and strategic outreach (2024)",
@@ -269,7 +269,7 @@
       "label": "Haiti: Haitians paroled into the US in 2024",
       "format": "integer",
       "formula": "(hai_arrived_to_oct2024 - hai_arrived_to_jan2024) * 12 / hai_months_counted",
-      "explainer": "The nine months' arrivals scaled to a year: about 97,000, close to Refugees International's own 'over 100,000 Haitians' for 2024 (financial statements, note 1, p. 8). The processes were briefly paused in July-August 2024 for vetting checks, which the scaling averages in. These are the people Refugees International's advocacy for the Haitian parole and family-reunification pathways is credited with helping, below."
+      "explainer": "The nine months' arrivals scaled to a year: about 97,000, close to Refugees International's own 'over 100,000 Haitians' for 2024 (financial statements, note 1, p. 8). The processes were briefly paused in July-August 2024 for vetting checks, which the scaling averages in. These are the people Refugees International's advocacy for the Haitian parole pathway is credited with helping, below. Its accounts also claim the expansion of family-reunification parole for Haitians and Cubans; those arrivals (a few thousand a year, not published by year in a source we could read) are left to the other campaigns' share."
     },
     {
       "id": "hai_us_consumption_vs_lowest_fifth",
@@ -310,8 +310,8 @@
       "section": "effect",
       "label": "Haiti: parolees' consumption per person had they stayed (US$ a year at US prices)",
       "format": "usd",
-      "formula": "@haiti.consumption_per_person_2024 * @survey_consumption.survey_to_na_world_median * @haiti.ppp_factor_2017 * hai_baseline_vs_average",
-      "explainer": "Haiti's national-accounts consumption per person (2024) on the survey scale (the site's median survey-to-national-accounts ratio: Haiti has no recent survey), at US prices (the private-consumption PPP factor), times the judgment above: about $4,200."
+      "formula": "@haiti.consumption_per_person_2024 * @survey_consumption.survey_to_na_world_median * @haiti.ppp_factor_2024 * hai_baseline_vs_average",
+      "explainer": "Haiti's national-accounts consumption per person (2024) on the survey scale (the site's median survey-to-national-accounts ratio: Haiti has no recent survey), at US prices of the same year (the 2024 private-consumption PPP factor), times the judgment above: about $2,500."
     },
     {
       "id": "hai_ln_gain",
@@ -322,40 +322,105 @@
       "explainer": "ln(consumption in the US ÷ consumption at home), on the site's one log-income scale, as cash-income does."
     },
     {
-      "id": "hai_violent_deaths_2024",
+      "id": "hai_adult_mortality_hti_male",
       "section": "effect",
-      "label": "Haiti: people killed in gang violence, 2024",
-      "format": "integer",
-      "value": 5601,
+      "label": "Haiti: chance a man of 15 dies before 60, Haiti, 2023",
+      "format": "percent",
+      "value": 0.281279,
       "kind": "observed",
       "source": {
-        "title": "UN News, More than 5,600 killed in Haiti gang violence in 2024 (7 January 2025)",
-        "url": "https://news.un.org/en/story/2025/01/1158781",
-        "quote": "At least 5,601 people were killed in gang violence in Haiti last year",
+        "title": "World Bank, World Development Indicators: mortality rate, adult, male (SP.DYN.AMRT.MA), 2023",
+        "url": "https://data.worldbank.org/indicator/SP.DYN.AMRT.MA",
+        "quote": "HTI 2023: SP.DYN.AMRT.MA 281.279",
+        "note": "https://api.worldbank.org/v2/country/HTI;USA/indicator/SP.DYN.AMRT.MA?format=json&date=2023",
         "retrieved": "2026-11-14"
       },
-      "explainer": "The UN human rights office's verified count for 2024."
+      "explainer": "The World Bank's adult mortality rate (UN World Population Prospects), per 1,000 divided by 1,000."
     },
     {
-      "id": "hai_violence_risk_removed",
+      "id": "hai_adult_mortality_hti_female",
       "section": "effect",
-      "label": "Haiti: share of the risk of a violent death removed by living in the US",
+      "label": "Haiti: chance a woman of 15 dies before 60, Haiti, 2023",
+      "format": "percent",
+      "value": 0.167358,
+      "kind": "observed",
+      "source": {
+        "title": "World Bank, World Development Indicators: mortality rate, adult, female (SP.DYN.AMRT.FE), 2023",
+        "url": "https://data.worldbank.org/indicator/SP.DYN.AMRT.FE",
+        "quote": "HTI 2023: SP.DYN.AMRT.FE 167.358",
+        "note": "https://api.worldbank.org/v2/country/HTI;USA/indicator/SP.DYN.AMRT.FE?format=json&date=2023",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The World Bank's adult mortality rate (UN World Population Prospects), per 1,000 divided by 1,000."
+    },
+    {
+      "id": "hai_adult_mortality_usa_male",
+      "section": "effect",
+      "label": "Haiti: chance a man of 15 dies before 60, the US, 2023",
+      "format": "percent",
+      "value": 0.146888,
+      "kind": "observed",
+      "source": {
+        "title": "World Bank, World Development Indicators: mortality rate, adult, male (SP.DYN.AMRT.MA), 2023",
+        "url": "https://data.worldbank.org/indicator/SP.DYN.AMRT.MA",
+        "quote": "USA 2023: SP.DYN.AMRT.MA 146.888",
+        "note": "https://api.worldbank.org/v2/country/HTI;USA/indicator/SP.DYN.AMRT.MA?format=json&date=2023",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The World Bank's adult mortality rate (UN World Population Prospects), per 1,000 divided by 1,000."
+    },
+    {
+      "id": "hai_adult_mortality_usa_female",
+      "section": "effect",
+      "label": "Haiti: chance a woman of 15 dies before 60, the US, 2023",
+      "format": "percent",
+      "value": 0.082423,
+      "kind": "observed",
+      "source": {
+        "title": "World Bank, World Development Indicators: mortality rate, adult, female (SP.DYN.AMRT.FE), 2023",
+        "url": "https://data.worldbank.org/indicator/SP.DYN.AMRT.FE",
+        "quote": "USA 2023: SP.DYN.AMRT.FE 82.423",
+        "note": "https://api.worldbank.org/v2/country/HTI;USA/indicator/SP.DYN.AMRT.FE?format=json&date=2023",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The World Bank's adult mortality rate (UN World Population Prospects), per 1,000 divided by 1,000."
+    },
+    {
+      "id": "hai_adult_mortality_span",
+      "section": "effect",
+      "label": "Haiti: years the adult mortality rate spans (ages 15 to 60)",
+      "format": "number",
+      "value": 45,
+      "kind": "observed",
+      "unit": "years",
+      "source": {
+        "title": "World Bank, World Development Indicators: mortality rate, adult (SP.DYN.AMRT.MA), definition",
+        "url": "https://data.worldbank.org/indicator/SP.DYN.AMRT.MA",
+        "quote": "Adult mortality rate is the probability of dying between the ages of 15 and 60",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The definition of the adult mortality rate: the chance of dying between exact ages 15 and 60."
+    },
+    {
+      "id": "hai_mortality_gap_removed",
+      "section": "effect",
+      "label": "Haiti: share of the adult death-rate gap between Haiti and the US that a parolee escapes",
       "format": "percent",
       "value": {
-        "low": 0.7,
-        "best": 0.9,
-        "high": 1
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Judgment 90% (70-100%): US homicide rates are about a tenth of Haiti's 2024 gang-violence death rate for these mostly urban young adults."
+      "explainer": "Judgment 70% (40-90%): in the US parolees face US rates of violence, infection and maternal death, but newly arrived low-income migrants have less health care than the average American (and some arrive with untreated conditions). It covers the gang violence of 2023-2024 (at least 5,601 killed in 2024, UN News) and Haiti's weak health system alike."
     },
     {
       "id": "hai_deaths_averted_per_person_year",
       "section": "effect",
-      "label": "Haiti: violent deaths averted per person-year in the US",
+      "label": "Haiti: deaths averted per person-year in the US",
       "format": "small",
-      "formula": "hai_violent_deaths_2024 / @haiti.population_2024 * hai_violence_risk_removed",
-      "explainer": "Haiti's 2024 gang-violence death rate (deaths over population, about 1 in 2,100 a year) times the share removed."
+      "formula": "(ln(1 - avg(hai_adult_mortality_usa_male, hai_adult_mortality_usa_female)) - ln(1 - avg(hai_adult_mortality_hti_male, hai_adult_mortality_hti_female))) / hai_adult_mortality_span * hai_mortality_gap_removed",
+      "explainer": "The yearly adult death rate in Haiti less the US's (each from the chance of dying between 15 and 60, men and women averaged: -ln(1 - q) over 45 years; about 0.0029 a year), times the share escaped."
     },
     {
       "id": "hai_share_not_otherwise_in_us",
@@ -375,9 +440,9 @@
       "section": "effect",
       "label": "Haiti: value per parolee per year in the US (units of value)",
       "format": "small",
-      "formula": "hai_share_not_otherwise_in_us * (hai_ln_gain * $uov_per_ln_consumption + hai_deaths_averted_per_person_year * @moral_weights.uov_per_death_age_15_49 * $life_value_multiplier)",
+      "formula": "hai_share_not_otherwise_in_us * (hai_ln_gain * $uov_per_ln_consumption + hai_deaths_averted_per_person_year * @moral_weights.uov_per_death_age_15_49 * $life_value_multiplier + hai_remittance_value_per_person_year)",
       "unit": "units of value",
-      "explainer": "The log-consumption gain plus the violent deaths averted, each death valued at the shared moral weight for ages 15-49 (most parolees are working-age adults; children came with them) times the value-of-life slider, for the share who wouldn't otherwise have come."
+      "explainer": "The log-consumption gain, the deaths averted and the remittances home (a side effect), each death valued at the shared moral weight for ages 15-49 (most parolees are working-age adults; children came with them) times the value-of-life slider, for the share who wouldn't otherwise have come."
     },
     {
       "id": "hai_years_in_us",
@@ -403,18 +468,47 @@
       "explainer": "At the shared discount rate. A parolee's years are their own, not a won reform's (rights-advocacy: a released person's years), so not $win_years_counted."
     },
     {
-      "id": "hai_remittance_share",
+      "id": "hai_remit_per_parolee",
       "section": "effect",
-      "label": "Haiti: value to family at home through remittances, as a share of the parolee's own gain",
-      "format": "percent",
+      "label": "Haiti: money a parolee sends home a year (US$)",
+      "format": "usd",
       "value": {
-        "low": 0.05,
-        "best": 0.2,
-        "high": 0.5
+        "low": 500,
+        "best": 1500,
+        "high": 3000
       },
       "kind": "judgment",
+      "source": {
+        "title": "World Bank, World Development Indicators: personal remittances, received (BX.TRF.PWKR.CD.DT), 2024",
+        "url": "https://data.worldbank.org/indicator/BX.TRF.PWKR.CD.DT",
+        "quote": "HTI 2024: BX.TRF.PWKR.CD.DT 4111002565.94729",
+        "note": "https://api.worldbank.org/v2/country/HTI/indicator/BX.TRF.PWKR.CD.DT?format=json&date=2024; the anchor, not the row's value",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Judgment $1,500 ($500-$3,000): Haiti received $4.1bn of personal remittances in 2024 (World Bank), mostly from the US, home to most of its 1.5-2 million emigrants: about $2,000-2,700 per emigrant. Less for new arrivals in their first low-wage years, more for those sending to children left behind."
+    },
+    {
+      "id": "hai_remit_recipients",
+      "section": "effect",
+      "label": "Haiti: people at home sharing what a parolee sends",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 6
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 4 (2-6): a household in Haiti (about four people) or parents and siblings."
+    },
+    {
+      "id": "hai_remittance_value_per_person_year",
+      "section": "effect",
+      "label": "Haiti: value of remittances to family at home, per parolee-year (units of value)",
+      "format": "small",
+      "formula": "hai_remit_recipients * ln(1 + hai_remit_per_parolee / (hai_remit_recipients * hai_haiti_consumption)) * $uov_per_ln_consumption",
+      "unit": "units of value",
       "side_effect": "added",
-      "explainer": "A side effect: parolees send money to relatives in Haiti, where a dollar goes much further on the log scale. Judgment 20% (5-50%): remittances are about a fifth of Haiti's national income and the parolees' own consumption above is net of what they send."
+      "explainer": "A side effect: the recipients' gain on the log scale, n × ln(1 + sent / (n × their consumption)), their consumption that of the parolee's household at home (above). The parolee's own US consumption above is spending, already net of what is sent."
     },
     {
       "id": "hai_origin_loss_share",
@@ -428,16 +522,16 @@
       },
       "kind": "judgment",
       "side_effect": "added",
-      "explainer": "A side effect: nurses, teachers and other skilled workers were among those who left. Judgment -5% (-15% to -1%): the parolees are a small share of Haiti's workforce (about 1%), and remittances (above) offset part of it."
+      "explainer": "A side effect: nurses, teachers and other skilled workers were among those who left. Judgment -5% (-15% to -1%): the parolees are a small share of Haiti's workforce (about 1%), and remittances (above) offset part of it. A share of the parolees' whole gain."
     },
     {
       "id": "hai_value_per_year",
       "section": "effect",
       "label": "Haiti: value of 2024's parolees (units of value)",
       "format": "number",
-      "formula": "units_hai_per_year * hai_value_per_person_year * hai_discounted_years * (1 + hai_remittance_share + hai_origin_loss_share)",
+      "formula": "units_hai_per_year * hai_value_per_person_year * hai_discounted_years * (1 + hai_origin_loss_share)",
       "unit": "units of value",
-      "explainer": "Parolees × value per person-year × discounted years, plus the side effects. A year's arrivals against a year's spending (the pathways had to be defended each year: a Texas-led lawsuit against them was dismissed in March 2024)."
+      "explainer": "Parolees × value per person-year × discounted years, less the loss to Haiti (a side effect). A year's arrivals against a year's spending (the pathways had to be defended each year: a Texas-led lawsuit against them was dismissed in March 2024)."
     },
     {
       "id": "sdn_funding_2024",
@@ -456,17 +550,25 @@
       "explainer": "Funding reported to OCHA's Financial Tracking Service against Sudan's 2024 Humanitarian Response Plan ($2.70bn required, about 70% funded; 2023's plan was about 43% funded). Refugees International's 'Speak Out on Sudan' campaign with diaspora groups pressed for aid, access and diplomacy throughout 2024."
     },
     {
-      "id": "sdn_aid_vs_cash",
+      "id": "sdn_response_vs_average",
       "section": "effect",
-      "label": "Sudan: value of a dollar of the humanitarian response, as a multiple of cash",
+      "label": "Sudan: value of a dollar of Sudan's 2024 response relative to the average humanitarian response",
       "format": "multiple",
       "value": {
-        "low": 0.2,
-        "best": 0.5,
-        "high": 1.5
+        "low": 1,
+        "best": 1.5,
+        "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "Judgment 0.5× (0.2-1.5×): charityevals' estimates of humanitarian responses come to about a fifth to two fifths of cash per dollar after their own adjustments (Save the Children's emergencies, MSF's relief distributions); charityevals' MSF advocacy model values appeal funding at 1×. Sudan's 2024 response was food, water, health care and cash in a declared famine with very high death rates, so above the average response; agencies' overheads and access problems pull it down."
+      "explainer": "Judgment 1.5 (1-2.5): famine was confirmed in Zamzam camp in August 2024 (the Famine Review Committee) and death rates were far above the emergency threshold, so food, water, health care and cash reaching people avert more deaths per dollar than the average response; access problems and diversion by the warring parties pull it back."
+    },
+    {
+      "id": "sdn_aid_vs_cash",
+      "section": "effect",
+      "label": "Sudan: value of a dollar of the response, as a multiple of cash",
+      "format": "multiple",
+      "formula": "@humanitarian.response_dollar_vs_cash * sdn_response_vs_average",
+      "explainer": "The site's shared value of a dollar of an average humanitarian response (facts/humanitarian.json, 0.3× cash) times Sudan's famine premium above."
     },
     {
       "id": "sdn_value_per_dollar",
@@ -495,15 +597,15 @@
       "section": "effect",
       "label": "Sudan: value of the other aid displaced, per dollar (units of value)",
       "format": "small",
-      "formula": "0 - sdn_displaced_share * sdn_aid_vs_cash * @cash.uov_per_dollar",
+      "formula": "0 - sdn_displaced_share * @humanitarian.response_dollar_vs_cash * @cash.uov_per_dollar",
       "unit": "units of value / $",
       "side_effect": "added",
-      "explainer": "A side effect: the displaced aid's value, lost, at the same multiple of cash (other crises' responses are of the same kind)."
+      "explainer": "A side effect: the displaced aid's value, lost, at the shared value of an average humanitarian response (the other crises it is taken from)."
     },
     {
       "id": "sdn_access_ratio",
       "section": "effect",
-      "label": "Sudan: access and diplomacy, as a share of the funding effect",
+      "label": "Sudan: access and diplomacy, as a share of the gross funding effect",
       "format": "percent",
       "value": {
         "low": 0,
@@ -511,7 +613,7 @@
         "high": 2
       },
       "kind": "judgment",
-      "explainer": "Judgment 50% (0-200%): besides funding, the campaign pressed for aid access (the Adre crossing from Chad, reopened in August 2024), the US special envoy (appointed February 2024), the US determination of atrocities and genocide, and pressure on the UAE over arms to the RSF. None has a measured effect; 0 if they changed nothing on the ground, 200% if reopened crossings did more than the money."
+      "explainer": "Judgment 50% (0-200%): besides funding, the campaign pressed for aid access (the Adre crossing from Chad, reopened in August 2024), the US special envoy (appointed February 2024), the US determination of atrocities and genocide, and pressure on the UAE over arms to the RSF. None has a measured effect; 0 if they changed nothing on the ground, 200% if reopened crossings did more than the money. A share of the funding's gross value, before the aid it displaces (access doesn't depend on whose budget paid)."
     },
     {
       "id": "sdn_years_until_spent",
@@ -540,9 +642,9 @@
       "section": "effect",
       "label": "Sudan: value of the 2024 response funding (units of value)",
       "format": "number",
-      "formula": "sdn_funding_2024 * (sdn_value_per_dollar + sdn_displaced_value_per_dollar) * (1 + sdn_access_ratio) * sdn_wait_discount",
+      "formula": "sdn_funding_2024 * (sdn_value_per_dollar * (1 + sdn_access_ratio) + sdn_displaced_value_per_dollar) * sdn_wait_discount",
       "unit": "units of value",
-      "explainer": "Funding × the value of a dollar net of the aid it displaces, plus access and diplomacy, discounted for the wait. A year's funding against a year's spending; the share advocacy added and Refugees International's part are below."
+      "explainer": "Funding × (the value of a dollar, with access and diplomacy on top, less the aid it displaces), discounted for the wait. A year's funding against a year's spending; the share advocacy added and Refugees International's part are below."
     },
     {
       "id": "cri_permits_per_year",
@@ -559,7 +661,7 @@
         "title": "UNHCR, Costa Rica Annual Results Report 2024",
         "url": "https://www.unhcr.org/us/sites/en-us/files/2025-06/costa_rica_arr_2024_54.pdf",
         "quote": "enabling the issuance of 20,000 work permits and the renewal of 22,000",
-        "note": "UNHCR's site returns 403 to automated fetches; the sentence as shown in search results on 2026-11-14.",
+        "note": "UNHCR's site returns 403 to automated fetches; the sentence as shown in search results on 2026-11-14. The decree's content (automatic work authorisation from July 2024) is confirmed by Refugees International's April 2026 Costa Rica report, https://d3jwam0i5codb7.cloudfront.net/wp-content/uploads/2026/05/CRReportENGApril2026_FINAL.pdf.",
         "retrieved": "2026-11-14"
       },
       "explainer": "UNHCR credits Executive Decree 44501-MGP (12 June 2024), which partly reversed the 2022 decree 43810-MGP that had removed asylum seekers' immediate work permits, with 20,000 work permits issued (and 22,000 renewed) in 2024. Taken as a year's flow: the first months cleared a backlog, and about 2,100 new asylum claims arrive each month (UNHCR, 2024), about 25,000 a year who need permits. The publisher blocks automated downloads; figure from its 2024 Annual Results Report as indexed."
@@ -570,12 +672,19 @@
       "label": "Costa Rica: share of those permits that the 2022 rules would have blocked",
       "format": "percent",
       "value": {
-        "low": 0.15,
-        "best": 0.4,
-        "high": 0.7
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Judgment 40% (15-70%): under the 2022 decree an asylum seeker could get a permit only after three months and with social-security (CCSS) enrolment, which needs a formal employer, and not for self-employment; the 2024 rules put the permit on the asylum seeker's identity card. Many would still have got a permit, later."
+      "source": {
+        "title": "Refugees International, Strengthening the Integration of Asylum Seekers and Refugees in Costa Rica (April 2026)",
+        "url": "https://d3jwam0i5codb7.cloudfront.net/wp-content/uploads/2026/05/CRReportENGApril2026_FINAL.pdf",
+        "quote": "This reform eliminated the requirement to present proof of employment or submit a separate work permit application",
+        "note": "UNHCR, Costa Rica factsheet January-June 2024, https://www.unhcr.org/sites/default/files/2024-09/240902%20Costa%20Rica%20Factsheet%20jan-jun2024_ENG_VF.pdf (403 to automated fetches; its 222 requested and 55 approved permits in 2023 as summarised by search, unconfirmed).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Judgment 70% (40-90%): Refugees International's April 2026 report says the July 2024 reform removed the need for proof of employment and a separate permit application, and covered self-employment; under the 2022 decree a permit needed a job and social-security enrolment after a three-month wait, and UNHCR's January-June 2024 factsheet (as indexed in search results; unhcr.org blocks automated reading) reports only 55 of 222 requests approved in 2023. Not all: some would have got a permit later, or worked informally anyway."
     },
     {
       "id": "cri_people_per_permit",
@@ -731,7 +840,7 @@
         "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "Judgment 40% (10-150%): the 2024 annual report names other work with no measured result: localisation of aid in Ukraine (two reports it says led to more aid from state donors directly to Ukrainian organisations), the Gaza scorecard with seven other agencies on aid obstruction, LGBTQ+ refugees' access to jobs in Costa Rica, the Destination Reception Assistance Act it helped draft and the #LetAsylumSeekersWork bill (neither passed), climate displacement at COP29 and in Uganda's adaptation plan, the Refugee Fellows, and the Refugee Advocacy Lab's public support for US resettlement (about 500 state and local officials' letter). Anchor: about nine campaigns, three modelled; if the others are worth a twelfth of a modelled win each, 40%; 10% if they mostly changed words, 150% if Ukraine's localisation moved large sums."
+      "explainer": "Judgment 40% (10-150%): the 2024 annual report names other work with no measured result: localisation of aid in Ukraine (two reports it says led to more aid from state donors directly to Ukrainian organisations), the Gaza scorecard with seven other agencies on aid obstruction, LGBTQ+ refugees' access to jobs in Costa Rica, the Destination Reception Assistance Act it helped draft and the #LetAsylumSeekersWork bill (neither passed), climate displacement at COP29 and in Uganda's adaptation plan, the Refugee Fellows, and the Refugee Advocacy Lab's public support for US resettlement (about 500 state and local officials' letter). Anchor: these eight other campaigns against the three modelled, each worth 15% of an average modelled win: 8 × 15% / 3 = 40%; 10% at 4% each (they mostly changed words), 150% at 55% each (Ukraine's localisation moved large sums)."
     },
     {
       "id": "hai_evidence_adj",
@@ -1023,27 +1132,17 @@
       "section": "careers",
       "label": "Pay a career changer gives up per year (US$)",
       "format": "usd",
-      "value": {
-        "low": 5000,
-        "best": 15000,
-        "high": 30000
-      },
-      "kind": "judgment",
-      "explainer": "Unused here (no careers changed); the template's placeholder range."
+      "formula": "@meta.career_forgone_pay_default",
+      "explainer": "Unused here (no careers changed): the site's shared default (facts/meta.json), so no model types the template's placeholder."
     },
     {
       "id": "career_years_stayed",
       "section": "careers",
       "label": "Years a career changer stays in high-impact work",
       "format": "number",
-      "value": {
-        "low": 2,
-        "best": 5,
-        "high": 10
-      },
-      "kind": "judgment",
+      "formula": "@meta.career_years_stayed_default",
       "unit": "years",
-      "explainer": "Unused here (no careers changed); the template's placeholder range."
+      "explainer": "Unused here (no careers changed): the site's shared default (facts/meta.json)."
     },
     {
       "id": "career_years",
@@ -1068,13 +1167,8 @@
       "section": "careers",
       "label": "Share of the career changes the charity caused",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Unused here (no careers changed); the template's placeholder range."
+      "formula": "@meta.career_counterfactual_share_default",
+      "explainer": "Unused here (no careers changed): the site's shared default (facts/meta.json)."
     },
     {
       "id": "career_change_value",
