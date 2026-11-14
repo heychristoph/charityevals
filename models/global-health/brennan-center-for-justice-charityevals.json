@@ -3,7 +3,10 @@
   "name": "Brennan Center for Justice (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":0.52,"CHN":0.48},
+  "beneficiaries": {
+    "USA": 0.52,
+    "CHN": 0.48
+  },
   "beneficiaries_note": "Our build: by share of the result at the defaults: the tariff ruling's gain abroad (about 48%, China's, net of small losses elsewhere) and the rest in the United States (the tariff ruling at home, democracy, prisons and jails).",
   "template": "rights-advocacy",
   "estimate_basis": "past_average",
@@ -313,13 +316,8 @@
       "section": "effect",
       "label": "Share of democracy's income gain a slide to a hybrid regime would lose",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Acemoglu et al. code a country as democratic or not (democratic while Freedom House rates it Free or Partly Free and Polity is positive, p. 54); the forecast is of a slide to the Economist's 'hybrid regime' (elections held but not free or fair), short of the full autocracy their estimate compares with. 60% (30% to 100%), as in charityevals' model of Protect Democracy: Hungary and Turkey, the nearest cases, kept elections and markets but lost courts' and the press's independence."
+      "formula": "@democracy.slide_severity_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "dem_ln_loss_per_person_year",
@@ -343,13 +341,8 @@
       "section": "effect",
       "label": "Relative cut in that chance from one year of the whole US pro-democracy field's work",
       "format": "percent",
-      "value": {
-        "low": 0.005,
-        "best": 0.045,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "The same judgment as in charityevals' model of Protect Democracy (one value for one concept): 4.5% (0.5% to 20%), the geometric middle of a lower anchor of about 1% and a high of 20%. From below: once autocratization begins, only one in five democracies manage to avert breakdown (Boese et al. 2021, Democratization 28(5): 36 breakdowns in 59 episodes since 1993), so resistance as a whole (courts, elections, officials, the press, civil society) cuts breakdown by about a fifth; with organised civil society a fifth to a third of that resistance and a year one of five in the window, a year of the field removes 0.8% to 1.3%. From above: the catastrophic-risk family's typical cut for nuclear-security work (@catastrophe.nuclear_catastrophe_cut_per_million) would give over 100% at the field's $3-4 billion; 4.5% is about a twentieth of that per dollar, for a field with steeply falling returns. Resources also explain under 5% of which side wins on contested US policy issues (Baumgartner et al. 2009, @democracy.lobbied_issue_change_rate's source); litigation is more decisive, since a ruling needs a suit (in 2025 courts blocked most of the elections executive order and the voter-file demands in suits the field brought). The biggest uncertainty in the branch."
+      "formula": "@democracy.field_risk_cut_per_year",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "dem_p_success",
@@ -370,7 +363,7 @@
         "high": 4.5
       },
       "kind": "judgment",
-      "explainer": "The forecast counts the Economist's reports published before 2030; those for 2024 and 2025 showed no slide, so the window left covers 2026 to 2028, and a slide averted would on average have come in its middle, 2027: about two and a half years after the year to June 2025 (1.5 to 4.5), as in the Protect Democracy model's three years after its calendar 2024.",
+      "explainer": "Not the same figure as the Protect Democracy model's bs_years_until_effect (3 years, 2 to 5), because the work year differs: the same slide-date window (the Economist's reports before 2030; those for 2024 and 2025 showed no slide, so 2026 to 2028, on average 2027) is measured from a different year of work. Here the year to June 2025: 2.5 years (1.5 to 4.5), the Protect Democracy range shortened by half a year, as its best guess is. Each model's wait is its own year's distance to the same date.",
       "unit": "years"
     },
     {
@@ -386,13 +379,8 @@
       "section": "effect",
       "label": "Chance per year that a slide, once it happens, is reversed",
       "format": "percent",
-      "value": {
-        "low": 0.02,
-        "best": 0.05,
-        "high": 0.1
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: '52% of all autocratization episodes become U-Turns, which increases to 73% when focusing on the last 30 years', and 90% of U-turns restore democracy (Nord et al. 2025, When autocratization is reversed: episodes of U-Turns since 1900, Democratization, doi 10.1080/13510347.2024.2448742, abstract). A 5% yearly hazard undoes about 70% of slides within 25 years; lower than the 73% because a fall to a hybrid regime is harder to undo than an episode stopped earlier (2% to 10%)."
+      "formula": "@democracy.slide_reversal_rate",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "dem_rate",
@@ -433,39 +421,24 @@
       "section": "adjustments",
       "label": "Whole field's resources as a multiple of its institutional philanthropy",
       "format": "multiple",
-      "value": {
-        "low": 1.2,
-        "best": 1.5,
-        "high": 2.2
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: Democracy Fund's figure counts institutional philanthropy to 501(c)(3) work in 2021-2022; 501(c)(4) funding adds about 13% (p. 16, note 10), individual donors (most of the Brennan Center's own contributions) and pro bono work come on top, and 45% of funders planned to give more in 2023-2024 (p. 3). 1.5 (1.2 to 2.2)."
+      "formula": "@democracy.field_beyond_institutional",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "dem_field_direct_share",
       "section": "adjustments",
       "label": "Share of the field doing direct work against a slide (litigation, election protection, checks on power)",
       "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.7
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: Democracy Fund's total covers elections and voting, the rule of law, civic engagement and education, money in politics and the information ecosystem; the Brennan Center's kind of work is part of it. 40% (20% to 70%)."
+      "formula": "@democracy.field_direct_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "dem_indirect_relative_effect",
       "section": "adjustments",
       "label": "Effect of the rest of the field's dollars on a slide, relative to a direct dollar",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.2,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: turnout drives, civic education, local news and money-in-politics work also act on backsliding, less directly: a fifth of a direct dollar's effect (0 to half)."
+      "formula": "@democracy.field_indirect_relative_effect",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "dem_field_spending",
@@ -488,13 +461,8 @@
       "section": "adjustments",
       "label": "Evidence adjustment for the democracy branch (external validity)",
       "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.8,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: the estimate comes from 175 countries, most of them poorer than the US, where democracy raised growth through investment, schooling and reforms that a rich country already has; a rich country's private institutions may hold up more of its income. 0.8 (0.5 to 1)."
+      "formula": "@democracy.democracy_effect_external_validity",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "dem_counterfactual_adj",
@@ -532,28 +500,17 @@
       "section": "adjustments",
       "label": "Backlash to the democracy work, as a share of the democracy branch",
       "format": "percent",
-      "value": {
-        "low": -0.15,
-        "best": -0.05,
-        "high": 0
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: litigation and campaigns seen as partisan can harden the other side and invite counter-measures (state bans on ranked-choice voting followed local wins, @democracy.electoral_reform_repeal_rate's source): -5% (-15% to 0).",
-      "side_effect": "added",
-      "shape": "normal"
+      "formula": "@democracy.democracy_work_backlash_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
+      "side_effect": "added"
     },
     {
       "id": "dem_ue_nonincome",
       "section": "adjustments",
       "label": "Value of democracy beyond income, as a share of the democracy branch",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: freedom of speech and assembly, fair treatment by the state and no fear of arrest for opposing the government are worth more than their income; Helliwell and Huang (2008, British Journal of Political Science 38(4)) find the quality of government linked to life satisfaction beyond its link through income, more so in richer countries. 30% (10% to 100%).",
+      "formula": "@democracy.slide_beyond_income_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
       "side_effect": "added"
     },
     {
@@ -561,13 +518,8 @@
       "section": "adjustments",
       "label": "State repression and intimidation averted, as a share of the democracy branch",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.05,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: autocratizing countries see more arrests, surveillance and threats against officials, journalists and opponents; non-fatal harms only, 5% (0 to 20%).",
+      "formula": "@democracy.slide_violence_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
       "side_effect": "added"
     },
     {
@@ -575,13 +527,8 @@
       "section": "adjustments",
       "label": "Effect of US democracy on democracy abroad, as a share of the democracy branch",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.2,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "As in the Protect Democracy model: democracy spreads from neighbours and partners (Boese et al. 2021), and V-Dem's 2026 report counts the US among the major powers now autocratizing; a US that left the democracies would weaken that pull and its support for democrats abroad: 20% (0 to 60%).",
+      "formula": "@democracy.slide_global_spillover_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
       "side_effect": "added"
     },
     {
@@ -872,34 +819,18 @@
       "section": "effect",
       "label": "Years of life lost per year in prison",
       "format": "number",
-      "value": {
-        "low": 0.5,
-        "best": 2,
-        "high": 3
-      },
-      "kind": "estimate",
+      "formula": "@incarceration.life_years_lost_per_year_incarcerated",
       "unit": "years",
-      "source": {
-        "title": "Patterson (2013), The dose-response of time served in prison on mortality: New York State, 1989-2003, American Journal of Public Health 103(3): 523-528",
-        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3673515/",
-        "retrieved": "2026-11-14",
-        "quote": "each additional year in prison produced a 15.6% increase in the odds of death for parolees, which translated to a 2-year decline in life expectancy for each year served in prison"
-      },
-      "explainer": "New York parolees, 1989-2003: 2 years of life per year served. Observational, with longer sentences going to people at higher risk anyway, so the low end is a quarter of it (0.5); high 3."
+      "explainer": "The shared figure (facts/incarceration.json), read by every model that counts years of incarceration averted."
     },
     {
       "id": "jus_remaining_life",
       "section": "effect",
       "label": "Remaining life expectancy of a person in prison",
       "format": "number",
-      "value": {
-        "low": 33,
-        "best": 40,
-        "high": 47
-      },
-      "kind": "judgment",
-      "explainer": "People in US prisons are mostly in their thirties and forties, with life expectancy below the general population's: 40 years left (33 to 47). Turns years of life lost into a share of a death.",
-      "unit": "years"
+      "formula": "@incarceration.remaining_life_in_prison",
+      "unit": "years",
+      "explainer": "The shared figure (facts/incarceration.json), read by every model that counts years of incarceration averted."
     },
     {
       "id": "jus_value_per_death",
@@ -924,14 +855,9 @@
       "section": "effect",
       "label": "Years from a prison-year averted until the deaths it would have caused",
       "format": "number",
-      "value": {
-        "low": 1,
-        "best": 3,
-        "high": 8
-      },
-      "kind": "judgment",
-      "explainer": "The excess risk is 'highest upon release from prison and declined over time' (Patterson 2013), recovering over about two thirds of the time served: the rest of the sentence plus a few years after release, 3 years (1 to 8).",
-      "unit": "years"
+      "formula": "@incarceration.years_until_prison_deaths",
+      "unit": "years",
+      "explainer": "The shared figure (facts/incarceration.json), read by every model that counts years of incarceration averted."
     },
     {
       "id": "jus_death_delay_discount",
