@@ -7,7 +7,7 @@
   "estimate_basis": "past_average",
   "charity": "sentinel-bio",
   "owner": "charityevals",
-  "summary": "Sentinel Bio (Washington DC, founded 2024) pools philanthropists' money and grants it for work against catastrophic pandemics, mostly on screening orders for synthetic DNA and on AI tools that can design biology; this model covers all it spent in its first tax year, May to December 2024 ($1.53M, $1.11M of it grants made in November and December), and the $1.08M it advised another donor to give the Johns Hopkins Center for Health Security. At the defaults it averts about 4.7 years of healthy life per $1,000 (0.4 to 60 on the combined range): about three fifths from three grants valued as a typical dollar of pandemic work (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a tenth from two fellowships counted through the work they add to the field, a quarter from its grant to the Council on Strategic Risks, read at that charity's figure on this site, and a few percent from the advised gift, valued as money shifted to a better use; its own costs (28% of the spending) count only through the grants and advice they buy. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate, the years a cut counts and what its next dollar does (49%: its reserves were six years of 2024's spending, but its grants have since grown several times over). Every branch is discounted for missing data: no outcome of the grants or the advice on the risk is measured.",
+  "summary": "Sentinel Bio (Washington DC, founded 2024) pools philanthropists' money and grants it for work against catastrophic pandemics, mostly on screening orders for synthetic DNA and on AI tools that can design biology; this model covers all it spent in its first tax year, May to December 2024 ($1.53M, $1.11M of it grants made in November and December), and the $1.08M it advised another donor to give the Johns Hopkins Center for Health Security. At the defaults it averts about 4.7 years of healthy life per $1,000 (0.4 to 60 on the combined range): about half from three grants valued as a typical dollar of pandemic work (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a fifth from two fellowships counted through the work they add to the field, a quarter from its grant to the Council on Strategic Risks, read at that charity's figure on this site, and a few percent from the advised gift, valued as money shifted to a better use; its own costs (28% of the spending) count only through the grants and advice they buy. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate, the years a cut counts and what its next dollar does (49%: its reserves were six years of 2024's spending, but its grants have since grown several times over). Every branch is discounted for missing data: no outcome of the grants or the advice on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Sentinel Bio",
@@ -525,6 +525,22 @@
       "explainer": "A fellowship 'to support biosecurity policy focusing on AI-Bio and nucleic acid governance' (its grant page: $164,468 committed; $113,300 paid in 2024). Counted in the field-building branch, as the site's peers count fellowships (the Council on Strategic Risks, Ploughshares Fund, GovAI)."
     },
     {
+      "id": "umd_fellowship_committed",
+      "section": "effect",
+      "label": "The University of Maryland fellowship: the grant committed",
+      "format": "usd",
+      "unit": "usd",
+      "value": 164468,
+      "kind": "observed",
+      "source": {
+        "title": "Sentinel Bio, grant page: University of Maryland – Department of Computer Science",
+        "url": "https://sentinelbio.org/grant/university-of-maryland-department-of-computer-science/",
+        "retrieved": "2026-11-14",
+        "quote": "We provided the University of Maryland with $164,468 for a fellowship to support biosecurity policy focusing on AI-Bio and nucleic acid governance."
+      },
+      "explainer": "The whole fellowship grant; $113,300 of it was paid in 2024 (grant_umd_fellowship), so 2024 pays for that share of the fellow (fb_people)."
+    },
+    {
       "id": "grant_rosetta_fellowship",
       "section": "effect",
       "label": "Grant to the Open Molecular Software Foundation (a biosecurity fellowship at Rosetta Commons)",
@@ -729,6 +745,39 @@
       "unit": "DALYs"
     },
     {
+      "id": "climate_cost_share",
+      "section": "effect",
+      "label": "Climate: share of the cost spent on climate work (an option: 0 where there is none)",
+      "format": "percent",
+      "value": 0,
+      "kind": "observed",
+      "explainer": "0: Sentinel Bio funds no climate work (its mission is pandemics). No range: the value is 0 by construction, not an uncertain estimate.",
+      "source": {
+        "title": "Sentinel Bio Inc., Form 990 for its first tax year, 16 May to 31 December 2024 (filed 6 October 2025; IRS e-file XML, object 202532799349300228)",
+        "url": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11C.zip",
+        "retrieved": "2026-11-14",
+        "page": "Part I line 1 mission: 'focused on eliminating pandemics within our lifetimes'"
+      }
+    },
+    {
+      "id": "climate_value_per_dollar",
+      "section": "effect",
+      "label": "Climate: value of a dollar of typical climate work (units of value)",
+      "format": "small",
+      "formula": "#cause:climate",
+      "unit": "units of value / $",
+      "explainer": "The site's own climate average: the equal-weight mean of the climate charities on the rankings, per dollar, in units of value (its tonnes already valued by the climate skeleton, normalization.md 2.5, 2.8). Not a Rethink figure or a bridge of the model's own. Fixed."
+    },
+    {
+      "id": "climate_uov",
+      "section": "effect",
+      "label": "Climate: value of the climate work (units of value, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * climate_cost_share * climate_value_per_dollar",
+      "unit": "UoV",
+      "explainer": "The climate spending × a typical climate dollar's value; how far this charity's climate work beats or trails a typical dollar is climate_evidence_adj. The average already counts its own wait and years."
+    },
+    {
       "id": "pol_cost_share",
       "section": "effect",
       "label": "Policy win: share of the cost spent on the campaign that won it",
@@ -854,15 +903,8 @@
       "section": "reach",
       "label": "Field-building: people trained or placed in the year",
       "format": "integer",
-      "value": 2,
-      "kind": "observed",
-      "explainer": "One fellow each: Samuel Curtis at Rosetta Commons (the grant page) and one policy fellow at the University of Maryland ('a fellowship', its grant page).",
-      "source": {
-        "title": "Sentinel Bio, grant pages: University of Maryland; Open Molecular Software Foundation",
-        "url": "https://sentinelbio.org/grant/open-molecular-software-foundation/",
-        "retrieved": "2026-11-14",
-        "quote": "support an inaugural biosecurity fellowship at Rosetta Commons, with Samuel Curtis as the inaugural fellow"
-      }
+      "explainer": "One fellow each: Samuel Curtis at Rosetta Commons (its grant page: 'with Samuel Curtis as the inaugural fellow', $50,000, all paid in 2024) and one policy fellow at the University of Maryland ('a fellowship', its grant page), counted for the share of that grant paid in 2024 ($113,300 of $164,468), so people and cost cover the same part: about 1.7.",
+      "formula": "1 + grant_umd_fellowship / umd_fellowship_committed"
     },
     {
       "id": "fb_share_working",
@@ -882,9 +924,9 @@
       "section": "effect",
       "label": "Field-building: years each stays in the work",
       "format": "number",
+      "formula": "@catastrophe.field_work_years",
       "unit": "years",
-      "explainer": "Years each person moved into the work stays in it: the family's shared figure (@catastrophe.field_work_years), 5 (2 to 10) from the field's turnover; no follow-up of the fellows is published. Discounted at the shared rate.",
-      "formula": "@catastrophe.field_work_years"
+      "explainer": "Years each person moved into the work stays in it: the family's shared figure (@catastrophe.field_work_years), 5 (2 to 10) from the field's turnover; no follow-up of the fellows is published. Discounted at the shared rate."
     },
     {
       "id": "fb_work_dollars",
@@ -949,7 +991,7 @@
       "section": "effect",
       "label": "Sentinel Bio's own costs: share of the cost (choosing and managing grants, advising donors)",
       "format": "percent",
-      "formula": "1 - ai_cost_share - bio_cost_share - nuclear_cost_share - pol_cost_share - fb_cost_share - live_cost_share",
+      "formula": "1 - ai_cost_share - bio_cost_share - nuclear_cost_share - climate_cost_share - pol_cost_share - fb_cost_share - live_cost_share",
       "explainer": "The rest of 2024's spending (28%, $428,699): staff, contractors, software, travel and the year's legal and audit fees. Its own research (on which chokepoints in biotechnology to fund) and its meetings with grantees (at least quarterly, Schedule I Part I line 2) are the cost of choosing and steering the grants, credited through the grants' value, not again; its advice to other donors is valued as the spending it changed (informed_money_value). So these costs earn no typical-project cut of their own, which would count the grantees' work twice."
     },
     {
@@ -957,7 +999,7 @@
       "section": "effect",
       "label": "Check: the cost shares add up to all the modelled spending",
       "format": "percent",
-      "formula": "ai_cost_share + bio_cost_share + nuclear_cost_share + pol_cost_share + fb_cost_share + live_cost_share + own_cost_share",
+      "formula": "ai_cost_share + bio_cost_share + nuclear_cost_share + climate_cost_share + pol_cost_share + fb_cost_share + live_cost_share + own_cost_share",
       "explainer": "Must be 1: every dollar of 2024's spending is in exactly one branch (the typical-project grants, the fellowships, the grants read at their recipients' figures, or Sentinel's own costs)."
     },
     {
@@ -1046,9 +1088,9 @@
       "section": "effect",
       "label": "Deaths averted that are in a COVID-scale pandemic (a part of deaths_averted)",
       "format": "small",
-      "formula": "(bio_deaths_averted + fb_deaths_averted) * bio_covid_scale_share",
+      "formula": "(bio_deaths_averted + pol_deaths_averted + fb_deaths_averted) * bio_covid_scale_share",
       "unit": "deaths",
-      "explainer": "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size at the world's. The fellows' work is pandemic work, so its deaths take the same COVID-scale share as the grants'."
+      "explainer": "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size at the world's. The fellows' work and the (switched-off) policy branch are pandemic work, so their deaths take the same COVID-scale share as the grants'."
     },
     {
       "id": "covid_value_per_death",
@@ -1103,11 +1145,20 @@
       "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: the weight its adjustments carry. Fixed."
     },
     {
+      "id": "w_climate",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the climate work (before adjustments)",
+      "format": "number",
+      "formula": "climate_uov * dalys_per_death_value",
+      "unit": "DALYs",
+      "explainer": "The branch's value in healthy years, by the same bridge: the weight its adjustments carry. Fixed."
+    },
+    {
       "id": "w_pol",
       "section": "adjustments",
       "label": "Weight: healthy years from the policy win (before adjustments)",
       "format": "number",
-      "formula": "pol_deaths_averted * value_per_death * dalys_per_death_value + pol_future_dalys",
+      "formula": "pol_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + pol_future_dalys",
       "unit": "DALYs",
       "explainer": "The branch's deaths averted in healthy years (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted), plus its future healthy years kept: the weight its adjustments carry. Fixed."
     },
@@ -1125,7 +1176,7 @@
       "section": "adjustments",
       "label": "Weight: healthy years from every branch (before adjustments)",
       "format": "number",
-      "formula": "w_ai + w_bio + w_nuclear + w_pol + w_fb",
+      "formula": "w_ai + w_bio + w_nuclear + w_climate + w_pol + w_fb",
       "unit": "DALYs"
     },
     {
@@ -1166,6 +1217,19 @@
       },
       "kind": "judgment",
       "explainer": "Not used: nuclear_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
+    },
+    {
+      "id": "climate_evidence_adj",
+      "section": "adjustments",
+      "label": "Climate work: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.7,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Not used: climate_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
     },
     {
       "id": "pol_evidence_adj",
@@ -1254,6 +1318,19 @@
       "explainer": "Not used: nuclear_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
     },
     {
+      "id": "climate_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Climate work: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Not used: climate_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
+    },
+    {
       "id": "pol_counterfactual_adj",
       "section": "adjustments",
       "label": "Policy win: share of the work no one else would have done now",
@@ -1319,6 +1396,19 @@
       "explainer": "Not used: nuclear_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
     },
     {
+      "id": "climate_attribution_share",
+      "section": "adjustments",
+      "label": "Climate work: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Not used: climate_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
+    },
+    {
       "id": "pol_attribution_share",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
@@ -1349,7 +1439,7 @@
       "section": "adjustments",
       "label": "How far the typical project's effect applies to this charity's work",
       "format": "multiple",
-      "formula": "(w_ai * ai_evidence_adj + w_bio * bio_evidence_adj + w_nuclear * nuclear_evidence_adj + w_pol * pol_evidence_adj + w_fb * fb_evidence_adj) / (w_total)",
+      "formula": "(w_ai * ai_evidence_adj + w_bio * bio_evidence_adj + w_nuclear * nuclear_evidence_adj + w_climate * climate_evidence_adj + w_pol * pol_evidence_adj + w_fb * fb_evidence_adj) / (w_total)",
       "explainer": "Outcome-weighted average of the branches on the typical-project chain (the pandemic grants and the fellowships), for reading only."
     },
     {
@@ -1357,7 +1447,7 @@
       "section": "adjustments",
       "label": "Share of the work no one else would have done now",
       "format": "percent",
-      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / (w_total * evidence_adj)",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_climate * climate_evidence_adj * climate_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / (w_total * evidence_adj)",
       "explainer": "Outcome-weighted average of the branches on the typical-project chain, for reading only."
     },
     {
@@ -1365,7 +1455,7 @@
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_climate * climate_evidence_adj * climate_counterfactual_adj * climate_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
       "explainer": "Outcome-weighted average of the branches on the typical-project chain, for reading only."
     },
     {
@@ -1450,15 +1540,15 @@
     {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths averted (and losses beyond them, 0 by default), in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted (and losses beyond them, 0 by default) and the climate work, in GiveWell units of value (before adjustments)",
       "format": "number",
-      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths)",
+      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths) + climate_uov",
       "unit": "UoV"
     },
     {
       "id": "dalys_from_uov",
       "section": "bridges",
-      "label": "Deaths averted (and losses beyond them, 0 by default), in healthy years",
+      "label": "Deaths averted (and losses beyond them, 0 by default) and the climate work, in healthy years",
       "format": "number",
       "formula": "uov_bridged / ($uov_per_daly)",
       "unit": "DALYs",

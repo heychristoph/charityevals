@@ -35,7 +35,7 @@ At the end of 2024 Sentinel held $9.1 million, six times what it spent from May 
 
 ### What drives the result
 
-The three grants valued as typical pandemic work bring about three fifths of the result and the fellowships a tenth. The grant to the Council on Strategic Risks brings a quarter, and the advised gift a few percent. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 58. The result sits near the other pandemic charities the site models, such as IBBIS and the Johns Hopkins Center for Health Security.
+The three grants valued as typical pandemic work bring about half of the result and the fellowships a fifth. The grant to the Council on Strategic Risks brings a quarter, and the advised gift a few percent. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 58. The result sits near the other pandemic charities the site models, such as IBBIS and the Johns Hopkins Center for Health Security.
 
 ### Biggest uncertainties
 
@@ -52,7 +52,7 @@ The three grants valued as typical pandemic work bring about three fifths of the
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template. Grants to charities the site models are read live at their figures, and the advised gift goes through the shared money-moved rows. Round 1 of the independent audit found two high findings and one medium, all fixed. The model had first counted Sentinel as a money mover, which kept the distance slider from reaching its own grants; it is now spread by world population, with the missing-data discount taken on the grants read live. The advised gift had been counted as half new money; advice that changes where money goes counts as money shifted to a better use. The two fellowships moved into the field-building branch, as in the site's other models. The result stayed at about 4.7. The rounds are in audits/sentinel-bio-charityevals/.
+The model was built from the catastrophic-risk template. Grants to charities the site models are read live at their figures, and the advised gift goes through the shared money-moved rows. Round 1 of the independent audit found two high findings and one medium, all fixed. Round 2 passed with one medium finding, the branches' shares as this text first gave them (corrected above), and small fixes: the University of Maryland fellow counts for the share of the grant paid in 2024. Before that, the model had first counted Sentinel as a money mover, which kept the distance slider from reaching its own grants; it is now spread by world population, with the missing-data discount taken on the grants read live. The advised gift had been counted as half new money; advice that changes where money goes counts as money shifted to a better use. The two fellowships moved into the field-building branch, as in the site's other models. The result stayed at about 4.7. The rounds are in audits/sentinel-bio-charityevals/.
 
 ### Sources
 
