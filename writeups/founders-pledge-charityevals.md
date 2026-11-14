@@ -1,6 +1,6 @@
 ### Summary
 
-Founders Pledge is a community of entrepreneurs who pledge part of their exit proceeds to charity. It researches where to give, advises its members and a few ultra-wealthy Philanthropy Partners, and runs donor-advised funds and public funds. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="founders-pledge-charityevals">8.7</span> years of healthy life per 1,000 dollars**. For each dollar it spends, about sixteen dollars go to the charities it recommends. The share of that money it caused is valued at what the site's models of its grantees and causes achieve. Most of the value comes from its health and education giving and from members' other giving it caused; its climate giving adds little, because the site's climate charities rank far below its global-health charities in healthy years.
+Founders Pledge is a community of entrepreneurs who pledge part of their exit proceeds to charity. It researches where to give, advises its members and a few ultra-wealthy Philanthropy Partners, and runs donor-advised funds and public funds. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="founders-pledge-charityevals">8.0</span> years of healthy life per 1,000 dollars**. For each dollar it spends, about sixteen dollars go to the charities it recommends. The share of that money it caused is valued at what the site's models of its grantees and causes achieve. Most of the value comes from its health and education giving and from members' other giving it caused; its climate giving adds little, because the site's climate charities rank far below its global-health charities in healthy years.
 
 ### What the charity does
 
@@ -23,10 +23,10 @@ Its community gave $359 million in 2025. Of that, $196 million went to the chari
 
 A dollar it directs is worth what its grantees achieve, read live under your values. Its impact report splits the $196 million by cause: climate 31.5%, education 31.1%, health and economic empowerment 27.4%, system change 4.6%, global catastrophic risks 2.8% and global security 1.0%. Within each cause, its audited list of 2025 grants of £1 million or more names the grantees:
 
-- **Health and economic empowerment** is valued at its grantees with a figure on the rankings (Evidence Action, Clinton Health Access Initiative, Fika, Precision Development and Helen Keller Intl), weighted by their 2025 grants. Its other grantees there, such as Raising the Village, take their average.
-- **Climate** is valued at Clean Air Task Force, and **catastrophic risks** at SecureBio, each its cause's one grantee with a model here.
+- **Health and economic empowerment** is valued at its grantees with a figure on the rankings (Evidence Action, Clinton Health Access Initiative, Fika, Precision Development, Helen Keller Intl and Save the Children), weighted by their 2025 grants. The accounts don't separate grants to its recommendations from members' other grants, so every modelled grantee on the list is read. Its other grantees there, such as Raising the Village, take their average.
+- **Climate** is valued at Clean Air Task Force and SilverLining, and **catastrophic risks** at SecureBio, its one grantee there with a model here.
 - **Education** has no grantee with a published model here. Education charities are filed under global health, so education takes the global-health charities on the rankings, with equal weights.
-- **System change, global security** and the small unlabelled slices have no model here, so they take the average of the rest.
+- **System change, global security** and the small unlabelled slices: the chart gives no breakdown of them, so they take the average of the rest.
 
 Its members also gave $163 million to charities it doesn't recommend. The share it caused that is new money is valued at an ordinary charity's worth, as Giving What We Can's model values its donors' giving below its bar, after taking out transfers to other donor-advised funds.
 
@@ -36,7 +36,7 @@ Shifted money would otherwise have gone to an ordinary charity of the same cause
 
 The cost is the group's direct and support costs, without the grants. The money is the year's flow, set against the year's costs. A pledge fulfilled in 2025 counts in 2025, and the year's new pledges aren't counted on top, so nothing is counted twice.
 
-A 3% side effect is added, with a range of −5% to +20% (our judgment). On the plus side, its public research and funds guide other platforms' donors, and its pledge spreads a norm of giving among founders. On the minus side, money can sit in donor-advised funds for years, and a few advisers steering much private money narrow a field's views. The recipients' own risks are already in their figures. The result is then multiplied by the next dollar's figure, 33% of the 2025 average. Credit by share of resources, off by default, would share the result with staff's forgone pay and with new money its fund donors and members gave.
+A 3% side effect is added, with a range of −5% to +20% (our judgment). On the plus side, its public research and funds guide other platforms' donors, and its pledge spreads a norm of giving among founders. On the minus side, money can sit in donor-advised funds for years, and a few advisers steering much private money narrow a field's views. The recipients' own risks are already in their figures. The result is then multiplied by the next dollar's figure, 33% of the 2025 average. Credit by share of resources, off by default, would share the result with staff's forgone pay and with new money its fund donors and members gave, to its recommended charities and to others.
 
 ### What drives the result
 
@@ -63,7 +63,7 @@ Audit rounds are in audits/founders-pledge-charityevals/. Round 1 checked every 
 - Its grantees with a model here are now read at their own figures within each cause, from the accounts' list of 2025 grants, in place of the cause averages (health, climate and catastrophic risks).
 - Members' giving to charities it doesn't recommend is now a row of its own, at an ordinary charity's value, in place of a share folded into the side effects; the side-effect share fell from 8% to 3%.
 
-It also lowered the judged overlap between partners' giving and fund money (25% to 10%: the large Climate Fund donor had already given in 2024, so isn't a new partner), named The Life You Can Save as the Rapid Response Fund's co-founder, removed an unused row and corrected a quote.
+Round 2, a verification round, found that credit by share of resources left out the new money of members' other giving, and that two modelled grantees (SilverLining, Save the Children) were missing from the causes' readings; both were fixed, and the share of other giving reaching end charities was re-anchored on the accounts (93% to 90%). Round 1 also lowered the judged overlap between partners' giving and fund money (25% to 10%: the large Climate Fund donor had already given in 2024, so isn't a new partner), named The Life You Can Save as the Rapid Response Fund's co-founder, removed an unused row and corrected a quote.
 
 ### Sources
 
