@@ -40,7 +40,10 @@ In January 2025 the US suspended refugee admissions and terminated HIAS's federa
 
 ### How this model was checked
 
-The mechanical audit (`scripts/audit-model.ts`) runs on each model, and independent auditors (a fresh agent each round, using the audit-cea skill) checked them; the rounds are in `audits/hias-charityevals/`.
+The mechanical audit (`scripts/audit-model.ts`) runs on each model, and independent auditors (a fresh agent each round, using the audit-cea skill) checked them; the rounds are in `audits/hias-charityevals/`, `audits/hias-charityevals-international/` and `audits/hias-charityevals-advocacy/`.
+
+- **Round 1** failed all three. US services: the gain from staying now waits for the case to end, uses clients' later consumption and counts remittances home; the resettlement counterfactual is split before and after the January 2025 suspension; the cash share was rebuilt from the Form 990's direct assistance (0.0026 to 0.0031). Abroad: the Resettlement Support Center in Austria and child protection became branches, cash is valued where its recipients are and rebuilt from the accounts, reach is scaled to the fiscal year, and the graduation effect is limited to its 1,100 participants (about 0.048 either way). Advocacy: the Ninth Circuit's March 2026 reversal of the Pacito injunction cut the chance of success to 2% and the admissions a win restores to 10,000 a year, and fiscal 2025 carries half the case's cost (1.9 to 0.32).
+- **Round 2** (verification) passed all three, with low findings and one medium (the Resettlement Support Center's departures are a judgment without a published count).
 
 ### Sources
 
