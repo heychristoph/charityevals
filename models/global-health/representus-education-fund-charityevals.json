@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "representus-education-fund",
   "owner": "charityevals",
-  "summary": "The RepresentUs Education Fund, the 501(c)(3) of the US anti-corruption and democracy-reform group RepresentUs (Represent.Us itself is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $7.8 million in 2024 on national videos and social media about corruption and threats to democracy, education and volunteer outreach behind state and local ballot measures, research, the American Democracy Summit and grants to Represent.Us for campaign outreach. Four branches, each its share of the money behind what its field or movement achieves: its 15% share of the ranked-choice voting movement, which puts about 1.4 million more Americans a year under ranked ballots (about a third of the result); its 3% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about a quarter); its other reforms (anti-corruption laws, money in politics, ethics), judged a quarter as effective per dollar as the redistricting movement (about a fifth); and its direct work's small share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about a fifth). With its next dollar at 49% of the average, it comes to about 0.026 years of healthy life per 1,000 dollars, close to our Common Cause and FairVote models; the result is mostly judgment (the years a win counts, how much a voting reform changes how well people are governed, the split of its spending between the branches), and all four branches are discounted by the shared missing-data slider.",
+  "summary": "The RepresentUs Education Fund, the 501(c)(3) of the US anti-corruption and democracy-reform group RepresentUs (Represent.Us itself is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $7.8 million in 2024 on national videos and social media about corruption and threats to democracy, education and volunteer outreach behind state and local ballot measures, research, the American Democracy Summit and grants to Represent.Us for campaign outreach. Four branches, each its share of the money behind what its field or movement achieves: its 14% share of the resources behind the ranked-choice voting movement (its volunteers' time counted with the others'), which puts about 1.4 million more Americans a year under ranked ballots (about a third of the result); its 3% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about a quarter); its other reforms (anti-corruption laws, money in politics, ethics), judged a quarter as effective per dollar as the redistricting movement (about a fifth); and its direct work's small share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about a fifth). With its next dollar at 49% of the average, it comes to about 0.026 years of healthy life per 1,000 dollars, close to our Common Cause and FairVote models; the result is mostly judgment (the years a win counts, how much a voting reform changes how well people are governed, the split of its spending between the branches), and all four branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: RepresentUs Education Fund",
@@ -731,6 +731,44 @@
       "explainer": "The slide branch's side effects, each weighted by the side-effect slider."
     },
     {
+      "id": "volunteer_contacts",
+      "section": "adjustments",
+      "label": "Texts and calls made by RepresentUs volunteers, 2024",
+      "format": "integer",
+      "value": 6700000,
+      "kind": "observed",
+      "source": {
+        "title": "RepresentUs, 2024 Impact Report (December 2024; covers Represent.Us and the Education Fund together)",
+        "url": "https://represent.us/wp-content/uploads/2024/12/2024-impact-report-6.9.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 7 (In 2024, we activated thousands of advocates)",
+        "quote": "6.7 MILLION TEXTS AND CALLS MADE BY DEDICATED VOLUNTEERS"
+      },
+      "explainer": "Its volunteers' outreach for the 2024 ballot campaigns, both arms together (the Fund's staff train and run the volunteer network; its grant to Represent.Us pays for the texting and calling): unpaid time behind the same wins, a resource of others (Convention 2)."
+    },
+    {
+      "id": "volunteer_hours_per_contact",
+      "section": "adjustments",
+      "label": "Volunteer time per text or call",
+      "format": "number",
+      "value": {
+        "low": 0.003,
+        "best": 0.01,
+        "high": 0.03
+      },
+      "kind": "judgment",
+      "explainer": "Peer-to-peer texting tools send a message in a few seconds and a phone-bank call, most of them unanswered, takes a few minutes; RepresentUs's contacts are mostly texts (2 million texts in Arizona alone in 2024, and 600,000 texts to 100,000 calls in 2025, 2025 Year in Review p. 7). Six texts at about 5 seconds and one call at about 3 minutes average about 30 seconds a contact: judged 0.01 hours (0.003 to 0.03), training and meetings included.",
+      "unit": "hours"
+    },
+    {
+      "id": "volunteer_value",
+      "section": "adjustments",
+      "label": "Value of the volunteers' time, 2024",
+      "format": "usd",
+      "formula": "volunteer_contacts * volunteer_hours_per_contact * @united_states.volunteer_hour_value_2024",
+      "explainer": "At the site's US value of a volunteer hour (@united_states.volunteer_hour_value_2024): about $2.3 million. The contacts were for the 2024 ballot measures, so it is split over the three reform branches by the reform work's shares, and none goes to the slide branch."
+    },
+    {
       "id": "rcv_evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment, RCV branch",
@@ -759,8 +797,8 @@
       "section": "adjustments",
       "label": "The Education Fund's share of the ranked-choice movement's resources",
       "format": "percent",
-      "formula": "cost_total * rcv_spend_share / @democracy.us_rcv_movement_resources_per_year",
-      "explainer": "Its 2024 spending on ranked-choice voting (about $2.8 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million in 2024 dollars, ballot campaigns, FairVote and RepresentUs included; Convention 2), the denominator the FairVote model divides by too: about 15%. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar spent. 2024 was a year of large ballot spending, most of it on statewide measures that failed (all but Alaska's defence; Washington DC's Initiative 83 passed), which is why the average year is the base, not 2024's record."
+      "formula": "cost_total * rcv_spend_share / (@democracy.us_rcv_movement_resources_per_year + volunteer_value * rcv_reform_share)",
+      "explainer": "Its 2024 spending on ranked-choice voting (about $2.8 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million in 2024 dollars, ballot campaigns, FairVote and RepresentUs included; Convention 2), the denominator the FairVote model divides by too, plus its own volunteers' time on this work (the shared figure counts money): about 14%. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar spent. 2024 was a year of large ballot spending, most of it on statewide measures that failed (all but Alaska's defence; Washington DC's Initiative 83 passed), which is why the average year is the base, not 2024's record."
     },
     {
       "id": "rcv_missing_data_adj",
@@ -816,8 +854,8 @@
       "section": "adjustments",
       "label": "The Education Fund's share of the redistricting movement's resources",
       "format": "percent",
-      "formula": "cost_total * maps_spend_share / maps_movement_resources",
-      "explainer": "Its 2024 spending on redistricting reform (about $0.7 million) over the movement's average yearly spending in 2008-2025 (@democracy.redistricting_movement_resources, $22 million in 2024 dollars, RepresentUs named among the standing organisations; Convention 2), the denominator the Common Cause model divides by too: about 3%. Both are 2024 dollars, so no price step."
+      "formula": "cost_total * maps_spend_share / (maps_movement_resources + volunteer_value * maps_reform_share)",
+      "explainer": "Its 2024 spending on redistricting reform (about $0.7 million) over the movement's average yearly spending in 2008-2025 (@democracy.redistricting_movement_resources, $22 million in 2024 dollars, RepresentUs named among the standing organisations; Convention 2), the denominator the Common Cause model divides by too, plus its own volunteers' time on this work (the shared figure counts money): about 3%. Both are 2024 dollars, so no price step."
     },
     {
       "id": "maps_weak_delivery",
@@ -898,8 +936,8 @@
       "section": "adjustments",
       "label": "The Education Fund's other reform spending over the redistricting movement's resources",
       "format": "percent",
-      "formula": "cost_total * oth_spend_share / maps_movement_resources",
-      "explainer": "Its 2024 spending on the other reforms over the redistricting movement's yearly resources, the scale oth_relative_effect is set against (as in the Common Cause model): about 12%."
+      "formula": "cost_total * oth_spend_share / (maps_movement_resources + volunteer_value * (1 - rcv_reform_share - maps_reform_share))",
+      "explainer": "Its 2024 spending on the other reforms over the redistricting movement's yearly resources, the scale oth_relative_effect is set against (as in the Common Cause model), plus its own volunteers' time on this work: about 12%."
     },
     {
       "id": "oth_evidence_adj",
