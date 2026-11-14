@@ -1,6 +1,6 @@
 ### Summary
 
-SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="securebio-charityevals">6.1</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 93.
+SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="securebio-charityevals">6.2</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 96.
 
 ### What the charity does
 
@@ -50,7 +50,7 @@ Most of the result comes from catastrophes the world survives and from COVID-sca
 
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.3 to 18.9.
 - **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 4 to 30 for the pandemic figure.
-- **How much the next dollar does.** 20% to 80% of the past average: 2.5 to 10.1.
+- **How much the next dollar does.** 17% to 85% of the past average: 2.1 to 10.7.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 
 ### What isn't modelled
@@ -60,7 +60,7 @@ Most of the result comes from catastrophes the world survives and from COVID-sca
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, starting from our Johns Hopkins Center for Health Security model. Round 1 of the independent audit checked every figure against the Form 990 and found no high issues and three medium ones. First, the reserves: much of the net assets was a multi-year grant booked in 2024, so the room factor is now neutral. Second, the use factor was above neutral without support; it is now neutral too, and the next dollar went from 48% to 49%. Third, one multiplier hid a blend, so the AI evaluations and the pandemic work now have their own. The low findings were fixed too: the system-card wording, an anchor for the other benefits, and a contradiction in our Nuclear Threat Initiative model. A verification round checked those changes. The rounds are in audits/securebio-charityevals/.
+The model was built from the catastrophic-risk template, starting from our Johns Hopkins Center for Health Security model. Round 1 of the independent audit checked every figure against the Form 990 and found no high issues and three medium ones. First, the reserves: much of the net assets was a multi-year grant booked in 2024, so the room factor is now neutral. Second, the use factor was above neutral without support; it is now neutral too, and the next dollar went from 48% to 49%. Third, one multiplier hid a blend, so the AI evaluations and the pandemic work now have their own. The low findings were fixed too: the system-card wording, an anchor for the other benefits, and a contradiction in our Nuclear Threat Initiative model. A verification round checked those changes and asked for the next-dollar range to be the product of its factors' ranges (now 17% to 85%); a last round checked that. The rounds are in audits/securebio-charityevals/.
 
 ### Sources
 
