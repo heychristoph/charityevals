@@ -1,6 +1,6 @@
 ### Summary
 
-The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in two parts. Its nuclear-weapons and science-and-democracy work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals">14</span> years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from about 0.6 to about 330. Its climate, transport and food work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-climate">0.0012</span>**, about $170 per tonne of CO₂e averted. Both rest on judgments about how much of each outcome is due to UCS.
+The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in two parts. Its nuclear-weapons and science-and-democracy work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals">16</span> years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from about 0.7 to about 370. Its climate, transport and food work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-climate">0.0011</span>**, about $180 per tonne of CO₂e averted. Both rest on judgments about how much of each outcome is due to UCS.
 
 ### What the charity does
 
@@ -34,9 +34,9 @@ UCS spent $49.8 million in the year to September 2025, $44.0 million of it on pr
 
 UCS is credited with 6% of the advocacy behind EPA's vehicle standards, 10% behind California's car rule, 3% behind the power-plant standards and 1% behind the Inflation Reduction Act. EPA has since repealed the vehicle standards and is repealing the power-plant standards; Congress revoked California's waiver in 2025, now in court; the 2025 budget law cut much of the act's credits. Each counts only what survives, by the same shared figures our other climate models use.
 
-Some value is added as shares. The nuclear part adds 8%: work against a limited nuclear war, the 2025 expansion of radiation compensation, and the democracy work. The climate part adds 60%: California's 2025 cap-and-invest extension and other state laws, grid plans, the science behind climate lawsuits, and the farm work. It takes off 2% for safety campaigns that may slow nuclear power.
+Some value is added as shares. The nuclear part adds 7%: work against a limited nuclear war and the 2025 expansion of radiation compensation. The climate part adds 60%: California's 2025 cap-and-invest extension and other state laws, grid plans, the science behind climate lawsuits, and the farm work. It takes off 2% for safety campaigns that may slow nuclear power.
 
-UCS had about 17 months of spending in reserve in September 2025 and grew its donations that year. Its climate work now faces harder ground. The next dollar counts at 36% of the past average.
+UCS's net assets were about 17 months of spending in September 2025, and its donations grew that year. The next dollar of its nuclear and science work counts at 42% of the past average. Its climate work now faces harder ground, so its next dollar counts at 33%.
 
 ### What drives the result
 
