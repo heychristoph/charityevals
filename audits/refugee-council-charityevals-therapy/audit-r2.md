@@ -1,0 +1,15 @@
+# Audit: refugee-council-charityevals-therapy, round 2 (verification)
+Result: 4.023e-5 WELLBYs/$ = 0.002626 years of healthy life per $1,000 (combined range 0.00043-0.0161). Verdict: pass.
+Verdict: pass
+Model-sha: cadd251c63f894eb84140173941475a0cfe2f4361f00b36de20a2cb1991fc27e
+Mechanical: lint 0 high / 0 medium / 1 low (far-below, summary gives the reason); simulation stable (5% 0.32, 95% 2.92 x best guess); normalization-audit printed no line for this model (generated/ reverted).
+
+Round-1 findings:
+1. `myview_clients` (medium): settled in substance. Best 50, range 0-200; the explainer now states that the accounts do not say which line pays MyView, that 0 removes the double count, and that the services model counts those children's general advice gain only, not therapy (so a residual overlap is limited to the 0-200 range, not a double count of therapy). The 50 rests on the cost gap (£5,700 against a £1,500-2,250 course). Accepted as a judgment with reasoning; the charity could settle it.
+2. `evidence_adj` / `missing_data_adj` (medium): settled. External part is population and setting only (0.85), delivery mix left to the missing-data step, stated in both explainers; 0.5 (0.3-0.75).
+3. `counterfactual_adj` (medium): settled. 0.9 (0.7-1) with the stated anchor (WWP's mental-health model takes 0.7 for veterans with free VA trauma therapy, verified in that model's `iop_counterfactual_adj`) and the note that no refugee access rate is published.
+4. `cost_per_person` explainer: no stale number: fixed.
+5. Harris and Barraclough: cited with journal, pages and DOI: fixed.
+6. Uncited Scandinavian claim removed: fixed.
+
+New findings: none. Summary updated (0.003, range 0.0004-0.016, $7,000 a person with the 50 MyView children in the count, credit and delivery named).
