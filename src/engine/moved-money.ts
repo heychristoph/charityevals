@@ -14,8 +14,10 @@
 //            for one whose money goes to several causes, each cause's in its own mix (priorDollarValueMix)
 //   net      new share × V + (1 − new share) × (V − V_before), on the path to the output (INV-12);
 //            money all shifted (a grantmaker's) earns shifted_dollar_value = V − V_before; spending
-//            research or advice changed (a judged share of the money it informed) is all shifted, with
-//            the evidence and missing-data steps: informed_money_value, in place of net
+//            research or advice changed (a judged share of the money it informed, the row
+//            informed_money) is all shifted, with the evidence and missing-data steps:
+//            informed_money_value, in place of net (money_moved, if the model also moves money gross)
+//   sets     money to a second destination set takes the same rows prefixed `<set>_` (destinationSetRows)
 //
 // A result an evaluator already states as counterfactual value in "dollars of current effective
 // donations" (CEARCH) is multiplied by V; money moved (gross) by `moved_dollar_net_value`.
@@ -119,11 +121,17 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
     explainer: "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed.",
   },
   informed_money_value: {
-    id: "informed_money_value", format: "small", formula: "money_moved * shifted_dollar_value * evidence_adj * missing_data_adj",
+    id: "informed_money_value", format: "small", formula: "informed_money * shifted_dollar_value * evidence_adj * missing_data_adj",
     label: "Value of the spending its research or advice changed (all shifted money), units of value",
     explainer: "Spending its research or advice changed, at a judged share of the money it informed: all of it would have been spent anyway, so it counts for the gain over where it would have gone, discounted for weak evidence and for an outcome not measured for this charity (docs/normalization.md 2.8, 2.12).",
   },
 };
+
+/** The model's own row read by informed_money_value: the spending its research or advice changed (US$),
+ * kept apart from `money_moved` (money moved gross, valued net), so an organisation with both (funds and
+ * advice) needs no row of its own. All shifted, it brings in no donors' new money: the credit by share of
+ * resources never reads it. */
+export const INFORMED_MONEY = "informed_money";
 
 /** Rows written only for research or advice that changes how money is spent (`informed`): all shifted. */
 export const INFORMED_ROWS = ["shifted_dollar_value", "informed_money_value"] as const;
@@ -206,6 +214,34 @@ export const OWN_SPLIT: TemplateRow = {
 /** Formulas a meta model's `moved_dollar_value` may have. */
 export const MOVED_DOLLAR_FORMULAS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula, OWN_SPLIT.formula];
 
+/** A second destination set: money a model moves to other destinations than its main set (Ambitious
+ * Impact: its founded charities, and the global health charities its effective giving organisations
+ * fund). The set's rows are the main set's, word for word, with `<set>_` before every set row's id; the
+ * model's own money rows take the prefix too (`<set>_money_moved` gross, `<set>_informed_money` changed).
+ * Its destination is one of the shared single-cause rows, so shifted money is compared with GiveDirectly. */
+export const SET_ROWS = ["moved_dollar_value", "prior_dollar_value", "moved_dollar_net_value", "shifted_dollar_value", "informed_money_value"] as const;
+export const SET_DESTINATIONS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula];
+const setIds = ["moved_dollar_value", "prior_dollar_value", "shifted_dollar_value", INFORMED_MONEY];
+
+/** The rows of destination set `set` whose destination is `destination` (a SET_DESTINATIONS formula). */
+export function destinationSetRows(set: string, destination: string): TemplateRow[] {
+  const prefix = (f: string) => f.replace(new RegExp(`\\b(${setIds.join("|")})\\b`, "g"), `${set}_$1`);
+  const main: Record<string, TemplateRow> = { ...MOVED_MONEY_ROWS, moved_dollar_value: { ...GLOBAL_HEALTH_ONLY, formula: destination } };
+  return SET_ROWS.map((id) => ({ ...main[id], id: `${set}_${id}`, formula: id === "moved_dollar_value" ? destination : prefix(main[id].formula) }));
+}
+
+/** The second destination sets a model's rows name (`<set>_<set row>`): set → the set rows it has. */
+export function destinationSets(ids: Iterable<string>): Map<string, string[]> {
+  const sets = new Map<string, string[]>();
+  for (const id of ids)
+    for (const base of SET_ROWS)
+      if (id.length > base.length + 1 && id.endsWith(`_${base}`)) {
+        const set = id.slice(0, -base.length - 1);
+        sets.set(set, [...(sets.get(set) ?? []), base]);
+      }
+  return sets;
+}
+
 /** A `value_destinations` formula holds only the organisation's money by recipient or cause (`@meta.*`),
  * live results (`#id`, `#owner:charity`), the shared destination rows, `avg()`, 1 and arithmetic: no
  * typed value per dollar and no evaluator's multiplier. */
@@ -239,7 +275,8 @@ export const MARGINAL_ASSUMPTION = "marginal_vs_past_average";
 
 /** Credit by share of resources (`$resource_shares`) for every meta model, one formula: when on, the
  * donors whose new money the organisation moves are co-contributors, alongside staff's forgone pay.
- * `moved_per_dollar` is the gross money moved (or influenced) per dollar of the organisation's cost. */
+ * `moved_per_dollar` is the gross money moved (or influenced) per dollar of the organisation's cost; the
+ * spending its research or advice changed (`informed_money`, all shifted) brings no new money and stays out. */
 export const META_DONOR_COST_SHARE_FORMULA = "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))";
 
 /** The career-change step, the mirror of staff salary sacrifice (docs/normalization.md 2.8): a programme

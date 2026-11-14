@@ -16,7 +16,7 @@ Tax havens let multinationals and wealthy people avoid tax. When tax authorities
 - **Transparency standards (about 51% of the result):**
   - tax authorities report EUR 4 billion a year of extra revenue from the transparency standards (2024, the OECD Global Forum), 70% of it in developing countries;
   - we judge 35% of the developing countries' share is in low and lower-middle income countries, 35% of that in India. That revenue is valued as GiveWell values a dollar of government spending: about 1.5 times cash in its African programme countries, a quarter of that in India. Revenue in upper-middle and high-income countries is valued as money spread over everyone's consumption, much less per dollar;
-  - each dollar is net of what it costs the people who pay, judged to consume five times the UK average, with the shared extra cost of raising public money;
+  - each dollar is net of what it costs the people who pay, judged to consume about four and a half times the UK average (a blend of multinationals' shareholders, at the shared 2.5 times, and offshore wealth's owners, at 20 times), with the shared extra cost of raising public money;
   - the win counts for the years a won reform counts on the site, less the shared yearly chance that such a reform is repealed;
   - the network gets 8% of the movement's credit in the years the standards were won, and civil society 15% of all credit: governments, the US FATCA law and leaked documents did most. Exchange of information on request, which predates the network's proposals, gets half that credit. That makes 1%;
   - we trust the revenue figure at 70%, and judge 60% of the identified revenue is collected;

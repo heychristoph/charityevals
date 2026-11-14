@@ -766,18 +766,45 @@
       "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
     },
     {
+      "id": "payer_corporate_share",
+      "section": "effect",
+      "label": "Share of the tax at stake that multinationals' profit shifting avoids (the rest: wealthy individuals' offshore wealth)",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Tax Justice Network, The State of Tax Justice 2024",
+        "url": "https://taxjustice.net/reports/the-state-of-tax-justice-2024/",
+        "quote": "two-thirds (US$347.6 billion) is lost to multinational corporations shifting profit offshore",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Of the $492 billion a year lost to cross-border tax abuse, two thirds ($347.6 billion) is multinationals' profit shifting and a third ($144.8 billion) wealthy individuals' offshore wealth (State of Tax Justice 2024): the UN convention's branch. The transparency standards' revenue comes mostly from individuals' offshore accounts (exchange of information, voluntary disclosure). The two branches count about equally here: 50%, range 30% to 70%."
+    },
+    {
+      "id": "offshore_owner_consumption_vs_uk",
+      "section": "effect",
+      "label": "Consumption per person of the owners of offshore wealth, as a multiple of the UK average",
+      "format": "multiple",
+      "value": {
+        "low": 8,
+        "best": 20,
+        "high": 60
+      },
+      "kind": "judgment",
+      "shape": "lognormal",
+      "explainer": "Offshore wealth belongs to the very richest: Alstadsaeter, Johannesen and Zucman (2019) find the top 0.01% own about half of the offshore wealth in Scandinavian leaks. Their consumption is far less concentrated than their wealth: judged 20 times UK household consumption per person (8 to 60)."
+    },
+    {
       "id": "payer_consumption_vs_uk",
       "section": "effect",
       "label": "Consumption per person of those who pay the tax, as a multiple of the UK average",
       "format": "multiple",
-      "value": {
-        "low": 2,
-        "best": 5,
-        "high": 30
-      },
-      "kind": "judgment",
-      "shape": "lognormal",
-      "explainer": "Offshore wealth and shifted profits belong mostly to the richest households: Alstadsaeter, Johannesen and Zucman (2019) find the top 0.01% own about half of the offshore wealth in Scandinavian leaks, and shareholders of multinationals are mostly rich households and pension funds in rich countries. Some corporate tax falls on workers. Judged 5 times UK household consumption per person (2 to 30), so a dollar they pay costs them little on the log-consumption scale."
+      "formula": "1 / (payer_corporate_share / @public_funds.corporate_tax_payer_multiple + (1 - payer_corporate_share) / offshore_owner_consumption_vs_uk)",
+      "explainer": "A dollar taken from someone consuming c costs 1/c, so the payers' multiple is the dollar-weighted harmonic mean: profit shifting's at the shared figure for those who bear corporate income tax (@public_funds.corporate_tax_payer_multiple, 2.5: three quarters on shareholders, a quarter on workers), offshore wealth's at its owners'. About 4.4."
     },
     {
       "id": "payer_cost_per_dollar",

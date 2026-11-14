@@ -753,7 +753,7 @@ shifted, as half new in its credit by share of resources: now donors' money only
 **November 2026: spending research changed; a mover across causes.**
 
 - *Research or advice that changes where money goes*, at a judged share of the money it informed, is
-  all shifted money with the evidence and missing-data steps (2.12): `informed_money_value = money_moved ×
+  all shifted money with the evidence and missing-data steps (2.12): `informed_money_value = informed_money ×
   shifted_dollar_value × evidence_adj × missing_data_adj`, in place of `moved_dollar_net_value`
   (`moved-money.py <model> own-split informed <cause>`). Every gain of money all shifted reads the shared
   `shifted_dollar_value` (GiveWell's and ACE's grantmakers' money too).
@@ -762,6 +762,17 @@ shifted, as half new in its credit by share of resources: now donors' money only
   / Σ share` (`priorDollarValueMix`; script cause `<share fact>=<cause>,...`).
 - INV-12 checks both; Rethink Priorities' four waivers are gone, 80,000 Hours takes the split prior. No
   result moved.
+- *Both kinds in one model* (Longview's funds and advice, Effektiv Spenden's platform and advice): the
+  spending it changed is its own row, `informed_money`; `money_moved` stays the money moved gross, valued
+  net, and alone enters the credit by share of resources (`money_moved × new_money_share`: changed spending
+  brings no new money; INV-12 checks `donor_cost_share` never reads `informed_money`). No result moved.
+- *A second destination set* (Ambitious Impact: its founded charities, and the global health charities its
+  giving organisations fund): the main set's rows word for word with `<set>_` before every set row and the
+  set's own money rows (`gh_moved_dollar_value = value_global_health`, `gh_prior_dollar_value`,
+  `gh_moved_dollar_net_value`, `gh_shifted_dollar_value`, `gh_informed_money_value`; `gh_money_moved`,
+  `gh_informed_money`), over a shared single-cause destination (`moved-money.ts set <set> <destination>`).
+  INV-12 checks every set by the main set's rules; a prior may also be read as a factor of a cost (money
+  that would have gone elsewhere, spent on running costs). No result moved.
 
 ### 2.9 Won reforms: one way (October 2026)
 
