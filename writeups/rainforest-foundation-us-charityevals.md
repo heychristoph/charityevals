@@ -50,7 +50,7 @@ In the randomised trial (Slough et al. 2021, 76 communities in Loreto), alerts, 
 |---|---|---|
 | Hectares per patroller | about 3,600 | about 62,000 |
 | Share of the loss the support prevents | 23% | 8% |
-| RFUS's share of the resources | 70% | 45% |
+| RFUS's share of the resources | 70% | 38% |
 | Evidence | 0.85 | 0.75 |
 | Missing-data discount | none: measured | the site's discount |
 
