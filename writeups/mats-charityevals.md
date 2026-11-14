@@ -1,6 +1,6 @@
 ### Summary
 
-MATS (ML Alignment & Theory Scholars) trains researchers for AI safety in Berkeley and London. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="mats-charityevals">0.8</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on how many scholars MATS brings into the field. All three are deeply uncertain: on the model's own ranges the result runs from about 0.08 to about 4, and wider with the shared assumptions.
+MATS (ML Alignment & Theory Scholars) trains researchers for AI safety in Berkeley and London. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="mats-charityevals">0.8</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on how many scholars MATS brings into the field. All three are deeply uncertain: on the model's own ranges the result runs from about 0.07 to about 4, and wider with the shared assumptions.
 
 ### What the charity does
 
@@ -23,10 +23,10 @@ The deaths averted are valued like every death on the site, across the world's a
 
 The model has two branches.
 
-- **Training.** It counts the scholars who go on to work on AI risk because of MATS: 25%. MATS says 75% of its alumni work in AI safety, and many would have got there anyway. Each stays five years, and the work is valued at a typical dollar of AI safety work. MATS gets credit by its share of all the resources behind that work: the training (its own cost, the stipends, mentors' time) against the alumni's later work. That share comes to about 3%.
+- **Training.** It counts the scholars who go on to work on AI risk because of MATS: 25%. MATS says 75% of its alumni work in AI safety, and many would have got there anyway. Each stays five years, and the work is valued at a typical dollar of AI safety work. MATS gets credit by its share of all the resources behind that work: the training (its own cost, the stipends, mentors' time) against the alumni's later work. That share comes to about 3%. The scholars' own research during the ten weeks counts here too, at a quarter of a typical work-year's value.
 - **Extension research**, valued as typical AI safety research at 0.8 of a typical project, because it is early-career work.
 
-Training gives about four fifths of the result. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
+Training gives nearly nine tenths of the result. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
 
 | Adjustment | Extension research | Training |
 |---|---|---|
@@ -36,7 +36,7 @@ Training gives about four fifths of the result. Each adjustment is set branch by
 
 Funging by large funders is 1, counted once in the next-dollar figure. The missing-data slider applies to both branches: nothing about MATS's effect on the risk is measured, and its alumni survey has no comparison group.
 
-Side effects: other benefits +45% (mostly the scholars' own research during the ten weeks, organisations alumni founded, smaller AI harms), −7% for speeding up AI (MATS adds researchers to frontier labs, where safety work also helps them build more capable systems) and −1% for published evaluations and attacks.
+Side effects: other benefits +5% (organisations alumni founded, smaller AI harms, the community), −7% for speeding up AI (MATS adds researchers to frontier labs, where safety work also helps them build more capable systems) and −1% for published evaluations and attacks.
 
 MATS ended 2024 with about a year of spending in reserve, and its main funder paid for a much larger 2025. The next dollar counts at 31.5% of the past average.
 
@@ -59,7 +59,7 @@ The result is about two thirds of the Institute for AI Policy and Strategy's and
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the models of the Institute for AI Policy and Strategy and GovAI as the closest peers. The first audit round found no high-severity problem. It showed that the scholars' own research during the ten weeks was undervalued by the model's own arithmetic, so its share of other benefits rose from 25% to 45%. It also corrected several sources: the stipends, the research tracks and the next-dollar quote. Later rounds checked the changes. The audit rounds are in audits/mats-charityevals/.
+The model was built from the catastrophic-risk template, with the models of the Institute for AI Policy and Strategy and GovAI as the closest peers. No audit round found a high-severity problem. The first showed that the scholars' own research during the ten weeks was undervalued by the model's own arithmetic, and corrected several sources: the stipends, the research tracks and the next-dollar quote. The second moved that research out of other benefits into the training branch, where the branch's own adjustments apply. A later round checked the changes. The audit rounds are in audits/mats-charityevals/.
 
 ### Sources
 

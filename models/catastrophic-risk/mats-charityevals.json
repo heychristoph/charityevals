@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "mats",
   "owner": "charityevals",
-  "summary": "MATS (ML Alignment & Theory Scholars, Berkeley and London) trains researchers for AI safety: scholars spend ten weeks on a research project with a mentor from an AI lab or safety group, and many then continue for four months in an extension phase. This model covers all its work in 2024, its first full year as its own charity ($2.2M of programme spending, $2.9M in all, in its Form 990), when about 153 scholars took part (stipends paid by AI Safety Support, a co-funder). At the defaults it averts about 0.8 years of healthy life per $1,000, from 0.08 to 4 on the model's own ranges, so the result is mostly uncertainty: the scholars who go on to work on AI risk because of MATS (25%, our judgment from its alumni data) are valued by their later work at a typical dollar of such work, credited by MATS's share of the resources behind the training (about 3%), the extension's research as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate; the training gives about four fifths of the result, and the next dollar counts at 31.5% of the past average. It is about two thirds of the Institute for AI Policy and Strategy's result, mainly because less of its work is aimed at misuse (10%) and AI Safety Support's stipends and mentors' time lower its share; the biggest swings are the chance of an AI catastrophe (the slider), Rethink's typical cut per dollar for misuse work, the years a cut counts and the missing-data discount, and every branch is discounted for missing data: no outcome of the work on the risk is measured and the alumni survey has no comparison group.",
+  "summary": "MATS (ML Alignment & Theory Scholars, Berkeley and London) trains researchers for AI safety: scholars spend ten weeks on a research project with a mentor from an AI lab or safety group, and many then continue for four months or longer in an extension phase. This model covers all its work in 2024, its first full year as its own charity ($2.2M of programme spending, $2.9M in all, in its Form 990), when about 153 scholars took part (stipends paid by AI Safety Support, a co-funder). At the defaults it averts about 0.8 years of healthy life per $1,000, from 0.07 to 4 on the model's own ranges, so the result is mostly uncertainty: the scholars who go on to work on AI risk because of MATS (25%, our judgment from its alumni data) are valued by their later work at a typical dollar of such work, credited by MATS's share of the resources behind the training (about 3%), and with their research during the programme, the extension's research as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate; the training gives nearly nine tenths of the result, and the next dollar counts at 31.5% of the past average. It is about two thirds of the Institute for AI Policy and Strategy's result, mainly because less of its work is aimed at misuse (10%) and AI Safety Support's stipends and mentors' time lower its share; the biggest swings are the chance of an AI catastrophe (the slider), Rethink's typical cut per dollar for misuse work, the years a cut counts and the missing-data discount, and every branch is discounted for missing data: no outcome of the work on the risk is measured and the alumni survey has no comparison group.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: MATS (ML Alignment & Theory Scholars)",
@@ -318,7 +318,7 @@
         "title": "MATS mentor selection (LessWrong, 10 January 2025)",
         "url": "https://www.lesswrong.com/posts/LvswJts75fnpdjAEj/mats-mentor-selection",
         "retrieved": "2026-11-14",
-        "quote": "Evaluations: 17 (22%)"
+        "quote": "Evaluations: 17 scholars (22%)"
       }
     },
     {
@@ -377,7 +377,7 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "From the year's spending to the research's effect on the risk: papers and tools are taken up by labs' safety teams and other researchers within a year or two of the four-month extension. About a year, our judgment, half a year to three, as for GovAI's and IAPS's one year; discounted at the shared rate."
+      "explainer": "From the year's spending to the research's effect on the risk: papers and tools are taken up by labs' safety teams and other researchers within a year or two of the extension (four months or longer). About a year, our judgment, half a year to three, as for GovAI's and IAPS's one year; discounted at the shared rate."
     },
     {
       "id": "ai_discounted_years",
@@ -829,7 +829,7 @@
       "section": "effect",
       "label": "Field-building: share of the cost spent training or placing people",
       "format": "percent",
-      "explainer": "The main programme's share of programme spending as the return splits it (line 4a over the total): 54%. Training is the line's purpose; the scholars' own research during the ten weeks is counted in unmodelled_benefits_adj, so it isn't valued twice.",
+      "explainer": "The main programme's share of programme spending as the return splits it (line 4a over the total): 54%. The line pays for the training and for the scholars' own research during the ten weeks; both are valued in this branch (fb_research_dollars for the research).",
       "formula": "fb_line_spend / program_expenses"
     },
     {
@@ -917,7 +917,7 @@
         "title": "MATS, Transparency (donations received by date)",
         "url": "https://www.matsprogram.org/transparency",
         "retrieved": "2026-11-14",
-        "quote": "Anthropic, API credits: estimated $35,000"
+        "quote": "Estimated Value: $35,000 (Late 2024)"
       },
       "explainer": "Other resources behind the training that MATS doesn't pay for: mentors' time (about 23 mentors in the winter cohort and 40 in the summer one, mostly employed by labs and research groups, the median one with two scholars; at least an hour a week per scholar plus Slack, reviews and selection interviews, about 2 to 4 hours a week per scholar over ten weeks, some 1.2 to 2.4 work-years at the shared $250,000 a work-year, partly paid by MATS as honoraria) and Anthropic's donated API credits (about $35,000, late 2024). About $350,000, our judgment, $150,000 to $800,000."
     },
@@ -928,6 +928,43 @@
       "format": "usd",
       "formula": "fb_people * fb_stipend_per_person + fb_mentor_resources",
       "explainer": "AI Safety Support's stipends plus mentors' time and donated compute: about $2.2M at the best guesses, more than MATS's own cost of the training."
+    },
+    {
+      "id": "fb_research_weeks",
+      "section": "effect",
+      "label": "Field-building: weeks of the research phase",
+      "format": "number",
+      "unit": "weeks",
+      "value": 10,
+      "kind": "observed",
+      "source": {
+        "title": "MATS Winter 2023-24 Retrospective (LessWrong, 11 May 2024)",
+        "url": "https://www.lesswrong.com/posts/Z87fSrxQb4yLXKcTk/mats-winter-2023-24-retrospective",
+        "retrieved": "2026-11-14",
+        "quote": "For reference, MATS research phase was 10 weeks long."
+      },
+      "explainer": "The research phase in Berkeley: ten weeks in Winter 2023-24 (8 January to 15 March 2024; the retrospective), the same in Summer 2024 (its page: a 10-week research phase in Berkeley)."
+    },
+    {
+      "id": "fb_research_value_share",
+      "section": "effect",
+      "label": "Field-building: the scholars' research during the programme, as a share of a typical work-year's value",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "What a week of a scholar's mentored research during the programme is worth against a week of typical AI safety work at its full cost (@catastrophe.cost_per_work_year), net of the research some would have done anyway that winter. Early-career work, but mentored and the programme's stated output (some became papers at top venues): about a third of a typical week, our judgment; times about three quarters for those who would otherwise have done alignment research anyway (24% of the Winter 2023-24 cohort said independent research without a mentor, 13% with one, several answers allowed): 25%, 10% to 50%."
+    },
+    {
+      "id": "fb_research_dollars",
+      "section": "effect",
+      "label": "Field-building: the scholars' research during the programme, in dollars of typical work",
+      "format": "usd",
+      "formula": "fb_people * fb_research_weeks / 52 * fb_research_value_share * @catastrophe.cost_per_work_year",
+      "explainer": "Scholars × the research phase in years × its value against a typical work-year × the shared cost of a work-year: about $1.8M at the best guesses. Its resources are the training's (MATS's cost, the stipends that pay for the scholars' time, mentors), so MATS's credit is fb_attribution_share, applied with the branch's other adjustments; it isn't in fb_credit_share, which shares the alumni's later work with their employers."
     },
     {
       "id": "fb_credit_share",
@@ -960,16 +997,18 @@
       "section": "effect",
       "label": "Field-building: deaths averted (expected, before adjustments)",
       "format": "small",
-      "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_deaths_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
-      "unit": "deaths"
+      "formula": "(fb_work_dollars * fb_credit_share + fb_research_dollars) / 1e6 * fb_deaths_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "deaths",
+      "explainer": "The alumni's later work credited to the training (fb_work_dollars × fb_credit_share) plus the scholars' research during the programme (fb_research_dollars), at a typical dollar of AI work, for the years a cut counts."
     },
     {
       "id": "fb_future_dalys",
       "section": "effect",
       "label": "Field-building: future healthy years kept (expected, before adjustments)",
       "format": "number",
-      "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
-      "unit": "DALYs"
+      "formula": "(fb_work_dollars * fb_credit_share + fb_research_dollars) / 1e6 * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "DALYs",
+      "explainer": "As fb_deaths_averted, for the future healthy years kept."
     },
     {
       "id": "cost_shares_total",
@@ -1089,7 +1128,7 @@
         "title": "MATS mentor selection (LessWrong, 10 January 2025)",
         "url": "https://www.lesswrong.com/posts/LvswJts75fnpdjAEj/mats-mentor-selection",
         "retrieved": "2026-11-14",
-        "quote": "Oversight & control: 24 (31%)"
+        "quote": "Oversight & control: 24 scholars (31%)"
       },
       "explainer": "Nearly all MATS research is aimed at risks from advanced AI: scholars by mentor track in Winter 2024-25 were oversight and control 31%, interpretability 23%, evaluations 22%, AI agency 13% and governance 10% (MATS mentor selection); a little is about nearer harms (bias, everyday misuse) or is general ML work, valued in unmodelled_benefits_adj. 90%, our judgment, 80% to 100%, above GovAI's and IAPS's 80% whose policy work covers competitiveness and economics."
     },
@@ -1110,7 +1149,7 @@
         "retrieved": "2026-11-14",
         "quote": "won best paper at ICML 2024"
       },
-      "explainer": "The alumni's research in the extension phase against Rethink Priorities' typical small AI project. Above typical in output: mentored by researchers at Anthropic, Google DeepMind, Redwood Research and Apollo Research, MATS projects have become papers at top venues (a best paper at ICML 2024 on debate, NeurIPS workshop papers on manipulation by models trained on user feedback); MATS's home page counts 'more than 240 research publications' and 'over 23,000 collective citations' across all cohorts. Below in that it is early-career researchers' four-month projects, many posted as forum posts rather than taken up by a lab. 0.8, our judgment, 0.4 to 1.2 (the family's ceiling), as Epoch AI's 0.8, below a typical project's 1."
+      "explainer": "The alumni's research in the extension phase against Rethink Priorities' typical small AI project. Above typical in output: mentored by researchers at Anthropic, Google DeepMind, Redwood Research and Apollo Research, MATS projects have become papers at top venues (a best paper at ICML 2024 on debate, NeurIPS workshop papers on manipulation by models trained on user feedback); MATS's home page counts 'more than 240 research publications' and 'over 23,000 collective citations' across all cohorts. Below in that it is early-career researchers' projects of four months or more, many posted as forum posts rather than taken up by a lab. 0.8, our judgment, 0.4 to 1.2 (the family's ceiling), as Epoch AI's 0.8, below a typical project's 1."
     },
     {
       "id": "ai_evidence_adj",
@@ -1183,7 +1222,7 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "The share of the extension research no one else would have done now. Without MATS some alumni would have done similar research anyway (37% of the Winter 2023-24 cohort said they would have done independent research that winter, with or without a mentor) or joined other programmes (the Astra fellowship, SPAR, LASR, the Anthropic Fellows), and mentors would have pursued some projects with other juniors; 78% of surveyed alumni said their publication 'possibly' or 'probably' would not have happened without MATS. Our judgment, 0.6 (0.35 to 0.85), as GovAI's and IAPS's research; that the work would have come years later is in years_of_impact.",
+      "explainer": "The share of the extension research no one else would have done now. Without MATS some alumni would have done similar research anyway (asked what they would have done that winter without MATS, 24% of the Winter 2023-24 cohort said independent research without a mentor and 13% with one, several answers allowed) or joined other programmes (the Astra fellowship, SPAR, LASR, the Anthropic Fellows), and mentors would have pursued some projects with other juniors; 78% of surveyed alumni said their publication 'possibly' or 'probably' would not have happened without MATS. Our judgment, 0.6 (0.35 to 0.85), as GovAI's and IAPS's research; that the work would have come years later is in years_of_impact.",
       "source": {
         "title": "MATS Alumni Impact Analysis (LessWrong, 30 September 2024)",
         "url": "https://www.lesswrong.com/posts/jeBkx6agMuBCQW94C/mats-alumni-impact-analysis",
@@ -1376,12 +1415,12 @@
       "label": "Benefits not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": 0.25,
-        "best": 0.45,
-        "high": 0.7
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Good beyond what the two branches count: the scholars' own research during the ten-week research phase (about 153 scholars × ten weeks, some 29 work-years, early-career work at perhaps a third of a typical work-year's value, about $2.4M of typical work; with MATS about two fifths of the resources and the extension research's counterfactual of 0.6, about $0.6M against about $1.5M of modelled value after adjustments, some 40%); the tenth of the research left out of the catastrophe chain (catastrophe_relevant_share) and work against smaller AI harms; organisations alumni founded beyond their own work-years (10% of alumni co-founded AI safety organisations or teams, the home page says); seminars and the community, about 5% more. 45%, our judgment, 25% to 70%, above GovAI's 15% and IAPS's 10%, whose fellows' own research is a smaller part of the programme.",
+      "explainer": "Good beyond what the branches count (the scholars' research during the ten weeks is in the training branch, fb_research_dollars): the tenth of the research left out of the catastrophe chain (catastrophe_relevant_share) and work against smaller AI harms; organisations alumni founded beyond their own work-years (10% of alumni co-founded AI safety organisations or teams, the home page says); seminars and the community. 5%, our judgment, 2% to 20%, below GovAI's 15% and IAPS's 10%, which also hold their fellows' own research.",
       "side_effect": "added",
       "source": {
         "title": "MATS, home page",
