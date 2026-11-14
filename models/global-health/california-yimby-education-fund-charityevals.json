@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "california-yimby-education-fund",
   "owner": "charityevals",
-  "summary": "The California YIMBY Education Fund is the tax-deductible 501(c)(3) arm of California YIMBY, a 501(c)(4) that lobbies for state laws letting more homes be built in California; the Education Fund does the research, public education, organising and coalition work behind the same campaign ($3.05 million spent in 2024, the latest filed year; gifts to the 501(c)(4) aren't deductible). Both organisations' average real spending over 2017-2024 is counted against the Education Fund's share of their part in the state housing laws of those years: the ADU clean-up laws that followed the 2016 reforms (about 9,000 extra backyard homes a year), and a judged 2,500 extra homes a year from streamlining, parking and other laws. Each extra home is valued on the site's log-consumption scale at California prices: its rent above what it costs to build, kept by whoever builds it, and the fall in rents it brings, which renters gain and better-off landlords lose (a little over half the value). With the next dollar at 42% of the average, it comes to about 0.10 years of healthy life per 1,000 dollars, about one and a half times the median of the site's global-health models. The result is mostly uncertainty: the resources others put into the same laws, how much rents fall per extra home and the share of the ADU boom due to the later laws are judgments, and the model's own ranges span several thousandfold; both branches are discounted for missing data.",
+  "summary": "The California YIMBY Education Fund is the tax-deductible 501(c)(3) arm of California YIMBY, a 501(c)(4) that lobbies for state laws letting more homes be built in California; the Education Fund does the research, public education, organising and coalition work behind the same campaign ($3.05 million spent in 2024, the latest filed year; gifts to the 501(c)(4) aren't deductible). Both organisations' average real spending over 2017-2024 is counted against the Education Fund's share of their part in the state housing laws of those years: the ADU clean-up laws that followed the 2016 reforms (about 11,000 extra backyard homes a year), and a judged 2,500 extra homes a year from streamlining, parking and other laws. Each extra home is valued on the site's log-consumption scale at California prices: its rent above what it costs to build, kept by whoever builds it, and the fall in rents it brings, which renters gain and better-off landlords lose (a little over half the value). With the next dollar at 42% of the average, it comes to about 0.13 years of healthy life per 1,000 dollars, about twice the median of the site's global-health models. The result is mostly uncertainty: the resources others put into the same laws, how much rents fall per extra home and the share of the ADU boom due to the later laws are judgments, and the model's own ranges span several thousandfold; both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: California YIMBY Education Fund",
@@ -401,19 +401,19 @@
       "label": "ADUs permitted in California, 2024",
       "format": "integer",
       "value": {
-        "low": 27000,
-        "best": 30354,
-        "high": 38907
+        "low": 30354,
+        "best": 39077,
+        "high": 41000
       },
       "kind": "estimate",
       "source": {
-        "title": "California Department of Housing and Community Development, Accessory Dwelling Unit Handbook (March 2026), as mirrored by Building Code Wizard (HCD's own PDF refuses automated downloads)",
-        "url": "https://buildingcodewizard.vercel.app/documents/seed-hcd-adu-handbook",
+        "title": "California Department of Housing and Community Development, Housing Element Annual Progress Report table A2 (data.ca.gov, resource fe505d9b-8c36-42ba-ba30-08bc4f34e022), ADU rows: building permits and certificates of occupancy by year",
+        "url": "https://data.ca.gov/api/3/action/datastore_search_sql",
         "retrieved": "2026-11-14",
-        "quote": "Between 2016-2024, the number of ADUs permitted annually in the state grew from 1,336 to 30,354, a 20-fold increase.",
-        "page": "introduction"
+        "quote": "Permits 2018-2025: 9,008 / 15,086 / 16,041 / 24,640 / 31,805 / 35,720 / 39,077 / 41,977. Completions: 3,316 / 6,428 / 8,601 / 10,806 / 15,000 / 18,548 / 21,473 / 24,416.",
+        "page": "SUM(NO_BUILDING_PERMITS) by YEAR where UNIT_CAT = 'ADU'"
       },
-      "explainer": "HCD's own count for 2024. The cities' self-reported Annual Progress Report table A2 gives 38,907 for the same year (RecordingLaw's tabulation), the high end; the low end allows for permits counted twice or abandoned before work starts, 10% below HCD's figure."
+      "explainer": "The cities' Annual Progress Report count for 2024, the same series as the completion share below (so permits and completions are counted alike). HCD's handbook gives a lower 30,354 for 2024 (Between 2016-2024, the number of ADUs permitted annually in the state grew from 1,336 to 30,354, HCD ADU Handbook, March 2026), the low end; the high end allows for under-reporting, about 5% above."
     },
     {
       "id": "adu_followon_share",
@@ -426,7 +426,7 @@
         "high": 0.65
       },
       "kind": "judgment",
-      "explainer": "California YIMBY was founded after the 2016 laws (SB 1069, AB 2299) that started the boom, so only the follow-on laws count: AB 68 and AB 881 (2019, which removed local zoning barriers), AB 2221 (2022), AB 976 (2023, no owner-occupancy rules), SB 1211 and AB 3057 (2024) and the other clean-up bills its retrospective lists. Under the 2016 rules permits reached 15,051 in 2019 (APR table A2, RecordingLaw); after the 2019 package took effect they rose to 24,542 in 2021 and 38,907 in 2024 in the same series, and HCD counts 30,354 in 2024. Part of that rise is the 2016 framework maturing (permits had grown 67% from 2018 to 2019), part the follow-on laws: 45%, from 25% to 65%. Its own report argues it took the clean-up bills to iron out the framework."
+      "explainer": "California YIMBY was founded after the 2016 laws (SB 1069, AB 2299) that started the boom, so only the follow-on laws count: AB 68 and AB 881 (2019, which removed local zoning barriers), AB 2221 (2022), AB 976 (2023, no owner-occupancy rules), SB 1211 and AB 3057 (2024) and the other clean-up bills its retrospective lists. Under the 2016 rules permits reached 15,086 in 2019 (APR table A2, data.ca.gov); after the 2019 package took effect they rose to 24,640 in 2021 and 39,077 in 2024 in the same series. Part of that rise is the 2016 framework maturing (permits had grown 67% from 2018 to 2019), part the follow-on laws: 45%, from 25% to 65%. Its own report argues it took the clean-up bills to iron out the framework."
     },
     {
       "id": "adu_completion_share",
@@ -563,7 +563,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "An ADU builder buys no land, so its gap is rent against construction cost alone. The statewide ADU owner survey found a median construction cost of $150,000 ($250 a square foot; 37% under $100,000, 71% under $200,000), about $180,000 in 2024 prices (US consumer prices rose about 21% from 2020). At the ADU rent here (about $20,800 a year) and a user cost of about 6.5% a year (interest, upkeep, depreciation), the median ADU leaves about 43% of its rent; one costing $250,000 about 22%, a $100,000 garage conversion about 69%. 40%, from 20% to 60%.",
+      "explainer": "An ADU builder buys no land, so its gap is rent against construction cost alone. The statewide ADU owner survey found a median construction cost of $150,000 ($250 a square foot; 37% under $100,000, 71% under $200,000), about $184,000 in 2024 prices (the survey asked about ADUs built through 2019; US consumer prices rose about 23% from 2019 to 2024). At the ADU rent here (about $20,800 a year) and a user cost of about 6.5% a year (interest, upkeep, depreciation), the median ADU leaves about 42% of its rent; one costing $250,000 about 22%, a $100,000 garage conversion about 69%. 40%, from 20% to 60%.",
       "source": {
         "title": "UC Berkeley Center for Community Innovation and Terner Center, Implementing the Backyard Revolution: Perspectives of California's ADU Owners (April 2021)",
         "url": "https://www.urbandisplacement.org/wp-content/uploads/2021/09/Implementing-the-Backyard-Revolution.pdf",
@@ -970,17 +970,54 @@
       "explainer": "California YIMBY supported the clean-up bills (AB 68 and AB 881, AB 2221, AB 976, SB 1211, Wikipedia), sponsored AB 3057 (2024) and published the ADU retrospective, among a dozen or more bills a year. 15%, from 8% to 30%."
     },
     {
+      "id": "casita_spend",
+      "section": "adjustments",
+      "label": "Casita Coalition's total expenses, 2021-2024 (US$)",
+      "format": "usd",
+      "value": 1208706,
+      "kind": "observed",
+      "source": {
+        "title": "ProPublica Nonprofit Explorer, Casita Coalition (EIN 84-3860605), filings by year; 2024 from its Form 990 e-file (IRS TEOS, scripts/irs-990.py)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/843860605",
+        "retrieved": "2026-11-14",
+        "quote": "2024 $535,635; 2023 $324,916; 2022 $220,041; 2021 $128,114",
+        "page": "expenses by tax year (2019-2020 nil)"
+      },
+      "explainer": "The coalition of ADU builders and advocates formed in 2020, whose whole work is ADU law and practice: all of its spending counts (128,114 + 220,041 + 324,916 + 535,635)."
+    },
+    {
+      "id": "adu_lobbies_resources",
+      "section": "adjustments",
+      "label": "ADU laws: the large lobbies' and groups' spending on them, 2017-2024 (US$)",
+      "format": "usd",
+      "value": {
+        "low": 3000000,
+        "best": 12000000,
+        "high": 40000000
+      },
+      "kind": "judgment",
+      "explainer": "The California Association of Realtors, the building industry, Habitat for Humanity California, regional business groups and local YIMBY groups lobbied for the clean-up bills among many others. Cal-Access reports each lobbying employer's payments in total, not by bill, and its pages refuse automated fetches, so the ADU part is a judgment: First Tuesday reports over $43 million a year of the realtors' state and national dues counted as lobbying expenses (an older figure), and a dozen ADU bills among the hundreds each lobby tracks over four sessions take a small share. $12 million, from $3 million to $40 million."
+    },
+    {
+      "id": "adu_public_resources",
+      "section": "adjustments",
+      "label": "ADU laws: legislators' and HCD's staff time on them, 2017-2024 (US$)",
+      "format": "usd",
+      "value": {
+        "low": 5000000,
+        "best": 20000000,
+        "high": 50000000
+      },
+      "kind": "judgment",
+      "explainer": "About a dozen bills, each with an author's office and two policy committees in each house (several staff-months a bill at a few hundred thousand dollars a staff-year with overheads), plus HCD's ADU handbook, technical assistance and review letters to cities over the period. $20 million, from $5 million to $50 million."
+    },
+    {
       "id": "adu_others_resources",
       "section": "adjustments",
       "label": "ADU laws: everyone else's resources behind the follow-on laws, 2017-2024 (US$)",
       "format": "usd",
-      "value": {
-        "low": 10000000,
-        "best": 35000000,
-        "high": 100000000
-      },
-      "kind": "judgment",
-      "explainer": "About a dozen bills over eight years, each carried by an author's office and committee staff (a few staff-months each at a legislative staffer's cost), HCD's ADU enforcement and technical-assistance staff, and the lobbying of the Casita Coalition (from 2020), the building industry, the California Association of Realtors, Habitat for Humanity California, regional business groups and local YIMBY groups; the lobbying disclosures (Cal-Access) report each lobbyer's spending in total, not by bill, so the ADU part of the large lobbies' budgets is a judgment. $35 million, from $10 million to $100 million."
+      "formula": "casita_spend * @cpi.usa_2024 / @cpi.usa_2022 + adu_lobbies_resources + adu_public_resources",
+      "explainer": "The Casita Coalition's spending (its 990s, in 2024 prices at its middle year's price level), the large lobbies' and groups' ADU spending and the public staff time."
     },
     {
       "id": "adu_coalition_share",
@@ -1004,9 +1041,38 @@
       "explainer": "The rest of the spending went on the ADU work above, on bills that failed (SB 827 in 2018, SB 50 in 2019-2020, which a past average still counts as cost but which bring no homes), on local organising and on the narrative work. 50%, from 30% to 70%."
     },
     {
-      "id": "oth_others_resources",
+      "id": "yimby_action_spend",
       "section": "adjustments",
-      "label": "Other laws: everyone else's resources behind them, 2017-2024 (US$)",
+      "label": "YIMBY Action's total expenses, 2017-2024 (US$)",
+      "format": "usd",
+      "value": 6870121,
+      "kind": "observed",
+      "source": {
+        "title": "ProPublica Nonprofit Explorer, Yimby Action (EIN 81-5140915, 501(c)(4)), filings by year",
+        "url": "https://projects.propublica.org/nonprofits/organizations/815140915",
+        "retrieved": "2026-11-14",
+        "quote": "2024 $1,750,703; 2023 $1,399,677; 2022 $1,094,902; 2021 $821,235; 2020 $542,631; 2019 $193,866; 2018 $611,893; 2017 $455,214",
+        "page": "expenses by tax year"
+      },
+      "explainer": "The Bay Area YIMBY network's lobbying arm, which campaigned for the same state bills (455,214 + 611,893 + 193,866 + 542,631 + 821,235 + 1,094,902 + 1,399,677 + 1,750,703)."
+    },
+    {
+      "id": "yimby_action_state_share",
+      "section": "adjustments",
+      "label": "Share of YIMBY Action's spending on the state laws in this branch",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Much of its work is local (city housing elements, projects); the rest backs state bills. 40%, from 20% to 60%."
+    },
+    {
+      "id": "oth_lobbies_public_resources",
+      "section": "adjustments",
+      "label": "Other laws: the other coalition members' and the state's resources, 2017-2024 (US$)",
       "format": "usd",
       "value": {
         "low": 50000000,
@@ -1014,7 +1080,15 @@
         "high": 400000000
       },
       "kind": "judgment",
-      "explainer": "Senator Wiener's and the other authors' offices, the building-trades and other unions whose labour terms several laws carry, affordable-housing developers and their associations, business groups (Bay Area Council), SPUR, Abundant Housing LA, YIMBY Law and YIMBY Action, the building and realtor lobbies, and HCD's housing-element enforcement; California YIMBY co-sponsored AB 2097 and backed the rest. Bigger and more contested laws than the ADU ones: $150 million, from $50 million to $400 million."
+      "explainer": "Senator Wiener's and the other authors' offices and committee staff, the building-trades and other unions whose labour terms several laws carry, affordable-housing developers and their associations, business groups (Bay Area Council), SPUR, Abundant Housing LA, YIMBY Law, the building and realtor lobbies, and HCD's housing-element enforcement. Cal-Access reports lobbying in total, not by bill, and refuses automated fetches, so this is a judgment: bigger and more contested laws than the ADU ones, over a dozen of them. $150 million, from $50 million to $400 million."
+    },
+    {
+      "id": "oth_others_resources",
+      "section": "adjustments",
+      "label": "Other laws: everyone else's resources behind them, 2017-2024 (US$)",
+      "format": "usd",
+      "formula": "yimby_action_spend * yimby_action_state_share * @cpi.usa_2024 / @cpi.usa_2021 + oth_lobbies_public_resources",
+      "explainer": "YIMBY Action's state-law spending (its 990s, in 2024 prices at its middle year's price level) and the rest of the coalition and the state."
     },
     {
       "id": "oth_coalition_share",
