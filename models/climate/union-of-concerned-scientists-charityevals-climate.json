@@ -3,13 +3,13 @@
   "name": "Union of Concerned Scientists: climate, transport and western states (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": "world",
-  "beneficiaries_note": "Our build: a tonne of greenhouse gas kept out of the air spares people everywhere, so the result is spread by world population; the small US power-plant and vehicle smoke share is left in the world figure.",
+  "beneficiaries": {"world":0.815,"USA":0.185},
+  "beneficiaries_note": "Our build: shares of the result at the defaults. The public money the Inflation Reduction Act won for US households (18.5%) is in the United States; the tonnes (81.5%) spare people everywhere, spread by world population, the small US power-plant and vehicle smoke share left in the world figure.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists' climate and clean energy, clean transportation and western states programmes ($32.8M with overhead in the year to September 2025) do technical analysis and advocacy for US climate policy; this model counts the five largest policies it worked on that were won in October 2021 to September 2025 with published tonnes (the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, California's Advanced Clean Cars II rule and its 2025 extension of its carbon market to 2045), with its other state clean-energy laws and its climate-accountability science as a share. At the defaults a dollar given averts about 0.0056 tonnes of CO₂e (about $180 a tonne), 0.0015 years of healthy life per $1,000, about half of it from the Inflation Reduction Act (three-fifths of the tonnes); it is low because each win is shared with many groups and with what governments would have done anyway (UCS is credited with 1% to 10% of the advocacy behind each), and the federal rules and the law's credits have since been repealed or cut back and California's car rule has lost its federal waiver. The biggest uncertainties are the discount rate, the shared years a won reform counts and the deaths per tonne; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "The Union of Concerned Scientists' climate and clean energy, clean transportation and western states programmes ($32.8M with overhead in the year to September 2025) do technical analysis and advocacy for US climate policy; this model counts the five largest policies it worked on that were won in October 2021 to September 2025 with published tonnes (the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, California's Advanced Clean Cars II rule and its 2025 extension of its carbon market to 2045), with its other state clean-energy laws and its climate-accountability science as a share. At the defaults that is 0.0018 years of healthy life per $1,000: a dollar given averts about 0.0056 tonnes of CO₂e (about $180 a tonne), and the public money the Inflation Reduction Act won for US households' home rebates and credits, valued as the recipients' gain less the taxpayers' cost, adds about a fifth; the act gives about three-fifths of the result; it is low because each win is shared with many groups and with what governments would have done anyway (UCS is credited with 1% to 10% of the advocacy behind each), and the federal rules and the law's credits have since been repealed or cut back and California's car rule has lost its federal waiver. The biggest uncertainties are the discount rate, the shared years a won reform counts and the deaths per tonne; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Union of Concerned Scientists (climate, transport and western states)",
@@ -80,6 +80,12 @@
       "title": "Air pollution these tonnes carry",
       "kind": "ours",
       "explainer": "Every tonne avoids its heat deaths; a tonne from burning less fossil fuel near people also avoids air-pollution deaths. These rows say how much of the shared rates applies to UCS's tonnes (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in tonnes",
+      "kind": "ours",
+      "explainer": "The public money won for US households (units of value) is counted in its own unit and enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
     },
     {
       "id": "outcome",
@@ -1159,6 +1165,62 @@
       "formula": "evidence_adj * ira_counterfactual_adj * ira_attribution_share * ira_implementation_adj * missing_data_adj"
     },
     {
+      "id": "ira_payer_cost_per_dollar",
+      "section": "adjustments",
+      "label": "ln(consumption) given up by taxpayers per dollar of federal money",
+      "format": "small",
+      "formula": "@public_funds.mcpf / (@public_funds.us_federal_payer_multiple * @united_states.consumption_per_person_2024)",
+      "explainer": "The shared cost of public money (facts: public_funds.mcpf, 1.2) over how federal taxes fall (public_funds.us_federal_payer_multiple, 1.4) times national-accounts consumption per person, as Rewiring America's model counts it."
+    },
+    {
+      "id": "ira_rebate_uov",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act's home rebates: recipients' gain less taxpayers' cost, units of value",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(@climate.ira_home_electrification_rebates_usd + @climate.ira_home_efficiency_rebates_usd) * @climate.ira_home_rebates_paid_share * (1 / (@climate.ira_home_rebates_recipient_consumption_ratio * @united_states.ce_expenditure_per_person_2024) - ira_payer_cost_per_dollar) * $uov_per_ln_consumption * (1 + $discount_rate) ^ -@climate.ira_home_rebates_years_until_paid",
+      "explainer": "The law's $8.8 billion of home rebates (facts: climate.ira_home_*), the share paid to households, valued as their gain less the taxpayers' cost (docs/normalization.md 2.20) and discounted to the middle of the payouts, as Rewiring America's model counts them. A fixed sum, counted once."
+    },
+    {
+      "id": "ira_credit_years_counted",
+      "section": "adjustments",
+      "label": "Years of the larger home credits counted (the shared years a won reform counts, at most the years they paid)",
+      "format": "number",
+      "unit": "years",
+      "formula": "min($win_years_counted, @climate.ira_home_credits_years)"
+    },
+    {
+      "id": "ira_credit_uov",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act's larger home credits: claimants' gain less taxpayers' cost, units of value",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(@climate.ira_home_credits_increment_2023_usd * min(ira_credit_years_counted, 1) + @climate.ira_home_credits_increment_2024_2025_usd_per_year * (pv_annuity_due(1, $discount_rate, ira_credit_years_counted) - min(ira_credit_years_counted, 1))) * (1 / (@climate.ira_home_credits_recipient_consumption_ratio * @united_states.ce_expenditure_per_person_2024) - ira_payer_cost_per_dollar) * $uov_per_ln_consumption * (1 + $discount_rate) ^ -@climate.ira_home_credits_years_until_paid",
+      "explainer": "The law's increase in the two home credits (25C, 25D; facts: climate.ira_home_credits_*), year by year over the years counted, valued as the claimants' gain less the taxpayers' cost and discounted from the first claims, as Rewiring America's model counts them."
+    },
+    {
+      "id": "ira_household_focus_adj",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act's home rebates and credits: UCS's share of the advocacy behind them, relative to its share behind the whole law",
+      "format": "multiple",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "UCS's work on the law was analyses of its clean-power and farm-conservation provisions and its members' calls for the bill as a whole; the home rebates and credits were Rewiring America's and the solar industry's asks, so only its support for the package carries over to them: half its share of the whole law (0.2 to 1), our judgment. The tonnes keep the whole law's share: the home provisions are about 2% of them."
+    },
+    {
+      "id": "ira_transfer_uov_per_year",
+      "section": "adjustments",
+      "label": "Public money won for households, units of value per year of the period (after the law's branch steps)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(ira_rebate_uov + ira_credit_uov) * ira_attribution_share * ira_household_focus_adj * p_success * ira_counterfactual_adj * missing_data_adj / period_years",
+      "explainer": "The law's branch steps for the money: advocacy's share of the win, UCS's share of the advocacy behind the home provisions, what wouldn't have come anyway and the missing-data step, spread over the period's four years. The tonnes' evidence and delivery steps are left out, as in Rewiring America's model: the money is a sum in the statute and the claims Treasury counted, its delivery in the paid share."
+    },
+    {
       "id": "accii_total_adj",
       "section": "adjustments",
       "label": "Advanced Clean Cars II: all adjustments combined",
@@ -1325,13 +1387,22 @@
       "explainer": "None counted directly: methane's ozone and earlier warming are in the shared conversion, through the methane share."
     },
     {
+      "id": "tco2e_from_uov",
+      "section": "bridges",
+      "label": "Public money won for households, in tonnes of CO₂e",
+      "format": "number",
+      "unit": "t CO₂e / year",
+      "formula": "ira_transfer_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "explainer": "The households' gain enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6): it moves with the value of consumption, not with the climate sliders."
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂e averted per year of the period",
       "format": "number",
-      "formula": "(pwr_downstream * pwr_total_adj + veh_downstream * veh_total_adj + ira_downstream * ira_total_adj + accii_downstream * accii_total_adj + capinv_downstream * capinv_total_adj) / period_years * (1 + unmodelled_benefits_adj + nuclear_power_harm_share)",
+      "formula": "(pwr_downstream * pwr_total_adj + veh_downstream * veh_total_adj + ira_downstream * ira_total_adj + accii_downstream * accii_total_adj + capinv_downstream * capinv_total_adj) / period_years * (1 + unmodelled_benefits_adj + nuclear_power_harm_share) + tco2e_from_uov",
       "unit": "t CO₂e / year",
-      "explainer": "Each win's expected tonnes × its own adjustments, summed, spread over the period's four years, with the other wins and the side effect added as shares."
+      "explainer": "Each win's expected tonnes × its own adjustments, summed, spread over the period's four years, with the other wins and the side effect added as shares, plus the public money won for households in tonnes."
     },
     {
       "id": "tco2e_per_dollar",
