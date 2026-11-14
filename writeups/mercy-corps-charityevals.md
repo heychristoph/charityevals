@@ -56,7 +56,8 @@ Half its spending abroad is in Sub-Saharan Africa, then the Middle East (15%), L
 The mechanical audit (`scripts/audit-model.ts`) runs on the model, and independent auditors (a fresh agent each round, using the audit-cea skill) checked it; the rounds are in `audits/mercy-corps-charityevals/`.
 
 - **Round 1**: no high finding; five medium. Fixed: the livelihood and peace reach counts are credited to their lines only in part (they overlap other lines); relief's months of cover now follow its cost per person; the health line, which Mercy Corps describes as water and food security, is split into water and nutrition branches; recovery and livelihood income gains carry the cash models' mortality step; effects the write-up had listed without a value became side-effect rows. Lows fixed: grants added to the regional weights, recovery's invested principal counted at the end, a household-sharing multiplier for direct livelihood participants, two citation slips. Together these raised the result from 0.145 to 0.17.
-- **Round 2** (verification): no high finding. Fixed after it: the household-sharing multiplier is now built from the site's household sizes and a judged share of participants counted without their households (0.17 to 0.18), and a cost anchor cites its source; a third, short verification round checked those changes.
+- **Round 2** (verification): no high finding. Fixed after it: the household-sharing multiplier is now built from the site's household sizes and a judged share of participants counted without their households (0.17 to 0.18), and a cost anchor cites its source.
+- **Round 3** (verification): passed with one low finding left: the share of participants counted without their households (a fifth) has no published anchor.
 
 ### Sources
 
