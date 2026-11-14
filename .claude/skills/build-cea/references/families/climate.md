@@ -14,7 +14,7 @@ win:  tonnes_per_year (once in effect) × p_success × pv($win_years_counted) ×
       × counterfactual × attribution (the charity's share of all groups' resources) × implementation
       × evidence_adj × missing_data_adj
 (sum of the period's wins) ÷ period years ÷ (cost × average_spend_vs_year) × @next_dollar.<charity>
-conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra_deaths_per_tco2e
+conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra_deaths_per_tco2e; methane_share
 ```
 
 - **Policy and litigation** are past averages: the wins of a period (several years: one year's wins
@@ -46,9 +46,10 @@ conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra
 - `us_power_smoke_factor` for tonnes from US power plants burning less, `us_coal_power_smoke_factor`
   for coal plants'; other fuels and places from per-fuel evidence (deaths per TWh) in the model's
   `fuel_smoke_factor`, weighted by branch.
-- `ozone_deaths_per_tco2e_methane`: methane's own ozone deaths, added in `extra_deaths_per_tco2e` as
-  a `methane_share` row × the fact (a waiver for INV-10 says why it doesn't scale with
-  `$deaths_per_tco2e`).
+- Methane: the model's `methane_share` row (methane's part of the CO₂e tonnes, weighted by tonnes a
+  year before waits); the conversion gives it methane's own warming (`methane_heat_*`) and ozone
+  (`ozone_deaths_per_tco2e_methane`, discounted over `methane_lifetime_years`). Never in
+  `extra_deaths_per_tco2e`.
 - `nondeath_damages_vs_deaths` stays a visible shared zero.
 
 ## Evidence to look for

@@ -3,7 +3,22 @@
   "name": "ShelterBox: emergency shelter (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"SYR":0.1523,"YEM":0.1516,"TCD":0.1125,"SOM":0.1006,"AFG":0.0734,"BFA":0.057,"PSE":0.0448,"CMR":0.078,"ETH":0.0397,"PHL":0.113,"MMR":0.0431,"PAK":0.0178,"BGD":0.0113,"JAM":0.0049},
+  "beneficiaries": {
+    "SYR": 0.1523,
+    "YEM": 0.1516,
+    "TCD": 0.1125,
+    "SOM": 0.1006,
+    "AFG": 0.0734,
+    "BFA": 0.057,
+    "PSE": 0.0448,
+    "CMR": 0.078,
+    "ETH": 0.0397,
+    "PHL": 0.113,
+    "MMR": 0.0431,
+    "PAK": 0.0178,
+    "BGD": 0.0113,
+    "JAM": 0.0049
+  },
   "beneficiaries_note": "Our build: by share of the result at the defaults, the poorest conflict and displacement settings (Mozambique stand-in: Syria, Yemen, Chad, Somalia, Afghanistan, Burkina Faso, Gaza) about 69% and the rest (Bangladesh stand-in: Cameroon, Ethiopia, the Philippines, Myanmar, Pakistan, Bangladesh, Jamaica) 31%, each spread over its countries by 2025 grants to partners (note 5 of the accounts; Ukraine and Malawi, under 0.2%, left out).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
@@ -812,6 +827,14 @@
       "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
     },
     {
+      "id": "methane_share",
+      "section": "bridges",
+      "label": "Share of these tonnes that are methane",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "The share of these tonnes (in CO₂e) that is methane, which the site's climate conversion values by methane's own timing: earlier, shorter warming and the ozone it makes (docs/normalization.md 2.5). 0 here: the tonnes are the CO₂ of making and shipping the aid."
+    },
+    {
       "id": "tco2e_bridged",
       "section": "bridges",
       "label": "Climate: the aid's emissions, as tonnes of CO2e averted (negative; after the goods' adjustments)",
@@ -825,7 +848,7 @@
       "section": "bridges",
       "label": "Climate, in healthy years",
       "format": "number",
-      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
       "unit": "DALYs",
       "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },

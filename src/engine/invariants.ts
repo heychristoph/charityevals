@@ -611,6 +611,8 @@ export function inv5b(lib: Library): InvariantReport {
 // --- INV-10: each slider moves exactly the models it should ---------------------------------------
 
 type Shape = "linear" | "independent";
+/** The tco2e conversion's row for the methane in a model's tonnes (docs/normalization.md 2.5). */
+const METHANE_SHARE = "methane_share";
 function expectations(unit: string, animal: boolean): [string, Shape][] {
   if (animal)
     return [["chicken_vs_person", "linear"], ["daly_per_sad", "linear"], ["uov_per_daly", "independent"], ["daly_per_wellby", "independent"], ["uov_per_ln_consumption", "independent"], ["deaths_per_tco2e", "independent"]];
@@ -637,29 +639,34 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     // A model that reads others live (`#id`, a meta charity's destinations) moves with every slider
     // they move: no independence is expected for those.
     const inherited = new Set(referencedModels(lib, m).flatMap((t) => usedAssumptions(lib, t)));
-    const check = (part: (a: Record<string, number>) => number, unit: string, animal: boolean, where: string, whole?: number) => {
-      const h0 = part(av);
-      if (!Number.isFinite(h0) || h0 === 0) return;
-      // A bridged part is a difference of two headlines: its rounding is the whole headline's, so a
-      // part far smaller than the rest gets the tolerance of the whole.
-      const tol = whole === undefined ? 1e-9 : Math.max(1e-9, 1e-9 * Math.abs(whole / h0));
+    const check = (part: (a: Record<string, number>, extra?: Record<string, number>) => number, unit: string, animal: boolean, where: string, whole?: number) => {
+      if (!Number.isFinite(part(av)) || part(av) === 0) return;
       for (const [a, shape] of expectations(unit, animal)) {
         if (shape === "independent" && inherited.has(a)) continue;
-        const at = (k: number) => part({ ...av, [a]: av[a] * k });
+        // Methane's tonnes (row methane_share) also carry its ozone deaths, a rate from methane's own
+        // chemistry that rightly doesn't scale with $deaths_per_tco2e (docs/normalization.md 2.5): that
+        // proportionality is checked on the other tonnes, with the methane share held at 0.
+        const extra: Record<string, number> = unit === "tco2e" && a === "deaths_per_tco2e" ? { [METHANE_SHARE]: 0 } : {};
+        const h0 = part(av, extra);
+        if (!Number.isFinite(h0) || h0 === 0) continue;
+        // A bridged part is a difference of two headlines: its rounding is the whole headline's, so a
+        // part far smaller than the rest gets the tolerance of the whole.
+        const tol = whole === undefined ? 1e-9 : Math.max(1e-9, 1e-9 * Math.abs(whole / h0));
+        const at = (k: number) => part({ ...av, [a]: av[a] * k }, extra);
         const h2 = at(1.5);
         const ok = shape === "linear" ? close(h2, 1.5 * h0, tol) && close(at(0.5), 0.5 * h0, tol) : close(h2, h0, tol);
         if (!ok)
           violations.push({ inv: "INV-10", model: m.id, where: `${where}$${a} ${shape}`, detail: `${where ? `the part bridged from ${unit} ` : "headline "}should be ${shape === "linear" ? "proportional to" : "independent of"} $${a}: ${fmt(h0)} at default, ${fmt(h2)} at ×1.5 (${fmt((h2 / h0 - 1) * 100)}%)` });
       }
     };
-    check((a) => headline(lib, m, a, held), m.output!.unit, m.cause === "animal-welfare", "");
+    check((a, x = {}) => headline(lib, m, a, { ...held, ...x }), m.output!.unit, m.cause === "animal-welfare", "");
     // WELLBY models' deaths are INV-17's; every other bridged part moves like a model of its own unit.
     for (const b of bridges) if (!isWellbyFromUov(m, m.byId.get(b.row)!))
-      check((a) => headline(lib, m, a) - headline(lib, m, a, { [b.input]: 0 }), b.from, b.from === "ced", `${b.row} `, headline(lib, m, av));
+      check((a, x = {}) => headline(lib, m, a, x) - headline(lib, m, a, { ...x, [b.input]: 0 }), b.from, b.from === "ced", `${b.row} `, headline(lib, m, av));
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,
-    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Every bridge's input (docs/normalization.md 2.6) is held at 0 for the output unit's expectations, and the part it brings in (headline − headline with the input at 0) must move as a model of its own unit would (a uov part independent of the animal, WELLBY and climate rates; a ced part proportional to the animal ones). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
+    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e (with methane_share held at 0: methane's ozone deaths are a rate of their own) and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Every bridge's input (docs/normalization.md 2.6) is held at 0 for the output unit's expectations, and the part it brings in (headline − headline with the input at 0) must move as a model of its own unit would (a uov part independent of the animal, WELLBY and climate rates; a ced part proportional to the animal ones). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
   };
 }
 

@@ -23,7 +23,7 @@ wild animals   wild_animal_years × wild_pain_days_per_animal_year × years × @
 ```
 
 The climate branch uses the climate skeleton's rows (`years_until_avoided`, `air_pollution_weight`,
-`extra_deaths_per_tco2e`, 2.5): land carbon carries no smoke, so `fuel_share` is 0, and the tonnes'
+`extra_deaths_per_tco2e`, `methane_share`, 2.5): land carbon carries no smoke, so `fuel_share` is 0, and the tonnes'
 bridge applies the shared deaths per tonne, heat-death delay and value of a death.
 
 ## Shared figures it reads
