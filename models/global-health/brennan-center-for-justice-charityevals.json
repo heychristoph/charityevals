@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "brennan-center-for-justice",
   "owner": "charityevals",
-  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Its democracy work (88% of the cost) is counted as its 1.1% share of the whole US pro-democracy field's yearly cut in the chance that US democracy breaks down before 2030 (a 15% chance, cut by a twentieth), valued by the income a breakdown would cost; its justice work as its 1.1% share of the reform field's part in the national decline in incarceration, valued by prisoners' wellbeing and shortened lives. It comes to about 0.003 years of healthy life per 1,000 dollars, far below the site's global-health median because a breakdown's income loss builds up over decades while an averted one counts only the five years the site counts a won change (a tenth of the loss on average), and because the Center holds about two years of spending in liquid reserves, so its next dollar counts at 32% of the average. The result is mostly uncertainty (the field's effect on the risk and the years counted; the model's own ranges alone span over ten thousandfold), and both branches are discounted by the shared missing-data slider.",
+  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Three branches: its 1.1% share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (12%, cut by a twentieth), valued by the income a breakdown would cost; its 1% share of the litigation that ended the emergency tariffs in February 2026 (about 0.12% of long-run GDP restored); and its 1.6% share of the reform field's part in the fall in incarceration, valued by prisoners' wellbeing and shortened lives. With its next dollar at 32% of the average (it holds about two years of spending in liquid reserves), it comes to about 0.03 years of healthy life per 1,000 dollars, most of it from the tariff ruling. The result is mostly uncertainty (the Center's share of the tariff litigation, the field's effect on the breakdown risk, the years a win counts; the model's own ranges alone span over a thousandfold), and all three branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Brennan Center for Justice",
@@ -48,17 +48,17 @@
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "The Brennan Center's own spending in the year to 30 June 2025 on its six programme columns, with its share of management and fundraising, split between the democracy branch (Democracy, Liberty and National Security) and the justice branch by their direct spending. From the audited statement of functional expenses; donated legal services are left out."
+      "explainer": "The Brennan Center's own spending in the year to 30 June 2025 on its six programme columns, with its share of management and fundraising, split between the democracy work (Democracy, Liberty and National Security: the breakdown-risk and tariff branches) and the justice branch by their direct spending. From the audited statement of functional expenses; donated legal services are left out."
     },
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "Who the work reaches: everyone governed by US democracy (democracy branch) and the people kept out of prison each year by the national decline in incarceration (justice branch)."
+      "explainer": "Who the work reaches: everyone governed by US democracy and paying US tariffs (democracy and tariff branches) and the people kept out of prison each year by the national decline in incarceration (justice branch)."
     },
     {
       "id": "effect",
       "title": "Effect per unit",
-      "explainer": "What the work changes: the chance that US democracy breaks down, valued by the income a breakdown would cost; and years out of prison, valued by wellbeing and the deaths that prison causes. Each counts the field's whole effect; the Center's share is in the adjustments."
+      "explainer": "What the work changes: the chance that US democracy breaks down, valued by the income a breakdown would cost; the income the emergency tariffs cost until the courts struck them down; and years out of prison, valued by wellbeing and the deaths that prison causes. Each counts the whole field's or the whole litigation's effect; the Center's share is in the adjustments."
     },
     {
       "id": "adjustments",
@@ -241,7 +241,7 @@
       "label": "Democracy branch's share of the cost",
       "format": "percent",
       "formula": "(dem_fy2025 + lns_fy2025) / (dem_fy2025 + lns_fy2025 + jus_fy2025)",
-      "explainer": "Democracy and Liberty and National Security over the three substantive programmes; communications, fellows and policy advocacy (and overhead) follow the same split (88%)."
+      "explainer": "Democracy and Liberty and National Security over the three substantive programmes (the cost of both the breakdown-risk branch and the tariff branch, which comes from the emergency-powers work); communications, fellows and policy advocacy (and overhead) follow the same split (88%)."
     },
     {
       "id": "dem_cost",
@@ -263,7 +263,7 @@
       "label": "People in the United States",
       "format": "integer",
       "formula": "@united_states.population_2024",
-      "explainer": "Everyone governed by the democracy the work defends: the shared US population figure."
+      "explainer": "Everyone governed by the democracy the work defends and paying the tariffs: the shared US population figure."
     },
     {
       "id": "dem_gain_at_stake",
@@ -271,70 +271,76 @@
       "label": "Long-run income gain from staying a democracy (share of GDP per person)",
       "format": "percent",
       "formula": "@democracy.democratization_gdp_gain",
-      "explainer": "The shared figure (Acemoglu et al. 2019): about a fifth of income per person, what a lasting fall out of democracy would cost in the long run."
+      "explainer": "The shared figure (Acemoglu et al. 2019): about a fifth of income per person, what a coded reversal out of democracy costs in the long run (p. 76: reversals have effects similar to democratizations)."
     },
     {
       "id": "dem_severity_share",
       "section": "effect",
-      "label": "Share of that gain a US breakdown would lose",
+      "label": "Share of that gain a fall to a hybrid regime would lose",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.5,
-        "high": 1
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "A fall to what the Economist Intelligence Unit calls a hybrid regime would count as a transition out of democracy in Acemoglu et al.'s coding, but the US would keep parts of what drives the gain (independent states, courts, a free economy) and could recover within the years counted. Half the long-run gain, from a fifth to all of it; no study measures it for a rich country."
-    },
-    {
-      "id": "dem_buildup_share",
-      "section": "effect",
-      "label": "Average share of the loss reached over the years counted",
-      "format": "percent",
-      "formula": "if(years_of_impact <= @democracy.democratization_years_to_effect, years_of_impact * 0.5 / @democracy.democratization_years_to_effect, 1 - 0.5 * @democracy.democratization_years_to_effect / years_of_impact)",
-      "explainer": "The income effect builds up over about 25 years (@democracy.democratization_years_to_effect), taken as linear: over the 5 years counted ($win_years_counted) the loss averted averages a tenth of its long-run size; at 25 years or more, the average of the build-up and the full effect after it."
+      "explainer": "The event priced below is a fall below the Economist Intelligence Unit's democracy threshold (a hybrid regime), milder than the reversals behind the shared gain: Acemoglu et al. code a country democratic while Freedom House rates it Free or Partly Free and its Polity score is positive (p. 54), and most hybrid regimes pass that test. A third of the gain (10% to 70%): the low end a hybrid regime that keeps contested elections, the high end one that slides on to a coded reversal within the years counted."
     },
     {
       "id": "dem_ln_loss_per_person_year",
       "section": "effect",
-      "label": "Income loss averted per person per year, ln(consumption)",
+      "label": "Long-run income loss of a breakdown per person per year, ln(consumption)",
       "format": "small",
-      "formula": "ln(1 + dem_gain_at_stake * dem_severity_share * dem_buildup_share)",
+      "formula": "ln(1 + dem_gain_at_stake * dem_severity_share)",
       "unit": "ln / year",
-      "explainer": "ln(1 + gain × severity × build-up): the shared log scale for income, valued at $uov_per_ln_consumption in the bridge."
+      "explainer": "ln(1 + gain × severity): the full long-run loss on the shared log scale, valued at $uov_per_ln_consumption; its build-up is in dem_loss_years."
     },
     {
       "id": "dem_p_breakdown",
       "section": "effect",
-      "label": "Chance the US stops being a democracy before 2030",
+      "label": "Chance the US falls to a hybrid regime before 2030",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.35
+        "low": 0.04,
+        "best": 0.12,
+        "high": 0.3
       },
-      "kind": "estimate",
-      "source": {
-        "title": "Manifold, Will the Economist Intelligent Unit stop classifying the United States as a democracy before 2030?",
-        "url": "https://manifold.markets/JZB/will-the-economist-intelligent-unit",
-        "retrieved": "2026-11-14",
-        "quote": "Will the Economist Intelligent Unit stop classifying the United States as a democracy before 2030?",
-        "note": "11% on 14 November 2026; resolves yes if any EIU Democracy Index report published before 1 January 2030 classes the US as a hybrid or authoritarian regime. V-Dem's Democracy Report 2026 (https://www.v-dem.net/documents/75/V-Dem_Institute_Democracy_Report_2026_lowres.pdf, p. 33: 'Within one year, the USA's LDI score has declined by 24%') downgraded the US from liberal to electoral democracy and notes that 'Electoral components of democracy remain stable.' Range: our judgment, 5% (the market's long-dated questions are thought to underprice change) to 35% (the experts V-Dem cites who call the regime already authoritarian)."
+      "kind": "judgment",
+      "explainer": "The risk the work reduces. Anchors: a forecasting market gives 11% (Manifold, https://manifold.markets/JZB/will-the-economist-intelligent-unit, on 14 November 2026, for the Economist Intelligence Unit classing the US as a hybrid or authoritarian regime in a report before 2030; play money, 18 holders, so a weak anchor), and V-Dem's Democracy Report 2026 records the steepest one-year fall in US democracy it has measured (https://www.v-dem.net/documents/75/V-Dem_Institute_Democracy_Report_2026_lowres.pdf, p. 33: 'Within one year, the USA's LDI score has declined by 24%'). 12%, a little above the market for the record fall, from 4% to 30% (the experts V-Dem cites who call the regime already authoritarian). Not a single event drawn as happens or not: the model counts the change in its chance, as the catastrophic-risk models count a cut in a hazard."
+    },
+    {
+      "id": "dem_pathway_share",
+      "section": "effect",
+      "label": "Share of the routes to a breakdown that the pro-democracy field works on",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
       },
-      "explainer": "The risk the work reduces: 15% (5% to 35%), above the 11% a forecasting market gives for the Economist Intelligence Unit downgrading the US to a hybrid regime before 2030, because V-Dem recorded the steepest one-year fall in US democracy it has measured (2025) and a market long-dated question tends to sit near no change. Not a single event drawn as happens or not: the model counts the change in its chance, as the catastrophic-risk models count a cut in a hazard."
+      "kind": "judgment",
+      "explainer": "The field litigates, supports election officials, researches and lobbies: it acts on elections, the courts and legislation, not on voters' choices, the parties or the military. V-Dem's 2025 decline was largest in legislative constraints, civil liberties and freedom of expression (p. 33), of which the field reaches the parts that go through courts and Congress. Half, from 30% to 80%."
+    },
+    {
+      "id": "dem_decisive_share",
+      "section": "effect",
+      "label": "Share of the outcomes on those routes that a year of the field's work decides",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Against what would happen without the field. Reference class: on contested US policy issues the side with more money was hardly likelier to win, and resources explained under 5% of the difference between successful and failed efforts (Baumgartner et al. 2009, read in @democracy.lobbied_issue_change_rate); litigation is more decisive, since a ruling needs a suit (in 2025 courts blocked most of the elections executive order and the voter-file demands in suits the field brought; Brennan Center 2025 annual report). A tenth, from 2% to 30%."
     },
     {
       "id": "dem_field_cut",
       "section": "effect",
-      "label": "Relative cut in that chance from one year of the whole US pro-democracy field's work",
+      "label": "Relative cut in the chance from one year of the whole US pro-democracy field's work",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.05,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "What a year of the field's litigation, election-administration support, research and advocacy (about $4.5 billion, below) takes off the chance of a breakdown: a twentieth of it (1% to 20%). Anchors: in 2025 courts blocked most of the March 2025 elections executive order and the Justice Department's demands for state voter files in suits the field brought (Brennan Center 2025 annual report), and V-Dem finds the electoral components the field defends still stable while the others fell; against that, Baumgartner et al. found the side with more money hardly likelier to win (@democracy.lobbied_issue_change_rate), and most of what decides a breakdown (voters, officials, courts, the parties) is outside the field. The biggest uncertainty in the model."
+      "formula": "dem_pathway_share * dem_decisive_share",
+      "explainer": "The routes the field works on × the share of their outcomes it decides: about 5%. The biggest uncertainty in the model."
     },
     {
       "id": "dem_p_success",
@@ -367,20 +373,20 @@
       "explainer": "The wait discounted at the shared rate."
     },
     {
-      "id": "dem_discounted_years",
+      "id": "dem_loss_years",
       "section": "effect",
-      "label": "Discounted years a breakdown averted counts",
+      "label": "Discounted years of the full loss averted by postponing a breakdown",
       "format": "number",
-      "formula": "pv_annuity_due(1, $discount_rate + @democracy.electoral_reform_repeal_rate, years_of_impact) * dem_wait_discount",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * pv_annuity_due(1, $discount_rate, @democracy.democratization_years_to_effect) / @democracy.democratization_years_to_effect * dem_wait_discount",
       "unit": "years",
-      "explainer": "The years counted ($win_years_counted), with the shared yearly chance that a protected arrangement is undone anyway (@democracy.electoral_reform_repeal_rate) beside the discount rate (families/rights-advocacy.md, Democracy and governance)."
+      "explainer": "An averted breakdown comes, if at all, the years counted later ($win_years_counted, 2.9), so the whole path of the loss, building up linearly over @democracy.democratization_years_to_effect (25 years), shifts by that many years: each twenty-fifth of the loss starts later, and the discounted loss averted is the years counted (discounted) × the average discount over the build-up. No separate repeal hazard: the years counted already say the breakdown may come later. About 3 years of the full loss at the defaults."
     },
     {
       "id": "dem_uov",
       "section": "effect",
       "label": "Income loss averted by a year of the field's work, units of value (before adjustments)",
       "format": "number",
-      "formula": "us_population * dem_ln_loss_per_person_year * $uov_per_ln_consumption * dem_p_success * dem_discounted_years",
+      "formula": "us_population * dem_ln_loss_per_person_year * $uov_per_ln_consumption * dem_p_success * dem_loss_years",
       "unit": "UoV"
     },
     {
@@ -422,7 +428,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "The income effect is a cross-country panel of mostly poorer countries applied to the US (external validity), and the risk is a market forecast; 0.5, from 0.25 to 0.8, lower than IRAP's advocacy model (0.8), whose value of a move rests on measured consumption."
+      "explainer": "The income effect is a cross-country panel of mostly poorer countries applied to the US (external validity), and the risk is a thin forecast; 0.5, from 0.25 to 0.8, lower than IRAP's advocacy model (0.8), whose value of a move rests on measured consumption."
     },
     {
       "id": "dem_counterfactual_adj",
@@ -430,7 +436,7 @@
       "label": "Share of the democracy outcome that wouldn't have happened anyway",
       "format": "percent",
       "formula": "1",
-      "explainer": "1: dem_field_cut is already the change against no field (what would have happened anyway is the rest of the breakdown chance), so it isn't asked twice (Convention 5)."
+      "explainer": "1: dem_decisive_share is already the change against no field, so it isn't asked twice (Convention 5)."
     },
     {
       "id": "dem_implementation_adj",
@@ -456,24 +462,242 @@
       "formula": "dem_evidence_adj * dem_counterfactual_adj * dem_attribution_share * dem_implementation_adj * dem_missing_data_adj"
     },
     {
+      "id": "dem_ue_backlash",
+      "section": "adjustments",
+      "label": "Backlash to the democracy work, as a share of the democracy branch",
+      "format": "percent",
+      "value": {
+        "low": -0.1,
+        "best": -0.03,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Litigation and campaigns against the administration can harden opposition and provoke counter-measures (state bans after local wins, attacks on nonprofits): -3%, from -10% to 0.",
+      "side_effect": "added",
+      "shape": "normal"
+    },
+    {
+      "id": "dem_ue_nonincome",
+      "section": "adjustments",
+      "label": "Value of democracy beyond income, as a share of the democracy branch",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The branch counts only income; civil liberties, freedom of expression and a fair hearing matter to people's lives beyond what they earn: 15%, from 0 to 50%.",
+      "side_effect": "added"
+    },
+    {
+      "id": "dem_ue_abroad",
+      "section": "adjustments",
+      "label": "Effect of US democracy on democracy abroad, as a share of the democracy branch",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "V-Dem's 2026 report counts the US among the major powers now autocratizing and the West's main allies; a US breakdown would weaken support for democracy elsewhere: 10%, from 0 to 40%.",
+      "side_effect": "added"
+    },
+    {
+      "id": "dem_unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Democracy side effects, summed (benefits and harms not modelled, democracy branch)",
+      "format": "percent",
+      "formula": "dem_ue_backlash + dem_ue_nonincome + dem_ue_abroad",
+      "explainer": "The three shares above, each with its sign, applied in the democracy branch only."
+    },
+    {
+      "id": "tar_gdp_restored",
+      "section": "effect",
+      "label": "Long-run US GDP restored by the ruling against the emergency tariffs (share)",
+      "format": "percent",
+      "value": {
+        "low": 0.0007,
+        "best": 0.0012,
+        "high": 0.0018
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "The Budget Lab at Yale, State of U.S. Tariffs: March 9, 2026",
+        "url": "https://budgetlab.yale.edu/sites/default/files/page_to_pdf/1410/publication_1410.pdf",
+        "retrieved": "2026-11-14",
+        "page": "pp. 5-6, table 1, row 'Percent change in long-run GDP' (columns: before the ruling; 10% Section 122 expiring; extended; 15% Section 122 expiring; extended)",
+        "quote": "-0.25% -0.07% -0.07% -0.13% -0.07% -0.18%"
+      },
+      "explainer": "All 2025 tariffs left US GDP 0.25% smaller in the long run before the Supreme Court's February 2026 ruling that the IEEPA tariffs exceeded the president's authority; after it, 0.07% if the 10% Section 122 replacement expires after 150 days (0.18% restored, the high end), 0.13% if it is made permanent (0.12% restored, the best guess, since the administration has replaced struck tariffs under other statutes) and 0.18% for a permanent 15% rate (0.07%, the low end). GDP, not tariff revenue: the duties and refunds are transfers."
+    },
+    {
+      "id": "tar_ln_gain",
+      "section": "effect",
+      "label": "Income gained per person per year from the ruling, ln(consumption)",
+      "format": "small",
+      "formula": "ln(1 + tar_gdp_restored)",
+      "unit": "ln / year"
+    },
+    {
+      "id": "tar_p_success",
+      "section": "effect",
+      "label": "Chance the win happens",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1: the ruling is in (Learning Resources v. Trump and V.O.S. Selections v. Trump, February 2026); the Center's part in it is its share of the resources behind the litigation, below."
+    },
+    {
+      "id": "tar_years_until_effect",
+      "section": "effect",
+      "label": "Years from the year modelled until the ruling took effect",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 1.25
+      },
+      "kind": "judgment",
+      "explainer": "The Center's briefs began in spring 2025 and the ruling came in February 2026, about eight months after the year modelled ended.",
+      "unit": "years"
+    },
+    {
+      "id": "tar_wait_discount",
+      "section": "effect",
+      "label": "Discount for the wait",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ (0 - tar_years_until_effect)",
+      "explainer": "The wait discounted at the shared rate."
+    },
+    {
+      "id": "tar_discounted_years",
+      "section": "effect",
+      "label": "Discounted years the ruling counts",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * tar_wait_discount",
+      "unit": "years",
+      "explainer": "A won ruling counts $win_years_counted years before a later court, Congress or administration would have ended the tariffs anyway; replacement tariffs are in tar_gdp_restored."
+    },
+    {
+      "id": "tar_cost_year_share",
+      "section": "effect",
+      "label": "Share of the Center's tariff litigation done in the year modelled",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Its first brief (spring 2025) fell in the year to June 2025, the later four and the Supreme Court stage in the next: half of the work, from 30% to 70%, so the year's cost is credited with that part of the win."
+    },
+    {
+      "id": "tar_uov",
+      "section": "effect",
+      "label": "Income gained from the ruling, units of value (before adjustments)",
+      "format": "number",
+      "formula": "us_population * tar_ln_gain * $uov_per_ln_consumption * tar_p_success * tar_discounted_years * tar_cost_year_share",
+      "unit": "UoV"
+    },
+    {
+      "id": "tar_attribution_share",
+      "section": "adjustments",
+      "label": "The Brennan Center's share of the resources behind the tariff litigation",
+      "format": "percent",
+      "value": {
+        "low": 0.002,
+        "best": 0.01,
+        "high": 0.04
+      },
+      "kind": "judgment",
+      "explainer": "The cases were brought by importers (counsel from the Liberty Justice Center and law firms) and twelve states, with dozens of amicus briefs; the Center filed five briefs ('The Brennan Center filed five briefs challenging that power grab', 2025 annual report, p. 17), a few hundred thousand dollars of staff time against tens of millions behind the cases (Convention 2): 1%, from 0.2% to 4%."
+    },
+    {
+      "id": "tar_evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment for the tariff branch",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "One model's estimate of the tariffs' long-run cost (the Budget Lab's), others differing in size; 0.8, from 0.5 to 1."
+    },
+    {
+      "id": "tar_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the tariff outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1: without the litigation there is no ruling; whether the tariffs would have ended some other way is the years counted (Convention 5)."
+    },
+    {
+      "id": "tar_implementation_adj",
+      "section": "adjustments",
+      "label": "Share of the ruling applied",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1: the IEEPA tariffs stopped; their replacement is in tar_gdp_restored."
+    },
+    {
+      "id": "tar_missing_data_adj",
+      "section": "adjustments",
+      "label": "Missing-data discount, tariff branch",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the briefs' effect on the ruling isn't measured, only judged by resources (Convention 12)."
+    },
+    {
+      "id": "tar_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments, tariff branch",
+      "format": "multiple",
+      "formula": "tar_evidence_adj * tar_counterfactual_adj * tar_attribution_share * tar_implementation_adj * tar_missing_data_adj"
+    },
+    {
+      "id": "tar_ue_abroad",
+      "section": "adjustments",
+      "label": "Trading partners' gains from the ruling, as a share of the tariff branch",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.3,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The tariffs also shrink partners' economies (the Budget Lab's long-run global estimates, Canada, China and Mexico hit hardest): 30% of the US gain, from 0 to as much again.",
+      "side_effect": "added"
+    },
+    {
+      "id": "tar_unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Tariff side effects, summed",
+      "format": "percent",
+      "formula": "tar_ue_abroad",
+      "explainer": "The share above, applied in the tariff branch only."
+    },
+    {
       "id": "jus_people",
       "section": "reach",
       "label": "People per year newly kept out of prison or jail by the US decline in incarceration",
       "format": "integer",
       "value": {
-        "low": 5000,
-        "best": 20757,
-        "high": 40370
+        "low": 2000,
+        "best": 22750,
+        "high": 36960
       },
       "kind": "estimate",
       "source": {
-        "title": "Bureau of Justice Statistics, Correctional Populations in the United States, 2022 - Statistical Tables (NCJ 308699), table 1",
-        "url": "https://bjs.ojp.gov/document/cpus22st.pdf",
+        "title": "Bureau of Justice Statistics, Correctional Populations in the United States, 2023 - Statistical Tables (NCJ 310413, September 2025), table 1",
+        "url": "https://bjs.ojp.gov/document/cpus23st.pdf",
         "retrieved": "2026-11-14",
-        "page": "p. 4, table 1, Incarcerated total column",
-        "quote": "2012 6,949,800 4,790,700 3,944,900 858,400 2,231,300 1,570,400 744,500"
+        "page": "table 1, Incarcerated total column",
+        "quote": "2013 6,899,700 4,749,800 3,912,900 849,500 2,222,500 1,577,000 731,200"
       },
-      "explainer": "The yearly flow of the decline (Convention 3): 2,231,300 people incarcerated in 2012 and 2,086,000 in 2019 (table 1, the same column: '2019 6,343,300 4,357,700 3,492,900 878,900 2,086,000'), 145,300 fewer over seven years, 20,757 a year. High: the 2012-2022 average (403,700 fewer, 40,370 a year), inflated by the pandemic's releases. Low: the decline has stalled since (the incarcerated population rose 2.9% in 2022), so the field's yearly gain may now be near 5,000.",
+      "explainer": "The yearly flow of the decline (Convention 3): 2,222,500 people incarcerated in 2013 and 2,086,000 in 2019 (the same column: '2019 6,343,200 4,357,500 3,492,900 878,700 2,086,000'), 136,500 fewer over six years, 22,750 a year, the years before the pandemic that the field's spending below also comes from. High: 2013-2023 (369,600 fewer, 36,960 a year), inflated by the pandemic's releases. Low: since 2021 the incarcerated population has risen (1,776,000 in 2021, 1,852,900 in 2023), so the field's yearly gain may now be near nothing.",
       "unit": "people"
     },
     {
@@ -487,7 +711,7 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "Over 2012-2019 crime fell little while states passed justice-reinvestment, sentencing and bail laws and the federal First Step Act (2018); the rest is falling arrests and admissions for other reasons. 60%, from 30% to 85%: no study apportions the national decline."
+      "explainer": "Over 2013-2019 violent crime was about flat while property crime and arrests fell (FBI Uniform Crime Reports), routes to fewer prisoners that aren't reform; states passed justice-reinvestment, sentencing and bail laws and Congress the First Step Act (2018). 60%, from 30% to 85%, allows for the fall in property crime and arrests: no study apportions the national decline."
     },
     {
       "id": "jus_advocacy_share",
@@ -576,6 +800,28 @@
       "explainer": "Years of life lost over the years left: about a twentieth of a death per year in prison."
     },
     {
+      "id": "jus_years_until_deaths",
+      "section": "effect",
+      "label": "Years from a prison-year averted until the deaths it would have caused",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 8
+      },
+      "kind": "judgment",
+      "explainer": "The excess risk is 'highest upon release from prison and declined over time' (Patterson 2013), recovering over about two thirds of the time served: the rest of the sentence plus a few years after release, 3 years (1 to 8).",
+      "unit": "years"
+    },
+    {
+      "id": "jus_death_delay_discount",
+      "section": "effect",
+      "label": "Discount for the delay until the deaths",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ (0 - jus_years_until_deaths)",
+      "explainer": "The delay discounted at the shared rate."
+    },
+    {
       "id": "jus_years_until_effect",
       "section": "effect",
       "label": "Years from the work until the reforms reduce incarceration",
@@ -619,20 +865,16 @@
       "section": "effect",
       "label": "Deaths averted by a year of the reform field's work, units of value (before adjustments)",
       "format": "number",
-      "formula": "jus_people * jus_deaths_per_person_year * jus_value_per_death * jus_p_success * jus_discounted_years",
+      "formula": "jus_people * jus_deaths_per_person_year * jus_value_per_death * jus_p_success * jus_discounted_years * jus_death_delay_discount",
       "unit": "UoV"
     },
     {
-      "id": "jus_field_spending",
+      "id": "jus_field_2019",
       "section": "adjustments",
-      "label": "Spending by the US criminal-justice reform field in a year",
+      "label": "Foundation funding of US criminal-justice reform, 2019",
       "format": "usd",
-      "value": {
-        "low": 343000000,
-        "best": 600000000,
-        "high": 1200000000
-      },
-      "kind": "estimate",
+      "value": 343000000,
+      "kind": "observed",
       "source": {
         "title": "Bridgespan Group, Making the Case: Philanthropy's Role in the Movement to Reimagine Criminal Justice, executive summary (March 2022)",
         "url": "https://bridgespan.org/getmedia/39b5d45c-b827-4722-9a99-c856e2cadb2b/philanthropy_criminal-justice-movements_executivesummary.pdf",
@@ -640,7 +882,28 @@
         "page": "pp. 2-3",
         "quote": "funding to criminal justice reform amounted to just $343 million."
       },
-      "explainer": "Foundation funding of $343 million in 2019 (the low end); individual donors and the rise in giving after 2020 come on top: $600 million, to $1.2 billion."
+      "explainer": "The most recent year with complete data in Bridgespan's analysis of Candid's data, at the end of the period the decline above comes from."
+    },
+    {
+      "id": "jus_field_scale",
+      "section": "adjustments",
+      "label": "The field's average yearly spending over 2013-2019, as a multiple of 2019's foundation funding",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "judgment",
+      "explainer": "Foundation funding was lower in the earlier years of the period, and individual donors' gifts come on top: about the 2019 figure, from 0.6 to twice it."
+    },
+    {
+      "id": "jus_field_spending",
+      "section": "adjustments",
+      "label": "Spending by the US criminal-justice reform field in a year, 2013-2019, in 2025 prices",
+      "format": "usd",
+      "formula": "jus_field_2019 * jus_field_scale * @cpi.usa_2025 / @cpi.usa_2019",
+      "explainer": "The field's spending in the years the decline comes from (Convention 11), in 2025 prices (Convention 8), so the Center's 2025 justice cost is credited at the field's past rate of achievement per dollar."
     },
     {
       "id": "jus_attribution_share",
@@ -648,7 +911,7 @@
       "label": "The Brennan Center's share of the reform field's resources",
       "format": "percent",
       "formula": "jus_cost / jus_field_spending",
-      "explainer": "Its justice cost over the field's spending (Convention 2): about 1.1%."
+      "explainer": "Its justice cost over the field's spending (Convention 2): about 1.6%."
     },
     {
       "id": "jus_evidence_adj",
@@ -672,6 +935,14 @@
       "explainer": "1: jus_reform_share and jus_advocacy_share already take out the decline that came without the field (Convention 5)."
     },
     {
+      "id": "jus_implementation_adj",
+      "section": "adjustments",
+      "label": "Share of the justice outcome enforced",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1: the branch counts an observed fall in incarceration, after enforcement."
+    },
+    {
       "id": "jus_missing_data_adj",
       "section": "adjustments",
       "label": "Missing-data discount, justice branch",
@@ -684,7 +955,7 @@
       "section": "adjustments",
       "label": "All adjustments, justice branch",
       "format": "multiple",
-      "formula": "jus_evidence_adj * jus_counterfactual_adj * jus_attribution_share * implementation_adj * jus_missing_data_adj"
+      "formula": "jus_evidence_adj * jus_counterfactual_adj * jus_attribution_share * jus_implementation_adj * jus_missing_data_adj"
     },
     {
       "id": "jus_ue_families",
@@ -745,24 +1016,138 @@
       "shape": "normal"
     },
     {
-      "id": "jus_side_effects",
+      "id": "jus_unmodelled_benefits_adj",
       "section": "adjustments",
-      "label": "Justice side effects, summed",
+      "label": "Justice side effects, summed (benefits and harms not modelled, justice branch)",
       "format": "percent",
       "formula": "jus_ue_families + jus_ue_earnings + jus_ue_crime + jus_ue_rollback"
     },
     {
+      "id": "dem_uov_adj",
+      "section": "bridges",
+      "label": "Democracy branch, units of value (adjusted, side effects added)",
+      "format": "number",
+      "formula": "dem_uov * dem_total_adj * (1 + dem_unmodelled_benefits_adj)",
+      "unit": "UoV"
+    },
+    {
+      "id": "tar_uov_adj",
+      "section": "bridges",
+      "label": "Tariff branch, units of value (adjusted, side effects added)",
+      "format": "number",
+      "formula": "tar_uov * tar_total_adj * (1 + tar_unmodelled_benefits_adj)",
+      "unit": "UoV"
+    },
+    {
+      "id": "jus_uov_adj",
+      "section": "bridges",
+      "label": "Justice branch deaths averted, units of value (adjusted, side effects added)",
+      "format": "number",
+      "formula": "jus_uov * jus_total_adj * (1 + jus_unmodelled_benefits_adj)",
+      "unit": "UoV"
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Income and deaths, in GiveWell units of value (adjusted)",
+      "format": "number",
+      "formula": "dem_uov_adj + tar_uov_adj + jus_uov_adj",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income and deaths, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Wellbeing gained, in WELLBYs (adjusted, side effects added)",
+      "format": "number",
+      "formula": "jus_wellbys * jus_total_adj * (1 + jus_unmodelled_benefits_adj) + released_people * released_value",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Wellbeing gained, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
+    },
+    {
+      "id": "dem_dalys",
+      "section": "outcome",
+      "label": "Democracy branch, healthy years",
+      "format": "number",
+      "formula": "dalys_from_uov * dem_uov_adj / uov_bridged",
+      "unit": "DALYs"
+    },
+    {
+      "id": "tar_dalys",
+      "section": "outcome",
+      "label": "Tariff branch, healthy years",
+      "format": "number",
+      "formula": "dalys_from_uov * tar_uov_adj / uov_bridged",
+      "unit": "DALYs"
+    },
+    {
+      "id": "jus_dalys",
+      "section": "outcome",
+      "label": "Justice branch, healthy years",
+      "format": "number",
+      "formula": "dalys_from_uov * jus_uov_adj / uov_bridged + dalys_from_wellby",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dem_raw",
+      "section": "outcome",
+      "label": "Democracy branch, healthy years before adjustments (weight for the averages)",
+      "format": "number",
+      "formula": "dem_dalys / (dem_total_adj * (1 + dem_unmodelled_benefits_adj))",
+      "unit": "DALYs"
+    },
+    {
+      "id": "tar_raw",
+      "section": "outcome",
+      "label": "Tariff branch, healthy years before adjustments (weight for the averages)",
+      "format": "number",
+      "formula": "tar_dalys / (tar_total_adj * (1 + tar_unmodelled_benefits_adj))",
+      "unit": "DALYs"
+    },
+    {
+      "id": "jus_raw",
+      "section": "outcome",
+      "label": "Justice branch, healthy years before adjustments (weight for the averages)",
+      "format": "number",
+      "formula": "jus_dalys / (jus_total_adj * (1 + jus_unmodelled_benefits_adj))",
+      "unit": "DALYs"
+    },
+    {
+      "id": "raw_total",
+      "section": "outcome",
+      "label": "All branches, healthy years before adjustments",
+      "format": "number",
+      "formula": "dem_raw + tar_raw + jus_raw",
+      "unit": "DALYs"
+    },
+    {
       "id": "people_affected_per_year",
       "section": "reach",
-      "label": "People per year the work affects (both branches, for reading only)",
+      "label": "People per year the work affects (all branches, for reading only)",
       "format": "integer",
       "formula": "us_population + jus_people",
-      "explainer": "Everyone in the US (democracy) plus the yearly flow kept out of prison (justice); each branch uses its own count."
+      "explainer": "Everyone in the US (democracy and tariffs) plus the yearly flow kept out of prison (justice); each branch uses its own count."
     },
     {
       "id": "ls_gain_per_person_year",
       "section": "effect",
-      "label": "Wellbeing gained per person affected per year (average over both branches, for reading only)",
+      "label": "Wellbeing gained per person affected per year (average, for reading only)",
       "format": "number",
       "formula": "jus_people * jus_ls_gain / people_affected_per_year",
       "unit": "points"
@@ -779,15 +1164,15 @@
     {
       "id": "ln_gain_per_person_year",
       "section": "effect",
-      "label": "Income gained per person affected per year (average over both branches, for reading only)",
+      "label": "Income gained per person affected per year (average, for reading only)",
       "format": "small",
-      "formula": "us_population * dem_ln_loss_per_person_year / people_affected_per_year",
+      "formula": "us_population * (dem_ln_loss_per_person_year + tar_ln_gain) / people_affected_per_year",
       "unit": "ln / year"
     },
     {
       "id": "years_of_impact",
       "section": "effect",
-      "label": "Years a won reform or averted breakdown counts",
+      "label": "Years a won reform, ruling or postponed breakdown counts",
       "format": "number",
       "formula": "$win_years_counted",
       "unit": "years",
@@ -798,30 +1183,39 @@
       "section": "effect",
       "label": "Years until the work takes effect (outcome-weighted average of the branches, for reading only)",
       "format": "number",
-      "formula": "dem_weight * dem_years_until_effect + (1 - dem_weight) * jus_years_until_effect",
+      "formula": "(dem_raw * dem_years_until_effect + tar_raw * tar_years_until_effect + jus_raw * jus_years_until_effect) / raw_total",
       "unit": "years"
     },
     {
       "id": "wait_discount",
       "section": "effect",
-      "label": "Discount for the wait (outcome-weighted average, for reading only)",
+      "label": "Discount for the wait (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "dem_weight * dem_wait_discount + (1 - dem_weight) * jus_wait_discount"
+      "formula": "(dem_raw * dem_wait_discount + tar_raw * tar_wait_discount + jus_raw * jus_wait_discount) / raw_total"
+    },
+    {
+      "id": "dem_discounted_years",
+      "section": "effect",
+      "label": "Discounted years, democracy branch, for the average",
+      "format": "number",
+      "formula": "dem_loss_years",
+      "unit": "years",
+      "explainer": "The democracy branch's discounted full-loss years, under the canonical name for the average."
     },
     {
       "id": "discounted_years",
       "section": "effect",
-      "label": "Discounted years of impact (outcome-weighted average, for reading only)",
+      "label": "Discounted years of impact (outcome-weighted average of the branches, for reading only)",
       "format": "number",
-      "formula": "dem_weight * dem_discounted_years + (1 - dem_weight) * jus_discounted_years",
+      "formula": "(dem_raw * dem_discounted_years + tar_raw * tar_discounted_years + jus_raw * jus_discounted_years) / raw_total",
       "unit": "years"
     },
     {
       "id": "p_success",
       "section": "effect",
-      "label": "Chance or share of each outcome the field's work causes (outcome-weighted average, for reading only)",
+      "label": "Chance or share of each outcome the work causes (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "dem_weight * dem_p_success + (1 - dem_weight) * jus_p_success"
+      "formula": "(dem_raw * dem_p_success + tar_raw * tar_p_success + jus_raw * jus_p_success) / raw_total"
     },
     {
       "id": "released_people",
@@ -860,179 +1254,66 @@
     {
       "id": "implementation_adj",
       "section": "adjustments",
-      "label": "Share of the win that is enforced",
+      "label": "Share of the win that is enforced (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "1",
-      "explainer": "1 in both branches: the democracy branch counts the chance of the outcome itself, and the justice branch an observed fall in incarceration, after enforcement."
+      "formula": "(dem_raw * dem_implementation_adj + tar_raw * tar_implementation_adj + jus_raw * jus_implementation_adj) / raw_total",
+      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own (all 1)."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "dem_weight * dem_evidence_adj + (1 - dem_weight) * jus_evidence_adj"
+      "formula": "(dem_raw * dem_evidence_adj + tar_raw * tar_evidence_adj + jus_raw * jus_evidence_adj) / raw_total",
+      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
       "id": "counterfactual_adj",
       "section": "adjustments",
-      "label": "Share that wouldn't have happened anyway (outcome-weighted average, for reading only)",
+      "label": "Share that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "dem_weight * dem_counterfactual_adj + (1 - dem_weight) * jus_counterfactual_adj",
-      "explainer": "The outcome-weighted average of the branches' counterfactual adjustments (both 1), for reading only: each branch applies its own."
+      "formula": "(dem_raw * dem_counterfactual_adj + tar_raw * tar_counterfactual_adj + jus_raw * jus_counterfactual_adj) / raw_total",
+      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own (all 1)."
     },
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "The Brennan Center's share of the resources behind the outcome (outcome-weighted average, for reading only)",
+      "label": "The Brennan Center's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "dem_weight * dem_attribution_share + (1 - dem_weight) * jus_attribution_share"
+      "formula": "(dem_raw * dem_attribution_share + tar_raw * tar_attribution_share + jus_raw * jus_attribution_share) / raw_total",
+      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
       "id": "attribution_share",
       "section": "adjustments",
-      "label": "Share of credit used",
+      "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
       "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches' shares of their fields' resources, for reading only: each branch applies its own (dem_attribution_share, jus_attribution_share)."
+      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own (dem_attribution_share, tar_attribution_share, jus_attribution_share)."
     },
     {
       "id": "missing_data_adj",
       "section": "adjustments",
-      "label": "Missing-data discount (outcome-weighted average, for reading only)",
+      "label": "Missing-data discount (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "dem_weight * dem_missing_data_adj + (1 - dem_weight) * jus_missing_data_adj",
-      "explainer": "The outcome-weighted average of the branches' missing-data discounts, for reading only: both branches are thin and each applies $missing_data_discount itself."
+      "formula": "(dem_raw * dem_missing_data_adj + tar_raw * tar_missing_data_adj + jus_raw * jus_missing_data_adj) / raw_total",
+      "explainer": "The outcome-weighted average of the branches, for reading only: all three branches are thin and each applies $missing_data_discount itself."
     },
     {
       "id": "total_adj",
       "section": "adjustments",
       "label": "All adjustments (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(dem_dalys + jus_dalys) / (dem_dalys / dem_total_adj + jus_dalys / (jus_total_adj * (1 + jus_side_effects)))"
-    },
-    {
-      "id": "ue_backlash",
-      "section": "adjustments",
-      "label": "Backlash to the democracy work, as a share of modelled value",
-      "format": "percent",
-      "value": {
-        "low": -0.1,
-        "best": -0.03,
-        "high": 0
-      },
-      "kind": "judgment",
-      "explainer": "Litigation and campaigns against the administration can harden opposition and provoke counter-measures (state bans after local wins, attacks on nonprofits): -3%, from -10% to 0.",
-      "side_effect": "added",
-      "shape": "normal"
-    },
-    {
-      "id": "ue_nonincome",
-      "section": "adjustments",
-      "label": "Value of democracy beyond income, as a share of modelled value",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "The democracy branch counts only income; civil liberties, freedom of expression and a fair hearing matter to people's lives beyond what they earn: 15%, from 0 to 50%.",
-      "side_effect": "added"
-    },
-    {
-      "id": "ue_abroad",
-      "section": "adjustments",
-      "label": "Effect of US democracy on democracy abroad, as a share of modelled value",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "V-Dem's 2026 report counts the US among the major powers now autocratizing and the West's main allies; a US breakdown would weaken support for democracy elsewhere: 10%, from 0 to 40%.",
-      "side_effect": "added"
+      "formula": "(dem_raw * dem_total_adj + tar_raw * tar_total_adj + jus_raw * jus_total_adj) / raw_total",
+      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
-      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "label": "Benefits and harms not modelled, as a share of modelled value (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "ue_backlash + ue_nonincome + ue_abroad",
-      "explainer": "The three shares above, each with its sign; the justice branch's own side effects are applied in that branch."
-    },
-    {
-      "id": "dem_uov_adj",
-      "section": "bridges",
-      "label": "Democracy branch, units of value (adjusted)",
-      "format": "number",
-      "formula": "dem_uov * dem_total_adj",
-      "unit": "UoV"
-    },
-    {
-      "id": "jus_uov_adj",
-      "section": "bridges",
-      "label": "Justice branch deaths averted, units of value (adjusted, side effects added)",
-      "format": "number",
-      "formula": "jus_uov * jus_total_adj * (1 + jus_side_effects)",
-      "unit": "UoV"
-    },
-    {
-      "id": "uov_bridged",
-      "section": "bridges",
-      "label": "Income and deaths, in GiveWell units of value (adjusted)",
-      "format": "number",
-      "formula": "dem_uov_adj + jus_uov_adj",
-      "unit": "UoV"
-    },
-    {
-      "id": "dalys_from_uov",
-      "section": "bridges",
-      "label": "Income and deaths, in healthy years",
-      "format": "number",
-      "formula": "uov_bridged / ($uov_per_daly)",
-      "unit": "DALYs",
-      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
-    },
-    {
-      "id": "wellbys_bridged",
-      "section": "bridges",
-      "label": "Wellbeing gained, in WELLBYs (adjusted, side effects added)",
-      "format": "number",
-      "formula": "jus_wellbys * jus_total_adj * (1 + jus_side_effects) + released_people * released_value",
-      "unit": "WELLBYs"
-    },
-    {
-      "id": "dalys_from_wellby",
-      "section": "bridges",
-      "label": "Wellbeing gained, in healthy years",
-      "format": "number",
-      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
-      "unit": "DALYs",
-      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit."
-    },
-    {
-      "id": "dem_dalys",
-      "section": "outcome",
-      "label": "Democracy branch, healthy years (before the shares not modelled)",
-      "format": "number",
-      "formula": "dalys_from_uov * dem_uov_adj / uov_bridged",
-      "unit": "DALYs"
-    },
-    {
-      "id": "jus_dalys",
-      "section": "outcome",
-      "label": "Justice branch, healthy years (before the shares not modelled)",
-      "format": "number",
-      "formula": "dalys_from_uov * jus_uov_adj / uov_bridged + dalys_from_wellby",
-      "unit": "DALYs"
-    },
-    {
-      "id": "dem_weight",
-      "section": "outcome",
-      "label": "Democracy branch's share of the healthy years before adjustments (weight for the averages)",
-      "format": "percent",
-      "formula": "(dem_dalys / dem_total_adj) / (dem_dalys / dem_total_adj + jus_dalys / (jus_total_adj * (1 + jus_side_effects)))"
+      "formula": "(dem_raw * dem_total_adj * dem_unmodelled_benefits_adj + tar_raw * tar_total_adj * tar_unmodelled_benefits_adj + jus_raw * jus_total_adj * jus_unmodelled_benefits_adj) / (dem_raw * dem_total_adj + tar_raw * tar_total_adj + jus_raw * jus_total_adj)",
+      "explainer": "The outcome-weighted average of the branches, for reading only: each branch adds its own side effects (dem_unmodelled_benefits_adj, tar_unmodelled_benefits_adj, jus_unmodelled_benefits_adj) in its bridge row, so outcome_total doesn't apply this again."
     },
     {
       "id": "dalys_direct",
@@ -1047,9 +1328,9 @@
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
+      "formula": "dalys_direct + dalys_from_uov + dalys_from_wellby",
       "unit": "DALYs",
-      "explainer": "Both branches, each in healthy years by its own unit's conversion, already adjusted, times the shares not modelled."
+      "explainer": "All three branches, each in healthy years by its own unit's conversion, with its own adjustments and side effects already applied."
     },
     {
       "id": "dalys_per_dollar",
@@ -1120,7 +1401,7 @@
       "label": "How much the next dollar does compared with the average dollar so far",
       "format": "percent",
       "formula": "@next_dollar.brennan_center_for_justice",
-      "explainer": "This model's cost per outcome is a year of the Center's spending over its share of what the field achieves (estimate_basis past_average), so the next dollar is valued at the Center's own figure (facts/next_dollar.json, docs/normalization.md 2.10): low because it holds about two years of spending in liquid reserves.",
+      "explainer": "This model's cost per outcome is a year of the Center's spending over its share of what its fields achieve (estimate_basis past_average), so the next dollar is valued at the Center's own figure (facts/next_dollar.json, docs/normalization.md 2.10): low because it holds about two years of spending in liquid reserves.",
       "published": 1
     },
     {
