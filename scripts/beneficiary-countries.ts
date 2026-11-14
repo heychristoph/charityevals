@@ -116,6 +116,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "earthjustice-charityevals-biodiversity": { b: "world", note: "Our build: the counted good is forest carbon kept out of the air, which spares people everywhere (heat deaths)." },
   "johns-hopkins-center-for-health-security-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "blueprint-biosecurity-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
+  "ibbis-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "securebio-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "cepi-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population; the endemic branch (Lassa, mpox, chikungunya) is under 1% of the result and left in the world figure." },
   "nuclear-threat-initiative-charityevals": { b: "world", note: "Our build: a global catastrophe (nuclear war, a pandemic) kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
