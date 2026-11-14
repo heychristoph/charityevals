@@ -1,0 +1,19 @@
+# Audit: california-yimby-education-fund-charityevals, round 3
+Result: 1.017e-4 daly/$ = 0.102 years of healthy life per 1,000 dollars (combined range 0.00674–1.54). Verdict: pass.
+Model-sha: a0f6188ded8cef790e135e2c33fa84488b94a09de7af715302f04ae5d6a78d37
+Scope: scoped verification of the round-2 fixes only (scope unchanged: whole 2024 programme column, two branches).
+Mechanical: audit-model lint 0 high / 0 medium / 1 low (spread, the summary says it); check.ts passes ("all models valid"); no invariant findings. normalization-audit, summaries and simulation-check were not re-run in this scoped round (the changes are one shared fact pair, row values and sources).
+
+Previous round (round 2):
+1. `renter_consumption`: resolved. Reads `@united_states.ce_renter_vs_all_2024` (0.7272) and `@household_size.united_states_renter` (2.2); `renter_lowest_fifth_weight` is gone. FRED CXUTOTALEXPLB1705M 2024 = 57108 and CXU980010LB1705M 2024 = 2.2 verified on fred.stlouisfed.org/data. 57,108 / 78,535 = 0.7272.
+2. `adu_completion_share`: resolved. Estimate 0.65 (0.57-0.75) with the data.ca.gov A2 source; the explainer's ratios recompute from the quoted series (2020-2025 lag ratios 0.57-0.67, 2025 over the 2023-24 average 0.65, 2023 over 2021 permits 0.75). Not re-queried live.
+3. `adu_others_resources` / `oth_others_resources` built from parts: still open, medium, as in round 2. It is the largest own driver (tornado 0.25-0.049) and remains one typed lump of $35 million.
+4. `owner_multiple`: resolved. 1.25 (1.06-1.6), explainer gives the CE figures. Top-fifth facts not added; acceptable since no row reads them.
+5. Write-up: resolved. One permit series (15,051 to 38,907, HCD 30,354 noted), CensusDepth gone, sources and "How this model was checked" present; headline 0.10 and the summary's 0.10 match the model (0.1017).
+6. `rent_fall_per_stock` and `adu_gap_share`: resolved. Both have source objects. Pew quote is as in round 2. The Backyard Revolution quote ("median statewide construction cost of an ADU of $150,000, or $250/square foot"; 37% under $100,000, 71% under $200,000) is confirmed by a web search summary of the report; the cited urbandisplacement.org PDF returns 403 to automated fetches, and the report is also at aducalifornia.org/wp-content/uploads/2021/04/Implementing-the-Backyard-Revolution.pdf. The gap arithmetic checks (about 43% / 22% / 69% at 6.5% user cost and $20,800 rent).
+
+| # | Severity | Category | Row | Finding | Fix | Effect on result |
+|---|---|---|---|---|---|---|
+| 1 | medium | source | `adu_others_resources`, `oth_others_resources` | Still open from round 2 finding 3: others' resources are one typed lump rather than built from the named members' spending. | As in round 2: sum Casita Coalition 990s, the large lobbies' Cal-Access totals times a ranged ADU share, legislative staff and HCD's ADU unit; same for the other-laws branch. | unknown (row spans x0.48 to x2.5) |
+| 2 | low | consistency | `adu_completion_share` with `adu_permits_2024` | The completion share is measured against the APR permit series (2024: 39,077), but it is applied to `adu_permits_2024` whose best is HCD's handbook figure 30,354 (range 27,000-38,907), a different and lower series. Mixing series understates completions if the handbook count is a true subset, and is neutral if the two count the same thing differently. | Say in the explainer which series the ratio belongs to, or apply it to the APR series (best near 39,000) and drop the handbook best. Not a rule breach. | up to +25% on the ADU branch if the APR series is used |
+| 3 | low | source | `adu_gap_share` | The survey's costs are 2019 prices (published April 2021); the explainer inflates from 2020 (21%). A 2019 base would give about 25%, so $188,000 instead of $181,500. Immaterial against a 20-60% range. | Say "2019 prices" and use the CPI change from 2019 to 2024. | negligible |

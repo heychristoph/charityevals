@@ -1,6 +1,6 @@
 # Audit: bulletin-of-the-atomic-scientists-charityevals, round 3
 Result: 0.01615 daly/$ = 16.15 years of healthy life per 1,000 dollars (unchanged from round 2). Verdict: pass.
-Model-sha: 01e1f22dca0d102a025a163b885b40e47719857afdd29096a3ce972de3dee19e
+Model-sha: a0f8308dd210cc0625c7b673782fe452d3f0bd09dbdb13671dd9c14d824ad322
 Scope: verification round on the last commit only (models, facts/climate.json, write-up). `scripts/audit-model.ts` gives 0 findings and 16.15 per $1,000.
 
 Previous round (round 2):
@@ -15,4 +15,6 @@ Write-up paragraph "How this model was checked": accurate. Round 1 had four medi
 No new findings.
 
 Verdict: pass
-Model-sha: 01e1f22dca0d102a025a163b885b40e47719857afdd29096a3ce972de3dee19e
+Model-sha: a0f8308dd210cc0625c7b673782fe452d3f0bd09dbdb13671dd9c14d824ad322
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

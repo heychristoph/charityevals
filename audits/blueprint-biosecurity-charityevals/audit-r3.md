@@ -14,4 +14,6 @@ Previous round: finding 1 (unsourced SFF $78K clause): resolved, clause dropped 
 No findings.
 
 Verdict: **pass**
-Model-sha: 5ec82090d0d384a692de4ad7a2a45ee8a148effee7559050b8f5cf6a062f3157
+Model-sha: 8dbada791af3fa491b3e03448b01b51a5c529daaab6ee085f80d035b837c79b6
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

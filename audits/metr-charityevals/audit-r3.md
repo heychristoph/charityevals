@@ -1,7 +1,7 @@
 # Audit: metr-charityevals, round 3
 
 Result: unchanged from round 2 (0.0565 years of healthy life per 1,000 dollars). Verdict: pass (no high, medium or low findings).
-Model-sha: 90e3a861bb34e73ae66d5acdb06c7374e4537879417238a0a0c6ab28f531e419
+Model-sha: 1d15eaecd158196e92a772bef0758f3a3df80c0f8e8f72d03b76cdc3bf0bb784
 Scope: the one round-2 finding. Mechanical: `check.ts metr-charityevals` all models valid; `audit-model.ts` shows no high findings (only low range, unused-input and far-below notes, as before). `generated/` restored after the scripts.
 Previous round: round 2 (one low).
 
@@ -14,3 +14,5 @@ Previous round: round 2 (one low).
 | R2 # | Status | Check |
 |---|---|---|
 | 1 `contractor_pay` explainer | fixed | `git diff` on the model shows this explainer as the only change: "at most 4%" became "about 4%". Round 1 computed 4.4% (donor_cost_share 0.810 to 0.774), so "about 4%" is accurate. No numbers moved. |
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
