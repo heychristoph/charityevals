@@ -31,7 +31,7 @@ Both branches have side effects, each a shared figure. In the slide branch: demo
 
 ### What drives the result
 
-The years a won reform counts move the result most, then the missing-data discount, the next-dollar figure, and how much a reform dollar does against a redistricting dollar. After those come the share of democracy's income gain that fair maps bring, the size of that gain, and the field's effect on the risk of a slide.
+The years a won reform counts move the result most, then the missing-data discount, the next-dollar figure and the size of democracy's income gain. After those, almost tied, come how much a reform dollar does against a redistricting dollar and the share of democracy's income gain that fair maps bring, then the field's effect on the risk of a slide.
 
 ### Biggest uncertainties
 
