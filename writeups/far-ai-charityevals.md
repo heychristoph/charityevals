@@ -1,6 +1,6 @@
 ### Summary
 
-FAR.AI works to make advanced AI safe. It does technical research on how AI systems can be attacked and broken, runs a research hub in Berkeley, holds workshops for alignment researchers and funds research by others. Our model of all four programmes in 2024 comes to **<span data-figure="headline" data-model="far-ai-charityevals">1.2</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.02 to about 55.
+FAR.AI works to make advanced AI safe. It does technical research on how AI systems can be attacked and broken, runs a research hub in Berkeley, holds workshops for alignment researchers and funds research by others. Our model of all four programmes in 2024 comes to **<span data-figure="headline" data-model="far-ai-charityevals">1.1</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.02 to about 51.
 
 ### What the charity does
 
@@ -23,11 +23,11 @@ The deaths averted are valued like every death on the site, across the world's a
 
 All of FAR.AI's spending is on AI. The model's pandemic and nuclear areas are set to zero, and so are its policy-win and training branches. No treaty or law was won in 2024, and FAR.AI ran no training programme.
 
-About a quarter of the work is against misuse: about half of the research (jailbreaks, data poisoning, red-teaming of safeguards) and perhaps a quarter of the grant. The rest is valued as work against misalignment.
+Nearly a quarter of the work is against misuse: about a third of the research (two of its twelve papers, on jailbreaks and data poisoning, and the red-teaming of safeguards) and perhaps half of the grant. The rest is valued as work against misalignment.
 
 | Adjustment | Value | Reason |
 |---|---|---|
-| How far a typical project's effect applies to FAR.AI's work | 0.99 | Research 1.2 (developers act on its attacks), events 1, grants 1, the hub 0.6 (it supports others' work), weighted by spending |
+| How far a typical project's effect applies to FAR.AI's work | 1.02 | Research 1.2 (developers act on its attacks), events 1, grants 1, the hub 0.6 (it supports others' work), weighted by spending |
 | Work no one else would have done now | 0.65 | Universities, the labs and government institutes also study robustness and red-team models |
 | FAR.AI's share of the resources behind its work | 0.81 | Fees paid by others, co-authors, co-hosts and attendees' time |
 | Funging by large funders | 0.85 | A few large funders who fill gaps |
@@ -39,12 +39,12 @@ FAR.AI ended 2024 with net assets of $22.5 million, about two and a half years o
 
 ### What drives the result
 
-The result is about 18 times MIRI's and close to the Center for AI Safety's. The main reason is the quarter of its work aimed at misuse. For catastrophes the world survives, Rethink's typical misuse project cuts the deaths about 450 times more per dollar than its typical misalignment project, because in its model most of those deaths come from misuse. So the misuse quarter carries almost all of the value. Deaths of people alive now are 99% of it: those catastrophes don't take the future, and at the default 4% discount rate the future counts for only about 8 years of the long-run population anyway.
+The result is about 16 times MIRI's and close to the Center for AI Safety's. The main reason is the near-quarter of its work aimed at misuse. For catastrophes the world survives, Rethink's typical misuse project cuts the deaths about 450 times more per dollar than its typical misalignment project, because in its model most of those deaths come from misuse. So the misuse work carries almost all of the value. Deaths of people alive now are 99% of it: those catastrophes don't take the future, and at the default 4% discount rate the future counts for only about 8 years of the long-run population anyway.
 
 ### Biggest uncertainties
 
-- **How much a dollar of misuse work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.17 to 11.
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.15 to 7.8.
+- **How much a dollar of misuse work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.16 to 10.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.14 to 7.2.
 - **How much of the work is against misuse.** FAR.AI publishes no split. From 12% to 40% moves the result from 0.59 to 1.8.
 - **The years a cut counts and the discount rate.** These are shared sliders.
 
@@ -56,7 +56,7 @@ The result is about 18 times MIRI's and close to the Center for AI Safety's. The
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Machine Intelligence Research Institute's and the Center for AI Safety's models as worked examples. Independent audits are in audits/far-ai-charityevals/.
+The model was built from the catastrophic-risk template, with the Machine Intelligence Research Institute's and the Center for AI Safety's models as worked examples. Round 1 of the independent audit found that the share of misuse work rested on four highlighted papers: rebuilt from all twelve 2024 papers, the red-teaming and the grant's likely topic, it fell from 25% to 23%, lowering the result by 8%. The round also found that adding FAR.AI gave the Nuclear Threat Initiative three peers, so its summary now says why it is more than ten times them. Independent audits are in audits/far-ai-charityevals/.
 
 ### Sources
 

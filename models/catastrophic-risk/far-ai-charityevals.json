@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "far-ai",
   "owner": "charityevals",
-  "summary": "FAR.AI (Berkeley and San Diego) works to make advanced AI safe: technical research on adversarial robustness, jailbreaks and red-teaming of frontier models, a research hub and coworking space in Berkeley, the Alignment Workshops and the International Dialogues on AI Safety, and research grants. This model covers all four programmes in 2024 ($8.6M spent). At the defaults it averts about 1.2 years of healthy life per $1,000, from 0.02 to 55 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate. It is about 18 times MIRI's and close to the Center for AI Safety's because about a quarter of its work (jailbreak research and red-teaming of safeguards) is against misuse, for which Rethink's typical project cuts the deaths in catastrophes the world survives about 450 times more per dollar than misalignment work; that cut, the chance of an AI catastrophe (the slider) and the years a cut counts are the biggest swings. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "FAR.AI (Berkeley and San Diego) works to make advanced AI safe: technical research on adversarial robustness, jailbreaks and red-teaming of frontier models, a research hub and coworking space in Berkeley, the Alignment Workshops and the International Dialogues on AI Safety, and research grants. This model covers all four programmes in 2024 ($8.6M spent). At the defaults it averts about 1.1 years of healthy life per $1,000, from 0.02 to 51 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate. It is about 16 times MIRI's and close to the Center for AI Safety's because nearly a quarter of its work (jailbreak research and red-teaming of safeguards) is against misuse, for which Rethink's typical project cuts the deaths in catastrophes the world survives about 450 times more per dollar than misalignment work; that cut, the chance of an AI catastrophe (the slider) and the years a cut counts are the biggest swings. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: FAR.AI",
@@ -47,6 +47,11 @@
       "title": "Rethink Priorities, Cross-Cause Cost-Effectiveness Model (x-risk interventions)",
       "url": "https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public",
       "type": "model"
+    },
+    {
+      "title": "OpenAI, GPT-5 System Card (August 2025), section 6.3.3.4 Third party red teaming: Far.AI",
+      "url": "https://arxiv.org/abs/2601.03267",
+      "type": "study"
     }
   ],
   "sections": [
@@ -291,11 +296,17 @@
       "format": "percent",
       "value": {
         "low": 0.12,
-        "best": 0.25,
+        "best": 0.23,
         "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "The share of FAR.AI's AI spending that is work against misuse. Its 2024 research (990 Part III line 4a; the 2024 Year in Review's highlights) is about half misuse work: jailbreak-tuning and data poisoning that strip a model's refusals, the compute an attacker needs to break an LLM's defences, and red-teaming of frontier systems' safeguards; the other half (adversarial attacks on superhuman Go AIs and defences against them, how a neural network learns to plan) is about AI that doesn't do what its makers intend. So about $1.48M of research, plus perhaps a quarter of the $1.46M research grant (FAR.AI's named grantees work on adversarial machine learning and AI security), and none of the workshops, the dialogues or the hub, whose topics are mostly alignment and governance: about $1.85M of $7.52M, 25%, our judgment, 12% to 40%; FAR.AI publishes no split of its projects. Work aimed at both counts as misalignment."
+      "explainer": "The share of FAR.AI's AI spending that is work against misuse. Of its 12 papers of 2024 (far.ai/publications), two are misuse work (jailbreak-tuning and data poisoning that strip a model's refusals; how robustness against jailbreaks scales with compute); the other ten are interpretability, reward misspecification, the robustness of superhuman Go AIs and guaranteed safe AI, aimed at AI that doesn't do what its makers intend. The red-teaming of frontier systems' safeguards (990 Part III line 4a), which uses much of the $1.9M of computing, is misuse work too, so about a third of research ($0.99M). The $1.46M grant's grantee isn't named in the return; the one European project FAR.AI names among its grantees, ETH Zurich's 'Failure Modes in Superhuman Systems', covers data poisoning, model stealing and prompt injection, so about half ($0.73M). None of the workshops, the dialogues or the hub, whose topics are mostly alignment and governance. About $1.72M of $7.52M, 23%, our judgment; 12% (research by papers alone, the grant none) to 40% (research half, the grant all). Work aimed at both counts as misalignment.",
+      "source": {
+        "title": "FAR.AI publications",
+        "url": "https://www.far.ai/publications",
+        "page": "2024 entries: 12 papers",
+        "retrieved": "2026-11-14"
+      }
     },
     {
       "id": "ai_deaths_per_year",
@@ -707,7 +718,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check. for a pending bill, treaty or standard, the chance of winning from a reference class (similar measures passed or failed); for a win already in the year, 1 (then delete single_event) and the charity's share of the cause in attribution_share_shared. Name the reference class.",
+      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check.",
       "single_event": true
     },
     {
@@ -721,7 +732,7 @@
         "high": 0.05
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check. how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use) and on Rethink Priorities' cut per project (@catastrophe.<area>_catastrophe_cut_per_million × its cost). Name the anchor."
+      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check."
     },
     {
       "id": "pol_years_until_effect",
@@ -735,7 +746,7 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check. from the win to entry into force; discounted at the shared rate."
+      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check."
     },
     {
       "id": "pol_discounted_years",
@@ -820,7 +831,7 @@
         "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check. alumni in roles on these risks a year or more later (the charity's alumni survey, with response bias in mind) minus those who would have got there anyway (their plans before, a comparison group). Name the survey."
+      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check."
     },
     {
       "id": "fb_work_years",
@@ -834,7 +845,7 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check. from alumni follow-ups or the field's turnover; discounted at the shared rate."
+      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check."
     },
     {
       "id": "fb_work_dollars",
@@ -855,7 +866,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check. the employers pay for the work itself: the training's cost over training plus the employers' cost of the work-years is the anchor (credit by share of resources); name it."
+      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check."
     },
     {
       "id": "fb_deaths_per_million",
@@ -990,7 +1001,7 @@
         "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "FAR.AI's research against Rethink Priorities' typical small AI project. Above typical: its papers are accepted at the main machine-learning venues, its attacks on superhuman Go AIs and on frontier models' safeguards were taken up by the systems' developers (OpenAI reports acting on FAR.AI's red-teaming in the GPT-5 system card, 2025), and the 990 reports red-teaming engagements on frontier systems and work with government AI security initiatives in 2024. Below in how directly it acts: showing a weakness cuts the risk only once developers fix it. 1.2, our judgment, 0.4 to 2.5, as for the Center for AI Safety's research (1.2), whose benchmarks the labs use in the same way.",
+      "explainer": "FAR.AI's research against Rethink Priorities' typical small AI project. Above typical: its papers are accepted at the main machine-learning venues, its attacks on superhuman Go AIs and on frontier models' safeguards were taken up by the systems' developers (in 2025 OpenAI's GPT-5 system card reports FAR.AI's red-teaming of its safeguards and says OpenAI is acting on some of the weaknesses found; that work is 2025's, a sign of the uptake, not counted here), and the 990 reports red-teaming engagements on frontier systems and work with government AI security initiatives in 2024. Below in how directly it acts: showing a weakness cuts the risk only once developers fix it. 1.2, our judgment, 0.4 to 2.5, as for the Center for AI Safety's research (1.2), whose benchmarks the labs use in the same way.",
       "source": {
         "title": "FAR AI, Inc., Form 990 for 2024 (public copy, filed 14 November 2025)",
         "url": "https://cdn.prod.website-files.com/6a53dbc6fa4e1a57fd55a002/6a5fbf4c2b284a9f32fbbaad_FAR%20AI%20CA%20RRF-1%20and%20Form%20990%20Public%20-%2012.31.2024%20-%20FINAL_FederalOnly.pdf",
@@ -1034,7 +1045,7 @@
       "source": {
         "title": "FAR.AI 2024 Year in Review: AI Safety as a Global Public Good",
         "url": "https://www.far.ai/newsletters/2024-global-public-good",
-        "quote": "The Safe AI Forum team, which FAR.AI fiscally sponsors, organized two International Dialogues on AI Safety (IDAIS) this year.",
+        "quote": "Safe AI Forum team (fiscally sponsored by FAR.AI) organized two International Dialogues on AI Safety (IDAIS) this year",
         "retrieved": "2026-11-14"
       }
     },
@@ -1057,7 +1068,7 @@
       "label": "How far the typical project's effect applies to this charity's work",
       "format": "multiple",
       "formula": "(spend_research * research_evidence_adj + spend_hub * hub_evidence_adj + spend_events * events_evidence_adj + spend_grants * grants_evidence_adj) / program_spend",
-      "explainer": "How far Rethink Priorities' typical small AI project applies to FAR.AI's work: the four programmes weighted by their spending (990 Part III): about 0.99."
+      "explainer": "How far Rethink Priorities' typical small AI project applies to FAR.AI's work: the four programmes weighted by their spending (990 Part III): about 1.02."
     },
     {
       "id": "counterfactual_adj",
