@@ -6,9 +6,9 @@ The Centre for the Governance of AI (GovAI) researches how governments and AI co
 
 GovAI spent $11.9 million in 2025, its first full year as an independent charity: a US nonprofit with a UK subsidiary that runs its London office. The annual report gives only the total, so the split below is our estimate.
 
-- **Research and policy engagement: about three quarters.** Some 17 researchers and 15 year-long Research Scholars worked on frontier AI companies' safety frameworks, regulation of frontier AI, AI agents, threat modelling of AI-enabled attacks (bioterrorism, the power grid, cybercrime) and AI's economic effects. Others were seconded to the UK government and the OECD, and two were writers of the International AI Safety Report.
+- **Research and policy engagement: about 70%.** Some 17 researchers and 15 year-long Research Scholars worked on frontier AI companies' safety frameworks, regulation of frontier AI, AI agents, threat modelling of AI-enabled attacks (bioterrorism, the power grid, cybercrime) and AI's economic effects. Others were seconded to the UK government and the OECD, and two were writers of the International AI Safety Report.
 - **The EU Code of Practice: about 2%.** GovAI's director of policy was one of the 13 chairs and vice-chairs who drafted it. It was published in July 2025 and signed by most frontier developers.
-- **Talent development: about a quarter.** 81 Seasonal Fellows spent three months in London or Washington, chosen from 18,000 applications. About 60% of alumni hold an AI governance role a year later. The Research Scholars' year counts half here, and 16 people completed a part-time Policy Program.
+- **Talent development: about 30%.** 81 Seasonal Fellows spent three months in London or Washington, chosen from 18,000 applications. About 60% of alumni hold an AI governance role a year later. The Research Scholars' year counts half here, and 16 people completed a part-time Policy Program.
 
 The only audited accounts are the US entity's short first return for 2024 ($0.9 million). Most of that year's work ran elsewhere, so we use 2025, which the annual report covers in full.
 
