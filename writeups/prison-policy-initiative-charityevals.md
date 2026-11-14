@@ -1,6 +1,6 @@
 ### Summary
 
-Prison Policy Initiative (PPI) researches mass incarceration in the United States and campaigns with others to change it. Counting its spending over fiscal years 2021 to 2025 against a share of the wins of those years, our model comes to **<span data-figure="headline" data-model="prison-policy-initiative-charityevals">0.04</span> years of healthy life per $1,000**. Most of that comes from the federal caps on prison and jail phone rates. The figure is low for two reasons. Money saved by poor American families counts for little on a scale set by the world's poorest people. And PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the past average.
+Prison Policy Initiative (PPI) researches mass incarceration in the United States and campaigns with others to change it. Counting its spending over fiscal years 2021 to 2025 against a share of the wins of those years, our model comes to **<span data-figure="headline" data-model="prison-policy-initiative-charityevals">0.03</span> years of healthy life per $1,000**. About three quarters of that comes from the federal caps on prison and jail phone rates. The figure is low for two reasons. Money saved by poor American families counts for little on a scale set by the world's poorest people. And PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the past average.
 
 ### What the charity does
 
@@ -8,32 +8,32 @@ PPI is a team of about a dozen people in Northampton, Massachusetts. In the year
 
 ### How the impact happens
 
-The model has three branches, one for each kind of win.
+The model has four branches, one for each kind of win.
 
-- **Federal phone caps.** The Martha Wright-Reed Act of 2022 let the Federal Communications Commission (FCC) cap the price of calls made within a state. The caps the FCC set in 2024 would have saved families about $450 million a year. In 2025 the FCC raised them, and the caps now in force still save families about $200 million a year, mostly on jail calls.
-- **State free-call laws.** Connecticut, California, Minnesota, Massachusetts and Colorado made prison calls free between 2021 and 2023, together saving families about $75 million a year.
-- **Decarceration.** PPI's data and support fed the reforms of the period, which we judge keep about 50,000 people out of prison or jail. Each year out is valued at the shared life-satisfaction cost of a year inside (facts/incarceration.json, 1.2 points out of 10).
-
-Wins we don't model one by one add 30%: prison gerrymandering, fees, medical copays, video-visit bans and fights against jail expansion.
+- **Federal phone caps.** The Martha Wright-Reed Act of 2022 let the Federal Communications Commission (FCC) cap the price of calls made within a state. The caps the FCC set in 2024 would have saved families about $450 million a year. In 2025 the FCC raised them, and the caps now in force still save families about $225 million a year, mostly on jail calls.
+- **State free-call laws.** Connecticut, California, Minnesota, Massachusetts and Colorado made prison calls free between 2021 and 2023, together saving families about $78 million a year. Other money wins of the period, such as ending medical copays and fees and the FCC's 2021 cut of interstate caps, add a judged 30% to this branch.
+- **Decarceration.** PPI's data and support fed the reforms of the period, which we judge keep about 50,000 people out of prison or jail. Each year out is valued at the shared life-satisfaction cost of a year inside (facts/incarceration.json, 1.2 points out of 10). Two side effects are rows of this branch: families with a parent home add 15%, and crime by people not held takes away 10%.
+- **Prison gerrymandering.** PPI led the campaign to count incarcerated people at their home address when districts are drawn, and several states changed for the 2021 maps. We judge about 2 million people gained a fairer say, worth a very small 0.0002 life-satisfaction points a year each, with half the credit to PPI.
 
 ### How the model works
 
-The cost is PPI's average real spending over fiscal years 2021 to 2025, with management and fundraising included. Each win counts for the site's shared number of years a won reform counts, discounted for the wait until it takes effect. Only PPI's share of each campaign's resources is credited: 10% for the federal caps, 4% for the state laws (Worth Rises led those) and 0.5% for decarceration. A dollar a family saves is valued on the site's log scale at the families' low consumption, less the same dollar's value to the average American who pays instead. All three branches take the shared missing-data discount. Two side effects are rows of their own: more contact with family adds 10%, and possible cuts in phone service take away 3%.
+The cost is PPI's average real spending over fiscal years 2021 to 2025, with management and fundraising included. Each win counts for the site's shared number of years a won reform counts, discounted for the wait until it takes effect. Only PPI's share of each campaign's resources is credited: 7% for the federal caps (its spending in these five years against the coalition's over the whole campaign), 4% for the state laws (Worth Rises led those), 0.5% for decarceration and 50% for gerrymandering. A dollar a family saves is valued on the site's log scale at the families' low consumption per person. From that we subtract the same dollar's value to whoever pays instead: phone companies' owners and county budgets for the federal caps, and state taxpayers (at the shared cost of public funds) for free calls. Every branch takes the shared missing-data discount. The phone wins have two side effects as rows of their own: more contact with family adds 10%, and possible cuts in phone service take away 3%.
 
 ### What drives the result
 
-The federal caps give about four fifths of the result and the state laws most of the rest. The largest swings are the years a win counts, the missing-data discount, PPI's share of the federal campaign, PPI's next-dollar figure, and the gap between the 2024 savings estimate and the savings lost in 2025.
+The federal caps give about three quarters of the result and the state laws about a fifth. Decarceration and gerrymandering give a few percent each. The largest swings are the years a win counts, the missing-data discount, PPI's share of the federal campaign, PPI's next-dollar figure, and the 2024 savings estimate and the share of it lost in 2025.
 
 ### Biggest uncertainties
 
 - PPI's share of a phone-rate campaign many groups carried.
+- The value of fairer representation, which no study measures.
 - Whether the 2025 caps survive the court challenges, and how much providers recover through fees the caps don't reach.
 - The savings figures are advocates' and the FCC's projections, not measured bills.
 - The number of people the reforms keep out, and PPI's part in them, are both our judgments.
 
 ### What isn't modelled
 
-We don't model the value of fairer representation from ending prison gerrymandering, except within the 30% for other wins. Health in prison isn't counted separately, because it is part of the life-satisfaction gap.
+Health in prison isn't counted separately, because it is part of the life-satisfaction gap. Nor are earnings after release, for the same reason.
 
 ### How this model was checked
 

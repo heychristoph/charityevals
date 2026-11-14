@@ -3,13 +3,15 @@
   "name": "Prison Policy Initiative (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: incarcerated people and their families in the United States (federal phone caps, state free-call laws, decarceration).",
   "template": "rights-advocacy",
   "estimate_basis": "past_average",
   "charity": "prison-policy-initiative",
   "owner": "charityevals",
-  "summary": "Prison Policy Initiative is a small US research and advocacy group on mass incarceration (1.9 million dollars spent in the year to June 2025). Its spending over fiscal years 2021-2025 is counted as a past average over the wins of those years: a share of the federal caps on prison and jail phone rates that the Martha Wright-Reed Act of 2022 made possible (still saving families about 200 million dollars a year after the FCC raised the caps in 2025), a smaller share of five states' free-call laws, and a very small share of the people kept out of prison by the reforms its data fed, each valued on the site's shared scales; all three branches are discounted for missing data. The result is about 0.04 years of healthy life per 1,000 dollars, below the median of the site's global-health models: money saved by poor American families is worth little on a scale set by the world's poorest, and PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the average. The biggest uncertainties are PPI's share of the phone-rate campaign and how long the caps hold.",
+  "summary": "Prison Policy Initiative is a small US research and advocacy group on mass incarceration (1.9 million dollars spent in the year to June 2025). Its spending over fiscal years 2021-2025 is counted as a past average over the wins of those years: a share of the federal caps on prison and jail phone rates that the Martha Wright-Reed Act of 2022 made possible (still saving families about 225 million dollars a year after the FCC raised the caps in 2025), a smaller share of five states' free-call laws and other fee wins, a very small share of the people kept out of prison by the reforms its data fed, and half the credit for ending prison gerrymandering in several states, each valued on the site's shared scales; every branch is discounted for missing data. The result is about 0.03 years of healthy life per 1,000 dollars, below the median of the site's global-health models: money saved by poor American families is worth little on a scale set by the world's poorest, and PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the average. The biggest uncertainties are PPI's share of the phone-rate campaign and how long the caps hold.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Prison Policy Initiative",
@@ -47,6 +49,21 @@
       "type": "other",
       "title": "Prison Policy Initiative, FCC votes to slash prison and jail calling rates and ban corporate kickbacks (18 July 2024, updated 2025)",
       "url": "https://www.prisonpolicy.org/blog/2024/07/18/fcc-vote/"
+    },
+    {
+      "type": "other",
+      "title": "Truthout, Free phone calls saved incarcerated people and their loved ones $622.5 million (on Worth Rises, Critical Connections: The Power of Free Communication in Prisons and Jails, 2026)",
+      "url": "https://truthout.org/articles/free-phone-calls-saved-incarcerated-people-and-their-loved-ones-622-5-million/"
+    },
+    {
+      "type": "other",
+      "title": "Worth Rises, Massachusetts free phone calls (press release)",
+      "url": "https://worthrises.org/pressreleases/massachusetts-free-phone-calls"
+    },
+    {
+      "type": "other",
+      "title": "ABA Journal (AP), FCC slashes cost of phone calls for inmates, capping decades-long effort (July 2024)",
+      "url": "https://abajournal.com/syndicated/article/fcc-slashes-cost-of-phone-calls-for-inmates-capping-decades-long-effort"
     }
   ],
   "sections": [
@@ -237,25 +254,52 @@
       "section": "effect",
       "label": "Consumption per person in families of incarcerated people (US$ a year)",
       "format": "usd",
-      "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024",
-      "explainer": "People in prison and their families are mostly poor: the shared US consumer expenditure per person times the lowest fifth's share, the same shared figures the site's US models use."
+      "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile",
+      "explainer": "People in prison and their families are mostly poor: the shared US survey consumption per person times the poorest fifth's spending share, which is per household, turned into per person with the shared household sizes (the poorest fifth's households are smaller), as the site's other US models do."
     },
     {
-      "id": "payer_consumption",
+      "id": "fed_payer_multiple",
       "section": "effect",
-      "label": "Consumption per person of those who pay instead (US$ a year)",
-      "format": "usd",
-      "formula": "@united_states.ce_expenditure_per_person_2024",
-      "explainer": "Lower phone bills are paid for by the phone companies' owners, the prisons and jails that lose commissions, and (for free calls) state taxpayers: the average American, the shared figure."
+      "label": "Federal caps: payers' consumption as a multiple of the national average",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 1.5,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Lower federal caps are paid for by the phone companies (mostly owned by private-equity funds, whose owners are well off) and by the prisons and jails that lose commissions (county and state budgets, paid by taxpayers at about the average). A multiple of 1 is the average American by the national accounts: 1.5, from 1 to 3."
     },
     {
-      "id": "uov_per_dollar_saved",
+      "id": "st_payer_multiple",
       "section": "effect",
-      "label": "Value of a dollar families save, net of what the payers lose (units of value)",
+      "label": "State laws: taxpayers' consumption as a multiple of the national average",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 1.1,
+        "high": 1.4
+      },
+      "kind": "judgment",
+      "explainer": "Free calls are paid from state budgets. State taxes are less progressive than federal ones (the site's federal figure is 1.4, @public_funds.us_federal_payer_multiple): 1.1, from 1 to 1.4."
+    },
+    {
+      "id": "fed_uov_per_dollar",
+      "section": "effect",
+      "label": "Federal caps: value of a dollar families save, net of what the payers lose (units of value)",
       "format": "small",
-      "formula": "$uov_per_ln_consumption * (1 / family_consumption - 1 / payer_consumption)",
+      "formula": "$uov_per_ln_consumption * (1 / family_consumption - 1 / (fed_payer_multiple * @united_states.consumption_per_person_2024))",
       "unit": "UoV / $",
-      "explainer": "On the site's log scale a small change in consumption is worth the dollars over consumption per person (spread over a household, household size cancels): the families' gain less the payers' loss, so a transfer counts only for going to poorer people."
+      "explainer": "On the site's log scale a small change in consumption is worth the dollars over consumption per person (spread over a household, household size cancels): the families' gain less the payers' loss, the payers at the national-accounts mean (the site's rule for everyone's consumption) times their multiple."
+    },
+    {
+      "id": "st_uov_per_dollar",
+      "section": "effect",
+      "label": "State laws: value of a dollar families save, net of the taxpayers' cost (units of value)",
+      "format": "small",
+      "formula": "$uov_per_ln_consumption * (1 / family_consumption - @public_funds.mcpf / (st_payer_multiple * @united_states.consumption_per_person_2024))",
+      "unit": "UoV / $",
+      "explainer": "As above, with the taxpayers' dollar raised at the shared marginal cost of public funds (@public_funds.mcpf)."
     },
     {
       "id": "fed_savings_2024_order",
@@ -278,14 +322,14 @@
       "explainer": "The FCC's July 2024 order under the Martha Wright-Reed Act (2022), which for the first time covered calls within a state: advocates put the savings at at least $500 million a year, the FCC's draft at $386 million. Our estimate 450 million, from 386 to 550 million."
     },
     {
-      "id": "fed_savings_lost_2025",
+      "id": "fed_share_lost_2025",
       "section": "reach",
-      "label": "Yearly savings lost when the FCC raised the caps in October 2025",
-      "format": "usd",
+      "label": "Share of the 2024 caps' savings lost when the FCC raised the caps in October 2025",
+      "format": "percent",
       "value": {
-        "low": 215000000,
-        "best": 250000000,
-        "high": 320000000
+        "low": 0.43,
+        "best": 0.5,
+        "high": 0.6
       },
       "kind": "estimate",
       "source": {
@@ -295,15 +339,15 @@
         "page": "press release",
         "quote": "will deliver substantially less financial relief to families impacted by incarceration — at least $215 million less per year"
       },
-      "explainer": "The interim caps of October 2025 (11 cents a minute at most prisons, 10 to 19 cents at jails, in effect from 5 December 2025 and to be met by 6 April 2026, Prison Legal News, February 2026) are higher than the 2024 caps but still cap in-state jail calls that had cost up to 76 cents a minute. At least 215 million a year less relief; our estimate 250 million, from 215 to 320 million."
+      "explainer": "The interim caps of October 2025 (11 cents a minute at most prisons, 10 to 19 cents at jails, in effect from 5 December 2025 and to be met by 6 April 2026, Prison Legal News) are higher than the 2024 caps but still cap in-state jail calls that had cost up to 11.35 dollars for 15 minutes at some large jails (ABA Journal, July 2024). Worth Rises puts the relief lost at at least 215 million of its at least 500 million (43%); the share is taken from that one frame and applied to our total: 50%, from 43% to 60%."
     },
     {
       "id": "fed_savings_per_year",
       "section": "reach",
       "label": "Yearly savings to families under the caps in force",
       "format": "usd",
-      "formula": "fed_savings_2024_order - fed_savings_lost_2025",
-      "explainer": "What the federal win still saves families each year: mostly in jails, since 94% of prisons already charge less than the new caps (Prison Legal News)."
+      "formula": "fed_savings_2024_order * (1 - fed_share_lost_2025)",
+      "explainer": "What the federal win still saves families each year: mostly in jails, since 94% of prisons already charge less than the new caps (Prison Legal News). The FCC's 2021 interim cut of interstate caps (to 12 and 14 cents) came before this baseline and is counted with the other money wins below."
     },
     {
       "id": "fed_years_until_effect",
@@ -341,7 +385,7 @@
       "section": "effect",
       "label": "Federal caps: value per campaign year, before adjustments (units of value)",
       "format": "number",
-      "formula": "fed_savings_per_year * uov_per_dollar_saved * fed_discounted_years / campaign_years",
+      "formula": "fed_savings_per_year * fed_uov_per_dollar * fed_discounted_years / campaign_years",
       "unit": "UoV"
     },
     {
@@ -376,13 +420,13 @@
       },
       "kind": "estimate",
       "source": {
-        "title": "Worth Rises, Recent wins and news",
-        "url": "https://worthrises.org/recentvictories",
+        "title": "Worth Rises, Massachusetts free phone calls (press release)",
+        "url": "https://worthrises.org/pressreleases/massachusetts-free-phone-calls",
         "retrieved": "2026-11-14",
-        "page": "Massachusetts",
-        "quote": "will save incarcerated people and their families in Massachusetts over $14 million annually"
+        "page": "press release",
+        "quote": "save Massachusetts families over $25 million annually"
       },
-      "explainer": "Free calls in state prisons and county jails from December 2023. Worth Rises gives 14 million here and over 25 million elsewhere; 19 million, from 14 to 25 million."
+      "explainer": "Free calls in state prisons and county jails from December 2023. Worth Rises gives over 25 million in its press release and over 14 million on its list of wins; 19 million, the middle, from 14 to 25 million."
     },
     {
       "id": "st_mn",
@@ -410,12 +454,12 @@
       "label": "Connecticut: yearly savings from free prison calls (law of 2021)",
       "format": "usd",
       "value": {
-        "low": 6000000,
-        "best": 12000000,
+        "low": 8000000,
+        "best": 15000000,
         "high": 18000000
       },
       "kind": "judgment",
-      "explainer": "The first state law (2021; at least 90 minutes a person a day, free from 2022). No published total: Worth Rises' 2026 report puts Connecticut's savings at 1,801 dollars a person a year, and Connecticut holds about 6,000 to 10,000 people in its unified prison and jail system; 12 million, from 6 to 18 million."
+      "explainer": "The first state law (2021; at least 90 minutes a person a day). No published total: Worth Rises' 2026 report finds free calls save 172 to 1,801 dollars per incarcerated person a year (Truthout), the top figure reported as Connecticut's, and Connecticut holds roughly 8,000 to 10,000 people in its unified prison and jail system: 15 million, from 8 to 18 million."
     },
     {
       "id": "st_co",
@@ -428,7 +472,7 @@
         "high": 10000000
       },
       "kind": "judgment",
-      "explainer": "Free calls in state prisons, phased in until July 2025; no published total. About 17,000 people in prison at 172 to 600 dollars each a year (the low end and middle of the range in Worth Rises' 2026 report): 6 million, from 2 to 10 million."
+      "explainer": "Free calls in state prisons, phased in until July 2025; no published total. About 17,000 people in prison at 172 to 600 dollars each a year (the low end and the lower part of the range in Worth Rises' 2026 report, Truthout): 6 million, from 2 to 10 million."
     },
     {
       "id": "st_savings_per_year",
@@ -436,7 +480,27 @@
       "label": "Yearly savings from the state free-call laws of 2021-2023",
       "format": "usd",
       "formula": "st_ca + st_ma + st_mn + st_ct + st_co",
-      "explainer": "The five state laws passed in the period; New York's (July 2025) came after it and isn't counted."
+      "explainer": "The five state laws passed in the period; New York's (July 2025) came after it and isn't counted. The state branch also carries the other money wins (fee_savings_per_year)."
+    },
+    {
+      "id": "fee_wins_ratio",
+      "section": "reach",
+      "label": "Other money wins for the same families, as a share of the state laws' savings",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Wins of the period that also leave money with incarcerated people and their families, on which PPI published and testified: states ending medical copays in prison, limits on release-card and commissary fees, bans on replacing in-person visits with paid video calls, and the FCC's 2021 interim cut of interstate caps. No total is published; together our judgment 30% of the state free-call laws' savings, from 10% to 100%. Credited, valued and adjusted as the state laws are."
+    },
+    {
+      "id": "fee_savings_per_year",
+      "section": "reach",
+      "label": "Yearly savings from the other money wins",
+      "format": "usd",
+      "formula": "st_savings_per_year * fee_wins_ratio"
     },
     {
       "id": "st_years_until_effect",
@@ -463,9 +527,9 @@
     {
       "id": "st_value_per_year",
       "section": "effect",
-      "label": "State laws: value per campaign year, before adjustments (units of value)",
+      "label": "State laws and other money wins: value per campaign year, before adjustments (units of value)",
       "format": "number",
-      "formula": "st_savings_per_year * uov_per_dollar_saved * st_discounted_years / campaign_years",
+      "formula": "(st_savings_per_year + fee_savings_per_year) * st_uov_per_dollar * st_discounted_years / campaign_years",
       "unit": "UoV"
     },
     {
@@ -479,7 +543,7 @@
         "high": 150000
       },
       "kind": "judgment",
-      "explainer": "PPI supplies the data behind bail, sentencing, parole and jail-expansion fights and gave technical support to advocates in 24 states (audit note 1). The country held nearly 2 million people in 2025, about 13% below the pre-pandemic level (The Whole Pie 2025), much of the fall from the pandemic itself and some refilled since. Our judgment: the reforms won in the period keep 50,000 people out, from 10,000 to 150,000."
+      "explainer": "PPI supplies the data behind bail, sentencing, parole and jail-expansion fights and gave technical support to advocates in 24 states (audit note 1). The country held nearly 2 million people in 2025, about 13% below the pre-pandemic level (The Whole Pie 2025), much of the fall from the pandemic itself and some refilled since. Local fights against jail expansion count here too. Our judgment: the reforms won in the period keep 50,000 people out, from 10,000 to 150,000."
     },
     {
       "id": "ls_gain_per_person_year",
@@ -521,6 +585,63 @@
       "unit": "WELLBYs"
     },
     {
+      "id": "ger_people",
+      "section": "reach",
+      "label": "People in the communities whose representation the end of prison gerrymandering restored",
+      "format": "integer",
+      "value": {
+        "low": 500000,
+        "best": 2000000,
+        "high": 5000000
+      },
+      "kind": "judgment",
+      "explainer": "Counting incarcerated people at their home address for redistricting, a change PPI's campaign has won in more than a dozen states, several of them for the 2021 redistricting in this period. It moves representation back to the (mostly poor, mostly urban) neighbourhoods people in prison come from; our judgment of the people in districts whose weight changed noticeably: 2 million, from 0.5 to 5 million."
+    },
+    {
+      "id": "ger_ls_gain",
+      "section": "effect",
+      "label": "Wellbeing gained per person a year from fairer representation (points, 0-10)",
+      "format": "small",
+      "value": {
+        "low": 0,
+        "best": 0.0002,
+        "high": 0.001
+      },
+      "kind": "judgment",
+      "unit": "points",
+      "explainer": "No study measures it: equal representation is a right whose effect on lives runs through a slightly larger say in budgets and laws. Our judgment a very small 0.0002 points a year, from 0 to 0.001."
+    },
+    {
+      "id": "ger_years_until_effect",
+      "section": "effect",
+      "label": "Years from the change until districts are redrawn",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "The changes apply at the next redistricting: those of the period took effect with the 2021-2022 maps, about a year: 1, from 0 to 3."
+    },
+    {
+      "id": "ger_discounted_years",
+      "section": "effect",
+      "label": "Gerrymandering: discounted years of impact",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ (0 - ger_years_until_effect)",
+      "unit": "years"
+    },
+    {
+      "id": "ger_value_per_year",
+      "section": "effect",
+      "label": "Gerrymandering: WELLBYs per campaign year, before adjustments",
+      "format": "number",
+      "formula": "ger_people * ger_ls_gain * ger_discounted_years / campaign_years",
+      "unit": "WELLBYs"
+    },
+    {
       "id": "people_affected_per_year",
       "section": "reach",
       "label": "People per year the reforms keep out of prison or jail",
@@ -533,48 +654,24 @@
       "section": "effect",
       "label": "Health gained per person affected per year (DALYs)",
       "format": "small",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Policy Initiative, Mass Incarceration: The Whole Pie 2025 (11 March 2025)",
-        "url": "https://www.prisonpolicy.org/reports/pie2025.html",
-        "retrieved": "2026-11-14",
-        "page": "body",
-        "quote": "the nearly 2 million people incarcerated"
-      },
-      "explainer": "Not counted separately: health in prison (and outside it) is part of the life-satisfaction gap above, so counting it again would double it."
+      "explainer": "Not counted separately: health in prison (and outside it) is part of the life-satisfaction gap above, so counting it again would double it.",
+      "formula": "0"
     },
     {
       "id": "ln_gain_per_person_year",
       "section": "effect",
       "label": "Income gained per person affected per year, ln(consumption)",
       "format": "small",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Policy Initiative, Mass Incarceration: The Whole Pie 2025 (11 March 2025)",
-        "url": "https://www.prisonpolicy.org/reports/pie2025.html",
-        "retrieved": "2026-11-14",
-        "page": "body",
-        "quote": "the nearly 2 million people incarcerated"
-      },
-      "explainer": "Zero: income is not counted for the people kept out (earnings after release are part of what the life-satisfaction gap measures), and the phone branches' money is valued per dollar in uov_per_dollar_saved."
+      "explainer": "Zero: income is not counted for the people kept out (earnings after release are part of what the life-satisfaction gap measures); the money branches are valued per dollar in fed_uov_per_dollar and st_uov_per_dollar.",
+      "formula": "0"
     },
     {
       "id": "p_success",
       "section": "effect",
       "label": "Probability the win happens because of this work",
       "format": "percent",
-      "value": 1,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Legal News, FCC releases final version of order gutting 2024 phone cap regulations (1 February 2026)",
-        "url": "https://www.prisonlegalnews.org/news/2026/feb/1/fcc-releases-final-version-order-gutting-2024-phone-cap-regulations/",
-        "retrieved": "2026-11-14",
-        "page": "body",
-        "quote": "went into effect on December 5"
-      },
-      "explainer": "Every win counted here is in: the caps are in force and the state laws passed. PPI's part in them is its share of the coalitions' resources (attribution_share below), one question, not two."
+      "explainer": "Every win counted here is in: the caps are in force and the state laws passed. PPI's part in them is its share of the coalitions' resources (attribution_share below), one question, not two.",
+      "formula": "1"
     },
     {
       "id": "years_until_effect",
@@ -583,7 +680,7 @@
       "format": "number",
       "unit": "years",
       "formula": "(fed_value_per_year * fed_years_until_effect + st_value_per_year * st_years_until_effect) / (fed_value_per_year + st_value_per_year)",
-      "explainer": "Outcome-weighted average of the two phone branches, for reading only (the decarceration branch, in WELLBYs and about 3% of the result, has its own wait row)."
+      "explainer": "Outcome-weighted average of the two phone branches, for reading only (the WELLBY branches have their own wait rows)."
     },
     {
       "id": "wait_discount",
@@ -606,33 +703,17 @@
       "section": "reach",
       "label": "People released, cleared or kept out of detention in the year",
       "format": "integer",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Policy Initiative, Inc., Independent Auditor's Report and Financial Statements, June 30, 2025 and 2024 (audited, Metwally CPA PLLC)",
-        "url": "https://static.prisonpolicy.org/financials/PPI_financials_2025.pdf",
-        "retrieved": "2026-11-14",
-        "page": "note 1",
-        "quote": "Our work is a unique combination of research, advocacy, and organizing"
-      },
-      "explainer": "PPI does no casework: nobody is freed by its own lawyers. People kept out by reforms are in the decarceration branch."
+      "explainer": "PPI does no casework: nobody is freed by its own lawyers. People kept out by reforms are in the decarceration branch.",
+      "formula": "0"
     },
     {
       "id": "released_years",
       "section": "effect",
       "label": "Years of freedom gained per person released",
       "format": "number",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Policy Initiative, Inc., Independent Auditor's Report and Financial Statements, June 30, 2025 and 2024 (audited, Metwally CPA PLLC)",
-        "url": "https://static.prisonpolicy.org/financials/PPI_financials_2025.pdf",
-        "retrieved": "2026-11-14",
-        "page": "note 1",
-        "quote": "Our work is a unique combination of research, advocacy, and organizing"
-      },
       "unit": "years",
-      "explainer": "No casework (above)."
+      "explainer": "No casework (above).",
+      "formula": "0"
     },
     {
       "id": "released_ls_gain_per_year",
@@ -654,7 +735,7 @@
     {
       "id": "fed_evidence_adj",
       "section": "adjustments",
-      "label": "Federal and state savings: evidence adjustment",
+      "label": "Federal caps: evidence adjustment",
       "format": "multiple",
       "value": {
         "low": 0.6,
@@ -662,23 +743,28 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The savings are advocates' and the FCC's projections, not measured bills, and providers may make up some revenue through fees the caps don't reach: 0.85, from 0.6 to 1 (the value of a dollar moved is mechanical)."
+      "explainer": "The savings are advocates' and the FCC's projections, not measured bills: 0.85, from 0.6 to 1 (the value of a dollar saved is mechanical)."
+    },
+    {
+      "id": "st_evidence_adj",
+      "section": "adjustments",
+      "label": "State laws: evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.6,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The savings are advocates' projections from what families paid before the laws, not measured: 0.85, from 0.6 to 1, as for the federal caps."
     },
     {
       "id": "fed_counterfactual_adj",
       "section": "adjustments",
       "label": "Federal caps: share that wouldn't have happened anyway",
       "format": "percent",
-      "value": 1,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Policy Initiative, FCC votes to slash prison and jail calling rates and ban corporate kickbacks (18 July 2024, updated 2025)",
-        "url": "https://www.prisonpolicy.org/blog/2024/07/18/fcc-vote/",
-        "retrieved": "2026-11-14",
-        "page": "body",
-        "quote": "the order delivers on the promise of the Martha Wright-Reed Act"
-      },
-      "explainer": "1: that the caps would have come some day is in the years a win counts (Convention 5, one question each)."
+      "explainer": "1: that the caps would have come some day is in the years a win counts (Convention 5, one question each).",
+      "formula": "1"
     },
     {
       "id": "fed_attribution_share",
@@ -686,12 +772,12 @@
       "label": "Federal caps: PPI's share of the campaign's resources",
       "format": "percent",
       "value": {
-        "low": 0.04,
-        "best": 0.1,
-        "high": 0.25
+        "low": 0.03,
+        "best": 0.07,
+        "high": 0.18
       },
       "kind": "judgment",
-      "explainer": "PPI has campaigned on prison phone rates for two decades (its reports on fees in 2013, video calling in 2015 and the State of Phone Justice in 2019 and 2022, cited in the FCC's proceedings); the Wright petitioners' lawyers, Worth Rises, the United Church of Christ's media justice ministry, Color of Change and others carried the Act and the rulemaking. PPI spends perhaps a fifth of its 1.6 million a year on the issue against a few million across the coalition: 10%, from 4% to 25%."
+      "explainer": "PPI has campaigned on prison phone rates for two decades (its reports on fees in 2013, video calling in 2015 and the State of Phone Justice in 2019 and 2022, cited in the FCC's proceedings); the Wright petitioners' lawyers, Worth Rises, the United Church of Christ's media justice ministry, Color of Change and others carried the Act and the rulemaking. PPI spends perhaps a fifth of its 1.6 million a year on the issue against a few million a year across the coalition. The share is PPI's resources in fiscal years 2021-2025 (the cost counted here) over the coalition's over the whole campaign that won the Act and the caps (from about 2017), since PPI's earlier spending isn't in the cost: 7%, from 3% to 18%."
     },
     {
       "id": "fed_implementation_adj",
@@ -704,23 +790,15 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Providers must comply by April 2026 and the order is under review in the courts of appeals; past caps were mostly obeyed but contested: 0.85, from 0.6 to 1."
+      "explainer": "Providers must comply by April 2026; the caps are interim and may be challenged or changed, and providers may recover some revenue through charges the caps don't reach; past caps were mostly obeyed: 0.85, from 0.6 to 1."
     },
     {
       "id": "st_counterfactual_adj",
       "section": "adjustments",
       "label": "State laws: share that wouldn't have happened anyway",
       "format": "percent",
-      "value": 1,
-      "kind": "observed",
-      "source": {
-        "title": "Worth Rises, Recent wins and news",
-        "url": "https://worthrises.org/recentvictories",
-        "retrieved": "2026-11-14",
-        "page": "California",
-        "quote": "save families more than $33 million, annually"
-      },
-      "explainer": "1: that the laws would have come some day is in the years a win counts (Convention 5)."
+      "explainer": "1: that the laws would have come some day is in the years a win counts (Convention 5).",
+      "formula": "1"
     },
     {
       "id": "st_attribution_share",
@@ -766,16 +844,8 @@
       "section": "adjustments",
       "label": "Decarceration: share that wouldn't have happened anyway",
       "format": "percent",
-      "value": 1,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Policy Initiative, Mass Incarceration: The Whole Pie 2025 (11 March 2025)",
-        "url": "https://www.prisonpolicy.org/reports/pie2025.html",
-        "retrieved": "2026-11-14",
-        "page": "body",
-        "quote": "the nearly 2 million people incarcerated"
-      },
-      "explainer": "1: the people count is the reforms' effect, and that they would have come some day is in the years a win counts (Convention 5)."
+      "explainer": "1: the people count is the reforms' effect, and that they would have come some day is in the years a win counts (Convention 5).",
+      "formula": "1"
     },
     {
       "id": "dec_attribution_share",
@@ -795,16 +865,8 @@
       "section": "adjustments",
       "label": "Decarceration: share of the reforms applied",
       "format": "percent",
-      "value": 1,
-      "kind": "observed",
-      "source": {
-        "title": "Prison Policy Initiative, Mass Incarceration: The Whole Pie 2025 (11 March 2025)",
-        "url": "https://www.prisonpolicy.org/reports/pie2025.html",
-        "retrieved": "2026-11-14",
-        "page": "body",
-        "quote": "the nearly 2 million people incarcerated"
-      },
-      "explainer": "1: the judged count is of people actually kept out, so enforcement is already in it."
+      "explainer": "1: the judged count is of people actually kept out, so enforcement is already in it.",
+      "formula": "1"
     },
     {
       "id": "fed_missing_data_adj",
@@ -842,7 +904,7 @@
       "section": "adjustments",
       "label": "State laws: all adjustments combined",
       "format": "multiple",
-      "formula": "fed_evidence_adj * st_counterfactual_adj * st_attribution_share * st_implementation_adj * st_missing_data_adj"
+      "formula": "st_evidence_adj * st_counterfactual_adj * st_attribution_share * st_implementation_adj * st_missing_data_adj"
     },
     {
       "id": "dec_total_adj",
@@ -852,12 +914,69 @@
       "formula": "dec_evidence_adj * dec_counterfactual_adj * dec_attribution_share * dec_implementation_adj * dec_missing_data_adj"
     },
     {
+      "id": "ger_attribution_share",
+      "section": "adjustments",
+      "label": "Gerrymandering: PPI's share of the campaign's resources",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "PPI started and led the national campaign (its Prisoners of the Census project) and drafted model bills; state groups and legislators carried them: 50%, from 30% to 80%."
+    },
+    {
+      "id": "ger_missing_data_adj",
+      "section": "adjustments",
+      "label": "Gerrymandering: counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: the people affected and the value of representation are our judgments. The shared missing-data step applies."
+    },
+    {
+      "id": "ger_total_adj",
+      "section": "adjustments",
+      "label": "Gerrymandering: all adjustments combined",
+      "format": "multiple",
+      "formula": "ger_attribution_share * ger_missing_data_adj",
+      "explainer": "PPI's share and the missing-data step; the counterfactual is in the years a win counts and the effect is a judgment, so no evidence or enforcement step beyond it."
+    },
+    {
+      "id": "ue_dec_family",
+      "section": "adjustments",
+      "label": "Side effect of decarceration: families and children with a parent home, as a share of the branch",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.15,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "side_effect": "added",
+      "explainer": "Children and partners of people kept out of prison are spared separation and lost income; studies of parental incarceration find harm to children's wellbeing and schooling: 15% of the branch's value, from 0 to 40%."
+    },
+    {
+      "id": "ue_dec_crime",
+      "section": "adjustments",
+      "label": "Side effect of decarceration: crime by people not held, as a share of the branch",
+      "format": "percent",
+      "value": {
+        "low": -0.3,
+        "best": -0.1,
+        "high": 0
+      },
+      "kind": "judgment",
+      "side_effect": "added",
+      "explainer": "Some people not held commit crimes they would not have committed inside; studies of bail and sentencing reforms mostly find small or no rises in crime: -10% of the branch's value, from -30% to 0."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average)",
       "format": "multiple",
-      "formula": "(fed_value_per_year * fed_evidence_adj + st_value_per_year * fed_evidence_adj) / (fed_value_per_year + st_value_per_year)",
-      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration branch, in WELLBYs and about 3% of the result, has its own row and is left out so the average needs no exchange rate)."
+      "formula": "(fed_value_per_year * fed_evidence_adj + st_value_per_year * st_evidence_adj) / (fed_value_per_year + st_value_per_year)",
+      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration and gerrymandering branches, in WELLBYs and a few percent of the result, have their own rows and are left out so the average needs no exchange rate)."
     },
     {
       "id": "counterfactual_adj",
@@ -865,7 +984,7 @@
       "label": "Share that wouldn't have happened anyway (outcome-weighted average)",
       "format": "percent",
       "formula": "(fed_value_per_year * fed_counterfactual_adj + st_value_per_year * st_counterfactual_adj) / (fed_value_per_year + st_value_per_year)",
-      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration branch, in WELLBYs and about 3% of the result, has its own row and is left out so the average needs no exchange rate)."
+      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration and gerrymandering branches, in WELLBYs and a few percent of the result, have their own rows and are left out so the average needs no exchange rate)."
     },
     {
       "id": "attribution_share_shared",
@@ -873,7 +992,7 @@
       "label": "PPI's share of the resources behind the outcome (outcome-weighted average)",
       "format": "percent",
       "formula": "(fed_value_per_year * fed_attribution_share + st_value_per_year * st_attribution_share) / (fed_value_per_year + st_value_per_year)",
-      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration branch, in WELLBYs and about 3% of the result, has its own row and is left out so the average needs no exchange rate)."
+      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration and gerrymandering branches, in WELLBYs and a few percent of the result, have their own rows and are left out so the average needs no exchange rate)."
     },
     {
       "id": "attribution_share",
@@ -889,7 +1008,7 @@
       "label": "Share of the win that is enforced (outcome-weighted average)",
       "format": "percent",
       "formula": "(fed_value_per_year * fed_implementation_adj + st_value_per_year * st_implementation_adj) / (fed_value_per_year + st_value_per_year)",
-      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration branch, in WELLBYs and about 3% of the result, has its own row and is left out so the average needs no exchange rate)."
+      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration and gerrymandering branches, in WELLBYs and a few percent of the result, have their own rows and are left out so the average needs no exchange rate)."
     },
     {
       "id": "missing_data_adj",
@@ -897,7 +1016,7 @@
       "label": "Counted less where the outcome isn't measured (outcome-weighted average)",
       "format": "percent",
       "formula": "(fed_value_per_year * fed_missing_data_adj + st_value_per_year * st_missing_data_adj) / (fed_value_per_year + st_value_per_year)",
-      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration branch, in WELLBYs and about 3% of the result, has its own row and is left out so the average needs no exchange rate)."
+      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration and gerrymandering branches, in WELLBYs and a few percent of the result, have their own rows and are left out so the average needs no exchange rate)."
     },
     {
       "id": "total_adj",
@@ -905,20 +1024,7 @@
       "label": "All adjustments combined (outcome-weighted average)",
       "format": "multiple",
       "formula": "(fed_value_per_year * fed_total_adj + st_value_per_year * st_total_adj) / (fed_value_per_year + st_value_per_year)",
-      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration branch, in WELLBYs and about 3% of the result, has its own row and is left out so the average needs no exchange rate)."
-    },
-    {
-      "id": "other_wins_ratio",
-      "section": "adjustments",
-      "label": "Wins not modelled one by one, as a share of the modelled wins",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.3,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "PPI's campaign against prison gerrymandering (states counting incarcerated people at home for redistricting, a change in more than a dozen states, several in the period), its work against medical copays, release-card and other fees, bans on replacing in-person visits with paid video calls, and local fights against jail expansion. Each is smaller per person than the phone and decarceration wins or hard to value (representation): together 30% of the modelled value, from 0 to 100%."
+      "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration and gerrymandering branches, in WELLBYs and a few percent of the result, have their own rows and are left out so the average needs no exchange rate)."
     },
     {
       "id": "ue_family_contact",
@@ -954,7 +1060,7 @@
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "formula": "ue_family_contact + ue_service_cuts",
-      "explainer": "The sum of the two side effects above."
+      "explainer": "The sum of the two side effects of the phone wins above (the decarceration branch's own side effects are applied in it)."
     },
     {
       "id": "fed_uov",
@@ -985,9 +1091,9 @@
       "section": "bridges",
       "label": "Families' money saved, in GiveWell units of value (after adjustments)",
       "format": "number",
-      "formula": "(fed_uov + st_uov) * (1 + other_wins_ratio) + people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years",
+      "formula": "fed_uov + st_uov + people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years",
       "unit": "UoV",
-      "explainer": "The two phone branches after their adjustments, plus the wins not modelled one by one; the template's income term for the people kept out is zero (ln_gain_per_person_year)."
+      "explainer": "The two money branches after their adjustments; the template's income term for the people kept out is zero (ln_gain_per_person_year)."
     },
     {
       "id": "dalys_from_uov",
@@ -1003,8 +1109,9 @@
       "section": "bridges",
       "label": "Wellbeing gained, in wellbeing-adjusted life years (after adjustments)",
       "format": "number",
-      "formula": "dec_wellbys * (1 + other_wins_ratio) + released_people * released_value",
-      "unit": "WELLBYs"
+      "formula": "dec_wellbys * (1 + ue_dec_family + ue_dec_crime) + ger_value_per_year * ger_total_adj + released_people * released_value",
+      "unit": "WELLBYs",
+      "explainer": "Decarceration with its two side effects, and the end of prison gerrymandering, after their adjustments."
     },
     {
       "id": "dalys_from_wellby",
