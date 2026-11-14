@@ -1,8 +1,7 @@
 # catastrophic-risk (uov, DALYs → daly; past_average)
 
-Charities against global catastrophes: AI (safety research, evaluations, governance), pandemics
-(biosecurity, DNA synthesis screening, preparedness) and nuclear war (arms control, materials security,
-resilience such as food after a nuclear winter). One model covers several areas; a regrantor is
+Charities against global catastrophes: AI, pandemics (biosecurity, DNA synthesis screening) and nuclear war
+(arms control, materials security, resilience). One model covers several areas; a regrantor is
 policy-research-meta's money moved, read live.
 
 ## The chain
@@ -16,7 +15,8 @@ field work     cost_total × <a>_cost_share / 1e6 × <a>_deaths_per_million (and
 policy win     pol_wins × pol_p_success (single_event) × pol_relative_cut × the area's yearly deaths
 field-building fb_people × fb_share_working × work-years × @catastrophe.cost_per_work_year → dollars
                of typical work × fb_credit_share
-deaths         deaths_averted × value_per_death (world age split, × $life_value_multiplier)
+deaths         deaths_averted × value_per_death (world age split, × $life_value_multiplier);
+               the COVID-scale part (covid_scale_deaths_averted) × covid_value_per_death (COVID's age mix)
                × (1 + @catastrophe.nondeath_losses_vs_deaths)  → uov_bridged → dalys_from_uov
 future         extinction cut × future_dalys_if_extinct (long-run population × future_years_per_person)
 (sum) × total_adj × (1 + benefits + harms) ÷ cost_total × marginal_vs_past_average
@@ -27,19 +27,21 @@ Why this shape:
 - **Sizes, not one risk.** A catastrophe the world survives kills a share of people, valued like any
   deaths. Only extinction-level ones take the future: people not yet born, counted through the one
   discount rate (`future_years_per_person`). People alive now count as deaths, never twice.
+- **Whose ages.** A COVID-scale pandemic (the smaller size) kills mostly older people: COVID's age mix
+  (`@death_ages.covid_scale_*`, as in every model that counts one). A catastrophe that kills a share of the
+  world, or ends it, is not selective by age: the world's.
 - **A typical dollar, then this charity.** The cut per dollar is Rethink Priorities' typical project per
   area, its backfire step included. The charity enters through its spending and `evidence_adj`: how far
-  its outputs (evaluations labs run, standards adopted) beat or trail a typical project. No free-hand
-  multiplier on the field.
+  its outputs beat or trail a typical project. No free-hand multiplier.
 - **AI: misuse or misalignment.** `ai_misuse_cost_share` (default 0) is the AI spending aimed at misuse:
   bio, cyber and chemical uplift evaluations, unlearning, refusal and robustness work against misuse. It
   takes the `ai_misuse_` cuts; the rest, and work aimed at both, the misalignment ones.
 - **Specific outcomes** (a treaty, law, standard, institution launched) go in the policy branch, with
   their spending left out of the areas' shares (`cost_shares_total` must be 1). People trained go in
-  field-building, valued at their work's typical dollar, the training credited only its share.
+  field-building, at their work's typical dollar, the training credited its share.
 - **Years.** Every cut counts `$win_years_counted` years (normalization.md 2.9), not Rethink's 15–25,
   the wait discounted; that someone else would do the work now is `counterfactual_adj`.
-- **Basis.** `past_average`, reading `@next_dollar.<id>` (normalization.md 2.10; write it if missing).
+- **Basis.** `past_average`, reading `@next_dollar.<id>` (normalization.md 2.10).
 
 ## Shared figures (facts/catastrophe.json)
 
@@ -55,28 +57,24 @@ Why this shape:
 | `cost_per_work_year` | $250k | judgment (McAleese 2025; 990s) |
 | `nondeath_losses_vs_deaths` | 0 (0–30%) | judgment, stated so it shows |
 
-A smaller AI or nuclear size (one detonation) needs a sourced forecast in facts/; until then, a named
-share in `unmodelled_benefits_adj`.
+A smaller AI or nuclear size needs a sourced forecast in facts/; until then, a named share in
+`unmodelled_benefits_adj`.
 
 ## Evidence to look for
 
 - Spending by area: Form 990 Part III lines 4a–4d, the accounts' programme notes. Shared costs are
   spread pro rata, the range running from none to all of them.
-- Outputs for `evidence_adj`: uptake by labs, governments or international bodies, cited in system cards,
-  regulations or treaty texts.
-- Wins in the year, for the policy branch: the official record, entry into force, the coalition behind it
-  (`attribution_share_shared`).
+- Outputs for `evidence_adj`: uptake by labs, governments or international bodies.
+- Wins in the year, for the policy branch: the official record, entry into force, the coalition behind it.
 - Room for more funding for `@next_dollar`: reserves, deficits, funders leaving or arriving.
 
 ## Pitfalls
 
-- **Thin by nature**: every branch takes `$missing_data_discount`; nothing about a charity's effect on
-  the risk is measured.
+- **Thin by nature**: every branch takes `$missing_data_discount`.
 - **Don't count a typical project's backfire twice**: it is in the shared cut. `speedup_harm_share` and
   `hazard_harm_share` (side effects) are only for work clearly riskier than typical (capabilities-
   adjacent research, dangerous-capability evaluations, published threat analyses).
 - **Don't** type a funder's dollars-per-basis-point bar, an evaluator's value of the future, or a
   premium for a catastrophe's size; compare the implied cost per basis point with those bars in the
   write-up only.
-- The result moves with the AI slider, `$win_years_counted` and the discount rate: say so in the summary,
-  and name the top swing.
+- The result moves with the AI slider, `$win_years_counted` and the discount rate: say so in the summary.

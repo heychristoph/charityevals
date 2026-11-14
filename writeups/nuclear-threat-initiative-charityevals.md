@@ -23,7 +23,7 @@ Pandemics also carry a 2% yearly chance of an outbreak as deadly as COVID-19. Th
 
 NTI's spending in each area cuts that yearly risk by the share a typical project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A nuclear war the world survives is taken to kill 45% of people, mostly through famine; a pandemic, 15%. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, by age: a catastrophe that kills a share of the world across the world's age groups, the COVID-scale pandemics the pandemic work also cuts with COVID's age mix (mostly older people). A nuclear war the world survives is taken to kill 45% of people, mostly through famine; a pandemic, 15%. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
 
 ### How the model works
 

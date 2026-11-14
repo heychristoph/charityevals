@@ -461,6 +461,14 @@
       "unit": "DALYs / year"
     },
     {
+      "id": "bio_covid_scale_share",
+      "section": "effect",
+      "label": "Pandemics: share of those deaths averted that are in a COVID-scale pandemic",
+      "format": "percent",
+      "formula": "@catastrophe.bio_catastrophe_cut_per_million * bio_smaller_per_year * bio_smaller_deaths / bio_deaths_per_million",
+      "explainer": "The COVID-scale size's part of the deaths a typical $1 million of pandemic work averts: valued at COVID-19's age mix (covid_value_per_death), the rest at the world's. Fixed; don't edit."
+    },
+    {
       "id": "bio_cost_share",
       "section": "effect",
       "label": "Pandemics: share of the cost spent on work against pandemics risk (research, evaluations, convening, advocacy)",
@@ -911,6 +919,24 @@
       "unit": "deaths"
     },
     {
+      "id": "covid_scale_deaths_averted",
+      "section": "effect",
+      "label": "Deaths averted that are in a COVID-scale pandemic (a part of deaths_averted)",
+      "format": "small",
+      "formula": "bio_deaths_averted * bio_covid_scale_share + fb_deaths_averted * bio_covid_scale_share",
+      "unit": "deaths",
+      "explainer": "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size (a catastrophe that kills a share of the world, extinction) at the world's. A policy or field-building branch pointed at the pandemic area adds its deaths averted × bio_covid_scale_share here. Fixed."
+    },
+    {
+      "id": "covid_value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted in a COVID-scale pandemic (units of value)",
+      "format": "number",
+      "formula": "(@death_ages.covid_scale_share_under5 * @moral_weights.uov_per_death_under5 + (1 - @death_ages.covid_scale_share_under5) * (@death_ages.covid_scale_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.covid_scale_share_5_14_of_over5) * (@death_ages.covid_scale_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - @death_ages.covid_scale_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
+      "unit": "units of value",
+      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed."
+    },
+    {
       "id": "future_dalys_averted",
       "section": "effect",
       "label": "Future healthy years kept, every branch (expected, before adjustments)",
@@ -1041,7 +1067,7 @@
       "section": "bridges",
       "label": "Deaths averted (and losses beyond them, 0 by default), in GiveWell units of value (before adjustments)",
       "format": "number",
-      "formula": "deaths_averted * value_per_death * (1 + @catastrophe.nondeath_losses_vs_deaths)",
+      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths)",
       "unit": "UoV"
     },
     {
