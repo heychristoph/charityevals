@@ -23,7 +23,7 @@ It is one model, with a branch for each programme.
   - US: the US smoking burden, 9.4 million DALYs a year in GBD 2023, and 0.25% of it averted.
   - Abroad: the ten countries' smoking burden, 47.8 million DALYs, and 0.25% of it averted. The anchor is Lyle and Hendrie's estimate that the world's top-level tobacco policies cut smokers by about 0.5% a year over 2007–2020, but by only about 0.16% a year in 2016–2020 (about 0.14% in the ten countries). The wins of 2020–2025 (Pakistan's tax rise, Mexico's smoke-free and advertising rules, Indonesia's 2024 regulation, yearly tax rises elsewhere) put the recent rate above that.
   - GHAI: the world's burden from obesity and salty diets, 174 million DALYs, and 0.02% of it averted, plus half as much again for its other areas.
-- **Counting the wins**: a won policy counts for the site's standard number of years before it would have come anyway, after a year's wait until it takes effect. About half the cut in smoking comes from smokers who quit, whose health gains come about 8 years later; the other half from young people who never start, about 30 years later. For diet the lag is five years. Every wait is discounted.
+- **Counting the wins**: a won policy counts for the site's standard number of years before it would have come anyway, after a year's wait until it takes effect. About half the cut in smoking comes from smokers who quit, whose health gains come about 8 years later; the other half from young people who never start, about 40 years later. For diet the lag is five years. Every wait is discounted. These lags, the US share averted, the US enforcement and evidence figures, the smoking and second-hand-smoke burdens and the harm of vaping are the site's shared tobacco figures, which our American Cancer Society, Cancer Research UK and British Heart Foundation models also read.
 - **Deaths**: the DALYs are split into illness and the deaths behind them. The deaths are valued by age, from GBD's smoking deaths by age.
 - **Credit**: CTFK's share of everyone behind the wins. That is 12% in the US, where ACS CAN, the heart and lung associations, Truth Initiative, health departments and its own Action Fund also campaign. It is 15% abroad, where governments, the other Bloomberg partners and WHO do much of the work.
 - **Adjustments**: enforcement (90% in the US, 75% abroad) and the validity of the effect sizes (0.8 for tobacco, 0.5 for GHAI). The missing-data discount applies to every branch, because no change in smoking from CTFK's own wins is measured.
@@ -44,7 +44,7 @@ About 72% of the result comes from the global branch, 18% from GHAI and 9% from 
 
 - **How much a year's wins cut smoking.** No study measures this for CTFK's countries. The anchor is a model of what policies of a given strength should do (SimSmoke-style projections), and the recent rate of wins is lower than the 2007–2020 average.
 - **Credit.** Bloomberg's partners, governments and local groups all claim the same wins, and CTFK's share of the resources is a judgment.
-- **From fewer smokers to fewer deaths.** The model treats a lasting cut in smoking as an equal cut in the smoking burden, half of it reached after about 8 years and half after about 30.
+- **From fewer smokers to fewer deaths.** The model treats a lasting cut in smoking as an equal cut in the smoking burden, half of it reached after about 8 years and half after about 40.
 - **GHAI.** Its food policies' effect on weight and disease is much less sure than tobacco taxes' effect on smoking.
 
 ### What isn't modelled
@@ -56,7 +56,7 @@ About 72% of the result comes from the global branch, 18% from GHAI and 9% from 
 
 ### How this model was checked
 
-Independent audits, in audits/campaign-for-tobacco-free-kids-charityevals/. Round 1 verified the Form 990 and GBD figures and found the global share of the burden averted too high for the recent period (cut from 0.5% to 0.25% a year). It also led to a neutral next-dollar use (Bloomberg funds US work too), a lag split between quitters and never-starters, evidence limited to the effect sizes' validity, second-hand smoke by branch and country, and GBD's direct death counts by age. Round 2 passed; its low findings (the quitters' share's range, the enforcement row's overlap with the effect sizes' compliance adjustors, write-up wording) were fixed and checked in a scoped verification.
+Independent audits, in audits/campaign-for-tobacco-free-kids-charityevals/. Round 1 verified the Form 990 and GBD figures and found the global share of the burden averted too high for the recent period (cut from 0.5% to 0.25% a year). It also led to a neutral next-dollar use (Bloomberg funds US work too), a lag split between quitters and never-starters, evidence limited to the effect sizes' validity, second-hand smoke by branch and country, and GBD's direct death counts by age. Round 2 passed; its low findings (the quitters' share's range, the enforcement row's overlap with the effect sizes' compliance adjustors, write-up wording) were fixed and checked in a scoped verification. Round 5 (2026-11-14), a scoped verification, passed the move to the site's shared tobacco figures: the never-start lag from 30 to 40 years, and deaths counted from all DALYs rather than the death part twice. The result moved from 0.134 to 0.135.
 
 ### Sources
 

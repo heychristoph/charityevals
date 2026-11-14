@@ -33,11 +33,12 @@ Research is the medical-research template's chain, as in our [British Heart Foun
 - **Adjustments:** our trust in the evidence (0.7), then Cancer Research UK's share of the world's cancer research funding, about 0.6%. All funders together spend about $100bn a year: some $16bn from governments and charities, and some $85bn from industry, for which cancer is the largest area (38% of its new trials).
 - **Check:** the 10% return in UK health gains found for UK cancer research implies about 30 times the chain's figure per pound. That study credits UK research with UK gains generously and calls itself a best case. The world also spends several times as much on cancer research as on heart research, for a smaller burden. The model shows both rows.
 
-The policy branch follows the government's impact assessment of the law, with the same figures as our British Heart Foundation model:
+The policy branch follows the government's impact assessment of the law. Its figures are the site's shared tobacco figures, which our British Heart Foundation, American Cancer Society and Campaign for Tobacco-Free Kids models also read:
 
 - **Effect:** 8 percentage points of each covered cohort kept from smoking.
 - **Health gain:** 3 healthy years lost per young smoker, arriving about 40 years later and discounted.
-- **Credit:** a fifth of the whole campaign took place this year. Cancer Research UK had a tenth of the resources behind the law, twice the British Heart Foundation's share.
+- **Side effects:** less second-hand smoke (9% more), less the harm of those who vape instead (3%).
+- **Credit:** a fifth of the whole campaign took place this year. Campaigning groups had 40% of the resources behind the law, and Cancer Research UK a quarter of theirs: a tenth in all, twice the British Heart Foundation's share.
 - **Years counted:** the site's shared years a won reform counts.
 
 The information branch works at UK scale:
@@ -58,7 +59,7 @@ Each branch is multiplied by the shared "How much we count a programme whose res
 - **Years brought forward** (2 to 15) and **Cancer Research UK's share of the field** (0.3% to 1.2%).
 - **The next dollar against the past average:** 30% to 85%.
 
-Research is about 57% of the result, policy about 36% and information about 6%. Per pound, the policy work does about twenty times as well as research and the information work about twice as well, but together they are 7% of the spending.
+Research is about 56% of the result, policy about 38% and information about 6%. Per pound, the policy work does about twenty times as well as research and the information work about twice as well, but together they are 7% of the spending.
 
 ### Biggest uncertainties
 
@@ -69,11 +70,11 @@ Research is about 57% of the result, policy about 36% and information about 6%. 
 
 ### What isn't modelled
 
-These get a share of the unmodelled benefits (10%, -5% to 30%), not a chain of their own:
+These get a share of the unmodelled benefits (7%, -8% to 27%), not a chain of their own:
 
 - Other policy wins this year: limits on junk-food advertising came into force, and the National Cancer Plan for England adopted targeted lung screening and earlier-diagnosis commitments, mostly announced before.
 - The research workforce, institutes and tools that later research uses; the start-ups Cancer Research Horizons forms.
-- The Act's vaping provisions and second-hand smoke.
+- The Act's limits on youth vaping.
 - Research effort drawn from other diseases, and overdiagnosis from awareness work.
 
 ### How this model was checked
@@ -90,6 +91,8 @@ Independent audit round 2: a pass, with no high findings, 1 medium and 2 low. Wh
 - **The lows:** the range of the share of the field now says what widens it beyond its anchors, and the check against the returns study gives the right ratio, about 30 times.
 
 Verification round 3: a pass. It corrected one figure in the share of the field's explainer and the British Heart Foundation write-up's branch shares; a last verification checked those.
+
+Verification round 5 (2026-11-14): a pass. The policy branch now reads the site's shared tobacco figures, with credit as Cancer Research UK's share of the campaigning groups' share, and second-hand smoke and vaping as side-effect rows in place of part of the unmodelled share. The result moved by under 1%.
 
 ### Sources
 

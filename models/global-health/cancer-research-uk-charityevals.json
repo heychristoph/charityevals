@@ -509,101 +509,38 @@
       "explainer": "In WHO's DALYs, before the deaths are valued by age, so in the reference's own units. Against ref_dalys_per_gbp: the chain gives about a thirtieth of it (0.000008 against 0.00023). The two count different things: the reference credits UK research with 17% of UK gains, far above the UK's few percent of the world's cancer research funding, while the chain credits Cancer Research UK its funding share of world gains. The gap is wider than for cardiovascular research (where the chain is about half the reference, british-heart-foundation-charityevals) because the world spends several times as much on cancer research as on cardiovascular research for a burden 40% smaller, and cancer mortality has fallen more slowly, so each pound of cancer research buys less; the UK study's 10% is a UK-only best case that credits research with gains (screening programmes, care) that also took other spending. We take the chain as the best guess; with years_brought_forward, share_burden_averted_per_research_year and research_attribution_share_shared all at their high ends it reaches about two-thirds of the reference."
     },
     {
-      "id": "adv_england_14_30",
-      "section": "effect",
-      "label": "Advocacy: people aged 14 to 30 in England (2021)",
-      "format": "integer",
-      "value": 11777381,
-      "kind": "observed",
-      "source": {
-        "title": "DHSC, Tobacco and Vapes Bill impact assessment (March 2024; superseded by the November 2024 assessment of the reintroduced bill)",
-        "url": "https://assets.publishing.service.gov.uk/media/65f9bd0a9316f5001164c351/tobacco-vapes-bill-impact-assessment.pdf",
-        "page": "para. 120",
-        "quote": "The population of those aged 14 to 30 is 11,777,381",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "The age group the impact assessment models the law's effect on smoking uptake in, from ONS 2021 mid-year estimates; with the number of single years of age it gives one year's cohort."
-    },
-    {
-      "id": "adv_ages_14_30",
-      "section": "effect",
-      "label": "Advocacy: single years of age from 14 to 30",
-      "format": "integer",
-      "value": 17,
-      "kind": "observed",
-      "source": {
-        "title": "DHSC, Tobacco and Vapes Bill impact assessment (March 2024; superseded by the November 2024 assessment of the reintroduced bill)",
-        "url": "https://assets.publishing.service.gov.uk/media/65f9bd0a9316f5001164c351/tobacco-vapes-bill-impact-assessment.pdf",
-        "page": "para. 120",
-        "quote": "The population of those aged 14 to 30 is 11,777,381",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "Ages 14 to 30 inclusive are 17 single years, so the band divided by 17 is an average cohort."
-    },
-    {
-      "id": "adv_uk_uplift",
-      "section": "effect",
-      "label": "Advocacy: UK population ÷ England's",
-      "format": "multiple",
-      "value": 1.19,
-      "kind": "observed",
-      "source": {
-        "title": "DHSC, Tobacco and Vapes Bill impact assessment (March 2024; superseded by the November 2024 assessment of the reintroduced bill)",
-        "url": "https://assets.publishing.service.gov.uk/media/65f9bd0a9316f5001164c351/tobacco-vapes-bill-impact-assessment.pdf",
-        "page": "para. 148",
-        "quote": "all the England estimates have been uplifted by 1.19 to provide estimates for the costs and benefits of the smokefree generation policy to the UK.",
-        "retrieved": "2026-11-03"
-      },
-      "explainer": "The Act covers the whole UK; the impact assessment scales England by population, and so do we."
-    },
-    {
       "id": "adv_people_affected_per_year",
       "section": "effect",
       "label": "Advocacy: people per year brought under the smokefree-generation law (one UK birth cohort)",
       "format": "integer",
-      "formula": "adv_england_14_30 / adv_ages_14_30 * adv_uk_uplift",
-      "explainer": "The Tobacco and Vapes Act (Royal Assent April 2026) bans the sale of tobacco to anyone born on or after 1 January 2009. Each year the law is brought forward covers one more birth cohort, about 820,000 people in the UK; so the yearly flow the win counts is one cohort, and $win_years_counted counts the years."
+      "formula": "@tobacco.uk_act_england_14_30 / @tobacco.uk_act_ages_14_30 * @tobacco.uk_act_uk_uplift",
+      "explainer": "The Tobacco and Vapes Act (Royal Assent April 2026) bans the sale of tobacco to anyone born on or after 1 January 2009. Each year the law is brought forward covers one more birth cohort: the impact assessment's 14 to 30 year olds in England ÷ 17 single years × its UK uplift (shared figures, facts: tobacco), about 824,000 people. So the yearly flow the win counts is one cohort, and $win_years_counted counts the years."
     },
     {
       "id": "adv_prevalence_cut",
       "section": "effect",
       "label": "Advocacy: share of a covered cohort kept from smoking",
       "format": "percent",
-      "value": {
-        "low": 0.025,
-        "best": 0.08,
-        "high": 0.092
-      },
-      "kind": "judgment",
-      "explainer": "The impact assessment's central scenario (a 30% fall in the yearly rate of taking up smoking below the age of sale, picked with tobacco-control experts (19 consulted, 14 replied) and chosen over stronger scenarios to allow for underage sales and proxy purchases, paras 154-161) takes smoking among 14 to 30 year olds from 9.2% in the baseline to effectively zero, \"9.2 percentage points lower in 2056\" (para. 169). That is the high end. Our best guess, 8 points, takes a little off for a baseline already falling faster than the assessment's flat steady state (a criticism made to the Public Bill Committee); leakage is not taken off again here or in adv_evidence_adj. The low end, 2.5 points, is the assessment's weakest scenario (Scenario 5, 6.7% against 9.2%, Table 27). The figures are from the March 2024 impact assessment; the November 2024 one for the reintroduced bill keeps the same smokefree-generation modelling."
+      "explainer": "The shared figure (facts: tobacco): the impact assessment's central scenario takes smoking among 14 to 30 year olds from 9.2% to effectively zero (the high end); 8 points allows for a baseline already falling; its weakest scenario, 2.5 points, is the low end.",
+      "formula": "@tobacco.uk_act_prevalence_cut"
     },
     {
       "id": "adv_dalys_per_smoker",
       "section": "effect",
       "label": "Advocacy: lifetime DALYs lost per person who smokes as a young adult",
       "format": "number",
-      "value": {
-        "low": 1.5,
-        "best": 3,
-        "high": 6
-      },
-      "kind": "judgment",
       "unit": "DALYs",
-      "explainer": "Doll et al.'s 50-year follow-up of British doctors (BMJ 2004): lifelong smokers die about 10 years sooner, and stopping at 30 avoids almost all of that, at 40 most of it. Many young smokers stop, so a person smoking at 14 to 30 loses a few healthy years on average, deaths and illness from heart disease, cancer and lung disease together. Check against the impact assessment: with the rest of the branch a covered UK cohort gains about 198,000 DALYs undiscounted (824,000 × 8% × 3), about 109,000 at the government's 1.5% over 40 years; the assessment's own figure, deaths only and only those before 2100, is about 950,000 QALYs in present value (£66.7bn at £70,000) over all the cohorts it covers, most of whose smoking deaths fall after 2100, so roughly nine cohorts' worth by our figure. Consistent within the range."
+      "explainer": "The shared figure (facts: tobacco), from Doll et al.'s 50-year follow-up of British doctors and checked against the impact assessment's own health gain.",
+      "formula": "@tobacco.uk_dalys_per_young_smoker"
     },
     {
       "id": "adv_years_until_health",
       "section": "effect",
       "label": "Advocacy: years from the law biting on a cohort until its health gains",
       "format": "number",
-      "value": {
-        "low": 30,
-        "best": 40,
-        "high": 50
-      },
-      "kind": "judgment",
       "unit": "years",
-      "explainer": "Smoking kills and disables mostly in middle and old age: the impact assessment finds \"no health benefits would be expected until 2044\" (para. 178), 17 years after the law starts, with gains rising to 2100. A cohort kept from smoking at 18 has its gains mostly at 50 to 80, about 40 years later. Discounted at the shared rate."
+      "explainer": "The shared figure for a young person kept from starting (facts: tobacco): smoking kills and disables mostly at 50 to 80, so a cohort kept from smoking at 18 gains about 40 years later. Discounted at the shared rate.",
+      "formula": "@tobacco.never_start_lag_years"
     },
     {
       "id": "adv_dalys_per_person_year",
@@ -650,13 +587,8 @@
       "section": "effect",
       "label": "Advocacy: share of all the campaigning behind the law done in this year",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "The law is won (Royal Assent April 2026, three weeks after the year ends), so the question is how much of the win this year's work bought. The bill was introduced in November 2024 and spent this year in the House of Lords, the last stretch of a campaign that ran from the 2023 plan (and of decades of tobacco-control work before it); Cancer Research UK's share of the people and money behind it is in adv_attribution_share_shared. A fifth, from about four years of active campaigning with the final year weighing more. The same figure as in british-heart-foundation-charityevals: the two charities' years are the same (to 31 March 2026)."
+      "explainer": "The shared figure (facts: tobacco): the law is won, so the question is how much of the win this year's work bought; a fifth, the last of about four years of active campaigning. The same for every charity whose year ends on 31 March 2026; Cancer Research UK's share of the people and money behind the law is in adv_attribution_share_shared.",
+      "formula": "@tobacco.uk_act_share_of_campaign_fy2026"
     },
     {
       "id": "adv_years_of_impact",
@@ -672,14 +604,9 @@
       "section": "effect",
       "label": "Advocacy: years from the year modelled until the law takes effect",
       "format": "number",
-      "value": {
-        "low": 0.5,
-        "best": 1,
-        "high": 1.5
-      },
-      "kind": "judgment",
       "unit": "years",
-      "explainer": "The sale ban starts on 1 January 2027 (the impact assessment's appraisal starts on that date), about a year after the middle of the year modelled. The longer wait until the health gains is in adv_dalys_per_person_year."
+      "explainer": "The shared figure (facts: tobacco): the sale ban starts on 1 January 2027, about a year after the middle of the year modelled. The longer wait until the health gains is in adv_dalys_per_person_year.",
+      "formula": "@tobacco.uk_act_years_until_effect"
     },
     {
       "id": "adv_discounted_years",
@@ -804,26 +731,29 @@
       "section": "adjustments",
       "label": "Advocacy: evidence adjustment, a multiplier",
       "format": "multiple",
+      "explainer": "The shared figure (facts: tobacco): the effect of a generational sale ban is modelled, not observed, and it could be repealed; leakage is in the prevalence cut and switching to vaping is a side effect of its own (adv_vaping_substitution_harm). 0.7.",
+      "formula": "@tobacco.uk_act_evidence_adj"
+    },
+    {
+      "id": "adv_share_of_campaigners",
+      "section": "adjustments",
+      "label": "Advocacy: Cancer Research UK's share of the campaigning groups' resources behind the law",
+      "format": "percent",
       "value": {
-        "low": 0.4,
-        "best": 0.7,
-        "high": 1
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "The effect of a generational sale ban is modelled, not observed (New Zealand repealed its own before it took effect); underage sales and leakage are already in the assessment's central scenario and adv_prevalence_cut, so this covers the rest: substitution by vaping (which the same Act regulates) and the chance of later repeal. 0.7, as the research branch."
+      "explainer": "Cancer Research UK ran its Smokefree UK campaign through the bill's passage in all four UK parliaments (mobile billboards, supporters' letters to MPs; annual report p. 28), funds much of the research the case rested on, and part-funds ASH. A quarter of the campaigning groups' resources, twice the British Heart Foundation's 12.5% in british-heart-foundation-charityevals, since smoking is the leading cause of cancer and tobacco control is a long-standing core campaign of Cancer Research UK's, with a larger policy budget; 15% to 40%. The two charities' shares together, 37.5%, leave the rest to ASH, the royal colleges and the other groups."
     },
     {
       "id": "adv_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy: Cancer Research UK's share of everyone's resources behind the law",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.1,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "The government proposed and drafted the law, Parliament passed it, and many groups campaigned (Action on Smoking and Health, Cancer Research UK, the British Heart Foundation, the royal colleges, directors of public health). Cancer Research UK ran its Smokefree UK campaign through the bill's passage in all four UK parliaments (mobile billboards, supporters' letters to MPs; annual report p. 28), funds much of the research the case rested on, and part-funds ASH. Government staff time counts among the resources (Convention 2). One in ten, twice the British Heart Foundation's 5% in british-heart-foundation-charityevals, since smoking is the leading cause of cancer and tobacco control is a long-standing core campaign of Cancer Research UK's, with a larger policy budget; 5% to 20%."
+      "explainer": "The campaigning groups' share of everyone's resources behind the law (shared, facts: tobacco: 40%, the government's and Parliament's work the rest) × Cancer Research UK's share of the groups' (row above), so the credits of the charities modelled for the same Act sum within the groups' share.",
+      "formula": "@tobacco.uk_act_campaigners_share * adv_share_of_campaigners"
     },
     {
       "id": "info_evidence_adj",
@@ -959,18 +889,44 @@
       "formula": "research_dalys * research_deaths_per_daly * research_value_per_death * research_total_adj"
     },
     {
+      "id": "adv_secondhand_smoke_share",
+      "section": "adjustments",
+      "label": "Advocacy side effect: second-hand smoke averted, as a share of the smoking burden averted",
+      "format": "percent",
+      "formula": "@tobacco.shs_dalys_gbr / @tobacco.smoking_dalys_gbr",
+      "explainer": "Fewer smokers means less second-hand smoke for the people around them, which GBD counts apart from smoking (UK 2023: 0.17 million DALYs against 1.9 million, 9%, facts: tobacco). Taken as falling in step with smoking and valued with the smokers' ages, though some second-hand-smoke deaths are children's, which undervalues it.",
+      "side_effect": "added"
+    },
+    {
+      "id": "adv_vaping_substitution_harm",
+      "section": "adjustments",
+      "label": "Advocacy side effect: young people who vape instead of smoking, as a share of the smoking burden averted",
+      "format": "percent",
+      "formula": "-@tobacco.uk_act_vaping_substitution_share * @tobacco.vaping_relative_harm",
+      "explainer": "Some of those the Act keeps from smoking vape instead (30%, facts: tobacco), at a tenth of smoking's harm (shared, facts: tobacco): a harm of 3% of the gain.",
+      "side_effect": "added"
+    },
+    {
+      "id": "adv_side_effects",
+      "section": "adjustments",
+      "label": "Advocacy: side effects, as a share of the branch's value",
+      "format": "percent",
+      "formula": "adv_secondhand_smoke_share + adv_vaping_substitution_harm",
+      "explainer": "Second-hand smoke averted less the harm of vaping instead, through the side-effects weight."
+    },
+    {
       "id": "adv_illness_credited",
       "section": "adjustments",
       "label": "Policy: illness averted, credited (DALYs)",
       "format": "number",
-      "formula": "advocacy_dalys * adv_yld_share * adv_total_adj"
+      "formula": "advocacy_dalys * adv_yld_share * adv_total_adj * (1 + adv_side_effects)"
     },
     {
       "id": "adv_uov_credited",
       "section": "adjustments",
       "label": "Policy: deaths averted, credited and valued by age (units of value)",
       "format": "number",
-      "formula": "advocacy_dalys * adv_deaths_per_daly * adv_value_per_death * adv_total_adj"
+      "formula": "advocacy_dalys * adv_deaths_per_daly * adv_value_per_death * adv_total_adj * (1 + adv_side_effects)"
     },
     {
       "id": "info_illness_credited",
@@ -1051,12 +1007,12 @@
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": -0.05,
-        "best": 0.1,
-        "high": 0.3
+        "low": -0.08,
+        "best": 0.07,
+        "high": 0.27
       },
       "kind": "judgment",
-      "explainer": "Benefits not counted: the Act's limits on youth vaping and second-hand smoke averted (both left out by the impact assessment's health figures); Cancer Research UK's other policy wins this year, the restrictions on junk-food advertising and promotions that came into force (obesity is a risk factor for 13 cancers) and the National Cancer Plan for England with its targeted lung screening and earlier-diagnosis commitments (largely announced before, so a small part of their value); the research workforce, institutes and tools that later research uses; the start-ups Cancer Research Horizons forms (99 so far, £3.5bn raised), whose private money is not counted as a gain. Harms: research effort drawn from other diseases, and the overdiagnosis that awareness work brings beyond what info_evidence_adj takes off. Positive on balance: 10%, -5% to 30% (the British Heart Foundation's model has 8% for a smaller set of other policy wins)."
+      "explainer": "Benefits not counted: the Act's limits on youth vaping (left out by the impact assessment's health figures); Cancer Research UK's other policy wins this year, the restrictions on junk-food advertising and promotions that came into force (obesity is a risk factor for 13 cancers) and the National Cancer Plan for England with its targeted lung screening and earlier-diagnosis commitments (largely announced before, so a small part of their value); the research workforce, institutes and tools that later research uses; the start-ups Cancer Research Horizons forms (99 so far, £3.5bn raised), whose private money is not counted as a gain. Harms: research effort drawn from other diseases, and the overdiagnosis that awareness work brings beyond what info_evidence_adj takes off. Positive on balance: 7%, -8% to 27% (the British Heart Foundation's model has 7% for a smaller set of other policy wins); second-hand smoke averted, about 3 points of it before, is now its own row (adv_secondhand_smoke_share)."
     },
     {
       "id": "uov_bridged",
