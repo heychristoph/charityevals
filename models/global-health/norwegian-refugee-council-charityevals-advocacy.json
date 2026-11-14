@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "norwegian-refugee-council",
   "owner": "charityevals",
-  "summary": "The Norwegian Refugee Council's advocacy and information work (NOK 256 million, $25 million, in 2025): campaigning against the 2025 humanitarian funding gap and for access in Sudan and the DRC, media work and the Internal Displacement Monitoring Centre's data. It publishes no measured result, so both branches are built from ranged judgments and counted at half by the shared missing-data slider: NRC's share of the aid that NGOs' funding advocacy kept or added, net of the aid it displaces (about 97% of the result), and the extra aid access gains let through, net of the same (about 3%), plus a judged share for its other work, each dollar of aid at the value of NRC's own programmes (charityevals' model, read live). It comes to about 0.015 years of healthy life per $1,000 (combined range 0.001-0.21), a sixth of the site's global-health median, because a dollar of humanitarian aid is worth about a fifth of cash to the poor (NRC's own programmes in charityevals' model before its missing-data step, adjusted for the system's counterfactual and mix) and NRC's share of the aid moved is small; the result is mostly uncertainty, judgments on how much aid advocacy moves and NRC's part in it driving it.",
+  "summary": "The Norwegian Refugee Council's advocacy and information work (NOK 256 million, $25 million, in 2025): campaigning against the 2025 humanitarian funding gap and for access in Sudan and the DRC, media work and the Internal Displacement Monitoring Centre's data. It publishes no measured result, so both branches are built from ranged judgments and counted at half by the shared missing-data slider: NRC's share of the aid that NGOs' funding advocacy kept or added, net of the aid it displaces (about 97% of the result), and the extra aid access gains let through, net of the same (about 3%), plus a judged share for its other work, each dollar of aid at the site's shared value of a humanitarian dollar. It comes to about 0.013 years of healthy life per $1,000 (combined range 0.001-0.23), an eighth of the site's global-health median, because a dollar of humanitarian aid is worth about a fifth of cash to the poor (the site's relief models before their missing-data step) and NRC's share of the aid moved is small; the result is mostly uncertainty, judgments on how much aid advocacy moves and NRC's part in it driving it.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Norwegian Refugee Council, advocacy and information (2025)",
@@ -268,47 +268,13 @@
       "explainer": "Judgment 5% (1-20%): fewer bureaucratic impediments, permits and crossings let more of the funded aid reach people in the areas covered. No study measures how much aid access negotiations unlock; the reference class is how much aid access constraints hold back: in eastern DRC and Darfur responders report programmes delayed or suspended for weeks to months a year, so lifting part of the barriers lets through a few percent to a fifth of a year's aid."
     },
     {
-      "id": "aid_counterfactual_vs_nrc",
-      "section": "effect",
-      "label": "Aid kept or let through, relative to NRC's programmes: counterfactual",
-      "format": "multiple",
-      "value": {
-        "low": 1,
-        "best": 1.29,
-        "high": 1.6
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 1.29 (1-1.6): NRC's programmes are counted at the share others wouldn't have delivered, about 0.775 outcome-weighted; aid added to the whole system isn't filled in by other responders, so a dollar of it is worth 1 ÷ 0.775 of NRC's, less where other money would follow."
-    },
-    {
-      "id": "aid_mix_vs_nrc",
-      "section": "effect",
-      "label": "Aid kept or let through, relative to NRC's programmes: what it buys",
-      "format": "multiple",
-      "value": {
-        "low": 0.4,
-        "best": 0.85,
-        "high": 1.6
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 0.85 (0.4-1.6): NRC's value per dollar leans on education (about 37% of its value from 12% of its spending), while education gets only a few percent of appeals funding, about ×0.8 at NRC's own branch values; health and nutrition work, which NRC doesn't do and which is worth more per dollar, takes a large share of appeals funding, coordination and logistics less."
-    },
-    {
-      "id": "aid_vs_nrc",
-      "section": "effect",
-      "label": "Value of a dollar of humanitarian aid, relative to a dollar of NRC's programmes",
-      "format": "multiple",
-      "formula": "aid_counterfactual_vs_nrc * aid_mix_vs_nrc",
-      "explainer": "The two parts above: about 1.1. The site's ten relief models come to 0.02-0.42 times cash's value per dollar (median about 0.13×)."
-    },
-    {
       "id": "aid_value_per_dollar",
       "section": "effect",
       "label": "Value of a dollar of humanitarian aid (units of value)",
       "format": "small",
-      "formula": "#norwegian-refugee-council-charityevals * aid_vs_nrc",
+      "formula": "@aid_value.humanitarian_vs_cash * @cash.uov_per_dollar",
       "unit": "units of value / $",
-      "explainer": "charityevals' model of NRC's programmes, read live at your values, times the ratio above."
+      "explainer": "The site's shared value of a dollar of humanitarian aid whose use isn't known more exactly (facts/aid_value.json: about 0.2 times cash, 0.05-0.8, the site's relief models before their missing-data step) × the value of a dollar given as cash. The appeals' money goes to every kind of relief, not to NRC's programmes, so it takes the shared figure, the same in every model that values aid won or kept."
     },
     {
       "id": "acc_displaced_share",
