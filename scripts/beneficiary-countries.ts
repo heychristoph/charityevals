@@ -310,7 +310,8 @@ for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)
       out[k] = v;
       if (k === "cause" && want !== undefined) { out.beneficiaries = want; out.beneficiaries_note = (d as { note?: string }).note; }
     }
-    next = JSON.stringify(out, null, 2) + "\n";
+    // The field on one line, as the text edit writes it, so the next run finds nothing to change.
+    next = (JSON.stringify(out, null, 2) + "\n").replace(/^([ \t]+)"beneficiaries": \{\n(?:[^\n]*\n)*?\1\},\n/m, (_, indent: string) => `${indent}"beneficiaries": ${JSON.stringify(want)},\n`);
   }
   if (next !== text) {
     changed++;
