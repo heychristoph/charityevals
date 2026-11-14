@@ -1,6 +1,6 @@
 ### Summary
 
-Ploughshares Fund is a San Francisco foundation that funds and connects the groups working to lower the chance of nuclear war. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="ploughshares-fund-charityevals">26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.2 to about 560.
+Ploughshares Fund is a San Francisco foundation that funds and connects the groups working to lower the chance of nuclear war. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="ploughshares-fund-charityevals">26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.3 to about 460.
 
 ### What the charity does
 
@@ -18,13 +18,13 @@ A typical project cuts that risk by a share per dollar, taken from Rethink Prior
 
 ### How the model works
 
-A grant dollar counts as a typical dollar of the grantee's nuclear work. The one grantee with its own model here, the Arms Control Association, comes out the same within 2%. Ploughshares' own coordination and communications count on the same path. The fellowship counts the work it adds: about 1 in 10 fellows staying longer in the field or moving up because of it, over five years. The fellowship's share of the credit for that work is its cost against the fellows' added work, about a third.
+A grant dollar counts as a typical dollar of the grantee's nuclear work, except for the four grantees with a model on the site: the Arms Control Association ($178,000), the Union of Concerned Scientists ($120,000), the Federation of American Scientists ($90,000) and the Bulletin of the Atomic Scientists ($80,000). Those $468,000 are valued at each grantee's own figure on the rankings, live, which already holds that grantee's own adjustments, so only Ploughshares' share of the credit is applied on top. ICAN's only money from Ploughshares is a fellowship capstone grant; Back from the Brink and Global Zero have no model. Ploughshares' own coordination and communications count on the same path. The fellowship counts the work it adds: about 1 in 10 fellows staying longer in the field or moving up because of it, over five years. The fellowship's share of the credit for that work is its cost against the fellows' added work, about a third.
 
 Each part has its own adjustments:
 
 | Adjustment | Grants | Own work | Fellowship |
 |---|---|---|---|
-| Share of the spending counted | 0.86 | 0.75 | 1 |
+| Share of the spending counted | 0.84 | 0.75 | 1 |
 | How far a typical project's effect applies | 0.8 | 0.6 | 1 |
 | Work other groups would not have done now | 0.7 | 0.7 | 0.8 |
 | Work other funders would not have paid for | 0.8 | 1 | 1 |
@@ -38,11 +38,11 @@ Ploughshares holds almost no unrestricted reserves. It has drawn on its restrict
 
 ### What drives the result
 
-The grants bring about two thirds of the result, Ploughshares' own work about a quarter and the fellowship about 7%. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 90. The result sits a little above the Nuclear Threat Initiative's 23. Ploughshares works only on nuclear risk, while NTI also works on pandemics, where Rethink's typical project cuts less per dollar. Ploughshares' next-dollar figure is also higher.
+The grants bring about two thirds of the result, Ploughshares' own work about a quarter and the fellowship about 7%. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 85. The result sits a little above the Nuclear Threat Initiative's 23. Ploughshares works only on nuclear risk, while NTI also works on pandemics, where Rethink's typical project cuts less per dollar. Ploughshares' next-dollar figure is also higher.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 5 to 240.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 5.6 to 210.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 - **How far the grantees' work beats or trails a typical project.** Nothing about it is measured.

@@ -30,7 +30,7 @@ function closure(raws: Record<string, unknown>[]): Record<string, unknown>[] {
   const out = new Map<string, Record<string, unknown>>();
   const visit = (m: Record<string, unknown>) => {
     const text = ((m.rows ?? []) as unknown[]).map((r) => (typeof r === "string" ? r : ((r as { formula?: string }).formula ?? ""))).join(" ");
-    const ids = [...text.matchAll(/#([a-z0-9-]+)(?::([a-z0-9-]+))?/g)].flatMap(([, a, b]) => (b ? repoModels.filter((x) => x.charity === b && x.owner === a).map((x) => x.id as string) : [a]));
+    const ids = [...text.matchAll(/#([a-z0-9-]+)(?::([a-z0-9-]+))?/g)].flatMap(([, a, b]) => (b ? repoModels.filter((x) => (a === "cause" ? x.cause === b : x.charity === b && x.owner === a)).map((x) => x.id as string) : [a]));
     if (typeof m.extends === "string") ids.push(m.extends);
     for (const id of ids) {
       const t = byId.get(id);

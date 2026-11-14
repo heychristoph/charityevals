@@ -640,6 +640,37 @@
       "unit": "DALYs"
     },
     {
+      "id": "climate_cost_share",
+      "section": "effect",
+      "label": "Climate: share of the cost spent on climate work (an option: 0 where there is none)",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: unused (0) by default, so no source: when the model has climate work, relabel it estimate and cite the accounts. The share of the modelled spending on climate analysis, advocacy or coverage, from the charity's programme expenses; counted in tonnes' worth at the site's own climate average, not a bridge of its own. Leave it out of the other shares. Feeds the check cost_shares_total."
+    },
+    {
+      "id": "climate_value_per_dollar",
+      "section": "effect",
+      "label": "Climate: value of a dollar of typical climate work (units of value)",
+      "format": "small",
+      "formula": "#cause:climate",
+      "unit": "units of value / $",
+      "explainer": "The site's own climate average: the equal-weight mean of the climate charities on the rankings, per dollar, in units of value (its tonnes already valued by the climate skeleton, normalization.md 2.5, 2.8). Not a Rethink figure or a bridge of the model's own. Fixed."
+    },
+    {
+      "id": "climate_uov",
+      "section": "effect",
+      "label": "Climate: value of the climate work (units of value, before adjustments)",
+      "format": "number",
+      "formula": "cost_total * climate_cost_share * climate_value_per_dollar",
+      "unit": "UoV",
+      "explainer": "The climate spending × a typical climate dollar's value; how far this charity's climate work beats or trails a typical dollar is climate_evidence_adj. The average already counts its own wait and years."
+    },
+    {
       "id": "pol_cost_share",
       "section": "effect",
       "label": "Policy win: share of the cost spent on the campaign that won it",
@@ -798,14 +829,9 @@
       "section": "effect",
       "label": "Field-building: years each stays in the work",
       "format": "number",
-      "value": {
-        "low": 2,
-        "best": 5,
-        "high": 10
-      },
-      "kind": "judgment",
+      "formula": "@catastrophe.field_work_years",
       "unit": "years",
-      "explainer": "TEMPLATE: from alumni follow-ups or the field's turnover; discounted at the shared rate. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
+      "explainer": "The shared figure (@catastrophe.field_work_years), one for every model; discounted at the shared rate. Fixed."
     },
     {
       "id": "fb_work_dollars",
@@ -867,7 +893,7 @@
       "section": "effect",
       "label": "Check: the cost shares add up to all the modelled spending",
       "format": "percent",
-      "formula": "ai_cost_share + bio_cost_share + nuclear_cost_share + pol_cost_share + fb_cost_share",
+      "formula": "ai_cost_share + bio_cost_share + nuclear_cost_share + climate_cost_share + pol_cost_share + fb_cost_share",
       "explainer": "Must be 1: every dollar of the modelled programme is in exactly one branch."
     },
     {
@@ -940,6 +966,15 @@
       "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: the weight its adjustments carry. Fixed."
     },
     {
+      "id": "w_climate",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the climate work (before adjustments)",
+      "format": "number",
+      "formula": "climate_uov * dalys_per_death_value",
+      "unit": "DALYs",
+      "explainer": "The branch's value in healthy years, by the same bridge: the weight its adjustments carry. Fixed."
+    },
+    {
       "id": "w_pol",
       "section": "adjustments",
       "label": "Weight: healthy years from the policy win (before adjustments)",
@@ -962,7 +997,7 @@
       "section": "adjustments",
       "label": "Weight: healthy years from every branch (before adjustments)",
       "format": "number",
-      "formula": "w_ai + w_bio + w_nuclear + w_pol + w_fb",
+      "formula": "w_ai + w_bio + w_nuclear + w_climate + w_pol + w_fb",
       "unit": "DALYs"
     },
     {
@@ -1003,6 +1038,19 @@
       },
       "kind": "judgment",
       "explainer": "TEMPLATE: a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities) for the nuclear work: above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project; 1 with 'unused' where the branch's cost share is 0."
+    },
+    {
+      "id": "climate_evidence_adj",
+      "section": "adjustments",
+      "label": "Climate work: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.7,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities) for the climate work: above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project; 1 with 'unused' where the branch's cost share is 0."
     },
     {
       "id": "pol_evidence_adj",
@@ -1070,6 +1118,19 @@
       "explainer": "TEMPLATE: the share of the nuclear work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes; 1 with 'unused' where the branch's cost share is 0."
     },
     {
+      "id": "climate_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Climate work: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the climate work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes; 1 with 'unused' where the branch's cost share is 0."
+    },
+    {
       "id": "pol_counterfactual_adj",
       "section": "adjustments",
       "label": "Policy win: share of the work no one else would have done now",
@@ -1135,6 +1196,19 @@
       "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
     },
     {
+      "id": "climate_attribution_share",
+      "section": "adjustments",
+      "label": "Climate work: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
       "id": "pol_attribution_share",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
@@ -1165,7 +1239,7 @@
       "section": "adjustments",
       "label": "How far the typical project's effect applies to this charity's work",
       "format": "multiple",
-      "formula": "(w_ai * ai_evidence_adj + w_bio * bio_evidence_adj + w_nuclear * nuclear_evidence_adj + w_pol * pol_evidence_adj + w_fb * fb_evidence_adj) / (w_total)",
+      "formula": "(w_ai * ai_evidence_adj + w_bio * bio_evidence_adj + w_nuclear * nuclear_evidence_adj + w_climate * climate_evidence_adj + w_pol * pol_evidence_adj + w_fb * fb_evidence_adj) / (w_total)",
       "explainer": "Applied: each branch's own multiplier (<branch>_evidence_adj), weighted by the branches' healthy years (w_<branch>), so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
     },
     {
@@ -1173,7 +1247,7 @@
       "section": "adjustments",
       "label": "Share of the work no one else would have done now",
       "format": "percent",
-      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / (w_total * evidence_adj)",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_climate * climate_evidence_adj * climate_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / (w_total * evidence_adj)",
       "explainer": "Applied: each branch's own share (<branch>_counterfactual_adj), weighted by the branches' healthy years (w_<branch>) after evidence_adj, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
     },
     {
@@ -1181,7 +1255,7 @@
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_climate * climate_evidence_adj * climate_counterfactual_adj * climate_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
       "explainer": "Applied: each branch's own share (<branch>_attribution_share), weighted by the branches' healthy years (w_<branch>) after the earlier factors, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
     },
     {
@@ -1266,15 +1340,15 @@
     {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths averted (and losses beyond them, 0 by default), in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted (and losses beyond them, 0 by default) and the climate work, in GiveWell units of value (before adjustments)",
       "format": "number",
-      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths)",
+      "formula": "((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths) + climate_uov",
       "unit": "UoV"
     },
     {
       "id": "dalys_from_uov",
       "section": "bridges",
-      "label": "Deaths averted (and losses beyond them, 0 by default), in healthy years",
+      "label": "Deaths averted (and losses beyond them, 0 by default) and the climate work, in healthy years",
       "format": "number",
       "formula": "uov_bridged / ($uov_per_daly)",
       "unit": "DALYs",
