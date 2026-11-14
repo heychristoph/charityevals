@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "international-rescue-committee",
   "owner": "charityevals",
-  "summary": "The International Rescue Committee's work in crisis-affected countries (Crisis Response, Recovery and Development: $754m of its $1.14bn programme spending in the year to September 2025), split by sector from its own outcome split: health care at 2,713 supported facilities, contraception, nutrition treatment for 638,187 children and 85,163 mothers, about 8 million vaccine doses, water for 2.5 million people, $52.5m in cash to 1.5 million people, livelihoods, women's and children's protection, and learning for 602,546 children. It comes to about 0.39 years of healthy life per $1,000 (combined range 0.11-1.3), about four times the site's global-health median and twice charityevals' Save the Children model, because more of its money goes to treating malnutrition and cash, whose reach it counts: nutrition gives about two fifths, other health care and cash about a sixth each, contraception a tenth. The biggest uncertainties are the deaths averted per child treated and what health care costs per person covered; every branch but cash is discounted for missing data (no controlled measure of the IRC's own effect).",
+  "summary": "The International Rescue Committee's work in crisis-affected countries (Crisis Response, Recovery and Development: $754m of its $1.14bn programme spending in the year to September 2025), split by sector from its own outcome split: health care at 2,713 supported facilities, contraception, nutrition treatment for 638,187 children and 85,163 mothers, about 8 million vaccine doses, water for 2.5 million people, $52.5m in cash to 1.5 million people, livelihoods, women's and children's protection, and learning for 602,546 children. It comes to about 0.38 years of healthy life per $1,000 (combined range 0.11-1.3), about four times the site's global-health median and twice charityevals' Save the Children model, because more of its money goes to treating malnutrition and cash, whose reach it counts: nutrition gives about two fifths, other health care and cash about a sixth each, contraception and vaccination about a twentieth each. The biggest uncertainties are the deaths averted per child treated and what health care costs per person covered; every branch but cash is discounted for missing data (no controlled measure of the IRC's own effect).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: International Rescue Committee, crisis response, recovery and development (year to September 2025)",
@@ -31,6 +31,11 @@
     {
       "title": "International Rescue Committee, 2025 Annual Report",
       "url": "https://www.rescue.org/sites/default/files/2026-06/Annual%20Report%202025.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "IRC, Cost efficiency analysis: distributing family planning materials",
+      "url": "https://www.rescue.org/report/cost-efficiency-analysis-distributing-family-planning-materials",
       "type": "charity"
     },
     {
@@ -278,7 +283,7 @@
       "label": "Other health care: people covered by IRC-supported care for a year",
       "format": "number",
       "formula": "hlt_spend / hlt_cost_per_person",
-      "explainer": "Other health spending ÷ the cost per person covered: about 13 million people. As a check, the branches' reach (other care 13m, water 2.5m, cash 1.5m, nutrition 0.7m, education 0.6m, vaccination 0.8m) sums to about 19 million before overlap, against the 20.5 million the IRC and its partners reached directly in crisis countries."
+      "explainer": "Other health spending ÷ the cost per person covered: about 12 million people. As a check, the branches' reach (other care 12m, water 2.5m, cash 1.5m, nutrition 0.7m, education 0.6m, vaccination 0.8m) sums to about 18 million before overlap, against the 20.5 million the IRC and its partners reached directly in crisis countries."
     },
     {
       "id": "cost_per_person",
@@ -587,12 +592,12 @@
       "label": "Family planning: the IRC's cost per couple-year of protection (US$)",
       "format": "usd",
       "value": {
-        "low": 12,
-        "best": 30,
-        "high": 80
+        "low": 15,
+        "best": 45,
+        "high": 100
       },
       "kind": "judgment",
-      "explainer": "Judgment $30 ($12-80): the IRC's staff, training and outreach per couple-year of protection, the contraceptives mostly from UNFPA; large public-sector and social-marketing programmes in low-income countries run at about $5-20 a couple-year, and crisis settings with mobile outreach and few clients a provider cost more."
+      "explainer": "Judgment $45 ($15-100): the IRC's own cost-efficiency analysis of four family planning programmes found an average of $47 a couple-year of protection (rescue.org, 'Cost efficiency analysis: distributing family planning materials'); its SheCares pilot in Uganda's refugee settlements reached $14 and the WISH2ACTION programme in South Sudan $43-100."
     },
     {
       "id": "fp_cyp",
@@ -1327,7 +1332,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 0.95 (0.85-1): the money is the benefit; a little is lost to fraud, fees and diversion."
+      "explainer": "Judgment 0.95 (0.85-1): the money is the benefit; the count of people may include some registered twice across rounds or programmes. Diversion and fraud are in se_diversion_share, transfer fees in the delivery cost."
     },
     {
       "id": "cash_counterfactual_adj",
@@ -1621,12 +1626,20 @@
       "unit": "years"
     },
     {
+      "id": "pro_discount_factor",
+      "section": "effect",
+      "label": "Protection: discount over the years the effect lasts",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ (0 - pro_effect_years * 0.5)",
+      "explainer": "The shared discount rate at the effect's midpoint, as the wellbeing template discounts a fading effect."
+    },
+    {
       "id": "pro_wellbys_per_person",
       "section": "effect",
       "label": "Protection: WELLBYs per person reached",
       "format": "number",
-      "formula": "pro_share_distressed * pro_effect_sd * pro_effect_years * 0.5 * @wellby_factors.wellbys_per_sd_year",
-      "explainer": "Share with a disorder × the effect in SD × its years × a half (linear fade) × the shared WELLBYs per SD-year."
+      "formula": "pro_share_distressed * pro_effect_sd * pro_effect_years * 0.5 * pro_discount_factor * @wellby_factors.wellbys_per_sd_year",
+      "explainer": "Share with a disorder × the effect in SD × its years × a half (linear fade) × the discount × the shared WELLBYs per SD-year."
     },
     {
       "id": "pro_evidence_adj",
