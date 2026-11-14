@@ -1,6 +1,6 @@
 ### Summary
 
-FairVote researches and campaigns for new ways of electing American governments: ranked-choice voting and proportional representation. Our model of its 2024 work comes to **<span data-figure="headline" data-model="fairvote-charityevals">0.03</span> years of healthy life per 1,000 dollars**, about half the site's global-health median. It is a very uncertain figure: whether a new voting method changes how well people are governed, and by how much, is our judgment.
+FairVote researches and campaigns for new ways of electing American governments: ranked-choice voting and proportional representation. Our model of its 2024 work comes to **<span data-figure="headline" data-model="fairvote-charityevals">0.02</span> years of healthy life per 1,000 dollars**, about a third of the site's global-health median. It is a very uncertain figure: whether a new voting method changes how well people are governed, and by how much, is our judgment.
 
 ### What the charity does
 
@@ -16,12 +16,12 @@ Ranked-choice voting now reaches about 17 million Americans (14 million voters),
 - **The past record:** a dollar to FairVote is counted as doing what the average dollar behind each movement did.
 - **Ranked-choice branch (about four fifths of spending):**
   - about 1.4 million more people a year under ranked-choice voting in 2016-2025, net of repeals;
-  - they use it for only some of their elections: counted at 60% of a full switch;
+  - they use it for only some of their governments' elections (New York City its primaries, cities their own offices): counted at 45% of a full switch;
   - the gain: a judged 2% of the income becoming a democracy brings (about a fifth more income per person in the long run), counted at 0.5 for doubt that the effect is real;
   - the movement spent about $19 million a year, ballot campaigns included.
-- **Proportional-representation branch (about a fifth):** about 95,000 people a year in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. The gain is a judged 5% of democracy's, at 0.6 for doubt. The movement spent about $3.5 million a year. The Protect Democracy model shares these figures.
+- **Proportional-representation branch (about a fifth):** about 103,000 people a year in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. A city's own elections count as half of a full switch. The gain is a judged 5% of democracy's, at 0.6 for doubt. The movement spent about $3.5 million a year. The Protect Democracy model shares these figures.
 - **Years:** the gain builds over about 25 years. A win counts as brought forward by the site's five years, with a 3% yearly chance of repeal.
-- **Both branches** are discounted by the missing-data slider. Ranked-choice voting gives about three quarters of the result.
+- **Both branches** are discounted by the missing-data slider. Ranked-choice voting gives about four fifths of the result.
 - **Side effects:** the good of fairer elections beyond income (+20%) and the state bans the wins provoke (−10%), shared with the Protect Democracy model.
 - **Next dollar:** 42% of the average. The easier wins came first, every statewide ranked-choice measure in 2024 failed except Alaska's defence of its own, and nineteen states now ban it.
 
@@ -34,7 +34,7 @@ Ranked-choice voting now reaches about 17 million Americans (14 million voters),
 5. The next dollar's share of the average (20% to 79%).
 6. The ranked-choice movement's yearly spending ($9 million to $39 million).
 7. Doubt that ranked-choice voting changes how places are governed (0.25 to 0.85).
-8. Proportional representation's share of democracy's gain (1% to 15%).
+8. The yearly chance a won reform is repealed (1% to 8%).
 
 ### Biggest uncertainties
 
@@ -50,7 +50,7 @@ Ranked-choice voting now reaches about 17 million Americans (14 million voters),
 
 ### How this model was checked
 
-Built from the template and audited by independent reviewers (rounds in audits/fairvote-charityevals/).
+Built from the template and audited by independent reviewers (rounds in audits/fairvote-charityevals/). Round 1 moved proportional representation from a forecast to the 2016-2025 record, counted against the movement's average spending over the same years, and shared its figures and side effects with the Protect Democracy model. Round 2 counted a city's own elections as half of a full switch and built the share of elections ranked ballots cover from the places themselves, lowering the result by about 30%; a last round checked those changes.
 
 ### Sources
 

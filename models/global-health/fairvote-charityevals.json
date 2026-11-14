@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "fairvote",
   "owner": "charityevals",
-  "summary": "FairVote researches and campaigns for ranked-choice voting and proportional representation in the United States ($6.4 million in 2024). A dollar to FairVote is counted as doing what the average dollar behind each movement did in 2016-2025: the ranked-choice movement (about $19 million a year, ballot campaigns included) put about 1.4 million more Americans a year under ranked ballots for some of their offices, and the proportional-representation movement (about $3.5 million a year) about 95,000 a year under proportional representation, each valued as a small share (2% and 5%) of the income democracy brings (Acemoglu et al. 2019), building over 25 years, brought forward by the years a win counts and repealed at 3% a year; ranked-choice voting gives about three quarters of the result. With its next dollar at 42% of the average that comes to about 0.03 years of healthy life per 1,000 dollars, about half the site's global-health median. The biggest uncertainty is whether a voting method changes how well people are governed at all, a judgment with no study of its size; both branches are discounted by the shared missing-data slider.",
+  "summary": "FairVote researches and campaigns for ranked-choice voting and proportional representation in the United States ($6.4 million in 2024). A dollar to FairVote is counted as doing what the average dollar behind each movement did in 2016-2025: the ranked-choice movement (about $19 million a year, ballot campaigns included) put about 1.4 million more Americans a year under ranked ballots for some of their offices, and the proportional-representation movement (about $3.5 million a year) about 103,000 a year under proportional representation, each valued as a small share (2% and 5%) of the income democracy brings (Acemoglu et al. 2019), building over 25 years, brought forward by the years a win counts and repealed at 3% a year; ranked-choice voting gives about four fifths of the result. With its next dollar at 42% of the average that comes to about 0.02 years of healthy life per 1,000 dollars, about a third of the site's global-health median. The biggest uncertainty is whether a voting method changes how well people are governed at all, a judgment with no study of its size; both branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: FairVote",
@@ -250,7 +250,7 @@
       "label": "People newly governed under proportional representation per year of the movement's work (PR branch)",
       "format": "integer",
       "formula": "@democracy.us_pr_people_covered_per_year",
-      "explainer": "The shared figure the Protect Democracy model reads too: the movement's 2016-2025 record, about 95,000 people a year (60,000 to 150,000), Portland, Oregon's 2022 reform most of it."
+      "explainer": "The shared figure the Protect Democracy model reads too: the movement's 2016-2025 record, about 103,000 people a year (85,000 to 115,000), Portland, Oregon's 2022 reform most of it."
     },
     {
       "id": "pr_ln_gain",
@@ -430,15 +430,15 @@
       "label": "Share of a full switch that the places counted get, RCV branch",
       "format": "percent",
       "formula": "@democracy.rcv_offices_share",
-      "explainer": "The shared figure (60%, 40% to 85%): most people counted use ranked ballots for some of their elections only (New York City's primaries and special elections, Maine's primaries and federal races)."
+      "explainer": "The shared figure (45%, 30% to 60%), weighted by the people added: New York City uses ranked ballots for its primaries and special elections, Maine for primaries and federal races, Hawaii only for special elections, cities for their own offices (@democracy.local_offices_weight)."
     },
     {
       "id": "pr_implementation_adj",
       "section": "adjustments",
       "label": "Share of a full switch that the places counted get, PR branch",
       "format": "percent",
-      "formula": "@democracy.pr_offices_share",
-      "explainer": "The shared figure (82%, 60% to 100%), read by the Protect Democracy model too: Portland, Oregon elects its whole council by proportional representation, Arlington County only its board and Portland, Maine some multi-seat offices."
+      "formula": "@democracy.pr_offices_share * @democracy.local_offices_weight",
+      "explainer": "The shared figures, read by the Protect Democracy model too: the adopting places use proportional representation for about 82% of their own elections (Portland, Oregon its whole council, Arlington County only its board), and a city's own elections are about half of a full switch (@democracy.local_offices_weight): about 41%."
     },
     {
       "id": "rcv_attribution_share",
