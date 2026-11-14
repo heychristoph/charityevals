@@ -112,7 +112,7 @@ There is no evaluator model of TNC to differ from. TNC's own goals count hectare
 
 ### How this model was checked
 
-Built with the build-cea skill on 2026-11-03 and rebuilt on 2026-11-04 to the current rules.
+Built with the build-cea skill on 2026-11-03 and rebuilt on 2026-11-04 to the current rules. Verification rounds in audits/the-nature-conservancy-charityevals/ checked the site-wide methane row (PRANA's methane, 0.3% of the tonnes; +0.07%) and the combined range.
 
 **The first build** valued three-quarters of the spending at the results of other charities on the site. Its two audit rounds found 2 high, 3 medium and 10 low findings, all fixed in that version.
 
@@ -159,7 +159,7 @@ The result rose to 0.0005.
 - **Ear tags (low).** The 2 million pairs were donated by TNC and JBS together; the credit row now says so and puts amounts on the resources behind the rule. The credit stays 10%.
 - **Fuel share (low).** The share of tonnes displacing fossil power is updated to 2%.
 
-The result is 0.0004 years of healthy life per $1,000 (combined range 0.00005-0.0035).
+The result is 0.0004 years of healthy life per $1,000 (combined range 0.00005-0.0021).
 
 ### Sources
 
