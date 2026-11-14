@@ -52,7 +52,7 @@ The nuclear work brings 71% of the result, the biological work 21%, the fellowsh
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the climate-security branch from our Federation of American Scientists model.
+The model was built from the catastrophic-risk template, with the climate-security branch from our Federation of American Scientists model. Round 1 of the independent audit checked every source and found the figures right. Its one high finding was that the years a fellow stays in the work had been typed into many models. That figure is now one shared figure that every catastrophic-risk model reads, with the same value. Its smaller findings were fixed too. The Nolan Center's biological share was set from the grant's arithmetic (65% to 60%). The lab's climate-nuclear project got its own, lower multiplier. The climate-security budgets are now those of 2025. The rounds are in audits/council-on-strategic-risks-charityevals/.
 
 ### Sources
 
