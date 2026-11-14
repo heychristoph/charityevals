@@ -1099,6 +1099,65 @@
         "retrieved": "2026-11-14"
       },
       "explainer": "What a dollar does for the climate at the hits-based climate funds' recommended organisations (policy advocacy and support for new technologies), as Rethink Priorities summarises them: $0.50 to $3.50 a tonne, median about $2. It describes the funds' best picks, not a typical climate dollar: a model that values ordinary climate work starts from it and says, as a ranged judgment, how far that work trails it. The brief states no period for the tonnes; our reading is that they are a policy's or technology's emissions over its years in effect."
+    },
+    {
+      "id": "us_heat_pump_tco2e_per_household_year",
+      "label": "Tonnes of CO₂e a year one US home cuts by switching its heating to an air-source heat pump",
+      "unit": "t CO₂e / household / year",
+      "format": "number",
+      "value": {
+        "low": 2.5,
+        "best": 3.3,
+        "high": 4.4
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Wilson, Munankarmi, Less, Reyna & Rothgeb (2024), Heat pumps for all? Distributions of the costs and benefits of residential air-source heat pumps in the United States, Joule 8: 1000-1035 (as reported by Canary Media, 11 March 2024)",
+        "url": "https://www.canarymedia.com/articles/heat-pumps/yes-heat-pumps-slash-emissions-even-if-powered-by-a-dirty-grid",
+        "quote": "2.5 to 4.4 metric tons of CO2 equivalent per year per housing unit",
+        "note": "The paper (DOI 10.1016/j.joule.2024.01.022; the journal page and NREL's copy didn't load for us) simulates 550,000 representative US homes in NREL's ResStock: a heat pump cuts a home's energy emissions by 36% to 64% on average, counting the extra power plants' emissions, over three heat-pump efficiency levels. Refrigerant leaks add about 0.07 tonnes a year on average (same article).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "What a home's switch to a heat pump does to its yearly emissions, the extra electricity's emissions taken off: NREL's simulation of the whole US housing stock finds 2.5 to 4.4 tonnes of CO₂e a year per home on average across its three heat-pump efficiency levels (Wilson et al. 2024). Best guess 3.3, the middle on a log scale. The range is the efficiency scenarios, not a confidence interval; homes switching from gas, oil or propane cut more than the stock's average, homes already on electric resistance less. Read by every model that counts US homes electrified."
+    },
+    {
+      "id": "us_home_electrification_smoke_factor",
+      "label": "Air-pollution deaths per tonne cut by electrifying US homes, relative to the fossil-fuel average",
+      "unit": "multiple",
+      "format": "number",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.06
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Dedoussi, Eastham, Monier & Barrett (2020), Premature mortality related to United States cross-state air pollution, Nature 578: 261-265",
+        "url": "https://www.nature.com/articles/s41586-020-1983-8",
+        "note": "By 2018 the commercial and residential sector's emissions caused about twice the cross-state premature deaths of power generation's (abstract), after power plants' sulphur fell; that sector includes wood burning, which gas heating doesn't have. Read with climate.us_power_smoke_factor (0.013, scrubbed US power plants).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "A home that switches from a gas furnace to a heat pump stops burning gas at ground level near people (nitrogen oxides, which form fine particles) and draws more power from plants that mostly have scrubbers. Per net tonne cut that is more smoke avoided than a tonne from US power alone (0.013 of the world average, climate.us_power_smoke_factor): Dedoussi et al. (2020) find building combustion now causes more US air-pollution deaths than power plants, though much of it is wood. Our judgment, 0.02 of the world fossil-fuel average (0.005 to 0.06). Read by every model whose tonnes come from US homes electrified."
+    },
+    {
+      "id": "us_home_electrification_methane_share",
+      "label": "Share of the tonnes a US home cuts by electrifying that are methane",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "OpenStudio-HPXML documentation (the simulation engine of NREL's ResStock), Workflow inputs: emissions scenarios",
+        "url": "https://openstudio-hpxml.readthedocs.io/en/latest/workflow_inputs.html",
+        "quote": "include both combustion and pre-combustion (e.g., methane leakage for natural gas) emissions",
+        "note": "Default fossil-fuel factors from ANSI/RESNET/ICC 301-2022 Addendum B: natural gas 147.3 lb CO₂e per MBtu, against about 117 for combustion alone. Leak rate behind it: Alvarez et al. (2018), Science 361: 186-188, about 2.3% of US gross gas production.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Gas a home stops burning also stops leaking upstream. ResStock, behind NREL's per-home heat-pump tonnes (climate.us_heat_pump_tco2e_per_household_year), counts gas at 147.3 lb CO₂e per MBtu including pre-combustion methane leakage, against about 117 for combustion alone: about a fifth of the gas side is upstream methane, consistent with the 2.3% leak rate Alvarez et al. (2018) measured. Less the methane behind the gas plants that make part of the added electricity, 10% to 20% of the net cut. Our judgment, 15% (5% to 25%), the shared conversion valuing that share by methane's own warming and ozone."
     }
   ]
 }
