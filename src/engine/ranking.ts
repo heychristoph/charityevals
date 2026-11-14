@@ -228,14 +228,14 @@ export function combine(xs: (Figure & { weight?: number })[]): Figure & { basis:
 }
 
 // Which models rank a charity doesn't depend on the reader's values: one plan per library.
-const plans = new WeakMap<Library, Map<string, EvaluatorPlan | undefined>>();
-function planOf(lib: Library, owner: string, charity: string): EvaluatorPlan | undefined {
+const plans = new WeakMap<Library, Map<string, EvaluatorPlan[]>>();
+function plansOf(lib: Library, charity: string): EvaluatorPlan[] {
   let cache = plans.get(lib);
   if (!cache) plans.set(lib, (cache = new Map()));
-  const key = `${owner}:${charity}`;
-  if (!cache.has(key)) cache.set(key, rankingPlan(lib, charity).find((p) => p.owner === owner));
-  return cache.get(key);
+  if (!cache.has(charity)) cache.set(charity, rankingPlan(lib, charity));
+  return cache.get(charity)!;
 }
+const planOf = (lib: Library, owner: string, charity: string) => plansOf(lib, charity).find((p) => p.owner === owner);
 
 /** A charity's figure from one evaluator, the way the rankings make it (src/lib/use-results.ts): each
  * program's model over its locations (declared funding, else the sheet's own grant sizes, else the model
@@ -243,11 +243,15 @@ function planOf(lib: Library, owner: string, charity: string): EvaluatorPlan | u
  * depend on it, so any linear measure (units of value, healthy years) combines the same way. NaN when the
  * evaluator doesn't rank the charity. Formulas read it as `#owner:charity` (expr.ts). */
 export function evaluatorFigure(lib: Library, owner: string, charity: string, figure: (m: ResolvedModel) => number): number {
+  return partsFigure(lib, charity, planOf(lib, owner, charity)?.parts, figure);
+}
+
+/** Programmes' figure, the way the rankings combine them (evaluatorFigure). NaN without programmes. */
+function partsFigure(lib: Library, charity: string, parts: PlanPart[] | undefined, figure: (m: ResolvedModel) => number): number {
   const c = lib.charities.get(charity);
-  const plan = planOf(lib, owner, charity);
-  if (!c || !plan) return NaN;
+  if (!c || !parts?.length) return NaN;
   const one = (m: ResolvedModel): Figure => { const v = figure(m); return { central: v, low: v, high: v }; };
-  return combine(plan.parts.map((p) => {
+  return combine(parts.map((p) => {
     const family = locationsOf(lib, p.model);
     const declared = declaredLocations(c, family);
     if (declared) return { ...combineLocations(declared, one), weight: p.weight };
@@ -276,10 +280,23 @@ export function causeMembers(lib: Library, cause: string, reader?: string): [own
   return all.filter(([, c]) => c !== reader);
 }
 
-/** The equal-weight mean of a cause's charities at their figures on the rankings (`#cause:x`). */
-export function causeFigure(lib: Library, cause: string, reader: string | undefined, figure: (m: ResolvedModel) => number): number {
-  const members = causeMembers(lib, cause, reader);
-  return members.length ? members.reduce((s, [o, c]) => s + evaluatorFigure(lib, o, c, figure), 0) / members.length : NaN;
+/** The equal-weight mean of a cause's charities at their figures on the rankings (`#cause:x`). `hidden`
+ * says which models the rankings leave out at the reader's values (`$ignore_old_estimates`, model.ts
+ * tooOld): as on the rankings (src/lib/use-results.ts computeResults), an evaluator keeps its other
+ * programmes, an evaluator with none left gives way to the next, and a charity with none left drops out. */
+export function causeFigure(lib: Library, cause: string, reader: string | undefined, figure: (m: ResolvedModel) => number, hidden?: (m: ResolvedModel) => boolean): number {
+  const figures = causeMembers(lib, cause, reader).flatMap(([o, c]) => {
+    if (!hidden) return [evaluatorFigure(lib, o, c, figure)];
+    const shown = plansOf(lib, c).map((e) => e.parts.filter((p) => !hidden(p.model))).find((parts) => parts.length);
+    return shown ? [partsFigure(lib, c, shown, figure)] : [];
+  });
+  return figures.length ? figures.reduce((s, v) => s + v, 0) / figures.length : NaN;
+}
+
+/** Every model `#cause:x` may read: each member charity's programmes and locations, by every evaluator
+ * that ranks it (the next one stands in where `hidden` leaves the first none). */
+export function causeModels(lib: Library, cause: string, reader?: string): ResolvedModel[] {
+  return causeMembers(lib, cause, reader).flatMap(([, c]) => plansOf(lib, c).flatMap((e) => evaluatorFigureModels(lib, e.owner, c)));
 }
 
 /** Every model `evaluatorFigure` reads for a charity and evaluator (programs and their locations). */
