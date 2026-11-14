@@ -1,6 +1,6 @@
 {
   "id": "union-of-concerned-scientists-charityevals-climate",
-  "name": "Union of Concerned Scientists: climate, transport and food (charityevals)",
+  "name": "Union of Concerned Scientists: climate, transport and western states (charityevals)",
   "kind": "charity",
   "cause": "climate",
   "beneficiaries": "world",
@@ -9,10 +9,10 @@
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists' climate and clean energy, clean transportation and western states programmes ($32.8M with overhead in the year to September 2025) do technical analysis and advocacy for US climate policy; this model counts the five largest policies it worked on that were won in October 2021 to September 2025 with published tonnes (the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, California's Advanced Clean Cars II rule and its 2025 extension of its carbon market to 2045), with its other state clean-energy laws and its climate-accountability science as a share. At the defaults a dollar given averts about 0.0053 tonnes of CO₂e (about $190 a tonne), 0.0013 years of healthy life per $1,000, three-fifths of it from the Inflation Reduction Act; it is low because each win is shared with many groups and with what governments would have done anyway (UCS is credited with 1% to 10% of the advocacy behind each), and the federal rules and the law's credits have since been repealed or cut back and California's car rule has lost its federal waiver. The biggest uncertainties are the discount rate, the shared years a won reform counts and the deaths per tonne; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "The Union of Concerned Scientists' climate and clean energy, clean transportation and western states programmes ($32.8M with overhead in the year to September 2025) do technical analysis and advocacy for US climate policy; this model counts the five largest policies it worked on that were won in October 2021 to September 2025 with published tonnes (the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, California's Advanced Clean Cars II rule and its 2025 extension of its carbon market to 2045), with its other state clean-energy laws and its climate-accountability science as a share. At the defaults a dollar given averts about 0.0056 tonnes of CO₂e (about $180 a tonne), 0.0015 years of healthy life per $1,000, about half of it from the Inflation Reduction Act (three-fifths of the tonnes); it is low because each win is shared with many groups and with what governments would have done anyway (UCS is credited with 1% to 10% of the advocacy behind each), and the federal rules and the law's credits have since been repealed or cut back and California's car rule has lost its federal waiver. The biggest uncertainties are the discount rate, the shared years a won reform counts and the deaths per tonne; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
-    "title": "charityevals' estimate: Union of Concerned Scientists (climate, transport and food)",
+    "title": "charityevals' estimate: Union of Concerned Scientists (climate, transport and western states)",
     "url": "https://charityevals.org/union-of-concerned-scientists-charityevals-climate",
     "published": "2026-11-14",
     "retrieved": "2026-11-14"
@@ -663,7 +663,7 @@
         "title": "California Air Resources Board (2026), Notice of public hearing to consider the proposed Cap-and-Invest Regulation amendments (hearing 28 May 2026)",
         "url": "https://ww2.arb.ca.gov/sites/default/files/barcu/regact/2026/cap_invest/nc_notice.pdf",
         "retrieved": "2026-11-14",
-        "page": "p. 16",
+        "page": "p. 6",
         "quote": "during 2027-2046"
       },
       "explainer": "The board's estimate runs from 2027 through 2046.",
@@ -680,7 +680,7 @@
         "title": "California Air Resources Board (2026), Notice of public hearing to consider the proposed Cap-and-Invest Regulation amendments (hearing 28 May 2026)",
         "url": "https://ww2.arb.ca.gov/sites/default/files/barcu/regact/2026/cap_invest/nc_notice.pdf",
         "retrieved": "2026-11-14",
-        "page": "p. 16",
+        "page": "p. 6",
         "quote": "during 2027-2046"
       },
       "explainer": "As capinv_first_year.",
@@ -718,7 +718,7 @@
       "format": "number",
       "formula": "@climate.years_until_avoided_regulation",
       "unit": "years",
-      "explainer": "The shared wait for rules and tax credits (3 years, 1 to 6): the US methane, power-plant and vehicle rules all had compliance dates two to four years after they were signed."
+      "explainer": "The shared wait for rules and tax credits (3 years, 1 to 6): the US methane, power-plant and vehicle rules all had compliance dates two to four years after they were signed. Used by the wins without compliance dates of their own (the Inflation Reduction Act); the rules use their own dates (<win>_years_until_avoided)."
     },
     {
       "id": "wait_discount",
@@ -744,11 +744,113 @@
       "unit": "years"
     },
     {
+      "id": "accii_win_year",
+      "section": "effect",
+      "label": "Advanced Clean Cars II: year the win was final",
+      "format": "integer",
+      "value": 2022,
+      "kind": "observed",
+      "source": {
+        "title": "California Air Resources Board (2022), California moves to accelerate to 100% new zero-emission vehicle sales by 2035",
+        "url": "https://ww2.arb.ca.gov/news/california-moves-accelerate-100-new-zero-emission-vehicle-sales-2035",
+        "retrieved": "2026-11-14",
+        "note": "Adopted 25 August 2022; the estimate runs from model year 2026.",
+        "page": "news release dated 25 August 2022"
+      },
+      "explainer": "The board adopted the rule in August 2022; its cuts start with model year 2026.",
+      "unit": "Year"
+    },
+    {
+      "id": "accii_years_until_avoided",
+      "section": "effect",
+      "label": "Advanced Clean Cars II: years from the win until its tonnes start",
+      "format": "number",
+      "formula": "accii_first_year - accii_win_year",
+      "unit": "years",
+      "explainer": "The win's own dates (climate.md: a policy with its own compliance dates uses them), in place of the shared wait."
+    },
+    {
+      "id": "accii_discounted_years",
+      "section": "effect",
+      "label": "Advanced Clean Cars II: discounted years counted, after the wait",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -accii_years_until_avoided",
+      "unit": "years"
+    },
+    {
+      "id": "veh_win_year",
+      "section": "effect",
+      "label": "EPA vehicle standards: year the win was final",
+      "format": "integer",
+      "value": 2024,
+      "kind": "observed",
+      "source": {
+        "title": "US EPA (20 March 2024), Biden-Harris administration finalizes strongest-ever pollution standards for cars",
+        "url": "https://www.epa.gov/newsreleases/biden-harris-administration-finalizes-strongest-ever-pollution-standards-cars-position",
+        "retrieved": "2026-11-14",
+        "note": "Final rule of 20 March 2024, for model years 2027 and later.",
+        "page": "news release dated 20 March 2024"
+      },
+      "explainer": "EPA finalised the standards in March 2024, for model years from 2027.",
+      "unit": "Year"
+    },
+    {
+      "id": "veh_years_until_avoided",
+      "section": "effect",
+      "label": "EPA vehicle standards: years from the win until its tonnes start",
+      "format": "number",
+      "formula": "veh_first_year - veh_win_year",
+      "unit": "years",
+      "explainer": "The win's own dates (climate.md: a policy with its own compliance dates uses them), in place of the shared wait."
+    },
+    {
+      "id": "veh_discounted_years",
+      "section": "effect",
+      "label": "EPA vehicle standards: discounted years counted, after the wait",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -veh_years_until_avoided",
+      "unit": "years"
+    },
+    {
+      "id": "pwr_win_year",
+      "section": "effect",
+      "label": "EPA power-plant standards: year the win was final",
+      "format": "integer",
+      "value": 2024,
+      "kind": "observed",
+      "source": {
+        "title": "US EPA (2024), Carbon pollution standards: fact sheet on the standards and regulatory impact analysis",
+        "url": "https://www.epa.gov/system/files/documents/2024-04/cps-111-fact-sheet-standards-and-ria-2024.pdf",
+        "retrieved": "2026-11-14",
+        "note": "Final rule of April 2024; the estimate runs 2028-2047.",
+        "page": "fact sheet, April 2024 (final standards)"
+      },
+      "explainer": "EPA finalised the standards in April 2024; the RIA's cuts start in 2028.",
+      "unit": "Year"
+    },
+    {
+      "id": "pwr_years_until_avoided",
+      "section": "effect",
+      "label": "EPA power-plant standards: years from the win until its tonnes start",
+      "format": "number",
+      "formula": "pwr_first_year - pwr_win_year",
+      "unit": "years",
+      "explainer": "The win's own dates (climate.md: a policy with its own compliance dates uses them), in place of the shared wait."
+    },
+    {
+      "id": "pwr_discounted_years",
+      "section": "effect",
+      "label": "EPA power-plant standards: discounted years counted, after the wait",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -pwr_years_until_avoided",
+      "unit": "years"
+    },
+    {
       "id": "pwr_downstream",
       "section": "effect",
       "label": "EPA power-plant standards: expected tonnes before adjustments",
       "format": "number",
-      "formula": "pwr_tonnes_per_year * p_success * discounted_years",
+      "formula": "pwr_tonnes_per_year * p_success * pwr_discounted_years",
       "unit": "t CO₂e"
     },
     {
@@ -756,7 +858,7 @@
       "section": "effect",
       "label": "EPA vehicle standards: expected tonnes before adjustments",
       "format": "number",
-      "formula": "veh_tonnes_per_year * p_success * discounted_years",
+      "formula": "veh_tonnes_per_year * p_success * veh_discounted_years",
       "unit": "t CO₂e"
     },
     {
@@ -772,7 +874,7 @@
       "section": "effect",
       "label": "Advanced Clean Cars II: tonnes averted over the years counted, due to advocacy (before adjustments)",
       "format": "number",
-      "formula": "accii_tonnes_per_year * p_success * discounted_years",
+      "formula": "accii_tonnes_per_year * p_success * accii_discounted_years",
       "unit": "t CO₂e"
     },
     {

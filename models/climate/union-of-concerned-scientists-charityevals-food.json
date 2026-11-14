@@ -7,7 +7,7 @@
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, $5.1M with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year helped defend the federal wetland protections (Swampbuster) against a 2025 challenge that could have struck them down; its other work is a share. At the defaults a dollar given keeps about 0.004 years of healthy life per $1,000 (flood damage averted, valued as consumption to the average American), from 0.0001 to 0.11 on the combined range. It is small because the challenge was unlikely to succeed, the government and other groups did most of the defence (UCS is credited with 3%), and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the share of wetlands that would be drained and the chance the challenge would have won each move it about ten times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
+  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, $5.1M with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year was part of the case for the federal wetland protections (Swampbuster) that a court upheld in May 2025 against a challenge filed in 2024; its other work is a share. At the defaults a dollar given keeps about 0.0004 years of healthy life per $1,000 (flood damage averted, valued as consumption to the average American), from 0.000007 to 0.02 on the combined range. It is small because the challenge was unlikely to succeed, the government and four other groups fought the case (UCS, not a party, is credited with 1%), only farmed wetlands are at stake and drain slowly, and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the chance the challenge would have won and the drainage rate each move it several times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Union of Concerned Scientists (food and farms)",
@@ -157,9 +157,9 @@
       "formula": "program_spend * overhead_ratio"
     },
     {
-      "id": "units_affected_per_year",
+      "id": "wetland_flood_damage_study",
       "section": "reach",
-      "label": "Flood damage the Upper Midwest's wetlands avert a year (US$)",
+      "label": "Flood damage the Upper Midwest's wetlands avert a year, in the analysis's 2022 dollars",
       "format": "usd",
       "value": {
         "low": 15000000000,
@@ -174,26 +174,58 @@
         "quote": "this flood protection equates to nearly $23 billion in annual residential flood protection",
         "note": "UCS's analysis of the Upper Midwest's 30 million acres of wetlands (its annual report, p. 15: 'they prevent almost $23 billion in flood damage every year'). The range is ours: one study's model of residential flood losses, so -35% to +30%."
       },
-      "explainer": "UCS's own estimate (December 2024) of the residential flood damage the Upper Midwest's wetlands avert each year: nearly $23 billion ($15 to $30 billion, our range around one study's figure). It is the value at stake when federal wetland protections are challenged."
+      "explainer": "UCS's own estimate (December 2024) of the residential flood damage the Upper Midwest's 30 million acres of wetlands avert each year: nearly $23 billion in the analysis's 2022 prices ($15 to $30 billion, our range around one study's figure)."
+    },
+    {
+      "id": "units_affected_per_year",
+      "section": "reach",
+      "label": "Flood damage the Upper Midwest's wetlands avert a year, in 2025 dollars",
+      "format": "usd",
+      "formula": "wetland_flood_damage_study * @cpi.usa_2025 / @cpi.usa_2022",
+      "explainer": "The study's figure in 2025 prices (US consumer prices, facts: cpi)."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "effect",
+      "label": "Years a won reform counts before it would have come anyway",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "unit": "years",
+      "explainer": "The shared years a won reform counts ($win_years_counted): the protections kept count for the years before the question would have been settled anyway; the drainage builds up over them (wetland_share_lost)."
+    },
+    {
+      "id": "farmed_wetland_share",
+      "section": "effect",
+      "label": "Share of the wetlands Swampbuster protects (farmed land of farmers in USDA programmes)",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Swampbuster binds only farmers who take USDA programme benefits, on wetlands on or next to farmland; the region's other wetlands are public, unfarmed or under state law (Minnesota's Wetland Conservation Act, Wisconsin's wetland rules). 40% (20% to 60%), our judgment for the Upper Midwest, where most land is farmed and most farmers take USDA benefits."
+    },
+    {
+      "id": "drain_rate_per_year",
+      "section": "effect",
+      "label": "Share of those wetlands drained a year if Swampbuster fell",
+      "format": "percent",
+      "value": {
+        "low": 0.002,
+        "best": 0.005,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "The US lost wetlands at about half a percent a year at the 1950s-1970s peak of farm drainage, before Swampbuster (US Fish and Wildlife Service, Status and Trends of Wetlands, 1950s to 1970s); with high crop prices and tile drainage cheap, farmers freed of the rule would drain at about that rate: 0.5% a year (0.2% to 1%), our judgment."
     },
     {
       "id": "wetland_share_lost",
       "section": "effect",
-      "label": "Share of that flood protection lost over the years counted if the protections fell",
+      "label": "Average share of the flood protection lost over the years counted if the protections fell",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.05,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "Swampbuster (1985) denies farm subsidies to farmers who drain wetlands on their land; Sodbuster does the same for highly erodible land. Had the challenge struck them down, part of the region's farmed wetlands would be drained over the following years (the region lost most of its wetlands to drainage before 1985). An average 5% of the protection lost over the years counted (1% to 15%), our judgment: about 1-2% of the wetlands drained a year, accumulating, on the share of them on farmland.",
-      "source": {
-        "title": "Iowa Environmental Council (29 May 2025), Victory: judge rules against dangerous case seeking to gut wetland protections",
-        "url": "https://www.iaenvironment.org/newsroom/water-and-land-news/victory-judge-rules-against-dangerous-case-seeking-to-gut-wetland-protections",
-        "retrieved": "2026-11-14",
-        "quote": "the program could have been revoked entirely, along with its sister program, Sodbuster"
-      }
+      "explainer": "Drainage builds up: in year t of the years counted, t years' drainage is gone, so the average share lost is the protected share × the yearly rate × (years + 1) ÷ 2 (the years counted are the shared slider). Wetlands' flood protection is taken as proportional to their area.",
+      "formula": "farmed_wetland_share * drain_rate_per_year * (years_of_impact + 1) * 0.5"
     },
     {
       "id": "value_per_dollar_us",
@@ -223,17 +255,8 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "CTM Holdings v. USDA argued that Swampbuster exceeds Congress's power and aimed for the Supreme Court; earlier challenges all failed, but the Supreme Court has narrowed federal wetland power before (Sackett v. EPA, 2023). One event, so drawn as one: 10% (2% to 30%), our judgment.",
+      "explainer": "CTM Holdings v. USDA (filed 2024) argued that Swampbuster exceeds Congress's power and aimed for the Supreme Court. The reference class: every earlier challenge failed (Horn Farms v. Johanns, 7th Circuit 2005, upheld it under the spending power), but the Supreme Court has narrowed federal wetland power before (Sackett v. EPA, 2023). One event, so drawn as one: 10% (2% to 30%), our judgment.",
       "single_event": true
-    },
-    {
-      "id": "years_of_impact",
-      "section": "effect",
-      "label": "Years a won reform counts before it would have come anyway",
-      "format": "number",
-      "formula": "$win_years_counted",
-      "unit": "years",
-      "explainer": "The shared years a won reform counts ($win_years_counted): the protections kept count for the years before the question would have been settled anyway."
     },
     {
       "id": "years_until_effect",
@@ -280,12 +303,12 @@
       "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
       "value": {
-        "low": 0.4,
-        "best": 0.7,
+        "low": 0.5,
+        "best": 0.8,
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "The $23 billion is UCS's own model of residential flood losses, not peer-reviewed evaluation, and the share drained without the protections is a judgment: 0.7 (0.4 to 1.0), our judgment, as the template's default for a single study."
+      "explainer": "How far UCS's $23 billion can be trusted: one organisation's model of residential flood losses, not peer-reviewed evaluation, and flood protection may not fall in proportion to wetland area. 0.8 (0.5 to 1.0), our judgment. The drainage judgment's doubt is in its own ranges, not here."
     },
     {
       "id": "counterfactual_adj",
@@ -293,17 +316,17 @@
       "label": "Share of that chance the 2025 ruling removed",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.5,
-        "high": 0.8
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "The district court's ruling (29 May 2025, Northern District of Iowa) kept the protections, but it can be appealed, and the government defends them too: half the chance of their falling removed by the ruling, 0.5 (0.2 to 0.8), our judgment.",
+      "explainer": "The district court's ruling (29 May 2025) is final: no appeal was filed by the July 2025 deadline. A new challenge later is the shared years a win counts, not asked again here. 0.9 (0.7 to 1.0), our judgment: the government, which also defended the rule, might have won alone on the same grounds (the case turned on the spending power and on exhausting administrative remedies).",
       "source": {
-        "title": "Iowa Environmental Council (29 May 2025)",
-        "url": "https://www.iaenvironment.org/newsroom/water-and-land-news/victory-judge-rules-against-dangerous-case-seeking-to-gut-wetland-protections",
+        "title": "Food & Water Watch (5 August 2025), on the final ruling in CTM Holdings v. USDA",
+        "url": "https://www.foodandwaterwatch.org/?p=13137",
         "retrieved": "2026-11-14",
-        "quote": "Judge C.J. Williams"
+        "note": "The plaintiffs did not appeal; the judgment stands."
       }
     },
     {
@@ -312,12 +335,12 @@
       "label": "UCS's share of the resources behind the defence",
       "format": "percent",
       "value": {
-        "low": 0.005,
-        "best": 0.03,
-        "high": 0.1
+        "low": 0.001,
+        "best": 0.01,
+        "high": 0.05
       },
       "kind": "judgment",
-      "explainer": "The defence was the Justice Department's for USDA and the intervenors' (the Iowa Farmers Union, the Iowa Environmental Council, Dakota Rural Action and Food & Water Watch, represented by the Environmental Law & Policy Center); UCS's wetland analysis is cited in the case's background and its annual report says it 'helped defeat' the lawsuit (p. 15). UCS's share of all resources behind the win, 3% (0.5% to 10%), our judgment.",
+      "explainer": "The defence was the Justice Department's for USDA and the intervenors' (the Iowa Farmers Union, the Iowa Environmental Council, Dakota Rural Action and Food & Water Watch, represented by the Environmental Law & Policy Center); UCS was not a party, its flood figure is not in the intervenors' brief, and the court ruled on the spending power and on administrative exhaustion. Its analysis appears in the Iowa Environmental Council's account of the case and in UCS's claim that it 'helped defeat' the suit (annual report p. 15). One analysis against two years of litigation by the government and four groups: 1% (0.1% to 5%), our judgment.",
       "source": {
         "title": "Union of Concerned Scientists, 2025 Annual Report (fiscal year 1 October 2024 to 30 September 2025)",
         "url": "https://www.ucs.org/sites/default/files/2025-11/2025-UCS-annual-report.pdf",
@@ -361,7 +384,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "The rest of the programme, each part a share of the wetland branch's value: fertilizer (nitrogen) analysis and advocacy, whose cuts in nitrous oxide and nitrate pollution would count in tonnes and health; the San Joaquin Valley groundwater recommendations; the farm bill's conservation programmes and farmworkers' heat and pesticide protections; analysis of the costs of tariffs to farmers. None has a counted win of the year, so each counts only for the chance it moves a later rule: together half the wetland branch's value, 50% (15% to 60%), our judgment, inside the family's bounds; the climate part of the fertilizer work would be worth more if a rule followed.",
+      "explainer": "The rest of the programme and the win's other goods, each a share of the wetland branch's value: fertilizer (nitrogen) analysis and advocacy, whose cuts in nitrous oxide and nitrate pollution would count in tonnes and health; the San Joaquin Valley groundwater recommendations; the farm bill's conservation programmes and farmworkers' heat and pesticide protections; analysis of the costs of tariffs to farmers; and, from the wetlands kept, nitrate removal, habitat, the carbon drainage would release, and Sodbuster's protection of erodible land (decided in the same case). None has a counted win of the year, so each counts only for the chance it moves a later rule: together half the wetland branch's value, 50% (15% to 60%), our judgment, inside the family's bounds.",
       "source": {
         "title": "Union of Concerned Scientists, 2025 Annual Report (fiscal year 1 October 2024 to 30 September 2025)",
         "url": "https://www.ucs.org/sites/default/files/2025-11/2025-UCS-annual-report.pdf",

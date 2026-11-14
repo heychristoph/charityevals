@@ -730,7 +730,7 @@
       "format": "number",
       "formula": "@climate.years_until_avoided_regulation",
       "unit": "years",
-      "explainer": "The shared wait for rules and tax credits (3 years, 1 to 6): the US methane, power-plant and vehicle rules all had compliance dates two to four years after they were signed."
+      "explainer": "The shared wait for rules and tax credits (3 years, 1 to 6): the US methane, power-plant and vehicle rules all had compliance dates two to four years after they were signed. Used by the wins without compliance dates of their own (the Inflation Reduction Act); the rules use their own dates (<win>_years_until_avoided)."
     },
     {
       "id": "wait_discount",
@@ -753,6 +753,74 @@
       "label": "Discounted years of impact (rules)",
       "format": "number",
       "formula": "years_pv * wait_discount",
+      "unit": "years"
+    },
+    {
+      "id": "veh_win_year",
+      "section": "effect",
+      "label": "EPA vehicle standards: year the win was final",
+      "format": "integer",
+      "value": 2024,
+      "kind": "observed",
+      "source": {
+        "title": "US EPA (20 March 2024), Biden-Harris administration finalizes strongest-ever pollution standards for cars",
+        "url": "https://www.epa.gov/newsreleases/biden-harris-administration-finalizes-strongest-ever-pollution-standards-cars-position",
+        "retrieved": "2026-11-14",
+        "note": "Final rule of 20 March 2024, for model years 2027 and later.",
+        "page": "news release dated 20 March 2024"
+      },
+      "explainer": "EPA finalised the standards in March 2024, for model years from 2027.",
+      "unit": "Year"
+    },
+    {
+      "id": "veh_years_until_avoided",
+      "section": "effect",
+      "label": "EPA vehicle standards: years from the win until its tonnes start",
+      "format": "number",
+      "formula": "veh_first_year - veh_win_year",
+      "unit": "years",
+      "explainer": "The win's own dates (climate.md: a policy with its own compliance dates uses them), in place of the shared wait."
+    },
+    {
+      "id": "veh_discounted_years",
+      "section": "effect",
+      "label": "EPA vehicle standards: discounted years counted, after the wait",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -veh_years_until_avoided",
+      "unit": "years"
+    },
+    {
+      "id": "pwr_win_year",
+      "section": "effect",
+      "label": "EPA power-plant standards: year the win was final",
+      "format": "integer",
+      "value": 2024,
+      "kind": "observed",
+      "source": {
+        "title": "US EPA (2024), Carbon pollution standards: fact sheet on the standards and regulatory impact analysis",
+        "url": "https://www.epa.gov/system/files/documents/2024-04/cps-111-fact-sheet-standards-and-ria-2024.pdf",
+        "retrieved": "2026-11-14",
+        "note": "Final rule of April 2024; the estimate runs 2028-2047.",
+        "page": "fact sheet, April 2024 (final standards)"
+      },
+      "explainer": "EPA finalised the standards in April 2024; the RIA's cuts start in 2028.",
+      "unit": "Year"
+    },
+    {
+      "id": "pwr_years_until_avoided",
+      "section": "effect",
+      "label": "EPA power-plant standards: years from the win until its tonnes start",
+      "format": "number",
+      "formula": "pwr_first_year - pwr_win_year",
+      "unit": "years",
+      "explainer": "The win's own dates (climate.md: a policy with its own compliance dates uses them), in place of the shared wait."
+    },
+    {
+      "id": "pwr_discounted_years",
+      "section": "effect",
+      "label": "EPA power-plant standards: discounted years counted, after the wait",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -pwr_years_until_avoided",
       "unit": "years"
     },
     {
@@ -829,7 +897,7 @@
       "section": "effect",
       "label": "EPA power-plant standards: expected tonnes before adjustments",
       "format": "number",
-      "formula": "pwr_tonnes_per_year * p_success * discounted_years",
+      "formula": "pwr_tonnes_per_year * p_success * pwr_discounted_years",
       "unit": "t CO₂e"
     },
     {
@@ -837,7 +905,7 @@
       "section": "effect",
       "label": "EPA vehicle standards: expected tonnes before adjustments",
       "format": "number",
-      "formula": "veh_tonnes_per_year * p_success * discounted_years",
+      "formula": "veh_tonnes_per_year * p_success * veh_discounted_years",
       "unit": "t CO₂e"
     },
     {
