@@ -14,7 +14,7 @@ currency, year).
 
 - Start with the charity's own financials page (audited statements, 990s it hosts): open the listing
   page and take the latest audited year it links, never a guessed URL (a missing file isn't
-  proof the year is unaudited). ProPublica's downloads often show a bot check; the IRS bulk 990 XML (index CSV, range-read zip) works.
+  proof the year is unaudited). ProPublica's downloads often show a bot check; `python3 scripts/irs-990.py EIN --year T --summary` fetches the IRS e-file XML.
 - US charities: Form 990 via ProPublica Nonprofit Explorer (`projects.propublica.org/nonprofits`),
   Part IX (functional expenses: program, management, fundraising; salaries lines 5–9). UK: Charity
   Commission register (accounts PDF). Elsewhere: the audited statements on the charity's site.
