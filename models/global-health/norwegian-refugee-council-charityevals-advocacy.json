@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "norwegian-refugee-council",
   "owner": "charityevals",
-  "summary": "The Norwegian Refugee Council's advocacy and information work (NOK 256 million, $25 million, in 2025): campaigning against the 2025 humanitarian funding gap and for access in Sudan and the DRC, media work and the Internal Displacement Monitoring Centre's data. It publishes no measured result, so both branches are built from ranged judgments and counted at half by the shared missing-data slider: NRC's share of the aid that NGOs' funding advocacy kept or added, net of the aid it displaces (about 97% of the result), and the extra aid access gains let through, net of the same (about 3%), plus a judged share for its other work, each dollar of aid at the site's shared value of a humanitarian dollar. It comes to about 0.013 years of healthy life per $1,000 (combined range 0.001-0.23), an eighth of the site's global-health median, because a dollar of humanitarian aid is worth about a fifth of cash to the poor (the site's relief models before their missing-data step) and NRC's share of the aid moved is small; the result is mostly uncertainty, judgments on how much aid advocacy moves and NRC's part in it driving it.",
+  "summary": "The Norwegian Refugee Council's advocacy and information work (NOK 256 million, $25 million, in 2025): campaigning against the 2025 humanitarian funding gap and for access in Sudan and the DRC, media work and the Internal Displacement Monitoring Centre's data. It publishes no measured result, so both branches are built from ranged judgments and counted at half by the shared missing-data slider: NRC's share of the aid that NGOs' funding advocacy kept or added, net of the aid it displaces (about 97% of the result), and the extra aid access gains let through, net of the same (about 3%), plus a judged share for its other work, each dollar of aid at the site's shared value of a humanitarian dollar. It comes to about 0.016 years of healthy life per $1,000 (combined range 0.001-0.28), about a fifth of the site's global-health median, because a dollar of humanitarian aid is worth about a fifth of cash to the poor (the site's relief models with nothing taken off for missing data; this model's own missing-data step applies once) and NRC's share of the aid moved is small; the result is mostly uncertainty, judgments on how much aid advocacy moves and NRC's part in it driving it.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Norwegian Refugee Council, advocacy and information (2025)",
@@ -274,7 +274,7 @@
       "format": "small",
       "formula": "@aid_value.humanitarian_vs_cash * @cash.uov_per_dollar",
       "unit": "units of value / $",
-      "explainer": "The site's shared value of a dollar of humanitarian aid whose use isn't known more exactly (facts/aid_value.json: about 0.2 times cash, 0.05-0.8, the site's relief models before their missing-data step) × the value of a dollar given as cash. The appeals' money goes to every kind of relief, not to NRC's programmes, so it takes the shared figure, the same in every model that values aid won or kept."
+      "explainer": "The site's shared value of a dollar of humanitarian aid whose use isn't known more exactly (facts/aid_value.json: about 0.2 times cash, 0.05-0.8, the site's relief models with nothing taken off for missing data, so this model's own missing-data step is the only one) × the value of a dollar given as cash. The appeals' money goes to every kind of relief, not to NRC's programmes, so it takes the shared figure, the same in every model that values aid won or kept."
     },
     {
       "id": "acc_displaced_share",
@@ -458,7 +458,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 0.8 (0.5-1): the gains are NRC's own report of partial progress; aid per person and its value are averages."
+      "explainer": "Judgment 0.8 (0.5-1): the gains are NRC's own report of partial progress, with no outside account of how much access changed on the ground; how well the aid works is in the shared aid value, not here."
     },
     {
       "id": "acc_counterfactual_adj",
@@ -506,13 +506,8 @@
       "section": "adjustments",
       "label": "Evidence adjustment, funding",
       "format": "multiple",
-      "value": {
-        "low": 0.5,
-        "best": 0.8,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 0.8 (0.5-1): the funding total is measured; what advocacy moved is a judgment, already in the share above."
+      "explainer": "1: how well the aid works is already in the shared value of a humanitarian dollar (@aid_value, built from the relief models with their own evidence adjustments), and how much aid the advocacy moved is the judgment fund_aid_moved_share, whose range carries that doubt; a further discount would count the same doubt twice.",
+      "formula": "1"
     },
     {
       "id": "fund_counterfactual_adj",
