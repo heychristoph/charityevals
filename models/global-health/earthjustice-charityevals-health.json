@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "earthjustice",
  "owner": "charityevals",
- "summary": "Earthjustice's healthy-communities work, toxics in air and water (our judgment: 25% of its programme spending, $34.3M in the year to June 2025): this model counts EPA's 2024 fine-particle (PM2.5) air standard, which Earthjustice's clients pressed for and defended in court (upheld in June 2026), and the 2024 PFAS drinking-water standards it defends, by EPA's own estimates of deaths avoided (up to 4,500 a year for PM2.5 from 2032; 9,600 over decades for PFAS), plus 50% for its other wins of fiscal 2022-2025 (chemical plants, coal ash, refineries, pesticides). At the defaults it comes to 0.015 years of healthy life per $1,000, nearly all from the PM2.5 standard; it is low because the deaths come years after the rules, advocacy is one cause of a rule and Earthjustice one of many groups behind it, and both rules' survival is in doubt. The biggest uncertainties are the years a won rule counts, the share of a rule due to advocacy and Earthjustice's share; both branches are discounted for missing data. Compliance costs to US water systems and industry aren't counted, as in the site's other policy models.",
+ "summary": "Earthjustice's healthy-communities work, toxics in air and water (our judgment: 25% of its programme spending, $34.3M in the year to June 2025): this model counts EPA's 2024 fine-particle (PM2.5) air standard, which Earthjustice's clients pressed for and defended in court (upheld in June 2026), and the 2024 PFAS drinking-water standards it defends, by EPA's own estimates of deaths avoided (about 3,000 a year for PM2.5, between EPA's two estimates for 2032; 9,600 over decades for PFAS), plus 50% for its other wins of fiscal 2022-2025 (chemical plants, coal ash, refineries, pesticides). At the defaults it comes to 0.0084 years of healthy life per $1,000, nearly all from the PM2.5 standard; it is low because the deaths come years after the rules, advocacy is one cause of a rule and Earthjustice one of many groups behind it, the deaths are mostly of people over 70, and both rules' survival is in doubt. The biggest uncertainties are the years a won rule counts, the share of a rule due to advocacy and Earthjustice's share; both branches are discounted for missing data. Compliance costs to US water systems and industry aren't counted, as in the site's other policy models.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Earthjustice (healthy communities)",
@@ -331,19 +331,11 @@
   {
    "id": "pm_deaths_per_year",
    "section": "reach",
-   "label": "EPA's 2024 fine-particle (PM2.5) standard: premature deaths avoided a year once met (2032)",
+   "label": "EPA's 2024 fine-particle (PM2.5) standard: premature deaths avoided a year once in effect",
    "format": "integer",
-   "value": 4500,
-   "kind": "observed",
    "unit": "deaths / year",
-   "source": {
-    "title": "US EPA (2024), Final reconsideration of the PM NAAQS: overview fact sheet",
-    "url": "https://www.epa.gov/system/files/documents/2024-02/pm-naaqs-overview.pdf",
-    "page": "p. 3",
-    "quote": "could result in as many as 4,500 avoided premature deaths and 290,000 avoided lost workdays in 2032",
-    "retrieved": "2026-11-14"
-   },
-   "explainer": "EPA's estimate for 2032, the first year states must meet the stricter annual limit (9 micrograms per cubic metre, down from 12), against a baseline of the rules already in place. EPA's figure is the top of its range ('as many as'); the evidence row below takes that into account."
+   "explainer": "The shared figure for this rule (facts: climate), read by every model that counts it: 3,000 a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults (Pope et al. 2019) and 2,100 for the over-64s (Wu et al. 2020).",
+   "formula": "@climate.us_pm_naaqs_2024_deaths_per_year"
   },
   {
    "id": "pfas_deaths_total",
@@ -373,7 +365,7 @@
    "source": {
     "title": "US EPA (2024), PFAS National Primary Drinking Water Regulation: costs and benefits fact sheet",
     "url": "https://www.epa.gov/system/files/documents/2024-04/pfas-npdwr_fact-sheet_cost-and-benefits_4.8.24.pdf",
-    "page": "p. 1, table",
+    "page": "p. 2, table",
     "quote": "Bladder Cancer (resulting from co-removal of disinfection byproducts with PFAS) $380 million 2,600 deaths and 7,300 illnesses",
     "retrieved": "2026-11-14"
    },
@@ -391,12 +383,39 @@
    "source": {
     "title": "US EPA (2024), PFAS National Primary Drinking Water Regulation: costs and benefits fact sheet",
     "url": "https://www.epa.gov/system/files/documents/2024-04/pfas-npdwr_fact-sheet_cost-and-benefits_4.8.24.pdf",
-    "page": "p. 1, table",
+    "page": "p. 2, table",
     "note": "Developmental effects: 1,300 deaths.",
     "retrieved": "2026-11-14"
    },
    "explainer": "Infant deaths from lower birth weight, valued below at the under-five value.",
    "drawn_with": "pfas_deaths_total"
+  },
+  {
+   "id": "pfas_cvd_deaths",
+   "section": "reach",
+   "label": "Of which: deaths from heart attacks and strokes (cardiovascular effects)",
+   "format": "integer",
+   "value": 3700,
+   "kind": "observed",
+   "unit": "deaths",
+   "source": {
+    "title": "US EPA (2024), PFAS National Primary Drinking Water Regulation: costs and benefits fact sheet",
+    "url": "https://www.epa.gov/system/files/documents/2024-04/pfas-npdwr_fact-sheet_cost-and-benefits_4.8.24.pdf",
+    "page": "p. 2, table",
+    "quote": "Cardiovascular Effects $607 million 3,700 deaths and 15,600 illnesses",
+    "retrieved": "2026-11-14"
+   },
+   "explainer": "Heart-disease deaths, valued below at the ages of US cardiovascular deaths; the rest of the PFAS deaths (2,000) are kidney cancer.",
+   "drawn_with": "pfas_deaths_total"
+  },
+  {
+   "id": "pfas_cancer_deaths",
+   "section": "reach",
+   "label": "Of which: kidney-cancer deaths (the rest, after heart disease and developmental effects)",
+   "format": "integer",
+   "formula": "pfas_deaths_total - pfas_dbp_deaths - pfas_dev_deaths - pfas_cvd_deaths",
+   "unit": "deaths",
+   "explainer": "9,600 - 2,600 - 1,300 - 3,700 = 2,000, EPA's kidney-cancer figure ('Kidney Cancer $354 million 2,000 deaths', the same table)."
   },
   {
    "id": "pfas_analysis_years",
@@ -434,22 +453,58 @@
    "explainer": "The two branches' deaths a year, for reading; each branch is valued on its own below."
   },
   {
+   "id": "cvd_value_70plus",
+   "section": "effect",
+   "label": "Value of a US heart or lung death at 70 or older (units of value)",
+   "format": "number",
+   "formula": "(1 - @death_ages.cvd_share_80plus_of_70plus_usa) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cvd_share_80plus_of_70plus_usa * @moral_weights.givewell_age_80_84",
+   "unit": "units of value",
+   "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of US cardiovascular deaths at 70 or older that are at 80 or older (facts: death_ages), as in the site's other models of rich-country deaths (Environmental Defense Fund, British Heart Foundation)."
+  },
+  {
+   "id": "cvd_value_per_death",
+   "section": "effect",
+   "label": "Value of a US heart or lung death averted (units of value)",
+   "format": "number",
+   "formula": "(@death_ages.cvd_share_under5_usa * @moral_weights.uov_per_death_under5 + @death_ages.cvd_share_5_14_usa * @moral_weights.uov_per_death_age_5_14 + @death_ages.cvd_share_15_49_usa * @moral_weights.uov_per_death_age_15_49 + @death_ages.cvd_share_50_69_usa * @moral_weights.uov_per_death_age_50_74 + @death_ages.cvd_share_70plus_usa * cvd_value_70plus) * $life_value_multiplier",
+   "unit": "units of value",
+   "explainer": "The ages of US cardiovascular deaths (facts: death_ages, GBD 2023: 74% at 70 or older) valued by GiveWell's weights by age, × your value of a life. PM2.5 deaths in the US are mostly heart and lung deaths of older adults, and the PFAS rule's heart-disease deaths are cardiovascular, so both use it."
+  },
+  {
    "id": "pm_value_per_death",
    "section": "effect",
    "label": "PM2.5 standard: value of a death averted (units of value)",
    "format": "number",
-   "formula": "(@death_ages.cvd_share_under5_gbr * @moral_weights.uov_per_death_under5 + @death_ages.cvd_share_5_14_gbr * @moral_weights.uov_per_death_age_5_14 + @death_ages.cvd_share_15_49_gbr * @moral_weights.uov_per_death_age_15_49 + (@death_ages.cvd_share_50_69_gbr + @death_ages.cvd_share_70plus_gbr) * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier",
+   "formula": "cvd_value_per_death",
    "unit": "units of value",
-   "explainer": "Valued like every death on the site, by age band (GiveWell's moral weights, facts: moral_weights) × your value of a life. PM2.5 deaths in the US are mostly heart and lung deaths of older adults: the ages of cardiovascular deaths in a rich country (facts: death_ages, cvd_share_*_gbr, the UK, the nearest the facts hold to the US: 98% at 50 and over) stand in for them, not the world's air-pollution ages (which hold more child deaths)."
+   "explainer": "The US value of a heart or lung death (row above)."
+  },
+  {
+   "id": "cancer_value_70plus",
+   "section": "effect",
+   "label": "Value of a US cancer death at 70 or older (units of value)",
+   "format": "number",
+   "formula": "(1 - @death_ages.cancer_share_80plus_of_70plus_usa) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cancer_share_80plus_of_70plus_usa * @moral_weights.givewell_age_80_84",
+   "unit": "units of value",
+   "explainer": "GiveWell's five-year weights above 70, mixed by the share of US cancer deaths at 70 or older that are at 80 or older (facts: death_ages, WHO GHE 2023: 50%)."
+  },
+  {
+   "id": "cancer_value_per_death",
+   "section": "effect",
+   "label": "Value of a US cancer death averted (units of value)",
+   "format": "number",
+   "formula": "(@death_ages.cancer_share_under5_usa * @moral_weights.uov_per_death_under5 + @death_ages.cancer_share_5_14_usa * @moral_weights.uov_per_death_age_5_14 + @death_ages.cancer_share_15_49_usa * @moral_weights.uov_per_death_age_15_49 + @death_ages.cancer_share_50_69_usa * @moral_weights.uov_per_death_age_50_74 + @death_ages.cancer_share_70plus_usa * cancer_value_70plus) * $life_value_multiplier",
+   "unit": "units of value",
+   "explainer": "The ages of US cancer deaths (facts: death_ages, WHO GHE 2023) valued by GiveWell's weights by age, × your value of a life: the PFAS rule's kidney-cancer deaths, and the byproducts' bladder-cancer deaths (the side effect)."
   },
   {
    "id": "pfas_value_per_death",
    "section": "effect",
    "label": "PFAS standards: value of a death averted (units of value)",
    "format": "number",
-   "formula": "((pfas_deaths_total - pfas_dbp_deaths - pfas_dev_deaths) * (@death_ages.cancer_share_under5_usa * @moral_weights.uov_per_death_under5 + @death_ages.cancer_share_5_14_usa * @moral_weights.uov_per_death_age_5_14 + @death_ages.cancer_share_15_49_usa * @moral_weights.uov_per_death_age_15_49 + (@death_ages.cancer_share_50_69_usa + @death_ages.cancer_share_70plus_usa) * @moral_weights.uov_per_death_age_50_74) + pfas_dev_deaths * @moral_weights.uov_per_death_under5) / (pfas_deaths_total - pfas_dbp_deaths) * $life_value_multiplier",
+   "formula": "(pfas_cvd_deaths * cvd_value_per_death + pfas_cancer_deaths * cancer_value_per_death + pfas_dev_deaths * @moral_weights.uov_per_death_under5 * $life_value_multiplier) / (pfas_deaths_total - pfas_dbp_deaths)",
    "unit": "units of value",
-   "explainer": "By age band × your value of a life: the heart-disease and kidney-cancer deaths at the ages of US cancer deaths (facts: death_ages, cancer_share_*_usa), the 1,300 developmental deaths as infants (the under-five value). Deaths over 74 take the 50-74 value, the site's rule for want of an older band. The byproducts' bladder-cancer deaths (the side effect) are valued like the branch."
+   "explainer": "By age × your value of a life: the 3,700 heart-disease deaths at the ages of US cardiovascular deaths, the 2,000 kidney-cancer deaths at the ages of US cancer deaths, the 1,300 developmental deaths as infants (the under-five value); averaged over the 7,000 deaths from PFAS itself."
   },
   {
    "id": "value_per_unit_year",
@@ -478,25 +533,20 @@
    "explainer": "The shared number of years a won reform counts (docs/normalization.md 2.9)."
   },
   {
-   "id": "years_until_effect",
+   "id": "pm_years_until_effect",
    "section": "effect",
    "label": "PM2.5 standard: years from the rule until its deaths are avoided",
    "format": "number",
-   "value": {
-    "low": 6,
-    "best": 8,
-    "high": 10
-   },
-   "kind": "judgment",
    "unit": "years",
-   "explainer": "States must meet the 2024 limit by 2032, EPA's analysis year, with cuts building from about 2028; designations, due in February 2026, were ordered by February 2027 and EPA is appealing. Our judgment, 8 years from 2024 (6 to 10)."
+   "explainer": "The shared figure for this rule (facts: climate): 9 years from 2024 (7 to 11); EPA assumed attainment in late 2032 after designations in late 2025, and designations are now due by February 2027.",
+   "formula": "@climate.us_pm_naaqs_2024_years_until_effect"
   },
   {
    "id": "wait_discount",
    "section": "effect",
    "label": "Discount for the wait",
    "format": "multiple",
-   "formula": "(1 + $discount_rate) ^ -years_until_effect"
+   "formula": "(1 + $discount_rate) ^ -pm_years_until_effect"
   },
   {
    "id": "years_pv",
@@ -557,18 +607,18 @@
    "section": "effect",
    "label": "PM2.5 standard: years lived with illness averted per death averted",
    "format": "number",
-   "formula": "@death_ages.air_pollution_yld_share / @death_ages.cvd_deaths_per_daly_gbr",
+   "formula": "@death_ages.cvd_yld_share_gbr / @death_ages.cvd_deaths_per_daly_gbr",
    "unit": "DALYs",
-   "explainer": "The shared figures (facts: death_ages): ambient air pollution's share of its burden that is illness (air_pollution_yld_share, 8%) over the deaths per DALY of cardiovascular disease in a rich country (cvd_deaths_per_daly_gbr, the UK standing for the US, as for the ages): each death averted comes with that much illness averted."
+   "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (facts: death_ages, cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About 2.5 healthy years of illness per death."
   },
   {
    "id": "pfas_illness_dalys_per_death",
    "section": "effect",
    "label": "PFAS standards: years lived with illness averted per death averted",
    "format": "number",
-   "formula": "@death_ages.cancer_yld_share_usa / @death_ages.cancer_deaths_per_daly_usa",
+   "formula": "(pfas_cvd_deaths * @death_ages.cvd_yld_share_gbr / @death_ages.cvd_deaths_per_daly_gbr + pfas_cancer_deaths * @death_ages.cancer_yld_share_usa / @death_ages.cancer_deaths_per_daly_usa) / (pfas_deaths_total - pfas_dbp_deaths)",
    "unit": "DALYs",
-   "explainer": "The shared figures for US cancer (facts: death_ages, cancer_yld_share_usa over cancer_deaths_per_daly_usa), standing for the heart-disease and cancer illness EPA counts."
+   "explainer": "Illness per death averted, by cause: the heart-disease deaths with the shared cardiovascular figures (cvd_yld_share_gbr over cvd_deaths_per_daly_gbr, the UK standing for the US), the kidney-cancer deaths with the US cancer figures (cancer_yld_share_usa over cancer_deaths_per_daly_usa); the infant deaths add none."
   },
   {
    "id": "pm_illness_downstream",
@@ -597,28 +647,31 @@
   {
    "id": "evidence_adj",
    "section": "adjustments",
-   "label": "Evidence adjustment: how far EPA's death estimates should be trusted",
+   "label": "Evidence adjustment: how far EPA's PFAS death estimates should be trusted",
    "format": "multiple",
    "value": {
-    "low": 0.4,
-    "best": 0.7,
-    "high": 1.0
+    "low": 0.5,
+    "best": 0.8,
+    "high": 1.1
    },
    "kind": "judgment",
-   "explainer": "EPA's PM2.5 figure is the top of its range (the larger of its two concentration-response studies; the other gives about half), and its PFAS deaths rest on dose-response models for heart disease and kidney cancer from observational studies. Our judgment, 0.7 (0.4 to 1.0), between face value and EPA's lower estimate; delivery and repeal are in each branch's implementation row."
+   "explainer": "EPA's PFAS deaths rest on dose-response models for heart disease and kidney cancer from observational studies, and on its own exposure modelling, which can run high or low. Our judgment, 0.8 (0.5 to 1.1), as in the site's other models of EPA's estimates (Environmental Defense Fund, Earthjustice's climate work); the PM2.5 branch reads the rule's shared evidence row, and delivery and repeal are in each branch's implementation row."
+  },
+  {
+   "id": "pm_evidence_adj",
+   "section": "adjustments",
+   "label": "PM2.5 standard: evidence adjustment on EPA's deaths",
+   "format": "multiple",
+   "formula": "@climate.us_pm_naaqs_2024_evidence",
+   "explainer": "The shared figure for this rule (facts: climate): 1 (0.7 to 1.2); the doubt about EPA's two estimates is already in the shared deaths figure."
   },
   {
    "id": "pm_counterfactual_adj",
    "section": "adjustments",
    "label": "PM2.5 standard: share of the deaths that wouldn't have been avoided anyway",
    "format": "percent",
-   "value": {
-    "low": 0.6,
-    "best": 0.8,
-    "high": 1
-   },
-   "kind": "judgment",
-   "explainer": "EPA's estimate is already net of the rules in place; some of the cut would have come from coal closings and vehicle turnover beyond its baseline. Our judgment, 80% (60% to 100%)."
+   "explainer": "The shared figure for this rule (facts: climate): 90% (70% to 100%); EPA's baseline already holds the rules then in force.",
+   "formula": "@climate.us_pm_naaqs_2024_counterfactual"
   },
   {
    "id": "pm_attribution_share_shared",
@@ -637,26 +690,15 @@
     "quote": "intervened to defend the strengthened soot standard",
     "retrieved": "2026-11-14"
    },
-   "explainer": "Earthjustice was counsel to the health and environmental groups (the American Lung Association, NRDC, the Environmental Defense Fund and Sierra Club among its clients) that pressed EPA to tighten the standard and intervened to defend it in Kentucky v. EPA, which the D.C. Circuit upheld in June 2026 against industry, 25 states and EPA itself; Clean Air Task Force represented other intervenors, and states defended it too. Earthjustice then won an order that EPA designate the areas that fail the standard. Its clients' own work counts among the others' resources. Our judgment, 25% (10% to 45%)."
+   "explainer": "Earthjustice was counsel to the health and environmental groups (the American Lung Association, NRDC, the Environmental Defense Fund and Sierra Club among its clients) that pressed EPA to tighten the standard and intervened to defend it in Kentucky v. EPA, briefed in 2024 and 2025 and upheld by the D.C. Circuit in June 2026 against industry, 25 states and EPA itself; Clean Air Task Force represented other intervenors, and states defended it too. Its clients' own work counts among the others' resources (the Environmental Defense Fund, 10% in its own model; the two sum well within the advocacy behind the rule). Our judgment, 25% (10% to 45%)."
   },
   {
    "id": "pm_implementation_adj",
    "section": "adjustments",
    "label": "PM2.5 standard: share of the deaths actually avoided",
    "format": "percent",
-   "value": {
-    "low": 0.3,
-    "best": 0.6,
-    "high": 0.85
-   },
-   "kind": "judgment",
-   "source": {
-    "title": "Harvard Environmental and Energy Law Program, Regulatory Tracker: PM NAAQS",
-    "url": "https://eelp.law.harvard.edu/tracker/epa-finalized-stricter-national-ambient-air-quality-standards-naaqs-for-particulate-matter-pm/",
-    "quote": "On Nov. 24, 2025, EPA asked the D.C. Circuit to vacate the 2024 revision",
-    "retrieved": "2026-11-14"
-   },
-   "explainer": "EPA asked the court to vacate its own standard in November 2025; the D.C. Circuit refused and upheld it (June 2026), states have petitioned the Supreme Court, and EPA missed the February 2026 designation deadline until a court ordered designations by February 2027. Meeting the standard also depends on state plans and on federal rules being rolled back. Our judgment, 60% (30% to 85%)."
+   "explainer": "The shared figure for this rule (facts: climate): 50% (20% to 80%); upheld in June 2026, but EPA means to reconsider it, states have gone to the Supreme Court and designations are late (court-ordered by February 2027).",
+   "formula": "@climate.us_pm_naaqs_2024_delivered_share"
   },
   {
    "id": "pfas_counterfactual_adj",
@@ -737,7 +779,7 @@
    "section": "adjustments",
    "label": "PM2.5 standard: all adjustments combined",
    "format": "multiple",
-   "formula": "evidence_adj * pm_counterfactual_adj * pm_attribution_share * pm_implementation_adj * missing_data_adj"
+   "formula": "pm_evidence_adj * pm_counterfactual_adj * pm_attribution_share * pm_implementation_adj * missing_data_adj"
   },
   {
    "id": "pfas_total_adj",
@@ -780,10 +822,19 @@
   {
    "id": "pfas_dbp_share",
    "section": "adjustments",
-   "label": "Side effect: bladder-cancer deaths averted by removing disinfection byproducts along with PFAS, as a share of the PFAS branch",
+   "label": "Side effect: bladder-cancer deaths averted by removing disinfection byproducts along with PFAS, as a share of the PFAS branch's value",
    "format": "percent",
-   "formula": "pfas_dbp_deaths / (pfas_deaths_total - pfas_dbp_deaths)",
-   "explainer": "Treatment for PFAS also removes the byproducts of chlorinating water, which EPA counts as 2,600 bladder-cancer deaths prevented: a benefit beside the rule's own aim, 37% on top of the PFAS deaths.",
+   "formula": "pfas_dbp_deaths * cancer_value_per_death / ((pfas_deaths_total - pfas_dbp_deaths) * pfas_value_per_death)",
+   "explainer": "Treatment for PFAS also removes the byproducts of chlorinating water, which EPA counts as 2,600 bladder-cancer deaths prevented: a benefit beside the rule's own aim, valued at the ages of US cancer deaths and added as a share of the PFAS deaths' value.",
+   "side_effect": "added"
+  },
+  {
+   "id": "pfas_dbp_illness_share",
+   "section": "adjustments",
+   "label": "Side effect: the bladder-cancer deaths' illness, as a share of the PFAS branch's illness",
+   "format": "percent",
+   "formula": "pfas_dbp_deaths * @death_ages.cancer_yld_share_usa / @death_ages.cancer_deaths_per_daly_usa / ((pfas_deaths_total - pfas_dbp_deaths) * pfas_illness_dalys_per_death)",
+   "explainer": "The same 2,600 deaths' illness, with the US cancer figures (cancer_yld_share_usa over cancer_deaths_per_daly_usa).",
    "side_effect": "added"
   },
   {
@@ -820,7 +871,7 @@
    "section": "bridges",
    "label": "Illness averted, credited, a year of the period (DALYs)",
    "format": "number",
-   "formula": "(pm_illness_downstream * pm_total_adj + pfas_illness_downstream * pfas_total_adj * (1 + pfas_dbp_share)) / period_years * (1 + unmodelled_benefits_adj)",
+   "formula": "(pm_illness_downstream * pm_total_adj + pfas_illness_downstream * pfas_total_adj * (1 + pfas_dbp_illness_share)) / period_years * (1 + unmodelled_benefits_adj)",
    "unit": "DALYs / year",
    "explainer": "Each rule's illness × its own adjustments, spread over the period, with the co-removed byproducts' illness and the other wins as shares, like the deaths."
   },

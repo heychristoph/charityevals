@@ -280,7 +280,8 @@ methane, 0.33% of the tonnes); every other climate model 0. Before → after (ou
 
 **Deaths by age (late October 2026).** Each death is valued by the age it comes at, like every death on the
 site (decision 2026-10-31 #4): GiveWell's moral weights by age (`@moral_weights`: under five 116.25, 5–14 134,
-15–49 104, 50–74 42, and 42 above 74 for want of an older band) over the ages of the deaths (facts/death_ages.json,
+15–49 104, 50–74 42, and 42 above 74 where only broad age bands are known; deaths at 70 or older in rich countries
+take GiveWell's five-year weights, 70–74 and 75–79 against 80 and over, mixed by a `*_80plus_of_70plus_*` share) over the ages of the deaths (facts/death_ages.json,
 GBD 2023 via Our World in Data: heat deaths 7% under five, 2% 5–14, 17% 15–49, 74% 50 and over; ambient
 air-pollution deaths 3%, 0.2%, 5%, 92%). Today's heat-death ages stand in for the late-century deaths (our
 judgment; older populations then would lower the value a little). Before: every death at GiveWell's all-ages

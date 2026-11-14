@@ -1,6 +1,6 @@
 ### Summary
 
-The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about 0.0018 years of healthy life per $1,000 (about $230 a tonne of CO₂e), the health and nature work about 0.0016.
+The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about 0.0018 years of healthy life per $1,000 (about $230 a tonne of CO₂e), the health and nature work about 0.0019.
 
 ### What the charity does
 
@@ -18,7 +18,7 @@ The health and nature model values EPA's deaths at the ages of rich-country hear
 
 ### What drives the result
 
-Climate: the US methane rule gives about 55% of the value, the EU regulation about 30%, the Inflation Reduction Act about 10%; the repealed rules and MethaneSAT the rest. Methane's tonnes count for their own, earlier warming and the ozone methane forms (the shared conversion), which is why methane rules dominate. Health and nature: the lead-pipe rule gives about 60%, the soot standard most of the rest.
+Climate: the US methane rule gives about 55% of the value, the EU regulation about 30%, the Inflation Reduction Act about 10%; the repealed rules and MethaneSAT the rest. Methane's tonnes count for their own, earlier warming and the ozone methane forms (the shared conversion), which is why methane rules dominate. Health and nature: the lead-pipe rule gives about 55%, the soot standard most of the rest.
 
 ### Biggest uncertainties
 
@@ -30,7 +30,7 @@ The Inflation Reduction Act's repealed methane fee, the heavy-duty truck standar
 
 ### How this model was checked
 
-Independent audits are in audits/environmental-defense-fund-charityevals/ and audits/environmental-defense-fund-charityevals-health-nature/. Round 1 passed the climate model and found two highs in the health and nature model: US deaths had been valued at the world's air-pollution ages (now US heart-disease ages, GBD 2023, −40%), and the IQ earnings gain lacked the shared household-sharing multiplier. Round 1 also added the Inflation Reduction Act as a branch, used each year's own programme mix for the period's cost, restated EPA's methane tonnes at the shared warming potential (also in Clean Air Task Force's model, +1.5% there), dropped overhead on the satellite write-off, and removed farm methane from the climate model's unmodelled list (it is a branch of the health and nature model). Round 2 passed both models; its remaining points were fixed and checked in a scoped verification round: US deaths at the US heart-disease ages (GBD 2023) rather than the UK's (+12%), a shared judgment for FY2022's programme mix, and better sources for EDF's part in the lead-pipe rule and its dates.
+Independent audits are in audits/environmental-defense-fund-charityevals/ and audits/environmental-defense-fund-charityevals-health-nature/. Round 1 passed the climate model and found two highs in the health and nature model: US deaths had been valued at the world's air-pollution ages (now US heart-disease ages, GBD 2023, −40%), and the IQ earnings gain lacked the shared household-sharing multiplier. Round 1 also added the Inflation Reduction Act as a branch, used each year's own programme mix for the period's cost, restated EPA's methane tonnes at the shared warming potential (also in Clean Air Task Force's model, +1.5% there), dropped overhead on the satellite write-off, and removed farm methane from the climate model's unmodelled list (it is a branch of the health and nature model). Round 2 passed both models; its remaining points were fixed and checked in a scoped verification round: US deaths at the US heart-disease ages (GBD 2023) rather than the UK's (+12%), a shared judgment for FY2022's programme mix, and better sources for EDF's part in the lead-pipe rule and its dates. Later, the soot standard's deaths, wait, counterfactual, delivery and evidence became shared with our Earthjustice model, and illness was counted with both rules' heart deaths (+15%); rounds 5 and 6 verified this.
 
 ### Sources
 

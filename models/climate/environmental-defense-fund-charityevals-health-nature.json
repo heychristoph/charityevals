@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "environmental-defense-fund",
   "owner": "charityevals",
-  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, $110M with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (up to 4,500 deaths a year avoided, upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about 0.0016 years of healthy life per $1,000, three-fifths from the lead-pipe rule and most of the rest from the soot standard; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
+  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, $110M with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (about 3,000 deaths a year avoided, between EPA's two estimates; upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about 0.0019 years of healthy life per $1,000, over half from the lead-pipe rule and most of the rest from the soot standard; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Environmental Defense Fund (health and nature)",
@@ -478,23 +478,11 @@
     {
       "id": "pm_deaths_per_year",
       "section": "reach",
-      "label": "EPA soot standard (2024): deaths a year avoided once areas meet it",
+      "label": "EPA soot standard (2024): deaths a year avoided once in effect",
       "format": "integer",
-      "value": {
-        "low": 1000,
-        "best": 3000,
-        "high": 4500
-      },
-      "kind": "judgment",
-      "explainer": "EPA's February 2024 standard lowered the annual limit on fine particles from 12 to 9 micrograms per cubic metre; EPA estimates 'as many as 4,500 avoided premature deaths' in 2032, when areas must meet it, with the lower figures of its range from other mortality studies. Our judgment, 3,000 a year (1,000 to 4,500), below EPA's top figure because it is the high end of its range.",
+      "explainer": "The shared figure for this rule (facts: climate), read by every model that counts it: 3,000 a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults and 2,100 for the over-64s.",
       "unit": "deaths / year",
-      "source": {
-        "title": "US EPA (2024), Final reconsideration of the national ambient air quality standards for particulate matter: overview fact sheet",
-        "url": "https://www.epa.gov/system/files/documents/2024-02/pm-naaqs-overview.pdf",
-        "page": "Benefits",
-        "quote": "as many as 4,500 avoided premature deaths",
-        "retrieved": "2026-11-14"
-      }
+      "formula": "@climate.us_pm_naaqs_2024_deaths_per_year"
     },
     {
       "id": "lcri_deaths_per_year",
@@ -669,26 +657,22 @@
       "explainer": "The US value of a heart or lung death (row above)."
     },
     {
-      "id": "pm_illness_share",
+      "id": "pm_illness_dalys_per_death",
       "section": "effect",
-      "label": "EPA soot standard: illness's share of air pollution's healthy years lost",
-      "format": "percent",
-      "formula": "@death_ages.air_pollution_yld_share",
-      "explainer": "The shared share of air pollution's burden that is illness rather than death (8%, 5% to 24%): asthma, heart attacks and lost work days, which EPA counts too."
+      "label": "EPA soot standard: years lived with illness averted per death averted",
+      "format": "number",
+      "formula": "@death_ages.cvd_yld_share_gbr / @death_ages.cvd_deaths_per_daly_gbr",
+      "unit": "DALYs per death",
+      "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About 2.5 healthy years of illness per death, counted in healthy years (row pm_illness_dalys)."
     },
     {
       "id": "pm_wait",
       "section": "effect",
       "label": "EPA soot standard: years from the win (2024) until the deaths are avoided",
       "format": "number",
-      "value": {
-        "low": 3,
-        "best": 6,
-        "high": 9
-      },
-      "kind": "judgment",
-      "explainer": "Areas were to be designated in 2026 (EPA missed the February deadline) and must meet the standard by 2032; some cleanup comes earlier through permits and other rules. Our judgment, 6 years from 2024 (3 to 9).",
-      "unit": "years"
+      "explainer": "The shared figure for this rule (facts: climate): 9 years from 2024 (7 to 11); EPA assumed attainment in late 2032 after designations in late 2025, and designations are now due by February 2027.",
+      "unit": "years",
+      "formula": "@climate.us_pm_naaqs_2024_years_until_effect"
     },
     {
       "id": "pm_years",
@@ -701,10 +685,18 @@
     {
       "id": "pm_uov",
       "section": "effect",
-      "label": "EPA soot standard: expected units of value before adjustments",
+      "label": "EPA soot standard: expected units of value from deaths, before adjustments",
       "format": "number",
-      "formula": "pm_deaths_per_year * pm_value_per_death / (1 - pm_illness_share) * p_success * pm_years",
+      "formula": "pm_deaths_per_year * pm_value_per_death * p_success * pm_years",
       "unit": "units of value"
+    },
+    {
+      "id": "pm_illness_dalys",
+      "section": "effect",
+      "label": "EPA soot standard: expected illness averted before adjustments (DALYs)",
+      "format": "number",
+      "formula": "pm_deaths_per_year * pm_illness_dalys_per_death * p_success * pm_years",
+      "unit": "DALYs"
     },
     {
       "id": "lcri_value_per_death",
@@ -714,6 +706,15 @@
       "formula": "rich_value_per_death",
       "unit": "units of value",
       "explainer": "The US value of a heart death (rows above)."
+    },
+    {
+      "id": "lcri_illness_dalys_per_death",
+      "section": "effect",
+      "label": "EPA lead-pipe rule: years lived with illness averted per heart-disease death averted",
+      "format": "number",
+      "formula": "@death_ages.cvd_yld_share_gbr / @death_ages.cvd_deaths_per_daly_gbr",
+      "unit": "DALYs per death",
+      "explainer": "The same shared cardiovascular figures as the soot standard's (cvd_yld_share_gbr over cvd_deaths_per_daly_gbr, the UK standing for the US): heart attacks and strokes survived come with the deaths averted."
     },
     {
       "id": "iq_wage_gain",
@@ -798,6 +799,14 @@
       "format": "number",
       "formula": "(lcri_deaths_per_year * lcri_value_per_death + lcri_iq_uov) * p_success * lcri_years",
       "unit": "units of value"
+    },
+    {
+      "id": "lcri_illness_dalys",
+      "section": "effect",
+      "label": "EPA lead-pipe rule: expected illness averted before adjustments (DALYs)",
+      "format": "number",
+      "formula": "lcri_deaths_per_year * lcri_illness_dalys_per_death * p_success * lcri_years",
+      "unit": "DALYs"
     },
     {
       "id": "ln_gain_per_person_year",
@@ -910,20 +919,23 @@
         "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "EPA's deaths and IQ points rest on large cohort studies of fine particles and lead (strong evidence that both kill and harm) and on its own exposure modelling, which can run high or low; the fisheries and farm reach are judgments. Our judgment, 0.8 (0.5 to 1.1), as for the climate rules' tonnes; delivery and repeal are in each branch's implementation row."
+      "explainer": "EPA's IQ points and lead deaths rest on large cohort studies (strong evidence that lead harms) and on its own exposure modelling, which can run high or low; the fisheries and farm reach are judgments. Our judgment, 0.8 (0.5 to 1.1), as for the climate rules' tonnes; the soot standard reads the rule's shared evidence row, and delivery and repeal are in each branch's implementation row."
+    },
+    {
+      "id": "pm_evidence_adj",
+      "section": "adjustments",
+      "label": "EPA soot standard: evidence adjustment on EPA's deaths",
+      "format": "multiple",
+      "formula": "@climate.us_pm_naaqs_2024_evidence",
+      "explainer": "The shared figure for this rule (facts: climate): 1 (0.7 to 1.2); the doubt about EPA's two estimates is already in the shared deaths figure."
     },
     {
       "id": "pm_counterfactual_adj",
       "section": "adjustments",
       "label": "EPA soot standard: share of the deaths that wouldn't have been avoided anyway",
       "format": "percent",
-      "value": {
-        "low": 0.75,
-        "best": 0.9,
-        "high": 1.0
-      },
-      "kind": "judgment",
-      "explainer": "EPA's estimate is against a baseline that already holds the other rules then in force, so little of it would have come anyway; some areas would still have cleaned up for other reasons (plant closures, state rules adopted later). Our judgment, 90% (75% to 100%)."
+      "explainer": "The shared figure for this rule (facts: climate): 90% (70% to 100%); EPA's baseline already holds the rules then in force.",
+      "formula": "@climate.us_pm_naaqs_2024_counterfactual"
     },
     {
       "id": "pm_attribution_share_shared",
@@ -936,7 +948,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "EDF and the Moms Clean Air Force pressed for a strong standard and EDF intervened to defend it in the D.C. Circuit (upheld 26 June 2026), beside the American Lung Association, Earthjustice, NRDC, Sierra Club, the Clean Air Task Force and community groups; EPA's science advisers backed a tighter limit, and industry lobbied against it. Our judgment, 10% (4% to 25%).",
+      "explainer": "EDF and the Moms Clean Air Force pressed for a strong standard and EDF intervened to defend it in the D.C. Circuit (upheld 26 June 2026), beside the American Lung Association, Earthjustice, NRDC, Sierra Club, the Clean Air Task Force and community groups; EPA's science advisers backed a tighter limit, and industry lobbied against it. Earthjustice, counsel to several of these groups, is credited with 25% in its own model; the two shares sum well within the advocacy behind the rule. Our judgment, 10% (4% to 25%).",
       "source": {
         "title": "EDF (2025), Trump's EPA abandons defense of national soot standard that saves lives",
         "url": "https://www.edf.org/media/trumps-epa-abandons-defense-national-soot-standard-saves-lives",
@@ -956,19 +968,8 @@
       "section": "adjustments",
       "label": "EPA soot standard: share of the win's deaths avoided",
       "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.5,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "The standard stands (upheld in June 2026, EPA's bid to vacate it refused), but EPA missed the February 2026 deadline for designating areas and has said it will reconsider the standard by rulemaking; states may be slow. Our judgment, 50% (20% to 80%).",
-      "source": {
-        "title": "Harvard Law School Environmental and Energy Law Program (2026), PM2.5 NAAQS quick take",
-        "url": "https://eelp.law.harvard.edu/wp-content/uploads/2026/07/PM2.5-NAAQS-Quick-Take.pdf",
-        "note": "Status after the D.C. Circuit's June 2026 decision; designations overdue.",
-        "retrieved": "2026-11-14"
-      }
+      "explainer": "The shared figure for this rule (facts: climate): 50% (20% to 80%); upheld in June 2026, but EPA means to reconsider it, states have gone to the Supreme Court and designations are late.",
+      "formula": "@climate.us_pm_naaqs_2024_delivered_share"
     },
     {
       "id": "lcri_counterfactual_adj",
@@ -1161,7 +1162,7 @@
       "section": "adjustments",
       "label": "EPA soot standard: all adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * pm_counterfactual_adj * pm_attribution_share * pm_implementation_adj * missing_data_adj"
+      "formula": "pm_evidence_adj * pm_counterfactual_adj * pm_attribution_share * pm_implementation_adj * missing_data_adj"
     },
     {
       "id": "lcri_total_adj",
@@ -1221,11 +1222,27 @@
       "explainer": "No separate step: others' resources are in each branch's attribution row, and EDF's spending doesn't displace a funder's."
     },
     {
+      "id": "pm_death_dalys_raw",
+      "section": "bridges",
+      "label": "EPA soot standard: deaths, in healthy years, before adjustments",
+      "format": "number",
+      "formula": "pm_uov / ($uov_per_daly)",
+      "unit": "DALYs"
+    },
+    {
       "id": "pm_dalys_raw",
       "section": "bridges",
       "label": "EPA soot standard: healthy years before adjustments (weight for the averages)",
       "format": "number",
-      "formula": "pm_uov / ($uov_per_daly)",
+      "formula": "pm_death_dalys_raw + pm_illness_dalys",
+      "unit": "DALYs"
+    },
+    {
+      "id": "lcri_death_dalys_raw",
+      "section": "bridges",
+      "label": "EPA lead-pipe rule: deaths and IQ, in healthy years, before adjustments",
+      "format": "number",
+      "formula": "lcri_uov / ($uov_per_daly)",
       "unit": "DALYs"
     },
     {
@@ -1233,7 +1250,7 @@
       "section": "bridges",
       "label": "EPA lead-pipe rule: healthy years before adjustments (weight for the averages)",
       "format": "number",
-      "formula": "lcri_uov / ($uov_per_daly)",
+      "formula": "lcri_death_dalys_raw + lcri_illness_dalys",
       "unit": "DALYs"
     },
     {
@@ -1423,9 +1440,9 @@
     {
       "id": "dalys_direct",
       "section": "outcome",
-      "label": "Healthy years counted directly (none)",
+      "label": "Healthy years counted directly (illness averted with the soot and lead-pipe rules' deaths, after adjustments)",
       "format": "number",
-      "formula": "health_people * dalys_per_person_year * protection_years",
+      "formula": "health_people * dalys_per_person_year * protection_years + pm_illness_dalys * pm_credit + lcri_illness_dalys * lcri_credit",
       "unit": "DALYs"
     },
     {
