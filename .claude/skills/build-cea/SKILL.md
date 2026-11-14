@@ -153,11 +153,13 @@ Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
                --exclude <ids> for audit-model.ts and normalization-audit.ts>. Don't edit the model.")
 ```
 
-1. Fix every **high** and **medium** finding with the fix it names (or a better one that settles the
-   same problem, said in the next round's input); fix lows unless the fix would be wrong, and say why.
+Audits go in `audits/<model id>/`, one folder per model id.
+
+1. Fix every **high** and **medium** finding with the fix it names (or a better one, said next round);
+   fix lows unless the fix would be wrong, and say why.
 2. Re-run `scripts/audit-model.ts`, then a **new** auditor (round n+1) with the previous findings.
-3. Stop at an audit with no high findings, or after **3 rounds**. **Verification round**: any change after
-   the last round gets a fresh auditor given the model, write-up, last
+3. Stop at an audit with no high findings, or after **3 rounds**. **Verification round**: any later change
+   gets a fresh auditor given the model, write-up, last
    findings and the changes, checking only those. Publish only on a passing latest audit of the model as
    it is (its `Model-sha`; a test checks); else fix and verify once more, or keep it out of `models/`.
 

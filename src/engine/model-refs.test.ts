@@ -10,7 +10,7 @@ import { sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
 import { lookupFor, rootOf, childrenOf } from "./tree";
 import { inv12, keyOf } from "./invariants";
-import { CASH_BENCHMARK, GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY, priorDollarValue } from "./moved-money";
+import { CASH_BENCHMARK, GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY, OWN_SPLIT, causeSplitShares, priorDollarValue, priorDollarValueMix } from "./moved-money";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -232,8 +232,27 @@ describe("INV-12: money moved is valued one way", () => {
   const animalCash = animal("animal-cash", shared(["prior_dollar_value"])[0]);
   // A local counterfactual off the shared net row; and the gain of money all shifted, which is allowed.
   const local = meta("local", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * (moved_dollar_value - 0.2 * prior_dollar_value)" }]);
-  const allShifted = meta("all-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * (moved_dollar_value - prior_dollar_value)" }]);
-  const extra = [animalGood, animalCash, local, allShifted];
+  const allShifted = meta("all-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value", "shifted_dollar_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * shifted_dollar_value" }]);
+  const inlineShifted = meta("inline-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * (moved_dollar_value - prior_dollar_value)" }]);
+  // Spending research or advice changed, all shifted, with the evidence and missing-data steps (or without).
+  const changed = { id: "money_moved", label: "Money moved: spending its research changed per dollar", value: 10, kind: "judgment", explainer: "Test input." };
+  const evidence = { id: "evidence_adj", label: "Evidence adjustment", value: 0.6, kind: "judgment", explainer: "Test input." };
+  const informedModel = (id: string, missing: string) => ({
+    ...meta(id, [changed, evidence, { id: "missing_data_adj", label: "Missing data", formula: missing }, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "shifted_dollar_value", "informed_money_value"]), { id: "out", label: "out", formula: "informed_money_value" }]),
+    output: { row: "out", unit: "uov", label: "UoV per $" },
+  });
+  const informedGood = informedModel("informed-good", "$missing_data_discount");
+  const informedBare = informedModel("informed-bare", "1");
+  // A mover whose own split spans causes: shifted money against each cause's ordinary charity, in its shares.
+  const shares: [string, string][] = [["rp_cross_cause_share_global_health", "global-health"], ["rp_cross_cause_share_animal_welfare", "animal-welfare"]];
+  const crossCause = (id: string, prior: string) => ({ beneficiaries: "destinations", ...meta(id, [raised,
+    { id: "value_destinations", label: "Value of a dollar to its causes", formula: `(${shares.map(([k, c]) => `@meta.${k} * #cause:${c}`).join(" + ")}) / (${shares.map(([k]) => `@meta.${k}`).join(" + ")})` },
+    { id: "moved_dollar_value", label: OWN_SPLIT.label, formula: OWN_SPLIT.formula },
+    { id: "prior_dollar_value", label: "prior", formula: prior },
+    ...shared(["new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value" }]) });
+  const splitGood = crossCause("split-good", priorDollarValueMix(shares).formula);
+  const splitForeign = crossCause("split-foreign", priorDollarValueMix([...shares, ["rp_cross_cause_share_ai", "ai"]]).formula);
+  const extra = [animalGood, animalCash, local, allShifted, inlineShifted, informedGood, informedBare, splitGood, splitForeign];
   const l = buildLibrary([...destinations, good, own, edited, success, career, ...extra], realAssumptions, facts, charities, owners);
 
   it("flags a meta model with its own multiple, an edited shared row, its own success chance, no net value and a career change outside the method", () => {
@@ -242,7 +261,7 @@ describe("INV-12: money moved is valued one way", () => {
   });
 
   it("compares shifted money with an ordinary charity of the mover's own cause, and reads it only through the shared rows", () => {
-    expect(inv12(l).violations.filter((x) => extra.some((m) => m.id === x.model)).map(keyOf).sort()).toEqual(["animal-cash prior_dollar_value formula", "local moved_dollar_net_value", "local out prior_dollar_value"]);
+    expect(inv12(l).violations.filter((x) => extra.some((m) => m.id === x.model)).map(keyOf).sort()).toEqual(["animal-cash prior_dollar_value formula", "informed-bare informed_money_value steps", "inline-shifted out prior_dollar_value", "local moved_dollar_net_value", "local out prior_dollar_value", "split-foreign prior_dollar_value formula"]);
     const av = assumptionValues(l.assumptions);
     const v = compute(l, l.models.get("animal-good")!, av);
     // An ordinary animal charity stands to the animal charities on the rankings as GiveDirectly to global health's.
@@ -251,6 +270,30 @@ describe("INV-12: money moved is valued one way", () => {
     expect(v.prior_dollar_value).toBeLessThan(0.01 * v[`#${CASH_BENCHMARK}`]);
     // In global health the rule is the shared row itself.
     expect(priorDollarValue("global-health")).toBe(MOVED_MONEY_ROWS.prior_dollar_value);
+  });
+
+  it("values spending research changed as all shifted, with the evidence and missing-data steps", () => {
+    const av = assumptionValues(l.assumptions);
+    const v = compute(l, l.models.get("informed-good")!, av);
+    expect(v.shifted_dollar_value).toBeCloseTo(v.moved_dollar_value - v.prior_dollar_value, 12);
+    expect(v.out).toBeCloseTo(10 * v.shifted_dollar_value * 0.6 * av.missing_data_discount, 12);
+    // No new money: the same spending counted as moved gross would be worth more.
+    expect(v.out).toBeLessThan(10 * (0.5 * v.moved_dollar_value + 0.5 * v.shifted_dollar_value) * 0.6 * av.missing_data_discount);
+  });
+
+  it("compares a cross-cause mover's shifted money with each cause's ordinary charity, in its own shares", () => {
+    const av = assumptionValues(l.assumptions);
+    const v = compute(l, l.models.get("split-good")!, av);
+    const w = shares.map(([k]) => pickValue(l.facts.get(`meta.${k}`)!.value));
+    const each = shares.map(([, c]) => pickValue(l.facts.get("meta.prior_vs_cash")!.value) * modelResult(l, CASH_BENCHMARK, av) / modelResult(l, "cause:global-health", av, "giving-what-we-can") * modelResult(l, `cause:${c}`, av, "giving-what-we-can"));
+    expect(v.prior_dollar_value).toBeCloseTo((w[0] * each[0] + w[1] * each[1]) / (w[0] + w[1]), 12);
+    // In global health the cause's ordinary charity is the shared row's GiveDirectly.
+    expect(each[0]).toBeCloseTo(pickValue(l.facts.get("meta.prior_vs_cash")!.value) * modelResult(l, CASH_BENCHMARK, av), 12);
+    // The helper's formula parses back to its shares, areas averaged; anything else isn't a split.
+    const areas: [string, string | string[]][] = [["a", "ai"], ["b", ["biosecurity", "nuclear"]]];
+    expect(causeSplitShares(priorDollarValueMix(areas).formula)).toEqual(areas);
+    expect(causeSplitShares(priorDollarValue("animal-welfare").formula)).toBeUndefined();
+    expect(causeSplitShares(`${priorDollarValueMix(areas).formula} * 2`)).toBeUndefined();
   });
 
   it("values a dollar moved from the destinations' live results", () => {

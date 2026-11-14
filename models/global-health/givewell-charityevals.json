@@ -538,11 +538,19 @@
       "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
     },
     {
+      "id": "shifted_dollar_value",
+      "section": "moved_money",
+      "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+      "format": "small",
+      "formula": "moved_dollar_value - prior_dollar_value",
+      "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+    },
+    {
       "id": "moved_value",
       "section": "effect",
       "label": "Value of the money moved (units of value)",
       "format": "number",
-      "formula": "(donors_moved * moved_dollar_net_value + open_philanthropy_moved * (moved_dollar_value - prior_dollar_value)) * (1 + moved_side_effects)",
+      "formula": "(donors_moved * moved_dollar_net_value + open_philanthropy_moved * shifted_dollar_value) * (1 + moved_side_effects)",
       "unit": "units of value",
       "explainer": "Other donors' money at the net value of a dollar moved (half new, half shifted); Open Philanthropy's at the gain over where it would have gone only, since it would have given the money anyway; both with the side effects."
     },
