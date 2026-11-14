@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "cepi",
   "owner": "charityevals",
-  "summary": "CEPI (Oslo) funds vaccines against epidemic and pandemic threats: rapid-response platforms and vaccine libraries for an unknown virus, vaccines against Lassa, Nipah, mpox, chikungunya, Rift Valley fever, filoviruses and coronaviruses, manufacturing in the Global South and the tools behind its 100 Days Mission. This model of all its work in 2025 (its latest audited accounts, $449M) comes to about 0.5 years of healthy life per $1,000, from 0.02 to 13 on the combined range: each dollar is valued as a typical pandemic project's cut in the forecast risk (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), cut to about 7% for CEPI's size, because at a small project's rate a year of its spending would remove a tenth of a catastrophic pandemic's yearly risk, while the 100 Days Mission's own estimate (8.3 million COVID-19 deaths averted, if achieved) gives a dollar of the whole effort far less; the vaccines' use against today's outbreaks adds under 1%. The biggest uncertainties are the discount rate, the years a cut counts, the chance the mission is achieved and Rethink's typical cuts; the next dollar counts at 49% of the past average (a stated funding gap for 2027-2031 and aid cuts, against surpluses in 2024 and 2025 mostly already signed to awardees). Every branch is discounted for missing data: no outcome of the work on the risk is measured, and most of the outbreak vaccines are not yet licensed and in use.",
+  "summary": "CEPI (Oslo) funds vaccines against epidemic and pandemic threats: rapid-response platforms and vaccine libraries for an unknown virus, vaccines against Lassa, Nipah, mpox, chikungunya, Rift Valley fever, filoviruses and coronaviruses, manufacturing in the Global South and the tools behind its 100 Days Mission. This model of all its work in 2025 (its latest audited accounts, $449M) comes to about 0.5 years of healthy life per $1,000, from 0.02 to 13 on the combined range: each dollar is valued as a typical pandemic project's cut in the forecast risk (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), measured at CEPI's size by the 100 Days Mission's own estimate of its worth, about 7% of a typical project's rate; the vaccines' use against today's outbreaks adds under 1%. The biggest uncertainties are the discount rate, the years a cut counts, the chance the mission is achieved and Rethink's typical cuts; the next dollar counts at 49% of the past average (a stated funding gap for 2027-2031 and aid cuts, against surpluses in 2024 and 2025 mostly already signed to awardees). Every branch is discounted for missing data: no outcome of the work on the risk is measured, and most of the outbreak vaccines are not yet licensed and in use.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: CEPI (Coalition for Epidemic Preparedness Innovations)",
@@ -795,14 +795,8 @@
         "best": 500,
         "high": 1100
       },
-      "kind": "estimate",
-      "source": {
-        "title": "WHO, Multi-country outbreak of mpox, external situation report 67 (26 June 2026)",
-        "url": "https://cdn.who.int/media/docs/default-source/_sage-2026/multi-country-outbreak-of-mpox--external-situation-report_67.pdf",
-        "retrieved": "2026-11-14",
-        "quote": "From 1 January 2025 to 14 June 2026, 31 countries in Africa reported 49 176 confirmed mpox cases, including 222 deaths (CFR 0.5%)."
-      },
-      "explainer": "Deaths among confirmed cases are about 170 a year worldwide (244 from January 2025 to May 2026), the low end; most cases in the Democratic Republic of Congo are never tested, and Africa CDC counted about 2,000 suspected and confirmed deaths from January 2024 to September 2025, about 1,100 a year, the high end. 500, between them."
+      "kind": "judgment",
+      "explainer": "WHO's situation report 67 (26 June 2026) counts 244 deaths among confirmed cases worldwide from January 2025 to May 2026, about 170 a year: the low end. Most cases in the Democratic Republic of Congo are never tested, so deaths among suspected cases run several times higher; 500, our judgment, up to 1,100 (deaths among suspected cases at the 2024 epidemic's height)."
     },
     {
       "id": "outbreak_deaths_per_year",
@@ -920,7 +914,7 @@
     {
       "id": "end_years_until_effect",
       "section": "effect",
-      "label": "Endemic branch: years until the vaccines are in use",
+      "label": "Endemic branch: years until the unlicensed vaccines are in use",
       "format": "number",
       "unit": "years",
       "value": {
@@ -930,6 +924,20 @@
       },
       "kind": "judgment",
       "explainer": "From phase 2 to licensure, prequalification and campaigns: 5 years, our judgment, 2 to 10 (the cited Lassa page says only 'if it becomes licensed in the coming years'); discounted at the shared rate."
+    },
+    {
+      "id": "end_licensed_years_until_effect",
+      "section": "effect",
+      "label": "Endemic branch: years until the licensed vaccines (mpox, chikungunya) are in use where the disease is",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "These vaccines are licensed already; what remains is prequalification, trials in children and older adults, and procurement in endemic countries. 1 year, our judgment, 0 to 3; discounted at the shared rate."
     },
     {
       "id": "pp_portfolio",
@@ -981,12 +989,21 @@
       "explainer": "The years of use the vaccines are brought forward, each discounted at the shared rate, after the wait until they are in use."
     },
     {
+      "id": "end_licensed_discounted_years",
+      "section": "effect",
+      "label": "Endemic branch: years brought forward for the licensed vaccines, discounted, after their wait",
+      "format": "number",
+      "unit": "years",
+      "formula": "pv_annuity_due(1, $discount_rate, end_years_brought_forward) * (1 + $discount_rate) ^ -end_licensed_years_until_effect",
+      "explainer": "As end_discounted_years, with the licensed vaccines' shorter wait."
+    },
+    {
       "id": "end_deaths_averted",
       "section": "effect",
       "label": "Endemic branch: deaths averted by the year's spending",
       "format": "number",
       "unit": "deaths",
-      "formula": "(lassa_deaths_averted_per_year + outbreak_deaths_per_year * outbreak_share_averted) * end_p_success * end_discounted_years * end_year_share + mpox_deaths_per_year * outbreak_share_averted * end_p_licensed_use * end_discounted_years * end_year_share",
+      "formula": "(lassa_deaths_averted_per_year + outbreak_deaths_per_year * outbreak_share_averted) * end_p_success * end_discounted_years * end_year_share + mpox_deaths_per_year * outbreak_share_averted * end_p_licensed_use * end_licensed_discounted_years * end_year_share",
       "explainer": "Deaths in today's outbreaks the vaccines would avert, times the chance they are licensed and used (Lassa, filoviruses, Nipah and Rift Valley fever at end_p_success; mpox, whose vaccines are licensed, at end_p_licensed_use), the years brought forward and the year's share; valued like every death at the world's age split (value_per_death: Lassa and mpox kill children and young adults more than that, a small understatement), before the branch's adjustments."
     },
     {
@@ -995,8 +1012,8 @@
       "label": "Endemic branch: chikungunya illness averted by the year's spending",
       "format": "number",
       "unit": "DALYs",
-      "formula": "chik_dalys_per_year * chik_illness_share * chik_share_averted * end_p_licensed_use * end_discounted_years * end_year_share",
-      "explainer": "Chikungunya's illness burden the vaccines would avert, on the same chain as the deaths, with the chance for a vaccine already licensed."
+      "formula": "chik_dalys_per_year * chik_illness_share * chik_share_averted * end_p_licensed_use * end_licensed_discounted_years * end_year_share",
+      "explainer": "Chikungunya's illness burden the vaccines would avert, on the same chain as the deaths, with the chance and wait for a vaccine already licensed."
     },
     {
       "id": "nuclear_extinction_per_year",
@@ -1586,7 +1603,7 @@
         "high": 2100000000
       },
       "kind": "judgment",
-      "explainer": "Anchored on CEPI's own plan, US$3.6 billion for 2027-2031 ('The full CEPI 3.0 strategy requires US$3.6 billion', cepi.net/investors), $720M a year, plus other public and philanthropic funders of the mission's vaccine, regulatory and manufacturing work (BARDA's and the EU's HERA's rapid-response vaccine programmes, the Gates Foundation, Wellcome, national institutes), which we put at about half as much again: $1.05B a year, our judgment, $0.7B (CEPI's own spending and little else) to $2.1B (others twice CEPI). The developers' co-investment is left out: bio_attribution_share counts it."
+      "explainer": "Anchored on CEPI's own plan, US$3.6 billion for 2027-2031 ('The full CEPI 3.0 strategy requires US$3.6 billion', cepi.net/investors), $720M a year, plus other public and philanthropic funders of the mission's vaccine, regulatory and manufacturing work (BARDA's and the EU's HERA's rapid-response vaccine programmes, the Gates Foundation, Wellcome, national institutes), which we put at about half as much again (no published total of the mission's funding exists): $1.05B a year, our judgment, $0.7B (CEPI's own spending and little else) to $2.1B (others twice CEPI). The developers' co-investment is left out: bio_attribution_share counts it."
     },
     {
       "id": "mission_effort_years",
@@ -1607,7 +1624,7 @@
       "section": "adjustments",
       "label": "Pandemic work: a typical project's cut per dollar at CEPI's size",
       "format": "multiple",
-      "explainer": "Rethink Priorities' typical pandemic project costs $0.5-10M and its portfolio preset $15-30M, at about the same cut per dollar; CEPI spends $449M a year, so at that rate one year of CEPI would cut a catastrophic pandemic's yearly risk by about 10% (449 × the cut per $1M, 0.00023) for each year the cut counts. This step measures a dollar at that size by the 100 Days Mission, the effort CEPI's work serves: the share of a COVID-scale pandemic's deaths the mission would avert (mission_deaths_share) times the chance it is achieved (mission_p_achieved), against what the typical rate implies for the whole effort's funders' dollars (mission_effort_per_year × mission_effort_years × the shared catastrophe cut per $1M). About 0.07 at the best guesses, capped at 1 (a typical project's rate). The funders' dollars leave out the developers' own co-investment, which bio_attribution_share counts, so the two don't ask the same question. In the catastrophe-size and COVID-scale parts the step cancels the shared typical cut (the mission's own estimate replaces it); the extinction part keeps Rethink's ratio of the extinction cut to the catastrophe cut, so the result moves with that ratio (up with the extinction cut, down with the catastrophe cut), not with the typical cut's level.",
+      "explainer": "Rethink Priorities' typical pandemic projects cost $0.5-30M; at their rate one year of CEPI ($449M) would cut a catastrophic pandemic's yearly risk by about 10%. So a dollar at CEPI's size is measured by the 100 Days Mission it serves: the mission's cut in a pandemic's deaths (mission_deaths_share × mission_p_achieved) against what the typical rate implies for the mission's funders' dollars (mission_effort_per_year × mission_effort_years × the shared catastrophe cut per $1M), capped at 1. About 0.07. In the catastrophe-size and COVID-scale parts the step cancels the shared typical cut; the extinction part keeps Rethink's ratio of the extinction cut to the catastrophe cut, so the result moves with that ratio (up with the extinction cut, down with the catastrophe cut), not with the typical cut's level.",
       "formula": "min(1, mission_deaths_share * mission_p_achieved / (@catastrophe.bio_catastrophe_cut_per_million * mission_effort_per_year / 1e6 * mission_effort_years))"
     },
     {
