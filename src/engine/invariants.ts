@@ -1058,16 +1058,26 @@ export function inv14(lib: Library): InvariantReport {
   }
   const violations: Violation[] = [];
   let checked = 0;
-  for (const [key, rows] of groups) {
-    const models = new Set(rows.map((r) => r.model));
+  // A copy that can't move its model's result (a switched-off branch's placeholder) isn't a constant anyone relies on.
+  const av = assumptionValues(lib.assumptions);
+  const moves = (r: { model: string; row: string; value: number }) => {
+    const m = lib.models.get(r.model)!;
+    const base = bottomLine(lib, m, av).native;
+    const moved = bottomLine(lib, m, av, { [r.row]: r.value === 0 ? 1 : r.value * 2 }).native;
+    return !(Number.isFinite(base) && Number.isFinite(moved) && Math.abs(moved - base) <= 1e-12 * Math.max(1, Math.abs(base)));
+  };
+  for (const [key, all] of groups) {
     checked++;
+    if (new Set(all.map((r) => r.model)).size < 5) continue;
+    const rows = all.filter(moves);
+    const models = new Set(rows.map((r) => r.model));
     if (models.size < 5) continue;
     for (const r of rows)
       violations.push({ inv: "INV-14", model: r.model, where: `${r.row} = ${fmt(r.value)}`, detail: `"${r.label}" = ${fmt(r.value)} is typed into ${models.size} models (${[...models].slice(0, 4).join(", ")}${models.size > 4 ? ", …" : ""}) with no shared fact behind it (${key})` });
   }
   return {
     id: "INV-14", title: "No house constant without a shared fact", status: "partial", checked, violations,
-    how: `Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and "overall" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (${[...ALLOWED_LITERALS].join(", ")}: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, "10x bar" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.`,
+    how: `Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and "overall" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (${[...ALLOWED_LITERALS].join(", ")}: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, "10x bar" = 10). Rows reading a fact are formulas and never counted, nor are copies that can't move their model's result (a switched-off branch's placeholder); the same number under different labels, or from different evaluators, is a coincidence, not a copy.`,
   };
 }
 
