@@ -846,7 +846,7 @@ CR_POINT = "TEMPLATE: point it at the area of the {what} (ai_, bio_ or nuclear_{
 # evidence_adj × counterfactual_adj × attribution_share is the healthy-years-weighted sum of each branch's
 # own product; never a blend by spending, which would give a branch the weight of its cost, not its value.
 CR_BRANCHES = [("ai", "AI field work", "the AI work"), ("bio", "Pandemic field work", "the pandemic work"),
-               ("nuclear", "Nuclear field work", "the nuclear work"), ("pol", "Policy win", "the policy win"),
+               ("nuclear", "Nuclear field work", "the nuclear work"), ("climate", "Climate work", "the climate work"), ("pol", "Policy win", "the policy win"),
                ("fb", "Field-building", "the people trained")]
 CR_EVIDENCE = "a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities) for {what}: above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project; 1 with 'unused' where the branch's cost share is 0."
 CR_CF = "the share of {what} another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes; 1 with 'unused' where the branch's cost share is 0."
@@ -868,6 +868,9 @@ def cr_adjustment_rows():
               "The bridge's healthy years per unit of value, over all value in the bridge (deaths and any other branch valued in units of value, such as a government's), scaled back to a death's own value: turns each branch's deaths into healthy years for the weights. Fixed.", "small")]
     for b, name, what in CR_BRANCHES:
         value = "((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death)" if b == "bio" else "value_per_death"
+        if b == "climate":
+            rows.append(f("w_climate", "adjustments", "Weight: healthy years from the climate work (before adjustments)", "climate_uov * dalys_per_death_value", "The branch's value in healthy years, by the same bridge: the weight its adjustments carry. Fixed.", "number", "DALYs"))
+            continue
         rows.append(f(f"w_{b}", "adjustments", f"Weight: healthy years from {what} (before adjustments)", f"{b}_deaths_averted * {value} * dalys_per_death_value + {b}_future_dalys",
                       "The branch's deaths averted in healthy years" + (" (the COVID-scale part at COVID-19's age mix)" if b == "bio" else " (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted)" if b in ("pol", "fb") else "") + ", plus its future healthy years kept: the weight its adjustments carry. Fixed.", "number", "DALYs"))
     rows.append(f("w_total", "adjustments", "Weight: healthy years from every branch (before adjustments)", " + ".join(f"w_{b}" for b, _, _ in CR_BRANCHES), None, "number", "DALYs"))
@@ -895,6 +898,12 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
         f("years_of_impact", "effect", "Years a cut in the risk counts before it would have come anyway", "$win_years_counted",
           "The site's one answer (docs/normalization.md 2.9): work, a won policy or a trained person's career brings a cut in the risk forward by these years; Rethink Priorities' 15-25 years of persistence is replaced by it.", "number", "years"),
     ] + [r for a in AREAS for r in area_rows(*a)] + [
+        inp("climate_cost_share", "effect", "Climate: share of the cost spent on climate work (an option: 0 where there is none)", {"low": 0, "best": 0, "high": 0.3}, "judgment",
+            "unused (0) by default, so no source: when the model has climate work, relabel it estimate and cite the accounts. The share of the modelled spending on climate analysis, advocacy or coverage, from the charity's programme expenses; counted in tonnes' worth at the site's own climate average, not a bridge of its own. Leave it out of the other shares. Feeds the check cost_shares_total.", "percent"),
+        f("climate_value_per_dollar", "effect", "Climate: value of a dollar of typical climate work (units of value)", "#cause:climate",
+          "The site's own climate average: the equal-weight mean of the climate charities on the rankings, per dollar, in units of value (its tonnes already valued by the climate skeleton, normalization.md 2.5, 2.8). Not a Rethink figure or a bridge of the model's own. Fixed.", "small", "units of value / $"),
+        f("climate_uov", "effect", "Climate: value of the climate work (units of value, before adjustments)", "cost_total * climate_cost_share * climate_value_per_dollar",
+          "The climate spending × a typical climate dollar's value; how far this charity's climate work beats or trails a typical dollar is climate_evidence_adj. The average already counts its own wait and years.", "number", "UoV"),
         inp("pol_cost_share", "effect", "Policy win: share of the cost spent on the campaign that won it", 0.1, "estimate",
             "the spending behind the specific win below (a treaty, law, regulation, standard or institution launched), left out of the areas' shares; 0 with the reason without such a win in the year. Several wins: a pol2_ branch each. Feeds only the check cost_shares_total.", "percent", source=src("charity report / accounts")),
         inp("pol_wins", "reach", "Policy win: wins of this kind in the year", 1, "observed",
@@ -915,8 +924,8 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
             "people who completed the programme in the year (not applicants or sign-ups), from the charity's report.", "integer", source=src("charity report")),
         inp("fb_share_working", "effect", "Field-building: share who go on to work on these risks because of it", {"low": 0.05, "best": 0.2, "high": 0.4}, "estimate",
             "alumni in roles on these risks a year or more later (the charity's alumni survey, with response bias in mind) minus those who would have got there anyway (their plans before, a comparison group). Name the survey.", "percent", source=src("alumni survey")),
-        inp("fb_work_years", "effect", "Field-building: years each stays in the work", {"low": 2, "best": 5, "high": 10}, "estimate",
-            "from alumni follow-ups or the field's turnover; discounted at the shared rate.", "number", "years", src("alumni follow-up")),
+        f("fb_work_years", "effect", "Field-building: years each stays in the work", "@catastrophe.field_work_years",
+          "The shared figure (@catastrophe.field_work_years), one for every model; discounted at the shared rate. Fixed.", "number", "years"),
         f("fb_work_dollars", "effect", "Field-building: the alumni's added work, in dollars of typical work", "fb_people * fb_share_working * pv_annuity_due(1, $discount_rate, fb_work_years) * @catastrophe.cost_per_work_year",
           "Work-years added × what a year of such work costs its employer (@catastrophe.cost_per_work_year), so it is valued at the area's typical dollar.", "usd"),
         inp("fb_credit_share", "effect", "Field-building: the training's share of the credit for that work", {"low": 0.1, "best": 0.3, "high": 0.6}, "judgment",
@@ -925,7 +934,7 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
         f("fb_future_per_million", "effect", "Field-building: future healthy years kept a year by a typical $1 million of the alumni's work", "ai_future_per_million", CR_POINT.format(what="alumni's work", row="future_per_million"), "small", "DALYs / year"),
         f("fb_deaths_averted", "effect", "Field-building: deaths averted (expected, before adjustments)", "fb_work_dollars / 1e6 * fb_credit_share * fb_deaths_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)", None, "small", "deaths"),
         f("fb_future_dalys", "effect", "Field-building: future healthy years kept (expected, before adjustments)", "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)", None, "number", "DALYs"),
-        f("cost_shares_total", "effect", "Check: the cost shares add up to all the modelled spending", "ai_cost_share + bio_cost_share + nuclear_cost_share + pol_cost_share + fb_cost_share",
+        f("cost_shares_total", "effect", "Check: the cost shares add up to all the modelled spending", "ai_cost_share + bio_cost_share + nuclear_cost_share + climate_cost_share + pol_cost_share + fb_cost_share",
           "Must be 1: every dollar of the modelled programme is in exactly one branch.", "percent"),
         f("deaths_averted", "effect", "Deaths averted, every branch (expected, before adjustments)", "ai_deaths_averted + bio_deaths_averted + nuclear_deaths_averted + pol_deaths_averted + fb_deaths_averted", None, "small", "deaths"),
         f("covid_scale_deaths_averted", "effect", "Deaths averted that are in a COVID-scale pandemic (a part of deaths_averted)", "bio_deaths_averted * bio_covid_scale_share",
@@ -951,14 +960,14 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
             inp("hazard_harm_share", "adjustments", "Harm: information hazards and attention, as a share of modelled value", {"low": -0.1, "best": 0, "high": 0}, "judgment",
                 "beyond a typical project's backfire, published threat analyses, red-teaming results or advocacy that show bad actors a path or draw them to a weapon, a negative share; 0 with the reason where nothing sensitive is published.", "percent"),
         ]) + multi({
-        "uov": ("((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths)", "Deaths averted (and losses beyond them, 0 by default)"),
+        "uov": ("((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death) * (1 + @catastrophe.nondeath_losses_vs_deaths) + climate_uov", "Deaths averted (and losses beyond them, 0 by default) and the climate work"),
     }, "future_dalys_averted", side=("unmodelled_benefits_adj", "speedup_harm_share", "hazard_harm_share")) + donor_rows("dalys", "Years of healthy life", "research", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
     "what the charity does against which risks (AI, pandemics, nuclear war), the year, which branches carry the result (field work, a policy win, people trained), " + BOTTOM + " Say that the result rests on shared forecasts and a typical project's effect, so it moves with the AI slider and the discount rate.", "past_average", sections=MULTI_SECTIONS)
 for r in T["catastrophic-risk"]["rows"]:
     if r["id"] == "pol_p_success": r["single_event"] = True
     # Rows unused by default (smaller sizes at 0, field-building) carry no placeholder source: a judgment until
     # the model switches them on, when the builder relabels them observed/estimate and cites the document.
-    if re.fullmatch(r"(ai|bio|nuclear)_smaller_(per_year|deaths)|fb_(cost_share|people|share_working|work_years)", r["id"]) and r.get("value") is not None:
+    if re.fullmatch(r"(ai|bio|nuclear)_smaller_(per_year|deaths)|fb_(cost_share|people|share_working)", r["id"]) and r.get("value") is not None:
         r.pop("source", None)
         r["kind"] = "judgment"
         v = r["value"]
