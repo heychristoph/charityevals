@@ -218,34 +218,28 @@
       "section": "effect",
       "label": "AI: yearly chance of a smaller catastrophe",
       "format": "small",
-      "value": 0,
-      "kind": "estimate",
-      "unit": "per year",
-      "source": {
-        "title": "TEMPLATE: forecast / historical record",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.01
       },
-      "explainer": "TEMPLATE: a smaller ai disaster the work also lowers (a single nuclear detonation in a city, a limited war; an AI incident that kills thousands), per year, from a published forecast or record, and its deaths in the next row; 0 with this reason where none is sourced. A shared figure another model could reuse goes into facts/catastrophe.json and is read here."
+      "kind": "judgment",
+      "unit": "per year",
+      "explainer": "TEMPLATE: a smaller ai disaster the work also lowers (a single nuclear detonation in a city, a limited war; an AI incident that kills thousands), per year, from a published forecast or record, and its deaths in the next row; 0 with this reason where none is sourced. A shared figure another model could reuse goes into facts/catastrophe.json and is read here. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "ai_smaller_deaths",
       "section": "effect",
       "label": "AI: deaths in a smaller catastrophe",
       "format": "integer",
-      "value": 0,
-      "kind": "estimate",
-      "unit": "deaths",
-      "source": {
-        "title": "TEMPLATE: scenario study",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 1000000
       },
-      "explainer": "TEMPLATE: the deaths in the smaller disaster above, from the same source; 0 when the row above is 0."
+      "kind": "judgment",
+      "unit": "deaths",
+      "explainer": "TEMPLATE: the deaths in the smaller disaster above, from the same source; 0 when the row above is 0. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "ai_deaths_if_catastrophe",
@@ -524,34 +518,28 @@
       "section": "effect",
       "label": "Nuclear war: yearly chance of a smaller catastrophe",
       "format": "small",
-      "value": 0,
-      "kind": "estimate",
-      "unit": "per year",
-      "source": {
-        "title": "TEMPLATE: forecast / historical record",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 0.01
       },
-      "explainer": "TEMPLATE: a smaller nuclear war disaster the work also lowers (a single nuclear detonation in a city, a limited war; an AI incident that kills thousands), per year, from a published forecast or record, and its deaths in the next row; 0 with this reason where none is sourced. A shared figure another model could reuse goes into facts/catastrophe.json and is read here."
+      "kind": "judgment",
+      "unit": "per year",
+      "explainer": "TEMPLATE: a smaller nuclear war disaster the work also lowers (a single nuclear detonation in a city, a limited war; an AI incident that kills thousands), per year, from a published forecast or record, and its deaths in the next row; 0 with this reason where none is sourced. A shared figure another model could reuse goes into facts/catastrophe.json and is read here. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "nuclear_smaller_deaths",
       "section": "effect",
       "label": "Nuclear war: deaths in a smaller catastrophe",
       "format": "integer",
-      "value": 0,
-      "kind": "estimate",
-      "unit": "deaths",
-      "source": {
-        "title": "TEMPLATE: scenario study",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 1000000
       },
-      "explainer": "TEMPLATE: the deaths in the smaller disaster above, from the same source; 0 when the row above is 0."
+      "kind": "judgment",
+      "unit": "deaths",
+      "explainer": "TEMPLATE: the deaths in the smaller disaster above, from the same source; 0 when the row above is 0. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "nuclear_deaths_if_catastrophe",
@@ -737,18 +725,18 @@
       "section": "effect",
       "label": "Policy win: expected deaths a year from the area's catastrophes",
       "format": "number",
-      "formula": "nuclear_deaths_per_year",
+      "formula": "nuclear_deaths_per_million / @catastrophe.nuclear_catastrophe_cut_per_million",
       "unit": "deaths / year",
-      "explainer": "TEMPLATE: point it at the area of the win (ai_, bio_ or nuclear_deaths_per_year); several areas: a weighted sum with a weight row."
+      "explainer": "TEMPLATE: the area's extinction-to-catastrophe mix of the deaths, defaulting to a typical project's: the deaths a typical $1 million averts a year (the area's *_deaths_per_million) over its cut in the catastrophe risk (@catastrophe.<area>_catastrophe_cut_per_million), so pol_relative_cut (a share of the catastrophe risk) cuts the extinction-level and the survivable risk in the proportion a typical project does. Point both at the win's area (nuclear_, ai_ or bio_); replace with the area's own yearly figure (<area>_deaths_per_year) only where the measure acts on one size alone (name which), several areas: a weighted sum with a weight row."
     },
     {
       "id": "pol_future_per_year",
       "section": "effect",
       "label": "Policy win: expected future healthy years lost a year in the area",
       "format": "number",
-      "formula": "nuclear_future_per_year",
+      "formula": "nuclear_future_per_million / @catastrophe.nuclear_catastrophe_cut_per_million",
       "unit": "DALYs / year",
-      "explainer": "TEMPLATE: point it at the area of the win (ai_, bio_ or nuclear_future_per_year); several areas: a weighted sum with a weight row."
+      "explainer": "TEMPLATE: the area's extinction-to-catastrophe mix of the future healthy years, defaulting to a typical project's: the future healthy years a typical $1 million averts a year (the area's *_future_per_million) over its cut in the catastrophe risk (@catastrophe.<area>_catastrophe_cut_per_million), so pol_relative_cut (a share of the catastrophe risk) cuts the extinction-level and the survivable risk in the proportion a typical project does. Point both at the win's area (nuclear_, ai_ or bio_); replace with the area's own yearly figure (<area>_future_per_year) only where the measure acts on one size alone (name which), several areas: a weighted sum with a weight row."
     },
     {
       "id": "pol_deaths_averted",
@@ -771,32 +759,26 @@
       "section": "effect",
       "label": "Field-building: share of the cost spent training or placing people",
       "format": "percent",
-      "value": 0.1,
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: charity report / accounts",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.2
       },
-      "explainer": "TEMPLATE: fellowships, courses, mentorship and career advice for people who go on to work on these risks; 0 with the reason without such a programme. Feeds the check cost_shares_total; the branch's value comes from the people trained."
+      "kind": "judgment",
+      "explainer": "TEMPLATE: fellowships, courses, mentorship and career advice for people who go on to work on these risks; 0 with the reason without such a programme. Feeds the check cost_shares_total; the branch's value comes from the people trained. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "fb_people",
       "section": "reach",
       "label": "Field-building: people trained or placed in the year",
       "format": "integer",
-      "value": 100,
-      "kind": "observed",
-      "source": {
-        "title": "TEMPLATE: charity report",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
+      "value": {
+        "low": 50.0,
+        "best": 100,
+        "high": 200
       },
-      "explainer": "TEMPLATE: people who completed the programme in the year (not applicants or sign-ups), from the charity's report."
+      "kind": "judgment",
+      "explainer": "TEMPLATE: people who completed the programme in the year (not applicants or sign-ups), from the charity's report. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "fb_share_working",
@@ -808,15 +790,8 @@
         "best": 0.2,
         "high": 0.4
       },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: alumni survey",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: alumni in roles on these risks a year or more later (the charity's alumni survey, with response bias in mind) minus those who would have got there anyway (their plans before, a comparison group). Name the survey."
+      "kind": "judgment",
+      "explainer": "TEMPLATE: alumni in roles on these risks a year or more later (the charity's alumni survey, with response bias in mind) minus those who would have got there anyway (their plans before, a comparison group). Name the survey. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "fb_work_years",
@@ -828,16 +803,9 @@
         "best": 5,
         "high": 10
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "unit": "years",
-      "source": {
-        "title": "TEMPLATE: alumni follow-up",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "TEMPLATE: from alumni follow-ups or the field's turnover; discounted at the shared rate."
+      "explainer": "TEMPLATE: from alumni follow-ups or the field's turnover; discounted at the shared rate. Unused by default, so no source: when the model uses it, relabel it observed or estimate and cite the document."
     },
     {
       "id": "fb_work_dollars",
