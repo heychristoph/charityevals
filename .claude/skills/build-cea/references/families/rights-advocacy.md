@@ -58,8 +58,8 @@ with better government as an income gain per person governed, `ln(1 + gain)` in
 `ln_gain_per_person_year` (the uov bridge). The shared figures are in facts/democracy.json:
 
 - **Backsliding averted or democratization**: `@democracy.democratization_gdp_gain`, built up over
-  `democratization_years_to_effect` (the average share reached in the years counted, a ranged judgment),
-  × the chance the work changes the outcome.
+  `democratization_years_to_effect` (T: it builds up evenly over T years), × the chance the work
+  changes the outcome.
 - **Less corruption**: `@democracy.bribery_share_gdp` × the share of its cost removed, ranged; bribes
   are a transfer, so say what that share stands for.
 - **Better-run spending**: public investment per person × `public_investment_efficiency_gap_<advanced
@@ -68,9 +68,11 @@ with better government as an income gain per person governed, `ln(1 + gain)` in
   share of the democratization gain, anchored on studies of that reform's effect on who is elected or
   what is decided; never the whole gain. Turnout, registration and voter information count through that
   change, not per vote.
-- **Years**: `pv_annuity_due(1, $discount_rate + @democracy.electoral_reform_repeal_rate,
-  years_of_impact)` (`years_of_impact` reads `$win_years_counted`; repeal is a separate question from
-  "would have come anyway"); a reform already repealed counts its years in force instead.
+- **Years**: a gain built up over T years and lasting the N years counted (`$win_years_counted`) is the
+  shifted ramp (1−(1+r)^−N)(1−(1+r)^−T)/(ln(1+r)²·T), r = `$discount_rate` + the repeal rate
+  (`@democracy.electoral_reform_repeal_rate`; for a slide averted, its reversal rate); an immediate gain:
+  `pv_annuity_due(1, r, N)`. Repeal is a separate question from "would have come anyway"; a reform
+  already repealed counts its years in force.
 - **Pending campaigns**: `p_success` from `@democracy.lobbied_issue_change_rate`, moved by the issue's
   own record (a jurisdiction's past ballot measures, a court's rulings), `single_event` for one measure.
 - **Coalitions**: credit is the charity's share of the money behind the win (Convention 2): the ballot
