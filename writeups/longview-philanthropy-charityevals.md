@@ -50,13 +50,13 @@ A 5% side effect is added, with a range of −5% to +20% (our judgment). On the 
 
 ### How this model was checked
 
-Two audit rounds (audits/longview-philanthropy-charityevals/). Round 1 passed with no high finding and checked every cost and reach figure against the US Form 990, the scanned UK accounts and Longview's post. Its fixes:
+Three audit rounds (audits/longview-philanthropy-charityevals/). Round 1 passed with no high finding and checked every cost and reach figure against the US Form 990, the scanned UK accounts and Longview's post. Its fixes:
 
 - Built the area split as a dollar-weighted blend of its itemised US grants and a judged split of the rest, with a lower nuclear share (15% to 12%) and biosecurity share (10% to 3%), and the 2025 nuclear team (two grantmakers) in place of the 2026 one.
 - Valued advised money at the site's shared share for a meta charity, all redirected and none new, and moved Effektiv Spenden's advised gifts onto the same rule, so advice is valued one way on the site.
 - Took digital sentience grants and Rethink Priorities' grant out of the AI share; narrowed the side effects to Longview's own; added the UK company's unrestricted income as evidence on the US grant to Europe; corrected formats and wording.
 
-Round 2, a verification round, checked those changes and passed; its wording points were fixed after it.
+Round 2, a verification round, checked those changes and passed. Round 3 checked the fixes to its wording points, and passed.
 
 ### Sources
 

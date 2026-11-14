@@ -74,13 +74,13 @@ Its own figures are a ratio of donations to costs of about 21 for 2024 (23 with 
 
 ### How this model was checked
 
-Five audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-severity problem and checked every cost, reach and fact figure against its source. Its fixes:
+Six audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-severity problem and checked every cost, reach and fact figure against its source. Its fixes:
 
 - Blended the Swiss association's 2025 grants by recipient into each cause. This brought in METR, Sinergia Animal and Wild Animal Initiative, which the organisation-wide 2024 split leaves out.
 - Lowered the wait for the funds' grants below the year-end balances, which December's giving inflates.
 - Corrected the write-up.
 
-Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes. Round 4 checked the move of two equal-weight lists to the site's live cause averages, and passed. Round 5 checked the advised gifts' move to the site's rule for advice (redirected money, counted only for the gain, with the evidence and missing-data steps), made when Longview Philanthropy's model was built, and passed.
+Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes. Round 4 checked the move of two equal-weight lists to the site's live cause averages, and passed. Round 5 checked the advised gifts' move to the site's rule for advice (redirected money, counted only for the gain, with the evidence and missing-data steps), made when Longview Philanthropy's model was built, and passed; round 6 checked the wording that followed.
 
 ### Sources
 
