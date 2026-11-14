@@ -1,0 +1,1032 @@
+{
+  "id": "hias-charityevals",
+  "name": "HIAS: refugee resettlement and legal services in the US",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"USA":1},
+  "beneficiaries_note": "Our build: refugees, asylum seekers and other immigrants served in the US (resettlement and legal services).",
+  "template": "domestic-services",
+  "estimate_basis": "unit_cost",
+  "charity": "hias",
+  "owner": "charityevals",
+  "summary": "HIAS spent $58.7 million of its own money in the US in the year to September 2025 on refugee resettlement through about 30 local partner agencies, integration and social services, and immigration legal services for 1,433 clients, helped by $18.7 million of pro bono lawyers' time that we count as their contribution, not HIAS's cost. Resettlement is valued as the money and goods clients receive and a short head start in work, on the site's log-income scale at newly arrived refugees' consumption; legal help as the extra chance a represented asylum seeker wins the right to stay, the consumption gap with their country of origin over the years they stay, and the deaths a removal risks. It comes to about 0.003 years of healthy life per $1,000, far below the global-health median because the money goes to people in the US, where a dollar is a small gain on the log scale, and because another agency would have resettled most of the same refugees with the same federal money. Both branches are discounted for missing data (no controlled measure of HIAS's own results); the biggest uncertainties are that discount, what would have happened anyway, and how many losing clients would actually be removed.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: HIAS, US resettlement and legal services",
+    "url": "https://charityevals.org/hias-charityevals",
+    "published": "2026-11-14",
+    "retrieved": "2026-11-14"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "HIAS, Inc. and Related Entities, Consolidated Financial Statements for the year ended 30 September 2025 (GRF CPAs & Advisors)",
+      "url": "https://hias.org/wp-content/uploads/HIAS-2025-Consolidated-Financial-Statements.pdf"
+    },
+    {
+      "type": "data",
+      "title": "HIAS, Inc., Form 990 for October 2024 to September 2025",
+      "url": "https://hias.org/wp-content/uploads/HIAS-2025-990.pdf"
+    },
+    {
+      "type": "charity",
+      "title": "HIAS, 2025 Annual Report",
+      "url": "https://hias.org/wp-content/uploads/HIAS-Annual-Report-2025.pdf"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled programme cost in fiscal 2025 (October 2024 to September 2025), with its share of management and fundraising, from HIAS's audited consolidated accounts. Donated legal services, booked in the accounts at the law firms' rates, are not HIAS's own money: they enter the credit share, not the cost."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people the spending reached, as HIAS reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per person",
+      "explainer": "What the help does for each person reached, from the research on that kind of work, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, delivery falling short and missing outcome data. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction) and put into healthy years by its unit's conversion, so each moves only with its own sliders."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in healthy years, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "us_ops_expenses",
+      "section": "cost",
+      "label": "US operations, programme expenses, fiscal 2025",
+      "format": "usd",
+      "value": 80432761,
+      "kind": "observed",
+      "source": {
+        "title": "HIAS, Inc. and Related Entities, Consolidated Financial Statements for the year ended 30 September 2025 (GRF CPAs & Advisors)",
+        "url": "https://hias.org/wp-content/uploads/HIAS-2025-Consolidated-Financial-Statements.pdf",
+        "page": "p. 5, Exhibit B, consolidated statement of activities",
+        "quote": "U.S. Operations 80,432,761",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "HIAS's US programme line: resettlement with its 30 local partner agencies, integration, social and legal services, and US advocacy and community engagement, October 2024 to September 2025."
+    },
+    {
+      "id": "us_inkind_legal",
+      "section": "cost",
+      "label": "Donated legal services booked in US operations",
+      "format": "usd",
+      "formula": "@hias.donated_services_fy2025",
+      "explainer": "The shared HIAS figure (facts/hias.json): pro bono lawyers' time, booked at their firms' rates as professional fees in US operations. Not HIAS's money: it enters the legal branch's credit share."
+    },
+    {
+      "id": "us_advocacy_cost",
+      "section": "cost",
+      "label": "US advocacy, community engagement and litigation (modelled separately)",
+      "format": "usd",
+      "formula": "@hias.us_advocacy_cost_fy2025",
+      "explainer": "The shared HIAS judgment (facts/hias.json), taken out of this model's cost and modelled in hias-charityevals-advocacy, so each counts it once."
+    },
+    {
+      "id": "leg_cash_cost",
+      "section": "cost",
+      "label": "HIAS's own cash spending on US legal services",
+      "format": "usd",
+      "value": {
+        "low": 2000000,
+        "best": 3500000,
+        "high": 6000000
+      },
+      "kind": "judgment",
+      "explainer": "HIAS's immigration legal staff in New York and Silver Spring and its pro bono coordination, which the accounts don't split from the rest of US operations. 1,433 clients at roughly $1,500-4,000 of staff time each, the range of US nonprofit immigration legal services' cost per case: $3.5 million ($2-6 million). Our judgment."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses less donated services, fiscal 2025",
+      "format": "usd",
+      "formula": "@hias.cash_total_expenses_fy2025",
+      "explainer": "The shared HIAS figure (facts/hias.json): total operating expenses less the donated legal and professional services booked as an expense, read by all three HIAS models."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Programme expenses less donated services, fiscal 2025",
+      "format": "usd",
+      "formula": "@hias.cash_program_expenses_fy2025",
+      "explainer": "The shared HIAS figure (facts/hias.json): programme services less the donated legal services, read by all three HIAS models."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "HIAS's own spending on the modelled programme, fiscal 2025",
+      "format": "usd",
+      "formula": "us_ops_expenses - us_inkind_legal - us_advocacy_cost",
+      "explainer": "US operations less the donated legal services and the advocacy work modelled on its own: resettlement and integration (mostly $43.9 million of payments to the local resettlement partners, Exhibit C) and HIAS's own legal services."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ programme expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over the programmes in proportion to their cash cost."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled programme, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "rst_spend",
+      "section": "cost",
+      "label": "Resettlement, integration and social services",
+      "format": "usd",
+      "formula": "program_spend - leg_cash_cost",
+      "explainer": "The US services less the legal programme's cash cost."
+    },
+    {
+      "id": "rst_people",
+      "section": "reach",
+      "label": "People served by resettlement, integration and social services in fiscal 2025",
+      "format": "integer",
+      "value": {
+        "low": 10000,
+        "best": 15000,
+        "high": 30000
+      },
+      "kind": "judgment",
+      "explainer": "HIAS counts 13,400 refugees, asylum seekers and immigrants supported by its US programming in calendar 2025 (annual report p. 9) and 1,725 to 2,213 resettled in 2025 (annual report p. 4; Form 990 Schedule O); in calendar 2024 it resettled 12,000 (2024 annual report). The fiscal year starts in October 2024, before admissions were suspended in January 2025, so it covers more arrivals than the calendar year: 15,000 (10,000-30,000). Our judgment, anchored on the 13,400."
+    },
+    {
+      "id": "leg_clients",
+      "section": "reach",
+      "label": "People served by US legal programmes, fiscal 2025",
+      "format": "integer",
+      "value": 1433,
+      "kind": "observed",
+      "source": {
+        "title": "HIAS, Inc., Form 990 for October 2024 to September 2025",
+        "url": "https://hias.org/wp-content/uploads/HIAS-2025-990.pdf",
+        "page": "Schedule O, Part III line 4a",
+        "quote": "IN FISCAL YEAR 2025, HIAS' US LEGAL PROGRAMS SERVED 1433 INDIVIDUALS.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Asylum, defence against removal, family reunification and other immigration cases, by HIAS's lawyers and its network of pro bono attorneys."
+    },
+    {
+      "id": "household_size",
+      "section": "reach",
+      "label": "People per household",
+      "format": "number",
+      "formula": "@household_size.united_states",
+      "explainer": "The site's US household size. HIAS counts individuals, so households are derived from the count and multiplied back: people reached are the count itself.",
+      "unit": "people"
+    },
+    {
+      "id": "households_reached",
+      "section": "reach",
+      "label": "Households served (derived from the individuals counted)",
+      "format": "integer",
+      "formula": "(rst_people + leg_clients) / household_size",
+      "explainer": "HIAS counts people, not households: the count divided by the US household size, for the family's shared rows."
+    },
+    {
+      "id": "people_reached",
+      "section": "reach",
+      "label": "People reached",
+      "format": "integer",
+      "formula": "households_reached * household_size"
+    },
+    {
+      "id": "cost_per_person",
+      "section": "reach",
+      "label": "Cost per person reached",
+      "format": "usd",
+      "formula": "cost_total / people_reached",
+      "explainer": "Context: resettlement agencies receive about $2,000-2,400 per refugee for the first months (Reception and Placement grant)."
+    },
+    {
+      "id": "consumption_mean",
+      "section": "effect",
+      "label": "Average US consumption per person by the household survey",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024",
+      "explainer": "The site's US figure (Consumer Expenditure Survey 2024)."
+    },
+    {
+      "id": "recipients_consumption_share",
+      "section": "effect",
+      "label": "The people served's consumption per person, as a share of the US average",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Newly arrived refugees and asylum seekers live on resettlement cash, public benefits and first entry-level wages. Anchored on the poorest fifth's spending, 45% of the average per household (@united_states.ce_lowest_quintile_vs_all_2024), and below it in the first year: 35% (25-50%). Our judgment."
+    },
+    {
+      "id": "baseline_consumption",
+      "section": "effect",
+      "label": "The people served's consumption per person",
+      "format": "usd",
+      "formula": "consumption_mean * recipients_consumption_share"
+    },
+    {
+      "id": "rst_cash_goods_share",
+      "section": "effect",
+      "label": "Share of the resettlement spending that reaches clients as money or goods",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The Reception and Placement grant requires about half to go to refugees as rent, furniture, food and pocket money ($1,125 of $2,075 per refugee in fiscal 2017: Congressional Research Service R44878); HIAS's partner payments also fund case managers and employment staff for refugees past their first 90 days, whose time is valued in the employment row below. 35% (20-50%). Our judgment."
+    },
+    {
+      "id": "rst_value_per_person",
+      "section": "effect",
+      "label": "Money and goods received per person served (US$)",
+      "format": "usd",
+      "formula": "rst_spend * rst_cash_goods_share / rst_people"
+    },
+    {
+      "id": "rst_cash_ln",
+      "section": "effect",
+      "label": "ln(consumption) gain per person from the money and goods",
+      "format": "number",
+      "formula": "ln(1 + rst_value_per_person / baseline_consumption)",
+      "explainer": "One year's gain on the site's log-income scale at the clients' own consumption."
+    },
+    {
+      "id": "rst_job_gain",
+      "section": "effect",
+      "label": "Earnings gain from employment services, as a share of consumption, a year",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.03,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "Case managers and job developers find first jobs sooner and help with credentials and English. No controlled evaluation of US resettlement employment services exists; the Matching Grant programme reports most families self-sufficient at six months without a control group. A first job a month or two sooner and a slightly better match is a few per cent of a year's consumption: 3% (0-8%). Our judgment."
+    },
+    {
+      "id": "rst_job_years",
+      "section": "effect",
+      "label": "Years the head start in work lasts",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Not a lifelong income gain: a head start in finding work fades as the unhelped catch up: about a year (half a year to three). Our judgment.",
+      "unit": "years"
+    },
+    {
+      "id": "rst_job_ln",
+      "section": "effect",
+      "label": "ln(consumption) gain per person from employment help, discounted",
+      "format": "number",
+      "formula": "ln(1 + rst_job_gain) * pv_annuity_due(1, $discount_rate, rst_job_years)"
+    },
+    {
+      "id": "rst_ln_gain",
+      "section": "effect",
+      "label": "ln(consumption) gain per person served (resettlement)",
+      "format": "number",
+      "formula": "rst_cash_ln + rst_job_ln"
+    },
+    {
+      "id": "leg_stay_share",
+      "section": "effect",
+      "label": "Share of legal clients whose case decides whether they may stay",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "HIAS's legal programme takes asylum applications and defence against removal, and also family reunification petitions, green cards and work permits (Form 990 Schedule O; annual report p. 9). Half (30-70%). Our judgment."
+    },
+    {
+      "id": "unrep_grant_rate",
+      "section": "effect",
+      "label": "Asylum grant rate without a lawyer (immigration courts)",
+      "format": "percent",
+      "value": 0.18,
+      "kind": "observed",
+      "source": {
+        "title": "TRAC, Syracuse University: asylum decisions, fiscal 2022",
+        "url": "https://tracreports.org/whatsnew/email.221129.html",
+        "page": "representation bullet",
+        "quote": "Grant rates were only 18% for those who were unrepresented, but more than two and a half times higher for represented cases.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The national rate for unrepresented asylum seekers in immigration court, fiscal 2022."
+    },
+    {
+      "id": "rep_grant_ratio",
+      "section": "effect",
+      "label": "Grant rate with a lawyer, as a multiple of the rate without",
+      "format": "multiple",
+      "value": {
+        "low": 2.5,
+        "best": 2.6,
+        "high": 3.0
+      },
+      "kind": "estimate",
+      "drawn_with": "unrep_grant_rate",
+      "source": {
+        "title": "TRAC, Syracuse University: asylum decisions, fiscal 2022",
+        "url": "https://tracreports.org/whatsnew/email.221129.html",
+        "page": "representation bullet",
+        "quote": "Grant rates were only 18% for those who were unrepresented, but more than two and a half times higher for represented cases.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "'More than two and a half times': 2.6 (2.5-3.0). A correlation: stronger cases find lawyers more easily, which evidence_adj discounts. Eagly and Shafer's national study of 1.2 million removal cases found represented immigrants five and a half times as likely to obtain relief (University of Pennsylvania Law Review, 2015), also uncontrolled."
+    },
+    {
+      "id": "leg_win_uplift",
+      "section": "effect",
+      "label": "Extra chance of winning the right to stay with representation",
+      "format": "percent",
+      "formula": "unrep_grant_rate * (rep_grant_ratio - 1)"
+    },
+    {
+      "id": "leg_removed_if_lost",
+      "section": "effect",
+      "label": "Chance a client who loses is actually removed",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Many people ordered removed stayed for years before 2025; since then removals, detention and 'third-country' deportations have risen sharply (annual report pp. 8-9). 40% (15-70%). Our judgment."
+    },
+    {
+      "id": "cons_ppp_hnd",
+      "section": "effect",
+      "label": "Consumption per person, Honduras (PPP dollars, 2024)",
+      "format": "usd",
+      "formula": "@survey_consumption.hnd_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.hnd_real_growth_survey_to_2024",
+      "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
+    },
+    {
+      "id": "cons_ppp_ken",
+      "section": "effect",
+      "label": "Consumption per person, Kenya (PPP dollars, 2024)",
+      "format": "usd",
+      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.ken_real_growth_survey_to_2024",
+      "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
+    },
+    {
+      "id": "cons_ppp_per",
+      "section": "effect",
+      "label": "Consumption per person, Peru (PPP dollars, 2024)",
+      "format": "usd",
+      "formula": "@survey_consumption.per_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.per_real_growth_survey_to_2024",
+      "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
+    },
+    {
+      "id": "leg_cons_origin",
+      "section": "effect",
+      "label": "Consumption per person in the clients' countries of origin (PPP dollars)",
+      "format": "usd",
+      "formula": "avg(cons_ppp_hnd, cons_ppp_ken, cons_ppp_per)",
+      "explainer": "HIAS's legal clients come from Central and South America, Africa (Cameroon in the annual report's story), Afghanistan and elsewhere; the site has survey consumption for Honduras, Kenya and Peru, which stand in for them equally (a judgment)."
+    },
+    {
+      "id": "leg_years_stayed",
+      "section": "effect",
+      "label": "Years in the US gained by a client who wins and would otherwise have been removed",
+      "format": "number",
+      "value": {
+        "low": 8,
+        "best": 20,
+        "high": 40
+      },
+      "kind": "judgment",
+      "explainer": "Most asylum seekers are young adults with decades ahead; some would later regularise another way or leave. 20 years (8-40). Our judgment.",
+      "unit": "years"
+    },
+    {
+      "id": "leg_stay_ln",
+      "section": "effect",
+      "label": "ln(consumption) value of staying rather than being removed, discounted",
+      "format": "number",
+      "formula": "ln(baseline_consumption / leg_cons_origin) * pv_annuity_due(1, $discount_rate, leg_years_stayed)",
+      "explainer": "The site's log-income scale at the client's own consumption: the US level the clients live at against their country of origin, each year they stay."
+    },
+    {
+      "id": "leg_ln_gain",
+      "section": "effect",
+      "label": "ln(consumption) gain per legal client",
+      "format": "number",
+      "formula": "leg_stay_share * leg_win_uplift * leg_removed_if_lost * leg_stay_ln"
+    },
+    {
+      "id": "leg_death_risk_if_removed",
+      "section": "effect",
+      "label": "Chance a removed asylum seeker is killed in the years after return",
+      "format": "small",
+      "value": {
+        "low": 0.0005,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "Human Rights Watch documented 138 Salvadorans killed after deportation from the US between 2013 and 2019, a likely undercount, against roughly 100,000 deported to El Salvador in those years ('Deported to Danger', 2020): over 0.1%. Asylum seekers fleeing persecution face more than deportees on average: 0.3% (0.05-1%). Our judgment."
+    },
+    {
+      "id": "leg_deaths",
+      "section": "effect",
+      "label": "Deaths averted per legal client",
+      "format": "small",
+      "formula": "leg_stay_share * leg_win_uplift * leg_removed_if_lost * leg_death_risk_if_removed"
+    },
+    {
+      "id": "leg_other_ls_gain",
+      "section": "effect",
+      "label": "Life satisfaction gained by other legal clients (points, 0-10) a year",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "The other half: families reunited, green cards and work permits won, which ease worry and separation. Studies of family separation among refugees find large distress; one point-year of life satisfaction is about the gap a reunion closes in the worst cases. A tenth of a point (0-0.3) averaged over all such clients, most of whose cases would succeed anyway or bring smaller relief. Our judgment.",
+      "unit": "points"
+    },
+    {
+      "id": "leg_other_years",
+      "section": "effect",
+      "label": "Years the other clients' gain lasts",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "A reunion or a status lasts, but the gain over the alternative (a later success without help) fades: two years (1-4). Our judgment.",
+      "unit": "years"
+    },
+    {
+      "id": "leg_wellbys_per_client",
+      "section": "effect",
+      "label": "WELLBYs per legal client, discounted",
+      "format": "number",
+      "formula": "(1 - leg_stay_share) * leg_other_ls_gain * pv_annuity_due(1, $discount_rate, leg_other_years)"
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Life satisfaction gained per person per year, all people reached (reading only)",
+      "format": "number",
+      "formula": "leg_clients * (1 - leg_stay_share) * leg_other_ls_gain / people_reached",
+      "explainer": "Outcome summary for reading only: the legal branch's other clients, spread over everyone reached.",
+      "unit": "points"
+    },
+    {
+      "id": "wellbys_per_person",
+      "section": "effect",
+      "label": "WELLBYs per person reached (reading only)",
+      "format": "number",
+      "formula": "leg_clients * leg_wellbys_per_client / people_reached",
+      "explainer": "Summary for reading only: the legal branch's WELLBYs spread over everyone reached.",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "ln_gain_per_person",
+      "section": "effect",
+      "label": "ln(consumption) gain per person reached (reading only)",
+      "format": "number",
+      "formula": "(rst_people * rst_ln_gain + leg_clients * leg_ln_gain) / people_reached",
+      "explainer": "Summary for reading only: both branches' log-income gains over everyone reached."
+    },
+    {
+      "id": "deaths_averted_per_person",
+      "section": "effect",
+      "label": "Deaths averted per person reached (reading only)",
+      "format": "small",
+      "formula": "leg_clients * leg_deaths / people_reached",
+      "explainer": "Summary for reading only: the legal branch's deaths averted over everyone reached."
+    },
+    {
+      "id": "dalys_averted_per_person",
+      "section": "effect",
+      "label": "Illness averted per person reached, in DALYs",
+      "format": "small",
+      "formula": "0",
+      "explainer": "Zero: no health effect is modelled apart from deaths; health insurance enrolment and mental-health referrals are in the unmodelled shares.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
+      "explainer": "Asylum seekers killed after return are mostly young adults: GiveWell's weight for ages 15-49, times your value of a life.",
+      "unit": "units of value"
+    },
+    {
+      "id": "rst_evidence_adj",
+      "section": "adjustments",
+      "label": "Resettlement: evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "The money and goods are counted at their value, but the employment gain has no controlled evidence and some of the goods (furniture, household items) are worth less to clients than their cost. 0.6 (0.4-0.85), about as for the employment and case-management branches of the site's other domestic-services models. Our judgment."
+    },
+    {
+      "id": "rst_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Resettlement: share that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Refugees admitted to the US are resettled by one of the national agencies whatever happens; without HIAS another would have taken its cases with the same federal money. After the January 2025 funding suspension, HIAS's private money kept some services going that others would not have run. 35% (15-60%). Our judgment."
+    },
+    {
+      "id": "rst_attribution_share",
+      "section": "adjustments",
+      "label": "Resettlement: HIAS's share of the resources",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "The local partners add their own fundraising, volunteers and Welcome Circles of community sponsors (117 Afghan families helped: annual report p. 9). 75% (50-90%). Our judgment."
+    },
+    {
+      "id": "leg_evidence_adj",
+      "section": "adjustments",
+      "label": "Legal services: evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "The represented-versus-unrepresented gap is a correlation: lawyers pick stronger cases and stronger applicants find lawyers. Studies that compare like cases keep a large effect (Eagly and Shafer control for case traits and still find much higher odds), so about half of the raw gap: 0.5 (0.3-0.75). Our judgment."
+    },
+    {
+      "id": "leg_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Legal services: share of clients who would not have found another lawyer",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "About half of people in removal proceedings find counsel (Eagly, Shafer and Moulton, 2025: 52%); HIAS takes clients who can't pay. 60% (35-85%). Our judgment."
+    },
+    {
+      "id": "pro_bono_hours",
+      "section": "adjustments",
+      "label": "Hours of donated legal services",
+      "format": "integer",
+      "value": 18000,
+      "kind": "observed",
+      "source": {
+        "title": "HIAS, 2025 Annual Report",
+        "url": "https://hias.org/wp-content/uploads/HIAS-Annual-Report-2025.pdf",
+        "page": "p. 9",
+        "quote": "18,000 hours of donated legal services by pro bono partners, valued at over $18.6 million",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Lawyers from law firms working HIAS's cases, calendar 2025."
+    },
+    {
+      "id": "pro_bono_hour_value",
+      "section": "adjustments",
+      "label": "Value of a donated lawyer's hour, for the credit share",
+      "format": "usd",
+      "value": {
+        "low": 70,
+        "best": 120,
+        "high": 300
+      },
+      "kind": "judgment",
+      "explainer": "Convention 2 values volunteers' time at the local wage. A US lawyer's median pay is about $73 an hour (BLS, 2024), about $100-120 with benefits; the accounts' $1,040 an hour is the firms' billing rate. $120 ($70-300). Our judgment."
+    },
+    {
+      "id": "leg_attribution_share",
+      "section": "adjustments",
+      "label": "Legal services: HIAS's share of the resources",
+      "format": "percent",
+      "formula": "leg_cash_cost * overhead_ratio / (leg_cash_cost * overhead_ratio + pro_bono_hours * pro_bono_hour_value)",
+      "explainer": "Convention 2: HIAS's own legal spending, with overhead, over that plus the pro bono lawyers' time at their wage."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Delivery adjustment",
+      "format": "percent",
+      "value": {
+        "low": 0.75,
+        "best": 0.9,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "HIAS's counts are its own; some clients served get only a consultation or drop out. 0.9 (0.75-1). Our judgment."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Government grants paid for most of the resettlement work ($74 million of HIAS's $155 million revenue, Exhibit B) until January 2025; a private dollar partly replaces cut federal money that may be restored by the courts. 0.95 (0.8-1.05). Our judgment."
+    },
+    {
+      "id": "rst_missing_data_adj",
+      "section": "adjustments",
+      "label": "Resettlement: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (Convention 12): the reach is a judgment around HIAS's calendar-year count and the employment gain has no controlled measure, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "leg_missing_data_adj",
+      "section": "adjustments",
+      "label": "Legal services: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: HIAS counts its legal clients, but the effect of its representation is from national, uncontrolled comparisons, not a measure of its own cases' outcomes, so the branch reads the shared missing-data slider."
+    },
+    {
+      "id": "rst_total_adj",
+      "section": "adjustments",
+      "label": "Resettlement: all adjustments",
+      "format": "multiple",
+      "formula": "rst_evidence_adj * rst_counterfactual_adj * rst_attribution_share * implementation_adj * leverage_funging_adj * rst_missing_data_adj"
+    },
+    {
+      "id": "leg_total_adj",
+      "section": "adjustments",
+      "label": "Legal services: all adjustments",
+      "format": "multiple",
+      "formula": "leg_evidence_adj * leg_counterfactual_adj * leg_attribution_share * implementation_adj * leverage_funging_adj * leg_missing_data_adj"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(rst_dalys_unadjusted * rst_evidence_adj + leg_dalys_unadjusted * leg_evidence_adj) / (rst_dalys_unadjusted + leg_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(rst_dalys_unadjusted * rst_counterfactual_adj + leg_dalys_unadjusted * leg_counterfactual_adj) / (rst_dalys_unadjusted + leg_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "HIAS's share of the resources (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(rst_dalys_unadjusted * rst_attribution_share + leg_dalys_unadjusted * leg_attribution_share) / (rst_dalys_unadjusted + leg_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(rst_dalys_unadjusted * rst_missing_data_adj + leg_dalys_unadjusted * leg_missing_data_adj) / (rst_dalys_unadjusted + leg_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The outcome-weighted average of the branches' shares, for reading only."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined (outcome-weighted average, for reading only)",
+      "format": "multiple",
+      "formula": "(rst_dalys + leg_dalys) / (rst_dalys_unadjusted + leg_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
+    },
+    {
+      "id": "ue_integration_share",
+      "section": "adjustments",
+      "label": "Unmodelled: social support and integration",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "Case management, English classes, school enrolment and community sponsors help people settle and feel less alone, beyond money: +5% (0 to +15%). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_health_share",
+      "section": "adjustments",
+      "label": "Unmodelled: health insurance enrolment and mental-health referrals",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.03,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "Clients are enrolled in Medicaid and refugee medical assistance and referred for trauma care: +3% (0 to +10%). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_community_share",
+      "section": "adjustments",
+      "label": "Unmodelled: effects on host communities",
+      "format": "percent",
+      "value": {
+        "low": -0.02,
+        "best": 0.01,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Refugees' work and taxes in the towns that receive them (positive), against some pressure on local services (negative): +1% (-2% to +5%). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_loan_share",
+      "section": "adjustments",
+      "label": "Unmodelled: collecting refugees' travel loans",
+      "format": "percent",
+      "value": {
+        "low": -0.02,
+        "best": -0.005,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "HIAS collects refugees' flight loans for the IOM and keeps 25% (statements p. 12): a burden on new arrivals, softened by its credit-building advice. -0.5% (-2% to 0). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "formula": "ue_integration_share + ue_health_share + ue_community_share + ue_loan_share",
+      "explainer": "The rows above, summed."
+    },
+    {
+      "id": "rst_uov",
+      "section": "bridges",
+      "label": "Resettlement: income gained, in units of value (adjusted)",
+      "format": "number",
+      "formula": "rst_people * rst_ln_gain * $uov_per_ln_consumption * rst_total_adj",
+      "unit": "UoV"
+    },
+    {
+      "id": "leg_uov",
+      "section": "bridges",
+      "label": "Legal services: income and deaths, in units of value (adjusted)",
+      "format": "number",
+      "formula": "leg_clients * (leg_ln_gain * $uov_per_ln_consumption + leg_deaths * value_per_death) * leg_total_adj",
+      "unit": "UoV"
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in units of value (after adjustments)",
+      "format": "number",
+      "formula": "rst_uov + leg_uov",
+      "unit": "UoV"
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income gained and deaths averted, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "leg_wellbys",
+      "section": "bridges",
+      "label": "Legal services: WELLBYs (adjusted)",
+      "format": "number",
+      "formula": "leg_clients * leg_wellbys_per_client * leg_total_adj",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in WELLBYs (after adjustments)",
+      "format": "number",
+      "formula": "leg_wellbys",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "rst_dalys",
+      "section": "bridges",
+      "label": "Resettlement: healthy years (adjusted)",
+      "format": "number",
+      "formula": "rst_uov / ($uov_per_daly)",
+      "unit": "DALYs"
+    },
+    {
+      "id": "leg_dalys_uov",
+      "section": "bridges",
+      "label": "Legal services: income and deaths, in healthy years (adjusted)",
+      "format": "number",
+      "formula": "leg_uov / ($uov_per_daly)",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "leg_dalys_wellby",
+      "section": "bridges",
+      "label": "Legal services: life satisfaction, in healthy years (adjusted)",
+      "format": "number",
+      "formula": "leg_wellbys * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "leg_dalys",
+      "section": "bridges",
+      "label": "Legal services: healthy years (adjusted)",
+      "format": "number",
+      "formula": "leg_dalys_uov + leg_dalys_wellby",
+      "unit": "DALYs"
+    },
+    {
+      "id": "rst_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Resettlement: healthy years before adjustments",
+      "format": "number",
+      "formula": "rst_dalys / rst_total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "leg_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Legal services: healthy years before adjustments",
+      "format": "number",
+      "formula": "leg_dalys / leg_total_adj",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly",
+      "format": "number",
+      "formula": "people_reached * dalys_averted_per_person",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
+      "explainer": "Both branches, each in healthy years by its own unit's conversion and with its own adjustments, times the unmodelled shares.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "us_personnel",
+      "section": "donor",
+      "label": "US operations: salaries, payroll taxes and benefits",
+      "format": "usd",
+      "value": 12089289,
+      "kind": "observed",
+      "source": {
+        "title": "HIAS, Inc. and Related Entities, Consolidated Financial Statements for the year ended 30 September 2025 (GRF CPAs & Advisors)",
+        "url": "https://hias.org/wp-content/uploads/HIAS-2025-Consolidated-Financial-Statements.pdf",
+        "page": "p. 6, Exhibit C, statement of functional expenses (U.S. Operations column)",
+        "quote": "Salaries 8,570,726 ... Payroll taxes and employee benefits 3,518,563",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Personnel costs of the US programme line: $8,570,726 salaries and $3,518,563 taxes and benefits."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of the programme's cost",
+      "format": "percent",
+      "formula": "us_personnel / (us_ops_expenses - us_inkind_legal)",
+      "explainer": "HIAS's US staff pay over the US line's cash spending (Exhibit C); most of the rest is payments to the local partners, whose staff aren't HIAS's."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_health_field",
+      "explainer": "The site's shared pay gap for this kind of staff (facts/staff_pay.json)."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}
