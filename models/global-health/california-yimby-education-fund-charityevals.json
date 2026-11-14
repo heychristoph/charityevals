@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "california-yimby-education-fund",
   "owner": "charityevals",
-  "summary": "The California YIMBY Education Fund is the tax-deductible 501(c)(3) arm of California YIMBY, a 501(c)(4) that lobbies for state laws letting more homes be built in California; the Education Fund does the research, public education, organising and coalition work behind the same campaign ($3.05 million spent in 2024, the latest filed year; gifts to the 501(c)(4) aren't deductible). Both organisations' average real spending over 2017-2024 is counted against the Education Fund's share of their part in the state housing laws of those years: the ADU clean-up laws that followed the 2016 reforms (about 10,000 extra backyard homes a year), and a judged 2,500 extra homes a year from streamlining, parking and other laws. Each extra home is valued on the site's log-consumption scale at California prices: its rent above what it costs to build, kept by whoever builds it, and the fall in rents it brings, which renters gain and better-off landlords lose (about two thirds of the value). With the next dollar at 42% of the average, it comes to about 0.12 years of healthy life per 1,000 dollars, about twice the median of the site's global-health models. The result is mostly uncertainty: the resources others put into the same laws, how much rents fall per extra home and the share of the ADU boom due to the later laws are judgments, and the model's own ranges span several thousandfold; both branches are discounted for missing data.",
+  "summary": "The California YIMBY Education Fund is the tax-deductible 501(c)(3) arm of California YIMBY, a 501(c)(4) that lobbies for state laws letting more homes be built in California; the Education Fund does the research, public education, organising and coalition work behind the same campaign ($3.05 million spent in 2024, the latest filed year; gifts to the 501(c)(4) aren't deductible). Both organisations' average real spending over 2017-2024 is counted against the Education Fund's share of their part in the state housing laws of those years: the ADU clean-up laws that followed the 2016 reforms (about 9,000 extra backyard homes a year), and a judged 2,500 extra homes a year from streamlining, parking and other laws. Each extra home is valued on the site's log-consumption scale at California prices: its rent above what it costs to build, kept by whoever builds it, and the fall in rents it brings, which renters gain and better-off landlords lose (a little over half the value). With the next dollar at 42% of the average, it comes to about 0.10 years of healthy life per 1,000 dollars, about one and a half times the median of the site's global-health models. The result is mostly uncertainty: the resources others put into the same laws, how much rents fall per extra home and the share of the ADU boom due to the later laws are judgments, and the model's own ranges span several thousandfold; both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: California YIMBY Education Fund",
@@ -434,12 +434,19 @@
       "label": "Share of permitted ADUs that are built",
       "format": "percent",
       "value": {
-        "low": 0.55,
-        "best": 0.75,
-        "high": 0.9
+        "low": 0.57,
+        "best": 0.65,
+        "high": 0.75
       },
-      "kind": "judgment",
-      "explainer": "HCD's completions run below permits and lag them a year or two (the completions line in California YIMBY's ADU retrospective sits below permits every year); some permits lapse. The APR file's completion columns aren't in the tabulation used here and HCD's dashboard refuses automated fetches, so this is a judgment: 75%, from 55% to 90%."
+      "kind": "estimate",
+      "source": {
+        "title": "California Department of Housing and Community Development, Housing Element Annual Progress Report table A2 (data.ca.gov, resource fe505d9b-8c36-42ba-ba30-08bc4f34e022), ADU rows: building permits and certificates of occupancy by year",
+        "url": "https://data.ca.gov/api/3/action/datastore_search_sql",
+        "retrieved": "2026-11-14",
+        "quote": "Permits 2018-2025: 9,008 / 15,086 / 16,041 / 24,640 / 31,805 / 35,720 / 39,077 / 41,977. Completions: 3,316 / 6,428 / 8,601 / 10,806 / 15,000 / 18,548 / 21,473 / 24,416.",
+        "page": "SUM(NO_BUILDING_PERMITS) and SUM(NO_OTHER_FORMS_OF_READINESS) by YEAR where UNIT_CAT = 'ADU'"
+      },
+      "explainer": "Completions (certificates of occupancy) in a year over the previous year's permits ran 0.57 to 0.67 in 2020-2025, and 2025's completions over the average of 2023-2024 permits 0.65; 2023's over 2021's permits 0.75. Some permits lapse and some completions go unreported. 65%, from 57% to 75%."
     },
     {
       "id": "adu_extra_homes_per_year",
@@ -551,12 +558,18 @@
       "label": "ADU laws: share of an ADU's rent above what it costs to build",
       "format": "percent",
       "value": {
-        "low": 0.15,
-        "best": 0.35,
-        "high": 0.55
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "An ADU builder buys no land, so its gap is rent against construction cost alone. At the ADU rent here (about $20,800 a year) and a user cost of about 6.5% a year (interest, upkeep, depreciation), a detached ADU costing $200,000 to $250,000 leaves 20% to 37% of the rent; a garage conversion costing half that leaves over 60%. Most new ADUs are detached. 35%, from 15% to 55%."
+      "explainer": "An ADU builder buys no land, so its gap is rent against construction cost alone. The statewide ADU owner survey found a median construction cost of $150,000 ($250 a square foot; 37% under $100,000, 71% under $200,000), about $180,000 in 2024 prices (US consumer prices rose about 21% from 2020). At the ADU rent here (about $20,800 a year) and a user cost of about 6.5% a year (interest, upkeep, depreciation), the median ADU leaves about 43% of its rent; one costing $250,000 about 22%, a $100,000 garage conversion about 69%. 40%, from 20% to 60%.",
+      "source": {
+        "title": "UC Berkeley Center for Community Innovation and Terner Center, Implementing the Backyard Revolution: Perspectives of California's ADU Owners (April 2021)",
+        "url": "https://www.urbandisplacement.org/wp-content/uploads/2021/09/Implementing-the-Backyard-Revolution.pdf",
+        "retrieved": "2026-11-14",
+        "quote": "median statewide construction cost of an ADU of $150,000, or $250/square foot"
+      }
     },
     {
       "id": "rent_fall_per_stock",
@@ -569,7 +582,13 @@
         "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "Across US metros, Pew's analysis of Zillow data (July 2025) finds each 10% more housing from 2017 to 2023 went with rents growing about 5% less to 2024: 0.5 per 1%, for a market open to people moving in from nearby, and correlational. A whole state is less open than a metro, so its rents fall more; the Reserve Bank of Australia's model of a national market uses 2.5% lower housing costs for each 1% more dwellings (RBA Research Discussion Paper 2019-01), the high end (the paper's Abelson et al. figure, 3.6%, is house prices, not rents, and isn't used). 1, from 0.4 to 2.5."
+      "explainer": "Across US metros, Pew's analysis of Zillow data (July 2025) finds each 10% more housing from 2017 to 2023 went with rents growing about 5% less to 2024: 0.5 per 1%, for a market open to people moving in from nearby, and correlational. A whole state is less open than a metro, so its rents fall more; the Reserve Bank of Australia's model of a national market uses 2.5% lower housing costs for each 1% more dwellings (RBA Research Discussion Paper 2019-01), the high end (the paper's Abelson et al. figure, 3.6%, is house prices, not rents, and isn't used). 1, from 0.4 to 2.5.",
+      "source": {
+        "title": "Pew Charitable Trusts, New Housing Slows Rent Growth Most for Older, More Affordable Units (31 July 2025)",
+        "url": "https://www.pew.org/en/research-and-analysis/articles/2025/07/31/new-housing-slows-rent-growth-most-for-older-more-affordable-units",
+        "retrieved": "2026-11-14",
+        "quote": "every 10% increase in a market's housing supply from 2017 to 2023 correlated with rents growing 5% less"
+      }
     },
     {
       "id": "ca_consumption_vs_us",
@@ -585,30 +604,17 @@
       "explainer": "California's prices run about 12% above the US average (the Bureau of Economic Analysis's regional price parities, about 112 for California), so the same living standard takes more dollars there and a dollar counts for less on the log scale. 1.12, from 1 to 1.25."
     },
     {
-      "id": "renter_lowest_fifth_weight",
-      "section": "effect",
-      "label": "Weight of the poorest income fifth in renters' consumption (the rest the second fifth)",
-      "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.5,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "Renting households' median income is about two thirds of all households' (the American Community Survey's median income by tenure), between the poorest and the second-poorest fifth. Half each, from 20% to 80% on the poorest fifth."
-    },
-    {
       "id": "owner_multiple",
       "section": "effect",
       "label": "Consumption of homeowners who build ADUs, as a multiple of the US survey average per person",
       "format": "multiple",
       "value": {
-        "low": 1,
-        "best": 1.4,
-        "high": 2
+        "low": 1.06,
+        "best": 1.25,
+        "high": 1.6
       },
       "kind": "judgment",
-      "explainer": "ADUs are built by homeowners, who earn more than renters and than the average household: between the average and the top income fifth, whose households spend about 1.8 times the average and are larger (the Consumer Expenditure Survey's income-fifth tables). 1.4 times the survey average per person, from 1 to 2."
+      "explainer": "ADUs are built by homeowners with a lot and the money to build, better off than homeowners as a whole: per person, US homeowners spend 1.06 times the survey average ($90,117 a household of 2.6) and the top income fifth 1.44 times ($150,342 for 3.2), against $78,535 for 2.4 (Consumer Expenditure Survey 2024 via FRED, series CXUTOTALEXPLB0106M, CXU980010LB0106M, CXUTOTALEXPLB1702M, CXU980010LB1702M). 1.25, from 1.06 to 1.6."
     },
     {
       "id": "landlord_multiple",
@@ -628,8 +634,8 @@
       "section": "effect",
       "label": "Renters' consumption per person (US$ a year)",
       "format": "usd",
-      "formula": "@united_states.ce_expenditure_per_person_2024 * (renter_lowest_fifth_weight * @united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile + (1 - renter_lowest_fifth_weight) * @united_states.ce_second_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_second_quintile) * ca_consumption_vs_us",
-      "explainer": "The shared survey spending per person (the base the site uses for the people a programme serves, docs/normalization.md 2.14), scaled to renters by the shared income-fifth ratios (per household, turned into per person with the shared household sizes), and to California's price level."
+      "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_renter_vs_all_2024 * @household_size.united_states / @household_size.united_states_renter * ca_consumption_vs_us",
+      "explainer": "The shared survey spending per person (the base the site uses for the people a programme serves, docs/normalization.md 2.14), scaled to renters by the survey's own renter figures (per household, turned into per person with the shared household sizes), and to California's price level."
     },
     {
       "id": "owner_consumption",
