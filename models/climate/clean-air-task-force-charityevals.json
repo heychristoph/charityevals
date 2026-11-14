@@ -1040,26 +1040,6 @@
       "explainer": "The six wins are the period's largest, but much of the work isn't in them: the EU Methane Regulation's rules on Europe's own oil, gas and coal; the Fossil Fuel Regulatory Programme (methane rules with up to 20 low- and middle-income countries, from 2024); agricultural and waste methane; hydrogen and zero-carbon fuels rules; superhot-rock geothermal; US state laws; energy access in Africa; the defence of the Mercury and Air Toxics Standards. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 30% of the modelled value (10% to 70%), below the roughly two-fifths of spending they take because the modelled wins are the biggest."
     },
     {
-      "id": "voc_health_share",
-      "section": "adjustments",
-      "label": "Side effect: smog and toxic air pollution cut by the methane rules, as a share of modelled value",
-      "format": "percent",
-      "value": {
-        "low": 0.005,
-        "best": 0.01,
-        "high": 0.02
-      },
-      "kind": "estimate",
-      "side_effect": "added",
-      "explainer": "EPA's methane rule also cuts smog-forming volatile organic compounds near wells: EPA's analysis gives about 56 (2028) to 74 (2038) ozone deaths a year avoided from them (Tables 3-8 and 3-9). Valued like other air-pollution deaths at the shared rates, that is about an eighth of the US methane branch's heat-death value, and with methane's own worldwide ozone counted in the shared conversion (through methane_share), about +1% of the model's value (0.5% to 2%). These are local deaths from the rule's other pollutants, apart from methane's own ozone.",
-      "source": {
-        "title": "US EPA (2023), Regulatory Impact Analysis for the final oil and natural gas standards",
-        "url": "https://www.epa.gov/system/files/documents/2023-12/eo12866_oil-and-gas-nsps-eg-climate-review-2060-av16-ria-20231130.pdf",
-        "page": "Tables 3-8 and 3-9, pp. 3-47 to 3-48",
-        "retrieved": "2026-11-14"
-      }
-    },
-    {
       "id": "eor_oil_share",
       "section": "adjustments",
       "label": "Side effect: extra oil from captured CO₂ used to push oil out of old wells, as a share of modelled value",
@@ -1178,19 +1158,28 @@
     {
       "id": "extra_deaths_per_tco2e",
       "section": "conversion",
-      "label": "Air-pollution deaths averted per tonne, counted directly (none here)",
+      "label": "Air-pollution deaths averted per tonne, counted directly (the US methane rule's local smog)",
       "format": "small",
-      "formula": "0",
-      "explainer": "Deaths a source counts directly beside the tonnes: none here. Methane's ozone deaths and its own, earlier warming are in the shared conversion, through the methane share (row above; docs/normalization.md 2.5), discounted over the years they come like every future good."
+      "formula": "methane_share * usmeth_expected_tonnes / (eumr_expected_tonnes + usmeth_expected_tonnes) * voc_deaths_per_year / usmeth_tonnes_per_year",
+      "explainer": "The US methane rule's local ozone deaths per tonne of its methane (shared figure below), × the rule's share of this model's expected tonnes, so per average tonne: they share the tonnes' credit and wait steps and are valued at the air-pollution ages by the shared conversion. The EU rule's and other methane's own ozone and earlier warming are in the shared conversion through the methane share."
+    },
+    {
+      "id": "voc_deaths_per_year",
+      "section": "conversion",
+      "label": "EPA methane rule: local ozone deaths a year avoided by its cut in smog-forming pollution",
+      "format": "number",
+      "unit": "deaths / year",
+      "explainer": "The shared figure (facts: climate.us_oil_gas_methane_rule_voc_deaths_per_year): EPA's 56 (2028) to 74 (2038) local ozone deaths a year avoided by the rule's cut in volatile organic compounds near wells, as in every model that credits this rule.",
+      "formula": "@climate.us_oil_gas_methane_rule_voc_deaths_per_year"
     },
     {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂e averted per year of the period",
       "format": "number",
-      "formula": "(eumr_downstream * eumr_total_adj + usmeth_downstream * usmeth_total_adj + pwr_downstream * pwr_total_adj + ccs_downstream * ccs_total_adj + nuc_downstream * nuc_total_adj + fus_downstream * fus_total_adj) / period_years * (1 + unmodelled_benefits_adj + voc_health_share + eor_oil_share + nuclear_harm_share)",
+      "formula": "(eumr_downstream * eumr_total_adj + usmeth_downstream * usmeth_total_adj + pwr_downstream * pwr_total_adj + ccs_downstream * ccs_total_adj + nuc_downstream * nuc_total_adj + fus_downstream * fus_total_adj) / period_years * (1 + unmodelled_benefits_adj + eor_oil_share + nuclear_harm_share)",
       "unit": "t CO₂e / year",
-      "explainer": "Each win's expected tonnes × its own adjustments, summed, spread over the period's four years, with the other wins and the side effects added as shares."
+      "explainer": "Each win's expected tonnes × its own adjustments, summed, spread over the period's four years, with the other wins and the remaining side effects added as shares."
     },
     {
       "id": "tco2e_per_dollar",
