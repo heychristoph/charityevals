@@ -59,7 +59,8 @@ with better government as an income gain per person governed, `ln(1 + gain)` in
 
 - **Backsliding averted or democratization**: `@democracy.democratization_gdp_gain`, built up over
   `democratization_years_to_effect` (T: it builds up evenly over T years), × the chance the work
-  changes the outcome.
+  changes the outcome. Only direct anti-backsliding spending counts here; reform dollars count in
+  their reform branch alone, never also against a slide.
 - **Less corruption**: `@democracy.bribery_share_gdp` × the share of its cost removed, ranged; bribes
   are a transfer, so say what that share stands for.
 - **Better-run spending**: public investment per person × `public_investment_efficiency_gap_<advanced
