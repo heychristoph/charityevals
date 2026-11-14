@@ -24,4 +24,3 @@ Summary and write-up use the **combined range** (0.0354–71.38).
 ## Drivers
 Misuse cut per dollar, AI catastrophe chance, years a cut counts, missing-data discount, AI catastrophe death share. Unchanged.
 
-(Numbered 5 on its branch; renumbered at merge.)

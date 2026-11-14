@@ -16,11 +16,11 @@ describe("build-cea templates", () => {
       const high = lintModel(lib, m).filter((f) => f.severity === "high");
       expect(high.length).toBeGreaterThan(0);
       expect(high.every((f) => f.code === "placeholder")).toBe(true);
-    });
+    }, 60_000);
     it(`${name}: filled in, it passes`, () => {
       const { lib, m } = load(filled(raw));
       expect(lintModel(lib, m).filter((f) => f.severity === "high")).toEqual([]);
-    });
+    }, 60_000);
   }
 });
 

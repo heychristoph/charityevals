@@ -23,4 +23,3 @@ Summary and write-up use the **combined range** (1.232–451.9).
 ## Drivers
 Nuclear cut per dollar, years a cut counts, missing-data discount, discount rate, evidence adjustment. Unchanged.
 
-(Numbered 7 on its branch; renumbered at merge.)

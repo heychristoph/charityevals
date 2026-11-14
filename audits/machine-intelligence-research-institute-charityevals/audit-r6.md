@@ -24,4 +24,3 @@ Summary and write-up use the **combined range**.
 ## Drivers
 AI catastrophe chance, extinction cut per dollar, discount rate, years a cut counts, missing-data discount. Unchanged.
 
-(Numbered 5 on its branch; renumbered at merge.)

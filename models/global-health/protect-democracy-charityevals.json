@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "protect-democracy",
   "owner": "charityevals",
-  "summary": "Protect Democracy litigates, builds tools and coalitions and writes policy to keep the United States from sliding into a more authoritarian government ($34.4 million in 2024). Its year of work is counted as its share of the money behind the US pro-democracy field's work against backsliding (about 1.3%) times the share of the forecast chance of the US leaving the democracies before 2030 (about 11%) that a year of the field's work removes (judged 4.5%); the loss is the income democracy brings (Acemoglu et al. 2019), building over 25 years, put off by the years a win counts and lasting until the slide would be undone (5% a year), and democracy's other goods. A smaller branch counts its work for proportional representation (about a fifth of the result). With its next dollar at 35% of the average that comes to about 0.02 years of healthy life per 1,000 dollars, about a quarter of the site's global-health median. The result is mostly uncertainty, its own ranges spanning over ten thousandfold; the biggest is the field's effect on that chance, a judgment with no study behind it. Both branches are discounted by the shared missing-data slider.",
+  "summary": "Protect Democracy litigates, builds tools and coalitions and writes policy to keep the United States from sliding into a more authoritarian government ($34.4 million in 2024). Its year of work is counted as its share of the money behind the US pro-democracy field's work against backsliding (about 1.3%) times the share of the forecast chance of the US leaving the democracies before 2030 (about 11%) that a year of the field's work removes (judged 4.5%); the loss is the income democracy brings (Acemoglu et al. 2019), building over 25 years, put off by the years a win counts and lasting until the slide would be undone (5% a year), and democracy's other goods. A smaller branch counts its work for proportional representation (about a twelfth of the result). With its next dollar at 35% of the average that comes to about 0.02 years of healthy life per 1,000 dollars, about a quarter of the site's global-health median. The result is mostly uncertainty, its own ranges spanning over ten thousandfold; the biggest is the field's effect on that chance, a judgment with no study behind it. Both branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Protect Democracy",
@@ -101,17 +101,8 @@
       "section": "cost",
       "label": "Total expenses, calendar 2024",
       "format": "usd",
-      "value": 34368875,
-      "kind": "observed",
-      "source": {
-        "title": "Protect Democracy Project, Form 990 for calendar year 2024 (public disclosure copy, filed November 2025)",
-        "url": "https://protectdemocracy.org/wp-content/uploads/2025/11/FY24-990-PDP-Public-Disclosure-Copy-without-Schedule-B.pdf",
-        "page": "Part I, line 18 (PDF p. 2)",
-        "quote": "Total expenses. Add lines 13-17 (must equal Part IX, column (A), line 25)",
-        "note": "$34,368,875 in 2024 ($22,051,673 in 2023).",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "All of the year's expenses, from the same return."
+      "explainer": "The shared figure from the same return ($34,368,875, Part I line 18), read by the FairVote model too, which divides credit for proportional representation by Protect Democracy's spending.",
+      "formula": "@democracy.protect_democracy_expenses_2024"
     },
     {
       "id": "program_spend",
@@ -158,13 +149,8 @@
       "section": "effect",
       "label": "Share of the programme spent on proportional representation",
       "format": "percent",
-      "value": {
-        "low": 0.03,
-        "best": 0.07,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "Protect Democracy lists four areas of work (Protecting Free & Fair Elections; Stopping the Consolidation of Power; Building Pro-Democracy Collective Action; Shaping the Democracy of Tomorrow, its own page). The last includes its work for proportional representation (research, a Democracy Journal symposium with Democracy Fund, a grant to Fix Our House) and its AI for Democracy Action Lab, which works on AI threats to elections and is counted in the backsliding branch; the return gives no split. Judged 7% (3% to 15%): part of the smallest of four areas, as its page and grants show; the rest is the backsliding branch."
+      "formula": "@democracy.protect_democracy_pr_share",
+      "explainer": "The shared figure (7%, 3% to 15%), read by the FairVote model too: Protect Democracy lists four areas of work (Protecting Free & Fair Elections; Stopping the Consolidation of Power; Building Pro-Democracy Collective Action; Shaping the Democracy of Tomorrow, its own page); the last includes its work for proportional representation (research, a Democracy Journal symposium with Democracy Fund, a grant to Fix Our House) and its AI for Democracy Action Lab, which is counted in the backsliding branch; the return gives no split. The rest is the backsliding branch."
     },
     {
       "id": "bs_spend_share",
@@ -187,13 +173,8 @@
       "section": "effect",
       "label": "Share of that chance a year of the US pro-democracy field's work removes",
       "format": "percent",
-      "value": {
-        "low": 0.005,
-        "best": 0.045,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "The whole field's year of litigation, election protection, policy and public education (about $3 billion a year from foundations alone, @democracy.us_democracy_philanthropy_per_year) against a world without it. No study measures this; judged 4.5% (0.5% to 20%), the geometric middle of a lower anchor of about 1% and the range's high of 20%. From below: once autocratization begins, only one in five democracies manage to avert breakdown (Boese et al. 2021, Democratization 28(5), abstract: 36 breakdowns in 59 episodes since 1993, the rest including episodes still under way), so resistance as a whole (courts, elections, officials, the press, civil society) cuts breakdown by about a fifth; durable judicial constraints and long democratic histories are what let democracies prevail, and the field works largely through the courts and election officials. With organised civil society a fifth to a third of that resistance and a year one of five in the window, a year of the field removes 0.8% to 1.3%; the low end is half that. From above: the catastrophic-risk family's typical cut for nuclear-security work, 0.036% of the risk per $1 million (@catastrophe.nuclear_catastrophe_cut_per_million), would give over 100% at the field's $3-4 billion; 4.5% is about a twentieth of that per dollar, for a field a hundred times larger with steeply falling returns, and the high end of 20% a fifth of it. Resources also explain less than 5% of which side wins on contested US policy issues (Baumgartner et al. 2009, @democracy.lobbied_issue_change_rate's source). A cut in a chance is counted at its expected value, as the catastrophic-risk family does: the field's work is thousands of cases and campaigns, not one bet, so this isn't a single event."
+      "formula": "@democracy.field_risk_cut_per_year",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "bs_p_success",
@@ -232,7 +213,7 @@
         "high": 5
       },
       "kind": "judgment",
-      "explainer": "The forecast counts the Economist's reports published before 2030; those for 2024 and 2025 showed no slide, so the window left covers 2026 to 2028, and a slide averted would on average have come in its middle, 2027: three years after 2024's work (2 to 5).",
+      "explainer": "The forecast counts the Economist's reports published before 2030; those for 2024 and 2025 showed no slide, so the window left covers 2026 to 2028, and a slide averted would on average have come in its middle, 2027: three years after 2024's work (2 to 5). Not the same figure as the Brennan Center model's dem_years_until_effect (2.5, 1.5 to 4.5): that model's work year is the year to June 2025, half a year closer to the same date, so the two are one date measured from two work years, not two views of it.",
       "unit": "years"
     },
     {
@@ -257,13 +238,8 @@
       "section": "effect",
       "label": "Chance per year that a slide, once it has happened, is undone",
       "format": "percent",
-      "value": {
-        "low": 0.02,
-        "best": 0.05,
-        "high": 0.1
-      },
-      "kind": "judgment",
-      "explainer": "Most recent slides are reversed: '52% of all autocratization episodes become U-Turns, which increases to 73% when focusing on the last 30 years', and 90% of U-turns restore democracy (Nord et al. 2025, When autocratization is reversed: episodes of U-Turns since 1900, Democratization, doi 10.1080/13510347.2024.2448742, abstract). A 5% yearly hazard undoes about 70% of slides within 25 years; judged lower than the 73% because a breakdown to a hybrid regime, the forecast's stake, is harder to undo than an episode stopped earlier (2% to 10%). The loss is treated as ending at reversal, a slight understatement since income recovers at the ramp's pace."
+      "formula": "@democracy.slide_reversal_rate",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "bs_rate",
@@ -294,28 +270,18 @@
     {
       "id": "ref_people_covered",
       "section": "effect",
-      "label": "People newly governed under proportional representation per year of the movement's work",
+      "label": "People newly governed under proportional representation per year of the movement's work (2016-2025)",
       "format": "integer",
-      "value": {
-        "low": 50000,
-        "best": 230000,
-        "high": 2000000
-      },
-      "kind": "judgment",
-      "explainer": "Proportional representation in the US is won city by city for now: Portland, Oregon (about 650,000 people) voted for multi-member districts with ranked ballots in November 2022, and no state or the US House has followed (the 1967 single-member district law stands). About one such city every two to four years of the whole movement's work gives 160,000 to 325,000 people a year in expectation, about 230,000 in the middle; from 50,000 (no new adoption for a decade) to 2 million (a large city or a small state's legislature within the years counted). Judgment."
+      "formula": "@democracy.us_pr_people_covered_per_year",
+      "explainer": "The shared figure, read by the FairVote model too: the movement's 2016-2025 record, about 103,000 people a year (85,000 to 115,000), Portland, Oregon's 2022 reform most of it."
     },
     {
       "id": "ref_gain_share",
       "section": "effect",
       "label": "Share of democracy's income gain a switch to proportional representation brings",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.05,
-        "high": 0.15
-      },
-      "kind": "judgment",
-      "explainer": "A reform within a democracy gets a ranged share of the democratization gain, never the whole (the family's rule). No study finds a robust income effect of proportional representation in rich democracies; its case is fewer wasted votes, more parties and less polarization, which Protect Democracy argues lowers the risk of backsliding. Judged 5% (1% to 15%) of the gain from becoming a democracy, a small change in who is elected against a change of regime."
+      "formula": "@democracy.pr_gain_share",
+      "explainer": "The shared figure (5%, 1% to 15%), read by the FairVote model too: a reform within a democracy gets a ranged share of the democratization gain, never the whole (the family's rule); no study finds a robust income effect of proportional representation in rich democracies."
     },
     {
       "id": "ref_ln_gain",
@@ -331,13 +297,8 @@
       "section": "effect",
       "label": "Years from the win until the new system is first used",
       "format": "number",
-      "value": {
-        "low": 1,
-        "best": 2,
-        "high": 4
-      },
-      "kind": "judgment",
-      "explainer": "Portland voted in November 2022 and first elected its council under the new system in November 2024: two years (1 to 4).",
+      "formula": "@democracy.pr_years_until_effect",
+      "explainer": "The shared figure: two years (1 to 4), as in Portland (voted November 2022, first used November 2024).",
       "unit": "years"
     },
     {
@@ -467,26 +428,16 @@
       "section": "adjustments",
       "label": "Share of the full democracy-to-autocracy loss a slide to a hybrid regime brings",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Acemoglu et al. code a country as democratic or not; the forecast is of a slide to the Economist's 'hybrid regime' (elections held but not free or fair), short of the full autocracy their estimate compares with. Judged 60% (30% to 100%): Hungary and Turkey, the nearest cases, kept elections and markets but lost courts' and the press's independence."
+      "formula": "@democracy.slide_severity_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "bs_external_validity",
       "section": "adjustments",
       "label": "Validity of the cross-country income effect for the United States",
       "format": "multiple",
-      "value": {
-        "low": 0.5,
-        "best": 0.8,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "The estimate comes from 175 countries, most of them poorer than the US, where democracy raised growth through investment, schooling and reforms that a rich country already has; a rich country's private institutions may hold up more of its income. Judged 0.8 (0.5 to 1)."
+      "formula": "@democracy.democracy_effect_external_validity",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "bs_evidence_adj",
@@ -501,13 +452,8 @@
       "section": "adjustments",
       "label": "Evidence adjustment, reform branch",
       "format": "multiple",
-      "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "The reform's share of the gain is already a ranged judgment; this is the doubt that proportional representation in US cities changes outcomes at all (few cases, first used in 2024). Judged 0.6 (0.3 to 0.9); it is above the backsliding branch's 0.48 only because it measures a different doubt."
+      "formula": "@democracy.pr_evidence_adj",
+      "explainer": "The shared figure (0.6, 0.3 to 0.9), read by the FairVote model too: the doubt that proportional representation in US cities changes outcomes at all (few cases, first used in 2024); above the backsliding branch's 0.48 only because it measures a different doubt."
     },
     {
       "id": "bs_counterfactual_adj",
@@ -530,39 +476,24 @@
       "section": "adjustments",
       "label": "The whole field's money as a multiple of institutional 501(c)(3) philanthropy",
       "format": "multiple",
-      "value": {
-        "low": 1.2,
-        "best": 1.5,
-        "high": 2.2
-      },
-      "kind": "judgment",
-      "explainer": "The shared figure counts only institutional philanthropy to 501(c)(3) work in 2021-2022, but the risk cut is the whole field's. Democracy Fund's own report says 501(c)(4) funding would raise its 2021-2022 total from $6.9 to $7.8 billion (+13%, p. 16, note 10), that individual donors are left out and the field's overall size would be larger (p. 15), and that 45% of funders planned to give more in 2023-2024 against 8% less (p. 3); law firms' pro bono work comes on top. Against that, the report names biases the other way: survey response from growing funders and a broader taxonomy than Candid's (p. 15), and slower individual giving in 2023-2024 (p. 16). Judged 1.5 (1.2 to 2.2): ×1.13 for 501(c)(4)s, about ×1.15 for real growth to 2024 and ×1.15 for individual donors and pro bono, the range covering both directions."
+      "formula": "@democracy.field_beyond_institutional",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "field_direct_share",
       "section": "adjustments",
       "label": "Share of US democracy money spent on work acting on backsliding as directly as Protect Democracy's",
       "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.7
-      },
-      "kind": "judgment",
-      "explainer": "Democracy Fund's total covers elections and voting, the rule of law and accountability, civic engagement and education, money in politics and the information ecosystem. Protect Democracy's kind of work (litigation, election protection, checks on executive power, election-official support) is part of it. Judged 40% (20% to 70%)."
+      "formula": "@democracy.field_direct_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "indirect_relative_effect",
       "section": "adjustments",
       "label": "Effect on backsliding of a dollar of the field's other work, against a direct dollar",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.2,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "The rest of the field (turnout drives, civic education, local news, money in politics) also acts on backsliding, less directly, and so shares in the risk cut. Judged a fifth of a direct dollar's effect (0 to half)."
+      "formula": "@democracy.field_indirect_relative_effect",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
     },
     {
       "id": "field_resources",
@@ -581,63 +512,12 @@
       "explainer": "Its 2024 spending on this work over the field's (Convention 2: share of resources, never an equal split): about 1.3%. It applies whichever way credit is shared."
     },
     {
-      "id": "fairvote_expenses_2023",
-      "section": "adjustments",
-      "label": "FairVote's total expenses, 2023",
-      "format": "usd",
-      "value": 6871703,
-      "kind": "observed",
-      "source": {
-        "title": "ProPublica Nonprofit Explorer, FairVote (EIN 54-1635649), Form 990 for 2023 (API)",
-        "url": "https://projects.propublica.org/nonprofits/organizations/541635649",
-        "page": "Form 990 Part I line 18 (via the Explorer's data)",
-        "quote": "totfuncexpns: 6871703",
-        "note": "Revenue $7,666,359; 2022 expenses $5,352,841.",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "The largest US electoral-reform organisation's whole spending, most of it for ranked-choice voting rather than proportional representation; the anchor for the movement's resources below."
-    },
-    {
-      "id": "fairvote_pr_share",
-      "section": "adjustments",
-      "label": "Share of FairVote's spending on proportional representation",
-      "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.33,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "FairVote works mostly for single-winner ranked-choice voting, and also for the Fair Representation Act (multi-member House districts with ranked ballots) and multi-winner ranked voting in cities. Judged a third (15% to 60%)."
-    },
-    {
-      "id": "other_pr_resources",
-      "section": "adjustments",
-      "label": "Other groups' yearly spending for proportional representation",
-      "format": "usd",
-      "value": {
-        "low": 1500000,
-        "best": 3700000,
-        "high": 10000000
-      },
-      "kind": "judgment",
-      "explainer": "Fix Our House (a small new group: Protect Democracy granted it $15,000 in 2024), New America's political reform programme, local campaigns such as Portland's 2022 measure, and funders' own staff. Judged $3.7 million a year ($1.5 million to $10 million), about FairVote's part again plus a little."
-    },
-    {
-      "id": "ref_movement_resources_other",
-      "section": "adjustments",
-      "label": "Other organisations' yearly spending for proportional representation",
-      "format": "usd",
-      "formula": "fairvote_expenses_2023 * @cpi.usa_2024 / @cpi.usa_2023 * fairvote_pr_share + other_pr_resources",
-      "explainer": "FairVote's part (its 2023 spending in 2024 prices; its 2024 return is filed but only as a PDF behind a bot check) plus the other groups': about $6 million a year."
-    },
-    {
       "id": "ref_attribution_share",
       "section": "adjustments",
       "label": "Protect Democracy's share of the proportional-representation movement's resources",
       "format": "percent",
-      "formula": "cost_total * ref_spend_share / (cost_total * ref_spend_share + ref_movement_resources_other)",
-      "explainer": "Its spending on this work over the movement's, its own included (Convention 2): about 29%."
+      "formula": "cost_total * ref_spend_share / @democracy.us_pr_movement_resources_per_year",
+      "explainer": "Its 2024 spending on this work (about $2.4 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, its own and FairVote's included; Convention 2), the denominator the FairVote model divides by too: about 71%. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
     },
     {
       "id": "bs_missing_data_adj",
@@ -656,19 +536,35 @@
       "explainer": "The shared missing-data step: the reach is a judgment and the effect is judged."
     },
     {
-      "id": "implementation_adj",
+      "id": "bs_implementation_adj",
       "section": "adjustments",
-      "label": "Share of the win that is enforced",
+      "label": "Share of the win that is enforced, backsliding branch",
       "format": "percent",
       "formula": "1",
-      "explainer": "1: an averted slide and an adopted voting system leave nothing to enforce; partial slides are in bs_severity."
+      "explainer": "1: an averted slide leaves nothing to enforce; partial slides are in bs_severity."
+    },
+    {
+      "id": "ref_implementation_adj",
+      "section": "adjustments",
+      "label": "Share of a full switch that the places counted get, reform branch",
+      "format": "percent",
+      "formula": "@democracy.pr_offices_share * @democracy.local_offices_weight",
+      "explainer": "The shared figures, read by the FairVote model too: the adopting places use proportional representation for about 82% of their own elections (Portland, Oregon its whole council, Arlington County only its board), and a city's own elections are about half of a full switch (@democracy.local_offices_weight): about 41%."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Share of the win that is enforced (outcome-weighted, for reading only)",
+      "format": "percent",
+      "formula": "(bs_value * bs_implementation_adj + ref_value * ref_implementation_adj) / (bs_value + ref_value)",
+      "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
       "id": "bs_total_adj",
       "section": "adjustments",
       "label": "All adjustments, backsliding branch",
       "format": "multiple",
-      "formula": "bs_evidence_adj * bs_counterfactual_adj * bs_attribution_share * implementation_adj * bs_missing_data_adj",
+      "formula": "bs_evidence_adj * bs_counterfactual_adj * bs_attribution_share * bs_implementation_adj * bs_missing_data_adj",
       "explainer": "The product of the branch's adjustments."
     },
     {
@@ -676,7 +572,7 @@
       "section": "adjustments",
       "label": "All adjustments, reform branch",
       "format": "multiple",
-      "formula": "ref_evidence_adj * ref_counterfactual_adj * ref_attribution_share * implementation_adj * ref_missing_data_adj",
+      "formula": "ref_evidence_adj * ref_counterfactual_adj * ref_attribution_share * ref_implementation_adj * ref_missing_data_adj",
       "explainer": "The product of the branch's adjustments."
     },
     {
@@ -732,13 +628,8 @@
       "section": "adjustments",
       "label": "Side effect: the good of democracy beyond income, as a share of the income value",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Living under a democracy is worth more than its income: freedom of speech and assembly, fair treatment by the state, no fear of arrest for opposing the government. Helliwell and Huang (2008, British Journal of Political Science 38(4)) find that the quality of government is linked to life satisfaction beyond its link through income, and more so in richer countries. Across 165 countries in 2005-2023, autocratization shows no clear overall link with life satisfaction, but a negative one in established democracies on 4 of 8 measures (Autocratization and Subjective Well-Being: Is There a Macro-Level Effect?, Applied Research in Quality of Life, 2026, doi 10.1007/s11482-026-10660-0, abstract), which supports a value beyond income for a rich democracy and the low end of the range. No study gives the size for a slide in a rich democracy; judged 30% of the income value (10% to 100%).",
+      "formula": "@democracy.slide_beyond_income_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide. Backsliding branch only: the reform branch has its own (ref_side_factor).",
       "side_effect": "added"
     },
     {
@@ -746,13 +637,8 @@
       "section": "adjustments",
       "label": "Side effect: non-fatal repression and intimidation averted, as a share of the income value",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.05,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "Autocratizing countries see more state repression: arrests, surveillance, threats against officials, journalists and opponents; Protect Democracy also works directly against intimidation (the Committee for Safe and Secure Elections' 150 trainings with election officials and police in 35 states, its page). Non-fatal harms only, judged 5% of the income value (0 to 20%). Deaths from political violence are left out: US political violence kills tens of people a year, which against 340 million people's incomes and a share of a chance would be under 1% of the result.",
+      "formula": "@democracy.slide_violence_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
       "side_effect": "added"
     },
     {
@@ -760,13 +646,8 @@
       "section": "adjustments",
       "label": "Side effect: US democracy's effect on democracy abroad, as a share of the income value",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.2,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Democracy spreads from neighbours and partners (Boese et al. 2021 find more democratic neighbours help democracies prevail), and a US that left the democracies would weaken that pull worldwide and its support for democrats abroad. Judged 20% of the US income value (0 to 60%).",
+      "formula": "@democracy.slide_global_spillover_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide.",
       "side_effect": "added"
     },
     {
@@ -774,14 +655,27 @@
       "section": "adjustments",
       "label": "Side effect: backlash and polarization the work provokes",
       "format": "percent",
-      "value": {
-        "low": -0.15,
-        "best": -0.05,
-        "high": 0
-      },
-      "kind": "judgment",
-      "explainer": "Litigation and campaigns seen as partisan can harden the other side and invite counter-measures (state bans on ranked-choice voting followed local wins, @democracy.electoral_reform_repeal_rate's source). Judged −5% (−15% to 0).",
+      "formula": "@democracy.democracy_work_backlash_share",
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide. Backsliding branch only: the reform branch has its own (ref_side_factor).",
       "side_effect": "added"
+    },
+    {
+      "id": "ref_ue_democratic_goods",
+      "section": "adjustments",
+      "label": "Side effect, reform branch: fairer elections valued beyond income, as a share of the income value",
+      "format": "percent",
+      "formula": "@democracy.electoral_reform_democratic_goods",
+      "side_effect": "added",
+      "explainer": "The shared figure for a won voting-method reform (20%, 5% to 60%), read by the FairVote model too: below ue_freedom_wellbeing's 30%, which belongs to an averted slide, because a change of voting method within a democracy touches no basic freedoms."
+    },
+    {
+      "id": "ref_ue_backlash",
+      "section": "adjustments",
+      "label": "Side effect, reform branch: bans and counter-measures the win provokes",
+      "format": "percent",
+      "formula": "@democracy.electoral_reform_backlash",
+      "side_effect": "added",
+      "explainer": "The shared figure for a won voting-method reform (−10%, −30% to 0), read by the FairVote model too: state bans on ranked-choice voting close places to future reform."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -789,7 +683,7 @@
       "label": "Benefits and harms not in the main chain, as a share of modelled value",
       "format": "percent",
       "formula": "ue_freedom_wellbeing + ue_backlash",
-      "explainer": "The two side effects of both branches (democracy's goods beyond income, backlash), each with its sign and weighted by the side-effects slider; the two that belong only to an averted slide enter the backsliding branch through bs_slide_side_factor."
+      "explainer": "The backsliding branch's two shared-form side effects (democracy's goods beyond income, backlash), each with its sign and weighted by the side-effects slider; bs_slide_side_factor adds that branch's slide-only two, and ref_side_factor swaps in the reform branch's own (the shared figures for a voting-method reform)."
     },
     {
       "id": "bs_slide_side_factor",
@@ -798,6 +692,14 @@
       "format": "multiple",
       "formula": "1 + (ue_violence_averted + ue_global_spillover) / (1 + ue_freedom_wellbeing + ue_backlash)",
       "explainer": "Repression averted and the pull of US democracy abroad belong to an averted slide, not to proportional representation: this factor adds them to the backsliding branch only, so with outcome_total's (1 + unmodelled_benefits_adj) the branch counts 1 + all four side effects, the reform branch 1 + the other two."
+    },
+    {
+      "id": "ref_side_factor",
+      "section": "bridges",
+      "label": "Reform branch: its own side effects, as a factor",
+      "format": "multiple",
+      "formula": "(1 + ref_ue_democratic_goods + ref_ue_backlash) / (1 + ue_freedom_wellbeing + ue_backlash)",
+      "explainer": "With outcome_total's (1 + unmodelled_benefits_adj), the reform branch counts 1 + the shared side effects of a won voting-method reform (as the FairVote model does), not the averted slide's."
     },
     {
       "id": "bs_uov",
@@ -812,7 +714,7 @@
       "section": "bridges",
       "label": "Reform branch, units of value after adjustments",
       "format": "number",
-      "formula": "ref_value * ref_total_adj",
+      "formula": "ref_value * ref_total_adj * ref_side_factor",
       "unit": "UoV"
     },
     {

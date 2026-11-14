@@ -52,7 +52,7 @@ Nuclear work is most of the result: it is two thirds of the spending, and Rethin
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 7 to 194.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 6 to 194.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely the catastrophes are.** The tournament's superforecasters put nuclear war at half the experts' chance, and engineered pandemics at a hundredth for extinction.
 - **How many people a catastrophe the world survives kills.** For nuclear war our judgment is 45%, with a range from 15% to 85% (Xia et al. 2022's regional and large wars).

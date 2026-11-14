@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "prison-policy-initiative",
   "owner": "charityevals",
-  "summary": "Prison Policy Initiative is a small US research and advocacy group on mass incarceration (1.9 million dollars spent in the year to June 2025). Its spending over fiscal years 2021-2025 is counted as a past average over the wins of those years: a share of the federal caps on prison and jail phone rates that the Martha Wright-Reed Act of 2022 made possible (still saving families about 250 million dollars a year after the FCC raised the caps in 2025), a smaller share of five states' free-call laws and other fee and visiting wins, a very small share of the people kept out of prison by the reforms its data fed, and half the credit for ending prison gerrymandering in several states, each valued on the site's shared scales; every branch is discounted for missing data. The result is about 0.03 years of healthy life per 1,000 dollars, below the median of the site's global-health models: money saved by poor American families is worth little on a scale set by the world's poorest, and PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the average. The biggest uncertainties are PPI's share of the phone-rate campaign and how long the caps hold.",
+  "summary": "Prison Policy Initiative is a small US research and advocacy group on mass incarceration (1.9 million dollars spent in the year to June 2025). Its spending over fiscal years 2021-2025 is counted as a past average over the wins of those years: a share of the federal caps on prison and jail phone rates that the Martha Wright-Reed Act of 2022 made possible (still saving families about 250 million dollars a year after the FCC raised the caps in 2025), a smaller share of five states' free-call laws and other fee and visiting wins, a very small share of the people kept out of prison by the reforms its data fed (their better years and the deaths a year in prison causes), and half the credit for ending prison gerrymandering in several states, each valued on the site's shared scales; every branch is discounted for missing data. The result is about 0.06 years of healthy life per 1,000 dollars, a little below the median of the site's global-health models: half of it is deaths averted by decarceration, while money saved by poor American families is worth little on a scale set by the world's poorest, and PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the average. The biggest uncertainties are PPI's share of the decarceration and phone-rate campaigns and how long the caps hold.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Prison Policy Initiative",
@@ -668,6 +668,67 @@
       "unit": "WELLBYs"
     },
     {
+      "id": "dec_life_years_lost",
+      "section": "effect",
+      "label": "Years of life lost per year in prison or jail",
+      "format": "number",
+      "formula": "@incarceration.life_years_lost_per_year_incarcerated",
+      "unit": "years",
+      "explainer": "The shared figure (facts/incarceration.json): about 2 years of life per year served (Patterson 2013), read by every model that counts years of incarceration averted. Deaths, not wellbeing: the life-satisfaction figure above is the quality of the years a person does live."
+    },
+    {
+      "id": "dec_remaining_life",
+      "section": "effect",
+      "label": "Remaining life expectancy of a person in prison or jail",
+      "format": "number",
+      "formula": "@incarceration.remaining_life_in_prison",
+      "unit": "years",
+      "explainer": "The shared figure (facts/incarceration.json): turns years of life lost into a share of a death."
+    },
+    {
+      "id": "dec_years_until_deaths",
+      "section": "effect",
+      "label": "Years from a prison-year averted until the deaths it would have caused",
+      "format": "number",
+      "formula": "@incarceration.years_until_prison_deaths",
+      "unit": "years",
+      "explainer": "The shared figure (facts/incarceration.json)."
+    },
+    {
+      "id": "dec_value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted at prison ages",
+      "format": "number",
+      "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
+      "unit": "UoV",
+      "explainer": "The shared value of a death at ages 15-49 (most people in prison or jail), times the shared multiplier."
+    },
+    {
+      "id": "dec_deaths_per_person_year",
+      "section": "effect",
+      "label": "Deaths averted per person-year kept out of prison or jail",
+      "format": "number",
+      "formula": "dec_life_years_lost / dec_remaining_life",
+      "explainer": "Years of life lost per year held, as a share of a death at the remaining life expectancy."
+    },
+    {
+      "id": "dec_death_delay_discount",
+      "section": "effect",
+      "label": "Discount for the delay until the deaths",
+      "format": "number",
+      "formula": "(1 + $discount_rate) ^ (0 - dec_years_until_deaths)",
+      "explainer": "The wait until the deaths a prison-year would have caused, discounted at the shared rate."
+    },
+    {
+      "id": "dec_death_value_per_year",
+      "section": "effect",
+      "label": "Decarceration: deaths averted, units of value per campaign year, before adjustments",
+      "format": "number",
+      "formula": "dec_people * dec_deaths_per_person_year * dec_value_per_death * dec_discounted_years * dec_death_delay_discount / campaign_years",
+      "unit": "UoV",
+      "explainer": "Same people, years and wait as the wellbeing term (dec_value_per_year), valued as deaths averted. It adds to the life-satisfaction term and does not repeat it: that counts how much better each year outside is than a year inside, for years the person lives; this counts the years of life a prison-year takes away afterwards (mostly after release), which carry no wellbeing in the other term."
+    },
+    {
       "id": "ger_people",
       "section": "reach",
       "label": "People in the communities whose representation the end of prison gerrymandering restored",
@@ -920,7 +981,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The wellbeing gap rests on small surveys of prisoners against others not matched to them, and people kept out may face other punishments (probation, fines): 0.75, from 0.5 to 1."
+      "explainer": "The wellbeing gap rests on small surveys of prisoners against others not matched to them, and people kept out may face other punishments (probation, fines); the deaths rest on one observational cohort of New York parolees (Patterson 2013), where longer sentences went to people at higher risk anyway (the fact's low end allows for it): 0.75, from 0.5 to 1."
     },
     {
       "id": "dec_counterfactual_adj",
@@ -1142,8 +1203,8 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "(ue_family_contact + ue_service_cuts) * dalys_from_uov / (dalys_direct + dalys_from_uov + dalys_from_wellby)",
-      "explainer": "The two side effects of the phone and fee wins, applied to those wins' share of the result only (the decarceration branch's own side effects are applied in it)."
+      "formula": "(ue_family_contact + ue_service_cuts) * dalys_from_uov * (1 - dec_death_uov / uov_bridged) / (dalys_direct + dalys_from_uov + dalys_from_wellby)",
+      "explainer": "The two side effects of the phone and fee wins, applied to those wins' share of the result only (the decarceration branch's own side effects are applied in it, for its deaths averted too)."
     },
     {
       "id": "fed_uov",
@@ -1170,13 +1231,22 @@
       "unit": "WELLBYs"
     },
     {
+      "id": "dec_death_uov",
+      "section": "bridges",
+      "label": "Decarceration deaths averted after adjustments (units of value)",
+      "format": "number",
+      "formula": "dec_death_value_per_year * dec_total_adj * (1 + ue_dec_family + ue_dec_crime)",
+      "unit": "UoV",
+      "explainer": "The branch's own adjustments and its two side effects, as for its wellbeing term."
+    },
+    {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Families' money saved, in GiveWell units of value (after adjustments)",
+      "label": "Families' money saved and deaths averted, in GiveWell units of value (after adjustments)",
       "format": "number",
-      "formula": "fed_uov + st_uov + people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years",
+      "formula": "fed_uov + st_uov + dec_death_uov + people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years",
       "unit": "UoV",
-      "explainer": "The two money branches after their adjustments; the template's income term for the people kept out is zero (ln_gain_per_person_year)."
+      "explainer": "The two money branches and the decarceration branch's deaths averted, after their adjustments; the template's income term for the people kept out is zero (ln_gain_per_person_year)."
     },
     {
       "id": "dalys_from_uov",
