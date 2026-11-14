@@ -257,6 +257,31 @@ export function evaluatorFigure(lib: Library, owner: string, charity: string, fi
   })).central;
 }
 
+const causes = new WeakMap<Library, Map<string, [owner: string, charity: string][]>>();
+
+/** `#cause:x`: the charities on the rankings in cause (or area) x, each by its primary evaluator, the
+ * figure the rankings show; money movers (`beneficiaries: "destinations"`) left out, and the reading
+ * model's own charity. docs/normalization.md 2.8. */
+export function causeMembers(lib: Library, cause: string, reader?: string): [owner: string, charity: string][] {
+  let cache = causes.get(lib);
+  if (!cache) causes.set(lib, (cache = new Map()));
+  let all = cache.get(cause);
+  if (!all) {
+    all = [...lib.charities.values()].filter((c) => c.cause === cause || c.area === cause).flatMap((c): [string, string][] => {
+      const lead = rankingPlan(lib, c.id)[0];
+      return lead && !lead.parts.some((p) => p.model.beneficiaries === "destinations") ? [[lead.owner, c.id]] : [];
+    });
+    cache.set(cause, all);
+  }
+  return all.filter(([, c]) => c !== reader);
+}
+
+/** The equal-weight mean of a cause's charities at their figures on the rankings (`#cause:x`). */
+export function causeFigure(lib: Library, cause: string, reader: string | undefined, figure: (m: ResolvedModel) => number): number {
+  const members = causeMembers(lib, cause, reader);
+  return members.length ? members.reduce((s, [o, c]) => s + evaluatorFigure(lib, o, c, figure), 0) / members.length : NaN;
+}
+
 /** Every model `evaluatorFigure` reads for a charity and evaluator (programs and their locations). */
 export function evaluatorFigureModels(lib: Library, owner: string, charity: string): ResolvedModel[] {
   const plan = planOf(lib, owner, charity);

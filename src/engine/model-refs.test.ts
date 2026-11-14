@@ -118,6 +118,52 @@ describe("model references (#id)", () => {
     expect(buildLibrary([mine(dest), prog("prog-a", 2), bad], assumptions, [], [charity, other], owners).errors).toContain("bad.out: unknown evaluator or charity #ev:nobody");
   });
 
+  describe("a cause's charities on the rankings (#cause:x)", () => {
+    const owners = [{ id: "ev", name: "Ev", short: "E", url: "https://example.org", kind: "evaluator" }];
+    const charity = (id: string, cause = "catastrophic-risk", area?: string) => ({ id, name: id, cause, ...(area ? { area } : {}) });
+    const charities = [charity("a1"), charity("a2"), charity("a3"), charity("mover"), charity("d1", "global-health", "democracy"), charity("other", "global-health")];
+    const of = (c: string, m: object) => ({ ...m, charity: c, owner: "ev" });
+    const ranked = (id: string, c: string, x: number) => of(c, model(id, [input("x", x), { id: "out", label: "out", formula: "x" }]));
+    // A money mover in the cause, valuing its unnamed recipients at the cause's average.
+    const mover = of("mover", model("mover-m", [{ id: "out", label: "out", formula: "2 * #cause:catastrophic-risk" }], "u", { beneficiaries: "destinations" }));
+    const reader = of("other", model("reader", [{ id: "out", label: "out", formula: "#cause:catastrophic-risk + #cause:democracy" }]));
+    const base = [mine(dest), ranked("a1-m", "a1", 2), ranked("a2-m", "a2", 4), ranked("d1-m", "d1", 10), mover, reader];
+    function mine(x: object) { return of("other", x); }
+
+    it("is the equal-weight mean of the cause's (or area's) ranked charities, money movers left out", () => {
+      const l = buildLibrary(base, assumptions, [], charities, owners);
+      expect(l.errors).toEqual([]);
+      expect(compute(l, l.models.get("reader")!, av).out).toBeCloseTo(3 + 10);
+    });
+
+    it("follows a model added to the cause", () => {
+      const l = buildLibrary([...base, ranked("a3-m", "a3", 9)], assumptions, [], charities, owners);
+      expect(compute(l, l.models.get("reader")!, av).out).toBeCloseTo(5 + 10);
+    });
+
+    it("leaves the reading model's own charity out, so a money mover never reads itself", () => {
+      const l = buildLibrary(base, assumptions, [], charities, owners);
+      expect(l.errors.filter((e) => e.includes("cycle"))).toEqual([]);
+      expect(compute(l, l.models.get("mover-m")!, av).out).toBeCloseTo(2 * 3);
+      // A ranked charity reading its own cause's average gets the others'.
+      const own = of("a1", model("a1-m", [{ id: "out", label: "out", formula: "#cause:catastrophic-risk" }]));
+      const l2 = buildLibrary([mine(dest), own, ranked("a2-m", "a2", 4), ranked("a3-m", "a3", 8)], assumptions, [], charities, owners);
+      expect(l2.errors).toEqual([]);
+      expect(compute(l2, l2.models.get("a1-m")!, av).out).toBeCloseTo(6);
+    });
+
+    it("reports a cycle through two charities' averages, an unknown cause and an empty one", () => {
+      const reads = (id: string, c: string) => of(c, model(id, [{ id: "out", label: "out", formula: "#cause:catastrophic-risk" }]));
+      const l = buildLibrary([mine(dest), reads("a1-m", "a1"), reads("a2-m", "a2")], assumptions, [], charities, owners);
+      expect(l.errors.some((e) => /model reference cycle (a1-m → a2-m → a1-m|a2-m → a1-m → a2-m)/.test(e))).toBe(true);
+      expect(Number.isNaN(headline(l, l.models.get("a1-m")!, av))).toBe(true);
+      const bad = mine(model("bad", [{ id: "out", label: "out", formula: "#cause:nowhere + #cause:climate" }]));
+      const errors = buildLibrary([mine(dest), bad], assumptions, [], charities, owners).errors;
+      expect(errors).toContain("bad.out: unknown cause or area #cause:nowhere");
+      expect(errors).toContain("bad.out: no charity on the rankings in #cause:climate");
+    });
+  });
+
   it("resolves references against another library for a model rebuilt on its own (a bulk page)", () => {
     const alone = buildLibrary([meta], assumptions, [], [], [], { models: lib.models });
     expect(alone.errors.filter((e) => e.includes("#"))).toEqual([]);

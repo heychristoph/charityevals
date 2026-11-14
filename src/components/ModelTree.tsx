@@ -9,7 +9,7 @@ import usage from "../../generated/usage.json";
 import { lib, modelFile, modelUrl } from "../lib/data";
 import { comparable, hasRange, headlineExprOf, pickValue, type Library, type ResolvedModel } from "../engine/model";
 import type { Node } from "../engine/expr";
-import type { Row } from "../engine/schema";
+import { Cause, type Row } from "../engine/schema";
 import { childrenOf, lookupFor, pathTo, pathToRef, rangedRowOf, rootOf, shapeOf, spreadShare, type TreeNode } from "../engine/tree";
 import { rowsFeeding } from "../engine/sensitivity";
 import type { Uncertainty } from "../engine/uncertainty";
@@ -23,6 +23,8 @@ import InfoTip from "./InfoTip";
 import Glossed from "./Glossed";
 import type { Flag } from "../engine/sensitivity";
 import "./tree.css";
+
+const CAUSES = new Set<string>(Cause.options);
 
 /** Parts shown before "n more": the ones with the most leverage, in the formula's own order. */
 const CAP = 6;
@@ -39,6 +41,10 @@ export function Formula({ text, model }: { text: string; model: ResolvedModel })
   return (
     <code className="formula">
       {parts.map((p, i) => {
+        if (p.startsWith("#cause:")) {
+          const cause = p.slice("#cause:".length);
+          return <a key={i} href={`/causes/${CAUSES.has(cause) ? cause : [...lib.charities.values()].find((c) => c.area === cause)?.cause}`} title="The cause's charities on the rankings, equal weights, live" className="ref ref-m">{modelLabel(p.slice(1))}</a>;
+        }
         if (p.startsWith("#") && p.includes(":")) {
           const c = lib.charities.get(p.slice(1).split(":")[1]);
           return c ? <a key={i} href={`/${c.id}`} title="One evaluator's programme-weighted figure for a charity, live" className="ref ref-m">{modelLabel(p.slice(1))}</a> : p;
@@ -67,6 +73,10 @@ const assumptionRow = (id: string) => lib.assumptions.rows.find((r) => r.id === 
 const liveLabel = (name: string) => `${name}: result per dollar, live`;
 const modelLabel = (id: string) => {
   if (!id.includes(":")) return liveLabel(lib.models.get(id)?.name ?? id);
+  if (id.startsWith("cause:")) {
+    const name = id.slice("cause:".length).replace(/-/g, " ");
+    return `${name === "ai" ? "AI" : name[0].toUpperCase() + name.slice(1)} charities on the rankings, equal weights, live`;
+  }
   // `#owner:charity`: one evaluator's figure for a charity, weighted over its programmes as the rankings make it.
   const [owner, charity] = id.split(":");
   return `${lib.charities.get(charity)?.name ?? charity} (${lib.owners.get(owner)?.name ?? owner}), programme-weighted, live`;
@@ -317,7 +327,7 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
     lines.push(
       <p key="m">
         Another model's result per dollar, in units of value, computed live with your values in charityevals' view:{" "}
-        {o ? <a href={modelUrl(lib, o)}>{o.name}</a> : n.refId}. Change a slider and it moves here too. Its own uncertainty
+        {o ? <a href={modelUrl(lib, o)}>{o.name}</a> : modelLabel(n.refId!)}. Change a slider and it moves here too. Its own uncertainty
         isn't part of this model's range: the range uses its result at your values (docs/normalization.md 2.8).
       </p>,
     );

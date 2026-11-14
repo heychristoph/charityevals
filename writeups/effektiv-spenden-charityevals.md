@@ -1,6 +1,6 @@
 ### Summary
 
-Effektiv Spenden runs a donation platform for Germany, Switzerland and Austria. It passes tax-deductible gifts on to charities that evaluators recommend, and it also runs its own funds and gives donors advice. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="effektiv-spenden-charityevals">25</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to about eight dollars of giving it caused. That giving is valued at what the causes its donors chose achieve on this site. About half went to fighting poverty, and the value comes from that half. Under the site's default values, the giving to the other causes adds slightly less than nothing. The figure moves most with how much the next dollar does compared with the past average, and with the discount rate.
+Effektiv Spenden runs a donation platform for Germany, Switzerland and Austria. It passes tax-deductible gifts on to charities that evaluators recommend, and it also runs its own funds and gives donors advice. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="effektiv-spenden-charityevals">26</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to about eight dollars of giving it caused. That giving is valued at what the causes its donors chose achieve on this site. About half went to fighting poverty, and the value comes from that half. Under the site's default values, the giving to the other causes adds slightly less than nothing. The figure moves most with how much the next dollar does compared with the past average, and with the discount rate.
 
 ### What the charity does
 
@@ -32,8 +32,8 @@ The Swiss list gets its share of the 2025 money, 27%. In both lists, recipients 
 - **Fighting poverty (48%).** Its poverty fund (40% of the 2024 poverty giving) is valued at GiveWell's top charities. GiveDirectly (27%), Malaria Consortium, Against Malaria Foundation and Deworm the World (at Evidence Action's figure) are read directly. In the Swiss list, Evidence Action, Helen Keller Intl, GiveDirectly, StrongMinds and the others are each read at their own figure.
 - **Climate (21%).** These are valued at Clean Air Task Force's figure, our own model and the one recipient with a published model here. Founders Pledge's and Giving Green's models of its other recipients are not published.
 - **Animal welfare (7%).** In 2024 these are valued at The Humane League's figure on the rankings (ACE's), the one modelled recipient. In the Swiss list, The Humane League, Sinergia Animal and Wild Animal Initiative are each read at their own figure.
-- **Catastrophic risks (12%).** No 2024 recipient has a model here, so that part is valued at the site's ten catastrophic-risk charity models, weighted equally. In the Swiss list, METR is the one modelled recipient.
-- **Democracy (9%).** These are valued at the site's four democracy models, weighted equally. None of its recipients has a model here.
+- **Catastrophic risks (12%).** No 2024 recipient has a model here, so that part is valued at the catastrophic-risk charities on the rankings, weighted equally. In the Swiss list, METR is the one modelled recipient.
+- **Democracy (9%).** These are valued at the democracy charities on the rankings, weighted equally. None of its recipients has a model here.
 - **Other effective-giving organisations (2.4%)** take the average of the rest.
 
 Under the site's default values, a dollar to climate, animal welfare or democracy does far less than a dollar to GiveDirectly. Shifted money to these causes therefore counts slightly below zero: it was assumed to come from an ordinary charity valued at GiveDirectly's level. So the poverty half carries the whole result. Half the giving it caused counts as new money. The other half would have gone to other charities, so it counts only for the gain over where it would have gone. Both are the site's shared figures for every organisation that moves money.
@@ -74,13 +74,13 @@ Its own figures are a ratio of donations to costs of about 21 for 2024 (23 with 
 
 ### How this model was checked
 
-Three audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-severity problem and checked every cost, reach and fact figure against its source. Its fixes:
+Four audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-severity problem and checked every cost, reach and fact figure against its source. Its fixes:
 
 - Blended the Swiss association's 2025 grants by recipient into each cause. This brought in METR, Sinergia Animal and Wild Animal Initiative, which the organisation-wide 2024 split leaves out.
 - Lowered the wait for the funds' grants below the year-end balances, which December's giving inflates.
 - Corrected the write-up.
 
-Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes.
+Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes. Round 4 checked the move of two equal-weight lists to the site's live cause averages, and passed.
 
 ### Sources
 

@@ -1,6 +1,6 @@
 import { parse, refs, evaluate, compile, type Compiled, type Env, type Node, type Scope } from "./expr";
-import { Model, Row, Assumptions, Facts, Charity, Owner, type ModelFile, type RowPatch, type Range } from "./schema";
-import { evaluatorFigure, evaluatorFigureModels } from "./ranking";
+import { Model, Row, Assumptions, Facts, Charity, Owner, Cause, type ModelFile, type RowPatch, type Range } from "./schema";
+import { causeFigure, causeMembers, evaluatorFigure, evaluatorFigureModels } from "./ranking";
 import { byIso3 } from "./countries";
 
 export type ResolvedRow = Row & {
@@ -288,12 +288,19 @@ export function buildLibrary(
   // `#model-id`: another model's live result. It must exist (here or in `options.models`), report in a
   // unit that converts to the common one, and no chain of references may come back to the model.
   const known = (id: string) => models.get(id) ?? options.models?.get(id);
-  // `#owner:charity`: a charity's figure from one evaluator, read through the models the rankings use.
+  // `#owner:charity`: a charity's figure from one evaluator, read through the models the rankings use;
+  // `#cause:x`, the charities of a cause or area at theirs, the reader's own charity left out.
   const all: Library = { models: new Map([...(options.models ?? []), ...models]), charities, owners, assumptions, facts, errors: [] };
-  const targets = (d: string): string[] => (isCharityRef(d) ? evaluatorFigureModels(all, ...splitCharityRef(d)).map((t) => t.id) : [d]);
+  const targets = (d: string, reader?: string): string[] => (isCharityRef(d) || isCauseRef(d) ? refTargets(all, d, reader).map((t) => t.id) : [d]);
   for (const m of models.values())
     for (const r of m.rows)
       for (const d of r.modelDeps) {
+        if (isCauseRef(d)) {
+          const cause = d.slice(CAUSE_PREFIX.length);
+          if (!(Cause.options as string[]).includes(cause) && ![...charities.values()].some((c) => c.area === cause)) errors.push(`${m.id}.${r.id}: unknown cause or area #${d}`);
+          else if (!targets(d, m.charity).length) errors.push(`${m.id}.${r.id}: no charity on the rankings in #${d}`);
+          continue;
+        }
         if (isCharityRef(d)) {
           const [owner, charity] = splitCharityRef(d);
           if (!owners.has(owner) || !charities.has(charity)) errors.push(`${m.id}.${r.id}: unknown evaluator or charity #${d}`);
@@ -309,7 +316,7 @@ export function buildLibrary(
     if (state.get(id) === 2) return;
     if (state.get(id) === 1) { errors.push(`model reference cycle ${[...path, id].join(" → ")}`); return; }
     state.set(id, 1);
-    for (const d of modelDepsOf(known(id)).flatMap(targets)) visit(d, [...path, id]);
+    for (const d of modelDepsOf(known(id)).flatMap((x) => targets(x, known(id)?.charity))) visit(d, [...path, id]);
     state.set(id, 2);
   };
   for (const id of models.keys()) visit(id, []);
@@ -322,17 +329,28 @@ export function modelDepsOf(m: ResolvedModel | undefined): string[] {
   return m ? [...new Set(m.rows.flatMap((r) => r.modelDeps ?? []))] : [];
 }
 
+/** `#cause:x`: the equal-weight mean of the ranked charities in a cause or area (ranking.ts causeFigure). */
+export const CAUSE_PREFIX = "cause:";
+export const isCauseRef = (ref: string) => ref.startsWith(CAUSE_PREFIX);
 /** `#owner:charity`: a charity's figure from one evaluator (src/engine/ranking.ts evaluatorFigure). */
-export const isCharityRef = (ref: string) => ref.includes(":");
+export const isCharityRef = (ref: string) => ref.includes(":") && !isCauseRef(ref);
 export const splitCharityRef = (ref: string) => ref.split(":") as [owner: string, charity: string];
+
+/** The models a reference reads: the model itself, or every model behind a charity's or a cause's figure.
+ * `reader` is the reading model's charity, which a cause's figure leaves out. */
+export function refTargets(lib: Library, ref: string, reader?: string): ResolvedModel[] {
+  if (isCauseRef(ref)) return causeMembers(lib, ref.slice(CAUSE_PREFIX.length), reader).flatMap(([o, c]) => evaluatorFigureModels(lib, o, c));
+  if (isCharityRef(ref)) return evaluatorFigureModels(lib, ...splitCharityRef(ref));
+  const m = lib.models.get(ref);
+  return m ? [m] : [];
+}
 
 /** Every model a model's result depends on through `#id` references, directly or not (a charity
  * reference stands for the models its figure reads). */
 export function referencedModels(lib: Library, m: ResolvedModel): ResolvedModel[] {
   const seen = new Map<string, ResolvedModel>();
-  const expand = (d: string) => (isCharityRef(d) ? evaluatorFigureModels(lib, ...splitCharityRef(d)).map((t) => t.id) : [d]);
   const walk = (x: ResolvedModel) => {
-    for (const d of modelDepsOf(x).flatMap(expand)) {
+    for (const d of modelDepsOf(x).flatMap((r) => (isCharityRef(r) || isCauseRef(r) ? refTargets(lib, r, x.charity).map((t) => t.id) : [r]))) {
       const t = lib.models.get(d);
       if (!t || seen.has(d) || d === m.id) continue;
       seen.set(d, t);
@@ -345,27 +363,35 @@ export function referencedModels(lib: Library, m: ResolvedModel): ResolvedModel[
 
 // A referenced model's result per dollar in common units, cached per assumption-values object (the
 // sliders, a sensitivity swing): the same reference read by many rows, or by every input swing of a
-// sensitivity run, is computed once.
-const resultCache = new WeakMap<Record<string, number>, Map<string, number>>();
+// sensitivity run, is computed once; per set of models, so a library with a model added reads it.
+const resultCache = new WeakMap<Map<string, ResolvedModel>, WeakMap<Record<string, number>, Map<string, number>>>();
 const computing = new Set<string>();
 
 /** Another model's live result, as `#id` reads it: its bottom line per dollar in common units (units of
  * value), in our view, under `av` (the reader's values, never another model's evaluator pins), with no
- * edits. NaN for an unknown model or a cycle (buildLibrary reports both). */
-export function modelResult(lib: Library, id: string, av: Record<string, number>): number {
-  let cache = resultCache.get(av);
-  if (!cache) resultCache.set(av, (cache = new Map()));
-  const hit = cache.get(id);
+ * edits. `reader`, the reading model's charity, is left out of a cause's figure (`#cause:x`). NaN for an
+ * unknown model or a cycle (buildLibrary reports both). */
+export function modelResult(lib: Library, id: string, av: Record<string, number>, reader?: string): number {
+  let byValues = resultCache.get(lib.models);
+  if (!byValues) resultCache.set(lib.models, (byValues = new WeakMap()));
+  let cache = byValues.get(av);
+  if (!cache) byValues.set(av, (cache = new Map()));
+  const cause = isCauseRef(id);
+  const key = cause ? `${id}@${reader ?? ""}` : id;
+  const hit = cache.get(key);
   if (hit !== undefined) return hit;
-  const m = isCharityRef(id) ? undefined : lib.models.get(id);
-  if ((!m && !isCharityRef(id)) || computing.has(id)) return NaN;
-  computing.add(id);
+  const m = cause || isCharityRef(id) ? undefined : lib.models.get(id);
+  if ((!m && !cause && !isCharityRef(id)) || computing.has(key)) return NaN;
+  computing.add(key);
   try {
-    const v = m ? bottomLine(lib, m, av).common : evaluatorFigure(lib, ...splitCharityRef(id), (t) => modelResult(lib, t.id, av));
-    cache.set(id, v);
+    const one = (t: ResolvedModel) => modelResult(lib, t.id, av);
+    const v = m ? bottomLine(lib, m, av).common
+      : cause ? causeFigure(lib, id.slice(CAUSE_PREFIX.length), reader, one)
+      : evaluatorFigure(lib, ...splitCharityRef(id), one);
+    cache.set(key, v);
     return v;
   } finally {
-    computing.delete(id);
+    computing.delete(key);
   }
 }
 
@@ -633,7 +659,7 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
   const models: Record<string, number> = base ? { ...base.models } : {};
   for (const k of keys) if (k.startsWith("#")) models[k.slice(1)] = inputs[k];
   const other = (scope: Scope, n: string) =>
-    scope === "model" ? (models[n] ??= inputs[`#${n}`] ?? modelResult(lib, n, refValues(m, av, view)))
+    scope === "model" ? (models[n] ??= inputs[`#${n}`] ?? modelResult(lib, n, refValues(m, av, view), m.charity))
     : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
   const n = p.rows.length;
   const env: Env = { v: base ? base.v.slice() : new Array<number>(n).fill(NaN), a, other };

@@ -32,7 +32,6 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 - **Shared fact** (`@file.key`): a sourced number in facts/*.json, one value for every model. **Shared assumption** (`$name`, a slider): a value judgment in assumptions/default.json that readers can move (discount rate, value of a life).
 - **`estimate_basis`**: what the dollar is: `unit_cost` (price per item delivered), `marginal` (the next grant or planned work), `past_average` (past spending over what it won).
 - **Canonical row**: a row id every model of a family has, meaning the same (`program_spend`, `total_adj`); listed in src/engine/templates.ts.
-- **`total_adj`**: the product of the adjustment multipliers.
 - **Invariant (INV-n)**: a site-wide rule over every model (docs/normalization.md section 3); the **lint** (src/engine/lint.ts) checks one model. **Convention n**: the rules below.
 - **Measured / thin** (a branch's outcome for this charity): *measured* when the charity's own count of
   who got the intervention meets an effect from its own controlled evaluation or trials of the same
@@ -252,7 +251,6 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
 - **Career changes**: `careers_changed × career_change_value × careers_missing_data_adj`.
 - Downstream WELLBYs: rename `uov_*` to `wellbys_*`, unit `wellby`. Animals: `sads_*` and the species
   section. Climate (`tco2e`, tonnes of CO₂-equivalent averted): the climate skeleton (normalization.md 2.5).
-- Usually dominated by judgment; say so in the summary.
 
 **Money moved** (shared rows word for word: `python3 scripts/moved-money.py <model> <set> net`):
 
@@ -262,8 +260,8 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
   (floor + (first − floor) × (1 − decay)^t).
 - A published split is `value_destinations` (set `own-split`, weights `@meta.<org>_moved_*`, INV-12):
   recipients at their figure on the rankings (`#owner:charity`, the primary evaluator's; `#id` only
-  without one), funds that follow an evaluator at its charities; the rest
-  at their cause's modelled average (none modelled: the site's models of that cause); meta and
-  unmodelled causes the average of the rest; below the organisation's own bar,
+  without one), funds that follow an evaluator at its charities; the rest at their cause's modelled
+  average, none modelled `#cause:<cause or area>` (its ranked charities, equal weights; never a typed
+  list); meta and unmodelled causes the average of the rest; below the organisation's own bar,
   `@meta.prior_vs_cash × #givedirectly`. No split: the cause's set. Not yet proven:
   `@meta.success_chance_new_org` and the success step. No missing-data step.
