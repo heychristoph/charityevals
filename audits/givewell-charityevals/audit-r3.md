@@ -39,4 +39,6 @@ Unchanged from round 2: the freed share (`next_dollar_freed_for_grants`, 27.4–
 Fixed after this round (builder, facts/meta.json notes only; the model is unchanged, same Model-sha): the `survey_nonrespondent_influence` quote is now Giving What We Can's passage with the 50% and 25% rule; the `own_effect_share` note's high end now reads "above the survey's discounted 40.2%".
 
 Verdict: pass
-Model-sha: 197b403854a88455bf5a376766ec265d2c5d75d544162ea024a889edfe5dd45f
+Model-sha: be7b65a1e9def3033c64df39551241fe8911b2729a3750afa6eafe6ca1dcc52e
+
+Re-stamped (shared rule change, applied mechanically): value_global_health reads GiveWell's figure for each Top Charity on the rankings (#givewell:<charity>, src/engine/moved-money.ts); this model's moved_dollar_value is its own split (value_destinations, already at those figures), so the result is unchanged at 36.0.

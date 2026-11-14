@@ -168,7 +168,7 @@ spillovers and mortality as ratios.
 - Household size is the place's fact (rural where recipients are rural); the recipients' own
   size only with that reason stated.
 - A benefit stated as a multiple of cash is that multiple × `@cash.uov_per_dollar`; GiveDirectly as a
-  destination or comparison is `#givedirectly` (read live).
+  destination is `#givewell:givedirectly`, as a comparison `#givedirectly` (read live).
 - Recurring income gains: `ln(1+gain/baseline) × pv_annuity_due(1,$discount_rate,persistence_years)`,
   persistence from follow-up studies.
 
@@ -261,7 +261,8 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
 - Pledges: new pledges × yearly giving × discounted years by `@meta.pledge_recording_*`
   (floor + (first − floor) × (1 − decay)^t).
 - A published split is `value_destinations` (set `own-split`, weights `@meta.<org>_moved_*`, INV-12):
-  recipients live (`#id`, `#owner:charity`), funds that follow an evaluator at its charities; the rest
+  recipients at their figure on the rankings (`#owner:charity`, the primary evaluator's; `#id` only
+  without one), funds that follow an evaluator at its charities; the rest
   at their cause's modelled average (none modelled: the site's models of that cause); meta and
   unmodelled causes the average of the rest; below the organisation's own bar,
   `@meta.prior_vs_cash × #givedirectly`. No split: the cause's set. Not yet proven:

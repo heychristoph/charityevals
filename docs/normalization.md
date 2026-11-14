@@ -435,7 +435,8 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Past average vs the next dollar | `$marginal_vs_past_average` (slider, "How much the next dollar does compared with the average dollar so far") | 50% (18–100%) | judgment; every model whose `estimate_basis` is `past_average` (2.10) |
 | Depression on the PHQ-9 | `@depression.dalys_per_phq9_point_year`; one SD = `@depression.phq9_sd` PHQ-9 points (4.21, 3.5–5.5) | 0.031 (0.0244–0.0435) | GBD 2019 weights for mild 0.145, moderate 0.396, severe 0.658 placed at the middle of the PHQ-9 bands (Kroenke et al. 2001; moderate covers 10–19), least-squares slope |
 | "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low our judgment, high GiveWell's 2024 GiveDirectly |
-| A dollar to GiveDirectly (where money goes or would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's GiveDirectly model on the site; every meta model reads it, never `@cash` |
+| A dollar to GiveDirectly (where shifted money would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's Kenya model, the site's cash benchmark; every meta model reads it, never `@cash` |
+| A dollar to GiveDirectly (where money goes) | `#givewell:givedirectly`, live | 0.00993 | GiveWell's figure for the charity on the rankings, as every destination (2.8) |
 | Currencies (pounds, euros, kroner, rupees; naira, Kenyan and Ugandan shillings, Rwandan francs, kwacha, meticais, leones) | `@fx.usd_per_<cur>_<year>` (its reciprocal where a sheet states local currency per dollar) | yearly averages | IRS where it lists the currency (2021–25 live table, 2015–20 archived), else World Bank WDI, official exchange rate (LCU per US$, period average, PA.NUS.FCRF); the year the evaluator's rate is for. A rate for a particular day (a grant date, "Google, 12 July 2024") stays the evaluator's in `published`; our view uses that year's average. `scripts/link-fx.py` |
 | Prices over several years (a past average's yearly spending) | `@cpi.<iso3>_<year>`: amount × `@cpi.<iso3>_<Y>` / `@cpi.<iso3>_<year>`, then year Y's `@fx` | index, 2010 = 100 | World Bank WDI, consumer price index (FP.CPI.TOTL), 2005–2025. `scripts/link-cpi.py` |
 | Time preference | `$discount_rate` | 4% (0–8%) | judgment |
@@ -485,7 +486,8 @@ model is imported.
 **Two GiveDirectly figures, two concepts.** `@cash.uov_per_dollar` (0.00335) is the benchmark old sheets divided
 by to state a result as "×cash": wherever it is used the multiple is multiplied back by the same figure, so it
 cancels and only the sheet's units of value remain. `#givedirectly` (0.00872) is what a dollar given to
-GiveDirectly does today on this site: the meta models use it for money that goes, or would have gone, to cash.
+GiveDirectly does today on this site: the meta models use it for money that would have gone to cash (money that
+goes to GiveDirectly is a destination, at the figure the rankings show, `#givewell:givedirectly`, 2.8).
 Neither replaces the other; no row reads `@cash` for a real dollar to GiveDirectly.
 
 **Multiples of cash.** A result published only as a multiple of cash ("10× GiveDirectly") is
@@ -581,7 +583,7 @@ low/high would make every meta range meaningless.
 **The method** (facts/meta.json):
 
 ```
-value_global_health = Σ GiveWell 2024 funding share × #top-charity          (AMF 49.5%, Malaria Consortium SMC 28.7%,
+value_global_health = Σ GiveWell 2024 funding share × #givewell:<charity>   (AMF 49.5%, Malaria Consortium SMC 28.7%,
                                                                              Helen Keller VAS 17.8%, New Incentives 4.0%)
 V = moved_dollar_value
     one cause:      value_global_health  (an organisation that only moves money to global health and poverty)
@@ -676,7 +678,7 @@ model was removed); INV-12 requires it of any model with a row on its path about
 - *Its own split.* An organisation that publishes where its donors' money went writes `value_destinations`
   (`moved_dollar_value = value_destinations`, `python3 scripts/moved-money.py <model> own-split net`), from
   its money by recipient or cause (`@meta.<org>_moved_*`), live results and the shared destination rows only
-  (`isDestinationMix`, INV-12). A recipient with a model is read live; a fund that follows an evaluator, at
+  (`isDestinationMix`, INV-12). A recipient with a model is read live, at its figure on the rankings (below); a fund that follows an evaluator, at
   that evaluator's charities (`value_global_health`); a recipient without a model, at its cause's modelled
   average within the split, or, when none of the cause's recipients is modelled, at the site's models of
   that cause with equal weights; other meta charities and causes the site has no published model for, at
@@ -689,6 +691,21 @@ model was removed); INV-12 requires it of any model with a row on its path about
 - *Pledges are a flow.* New pledges × yearly giving × the discounted years they keep giving, by the shared
   persistence curve `@meta.pledge_recording_*` (59% giving in the first year, falling 48% a year towards a
   28% floor; Giving What We Can's cohorts), at `$discount_rate`.
+
+**November 2026: every destination at the figure the rankings show.** A destination is read at its charity's
+figure on the rankings, its primary evaluator's programmes and locations weighted by funding (`#owner:charity`,
+src/engine/moved-money.ts), never one model of it: Helen Keller Intl's and New Incentives' median-location
+sheets were 0.015 and 0.008 units of value per dollar against their ranked 0.082 and 0.051. Global health
+0.0409 → 0.0615. A model by its id only where the charity has no ranked figure (Raising the Village) or its
+only model is an unpublished evaluator's. The cash benchmark for shifted money stays `#givedirectly`. Giving
+What We Can's Deworm the World ($463K, at Evidence Action's figure) and Unlimit Health ($399K) now read their
+own figures instead of the average.
+
+| Model | Our view before → after | Evaluator view |
+|---|---|---|
+| Giving What We Can (ours) | 37.3 → 54.3 | — |
+| CEARCH | 43.5 → 65.5 | 160 → 242 (reads V) |
+| Better Futures Guide | 7.44 → 7.97 | 27.9 |
 
 ### 2.9 Won reforms: one way (October 2026)
 
