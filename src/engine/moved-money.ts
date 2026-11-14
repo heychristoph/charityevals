@@ -14,8 +14,9 @@
 //            for one whose money goes to several causes, each cause's in its own mix (priorDollarValueMix)
 //   net      new share × V + (1 − new share) × (V − V_before), on the path to the output (INV-12);
 //            money all shifted (a grantmaker's) earns shifted_dollar_value = V − V_before; spending
-//            research or advice changed (a judged share of the money it informed) is all shifted, with
-//            the evidence and missing-data steps: informed_money_value, in place of net
+//            research or advice changed (a judged share of the money it informed, the row
+//            informed_money) is all shifted, with the evidence and missing-data steps:
+//            informed_money_value, in place of net (money_moved, if the model also moves money gross)
 //
 // A result an evaluator already states as counterfactual value in "dollars of current effective
 // donations" (CEARCH) is multiplied by V; money moved (gross) by `moved_dollar_net_value`.
@@ -119,11 +120,17 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
     explainer: "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed.",
   },
   informed_money_value: {
-    id: "informed_money_value", format: "small", formula: "money_moved * shifted_dollar_value * evidence_adj * missing_data_adj",
+    id: "informed_money_value", format: "small", formula: "informed_money * shifted_dollar_value * evidence_adj * missing_data_adj",
     label: "Value of the spending its research or advice changed (all shifted money), units of value",
     explainer: "Spending its research or advice changed, at a judged share of the money it informed: all of it would have been spent anyway, so it counts for the gain over where it would have gone, discounted for weak evidence and for an outcome not measured for this charity (docs/normalization.md 2.8, 2.12).",
   },
 };
+
+/** The model's own row read by informed_money_value: the spending its research or advice changed (US$),
+ * kept apart from `money_moved` (money moved gross, valued net), so an organisation with both (funds and
+ * advice) needs no row of its own. All shifted, it brings in no donors' new money: the credit by share of
+ * resources never reads it. */
+export const INFORMED_MONEY = "informed_money";
 
 /** Rows written only for research or advice that changes how money is spent (`informed`): all shifted. */
 export const INFORMED_ROWS = ["shifted_dollar_value", "informed_money_value"] as const;
@@ -239,7 +246,8 @@ export const MARGINAL_ASSUMPTION = "marginal_vs_past_average";
 
 /** Credit by share of resources (`$resource_shares`) for every meta model, one formula: when on, the
  * donors whose new money the organisation moves are co-contributors, alongside staff's forgone pay.
- * `moved_per_dollar` is the gross money moved (or influenced) per dollar of the organisation's cost. */
+ * `moved_per_dollar` is the gross money moved (or influenced) per dollar of the organisation's cost; the
+ * spending its research or advice changed (`informed_money`, all shifted) brings no new money and stays out. */
 export const META_DONOR_COST_SHARE_FORMULA = "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))";
 
 /** The career-change step, the mirror of staff salary sacrifice (docs/normalization.md 2.8): a programme
