@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "The American Red Cross responds to home fires and large disasters across the US (shelter, meals, relief items, cash and recovery grants), installs free smoke alarms through its Home Fire Campaign, and relays emergency messages and gives financial help to military families. This model covers that donor-funded work in its fiscal year to June 2025 ($721 million, the domestic disaster, community and armed-forces programmes; the latest audited year, as the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) and comes to under 0.003 years of healthy life per $1,000, far below the site's global-health median because almost all the value is money and goods for US households, which the site's one log-income scale values at a small fraction of the same dollar for a household living on a few dollars a day, plus about ten fire deaths averted by smoke alarms. The audited money and goods are measured; the meals and shelter nights (valued by judgment), the smoke alarms and the emotional support, about a fifth of the value before the missing-data step, rest on research on other programmes and on judgment and are discounted for missing data. The biggest uncertainties are what FEMA, insurers and other charities would have provided anyway and how many fire deaths the alarms really avert (the charity's own count of lives saved is nearly thirty times our estimate).",
+  "summary": "The American Red Cross responds to home fires and large disasters across the US (shelter, meals, relief items, cash and recovery grants), installs free smoke alarms through its Home Fire Campaign, and relays emergency messages and gives financial help to military families. This model covers that donor-funded work in its fiscal year to June 2025 ($721 million, the domestic disaster, community and armed-forces programmes; the latest audited year, as the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) and comes to about 0.005 years of healthy life per $1,000, far below the site's global-health median because almost all the value is money and goods for US households, which the site's one log-income scale values at a small fraction of the same dollar for a household living on a few dollars a day, plus about ten fire deaths averted by smoke alarms. The audited money and goods are measured; the meals and shelter nights (valued by judgment), the smoke alarms and the emotional support, about a fifth of the value before the missing-data step, rest on research on other programmes and on judgment and are discounted for missing data. The biggest uncertainties are what FEMA, insurers and other charities would have provided anyway and how many fire deaths the alarms really avert (the charity's own count of lives saved is nearly thirty times our estimate).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross domestic disaster relief, Home Fire Campaign and Service to the Armed Forces (FY2025)",
@@ -538,16 +538,30 @@
       "label": "Years the value is counted over",
       "format": "number",
       "unit": "years",
-      "explainer": "All the help is a one-off sum (cash, goods, meals, nights), counted once at the year's consumption; spreading it over more years would change little at these small gains, and the durable part (furniture, repairs) is in unmodelled benefits.",
+      "explainer": "The money and goods are a one-off sum, counted once at the year's consumption (households spread what it frees over the year); spreading it over more years would change little at these small gains, and the durable part (furniture, repairs) is in unmodelled benefits. The meals and nights are counted over the weeks they are used (mc_years).",
       "formula": "1"
+    },
+    {
+      "id": "mc_years",
+      "section": "effect",
+      "label": "Years over which the meals and shelter nights are used",
+      "format": "number",
+      "value": {
+        "low": 0.02,
+        "best": 0.04,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Meals and shelter nights are used on the day, in the days to weeks after a disaster while people are displaced: about two weeks (0.04 years), from one week to about two months for long shelter operations after hurricanes."
     },
     {
       "id": "ln_gain_per_person",
       "section": "effect",
       "label": "ln(consumption) gain per person, discounted",
       "format": "number",
-      "formula": "ln(1 + value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)",
-      "explainer": "The site's one log-income scale at the clients' own consumption: a dollar does far less for a US household than for one living on a few dollars a day."
+      "formula": "(mc_years * ln(1 + (value_per_person * (1 - mc_value_share) + value_per_person * mc_value_share / mc_years) / baseline_consumption) + (1 - mc_years) * ln(1 + value_per_person * (1 - mc_value_share) / baseline_consumption)) * pv_annuity_due(1, $discount_rate, income_years)",
+      "explainer": "The site's one log-income scale at the clients' own consumption: a dollar does far less for a US household than for one living on a few dollars a day. The money and goods raise consumption over the year; the meals and shelter nights only in the weeks they are used (mc_years), so during those weeks consumption is higher by their value ÷ mc_years (the site's rule for goods used within a year: t × ln(1 + v ÷ (b × t)))."
     },
     {
       "id": "dalys_averted_per_person",

@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "world-vision",
   "owner": "charityevals",
-  "summary": "World Vision US (World Vision, Inc.) spent $988 million on international programmes in its fiscal year to September 2025, almost all as grants to World Vision field offices (71% in Sub-Saharan Africa): child-sponsorship community development (health and nutrition, clean water, livelihoods, education) and food-crisis and disaster response, much of it WFP food and US government grants; plus $3.4 million of advocacy on global poverty. World Vision US publishes no outcome figures for its own spending, so each branch is built from its spending, judged costs per person and the research on that kind of work, and every branch is discounted for missing data. About half the result is relief (food and cash for some 15 million people at the partnership's $30 a person, with a few excess crisis deaths averted), then livelihoods, child health and water: near the site's global-health median. The biggest uncertainties are the missing-data discount, how much livelihoods work raises consumption, and the share of excess crisis deaths that food assistance averts.",
+  "summary": "World Vision US (World Vision, Inc.) spent $988 million on international programmes in its fiscal year to September 2025, almost all as grants to World Vision field offices (71% in Sub-Saharan Africa): child-sponsorship community development (health and nutrition, clean water, livelihoods, education) and food-crisis and disaster response, much of it WFP food and US government grants; plus $3.4 million of advocacy on global poverty. World Vision US publishes no outcome figures for its own spending, so each branch is built from its spending, judged costs per person and the research on that kind of work, and every branch is discounted for missing data. About two thirds of the result is relief (food and cash for some 15 million people at the partnership's $30 a person, valued over the months they cover, with a few excess crisis deaths averted), then child health and water, and livelihoods: about three times the site's global-health median, because the relief reaches very poor people at a low cost per person. The biggest uncertainties are the missing-data discount, how much livelihoods work raises consumption, and the share of excess crisis deaths that food assistance averts.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: World Vision US, international programmes",
@@ -595,8 +595,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person / baseline_consumption)",
-      "explainer": "A year's relief on the site's one log-income scale."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person / (baseline_consumption * years_exposed))",
+      "explainer": "The relief on the site's one log-income scale over the time it is used: food, cash and goods raise consumption during the months each person is covered (years_exposed), so the gain is years_exposed × ln(1 + value ÷ the consumption of those months), the site's rule for a transfer used within a year."
     },
     {
       "id": "neonatal_mortality",
@@ -910,6 +910,19 @@
       "explainer": "ln(consumption) gain per person, discounted."
     },
     {
+      "id": "income_mortality_uov_ratio",
+      "section": "effect",
+      "label": "Deaths averted by higher incomes, as a share of the consumption benefits",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The cash-income family's mortality step: higher household incomes avert some child deaths (cash transfers cut under-five deaths by about 8% in Richterman et al. 2023); GiveWell's mortality effect for cash is about 0.2 of its consumption value. Judgment 0.2 (0-0.5), times your value of a life, for the livelihood branch (as Mercy Corps' recovery and livelihoods)."
+    },
+    {
       "id": "education_learning_gain_sd",
       "section": "effect",
       "label": "Learning gain per child reached (standard deviations)",
@@ -1058,7 +1071,7 @@
     {
       "id": "relief_evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment, relief",
+      "label": "Evidence adjustment, relief deaths averted",
       "format": "multiple",
       "value": {
         "low": 0.7,
@@ -1066,7 +1079,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The value is mostly goods at their cost, which needs no effect study; the deaths averted rest on weak evidence, already wide in share_excess_averted. 0.85 (0.7-1)."
+      "explainer": "Applies to the deaths averted (and illness) only: they rest on weak evidence, already wide in share_excess_averted, and the studies are of other settings. The goods' value is their cost, which needs no effect study, so it isn't discounted here. 0.85 (0.7-1)."
     },
     {
       "id": "relief_counterfactual_adj",
@@ -1084,7 +1097,7 @@
     {
       "id": "relief_attribution_share",
       "section": "adjustments",
-      "label": "World Vision's share of the resources, relief",
+      "label": "World Vision's share of the resources behind the deaths averted, relief",
       "format": "percent",
       "value": {
         "low": 0.7,
@@ -1093,6 +1106,19 @@
       },
       "kind": "judgment",
       "explainer": "World Vision distributes WFP and US government food whose procurement, shipping and WFP's own costs are only partly on its books (the commodities are, at their value; WFP's associated costs for in-kind food add 15-30%). Communities' volunteers help with distributions. World Vision's share of all the resources behind the food reaching people: 85% (70-100%)."
+    },
+    {
+      "id": "relief_goods_attribution_share",
+      "section": "adjustments",
+      "label": "World Vision's share of the resources behind the relief goods' value",
+      "format": "percent",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The goods are valued at a share of World Vision's own relief spending (relief_goods_value_share), WFP and US government commodities at the value on its books, so WFP's off-book shipping and storage don't enter the value counted; only communities' volunteers and local partners delivering it do. 95% (85-100%), as CARE's relief goods."
     },
     {
       "id": "health_evidence_adj",
@@ -1203,13 +1229,8 @@
       "section": "adjustments",
       "label": "Evidence adjustment, gik",
       "format": "multiple",
-      "value": {
-        "low": 0.85,
-        "best": 0.95,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "The value is the goods at a judged share of their recorded value, which needs no effect study; 0.95 (0.85-1) for valuations that may not match what was given."
+      "explainer": "1: the goods are valued at a judged share of their recorded value, which needs no effect study; the doubt about what they are worth to the people who get them is in gik_inkind_equivalence.",
+      "formula": "1"
     },
     {
       "id": "gik_counterfactual_adj",
@@ -1255,7 +1276,7 @@
       "section": "adjustments",
       "label": "This charity's share of the resources: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(relief_dalys_unadjusted * relief_attribution_share + health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * (relief_deaths_share_unadj * relief_attribution_share + (1 - relief_deaths_share_unadj) * relief_goods_attribution_share) + health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: relief, health and water share credit with WFP, governments and communities (their own rows); livelihoods, education and the goods are World Vision's own spending, so 1."
     },
     {
@@ -1387,10 +1408,18 @@
     {
       "id": "relief_total_adj",
       "section": "adjustments",
-      "label": "All adjustments, relief",
+      "label": "All adjustments, relief deaths averted",
       "format": "multiple",
       "formula": "relief_evidence_adj * relief_counterfactual_adj * relief_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * relief_missing_data_adj",
-      "explainer": "The product of the branch's adjustments."
+      "explainer": "The product of the adjustments to the deaths averted (and the illness counted directly)."
+    },
+    {
+      "id": "relief_goods_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments, relief goods",
+      "format": "percent",
+      "formula": "relief_counterfactual_adj * relief_goods_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * relief_missing_data_adj",
+      "explainer": "All adjustments to the goods' value: no evidence step (goods valued at a share of their cost need no effect study)."
     },
     {
       "id": "health_total_adj",
@@ -1445,7 +1474,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment: outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "(relief_dalys_unadjusted * relief_evidence_adj + health_dalys_unadjusted * health_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + livelihood_dalys_unadjusted * livelihood_evidence_adj + education_dalys_unadjusted * education_evidence_adj + gik_dalys_unadjusted * gik_evidence_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * (relief_deaths_share_unadj * relief_evidence_adj + (1 - relief_deaths_share_unadj)) + health_dalys_unadjusted * health_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + livelihood_dalys_unadjusted * livelihood_evidence_adj + education_dalys_unadjusted * education_evidence_adj + gik_dalys_unadjusted * gik_evidence_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + education_dalys_unadjusted + gik_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row; awareness has none (1)."
     },
     {
@@ -1541,9 +1570,25 @@
       "section": "bridges",
       "label": "Relief: deaths averted and goods delivered, in units of value (adjusted)",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption) * relief_total_adj",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death * relief_total_adj + ln_gain_per_person * $uov_per_ln_consumption * relief_goods_total_adj)",
       "unit": "UoV",
-      "explainer": "Relief: deaths averted and goods delivered, in units of value (adjusted)."
+      "explainer": "Deaths averted and goods delivered, each with its own adjustments."
+    },
+    {
+      "id": "relief_uov_unadjusted",
+      "section": "bridges",
+      "label": "Relief: deaths averted and goods delivered, in units of value before adjustments",
+      "format": "number",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
+      "explainer": "For the reading-only averages: relief's two parts before their adjustments."
+    },
+    {
+      "id": "relief_deaths_share_unadj",
+      "section": "bridges",
+      "label": "Deaths' share of relief's value before adjustments (for the reading-only averages)",
+      "format": "percent",
+      "formula": "people_reached * deaths_averted_per_person * value_per_death / relief_uov_unadjusted",
+      "explainer": "The rest is the goods' value; the averages weight relief's two parts by their own adjustments."
     },
     {
       "id": "health_uov",
@@ -1566,11 +1611,11 @@
     {
       "id": "livelihood_uov",
       "section": "bridges",
-      "label": "Livelihoods: consumption gained, in units of value (adjusted)",
+      "label": "Livelihoods: consumption gained and the deaths higher incomes avert, in units of value (adjusted)",
       "format": "number",
-      "formula": "livelihood_members * household_size * livelihood_ln_gain_per_person * $uov_per_ln_consumption * livelihood_total_adj",
+      "formula": "livelihood_members * household_size * livelihood_ln_gain_per_person * $uov_per_ln_consumption * (1 + income_mortality_uov_ratio * $life_value_multiplier) * livelihood_total_adj",
       "unit": "UoV",
-      "explainer": "Livelihoods: consumption gained, in units of value (adjusted)."
+      "explainer": "Livelihoods' consumption gains and the deaths higher incomes avert (the cash-income family's mortality ratio), in units of value, after the branch's adjustments."
     },
     {
       "id": "education_uov",
@@ -1665,7 +1710,7 @@
     {
       "id": "livelihood_dalys",
       "section": "bridges",
-      "label": "Livelihoods: consumption gained, in healthy years",
+      "label": "Livelihoods: consumption gained and the deaths higher incomes avert, in healthy years",
       "format": "number",
       "formula": "livelihood_uov / ($uov_per_daly)",
       "unit": "DALYs",
@@ -1703,9 +1748,9 @@
       "section": "bridges",
       "label": "Relief: deaths averted and goods delivered, in healthy years before adjustments",
       "format": "number",
-      "formula": "relief_dalys / relief_total_adj",
+      "formula": "relief_uov_unadjusted / ($uov_per_daly)",
       "unit": "DALYs",
-      "explainer": "For the outcome-weighted averages only."
+      "explainer": "For the outcome-weighted averages only: deaths and goods before their adjustments."
     },
     {
       "id": "health_dalys_unadjusted",
@@ -1728,7 +1773,7 @@
     {
       "id": "livelihood_dalys_unadjusted",
       "section": "bridges",
-      "label": "Livelihoods: consumption gained, in healthy years before adjustments",
+      "label": "Livelihoods: consumption gained and the deaths higher incomes avert, in healthy years before adjustments",
       "format": "number",
       "formula": "livelihood_dalys / livelihood_total_adj",
       "unit": "DALYs",

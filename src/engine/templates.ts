@@ -283,6 +283,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     [
       "forecast_years", "deaths_if_extinct", "share_under5", "value_per_death", "future_years_per_person", "future_dalys_if_extinct", "years_of_impact",
       ...["ai", "bio", "nuclear"].flatMap((a) => [`${a}_extinction_per_year`, `${a}_catastrophe_per_year`, `${a}_deaths_if_catastrophe`, `${a}_smaller_per_year`, `${a}_deaths_per_million`, `${a}_future_per_million`, `${a}_cost_share`, `${a}_discounted_years`, `${a}_deaths_averted`, `${a}_future_dalys`]),
+      "ai_misuse_cost_share",
       "pol_cost_share", "pol_wins", "pol_p_success", "pol_relative_cut", "pol_discounted_years", "pol_deaths_averted", "pol_future_dalys",
       "fb_cost_share", "fb_people", "fb_share_working", "fb_work_dollars", "fb_credit_share", "fb_deaths_averted", "fb_future_dalys",
       "cost_shares_total", "deaths_averted", "future_dalys_averted", "leverage_funging_adj", "unmodelled_benefits_adj", "speedup_harm_share", "hazard_harm_share",
@@ -290,7 +291,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     ],
     {
       cost_shares_total: [0.99, 1.01],
-      ai_cost_share: [0, 1], bio_cost_share: [0, 1], nuclear_cost_share: [0, 1], pol_cost_share: [0, 1], fb_cost_share: [0, 1],
+      ai_cost_share: [0, 1], ai_misuse_cost_share: [0, 1], bio_cost_share: [0, 1], nuclear_cost_share: [0, 1], pol_cost_share: [0, 1], fb_cost_share: [0, 1],
       pol_p_success: [0, 1], pol_relative_cut: [0, 0.5], fb_share_working: [0, 1], fb_credit_share: [0, 1],
       speedup_harm_share: [-0.6, 0], hazard_harm_share: [-0.6, 0],
       ai_extinction_per_year: [0, 0.01], bio_extinction_per_year: [0, 0.01], nuclear_extinction_per_year: [0, 0.01],
@@ -306,6 +307,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
       { row: "bio_extinction_per_year", ref: "@catastrophe.bio_extinction_by_2100", why: "pandemics' chance is the site's one forecast" },
       { row: "nuclear_extinction_per_year", ref: "@catastrophe.nuclear_extinction_by_2100", why: "nuclear war's chance is the site's one forecast" },
       { row: "ai_deaths_per_million", ref: "@catastrophe.ai_extinction_cut_per_million", why: "a typical dollar's cut in the risk is the site's one figure per area" },
+      { row: "ai_deaths_per_million", ref: "@catastrophe.ai_misuse_extinction_cut_per_million", why: "AI work against misuse takes the site's one misuse figure, weighted by ai_misuse_cost_share" },
       { row: "bio_deaths_per_million", ref: "@catastrophe.bio_extinction_cut_per_million", why: "a typical dollar's cut in the risk is the site's one figure per area" },
       { row: "nuclear_deaths_per_million", ref: "@catastrophe.nuclear_extinction_cut_per_million", why: "a typical dollar's cut in the risk is the site's one figure per area" },
       { row: "years_of_impact", ref: "$win_years_counted", why: "a cut in the risk counts the site's one number of years ($win_years_counted, docs/normalization.md 2.9)" },

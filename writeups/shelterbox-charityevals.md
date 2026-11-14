@@ -20,13 +20,13 @@ Families who have lost their homes get shelter and the basics to cook, sleep and
 ### How the model works
 
 - **Cost:** the 2025 accounts. Fundraising, and ShelterBox USA's own costs, are spread over the programme. Donated stock and freight (£0.6m) count as others' resources, not as ShelterBox's cost.
-- **Value per person:** the money that reaches people as shelter, items, materials or cash (our judgment: 65% of grants and direct costs), divided by the people reached. That comes to about 46 dollars a person.
+- **Value per person:** the money that reaches people as shelter, items, materials or cash (our judgment: 65% of grants and direct costs), divided by the people reached. That comes to about 46 dollars a person, worth 85% of that to the people who get it (in-kind aid is worth somewhat less to people than its cost).
 - **Consumption:** the goods are valued against the consumption of poor households in two stand-in countries, weighted by our judgment of where the people were (the grants, adjusted for ShelterBox's own deliveries). Mozambique stands in for the poorest settings (Syria, Yemen, Chad, Somalia, Afghanistan, Burkina Faso, Gaza) and Bangladesh for the rest (Cameroon, Ethiopia, the rest of Asia and Jamaica). Durable shelter and repairs count over the years they are used.
 - **Deaths averted:** the crisis's excess death rate, times the share the aid averts (our judgment: 2%), over half a year.
 - **Illness averted:** acute episodes averted, times their length and disability weight.
 - **Emissions:** the climate harm of making and shipping the aid, through the site's climate rows.
 - **Adjustments:**
-  - evidence: in-kind aid is worth somewhat less to people than its cost;
+  - evidence: for the deaths and illness averted only (the goods, valued at their cost, need no effect study);
   - counterfactual: shelter clusters in ShelterBox's countries were 13–27% funded in 2025;
   - credit: shared with partners, volunteers and donors of goods;
   - delivery;
@@ -54,7 +54,7 @@ Preparedness (stock held in warehouses, training in building back safer) and ten
 
 ### How this model was checked
 
-Mechanical checks (scripts/audit-model.ts, scripts/check.ts, simulation-check, normalization-audit) and independent audit rounds with the audit-cea skill, kept in audits/shelterbox-charityevals/. Round 1 (1 high, 2 medium, 2 low) moved the emissions of the aid into the site's climate rows, added ShelterBox USA's own costs to the overhead, valued Cameroon and Ethiopia at the middle stand-in, and spread durable shelter over its years in the main chain instead of a side-effect share. Round 2 (1 high, 2 low) removed a duplicated row, moved Afghanistan to the poorest stand-in and corrected leftover figures in the explanations. A verification round checked those changes.
+Mechanical checks (scripts/audit-model.ts, scripts/check.ts, simulation-check, normalization-audit) and independent audit rounds with the audit-cea skill, kept in audits/shelterbox-charityevals/. Round 1 (1 high, 2 medium, 2 low) moved the emissions of the aid into the site's climate rows, added ShelterBox USA's own costs to the overhead, valued Cameroon and Ethiopia at the middle stand-in, and spread durable shelter over its years in the main chain instead of a side-effect share. Round 2 (1 high, 2 low) removed a duplicated row, moved Afghanistan to the poorest stand-in and corrected leftover figures in the explanations. A verification round checked those changes. A later site-wide pass moved the in-kind discount out of the evidence step into the goods' value (85% of cost) and kept the evidence step for the deaths and illness only (0.2125 to 0.2150); round 4 verified it with no high or medium finding.
 
 ### Sources
 

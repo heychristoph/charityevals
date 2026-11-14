@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "world-central-kitchen",
   "owner": "charityevals",
-  "summary": "World Central Kitchen cooks and delivers hot meals after disasters and in wars; in 2025 it spent 372.5 million dollars on this, its only programme, and served 130 to 179 million meals, about 70% of them in Gaza, the rest mostly in Haiti, Ukraine, Jamaica, Myanmar and US and European disasters. The model values the meals as food on the site's log-income scale and, in Gaza and poorer countries' crises, as a share of the excess deaths from hunger they avert, in three branches split by the Form 990's regions: about 0.10 years of healthy life per 1,000 dollars at the defaults, over 70% of it from Gaza. Each branch's food is valued from its share of the food bill, over the months people were fed. The biggest uncertainties are how much of the food in Gaza others would have brought in through the same crossings, and how little people there had without it; no study measures what the meals do, so every branch is discounted for missing data.",
+  "summary": "World Central Kitchen cooks and delivers hot meals after disasters and in wars; in 2025 it spent 372.5 million dollars on this, its only programme, and served 130 to 179 million meals, about 70% of them in Gaza, the rest mostly in Haiti, Ukraine, Jamaica, Myanmar and US and European disasters. The model values the meals as food on the site's log-income scale and, in Gaza and poorer countries' crises, as a share of the excess deaths from hunger they avert, in three branches split by the Form 990's regions: about 0.12 years of healthy life per 1,000 dollars at the defaults, over 70% of it from Gaza. Each branch's food is valued from its share of the food bill, over the months people were fed. The biggest uncertainties are how much of the food in Gaza others would have brought in through the same crossings, and how little people there had without it; no study measures what the meals do, so every branch is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: World Central Kitchen's emergency meals (2025)",
@@ -1043,7 +1043,7 @@
     {
       "id": "gz_evidence_adj",
       "section": "adjustments",
-      "label": "Gaza: evidence adjustment (internal and external validity), a multiplier",
+      "label": "Gaza: evidence adjustment for the deaths averted (internal and external validity), a multiplier",
       "format": "multiple",
       "value": {
         "low": 0.6,
@@ -1051,7 +1051,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "How far to trust the meal count and the chain's inputs in this setting: the count is the charity's own and unaudited (the accounts say 179 million meals, its review 130 million). Looting and diversion are in delivery below, and that no study measures the meals' effect is the missing-data step's, not this one's. About 0.85, from 0.6 to 1, between our relief models (American Red Cross 0.95, Americares 0.8)."
+      "explainer": "For the deaths averted only, which rest on the people and months fed: how far to trust the meal count behind them in this setting (the count is the charity's own and unaudited: the accounts say 179 million meals, its review 130 million). Looting and diversion are in delivery below, and that no study measures the meals' effect is the missing-data step's, not this one's. About 0.85, from 0.6 to 1, as World Vision's and CARE's relief deaths. The food is valued from the charity's food bill, which needs no effect study and doesn't rest on the count, so it takes no evidence step."
     },
     {
       "id": "gz_counterfactual_adj",
@@ -1069,7 +1069,7 @@
     {
       "id": "lm_evidence_adj",
       "section": "adjustments",
-      "label": "Crises in poorer countries: evidence adjustment, a multiplier",
+      "label": "Crises in poorer countries: evidence adjustment for the deaths averted, a multiplier",
       "format": "multiple",
       "value": {
         "low": 0.6,
@@ -1077,7 +1077,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "As in Gaza: the charity's own, unaudited counts. About 0.85, from 0.6 to 1, between our relief models (American Red Cross 0.95, Americares 0.8)."
+      "explainer": "For the deaths averted only, as in Gaza: they rest on the charity's own, unaudited meal counts. About 0.85, from 0.6 to 1. The food is valued from the food bill, so it takes no evidence step."
     },
     {
       "id": "lm_counterfactual_adj",
@@ -1097,13 +1097,8 @@
       "section": "adjustments",
       "label": "Rich-country disasters: evidence adjustment, a multiplier",
       "format": "multiple",
-      "value": {
-        "low": 0.7,
-        "best": 0.9,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "The meal counts and their value at local prices are straightforward here. About 0.9, from 0.7 to 1."
+      "explainer": "1: this branch is food only, valued from the charity's food bill at local prices, which needs no effect study.",
+      "formula": "1"
     },
     {
       "id": "hi_counterfactual_adj",
@@ -1124,12 +1119,12 @@
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
-        "low": 0.75,
-        "best": 0.9,
+        "low": 0.8,
+        "best": 0.95,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The charity pays for the food, the kitchens and the local partners' cooking (subcontractors), so most resources are its own. Others' are its 4,883 volunteers (Form 990 Part I, line 6; at the US value of a volunteer hour, 36 dollars, and some tens of hours each, a few million dollars, about 1-2% of spending), UN and Jordanian convoys and logistics it uses in Gaza, and restaurant partners' own capacity. About 90%, from 75% to 100%."
+      "explainer": "The charity pays for the food, the kitchens and the local partners' cooking (subcontractors, in its cost), and the food is valued from its own food bill, so others' resources enter only through delivery: its 4,883 volunteers (Form 990 Part I, line 6; at the US value of a volunteer hour, 36 dollars, and some tens of hours each, a few million dollars, about 1-2% of spending) and the UN and Jordanian convoys and logistics it uses in Gaza (unsized; a few percent of the cost of getting food in). About 95%, from 80% to 100%, as CARE's relief goods."
     },
     {
       "id": "attribution_share",
@@ -1255,16 +1250,32 @@
     {
       "id": "gz_total_adj",
       "section": "adjustments",
-      "label": "Gaza: all adjustments combined",
+      "label": "Gaza: all adjustments combined, deaths averted",
       "format": "multiple",
       "formula": "gz_evidence_adj * gz_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * gz_missing_data_adj"
     },
     {
+      "id": "gz_goods_total_adj",
+      "section": "adjustments",
+      "label": "Gaza: all adjustments combined, food",
+      "format": "multiple",
+      "formula": "gz_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * gz_missing_data_adj",
+      "explainer": "The food's adjustments: no evidence step (food valued from the food bill needs no effect study)."
+    },
+    {
       "id": "lm_total_adj",
       "section": "adjustments",
-      "label": "Crises in poorer countries: all adjustments combined",
+      "label": "Crises in poorer countries: all adjustments combined, deaths averted",
       "format": "multiple",
       "formula": "lm_evidence_adj * lm_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * lm_missing_data_adj"
+    },
+    {
+      "id": "lm_goods_total_adj",
+      "section": "adjustments",
+      "label": "Crises in poorer countries: all adjustments combined, food",
+      "format": "multiple",
+      "formula": "lm_counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * lm_missing_data_adj",
+      "explainer": "The food's adjustments: no evidence step (food valued from the food bill needs no effect study)."
     },
     {
       "id": "hi_total_adj",
@@ -1278,7 +1289,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(gz_dalys_unadjusted * gz_evidence_adj + lm_dalys_unadjusted * lm_evidence_adj + hi_dalys_unadjusted * hi_evidence_adj) / (gz_dalys_unadjusted + lm_dalys_unadjusted + hi_dalys_unadjusted)",
+      "formula": "(gz_dalys_unadjusted * (gz_deaths_share_unadj * gz_evidence_adj + (1 - gz_deaths_share_unadj)) + lm_dalys_unadjusted * (lm_deaths_share_unadj * lm_evidence_adj + (1 - lm_deaths_share_unadj)) + hi_dalys_unadjusted * hi_evidence_adj) / (gz_dalys_unadjusted + lm_dalys_unadjusted + hi_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1358,16 +1369,50 @@
       "section": "bridges",
       "label": "Gaza: deaths averted and food, in units of value (after the branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption) * gz_total_adj",
-      "unit": "UoV"
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death * gz_total_adj + ln_gain_per_person * $uov_per_ln_consumption * gz_goods_total_adj)",
+      "unit": "UoV",
+      "explainer": "Deaths averted and food, each with its own adjustments."
+    },
+    {
+      "id": "gz_deaths_uov_unadjusted",
+      "section": "bridges",
+      "label": "Gaza: deaths averted, in units of value (before adjustments; weights only)",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * value_per_death",
+      "explainer": "For the reading-only averages."
+    },
+    {
+      "id": "gz_uov_unadjusted",
+      "section": "bridges",
+      "label": "Gaza: deaths averted and food, in units of value (before adjustments; weights only)",
+      "format": "number",
+      "formula": "gz_deaths_uov_unadjusted + people_reached * ln_gain_per_person * $uov_per_ln_consumption",
+      "explainer": "For the reading-only averages."
     },
     {
       "id": "lm_uov",
       "section": "bridges",
       "label": "Crises in poorer countries: deaths averted and food, in units of value (after adjustments)",
       "format": "number",
-      "formula": "(lm_deaths * value_per_death + lm_people_reached * lm_ln_gain_per_person * $uov_per_ln_consumption) * lm_total_adj",
-      "unit": "UoV"
+      "formula": "lm_deaths * value_per_death * lm_total_adj + lm_people_reached * lm_ln_gain_per_person * $uov_per_ln_consumption * lm_goods_total_adj",
+      "unit": "UoV",
+      "explainer": "Deaths averted and food, each with its own adjustments."
+    },
+    {
+      "id": "lm_deaths_uov_unadjusted",
+      "section": "bridges",
+      "label": "Crises in poorer countries: deaths averted, in units of value (before adjustments; weights only)",
+      "format": "number",
+      "formula": "lm_deaths * value_per_death",
+      "explainer": "For the reading-only averages."
+    },
+    {
+      "id": "lm_uov_unadjusted",
+      "section": "bridges",
+      "label": "Crises in poorer countries: deaths averted and food, in units of value (before adjustments; weights only)",
+      "format": "number",
+      "formula": "lm_deaths_uov_unadjusted + lm_people_reached * lm_ln_gain_per_person * $uov_per_ln_consumption",
+      "explainer": "For the reading-only averages."
     },
     {
       "id": "hi_uov",
@@ -1397,7 +1442,7 @@
     {
       "id": "wellbys_bridged",
       "section": "bridges",
-      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years",
       "format": "number",
       "formula": "0",
       "unit": "WELLBYs"
@@ -1444,11 +1489,43 @@
       "unit": "DALYs"
     },
     {
+      "id": "gz_dalys_from_uov_unadjusted",
+      "section": "bridges",
+      "label": "Gaza: deaths averted and food before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "gz_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "gz_deaths_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Gaza: deaths averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "gz_deaths_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "lm_dalys_from_uov_unadjusted",
+      "section": "bridges",
+      "label": "Crises in poorer countries before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "lm_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "lm_deaths_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Crises in poorer countries: deaths averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "lm_deaths_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
       "id": "gz_dalys_unadjusted",
       "section": "bridges",
       "label": "Gaza, in healthy years (before adjustments)",
       "format": "number",
-      "formula": "gz_dalys / gz_total_adj",
+      "formula": "gz_dalys_from_uov_unadjusted + people_reached * dalys_illness_per_person",
       "unit": "DALYs"
     },
     {
@@ -1456,7 +1533,7 @@
       "section": "bridges",
       "label": "Crises in poorer countries, in healthy years (before adjustments)",
       "format": "number",
-      "formula": "lm_dalys / lm_total_adj",
+      "formula": "lm_dalys_from_uov_unadjusted",
       "unit": "DALYs"
     },
     {
@@ -1466,6 +1543,22 @@
       "format": "number",
       "formula": "hi_dalys / hi_total_adj",
       "unit": "DALYs"
+    },
+    {
+      "id": "gz_deaths_share_unadj",
+      "section": "bridges",
+      "label": "Gaza: deaths' and illness' share of the outcome before adjustments (weights only)",
+      "format": "percent",
+      "formula": "(gz_deaths_dalys_unadjusted + people_reached * dalys_illness_per_person) / gz_dalys_unadjusted",
+      "explainer": "The rest is the food's value; the evidence average weights the two parts by their own adjustments."
+    },
+    {
+      "id": "lm_deaths_share_unadj",
+      "section": "bridges",
+      "label": "Crises in poorer countries: deaths' share of the outcome before adjustments (weights only)",
+      "format": "percent",
+      "formula": "lm_deaths_dalys_unadjusted / lm_dalys_unadjusted",
+      "explainer": "The rest is the food's value; the evidence average weights the two parts by their own adjustments."
     },
     {
       "id": "dalys_direct",
