@@ -1,6 +1,6 @@
 ### Summary
 
-Project Drawdown researches which climate solutions matter most and helps funders, companies and investors put their money there. Our model values that advice by the money it changed in 2023-2025. Each dollar counts only for how much better its new use is than its old one. Against what Drawdown spent over those years, that comes to **<span data-figure="headline" data-model="project-drawdown-charityevals">0.0049</span> years of healthy life per $1,000**. About nine-tenths of it comes from foundation and family giving that follows its guidance. The result is very uncertain: nobody has counted the decisions it changed, so the money and Drawdown's part in it are our judgments.
+Project Drawdown researches which climate solutions matter most and helps funders, companies and investors put their money there. Our model values that advice by the money it changed in 2023-2025. Each dollar counts only for how much better its new use is than its old one. Against what Drawdown spent over those years, that comes to **<span data-figure="headline" data-model="project-drawdown-charityevals">0.0035</span> years of healthy life per $1,000**. About nine-tenths of it comes from foundation and family giving that follows its guidance. The result is very uncertain: nobody has counted the decisions it changed, so the money and Drawdown's part in it are our judgments.
 
 ### What the charity does
 
@@ -24,11 +24,11 @@ Drawdown cuts no emissions itself. It changes where other people's climate money
 
 This is a value-of-information model: money whose use changed × how much better the new use is.
 
-Funders' giving would have gone to climate work anyway, so it is shifted money, valued the site's one way. A dollar at the climate charities on the rankings is worth their figure there, each with its own steps. Where it would have gone is an ordinary climate charity, which stands to them as GiveDirectly stands to the global-health charities. The giving counts once, in the year it is given.
+Funders' giving would have gone to climate work anyway, so it is shifted money, valued by the site's one rule for spending that research or advice changed. A dollar at the climate charities on the rankings is worth their figure there, each with its own steps. Where it would have gone is an ordinary climate charity, which stands to them as GiveDirectly stands to the global-health charities. The giving counts once, in the year it is given, and only 70% of the gain is counted as real, since advice can point the wrong way or overstate the difference between options.
 
 Companies' and investors' money is valued by the difference in tonnes per dollar between the new and old use. An ordinary corporate climate dollar is put at 0.01 tonnes (0.002 to 0.04), and Drawdown's advice makes it do 30% more. An invested dollar gains 0.0003 tonnes, since it comes back. These changes count for the shared years a won reform counts, after a year's wait.
 
-Each branch then takes the share that wouldn't have happened anyway (40-60%) and Drawdown's share of the work behind the change. Funders' own staff, advisers and other guides (ClimateWorks, Giving Green, Founders Pledge) do the rest. Donated services are others' resources: they are left out of the cost and lower Drawdown's share instead. Then come the shared missing-data step and two side effects: other good not modelled, such as policy advice and research others cite (+15%), and companies using the partnership as cover (−3%). The total is divided by a typical year's spending in 2023-2025. The next dollar is valued at 42% of that average. Drawdown holds about a year's cash, and new money goes to programmes not yet tried (Drawdown Capital, Explorer 2.0).
+Each branch then takes the share that wouldn't have happened anyway (40-60%) and Drawdown's share of the work behind the change. Funders' own staff, advisers and other guides (ClimateWorks, Giving Green, Founders Pledge) do the rest. Donated services are others' resources: they are left out of the cost and lower Drawdown's share instead. Then come the shared evidence (70%) and missing-data steps and two side effects: other good not modelled, such as policy advice and research others cite (+15%), and companies using the partnership as cover (−3%). The total is divided by a typical year's spending in 2023-2025. The next dollar is valued at 42% of that average. Drawdown holds about a year's cash, and new money goes to programmes not yet tried (Drawdown Capital, Explorer 2.0).
 
 ### What drives the result
 
@@ -46,7 +46,7 @@ Its influence before 2023 is left out, along with its cost: the 2017 book and th
 
 ### How this model was checked
 
-Independent audits are in audits/project-drawdown-charityevals/. Round 1 found the funders' giving valued by our own tonnes-per-dollar judgments; it now goes through the site's shared money-moved rows, which raised the result about eightfold. It also removed an evidence discount that repeated the missing-data step and timing reasons from a counterfactual that the years counted already cover. Donated services left the cost. Round 2 found the shifted giving read the climate charities without their own missing-data and age steps; the model now reads them as a money mover does, which lowered the result by about two-thirds.
+Independent audits are in audits/project-drawdown-charityevals/. Round 1 found the funders' giving valued by our own tonnes-per-dollar judgments; it now goes through the site's shared money-moved rows, which raised the result about eightfold. It also removed an evidence discount that repeated the missing-data step and timing reasons from a counterfactual that the years counted already cover. Donated services left the cost. Round 2 found the shifted giving read the climate charities without their own missing-data and age steps; the model now reads them as a money mover does, which lowered the result by about two-thirds. Before the last round the funders' branch moved to the site's new shared rule for spending research changed, with its evidence step (70%, as for Rethink Priorities).
 
 ### Sources
 

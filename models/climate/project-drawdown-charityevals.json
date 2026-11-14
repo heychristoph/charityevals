@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "project-drawdown",
   "owner": "charityevals",
-  "summary": "Project Drawdown (Saint Paul, Minnesota) researches which climate solutions matter most (Drawdown Explorer, the Drawdown Roadmap) and guides philanthropists, companies and investors toward them, with storytelling for the public; this model values that information by the money it changed in 2023-2025: funders' climate giving as the site values shifted money (the gain of a dollar at the climate charities on the rankings over an ordinary one), companies' and investors' money by the difference in tonnes per dollar between the new and old use, against its spending over those years ($5.6M in 2025). At the defaults a dollar given averts the equivalent of about 0.01 tonnes of CO₂e, about 0.005 years of healthy life per $1,000, nine-tenths of it from funders' giving; it is above the climate median because a shifted dollar is valued at the ranked climate charities' figures, forest protection among them. The result is mostly uncertainty: how much giving follows its guidance, how much is its doing rather than other advisers', and how an ordinary climate charity compares with the ranked ones; every branch is discounted for missing data, since no decision it changed is counted or followed up.",
+  "summary": "Project Drawdown (Saint Paul, Minnesota) researches which climate solutions matter most (Drawdown Explorer, the Drawdown Roadmap) and guides philanthropists, companies and investors toward them, with storytelling for the public; this model values that information by the money it changed in 2023-2025: funders' climate giving by the site's shared rule for spending research changed (all shifted money, at the gain of a dollar at the climate charities on the rankings over an ordinary one, with evidence and missing-data steps), companies' and investors' money by the difference in tonnes per dollar between the new and old use, against its spending over those years ($5.6M in 2025). At the defaults a dollar given averts the equivalent of about 0.007 tonnes of CO₂e, about 0.0035 years of healthy life per $1,000, nine-tenths of it from funders' giving; it is above the climate median because a shifted dollar is valued at the ranked climate charities' figures, forest protection among them. The result is mostly uncertainty: how much giving follows its guidance, how much is its doing rather than other advisers', and how an ordinary climate charity compares with the ranked ones; every branch is discounted for missing data, since no decision it changed is counted or followed up.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Project Drawdown",
@@ -488,6 +488,14 @@
       "explainer": "Where the shifted giving goes: climate work Drawdown's research favours, not a list of charities, so the cause's charities on the rankings at their figures there, equal weights (#cause:climate; normalization.md 2.8: no published split)."
     },
     {
+      "id": "money_moved",
+      "section": "moved_money",
+      "label": "Philanthropy: giving that follows its guidance (money moved, all shifted, gross)",
+      "format": "usd",
+      "formula": "phil_money_shifted",
+      "explainer": "The giving that follows its guidance, valued by the shared informed-money row; what would have happened anyway and Drawdown's share of the work behind the choice are applied after the bridge (phil_total_adj)."
+    },
+    {
       "id": "value_global_health",
       "section": "moved_money",
       "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
@@ -512,34 +520,34 @@
       "explainer": "Our judgment, the shared rule for an organisation that moves money within a cause other than global health (climate). Shifted money was going to be given anyway, to an ordinary charity of the same cause; it is credited only for the gain. An ordinary charity stands to its cause's charities on the rankings as GiveDirectly (GiveWell's model, times a shared multiple, 1×, from 0 to 3×) stands to global health's: GiveDirectly's live result over the global-health charities' (#cause:global-health), times the climate charities' (#cause:climate), all live under your values."
     },
     {
-      "id": "new_money_share",
+      "id": "shifted_dollar_value",
       "section": "moved_money",
-      "label": "Share of money moved that is new money",
-      "format": "percent",
-      "formula": "@meta.new_money_share",
-      "explainer": "The site's one figure for every meta charity. Not used on the path here: the giving Drawdown's guidance changes is funders' climate money that would have been given anyway, all shifted, valued at its gain only (as GiveWell's model values Open Philanthropy's money)."
+      "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+      "format": "small",
+      "formula": "moved_dollar_value - prior_dollar_value",
+      "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
     },
     {
-      "id": "moved_dollar_net_value",
+      "id": "informed_money_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of the spending its research or advice changed (all shifted money), units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. Not on the path here: all of the money counted is shifted (uov_bridged reads the gain, moved_dollar_value - prior_dollar_value)."
+      "formula": "money_moved * shifted_dollar_value * evidence_adj * missing_data_adj",
+      "explainer": "Spending its research or advice changed, at a judged share of the money it informed: all of it would have been spent anyway, so it counts for the gain over where it would have gone, discounted for weak evidence and for an outcome not measured for this charity (docs/normalization.md 2.8, 2.12)."
     },
     {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Philanthropy, in GiveWell units of value (before adjustments)",
+      "label": "Philanthropy, in GiveWell units of value (after the evidence and missing-data steps)",
       "format": "small",
-      "formula": "phil_money_shifted * (moved_dollar_value - prior_dollar_value)",
+      "formula": "informed_money_value",
       "unit": "uov",
-      "explainer": "The shifted giving, valued as the site values money all shifted: the gain of a dollar at the climate charities over where it would have gone (moved_dollar_value - prior_dollar_value), per year."
+      "explainer": "The spending its guidance changed, valued by the shared rule for spending research or advice changed (informed_money_value: all shifted, at the gain of a dollar at the climate charities over an ordinary one, with the evidence and missing-data steps), per year, before what would have happened anyway and Drawdown's share."
     },
     {
       "id": "tco2e_from_uov",
       "section": "bridges",
-      "label": "Philanthropy, in tonnes of CO₂e (before adjustments)",
+      "label": "Philanthropy, in tonnes of CO₂e (after the evidence and missing-data steps)",
       "format": "number",
       "formula": "uov_bridged / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "unit": "t CO₂e",
@@ -548,11 +556,11 @@
     {
       "id": "phil_downstream",
       "section": "effect",
-      "label": "Philanthropy: the shifted giving's value, in tonnes, per year of the period",
+      "label": "Philanthropy: the giving's value in tonnes before its adjustments (weights for the averages only)",
       "format": "number",
-      "formula": "tco2e_from_uov",
+      "formula": "tco2e_from_uov / (evidence_adj * missing_data_adj)",
       "unit": "t CO₂e",
-      "explainer": "From the bridge: counted once a year, no years counted and no wait (the climate charities' own figures carry theirs)."
+      "explainer": "The bridge's tonnes before the evidence and missing-data steps: counted once a year, no years counted and no wait (the climate charities' own figures carry theirs). Only the outcome-weighted averages read it; the outcome reads the bridge."
     },
     {
       "id": "corp_downstream",
@@ -595,11 +603,11 @@
       "section": "adjustments",
       "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
-      "explainer": "Our judgment, 1 (0.8 to 1.1): there is no study effect to discount here. That nothing Drawdown changed is counted is the missing-data step below; the money, gains and shares are best guesses, the self-chosen testimonials already lowering them. For the funders' branch the gain is the site's shared one and money moved takes no effectiveness step (templates.md, Money moved); for the companies' and investors' branches, advice that points money to worse options is in the gains' low ends.",
+      "explainer": "Our judgment, 0.7 (0.4 to 0.9), as Rethink Priorities' models take for spending research changed (the shared rule for it, normalization.md 2.8): the share of the gain counted that is real. Advice that changes an allocation can point the wrong way or overstate the difference between options, and funders' and companies' own staff check it. That nothing Drawdown changed is counted or followed up is the separate missing-data step below.",
       "value": {
-        "low": 0.8,
-        "best": 1,
-        "high": 1.1
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment"
     },
@@ -790,10 +798,10 @@
     {
       "id": "phil_total_adj",
       "section": "adjustments",
-      "label": "Philanthropy: all adjustments combined",
+      "label": "Philanthropy: adjustments applied after the shared informed-money row",
       "format": "multiple",
-      "formula": "evidence_adj * phil_counterfactual_adj * phil_attribution_share * missing_data_adj",
-      "explainer": ""
+      "formula": "phil_counterfactual_adj * phil_attribution_share",
+      "explainer": "What wouldn't have happened anyway times Drawdown's share; the evidence and missing-data steps are inside informed_money_value."
     },
     {
       "id": "corp_total_adj",
@@ -849,7 +857,7 @@
       "label": "All adjustments combined",
       "format": "multiple",
       "explainer": "Outcome-weighted average of the branches, for reading only.",
-      "formula": "(phil_downstream * phil_total_adj + corp_downstream * corp_total_adj + inv_downstream * inv_total_adj + pub_downstream * pub_total_adj) / (phil_downstream + corp_downstream + inv_downstream + pub_downstream)"
+      "formula": "(tco2e_from_uov * phil_total_adj + corp_downstream * corp_total_adj + inv_downstream * inv_total_adj + pub_downstream * pub_total_adj) / (phil_downstream + corp_downstream + inv_downstream + pub_downstream)"
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -1035,8 +1043,8 @@
       "label": "Tonnes of CO₂e averted",
       "format": "number",
       "unit": "t CO₂e",
-      "formula": "(phil_downstream * phil_total_adj + corp_downstream * corp_total_adj + inv_downstream * inv_total_adj + pub_downstream * pub_total_adj) * (1 + unmodelled_benefits_adj + cover_harm_share)",
-      "explainer": "Tonnes per year of the period: each branch's tonnes times its own adjustments, plus the side effects (each counted through the shared side-effect weight)."
+      "formula": "(tco2e_from_uov * phil_total_adj + corp_downstream * corp_total_adj + inv_downstream * inv_total_adj + pub_downstream * pub_total_adj) * (1 + unmodelled_benefits_adj + cover_harm_share)",
+      "explainer": "Tonnes per year of the period: the funders' giving through the bridge (its adjustments inside), each other branch's tonnes times its own adjustments, plus the side effects (each counted through the shared side-effect weight)."
     },
     {
       "id": "tco2e_per_dollar",
