@@ -7,7 +7,7 @@
   "estimate_basis": "past_average",
   "charity": "innocence-project",
   "owner": "charityevals",
-  "summary": "The Innocence Project is a US legal organisation (31.5 million dollars spent in the year to June 2025) that frees wrongly convicted people, mostly with DNA evidence, campaigns for laws that prevent wrongful convictions and compensate exonerees, and supports the Innocence Network's groups. Its spending over fiscal years 2021-2025 is counted as a past average over what those years achieved: about a third of the credit for its 24 exonerations (the years in prison they would still have served, the deaths prison causes, and compensation counted as a transfer, the exoneree's gain less the taxpayers' cost), shared with pro bono law firms that give about as much as it spends, about a third of a small cut in wrongful imprisonment from the eyewitness, interrogation, discovery and compensation laws it won or defended, and a small share of other innocence groups' exonerations; every branch is discounted for missing data. The result is about 0.0006 years of healthy life per 1,000 dollars, far below the median of the site's global-health models: its casework costs about two million dollars per exoneration, each freeing one person from about a dozen more years in prison; the reforms of the window remove only about 1% of the country's wrongful imprisonment; and the next dollar counts at a third of the average as it holds over three years of spending in reserve. The model's own ranges span more than a thousandfold, so the result is mostly uncertainty; the biggest are how many people in US prisons are innocent, how much the window's reforms cut that, and how long the freed would otherwise have served.",
+  "summary": "The Innocence Project is a US legal organisation (31.5 million dollars spent in the year to June 2025) that frees wrongly convicted people, mostly with DNA evidence, campaigns for laws that prevent wrongful convictions and compensate exonerees, and supports the Innocence Network's groups. Its spending over fiscal years 2021-2025 is counted as a past average over what those years achieved: about a third of the credit for its 24 exonerations (the years in prison they would still have served, the deaths prison causes, and compensation counted as a transfer, the exoneree's gain less the taxpayers' cost), shared with pro bono law firms that give about as much as it spends, about a third of a small cut in wrongful imprisonment from the eyewitness, interrogation, discovery and compensation laws it won or defended, and a small share of other innocence groups' exonerations; every branch is discounted for missing data. The result is about 0.0006 years of healthy life per 1,000 dollars, far below the median of the site's global-health models: its casework costs about two million dollars per exoneration, each freeing one person from about a dozen more years in prison; the reforms of the window remove only about 1% of the country's wrongful imprisonment; and the next dollar counts at a third of the average as it holds over three years of spending in reserve. The model's own ranges span more than a thousandfold, so the result is mostly uncertainty; the biggest are how many people in US prisons are innocent, how much the window's reforms cut that, and the Innocence Project's share of the coalitions behind the reforms.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Innocence Project",
@@ -460,7 +460,12 @@
         "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Bans on police deception in interrogating children have passed since 2021 in Illinois and Oregon first, then several more states including California, a campaign the Innocence Project led with partners; our list, not a published count. Our judgment: states with 25% of the population, from 15% to 40%."
+      "explainer": "Ten states have banned police deception in interrogating children since Illinois and Oregon in 2021 (NPR, October 2024), California among them, a campaign the Innocence Project led with partners. Our judgment: states with 25% of the population, from 15% to 40%.",
+      "source": {
+        "title": "NPR (21 October 2024), police deception bans: ten states have passed laws banning police from lying to children in interrogations since Illinois in 2021",
+        "url": "https://www.npr.org/2024/10/21/nx-s1-4974964/police-deception-bans",
+        "retrieved": "2026-11-14"
+      }
     },
     {
       "id": "pol_int_cause_share",
@@ -493,8 +498,8 @@
       "kind": "judgment",
       "explainer": "Deception (false evidence ploys) is the tactic most tied to false confessions in laboratory and case studies. Our judgment: the bans remove 30%, from 10% to 50%.",
       "source": {
-        "title": "charityevals' judgment (deception and false-evidence ploys in false-confession research, see explainer)",
-        "url": "https://report2024.innocenceproject.org/IP_AnnualReport_2024.pdf",
+        "title": "Kassin et al. (2010), Police-induced confessions: risk factors and recommendations, Law and Human Behavior 34(1): 3-38",
+        "url": "https://doi.org/10.1007/s10979-009-9188-6",
         "retrieved": "2026-11-14"
       }
     },
@@ -680,8 +685,8 @@
       "section": "effect",
       "label": "WELLBYs per person freed (the years they would have served, discounted)",
       "format": "number",
-      "formula": "released_ls_gain_per_year * pv_annuity_due(1, $discount_rate, released_years)",
-      "explainer": "The life satisfaction regained over the years they would have served, discounted at the shared rate.",
+      "formula": "released_ls_gain_per_year * pv_annuity_due(1, $discount_rate, ex_years_inside)",
+      "explainer": "The life satisfaction regained over the years they would have spent inside (capped by survival), discounted at the shared rate.",
       "unit": "WELLBY"
     },
     {
@@ -703,12 +708,21 @@
       "unit": "years"
     },
     {
-      "id": "ex_deaths_per_prison_year",
+      "id": "ex_years_inside",
       "section": "effect",
-      "label": "Deaths averted per person freed (years of life lost, capped by the life left, over the remaining life)",
+      "label": "Years a freed person would have spent inside, capped by the life they had left",
+      "unit": "years",
       "format": "number",
-      "formula": "min(ex_life_years_lost * released_years, max(0, ex_remaining_life - released_years)) / ex_remaining_life",
-      "explainer": "The years of life the further years inside would have cost, never more than the life left after the term, as a share of the remaining life: the share of a death each person freed is spared."
+      "formula": "min(released_years, ex_remaining_life / (1 + ex_life_years_lost))",
+      "explainer": "The years still to serve, unless prison would have ended their life first: each year inside costs ex_life_years_lost of life, so a person with ex_remaining_life years left dies inside after ex_remaining_life / (1 + years lost a year) years."
+    },
+    {
+      "id": "ex_deaths_per_freed",
+      "section": "effect",
+      "label": "Deaths averted per person freed (share of a death)",
+      "format": "number",
+      "formula": "ex_life_years_lost * ex_years_inside / ex_remaining_life",
+      "explainer": "The years of life the years inside would have cost, as a share of the remaining life: the share of a death each person freed is spared. With the survival cap on the years inside it stays below one death."
     },
     {
       "id": "pol_remaining_life",
@@ -758,7 +772,7 @@
       "section": "effect",
       "label": "Deaths averted per person freed, in units of value",
       "format": "number",
-      "formula": "ex_deaths_per_prison_year * pv_annuity_due(1, $discount_rate, released_years) / released_years * ex_death_delay_discount * ex_value_per_death",
+      "formula": "ex_deaths_per_freed * pv_annuity_due(1, $discount_rate, ex_years_inside) / ex_years_inside * ex_death_delay_discount * ex_value_per_death",
       "explainer": "The share of a death spared, spread over the years they would have served and discounted as those years come (and for the wait after each), times the value of a death at their ages.",
       "unit": "UoV"
     },
@@ -793,8 +807,8 @@
       "kind": "judgment",
       "explainer": "Most US death sentences end in a reversal, resentencing, commutation or a death from other causes rather than an execution (Gross et al. 2014: most death-sentenced defendants are removed from death row within decades); by Death Penalty Information Center counts about one in six sentenced since the 1970s has been executed (our reading, not from the paper). Our judgment: 20%, from 5% to 40%. Those who would have been executed would have served about as long before it (the 10 years below) as the others' remaining terms, so their prison-years are counted as for the others.",
       "source": {
-        "title": "Gross, O'Brien, Hu and Kennedy (2014), Rate of false conviction of criminal defendants who are sentenced to death, PNAS",
-        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4034186/",
+        "title": "Death Penalty Information Center, facts and research (outcomes of death sentences); Gross et al. (2014), PNAS",
+        "url": "https://deathpenaltyinfo.org/",
         "retrieved": "2026-11-14"
       }
     },
@@ -1048,8 +1062,8 @@
       "section": "effect",
       "label": "Compensation laws: net value of the extra transfers, a year of spending (units of value, before adjustments)",
       "format": "number",
-      "formula": "pol_comp_dollars_per_year * comp_net_uov_per_award / comp_award * discounted_years / campaign_years",
-      "explainer": "The extra compensation a year times the net value of a dollar of award (the exoneree's gain less the taxpayers' cost), over the discounted years counted, divided among the five years.",
+      "formula": "pol_comp_dollars_per_year * comp_net_uov_per_award / comp_award * pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ (0 - comp_years_until_paid) / campaign_years",
+      "explainer": "The extra compensation a year times the net value of a dollar of award (the exoneree's gain less the taxpayers' cost), over the discounted years counted after the wait for payment, divided among the five years.",
       "unit": "UoV"
     },
     {
@@ -1156,40 +1170,56 @@
       "explainer": "Research and communications support the litigation, policy and social work (Part III line 4d); network support serves the Network branch."
     },
     {
+      "id": "other_network_share",
+      "section": "adjustments",
+      "label": "Share of the other programmes that is network support",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Form 990 for the year to 30 June 2025, Part III line 4d (network support unit)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/320077563",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The network support unit (trainings, coaching for more than 50 groups, the annual conference) within the $8.37M line. Our judgment: 20%, from 10% to 35%."
+    },
+    {
+      "id": "other_casework_of_rest",
+      "section": "adjustments",
+      "label": "Of the rest of the other programmes, the share behind casework rather than reforms",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.4,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Form 990 for the year to 30 June 2025, Part III line 4d (research supports litigation, policy, communications and social work; communications 'to further our public policy and litigation goals')",
+        "url": "https://projects.propublica.org/nonprofits/organizations/320077563",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Research and communications behind the casework (exoneration stories, client data) against those behind the policy work. Our judgment: 40% casework, from 25% to 55%."
+    },
+    {
       "id": "other_casework_share",
       "section": "adjustments",
       "label": "Share of the other programmes that supports casework",
       "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "source": {
-        "title": "Form 990 for the year to 30 June 2025, Part III line 4d (research supports litigation, policy, communications and social work)",
-        "url": "https://projects.propublica.org/nonprofits/organizations/320077563",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "Research, data and communications behind the casework (exoneration stories, client data). Our judgment: 30%, from 15% to 45%."
+      "explainer": "What is left after network support, times the casework share of it.",
+      "formula": "(1 - other_network_share) * other_casework_of_rest"
     },
     {
       "id": "other_reform_share",
       "section": "adjustments",
       "label": "Share of the other programmes that supports the reforms",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.45,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "source": {
-        "title": "Form 990 for the year to 30 June 2025, Part III line 4d (communications 'to further our public policy and litigation goals')",
-        "url": "https://projects.propublica.org/nonprofits/organizations/320077563",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "Communications designed 'to further our public policy and litigation goals' and research for the policy work; the rest is network support. Our judgment: 45%, from 30% to 60%."
+      "explainer": "What is left after network support and casework.",
+      "formula": "(1 - other_network_share) * (1 - other_casework_of_rest)"
     },
     {
       "id": "pro_bono_services",
@@ -1586,8 +1616,8 @@
       "section": "bridges",
       "label": "Reforms: deaths and compensation a year (units of value)",
       "format": "number",
-      "formula": "(pol_death_uov_per_year * (1 + ue_family + ue_earnings + ue_pol_crime) + pol_comp_uov_per_year) * pol_total_adj",
-      "explainer": "The reforms' deaths averted with the side effects, plus the compensation laws' net transfers, adjusted.",
+      "formula": "pol_death_uov_per_year * (1 + ue_family + ue_earnings + ue_pol_crime) * pol_total_adj + pol_comp_uov_per_year * pol_counterfactual_adj * pol_attribution_share * pol_missing_data_adj",
+      "explainer": "The reforms' deaths averted with the side effects, adjusted; plus the compensation laws' net transfers, at the Innocence Project's share and the missing-data step only (the evidence and implementation questions are about lineup and interrogation rules, not payments).",
       "unit": "UoV"
     },
     {
