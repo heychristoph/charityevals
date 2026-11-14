@@ -10,14 +10,19 @@ was delivered. Blood supply, routine medical care and vaccination in a crisis co
 ```
 deaths      (crisis_mortality_rate − baseline_mortality_rate) × share_excess_averted × years_exposed
             × value_per_death (@moral_weights by band × $life_value_multiplier)
-goods       ln(1 + value_delivered_per_person × ppp_factor / baseline_consumption) × $uov_per_ln_consumption
-                                         → uov_bridged → dalys_from_uov
+goods       t × ln(1 + value_delivered_per_person × ppp_factor / (baseline_consumption × t))
+            × $uov_per_ln_consumption    → uov_bridged → dalys_from_uov
 illness     dalys_illness_per_person     → dalys_direct
 × people_reached × total_adj × (1 + unmodelled_benefits_adj) ÷ cost_total
 ```
 
 Only excess deaths count: the crisis's mortality above the population's normal rate, of which a share
 is averted for the people the response reaches, over the months it reaches them.
+
+Goods used up over t years (t ≤ 1: usually `years_exposed`, or months fed) raise consumption only in
+those months, so the gain is t × ln(1 + v ÷ (b × t)), never ln(1 + v ÷ b) spread over a year; an item
+lasting longer is spread over its life, discounted. Goods valued at their cost take no evidence step
+and an attribution of about 0.95 (others' delivery work only); deaths averted keep their own.
 
 ## Shared figures it reads
 

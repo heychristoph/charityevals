@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "The American Red Cross's international services ($48.8 million in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) fund other Red Cross and Red Crescent societies' disaster responses, preparedness and the Measles & Rubella Partnership. By its Form 990's list of grants abroad, the response money went first to the Middle East (Lebanon, Gaza, Syria: 45%) and Europe (Ukraine: 25%), then Africa, South and East Asia and the Americas; a third of the non-measles grants were for preparedness. This model covers the relief and preparedness, about nine-tenths of the spending (the measles visits have a model of their own): the relief's value to the people reached on the site's one log-income scale, a few disaster deaths averted and preparedness as a share of that, built from the research on cash and relief in crises, in years of healthy life per $1,000. The Red Cross publishes no count of people its grants reached, so reach and the counterfactual are wide judgments, the result is mostly uncertainty and the whole model is discounted for missing data. It is far below the site's global-health median because relief goods and cash are valued at cost on the log scale, mostly in middle-income countries, with no large mortality effect.",
+  "summary": "The American Red Cross's international services ($48.8 million in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) fund other Red Cross and Red Crescent societies' disaster responses, preparedness and the Measles & Rubella Partnership. By its Form 990's list of grants abroad, the response money went first to the Middle East (Lebanon, Gaza, Syria: 45%) and Europe (Ukraine: 25%), then Africa, South and East Asia and the Americas; a third of the non-measles grants were for preparedness. This model covers the relief and preparedness, about nine-tenths of the spending (the measles visits have a model of their own): the relief's value to the people reached on the site's one log-income scale, a few disaster deaths averted and preparedness as a share of that, built from the research on cash and relief in crises, in years of healthy life per $1,000. The Red Cross publishes no count of people its grants reached, so reach and the counterfactual are wide judgments, the result is mostly uncertainty and the whole model is discounted for missing data. It is below the site's global-health median because relief goods and cash are valued at cost on the log scale, mostly in middle-income countries, with no large mortality effect.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross International Relief and Development Services (FY2025)",
@@ -562,42 +562,48 @@
       "section": "effect",
       "label": "ln(consumption) gain per person, Lebanon",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @lebanon.ppp_factor_2017 / baseline_lebanon)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @lebanon.ppp_factor_2017 / (baseline_lebanon * years_exposed))",
+      "explainer": "The relief over the months it is used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Lebanon's consumption."
     },
     {
       "id": "ln_gain_ukraine",
       "section": "effect",
       "label": "ln(consumption) gain per person, Ukraine",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @ukraine.ppp_factor_2017 / baseline_ukraine)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @ukraine.ppp_factor_2017 / (baseline_ukraine * years_exposed))",
+      "explainer": "The relief over the months it is used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Ukraine's consumption."
     },
     {
       "id": "ln_gain_mozambique",
       "section": "effect",
       "label": "ln(consumption) gain per person, Mozambique",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @mozambique.ppp_factor_2017 / baseline_mozambique)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @mozambique.ppp_factor_2017 / (baseline_mozambique * years_exposed))",
+      "explainer": "The relief over the months it is used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Mozambique's consumption."
     },
     {
       "id": "ln_gain_bangladesh",
       "section": "effect",
       "label": "ln(consumption) gain per person, Bangladesh",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @bangladesh.ppp_factor_2017 / baseline_bangladesh)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @bangladesh.ppp_factor_2017 / (baseline_bangladesh * years_exposed))",
+      "explainer": "The relief over the months it is used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Bangladesh's consumption."
     },
     {
       "id": "ln_gain_myanmar",
       "section": "effect",
       "label": "ln(consumption) gain per person, Myanmar",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @myanmar.ppp_factor_2017 / baseline_myanmar)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @myanmar.ppp_factor_2017 / (baseline_myanmar * years_exposed))",
+      "explainer": "The relief over the months it is used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Myanmar's consumption."
     },
     {
       "id": "ln_gain_brazil",
       "section": "effect",
       "label": "ln(consumption) gain per person, Brazil",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @brazil.ppp_factor_2017 / baseline_brazil)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @brazil.ppp_factor_2017 / (baseline_brazil * years_exposed))",
+      "explainer": "The relief over the months it is used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Brazil's consumption."
     },
     {
       "id": "ppp_factor",
@@ -647,20 +653,20 @@
       "label": "ln(consumption) gain per person",
       "format": "number",
       "formula": "w_lebanon * ln_gain_lebanon + w_ukraine * ln_gain_ukraine + w_mozambique * ln_gain_mozambique + w_bangladesh * ln_gain_bangladesh + w_myanmar * ln_gain_myanmar + w_brazil * ln_gain_brazil",
-      "explainer": "Each stand-in country's log gain at its own consumption, weighted by its region's share of the response grants."
+      "explainer": "Each stand-in country's log gain at its own consumption, weighted by its region's share of the response grants; each over the months the relief is used (the site's rule for a transfer used within a year: years_exposed × ln(1 + value ÷ the consumption of those months))."
     },
     {
-      "id": "evidence_adj",
+      "id": "deaths_evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "label": "Evidence adjustment, deaths and illness averted",
       "format": "multiple",
       "value": {
-        "low": 0.85,
-        "best": 0.95,
+        "low": 0.7,
+        "best": 0.85,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The relief's value is its goods and cash at their cost, which needs no effect study (the site's cash models take transfers at face value, 1, and the Red Cross's domestic model takes its money and goods at 0.95). Reach follows from the money, and what fails to reach people is in the value-share and delivery rows, so only a little doubt is left here: the small deaths branch and the value spread."
+      "explainer": "For the deaths and illness averted only: the share of excess deaths a response averts rests on studies of other settings and no trial of mixed relief. 0.85 (0.7-1), as World Vision's and CARE's relief deaths. The goods and cash are valued at their cost, which needs no effect study, so they take no evidence step (the site's cash models take transfers at face value)."
     },
     {
       "id": "counterfactual_adj",
@@ -676,9 +682,9 @@
       "explainer": "The Red Cross's grants go into IFRC emergency appeals and national society responses that other donors fund too. UN-coordinated humanitarian appeals were 45.5% funded in 2024 at OCHA's November-December update ($22.58 billion of $49.60 billion, Global Humanitarian Overview, https://humanitarianaction.info) and about 47% by its January 2025 update; the IFRC's own appeals are the closer reference class (the appeals the Red Cross funded were 17-52% covered: Cyclone Remal 17%, Myanmar earthquake 26% after 14 months, Typhoon Yagi 44%, Bangladesh flash floods 52%; its Brazil floods appeal, which the American Red Cross funded, was 23% funded five weeks in, 43% after seven months and 49% after thirteen: MDRBR011 operation updates 1, 3 and 4, https://go-api.ifrc.org/api/downloadfile/90869/MDRBR011ou4), so most money given doesn't displace someone else's; but appeals for sudden-onset disasters in middle-income countries (Brazil) are better funded than the average and national governments respond too. About 0.6, from 0.4 (well-funded responses) to 0.85 (neglected ones)."
     },
     {
-      "id": "attribution_share_shared",
+      "id": "deaths_attribution_share",
       "section": "adjustments",
-      "label": "This charity's share of the resources behind the outcome",
+      "label": "The Red Cross's share of the resources behind the deaths and illness averted",
       "format": "percent",
       "value": {
         "low": 0.7,
@@ -686,15 +692,36 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "The Red Cross's grant against all the resources behind the relief it funds. National society and IFRC staff paid from the grant are the grant's own cost, already taken out of the value in intl_value_share; what the grant doesn't pay for is the national societies' unpaid volunteers (at local wages, low in these countries) and their own and other donors' funds in pooled logistics. No published split: about 0.85, from 0.7 (volunteer-heavy responses) to 0.95."
+      "explainer": "The Red Cross's grant against all the resources behind the deaths a response averts: the national societies' unpaid volunteers (at local wages), their own and other donors' funds in pooled logistics, health services and the water and shelter work of others in the same response. No published split: about 0.85, from 0.7 (volunteer-heavy responses) to 0.95."
+    },
+    {
+      "id": "goods_attribution_share",
+      "section": "adjustments",
+      "label": "The Red Cross's share of the resources behind the goods' value",
+      "format": "percent",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The goods and cash are valued at the share of the grant that reaches people (intl_value_share), so other donors' money in the same pooled appeal pays for its own goods, not these; only the national societies' unpaid volunteers who hand them out (at local wages, low in these countries) are behind this value and not on the grant. 95% (85-100%), as CARE's relief goods."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
+      "format": "percent",
+      "formula": "(deaths_part_dalys_unadjusted * deaths_attribution_share + goods_part_dalys_unadjusted * goods_attribution_share) / (deaths_part_dalys_unadjusted + goods_part_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the two branches (deaths and illness averted; goods delivered), for reading only: each applies its own row."
     },
     {
       "id": "attribution_share",
       "section": "adjustments",
-      "label": "Share of credit used",
+      "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
       "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "explainer": "The outcome-weighted average of the branches, for reading only: the deaths and the goods each apply their own share."
     },
     {
       "id": "implementation_adj",
@@ -793,12 +820,36 @@
       "explainer": "Thin: the Red Cross publishes no count of the people its international grants reached, so reach follows from the money over a judged value per person, and the deaths averted rest on the research on cash and relief in crises (Pega et al. 2015; Richterman et al. 2023; van Daalen et al. 2022), not on a measurement of these responses. So the shared missing-data step applies."
     },
     {
+      "id": "deaths_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined, deaths and illness averted",
+      "format": "multiple",
+      "formula": "deaths_evidence_adj * counterfactual_adj * deaths_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
+      "explainer": "The product of the adjustments to the deaths and illness averted, the wait and the missing-data step included where the model has them."
+    },
+    {
+      "id": "goods_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined, goods delivered",
+      "format": "multiple",
+      "formula": "counterfactual_adj * goods_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
+      "explainer": "The same adjustments for the goods' value, with no evidence step: goods valued at their cost need no effect study."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(deaths_part_dalys_unadjusted * deaths_evidence_adj + goods_part_dalys_unadjusted) / (deaths_part_dalys_unadjusted + goods_part_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the two branches (deaths and illness averted at deaths_evidence_adj; goods at 1), for reading only."
+    },
+    {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "All adjustments combined",
+      "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
-      "explainer": "The product of the adjustments above, the wait and the missing-data step included."
+      "formula": "(deaths_part_dalys_unadjusted * deaths_total_adj + goods_part_dalys_unadjusted * goods_total_adj) / (deaths_part_dalys_unadjusted + goods_part_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the two branches (deaths and illness averted; goods delivered), for reading only: each applies its own total."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -836,12 +887,29 @@
       "explainer": "The national societies' lasting response capacity from the strengthening part of the appeals (5-29% of their budgets) (+), health and water services in some responses beyond the goods valued (+), restoring family links (225 families) and international humanitarian law work (+); against them, funging inside the Red Cross (restricted international gifts may let it move its own unrestricted funds to domestic work, where a dollar does less: about −3%, 0 to −5%) and relief that crowds out local markets (−). About +12% net."
     },
     {
+      "id": "deaths_uov_unadjusted",
+      "section": "bridges",
+      "label": "Deaths averted, in units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * value_per_death",
+      "explainer": "The deaths averted before their adjustments."
+    },
+    {
+      "id": "goods_uov_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered, in units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * ln_gain_per_person * $uov_per_ln_consumption",
+      "explainer": "The goods' value before its adjustments."
+    },
+    {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths averted and goods delivered, in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted and goods delivered, in GiveWell units of value (after each branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
-      "unit": "UoV"
+      "formula": "deaths_uov_unadjusted * deaths_total_adj + goods_uov_unadjusted * goods_total_adj",
+      "unit": "UoV",
+      "explainer": "Deaths averted and goods delivered, each with its own adjustments."
     },
     {
       "id": "dalys_from_uov",
@@ -853,9 +921,41 @@
       "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
+      "id": "deaths_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Deaths averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "deaths_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "goods_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "goods_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "deaths_part_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Deaths and illness averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "deaths_dalys_unadjusted + people_reached * dalys_illness_per_person",
+      "explainer": "The weight of the deaths-and-illness branch in the reading-only averages."
+    },
+    {
+      "id": "goods_part_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "goods_dalys_unadjusted",
+      "explainer": "The weight of the goods branch in the reading-only averages."
+    },
+    {
       "id": "wellbys_bridged",
       "section": "bridges",
-      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years",
       "format": "number",
       "formula": "0",
       "unit": "WELLBYs"
@@ -872,19 +972,20 @@
     {
       "id": "dalys_direct",
       "section": "outcome",
-      "label": "Healthy years counted directly (before adjustments)",
+      "label": "Healthy years counted directly (illness averted, after its adjustments)",
       "format": "number",
-      "formula": "people_reached * dalys_illness_per_person",
-      "unit": "DALYs"
+      "formula": "people_reached * dalys_illness_per_person * deaths_total_adj",
+      "unit": "DALYs",
+      "explainer": "Illness averted, with the deaths averted's adjustments."
     },
     {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
       "unit": "DALYs",
-      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, each already after its own branch's adjustments."
     },
     {
       "id": "dalys_per_dollar",

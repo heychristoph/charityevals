@@ -518,28 +518,32 @@
       "section": "effect",
       "label": "ln gain, United States",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 / baseline_usa)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 / (baseline_usa * years_exposed))",
+      "explainer": "The goods, water and cash over the months they are used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at the United States's consumption."
     },
     {
       "id": "ln_gain_lebanon",
       "section": "effect",
       "label": "ln gain, Lebanon",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @lebanon.ppp_factor_2017 / baseline_lebanon)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @lebanon.ppp_factor_2017 / (baseline_lebanon * years_exposed))",
+      "explainer": "The goods, water and cash over the months they are used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Lebanon's consumption."
     },
     {
       "id": "ln_gain_ukraine",
       "section": "effect",
       "label": "ln gain, Ukraine",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @ukraine.ppp_factor_2017 / baseline_ukraine)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @ukraine.ppp_factor_2017 / (baseline_ukraine * years_exposed))",
+      "explainer": "The goods, water and cash over the months they are used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Ukraine's consumption."
     },
     {
       "id": "ln_gain_myanmar",
       "section": "effect",
       "label": "ln gain, Myanmar",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @myanmar.ppp_factor_2017 / baseline_myanmar)"
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2024 * @myanmar.ppp_factor_2017 / (baseline_myanmar * years_exposed))",
+      "explainer": "The goods, water and cash over the months they are used (years_exposed): years_exposed × ln(1 + value ÷ the consumption of those months), at Myanmar's consumption."
     },
     {
       "id": "ppp_factor",
@@ -562,12 +566,12 @@
       "label": "ln(consumption) gain per person",
       "format": "number",
       "formula": "w_usa * ln_gain_usa + w_lebanon * ln_gain_lebanon + w_ukraine * ln_gain_ukraine + w_myanmar * ln_gain_myanmar",
-      "explainer": "Each stand-in country's log gain at its own consumption, weighted."
+      "explainer": "Each stand-in country's log gain at its own consumption, weighted; each over the months the help is used (the site's rule for a transfer used within a year)."
     },
     {
-      "id": "evidence_adj",
+      "id": "deaths_evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "label": "Evidence adjustment, deaths and illness averted",
       "format": "multiple",
       "value": {
         "low": 0.6,
@@ -575,7 +579,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Goods and cash at cost need no effect study; the deaths and illness averted are judgments anchored on other responses, not measured. Our judgment, 0.8, as for the effects of our model of Americares' health services."
+      "explainer": "For the deaths and illness averted only: they are judgments anchored on other responses, not measured. Our judgment, 0.8 (0.6-1), as for the effects of our model of Americares' health services. The goods, water and cash are valued at their cost (donated goods at local market prices), which needs no effect study, so they take no evidence step."
     },
     {
       "id": "counterfactual_adj",
@@ -702,12 +706,36 @@
       "explainer": "Thin: Americares counts people helped, but the deaths and illness averted and the goods' value per person are our judgments, not measured."
     },
     {
+      "id": "deaths_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined, deaths and illness averted",
+      "format": "multiple",
+      "formula": "deaths_evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
+      "explainer": "The product of the adjustments to the deaths and illness averted, the wait and the missing-data step included where the model has them."
+    },
+    {
+      "id": "goods_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined, goods delivered",
+      "format": "multiple",
+      "formula": "counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
+      "explainer": "The same adjustments for the goods' value, with no evidence step: goods valued at their cost need no effect study."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(deaths_part_dalys_unadjusted * deaths_evidence_adj + goods_part_dalys_unadjusted) / (deaths_part_dalys_unadjusted + goods_part_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the two branches (deaths and illness averted at deaths_evidence_adj; goods at 1), for reading only."
+    },
+    {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "All adjustments combined",
+      "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * wait_discount * missing_data_adj",
-      "explainer": "The product of the adjustments above, the wait and the missing-data step included."
+      "formula": "(deaths_part_dalys_unadjusted * deaths_total_adj + goods_part_dalys_unadjusted * goods_total_adj) / (deaths_part_dalys_unadjusted + goods_part_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the two branches (deaths and illness averted; goods delivered), for reading only: each applies its own total."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -724,12 +752,29 @@
       "side_effect": "added"
     },
     {
+      "id": "deaths_uov_unadjusted",
+      "section": "bridges",
+      "label": "Deaths averted, in units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * value_per_death",
+      "explainer": "The deaths averted before their adjustments."
+    },
+    {
+      "id": "goods_uov_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered, in units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * ln_gain_per_person * $uov_per_ln_consumption",
+      "explainer": "The goods' value before its adjustments."
+    },
+    {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths averted and goods delivered, in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted and goods delivered, in GiveWell units of value (after each branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
-      "unit": "UoV"
+      "formula": "deaths_uov_unadjusted * deaths_total_adj + goods_uov_unadjusted * goods_total_adj",
+      "unit": "UoV",
+      "explainer": "Deaths averted and goods delivered, each with its own adjustments."
     },
     {
       "id": "dalys_from_uov",
@@ -741,9 +786,41 @@
       "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
+      "id": "deaths_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Deaths averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "deaths_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "goods_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "goods_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "deaths_part_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Deaths and illness averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "deaths_dalys_unadjusted + people_reached * dalys_illness_per_person",
+      "explainer": "The weight of the deaths-and-illness branch in the reading-only averages."
+    },
+    {
+      "id": "goods_part_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "goods_dalys_unadjusted",
+      "explainer": "The weight of the goods branch in the reading-only averages."
+    },
+    {
       "id": "wellbys_bridged",
       "section": "bridges",
-      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years",
       "format": "number",
       "formula": "0",
       "unit": "WELLBYs"
@@ -760,19 +837,20 @@
     {
       "id": "dalys_direct",
       "section": "outcome",
-      "label": "Healthy years counted directly (before adjustments)",
+      "label": "Healthy years counted directly (illness averted, after its adjustments)",
       "format": "number",
-      "formula": "people_reached * dalys_illness_per_person",
-      "unit": "DALYs"
+      "formula": "people_reached * dalys_illness_per_person * deaths_total_adj",
+      "unit": "DALYs",
+      "explainer": "Illness averted, with the deaths averted's adjustments."
     },
     {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
       "unit": "DALYs",
-      "explainer": "Every outcome, each in healthy years by its own unit's conversion, times the adjustments."
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, each already after its own branch's adjustments."
     },
     {
       "id": "dalys_per_dollar",
