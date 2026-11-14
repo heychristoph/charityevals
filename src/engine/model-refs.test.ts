@@ -5,12 +5,12 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse, refs } from "./expr";
 import { formulaText } from "./derive";
-import { assumptionValues, buildLibrary, compute, headline, modelResult, pickValue, usedAssumptions } from "./model";
+import { assumptionValues, buildLibrary, compute, headline, modelResult, pickValue, refTargets, usedAssumptions } from "./model";
 import { sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
 import { lookupFor, rootOf, childrenOf } from "./tree";
 import { inv12, keyOf } from "./invariants";
-import { CASH_BENCHMARK, GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY } from "./moved-money";
+import { CASH_BENCHMARK, GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY, priorDollarValue } from "./moved-money";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -162,6 +162,34 @@ describe("model references (#id)", () => {
       expect(errors).toContain("bad.out: unknown cause or area #cause:nowhere");
       expect(errors).toContain("bad.out: no charity on the rankings in #cause:climate");
     });
+
+    it("leaves out what the rankings leave out under $ignore_old_estimates, the next evaluator standing in", () => {
+      const withOld = {
+        ...assumptions,
+        rows: [...assumptions.rows, { id: "ignore_old_estimates", section: "g", label: "old", format: "toggle", value: { low: 0, best: 1, high: 1 }, kind: "judgment", explainer: "x" }],
+        common: { ...assumptions.common, old_estimate_years: 5, estimate_age_as_of: "2026-07-02" },
+      };
+      const two = [...owners, { id: "ev2", name: "Ev2", short: "E2", url: "https://example.org", kind: "evaluator" }];
+      const dated = (id: string, c: string, x: number, published: string, owner = "ev") =>
+        ({ ...ranked(id, c, x), owner, source: { title: id, publisher: owner, url: "https://example.org", retrieved: "2026-11-02", published } });
+      const l = buildLibrary([
+        mine(dest), reader,
+        dated("a1-old", "a1", 9, "2016"), // only an old estimate: the charity drops out
+        dated("a2-new", "a2", 4, "2025"),
+        dated("a3-old", "a3", 100, "2016"), dated("a3-ev2", "a3", 6, "2025", "ev2"), // ev's is old: ev2's stands in
+        ranked("d1-m", "d1", 10),
+      ], withOld, [], charities, two);
+      expect(l.errors).toEqual([]);
+      const r = l.models.get("reader")!;
+      const on = assumptionValues(l.assumptions);
+      expect(compute(l, r, on).out).toBeCloseTo((4 + 6) / 2 + 10);
+      expect(compute(l, r, { ...on, ignore_old_estimates: 0 }).out).toBeCloseTo((9 + 4 + 100) / 3 + 10);
+      // The toggle is one of the reader's sliders, and the stand-in is among the models it reads.
+      expect(usedAssumptions(l, r)).toContain("ignore_old_estimates");
+      expect(refTargets(l, "cause:catastrophic-risk").map((m) => m.id).sort()).toEqual(["a1-old", "a2-new", "a3-ev2", "a3-old"]);
+      // A charity's own figure (`#owner:charity`) keeps its old estimate.
+      expect(modelResult(l, "ev:a1", on)).toBe(9);
+    });
   });
 
   it("resolves references against another library for a model rebuilt on its own (a bulk page)", () => {
@@ -197,11 +225,32 @@ describe("INV-12: money moved is valued one way", () => {
   const edited = meta("edited", [raised, ...shared(["value_global_health", "moved_dollar_value"], true).map((r) => (r.id === "value_global_health" ? { ...r, formula: "#against-malaria-foundation" } : r)), { id: "out", label: "out", formula: "raised * moved_dollar_value" }]);
   const success = meta("success", [raised, ...shared(["value_global_health", "moved_dollar_value"], true), { id: "p", label: "Probability of success", value: 0.6, kind: "judgment", explainer: "Test input." }, { id: "out", label: "out", formula: "raised * p * moved_dollar_value" }]);
   const career = { ...meta("career", [{ id: "careers", label: "Career changes per dollar", value: 0.001, kind: "estimate", explainer: "Test input." }, { id: "out", label: "out", formula: "careers * 50000 * #givedirectly" }]), output: { row: "out", unit: "uov", label: "UoV per $" } };
-  const l = buildLibrary([...destinations, good, own, edited, success, career], realAssumptions, facts, charities, owners);
+  // An animal mover: shifted money against an ordinary animal charity, or (wrongly) against GiveDirectly.
+  const animal = (id: string, prior: { id: string; label: string; formula: string }, out = "raised * moved_dollar_net_value") =>
+    ({ ...meta(id, [raised, ...shared(["value_global_health", "moved_dollar_value"]), prior, ...shared(["new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: out }]), cause: "animal-welfare", beneficiaries: "destinations" });
+  const animalGood = animal("animal-good", priorDollarValue("animal-welfare"));
+  const animalCash = animal("animal-cash", shared(["prior_dollar_value"])[0]);
+  // A local counterfactual off the shared net row; and the gain of money all shifted, which is allowed.
+  const local = meta("local", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * (moved_dollar_value - 0.2 * prior_dollar_value)" }]);
+  const allShifted = meta("all-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * (moved_dollar_value - prior_dollar_value)" }]);
+  const extra = [animalGood, animalCash, local, allShifted];
+  const l = buildLibrary([...destinations, good, own, edited, success, career, ...extra], realAssumptions, facts, charities, owners);
 
-  it("flags a meta model with its own multiple, an edited shared row, its own success chance and a career change outside the method", () => {
+  it("flags a meta model with its own multiple, an edited shared row, its own success chance, no net value and a career change outside the method", () => {
     expect(l.errors).toEqual([]);
-    expect(inv12(l).violations.filter((x) => ["good", "own", "edited", "success", "career"].includes(x.model)).map(keyOf).sort()).toEqual(["career career_change_value", "edited value_global_health formula", "own moved_dollar_value", "success p success"]);
+    expect(inv12(l).violations.filter((x) => ["good", "own", "edited", "success", "career"].includes(x.model)).map(keyOf).sort()).toEqual(["career career_change_value", "edited moved_dollar_net_value", "edited value_global_health formula", "own moved_dollar_value", "success moved_dollar_net_value", "success p success"]);
+  });
+
+  it("compares shifted money with an ordinary charity of the mover's own cause, and reads it only through the shared rows", () => {
+    expect(inv12(l).violations.filter((x) => extra.some((m) => m.id === x.model)).map(keyOf).sort()).toEqual(["animal-cash prior_dollar_value formula", "local moved_dollar_net_value", "local out prior_dollar_value"]);
+    const av = assumptionValues(l.assumptions);
+    const v = compute(l, l.models.get("animal-good")!, av);
+    // An ordinary animal charity stands to the animal charities on the rankings as GiveDirectly to global health's.
+    const ratio = pickValue(l.facts.get("meta.prior_vs_cash")!.value) * modelResult(l, CASH_BENCHMARK, av) / modelResult(l, "cause:global-health", av, "giving-what-we-can");
+    expect(v.prior_dollar_value).toBeCloseTo(ratio * modelResult(l, "cause:animal-welfare", av, "giving-what-we-can"), 12);
+    expect(v.prior_dollar_value).toBeLessThan(0.01 * v[`#${CASH_BENCHMARK}`]);
+    // In global health the rule is the shared row itself.
+    expect(priorDollarValue("global-health")).toBe(MOVED_MONEY_ROWS.prior_dollar_value);
   });
 
   it("values a dollar moved from the destinations' live results", () => {

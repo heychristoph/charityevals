@@ -252,7 +252,7 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
 - Downstream WELLBYs: rename `uov_*` to `wellbys_*`, unit `wellby`. Animals: `sads_*` and the species
   section. Climate (`tco2e`, tonnes of CO₂-equivalent averted): the climate skeleton (normalization.md 2.5).
 
-**Money moved** (shared rows word for word: `python3 scripts/moved-money.py <model> <set> net`):
+**Money moved** (shared rows verbatim: `python3 scripts/moved-money.py <model> <set> net <cause>`):
 
 - `money_moved` = donations recorded × recording (unrecorded giving) × own effect (its donor survey,
   else `@meta.own_effect_share`); never an evaluator's multiplier or effectiveness step.

@@ -233,9 +233,12 @@ describe("invariant checks", () => {
     const output2 = { ...good.output, species: ["shrimp", "chicken"] };
     const mixed = { ...good, id: "mixed", rows: v2024("2024"), output: output2 };
     const mismatched = { ...good, id: "mismatched", rows: v2024("2025"), output: output2 };
-    const l = buildLibrary([base, good, bad, mixed, mismatched], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
+    // A money mover reads its destinations live in units of value; each destination takes the step.
+    const mover = { ...animal, id: "mover", beneficiaries: "destinations", rows: [{ id: "out", label: "out", formula: "2 * #good" }], output: { row: "out", unit: "uov", label: "x" } };
+    const moverAnimals = { ...mover, id: "not-a-mover", beneficiaries: undefined };
+    const l = buildLibrary([base, good, bad, mixed, mismatched, mover, moverAnimals], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
     expect(l.errors).toEqual([]);
-    expect(inv3(l).violations.map(keyOf)).toEqual(["bad ced_shrimp", "mismatched ced_chicken_2024"]);
+    expect(inv3(l).violations.map(keyOf)).toEqual(["bad ced_shrimp", "mismatched ced_chicken_2024", "not-a-mover model"]);
   });
 
   // An evaluator's model: native row `x_cash` (with `expected`), our staff-pay step after it.
@@ -278,6 +281,15 @@ describe("invariant checks", () => {
     const l = buildLibrary([base, bad, animal], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
     expect(l.errors).toEqual([]);
     expect(inv10(l).violations.map(keyOf)).toEqual(["bad $chicken_vs_person independent"]);
+  });
+
+  it("INV-10 expects no shape of a money mover in the sliders its destinations read", () => {
+    // An animal mover whose shifted money's alternative is valued on human outcomes (#base).
+    const mover = { ...base, id: "mover", cause: "animal-welfare", beneficiaries: "destinations", rows: [{ id: "out", label: "out", formula: "#hens - 0.1 * #base" }] };
+    const notMover = { ...mover, id: "not-mover", beneficiaries: undefined };
+    const l = buildLibrary([base, animal, mover, notMover], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, [read(join(root, "facts/aim_sads.json"))]);
+    expect(l.errors).toEqual([]);
+    expect(inv10(l).violations.map(keyOf).filter((k) => k.startsWith("mover") || k.startsWith("not-mover"))).toEqual(["not-mover $chicken_vs_person linear", "not-mover $daly_per_sad linear"]);
   });
 });
 
