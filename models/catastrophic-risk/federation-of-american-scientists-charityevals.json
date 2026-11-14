@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "federation-of-american-scientists",
   "owner": "charityevals",
-  "summary": "The Federation of American Scientists (Washington DC) counts the world's nuclear arsenals in the open through its Nuclear Information Project, has a small AI safety and security policy team, and spends most of its money on making US science policy and government work better: fellows placed in federal agencies, the Day One Project's policy proposals, research teams on climate, government capacity and data, and nine fiscally sponsored projects. This model covers all its programmes in the year to June 2025 ($36.4M spent). At the defaults it averts about 1.2 years of healthy life per $1,000, from 0.06 to 26 on the combined range: 93% of that is the nuclear work (about 2% of the cost), valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), 7% the AI work, and under 1% the science-policy work, valued as better use of US public money at what a dollar is worth to the average American. It is far below the Arms Control Association and the Nuclear Threat Initiative because only about 4% of its spending is on catastrophic risks. The biggest uncertainty is how much a dollar of nuclear work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way) and how much of the research spending is the Nuclear Information Project's. Every branch is discounted for missing data: no outcome of the work is measured.",
+  "summary": "The Federation of American Scientists (Washington DC) counts the world's nuclear arsenals in the open through its Nuclear Information Project, ran a Global Risk Program on AI, nuclear and biological risk, has a small AI safety and security policy team, and spends most of its money on making US science policy and government work better: fellows placed in federal agencies, the Day One Project's policy proposals, research teams on climate, government capacity and data, and nine fiscally sponsored projects. This model covers all its programmes in the year to June 2025 ($36.4M spent). At the defaults it averts about 1.6 years of healthy life per $1,000, from 0.08 to 31 on the combined range: 89% of that is the nuclear work (about 3% of the cost), valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), 8% the AI work, 3% the pandemic work and under 1% the science-policy work, valued as better use of US public money at what a dollar is worth to the average American. It is far below the Arms Control Association and the Nuclear Threat Initiative because only about 6% of its spending is on catastrophic risks. The biggest uncertainty is how much a dollar of nuclear work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way) and how much of the research spending is the Nuclear Information Project's and the Global Risk Program's. Every branch is discounted for missing data: no outcome of the work is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Federation of American Scientists",
@@ -385,8 +385,8 @@
       "section": "effect",
       "label": "AI: share of the cost spent on work against ai risk (research, evaluations, convening, advocacy)",
       "format": "percent",
-      "explainer": "The AI safety and security policy work in the research line (its share of the research staff) and the Day One proposals on catastrophic risks, over all programme spending; overhead is spread alike. FAS's other AI work (AI in government services, data governance) is government capacity, in the gov branch.",
-      "formula": "(research_line * ai_staff_share + dayone_line * dayone_gcr_share) / program_spend"
+      "explainer": "The AI safety and security policy team's share of the research line, the Global Risk Program's AI part (autonomy, cyber, AI generally) and the Day One proposals on catastrophic risks, over all programme spending; overhead is spread alike. FAS's other AI work (AI in government services, data governance) is government capacity, in the gov branch.",
+      "formula": "(research_line * (ai_staff_share + global_risk_share * (1 - gr_nuclear_share - gr_bio_share)) + dayone_line * dayone_gcr_share) / program_spend"
     },
     {
       "id": "ai_staff_share",
@@ -394,7 +394,7 @@
       "label": "AI: share of the research line spent on AI safety and security policy",
       "format": "percent",
       "value": {
-        "low": 0.03,
+        "low": 0.01,
         "best": 0.057,
         "high": 0.1
       },
@@ -406,7 +406,7 @@
         "quote": "Senior Manager, AI Safety and Security Policy",
         "page": "two of about 35 issue-team staff on AI safety and security (Michael Depp; Caroline Siegel Singh, AI and emerging tech)"
       },
-      "explainer": "The 990 doesn't split the research line by issue, so by headcount: of about 35 issue-team staff in the directory (13 climate and environment, about 14 government capacity, federal data and state and local, 6 on nuclear weapons, 2 on AI safety and security), 2 work on AI safety and security policy: 2/35 = 5.7%, from 3% to 10% for a directory read in November 2026 against a year that ended in June 2025 and for pay that differs by seniority."
+      "explainer": "The 990 doesn't split the research line by issue, so by headcount: of about 35 issue-team staff in the directory (13 climate and environment, about 14 government capacity, federal data and state and local, 6 on nuclear weapons, 2 on AI safety and security), 2 work on AI safety and security policy: 2/35 = 5.7%, from 3% to 10% for a directory read in November 2026 against a year that ended in June 2025 and for pay that differs by seniority. Today's two may in part continue the Global Risk Program's AI work of fiscal 2025 (global_risk_share), hence the low end."
     },
     {
       "id": "dayone_gcr_share",
@@ -552,15 +552,8 @@
       "section": "effect",
       "label": "Pandemics: share of the cost spent on work against pandemics risk (research, evaluations, convening, advocacy)",
       "format": "percent",
-      "value": 0,
-      "kind": "observed",
-      "source": {
-        "title": "Federation of American Scientists, staff directory (8 pages)",
-        "url": "https://fas.org/fas-experts/?expert-category=staff",
-        "retrieved": "2026-11-14",
-        "page": "no biosecurity team or staff title in the directory"
-      },
-      "explainer": "0: FAS has no biosecurity programme in fiscal 2025; its work on AI and biological weapons is in the AI branch's misuse share. The template's rows stay for the switched-on check."
+      "explainer": "The Global Risk Program's work on pandemics (its bioengineering strand and its associate director's biosecurity work) over all programme spending; FAS has no other biosecurity programme in fiscal 2025.",
+      "formula": "research_line * global_risk_share * gr_bio_share / program_spend"
     },
     {
       "id": "bio_years_until_effect",
@@ -574,7 +567,7 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Not used: bio_cost_share is 0; the template's range kept for the switched-on check: from the spending to its effect on the risk (an analysis taken up, a debate shifted), about a year, our judgment, 0 to 3, as the nuclear branch; discounted at the shared rate."
+      "explainer": "From the spending to its effect on the risk (a workshop's or a policy sprint's proposal taken up, a debate on AI and biological weapons shifted): about a year, our judgment, 0 to 3, as the nuclear branch; discounted at the shared rate."
     },
     {
       "id": "bio_discounted_years",
@@ -685,8 +678,8 @@
       "section": "effect",
       "label": "Nuclear war: share of the cost spent on work against nuclear war risk (research, evaluations, convening, advocacy)",
       "format": "percent",
-      "explainer": "The Nuclear Information Project's share of the research line over all programme spending; overhead is spread alike. Its work: the Status of World Nuclear Forces, the Nuclear Notebook in the Bulletin of the Atomic Scientists, the world nuclear forces chapter of the SIPRI Yearbook, satellite-imagery analysis of new silos and bases, and advice to governments and the press.",
-      "formula": "research_line * nuclear_staff_share / program_spend"
+      "explainer": "The Nuclear Information Project's share of the research line and the Global Risk Program's nuclear part, over all programme spending; overhead is spread alike. The project's work: the Status of World Nuclear Forces, the Nuclear Notebook in the Bulletin of the Atomic Scientists, the world nuclear forces chapter of the SIPRI Yearbook, satellite-imagery analysis of new silos and bases, and advice to governments and the press.",
+      "formula": "research_line * (nuclear_staff_share + global_risk_share * gr_nuclear_share) / program_spend"
     },
     {
       "id": "nuclear_staff_share",
@@ -706,7 +699,53 @@
         "quote": "provides the public with reliable information about the status and trends of the nuclear weapons arsenals",
         "page": "the project page names five staff (Kristensen, Korda, Knight-Boyle, McDowall, Barnaby); the directory adds Eliana Johns"
       },
-      "explainer": "By headcount, as ai_staff_share: about 5 paid staff of the Nuclear Information Project (six named, one a Scoville fellow paid by the Scoville fund) of about 35 issue-team staff: 14%, from 10% to 22% (the project's own grants, such as Carnegie Corporation's $500,000 over two years from September 2025, https://fas.org/publication/mobile-nuclear-launch-systems/, may pay for more than its share of heads)."
+      "explainer": "By headcount, as ai_staff_share: about 5 paid staff of the Nuclear Information Project (six named, one a Scoville fellow paid by the Scoville fund) of about 35 issue-team staff: 14%, from 10% to 22%. The project's core staff (its director since 2005, its associate director) were the same in fiscal 2025; its own grants may pay for more than its share of heads (Ploughshares' $90,000 in the year, and a later $500,000 two-year grant from Carnegie Corporation, announced in November 2025 and shared with BASIC, https://fas.org/publication/mobile-nuclear-launch-systems/, which falls after fiscal 2025)."
+    },
+    {
+      "id": "global_risk_share",
+      "section": "effect",
+      "label": "Share of the research line spent by the Global Risk Program in fiscal 2025",
+      "format": "percent",
+      "value": {
+        "low": 0.11,
+        "best": 0.15,
+        "high": 0.22
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Federation of American Scientists, FAS Receives $1.5 Million Grant on The Artificial Intelligence / Global Risk Nexus (11 September 2024); Future of Life Institute grant page",
+        "url": "https://fas.org/publication/artificial-intelligence-global-risk/",
+        "retrieved": "2026-11-14",
+        "quote": "FAS Receives $1.5 Million Grant on The Artificial Intelligence / Global Risk Nexus",
+        "page": "18 months from September 2024: workshops, policy sprints and fellows, directed research; nuclear deterrence and security, bioengineering, autonomy and lethality, cyber security; led by Jon Wolfsthal, Director of the Global Risk Program; $1,500,000 on https://futureoflife.org/grant/federation-of-american-scientists-fas/"
+      },
+      "explainer": "The Global Risk Program FAS ran in fiscal 2025, which today's staff directory no longer shows: the Future of Life Institute's $1.5M, 18-month project on AI and global risk from September 2024 (about $0.83M of it in the ten months to June 2025), led by its director Jon Wolfsthal, with Yong-Bee Lim, a biosecurity expert, its associate director from March 2025 (https://fas.org/publication/yong-bee-lim/). About $0.83M of the $5.44M research line: 15%, from 11% to 22% ($0.6M to $1.2M, for the directors' time beyond the grant and for spending that ran slower or faster than the grant's months). Split into the three areas by gr_nuclear_share and gr_bio_share, the rest AI."
+    },
+    {
+      "id": "gr_nuclear_share",
+      "section": "effect",
+      "label": "Global Risk Program: share of its work on nuclear war",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "The project's named strands are nuclear deterrence and security, bioengineering, autonomy and lethality, and cyber security, under a director whose own work is arms control: 40% on AI and nuclear risk (20% to 60%), our judgment from the four strands with the director's field weighting nuclear up."
+    },
+    {
+      "id": "gr_bio_share",
+      "section": "effect",
+      "label": "Global Risk Program: share of its work on pandemics",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "The bioengineering strand and the associate director's biosecurity work from March 2025: 20% (10% to 35%), our judgment, one of four strands with a specialist for the last third of the year. The rest of the program (autonomy, cyber, AI generally) is AI work, in the AI branch."
     },
     {
       "id": "nuclear_years_until_effect",
@@ -1002,7 +1041,7 @@
       "label": "Share of public investment's value lost to inefficiency, advanced economies",
       "format": "percent",
       "formula": "@democracy.public_investment_efficiency_gap_advanced",
-      "explainer": "The site's one figure for how much better public spending in rich countries could do (the IMF's efficiency gap, facts/democracy.json): the room the work can close."
+      "explainer": "The site's one figure for how much better public spending in rich countries could do (the IMF's efficiency gap for public investment, facts/democracy.json): the room the work can close. It is measured on investment and applied here to all the public spending the work touches, programmes and regulation too, for want of a figure for those; gov_gap_closed's wide range covers the difference."
     },
     {
       "id": "gov_gap_closed",
@@ -1193,7 +1232,7 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch has no spending (bio_cost_share is 0). The template's range kept."
+      "explainer": "How far Rethink Priorities' typical small pandemic project applies to the Global Risk Program's bioengineering strand: workshops, policy sprints and directed research on AI and biological risk, a new team with no uptake named for fiscal 2025. 0.7 (0.3 to 1.2), the template's figure for typical policy work, as the AI branch."
     },
     {
       "id": "nuclear_evidence_adj",
@@ -1202,11 +1241,11 @@
       "format": "multiple",
       "value": {
         "low": 0.35,
-        "best": 0.9,
-        "high": 1.3
+        "best": 0.8,
+        "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "How far Rethink Priorities' typical small nuclear project applies to the Nuclear Information Project: open-source counts of every country's warheads that governments, parliaments and the press use (the Washington Post called it \"one of the most widely sourced resources for nuclear warhead counts\", quoted on its page, https://fas.org/initiative/nuclear-information-project/), the SIPRI Yearbook's chapter, satellite analysis that made China's new silo fields public. Above the 0.8 of the Arms Control Association and of Ploughshares' grants for its uptake; its path to the risk is still long (information, not a campaign). 0.9 (0.35 to 1.3), our judgment."
+      "explainer": "How far Rethink Priorities' typical small nuclear project applies to the Nuclear Information Project and the Global Risk Program's nuclear work: open-source counts of every country's warheads that governments, parliaments and the press use (the Washington Post called the project \"one of the most widely sourced resources for nuclear warhead counts\", quoted on its page, https://fas.org/initiative/nuclear-information-project/), the SIPRI Yearbook's chapter, satellite analysis that made China's new silo fields public. Wide uptake, but information rather than a campaign, so neither above nor below the advocacy peers: 0.8 (0.35 to 1.2), our judgment, as the Arms Control Association's and Ploughshares' grants (gr_evidence_adj). That few others build the counts is in nuclear_counterfactual_adj."
     },
     {
       "id": "pol_evidence_adj",
@@ -1255,10 +1294,10 @@
       "value": {
         "low": 0.4,
         "best": 0.7,
-        "high": 0.95
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch has no spending (bio_cost_share is 0). The template's range kept."
+      "explainer": "Others work on AI and biological risk (the Johns Hopkins Center for Health Security, NTI | bio, RAND), but few on the convergence: 0.7 (0.4 to 0.9), our judgment, as the nuclear branch and the Johns Hopkins Center for Health Security's model."
     },
     {
       "id": "nuclear_counterfactual_adj",
@@ -1318,12 +1357,12 @@
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.5,
+        "low": 0.6,
         "best": 0.8,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch has no spending (bio_cost_share is 0). The template's range kept."
+      "explainer": "The program's workshops and sprints draw on outside experts' unpaid time beside the grant-paid staff and fellows: FAS's share 0.8 (0.6 to 1), our judgment, below the nuclear branch's 0.9 for a convening-heavy project."
     },
     {
       "id": "nuclear_attribution_share",
@@ -1336,7 +1375,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "FAS's share of the resources behind the work: its staff and grants are in the cost (Ploughshares' $90,000 in its 2025 990, Schedule I, and Carnegie Corporation's grant included); co-authors at the Bulletin and SIPRI and the satellite-imagery firms whose images it uses add some. 0.9 (0.75 to 1), our judgment, as the Arms Control Association's; Ploughshares' model credits its grants at 0.95, so no dollar's effect counts twice."
+      "explainer": "FAS's share of the resources behind the work: its staff and grants are in the cost (Ploughshares' $90,000 in the year to June 2025, its 990 Schedule I: \"to support analysis the world's nuclear weapons, ongoing research projects, and consistent media outreach\", https://apps.irs.gov/pub/epostcard/990/xml/2026/2026_TEOS_XML_04A.zip, object 202620979349300102); co-authors at the Bulletin and SIPRI and the satellite-imagery firms whose images it uses add some. 0.9 (0.75 to 1), our judgment, as the Arms Control Association's; Ploughshares' model credits its grants at 0.95 for its own dollars, so no dollar's effect counts twice."
     },
     {
       "id": "pol_attribution_share",
@@ -1471,11 +1510,11 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.1,
-        "high": 0.3
+        "best": 0.08,
+        "high": 0.28
       },
       "kind": "judgment",
-      "explainer": "Good beyond what is counted, each part a share of the modelled value (mostly the nuclear branch's): work against a single detonation or a limited nuclear war, which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0), 6%; the public record of every arsenal that teachers, journalists and other groups use, 1%; the climate and energy teams' and fellows' work on clean-energy deployment and permitting, whose emissions cut isn't in the gov branch's value of public spending (a small team beside the nuclear branch's value), 2%; health and safety from the wildfire and heat work beyond its public-spending value, 1%. 10% (0 to 30%) in all, our judgment, as the Arms Control Association's and NTI's 10%.",
+      "explainer": "Good beyond what is counted, each part a share of the modelled value (mostly the nuclear branch's): work against a single detonation or a limited nuclear war, which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0), 6%; the public record of every arsenal that teachers, journalists and other groups use, 1%; health and safety from the wildfire and heat work beyond its public-spending value, 1%; the climate and energy teams' and fellows' work on clean-energy deployment and permitting, whose emissions cut isn't in the gov branch's value, 0.1% (0 to 0.5%: about $2-3M of climate work, some 7% of the cost, at the Clean Air Task Force model's result per dollar, 0.0067 years per $1,000, adds about 0.0005 per $1,000). 8% (0 to 28%) in all, our judgment, as the Arms Control Association's and NTI's 10% less the arms-control parts FAS doesn't do.",
       "side_effect": "added"
     },
     {
