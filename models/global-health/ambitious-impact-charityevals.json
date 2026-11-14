@@ -6,7 +6,7 @@
  "estimate_basis": "past_average",
  "charity": "ambitious-impact",
  "owner": "charityevals",
- "summary": "Ambitious Impact (formerly Charity Entrepreneurship) researches intervention ideas and founds new charities to run the best of them; this model covers all its programmes in the year to March 2025: the nine charities and five effective giving organisations it launched, Founding to Give, its funding circles, grantmaker and research training, and its research, against its own spending of $2.5M (the seed grants it passed on are valued as money for the new charities). At the defaults it averts about 16 years of healthy life per $1,000: each charity founded is credited with the average lifetime fundraising of its charities ($107M raised by 60 so far, times 2.5 for the years to come), 60% of it caused by Ambitious Impact, valued at the figures the rankings give the charities it has launched, institutional funders' grants as all shifted and the rest half new money, each effective giving organisation and Founding to Give company with the donations it is expected to move, at GiveWell's Top Charities; the next dollar at 36% of the past average. It is more than ten times its peers because it creates charities that each go on to raise and spend several times its cost per charity, most of them in global health near the cause's average: it sits above the charities it founds, not among typical global-health programmes. The result moves most with the missing-data discount, where shifted money would otherwise have gone, the discount rate and the next-dollar figure; the projected part of its charities' future fundraising, the giving organisations' donations, the spending its grantmaker training and research changed and its fellows' careers are discounted for missing data.",
+ "summary": "Ambitious Impact (formerly Charity Entrepreneurship) researches intervention ideas and founds new charities to run the best of them; this model covers all its programmes in the year to March 2025: the nine charities and five effective giving organisations it launched, Founding to Give, its funding circles, grantmaker and research training, and its research, against its own spending of $2.5M (the seed grants it passed on are valued as money for the new charities). At the defaults it averts about 15 years of healthy life per $1,000: each charity founded is credited with the average lifetime fundraising of its charities ($107M raised by 60 so far, times 2.5 for the years to come), 60% of it caused by Ambitious Impact, valued at the figures the rankings give the charities it has launched, institutional funders' grants as all shifted and the rest half new money, each effective giving organisation and Founding to Give company with the donations it is expected to move, at GiveWell's Top Charities, less the giving organisations' running costs; the next dollar at 36% of the past average. It is more than ten times its peers because it creates charities that each go on to raise and spend several times its cost per charity, most of them in global health near the cause's average: it sits above the charities it founds, not among typical global-health programmes. The result moves most with the missing-data discount, where shifted money would otherwise have gone, the discount rate and the next-dollar figure; the projected part of its charities' future fundraising, the giving organisations' and companies' donations, the spending its grantmaker training and research changed and its fellows' careers are discounted for missing data.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Ambitious Impact",
@@ -390,7 +390,7 @@
    "label": "Share of the funding circles' grants that its organising caused",
    "format": "percent",
    "formula": "@meta.own_effect_share",
-   "explainer": "The site's shared own-effect share for money a meta charity records without a donor survey of its own (30%, 15% to 45%). The members are established funders who would have granted the money anyway, so it is all shifted. Circle grants to its own charities are credited here and again in their fundraising (at founding_counterfactual_share); the two shares together stay below 100% of the money, and the circles' grant lists aren't published to separate them."
+   "explainer": "The site's shared own-effect share for money a meta charity records without a donor survey of its own (30%, 15% to 45%). The members are established funders who would have granted the money anyway, so it is all shifted. Circle grants to its own charities are credited here and again in their fundraising (at founding_counterfactual_share); the two shares together stay below 100% of the money, and the circles' grant lists aren't published to separate them. Valued at the mix of the charities it founds (shifted_dollar_value): the circles fund its own charities and other high-impact ones in global health, mental health and animal welfare, as its own charities do."
   },
   {
    "id": "egi_moved_per_org",
@@ -403,7 +403,7 @@
     "high": 10000000
    },
    "kind": "judgment",
-   "explainer": "Our judgment. Each is a national platform taking tax-deductible donations for effective charities (Belgium and the Netherlands, France, Italy and others). FarmKind, a giving platform from an earlier cohort, has raised almost $4M for its recommended charities (Ambitious Impact, Our charities); national platforms in smaller markets record less, and the largest established one, Effektiv Spenden in Germany and Switzerland (founded 2019, about €30M a year by 2025, facts/meta.json), is far above a typical one. $2M over its life ($0.5M to $10M), recorded donations before its own effect."
+   "explainer": "Our judgment. Each is a national platform taking tax-deductible donations for effective charities (Belgium and the Netherlands, France, Italy and others). FarmKind, a giving platform from an earlier cohort, has raised almost $4M for its recommended charities (Ambitious Impact, Our charities); national platforms in smaller markets record less, and the largest established one, Effektiv Spenden in Germany and Switzerland (founded 2019; its 2025 transparency page, quoted in facts/meta.json: \"fast 30 Millionen Euro\" a year), is far above a typical one. $2M over its life ($0.5M to $10M), recorded donations before its own effect."
   },
   {
    "id": "egi_success",
@@ -438,6 +438,19 @@
    "explainer": "Organisations × recorded donations × the success step × their own effect on the donations (the site's shared share for a meta charity without its own donor survey, 30%) × the wait (the middle of their giving about six years on, as for the charities' projected money) × the share of their existence the programme caused × the missing-data step."
   },
   {
+   "id": "egi_budget_per_org",
+   "section": "reach",
+   "label": "An effective giving organisation's own spending over its life, success or failure (US$)",
+   "format": "usd",
+   "value": {
+    "low": 150000,
+    "best": 500000,
+    "high": 1500000
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment. A national giving platform run by one or two staff and volunteers spends about $50,000 to $150,000 a year; one that fails closes after about three years (@meta.failure_years_run), one that succeeds runs for a decade or more: $0.5M expected over its life ($0.15M to $1.5M). Paid by donors who would otherwise have given it to effective charities, it is subtracted at where that money would have gone (egi_costs_value)."
+  },
+  {
    "id": "f2g_companies",
    "section": "reach",
    "label": "Companies launched by its Founding to Give programme in the year",
@@ -464,7 +477,7 @@
     "high": 1500000
    },
    "kind": "judgment",
-   "explainer": "Our judgment. Most start-ups fail or never pay their founders out, so the expected value is a small chance of a large exit times the share pledged: $150,000 per company ($15,000 to $1.5M), before discounting. No company had given anything by the end of the year."
+   "explainer": "Our judgment, built from a reference chain: about one start-up in ten reaches an exit or profits that pay its founders well within a decade; such a modest exit leaves two founders a few million dollars between them after dilution (about $3M); and the founders commit to give a large share, of which perhaps half is given (about 50% pledged, 25% to 50% given). 0.1 × $3M × 0.5 ≈ $150,000 per company ($15,000 if exits are rarer and smaller, $1.5M if one company in the cohort becomes a large success, which dominates the mean). Before discounting. No company had given anything by the end of the year."
   },
   {
    "id": "f2g_years_to_giving",
@@ -489,12 +502,20 @@
    "explainer": "The wait discounted at the shared rate."
   },
   {
+   "id": "f2g_missing_data_adj",
+   "section": "reach",
+   "label": "Counted less where the outcome isn't measured for this charity (Founding to Give's donations)",
+   "format": "percent",
+   "formula": "$missing_data_discount",
+   "explainer": "The shared missing-data step (docs/normalization.md 2.12): the companies' donations are a projection by judgment (f2g_donations_per_company); none has given yet."
+  },
+  {
    "id": "f2g_money",
    "section": "reach",
    "label": "Donations its Founding to Give companies will make, caused by it (US$)",
    "format": "usd",
-   "formula": "f2g_companies * f2g_donations_per_company * f2g_wait_discount * founding_counterfactual_share",
-   "explainer": "Companies × expected donations × the discounted wait × the share of their existence the programme caused (the same share as for its charities: it recruits, trains and pairs the founders). Valued, like the giving organisations' money, at GiveWell's Top Charities, half of it counted new by the shared rule."
+   "formula": "f2g_companies * f2g_donations_per_company * f2g_wait_discount * founding_counterfactual_share * f2g_missing_data_adj",
+   "explainer": "Companies × expected donations × the discounted wait × the share of their existence the programme caused (the same share as for its charities: it recruits, trains and pairs the founders) × the missing-data step. Valued, like the giving organisations' money, at GiveWell's Top Charities, half of it counted new by the shared rule."
   },
   {
    "id": "gh_moved_money",
@@ -615,7 +636,7 @@
   },
   {
    "id": "gh_prior_dollar_value",
-   "section": "effect",
+   "section": "moved_money",
    "label": "Value of a dollar where shifted money to global-health charities would otherwise have gone (our judgment: 1× GiveDirectly), units of value",
    "format": "small",
    "formula": "@meta.prior_vs_cash * #givedirectly",
@@ -679,11 +700,19 @@
   },
   {
    "id": "gh_dollar_net_value",
-   "section": "effect",
+   "section": "moved_money",
    "label": "Value of a dollar its giving organisations and companies move, net of where shifted money would have gone, units of value",
    "format": "small",
    "formula": "new_money_share * value_global_health + (1 - new_money_share) * (value_global_health - gh_prior_dollar_value)",
-   "explainer": "The shared net value of a dollar moved, at GiveWell's Top Charities (value_global_health): new money in full, shifted money for its gain."
+   "explainer": "The shared net value of a dollar moved (moved_dollar_net_value's formula) at the shared global-health destination (value_global_health) and its shared prior: new money in full, shifted money for its gain. A second set because this money goes to global health only, while the charities it founds include animal ones."
+  },
+  {
+   "id": "egi_costs_value",
+   "section": "effect",
+   "label": "Value lost to the effective giving organisations' own running costs (units of value)",
+   "format": "number",
+   "formula": "egi_orgs_launched * egi_budget_per_org * projected_wait_discount * founding_counterfactual_share * gh_prior_dollar_value",
+   "explainer": "Their lifetime spending, on the same wait and counterfactual share as their donations, at where that money would otherwise have gone (an ordinary global-health charity)."
   },
   {
    "id": "units_affected_per_year",
@@ -768,7 +797,7 @@
   {
    "id": "founding_side_benefits",
    "section": "effect",
-   "label": "Side benefits of founding charities beyond the money counted, as a share of its value",
+   "label": "Side benefits of its work beyond what the branches count, as a share of its value",
    "format": "percent",
    "value": {
     "low": 0.0,
@@ -782,7 +811,7 @@
   {
    "id": "founding_side_harms",
    "section": "effect",
-   "label": "Side harms of founding charities beyond the money counted, as a share of its value",
+   "label": "Side harms of its work beyond what the branches count, as a share of its value",
    "format": "percent",
    "value": {
     "low": -0.08,
@@ -799,8 +828,8 @@
    "label": "Value of the money it caused to be raised and the spending it changed (units of value)",
    "format": "number",
    "unit": "units of value",
-   "formula": "(raised_money * moved_dollar_net_value + shifted_money * shifted_dollar_value + gh_moved_money * gh_dollar_net_value + informed_money_value) * (1 + founding_side_benefits + founding_side_harms)",
-   "explainer": "The money individual donors and its companies give because of it, net of where shifted money would have gone; the institutional funders' and circles' grants, all shifted, at their gain; the giving organisations' and companies' donations at GiveWell's Top Charities, net; the spending its training and research changed, all shifted, with its evidence and missing-data steps; then the side effects."
+   "formula": "(raised_money * moved_dollar_net_value + shifted_money * shifted_dollar_value + gh_moved_money * gh_dollar_net_value - egi_costs_value + informed_money_value) * (1 + founding_side_benefits + founding_side_harms)",
+   "explainer": "The money individual donors and its companies give because of it, net of where shifted money would have gone; the institutional funders' and circles' grants, all shifted, at their gain; the giving organisations' and companies' donations at GiveWell's Top Charities, net, less the giving organisations' running costs; the spending its training and research changed, all shifted, with its evidence and missing-data steps; then the side effects."
   },
   {
    "id": "research_fellows_trained",
