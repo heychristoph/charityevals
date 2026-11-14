@@ -87,7 +87,7 @@ def missing_data_row(id, section, what="this branch's outcome"):
     return f(id, section, "Counted less where the outcome isn't measured for this charity", "$missing_data_discount",
              f"TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when {what} rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here.", "percent")
 
-def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None):
+def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None, leverage_row=None):
     rows = list(evidence_rows) if evidence_rows else [
         inp("evidence_adj", "adjustments", "Evidence adjustment (internal and external validity), a multiplier", {"low": 0.5, "best": 0.7, "high": 0.9}, "judgment",
             "how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range.", "multiple"),
@@ -104,7 +104,7 @@ def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, im
         rows.append(implementation_row or inp("implementation_adj", "adjustments", "Delivery adjustment (fidelity, compliance, follow-through)", {"low": 0.6, "best": 0.8, "high": 0.95}, "judgment",
             "the share of the reported reach that actually receives the intervention as studied: dose completion, coverage survey vs. reported.", "percent"))
     if leverage:
-        rows.append(inp("leverage_funging_adj", "adjustments", "Leverage and funging", {"low": 0.85, "best": 0.95, "high": 1.05}, "judgment",
+        rows.append(leverage_row or inp("leverage_funging_adj", "adjustments", "Leverage and funging", {"low": 0.85, "best": 0.95, "high": 1.05}, "judgment",
             "below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95.", "multiple"))
     rows += list(extra)
     rows.append(missing_data_row("missing_data_adj", "adjustments"))
@@ -887,6 +887,8 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
           "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed.", "number", "units of value"),
         f("future_dalys_averted", "effect", "Future healthy years kept, every branch (expected, before adjustments)", "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys", None, "number", "DALYs"),
     ] + adj_rows(implementation=False, leverage=True,
+        leverage_row=inp("leverage_funging_adj", "adjustments", "Leverage and funging", {"low": 0.85, "best": 1, "high": 1.05}, "judgment",
+            "1 by default: the next-dollar room factor (`@next_dollar`) already asks whether other funders would cover this work, so a funging cut here counts it twice. Differ from 1 only for a reason the room factor cannot hold: above 1 when the donation visibly pulls in other money (matching, a lab or government co-funding the work), below 1 when the charity redirects restricted gifts inside itself. Name the evidence.", "multiple"),
         evidence_rows=[inp("evidence_adj", "adjustments", "How far the typical project's effect applies to this charity's work", {"low": 0.3, "best": 0.7, "high": 1.2}, "judgment",
             "a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities): above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project.", "multiple")],
         counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the work no one else would have done now", {"low": 0.4, "best": 0.7, "high": 0.95}, "judgment",

@@ -1,6 +1,6 @@
 # Audit: refugees-international-charityevals, round 4 (verification)
 Result: 2.642e-4 uov/$ = 0.132 years of healthy life per 1,000 dollars (combined range 0.0159–1.10); cause median 0.0866 (×1.53). Verdict: pass.
-Model-sha: 6ee446bac7bc0981695c1b5740cbddb9761ec6ceeb9e98e127202ab6128a9b9f
+Model-sha: c92bb3365db5fb2dac9127a3826e1cb0992f58b0abc3fd8e8b20f4b985a2369d
 Scope: verification of the two changes since round 3 (the model diff from commit 881e847 to HEAD): acc_evidence_adj and the beneficiaries. Nothing else changed.
 Mechanical: audit-model's lint shows 0 high / 0 medium / 1 low (the same spread finding, stated in the summary), no new finding; beneficiaries sum to 1.00.
 Previous round:
@@ -14,3 +14,5 @@ No source changed since round 3; none refetched.
 
 Verdict: pass (0 high; 0 medium; 0 low).
 Model-sha: 6ee446bac7bc0981695c1b5740cbddb9761ec6ceeb9e98e127202ab6128a9b9f
+
+Re-stamped (shared rule change, applied mechanically): the shared moved-money rows read each destination at its charity's figure on the rankings (#givewell:<charity>, src/engine/moved-money.ts); no money moved reaches this model's result, which is unchanged.

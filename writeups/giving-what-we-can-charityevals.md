@@ -1,6 +1,6 @@
 ### Summary
 
-Giving What We Can asks people to pledge part of their income to effective charities, recommends where to give and runs a donation platform. Our model of all its work in 2023 and 2024 comes to **<span data-figure="headline" data-model="giving-what-we-can-charityevals">38</span> years of healthy life per $1,000**. Each dollar it spends leads to about nine dollars of giving it caused, valued at what the charities its donors actually chose achieve on this site. The figure moves most with the discount rate, because a pledge pays out over decades, and with how much the next dollar does compared with the past average.
+Giving What We Can asks people to pledge part of their income to effective charities, recommends where to give and runs a donation platform. Our model of all its work in 2023 and 2024 comes to **<span data-figure="headline" data-model="giving-what-we-can-charityevals">54</span> years of healthy life per $1,000**. Each dollar it spends leads to about nine dollars of giving it caused, valued at what the charities its donors actually chose achieve on this site. The figure moves most with the discount rate, because a pledge pays out over decades, and with how much the next dollar does compared with the past average.
 
 ### What the charity does
 
@@ -18,10 +18,10 @@ People give more, and give better, because of Giving What We Can. The model coun
 
 A pledge is valued by the giving it leads to over the pledger's working life. Pledgers who record their giving give $8,491 a year on average. The share still giving falls from 59% in the first year towards a long-term 28%, using the site's shared pledge-persistence figures, which come from its cohort data. A new pledger gives for 35 years, and each future year is discounted at the site's rate. Pledgers also give about 14% more than they record.
 
-A dollar moved is worth what its recipients achieve. Of the giving, 82% went to charities and funds that Giving What We Can's own review rates high-impact. By cause, that was $40.2 million to global health and wellbeing, $9.8 million to animal welfare and $11.5 million to catastrophic risk, plus some to climate and to other effective-giving organisations. Each recipient is read live at its result on this site, under your values:
+A dollar moved is worth what its recipients achieve. Of the giving, 82% went to charities and funds that Giving What We Can's own review rates high-impact. By cause, that was $40.2 million to global health and wellbeing, $9.8 million to animal welfare and $11.5 million to catastrophic risk, plus some to climate and to other effective-giving organisations. Each recipient is read live at the figure the rankings show for it, under your values:
 
-- **Global health funds** that follow GiveWell (GiveWell's own funds, EA Funds' Global Health and Development Fund, its own Global Health and Wellbeing Fund) are valued at GiveWell's top charities. Named charities with a model here are read directly: Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives and StrongMinds. Other global health recipients are valued at the average of these.
-- **Animal welfare** is valued at our model of The Humane League. It is the only animal charity among the top recipients that the site models, and the animal funds are valued at its figure.
+- **Global health funds** that follow GiveWell (GiveWell's own funds, EA Funds' Global Health and Development Fund, its own Global Health and Wellbeing Fund) are valued at GiveWell's top charities. Named charities with a model here are read directly: Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives, Deworm the World (at Evidence Action's figure), Unlimit Health and StrongMinds. Other global health recipients are valued at the average of these.
+- **Animal welfare** is valued at The Humane League's figure on the rankings (ACE's). It is the only animal charity among the top recipients that the site models, and the animal funds are valued at its figure.
 - **Catastrophic risk** recipients (the Long-Term Future Fund, Longview, its own Risks and Resilience Fund) have no model here. They are valued at the site's four catastrophic-risk models, weighted equally.
 - **Climate**, where no model of the work these donors fund is published here, and **other effective-giving organisations** are valued at the average of the rest.
 - **The remaining 18%**, to charities it couldn't place, is valued as an ordinary charity.
@@ -30,7 +30,7 @@ Half the giving it caused is counted as new money. The other half would have gon
 
 ### How the model works
 
-Money moved = new pledges × yearly giving × discounted years of giving × recording × the share it caused, plus the same for Trial Pledges and for other donors' platform giving. That comes to about $34 million over the two years, against $3.9 million of spending. Each dollar moved is valued at its recipients' live results, net of where shifted money would have gone. A 5% side effect is added, our judgment, for giving it inspires but doesn't record, less a 10% norm that may anchor some who would give more. The result is then multiplied by how much the next dollar does compared with the past average: 42%, Giving What We Can's own figure. Money moved is counted, not estimated, so no branch is discounted for missing data.
+Money moved = new pledges × yearly giving × discounted years of giving × recording × the share it caused, plus the same for Trial Pledges and for other donors' platform giving. That comes to about $34 million over the two years, against $3.9 million of spending. Each dollar moved is valued at its recipients' figures on the rankings, net of where shifted money would have gone. A 5% side effect is added, our judgment, for giving it inspires but doesn't record, less a 10% norm that may anchor some who would give more. The result is then multiplied by how much the next dollar does compared with the past average: 42%, Giving What We Can's own figure. Money moved is counted, not estimated, so no branch is discounted for missing data.
 
 ### What drives the result
 
@@ -43,7 +43,7 @@ Money moved = new pledges × yearly giving × discounted years of giving × reco
 
 Its own estimate is a giving multiplier of 6x: $6 of value for effective charities per dollar spent in 2023–2024.
 
-- **What a dollar moved is worth.** It counts dollars to charities that pass its bar as equal. We value each recipient by its own live result, so a dollar to animal welfare counts far less than a dollar to malaria nets under the site's default species weights. We also count only half the money as new.
+- **What a dollar moved is worth.** It counts dollars to charities that pass its bar as equal. We value each recipient by its figure on the rankings, so a dollar to animal welfare counts far less than a dollar to malaria nets under the site's default species weights. We also count only half the money as new.
 - **Charities below its bar.** It counts this giving as zero. We value it as an ordinary charity.
 - **Pledges.** It averages two methods (this period's recorded giving, and new pledges' lifetime giving). We count only the new pledges' lifetime giving, because a pledge added this period is a flow. Its two methods give similar totals ($19.3 million and $21.6 million).
 - **Discounting.** It discounts at 3.5%; we use the site's 4%.
@@ -64,7 +64,7 @@ Its own estimate is a giving multiplier of 6x: $6 of value for effective chariti
 
 ### How this model was checked
 
-Two audit rounds (audits/giving-what-we-can-charityevals/). Round 1 found no high-severity problem. Its fixes widened the next-dollar range up to the organisation's own target, weighted the high-impact share by the money each stream moves, and gave the spending figures the ±$200,000 margin the evaluation states. Round 2 checked those changes and passed.
+Three audit rounds (audits/giving-what-we-can-charityevals/). Round 1 found no high-severity problem. Its fixes widened the next-dollar range up to the organisation's own target, weighted the high-impact share by the money each stream moves, and gave the spending figures the ±$200,000 margin the evaluation states. Round 2 checked those changes and passed. Round 3 checked the move to reading each recipient at its figure on the rankings, and the two recipients now read by their own figures, and passed.
 
 ### Sources
 
