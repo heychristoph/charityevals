@@ -3,7 +3,16 @@
   "name": "The Nature Conservancy (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"world":0.4129,"IND":0.48,"MEX":0.041,"USA":0.0167,"SYC":0.0135,"MHL":0.0135,"ECU":0.0173,"BHS":0.0051},
+  "beneficiaries": {
+    "world": 0.4129,
+    "IND": 0.48,
+    "MEX": 0.041,
+    "USA": 0.0167,
+    "SYC": 0.0135,
+    "MHL": 0.0135,
+    "ECU": 0.0173,
+    "BHS": 0.0051
+  },
   "beneficiaries_note": "Our build: by share of the result at the defaults. PRANA's crop-burning deaths in northwest India (48%); forest and land carbon, power displaced and pandemic risk, spread by world population (41%); adaptation's coastal people in Mexico and Hawai'i (6%, split by judgment); the fisheries rules' fishers in the Seychelles and the Pacific islands (3%, split by judgment); the year's deals' local incomes in Ecuador and The Bahamas (2%, by their people).",
   "template": "conservation",
   "estimate_basis": "past_average",
@@ -3416,6 +3425,19 @@
       "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
     },
     {
+      "id": "methane_share",
+      "section": "bridges",
+      "label": "Share of these tonnes that are methane",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "The share of these tonnes (in CO₂e) that is methane, which the site's climate conversion values by methane's own timing: earlier, shorter warming and the ozone it makes (docs/normalization.md 2.5). Only PRANA's tonnes are methane, about 80% of them (2.7 g of methane and 0.07 g of nitrous oxide a kg of residue burned, at 28 and 265 times CO₂: IPCC 2006 Guidelines, Vol. 4, Table 2.5), and PRANA is about 0.33% of the credited tonnes at the defaults: 0.003 (0.001 to 0.01 across the ranges). A typed share, like fuel_share: the row can't compute it from the branches, since a row the conversion reads may not read the shared sliders those carry (normalization.md 2.5)."
+    },
+    {
       "id": "pain_days_fish",
       "section": "bridges",
       "label": "Wild animals: days of pain spared (before adjustments)",
@@ -3481,7 +3503,7 @@
       "section": "bridges",
       "label": "Climate, in healthy years",
       "format": "number",
-      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
       "unit": "DALYs",
       "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },

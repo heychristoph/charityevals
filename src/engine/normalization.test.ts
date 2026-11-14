@@ -323,8 +323,15 @@ describe("climate conversion", () => {
     const H = heatDeathValue(), AP = airPollutionDeathValue();
     // The value of a life: the life slider in healthy years, over GiveWell's value of a death under five, in units of value.
     const life = (a: Record<string, number>) => (a.daly_per_child_death * a.uov_per_daly) / (fact("moral_weights.uov_per_death_under5") as number);
-    const one = (w: number, a = av, extra = 0) => toCommon(l, "tco2e", a, { air_pollution_weight: w, extra_deaths_per_tco2e: extra }) / (a.deaths_per_tco2e * life(a));
+    const one = (w: number, a = av, extra = 0, methane = 0) => toCommon(l, "tco2e", a, { air_pollution_weight: w, extra_deaths_per_tco2e: extra, methane_share: methane }) / (a.deaths_per_tco2e * life(a));
     const share = av.climate_heat_share, df = (1 + av.discount_rate) ** -av.climate_heat_death_delay;
+    // Methane's tonnes: their own, earlier and shorter warming, and the ozone they make, discounted over methane's lifetime.
+    const best = (k: string) => (fact(`climate.${k}`) as { best: number }).best;
+    const dfm = (a: Record<string, number>) => best("methane_heat_deaths_vs_co2") * (1 + a.discount_rate) ** -best("methane_heat_death_delay");
+    const ozone = (a: Record<string, number>) => best("ozone_deaths_per_tco2e_methane") / (1 + Math.log(1 + a.discount_rate) * best("methane_lifetime_years"));
+    expect(one(0, av, 0, 1)).toBeCloseTo(share * dfm(av) * H + (ozone(av) * AP) / av.deaths_per_tco2e, 9);
+    expect(one(0, av, 0, 0.5)).toBeCloseTo((one(0) + one(0, av, 0, 1)) / 2, 9);
+    expect(one(0, { ...av, discount_rate: 0 }, 0, 1)).toBeCloseTo(share * best("methane_heat_deaths_vs_co2") * H + (best("ozone_deaths_per_tco2e_methane") * AP) / av.deaths_per_tco2e, 9);
     expect(one(1)).toBeCloseTo((1 - share) * AP + share * df * H, 9);
     expect(one(0)).toBeCloseTo(share * df * H, 9);
     expect(one(0, { ...av, discount_rate: 0 })).toBeCloseTo(share * H, 9);
@@ -333,7 +340,7 @@ describe("climate conversion", () => {
     expect(one(0, av, 1e-4) - one(0)).toBeCloseTo((1e-4 * AP) / av.deaths_per_tco2e, 9);
     expect(toCommon(l, "tco2e", av)).toBeNaN();
     // A tonne's deaths count the same healthy years whatever a healthy year is worth.
-    const years = (a: Record<string, number>) => toCommon(l, "tco2e", a, { air_pollution_weight: 1, extra_deaths_per_tco2e: 0 }) / a.uov_per_daly;
+    const years = (a: Record<string, number>) => toCommon(l, "tco2e", a, { air_pollution_weight: 1, extra_deaths_per_tco2e: 0, methane_share: 0.3 }) / a.uov_per_daly;
     expect(years({ ...av, uov_per_daly: 3 })).toBeCloseTo(years(av), 12);
     expect(years({ ...av, daly_per_child_death: av.daly_per_child_death * 1.5 })).toBeCloseTo(1.5 * years(av), 12);
   });
@@ -344,12 +351,13 @@ describe("climate conversion", () => {
       sections: [{ id: "conv", title: "Conversion", kind: "ours" }, { id: "eval", title: "Evaluator" }],
       rows: [{ id: "x", label: "x", value: 2, kind: "observed", explainer: "Test input." }, { id: "out", label: "out", formula: "x" },
         { id: "air_pollution_weight", section: "conv", label: "w", value: 0.5, kind: "judgment", explainer: "Test input." },
-        { id: "extra_deaths_per_tco2e", section: "conv", label: "d", value: 0, kind: "judgment", explainer: "Test input." }],
+        { id: "extra_deaths_per_tco2e", section: "conv", label: "d", value: 0, kind: "judgment", explainer: "Test input." },
+        { id: "methane_share", section: "conv", label: "m", value: 0, kind: "judgment", explainer: "Test input." }],
       output: { row: "out", unit: "tco2e", label: "t CO₂e per $" },
     };
-    const missing = { ...base, id: "missing", rows: [...base.rows.slice(0, 2), base.rows[3]] };
-    const outside = { ...base, id: "outside", rows: [...base.rows.slice(0, 2), { ...base.rows[2], section: "eval" }, base.rows[3]] };
-    const reads = { ...base, id: "reads", rows: [...base.rows.slice(0, 2), { id: "air_pollution_weight", section: "conv", label: "w", formula: "$discount_rate" }, base.rows[3]] };
+    const missing = { ...base, id: "missing", rows: [...base.rows.slice(0, 2), ...base.rows.slice(3)] };
+    const outside = { ...base, id: "outside", rows: [...base.rows.slice(0, 2), { ...base.rows[2], section: "eval" }, ...base.rows.slice(3)] };
+    const reads = { ...base, id: "reads", rows: [...base.rows.slice(0, 2), { id: "air_pollution_weight", section: "conv", label: "w", formula: "$discount_rate" }, ...base.rows.slice(3)] };
     const l = buildLibrary([base, missing, outside, reads], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, walk(join(root, "facts")).map(read));
     expect(l.errors).toEqual(["missing: unit tco2e reads row air_pollution_weight, which the model doesn't define (docs/normalization.md 2.5)"]);
     expect(inv2b(l).violations.map(keyOf).sort()).toEqual(["outside air_pollution_weight section", "reads air_pollution_weight $discount_rate"]);
@@ -365,9 +373,10 @@ describe("climate conversion", () => {
       output: { row: "out", unit: "uov", label: "UoV per $" },
     };
     const bad = { ...base, id: "bad", rows: [...base.rows.slice(0, 1), { id: "out", label: "out", formula: "x * $deaths_per_tco2e" }] };
-    const tonnes = { ...base, id: "tonnes", cause: "climate", rows: [...base.rows, { id: "air_pollution_weight", label: "w", value: 0.3, kind: "judgment", explainer: "Test input." }, { id: "extra_deaths_per_tco2e", label: "d", value: 0, kind: "judgment", explainer: "Test input." }], output: { row: "out", unit: "tco2e", label: "t CO₂e per $" } };
-    const l = buildLibrary([base, bad, tonnes], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    const tonnes = { ...base, id: "tonnes", cause: "climate", rows: [...base.rows, { id: "air_pollution_weight", label: "w", value: 0.3, kind: "judgment", explainer: "Test input." }, { id: "extra_deaths_per_tco2e", label: "d", value: 0, kind: "judgment", explainer: "Test input." }, { id: "methane_share", label: "m", value: 0.5, kind: "judgment", explainer: "Test input." }], output: { row: "out", unit: "tco2e", label: "t CO₂e per $" } };
+    const l = buildLibrary([base, bad, tonnes], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, walk(join(root, "facts")).map(read));
     expect(l.errors).toEqual([]);
+    // Methane's ozone deaths don't scale with the climate rate: proportionality is checked with the methane share at 0.
     expect(inv10(l).violations.map(keyOf)).toEqual(["bad $deaths_per_tco2e independent"]);
   });
 });
