@@ -1,0 +1,46 @@
+# Audit: sierra-club-foundation-charityevals, round 1
+Result: 0.01419 tco2e/$ = 0.005293 years of healthy life per 1,000 dollars (combined range 0.000187–0.150; own ranges joint 0.00117–0.0170); cause median 0.001875 (×2.8). Verdict: pass.
+Model-sha: c001ea294504f0befc177128913f75dfcd88cab598389f473f0bf2373dcf0031
+Scope: the climate half of the Foundation's 2022-2024 grants (Beyond Coal $32.3M / $27.3M / $17.1M, plus 50% of the other programme grants), against the wins of the same years: US coal closings 2022-2024, EPA's 2023 methane rule, EPA's 2024 power-plant and vehicle standards, California's ACC II, and +50% for other climate wins. The other half of the grants is the lands, clean-air and outdoors model. charities/sierra-club-foundation.json `spending` ($87,490,405, 2024) and `lines` ($52,298,150 + $35,192,255) match the 2024 Form 990.
+Mechanical: lint 0/0/0, invariants none, normalization-audit no violations, check.ts all valid, simulation stable (5% 0.22×, 95% 3.86× the best guess).
+Previous round: none (first round).
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | medium | source | facts/climate.json `us_coal_retirement_advocacy_share` (read as `coal_advocacy_share`) | This new shared fact is the 6th-largest swing (0.0026–0.0106) and the base of about four fifths of the tonnes. It has `source: null` and no reference class, only a narrative: "most closings were economic". | The tornado puts it right after the shared sliders and the next-dollar factor. The explainer cites nothing for the split between economics, regulation and advocacy. | Add a source and a reference class. Coglianese, Gerarden & Stock (2020), "The Effects of Fuel Prices, Environmental Regulations, and Other Factors on U.S. Coal Production, 2008-2016", Energy Journal 41(1), find that gas prices relative to coal explain most of the decline (about 92%) and environmental rules a few percent; this anchors the non-advocacy part. Beyond Coal's own count (389 plants retired or committed since 2010) is the upper anchor. State in the explainer how 15% (5% to 35%) follows from these two. Keep the value only if the anchors support it. Earthjustice reads the same row, so the fix reaches both models. | Rests on the anchor; at the ends of the current range the result is 0.0026–0.0106 |
+| 2 | medium | scope | `climate_spend_2022`, `climate_spend_2023` | The 2022 and 2023 returns name a lands programme of their own: Our Wild America, $17,202,850 (2022) and $15,021,864 (2023), Part III line 4b/4c. The model puts it in the pool that the 50% climate split applies to, so half of an explicitly lands programme is charged to climate in those years. The 2024 return has no such line, so the same judgment means different things in different years. | Form 990 2022 (object 202322919349301827) and 2023 (202402829349301810), Part III: "OUR WILD AMERICA - THE GOAL OF THIS PROGRAM IS TO PROTECT, CONSERVE, AND RESTORE PUBLIC AND PRIVATE LANDS". | Add observed rows `our_wild_america_2022` = 17,202,850 and `our_wild_america_2023` = 15,021,864, citing those lines. Set `climate_spend_2022 = beyond_coal_2022 + climate_share_other * (program_expenses_2022 - beyond_coal_2022 - our_wild_america_2022)`, and the same for 2023. Mirror this in the lands model: that programme goes wholly to lands, plus (1 − share) of the rest. Also correct the write-up's "Its Form 990 names one campaign, Beyond Coal" to "Its 2024 Form 990 names one campaign, Beyond Coal (in 2022-2023 also Our Wild America, a lands programme)". | +10% (0.00529 → 0.00582, computed on a scratch copy); the lands model falls by a similar share |
+| 3 | low | source | `program_expenses_2022`, `_2023`, `_2024` (source notes) | Each note lists the same four programme lines, which matches none of the years. 2022 has Beyond Coal, Our Wild America, CGEP and other grants. 2023 has Beyond Coal, NEP, Our Wild America and other grants. 2024 has Beyond Coal, CGEP, NEP and other grants. | The three returns' Part III lines 4a-4d. | List each year's lines as filed, with their amounts. | none |
+| 4 | low | source | facts/sierra_club_foundation.json `share_of_sierra_club_resources` | The 70% is anchored only on narrative and the 50% overall ratio. The Sierra Club's own return gives a closer anchor. Its conservation programme (Part III line 4a) cost $83,901,874 in 2024. The Foundation's grant was $85,639,241, of which CGEP ($15.4M, chapters) and NEP ($8.8M, education) fund other lines. That leaves about $61M of $84M, roughly 73%. This supports 70%. | Sierra Club Form 990 2024 (object 202503169349309600), Part III line 4a ExpenseAmt 83901874; Foundation 2024 Part III. | Add this calculation to the explainer as the anchor. Keep 70% (50% to 90%). | none (setting 50% would give −29%, so the anchor matters) |
+| 5 | low | source | facts/climate.json `us_retiring_coal_twh_per_gw_year`, `us_coal_replacement_tco2_per_mwh`, `us_coal_retirement_years_until_avoided`, `us_coal_retirement_stay_closed_share` | These new coal facts have `source: null`. `us_retiring_coal_twh_per_gw_year` is the 11th-largest swing (0.0036–0.0071). | The replacement explainer already quotes EIA's 2023 table but gives no URL. | `us_retiring_coal_twh_per_gw_year`: cite EIA Electric Power Monthly, Table 6.07.A (coal capacity factor 2022-2024) as the anchor for 35%. `us_coal_replacement_tco2_per_mwh`: set the source to the EIA FAQ URL already used by `us_coal_tco2_per_mwh` (the gas figure, 0.96 lb/kWh). `us_coal_retirement_stay_closed_share`: cite DOE's Federal Power Act 202(c) order for J.H. Campbell (May 2025) and EIA's 2025 note (2.6 GW retired against 8.5 GW planned, already a fact). `us_coal_retirement_years_until_avoided`: cite one utility resource plan or settlement with its order-to-closing lead time. | none |
+| 6 | low | presentation | writeups/sierra-club-foundation-charityevals.md | "How this model was checked" still holds the placeholder AUDIT. | The write-up text. | Replace it with the audit rounds and their outcome once the lands model's audit is in. | none |
+
+Credit shares for wins counted by several models (all within 100%):
+- Coal closings: Sierra Club 40% + Earthjustice 10% = 50% of the 15% advocacy share.
+- 2023 methane rule: EDF 25% + CATF 10% + Earthjustice 8% + Sierra Club 5% = 48%.
+- 2024 power-plant standards: CATF 10% + EDF 10% + Earthjustice 10% + Sierra Club 10% + UCS 3% = 43%.
+- 2024 vehicle standards: EDF 8% + Sierra Club 8% + UCS 6% = 22%.
+- ACC II: UCS 10% + Sierra Club 8% = 18%.
+
+Every model reads the same shared tonnes, counterfactual and delivered share for each win. Only this model multiplies its Sierra Club share by the Foundation's 70%; the remaining 30% stays with the 501(c)(4) and is never credited elsewhere, which is correct.
+
+## Sources checked
+| Row | URL | Status | Note |
+|---|---|---|---|
+| beyond_coal_2022, program_expenses_2022, total_expenses_2022 | IRS 2023_TEOS_XML_10A, object 202322919349301827 | verified | 32,282,148; 97,349,446; 113,448,406; calendar 2022 |
+| beyond_coal_2023, program_expenses_2023, total_expenses_2023 | IRS 2024_TEOS_XML_10A, object 202402829349301810 | verified | 27,344,063; 98,270,166; 113,468,024 |
+| beyond_coal_2024, program_expenses_2024, total_expenses_2024 | IRS 2025_TEOS_XML_09A, object 202502689349300025 | verified | 17,105,894; 87,490,405; 102,142,815; grants 86,925,218 |
+| staff_pay, sierra_club_total_expenses; quotes for coal, pwr, veh, accii, unmodelled | IRS 2025_TEOS_XML_11A, object 202503169349309600 | verified | 106,506,400; 171,800,410; Schedule O quotes present ("389TH COAL PLANT", "HISTORIC ANTI-POLLUTION STANDARDS FROM THE EPA") |
+| @next_dollar.sierra_club_foundation | IRS 2026_TEOS_XML_04A, object 202620919349300112 | verified | Jan-Jun 2025: revenue 31,947,339; expenses 53,130,891; unrestricted net assets 69,562,864; restricted 95,038,324 |
+| @climate.us_coal_retired_gw_2022_2023 | https://www.eia.gov/todayinenergy/detail.php?id=61425 | verified | "After 22.3 GW of U.S. coal-fired electric generating capacity retired over the past two years" |
+| @climate.us_coal_retired_gw_2024 | https://www.eia.gov/todayinenergy/detail.php?id=64604 | verified | "Coal retirements decreased to 4.0 GW last year" (25 February 2025) |
+| @climate.us_coal_retirement_advocacy_share, us_retiring_coal_twh_per_gw_year | none | unsupported (no source) | findings 1 and 5 |
+| @climate.us_oil_gas_methane_rule_voc_deaths_per_year | EPA RIA (2023) | not re-fetched | moved unchanged from Earthjustice's audited model; a tiny effect (about 6.5e-7 deaths per tonne against about 2e-4 heat deaths) |
+
+## Drivers
+1. `$win_years_counted` (shared slider): 0.0011–0.0162.
+2. `$missing_data_discount` (shared slider): 0.0011–0.0106.
+3. `deaths_per_tco2e` (shared estimate): 0.0016–0.0134.
+4. `@next_dollar.sierra_club_foundation` (sourced estimate, checked): 0.0020–0.0102.
+5. `@climate.us_coal_retirement_advocacy_share` (judgment, no reference class): 0.0026–0.0106.
+
+Next come `coal_sierra_club_share` (judgment, anchored on Beyond Coal's count and Earthjustice's 10%) and `scf_share`. The model would improve most from a sourced reference class for advocacy's share of coal closings (finding 1), then the per-year cost split (finding 2).

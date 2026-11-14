@@ -2,14 +2,14 @@
 
 The Sierra Club Foundation is the tax-deductible arm of the Sierra Club. It raises money and passes almost all of it to the Sierra Club for its charitable campaigns; the Sierra Club itself is a 501(c)(4) that also lobbies and backs candidates. We model the Foundation's grants in two parts, each against what it granted for that part in 2022 to 2024:
 
-- **Climate and clean energy:** **<span data-figure="headline" data-model="sierra-club-foundation-charityevals">0.0053</span> years of healthy life per $1,000**, about $70 a tonne of CO₂e averted, mostly from the coal plants that closed.
-- **Lands, clean air and outdoors:** **<span data-figure="headline" data-model="sierra-club-foundation-charityevals-lands-health">0.0019</span> years of healthy life per $1,000**, mostly from EPA's 2024 soot standard.
+- **Climate and clean energy:** **<span data-figure="headline" data-model="sierra-club-foundation-charityevals">0.0058</span> years of healthy life per $1,000**, about $64 a tonne of CO₂e averted, mostly from the coal plants that closed.
+- **Lands, clean air and outdoors:** **<span data-figure="headline" data-model="sierra-club-foundation-charityevals-lands-health">0.0011</span> years of healthy life per $1,000**, mostly from EPA's 2024 soot standard.
 
 Both are low on the site's scale for the same reasons as the other US advocacy groups: each win has many authors, advocacy is only one cause of it, and much of what was won federally is being reversed.
 
 ### What the charity does
 
-In 2024 the Foundation spent $102.1 million (Form 990), $87.5 million of it on programmes; $85.6 million went to the Sierra Club and $1.3 million to other groups. Its Form 990 names one campaign, Beyond Coal ($17.1 million in 2024, down from $32.3 million in 2022). The rest goes to the Sierra Club's chapters, its national education work and other campaigns, without a split, so we judge half of it climate work (gas pipelines and export terminals, clean transport, federal climate rules) and half lands and waters, clean air and water and the outdoors programmes. The Foundation then moved its year end to June; its six-month return for January to June 2025 is left out as a short year.
+In 2024 the Foundation spent $102.1 million (Form 990), $87.5 million of it on programmes; $85.6 million went to the Sierra Club and $1.3 million to other groups. Its Form 990 names Beyond Coal ($17.1 million in 2024, down from $32.3 million in 2022) and, in 2022 and 2023, the Our Wild America lands campaign ($17.2 million and $15.0 million), which goes whole to the lands model. The rest goes to the Sierra Club's chapters, its national education work and other campaigns, without a split, so we judge half of it climate work (gas pipelines and export terminals, clean transport, federal climate rules) and half lands and waters, clean air and water and the outdoors programmes. The Foundation then moved its year end to June; its six-month return for January to June 2025 is left out as a short year.
 
 ### How the impact happens
 
@@ -17,7 +17,7 @@ The Sierra Club's organisers, lawyers and volunteers argue before utility commis
 
 - **US coal plants closed in 2022-2024** (26 gigawatts, EIA). Advocacy is credited with 15% of the closings; most were utilities' economic choices. Beyond Coal, the largest campaign against coal plants, gets 40% of that advocacy and Earthjustice, often its lawyer, 10% in its own model.
 - **EPA's 2023 methane rule, its 2024 power-plant and vehicle standards, and California's Advanced Clean Cars II.** The same tonnes, status and steps as our models of the Environmental Defense Fund, Clean Air Task Force, Earthjustice and the Union of Concerned Scientists. The Sierra Club gets 5%, 10%, 8% and 8% of the advocacy behind them.
-- **EPA's 2024 soot standard**, about 3,000 deaths a year avoided once in effect. The Sierra Club gets 6%.
+- **EPA's 2024 soot standard**, about 3,000 deaths a year avoided once in effect. The Sierra Club gets 4% for its own comments and members; Earthjustice, its lawyer in court, gets 25% in its model.
 - **Inspiring Connections Outdoors**, 5,127 people a year on nature trips, counted as a small gain in life satisfaction.
 
 The Foundation is credited with 70% of the Sierra Club's part: it pays for the charitable campaigns, and the Sierra Club's own money is counted among the other groups' resources.
@@ -43,7 +43,12 @@ Gas pipelines, export terminals and other climate work are a 50% share on top of
 
 ### How this model was checked
 
-AUDIT
+Each model had an independent audit, and both passed with no high findings. What changed after them:
+
+- **Climate:** the Our Wild America lands grants of 2022 and 2023 were taken out of the climate split (+10%), and the shared coal figures got their sources. The advocacy share of closings is now anchored on Coglianese, Gerarden & Stock (2020).
+- **Lands and health:** Our Wild America was counted whole, which raised the cost. The Sierra Club's share of the soot standard was cut from 6% to 4%, since Earthjustice was its lawyer in court. Volunteers' time now counts as others' resources behind the outdoors trips, and the other-work share was re-anchored.
+
+A further check then verified these changes.
 
 ### Sources
 
