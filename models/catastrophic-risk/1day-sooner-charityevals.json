@@ -7,7 +7,7 @@
   "estimate_basis": "past_average",
   "charity": "1day-sooner",
   "owner": "charityevals",
-  "summary": "1Day Sooner (Delaware, working mostly from the US, the UK and five African countries) represents volunteers for human challenge studies and campaigns for faster vaccines and pandemic preparedness. This model of all its 2024 work ($2.4M, its latest Form 990) comes to about 6 years of healthy life per $1,000, from about 0.4 to 87 on the combined range, so the result is mostly uncertainty: most of it is its pandemic work (an FDA preparedness programme, plans for challenge studies in a pandemic, indoor air cleaning) valued as a typical pandemic project's cut in the forecast risk, plus its part in stopping a California bill that would have banned far-UV air cleaners; its hepatitis C challenge-study work (valued by the 1.5 years it says it cut from the Toronto study) and its malaria vaccine campaign (by children vaccinated sooner, net of the health spending it displaces) add about 14%. Every branch is discounted for missing data, and the result moves most with the discount rate and a typical pandemic dollar's effect.",
+  "summary": "1Day Sooner (Delaware, working mostly from the US, the UK and five African countries) represents volunteers for human challenge studies and campaigns for faster vaccines and pandemic preparedness. This model of all its 2024 work ($2.4M, its latest Form 990) comes to about 5 years of healthy life per $1,000, from about 0.4 to 75 on the combined range, so the result is mostly uncertainty: most of it is its pandemic work (an FDA preparedness programme, plans for challenge studies in a pandemic, indoor air cleaning) valued as a typical pandemic project's cut in the forecast risk, plus its part in stopping a California bill that would have banned far-UV air cleaners; its hepatitis C challenge-study work (valued by the 1.5 years it says it cut from the Toronto study) and its malaria vaccine campaign (by children vaccinated sooner, net of what the Gavi money would do elsewhere) add about 23%. Every branch is discounted for missing data, and the result moves most with the discount rate and a typical pandemic dollar's effect.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: 1Day Sooner",
@@ -577,7 +577,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "A challenge study gives early efficacy data, but a vaccine still needs field trials, licensure and purchase; a year saved in one study moves the end only if the study is on the critical path and later steps don't absorb it. The 2024 proposal itself reports delayed start dates at both the Toronto and Oxford studies (hiring, contracting, a protocol Health Canada asked to resubmit). 0.4 (0.1 to 0.8), our judgment.",
+      "explainer": "A challenge study gives early efficacy data, but a vaccine still needs field trials, licensure and purchase; a year saved in one study moves the end only if the study is on the critical path, later steps don't absorb it and the same changes would not have come later anyway (1Day says the rest of the team made no substantial effort on speed, so it was the main driver). The 2024 proposal reports delayed start dates at both the Toronto and Oxford studies (hiring, contracting, a protocol Health Canada asked to resubmit). 0.4 (0.1 to 0.8), our judgment; it holds the would-have-come-anyway question too, so there is no separate counterfactual row.",
       "section": "effect"
     },
     {
@@ -726,37 +726,20 @@
       "section": "effect"
     },
     {
-      "id": "hcv_share_15_49",
-      "label": "Hepatitis C: share of its deaths aged 15 to 49",
-      "format": "percent",
-      "value": {
-        "low": 0.15,
-        "best": 0.25,
-        "high": 0.35
-      },
-      "kind": "judgment",
-      "explainer": "Hepatitis C kills through cirrhosis and liver cancer decades after infection, so mostly at 50 or older; the rest at 15 to 49 (a quarter, 15% to 35%, our judgment from the decades-long course above; no WHO split by age is published for hepatitis C deaths). The over-75s are valued with the 50 to 74 band, the oldest the shared moral weights have.",
-      "section": "effect"
-    },
-    {
       "id": "hcv_value_per_death",
       "label": "Hepatitis C: value of a death averted (units of value)",
       "format": "number",
-      "formula": "(hcv_share_15_49 * @moral_weights.uov_per_death_age_15_49 + (1 - hcv_share_15_49) * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier",
-      "section": "effect"
+      "formula": "(@death_ages.hepatitis_c_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.hepatitis_c_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.hepatitis_c_share_15_49_world * @moral_weights.uov_per_death_age_15_49 + @death_ages.hepatitis_c_share_50plus_world * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier",
+      "section": "effect",
+      "explainer": "Hepatitis C's deaths by age (WHO Global Health Estimates 2023, world: 80% at 50 or older, 19% at 15 to 49), each band at the shared value of a death; the over-75s at the 50 to 74 band, the oldest the shared moral weights have."
     },
     {
       "id": "hcv_morbidity_ratio",
       "label": "Hepatitis C: illness averted, as a share of the deaths' value",
       "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "Hepatitis C's burden is mostly years of life lost; the illness (chronic fatigue, cirrhosis, liver cancer before death) adds a smaller share. 15% (5% to 40%), our judgment, as the share GiveWell adds for malaria illness (9%) and a little above it for a chronic infection.",
-      "section": "effect"
+      "explainer": "Illness as a share of the deaths' value: years lived with disability over years of life lost in hepatitis C's burden (WHO GHE 2023, world: 2.3% of its DALYs are illness), about 2.4%.",
+      "section": "effect",
+      "formula": "@death_ages.hepatitis_c_yld_share_world / (1 - @death_ages.hepatitis_c_yld_share_world)"
     },
     {
       "id": "hcv_uov",
@@ -780,16 +763,16 @@
     },
     {
       "id": "mal_field_children_added",
-      "label": "Malaria vaccines: children fully vaccinated sooner or added because of all advocacy for faster rollout in 2024",
+      "label": "Malaria vaccines: children a year fully vaccinated sooner or added because of all advocacy for faster rollout in 2024",
       "format": "integer",
-      "unit": "children",
+      "unit": "children / year",
       "value": {
-        "low": 200000,
-        "best": 1000000,
-        "high": 5000000
+        "low": 33000,
+        "best": 167000,
+        "high": 833000
       },
       "kind": "judgment",
-      "explainer": "What every group pushing for faster rollout in 2024 (PATH, the Malaria No More and RBM networks, African health ministries and leaders, 1Day Sooner) added to the children vaccinated by 2030, beyond what Gavi and the countries would have done anyway (so the counterfactual is in this row). Gavi's 2026-2030 plan targets 50 million children fully vaccinated for $1.27 billion, higher than 1Day expected, with no sign it was moved by the campaign; the Serum Institute can make 100 million doses a year against plans under 250 million by 2030. 1 million children (200,000 to 5 million), our judgment: 2% of Gavi's target.",
+      "explainer": "What every group pushing for faster rollout in 2024 (PATH, the Malaria No More and RBM networks, African health ministries and leaders, 1Day Sooner) adds to the children vaccinated each year while the faster rollout lasts, beyond what Gavi and the countries would have done anyway (so the field's counterfactual is in this row). Gavi's 2026-2030 plan targets 50 million children (10 million a year), higher than 1Day expected, with no sign it was moved by the campaign; the Serum Institute can make 100 million doses a year against plans under 250 million by 2030. 167,000 a year (33,000 to 833,000), our judgment: about 1.7% of Gavi's yearly target; counted for the shared years a win counts ($win_years_counted).",
       "section": "effect"
     },
     {
@@ -813,17 +796,50 @@
       "section": "effect"
     },
     {
-      "id": "mal_net_value_share",
-      "label": "Malaria vaccines: share of the doses' value not taken from other health spending",
-      "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.4,
-        "high": 0.8
+      "id": "mal_gavi_budget",
+      "section": "effect",
+      "label": "Malaria vaccines: Gavi's 2026-2030 malaria vaccine budget",
+      "format": "usd",
+      "value": 1270000000,
+      "kind": "observed",
+      "source": {
+        "title": "1Day Sooner, Funding Proposal 2025-2026 to Open Philanthropy (lightly redacted public version, shared on the EA Forum 2 July 2025)",
+        "url": "https://docs.google.com/document/d/1tm5QXyFBd0uQrU9NiUlsJaeadyVY7c5cCk34sAe88KA/edit",
+        "page": "note 27 (Malaria Vaccine Deployment)",
+        "quote": "With 50 million children fully vaccinated for $1.27 billion, it is the largest item in the Gavi vaccine budget.",
+        "retrieved": "2026-11-14"
       },
-      "kind": "judgment",
-      "explainer": "Vaccines bought by Gavi and governments are paid for from health budgets that would otherwise buy other vaccines and malaria tools of similar value, so only new money (replenishment pledges raised by the case for malaria vaccines) adds its full value; 1Day's own proposal says the marginal impact of a new technology may be its health impact minus that of the counterfactual use of the funding. 40% (10% to 80%), our judgment.",
-      "section": "effect"
+      "explainer": "Gavi's replenishment plan for 2026-2030, as 1Day's proposal reports it (from Gavi's investment case, figure 7)."
+    },
+    {
+      "id": "mal_gavi_children",
+      "section": "effect",
+      "label": "Malaria vaccines: children that budget fully vaccinates",
+      "format": "integer",
+      "value": 50000000,
+      "kind": "observed",
+      "source": {
+        "title": "1Day Sooner, Funding Proposal 2025-2026 to Open Philanthropy (lightly redacted public version, shared on the EA Forum 2 July 2025)",
+        "url": "https://docs.google.com/document/d/1tm5QXyFBd0uQrU9NiUlsJaeadyVY7c5cCk34sAe88KA/edit",
+        "page": "note 27 (Malaria Vaccine Deployment)",
+        "quote": "With 50 million children fully vaccinated for $1.27 billion, it is the largest item in the Gavi vaccine budget.",
+        "retrieved": "2026-11-14"
+      }
+    },
+    {
+      "id": "mal_cost_per_child",
+      "section": "effect",
+      "label": "Malaria vaccines: cost of fully vaccinating a child",
+      "format": "usd",
+      "formula": "mal_gavi_budget / mal_gavi_children"
+    },
+    {
+      "id": "mal_net_value_share",
+      "label": "Malaria vaccines: share of the doses' value net of the Gavi money they use",
+      "format": "percent",
+      "explainer": "Vaccines bought by Gavi and governments come from money that would otherwise buy other health tools, so each child's value counts net of what that money does elsewhere: the cost of vaccinating a child × GiveWell's value of a dollar of Gavi spending (@givewell_shared.cf_value_gavi, the site's figure for displaced Gavi money, normalization.md 2.20), over the value the child's vaccination brings. About 78% at the defaults.",
+      "section": "effect",
+      "formula": "1 - mal_cost_per_child * @givewell_shared.cf_value_gavi / (mal_deaths_per_child * @moral_weights.uov_per_death_under5 * $life_value_multiplier * (1 + @givewell_common.malaria_morbidity))"
     },
     {
       "id": "mal_years_until_effect",
@@ -832,11 +848,11 @@
       "unit": "years",
       "value": {
         "low": 1,
-        "best": 3,
-        "high": 5
+        "best": 2,
+        "high": 4
       },
       "kind": "judgment",
-      "explainer": "Extra doses go out over 2025-2030, and the vaccine protects children up to about age five: 3 years (1 to 5), our judgment; discounted at the shared rate.",
+      "explainer": "From the spending to the first year's deaths averted: doses given from 2025, protecting children up to about age five: 2 years (1 to 4), our judgment; discounted at the shared rate.",
       "section": "effect"
     },
     {
@@ -844,7 +860,7 @@
       "label": "Malaria vaccines: deaths averted (expected, discounted, before adjustments)",
       "format": "number",
       "unit": "deaths",
-      "formula": "mal_field_children_added * mal_deaths_per_child * mal_net_value_share * (1 + $discount_rate) ^ -mal_years_until_effect",
+      "formula": "mal_field_children_added * mal_deaths_per_child * mal_net_value_share * pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -mal_years_until_effect",
       "section": "effect"
     },
     {
@@ -1076,12 +1092,12 @@
       "label": "Policy win: the win's cut against a typical project's for the same resources",
       "format": "multiple",
       "value": {
-        "low": 0.5,
-        "best": 2,
-        "high": 10
+        "low": 0.4,
+        "best": 1,
+        "high": 5
       },
       "kind": "judgment",
-      "explainer": "A won fight that keeps one promising pandemic defence (far-UV) legal in the largest US state economy beats a typical pandemic project's effect per dollar, but far-UV has little market or government interest and its benefit against pandemics is not yet measured. 2 (0.5 to 10), our judgment.",
+      "explainer": "Reference class: the site's value of far-UVC work against a typical pandemic project, Blueprint Biosecurity's uvc_evidence_adj of 0.8 (0.4 to 1.2). A won, realised defence of an existing market beats research still awaiting results, so rounded up to 1; far-UV has received little market or government interest and its benefit against pandemics is unmeasured (1Day's own proposal), so not more; the upside, a ban that would have spread to other states, is kept in the high end. 1 (0.4 to 5), our judgment.",
       "section": "effect"
     },
     {
@@ -1089,8 +1105,8 @@
       "section": "effect",
       "label": "Policy win: share of the area's yearly risk it removes while in force",
       "format": "percent",
-      "explainer": "Calibrated as the family asks: everyone's resources behind the measure × a typical $1 million's cut in pandemic risk (the catastrophe figure, the larger of the two) × the multiple above, about 0.014% of the yearly pandemic risk while it counts.",
-      "formula": "pol_coalition_spend / 1e6 * @catastrophe.bio_catastrophe_cut_per_million * pol_win_multiple"
+      "explainer": "For reading only: the share of the yearly pandemic deaths the win removes while it counts (everyone's resources × a typical $1 million's cut at both sizes × the multiple), about 0.004%. The branch's rows above compute from the same parts.",
+      "formula": "pol_coalition_spend / 1e6 * pol_win_multiple * bio_deaths_per_million / bio_deaths_per_year"
     },
     {
       "id": "pol_years_until_effect",
@@ -1137,16 +1153,18 @@
       "section": "effect",
       "label": "Policy win: deaths averted (expected, before adjustments)",
       "format": "small",
-      "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_deaths_per_year * pol_discounted_years",
-      "unit": "deaths"
+      "formula": "pol_wins * pol_p_success * pol_coalition_spend / 1e6 * pol_win_multiple * bio_deaths_per_million * pol_discounted_years",
+      "unit": "deaths",
+      "explainer": "Everyone's resources behind the win × a typical $1 million's deaths averted a year in pandemics (both sizes, the COVID-scale one included) × the win's multiple, for the years it counts."
     },
     {
       "id": "pol_future_dalys",
       "section": "effect",
       "label": "Policy win: future healthy years kept (expected, before adjustments)",
       "format": "number",
-      "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
-      "unit": "DALYs"
+      "formula": "pol_wins * pol_p_success * pol_coalition_spend / 1e6 * pol_win_multiple * bio_future_per_million * pol_discounted_years",
+      "unit": "DALYs",
+      "explainer": "The same for the future kept (the extinction-size cut)."
     },
     {
       "id": "fb_cost_share",
@@ -1284,9 +1302,9 @@
       "section": "effect",
       "label": "Deaths averted that are in a COVID-scale pandemic (a part of deaths_averted)",
       "format": "small",
-      "formula": "bio_deaths_averted * bio_covid_scale_share",
+      "formula": "(bio_deaths_averted + pol_deaths_averted) * bio_covid_scale_share",
       "unit": "deaths",
-      "explainer": "A natural or zoonotic pandemic on COVID's scale kills mostly older people, so its deaths are valued at COVID-19's age mix; every other size (a catastrophe that kills a share of the world, extinction) at the world's. A policy or field-building branch pointed at the pandemic area adds its deaths averted × bio_covid_scale_share here. Fixed."
+      "explainer": "The COVID-scale share of the pandemic field work's and the policy win's deaths, valued at COVID's age mix."
     },
     {
       "id": "covid_value_per_death",
@@ -1345,7 +1363,7 @@
       "section": "adjustments",
       "label": "Weight: healthy years from the policy win (before adjustments)",
       "format": "number",
-      "formula": "pol_deaths_averted * value_per_death * dalys_per_death_value + pol_future_dalys",
+      "formula": "pol_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + pol_future_dalys",
       "unit": "DALYs",
       "explainer": "The branch's deaths averted in healthy years (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted), plus its future healthy years kept: the weight its adjustments carry. Fixed."
     },
@@ -1502,7 +1520,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "The chance the bill would have passed and stood without the campaign. 1Day says committee passage looked very likely to legislative staff and the industry lobbyist, the author was the Senate Majority Leader with a supermajority, and other civil-society groups would not act publicly; but it withdrew unexpectedly, for reasons not all known, and a passed limit could have been amended later. 0.5 (0.2 to 0.8), our judgment."
+      "explainer": "The chance the bill would have passed without the campaign. 1Day says committee passage looked very likely to legislative staff and the industry lobbyist, that the author was the Senate Majority Leader with a supermajority, that other civil-society groups would not act publicly and that the bill 'would have likely passed without our intervention'; but it was withdrawn unexpectedly, for reasons not all known. 0.5 (0.2 to 0.8), our judgment."
     },
     {
       "id": "fb_counterfactual_adj",
@@ -1588,25 +1606,12 @@
       "label": "Hepatitis C: trust in the result",
       "format": "multiple",
       "value": {
-        "low": 0.4,
-        "best": 0.7,
-        "high": 1
+        "low": 0.6,
+        "best": 0.85,
+        "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "The 1.5 years is 1Day's own account of a protocol not yet run, 'all else being equal'; protocols change before and during a study, and the design was later resubmitted to Health Canada. 0.7 (0.4 to 1), our judgment, below the pandemic work's 0.8 because the one figure the branch rests on is self-reported and untested."
-    },
-    {
-      "id": "hcv_counterfactual_adj",
-      "section": "adjustments",
-      "label": "Hepatitis C: share of the time saved that would not have been saved anyway",
-      "format": "percent",
-      "value": {
-        "low": 0.5,
-        "best": 0.8,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "1Day says other study team members made no substantial effort to focus on speed, so its proposals were the main driver; some of the changes might still have come later, from the team, its funders or the regulator. 0.8 (0.5 to 1), our judgment."
+      "explainer": "Whether the protocol's 1.5 years holds as written ('all else being equal'): protocols change before and during a study. Whether the time saved reaches the vaccine (the Health Canada resubmission, later delays) is in hcv_carry_share, and the self-report in the missing-data discount. 0.85 (0.6 to 1.1), our judgment."
     },
     {
       "id": "hcv_attribution_share",
@@ -1619,7 +1624,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "The study team at the University Health Network evaluated, approved and carries out the changes, with its own time and funding; 1Day proposed them and built the participants' case. Half (0.3 to 0.8), our judgment."
+      "explainer": "The study team at the University Health Network evaluated, approved and carries out the changes, with its own time and funding; 1Day proposed them and built the participants' case. Half (0.3 to 0.8), our judgment. (Whether the changes would have come anyway is in hcv_carry_share.)"
     },
     {
       "id": "mal_evidence_adj",
@@ -1673,7 +1678,7 @@
       "section": "adjustments",
       "label": "Share of the work no one else would have done now",
       "format": "percent",
-      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj + w_hcv * hcv_evidence_adj * hcv_counterfactual_adj + w_mal * mal_evidence_adj * mal_counterfactual_adj) / (w_total * evidence_adj)",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj + w_hcv * hcv_evidence_adj + w_mal * mal_evidence_adj * mal_counterfactual_adj) / (w_total * evidence_adj)",
       "explainer": "Applied: each branch's own share (<branch>_counterfactual_adj), weighted by the branches' healthy years (w_<branch>) after evidence_adj, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
     },
     {
@@ -1681,7 +1686,7 @@
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share + w_hcv * hcv_evidence_adj * hcv_counterfactual_adj * hcv_attribution_share + w_mal * mal_evidence_adj * mal_counterfactual_adj * mal_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share + w_hcv * hcv_evidence_adj * hcv_attribution_share + w_mal * mal_evidence_adj * mal_counterfactual_adj * mal_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
       "explainer": "Applied: each branch's own share (<branch>_attribution_share), weighted by the branches' healthy years (w_<branch>) after the earlier factors, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
     },
     {
@@ -1711,7 +1716,7 @@
       "label": "Counted less where the outcome isn't measured for this charity",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Every branch is thin (Convention 12): the pandemic and policy work by a typical project's effect, the hepatitis C result on 1Day's own unverified count, the malaria result on a judged number of children. So the shared missing-data discount applies to all."
+      "explainer": "Every branch is thin (Convention 12): the pandemic and policy work by a typical project's effect, the hepatitis C result on 1Day's own unverified count of the time saved, the malaria result on a judged number of children. So the shared missing-data discount applies to all."
     },
     {
       "id": "total_adj",
@@ -1868,7 +1873,7 @@
     {
       "id": "staff_eor",
       "section": "donor",
-      "label": "Staff employed through employers of record abroad (payroll fees, Part IX line 11g)",
+      "label": "Payroll fees through payroll providers and employers of record (Part IX line 11g)",
       "format": "usd",
       "value": 344784,
       "kind": "observed",
@@ -1879,7 +1884,7 @@
         "quote": "PAYROLL FEES: PROGRAM SERVICE EXPENSES 344,084. MANAGEMENT AND GENERAL EXPENSES 700. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 344,784.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Staff outside the US paid through employers of record (Schedule F: 'services as employer of record and contractors for research' in Europe): their pay, counted as staff."
+      "explainer": "Pay and its costs paid through payroll providers and employers of record (Schedule O, line 11g), counted as staff; Schedule F puts $105,947 of spending in Europe, where it uses employers of record."
     },
     {
       "id": "staff_contractors",
@@ -1958,5 +1963,5 @@
     }
   },
   "beneficiaries": "world",
-  "beneficiaries_note": "Our build: most of the result is pandemic risk, which is everyone's, so it is spread by world population; the malaria vaccine branch (sub-Saharan Africa) and hepatitis C (worldwide) are about 14% of it and left in the world figure."
+  "beneficiaries_note": "Our build: most of the result is pandemic risk, which is everyone's, so it is spread by world population; the malaria vaccine branch (sub-Saharan Africa) and hepatitis C (worldwide) are about 23% of it and left in the world figure."
 }
