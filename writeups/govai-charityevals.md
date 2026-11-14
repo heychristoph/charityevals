@@ -26,7 +26,7 @@ The model has three branches.
 
 - **Research and policy engagement**, valued as typical AI safety work. About a fifth of the research is on AI's economic effects and US competitiveness rather than catastrophes; it counts as a share of other benefits, not through the catastrophe chances.
 - **The Code of Practice**, a policy win. We judge that its safety chapter removes 0.1% of the AI catastrophe risk while in force, beyond what the AI Act already requires; most signatories already had safety frameworks. GovAI's director of policy was one of the 9 people who drafted that chapter, but the AI Office, almost 430 written submissions and the companies themselves put in far more: we put everyone's resources behind the chapter at about $20 million, so GovAI's $240,000 is about 1% of them. About half of its part another expert in the seat would have written. This branch gives about a tenth of the result.
-- **Training.** It counts the fellows and scholars who go on to work on AI risk because of it (22%), the years they stay (5), and the training's share of the credit for that work (12.5%, its cost against theirs). It gives about two fifths of the result, the research about half.
+- **Training.** It counts the fellows and scholars who go on to work on AI risk because of it (22%), the years they stay (5), and the training's share of the credit for that work (its cost against theirs, about 12% at the defaults). It gives about two fifths of the result, the research about half.
 
 Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
 

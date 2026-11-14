@@ -1,19 +1,19 @@
 ### Summary
 
-The Institute for AI Policy and Strategy (IAPS) is a think tank in Washington. It researches policy on advanced AI and national security, briefs officials and runs an AI Policy Fellowship. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="institute-for-ai-policy-and-strategy-charityevals">0.9</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain: on the model's own ranges the result runs from about 0.02 to about 17, and wider with the shared assumptions.
+The Institute for AI Policy and Strategy (IAPS) is a think tank in Washington. It researches policy on advanced AI and national security, briefs officials and runs an AI Policy Fellowship. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="institute-for-ai-policy-and-strategy-charityevals">1.2</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain: on the model's own ranges the result runs from about 0.1 to about 5, and wider with the shared assumptions.
 
 ### What the charity does
 
 In 2025 IAPS was a project of Rethink Priorities, its fiscal sponsor. Rethink Priorities' tax return lists it as its own programme, $3.9 million, inside its audited accounts. With its share of the sponsor's central costs (finance, HR, fundraising) it cost about $4.2 million. In 2026 IAPS became its own charity. Our models of Rethink Priorities leave IAPS out, so its money is counted once, here.
 
-- **Research and policy engagement: about 70%.** About 20 researchers in three teams. Frontier Security works on AI-enabled cyber attacks, AI agents, AI security in government and data centre security. Compute Policy works on export controls, chip smuggling and location verification for AI chips. International Strategy works on the US and China. It published 8 major reports in 2025. Its recommendations are reflected in America's AI Action Plan, and two bills on chip security use its research.
+- **Research and policy engagement: about 70%.** About 20 researchers in three teams. Frontier Security works on AI-enabled cyber attacks, AI agents, AI security in government and data centre security. Compute Policy works on export controls, chip smuggling and location verification for AI chips. International Strategy works on the US and China. It published 8 major reports in 2025. Its recommendations are reflected in America's AI Action Plan, and two bills on chip security draw on its research (location verification for chips, a whistleblower programme for export controls).
 - **The AI Policy Fellowship: about 30%.** 28 fellows spent three months on AI policy, chosen from over 5,600 applicants, on stipends of $15,000 to $22,000. The split is our estimate.
 
 ### How the impact happens
 
 AI carries a yearly chance of catastrophe: the site's shared 3% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. You can move the 3% with a slider.
 
-IAPS's research cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model (its chance that a project backfires included). Rethink has two kinds of AI project. Work against misuse cuts the misuse part of the risk, which is most of the deaths in catastrophes the world survives. Other work cuts the misalignment part. We count 15% of IAPS's catastrophe work as misuse work, mainly its cyber research. The cut counts for the years such progress would otherwise have taken to come, each year discounted.
+IAPS's research cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model (its chance that a project backfires included). Rethink has two kinds of AI project. Work against misuse cuts the misuse part of the risk, which is most of the deaths in catastrophes the world survives. Other work cuts the misalignment part. We count 20% of IAPS's catastrophe work as misuse work, mainly its cyber research. The cut counts for the years such progress would otherwise have taken to come, each year discounted.
 
 The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted through the discount rate.
 
@@ -22,7 +22,7 @@ The deaths averted are valued like every death on the site, across the world's a
 The model has two branches.
 
 - **Research and policy engagement**, valued as typical AI safety work. About a fifth of it is about US competitiveness and ordinary national security rather than catastrophes; it counts as a share of other benefits. None of the measures it worked on had become law or rule by the end of 2025, so there is no policy-win branch.
-- **The fellowship.** It counts the fellows who go on to work on AI risk because of it (20%), the years they stay (5), and the fellowship's share of the credit for that work (16%, its cost against theirs).
+- **The fellowship.** It counts the fellows who go on to work on AI risk because of it (20%), the years they stay (5), and the fellowship's share of the credit for that work (its cost against theirs, 16% at the defaults).
 
 The two give about half of the result each. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
 
@@ -40,7 +40,7 @@ At the end of 2025 about two years of spending was set aside for IAPS, and it ha
 
 ### What drives the result
 
-The result is about 60% of GovAI's, the closest peer: IAPS has a smaller share of work aimed at misuse and more race risk. It is far above METR's and Epoch AI's, which put little of their work against misuse.
+The result is about four fifths of GovAI's, the closest peer: the same share of work aimed at misuse, more race risk and a lower next-dollar figure. It is far above METR's and Epoch AI's, which put little of their work against misuse.
 
 ### Biggest uncertainties
 
