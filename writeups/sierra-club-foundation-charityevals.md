@@ -48,7 +48,7 @@ Each model had an independent audit, and both passed with no high findings. What
 - **Climate:** the Our Wild America lands grants of 2022 and 2023 were taken out of the climate split (+10%), and the shared coal figures got their sources. The advocacy share of closings is now anchored on Coglianese, Gerarden & Stock (2020).
 - **Lands and health:** Our Wild America was counted whole, which raised the cost. The Sierra Club's share of the soot standard was cut from 6% to 4%, since Earthjustice was its lawyer in court. Volunteers' time now counts as others' resources behind the outdoors trips, and the other-work share was re-anchored.
 
-A further check then verified these changes.
+A scoped verification of these changes passed for both models.
 
 ### Sources
 
