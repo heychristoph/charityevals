@@ -148,9 +148,11 @@ describe("uncertainty", () => {
     const bm = big.models.get(raw.id)!;
     const bav = assumptionValues(big.assumptions);
     const values = compute(big, bm, bav);
-    const t = performance.now();
+    // CPU time, not wall-clock: other test files and processes share the machine.
+    const t = process.cpuUsage();
     const bu = uncertainty(big, bm, values, bav, "charityevals");
-    const ms = performance.now() - t;
+    const used = process.cpuUsage(t);
+    const ms = (used.user + used.system) / 1000;
     console.log(`uncertainty: ${ms.toFixed(0)} ms over ${bm.rows.length} rows, ${bu.drivers.length} drivers`);
     expect(bu.drivers.length).toBeGreaterThan(10);
     expect(ms).toBeLessThan(1000);
