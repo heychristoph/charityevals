@@ -42,11 +42,12 @@ The implementation pilots follow the same chain at UK scale:
 - **Timing:** brought forward 3 years, after a 5-year wait.
 - **Adjustments:** trust 0.6, and BHF's share of the resources behind the piloting 60%. As for research, credit is for the piloting, not for the NHS's later cost of delivery.
 
-The policy branch follows the government's own impact assessment of the law:
+The policy branch follows the government's own impact assessment of the law. Its figures are the site's shared tobacco figures, the same as in our Cancer Research UK model:
 
 - **Effect:** 8 percentage points of each covered cohort kept from smoking. The assessment's central scenario says 9.2.
 - **Health gain:** 3 healthy years lost per young smoker, arriving about 40 years later and discounted.
-- **Credit:** a fifth of the whole campaign took place this year, and BHF had a twentieth of the resources behind the law.
+- **Side effects:** less second-hand smoke (9% more), less the harm of those who vape instead (3%).
+- **Credit:** a fifth of the whole campaign took place this year. Campaigning groups had 40% of the resources behind the law, and BHF an eighth of theirs: a twentieth in all.
 - **Years counted:** the site's shared years a won reform counts.
 
 **Deaths by age.** The DALYs in every branch are mostly years lost to deaths, and these deaths are mostly at old ages. As everywhere on the site, each DALY is split into its illness part and the deaths behind the rest. Each death is valued at the site's value of a death by age, using GBD's age split: two thirds of the world's cardiovascular deaths come at 70 or older, and four in five of the UK's. So the value-of-a-life setting moves this model, and each DALY counts about 0.6 to 0.75 of a healthy year.
@@ -63,7 +64,7 @@ The result divides spending by what past work of the kind achieved, so it is a p
 - **BHF's share of the field:** 0.3% to 0.8%.
 - **The discount rate:** a 17-year wait makes the result sensitive to it.
 
-Research is about 87% of the result, policy about 9% and the pilots about 4%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
+Research is about 86% of the result, policy about 9% and the pilots about 4%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
 
 ### Biggest uncertainties
 
@@ -76,7 +77,7 @@ Research is about 87% of the result, policy about 9% and the pilots about 4%. Th
 
 - Research workforce and infrastructure that later research uses (in a small unmodelled share).
 - Economic gains from research (not health).
-- The Act's vaping provisions and second-hand smoke.
+- The Act's limits on youth vaping.
 - BHF's other policy work, such as the cardiovascular framework in England, survival funding in Scotland and blood-pressure work in Wales. These are in the policy share's cost and get a small named share (about 2%) of the unmodelled benefits, not a chain of their own.
 
 ### How this model was checked

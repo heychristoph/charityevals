@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "american-cancer-society",
  "owner": "charityevals",
- "summary": "The American Cancer Society funds cancer research ($193m in the year to March 2026: 934 active grants at 219 institutions and its own population and statistics research), campaigns through its advocacy affiliate ACS CAN ($55m: tobacco taxes, insurance coverage of screening and testing, cancer-research budgets), and promotes screening and prevention (about 45% of its $426m patient-support line, a judgment). Research is valued as ACS's share (about 0.25%, drug companies' research included) of the world cancer burden a year of the field's research averts sooner; advocacy as ACS CAN's share of the US cancer and smoking burden the year's policy wins avert; screening as ACS's share of the year's gain in US screening; the deaths inside every branch's DALYs are valued by age. The result, about 0.0033 years of healthy life per $1,000, is far below the site's global-health median because research results arrive after about 15 years and are shared with a field spending about $70bn a year, policy and screening gains are shared with many groups and fall mostly on people over 50, and a past average counts at the next dollar's share (46%); all three branches are discounted for missing data, since ACS measures no health outcome of its own spending. It is dominated by judgment (the share of the US cancer burden the year's wins avert, the share of the burden a year of research averts, ACS's shares of the credit), so the result is mostly uncertainty; Hope Lodge, rides to treatment and the helpline are the separate patient-services model.",
+ "summary": "The American Cancer Society funds cancer research ($193m in the year to March 2026: 934 active grants at 219 institutions and its own population and statistics research), campaigns through its advocacy affiliate ACS CAN ($55m: tobacco taxes, insurance coverage of screening and testing, cancer-research budgets), and promotes screening and prevention (about 45% of its $426m patient-support line, a judgment). Research is valued as ACS's share (about 0.25%, drug companies' research included) of the world cancer burden a year of the field's research averts sooner; tobacco advocacy as ACS CAN's share of the US smoking burden a typical year's US tobacco wins avert (the site's shared tobacco figures), coverage advocacy as its share of the US cancer burden the year's coverage and budget wins avert; screening as ACS's share of the year's gain in US screening; the deaths inside every branch's DALYs are valued by age. The result, about 0.006 years of healthy life per $1,000, is far below the site's global-health median because research results arrive after about 15 years and are shared with a field spending about $70bn a year, policy and screening gains are shared with many groups and fall mostly on people over 50, and a past average counts at the next dollar's share (46%); all three branches are discounted for missing data, since ACS measures no health outcome of its own spending. It is dominated by judgment (the share of the burden the year's policy wins avert, the share of the burden a year of research averts, ACS's shares of the credit), so the result is mostly uncertainty; Hope Lodge, rides to treatment and the helpline are the separate patient-services model.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: American Cancer Society: research, advocacy and screening promotion (charityevals, 2025-26)",
@@ -254,6 +254,15 @@
    "unit": "DALYs / year"
   },
   {
+   "id": "tob_smoking_dalys",
+   "section": "reach",
+   "label": "Tobacco advocacy: smoking DALYs a year, United States (2023)",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "@tobacco.smoking_dalys_usa",
+   "explainer": "The burden ACS CAN's tobacco work (state tax rises, smoke-free and flavour rules) works on: all DALYs GBD attributes to smoking, cancer, heart and lung disease together (shared, facts: tobacco)."
+  },
+  {
    "id": "share_burden_averted_per_research_year",
    "section": "effect",
    "label": "Share of the burden the advances from one year of the field's research avert each year once in use",
@@ -444,12 +453,12 @@
    "label": "Advocacy: people in the United States",
    "format": "integer",
    "formula": "@united_states.population_2024",
-   "explainer": "ACS CAN works at federal, state and local level; its wins are spread over the US population (a state's tax covers its share of it, which adv_share_burden_averted allows for)."
+   "explainer": "ACS CAN works at federal, state and local level; its coverage and budget wins are spread over the US population (a state's law covers its share of it, which adv_share_burden_averted allows for)."
   },
   {
    "id": "adv_cancer_dalys_per_person",
    "section": "effect",
-   "label": "Advocacy: cancer DALYs per person a year, United States",
+   "label": "Coverage advocacy: cancer DALYs per person a year, United States",
    "format": "small",
    "formula": "usa_cancer_dalys / adv_people_affected_per_year",
    "explainer": "WHO GHE 2023."
@@ -457,41 +466,28 @@
   {
    "id": "adv_share_burden_averted",
    "section": "effect",
-   "label": "Advocacy: share of US cancer DALYs the year's policy wins avert once in full effect",
+   "label": "Coverage advocacy: share of US cancer DALYs the year's coverage and budget wins avert once in full effect",
    "format": "percent",
    "value": {
-    "low": 0.0002,
-    "best": 0.001,
-    "high": 0.004
+    "low": 0.0001,
+    "best": 0.0005,
+    "high": 0.002
    },
    "kind": "judgment",
-   "explainer": "ACS CAN's wins in a year are a handful of state tobacco-tax rises (ACS's impact page credits a $2-per-pack rise with a projected 14.3% fall in youth smoking, and its advocacy with 25.6 million lives affected) and smoke-free rules, coverage laws (23 states had biomarker-testing coverage laws by March 2026, ACS impact page), and federal budget and coverage protections. Worked out for tobacco: a $1 rise on an $8 pack cuts smoking about 5% (price elasticity about -0.4); one or two states' rises cover a few percent of Americans, so about 0.15% less smoking nationally, and smoking causes about 30% of US cancer deaths: 0.05% of the cancer burden. Coverage of screening follow-up and biomarker testing in a few more states and protected federal funding about as much again. 0.1%, 0.02% to 0.4%."
-  },
-  {
-   "id": "adv_noncancer_ratio",
-   "section": "effect",
-   "label": "Advocacy: non-cancer burden averted, as a share of the cancer burden averted",
-   "format": "percent",
-   "value": {
-    "low": 0.5,
-    "best": 0.9,
-    "high": 1.3
-   },
-   "kind": "judgment",
-   "explainer": "Tobacco taxes and smoke-free laws also avert heart and lung disease: smoking's US deaths are about a third cancer, so tobacco wins avert about twice their cancer burden again; tobacco is about half of the cancer burden the wins avert (adv_share_burden_averted's worked example), so about 0.9 times as much again overall, 0.5 to 1.3. Valued like the cancer deaths (a mix of ages a little older than cancer's; the difference is inside the range)."
+   "explainer": "ACS CAN's coverage and budget wins in a year: biomarker-testing coverage laws in a few more states (23 states had one by March 2026, ACS impact page), coverage of follow-up after an abnormal screening result, and federal budget and coverage protections (cancer-research budgets, Medicaid). Worked out: a few more states' coverage laws reach a few percent of Americans with cancer, and better-targeted treatment or earlier follow-up for some of them cuts their burden by a few percent, about 0.05% of the cancer burden. 0.05%, 0.01% to 0.2%. Its tobacco wins are the tobacco branch (tob_)."
   },
   {
    "id": "adv_years_until_health",
    "section": "effect",
-   "label": "Advocacy: years from the policy taking effect until the health gain",
+   "label": "Coverage advocacy: years from the policy taking effect until the health gain",
    "format": "number",
    "value": {
-    "low": 3,
-    "best": 10,
-    "high": 25
+    "low": 1,
+    "best": 3,
+    "high": 6
    },
    "kind": "judgment",
-   "explainer": "Counted from when the policy takes effect (the wait before that is adv_years_until_effect, so no year is discounted twice). Smokers who quit cut their cancer risk over 5 to 20 years, and youth who never start gain decades later; coverage of screening and testing acts within a few years. 10 years, 3 to 25. Discounted at the shared rate.",
+   "explainer": "Counted from when the policy takes effect (the wait before that is adv_years_until_effect, so no year is discounted twice). Coverage of screening follow-up and of biomarker testing acts through diagnoses and treatment within a few years. 3 years, 1 to 6. Discounted at the shared rate.",
    "unit": "years"
   },
   {
@@ -499,21 +495,16 @@
    "section": "effect",
    "label": "Advocacy: DALYs averted per person per year of the wins in effect",
    "format": "small",
-   "formula": "adv_cancer_dalys_per_person * adv_share_burden_averted * (1 + adv_noncancer_ratio) * (1 + $discount_rate) ^ -adv_years_until_health",
-   "explainer": "The US cancer burden per person times the share the wins avert, plus the non-cancer share, discounted for the wait until the health gain."
+   "formula": "adv_cancer_dalys_per_person * adv_share_burden_averted * (1 + $discount_rate) ^ -adv_years_until_health",
+   "explainer": "The US cancer burden per person times the share the wins avert, discounted for the wait until the health gain."
   },
   {
    "id": "adv_p_success",
    "section": "effect",
-   "label": "Advocacy: share of all the campaigning behind the year's wins done in this year",
+   "label": "Advocacy: share of a typical year's wins that a year's work produces",
    "format": "percent",
-   "value": {
-    "low": 0.2,
-    "best": 0.4,
-    "high": 0.7
-   },
-   "kind": "judgment",
-   "explainer": "The wins counted are won (laws passed and budgets kept), so the question is how much of each win this year's work bought: state tax and coverage campaigns run two to three years, the last year weighing most. 40%, 20% to 70%."
+   "explainer": "1: the branch counts a typical year's wins against a year's spending (a past average). Each campaign runs two to three years, so a year's work buys part of this year's wins and part of the next years'; in the steady state that is one year's worth of wins, as in charityevals' Campaign for Tobacco-Free Kids model. The chance that the work made a difference is the credit share and the years a win counts ($win_years_counted).",
+   "formula": "1"
   },
   {
    "id": "adv_years_of_impact",
@@ -535,7 +526,7 @@
     "high": 2
    },
    "kind": "judgment",
-   "explainer": "Taxes and coverage laws usually start within a year of passing.",
+   "explainer": "Coverage laws and budget decisions usually take effect within a year of passing.",
    "unit": "years"
   },
   {
@@ -587,6 +578,86 @@
    "format": "percent",
    "formula": "@death_ages.cancer_yld_share_usa",
    "explainer": "Kept as DALYs."
+  },
+  {
+   "id": "tob_share_burden_averted",
+   "section": "effect",
+   "label": "Tobacco advocacy: share of US smoking DALYs a typical year's US tobacco-control wins avert once in full effect",
+   "format": "percent",
+   "formula": "@tobacco.us_wins_share_smoking_burden_averted",
+   "explainer": "The shared figure (facts: tobacco) for the wins of everyone working on US tobacco control in a year: one or two state tax rises, local flavour bans, youth rules and court wins. 0.25%, worked out from a price elasticity of about -0.4, half of it fewer smokers. ACS CAN's part of the credit is tob_attribution_share_shared."
+  },
+  {
+   "id": "tob_health_lag_discount",
+   "section": "effect",
+   "label": "Tobacco advocacy: discount for the wait from the policy to the health gain",
+   "format": "number",
+   "formula": "@tobacco.quit_share_of_policy_effect * (1 + $discount_rate) ^ -@tobacco.quit_lag_years + (1 - @tobacco.quit_share_of_policy_effect) * (1 + $discount_rate) ^ -@tobacco.never_start_lag_years",
+   "explainer": "About half of a tobacco policy's long-run cut in smoking comes from smokers quitting, whose gain comes about 8 years later, the rest from young people who never start, about 40 years later (shared figures, facts: tobacco), each discounted at the shared rate."
+  },
+  {
+   "id": "tob_p_success",
+   "section": "effect",
+   "label": "Tobacco advocacy: share of a typical year's wins that a year's work produces",
+   "format": "number",
+   "formula": "1",
+   "explainer": "1, as for coverage (adv_p_success): a typical year's wins against a year's spending, in the steady state."
+  },
+  {
+   "id": "tob_years_until_effect",
+   "section": "effect",
+   "label": "Tobacco advocacy: years from the win until the policy takes effect",
+   "format": "number",
+   "formula": "@tobacco.policy_years_until_effect",
+   "explainer": "The shared figure (facts: tobacco): taxes at once or at the next budget year, regulations within months to two years."
+  },
+  {
+   "id": "tob_discounted_years",
+   "section": "effect",
+   "label": "Tobacco advocacy: discounted years of impact",
+   "format": "number",
+   "formula": "pv_annuity_due(1, $discount_rate, adv_years_of_impact) * (1 + $discount_rate) ^ -tob_years_until_effect",
+   "explainer": "The years a won reform counts ($win_years_counted) and the wait until it takes effect, discounted at the shared rate."
+  },
+  {
+   "id": "tob_dalys",
+   "section": "effect",
+   "label": "Tobacco advocacy: DALYs averted by a typical year's US tobacco wins (all groups', before credit)",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "tob_smoking_dalys * tob_share_burden_averted * tob_health_lag_discount * tob_p_success * tob_discounted_years"
+  },
+  {
+   "id": "tob_value_70plus",
+   "section": "effect",
+   "label": "Tobacco advocacy: value of a smoking death at 70 or older (United States, units of value)",
+   "format": "number",
+   "formula": "(1 - @death_ages.smoking_share_80plus_of_70plus_usa) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.smoking_share_80plus_of_70plus_usa * @moral_weights.givewell_age_80_84",
+   "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of these deaths at 80 or older."
+  },
+  {
+   "id": "tob_value_per_death",
+   "section": "effect",
+   "label": "Tobacco advocacy: value of a smoking death averted (units of value)",
+   "format": "number",
+   "formula": "(@death_ages.smoking_share_15_49_usa * @moral_weights.uov_per_death_age_15_49 + @death_ages.smoking_share_50_69_usa * @moral_weights.uov_per_death_age_50_74 + @death_ages.smoking_share_70plus_usa * tob_value_70plus) * $life_value_multiplier",
+   "explainer": "Every death the site counts is valued by the age it happens at (docs/normalization.md, decision 2026-10-31 #4): GiveWell's moral weights by age over the ages of US smoking deaths (GBD 2023, facts: death_ages), times the value-of-a-life slider."
+  },
+  {
+   "id": "tob_deaths_per_daly",
+   "section": "effect",
+   "label": "Tobacco advocacy: smoking deaths per smoking DALY (United States)",
+   "format": "small",
+   "formula": "@death_ages.smoking_deaths_per_daly_usa",
+   "explainer": "GBD 2023 (facts: death_ages): turns the DALYs back into the deaths behind them."
+  },
+  {
+   "id": "tob_yld_share",
+   "section": "effect",
+   "label": "Tobacco advocacy: share of smoking DALYs that are illness",
+   "format": "percent",
+   "formula": "@death_ages.smoking_yld_share",
+   "explainer": "The shared judgment (facts: death_ages): mostly chronic lung disease; kept as DALYs."
   },
   {
    "id": "screen_screenable_share",
@@ -753,17 +824,17 @@
    "label": "Advocacy: evidence adjustment, a multiplier",
    "format": "multiple",
    "value": {
-    "low": 0.4,
-    "best": 0.7,
-    "high": 1
+    "low": 0.35,
+    "best": 0.6,
+    "high": 0.9
    },
    "kind": "judgment",
-   "explainer": "Tax and smoke-free effects are well measured (price elasticities, natural experiments); coverage laws' effects on use are less so. 0.7, as the British Heart Foundation's tobacco branch."
+   "explainer": "Coverage laws' effects on use of testing and follow-up are less well measured than tobacco taxes' (the tobacco branch reads the shared 0.8); the step from use to deaths averted is the screening branch's. 0.6, as the screening branch."
   },
   {
    "id": "adv_attribution_share_shared",
    "section": "adjustments",
-   "label": "Advocacy: ACS CAN's share of the people and money behind the wins",
+   "label": "Coverage advocacy: ACS CAN's share of the people and money behind the wins",
    "format": "percent",
    "value": {
     "low": 0.15,
@@ -771,7 +842,7 @@
     "high": 0.5
    },
    "kind": "judgment",
-   "explainer": "Tobacco and coverage campaigns are coalitions: Campaign for Tobacco-Free Kids, the American Heart Association, the American Lung Association, health departments and patient groups. ACS CAN has staff and volunteers in every state and is often the largest member; 30%, 15% to 50%."
+   "explainer": "Coverage and budget campaigns are coalitions: patient groups (the Leukemia & Lymphoma Society, Susan G. Komen), the American Heart Association, medical societies, health departments, legislators' staff. ACS CAN has staff and volunteers in every state and is often the largest member; 30%, 15% to 50%."
   },
   {
    "id": "screen_evidence_adj",
@@ -929,6 +1000,88 @@
    "unit": "UoV"
   },
   {
+   "id": "tob_evidence_adj",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: evidence adjustment, a multiplier",
+   "format": "number",
+   "formula": "@tobacco.us_wins_evidence_adj",
+   "explainer": "The shared figure for US tobacco wins (facts: tobacco): price elasticities and flavour-restriction studies are well established; the step to less burden in the steady state less so. 0.8."
+  },
+  {
+   "id": "tob_implementation_adj",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: share of the wins enforced as written",
+   "format": "percent",
+   "formula": "@tobacco.us_wins_implementation_adj",
+   "explainer": "The shared figure (facts: tobacco): taxes are collected and age and flavour rules mostly enforced; illegal e-cigarettes and cross-border buying leak some. 0.9."
+  },
+  {
+   "id": "tob_attribution_share_shared",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: ACS CAN's share of the people and money behind the wins",
+   "format": "percent",
+   "value": {
+    "low": 0.15,
+    "best": 0.3,
+    "high": 0.5
+   },
+   "kind": "judgment",
+   "explainer": "US tobacco wins are coalition wins: the Campaign for Tobacco-Free Kids (12% in its own model), the American Heart Association, the American Lung Association, Truth Initiative, state and local health departments and coalitions, legislators' staff. ACS CAN has staff and volunteers in every state and is often the largest member; 30%, 15% to 50%."
+  },
+  {
+   "id": "tob_missing_data_adj",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: missing-data step",
+   "format": "percent",
+   "formula": "$missing_data_discount",
+   "explainer": "Thin: no change in smoking from ACS CAN's own wins is measured; the share averted is our judgment from price elasticities (templates.md Convention 12)."
+  },
+  {
+   "id": "tob_counterfactual_adj",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: share that wouldn't have happened anyway",
+   "format": "percent",
+   "formula": "1",
+   "explainer": "1: answered by the years a win counts ($win_years_counted) (Convention 5)."
+  },
+  {
+   "id": "tob_attribution_share",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: ACS CAN's share of the credit",
+   "format": "percent",
+   "formula": "tob_attribution_share_shared"
+  },
+  {
+   "id": "tob_total_adj",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: product of adjustments",
+   "format": "percent",
+   "formula": "tob_evidence_adj * tob_counterfactual_adj * tob_attribution_share * tob_implementation_adj * tob_missing_data_adj"
+  },
+  {
+   "id": "tob_secondhand_smoke_share",
+   "section": "adjustments",
+   "label": "Tobacco advocacy side effect: second-hand smoke averted, as a share of the smoking burden averted",
+   "format": "percent",
+   "formula": "@tobacco.shs_dalys_usa / @tobacco.smoking_dalys_usa",
+   "explainer": "Fewer smokers means less second-hand smoke for the people around them, which GBD counts apart from smoking (US 2023: 1.0 million DALYs against 9.4 million, 10%, facts: tobacco); smoke-free laws cut it directly. Taken as falling in step with smoking and valued with the smokers' ages.",
+   "side_effect": "added"
+  },
+  {
+   "id": "tob_illness_credited",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: illness averted, credited (DALYs)",
+   "format": "number",
+   "formula": "tob_dalys * tob_yld_share * tob_total_adj * (1 + tob_secondhand_smoke_share)"
+  },
+  {
+   "id": "tob_uov_credited",
+   "section": "adjustments",
+   "label": "Tobacco advocacy: deaths averted, credited and valued by age (units of value)",
+   "format": "number",
+   "formula": "tob_dalys * tob_deaths_per_daly * tob_value_per_death * tob_total_adj * (1 + tob_secondhand_smoke_share)"
+  },
+  {
    "id": "screen_total_adj",
    "section": "adjustments",
    "label": "screen: all adjustments combined",
@@ -959,7 +1112,7 @@
    "section": "adjustments",
    "label": "evidence adj (outcome-weighted average of the branches, for reading only)",
    "format": "multiple",
-   "formula": "(research_dalys * research_evidence_adj + advocacy_dalys * adv_evidence_adj + screen_dalys * screen_evidence_adj) / (research_dalys + advocacy_dalys + screen_dalys)",
+   "formula": "(research_dalys * research_evidence_adj + advocacy_dalys * adv_evidence_adj + screen_dalys * screen_evidence_adj + tob_dalys * tob_evidence_adj) / (research_dalys + advocacy_dalys + screen_dalys + tob_dalys)",
    "explainer": "The DALY-weighted average of the branches, for reading only; each branch applies its own."
   },
   {
@@ -967,7 +1120,7 @@
    "section": "adjustments",
    "label": "counterfactual adj (outcome-weighted average of the branches, for reading only)",
    "format": "multiple",
-   "formula": "(research_dalys * research_counterfactual_adj + advocacy_dalys * adv_counterfactual_adj + screen_dalys * screen_counterfactual_adj) / (research_dalys + advocacy_dalys + screen_dalys)",
+   "formula": "(research_dalys * research_counterfactual_adj + advocacy_dalys * adv_counterfactual_adj + screen_dalys * screen_counterfactual_adj + tob_dalys * tob_counterfactual_adj) / (research_dalys + advocacy_dalys + screen_dalys + tob_dalys)",
    "explainer": "The DALY-weighted average of the branches, for reading only; each branch applies its own."
   },
   {
@@ -975,7 +1128,7 @@
    "section": "adjustments",
    "label": "attribution share shared (outcome-weighted average of the branches, for reading only)",
    "format": "multiple",
-   "formula": "(research_dalys * research_attribution_share_shared + advocacy_dalys * adv_attribution_share_shared + screen_dalys * screen_attribution_share_shared) / (research_dalys + advocacy_dalys + screen_dalys)",
+   "formula": "(research_dalys * research_attribution_share_shared + advocacy_dalys * adv_attribution_share_shared + screen_dalys * screen_attribution_share_shared + tob_dalys * tob_attribution_share_shared) / (research_dalys + advocacy_dalys + screen_dalys + tob_dalys)",
    "explainer": "The DALY-weighted average of the branches, for reading only; each branch applies its own."
   },
   {
@@ -983,7 +1136,7 @@
    "section": "adjustments",
    "label": "attribution share (outcome-weighted average of the branches, for reading only)",
    "format": "multiple",
-   "formula": "(research_dalys * research_attribution_share + advocacy_dalys * adv_attribution_share + screen_dalys * screen_attribution_share) / (research_dalys + advocacy_dalys + screen_dalys)",
+   "formula": "(research_dalys * research_attribution_share + advocacy_dalys * adv_attribution_share + screen_dalys * screen_attribution_share + tob_dalys * tob_attribution_share) / (research_dalys + advocacy_dalys + screen_dalys + tob_dalys)",
    "explainer": "The DALY-weighted average of the branches, for reading only; each branch applies its own."
   },
   {
@@ -991,7 +1144,7 @@
    "section": "adjustments",
    "label": "missing data adj (outcome-weighted average of the branches, for reading only)",
    "format": "multiple",
-   "formula": "(research_dalys * research_missing_data_adj + advocacy_dalys * adv_missing_data_adj + screen_dalys * screen_missing_data_adj) / (research_dalys + advocacy_dalys + screen_dalys)",
+   "formula": "(research_dalys * research_missing_data_adj + advocacy_dalys * adv_missing_data_adj + screen_dalys * screen_missing_data_adj + tob_dalys * tob_missing_data_adj) / (research_dalys + advocacy_dalys + screen_dalys + tob_dalys)",
    "explainer": "The DALY-weighted average of the branches, for reading only; each branch applies its own."
   },
   {
@@ -999,7 +1152,7 @@
    "section": "adjustments",
    "label": "total adj (outcome-weighted average of the branches, for reading only)",
    "format": "multiple",
-   "formula": "(research_dalys * research_total_adj + advocacy_dalys * adv_total_adj + screen_dalys * screen_total_adj) / (research_dalys + advocacy_dalys + screen_dalys)",
+   "formula": "(research_dalys * research_total_adj + advocacy_dalys * adv_total_adj + screen_dalys * screen_total_adj + tob_dalys * tob_total_adj) / (research_dalys + advocacy_dalys + screen_dalys + tob_dalys)",
    "explainer": "The DALY-weighted average of the branches, for reading only; each branch applies its own."
   },
   {
@@ -1021,7 +1174,7 @@
    "section": "bridges",
    "label": "Deaths averted, in units of value",
    "format": "number",
-   "formula": "research_uov_credited + adv_uov_credited + screen_uov_credited",
+   "formula": "research_uov_credited + adv_uov_credited + screen_uov_credited + tob_uov_credited",
    "explainer": "Each branch's deaths valued by age, already adjusted branch by branch.",
    "unit": "UoV"
   },
@@ -1057,7 +1210,7 @@
    "section": "outcome",
    "label": "Healthy years counted directly (before adjustments)",
    "format": "number",
-   "formula": "research_dalys * research_yld_share + advocacy_dalys * adv_yld_share + screen_dalys * screen_yld_share",
+   "formula": "research_dalys * research_yld_share + advocacy_dalys * adv_yld_share + screen_dalys * screen_yld_share + tob_dalys * tob_yld_share",
    "explainer": "The illness part of each branch's DALYs, before adjustments (the deaths go through uov_bridged).",
    "unit": "DALYs"
   },
@@ -1066,7 +1219,7 @@
    "section": "outcome",
    "label": "Years of healthy life",
    "format": "number",
-   "formula": "(research_illness_credited + adv_illness_credited + screen_illness_credited + dalys_from_uov + dalys_from_wellby * total_adj) * (1 + unmodelled_benefits_adj)",
+   "formula": "(research_illness_credited + adv_illness_credited + screen_illness_credited + tob_illness_credited + dalys_from_uov + dalys_from_wellby * total_adj) * (1 + unmodelled_benefits_adj)",
    "explainer": "Each branch's illness with its own adjustments, plus the deaths through the bridge (already adjusted branch by branch, Convention 4), times the unmodelled share.",
    "unit": "DALYs"
   },
