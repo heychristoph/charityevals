@@ -1,6 +1,6 @@
 ### Summary
 
-One for the World asks students and young professionals to take the 1% Pledge: to give 1% of their income, now or after they graduate, to charities GiveWell recommends. It works through volunteer chapters at universities and graduate schools and through talks at companies, in the US, UK, Canada and Australia. Our model of its year to June 2024 comes to **<span data-figure="headline" data-model="one-for-the-world-charityevals">12</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to about 85 cents of discounted giving it caused, almost all of it to top global-health charities. The figure moves most with the discount rate, how much the next dollar does compared with the past average, its own count of the giving it caused, and how long its pledgers keep giving.
+One for the World asks students and young professionals to take the 1% Pledge: to give 1% of their income, now or after they graduate, to charities GiveWell recommends. It works through volunteer chapters at universities and graduate schools and through talks at companies, in the US, UK, Canada and Australia. Our model of its year to June 2024 comes to **<span data-figure="headline" data-model="one-for-the-world-charityevals">14</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to about a dollar of discounted giving it caused, almost all of it to top global-health charities. The figure moves most with the discount rate, how much the next dollar does compared with the past average, its own count of the giving it caused, and how long its pledgers keep giving.
 
 ### What the charity does
 
@@ -18,25 +18,26 @@ Its donors gave about $1.55 million in the year, $1.30 million of it to charitie
 
 Most of the year's giving comes from people who pledged in earlier years. Pledges are a flow on this site: a year's spending earns the lifetime giving of the pledges it brings, not the giving of earlier pledgers. So the model works out what one pledge gives:
 
-- **Yearly gift.** The year's recurring giving (70%, our judgment) is spread over the pledgers giving that year. Its 2,913 pledges from nine years, at their ages on the site's shared pledge curve, come to about 1,020 pledgers giving. That is about $1,140 each a year.
-- **The year's pledges.** 166 new pledges, at 10% more than the average gift, because more came from graduate schools.
-- **Years of giving.** The shared curve (Giving What We Can's cohorts) over 38 years, discounted. Its own 1% pledgers drop out faster: 13–20% a year against the curve's 10% or less. So their lifetime giving is taken at 65% of the curve's (45% to 100%).
-- **The wait.** The first gift comes about a year later, as students give once they graduate.
+- **Yearly gift.** The year's recurring giving (70%, our judgment), less corporate payroll giving, is spread over the pledgers giving that year. Its 2,913 pledges, most of them from its first six years, sit at their ages on the site's shared pledge curve, thinned a little for its faster attrition. That comes to about 830 pledgers giving, at about $1,070 each a year.
+- **The year's pledges.** 166 new pledges from its chapters, at the average gift. They were a little more undergraduate than its book of givers, but newer pledges give more.
+- **Years of giving.** The shared curve (Giving What We Can's cohorts) over 38 years, discounted. Its own 1% pledgers start and stay less often: 64–73% of those due to start giving did, and 13–20% a year drop out, against the curve's 10% or less. So their lifetime giving is taken at 65% of the curve's (45% to 100%).
+- **The wait.** The first gift comes about a year and a half later, as students give once they graduate.
+- **Corporate donors.** Its talks at companies recruit payroll donors who give at once and rarely stop. The year's new ones are taken at about $55,000 a year of giving (our judgment, from about $2,800 per talk), over the shared curve.
 
-One-off gifts (30%) count as they are. Together this comes to about $650,000 of discounted giving it caused, against $758,000 of costs. Donations wait about half a year in its accounts before reaching charities, and that wait is discounted.
+One-off gifts (30%) count as they are. Together this comes to about $770,000 of discounted giving it caused, against $758,000 of costs. Donations wait about half a year in its accounts before reaching charities, and that wait is discounted.
 
 A dollar moved is worth what its recipients achieve, read live under your values at their figures on the rankings. 84% went to charities GiveWell recommends. They are split as the donations through its own books were: $505,604 to GiveWell (and through Every.org) for its recommended charities, valued at GiveWell's top charities, and $162,953 to Against Malaria Foundation. The other 16% went to charities outside GiveWell's list, such as GiveDirectly. It is valued as an ordinary charity, below its own bar. Half the giving it caused counts as new money. The other half would have gone to other charities anyway, so it counts only for the gain over where it would have gone. Both halves use the site's shared figures for every organisation that moves money. A 5% side effect is added (our judgment). Pledgers and chapter leaders may go on to give more, or to work in effective giving. On the other side, a 1% norm may anchor some who would have given more.
 
 ### How the model works
 
-Value = giving caused (pledges' discounted lifetime giving and one-off gifts) × the wait in its accounts × the net value of a dollar moved × (1 + side effects), over its own costs. Then × how much the next dollar does compared with the past average: 57%, from 29% to 95%. Money is its constraint. Its unrestricted reserves fell to about five months of its costs by June 2025, it projects a $160,000 deficit for 2025–2026, and Open Philanthropy no longer funds its operations. But the next dollar goes to a new growth strategy with mixed early results, at an organisation that missed most of its own targets in 2022–2024. Money moved is counted, not estimated, so no missing-data discount applies. With credit by share of resources on, its staff's forgone pay, the donated legal work, the chapter leaders' unpaid time and its donors' new money share the credit with your dollar.
+Value = giving caused (new pledgers' and corporate donors' discounted lifetime giving, and one-off gifts) × the wait in its accounts × the net value of a dollar moved × (1 + side effects), over its own costs. Then × how much the next dollar does compared with the past average: 57%, from 29% to 95%. Money is its constraint. Its unrestricted reserves fell to about five months of its costs by June 2025, it projects a $160,000 deficit for 2025–2026, and Open Philanthropy no longer funds its operations. But the next dollar goes to a new growth strategy with mixed early results, at an organisation that missed most of its own targets in 2022–2024. Money moved is counted, not estimated, so no missing-data discount applies. With credit by share of resources on, its staff's forgone pay, the donated legal work, the chapter leaders' unpaid time and its donors' new money share the credit with your dollar.
 
 ### What drives the result
 
 - **The discount rate.** Pledgers give for decades.
 - **The next dollar** (57%, from 29% to 95%).
 - **The share it caused** (50%, from 30% to 61%).
-- **How long its pledgers keep giving** (65% of the shared curve, from 45% to 100%).
+- **How long its pledgers keep giving** (65% of the shared curve, from 45% to 100%), and **the new corporate donors** ($55,000 a year, from $25,000 to $110,000).
 - **The value of a young child's life**, through its destinations.
 
 ### Where we differ from One for the World's own figures
@@ -52,10 +53,6 @@ It reports money moved and the part it caused in the year, with no ratio to cost
 - The share of its donors' giving it caused. It rests on whether donors knew GiveWell, which it doubts is the right test.
 - How long its 1% pledgers keep giving. Its oldest cohorts are about ten years old, so nobody has measured decades.
 - Whether its total money moved includes the UK charity's £159,000. We take it as included.
-
-### What isn't modelled
-
-- Effects of the chapters on the volunteers who run them, beyond the 5% side effect.
 
 ### How this model was checked
 
