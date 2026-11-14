@@ -39,7 +39,7 @@ GiveWell publishes no estimate of the cost-effectiveness of its own operations. 
 
 - **Where a further dollar goes.** Funds directed per dollar spent is an average over operations GiveWell has already funded. We count most of a further dollar as granted, as GiveWell's excess-assets policy implies.
 - **The share it caused.** Funds directed counts every dollar. We count only the giving GiveWell caused, and half of other donors' part as new money.
-- **Staff time.** We credit staff for pay they give up, as in every model on the site (credit by share of resources, off by default).
+- **Shared credit.** With credit by share of resources (off by default), staff share it for pay they give up, and other donors for their new money.
 
 ### Biggest uncertainties
 
