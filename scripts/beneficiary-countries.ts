@@ -157,6 +157,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "far-ai-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "govai-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "institute-for-ai-policy-and-strategy-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
+  "mats-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "epoch-ai-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "metr-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "centre-for-long-term-resilience-charityevals": { b: "world", note: "Our build: pandemics and an AI catastrophe kill people everywhere and the future lost is everyone's, so the result is spread by world population; the work is aimed at the UK government." },
