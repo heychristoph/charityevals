@@ -1,6 +1,6 @@
 ### Summary
 
-The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in two parts. Its nuclear-weapons and science-and-democracy work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals">16</span> years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from about 0.7 to about 370. Its climate, transport and food work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-climate">0.0011</span>**, about $180 per tonne of CO₂e averted. Both rest on judgments about how much of each outcome is due to UCS.
+The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in three parts. Its nuclear-weapons and science-and-democracy work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals">16</span> years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from about 0.7 to about 370. Its climate, transport and western states work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-climate">0.0013</span>**, about $190 per tonne of CO₂e averted. Its food and farm work comes to **<span data-figure="headline" data-model="union-of-concerned-scientists-charityevals-food">0.004</span>**. Both rest on judgments about how much of each outcome is due to UCS.
 
 ### What the charity does
 
@@ -20,29 +20,31 @@ UCS spent $49.8 million in the year to September 2025, $44.0 million of it on pr
 
 **Science and democracy.** This counts as better use of US public money: the federal budgets the work touches, the share of their value lost to waste, the small part of that the work closes, valued as a dollar to the average American.
 
-**Climate.** Four policies won from October 2021 to September 2025 have published tonnes: the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, and California's Advanced Clean Cars II rule. Each counts the tonnes it would avert, the 30% of a won policy due to advocacy at all, and UCS's share of that advocacy. Tonnes become deaths averted through the site's one conversion.
+**Climate.** Five policies won from October 2021 to September 2025 have published tonnes: the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, California's Advanced Clean Cars II rule, and its 2025 law extending its carbon market to 2045. Each counts the tonnes it would avert, the 30% of a won policy due to advocacy at all, and UCS's share of that advocacy. Tonnes become deaths averted through the site's one conversion.
+
+**Food and farms.** UCS estimated that the Upper Midwest's wetlands avert about $23 billion of flood damage a year. That work helped defend federal wetland protections against a 2025 lawsuit. The value is the flood damage that draining would bring, times the chance the lawsuit would have won, times UCS's share of the defence.
 
 ### How the model works
 
-| Adjustment | Nuclear | Science and democracy | Climate wins |
-|---|---|---|---|
-| How far the estimate applies | 0.8 | 1 | 0.8 |
-| Work no one else would have done, or would have come anyway | 0.7 | 0.6 | 0.6 to 0.8 (shared) |
-| UCS's share of the work | 0.9 | 0.5 | 1% to 10% |
-| Share of the win still delivered | | | 5% to 35% (shared) |
-| Missing-data discount | 0.5 | 0.5 | 0.5 |
+| Adjustment | Nuclear | Science and democracy | Climate wins | Wetlands |
+|---|---|---|---|---|
+| How far the estimate applies | 0.8 | 1 | 0.8 | 0.7 |
+| Work no one else would have done, or would have come anyway | 0.7 | 0.6 | 0.5 to 0.8 (shared) | 0.5 |
+| UCS's share of the work | 0.9 | 0.5 | 1% to 10% | 3% |
+| Share of the win still delivered | | | 5% to 60% (shared) | |
+| Missing-data discount | 0.5 | 0.5 | 0.5 | 0.5 |
 
-UCS is credited with 6% of the advocacy behind EPA's vehicle standards, 10% behind California's car rule, 3% behind the power-plant standards and 1% behind the Inflation Reduction Act. EPA has since repealed the vehicle standards and is repealing the power-plant standards; Congress revoked California's waiver in 2025, now in court; the 2025 budget law cut much of the act's credits. Each counts only what survives, by the same shared figures our other climate models use.
+UCS is credited with 6% of the advocacy behind EPA's vehicle standards, 10% behind California's car rule, 4% behind the carbon-market extension, 3% behind the power-plant standards and 1% behind the Inflation Reduction Act. EPA has since repealed the vehicle standards and is repealing the power-plant standards; Congress revoked California's waiver in 2025, now in court; the 2025 budget law cut much of the act's credits. Each counts only what survives, by the same shared figures our other climate models use.
 
-Some value is added as shares. The nuclear part adds 7%: work against a limited nuclear war and the 2025 expansion of radiation compensation. The climate part adds 60%: California's 2025 cap-and-invest extension and other state laws, grid plans, the science behind climate lawsuits, and the farm work. It takes off 2% for safety campaigns that may slow nuclear power.
+Some value is added as shares. The nuclear part adds 7%: work against a limited nuclear war and the 2025 expansion of radiation compensation. The climate part adds 15%: other state laws, grid plans and the science behind climate lawsuits. It takes off 2% for safety campaigns that may slow nuclear power. The food part adds 50% for its fertilizer, groundwater, farm bill and farmworker work.
 
-UCS's net assets were about 17 months of spending in September 2025, and its donations grew that year. The next dollar of its nuclear and science work counts at 42% of the past average. Its climate work now faces harder ground, so its next dollar counts at 33%.
+UCS's net assets were about 17 months of spending in September 2025, and its donations grew that year. The next dollar of its nuclear, science and food work counts at 42% of the past average. Its climate work now faces harder ground, so its next dollar counts at 33%.
 
 ### What drives the result
 
 The nuclear work is about half the first model's cost and almost all its value. The result is below the Arms Control Association's 41, because only half this spending is on nuclear risk and the next dollar counts for less. It is above the Federation of American Scientists' 1.4, which spends only about 3% on nuclear work.
 
-The climate result is near our other climate advocacy models: the Environmental Defense Fund 0.0018 and Clean Air Task Force 0.0067. Three-quarters of it comes from the Inflation Reduction Act.
+The climate result is near our other climate advocacy models: the Environmental Defense Fund 0.0019 and Clean Air Task Force 0.0067. Three-fifths of it comes from the Inflation Reduction Act. The food result is low because the lawsuit was unlikely to win and others did most of the defence.
 
 ### Biggest uncertainties
 
@@ -54,16 +56,18 @@ The climate result is near our other climate advocacy models: the Environmental 
 ### What isn't modelled
 
 - Losses beyond deaths, such as lost income and health, are a shared figure set to 0.
-- The tonnes of California's 2025 laws are not estimated; they enter only as a share.
+- The tonnes of UCS's other state laws are not estimated; they enter only as a share.
 
 ### How this model was checked
 
-Both models were built from their family templates: the catastrophic-risk one, as for the Federation of American Scientists, and the climate policy one, as for the Environmental Defense Fund. The Environmental Defense Fund's model now reads the same shared figures for the vehicle standards and the Inflation Reduction Act. The audit rounds are in audits/union-of-concerned-scientists-charityevals/ and audits/union-of-concerned-scientists-charityevals-climate/.
+The three models were built from their family templates: the catastrophic-risk one, as for the Federation of American Scientists; the climate policy one, as for the Environmental Defense Fund; and the policy one. The Environmental Defense Fund's model now reads the same shared figures for the vehicle standards and the Inflation Reduction Act, including the act's methane share. The first climate audit asked for the carbon-market extension as its own win and the food work as its own model, both done. The audit rounds are in audits/ under each model's name.
 
 ### Sources
 
 - Union of Concerned Scientists, Form 990s for the years to September 2022 to 2025, and its audited statements.
 - Union of Concerned Scientists, 2025 Annual Report.
-- California Air Resources Board, Advanced Clean Cars II announcement (August 2022).
+- California Air Resources Board, Advanced Clean Cars II announcement (August 2022), and its 2026 cap-and-invest rulemaking notice.
+- Iowa Environmental Council, on the 2025 wetland ruling; DTN, on UCS's wetland analysis (December 2024).
+- Bistline et al., Science (2023), on the Inflation Reduction Act's cuts by sector.
 - Karger et al., Forecasting Existential Risks (Forecasting Research Institute, 2023).
 - Rethink Priorities, Cross-Cause Cost-Effectiveness Model.
