@@ -164,6 +164,9 @@ export const Charity = z
     id: z.string().regex(/^[a-z0-9-]+$/),
     name: z.string(),
     cause: Cause,
+    /** A narrower area within the cause (ai, biosecurity, nuclear, democracy, livelihoods), for a money
+     * mover's split that names one: `#cause:<area>` averages it like a cause (docs/normalization.md 2.8). */
+    area: z.enum(["ai", "biosecurity", "nuclear", "democracy", "livelihoods"]).optional(),
     website: z.string().url().optional(),
     /** Where to give: the charity's own donation page, or an evaluator's form for it. */
     donate: z.string().url().optional(),

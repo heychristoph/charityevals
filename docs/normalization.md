@@ -681,8 +681,8 @@ model was removed); INV-12 requires it of any model with a row on its path about
   its money by recipient or cause (`@meta.<org>_moved_*`), live results and the shared destination rows only
   (`isDestinationMix`, INV-12). A recipient with a model is read live, at its figure on the rankings (below); a fund that follows an evaluator, at
   that evaluator's charities (`value_global_health`); a recipient without a model, at its cause's modelled
-  average within the split, or, when none of the cause's recipients is modelled, at the site's models of
-  that cause with equal weights; other meta charities and causes the site has no published model for, at
+  average within the split, or, when none of the cause's recipients is modelled, at the cause's charities
+  on the rankings with equal weights (`#cause:x`, below); other meta charities and causes the site has no published model for, at
   the average of the rest (they drop out); recipients below the organisation's own bar, at
   `@meta.prior_vs_cash × #givedirectly`, an ordinary charity, so shifted money to them gains nothing.
 - *Its own effect.* Money moved counts only the giving the organisation caused: recorded donations × the
@@ -707,6 +707,24 @@ own figures instead of the average.
 | Giving What We Can (ours) | 37.3 → 54.3 | — |
 | CEARCH | 43.5 → 65.5 | 160 → 242 (reads V) |
 | Better Futures Guide | 7.44 → 7.97 | 27.9 |
+
+**November 2026: a cause's average, read live (`#cause:x`).** Money to a cause with no recipient modelled
+was valued at hand-typed equal-weight lists of models, which went stale as models landed (Giving What We
+Can's catastrophic-risk stand-in averaged 4 of the 12 ranked charities). `#cause:x` is the equal-weight
+mean of the charities on the rankings in cause x, or in area x (a charity's `area`: ai, biosecurity,
+nuclear, democracy, livelihoods), each at its primary evaluator's figure, the one the rankings show
+(src/engine/ranking.ts `causeFigure`). Left out: the reading model's own charity, money movers
+(`beneficiaries: "destinations"`), so no model reads itself through its cause, and unpublished
+evaluators' models (not in the library). A model added to the cause enters it; buildLibrary reports an
+unknown cause or area, an empty one and any cycle. Not changed: named recipients without shares
+(GiveWell's influenced money), CEARCH (GiveWell's Top Charities) and The Life You Can Save (its own split).
+
+| Model | Our view before → after | Evaluator view |
+|---|---|---|
+| Giving What We Can (ours) | 54.7 → 56.2 (catastrophic risk: 4 → 12 charities) | — |
+| Effektiv Spenden (ours) | 25.1 → 25.7 (catastrophic risk 10 → 12; democracy 4) | — |
+| 80,000 Hours (ours) | 1.07 → 1.20 (AI 5 → 7; biosecurity and nuclear 2 → 5, the two areas half each) | — |
+| Better Futures Guide | 7.97 → 16.7 (livelihoods: GiveDirectly, One Acre Fund, Precision Development, Better Season Project; Raising the Village has no ranked figure) | 27.9 |
 
 ### 2.9 Won reforms: one way (October 2026)
 

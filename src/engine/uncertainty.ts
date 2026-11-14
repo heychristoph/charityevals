@@ -278,7 +278,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
         if (!Number.isFinite(v)) continue;
         const leaf = leaves.get(key)!;
         const step = v !== 0 ? Math.abs(v) * H : leaf.absolute ? (leaf.high - leaf.low) * H : ZERO_STEP;
-        const d = (modelResult(lib, ref, { ...rv, [name]: v + step }) - base) / step;
+        const d = (modelResult(lib, ref, { ...rv, [name]: v + step }, m.charity) - base) / step;
         if (Number.isFinite(d) && d !== 0) es.push({ name, d });
       }
     modelDerivs.set(ref, es);

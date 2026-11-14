@@ -1,6 +1,6 @@
 ### Summary
 
-80,000 Hours helps people find careers that work on the world's most pressing problems. Since 2025 it focuses mainly on risks from advanced AI. Our model of its work comes to **<span data-figure="headline" data-model="80000-hours-charityevals">1.1</span> years of healthy life per $1,000**. It credits 80,000 Hours with the careers it changed from 2012 to 2022, each valued by what the person gives up to do the work and what a dollar of work in their new cause achieves on this site. The figure moves most with how much we discount for missing outcome data, with the site's sliders for AI risk and for how long a win counts (through the AI models it reads), with what a career change gives up, and with how much the next dollar does compared with the past average.
+80,000 Hours helps people find careers that work on the world's most pressing problems. Since 2025 it focuses mainly on risks from advanced AI. Our model of its work comes to **<span data-figure="headline" data-model="80000-hours-charityevals">1.2</span> years of healthy life per $1,000**. It credits 80,000 Hours with the careers it changed from 2012 to 2022, each valued by what the person gives up to do the work and what a dollar of work in their new cause achieves on this site. The figure moves most with how much we discount for missing outcome data, with the site's sliders for AI risk and for how long a win counts (through the AI models it reads), with what a career change gives up, and with how much the next dollar does compared with the past average.
 
 ### What the charity does
 
@@ -23,8 +23,8 @@ Each career change is valued by the site's one rule for careers. A person who mo
 
 The value of a dollar of work depends on the cause. A donation now buys today's careers, and since 2025 those are mostly in AI. 80,000 Hours publishes no split by cause, so the split is our judgment, anchored on its job board. Since the 2025 change, 88% of users click only or mostly AI roles and 4% a balance. AI safety takes 90%, biosecurity and nuclear security 6%, global health 2% and animal welfare 0.5%. The remaining 1.5% goes to building effective altruism and research on priorities, and is valued at the weighted average of the four. Each cause is read live at the figures the rankings show:
 
-- **AI safety**: the site's five AI models (Center for AI Safety, FAR.AI, MIRI, METR, Redwood Research), weighted equally.
-- **Biosecurity and nuclear security**: the Nuclear Threat Initiative and the Johns Hopkins Center for Health Security, weighted equally.
+- **AI safety**: the AI charities on the rankings, weighted equally.
+- **Biosecurity and nuclear security**: the biosecurity and the nuclear charities on the rankings, each area weighted equally and its charities too.
 - **Global health**: GiveWell's top charities.
 - **Animal welfare**: The Humane League, at ACE's figure.
 
