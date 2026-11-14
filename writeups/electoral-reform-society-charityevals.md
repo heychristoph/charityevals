@@ -14,7 +14,7 @@ The Society's main aim is proportional representation for Westminster, which has
 
 - the supplementary vote restored for mayors (2026);
 - the 92 hereditary peers removed from the Lords (2026);
-- votes at 16 and automatic voter registration for all UK elections (the bill is in the Lords);
+- votes at 16 for all UK elections and pilots of automated voter registration (the bill is in the Lords);
 - votes at 16 and for foreign nationals in Wales, and for foreign nationals in Scotland (2020);
 - a larger Senedd (2024), though it opposed the closed lists that came with it.
 
@@ -59,7 +59,7 @@ In every case the government or the Senedd made the change, with the Society as 
 
 ### How this model was checked
 
-Built from the template and audited by independent reviewers (rounds in audits/electoral-reform-society-charityevals/). Round 1 built the decade's spending from the published years and the shared price index, limited the supplementary vote to England's mayors (commissioners are being abolished), lowered the next dollar to 21% for the size of the capital fund, added the registration and finance reforms, took the chance of proportional representation from the shared rate for contested issues, and credited the Society only with the part of the Senedd reform it backed. The result fell from 0.065 to 0.049.
+Built from the template and audited by independent reviewers (rounds in audits/electoral-reform-society-charityevals/). Round 1 built the decade's spending from the published years and the shared price index, limited the supplementary vote to England's mayors (commissioners are being abolished), lowered the next dollar to 21% for the size of the capital fund, added the registration and finance reforms, took the chance of proportional representation from the shared rate for contested issues, and credited the Society only with the part of the Senedd reform it backed. The result fell from 0.065 to 0.049. Round 2 passed; its notes on wording and sources were fixed and checked in a last round.
 
 ### Sources
 
