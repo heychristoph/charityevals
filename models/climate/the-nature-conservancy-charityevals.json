@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-nature-conservancy",
   "owner": "charityevals",
-  "summary": "The Nature Conservancy (TNC) buys and protects land and water in the US and about 80 countries, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries. We model all of its fiscal year 2025 spending (July 2024 to June 2025, $1.28 billion of conservation programmes and land purchases), each of its nine pathways from the research on its kind of work, in 13 branches: forest kept by the Ecuador Amazon deal, the land it bought and its protection policy; power displaced by mine-land solar and renewable siting maps; Pará's deforestation-free cattle rule, zero-conversion soy in the Gran Chaco, regenerative farming and the PRANA no-burn programme in India; restoration; fisheries rules; and climate adaptation. The result is about 0.0004 years of healthy life per $1,000, under a tenth of the site's climate models, because most of TNC's work keeps land carbon, which is worth little in healthy years, and TNC is a small share of the resources behind its large deals, rules and policies. Nearly half of it is the air-pollution deaths averted by less crop burning in Punjab and Haryana, most of whose fall would have come anyway; a third is the Pará cattle rule, mostly through the least grounded step, a small cut in pandemic risk from forest kept, and its roll-out has barely begun. Every branch rests on thin data and is discounted for missing data, and the result is mostly uncertainty (combined range about 0.00005-0.0035).",
+  "summary": "The Nature Conservancy (TNC) buys and protects land and water in the US and about 80 countries, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries. We model all of its fiscal year 2025 spending (July 2024 to June 2025, $1.28 billion of conservation programmes and land purchases), each of its nine pathways from the research on its kind of work, in 13 branches: forest kept by the Ecuador Amazon deal, the land it bought and its protection policy; power displaced by mine-land solar and renewable siting maps; Pará's deforestation-free cattle rule, zero-conversion soy in the Gran Chaco, regenerative farming and the PRANA no-burn programme in India; restoration; fisheries rules; and climate adaptation. The result is about 0.0004 years of healthy life per $1,000, under a tenth of the site's climate models, because most of TNC's work keeps land carbon, which is worth little in healthy years, and TNC is a small share of the resources behind its large deals, rules and policies. Nearly half of it is the air-pollution deaths averted by less crop burning in Punjab and Haryana, most of whose fall would have come anyway; a third is the Pará cattle rule, mostly through the least grounded step, a small cut in pandemic risk from forest kept, and its roll-out has barely begun. Every branch rests on thin data and is discounted for missing data, and the result is mostly uncertainty (combined range about 0.00005-0.0021).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Nature Conservancy",
@@ -657,15 +657,8 @@
       "label": "Tropical primary forest lost worldwide in 2023",
       "format": "integer",
       "unit": "ha",
-      "value": 3700000,
-      "kind": "observed",
-      "source": {
-        "title": "World Resources Institute, Global Forest Review: How much forest was lost in 2023?",
-        "url": "https://gfr.wri.org/global-tree-cover-loss-data-2023",
-        "retrieved": "2026-11-03",
-        "quote": "Total tropical primary forest loss in 2023 totaled 3.7 million hectares"
-      },
-      "explainer": "With the next row, the CO₂ released per hectare of tropical primary forest lost; also the denominator of the catastrophic-risk branch."
+      "explainer": "The shared figure (World Resources Institute): 3.7 million hectares. With the next row, the CO₂ released per hectare of tropical primary forest lost; also the denominator of the catastrophic-risk branch.",
+      "formula": "@climate.tropical_primary_loss_2023_ha"
     },
     {
       "id": "tropical_loss_emissions_2023",
@@ -673,15 +666,8 @@
       "label": "CO₂ released by that loss",
       "format": "integer",
       "unit": "t CO₂",
-      "value": 2400000000,
-      "kind": "observed",
-      "source": {
-        "title": "World Resources Institute, Global Forest Review: How much forest was lost in 2023?",
-        "url": "https://gfr.wri.org/global-tree-cover-loss-data-2023",
-        "retrieved": "2026-11-03",
-        "quote": "All this forest loss produced 2.4 gigatonnes (Gt) of carbon dioxide emissions in 2023"
-      },
-      "explainer": "Gross emissions from the year's tropical primary forest loss."
+      "explainer": "The shared figure (World Resources Institute): 2.4 billion tonnes, the gross emissions of the year's tropical primary forest loss.",
+      "formula": "@climate.tropical_primary_loss_emissions_2023"
     },
     {
       "id": "amazon_tco2_per_ha_lost",
@@ -1758,13 +1744,8 @@
       "section": "effect",
       "label": "Catastrophic risk: share of the land-use risk that scales with tropical forest loss",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.5,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "IPBES's land-use change includes farming expansion, settlement and wildlife trade as well as clearing tropical forest. Anchor: Allen et al. (2017, Nature Communications, doi 10.1038/s41467-017-00923-8) find emerging-disease hotspots best predicted by tropical forest regions with high mammal diversity undergoing land-use change, so clearing tropical forest is a large part, not all, of the land-use risk. We take half of it as scaling with tropical forest loss, in proportion to the hectares lost (10-100%); Dobson et al. (Science, 2020) argue for cutting deforestation as pandemic prevention but give no dose-response. The least grounded number in the model, and through the cattle rule's branch it carries much of the result."
+      "explainer": "The shared judgment (facts/catastrophe.json): half of the land-use share of new diseases scales with tropical forest loss (10-100%), anchored on Allen et al. (2017). The least grounded number in the model, and through the cattle rule's branch it carries much of the result.",
+      "formula": "@catastrophe.deforestation_share_of_land_use_risk"
     },
     {
       "id": "risk_per_ha_year",
@@ -1780,39 +1761,24 @@
       "section": "effect",
       "label": "Share of the catastrophe's deaths that are of children under five",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.02,
-        "high": 0.1
-      },
-      "kind": "judgment",
-      "explainer": "COVID-19's excess deaths were mostly of older people and few of young children; a different pathogen could hit children harder (the range's top). Anchored on WHO's excess-mortality age profile (Msemburi et al. 2023, Nature: most excess deaths over 60)."
+      "explainer": "The shared judgment for a COVID-scale pandemic (facts/death_ages.json): COVID-19's excess deaths were mostly of older people, few of young children.",
+      "formula": "@death_ages.covid_scale_share_under5"
     },
     {
       "id": "share_5_14_of_over5",
       "section": "effect",
       "label": "Of the catastrophe's deaths at five or older, share aged 5 to 14",
       "format": "percent",
-      "value": {
-        "low": 0.005,
-        "best": 0.01,
-        "high": 0.05
-      },
-      "kind": "judgment",
-      "explainer": "School-age children were the least affected group in COVID-19; up to 5% for a pathogen like the 1918 influenza."
+      "explainer": "The shared judgment for a COVID-scale pandemic (facts/death_ages.json): school-age children were the least affected group.",
+      "formula": "@death_ages.covid_scale_share_5_14_of_over5"
     },
     {
       "id": "share_15_49_of_over15",
       "section": "effect",
       "label": "Of the catastrophe's deaths at 15 or older, share aged 15 to 49",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.15,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "About 15% of COVID-19's adult excess deaths were under 50 (WHO's age profile, most deaths over 60); up to 40% for a pathogen that kills young adults (1918 influenza). The rest are valued at the 50-74 band."
+      "explainer": "The shared judgment for a COVID-scale pandemic (facts/death_ages.json): about 15% of COVID-19's adult excess deaths were under 50; the rest are valued at the 50-74 band.",
+      "formula": "@death_ages.covid_scale_share_15_49_of_over15"
     },
     {
       "id": "catastrophe_value_per_death",
@@ -1828,13 +1794,8 @@
       "section": "effect",
       "label": "Catastrophic risk: share of every later year's healthy life the catastrophe would take",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0,
-        "high": 1e-05
-      },
-      "kind": "judgment",
-      "explainer": "0: the world recovers from a COVID-scale pandemic; its deaths are counted above. The tiny high end allows for lasting damage."
+      "explainer": "The shared judgment (facts/catastrophe.json): 0, the world recovers from a COVID-scale pandemic and its deaths are counted above; the tiny high end allows for lasting damage.",
+      "formula": "@catastrophe.covid_scale_future_share_lost"
     },
     {
       "id": "deal_risk_years",
@@ -3416,6 +3377,19 @@
       "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
     },
     {
+      "id": "methane_share",
+      "section": "bridges",
+      "label": "Share of these tonnes that are methane",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "The share of these tonnes (in CO₂e) that is methane, which the site's climate conversion values by methane's own timing: earlier, shorter warming and the ozone it makes (docs/normalization.md 2.5). Only PRANA's tonnes are methane, about 80% of them (2.7 g of methane and 0.07 g of nitrous oxide a kg of residue burned, at 28 and 265 times CO₂: IPCC 2006 Guidelines, Vol. 4, Table 2.5), and PRANA is about 0.33% of the credited tonnes at the defaults: 0.003 (0.001 to 0.01 across the ranges). A typed share, like fuel_share: the row can't compute it from the branches, since a row the conversion reads may not read the shared sliders those carry (normalization.md 2.5)."
+    },
+    {
       "id": "pain_days_fish",
       "section": "bridges",
       "label": "Wild animals: days of pain spared (before adjustments)",
@@ -3481,7 +3455,7 @@
       "section": "bridges",
       "label": "Climate, in healthy years",
       "format": "number",
-      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
       "unit": "DALYs",
       "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },

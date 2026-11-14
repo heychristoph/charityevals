@@ -1,0 +1,826 @@
+{
+  "id": "givewell-charityevals",
+  "name": "GiveWell (charityevals)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": "destinations",
+  "beneficiaries_note": "Moves money: each charity it funds, read live, brings its own countries.",
+  "template": "policy-research-meta",
+  "estimate_basis": "past_average",
+  "charity": "givewell",
+  "owner": "charityevals",
+  "summary": "GiveWell researches global health and poverty programmes and directs donors' money to the most cost-effective ones; this model covers a gift for its own operations in 2024 ($20.7M, audited), not the $163M of grants it paid out, which are the funded charities' cost and counted in their own models. Its operations aren't short of money (unrestricted gifts were five times its operating costs, the excess granted out), so a further dollar for them mostly frees another donor's dollar for grants and is worth about a dollar granted; the small rest does operations work, where each dollar moved about eleven dollars it caused in 2024 (a quarter of Open Philanthropy's money, all of it shifted, and 59% of other donors' giving, by its own donor survey with non-respondents counted at half, plus $45M its research influenced), each dollar valued at the charities it went to, read live. At the defaults that comes to about 36 years of healthy life per $1,000, more than ten times its peers because a dollar for GiveWell ends up with GiveWell's grantees, mostly the most cost-effective programmes on the site, not among typical global-health programmes; the result moves most with the share freed for grants, the value of a life and the discount rate, and no branch is discounted for missing data, since money moved is counted.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: GiveWell",
+    "url": "https://charityevals.org/givewell-charityevals",
+    "published": "2026-11-14",
+    "retrieved": "2026-11-14"
+  },
+  "resources": [
+    {
+      "title": "The Clear Fund d.b.a. GiveWell, Consolidated Financial Statements, December 31, 2024 (audited, UHY LLP)",
+      "url": "https://files.givewell.org/files/ClearFund/Clear%20Fund%202024%20audited%20financial%20statements%20(PDF).pdf",
+      "type": "charity"
+    },
+    {
+      "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+      "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "GiveWell, Metrics Report 2025 (February 2025 – January 2026)",
+      "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2025.pdf",
+      "type": "charity"
+    },
+    {
+      "title": "GiveWell, Unrestricted Fund",
+      "url": "https://www.givewell.org/unrestricted-fund",
+      "type": "charity"
+    }
+  ],
+  "output": {
+    "row": "uov_per_donor_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar you give",
+    "native": {
+      "row": "uov_per_dollar",
+      "unit": "uov"
+    }
+  },
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled program cost in the year the outcomes below are counted for, including its share of overhead. From audited financial statements or the annual report."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people, animals or meals the spending reached in the same year, as the charity reports it."
+    },
+    {
+      "id": "moved_money",
+      "title": "Value of a dollar moved (shared)",
+      "kind": "ours",
+      "explainer": "charityevals' shared method for money a meta charity moves, the same rows in every such model (docs/normalization.md 2.8). A dollar moved is worth what the charities it reaches achieve, each at its live result on this site under your values; new money counts in full, shifted money only for the gain over where it would have gone."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per unit",
+      "explainer": "What the intervention does for each unit reached, from the best available studies, before any adjustment."
+    },
+    {
+      "id": "careers",
+      "title": "Career changes",
+      "kind": "ours",
+      "explainer": "People the charity moves into high-impact jobs: per career changed, the pay they give up for the years they stay, valued at the new employer's live result per dollar, times the share of changes the charity caused (docs/normalization.md 2.8). The mirror of staff pay below market."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, and delivery falling short. All multiply the outcome."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in the family's shared unit, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "accounts_total_expenses",
+      "section": "cost",
+      "label": "GiveWell's total expenses in 2024, grants included (US$)",
+      "format": "usd",
+      "value": 183889000,
+      "kind": "observed",
+      "source": {
+        "title": "The Clear Fund d.b.a. GiveWell, Consolidated Financial Statements, December 31, 2024 (audited, UHY LLP)",
+        "url": "https://files.givewell.org/files/ClearFund/Clear%20Fund%202024%20audited%20financial%20statements%20(PDF).pdf",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "Total expenses 183,889 - 183,889 115,729",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Everything the consolidated accounts (GiveWell US and GiveWell UK) record as spent in calendar 2024, including the grants it paid out of donors' money."
+    },
+    {
+      "id": "accounts_program_expenses",
+      "section": "cost",
+      "label": "GiveWell's programme-service expenses in 2024, grants included (US$)",
+      "format": "usd",
+      "value": 177309000,
+      "kind": "observed",
+      "source": {
+        "title": "The Clear Fund d.b.a. GiveWell, Consolidated Financial Statements, December 31, 2024 (audited, UHY LLP)",
+        "url": "https://files.givewell.org/files/ClearFund/Clear%20Fund%202024%20audited%20financial%20statements%20(PDF).pdf",
+        "page": "p. 4, Consolidated Statement of Activities (in thousands)",
+        "quote": "Program services 177,309 - 177,309 108,926",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Programme services: research and grantmaking, outreach to donors, and the grants themselves; management and general ($5.9M) and fundraising ($0.7M) are the rest.",
+      "drawn_with": "accounts_total_expenses"
+    },
+    {
+      "id": "grants_paid",
+      "section": "cost",
+      "label": "Grants GiveWell paid out in 2024 (US$)",
+      "format": "usd",
+      "value": 163148000,
+      "kind": "observed",
+      "source": {
+        "title": "The Clear Fund d.b.a. GiveWell, Consolidated Financial Statements, December 31, 2024 (audited, UHY LLP)",
+        "url": "https://files.givewell.org/files/ClearFund/Clear%20Fund%202024%20audited%20financial%20statements%20(PDF).pdf",
+        "page": "p. 5, Consolidated Statement of Functional Expenses (in thousands)",
+        "quote": "Grants 163,148 $ - $ - $ 163,148$ 96,214$",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Donors' money passed on to the charities GiveWell funds. It is those charities' cost, counted in their own models (read live as the destinations below), so it is taken out of GiveWell's cost here.",
+      "drawn_with": "accounts_total_expenses"
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "GiveWell's own operating expenses in 2024 (US$)",
+      "format": "usd",
+      "formula": "accounts_total_expenses - grants_paid",
+      "explainer": "Its spending on itself: staff and contractors, research, outreach, administration ($20.7M), calendar 2024. The funds below are for GiveWell's metrics year, February 2024 – January 2025, a month later; its metrics report gives $21.4M of operating costs for that year (3% more). The same audited figure is taken out of the funds raised, so cost and deduction are one period."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "GiveWell's programme expenses less grants, 2024 (US$)",
+      "format": "usd",
+      "formula": "accounts_program_expenses - grants_paid",
+      "explainer": "Research, grantmaking and donor outreach, without the grants paid."
+    },
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "Spending on research, grantmaking and outreach, 2024 (US$)",
+      "format": "usd",
+      "formula": "program_expenses",
+      "explainer": "GiveWell's one programme: finding and funding cost-effective programmes and telling donors about them. Its research, grantmaking and outreach move the money counted below; no split between them is published."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ program expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over programs in proportion to their cost, as GiveWell and ACE do."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled program, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio",
+      "explainer": "Operating spending, management and fundraising included: what a dollar for GiveWell's operations pays for."
+    },
+    {
+      "id": "units_affected_per_year",
+      "section": "reach",
+      "label": "People or animals per year the policy or research would affect",
+      "format": "integer",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+        "page": "p. 6",
+        "quote": "GiveWell is dedicated to finding and funding outstanding giving opportunities",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "0: GiveWell's work reaches people through the money it directs, counted below at the charities it funds. The research, policy and scoping grants it makes are among those charities, valued by their own models; its own published research is in the side effects."
+    },
+    {
+      "id": "funds_raised",
+      "section": "reach",
+      "label": "Funds GiveWell raised in its 2024 metrics year (US$)",
+      "format": "usd",
+      "value": {
+        "low": 400204697,
+        "best": 414893748,
+        "high": 414893748
+      },
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+        "page": "p. 6",
+        "quote": "Funds Raised $355,070,034 $414,893,748 17%",
+        "note": "February 2024 – January 2025. Donations to and through GiveWell ($256M), donations made directly to charities on its recommendation ($159M, Open Philanthropy's $100M included). Read from the Internet Archive's copy; the site itself shows a bot check. Low: the 2025 report's stricter basis, which stops counting direct-to-charity donations it can't verify: 'If we applied this approach to last year's totals, we expect 2024 funds raised would be around $400,204,697' (GiveWell, Metrics Report 2025, p. 7, note 2).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Every gift GiveWell counts as raised in the year: to its giving funds and Unrestricted Fund, charity-specific donations through it, and gifts made directly to its recommended charities, Open Philanthropy's yearly $100M commitment included. Raised money is granted over the following year or so; the wait isn't discounted because the funds held earn about as much (US Treasury funds, $10.6M of dividends in 2024, audited statements p. 8) as the shared discount rate takes off."
+    },
+    {
+      "id": "funds_raised_open_philanthropy",
+      "section": "reach",
+      "label": "Of which from Open Philanthropy (now Coefficient Giving) (US$)",
+      "format": "usd",
+      "value": 108161952,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+        "page": "p. 8, 'Source of Funds Raised'",
+        "quote": "Open Philanthropy $8,161,952 2% ... Open Philanthropy $100,000,000 24%",
+        "note": "$8.2M through GiveWell (unrestricted) and $100M of its 2023–2025 commitment, given directly to recommended programmes. Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Open Philanthropy's share, kept apart because it would have given this money to global health anyway (below).",
+      "drawn_with": "funds_raised"
+    },
+    {
+      "id": "open_philanthropy_to_operations",
+      "section": "reach",
+      "label": "Of Open Philanthropy's money, the part used for GiveWell's operations (US$)",
+      "format": "usd",
+      "value": 5000000,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+        "page": "p. 12",
+        "quote": "about $5 million was used for GiveWell's operational expenses",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Money that paid for GiveWell itself rather than reaching a charity; taken out of the money moved.",
+      "drawn_with": "funds_raised"
+    },
+    {
+      "id": "open_philanthropy_moved_gross",
+      "section": "reach",
+      "label": "Open Philanthropy's money GiveWell directed to charities (US$)",
+      "format": "usd",
+      "formula": "funds_raised_open_philanthropy - open_philanthropy_to_operations"
+    },
+    {
+      "id": "donors_moved_gross",
+      "section": "reach",
+      "label": "Other donors' money GiveWell directed to charities (US$)",
+      "format": "usd",
+      "formula": "funds_raised - funds_raised_open_philanthropy - (total_expenses - open_philanthropy_to_operations)",
+      "explainer": "Individuals, family foundations and effective-giving groups ($307M), less what their unrestricted gifts paid for GiveWell's operations: its operating expenses (the same audited figure as the cost above, so cost and deduction are one period) less Open Philanthropy's $5M part."
+    },
+    {
+      "id": "influenced_funding",
+      "section": "reach",
+      "label": "Other funding GiveWell's research influenced in 2024 (US$)",
+      "format": "usd",
+      "formula": "@meta.givewell_influenced_2024",
+      "explainer": "Funders who told GiveWell they gave to programmes outside its Top Charities because of its research ($45M); not in its funds raised, so no double count. Counted with the survey-response step only, and valued at its recipients in value_destinations."
+    },
+    {
+      "id": "open_philanthropy_own_effect",
+      "section": "reach",
+      "label": "Share of Open Philanthropy's giving through GiveWell that GiveWell caused",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. All of it counts as shifted money (moved_value), none as new. Open Philanthropy decides its global-health budget itself and has its own global health and wellbeing grantmakers with a bar like GiveWell's; without GiveWell it would still give most of this money to good global-health programmes, so GiveWell is credited with the part its research steers better than Open Philanthropy would alone, set at the low end of the shared own-effect range (facts/meta.json own_effect_share, 15–45%, from Giving What We Can's donor surveys). Low: Open Philanthropy's own team would find nearly the same grants; high: it relies on GiveWell for the research it would otherwise go without."
+    },
+    {
+      "id": "donor_survey_changed_share",
+      "section": "reach",
+      "label": "Share of surveyed donors' giving that GiveWell changed (its 2015 survey)",
+      "format": "percent",
+      "value": 0.8403,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2016",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2016.pdf",
+        "page": "pp. 13–14, 'How has GiveWell changed donors' giving'",
+        "quote": "Reallocated 272 47% $4,247,252 53% Increased 157 27% $1,585,326 20% Some reallocated, some increased 82 14% $898,750 11%",
+        "note": "583 donors giving $2,000–$1M ($8,010,602) from its 2015 major donor survey, reported in the 2016 metrics: reallocated, increased or both, $6,731,328 = 84.0% of the giving; 'just beginning to give' $1,271,399 (16%); decreased $7,875. GiveWell says the sample is likely skewed to its most engaged donors. Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Its own donor survey: the giving its surveyed donors said GiveWell redirected or increased, as a share of all their giving."
+    },
+    {
+      "id": "survey_respondents_giving",
+      "section": "reach",
+      "label": "Giving by the donors who answered GiveWell's 2015 survey question (US$)",
+      "format": "usd",
+      "value": 8010602,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2016",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2016.pdf",
+        "page": "p. 14, 'How has GiveWell changed donors' giving' (total row)",
+        "quote": "Just beginning to give 70 12% $1,271,399 16% Total 583 100% $8,010,602 100%",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      }
+    },
+    {
+      "id": "surveyed_donors_giving",
+      "section": "reach",
+      "label": "Giving by all donors GiveWell surveyed in 2015 (US$)",
+      "format": "usd",
+      "value": 19300000,
+      "kind": "observed",
+      "drawn_with": "survey_respondents_giving",
+      "source": {
+        "title": "GiveWell, Metrics Report 2016",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2016.pdf",
+        "page": "p. 12",
+        "quote": "we summarize what we have learned about the 1,882 donors surveyed who each gave $2,000 – $1 million in 2016 (in total, this set of donors gave $19.3 million)",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      }
+    },
+    {
+      "id": "survey_response_share",
+      "section": "reach",
+      "label": "Share of the surveyed donors' giving covered by the answers",
+      "format": "percent",
+      "formula": "survey_respondents_giving / surveyed_donors_giving",
+      "explainer": "The donors who answered gave 42% of what all surveyed donors gave; the rest didn't answer the question."
+    },
+    {
+      "id": "survey_response_adj",
+      "section": "reach",
+      "label": "Survey answer to own effect: non-respondents counted at the shared share of respondents' influence",
+      "format": "percent",
+      "explainer": "Donors who answer a survey are the engaged ones; those who didn't are counted at half the respondents' influence (the shared @meta.survey_nonrespondent_influence, Giving What We Can's rule for its own surveys). 71% (56% to 100%).",
+      "formula": "survey_response_share + (1 - survey_response_share) * @meta.survey_nonrespondent_influence"
+    },
+    {
+      "id": "donor_own_effect",
+      "section": "reach",
+      "label": "Share of other donors' giving through GiveWell that GiveWell caused",
+      "format": "percent",
+      "explainer": "The share of these donors' giving that would not have gone to equally good charities without GiveWell (the shared own-effect step, normalization.md 2.8: the organisation's own donor survey; whether it was new or shifted money is the separate new-money share). Its 2015 survey's 84%, with the donors who didn't answer counted at half the respondents' influence: 59% (47% to 84%). Above the shared 30% for fundraisers, as expected: the other effective-giving organisations largely recommend GiveWell's charities, so without it there would be little equally good advice to follow.",
+      "formula": "donor_survey_changed_share * survey_response_adj"
+    },
+    {
+      "id": "open_philanthropy_moved",
+      "section": "reach",
+      "label": "Open Philanthropy's money GiveWell moved, the part GiveWell caused (US$)",
+      "format": "usd",
+      "formula": "open_philanthropy_moved_gross * open_philanthropy_own_effect"
+    },
+    {
+      "id": "donors_moved",
+      "section": "reach",
+      "label": "Other donors' money and influenced funding GiveWell moved, the part GiveWell caused (US$)",
+      "format": "usd",
+      "formula": "donors_moved_gross * donor_own_effect + influenced_funding * survey_response_adj",
+      "explainer": "Other donors' giving through GiveWell at the share it caused; the influenced funding is giving its funders already said was due to GiveWell's research, so only the survey-response step applies (funders who said so are the ones who answered)."
+    },
+    {
+      "id": "money_moved",
+      "section": "reach",
+      "label": "Money GiveWell moved to charities in its 2024 metrics year, caused by GiveWell (US$)",
+      "format": "usd",
+      "formula": "open_philanthropy_moved + donors_moved",
+      "explainer": "Funds raised less what paid for operations, plus the funding its research influenced, each times the share GiveWell caused. Funds raised ($415M) and funds directed ($397M) were close in 2024; raised is the year's giving, directed includes money raised earlier."
+    },
+    {
+      "id": "moved_per_dollar",
+      "section": "reach",
+      "label": "Money moved per dollar of the charity's cost",
+      "format": "multiple",
+      "formula": "money_moved / cost_total",
+      "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+    },
+    {
+      "id": "value_per_unit_year",
+      "section": "effect",
+      "label": "Value per unit affected per year, in units of value",
+      "format": "small",
+      "value": {
+        "low": 0.001,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "Unused: the policy branch is 0 (units_affected_per_year), so this row multiplies nothing. It keeps the template's figure and range (a typical policy win's value and chance from the family's reference classes) only so the canonical row exists; changing it moves no result."
+    },
+    {
+      "id": "p_success",
+      "section": "effect",
+      "label": "Probability the change happens because of this work",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Unused: the policy branch is 0 (units_affected_per_year), so this row multiplies nothing. It keeps the template's figure and range (a typical policy win's value and chance from the family's reference classes) only so the canonical row exists; changing it moves no result."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "effect",
+      "label": "Years a won reform counts before it would have come anyway",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "unit": "years",
+      "explainer": "The site's one answer (Your values → How impact is counted; docs/normalization.md 2.9). Never the charity's or an evaluator's own years."
+    },
+    {
+      "id": "years_until_effect",
+      "section": "effect",
+      "label": "Years from the win until the policy takes effect",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 3
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Unused: the policy branch is 0 (units_affected_per_year), so the wait discounts nothing. It keeps the template's 1 year (0 to 3, a law passed to the year it applies) only so the canonical row exists; changing it moves no result."
+    },
+    {
+      "id": "wait_discount",
+      "section": "effect",
+      "label": "Discount for the wait until the policy takes effect",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -years_until_effect",
+      "explainer": "The wait discounted at the shared rate, like every future benefit."
+    },
+    {
+      "id": "discounted_years",
+      "section": "effect",
+      "label": "Discounted years of impact",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount",
+      "unit": "years"
+    },
+    {
+      "id": "downstream_value",
+      "section": "effect",
+      "label": "Expected value of the policy or research (before adjustments)",
+      "format": "number",
+      "formula": "units_affected_per_year * value_per_unit_year * p_success * discounted_years"
+    },
+    {
+      "id": "value_destinations",
+      "section": "moved_money",
+      "label": "Value of a dollar to the charities GiveWell funds (its 2024 split, live), units of value",
+      "format": "small",
+      "formula": "(@meta.givewell_directed_2024_amf * #givewell:against-malaria-foundation + @meta.givewell_directed_2024_malaria_consortium_smc * #givewell:malaria-consortium + @meta.givewell_directed_2024_helen_keller_vas * #givewell:helen-keller-intl + @meta.givewell_directed_2024_new_incentives_cct * #givewell:new-incentives + @meta.givewell_directed_2024_path_malaria_vaccines * #givewell:path + @meta.givewell_directed_2024_chai_tb * #givewell:clinton-health-access-initiative + @meta.givewell_directed_2024_malaria_consortium_nets * #givewell:malaria-consortium + @meta.givewell_directed_2024_nutrition_international_rice * #givewell:nutrition-international + @meta.givewell_directed_2024_chai_organizational * #givewell:clinton-health-access-initiative + @meta.givewell_directed_2024_taimaka * #givewell:taimaka + @meta.givewell_directed_2024_lshtm_eyeglasses * #givewell:lshtm + @meta.givewell_directed_2024_new_incentives_ors * #givewell:new-incentives + @meta.givewell_directed_2024_evidence_action_deworming * #givewell:evidence-action + @meta.givewell_directed_2024_nutrition_international_vas * #givewell:nutrition-international + @meta.givewell_directed_2024_alima * #givewell:alima + @meta.givewell_directed_2024_ansh * #givewell:ansh + @meta.givewell_directed_2024_dimagi * #givewell:dimagi + @meta.givewell_directed_2024_y_rise * #givewell:yale-research-initiative-on-innovation-and-scale + @meta.givewell_directed_2024_evidence_action_syphilis * #givewell:evidence-action + @meta.givewell_directed_2024_mdgh * #givewell:medicines-development-for-global-health + @meta.givewell_directed_2024_ipa * #givewell:innovations-for-poverty-action + @meta.givewell_directed_2024_uduma * #givewell:uduma + @meta.givewell_directed_2024_evidence_action_ifa * #givewell:evidence-action + @meta.givewell_directed_2024_irc * #givewell:international-rescue-committee + @meta.givewell_directed_2024_ird_global * #givewell:ird-global + @meta.givewell_influenced_2024 * avg(#givewell:sightsavers, #givewell:givedirectly, #givewell:evidence-action, #givewell:pure-earth, #givewell:dimagi, #givewell:fortify-health)) / (@meta.givewell_directed_2024_amf + @meta.givewell_directed_2024_malaria_consortium_smc + @meta.givewell_directed_2024_helen_keller_vas + @meta.givewell_directed_2024_new_incentives_cct + @meta.givewell_directed_2024_path_malaria_vaccines + @meta.givewell_directed_2024_chai_tb + @meta.givewell_directed_2024_malaria_consortium_nets + @meta.givewell_directed_2024_nutrition_international_rice + @meta.givewell_directed_2024_chai_organizational + @meta.givewell_directed_2024_taimaka + @meta.givewell_directed_2024_lshtm_eyeglasses + @meta.givewell_directed_2024_new_incentives_ors + @meta.givewell_directed_2024_evidence_action_deworming + @meta.givewell_directed_2024_nutrition_international_vas + @meta.givewell_directed_2024_alima + @meta.givewell_directed_2024_ansh + @meta.givewell_directed_2024_dimagi + @meta.givewell_directed_2024_y_rise + @meta.givewell_directed_2024_evidence_action_syphilis + @meta.givewell_directed_2024_mdgh + @meta.givewell_directed_2024_ipa + @meta.givewell_directed_2024_uduma + @meta.givewell_directed_2024_evidence_action_ifa + @meta.givewell_directed_2024_irc + @meta.givewell_directed_2024_ird_global + @meta.givewell_influenced_2024)",
+      "explainer": "Where GiveWell's money went in its 2024 metrics year (its metrics report's tables of funds directed by organisation and programme, facts/meta.json givewell_directed_2024_*), each recipient at GiveWell's figure for it on this site, read live under your values (#givewell:<charity>: its programme models weighted by location, the figure the rankings show; GiveWell's own grant models are these destinations, not counted again). Top Charities 76% of the $397M; 21 other recipients with a model; the 16 grants to 14 organisations without one ($4.9M, 1.2%) are valued at the average of the rest. The $45M its research influenced goes to its recipients (Sightsavers, GiveDirectly, Evidence Action, Pure Earth, Dimagi, Fortify Health; Unlimit Health has no model) with equal weights, none being published.",
+      "unit": "units of value / $"
+    },
+    {
+      "id": "moved_side_effects",
+      "section": "effect",
+      "label": "Side effects of GiveWell's work beyond the money counted, as a share of its value",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "side_effect": "added",
+      "explainer": "Good and harm the money counted leaves out. Positive: its published research and cost-effectiveness models used by funders and governments who don't report it (only funders who told it count in influenced_funding), and other effective-giving organisations' recommendations built on its research beyond the money they pass through it; negative: donors' and funders' attention concentrated on what it can measure, and charities shaping programmes to its criteria. 10% (−5% to +30%) of the modelled value, our judgment, anchored on Giving What We Can's 5% (−5% to +20%) for a fundraiser whose research is a small part of its work; GiveWell's research is most of its."
+    },
+    {
+      "id": "value_global_health",
+      "section": "moved_money",
+      "label": "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
+      "format": "small",
+      "formula": "@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives",
+      "explainer": "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium's seasonal malaria chemoprevention, Helen Keller Intl's vitamin A, New Incentives), each at its result on this site under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%)."
+    },
+    {
+      "id": "moved_dollar_value",
+      "section": "moved_money",
+      "label": "Value of a dollar moved, units of value",
+      "format": "small",
+      "formula": "value_destinations",
+      "explainer": "Valued by where this organisation's money went: its own published split, each recipient at its live result on this site (value_destinations)."
+    },
+    {
+      "id": "prior_dollar_value",
+      "section": "moved_money",
+      "label": "Value of a dollar where shifted money would otherwise have gone (our judgment: 1× GiveDirectly), units of value",
+      "format": "small",
+      "formula": "@meta.prior_vs_cash * #givedirectly",
+      "explainer": "Our judgment. Shifted money was going to be given anyway; it is credited only for the gain. Where it would have gone is valued at GiveDirectly's live result (GiveWell's model), as Ambitious Impact does, times a shared multiple (1×, from 0 to 3×)."
+    },
+    {
+      "id": "new_money_share",
+      "section": "moved_money",
+      "label": "Share of money moved that is new money",
+      "format": "percent",
+      "formula": "@meta.new_money_share",
+      "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
+    },
+    {
+      "id": "moved_dollar_net_value",
+      "section": "moved_money",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "format": "small",
+      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+    },
+    {
+      "id": "moved_value",
+      "section": "effect",
+      "label": "Value of the money moved (units of value)",
+      "format": "number",
+      "formula": "(donors_moved * moved_dollar_net_value + open_philanthropy_moved * (moved_dollar_value - prior_dollar_value)) * (1 + moved_side_effects)",
+      "unit": "units of value",
+      "explainer": "Other donors' money at the net value of a dollar moved (half new, half shifted); Open Philanthropy's at the gain over where it would have gone only, since it would have given the money anyway; both with the side effects."
+    },
+    {
+      "id": "careers_changed",
+      "section": "careers",
+      "label": "Careers changed to high-impact work in the year modelled",
+      "format": "integer",
+      "value": 0,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+        "page": "p. 6",
+        "quote": "GiveWell is dedicated to finding and funding outstanding giving opportunities",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "0: GiveWell moves money, not people; it reports no careers changed."
+    },
+    {
+      "id": "career_forgone_pay",
+      "section": "careers",
+      "label": "Pay a career changer gives up per year (US$)",
+      "format": "usd",
+      "explainer": "The site's shared default (facts/meta.json) while careers_changed is 0: GiveWell changes no careers, so this multiplies nothing.",
+      "formula": "@meta.career_forgone_pay_default"
+    },
+    {
+      "id": "career_years_stayed",
+      "section": "careers",
+      "label": "Years a career changer stays in high-impact work",
+      "format": "number",
+      "unit": "years",
+      "explainer": "The site's shared default (facts/meta.json) while careers_changed is 0: GiveWell changes no careers, so this multiplies nothing.",
+      "formula": "@meta.career_years_stayed_default"
+    },
+    {
+      "id": "career_years",
+      "section": "careers",
+      "label": "Years a career changer stays, discounted",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, career_years_stayed)",
+      "unit": "years",
+      "explainer": "Discounted at the shared rate."
+    },
+    {
+      "id": "career_employer_value",
+      "section": "careers",
+      "label": "Value of a dollar of the new employers' work (units of value)",
+      "format": "small",
+      "formula": "moved_dollar_value",
+      "unit": "units of value / $",
+      "explainer": "Unused: no careers changed (careers_changed is 0), so this row multiplies nothing. It keeps the template's figure and range (a typical career changer's forgone pay, years stayed and the share a programme causes) only so the canonical row exists; changing it moves no result."
+    },
+    {
+      "id": "career_counterfactual_share",
+      "section": "careers",
+      "label": "Share of the career changes the charity caused",
+      "format": "percent",
+      "explainer": "The site's shared default (facts/meta.json) while careers_changed is 0: GiveWell changes no careers, so this multiplies nothing.",
+      "formula": "@meta.career_counterfactual_share_default"
+    },
+    {
+      "id": "career_change_value",
+      "section": "careers",
+      "label": "Value of one career change (units of value)",
+      "format": "number",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "unit": "units of value",
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+    },
+    {
+      "id": "careers_missing_data_adj",
+      "section": "careers",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Unused: no careers changed (careers_changed is 0), so this row multiplies nothing. It keeps the template's figure and range (a typical career changer's forgone pay, years stayed and the share a programme causes) only so the canonical row exists; changing it moves no result."
+    },
+    {
+      "id": "careers_value",
+      "section": "careers",
+      "label": "Value of the career changes (units of value)",
+      "format": "number",
+      "formula": "careers_changed * career_change_value * careers_missing_data_adj",
+      "unit": "units of value"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Applies to the policy branch only, which is 0 here; the money moved has its own steps (own effect, new money, destinations). Kept at the template's figure."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the outcome that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Applies to the policy branch only, which is 0 here; the money moved has its own steps (own effect, new money, destinations). Kept at the template's figure."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Applies to the policy branch only, which is 0 here; the money moved has its own steps (own effect, new money, destinations). Kept at the template's figure."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Only the empty policy branch reads it. Money moved is counted dollars (its recorded funds raised): no missing-data step; each destination read live brings its own."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * missing_data_adj",
+      "explainer": "The product of the adjustments above."
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Total value (units of value)",
+      "format": "number",
+      "formula": "downstream_value * total_adj + moved_value + careers_value",
+      "unit": "units of value",
+      "explainer": "The adjustments apply to the policy and research branch; money moved counts its counterfactual through the shared new-money share (its dollars are measured, so no missing-data step), career changes through their own share and missing-data step."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "outcome",
+      "label": "Value per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "explainer": "For WELLBYs, rename the uov_* rows to wellbys_* and report in wellby. For animals, rename them to sads_* and add the species section of the corporate-campaign template (output ced_per_donor_dollar). For climate, start from the climate skeleton."
+    },
+    {
+      "id": "staff_salaries",
+      "section": "donor",
+      "label": "Salaries, 2024 (US$)",
+      "format": "usd",
+      "value": 10803000,
+      "kind": "observed",
+      "source": {
+        "title": "The Clear Fund d.b.a. GiveWell, Consolidated Financial Statements, December 31, 2024 (audited, UHY LLP)",
+        "url": "https://files.givewell.org/files/ClearFund/Clear%20Fund%202024%20audited%20financial%20statements%20(PDF).pdf",
+        "page": "p. 5, Consolidated Statement of Functional Expenses (in thousands)",
+        "quote": "Salaries 8,495 1,963 345 10,803 9,464",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "drawn_with": "accounts_total_expenses"
+    },
+    {
+      "id": "staff_benefits",
+      "section": "donor",
+      "label": "Payroll taxes and benefits, 2024 (US$)",
+      "format": "usd",
+      "value": 2492000,
+      "kind": "observed",
+      "source": {
+        "title": "The Clear Fund d.b.a. GiveWell, Consolidated Financial Statements, December 31, 2024 (audited, UHY LLP)",
+        "url": "https://files.givewell.org/files/ClearFund/Clear%20Fund%202024%20audited%20financial%20statements%20(PDF).pdf",
+        "page": "p. 5, Consolidated Statement of Functional Expenses (in thousands)",
+        "quote": "Payroll taxes and benefits 1,972 439 81 2,492 1,963",
+        "note": "Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "drawn_with": "accounts_total_expenses"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Share of cost that is staff pay",
+      "format": "percent",
+      "formula": "(staff_salaries + staff_benefits) / total_expenses",
+      "explainer": "Its own share from the audited accounts (Convention 1): salaries, payroll taxes and benefits over operating expenses, 64%. Contractors paid as professional fees ($2.2M) are left out."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap against market",
+      "format": "percent",
+      "formula": "@staff_pay.gap_research_policy",
+      "explainer": "The shared pay gap for research and policy organisations: no published salary benchmark for GiveWell's staff."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "@next_dollar.givewell",
+      "published": 1,
+      "explainer": "GiveWell's own figure (facts/next_dollar.json): 70% (40–85%), for the part of a further dollar that does add to its operations: its research is growing into less proven areas. That money isn't what limits its operations is counted once, in next_dollar_freed_for_grants."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"
+    },
+    {
+      "id": "next_dollar_freed_for_grants",
+      "section": "donor",
+      "label": "Share of a further dollar for operations that ends up granted out",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "GiveWell, Excess Assets Policy; GiveWell, Unrestricted Fund",
+        "url": "https://www.givewell.org/about/official-records/Excess-Assets-Policy",
+        "quote": "Once we surpass that level of unrestricted assets, we designate the excess assets for granting",
+        "note": "The policy: GiveWell holds enough unrestricted funding to operate for two years into the future and its Board earmarks the excess for granting at least once a year; the excess is designated from 'our largest unrestricted donation or donations' (Unrestricted Fund page). Unrestricted gifts $111M against $21.4M of operations in its 2024 metrics year (Metrics Report 2024, pp. 8, 12), $199M against $23.0M in 2025; net assets without donor restrictions $189M at the end of 2024 (audited statements, p. 3). Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Our judgment. GiveWell keeps two years of operating needs in unrestricted funds and designates anything above that for granting. The Unrestricted Fund page says most donors' gifts are spent on operations, because the excess is taken from the largest gifts; but a further gift still raises the excess one for one, so it ends up a dollar granted, worth what GiveWell's grants achieve (granted_dollar_value). The rest, where the operating budget does respond to what donors give, does operations work at the next-dollar share of the past average. 95% (80% to 100%), anchored on unrestricted gifts running five to nine times its operating costs."
+    },
+    {
+      "id": "granted_dollar_value",
+      "section": "donor",
+      "label": "Value of a dollar GiveWell grants (its 2024 directed split, live), units of value",
+      "format": "small",
+      "formula": "(@meta.givewell_directed_2024_amf * #givewell:against-malaria-foundation + @meta.givewell_directed_2024_malaria_consortium_smc * #givewell:malaria-consortium + @meta.givewell_directed_2024_helen_keller_vas * #givewell:helen-keller-intl + @meta.givewell_directed_2024_new_incentives_cct * #givewell:new-incentives + @meta.givewell_directed_2024_path_malaria_vaccines * #givewell:path + @meta.givewell_directed_2024_chai_tb * #givewell:clinton-health-access-initiative + @meta.givewell_directed_2024_malaria_consortium_nets * #givewell:malaria-consortium + @meta.givewell_directed_2024_nutrition_international_rice * #givewell:nutrition-international + @meta.givewell_directed_2024_chai_organizational * #givewell:clinton-health-access-initiative + @meta.givewell_directed_2024_taimaka * #givewell:taimaka + @meta.givewell_directed_2024_lshtm_eyeglasses * #givewell:lshtm + @meta.givewell_directed_2024_new_incentives_ors * #givewell:new-incentives + @meta.givewell_directed_2024_evidence_action_deworming * #givewell:evidence-action + @meta.givewell_directed_2024_nutrition_international_vas * #givewell:nutrition-international + @meta.givewell_directed_2024_alima * #givewell:alima + @meta.givewell_directed_2024_ansh * #givewell:ansh + @meta.givewell_directed_2024_dimagi * #givewell:dimagi + @meta.givewell_directed_2024_y_rise * #givewell:yale-research-initiative-on-innovation-and-scale + @meta.givewell_directed_2024_evidence_action_syphilis * #givewell:evidence-action + @meta.givewell_directed_2024_mdgh * #givewell:medicines-development-for-global-health + @meta.givewell_directed_2024_ipa * #givewell:innovations-for-poverty-action + @meta.givewell_directed_2024_uduma * #givewell:uduma + @meta.givewell_directed_2024_evidence_action_ifa * #givewell:evidence-action + @meta.givewell_directed_2024_irc * #givewell:international-rescue-committee + @meta.givewell_directed_2024_ird_global * #givewell:ird-global) / (@meta.givewell_directed_2024_amf + @meta.givewell_directed_2024_malaria_consortium_smc + @meta.givewell_directed_2024_helen_keller_vas + @meta.givewell_directed_2024_new_incentives_cct + @meta.givewell_directed_2024_path_malaria_vaccines + @meta.givewell_directed_2024_chai_tb + @meta.givewell_directed_2024_malaria_consortium_nets + @meta.givewell_directed_2024_nutrition_international_rice + @meta.givewell_directed_2024_chai_organizational + @meta.givewell_directed_2024_taimaka + @meta.givewell_directed_2024_lshtm_eyeglasses + @meta.givewell_directed_2024_new_incentives_ors + @meta.givewell_directed_2024_evidence_action_deworming + @meta.givewell_directed_2024_nutrition_international_vas + @meta.givewell_directed_2024_alima + @meta.givewell_directed_2024_ansh + @meta.givewell_directed_2024_dimagi + @meta.givewell_directed_2024_y_rise + @meta.givewell_directed_2024_evidence_action_syphilis + @meta.givewell_directed_2024_mdgh + @meta.givewell_directed_2024_ipa + @meta.givewell_directed_2024_uduma + @meta.givewell_directed_2024_evidence_action_ifa + @meta.givewell_directed_2024_irc + @meta.givewell_directed_2024_ird_global)",
+      "unit": "units of value / $",
+      "explainer": "The funds GiveWell directed in 2024, each recipient at GiveWell's figure for it, read live, the same weights as value_destinations without the funding other funders chose (influenced_funding): what a dollar GiveWell designates for granting achieves."
+    },
+    {
+      "id": "uov_per_donor_dollar",
+      "section": "donor",
+      "label": "Units of value per dollar you give",
+      "format": "small",
+      "formula": "next_dollar_freed_for_grants * granted_dollar_value + (1 - next_dollar_freed_for_grants) * uov_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "unit": "Units of value / $",
+      "explainer": "A further dollar for GiveWell's operations: the share it frees for grants at the value of a dollar GiveWell grants, the rest at the operations' past average, credited by share of resources and scaled to the next dollar."
+    }
+  ]
+}

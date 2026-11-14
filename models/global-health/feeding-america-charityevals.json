@@ -1020,48 +1020,12 @@
       "unit": "Years of healthy life / $"
     },
     {
-      "id": "fuel_share",
-      "section": "bridges",
-      "label": "Share of these tonnes from burning less fossil fuel near people",
-      "format": "percent",
-      "value": 0,
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: emissions inventory",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "0: rotting food carries no smoke (the climate skeleton's row, docs/normalization.md 2.5)."
-    },
-    {
-      "id": "fuel_smoke_factor",
-      "section": "bridges",
-      "label": "Air-pollution deaths per tonne of this fuel, relative to the fossil-fuel average",
-      "format": "number",
-      "value": {
-        "low": 0.02,
-        "best": 0.1,
-        "high": 0.3
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "TEMPLATE: deaths per TWh study",
-        "url": "https://example.org/REPLACE",
-        "page": "REPLACE: page/table",
-        "quote": "REPLACE: verbatim sentence",
-        "retrieved": "2026-01-01"
-      },
-      "explainer": "Not used here: fuel_share is 0, so the smoke factor doesn't count (the climate skeleton's row)."
-    },
-    {
       "id": "air_pollution_weight",
       "section": "bridges",
       "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
       "format": "number",
-      "formula": "fuel_share * fuel_smoke_factor",
-      "explainer": "Read by the tonnes' bridge, as by the tco2e unit's conversion."
+      "formula": "0",
+      "explainer": "Read by the tonnes' bridge, as by the tco2e unit's conversion: 0, since food rotting in a landfill burns no fuel and carries no smoke (its methane's ozone is counted through the methane share below)."
     },
     {
       "id": "extra_deaths_per_tco2e",
@@ -1070,6 +1034,19 @@
       "format": "small",
       "formula": "0",
       "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
+    },
+    {
+      "id": "methane_share",
+      "section": "bridges",
+      "label": "Share of these tonnes that are methane",
+      "format": "percent",
+      "value": {
+        "low": 0.85,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The share of these tonnes (in CO₂e) that is methane, which the site's climate conversion values by methane's own timing: earlier, shorter warming and the ozone it makes (docs/normalization.md 2.5). Food rotting in a landfill gives off methane; its CO₂ is from plants and isn't counted, so the landfill tonnes are nearly all methane, less the fuel of hauling it and the power credited to captured landfill gas in EPA's Waste Reduction Model. Our judgment, 0.95 (0.85 to 1)."
     },
     {
       "id": "tco2e_bridged",
@@ -1084,7 +1061,7 @@
       "section": "bridges",
       "label": "Climate, in healthy years",
       "format": "number",
-      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
       "unit": "DALYs",
       "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     }

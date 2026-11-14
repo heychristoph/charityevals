@@ -253,10 +253,30 @@ tonnes carry, in one row the conversion reads:
 heat factor   = (1 + $discount_rate) ^ -$climate_heat_death_delay
 V_heat        = Σ_band @death_ages.heat_share_<band> × @moral_weights.<band>           (59.7 UoV)
 V_air         = Σ_band @death_ages.air_pollution_share_<band> × @moral_weights.<band>  (47.6 UoV)
-healthy years = tonnes × [ $deaths_per_tco2e × $climate_heat_share × heat factor × (1 + @climate.nondeath_damages_vs_deaths) × V_heat
-                         + ($deaths_per_tco2e × (1 − $climate_heat_share) × air_pollution_weight + extra_deaths_per_tco2e) × V_air ]
+methane heat  = @climate.methane_heat_deaths_vs_co2 × (1 + $discount_rate) ^ -@climate.methane_heat_death_delay
+ozone factor  = 1 / (1 + ln(1 + $discount_rate) × @climate.methane_lifetime_years)
+healthy years = tonnes × [ $deaths_per_tco2e × $climate_heat_share × ((1 − methane_share) × heat factor + methane_share × methane heat)
+                             × (1 + @climate.nondeath_damages_vs_deaths) × V_heat
+                         + ($deaths_per_tco2e × (1 − $climate_heat_share) × air_pollution_weight + extra_deaths_per_tco2e
+                             + methane_share × @climate.ozone_deaths_per_tco2e_methane × ozone factor) × V_air ]
                 × $life_value_multiplier / $uov_per_daly     (= $daly_per_child_death / 116.25: no $uov_per_daly left)
 ```
+
+**Methane (November 2026), one rule for every model with methane tonnes.** Each model (and each tco2e bridge) has a
+row `methane_share` beside `air_pollution_weight`: the share of its CO₂e tonnes that is methane, weighted by tonnes a
+year before waits (a conversion row reads no shared assumption, INV-2b). The conversion gives that share methane's own
+warming and its ozone. Warming: the IPCC's standard pulse responses (AR5 8.SM.11; methane's 11.8-year lifetime, AR6),
+with heat deaths following the warming, give a discount-weighted delay at 4% of 60 years for CO₂ (the site's figure)
+and 23 for methane (`methane_heat_death_delay`, judgment 18–30), and a methane CO₂e tonne 0.51 of a CO₂ tonne's warming
+to 2300 (`methane_heat_deaths_vs_co2`, judgment 0.5, 0.3–0.8: GWP100 equals the gases over 100 years only). Ozone:
+`ozone_deaths_per_tco2e_methane` (EPA/McDuffie to the Global Methane Assessment), discounted over the methane's
+lifetime as an exponential decay (`methane_lifetime_years`, 0.68 at 4%). At the defaults a methane tonne is worth 4.3
+CO₂ tonnes (heat 2.1, ozone about as much again). INV-10 checks proportionality to `$deaths_per_tco2e` with
+`methane_share` at 0, since the ozone rate is methane's own. Evaluators that value every tonne alike keep 0 in their
+view. Shares: Clean Air Task Force (ours) 0.81, computed from its wins (before: its ozone in `extra_deaths_per_tco2e`,
+undiscounted); Feeding America 0.95 (landfilled food); The Nature Conservancy 0.003 (PRANA's residue burning, 80%
+methane, 0.33% of the tonnes); every other climate model 0. Before → after (our view): Clean Air Task Force 0.0064 →
+0.0066; Feeding America and The Nature Conservancy unchanged at three figures.
 
 **Deaths by age (late October 2026).** Each death is valued by the age it comes at, like every death on the
 site (decision 2026-10-31 #4): GiveWell's moral weights by age (`@moral_weights`: under five 116.25, 5–14 134,
@@ -305,7 +325,7 @@ Evergreen 2021 0.32 → 0.12, 2023 0.039 → 0.030; Future Cleantech Architects 
 - The mechanism: `to_common` may name rows of the converted model by bare id (and shared facts by
   `@key`), and the engine evaluates the conversion with the model's computed rows (`toCommon`, `headline`, `bottomLine`, uncertainty).
   `buildLibrary` records these as the model's `conversionRows`; a `tco2e` model without
-  `air_pollution_weight` is a build error, and `rowsFeeding` follows them, so the row's inputs count as
+  one of the rows it names (`air_pollution_weight`, `extra_deaths_per_tco2e`, `methane_share`) is a build error, and `rowsFeeding` follows them, so the row's inputs count as
   on the path. The shared rates stay shared: INV-2b still forbids any row from reading a cross-cause
   rate, and also checks that a conversion row sits in an `ours` section and that neither it nor
   anything feeding it reads a shared assumption. The model supplies only how much of the shared
@@ -343,7 +363,7 @@ Evergreen 2021 0.32 → 0.12, 2023 0.039 → 0.030; Future Cleantech Architects 
   about 50 times below our default because it leaves out air pollution.
 - What it leaves out: damage that isn't death (crops, income, migration), tipping points and growth
   effects (Rethink's Model 2+ multiplies its whole-damages figure by 2.5 to 6). Air pollution per
-  tonne differs by fuel and place; each model's `air_pollution_weight` carries that. Methane's ozone deaths aren't counted yet (a methane fact is open work). At the slider's high end
+  tonne differs by fuel and place; each model's `air_pollution_weight` carries that. Methane is valued by its own timing and ozone (Methane, above). At the slider's high end
   (a stand-in for all damage) the 23% heat share undercounts what tonnes with a low `air_pollution_weight` carry.
 - **The wait is discounted.** Most tonnes are avoided years after the grant (a policy that takes
   effect later, plants re-powered later, trees growing for decades). Every climate model has a row
