@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "securebio",
   "owner": "charityevals",
-  "summary": "SecureBio (Cambridge, Massachusetts) works against catastrophic pandemics: the Nucleic Acid Observatory's metagenomic early warning from sewage and airplane waste, SecureDNA's free DNA synthesis screening (since run by a Swiss foundation) and evaluations of how far AI models help with dangerous biology, run for AI developers. This model of all its work in 2024 (its latest Form 990, $4.25M) comes to about 6.1 years of healthy life per $1,000, from 0.4 to 98 on the combined range: each dollar is valued as a typical project's cut in the forecast risk (Rethink Priorities' cross-cause model; the Existential Risk Persuasion Tournament's experts for pandemics, the AI slider for AI), the AI evaluations as work against AI misuse and the rest as pandemic work, deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. The biggest uncertainties are the years a cut counts, the discount rate and how much a typical dollar cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way). Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "SecureBio (Cambridge, Massachusetts) works against catastrophic pandemics: the Nucleic Acid Observatory's metagenomic early warning from sewage and airplane waste, SecureDNA's free DNA synthesis screening (since run by a Swiss foundation) and evaluations of how far AI models help with dangerous biology, run for AI developers. This model of all its work in 2024 (its latest Form 990, $4.25M) comes to about 6.2 years of healthy life per $1,000, from 0.4 to 93 on the combined range: each dollar is valued as a typical project's cut in the forecast risk (Rethink Priorities' cross-cause model; the Existential Risk Persuasion Tournament's experts for pandemics, the AI slider for AI), the AI evaluations as work against AI misuse and the rest as pandemic work, deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. The biggest uncertainties are the years a cut counts, the discount rate and how much a typical dollar cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way). Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: SecureBio",
@@ -995,17 +995,38 @@
       "unit": "DALYs"
     },
     {
+      "id": "ai_evidence_adj",
+      "section": "adjustments",
+      "label": "AI evaluations: how far a typical AI project's effect applies",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 1.2,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "Above a typical project: the developers use SecureBio's evaluations before release (SecureBio says references to its evaluations appear in the public system cards of Claude 3.7 Sonnet, Claude 4, GPT-4.5, o3-mini, o4-mini and Gemini 2.5 Pro; Anthropic's Claude 4 assessment used its Virology Capabilities Test and two more of its benchmarks). 1.2, the family's ceiling, as for our Center for AI Safety model, whose benchmarks the developers also report; down to 0.5 if the evaluations mostly confirm what the developers would have found."
+    },
+    {
+      "id": "bio_evidence_adj",
+      "section": "adjustments",
+      "label": "Pandemic work: how far a typical biosecurity project's effect applies",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.75,
+        "high": 1.1
+      },
+      "kind": "judgment",
+      "explainer": "The Nucleic Acid Observatory is the leading open pilot of untargeted wastewater sequencing, with CDC's traveller surveillance as a partner, and SecureDNA's screening was tested with major manufacturers; but neither the early-warning system nor the screening was yet in routine use in 2024, and detection helps only if a response follows. 0.75, our judgment, 0.3 to 1.1; anchors our Nuclear Threat Initiative model's 0.8 and Johns Hopkins Center for Health Security model's 0.73."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "How far a typical project's effect applies here",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.85,
-        "high": 1.3
-      },
-      "kind": "judgment",
-      "explainer": "How far Rethink Priorities' typical small project applies to SecureBio's work, one figure for all of it (the programmes' cases are close, so no blend). Above typical: its AI evaluations are used by the developers (its Virology Capabilities Test is cited in the system cards of Claude 3.7 Sonnet, Claude 4, GPT-4.5, o3-mini, o4-mini and Gemini 2.5 Pro, SecureBio says), as for our Center for AI Safety model's 1.2; the Nucleic Acid Observatory is the leading open pilot of untargeted wastewater sequencing, with CDC's traveller surveillance as a partner. Below: neither the early-warning system nor SecureDNA's screening was yet in routine use in 2024, and detection helps only if a response follows. Net 0.85, our judgment, 0.3 to 1.3; anchors our Nuclear Threat Initiative model's 0.8 and Johns Hopkins Center for Health Security model's 0.73."
+      "formula": "ai_cost_share * ai_evidence_adj + (1 - ai_cost_share) * bio_evidence_adj",
+      "explainer": "The AI evaluations' and the pandemic work's multipliers, weighted by their shares of the cost (Convention 7); a dollar of each averts about as much before adjustments (the AI one about 0.9 of the pandemic one), so cost weights stand in for outcome weights."
     },
     {
       "id": "counterfactual_adj",
@@ -1104,7 +1125,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Good beyond the catastrophes counted: the Nucleic Acid Observatory publishes its sequencing data and methods, which others use to track ordinary respiratory and enteric viruses; screening and AI safeguards also stop misuse far below a catastrophe. No such outcome is measured. 5% (0 to 20%) of the modelled value, our judgment, as for the Johns Hopkins Center for Health Security.",
+      "explainer": "Good beyond the catastrophes counted: the Nucleic Acid Observatory publishes its sequencing data and methods, which others use to track ordinary respiratory and enteric viruses; screening and AI safeguards also stop misuse far below a catastrophe. No such outcome is measured. Anchor: at 5% this is about 1.5 years of healthy life per $1,000 of the Observatory's spending, below the site's rich-country health services and research models (cancer research and refugee services about 2); 0 to 20% (up to about 6), our judgment, as for the Johns Hopkins Center for Health Security.",
       "side_effect": "added"
     },
     {
