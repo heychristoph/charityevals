@@ -1,6 +1,6 @@
 ### Summary
 
-The Centre for the Governance of AI (GovAI) researches how governments and AI companies can manage the risks of advanced AI, advises them, and trains people for the field. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="govai-charityevals">2.9</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on our judgment of what the EU's Code of Practice for general-purpose AI does and how much of it is GovAI's. All are deeply uncertain: on the model's own ranges the result runs from about 0.07 to about 48, and wider with the shared assumptions.
+The Centre for the Governance of AI (GovAI) researches how governments and AI companies can manage the risks of advanced AI, advises them, and trains people for the field. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="govai-charityevals">1.6</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on our judgment of what the EU's Code of Practice for general-purpose AI does and how much of it is GovAI's. All are deeply uncertain: on the model's own ranges the result runs from about 0.05 to about 33, and wider with the shared assumptions.
 
 ### What the charity does
 
@@ -25,16 +25,16 @@ The deaths averted are valued like every death on the site, across the world's a
 The model has three branches.
 
 - **Research and policy engagement**, valued as typical AI safety work. About a fifth of the research is on AI's economic effects and US competitiveness rather than catastrophes; it counts as a share of other benefits, not through the catastrophe chances.
-- **The Code of Practice**, a policy win. We judge that its safety chapter removes 0.1% of the AI catastrophe risk while in force, beyond what the AI Act already requires; most signatories already had safety frameworks. GovAI's director of policy was one of the 9 people who drafted that chapter, and about half of his part another expert would have written. This branch gives about half the result.
-- **Training.** It counts the fellows and scholars who go on to work on AI risk because of it (22%), the years they stay (5), and the training's share of the credit for that work (12%, its cost against theirs).
+- **The Code of Practice**, a policy win. We judge that its safety chapter removes 0.1% of the AI catastrophe risk while in force, beyond what the AI Act already requires; most signatories already had safety frameworks. GovAI's director of policy was one of the 9 people who drafted that chapter, but the AI Office, almost 430 written submissions and the companies themselves put in far more: we put everyone's resources behind the chapter at about $20 million, so GovAI's $240,000 is about 1% of them. About half of its part another expert in the seat would have written. This branch gives about a tenth of the result.
+- **Training.** It counts the fellows and scholars who go on to work on AI risk because of it (22%), the years they stay (5), and the training's share of the credit for that work (12.5%, its cost against theirs). It gives about two fifths of the result, the research about half.
 
-Each adjustment is set branch by branch and weighted by the deaths each branch averts:
+Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
 
 | Adjustment | Research | Code | Training |
 |---|---|---|---|
 | How far a typical project's effect applies | 0.8 × 1 (catastrophe share × uptake) | 1 (the cut is judged directly) | 1 |
 | Work no one else would have done now | 0.6 | 0.5 | 0.9 |
-| GovAI's share of the resources | 0.75 | 0.11 (1 of 9 drafters) | 0.95 |
+| GovAI's share of the resources | 0.75 | about 0.01 (its spending over everyone's) | 0.95 |
 
 Funging by large funders is 1, counted once in the next-dollar figure. The missing-data slider applies to every branch, because nothing about GovAI's effect on the risk is measured.
 
@@ -44,12 +44,12 @@ GovAI doubled its spending in 2025 and plans more growth; the UK office alone he
 
 ### What drives the result
 
-The result is above the Center for AI Safety's and far above METR's, MIRI's and Redwood Research's. Two things cause this: the Code of Practice, and the fifth of GovAI's catastrophe research aimed at misuse, which Rethink's typical project values far above misalignment work. It is far below the Nuclear Threat Initiative's, because Rethink's typical AI project cuts much less expected harm per dollar than a nuclear one.
+The result is close to the Center for AI Safety's and far above METR's, MIRI's and Redwood Research's, because a fifth of GovAI's catastrophe research is aimed at misuse, which Rethink's typical project values far above misalignment work. It is far below the Nuclear Threat Initiative's, because Rethink's typical AI project cuts much less expected harm per dollar than a nuclear one.
 
 ### Biggest uncertainties
 
 - **How likely an AI catastrophe is.** The slider moves the result many-fold.
-- **What the Code does and how much of it is GovAI's.** Both are our judgments; each moves the result several-fold.
+- **What the Code does and how much of it is GovAI's.** Both are our judgments, but the Code gives only a tenth of the result.
 - **How much a dollar of misuse work cuts the risk.** Rethink's figure runs ten times either way.
 - **The discount rate and the years a cut counts.** Each moves the result several-fold.
 - **The 2025 figures.** No audited statement for 2025 is public yet, and the split between research and training is our estimate.
@@ -61,7 +61,7 @@ The result is above the Center for AI Safety's and far above METR's, MIRI's and 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Center for AI Safety's model as the worked example. The first audit round moved the Code of Practice into the policy branch, split the counterfactual by branch so the training's is not counted twice, and lowered the research's uptake factor to 1. The second round put GovAI's part of the Code into the counterfactual and credit rows, counted it over its safety chapter's 9 drafters, anchored the Code's cut on the AI Act and Rethink's rate (0.1%), and chained the adjustments so each branch keeps its own product. The audit rounds are in audits/govai-charityevals/.
+The model was built from the catastrophic-risk template, with the Center for AI Safety's model as the worked example. The first audit round moved the Code of Practice into the policy branch, split the counterfactual by branch so the training's is not counted twice, and lowered the research's uptake factor to 1. The second round put GovAI's part of the Code into the counterfactual and credit rows, counted it over its safety chapter's 9 drafters, anchored the Code's cut on the AI Act and Rethink's rate (0.1%), and chained the adjustments so each branch keeps its own product. The third credited GovAI's part of the Code by its share of everyone's resources behind it (about 1%, not 1 in 9 drafters) and weighted the adjustments by healthy years. The audit rounds are in audits/govai-charityevals/.
 
 ### Sources
 
