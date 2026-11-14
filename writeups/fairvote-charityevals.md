@@ -16,10 +16,10 @@ Ranked-choice voting now reaches about 17 million Americans (14 million voters),
 - **The past record:** a dollar to FairVote is counted as doing what the average dollar behind each movement did.
 - **Ranked-choice branch (about four fifths of spending):**
   - about 1.4 million more people a year under ranked-choice voting in 2016-2025, net of repeals;
-  - they use it for only some of their governments' elections (New York City its primaries, cities their own offices): counted at 45% of a full switch;
+  - they use it for only some of their governments' elections (New York City its primaries, cities their own offices): counted at 44% of a full switch;
   - the gain: a judged 2% of the income becoming a democracy brings (about a fifth more income per person in the long run), counted at 0.5 for doubt that the effect is real;
   - the movement spent about $19 million a year, ballot campaigns included.
-- **Proportional-representation branch (about a fifth):** about 103,000 people a year in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. A city's own elections count as half of a full switch. The gain is a judged 5% of democracy's, at 0.6 for doubt. The movement spent about $3.5 million a year. The Protect Democracy model shares these figures.
+- **Proportional-representation branch (about a fifth):** about 103,000 people a year in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. A city's own elections count as half of a full switch. The gain is a judged 5% of democracy's, at 0.6 for doubt. The movement spent about $3.4 million a year. The Protect Democracy model shares these figures.
 - **Years:** the gain builds over about 25 years. A win counts as brought forward by the site's five years, with a 3% yearly chance of repeal.
 - **Both branches** are discounted by the missing-data slider. Ranked-choice voting gives about four fifths of the result.
 - **Side effects:** the good of fairer elections beyond income (+20%) and the state bans the wins provoke (−10%), shared with the Protect Democracy model.
