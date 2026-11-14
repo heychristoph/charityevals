@@ -1,6 +1,6 @@
 ### Summary
 
-The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **<span data-figure="headline" data-model="center-for-ai-safety-charityevals">1.4</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.03 to about 61.
+The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **<span data-figure="headline" data-model="center-for-ai-safety-charityevals">1.6</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.04 to about 71.
 
 ### What the charity does
 
@@ -33,7 +33,7 @@ The adjustments apply to all branches:
 | How far a typical project's effect applies to CAIS's work | 1.2 | Labs use its benchmarks; the cluster's projects vary in relevance |
 | Work no one else would have done now | 0.65 | 70% of cluster users said their projects needed it; others also build benchmarks |
 | CAIS's share of the resources behind its outputs | 0.61 | Outside researchers write the cluster's papers; benchmarks were made with Scale AI |
-| Funging by large funders | 0.85 | Large AI safety funders fill gaps |
+| Funging by large funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about CAIS's effect on the risk is measured |
 
 Side effects: other benefits +10% (workshops, competitions, readers of the textbook) and −5% for speeding up AI capabilities (Humanity's Last Exam is also a target labs race on).
@@ -42,13 +42,13 @@ CAIS holds about a year and a half of spending in reserve after two years of sur
 
 ### What drives the result
 
-The result is far below the Nuclear Threat Initiative's 21. That is because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects; nothing particular to CAIS causes it. Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 2.8. The course adds under a tenth.
+The result is far below the Nuclear Threat Initiative's 23. That is because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects; nothing particular to CAIS causes it. Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 3.3. The course adds under a tenth.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.4% to 20% by 2100, which moves the result from 0.2 to 9.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.2 to 13, the largest swing.
-- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (0.6 to 2.1).
+- **How likely an AI catastrophe is.** The slider runs from 0.4% to 20% by 2100, which moves the result from 0.2 to 11.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.2 to 15, the largest swing.
+- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (0.7 to 2.5).
 - **The discount rate and the years a cut counts.** Each moves the result several-fold.
 - **How CAIS's work compares with a typical project.** Its benchmarks are widely used, but use isn't the same as lower risk.
 
@@ -60,7 +60,7 @@ The result is far below the Nuclear Threat Initiative's 21. That is because Reth
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. The independent audit rounds are in audits/center-for-ai-safety-charityevals/.
+The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. The independent audit rounds are in audits/center-for-ai-safety-charityevals/.
 
 ### Sources
 

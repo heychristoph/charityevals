@@ -1,6 +1,6 @@
 ### Summary
 
-The Nuclear Threat Initiative (NTI) works to lower the chance of nuclear war, nuclear terrorism and catastrophic pandemics, mostly through diplomacy, policy work and convening. Our model of all its programmes in 2025 comes to **<span data-figure="headline" data-model="nuclear-threat-initiative-charityevals">21</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely these catastrophes are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1 to about 410.
+The Nuclear Threat Initiative (NTI) works to lower the chance of nuclear war, nuclear terrorism and catastrophic pandemics, mostly through diplomacy, policy work and convening. Our model of all its programmes in 2025 comes to **<span data-figure="headline" data-model="nuclear-threat-initiative-charityevals">24</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely these catastrophes are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1 to about 450.
 
 ### What the charity does
 
@@ -23,7 +23,7 @@ Pandemics also carry a 2% yearly chance of an outbreak as deadly as COVID-19. Th
 
 NTI's spending in each area cuts that yearly risk by the share a typical project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A nuclear war the world survives is taken to kill 45% of people, mostly through famine; a pandemic, 15%. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, by age: a catastrophe that kills a share of the world across the world's age groups, the COVID-scale pandemics the pandemic work also cuts with COVID's age mix (mostly older people). A nuclear war the world survives is taken to kill 45% of people, mostly through famine; a pandemic, 15%. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
 
 ### How the model works
 
@@ -39,7 +39,7 @@ The adjustments apply to all branches:
 | How far a typical project's effect applies to NTI's work | 0.8 | Above typical for diplomacy with senior access; below for public education |
 | Work no one else would have done now | 0.7 | |
 | NTI's share of the resources behind its projects | 0.85 | |
-| Funging by large funders | 0.9 | |
+| Funging by large funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about NTI's effect on the risk is measured |
 
 Side effects: other benefits +10% (mainly lower terrorism risk from materials security). No harm is added beyond a typical project's chance of backfiring, which is already in the cut per dollar.
@@ -48,11 +48,11 @@ NTI holds about three years of spending in reserve and has run deficits, so the 
 
 ### What drives the result
 
-Nuclear work is most of the result: it is two thirds of the spending, and Rethink's typical nuclear project cuts its risk more per dollar than a biosecurity one. Catastrophes the world survives account for more than extinction does, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 90.
+Nuclear work is most of the result: it is two thirds of the spending, and Rethink's typical nuclear project cuts its risk more per dollar than a biosecurity one. Catastrophes the world survives account for more than extinction does, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 100.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 6 to 174.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 6 to 194.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely the catastrophes are.** The tournament's superforecasters put nuclear war at half the experts' chance, and engineered pandemics at a hundredth for extinction.
 - **How many people a catastrophe the world survives kills.** For nuclear war our judgment is 45%, with a range from 15% to 85% (Xia et al. 2022's regional and large wars).
@@ -65,7 +65,7 @@ Nuclear work is most of the result: it is two thirds of the spending, and Rethin
 
 ### How this model was checked
 
-The model was built from the new catastrophic-risk template. Round 1 of the independent audit found two high issues. The first was one death share for every kind of catastrophe; it is now split by area. The second was the experts' forecasts as best guesses; they are kept, following the site's rule for AI, with the superforecasters as the low end. Rethink's backfire step is now in the cut per dollar. Round 2 passed; its fixes (the nuclear death share's range, the summary's figures) were checked in a verification round. The rounds are in audits/nuclear-threat-initiative-charityevals/.
+The model was built from the new catastrophic-risk template. Round 1 of the independent audit found two high issues. The first was one death share for every kind of catastrophe; it is now split by area. The second was the experts' forecasts as best guesses; they are kept, following the site's rule for AI, with the superforecasters as the low end. Rethink's backfire step is now in the cut per dollar. Round 2 passed; its fixes (the nuclear death share's range, the summary's figures) were checked in a verification round. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. The rounds are in audits/nuclear-threat-initiative-charityevals/.
 
 ### Sources
 
