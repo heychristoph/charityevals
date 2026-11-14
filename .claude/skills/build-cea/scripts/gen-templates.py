@@ -861,8 +861,8 @@ CR_ADJ_INPUTS = {
 
 def cr_adjustment_rows():
     rows = [f("dalys_per_death_value", "adjustments", "Healthy years per unit of value of the deaths averted (for the weights below)",
-              "dalys_from_uov / ((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death)",
-              "The bridge's healthy years over the deaths' value: turns each branch's deaths into healthy years for the weights. Fixed.", "small")]
+              "dalys_from_uov / uov_bridged * (1 + @catastrophe.nondeath_losses_vs_deaths)",
+              "The bridge's healthy years per unit of value, over all value in the bridge (deaths and any other branch valued in units of value, such as a government's), scaled back to a death's own value: turns each branch's deaths into healthy years for the weights. Fixed.", "small")]
     for b, name, what in CR_BRANCHES:
         value = "((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death)" if b == "bio" else "value_per_death"
         rows.append(f(f"w_{b}", "adjustments", f"Weight: healthy years from {what} (before adjustments)", f"{b}_deaths_averted * {value} * dalys_per_death_value + {b}_future_dalys",
