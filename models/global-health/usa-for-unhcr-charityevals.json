@@ -568,7 +568,7 @@
     {
       "id": "value_delivered_per_person",
       "section": "effect",
-      "label": "Cash and goods delivered per person in the year (US$)",
+      "label": "Cash and goods delivered per person (US$)",
       "format": "usd",
       "formula": "rel_cost_per_person * rel_goods_value_share",
       "explainer": "Valued as consumption, in full: the deaths and illness averted above are a small share of the people reached, so it isn't counted twice."
@@ -770,8 +770,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * price_2017_per_2025 * ppp_factor / baseline_consumption)",
-      "explainer": "A year's cash and goods on the site's one log-income scale."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * price_2017_per_2025 * ppp_factor / (baseline_consumption * years_exposed))",
+      "explainer": "The site's rule for cash and goods used up within a year: the months covered × ln(1 + the transfer ÷ the consumption of those months), as in charityevals' Mercy Corps and CARE models."
     },
     {
       "id": "hlt_cost_per_person",
@@ -1284,8 +1284,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per person helped home",
       "format": "number",
-      "formula": "ln(1 + sol_return_cost_per_person * rel_goods_value_share * price_2017_per_2025 * ppp_factor / baseline_consumption)",
-      "explainer": "The cash and goods given, valued as relief is (the same share reaching people, PPP and baseline)."
+      "formula": "years_exposed * ln(1 + sol_return_cost_per_person * rel_goods_value_share * price_2017_per_2025 * ppp_factor / (baseline_consumption * years_exposed))",
+      "explainer": "The cash and goods given, valued as relief is (the same share reaching people, PPP, baseline and months covered)."
     },
     {
       "id": "gik_goods_share",
