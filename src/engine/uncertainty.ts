@@ -10,7 +10,7 @@
 // high on the rankings use published ranges alone.
 
 import { evaluate, normInv, refs, type Node, type Scope } from "./expr";
-import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, hasRange, inputRange, modelConversion, modelResult, pickValue, refValues, referencedModels, usedAssumptions, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
+import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, hasRange, inputRange, modelConversion, modelResult, pickValue, readsAsDestination, refValues, referencedModels, usedAssumptions, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";
 import { rowsFeeding } from "./sensitivity";
 
 /** Where a number comes from, for grouping: your shared assumptions, the evaluator's judgment calls,
@@ -260,20 +260,22 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   // A referenced model's result's derivative with respect to each shared assumption it reads, at the
   // reader's values (`#id` is always our view), by nudging the assumption 1%.
   const modelDerivs = new Map<string, { name: string; d: number }[]>();
-  // The values compute read the model at (refValues: the evaluator view reads it undiscounted for age, and a
+  // The values compute read the model at (refValues: the evaluator view reads it undiscounted for age; a
   // model read as a stand-in for this one's work is read without its distance weight and missing-data
-  // step, so neither slider moves it).
-  const rv = refValues(m, av, view);
+  // step, so neither slider moves it; a destination of a model with beneficiaries of its own, without
+  // its distance weight).
   const modelEdges = (ref: string) => {
     let es = modelDerivs.get(ref);
     if (es) return es;
     es = [];
+    const rv = refValues(m, av, view, ref);
     const base = leafVals("model", ref);
     if (Number.isFinite(base))
       for (const key of leaves.keys()) {
         if (!key.startsWith("assumption:")) continue;
         const name = key.slice("assumption:".length);
-        if ((name === DISTANCE_DISCOUNT || name === MISSING_DATA_DISCOUNT) && m.beneficiaries !== "destinations") continue;
+        if (name === DISTANCE_DISCOUNT && m.beneficiaries !== "destinations") continue;
+        if (name === MISSING_DATA_DISCOUNT && !readsAsDestination(m, ref)) continue;
         const v = rv[name];
         if (!Number.isFinite(v)) continue;
         const leaf = leaves.get(key)!;

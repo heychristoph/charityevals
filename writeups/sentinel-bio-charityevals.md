@@ -25,8 +25,6 @@ Each grant counts at what its recipient does with a dollar:
 - **The two fellowships** ($163,300) count through the work they add to the field, as fellowships do in the site's other models. About 1 in 10 fellows is taken to stay in biosecurity longer because of it, over five years. The fellowship's share of the credit for that work is its cost against the fellows' added work, about two fifths.
 - **The advised gift** counts as advice that changed where money went, the site's one method for it. Sentinel is taken to have caused 30% of it, the site's shared figure. That money was going to be given anyway, so it counts only for its gain over an ordinary catastrophic-risk charity, with the evidence and missing-data discounts. The Center counts at its figure on the rankings.
 
-The grants to charities the site models also take the missing-data discount here, as they do on those charities' own pages.
-
 Sentinel's own costs are in the cost, but earn nothing of their own. They are what it costs to choose and steer the grants and give the advice, so counting them again as typical pandemic work would count the grantees' work twice.
 
 Side effects for the grants and fellowships valued as typical work add 2%. Screening also catches orders for toxins, and the fellowships link protein designers with policy. Against that, stress-testing screening finds ways around it, which could help an attacker if published.

@@ -980,7 +980,14 @@ for r in T["catastrophic-risk"]["rows"]:
 SIDE_EFFECTS = {"unmodelled_benefits_adj": "added", "uov_spillovers": "added", "household_multiplier": "factor", "speedup_harm_share": "added", "hazard_harm_share": "added"}
 
 os.makedirs(OUT, exist_ok=True)
+MODEL_REF = re.compile(r"#([a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?)")
 for name, m in T.items():
+    # Money moved is read at its destinations' figures on the rankings, missing-data step included
+    # (destination_reads, docs/normalization.md 2.12); a stand-in elsewhere is not.
+    dest = sorted({x for r in m["rows"] if r.get("section") == MM["section"]["id"] for x in MODEL_REF.findall(r.get("formula", ""))})
+    if dest:
+        m = {k2: v2 for k, v in m.items() for k2, v2 in ([(k, v), ("destination_reads", dest)] if k == "resources" else [(k, v)])}
+        T[name] = m
     for r in m["rows"]:
         if r["id"] in SIDE_EFFECTS: r["side_effect"] = SIDE_EFFECTS[r["id"]]
         if r["id"] in ("p_success", "adv_p_success"):

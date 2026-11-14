@@ -1076,7 +1076,13 @@ the same definition of measured and thin. Built like the age and distance factor
 - **Models read live, as for distance.** A charity that moves money ("destinations") reads each
   destination with its own step (the good is the destination's, as well measured as it is) and is itself
   measured (counted dollars); a stand-in is read at a slider of 1 (`refValues`) and the reading model's
-  own classification applies once. The evaluator view reads every model at 1 (`readerValues`).
+  own classification applies once. The evaluator view reads every model at 1 (`readerValues`). A model
+  with beneficiaries of its own reads money it grants or moves (and that money's counterfactual) as a
+  destination by naming the reference in `destination_reads`: its figure on the rankings, step included
+  (Ploughshares' four grantees, Sentinel Bio's, the moved-money rows of the advocacy builds; the lint
+  refuses a moved-money row or `#owner:charity` on the path read as a stand-in). Ploughshares 24.2 →
+  23.6, Sentinel Bio 4.66 → 4.58 (its own `live_missing_data_adj` dropped, which had also halved the advice
+  a second time; the prior now reads its cause's members with their steps).
 - **Classification** by scripts/missing-data.ts, a default per evaluator and programme with a reason per
   model (`--table` prints them): measured where the charity counts who got the intervention (or its cost per
   person comes from its own past delivery) and the effect is from a controlled evaluation of the charity
@@ -1163,6 +1169,8 @@ rule follows:
   GiveDirectly's result per dollar): the other model only supplies a value per dollar for this model's own
   work, whose beneficiaries are this model's. It reads the stand-in without its weight (`refValues`: d = 0),
   and its own weight applies once, to the whole.
+- **A grant from a model with beneficiaries of its own** (`destination_reads`, 2.12): read at the grantee's
+  figure with its missing-data step, age and risk but without its weight; the reader's own applies once.
 
 Checked by INV-20 (every model with a result in common units has beneficiaries with known codes summing to 1,
 or "world", or "destinations" only where it reads models live; with no home, or a home at d = 0, every

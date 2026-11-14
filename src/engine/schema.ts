@@ -257,6 +257,13 @@ export const Model = z
     beneficiaries: z.union([z.record(z.string().regex(/^([A-Z]{3}|world)$/), z.number().positive().max(1)), z.enum(["world", "destinations"])]).optional(),
     /** How `beneficiaries` was set: the data it was read from, or why it is a judgment. */
     beneficiaries_note: z.string().optional(),
+    /** For a model with beneficiaries of its own: the references (`#id`, `#owner:charity`, `#cause:x`,
+     * written without the `#`) it reads as destinations, money it grants or moves to them and the
+     * counterfactual of that money, at their figures on the rankings: each with its missing-data step,
+     * age and risk, as a "destinations" model reads it, but without its distance weight (this model's own
+     * applies). Every other reference is a stand-in (src/engine/model.ts refValues, docs/normalization.md
+     * 2.12). Variants inherit it. */
+    destination_reads: z.array(z.string().min(1)).optional(),
     /** For an imported (evaluator's) model: the share of its result whose outcome isn't measured for this
      * charity (reach or effect a judgment, or the effect from research on other delivery), which our view
      * counts at $missing_data_discount: the result is (1 − thin_share) + thin_share × the slider
