@@ -18,13 +18,13 @@ People give more, and give better, because of Giving What We Can. The model coun
 
 A pledge is valued by the giving it leads to over the pledger's working life. Pledgers who record their giving give $8,491 a year on average. The share still giving falls from 59% in the first year towards a long-term 28%, using the site's shared pledge-persistence figures, which come from its cohort data. A new pledger gives for 35 years, and each future year is discounted at the site's rate. Pledgers also give about 14% more than they record.
 
-A dollar moved is worth what its recipients achieve. Of the giving, 83% went to charities and funds that Giving What We Can's own review rates high-impact. By cause, that was $40.2 million to global health and wellbeing, $9.8 million to animal welfare and $11.5 million to catastrophic risk, plus some to climate and to other effective-giving organisations. Each recipient is read live at its result on this site, under your values:
+A dollar moved is worth what its recipients achieve. Of the giving, 82% went to charities and funds that Giving What We Can's own review rates high-impact. By cause, that was $40.2 million to global health and wellbeing, $9.8 million to animal welfare and $11.5 million to catastrophic risk, plus some to climate and to other effective-giving organisations. Each recipient is read live at its result on this site, under your values:
 
 - **Global health funds** that follow GiveWell (GiveWell's own funds, EA Funds' Global Health and Development Fund, its own Global Health and Wellbeing Fund) are valued at GiveWell's top charities. Named charities with a model here are read directly: Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives and StrongMinds. Other global health recipients are valued at the average of these.
 - **Animal welfare** is valued at our model of The Humane League. It is the only animal charity among the top recipients that the site models, and the animal funds are valued at its figure.
 - **Catastrophic risk** recipients (the Long-Term Future Fund, Longview, its own Risks and Resilience Fund) have no model here. They are valued at the site's four catastrophic-risk models, weighted equally.
 - **Climate**, where no model of the work these donors fund is published here, and **other effective-giving organisations** are valued at the average of the rest.
-- **The remaining 17%**, to charities it couldn't place, is valued as an ordinary charity.
+- **The remaining 18%**, to charities it couldn't place, is valued as an ordinary charity.
 
 Half the giving it caused is counted as new money. The other half would have gone to other charities, so it counts only for the gain over where it would have gone. These are the site's shared figures for every organisation that moves money.
 
@@ -35,7 +35,7 @@ Money moved = new pledges × yearly giving × discounted years of giving × reco
 ### What drives the result
 
 - **The discount rate.** At 0.1% a pledge's 35 years count almost in full and the result is nearly three times higher. At 8% it falls by about two fifths.
-- **The next dollar** (42%, from 20% to 75%). Spending grew about 2.5 times from 2020–2022 while pledge growth slowed, and the organisation itself expects diminishing returns.
+- **The next dollar** (42%, from 20% to 85%). Spending grew about 2.5 times from 2020–2022 while pledge growth slowed, and the organisation itself expects diminishing returns.
 - **The value of a life** and **where shifted money would otherwise have gone** (one times GiveDirectly, from 0 to 3 times).
 - **The share it caused** (33% and 28%), from donor surveys that rely on what people say they would have done.
 
