@@ -3,7 +3,7 @@
 Earthjustice is the largest US non-profit environmental law firm. It represents community, health and environmental groups and tribes for free, in court, before federal agencies and before state utility commissions. We model its three focus areas separately, each against what it spent on that area over its fiscal years 2022 to 2025:
 
 - **Climate and clean energy:** **<span data-figure="headline" data-model="earthjustice-charityevals">0.0024</span> years of healthy life per $1,000**, about $180 a tonne of CO₂e averted.
-- **Healthy communities:** **<span data-figure="headline" data-model="earthjustice-charityevals-health">0.015</span> years of healthy life per $1,000**, from cleaner air and drinking water.
+- **Healthy communities:** **<span data-figure="headline" data-model="earthjustice-charityevals-health">0.0084</span> years of healthy life per $1,000**, from cleaner air and drinking water.
 - **Biodiversity:** **<span data-figure="headline" data-model="earthjustice-charityevals-biodiversity">0.0000007</span> years of healthy life per $1,000**, from the Tongass forest's carbon.
 
 All three are low for the same reasons. Earthjustice is one of many groups behind each rule. Advocacy is only one cause of a rule. And the federal rules it won are now being weakened or repealed.
@@ -24,7 +24,7 @@ Earthjustice sues agencies to make them act, defends their rules against industr
 
 - **EPA's 2023 oil and gas methane rule and its 2024 power-plant carbon standards.** We use the same tonnes, status and steps as our model of Clean Air Task Force, which worked on the same rules. Earthjustice is credited with 8% and 10% of the advocacy behind them; Clean Air Task Force with 10% each.
 - **US coal plants that closed in 2022 to 2025: 28.9 GW (EIA).** Most closed for economic reasons. Advocacy is credited with 15% of the closings and Earthjustice with a tenth of that advocacy. Sierra Club's Beyond Coal campaign leads that field.
-- **EPA's 2024 fine-particle (PM2.5) air standard.** EPA estimates it avoids up to 4,500 deaths a year from 2032. Earthjustice's clients pressed for it and defended it in court, where it was upheld in June 2026. Earthjustice is credited with 25% of the advocacy.
+- **EPA's 2024 fine-particle (PM2.5) air standard.** EPA's two estimates for 2032 are 2,100 and 4,500 deaths a year avoided; we take 3,000. Earthjustice's clients pressed for it and defended it in court, where it was upheld in June 2026. Earthjustice is credited with 25% of the advocacy.
 - **EPA's 2024 PFAS drinking-water standards.** EPA estimates 9,600 deaths prevented over its 82-year analysis. Earthjustice represents community groups defending the standards and is credited with 15%.
 - **The Tongass National Forest's roadless protection, restored in January 2023 on 9.37 million acres.** Earthjustice represented the tribes and groups that sued over the 2020 exemption. It is counted for the old-growth carbon that logging would have released.
 
@@ -34,7 +34,7 @@ For each win: the tonnes or deaths a year once it takes effect, × the share of 
 
 The wins are added up and spread over the four years. Then come the shared evidence and missing-data steps, and a share for other wins of the period too small to model one by one (+50% for climate and health, +20% for biodiversity). The total is divided by a typical year's spending on that area.
 
-Deaths are valued by age, like every death on the site: PM2.5 deaths at the ages of rich-country heart deaths, PFAS deaths at the ages of US cancer deaths (infants for the birth-weight deaths). Illness averted comes from the site’s shared figures for each kind of death. Tonnes go through the site's climate conversion. The methane rule's tonnes count for methane's own, earlier warming and the ozone it forms. The coal tonnes also count the air pollution of US coal plants.
+Deaths are valued by age, like every death on the site: PM2.5 and PFAS heart deaths at the ages of US heart deaths, PFAS kidney-cancer deaths at the ages of US cancer deaths (infants for the birth-weight deaths). Illness averted comes from the site’s shared figures for each kind of death. Tonnes go through the site's climate conversion. The methane rule's tonnes count for methane's own, earlier warming and the ozone it forms. The coal tonnes also count the air pollution of US coal plants.
 
 The next dollar is valued at 35% of the period's average. Earthjustice holds about four months of spending in liquid assets plus a $201 million board-designated fund, and more of its next dollar goes to defending rules in less favourable courts.
 
@@ -59,7 +59,7 @@ Compliance costs to industry and water systems aren't counted, as in the site's 
 
 ### How this model was checked
 
-Independent audits are in audits/earthjustice-charityevals/, audits/earthjustice-charityevals-health/ and audits/earthjustice-charityevals-biodiversity/. Round 1 passed the climate model and asked for fixes to the other two. Health: illness now comes from the site's shared figures, each rule has its own wait, US-like ages value the deaths and infant deaths count as infants (−15%). Biodiversity: the logging spared was re-anchored on the Forest Service's own expectation that overall harvest would change little, and leakage on a timber-market study (÷8). Climate: the methane rule's local smog deaths moved into the conversion, and coal closings wait 3 years (−4%). Round 2 verified the changes; all three pass.
+Independent audits are in audits/earthjustice-charityevals/, audits/earthjustice-charityevals-health/ and audits/earthjustice-charityevals-biodiversity/. Round 1 passed the climate model and asked for fixes to the other two. Health: illness now comes from the site's shared figures, each rule has its own wait, US-like ages value the deaths and infant deaths count as infants (−15%). Biodiversity: the logging spared was re-anchored on the Forest Service's own expectation that overall harvest would change little, and leakage on a timber-market study (÷8). Climate: the methane rule's local smog deaths moved into the conversion, and coal closings wait 3 years (−4%). Round 2 verified the changes; all three pass. Later, the PM2.5 standard's figures became shared with our Environmental Defense Fund model and deaths over 70 took GiveWell's five-year weights; a full round 3 audit and a round 4 check passed the health model (−45%).
 
 ### Sources
 
