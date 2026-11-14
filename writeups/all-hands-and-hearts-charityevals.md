@@ -1,6 +1,6 @@
 ### Summary
 
-All Hands and Hearts sends volunteers, led by its own staff, to disasters. In the US they muck out and sanitise flooded homes, clean smoke-damaged houses and repair homes. Abroad it rebuilds schools and funds relief through local partners. Its US work in the year to August 2025 comes to **<span data-figure="headline" data-model="all-hands-and-hearts-charityevals">0.003</span> years of healthy life per $1,000**, its work abroad to about 0.09 (a model of its own).
+All Hands and Hearts sends volunteers, led by its own staff, to disasters. In the US they muck out and sanitise flooded homes, clean smoke-damaged houses and repair homes. Abroad it rebuilds schools and funds relief through local partners. Its US work in the year to August 2025 comes to **<span data-figure="headline" data-model="all-hands-and-hearts-charityevals">0.003</span> years of healthy life per $1,000**, its work abroad to <span data-figure="headline" data-model="all-hands-and-hearts-charityevals-international">0.09</span> (a model of its own).
 
 The US figure is far below the site's global-health charities. The help goes to American households, and the site's one income scale values a dollar of help to them at a small fraction of what it does for a family living on a few dollars a day. Volunteers' unpaid time and donated materials are also much of what the work takes, so All Hands and Hearts' cash gets about half the credit.
 
@@ -17,7 +17,7 @@ The good is mostly the work itself. A household that would have had to pay a con
 
 ### How the model works
 
-- **Response work** (US). Each muck and gut, sanitation and smoke clean-up counts at a judged contractor's price: $6,000, $2,500 and $8,000. Help in kind counts at 80% of its price, and the clients' consumption is set a little above that of America's poorest fifth. This branch is about four-fifths of the US result.
+- **Response work** (US). Each muck and gut, sanitation and smoke clean-up counts at a judged contractor's price, anchored on published cost guides: $5,000, $2,200 and $8,000. Help in kind counts at 90% of its price, and the clients' consumption is set a little above that of America's poorest fifth. This branch is about four-fifths of the US result.
 - **Repairs** (US). An estimated 90 homes at $20,000 of repairs each, valued as housing over 15 years.
 - **Volunteers' wellbeing.** The 2,526 volunteers gain a little life satisfaction for the year, discounted for those who would have volunteered elsewhere.
 - **Credit.** All Hands and Hearts' cash is about half the resources behind the US work. The rest is the volunteers' unpaid hours (about 190,000, at the US value of a volunteer hour), donated goods and services, and partners.
@@ -47,5 +47,6 @@ Independent audits, kept in audits/all-hands-and-hearts-charityevals/ and audits
 - All Hands and Hearts Smart Response, Inc., audited financial statements for the years to 31 August 2025 and 2024 ([PDF](https://allhandsandhearts.org/wp-content/uploads/2026/02/All-Hands-and-Hearts-2025.pdf)).
 - All Hands and Hearts Smart Response, Inc., Form 990 for the year to 31 August 2025 ([PDF](https://allhandsandhearts.org/wp-content/uploads/2026/04/All-Hands-and-Hearts-Smart-Response-2024-990-PDC.pdf)).
 - All Hands and Hearts, Annual Report 2025 ([PDF](https://allhandsandhearts.org/wp-content/uploads/2025/11/AHAH-2025AnnualReport-Postcards-r04-PDF.pdf)).
-- World Bank, Poverty and Inequality Platform and World Development Indicators (survey means and price levels for Nepal, the Philippines and Mexico).
+- World Bank, Poverty and Inequality Platform and World Development Indicators (survey means and price levels for Nepal, the Philippines and Mexico, for the model abroad).
+- Angi, HomeAdvisor and Bob Vila cost guides for water-damage restoration, mould removal and fire and smoke remediation (2025).
 - Binder and Freytag (2013), "Volunteering, subjective well-being and public policy", Journal of Economic Psychology 34: 97–119.

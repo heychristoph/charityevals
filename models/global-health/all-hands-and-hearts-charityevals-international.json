@@ -4,17 +4,16 @@
   "kind": "charity",
   "cause": "global-health",
   "beneficiaries": {
-    "MMR": 0.75,
-    "NPL": 0.14,
-    "PHL": 0.09,
+    "MMR": 0.78,
+    "NPL": 0.12,
+    "PHL": 0.08,
     "MEX": 0.02
   },
-  "beneficiaries_note": "Our build: the Myanmar earthquake response and school rebuilds in Nepal, the Philippines and Mexico: shares of the result at the defaults.",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "all-hands-and-hearts",
   "owner": "charityevals",
-  "summary": "All Hands and Hearts' work abroad in the year to August 2025 (the latest audited year): the Myanmar earthquake response through local partners (cash, water, shelter materials and hygiene supplies, then a water and hygiene programme in 12 villages: 13,000 people), and school rebuilds for disaster-hit communities (Bandevi School in Nepal, two bamboo-frame schools in the Philippines and 17 classrooms repaired in Oaxaca, Mexico). Its accounts don't split spending by country, so the $2.0 million modelled here is our judgment of the share abroad (18%, from 10% to 30%), which moves the result in proportion. The relief is valued as goods at their cost on the site's log-income scale at the affected households' consumption, plus the few excess deaths clean water and shelter avert; each school as its building's cost spread over its pupils and years, for the years it brought forward. The result, about 0.09 years of healthy life per $1,000 (0.015 to 0.5), is near the median global-health charity and about the American Red Cross's relief abroad; three-quarters of it is the Myanmar relief, valued at a judged $40 a person. Both branches are discounted for missing data: the counts are All Hands and Hearts' own and what each person got is a judgment. The biggest uncertainties are the share of spending abroad, the value of the relief per person and what others would have done anyway.",
+  "summary": "All Hands and Hearts' work abroad in the year to August 2025 (the latest audited year; its Afghanistan and Gaza responses began after it): the Myanmar earthquake response through local partners (cash, water, shelter materials and hygiene supplies, then a water and hygiene programme in 12 villages: 13,000 people), and school rebuilds for disaster-hit communities (Bandevi School in Nepal, two bamboo-frame schools in the Philippines and 17 classrooms repaired in Oaxaca, Mexico). Its accounts don't split spending by country, so the $2.0 million modelled here is our judgment of the share abroad (18%, from 10% to 30%), which moves the result in proportion. The relief is valued as goods at their cost on the site's log-income scale at the affected households' consumption, plus the few excess deaths clean water and shelter avert; each school as its building's cost spread over its pupils and years, for the years it brought forward. The result, about 0.09 years of healthy life per $1,000 (0.015 to 0.5), is near the median global-health charity and about the American Red Cross's relief abroad; three-quarters of it is the Myanmar relief, valued at a judged $40 a person. Both branches are discounted for missing data: the counts are All Hands and Hearts' own and what each person got is a judgment. The biggest uncertainties are the share of spending abroad, the value of the relief per person and what others would have done anyway.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: All Hands and Hearts' school rebuilds and disaster relief abroad (year to August 2025)",
@@ -337,15 +336,8 @@
         "best": 250000,
         "high": 350000
       },
-      "kind": "estimate",
-      "source": {
-        "title": "All Hands and Hearts, Nepal Flood Relief programme page",
-        "url": "https://allhandsandhearts.org/our-work/programs/nepal-flood-relief",
-        "retrieved": "2026-11-14",
-        "page": "Back to School campaign",
-        "quote": "raise $5 million to rebuild 20 schools"
-      },
-      "explainer": "All Hands and Hearts' own figure for its next Nepal schools, $250,000 a school (2026): what the building is worth at its cost. From $150,000 (a smaller school, cheaper in 2024-25) to $350,000."
+      "kind": "judgment",
+      "explainer": "Our judgment, anchored on All Hands and Hearts' Nepal flood campaign (programme start August 2026): 'raise $5 million to rebuild 20 schools' (allhandsandhearts.org/our-work/programs/nepal-flood-relief, retrieved 2026-11-14), $250,000 a school by our division, a forward goal rather than a stated cost per school. What the building is worth at its cost: $250,000, from $150,000 (a smaller school, cheaper in 2024-25) to $350,000."
     },
     {
       "id": "sch_cost_phl",
@@ -422,7 +414,7 @@
       "value": {
         "low": 0.45,
         "best": 0.7,
-        "high": 1
+        "high": 1.0
       },
       "kind": "judgment",
       "explainer": "Our judgment: rural public schools serve households poorer than the national mean (Nepal's bottom 40% consume about half the mean). As Habitat for Humanity's model for Asia and the Pacific (0.65): 0.7, from 0.45 to 1."
@@ -621,28 +613,41 @@
       "label": "PPP factor, Myanmar",
       "format": "number",
       "formula": "@myanmar.ppp_factor_2017",
-      "explainer": "For reading: the relief and the baseline below are both in nominal US dollars, so the price level cancels in the log gain."
+      "explainer": "The template's canonical row, kept for reading and comparison only: the relief and the baseline below are both in nominal US dollars, so the price level cancels in the log gain and no row reads it."
     },
     {
-      "id": "rel_consumption_vs_gdp",
+      "id": "mmr_consumption_share_of_gdp",
       "section": "effect",
-      "label": "Affected households' consumption per person against Myanmar's GDP per person",
+      "label": "Household consumption as a share of GDP, Myanmar",
       "format": "percent",
       "value": {
-        "low": 0.25,
-        "best": 0.4,
-        "high": 0.65
+        "low": 0.55,
+        "best": 0.7,
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Our judgment, three steps in one: households consume about 70% of GDP in neighbouring Bangladesh (the World Bank has no consumption series for Myanmar), household surveys find about two-thirds of that (the site's median survey-to-accounts ratio, 0.68), and the affected villages near Mandalay are poorer than the mean (0.7-1). 0.4, from 0.25 to 0.65."
+      "explainer": "Our judgment, as in the American Red Cross's international model: the World Bank has no consumption series for Myanmar; neighbouring Bangladesh's households consume 70% of GDP (NE.CON.PRVT.ZS, 2024). 0.7, from 0.55 to 0.8."
+    },
+    {
+      "id": "rel_affected_share",
+      "section": "effect",
+      "label": "Affected households' consumption against Myanmar's survey mean",
+      "format": "percent",
+      "value": {
+        "low": 0.55,
+        "best": 0.8,
+        "high": 1.05
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the villages near Mandalay and Sagaing reached by the water programme are rural and hit by the earthquake, so poorer than the national mean, but the earthquake struck a broad population, not the poorest only. 0.8, from 0.55 to 1.05."
     },
     {
       "id": "baseline_consumption",
       "section": "effect",
       "label": "Affected households' consumption per person a year, Myanmar",
       "format": "usd",
-      "formula": "@myanmar.gdp_per_capita_2024 * rel_consumption_vs_gdp",
-      "explainer": "Myanmar's GDP per person (World Bank, 2024 US$) times the share above: about $500 a year."
+      "formula": "@myanmar.gdp_per_capita_2024 * mmr_consumption_share_of_gdp * @survey_consumption.survey_to_na_world_median * rel_affected_share",
+      "explainer": "Myanmar's GDP per person (World Bank, 2024 US$) times households' share of it, put on the household-survey scale by the site's shared ratio for a country with no recent survey (@survey_consumption.survey_to_na_world_median, 0.68), at the affected households' share: about $520 a year."
     },
     {
       "id": "ln_gain_per_person",
@@ -668,7 +673,7 @@
       "value": {
         "low": 0.6,
         "best": 0.85,
-        "high": 1
+        "high": 1.0
       },
       "kind": "judgment",
       "explainer": "Our judgment, validity only: schools and classrooms are counted and the value is the building at its cost (no effect study needed); the pupils per school and the cost per school are rows of their own. 0.85, from 0.6 to 1."
@@ -692,12 +697,12 @@
       "label": "Schools: All Hands and Hearts' share of the resources",
       "format": "percent",
       "value": {
-        "low": 0.55,
-        "best": 0.8,
-        "high": 0.95
+        "low": 0.45,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Our judgment: communities give labour (parents volunteered on the Philippines schools), local governments land and some materials, and international volunteers their time (All Hands and Hearts houses and feeds them, in its cost). Donated materials and equipment ($1,060,843, partly for the schools) are taken out of the cost, so they belong here too. 0.8, from 0.55 to 0.95."
+      "explainer": "Our judgment: communities give labour (parents volunteered on the Philippines schools), local governments land and some materials, and international volunteers their time (All Hands and Hearts houses and feeds them, in its cost). Donated materials and equipment ($1,060,843, partly for the schools) are taken out of the cost, so they belong here too. Less shared than the US work (0.52 there, where volunteers' hours are about half the resources), since the schools are built mostly by paid local masons and contractors in All Hands and Hearts' cost. 0.7, from 0.45 to 0.9."
     },
     {
       "id": "sch_implementation_adj",
@@ -707,7 +712,7 @@
       "value": {
         "low": 0.85,
         "best": 0.95,
-        "high": 1
+        "high": 1.0
       },
       "kind": "judgment",
       "explainer": "Our judgment: the schools are counted as completed, but some may be used below capacity or need further work. 0.95, from 0.85 to 1."
@@ -720,7 +725,7 @@
       "value": {
         "low": 0.7,
         "best": 0.9,
-        "high": 1
+        "high": 1.0
       },
       "kind": "judgment",
       "explainer": "Our judgment: the relief's value is its goods and cash at their cost (no effect study needed), and the people reached are All Hands and Hearts' rounded count. The American Red Cross's relief model takes 0.95. 0.9, from 0.7 to 1."
@@ -759,7 +764,7 @@
       "value": {
         "low": 0.75,
         "best": 0.9,
-        "high": 1
+        "high": 1.0
       },
       "kind": "judgment",
       "explainer": "Our judgment: goods lost, diverted or misdirected in a conflict setting. 0.9, from 0.75 to 1."
@@ -771,7 +776,7 @@
       "format": "percent",
       "value": {
         "low": 0.9,
-        "best": 1,
+        "best": 1.0,
         "high": 1.05
       },
       "kind": "judgment",
@@ -1000,5 +1005,6 @@
       "row": "dalys_per_dollar",
       "unit": "daly"
     }
-  }
+  },
+  "beneficiaries_note": "Our build: school rebuilds in Nepal and the Philippines, classroom repairs in Mexico and the Myanmar earthquake response."
 }
