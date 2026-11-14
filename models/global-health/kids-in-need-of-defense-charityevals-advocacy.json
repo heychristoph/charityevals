@@ -3,13 +3,11 @@
   "name": "Kids in Need of Defense: advocacy and communications (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
-  "beneficiaries_note": "Our build: the J.O.P. class members and the D.C. youths are in the US.",
   "template": "rights-advocacy",
   "estimate_basis": "past_average",
   "charity": "kids-in-need-of-defense",
   "owner": "charityevals",
-  "summary": "KIND's advocacy and communications ($4.2 million in 2024, about $3.6 million a year over 2023-2024 in 2024 prices) are counted as a past average over the period's wins: its share as one of five counsel in the J.O.P. v. DHS settlement (approved November 2024), which keeps thousands of former unaccompanied children's asylum claims with USCIS's asylum officers rather than immigration court, and the District of Columbia's 2024 Vulnerable Youth Guardianship Protection Amendment Act, each valued per status gained as in charityevals' model of KIND's legal services, plus a judged share for wins not modelled one by one. With its next dollar at 67% of the average, it comes to about 0.016 years of healthy life per 1,000 dollars, about a sixth of the site's global-health median. The result is mostly uncertainty, its own ranges alone spanning over a thousandfold (the class size, the gain in the chance of asylum, KIND's share of counsel, the wins not modelled), and both wins are discounted by the shared missing-data slider.",
+  "summary": "KIND's advocacy and communications ($4.2 million in 2024, about $3.6 million a year over 2023-2024 in 2024 prices) are counted as a past average over the period's wins: its share as one of five counsel in the J.O.P. v. DHS settlement (approved November 2024), which keeps thousands of former unaccompanied children's asylum claims with USCIS's asylum officers rather than immigration court, and the District of Columbia's 2024 Vulnerable Youth Guardianship Protection Amendment Act, each valued per status gained as in charityevals' model of KIND's legal services, plus a judged share for wins not modelled one by one. With its next dollar at 67% of the average, it comes to about 0.009 years of healthy life per 1,000 dollars, far below the site's global-health median because the two wins change the status of only a few hundred people a year and KIND's share of the J.O.P. counsel's resources is small (about a tenth). The result is mostly uncertainty, its own ranges alone spanning over ten thousandfold (the class size, the gain in the chance of asylum, KIND's share of counsel, the wins not modelled), and both wins are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Kids in Need of Defense's advocacy and communications",
@@ -225,7 +223,7 @@
       "label": "Value of permanent status for a child who would otherwise lack it (units of value)",
       "format": "number",
       "formula": "@kind.p_removed_without_status * (ln_gain_per_person_year * adv_gain_years_pv * $uov_per_ln_consumption + (@kind.origin_youth_mortality_rate - @kind.us_youth_mortality_rate) * pv_annuity_due(1, $discount_rate, @kind.years_exposed) * adv_value_per_death) + (1 - @kind.p_removed_without_status) * adv_ln_gain_status * adv_gain_years_pv * $uov_per_ln_consumption",
-      "explainer": "The same value as in charityevals' model of KIND's legal services, per child: with the chance of removal, a life in the US instead of at home and the danger at home avoided; otherwise status instead of none, for the discounted years the gain lasts. About 13 units of value.",
+      "explainer": "The same value as in charityevals' model of KIND's legal services, per child: with the chance of removal, a life in the US instead of at home and the danger at home avoided; otherwise status instead of none, for the discounted years the gain lasts. About 15 units of value.",
       "unit": "UoV"
     },
     {
@@ -239,7 +237,7 @@
         "high": 30000
       },
       "kind": "judgment",
-      "explainer": "The class is people determined to be unaccompanied children who applied for asylum after 31 May 2019, or did so by 24 February 2025, and whom a 2019 USCIS policy would have sent to an adversarial immigration court hearing because they had turned 18 or reunited with a parent. No count is published (the case pages speak of 'thousands of children'); several hundred thousand unaccompanied children were released from federal custody in 2019-2024 and USCIS's asylum office takes several thousand of their applications a year. Our judgment 8,000, from 2,000 to 30,000."
+      "explainer": "The class is people determined to be unaccompanied children who applied for asylum after 31 May 2019, or did so by 24 February 2025, and whom a 2019 USCIS policy would have sent to an adversarial immigration court hearing because they had turned 18 or reunited with a parent. No count is published (Public Counsel's case page speaks of the policy 'threatening the safety of thousands of children who have filed for asylum'). Anchors: over half a million unaccompanied children were referred to federal custody in fiscal years 2019-2024 (ORR), most of them 15-17 and released to a parent or relative, so most turn 18 or are with a parent by the time they file; only a minority file for asylum at all (many pursue Special Immigrant Juvenile status instead), and USCIS's asylum offices take several thousand such filings a year. Our judgment 8,000 class members who benefit, from 2,000 to 30,000."
     },
     {
       "id": "jop_relief_gain",
@@ -252,7 +250,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "The settlement keeps these cases with USCIS's asylum officers, in a non-adversarial interview built for children, instead of contested court hearings where grant rates are lower, and bars removal while USCIS decides. Our judgment +10 percentage points, from 3 to 25."
+      "explainer": "The settlement keeps these cases with USCIS's asylum officers, in a non-adversarial interview built for children, instead of contested court hearings, lifts the one-year filing deadline for class members, and bars removal while USCIS decides. Anchors: TRAC's study of children's cases found 73% of represented children allowed to remain against 15% alone (most class members have counsel either way), and asylum offices grant children's claims more often than immigration courts, where government attorneys contest them; neither agency publishes grant rates for this class. Our judgment +10 percentage points, from 3 to 25."
     },
     {
       "id": "jop_period_share",
@@ -310,12 +308,12 @@
       "label": "KIND's share of the counsel's resources, against an equal split",
       "format": "multiple",
       "value": {
-        "low": 0.4,
-        "best": 0.75,
-        "high": 1.5
+        "low": 0.25,
+        "best": 0.5,
+        "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "Goodwin Procter's pro bono team carried much of the litigation; KIND and the other legal-aid groups supplied class representatives, practice alerts and implementation work (KIND hosts the class notices). Our judgment 0.75 of an equal fifth, from 0.4 to 1.5."
+      "explainer": "A large firm's pro bono team (Goodwin Procter, whose address is the class counsel contact on the class notices) carries most of the litigation hours in cases like this; KIND and the other legal-aid groups supply class representatives, practice alerts and implementation work (KIND hosts the class notices and practice alerts on its site). Our judgment half of an equal fifth, from a quarter to 1.2 (KIND among the leads)."
     },
     {
       "id": "jop_attribution_share",
@@ -323,7 +321,20 @@
       "label": "J.O.P.: KIND's share of the resources behind the win",
       "format": "percent",
       "formula": "jop_kind_share_vs_equal / jop_counsel_count",
-      "explainer": "About 15%."
+      "explainer": "About 10%."
+    },
+    {
+      "id": "jop_implementation_adj",
+      "section": "adjustments",
+      "label": "J.O.P.: share of the settlement applied in practice",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The government has not kept to the settlement in full: the court granted a motion to enforce in 2025 (barring removal of class members awaiting USCIS), found the government in civil contempt in July 2026 and extended the agreement to November 2026, and USCIS paused asylum decisions in 2025. Our judgment 70% of the settlement's benefit delivered, from 40% to 100%."
     },
     {
       "id": "jop_years_until_effect",
@@ -358,7 +369,7 @@
     {
       "id": "dc_youth_per_year",
       "section": "reach",
-      "label": "Young immigrants a year who use the D.C. act's guardianship protections",
+      "label": "Young immigrants a year who petition under the D.C. act's guardianship",
       "format": "integer",
       "value": {
         "low": 20,
@@ -366,7 +377,7 @@
         "high": 200
       },
       "kind": "judgment",
-      "explainer": "The act (enacted July 2024; KIND's report, p. 5: 'Successfully advocated for') strengthens D.C. courts' guardianship for immigrant youth up to 21 who were abused, abandoned or neglected, the state-court step a Special Immigrant Juvenile petition needs. D.C. is small: a few dozen to a few hundred such petitions a year. Our judgment 60, from 20 to 200."
+      "explainer": "The Vulnerable Youth Guardianship Protection Amendment Act (D.C. Law 25-188, effective 19 July 2024, D.C. Code §21-2381 ff., code.dccouncil.gov; KIND's report, p. 5: 'Successfully advocated for') sets up a guardianship for noncitizens aged 18 to 20 whose reunification with a parent is not viable because of abuse, abandonment or neglect, with findings that track the Special Immigrant Juvenile ones: the state-court step a SIJS petition needs after 18. D.C. is small: a few dozen to a few hundred such petitions a year. Our judgment 60, from 20 to 200."
     },
     {
       "id": "dc_relief_gain",
@@ -393,15 +404,15 @@
     {
       "id": "years_until_effect",
       "section": "effect",
-      "label": "Years until the D.C. act takes effect",
+      "label": "Years until the D.C. act brings status",
       "format": "number",
       "value": {
-        "low": 0,
-        "best": 0.5,
-        "high": 1
+        "low": 0.5,
+        "best": 2,
+        "high": 4
       },
       "kind": "judgment",
-      "explainer": "Enacted in July 2024 and in force within months: 0.5, from 0 to 1.",
+      "explainer": "In force from July 2024; a youth's guardianship order then leads to a Special Immigrant Juvenile approval about 1.5 years later (USCIS processing; 0.5 to 3), and the green card later still: 2 years in all, from 0.5 to 4.",
       "unit": "years"
     },
     {
@@ -547,14 +558,14 @@
       "label": "Share of the wins applied in practice",
       "format": "percent",
       "formula": "1",
-      "explainer": "Nothing more: the settlement's enforcement problems (contempt findings in 2026) are in the relief gain's range, and the D.C. act is applied by its courts."
+      "explainer": "For the D.C. act, applied by its courts: nothing more. The J.O.P. settlement's enforcement has its own row (jop_implementation_adj)."
     },
     {
       "id": "jop_total_adj",
       "section": "adjustments",
       "label": "J.O.P.: product of its adjustments",
       "format": "multiple",
-      "formula": "adv_evidence_adj * implementation_adj * jop_counterfactual_adj * jop_attribution_share * jop_wait_discount * jop_missing_data_adj"
+      "formula": "adv_evidence_adj * jop_implementation_adj * jop_counterfactual_adj * jop_attribution_share * jop_wait_discount * jop_missing_data_adj"
     },
     {
       "id": "dc_total_adj",
@@ -617,12 +628,12 @@
       "label": "Wins not modelled one by one, as a share of the two above",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.5,
-        "high": 2
+        "low": 0,
+        "best": 0.3,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "KIND's other policy work in the period: defending federal appropriations for unaccompanied children's legal representation (the programme behind most of the casework in the legal-services model), the Keeping Kids Safe campaign for a children's immigration court, Europe's protections for unaccompanied and Ukrainian children, and communications. Its biggest past win, the federal programme itself, came before the period. Our judgment 50%, from 10% to 200%."
+      "explainer": "KIND's other policy work in the period: defending federal appropriations for unaccompanied children's legal representation (the programme behind most of the casework in the legal-services model; appropriations are hard to move: Baumgartner et al., Lobbying and Policy Change, 2009, find most advocacy campaigns change nothing), the Keeping Kids Safe campaign for a children's immigration court, Europe's protections for unaccompanied and Ukrainian children, and communications. Its biggest past win, the federal programme itself, came before the period, and the programme was cut off in 2025. Our judgment 30%, from 0 to 100%, as for IRAP's advocacy model (30%, from 0 to 100%)."
     },
     {
       "id": "ue_backlash",
@@ -821,5 +832,9 @@
       "row": "dalys_per_dollar",
       "unit": "daly"
     }
-  }
+  },
+  "beneficiaries": {
+    "USA": 1
+  },
+  "beneficiaries_note": "Our build: the J.O.P. class members and the D.C. youths are in the US."
 }

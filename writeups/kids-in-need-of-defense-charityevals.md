@@ -1,6 +1,6 @@
 ### Summary
 
-Kids in Need of Defense (KIND) gives unaccompanied migrant children free lawyers in US immigration proceedings and supports children on the move in Mexico, Central America and Europe. Our model of its legal services and regional work in 2024 comes to **<span data-figure="headline" data-model="kids-in-need-of-defense-charityevals">0.013</span> years of healthy life per 1,000 dollars**, well below the site's global-health median. Its advocacy, modelled separately, comes to **<span data-figure="headline" data-model="kids-in-need-of-defense-charityevals-advocacy">0.016</span>**.
+Kids in Need of Defense (KIND) gives unaccompanied migrant children free lawyers in US immigration proceedings and supports children on the move in Mexico, Central America and Europe. Our model of its legal services and regional work in 2024 comes to **<span data-figure="headline" data-model="kids-in-need-of-defense-charityevals">0.013</span> years of healthy life per 1,000 dollars**, well below the site's global-health median. Its advocacy, modelled separately, comes to **<span data-figure="headline" data-model="kids-in-need-of-defense-charityevals-advocacy">0.009</span>**.
 
 ### What the charity does
 
@@ -15,9 +15,9 @@ A child who arrives alone faces a deportation case, usually without a right to a
 - **Cost:** the audited 2024 accounts. Donated legal services are left out; management and fundraising are spread over the programmes.
 - **US casework:** the 580 relief cases, scaled to 2024's level of work, because the cases ran over years when KIND was smaller. Each relief is valued in two parts:
   - for the 30% judged to be removed without status, a life at US instead of home consumption for 40 years, discounted, and three years of danger at home avoided;
-  - for the rest, status instead of none: 8% more consumption.
+  - for the rest, status instead of none: about 10% more consumption.
 - **Central American Minors:** of 323 people helped to apply for refugee status from Central America, a judged 15% reach the US, valued the same way.
-- **Psychosocial support:** 2,366 children in Mexico and from Ukraine, valued in wellbeing from trials of psychosocial programmes for children in crises.
+- **Psychosocial support:** 2,366 children in Mexico and from Ukraine, valued in wellbeing from trials of psychosocial programmes for children in crises. The other 1,800 children served outside the US (reintegration in Guatemala and Honduras, legal help in Mexico and Europe) are valued the same way, at a lower weight.
 - **Advocacy:** a past average over 2023-2024, with two wins: KIND's share as one of five counsel in the J.O.P. v. DHS settlement on children's asylum claims, and the District of Columbia's 2024 guardianship act. Each status gained is valued as in the casework.
 - **Adjustments:**
   - evidence;
@@ -44,7 +44,7 @@ These are counted only as shares of the modelled value: Know Your Rights orienta
 
 ### How this model was checked
 
-Independent audit rounds are in audits/kids-in-need-of-defense-charityevals/ and audits/kids-in-need-of-defense-charityevals-advocacy/.
+Independent audit rounds are in audits/kids-in-need-of-defense-charityevals/ and audits/kids-in-need-of-defense-charityevals-advocacy/. Round 1 of the legal-services model added a branch for the other 1,800 children served outside the US and a share for the Gender and Migration Initiative, gave the case-duration window a range, and updated the pro bono billing rate to the 2023 report's. Round 1 of the advocacy model added the J.O.P. settlement's enforcement shortfall, halved KIND's share of counsel, cut the wins not modelled to 30% and added the wait from guardianship to status. The shared figure for what legal status adds to consumption was re-sourced to the study itself.
 
 ### Sources
 
