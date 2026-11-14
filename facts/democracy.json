@@ -36,7 +36,7 @@
         "note": "Low: the semiparametric estimates plateau between 20 and 25 years (p. 76).",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Democracy's income gain builds up over about 25 years (20 to 30). A model crediting a change in how well a country is governed counts the gain as it builds (about half on average over the build-up, a ranged judgment in the model), discounted at $discount_rate, not the full long-run gain from the first year."
+      "explainer": "Democracy's income gain builds up over about 25 years (20 to 30). A model crediting a change in how well a country is governed counts the gain as it builds, not the full long-run gain from the first year: a change brought forward (or a slide put off) by N years ($win_years_counted) moves the whole build-up by N years, worth (1 - (1+r)^-N) × (1 - (1+r)^-T) / (ln(1+r)² × T) full-gain years at rate r over this T (N undiscounted; about 2.9 at 4%, N = 5, T = 25)."
     },
     {
       "id": "bribery_share_gdp",
@@ -139,16 +139,16 @@
       "label": "Chance the United States stops being classed a democracy before 2030",
       "unit": "share",
       "format": "percent",
-      "value": { "low": 0.07, "best": 0.15, "high": 0.3 },
+      "value": { "low": 0.05, "best": 0.11, "high": 0.28 },
       "kind": "estimate",
       "source": {
         "title": "Manifold Markets, Will the Economist Intelligent Unit stop classifying the United States as a democracy before 2030? (market probability via the public API)",
         "url": "https://manifold.markets/JZB/will-the-economist-intelligent-unit",
         "quote": "This market resolves to YES if the Economist Intelligence Unit (EIU) classifies the United States as either a \"hybrid regime\" or an \"authoritarian regime\" in any of its Democracy Index reports published before January 1, 2030.",
-        "note": "Market probability 10.7% on 2026-11-14 (21 traders; https://api.manifold.markets/v0/slug/will-the-economist-intelligent-unit). Metaculus's question on the same classification stood at 25% on 8 October 2025 and 17% on 5 March 2026 (as reported in search summaries; the question page and API need a login). A broader Manifold market, Freedom House rating the US 'Not Free' at any point before 2034 (https://manifold.markets/SemioticRivalry/will-the-united-states-no-longer-be), stood at 28% (31 traders). V-Dem's Democracy Report 2026 moved the US from liberal to electoral democracy and named it one of ten new autocratizers in 2025. Best guess 15%, between the two EIU forecasts; low 7% (below both), high 30% (the broader market and the earlier Metaculus figure).",
+        "note": "Market probability 10.7% on 2026-11-14 (21 traders; https://api.manifold.markets/v0/slug/will-the-economist-intelligent-unit). A broader Manifold market, 'Will the United States no longer be a Democracy in the next ten years?', resolving on Freedom House rating the US 'not free' at any point between now and 2033 (https://api.manifold.markets/v0/slug/will-the-united-states-no-longer-be), stood at 28.4% (31 traders). Metaculus asks the same EIU question, but its page and API need a login, so its figure isn't used. V-Dem's Democracy Report 2026 moved the US from liberal to electoral democracy and named it one of ten new autocratizers in 2025. Rule: best guess the verified market on the stake itself (the EIU classification before 2030), 11%; low about half of it, 5%, for thin markets that may overstate; high the broader verified market, 28%.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Forecasters' chance that the United States falls out of the democracies, to a hybrid or authoritarian regime in the Economist Intelligence Unit's index, before 2030: about 15% (7% to 30%). The stake for work against US democratic backsliding: a model credits a share of this chance removed, the loss valued with democratization_gdp_gain."
+      "explainer": "Forecasters' chance that the United States falls out of the democracies, to a hybrid or authoritarian regime in the Economist Intelligence Unit's index, before 2030: about 11% (5% to 28%). The stake for work against US democratic backsliding: a model credits a share of this chance removed, the loss valued with democratization_gdp_gain."
     },
     {
       "id": "us_democracy_philanthropy_per_year",
@@ -160,9 +160,9 @@
       "source": {
         "title": "Democracy Fund (Griffin, Lobeck, Botero, Cooper, Diggles, McKay and Steffen), Field in Focus: The State of Pro-Democracy Institutional Philanthropy, October 2023",
         "url": "https://democracyfund.org/wp-content/uploads/2024/01/Field-in-Focus-3.pdf",
-        "page": "p. 5 (executive summary) and p. 6 (foreword)",
+        "page": "p. 3 (executive summary) and p. 6 (foreword)",
         "quote": "By our estimate, institutional philanthropy is currently investing an average of $2.7 to $3.4 billion a year to support democracy.",
-        "note": "2021-2022, from Candid's grants data and a survey of 70 funders; best guess the middle of the range. Institutional philanthropy only (foundations, donor-advised funds), so individual gifts to these organisations are left out; 45% of surveyed funders planned to increase giving in 2023-2024 (p. 5).",
+        "note": "2021-2022, from Candid's grants data and a survey of 70 funders; best guess the middle of the range. Institutional philanthropy to 501(c)(3) work only: 501(c)(4) funding would add about 13% (p. 16, note 10), individual donors are left out (p. 15), and 45% of surveyed funders planned to increase giving in 2023-2024 (p. 3). A model scales it to the whole field with its own ranged factor.",
         "retrieved": "2026-11-14"
       },
       "explainer": "Foundations and other institutions give about $3 billion a year ($2.7 to $3.4 billion, 2021-2022 dollars) to US democracy work: elections, voting rights, the rule of law, civic engagement and the information ecosystem. A model of one organisation's share of the field's resources (Convention 2) divides its spending by this, after the share of the field that does its kind of work and the price change to its year (@cpi)."
