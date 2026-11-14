@@ -1091,14 +1091,18 @@
       "section": "adjustments",
       "label": "Side effect of decarceration: families and children with a parent home, as a share of the branch",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.15,
-        "high": 0.4
-      },
-      "kind": "judgment",
       "side_effect": "added",
-      "explainer": "Children and partners of people kept out of prison are spared separation and lost income; parental incarceration harms children's wellbeing and behaviour (Wakefield and Wildeman, Children of the Prison Boom, 2013): 15% of the branch's value, from 0 to 40%."
+      "explainer": "Children and partners of people kept out of prison are spared separation and lost income: the shared share (facts/incarceration.json, Wakefield and Wildeman 2013), 15% of the branch's value, from 0 to 40%.",
+      "formula": "@incarceration.family_share_of_incarceration_value"
+    },
+    {
+      "id": "ue_dec_earnings",
+      "section": "adjustments",
+      "label": "Side effect of decarceration: earnings kept after release, as a share of the branch",
+      "format": "percent",
+      "formula": "@incarceration.earnings_share_of_incarceration_value",
+      "side_effect": "added",
+      "explainer": "A year in prison lowers later earnings, which the life-satisfaction gap of the year inside doesn't cover: the shared share (facts/incarceration.json, Western 2002), 10% of the branch's value, from 0 to 30%."
     },
     {
       "id": "ue_dec_crime",
@@ -1235,7 +1239,7 @@
       "section": "bridges",
       "label": "Decarceration deaths averted after adjustments (units of value)",
       "format": "number",
-      "formula": "dec_death_value_per_year * dec_total_adj * (1 + ue_dec_family + ue_dec_crime)",
+      "formula": "dec_death_value_per_year * dec_total_adj * (1 + ue_dec_family + ue_dec_earnings + ue_dec_crime)",
       "unit": "UoV",
       "explainer": "The branch's own adjustments and its two side effects, as for its wellbeing term."
     },
@@ -1262,7 +1266,7 @@
       "section": "bridges",
       "label": "Wellbeing gained, in wellbeing-adjusted life years (after adjustments)",
       "format": "number",
-      "formula": "dec_wellbys * (1 + ue_dec_family + ue_dec_crime) + ger_value_per_year * ger_total_adj + released_people * released_value",
+      "formula": "dec_wellbys * (1 + ue_dec_family + ue_dec_earnings + ue_dec_crime) + ger_value_per_year * ger_total_adj + released_people * released_value",
       "unit": "WELLBYs",
       "explainer": "Decarceration with its two side effects, and the end of prison gerrymandering, after their adjustments."
     },
