@@ -42,7 +42,7 @@ The result is more than ten times the climate median because the climate peers' 
 
 ### Biggest uncertainties
 
-- **How much of the law is its doing.** Its plan is in the law, but the home provisions passed as part of a much larger deal that unions, industry and other groups pushed. Its share is our judgment, 10% to 50%.
+- **How much of the law is its doing.** Its plan is in the law, but the home provisions passed as part of a much larger deal that unions, industry and other groups pushed. Its share is our judgment: 35% (15% to 60%) of the advocacy behind the rebates, 10% (3% to 25%) behind the credits.
 - **Who gets the money.** The rebates are for low- and moderate-income homes, but the states' programmes are slow to open, keep part for administration and had to be reworked after DOE's 2026 guidance. Two-thirds of the residential clean energy credit went to incomes of $100,000 or more.
 - **Whether switching pays.** Bills fall in most homes, but heat pumps cost more to install, and gas-heated homes save least. No study gives the net for the homes these programmes moved.
 - **Whether the tools change decisions.** No one has measured how many users switch because of them.
