@@ -555,20 +555,33 @@
       "unit": "years"
     },
     {
+      "id": "inkind_value_share",
+      "section": "effect",
+      "label": "What the shelter and items are worth to the people who get them, as a share of their cost",
+      "format": "percent",
+      "value": {
+        "low": 0.65,
+        "best": 0.85,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "People value aid in kind below its cost when it isn't what they would have bought (in-kind against cash comparisons find in-kind transfers worth somewhat less to recipients); ShelterBox's post-distribution surveys report high satisfaction (93-100% in Pakistan in 2024). Our judgment, 85%, from 65% to 100% (formerly part of the evidence step, which now covers the deaths and illness only)."
+    },
+    {
       "id": "x_low",
       "section": "effect",
       "label": "Value delivered as a share of a year's consumption, poorest settings",
       "format": "number",
-      "formula": "value_delivered_per_person * cpi_2017_vs_2025 * @mozambique.ppp_factor_2017 / baseline_low",
-      "explainer": "The aid per person over the Mozambique stand-in's yearly consumption, both in 2017 PPP dollars."
+      "formula": "value_delivered_per_person * inkind_value_share * cpi_2017_vs_2025 * @mozambique.ppp_factor_2017 / baseline_low",
+      "explainer": "The aid per person, at what it is worth to the people who get it, over the Mozambique stand-in's yearly consumption, both in 2017 PPP dollars."
     },
     {
       "id": "x_mid",
       "section": "effect",
       "label": "Value delivered as a share of a year's consumption, the other settings",
       "format": "number",
-      "formula": "value_delivered_per_person * cpi_2017_vs_2025 * @bangladesh.ppp_factor_2017 / baseline_mid",
-      "explainer": "The aid per person over the Bangladesh stand-in's yearly consumption."
+      "formula": "value_delivered_per_person * inkind_value_share * cpi_2017_vs_2025 * @bangladesh.ppp_factor_2017 / baseline_mid",
+      "explainer": "The aid per person, at what it is worth to the people who get it, over the Bangladesh stand-in's yearly consumption, both in 2017 PPP dollars."
     },
     {
       "id": "ln_gain_low",
@@ -576,7 +589,7 @@
       "label": "ln(consumption) gain per person, poorest settings",
       "format": "number",
       "formula": "(1 - durable_value_share) * ln(1 + x_low) + durable_value_share * pv_annuity_due(1, $discount_rate, durable_life_years) * ln(1 + x_low / durable_life_years)",
-      "explainer": "Items used within the year as one year's consumption; durable shelter's value spread evenly over its years of use, each year discounted."
+      "explainer": "Items used within about a year (tents, tarpaulins and household items: ShelterBox's tent life-cycle study assumes a 12-month lifespan) as one year's consumption; durable shelter's value spread evenly over its years of use, each year discounted."
     },
     {
       "id": "ln_gain_mid",
@@ -619,9 +632,9 @@
       "side_effect": "added"
     },
     {
-      "id": "evidence_adj",
+      "id": "deaths_evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment (internal and external validity), a multiplier",
+      "label": "Evidence adjustment, deaths and illness averted",
       "format": "multiple",
       "value": {
         "low": 0.65,
@@ -629,7 +642,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Most of the value is the goods at their cost, which needs no effect study, but people value aid in kind below its cost when it isn't what they would have bought (in-kind vs cash comparisons find in-kind transfers worth somewhat less to recipients; ShelterBox's post-distribution surveys report high satisfaction, e.g. 93-100% in Pakistan in 2024); the deaths and illness rows are judgments anchored on other relief, not measured. Our judgment, 0.85, from 0.65 to 1 (our American Red Cross relief model takes 0.95 for cash and goods, our Americares emergency model 0.8 with more health care in it)."
+      "explainer": "For the deaths and illness averted only: they are judgments anchored on other relief, not measured. Our judgment, 0.85, from 0.65 to 1, as World Vision's and CARE's relief deaths. The shelter and items are valued at their cost, which needs no effect study; what they are worth to the people who get them is in inkind_value_share."
     },
     {
       "id": "counterfactual_adj",
@@ -716,12 +729,36 @@
       "explainer": "Thin (templates.md Convention 12): ShelterBox counts the people, but the value per person rests on our judged goods share, and the effect on deaths and illness is judged with no study of shelter against none, so the branch reads the shared missing-data slider."
     },
     {
+      "id": "deaths_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined, deaths and illness averted",
+      "format": "multiple",
+      "formula": "deaths_evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * missing_data_adj",
+      "explainer": "The product of the adjustments to the deaths and illness averted, the wait and the missing-data step included where the model has them."
+    },
+    {
+      "id": "goods_total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined, goods delivered",
+      "format": "multiple",
+      "formula": "counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * missing_data_adj",
+      "explainer": "The same adjustments for the goods' value, with no evidence step: goods valued at their cost need no effect study."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
+      "format": "multiple",
+      "formula": "(deaths_part_dalys_unadjusted * deaths_evidence_adj + goods_part_dalys_unadjusted) / (deaths_part_dalys_unadjusted + goods_part_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the two branches (deaths and illness averted at deaths_evidence_adj; goods at 1), for reading only."
+    },
+    {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "All adjustments combined",
+      "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * leverage_funging_adj * missing_data_adj",
-      "explainer": "The product of the adjustments above."
+      "formula": "(deaths_part_dalys_unadjusted * deaths_total_adj + goods_part_dalys_unadjusted * goods_total_adj) / (deaths_part_dalys_unadjusted + goods_part_dalys_unadjusted)",
+      "explainer": "Outcome-weighted average of the two branches (deaths and illness averted; goods delivered), for reading only: each applies its own total."
     },
     {
       "id": "preparedness_share",
@@ -777,11 +814,11 @@
     {
       "id": "tco2e_bridged",
       "section": "bridges",
-      "label": "Climate: the aid's emissions, as tonnes of CO2e averted (negative; before adjustments)",
+      "label": "Climate: the aid's emissions, as tonnes of CO2e averted (negative; after the goods' adjustments)",
       "format": "number",
-      "formula": "0 - tco2e_from_aid",
+      "formula": "(0 - tco2e_from_aid) * goods_total_adj",
       "unit": "t CO₂e",
-      "explainer": "The emissions enter as negative tonnes averted."
+      "explainer": "The emissions enter as negative tonnes averted, as far as the goods are this charity's doing (the goods' adjustments)."
     },
     {
       "id": "dalys_from_tco2e",
@@ -793,12 +830,29 @@
       "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
+      "id": "deaths_uov_unadjusted",
+      "section": "bridges",
+      "label": "Deaths averted, in units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * deaths_averted_per_person * value_per_death",
+      "explainer": "The deaths averted before their adjustments."
+    },
+    {
+      "id": "goods_uov_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered, in units of value (before adjustments)",
+      "format": "number",
+      "formula": "people_reached * ln_gain_per_person * $uov_per_ln_consumption",
+      "explainer": "The goods' value before its adjustments."
+    },
+    {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Deaths averted and goods delivered, in GiveWell units of value (before adjustments)",
+      "label": "Deaths averted and goods delivered, in GiveWell units of value (after each branch's adjustments)",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
-      "unit": "UoV"
+      "formula": "deaths_uov_unadjusted * deaths_total_adj + goods_uov_unadjusted * goods_total_adj",
+      "unit": "UoV",
+      "explainer": "Deaths averted and goods delivered, each with its own adjustments."
     },
     {
       "id": "dalys_from_uov",
@@ -810,9 +864,41 @@
       "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
+      "id": "deaths_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Deaths averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "deaths_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "goods_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "goods_uov_unadjusted / ($uov_per_daly)",
+      "explainer": "Through the fixed bridge (docs/normalization.md 2.6), only to weigh the reading-only averages."
+    },
+    {
+      "id": "deaths_part_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Deaths and illness averted before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "deaths_dalys_unadjusted + people_reached * dalys_illness_per_person",
+      "explainer": "The weight of the deaths-and-illness branch in the reading-only averages."
+    },
+    {
+      "id": "goods_part_dalys_unadjusted",
+      "section": "bridges",
+      "label": "Goods delivered before adjustments, in healthy years (weights only)",
+      "format": "number",
+      "formula": "goods_dalys_unadjusted",
+      "explainer": "The weight of the goods branch in the reading-only averages."
+    },
+    {
       "id": "wellbys_bridged",
       "section": "bridges",
-      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years (before adjustments)",
+      "label": "Life satisfaction (not counted: deaths, illness and goods cover the response), in wellbeing-adjusted life years",
       "format": "number",
       "formula": "0",
       "unit": "WELLBYs"
@@ -829,10 +915,11 @@
     {
       "id": "dalys_direct",
       "section": "outcome",
-      "label": "Healthy years counted directly (before adjustments)",
+      "label": "Healthy years counted directly (illness averted, after its adjustments)",
       "format": "number",
-      "formula": "people_reached * dalys_illness_per_person",
-      "unit": "DALYs"
+      "formula": "people_reached * dalys_illness_per_person * deaths_total_adj",
+      "unit": "DALYs",
+      "explainer": "Illness averted, with the deaths averted's adjustments."
     },
     {
       "id": "dalys_per_dollar",
@@ -847,9 +934,9 @@
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby + dalys_from_tco2e) * total_adj * (1 + unmodelled_benefits_adj)",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby + dalys_from_tco2e) * (1 + unmodelled_benefits_adj)",
       "unit": "DALYs",
-      "explainer": "Every outcome, each in healthy years by its own unit's conversion (the aid's emissions as negative tonnes), times the adjustments: the emissions count as far as the aid itself is ShelterBox's doing."
+      "explainer": "Every outcome, each in healthy years by its own unit's conversion, each already after its own branch's adjustments."
     },
     {
       "id": "staff_costs_gbp",
