@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "ploughshares-fund",
   "owner": "charityevals",
-  "summary": "Ploughshares Fund (San Francisco) funds and convenes the groups working to cut the risk of nuclear war: in the year to June 2025 it spent $7.6M, $3.1M of it in grants to 46 organisations (arms-control research and advocacy, diplomacy with Iran, North Korea and China, media, laboratory watchdogs) and $2.6M on its own coalitions, communications and the Nuclear Futures Fellowship; this model covers all of it. At the defaults it averts about 32 years of healthy life per $1,000, from 1.5 to 670 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a grant as a typical dollar of the grantee's work (no grantee has a model on the site yet), with deaths valued like every death and the future lost counted through the discount rate. It is more than ten times its peers because most of them work only on AI, and Rethink's typical nuclear project averts far more deaths per dollar than a typical AI project; it is close to the Nuclear Threat Initiative. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "Ploughshares Fund (San Francisco) funds and convenes the groups working to cut the risk of nuclear war: in the year to June 2025 it spent $7.6M, $3.1M of it in grants to 46 organisations (arms-control research and advocacy, diplomacy with Iran, North Korea and China, media, laboratory watchdogs) and $2.6M on its own coalitions, communications and the Nuclear Futures Fellowship; this model covers all of it. At the defaults it averts about 26 years of healthy life per $1,000, from 1.2 to 560 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a grant as a typical dollar of the grantee's work (no grantee has a model on the site yet), with deaths valued like every death and the future lost counted through the discount rate. It is more than ten times its peers because most of them work only on AI, and Rethink's typical nuclear project averts far more deaths per dollar than a typical AI project; it is close to the Nuclear Threat Initiative. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Ploughshares Fund",
@@ -888,13 +888,8 @@
       "section": "effect",
       "label": "Field-building: the training's share of the credit for that work",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "The fellowship's share of the credit for that work beside the fellows' employers and their own choices: 0.3 (0.1 to 0.6), our judgment, the template's figure for a structured programme with coaching and a funded capstone."
+      "explainer": "The employers pay for the fellows' work, so the training gets credit by share of resources, as in GovAI's model: everyone's spending on the fellowship (Ploughshares' about $305,000 with overhead, over its share of the fellowship's resources fb_attribution_share_shared, for Horizon 2045's part) over that plus the alumni's added work (fb_work_dollars): about 33%; fb_attribution_share_shared then gives Ploughshares its share of that.",
+      "formula": "(fb_cost_share * cost_total / fb_attribution_share_shared) / (fb_cost_share * cost_total / fb_attribution_share_shared + fb_work_dollars)"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1026,6 +1021,19 @@
       "explainer": "The grants fund typical field work: arms-control research and advocacy (the Arms Control Association, FAS, the Stimson Center, RAND, Carnegie), congressional advocacy (FCNL, Win Without War), Track 2 on Korea (the Quincy Institute, the National Committee on North Korea), media (Inkstick, ReThink Media) and watchdogs of the weapons laboratories. A funder choosing grantees in the field for 44 years may pick better than average; small advocacy and media grants have long paths to the risk. 0.8 (0.35 to 1.2), our judgment, as NTI's 0.8 for a mix of policy work and public education."
     },
     {
+      "id": "own_grant_admin_share",
+      "section": "adjustments",
+      "label": "Own work: share of the programmatic activity that runs the grantmaking",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "Part of the $2,559,135 of programmatic activity is the cost of choosing, managing and reporting on 46 grants: the 990 puts no grant administration in management and general ($915,743, mostly investment fees, legal, accounting and finance staff), and the annual report's programme services are only grants and programmatic activity. Its output is the grants, already valued per dollar granted, so this share adds nothing of its own (its cost stays in the cost). 25% (10% to 40%), our judgment from the programme staff: of 23 employees, the programmes director and grants team against the field-building, coalition and communications staff; any value grant selection adds is in gr_evidence_adj."
+    },
+    {
       "id": "own_evidence_adj",
       "section": "adjustments",
       "label": "Own work: how far the typical project's effect applies to Ploughshares' coalitions, convening and communications",
@@ -1052,9 +1060,9 @@
       "explainer": "The fellows' added work is valued at a typical dollar of nuclear work (fb_deaths_per_million), so 1 unless their work differs: fellows from PSR, NTI, the Arms Control Association and similar groups do typical field work. 1 (0.7 to 1.2), our judgment, as GovAI's fellowship."
     },
     {
-      "id": "gr_counterfactual_adj",
+      "id": "gr_cf_other_orgs",
       "section": "adjustments",
-      "label": "Grants: share of the funded work no one else would have paid for now",
+      "label": "Grants: share of the funded work other organisations would not have done now",
       "format": "percent",
       "value": {
         "low": 0.4,
@@ -1062,7 +1070,28 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Nuclear threat reduction is a small field whose funding is shrinking (MacArthur left in 2021; the annual report, p. 44: \"philanthropic support for nuclear threat reduction is declining sector-wide\"), so grantees would mostly not replace a Ploughshares grant soon; other funders (Longview, Carnegie Corporation, the Rockefeller Brothers Fund, Open Society) fund many of the same groups. 0.7 (0.4 to 0.9), our judgment, as for NTI; that the work would have come years later is in years_of_impact."
+      "explainer": "Whether the research, advocacy and education the grants pay for would have been done now by other groups in the field (other think tanks' arms-control analysis, other advocacy coalitions on the Hill, other Track 2 channels on Korea): the field is small and each grantee has its niche, but many overlap. 0.7 (0.4 to 0.9), our judgment, as NTI's counterfactual_adj for the same question; that the work would have come years later is in years_of_impact."
+    },
+    {
+      "id": "gr_cf_other_funders",
+      "section": "adjustments",
+      "label": "Grants: share of the funded work the grantees' other funders would not have paid for",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "Whether the grantees' other funders (Longview, Carnegie Corporation, the Rockefeller Brothers Fund, Open Society) would have paid for the work Ploughshares funded had it not: the field's money is shrinking (MacArthur left in 2021; annual report p. 44: \"philanthropic support for nuclear threat reduction is declining sector-wide\"), so most of it would go unfunded, but a large funder might fill a gap at an established grantee. 0.8 (0.6 to 0.95), our judgment. A question about the grant's own counterfactual, so it sits here; whether Ploughshares' own funders would fill a gap if a donor gave less is the room factor of @next_dollar.ploughshares_fund, and leverage_funging_adj stays 1 as in every catastrophic-risk model."
+    },
+    {
+      "id": "gr_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Grants: share of the funded work that would not have happened anyway",
+      "format": "percent",
+      "explainer": "Two questions about the funded work, each its own row: other organisations doing it now (gr_cf_other_orgs) and the grantees' other funders paying for it (gr_cf_other_funders).",
+      "formula": "gr_cf_other_orgs * gr_cf_other_funders"
     },
     {
       "id": "own_counterfactual_adj",
@@ -1075,7 +1104,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Few others run the field's coalitions (Ploughshares facilitates and resources them), though members would keep meeting without it. 0.7 (0.4 to 0.9), our judgment, as for NTI."
+      "explainer": "Whether others would have run the field's coordination now: few others run its coalitions (Ploughshares facilitates and resources them), though members would keep meeting without it. 0.7 (0.4 to 0.9), our judgment, as NTI's counterfactual_adj."
     },
     {
       "id": "fb_counterfactual_adj",
@@ -1134,8 +1163,8 @@
       "section": "adjustments",
       "label": "How far the typical project's effect applies to this charity's work",
       "format": "multiple",
-      "explainer": "Outcome-weighted average of the branches, for reading only: the grants (their relevant share × gr_evidence_adj), Ploughshares' own work and the fellowship.",
-      "formula": "(w_gr * gr_relevant_share * gr_evidence_adj + w_own * own_evidence_adj + w_fb * fb_evidence_adj) / (w_gr + w_own + w_fb)"
+      "explainer": "Outcome-weighted average of the branches, for reading only: the grants (their relevant share × gr_evidence_adj), Ploughshares' own work (less the share that runs the grantmaking, own_grant_admin_share) and the fellowship.",
+      "formula": "(w_gr * gr_relevant_share * gr_evidence_adj + w_own * (1 - own_grant_admin_share) * own_evidence_adj + w_fb * fb_evidence_adj) / (w_gr + w_own + w_fb)"
     },
     {
       "id": "counterfactual_adj",
@@ -1143,7 +1172,7 @@
       "label": "Share of the work no one else would have done now",
       "format": "percent",
       "explainer": "Outcome-weighted average of the branches, for reading only (weighted by each branch's healthy years after its evidence step, so the product of the canonical rows is the sum over branches).",
-      "formula": "(w_gr * gr_relevant_share * gr_evidence_adj * gr_counterfactual_adj + w_own * own_evidence_adj * own_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / ((w_gr + w_own + w_fb) * evidence_adj)"
+      "formula": "(w_gr * gr_relevant_share * gr_evidence_adj * gr_counterfactual_adj + w_own * (1 - own_grant_admin_share) * own_evidence_adj * own_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / ((w_gr + w_own + w_fb) * evidence_adj)"
     },
     {
       "id": "attribution_share_shared",
@@ -1151,7 +1180,7 @@
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "explainer": "Outcome-weighted average of the branches, for reading only (weighted after their evidence and counterfactual steps).",
-      "formula": "(w_gr * gr_relevant_share * gr_evidence_adj * gr_counterfactual_adj * gr_attribution_share_shared + w_own * own_evidence_adj * own_counterfactual_adj * own_attribution_share_shared + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share_shared) / ((w_gr + w_own + w_fb) * evidence_adj * counterfactual_adj)"
+      "formula": "(w_gr * gr_relevant_share * gr_evidence_adj * gr_counterfactual_adj * gr_attribution_share_shared + w_own * (1 - own_grant_admin_share) * own_evidence_adj * own_counterfactual_adj * own_attribution_share_shared + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share_shared) / ((w_gr + w_own + w_fb) * evidence_adj * counterfactual_adj)"
     },
     {
       "id": "attribution_share",
@@ -1197,11 +1226,11 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.1,
-        "high": 0.3
+        "best": 0.13,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Good beyond the catastrophes counted: work against a limited nuclear war or a single detonation (the testing and Korea work), which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0); grants against conventional war (diplomacy with Iran in the year of the June 2025 strikes); and the compensation and recognition won for people harmed by testing (the RECA expansion a grantee pushed for, a transfer within the US whose net gain after its cost to taxpayers is small). 10% (0 to 30%) of the modelled value, our judgment, as for NTI.",
+      "explainer": "Good beyond the catastrophes counted, each part a share of the modelled value: work against a limited nuclear war or a single detonation (the testing and Korea work), which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0), and grants against conventional war (diplomacy with Iran in the year of the June 2025 strikes), together 8%; the compensation and recognition won for people harmed by testing (the RECA expansion a grantee pushed for: a transfer within the US whose net gain after its cost to taxpayers is small), 2%; Ploughshares' influence on other funders' giving to the field (its president's talks at the Global Philanthropy Forum and Skoll World Forum in spring 2025, advice to donors; no money moved is published), 3% (0 to 10%). 13% (0 to 40%) in all, our judgment; NTI's model takes 10% for the first kind.",
       "side_effect": "added"
     },
     {
