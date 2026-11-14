@@ -1,6 +1,6 @@
 ### Summary
 
-Giving What We Can asks people to pledge part of their income to effective charities, recommends where to give and runs a donation platform. Our model of all its work in 2023 and 2024 comes to **<span data-figure="headline" data-model="giving-what-we-can-charityevals">54</span> years of healthy life per $1,000**. Each dollar it spends leads to about nine dollars of giving it caused, valued at what the charities its donors actually chose achieve on this site. The figure moves most with the discount rate, because a pledge pays out over decades, and with how much the next dollar does compared with the past average.
+Giving What We Can asks people to pledge part of their income to effective charities, recommends where to give and runs a donation platform. Our model of all its work in 2023 and 2024 comes to **<span data-figure="headline" data-model="giving-what-we-can-charityevals">56</span> years of healthy life per $1,000**. Each dollar it spends leads to about nine dollars of giving it caused, valued at what the charities its donors actually chose achieve on this site. The figure moves most with the discount rate, because a pledge pays out over decades, and with how much the next dollar does compared with the past average.
 
 ### What the charity does
 
@@ -22,7 +22,7 @@ A dollar moved is worth what its recipients achieve. Of the giving, 82% went to 
 
 - **Global health funds** that follow GiveWell (GiveWell's own funds, EA Funds' Global Health and Development Fund, its own Global Health and Wellbeing Fund) are valued at GiveWell's top charities. Named charities with a model here are read directly: Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives, Deworm the World (at Evidence Action's figure), Unlimit Health and StrongMinds. Other global health recipients are valued at the average of these.
 - **Animal welfare** is valued at The Humane League's figure on the rankings (ACE's). It is the only animal charity among the top recipients that the site models, and the animal funds are valued at its figure.
-- **Catastrophic risk** recipients (the Long-Term Future Fund, Longview, its own Risks and Resilience Fund) have no model here. They are valued at the site's four catastrophic-risk models, weighted equally.
+- **Catastrophic risk** recipients (the Long-Term Future Fund, Longview, its own Risks and Resilience Fund) have no model here. They are valued at the catastrophic-risk charities on the rankings, weighted equally.
 - **Climate**, where no model of the work these donors fund is published here, and **other effective-giving organisations** are valued at the average of the rest.
 - **The remaining 18%**, to charities it couldn't place, is valued as an ordinary charity.
 
@@ -54,7 +54,7 @@ Its own estimate is a giving multiplier of 6x: $6 of value for effective chariti
 
 - Whether the 28% long-term floor holds beyond the ten years of data, and whether pledgers who stop recording still give.
 - Donor surveys of what people would have done. Its conservative case (26% and 17%) gives a far lower result.
-- The value of the catastrophic-risk and animal giving, which rests on the site's stand-in models and on the species-weight and risk sliders.
+- The value of the catastrophic-risk and animal giving, which rests on the site's models of the catastrophic-risk charities and of The Humane League, and on the species-weight and risk sliders.
 
 ### What isn't modelled
 
@@ -64,7 +64,7 @@ Its own estimate is a giving multiplier of 6x: $6 of value for effective chariti
 
 ### How this model was checked
 
-Three audit rounds (audits/giving-what-we-can-charityevals/). Round 1 found no high-severity problem. Its fixes widened the next-dollar range up to the organisation's own target, weighted the high-impact share by the money each stream moves, and gave the spending figures the ±$200,000 margin the evaluation states. Round 2 checked those changes and passed. Round 3 checked the move to reading each recipient at its figure on the rankings, and the two recipients now read by their own figures, and passed.
+Four audit rounds (audits/giving-what-we-can-charityevals/). Round 1 found no high-severity problem. Its fixes widened the next-dollar range up to the organisation's own target, weighted the high-impact share by the money each stream moves, and gave the spending figures the ±$200,000 margin the evaluation states. Round 2 checked those changes and passed. Round 3 checked the move to reading each recipient at its figure on the rankings, and the two recipients now read by their own figures, and passed. Round 4 checked the move of the catastrophic-risk stand-in to the site's live cause average, and passed.
 
 ### Sources
 
