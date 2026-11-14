@@ -1,0 +1,15 @@
+# Audit: refugee-council-charityevals-advocacy, round 2 (verification)
+Result: 2.942e-6 daly/$ = 0.002942 years of healthy life per $1,000 (combined range 0.00043-0.0201). Verdict: pass.
+Verdict: pass
+Model-sha: 767aaa9ac12c536237272372bf64b893d2d8d138c167a96b860c24aeb823da1c
+Mechanical: lint 0 high / 1 medium (spread, own ranges 2713x) / 2 low (attribution_share diagnostic, far-below); simulation stable (5% 0.25, 95% 3.93 x best guess); normalization-audit printed no line for this model (generated/ reverted).
+
+Round-1 findings:
+1. `mvo_lasting_days` unsourced (medium): settled by removal; the row is deleted and no lasting 42-day win is credited.
+2. Cost window vs the March 2026 change (medium): settled. `ln_gain_per_person_year` = 0 with the Convention 11 reason in the explainer; only the pilot (9 Dec 2024 to 1 Sep 2025, inside the costed years) is counted. The summary says a later lasting change is left to the next year's accounts. Result falls 0.0082 -> 0.0029, as I estimated for dropping the branch.
+3. `ima_ls_gain` anchor (medium): settled. Anchored on the Refugee Council's own surveys; I checked accounts p. 14: confidence dealing with unexpected events 31% (asylum) vs 55% (other statuses) improved, worrying less 20% vs 45%, about 800 clients. IRC resettlement model's `reunif_ls_gain` is 1 (0.3-2), as cited. The branch is small.
+4. `mvo_pilot_years`: now an estimate, evaluation-sourced: fixed.
+5. `grants_per_year`: now an estimate 35,000-70,000 with the trend stated: fixed.
+6. Own-range spread: lint medium "spread" remains at 2713x (own ranges, shared assumptions at best). I accept it: it is inherent in the two judged counterfactual and attribution shares (counterfactual 30% / 5%, credit 25% / 12%, each ranged several-fold and multiplied through two branches), the model has no lever left to narrow without inventing evidence, and the summary states that the result is mostly judgment spanning ten-fold per win. Fine for a pass; the best narrowing would be a published campaign-attribution study. The spread rose from 1183x because the lasting branch (which carried a narrow range) is gone.
+
+New findings: none. A hidden wrinkle checked: with the lasting branch at zero the template's win-years row still reads `$win_years_counted` but multiplies 0, so no stray credit; "advocacy line only counts the pilot" is stated in the summary.
