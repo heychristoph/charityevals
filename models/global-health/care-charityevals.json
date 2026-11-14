@@ -611,10 +611,15 @@
     {
       "id": "share_under5",
       "section": "effect",
-      "label": "Share of the deaths averted that are of children under five",
+      "label": "Share of the excess deaths averted that are of children under five",
       "format": "percent",
-      "formula": "@death_ages.diarrhoea_ssa_share_under5",
-      "explainer": "A stand-in: the site's WHO Global Health Estimates split of diarrhoeal deaths in Sub-Saharan Africa (facts/death_ages.json), used for excess crisis deaths, which are mostly hunger-worsened infections: 55% under five, within the 40-60% the family's guidance gives for crises."
+      "value": {
+        "low": 0.4,
+        "best": 0.5,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Excess deaths in food crises and displacement are mostly young children's: mortality surveys in crises commonly find under-five death rates about twice the crude rate, and the family guidance gives 40-60% under five. No all-cause age split for CARE's response countries is in the site's facts yet; the diarrhoeal split in Sub-Saharan Africa (55% under five, @death_ages) is inside the range. 50% (40-60%)."
     },
     {
       "id": "share_5_14_of_over5",
@@ -622,7 +627,7 @@
       "label": "Of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
       "formula": "@death_ages.diarrhoea_ssa_share_5_14 / (1 - @death_ages.diarrhoea_ssa_share_under5)",
-      "explainer": "From the same stand-in split (diarrhoeal deaths in Sub-Saharan Africa, WHO GHE)."
+      "explainer": "A stand-in: among deaths over five, the share aged 5-14 in the site's split of diarrhoeal deaths in Sub-Saharan Africa (GBD, facts/death_ages.json), used until an all-cause split for the response countries is in the facts."
     },
     {
       "id": "share_15_49_of_over15",
@@ -630,7 +635,7 @@
       "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
       "format": "percent",
       "formula": "@death_ages.diarrhoea_ssa_share_15_49 / (@death_ages.diarrhoea_ssa_share_15_49 + @death_ages.diarrhoea_ssa_share_50plus)",
-      "explainer": "From the same stand-in split (diarrhoeal deaths in Sub-Saharan Africa, WHO GHE); the rest valued at the 50-74 band."
+      "explainer": "A stand-in: among deaths over fifteen, the share aged 15-49 in the same diarrhoeal split, used until an all-cause split for the response countries is in the facts."
     },
     {
       "id": "value_per_death",
@@ -729,8 +734,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per person",
       "format": "small",
-      "formula": "ln(1 + value_delivered_per_person / baseline_consumption)",
-      "explainer": "A year's relief on the site's one log-income scale."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person / (baseline_consumption * years_exposed))",
+      "explainer": "The goods on the site's one log-income scale over the time they are used: they raise consumption during the months each person is covered (years_exposed), so the gain is years_exposed × ln(1 + value ÷ the consumption of that period)."
     },
     {
       "id": "neonatal_mortality",
@@ -1642,11 +1647,19 @@
       "explainer": "Aid kept is already CARE's share; only the missing-data discount."
     },
     {
+      "id": "relief_deaths_share_unadj",
+      "section": "adjustments",
+      "label": "Deaths' share of relief's value before adjustments (for the reading-only averages)",
+      "format": "percent",
+      "formula": "people_reached * deaths_averted_per_person * value_per_death / relief_uov_unadjusted",
+      "explainer": "The rest is the goods' value; the averages below weight relief's two parts by their own adjustments."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "Attribution (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(relief_dalys_unadjusted * relief_attribution_share + health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + livelihood_dalys_unadjusted + food_dalys_unadjusted * food_attribution_share + education_dalys_unadjusted * education_attribution_share + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + food_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * (relief_deaths_share_unadj * relief_attribution_share + (1 - relief_deaths_share_unadj) * relief_goods_attribution_share) + health_dalys_unadjusted * health_attribution_share + wash_dalys_unadjusted * wash_attribution_share + livelihood_dalys_unadjusted + food_dalys_unadjusted * food_attribution_share + education_dalys_unadjusted * education_attribution_share + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + food_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1662,7 +1675,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(relief_dalys_unadjusted * relief_evidence_adj + health_dalys_unadjusted * health_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + livelihood_dalys_unadjusted * livelihood_evidence_adj + food_dalys_unadjusted * food_evidence_adj + education_dalys_unadjusted * education_evidence_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + food_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * (relief_deaths_share_unadj * relief_evidence_adj + (1 - relief_deaths_share_unadj)) + health_dalys_unadjusted * health_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + livelihood_dalys_unadjusted * livelihood_evidence_adj + food_dalys_unadjusted * food_evidence_adj + education_dalys_unadjusted * education_evidence_adj + awareness_dalys_unadjusted) / (relief_dalys_unadjusted + health_dalys_unadjusted + wash_dalys_unadjusted + livelihood_dalys_unadjusted + food_dalys_unadjusted + education_dalys_unadjusted + awareness_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
