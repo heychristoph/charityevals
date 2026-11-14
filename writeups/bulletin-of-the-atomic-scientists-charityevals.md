@@ -62,11 +62,13 @@ The result is below the Arms Control Association's 41, the Nuclear Threat Initia
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with a climate branch added that counts tonnes of greenhouse gas. The rounds of independent audit are in audits/bulletin-of-the-atomic-scientists-charityevals/.
+The model was built from the catastrophic-risk template, with a climate branch added that counts tonnes of greenhouse gas. Round 1 of the independent audit passed with four medium and three small findings, all fixed. The split between areas now follows the year's 316 articles instead of the next year's projects. The nuclear work gets the site's figure for public-facing work. The climate tonnes start from a shared, published cost per tonne instead of another of our models. Three sources and two small figures were corrected. Round 2 passed with five small findings, all fixed, and a final round checked those fixes. The rounds are in audits/bulletin-of-the-atomic-scientists-charityevals/.
 
 ### Sources
 
 - Bulletin of the Atomic Scientists Form 990 for the year ended June 2025 (IRS e-file data).
 - Bulletin of the Atomic Scientists, 2024 and 2025 Annual Reports, and its staff page.
+- Bulletin of the Atomic Scientists, topic listings for July 2024 to June 2025.
+- Clare & Vargas, Can climate change be more cost-effective than the best GHD interventions? (Rethink Priorities, 2026).
 - Karger et al., Forecasting Existential Risks (Forecasting Research Institute, 2023).
 - Rethink Priorities, Cross-Cause Cost-Effectiveness Model.
