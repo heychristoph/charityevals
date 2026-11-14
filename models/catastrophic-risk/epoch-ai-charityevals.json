@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "epoch-ai",
   "owner": "charityevals",
-  "summary": "Epoch AI (San Francisco) tracks and forecasts the trajectory of AI: public databases of AI models, compute, chips and data centres, capability benchmarks (FrontierMath, the Epoch Capabilities Index), research reports and a newsletter, used by governments, central banks and journalists, plus paid work for AI companies, investors and governments. This model covers all its work in 2025, its first year as an independent charity ($5M spent, from its impact report; no audited statement for the year is public yet). At the defaults it averts about 0.08 years of healthy life per $1,000, from 0.001 to 1.2 on the model's own ranges, so the result is mostly uncertainty: each dollar of the work that bears on catastrophic risk is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. It is under a tenth of its cause's median, close to METR's, because Epoch's mission is understanding AI rather than reducing its risks (about 60% of the work counted as bearing on them, at 0.8 of a typical project's uptake), little of it is aimed at misuse (under 3% of the counted work, its biological AI tracking, which still gives about two thirds of the result), its benchmarks and paid work for AI companies and investors are taken to speed the race (−12% of the value, −30% of the part they concern), clients' fees for commissioned work are credited to the clients, and the next dollar counts at 23% of the past average after Coefficient Giving's $22.7M in October 2026. The chance of an AI catastrophe (the slider), the typical cut per dollar, the years a cut counts and the share of work counted as misuse are the biggest swings; the one branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "Epoch AI (San Francisco) tracks and forecasts the trajectory of AI: public databases of AI models, compute, chips and data centres, capability benchmarks (FrontierMath, the Epoch Capabilities Index), research reports and a newsletter, used by governments, central banks and journalists, plus paid work for AI companies, investors and governments. This model covers all its work in 2025, its first year as an independent charity ($5M spent, from its impact report; no audited statement for the year is public yet). At the defaults it averts about 0.07 years of healthy life per $1,000, from 0.001 to 0.9 on the model's own ranges, so the result is mostly uncertainty: each dollar of the work that bears on catastrophic risk is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. It is under a tenth of its cause's median, close to METR's, because Epoch's mission is understanding AI rather than reducing its risks (about 60% of the work counted as bearing on them, at 0.8 of a typical project's uptake), little of it is aimed at misuse (1.7% of spending, under 3% of the counted work: its biological AI tracking, which still gives about two thirds of the result), its benchmarks and paid work for AI companies and investors are taken to speed the race (−9% of the value, −30% of the part they concern), clients' fees for commissioned work are credited to the clients, and the next dollar counts at 23% of the past average after Coefficient Giving's $22.7M in October 2026. The chance of an AI catastrophe (the slider), the typical cut per dollar, the years a cut counts and the share of work counted as misuse are the biggest swings; the one branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Epoch AI",
@@ -297,17 +297,25 @@
       "explainer": "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed."
     },
     {
-      "id": "ai_misuse_cost_share",
+      "id": "ai_misuse_spend_share",
       "section": "effect",
-      "label": "AI: share of the AI spending on work against misuse (dangerous-capability evaluations, defences against misuse)",
+      "label": "AI: share of all spending on work against misuse",
       "format": "percent",
-      "kind": "judgment",
-      "explainer": "Of Epoch's AI work that bears on catastrophic risk (the part counted, catastrophe_relevant_share), the share aimed at people using AI to do harm. Only one line is: tracking biological AI models (tools that design proteins or advise on lab work), funded by Sentinel Bio ($85,000 in September 2025, $80,000 in 2024, the funding page), 1.7% of all 2025 spending ($85,000 of $5M) and all of it catastrophe-relevant, so 0.017 / 0.6 = 2.8% of the counted work. The rest is aimed at neither or informs governance of loss of control and misuse alike, which counts as misalignment work (the template's rule). 0 to 13%: the high end counts parts of the Benchmarking Hub that track dangerous knowledge (scores on public biology and cyber benchmarks, about 8% of spending at most, over the relevant share). The share matters: for catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its misalignment one, so these few percent give about two thirds of the result.",
       "value": {
         "low": 0,
-        "best": 0.028,
-        "high": 0.13
-      }
+        "best": 0.017,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "The share of Epoch's 2025 spending aimed at people using AI to do harm. Only one line is: tracking biological AI models (tools that design proteins or advise on lab work), funded by Sentinel Bio ($85,000 in September 2025, $80,000 in 2024, the funding page): $85,000 of $5M, 1.7%, our judgment that the grant pays for the work it names. The rest is aimed at neither or informs governance of loss of control and misuse alike, which counts as misalignment work (the template's rule). 0 to 8%: the high end counts parts of the Benchmarking Hub that track dangerous knowledge (models' scores on public biology and cyber benchmarks)."
+    },
+    {
+      "id": "ai_misuse_cost_share",
+      "section": "effect",
+      "label": "AI: share of the counted (catastrophe-relevant) AI work aimed at misuse",
+      "format": "percent",
+      "explainer": "The misuse work (ai_misuse_spend_share, all of it catastrophe-relevant) over the share of the work counted (catastrophe_relevant_share): about 0.017 / 0.6 = 2.8%. It weights Rethink's misuse preset against its misalignment one inside the counted work. The share matters: for catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its misalignment one, so these few percent give about two thirds of the result.",
+      "formula": "ai_misuse_spend_share / catastrophe_relevant_share"
     },
     {
       "id": "ai_deaths_per_year",
@@ -1039,19 +1047,19 @@
       "label": "AI work: fees paid by clients for commissioned work, 2025",
       "format": "usd",
       "value": {
-        "low": 100000,
-        "best": 350000,
-        "high": 1500000
+        "low": 350000,
+        "best": 990000,
+        "high": 1900000
       },
       "kind": "estimate",
       "source": {
         "title": "Epoch AI, Epoch Impact Report 2025 (16 January 2026); Epoch AI, Funding and transparency page (funders, clients, collaborations, conflicts of interest)",
         "url": "https://epoch.ai/blog/epoch-impact-report-2025",
         "retrieved": "2026-11-14",
-        "page": "'2025 in numbers': Raised from donors and collaborators $10.3 million; Commissioned research projects and consultations 13",
+        "page": "'2025 in numbers': Raised from donors and collaborators $10.3 million (+40% from 2024); Commissioned research projects and consultations 13",
         "quote": "Raised from donors and collaborators"
       },
-      "explainer": "What clients paid for the 13 commissioned projects and consultations of 2025 (FrontierMath Tier 4 for OpenAI, evaluations for xAI and Google DeepMind, 'AI in 2030' for Google DeepMind, a benchmark funded by METR, a report for EPRI, consultations for Sequoia Capital and Bridgewater Associates, among others): the $10.3M raised from donors and collaborators less the gifts dated 2025 on the funding page (Coefficient Giving $8.5M and $70,000, Jaan Tallinn $600,000, Likith Govindaiah $400,000, Leopold Aschenbrenner $200,000, Girish Sastry $100,000, Sentinel Bio $85,000: $9.955M), about $0.35M. $0.1M to $1.5M: a grant recognised in 2025 but listed under another date, gifts under $70,000 the page leaves out, or fees counted as other revenue move it either way; Epoch says it charges 'at least on par with industry consultants'. Paid work bought by clients is their resources behind the outputs, credited in ai_attribution_share."
+      "explainer": "What clients paid for the work of 2025 (13 commissioned projects and consultations: FrontierMath Tier 4 for OpenAI, evaluations for xAI and Google DeepMind, 'AI in 2030' for Google DeepMind, a benchmark funded by METR, a report for EPRI, data for the AI Index, consultations for the UK DSIT, Sequoia Capital and Bridgewater Associates). Several were paid across 2024 and 2025 (the funding page dates OpenAI's FrontierMath, the Google DeepMind report, the AI Index, EPRI and DSIT '2024/25'), so the fees' share is taken over both years: raised $10.3M in 2025 and about $7.36M in 2024 ('+40% from 2024'), $17.66M, less the gifts the funding page dates to those years ($4.21M in 2024: Coefficient Giving $4,132,488, Sentinel Bio $80,000; $9.955M in 2025: Coefficient Giving $8.5M and $70,000, Jaan Tallinn $600,000, Likith Govindaiah $400,000, Leopold Aschenbrenner $200,000, Girish Sastry $100,000, Sentinel Bio $85,000), about $3.5M of fees, 19.8% of receipts, × the $5M spent = about $990,000. $350,000 (2025's receipts alone) to $1.9M (2024's unlisted receipts all fees and paid for 2025's work): gifts under $70,000 the page leaves out, or grants recognised in another year, move it either way; Epoch says it charges 'at least on par with industry consultants'. Paid work bought by clients is their resources behind the outputs, credited in ai_attribution_share."
     },
     {
       "id": "own_work_share",
@@ -1196,7 +1204,7 @@
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
-      "explainer": "Epoch's share of all resources behind its work: the share of its spending not paid by its clients' fees (earned_revenue, credited to the clients as their resources, as in FAR.AI's model), times its share against outside contributors (own_work_share): about 0.84.",
+      "explainer": "Epoch's share of all resources behind its work: the share of its spending not paid by its clients' fees (earned_revenue, credited to the clients as their resources, as in FAR.AI's model), times its share against outside contributors (own_work_share): about 0.72.",
       "formula": "(1 - earned_revenue / total_expenses) * own_work_share"
     },
     {
@@ -1332,12 +1340,12 @@
       "label": "Harm: speeding up dangerous capabilities, as a share of modelled value",
       "format": "percent",
       "kind": "judgment",
-      "explainer": "Beyond a typical project's backfire (in the shared cut): Epoch's work is clearly riskier than typical in three ways. (1) Benchmarks the labs race on: FrontierMath was commissioned by OpenAI (Tier 4 in 2025), which holds most of its problems, and Epoch evaluates models for xAI and Google DeepMind; capability benchmarks give developers targets. (2) Paid work for AI companies and investors: 'AI in 2030' for Google DeepMind, research on RL scaling for Sequoia Capital, consultations for Bridgewater Associates; trend forecasts can pull money into AI and sharpen the race. (3) In April 2025 a co-founder and three staff left to found Mechanize, a start-up that builds training environments and data to enable 'the full automation of the economy', and the work's neutrality on whether faster AI is good means it is not steered away from acceleration. On the value of the work these channels concern, about −30%, the top of the template's anchor for capabilities-adjacent work (−10% to −30%; METR's evaluations −10%), −5% to −60%. But this row is a share of all modelled value, and about two thirds of it comes from the biological AI tracking (ai_misuse_cost_share), which speeds nothing up; so −30% × about 0.4 = −12%, our judgment, −2% to −24%.",
+      "explainer": "Beyond a typical project's backfire (in the shared cut): Epoch's work is clearly riskier than typical in three ways. (1) Benchmarks the labs race on: FrontierMath was commissioned by OpenAI (Tier 4 in 2025), which holds most of its problems, and Epoch evaluates models for xAI and Google DeepMind; capability benchmarks give developers targets. (2) Paid work for AI companies and investors: 'AI in 2030' for Google DeepMind, research on RL scaling for Sequoia Capital, consultations for Bridgewater Associates; trend forecasts can pull money into AI and sharpen the race. (3) In April 2025 a co-founder and three staff left to found Mechanize, a start-up that builds training environments and data to enable 'the full automation of the economy', and the work's neutrality on whether faster AI is good means it is not steered away from acceleration. On the value of the work these channels concern, about −30%, the top of the template's anchor for capabilities-adjacent work (−10% to −30%; METR's evaluations −10%), −5% to −60%. But this row is a share of all modelled value, and about two thirds of it comes from the biological AI tracking (ai_misuse_cost_share), which speeds nothing up; so −30% × about 0.3 = −9%, our judgment, −1.5% to −18%.",
       "side_effect": "added",
       "value": {
-        "low": -0.24,
-        "best": -0.12,
-        "high": -0.02
+        "low": -0.18,
+        "best": -0.09,
+        "high": -0.015
       }
     },
     {

@@ -1,6 +1,6 @@
 ### Summary
 
-Epoch AI tracks and forecasts how AI is developing, and publishes data, benchmarks and research on it. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="epoch-ai-charityevals">0.08</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so on the model's own ranges the result runs from about 0.001 to about 1.2.
+Epoch AI tracks and forecasts how AI is developing, and publishes data, benchmarks and research on it. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="epoch-ai-charityevals">0.07</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so on the model's own ranges the result runs from about 0.001 to about 0.9.
 
 ### What the charity does
 
@@ -30,13 +30,13 @@ All of Epoch's spending is AI work. The model's pandemic, nuclear, policy-win an
 | Share of the work bearing on catastrophic risk | 0.6 | Compute, chip and data-centre data, capability benchmarks and trend research count; the economics, power-demand and investor work doesn't |
 | That work's uptake against a typical AI project | 0.8 | Widely cited by governments and central banks, but aimed at understanding AI, not at reducing its risks |
 | Work no one else would have done now | 0.7 | The AI Index, OECD.AI and commercial analysts also publish trend data, but Epoch's databases are the main free source |
-| Epoch's share of the resources behind its work | 0.84 | Clients' fees for commissioned work (about $0.35 million) are their share; the rest is mostly its own staff compiling public information, and labs give model access |
+| Epoch's share of the resources behind its work | 0.72 | Clients' fees for commissioned work (about $1 million) are their share; the rest is mostly its own staff compiling public information, and labs give model access |
 | Funging by its main funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about Epoch's effect on the risk is measured |
 
-About 3% of the counted work is work against misuse: tracking biological AI tools, funded by Sentinel Bio. The rest counts as work against AI escaping control.
+About 1.7% of spending, under 3% of the counted work, is work against misuse: tracking biological AI tools, funded by Sentinel Bio. The rest counts as work against AI escaping control.
 
-Side effects: other benefits add 10% (its economics and energy work informs central banks and planners). Speeding up AI subtracts 12%: about 30% of the value of the work it concerns, which excludes the biological tracking. Its benchmarks give labs targets to race on, its paid work for AI companies and investors can pull money into AI, and in April 2025 a co-founder and three staff left to found Mechanize, a start-up that aims to automate all work. Information hazards subtract nothing: it publishes no threat analyses.
+Side effects: other benefits add 10% (its economics and energy work informs central banks and planners). Speeding up AI subtracts 9%: about 30% of the value of the work it concerns, which excludes the biological tracking. Its benchmarks give labs targets to race on, its paid work for AI companies and investors can pull money into AI, and in April 2025 a co-founder and three staff left to found Mechanize, a start-up that aims to automate all work. Information hazards subtract nothing: it publishes no threat analyses.
 
 Epoch raised $10.3 million in 2025 and spent $5 million. Since then Coefficient Giving has given it $22.7 million of general support and more for a data-centre tracker and compute. Money is not its main constraint, so the next dollar counts at 23% of the past average.
 
@@ -46,11 +46,11 @@ The result is under a tenth of the median for this cause and close to METR's (0.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%; the result moves from 0.01 to 0.52.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the misuse figure alone moves the result from 0.029 to 0.57.
-- **How much of the work counts as misuse work.** At none the result is 0.024; at 13% it is 0.28.
-- **Whether Epoch's information makes AI safer or faster.** The speed-up harm runs from −2% to −24%, and the uptake from 0.3 to 1.2 of a typical project.
-- **The discount rate and the years a cut counts.** At a 0.1% discount rate the result is about 0.55.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%; the result moves from 0.009 to 0.47.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the misuse figure alone moves the result from 0.026 to 0.51.
+- **How much of the work counts as misuse work.** At none the result is 0.021; at 8% of spending it is 0.25.
+- **Whether Epoch's information makes AI safer or faster.** The speed-up harm runs from −1.5% to −18%, and the uptake from 0.3 to 1.2 of a typical project.
+- **The discount rate and the years a cut counts.** At a 0.1% discount rate the result is about 0.49.
 
 ### What isn't modelled
 
@@ -60,7 +60,7 @@ The result is under a tenth of the median for this cause and close to METR's (0.
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with METR's and the Centre for the Governance of AI's models as worked examples. Independent audits are in audits/epoch-ai-charityevals/.
+The model was built from the catastrophic-risk template, with METR's and the Centre for the Governance of AI's models as worked examples. Round 1 of the independent audit found one high finding and three medium ones, all fixed: clients' fees for commissioned work are now credited to the clients, the misuse share is taken over the work counted, the speed-up harm applies only to the part of the value it concerns, and a source link was corrected. Round 2 passed. Its medium finding, that fees paid across 2024 and 2025 were undercounted, was fixed, lowering the result by about a tenth, and a verification round checked the changes. Independent audits are in audits/epoch-ai-charityevals/.
 
 ### Sources
 
