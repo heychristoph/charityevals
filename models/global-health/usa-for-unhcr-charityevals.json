@@ -35,7 +35,7 @@
   "estimate_basis": "unit_cost",
   "charity": "usa-for-unhcr",
   "owner": "charityevals",
-  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.8 million as donated clothes, hygiene kits, software and transport, and $8.2 million on awareness work; fundraising took $26.6 million, so each dollar granted costs about $1.51 of donations. The grants are valued as UNHCR's 2025 programme mix (its audited impact areas, split further by judgment): cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about 0.062 years of healthy life per $1,000 (combined range 0.014-0.27: the result is mostly uncertainty), about 60% of the site's global-health median and below charityevals' Save the Children and World Vision models, mostly because a third of each dollar pays for fundraising and management in the US and a quarter of UNHCR's for its own support costs; the biggest uncertainties are the missing-data discount, how many refugees' papers bring them rights, and how poor the people reached are.",
+  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.6 million of donated clothes, hygiene kits, software and transport passed on (the donors' resources, so credited by share rather than costed), and $8.2 million on awareness work; fundraising took $26.6 million, so each cash dollar granted costs about $1.61 of donations. The grants are valued as UNHCR's 2025 programme mix (its audited impact areas, split further by judgment): cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about 0.060 years of healthy life per $1,000 (combined range 0.014-0.27: the result is mostly uncertainty), about 60% of the site's global-health median and below charityevals' Save the Children and World Vision models, mostly because a third of each dollar pays for fundraising and management in the US and a quarter of UNHCR's for its own support costs; the biggest uncertainties are the missing-data discount, how many refugees' papers bring them rights, and how poor the people reached are.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: USA for UNHCR (2025)",
@@ -135,7 +135,31 @@
         "retrieved": "2026-11-14",
         "page": "Part III line 4b; Schedules F and I"
       },
-      "explainer": "Donated goods and services passed on, at the donors' fair market value: new clothes, hygiene kits, IT goods and software licences and transport (Schedule F: 'IT goods and licenses, new clothes for refugees, transport'; Schedule I: new clothes to Good360 and the IRC). Counted at its recorded value as the accounts do; its value to refugees is judged below."
+      "explainer": "Donated goods and services passed on, at the donors' fair market value: new clothes, hygiene kits, IT goods and software licences and transport (Schedule F: 'IT goods and licenses, new clothes for refugees, transport'; Schedule I: new clothes to Good360 and the IRC). The goods themselves are the donors' resources, not USA for UNHCR's: they leave the cost and enter the gifts-in-kind credit share below (Convention 2), as in charityevals' Direct Relief, ShelterBox and Team Rubicon models."
+    },
+    {
+      "id": "gik_goods_granted",
+      "section": "cost",
+      "label": "Donated goods and services granted in 2025, at the donors' fair market value",
+      "format": "usd",
+      "value": 10626878,
+      "kind": "observed",
+      "source": {
+        "title": "USA for UNHCR (United States Association for UNHCR), Form 990 for calendar 2025 (filed August 2026; Part XII: financial statements audited), IRS e-file XML",
+        "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202622319349300112_public.xml",
+        "quote": "<GrantAmt>10626878</GrantAmt> (programme 2)",
+        "retrieved": "2026-11-14",
+        "page": "Part III line 4b"
+      },
+      "explainer": "Programme 2's grants: the donated goods, software and transport passed on (Schedule F non-cash $9,854,908 abroad, Schedule I $771,969 in the US). Non-cash: taken out of the cost."
+    },
+    {
+      "id": "gik_cash_spend",
+      "section": "cost",
+      "label": "USA for UNHCR's own cash spending on the gifts-in-kind programme",
+      "format": "usd",
+      "formula": "gik_spend - gik_goods_granted",
+      "explainer": "Staff, storage and handling of the donated goods: about $0.18M."
     },
     {
       "id": "aw_spend",
@@ -158,13 +182,13 @@
       "section": "cost",
       "label": "Spending on the modelled programmes in 2025",
       "format": "usd",
-      "formula": "unhcr_grants + gik_spend + aw_spend",
-      "explainer": "All three programmes of the 2025 Form 990, $63.3M: grants to UNHCR, gifts in kind and awareness. Every line of the accounts is modelled here."
+      "formula": "unhcr_grants + gik_cash_spend + aw_spend",
+      "explainer": "All three programmes of the 2025 Form 990 at their cash cost, $52.7M: grants to UNHCR, the handling of gifts in kind and awareness. Every line of the accounts is modelled here; the donated goods ($10.6M) are the donors' resources and enter the credit share instead."
     },
     {
-      "id": "total_expenses",
+      "id": "total_expenses_reported",
       "section": "cost",
-      "label": "Total expenses in 2025 (programmes, management, fundraising)",
+      "label": "Total expenses in 2025 as reported (programmes, management, fundraising)",
       "format": "usd",
       "value": 95541311,
       "kind": "observed",
@@ -178,9 +202,9 @@
       "explainer": "Part IX line 25, column A: programmes $63.3M, management $5.6M, fundraising $26.6M (28% of the total)."
     },
     {
-      "id": "program_expenses",
+      "id": "program_expenses_reported",
       "section": "cost",
-      "label": "Programme service expenses in 2025",
+      "label": "Programme service expenses in 2025 as reported",
       "format": "usd",
       "value": 63325785,
       "kind": "observed",
@@ -194,12 +218,28 @@
       "explainer": "Part IX line 25, column B, the same as Part III line 4e."
     },
     {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total cash expenses in 2025",
+      "format": "usd",
+      "formula": "total_expenses_reported - gik_goods_granted",
+      "explainer": "Total expenses less the donated goods passed on (a non-cash item)."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Programme cash expenses in 2025",
+      "format": "usd",
+      "formula": "program_expenses_reported - gik_goods_granted",
+      "explainer": "Programme expenses less the donated goods passed on."
+    },
+    {
       "id": "overhead_ratio",
       "section": "cost",
       "label": "Overhead multiplier (total ÷ programme expenses)",
       "format": "multiple",
       "formula": "total_expenses / program_expenses",
-      "explainer": "Spreads management and fundraising over the programmes in proportion to their cost: about 1.51, so each dollar granted costs $1.51 of donations. UNHCR's own programme support and management costs (27% of its 2025 expenditure) are inside the grants and so inside the branches' costs per person below."
+      "explainer": "Spreads management and fundraising over the programmes in proportion to their cash cost: about 1.61, so each dollar granted costs $1.61 of donations. UNHCR's own programme support and management costs (27% of its 2025 expenditure) are inside the grants and so inside the branches' costs per person below."
     },
     {
       "id": "cost_total",
@@ -1332,7 +1372,7 @@
       "section": "reach",
       "label": "Refugees abroad who get donated goods",
       "format": "integer",
-      "formula": "(gik_spend * gik_goods_share - gik_us_goods) / gik_value_per_person"
+      "formula": "(gik_goods_granted * gik_goods_share - gik_us_goods) / gik_value_per_person"
     },
     {
       "id": "gik_us_ln_gain_per_person",
@@ -1652,15 +1692,10 @@
     {
       "id": "gik_attribution_share",
       "section": "adjustments",
-      "label": "gik: UNHCR's (or USA for UNHCR's) share of the resources behind it",
+      "label": "gik: USA for UNHCR's share of the resources behind the gifts",
       "format": "percent",
-      "value": {
-        "low": 0.7,
-        "best": 0.9,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "90% (70-100%): the donors' goods are on USA for UNHCR's books at their value; UNHCR's and Good360's handling adds the rest."
+      "formula": "gik_cash_spend * overhead_ratio / (gik_cash_spend * overhead_ratio + gik_goods_granted * (gik_goods_share * gik_inkind_equivalence + (1 - gik_goods_share) * gik_services_vs_cash))",
+      "explainer": "Convention 2, as charityevals' Direct Relief model: USA for UNHCR's own cash for the programme (with overhead) over that cash plus the donated goods at their value to the recipients (the clothes and kits at the in-kind share, the software and transport at their share of cash), the donors' resources. About 6%."
     },
     {
       "id": "attribution_share_shared",
@@ -1991,7 +2026,7 @@
       "section": "bridges",
       "label": "Gifts in kind: goods and services, in units of value (adjusted)",
       "format": "number",
-      "formula": "((gik_people * gik_ln_gain_per_person + gik_us_people * gik_us_ln_gain_per_person) * $uov_per_ln_consumption + gik_spend * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_uov_per_dollar_gross) * gik_total_adj",
+      "formula": "((gik_people * gik_ln_gain_per_person + gik_us_people * gik_us_ln_gain_per_person) * $uov_per_ln_consumption + gik_goods_granted * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_uov_per_dollar_gross) * gik_total_adj",
       "explainer": "Clothes and kits as consumption; donated IT and transport at a share of what the same in cash to UNHCR does (UNHCR's units of value per dollar of grants).",
       "unit": "UoV"
     },
@@ -2000,7 +2035,7 @@
       "section": "bridges",
       "label": "Gifts in kind: the protection WELLBYs of the IT and transport's UNHCR-dollar equivalent",
       "format": "number",
-      "formula": "gik_spend * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_wellbys_per_dollar_gross * gik_total_adj",
+      "formula": "gik_goods_granted * (1 - gik_goods_share) * gik_services_vs_cash * unhcr_wellbys_per_dollar_gross * gik_total_adj",
       "unit": "WELLBYs"
     },
     {
