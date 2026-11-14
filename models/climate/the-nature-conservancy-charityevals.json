@@ -18,7 +18,7 @@
   "estimate_basis": "past_average",
   "charity": "the-nature-conservancy",
   "owner": "charityevals",
-  "summary": "The Nature Conservancy (TNC) buys and protects land and water in the US and about 80 countries, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries. We model all of its fiscal year 2025 spending (July 2024 to June 2025, $1.28 billion of conservation programmes and land purchases), each of its nine pathways from the research on its kind of work, in 13 branches: forest kept by the Ecuador Amazon deal, the land it bought and its protection policy; power displaced by mine-land solar and renewable siting maps; Pará's deforestation-free cattle rule, zero-conversion soy in the Gran Chaco, regenerative farming and the PRANA no-burn programme in India; restoration; fisheries rules; and climate adaptation. The result is about 0.0004 years of healthy life per $1,000, under a tenth of the site's climate models, because most of TNC's work keeps land carbon, which is worth little in healthy years, and TNC is a small share of the resources behind its large deals, rules and policies. Nearly half of it is the air-pollution deaths averted by less crop burning in Punjab and Haryana, most of whose fall would have come anyway; a third is the Pará cattle rule, mostly through the least grounded step, a small cut in pandemic risk from forest kept, and its roll-out has barely begun. Every branch rests on thin data and is discounted for missing data, and the result is mostly uncertainty (combined range about 0.00005-0.0035).",
+  "summary": "The Nature Conservancy (TNC) buys and protects land and water in the US and about 80 countries, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries. We model all of its fiscal year 2025 spending (July 2024 to June 2025, $1.28 billion of conservation programmes and land purchases), each of its nine pathways from the research on its kind of work, in 13 branches: forest kept by the Ecuador Amazon deal, the land it bought and its protection policy; power displaced by mine-land solar and renewable siting maps; Pará's deforestation-free cattle rule, zero-conversion soy in the Gran Chaco, regenerative farming and the PRANA no-burn programme in India; restoration; fisheries rules; and climate adaptation. The result is about 0.0004 years of healthy life per $1,000, under a tenth of the site's climate models, because most of TNC's work keeps land carbon, which is worth little in healthy years, and TNC is a small share of the resources behind its large deals, rules and policies. Nearly half of it is the air-pollution deaths averted by less crop burning in Punjab and Haryana, most of whose fall would have come anyway; a third is the Pará cattle rule, mostly through the least grounded step, a small cut in pandemic risk from forest kept, and its roll-out has barely begun. Every branch rests on thin data and is discounted for missing data, and the result is mostly uncertainty (combined range about 0.00005-0.0021).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Nature Conservancy",
@@ -3386,6 +3386,19 @@
       "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
     },
     {
+      "id": "methane_share",
+      "section": "bridges",
+      "label": "Share of these tonnes that are methane",
+      "format": "percent",
+      "value": {
+        "low": 0.001,
+        "best": 0.003,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "The share of these tonnes (in CO₂e) that is methane, which the site's climate conversion values by methane's own timing: earlier, shorter warming and the ozone it makes (docs/normalization.md 2.5). Only PRANA's tonnes are methane, about 80% of them (2.7 g of methane and 0.07 g of nitrous oxide a kg of residue burned, at 28 and 265 times CO₂: IPCC 2006 Guidelines, Vol. 4, Table 2.5), and PRANA is about 0.33% of the credited tonnes at the defaults: 0.003 (0.001 to 0.01 across the ranges). A typed share, like fuel_share: the row can't compute it from the branches, since a row the conversion reads may not read the shared sliders those carry (normalization.md 2.5)."
+    },
+    {
       "id": "pain_days_fish",
       "section": "bridges",
       "label": "Wild animals: days of pain spared (before adjustments)",
@@ -3451,7 +3464,7 @@
       "section": "bridges",
       "label": "Climate, in healthy years",
       "format": "number",
-      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * (1 + $discount_rate) ^ -$climate_heat_death_delay * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
       "unit": "DALYs",
       "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },

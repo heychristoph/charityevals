@@ -21,7 +21,7 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
   policy-research-meta  won policy ($win_years_counted, the wait), money moved through the shared
                     rows of src/engine/moved-money.ts (#model-id, @meta), the career-change step,
                     $marginal_vs_past_average; a climate skeleton in tco2e with years_until_avoided,
-                    air_pollution_weight and extra_deaths_per_tco2e
+                    air_pollution_weight, extra_deaths_per_tco2e and methane_share
   domestic-services, humanitarian-relief, medical-research, conservation, rights-advocacy  in DALYs,
                     each other unit's outcome through one fixed bridge row (src/engine/bridges.ts,
                     docs/normalization.md 2.6); companion-animals  days of pain -> ced_dog / ced_cat
@@ -491,6 +491,8 @@ T["policy-research-meta-climate"] = model("policy-research-meta", "climate polic
         f("air_pollution_weight", "conversion", "Air pollution these tonnes cut, relative to an average fossil-fuel tonne", "fuel_share * fuel_smoke_factor", "Read by the tco2e unit's conversion (docs/normalization.md 2.5).", "number"),
         f("extra_deaths_per_tco2e", "conversion", "Air-pollution deaths averted per tonne, counted directly (none here)", "0",
           "TEMPLATE: deaths a source counts directly beside the tonnes (a coal plant's own death count), per tonne brought forward, as an input with its source; 0 when the smoke is in air_pollution_weight, so nothing is counted twice.", "small"),
+        f("methane_share", "conversion", "Share of these tonnes that are methane", "0",
+          "TEMPLATE: the share of the tonnes (CO₂e) that is methane, weighted by tonnes a year before waits and years counted (a conversion row reads no shared assumption); the shared conversion values it by methane's own timing and adds its ozone deaths (docs/normalization.md 2.5). 0 for CO₂ only.", "percent"),
     ] + adj_rows(implementation=False) + [
         f("outcome_total", "outcome", "Tonnes of CO₂e averted", "downstream_value * total_adj", None, "number", "t CO₂e"),
         f("tco2e_per_dollar", "outcome", "Tonnes of CO₂e averted per dollar", "outcome_total / cost_total", None, "small", "t CO₂e / $"),
@@ -693,6 +695,8 @@ T["conservation"] = model("conservation", "conservation of land, water and speci
         f("air_pollution_weight", "bridges", "Air pollution these tonnes cut, relative to an average fossil-fuel tonne", "fuel_share * fuel_smoke_factor", "Read by the tonnes' bridge, as by the tco2e unit's conversion.", "number"),
         f("extra_deaths_per_tco2e", "bridges", "Air-pollution deaths averted per tonne, counted directly (none here)", "0",
           "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice.", "small"),
+        f("methane_share", "bridges", "Share of these tonnes that are methane", "0",
+          "The share of the tonnes (CO₂e) that is methane (wetland or rice methane, livestock), which the bridge values by methane's own timing and ozone (docs/normalization.md 2.5); 0 for land carbon.", "percent"),
         inp("health_people", "reach", "Health: people whose air, water, food or disease exposure the protection changes", 0, "estimate",
             "people downstream or downwind of the protected area, or living with it, whose health the evidence shows it changes (water quality, fire smoke, malaria, zoonotic spillover); 0, with the reason, where there is no evidence.", "integer", source=src("study")),
         inp("dalys_per_person_year", "effect", "Health: DALYs averted per person per year", {"low": 0.0001, "best": 0.0005, "high": 0.002}, "estimate",

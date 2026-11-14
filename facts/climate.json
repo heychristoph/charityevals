@@ -222,10 +222,10 @@
         "title": "MIT Technology Review (2022), Why the carbon capture subsidies in the climate bill are good news for emissions (Princeton REPEAT Project's estimate)",
         "url": "https://www.technologyreview.com/2022/08/25/1058591/why-the-carbon-capture-subsidies-in-the-climate-bill-are-good-news-for-emissions/amp/",
         "quote": "US facilities would trap and sequester some 200 million metric tons of carbon dioxide per year",
-        "note": "The article goes on: 'a 13-fold increase over what would likely occur with just the infrastructure bill that passed last year', which already held the 2018 credit. So about 185 million of the 200 million tonnes a year in 2030 are the 2022 law's doing.",
+        "note": "The article goes on: 'a 13-fold increase over what would likely occur with just the infrastructure bill that passed last year', which already held the 2018 credit. So about 185 million of the 200 million tonnes a year in 2030 are the 2022 law's doing. Delivery so far: CSIS (28 July 2025, https://www.csis.org/analysis/united-states-risks-losing-its-carbon-capture-advantage) puts US installed capture at 'over 20 million metric tons per year', about what was running before the 2022 law (some 22 million tonnes a year at 19 plants, Carbon Capture Coalition, 2024), against 'announced facilities under development with a combined capture capacity of over 130 Mtpa'.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "The 2022 law raised the 45Q credit (to $85 a tonne stored, $180 for direct air capture) and lowered the size a plant must be; the 2025 budget law kept it. Princeton's REPEAT Project projected about 200 million tonnes a year captured and stored by 2030, 13 times what the earlier policy (the 2018 credit and the 2021 infrastructure law) would give: about 185 million tonnes a year due to the 2022 law. Our judgment, 60 million tonnes a year once built (20 to 185 million), a third of the projection: the projection assumed pipelines and storage permits built at the pace needed, and by 2026 few of the projects it counted had reached operation. The high end is REPEAT's own increment."
+      "explainer": "The 2022 law raised the 45Q credit (to $85 a tonne stored, $180 for direct air capture) and lowered the size a plant must be; the 2025 budget law kept it. Princeton's REPEAT Project projected about 200 million tonnes a year captured and stored by 2030, 13 times what the earlier policy (the 2018 credit and the 2021 infrastructure law) would give: about 185 million tonnes a year due to the 2022 law. Our judgment, 60 million tonnes a year once built (20 to 185 million), a third of the projection: the projection assumed pipelines and storage permits built at the pace needed, and by mid-2025 US capture running was still about 20 million tonnes a year, about the level before the law, with over 130 million announced but not built (CSIS, 2025). The high end is REPEAT's own increment."
     },
     {
       "id": "ozone_deaths_per_tco2e_methane",
@@ -246,7 +246,67 @@
         "note": "Global Methane Assessment (https://www.unep.org/resources/report/global-methane-assessment-benefits-and-costs-mitigating-methane-emissions): cutting 180 million tonnes of methane a year prevents about 255,000 premature deaths a year from ozone.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Methane is also the main fuel of ground-level ozone worldwide, which kills people with lung and heart disease within about a decade of the methane's release, wherever it was emitted. Low: McDuffie et al.'s respiratory ozone deaths, valued by EPA at $1,800 per ton of methane, at a US value of a statistical life of about $11 million: 1.6 deaths per 10,000 tonnes of methane, 0.05 per 10,000 tonnes of CO₂e at a warming potential of 29.8 (respiratory deaths only, and below the full count where incomes are lower). High: the Global Methane Assessment's 255,000 deaths a year from a 180-million-tonne cut, cardiovascular deaths included: 14 per 10,000 tonnes of methane, 0.48 per 10,000 tonnes of CO₂e. Best guess 0.16 per 10,000 tonnes of CO₂e, the middle of the two on a log scale. A model adds it per tonne of methane in its extra_deaths_per_tco2e row (the share of its tonnes that are methane × this), valued like other air-pollution deaths; the deaths come within a decade, so they are not discounted like heat deaths. For comparison, the shared conversion's discounted heat deaths are about 0.04 per 10,000 tonnes."
+      "explainer": "Methane is also the main fuel of ground-level ozone worldwide, which kills people with lung and heart disease within about a decade of the methane's release, wherever it was emitted. Low: McDuffie et al.'s respiratory ozone deaths, valued by EPA at $1,800 per ton of methane, at a US value of a statistical life of about $11 million: 1.6 deaths per 10,000 tonnes of methane, 0.05 per 10,000 tonnes of CO₂e at a warming potential of 29.8 (respiratory deaths only, and below the full count where incomes are lower). High: the Global Methane Assessment's 255,000 deaths a year from a 180-million-tonne cut, cardiovascular deaths included: 14 per 10,000 tonnes of methane, 0.48 per 10,000 tonnes of CO₂e. Best guess 0.16 per 10,000 tonnes of CO₂e, the middle of the two on a log scale. The climate conversion adds it per tonne of methane (each model's methane_share row × this), valued like other air-pollution deaths and discounted over the years the extra methane stays in the air (climate.methane_lifetime_years): at 4% a year it counts 0.68 of its undiscounted value. For comparison, the shared conversion's discounted heat deaths are about 0.04 per 10,000 tonnes."
+    },
+    {
+      "id": "methane_lifetime_years",
+      "label": "Years an extra tonne of methane stays in the air (perturbation lifetime)",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 11.8,
+        "high": 13.6
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "IPCC (2021), Climate Change 2021: The Physical Science Basis, Chapter 7 (Forster et al.), section 7.6.1.1 and Table 7.15",
+        "url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/",
+        "page": "Section 7.6.1.1; Table 7.15",
+        "quote": "slightly revised since AR5 to be 11.8 ± 1.8 years",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Methane emitted today is broken down in the air over about 12 years: the extra methane falls by about 8% a year. Ground-level ozone follows the methane in the air, so the ozone deaths of a tonne come over those years, and the climate conversion discounts them that way: at the discount rate r their present value is 1 ÷ (1 + ln(1 + r) × 11.8), 0.68 of the undiscounted count at 4%. The deaths are taken in the year of the exposure; a lag from exposure to death (a few years in EPA's cessation lags) would lower them a little more and isn't counted. The range is the IPCC's ±1.8 years."
+    },
+    {
+      "id": "methane_heat_death_delay",
+      "label": "Years until the heat deaths from a tonne of CO₂e emitted as methane",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 18,
+        "best": 23,
+        "high": 30
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "IPCC (2013), Climate Change 2013: The Physical Science Basis, Chapter 8 Supplementary Material, section 8.SM.11 (impulse responses for emission metrics: Joos et al. 2013 for CO₂, a two-box temperature response)",
+        "url": "https://www.ipcc.ch/site/assets/uploads/2018/02/WG1AR5_Ch08SM_FINAL.pdf",
+        "page": "8.SM.11, Equations 8.SM.10 to 8.SM.15",
+        "note": "Derivation (our run of these standard responses): CO₂ airborne fraction 0.2173 + 0.2240 e^(-t/394.4) + 0.2824 e^(-t/36.54) + 0.2763 e^(-t/4.304); temperature response 0.631/8.4 e^(-t/8.4) + 0.429/409.5 e^(-t/409.5) K per W m⁻²; methane decaying over its 11.8-year lifetime (climate.methane_lifetime_years), scaled to equal CO₂'s forcing over 100 years (GWP100); heat deaths taken proportional to the warming, counted to 2300 like Rethink Priorities'. At 4% a year the discount-weighted delay is 60 years for CO₂ (the site's climate_heat_death_delay) and 23 for methane; undiscounted, a methane CO₂e tonne's warming to 2300 is 0.51 of a CO₂ tonne's. With heat deaths per degree rising 1% a year to 2100: 70 and 27 years, 0.37. The IPCC page blocks automated reads here; the parameters are the published ones as widely reproduced.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Methane's warming comes early: it peaks about a decade after the methane is released and is mostly gone after a few decades, while CO₂'s lasts for centuries. Like CO₂'s heat deaths (\"Years until the heat deaths from a tonne of CO₂\", 60), methane's are discounted as if they all came this many years after the tonne. Running the IPCC's standard responses of temperature to a pulse of each gas, with heat deaths following the warming, gives 60 years for CO₂ at a 4% discount rate, the same as the site's figure, and 23 for methane. Our judgment, 23 (18 to 30): 20 at a 6% rate, 27 if heat deaths per degree rise over the century, which pushes them later."
+    },
+    {
+      "id": "methane_heat_deaths_vs_co2",
+      "label": "Heat deaths of a tonne of CO₂e emitted as methane, relative to a tonne of CO₂ (undiscounted)",
+      "unit": "multiple",
+      "format": "number",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "IPCC (2013), Climate Change 2013: The Physical Science Basis, Chapter 8 Supplementary Material, section 8.SM.11 (impulse responses for emission metrics: Joos et al. 2013 for CO₂, a two-box temperature response)",
+        "url": "https://www.ipcc.ch/site/assets/uploads/2018/02/WG1AR5_Ch08SM_FINAL.pdf",
+        "page": "8.SM.11, Equations 8.SM.10 to 8.SM.15",
+        "note": "Derivation (our run of these standard responses): CO₂ airborne fraction 0.2173 + 0.2240 e^(-t/394.4) + 0.2824 e^(-t/36.54) + 0.2763 e^(-t/4.304); temperature response 0.631/8.4 e^(-t/8.4) + 0.429/409.5 e^(-t/409.5) K per W m⁻²; methane decaying over its 11.8-year lifetime (climate.methane_lifetime_years), scaled to equal CO₂'s forcing over 100 years (GWP100); heat deaths taken proportional to the warming, counted to 2300 like Rethink Priorities'. At 4% a year the discount-weighted delay is 60 years for CO₂ (the site's climate_heat_death_delay) and 23 for methane; undiscounted, a methane CO₂e tonne's warming to 2300 is 0.51 of a CO₂ tonne's. With heat deaths per degree rising 1% a year to 2100: 70 and 27 years, 0.37. The IPCC page blocks automated reads here; the parameters are the published ones as widely reproduced.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Tonnes of methane are stated in CO₂-equivalents at the 100-year warming potential (GWP100), which makes a methane tonne warm as much as a CO₂ tonne over its first 100 years; CO₂ goes on warming for centuries after, and the heat deaths of a tonne of CO₂ are counted to 2300 (Rethink Priorities). The same run of the IPCC's standard responses gives a methane CO₂e tonne 0.51 of a CO₂ tonne's warming to 2300. Our judgment, 0.5 (0.3 to 0.8): 0.37 if heat deaths per degree rise over the century (methane's come when it is cooler), and EPA's 2023 social costs value methane at about 8.5 times CO₂ per tonne at a 2% rate, 0.29 of GWP100's 29.8; the high end allows for deaths after 2100 counting less. The climate conversion multiplies methane's share of a model's heat deaths by this and discounts them over climate.methane_heat_death_delay: at the defaults a methane tonne's heat deaths are worth 2.1 times a CO₂ tonne's."
     },
     {
       "id": "us_coal_power_smoke_factor",
