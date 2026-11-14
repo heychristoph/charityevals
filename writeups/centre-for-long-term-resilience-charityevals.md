@@ -16,7 +16,7 @@ Pandemics and AI carry a yearly chance of catastrophe, taken from the shared for
 
 ### How the model works
 
-CLTR files small-company accounts with no income and expenditure account, so its spending isn't published. We build it from the 19 staff in its accounts and the pay in its job adverts: about £75,000 on average, plus 19% for National Insurance and pension. Staff are taken as 80% of all costs. That makes about $2.8 million (£2.1 million). Its known grants and the year's £0.6 million surplus give about the same.
+CLTR files small-company accounts with no income and expenditure account, so its spending isn't published. We build it from the 19 staff in its accounts and the pay in its job adverts: about £75,000 on average, plus 25% for National Insurance, pension and benefits. Staff are taken as 80% of all costs. That makes about $2.9 million (£2.2 million). Its known grants and the year's £0.6 million surplus give about the same.
 
 No split by unit is published either. One senior adviser and some leadership time go on risk management, 12% of the cost. Of the rest, 55% goes on biosecurity, by headcount on the unit pages. A quarter of the AI work is aimed at misuse, mostly AI and biology. Each part has its own adjustments:
 
@@ -30,7 +30,7 @@ The AI figure includes a 15% cut for its work on chronic and societal AI risks, 
 
 Side effects add 10%, mostly risk management's value in ordinary emergencies and the AI unit's societal work. Harms take off 3.5%: a little faster progress in the technologies, and published analyses of how they could be misused.
 
-CLTR holds about three months of spending in its own funds. Coefficient Giving matches other donors' gifts, and CLTR says it turns down most of what it is asked to do. The next dollar counts at 53% of the past average.
+CLTR holds about three months of spending in its own funds. Coefficient Giving offered in October 2024 to match other donors' gifts, up to £3 million, and CLTR says it turns down most of what it is asked to do. The next dollar counts at 53% of the past average.
 
 ### What drives the result
 
