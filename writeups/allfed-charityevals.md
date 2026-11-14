@@ -1,16 +1,16 @@
 ### Summary
 
-ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="allfed-charityevals">30</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from about 1 to about 870.
+ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="allfed-charityevals">26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from about 0.9 to about 750.
 
 ### What the charity does
 
 ALLFED spent $1.0 million in 2024. It has no employees: a team of contractors and 61 volunteers works across several continents. Its programmes cost $0.77 million:
 
-- **Research: $0.55 million.** Foods that grow without much sunlight (seaweed, single-cell protein, sugar from leaves, crops moved to warmer places) and how trade and rationing could feed people. In 2024 it submitted 16 academic papers and began work on food supply in an extreme pandemic. This line includes a $25,000 grant to a research partner in South America.
+- **Research: $0.55 million.** Foods that grow without much sunlight (seaweed, single-cell protein, sugar from leaves, crops moved to warmer places) and how trade and rationing could feed people. In 2024 it submitted 16 academic papers and began work on food supply in an extreme pandemic. This line includes a $25,000 grant to Manifold for Charity for general support.
 - **Awareness: $0.15 million.** Media, conferences and workshops. Its work was featured in nearly 100 media outlets.
 - **Policy: $0.07 million.** Advice to governments on food plans for catastrophes: Argentina, UK pandemic planning, and the Swedish presidency of the Nordic Council.
 
-The tax return is ALLFED's own, on the cash basis and not audited. Its UK sister charity had not started operating in 2024.
+The tax return is ALLFED's own, on the cash basis and not audited. Its UK sister charity, registered in 2023, had no income or spending in 2024.
 
 ### How the impact happens
 
@@ -36,22 +36,22 @@ Then come the adjustments for the nuclear work:
 |---|---|
 | How far a typical project's effect applies | 0.8 |
 | Work other groups would not have done now | 0.75 |
-| ALLFED's share of the resources | 0.65 |
+| ALLFED's share of the resources | 0.62 |
 | Missing-data discount | 0.5 |
 
-The first matches what our Arms Control Association and Nuclear Threat Initiative models give their research and policy work, with a wider range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' unpaid time and its co-authors' and partners' time.
+The first matches what our Arms Control Association and Nuclear Threat Initiative models give their research and policy work, with a wider range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' and its president's unpaid time and its co-authors' and partners' time.
 
 Benefits not modelled add 25%. The largest part is the same food work after a volcanic winter: a large eruption has about a one-in-six chance this century. Smaller nuclear wars, the loss-of-industry work and ordinary food shocks make up the rest. One harm is counted: preparing for a war could make it seem more survivable, at −2%.
 
-ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 to avoid cutting half its budget. The next dollar counts at 63% of the past average.
+ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 and, short of it, halved its programmes and team in 2025. It still held about 21 months of reserves at the end of 2024. The next dollar counts at 56% of the past average.
 
 ### What drives the result
 
-Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 61. The result sits between the Nuclear Threat Initiative's 23 and the Arms Control Association's 41. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
+Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 52. The result sits between the Nuclear Threat Initiative's 23 and the Arms Control Association's 41. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the deaths.** Rethink's figures are placeholders for work on the risk itself, and the range runs ten times either way. Applying them to resilience adds to the doubt. This is the largest swing, from 4 to 290.
+- **How much a dollar of this work cuts the deaths.** Rethink's figures are placeholders for work against the threat or severity of a nuclear war, not set with food resilience in mind, and the range runs ten times either way. This is the largest swing, from 3.4 to 250.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely a nuclear war is, and how deadly.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 - **Whether food plans would work after a real war.** None has been tested, and governments would have to act fast amid chaos.
