@@ -1145,18 +1145,19 @@
       "unit": "share",
       "format": "percent",
       "value": {
-        "low": 0,
-        "best": 0.1,
+        "low": 0.05,
+        "best": 0.15,
         "high": 0.25
       },
       "kind": "judgment",
       "source": {
-        "title": "Alvarez et al. (2018), Assessment of methane emissions from the U.S. oil and gas supply chain, Science 361: 186-188",
-        "url": "https://www.science.org/doi/10.1126/science.aar7204",
-        "note": "About 2.3% of US gross gas production leaks (13 million tonnes of methane a year, 2015): at the IPCC AR6 GWP100 of 29.8 that adds about a quarter to the CO₂ of the gas a home burns.",
+        "title": "OpenStudio-HPXML documentation (the simulation engine of NREL's ResStock), Workflow inputs: emissions scenarios",
+        "url": "https://openstudio-hpxml.readthedocs.io/en/latest/workflow_inputs.html",
+        "quote": "include both combustion and pre-combustion (e.g., methane leakage for natural gas) emissions",
+        "note": "Default fossil-fuel factors from ANSI/RESNET/ICC 301-2022 Addendum B: natural gas 147.3 lb CO₂e per MBtu, against about 117 for combustion alone. Leak rate behind it: Alvarez et al. (2018), Science 361: 186-188, about 2.3% of US gross gas production.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Gas a home stops burning also stops leaking upstream: at the 2.3% supply-chain leak rate Alvarez et al. (2018) measured, the methane is about a fifth of the gas side's CO₂e, less the methane of the gas plants that make part of the added electricity, so a fifth to a quarter of the net cut. Whether NREL's simulated per-home tonnes (climate.us_heat_pump_tco2e_per_household_year) count upstream leaks isn't stated in the coverage we could read; if they don't, the per-home tonnes miss that methane and a model reading both figures undercounts the cut by up to a quarter, rather than having no methane. Our judgment, 10% (0 to 25%), the shared conversion valuing that share by methane's own warming and ozone."
+      "explainer": "Gas a home stops burning also stops leaking upstream. ResStock, behind NREL's per-home heat-pump tonnes (climate.us_heat_pump_tco2e_per_household_year), counts gas at 147.3 lb CO₂e per MBtu including pre-combustion methane leakage, against about 117 for combustion alone: about a fifth of the gas side is upstream methane, consistent with the 2.3% leak rate Alvarez et al. (2018) measured. Less the methane behind the gas plants that make part of the added electricity, 10% to 20% of the net cut. Our judgment, 15% (5% to 25%), the shared conversion valuing that share by methane's own warming and ozone."
     }
   ]
 }
