@@ -1,10 +1,10 @@
 ### Summary
 
-80,000 Hours helps people find careers that work on the world's most pressing problems, now mainly risks from advanced AI. Our model of its work comes to **<span data-figure="headline" data-model="80000-hours-charityevals">2.6</span> years of healthy life per $1,000**. It credits 80,000 Hours with the careers it changed from 2012 to 2022, each valued by what the person gives up to do the work and what a dollar of work in their new cause achieves on this site. The figure moves most with how much we discount for missing outcome data, with what a career change gives up and how much 80,000 Hours caused it, and with how much the next dollar does compared with the past average.
+80,000 Hours helps people find careers that work on the world's most pressing problems. Since 2025 it focuses mainly on risks from advanced AI. Our model of its work comes to **<span data-figure="headline" data-model="80000-hours-charityevals">2.0</span> years of healthy life per $1,000**. It credits 80,000 Hours with the careers it changed from 2012 to 2022, each valued by what the person gives up to do the work and what a dollar of work in their new cause achieves on this site. The figure moves most with how much we discount for missing outcome data, with the site's sliders for AI risk and for how long a win counts (through the AI models it reads), with what a career change gives up, and with how much the next dollar does compared with the past average.
 
 ### What the charity does
 
-80,000 Hours spent about $10.9 million in 2025. Until 31 March 2025 it was a project of Effective Ventures. Since then it runs as 80,000 Hours Limited, a non-profit company that employs the staff and runs the work, and the 80,000 Hours Foundation, a UK charity (1212431) that takes donations and owns its intellectual property. Their audited accounts for 2025 show £6,299,318 of spending by the company, from April, and £53,959 by the Foundation. The first quarter, under Effective Ventures, is estimated at a quarter of its $10.43 million budget for the year.
+80,000 Hours spent about $11.0 million in 2025. Until 31 March 2025 it was a project of Effective Ventures. Since then it runs as two entities. 80,000 Hours Limited is a non-profit company that employs the staff and runs the work. The 80,000 Hours Foundation is a UK charity (1212431) that takes donations and owns its intellectual property. Their audited accounts for 2025 show £6,299,318 of spending by the company, from April, and £53,959 by the Foundation. The first quarter, under Effective Ventures, is estimated at a quarter of its $10.43 million budget for the year.
 
 Its work is one funnel with six parts. The accounts give no split between them.
 
@@ -17,11 +17,11 @@ Its work is one funnel with six parts. The accounts give no split between them.
 
 ### How the impact happens
 
-People change what they work on because of its advice. 80,000 Hours counts a "plan change" when someone takes a new job or graduate course and says 80,000 Hours had at least a 30% chance of causing it. It tracked 604 of these by the end of 2022. It estimates the true number at about 2,000, because it hears of only a fraction. Over the same years, 2012 to 2022, it spent $18.8 million.
+People change what they work on because of its advice. 80,000 Hours counts a "plan change" when someone takes a new job or graduate course and reports at least a 30% chance that 80,000 Hours caused it (its two-year review for 2021–2022). It tracked 604 of these by the end of 2022. It estimates the true number at about 2,000, because it hears of only a fraction. Over the same years, 2012 to 2022, it spent $18.8 million.
 
-Each career change is valued by the site's one rule for careers. A person who moves into high-impact work gives up some pay for the years they stay, which is a gift in kind to their new employer. That gift is worth what a dollar of the employer's work achieves. Only the share 80,000 Hours caused counts. 80,000 Hours publishes no survey of pay given up, years stayed or what people would have done otherwise, so the model uses the site's shared defaults: $15,000 a year, for five years, discounted, of which 30% is credited to it.
+Each career change is valued by the site's one rule for careers. A person who moves into high-impact work gives up some pay for the years they stay. That is a gift in kind to their new employer, worth what a dollar of the employer's work achieves. Only the share 80,000 Hours caused counts. It publishes no survey of pay given up or years stayed, so the model uses the site's shared defaults: $15,000 a year, for five years, discounted. The share it caused is its own: 40%, because its criterion makes 30% the floor of every counted change, less a discount for people crediting their adviser generously.
 
-The value of a dollar of work depends on the cause. 80,000 Hours publishes no split of its plan changes by cause, so the split is our judgment. AI safety takes 45%, biosecurity and nuclear security 15%, global health 20% and animal welfare 5%. The other 15% went to building effective altruism, research on priorities and earning to give, and is valued at the average of the four. Each cause is read live at the figures the rankings show:
+The value of a dollar of work depends on the cause. A donation now buys today's careers, and since 2025 those are mostly in AI. 80,000 Hours publishes no split by cause, so the split is our judgment, anchored on its job board: 88% of users since the 2025 change click only or mostly AI roles. AI safety takes 80%, biosecurity and nuclear security 10%, global health 3% and animal welfare 1%. The remaining 6% goes to building effective altruism and research on priorities, and is valued at the weighted average of the four. Each cause is read live at the figures the rankings show:
 
 - **AI safety**: the site's five AI models (Center for AI Safety, FAR.AI, MIRI, METR, Redwood Research), weighted equally.
 - **Biosecurity and nuclear security**: the Nuclear Threat Initiative, the site's model of both.
@@ -30,36 +30,37 @@ The value of a dollar of work depends on the cause. 80,000 Hours publishes no sp
 
 ### How the model works
 
-- **Cost.** A year's spending at its average over 2012 to 2022, in 2025 prices. This is the period whose plan changes are counted.
+- **Cost.** A year's spending at its average over 2012 to 2022, each year in 2025 prices. Half of 2022's spending is taken out, because the changes it paid for mostly came after the count closed.
 - **Plan changes.** 2,000 over eleven years, so about 182 a year. The range runs from the 604 it tracked to 3,000.
-- **Value of a plan change.** Pay given up × years stayed (discounted) × the share caused × the value of a dollar of work in the causes the people join.
+- **Value of a plan change.** Pay given up × years stayed (discounted) × the share caused × the value of a dollar of work in the causes the people join. Graduate courses delay the work, so the value waits 0.75 years on average, discounted.
 - **Missing data.** The count rests on people's own reports, and no study compares people it advised with people it didn't. The career branch therefore takes the site's discount for missing outcome data.
-- **Side effects.** Two rows, each counted through the side-effects weight in Your values. On the plus side (15%, 0 to 40%): donations by people it advised to earn and give, giving inspired by its content, and the many people it reaches who change course without ever being counted. On the minus side (−10%, −40% to 0): roles at AI companies whose work also speeds up more capable systems, beyond the typical backfire risk already in the AI models.
-- **The next dollar.** The result is a past average, and 80,000 Hours now spends five times its 2012–2022 yearly average. It is not fundraising and its grants for the year are confirmed. The extra money goes to marketing, video and a larger team, while advising calls have stayed flat. The next dollar is counted at 24% (10 to 60%) of the average one.
-- **Credit for staff.** Staff costs are 45% of its 2025 budget. Staff who earn less than they could elsewhere share the credit, as in every model.
+- **Backfire.** Some roles it fills at AI companies also speed up more capable systems. This takes 10% (0 to 40%) off the value, beyond the typical backfire already in the AI models.
+- **Side benefits.** These count through the side-effects weight in Your values: 10% (0 to 30%). They cover donations by people it advised to earn and give, giving inspired by its content, and others' work improved by its research.
+- **The next dollar.** The result is a past average, and 80,000 Hours now spends five times its 2012–2022 yearly average. The extra money goes to marketing, video and a larger team, while advising calls have stayed flat. It holds about a year of confirmed grants. The next dollar is counted at 36% (15 to 75%) of the average one.
+- **Credit for staff.** Staff are estimated at 55% of its costs over the period. Staff who earn less than they could elsewhere share the credit, as in every model.
 
 ### What drives the result
 
-- **The missing-data discount** (a slider): at full credit the result roughly triples.
-- **Pay given up and the share caused**: each moves the result about sixfold across its range.
-- **The next dollar**: 10% to 60% moves it sixfold.
-- **The split by cause**: a career in global health or biosecurity counts far more than one in AI safety, because the site's AI models come out low. More AI in the split lowers the result.
+- **The missing-data discount** (a slider): at full credit the result more than triples.
+- **The AI sliders**: how likely an AI catastrophe is, and how many years a win counts, move the AI models and so this one.
+- **Pay given up, years stayed and the share caused**: each moves the result threefold to sixfold across its range.
+- **The next dollar**: 15% to 75% moves it fivefold.
+- **The split by cause**: a career in biosecurity or global health counts far more than one in AI safety, because the site's AI models come out low.
 
 ### Biggest uncertainties
 
-- **How many careers it changed, and how much it caused.** The count is self-reported and 80,000 Hours estimated the true number itself. People tend to give an adviser more credit than an outside view would.
-- **What a career change is worth.** The shared rule credits only the pay people give up. It does not credit the possibility that they do the work better than whoever would otherwise have been hired.
-- **Where the people went.** The split by cause is our judgment.
-- **Today's work.** Since 2025, 80,000 Hours has narrowed its focus to AI. The model's average describes broader work, 2012 to 2022. Today's plan changes go more to AI safety, which the site values low, so today's figure would be lower than this one.
+- **How many careers it changed, and how much it caused.** The count is self-reported, and 80,000 Hours estimated the true number itself.
+- **What a career change is worth.** The shared rule credits only the pay people give up. It does not credit people doing the work better than whoever would otherwise have been hired.
+- **Where the people go.** The split by cause is our judgment.
+- **Past and present.** The careers per dollar come from 2012 to 2022, when its advice was broader. Whether its AI-focused work changes careers at the same rate is unknown.
 
 ### What isn't modelled
 
 - Plan changes after 2022: 80,000 Hours has published no count since.
-- Graduate courses that lead nowhere, and people whose new career goes badly: these would lower the count. They are part of why it is discounted.
 
 ### How this model was checked
 
-Audit rounds are recorded in audits/80000-hours-charityevals/.
+Audit rounds are recorded in audits/80000-hours-charityevals/. Round 1 found that the careers were valued at the 2012–2022 mix of causes, though a donation buys today's mostly-AI careers. It also asked for 80,000 Hours' own counterfactual criterion, the reporting lag, per-year prices, the backfire in the main chain and the model filed under catastrophic risk. All were fixed.
 
 ### Sources
 
@@ -67,5 +68,7 @@ Audit rounds are recorded in audits/80000-hours-charityevals/.
 - 80,000 Hours Foundation, annual report and financial statements for 2025 (Charity Commission 1212431; Companies House 15777224).
 - 80,000 Hours, [Financial accounts](https://80000hours.org/about/credibility/evaluations/financial-accounts/) (spending by year, 2025 budget).
 - 80,000 Hours, [Donate](https://80000hours.org/support-us/donate/) (604 tracked plan changes and about 2,000 estimated by the end of 2022).
+- 80,000 Hours, [Two-year review 2021–2022](https://forum.effectivealtruism.org/posts/tedrwwpXgpBEi3Ecc/80-000-hours-two-year-review-2021-2022) (its plan-change criterion).
 - 80,000 Hours, [Review: 2023 to mid-2025](https://80000hours.org/2025/09/80000-hours-review-2023-to-mid-2025/) and [Update for Q3–Q4 2025](https://80000hours.org/2026/03/half-year-update-q3-q4-2025/).
 - 80,000 Hours, [We're shifting our strategic approach to focus more on AGI](https://80000hours.org/2025/04/strategic-approach) and [Why we're increasing the AI focus of our job board](https://80000hours.org/2026/07/why-were-increasing-the-ai-focus-of-our-job-board/).
+- US Bureau of Labor Statistics, CPI-U annual averages.
