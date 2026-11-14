@@ -1,0 +1,698 @@
+{
+  "id": "hias-charityevals-advocacy",
+  "name": "HIAS: US advocacy and litigation for refugees",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": {"AFG":0.2,"COD":0.2,"MMR":0.1,"SYR":0.1,"SDN":0.1,"GTM":0.1,"VEN":0.1,"SOM":0.1},
+  "beneficiaries_note": "Our build: refugees waiting abroad for US resettlement, by the largest nationalities in the pipeline (the DRC, Afghanistan, Venezuela, Syria, Myanmar, Sudan, Somalia, Guatemala); a judgment.",
+  "template": "rights-advocacy",
+  "estimate_basis": "past_average",
+  "charity": "hias",
+  "owner": "charityevals",
+  "summary": "HIAS spends about $3 million a year (our estimate, inside its US accounts line) on US advocacy, community engagement and litigation, chiefly as a plaintiff in Pacito v. Trump against the January 2025 suspension of refugee admissions, which let more than 80 approved refugees travel in 2025 before the Ninth Circuit reversed most of the injunction in March 2026. We value the pending case as a small chance (2%) of restoring about 10,000 admissions a year for the years a win counts, fiscal 2025 carrying half of the case's cost, and the 2025 admissions as won, each refugee gaining the US level of consumption over decades against the level where they wait, with HIAS credited 15% of the litigation; at HIAS's own next-dollar figure (49%) it comes to about 0.3 years of healthy life per $1,000, above the global-health median because a refugee resettled in the US gains several doublings of consumption for decades. The result is mostly uncertainty (the chance of success, HIAS's share and the years a win counts span over a thousandfold), and it is discounted for missing data.",
+  "source": {
+    "publisher": "charityevals",
+    "title": "charityevals' estimate: HIAS, US advocacy, community engagement and litigation",
+    "url": "https://charityevals.org/hias-charityevals-advocacy",
+    "published": "2026-11-14",
+    "retrieved": "2026-11-14"
+  },
+  "resources": [
+    {
+      "type": "data",
+      "title": "HIAS, Inc. and Related Entities, Consolidated Financial Statements for the year ended 30 September 2025 (GRF CPAs & Advisors)",
+      "url": "https://hias.org/wp-content/uploads/HIAS-2025-Consolidated-Financial-Statements.pdf"
+    },
+    {
+      "type": "data",
+      "title": "HIAS, Inc., Form 990 for October 2024 to September 2025",
+      "url": "https://hias.org/wp-content/uploads/HIAS-2025-990.pdf"
+    },
+    {
+      "type": "charity",
+      "title": "HIAS, 2025 Annual Report",
+      "url": "https://hias.org/wp-content/uploads/HIAS-Annual-Report-2025.pdf"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cost",
+      "title": "Cost",
+      "explainer": "What the modelled programme cost in fiscal 2025 (October 2024 to September 2025), with its share of management and fundraising, from HIAS's audited consolidated accounts. Donated legal services, booked in the accounts at the law firms' rates, are not HIAS's own money: they enter the credit share, not the cost."
+    },
+    {
+      "id": "reach",
+      "title": "Reach",
+      "explainer": "How many people the spending reached, as HIAS reports it."
+    },
+    {
+      "id": "effect",
+      "title": "Effect per person",
+      "explainer": "What the help does for each person reached, from the research on that kind of work, before any adjustment."
+    },
+    {
+      "id": "adjustments",
+      "title": "Adjustments",
+      "explainer": "Discounts for weaker evidence, what would have happened anyway, credit shared with others, delivery falling short and missing outcome data. All multiply the outcome."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction) and put into healthy years by its unit's conversion, so each moves only with its own sliders."
+    },
+    {
+      "id": "outcome",
+      "title": "Outcome",
+      "explainer": "The outcome in healthy years, per dollar."
+    },
+    {
+      "id": "donor",
+      "title": "Your dollar's share",
+      "kind": "ours",
+      "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
+    }
+  ],
+  "rows": [
+    {
+      "id": "program_spend",
+      "section": "cost",
+      "label": "US advocacy, community engagement and litigation, fiscal 2025",
+      "format": "usd",
+      "formula": "@hias.us_advocacy_cost_fy2025",
+      "explainer": "The shared HIAS judgment (facts/hias.json), taken out of the US services model's cost so each counts it once."
+    },
+    {
+      "id": "total_expenses",
+      "section": "cost",
+      "label": "Total expenses less donated services, fiscal 2025",
+      "format": "usd",
+      "formula": "@hias.cash_total_expenses_fy2025",
+      "explainer": "The shared HIAS figure (facts/hias.json)."
+    },
+    {
+      "id": "program_expenses",
+      "section": "cost",
+      "label": "Programme expenses less donated services, fiscal 2025",
+      "format": "usd",
+      "formula": "@hias.cash_program_expenses_fy2025",
+      "explainer": "The shared HIAS figure (facts/hias.json)."
+    },
+    {
+      "id": "overhead_ratio",
+      "section": "cost",
+      "label": "Overhead multiplier (total ÷ programme expenses)",
+      "format": "multiple",
+      "formula": "total_expenses / program_expenses",
+      "explainer": "Spreads management and fundraising over the programmes in proportion to their cash cost."
+    },
+    {
+      "id": "cost_total",
+      "section": "cost",
+      "label": "Cost of the modelled programme, including overhead",
+      "format": "usd",
+      "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "people_affected_per_year",
+      "section": "reach",
+      "label": "Extra refugees admitted to the US a year if the suspension is overturned",
+      "format": "integer",
+      "value": {
+        "low": 20000,
+        "best": 50000,
+        "high": 100000
+      },
+      "kind": "judgment",
+      "explainer": "The ceiling was 125,000 for fiscal 2025 and 7,500 for fiscal 2026 (annual report PDF p. 5). A win in Pacito v. Trump would at most restore processing of refugees already in the pipeline; the President sets the ceiling, which the case doesn't, so extra admissions would stay far below the old ceiling. 10,000 a year (2,000-50,000). Our judgment."
+    },
+    {
+      "id": "p_success",
+      "section": "effect",
+      "label": "Chance the suspension is overturned by the litigation and advocacy HIAS joins",
+      "format": "percent",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.06
+      },
+      "kind": "judgment",
+      "single_event": {
+        "with": "pacito_v_trump"
+      },
+      "explainer": "On 5 March 2026 the Ninth Circuit held that the President may likely suspend refugee admissions entirely and reversed the injunction on processing and admissions, upholding only the funding of services for refugees already in the US (IRAP, https://refugeerights.org/news-resources/ninth-circuit-rules-government-must-fund-domestic-refugee-resettlement-services-reverses-order-requiring-continued-refugee-processing). What remains is a rehearing, the Supreme Court or a new suit, against an administration that has won most immigration stays. One event, drawn as happens or doesn't. 2% (0.5-6%). Our judgment."
+    },
+    {
+      "id": "years_of_impact",
+      "section": "effect",
+      "label": "Years a win counts",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "explainer": "The site's one number of years a won reform brings a change forward (docs/normalization.md 2.9): a later administration might restore admissions anyway.",
+      "unit": "years"
+    },
+    {
+      "id": "years_until_effect",
+      "section": "effect",
+      "label": "Years until a win takes effect",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Further appeals after the March 2026 ruling and rebuilding the overseas processing pipeline: 2 years (1-3). Our judgment.",
+      "unit": "years"
+    },
+    {
+      "id": "pend_period_share",
+      "section": "effect",
+      "label": "Fiscal 2025's share of the resources the case will take",
+      "format": "percent",
+      "value": {
+        "low": 0.33,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The case began in February 2025 and goes on; fiscal 2025 carried the filing, the injunction hearings and the appeal, about half of what it will take (a third if it runs three years like it, all of it if it ends now). 50% (33-100%). Our judgment."
+    },
+    {
+      "id": "wait_discount",
+      "section": "effect",
+      "label": "The wait, discounted",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ -years_until_effect"
+    },
+    {
+      "id": "discounted_years",
+      "section": "effect",
+      "label": "Years counted, discounted",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount"
+    },
+    {
+      "id": "consumption_us",
+      "section": "effect",
+      "label": "Average US consumption per person by the household survey",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024",
+      "explainer": "The site's US figure."
+    },
+    {
+      "id": "refugee_us_consumption_share",
+      "section": "effect",
+      "label": "Resettled refugees' consumption in the US, as a share of the average",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.4,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "Refugees start on resettlement cash and benefits and most work within months; a few years on they earn around the poorest fifth's level, 45% of the average per household (@united_states.ce_lowest_quintile_vs_all_2024). 40% (30-55%) over their years. Our judgment."
+    },
+    {
+      "id": "cons_ppp_ken",
+      "section": "effect",
+      "label": "Consumption per person, Kenya (PPP dollars, 2024)",
+      "format": "usd",
+      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.ken_real_growth_survey_to_2024",
+      "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
+    },
+    {
+      "id": "cons_ppp_egy",
+      "section": "effect",
+      "label": "Consumption per person, Egypt (PPP dollars, 2024)",
+      "format": "usd",
+      "formula": "@survey_consumption.egy_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.egy_real_growth_survey_to_2024",
+      "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
+    },
+    {
+      "id": "cons_ppp_per",
+      "section": "effect",
+      "label": "Consumption per person, Peru (PPP dollars, 2024)",
+      "format": "usd",
+      "formula": "@survey_consumption.per_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.per_real_growth_survey_to_2024",
+      "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
+    },
+    {
+      "id": "cons_ppp_bgd",
+      "section": "effect",
+      "label": "Consumption per person, Bangladesh (PPP dollars, 2024)",
+      "format": "usd",
+      "formula": "@survey_consumption.bgd_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.bgd_real_growth_survey_to_2024",
+      "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
+    },
+    {
+      "id": "refugee_host_consumption_share",
+      "section": "effect",
+      "label": "Refugees' consumption where they wait, as a share of the host country's average",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Refugees referred for resettlement wait in camps and cities in East Africa, the Middle East, Asia and Latin America, mostly below their hosts. 60% (40-90%). Our judgment."
+    },
+    {
+      "id": "refugee_abroad_consumption",
+      "section": "effect",
+      "label": "Refugees' consumption while waiting (PPP dollars)",
+      "format": "usd",
+      "formula": "avg(cons_ppp_ken, cons_ppp_egy, cons_ppp_per, cons_ppp_bgd) * refugee_host_consumption_share",
+      "explainer": "Refugees in the US pipeline wait mainly in East Africa (Kenya, Uganda, Tanzania), the Middle East (Jordan, Türkiye, Egypt), Latin America (Colombia, Ecuador) and South Asia (Pakistan, Malaysia); the site's survey figures for Kenya, Egypt, Peru and Bangladesh stand in for them equally (a judgment)."
+    },
+    {
+      "id": "years_in_us",
+      "section": "effect",
+      "label": "Years a resettled refugee gains in the US",
+      "format": "number",
+      "value": {
+        "low": 15,
+        "best": 30,
+        "high": 45
+      },
+      "kind": "judgment",
+      "explainer": "Refugees admitted are of every age, many children; without resettlement most would stay displaced for decades (protracted situations average over 20 years). 30 years (15-45). Our judgment.",
+      "unit": "years"
+    },
+    {
+      "id": "ln_gain_per_person_year",
+      "section": "effect",
+      "label": "ln(consumption) gain per refugee admitted, discounted over their years",
+      "format": "number",
+      "formula": "ln(consumption_us * refugee_us_consumption_share / refugee_abroad_consumption) * pv_annuity_due(1, $discount_rate, years_in_us)",
+      "explainer": "Each year's cohort of extra refugees gains the US level against the level where they wait, every year they stay, on the site's log-income scale."
+    },
+    {
+      "id": "ls_gain_per_person_year",
+      "section": "effect",
+      "label": "Life satisfaction gained per refugee (points, 0-10)",
+      "format": "number",
+      "formula": "0",
+      "explainer": "Zero: the gain is counted as income and mortality; safety and family reunion are an unmodelled share (ue_family_share), so they aren't counted twice.",
+      "unit": "points"
+    },
+    {
+      "id": "dalys_per_person_year",
+      "section": "effect",
+      "label": "Illness averted per refugee admitted, in healthy years",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.02,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "Better treatment of chronic and infectious illness in the US than in camps and poor cities, over the years in the US: 0.02 healthy years per refugee (0-0.1), apart from the income and the mortality rows. Our judgment.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "death_rate_gap",
+      "section": "effect",
+      "label": "Excess yearly mortality where refugees wait, over the US (per person-year)",
+      "format": "small",
+      "value": {
+        "low": 0,
+        "best": 0.002,
+        "high": 0.005
+      },
+      "kind": "judgment",
+      "explainer": "Crude death rates in long-running camps sit near or above their hosts' (Kenya and Uganda about 0.5-0.6% a year for young populations, UN WPP) against far lower age-specific rates in the US for the same young people. 0.2 points a year (0-0.5). Our judgment."
+    },
+    {
+      "id": "refugee_share_under5",
+      "section": "effect",
+      "label": "Share of the deaths averted under five",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Children are about 40% of refugees (UNHCR) and young children die at higher rates in camps, while adults far outnumber them over decades in the US. 30% (10-45%). Our judgment."
+    },
+    {
+      "id": "deaths_averted_per_refugee",
+      "section": "effect",
+      "label": "Deaths averted per refugee admitted, discounted over their years",
+      "format": "small",
+      "formula": "death_rate_gap * pv_annuity_due(1, $discount_rate, years_in_us)"
+    },
+    {
+      "id": "value_per_death",
+      "section": "effect",
+      "label": "Value of a death averted (units of value)",
+      "format": "number",
+      "formula": "(refugee_share_under5 * @moral_weights.uov_per_death_under5 + (1 - refugee_share_under5) * @moral_weights.uov_per_death_age_15_49) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights for children under five and adults 15-49, times your value of a life.",
+      "unit": "units of value"
+    },
+    {
+      "id": "pac_admitted",
+      "section": "reach",
+      "label": "Refugees resettled under the Pacito v. Trump injunctions by August 2025",
+      "format": "integer",
+      "value": 80,
+      "kind": "observed",
+      "source": {
+        "title": "IRAP, Impact Under Fire: 2025 Annual Report (fiscal year September 2024 to August 2025)",
+        "url": "https://e1.nmcdn.io/assets/irap/wp-content/uploads/2025/12/IRAP-2025-Annnual-Report.pdf",
+        "page": "p. 4, IRAP is Not Backing Down",
+        "quote": "More than 80 refugees who would have otherwise been stuck in limbo have since successfully resettled and reunited with their families thanks to injunctions secured through our lawsuit.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "The same count as charityevals' model of IRAP's litigation, which shares the credit; HIAS's annual report calls it 'a small number of vulnerable refugees in the summer of 2025' (PDF p. 8), and IRAP's 5 March 2026 page says more than a hundred by then (https://refugeerights.org/news-resources/ninth-circuit-rules-government-must-fund-domestic-refugee-resettlement-services-reverses-order-requiring-continued-refugee-processing), some after HIAS's fiscal year."
+    },
+    {
+      "id": "pac_counterfactual_adj",
+      "section": "reach",
+      "label": "Share of the injunction's admissions that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "A few might have travelled under the ban's case-by-case exceptions or after a later lifting: 70% (40-90%), as in charityevals' model of IRAP's litigation. Our judgment."
+    },
+    {
+      "id": "pend_refugees",
+      "section": "reach",
+      "label": "Refugees counted for the pending case (expected, discounted, enforced, fiscal 2025's share)",
+      "format": "number",
+      "formula": "people_affected_per_year * p_success * discounted_years * implementation_adj * pend_period_share",
+      "explainer": "Refugees a year × the chance of winning × the discounted years a win counts × the share enforced × fiscal 2025's share of the case."
+    },
+    {
+      "id": "refugees_counted",
+      "section": "reach",
+      "label": "Refugees counted in all",
+      "format": "number",
+      "formula": "pend_refugees + pac_admitted * pac_counterfactual_adj"
+    },
+    {
+      "id": "released_people",
+      "section": "reach",
+      "label": "People released, cleared or kept out of detention",
+      "format": "integer",
+      "formula": "0",
+      "explainer": "Zero: HIAS's detention casework is in the US services model's legal branch; the injunction's admissions are counted in pac_admitted."
+    },
+    {
+      "id": "released_years",
+      "section": "effect",
+      "label": "Years of freedom gained per person released",
+      "format": "number",
+      "formula": "0",
+      "explainer": "Zero: no released people in this model.",
+      "unit": "years"
+    },
+    {
+      "id": "released_ls_gain_per_year",
+      "section": "effect",
+      "label": "Life satisfaction gained per released person a year",
+      "format": "number",
+      "formula": "0",
+      "explainer": "Zero: no released people in this model.",
+      "unit": "points"
+    },
+    {
+      "id": "released_value",
+      "section": "effect",
+      "label": "WELLBYs per released person",
+      "format": "number",
+      "formula": "released_ls_gain_per_year * pv_annuity_due(1, $discount_rate, released_years)",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "The value of resettlement is the consumption gap and the extra years, judged from survey figures rather than measured for these refugees. 0.7 (0.5-0.9). Our judgment."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share that wouldn't have happened anyway (weighted average, for reading only)",
+      "format": "percent",
+      "formula": "(pend_refugees + pac_admitted * pac_counterfactual_adj) / (pend_refugees + pac_admitted)",
+      "explainer": "Outcome-weighted average of the branches, for reading only: the pending win counts 1 here, since whether it would come anyway is the question the years counted answer (Convention 5); the injunction's admissions carry pac_counterfactual_adj, applied in refugees_counted."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "HIAS's share of the resources behind the litigation and advocacy",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "By resources: the International Refugee Assistance Project and pro bono co-counsel carry most of the litigation's work (a judged three-fifths); HIAS, Church World Service and Lutheran Community Services Northwest, the organisational plaintiffs (annual report PDF p. 8), share the rest with the individual refugees, about an eighth each; HIAS's own advocacy and congregations add a little to its share against the other agencies' and coalitions' campaigns. 15% (5-30%). Our judgment."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "HIAS's share of the resources; it applies whichever way credit is shared."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Share of a win enforced (pending win only)",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Court orders on admissions have been slow-walked and narrowed; a restored programme takes years to rebuild its overseas pipeline. 70% (40-90%). Our judgment. Applied to the pending win only: the 2025 admissions are counted as they happened."
+    },
+    {
+      "id": "missing_data_adj",
+      "section": "adjustments",
+      "label": "Counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (Convention 12): the chance of success, the admissions a win restores and HIAS's share are judgments."
+    },
+    {
+      "id": "total_adj",
+      "section": "adjustments",
+      "label": "All adjustments combined (enforcement and the counterfactual applied in the refugees counted)",
+      "format": "multiple",
+      "formula": "evidence_adj * attribution_share * missing_data_adj"
+    },
+    {
+      "id": "ue_aid_share",
+      "section": "adjustments",
+      "label": "Unmodelled: Global Health Council v. Trump",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "HIAS is one of many plaintiffs in the case that forced payment of frozen foreign-aid awards for work already done (annual report PDF p. 8): a tiny share of a large sum. +5% (0 to +15%). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_services_share",
+      "section": "adjustments",
+      "label": "Unmodelled: funding for refugees already in the US",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.03,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "The Ninth Circuit upheld the order that the government fund resettlement services for refugees already admitted: case management and cash for people who arrived before the suspension. +3% (0 to +10%). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_family_share",
+      "section": "adjustments",
+      "label": "Unmodelled: safety and family reunion of the refugees admitted",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.03,
+        "high": 0.08
+      },
+      "kind": "judgment",
+      "explainer": "Beyond consumption and mortality: safety from persecution and families reunited (many refugees join relatives already here). +3% (0 to +8%). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_mobilisation_share",
+      "section": "adjustments",
+      "label": "Unmodelled: community mobilisation and support for refugees",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "20,400 people contacted their representatives 41,600 times, 284 congregations held Refugee Shabbat and vigils ran in 14 states (annual report PDF p. 7): goodwill toward refugees beyond the litigation. +5% (0 to +15%). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_backlash_share",
+      "section": "adjustments",
+      "label": "Unmodelled: backlash",
+      "format": "percent",
+      "value": {
+        "low": -0.05,
+        "best": -0.01,
+        "high": 0
+      },
+      "kind": "judgment",
+      "explainer": "Litigation and protest can harden opposition. -1% (-5% to 0). Our judgment.",
+      "side_effect": "added"
+    },
+    {
+      "id": "unmodelled_benefits_adj",
+      "section": "adjustments",
+      "label": "Benefits and harms not modelled, as a share of modelled value",
+      "format": "percent",
+      "formula": "ue_aid_share + ue_services_share + ue_family_share + ue_mobilisation_share + ue_backlash_share",
+      "explainer": "The rows above, summed."
+    },
+    {
+      "id": "uov_bridged",
+      "section": "bridges",
+      "label": "Income gained, in units of value (before adjustments)",
+      "format": "number",
+      "formula": "refugees_counted * (ln_gain_per_person_year * $uov_per_ln_consumption + deaths_averted_per_refugee * value_per_death)",
+      "unit": "UoV",
+      "explainer": "The pending win's expected admissions (refugees a year × chance × discounted years) and the injunction's admissions, each refugee's lifetime income gain and deaths averted."
+    },
+    {
+      "id": "dalys_from_uov",
+      "section": "bridges",
+      "label": "Income gained, in healthy years",
+      "format": "number",
+      "formula": "uov_bridged / ($uov_per_daly)",
+      "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "wellbys_bridged",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in WELLBYs (before adjustments)",
+      "format": "number",
+      "formula": "refugees_counted * ls_gain_per_person_year + released_people * released_value",
+      "unit": "WELLBYs"
+    },
+    {
+      "id": "dalys_from_wellby",
+      "section": "bridges",
+      "label": "Life satisfaction gained, in healthy years",
+      "format": "number",
+      "formula": "wellbys_bridged * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
+      "explainer": "The bridge from WELLBYs into healthy years (docs/normalization.md 2.6): fixed, don't edit.",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dalys_direct",
+      "section": "outcome",
+      "label": "Healthy years counted directly (before adjustments)",
+      "format": "number",
+      "formula": "refugees_counted * dalys_per_person_year",
+      "unit": "DALYs"
+    },
+    {
+      "id": "outcome_total",
+      "section": "outcome",
+      "label": "Years of healthy life",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * total_adj * (1 + unmodelled_benefits_adj)",
+      "unit": "DALYs"
+    },
+    {
+      "id": "dalys_per_dollar",
+      "section": "outcome",
+      "label": "Years of healthy life per dollar",
+      "format": "small",
+      "formula": "outcome_total / cost_total",
+      "unit": "DALYs / $"
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "donor",
+      "label": "Staff pay as a share of the programme's cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_advocacy",
+      "explainer": "The site's shared share for advocacy work (facts/staff_pay.json): the accounts don't split the advocacy team's pay."
+    },
+    {
+      "id": "salary_gap",
+      "section": "donor",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_advocacy",
+      "explainer": "The site's shared pay gap for this kind of staff (facts/staff_pay.json)."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "donor",
+      "label": "Salary forgone by staff (in-kind donation)",
+      "format": "usd",
+      "formula": "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "marginal_vs_past_average",
+      "section": "donor",
+      "label": "How much the next dollar does compared with the average dollar so far",
+      "format": "percent",
+      "formula": "@next_dollar.hias",
+      "published": 1,
+      "explainer": "This model's cost per outcome is HIAS's past spending on advocacy and litigation over what that work won or is expected to win (estimate_basis past_average), so the next dollar is valued at HIAS's own figure (facts/next_dollar.json, docs/normalization.md 2.10): room for more money (its cash fell to $4.4 million against a $9.4 million credit line under a forbearance agreement) × what the next dollar buys (the same litigation, against an administration that has won most stays) × how it is run (heavy layoffs and a new chief executive in 2025). 1 in `published`: what the past average itself says."
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "donor",
+      "label": "Share of the full cost paid by cash donations",
+      "format": "percent",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
+    },
+    {
+      "id": "dalys_per_donor_dollar",
+      "section": "donor",
+      "label": "Years of healthy life per dollar you give",
+      "format": "small",
+      "formula": "dalys_per_dollar * donor_cost_share * marginal_vs_past_average",
+      "unit": "Years of healthy life / $"
+    }
+  ],
+  "output": {
+    "row": "dalys_per_donor_dollar",
+    "unit": "daly",
+    "label": "Years of healthy life per dollar you give",
+    "native": {
+      "row": "dalys_per_dollar",
+      "unit": "daly"
+    }
+  }
+}
