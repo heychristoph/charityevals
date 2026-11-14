@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "center-for-ai-safety",
   "owner": "charityevals",
-  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam, circuit breakers), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 1.6 years of healthy life per $1,000, from 0.04 to 71 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model: its misuse preset for the quarter of the work against misuse, which gives most of the result because Rethink's typical misuse project cuts far more risk per dollar, its misalignment preset for the rest; the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is more than ten times its peers' median because of that misuse work (Redwood's, MIRI's and METR's is all misalignment work) and far below the Nuclear Threat Initiative (23) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's misuse cut per dollar (a placeholder, ten times either way), the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Center for AI Safety (San Francisco) works to cut the risk of catastrophe from AI through technical research and benchmarks (WMDP, Humanity's Last Exam, circuit breakers), a free compute cluster for outside safety researchers, advocacy and field-building; this model covers all its programmes in 2024 ($7.2M spent; its separate lobbying arm, the CAIS Action Fund, whose gifts aren't tax-deductible, is left out). At the defaults it averts about 1.6 years of healthy life per $1,000, from 0.03 to 71 on the combined range: each dollar is valued as a typical AI project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model: its misuse preset for the quarter of the work against misuse, which gives most of the result because Rethink's typical misuse project cuts far more risk per dollar, its misalignment preset for the rest; the shared 3% chance by 2100), with deaths valued like every death and the future lost counted through the discount rate. It is far above Redwood's, MIRI's and METR's because of that misuse work (theirs is all misalignment work) and far below the Nuclear Threat Initiative (23) because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects, not because of anything about CAIS; the result moves most with the AI catastrophe chance, Rethink's misuse cut per dollar (a placeholder, ten times either way), the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Center for AI Safety",
@@ -989,7 +989,7 @@
         "page": "Part III line 4a: expenses 2,947,497",
         "retrieved": "2026-11-14"
       },
-      "explainer": "The compute cluster's expenses, a weight in the attribution blend."
+      "explainer": "The compute cluster's expenses, a weight in the AI work's attribution (ai_attribution_share)."
     },
     {
       "id": "spend_research",
@@ -1004,7 +1004,7 @@
         "page": "Part III line 4b: expenses 1,168,082",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Research's expenses, a weight in the attribution blend."
+      "explainer": "Research's expenses, a weight in the AI work's attribution (ai_attribution_share)."
     },
     {
       "id": "spend_advocacy",
@@ -1019,22 +1019,7 @@
         "page": "Part III line 4d additional data: Advocacy, expenses 777,874",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Advocacy's expenses, a weight in the attribution blend."
-    },
-    {
-      "id": "spend_field",
-      "section": "adjustments",
-      "label": "Field-building spending in 2024",
-      "format": "usd",
-      "value": 520385,
-      "kind": "observed",
-      "source": {
-        "title": "Center for AI Safety, Form 990 for 2024 (signed 17 November 2025), IRS e-file copy",
-        "url": "https://apps.irs.gov/pub/epostcard/cor/881751310_202412_990_2026030223958680.pdf",
-        "page": "Part III line 4d additional data: Field Building, expenses 520,385",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "Field-building's expenses, a weight in the attribution blend (the undescribed line 4c is spread in proportion, so it leaves the weights unchanged)."
+      "explainer": "Advocacy's expenses, a weight in the AI work's attribution (ai_attribution_share)."
     },
     {
       "id": "attr_cluster",
@@ -1076,12 +1061,44 @@
       "explainer": "The newsletter, media work, textbook and course are CAIS's own; SafeBench's prizes came from Schmidt Sciences and conference workshops use the conferences' venues. Our judgment, 95% (80% to 100%)."
     },
     {
+      "id": "dalys_per_death_value",
+      "section": "adjustments",
+      "label": "Healthy years per unit of value of the deaths averted (for the weights below)",
+      "format": "small",
+      "formula": "dalys_from_uov / ((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death)",
+      "explainer": "The bridge's healthy years over the deaths' value: turns each branch's deaths into healthy years for the weights."
+    },
+    {
+      "id": "w_ai",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the AI work (cluster, research, advocacy) (before adjustments)",
+      "format": "number",
+      "formula": "ai_deaths_averted * value_per_death * dalys_per_death_value + ai_future_dalys",
+      "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: its share of the value, used to weight the adjustments so each applies to its own branch's value."
+    },
+    {
+      "id": "w_fb",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the course (before adjustments)",
+      "format": "number",
+      "formula": "fb_deaths_averted * value_per_death * dalys_per_death_value + fb_future_dalys",
+      "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: its share of the value, used to weight the adjustments so each applies to its own branch's value."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI work: CAIS's share of the resources behind it",
+      "format": "percent",
+      "formula": "(spend_cluster * attr_cluster + spend_research * attr_research + spend_advocacy * attr_other) / (spend_cluster + spend_research + spend_advocacy)",
+      "explainer": "The cluster's, research's and advocacy's shares, weighted by their spending: within the AI branch a dollar of each counts the same before adjustments."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "explainer": "CAIS's share of the resources behind the outputs evidence_adj is judged on, weighted by each programme's spending: the compute cluster (outside researchers write its papers), research (benchmarks made with Scale AI and outside experts) and advocacy and field-building (CAIS's own). About 0.61, below NTI's 0.85 because half of CAIS's spending supports other people's research.",
-      "formula": "(spend_cluster * attr_cluster + spend_research * attr_research + (spend_advocacy + spend_field) * attr_other) / (spend_cluster + spend_research + spend_advocacy + spend_field)"
+      "explainer": "CAIS's share of the resources behind its outputs, branch by branch: the AI work at ai_attribution_share (the compute cluster, whose papers outside researchers write; research, benchmarks made with Scale AI and outside experts; advocacy, CAIS's own), the course at attr_other (CAIS's own). Weighted by each branch's healthy years (w_ai, w_fb), so each share applies to its own branch's value. About 0.61, below NTI's 0.85 because half of CAIS's spending supports other people's research.",
+      "formula": "(w_ai * ai_attribution_share + w_fb * attr_other) / (w_ai + w_fb)"
     },
     {
       "id": "attribution_share",

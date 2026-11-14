@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "johns-hopkins-center-for-health-security",
   "owner": "charityevals",
-  "summary": "The Johns Hopkins Center for Health Security (Baltimore), part of Johns Hopkins University, works to prevent and prepare for pandemics: biosecurity policy research and advocacy, outbreak analytics for CDC and health departments (CORI) and training. Gifts go through the university's form for the Center; it publishes no accounts, so this model of all its work in 2025 builds its budget (about $13.8M) from its published grants. At the defaults it averts about 7.6 years of healthy life per $1,000, from 0.4 to 134 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. It is more than ten times its peers because five of the six work only on AI, and Rethink Priorities' typical pandemic project averts many times more deaths per dollar than a typical AI project. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate and the years a cut counts. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Johns Hopkins Center for Health Security (Baltimore), part of Johns Hopkins University, works to prevent and prepare for pandemics: biosecurity policy research and advocacy, outbreak analytics for CDC and health departments (CORI) and training. Gifts go through the university's form for the Center; it publishes no accounts, so this model of all its work in 2025 builds its budget (about $13.8M) from its published grants. At the defaults it averts about 7.5 years of healthy life per $1,000, from 0.4 to 134 on the combined range: each dollar is valued as a typical project's cut in the forecast risk of pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. It is about six times its peers' median because most of them work only on AI, and Rethink Priorities' typical pandemic project averts many times more deaths per dollar than a typical AI project. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate and the years a cut counts. Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Johns Hopkins Center for Health Security",
@@ -1161,12 +1161,44 @@
       "explainer": "CORI builds risk assessments (measles, mpox), forecasting tools and a network of health departments testing outbreak response (ORI-Net): faster response helps in a COVID-scale pandemic too, but the work is aimed at ordinary outbreaks, so its path to the pandemic risks counted is thinner than a typical biosecurity project's. Our judgment, 0.4 (0.1 to 0.8); the good it does in ordinary outbreaks is in unmodelled_benefits_adj."
     },
     {
+      "id": "dalys_per_death_value",
+      "section": "adjustments",
+      "label": "Healthy years per unit of value of the deaths averted (for the weights below)",
+      "format": "small",
+      "formula": "dalys_from_uov / ((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death)",
+      "explainer": "The bridge's healthy years over the deaths' value: turns each branch's deaths into healthy years for the weights."
+    },
+    {
+      "id": "w_bio",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the pandemic work (policy research and CORI) (before adjustments)",
+      "format": "number",
+      "formula": "bio_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + bio_future_dalys",
+      "explainer": "The branch's deaths averted in healthy years (its COVID-scale part at COVID-19's age mix), plus its future healthy years kept: its share of the value, used to weight the adjustments so each applies to its own branch's value."
+    },
+    {
+      "id": "w_fb",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the training (before adjustments)",
+      "format": "number",
+      "formula": "fb_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + fb_future_dalys",
+      "explainer": "The branch's deaths averted in healthy years (its COVID-scale part at COVID-19's age mix), plus its future healthy years kept: its share of the value, used to weight the adjustments so each applies to its own branch's value."
+    },
+    {
+      "id": "bio_evidence_adj",
+      "section": "adjustments",
+      "label": "Pandemic work: how far a typical project's effect applies (CORI and the policy work)",
+      "format": "multiple",
+      "formula": "(cori_share * cori_evidence_adj + (bio_cost_share - cori_share) * policy_evidence_adj) / bio_cost_share",
+      "explainer": "CORI's and the policy work's multipliers, weighted by their spending within the pandemic branch (Convention 7): within the branch a dollar of each counts the same before adjustments."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "How far the typical project's effect applies to this charity's work",
       "format": "multiple",
-      "explainer": "The policy work's and CORI's multipliers, weighted by their shares of the budget (Convention 7).",
-      "formula": "cori_share * cori_evidence_adj + (1 - cori_share) * policy_evidence_adj"
+      "explainer": "Branch by branch: the pandemic work at bio_evidence_adj (CORI's and the policy work's multipliers by their budgets), the training at the policy work's multiplier. Weighted by each branch's healthy years (w_bio, w_fb), so each multiplier applies to its own branch's value.",
+      "formula": "(w_bio * bio_evidence_adj + w_fb * policy_evidence_adj) / (w_bio + w_fb)"
     },
     {
       "id": "counterfactual_adj",

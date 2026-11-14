@@ -1,6 +1,6 @@
 ### Summary
 
-The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **<span data-figure="headline" data-model="center-for-ai-safety-charityevals">1.6</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.04 to about 71.
+The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **<span data-figure="headline" data-model="center-for-ai-safety-charityevals">1.6</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.03 to about 71.
 
 ### What the charity does
 
@@ -26,13 +26,13 @@ The deaths averted are valued like every death on the site, across the world's a
 
 The research, compute cluster and advocacy are one branch, valued as typical AI safety work. The course is a training branch. It counts the students who go on to work on AI risk (5%, as a judgment), the years they stay in the work, and the course's share of the credit for that work (4%, its cost against theirs). A policy-win branch is set to zero, because CAIS itself won no law or standard in 2024.
 
-The adjustments apply to all branches:
+The adjustments, each applied to its own branch:
 
 | Adjustment | Value | Reason |
 |---|---|---|
 | How far a typical project's effect applies to CAIS's work | 1.2 | Labs use its benchmarks; the cluster's projects vary in relevance |
 | Work no one else would have done now | 0.65 | 70% of cluster users said their projects needed it; others also build benchmarks |
-| CAIS's share of the resources behind its outputs | 0.61 | Outside researchers write the cluster's papers; benchmarks were made with Scale AI |
+| CAIS's share of the resources behind its outputs | 0.58 for the AI work, 0.95 for the course (about 0.61 overall) | Outside researchers write the cluster's papers; benchmarks were made with Scale AI |
 | Funging by large funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about CAIS's effect on the risk is measured |
 
@@ -60,7 +60,7 @@ The result is far below the Nuclear Threat Initiative's 23. That is because Reth
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. The independent audit rounds are in audits/center-for-ai-safety-charityevals/.
+The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. In November 2026 the attribution share was applied to each branch's own value instead of blended by spending; a verification round checked it. The independent audit rounds are in audits/center-for-ai-safety-charityevals/.
 
 ### Sources
 

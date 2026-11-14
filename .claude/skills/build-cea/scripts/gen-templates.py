@@ -27,7 +27,8 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
                     docs/normalization.md 2.6); companion-animals  days of pain -> ced_dog / ced_cat
                     with @welfare_ranges (the raw species step)
   catastrophic-risk  yearly chances by size (@catastrophe, $ai_catastrophe_chance), a typical dollar's cut
-                    (AI: misalignment and misuse presets weighted by ai_misuse_cost_share), deaths by the world's age split, the future through future_years_per_person
+                    (AI: misalignment and misuse presets weighted by ai_misuse_cost_share), deaths by the world's age split, the future through future_years_per_person,
+                    each branch's adjustments applied to its own value (chained by healthy years, w_<branch>)
   every skeleton    missing_data_adj in total_adj (a branch's <branch>_missing_data_adj): the shared
                     $missing_data_discount where the outcome isn't measured for this charity, else 1 with
                     the reason (docs/normalization.md 2.12)
@@ -87,7 +88,9 @@ def missing_data_row(id, section, what="this branch's outcome"):
     return f(id, section, "Counted less where the outcome isn't measured for this charity", "$missing_data_discount",
              f"TEMPLATE: the shared missing-data step (docs/normalization.md 2.12). Keep $missing_data_discount when {what} rests on the research literature or on judgment rather than on this charity's own data: reach that is a judgment (spending over an assumed cost per person, no count of its own), an effect that is a judgment, or a programme with no outcome data built from the literature on its kind of work. Set the formula to 1 only when the charity's own count of who got the intervention meets an effect measured with a credible counterfactual (its own controlled evaluation, or trials of the same intervention delivered the same way, dose and population), and say which here.", "percent")
 
-def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None, leverage_row=None):
+ATTRIBUTION = "where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+
+def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None, leverage_row=None, attribution_row=None):
     rows = list(evidence_rows) if evidence_rows else [
         inp("evidence_adj", "adjustments", "Evidence adjustment (internal and external validity), a multiplier", {"low": 0.5, "best": 0.7, "high": 0.9}, "judgment",
             "how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range.", "multiple"),
@@ -95,8 +98,8 @@ def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, im
     rows.append(counterfactual_row or inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.6, "best": 0.8, "high": 0.95}, "judgment",
             "the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible.", "percent"))
     rows += [
-        inp("attribution_share_shared", "adjustments", "This charity's share of the resources behind the outcome", {"low": 0.5, "best": 0.8, "high": 1}, "judgment",
-            "where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone.", "percent"),
+        attribution_row or inp("attribution_share_shared", "adjustments", "This charity's share of the resources behind the outcome", {"low": 0.5, "best": 0.8, "high": 1}, "judgment",
+            ATTRIBUTION, "percent"),
         f("attribution_share", "adjustments", "Share of credit used", "attribution_share_shared",
           "The charity's share of the resources behind the outcome; it applies whichever way credit is shared.", "percent"),
     ]
@@ -833,6 +836,48 @@ def area_rows(a, name, ext, cat, share, what):
     return rows
 
 CR_POINT = "TEMPLATE: point it at the area of the {what} (ai_, bio_ or nuclear_{row}); several areas: a weighted sum with a weight row."
+
+# Adjustments branch by branch: a branch's value per dollar differs (by area, and for a win or people trained),
+# so each branch's evidence, counterfactual and attribution apply to its own value. The canonical rows chain
+# them, each weighted by the branches' healthy years (w_<branch>) after the earlier factors, so that
+# evidence_adj × counterfactual_adj × attribution_share is the healthy-years-weighted sum of each branch's
+# own product; never a blend by spending, which would give a branch the weight of its cost, not its value.
+CR_BRANCHES = [("ai", "AI field work", "the AI work"), ("bio", "Pandemic field work", "the pandemic work"),
+               ("nuclear", "Nuclear field work", "the nuclear work"), ("pol", "Policy win", "the policy win"),
+               ("fb", "Field-building", "the people trained")]
+CR_EVIDENCE = "a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities) for {what}: above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project; 1 with 'unused' where the branch's cost share is 0."
+CR_CF = "the share of {what} another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes; 1 with 'unused' where the branch's cost share is 0."
+CR_ADJ_INPUTS = {
+    "evidence_adj": ("How far the typical project's effect applies", "multiple", {"low": 0.3, "best": 0.7, "high": 1.2}, {
+        "pol": ({"low": 0.8, "best": 1, "high": 1.2}, "1 by default: the win's cut is judged directly (pol_relative_cut), not read from a typical project, so its evidence is in that judgment; differ from 1 only for doubt the cut cannot hold (whether the measure is enforced), named."),
+        "fb": ({"low": 0.7, "best": 1, "high": 1.2}, "how far the alumni's work beats or trails a typical project in its area (their roles, their employers' uptake); 1 = typical, as fb_work_dollars values it.")}),
+    "counterfactual_adj": ("Share of the work no one else would have done now", "percent", {"low": 0.4, "best": 0.7, "high": 0.95}, {
+        "pol": ({"low": 0.3, "best": 0.6, "high": 0.9}, "the share of the win no one else (other campaigners, the government on its own) would have brought about now; for a pending measure the chance it passes is pol_p_success, not here. Name the closest substitutes."),
+        "fb": ({"low": 0.8, "best": 1, "high": 1}, "1 by default: those who would have got there anyway are already out of fb_share_working; below 1 only where another programme would have trained the same people (a substitute course), named.")}),
+    "attribution_share": ("This charity's share of the resources behind it", "percent", {"low": 0.5, "best": 0.8, "high": 1}, {
+        "pol": ({"low": 0.01, "best": 0.1, "high": 0.5}, "credit by share of resources: the campaign's spending (pol_cost_share × cost_total) over everyone's resources behind the win (coalition partners' spending and staff time, the officials drafting it, the submissions), each valued; name them. Counting seats or signatures overstates it where others did most of the work."),
+        "fb": ({"low": 0.7, "best": 0.95, "high": 1}, "the charity's share of the programme's own resources (co-hosts, mentors' unpaid time, a partner's venue); the employers' share of the alumni's work is fb_credit_share, not here.")}),
+}
+
+def cr_adjustment_rows():
+    rows = [f("dalys_per_death_value", "adjustments", "Healthy years per unit of value of the deaths averted (for the weights below)",
+              "dalys_from_uov / ((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death)",
+              "The bridge's healthy years over the deaths' value: turns each branch's deaths into healthy years for the weights. Fixed.", "small")]
+    for b, name, what in CR_BRANCHES:
+        value = "((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death)" if b == "bio" else "value_per_death"
+        rows.append(f(f"w_{b}", "adjustments", f"Weight: healthy years from {what} (before adjustments)", f"{b}_deaths_averted * {value} * dalys_per_death_value + {b}_future_dalys",
+                      "The branch's deaths averted in healthy years" + (" (the COVID-scale part at COVID-19's age mix)" if b == "bio" else " (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted)" if b in ("pol", "fb") else "") + ", plus its future healthy years kept: the weight its adjustments carry. Fixed.", "number", "DALYs"))
+    rows.append(f("w_total", "adjustments", "Weight: healthy years from every branch (before adjustments)", " + ".join(f"w_{b}" for b, _, _ in CR_BRANCHES), None, "number", "DALYs"))
+    for adj, (label, fmt, default, special) in CR_ADJ_INPUTS.items():
+        for b, name, what in CR_BRANCHES:
+            value, text = special.get(b, (default, {"evidence_adj": CR_EVIDENCE, "counterfactual_adj": CR_CF, "attribution_share": ATTRIBUTION}[adj].format(what=what)))
+            rows.append(inp(f"{b}_{adj}", "adjustments", f"{name}: {label[0].lower() + label[1:]}", value, "judgment", text, fmt))
+    return rows
+
+CR_CHAIN = "Applied: each branch's own {what}, weighted by the branches' healthy years (w_<branch>){after}, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
+def cr_chain(adj, prev):
+    num = " + ".join(f"w_{b} * " + " * ".join(f"{b}_{a}" for a in prev + [adj]) for b, _, _ in CR_BRANCHES)
+    return f"({num}) / (w_total" + "".join(f" * {a}" for a in prev) + ")"
 T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (AI, pandemics, nuclear war)", "daly", "dalys", "Years of healthy life", "catastrophic-risk",
     cost_rows() + [
         f("forecast_years", "effect", "Years the shared forecasts cover", "@catastrophe.xpt_end_year - @catastrophe.xpt_forecast_year", "From the year the chances were forecast to 2100: turns a chance by 2100 into a yearly one. Fixed.", "number", "years"),
@@ -852,9 +897,9 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
         inp("pol_wins", "reach", "Policy win: wins of this kind in the year", 1, "observed",
             "treaties, laws, regulations, standards or institutions won or launched in the year that the policy branch values (one kind per branch; a pol2_ branch for another); 0, with the reason, without one: then the branch counts nothing.", "integer", source=src("charity report / official record")),
         inp("pol_p_success", "effect", "Policy win: chance it happens because of this work", {"low": 0.05, "best": 0.3, "high": 0.7}, "judgment",
-            "for a pending bill, treaty or standard, the chance of winning from a reference class (similar measures passed or failed); for a win already in the year, 1 (then delete single_event) and the charity's share of the cause in attribution_share_shared. Name the reference class.", "percent"),
+            "for a pending bill, treaty or standard, the chance of winning from a reference class (similar measures passed or failed); for a win already in the year, 1 (then delete single_event) and the charity's part of it in pol_counterfactual_adj and pol_attribution_share. Name the reference class.", "percent"),
         inp("pol_relative_cut", "effect", "Policy win: share of the area's yearly risk it removes while in force", {"low": 0.001, "best": 0.01, "high": 0.05}, "judgment",
-            "how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use) and on Rethink Priorities' cut per project (@catastrophe.<area>_catastrophe_cut_per_million × its cost). Name the anchor.", "percent"),
+            "how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use). Calibrate it per risk, since a typical dollar's cut differs by orders of magnitude between areas (the default 1% fits nuclear policy, about $30 million of typical nuclear work, but is tens of billions of dollars of typical AI misalignment work): everyone's resources behind the measure (all its drafters and campaigners, not only the charity) × the area's cut per $1 million (@catastrophe.<area>_catastrophe_cut_per_million, and the extinction one for the future) is a typical project's cut, then a named multiple of it for how much more directly the measure acts. Check both sizes: pol_relative_cut ÷ each cut per $1 million is the millions of typical work it equals, to set against those resources and the field's yearly spending. Name the anchors.", "percent"),
         inp("pol_years_until_effect", "effect", "Policy win: years until it takes effect", {"low": 0, "best": 1, "high": 3}, "judgment", "from the win to entry into force; discounted at the shared rate.", "number", "years"),
         f("pol_discounted_years", "effect", "Policy win: discounted years the cut counts", "pv_annuity_due(1, $discount_rate, years_of_impact) * (1 + $discount_rate) ^ -pol_years_until_effect", None, "number", "years"),
         f("pol_deaths_per_year", "effect", "Policy win: expected deaths a year from the area's catastrophes", "nuclear_deaths_per_year", CR_POINT.format(what="win", row="deaths_per_year"), "number", "deaths / year"),
@@ -889,10 +934,12 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
     ] + adj_rows(implementation=False, leverage=True,
         leverage_row=inp("leverage_funging_adj", "adjustments", "Leverage and funging", {"low": 0.85, "best": 1, "high": 1.05}, "judgment",
             "1 by default: the next-dollar room factor (`@next_dollar`) already asks whether other funders would cover this work, so a funging cut here counts it twice. Differ from 1 only for a reason the room factor cannot hold: above 1 when the donation visibly pulls in other money (matching, a lab or government co-funding the work), below 1 when the charity redirects restricted gifts inside itself. Name the evidence.", "multiple"),
-        evidence_rows=[inp("evidence_adj", "adjustments", "How far the typical project's effect applies to this charity's work", {"low": 0.3, "best": 0.7, "high": 1.2}, "judgment",
-            "a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities): above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project.", "multiple")],
-        counterfactual_row=inp("counterfactual_adj", "adjustments", "Share of the work no one else would have done now", {"low": 0.4, "best": 0.7, "high": 0.95}, "judgment",
-            "the share of the work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes.", "percent"),
+        evidence_rows=cr_adjustment_rows() + [f("evidence_adj", "adjustments", "How far the typical project's effect applies to this charity's work", cr_chain("evidence_adj", []),
+            CR_CHAIN.format(what="multiplier (<branch>_evidence_adj)", after=""), "multiple")],
+        counterfactual_row=f("counterfactual_adj", "adjustments", "Share of the work no one else would have done now", cr_chain("counterfactual_adj", ["evidence_adj"]),
+            CR_CHAIN.format(what="share (<branch>_counterfactual_adj)", after=" after evidence_adj"), "percent"),
+        attribution_row=f("attribution_share_shared", "adjustments", "This charity's share of the resources behind the outcome", cr_chain("attribution_share", ["evidence_adj", "counterfactual_adj"]),
+            CR_CHAIN.format(what="share (<branch>_attribution_share)", after=" after the earlier factors"), "percent"),
         unmodelled_rows=[
             inp("unmodelled_benefits_adj", "adjustments", "Benefits not modelled, as a share of modelled value", {"low": 0, "best": 0.05, "high": 0.2}, "judgment",
                 "good beyond the catastrophes counted, each named with its size: preparedness that also cuts ordinary outbreaks, materials security that also cuts radiological terrorism, safety work that also cuts everyday harm from AI.", "percent"),
