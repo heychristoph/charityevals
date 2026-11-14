@@ -1,15 +1,15 @@
 ### Summary
 
-Blueprint Biosecurity works on defences that would protect people against any airborne pandemic: far-UVC light and other ways to clean indoor air, and better respirators. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="blueprint-biosecurity-charityevals">5.8</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of pandemic work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 113.
+Blueprint Biosecurity works on defences that would protect people against any airborne pandemic: far-UVC light and other ways to clean indoor air, and better respirators. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="blueprint-biosecurity-charityevals">5.9</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of pandemic work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 115.
 
 ### What the charity does
 
 Blueprint was founded in 2023 in Washington, DC, by Jake Swett. It spent $3.1 million in 2024 with ten employees (Form 990; its statements are audited). Its programmes that year:
 
-- **Far-UVC** ($1.14M). Far-UVC is ultraviolet light that kills airborne germs and is thought to be safe for people in the room. Blueprint funded studies on what stands in the way of using it: eye safety (Shimane University, Columbia University), the pollution it can create indoors (MIT, Penn State), how well it kills airborne viruses, and a model of how much it would cut spread (Imperial College London). It also wrote the Blueprint for Far-UVC, published in 2025.
-- **Biosecurity and government affairs** ($0.57M). Strategy, partnerships and briefings across the programmes. A government affairs team followed in 2025.
+- **Far-UVC** ($1.14M). Far-UVC is ultraviolet light that kills airborne germs and is thought to be safe for people in the room. Blueprint funded studies on what stands in the way of using it: eye safety (Shimane University, Columbia University), the pollution it can create indoors (MIT, Penn State), how well it kills airborne viruses, and a model of how much it would cut spread (Imperial College London). These grants were awarded in 2024 and paid over 2024 and 2025. It also wrote the Blueprint for Far-UVC, published in 2025.
+- **Biosecurity and government affairs** ($0.57M). Strategy, partnerships and briefings across the programmes, including early advocacy for better respirators for critical workers. A government affairs team followed in 2025.
 - **Other ways to clean indoor air** ($0.37M). Desk research on glycol vapours, which led to seven research grants in 2026.
-- **Protective equipment** ($0.32M). The Next-Gen PPE Blueprint (2024, with Gryphon Scientific) argues for stockpiling reusable respirators, which protect better and take up far less space than disposable N95s.
+- **Protective equipment** ($0.32M). The Next-Gen PPE Blueprint (June 2024, with Gryphon Scientific) argues for stockpiling reusable respirators, which protect better and take up far less space than disposable N95s.
 
 Most of its money comes from Coefficient Giving (formerly Open Philanthropy).
 
@@ -28,7 +28,7 @@ All of Blueprint's spending is pandemic work. The model's AI, nuclear, policy-wi
 | Adjustment | Value | Reason |
 |---|---|---|
 | Uptake of the far-UVC work against a typical project | 0.8 | Studies aimed at the known barriers, but nothing yet deployed because of them |
-| Uptake of the respirator work | 1 | Its figures were used in a respirator stockpiling proposal within months; Congress mentioned reusable respirators six times in 2025 bills |
+| Uptake of the respirator work | 0.8 | A costed case for stockpiles; its own PPE lead carried it into a policy memo, and the mentions in Congress's bills came from 2025 work |
 | Uptake of the glycol work | 0.6 | Early research on a technology with open safety questions |
 | Uptake of the strategy and government work | 0.7 | Typical: no output of its own to judge in 2024 |
 | Work no one else would have done now | 0.7 | Coefficient Giving funds some far-UVC studies directly; 1Day Sooner and Johns Hopkins also work on far-UVC |
@@ -36,11 +36,11 @@ All of Blueprint's spending is pandemic work. The model's AI, nuclear, policy-wi
 | Funging by its main funder | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about Blueprint's effect on the risk is measured |
 
-Together the uptake figures come to about 0.77 of a typical project.
+Together the uptake figures come to about 0.75 of a typical project.
 
 Side effects: other benefits add 15%. These tools also fight ordinary infections between pandemics, such as tuberculosis, flu and COVID, net of a small risk that far-UVC adds indoor pollution if used too soon. Speeding up dangerous biology and information hazards subtract nothing: Blueprint studies defences and publishes no threat analyses.
 
-At the end of 2024 Blueprint had under three months of spending in hand. Since then Coefficient Giving has given it $7.1 million to pass on as research grants and, by its grant records, $6.4 million of general support over two years, and Blueprint says it raised over $17.5 million in 2025. Money is less of a constraint now, so the next dollar counts at 35% of the past average.
+At the end of 2024 Blueprint had under three months of spending in hand. Since then, by its grant records, Coefficient Giving has given it $7.1 million to pass on as research grants, $3.2 million for policy advocacy (shared with its advocacy arm) and $6.4 million of general support over two years, and Blueprint says it raised over $17.5 million in 2025. Money is less of a constraint now. Founders Pledge, which recommends it, rates its team highly. The next dollar counts at 37% of the past average.
 
 ### What drives the result
 
@@ -48,10 +48,10 @@ The result is about four times the median for this cause, below SecureBio's (6.1
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 83; at 8% it is about 4.6.
-- **The years a cut counts.** At one year the result is 1.2; at twenty it is 18.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the extinction figure alone moves the result from 2.9 to 34.
-- **How much the next dollar does.** From 13% to 76% of the past average, the result moves from 2.1 to 12.5.
+- **The discount rate.** At 0.1% the result is about 84; at 8% it is about 4.7.
+- **The years a cut counts.** At one year the result is 1.3; at twenty it is 18.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the extinction figure alone moves the result from 3.0 to 35.
+- **How much the next dollar does.** From 13.5% to 79% of the past average, the result moves from 2.2 to 12.6.
 - **Whether far-UVC works and is safe in real buildings.** This is what Blueprint is funding studies to find out; the far-UVC uptake runs from 0.4 to 1.2.
 
 ### What isn't modelled
@@ -71,5 +71,6 @@ The model was built from the catastrophic-risk template, with SecureBio's and th
 - Blueprint Biosecurity, Bioresilience Fund funded projects, and the Next-Gen PPE Blueprint (2024).
 - Aman Patel, Protecting U.S. Critical Infrastructure with Resilience Caches of Reusable Respirators (Federation of American Scientists, October 2024).
 - Coefficient Giving's grants to Blueprint Biosecurity (Longterm Wiki's mirror of its grant records).
+- Founders Pledge, Blueprint Biosecurity (June 2024).
 - Karger et al., Forecasting Existential Risk (Forecasting Research Institute, 2023).
 - Rethink Priorities, Cross-Cause Cost-Effectiveness Model.
