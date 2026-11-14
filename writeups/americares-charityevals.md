@@ -21,7 +21,7 @@ Each programme branch counts patients, the risk of death the care removes and th
 - **Donated goods count in the credit share, not the cost.** The medicines are drug companies' resources, valued at what they would cost where they're used (half of US list price for US brand drugs, about a third for medicine shipped abroad), and partner clinics' staff are theirs. Americares' cash is credited with its share of all of that: about 2% for the assistance programme, 8% for donated medicine to clinics, 85% for its own clinics.
 - **The assistance programme** (about 224,000 patient-years of medicine, our estimate from its value) adds little: the companies would most likely run their programmes in-house or through another administrator without Americares.
 - **Its clinics and training** carry most of the result: clinic patients at outpatient-care risks as in our model of Doctors Without Borders' outpatients, trained health workers from the research on training (Rowe et al. 2018).
-- **Emergencies** are a humanitarian-relief model: excess deaths during the crisis, a share averted by the health care, illness treated, and goods, water and cash on the site's log-income scale in four stand-in places (the US a third).
+- **Emergencies** are a humanitarian-relief model: excess deaths during the crisis, a share averted by the health care, illness treated, and goods, water and cash on the site's log-income scale over the months they cover, in four stand-in places (the US a third). The goods take no evidence step, being valued at their cost.
 
 Every branch's effect is our judgment, not measured, so each is discounted by the shared missing-data slider.
 
@@ -42,7 +42,7 @@ Supply-chain and disaster-preparedness support to partner clinics, recovery proj
 
 ### How this model was checked
 
-Each model had an independent audit (audits/americares-charityevals/ and audits/americares-charityevals-emergency/). Round 1 passed both with no high findings. The fixes that followed: the assistance programme's deaths split by age from the shared cardiovascular split instead of our guess, the other age splits anchored on the shared splits, the emergency goods share anchored on the programme's own expense lines, the cash programme total cited from the audited statement, and the overlaps between branches stated. A verification round checked those changes.
+Each model had an independent audit (audits/americares-charityevals/ and audits/americares-charityevals-emergency/). Round 1 passed both with no high findings. The fixes that followed: the assistance programme's deaths split by age from the shared cardiovascular split instead of our guess, the other age splits anchored on the shared splits, the emergency goods share anchored on the programme's own expense lines, the cash programme total cited from the audited statement, and the overlaps between branches stated. A verification round checked those changes. A later site-wide pass counted the emergency goods over the months they cover and without an evidence step (0.037 to 0.041); a third emergency round verified it with no high or medium finding.
 
 ### Sources
 
