@@ -22,5 +22,3 @@ Previous round: round 4 had no open findings.
 
 ## Drivers
 AI catastrophe chance, misalignment cut per dollar, discount rate, years a cut counts, misuse share. Unchanged.
-
-(Numbered 5 on its branch; renumbered at merge.)
