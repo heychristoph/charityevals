@@ -1,6 +1,6 @@
 # Audit: govai-charityevals, round 4 (verification round)
 Result: 0.001583 daly/$ = 1.58 years of healthy life per 1,000 dollars (combined range 0.039-64; model's own ranges 0.047-33); cause median 0.958 (x1.7). Verdict: pass.
-Model-sha: e6d9d1975dc0ec9a388dadd6d0dd87dc08970a46d060e59844b3ea3b20ee89d6
+Model-sha: 6fdebc3e16c2a9b9c63686f4a04ebc4484cbe358e7f4fd040e3c8ff55b686f92
 Scope: unchanged from round 3 (all of GovAI's 2025 work, $11.9M); only round 3's findings and the changes they caused were checked.
 Mechanical: audit-model lint 0/0/0, findings (0); scripts/check.ts: all models valid. Not re-run this round (scoped): normalization-audit, simulation-check. No file in generated/ was changed.
 
@@ -23,3 +23,5 @@ Not re-fetched (scoped round). The new `code_resources` row reuses the Commissio
 Unchanged: `$ai_catastrophe_chance`, the shared misuse cut per million, `$win_years_counted`, `$missing_data_discount`, `@next_dollar.govai`. Code of Practice inputs (code_resources, pol_relative_cut, cf_policy) now each have anchors; the Code is about a tenth of the result.
 
 **Verdict: pass** (no high finding; one low presentation note)
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

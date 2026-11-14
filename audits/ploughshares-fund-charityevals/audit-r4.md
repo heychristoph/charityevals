@@ -1,6 +1,6 @@
 # Audit: ploughshares-fund-charityevals, round 4 (verification)
 Result: 0.02598 daly/$ = 26.0 years of healthy life per 1,000 dollars (combined range 1.22–555; model's own ranges 2.17–102), unchanged from round 3. Verdict: pass.
-Model-sha: 789dd467c5ae34365f975c2fe67e31cbd1d6b3a22ef3b958866a136f600ce6ed
+Model-sha: 2d44cede649f5f2dce26c3c5585a8e4fddb39fb14dd552fccd855bc3322e20a8
 Scope: scoped to the wording change since round 3 (`git diff 659a741 6eb8f71 -- models/catastrophic-risk/ploughshares-fund-charityevals.json writeups/ploughshares-fund-charityevals.md`): the summary drops "(no grantee has a model on the site yet)", and the nuclear_cost_share explainer and the write-up now say that the one grantee with a model on the site, the Arms Control Association ($178,000 from Ploughshares in fiscal 2025, Schedule I), asks the same questions with the same figures, so its grant is worth the same within 2% and is valued with the rest. Only that claim was checked; no number in the model changed, so nothing else was re-audited.
 Mechanical: audit-model lint 0/0/7 (the same seven structural zeros accepted in round 2; the "Point inputs without a range" line is unchanged); result identical to round 3 (25.98); the Model-sha differs from round 3 only because of the wording.
 Previous round (round 3): no findings, nothing to carry over.
@@ -34,4 +34,6 @@ Value of a Ploughshares grant dollar, as a share of a typical nuclear dollar (be
 | summary | the model | verified | the removed parenthesis no longer applies |
 
 **Verdict: pass** (no findings)
-Model-sha: 789dd467c5ae34365f975c2fe67e31cbd1d6b3a22ef3b958866a136f600ce6ed
+Model-sha: 2d44cede649f5f2dce26c3c5585a8e4fddb39fb14dd552fccd855bc3322e20a8
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
