@@ -5,6 +5,7 @@
   "cause": "catastrophic-risk",
   "beneficiaries": "world",
   "beneficiaries_note": "Our build: the grants, the recipients read live and the advised gift all work against pandemics, which kill people everywhere, and the future lost is everyone's, so the result is spread by world population.",
+  "destination_reads": ["charityevals:council-on-strategic-risks","charityevals:epoch-ai","charityevals:johns-hopkins-center-for-health-security","givewell:against-malaria-foundation","givewell:malaria-consortium","givewell:helen-keller-intl","givewell:new-incentives","givedirectly","cause:global-health","cause:catastrophic-risk"],
   "template": "catastrophic-risk",
   "estimate_basis": "past_average",
   "charity": "sentinel-bio",
@@ -1026,15 +1027,7 @@
       "label": "Grants to recipients the site models, valued at their figures, units of value",
       "format": "number",
       "formula": "grant_csr * value_csr + grant_epoch * value_epoch",
-      "explainer": "Each grant times its recipient's value per dollar. No further adjustment: each recipient's model already asks whether others would do its work, its share of the credit and what its next dollar does."
-    },
-    {
-      "id": "live_missing_data_adj",
-      "section": "adjustments",
-      "label": "Grants read at their recipients' figures: counted less where the outcome isn't measured",
-      "format": "percent",
-      "formula": "$missing_data_discount",
-      "explainer": "The site reads another model as a stand-in for this one's work, without the stand-in's missing-data step (src/engine/model.ts refValues), so the step is taken here: the Council on Strategic Risks', Epoch AI's and the Johns Hopkins Center for Health Security's models are thin in every branch (no outcome of their work on the risk is measured), so the shared missing-data discount applies to the whole of the grants and of the advised gift's value, as it does on their own pages (docs/normalization.md 2.12)."
+      "explainer": "Each grant times its recipient's value per dollar. No further adjustment: each recipient's figure on the rankings already asks whether others would do its work, its share of the credit, what its next dollar does and how much of its outcome is measured."
     },
     {
       "id": "advised_gifts",
@@ -1487,7 +1480,7 @@
       "label": "Counted less where the outcome isn't measured for this charity",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin: no outcome of the grants on the risk is measured; the cut per dollar is a typical project's from Rethink Priorities' model and the adjustments are judgments, so the shared missing-data step applies (docs/normalization.md 2.12), to the pandemic grants and the fellowships here and to the advised gift through informed_money_value; the grants read at their recipients' figures take it in live_missing_data_adj."
+      "explainer": "Thin: no outcome of the grants on the risk is measured; the cut per dollar is a typical project's from Rethink Priorities' model and the adjustments are judgments, so the shared missing-data step applies (docs/normalization.md 2.12), to the pandemic grants and the fellowships here and to the advised gift through informed_money_value; the grants read at their recipients' figures take each recipient's own step (destination_reads)."
     },
     {
       "id": "total_adj",
@@ -1561,8 +1554,8 @@
       "section": "bridges",
       "label": "Grants read at their recipients' figures and the spending Sentinel's advice changed, in units of value (after their own adjustments)",
       "format": "number",
-      "formula": "(live_grants_uov + informed_money_value) * live_missing_data_adj",
-      "explainer": "The grants to the Council on Strategic Risks and Epoch AI at their figures, and the advised gift's gain over where it would have gone (informed_money_value, with its own evidence and missing-data steps for the advice), both times the recipients' missing-data step (live_missing_data_adj), which reading them live leaves out: in units of value per dollar from the recipients' models, so they enter after the pandemic branch's adjustments."
+      "formula": "live_grants_uov + informed_money_value",
+      "explainer": "The grants to the Council on Strategic Risks and Epoch AI at their figures, and the advised gift's gain over where it would have gone (informed_money_value, with its own evidence and missing-data steps for the advice): in units of value per dollar from the recipients' models, read as destinations (destination_reads: each with its own missing-data step), so they enter after the pandemic branch's adjustments."
     },
     {
       "id": "dalys_from_live",

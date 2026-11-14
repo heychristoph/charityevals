@@ -73,6 +73,10 @@ describe("lives near and far", () => {
     expect(distanceFactor(lib, m("mover"), a)).toBe(1);
     expect(headline(lib, m("mover"), a)).toBeCloseTo(7.5 * K, 9);
     expect(headline(lib, m("mover"), at(404, 0.5))).toBeCloseTo(30 * K, 9);
+    // A grant from a model with beneficiaries of its own (destination_reads) is read without the
+    // grantee's weight: the grantmaker's own applies, once.
+    const g = buildLibrary([kenya, { ...proxy, id: "grant", destination_reads: ["kenya"] }], assumptions);
+    expect(compute(g, g.models.get("grant")!, a)["#kenya"]).toBe(bottomLine(g, g.models.get("kenya")!, av).common);
   });
 
   it("never applies in the evaluator view, destinations included", () => {

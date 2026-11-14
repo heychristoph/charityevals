@@ -1,6 +1,6 @@
 ### Summary
 
-Ploughshares Fund is a San Francisco foundation that funds and connects the groups working to lower the chance of nuclear war. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="ploughshares-fund-charityevals">26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.3 to about 460.
+Ploughshares Fund is a San Francisco foundation that funds and connects the groups working to lower the chance of nuclear war. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="ploughshares-fund-charityevals">26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.2 to about 480.
 
 ### What the charity does
 
@@ -38,11 +38,11 @@ Ploughshares holds almost no unrestricted reserves. It has drawn on its restrict
 
 ### What drives the result
 
-The grants bring about two thirds of the result, Ploughshares' own work about a quarter and the fellowship about 7%. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 85. The result sits a little above the Nuclear Threat Initiative's 23. Ploughshares works only on nuclear risk, while NTI also works on pandemics, where Rethink's typical project cuts less per dollar. Ploughshares' next-dollar figure is also higher.
+The grants bring about three fifths of the result, Ploughshares' own work under a third and the fellowship about 8%. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 83. The result sits a little above the Nuclear Threat Initiative's 23. Ploughshares works only on nuclear risk, while NTI also works on pandemics, where Rethink's typical project cuts less per dollar. Ploughshares' next-dollar figure is also higher.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 5.6 to 210.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 5.0 to 210.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 - **How far the grantees' work beats or trails a typical project.** Nothing about it is measured.

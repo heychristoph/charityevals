@@ -264,7 +264,10 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
   average, none modelled `#cause:<cause or area>` (its ranked charities, equal weights; never a typed
   list); meta and unmodelled causes the average of the rest; below the organisation's own bar,
   `@meta.prior_vs_cash × #givedirectly`. No split: the cause's set. Not yet proven:
-  `@meta.success_chance_new_org` and the success step. No missing-data step.
+  `@meta.success_chance_new_org` and the success step. No missing-data step of its own: each
+  destination brings its own. Not a `"destinations"` model (beneficiaries of its own: a grantmaker, an
+  advocate's money moved)? List every grantee, destination and prior reference in `destination_reads`
+  (the lint refuses a moved-money row or `#owner:charity` read as a stand-in).
 - Research or advice that changes where money is spent (a judged share of the money it informed): the row
   `informed_money`, all shifted, `informed_money_value` (set `informed`: evidence and missing-data steps),
   not net value, and never in `donor_cost_share` (`money_moved` stays any money moved gross). Money to a

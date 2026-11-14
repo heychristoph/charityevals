@@ -1,6 +1,8 @@
 # catastrophic-risk (uov, DALYs → daly; past_average)
 
-AI, pandemics, nuclear war. One model covers several areas; a regrantor is money moved, read live.
+AI, pandemics, nuclear war. One model covers several areas; a regrantor is money moved, read live; a
+grant to a modelled charity is `grant × #owner:charity`, listed in `destination_reads`, after the branch
+adjustments (its figure carries its own).
 
 ## The chain
 

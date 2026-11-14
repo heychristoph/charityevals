@@ -37,7 +37,14 @@ const ours = {
   output: { row: "out", unit: "u", label: "per $" },
 };
 const unclassified = imported("unclassified", undefined, [input("x", 1), { id: "out", label: "out", formula: "x" }]);
-const lib = buildLibrary([measured, thin, partly, variant, proxy, mover, ours, unclassified], assumptions);
+// One of ours with beneficiaries of its own that grants money to the thin model and values its own
+// work with a stand-in: the grant reads the grantee's step, the stand-in doesn't.
+const grantmaker = {
+  ...ours, id: "grantmaker", destination_reads: ["thin"],
+  rows: [input("x", 3), input("grant", 2), { id: "missing_data_adj", label: "m", formula: "$missing_data_discount", explainer: "Thin." },
+    { id: "out", label: "out", formula: "(x + #partly) * missing_data_adj + grant * #thin" }],
+};
+const lib = buildLibrary([measured, thin, partly, variant, proxy, mover, ours, unclassified, grantmaker], assumptions);
 const av = assumptionValues(lib.assumptions);
 const at = (d: number) => ({ ...av, missing_data_discount: d });
 const m = (id: string) => lib.models.get(id)!;
@@ -72,6 +79,20 @@ describe("missing outcome data", () => {
     // Ours: the marker only, no second factor.
     expect(missingDataFactor(lib, m("ours"), av)).toBe(1);
     expect(headline(lib, m("ours"), av)).toBeCloseTo(1.5 * K, 9);
+    // A grant (destination_reads) is read at the grantee's figure, step included; the stand-in in full.
+    const g = compute(lib, m("grantmaker"), at(0.1));
+    expect(g["#thin"]).toBeCloseTo(0.3, 12);
+    expect(g["#partly"]).toBe(3);
+    expect(headline(lib, m("grantmaker"), at(0.1))).toBeCloseTo(((3 + 3) * 0.1 + 2 * 0.3) * K, 9);
+    // The uncertainty step reaches the grant through the grantee's slider, not the stand-in's.
+    const u = (x: Record<string, number>) => uncertainty(lib, m("grantmaker"), compute(lib, m("grantmaker"), x), x, "charityevals");
+    expect(u(av).total).toBeGreaterThan(0);
+  });
+
+  it("names a destination read only where the model reads it, and never on a money mover", () => {
+    const bad = buildLibrary([thin, { ...ours, id: "bad", destination_reads: ["measured"] }, { ...mover, id: "mover2", destination_reads: ["thin"] }], assumptions);
+    expect(bad.errors.some((e) => e.includes("bad: destination_reads names #measured"))).toBe(true);
+    expect(bad.errors.some((e) => e.includes(`mover2: destination_reads on a "destinations" model`))).toBe(true);
   });
 
   it("reaches sensitivity, uncertainty and the tree through the same factor", () => {

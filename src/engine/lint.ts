@@ -4,7 +4,8 @@
 // judgment with a range and a reason, formulas carry no unexplained constants, and the canonical
 // rows sit inside plausible bounds. `npm run check` fails on any high-severity finding.
 import type { Node } from "./expr";
-import { assumptionValues, compute, hasRange, type Library, type ResolvedModel } from "./model";
+import { assumptionValues, compute, hasRange, isCharityRef, readsAsDestination, type Library, type ResolvedModel } from "./model";
+import { MOVED_MONEY_SECTION } from "./moved-money";
 import { rowsFeeding } from "./sensitivity";
 import { bridgesOf } from "./bridges";
 import { CLIMATE_REQUIRED, SAD_FACT_VERSION, TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
@@ -158,6 +159,16 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     else if (r.formula && /median\([^)]*#/.test(r.formula) && path.has(r.id))
       add(ruleSev, "borrowed", `${r.id} takes its value from other models' results (median of #…)`, literature, r.id);
   }
+  // Destinations (2.12): money this model grants or moves to a modelled charity is read at the charity's
+  // figure on the rankings, its missing-data step included, never as a stand-in. A charity's figure
+  // (`#owner:charity`) and every reference of the shared moved-money rows are such reads.
+  if (m.beneficiaries !== "destinations")
+    for (const r of m.rows) {
+      if (!path.has(r.id)) continue;
+      for (const d of r.modelDeps)
+        if ((r.section === MOVED_MONEY_SECTION.id || isCharityRef(d)) && !readsAsDestination(m, d))
+          add("high", "destination-read", `${r.id} reads #${d} as a stand-in (without its missing-data step), but ${r.section === MOVED_MONEY_SECTION.id ? "it is a destination of the moved money" : "a charity's figure on the rankings is money to that charity"}`, `Add "${d}" to the model's destination_reads (a grant, money moved, or that money's counterfactual), or, for a stand-in, value the work from the literature (Convention 12).`, r.id);
+    }
   if (m.missing_data) add("high", "missing-data", "a charityevals model carries missing_data", "Remove the field: an own build's branches carry the step in their missing_data_adj rows (the field is for imported models, INV-21).");
   const down = new Map<string, string[]>();
   for (const r of m.rows) for (const d of r.deps) down.set(d, [...(down.get(d) ?? []), r.id]);

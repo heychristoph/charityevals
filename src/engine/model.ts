@@ -254,6 +254,7 @@ export function buildLibrary(
       estimate_basis: file.estimate_basis ?? parent?.estimate_basis,
       beneficiaries: file.beneficiaries ?? parent?.beneficiaries,
       beneficiaries_note: file.beneficiaries ? file.beneficiaries_note : parent?.beneficiaries_note,
+      destination_reads: file.destination_reads ?? parent?.destination_reads,
       missing_data: file.missing_data ?? parent?.missing_data,
       charity: file.charity ?? parent?.charity ?? "",
       owner: file.owner ?? parent?.owner ?? "",
@@ -292,6 +293,14 @@ export function buildLibrary(
   // `#cause:x`, the charities of a cause or area at theirs, the reader's own charity left out.
   const all: Library = { models: new Map([...(options.models ?? []), ...models]), charities, owners, assumptions, facts, errors: [] };
   const targets = (d: string, reader?: string): string[] => (isCharityRef(d) || isCauseRef(d) ? refTargets(all, d, reader).map((t) => t.id) : [d]);
+  for (const m of models.values()) {
+    // A reference read as a destination must be one the model reads; a money mover reads every one so.
+    if (m.destination_reads?.length) {
+      if (m.beneficiaries === "destinations") errors.push(`${m.id}: destination_reads on a "destinations" model (it reads every reference as a destination)`);
+      const read = new Set(m.rows.flatMap((r) => r.modelDeps));
+      for (const d of m.destination_reads) if (!read.has(d)) errors.push(`${m.id}: destination_reads names #${d}, which no row reads`);
+    }
+  }
   for (const m of models.values())
     for (const r of m.rows)
       for (const d of r.modelDeps) {
@@ -655,11 +664,12 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
   // uncertainty) reads the same number. It is always our view at the reader's values: the evaluator
   // view of this model doesn't pin another model's rates, but it never discounts an estimate for its
   // age or weighs it by distance (readerValues). A model read as a stand-in for this one's own work is
-  // read without its distance weight: this model's beneficiaries apply (refValues).
+  // read without its distance weight, missing-data step, age or risk: this model's apply (refValues); a
+  // destination with them.
   const models: Record<string, number> = base ? { ...base.models } : {};
   for (const k of keys) if (k.startsWith("#")) models[k.slice(1)] = inputs[k];
   const other = (scope: Scope, n: string) =>
-    scope === "model" ? (models[n] ??= inputs[`#${n}`] ?? modelResult(lib, n, refValues(m, av, view), m.charity))
+    scope === "model" ? (models[n] ??= inputs[`#${n}`] ?? modelResult(lib, n, refValues(m, av, view, n), m.charity))
     : inputs[`@${n}`] ?? pickValue(lib.facts.get(n)?.value);
   const n = p.rows.length;
   const env: Env = { v: base ? base.v.slice() : new Array<number>(n).fill(NaN), a, other };
@@ -1074,16 +1084,31 @@ export function readerValues(av: Record<string, number>, view: View): Record<str
 }
 
 const neutral = new WeakMap<Record<string, number>, Record<string, number>>();
-/** The values a model reads another (`#id`) at. A charity that moves money ("destinations") reads each
- * destination with its distance weight and its missing-data step: the good is done where, and as well
- * as, the destination does it. Any other model reads a model as a stand-in for its own work (a
- * comparable programme's result per dollar), so without the stand-in's weight, missing-data step or age
- * discount: its own beneficiaries' weight, missing-data classification and estimate age apply once, to the whole. */
-export function refValues(m: ResolvedModel, av: Record<string, number>, view: View): Record<string, number> {
+const nearby = new WeakMap<Record<string, number>, Record<string, number>>();
+/** Whether a model reads a reference (`#id`, `#owner:charity`, `#cause:x`, without the `#`) as a
+ * destination: every reference of a charity that moves money ("destinations"), and those another model
+ * names in `destination_reads` (money it grants or moves, and that money's counterfactual). */
+export const readsAsDestination = (m: ResolvedModel, ref: string) => m.beneficiaries === "destinations" || !!m.destination_reads?.includes(ref);
+
+/** The values a model reads another (`#id`) at. A destination (readsAsDestination) is read at its
+ * figure on the rankings, with its missing-data step, age and risk: the good is done as well as the
+ * destination does it. A charity that moves money ("destinations") also reads its distance weight (the
+ * good is done where the destination works); a model with beneficiaries of its own reads it without
+ * (its own weight applies, once, to the whole). Any other reference is a stand-in for the model's own
+ * work (a comparable programme's result per dollar), read without the stand-in's weight, missing-data
+ * step, age or risk: the reader's own apply once, to the whole. */
+export function refValues(m: ResolvedModel, av: Record<string, number>, view: View, ref?: string): Record<string, number> {
   const r = readerValues(av, view);
+  if (m.beneficiaries === "destinations") return r;
+  if (ref !== undefined && readsAsDestination(m, ref)) {
+    if (!r[DISTANCE_DISCOUNT]) return r;
+    let n = nearby.get(r);
+    if (!n) nearby.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0 }));
+    return n;
+  }
   const missingMoves = MISSING_DATA_DISCOUNT in r && r[MISSING_DATA_DISCOUNT] !== 1;
   const riskMoves = RISK_QUANTILE in r && r[RISK_QUANTILE] !== RISK_OFF;
-  if (m.beneficiaries === "destinations" || (!r[DISTANCE_DISCOUNT] && !r[AGE_DISCOUNT] && !missingMoves && !riskMoves)) return r;
+  if (!r[DISTANCE_DISCOUNT] && !r[AGE_DISCOUNT] && !missingMoves && !riskMoves) return r;
   let n = neutral.get(r);
   if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, [AGE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_QUANTILE in r ? { [RISK_QUANTILE]: RISK_OFF } : {}) }));
   return n;
