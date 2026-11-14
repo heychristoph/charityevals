@@ -1050,15 +1050,15 @@ const neutral = new WeakMap<Record<string, number>, Record<string, number>>();
 /** The values a model reads another (`#id`) at. A charity that moves money ("destinations") reads each
  * destination with its distance weight and its missing-data step: the good is done where, and as well
  * as, the destination does it. Any other model reads a model as a stand-in for its own work (a
- * comparable programme's result per dollar), so without the stand-in's weight or missing-data step: its
- * own beneficiaries' weight and its own missing-data classification apply once, to the whole. */
+ * comparable programme's result per dollar), so without the stand-in's weight, missing-data step or age
+ * discount: its own beneficiaries' weight, missing-data classification and estimate age apply once, to the whole. */
 export function refValues(m: ResolvedModel, av: Record<string, number>, view: View): Record<string, number> {
   const r = readerValues(av, view);
   const missingMoves = MISSING_DATA_DISCOUNT in r && r[MISSING_DATA_DISCOUNT] !== 1;
   const riskMoves = RISK_QUANTILE in r && r[RISK_QUANTILE] !== RISK_OFF;
-  if (m.beneficiaries === "destinations" || (!r[DISTANCE_DISCOUNT] && !missingMoves && !riskMoves)) return r;
+  if (m.beneficiaries === "destinations" || (!r[DISTANCE_DISCOUNT] && !r[AGE_DISCOUNT] && !missingMoves && !riskMoves)) return r;
   let n = neutral.get(r);
-  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_QUANTILE in r ? { [RISK_QUANTILE]: RISK_OFF } : {}) }));
+  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, [AGE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_QUANTILE in r ? { [RISK_QUANTILE]: RISK_OFF } : {}) }));
   return n;
 }
 

@@ -25,9 +25,11 @@ const model = (id: string, published: string | undefined, rows: object[], extra:
 });
 // Ten years old (mid-2016 to 2 July 2026), and a meta charity two years old that reads it live.
 const dest = model("dest", "2016", [input("x", 3), { id: "out", label: "out", formula: "x" }], { evaluator: { name: "E", assumptions: {} } });
-const meta = model("meta-org", "2024-07-02", [input("moved", { low: 5, best: 10, high: 20 }), { id: "out", label: "out", formula: "moved * #dest" }], { evaluator: { name: "E", assumptions: {} } });
+const meta = model("meta-org", "2024-07-02", [input("moved", { low: 5, best: 10, high: 20 }), { id: "out", label: "out", formula: "moved * #dest" }], { evaluator: { name: "E", assumptions: {} }, beneficiaries: "destinations" });
+// A model two years old that reads the old one as a stand-in for its own work (not money moved to it).
+const standIn = model("stand-in", "2024-07-02", [input("scale", 2), { id: "out", label: "out", formula: "scale * #dest" }], { evaluator: { name: "E", assumptions: {} } });
 const undated = model("undated", undefined, [input("x", 1), { id: "out", label: "out", formula: "x" }]);
-const lib = buildLibrary([dest, meta, undated], assumptions);
+const lib = buildLibrary([dest, meta, standIn, undated], assumptions);
 const av = assumptionValues(lib.assumptions);
 const at = (d: number) => ({ ...av, estimate_age_discount: d });
 
@@ -58,6 +60,11 @@ describe("an estimate's age", () => {
     }
     expect(usedAssumptions(lib, m)).toContain("estimate_age_discount");
     expect(usedAssumptions(lib, m, "evaluator")).not.toContain("estimate_age_discount");
+  });
+
+  it("discounts a stand-in read live by the reader's age only: the reader's estimate is the one that ages", () => {
+    const m = lib.models.get("stand-in")!;
+    expect(headline(lib, m, at(0.1)) / headline(lib, m, at(0))).toBeCloseTo(1.1 ** -estimateAge(lib, m)!, 12);
   });
 
   it("discounts a meta charity's destinations by their own age and its own estimate by its own, and neither in the evaluator view", () => {
