@@ -10,7 +10,7 @@ The International Rescue Committee spent $1.33 billion in the year to September 
 
 **Cash** (about a sixth). The IRC gave $52.5 million in cash and vouchers to 1.5 million people, about $34 each. Delivery costs a further 25 cents a dollar. The cash covers about three months of needs for people who live on about $700 a year at international prices. This branch is the one measured part of the model: the dollars and the people are counted, and the transfer is itself the benefit.
 
-**Contraception** (about a twentieth). It is one of the four interventions the IRC says it will scale first, but it publishes no count. We put it at 5% of health spending, at $45 a couple-year of protection (the IRC's own analysis of four programmes found $47), each valued at GiveWell's figure for low-income countries.
+**Contraception** (about a fifteenth). It is one of the four interventions the IRC says it will scale first, but it publishes no count. We put it at 5% of health spending, at $45 a couple-year of protection (the IRC's own analysis of four programmes found $47), each valued at GiveWell's figure for low-income countries.
 
 **Vaccination, education, livelihoods, water and protection.** The IRC-led REACH consortium delivers about 8 million doses a year at about $1 a dose. Gavi and UNICEF pay for the vaccines, so the IRC gets a quarter of the credit. Education reaches 602,546 children, at the median learning gain of education trials. Livelihoods spends what is left of the economic budget. Water reaches 2.5 million people and also saves the time spent fetching it. Protection counts its mental-health gains in WELLBYs for everyone its spending reaches, not only those counted in safe spaces.
 
