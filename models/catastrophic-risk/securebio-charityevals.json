@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "securebio",
   "owner": "charityevals",
-  "summary": "SecureBio (Cambridge, Massachusetts) works against catastrophic pandemics: the Nucleic Acid Observatory's metagenomic early warning from sewage and airplane waste, SecureDNA's free DNA synthesis screening (since run by a Swiss foundation) and evaluations of how far AI models help with dangerous biology, run for AI developers. This model of all its work in 2024 (its latest Form 990, $4.25M) comes to about 6.2 years of healthy life per $1,000, from 0.4 to 96 on the combined range: each dollar is valued as a typical project's cut in the forecast risk (Rethink Priorities' cross-cause model; the Existential Risk Persuasion Tournament's experts for pandemics, the AI slider for AI), the AI evaluations as work against AI misuse and the rest as pandemic work, deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. The biggest uncertainties are the years a cut counts, the discount rate and how much a typical dollar cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way). Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "SecureBio (Cambridge, Massachusetts) works against catastrophic pandemics: the Nucleic Acid Observatory's metagenomic early warning from sewage and airplane waste, SecureDNA's free DNA synthesis screening (since run by a Swiss foundation) and evaluations of how far AI models help with dangerous biology, run for AI developers. This model of all its work in 2024 (its latest Form 990, $4.25M) comes to about 6.1 years of healthy life per $1,000, from 0.4 to 94 on the combined range: each dollar is valued as a typical project's cut in the forecast risk (Rethink Priorities' cross-cause model; the Existential Risk Persuasion Tournament's experts for pandemics, the AI slider for AI), the AI evaluations as work against AI misuse and the rest as pandemic work, deaths valued like every death (a COVID-scale pandemic's at COVID's age mix) and the future lost counted through the discount rate. The biggest uncertainties are the years a cut counts, the discount rate and how much a typical dollar cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way). Every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: SecureBio",
@@ -1021,12 +1021,36 @@
       "explainer": "The Nucleic Acid Observatory is the leading open pilot of untargeted wastewater sequencing, with CDC's traveller surveillance as a partner, and SecureDNA's screening was tested with major manufacturers; but neither the early-warning system nor the screening was yet in routine use in 2024, and detection helps only if a response follows. 0.75, our judgment, 0.3 to 1.1; anchors our Nuclear Threat Initiative model's 0.8 and Johns Hopkins Center for Health Security model's 0.73."
     },
     {
+      "id": "dalys_per_death_value",
+      "section": "adjustments",
+      "label": "Healthy years per unit of value of the deaths averted (for the weights below)",
+      "format": "small",
+      "formula": "dalys_from_uov / ((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death)",
+      "explainer": "The bridge's healthy years over the deaths' value: turns each branch's deaths into healthy years for the weights."
+    },
+    {
+      "id": "w_ai",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the AI evaluations (before adjustments)",
+      "format": "number",
+      "formula": "ai_deaths_averted * value_per_death * dalys_per_death_value + ai_future_dalys",
+      "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: its share of the value, used to weight the adjustments so each applies to its own branch's value."
+    },
+    {
+      "id": "w_bio",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the pandemic work (before adjustments)",
+      "format": "number",
+      "formula": "bio_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + bio_future_dalys",
+      "explainer": "The branch's deaths averted in healthy years (its COVID-scale part at COVID-19's age mix), plus its future healthy years kept: its share of the value, used to weight the adjustments so each applies to its own branch's value."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "How far a typical project's effect applies here",
       "format": "percent",
-      "formula": "ai_cost_share * ai_evidence_adj + (1 - ai_cost_share) * bio_evidence_adj",
-      "explainer": "The AI evaluations' and the pandemic work's multipliers, weighted by their shares of the cost (Convention 7); a dollar of each averts about as much before adjustments (the AI one about 0.9 of the pandemic one), so cost weights stand in for outcome weights."
+      "formula": "(w_ai * ai_evidence_adj + w_bio * bio_evidence_adj) / (w_ai + w_bio)",
+      "explainer": "The AI evaluations' and the pandemic work's multipliers, weighted by each branch's healthy years before adjustments (w_ai, w_bio), so each applies to its own branch's value: a dollar of the pandemic work counts about 1.1 times a dollar of the evaluations before adjustments."
     },
     {
       "id": "counterfactual_adj",

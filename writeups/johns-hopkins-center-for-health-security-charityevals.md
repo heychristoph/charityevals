@@ -1,6 +1,6 @@
 ### Summary
 
-The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="johns-hopkins-center-for-health-security-charityevals">7.6</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 134.
+The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="johns-hopkins-center-for-health-security-charityevals">7.5</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 134.
 
 ### What the charity does
 
@@ -35,11 +35,11 @@ The deaths averted are valued like every death on the site, by age. A COVID-scal
 - **Training.** The fellows and doctoral students who go on to work on these risks because of it: 10% of the fellows, who mostly work in the field already, and 30% of the students. Their added work-years are valued at the cost of a year of such work. The training gets its share of the credit by cost: what it cost, over that plus what employers pay for the work.
 - **A policy-win branch, set to zero.** No law or institution was won in 2025; the gene synthesis bills are still pending.
 
-The adjustments apply to all branches:
+The adjustments, each applied to its own branch:
 
 | Adjustment | Value | Reason |
 |---|---|---|
-| How far a typical project's effect applies | 0.9 for policy work, 0.4 for CORI (about 0.73 overall) | The Center's research is taken up widely. CORI is aimed at ordinary outbreaks, a thinner path to a catastrophe |
+| How far a typical project's effect applies | 0.9 for policy work and training, 0.4 for CORI (about 0.73 overall) | The Center's research is taken up widely. CORI is aimed at ordinary outbreaks, a thinner path to a catastrophe |
 | Work no one else would have done now | 0.7 | Other groups also work on biosecurity policy and outbreak analytics |
 | The Center's share of the resources | 0.85 | CORI works with CDC's own staff |
 | Funging by large funders | 0.9 | Coefficient Giving dominates its unrestricted money |
@@ -51,11 +51,11 @@ The Center's main funder halved its general support in 2023, and that grant ends
 
 ### What drives the result
 
-Most of the result comes from catastrophes the world survives and from COVID-scale pandemics, because at the default 4% discount rate the future counts for only about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 104. The result is below our Nuclear Threat Initiative model's because the Center works only on pandemics: Rethink's typical nuclear project averts more deaths per dollar than a typical biosecurity one. It is far above our AI-safety models for the same reason the other way: a typical pandemic project averts many times more deaths per dollar than a typical AI project.
+Most of the result comes from catastrophes the world survives and from COVID-scale pandemics, because at the default 4% discount rate the future counts for only about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 103. The result is below our Nuclear Threat Initiative model's because the Center works only on pandemics: Rethink's typical nuclear project averts more deaths per dollar than a typical biosecurity one. It is far above our AI-safety models for the same reason the other way: a typical pandemic project averts many times more deaths per dollar than a typical AI project.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 4 to 45.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 4 to 44.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.6 to 23.
 - **The Center's budget.** We built it from its grants. The result barely moves with it, because the cut is counted per dollar; only the training's share depends on it.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
@@ -68,7 +68,7 @@ Most of the result comes from catastrophes the world survives and from COVID-sca
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, starting from our Nuclear Threat Initiative model. Round 1 of the independent audit found no high issues and two medium ones. The first was the next-dollar figure: a gift cannot buy CORI, which a restricted CDC grant pays for, so it now buys the higher-valued policy work and the figure rose from 53% to 64%. The second was the other benefits, now 5% with an anchor instead of 15%. The low findings were fixed too: the university's and the School's assessments on gifts, funging at 0.9 as for the Nuclear Threat Initiative, and the grant terms. A verification round checked those changes. The rounds are in audits/johns-hopkins-center-for-health-security-charityevals/.
+The model was built from the catastrophic-risk template, starting from our Nuclear Threat Initiative model. Round 1 of the independent audit found no high issues and two medium ones. The first was the next-dollar figure: a gift cannot buy CORI, which a restricted CDC grant pays for, so it now buys the higher-valued policy work and the figure rose from 53% to 64%. The second was the other benefits, now 5% with an anchor instead of 15%. The low findings were fixed too: the university's and the School's assessments on gifts, funging at 0.9 as for the Nuclear Threat Initiative, and the grant terms. A verification round checked those changes. Later the evidence multiplier was applied to each branch's own value instead of blended by spending, checked in a further round. The rounds are in audits/johns-hopkins-center-for-health-security-charityevals/.
 
 ### Sources
 

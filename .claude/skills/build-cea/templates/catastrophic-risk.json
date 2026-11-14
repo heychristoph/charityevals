@@ -694,7 +694,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: for a pending bill, treaty or standard, the chance of winning from a reference class (similar measures passed or failed); for a win already in the year, 1 (then delete single_event) and the charity's share of the cause in attribution_share_shared. Name the reference class.",
+      "explainer": "TEMPLATE: for a pending bill, treaty or standard, the chance of winning from a reference class (similar measures passed or failed); for a win already in the year, 1 (then delete single_event) and the charity's part of it in pol_counterfactual_adj and pol_attribution_share. Name the reference class.",
       "single_event": true
     },
     {
@@ -708,7 +708,7 @@
         "high": 0.05
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use) and on Rethink Priorities' cut per project (@catastrophe.<area>_catastrophe_cut_per_million × its cost). Name the anchor."
+      "explainer": "TEMPLATE: how much of the area's catastrophe risk the measure removes once in force: the share of the risk's pathways it touches × how well it closes them, anchored on published estimates of the mechanism (screening coverage, verification, a hotline's use). Calibrate it per risk, since a typical dollar's cut differs by orders of magnitude between areas (the default 1% fits nuclear policy, about $30 million of typical nuclear work, but is tens of billions of dollars of typical AI misalignment work): everyone's resources behind the measure (all its drafters and campaigners, not only the charity) × the area's cut per $1 million (@catastrophe.<area>_catastrophe_cut_per_million, and the extinction one for the future) is a typical project's cut, then a named multiple of it for how much more directly the measure acts. Check both sizes: pol_relative_cut ÷ each cut per $1 million is the millions of typical work it equals, to set against those resources and the field's yearly spending. Name the anchors."
     },
     {
       "id": "pol_years_until_effect",
@@ -937,9 +937,70 @@
       "unit": "DALYs"
     },
     {
-      "id": "evidence_adj",
+      "id": "dalys_per_death_value",
       "section": "adjustments",
-      "label": "How far the typical project's effect applies to this charity's work",
+      "label": "Healthy years per unit of value of the deaths averted (for the weights below)",
+      "format": "small",
+      "formula": "dalys_from_uov / ((deaths_averted - covid_scale_deaths_averted) * value_per_death + covid_scale_deaths_averted * covid_value_per_death)",
+      "explainer": "The bridge's healthy years over the deaths' value: turns each branch's deaths into healthy years for the weights. Fixed."
+    },
+    {
+      "id": "w_ai",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the AI work (before adjustments)",
+      "format": "number",
+      "formula": "ai_deaths_averted * value_per_death * dalys_per_death_value + ai_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_bio",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the pandemic work (before adjustments)",
+      "format": "number",
+      "formula": "bio_deaths_averted * ((1 - bio_covid_scale_share) * value_per_death + bio_covid_scale_share * covid_value_per_death) * dalys_per_death_value + bio_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years (the COVID-scale part at COVID-19's age mix), plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_nuclear",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the nuclear work (before adjustments)",
+      "format": "number",
+      "formula": "nuclear_deaths_averted * value_per_death * dalys_per_death_value + nuclear_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_pol",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the policy win (before adjustments)",
+      "format": "number",
+      "formula": "pol_deaths_averted * value_per_death * dalys_per_death_value + pol_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted), plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_fb",
+      "section": "adjustments",
+      "label": "Weight: healthy years from the people trained (before adjustments)",
+      "format": "number",
+      "formula": "fb_deaths_averted * value_per_death * dalys_per_death_value + fb_future_dalys",
+      "unit": "DALYs",
+      "explainer": "The branch's deaths averted in healthy years (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted), plus its future healthy years kept: the weight its adjustments carry. Fixed."
+    },
+    {
+      "id": "w_total",
+      "section": "adjustments",
+      "label": "Weight: healthy years from every branch (before adjustments)",
+      "format": "number",
+      "formula": "w_ai + w_bio + w_nuclear + w_pol + w_fb",
+      "unit": "DALYs"
+    },
+    {
+      "id": "ai_evidence_adj",
+      "section": "adjustments",
+      "label": "AI field work: how far the typical project's effect applies",
       "format": "multiple",
       "value": {
         "low": 0.3,
@@ -947,12 +1008,64 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities): above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project."
+      "explainer": "TEMPLATE: a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities) for the AI work: above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project; 1 with 'unused' where the branch's cost share is 0."
     },
     {
-      "id": "counterfactual_adj",
+      "id": "bio_evidence_adj",
       "section": "adjustments",
-      "label": "Share of the work no one else would have done now",
+      "label": "Pandemic field work: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.7,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities) for the pandemic work: above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project; 1 with 'unused' where the branch's cost share is 0."
+    },
+    {
+      "id": "nuclear_evidence_adj",
+      "section": "adjustments",
+      "label": "Nuclear field work: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.7,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: a multiplier on the shared cut per dollar (a typical project's, Rethink Priorities) for the nuclear work: above 1 only where the charity's outputs show its work is taken up more than a typical project's (evaluations labs or governments run, standards adopted, citations in policy), below where they show less or nothing. Name the outputs. 1 = a typical project; 1 with 'unused' where the branch's cost share is 0."
+    },
+    {
+      "id": "pol_evidence_adj",
+      "section": "adjustments",
+      "label": "Policy win: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.8,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: 1 by default: the win's cut is judged directly (pol_relative_cut), not read from a typical project, so its evidence is in that judgment; differ from 1 only for doubt the cut cannot hold (whether the measure is enforced), named."
+    },
+    {
+      "id": "fb_evidence_adj",
+      "section": "adjustments",
+      "label": "Field-building: how far the typical project's effect applies",
+      "format": "multiple",
+      "value": {
+        "low": 0.7,
+        "best": 1,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: how far the alumni's work beats or trails a typical project in its area (their roles, their employers' uptake); 1 = typical, as fb_work_dollars values it."
+    },
+    {
+      "id": "ai_counterfactual_adj",
+      "section": "adjustments",
+      "label": "AI field work: share of the work no one else would have done now",
       "format": "percent",
       "value": {
         "low": 0.4,
@@ -960,12 +1073,64 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the share of the work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes."
+      "explainer": "TEMPLATE: the share of the AI work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes; 1 with 'unused' where the branch's cost share is 0."
     },
     {
-      "id": "attribution_share_shared",
+      "id": "bio_counterfactual_adj",
       "section": "adjustments",
-      "label": "This charity's share of the resources behind the outcome",
+      "label": "Pandemic field work: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the pandemic work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes; 1 with 'unused' where the branch's cost share is 0."
+    },
+    {
+      "id": "nuclear_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the nuclear work another organisation (a lab, a government, a better-funded group) would not have done in its place now; that it would have come years later is already in years_of_impact. Name the closest substitutes; 1 with 'unused' where the branch's cost share is 0."
+    },
+    {
+      "id": "pol_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Policy win: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the share of the win no one else (other campaigners, the government on its own) would have brought about now; for a pending measure the chance it passes is pol_p_success, not here. Name the closest substitutes."
+    },
+    {
+      "id": "fb_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Field-building: share of the work no one else would have done now",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: 1 by default: those who would have got there anyway are already out of fb_share_working; below 1 only where another programme would have trained the same people (a substitute course), named."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -974,6 +1139,82 @@
       },
       "kind": "judgment",
       "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+    },
+    {
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.1,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: credit by share of resources: the campaign's spending (pol_cost_share × cost_total) over everyone's resources behind the win (coalition partners' spending and staff time, the officials drafting it, the submissions), each valued; name them. Counting seats or signatures overstates it where others did most of the work."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: this charity's share of the resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.7,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: the charity's share of the programme's own resources (co-hosts, mentors' unpaid time, a partner's venue); the employers' share of the alumni's work is fb_credit_share, not here."
+    },
+    {
+      "id": "evidence_adj",
+      "section": "adjustments",
+      "label": "How far the typical project's effect applies to this charity's work",
+      "format": "multiple",
+      "formula": "(w_ai * ai_evidence_adj + w_bio * bio_evidence_adj + w_nuclear * nuclear_evidence_adj + w_pol * pol_evidence_adj + w_fb * fb_evidence_adj) / (w_total)",
+      "explainer": "Applied: each branch's own multiplier (<branch>_evidence_adj), weighted by the branches' healthy years (w_<branch>), so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the work no one else would have done now",
+      "format": "percent",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj + w_bio * bio_evidence_adj * bio_counterfactual_adj + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj + w_pol * pol_evidence_adj * pol_counterfactual_adj + w_fb * fb_evidence_adj * fb_counterfactual_adj) / (w_total * evidence_adj)",
+      "explainer": "Applied: each branch's own share (<branch>_counterfactual_adj), weighted by the branches' healthy years (w_<branch>) after evidence_adj, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "This charity's share of the resources behind the outcome",
+      "format": "percent",
+      "formula": "(w_ai * ai_evidence_adj * ai_counterfactual_adj * ai_attribution_share + w_bio * bio_evidence_adj * bio_counterfactual_adj * bio_attribution_share + w_nuclear * nuclear_evidence_adj * nuclear_counterfactual_adj * nuclear_attribution_share + w_pol * pol_evidence_adj * pol_counterfactual_adj * pol_attribution_share + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share) / (w_total * evidence_adj * counterfactual_adj)",
+      "explainer": "Applied: each branch's own share (<branch>_attribution_share), weighted by the branches' healthy years (w_<branch>) after the earlier factors, so that evidence_adj × counterfactual_adj × attribution_share is each branch's own product weighted by its value, never by its spending. Fixed."
     },
     {
       "id": "attribution_share",
