@@ -55,6 +55,8 @@ First build (2026-11-13), independent audit round 1 of each model. This model pa
 - **Patient services:** the information doses now match the British Heart Foundation's helpline and reading doses, with a patient share; the evidence adjustment no longer counts the dose twice; the cash value of help in kind is Habitat's 80%, with families who had other options in the counterfactual rows; the lodging health effect cites a review of distance and cancer care; delivery doubt applies to the information branch only. Its result moved from 0.0038 to 0.0036.
 - **Left as they are:** illness averted stays at 0 in patient services, since treatment kept on track can add illness as well as remove it, and two reading-only reference rows the lint flags as unused.
 
+Shared tobacco figures (2026-11-14), verification round 3: a pass. Tobacco advocacy became its own branch on the site's shared tobacco figures, coverage advocacy kept its own, and both now credit a year's work with a typical year's wins (from 40%), as in our Campaign for Tobacco-Free Kids model. The result rose from 0.0033 to 0.006.
+
 ### Sources
 
 - [ACS Consolidated Financial Statements, year ended March 31, 2026](https://www.cancer.org/content/dam/cancer-org/online-documents/en/pdf/policies/combined-financials-2026.pdf) (p. 7-8, 17-19)

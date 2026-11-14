@@ -44,7 +44,7 @@ About 72% of the result comes from the global branch, 18% from GHAI and 9% from 
 
 - **How much a year's wins cut smoking.** No study measures this for CTFK's countries. The anchor is a model of what policies of a given strength should do (SimSmoke-style projections), and the recent rate of wins is lower than the 2007–2020 average.
 - **Credit.** Bloomberg's partners, governments and local groups all claim the same wins, and CTFK's share of the resources is a judgment.
-- **From fewer smokers to fewer deaths.** The model treats a lasting cut in smoking as an equal cut in the smoking burden, half of it reached after about 8 years and half after about 30.
+- **From fewer smokers to fewer deaths.** The model treats a lasting cut in smoking as an equal cut in the smoking burden, half of it reached after about 8 years and half after about 40.
 - **GHAI.** Its food policies' effect on weight and disease is much less sure than tobacco taxes' effect on smoking.
 
 ### What isn't modelled
@@ -56,7 +56,7 @@ About 72% of the result comes from the global branch, 18% from GHAI and 9% from 
 
 ### How this model was checked
 
-Independent audits, in audits/campaign-for-tobacco-free-kids-charityevals/. Round 1 verified the Form 990 and GBD figures and found the global share of the burden averted too high for the recent period (cut from 0.5% to 0.25% a year). It also led to a neutral next-dollar use (Bloomberg funds US work too), a lag split between quitters and never-starters, evidence limited to the effect sizes' validity, second-hand smoke by branch and country, and GBD's direct death counts by age. Round 2 passed; its low findings (the quitters' share's range, the enforcement row's overlap with the effect sizes' compliance adjustors, write-up wording) were fixed and checked in a scoped verification.
+Independent audits, in audits/campaign-for-tobacco-free-kids-charityevals/. Round 1 verified the Form 990 and GBD figures and found the global share of the burden averted too high for the recent period (cut from 0.5% to 0.25% a year). It also led to a neutral next-dollar use (Bloomberg funds US work too), a lag split between quitters and never-starters, evidence limited to the effect sizes' validity, second-hand smoke by branch and country, and GBD's direct death counts by age. Round 2 passed; its low findings (the quitters' share's range, the enforcement row's overlap with the effect sizes' compliance adjustors, write-up wording) were fixed and checked in a scoped verification. Round 5 (2026-11-14), a scoped verification, passed the move to the site's shared tobacco figures: the never-start lag from 30 to 40 years, and deaths counted from all DALYs rather than the death part twice. The result moved from 0.134 to 0.135.
 
 ### Sources
 

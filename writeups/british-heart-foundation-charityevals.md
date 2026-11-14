@@ -114,6 +114,8 @@ Rebuild, independent audit round 2: no high findings, 1 medium, 10 low. The audi
 
 Change of method (2026-11-13), from the audit of our Cancer Research UK model: industry's part of the field is now global pharmaceutical R&D times cardiovascular's share of it (about 7%, a judgment), as for cancer, instead of the share industry pays of all US medical research. BHF's share of the field fell from 1% to 0.5%, and the result by about half.
 
+Shared tobacco figures (2026-11-14), verified in audits/british-heart-foundation-charityevals/audit-r1.md: the policy branch reads the site's shared tobacco figures, with credit as BHF's share of the campaigning groups' share, and second-hand smoke and vaping as side-effect rows in place of part of the unmodelled share. The result moved by under 1%.
+
 ### Sources
 
 - [BHF Annual Report and Accounts 2025-26](https://www.bhf.org.uk/what-we-do/-/media/files/annual_report_and_accounts_2025-26.pdf) (audited accounts, p. 65, 108-109, 125, 136; trustees' report, p. 17-36)

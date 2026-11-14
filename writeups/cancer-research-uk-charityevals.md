@@ -92,6 +92,8 @@ Independent audit round 2: a pass, with no high findings, 1 medium and 2 low. Wh
 
 Verification round 3: a pass. It corrected one figure in the share of the field's explainer and the British Heart Foundation write-up's branch shares; a last verification checked those.
 
+Verification round 5 (2026-11-14): a pass. The policy branch now reads the site's shared tobacco figures, with credit as Cancer Research UK's share of the campaigning groups' share, and second-hand smoke and vaping as side-effect rows in place of part of the unmodelled share. The result moved by under 1%.
+
 ### Sources
 
 - [Cancer Research UK, Annual report and accounts 2025/26](https://downloads.ctfassets.net/u7vsjnoopqo5/5mIQtPIZ43jHIbMTdSfRYe/21a6487f12a000bcab5e7c43daa6908a/Cancer_Research_UK_annual_report_and_accounts_2025-26.pdf) (research spend p. 9; financial review p. 8-13; policy and information p. 26-29, 34-35; reserves p. 51-52; statement of financial activities p. 78; notes 4, 5 and 9, p. 88-90)
