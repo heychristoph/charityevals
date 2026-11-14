@@ -1,0 +1,33 @@
+# Audit: giving-what-we-can-charityevals, round 3
+Result: 0.1086 uov/$ = 54.3 years of healthy life per 1,000 dollars (combined range 10.5–280.5; joint low–high of the model's own ranges 26.3–101.5); cause median 0.06863 (×791). Verdict: pass.
+Model-sha: f34097017b4d94d42569b77c43cfc83286a26a4b24e483dcb34eac221db029f6
+Scope: unchanged from rounds 1 and 2 (all 2023 and 2024 spending, one effective-giving programme). Scoped verification round: only the changes since round 2 (the "every destination at the figure the rankings show" rule, normalization.md 2.8, November 2026; the two new facts; the explainers, summary and write-up that follow from them).
+Mechanical: lint none (audit-model: Findings 0), invariants none (check.ts "all models valid"), simulation-check stable (5% 0.431, 50% 1.00, 95% 2.37 × best guess; warnings only the usual 3,000× range and 60% judgment share); normalization-audit not re-run (0 violations on this tree, as stated).
+Previous round: r2 had one low finding (the effective-share fact is typed from the model's own defaults, accepted); unchanged, still accepted. r1's findings were resolved in r2.
+
+Process note: while checking, I ran scripts/moved-money.py on the model, which rewrites the shared moved-money section in place (it moved the `moved_money` section and `value_destinations` row; no formula or value changed). I restored the file from the pre-run diff; `audit-receipt.ts` prints the same Model-sha as before (f34097017b...), so the model audited here is the one handed over, byte for byte.
+
+Verification of the changes:
+
+1. New facts against the donation classification sheet (recip.xlsx, column D = total donations; every row of both sheets searched for deworm, evidence, unlimit, schisto, SCI, worm, helminth, bilharz, END Fund).
+   - gwwc_moved_2023_24_deworm_the_world = 463,224.02. Rows: 'Evidence Action (Deworm the World Initiative)' Pledger-Top100 row 57, 222,553.6476; 'Evidence Action (Deworm the World )' NonPledger-General-Top30 row 20, 240,670.37 (both "GWWC Recommended 2023", Global Health & Wellbeing). Sum 463,224.0176. Matches; no other spelling exists.
+   - gwwc_moved_2023_24_unlimit_health = 399,239.44. Row 'Schistosomiasis Control Initiative' Pledger-Top100 row 36, 208,809.5691 + 190,429.8755 = 399,239.4446; absent from the non-pledger top 30. No row named Unlimit Health or SCI Foundation. Matches. (Its "conservative" column is 208,809.57, the 2023 amount only; the facts use column D like every other gwwc_moved_* fact.)
+   - Method is that of the existing gwwc_moved_* facts (same note, source, quote; sum of matching rows of both sheets, column D); both facts say so and name the rows, kind observed, retrieved 2026-11-14.
+2. value_destinations by INV-12 and normalization.md 2.8 "Its own split": isDestinationMix holds (only @meta.* money, #owner:charity refs, value_global_health, avg, 1, arithmetic; no typed value per dollar). Every term in the numerator has its weight in the denominator, and vice versa (ten global-health terms, the same ten in both). Weights sum: named recipients $35.0M of $40.2M global health and wellbeing; the remaining $5.2M of smaller recipients drop out (take the weighted average), as the rule says. Recipients and references, each the primary evaluator's figure (rankingPlan order checked): AMF #givewell:against-malaria-foundation 0.0454; GiveDirectly #givewell:givedirectly 0.00993; Malaria Consortium SMC and unearmarked both #givewell:malaria-consortium 0.0779 (two separate recipient rows of the sheet with separate dollars, so no double counting); Helen Keller Intl 0.0820; New Incentives 0.0514; Deworm the World #givewell:evidence-action 0.0433 (Evidence Action's whole figure, GiveWell its only evaluator before SoGive); Unlimit Health #sogive:unlimit-health 0.0165 (SoGive only); StrongMinds #hli:strongminds 0.00433 (HLI before SoGive); The Humane League #ace:the-humane-league 1.57e-5 (ACE before charityevals; was 9.1e-7); catastrophic risk avg of #charityevals:<four> (their only evaluator). value_global_health = four #givewell:<charity> refs at the shared GiveWell weights = 0.0615. Cash benchmark for shifted money and below-bar giving stays #givedirectly (0.00792). value_destinations 0.03249; moved_dollar_net_value 0.02853 (new share 0.5). No unresolved reference (lib.errors empty for this model).
+3. Result and text: 54.30 in audit-model, simulation-check and the summary ("about 54"); write-up headline span reads the model and its static text says 54; write-up and explainers say "at its figure on the rankings", name Deworm the World and Unlimit Health as read directly, and The Humane League at ACE's figure; no stale 37/38 or "live result" for destinations remains in the write-up (the shared moved_money section's explainers are the template's). The INV-15 sentence "It is more than ten times its peers because it moves about nine dollars, most of it to top global-health charities, for each dollar it spends: it sits above the charities it funds, not among typical global-health programmes" is present and true (peers: GiveWell charityevals 36.0, AMF 24.2, Malaria Consortium SMC 24.3; this model 54.3, cause median 0.0686). normalization.md 2.8 table (37.3 → 54.3) agrees. The move from 37.3 to 54.3 is explained by value_global_health 0.0409 → 0.0615 (Helen Keller and New Incentives at their ranked figures) and the two recipients leaving the average.
+
+No findings.
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+
+## Sources checked
+| Row | URL | Status | Note |
+|---|---|---|---|
+| @meta.gwwc_moved_2023_24_deworm_the_world | https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit (downloaded copy recip.xlsx) | verified | two rows, 222,553.65 + 240,670.37 = 463,224.02; no other spelling |
+| @meta.gwwc_moved_2023_24_unlimit_health | same | verified | 'Schistosomiasis Control Initiative' 399,239.44 (Pledger-Top100); none in the non-pledger sheet |
+
+## Drivers
+Unchanged from round 2: resource shares (judgment, the credit toggle), the next-dollar figure (estimate, 0.20–0.85), the discount rate (judgment), the value of a child death in DALYs (judgment), the effective share (estimate). The destination values are now the rankings' figures, the site's, so the builder's only choices left in the mix are the weights (sourced from the sheet) and the below-bar multiple (the shared prior_vs_cash). Most useful future improvement: a sourced split of the $5.2M of smaller global-health recipients and of the climate and movement-building giving, which still take the average.
+
+Verdict: pass

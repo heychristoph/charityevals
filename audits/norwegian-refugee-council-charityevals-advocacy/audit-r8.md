@@ -14,6 +14,8 @@ Checks:
 | (none) | | | | | | | |
 
 Verdict: pass
-Model-sha: 498e334c39818b8aab68d36cf3374c58a14c55284eadbf72d8c9d31ac85a7a70
+Model-sha: bb3be306a63ccc78e88e85fddba83cbd957786cf7734712bac801c3b01bf4a7c
 
 Re-stamped after merge: this round's model combined with round 6's verified change on main (the unused career rows read the shared defaults in facts/meta.json; careers_changed is 0, result unchanged at 0.0164).
+
+Re-stamped (shared rule change, applied mechanically): the shared moved-money rows read each destination at its charity's figure on the rankings (#givewell:<charity>, src/engine/moved-money.ts); no money moved reaches this model's result, which is unchanged.

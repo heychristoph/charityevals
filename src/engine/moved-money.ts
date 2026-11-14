@@ -14,10 +14,22 @@
 // A result an evaluator already states as counterfactual value in "dollars of current effective
 // donations" (CEARCH) is multiplied by V; money moved (gross) by `moved_dollar_net_value`.
 //
-// GiveDirectly: every meta model reads GiveDirectly's live result (#givedirectly, GiveWell's model,
-// 0.00872 units of value per dollar at the defaults) wherever money would have gone or goes to cash.
-// `@cash.uov_per_dollar` (0.00335) is a different thing: the benchmark old sheets divided by to state
-// "multiples of cash", which cancels where it is used (docs/normalization.md 2.7). No meta model reads it.
+// Every destination is read at the figure the site ranks its charity by: the charity's primary
+// evaluator's programme- and location-weighted figure, `#owner:charity` (src/engine/ranking.ts
+// evaluatorFigure), never one of its models alone (a median location sheet can be a fifth of it). A
+// model read by its id (`#id`) only where its charity has no figure on the rankings.
+//
+// GiveDirectly, two reads: money that goes to GiveDirectly is a destination like any other, at the
+// figure the rankings show (#givewell:givedirectly, GiveWell's five-country aggregate, 0.00993 units of
+// value per dollar at the defaults); where shifted money would otherwise have gone is the site's cash
+// benchmark (#givedirectly, GiveWell's Kenya model, `common.benchmark`, 0.00792), times a judged multiple
+// (docs/normalization.md 2.3 and 2.7). `@cash.uov_per_dollar` (0.00335) is a third thing: the benchmark
+// old sheets divided by to state "multiples of cash", which cancels where it is used. No meta model reads it.
+
+/** GiveDirectly as a destination: GiveWell's figure for the charity, as on the rankings. */
+export const GIVEDIRECTLY = "givewell:givedirectly";
+/** The site's cash benchmark (`common.benchmark`), where shifted money would otherwise have gone. */
+export const CASH_BENCHMARK = "givedirectly";
 
 export const MOVED_MONEY_SECTION = {
   id: "moved_money",
@@ -27,36 +39,39 @@ export const MOVED_MONEY_SECTION = {
     "charityevals' shared method for money a meta charity moves, the same rows in every such model (docs/normalization.md 2.8). A dollar moved is worth what the charities it reaches achieve, each at its live result on this site under your values; new money counts in full, shifted money only for the gain over where it would have gone.",
 };
 
-/** GiveWell's four Top Charities, read live, weighted by GiveWell's 2024 funding. */
-export const GLOBAL_HEALTH_DESTINATIONS = ["against-malaria-foundation", "malaria-consortium-smc", "helen-keller-vas", "new-incentives"];
+/** GiveWell's four Top Charities, each at GiveWell's figure for the charity, weighted by GiveWell's 2024 funding. */
+export const GLOBAL_HEALTH_DESTINATIONS = ["givewell:against-malaria-foundation", "givewell:malaria-consortium", "givewell:helen-keller-intl", "givewell:new-incentives"];
 /** Livelihoods charities with an evaluator's live model on the site, for an organisation that moves money
- * to livelihoods charities (Better Futures Guide). Equal weights: none of them has a published share yet. */
+ * to livelihoods charities (Better Futures Guide). Equal weights: none of them has a published share yet.
+ * Raising the Village has no figure on the rankings (GiveWell's sheet sizes a research grant), so its model. */
 export const LIVELIHOODS_DESTINATIONS = [
-  "givedirectly", "raising-the-village-2024", "one-acre-fund-seedlings-2022",
+  GIVEDIRECTLY, "raising-the-village-2024", "givewell:one-acre-fund",
 ];
 /** The Life You Can Save's own split of the money it moved in 2025 (facts/meta.json tlycs_moved_2025_*),
- * each charity at its main model on the site (GiveDirectly at #givedirectly, as everywhere in meta
- * models), or, for a charity that runs several programmes, at its programme-weighted figure from the
- * rankings (`#owner:charity`: Evidence Action and Malaria Consortium, GiveWell's). Its other charities
- * have no model here and drop out: they're valued at the average of these. */
+ * each charity at the figure the rankings show for it (`#owner:charity`). A charity whose only model is
+ * an unpublished evaluator's (Founders Pledge, Giving Green), or that has no figure on the rankings
+ * (Raising the Village), at that model. Its other charities have no model here and drop out: they're
+ * valued at the average of these. */
 export const TLYCS_DESTINATIONS: [string, string][] = [
-  ["against_malaria_foundation", "against-malaria-foundation"],
-  ["development_media_international", "development-media-international-dmi"],
+  ["against_malaria_foundation", "givewell:against-malaria-foundation"],
+  ["clean_air_task_force", "charityevals:clean-air-task-force"],
+  ["development_media_international", "givewell:development-media-international"],
   ["evidence_action", "givewell:evidence-action"],
-  ["givedirectly", "givedirectly"],
-  ["helen_keller_intl", "helen-keller-vas"],
-  ["innovations_for_poverty_action", "innovations-for-poverty-action-ipa-m-e-msi-family-planning-outreach"],
-  ["lafiya", "lafiya-nigeria-2026"],
+  ["givedirectly", GIVEDIRECTLY],
+  ["helen_keller_intl", "givewell:helen-keller-intl"],
+  ["innovations_for_poverty_action", "givewell:innovations-for-poverty-action"],
+  ["lafiya", "givewell:lafiya-nigeria"],
   ["malaria_consortium", "givewell:malaria-consortium"],
-  ["new_incentives", "new-incentives"],
-  ["one_acre_fund", "one-acre-fund-seedlings-2022"],
+  ["new_incentives", "givewell:new-incentives"],
+  ["one_acre_fund", "givewell:one-acre-fund"],
   ["raising_the_village", "raising-the-village-2024"],
-  ["unlimit_health", "unlimit-health-deworming-sogive-2022"],
+  ["unlimit_health", "sogive:unlimit-health"],
 ];
 
 export type TemplateRow = { id: string; label: string; format: "small" | "percent"; formula: string; explainer: string };
 
-const gh = `@meta.gw_weight_amf * #against-malaria-foundation + @meta.gw_weight_smc * #malaria-consortium-smc + @meta.gw_weight_vas * #helen-keller-vas + @meta.gw_weight_ni * #new-incentives`;
+const [amf, mc, hk, ni] = GLOBAL_HEALTH_DESTINATIONS;
+const gh = `@meta.gw_weight_amf * #${amf} + @meta.gw_weight_smc * #${mc} + @meta.gw_weight_vas * #${hk} + @meta.gw_weight_ni * #${ni}`;
 const lw = `avg(${LIVELIHOODS_DESTINATIONS.map((id) => `#${id}`).join(", ")})`;
 const tl = `(${TLYCS_DESTINATIONS.map(([k, id]) => `@meta.tlycs_moved_2025_${k} * #${id}`).join(" + ")}) / (${TLYCS_DESTINATIONS.map(([k]) => `@meta.tlycs_moved_2025_${k}`).join(" + ")})`;
 
@@ -64,20 +79,20 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
   value_global_health: {
     id: "value_global_health", format: "small", formula: gh,
     label: "Value of a dollar to global health and poverty charities (GiveWell's Top Charities, live), units of value",
-    explainer: "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium's seasonal malaria chemoprevention, Helen Keller Intl's vitamin A, New Incentives), each at its result on this site under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%).",
+    explainer: "GiveWell's four Top Charities (Against Malaria Foundation, Malaria Consortium, Helen Keller Intl, New Incentives), each at GiveWell's figure for the charity on the rankings (its programmes and locations weighted by funding) under your values, weighted by what GiveWell directed to each in 2024 (50%, 29%, 18%, 4%).",
   },
   value_livelihoods: {
     id: "value_livelihoods", format: "small", formula: lw,
     label: "Value of a dollar to livelihoods charities (live), units of value",
-    explainer: "The livelihoods charities with an evaluator's model on this site, each at its live result under your values, with equal weights: GiveDirectly, Raising the Village and One Acre Fund (all GiveWell's).",
+    explainer: "The livelihoods charities with an evaluator's model on this site, each at its figure on the rankings under your values, with equal weights: GiveDirectly, Raising the Village (not on the rankings: its model) and One Acre Fund (all GiveWell's).",
   },
   value_tlycs_recommended: {
     id: "value_tlycs_recommended", format: "small", formula: tl,
     label: "Value of a dollar to The Life You Can Save's recommended charities (its 2025 split, live), units of value",
-    explainer: "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its main model's live result on this site (GiveDirectly at GiveWell's model, as everywhere in meta models); Evidence Action and Malaria Consortium, which run several programmes, at GiveWell's programme-weighted figure for the charity, as on the rankings (Evidence Action: syphilis screening, iron and folic acid, deworming, in-line chlorination and Dispensers for Safe Water; Malaria Consortium: seasonal malaria chemoprevention over its locations, bed nets and vitamin A). The 19 charities with a model here took $13.4 million of the $24.1 million; the rest (15 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix.",
+    explainer: "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its figure on the rankings under your values (its programmes and locations weighted by funding; Evidence Action, for one: syphilis screening, iron and folic acid, deworming, in-line chlorination and Dispensers for Safe Water); a charity whose only model is an unpublished evaluator's, or with no figure on the rankings (Raising the Village), at that model. The 19 charities with a model here took $13.4 million of the $24.1 million; the rest (15 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix.",
   },
   prior_dollar_value: {
-    id: "prior_dollar_value", format: "small", formula: "@meta.prior_vs_cash * #givedirectly",
+    id: "prior_dollar_value", format: "small", formula: `@meta.prior_vs_cash * #${CASH_BENCHMARK}`,
     label: "Value of a dollar where shifted money would otherwise have gone (our judgment: 1× GiveDirectly), units of value",
     explainer: "Our judgment. Shifted money was going to be given anyway; it is credited only for the gain. Where it would have gone is valued at GiveDirectly's live result (GiveWell's model), as Ambitious Impact does, times a shared multiple (1×, from 0 to 3×).",
   },
