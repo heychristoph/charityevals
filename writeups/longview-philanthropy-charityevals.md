@@ -1,6 +1,6 @@
 ### Summary
 
-Longview Philanthropy advises major donors who want to reduce catastrophic risks from advanced AI, nuclear weapons and biological threats. It recommends grants, runs regranting funds and holds convenings. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="longview-philanthropy-charityevals">1.3</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to a little over a dollar of giving it caused through its funds, and a little over a dollar of advised giving it redirected. That giving is valued at what the site's charities in its three areas achieve. The nuclear part carries most of the value, because the site's nuclear charities rank far above its AI charities.
+Longview Philanthropy advises major donors who want to reduce catastrophic risks from advanced AI, nuclear weapons and biological threats. It recommends grants, runs regranting funds and holds convenings. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="longview-philanthropy-charityevals">1.2</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to a little over a dollar of giving it caused through its funds, and a little over a dollar of advised giving it redirected. That giving is valued at what the site's charities in its three areas achieve. The nuclear part carries most of the value, because the site's nuclear charities rank far above its AI charities.
 
 ### What the charity does
 
@@ -32,7 +32,7 @@ A 5% side effect is added, with a range of −5% to +20% (our judgment). On the 
 ### What drives the result
 
 - **Where shifted money would otherwise have gone** (an ordinary charity of the same areas, from nothing to three times that). At the high end, shifted money counts as a loss.
-- **The share that went to nuclear work** (12%, from 6% to 20%). The site's nuclear charities rank about thirty times above its AI charities, so nuclear grants carry most of the value.
+- **The share that went to nuclear work** (12%, from 6% to 19%). The site's nuclear charities rank about thirty times above its AI charities, so nuclear grants carry most of the value.
 - **The discount rate**, through its destinations' long-run benefits.
 - **The next dollar** (36%, from 15% to 75%). Longview holds over a year and a half of operating costs in unrestricted reserves. Its 2025 average comes from the year its private AI fund made its grants rise fivefold.
 - **How much unmeasured results and won reforms count**, through the charities it funds.
@@ -50,7 +50,13 @@ A 5% side effect is added, with a range of −5% to +20% (our judgment). On the 
 
 ### How this model was checked
 
-To be completed after the audit rounds.
+Two audit rounds (audits/longview-philanthropy-charityevals/). Round 1 passed with no high finding and checked every cost and reach figure against the US Form 990, the scanned UK accounts and Longview's post. Its fixes:
+
+- Built the area split as a dollar-weighted blend of its itemised US grants and a judged split of the rest, with a lower nuclear share (15% to 12%) and biosecurity share (10% to 3%), and the 2025 nuclear team (two grantmakers) in place of the 2026 one.
+- Valued advised money at the site's shared share for a meta charity, all redirected and none new, and moved Effektiv Spenden's advised gifts onto the same rule, so advice is valued one way on the site.
+- Took digital sentience grants and Rethink Priorities' grant out of the AI share; narrowed the side effects to Longview's own; added the UK company's unrestricted income as evidence on the US grant to Europe; corrected formats and wording.
+
+Round 2, a verification round, checked those changes and passed; its wording points were fixed after it.
 
 ### Sources
 

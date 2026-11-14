@@ -40,7 +40,7 @@ Under the site's default values, a dollar to climate, animal welfare or democrac
 
 ### How the model works
 
-Money moved = donations received for charities × the share it caused, plus advised gifts × the shared 30% its advice is taken to have redirected. People who ask for advice were giving anyway, so the advised gifts count only for the gain over where they would have gone, after the site's evidence and missing-data steps (the rule for advice that changes where money goes). That comes to about $11 million against $1.34 million of costs. Platform donations wait about a third of a year before reaching the charities, because its funds grant twice a year (our judgment, 0.1 to 0.6 years). That wait is discounted at the site's rate. Each dollar moved is valued at its recipients' figures, net of where shifted money would have gone. A 5% side effect is added (our judgment) for giving its recommendations inspire outside the platform and advice. The result is multiplied by how much the next dollar does compared with the past average: 32%. Its German company holds about two years of costs in reserve after two surpluses, and Open Philanthropy covers half its costs, so a further gift does less than the average dollar so far. Money moved is counted, not estimated, so no branch is discounted for missing data.
+Money moved = donations received for charities × the share it caused, plus advised gifts × the shared 30% its advice is taken to have redirected. People who ask for advice were giving anyway, so the advised gifts count only for the gain over where they would have gone, after the site's evidence and missing-data steps (the rule for advice that changes where money goes). That comes to about $11 million against $1.34 million of costs. Platform donations wait about a third of a year before reaching the charities, because its funds grant twice a year (our judgment, 0.1 to 0.6 years). That wait is discounted at the site's rate. Each dollar moved is valued at its recipients' figures, net of where shifted money would have gone. A 5% side effect is added (our judgment) for giving its recommendations inspire outside the platform and advice. The result is multiplied by how much the next dollar does compared with the past average: 32%. Its German company holds about two years of costs in reserve after two surpluses, and Open Philanthropy covers half its costs, so a further gift does less than the average dollar so far. Platform money is counted, not estimated, so it takes no missing-data discount; the advised gifts, whose redirection is judged, do.
 
 ### What drives the result
 
@@ -74,13 +74,13 @@ Its own figures are a ratio of donations to costs of about 21 for 2024 (23 with 
 
 ### How this model was checked
 
-Four audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-severity problem and checked every cost, reach and fact figure against its source. Its fixes:
+Five audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-severity problem and checked every cost, reach and fact figure against its source. Its fixes:
 
 - Blended the Swiss association's 2025 grants by recipient into each cause. This brought in METR, Sinergia Animal and Wild Animal Initiative, which the organisation-wide 2024 split leaves out.
 - Lowered the wait for the funds' grants below the year-end balances, which December's giving inflates.
 - Corrected the write-up.
 
-Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes. Round 4 checked the move of two equal-weight lists to the site's live cause averages, and passed.
+Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes. Round 4 checked the move of two equal-weight lists to the site's live cause averages, and passed. Round 5 checked the advised gifts' move to the site's rule for advice (redirected money, counted only for the gain, with the evidence and missing-data steps), made when Longview Philanthropy's model was built, and passed.
 
 ### Sources
 
