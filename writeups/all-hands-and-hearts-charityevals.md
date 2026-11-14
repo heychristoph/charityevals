@@ -36,11 +36,15 @@ The missing-data and income-to-health sliders move the US result most. Next come
 
 ### What isn't modelled
 
-The US model leaves out several benefits. Prompt muck-outs avert some mould-related illness. In Los Angeles, partner grants paid for cash vouchers, day-workers clearing burn zones and children's mental-health support. The first days of the Texas floods brought food, water and temporary housing. Small businesses were repaired and site supervisors trained. It also leaves out two harms: injuries to volunteers and work taken from local contractors. These are in one share of +15%, from −5% to +40%. Abroad, it leaves out pupils' learning and later earnings, lives saved in future earthquakes by resilient schools, the women trained as masons in Nepal and the diarrhoea the water work averts (+20%, from −5% to +50%).
+The US model leaves out several benefits. Prompt muck-outs avert some mould-related illness. In Los Angeles, partner grants paid for cash vouchers, day-workers clearing burn zones and children's mental-health support. The first days of the Texas floods brought food, water and temporary housing. Small businesses were repaired and site supervisors trained. It also leaves out two harms: injuries to volunteers and work taken from local contractors. These are in one share of +13%, from −5% to +40%. Abroad, it leaves out pupils' learning and later earnings, lives saved in future earthquakes by resilient schools, the women trained as masons in Nepal and the diarrhoea the water work averts (+20%, from −5% to +50%).
 
 ### How this model was checked
 
 Independent audits, kept in audits/all-hands-and-hearts-charityevals/ and audits/all-hands-and-hearts-charityevals-international/.
+
+- **Round 1.** The US model passed with three medium points. The contractor prices now rest on published cost guides. The value of help in kind no longer repeats the counterfactual's question. The volunteers' hours are now anchored on Team Rubicon's and on the hours the year's jobs take. The model abroad had one high point: Myanmar's household consumption now reads the site's shared survey-to-accounts ratio. The schools' share of the credit was also lowered, since paid local masons build them.
+- **Round 2** passed both models. Its small points were fixed: a cost guide's exact figures, the unmodelled share's sum and a note on the Myanmar count's period.
+- **A verification round** checked those last changes.
 
 ### Sources
 
