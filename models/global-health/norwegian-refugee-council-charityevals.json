@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "norwegian-refugee-council",
   "owner": "charityevals",
-  "summary": "The Norwegian Refugee Council (NRC) spent NOK 8.7 billion ($837 million) in 2025 helping people displaced by conflict and disaster in 39 countries, mostly with government and UN grants: cash and vouchers (two fifths in Ukraine, a quarter in Sudan), food security, shelter, education, water and sanitation, legal assistance and protection for 10.6 million people, plus 613 NORCAP expert secondments to UN agencies and governments. NRC counts the people each programme reached and the cash it hands out, but publishes no controlled evaluation of its own, so the cash transfers count in full and every other part, built from spending, reach and the research on its kind of work, is counted at half by the shared missing-data slider. It comes to about 0.20 years of healthy life per $1,000 (combined range 0.05-0.81), about the same as charityevals' Save the Children and ShelterBox models: cash carries about 35%, education's later earnings about 30%, food security about 15%, shelter, water and sanitation, legal assistance, NORCAP and protection the rest. NRC is phasing out food security by 2027, so a dollar given now buys a little more cash and less food security than in 2025; the biggest uncertainties are how much emergency education raises later earnings and how much of a crisis's excess deaths basic-needs aid averts.",
+  "summary": "The Norwegian Refugee Council (NRC) spent NOK 8.7 billion ($837 million) in 2025 helping people displaced by conflict and disaster in 39 countries, mostly with government and UN grants: cash and vouchers (two fifths in Ukraine, a quarter in Sudan), food security, shelter, education, water and sanitation, legal assistance and protection for 10.6 million people, plus 613 NORCAP expert secondments to UN agencies and governments. NRC counts the people each programme reached and the cash it hands out, but publishes no controlled evaluation of its own, so the cash transfers count in full and every other part, built from spending, reach and the research on its kind of work, is counted at half by the shared missing-data slider. It comes to about 0.20 years of healthy life per $1,000 (combined range 0.05-0.80), about the same as charityevals' Save the Children and ShelterBox models: cash carries about 35%, education's later earnings about 30%, food security about 15%, shelter, water and sanitation, legal assistance, NORCAP and protection the rest. NRC is phasing out food security by 2027, so a dollar given now buys a little more cash and less food security than in 2025; the biggest uncertainties are how much emergency education raises later earnings and how much of a crisis's excess deaths basic-needs aid averts.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Norwegian Refugee Council, programmes (2025)",
@@ -548,13 +548,8 @@
       "section": "effect",
       "label": "Of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 20% (10-40%), the rest of the age split, as in charityevals' other relief models."
+      "explainer": "The relief models' shared figure (@death_ages.crisis_share_5_14_of_over5, 20%, 10-40%): most deaths over five in crises are of adults.",
+      "formula": "@death_ages.crisis_share_5_14_of_over5"
     },
     {
       "id": "share_15_49_of_over15",
@@ -655,8 +650,8 @@
       "section": "effect",
       "label": "Food security: ln(consumption) gain per person",
       "format": "number",
-      "formula": "ln(1 + value_delivered_per_person * cpi_2017_vs_2025 * ppp_factor / baseline_consumption)",
-      "explainer": "A year's food, cash and inputs on the site's one log-income scale; the line works almost only in low-income crises (Sudan, Ethiopia, Somalia, South Sudan)."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * cpi_2017_vs_2025 * ppp_factor / (baseline_consumption * years_exposed))",
+      "explainer": "The template's form: goods used up over the months they cover (years_exposed) raise consumption only in those months, so the gain is t × ln(1 + v ÷ (b × t))."
     },
     {
       "id": "lfs_market_spillover_share",
@@ -735,8 +730,8 @@
       "section": "effect",
       "label": "Cash: ln(consumption) gain per person",
       "format": "number",
-      "formula": "csh_ukr_share * ln(1 + csh_transfer_per_person * cpi_2024_vs_2025 / ukr_consumption) + (1 - csh_ukr_share) * ln(1 + csh_transfer_per_person * cpi_2017_vs_2025 * ppp_factor / baseline_consumption)",
-      "explainer": "Each group's log gain at its own consumption, weighted by its share of the money, taken as its share of the people. Ukraine's transfers per person are larger than elsewhere, so it has fewer of the people than of the money; at three times the amount per person the branch would be about 3% higher, so the approximation is kept."
+      "formula": "years_exposed * (csh_ukr_share * ln(1 + csh_transfer_per_person * cpi_2024_vs_2025 / (ukr_consumption * years_exposed)) + (1 - csh_ukr_share) * ln(1 + csh_transfer_per_person * cpi_2017_vs_2025 * ppp_factor / (baseline_consumption * years_exposed)))",
+      "explainer": "Each group's log gain at its own consumption over the months the transfers cover (years_exposed, the template's t × ln(1 + v ÷ (b × t))), weighted by its share of the money, taken as its share of the people. Ukraine's transfers per person are larger than elsewhere, so it has fewer of the people than of the money; at three times the amount per person the branch would be about 3% higher, so the approximation is kept."
     },
     {
       "id": "csh_deaths_per_person",
