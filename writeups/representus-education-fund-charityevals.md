@@ -41,7 +41,7 @@ The years a won reform counts move the result most, then the missing-data discou
 ### What isn't modelled
 
 - Represent.Us's own spending ($0.3 million in 2024 beyond the $0.5 million grant it received from the Fund), because gifts to it aren't tax-deductible.
-- Los Angeles's 2024 city commission, as a win of its own. The shared redistricting figures count state commissions and the money behind state campaigns, for every model alike; Los Angeles's measure was put on the ballot by the city council, not by a petition campaign the movement's money paid for, so the Fund's spending on it is credited at the state movement's rate.
+- Los Angeles's 2024 city commission, as a win of its own. The shared redistricting figures count state commissions and the money behind state campaigns, for every model alike; Los Angeles's measure was a city proposal, and the shared figures count neither city commissions nor the money behind them, so the Fund's spending on it is credited at the state movement's rate.
 
 ### How this model was checked
 
