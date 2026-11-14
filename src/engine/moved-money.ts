@@ -10,9 +10,12 @@
 //            on 2026-11-02: no model used it; an organisation moving money across causes would rebuild it.
 //   V_before value of where shifted money would have gone = @meta.prior_vs_cash × GiveDirectly, live;
 //            for an organisation filed under another cause, an ordinary charity of that cause: the same
-//            multiple of GiveDirectly over #cause:global-health, times #cause:<cause> (priorDollarValue)
+//            multiple of GiveDirectly over #cause:global-health, times #cause:<cause> (priorDollarValue);
+//            for one whose money goes to several causes, each cause's in its own mix (priorDollarValueMix)
 //   net      new share × V + (1 − new share) × (V − V_before), on the path to the output (INV-12);
-//            money all shifted (a grantmaker's) earns V − V_before
+//            money all shifted (a grantmaker's) earns shifted_dollar_value = V − V_before; spending
+//            research or advice changed (a judged share of the money it informed) is all shifted, with
+//            the evidence and missing-data steps: informed_money_value, in place of net
 //
 // A result an evaluator already states as counterfactual value in "dollars of current effective
 // donations" (CEARCH) is multiplied by V; money moved (gross) by `moved_dollar_net_value`.
@@ -110,7 +113,20 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
     label: "Value of a dollar moved, net of where shifted money would have gone, units of value",
     explainer: "New money counts in full; shifted money counts for the gain over where it would have gone.",
   },
+  shifted_dollar_value: {
+    id: "shifted_dollar_value", format: "small", formula: "moved_dollar_value - prior_dollar_value",
+    label: "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+    explainer: "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed.",
+  },
+  informed_money_value: {
+    id: "informed_money_value", format: "small", formula: "money_moved * shifted_dollar_value * evidence_adj * missing_data_adj",
+    label: "Value of the spending its research or advice changed (all shifted money), units of value",
+    explainer: "Spending its research or advice changed, at a judged share of the money it informed: all of it would have been spent anyway, so it counts for the gain over where it would have gone, discounted for weak evidence and for an outcome not measured for this charity (docs/normalization.md 2.8, 2.12).",
+  },
 };
+
+/** Rows written only for research or advice that changes how money is spent (`informed`): all shifted. */
+export const INFORMED_ROWS = ["shifted_dollar_value", "informed_money_value"] as const;
 
 /** `prior_dollar_value` for an organisation filed under a cause other than global health (its model's
  * `cause`: Animal Charity Evaluators, 80,000 Hours): shifted money would have gone to an ordinary charity
@@ -126,6 +142,36 @@ export function priorDollarValue(cause: string): TemplateRow {
     label: "Value of a dollar where shifted money would otherwise have gone (our judgment: an ordinary charity of its cause, as 1× GiveDirectly is in global health), units of value",
     explainer: `Our judgment, the shared rule for an organisation that moves money within a cause other than global health (${cause}). Shifted money was going to be given anyway, to an ordinary charity of the same cause; it is credited only for the gain. An ordinary charity stands to its cause's charities on the rankings as GiveDirectly (GiveWell's model, times a shared multiple, 1×, from 0 to 3×) stands to global health's: GiveDirectly's live result over the global-health charities' (#cause:global-health), times the ${cause} charities' (#cause:${cause}), all live under your values.`,
   };
+}
+
+/** One cause's share of a cross-cause mover's money: the `@meta` fact holding it and the cause (or
+ * area) it goes to, or several whose ranked charities are averaged (`avg(#cause:a, #cause:b)`). */
+export type CauseShare = [fact: string, cause: string | string[]];
+const causeTerm = (c: string | string[]) => (Array.isArray(c) ? `avg(${c.map((x) => `#cause:${x}`).join(", ")})` : `#cause:${c}`);
+
+/** `prior_dollar_value` for an organisation whose money goes to several causes (its own split,
+ * `value_destinations`): an ordinary charity of each cause, weighted by the same shares,
+ * Σ share × priorDollarValue(cause) / Σ share. In global health that cause's term is the shared row's
+ * GiveDirectly (#cause:global-health cancels). */
+export function priorDollarValueMix(shares: CauseShare[]): TemplateRow {
+  const num = shares.map(([k, c]) => `@meta.${k} * ${causeTerm(c)}`).join(" + ");
+  const den = shares.map(([k]) => `@meta.${k}`).join(" + ");
+  return {
+    id: "prior_dollar_value", format: "small",
+    formula: `@meta.prior_vs_cash * #${CASH_BENCHMARK} / #cause:global-health * (${num}) / (${den})`,
+    label: "Value of a dollar where shifted money would otherwise have gone (our judgment: an ordinary charity of each cause its money goes to, in its own mix), units of value",
+    explainer: "Our judgment, the shared rule for an organisation whose money goes to several causes. Shifted money would have gone to an ordinary charity of the same cause: each cause's at the rule for a mover in that cause (GiveDirectly's live result, times a shared multiple, 1×, from 0 to 3×, over the global-health charities' on the rankings, times that cause's charities'), weighted by the organisation's own split, all live under your values.",
+  };
+}
+
+/** The shares of a cause-split prior (`priorDollarValueMix`), or undefined if the formula isn't one. */
+export function causeSplitShares(formula: string | undefined): CauseShare[] | undefined {
+  if (!formula) return undefined;
+  const pairs = [...formula.matchAll(/@meta\.([a-z0-9_]+)\s*\*\s*(#cause:[a-z0-9-]+|avg\((?:\s*#cause:[a-z0-9-]+\s*,?)+\))/g)].map(([, k, t]): CauseShare => {
+    const cs = [...t.matchAll(/#cause:([a-z0-9-]+)/g)].map((x) => x[1]);
+    return [k, t.startsWith("avg") ? cs : cs[0]];
+  });
+  return pairs.length && sameFormula(formula, priorDollarValueMix(pairs).formula) ? pairs : undefined;
 }
 
 /** `moved_dollar_value` for an organisation that only moves money within global health and poverty
