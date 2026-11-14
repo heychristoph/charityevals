@@ -112,6 +112,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "far-ai-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "better-futures-guide-aim": { b: "destinations", note: "Moves money: each livelihoods charity it reads live brings its own countries." },
   "cearch-aim": { b: "destinations", note: "Moves money: each GiveWell top charity it reads live brings its own countries." },
+  "giving-what-we-can-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
 };
 /** Research and standard-setting whose good reaches the whole world. */
 const WORLD: Record<string, string> = {
