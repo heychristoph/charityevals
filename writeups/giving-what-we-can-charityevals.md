@@ -64,7 +64,7 @@ Its own estimate is a giving multiplier of 6x: $6 of value for effective chariti
 
 ### How this model was checked
 
-Audit rounds are listed in audits/giving-what-we-can-charityevals/.
+Two audit rounds (audits/giving-what-we-can-charityevals/). Round 1 found no high-severity problem. Its fixes widened the next-dollar range up to the organisation's own target, weighted the high-impact share by the money each stream moves, and gave the spending figures the ±$200,000 margin the evaluation states. Round 2 checked those changes and passed.
 
 ### Sources
 
