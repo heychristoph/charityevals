@@ -65,7 +65,7 @@ The result is about a third of the median for this cause, well below SecureBio's
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Johns Hopkins Center for Health Security's, Blueprint Biosecurity's and SecureBio's models as worked examples. Round 1 of the independent audit found one high, two medium and three low problems. The size step had been a typed 0.08; it is now worked out from the 100 Days Mission's figures, which lowered it to about 0.07. The next-dollar figure now weighs CEPI's surpluses in 2024 and 2025 and fell from 56% to 49%. Together these took the result from 0.69 to 0.52. Round 2 passed with four low findings: the mpox range, a shorter wait for vaccines already licensed, the other funders' share of the mission, and shorter text. All were fixed, and a verification round checked them. Independent audits are in audits/cepi-charityevals/.
+The model was built from the catastrophic-risk template, with the Johns Hopkins Center for Health Security's, Blueprint Biosecurity's and SecureBio's models as worked examples. Round 1 of the independent audit found one high, two medium and three low problems. The size step had been a typed 0.08; it is now worked out from the 100 Days Mission's figures, which lowered it to about 0.07. The next-dollar figure now weighs CEPI's surpluses in 2024 and 2025 and fell from 56% to 49%. Together these took the result from 0.69 to 0.52. Round 2 passed with four low findings: the mpox range, a shorter wait for vaccines already licensed, the other funders' share of the mission, and shorter text. All were fixed, and two verification rounds checked them. Independent audits are in audits/cepi-charityevals/.
 
 ### Sources
 
