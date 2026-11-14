@@ -1,6 +1,6 @@
 ### Summary
 
-80,000 Hours helps people find careers that work on the world's most pressing problems. Since 2025 it focuses mainly on risks from advanced AI. Our model of its work comes to **<span data-figure="headline" data-model="80000-hours-charityevals">2.0</span> years of healthy life per $1,000**. It credits 80,000 Hours with the careers it changed from 2012 to 2022, each valued by what the person gives up to do the work and what a dollar of work in their new cause achieves on this site. The figure moves most with how much we discount for missing outcome data, with the site's sliders for AI risk and for how long a win counts (through the AI models it reads), with what a career change gives up, and with how much the next dollar does compared with the past average.
+80,000 Hours helps people find careers that work on the world's most pressing problems. Since 2025 it focuses mainly on risks from advanced AI. Our model of its work comes to **<span data-figure="headline" data-model="80000-hours-charityevals">1.1</span> years of healthy life per $1,000**. It credits 80,000 Hours with the careers it changed from 2012 to 2022, each valued by what the person gives up to do the work and what a dollar of work in their new cause achieves on this site. The figure moves most with how much we discount for missing outcome data, with the site's sliders for AI risk and for how long a win counts (through the AI models it reads), with what a career change gives up, and with how much the next dollar does compared with the past average.
 
 ### What the charity does
 
@@ -21,23 +21,23 @@ People change what they work on because of its advice. 80,000 Hours counts a "pl
 
 Each career change is valued by the site's one rule for careers. A person who moves into high-impact work gives up some pay for the years they stay. That is a gift in kind to their new employer, worth what a dollar of the employer's work achieves. Only the share 80,000 Hours caused counts. It publishes no survey of pay given up or years stayed, so the model uses the site's shared defaults: $15,000 a year, for five years, discounted. The share it caused is its own: 40%, because its criterion makes 30% the floor of every counted change, less a discount for people crediting their adviser generously.
 
-The value of a dollar of work depends on the cause. A donation now buys today's careers, and since 2025 those are mostly in AI. 80,000 Hours publishes no split by cause, so the split is our judgment, anchored on its job board: 88% of users since the 2025 change click only or mostly AI roles. AI safety takes 80%, biosecurity and nuclear security 10%, global health 3% and animal welfare 1%. The remaining 6% goes to building effective altruism and research on priorities, and is valued at the weighted average of the four. Each cause is read live at the figures the rankings show:
+The value of a dollar of work depends on the cause. A donation now buys today's careers, and since 2025 those are mostly in AI. 80,000 Hours publishes no split by cause, so the split is our judgment, anchored on its job board. Since the 2025 change, 88% of users click only or mostly AI roles and 4% a balance. AI safety takes 90%, biosecurity and nuclear security 6%, global health 2% and animal welfare 0.5%. The remaining 1.5% goes to building effective altruism and research on priorities, and is valued at the weighted average of the four. Each cause is read live at the figures the rankings show:
 
 - **AI safety**: the site's five AI models (Center for AI Safety, FAR.AI, MIRI, METR, Redwood Research), weighted equally.
-- **Biosecurity and nuclear security**: the Nuclear Threat Initiative, the site's model of both.
+- **Biosecurity and nuclear security**: the Nuclear Threat Initiative and the Johns Hopkins Center for Health Security, weighted equally.
 - **Global health**: GiveWell's top charities.
 - **Animal welfare**: The Humane League, at ACE's figure.
 
 ### How the model works
 
-- **Cost.** A year's spending at its average over 2012 to 2022, each year in 2025 prices. Half of 2022's spending is taken out, because the changes it paid for mostly came after the count closed.
+- **Cost.** A year's spending at its average over 2012 to 2022, each year in 2025 prices. Plan changes come about six months after the advice on average, so half of 2022's spending is taken out: the changes it paid for came after the count closed.
 - **Plan changes.** 2,000 over eleven years, so about 182 a year. The range runs from the 604 it tracked to 3,000.
 - **Value of a plan change.** Pay given up × years stayed (discounted) × the share caused × the value of a dollar of work in the causes the people join. Graduate courses delay the work, so the value waits 0.75 years on average, discounted.
 - **Missing data.** The count rests on people's own reports, and no study compares people it advised with people it didn't. The career branch therefore takes the site's discount for missing outcome data.
 - **Backfire.** Some roles it fills at AI companies also speed up more capable systems. This takes 10% (0 to 40%) off the value, beyond the typical backfire already in the AI models.
-- **Side benefits.** These count through the side-effects weight in Your values: 10% (0 to 30%). They cover donations by people it advised to earn and give, giving inspired by its content, and others' work improved by its research.
+- **Side benefits.** These count through the side-effects weight in Your values: 10% (0 to 30%). They cover giving inspired by its content among people who don't change careers, and others' work improved by its research. People it advised to earn and give are plan changes like the rest.
 - **The next dollar.** The result is a past average, and 80,000 Hours now spends five times its 2012–2022 yearly average. The extra money goes to marketing, video and a larger team, while advising calls have stayed flat. It holds about a year of confirmed grants. The next dollar is counted at 36% (15 to 75%) of the average one.
-- **Credit for staff.** Staff are estimated at 55% of its costs over the period. Staff who earn less than they could elsewhere share the credit, as in every model.
+- **Credit for staff.** Staff are estimated at 50% of its costs over the period, from its spending per full-time staff-year. Staff who earn less than they could elsewhere share the credit, as in every model.
 
 ### What drives the result
 
@@ -45,7 +45,7 @@ The value of a dollar of work depends on the cause. A donation now buys today's 
 - **The AI sliders**: how likely an AI catastrophe is, and how many years a win counts, move the AI models and so this one.
 - **Pay given up, years stayed and the share caused**: each moves the result threefold to sixfold across its range.
 - **The next dollar**: 15% to 75% moves it fivefold.
-- **The split by cause**: a career in biosecurity or global health counts far more than one in AI safety, because the site's AI models come out low.
+- **The split by cause**: a career in biosecurity or global health counts far more than one in AI safety, because the site's AI models come out low. Most of the result comes from the tenth of careers outside AI.
 
 ### Biggest uncertainties
 
@@ -60,7 +60,7 @@ The value of a dollar of work depends on the cause. A donation now buys today's 
 
 ### How this model was checked
 
-Audit rounds are recorded in audits/80000-hours-charityevals/. Round 1 found that the careers were valued at the 2012–2022 mix of causes, though a donation buys today's mostly-AI careers. It also asked for 80,000 Hours' own counterfactual criterion, the reporting lag, per-year prices, the backfire in the main chain and the model filed under catastrophic risk. All were fixed.
+Audit rounds are recorded in audits/80000-hours-charityevals/. Round 1 found that the careers were valued at the 2012–2022 mix of causes, though a donation buys today's mostly-AI careers. It also asked for 80,000 Hours' own counterfactual criterion, the reporting lag, per-year prices, the backfire in the main chain and the model filed under catastrophic risk. All were fixed. Round 2 set the split by cause to follow its job-board anchor (90% AI), added the Johns Hopkins Center for Health Security to biosecurity, and tied the reporting lag and staff share to stated anchors.
 
 ### Sources
 
