@@ -59,7 +59,7 @@ Compliance costs to industry and water systems aren't counted, as in the site's 
 
 ### How this model was checked
 
-Independent audits are in audits/earthjustice-charityevals/, audits/earthjustice-charityevals-health/ and audits/earthjustice-charityevals-biodiversity/.
+Independent audits are in audits/earthjustice-charityevals/, audits/earthjustice-charityevals-health/ and audits/earthjustice-charityevals-biodiversity/. Round 1 passed the climate model and asked for fixes to the other two. Health: illness now comes from the site's shared figures, each rule has its own wait, US-like ages value the deaths and infant deaths count as infants (−15%). Biodiversity: the logging spared was re-anchored on the Forest Service's own expectation that overall harvest would change little, and leakage on a timber-market study (÷8). Climate: the methane rule's local smog deaths moved into the conversion, and coal closings wait 3 years (−4%). Round 2 verified the changes; all three pass.
 
 ### Sources
 
