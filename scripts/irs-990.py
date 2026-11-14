@@ -15,7 +15,8 @@ How it works (standard library + curl + the system `unzip`; needs network):
      tax year T is usually filed in T+1, sometimes T or T+2) and keeps rows for the EIN.
      Amended returns: the row with the highest OBJECT_ID wins per tax period.
   2. Batch zip = .../xml/<Y>/<XML_BATCH_ID>.zip. The index's batch id can be off by one letter
-     (e.g. 01A listed, file is 01B), so neighbouring letters are tried.
+     (e.g. 01A listed, file is 01B), so neighbouring letters are tried. Older indexes list no batch:
+     the monthly batches are tried, nearest the month in OBJECT_ID first.
   3. Range-reads the zip's end and central directory over HTTP, finds <OBJECT_ID>_public.xml,
      downloads only that entry's bytes, wraps them as a one-entry zip and extracts with `unzip`
      (handles Deflate64, which Python's zipfile cannot).
@@ -82,7 +83,7 @@ def find_entry(url, name):
         loff = struct.unpack("<I", cd[pos + 42:pos + 46])[0]
         fname = cd[pos + 46:pos + 46 + nl]
         end = pos + 46 + nl + el + cl
-        if fname == target:
+        if fname == target or fname.endswith(b"/" + target):  # older batches keep a folder prefix
             extra = cd[pos + 46 + nl:pos + 46 + nl + el]
             if 0xFFFFFFFF in (csize, loff, usize):  # zip64 extra field
                 k, vals = 0, []
@@ -210,17 +211,27 @@ def main():
     name = f"{row['OBJECT_ID']}_public.xml"
     out = a.out or f"{ein}_{row['TAX_PERIOD']}.xml"
     ok = False
-    for b in neighbours(row["XML_BATCH_ID"]):
+    listed = row.get("XML_BATCH_ID") or ""
+    if listed:
+        batches = neighbours(listed)
+    else:
+        # Older indexes (submission years up to 2023) have no batch id: batches are monthly,
+        # <Y>_TEOS_XML_<MM><L>.zip, and OBJECT_ID starts with the year and month processed.
+        mm = int(row["OBJECT_ID"][4:6]) if row["OBJECT_ID"][:4] == str(row["_Y"]) else 1
+        months = sorted(range(1, 13), key=lambda m: (abs(m - mm), m))
+        batches = [f"{row['_Y']}_TEOS_XML_{m:02d}{L}" for m in months for L in "ABCD"]
+        listed = "none listed"
+    for b in batches:
         url = f"{BASE}/{row['_Y']}/{b}.zip"
         try:
             ok = extract(url, name, out)
         except subprocess.CalledProcessError:
             continue
         if ok:
-            print(f"batch {b} ({row['XML_BATCH_ID']} listed); wrote {out}", file=sys.stderr)
+            print(f"batch {b} ({listed}); wrote {out}", file=sys.stderr)
             break
     if not ok:
-        sys.exit(f"{name} not found in batch {row['XML_BATCH_ID']} or neighbours")
+        sys.exit(f"{name} not found in batch {listed} or its neighbours")
     if a.summary:
         summary(open(out, encoding="utf-8", errors="replace").read(), row)
 
