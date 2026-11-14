@@ -1,6 +1,6 @@
 # Audit: americares-charityevals, round 2 (verification)
 Result: 2.964e-5 uov/$ = 0.0148 years of healthy life per 1,000 dollars (combined range 0.0026-0.0838); cause median 0.338 (x0.044). Verdict: pass (no high or medium finding).
-Model-sha: 8826811577a282908aac20fb0487231db79a7da10474b51a29472c6b7af0ad89
+Model-sha: 44ffe7b9818ff47fd570e06b6c6bfa55170489c9887aa6542d88234d423b121e
 Scope: unchanged from round 1 (FY2025, Access to Medicine and Clinical Services and Community Health = 92,962k cash of the 133,068k programme total; Emergency is the separate model).
 Mechanical: lint 0 high / 0 medium / 4 low (attribution_share diagnostic, unused hs_clinic_share, far-below, spread), invariants none, normalization-audit none (generated/ reverted).
 Previous round:
@@ -25,3 +25,5 @@ Previous round:
 Unchanged from round 1: the training-gain per patient (judgment, Rowe 2018 reference class), the donated-medicine mortality effect and counterfactual share, the donated-goods credit share, the missing-data slider, and the age mixes (now anchored, effect under 15%). Most improving: a measured effect of donated medicine against stock-outs.
 
 Verdict: pass. No high or medium finding; all six round-1 findings resolved.
+
+Re-stamped: mechanical template-rule change (direct-health outcome_total: bridged DALYs inside the side-effect share, as the template now has it); result 0.01482 → 0.01517 healthy years per $1,000.

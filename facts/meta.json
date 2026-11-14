@@ -429,6 +429,246 @@
       "explainer": "The Life You Can Save's own split of the money it moved, used to weight the live results of the charities it moves money to (docs/normalization.md 2.8)."
     },
     {
+      "id": "own_effect_share",
+      "label": "Share of the donations a meta charity's donors make that the charity caused (its own effect), when it has no donor survey of its own",
+      "format": "percent",
+      "value": { "low": 0.15, "best": 0.3, "high": 0.45 },
+      "kind": "estimate",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 Impact Evaluation (Aidan Whitfield, June 2025)",
+        "url": "https://docs.google.com/document/d/1w3Gqd3kovF7nxiyFDJFZgrE9T7gAYGCmpAW92lxy81A/edit",
+        "quote": "Pledge counterfactuality coefficient 33% 26% ... Non-pledge counterfactual coefficient 28% 17%",
+        "note": "Giving What We Can's donor surveys, the only published measurement of a meta charity's counterfactual influence on its donors' giving: best guesses 32.7% (pledgers) and 28.0% (other donors through its platform), conservative 26.0% and 17.0%; its raw 2023 pledger survey before the non-response discount, 40.2% (working sheet, 'Pledge counterfactuality coefficient'). Low: below the conservative non-pledge figure; high: above the raw survey.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Of the donations a meta charity records or channels (through its platform, by its pledgers, by people it advised), the share that happened only because of it: the rest its donors would have given to the same effective charities anyway. A meta model reads its own donor survey where it has one (an observed input with its source), otherwise this figure. A different question from the new-money share: of the donations the charity caused, how much would not have been given at all (new) and how much was redirected from other charities (shifted). 30%, from 15% to 45%."
+    },
+    {
+      "id": "pledge_recording_first_year",
+      "label": "Share of new giving pledgers recording donations in their first pledge year",
+      "format": "percent",
+      "value": { "low": 0.58, "best": 0.594388, "high": 0.61 },
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 Impact Evaluation (Aidan Whitfield, June 2025)",
+        "url": "https://docs.google.com/document/d/1w3Gqd3kovF7nxiyFDJFZgrE9T7gAYGCmpAW92lxy81A/edit",
+        "quote": "y₀ 59.4% 0.0076 7.90e-13 Initial percentage of pledgers recording donations",
+        "note": "Exponential decay to a floor fitted to 10% Pledge cohorts 2017–2023 by years since pledging; range about two standard errors.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Pledge persistence, part 1 of 3: of people who take a lifetime giving pledge, the share giving (recorded) in their first year. With the decay and the floor: share giving in year t = floor + (first year − floor) × (1 − decay)^t. The only published cohort data on how pledges hold up; every pledge model reads it unless the organisation publishes its own."
+    },
+    {
+      "id": "pledge_recording_decay",
+      "label": "Yearly fall in the share of pledgers still giving, above the long-term floor",
+      "format": "percent",
+      "value": { "low": 0.42, "best": 0.479817, "high": 0.54 },
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 Impact Evaluation (Aidan Whitfield, June 2025)",
+        "url": "https://docs.google.com/document/d/1w3Gqd3kovF7nxiyFDJFZgrE9T7gAYGCmpAW92lxy81A/edit",
+        "quote": "r 48.0% 0.0276 1.20e-07 Annual decay rate of the non-floor component",
+        "note": "Range about two standard errors.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Pledge persistence, part 2 of 3: each year the share of pledgers giving above the floor falls by about half."
+    },
+    {
+      "id": "pledge_recording_floor",
+      "label": "Long-term share of pledgers still giving (floor)",
+      "format": "percent",
+      "value": { "low": 0.2, "best": 0.277945, "high": 0.32 },
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 Impact Evaluation (Aidan Whitfield, June 2025)",
+        "url": "https://docs.google.com/document/d/1w3Gqd3kovF7nxiyFDJFZgrE9T7gAYGCmpAW92lxy81A/edit",
+        "quote": "c 27.8% 0.0076 3.55e-10 Long-term floor percentage of pledgers recording donations",
+        "note": "Fitted on up to 10 years of data. Low: our judgment that the share may fall further after year 10 (the report: 'it is entirely possible that the percentage of reporting pledgers will drop again'); high: about two standard errors and a half.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Pledge persistence, part 3 of 3: the share of pledgers who keep giving for good, about 28%. The report finds the decline levels off at 25–30% for older cohorts."
+    },
+    {
+      "id": "gwwc_effective_share_2023_24",
+      "label": "Giving What We Can 2023–2024: share of its donors' giving that went to charities and funds it rates high-impact",
+      "format": "percent",
+      "value": { "low": 0.55, "best": 0.82, "high": 0.9 },
+      "kind": "estimate",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 Impact Evaluation (Aidan Whitfield, June 2025)",
+        "url": "https://docs.google.com/document/d/1w3Gqd3kovF7nxiyFDJFZgrE9T7gAYGCmpAW92lxy81A/edit",
+        "quote": "Pledge effectiveness coefficient 77% 50% ... Non-pledge effectiveness coefficient 99.7% 73%",
+        "note": "Weighted by the money each stream moves in our model of it at the defaults (pledges $26.8M, other platform giving $7.0M, 2023–2024): (26.80 × 0.774 + 7.03 × 0.997) / 33.83 = 0.82; weighted by recorded donations instead it is 0.83. Low: the same with the conservative coefficients (only charities it recommended): (26.80 × 0.502 + 7.03 × 0.733) / 33.83 = 0.55. High: its top-100 pledge recipients' best-guess rate (0.911), rounded down.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Of what Giving What We Can's donors gave, the share to recipients its own review classes as top or standout (its or an impact-focused evaluator's recommendations, effective-giving organisations); the rest went to charities it couldn't place, valued as an ordinary charity in its destination mix."
+    },
+    {
+      "id": "gwwc_high_impact_2023_24_ghw",
+      "label": "Giving What We Can 2023–2024: its donors' high-impact giving to global health and wellbeing (US$, 2024 prices)",
+      "format": "usd",
+      "value": 40245521,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Estimated overall ... Best-guess high-impact donations",
+        "note": "Sheets 'Pledger-Cause-Areas' and 'NonPledger-Cause-Areas', 'Estimated overall', best-guess high-impact donations, pledges plus other donations (top recipients and a random sample of the rest, scaled to all eligible donations). The other causes: climate change ($6.28M) and movement building ($10.87M).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Where Giving What We Can's donors' high-impact money went, by cause: weights the cause averages in its destination mix."
+    },
+    {
+      "id": "gwwc_high_impact_2023_24_animals",
+      "label": "Giving What We Can 2023–2024: its donors' high-impact giving to animal welfare (US$, 2024 prices)",
+      "format": "usd",
+      "value": 9816945,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Estimated overall ... Best-guess high-impact donations",
+        "note": "Sheets 'Pledger-Cause-Areas' and 'NonPledger-Cause-Areas', 'Estimated overall', best-guess high-impact donations, pledges plus other donations (top recipients and a random sample of the rest, scaled to all eligible donations). The other causes: climate change ($6.28M) and movement building ($10.87M).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Where Giving What We Can's donors' high-impact money went, by cause: weights the cause averages in its destination mix."
+    },
+    {
+      "id": "gwwc_high_impact_2023_24_gcr",
+      "label": "Giving What We Can 2023–2024: its donors' high-impact giving to reducing global catastrophic risks (US$, 2024 prices)",
+      "format": "usd",
+      "value": 11516268,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Estimated overall ... Best-guess high-impact donations",
+        "note": "Sheets 'Pledger-Cause-Areas' and 'NonPledger-Cause-Areas', 'Estimated overall', best-guess high-impact donations, pledges plus other donations (top recipients and a random sample of the rest, scaled to all eligible donations). The other causes: climate change ($6.28M) and movement building ($10.87M).",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Where Giving What We Can's donors' high-impact money went, by cause: weights the cause averages in its destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_against_malaria_foundation",
+      "label": "Giving What We Can 2023–2024: its donors' giving to Against Malaria Foundation (US$, 2024 prices)",
+      "format": "usd",
+      "value": 4039369.53,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_global_health_funds",
+      "label": "Giving What We Can 2023–2024: its donors' giving to global health funds that follow GiveWell (GiveWell's Top Charities and All Grants funds and GiveWell itself, EA Funds' Global Health and Development Fund, its own Global Health and Wellbeing Fund, RC Forward's and Effektiv Spenden's poverty funds) (US$, 2024 prices)",
+      "format": "usd",
+      "value": 24617284.17,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_givedirectly",
+      "label": "Giving What We Can 2023–2024: its donors' giving to GiveDirectly (US$, 2024 prices)",
+      "format": "usd",
+      "value": 3110537.54,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_malaria_consortium_smc",
+      "label": "Giving What We Can 2023–2024: its donors' giving to Malaria Consortium's seasonal malaria chemoprevention (US$, 2024 prices)",
+      "format": "usd",
+      "value": 767762.5,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_new_incentives",
+      "label": "Giving What We Can 2023–2024: its donors' giving to New Incentives (US$, 2024 prices)",
+      "format": "usd",
+      "value": 567860.53,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_malaria_consortium",
+      "label": "Giving What We Can 2023–2024: its donors' giving to Malaria Consortium (not earmarked) (US$, 2024 prices)",
+      "format": "usd",
+      "value": 215289.84,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_helen_keller_intl",
+      "label": "Giving What We Can 2023–2024: its donors' giving to Helen Keller Intl's vitamin A supplementation (US$, 2024 prices)",
+      "format": "usd",
+      "value": 628292.15,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
+      "id": "gwwc_moved_2023_24_strongminds",
+      "label": "Giving What We Can 2023–2024: its donors' giving to StrongMinds (US$, 2024 prices)",
+      "format": "usd",
+      "value": 221392.78,
+      "kind": "observed",
+      "source": {
+        "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+        "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+        "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+        "note": "Sum of the matching rows of 'Pledger-Top100' (top 100 recipients of pledgers' recorded donations) and 'NonPledger-General-Top30' (top 30 of other donations through its platform), every spelling of the recipient as donors named it.",
+        "retrieved": "2026-11-14"
+      },
+      "explainer": "Weights this recipient's live result within its cause in Giving What We Can's destination mix."
+    },
+    {
       "id": "career_forgone_pay_default",
       "label": "Pay a career changer gives up per year, the site's default where a model has no career data (US$)",
       "format": "usd",

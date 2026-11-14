@@ -114,8 +114,30 @@ export const TLYCS_SPLIT: TemplateRow = {
   explainer: "Valued by where this organisation's money actually went: its own published split by charity, each at its live result on this site.",
 };
 
+/** `moved_dollar_value` for an organisation that publishes where its money went (by recipient or cause):
+ * the model's own row `value_destinations`, written by hand by the rule of normalization.md 2.8 ("Its own
+ * split") and checked by `isDestinationMix`. */
+export const OWN_SPLIT: TemplateRow = {
+  id: "moved_dollar_value", format: "small", formula: "value_destinations",
+  label: "Value of a dollar moved, units of value",
+  explainer: "Valued by where this organisation's money went: its own published split, each recipient at its live result on this site (value_destinations).",
+};
+
 /** Formulas a meta model's `moved_dollar_value` may have. */
-export const MOVED_DOLLAR_FORMULAS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula];
+export const MOVED_DOLLAR_FORMULAS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula, OWN_SPLIT.formula];
+
+/** A `value_destinations` formula holds only the organisation's money by recipient or cause (`@meta.*`),
+ * live results (`#id`, `#owner:charity`), the shared destination rows, `avg()`, 1 and arithmetic: no
+ * typed value per dollar and no evaluator's multiplier. */
+export function isDestinationMix(formula: string | undefined): boolean {
+  if (!formula || !/#[a-z]/.test(formula)) return false;
+  const rest = formula
+    .replace(/@meta\.[a-z0-9_]+/g, " ")
+    .replace(/#[a-z0-9:-]+/g, " ")
+    .replace(/\b(value_global_health|value_livelihoods|avg)\b/g, " ")
+    .replace(/\b1\b/g, " ");
+  return /^[\s()+\-*/,]*$/.test(rest);
+}
 
 /** The success chance a not-yet-proven meta organisation's row reads in our view. */
 export const SUCCESS_FACT = "meta.success_chance_new_org";
