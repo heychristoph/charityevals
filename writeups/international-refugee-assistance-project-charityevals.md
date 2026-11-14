@@ -1,6 +1,6 @@
 ### Summary
 
-The International Refugee Assistance Project (IRAP) gives refugees free legal help to reach safety, and litigates and campaigns to keep those pathways open. Our model of its legal services in the year to August 2025 comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals">0.06</span> years of healthy life per 1,000 dollars**, below the site's global-health median. Its litigation and policy work, modelled separately, comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals-advocacy">0.27</span>**.
+The International Refugee Assistance Project (IRAP) gives refugees free legal help to reach safety, and litigates and campaigns to keep those pathways open. Our model of its legal services in the year to August 2025 comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals">0.07</span> years of healthy life per 1,000 dollars**, below the site's global-health median. Its litigation and policy work, modelled separately, comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals-advocacy">0.23</span>**.
 
 ### What the charity does
 
@@ -13,17 +13,17 @@ A refugee waiting in Jordan, Lebanon, Kenya or Afghanistan lives on a few dollar
 ### How the model works
 
 - **Cost:** the audited 2025 accounts. Donated legal services and written-off pledges are left out; management and fundraising are spread over the programmes.
-- **Legal services:** of the year's clients, the share whose move to safety comes from that year's work (our judgment: 8%). Each move is valued by the rise in consumption, from what refugees live on while they wait to what resettled refugees consume, over 30 years and discounted. The excess deaths over three years of danger are added.
+- **Legal services:** of the year's clients, the share who reach safety in a year (our judgment: 10%). Each move is valued by the rise in consumption, from what refugees live on while they wait to what resettled refugees consume, over 30 years and discounted. The excess deaths over three years of danger are added.
 - **Litigation and policy:** a past average over fiscal years 2021-2025, with three wins:
-  - the court-ordered plan that speeds Special Immigrant Visas for Afghan and Iraqi allies (about 27,000 visas a year, judged a quarter of a year sooner);
+  - IRAP's defence and revision of the court-ordered plan that speeds Special Immigrant Visas for Afghan and Iraqi allies (about 27,000 visas a year, judged a quarter of a year sooner);
   - a share of the rebuilt US refugee programme (100,034 admissions in 2024 against 11,411 in 2021), counted only for the two years it lasted;
   - the 80 refugees resettled under the 2025 injunctions in Pacito v. Trump.
 - **Adjustments:**
   - evidence;
-  - moves that would have happened anyway;
+  - moves that would have happened anyway (those that would have come later count for the years brought forward);
   - credit shared with volunteers, governments and co-counsel;
   - the wait until arrival;
-  - missing data, as IRAP publishes no count of clients who reached safety;
+  - missing data: IRAP publishes no count of clients who reached safety, and the value of each move, in both models, is our judgment;
   - the next dollar against the past average (46%), for the litigation and policy work.
 
 ### What drives the result
@@ -43,7 +43,7 @@ These are counted only as shares of the modelled value: legal information to abo
 
 ### How this model was checked
 
-Independent audit rounds are in audits/international-refugee-assistance-project-charityevals/.
+Independent audit rounds are in audits/international-refugee-assistance-project-charityevals/ and audits/international-refugee-assistance-project-charityevals-advocacy/. Round 1 of the legal-services model raised the share of clients reaching safety to the yearly flow (10%), credited moves brought forward, weighted Central American families' higher consumption, valued pro bono hours at a lawyer's wage and fixed the legal-information share. Round 1 of the litigation model credited only the period's defence of the SIV plan (the plan itself dates from June 2020), discounted all three branches for missing data and asked whether the extra refugees would have reached safety another way.
 
 ### Sources
 
