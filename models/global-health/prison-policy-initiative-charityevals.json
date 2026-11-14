@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "prison-policy-initiative",
   "owner": "charityevals",
-  "summary": "Prison Policy Initiative is a small US research and advocacy group on mass incarceration (1.9 million dollars spent in the year to June 2025). Its spending over fiscal years 2021-2025 is counted as a past average over the wins of those years: a share of the federal caps on prison and jail phone rates that the Martha Wright-Reed Act of 2022 made possible (still saving families about 225 million dollars a year after the FCC raised the caps in 2025), a smaller share of five states' free-call laws and other fee wins, a very small share of the people kept out of prison by the reforms its data fed, and half the credit for ending prison gerrymandering in several states, each valued on the site's shared scales; every branch is discounted for missing data. The result is about 0.03 years of healthy life per 1,000 dollars, below the median of the site's global-health models: money saved by poor American families is worth little on a scale set by the world's poorest, and PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the average. The biggest uncertainties are PPI's share of the phone-rate campaign and how long the caps hold.",
+  "summary": "Prison Policy Initiative is a small US research and advocacy group on mass incarceration (1.9 million dollars spent in the year to June 2025). Its spending over fiscal years 2021-2025 is counted as a past average over the wins of those years: a share of the federal caps on prison and jail phone rates that the Martha Wright-Reed Act of 2022 made possible (still saving families about 250 million dollars a year after the FCC raised the caps in 2025), a smaller share of five states' free-call laws and other fee and visiting wins, a very small share of the people kept out of prison by the reforms its data fed, and half the credit for ending prison gerrymandering in several states, each valued on the site's shared scales; every branch is discounted for missing data. The result is about 0.03 years of healthy life per 1,000 dollars, below the median of the site's global-health models: money saved by poor American families is worth little on a scale set by the world's poorest, and PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the average. The biggest uncertainties are PPI's share of the phone-rate campaign and how long the caps hold.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Prison Policy Initiative",
@@ -258,48 +258,48 @@
       "explainer": "People in prison and their families are mostly poor: the shared US survey consumption per person times the poorest fifth's spending share, which is per household, turned into per person with the shared household sizes (the poorest fifth's households are smaller), as the site's other US models do."
     },
     {
-      "id": "fed_payer_multiple",
+      "id": "fed_owner_multiple",
       "section": "effect",
-      "label": "Federal caps: payers' consumption as a multiple of the national average",
+      "label": "Federal caps: phone-company owners' consumption as a multiple of the national average",
       "format": "multiple",
       "value": {
         "low": 1,
-        "best": 1.5,
-        "high": 3
+        "best": 2,
+        "high": 4
       },
       "kind": "judgment",
-      "explainer": "Lower federal caps are paid for by the phone companies (mostly owned by private-equity funds, whose owners are well off) and by the prisons and jails that lose commissions (county and state budgets, paid by taxpayers at about the average). A multiple of 1 is the average American by the national accounts: 1.5, from 1 to 3."
+      "explainer": "The part of the savings that comes out of the phone companies' margins falls on their owners, mostly private-equity funds and their investors, who are well off: 2 times the national-accounts average, from 1 to 4."
     },
     {
-      "id": "st_payer_multiple",
+      "id": "fed_commission_share",
       "section": "effect",
-      "label": "State laws: taxpayers' consumption as a multiple of the national average",
-      "format": "multiple",
+      "label": "Federal caps: share of the savings that comes out of commissions to prisons and jails",
+      "format": "percent",
       "value": {
-        "low": 1,
-        "best": 1.1,
-        "high": 1.4
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Free calls are paid from state budgets. State taxes are less progressive than federal ones (the site's federal figure is 1.4, @public_funds.us_federal_payer_multiple): 1.1, from 1 to 1.4."
+      "explainer": "Before the caps, providers paid prisons and jails commissions out of call revenue, which the 2024 order banned from the rates; that part of the families' savings is lost by county and state budgets, the rest by the providers. Commissions often ran at half or more of jail call revenue; our judgment 40% of the savings, from 20% to 60%."
     },
     {
       "id": "fed_uov_per_dollar",
       "section": "effect",
       "label": "Federal caps: value of a dollar families save, net of what the payers lose (units of value)",
       "format": "small",
-      "formula": "$uov_per_ln_consumption * (1 / family_consumption - 1 / (fed_payer_multiple * @united_states.consumption_per_person_2024))",
+      "formula": "$uov_per_ln_consumption * (1 / family_consumption - fed_commission_share * @public_funds.mcpf / (@public_funds.us_state_local_payer_multiple * @united_states.consumption_per_person_2024) - (1 - fed_commission_share) / (fed_owner_multiple * @united_states.consumption_per_person_2024))",
       "unit": "UoV / $",
-      "explainer": "On the site's log scale a small change in consumption is worth the dollars over consumption per person (spread over a household, household size cancels): the families' gain less the payers' loss, the payers at the national-accounts mean (the site's rule for everyone's consumption) times their multiple."
+      "explainer": "On the site's log scale a small change in consumption is worth the dollars over consumption per person (spread over a household, household size cancels): the families' gain less the payers' loss, the payers at the national-accounts mean (the site's rule for everyone's consumption): lost commissions as state and local money (the shared payer multiple and cost of public funds), the providers' share at their owners' multiple."
     },
     {
       "id": "st_uov_per_dollar",
       "section": "effect",
       "label": "State laws: value of a dollar families save, net of the taxpayers' cost (units of value)",
       "format": "small",
-      "formula": "$uov_per_ln_consumption * (1 / family_consumption - @public_funds.mcpf / (st_payer_multiple * @united_states.consumption_per_person_2024))",
+      "formula": "$uov_per_ln_consumption * (1 / family_consumption - @public_funds.mcpf / (@public_funds.us_state_local_payer_multiple * @united_states.consumption_per_person_2024))",
       "unit": "UoV / $",
-      "explainer": "As above, with the taxpayers' dollar raised at the shared marginal cost of public funds (@public_funds.mcpf)."
+      "explainer": "As above, with the state taxpayers' dollar raised at the shared cost of public funds and the shared state and local payer multiple."
     },
     {
       "id": "fed_savings_2024_order",
@@ -327,8 +327,8 @@
       "label": "Share of the 2024 caps' savings lost when the FCC raised the caps in October 2025",
       "format": "percent",
       "value": {
-        "low": 0.43,
-        "best": 0.5,
+        "low": 0.4,
+        "best": 0.43,
         "high": 0.6
       },
       "kind": "estimate",
@@ -339,15 +339,41 @@
         "page": "press release",
         "quote": "will deliver substantially less financial relief to families impacted by incarceration — at least $215 million less per year"
       },
-      "explainer": "The interim caps of October 2025 (11 cents a minute at most prisons, 10 to 19 cents at jails, in effect from 5 December 2025 and to be met by 6 April 2026, Prison Legal News) are higher than the 2024 caps but still cap in-state jail calls that had cost up to 11.35 dollars for 15 minutes at some large jails (ABA Journal, July 2024). Worth Rises puts the relief lost at at least 215 million of its at least 500 million (43%); the share is taken from that one frame and applied to our total: 50%, from 43% to 60%."
+      "explainer": "The interim caps of October 2025 (11 cents a minute at most prisons, 10 to 19 cents at jails, in effect from 5 December 2025 and to be met by 6 April 2026, Prison Legal News) are higher than the 2024 caps but still cap in-state jail calls that had cost up to 11.35 dollars for 15 minutes at some large jails (ABA Journal, July 2024). Worth Rises puts the relief lost at at least 215 million of its at least 500 million (43%); the share is taken from that one frame and applied to our total: 43%, from 40% to 60% (\"at least\" leaves more room above)."
+    },
+    {
+      "id": "fed_overlap_share",
+      "section": "reach",
+      "label": "Share of the federal savings already counted under the state free-call laws",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.02,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "Where calls are free (California, Minnesota and Colorado prisons, Massachusetts and Connecticut prisons and jails) the caps save nothing more. Those prisons already charged less than the new caps, so the overlap is in Massachusetts' and Connecticut's jails, a small part of the country's jail calls: 2%, from 0 to 5%."
+    },
+    {
+      "id": "fcc2021_savings",
+      "section": "reach",
+      "label": "Yearly savings from the FCC's 2021 cut of interstate caps",
+      "format": "usd",
+      "value": {
+        "low": 10000000,
+        "best": 30000000,
+        "high": 60000000
+      },
+      "kind": "judgment",
+      "explainer": "In May 2021 the FCC cut interstate caps from 21 cents a minute to 12 cents at prisons and 14 at large jails. Interstate calls are a minority of calls from prisons and jails, and the 2024 and 2025 caps now cover them too, so this counts only until those took effect, within the shared years a win counts: our judgment 30 million a year, from 10 to 60 million. Credited, valued and adjusted as the later federal caps are."
     },
     {
       "id": "fed_savings_per_year",
       "section": "reach",
       "label": "Yearly savings to families under the caps in force",
       "format": "usd",
-      "formula": "fed_savings_2024_order * (1 - fed_share_lost_2025)",
-      "explainer": "What the federal win still saves families each year: mostly in jails, since 94% of prisons already charge less than the new caps (Prison Legal News). The FCC's 2021 interim cut of interstate caps (to 12 and 14 cents) came before this baseline and is counted with the other money wins below."
+      "formula": "fed_savings_2024_order * (1 - fed_share_lost_2025) * (1 - fed_overlap_share)",
+      "explainer": "What the federal win still saves families each year: mostly in jails, since 94% of prisons already charge less than the new caps (Prison Legal News), less the overlap with the state laws. The FCC's 2021 interstate cut is added in its own row."
     },
     {
       "id": "fed_years_until_effect",
@@ -383,9 +409,9 @@
     {
       "id": "fed_value_per_year",
       "section": "effect",
-      "label": "Federal caps: value per campaign year, before adjustments (units of value)",
+      "label": "Federal caps (2021 and 2025): value per campaign year, before adjustments (units of value)",
       "format": "number",
-      "formula": "fed_savings_per_year * fed_uov_per_dollar * fed_discounted_years / campaign_years",
+      "formula": "(fed_savings_per_year + fcc2021_savings) * fed_uov_per_dollar * fed_discounted_years / campaign_years",
       "unit": "UoV"
     },
     {
@@ -449,17 +475,41 @@
       "explainer": "Free calls in Minnesota's prisons from July 2023. An advocate's projection: 4.5 million, from 3 to 6 million."
     },
     {
+      "id": "ct_people",
+      "section": "reach",
+      "label": "People held by Connecticut's Department of Correction (prisons and jails), October 2023",
+      "format": "integer",
+      "value": 10098,
+      "kind": "observed",
+      "source": {
+        "title": "Connecticut Office of Policy and Management, Monthly Indicators Report, October 2023",
+        "url": "https://portal.ct.gov/-/media/opm/cjppd/cjresearch/monthlyindicators/2023-monthly-indicator-reports/monthly-indicators-report----october-2023.pdf",
+        "retrieved": "2026-11-14",
+        "page": "population estimate, 1 October 2023",
+        "quote": "OPM Population Estimate: 10,098"
+      },
+      "explainer": "Connecticut runs one system for prisons and jails, all covered by the free-call law of 2021 (at least 90 minutes a person a day)."
+    },
+    {
+      "id": "ct_saving_per_person",
+      "section": "reach",
+      "label": "Connecticut: yearly saving per person held",
+      "format": "usd",
+      "value": {
+        "low": 500,
+        "best": 1200,
+        "high": 1801
+      },
+      "kind": "judgment",
+      "explainer": "Worth Rises' 2026 report finds free calls save 172 to 1,801 dollars per incarcerated person a year across the systems that made them free (Truthout); Connecticut's calls were among the most expensive in the country before the law, so it sits in the upper part: 1,200 dollars, from 500 to the report's top of 1,801."
+    },
+    {
       "id": "st_ct",
       "section": "reach",
       "label": "Connecticut: yearly savings from free prison calls (law of 2021)",
       "format": "usd",
-      "value": {
-        "low": 8000000,
-        "best": 15000000,
-        "high": 18000000
-      },
-      "kind": "judgment",
-      "explainer": "The first state law (2021; at least 90 minutes a person a day). No published total: Worth Rises' 2026 report finds free calls save 172 to 1,801 dollars per incarcerated person a year (Truthout), the top figure reported as Connecticut's, and Connecticut holds roughly 8,000 to 10,000 people in its unified prison and jail system: 15 million, from 8 to 18 million."
+      "explainer": "Connecticut's people held times the yearly saving per person; no published total.",
+      "formula": "ct_people * ct_saving_per_person"
     },
     {
       "id": "st_co",
@@ -480,27 +530,41 @@
       "label": "Yearly savings from the state free-call laws of 2021-2023",
       "format": "usd",
       "formula": "st_ca + st_ma + st_mn + st_ct + st_co",
-      "explainer": "The five state laws passed in the period; New York's (July 2025) came after it and isn't counted. The state branch also carries the other money wins (fee_savings_per_year)."
+      "explainer": "The five state laws passed in the period; New York's (July 2025) came after it and isn't counted. The state branch also carries the other state and local money wins (fee_savings_per_year)."
     },
     {
-      "id": "fee_wins_ratio",
+      "id": "copay_fee_savings",
       "section": "reach",
-      "label": "Other money wins for the same families, as a share of the state laws' savings",
-      "format": "percent",
+      "label": "Yearly savings from ending medical copays and capping release-card and commissary fees in the period",
+      "format": "usd",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 1
+        "low": 2000000,
+        "best": 8000000,
+        "high": 25000000
       },
       "kind": "judgment",
-      "explainer": "Wins of the period that also leave money with incarcerated people and their families, on which PPI published and testified: states ending medical copays in prison, limits on release-card and commissary fees, bans on replacing in-person visits with paid video calls, and the FCC's 2021 interim cut of interstate caps. No total is published; together our judgment 30% of the state free-call laws' savings, from 10% to 100%. Credited, valued and adjusted as the state laws are."
+      "explainer": "States that ended medical copays in prison or capped the fees on release cards and commissary accounts in 2020-2025, on which PPI published the national data and testified. No total is published; a few dollars a visit or a transaction across the systems that changed, judged a tenth of the free-call laws' savings: 8 million, from 2 to 25 million."
+    },
+    {
+      "id": "video_visit_savings",
+      "section": "reach",
+      "label": "Yearly savings from bans on replacing in-person visits with paid video calls",
+      "format": "usd",
+      "value": {
+        "low": 1000000,
+        "best": 5000000,
+        "high": 15000000
+      },
+      "kind": "judgment",
+      "explainer": "State and county rules of the period that keep in-person visits where jails had moved to paid video calls (a practice PPI put on the national radar in 2015). No total is published; our judgment 5 million, from 1 to 15 million."
     },
     {
       "id": "fee_savings_per_year",
       "section": "reach",
-      "label": "Yearly savings from the other money wins",
+      "label": "Yearly savings from the other state and local money wins",
       "format": "usd",
-      "formula": "st_savings_per_year * fee_wins_ratio"
+      "formula": "copay_fee_savings + video_visit_savings",
+      "explainer": "Credited, valued and adjusted as the state free-call laws are: the same families, the same public payers, the same coalitions."
     },
     {
       "id": "st_years_until_effect",
@@ -604,12 +668,12 @@
       "format": "small",
       "value": {
         "low": 0,
-        "best": 0.0002,
-        "high": 0.001
+        "best": 0.0003,
+        "high": 0.004
       },
       "kind": "judgment",
       "unit": "points",
-      "explainer": "No study measures it: equal representation is a right whose effect on lives runs through a slightly larger say in budgets and laws. Our judgment a very small 0.0002 points a year, from 0 to 0.001."
+      "explainer": "No study measures it. Reference class: Frey and Stutzer (2000, Economic Journal) find that Swiss residents of cantons with the most direct-democracy rights are about 0.2 points more satisfied (0-10) than those with the fewest, part of it procedural (the satisfaction of having a say). Ending prison gerrymandering changes the weight of a district by a few percent of its population, so scaling that difference by the share of voice restored gives at most about 0.004; these residents already vote, so the procedural part doesn't move: our judgment 0.0003 points a year, from 0 to 0.004."
     },
     {
       "id": "ger_years_until_effect",
@@ -777,7 +841,7 @@
         "high": 0.18
       },
       "kind": "judgment",
-      "explainer": "PPI has campaigned on prison phone rates for two decades (its reports on fees in 2013, video calling in 2015 and the State of Phone Justice in 2019 and 2022, cited in the FCC's proceedings); the Wright petitioners' lawyers, Worth Rises, the United Church of Christ's media justice ministry, Color of Change and others carried the Act and the rulemaking. PPI spends perhaps a fifth of its 1.6 million a year on the issue against a few million a year across the coalition. The share is PPI's resources in fiscal years 2021-2025 (the cost counted here) over the coalition's over the whole campaign that won the Act and the caps (from about 2017), since PPI's earlier spending isn't in the cost: 7%, from 3% to 18%."
+      "explainer": "PPI has campaigned on prison phone rates for two decades (its reports on fees in 2013, video calling in 2015 and the State of Phone Justice in 2019 and 2022, cited in the FCC's proceedings); the Wright petitioners' lawyers, Worth Rises, the United Church of Christ's media justice ministry, Color of Change and others carried the Act and the rulemaking. PPI spends perhaps a fifth of its 1.6 million a year on the issue, about 1.6 million over the five years, against roughly 3 million a year across the coalition over eight years, about 24 million: 7% with its research's weight in the proceedings. The share is PPI's resources in fiscal years 2021-2025 (the cost counted here) over the coalition's over the whole campaign that won the Act and the caps (from about 2017), since PPI's earlier spending isn't in the cost: 7%, from 3% to 18%."
     },
     {
       "id": "fed_implementation_adj",
@@ -790,7 +854,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Providers must comply by April 2026; the caps are interim and may be challenged or changed, and providers may recover some revenue through charges the caps don't reach; past caps were mostly obeyed: 0.85, from 0.6 to 1."
+      "explainer": "Providers must comply by April 2026; the caps are interim, pending permanent rules, and may change; providers may recover some revenue through charges the caps don't reach; past caps were mostly obeyed: 0.85, from 0.6 to 1."
     },
     {
       "id": "st_counterfactual_adj",
@@ -811,7 +875,7 @@
         "high": 0.1
       },
       "kind": "judgment",
-      "explainer": "Worth Rises led these state campaigns with local coalitions and sponsors; PPI's rate data and testimony supported them: 4%, from 1% to 10%."
+      "explainer": "Worth Rises led these state campaigns (2020-2023, almost all inside the cost period, so the share is over the whole campaigns) with local coalitions and sponsors; PPI's rate data and testimony supported them: 4%, from 1% to 10%."
     },
     {
       "id": "st_implementation_adj",
@@ -954,7 +1018,7 @@
       },
       "kind": "judgment",
       "side_effect": "added",
-      "explainer": "Children and partners of people kept out of prison are spared separation and lost income; studies of parental incarceration find harm to children's wellbeing and schooling: 15% of the branch's value, from 0 to 40%."
+      "explainer": "Children and partners of people kept out of prison are spared separation and lost income; parental incarceration harms children's wellbeing and behaviour (Wakefield and Wildeman, Children of the Prison Boom, 2013): 15% of the branch's value, from 0 to 40%."
     },
     {
       "id": "ue_dec_crime",
@@ -968,7 +1032,7 @@
       },
       "kind": "judgment",
       "side_effect": "added",
-      "explainer": "Some people not held commit crimes they would not have committed inside; studies of bail and sentencing reforms mostly find small or no rises in crime: -10% of the branch's value, from -30% to 0."
+      "explainer": "Some people not held commit crimes they would not have committed inside; studies of pretrial reforms mostly find small or no rises in rearrest (Ouss and Stevenson, Does Cash Bail Deter Misconduct?, American Economic Journal: Applied 2023, on Philadelphia's no-bail policy): -10% of the branch's value, from -30% to 0."
     },
     {
       "id": "evidence_adj",
@@ -1059,8 +1123,8 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "ue_family_contact + ue_service_cuts",
-      "explainer": "The sum of the two side effects of the phone wins above (the decarceration branch's own side effects are applied in it)."
+      "formula": "(ue_family_contact + ue_service_cuts) * dalys_from_uov / (dalys_direct + dalys_from_uov + dalys_from_wellby)",
+      "explainer": "The two side effects of the phone and fee wins, applied to those wins' share of the result only (the decarceration branch's own side effects are applied in it)."
     },
     {
       "id": "fed_uov",
