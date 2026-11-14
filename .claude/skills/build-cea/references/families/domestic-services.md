@@ -21,7 +21,8 @@ health      dalys_averted_per_person                                    → daly
 `baseline_consumption = consumption_mean × recipients_consumption_share`: the site's one log-income
 scale at the clients' own consumption, so $400 of food is a small ln gain for a US household and a
 large one for a household on two dollars a day. Nothing else makes a rich-country dollar do less: the
-scale does it.
+scale does it. Meals or shelter nights used up within t years (t < 1, a disaster's few weeks) gain
+t × ln(1 + v ÷ (b × t)); help spread through the year, cash and costs saved count over the year.
 
 ## Shared figures it reads
 

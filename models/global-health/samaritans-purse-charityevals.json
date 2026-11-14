@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "samaritans-purse",
   "owner": "charityevals",
-  "summary": "Samaritan's Purse, an evangelical relief charity, spent $1.15 billion on its ministries in 2025 (audited accounts): $490 million on Operation Christmas Child's 10.9 million shoebox gifts to children abroad, $295 million on food, water, shelter and health care in crises abroad (Sudan, South Sudan, the DRC, Gaza, Ukraine, Myanmar, Jamaica), $185 million on US disaster relief and rebuilding, $72 million on mission hospitals and field hospitals, and $103 million on Christian education and other faith work, which the site's scale gives no value beyond its material aid. The result, about 0.05 years of healthy life per 1,000 dollars, is about a quarter of the site's global-health median: almost all of it is goods valued as consumption (about four months of food rations a person abroad, half of them outside famine settings, and the shoeboxes' contents at about a third of their US retail value), with few deaths averted; US rebuilding counts little because a few thousand dollars means little to a US household and most of its Helene money waits years to be spent. Every branch is built from spending, Samaritan's Purse's own counts and judged costs, and discounted for missing data; the biggest uncertainties are that discount, the shoeboxes' worth to the children and the cost per person of the relief.",
+  "summary": "Samaritan's Purse, an evangelical relief charity, spent $1.15 billion on its ministries in 2025 (audited accounts): $490 million on Operation Christmas Child's 10.9 million shoebox gifts to children abroad, $295 million on food, water, shelter and health care in crises abroad (Sudan, South Sudan, the DRC, Gaza, Ukraine, Myanmar, Jamaica), $185 million on US disaster relief and rebuilding, $72 million on mission hospitals and field hospitals, and $103 million on Christian education and other faith work, which the site's scale gives no value beyond its material aid. The result, about 0.05 years of healthy life per 1,000 dollars, is about half the site's global-health median: almost all of it is goods valued as consumption (about four months of food rations a person abroad, half of them outside famine settings, and the shoeboxes' contents at about a third of their US retail value), with few deaths averted; US rebuilding counts little because a few thousand dollars means little to a US household and most of its Helene money waits years to be spent. Every branch is built from spending, Samaritan's Purse's own counts and judged costs, and discounted for missing data; the biggest uncertainties are that discount, the shoeboxes' worth to the children and the cost per person of the relief.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Samaritan's Purse",
@@ -1386,7 +1386,7 @@
     {
       "id": "relief_evidence_adj",
       "section": "adjustments",
-      "label": "Relief: evidence adjustment",
+      "label": "Relief: evidence adjustment, deaths averted",
       "format": "multiple",
       "value": {
         "low": 0.7,
@@ -1394,7 +1394,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The value is mostly food at local prices, which needs no effect study; the deaths averted rest on weak evidence, already wide in share_excess_averted. 0.85 (0.7-1), as in World Vision's model."
+      "explainer": "For the deaths averted only: they rest on weak evidence, already wide in share_excess_averted. 0.85 (0.7-1), as in World Vision's and CARE's models. The food is valued at local prices, which needs no effect study, so it takes no evidence step."
     },
     {
       "id": "relief_counterfactual_adj",
@@ -1466,13 +1466,8 @@
       "section": "adjustments",
       "label": "US disaster relief: evidence adjustment",
       "format": "multiple",
-      "value": {
-        "low": 0.8,
-        "best": 0.95,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Goods, labour and grants valued at what they are worth to the household need no effect study; the share of spending that reaches households is a judgment of its own. 0.95 (0.8-1)."
+      "explainer": "1: goods, labour and grants valued at what they are worth to the household need no effect study; the share of spending that reaches households is in us_value_share's range.",
+      "formula": "1"
     },
     {
       "id": "us_counterfactual_adj",
@@ -1595,13 +1590,8 @@
       "section": "adjustments",
       "label": "Shoeboxes: evidence adjustment",
       "format": "multiple",
-      "value": {
-        "low": 0.85,
-        "best": 0.95,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Goods valued at what they are worth to the child need no effect study. 0.95 (0.85-1), as for World Vision's donated goods."
+      "explainer": "1: goods valued at what they are worth to the child (occ_inkind_equivalence) need no effect study.",
+      "formula": "1"
     },
     {
       "id": "occ_counterfactual_adj",
@@ -1671,13 +1661,8 @@
       "section": "adjustments",
       "label": "Material aid: evidence adjustment",
       "format": "multiple",
-      "value": {
-        "low": 0.7,
-        "best": 0.9,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Goods valued at their worth, but what the lines buy is itself a judgment. 0.9 (0.7-1)."
+      "explainer": "1: goods valued at their worth need no effect study; what the lines buy is in aid_value_share's range.",
+      "formula": "1"
     },
     {
       "id": "aid_counterfactual_adj",
@@ -1924,9 +1909,17 @@
     {
       "id": "relief_total_adj",
       "section": "adjustments",
-      "label": "Relief: all adjustments",
+      "label": "Relief: all adjustments, deaths averted",
       "format": "multiple",
       "formula": "relief_evidence_adj * relief_counterfactual_adj * relief_attribution_share * implementation_adj * leverage_funging_adj * relief_wait_discount * relief_missing_data_adj"
+    },
+    {
+      "id": "relief_goods_total_adj",
+      "section": "adjustments",
+      "label": "Relief: all adjustments, food",
+      "format": "multiple",
+      "formula": "relief_counterfactual_adj * relief_attribution_share * implementation_adj * leverage_funging_adj * relief_wait_discount * relief_missing_data_adj",
+      "explainer": "The food's adjustments: no evidence step (food at local prices needs no effect study); the same share of the resources as the deaths, since the food valued includes WFP's commodities that aren't in Samaritan's Purse's accounts."
     },
     {
       "id": "wash_total_adj",
@@ -1985,7 +1978,7 @@
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average)",
       "format": "multiple",
-      "formula": "(relief_dalys_unadjusted * relief_evidence_adj + wash_dalys_unadjusted * wash_evidence_adj + us_dalys_unadjusted * us_evidence_adj + medsurg_dalys_unadjusted * med_evidence_adj + medout_dalys_unadjusted * med_evidence_adj + heart_dalys_unadjusted * heart_evidence_adj + occ_dalys_unadjusted * occ_evidence_adj + aid_dalys_unadjusted * aid_evidence_adj) / (relief_dalys_unadjusted + wash_dalys_unadjusted + us_dalys_unadjusted + medsurg_dalys_unadjusted + medout_dalys_unadjusted + heart_dalys_unadjusted + occ_dalys_unadjusted + aid_dalys_unadjusted)",
+      "formula": "(relief_dalys_unadjusted * (relief_deaths_share_unadj * relief_evidence_adj + (1 - relief_deaths_share_unadj)) + wash_dalys_unadjusted * wash_evidence_adj + us_dalys_unadjusted * us_evidence_adj + medsurg_dalys_unadjusted * med_evidence_adj + medout_dalys_unadjusted * med_evidence_adj + heart_dalys_unadjusted * heart_evidence_adj + occ_dalys_unadjusted * occ_evidence_adj + aid_dalys_unadjusted * aid_evidence_adj) / (relief_dalys_unadjusted + wash_dalys_unadjusted + us_dalys_unadjusted + medsurg_dalys_unadjusted + medout_dalys_unadjusted + heart_dalys_unadjusted + occ_dalys_unadjusted + aid_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -2097,8 +2090,25 @@
       "section": "bridges",
       "label": "Relief abroad: deaths averted and food, units of value (adjusted)",
       "format": "number",
-      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption) * relief_total_adj",
-      "unit": "UoV"
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death * relief_total_adj + ln_gain_per_person * $uov_per_ln_consumption * relief_goods_total_adj)",
+      "unit": "UoV",
+      "explainer": "Deaths averted and food delivered, each with its own adjustments."
+    },
+    {
+      "id": "relief_uov_unadjusted",
+      "section": "bridges",
+      "label": "Relief abroad: deaths averted and food, units of value (before adjustments; weights only)",
+      "format": "number",
+      "formula": "people_reached * (deaths_averted_per_person * value_per_death + ln_gain_per_person * $uov_per_ln_consumption)",
+      "explainer": "For the reading-only averages: relief's two parts before their adjustments."
+    },
+    {
+      "id": "relief_deaths_share_unadj",
+      "section": "bridges",
+      "label": "Relief: deaths' share of the value before adjustments (weights only)",
+      "format": "percent",
+      "formula": "people_reached * deaths_averted_per_person * value_per_death / relief_uov_unadjusted",
+      "explainer": "The rest is the food's value; the evidence average weights relief's two parts by their own adjustments."
     },
     {
       "id": "wash_uov",
@@ -2229,8 +2239,9 @@
       "section": "bridges",
       "label": "relief: healthy years before adjustments",
       "format": "number",
-      "formula": "relief_dalys / relief_total_adj",
-      "unit": "DALYs"
+      "formula": "relief_uov_unadjusted / ($uov_per_daly)",
+      "unit": "DALYs",
+      "explainer": "Relief before its adjustments (deaths and food), through the fixed bridge; for the weights only."
     },
     {
       "id": "wash_dalys",

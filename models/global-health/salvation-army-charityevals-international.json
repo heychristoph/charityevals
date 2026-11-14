@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "salvation-army",
   "owner": "charityevals",
-  "summary": "The Salvation Army USA's overseas work, about 2.4% of its programme spending ($69.7 million in fiscal 2025): the World Service Office's (SAWSO) grants to Salvation Army units abroad for disaster relief (mostly Ukrainian refugees), livelihoods (savings groups and income generation), education, health and anti-trafficking, and its and the US territories' support for the territories that can't pay their own way (maintenance grants, an endowment for officers' support and the running of International Headquarters), five-sixths of the money, which pays for their schools, health care, social services and church life. SAWSO publishes no count of people reached or of outcomes, so every branch is built from the research on its kind of work with its own spending (a meta-analysis of savings-promotion trials, the returns to schooling, the Cochrane review of community newborn care, studies of what relief costs to deliver, churchgoing and life satisfaction), and every branch is discounted for missing data. It comes to about 0.2 years of healthy life per $1,000 (combined range 0.03-1.6), about 45 times the US work per dollar, because a dollar does far more on the log scale for a poor household, but far below the site's global-health median (about a twelfth) because the money is spread over church running costs and small projects with no measured effect, and the result is mostly uncertainty. The biggest uncertainties are how much savings groups raise consumption and what they cost per household (the meta-analysis finds a small gain, the largest trial none), what a school place costs and how many pupils would otherwise not be in school, and how much of the support pays for services rather than worship.",
+  "summary": "The Salvation Army USA's overseas work, about 2.4% of its programme spending ($69.7 million in fiscal 2025): the World Service Office's (SAWSO) grants to Salvation Army units abroad for disaster relief (mostly Ukrainian refugees), livelihoods (savings groups and income generation), education, health and anti-trafficking, and its and the US territories' support for the territories that can't pay their own way (maintenance grants, an endowment for officers' support and the running of International Headquarters), five-sixths of the money, which pays for their schools, health care, social services and church life. SAWSO publishes no count of people reached or of outcomes, so every branch is built from the research on its kind of work with its own spending (a meta-analysis of savings-promotion trials, the returns to schooling, the Cochrane review of community newborn care, studies of what relief costs to deliver, churchgoing and life satisfaction), and every branch is discounted for missing data. It comes to about 0.26 years of healthy life per $1,000 (combined range 0.04-1.7), about 50 times the US work per dollar and about three times the site's global-health median, because a dollar does far more on the log scale for a poor household; the money is spread over church running costs and small projects with no measured effect, and the result is mostly uncertainty. The biggest uncertainties are how much savings groups raise consumption and what they cost per household (the meta-analysis finds a small gain, the largest trial none), what a school place costs and how many pupils would otherwise not be in school, and how much of the support pays for services rather than worship.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Salvation Army USA, overseas work",
@@ -882,8 +882,8 @@
       "section": "effect",
       "label": "Gain in ln(consumption) per person",
       "format": "small",
-      "formula": "ln(1 + value_delivered_per_person * ppp_factor / baseline_consumption)",
-      "explainer": "The relief's value in PPP dollars over a year's consumption, on the site's log scale."
+      "formula": "years_exposed * ln(1 + value_delivered_per_person * ppp_factor / (baseline_consumption * years_exposed))",
+      "explainer": "The relief's value in PPP dollars on the site's log scale over the months it is used (years_exposed, the months each person is helped): years_exposed × ln(1 + value ÷ the consumption of those months), the site's rule for a transfer used within a year."
     },
     {
       "id": "protection_ls_gain",
@@ -955,6 +955,19 @@
       "format": "small",
       "formula": "ln(1 + livelihood_consumption_gain) * pv_annuity_due(1, $discount_rate, livelihood_years)",
       "explainer": "As cash-income's recurring-gain recipe: ln(1 + gain) for each year, discounted."
+    },
+    {
+      "id": "income_mortality_uov_ratio",
+      "section": "effect",
+      "label": "Deaths averted by higher incomes, as a share of the consumption benefits",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "The cash-income family's mortality step: higher household incomes avert some child deaths (cash transfers cut under-five deaths by about 8% in Richterman et al. 2023); GiveWell's mortality effect for cash is about 0.2 of its consumption value. Judgment 0.2 (0-0.5), times your value of a life, for the livelihoods branch (as Mercy Corps' recovery and livelihoods)."
     },
     {
       "id": "working_years",
@@ -1921,8 +1934,9 @@
       "section": "bridges",
       "label": "Income gained and deaths averted, livelihoods (units of value, after the branch's adjustments)",
       "format": "number",
-      "formula": "livelihood_members * livelihood_household_size * livelihood_ln_gain_per_person * $uov_per_ln_consumption * livelihood_total_adj",
-      "unit": "UoV"
+      "formula": "livelihood_members * livelihood_household_size * livelihood_ln_gain_per_person * $uov_per_ln_consumption * (1 + income_mortality_uov_ratio * $life_value_multiplier) * livelihood_total_adj",
+      "unit": "UoV",
+      "explainer": "Livelihoods' consumption gains and the deaths higher incomes avert (the cash-income family's mortality ratio), after the branch's adjustments."
     },
     {
       "id": "education_uov",
