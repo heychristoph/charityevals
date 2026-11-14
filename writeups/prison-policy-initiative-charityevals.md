@@ -12,7 +12,7 @@ The model has four branches, one for each kind of win.
 
 - **Federal phone caps.** The Martha Wright-Reed Act of 2022 let the Federal Communications Commission (FCC) cap the price of calls made within a state. The caps the FCC set in 2024 would have saved families about $450 million a year. In 2025 the FCC raised them, and the caps now in force still save families about $250 million a year, mostly on jail calls. The FCC's 2021 cut of interstate caps adds about $30 million a year, scaled from the 2024 savings by interstate calls' share and the size of the cut.
 - **State free-call laws.** Connecticut, California, Minnesota, Massachusetts and Colorado made prison calls free between 2021 and 2023, together saving families about $75 million a year. Two other kinds of money win from the period are added to this branch as judgments: ending medical copays and capping fees (about $2 million a year), and bans on replacing in-person visits with paid video calls (about $2 million a year).
-- **Decarceration.** PPI's data and support fed the reforms of the period, which we judge keep about 50,000 people out of prison or jail. Each year out is valued at the shared life-satisfaction cost of a year inside (facts/incarceration.json, 1.2 points out of 10) and at the deaths it averts: a year in prison costs about 2 years of life (Patterson 2013, also in facts/incarceration.json and read by the Brennan Center's model), as a share of a death at the remaining 40 years, discounted for the 3 years until they come. The two are different things, the quality of the years a person lives and the years they do not live, so neither repeats the other. Two side effects are rows of this branch: families with a parent home add 15%, and crime by people not held takes away 10%.
+- **Decarceration.** PPI's data and support fed the reforms of the period, which we judge keep about 50,000 people out of prison or jail. Each year out is valued at the shared life-satisfaction cost of a year inside (facts/incarceration.json, 1.2 points out of 10) and at the deaths it averts: a year in prison costs about 2 years of life (Patterson 2013, also in facts/incarceration.json and read by the Brennan Center's model), as a share of a death at the remaining 40 years, discounted for the 3 years until they come. The two are different things, the quality of the years a person lives and the years they do not live, so neither repeats the other. Three side effects are rows of this branch: families with a parent home add 15% and earnings kept after release 10% (both shared figures in facts/incarceration.json, read by the site's other prison models), and crime by people not held takes away 10%.
 - **Prison gerrymandering.** PPI led the campaign to count incarcerated people at their home address when districts are drawn, and several states changed for the 2021 maps. We judge about 2 million people gained a fairer say, worth a very small 0.0003 life-satisfaction points a year each (anchored on Swiss studies of political voice), with half the credit to PPI.
 
 ### How the model works
@@ -33,7 +33,7 @@ Deaths averted by decarceration give about half of the result, the federal caps 
 
 ### What isn't modelled
 
-Health in prison short of death isn't counted separately, because it is part of the life-satisfaction gap; deaths are counted on their own. Nor are earnings after release, for the same reason.
+Health in prison short of death isn't counted separately, because it is part of the life-satisfaction gap; deaths are counted on their own.
 
 ### How this model was checked
 
