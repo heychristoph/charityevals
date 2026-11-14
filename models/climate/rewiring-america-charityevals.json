@@ -3,16 +3,13 @@
   "name": "Rewiring America (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {
-    "world": 0.025,
-    "USA": 0.975
-  },
-  "beneficiaries_note": "Our build: shares of the result at the defaults. The public money won for US households, their net gain and the asthma averted (97.5%) are in the United States; the tonnes (2.5%) spare people everywhere, spread by world population.",
+  "beneficiaries": {"world":0.014,"USA":0.986},
+  "beneficiaries_note": "Our build: shares of the result at the defaults. The public money won for US households, their net gain and the asthma averted (98.6%) are in the United States; the tonnes (1.4%) spare people everywhere, spread by world population.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "rewiring-america",
   "owner": "charityevals",
-  "summary": "Rewiring America works to electrify American homes: it designed the Inflation Reduction Act's home-electrification rebates and runs free tools and coaching that help households switch to heat pumps and other electric appliances ($22.7M spent in 2024, its first year filing on its own after leaving the Windward Fund). This model counts its share of the law's home-energy provisions (rebates and home credits) won in 2021-2024 and the households its tools and coaches bring to switch sooner, against a typical year's spending in that period: the tonnes they cut, the public money won for households, the households' own net gain or loss from switching and cleaner indoor air where a gas stove goes. At the defaults that is 0.030 years of healthy life per $1,000, more than ten times its peers because it counts the law's $8.8 billion of home-energy rebates, mostly for low- and moderate-income homes, and three years of larger home credits as public money won, valued by the site's rule for aid won as the recipients' gain less the taxpayers' cost: about 97% of the result, against 2.5% from the tonnes (0.00074 alone). The climate peers' models of the same law count only its tonnes. The households the law's subsidies tipped into switching lose a little on it before the subsidy (our guess, −$120 a year each), which alone would put the tonnes' part below zero. The biggest uncertainties are the shared missing-data step, advocacy's share of a won policy, Rewiring America's share of the advocacy behind the home provisions and the next-dollar figure; both branches are discounted for missing data, since nothing is measured for its work.",
+  "summary": "Rewiring America works to electrify American homes: it designed the Inflation Reduction Act's home-electrification rebates and runs free tools and coaching that help households switch to heat pumps and other electric appliances ($22.7M spent in 2024, its first year filing on its own after leaving the Windward Fund). This model counts its share of the law's home-energy provisions (rebates and home credits) won in 2021-2024 and the households its tools and coaches bring to switch sooner, against a typical year's spending in that period: the tonnes they cut, the public money won for households, the households' own net gain or loss from switching and cleaner indoor air where a gas stove goes. At the defaults that is 0.028 years of healthy life per $1,000, more than ten times its peers because it counts the law's $8.8 billion of home-energy rebates, mostly for low- and moderate-income homes, and three years of larger home credits as public money won, valued by the site's rule for aid won as the recipients' gain less the taxpayers' cost: nearly all of the result, the tonnes giving about 1.4% of it. The climate peers' models of the same law count only its tonnes. The households the law's subsidies tipped into switching lose a little on it before the subsidy (our guess, −$120 a year each), which alone puts the tonnes' part slightly below zero. The biggest uncertainties are the shared missing-data step, advocacy's share of a won policy, the next-dollar figure and Rewiring America's share of the advocacy behind the rebates; since May 2026 the rebates no longer pay for switching from gas, so less of them will be paid. Both branches are discounted for missing data, since nothing is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Rewiring America",
@@ -482,12 +479,20 @@
     {
       "id": "ira_attribution_share_shared",
       "section": "adjustments",
-      "label": "Inflation Reduction Act's home-energy provisions: Rewiring America's share of the advocacy behind them",
+      "label": "Inflation Reduction Act's home-energy provisions: Rewiring America's share of the advocacy behind their tonnes",
+      "format": "percent",
+      "explainer": "Its share of the advocacy behind the rebates and behind the credits, weighted by their tonnes. Over the whole law that is 2% × about 14%, 0.3%, beside 1% for the Union of Concerned Scientists and 2% for the Environmental Defense Fund, both larger groups working across the law.",
+      "formula": "rebate_tonnes_share * rebate_attribution_share_shared + (1 - rebate_tonnes_share) * credit_attribution_share_shared"
+    },
+    {
+      "id": "rebate_attribution_share_shared",
+      "section": "adjustments",
+      "label": "The rebates: Rewiring America's share of the advocacy behind them",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.25,
-        "high": 0.5
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.6
       },
       "kind": "judgment",
       "source": {
@@ -496,7 +501,33 @@
         "retrieved": "2026-11-14",
         "quote": "Based on a Rewiring America plan"
       },
-      "explainer": "The electrification rebates were built on Rewiring America's own plan (Canary Media), and it was the leading voice for paying households to switch appliances; the efficiency rebates and the credits had long-standing backers (efficiency and solar groups, NRDC, the Building Decarbonization Coalition, manufacturers), and the whole law many more. 25% (10% to 50%), our judgment. Over the whole law that is 2% × 25%, 0.5%, beside 1% for the Union of Concerned Scientists and 2% for the Environmental Defense Fund, both larger groups working across the law."
+      "explainer": "The electrification rebates were built on Rewiring America's own plan and it was their leading advocate; the efficiency rebates (HOMES) had long-standing efficiency backers, and both passed inside a law that many more groups pushed. 35% (15% to 60%), our judgment."
+    },
+    {
+      "id": "credit_attribution_share_shared",
+      "section": "adjustments",
+      "label": "The larger home credits: Rewiring America's share of the advocacy behind them",
+      "format": "percent",
+      "value": {
+        "low": 0.03,
+        "best": 0.1,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Rewiring America pressed for the heat-pump part of the home-improvement credit (25C), but the residential clean energy credit (25D), three-quarters of the money, was mainly the rooftop-solar industry's ask, renewed several times before. 10% (3% to 25%), our judgment."
+    },
+    {
+      "id": "rebate_tonnes_share",
+      "section": "adjustments",
+      "label": "The rebates' share of the home provisions' tonnes",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.17,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "About 3 of the provisions' 18 million tonnes a year come from the rebates and the rest from the credits (ira_household_share's explainer): 17% (10% to 30%), our judgment."
     },
     {
       "id": "ira_attribution_share",
@@ -512,18 +543,18 @@
       "label": "Home-energy provisions' delivered share relative to the whole law's",
       "format": "multiple",
       "value": {
-        "low": 0.4,
-        "best": 0.8,
-        "high": 1.2
+        "low": 0.35,
+        "best": 0.7,
+        "high": 1.1
       },
       "kind": "judgment",
       "source": {
         "title": "US Internal Revenue Service (2025), FAQs for modification of sections 25C, 25D, 25E, 30C, 30D, 45L, 45W and 179D under Public Law 119-21 (the One, Big, Beautiful Bill)",
         "url": "https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-act-obbb",
         "retrieved": "2026-11-14",
-        "note": "The 2025 budget law ends the 25C credit for property placed in service after 31 December 2025, and 25D on the same date."
+        "note": "The 2025 budget law ends the 25C credit for property placed in service after 31 December 2025, and 25D on the same date. DOE's revised rebate guidance (29 May 2026, reported by Utility Dive, https://www.utilitydive.com/news/doe-issues-guidance-gas-electric-appliance-rebate/821720/) ends the electrification rebates for replacing fossil fuel-fired appliances."
       },
-      "explainer": "The 2025 budget law ended both home credits after 2025, ten years early, while the $8.8B of rebates were left funded and the states kept opening programmes, slowly. The whole law kept less (its power credits end for projects begun after 2027), so the home provisions kept somewhat less than the law's own delivered share or about as much: 0.8 (0.4 to 1.2) of it, our judgment."
+      "explainer": "The 2025 budget law ended both home credits after 2025, ten years early, and DOE's revised guidance of May 2026 (Utility Dive) ended the electrification rebates for households replacing gas or other fossil equipment, leaving electric-to-electric upgrades and new homes, while states rework and resubmit their programmes. The whole law kept less in some ways (its power credits end for projects begun after 2027), so the home provisions kept somewhat less than the law's own delivered share: 0.7 (0.35 to 1.1) of it, our judgment."
     },
     {
       "id": "ira_implementation_adj",
@@ -659,7 +690,7 @@
     {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
-      "label": "Other work not modelled, as a share of the modelled value",
+      "label": "Other work not modelled, as a share of the tonnes counted",
       "format": "percent",
       "value": {
         "low": 0.05,
@@ -674,7 +705,7 @@
         "retrieved": "2026-11-14",
         "quote": "negotiated with manufacturers to lower the cost of heat pumps for households by 40 percent"
       },
-      "explainer": "The rest of the work, each a share of the modelled value: heat-pump prices it negotiated with manufacturers for its programmes and a free database of 3,500 incentives that utilities and states build on, which may speed switches beyond its own users, 10%; free technical analyses for states and cities applying for funds and for utility programmes and rates, and its research (the health and jobs reports), 7%; community demonstration projects in five places, 3%. 20% (5% to 50%), our judgment. The households' own gains and costs and cleaner indoor air are counted in their own units below."
+      "explainer": "The rest of the work, each a share of the tonnes counted: heat-pump prices it negotiated with manufacturers for its programmes and a free database of 3,500 incentives that utilities and states build on, which may speed switches beyond its own users, 10%; free technical analyses for states and cities applying for funds and for utility programmes and rates, and its research (the health and jobs reports), 7%; community demonstration projects in five places, 3%. 20% (5% to 50%), our judgment. The households' own gains and costs and cleaner indoor air are counted in their own units below. The public money is the law's alone; the other work wins none of it, so the share applies to the tonnes only."
     },
     {
       "id": "ira_household_net_gain",
@@ -905,12 +936,18 @@
       "label": "Share of the rebate money that reaches households",
       "format": "percent",
       "value": {
-        "low": 0.5,
-        "best": 0.75,
-        "high": 0.9
+        "low": 0.3,
+        "best": 0.55,
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "States may keep up to a fifth for administration and outreach, some opened their programmes late or not at all, and money left unspent when the programmes close goes back. 75% (50% to 90%), our judgment."
+      "explainer": "States may keep up to a fifth for administration and outreach; only about a dozen states and DC had launched by mid-2026, DOE's May 2026 guidance made states rework their programmes and dropped switches from gas from the electrification rebates, and money unspent when the programmes close in September 2031 goes back. 55% (30% to 80%), our judgment.",
+      "source": {
+        "title": "Utility Dive (2026), DOE issues guidance ending gas-to-electric appliance rebates (2 June 2026), on DOE's revised Home Energy Rebates guidance of 29 May 2026",
+        "url": "https://www.utilitydive.com/news/doe-issues-guidance-gas-electric-appliance-rebate/821720/",
+        "retrieved": "2026-11-14",
+        "quote": "ending the ability for households to qualify for rebates when replacing fossil fuel-fired appliances with electric alternatives"
+      }
     },
     {
       "id": "rebate_years_until_paid",
@@ -918,13 +955,19 @@
       "label": "Years from the law (2022) to the middle of the rebates' payouts",
       "format": "number",
       "value": {
-        "low": 2.5,
-        "best": 4,
-        "high": 6
+        "low": 4,
+        "best": 5.5,
+        "high": 7
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "The states' programmes opened from late 2024 into 2026 and the money runs to 2031: the middle of the payouts about 2026, four years after the law (2.5 to 6), our judgment."
+      "explainer": "The states' programmes opened slowly from late 2024 and were reworked after DOE's May 2026 guidance; the money runs to 2031, so the middle of the payouts is about 2027-28, five and a half years after the law (4 to 7), our judgment. The rebates are a fixed sum and count once, as Habitat for Humanity's model counts one-off public money.",
+      "source": {
+        "title": "Utility Dive (2026), DOE issues guidance ending gas-to-electric appliance rebates (2 June 2026), on DOE's revised Home Energy Rebates guidance of 29 May 2026",
+        "url": "https://www.utilitydive.com/news/doe-issues-guidance-gas-electric-appliance-rebate/821720/",
+        "retrieved": "2026-11-14",
+        "quote": "ending the ability for households to qualify for rebates when replacing fossil fuel-fired appliances with electric alternatives"
+      }
     },
     {
       "id": "rebate_recipient_consumption_ratio",
@@ -940,23 +983,43 @@
       "explainer": "The electrification rebates go only to households under 150% of the area's median income, in full under 80%, and HOMES doubles its rebate under 80%. Households in the bottom two income fifths spend about half to two-thirds of the average per person; 0.6 (0.45 to 0.85) of the survey average (facts: united_states.ce_expenditure_per_person_2024), our judgment."
     },
     {
-      "id": "credit_increment_per_year",
+      "id": "credit_increment_2023",
       "section": "adjustments",
-      "label": "The law's increase in the two home credits (25C, 25D), dollars a year",
+      "label": "The law's increase in the two home credits (25C, 25D), tax year 2023",
       "format": "usd",
       "value": {
-        "low": 2000000000,
-        "best": 3400000000,
-        "high": 5000000000
+        "low": 3200000000,
+        "best": 3800000000,
+        "high": 4200000000
       },
       "kind": "judgment",
       "source": {
         "title": "US Treasury (2024), More than 3.4 million American families benefitted from $8.4 billion in residential clean energy and energy efficient home improvement credits in 2023 (press release jy2521, 7 August 2024)",
         "url": "https://home.treasury.gov/news/press-releases/jy2521",
         "retrieved": "2026-11-14",
-        "note": "Tax year 2023: about $6.3 billion of the residential clean energy credit (25D, 1.25 million returns) and $2.1 billion of the energy efficient home improvement credit (25C, 2.34 million returns); preliminary, expected to rise."
+        "note": "Tax year 2023: about $6.3 billion of the residential clean energy credit (25D) and $2.1 billion of the energy efficient home improvement credit (25C); preliminary. Before the law, 25D was set to expire at the end of 2023 and 25C had expired after 2021 (CRS Insight IN12423)."
       },
-      "explainer": "What the law added over the credits as they stood before it: 25D would have paid 22% in 2023 instead of 30% (about $1.7B of the $6.3B claimed), and 25C, a $500 lifetime credit before, paid up to $3,200 a year (most of its $2.1B). About $3.4B a year ($2B to $5B), our judgment from Treasury's 2023 claims."
+      "explainer": "What the law added in 2023: 25D would have paid 22% instead of 30% (about $1.7B of the $6.3B claimed), and 25C had lapsed after 2021, so all its $2.1B. About $3.8B ($3.2B to $4.2B), our judgment from Treasury's 2023 claims."
+    },
+    {
+      "id": "credit_increment_2024_2025_per_year",
+      "section": "adjustments",
+      "label": "The law's increase in the two home credits, a year in 2024-2025",
+      "format": "usd",
+      "value": {
+        "low": 6000000000,
+        "best": 8400000000,
+        "high": 11000000000
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Congressional Research Service (2026), Preliminary data on the IRA residential clean energy credit, Insight IN12423 (updated 13 April 2026)",
+        "url": "https://www.everycrsreport.com/reports/IN12423.html",
+        "retrieved": "2026-11-14",
+        "quote": "the RCEC reduced federal revenues by $6.3 billion in tax year 2023",
+        "note": "Before the law the credits were scheduled to expire at the end of 2023 (25D) and 2021 (25C), so both are wholly the law's from 2024."
+      },
+      "explainer": "Without the law neither credit would have existed in 2024 and 2025, so all of both counts: about 2023's $8.4B a year ($6B to $11B), the top for the rush before the credits ended, our judgment."
     },
     {
       "id": "credit_years",
@@ -977,16 +1040,16 @@
     {
       "id": "credit_years_until_paid",
       "section": "adjustments",
-      "label": "Years from the law (2022) to the middle of the credits' payouts",
+      "label": "Years from the law (2022) until the first larger credits are claimed",
       "format": "number",
       "value": {
-        "low": 1.5,
-        "best": 2,
-        "high": 2.5
+        "low": 1,
+        "best": 1.5,
+        "high": 2
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Claimed on returns for 2023 to 2025, filed in 2024 to 2026: the middle about two years after the law (1.5 to 2.5), our judgment."
+      "explainer": "Credits for 2023 are claimed on returns filed in early 2024, about a year and a half after the law (1 to 2), our judgment; later years follow a year apart in the annuity."
     },
     {
       "id": "credit_recipient_consumption_ratio",
@@ -1000,12 +1063,12 @@
       },
       "kind": "judgment",
       "source": {
-        "title": "US Treasury (2024), press release jy2521 (7 August 2024), and IRS statistics as reported by CPA Practice Advisor (14 August 2024)",
-        "url": "https://www.cpapracticeadvisor.com/2024/08/14/americans-claimed/109066/",
+        "title": "Congressional Research Service (2026), Preliminary data on the IRA residential clean energy credit, Insight IN12423 (updated 13 April 2026)",
+        "url": "https://www.everycrsreport.com/reports/IN12423.html",
         "retrieved": "2026-11-14",
-        "note": "About two-thirds of the $8.4 billion went to households with incomes over $100,000."
+        "quote": "taxpayers with incomes of $100,000 or more received 67% of RCEC benefits"
       },
-      "explainer": "Homeowners with tax to offset, two-thirds of the money to incomes over $100,000: 1.3 (1 to 1.8) times the survey average spending per person, our judgment."
+      "explainer": "Homeowners with tax to offset: two-thirds of the residential clean energy credit's money went to incomes of $100,000 or more (CRS), and the home-improvement credit's claimants are similar homeowners. 1.3 (1 to 1.8) times the survey average spending per person, our judgment."
     },
     {
       "id": "payer_cost_per_dollar",
@@ -1029,18 +1092,18 @@
       "section": "adjustments",
       "label": "The larger credits: claimants' gain less taxpayers' cost, units of value",
       "format": "number",
-      "formula": "credit_increment_per_year * credit_years * (1 / (credit_recipient_consumption_ratio * @united_states.ce_expenditure_per_person_2024) - payer_cost_per_dollar) * $uov_per_ln_consumption * (1 + $discount_rate) ^ -credit_years_until_paid",
+      "formula": "(credit_increment_2023 + credit_increment_2024_2025_per_year * (credit_years - 1)) / credit_years * pv_annuity_due(1, $discount_rate, min($win_years_counted, credit_years)) * (1 / (credit_recipient_consumption_ratio * @united_states.ce_expenditure_per_person_2024) - payer_cost_per_dollar) * $uov_per_ln_consumption * (1 + $discount_rate) ^ -credit_years_until_paid",
       "unit": "uov",
-      "explainer": "As for the rebates, for the three years the larger credits paid."
+      "explainer": "The larger credits were a yearly stream won with the law, so like any won policy's yearly benefit they count the shared years a won reform counts, here at most the three years they paid; each year's dollars (their average over 2023-2025) valued as the claimants' gain less the taxpayers' cost, discounted from the first claims."
     },
     {
       "id": "ira_transfer_uov_per_year",
       "section": "adjustments",
       "label": "Public money won for households, units of value per year of the period (after the law's branch steps)",
       "format": "number",
-      "formula": "(rebate_uov + credit_uov) * p_success * ira_counterfactual_adj * ira_attribution_share * missing_data_adj / period_years",
+      "formula": "(rebate_uov * rebate_attribution_share_shared + credit_uov * credit_attribution_share_shared) * p_success * ira_counterfactual_adj * missing_data_adj / period_years",
       "unit": "uov",
-      "explainer": "The law's branch steps for the money: advocacy's share of the win, what wouldn't have come anyway, Rewiring America's share of the advocacy and the missing-data step, spread over the period's four years. The tonnes' evidence and delivery steps are left out: the money is a sum in the statute and the claims Treasury counted, its delivery in the paid share."
+      "explainer": "The law's branch steps for the money: advocacy's share of the win, what wouldn't have come anyway, Rewiring America's share of the advocacy behind each (the rebates' and the credits' own) and the missing-data step, spread over the period's four years. The tonnes' evidence and delivery steps are left out: the money is a sum in the statute and the claims Treasury counted, its delivery in the paid share."
     },
     {
       "id": "uov_bridged",
@@ -1066,7 +1129,7 @@
       "label": "Share of these tonnes that are methane",
       "format": "percent",
       "formula": "@climate.us_home_electrification_methane_share",
-      "explainer": "Gas a home stops burning also stops leaking upstream (facts: climate.us_home_electrification_methane_share, 10%): both branches' tonnes come from homes electrified. The shared conversion values it by methane's own, earlier warming and ozone."
+      "explainer": "Gas a home stops burning also stops leaking upstream (facts: climate.us_home_electrification_methane_share, 15%): both branches' tonnes come from homes electrified. The shared conversion values it by methane's own, earlier warming and ozone."
     },
     {
       "id": "fuel_share",
