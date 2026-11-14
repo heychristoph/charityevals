@@ -32,7 +32,7 @@ The Swiss list gets its share of the 2025 money, 27%. In both lists, recipients 
 - **Fighting poverty (48%).** Its poverty fund (40% of the 2024 poverty giving) is valued at GiveWell's top charities. GiveDirectly (27%), Malaria Consortium, Against Malaria Foundation and Deworm the World (at Evidence Action's figure) are read directly. In the Swiss list, Evidence Action, Helen Keller Intl, GiveDirectly, StrongMinds and the others are each read at their own figure.
 - **Climate (21%).** These are valued at Clean Air Task Force's figure, our own model and the one recipient with a published model here. Founders Pledge's and Giving Green's models of its other recipients are not published.
 - **Animal welfare (7%).** In 2024 these are valued at The Humane League's figure on the rankings (ACE's), the one modelled recipient. In the Swiss list, The Humane League, Sinergia Animal and Wild Animal Initiative are each read at their own figure.
-- **Catastrophic risks (12%).** No 2024 recipient has a model here, so that part is valued at the site's nine catastrophic-risk charity models, weighted equally. In the Swiss list, METR is the one modelled recipient.
+- **Catastrophic risks (12%).** No 2024 recipient has a model here, so that part is valued at the site's ten catastrophic-risk charity models, weighted equally. In the Swiss list, METR is the one modelled recipient.
 - **Democracy (9%).** These are valued at the site's four democracy models, weighted equally. None of its recipients has a model here.
 - **Other effective-giving organisations (2.4%)** take the average of the rest.
 
