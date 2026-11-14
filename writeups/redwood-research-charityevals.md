@@ -1,13 +1,13 @@
 ### Summary
 
-Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="redwood-research-charityevals">0.26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.006 to about 12.
+Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="redwood-research-charityevals">0.05</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.003 to about 0.5.
 
 ### What the charity does
 
 Redwood spent $2.9 million in 2024, according to its Form 990 (its statements aren't audited). Its one programme, AI research, cost $2.6 million:
 
 - **Its own research: $2.0 million.** Six employees, contractors and computing. In 2024 it showed, with Anthropic, that a production model (Claude 3 Opus) sometimes fakes alignment during training. It also published work on control protocols for untrusted models and on eliciting capabilities a model hides, and drafted a control safety case with the UK AI Security Institute. It advises AI companies, among them Google DeepMind and Anthropic.
-- **A grant to Constellation: $0.7 million.** Redwood ran Constellation, a Berkeley AI safety research centre, until it became a charity of its own. In 2024 Redwood passed on $250,000 it held for the centre and the office's fit-out ($430,000).
+- **Transfers to Constellation: $0.7 million.** Redwood ran Constellation, a Berkeley AI safety research centre, until it became a charity of its own. In 2024 Redwood passed on $250,000 it held for the centre and the office's fit-out ($430,000). The fit-out was already built and in use, so it counts for little.
 
 ### How the impact happens
 
@@ -21,13 +21,13 @@ The deaths averted are valued like every death on the site, across the world's a
 
 All of Redwood's spending is on AI. The model's pandemic and nuclear areas are set to zero, and so are its policy-win and training branches. No law or standard was won in 2024, and Redwood's training bootcamps ended in 2023.
 
-Nearly all the work is against misaligned AI. Only the paper on hidden capabilities also helps tests for misuse, so 5% of the spending counts as misuse work.
+All the work counts as work against misaligned AI. Only the paper on hidden capabilities also helps tests for misuse, and work aimed at both counts as misalignment.
 
 | Adjustment | Value | Reason |
 |---|---|---|
-| How far a typical project's effect applies to Redwood's work | 1.05 | Research 1.2 (labs and a government institute take up its methods), the Constellation grant 0.6 (it supports others' work), weighted by spending |
+| How far a typical project's effect applies to Redwood's work | 0.96 | Research 1.2 (labs and a government institute take up its methods), the cash grant to Constellation 0.6 (it supports others' work), the office fit-out 0.1, weighted by spending |
 | Work no one else would have done now | 0.7 | Redwood started AI control; lab teams and the UK institute now work on it too |
-| Redwood's share of the resources behind its work | 0.70 | Most of the alignment-faking authors and its compute were Anthropic's |
+| Redwood's share of the resources behind its work | 0.70 | Most of the alignment-faking paper's authors and its compute were Anthropic's |
 | Funging by its main funder | 0.8 | Almost all its money comes from Coefficient Giving, which fills gaps |
 | Missing data | slider | Nothing about Redwood's effect on the risk is measured |
 
@@ -37,14 +37,14 @@ Redwood received under $10,000 in 2024 and spent from its reserves. It ended the
 
 ### What drives the result
 
-The result is about a third of FAR.AI's and four times MIRI's. The gap with FAR.AI is mostly the share of work against misuse: 5% here against FAR.AI's 28%. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project. That same 5% is most of the gap with MIRI: with no misuse work the result would be about 0.05, close to MIRI's.
+The result is under a tenth of the median for this cause and close to MIRI's (0.07). The reason is that all of Redwood's work is against misaligned AI. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.03 to 1.7.
-- **How much a dollar of misuse work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.07 to 2.1.
-- **How much of the work is against misuse.** Redwood publishes no split. From 0 to 15% moves the result from 0.05 to 0.68.
-- **The years a cut counts and the discount rate.** These are shared sliders.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.006 to 0.32.
+- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.01 to 0.40.
+- **Whether any of the work counts as misuse work.** If the paper on hidden capabilities counted as misuse work (15% of the outputs), the result would be 0.63.
+- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 1.
 
 ### What isn't modelled
 
@@ -54,7 +54,7 @@ The result is about a third of FAR.AI's and four times MIRI's. The gap with FAR.
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with FAR.AI's model as the worked example. Independent audits are in audits/redwood-research-charityevals/.
+The model was built from the catastrophic-risk template, with FAR.AI's model as the worked example. Round 1 of the independent audit found that 5% of the work had been counted as misuse work, from a paper that serves misuse and misalignment tests alike. By the template's rule such work counts as misalignment, so the share is now 0. That lowered the result from 0.26 to about 0.05. The round also split the transfers to Constellation: the office fit-out, already in use, now counts at a sixth of the cash. Independent audits are in audits/redwood-research-charityevals/.
 
 ### Sources
 
