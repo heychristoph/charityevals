@@ -1,0 +1,15 @@
+# Audit: all-hands-and-hearts-charityevals, round 3
+Result: 2.760e-6 daly/$ = 0.00276 years of healthy life per 1,000 dollars (combined range 0.00057-0.0135); cause median 0.0866 (x0.032). Verdict: pass (no findings).
+Model-sha: dccbb01fed8aaeb68cd6b0fde9e32aba079bb51b5e16aa56abab93f5b0d8d5a3
+Scope: unchanged; only the changes of commit 001c6e4 since 95fed69 were checked (`git diff 95fed69 001c6e4 -- models/ writeups/`).
+Mechanical: lint 0 high / 0 medium / 1 low (far-below, the same as round 2, covered by the summary's reason); invariants none; check.ts all models valid; normalization-audit and simulation-check not re-run (a value and two explainers changed).
+
+Previous round (round 2 lows):
+- ms_price explainer quoted Bob Vila's figures inexactly: resolved. It now reads $1,125 to $3,439, average $2,254; the modelled $2,200 (1,100-4,000) is unchanged.
+- unmodelled_benefits_adj best did not equal the sum of its sized items: resolved. Best 0.15 to 0.13; the items 6+3+3+2-1 sum to 13; the explainer ends "+13%, from -5% to +40%" (range unchanged); the write-up says +13%.
+
+Diff check: three files changed. The US model has exactly two edits (the ms_price explainer; unmodelled_benefits_adj best 0.15 to 0.13 with its explainer's closing figure). The write-up changes the +15% to +13% and adds a "How this model was checked" list of the rounds. Nothing else changed in the model. The result moved from 0.00281 to 0.00276 (-1.8%), as expected from 0.15 to 0.13 on a (1+adj) multiplier.
+
+No new findings.
+
+Verdict: pass.
