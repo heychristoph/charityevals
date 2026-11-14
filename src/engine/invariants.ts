@@ -10,7 +10,7 @@ import {
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
-import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SUCCESS_FACT, isDestinationMix, sameFormula } from "./moved-money";
+import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SUCCESS_FACT, isDestinationMix, priorDollarValue, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
@@ -276,7 +276,9 @@ const squash = (f: string) => f.replace(/\s+/g, "");
 const SPECIES_FACT = (f: string) => f.startsWith("welfare_ranges.") || f.startsWith("aim_sads.");
 
 export function inv3(lib: Library): InvariantReport {
-  const models = [...lib.models.values()].filter((m) => m.cause === "animal-welfare" && m.output);
+  // A money mover (`beneficiaries: "destinations"`) has no animals of its own: it reads each destination's
+  // result live in common units, and each destination's model takes the species step.
+  const models = [...lib.models.values()].filter((m) => m.cause === "animal-welfare" && m.output && m.beneficiaries !== "destinations");
   const violations: Violation[] = [];
   for (const m of models) {
     const out = m.output!;
@@ -314,7 +316,7 @@ export function inv3(lib: Library): InvariantReport {
   }
   return {
     id: "INV-3", title: "Every animal model passes through the species step, once per species, from the shared table", status: "checked", checked: models.length, violations,
-    how: "Animal models must report in ced and declare output.species. For each species s there is a row ced_<s> whose formula equals the standard template (AIM SADs: sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024), v the SAD version, 2024 or 2025, whose weight is built into the figure; a second version for the same species goes in ced_<s>_<v> on sads_<s>_<v>; raw days: pain_days_<s> * @welfare_ranges.<s>_vs_chicken) up to whitespace, reads @welfare_ranges.<s>_vs_chicken and feeds the output. No other row reads @welfare_ranges.* or @aim_sads.*. Not checked: that every path from a SAD or pain-day row to the output passes through a ced_* row (rows carry no unit to tell).",
+    how: "Animal models (not money movers, `beneficiaries: \"destinations\"`, which read their destinations live) must report in ced and declare output.species. For each species s there is a row ced_<s> whose formula equals the standard template (AIM SADs: sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024), v the SAD version, 2024 or 2025, whose weight is built into the figure; a second version for the same species goes in ced_<s>_<v> on sads_<s>_<v>; raw days: pain_days_<s> * @welfare_ranges.<s>_vs_chicken) up to whitespace, reads @welfare_ranges.<s>_vs_chicken and feeds the output. No other row reads @welfare_ranges.* or @aim_sads.*. Not checked: that every path from a SAD or pain-day row to the output passes through a ced_* row (rows carry no unit to tell).",
   };
 }
 
@@ -637,12 +639,16 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     const bridges = bridgesOf(lib, m);
     const held: Record<string, number> = Object.fromEntries(bridges.map((b) => [b.input, 0]));
     // A model that reads others live (`#id`, a meta charity's destinations) moves with every slider
-    // they move: no independence is expected for those.
+    // they move: no independence is expected for those. A money mover (`beneficiaries: "destinations"`)
+    // is a mix of its destinations' results and of where shifted money would have gone, each checked
+    // on its own: no proportionality either (an animal mover's ordinary charity includes companion-
+    // animal charities valued on human outcomes).
     const inherited = new Set(referencedModels(lib, m).flatMap((t) => usedAssumptions(lib, t)));
+    const mover = m.beneficiaries === "destinations";
     const check = (part: (a: Record<string, number>, extra?: Record<string, number>) => number, unit: string, animal: boolean, where: string, whole?: number) => {
       if (!Number.isFinite(part(av)) || part(av) === 0) return;
       for (const [a, shape] of expectations(unit, animal)) {
-        if (shape === "independent" && inherited.has(a)) continue;
+        if ((shape === "independent" || mover) && inherited.has(a)) continue;
         // Methane's tonnes (row methane_share) also carry its ozone deaths, a rate from methane's own
         // chemistry that rightly doesn't scale with $deaths_per_tco2e (docs/normalization.md 2.5): that
         // proportionality is checked on the other tonnes, with the methane share held at 0.
@@ -666,7 +672,7 @@ export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   }
   return {
     id: "INV-10", title: "Each slider moves exactly the models it should", status: "checked", checked: models.length, violations,
-    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e (with methane_share held at 0: methane's ozone deaths are a rate of their own) and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Every bridge's input (docs/normalization.md 2.6) is held at 0 for the output unit's expectations, and the part it brings in (headline − headline with the input at 0) must move as a model of its own unit would (a uov part independent of the animal, WELLBY and climate rates; a ced part proportional to the animal ones). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read.",
+    how: "At the defaults, each headline is recomputed with one assumption ×1.5 (and ×0.5 for linearity). Animal models: proportional to $chicken_vs_person and $daly_per_sad (the design's $daly_per_disabling_day), independent of $uov_per_daly, $daly_per_wellby, $uov_per_ln_consumption. Climate (tco2e) models: proportional to $deaths_per_tco2e (with methane_share held at 0: methane's ozone deaths are a rate of their own) and $life_value_multiplier, independent of the animal assumptions, $daly_per_wellby and $uov_per_ln_consumption. Others: independent of the animal assumptions, $deaths_per_tco2e, $climate_heat_death_delay and $daly_per_wellby, except WELLBY models, which are proportional to $daly_per_wellby and independent of $uov_per_daly and $uov_per_ln_consumption (with the deaths they value outside their WELLBYs, uov_valued_outside_wellbys, held at 0: INV-17 checks those). Every bridge's input (docs/normalization.md 2.6) is held at 0 for the output unit's expectations, and the part it brings in (headline − headline with the input at 0) must move as a model of its own unit would (a uov part independent of the animal, WELLBY and climate rates; a ced part proportional to the animal ones). Models with a zero or non-finite headline are skipped. A model that reads other models live (`#id`) is not expected to be independent of an assumption those models read, and a money mover (`beneficiaries: \"destinations\"`) not proportional to one either.",
   };
 }
 
@@ -848,6 +854,10 @@ export const MOVED_MONEY = /\b(money|dollars?|donations?|funds?)\b[^.;]{0,40}\b(
 /** A not-yet-proven organisation's chance of success, in our view the shared one. */
 const ORG_SUCCESS = /\bprobability of success\b|\bchance (that )?(the )?(new )?(organi[sz]ation|charity|evaluator) succeeds\b/i;
 const CAREER = /\bcareer (change|plan|switch|shift)s?\b/i;
+/** A result an evaluator already states as counterfactual value, in dollars of effective donations (CEARCH). */
+const ALREADY_NET = /\bEA[- ]donation value\b|\bequivalent donations\b/i;
+/** A formula that reads prior_dollar_value only in (moved_dollar_value - prior_dollar_value). */
+const onlyShiftedGain = (f: string | undefined) => !!f && !f.replace(/\s+/g, "").replaceAll("(moved_dollar_value-prior_dollar_value)", "").includes("prior_dollar_value");
 
 /** INV-12: every model that values money moved, raised or influenced, or career changes, goes through
  * the site's one method: the shared rows of src/engine/moved-money.ts, word for word, on the path. */
@@ -869,11 +879,23 @@ export function inv12(lib: Library): InvariantReport {
       } else if (sameFormula(v.formula, OWN_SPLIT.formula) && !isDestinationMix(m.byId.get("value_destinations")?.formula)) {
         violations.push({ inv: "INV-12", model: m.id, where: "value_destinations", detail: `value_destinations is ${m.byId.get("value_destinations")?.formula ?? "missing"}: it may hold only @meta money by recipient or cause, live results (#id), the shared destination rows, avg() and arithmetic` });
       }
-      for (const [id, t] of Object.entries(MOVED_MONEY_ROWS)) {
+      // Where shifted money would have gone: GiveDirectly in global health, an ordinary charity of the
+      // model's own cause elsewhere.
+      const shared = { ...MOVED_MONEY_ROWS, prior_dollar_value: priorDollarValue(m.cause) };
+      for (const [id, t] of Object.entries(shared)) {
         const r = m.byId.get(id);
         if (!r || id === "moved_dollar_value") continue;
         if (!sameFormula(r.formula, t.formula)) violations.push({ inv: "INV-12", model: m.id, where: `${id} formula`, detail: `shared row ${id} is ${r.formula ?? "an input"}, not ${t.formula}` });
       }
+      // Money moved gross is valued net of where shifted money would have gone, through the shared row; a
+      // result already stated as counterfactual dollars of effective donations (CEARCH) reads V alone.
+      const alreadyNet = ALREADY_NET.test(m.output!.native?.unit ?? "") || onPath.some((r) => ALREADY_NET.test(r.label));
+      if (v && path.has(v.id) && !alreadyNet && !path.has("moved_dollar_net_value"))
+        violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_net_value", detail: `values money moved but moved_dollar_net_value isn't on the path to the output: value new and shifted money through the shared rows (python3 scripts/moved-money.py <model> <scope> net)` });
+      // Other rows read where shifted money would have gone only as the gain of money all shifted.
+      for (const r of onPath)
+        if (!(r.id in shared) && r.deps.includes("prior_dollar_value") && !onlyShiftedGain(r.formula))
+          violations.push({ inv: "INV-12", model: m.id, where: `${r.id} prior_dollar_value`, detail: `${r.id} reads prior_dollar_value other than as the gain of shifted money (moved_dollar_value - prior_dollar_value): ${r.formula}` });
       for (const r of onPath)
         if (ORG_SUCCESS.test(r.label) && !r.factDeps.includes(SUCCESS_FACT))
           violations.push({ inv: "INV-12", model: m.id, where: `${r.id} success`, detail: `"${r.label}" is a meta organisation's chance of success but reads ${r.formula ?? fmt(inputValue(r, "charityevals"))}, not @${SUCCESS_FACT} (evaluator's figure in \`published\`)` });
@@ -888,7 +910,7 @@ export function inv12(lib: Library): InvariantReport {
   }
   return {
     id: "INV-12", title: "Money moved and career changes are valued one way", status: "partial", checked, violations,
-    how: `Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (${Object.keys(MOVED_MONEY_ROWS).join(", ")}) must have the shared formula word for word; and every row on its path stating an organisation's chance of success must read @${SUCCESS_FACT}. A row on the path about career changes needs the shared career_change_value = ${CAREER_CHANGE_FORMULA}. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.`,
+    how: `Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (${Object.keys(MOVED_MONEY_ROWS).join(", ")}) must have the shared formula word for word (prior_dollar_value: GiveDirectly for a model filed under global health, an ordinary charity of its own cause for any other, ${priorDollarValue("<cause>").formula}); moved_dollar_net_value must be on the path, unless the result is already counterfactual dollars of effective donations (CEARCH); no other row on the path may read prior_dollar_value except as the gain of money all shifted, (moved_dollar_value - prior_dollar_value); and every row on its path stating an organisation's chance of success must read @${SUCCESS_FACT}. A row on the path about career changes needs the shared career_change_value = ${CAREER_CHANGE_FORMULA}. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.`,
   };
 }
 
