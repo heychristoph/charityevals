@@ -41,7 +41,7 @@ Built with charityevals' humanitarian-relief template on 14 November 2026, as a 
 - Resettlement's cost comes from UNHCR's audited departures.
 - Resettled consumption reads the shared US figures.
 
-The result fell from 0.094 to 0.061. Round 2 verified these fixes and asked for three more: livelihoods' duration got its own reasoned figure (2.5 years), the share of refugees whose papers bring rights is anchored on new registrations and hosts' work rights, and UNHCR's support markup uses the same total as the sector shares. The result is 0.062. Then the donated goods left the cost and entered the credit share, as in our other builds (0.062 to 0.060). Round 3 checked those changes; the rounds are in audits/usa-for-unhcr-charityevals/.
+The result fell from 0.094 to 0.061. Round 2 verified these fixes and asked for three more: livelihoods' duration got its own reasoned figure (2.5 years), the share of refugees whose papers bring rights is anchored on new registrations and hosts' work rights, and UNHCR's support markup uses the same total as the sector shares. The result is 0.062. Then the donated goods left the cost and entered the credit share, as in our other builds (0.062 to 0.060). Round 3 checked those changes; the rounds are in audits/usa-for-unhcr-charityevals/. Round 6 applied the within-a-year rule to relief and return cash and goods (months covered × ln(1 + transfer ÷ consumption of those months)); the result is 0.060 either way (0.0603 to 0.0599).
 
 ### Sources
 

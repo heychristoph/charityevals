@@ -10,7 +10,7 @@ import {
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
-import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, SUCCESS_FACT, sameFormula } from "./moved-money";
+import { CAREER_CHANGE_FORMULA, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SUCCESS_FACT, isDestinationMix, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
@@ -859,6 +859,8 @@ export function inv12(lib: Library): InvariantReport {
         violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_value", detail: `values money moved (${moved.slice(0, 2).map((r) => `"${r.label}"`).join(", ") || m.output!.native?.unit}) but its result doesn't go through the shared moved_dollar_value: write the shared rows (python3 scripts/moved-money.py) and read them` });
       } else if (!MOVED_DOLLAR_FORMULAS.some((f) => sameFormula(v.formula, f))) {
         violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_value formula", detail: `moved_dollar_value is ${v.formula ?? "an input"}, not the shared formula` });
+      } else if (sameFormula(v.formula, OWN_SPLIT.formula) && !isDestinationMix(m.byId.get("value_destinations")?.formula)) {
+        violations.push({ inv: "INV-12", model: m.id, where: "value_destinations", detail: `value_destinations is ${m.byId.get("value_destinations")?.formula ?? "missing"}: it may hold only @meta money by recipient or cause, live results (#id), the shared destination rows, avg() and arithmetic` });
       }
       for (const [id, t] of Object.entries(MOVED_MONEY_ROWS)) {
         const r = m.byId.get(id);
@@ -1056,16 +1058,26 @@ export function inv14(lib: Library): InvariantReport {
   }
   const violations: Violation[] = [];
   let checked = 0;
-  for (const [key, rows] of groups) {
-    const models = new Set(rows.map((r) => r.model));
+  // A copy that can't move its model's result (a switched-off branch's placeholder) isn't a constant anyone relies on.
+  const av = assumptionValues(lib.assumptions);
+  const moves = (r: { model: string; row: string; value: number }) => {
+    const m = lib.models.get(r.model)!;
+    const base = bottomLine(lib, m, av).native;
+    const moved = bottomLine(lib, m, av, { [r.row]: r.value === 0 ? 1 : r.value * 2 }).native;
+    return !(Number.isFinite(base) && Number.isFinite(moved) && Math.abs(moved - base) <= 1e-12 * Math.max(1, Math.abs(base)));
+  };
+  for (const [key, all] of groups) {
     checked++;
+    if (new Set(all.map((r) => r.model)).size < 5) continue;
+    const rows = all.filter(moves);
+    const models = new Set(rows.map((r) => r.model));
     if (models.size < 5) continue;
     for (const r of rows)
       violations.push({ inv: "INV-14", model: r.model, where: `${r.row} = ${fmt(r.value)}`, detail: `"${r.label}" = ${fmt(r.value)} is typed into ${models.size} models (${[...models].slice(0, 4).join(", ")}${models.size > 4 ? ", …" : ""}) with no shared fact behind it (${key})` });
   }
   return {
     id: "INV-14", title: "No house constant without a shared fact", status: "partial", checked, violations,
-    how: `Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and "overall" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (${[...ALLOWED_LITERALS].join(", ")}: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, "10x bar" = 10). Rows reading a fact are formulas and never counted; the same number under different labels, or from different evaluators, is a coincidence, not a copy.`,
+    how: `Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and "overall" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (${[...ALLOWED_LITERALS].join(", ")}: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, "10x bar" = 10). Rows reading a fact are formulas and never counted, nor are copies that can't move their model's result (a switched-off branch's placeholder); the same number under different labels, or from different evaluators, is a coincidence, not a copy.`,
   };
 }
 
@@ -1368,7 +1380,10 @@ export function inv21(lib: Library, av = assumptionValues(lib.assumptions)): Inv
       if (m.missing_data) violations.push({ inv: "INV-21", model: m.id, where: "missing_data", detail: "a charityevals model carries missing_data: its branches' missing_data_adj rows apply the slider, so the field would count it twice" });
       if (!markers.length) { violations.push({ inv: "INV-21", model: m.id, where: "missing_data_adj", detail: "no missing_data_adj row: every branch says whether its outcome is measured (templates.md Convention 12)" }); continue; }
       const h1 = headline(lib, m, one);
-      const flat = headline(lib, m, av, Object.fromEntries(markers.map((r) => [r.id, 1])));
+      // Models it reads live (a meta charity's destinations) bring their own step: held at their value at 1.
+      const atOne = compute(lib, m, one);
+      const held = Object.fromEntries(modelDepsOf(m).map((x) => [`#${x}`, atOne[`#${x}`]]));
+      const flat = headline(lib, m, av, { ...held, ...Object.fromEntries(markers.map((r) => [r.id, 1])) });
       if (Number.isFinite(h1) && !close(h1, flat, 1e-9)) violations.push({ inv: "INV-21", model: m.id, where: "at 1", detail: `headline ${fmt(h1)} at $${D} = 1, ${fmt(flat)} with every marker at 1: the slider moves the result outside its markers` });
       continue;
     }

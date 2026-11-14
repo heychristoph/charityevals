@@ -579,7 +579,7 @@ success  = @meta.success_chance_new_org = 55.7% (50–63.5%)                   f
   The across-causes mix this section first had (Giving What We Can's 2020–22 split, ACE's Recommended
   Charities, longtermist causes at 0) was removed on 2026-11-02 with its facts (`@meta.dest_share_*`,
   `@meta.value_longtermist`, facts/ace_fund_weights.json): since late October no model used it. An
-  organisation that moves money across causes would rebuild it from where its own money goes.
+  organisation that moves money across causes values its own split (below, November 2026).
   Better Futures Guide's charities don't exist yet; Ambitious Impact assumes they reach GiveWell's bar
   (3× GiveDirectly's new estimate), so GiveWell's Top Charities stand in.
 - *Shifted money.* Money given anyway, now to a better charity, earns only the gain. Where it would
@@ -650,6 +650,25 @@ model was removed); INV-12 requires it of any model with a row on its path about
 |---|---|---|---|
 | CEARCH | 99.4 (84.0 after 2.9) → 114 | 210 → 161 | global-health destination; one success step (+50%) |
 | Better Futures Guide | 62.7 → 27.4 | 27.9 | livelihoods charities live (0.0206 vs 0.0413 UoV per dollar) |
+
+**November 2026: its own split, its own effect, pledges** (first used by Giving What We Can's model).
+
+- *Its own split.* An organisation that publishes where its donors' money went writes `value_destinations`
+  (`moved_dollar_value = value_destinations`, `python3 scripts/moved-money.py <model> own-split net`), from
+  its money by recipient or cause (`@meta.<org>_moved_*`), live results and the shared destination rows only
+  (`isDestinationMix`, INV-12). A recipient with a model is read live; a fund that follows an evaluator, at
+  that evaluator's charities (`value_global_health`); a recipient without a model, at its cause's modelled
+  average within the split, or, when none of the cause's recipients is modelled, at the site's models of
+  that cause with equal weights; other meta charities and causes the site has no published model for, at
+  the average of the rest (they drop out); recipients below the organisation's own bar, at
+  `@meta.prior_vs_cash × #givedirectly`, an ordinary charity, so shifted money to them gains nothing.
+- *Its own effect.* Money moved counts only the giving the organisation caused: recorded donations × the
+  share unrecorded giving adds × its own effect (`@meta.own_effect_share`, 30%, 15–45%, from Giving What We
+  Can's donor surveys, or the organisation's own survey). New money against shifted money is a second
+  question, the shared `new_money_share`.
+- *Pledges are a flow.* New pledges × yearly giving × the discounted years they keep giving, by the shared
+  persistence curve `@meta.pledge_recording_*` (59% giving in the first year, falling 48% a year towards a
+  28% floor; Giving What We Can's cohorts), at `$discount_rate`.
 
 ### 2.9 Won reforms: one way (October 2026)
 
