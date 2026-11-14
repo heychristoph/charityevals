@@ -56,7 +56,7 @@ The result is about four fifths of GovAI's, the closest peer: the same share of 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with GovAI's model as the closest peer. The audit rounds are in audits/institute-for-ai-policy-and-strategy-charityevals/.
+The model was built from the catastrophic-risk template, with GovAI's model as the closest peer. The first audit round found no high-severity problem. It raised the share of work counted as misuse from 15% to 20%, since two of the year's eight major items are cyber work. It also corrected the fellowship's source, computed the fellowship's credit from its inputs, and narrowed the range of the sponsor's central costs so none are counted twice against our Rethink Priorities models. Two verification rounds checked the changes. The audit rounds are in audits/institute-for-ai-policy-and-strategy-charityevals/.
 
 ### Sources
 
