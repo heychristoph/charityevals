@@ -137,7 +137,7 @@ def donor_rows(prefix, unit_label, staff, marginal=False):
     ]
     if marginal:
         rows.append(f("marginal_vs_past_average", "donor", "How much the next dollar does compared with the average dollar so far", "$marginal_vs_past_average",
-                      "This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued at the shared share of the average (docs/normalization.md 2.10). 1 in `published`: what the past average itself says.", "percent", published=1))
+                      "TEMPLATE: replace the formula with `@next_dollar.<charity id, - as _>`, the charity's own figure written by docs/normalization.md 2.10 (room × use × run) in facts/next_dollar.json; the slider here is only a placeholder that loads. This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued as a share of the average. 1 in `published`: what the past average itself says.", "percent", published=1))
     return rows
 
 UNITS = json.load(open(os.path.join(ROOT, "assumptions", "default.json")))["units"]
@@ -450,15 +450,15 @@ T["policy-research-meta"] = model("policy-research-meta", "policy, research and 
         f("moved_value", "effect", "Value of the money moved (units of value)", "money_moved * moved_dollar_net_value", None, "number", "units of value"),
         inp("careers_changed", "careers", "Careers changed to high-impact work in the year modelled", 0, "observed",
             "people the charity moved into high-impact jobs in the year modelled, from its own survey (0 with an explanation for most charities).", "integer", source=src("charity impact survey")),
-        inp("career_forgone_pay", "careers", "Pay a career changer gives up per year (US$)", {"low": 5000, "best": 15000, "high": 30000}, "estimate",
-            "what they could earn elsewhere less what they take, per year.", "usd", source=src("salary survey")),
-        inp("career_years_stayed", "careers", "Years a career changer stays in high-impact work", {"low": 2, "best": 5, "high": 10}, "estimate",
-            "from the charity's follow-up survey or a labelled reference class.", "number", "years", src("follow-up survey")),
+        f("career_forgone_pay", "careers", "Pay a career changer gives up per year (US$)", "@meta.career_forgone_pay_default",
+          "TEMPLATE: the site's shared default (facts/meta.json) while careers_changed is 0; a charity that changes careers replaces it with an input: what they could earn elsewhere less what they take, per year, from a salary survey.", "usd"),
+        f("career_years_stayed", "careers", "Years a career changer stays in high-impact work", "@meta.career_years_stayed_default",
+          "TEMPLATE: the site's shared default (facts/meta.json) while careers_changed is 0; else an input from the charity's follow-up survey or a labelled reference class.", "number", "years"),
         f("career_years", "careers", "Years a career changer stays, discounted", "pv_annuity_due(1, $discount_rate, career_years_stayed)", "Discounted at the shared rate.", "number", "years"),
         f("career_employer_value", "careers", "Value of a dollar of the new employers' work (units of value)", "moved_dollar_value",
           "TEMPLATE: the employer's live result per dollar (#model-id) where the jobs are at one charity the site models; the moved-money destinations where they are spread over many.", "small", "units of value / $"),
-        inp("career_counterfactual_share", "careers", "Share of the career changes the charity caused", {"low": 0.1, "best": 0.3, "high": 0.6}, "judgment",
-            "the share of the changes that wouldn't have happened without the charity, from its own survey of what people would have done, or a labelled reference class.", "percent"),
+        f("career_counterfactual_share", "careers", "Share of the career changes the charity caused", "@meta.career_counterfactual_share_default",
+          "TEMPLATE: the site's shared default (facts/meta.json) while careers_changed is 0; else an input: the share of the changes that wouldn't have happened without the charity, from its own survey of what people would have done, or a labelled reference class.", "percent"),
         f("career_change_value", "careers", "Value of one career change (units of value)", "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share", "The site's one career-change step (docs/normalization.md 2.8).", "number", "units of value"),
         missing_data_row("careers_missing_data_adj", "careers", "the career changes' count or counterfactual share"),
         f("careers_value", "careers", "Value of the career changes (units of value)", "careers_changed * career_change_value * careers_missing_data_adj", None, "number", "units of value"),
