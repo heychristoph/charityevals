@@ -51,7 +51,7 @@ The Center's main funder halved its general support in 2023, and that grant ends
 
 ### What drives the result
 
-Most of the result comes from catastrophes the world survives and from COVID-scale pandemics, because at the default 4% discount rate the future counts for only about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 104. The result is below our Nuclear Threat Initiative model's because the Center works only on pandemics: Rethink's typical nuclear project averts more deaths per dollar than a typical biosecurity one.
+Most of the result comes from catastrophes the world survives and from COVID-scale pandemics, because at the default 4% discount rate the future counts for only about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 104. The result is below our Nuclear Threat Initiative model's because the Center works only on pandemics: Rethink's typical nuclear project averts more deaths per dollar than a typical biosecurity one. It is far above our AI-safety models for the same reason the other way: a typical pandemic project averts many times more deaths per dollar than a typical AI project.
 
 ### Biggest uncertainties
 
