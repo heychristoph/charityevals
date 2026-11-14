@@ -134,6 +134,11 @@ export function buildLibrary(
     }
     if (files.has(parsed.data.id)) errors.push(`${parsed.data.id}: duplicate model id`);
     if (parsed.data.id === "history") errors.push(`${parsed.data.id}: id is taken by a site page`);
+    // A second row with the same id would silently patch the first.
+    const rowIds = new Set<string>();
+    for (const r of parsed.data.rows)
+      if (rowIds.has(r.id)) errors.push(`${parsed.data.id}: duplicate row id ${r.id}`);
+      else rowIds.add(r.id);
     for (const a of Object.keys(parsed.data.evaluator?.assumptions ?? {}))
       if (!assumptionIds.has(a)) errors.push(`${parsed.data.id}: evaluator pins unknown assumption $${a}`);
       else if (derived.has(a)) errors.push(`${parsed.data.id}: evaluator pins $${a}, which is worked out from other assumptions: pin those instead`);
