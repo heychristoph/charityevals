@@ -3,13 +3,15 @@
   "name": "California YIMBY Education Fund (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: renters and homeowners in California, through the extra homes state housing laws allow.",
   "template": "rights-advocacy",
   "estimate_basis": "past_average",
   "charity": "california-yimby-education-fund",
   "owner": "charityevals",
-  "summary": "The California YIMBY Education Fund is the tax-deductible 501(c)(3) arm of California YIMBY, a 501(c)(4) that lobbies for state laws letting more homes be built in California; the Education Fund does the research, public education, organising and coalition work behind the same campaign ($3.05 million spent in 2024, the latest filed year; gifts to the 501(c)(4) aren't deductible). Both organisations' average real spending over 2017-2024 is counted against the Education Fund's share of their part in the state housing laws of those years: the ADU clean-up laws that followed the 2016 reforms (about 10,000 extra backyard homes a year), and a judged 2,500 extra homes a year from streamlining, parking and other laws. Each extra home is valued on the site's log-consumption scale at California prices: its rent above what it costs to build, kept by whoever builds it, and the fall in rents it brings, which renters gain and better-off landlords lose. With the next dollar at 42% of the average, it comes to about 0.16 years of healthy life per 1,000 dollars, a little over twice the median of the site's global-health models. The result is mostly uncertainty: the organisations' share of the coalitions, how much rents fall per extra home and the share of the ADU boom due to the later laws are judgments, and the model's own ranges span several thousandfold; both branches are discounted for missing data.",
+  "summary": "The California YIMBY Education Fund is the tax-deductible 501(c)(3) arm of California YIMBY, a 501(c)(4) that lobbies for state laws letting more homes be built in California; the Education Fund does the research, public education, organising and coalition work behind the same campaign ($3.05 million spent in 2024, the latest filed year; gifts to the 501(c)(4) aren't deductible). Both organisations' average real spending over 2017-2024 is counted against the Education Fund's share of their part in the state housing laws of those years: the ADU clean-up laws that followed the 2016 reforms (about 10,000 extra backyard homes a year), and a judged 2,500 extra homes a year from streamlining, parking and other laws. Each extra home is valued on the site's log-consumption scale at California prices: its rent above what it costs to build, kept by whoever builds it, and the fall in rents it brings, which renters gain and better-off landlords lose (about two thirds of the value). With the next dollar at 42% of the average, it comes to about 0.12 years of healthy life per 1,000 dollars, about twice the median of the site's global-health models. The result is mostly uncertainty: the resources others put into the same laws, how much rents fall per extra home and the share of the ADU boom due to the later laws are judgments, and the model's own ranges span several thousandfold; both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: California YIMBY Education Fund",
@@ -280,7 +282,7 @@
         "quote": "Total Functional Expenses $1,877,320",
         "page": "tax year 2024"
       },
-      "explainer": "From its Form 990 as ProPublica lists it. The two organisations share paid staff (the Education Fund's Schedule R) and the Education Fund owed its sister $386,898 at the end of 2024 (Schedule D), so staff time is billed between them; the 501(c)(4)'s own revenue of $428,320 in 2024 rules out a large reimbursement counted twice."
+      "explainer": "From its Form 990 as ProPublica lists it. The two organisations share paid staff (the Education Fund's Schedule R) and the Education Fund owed its sister $386,898 at the end of 2024 (Schedule D), so staff time is billed between them. Nothing is counted twice: the Education Fund reports $1,622,724 of other salaries as its own expense, and the 501(c)(4) only $885,736 of salaries in 2024 (officers $453,327, others $432,409), so each books only its own share of the shared payroll rather than paying it all and booking the other's reimbursement as revenue (its whole revenue was $428,320)."
     },
     {
       "id": "edf_expenses_2021",
@@ -437,7 +439,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "HCD's completions run below permits and lag them a year or two (the completions line in California YIMBY's ADU retrospective sits below permits every year); some permits lapse. 75%, from 55% to 90%."
+      "explainer": "HCD's completions run below permits and lag them a year or two (the completions line in California YIMBY's ADU retrospective sits below permits every year); some permits lapse. The APR file's completion columns aren't in the tabulation used here and HCD's dashboard refuses automated fetches, so this is a judgment: 75%, from 55% to 90%."
     },
     {
       "id": "adu_extra_homes_per_year",
@@ -494,18 +496,27 @@
       "explainer": "The typical rent in California, the base for both the rents an extra home earns and the fall in rents it brings."
     },
     {
-      "id": "renter_share",
+      "id": "owner_occupied_rate",
       "section": "effect",
-      "label": "Share of California's homes that are rented",
+      "label": "Owner-occupied housing unit rate, California, 2020-2024",
       "format": "percent",
-      "value": 0.442,
+      "value": 0.559,
       "kind": "observed",
       "source": {
-        "title": "CensusDepth, California housing (US Census Bureau, American Community Survey 2023)",
-        "url": "https://censusdepth.com/states/california",
+        "title": "US Census Bureau, QuickFacts, California (American Community Survey 2020-2024)",
+        "url": "https://www.census.gov/quickfacts/fact/csv/CA/HSG445224",
         "retrieved": "2026-11-14",
-        "quote": "44.2% of housing units as renter-occupied"
+        "quote": "Owner-occupied housing unit rate, 2020-2024 55.9%",
+        "page": "Housing"
       },
+      "explainer": "The same five-year series as the median rent. census.gov refuses automated fetches; the figure is QuickFacts' as indexed by search."
+    },
+    {
+      "id": "renter_share",
+      "section": "effect",
+      "label": "Share of California's occupied homes that are rented",
+      "format": "percent",
+      "formula": "1 - owner_occupied_rate",
       "explainer": "The rest are owner-occupied: a fall in rents moves money from landlords to renters only on rented homes."
     },
     {
@@ -524,7 +535,7 @@
     {
       "id": "gap_share",
       "section": "effect",
-      "label": "Share of a new home's rent above what it costs to build (the regulatory gap)",
+      "label": "Other laws: share of a new apartment's rent above what it costs to build, land included (the regulatory gap)",
       "format": "percent",
       "value": {
         "low": 0.3,
@@ -532,7 +543,20 @@
         "high": 0.65
       },
       "kind": "judgment",
-      "explainer": "Glaeser and Gyourko find median house prices more than double the minimum profitable cost of building in Los Angeles, Oxnard-Ventura and San Francisco-Oakland (2.84 in San Francisco), and 1.25 to 2 in San Diego: a gap of 20% to 65% of the price, which they read as a regulatory tax. A home that rules no longer block is worth its rent and costs less to build, and the difference is the economy's gain. 50%, from 30% to 65%."
+      "explainer": "Glaeser and Gyourko find median house prices more than double the minimum profitable cost of building (land at an unregulated price included) in Los Angeles, Oxnard-Ventura and San Francisco-Oakland (2.84 in San Francisco), and 1.25 to 2 in San Diego: a gap of 20% to 65% of the price, mostly bid-up land, which they read as a regulatory tax. A home that rules no longer block is worth its rent and costs less to build, and the difference is the economy's gain. 50%, from 30% to 65%."
+    },
+    {
+      "id": "adu_gap_share",
+      "section": "effect",
+      "label": "ADU laws: share of an ADU's rent above what it costs to build",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.35,
+        "high": 0.55
+      },
+      "kind": "judgment",
+      "explainer": "An ADU builder buys no land, so its gap is rent against construction cost alone. At the ADU rent here (about $20,800 a year) and a user cost of about 6.5% a year (interest, upkeep, depreciation), a detached ADU costing $200,000 to $250,000 leaves 20% to 37% of the rent; a garage conversion costing half that leaves over 60%. Most new ADUs are detached. 35%, from 15% to 55%."
     },
     {
       "id": "rent_fall_per_stock",
@@ -540,12 +564,12 @@
       "label": "Fall in rents (%) for each 1% more homes in the state",
       "format": "multiple",
       "value": {
-        "low": 0.5,
-        "best": 1.5,
-        "high": 3
+        "low": 0.4,
+        "best": 1,
+        "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "The Reserve Bank of Australia's model uses 2.5% lower housing costs for each 1% more dwellings and Abelson et al. (2005) 3.6% in the long run (RBA Research Discussion Paper 2019-01); a state open to migration falls less, since newcomers take some of the homes. 1.5, from 0.5 to 3."
+      "explainer": "Across US metros, Pew's analysis of Zillow data (July 2025) finds each 10% more housing from 2017 to 2023 went with rents growing about 5% less to 2024: 0.5 per 1%, for a market open to people moving in from nearby, and correlational. A whole state is less open than a metro, so its rents fall more; the Reserve Bank of Australia's model of a national market uses 2.5% lower housing costs for each 1% more dwellings (RBA Research Discussion Paper 2019-01), the high end (the paper's Abelson et al. figure, 3.6%, is house prices, not rents, and isn't used). 1, from 0.4 to 2.5."
     },
     {
       "id": "ca_consumption_vs_us",
@@ -561,67 +585,67 @@
       "explainer": "California's prices run about 12% above the US average (the Bureau of Economic Analysis's regional price parities, about 112 for California), so the same living standard takes more dollars there and a dollar counts for less on the log scale. 1.12, from 1 to 1.25."
     },
     {
-      "id": "renter_spending_vs_all",
+      "id": "renter_lowest_fifth_weight",
       "section": "effect",
-      "label": "Renters' spending per person against all US households'",
+      "label": "Weight of the poorest income fifth in renters' consumption (the rest the second fifth)",
       "format": "percent",
       "value": {
-        "low": 0.55,
-        "best": 0.7,
-        "high": 0.85
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Renting households earn about two thirds of what all households do (the American Community Survey's median income by tenure) and spend a larger share of it; between the poorest fifth's 45% and the second fifth's 64% of the average household's spending, and with smaller households. 70%, from 55% to 85%."
+      "explainer": "Renting households' median income is about two thirds of all households' (the American Community Survey's median income by tenure), between the poorest and the second-poorest fifth. Half each, from 20% to 80% on the poorest fifth."
     },
     {
       "id": "owner_multiple",
       "section": "effect",
-      "label": "Consumption of homeowners who build ADUs, as a multiple of the US average per person",
+      "label": "Consumption of homeowners who build ADUs, as a multiple of the US survey average per person",
       "format": "multiple",
       "value": {
         "low": 1,
-        "best": 1.3,
+        "best": 1.4,
         "high": 2
       },
       "kind": "judgment",
-      "explainer": "ADUs are built by homeowners, who earn more than renters and somewhat more than the average household. 1.3 times the national-accounts average, from 1 to 2."
+      "explainer": "ADUs are built by homeowners, who earn more than renters and than the average household: between the average and the top income fifth, whose households spend about 1.8 times the average and are larger (the Consumer Expenditure Survey's income-fifth tables). 1.4 times the survey average per person, from 1 to 2."
     },
     {
       "id": "landlord_multiple",
       "section": "effect",
-      "label": "Consumption of landlords and developers, as a multiple of the US average per person",
+      "label": "Consumption of landlords and developers, as a multiple of the US survey average per person",
       "format": "multiple",
       "value": {
-        "low": 1,
-        "best": 1.6,
-        "high": 3
+        "low": 1.2,
+        "best": 2,
+        "high": 3.5
       },
       "kind": "judgment",
-      "explainer": "Rental housing is owned by better-off households, funds and firms; developers and landowners keep the gain on new apartments. 1.6 times the national-accounts average, from 1 to 3, as the phone companies' owners in Prison Policy Initiative's model are judged at 2 (1 to 4)."
+      "explainer": "Rental housing is owned by better-off households, funds and firms; developers and landowners keep the gain on new apartments. Around the top income fifth and above it: 2 times the survey average per person, from 1.2 to 3.5, as the phone companies' owners in Prison Policy Initiative's model are judged at 2 (1 to 4)."
     },
     {
       "id": "renter_consumption",
       "section": "effect",
       "label": "Renters' consumption per person (US$ a year)",
       "format": "usd",
-      "formula": "@united_states.ce_expenditure_per_person_2024 * renter_spending_vs_all * ca_consumption_vs_us",
-      "explainer": "The shared survey spending per person (the base the site uses for the people a programme serves), times renters' share and California's price level."
+      "formula": "@united_states.ce_expenditure_per_person_2024 * (renter_lowest_fifth_weight * @united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile + (1 - renter_lowest_fifth_weight) * @united_states.ce_second_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_second_quintile) * ca_consumption_vs_us",
+      "explainer": "The shared survey spending per person (the base the site uses for the people a programme serves, docs/normalization.md 2.14), scaled to renters by the shared income-fifth ratios (per household, turned into per person with the shared household sizes), and to California's price level."
     },
     {
       "id": "owner_consumption",
       "section": "effect",
       "label": "ADU builders' consumption per person (US$ a year)",
       "format": "usd",
-      "formula": "@united_states.consumption_per_person_2024 * owner_multiple * ca_consumption_vs_us",
-      "explainer": "The shared national-accounts consumption per person (the base the site uses for those who pay), times the multiple and California's price level."
+      "formula": "@united_states.ce_expenditure_per_person_2024 * owner_multiple * ca_consumption_vs_us",
+      "explainer": "The same survey base (rule 2.14 keeps the national accounts for everyone's consumption, as taxpayers'; ADU builders are a group), times the multiple and California's price level."
     },
     {
       "id": "landlord_consumption",
       "section": "effect",
       "label": "Landlords' and developers' consumption per person (US$ a year)",
       "format": "usd",
-      "formula": "@united_states.consumption_per_person_2024 * landlord_multiple * ca_consumption_vs_us",
-      "explainer": "As above."
+      "formula": "@united_states.ce_expenditure_per_person_2024 * landlord_multiple * ca_consumption_vs_us",
+      "explainer": "As above, for landlords and developers."
     },
     {
       "id": "transfer_per_home_year",
@@ -645,7 +669,7 @@
       "section": "effect",
       "label": "Gain to the owner who builds an ADU, a year (units of value)",
       "format": "number",
-      "formula": "$uov_per_ln_consumption * gap_share * median_rent_month * 12 * adu_rent_vs_median / owner_consumption",
+      "formula": "$uov_per_ln_consumption * adu_gap_share * median_rent_month * 12 * adu_rent_vs_median / owner_consumption",
       "explainer": "The ADU's rent above what it costs to build, kept by the homeowner who builds it (or saved by the family member who lives in it), at the homeowner's consumption.",
       "unit": "UoV"
     },
@@ -669,7 +693,7 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Once a law would have come (after the years a win counts, below), builders would partly catch up on the homes it brought earlier; the extra homes' lead shrinks at this rate. A separate question from whether the law would have come: that is the years a win counts. 5% a year, from 2% to 15%."
+      "explainer": "Once a law would have come (after the years a win counts, below), builders would partly catch up on the homes it brought earlier; the extra homes' lead shrinks at this rate from then on. A separate question from whether the law would have come: that is the years a win counts. 5% a year, from 2% to 15%."
     },
     {
       "id": "home_life_years",
@@ -686,12 +710,21 @@
       "unit": "years"
     },
     {
+      "id": "catch_up_start_years",
+      "section": "effect",
+      "label": "Years from a home's completion until the catch-up starts",
+      "format": "number",
+      "formula": "years_of_impact * 0.5",
+      "explainer": "The homes are built over the years a win counts; the average one is finished halfway through, and the counterfactual law (and the catch-up) arrives at the end of those years: half of them later.",
+      "unit": "years"
+    },
+    {
       "id": "home_pv_years",
       "section": "effect",
       "label": "Discounted years an extra home counts",
       "format": "number",
-      "formula": "pv_annuity_due(1, $discount_rate + catch_up_rate, home_life_years)",
-      "explainer": "Each extra home's yearly gain over its life, discounted at the shared rate plus the catch-up.",
+      "formula": "pv_annuity_due(1, $discount_rate, catch_up_start_years) + (1 + $discount_rate) ^ (0 - catch_up_start_years) * pv_annuity_due(1, $discount_rate + catch_up_rate, home_life_years - catch_up_start_years)",
+      "explainer": "Each extra home's yearly gain over its life, discounted at the shared rate, with the catch-up shrinking its lead only once the law would have come.",
       "unit": "years"
     },
     {
@@ -795,7 +828,7 @@
       "label": "Health gained per person affected per year (DALYs)",
       "format": "small",
       "formula": "0",
-      "explainer": "Zero: no health channel is counted (crowding and homelessness are in the side effects' range, not modelled).",
+      "explainer": "Zero here: less homelessness from lower rents is a side-effect row (ue_homelessness); crowding isn't counted.",
       "unit": "DALYs"
     },
     {
@@ -910,30 +943,80 @@
       "explainer": "1: the homes count is net of those that would have been built anyway, and the laws' coming some day is in the years a win counts."
     },
     {
+      "id": "family_spend_period",
+      "section": "adjustments",
+      "label": "Both organisations' real spending over 2017-2024 (2024 dollars)",
+      "format": "usd",
+      "formula": "family_expenses_2024 * average_spend_vs_year * campaign_years",
+      "explainer": "The eight years' spending above, in 2024 prices: the organisations' side of the coalitions."
+    },
+    {
+      "id": "adu_family_spend_share",
+      "section": "adjustments",
+      "label": "ADU laws: share of both organisations' spending that went on ADU work",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "California YIMBY supported the clean-up bills (AB 68 and AB 881, AB 2221, AB 976, SB 1211, Wikipedia), sponsored AB 3057 (2024) and published the ADU retrospective, among a dozen or more bills a year. 15%, from 8% to 30%."
+    },
+    {
+      "id": "adu_others_resources",
+      "section": "adjustments",
+      "label": "ADU laws: everyone else's resources behind the follow-on laws, 2017-2024 (US$)",
+      "format": "usd",
+      "value": {
+        "low": 10000000,
+        "best": 35000000,
+        "high": 100000000
+      },
+      "kind": "judgment",
+      "explainer": "About a dozen bills over eight years, each carried by an author's office and committee staff (a few staff-months each at a legislative staffer's cost), HCD's ADU enforcement and technical-assistance staff, and the lobbying of the Casita Coalition (from 2020), the building industry, the California Association of Realtors, Habitat for Humanity California, regional business groups and local YIMBY groups; the lobbying disclosures (Cal-Access) report each lobbyer's spending in total, not by bill, so the ADU part of the large lobbies' budgets is a judgment. $35 million, from $10 million to $100 million."
+    },
+    {
       "id": "adu_coalition_share",
       "section": "adjustments",
       "label": "ADU laws: both organisations' share of the resources behind the follow-on laws",
       "format": "percent",
+      "formula": "adu_family_spend_share * family_spend_period / (adu_family_spend_share * family_spend_period + adu_others_resources)",
+      "explainer": "Their ADU spending over all the resources behind the laws (Convention 2): about 11% at the best guesses."
+    },
+    {
+      "id": "oth_family_spend_share",
+      "section": "adjustments",
+      "label": "Other laws: share of both organisations' spending that went on the laws in this branch",
+      "format": "percent",
       "value": {
-        "low": 0.03,
-        "best": 0.1,
-        "high": 0.25
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "California YIMBY sponsored or backed several of the clean-up bills (AB 68 and AB 881, AB 2221, AB 976, SB 1211, Wikipedia) and published the ADU retrospective. Behind them were the authors' offices, HCD's enforcement staff, the Casita Coalition, the building and realtor lobbies, Habitat for Humanity California, regional business groups and local YIMBY groups. If a sixth of its eight years' spending (about $4 million) went on ADUs, against tens of millions across the coalition and the legislators' own staff: 10%, from 3% to 25% (Convention 2)."
+      "explainer": "The rest of the spending went on the ADU work above, on bills that failed (SB 827 in 2018, SB 50 in 2019-2020, which a past average still counts as cost but which bring no homes), on local organising and on the narrative work. 50%, from 30% to 70%."
+    },
+    {
+      "id": "oth_others_resources",
+      "section": "adjustments",
+      "label": "Other laws: everyone else's resources behind them, 2017-2024 (US$)",
+      "format": "usd",
+      "value": {
+        "low": 50000000,
+        "best": 150000000,
+        "high": 400000000
+      },
+      "kind": "judgment",
+      "explainer": "Senator Wiener's and the other authors' offices, the building-trades and other unions whose labour terms several laws carry, affordable-housing developers and their associations, business groups (Bay Area Council), SPUR, Abundant Housing LA, YIMBY Law and YIMBY Action, the building and realtor lobbies, and HCD's housing-element enforcement; California YIMBY co-sponsored AB 2097 and backed the rest. Bigger and more contested laws than the ADU ones: $150 million, from $50 million to $400 million."
     },
     {
       "id": "oth_coalition_share",
       "section": "adjustments",
       "label": "Other laws: both organisations' share of the resources behind them",
       "format": "percent",
-      "value": {
-        "low": 0.03,
-        "best": 0.08,
-        "high": 0.2
-      },
-      "kind": "judgment",
-      "explainer": "Senator Wiener's office, the building trades and the labour unions whose terms several laws carry, affordable-housing developers, business groups (Bay Area Council), SPUR, Abundant Housing LA, YIMBY Law and YIMBY Action all spent on these laws; California YIMBY was among the sponsors of several (it co-sponsored AB 2097). 8%, from 3% to 20%."
+      "formula": "oth_family_spend_share * family_spend_period / (oth_family_spend_share * family_spend_period + oth_others_resources)",
+      "explainer": "Their spending on these laws over all the resources behind them (Convention 2): about 9% at the best guesses."
     },
     {
       "id": "adu_attribution_share",
@@ -978,7 +1061,7 @@
       "label": "ADU laws: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin: the share of the boom due to the follow-on laws and the organisations' share are judgments, with no study of either; the shared missing-data step applies."
+      "explainer": "Thin: HCD counts the ADUs, but what they do to rents and to their builders is judged from market studies, not measured for these homes; the shared missing-data step applies."
     },
     {
       "id": "oth_missing_data_adj",
@@ -986,7 +1069,7 @@
       "label": "Other laws: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin: the homes these laws added are our judgment; the shared missing-data step applies."
+      "explainer": "Thin: the homes these laws added are our judgment, with no count of their own, and their effect is judged from market studies; the shared missing-data step applies."
     },
     {
       "id": "adu_total_adj",
@@ -1061,29 +1144,29 @@
     {
       "id": "ue_agglomeration",
       "section": "adjustments",
-      "label": "Side effect: higher earnings from more people working in California's productive cities",
+      "label": "Side effect: higher productivity of other workers as California's job centres grow",
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.15,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "Hsieh and Moretti estimate that housing constraints in the most productive US cities (New York, the San Francisco Bay Area) lowered aggregate US growth by 36% from 1964 to 2009, by keeping workers out of them; later work finds smaller effects. The value above counts housing, not the higher wages of those who can now live near the jobs. 15% of the modelled value, from 0 to 50%.",
-      "side_effect": "added"
-    },
-    {
-      "id": "ue_climate",
-      "section": "adjustments",
-      "label": "Side effect: lower emissions from homes built in mild, dense, transit-served places",
-      "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.05,
+        "best": 0.03,
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Infill homes in coastal California use less energy and driving than the homes their residents would otherwise have (inland, or in hotter states): a few tonnes of CO2 a year each. At the shared 0.00019 deaths per tonne (facts/climate.json) and the shared value of a death, a home's discounted emissions are worth about 5% of its housing value here. 5%, from 0 to 15%.",
+      "explainer": "The movers' own higher wages are mostly paid back in the rents that the builders' gain above already counts; what is new is the spillover to other workers when a city grows (urban productivity rises by about 2% to 5% for each doubling of density, the agglomeration literature, Combes and Gobillon's 2015 review). The aggregate gains are disputed: Hsieh and Moretti (2019) put the cost of housing limits in the most productive cities at 36% of US growth from 1964 to 2009, Glaeser and Gyourko (this model's source) at about 2% of GDP at most, and a 2026 comment by Greaney far less. 3% of the modelled value, from 0 to 15%.",
+      "side_effect": "added"
+    },
+    {
+      "id": "ue_homelessness",
+      "section": "adjustments",
+      "label": "Side effect: less homelessness from lower rents",
+      "format": "percent",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.06
+      },
+      "kind": "judgment",
+      "explainer": "Homelessness across US regions tracks rents far more than poverty or addiction (Colburn and Aldern, Homelessness Is a Housing Problem, 2022; Byrne et al. 2013). At the fall in rents above, an extra home lowers rents by about a ten-millionth, which with California's roughly 187,000 homeless people and a rent elasticity of homelessness near 1 is about 0.02 fewer homeless people per home-year; at a homeless person's excess deaths and life-satisfaction gap that is about 2% of a home-year's value here. 2%, from 0.5% to 6%.",
       "side_effect": "added"
     },
     {
@@ -1105,8 +1188,32 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "ue_agglomeration + ue_climate + ue_neighbours",
-      "explainer": "The three side effects, each a row above, applied to both branches."
+      "formula": "ue_agglomeration + ue_homelessness + ue_neighbours",
+      "explainer": "The three side effects, each a row above, applied to both branches; lower emissions are counted in tonnes through the climate bridge below."
+    },
+    {
+      "id": "tco2e_per_extra_home_year",
+      "section": "adjustments",
+      "label": "Tonnes of CO2e a year an extra home in California saves against where its household would otherwise live",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 2,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Coastal California households emit less than almost anywhere in the US: a mild climate, a cleaner grid and shorter drives in infill places (Glaeser and Kahn, The greenness of cities, Journal of Urban Economics 2010, find San Diego and San Francisco the lowest-emitting US metros; the CoolClimate household footprints of Jones and Kammen vary by several tonnes between places). Against living inland or in a hotter, car-bound state: 2 tonnes a home-year, from 0.5 to 4.",
+      "unit": "tCO2e"
+    },
+    {
+      "id": "homes_tco2e_averted",
+      "section": "adjustments",
+      "label": "Side effect: emissions averted by the extra homes, the Education Fund's credit (t CO2e)",
+      "format": "number",
+      "formula": "(adu_extra_homes_per_year * adu_total_adj * adu_discounted_years + oth_extra_homes_per_year * oth_total_adj * oth_discounted_years) * home_pv_years / campaign_years * tco2e_per_extra_home_year",
+      "explainer": "The extra homes, with each branch's adjustments and discounted years, over their discounted lives, per campaign year, times the tonnes a home-year saves.",
+      "unit": "tCO2e",
+      "side_effect": "added"
     },
     {
       "id": "uov_bridged",
@@ -1144,6 +1251,47 @@
       "unit": "DALYs"
     },
     {
+      "id": "air_pollution_weight",
+      "section": "bridges",
+      "label": "Air pollution these tonnes cut, relative to an average fossil-fuel tonne",
+      "format": "number",
+      "formula": "@climate.us_power_smoke_factor",
+      "explainer": "Read by the tonnes' bridge: the tonnes are US electricity, gas and petrol, whose smoke kills far fewer people per tonne than the world's fossil-fuel average; the shared US power figure stands in for both."
+    },
+    {
+      "id": "extra_deaths_per_tco2e",
+      "section": "bridges",
+      "label": "Air-pollution deaths averted per tonne, counted directly (none here)",
+      "format": "small",
+      "formula": "0",
+      "explainer": "Deaths a source counts directly beside the tonnes; 0 when the smoke is in air_pollution_weight, so nothing is counted twice."
+    },
+    {
+      "id": "methane_share",
+      "section": "bridges",
+      "label": "Share of these tonnes that are methane",
+      "format": "percent",
+      "formula": "0",
+      "explainer": "0: the tonnes are from burning fuel (driving, heating, cooling); the gas system's leaks are small beside them."
+    },
+    {
+      "id": "tco2e_bridged",
+      "section": "bridges",
+      "label": "Emissions averted, in tonnes of CO2e (after adjustments)",
+      "format": "number",
+      "formula": "homes_tco2e_averted",
+      "unit": "tCO2e"
+    },
+    {
+      "id": "dalys_from_tco2e",
+      "section": "bridges",
+      "label": "Climate, in healthy years",
+      "format": "number",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit.",
+      "unit": "DALYs"
+    },
+    {
       "id": "dalys_direct",
       "section": "outcome",
       "label": "Healthy years counted directly (before adjustments)",
@@ -1156,8 +1304,8 @@
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
-      "explainer": "Every outcome in healthy years, after each branch's adjustments, plus the side effects.",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj) + dalys_from_tco2e",
+      "explainer": "Every outcome in healthy years, after each branch's adjustments, plus the side effects (the emissions through their own bridge).",
       "unit": "DALYs"
     },
     {
