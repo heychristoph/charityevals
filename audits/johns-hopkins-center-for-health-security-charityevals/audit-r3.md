@@ -12,6 +12,8 @@ Checked only the change since round 2 (evidence adjustment applied per branch, w
 
 New findings: none. (Not a finding: w_bio + w_fb equals the total only while the ai, nuclear and policy branches are zero, which holds here.)
 
-Model-sha: 4ffc751d634c19424f51f70c447005af9a1b144ab6ebdb67bde572a822abdae1
+Model-sha: f0dc99fa873659a3647468f603ae1d7c49ef35d88dd60ac31a5b473c67c12118
 
 **Verdict: pass**
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

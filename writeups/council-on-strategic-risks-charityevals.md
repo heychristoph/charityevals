@@ -1,6 +1,6 @@
 ### Summary
 
-The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="council-on-strategic-risks-charityevals">12</span> years of healthy life per $1,000**. Two thirds of that comes from the nuclear work, about a fifth of the cost. A quarter comes from the biological work, about a third of the cost. The plausible range runs from about 0.8 to about 170.
+The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="council-on-strategic-risks-charityevals">12</span> years of healthy life per $1,000**. About 70% of that comes from the nuclear work, about a quarter of the cost. A fifth comes from the biological work, about a third of the cost. The plausible range runs from about 0.8 to about 180.
 
 ### What the charity does
 
@@ -16,19 +16,19 @@ Nuclear war and pandemics carry a yearly chance of catastrophe, taken from the s
 
 Fellows count through the work they add to the field: the share who go on to work on these risks because of the fellowship, valued at a typical dollar of that work. The fellowships get credit for their share of the cost behind that work.
 
-The climate-security work aims to get militaries and governments to plan and spend for climate risks as their scale warrants. A dollar of it is taken to bear on about $1,000 of public money a year. The anchor is the US Defense Department's $5.1 billion request for climate-risk work in 2024, much of it cut back in 2025. Rich countries' public investment loses about 13% of its value to inefficiency. The work is taken to close 0.3% of that gap in what it touches. That makes about 39 cents of public value a year per dollar, valued at what a dollar is worth to the average American.
+The climate-security work aims to get militaries and governments to plan and spend for climate risks as their scale warrants. A dollar of it is taken to bear on about $500 of public money a year. The anchor is the US Defense Department's $5.1 billion request for climate-risk work in 2024, at most half of which is left after the 2025 cuts. Rich countries' public investment loses about 13% of its value to inefficiency. The work is taken to close 0.3% of that gap in what it touches. That makes about 20 cents of public value a year per dollar, valued at what a dollar is worth to the average American.
 
 ### How the model works
 
-The return doesn't split the Nolan Center's spending by area. The fellowships are taken to cost about $350,000. Of the rest, 65% is put on biological threats. The anchors are Coefficient Giving's three-year grant for biosecurity fellowships, policy and operations (about $2.2 million a year from November 2024) and the Center's own list of projects. Half of the Converging Risks Lab counts as nuclear work and half as climate security. That puts about 35% of the cost on pandemics, 21% on nuclear risk, 8% on the fellowships and 36% on climate security. Each part has its own adjustments:
+The return doesn't split the Nolan Center's spending by area. The fellowships are taken to cost about $350,000. Of the rest, 60% is put on biological threats. The anchor is Coefficient Giving's three-year grant for biosecurity fellowships, policy and operations, about $2.2 million a year from November 2024. Less the fellowships and a share for running the organisation, that leaves about 58% of the Center's other work. Half of the Converging Risks Lab counts as nuclear work and half as climate security. That puts about 32% of the cost on pandemics, 24% on nuclear risk, 8% on the fellowships and 36% on climate security. Each part has its own adjustments:
 
 | Adjustment | Pandemics | Nuclear | Fellowships | Climate security |
 |---|---|---|---|---|
-| How far the effect applies | 0.8 | 0.7 | 1 | 0.7 |
+| How far the effect applies | 0.8 | 0.7 (the lab's project 0.4) | 1 | 0.7 |
 | Work others would not have done now | 0.7 | 0.7 | 1 | 0.6 |
 | CSR's share of the resources | 0.8 | 0.9 | 0.95 | 0.7 |
 
-Every part is discounted 50% for missing data. The climate-security figure for how far the effect applies is lower because the US Defense Department dropped much of its climate work in 2025.
+Every part is discounted 50% for missing data. The Converging Risks Lab's climate-nuclear project counts at 0.4 because foresight research is a step further from the risk. The climate-security figure is lower than our Federation of American Scientists model's because past gains in US defence planning are being undone.
 
 Side effects add 5%. Most of that is work against a single detonation or a limited nuclear war, which has no shared forecast. The rest is chemical weapons and the climate-security work's gains beyond better spending. No harm is added beyond a typical project's chance of backfiring.
 
@@ -36,13 +36,13 @@ CSR holds about two months of spending in unrestricted reserves, but most of its
 
 ### What drives the result
 
-The nuclear work brings 67% of the result, the biological work 24%, the fellowships 9% and the climate-security work under 0.1%. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe. The result is about twice the median of the site's catastrophic-risk models. It sits between the Johns Hopkins Center for Health Security, which works only on pandemics, and the Nuclear Threat Initiative, which spends more of its money on nuclear risk.
+The nuclear work brings 71% of the result, the biological work 21%, the fellowships 8% and the climate-security work under 0.01%. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe. The result is about twice the median of the site's catastrophic-risk models. It sits between the Johns Hopkins Center for Health Security, which works only on pandemics, and the Nuclear Threat Initiative, which spends more of its money on nuclear risk.
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 5 to 77.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 5 to 82.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
-- **How the Nolan Center's spending splits between biological and nuclear work.** From 50% to 80% biological, which moves the result from about 14 to 10.
+- **How the Nolan Center's spending splits between biological and nuclear work.** From 45% to 80% biological, which moves the result from about 14 to 9.
 - **How much a dollar of pandemic work cuts the risk.** Also ten times either way.
 
 ### What isn't modelled

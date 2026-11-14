@@ -23,4 +23,6 @@ No findings.
 
 **Verdict: pass (all four round-1 findings settled; no new findings).**
 
-Model-sha: 3a5e14768d0fa4782429edc841ec0e4a3dd19ae53909ab80ffd146dd097872f9
+Model-sha: 01adf044600aef63b931966903b39f34a3eaae99e5ec7da23fe87bd223f22db8
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.

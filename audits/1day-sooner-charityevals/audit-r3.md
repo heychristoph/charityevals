@@ -8,4 +8,6 @@
 | d | Lint (audit-model) | 1 low (spread across joint ranges, already stated in the summary); unchanged |
 
 Verdict: pass
-Model-sha: c921e995b740760a13337c9270732d3e91c8d0662fd50ffea91a040fa0d69ee3
+Model-sha: 8999ad677f10ec1652774a64bdb7fd008ccbcbec373c47cd28f08251ea99fabf
+
+Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
