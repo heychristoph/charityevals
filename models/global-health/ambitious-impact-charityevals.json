@@ -2,13 +2,11 @@
  "id": "ambitious-impact-charityevals",
  "kind": "charity",
  "cause": "global-health",
- "beneficiaries": "destinations",
- "beneficiaries_note": "Founds charities: each charity it launched, read live, brings its own countries.",
  "template": "policy-research-meta",
  "estimate_basis": "past_average",
  "charity": "ambitious-impact",
  "owner": "charityevals",
- "summary": "Ambitious Impact (formerly Charity Entrepreneurship) researches intervention ideas and founds new charities to run the best of them; this model covers all its programmes in the year to March 2025: the nine charities and five effective giving organisations it launched, Founding to Give, its funding circles, grantmaker and research training, and its research, against its own spending of $2.5M (the $2.5M of seed grants it passed on are the new charities' money). At the defaults it averts about 20 years of healthy life per $1,000: each organisation founded is credited with the average lifetime fundraising of its charities ($107M raised by 60 so far, times 2.5 for the years to come), half of it caused by Ambitious Impact, valued at the figures the rankings give the charities it has launched, half counted as new money, the next dollar at 36% of the past average. It is more than ten times its peers because it creates charities that each go on to raise and spend several times its cost per charity, most of them in global health near the cause's average: it sits above the charities it founds, not among typical global-health programmes. The result moves most with the next-dollar figure, the discount rate, how much its charities will raise over their lives and how much of their existence it caused; the spending its grantmaker training and research changed and its fellows' careers are discounted for missing data.",
+ "summary": "Ambitious Impact (formerly Charity Entrepreneurship) researches intervention ideas and founds new charities to run the best of them; this model covers all its programmes in the year to March 2025: the nine charities and five effective giving organisations it launched, Founding to Give, its funding circles, grantmaker and research training, and its research, against its own spending of $2.5M (the seed grants it passed on are valued as money for the new charities). At the defaults it averts about 14 years of healthy life per $1,000: each organisation founded is credited with the average lifetime fundraising of its charities ($107M raised by 60 so far, times 2.5 for the years to come), 60% of it caused by Ambitious Impact, valued at the figures the rankings give the charities it has launched, institutional funders' grants as all shifted and the rest half new money, the next dollar at 36% of the past average. It is more than ten times its peers because it creates charities that each go on to raise and spend several times its cost per charity, most of them in global health near the cause's average: it sits above the charities it founds, not among typical global-health programmes. The result moves most with the missing-data discount, where shifted money would otherwise have gone, the discount rate and the next-dollar figure; the projected part of its charities' future fundraising, the spending its grantmaker training and research changed and its fellows' careers are discounted for missing data.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Ambitious Impact",
@@ -82,6 +80,8 @@
    "unit": "uov"
   }
  },
+ "beneficiaries": "destinations",
+ "beneficiaries_note": "Founds charities: each charity it launched, read live, brings its own countries.",
  "name": "Ambitious Impact (charityevals)",
  "rows": [
   {
@@ -116,7 +116,7 @@
     "quote": "Grants payable (note 4) 1,969,975",
     "retrieved": "2026-11-14"
    },
-   "explainer": "Seed and post-seed grants it passed on to the charities it incubated (note 13: £952,040 of seed-funding regrants and £277,407 of post-seed regrants from restricted funds, the rest unrestricted). Donors' money passed on to the new charities: it is part of what those charities raise and spend (charities_raised_to_date), counted there, so it is not Ambitious Impact's own cost here."
+   "explainer": "Seed and post-seed grants it made to the charities it incubated (note 13: £952,040 of seed-funding regrants and £277,407 of post-seed regrants from restricted funds, £740,528 from unrestricted funds). Money for the new charities: it is part of what those charities raise and spend (charities_raised_to_date), so it is taken out of the cost of its own work here, as GiveWell's grants are in our model of GiveWell; the share of a further unrestricted dollar that goes to such grants is valued at the charities' figures (next_dollar_to_grants)."
   },
   {
    "id": "support_costs_gbp",
@@ -207,9 +207,9 @@
    "explainer": "A one-off pilot, May to July 2024: Ellis Impact, Benefficienza, Mieux Donner, Effectief Geven and Impactful Giving, each raising donations for effective charities in its own country."
   },
   {
-   "id": "charities_raised_to_date",
+   "id": "charities_raised_nominal",
    "section": "reach",
-   "label": "Money raised since 2019 by the charities it launched (US$)",
+   "label": "Money raised since 2019 by the charities it launched, in the prices of each year (US$)",
    "format": "usd",
    "value": 107000000,
    "kind": "observed",
@@ -219,7 +219,15 @@
     "quote": "$107M+ raised since 2019 by charities launched through Ambitious Impact",
     "retrieved": "2026-11-14"
    },
-   "explainer": "Everything its charities have raised from all funders (GiveWell, Open Philanthropy, the Animal Welfare Fund, individual donors, its own seed grants), its own count, unaudited. Raised is close to spent for small charities without endowments; GiveWell's grants to 13 of them (over $5M to Taimaka and $7M to Ansh alone) are the largest part."
+   "explainer": "Everything its charities have raised from all funders (GiveWell, Open Philanthropy, the Animal Welfare Fund, funding circles, individual donors, its own seed grants), its own count, unaudited. Raised is close to spent for small charities without endowments. Its own seed grants (about $1.3M in the year modelled) are a small part of it."
+  },
+  {
+   "id": "charities_raised_to_date",
+   "section": "reach",
+   "label": "Money raised since 2019 by the charities it launched, in 2024 prices (US$)",
+   "format": "usd",
+   "formula": "charities_raised_nominal * @cpi.usa_2024 / @cpi.usa_2023",
+   "explainer": "The nominal sum brought to 2024 prices at 2023, about the money-weighted middle of the years 2019 to 2025 (most of the money came after 2021, as the cohorts grew and GiveWell began funding them) (Convention 8)."
   },
   {
    "id": "charities_launched_to_date",
@@ -242,7 +250,7 @@
    "label": "Money raised so far per charity launched, failures included (US$)",
    "format": "usd",
    "formula": "charities_raised_to_date / charities_launched_to_date",
-   "explainer": "About $1.8M per charity: an average over every cohort since 2018, the ones that closed and the young ones that have barely started included."
+   "explainer": "About $1.8M per charity: an average over every cohort since 2018, the ones that closed and the young ones that have barely started included. This part of a new charity's money is measured: what its predecessors raised."
   },
   {
    "id": "lifetime_vs_to_date",
@@ -255,7 +263,7 @@
     "high": 5
    },
    "kind": "judgment",
-   "explainer": "Our judgment. The average so far stops at today: the charities are on average about three years old (cohorts of 6 to 10 a year since 2018, most of them since 2021), and the ones that survive grow (Fortify Health, Suvita, Family Empowerment Media, Shrimp Welfare Project and Ansh now spend $1M to $5M a year; GiveWell has funded 13). A charity's whole life raises more than its first three years: 2.5 times (1.5 if most of the money comes from a few charities whose growth has peaked, 5 if the survivors keep growing for a decade, as Fortify Health has since 2018). Closures are in the multiple: the failed ones add nothing further."
+   "explainer": "Our judgment. The average so far stops at today: the charities are on average about three years old (cohorts of 6 to 10 a year since 2018, most of them since 2021), and the ones that survive grow (Fortify Health, Suvita, Family Empowerment Media, Shrimp Welfare Project and Ansh now spend $1M to $5M a year; GiveWell has funded 13). A charity's whole life raises more than its first three years: 2.5 times (1.5 if most of the money comes from a few charities whose growth has peaked, 5 if the survivors keep growing for a decade, as Fortify Health has since 2018). Closures are in the multiple: the failed ones add nothing further. The part beyond what has been raised so far is a projection and takes the missing-data step (founded_projected_missing_data_adj)."
   },
   {
    "id": "spend_midpoint_years",
@@ -269,7 +277,8 @@
     "high": 7
    },
    "kind": "judgment",
-   "explainer": "Our judgment. A charity raises little in its first year (a seed grant of $150,000 to $190,000) and more as it scales, so half its lifetime money is spent about four years after launch (two if it stays small, seven if it grows for a decade)."
+   "drawn_with": "lifetime_vs_to_date",
+   "explainer": "Our judgment. A charity raises little in its first year (a seed grant of $150,000 to $190,000) and more as it scales, so half its lifetime money is spent about four years after launch (two if it stays small, seven if it grows for a decade). Drawn together with the lifetime multiple: a charity that keeps growing spends its money later."
   },
   {
    "id": "spend_wait_discount",
@@ -290,28 +299,73 @@
     "high": 0.8
    },
    "kind": "judgment",
-   "explainer": "Our judgment. The five are new national giving platforms, typically run by one or two staff and volunteers, against an incubated charity's $0.2M to $2M: 30% (10% to 80%). What they spend is valued at the charities their donors fund, through the destinations below; their own leverage (money moved per dollar) isn't credited, so no money is counted twice."
+   "explainer": "Our judgment. The five are new national giving platforms, typically run by one or two staff and volunteers, against an incubated charity's $0.2M to $2M a year: 30% (10% to 80%). What they spend is valued at the charities it founds, through the destinations below; their own leverage (money moved per dollar) isn't credited, so no money is counted twice."
   },
   {
-   "id": "aim_share_of_founding",
+   "id": "founding_counterfactual_share",
    "section": "reach",
-   "label": "Share of each founded organisation's existence Ambitious Impact caused",
+   "label": "Share of each founded organisation's existence that wouldn't have happened without the programme",
    "format": "percent",
    "value": {
-    "low": 0.25,
-    "best": 0.5,
-    "high": 0.8
+    "low": 0.3,
+    "best": 0.6,
+    "high": 0.85
    },
    "kind": "judgment",
-   "explainer": "Our judgment. Without the programme some of these organisations would exist anyway, later or in another form: founders who would have started a charity on their own, ideas others were already pursuing (lead paint, tobacco taxes, kangaroo care), funders who would have backed the same team. And the founders give up other good work (their alternative careers at effective organisations), which this share also nets out. Half (25% to 80%). Anchors: AIM picks the idea, recruits and trains the founders, pairs them and finds the seed money (about 95% of proposals funded); against that, the site's own-effect share for money a meta charity records is 30% (15% to 45%, @meta.own_effect_share), and a founder's alternative career counts against it."
+   "explainer": "Our judgment, of one question: would the organisation exist anyway, then or soon after? Its research picks ideas no organisation is running at scale (its idea reports assess who else works on each idea), it recruits and trains the founders, many of them not planning to found a charity, pairs them and finds the seed money (about 95% of proposals funded); against that, some ideas were already being pursued in some form (lead paint, tobacco taxes, kangaroo care), some founders would have started something on their own, and a charity started a few years later is partly the same charity. 60% (30% to 85%). No study measures it. Anchors: the site's other counterfactual shares for meta work, a meta charity's own effect on donations it records (30%, 15% to 45%, @meta.own_effect_share) and the share of career changes a programme caused (30%, 10% to 60%); higher here because the programme supplies the idea, the team and the seed money together. The founders' own alternative work is in founding_side_effects, not here."
+  },
+  {
+   "id": "founded_orgs",
+   "section": "reach",
+   "label": "Organisations founded in the year, in incubated charities' equivalents",
+   "format": "number",
+   "formula": "ceip_charities_launched + egi_orgs_launched * egi_spend_vs_charity",
+   "explainer": "The nine charities and the five giving organisations, each giving organisation at its share of a charity's lifetime spending."
+  },
+  {
+   "id": "founded_measured_money",
+   "section": "reach",
+   "label": "Money the year's organisations will raise, the part measured by its past charities, caused by it, discounted (US$)",
+   "format": "usd",
+   "formula": "founded_orgs * raised_per_charity_to_date * spend_wait_discount * founding_counterfactual_share",
+   "explainer": "Each organisation at what the average charity it launched has raised so far (closures included), discounted for the wait, times the share of its existence the programme caused."
+  },
+  {
+   "id": "founded_projected_missing_data_adj",
+   "section": "reach",
+   "label": "Counted less where the outcome isn't measured for this charity (the projected part of the founded money)",
+   "format": "percent",
+   "formula": "$missing_data_discount",
+   "explainer": "The shared missing-data step (docs/normalization.md 2.12): the money its charities will raise beyond what the average has raised so far is a projection by judgment (lifetime_vs_to_date), not a count."
+  },
+  {
+   "id": "founded_projected_money",
+   "section": "reach",
+   "label": "Money the year's organisations will raise beyond that, projected, caused by it, discounted (US$)",
+   "format": "usd",
+   "formula": "founded_orgs * raised_per_charity_to_date * (lifetime_vs_to_date - 1) * spend_wait_discount * founding_counterfactual_share * founded_projected_missing_data_adj",
+   "explainer": "The rest of a charity's lifetime fundraising (the lifetime multiple less the part raised so far), on the same steps, with the missing-data step."
   },
   {
    "id": "founded_money",
    "section": "reach",
    "label": "Money the organisations it founded in the year will raise and spend, caused by it, discounted (US$)",
    "format": "usd",
-   "formula": "(ceip_charities_launched + egi_orgs_launched * egi_spend_vs_charity) * raised_per_charity_to_date * lifetime_vs_to_date * spend_wait_discount * aim_share_of_founding",
-   "explainer": "The year's new organisations, each at the average charity's lifetime fundraising (raised so far × the lifetime multiple, closures included), discounted for the wait, times Ambitious Impact's share of their existence. This money is valued below as money moved: at the figures of the charities it founds, new money in full and shifted money only for its gain."
+   "formula": "founded_measured_money + founded_projected_money",
+   "explainer": "The measured and the projected part. Valued below as money moved, at the figures of the charities it founds: the institutional funders' part all shifted, the rest half new money."
+  },
+  {
+   "id": "founded_institutional_share",
+   "section": "reach",
+   "label": "Share of its charities' money that comes from institutional funders (GiveWell, Open Philanthropy, other foundations and funds)",
+   "format": "percent",
+   "value": {
+    "low": 0.4,
+    "best": 0.6,
+    "high": 0.8
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment. GiveWell gave $7.5M to five of its charities in the year (accounts p. 17), $7M has gone to Ansh and over $5M to Taimaka, and Open Philanthropy, the Animal Welfare Fund and the funding circles fund most of the rest; individual donors give the remainder. 60% (40% to 80%). Such funders' money would have been granted anyway, so it is valued as all shifted (shifted_dollar_value), as Open Philanthropy's money is in our model of GiveWell."
   },
   {
    "id": "circles_facilitated",
@@ -327,7 +381,7 @@
     "quote": "we facilitated a total of $5.8 million in charitable funding to high-impact organizations",
     "retrieved": "2026-11-14"
    },
-   "explainer": "Its funding circles (groups of funders pooling grants, among them the Sustainable Animal Welfare circle, $650,000, and the Mental Health circle, $1.8 million) granted $5.8M in the year (p. 14: \"resulted in $5.8 million USD being granted\")."
+   "explainer": "Its funding circles (groups of funders pooling grants, among them the Sustainable Animal Welfare circle, $650,000, and the Mental Health circle, $1.8 million) granted $5.8M in the year (p. 14: \"resulted in $5.8 million USD being granted\"), to its own charities and others."
   },
   {
    "id": "circles_own_effect",
@@ -335,7 +389,7 @@
    "label": "Share of the funding circles' grants that its organising caused",
    "format": "percent",
    "formula": "@meta.own_effect_share",
-   "explainer": "The site's shared own-effect share for money a meta charity records without a donor survey of its own (30%, 15% to 45%): the circles' members are established funders who would have given most of it anyway."
+   "explainer": "The site's shared own-effect share for money a meta charity records without a donor survey of its own (30%, 15% to 45%). The members are established funders who would have granted the money anyway, so it is all shifted. Circle grants to its own charities are credited here and again in their fundraising (at founding_counterfactual_share); the two shares together stay below 100% of the money, and the circles' grant lists aren't published to separate them."
   },
   {
    "id": "f2g_companies",
@@ -356,39 +410,69 @@
   {
    "id": "f2g_donations_per_company",
    "section": "reach",
-   "label": "Expected donations per Founding to Give company, present value (US$)",
+   "label": "Expected donations per Founding to Give company, undiscounted (US$)",
    "format": "usd",
    "value": {
-    "low": 10000,
-    "best": 100000,
-    "high": 1000000
+    "low": 15000,
+    "best": 150000,
+    "high": 1500000
    },
    "kind": "judgment",
-   "explainer": "Our judgment. Most start-ups fail or never pay their founders out, so the expected value is a small chance of a large exit times the share pledged, discounted for the decade it takes: $100,000 per company ($10,000 to $1M). No company had given anything by the end of the year."
+   "explainer": "Our judgment. Most start-ups fail or never pay their founders out, so the expected value is a small chance of a large exit times the share pledged: $150,000 per company ($15,000 to $1.5M), before discounting. No company had given anything by the end of the year."
+  },
+  {
+   "id": "f2g_years_to_giving",
+   "section": "reach",
+   "label": "Years until a Founding to Give company's founders give",
+   "format": "number",
+   "unit": "years",
+   "value": {
+    "low": 5,
+    "best": 10,
+    "high": 15
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment: a start-up's exit or profits come, if at all, about a decade after founding (5 to 15 years)."
+  },
+  {
+   "id": "f2g_wait_discount",
+   "section": "reach",
+   "label": "Discount for the wait until the companies' founders give",
+   "format": "percent",
+   "formula": "(1 + $discount_rate) ^ -f2g_years_to_giving",
+   "explainer": "The wait discounted at the shared rate."
   },
   {
    "id": "f2g_money",
    "section": "reach",
    "label": "Donations its Founding to Give companies will make, caused by it (US$)",
    "format": "usd",
-   "formula": "f2g_companies * f2g_donations_per_company * aim_share_of_founding",
-   "explainer": "Companies × expected donations × the share of their existence it caused (the same share as for its charities: it recruits, trains and pairs the founders)."
+   "formula": "f2g_companies * f2g_donations_per_company * f2g_wait_discount * founding_counterfactual_share",
+   "explainer": "Companies × expected donations × the discounted wait × the share of their existence the programme caused (the same share as for its charities: it recruits, trains and pairs the founders). New money from founders who would not otherwise give it, half of it counted new by the shared rule."
   },
   {
    "id": "raised_money",
    "section": "reach",
-   "label": "Money raised for effective charities that it caused: organisations founded, funding circles, Founding to Give (US$)",
+   "label": "Money raised for effective charities that it caused, from individual donors and its Founding to Give companies (US$)",
    "format": "usd",
-   "formula": "founded_money + circles_facilitated * circles_own_effect + f2g_money",
+   "formula": "founded_money * (1 - founded_institutional_share) + f2g_money",
    "explainer": "Valued through the shared rows for money moved: half new money, half shifted (@meta.new_money_share)."
+  },
+  {
+   "id": "shifted_money",
+   "section": "reach",
+   "label": "Money institutional funders give to its charities and through its circles because of it, all shifted (US$)",
+   "format": "usd",
+   "formula": "founded_money * founded_institutional_share + circles_facilitated * circles_own_effect",
+   "explainer": "Grants funders would have made anyway, now to its charities: they count only for the gain over where they would have gone (shifted_dollar_value)."
   },
   {
    "id": "moved_per_dollar",
    "section": "reach",
    "label": "Money raised for effective charities that it caused, per dollar of its cost",
    "format": "multiple",
-   "explainer": "Context, and the donors' share of the resources with credit by share of resources on (the money it informs, below, is all shifted and adds no donors).",
-   "formula": "raised_money / cost_total"
+   "explainer": "Context. With credit by share of resources on, only the individual donors' part brings new money (donor_cost_share).",
+   "formula": "(raised_money + shifted_money) / cost_total"
   },
   {
    "id": "grantmakers_budget",
@@ -409,15 +493,29 @@
   {
    "id": "grantmaking_share_changed",
    "section": "reach",
-   "label": "Share of those grants its training moved to better uses, summed over the years it lasts",
+   "label": "Share of those grants its training moves to better uses each year",
    "format": "percent",
    "value": {
-    "low": 0.01,
-    "best": 0.04,
-    "high": 0.12
+    "low": 0.005,
+    "best": 0.015,
+    "high": 0.04
    },
    "kind": "judgment",
-   "explainer": "Our judgment. Most of a trained grantmaker's portfolio is set by the foundation's mandate; training changes how some grants are chosen (cost-effectiveness, evidence, neglected areas) for a few years. 4% of a year's grants (1% to 12%). Anchor: Ambitious Impact's own estimate of about $3M of counterfactual value from the cohort (p. 17), 7.5% of $40M, before any discount for its self-assessment; Rethink Priorities' research is credited 3% to 5% of the money it informs (our model of it)."
+   "explainer": "Our judgment. Most of a trained grantmaker's portfolio is set by the foundation's mandate; training changes how some grants are chosen (cost-effectiveness, evidence, neglected areas). 1.5% of a year's grants (0.5% to 4%), for each year it lasts (grantmaking_years). Anchor: Ambitious Impact's own estimate of about $3M of counterfactual value from the cohort (p. 17), 7.5% of $40M over the training's life, before any discount for its self-assessment; Rethink Priorities' research is credited 3% to 5% of the money it informs (our model of it)."
+  },
+  {
+   "id": "grantmaking_years",
+   "section": "reach",
+   "label": "Years the training keeps changing a grantmaker's grants",
+   "format": "number",
+   "unit": "years",
+   "value": {
+    "low": 1,
+    "best": 3,
+    "high": 5
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment: grantmakers move on and practices drift back, so the change lasts about three years (one to five)."
   },
   {
    "id": "research_money_informed",
@@ -450,16 +548,16 @@
    "section": "reach",
    "label": "Spending its grantmaker training and research changed, in the year (US$)",
    "format": "usd",
-   "explainer": "Money informed × the share changed, for both. All shifted: these funders would have granted the money anyway, so it counts only for the gain over where it would have gone (informed_money_value). The money raised that it caused is in raised_money.",
-   "formula": "grantmakers_budget * grantmaking_share_changed + research_money_informed * research_share_changed"
+   "explainer": "Money informed × the share changed, for both (the training's over its years, discounted at the shared rate). All shifted: these funders would have granted the money anyway, so it counts only for the gain over where it would have gone (informed_money_value). The money raised that it caused is in raised_money.",
+   "formula": "grantmakers_budget * grantmaking_share_changed * pv_annuity_due(1, $discount_rate, grantmaking_years) + research_money_informed * research_share_changed"
   },
   {
    "id": "value_destinations",
    "section": "moved_money",
    "label": "Value of a dollar to the charities it founds (its charities on the rankings, live), units of value",
    "format": "small",
-   "formula": "(@meta.aim_ideas_2025_human * avg(#givewell:suvita, #givewell:family-empowerment-media, #givewell:fortify-health, #givewell:ansh, #givewell:taimaka, #givewell:lafiya-nigeria, #givewell:notify-health, #givewell:healthy-futures, #givewell:clear-solutions, #givewell:spiro, #hli:actra, #ambitious-impact:kaya-guides, #ambitious-impact:alliance-for-reducing-microbial-resistance, #ambitious-impact:concentric-policies, #ambitious-impact:novah, #ambitious-impact:learning-alliance, #ambitious-impact:lead-research-for-action, #ambitious-impact:oxygen-access-project, #ambitious-impact:respira-health, #ambitious-impact:labri, #ambitious-impact:first-embrace, #ambitious-impact:opal-health, #ambitious-impact:neev, #ambitious-impact:better-season-project) + @meta.aim_ideas_2025_animal * avg(#ace:shrimp-welfare-project, #ambitious-impact:animal-policy-international)) / (@meta.aim_ideas_2025_human + @meta.aim_ideas_2025_animal)",
-   "explainer": "The charities it has launched that the site ranks, each at its figure on the rankings (its primary evaluator's: GiveWell for Suvita, Family Empowerment Media, Fortify Health, Ansh, Taimaka, Lafiya Nigeria, Notify Health, Healthy Futures Global, Clear Solutions and Spiro; the Happier Lives Institute for ACTRA; Ambitious Impact's own idea-stage estimates for the eleven young ones that have no other; Animal Charity Evaluators for Shrimp Welfare Project; Ambitious Impact for Animal Policy International), equal weights within each cause, and the two causes in the shares of the ideas its research recommended in the year (nine human, three animal). Its charities without a model here (LEEP, whose only model is unpublished, FarmKind, Rahi Impact, Scale Welfare, Radius, the Institute for Development Innovation and others) are valued at the average of their cause; its meta charities (CEARCH, Better Futures Guide) and the effective giving organisations at the average of the rest. Equal weights, not money weights: the charities that raised most (GiveWell's grantees) would weigh more by money, and they sit near the global-health average."
+   "formula": "(@meta.aim_founded_2025_human * avg(#givewell:suvita, #givewell:family-empowerment-media, #givewell:fortify-health, #givewell:ansh, #givewell:taimaka, #givewell:lafiya-nigeria, #givewell:notify-health, #givewell:healthy-futures, #givewell:clear-solutions, #givewell:spiro, #hli:actra, #ambitious-impact:kaya-guides, #ambitious-impact:alliance-for-reducing-microbial-resistance, #ambitious-impact:concentric-policies, #ambitious-impact:novah, #ambitious-impact:learning-alliance, #ambitious-impact:lead-research-for-action, #ambitious-impact:oxygen-access-project, #ambitious-impact:respira-health, #ambitious-impact:labri, #ambitious-impact:first-embrace, #ambitious-impact:opal-health, #ambitious-impact:neev, #ambitious-impact:better-season-project) + @meta.aim_founded_2025_animal * avg(#ace:shrimp-welfare-project, #ambitious-impact:animal-policy-international)) / (@meta.aim_founded_2025_human + @meta.aim_founded_2025_animal)",
+   "explainer": "The charities it has launched that the site ranks, each at its figure on the rankings (its primary evaluator's: GiveWell for Suvita, Family Empowerment Media, Fortify Health, Ansh, Taimaka, Lafiya Nigeria, Notify Health, Healthy Futures Global, Clear Solutions and Spiro; the Happier Lives Institute for ACTRA; Ambitious Impact's own idea-stage estimates for the thirteen young ones that have no other; Animal Charity Evaluators for Shrimp Welfare Project; Ambitious Impact for Animal Policy International), equal weights within each cause, and the two causes in the shares of the charities it founded in the year (eight in human well-being, one in animal welfare: Scale Welfare). Its charities without a model here (LEEP, whose only model is unpublished, FarmKind, Rahi Impact, Scale Welfare, Radius, the Institute for Development Innovation and others) are valued at the average of their cause; its meta charities (CEARCH, Better Futures Guide) and the effective giving organisations at the average of the rest. Equal weights, not money weights: the charities that raised most (GiveWell's grantees) would weigh more by money, and they sit near the global-health average."
   },
   {
    "id": "units_affected_per_year",
@@ -548,12 +646,12 @@
    "format": "percent",
    "value": {
     "low": 0.0,
-    "best": 0.1,
-    "high": 0.3
+    "best": 0.05,
+    "high": 0.25
    },
    "kind": "judgment",
    "side_effect": "added",
-   "explainer": "Our judgment. Good the branches leave out: founders trained who later lead other organisations, the ideas and open cost-effectiveness analyses other charities and governments use, new markets its charities open (stunning equipment, fortified flour) that others enter. Harm: staff time of governments and partners its failed charities used, and the closure of the weakest. Net +10% (0% to +30%)."
+   "explainer": "Our judgment. Good the branches leave out: founders trained who later lead other organisations, the ideas and open cost-effectiveness analyses other charities and governments use, new markets its charities open (stunning equipment, fortified flour) that others enter. Harm: the good work the founders would otherwise have done (most were in effective organisations or would have joined one), staff time of governments and partners its failed charities used, and the closure of the weakest. Net +5% (0% to +25%)."
   },
   {
    "id": "new_money_share",
@@ -584,7 +682,7 @@
    "section": "moved_money",
    "label": "Value of a dollar where shifted money would otherwise have gone (our judgment: an ordinary charity of each cause its money goes to, in its own mix), units of value",
    "format": "small",
-   "formula": "@meta.prior_vs_cash * #givedirectly / #cause:global-health * (@meta.aim_ideas_2025_human * #cause:global-health + @meta.aim_ideas_2025_animal * #cause:animal-welfare) / (@meta.aim_ideas_2025_human + @meta.aim_ideas_2025_animal)",
+   "formula": "@meta.prior_vs_cash * #givedirectly / #cause:global-health * (@meta.aim_founded_2025_human * #cause:global-health + @meta.aim_founded_2025_animal * #cause:animal-welfare) / (@meta.aim_founded_2025_human + @meta.aim_founded_2025_animal)",
    "explainer": "Our judgment, the shared rule for an organisation whose money goes to several causes. Shifted money would have gone to an ordinary charity of the same cause: each cause's at the rule for a mover in that cause (GiveDirectly's live result, times a shared multiple, 1×, from 0 to 3×, over the global-health charities' on the rankings, times that cause's charities'), weighted by the organisation's own split, all live under your values."
   },
   {
@@ -617,8 +715,8 @@
    "label": "Value of the money it caused to be raised and the spending it changed (units of value)",
    "format": "number",
    "unit": "units of value",
-   "formula": "(raised_money * moved_dollar_net_value + informed_money_value) * (1 + founding_side_effects)",
-   "explainer": "The money raised for its charities and through its circles and companies, net of where shifted money would have gone, plus the spending its training and research changed, all shifted, with its evidence and missing-data steps; then the side effects."
+   "formula": "(raised_money * moved_dollar_net_value + shifted_money * shifted_dollar_value + informed_money_value) * (1 + founding_side_effects)",
+   "explainer": "The money individual donors and its companies give because of it, net of where shifted money would have gone; the institutional funders' and circles' grants, all shifted, at their gain; the spending its training and research changed, all shifted, with its evidence and missing-data steps; then the side effects."
   },
   {
    "id": "research_fellows_trained",
@@ -743,7 +841,7 @@
    "section": "adjustments",
    "label": "Share of the outcome that wouldn't have happened anyway",
    "format": "percent",
-   "explainer": "1: what would have happened anyway is in each branch's own row (the share changed, the shared new-money share, its share of the founding).",
+   "explainer": "1: what would have happened anyway is in each branch's own row (the share changed, the shared new-money share, founding_counterfactual_share).",
    "formula": "1"
   },
   {
@@ -751,7 +849,7 @@
    "section": "adjustments",
    "label": "This charity's share of the resources behind the outcome",
    "format": "percent",
-   "explainer": "1: other contributors are in the branches (funders' money through the shared new-money share, founders' alternative work in aim_share_of_founding).",
+   "explainer": "1: other contributors are in the branches (funders' money through the shared new-money and institutional shares, the founders' alternative work in founding_side_effects).",
    "formula": "1"
   },
   {
@@ -768,7 +866,7 @@
    "label": "Counted less where the outcome isn't measured for this charity",
    "format": "percent",
    "formula": "$missing_data_discount",
-   "explainer": "The shared missing-data step for the spending its training and research changed: the money informed and the share changed are judgments, not counts. The money raised for its charities is counted (their fundraising, its own count) and takes no missing-data step, as for every meta charity's money moved; the careers have their own."
+   "explainer": "The shared missing-data step for the spending its training and research changed: the money informed and the share changed are judgments, not counts. The money its charities have raised so far is counted (its own count) and takes no step, as for every meta charity's money moved; the projected rest has its own (founded_projected_missing_data_adj), the careers theirs."
   },
   {
    "id": "total_adj",
@@ -850,15 +948,36 @@
    "label": "Share of the full cost paid by cash donations",
    "format": "percent",
    "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + raised_money * new_money_share, 0))",
-   "explainer": "With credit by share of resources: staff's forgone pay and the new money the funders of its charities put in are co-contributions; the spending it informs is all shifted and adds none."
+   "explainer": "With credit by share of resources: staff's forgone pay and the new money individual donors and its companies' founders put in are co-contributions; institutional funders' grants and the spending it informs are all shifted and add none."
+  },
+  {
+   "id": "next_dollar_to_grants",
+   "section": "donor",
+   "label": "Share of a further unrestricted dollar that goes to grants to its new charities",
+   "format": "percent",
+   "value": {
+    "low": 0.15,
+    "best": 0.34,
+    "high": 0.5
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "Charity Entrepreneurship (Ambitious Impact), charity 1195850, Trustees' Report and Audited Financial Statements, year ended 31 March 2025 (Moore Kingston Smith LLP; filed copy of the Charity Commission's register)",
+    "url": "https://opencharities.uk/ew/1195850/files/2025-03-31-accounts.md",
+    "page": "p. 40, note 4; p. 44, note 13",
+    "quote": "Regrants to incubated projects (seed funding)",
+    "retrieved": "2026-11-14"
+   },
+   "explainer": "Grants paid from unrestricted funds over unrestricted spending in the year: £1,969,975 of grants less £1,229,447 paid from the restricted regrant funds (note 13: seed £952,040, post-seed £277,407) leaves £740,528, against £2,192,858 of unrestricted expenditure (£3,953,275 less £1,760,417 restricted): 34% (15% to 50%, as the seed round's size and restricted gifts vary from year to year). That part of a further dollar is a dollar to its charities, valued at their figures (value_destinations), as our model of GiveWell values the part of a dollar it grants."
   },
   {
    "id": "uov_per_donor_dollar",
    "section": "donor",
    "label": "Units of value per dollar you give",
    "format": "small",
-   "formula": "uov_per_dollar * donor_cost_share * marginal_vs_past_average",
-   "unit": "Units of value / $"
+   "unit": "Units of value / $",
+   "formula": "next_dollar_to_grants * value_destinations + (1 - next_dollar_to_grants) * uov_per_dollar * donor_cost_share * marginal_vs_past_average",
+   "explainer": "A further dollar: the share it grants to its new charities at their figures, the rest at its own work's past average, credited by share of resources and scaled to the next dollar."
   }
  ]
 }
