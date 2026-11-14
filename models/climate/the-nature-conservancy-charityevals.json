@@ -3,7 +3,16 @@
   "name": "The Nature Conservancy (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"world":0.4129,"IND":0.48,"MEX":0.041,"USA":0.0167,"SYC":0.0135,"MHL":0.0135,"ECU":0.0173,"BHS":0.0051},
+  "beneficiaries": {
+    "world": 0.4129,
+    "IND": 0.48,
+    "MEX": 0.041,
+    "USA": 0.0167,
+    "SYC": 0.0135,
+    "MHL": 0.0135,
+    "ECU": 0.0173,
+    "BHS": 0.0051
+  },
   "beneficiaries_note": "Our build: by share of the result at the defaults. PRANA's crop-burning deaths in northwest India (48%); forest and land carbon, power displaced and pandemic risk, spread by world population (41%); adaptation's coastal people in Mexico and Hawai'i (6%, split by judgment); the fisheries rules' fishers in the Seychelles and the Pacific islands (3%, split by judgment); the year's deals' local incomes in Ecuador and The Bahamas (2%, by their people).",
   "template": "conservation",
   "estimate_basis": "past_average",
@@ -657,15 +666,8 @@
       "label": "Tropical primary forest lost worldwide in 2023",
       "format": "integer",
       "unit": "ha",
-      "value": 3700000,
-      "kind": "observed",
-      "source": {
-        "title": "World Resources Institute, Global Forest Review: How much forest was lost in 2023?",
-        "url": "https://gfr.wri.org/global-tree-cover-loss-data-2023",
-        "retrieved": "2026-11-03",
-        "quote": "Total tropical primary forest loss in 2023 totaled 3.7 million hectares"
-      },
-      "explainer": "With the next row, the CO₂ released per hectare of tropical primary forest lost; also the denominator of the catastrophic-risk branch."
+      "explainer": "The shared figure (World Resources Institute): 3.7 million hectares. With the next row, the CO₂ released per hectare of tropical primary forest lost; also the denominator of the catastrophic-risk branch.",
+      "formula": "@climate.tropical_primary_loss_2023_ha"
     },
     {
       "id": "tropical_loss_emissions_2023",
@@ -673,15 +675,8 @@
       "label": "CO₂ released by that loss",
       "format": "integer",
       "unit": "t CO₂",
-      "value": 2400000000,
-      "kind": "observed",
-      "source": {
-        "title": "World Resources Institute, Global Forest Review: How much forest was lost in 2023?",
-        "url": "https://gfr.wri.org/global-tree-cover-loss-data-2023",
-        "retrieved": "2026-11-03",
-        "quote": "All this forest loss produced 2.4 gigatonnes (Gt) of carbon dioxide emissions in 2023"
-      },
-      "explainer": "Gross emissions from the year's tropical primary forest loss."
+      "explainer": "The shared figure (World Resources Institute): 2.4 billion tonnes, the gross emissions of the year's tropical primary forest loss.",
+      "formula": "@climate.tropical_primary_loss_emissions_2023"
     },
     {
       "id": "amazon_tco2_per_ha_lost",
@@ -1758,13 +1753,8 @@
       "section": "effect",
       "label": "Catastrophic risk: share of the land-use risk that scales with tropical forest loss",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.5,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "IPBES's land-use change includes farming expansion, settlement and wildlife trade as well as clearing tropical forest. Anchor: Allen et al. (2017, Nature Communications, doi 10.1038/s41467-017-00923-8) find emerging-disease hotspots best predicted by tropical forest regions with high mammal diversity undergoing land-use change, so clearing tropical forest is a large part, not all, of the land-use risk. We take half of it as scaling with tropical forest loss, in proportion to the hectares lost (10-100%); Dobson et al. (Science, 2020) argue for cutting deforestation as pandemic prevention but give no dose-response. The least grounded number in the model, and through the cattle rule's branch it carries much of the result."
+      "explainer": "The shared judgment (facts/catastrophe.json): half of the land-use share of new diseases scales with tropical forest loss (10-100%), anchored on Allen et al. (2017). The least grounded number in the model, and through the cattle rule's branch it carries much of the result.",
+      "formula": "@catastrophe.deforestation_share_of_land_use_risk"
     },
     {
       "id": "risk_per_ha_year",
@@ -1780,39 +1770,24 @@
       "section": "effect",
       "label": "Share of the catastrophe's deaths that are of children under five",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.02,
-        "high": 0.1
-      },
-      "kind": "judgment",
-      "explainer": "COVID-19's excess deaths were mostly of older people and few of young children; a different pathogen could hit children harder (the range's top). Anchored on WHO's excess-mortality age profile (Msemburi et al. 2023, Nature: most excess deaths over 60)."
+      "explainer": "The shared judgment for a COVID-scale pandemic (facts/death_ages.json): COVID-19's excess deaths were mostly of older people, few of young children.",
+      "formula": "@death_ages.covid_scale_share_under5"
     },
     {
       "id": "share_5_14_of_over5",
       "section": "effect",
       "label": "Of the catastrophe's deaths at five or older, share aged 5 to 14",
       "format": "percent",
-      "value": {
-        "low": 0.005,
-        "best": 0.01,
-        "high": 0.05
-      },
-      "kind": "judgment",
-      "explainer": "School-age children were the least affected group in COVID-19; up to 5% for a pathogen like the 1918 influenza."
+      "explainer": "The shared judgment for a COVID-scale pandemic (facts/death_ages.json): school-age children were the least affected group.",
+      "formula": "@death_ages.covid_scale_share_5_14_of_over5"
     },
     {
       "id": "share_15_49_of_over15",
       "section": "effect",
       "label": "Of the catastrophe's deaths at 15 or older, share aged 15 to 49",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.15,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "About 15% of COVID-19's adult excess deaths were under 50 (WHO's age profile, most deaths over 60); up to 40% for a pathogen that kills young adults (1918 influenza). The rest are valued at the 50-74 band."
+      "explainer": "The shared judgment for a COVID-scale pandemic (facts/death_ages.json): about 15% of COVID-19's adult excess deaths were under 50; the rest are valued at the 50-74 band.",
+      "formula": "@death_ages.covid_scale_share_15_49_of_over15"
     },
     {
       "id": "catastrophe_value_per_death",
@@ -1828,13 +1803,8 @@
       "section": "effect",
       "label": "Catastrophic risk: share of every later year's healthy life the catastrophe would take",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0,
-        "high": 1e-05
-      },
-      "kind": "judgment",
-      "explainer": "0: the world recovers from a COVID-scale pandemic; its deaths are counted above. The tiny high end allows for lasting damage."
+      "explainer": "The shared judgment (facts/catastrophe.json): 0, the world recovers from a COVID-scale pandemic and its deaths are counted above; the tiny high end allows for lasting damage.",
+      "formula": "@catastrophe.covid_scale_future_share_lost"
     },
     {
       "id": "deal_risk_years",
