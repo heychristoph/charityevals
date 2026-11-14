@@ -14,7 +14,21 @@
 //                    ordinary charity of that cause (priorDollarValue); for money split across causes,
 //                    <fact>=<cause>[+<cause>],... (the @meta share facts of value_destinations; `+`
 //                    averages areas): each cause's ordinary charity in that mix (priorDollarValueMix)
-import { GLOBAL_HEALTH_ONLY, LIVELIHOODS_ONLY, MOVED_MONEY_ROWS, MOVED_MONEY_SECTION, OWN_SPLIT, TLYCS_SPLIT, priorDollarValue, priorDollarValueMix, type CauseShare } from "../src/engine/moved-money";
+//   npx tsx scripts/moved-money.ts set <set> <global-health|livelihoods|tlycs>
+//                    a second destination set: the main set's rows prefixed <set>_ (destinationSetRows)
+import { GLOBAL_HEALTH_ONLY, LIVELIHOODS_ONLY, MOVED_MONEY_ROWS, MOVED_MONEY_SECTION, OWN_SPLIT, TLYCS_SPLIT, destinationSetRows, priorDollarValue, priorDollarValueMix, type CauseShare } from "../src/engine/moved-money";
+
+if (process.argv[2] === "set") {
+  const [, set, dest] = process.argv.slice(2);
+  const d = ({ "global-health": GLOBAL_HEALTH_ONLY, livelihoods: LIVELIHOODS_ONLY, tlycs: TLYCS_SPLIT } as const)[dest as "tlycs"];
+  if (!/^[a-z][a-z0-9]*$/.test(set ?? "") || !d) {
+    console.error("usage: npx tsx scripts/moved-money.ts set <set> <global-health|livelihoods|tlycs>");
+    process.exit(1);
+  }
+  const rows = destinationSetRows(set, d.formula).map((r) => ({ id: r.id, section: MOVED_MONEY_SECTION.id, label: r.label, format: r.format, formula: r.formula, explainer: r.explainer }));
+  console.log(JSON.stringify({ section: MOVED_MONEY_SECTION, rows }));
+  process.exit(0);
+}
 
 const [scope, step, cause = "global-health"] = process.argv.slice(2);
 if (!["global-health", "livelihoods", "tlycs", "own-split"].includes(scope) || (step && !["net", "informed"].includes(step))) {
