@@ -163,6 +163,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "redwood-research-charityevals": { b: "world", note: "Our build: an AI catastrophe kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "better-futures-guide-aim": { b: "destinations", note: "Moves money: each livelihoods charity it reads live brings its own countries." },
   "cearch-aim": { b: "destinations", note: "Moves money: each GiveWell top charity it reads live brings its own countries." },
+  "ambitious-impact-charityevals": { b: "destinations", note: "Founds charities: each charity it launched, read live, brings its own countries." },
   "giving-what-we-can-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
   "80000-hours-charityevals": { b: "destinations", note: "Moves people: each cause its plan changes go into, read live, brings its own countries." },
   "givewell-charityevals": { b: "destinations", note: "Moves money: each charity it funds, read live, brings its own countries." },
