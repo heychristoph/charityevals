@@ -1,6 +1,6 @@
 # Audit: sentinel-bio-charityevals, round 3 (verification of the changes since round 2)
 Result: 0.004651 daly/$ = 4.65 years of healthy life per 1,000 dollars (combined range 0.35–61.3; model's own ranges 1.6–10.7); cause median 5.26 (×0.89). Verdict: pass.
-Model-sha: ce1413b842bdf016a171e61a1f5e42422f64909e201ed7bcdcadefca26ad8518
+Model-sha: d41a51c35cc74a22a701fb2328d16ad3a0bc98ed5efff3960c79f24e597147e8
 Scope: unchanged from round 2 (everything spent in the first tax year, 16 May to 31 December 2024). Only the changes since round 2 were checked.
 Mechanical: lint 0/0/1 (pol_cost_share unused, marked as context), invariants none, normalization-audit 0 violations (generated/ restored), check.ts all models valid.
 
@@ -27,3 +27,5 @@ New changes:
 
 ## Drivers
 Unchanged from round 2: discount rate, years a win counts, missing-data discount, the shared bio cut estimates, @next_dollar.sentinel_bio; own judgments bio_evidence_adj, bio_cf_other_orgs, fb_share_working. The engine read of round 2's finding 2 would improve the model most.
+
+Re-stamped (orchestrator, 14 Nov 2026): on merge, the advised-gift row renamed money_moved → informed_money for the shared research-informed rule (normalization.md 2.8, merged meanwhile); formula and result unchanged (4.658).
