@@ -79,6 +79,103 @@
         "note": "The excess risk is 'highest upon release from prison and declined over time'; the delay is our judgment."
       },
       "explainer": "The excess risk is 'highest upon release from prison and declined over time' (Patterson 2013), recovering over about two thirds of the time served: the rest of the sentence plus a few years after release, 3 years (1 to 8). The deaths come this long after the prison-year, so a model discounts them for the wait."
+    },
+    {
+      "id": "jail_mortality_vs_prison",
+      "label": "Deaths caused per year of pretrial jail, as a share of the deaths per year in prison",
+      "format": "multiple",
+      "value": {
+        "low": 0.1,
+        "best": 0.5,
+        "high": 1.2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' judgment, anchored on Patterson (2013), The dose-response of time served in prison on mortality: New York State, 1989-2003, American Journal of Public Health 103(3): 523-528",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3673515/",
+        "retrieved": "2026-11-14",
+        "note": "Patterson's excess risk is 'highest upon release from prison and declined over time'; no study measures the mortality of a few weeks in pretrial jail against release."
+      },
+      "explainer": "The shared years of life lost per year incarcerated (life_years_lost_per_year_incarcerated) come from New York parolees' prison terms, with the excess risk highest on release. Weeks in a county jail bring the same release (overdoses after release, lost housing and care) but less of the damage of years inside, and the dose-response at weeks isn't measured. Our judgment: half the prison rate per year (0.1 to 1.2). Read by every model that counts days of pretrial detention avoided."
+    },
+    {
+      "id": "jail_cost_per_day",
+      "label": "Jail costs a US county saves per day a person isn't held (marginal, US$)",
+      "format": "usd",
+      "value": {
+        "low": 15,
+        "best": 35,
+        "high": 80
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' judgment, anchored on The Bail Project, 2025 Annual Report: $107 million of taxpayer savings over 1,381,170 days of pretrial incarceration prevented",
+        "url": "https://bailproject.org/2025annualreport/",
+        "retrieved": "2026-11-14",
+        "quote": "$107 Million taxpayer dollars saved",
+        "note": "$107 million over 1,381,170 days is $77 a day, an average cost of a jail bed; the cost that varies with the count is lower."
+      },
+      "explainer": "What a county saves when one fewer person is held for a day: food, medical care and the staff and space that vary with the count, below the average cost of about $77 a day that charitable bail funds quote. Our judgment: $35 (15 to 80). Read by every model that counts jail days avoided."
+    },
+    {
+      "id": "release_earnings_gain",
+      "label": "Formal earnings gained a year by a defendant released before trial rather than detained, three to four years later (US$)",
+      "format": "usd",
+      "value": {
+        "low": 0,
+        "best": 500,
+        "high": 2000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Dobbie, Goldin and Yang (2016), The Effects of Pre-Trial Detention on Conviction, Future Crime, and Employment: Evidence from Randomly Assigned Judges, NBER Working Paper 22511 (American Economic Review 108(2), 2018)",
+        "url": "https://www.nber.org/system/files/working_papers/w22511/w22511.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 23 and Table 7",
+        "quote": "Formal sector earnings are $1,024 higher over the same time period, a 17.5 percent increase from the mean",
+        "note": "The same table's least-squares estimate with baseline earnings controls is $224; the two-stage estimate's standard error is $1,338, and household income shows no gain."
+      },
+      "explainer": "Released defendants in Philadelphia and Miami are 10.2 points more likely to be in formal work three to four years on, mostly because fewer are convicted. Earnings: $1,024 a year (not significant) by judge assignment, $224 by least squares with controls, and no gain in household income, so some formal pay replaces informal work: $500 a year (0 to 2,000), in the paper's dollars of the early 2010s, left unadjusted for inflation since the range is far wider. Jobs lost during detention are in it. Read by every model that counts defendants released."
+    },
+    {
+      "id": "release_employment_persistence",
+      "label": "How long released defendants' better employment holds (years)",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 4,
+        "high": 10
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' judgment, anchored on Dobbie, Goldin and Yang (2016), NBER Working Paper 22511",
+        "url": "https://www.nber.org/system/files/working_papers/w22511/w22511.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 4 (PDF page 6)",
+        "quote": "we find that pre-trial release also increases the probability of employment in the formal labor market three to four years after the bail hearing by 10.2 percentage points"
+      },
+      "explainer": "Measured three to four years after the bail hearing; a conviction's mark on employment lasts longer, but the gain is imprecise. Our judgment: 4 years (2 to 10). Read with release_earnings_gain."
+    },
+    {
+      "id": "release_sentence_days_avoided",
+      "label": "Days of post-conviction jail or prison avoided per defendant released before trial rather than detained",
+      "unit": "days",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 12,
+        "high": 45
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' judgment, anchored on Heaton, Mayson and Stevenson (2017), The Downstream Consequences of Misdemeanor Pretrial Detention, Stanford Law Review 69: 711, and Dobbie, Goldin and Yang (2016), NBER Working Paper 22511",
+        "url": "https://www.stanfordlawreview.org/print/article/the-downstream-consequences-of-misdemeanor-pretrial-detention/",
+        "retrieved": "2026-11-14",
+        "quote": "are 43% more likely to be sentenced to jail",
+        "note": "Heaton et al. (Harris County misdemeanours): detained defendants 'receive jail sentences that are more than twice as long on average'. Dobbie et al. (Philadelphia and Miami, p. 3): release lowers the chance of being found guilty by 15.6 points; its effect on incarceration is 'small and not precisely estimated' overall (3.0 points) but large for felony and drug cases."
+      },
+      "explainer": "Detention makes defendants plead guilty to get out, so released defendants are convicted and jailed less. Our judgment: 12 days of sentence avoided per defendant released (0 to 45), about a tenth more of them serving a sentence of some months. Read by every model that counts defendants released before trial; the days come after the case closes."
     }
   ]
 }
