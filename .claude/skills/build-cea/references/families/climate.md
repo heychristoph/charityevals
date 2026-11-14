@@ -43,8 +43,12 @@ conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra
   cut, EPA's 2023 oil and gas methane rule, EPA's 2024 power-plant standards, the 2022 carbon-capture
   credit. Add a new win's tonnes here (the regulator's impact assessment or a modelling study), never
   inside one model.
-- `us_power_smoke_factor` for tonnes from US power plants burning less; other fuels and places
-  from per-fuel evidence (deaths per TWh) in the model's `fuel_smoke_factor`.
+- `us_power_smoke_factor` for tonnes from US power plants burning less, `us_coal_power_smoke_factor`
+  for coal plants'; other fuels and places from per-fuel evidence (deaths per TWh) in the model's
+  `fuel_smoke_factor`, weighted by branch.
+- `ozone_deaths_per_tco2e_methane`: methane's own ozone deaths, added in `extra_deaths_per_tco2e` as
+  a `methane_share` row × the fact (a waiver for INV-10 says why it doesn't scale with
+  `$deaths_per_tco2e`).
 - `nondeath_damages_vs_deaths` stays a visible shared zero.
 
 ## Evidence to look for
