@@ -3,13 +3,42 @@
   "name": "Transparency International (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": "world",
-  "beneficiaries_note": "Our build: changes in policy, law and practice from global rules (the UN anti-corruption convention's resolution on political finance) to EU law and national laws in the chapters' countries across more than 100 countries (97% of the result at the defaults), with the advice centres in 53 countries and legal cases mostly in Europe; no country split is published, so the result is spread by world population, most of it in low- and middle-income countries (a judgment).",
+  "beneficiaries": {
+    "DEU": 0.1151,
+    "FRA": 0.0944,
+    "ITA": 0.0814,
+    "ESP": 0.0671,
+    "POL": 0.0505,
+    "ROU": 0.0264,
+    "NLD": 0.0247,
+    "BEL": 0.0163,
+    "CZE": 0.015,
+    "SWE": 0.0146,
+    "GRC": 0.0144,
+    "PRT": 0.0146,
+    "HUN": 0.0133,
+    "AUT": 0.0127,
+    "BGR": 0.0088,
+    "DNK": 0.0083,
+    "FIN": 0.0077,
+    "SVK": 0.0075,
+    "IRL": 0.0073,
+    "HRV": 0.0054,
+    "LTU": 0.004,
+    "SVN": 0.0029,
+    "LVA": 0.0026,
+    "EST": 0.0019,
+    "CYP": 0.0012,
+    "LUX": 0.001,
+    "MLT": 0.0008,
+    "world": 0.3801
+  },
+  "beneficiaries_note": "Our build: shares of the result at the defaults: the EU part of the policy branch (about 56%: EU rules and changes in member states, valued at the EU's own cost of corruption) and the legal submissions, mostly in Europe (about 6%), spread over the 27 member states by population (2024, rounded); the rest of the policy changes and the advice centres in 53 countries (about 38%) by world population, as no country list is published (a judgment).",
   "template": "rights-advocacy",
   "estimate_basis": "past_average",
   "charity": "transparency-international",
   "owner": "charityevals",
-  "summary": "Transparency International's Secretariat in Berlin, with offices in Brussels and Washington, campaigns for global, EU and national anti-corruption rules, brings legal cases and funds and supports more than 100 national chapters, whose legal advice centres help people who meet corruption; it spent EUR 28.0 million ($31.6 million) in 2025. Its year is counted as its share of the 60-plus changes in policy, law and practice the movement contributed to, each removing a judged small share of what corruption costs the people it governs (corruption's cost taken as about the 2% of income paid in bribes), building up over about four years and lasting the years a won reform counts unless repealed; smaller branches count the 14,000 people the advice centres supported and the 62 legal submissions (public money recovered, and deterrence). With the next dollar at about half the average, that comes to about 0.07 years of healthy life per 1,000 dollars, about the site's global-health median. The result is mostly uncertainty, its own ranges spanning millions-fold: the biggest are judgments with no study behind them, the share of corruption's cost a change removes and the people an average change governs. All three branches are discounted by the shared missing-data slider.",
+  "summary": "Transparency International's Secretariat in Berlin, with offices in Brussels and Washington, campaigns for global, EU and national anti-corruption rules, brings legal cases and funds and supports more than 100 national chapters, whose legal advice centres help people who meet corruption; it spent EUR 28.0 million ($31.6 million) in 2025. Its average year of 2023-2025 spending is counted against its share of the 60-plus changes in policy, law and practice the movement contributed to in 2025, each removing a judged small share of what corruption costs the people it governs (about 1.3% of income in the EU, where most of them live, and about the 2% paid in bribes elsewhere), building up over about four years and lasting the years a won reform counts unless repealed; smaller branches count the 14,000 people the advice centres supported and the 62 legal submissions (public money recovered, and deterrence). With the next dollar at about half the average, that comes to about 0.03 years of healthy life per 1,000 dollars, under half the site's global-health median. The result is mostly uncertainty, its own ranges spanning millions-fold: the biggest are judgments with no study behind them, the share of corruption's cost a change removes and the people an average change governs. All three branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Transparency International",
@@ -156,8 +185,50 @@
       "section": "cost",
       "label": "Spending on the modelled programmes (all of them), 2025",
       "format": "usd",
-      "formula": "program_expenses",
-      "explainer": "Every programme of the year: the model counts all of them through three branches (the policy, law and practice changes the work contributed to; people helped by the chapters' legal advice centres; legal submissions against corruption)."
+      "formula": "program_expenses * average_spend_vs_year",
+      "explainer": "Every programme: the model counts all of them through three branches (the policy, law and practice changes the work contributed to; people helped by the chapters' legal advice centres; legal submissions against corruption). The 2025 wins came from several years of work, so the cost is the average real spending over those years (Convention 11), not 2025's alone."
+    },
+    {
+      "id": "tis_expenditure_eur_2024",
+      "section": "cost",
+      "label": "Total expenditure, 2024 (euros)",
+      "format": "number",
+      "value": 24478174,
+      "kind": "observed",
+      "unit": "EUR",
+      "source": {
+        "title": "Transparency International e.V., Financial Statements for the year ended 31 December 2025 (consolidated, IFRS; audited by Grant Thornton AG, opinion dated 8 May 2026)",
+        "url": "https://files.transparencycdn.org/images/Transparency-International-Financial-Statements-2025.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 15, consolidated statement of comprehensive income, Expenditure, total, 2024 column",
+        "quote": "Expenditure, total 28,003,936 24,478,174"
+      },
+      "explainer": "The prior year's total, for the average over the years behind the wins."
+    },
+    {
+      "id": "tis_expenditure_eur_2023",
+      "section": "cost",
+      "label": "Total expenditure, 2023 (euros)",
+      "format": "number",
+      "value": 22101840,
+      "kind": "observed",
+      "unit": "EUR",
+      "source": {
+        "title": "Transparency International e.V., Financial Statements for the year ended 31 December 2024 (consolidated, IFRS, audited)",
+        "url": "https://files.transparencycdn.org/images/TIS-Financial-Statements-2024.pdf",
+        "retrieved": "2026-11-14",
+        "page": "p. 15, consolidated statement of comprehensive income, Expenditure, total, 2023 column",
+        "quote": "Expenditure, total 24,478,174 22,101,840"
+      },
+      "explainer": "2023's total, for the average over the years behind the wins."
+    },
+    {
+      "id": "average_spend_vs_year",
+      "section": "cost",
+      "label": "Average real spending over 2023-2025 (2025 prices) against 2025's",
+      "format": "multiple",
+      "formula": "avg(tis_expenditure_eur_2023 * @cpi.deu_2025 / @cpi.deu_2023, tis_expenditure_eur_2024 * @cpi.deu_2025 / @cpi.deu_2024, tis_expenditure_eur_2025) / tis_expenditure_eur_2025",
+      "explainer": "The wins followed years of work (the annual report: 'years of joint work' in Spain, golden passports 'over many years'), while 2025 was the most expensive year, partner transfers up 36% with the project cycle (p. 8). So the cost is the average real spending of the three years 2023-2025, in 2025 German prices (Convention 11): about 0.91 of 2025's."
     },
     {
       "id": "overhead_ratio",
@@ -206,7 +277,20 @@
       },
       "kind": "judgment",
       "shape": "lognormal",
-      "explainer": "Each change covers the people of the place whose rules change. The annual report's eight highlights include global and EU rules (about 450 million people in the EU) beside national ones in countries of 5 to 50 million people, and many changes are an agency's or a city's practice, covering fewer. The average, which large rules pull up: 30 million (5 to 150 million). Soft or voluntary rules count their full population here and their weak force in implementation_adj."
+      "explainer": "Each change covers the people of the place whose rules change. Global resolutions (the UN convention's resolution on political finance, the Financing for Development commitment, the UN climate talks' disclosure rule, the Human Rights Council resolution) count no people here: their effect comes through the national laws that implement them, which count when they are won, so counting both would count it twice. The rest: about three EU rules (the golden-passport ban, two parts of the anti-corruption directive) × 450 million ≈ 1.35 billion, and about 60 national, agency or city changes × 5 to 15 million ≈ 0.55 billion; 1.9 billion ÷ 63 ≈ 30 million (5 to 150 million)."
+    },
+    {
+      "id": "pol_eu_people_share",
+      "section": "reach",
+      "label": "Share of the people governed who live in the EU",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "From the sum in pol_people_per_change: the three EU rules' 1.35 billion of about 1.9 billion people governed (71%), plus national changes in EU member states (Spain's strategy), less if fewer EU rules count or the national changes cover more people. 70% (40% to 85%)."
     },
     {
       "id": "alac_people",
@@ -257,12 +341,20 @@
       "explainer": "0: the work frees no one from detention; the legal advice centres' casework is counted as income in its own branch."
     },
     {
+      "id": "pol_eu_cost_share",
+      "section": "effect",
+      "label": "Income lost to corruption in the EU each year, as a share of income",
+      "format": "percent",
+      "formula": "@democracy.eu_corruption_cost_share",
+      "explainer": "The shared figure (facts/democracy.json): about 1.3% of EU income, from the European Commission's EUR 120 billion a year and the European Parliament's study. Already an income cost, so it takes no cost-per-bribe step. Used for the EU part of the people governed."
+    },
+    {
       "id": "pol_bribery_share",
       "section": "effect",
       "label": "Bribes paid each year, as a share of income",
       "format": "percent",
       "formula": "@democracy.bribery_share_gdp",
-      "explainer": "The shared figure (facts/democracy.json): about 2% of the world's income. A measure of what is at stake, not the loss: the next row turns it into income lost."
+      "explainer": "The shared figure (facts/democracy.json): about 2% of the world's income, used for the people governed outside the EU. A measure of what is at stake, not the loss: the next row turns it into income lost."
     },
     {
       "id": "pol_cost_per_bribe",
@@ -287,7 +379,7 @@
     {
       "id": "pol_share_removed",
       "section": "effect",
-      "label": "Share of corruption's cost a change removes where it is applied",
+      "label": "Share of corruption's cost a change removes where applied, if it works as the audits in Olken's trial did",
       "format": "percent",
       "value": {
         "low": 0.0003,
@@ -302,15 +394,29 @@
         "retrieved": "2026-11-14",
         "quote": "increasing government audits from 4 percent of projects to 100 percent reduced missing expenditures ... by eight percentage points"
       },
-      "explainer": "The largest measured effects are within one sector: in Olken's trial in Indonesia, certain audits cut the money missing from village road projects by 8 percentage points, about a third of what went missing (about 24%). A national law, rule or agency practice touches a few sectors among many, and most changes are smaller steps: disclosure rules, a register, a strategy, reporting duties. Judged 0.3% of a country's whole income cost of corruption per change (0.03% to 2%), applied as written; how far it is applied is implementation_adj."
+      "explainer": "The largest measured effects are within one sector: in Olken's trial in Indonesia, certain audits cut the money missing from village road projects by 8 percentage points. A national law, rule or agency practice touches a few sectors among many, and most changes are smaller steps: disclosure rules, a register, a strategy, reporting duties. Judged 0.3% of a country's whole income cost of corruption per change (0.03% to 2%), if the rule works as tested measures do and is applied as written; the chance it works so is pol_evidence_adj, how far it is applied implementation_adj."
+    },
+    {
+      "id": "pol_ln_gain_eu",
+      "section": "effect",
+      "label": "Income gained per person governed per year in the EU (log consumption)",
+      "format": "small",
+      "formula": "ln(1 + pol_eu_cost_share * pol_share_removed)"
+    },
+    {
+      "id": "pol_ln_gain_rest",
+      "section": "effect",
+      "label": "Income gained per person governed per year outside the EU (log consumption)",
+      "format": "small",
+      "formula": "ln(1 + pol_bribery_share * pol_cost_per_bribe * pol_share_removed)"
     },
     {
       "id": "pol_ln_gain",
       "section": "effect",
-      "label": "Income gained per person governed per year (log consumption)",
+      "label": "Income gained per person governed per year (log consumption, average over the EU and the rest)",
       "format": "small",
-      "formula": "ln(1 + pol_bribery_share * pol_cost_per_bribe * pol_share_removed)",
-      "explainer": "ln(1 + corruption's income cost × the share a change removes): the gain in log consumption for each person governed, the same scale wherever they live."
+      "formula": "pol_eu_people_share * pol_ln_gain_eu + (1 - pol_eu_people_share) * pol_ln_gain_rest",
+      "explainer": "ln(1 + corruption's income cost × the share a change removes), with the EU's own cost for its people and the world's for the rest: the gain in log consumption for each person governed, the same scale wherever they live."
     },
     {
       "id": "pol_p_success",
@@ -356,7 +462,7 @@
       "label": "Yearly chance a won change is undone",
       "format": "percent",
       "formula": "@democracy.electoral_reform_repeal_rate",
-      "explainer": "The shared hazard for won reforms of how governments work (facts/democracy.json): anti-corruption rules are also attacked and rolled back (in Slovakia a 2025 law weakened the whistleblower protection authority before the constitutional court suspended it, annual report p. 44; the EU Court of Justice's 2022 ruling ended public access to beneficial-ownership registers)."
+      "explainer": "The shared hazard for won reforms of how governments work (facts/democracy.json): anti-corruption rules are also attacked and rolled back (the EU Court of Justice's 2022 ruling ended public access to beneficial-ownership registers)."
     },
     {
       "id": "pol_rate",
@@ -413,7 +519,7 @@
         "page": "p. 4",
         "quote": "In 2021, ALAC handled a total of 265 new cases, of which 26 were initiated by ALAC itself and the remaining 239 were cases where ALAC acted on the basis of reports/complaints received from citizens."
       },
-      "explainer": "Most people supported get advice by phone or in person; a smaller number become cases the centre acts on, and some of those end with the bribe refused, the service given, the land or money returned. The Bosnian centre took on 265 cases against 1,629 calls in 2021 (cases about 14% of contacts); no published figure gives the share resolved. 10% (3% to 30%)."
+      "explainer": "Most people supported get advice by phone or in person; a smaller number become cases the centre acts on, and some of those end with the bribe refused, the service given, the land or money returned. Across the network since 2003 the centres supported nearly 400,000 people and investigated almost 90,000 cases (annual report p. 45: cases about 22% of people supported); the Bosnian centre took on 265 cases against 1,629 calls in 2021 (about 16%). No published figure gives the share resolved; judged about half of cases: 10% (3% to 30%)."
     },
     {
       "id": "alac_gain_share",
@@ -667,12 +773,12 @@
       "label": "Transparency International's share of all groups' resources behind the changes",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Other NGOs (Global Witness, Open Ownership, ONE, the FACT coalition, OCCRP's reporting), donors and international bodies pushed the same changes, and governments' own reformers did most of the work. Credit by share of the resources behind the wins (Convention 2): about 30% (10% to 60%), as one of the largest specialised groups in most of the coalitions named."
+      "explainer": "Credit by share of all the resources behind the wins (Convention 2), government staff time included: governments' own reformers and officials about 50-60%; other NGOs (Global Witness, Open Ownership, ONE, the FACT coalition, OCCRP's reporting), donors and international bodies about 25-35%; the Transparency International movement, one of the largest specialised groups in most of the coalitions named, about 15% (5% to 40%)."
     },
     {
       "id": "pol_attribution_share",
@@ -745,7 +851,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The share redressed and what it is worth are judged from the centres' own case reports, which no independent study checks: 0.75 (0.5 to 1)."
+      "explainer": "alac_redressed_share and alac_gain_share are what happens if the centres' own case reports are accurate; this is the doubt that they are, as no independent study checks them: 0.75 (0.5 to 1)."
     },
     {
       "id": "alac_counterfactual_adj",
