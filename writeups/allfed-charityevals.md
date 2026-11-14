@@ -63,7 +63,7 @@ Famine deaths in a war the world survives bring almost all of the result. At a 0
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template. The independent audit rounds are in audits/allfed-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit passed with two medium and six low findings, all fixed: the next dollar lowered to 56% for ALLFED's reserves and its 2025 cuts, a lower low end for the famine share if a nuclear winter is weaker than modelled, the president's unpaid time in ALLFED's share of the resources, and corrections to the grant, the UK charity's date and Rethink's wording. It also confirmed that a typical project's cut can apply to deaths in a war: Rethink's preset is for work against the threat or severity of a nuclear war. A verification round checked the fixes. The rounds are in audits/allfed-charityevals/.
 
 ### Sources
 
