@@ -5,12 +5,12 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse, refs } from "./expr";
 import { formulaText } from "./derive";
-import { assumptionValues, buildLibrary, compute, headline, modelResult, usedAssumptions } from "./model";
+import { assumptionValues, buildLibrary, compute, headline, modelResult, pickValue, usedAssumptions } from "./model";
 import { sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
 import { lookupFor, rootOf, childrenOf } from "./tree";
 import { inv12, keyOf } from "./invariants";
-import { GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY } from "./moved-money";
+import { CASH_BENCHMARK, GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY } from "./moved-money";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -135,11 +135,14 @@ describe("INV-12: money moved is valued one way", () => {
   });
   const realAssumptions = read(join(root, "assumptions/default.json"));
   const facts = walk(join(root, "facts")).map(read);
-  const destinations = walk(join(root, "models")).map(read).filter((m) => [...GLOBAL_HEALTH_DESTINATIONS, "givedirectly"].includes(m.id));
+  // The destinations are charities' figures on the rankings (`#owner:charity`): the real models and charities.
+  const destinations = walk(join(root, "models")).map(read);
+  const charities = walk(join(root, "charities")).map(read);
+  const owners = read(join(root, "owners.json"));
   const shared = (ids: (keyof typeof MOVED_MONEY_ROWS | "moved_dollar_value")[], _ghOnly = true) =>
     ids.map((id) => (id === "moved_dollar_value" ? GLOBAL_HEALTH_ONLY : MOVED_MONEY_ROWS[id])).map(({ id, label, formula }) => ({ id, label, formula }));
   const meta = (id: string, rows: object[]) => ({
-    id, name: id, kind: "charity", cause: "global-health", rows,
+    id, name: id, kind: "charity", cause: "global-health", charity: "giving-what-we-can", owner: "charityevals", rows,
     output: { row: "out", unit: "uov", label: "UoV per $", native: { row: "raised", unit: "dollars raised per dollar (gross)" } },
   });
   const raised = { id: "raised", label: "Dollars raised for effective charities per dollar received", value: 10, kind: "estimate", explainer: "Test input." };
@@ -148,19 +151,24 @@ describe("INV-12: money moved is valued one way", () => {
   const edited = meta("edited", [raised, ...shared(["value_global_health", "moved_dollar_value"], true).map((r) => (r.id === "value_global_health" ? { ...r, formula: "#against-malaria-foundation" } : r)), { id: "out", label: "out", formula: "raised * moved_dollar_value" }]);
   const success = meta("success", [raised, ...shared(["value_global_health", "moved_dollar_value"], true), { id: "p", label: "Probability of success", value: 0.6, kind: "judgment", explainer: "Test input." }, { id: "out", label: "out", formula: "raised * p * moved_dollar_value" }]);
   const career = { ...meta("career", [{ id: "careers", label: "Career changes per dollar", value: 0.001, kind: "estimate", explainer: "Test input." }, { id: "out", label: "out", formula: "careers * 50000 * #givedirectly" }]), output: { row: "out", unit: "uov", label: "UoV per $" } };
-  const l = buildLibrary([...destinations, good, own, edited, success, career], realAssumptions, facts);
+  const l = buildLibrary([...destinations, good, own, edited, success, career], realAssumptions, facts, charities, owners);
 
   it("flags a meta model with its own multiple, an edited shared row, its own success chance and a career change outside the method", () => {
     expect(l.errors).toEqual([]);
-    expect(inv12(l).violations.map(keyOf).sort()).toEqual(["career career_change_value", "edited value_global_health formula", "own moved_dollar_value", "success p success"]);
+    expect(inv12(l).violations.filter((x) => ["good", "own", "edited", "success", "career"].includes(x.model)).map(keyOf).sort()).toEqual(["career career_change_value", "edited value_global_health formula", "own moved_dollar_value", "success p success"]);
   });
 
   it("values a dollar moved from the destinations' live results", () => {
     const m = l.models.get("good")!;
     const av = assumptionValues(l.assumptions);
     const v = compute(l, m, av);
-    expect(v.moved_dollar_value).toBeGreaterThan(v["#givedirectly"]);
-    expect(v.moved_dollar_net_value).toBeCloseTo(0.5 * v.moved_dollar_value + 0.5 * (v.moved_dollar_value - v["#givedirectly"]));
+    expect(v.moved_dollar_value).toBeGreaterThan(v[`#${CASH_BENCHMARK}`]);
+    expect(v.moved_dollar_net_value).toBeCloseTo(0.5 * v.moved_dollar_value + 0.5 * (v.moved_dollar_value - v[`#${CASH_BENCHMARK}`]));
+    // Each destination at its charity's figure on the rankings, never one of its location models alone.
+    expect(GLOBAL_HEALTH_DESTINATIONS.every((d) => d.includes(":"))).toBe(true);
+    const weights = ["gw_weight_amf", "gw_weight_smc", "gw_weight_vas", "gw_weight_ni"].map((k) => pickValue(l.facts.get(`meta.${k}`)!.value));
+    expect(v.value_global_health).toBeCloseTo(GLOBAL_HEALTH_DESTINATIONS.reduce((s, d, i) => s + weights[i] * modelResult(l, d, av), 0));
+    expect(modelResult(l, "givewell:helen-keller-intl", av)).toBeGreaterThan(modelResult(l, "helen-keller-vas", av));
     // Moving a slider the destinations read moves the meta model.
     expect(headline(l, m, { ...av, daly_per_child_death: av.daly_per_child_death * 2 })).toBeGreaterThan(headline(l, m, av));
   });

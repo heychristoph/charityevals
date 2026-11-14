@@ -65,7 +65,7 @@ describe("build-cea templates, filled in", () => {
       expect((at(0.5) - at(0)) / (at(1) - at(0))).toBeCloseTo(0.5, 9);
       // Every branch's marker reads the slider in the skeleton; 1 is the builder's call, with a reason.
       expect(m.rows.filter((r) => /(^|_)missing_data_adj$/.test(r.id)).map((r) => r.formula)).toEqual(expect.arrayContaining(["$missing_data_discount"]));
-    });
+    }, 30_000); // every invariant over the whole library: seconds, more under a parallel run
   }
 
   it("a bridge written any other way, or a missing-data step typed in, is caught", () => {
