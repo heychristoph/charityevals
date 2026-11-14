@@ -56,6 +56,7 @@ Beyond the side-effect rows (emergency health and protection services, women's s
 The mechanical audit (`scripts/audit-model.ts`) runs on the model, and independent auditors (a fresh agent each round, using the audit-cea skill) checked it; the rounds are in `audits/care-charityevals/`.
 
 - **Round 1**: no high finding, two medium. The relief goods' value had been discounted by the evidence and attribution steps meant for the deaths averted; goods and deaths now take their own adjustments. The food-security branch counted participants without their households, unlike the savings groups; it now shares the gain with half the rest of the household. Lows fixed: food and education got attribution shares, the delivery adjustment takes the 2025 stop-work orders, endowments left the unspent-money wait, and the summary's shares were corrected. Together these raised the result by about a quarter.
+- **Round 2** (verification of those changes): no high or medium finding. Left as they are: the reading-only average adjustments weight relief by its deaths' factors (no effect on the result), and the crisis deaths' ages follow the site's diarrhoea split as a stand-in, as in the peer relief models.
 
 ### Sources
 
