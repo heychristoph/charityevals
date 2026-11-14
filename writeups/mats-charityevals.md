@@ -59,7 +59,7 @@ The result is about two thirds of the Institute for AI Policy and Strategy's and
 
 ### How this model was checked
 
-AUDIT
+The model was built from the catastrophic-risk template, with the models of the Institute for AI Policy and Strategy and GovAI as the closest peers. The first audit round found no high-severity problem. It showed that the scholars' own research during the ten weeks was undervalued by the model's own arithmetic, so its share of other benefits rose from 25% to 45%. It also corrected several sources: the stipends, the research tracks and the next-dollar quote. Later rounds checked the changes. The audit rounds are in audits/mats-charityevals/.
 
 ### Sources
 
