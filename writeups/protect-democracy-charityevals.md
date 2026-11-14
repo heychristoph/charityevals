@@ -1,6 +1,6 @@
 ### Summary
 
-Protect Democracy works to keep the United States from sliding into a more authoritarian government, through lawsuits, election protection, state laws, tools and public education. Our model of its 2024 work comes to **<span data-figure="headline" data-model="protect-democracy-charityevals">0.04</span> years of healthy life per 1,000 dollars**, about half the site's global-health median. It is a very uncertain figure: the main step, how much a year of the whole pro-democracy field's work lowers the chance of the US leaving the democracies, is our judgment.
+Protect Democracy works to keep the United States from sliding into a more authoritarian government, through lawsuits, election protection, state laws, tools and public education. Our model of its 2024 work comes to **<span data-figure="headline" data-model="protect-democracy-charityevals">0.02</span> years of healthy life per 1,000 dollars**, about a quarter of the site's global-health median. It is a very uncertain figure: the main step, how much a year of the whole pro-democracy field's work lowers the chance of the US leaving the democracies, is our judgment.
 
 ### What the charity does
 
@@ -15,26 +15,27 @@ Forecasters give the US about an 11% chance of falling to a "hybrid regime" befo
 - **Cost:** the 2024 Form 990 (the audited statements aren't public). Management and fundraising are spread over the programme. Grants count as the work they fund.
 - **Backsliding branch (about 93% of spending):**
   - the stake: the whole US population keeps the income gain of democracy;
-  - the loss would build over about 25 years after a slide. An averted slide is put off by the five years a win counts on the site, which moves the whole build-up later;
+  - the loss would build over about 25 years after a slide. An averted slide is put off by the five years a win counts on the site, which moves the whole build-up later. A slide is undone with a judged 5% chance each year, as most recent slides have been;
   - a slide to a hybrid regime counts as 60% of the full loss, and the cross-country effect counts at 0.8 for a rich country;
-  - a year of the field's work removes a judged 5% of the 11% chance;
+  - a year of the field's work removes a judged 4.5% of the 11% chance;
   - Protect Democracy's credit is its share of the money behind that work, about 1.3%. The field is $3 billion a year of foundation money, scaled up for other donors, with the work that acts less directly counted at a fifth.
-- **Proportional-representation branch (about 7% of spending):** about 300,000 people a year newly governed under proportional representation in expectation, as when Portland, Oregon, adopted it in 2022. The reform is worth a judged 5% of democracy's gain. Protect Democracy's share of the movement's money is about 29%. This branch is about a sixth of the result.
-- **Side effects:** the good of democracy beyond income (+30%), repression averted (+5%), effects on democracy abroad (+20%) and backlash (−5%), each a share of the income value.
+- **Proportional-representation branch (about 7% of spending):** about 230,000 people a year newly governed under proportional representation in expectation, as when Portland, Oregon, adopted it in 2022. The reform is worth a judged 5% of democracy's gain. Protect Democracy's share of the movement's money is about 29%. This branch is about a sixth of the result.
+- **Side effects:** the good of democracy beyond income (+30%) and backlash (−5%) in both branches; repression averted (+5%) and effects on democracy abroad (+20%) in the backsliding branch only. Each is a share of the income value.
 - **Next dollar:** 35% of the average. Protect Democracy held $93 million of net assets at the end of 2024, about 2.7 years of spending, almost all of it unrestricted.
 
 ### What drives the result
 
-1. The share of the backsliding chance a year of the field's work removes (1% to 20%).
+1. The share of the backsliding chance a year of the field's work removes (0.5% to 20%).
 2. The next dollar's share of the average (16% to 74%).
-3. The forecast chance of a slide (5% to 28%).
-4. How much of the full loss a slide to a hybrid regime brings (30% to 100%).
+3. Democracy's long-run income gain (7% to 35%).
+4. The forecast chance of a slide (5% to 28%).
+5. People newly governed under proportional representation each year (50,000 to 2 million).
 
 ### Biggest uncertainties
 
-- No study measures how much litigation and election protection lower the chance of democratic breakdown. Our 5% sits between two anchors. Counting the field as part of the resistance that stops two in five slides gives 2% to 3%. Typical nuclear-security work's cut per dollar gives far more.
+- No study measures how much litigation and election protection lower the chance of democratic breakdown. Our 4.5% sits between two anchors. Only one in five democracies avert breakdown once a slide starts. Counting the field as part of that resistance gives about 1%. Typical nuclear-security work's cut per dollar gives far more.
 - The forecast is from thin prediction markets on an index the Economist publishes.
-- The income effect comes from mostly poorer countries changing regime. A rich democracy sliding part-way may lose less.
+- The income effect comes from mostly poorer countries changing regime. A rich democracy sliding part-way may lose less, and may recover sooner.
 
 ### What isn't modelled
 
