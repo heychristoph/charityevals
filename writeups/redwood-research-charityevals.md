@@ -1,6 +1,6 @@
 ### Summary
 
-Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="redwood-research-charityevals">0.05</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.003 to about 0.5.
+Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="redwood-research-charityevals">0.05</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.004 to about 0.5.
 
 ### What the charity does
 
@@ -33,7 +33,7 @@ All the work counts as work against misaligned AI. Only the paper on hidden capa
 
 Side effects: other benefits add 10% (control also guards against smaller harms; its researchers mentor outside scholars). Two harms subtract 5% and 2%. Control could let labs deploy more capable models sooner. Published attack strategies and alignment-faking demonstrations may end up in future models' training data.
 
-Redwood received under $10,000 in 2024 and spent from its reserves. It ended the year with net assets of $6.5 million, over two years of spending. The transfers to Constellation won't recur, so the next dollar buys only research. So the next dollar counts at 38% of the past average.
+Redwood received under $10,000 in 2024 and spent from its reserves. It ended the year with net assets of $6.5 million, over two years of spending. The transfers to Constellation won't recur, so the next dollar buys only research. So the next dollar counts at 40% of the past average.
 
 ### What drives the result
 
@@ -41,9 +41,9 @@ The result is under a tenth of the median for this cause and close to MIRI's (0.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.007 to 0.35.
-- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.014 to 0.44.
-- **Whether any of the work counts as misuse work.** If the paper on hidden capabilities counted as misuse work (about 15% of the research), the result would be 0.69.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.007 to 0.37.
+- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.014 to 0.46.
+- **Whether any of the work counts as misuse work.** If the paper on hidden capabilities counted as misuse work (about 15% of the research), the result would be 0.72.
 - **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 1.
 
 ### What isn't modelled
@@ -54,7 +54,7 @@ The result is under a tenth of the median for this cause and close to MIRI's (0.
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with FAR.AI's model as the worked example. Round 1 of the independent audit found that 5% of the work had been counted as misuse work, from a paper that serves misuse and misalignment tests alike. By the template's rule such work counts as misalignment, so the share is now 0. That lowered the result from 0.26 to about 0.05. The round also split the transfers to Constellation: the office fit-out, already in use, now counts at a sixth of the cash. Round 2 passed with two medium findings, both fixed: the next dollar buys only research now the spin-off is done, raising it from 33% to 38%, and the high end of the misuse share is now set by the paper's likely share of the research. Credit is now weighted part by part, lowering the result by 5%. A verification round checked the changes. Independent audits are in audits/redwood-research-charityevals/.
+The model was built from the catastrophic-risk template, with FAR.AI's model as the worked example. Round 1 of the independent audit found that 5% of the work had been counted as misuse work, from a paper that serves misuse and misalignment tests alike. By the template's rule such work counts as misalignment, so the share is now 0. That lowered the result from 0.26 to about 0.05. The round also split the transfers to Constellation: the office fit-out, already in use, now counts at a sixth of the cash. Round 2 passed with two medium findings, both fixed: the next dollar buys only research now the spin-off is done, raising it from 33% to 40%, and the high end of the misuse share is now set by the paper's likely share of the research. Credit is now weighted part by part, lowering the result by 5%. A verification round checked the changes. Independent audits are in audits/redwood-research-charityevals/.
 
 ### Sources
 
