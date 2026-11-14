@@ -17,6 +17,7 @@
 //            research or advice changed (a judged share of the money it informed, the row
 //            informed_money) is all shifted, with the evidence and missing-data steps:
 //            informed_money_value, in place of net (money_moved, if the model also moves money gross)
+//   sets     money to a second destination set takes the same rows prefixed `<set>_` (destinationSetRows)
 //
 // A result an evaluator already states as counterfactual value in "dollars of current effective
 // donations" (CEARCH) is multiplied by V; money moved (gross) by `moved_dollar_net_value`.
@@ -212,6 +213,34 @@ export const OWN_SPLIT: TemplateRow = {
 
 /** Formulas a meta model's `moved_dollar_value` may have. */
 export const MOVED_DOLLAR_FORMULAS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula, OWN_SPLIT.formula];
+
+/** A second destination set: money a model moves to other destinations than its main set (Ambitious
+ * Impact: its founded charities, and the global health charities its effective giving organisations
+ * fund). The set's rows are the main set's, word for word, with `<set>_` before every set row's id; the
+ * model's own money rows take the prefix too (`<set>_money_moved` gross, `<set>_informed_money` changed).
+ * Its destination is one of the shared single-cause rows, so shifted money is compared with GiveDirectly. */
+export const SET_ROWS = ["moved_dollar_value", "prior_dollar_value", "moved_dollar_net_value", "shifted_dollar_value", "informed_money_value"] as const;
+export const SET_DESTINATIONS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula];
+const setIds = ["moved_dollar_value", "prior_dollar_value", "shifted_dollar_value", INFORMED_MONEY];
+
+/** The rows of destination set `set` whose destination is `destination` (a SET_DESTINATIONS formula). */
+export function destinationSetRows(set: string, destination: string): TemplateRow[] {
+  const prefix = (f: string) => f.replace(new RegExp(`\\b(${setIds.join("|")})\\b`, "g"), `${set}_$1`);
+  const main: Record<string, TemplateRow> = { ...MOVED_MONEY_ROWS, moved_dollar_value: { ...GLOBAL_HEALTH_ONLY, formula: destination } };
+  return SET_ROWS.map((id) => ({ ...main[id], id: `${set}_${id}`, formula: id === "moved_dollar_value" ? destination : prefix(main[id].formula) }));
+}
+
+/** The second destination sets a model's rows name (`<set>_<set row>`): set → the set rows it has. */
+export function destinationSets(ids: Iterable<string>): Map<string, string[]> {
+  const sets = new Map<string, string[]>();
+  for (const id of ids)
+    for (const base of SET_ROWS)
+      if (id.length > base.length + 1 && id.endsWith(`_${base}`)) {
+        const set = id.slice(0, -base.length - 1);
+        sets.set(set, [...(sets.get(set) ?? []), base]);
+      }
+  return sets;
+}
 
 /** A `value_destinations` formula holds only the organisation's money by recipient or cause (`@meta.*`),
  * live results (`#id`, `#owner:charity`), the shared destination rows, `avg()`, 1 and arithmetic: no

@@ -10,7 +10,7 @@ import { sensitivity } from "./sensitivity";
 import { uncertainty } from "./uncertainty";
 import { lookupFor, rootOf, childrenOf } from "./tree";
 import { inv12, keyOf } from "./invariants";
-import { CASH_BENCHMARK, GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY, OWN_SPLIT, causeSplitShares, priorDollarValue, priorDollarValueMix } from "./moved-money";
+import { CASH_BENCHMARK, GLOBAL_HEALTH_DESTINATIONS, MOVED_MONEY_ROWS, GLOBAL_HEALTH_ONLY, OWN_SPLIT, causeSplitShares, destinationSetRows, priorDollarValue, priorDollarValueMix } from "./moved-money";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -254,7 +254,17 @@ describe("INV-12: money moved is valued one way", () => {
     ...shared(["new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value" }]) });
   const splitGood = crossCause("split-good", priorDollarValueMix(shares).formula);
   const splitForeign = crossCause("split-foreign", priorDollarValueMix([...shares, ["rp_cross_cause_share_ai", "ai"]]).formula);
-  const extra = [animalGood, animalCash, local, allShifted, inlineShifted, informedGood, informedBare, informedCost, splitGood, splitForeign];
+  // A second destination set (gh): the main set's rows with the prefix, a cost valued at its prior (allowed),
+  // or (wrongly) its net value restated by hand over the destination row.
+  const ghMoved = { id: "gh_money_moved", label: "Dollars its giving organisations move per dollar", value: 3, kind: "estimate", explainer: "Test input." };
+  const setModel = (id: string, edit: (r: { id: string; label: string; formula: string }) => { id: string; label: string; formula: string }) =>
+    meta(id, [raised, ghMoved, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]),
+      ...destinationSetRows("gh", "value_global_health").filter((r) => r.id !== "gh_informed_money_value").map(({ id, label, formula }) => edit({ id, label, formula })),
+      { id: "out", label: "out", formula: "raised * moved_dollar_net_value + gh_money_moved * gh_moved_dollar_net_value - 0.1 * raised * running_cost_value" },
+      { id: "running_cost_value", label: "Running costs valued where the money would have gone", formula: "2 * gh_prior_dollar_value" }]);
+  const setGood = setModel("set-good", (r) => r);
+  const setEdited = setModel("set-edited", (r) => (r.id === "gh_moved_dollar_net_value" ? { ...r, formula: "new_money_share * value_global_health + (1 - new_money_share) * (value_global_health - gh_prior_dollar_value)" } : r));
+  const extra = [animalGood, animalCash, local, allShifted, inlineShifted, informedGood, informedBare, informedCost, splitGood, splitForeign, setGood, setEdited];
   const l = buildLibrary([...destinations, good, own, edited, success, career, ...extra], realAssumptions, facts, charities, owners);
 
   it("flags a meta model with its own multiple, an edited shared row, its own success chance, no net value and a career change outside the method", () => {
@@ -263,7 +273,7 @@ describe("INV-12: money moved is valued one way", () => {
   });
 
   it("compares shifted money with an ordinary charity of the mover's own cause, and reads it only through the shared rows", () => {
-    expect(inv12(l).violations.filter((x) => extra.some((m) => m.id === x.model)).map(keyOf).sort()).toEqual(["animal-cash prior_dollar_value formula", "informed-bare informed_money_value steps", "informed-cost donor_cost_share informed_money", "inline-shifted out prior_dollar_value", "local moved_dollar_net_value", "local out prior_dollar_value", "split-foreign prior_dollar_value formula"]);
+    expect(inv12(l).violations.filter((x) => extra.some((m) => m.id === x.model)).map(keyOf).sort()).toEqual(["animal-cash prior_dollar_value formula", "informed-bare informed_money_value steps", "informed-cost donor_cost_share informed_money", "inline-shifted out prior_dollar_value", "local moved_dollar_net_value", "local out prior_dollar_value", "set-edited gh_moved_dollar_net_value formula", "split-foreign prior_dollar_value formula"]);
     const av = assumptionValues(l.assumptions);
     const v = compute(l, l.models.get("animal-good")!, av);
     // An ordinary animal charity stands to the animal charities on the rankings as GiveDirectly to global health's.

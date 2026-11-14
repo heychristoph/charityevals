@@ -766,6 +766,13 @@ shifted, as half new in its credit by share of resources: now donors' money only
   spending it changed is its own row, `informed_money`; `money_moved` stays the money moved gross, valued
   net, and alone enters the credit by share of resources (`money_moved × new_money_share`: changed spending
   brings no new money; INV-12 checks `donor_cost_share` never reads `informed_money`). No result moved.
+- *A second destination set* (Ambitious Impact: its founded charities, and the global health charities its
+  giving organisations fund): the main set's rows word for word with `<set>_` before every set row and the
+  set's own money rows (`gh_moved_dollar_value = value_global_health`, `gh_prior_dollar_value`,
+  `gh_moved_dollar_net_value`, `gh_shifted_dollar_value`, `gh_informed_money_value`; `gh_money_moved`,
+  `gh_informed_money`), over a shared single-cause destination (`moved-money.ts set <set> <destination>`).
+  INV-12 checks every set by the main set's rules; a prior may also be read as a factor of a cost (money
+  that would have gone elsewhere, spent on running costs). No result moved.
 
 ### 2.9 Won reforms: one way (October 2026)
 

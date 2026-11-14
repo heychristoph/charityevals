@@ -10,7 +10,7 @@ import {
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
-import { CAREER_CHANGE_FORMULA, INFORMED_MONEY, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SUCCESS_FACT, causeSplitShares, isDestinationMix, priorDollarValue, priorDollarValueMix, sameFormula } from "./moved-money";
+import { CAREER_CHANGE_FORMULA, INFORMED_MONEY, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SET_DESTINATIONS, SUCCESS_FACT, causeSplitShares, destinationSetRows, destinationSets, isDestinationMix, priorDollarValue, priorDollarValueMix, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
@@ -889,12 +889,30 @@ export function inv12(lib: Library): InvariantReport {
         if (!r || id === "moved_dollar_value") continue;
         if (!sameFormula(r.formula, t.formula)) violations.push({ inv: "INV-12", model: m.id, where: `${id} formula`, detail: `shared row ${id} is ${r.formula ?? "an input"}, not ${t.formula}` });
       }
+      // Second destination sets (`<set>_` rows, src/engine/moved-money.ts destinationSetRows): the main
+      // set's rows word for word, prefixed, over a shared single-cause destination.
+      const sets = [...destinationSets(m.byId.keys()).keys()];
+      const setRows = new Set<string>();
+      for (const set of sets) {
+        const d = m.byId.get(`${set}_moved_dollar_value`);
+        if (!d || !SET_DESTINATIONS.some((f) => sameFormula(d.formula, f))) {
+          violations.push({ inv: "INV-12", model: m.id, where: `${set}_moved_dollar_value`, detail: `destination set ${set} needs ${set}_moved_dollar_value = one of ${SET_DESTINATIONS.join(", ")} (it is ${d?.formula ?? "missing"})` });
+          continue;
+        }
+        for (const t of destinationSetRows(set, d.formula!)) {
+          setRows.add(t.id);
+          const r = m.byId.get(t.id);
+          if (r && !sameFormula(r.formula, t.formula)) violations.push({ inv: "INV-12", model: m.id, where: `${t.id} formula`, detail: `shared row ${t.id} (destination set ${set}) is ${r.formula ?? "an input"}, not ${t.formula}` });
+        }
+      }
+      const prefixes = ["", ...sets.map((s) => `${s}_`)];
       // Money moved gross is valued net of where shifted money would have gone, through the shared row; a
       // result already stated as counterfactual dollars of effective donations (CEARCH) reads V alone;
       // spending research or advice changed, all shifted, through informed_money_value, whose evidence
       // and missing-data steps are the template's rows.
       const alreadyNet = ALREADY_NET.test(m.output!.native?.unit ?? "") || onPath.some((r) => ALREADY_NET.test(r.label));
-      const informed = path.has("informed_money_value") && path.has("shifted_dollar_value");
+      const informedSets = prefixes.filter((p) => path.has(`${p}informed_money_value`) && path.has(`${p}shifted_dollar_value`));
+      const informed = informedSets.length > 0;
       if (v && path.has(v.id) && !alreadyNet && !informed && !path.has("moved_dollar_net_value"))
         violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_net_value", detail: `values money moved but neither moved_dollar_net_value nor (for spending research or advice changed) informed_money_value is on the path to the output: value it through the shared rows (python3 scripts/moved-money.py <model> <scope> net|informed)` });
       if (informed) {
@@ -903,14 +921,18 @@ export function inv12(lib: Library): InvariantReport {
         if (!ev || !md || !sameFormula(md.formula, "$missing_data_discount"))
           violations.push({ inv: "INV-12", model: m.id, where: "informed_money_value steps", detail: `informed_money_value needs an evidence_adj row and missing_data_adj = $missing_data_discount (evidence_adj ${ev ? "present" : "missing"}, missing_data_adj ${md?.formula ?? "missing"})` });
         // All shifted, the spending it changed brings in no donors' new money.
-        if (m.byId.has("donor_cost_share") && upstream(m, "donor_cost_share").has(INFORMED_MONEY))
-          violations.push({ inv: "INV-12", model: m.id, where: "donor_cost_share informed_money", detail: `donor_cost_share reads ${INFORMED_MONEY} (spending its research or advice changed, all shifted): only money_moved × new_money_share counts as donors' new money` });
+        const feeding = m.byId.has("donor_cost_share") ? upstream(m, "donor_cost_share") : new Set<string>();
+        for (const p of informedSets)
+          if (feeding.has(`${p}${INFORMED_MONEY}`))
+            violations.push({ inv: "INV-12", model: m.id, where: `donor_cost_share ${p}${INFORMED_MONEY}`, detail: `donor_cost_share reads ${p}${INFORMED_MONEY} (spending its research or advice changed, all shifted): only money moved gross × new_money_share counts as donors' new money` });
       }
       // Other rows read where shifted money would have gone only through the shared rows (the gain of
       // money all shifted is shifted_dollar_value).
+      // A cost valued where the money would have gone (a product with the prior as a factor) is no gain.
       for (const r of onPath)
-        if (!(r.id in shared) && r.deps.includes("prior_dollar_value"))
-          violations.push({ inv: "INV-12", model: m.id, where: `${r.id} prior_dollar_value`, detail: `${r.id} reads prior_dollar_value outside the shared rows (the gain of money all shifted is shifted_dollar_value): ${r.formula}` });
+        for (const prior of prefixes.map((p) => `${p}prior_dollar_value`))
+          if (!(r.id in shared) && !setRows.has(r.id) && r.deps.includes(prior) && /[+-]/.test(r.formula ?? ""))
+            violations.push({ inv: "INV-12", model: m.id, where: `${r.id} ${prior}`, detail: `${r.id} reads ${prior} outside the shared rows (the gain of money all shifted is ${prior.replace("prior_dollar_value", "shifted_dollar_value")}; a cost valued where money would have gone multiplies it): ${r.formula}` });
       for (const r of onPath)
         if (ORG_SUCCESS.test(r.label) && !r.factDeps.includes(SUCCESS_FACT))
           violations.push({ inv: "INV-12", model: m.id, where: `${r.id} success`, detail: `"${r.label}" is a meta organisation's chance of success but reads ${r.formula ?? fmt(inputValue(r, "charityevals"))}, not @${SUCCESS_FACT} (evaluator's figure in \`published\`)` });
@@ -925,7 +947,7 @@ export function inv12(lib: Library): InvariantReport {
   }
   return {
     id: "INV-12", title: "Money moved and career changes are valued one way", status: "partial", checked, violations,
-    how: `Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (${Object.keys(MOVED_MONEY_ROWS).join(", ")}) must have the shared formula word for word (prior_dollar_value: GiveDirectly for a model filed under global health, an ordinary charity of its own cause for any other, ${priorDollarValue("<cause>").formula}); for a mover whose own split spans several causes, prior_dollar_value may instead be each cause's ordinary charity in the split's shares (${priorDollarValueMix([["<share>", "<cause>"]]).formula}); moved_dollar_net_value must be on the path, unless the result is already counterfactual dollars of effective donations (CEARCH) or is spending research or advice changed, all shifted, through informed_money_value = ${MOVED_MONEY_ROWS.informed_money_value.formula} (evidence_adj a row, missing_data_adj = $missing_data_discount, and the model's own ${INFORMED_MONEY}, the money changed, never read by donor_cost_share: all shifted, it brings no new money); no other row on the path may read prior_dollar_value (the gain of money all shifted is shifted_dollar_value); and every row on its path stating an organisation's chance of success must read @${SUCCESS_FACT}. A row on the path about career changes needs the shared career_change_value = ${CAREER_CHANGE_FORMULA}. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.`,
+    how: `Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (${Object.keys(MOVED_MONEY_ROWS).join(", ")}) must have the shared formula word for word (prior_dollar_value: GiveDirectly for a model filed under global health, an ordinary charity of its own cause for any other, ${priorDollarValue("<cause>").formula}); for a mover whose own split spans several causes, prior_dollar_value may instead be each cause's ordinary charity in the split's shares (${priorDollarValueMix([["<share>", "<cause>"]]).formula}); moved_dollar_net_value must be on the path, unless the result is already counterfactual dollars of effective donations (CEARCH) or is spending research or advice changed, all shifted, through informed_money_value = ${MOVED_MONEY_ROWS.informed_money_value.formula} (evidence_adj a row, missing_data_adj = $missing_data_discount, and the model's own ${INFORMED_MONEY}, the money changed, never read by donor_cost_share: all shifted, it brings no new money); no other row on the path may read prior_dollar_value but as a factor of a product (a cost valued where money would have gone; the gain of money all shifted is shifted_dollar_value); a second destination set (rows <set>_moved_dollar_value and the rest) has the main set's rows word for word with the prefix on every set row and on its own money rows, over ${SET_DESTINATIONS.join(", ")}, under the same rules; and every row on its path stating an organisation's chance of success must read @${SUCCESS_FACT}. A row on the path about career changes needs the shared career_change_value = ${CAREER_CHANGE_FORMULA}. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.`,
   };
 }
 

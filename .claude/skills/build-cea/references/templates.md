@@ -267,5 +267,6 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
   `@meta.success_chance_new_org` and the success step. No missing-data step.
 - Research or advice that changes where money is spent (a judged share of the money it informed): the row
   `informed_money`, all shifted, `informed_money_value` (set `informed`: evidence and missing-data steps),
-  not net value, and never in `donor_cost_share` (`money_moved` stays any money moved gross). A split
+  not net value, and never in `donor_cost_share` (`money_moved` stays any money moved gross). Money to a
+  second destination set: the same rows prefixed `<set>_` (`moved-money.ts set <set> <destination>`). A split
   across causes: the prior by the same shares (cause `<share fact>=<cause>,...`).
