@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "league-of-women-voters-education-fund",
   "owner": "charityevals",
-  "summary": "The League of Women Voters Education Fund, the 501(c)(3) of the League of Women Voters (the League of Women Voters of the United States is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $11.3 million of its own money in the year to June 2025, beside $5.4 million of donated legal services and advertising that count as the donors' resources, on VOTE411.org, voter registration, voting-rights litigation and reform campaigns. Four branches: its direct work's share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about 32% of the result); its voter information and registration, 73% of its spending, credited in the same cut at the shared weight for turnout and civic-education dollars (about 32%), with a side effect for what it changes in who is elected, judged a tenth of an access reform's effect per dollar (about 10%); its 1% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about 12%); and its other reforms (voting access, the Electoral College, DC statehood), judged a quarter as effective per dollar as the redistricting movement (about 14%). With its next dollar at 52.5% of the average, it comes to about 0.012 years of healthy life per 1,000 dollars; the result is mostly judgment (the years a win counts, the field's effect on the risk, the weight of voter information against direct work), and all four branches are discounted by the shared missing-data slider.",
+  "summary": "The League of Women Voters Education Fund, the 501(c)(3) of the League of Women Voters (the League of Women Voters of the United States is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $11.3 million of its own money in the year to June 2025, beside $5.4 million of donated legal services and advertising that count as the donors' resources, on VOTE411.org, voter registration, voting-rights litigation and reform campaigns. Four branches: its direct work's share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about 32% of the result); its voter information and registration, 73% of its spending, credited in the same cut at the shared weight for turnout and civic-education dollars (about 32%), with a side effect for what it changes in who is elected, judged a tenth of an access reform's effect per dollar (about 10%); its 1% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about 11%); and its other reforms (voting access, the Electoral College, DC statehood), judged a quarter as effective per dollar as the redistricting movement (about 14%). With its next dollar at 52.5% of the average, it comes to about 0.012 years of healthy life per 1,000 dollars; the result is mostly judgment (the years a win counts, the field's effect on the risk, the weight of voter information against direct work), and all four branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: League of Women Voters Education Fund",
@@ -327,7 +327,7 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "Work as direct as the field's 'direct' dollar (@democracy.field_direct_share: litigation, election protection, checks on executive power): the national litigation team and its voter-protection work (the annual report counts 11.2 million voters protected through litigation, among them the suit that blocked the 2025 executive order requiring documentary proof of citizenship and the North Carolina Supreme Court certification case; its redistricting suits, 12 of 59 federal cases, count here, not in the redistricting branch, whose wins and resources leave litigation out),the April 2025 lobbying of every congressional office to enforce checks and balances, and the legal-action prong of Women Defend Democracy and Unite and Rise 8.5. Anchor: the Advocacy column without its donated legal work is $0.73 million, 8.8% of the programme, and part of it is lobbying for reforms; parts of Mission impact and Communications serve the litigation and rapid response. Judged 15% (8% to 30%), under Common Cause Education Fund's 35% because the League runs no Election Protection hotline of that size and its lawsuits are mostly argued by donated counsel, whose work isn't its spending."
+      "explainer": "Work as direct as the field's 'direct' dollar (@democracy.field_direct_share: litigation, election protection, checks on executive power): the national litigation team and its voter-protection work (the annual report counts 11.2 million voters protected through litigation, among them the suit that blocked the 2025 executive order requiring documentary proof of citizenship and the North Carolina Supreme Court certification case; its redistricting suits, 12 of 59 federal cases, count here, not in the redistricting branch, whose wins and resources leave litigation out), the April 2025 lobbying of every congressional office to enforce checks and balances, and the legal-action prong of Women Defend Democracy and Unite and Rise 8.5. Anchor: the Advocacy column without its donated legal work is $0.73 million, 8.8% of the programme, and part of it is lobbying for reforms; parts of Mission impact and Communications serve the litigation and rapid response. Judged 15% (8% to 30%), under Common Cause Education Fund's 35% because the League runs no Election Protection hotline of that size and its lawsuits are mostly argued by donated counsel, whose work isn't its spending."
     },
     {
       "id": "maps_spend_share",
@@ -1010,7 +1010,43 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "Outside a slide, more and better-informed voters can change who wins and what is decided, the other thing voter information changes; the site values that change for voting-access reforms through @democracy.other_reform_relative_effect (a quarter of a redistricting-movement dollar). A cycle of registration and voter guides acts on one election, where a won access reform counts its years ($win_years_counted, 5 at the default, two or three elections) and covers everyone in its state; and nonpartisan turnout gains change little: universal mail voting raised turnout about 2 points and changed neither party's share (Thompson et al. 2020, the same fact's anchor), and the League's work is nonpartisan by rule. Candidate information may make choices better informed, but no study measures that for a voter guide. Judged a tenth of an access-reform dollar's effect (0 to 30%)."
+      "explainer": "Outside a slide, more and better-informed voters can change who wins and what is decided, the other thing voter information changes; the site values that change for voting-access reforms through @democracy.other_reform_relative_effect (a quarter of a redistricting-movement dollar, which already holds the small partisan effect of turnout gains). This is the effect, per dollar and per year it lasts, of a cycle of registration and voter guides against a won access reform's effect per person-year of its state: a reform changes the rules for everyone in its state, while a cycle of voter information reaches the people it informs or registers (7.6 million VOTE411 users and 482,000 registrations in the year, against the tens of millions a state access reform covers), and its years are counted separately (vie_discounted_years). Candidate information may make choices better informed, but no study measures that for a voter guide. Judged a tenth (0 to 30%)."
+    },
+    {
+      "id": "vie_cycle_years",
+      "section": "adjustments",
+      "label": "Years one cycle of voter information shapes who governs",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Those elected in the cycle the work informed serve their terms: two years for the US House and most state lower houses, four for governors, senators of most states and many local offices, one for some local and primary contests. Judged 2 years (1 to 4), the House term."
+    },
+    {
+      "id": "vie_wait",
+      "section": "adjustments",
+      "label": "Years from the work until those elected take office",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "explainer": "The year's work led up to the November 2024 election, and those elected took office in January 2025, about half a year after the middle of the year to June 2025. Judged 0.5 years (0.25 to 1.5, the upper end for work in this year that acts on the 2026 midterms)."
+    },
+    {
+      "id": "vie_discounted_years",
+      "section": "adjustments",
+      "label": "Discounted years of one cycle's effect on who governs",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, min(vie_cycle_years, years_of_impact)) * (1 + $discount_rate) ^ (0 - vie_wait)",
+      "explainer": "The terms served, at the shared discount rate, never more than the years a won reform counts, after the wait until they start. They replace the reform's own discounted years (maps_discounted_years) in vie_uov, so the side effect doesn't grow with $win_years_counted beyond a term."
     },
     {
       "id": "vie_attribution_share",
@@ -1067,8 +1103,8 @@
       "format": "number",
       "unit": "UoV",
       "side_effect": "added",
-      "formula": "oth_uov * vie_attribution_share * vi_cycle_share * oth_evidence_adj * oth_implementation_adj * vi_missing_data_adj",
-      "explainer": "The other-reforms chain (a year of reform work the size of the redistricting movement, scaled by the shared relative effect of access reforms) × the Education Fund's voter-information dollars in those units × one cycle's share of a lasting reform's effect, with the same trust, delivery and missing-data discounts as that branch: what voter information changes in who is elected, outside a slide."
+      "formula": "oth_uov / maps_discounted_years * vie_discounted_years * vie_attribution_share * vi_cycle_share * oth_evidence_adj * oth_implementation_adj * vi_missing_data_adj",
+      "explainer": "The other-reforms chain per discounted year (a year of reform work the size of the redistricting movement, scaled by the shared relative effect of access reforms, over the reform's own discounted years) × one cycle's discounted years × the Education Fund's voter-information dollars in those units × a cycle's effect against a reform's, with the same trust, delivery and missing-data discounts as that branch: what voter information changes in who is elected, outside a slide."
     },
     {
       "id": "uov_bridged",
@@ -1314,7 +1350,7 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(bs_raw * bs_total_adj * bs_unmodelled_benefits_adj + maps_raw * maps_total_adj * maps_unmodelled_benefits_adj + oth_raw * oth_total_adj * oth_unmodelled_benefits_adj + vi_raw * vi_total_adj * vi_unmodelled_benefits_adj) / (bs_raw * bs_total_adj + maps_raw * maps_total_adj + oth_raw * oth_total_adj + vi_raw * vi_total_adj)"
+      "formula": "(bs_raw * bs_total_adj * bs_unmodelled_benefits_adj + maps_raw * maps_total_adj * maps_unmodelled_benefits_adj + oth_raw * oth_total_adj * oth_unmodelled_benefits_adj + vi_raw * vi_total_adj * vi_unmodelled_benefits_adj + vie_uov) / (bs_raw * bs_total_adj + maps_raw * maps_total_adj + oth_raw * oth_total_adj + vi_raw * vi_total_adj)"
     },
     {
       "id": "dalys_direct",
