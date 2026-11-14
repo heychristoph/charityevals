@@ -8,8 +8,11 @@
 //            split where it has one, else the cause it works in: global health, livelihoods). The
 //            across-causes mix (Giving What We Can's split, animals, longtermist causes at 0) was removed
 //            on 2026-11-02: no model used it; an organisation moving money across causes would rebuild it.
-//   V_before value of where shifted money would have gone = @meta.prior_vs_cash × GiveDirectly, live
-//   net      new share × V + (1 − new share) × (V − V_before)
+//   V_before value of where shifted money would have gone = @meta.prior_vs_cash × GiveDirectly, live;
+//            for an organisation filed under another cause, an ordinary charity of that cause: the same
+//            multiple of GiveDirectly over #cause:global-health, times #cause:<cause> (priorDollarValue)
+//   net      new share × V + (1 − new share) × (V − V_before), on the path to the output (INV-12);
+//            money all shifted (a grantmaker's) earns V − V_before
 //
 // A result an evaluator already states as counterfactual value in "dollars of current effective
 // donations" (CEARCH) is multiplied by V; money moved (gross) by `moved_dollar_net_value`.
@@ -108,6 +111,22 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
     explainer: "New money counts in full; shifted money counts for the gain over where it would have gone.",
   },
 };
+
+/** `prior_dollar_value` for an organisation filed under a cause other than global health (its model's
+ * `cause`: Animal Charity Evaluators, 80,000 Hours): shifted money would have gone to an ordinary charity
+ * of that cause, not to GiveDirectly, whose value per dollar in units of value is of another scale (an
+ * animal charity's dollar is a thousandth of it, so shifted money would always be a loss). An ordinary
+ * charity stands to its cause's charities on the rankings as GiveDirectly (times the shared multiple)
+ * stands to global health's: in global health it is the shared row itself. */
+export function priorDollarValue(cause: string): TemplateRow {
+  if (cause === "global-health") return MOVED_MONEY_ROWS.prior_dollar_value;
+  return {
+    id: "prior_dollar_value", format: "small",
+    formula: `@meta.prior_vs_cash * #${CASH_BENCHMARK} / #cause:global-health * #cause:${cause}`,
+    label: "Value of a dollar where shifted money would otherwise have gone (our judgment: an ordinary charity of its cause, as 1× GiveDirectly is in global health), units of value",
+    explainer: `Our judgment, the shared rule for an organisation that moves money within a cause other than global health (${cause}). Shifted money was going to be given anyway, to an ordinary charity of the same cause; it is credited only for the gain. An ordinary charity stands to its cause's charities on the rankings as GiveDirectly (GiveWell's model, times a shared multiple, 1×, from 0 to 3×) stands to global health's: GiveDirectly's live result over the global-health charities' (#cause:global-health), times the ${cause} charities' (#cause:${cause}), all live under your values.`,
+  };
+}
 
 /** `moved_dollar_value` for an organisation that only moves money within global health and poverty
  * and publishes no split: that destination alone. */

@@ -1,6 +1,6 @@
 import { parse, refs, evaluate, compile, type Compiled, type Env, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, Cause, type ModelFile, type RowPatch, type Range } from "./schema";
-import { causeFigure, causeMembers, evaluatorFigure, evaluatorFigureModels } from "./ranking";
+import { causeFigure, causeModels, evaluatorFigure, evaluatorFigureModels } from "./ranking";
 import { byIso3 } from "./countries";
 
 export type ResolvedRow = Row & {
@@ -339,7 +339,7 @@ export const splitCharityRef = (ref: string) => ref.split(":") as [owner: string
 /** The models a reference reads: the model itself, or every model behind a charity's or a cause's figure.
  * `reader` is the reading model's charity, which a cause's figure leaves out. */
 export function refTargets(lib: Library, ref: string, reader?: string): ResolvedModel[] {
-  if (isCauseRef(ref)) return causeMembers(lib, ref.slice(CAUSE_PREFIX.length), reader).flatMap(([o, c]) => evaluatorFigureModels(lib, o, c));
+  if (isCauseRef(ref)) return causeModels(lib, ref.slice(CAUSE_PREFIX.length), reader);
   if (isCharityRef(ref)) return evaluatorFigureModels(lib, ...splitCharityRef(ref));
   const m = lib.models.get(ref);
   return m ? [m] : [];
@@ -386,7 +386,7 @@ export function modelResult(lib: Library, id: string, av: Record<string, number>
   try {
     const one = (t: ResolvedModel) => modelResult(lib, t.id, av);
     const v = m ? bottomLine(lib, m, av).common
-      : cause ? causeFigure(lib, id.slice(CAUSE_PREFIX.length), reader, one)
+      : cause ? causeFigure(lib, id.slice(CAUSE_PREFIX.length), reader, one, (t) => tooOld(lib, t, av))
       : evaluatorFigure(lib, ...splitCharityRef(id), one);
     cache.set(key, v);
     return v;
@@ -827,8 +827,9 @@ export function ageFactor(lib: Library, m: ResolvedModel, a: Record<string, numb
 export const IGNORE_OLD = "ignore_old_estimates";
 
 /** Whether the rankings leave this model out at assumption values `a`: the toggle is on and the
- * estimate is older than the cutoff (docs/normalization.md 2.15). Only which models rank changes; a
- * model's own result, and anything that reads it live (`#id`), doesn't. */
+ * estimate is older than the cutoff (docs/normalization.md 2.15). Only which models rank changes, and so
+ * a cause's figure on the rankings (`#cause:x`); a model's own result, and a read of it or of its
+ * charity (`#id`, `#owner:charity`), doesn't. */
 export function tooOld(lib: Library, m: ResolvedModel, a: Record<string, number>): boolean {
   const cutoff = lib.assumptions.common.old_estimate_years;
   if (!a[IGNORE_OLD] || cutoff === undefined) return false;
@@ -1129,6 +1130,8 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   if (conv) refs(conv).assumptions.forEach((a) => used.add(a));
   // A model read live (`#id`) moves with every assumption it reads, in our view.
   for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
+  // A cause's figure (`#cause:x`) leaves out what the rankings leave out under `$ignore_old_estimates`.
+  if (m.rows.some((r) => r.modelDeps.some(isCauseRef)) && lib.assumptions.rows.some((r) => r.id === IGNORE_OLD)) used.add(IGNORE_OLD);
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads, never
   // weighs it by distance and never discounts an imported model for missing data.
   if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT, RISK_QUANTILE].forEach((x) => used.delete(x));
