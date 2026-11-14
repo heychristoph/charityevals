@@ -355,17 +355,38 @@
       "explainer": "Where calls are free (California, Minnesota and Colorado prisons, Massachusetts and Connecticut prisons and jails) the caps save nothing more. Those prisons already charged less than the new caps, so the overlap is in Massachusetts' and Connecticut's jails, a small part of the country's jail calls: 2%, from 0 to 5%."
     },
     {
+      "id": "fcc2021_interstate_share",
+      "section": "reach",
+      "label": "Interstate calls' share of the savings the 2024 caps would have brought",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Most calls from prisons and jails are to people in the same state, which is why the 2022 Act's extension of the FCC's power to in-state calls mattered; our judgment 15% of the 2024 savings, from 5% to 30%."
+    },
+    {
+      "id": "fcc2021_cut_vs_2024",
+      "section": "reach",
+      "label": "The 2021 interstate cut as a share of the 2024 cut on the same calls",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.45,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "From 21 cents to 12 at prisons in 2021 (9 cents) against 21 to 6 cents in 2024 (15 cents) is 0.6; at jails 21 to 14 (7 cents) against 21 to 6-9 cents (12-15 cents) about 0.5; many providers already charged less than the old cap, so less was cut in practice: 45%, from 25% to 70%."
+    },
+    {
       "id": "fcc2021_savings",
       "section": "reach",
       "label": "Yearly savings from the FCC's 2021 cut of interstate caps",
       "format": "usd",
-      "value": {
-        "low": 10000000,
-        "best": 30000000,
-        "high": 60000000
-      },
-      "kind": "judgment",
-      "explainer": "In May 2021 the FCC cut interstate caps from 21 cents a minute to 12 cents at prisons and 14 at large jails. Interstate calls are a minority of calls from prisons and jails, and the 2024 and 2025 caps now cover them too, so this counts only until those took effect, within the shared years a win counts: our judgment 30 million a year, from 10 to 60 million. Credited, valued and adjusted as the later federal caps are."
+      "explainer": "In May 2021 the FCC cut interstate caps from 21 cents a minute to 12 cents at prisons and 14 at large jails (Third Report and Order, Federal Register 28 July 2021). Its savings are the 2024 order's, scaled by the interstate share of calls and by the 2021 cut against the 2024 one. Counted only until the later caps covered the same calls, within the shared years a win counts; credited, valued and adjusted as the later federal caps are.",
+      "formula": "fed_savings_2024_order * fcc2021_interstate_share * fcc2021_cut_vs_2024"
     },
     {
       "id": "fed_savings_per_year",
@@ -483,7 +504,7 @@
       "kind": "observed",
       "source": {
         "title": "Connecticut Office of Policy and Management, Monthly Indicators Report, October 2023",
-        "url": "https://portal.ct.gov/-/media/opm/cjppd/cjresearch/monthlyindicators/2023-monthly-indicator-reports/monthly-indicators-report----october-2023.pdf",
+        "url": "https://portal.ct.gov/-/media/opm/cjppd-main/cjppd/cjresearch/monthlyindicators/2023-monthly-indicator-reports/monthly-indicators-report----october-2023.pdf",
         "retrieved": "2026-11-14",
         "page": "population estimate, 1 October 2023",
         "quote": "OPM Population Estimate: 10,098"
@@ -538,12 +559,12 @@
       "label": "Yearly savings from ending medical copays and capping release-card and commissary fees in the period",
       "format": "usd",
       "value": {
-        "low": 2000000,
-        "best": 8000000,
-        "high": 25000000
+        "low": 500000,
+        "best": 2000000,
+        "high": 8000000
       },
       "kind": "judgment",
-      "explainer": "States that ended medical copays in prison or capped the fees on release cards and commissary accounts in 2020-2025, on which PPI published the national data and testified. No total is published; a few dollars a visit or a transaction across the systems that changed, judged a tenth of the free-call laws' savings: 8 million, from 2 to 25 million."
+      "explainer": "States that ended medical copays in prison in the period (Nevada by law in 2023; Virginia's suspension; others kept pandemic waivers: about 30,000 people or more at copays of 2 to 5 dollars a visit, a few visits a year, under a million dollars), plus caps on release-card and commissary fees on which PPI published the national data. No total is published: our judgment 2 million, from 0.5 to 8 million."
     },
     {
       "id": "video_visit_savings",
@@ -551,12 +572,12 @@
       "label": "Yearly savings from bans on replacing in-person visits with paid video calls",
       "format": "usd",
       "value": {
-        "low": 1000000,
-        "best": 5000000,
-        "high": 15000000
+        "low": 500000,
+        "best": 2000000,
+        "high": 8000000
       },
       "kind": "judgment",
-      "explainer": "State and county rules of the period that keep in-person visits where jails had moved to paid video calls (a practice PPI put on the national radar in 2015). No total is published; our judgment 5 million, from 1 to 15 million."
+      "explainer": "State and county rules of the period that keep in-person visits where jails had moved to paid video calls (a practice PPI put on the national radar in 2015). Jail video calls cost families several dollars for 20 minutes; a few states and counties acted, so tens of thousands of people held at a few visits a month: our judgment 2 million, from 0.5 to 8 million."
     },
     {
       "id": "fee_savings_per_year",
@@ -673,7 +694,7 @@
       },
       "kind": "judgment",
       "unit": "points",
-      "explainer": "No study measures it. Reference class: Frey and Stutzer (2000, Economic Journal) find that Swiss residents of cantons with the most direct-democracy rights are about 0.2 points more satisfied (0-10) than those with the fewest, part of it procedural (the satisfaction of having a say). Ending prison gerrymandering changes the weight of a district by a few percent of its population, so scaling that difference by the share of voice restored gives at most about 0.004; these residents already vote, so the procedural part doesn't move: our judgment 0.0003 points a year, from 0 to 0.004."
+      "explainer": "No study measures it. Reference class: Frey and Stutzer (2000, Economic Journal) find residents of the Swiss canton with the most direct-democracy rights about 11 percentage points more likely to be completely satisfied with life than those of the canton with the fewest; with most people moving up one or two points on the 0-10 scale, that is roughly 0.1 to 0.2 points on the mean, part of it procedural (the satisfaction of having a say). Ending prison gerrymandering changes a district's weight by a few percent of its population, so scaling that difference by the share of voice restored gives at most about 0.004; these residents already vote, so the procedural part doesn't move: our judgment 0.0003 points a year, from 0 to 0.004."
     },
     {
       "id": "ger_years_until_effect",
