@@ -28,7 +28,7 @@ The [model](/cool-earth/cool-earth-charityevals) follows the site's conservation
 
 **Cost.** All £3.27 million of programme spending ($4.3 million), plus raising funds spread over it: $5.1 million in all.
 
-**The forest.** The partnerships' 866,998 hectares × the share of similar community forest lost each year without the support (our judgment, 0.5%: between Cool Earth's own figures of 0.14% for Amazon Indigenous land on average and 1.34% for its most threatened land) × the share of that loss that would stay lost rather than be delayed (half) × the tropics' average carbon per hectare lost (about 650 tonnes of CO₂, from the World Resources Institute). Then:
+**The forest.** The partnerships' 866,998 hectares × the share of similar community forest lost each year without the support (our judgment, 0.14%: Cool Earth's own figure for Amazon Indigenous land on average; its partnerships lose about 0.05% a year with the support) × the share of that loss that would stay lost rather than be delayed (half) × the tropics' average carbon per hectare lost (about 650 tonnes of CO₂, from the World Resources Institute). Then:
 
 - **What the support changes:** 30% of that loss. In the one randomised trial, paying Ugandan forest owners to keep their trees cut their loss by about half (Jayachandran et al. 2017). Cool Earth's cash is mostly unconditional, so less.
 - **Credit:** 70%. The communities' own work and other funders count too.
@@ -43,7 +43,7 @@ We take the cash as shared by about 40,000 people. That is a judgment: Cool Eart
 
 Two side effects are added, as for other cash:
 
-- child deaths averted, GiveWell's shared +4%;
+- deaths averted, +12% (anchored on GiveWell's analysis of GiveDirectly, scaled to the communities' lower child mortality);
 - gains to traders and others where the money is spent, +10%.
 
 Credit and the counterfactual are 1: the cash is Cool Earth's own, and no one else would have given it.
@@ -52,7 +52,7 @@ Credit and the counterfactual are 1: the cash is Cool Earth's own, and no one el
 
 ### What drives the result
 
-At the defaults, the cash is about 90% of the result. The pandemic risk is about 8% and the forest's carbon about 2%. The biggest swings are:
+At the defaults, the cash is about 97% of the result. The pandemic risk is about 2% and the forest's carbon about 0.5%. The biggest swings are:
 
 - the missing-data discount;
 - how many units of value make a healthy year;
@@ -64,7 +64,7 @@ The forest's judgments (the loss rate, what the support changes, permanence) bar
 ### Biggest uncertainties
 
 - **How poor the communities are.** No survey of the partnerships' consumption is published; the share of Peru's average is our judgment.
-- **How much is cash.** Cool Earth publishes no figure for cash disbursed. The £1.2 million is our reading of its accounts, between £0.8 million and its own £2 million.
+- **How much is cash.** Cool Earth publishes no figure for cash disbursed. The £1.2 million is our reading of its accounts, between £0.8 million and £1.7 million, the programmes' direct costs less their staff. Cool Earth's own figure, £2 million, includes the hubs' local staff.
 - **What the support does to the forest.** Cool Earth's satellite comparison finds three times less loss than in comparable areas. Most of those areas aren't Indigenous land, and Indigenous land keeps its forest well anyway (Sze et al. 2022: 2.5 times less loss than other land). No study compares the partnerships with similar Indigenous forest without the support.
 - **Pandemic risk from forest loss** is the least grounded number. It is a shared judgment, and it is small here.
 
