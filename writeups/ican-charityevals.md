@@ -25,11 +25,11 @@ The model has two branches.
 
 | Adjustment | Value |
 |---|---|
-| How far a typical project's effect applies | 0.25 |
+| How far a typical project's effect applies | 0.27 |
 | Work other groups would not have done now | 0.7 |
-| ICAN's share of the resources | 0.6 |
+| ICAN's share of the resources | 0.55 |
 
-The first blends two parts. About a quarter of the campaign is the treaty's implementation, valued at the treaty's own figure (below). The rest, the work on deterrence, spending, divestment and the media, counts at 0.3. That is well below the 0.8 our models give the Arms Control Association and the Nuclear Threat Initiative. ICAN's work is aimed mostly at states without nuclear weapons and at the public. No arsenal, doctrine or budget is shown to have moved because of it, and nuclear weapons spending rose 11% in 2024, by ICAN's own count. The share of resources is below 1 because partners do much of the work under ICAN's banner.
+The first blends two parts. About 15% of the campaign is the treaty's implementation, valued at the treaty's own figure (below). The rest, the work on deterrence, spending, divestment and the media, counts at 0.3. That is well below the 0.8 our models give the Arms Control Association and the Nuclear Threat Initiative. ICAN's work is aimed mostly at states without nuclear weapons and at the public. No arsenal, doctrine or budget is shown to have moved because of it, and nuclear weapons spending rose 11% in 2024, by ICAN's own count. The share of resources is below 1 because partners do much of the work under ICAN's banner.
 
 **The year's new states parties (30% of the cost).** This includes the cities appeal and the parliamentary pledge, whose signers work for their country to join. We value the treaty against what typical nuclear work would achieve with the same resources. About $100 million has been spent on the treaty itself since 2010, by ICAN (about $14 million), its partners, the Red Cross and governments. We judge the treaty to do a tenth of what that much typical work would do, from all but nothing to as much. The nine nuclear-armed states and their allies stay outside it, and the treaty binds only states without weapons. Its effect comes through a legal norm against possession and deterrence. Even public support hasn't moved an allied government: three in four Japanese adults want their country to join, yet Japan stays out. Each new state party adds one 73rd of the treaty's cut, weighted at 0.6: the treaty needed only 50 states to exist, and three of 2024's four are small states outside any alliance, though Indonesia is the largest party. ICAN is credited with 60% of that, the share that wouldn't have happened in 2024 without the campaign, and then with a quarter of what remains, its share of the resources behind the four ratifications.
 
@@ -39,12 +39,12 @@ ICAN's income fell from CHF 3.6 million in 2023 to 2.0 million in 2024, and it r
 
 ### What drives the result
 
-Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate the future counts for little; at 0.1% the result rises to about 27. The campaign brings about three-quarters of the result and the new states parties a quarter. The result is below the Arms Control Association (41), Ploughshares Fund (26) and the Nuclear Threat Initiative (23). The treaty that is ICAN's main achievement doesn't constrain the states whose weapons make up the risk.
+Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate the future counts for little; at 0.1% the result rises to about 26. The campaign brings about three-quarters of the result and the new states parties a quarter. The result is below the Arms Control Association (41), Ploughshares Fund (26) and the Nuclear Threat Initiative (23). The treaty that is ICAN's main achievement doesn't constrain the states whose weapons make up the risk.
 
 ### Biggest uncertainties
 
 - **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 1.5 to 69.
-- **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 6 to 29.
+- **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 6 to 26.
 - **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 3 to 20.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
@@ -57,7 +57,7 @@ Deaths in a war the world survives bring almost all of the result. At the defaul
 
 ### How this model was checked
 
-AUDIT
+The model was built from the catastrophic-risk template. Round 1 of the independent audit passed with three medium and four low findings, all fixed. The treaty's paths to the risk and the campaign's now each have one home: the treaty's implementation is valued at the treaty's own figure, and the cities and parliamentary work moved into the new-parties branch. The treaty's resources count only what was spent on the treaty itself, with ICAN's part summed from its annual reports. A new state party now weighs less than the average one. The next-dollar figure is weighted by both branches, and template placeholders were removed. Round 1 lowered the result by about a quarter. Round 2, a check of those fixes, passed with four small findings, also fixed: a smaller implementation share, ICAN's share of the campaign's resources, the next-dollar note's weights and sources for the treaty precedents. A final check covered those changes. The rounds are in audits/ican-charityevals/.
 
 ### Sources
 
