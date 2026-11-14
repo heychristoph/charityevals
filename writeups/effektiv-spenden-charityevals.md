@@ -74,7 +74,13 @@ Its own figures are a ratio of donations to costs of about 21 for 2024 (23 with 
 
 ### How this model was checked
 
-Audit rounds are in audits/effektiv-spenden-charityevals/.
+Three audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-severity problem and checked every cost, reach and fact figure against its source. Its fixes:
+
+- Blended the Swiss association's 2025 grants by recipient into each cause. This brought in METR, Sinergia Animal and Wild Animal Initiative, which the organisation-wide 2024 split leaves out.
+- Lowered the wait for the funds' grants below the year-end balances, which December's giving inflates.
+- Corrected the write-up.
+
+Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes.
 
 ### Sources
 
