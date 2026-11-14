@@ -135,6 +135,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "ploughshares-fund-charityevals": { b: "world", note: "Our build: a nuclear war kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "federation-of-american-scientists-charityevals": { b: "world", note: "Our build: almost all the value is the nuclear and AI work, against risks that kill people everywhere, so the result is spread by world population; the science-policy work (a few percent of the value) is for Americans." },
   "arms-control-association-charityevals": { b: "world", note: "Our build: a nuclear war kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
+  "allfed-charityevals": { b: "world", note: "Our build: a nuclear winter's famine would kill people everywhere, most in countries that import food, and the future lost is everyone's, so the result is spread by world population." },
   "ican-charityevals": { b: "world", note: "Our build: a nuclear war kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "union-of-concerned-scientists-charityevals": { b: "world", note: "Our build: almost all the value is the nuclear-weapons work, against a risk that kills people everywhere, so the result is spread by world population; the science-and-democracy work (under 1% of the value) is for Americans." },
   "union-of-concerned-scientists-charityevals-food": { b: { USA: 1 }, note: "Our build: the flood protection kept is for households in the US Upper Midwest." },
@@ -161,6 +162,9 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "givewell-charityevals": { b: "destinations", note: "Moves money: each charity it funds, read live, brings its own countries." },
   "effektiv-spenden-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
   "animal-charity-evaluators-charityevals": { b: "destinations", note: "Moves money: each animal charity it reaches, read live, brings its own countries." },
+  "rethink-priorities-charityevals": { b: "destinations", note: "Changes others' spending: the charities of each cause it informs, read live, bring their own countries." },
+  "rethink-priorities-charityevals-global-health": { b: "destinations", note: "Changes others' spending: the charities of each cause it informs, read live, bring their own countries." },
+  "rethink-priorities-charityevals-cross-cause": { b: "destinations", note: "Changes others' spending: the charities of each cause it informs, read live, bring their own countries." },
 };
 /** Research and standard-setting whose good reaches the whole world. */
 const WORLD: Record<string, string> = {
