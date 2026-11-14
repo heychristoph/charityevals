@@ -1,7 +1,7 @@
 # Audit: machine-intelligence-research-institute-charityevals, round 4 (verification of round 3's two lows)
 
 Result: 6.594e-5 daly/$ = 0.0659 years of healthy life per $1,000 (combined range 0.0016–2.65). The cause's other model, the Nuclear Threat Initiative, is at 21.0 (×0.0031). Verdict: pass.
-Model-sha: c18a4498a602948567e3f6bfb471beee38c8482245457583a0669bf15eced5ca
+Model-sha: 21fe7ed19da4cf118f15cfcad1b84f67d0aa381f84a69e0a645953969e54fd1d
 
 Scope: only the changes in commit 5a46d31 (facts/catastrophe.json, the model summary, the write-up, the family reference table).
 
@@ -21,3 +21,5 @@ Checked:
 | Row | URL | Status | Note |
 |---|---|---|---|
 | `@catastrophe.ai_catastrophe_cut_per_million` | https://github.com/rethinkpriorities/cross-cause-cost-effectiveness-model-public | not re-fetched | Mean shares killed and the 96.4% / 97.3% were verified in round 3; this round checks the arithmetic and the text against them. |
+
+Re-stamped: template-alignment change, result unchanged (before 0.066, after 0.066).

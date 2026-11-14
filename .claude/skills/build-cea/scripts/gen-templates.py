@@ -26,8 +26,8 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
                     each other unit's outcome through one fixed bridge row (src/engine/bridges.ts,
                     docs/normalization.md 2.6); companion-animals  days of pain -> ced_dog / ced_cat
                     with @welfare_ranges (the raw species step)
-  catastrophic-risk  yearly chances by size (@catastrophe, $ai_catastrophe_chance), a typical dollar's cut,
-                    deaths by the world's age split, the future through future_years_per_person
+  catastrophic-risk  yearly chances by size (@catastrophe, $ai_catastrophe_chance), a typical dollar's cut
+                    (AI: misalignment and misuse presets weighted by ai_misuse_cost_share), deaths by the world's age split, the future through future_years_per_person
   every skeleton    missing_data_adj in total_adj (a branch's <branch>_missing_data_adj): the shared
                     $missing_data_discount where the outcome isn't measured for this charity, else 1 with
                     the reason (docs/normalization.md 2.12)
@@ -780,6 +780,9 @@ AREAS = [("ai", "AI", "$ai_catastrophe_chance / forecast_years", "$ai_catastroph
 
 def area_rows(a, name, ext, cat, share, what):
     small = {"bio": ("@catastrophe.pandemic_probability_covid_scale", "@catastrophe.covid_excess_deaths")}.get(a)
+    # AI has two of Rethink Priorities' presets, misalignment and misuse, weighted by ai_misuse_cost_share.
+    cut = lambda size: (f"((1 - ai_misuse_cost_share) * @catastrophe.ai_{size}_cut_per_million + ai_misuse_cost_share * @catastrophe.ai_misuse_{size}_cut_per_million)"
+                        if a == "ai" else f"@catastrophe.{a}_{size}_cut_per_million")
     rows = [
         f(f"{a}_extinction_per_year", "effect", f"{name}: yearly chance of a catastrophe that ends humanity's future", ext,
           "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament" + (", the AI chance your slider" if a == "ai" else "") + "). Fixed; don't edit.", "small", "per year"),
@@ -796,12 +799,18 @@ def area_rows(a, name, ext, cat, share, what):
     rows += [
         f(f"{a}_deaths_if_catastrophe", "effect", f"{name}: deaths in a catastrophe the world survives", f"@catastrophe.world_population_now * @catastrophe.{a}_catastrophe_death_share",
           "Everyone alive × the shared share such a catastrophe kills (over the tournament's 10% threshold; @catastrophe.<area>_catastrophe_death_share). Fixed.", "integer", "deaths"),
+    ]
+    if a == "ai":
+        rows += [inp("ai_misuse_cost_share", "effect", "AI: share of the AI spending on work against misuse (dangerous-capability evaluations, defences against misuse)", {"low": 0, "best": 0, "high": 0.3}, "judgment",
+            "of the AI spending, the share aimed at misuse, people using AI to do harm: bio, cyber and chemical uplift evaluations, unlearning hazardous knowledge, refusal and robustness (jailbreak) work aimed at misuse. The rest is misalignment work (alignment, interpretability, control, governance of loss of control); work aimed at both counts there. It weights Rethink Priorities' misuse preset (@catastrophe.ai_misuse_extinction_cut_per_million, ai_misuse_catastrophe_cut_per_million) against its misalignment one (@catastrophe.ai_extinction_cut_per_million, ai_catastrophe_cut_per_million) in the two rows per $1 million. From the charity's named outputs and their spending; 0 with the reason where none of its AI work is aimed at misuse; the high end for outputs that could be read either way.", "percent")]
+    rows += [
         f(f"{a}_deaths_per_year", "effect", f"{name}: expected deaths a year from these catastrophes", f"{a}_extinction_per_year * deaths_if_extinct + {a}_catastrophe_per_year * {a}_deaths_if_catastrophe + {a}_smaller_per_year * {a}_smaller_deaths", "Each size's yearly chance × the people it kills.", "number", "deaths / year"),
         f(f"{a}_future_per_year", "effect", f"{name}: expected future healthy years lost a year (extinction-level)", f"{a}_extinction_per_year * future_dalys_if_extinct", "Only a catastrophe that ends humanity's future takes the future; the world recovers from the others.", "number", "DALYs / year"),
         f(f"{a}_deaths_per_million", "effect", f"{name}: deaths averted a year by a typical $1 million of work, while its cut counts",
-          f"@catastrophe.{a}_extinction_cut_per_million * {a}_extinction_per_year * deaths_if_extinct + @catastrophe.{a}_catastrophe_cut_per_million * ({a}_catastrophe_per_year * {a}_deaths_if_catastrophe + {a}_smaller_per_year * {a}_smaller_deaths)",
-          "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries. The catastrophe figure also applies to the smaller size. Fixed; don't edit.", "small", "deaths / year"),
-        f(f"{a}_future_per_million", "effect", f"{name}: future healthy years kept a year by a typical $1 million of work", f"@catastrophe.{a}_extinction_cut_per_million * {a}_future_per_year", None, "small", "DALYs / year"),
+          f"{cut('extinction')} * {a}_extinction_per_year * deaths_if_extinct + {cut('catastrophe')} * ({a}_catastrophe_per_year * {a}_deaths_if_catastrophe + {a}_smaller_per_year * {a}_smaller_deaths)",
+          "The share of each yearly risk a typical $1 million of work in the area removes (Rethink Priorities' cross-cause model, its backfire step included; shared), × the deaths that risk carries" + (": misuse work at Rethink's misuse preset, other AI work at its misalignment preset, weighted by ai_misuse_cost_share" if a == "ai" else "") + ". The catastrophe figure also applies to the smaller size. Fixed; don't edit.", "small", "deaths / year"),
+        f(f"{a}_future_per_million", "effect", f"{name}: future healthy years kept a year by a typical $1 million of work", f"{cut('extinction')} * {a}_future_per_year",
+          "As ai_deaths_per_million, for the future lost in an extinction-level catastrophe: the two presets' extinction cuts weighted by ai_misuse_cost_share." if a == "ai" else None, "small", "DALYs / year"),
         inp(f"{a}_cost_share", "effect", f"{name}: share of the cost spent on work against {name.lower()} risk (research, evaluations, convening, advocacy)", share, "estimate",
             f"the share of the modelled spending on {what}, from the charity's programme expenses (Form 990 Part III, the accounts' programme notes), overhead spread alike. Leave out the spending behind a specific win counted in the policy branch (pol_cost_share) and on training counted in fb_cost_share, so nothing counts twice. 0 with the reason where the charity does none.", "percent", source=src("Form 990 Part III / annual accounts")),
         inp(f"{a}_years_until_effect", "effect", f"{name}: years from the spending until the work cuts the risk", {"low": 0, "best": 1, "high": 3}, "judgment",
