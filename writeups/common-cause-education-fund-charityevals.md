@@ -53,5 +53,5 @@ An independent auditor reviews the model in rounds; the findings and fixes of ea
 - Common Cause and Affiliate, audited consolidated financial statements, year ended June 30, 2025: https://www.commoncause.org/wp-content/uploads/2026/07/Common-Cause-Final-FS-06.30.25.pdf
 - McCartan et al., Redistricting Reforms Reduce Gerrymandering by Constraining Partisan Actors: https://arxiv.org/abs/2407.11336
 - Caughey, Tausanovitch and Warshaw (2017), Partisan Gerrymandering and the Political Process, Election Law Journal: https://dspace.mit.edu/handle/1721.1/119500
-- Thompson, Wu, Yoder and Hall (2020), Universal vote-by-mail has no impact on partisan turnout or vote share, PNAS: https://www.andrewbenjaminhall.com/Thompson_et_al_VBM.pdf
+- Thompson, Wu, Yoder and Hall (2020), Universal vote-by-mail has no impact on partisan turnout or vote share, PNAS: https://doi.org/10.1073/pnas.2007249117
 - The shared democracy figures: facts/democracy.json
