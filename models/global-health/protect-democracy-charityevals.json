@@ -198,8 +198,8 @@
       "section": "effect",
       "label": "Income kept per person-year once the effect is fully built, ln(consumption)",
       "format": "small",
-      "formula": "ln(1 + @democracy.democratization_gdp_gain)",
-      "explainer": "A slide out of democracy averted keeps the income gain a democracy brings in the long run (about 21%, Acemoglu et al. 2019); the build-up is in bs_discounted_years.",
+      "formula": "ln(1 + @democracy.democratization_gdp_gain * bs_severity)",
+      "explainer": "A slide to a hybrid regime averted keeps the share of democracy's long-run income gain such a slide would lose (bs_severity, 60%, of about 21%, Acemoglu et al. 2019), inside the log as in every model of work against a US slide (Common Cause, League of Women Voters, RepresentUs); the build-up is in bs_discounted_years.",
       "unit": "ln / year"
     },
     {
@@ -429,7 +429,7 @@
       "label": "Share of the full democracy-to-autocracy loss a slide to a hybrid regime brings",
       "format": "percent",
       "formula": "@democracy.slide_severity_share",
-      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide."
+      "explainer": "The shared figure (facts/democracy.json), read by every model of work against a US slide: it scales the income gain inside the log (bs_ln_gain)."
     },
     {
       "id": "bs_external_validity",
@@ -444,8 +444,8 @@
       "section": "adjustments",
       "label": "Evidence adjustment, backsliding branch",
       "format": "multiple",
-      "formula": "bs_severity * bs_external_validity",
-      "explainer": "The two parts above: how much of the cross-country effect a US slide would bring."
+      "formula": "bs_external_validity",
+      "explainer": "How well the cross-country effect carries to the United States; the slide's severity is in the income kept (bs_ln_gain)."
     },
     {
       "id": "ref_evidence_adj",

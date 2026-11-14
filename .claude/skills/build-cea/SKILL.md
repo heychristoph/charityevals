@@ -111,8 +111,8 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - a won reform counts `$win_years_counted` years, the wait until it takes effect discounted; coalition
     credit is the charity's share of all groups' resources (Convention 2);
   - `estimate_basis` (INV-18, Convention 11): a `past_average` keeps or adds the
-    `marginal_vs_past_average` row (corporate-campaign.json), formula `@next_dollar.<charity id, - as _>`
-    (write it by normalization.md 2.10 if missing); change the basis only for a reason you write down;
+    `marginal_vs_past_average` row (corporate-campaign.json), formula `@next_dollar.<charity id, - as _, a leading digit spelled out>`
+    (normalization.md 2.10 if missing); change the basis only with a written reason;
   - money moved goes through the shared rows of src/engine/moved-money.ts word for word
     (`python3 scripts/moved-money.py <model> <set> net`), destinations live;
     career changes through `career_change_value` (INV-12);
