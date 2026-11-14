@@ -37,8 +37,9 @@ Value = giving caused (new pledgers' and corporate donors' discounted lifetime g
 - **The discount rate.** Pledgers give for decades.
 - **The next dollar** (57%, from 29% to 95%).
 - **The share it caused** (50%, from 30% to 61%).
-- **How long its pledgers keep giving** (65% of the shared curve, from 45% to 100%), and **the new corporate donors** ($55,000 a year, from $25,000 to $110,000).
 - **The value of a young child's life**, through its destinations.
+- **Credit by share of resources and the weight on side effects**, two of the site's settings.
+- **How long its pledgers keep giving** (65% of the shared curve, from 45% to 100%), and **the new corporate donors** ($55,000 a year, from $25,000 to $110,000).
 
 ### Where we differ from One for the World's own figures
 
@@ -56,4 +57,10 @@ It reports money moved and the part it caused in the year, with no ratio to cost
 
 ### How this model was checked
 
-AUDIT
+Four audit rounds (audits/one-for-the-world-charityevals/). Round 1 found four high-severity problems:
+
+- It treated the year's recurring giving as a steady state. One for the World is ten years old, so its giving comes from nine young cohorts. The pledges are now valued by the template's recipe: new pledges × the yearly gift per active pledger × discounted years of giving.
+- It took One for the World's own 44%, which it calls a floor, as the best guess. It is now 50%.
+- It left out the wait in its accounts and the chapter leaders' unpaid time. Both are now in.
+
+Round 1 also lowered its pledgers' retention below the shared curve, anchored the recurring share, and valued money outside GiveWell's list as an ordinary charity. Round 2 passed. Its fixes split the pledgers by the cohort sizes it published, added a branch for corporate donors, and anchored the size of new pledges and the wait to the first gift on its 2019–2020 data. Rounds 3 and 4, scoped checks of those changes, passed. They corrected the pledge-size arithmetic and the corporate donors' retention.
