@@ -121,6 +121,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "sierra-club-foundation-charityevals": { b: "world", note: "Our build: a tonne of greenhouse gas kept out of the air spares people everywhere (heat deaths), so the result is spread by world population; the small US coal and traffic smoke share is left in the world figure." },
   "sierra-club-foundation-charityevals-lands-health": { b: { USA: 1 }, note: "Our build: EPA's soot standard and the outdoors trips reach people in the United States." },
   "johns-hopkins-center-for-health-security-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
+  "1day-sooner-charityevals": { b: "world", note: "Our build: most of the result is pandemic risk, which is everyone's, so it is spread by world population; the malaria vaccine branch (sub-Saharan Africa) and hepatitis C (worldwide) are about 23% of it and left in the world figure." },
   "blueprint-biosecurity-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "ibbis-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
   "securebio-charityevals": { b: "world", note: "Our build: a pandemic kills people everywhere and the future lost is everyone's, so the result is spread by world population." },
