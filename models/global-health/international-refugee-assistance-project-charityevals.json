@@ -4,17 +4,17 @@
   "kind": "charity",
   "cause": "global-health",
   "beneficiaries": {
-    "JOR": 0.2,
-    "LBN": 0.2,
-    "AFG": 0.15,
-    "KEN": 0.1,
-    "USA": 0.1,
-    "HND": 0.08,
-    "GTM": 0.07,
-    "SLV": 0.05,
-    "PAK": 0.05
+    "JOR": 0.15,
+    "LBN": 0.15,
+    "AFG": 0.12,
+    "KEN": 0.07,
+    "USA": 0.07,
+    "PAK": 0.04,
+    "HND": 0.16,
+    "GTM": 0.14,
+    "SLV": 0.1
   },
-  "beneficiaries_note": "Our build: where IRAP's clients wait for a pathway (a judgment, as IRAP publishes no split): its Jordan and Lebanon offices' refugees, US-affiliated Afghans in Afghanistan and Pakistan, refugees in Kenya referred by partners, Central American families seeking reunification, and asylum seekers and status cases in the US.",
+  "beneficiaries_note": "Our build: where IRAP's clients wait for a pathway (a judgment, as IRAP publishes no split): Central American families seeking reunification 40% (the model's wh_client_share), and its Jordan and Lebanon offices' refugees, US-affiliated Afghans in Afghanistan and Pakistan, refugees in Kenya referred by partners, and asylum seekers and status cases in the US, the other 60%.",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "international-refugee-assistance-project",
@@ -497,10 +497,10 @@
     {
       "id": "counterfactual_adj",
       "section": "adjustments",
-      "label": "Share of the moves that wouldn't have happened without IRAP's casework",
+      "label": "Share of the moves' value that wouldn't have come without IRAP (moves that never would have, plus years brought forward)",
       "format": "percent",
-      "explainer": "The moves that would never have happened count in full; those that would have come anyway count for the years they are brought forward, as a share of the years the gain lasts (undiscounted, a slight overstatement as the earliest years are worth most).",
-      "formula": "cf_never_share + (1 - cf_never_share) * min(1, years_sooner / @irap.years_gain_lasts)"
+      "explainer": "The moves that would never have happened count in full; those that would have come anyway count for the years they are brought forward, as the discounted value of those first years over the discounted value of all the years the gain lasts (both at the shared rate).",
+      "formula": "cf_never_share + (1 - cf_never_share) * min(1, pv_annuity_due(1, $discount_rate, years_sooner) / pv_annuity_due(1, $discount_rate, @irap.years_gain_lasts))"
     },
     {
       "id": "pro_bono_hours",
@@ -647,9 +647,9 @@
       "section": "adjustments",
       "label": "Legal information to about 290,000 people, as a share of modelled value",
       "format": "percent",
-      "explainer": "The extra moves from the legal information as a share of the counterfactual moves the casework brings (clients × share reaching safety × counterfactual).",
+      "explainer": "The extra moves from the legal information (each a move that otherwise wouldn't happen) as a share of the moves the casework brings that otherwise wouldn't happen (clients × share reaching safety × share that never would have).",
       "side_effect": "added",
-      "formula": "info_extra_moves / (people_reached * share_reaching_safety * counterfactual_adj)"
+      "formula": "info_extra_moves / (people_reached * share_reaching_safety * cf_never_share)"
     },
     {
       "id": "ue_other_legal_benefits",
