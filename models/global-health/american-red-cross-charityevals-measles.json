@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "Through the Measles & Rubella Partnership the American Red Cross funds Red Cross and Red Crescent volunteers who visit households before vaccination campaigns to bring children in (3 million households in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026). This model counts the measles deaths averted among the few extra children vaccinated because of a visit, in years of healthy life per $1,000, at about 8% of the international programme's spending (the measles grants' share of its grants abroad in the Form 990). Nothing in the chain is measured for this programme: the extra vaccinations per visit (a Kenyan Red Cross survey's 26% of children who would have missed the dose, discounted to about 3%), the deaths each averts and the programme's spending are wide judgments, so the result is mostly uncertainty and the model is discounted for missing data. Most children would have been vaccinated without a visit, so the Red Cross's cost per extra child vaccinated is about $45, and the dose protects a child for only the two years or so left under five, often on top of an earlier dose.",
+  "summary": "Through the Measles & Rubella Partnership the American Red Cross funds Red Cross and Red Crescent volunteers who visit households before vaccination campaigns to bring children in (3 million households in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 15 November 2026). This model counts the measles deaths averted among the few extra children vaccinated because of a visit (and the deaths after measles), in years of healthy life per $1,000, at about 8% of the international programme's spending (the measles grants' share of its grants abroad in the Form 990). Nothing in the chain is measured for this programme: the extra vaccinations per visit (a Kenyan Red Cross survey's 26% of children who would have missed the dose, discounted to about 3%), the deaths each averts and the programme's spending are wide judgments, so the result is mostly uncertainty and the model is discounted for missing data. Most children would have been vaccinated without a visit, so the Red Cross's cost per extra child vaccinated is about $35 (older children counted where the campaign covers them), and the dose protects an under-five for only the two years or so left under five, often on top of an earlier dose.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross Measles & Rubella Partnership mobilisation (FY2025)",
@@ -205,7 +205,7 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "In Kenya's 2012 campaign, Red Cross volunteers counted 161,695 eligible children aged 9-59 months in the 164,643 households they visited, 0.98 a household (Mbabazi et al. 2014, Health Policy and Planning): volunteers target households with young children. The national average (DHS household sizes of 4.2-4.6 with about 15% under five) is about 0.7, the low end. Children 5-14 also get campaign doses, but their measles death risk is a small fraction of under-fives' and the rate below is per unvaccinated under-five, so they are counted in unmodelled benefits."
+      "explainer": "In Kenya's 2012 campaign, Red Cross volunteers counted 161,695 eligible children aged 9-59 months in the 164,643 households they visited, 0.98 a household (Mbabazi et al. 2014, Health Policy and Planning): volunteers target households with young children. The national average (DHS household sizes of 4.2-4.6 with about 15% under five) is about 0.7, the low end. Children 5-14 vaccinated in wide-age campaigns are counted in msl_5_14_deaths_per_u5_child."
     },
     {
       "id": "people_reached",
@@ -273,13 +273,13 @@
       "label": "Yearly cohorts of unvaccinated children under five at risk at once",
       "format": "number",
       "value": {
-        "low": 3,
-        "best": 4,
-        "high": 6
+        "low": 2,
+        "best": 3,
+        "high": 5
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Each year's missed cohort stays unvaccinated through early childhood until a campaign or a late dose reaches it, so the unvaccinated under-fives alive at once are about four cohorts, from three (frequent campaigns) to six (under five's full span, few catch-ups)."
+      "explainer": "A child who stays unvaccinated from 9 to 59 months is at risk 4.25 years, but late routine doses and campaigns every three to four years catch many of each year's missed cohort sooner: with about half caught up at a mean of one to two years, the unvaccinated under-fives alive at once are about three cohorts, from two (frequent campaigns) to five (few catch-ups)."
     },
     {
       "id": "msl_setting_risk",
@@ -320,7 +320,7 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "The rate below is per unvaccinated child, so the deaths of vaccinated children (vaccine failures) and of infants under 9 months, too young for the campaign, come out of the numerator. In the WHO African region, 'reported measles cases occurred among children aged 9–59 months, 79% of whom were either unvaccinated or had unknown vaccination status' (Masresha et al. 2017, Progress toward measles elimination, African Region 2013-2016, MMWR 66(17); an upper bound, 'unknown' includes some vaccinated), and 9-59-month-olds are about 87% of under-five cases: about 0.7. Low end: 58-60% zero-dose among confirmed cases in Nigeria (NCDC 2020, Anambra 2011-2016)."
+      "explainer": "The rate below is per unvaccinated child, so the deaths of vaccinated children (vaccine failures) and of infants under 9 months, too young for the campaign, come out of the numerator. In the WHO African region, 'reported measles cases occurred among children aged 9–59 months, 79% of whom were either unvaccinated or had unknown vaccination status' (Masresha et al. 2017, Progress toward measles elimination, African Region 2013-2016, MMWR 66(17); an upper bound, 'unknown' includes some vaccinated), and by our judgment 9-59-month-olds are most of under-five cases (infants under 9 months are a minority): about 0.7. Low end: 58-60% zero-dose among confirmed cases in Nigeria (NCDC 2020, Anambra 2011-2016)."
     },
     {
       "id": "baseline_mortality_rate",
@@ -395,7 +395,8 @@
         "retrieved": "2026-11-04",
         "quote": "For a single dose of vaccine administered at 9-11 months of age and ≥12 months, the median VE was 77.0% (interquartile range [IQR], 62%-91%) and 92.0% (IQR, 86%-96%), respectively."
       },
-      "explainer": "Median of the published field estimates; estimates are generally lower in the African and South-East Asian regions, which the evidence adjustment allows for. Range: the review's interquartile range."
+      "explainer": "Median of the published field estimates; estimates are generally lower in the African and South-East Asian regions, which the evidence adjustment allows for. Range: the review's interquartile range.",
+      "interval": 0.5
     },
     {
       "id": "msl_ve_one_dose_9_11m",
@@ -414,7 +415,8 @@
         "retrieved": "2026-11-04",
         "quote": "For a single dose of vaccine administered at 9-11 months of age and ≥12 months, the median VE was 77.0% (interquartile range [IQR], 62%-91%) and 92.0% (IQR, 86%-96%), respectively."
       },
-      "explainer": "The protection a child with a routine dose at 9 months already has. Range: the review's interquartile range."
+      "explainer": "The protection a child with a routine dose at 9 months already has. Range: the review's interquartile range.",
+      "interval": 0.5
     },
     {
       "id": "msl_ve_two_dose",
@@ -433,39 +435,109 @@
         "retrieved": "2026-11-04",
         "quote": "For 2 doses of measles-containing vaccine, compared with no vaccination, the median VE was 94.1% (IQR, 88.3%-98.3%)."
       },
-      "explainer": "With the campaign dose as the second. Range: the review's interquartile range."
+      "explainer": "With the campaign dose as the second. Range: the review's interquartile range.",
+      "interval": 0.5
     },
     {
       "id": "indirect_deaths_ratio",
       "section": "effect",
-      "label": "Deaths caused indirectly, per direct death averted (immune amnesia in unmodelled benefits)",
+      "label": "Deaths after measles (immune amnesia), per measles death averted",
       "format": "number",
-      "formula": "0",
-      "explainer": "0: herd protection and the deaths after measles (immune amnesia) are in unmodelled benefits."
+      "explainer": "Measles wipes out existing immune memory, raising deaths from other infections for two to three years after it (Mina et al. 2015, Science 348:694, where measles explained much of childhood infectious mortality before vaccination). About 0.3 more deaths per measles death, from 0 to 1. Cross-check: with it, the protected years avert about 1.4 deaths per 1,000 unvaccinated child-years, about a tenth of all-cause deaths at ages 1-4 in the region; all-cause studies of measles vaccine report larger falls, so the ratio isn't too high.",
+      "value": {
+        "low": 0,
+        "best": 0.3,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "deaths_averted_per_person",
       "section": "effect",
       "label": "Deaths averted per person reached (before adjustments)",
       "format": "small",
+      "formula": "msl_u5_deaths_per_child + msl_5_14_deaths_per_u5_child",
+      "explainer": "Measles deaths averted per under-five reached, its own and those of the older children vaccinated in wide-age campaigns alongside."
+    },
+    {
+      "id": "msl_u5_deaths_per_child",
+      "section": "effect",
+      "label": "Measles deaths averted per under-five vaccinated, over the years left under five",
+      "format": "small",
       "formula": "baseline_mortality_rate * msl_age_risk_ratio * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
-      "explainer": "The unvaccinated child's yearly measles death risk, adjusted to the ages the protection covers, × the campaign dose's reduction × the years left under five."
+      "explainer": "Yearly risk at the protected ages × the dose's added protection × deaths after measles × years left under five."
+    },
+    {
+      "id": "msl_wide_age_campaign_share",
+      "section": "effect",
+      "label": "Share of the visits before campaigns that also vaccinate children aged 5-14",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.4,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Measles-rubella catch-up campaigns, often the first with rubella vaccine, cover 9 months to 14 years (Kenya 2016: '19 million children aged 9 months–14 years', Subaiya et al. 2018); follow-up campaigns cover 9-59 months. The Red Cross doesn't list the year's campaigns. About 40%, from 10 to 80%."
+    },
+    {
+      "id": "msl_5_14_per_household",
+      "section": "effect",
+      "label": "Children aged 5-14 per household visited",
+      "format": "number",
+      "value": {
+        "low": 0.9,
+        "best": 1.3,
+        "high": 1.8
+      },
+      "kind": "judgment",
+      "explainer": "DHS household sizes of 4.2-4.6 with about 28-30% aged 5-14 give about 1.3; households with young children, which volunteers target, have about as many. From 0.9 to 1.8."
+    },
+    {
+      "id": "msl_5_14_risk_ratio",
+      "section": "effect",
+      "label": "Measles death risk per year at 5-14 relative to under five",
+      "format": "multiple",
+      "formula": "0.5 * @givewell_common.both_5_14_years_measles_2021 / @givewell_common.both_under_5_measles_2021",
+      "explainer": "GBD 2021 chances of dying of measles in Bauchi, Nigeria, per year of age: 5-14 over ten years against under five over five (0.5 = 5 ÷ 10)."
+    },
+    {
+      "id": "msl_5_14_years_at_risk",
+      "section": "effect",
+      "label": "Years of risk a dose covers for a child aged 5-14",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 2.5,
+        "best": 4,
+        "high": 5.5
+      },
+      "kind": "judgment",
+      "explainer": "A child of 5-14 is on average about 9.5, five years from fifteen; fewer where the next campaign three to four years on would reach the child anyway. About 4, from 2.5 to 5.5."
+    },
+    {
+      "id": "msl_5_14_deaths_per_u5_child",
+      "section": "effect",
+      "label": "Measles deaths averted among children aged 5-14, per under-five reached",
+      "format": "small",
+      "formula": "msl_wide_age_campaign_share * msl_5_14_per_household / msl_u5_per_household * baseline_mortality_rate * msl_5_14_risk_ratio * mortality_reduction * (1 + indirect_deaths_ratio) * msl_5_14_years_at_risk",
+      "explainer": "Older children vaccinated alongside, at the GBD age ratio of the unvaccinated under-five rate, with the same added protection per dose."
     },
     {
       "id": "share_under5",
       "section": "effect",
       "label": "Share of the deaths averted that are of children under five",
       "format": "percent",
-      "explainer": "1: the chain counts only under-fives.",
-      "formula": "1"
+      "explainer": "The under-fives' share of the deaths averted; the rest are children aged 5-14.",
+      "formula": "msl_u5_deaths_per_child / deaths_averted_per_person"
     },
     {
       "id": "share_5_14_of_over5",
       "section": "effect",
       "label": "Of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
-      "explainer": "Not used: the chain counts only under-fives (older children are in unmodelled benefits).",
-      "formula": "0"
+      "explainer": "The deaths averted at five or older are of children aged 5-14 vaccinated in wide-age campaigns.",
+      "formula": "1"
     },
     {
       "id": "share_15_49_of_over15",
@@ -606,11 +678,19 @@
       "explainer": "Carers reassured by a visit overstate what it changed, most would have heard of the campaign from radio, posters or neighbours, and the urban Kenyan settlements were harder to reach than most. Floor: in Benin's 2019 campaign, volunteers turned 751 of 862 refusing households (of about 300,000 visited) into acceptors (Aholoukpe and Davis 2020, Pan African Medical Journal), 0.25% of households from refusals alone. About an eighth, giving 3% of children (1-10%). This row carries all of the self-report discount; the evidence adjustment doesn't repeat it."
     },
     {
+      "id": "msl_extra_children_vaccinated",
+      "section": "adjustments",
+      "label": "Extra children vaccinated because of the visits",
+      "format": "integer",
+      "formula": "msl_households_visited * (msl_u5_per_household + msl_wide_age_campaign_share * msl_5_14_per_household) * counterfactual_adj * implementation_adj",
+      "explainer": "Children in the households visited, older ones where the campaign covers them, who wouldn't otherwise have been vaccinated, at the delivery adjustment: per child actually vaccinated, like others' cost."
+    },
+    {
       "id": "msl_cost_per_extra_child",
       "section": "adjustments",
       "label": "Red Cross cost per extra child vaccinated (US$)",
       "format": "usd",
-      "formula": "cost_total / (people_reached * counterfactual_adj)",
+      "formula": "cost_total / msl_extra_children_vaccinated",
       "explainer": "The programme's full cost over the children vaccinated only because of a visit."
     },
     {
@@ -646,11 +726,11 @@
       "format": "usd",
       "value": {
         "low": 0,
-        "best": 5,
-        "high": 8
+        "best": 3,
+        "high": 5
       },
       "kind": "judgment",
-      "explainer": "A day's unskilled wage in Kenya, Nigeria, Malawi and Mozambique is a few dollars; national societies' volunteers often get a small stipend from the grant, which is already the Red Cross's cost. About $5 of unpaid value a day, from 0 (stipends cover it) to 8."
+      "explainer": "Statutory minimum wages in the visit countries, 2024: Kenya KES 15,202 a month for urban general labourers (about $4.5 a day), Nigeria ₦70,000 a month (National Minimum Wage Act 2024, about $1.7 a day), Malawi MWK 3,462 a day (from 1 February 2024, about $2), Mozambique's agriculture minimum MZN 6,338 a month (about $3.8 a day): about $3 a day, net of stipends the grants pay (which are already the Red Cross's cost), from 0 (stipends cover it) to 5."
     },
     {
       "id": "attribution_share_shared",
@@ -658,7 +738,7 @@
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "explainer": "The Red Cross's cost per extra child against everyone's: the vaccine and campaign (others' cost) and the national societies' volunteers' unpaid time (Convention 2). It follows the chain: fewer extra children per visit means a larger share of a smaller result.",
-      "formula": "msl_cost_per_extra_child / (msl_cost_per_extra_child + msl_others_cost_per_child + msl_households_visited * msl_volunteer_days_per_household * msl_volunteer_day_value / (people_reached * counterfactual_adj))"
+      "formula": "msl_cost_per_extra_child / (msl_cost_per_extra_child + msl_others_cost_per_child + msl_households_visited * msl_volunteer_days_per_household * msl_volunteer_day_value / msl_extra_children_vaccinated)"
     },
     {
       "id": "attribution_share",
@@ -807,17 +887,25 @@
       "explainer": "GiveWell's shared share for income invested by families of children who survive."
     },
     {
+      "id": "herd_immunity_share",
+      "section": "adjustments",
+      "label": "Protection of unvaccinated children (herd immunity), as a share of modelled value",
+      "format": "percent",
+      "formula": "@givewell_common.herd_immunity",
+      "explainer": "GiveWell's shared figure for vaccines' herd protection, as in the site's other vaccination models."
+    },
+    {
       "id": "other_unmodelled_share",
       "section": "adjustments",
       "label": "Other benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": -0.03,
-        "best": 0.17,
-        "high": 0.47
+        "low": -0.05,
+        "best": 0.02,
+        "high": 0.12
       },
       "kind": "judgment",
-      "explainer": "Older children vaccinated in the campaigns (+), rubella and congenital rubella syndrome averted (+), herd protection of unvisited children (+), deaths after measles from weakened immunity (+), other services promoted at the visits (+); against them, funging inside the Red Cross (restricted international gifts may let it move its own funds to domestic work: about −3%, 0 to −5%)."
+      "explainer": "Rubella and congenital rubella syndrome averted (+, about 3%) and other services promoted at the visits (+, about 2%); against them, funging inside the Red Cross (restricted international gifts may let it move its own funds to domestic work: about −3%, 0 to −5%). Herd protection, older children and deaths after measles have their own rows."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -825,7 +913,7 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + herd_immunity_share + other_unmodelled_share",
       "explainer": "GiveWell-style supplementary adjustments, each its own row, summed: they add to the modelled value as one share, as in GiveWell's sheets."
     },
     {
