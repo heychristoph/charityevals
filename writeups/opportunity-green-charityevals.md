@@ -1,6 +1,6 @@
 ### Summary
 
-Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **<span data-figure="headline" data-model="opportunity-green-charityevals">−0.018</span> years of healthy life per $1,000**, below zero. On the site's values, the shipping framework's emissions cuts are worth far less than the extra fuel costs ships would pay for them. The money a new IMO fund would send to climate-vulnerable countries makes up only part of the difference, and even the sign of the result is uncertain.
+Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **<span data-figure="headline" data-model="opportunity-green-charityevals">−0.11</span> years of healthy life per $1,000**, below zero. On the site's values, the shipping framework's emissions cuts are worth far less than the extra fuel costs ships would pay for them. The money a new IMO fund would send to climate-vulnerable countries makes up only part of the difference, and even the sign of the result is uncertain.
 
 ### What the charity does
 
@@ -27,7 +27,7 @@ The model takes the expected tonnes from both policies over the years a won refo
 The IMO framework also moves money, and the model counts both sides in the main chain:
 
 - **Compliance costs.** Ships' extra costs, about $300 per tonne cut by the IMO's own impact assessment, count as money lost by the people who pay them. Freight costs follow the volume of goods shipped, and about half of that goes to poorer countries, where a dollar counts for more.
-- **Just-transition funding.** The share of the fund that reaches climate-vulnerable countries is valued as development aid of the kind the IMO lists: infrastructure, training, technology and capacity. That aid is taken to do half as much as the same money given as cash. We take 40% of the fund's revenue in the first five years, with a range of 10% to 70%. A seventh of it is taken to replace aid donors would have given anyway.
+- **Just-transition funding.** The share of the fund that reaches climate-vulnerable countries is valued as development aid of the kind the IMO lists: infrastructure, training, technology and capacity. That aid is taken to do half as much as the same money given as cash. We take 40% of the fund's revenue in the first five years, with a range of 10% to 70%. 15% of it is taken to replace aid donors would have given anyway.
 
 Ships' payments into the fund are transfers, not compliance costs. They are not subtracted from the aid's value either: how to count public money against what it costs those who pay it awaits a site-wide rule. The fund's rewards for clean fuels buy tonnes that are already in the framework's projected cut.
 
