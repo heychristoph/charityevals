@@ -16,8 +16,8 @@
     "publisher": "charityevals",
     "title": "charityevals' estimate: Habitat for Humanity International, US affiliates programme (FY2025)",
     "url": "https://charityevals.org/habitat-for-humanity-charityevals",
-    "published": "2026-11-04",
-    "retrieved": "2026-11-04"
+    "published": "2026-11-15",
+    "retrieved": "2026-11-15"
   },
   "resources": [
     {
@@ -316,7 +316,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "HFHI doesn't split its US spending by activity. FY2025 began just before Hurricane Helene (September 2024) and Milton (October 2024); HFHI reports over 53,000 early-recovery interventions in 30 states and over 500 long-term ones (Form 990, Schedule O), and its US affiliates line rose by $22.6 million over FY2024 ($162.1 million to $184.7 million, audited statement p. 6), much of it plausibly disaster appeals passed to affiliates. Best guess 10% of the line, range 4% (the rise is ordinary growth) to 20%."
+      "explainer": "HFHI doesn't split its US spending by activity. FY2025 began just before Hurricane Helene (September 2024) and Milton (October 2024); HFHI reports over 53,000 early-recovery interventions in 30 states and over 500 long-term ones (Form 990, Schedule O), and its US affiliates line in cash rose by $24.4 million over FY2024 ($127.9 million to $152.4 million, audited statements pp. 6-7; transfers +$19.0 million), much of it plausibly disaster appeals passed to affiliates. Best guess 10% of the line, range 4% (the rise is ordinary growth) to 20%."
     },
     {
       "id": "dis_reach_share",
@@ -329,7 +329,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Disaster money mostly goes to affiliates and partners as grants for clean-up kits, roof tarps, muck-outs and repair materials; the rest is HFHI's staff and logistics. Anchored on the US programme's own mix: transfers and donated products are 65% of it (audited statement p. 7). 0.6, range 0.4 to 0.8."
+      "explainer": "Disaster money mostly goes to affiliates and partners as grants for clean-up kits, roof tarps, muck-outs and repair materials; the rest is HFHI's staff and logistics. Anchored on the US programme's own mix: in cash, transfers are 58% of it (audited statement p. 7). 0.6, range 0.4 to 0.8."
     },
     {
       "id": "dis_value_per_household",
@@ -875,29 +875,16 @@
       "section": "adjustments",
       "label": "Volunteers across the Habitat network, FY2025",
       "format": "integer",
-      "value": 828000,
-      "kind": "observed",
-      "source": {
-        "title": "Habitat for Humanity International, Form 990 for the fiscal year ended June 30, 2025, Schedule O",
-        "url": "https://www.habitat.org/media/36761/view",
-        "retrieved": "2026-11-03",
-        "page": "Schedule O, Part III",
-        "quote": "THE NUMBER OF VOLUNTEERS REPORTED BY ALL HABITAT FOR HUMANITY INTERNATIONAL, INC. (HFHI) ENTITIES IN FY25 WAS 828,000."
-      },
-      "explainer": "Everyone who volunteered with HFHI or an affiliate in the year, worldwide. Their time isn't in any financial statement (the audited statements say so), so it is added as a resource here."
+      "explainer": "The shared count of the network's volunteers (read by the international model too). Their time isn't in any financial statement (the audited statements say so), so it is added as a resource here.",
+      "formula": "@habitat_for_humanity.network_volunteers_fy2025"
     },
     {
       "id": "us_volunteer_share",
       "section": "adjustments",
       "label": "Share of the volunteers who worked with US affiliates",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.75
-      },
-      "kind": "judgment",
-      "explainer": "No split of Habitat's volunteers by country or activity is published. Most Habitat volunteering is on US build and repair sites (corporate, church and student build days); Global Village trips and national organisations' volunteers abroad are a minority, and a share of US volunteers work in the 863 ReStores, which sell donated goods to fund the affiliates and are not part of the homes' resources (like the donated goods themselves). 0.5 of the network's volunteers on US homes and repairs, range 0.3 to 0.75."
+      "explainer": "The shared judgment of the share of the network's volunteers on US homes and repairs (the international model takes its share of the rest).",
+      "formula": "@habitat_for_humanity.us_volunteer_share"
     },
     {
       "id": "hours_per_volunteer",
@@ -1019,7 +1006,7 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Not modelled, as a share of the modelled value: (+) children's stability and schooling (Wilder 2015: families report better grades and less moving, uncontrolled), +5%; (+) falls averted by accessibility repairs for older owners (home-safety modifications cut falls among older people at high risk: Gillespie et al. 2012, Cochrane review, rate ratio 0.81), +3%; (−) families who default or sell early lose part of the subsidy (in implementation_adj already, so not here). HFHI's US advocacy is no longer here: it is modelled with the public awareness and education programme (habitat-for-humanity-charityevals-awareness). The high end allows for larger child effects."
+      "explainer": "Not modelled, as a share of the modelled value: (+) children's stability and schooling (Wilder 2015: families report better grades and less moving, uncontrolled), +5%; (+) falls averted by accessibility repairs for older owners (home-safety modifications cut falls among older people at high risk: Gillespie et al. 2012, Cochrane review, rate ratio 0.81), +3%; (−) families who default or sell early lose part of the subsidy (in implementation_adj already, so not here). HFHI's US advocacy is modelled with its public awareness and education programme. The high end allows for larger child effects."
     },
     {
       "id": "cash_equivalent_share",
@@ -1152,7 +1139,7 @@
       "label": "Staff pay as a share of HFHI's cost",
       "format": "percent",
       "formula": "staff_pay_total / total_expenses",
-      "explainer": "HFHI's own salaries over its total expenses (32%), its own figure in place of the shared default. Affiliates' staff are their own and are inside the attribution above."
+      "explainer": "HFHI's own salaries over its total expenses (35%), its own figure in place of the shared default. Affiliates' staff are their own and are inside the attribution above."
     },
     {
       "id": "salary_gap",

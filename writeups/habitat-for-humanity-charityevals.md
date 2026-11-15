@@ -2,7 +2,7 @@
 
 Habitat for Humanity International (HFHI) funds and supports about 984 independent US affiliates that build homes with volunteers and sell them at appraised value, on zero-interest mortgages with down-payment help, to low-income families, and that repair low-income owners' homes. In the year to June 2025 HFHI spent $185 million on this work, against about 3,400 homes sold and 12,370 repairs across the network, and on disaster recovery after Hurricanes Helene and Milton. Our estimate of a dollar given to HFHI for its US work is **<span data-figure="headline" data-model="habitat-for-humanity-charityevals">0.005</span> years of healthy life per $1,000**.
 
-Two things set the result. The families repay much of what their homes are worth, so only the net subsidy they receive counts, and the affiliates spend well over the sale price per home, so a dollar of the network's resources buys under half a dollar of subsidy; and they live in the US, where a dollar of better housing adds far less to a family's consumption than in a poor country, on the same log-income scale the site uses for cash transfers. And no controlled study measures what Habitat's homes or repairs do, so every branch takes the site's shared discount for missing data. This covers HFHI's US programme, 65% of its programme spending; its public awareness, education and advocacy and its international programme ([international model](/habitat-for-humanity/habitat-for-humanity-charityevals-international), <span data-figure="headline" data-model="habitat-for-humanity-charityevals-international">0.07</span>) are modelled separately.
+Three things set the result. The families repay much of what their homes are worth, so only the net subsidy they receive counts, and the affiliates spend well over the sale price per home, so a dollar of the network's resources buys under half a dollar of subsidy; and they live in the US, where a dollar of better housing adds far less to a family's consumption than in a poor country, on the same log-income scale the site uses for cash transfers. And no controlled study measures what Habitat's homes or repairs do, so every branch takes the site's shared discount for missing data. This covers HFHI's US programme, 60% of its programme spending in cash; its public awareness, education and advocacy and its international programme ([international model](/habitat-for-humanity/habitat-for-humanity-charityevals-international), <span data-figure="headline" data-model="habitat-for-humanity-charityevals-international">0.07</span>) are modelled separately.
 
 ### What the charity does
 
@@ -43,7 +43,7 @@ Adjustments: a home is worth less to a family than the same money in cash (in-ki
 
 ### What isn't modelled
 
-HFHI's US policy work is modelled with its public awareness and education programme ($24.3 million), no longer as a share here. HFHI's international programme ($75.5 million) is modelled separately.
+HFHI's US policy work is modelled with its public awareness and education programme ($24.3 million). HFHI's international programme ($75.5 million) is modelled separately.
 
 ### How this model was checked
 

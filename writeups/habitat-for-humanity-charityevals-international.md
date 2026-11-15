@@ -19,14 +19,14 @@ Outside the US and Canada, most of Habitat's direct work is incremental: a floor
 The model follows the site's cash-transfer template with two branches:
 
 - **Direct housing.** Habitat's count of 472,900 people in direct housing outside the US and Canada, at a net subsidy of about $1,500 a family, spread over the improvement's life and valued per person on the site's log-consumption scale at each region's consumption (the World Bank's household-survey means for 13 Habitat countries, carried to 2024 by real growth and the site's price index, times how far below the survey mean Habitat's families are). HFHI is credited with its share of the resources behind that housing: its own cost of the direct work (three-quarters of its international cost, a judgment), against the national organisations' own spending (what the families got less what HFHI's transfers delivered, over the share of a national organisation's spending that reaches families: 60%, below the 79% Habitat for Humanity Poland's audited accounts show for all its programme work, staff included), volunteers' time and HFHI's cost. That share is about a fifth. Spillovers to local builders and a small share for child deaths averted are added.
-- **Market development.** Habitat's count of 2.4 million people reached through partners, a surplus of about $150 for a household that borrowed (the microcredit trials find small gains: Banerjee, Karlan and Zinman 2015; Meager 2019) and $20 for one that bought materials or services, two in five borrowers, counted once, region by region at somewhat higher consumption, with only the share of partners' sales due to Habitat (40%), a discount for the reliability of the count (80%, as low as the Form 990's 300,000 Terwilliger households), HFHI's share of Habitat's market work (70%), and Habitat's next-dollar figure, since these sales come from lines set up in earlier years.
+- **Market development.** Habitat's count of 2.4 million people reached through partners, a surplus of about $150 for a household that borrowed (the microcredit trials find small gains: Banerjee, Karlan and Zinman 2015; Meager 2019) and $20 for one that bought materials or services, two in five borrowers, counted once, region by region at somewhat higher consumption, with only the share of partners' sales due to Habitat (40%), a discount for the reliability of the count (80%), HFHI's share of Habitat's market work (70%), and Habitat's next-dollar figure, since these sales come from lines set up in earlier years.
 - **Missing data.** Both branches take the site's shared discount for programmes whose results aren't measured.
 
 ### What drives the result
 
 - **How much we count a programme whose results aren't measured** and **the value of a healthy year against a doubled income** (site-wide sliders).
 - **The share of a national organisation's spending that reaches families**, which sets HFHI's share, and **the share of the housing that wouldn't have happened anyway**.
-- The families' consumption in each region, and the market branch (about a seventh of the result).
+- The families' consumption in each region, and the market branch (about an eighth of the result).
 
 ### Biggest uncertainties
 
