@@ -1,6 +1,6 @@
 ### Summary
 
-The Lead Exposure Elimination Project (LEEP) works to get lead out of the paint sold in low- and middle-income countries. Our model counts what it spent from its founding in September 2020 to the end of 2025 against what it won in that time: lead paint rules in seven countries and measured switches to lead-free paint in seven more. It comes to **<span data-figure="headline" data-model="lead-exposure-elimination-project-charityevals">14</span> years of healthy life per 1,000 dollars**. The figure is very uncertain. Nobody has measured how much of children's blood lead in these countries comes from paint, and the benefits come decades later, so the discount rate moves the result a lot.
+The Lead Exposure Elimination Project (LEEP) works to get lead out of the paint sold in low- and middle-income countries. Our model counts what it spent from its founding in September 2020 to the end of 2025 against what it won in that time: lead paint rules in seven countries and measured switches to lead-free paint in seven more. It comes to **<span data-figure="headline" data-model="lead-exposure-elimination-project-charityevals">15</span> years of healthy life per 1,000 dollars**. The figure is very uncertain. Nobody has measured how much of children's blood lead in these countries comes from paint, and the benefits come decades later, so the discount rate moves the result a lot.
 
 ### What the charity does
 
@@ -10,7 +10,7 @@ It spent $3.44 million in its year to August 2025 (Form 990), and $4.9 million i
 
 ### How the impact happens
 
-Lead paint on walls flakes and wears into dust, and young children swallow it. Lead in a child's blood lowers IQ, and a lower IQ means lower earnings as an adult. Paint stays on walls for decades, so each year a market sells no lead paint spares children years of exposure to come. Adults in the same homes are exposed too, which raises heart and kidney disease.
+Lead paint on walls flakes and wears into dust, and young children swallow it. Lead in a child's blood lowers IQ, and a lower IQ means lower earnings as an adult. Paint stays on walls for decades, so each year a market sells no lead paint spares children years of exposure to come. Adults in the same homes are exposed too, which raises heart disease.
 
 ### How the model works
 
@@ -21,9 +21,9 @@ Lead paint on walls flakes and wears into dust, and young children swallow it. L
   - spices, eyeliner and plastics: no change won yet, so this work counts as cost only. Drafted rules aren't counted either.
 - **Children protected:** each year a market stays free of lead paint spares about one birth cohort its childhood lead from paint, so a win counts each year's births in that country.
 - **What a child gains:** children in these countries average about 5 µg/dL of blood lead. We judge that 15% of it comes from paint (4% to 40%), and a child loses half an IQ point per µg/dL. That is about 0.4 IQ points per child. Each point raises earnings by 0.67% over a 40-year working life, shared in the household. The paint's exposure fades over about 25 years, and earnings start 17 years after a child's exposure.
-- **Delivered:** the rules take 40% of the lead paint off the market over the years counted, as most are new. The switches take 44%: in Pakistan the lead paint brands' share fell from 88% to 41% in three years, in Malawi lead raw materials fell from 89% of the market to 4%, and we take a fifth in the five countries without a measured share.
+- **Delivered:** the rules take 40% of the lead paint off the market over the years counted, as most are new. For the switches each country takes its own share: in Pakistan the lead paint brands' share fell from 88% to 41% in three years (53% gone), in Malawi lead raw materials fell from 89% of the market to 4% (90%), and we take a fifth in the five countries without a measured share.
 - **Adjustments:** LEEP gets half the credit (the regulators, partner NGOs and UN agencies do the rest), and trust in the chain is 70%. A tenth of the wins would have come in the same years anyway. Each win counts for the years a won reform counts on the site.
-- **Side effect:** lead's other harms, mostly adults' heart disease, add 30% (8% to 90%).
+- **Side effect:** adults in the same homes die less of lead's heart disease. Lead caused over 3.5 million deaths in 2023; we count paint's share of adults' blood lead as a quarter of its share of children's, and value the deaths at the site's value of a death by age.
 - **The missing-data discount** applies throughout. LEEP measures the lead in paint on sale, not children's blood lead.
 - **The next dollar** is valued at 42% of the average. LEEP holds over three years of 2025's spending, mostly earmarked, and its next programmes are in new countries and newer lead sources.
 
@@ -43,7 +43,7 @@ Wins after 2025 (LEEP's goal is rules in 14 countries by the end of 2026) and th
 
 ### How this model was checked
 
-Audit rounds are listed in audits/lead-exposure-elimination-project-charityevals/.
+Audit rounds are listed in audits/lead-exposure-elimination-project-charityevals/. Round 1 passed with four medium findings, all fixed: more of 2025's spending is left out for wins still to come, the paint's exposure fades over its life rather than coming at one date, the delivery shares use LEEP's latest testing, and lead's other harms got an anchor. That took the result from 13 to 14. Round 2 found one high issue: those harms, mostly adults' heart-disease deaths, were a fixed share and didn't move with the value of a life. They are now valued as deaths. Each switch country also takes its own measured delivery share, and Liberia's ungazetted rule lengthens the wait. That took the result to 15.
 
 ### Sources
 

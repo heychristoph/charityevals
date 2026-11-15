@@ -4,27 +4,27 @@
  "kind": "charity",
  "cause": "global-health",
  "beneficiaries": {
-  "PAK": 0.3884,
-  "NGA": 0.1852,
-  "ZAF": 0.067,
-  "NER": 0.0541,
-  "GHA": 0.0502,
-  "MDG": 0.0494,
-  "COL": 0.0398,
-  "MWI": 0.0374,
-  "SEN": 0.03,
-  "ZWE": 0.028,
-  "PER": 0.0266,
-  "BDI": 0.0227,
-  "SLE": 0.0128,
-  "LBR": 0.0084
+  "PAK": 0.4706,
+  "NGA": 0.1827,
+  "MWI": 0.0769,
+  "NER": 0.0533,
+  "MDG": 0.0487,
+  "ZAF": 0.0306,
+  "PER": 0.0263,
+  "GHA": 0.0229,
+  "BDI": 0.0224,
+  "COL": 0.0182,
+  "SEN": 0.0137,
+  "ZWE": 0.0128,
+  "SLE": 0.0126,
+  "LBR": 0.0083
  },
- "beneficiaries_note": "Our build: shares of the result at the defaults by country, each country's births times its branch's discounted years and delivery share (regulations 36%, Nigeria at half credit; market switches 64%).",
+ "beneficiaries_note": "Our build: shares of the result at the defaults by country, each country's births times its branch's discounted years and its own delivery share (regulations 35%, Nigeria at half credit; market switches 65%, Pakistan at its measured 53%, Malawi 90%, the other five 20%).",
  "template": "policy-research-meta",
  "estimate_basis": "past_average",
  "charity": "lead-exposure-elimination-project",
  "owner": "charityevals",
- "summary": "The Lead Exposure Elimination Project (LEEP) tests paint on sale in low- and middle-income countries and works with governments and manufacturers to take lead out of it; we count its spending from its founding in September 2020 to the end of 2025 against what it won: lead paint rules adopted in seven countries with its support (Nigeria at half credit) and measured switches to lead-free paint in seven more, Pakistan the largest. Each year a market stays free of lead paint spares about a birth cohort the IQ points that paint lead would cost them, valued as later earnings; lead's other harms are a side effect. At the defaults it comes to about 14 years of healthy life per $1,000, but the result is mostly uncertainty: no study measures how much of children's blood lead comes from paint in these countries, and the discount rate and the years a won rule counts move it most, since the benefits come decades later. Every branch is discounted for missing data, and its spices, eyeliner and plastics work has won no change yet, so it counts as cost only.",
+ "summary": "The Lead Exposure Elimination Project (LEEP) tests paint on sale in low- and middle-income countries and works with governments and manufacturers to take lead out of it; we count its spending from its founding in September 2020 to the end of 2025 against what it won: lead paint rules adopted in seven countries with its support (Nigeria at half credit) and measured switches to lead-free paint in seven more, Pakistan the largest. Each year a market stays free of lead paint spares about a birth cohort the IQ points that paint lead would cost them, valued as later earnings; adults' lead deaths in the same homes are a side effect. At the defaults it comes to about 15 years of healthy life per $1,000, but the result is mostly uncertainty: no study measures how much of children's blood lead comes from paint in these countries, and the discount rate and the years a won rule counts move it most, since the benefits come decades later. Every branch is discounted for missing data, and its spices, eyeliner and plastics work has won no change yet, so it counts as cost only.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Lead Exposure Elimination Project",
@@ -245,7 +245,7 @@
     "high": 1
    },
    "kind": "judgment",
-   "explainer": "LEEP tripled its spending in 2025 and started 11 new paint programmes. Its own record puts months to years between the work and a win: Nigeria's rule was signed four months after the LEEP-funded workshop, Liberia's within weeks of LEEP-funded workshops, the Democratic Republic of the Congo's draft five months after its study, Sierra Leone's rule about three years after its study, Zimbabwe's manufacturers' switch two years after theirs, and Malawi's market two years of joint work after its study. LEEP's 2025 spending ran about evenly through the year, and its 2026 goals double the regulations from 7 to 14. With a typical lag of about a year, most of 2025's spending buys wins after the count. Our judgment: three quarters (40% to all of it)."
+   "explainer": "LEEP tripled its spending in 2025 and started 11 new paint programmes. Its own record puts months to years between the work and a win: Nigeria's rule was signed four months after the LEEP-funded workshop, Liberia's within weeks of LEEP-funded workshops, the Democratic Republic of the Congo's draft five months after its study, Sierra Leone's rule about three years after its study, Zimbabwe's manufacturers' switch two years after theirs, and Malawi's market two years of joint work after its study. LEEP's 2025 spending rose through the year (the Form 990's year to August 2025 implies about $0.36M a month, the calendar year's total about $0.5M a month after it), and its 2026 goals double the regulations from 7 to 14. With a typical lag of about a year, most of 2025's spending buys wins after the count. Our judgment: three quarters (40% to all of it)."
   },
   {
    "id": "spend_period_years",
@@ -728,12 +728,20 @@
    "explainer": "Lead harms the brain most before about age six (exposure centred near age three); earnings start at about 20. Our judgment, 17 years (14 to 20), as EDF's lead-pipe branch of ours takes 15 (10 to 20) for the same chain in older children."
   },
   {
+   "id": "paint_exposure_pv",
+   "section": "effect",
+   "label": "Discount for the paint's exposure coming over its life",
+   "format": "percent",
+   "formula": "(1 / paint_exposure_life_years) / (1 / paint_exposure_life_years + ln(1 + $discount_rate))",
+   "explainer": "The exposure a year's paint would have caused fades at a constant rate over its average life; discounted continuously at the shared rate, its present value is (1/life) ÷ (1/life + ln(1 + rate)) of the undiscounted whole (one birth cohort's worth, below)."
+  },
+  {
    "id": "income_wait_discount",
    "section": "effect",
    "label": "Discount for the waits until the earnings gain begins",
    "format": "percent",
-   "formula": "(1 / paint_exposure_life_years) / (1 / paint_exposure_life_years + ln(1 + $discount_rate)) * (1 + $discount_rate) ^ -years_to_working_age",
-   "explainer": "The exposure a year's paint would have caused fades at a constant rate over its average life; discounted continuously at the shared rate, its present value is (1/life) ÷ (1/life + ln(1 + rate)) of the undiscounted whole (one birth cohort's worth, below). Then the wait from a child's exposure to working age, discounted the same way."
+   "formula": "paint_exposure_pv * (1 + $discount_rate) ^ -years_to_working_age",
+   "explainer": "The paint's exposure over its life, then the wait from a child's exposure to working age, discounted at the shared rate."
   },
   {
    "id": "cohorts_per_win_year",
@@ -749,13 +757,86 @@
    "explainer": "If lead paint has been sold for decades, the paint on walls is many years' sales, and each year's sales cause that year's share of the harm for as long as they last: summed over their life, about one birth cohort's childhood of paint lead. A market growing faster than the population (LEEP's Malawi analysis: about 5% a year) puts more than a year's share in each new year's sales, and paint lost to renovation, replacement or rain puts less. Our judgment, 1 (0.5 to 1.6)."
   },
   {
+   "id": "earnings_value_per_birth",
+   "section": "effect",
+   "label": "Earnings value per child born in a protected country per year of protection, in units of value",
+   "format": "small",
+   "formula": "iq_points_per_child * iq_wage_gain * resource_sharing * iq_years * income_wait_discount * $uov_per_ln_consumption * cohorts_per_win_year",
+   "unit": "units of value",
+   "explainer": "The IQ points kept as a gain in ln(consumption) over the working life, shared in the household, after the waits, in units of value, for each birth cohort's worth of exposure averted."
+  },
+  {
+   "id": "lead_deaths_2023",
+   "section": "effect",
+   "label": "Deaths attributed to lead exposure worldwide, 2023",
+   "format": "integer",
+   "value": 3500000,
+   "kind": "observed",
+   "unit": "deaths / year",
+   "source": {
+    "title": "WHO, Lead poisoning and health, fact sheet (10 June 2026), citing IHME's Global Burden of Disease Study 2023",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health",
+    "quote": "more than 3.5 million deaths globally were attributed to lead exposure in 2023, primarily due to cardiovascular effects",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "Lead's deaths from all sources, mostly adults' heart disease from a lifetime's exposure."
+  },
+  {
+   "id": "world_births_2023",
+   "section": "effect",
+   "label": "Births worldwide, 2023",
+   "format": "integer",
+   "value": 132110264,
+   "kind": "observed",
+   "unit": "children / year",
+   "source": {
+    "title": "UN World Population Prospects 2024, births per year (Our World in Data grapher)",
+    "url": "https://ourworldindata.org/grapher/number-of-births-per-year",
+    "page": "World, 2023 estimate: 132,110,264 births",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "Lead's deaths per year are put against a year's births, so that a birth cohort's worth of paint exposure averted carries a year's worth of paint's share of the deaths."
+  },
+  {
+   "id": "adult_vs_child_paint_exposure",
+   "section": "effect",
+   "label": "Paint's share of adults' blood lead, relative to its share of children's",
+   "format": "percent",
+   "value": {
+    "low": 0.1,
+    "best": 0.25,
+    "high": 0.5
+   },
+   "kind": "judgment",
+   "explainer": "Young children swallow paint dust and flakes by putting their hands and toys in their mouths; adults in the same homes take in much less, and their blood lead comes more from food, work and old exposure stored in bone. Our judgment: paint's share of adults' blood lead is a quarter of its share of children's (10% to 50%)."
+  },
+  {
+   "id": "lead_cvd_value_per_death",
+   "section": "effect",
+   "label": "Value of a heart-disease death averted, at the world's ages (units of value)",
+   "format": "number",
+   "formula": "(@death_ages.cvd_share_under5_world * @moral_weights.uov_per_death_under5 + @death_ages.cvd_share_5_14_world * @moral_weights.uov_per_death_age_5_14 + @death_ages.cvd_share_15_49_world * @moral_weights.uov_per_death_age_15_49 + @death_ages.cvd_share_50_69_world * @moral_weights.uov_per_death_age_50_74 + @death_ages.cvd_share_70plus_world * ((1 - @death_ages.cvd_share_80plus_of_70plus_world) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cvd_share_80plus_of_70plus_world * @moral_weights.givewell_age_80_84)) * $life_value_multiplier",
+   "unit": "units of value",
+   "explainer": "The ages of the world's cardiovascular deaths (facts: death_ages) valued by GiveWell's weights by age, the 70-and-over band split by the share at 80 or older, × the value-of-a-life slider: lead's deaths are mostly heart disease in older adults."
+  },
+  {
+   "id": "adult_deaths_value_per_birth",
+   "section": "effect",
+   "label": "Side effect: adults' lead deaths averted, value per child born per year of protection (units of value)",
+   "format": "small",
+   "side_effect": "added",
+   "formula": "lead_deaths_2023 / world_births_2023 * paint_share * adult_vs_child_paint_exposure * lead_cvd_value_per_death * paint_exposure_pv * cohorts_per_win_year",
+   "unit": "units of value",
+   "explainer": "Lead paint dust also raises the blood lead of the adults in the same homes, which raises blood pressure and heart disease. Lead's deaths per birth, × paint's share of adults' blood lead (its share of children's × the adult ratio), valued at the shared value of a death by age, over the paint's life. Illness short of death, kidney disease and children's behaviour problems aren't counted: lead's burden is mostly deaths."
+  },
+  {
    "id": "value_per_unit_year",
    "section": "effect",
    "label": "Value per child born in a protected country per year of protection, in units of value",
    "format": "small",
-   "formula": "iq_points_per_child * iq_wage_gain * resource_sharing * iq_years * income_wait_discount * $uov_per_ln_consumption * cohorts_per_win_year",
+   "formula": "earnings_value_per_birth + adult_deaths_value_per_birth",
    "unit": "units of value",
-   "explainer": "The IQ points kept as a gain in ln(consumption) over the working life, shared in the household, after the waits, in units of value, for each birth cohort's worth of exposure averted. Lead's other harms (heart and kidney disease in adults living in the same homes, behaviour) are the side effect below."
+   "explainer": "The children's earnings gain and the adults' deaths averted, for each birth cohort's worth of paint exposure kept off the market."
   },
   {
    "id": "p_success",
@@ -781,12 +862,12 @@
    "format": "number",
    "value": {
     "low": 0,
-    "best": 1,
+    "best": 1.5,
     "high": 3
    },
    "kind": "judgment",
    "unit": "years",
-   "explainer": "New limits usually give manufacturers a transition period before enforcement starts (Liberia's rule passed in January 2025; Nigeria's was enforceable on adoption). Our judgment, 1 year (0 to 3). The market switches are already happening: no wait."
+   "explainer": "New limits usually give manufacturers a transition period, and some wait for gazetting before they have legal force: Liberia's rule, passed in January 2025, gives manufacturers three years and had not been gazetted by March 2026 (AllAfrica, 31 March 2026), while Nigeria's was enforceable once gazetted. Our judgment, 1.5 years (0 to 3); delivery after it is the implementation row. The market switches are already happening: no wait."
   },
   {
    "id": "wait_discount",
@@ -1068,26 +1149,72 @@
     "quote": "brands representing only 4% of market share are using lead-based raw materials, down from 89%",
     "retrieved": "2026-11-15"
    },
-   "explainer": "A rule on paper removes lead only as far as it is enforced and followed. Five of the seven rules are from 2025, enforcement agreements cover only some of the countries, and Nigeria's market is large and fragmented. LEEP's follow-up testing shows what full delivery can look like: in Malawi, four years after enforcement began, brands using lead-based raw materials fell from 89% of the market to 4% (the paint still over the limit is low-level contamination at two manufacturers), and in Pakistan the oil-based lead paint brands' share fell from 88% to 41% in three years. New rules take years to reach that. Our judgment, 40% of the lead paint removed over the years counted (15% to 70%)."
+   "explainer": "A rule on paper removes lead only as far as it is enforced and followed. Five of the seven rules are from 2025 (Liberia's not yet gazetted in March 2026 and with three years for manufacturers to switch), enforcement agreements cover only some of the countries, and Nigeria's market is large and fragmented. LEEP's follow-up testing shows what full delivery can look like: in Malawi, four years after enforcement began, brands using lead-based raw materials fell from 89% of the market to 4% (the paint still over the limit is low-level contamination at two manufacturers), and in Pakistan the oil-based lead paint brands' share fell from 88% to 41% in three years. New rules take years to reach that. Our judgment, 40% of the lead paint removed over the years counted (15% to 70%)."
   },
   {
-   "id": "mkt_implementation_adj",
+   "id": "mkt_pak_implementation_adj",
    "section": "adjustments",
-   "label": "Market switches: share of the lead paint market switched to lead-free",
+   "label": "Market switches: share of Pakistan's lead paint gone, 2021 to 2024",
    "format": "percent",
    "value": {
-    "low": 0.25,
-    "best": 0.44,
+    "low": 0.4,
+    "best": 0.53,
     "high": 0.65
    },
-   "kind": "judgment",
+   "kind": "estimate",
    "source": {
     "title": "LEEP, 2025 in Review",
     "url": "https://leadelimination.org/news/2025-in-review-advancing-lead-elimination-at-scale",
     "quote": "market share of brands selling oil-based lead paint for home use has reduced from approximately 88% in 2021 to 41% in 2024",
     "retrieved": "2026-11-15"
    },
-   "explainer": "LEEP's testing measures two of the seven markets: Pakistan, where the oil-based lead paint brands' share fell from about 88% to 41% (53% of the lead paint gone), and Malawi, where brands using lead raw materials fell from 89% to 4% (about 90% gone). In Zimbabwe, Ghana, Colombia, Senegal and South Africa testing shows more manufacturers switching but no market share; we take a fifth there. Weighted by births (Pakistan 61%, Malawi 6%, the rest 33%): 0.53 × 0.61 + 0.9 × 0.06 + 0.2 × 0.33 ≈ 44%. Our judgment, 44% (25% to 65%); without a law some may switch back, which the range takes in."
+   "explainer": "LEEP's follow-up paint study: the oil-based home-use lead paint brands' share fell from about 88% to 41%, so (88 − 41) ÷ 88 = 53% of the lead paint is gone. The range takes in sampling error and that brands still selling some lead paint may sell less of it."
+  },
+  {
+   "id": "mkt_mwi_implementation_adj",
+   "section": "adjustments",
+   "label": "Market switches: share of Malawi's lead paint gone, 2021 to 2025",
+   "format": "percent",
+   "value": {
+    "low": 0.75,
+    "best": 0.9,
+    "high": 0.96
+   },
+   "kind": "estimate",
+   "source": {
+    "title": "LEEP, 2025 in Review",
+    "url": "https://leadelimination.org/news/2025-in-review-advancing-lead-elimination-at-scale",
+    "quote": "brands representing only 4% of market share are using lead-based raw materials, down from 89%",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "LEEP's follow-up paint study: brands using lead-based raw materials fell from 89% to 4% of the market (96% gone); two major manufacturers still have low-level contamination over the limit. Our estimate, 90% (75% to 96%)."
+  },
+  {
+   "id": "mkt_other_implementation_adj",
+   "section": "adjustments",
+   "label": "Market switches: share of the lead paint gone in the five countries without a measured share",
+   "format": "percent",
+   "value": {
+    "low": 0.05,
+    "best": 0.2,
+    "high": 0.5
+   },
+   "kind": "judgment",
+   "source": {
+    "title": "LEEP, 2025 in Review",
+    "url": "https://leadelimination.org/news/2025-in-review-advancing-lead-elimination-at-scale",
+    "quote": "more manufacturers reformulated in 2025 in Ghana, Colombia, Senegal, Zimbabwe, Pakistan, Malawi, South Africa and Burundi",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "In Zimbabwe manufacturers with over 90% of the market said in 2023 they had started to switch, and in Ghana, Colombia, Senegal and South Africa testing shows more manufacturers switching, but no market share is published. Our judgment: a fifth of the lead paint gone (5% to 50%), below Pakistan's measured 53% because the switches are reported rather than measured and, without a law, some may switch back."
+  },
+  {
+   "id": "mkt_implementation_adj",
+   "section": "adjustments",
+   "label": "Market switches: share of the lead paint market switched to lead-free, weighted by births",
+   "format": "percent",
+   "formula": "(births_pak * mkt_pak_implementation_adj + births_mwi * mkt_mwi_implementation_adj + (births_zwe + births_gha + births_col + births_sen + births_zaf) * mkt_other_implementation_adj) / mkt_births",
+   "explainer": "Each country's share of its lead paint gone, weighted by its births: about 44% at the best guesses (Pakistan has three fifths of these births)."
   },
   {
    "id": "missing_data_adj",
@@ -1096,26 +1223,6 @@
    "format": "percent",
    "formula": "$missing_data_discount",
    "explainer": "The shared missing-data step (docs/normalization.md 2.12): LEEP's testing measures lead in paint on sale, but no child's blood lead or IQ is measured for its work; the paint share of blood lead is a judgment. Every branch takes it."
-  },
-  {
-   "id": "health_effects_share",
-   "section": "adjustments",
-   "label": "Side effect: lead's other harms, as a share of the earnings value",
-   "format": "percent",
-   "value": {
-    "low": 0.08,
-    "best": 0.3,
-    "high": 0.9
-   },
-   "kind": "judgment",
-   "side_effect": "added",
-   "source": {
-    "title": "Systemic drivers of toxic food adulteration: lead chromate in turmeric across eastern India, npj Science of Food (2026), abstract (Europe PMC)",
-    "url": "https://europepmc.org/article/MED/42091913",
-    "quote": "If cardiovascular disease mortality reductions are included, there would be an additional benefit of approximately US$ 430 million to 2.8 billion per year.",
-    "retrieved": "2026-11-15"
-   },
-   "explainer": "Lead paint dust also raises the blood lead of the adults living in the same homes, which raises blood pressure and heart disease, and children's lead is linked to behaviour problems and crime. Anchor: for lead in turmeric, eaten by adults and children alike, a 2026 study values the heart-disease deaths averted at about 1.8 times the children's earnings gain ($430M to $2.8B against $239M to $1.6B a year), using a value of a statistical life. Paint raises adults' blood lead much less than young children's (no hand-to-mouth dust), say a quarter as much relative to the earnings chain, and the site values the deaths of older adults lower than a value of a statistical life (@moral_weights: 42 units of value at 50 to 74 against 104 at 15 to 49): 1.8 × 0.25 × about 0.7 ≈ 0.3. Our judgment: 30% of the earnings value (8% to 90%)."
   },
   {
    "id": "total_adj",
@@ -1130,9 +1237,9 @@
    "section": "outcome",
    "label": "Total value (units of value)",
    "format": "number",
-   "formula": "(reg_downstream_value * reg_implementation_adj + mkt_downstream_value * mkt_implementation_adj + other_sources_downstream_value) * total_adj * (1 + health_effects_share) + moved_value + careers_value",
+   "formula": "(reg_downstream_value * reg_implementation_adj + mkt_downstream_value * mkt_implementation_adj + other_sources_downstream_value) * total_adj + moved_value + careers_value",
    "unit": "units of value",
-   "explainer": "Each branch with its delivery share, the shared adjustments and lead's other harms; LEEP moves no money and changes no careers, so those rows add nothing."
+   "explainer": "Each branch with its delivery share and the shared adjustments; LEEP moves no money and changes no careers, so those rows add nothing."
   },
   {
    "id": "uov_per_dollar",
