@@ -1,10 +1,11 @@
 ### Summary
 
-The Coalition for Rainforest Nations (CfRN) works with rainforest countries in the UN climate talks and helps them get paid for cutting deforestation. Our model of its 2024 spending comes to **<span data-figure="headline" data-model="coalition-for-rainforest-nations-charityevals">0.12</span> years of healthy life per $1,000**.
+The Coalition for Rainforest Nations (CfRN) works with rainforest countries in the UN climate talks and helps them get paid for cutting deforestation. Our model of its 2024 spending comes to **<span data-figure="headline" data-model="coalition-for-rainforest-nations-charityevals">−0.12</span> years of healthy life per $1,000**: a net harm, though the result is mostly uncertainty.
 
-- Nearly all of it is CfRN's small share of the credit for the climate-finance goal agreed at COP29, valued as aid. That share is a judgment, and the result moves almost in proportion to it.
-- The forest its work helps keep standing adds a little: a small cut in pandemic risk, and carbon, which is worth little in healthy years, as everywhere on the site.
-- Selling forest credits can do harm. A country that counts a credit against its own target can emit a tonne more. At our best guesses the credit sales are a small net harm.
+- Nearly all of it is CfRN's small share of the climate-finance goal agreed at COP29. Much climate finance is aid moved from health, education and other development work into cutting emissions, which is worth far less in healthy years. At our best guesses the aid lost outweighs the new aid for adaptation and the emissions cut.
+- Whether the goal's money is new aid decides the sign. If about two thirds of it were new, the result would be positive.
+- The forest CfRN's work helps keep standing adds a little: a small cut in pandemic risk, and carbon, which is worth little in healthy years, as everywhere on the site.
+- Selling forest credits can do harm too. A country that counts a credit against its own target can emit a tonne more. At our best guesses the credit sales are a small net harm.
 
 Every branch takes the site's missing-data discount: no one measures what CfRN's work changes.
 
@@ -20,7 +21,7 @@ In 2024 it spent $4.88 million: $4.05 million on its one reported programme, $0.
 
 ### How the impact happens
 
-1. **The climate-finance goal.** More money for developing countries' climate projects, if donors deliver.
+1. **The climate-finance goal.** More money for developing countries' climate projects, if donors deliver. Money for adaptation works like other aid. Money for cutting emissions buys tonnes. Money moved from other aid loses what that aid would have done.
 2. **Results-based payments.** Donors such as Norway, Germany, the Green Climate Fund and the World Bank pay countries for verified cuts in deforestation. A country can only claim them once it can measure and report its forest; CfRN helps it do that. Money paid for results gives a country a reason to keep its forest standing.
 3. **Carbon markets.** Under Article 6 a rainforest country can sell its results as credits. The money works like donors' payments. But a buyer that counts the credit against its own target can cut a tonne less at home: if the credit isn't a real extra tonne kept, the world emits more.
 
@@ -28,7 +29,15 @@ In 2024 it spent $4.88 million: $4.05 million on its one reported programme, $0.
 
 The [model](/coalition-for-rainforest-nations/coalition-for-rainforest-nations-charityevals) follows the site's conservation template, with three branches set against the same cost: all $4.05 million of programme spending plus overhead, $4.88 million in all. We judge that 45% of the work goes to measuring results, a tenth to the finance talks and the rest to carbon markets.
 
-**The finance goal.** The goal raises the target from $100 billion to $300 billion a year. We judge that 15% of that rise is the goal's own doing, that 40% of the money is worth as much as a grant (the goal counts loans and private money at face value), and that half of it will be delivered. Each grant-equivalent dollar is valued at the site's shared figure for aid. The win is counted like every won policy on the site: the advocates' shared part of a won climate policy (30%), the site's years a win counts, discounted to when the money flows, and one of the three years of talks per year of work. CfRN's share of all advocates' and negotiators' resources on the goal is our judgment: 0.05%, from 0.01% to 0.3%.
+**The finance goal.** The goal raises the target from $100 billion to $300 billion a year by 2035. We take:
+
+- half of that rise as not coming anyway: a new goal was required from a $100 billion floor, and the presidency's draft of 22 November 2024 already offered $250 billion;
+- 15% of the rise in finance as the goal's own doing (the $100 billion goal was met two years late);
+- 40% of the money as worth a grant (the goal counts loans and private money at face value), and half of it as delivered;
+- 35% for adaptation, valued as aid; the rest for cutting emissions, at $40 a tonne, with the smoke the fuel would have made;
+- 40% as new aid, and the rest as moved from other aid, which loses the value of that aid (CARE found 7% to 48% of climate finance new, by its strict and weak tests).
+
+The win is counted like every won policy on the site: the advocates' shared part of a won climate policy (30%), the site's years a win counts, discounted to 2035, and one of the three years of talks per year of work. CfRN's share of the credit is its spending on the talks over all advocates' and support groups' spending on them: about half a percent, at our judgment of $80 million a year in all.
 
 **What payments buy.** The one evaluation of a national programme like this is Norway's offer of $250 million to Guyana for 2010-2015. Roopsind et al. (2019) found it cut tree-cover loss by 35%, at $19.53 a tonne of CO₂, about $27 in 2024 prices. We then take:
 
@@ -36,27 +45,29 @@ The [model](/coalition-for-rainforest-nations/coalition-for-rainforest-nations-c
 - 20% of the clearing avoided as moved elsewhere;
 - half of Guyana's effect for other countries' payments, many of which reward results years after the fact.
 
-**Results-based payments.** Donors committed about $460 million a year (Forest Declaration Assessment 2022). Readiness grants and the forest countries' own budgets add about $2.60 for each dollar paid. CfRN's share of all those resources is about 0.15%.
+**Results-based payments.** Donors committed about $460 million a year (Forest Declaration Assessment 2022). Readiness grants and the forest countries' own budgets add about $2.60 for each dollar paid. CfRN's share of all those resources is about a tenth of a percent.
 
-**Carbon markets.** CfRN's share of the resources behind the forest-credit market is set the same way, about 0.3% at a market of $200 million a year; the market's size cancels out. Credits sell at about $20. We judge that half go to countries, half of whose credits replace their own cuts at home, with the smoke those cuts would have removed. Other buyers (airlines, taxed companies, voluntary buyers) would otherwise have bought another credit or paid a tax; we count only the real cuts in the credits they would have bought, 16% (Probst et al. 2024).
+**Carbon markets.** CfRN's share of the resources behind the forest-credit market is set the same way, about a quarter of a percent; the market's size cancels out. Credits sell at about $15. We judge that half go to countries, half of whose credits replace their own cuts at home, with the smoke those cuts would have removed. Other buyers (airlines, taxed companies, voluntary buyers) would otherwise have bought another credit or paid a tax; we count only the real cuts in the credits they would have bought, 12%.
 
 **Pandemic risk.** The forest kept cuts the risk by the same shared figures as the site's other forest models.
 
-**The next dollar.** The result is a past average, so the next dollar is valued at 64% of it: CfRN has run deficits for two years and holds about two months of liquid reserves, and more money takes the same work to more countries.
+**The next dollar.** The result is a past average, so the next dollar is valued at 64% of it: CfRN has run deficits for two years and holds about two months of liquid reserves.
 
 ### What drives the result
 
 The biggest swings are:
 
-- CfRN's share of the credit for the finance goal;
+- the share of the goal's money that is new aid;
+- how much of the rise in finance the goal itself causes;
 - the years a won policy counts;
-- how much of the rise in finance the goal itself causes, and how much is delivered;
-- the advocates' share of a won climate policy and the value of a dollar of aid.
+- everyone else's spending on the finance talks, which sets CfRN's share;
+- the share of CfRN's work on the finance talks.
 
 ### Biggest uncertainties
 
-- **CfRN's part in the finance goal.** It negotiated alongside the blocs of the 134 countries of the G77 and China and many campaign groups. No one has measured what any one of them added.
-- **Whether payments for past results change behaviour.** Guyana's contract rewarded each year's restraint; most payments CfRN's countries claim reward results years old, against reference levels that may be set high.
+- **Whether climate finance is new money.** If donors add it to their aid, the goal does good; if they move it from other aid, it mostly does harm.
+- **CfRN's part in the finance goal.** It negotiated alongside many blocs and campaign groups. No one has measured what any one of them added.
+- **Whether payments for past results change behaviour.** Guyana's contract rewarded each year's restraint; most payments CfRN's countries claim reward results years old.
 - **How credits are used.** If countries would have met their targets anyway, every non-additional credit adds a tonne.
 
 ### What isn't modelled
@@ -68,7 +79,7 @@ These sit in one row for effects not modelled, at zero net (−20% to +20%).
 
 ### How this model was checked
 
-Built on 15 November 2026 from CfRN's 2024 Form 990 and Impact Statement. Round 1 of the independent audit failed. In response we added the climate-finance goal as its own branch, put Guyana's cost per tonne into 2024 prices, split credit buyers by what they would otherwise do, gave the forest countries' spending a range, counted the forestry experts as staff and corrected the reserves figure. Later rounds are listed in audits/coalition-for-rainforest-nations-charityevals/.
+Built on 15 November 2026 from CfRN's 2024 Form 990 and Impact Statement. The first two rounds of the independent audit failed. After round 1 we added the climate-finance goal as its own branch, put Guyana's cost per tonne into 2024 prices and split credit buyers by what they would otherwise do. After round 2 we valued the goal's mitigation money in tonnes, counted the aid it moves from other uses, set CfRN's share from its own spending, and allowed for the goal coming anyway. Later rounds are in audits/coalition-for-rainforest-nations-charityevals/.
 
 ### Sources
 
@@ -76,5 +87,9 @@ Built on 15 November 2026 from CfRN's 2024 Form 990 and Impact Statement. Round 
 - [Coalition for Rainforest Nations, Annual Impact Statement 2024](https://www.rainforestcoalition.org/wp-content/uploads/2026/02/CfRN-2024-Annual-Impact-Statement.pdf.pdf)
 - [Roopsind, Sohngen and Brandt (2019), PNAS](https://pmc.ncbi.nlm.nih.gov/articles/PMC6900633)
 - [Forest Declaration Assessment (February 2022), Reward results by countries and jurisdictions](https://forestdeclaration.org/wp-content/uploads/2022/08/Forest-rewards-Progress-since-2014-low-res.pdf)
+- [CARE Denmark (2023), Seeing Double](https://care.dk/media/ckjh2s3p/seeing-double-2023.pdf)
+- [Clean Energy Wire (2024), on OECD's climate finance figures for 2022](https://www.cleanenergywire.org/news/developed-countries-reach-100-bln-annual-climate-finance-target-two-years-late-oecd)
+- [Green Climate Fund, report to COP29 (UNFCCC)](https://unfccc.int/sites/default/files/resource/cp2024_03a01.pdf)
+- [UN News (22 November 2024), the COP29 draft finance text](https://news.un.org/en/story/2024/11/1157346)
 - [Probst et al. (2024), Nature Communications](https://pmc.ncbi.nlm.nih.gov/articles/PMC11564741/)
 - [Stabroek News (2023), Hess's first payment for Guyana's carbon credits](https://stabroeknews.com/2023/01/11/news/guyana/hess-makes-us75m-first-payment-for-guyana-issued-carbon-credits)
