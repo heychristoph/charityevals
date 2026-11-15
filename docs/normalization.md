@@ -1383,6 +1383,12 @@ relief), Save the Children's advocacy 0.426 → 0.417 (Elrha 0.3× → 0.2×; di
 NRC's programmes 0.2044 → 0.2039 (NORCAP 0.25× → 0.2×), CARE's and World Vision's US aid unchanged at 1×
 (range 0.3-2.5 → 0.4-2). Each changed model had a verification round.
 
+### 2.21 Net harm shows as a negative result (15 Nov 2026)
+
+Owner: "negative is allowed". A model whose honest result is net harm keeps a headline below zero; the lint
+no longer rejects it. It ranks last, sits at the left edge of the log-scale bars with its number signed,
+and its simulation is stored in the result's order (5% the most harmful). First: Drug Policy Alliance.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them

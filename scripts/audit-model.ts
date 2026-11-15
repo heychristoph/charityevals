@@ -96,7 +96,8 @@ const vals = compute(lib, m, av);
 // the site's uncertainty breakdown adds up), so a 90% interval if each range is one. The joint
 // low–high sets every input at its end at once, the extreme case, and spans orders of magnitude.
 const sd = Math.sqrt(uncertainty(lib, m, vals, av, "charityevals").total);
-const combined = { low: years * Math.exp(-sd), high: years * Math.exp(sd) };
+// Ordered, so a net harm (a negative result) reads from its most harmful end.
+const combined = { low: Math.min(years * Math.exp(-sd), years * Math.exp(sd)), high: Math.max(years * Math.exp(-sd), years * Math.exp(sd)) };
 
 // Reference class: other ranked, hand-built charity models in the same output unit.
 const peers = [...lib.models.values()]
@@ -104,7 +105,7 @@ const peers = [...lib.models.values()]
   .map((x) => ({ id: x.id, owner: x.owner, native: bottomLine(lib, x, av).native, years: headline(lib, x, av) }))
   .filter((p) => Number.isFinite(p.native) && p.native > 0)
   .sort((a, b) => a.native - b.native);
-if (peers.length >= 3 && Number.isFinite(line.native)) {
+if (peers.length >= 3 && Number.isFinite(line.native) && line.native > 0) {
   const lo = peers[0].native, hi = peers[peers.length - 1].native;
   if (line.native > 10 * hi || line.native < lo / 10)
     findings.push({ severity: "medium", code: "outlier", message: `bottom line ${line.native.toPrecision(3)} ${m.output!.unit}/$ is more than 10× outside the range of ${peers.length} peer models (${lo.toPrecision(3)}–${hi.toPrecision(3)})`, fix: "Find the row that makes the difference (compare intermediates with the closest peer) and either correct it or argue for it in the explainer and write-up." });
@@ -122,7 +123,8 @@ if (Number.isFinite(causeMedian) && Number.isFinite(years)) {
   if (years > 10 * causeMedian && !OUTLIER_REASON.test(m.summary ?? ""))
     findings.push({ severity: "high", code: "INV-15", message: `${years.toPrecision(3)} years of healthy life per $1,000 is ${(years / causeMedian).toPrecision(3)}× the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)}) and the summary doesn't say why`, fix: 'Find the row that makes the difference; correct it, or state the reason in the summary ("more than ten times its peers because …").' });
   // Said in the summary already ("far below the median because …"): low, a reminder to keep the sentence.
-  if (years < causeMedian / 10) {
+  // A net harm (at or below zero) is a sign the audit checks row by row, not a gap to a median (2.21).
+  if (years > 0 && years < causeMedian / 10) {
     const said = FAR_BELOW_REASON.test(m.summary ?? "");
     findings.push({ severity: said ? "low" : "medium", code: "far-below", message: `${years.toPrecision(3)} years of healthy life per $1,000 is under a tenth of the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)})${said ? "; the summary says why" : ""}`, fix: said ? "Keep the summary's reason; check it still matches the rows that make the gap." : "Check scope first (the charity's main programme by spending, all programmes by funding weight, the latest year), then reach and persistence (every animal under the commitments won, the shared years and fulfilment rate), and the shared per-change figures; fix what is wrong, or say in the summary why it is low (\"far below the median because …\")." });
   }
@@ -154,9 +156,11 @@ findings.sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity])
 
 // The spread the builder owns (shared assumptions and facts at their best). Said in the summary already
 // ("the result is mostly uncertainty"): low, a reminder to keep the sentence.
-if (sBuilder.jointHigh / sBuilder.jointLow > 1000) {
+// Both ends below zero (a net harm): the ratio of their sizes.
+const builderSpread = sBuilder.jointHigh < 0 ? sBuilder.jointLow / sBuilder.jointHigh : sBuilder.jointHigh / sBuilder.jointLow;
+if (builderSpread > 1000) {
   const said = /\bmostly uncertain(ty)?\b|\buncertain(ty)? (spans|of about|is wide)|\bwide(ly)? uncertain/i.test(m.summary ?? "");
-  findings.push({ severity: said ? "low" : "medium", code: "spread", message: `with shared assumptions and shared facts at their best, the model's own ranges still span ${Math.round(sBuilder.jointHigh / sBuilder.jointLow)}× (joint low to high)${said ? "; the summary says so" : ""}`, fix: said ? "Keep the summary's sentence on the uncertainty; narrow the widest of the model's own ranges where a source allows." : "Check the widest of the model's own ranges are real; narrow ranges you can source, or say in the summary that the result is mostly uncertainty." });
+  findings.push({ severity: said ? "low" : "medium", code: "spread", message: `with shared assumptions and shared facts at their best, the model's own ranges still span ${Math.round(builderSpread)}× (joint low to high)${said ? "; the summary says so" : ""}`, fix: said ? "Keep the summary's sentence on the uncertainty; narrow the widest of the model's own ranges where a source allows." : "Check the widest of the model's own ranges are real; narrow ranges you can source, or say in the summary that the result is mostly uncertainty." });
 }
 
 // Same-family charityevals models: canonical rows side by side.

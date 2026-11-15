@@ -1288,8 +1288,8 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
       const f = ownOnPath[0].factDeps.find((x) => x.startsWith("next_dollar."))!;
       const v = pickValue(lib.facts.get(f)?.value);
       const h0 = headline(lib, m, av), h1 = headline(lib, m, av, { [`@${f}`]: v * 0.5 });
-      if (!(Number.isFinite(h0) && h1 < h0))
-        violations.push({ inv: "INV-18", model: m.id, where: `@${f} moves`, detail: `halving the charity's next-dollar figure doesn't lower our headline (${fmt(h0)} → ${fmt(h1)})` });
+      if (!(Number.isFinite(h0) && Math.abs(h1) < Math.abs(h0)))
+        violations.push({ inv: "INV-18", model: m.id, where: `@${f} moves`, detail: `halving the charity's next-dollar figure doesn't shrink our headline (${fmt(h0)} → ${fmt(h1)})` });
       for (const r of ownOnPath) if (r.published === undefined)
         violations.push({ inv: "INV-18", model: m.id, where: `${r.id} evaluator view`, detail: "reads a next-dollar figure with no `published` value: the evaluator view must keep the evaluator's 1" });
       continue;
@@ -1300,8 +1300,8 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     }
     const half = { ...av, [A]: av[A] * 0.5 };
     const h0 = headline(lib, m, av), h1 = headline(lib, m, half);
-    if (!(Number.isFinite(h0) && h1 < h0))
-      violations.push({ inv: "INV-18", model: m.id, where: `$${A} moves`, detail: `halving $${A} doesn't lower our headline (${fmt(h0)} → ${fmt(h1)})` });
+    if (!(Number.isFinite(h0) && Math.abs(h1) < Math.abs(h0)))
+      violations.push({ inv: "INV-18", model: m.id, where: `$${A} moves`, detail: `halving $${A} doesn't shrink our headline (${fmt(h0)} → ${fmt(h1)})` });
     // The evaluator publishes the average: its view keeps 1. (Destinations read live through `#id` move in
     // both views, so this is checked on the rows, not the headline.)
     for (const r of readers) if (r.published === undefined && m.evaluator?.assumptions[A] === undefined)
