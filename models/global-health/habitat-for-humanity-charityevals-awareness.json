@@ -3,7 +3,22 @@
   "name": "Habitat for Humanity International: public awareness, education and housing advocacy (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":0.02,"HND":0.0116,"DOM":0.0282,"PER":0.0314,"ARM":0.0494,"MKD":0.0245,"ROU":0.0123,"EGY":0.0993,"KEN":0.1268,"UGA":0.063,"MWI":0.1408,"ZMB":0.1528,"PHL":0.0995,"BGD":0.1404},
+  "beneficiaries": {
+    "USA": 0.02,
+    "HND": 0.0116,
+    "DOM": 0.0282,
+    "PER": 0.0314,
+    "ARM": 0.0494,
+    "MKD": 0.0245,
+    "ROU": 0.0123,
+    "EGY": 0.0993,
+    "KEN": 0.1268,
+    "UGA": 0.063,
+    "MWI": 0.1408,
+    "ZMB": 0.1528,
+    "PHL": 0.0995,
+    "BGD": 0.1404
+  },
   "beneficiaries_note": "Our build: the global Home Equals campaign (98% of the result at the defaults), valued country by country over the 13 stand-in countries of the international build, each region a quarter of the people (Home Equals publishes no split, a judgment), so the shares follow each country's net value per person; US housing advocacy 2%.",
   "destination_reads": [
     "givewell:against-malaria-foundation",
@@ -1532,6 +1547,61 @@
       "unit": "Units of value / $",
       "formula": "uov_per_dollar * donor_cost_share * marginal_vs_past_average",
       "explainer": "The year's wins over the year's spending, at the shared share of the average that the next dollar does (estimate_basis past_average)."
+    },
+    {
+      "id": "pae_donated_advertising",
+      "section": "cost",
+      "label": "Donated advertising in the public awareness and education line, FY2025",
+      "format": "usd",
+      "value": 1915000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
+        "url": "https://www.habitat.org/media/36766/download",
+        "retrieved": "2026-11-15",
+        "page": "p. 7, Consolidated statements of functional expenses, Public Awareness and Education column",
+        "quote": "Donated products and advertising distributed 32,286 214 1,915 34,415"
+      },
+      "explainer": "Media space and services given to HFHI: the donors' resources, so they leave the cost and both sides of the overhead ratio (docs/normalization.md, Convention 2), as in the US and international models."
+    },
+    {
+      "id": "he_spillover_ratio",
+      "section": "effect",
+      "side_effect": "added",
+      "label": "Home Equals: spillovers as a share of the households' gain",
+      "format": "percent",
+      "formula": "@habitat_for_humanity.housing_spillover_ratio",
+      "explainer": "Local builders' and sellers' earnings and works that serve neighbours: the shared figure for Habitat's housing work in poorer countries, as in the international model. The money is the country's own, so the payers' forgone spending carries the same spillover with the opposite sign (only new spending creates one): it is applied to both sides in he_net_<country>."
+    },
+    {
+      "id": "he_mortality_ratio",
+      "section": "effect",
+      "label": "Home Equals: child deaths averted as a share of the households' gain (× your value of a life)",
+      "format": "percent",
+      "formula": "@habitat_for_humanity.housing_mortality_uov_ratio * $life_value_multiplier",
+      "explainer": "Drainage, water and sanitation cut children's diarrhoea: the shared figure for Habitat's housing work in poorer countries, as in the international model, times your value of a life."
+    },
+    {
+      "id": "he_gain_multiplier",
+      "section": "effect",
+      "label": "Home Equals: households' gain with spillovers and deaths averted, relative to the consumption gain",
+      "format": "multiple",
+      "formula": "1 + he_spillover_ratio + he_mortality_ratio",
+      "explainer": "The consumption gain plus the shared spillover and mortality shares."
+    },
+    {
+      "id": "he_illness_adj",
+      "side_effect": "added",
+      "section": "adjustments",
+      "label": "Home Equals: illness averted, as a share of the households' gross value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "Illness averted by the water, sanitation and drainage works in Home Equals countries (children's diarrhoea and parasites), as the international model counts for its floors and latrines (Cattaneo et al. 2009 measured it for cement floors in Mexico): 0.05, range 0 to 0.2. Deaths averted are in he_mortality_ratio. Home Equals only."
     }
   ]
 }

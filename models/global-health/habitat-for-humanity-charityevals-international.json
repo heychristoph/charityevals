@@ -3,19 +3,33 @@
   "name": "Habitat for Humanity International: international programme (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"HND":0.0347,"DOM":0.0347,"PER":0.0346,"ARM":0.0288,"MKD":0.0288,"ROU":0.0287,"EGY":0.0287,"KEN":0.129,"UGA":0.129,"MWI":0.129,"ZMB":0.129,"PHL":0.1325,"BGD":0.1325},
-  "beneficiaries_note": "Our build: Habitat's work in more than 60 countries, by region at the shares of the result at the defaults (Africa 52%, Asia and the Pacific 26%, Europe and the Middle East 12%, Latin America and the Caribbean 10%), each region's share spread equally over the stand-in countries whose survey consumption the build reads (a judgment).",
+  "beneficiaries": {
+    "HND": 0.0422,
+    "DOM": 0.0422,
+    "PER": 0.0422,
+    "ARM": 0.0393,
+    "MKD": 0.0393,
+    "ROU": 0.0393,
+    "EGY": 0.0393,
+    "KEN": 0.1243,
+    "UGA": 0.1243,
+    "MWI": 0.1243,
+    "ZMB": 0.1243,
+    "PHL": 0.1095,
+    "BGD": 0.1095
+  },
+  "beneficiaries_note": "Our build: Habitat's work in more than 60 countries, by region at the shares of the result at the defaults (Africa 50%, Asia and the Pacific 22%, Europe and the Middle East 16%, Latin America and the Caribbean 13%), each region's share spread equally over the stand-in countries whose survey consumption the build reads (a judgment).",
   "template": "cash-income",
-  "estimate_basis": "unit_cost",
+  "estimate_basis": "past_average",
   "charity": "habitat-for-humanity",
   "owner": "charityevals",
-  "summary": "Habitat for Humanity International (HFHI) spent $75.5 million in the year to June 2025 ($74 million without the Home Equals advocacy booked in the same line, counted in the awareness model) helping families outside the US build, extend and repair homes with Habitat national organisations in more than 60 countries (mostly incremental building and repairs, about 470,000 people across the network), and working with lenders and building-material firms so that low-income households can buy housing loans and products (2.4 million people in Habitat's count). Valued as the net housing subsidy families receive on the site's log-income scale, at the household-survey consumption of Habitat's families in each region, plus a small surplus for borrowers and buyers of products, it does about 0.07 years of healthy life per $1,000. Only about 17 cents of each dollar reaches families as housing (HFHI's transfers to partners are 31% of the programme's cost with overhead, and the national organisations it funds spend part on their own staff), close to 60% of the families are in middle-income Latin America, Europe and the Middle East, housing is an in-kind transfer, and both branches (direct housing and market development) are discounted for missing data: HFHI publishes no count of the families its own money reached, no subsidy per family and no split of its spending by type of work. Those are the biggest uncertainties, with the families' consumption.",
+  "summary": "Habitat for Humanity International (HFHI) spent $75.5 million in the year to June 2025 helping families outside the US build, extend and repair homes with Habitat national organisations in more than 60 countries (about 470,000 people across the network, mostly incremental building and repairs), and working with lenders and building-material firms so that low-income households can buy housing loans and products (2.4 million people in Habitat's count). We value the net housing subsidy families receive on the site's log-income scale, at the household-survey consumption of Habitat's families in each region, plus a small surplus for the partners' customers, and credit HFHI with its share of all the resources behind the network's housing (about a fifth: the national organisations raise most of the money). Close to 60% of the families are in middle-income Latin America, Europe and the Middle East, housing is an in-kind transfer, and both branches are discounted for missing data: HFHI publishes no subsidy per family and no split of its spending by type of work. Those are the biggest uncertainties, with the families' consumption. The market branch is a past average, so it reads Habitat's next-dollar figure.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Habitat for Humanity International, international programme (FY2025)",
     "url": "https://charityevals.org/habitat-for-humanity-charityevals-international",
-    "published": "2026-11-04",
-    "retrieved": "2026-11-04"
+    "published": "2026-11-15",
+    "retrieved": "2026-11-15"
   },
   "resources": [
     {
@@ -90,60 +104,60 @@
       "explainer": "Habitat for Humanity International's (HFHI) programme spending outside the US and Canada in the year to 30 June 2025: grants and house-building transfers to Habitat national organisations and partners ($31.4 million), its area and country offices' staff ($28.1 million), professional services ($5.9 million) and the rest. It pays for homes, incremental improvements, repairs and disaster shelter that families build with Habitat (the direct branch), and for the Terwilliger Center's and national offices' work with banks, microfinance institutions and building-material firms (the market branch). Public awareness and education, with HFHI's housing advocacy, is modelled separately (habitat-for-humanity-charityevals-awareness)."
     },
     {
+      "id": "intl_donated_products",
+      "section": "cost",
+      "label": "Donated products HFHI passed to international partners, FY2025",
+      "format": "usd",
+      "value": 214000,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
+        "url": "https://www.habitat.org/media/36766/download",
+        "retrieved": "2026-11-15",
+        "page": "p. 7, Consolidated statements of functional expenses, International Affiliates column",
+        "quote": "Donated products and advertising distributed 32,286 214 1,915 34,415"
+      },
+      "explainer": "Products companies gave HFHI to pass on: the donors' resources, so they leave the cost and both sides of the overhead ratio (docs/normalization.md, Convention 2)."
+    },
+    {
       "id": "program_spend",
       "section": "cost",
-      "label": "Spending on Habitat's international programme, FY2025 (year to 30 June 2025), less the advocacy booked in it",
+      "label": "Spending in cash on Habitat's international programme, FY2025 (year to 30 June 2025), less the advocacy booked in it",
       "format": "usd",
-      "formula": "intl_line - @habitat_for_humanity.he_advocacy_cost_fy2025",
-      "explainer": "The audited line less the Home Equals campaign's cost booked in it (@habitat_for_humanity.he_advocacy_cost_fy2025, a judgment shared with the awareness model, which counts it in its own cost), so each model counts that cost once."
+      "formula": "intl_line - @habitat_for_humanity.he_advocacy_cost_fy2025 - intl_donated_products",
+      "explainer": "The audited line less the Home Equals campaign's cost booked in it (@habitat_for_humanity.he_advocacy_cost_fy2025, a judgment shared with the awareness model, which counts it in its own cost), so each model counts that cost once, and less the donated products passed on (intl_donated_products)."
     },
     {
       "id": "intl_transfers",
       "section": "cost",
-      "label": "HFHI's programme and house-building transfers, plus donated products, to international partners, FY2025",
+      "label": "HFHI's cash transfers to international partners, FY2025",
       "format": "usd",
-      "value": 31649000,
+      "value": 31435000,
       "kind": "observed",
       "source": {
         "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
         "url": "https://www.habitat.org/media/36766/download",
-        "retrieved": "2026-11-03",
+        "retrieved": "2026-11-15",
         "page": "p. 7, Consolidated statements of functional expenses, International Affiliates column",
-        "quote": "Program and house building transfers ... 31,435 ... Donated products and advertising distributed ... 214"
+        "quote": "Program and house building transfers ... 31,435"
       },
-      "explainer": "$31.4 million of cash transfers (including 'payments to other vendors made on behalf of affiliates', note 2) and $0.2 million of donated products: the only international expense lines that can carry housing to families. For the eleven consolidated national organisations they are their own direct spending (consolidated_transfer_share). The area and country offices' and consolidated national organisations' staff ($28.1 million), professional services and travel are delivery costs."
+      "explainer": "$31.4 million of cash transfers (including 'payments to other vendors made on behalf of affiliates', note 2): the only international expense line that can carry housing to families. For the eleven consolidated national organisations they are their own direct spending (consolidated_transfer_share). The area and country offices' and consolidated national organisations' staff ($28.1 million), professional services and travel are delivery costs."
     },
     {
       "id": "total_expenses",
       "section": "cost",
-      "label": "Total expenses (all programs, management, fundraising), FY2025",
+      "label": "Total expenses in cash (all programmes, management, fundraising), FY2025",
       "format": "usd",
-      "value": 377478000,
-      "kind": "observed",
-      "source": {
-        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
-        "url": "https://www.habitat.org/media/36766/download",
-        "retrieved": "2026-11-03",
-        "page": "p. 6, Consolidated statements of activities",
-        "quote": "Total expenses 377,478"
-      },
-      "explainer": "HFHI's total expenses in the year to 30 June 2025, from the same audited statement."
+      "explainer": "HFHI's total expenses in the year to 30 June 2025 less the donated products and advertising it passed on (a shared figure read by all three Habitat models).",
+      "formula": "@habitat_for_humanity.cash_total_expenses_fy2025"
     },
     {
       "id": "program_expenses",
       "section": "cost",
-      "label": "Program expenses (all programs), FY2025",
+      "label": "Programme expenses in cash, FY2025",
       "format": "usd",
-      "value": 284497000,
-      "kind": "observed",
-      "source": {
-        "title": "Habitat for Humanity International, consolidated financial statements, years ended June 30, 2025 and 2024 (audited)",
-        "url": "https://www.habitat.org/media/36766/download",
-        "retrieved": "2026-11-03",
-        "page": "p. 6, Consolidated statements of activities",
-        "quote": "Total program services 284,497"
-      },
-      "explainer": "HFHI's programme-service expenses in the same year."
+      "explainer": "HFHI's programme-service expenses in the same year less the donated products and advertising (a shared figure).",
+      "formula": "@habitat_for_humanity.cash_program_expenses_fy2025"
     },
     {
       "id": "overhead_ratio",
@@ -151,7 +165,7 @@
       "label": "Overhead multiplier (total ÷ program expenses)",
       "format": "multiple",
       "formula": "total_expenses / program_expenses",
-      "explainer": "Spreads HFHI's fundraising and management over its programmes in proportion to their cost, as GiveWell and ACE do."
+      "explainer": "Spreads HFHI's fundraising and management over its programmes in proportion to their cash cost, as GiveWell and ACE do; donated goods are on neither side."
     },
     {
       "id": "cost_total",
@@ -171,7 +185,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "HFHI's transfers to national organisations and partners pay mostly for homes, incremental building, repairs and disaster shelter; some fund national offices' market and housing-finance work. HFHI publishes no split. 0.8, range 0.6 to 0.95. The market branch is paid for mostly by HFHI's own staff (the Terwilliger Center), so it isn't tied to this row."
+      "explainer": "HFHI's transfers to national organisations and partners pay mostly for homes, incremental building, repairs and disaster shelter; some fund national offices' market and housing-finance work, and some are Home Equals campaign grants to national organisations (part of @habitat_for_humanity.he_advocacy_cost_fy2025, counted in the awareness model). HFHI publishes no split. 0.8, range 0.6 to 0.95. The market branch is paid for mostly by HFHI's own staff (the Terwilliger Center), so it isn't tied to this row."
     },
     {
       "id": "nso_delivery_share",
@@ -184,7 +198,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "One question, for the national organisations HFHI funds but doesn't consolidate: the share of a national organisation's spending of HFHI money that goes to materials, skilled labour and families' subsidy rather than its own staff and offices (families' repayments are netted only in the subsidy per family). Habitat for Humanity Poland's audited 2024 accounts are the one national organisation's we could read: of PLN 31.3 million of costs, PLN 24.7 million (79%) were its statutory programme work, the rest administration (PLN 3.4 million), its trading arm (PLN 1.8 million), financing (PLN 0.8 million) and other operating costs (PLN 0.6 million); the programme figure still includes its own programme staff (70 employees) and, in 2024, refugee shelter and a social rental agency more than construction. So 79% is the ceiling of what can reach families; with programme staff and supervision taken out, 0.6, range 0.4 to 0.8. Cross-checks: HFHI's own US programme passes 65% of its spending to affiliates as cash and products (audited statement p. 7); a single-purpose cash charity reaches 84% (GiveDirectly).",
+      "explainer": "One question, for the national organisations HFHI funds but doesn't consolidate: the share of a national organisation's spending (HFHI's money and its own) that goes to materials, skilled labour and families' subsidy rather than its own staff and offices (families' repayments are netted only in the subsidy per family). Habitat for Humanity Poland's audited 2024 accounts are the one national organisation's we could read: of PLN 31.3 million of costs, PLN 24.7 million (79%) were its statutory programme work, the rest administration (PLN 3.4 million), its trading arm (PLN 1.8 million), financing (PLN 0.8 million) and other operating costs (PLN 0.6 million); the programme figure still includes its own programme staff (70 employees) and, in 2024, refugee shelter and a social rental agency more than construction. So 79% is the ceiling of what can reach families; with programme staff and supervision taken out, 0.6, range 0.4 to 0.8. Cross-checks: HFHI's own US programme passes 65% of its spending to affiliates as cash and products (audited statement p. 7).",
       "source": {
         "title": "Fundacja Habitat for Humanity Poland, sprawozdanie finansowe (financial statements) 2024",
         "url": "https://habitat.pl/files/Sprawozdanie-finansowe-Habitat-for-Humanity-Poland-2024.pdf",
@@ -221,12 +235,12 @@
       "explainer": "Their staff are outside this line, so nearly all of it is materials, contractors and families' subsidy; some is rent, vehicles and other costs booked as payments to vendors. 0.9, range 0.8 to 1."
     },
     {
-      "id": "transfers_share_of_cost",
+      "id": "transfer_delivery_share",
       "section": "reach",
-      "label": "Housing value reaching families as a share of the programme's total cost",
+      "label": "Share of HFHI's transfers that reaches families as housing",
       "format": "percent",
-      "formula": "intl_transfers / cost_total * dir_transfers_share * (consolidated_transfer_share * consolidated_delivery_share + (1 - consolidated_transfer_share) * nso_delivery_share)",
-      "explainer": "HFHI's transfers to partners over the programme's cost with overhead, times the share of them for direct housing and the share reaching families: nearly all of what the consolidated national organisations spend (their staff are in HFHI's salaries line), the delivery share of what the independent ones spend. About 17 cents per dollar."
+      "formula": "dir_transfers_share * (consolidated_transfer_share * consolidated_delivery_share + (1 - consolidated_transfer_share) * nso_delivery_share)",
+      "explainer": "The share of the transfers for direct housing, times the share reaching families: nearly all of what the consolidated national organisations spend (their staff are in HFHI's salaries line), the delivery share of what the independent ones spend. About 55%."
     },
     {
       "id": "transfer_per_household",
@@ -239,15 +253,15 @@
         "high": 3500
       },
       "kind": "judgment",
-      "explainer": "No average is published. The direct branch is mostly incremental building (265,445 people) and repairs (177,520), with few new or rehabilitated homes (29,935): Habitat's FY2025 individuals-served table. A floor, a latrine, a roof or a room typically costs a few hundred to $2,000 in materials and skilled labour (cement floors and improved stoves in Habitat's Global Village work; a $1,000 to $2,000 incremental loan), a new core house $5,000 to $15,000, disaster shelter kits much less. Weighted by people: 0.06 × $10,000 + 0.56 × $1,500 + 0.38 × $1,000 = about $1,800 at full cost; families contribute labour and repay some loans, so $1,500 net, range $700 to $3,500."
+      "explainer": "No average is published; it applies to the network's families as to those HFHI's transfers pay for. The direct branch is mostly incremental building (265,445 people) and repairs (177,520), with few new or rehabilitated homes (29,935): Habitat's FY2025 individuals-served table. A floor, a latrine, a roof or a room typically costs a few hundred to $2,000 in materials and skilled labour (cement floors and improved stoves in Habitat's Global Village work; a $1,000 to $2,000 incremental loan), a new core house $5,000 to $15,000, disaster shelter kits much less. Weighted by people: 0.06 × $10,000 + 0.56 × $1,500 + 0.38 × $1,000 = about $1,800 at full cost; families contribute labour and repay some loans, so $1,500 net, range $700 to $3,500."
     },
     {
       "id": "households",
       "section": "reach",
       "label": "Families HFHI's direct-housing spending reached",
       "format": "integer",
-      "formula": "cost_total * transfers_share_of_cost / transfer_per_household",
-      "explainer": "HFHI's own dollars only: national organisations and other donors fund the rest of the network's international work, so this is far fewer families than Habitat's own count for the network: 472,900 people (about 130,000 households) in new and rehab construction, incremental construction and repairs across Latin America and the Caribbean, Europe and the Middle East, Africa and Asia-Pacific (FY2025 annual report, individuals served)."
+      "formula": "dir_people_counted * (lac_share / hh_lac + eme_share / hh_eme + afr_share / hh_afr + (1 - lac_share - eme_share - afr_share) / hh_ap)",
+      "explainer": "Habitat's count of people in direct housing, turned into households region by region at each region's household size: about 125,000."
     },
     {
       "id": "lac_share",
@@ -264,6 +278,23 @@
         "quote": "Incremental construction 57,720 ... New and rehab construction 18,575 ... Repairs 53,920"
       },
       "explainer": "(57,720 + 18,575 + 53,920) / 472,900 people in direct housing outside the US and Canada."
+    },
+    {
+      "id": "dir_people_counted",
+      "section": "reach",
+      "label": "People Habitat counts in direct housing outside the US and Canada, FY2025",
+      "format": "integer",
+      "value": 472900,
+      "kind": "observed",
+      "source": {
+        "title": "Habitat for Humanity, FY2025 annual report: Individuals served",
+        "url": "https://www.habitat.org/multimedia/annual-report-2025/",
+        "retrieved": "2026-11-15",
+        "page": "Impact: Individuals served, the four regions outside the United States and Canada",
+        "quote": "Incremental construction 57,720 ... New and rehab construction 18,575 ... Repairs 53,920",
+        "note": "Incremental construction, new and rehab construction and repairs, by region: Latin America and the Caribbean 57,720 / 18,575 / 53,920; Europe and Middle East 47,185 / 540 / 95,980; Africa 97,520 / 2,155 / 460; Asia and the Pacific 63,020 / 8,665 / 27,160; total 472,900."
+      },
+      "explainer": "The whole network's direct housing work outside the US and Canada: the national organisations' and HFHI's together. HFHI is credited with its share of the resources behind it (dir_attribution_share), as the US model credits it with its share of the affiliates' homes."
     },
     {
       "id": "eme_share",
@@ -419,7 +450,7 @@
       "section": "effect",
       "label": "ln(consumption) gain per person, direct branch, Latin America and the Caribbean",
       "format": "number",
-      "formula": "ln(1 + dir_value_per_person_year / cons_fam_lac) * pv_annuity_due(1, $discount_rate, dir_years)"
+      "formula": "ln(1 + transfer_per_household / pv_annuity_due(1, $discount_rate, dir_years) / hh_lac / cons_fam_lac) * pv_annuity_due(1, $discount_rate, dir_years)"
     },
     {
       "id": "cons_arm",
@@ -487,7 +518,7 @@
       "section": "effect",
       "label": "ln(consumption) gain per person, direct branch, Europe and Central Asia",
       "format": "number",
-      "formula": "ln(1 + dir_value_per_person_year / cons_fam_eme) * pv_annuity_due(1, $discount_rate, dir_years)"
+      "formula": "ln(1 + transfer_per_household / pv_annuity_due(1, $discount_rate, dir_years) / hh_eme / cons_fam_eme) * pv_annuity_due(1, $discount_rate, dir_years)"
     },
     {
       "id": "cons_ken",
@@ -555,7 +586,7 @@
       "section": "effect",
       "label": "ln(consumption) gain per person, direct branch, Sub-Saharan Africa",
       "format": "number",
-      "formula": "ln(1 + dir_value_per_person_year / cons_fam_afr) * pv_annuity_due(1, $discount_rate, dir_years)"
+      "formula": "ln(1 + transfer_per_household / pv_annuity_due(1, $discount_rate, dir_years) / hh_afr / cons_fam_afr) * pv_annuity_due(1, $discount_rate, dir_years)"
     },
     {
       "id": "cons_phl",
@@ -607,7 +638,7 @@
       "section": "effect",
       "label": "ln(consumption) gain per person, direct branch, South Asia",
       "format": "number",
-      "formula": "ln(1 + dir_value_per_person_year / cons_fam_ap) * pv_annuity_due(1, $discount_rate, dir_years)"
+      "formula": "ln(1 + transfer_per_household / pv_annuity_due(1, $discount_rate, dir_years) / hh_ap / cons_fam_ap) * pv_annuity_due(1, $discount_rate, dir_years)"
     },
     {
       "id": "mkt_household_size",
@@ -675,19 +706,16 @@
       "section": "reach",
       "label": "People in the families HFHI's direct-housing spending reached",
       "format": "integer",
-      "formula": "households * household_size"
+      "formula": "dir_people_counted",
+      "explainer": "Habitat's count (dir_people_counted)."
     },
     {
       "id": "mkt_people_reported",
       "section": "reach",
       "label": "People Habitat counts in market development outside the US, FY2025",
       "format": "integer",
-      "value": {
-        "low": 1050000,
-        "best": 2444230,
-        "high": 2444230
-      },
-      "kind": "estimate",
+      "value": 2444230,
+      "kind": "observed",
       "source": {
         "title": "Habitat for Humanity, FY2025 annual report: Individuals served",
         "url": "https://www.habitat.org/multimedia/annual-report-2025/",
@@ -695,7 +723,7 @@
         "page": "Impact: Individuals served, the four regions outside the United States and Canada",
         "quote": "Market development 304,150 (Latin America and the Caribbean); 485,515 (Europe and Middle East); 508,100 (Africa); 1,146,465 (Asia and the Pacific)"
       },
-      "explainer": "Market development across the four regions (2,444,230): people in households that bought housing loans, building materials or services from lenders and firms Habitat works with, Habitat's own count from partners' reports with no stated method. The low end is the Form 990's 'nearly 300,000 households' for the Terwilliger Center's partners alone (× 3.5 people), in case the regional count includes others' customers or double counts; MicroBuild Fund 1 was winding down (one open investment by year end) and adds little in FY2025. Professional services (49,985: land, titling and construction advice) buy nothing, so they are left out here and counted with tenure security in unmodelled_benefits_adj; civil-society facilitation (12,990) is the local organising behind Home Equals, valued in the awareness model."
+      "explainer": "Market development across the four regions (2,444,230): people in households that bought housing loans, building materials or services from lenders and firms Habitat works with, Habitat's own count from partners' reports with no stated method (its reliability is in mkt_evidence_adj). MicroBuild Fund 1 was winding down (one open investment by year end) and adds little in FY2025. Professional services (49,985: land, titling and construction advice) buy nothing, so they are left out here and counted with tenure security in unmodelled_benefits_adj; civil-society facilitation (12,990) is the local organising behind Home Equals, valued in the awareness model."
     },
     {
       "id": "mkt_households",
@@ -739,8 +767,8 @@
       "section": "effect",
       "label": "Value of the direct subsidy per person per year (US$)",
       "format": "usd",
-      "formula": "transfer_per_household / pv_annuity_due(1, $discount_rate, dir_years) / household_size",
-      "explainer": "The subsidy as an even yearly flow of better housing over the years it lasts (its present value equals the subsidy at the shared rate), per person."
+      "formula": "transfer_per_household / pv_annuity_due(1, $discount_rate, dir_years) * households / dir_people",
+      "explainer": "The subsidy as an even yearly flow of better housing over the years it lasts (its present value equals the subsidy at the shared rate), per person, averaged over the regions (each region's own household size is used in its gain)."
     },
     {
       "id": "dir_ln_gain_per_person",
@@ -782,7 +810,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Habitat's market count mixes housing-microfinance borrowers (MicroBuild's investees and the national offices' partner lenders: $230 million lent to 236,000 households over MicroBuild Fund 1's life, FY2025 annual report) with buyers of building materials, construction services and technical advice from the Terwilliger Center's firms ('nearly 300,000 households' received 'products or services' from its partners, Form 990). No split is published; borrowers are the smaller part of the yearly count: 0.4, range 0.2 to 0.7."
+      "explainer": "Habitat's market count mixes housing-microfinance borrowers (MicroBuild's investees and the national offices' partner lenders: $230 million lent to 236,000 households over MicroBuild Fund 1's life, FY2025 annual report) with buyers of building materials, construction services and technical advice from the Terwilliger Center's firms. No split is published; borrowers are the smaller part of the yearly count: 0.4, range 0.2 to 0.7."
     },
     {
       "id": "mkt_value_per_borrower",
@@ -839,26 +867,16 @@
       "section": "effect",
       "label": "Spillover benefits to non-recipients, as a share of recipients' benefits",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "Local builders, masons and material sellers earn from the work, as neighbours gain from cash transfers' spending (GiveWell's adjusted Egger et al. 2022 spillover is about 0.7 for cash in Kenya). Housing money buys more imported or factory goods (cement, roofing sheets) than cash does, and the evidence for construction is weaker, so 0.1, range 0 to 0.4. Applied to the direct branch only: market purchases are trades, not new spending."
+      "explainer": "The shared figure for Habitat's housing work in poorer countries (facts/habitat_for_humanity.json), read by the awareness model's Home Equals branch too. Applied to the direct branch only: market purchases are trades, not new spending.",
+      "formula": "@habitat_for_humanity.housing_spillover_ratio"
     },
     {
       "id": "mortality_uov_ratio",
       "section": "effect",
       "label": "Deaths averted as a share of consumption benefits",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.03,
-        "high": 0.1
-      },
-      "kind": "judgment",
-      "explainer": "Deaths only: cement floors, latrines and improved stoves cut children's diarrhoea and respiratory illness (Piso Firme, Cattaneo et al. 2009, measured illness, not deaths), so some child deaths are averted where that is the work. GiveWell's mortality effect for cash is about 0.2 of consumption value; Habitat's floors, latrines and stoves are a small part of its direct work, so 0.03, range 0 to 0.1; × your value of a life. Illness itself is in unmodelled_benefits_adj. Direct branch only."
+      "explainer": "The shared figure for child deaths averted by Habitat's housing work in poorer countries (facts/habitat_for_humanity.json), × your value of a life. Direct branch only.",
+      "formula": "@habitat_for_humanity.housing_mortality_uov_ratio"
     },
     {
       "id": "evidence_adj",
@@ -887,7 +905,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "One question: how reliable Habitat's count of partners' customers is (partners' own reports, aggregated by Habitat with no stated method; some customers counted by more than one partner or programme). 0.8, range 0.5 to 1. The surplus is already money-metric, so no in-kind discount."
+      "explainer": "One question: how reliable Habitat's count of partners' customers is (partners' own reports, aggregated by Habitat with no stated method; some customers counted by more than one partner or programme, or customers of products Habitat had no part in). 0.8, range 0.5 (half of the count double or wrongly counted) to 1. The surplus is already money-metric, so no in-kind discount."
     },
     {
       "id": "dir_counterfactual_adj",
@@ -900,7 +918,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Poor families improve their homes themselves, slowly, room by room (Habitat's own description of incremental building); some of what Habitat helps with would have been built a few years later, and some disaster shelter would have come from other agencies. 0.75, range 0.5 to 0.9."
+      "explainer": "The share of the housing help that families wouldn't have got anyway from someone else: governments, other NGOs and, for disaster shelter, relief agencies. (A family that would have built the same room later with its own money still gains the money: that is a transfer, valued in dir_inkind_value, not a counterfactual loss.) Anchored on the US model's 0.8 (hr_counterfactual_adj: three in four eligible US renter households get no federal rental assistance, CBPP); in Habitat's countries public housing help reaches even fewer poor families, but Habitat's work is often co-funded with governments or in programmes others would run (disaster recovery, slum upgrading), so a little lower: 0.75, range 0.5 to 0.9."
     },
     {
       "id": "mkt_counterfactual_adj",
@@ -908,12 +926,12 @@
       "label": "Market branch: share of the partners' housing sales that exist because of Habitat",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.15,
+        "best": 0.4,
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Of the partners' housing sales Habitat counts, the share that wouldn't have happened without its advice and seed capital. Habitat's partners are commercial lenders and firms whose housing business mostly predates or outgrows Habitat; the six randomised trials of new microcredit access (Banerjee, Karlan and Zinman 2015, American Economic Journal: Applied) found that opening a lender raised borrowing only modestly, much of it replacing other credit. Habitat helped open housing lines (MicroBuild's investees later 'mobilized a cumulative US$1.26 billion'), but that is leverage, not a counterfactual. 0.3, range 0.1 to 0.6."
+      "explainer": "Of the partners' housing sales Habitat counts, the share that wouldn't have happened without its advice and seed capital: whether the partner's housing product exists because of Habitat. (Whether a borrower gains over the next-best credit is already netted in the surplus per borrower.) Reference class: MicroBuild's 62 institutions, of which Habitat reports that 'most of the fund's investees have now embraced housing', and the Terwilliger Center's firms, many of them lenders and suppliers with housing business before Habitat came. 0.4, range 0.15 to 0.7."
     },
     {
       "id": "counterfactual_adj",
@@ -924,9 +942,80 @@
       "explainer": "The outcome-weighted average of the two branch adjustments, for reading only; each branch applies its own."
     },
     {
-      "id": "dir_attribution_share",
+      "id": "nso_own_spend",
       "section": "adjustments",
-      "label": "Direct branch: HFHI's share of the resources behind the subsidy counted",
+      "label": "National organisations' own spending on direct housing beyond HFHI's transfers (US$)",
+      "format": "usd",
+      "formula": "(households * transfer_per_household - intl_transfers * transfer_delivery_share) / nso_delivery_share",
+      "explainer": "What the network's direct housing delivered to families (households × net subsidy) less what HFHI's transfers delivered, grossed up by the national organisations' delivery share: their own money (local fundraising, institutional donors, governments) behind the year's work."
+    },
+    {
+      "id": "network_volunteers",
+      "section": "adjustments",
+      "label": "Volunteers across the Habitat network, worldwide, FY2025",
+      "format": "integer",
+      "formula": "@habitat_for_humanity.network_volunteers_fy2025",
+      "explainer": "The shared count, read by the US model too."
+    },
+    {
+      "id": "int_volunteer_share",
+      "section": "adjustments",
+      "label": "Of the volunteers not on US homes, the share on international direct housing",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "The volunteers not on US homes and repairs (1 − @habitat_for_humanity.us_volunteer_share) are in US ReStores, advocacy and offices, Canada, and the national organisations' and Global Village's build sites abroad. No split is published: 0.5, range 0.25 to 0.8."
+    },
+    {
+      "id": "int_hours_per_volunteer",
+      "section": "adjustments",
+      "label": "Hours per volunteer on international direct housing",
+      "format": "number",
+      "value": {
+        "low": 4,
+        "best": 10,
+        "high": 30
+      },
+      "kind": "judgment",
+      "explainer": "Most are local volunteers giving a day or two; Global Village teams give a week (2,803 volunteers and 91,353 hours since its relaunch, about 33 hours each, FY2025 annual report). 10, range 4 to 30."
+    },
+    {
+      "id": "int_household_work_hours",
+      "section": "adjustments",
+      "label": "Hours of paid or own-account work per household a year, Habitat's countries",
+      "format": "number",
+      "value": {
+        "low": 3000,
+        "best": 4000,
+        "high": 5000
+      },
+      "kind": "judgment",
+      "explainer": "About two working adults per household at about 2,000 hours a year each (40 hours a week for 50 weeks; part-time and seasonal work lower, long informal hours higher): 4,000, range 3,000 to 5,000."
+    },
+    {
+      "id": "int_volunteer_hour_value",
+      "section": "adjustments",
+      "label": "Value of a volunteer hour in Habitat's international work (US$)",
+      "format": "usd",
+      "explainer": "An hour of local work valued at what it earns: the regions' household-survey consumption per household (the shared survey means and household sizes this model reads), over the household's working hours, weighted by where the direct work is. About $2 an hour, from about $0.50 in Africa to about $3 in Latin America.",
+      "formula": "(lac_share * cons_mean_lac * hh_lac + eme_share * cons_mean_eme * hh_eme + afr_share * cons_mean_afr * hh_afr + (1 - lac_share - eme_share - afr_share) * cons_mean_ap * hh_ap) / int_household_work_hours"
+    },
+    {
+      "id": "int_volunteer_value",
+      "section": "adjustments",
+      "label": "Volunteers' time on Habitat's international direct housing (US$)",
+      "format": "usd",
+      "explainer": "Volunteers' time on the same homes (families' own labour is netted in the subsidy per family): the network's volunteers not on US homes, the share of them on international direct housing, their hours and the local value of an hour. About $6 million, a small part of the resources.",
+      "formula": "network_volunteers * (1 - @habitat_for_humanity.us_volunteer_share) * int_volunteer_share * int_hours_per_volunteer * int_volunteer_hour_value"
+    },
+    {
+      "id": "dir_staff_share",
+      "section": "adjustments",
+      "label": "Share of HFHI's international staff and office cost spent on direct housing (the rest on market development)",
       "format": "percent",
       "value": {
         "low": 0.6,
@@ -934,7 +1023,31 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "The direct branch counts only the housing HFHI's own transfers pay for, but national organisations deliver it with staff and offices partly funded by local fundraising and institutional donors, and Global Village and local volunteers work on the same homes (families' own labour is netted in the subsidy per family, so it isn't counted here). HFHI's share of those resources: 0.8, range 0.6 to 0.95, the same convention as the US model's share by resources (Convention 2)."
+      "explainer": "HFHI's international line beyond its transfers is the area and country offices' and consolidated national organisations' staff ($28.1 million), professional services ($5.9 million), travel, offices and other costs. The Terwilliger Center and MicroBuild's market work are a few dozen of those staff, with some grants; HFHI publishes no split. 0.8, range 0.6 to 0.95."
+    },
+    {
+      "id": "dir_cost_share",
+      "section": "adjustments",
+      "label": "Share of HFHI's international cost spent on direct housing (the rest on market development)",
+      "format": "percent",
+      "explainer": "HFHI's transfers for direct housing (dir_transfers_share) and the direct-housing share of its staff and office cost (dir_staff_share), over the programme's cash cost: about 0.8.",
+      "formula": "(intl_transfers * dir_transfers_share + (program_spend - intl_transfers) * dir_staff_share) / program_spend"
+    },
+    {
+      "id": "int_network_resources",
+      "section": "adjustments",
+      "label": "All the resources behind the network's international direct housing (US$)",
+      "format": "usd",
+      "formula": "nso_own_spend + int_volunteer_value + cost_total * dir_cost_share",
+      "explainer": "The national organisations' own spending, volunteers' time and HFHI's own cost of the direct work with its overhead (its transfers are inside that cost, so not counted again)."
+    },
+    {
+      "id": "dir_attribution_share",
+      "section": "adjustments",
+      "label": "Direct branch: HFHI's share of the resources behind the subsidy counted",
+      "format": "percent",
+      "explainer": "HFHI's cost of the direct work over all the resources behind the year's direct housing (Convention 2, credit by share of resources), as the US model credits HFHI with its share of the affiliates' homes: about a fifth.",
+      "formula": "cost_total * dir_cost_share / int_network_resources"
     },
     {
       "id": "mkt_attribution_share",
@@ -948,6 +1061,15 @@
       },
       "kind": "judgment",
       "explainer": "The households Habitat counts in market development come from the whole network's market work: HFHI's Terwilliger Center and MicroBuild, and national organisations' own housing-finance and materials programmes, funded partly by others (the Mastercard Foundation, USAID until 2025, local donors). HFHI is the largest part: 0.7, range 0.4 to 1. The market work is mostly HFHI staff time, not transfers, so it doesn't move with the direct branch's share of the transfers. The partners' own capital is repaid by their customers, so it isn't a subsidy."
+    },
+    {
+      "id": "mkt_marginal_vs_past_average",
+      "section": "adjustments",
+      "label": "Market branch: what the next dollar does compared with the past average",
+      "format": "percent",
+      "formula": "@next_dollar.habitat_for_humanity",
+      "published": 1,
+      "explainer": "The market branch credits the year's partner sales to the year's cost, but those sales come from housing lines Habitat's earlier work set up (MicroBuild since 2012, winding down to one open investment by year end), so more money doesn't buy more customers at a known price: a past average (docs/normalization.md 2.10), at Habitat's next-dollar figure. The direct branch is a price per family, so it doesn't read it."
     },
     {
       "id": "attribution_share_shared",
@@ -966,9 +1088,9 @@
       "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared. Each branch applies its own."
     },
     {
-      "id": "leverage_funging_adj",
+      "id": "dir_leverage_funging_adj",
       "section": "adjustments",
-      "label": "Leverage and funging",
+      "label": "Direct branch: leverage and funging",
       "format": "multiple",
       "value": {
         "low": 0.8,
@@ -976,7 +1098,15 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "Below 1 because some of HFHI's international grants pass on institutional money that would reach the national organisations anyway, beyond what the shares by resources already handle. Anchored on GiveWell's 0.85 to 0.95 for its top charities; high end 1. Home Equals is modelled in habitat-for-humanity-charityevals-awareness; none of its money enters this model."
+      "explainer": "Below 1 because some of HFHI's international grants pass on institutional money that would reach the national organisations anyway, beyond what the shares by resources already handle. Anchored on GiveWell's 0.85 to 0.95 for its top charities; high end 1. Home Equals is modelled in habitat-for-humanity-charityevals-awareness; none of its money enters this model. Applied to the direct branch only: the market work is mostly HFHI's own staff time."
+    },
+    {
+      "id": "leverage_funging_adj",
+      "section": "adjustments",
+      "label": "Leverage and funging",
+      "format": "multiple",
+      "explainer": "The direct branch's leverage and funging weighted by the branches' value (the market branch takes none): for reading only.",
+      "formula": "(dir_uov_consumption_raw * dir_leverage_funging_adj + mkt_uov_consumption_raw) / (dir_uov_consumption_raw + mkt_uov_consumption_raw)"
     },
     {
       "id": "dir_missing_data_adj",
@@ -984,7 +1114,7 @@
       "label": "Direct branch: counted less where the outcome isn't measured for Habitat",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (templates.md Convention 12): the families reached are HFHI's transfers over a judged subsidy per family, and the value is a judgment anchored on research on housing improvements elsewhere (Piso Firme), not a count of Habitat's own families or a controlled evaluation of its work. The shared missing-data discount."
+      "explainer": "Thin (templates.md Convention 12): the families reached are Habitat's count; the subsidy per family and its value are judgments anchored on research on housing improvements elsewhere (Piso Firme), not measured for Habitat's families or by a controlled evaluation of its work. The shared missing-data discount."
     },
     {
       "id": "mkt_missing_data_adj",
@@ -999,14 +1129,14 @@
       "section": "adjustments",
       "label": "Direct branch: all adjustments combined",
       "format": "multiple",
-      "formula": "dir_inkind_value * dir_counterfactual_adj * dir_attribution_share * leverage_funging_adj * dir_missing_data_adj"
+      "formula": "dir_inkind_value * dir_counterfactual_adj * dir_attribution_share * dir_leverage_funging_adj * dir_missing_data_adj"
     },
     {
       "id": "mkt_total_adj",
       "section": "adjustments",
       "label": "Market branch: all adjustments combined",
       "format": "multiple",
-      "formula": "mkt_evidence_adj * mkt_counterfactual_adj * mkt_attribution_share * leverage_funging_adj * mkt_missing_data_adj"
+      "formula": "mkt_evidence_adj * mkt_counterfactual_adj * mkt_attribution_share * mkt_marginal_vs_past_average * mkt_missing_data_adj"
     },
     {
       "id": "missing_data_adj",
@@ -1133,7 +1263,7 @@
       "label": "Staff pay as a share of HFHI's cost",
       "format": "percent",
       "formula": "staff_pay_total / total_expenses",
-      "explainer": "HFHI's own salaries over its total expenses (32%), its own figure in place of the shared default."
+      "explainer": "HFHI's own salaries over its total expenses (35%), its own figure in place of the shared default."
     },
     {
       "id": "salary_gap",
