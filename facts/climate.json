@@ -1380,103 +1380,376 @@
       "explainer": "Homeowners with tax to offset: two-thirds of the residential clean energy credit's money went to incomes of $100,000 or more (CRS), and the home-improvement credit's claimants are similar homeowners. 1.3 (1 to 1.8) times the survey average spending per person, our judgment."
     },
     {
-      "id": "advanced_nuclear_overnight_usd_per_kw",
-      "label": "Overnight cost of building an advanced reactor in the 2030s-2040s, per kW (2022 US$)",
-      "unit": "usd / kW",
-      "format": "usd",
-      "value": {
-        "low": 3600,
-        "best": 5000,
-        "high": 8000
-      },
-      "kind": "judgment",
+      "id": "pcge_discount_rate_low",
+      "label": "Lower discount rate of the IEA/NEA levelised costs (2020)",
+      "unit": "rate",
+      "format": "percent",
+      "value": 0.03,
+      "kind": "observed",
       "source": {
-        "title": "US Department of Energy (30 March 2023), Commercializing advanced nuclear reactors, explained in five charts",
-        "url": "https://www.energy.gov/ne/articles/commercializing-advanced-nuclear-reactors-explained-five-charts",
-        "quote": "overnight capital costs of a first-of-a-kind (FOAK) advanced nuclear power plant are expected to range from ~$6,000-$10,000",
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Executive summary and chapter 2: discount rates",
+        "note": "The study reports levelised costs at 3%, 7% and 10%; 3% corresponds approximately to the social cost of capital.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "DOE puts a first advanced reactor at about $6,000 to $10,000 per kW and expects repeat builds to cost 40% less. The reactors of the 2030s and 2040s are mostly repeat builds: our judgment, $5,000 per kW ($3,600, DOE's repeat-build cost of a $6,000 first plant, to $8,000). Reactors in China cost less; one figure for every model."
+      "explainer": "With the 7% rate below, the two points between which the site's discount rate interpolates each region's nuclear cost gap."
     },
     {
-      "id": "advanced_nuclear_premium_usd_per_mwh_chn",
-      "label": "New nuclear power's cost over the power it replaces, China (2019 US$ per MWh)",
+      "id": "pcge_discount_rate_high",
+      "label": "Middle discount rate of the IEA/NEA levelised costs (2020)",
+      "unit": "rate",
+      "format": "percent",
+      "value": 0.07,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Executive summary and chapter 2: discount rates",
+        "note": "7% approximates the cost of capital of a utility in a deregulated or restructured market.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "With the 3% rate above, the two points between which the site's discount rate interpolates each region's nuclear cost gap."
+    },
+    {
+      "id": "advanced_nuclear_premium_uncertainty_usd_per_mwh",
+      "label": "Uncertainty in new nuclear power's cost gap, added to every region's figure (2018 US$ per MWh)",
       "unit": "usd / MWh",
       "format": "usd",
       "value": {
-        "low": -8,
-        "best": 5,
+        "low": -10,
+        "best": 0,
         "high": 15
       },
       "kind": "judgment",
       "source": {
         "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
         "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
-        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at a 7% discount rate, 85% capacity factor",
-        "note": "China: nuclear 66.01; ultra-supercritical coal 74.66 less its 22.70 carbon cost = 51.96; CCGT 84.00 less 10.45 = 73.55. Against 60% coal and 40% gas: 0.6 × 14.05 + 0.4 × (−7.54) = 5.4.",
+        "page": "Tables 3.13a (nuclear), 3.12 (coal), 3.11a (CCGT)",
+        "note": "The figures are projections for plants commissioned in 2025; Western nuclear projects have since run far over such costs, while repeat builds in China have met them.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "What a MWh from a new reactor costs more than the power it replaces, without any carbon price: the IEA/NEA levelised costs at a 7% discount rate, nuclear against coal and gas weighted 60/40. Our judgment around that figure, $5 (−$8, nuclear against gas, to $15, against coal alone)."
+      "explainer": "The regions' cost gaps come from one study's projections. Nuclear projects have more often cost more than projected than less, so the range leans up: our judgment, 0 (−$10 to +$15 per MWh), the same for every region and model."
     },
     {
-      "id": "advanced_nuclear_premium_usd_per_mwh_ind",
-      "label": "New nuclear power's cost over the power it replaces, India (2019 US$ per MWh)",
+      "id": "advanced_nuclear_premium_usd_per_mwh_chn_3pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, China, at a 3% discount rate (2018 US$ per MWh)",
       "unit": "usd / MWh",
       "format": "usd",
-      "value": {
-        "low": 5,
-        "best": 18,
-        "high": 30
-      },
-      "kind": "judgment",
+      "value": -1.47,
+      "kind": "observed",
       "source": {
         "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
         "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
-        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at a 7% discount rate, 85% capacity factor",
-        "note": "India: nuclear 66.06; ultra-supercritical coal 70.53 less its 22.70 carbon cost = 47.83 (no CCGT submitted): 18.2.",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Nuclear 49.92 (3%) / 66.01 (7%); ultra-supercritical coal 70.62 / 74.66 less its 22.70 carbon cost; CCGT 81.48 / 84.00 less 10.45. Fossil power replaced weighted by generation, 85% coal, 15% gas (China's fossil generation is overwhelmingly coal): 51.39 / 55.20. Gap −1.47 / 10.81.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "What a MWh from a new reactor costs more than the coal power it would replace in India, without any carbon price: the IEA/NEA levelised costs at a 7% discount rate. Our judgment, $18 ($5, India's cheaper home-built reactors, to $30)."
+      "explainer": "Levelised cost of new nuclear power less that of the coal and gas it replaces, without any carbon price, at a 3% discount rate. Models interpolate between the 3% and 7% figures at the site's discount rate."
     },
     {
-      "id": "advanced_nuclear_premium_usd_per_mwh_usa",
-      "label": "New nuclear power's cost over the power it replaces, United States (2019 US$ per MWh)",
+      "id": "advanced_nuclear_premium_usd_per_mwh_chn_7pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, China, at a 7% discount rate (2018 US$ per MWh)",
       "unit": "usd / MWh",
       "format": "usd",
-      "value": {
-        "low": 0,
-        "best": 25,
-        "high": 60
-      },
-      "kind": "judgment",
+      "value": 10.81,
+      "kind": "observed",
       "source": {
         "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
         "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
-        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at a 7% discount rate, 85% capacity factor",
-        "note": "United States: nuclear 71.25; supercritical coal 88.13 less 24.47 = 63.66; CCGT 44.98 less 10.20 = 34.78. Against 40% coal and 60% gas: 0.4 × 7.59 + 0.6 × 36.47 = 24.9. DOE's first-of-a-kind costs ($6,000-$10,000 per kW, five-charts article) put a first plant's power far higher: the top of the range.",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Nuclear 49.92 (3%) / 66.01 (7%); ultra-supercritical coal 70.62 / 74.66 less its 22.70 carbon cost; CCGT 81.48 / 84.00 less 10.45. Fossil power replaced weighted by generation, 85% coal, 15% gas (China's fossil generation is overwhelmingly coal): 51.39 / 55.20. Gap −1.47 / 10.81.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "What a MWh from a new US reactor costs more than the power it replaces, without any carbon price: the IEA/NEA levelised costs at 7%, nuclear against gas and coal weighted 60/40 (gas sets most US prices). Our judgment, $25 ($0, repeat builds at DOE's target costs, to $60, nearer first-of-a-kind costs)."
+      "explainer": "As the 3% figure, at a 7% discount rate: reactors cost more to build and less to run, so their gap grows with the rate."
     },
     {
-      "id": "advanced_nuclear_premium_usd_per_mwh_rest",
-      "label": "New nuclear power's cost over the power it replaces, other countries (Europe, Korea and others) (2019 US$ per MWh)",
+      "id": "advanced_nuclear_investment_usd_per_mwh_chn_3pct",
+      "label": "Construction cost in each MWh of new nuclear power, China, at a 3% discount rate (2018 US$ per MWh)",
       "unit": "usd / MWh",
       "format": "usd",
-      "value": {
-        "low": -15,
-        "best": 5,
-        "high": 30
-      },
-      "kind": "judgment",
+      "value": 13.28,
+      "kind": "observed",
       "source": {
         "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
         "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
-        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at a 7% discount rate, 85% capacity factor",
-        "note": "Korea: nuclear 53.30 against coal 75.59 − 23.60 = 51.99 and CCGT 95.89 − 10.80 = 85.09; France EPR 71.10 against Belgian CCGT 71.00 − 10.18 = 60.82.",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Nuclear 49.92 (3%) / 66.01 (7%); ultra-supercritical coal 70.62 / 74.66 less its 22.70 carbon cost; CCGT 81.48 / 84.00 less 10.45. Fossil power replaced weighted by generation, 85% coal, 15% gas (China's fossil generation is overwhelmingly coal): 51.39 / 55.20. Gap −1.47 / 10.81.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "What a MWh from a new reactor costs more than the power it replaces elsewhere, without any carbon price: in Korea nuclear is about as cheap as coal and far cheaper than gas, in France about $10 dearer than gas (IEA/NEA levelised costs at 7%). Our judgment, $5 (−$15 to $30)."
+      "explainer": "The investment part of the levelised cost: what a saving on construction lowers per MWh."
+    },
+    {
+      "id": "advanced_nuclear_investment_usd_per_mwh_chn_7pct",
+      "label": "Construction cost in each MWh of new nuclear power, China, at a 7% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 29.57,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Nuclear 49.92 (3%) / 66.01 (7%); ultra-supercritical coal 70.62 / 74.66 less its 22.70 carbon cost; CCGT 81.48 / 84.00 less 10.45. Fossil power replaced weighted by generation, 85% coal, 15% gas (China's fossil generation is overwhelmingly coal): 51.39 / 55.20. Gap −1.47 / 10.81.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The investment part of the levelised cost at 7%."
+    },
+    {
+      "id": "advanced_nuclear_overnight_usd_per_kw_chn",
+      "label": "Overnight cost of building a new reactor, China (2018 US$ per kW)",
+      "unit": "usd / kW",
+      "format": "usd",
+      "value": 2500,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.4a: nuclear generating technologies, new build, overnight costs (USD/kWe)",
+        "note": "Nuclear 49.92 (3%) / 66.01 (7%); ultra-supercritical coal 70.62 / 74.66 less its 22.70 carbon cost; CCGT 81.48 / 84.00 less 10.45. Fossil power replaced weighted by generation, 85% coal, 15% gas (China's fossil generation is overwhelmingly coal): 51.39 / 55.20. Gap −1.47 / 10.81.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "What a new reactor costs to build per kW before financing, as submitted for plants commissioned around 2025."
+    },
+    {
+      "id": "advanced_nuclear_premium_usd_per_mwh_ind_3pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, India, at a 3% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": -8.8,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Nuclear 48.17 / 66.06; the two ultra-supercritical coal plants submitted, 64.72 / 70.53 and 94.61 / 100.24, averaged, less their 22.70 carbon cost: 56.97 / 62.69 (no CCGT submitted). Gap −8.80 / 3.37.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Levelised cost of new nuclear power less that of the coal and gas it replaces, without any carbon price, at a 3% discount rate. Models interpolate between the 3% and 7% figures at the site's discount rate."
+    },
+    {
+      "id": "advanced_nuclear_premium_usd_per_mwh_ind_7pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, India, at a 7% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 3.37,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Nuclear 48.17 / 66.06; the two ultra-supercritical coal plants submitted, 64.72 / 70.53 and 94.61 / 100.24, averaged, less their 22.70 carbon cost: 56.97 / 62.69 (no CCGT submitted). Gap −8.80 / 3.37.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "As the 3% figure, at a 7% discount rate: reactors cost more to build and less to run, so their gap grows with the rate."
+    },
+    {
+      "id": "advanced_nuclear_investment_usd_per_mwh_ind_3pct",
+      "label": "Construction cost in each MWh of new nuclear power, India, at a 3% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 14.76,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Nuclear 48.17 / 66.06; the two ultra-supercritical coal plants submitted, 64.72 / 70.53 and 94.61 / 100.24, averaged, less their 22.70 carbon cost: 56.97 / 62.69 (no CCGT submitted). Gap −8.80 / 3.37.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The investment part of the levelised cost: what a saving on construction lowers per MWh."
+    },
+    {
+      "id": "advanced_nuclear_investment_usd_per_mwh_ind_7pct",
+      "label": "Construction cost in each MWh of new nuclear power, India, at a 7% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 32.85,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Nuclear 48.17 / 66.06; the two ultra-supercritical coal plants submitted, 64.72 / 70.53 and 94.61 / 100.24, averaged, less their 22.70 carbon cost: 56.97 / 62.69 (no CCGT submitted). Gap −8.80 / 3.37.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The investment part of the levelised cost at 7%."
+    },
+    {
+      "id": "advanced_nuclear_overnight_usd_per_kw_ind",
+      "label": "Overnight cost of building a new reactor, India (2018 US$ per kW)",
+      "unit": "usd / kW",
+      "format": "usd",
+      "value": 2778,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.4a: nuclear generating technologies, new build, overnight costs (USD/kWe)",
+        "note": "Nuclear 48.17 / 66.06; the two ultra-supercritical coal plants submitted, 64.72 / 70.53 and 94.61 / 100.24, averaged, less their 22.70 carbon cost: 56.97 / 62.69 (no CCGT submitted). Gap −8.80 / 3.37.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "What a new reactor costs to build per kW before financing, as submitted for plants commissioned around 2025."
+    },
+    {
+      "id": "advanced_nuclear_premium_usd_per_mwh_usa_3pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, United States, at a 3% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 5.33,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Nuclear 43.90 / 71.25; supercritical coal 75.09 / 88.13 less 24.47; CCGT 40.73 / 44.98 less 10.20. Weighted 40% coal, 60% gas: 38.57 / 46.33. Gap 5.33 / 24.92.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Levelised cost of new nuclear power less that of the coal and gas it replaces, without any carbon price, at a 3% discount rate. Models interpolate between the 3% and 7% figures at the site's discount rate."
+    },
+    {
+      "id": "advanced_nuclear_premium_usd_per_mwh_usa_7pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, United States, at a 7% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 24.92,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Nuclear 43.90 / 71.25; supercritical coal 75.09 / 88.13 less 24.47; CCGT 40.73 / 44.98 less 10.20. Weighted 40% coal, 60% gas: 38.57 / 46.33. Gap 5.33 / 24.92.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "As the 3% figure, at a 7% discount rate: reactors cost more to build and less to run, so their gap grows with the rate."
+    },
+    {
+      "id": "advanced_nuclear_investment_usd_per_mwh_usa_3pct",
+      "label": "Construction cost in each MWh of new nuclear power, United States, at a 3% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 22.58,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Nuclear 43.90 / 71.25; supercritical coal 75.09 / 88.13 less 24.47; CCGT 40.73 / 44.98 less 10.20. Weighted 40% coal, 60% gas: 38.57 / 46.33. Gap 5.33 / 24.92.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The investment part of the levelised cost: what a saving on construction lowers per MWh."
+    },
+    {
+      "id": "advanced_nuclear_investment_usd_per_mwh_usa_7pct",
+      "label": "Construction cost in each MWh of new nuclear power, United States, at a 7% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 50.26,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Nuclear 43.90 / 71.25; supercritical coal 75.09 / 88.13 less 24.47; CCGT 40.73 / 44.98 less 10.20. Weighted 40% coal, 60% gas: 38.57 / 46.33. Gap 5.33 / 24.92.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The investment part of the levelised cost at 7%."
+    },
+    {
+      "id": "advanced_nuclear_overnight_usd_per_kw_usa",
+      "label": "Overnight cost of building a new reactor, United States (2018 US$ per kW)",
+      "unit": "usd / kW",
+      "format": "usd",
+      "value": 4250,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.4a: nuclear generating technologies, new build, overnight costs (USD/kWe)",
+        "note": "Nuclear 43.90 / 71.25; supercritical coal 75.09 / 88.13 less 24.47; CCGT 40.73 / 44.98 less 10.20. Weighted 40% coal, 60% gas: 38.57 / 46.33. Gap 5.33 / 24.92.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "What a new reactor costs to build per kW before financing, as submitted for plants commissioned around 2025."
+    },
+    {
+      "id": "advanced_nuclear_premium_usd_per_mwh_rest_3pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, other countries (Korea and France as the reference), at a 3% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": -17.9,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Korea: nuclear 39.42 / 53.30 against coal 69.78 / 75.59 less 23.60 and CCGT 90.95 / 95.89 less 10.80, weighted 50/50: gap −23.75 / −15.24. France: EPR 45.27 / 71.10 against Belgian CCGT 67.58 / 71.00 less 10.18: gap −12.13 / 10.28. Averaged: −17.9 / −2.5. Overnight costs: Korea 2,157, France 4,013 per kW, averaged 3,085; investment per MWh Korea 11.46 / 25.51, France 21.32 / 47.46.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Levelised cost of new nuclear power less that of the coal and gas it replaces, without any carbon price, at a 3% discount rate. Models interpolate between the 3% and 7% figures at the site's discount rate."
+    },
+    {
+      "id": "advanced_nuclear_premium_usd_per_mwh_rest_7pct",
+      "label": "New nuclear power's cost over the fossil power it replaces, other countries (Korea and France as the reference), at a 7% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": -2.5,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Tables 3.11a (CCGT), 3.12 (coal) and 3.13a (nuclear new build): LCOE at 3% and 7%, 85% capacity factor, 2018 USD",
+        "note": "Korea: nuclear 39.42 / 53.30 against coal 69.78 / 75.59 less 23.60 and CCGT 90.95 / 95.89 less 10.80, weighted 50/50: gap −23.75 / −15.24. France: EPR 45.27 / 71.10 against Belgian CCGT 67.58 / 71.00 less 10.18: gap −12.13 / 10.28. Averaged: −17.9 / −2.5. Overnight costs: Korea 2,157, France 4,013 per kW, averaged 3,085; investment per MWh Korea 11.46 / 25.51, France 21.32 / 47.46.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "As the 3% figure, at a 7% discount rate: reactors cost more to build and less to run, so their gap grows with the rate."
+    },
+    {
+      "id": "advanced_nuclear_investment_usd_per_mwh_rest_3pct",
+      "label": "Construction cost in each MWh of new nuclear power, other countries (Korea and France as the reference), at a 3% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 16.39,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Korea: nuclear 39.42 / 53.30 against coal 69.78 / 75.59 less 23.60 and CCGT 90.95 / 95.89 less 10.80, weighted 50/50: gap −23.75 / −15.24. France: EPR 45.27 / 71.10 against Belgian CCGT 67.58 / 71.00 less 10.18: gap −12.13 / 10.28. Averaged: −17.9 / −2.5. Overnight costs: Korea 2,157, France 4,013 per kW, averaged 3,085; investment per MWh Korea 11.46 / 25.51, France 21.32 / 47.46.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The investment part of the levelised cost: what a saving on construction lowers per MWh."
+    },
+    {
+      "id": "advanced_nuclear_investment_usd_per_mwh_rest_7pct",
+      "label": "Construction cost in each MWh of new nuclear power, other countries (Korea and France as the reference), at a 7% discount rate (2018 US$ per MWh)",
+      "unit": "usd / MWh",
+      "format": "usd",
+      "value": 36.49,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.13a: investment cost per MWh at 3%, 7%, 10%",
+        "note": "Korea: nuclear 39.42 / 53.30 against coal 69.78 / 75.59 less 23.60 and CCGT 90.95 / 95.89 less 10.80, weighted 50/50: gap −23.75 / −15.24. France: EPR 45.27 / 71.10 against Belgian CCGT 67.58 / 71.00 less 10.18: gap −12.13 / 10.28. Averaged: −17.9 / −2.5. Overnight costs: Korea 2,157, France 4,013 per kW, averaged 3,085; investment per MWh Korea 11.46 / 25.51, France 21.32 / 47.46.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The investment part of the levelised cost at 7%."
+    },
+    {
+      "id": "advanced_nuclear_overnight_usd_per_kw_rest",
+      "label": "Overnight cost of building a new reactor, other countries (Korea and France as the reference) (2018 US$ per kW)",
+      "unit": "usd / kW",
+      "format": "usd",
+      "value": 3085,
+      "kind": "observed",
+      "source": {
+        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
+        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
+        "page": "Table 3.4a: nuclear generating technologies, new build, overnight costs (USD/kWe)",
+        "note": "Korea: nuclear 39.42 / 53.30 against coal 69.78 / 75.59 less 23.60 and CCGT 90.95 / 95.89 less 10.80, weighted 50/50: gap −23.75 / −15.24. France: EPR 45.27 / 71.10 against Belgian CCGT 67.58 / 71.00 less 10.18: gap −12.13 / 10.28. Averaged: −17.9 / −2.5. Overnight costs: Korea 2,157, France 4,013 per kW, averaged 3,085; investment per MWh Korea 11.46 / 25.51, France 21.32 / 47.46.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "What a new reactor costs to build per kW before financing, as submitted for plants commissioned around 2025."
     }
   ]
 }
