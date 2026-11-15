@@ -1,0 +1,451 @@
+{
+  "id": "iodine-global-network-givewell",
+  "name": "GiveWell: cost-effectiveness of salt iodization (GAIN and ICCIDD, December 2014, moral weights updated 2021)",
+  "kind": "charity",
+  "cause": "global-health",
+  "beneficiaries": "world",
+  "beneficiaries_note": "GiveWell's model of salt iodization generally, supported by GAIN or ICCIDD (now IGN) across many low- and middle-income countries, with no country split: spread by world population.",
+  "missing_data": {"thin_share":1,"note":"Thin: a model of salt iodization generally: the cost per person, coverage and the organisation's chance of making a difference are GiveWell's judgments, with no count of the people whose salt or iodine status IGN's support changed."},
+  "estimate_basis": "marginal",
+  "charity": "iodine-global-network",
+  "owner": "givewell",
+  "summary": "GiveWell's model of a hypothetical $100,000 donation to salt iodization through GAIN or ICCIDD (now the Iodine Global Network), first published with its 2014 reviews and updated for its 2021 moral weights. It values iodine by children's later earnings: a 3.6% wage gain for children iodine sufficient through childhood, at 10 cents per person covered a year and a 50% chance that the organisation's support makes the difference. It is a model of salt iodization generally rather than of IGN's own spending or results, and over five years old.",
+  "source": {
+    "publisher": "GiveWell",
+    "title": "Cost-effectiveness analysis of salt iodization (public)",
+    "url": "https://www.givewell.org/international/technical/programs/salt-iodization",
+    "sheet": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+    "published": "2021-03",
+    "retrieved": "2026-11-15",
+    "license": "CC BY-NC-SA 3.0 US"
+  },
+  "evaluator": {
+    "name": "GiveWell",
+    "assumptions": {
+      "resource_shares": 0,
+      "discount_rate": 0.04
+    }
+  },
+  "resources": [
+    {
+      "title": "GiveWell, Cost-effectiveness analysis of salt iodization (Google Sheet)",
+      "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+      "type": "model",
+      "note": "The spreadsheet this page reproduces (tabs Iodine and Parameters)."
+    },
+    {
+      "title": "GiveWell, Salt iodization intervention report",
+      "url": "https://www.givewell.org/international/technical/programs/salt-iodization",
+      "type": "evaluation",
+      "note": "The review that links the sheet; its cost-effectiveness estimate updated in March 2021."
+    }
+  ],
+  "sections": [
+    {
+      "id": "iodine",
+      "title": "Iodine",
+      "explainer": "The sheet's Iodine tab, its inputs read from the Parameters tab (GiveWell's best guess first, the alternatives as the range)."
+    },
+    {
+      "id": "staff_pay",
+      "title": "Staff pay below market",
+      "kind": "ours"
+    },
+    {
+      "id": "bottom_line",
+      "title": "Bottom line",
+      "kind": "ours"
+    }
+  ],
+  "rows": [
+    {
+      "id": "discount_rate",
+      "section": "iodine",
+      "label": "Discount rate",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Iodine!B3"
+      },
+      "explainer": "GiveWell's 4% (from its 2020 cost-effectiveness analysis), pinned in the evaluator view; our view reads your discount rate, so the earnings gains below move with it."
+    },
+    {
+      "id": "long_term_benefit_years",
+      "section": "iodine",
+      "label": "Duration of long-term benefits (years), as for deworming",
+      "format": "number",
+      "unit": "years",
+      "formula": "@givewell_shared.long_term_benefit_years",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Iodine!B4"
+      },
+      "explainer": "GiveWell's 40 years of earnings gains, the house figure its deworming model uses and this sheet borrows; read from the shared fact (the same 40)."
+    },
+    {
+      "id": "cost_per_person_per_year",
+      "section": "iodine",
+      "label": "Cost per person per year",
+      "format": "usd",
+      "value": {
+        "low": 0.05,
+        "best": 0.1,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B47:D47"
+      },
+      "explainer": "GiveWell's best guess of what salt iodization costs per person covered per year (its Parameters tab lists 5 and 8 cents as the other possibilities, the range here)."
+    },
+    {
+      "id": "internal_validity",
+      "section": "iodine",
+      "label": "Internal validity",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B48:D48"
+      },
+      "explainer": "GiveWell's replicability adjustment for the studies of iodine and cognition (best guess 80%; 60% and 90% the alternatives listed). A trial-transfer adjustment, kept in our view."
+    },
+    {
+      "id": "external_validity",
+      "section": "iodine",
+      "label": "External validity",
+      "format": "percent",
+      "value": 0.7,
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B49"
+      },
+      "explainer": "GiveWell's adjustment for how well the studies' settings carry over to today's programmes (70%, no alternative listed). Kept in our view."
+    },
+    {
+      "id": "leverage",
+      "section": "iodine",
+      "label": "Leverage (dollars of impact per dollar spent)",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B50:C50"
+      },
+      "explainer": "GiveWell's best guess that a dollar to GAIN or ICCIDD (now IGN) buys a dollar's worth of iodization (2 the alternative)."
+    },
+    {
+      "id": "leverage_credit",
+      "section": "iodine",
+      "label": "Leverage, with credit by share of resources",
+      "format": "multiple",
+      "formula": "if($resource_shares, 1, leverage)",
+      "published": 1,
+      "explainer": "With credit by share of resources on, leverage is dropped: others' money behind the programmes takes its own share of the credit instead. Off (the default) and in the evaluator view, GiveWell's 1."
+    },
+    {
+      "id": "long_term_share",
+      "section": "iodine",
+      "label": "Share of the benefit of iodine that lasts for the long term",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B51:D51"
+      },
+      "explainer": "GiveWell's guess that 80% of the cognitive gain from iodine persists into adult earnings (40% and 100% the alternatives)."
+    },
+    {
+      "id": "household_coverage",
+      "section": "iodine",
+      "label": "Household coverage achieved",
+      "format": "percent",
+      "value": 0.66,
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B52"
+      },
+      "explainer": "GiveWell's figure for the share of households a programme gets using adequately iodized salt (66%)."
+    },
+    {
+      "id": "p_impact",
+      "section": "iodine",
+      "label": "Probability that GAIN/ICCIDD has an impact",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B53:D53"
+      },
+      "explainer": "GiveWell's 50% chance that the organisation's support changes iodization outcomes (75% and 25% the alternatives). ICCIDD is IGN's former name. Not marked a single event: it stands for the share of the organisations' many country programmes where their support makes the difference."
+    },
+    {
+      "id": "children_benefit_share",
+      "section": "iodine",
+      "label": "Share of children that benefit",
+      "format": "percent",
+      "value": {
+        "low": 0.332,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B54:D54"
+      },
+      "explainer": "GiveWell's guess of the share of children who would be iodine deficient without iodized salt and so benefit (100% and 33.2% the alternatives)."
+    },
+    {
+      "id": "wage_gain",
+      "section": "iodine",
+      "label": "Equivalent increase in wages from having iodine throughout childhood",
+      "format": "percent",
+      "value": {
+        "low": 0.027,
+        "best": 0.036,
+        "high": 0.054
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Parameters!B55:D55"
+      },
+      "explainer": "GiveWell's estimate of the earnings gain from iodine sufficiency across childhood (3.6%; 2.7% and 5.4% the alternatives)."
+    },
+    {
+      "id": "years_of_childhood",
+      "section": "iodine",
+      "label": "Years of childhood (for iodine)",
+      "format": "number",
+      "unit": "years",
+      "value": 15,
+      "kind": "observed",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Iodine!B17"
+      },
+      "explainer": "GiveWell's definition: a child benefits from iodized salt for 15 years of childhood, so a year of iodized salt gives a fifteenth of the benefit to each child under 15."
+    },
+    {
+      "id": "share_under_15",
+      "section": "iodine",
+      "label": "Percent of population under 15",
+      "format": "percent",
+      "value": 0.43,
+      "kind": "observed",
+      "source": {
+        "title": "World Bank data, Population ages 0-14 (% of total population), Sub-Saharan Africa, 2014 (as cited in the sheet)",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Iodine!B18"
+      },
+      "explainer": "The share of people under 15 in sub-Saharan Africa in 2014, as the sheet cites from the World Bank."
+    },
+    {
+      "id": "income_delay_years",
+      "section": "iodine",
+      "label": "Delay between iodine in childhood and working for income (the sheet's)",
+      "format": "number",
+      "unit": "years",
+      "value": 10,
+      "kind": "judgment",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Iodine!B21"
+      },
+      "explainer": "The sheet discounts one year's earnings gain back 10 years for the delay between the iodine (spread over childhood) and working life; written into its formula, here its own row."
+    },
+    {
+      "id": "benefit_one_year",
+      "section": "iodine",
+      "label": "Benefit on one year's income, discounted for the delay to working life",
+      "format": "small",
+      "formula": "wage_gain * long_term_share / (1 + discount_rate) ^ income_delay_years",
+      "expected": 0.01945624806
+    },
+    {
+      "id": "pv_lifetime_benefit",
+      "section": "iodine",
+      "label": "Present value of the lifetime benefits per worker (ln income)",
+      "format": "number",
+      "formula": "pv_annuity_due(benefit_one_year, discount_rate, long_term_benefit_years)",
+      "expected": 0.4004968433,
+      "explainer": "The sheet's PV(rate, 40, −benefit, 0, 1): 40 years of the yearly gain, the first undiscounted, at the discount rate above."
+    },
+    {
+      "id": "pv_lifetime_benefit_adjusted",
+      "section": "iodine",
+      "label": "Present value of the lifetime benefits per worker, with internal and external validity adjustments",
+      "format": "number",
+      "formula": "pv_lifetime_benefit * internal_validity * external_validity",
+      "expected": 0.2242782322
+    },
+    {
+      "id": "benefit_per_person_year",
+      "section": "iodine",
+      "label": "Benefits (ln income) per person per year of iodized salt, adjusted for coverage and the children reached",
+      "format": "small",
+      "formula": "pv_lifetime_benefit_adjusted * household_coverage * children_benefit_share * (share_under_15 / years_of_childhood)",
+      "expected": 0.003394675323
+    },
+    {
+      "id": "ln_consumption_per_dollar",
+      "section": "iodine",
+      "label": "Units of increase in ln(consumption) per dollar",
+      "format": "small",
+      "formula": "p_impact * benefit_per_person_year / (cost_per_person_per_year / leverage_credit)",
+      "expected": 0.01697337661
+    },
+    {
+      "id": "ln_consumption_per_100k",
+      "section": "iodine",
+      "label": "Units of increase in ln(consumption) per $100,000 donated to salt iodization",
+      "format": "number",
+      "formula": "ln_consumption_per_dollar * 1e5",
+      "expected": 1697.337661
+    },
+    {
+      "id": "resource_sharing",
+      "section": "iodine",
+      "label": "Multiplier for earnings shared within the household",
+      "format": "multiple",
+      "formula": "@givewell_shared.resource_sharing_multiplier",
+      "published": 1,
+      "explainer": "Changed for consistency. GiveWell's current models of later-life earnings (deworming, iron, malaria) multiply the earner's gain by 2 for income shared within the household (its house figure, facts: givewell_shared); this 2014 sheet doesn't. Our view applies it as every later-life income chain on the site does; the evaluator view keeps the sheet's 1."
+    },
+    {
+      "id": "uov_per_ln_consumption",
+      "section": "iodine",
+      "label": "Value of increasing ln(consumption) by one unit for one person for one year",
+      "format": "number",
+      "formula": "$uov_per_ln_consumption",
+      "published": 1.44,
+      "explainer": "Changed for consistency. The sheet types GiveWell's 1.44 (from its 2020 analysis); our view reads the site's shared value (1/ln 2 = 1.4427), the evaluator view the sheet's 1.44."
+    },
+    {
+      "id": "uov_per_100k",
+      "section": "iodine",
+      "label": "Units of value generated with a hypothetical $100,000 donation to salt iodization",
+      "format": "number",
+      "formula": "ln_consumption_per_100k * resource_sharing * uov_per_ln_consumption",
+      "expected": 2444.166233
+    },
+    {
+      "id": "givedirectly_uov_per_100k",
+      "section": "iodine",
+      "label": "Units of value generated with a hypothetical $100,000 donation to GiveDirectly (the sheet's)",
+      "format": "number",
+      "value": 344,
+      "kind": "observed",
+      "source": {
+        "title": "Source spreadsheet",
+        "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
+        "cell": "Iodine!B32"
+      },
+      "explainer": "The sheet's figure for GiveDirectly from GiveWell's 2020 analysis, used only for its multiple of cash below; our view's result is in units of value and doesn't read it."
+    },
+    {
+      "id": "vs_cash",
+      "section": "iodine",
+      "label": "Salt iodization vs cash",
+      "format": "multiple",
+      "formula": "uov_per_100k / givedirectly_uov_per_100k",
+      "expected": 7.105134397,
+      "explainer": "The sheet's bottom line as a multiple of GiveDirectly, for reading; the model's result is the units of value per dollar below."
+    },
+    {
+      "id": "uov_per_dollar_givewell",
+      "section": "iodine",
+      "label": "Units of value per dollar donated to salt iodization",
+      "format": "small",
+      "formula": "uov_per_100k / 1e5",
+      "expected": 0.02444166233,
+      "explainer": "The sheet's units of value for $100,000, per dollar: GiveWell's bottom line in its own unit."
+    },
+    {
+      "id": "staff_cost_share",
+      "section": "staff_pay",
+      "label": "Staff pay as a share of cost",
+      "format": "percent",
+      "formula": "@staff_pay.share_research_policy",
+      "explainer": "The shared default for research and policy work: a donation to IGN pays for technical assistance and advocacy, mostly staff and consultants' time; its accounts give no salaries line."
+    },
+    {
+      "id": "salary_gap",
+      "section": "staff_pay",
+      "label": "Pay gap versus comparable jobs elsewhere",
+      "format": "percent",
+      "formula": "@staff_pay.gap_research_policy",
+      "explainer": "The shared pay gap for research and policy staff, the same figure our own model of IGN reads."
+    },
+    {
+      "id": "salary_sacrifice",
+      "section": "staff_pay",
+      "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+      "format": "number",
+      "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+    },
+    {
+      "id": "donor_cost_share",
+      "section": "staff_pay",
+      "label": "Share of the full cost paid in cash",
+      "format": "percent",
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
+    },
+    {
+      "id": "uov_per_dollar",
+      "section": "bottom_line",
+      "label": "Units of value per dollar",
+      "format": "small",
+      "formula": "uov_per_dollar_givewell * donor_cost_share",
+      "explainer": "GiveWell's result per dollar, with credit by share of resources times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+    }
+  ],
+  "output": {
+    "row": "uov_per_dollar",
+    "unit": "uov",
+    "label": "Units of value per dollar",
+    "native": {
+      "row": "uov_per_dollar_givewell",
+      "unit": "uov"
+    }
+  }
+}
