@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "future-cleantech-architects",
   "owner": "charityevals",
-  "summary": "Future Cleantech Architects (Remscheid and Brussels) does technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors in the EU; this model counts the two policies it helped win in 2022-2025, the Renewable Energy Directive's indicative target that 5% of new renewable capacity be innovative technology (2023) and the European Parliament's backing of the low-carbon fuels delegated act (2025), against its spending over those years (€1.37M in 2024). At the defaults a dollar given averts about 0.0026 tonnes of CO₂e, about 0.001 years of healthy life per $1,000, nearly all from the 5% target: the capacity it adds where it displaces fossil power, and as much again later as the technologies get cheaper; it is low because the target is loosely defined and voluntary (a fifth of its capacity is credited to it, two-fifths of the target built), Future Cleantech Architects is credited with a tenth of the advocacy, and the next dollar counts 24% of the past average, as it holds about two years of spending in reserve. The result is mostly uncertainty, resting on judgments no study settles (how much capacity the target adds and how much fossil power that displaces, the later learning); the extra cost of the newest technologies is not counted, as no impact analysis gives one, and every branch is discounted for missing data.",
+  "summary": "Future Cleantech Architects (Remscheid and Brussels) does technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors in the EU, with a small sideline of publicly co-funded research on work and learning in manufacturing firms; this model counts the two policies it helped win in 2021-2025, the Renewable Energy Directive's indicative target that 5% of new renewable capacity be innovative technology (2023) and the European Parliament's backing of the low-carbon fuels delegated act (2025), against its spending over those years (€1.37M in 2024). At the defaults a dollar given averts about 0.002 tonnes of CO₂e, about 0.0008 years of healthy life per $1,000, nearly all from the 5% target: the capacity it causes where that displaces fossil power, and the cheaper technology that capacity buys later; it is low because the target is loosely defined and voluntary (an eighth of the capacity reported against it is credited to it), Future Cleantech Architects is credited with a tenth of the advocacy, and the next dollar counts 24% of the past average, as it holds about two years of spending in reserve. The result is mostly uncertainty, resting on judgments no study settles (how much capacity the target causes and how much fossil power that displaces); the extra cost of the newest technologies is not counted, as no impact analysis gives one, and every branch, the research consortia included, is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Future Cleantech Architects",
@@ -58,12 +58,12 @@
     {
       "id": "cost",
       "title": "Cost",
-      "explainer": "What Future Cleantech Architects spent: 2024 from its filed accounts, and the average year of 2022-2025, the period whose wins are counted."
+      "explainer": "What Future Cleantech Architects spent: 2024 from its filed accounts, and the average year of 2021-2025, the period whose wins are counted."
     },
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "Tonnes a year each win of 2022-2025 would avert once in effect: the Renewable Energy Directive's 5% target for innovative renewables and the low-carbon fuels delegated act."
+      "explainer": "Tonnes a year each win of 2021-2025 would avert once in effect (the Renewable Energy Directive's 5% target for innovative renewables, the later learning it buys, and the low-carbon fuels delegated act), and the research consortia's spending and return."
     },
     {
       "id": "effect",
@@ -80,6 +80,12 @@
       "title": "Air pollution these tonnes carry",
       "kind": "ours",
       "explainer": "Every tonne avoids its heat deaths; a tonne from burning less fossil fuel near people also avoids air-pollution deaths. These rows say how much of the shared air-pollution rate applies to this charity's tonnes (docs/normalization.md 2.5); the rates themselves stay shared."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in tonnes",
+      "kind": "ours",
+      "explainer": "The research consortia's income gains (units of value) are counted in their own unit and enter the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
     },
     {
       "id": "outcome",
@@ -165,7 +171,7 @@
       "label": "Programme expenses, 2024 (all of it)",
       "format": "usd",
       "formula": "total_expenses",
-      "explainer": "German company accounts don't split spending into programmes, management and fundraising, and Future Cleantech Architects has one line of work (technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors), so all of the spending is counted as the programme and the overhead multiplier is 1."
+      "explainer": "German company accounts don't split spending into programmes, management and fundraising, so all of it is counted as programme spending and the overhead multiplier is 1. Two kinds of work share it: technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors (nearly all of it), and small publicly co-funded research consortia on work and learning in manufacturing firms (AgilOLab, DICoLab); both are branches of this model."
     },
     {
       "id": "program_spend",
@@ -173,7 +179,7 @@
       "label": "Spending on the modelled programme, 2024",
       "format": "usd",
       "formula": "program_expenses",
-      "explainer": "All of its work: the policy wins below stand for the whole of it (a past average of the period's wins against the period's spending)."
+      "explainer": "All of its work: the policy wins below stand for the climate work, and the research consortia are their own branch (rc_)."
     },
     {
       "id": "overhead_ratio",
@@ -189,6 +195,20 @@
       "label": "Cost of the modelled programme, including overhead, 2024",
       "format": "usd",
       "formula": "program_spend * overhead_ratio"
+    },
+    {
+      "id": "total_expenses_eur_2021",
+      "section": "cost",
+      "label": "Total expenses, 2021 (euros)",
+      "format": "integer",
+      "value": {
+        "low": 100000,
+        "best": 250000,
+        "high": 450000
+      },
+      "kind": "judgment",
+      "unit": "EUR",
+      "explainer": "No 2021 accounts are on the register. Our judgment, €0.25M (€0.1M to €0.45M): it hired its first employee in 2021 (Milestones 2021) and spent €0.63M in 2022 with a larger team; its retained reserves at the end of 2021 were about €0.62M (end-2022 reserves of €1.23M in the 2023 accounts, Blatt 3, less the 2022 surplus of €0.61M), so 2021's donations ran well ahead of its spending."
     },
     {
       "id": "total_expenses_eur_2022",
@@ -241,17 +261,17 @@
       "section": "cost",
       "label": "First year of the period whose wins are counted",
       "format": "number",
-      "value": 2022,
+      "value": 2021,
       "kind": "observed",
       "unit": "Year",
       "source": {
-        "title": "Future Cleantech Architects gGmbH, Jahresabschluss zum 31. Dezember 2023 (prepared by Flossdorf Trachte Steuerberater, 17 December 2024; Lobbyregister entry R005009)",
-        "url": "https://www.lobbyregister.bundestag.de/media/f4/66/484886/2023_Jahresabschluss_Future-Cleantech-Architects-gGmbH.pdf",
+        "title": "Future Cleantech Architects, Milestones 2021",
+        "url": "https://fcarchitects.org/fcas-milestones-in-2021/",
         "retrieved": "2026-11-15",
-        "page": "Blatt 4 (2023 and 2022 columns)",
-        "note": "The period 2022-2025: the first full year with published accounts, through the European Parliament's work on the Renewable Energy Directive (2022-2023), to the low-carbon fuels delegated act (2025)."
+        "quote": "We advised for support for innovation in the upcoming legislation revision on renewables.",
+        "note": "Timeline entry for December 2021, 'Collaboration on RED III'; the same page: 'hired our first employee'."
       },
-      "explainer": "The model counts the policies won from 2022 to 2025 against what Future Cleantech Architects spent in those years: a past average."
+      "explainer": "The model counts the policies won from 2021 to 2025 against what Future Cleantech Architects spent in those years: a past average. 2021 is its first year with staff and the start of its advice on the Renewable Energy Directive revision that carried the 5% target."
     },
     {
       "id": "period_last_year",
@@ -280,15 +300,15 @@
     {
       "id": "average_spend_vs_year",
       "section": "cost",
-      "label": "Average yearly spending 2022-2025, in 2024 prices, ÷ 2024's",
+      "label": "Average yearly spending 2021-2025, in 2024 prices, ÷ 2024's",
       "format": "multiple",
-      "formula": "(total_expenses_eur_2022 * @cpi.deu_2024 / @cpi.deu_2022 + total_expenses_eur_2023 * @cpi.deu_2024 / @cpi.deu_2023 + total_expenses_eur_2024 + total_expenses_eur_2025 * @cpi.deu_2024 / @cpi.deu_2025) / period_years / total_expenses_eur_2024",
+      "formula": "(total_expenses_eur_2021 * @cpi.deu_2024 / @cpi.deu_2021 + total_expenses_eur_2022 * @cpi.deu_2024 / @cpi.deu_2022 + total_expenses_eur_2023 * @cpi.deu_2024 / @cpi.deu_2023 + total_expenses_eur_2024 + total_expenses_eur_2025 * @cpi.deu_2024 / @cpi.deu_2025) / period_years / total_expenses_eur_2024",
       "explainer": "A past average's cost and wins come from the same period (templates.md Convention 11): each year's spending in 2024 prices (German consumer prices, facts: cpi), averaged and divided by 2024's, so the cost below is a typical year of the period."
     },
     {
       "id": "cost_per_period_year",
       "section": "cost",
-      "label": "Cost of a typical year of 2022-2025, in 2024 dollars",
+      "label": "Cost of a typical year of 2021-2025, in 2024 dollars",
       "format": "usd",
       "formula": "cost_total * average_spend_vs_year"
     },
@@ -324,7 +344,7 @@
       "format": "number",
       "unit": "GW",
       "formula": "ren_new_capacity_gw * ren_target_share",
-      "explainer": "5% of the capacity added in 2025-2030, about 24 GW. Future Cleantech Architects' own review of ten member states' plans puts their part alone at more than 25 GW (The 5% Opportunity, 2026), a cross-check that this isn't too high."
+      "explainer": "5% of the capacity added in 2025-2030, about 24 GW. Future Cleantech Architects' own review puts ten member states alone at more than 25 GW (The 5% Opportunity, 2026), above this EU-wide figure because it rests on the national plans' targets, which run ahead of the industry outlooks; the model takes the outlooks (the shared fact, whose high end covers it) as the best guess of what is built."
     },
     {
       "id": "ren_twh_per_gw_year",
@@ -352,7 +372,7 @@
       },
       "kind": "judgment",
       "unit": "t CO₂ / MWh",
-      "explainer": "Gas plants set the margin in most EU hours, coal in some until its phase-out: a gas combined-cycle plant emits about 0.37 tonnes of CO₂ per MWh and a hard-coal plant about 0.9-1.0 (IPCC AR5 WG III, Annex III, direct emissions). Coal still made 269 TWh of EU power in 2024 against about 500 TWh from gas (Ember, European Electricity Review 2025). Our judgment, 0.45 (gas only 0.35 to a third coal 0.65)."
+      "explainer": "Gas plants set the margin in most EU hours, coal in some until its phase-out: a gas combined-cycle plant emits a median 0.37 tonnes of CO₂ per MWh and a hard-coal plant 0.76 (0.67-0.87; IPCC AR5 WG III, Annex III, direct emissions), lignite about 1.0-1.1. Coal made 269 TWh of EU power in 2024 and gas 430 TWh (Ember, European Electricity Review 2025), so coal was 38% of fossil power, falling by the 2030s. Our judgment, 0.45 (gas only 0.35 to a coal- and lignite-heavy margin 0.65)."
     },
     {
       "id": "ren_fossil_displaced_share",
@@ -377,25 +397,63 @@
       "explainer": "Capacity × output a year (TWh × 1,000,000 MWh) × CO₂ per MWh of fossil power × the share that displaces fossil power. No cost is counted against these tonnes (docs/normalization.md 2.21): the target began as a Parliament amendment that no impact analysis costed, and member states meet it through their own support schemes (public money or consumer levies), so no regulator's figure exists; the newest technologies cost more per MWh than the solar and wind they replace, so a cost row would lower this branch."
     },
     {
-      "id": "ren_learning_multiple",
+      "id": "ren_caused_gw",
       "section": "reach",
-      "label": "Later tonnes from cheaper innovative technologies, per tonne the target's capacity avoids directly",
+      "label": "5% target: innovative capacity it causes",
+      "format": "number",
+      "unit": "GW",
+      "formula": "ren_gw_if_met * ren_implementation_adj * ren_counterfactual_adj",
+      "explainer": "The capacity if met × the share reported as met × the share the target caused (about 2 GW at the defaults); the learning below follows from this added capacity."
+    },
+    {
+      "id": "learning_rate",
+      "section": "reach",
+      "label": "Cost fall per doubling of capacity built, young energy technologies",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Way, Ives, Mealy & Farmer (2022), Empirically grounded technology forecasts and the energy transition, Joule 6(9)",
+        "url": "https://doi.org/10.1016/j.joule.2022.08.009",
+        "page": "Experience curves (Figure 2 and Table S1): solar PV about 20% a doubling, onshore wind and batteries 10%-25%",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Learning rates of solar, wind and batteries cluster around 20% a doubling of cumulative capacity, from 10% to over 25%; the technologies under the target (floating wind, ocean energy, next-generation geothermal) have no long series of their own, so the range is wide."
+    },
+    {
+      "id": "deployment_cost_elasticity",
+      "section": "reach",
+      "label": "Extra later deployment per unit of cost fall (elasticity)",
       "format": "multiple",
       "value": {
-        "low": 0.2,
-        "best": 1,
-        "high": 4
+        "low": 0.5,
+        "best": 1.5,
+        "high": 3
       },
       "kind": "judgment",
-      "explainer": "The target's purpose is learning: costs of young energy technologies fall with each doubling of what is built (about 20% a doubling for solar, wind and batteries; Way et al. 2022, Joule), so a few early gigawatts can make later deployment, in Europe and elsewhere, cheaper and larger. How much of that the target's capacity buys is unmeasured; our judgment, as many tonnes later as the capacity avoids directly (0.2 to 4 times), after the technologies' own longer wait (effect section)."
+      "explainer": "How much more of a technology is built when it gets cheaper, in percent per percent: near 1 or above for technologies competing on cost at the margin of power markets (solar's and wind's growth followed their cost falls), lower where grid access, permits or the resource limit it. Our judgment, 1.5 (0.5 to 3)."
+    },
+    {
+      "id": "learn_gw",
+      "section": "reach",
+      "label": "Extra capacity built later because the technologies got cheaper",
+      "format": "number",
+      "unit": "GW",
+      "formula": "ren_caused_gw * deployment_cost_elasticity * -ln(1 - learning_rate) / ln(1 + 1)",
+      "explainer": "Adding a small capacity to a technology's cumulative stock lowers its cost by the learning exponent (−log₂ of one minus the learning rate) times the stock's share added; times the deployment elasticity, later deployment grows by that same share of the stock, so the extra later capacity is the added capacity × the learning exponent × the elasticity, whatever the stock's size."
     },
     {
       "id": "ren_learn_tonnes_per_year",
       "section": "reach",
-      "label": "Later tonnes a year from cheaper technology, if the target is met",
+      "label": "Later tonnes a year from the extra capacity built",
       "format": "integer",
       "unit": "t CO₂ / year",
-      "formula": "ren_tonnes_per_year * ren_learning_multiple"
+      "formula": "learn_gw * ren_twh_per_gw_year * 1e6 * displaced_fossil_tco2_per_mwh * ren_fossil_displaced_share",
+      "explainer": "The extra later capacity × output × CO₂ per MWh of fossil power × the share displacing fossil power, as for the target's own capacity; it may come anywhere, so the EU figures stand in. The counterfactual and delivered share are already in the capacity caused, so this branch takes only the credit, evidence and missing-data steps."
     },
     {
       "id": "h2_volume_t_per_year",
@@ -403,13 +461,13 @@
       "label": "Low-carbon hydrogen made from fossil gas with carbon capture and certified in the EU a year, once in effect",
       "format": "integer",
       "value": {
-        "low": 300000,
-        "best": 1000000,
-        "high": 3000000
+        "low": 200000,
+        "best": 600000,
+        "high": 1500000
       },
       "kind": "judgment",
       "unit": "t H₂ / year",
-      "explainer": "The EU uses about 8 million tonnes of hydrogen a year, nearly all from fossil gas without capture (Future Cleantech Architects, Annual Report 2025, p. 4: 95% fossil-based); hydrogen with carbon capture certified under the new rules starts from almost nothing. Our judgment, 1 million tonnes a year in the early 2030s (0.3 to 3 million)."
+      "explainer": "Hydrogen Europe's Clean Hydrogen Monitor 2025 puts the EU's potential 2030 output from gas with carbon capture (\"thermochemical\" production) at about 600,000 tonnes a year, of a 2.3 million-tonne clean pipeline only 26% under construction (as reported by Argus, 2025); the EU uses about 8 million tonnes of hydrogen a year, 95% fossil-based (Annual Report 2025, p. 4). Our judgment, 0.6 million tonnes a year once in effect (0.2 to 1.5 million)."
     },
     {
       "id": "h2_gap_tco2e_per_t",
@@ -431,7 +489,50 @@
       "label": "Tonnes of CO₂e a year the stricter methane accounting keeps out, once in effect",
       "format": "integer",
       "unit": "t CO₂e / year",
-      "formula": "h2_volume_t_per_year * h2_gap_tco2e_per_t"
+      "formula": "h2_volume_t_per_year * h2_gap_tco2e_per_t",
+      "explainer": "Hydrogen certified × the extra emissions per tonne a looser rule would have let through. No compliance cost is counted (docs/normalization.md 2.21): the delegated act came with no impact assessment giving one, so no regulator's figure exists. Nor is the certification delay it avoided: a replacement act would have come within a year or two, before much gas-based hydrogen with capture is running, so the delay would have cost few tonnes."
+    },
+    {
+      "id": "rc_share_of_spend",
+      "section": "reach",
+      "label": "Share of spending on the research consortia on work and learning (AgilOLab, DICoLab)",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.03,
+        "high": 0.05
+      },
+      "kind": "judgment",
+      "explainer": "The consortia's public grants were €40-50k (AgilOLab, budget year 2024) and €20-30k (DICoLab) on the 2026 Lobbyregister entry, and research grants were about 2.8% of 2025 funding (Annual Report 2025, p. 22), against €1.4M-2.0M of spending; the solar-cement consortium CemSol is climate work and stays in the climate branches. Our judgment, 3% of the period's spending (1% to 5%), FCA's own staff time on them included."
+    },
+    {
+      "id": "rc_spend_per_year",
+      "section": "reach",
+      "label": "Research consortia: spending in a typical year of the period",
+      "format": "usd",
+      "formula": "cost_per_period_year * rc_share_of_spend"
+    },
+    {
+      "id": "rc_return_per_dollar",
+      "section": "reach",
+      "label": "Research consortia: later income gains per dollar spent on applied research",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 2,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Estimates of the social return to research and development put a dollar of it at several dollars of later output on average (Jones & Summers 2020, NBER Working Paper 27863, about $4 to $5 per dollar, present value); small applied projects on how manufacturing firms organise work and learning, with partners in the Bergisches Land, are less likely to change much. Our judgment, $2 per dollar (0.5 to 5), as gains to the firms' workers and owners, present value."
+    },
+    {
+      "id": "rc_uov_per_year",
+      "section": "reach",
+      "label": "Research consortia: income gains in units of value, a typical year",
+      "format": "number",
+      "unit": "UoV / year",
+      "formula": "rc_spend_per_year * rc_return_per_dollar * $uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr) * rc_attribution_share * rc_missing_data_adj * evidence_adj",
+      "explainer": "Income gains to German workers and owners, on the log scale at average consumption (the site's European figure: UK consumption per person on the survey scale), with the consortia's credit, evidence and missing-data steps. The return per dollar is already a present value, so no further wait is discounted."
     },
     {
       "id": "p_success",
@@ -486,16 +587,16 @@
     {
       "id": "ren_years_until_avoided",
       "section": "effect",
-      "label": "Years from the 5% target (2023) until its capacity runs",
+      "label": "Years from the 5% target (late 2023) until its capacity runs in full",
       "format": "number",
       "value": {
-        "low": 3,
-        "best": 4.5,
-        "high": 6
+        "low": 4.5,
+        "best": 6,
+        "high": 7
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "The target's own dates: capacity installed by 2030 (Article 3(1)), mostly from 2025 as countries set their targets, so its middle comes in 2027-2028, four to five years after the directive; our judgment, 4.5 years (3 to 6)."
+      "explainer": "The target's own dates: capacity installed by 2030 (Article 3(1)), mostly from 2025 as countries set their targets, so it runs in full by about 2030, six to seven years after the directive, and partly before; our judgment, 6 years (4.5 to 7)."
     },
     {
       "id": "ren_discounted_years",
@@ -553,7 +654,7 @@
       "format": "number",
       "formula": "(ren_downstream + learn_downstream + h2_downstream) / period_years",
       "unit": "t CO₂e / year",
-      "explainer": "The two wins of 2022-2025, each its tonnes a year × the advocacy share × its discounted years, summed and spread over the period's four years."
+      "explainer": "The wins of 2021-2025, each its tonnes a year × the advocacy share × its discounted years, summed and spread over the period's five years; the research consortia's value enters through the bridge below."
     },
     {
       "id": "evidence_adj",
@@ -566,20 +667,20 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The tonnes are our own chains from industry outlooks and engineering figures, not a regulator's impact assessment, and the learning branch rests on the general learning-curve literature rather than these technologies; ex-ante estimates of technology policy have often run ahead of what was built. Our judgment, 0.7 (0.4 to 1), below the 0.8 we give regulators' own estimates in other climate-policy models, applied to every branch."
+      "explainer": "The tonnes are our own chains from industry outlooks and engineering figures, not a regulator's impact assessment, and the learning branch rests on the general learning-curve literature rather than these technologies; ex-ante estimates of technology policy have often run ahead of what was built. Our judgment, 0.7 (0.4 to 1), applied to every branch."
     },
     {
       "id": "ren_counterfactual_adj",
       "section": "adjustments",
-      "label": "5% target: share of the innovative capacity that wouldn't have been built without it",
+      "label": "5% target: share of the capacity reported against it that the target caused",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.2,
-        "high": 0.5
+        "low": 0.04,
+        "best": 0.12,
+        "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "The definition counts any renewable technology that improves on the state of the art in at least one way, so much capacity built anyway (newer turbines and panels, agrivoltaics, floating offshore wind already in auctions) can be reported against it; the target is indicative. Our judgment, 20% (5% to 50%) of the capacity is there because of the target."
+      "explainer": "The definition counts any renewable technology that improves on the state of the art in at least one way, and member states label mature technologies as innovative, so most capacity reported against the target (newer turbines and panels, agrivoltaics, floating offshore wind already in auctions) would have been built anyway; the target is indicative. Our judgment, 12% (4% to 30%) of the reported capacity is there because of it."
     },
     {
       "id": "ren_attribution_share_shared",
@@ -605,15 +706,15 @@
     {
       "id": "ren_implementation_adj",
       "section": "adjustments",
-      "label": "5% target: share of the target that member states build",
+      "label": "5% target: share of the target member states report as met",
       "format": "percent",
       "value": {
-        "low": 0.15,
-        "best": 0.4,
-        "high": 0.8
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Future Cleantech Architects' own review of ten updated national energy and climate plans found only seven mentioning the target and four saying how they would meet it (The 5% Opportunity, 2026); the target carries no penalty. Our judgment, 40% of it built (15% to 80%)."
+      "explainer": "With a definition this loose, meeting the target on paper is easy: Future Cleantech Architects' own review of ten updated national energy and climate plans found seven mentioning it and four saying how they would meet it, and some counting mature options such as large heat pumps or conventional power-to-X as innovative (The 5% Opportunity, 2026). Our judgment, 70% of the target reported as met (40% to 90%); whether that capacity is there because of the target is the counterfactual row's question alone."
     },
     {
       "id": "h2_counterfactual_adj",
@@ -650,6 +751,35 @@
       "explainer": "Its share of the resources behind the win; it applies whichever way credit is shared."
     },
     {
+      "id": "rc_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Research consortia: Future Cleantech Architects' share of the resources behind them",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "The return above is per dollar of all the consortia's spending; their universities and firms bring their own staff and the ministries' grants, so FCA's spending is part of the whole. Our judgment, 40% (20% to 70%): its spending here is mostly the grant money passed through for its own part of the work, so the partners' own time is the rest."
+    },
+    {
+      "id": "rc_attribution_share",
+      "section": "adjustments",
+      "label": "Research consortia: share of credit used",
+      "format": "percent",
+      "formula": "rc_attribution_share_shared",
+      "explainer": "Its share of the resources behind the consortia; it applies whichever way credit is shared."
+    },
+    {
+      "id": "rc_missing_data_adj",
+      "section": "adjustments",
+      "label": "Research consortia: counted less as the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "The shared missing-data step (docs/normalization.md 2.12): no outcome of the consortia is measured; the return is from research on research spending in general."
+    },
+    {
       "id": "missing_data_adj",
       "section": "adjustments",
       "label": "Counted less where the outcome isn't measured for this charity",
@@ -660,10 +790,18 @@
     {
       "id": "ren_total_adj",
       "section": "adjustments",
-      "label": "5% target: all adjustments combined (both its branches)",
+      "label": "5% target: all adjustments combined",
       "format": "multiple",
       "formula": "evidence_adj * ren_counterfactual_adj * ren_attribution_share * ren_implementation_adj * missing_data_adj",
-      "explainer": "The capacity's direct tonnes and the later tonnes from cheaper technology come from the same capacity, so they share the counterfactual, credit and delivered share."
+      "explainer": "The product of the branch's adjustments."
+    },
+    {
+      "id": "learn_total_adj",
+      "section": "adjustments",
+      "label": "Learning: all adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * ren_attribution_share * missing_data_adj",
+      "explainer": "The capacity the target caused already carries its counterfactual and delivered share, so only the credit, evidence and missing-data steps apply."
     },
     {
       "id": "h2_total_adj",
@@ -678,15 +816,15 @@
       "section": "adjustments",
       "label": "Share of the tonnes that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "((ren_downstream + learn_downstream) * ren_counterfactual_adj + h2_downstream * h2_counterfactual_adj) / (ren_downstream + learn_downstream + h2_downstream)",
-      "explainer": "The branches' own rows apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
+      "formula": "(ren_downstream * ren_counterfactual_adj + learn_downstream + h2_downstream * h2_counterfactual_adj) / (ren_downstream + learn_downstream + h2_downstream)",
+      "explainer": "The branches' own rows apply (learning at 1, its counterfactual already in the capacity caused); this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
     },
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "Future Cleantech Architects' share of the resources behind the wins (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "((ren_downstream + learn_downstream) * ren_counterfactual_adj * ren_attribution_share_shared + h2_downstream * h2_counterfactual_adj * h2_attribution_share_shared) / ((ren_downstream + learn_downstream) * ren_counterfactual_adj + h2_downstream * h2_counterfactual_adj)",
+      "formula": "(ren_downstream * ren_counterfactual_adj * ren_attribution_share_shared + learn_downstream * ren_attribution_share_shared + h2_downstream * h2_counterfactual_adj * h2_attribution_share_shared) / (ren_downstream * ren_counterfactual_adj + learn_downstream + h2_downstream * h2_counterfactual_adj)",
       "explainer": "The branches' own rows apply; this is their average, weighted by each branch's tonnes after the counterfactual, for reading only."
     },
     {
@@ -702,15 +840,15 @@
       "section": "adjustments",
       "label": "Share of the wins' tonnes delivered (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "((ren_downstream + learn_downstream) * ren_counterfactual_adj * ren_attribution_share * ren_implementation_adj + h2_downstream * h2_counterfactual_adj * h2_attribution_share) / ((ren_downstream + learn_downstream) * ren_counterfactual_adj * ren_attribution_share + h2_downstream * h2_counterfactual_adj * h2_attribution_share)",
-      "explainer": "The branches' own rows apply (the delegated act's at 1); this is their average, weighted by each branch's tonnes after the counterfactual and credit, for reading only."
+      "formula": "(ren_downstream * ren_counterfactual_adj * ren_attribution_share * ren_implementation_adj + learn_downstream * ren_attribution_share + h2_downstream * h2_counterfactual_adj * h2_attribution_share) / (ren_downstream * ren_counterfactual_adj * ren_attribution_share + learn_downstream * ren_attribution_share + h2_downstream * h2_counterfactual_adj * h2_attribution_share)",
+      "explainer": "The branches' own rows apply (learning and the delegated act at 1); this is their average, weighted by each branch's tonnes after the counterfactual and credit, for reading only."
     },
     {
       "id": "total_adj",
       "section": "adjustments",
       "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "((ren_downstream + learn_downstream) * ren_total_adj + h2_downstream * h2_total_adj) / (ren_downstream + learn_downstream + h2_downstream)",
+      "formula": "(ren_downstream * ren_total_adj + learn_downstream * learn_total_adj + h2_downstream * h2_total_adj) / (ren_downstream + learn_downstream + h2_downstream)",
       "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
     },
     {
@@ -724,7 +862,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Most of its work has no decided law to show yet: industrial heat and thermal storage (input to the Commission's planned auction for process heat, a dialogue convened with the energy directorate), cement and steel demand, sustainable aviation fuels, hydrogen priorities (Hydrogen Guardrails), briefings for the Bundestag and the European Parliament, and the follow-up of the 5% target in member states (Annual Reports 2024 and 2025). Its spending is in the cost, so leaving it out would count it as worth nothing; a later win would be counted then. Our judgment, 30% of the modelled value (5% to 60%)."
+      "explainer": "Most of its climate work has no decided law to show yet: industrial heat and thermal storage (input to the Commission's planned auction for process heat, a dialogue convened with the energy directorate), cement and steel demand, sustainable aviation fuels, hydrogen priorities (Hydrogen Guardrails), and briefings for the Bundestag and the European Parliament (Annual Reports 2024 and 2025). Its spending is in the cost, so leaving it out would count it as worth nothing; a later win would be counted then. 2024 and 2025 are about two-thirds of the period's real spending and brought one small win, so this pipeline is worth a share of the counted wins: our judgment, 30% of the modelled value (5% to 60%)."
     },
     {
       "id": "ren_expected_tonnes",
@@ -741,7 +879,7 @@
       "label": "5% target: later tonnes a year after the counterfactual, credit and delivery",
       "format": "number",
       "unit": "t CO₂ / year",
-      "formula": "ren_learn_tonnes_per_year * ren_counterfactual_adj * ren_attribution_share_shared * ren_implementation_adj"
+      "formula": "ren_learn_tonnes_per_year * ren_attribution_share_shared"
     },
     {
       "id": "h2_expected_tonnes",
@@ -767,10 +905,10 @@
       "value": {
         "low": 0.03,
         "best": 0.08,
-        "high": 0.18
+        "high": 0.22
       },
       "kind": "judgment",
-      "explainer": "Per-fuel evidence: Markandya & Wilkinson (2007, The Lancet, \"Electricity generation and health\") give 2.8 deaths per TWh for gas and 24.5 for coal in Europe; at 0.37 and 0.95 tonnes of CO₂ per MWh that is 7.6 and 26 deaths per million tonnes, 0.05 and 0.18 of the 146 per million tonnes behind the shared air-pollution rate. The direct tonnes displace mostly EU gas; the later tonnes from cheaper technology may come anywhere, coal included. Our judgment, 0.08 (gas only 0.03 to coal 0.18)."
+      "explainer": "Per-fuel evidence: Markandya & Wilkinson (2007, The Lancet, \"Electricity generation and health\") give 2.8 deaths per TWh for gas and 24.5 for coal in Europe; at 0.37 and 0.76 tonnes of CO₂ per MWh that is 7.6 and 32 deaths per million tonnes, 0.05 and 0.22 of the 146 per million tonnes behind the shared air-pollution rate. The direct tonnes displace mostly EU gas; the later tonnes from cheaper technology may come anywhere, coal included. Our judgment, 0.08 (gas only 0.03 to coal 0.22)."
     },
     {
       "id": "air_pollution_weight",
@@ -797,13 +935,22 @@
       "explainer": "The delegated act's tonnes are methane leaked from gas supply; weighted by expected tonnes a year before waits and years counted. The shared conversion values this share by methane's own timing and adds its ozone deaths (docs/normalization.md 2.5)."
     },
     {
+      "id": "tco2e_from_uov",
+      "section": "bridges",
+      "label": "The research consortia's income gains, in tonnes of CO₂e",
+      "format": "number",
+      "unit": "t CO₂e / year",
+      "formula": "rc_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "explainer": "Units of value into tonnes at what a tonne of these is worth on the site's scale (its heat and air-pollution deaths by age, as the conversion counts them), the bridge the other climate-policy models use (docs/normalization.md 2.6)."
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂e averted per year of the period",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "((ren_downstream + learn_downstream) * ren_total_adj + h2_downstream * h2_total_adj) / period_years * (1 + unmodelled_benefits_adj)",
-      "explainer": "Each win's expected tonnes × its own adjustments, summed and spread over the period's four years, with the work that has no documented win added as a share."
+      "formula": "(ren_downstream * ren_total_adj + learn_downstream * learn_total_adj + h2_downstream * h2_total_adj) / period_years * (1 + unmodelled_benefits_adj) + tco2e_from_uov",
+      "explainer": "Each win's expected tonnes × its own adjustments, summed and spread over the period's five years, with the climate work that has no documented win added as a share, plus the research consortia's income gains in tonnes."
     },
     {
       "id": "tco2e_per_dollar",
