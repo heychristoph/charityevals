@@ -35,17 +35,20 @@ describe("ranking plan", () => {
   });
 
   it("gives each evaluator one entry, and each program its newest model", () => {
-    expect(rankingPlan(lib, "against-malaria-foundation").map((e) => e.owner)).toEqual(["givewell", "hli"]);
-    // GiveWell's four programs, plus SoGive's deworming model as SoGive's own entry.
+    expect(rankingPlan(lib, "against-malaria-foundation").map((e) => e.owner)).toEqual(["givewell", "hli", "the-life-you-can-save"]);
+    // GiveWell's four programs, SoGive's deworming model as SoGive's own entry, and The Life You Can Save's three.
     expect(ids("evidence-action").sort()).toEqual([
       "evidence-action-deworm-the-world-sogive-2022",
       "evidence-action-deworm-world-2024-renewal",
       "evidence-action-ifa-in-bihar-uttar-pradesh-july-2024",
       "evidence-action-in-line-chlorination-india-2023",
       "evidence-action-syphilis-screening-treatment-in",
+      "evidence-action-tlycs-dispensers-for-safe-water",
+      "evidence-action-tlycs-iron-folic-acid-india",
+      "evidence-action-tlycs-syphilis-free-start-liberia",
       "evidence-action-water-quality-nov-2022",
     ]);
-    expect(ids("new-incentives")).toEqual(["new-incentives"]);
+    expect(ids("new-incentives")).toEqual(["new-incentives", "new-incentives-tlycs"]);
   });
 
   it("counts each program's newest model, hand-built or bulk import (C5)", () => {
