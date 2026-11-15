@@ -33,3 +33,4 @@ Verdict: pass
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 1.43 → 1.43.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

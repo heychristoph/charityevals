@@ -28,3 +28,4 @@ Unchanged from round 8 (win_years_counted, missing_data_discount, dec_attributio
 Re-stamped: low and medium findings fixed after the round (wording in the model and write-up only, no formula or number changed).
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0603 → 0.054.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

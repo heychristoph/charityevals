@@ -38,3 +38,4 @@ Previous round (round 2):
 Verdict: pass. Findings: 0 high, 0 medium, 0 low.
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00129 → 0.00156.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

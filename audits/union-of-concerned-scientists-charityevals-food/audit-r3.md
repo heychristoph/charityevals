@@ -23,3 +23,4 @@ None open. The audit-model outlier (medium) and spread (low) lines remain by des
 Model-sha: 6d2c0c71fbf3bf00a43228f01761a96a9e0e0acd7f9501a7ffedeab589f3e959
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000253 → 0.000453.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

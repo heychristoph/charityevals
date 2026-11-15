@@ -13,3 +13,4 @@ Verdict: pass (0 high).
 Model-sha: 43da1e26a504a2a47a507ddeba9831ee1670faabc144e5737df58daaf2209f39
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0125 → 0.0135.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

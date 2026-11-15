@@ -17,3 +17,4 @@ Verdict: pass (no high, no medium; the two standing low notes only)
 Model-sha: b24b3ba064b91aaca02820dec17a542d94c83eb75f6581b6b66199a830179ef4
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000601 → 0.000489.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
