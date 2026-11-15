@@ -1,0 +1,25 @@
+# Audit: doctors-without-borders-charityevals-advocacy, round 5 (verification round: only the changes of commit 5e4a7655)
+Result: 1.281e-4 uov/$ = 0.0640 years of healthy life per 1,000 dollars (combined range 0.0068–0.602); cause median 0.1169 (×0.55). Verdict: pass.
+Model-sha: f4398a4a97eb55e33c6eb6cdb1aea2b9bf979caefa88a646ef97c6674ec83dfc
+Verdict: pass
+Scope: verification round. Checked only that each round-4 finding is fixed and that the new row `acc_innovation_harm` and every number in the summary and write-up match the model. Programmes and spending were verified in round 4 and are unchanged (awareness-raising, MSF Access, DNDi, 2025).
+Mechanical: lint-all 0 findings for this model; check.ts all models valid; audit-model.ts runs clean (no findings). Normalization-audit and simulation-check not rerun (the change is one factor row, text and weights).
+Previous round: finding 1 (text said 50%) resolved: summary and write-up now say MSF's own 40% (`@next_dollar.doctors_without_borders` best 0.4, same value as in round 4). Finding 2 (beneficiary weights) resolved: `beneficiaries` equals the round-4 fix exactly, sums to 1, note says 89 / 4 / 7%. Finding 3 (drivers) resolved: the healthy-year value is in the write-up's drivers with 0.034 to 0.12 (tornado 0.03432–0.1234). Finding 4 (`acc_missing_data_adj` explainer) resolved: the judged attribution is gone from the thin reason, wording as proposed. Finding 5 ($8 million) resolved: "($8 million saved, which we count as a year's orders)". Finding 6 (side effect) resolved by a defensible alternative (see finding 1 below, low).
+
+Numbers checked against `audit-model.ts`: headline 0.064 (0.06403); combined range 0.007 to 0.60 (0.0068–0.6018); drivers: missing data 0.013–0.13 (0.01281–0.1281), years a win counts 0.02–0.18 (0.01944–0.1808), MSF's share 0.03–0.12 (0.0299–0.1209), healthy-year value 0.034–0.12, next dollar 0.03–0.11 (0.03201–0.1120), counterfactual 0.03–0.10 (0.0299–0.09815); the 2% (0.98) matches `acc_innovation_harm`; 3.3% of social mission unchanged (the headline's input is the same 64.8M / 1,974.7M); branch shares with the factor: about 88.8 / 4.0 / 7.2%, so the stated 89 / 4 / 7% hold. The audit paragraph's "0.065 to 0.064" matches the commit's move.
+
+`acc_innovation_harm` placement and marking (normalization.md 2.16): `side_effect: "factor"` (a multiplier on the savings, read through `$side_effect_weight` as 1 + w(row − 1)), section `effect`, defined before its reader; read by exactly one row, `acc_value_per_year`, which sits in the effect section; not computed from another side effect (no double weighting); kind judgment with range 0.9–1 and best 0.98; the explainer names its anchor. Claims in the explainer: Cepheid's Xpert MTB/RIF Ultra launched in 2017 (WHO endorsed it that year) and Xpert MTB/XDR in 2021 (CE-marked, WHO-endorsed 2021); the 2012 concessional deal (the price cut to $9.98, which is also the quoted "before" price of the 2023 cut) is consistent with the model's own `acc_xpert_price_before`. Plausible and in line with the direction (a small harm).
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | low | missing-adjustment | `acc_innovation_harm` (explainer) | The anchor is qualitative (no figure for the concessional tier's share of the maker's sales, which round 4 suggested as the anchor); the explainer states "a small part of the makers' sales" without a number or source. | Explainer: "the cuts are to concessional prices for high-burden countries, a small part of the makers' sales". The row is a ranged judgment and the launch dates are correct, so this is a defensible alternative. | Add one figure and its source to the explainer if one is found (Danaher's or Cepheid's annual report: the share of Cepheid's TB cartridge sales that goes to the concessional tier), or word it as "a small part of the makers' sales (not published; our reading)". | none (text); the 0.9–1 range stays |
+
+## Sources checked
+| Row | URL | Status | Note |
+|---|---|---|---|
+| acc_innovation_harm explainer (Ultra 2017, XDR 2021) | WHO / Cepheid product announcements | consistent with public record (from knowledge; not re-fetched this round) | Xpert MTB/RIF Ultra endorsed by WHO 2017; Xpert MTB/XDR 2021. |
+| @next_dollar.doctors_without_borders | facts/next_dollar.json | verified in this worktree | best 0.4 (0.2–0.7), estimate; retrieved 2026-11-13 per round 4. |
+| All other rows | | not rechecked | Verified in round 4 and unchanged by the commit (diff touches only beneficiaries, summary, `acc_innovation_harm`, `acc_value_per_year`, `acc_missing_data_adj` explainer). |
+
+## Drivers
+Unchanged in order: missing-data slider, years a win counts, MSF's share of the price campaigns, the value of a healthy year (judgment, 1–4), MSF's next-dollar share (0.2–0.7), the counterfactual. What would most improve the model: a measured link from the price campaigns to the 2023 price cuts, and a sourced figure for the incentive effect in finding 1.

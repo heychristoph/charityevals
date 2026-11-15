@@ -1,0 +1,554 @@
+{
+ "id": "malaria-consortium-tlycs-emergency-response-ethiopia",
+ "name": "Malaria Consortium, malaria emergency response in South Ethiopia (The Life You Can Save, 2025)",
+ "kind": "charity",
+ "cause": "global-health",
+ "beneficiaries": {"ETH":1},
+ "beneficiaries_note": "The model's name: Malaria Consortium, malaria emergency response in South Ethiopia (The Life You Can Save, 2025).",
+ "missing_data": {"thin_share":1,"note":"Thin: the effect is the before-and-after change in the project districts' monitoring indicators (malaria cases relative to the region's, admissions, case fatality), with no comparison group, read as a fall in incidence across the whole population."},
+ "estimate_basis": "unit_cost",
+ "charity": "malaria-consortium",
+ "owner": "the-life-you-can-save",
+ "summary": "Malaria Consortium ran an emergency malaria response with the health authorities in 18 high-burden districts of South Ethiopia from mid-2024, after cases in Ethiopia rose eightfold. The Life You Can Save reads the fall in the districts' malaria indicators over the project as cases, admissions and deaths averted and estimates $225 per DALY averted. Our view values each death averted by age the site's way and credits Malaria Consortium with most but not all of the change; the biggest uncertainty is how much of the fall the project caused.",
+ "source": {
+  "publisher": "The Life You Can Save",
+  "title": "Malaria Consortium: evaluation and cost-effectiveness analysis (emergency response, Ethiopia)",
+  "url": "https://www.thelifeyoucansave.org/evaluation-hub/malaria-consortium/",
+  "published": "2025-08-26",
+  "retrieved": "2026-11-15",
+  "license": "No licence published; the sheet is linked publicly from The Life You Can Save's Evaluation Hub, which calls its figures highly approximate. Numbers cited with their source."
+ },
+ "resources": [
+  {
+   "title": "The Life You Can Save, Malaria Consortium Evaluation Hub page",
+   "url": "https://www.thelifeyoucansave.org/evaluation-hub/malaria-consortium/",
+   "type": "evaluation",
+   "note": "Links the main evaluation document, the quality-of-evidence and organisational-quality forms and the cost-effectiveness sheet. The page has no date; the sheet's file was created on 26 August 2025, the date used here."
+  },
+  {
+   "title": "The Life You Can Save, cost-effectiveness analysis spreadsheet for Malaria Consortium",
+   "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+   "type": "model",
+   "note": "Tab 'Ethiopia' (2024/25 emergency response in South Ethiopia). Every calculated row of this model reproduces its cell."
+  },
+  {
+   "title": "Malaria Consortium",
+   "url": "https://www.malariaconsortium.org",
+   "type": "charity"
+  }
+ ],
+ "evaluator": {
+  "name": "The Life You Can Save",
+  "assumptions": {
+   "resource_shares": 0,
+   "discount_rate": 0.03,
+   "uov_per_daly": 2
+  }
+ },
+ "sections": [
+  {
+   "id": "reach",
+   "title": "People in the project districts"
+  },
+  {
+   "id": "effect",
+   "title": "Cases, admissions and deaths averted"
+  },
+  {
+   "id": "dalys",
+   "title": "DALYs averted"
+  },
+  {
+   "id": "costs",
+   "title": "Costs"
+  },
+  {
+   "id": "bottom",
+   "title": "The Life You Can Save's bottom line"
+  },
+  {
+   "id": "deaths_ours",
+   "title": "Deaths valued by age",
+   "kind": "ours",
+   "explainer": "charityevals' step. The sheet counts a death averted as discounted remaining life expectancy; the site values every death by age with GiveWell's moral weights and the value-of-a-life slider."
+  },
+  {
+   "id": "credit_ours",
+   "title": "What would have happened anyway, and who pays",
+   "kind": "ours",
+   "explainer": "charityevals' step: the share of the effect due to Malaria Consortium and, with credit by share of resources on, staff's pay below market."
+  }
+ ],
+ "rows": [
+  {
+   "id": "target_population",
+   "section": "reach",
+   "label": "People in the 18 project districts",
+   "format": "integer",
+   "unit": "people",
+   "value": 1709099.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B30"
+   }
+  },
+  {
+   "id": "incidence_baseline",
+   "section": "effect",
+   "label": "Indicator: the districts' malaria cases relative to the region's, baseline",
+   "format": "percent",
+   "value": 0.4522,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B40"
+   }
+  },
+  {
+   "id": "incidence_endline",
+   "section": "effect",
+   "label": "Indicator: the districts' malaria cases relative to the region's, endline",
+   "format": "percent",
+   "value": 0.3269,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B44"
+   }
+  },
+  {
+   "id": "incidence_reduction",
+   "section": "effect",
+   "label": "Reduction of malaria incidence",
+   "format": "percent",
+   "formula": "incidence_baseline - incidence_endline",
+   "expected": 0.1253,
+   "explainer": "The sheet reads the fall in the indicator (45.2% to 32.7%) as 12.5 fewer cases per 100 people."
+  },
+  {
+   "id": "cfr_baseline",
+   "section": "effect",
+   "label": "Malaria case fatality, baseline",
+   "format": "percent",
+   "value": 0.0001,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B42"
+   }
+  },
+  {
+   "id": "cfr_endline",
+   "section": "effect",
+   "label": "Malaria case fatality, endline",
+   "format": "percent",
+   "value": 0.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B46"
+   }
+  },
+  {
+   "id": "cfr_reduction",
+   "section": "effect",
+   "label": "Reduction in case fatality",
+   "format": "percent",
+   "formula": "cfr_baseline - cfr_endline",
+   "expected": 0.0001
+  },
+  {
+   "id": "cases_averted",
+   "section": "effect",
+   "label": "Malaria cases averted",
+   "format": "integer",
+   "unit": "cases",
+   "formula": "incidence_reduction * target_population",
+   "expected": 214150.1047
+  },
+  {
+   "id": "deaths_averted",
+   "section": "effect",
+   "label": "Deaths averted",
+   "format": "number",
+   "unit": "deaths",
+   "formula": "cfr_reduction * cases_averted",
+   "expected": 21.41501047
+  },
+  {
+   "id": "admission_baseline",
+   "section": "effect",
+   "label": "Malaria admission rate, baseline",
+   "format": "percent",
+   "value": 0.028,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B41"
+   }
+  },
+  {
+   "id": "admission_endline",
+   "section": "effect",
+   "label": "Malaria admission rate, endline",
+   "format": "percent",
+   "value": 0.019,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B45"
+   }
+  },
+  {
+   "id": "admission_reduction",
+   "section": "effect",
+   "label": "Reduction of malaria admissions",
+   "format": "percent",
+   "formula": "admission_baseline - admission_endline",
+   "expected": 0.009
+  },
+  {
+   "id": "admissions_averted",
+   "section": "effect",
+   "label": "Admissions averted",
+   "format": "number",
+   "unit": "admissions",
+   "formula": "cases_averted * admission_reduction",
+   "expected": 1927.350942
+  },
+  {
+   "id": "le_25",
+   "section": "dalys",
+   "label": "Life expectancy at 25, Ethiopia",
+   "format": "number",
+   "unit": "years",
+   "value": 34.55,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B55"
+   }
+  },
+  {
+   "id": "le_disc_25",
+   "section": "dalys",
+   "label": "Discounted life expectancy at 25",
+   "format": "number",
+   "unit": "years",
+   "formula": "round((1 - (1 + $discount_rate) ^ -le_25) / $discount_rate, 1)",
+   "expected": 21.3,
+   "explainer": "The remaining years of life discounted at The Life You Can Save's 3% (the shared rate in our view, where it cancels: deaths are valued by age)."
+  },
+  {
+   "id": "yll",
+   "section": "dalys",
+   "label": "Years of life lost averted",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "deaths_averted * le_disc_25",
+   "expected": 456.139723
+  },
+  {
+   "id": "dw_severe",
+   "section": "dalys",
+   "label": "Disability weight for severe malaria",
+   "format": "number",
+   "value": 0.133411519,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B76"
+   }
+  },
+  {
+   "id": "admission_days",
+   "section": "dalys",
+   "label": "Days in hospital",
+   "format": "number",
+   "unit": "days",
+   "value": 4,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "C64"
+   },
+   "explainer": "The sheet takes admitted cases as severe, with four days in hospital (in the formula of row 65)."
+  },
+  {
+   "id": "yld_admissions",
+   "section": "dalys",
+   "label": "Years lived with disability averted, admissions",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "admissions_averted * dw_severe * admission_days / 365",
+   "expected": 2.817871966
+  },
+  {
+   "id": "dw_mild",
+   "section": "dalys",
+   "label": "Disability weight for mild malaria",
+   "format": "number",
+   "value": 0.005786497,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B77"
+   }
+  },
+  {
+   "id": "dw_moderate",
+   "section": "dalys",
+   "label": "Disability weight for moderate malaria",
+   "format": "number",
+   "value": 0.050594946,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B78"
+   }
+  },
+  {
+   "id": "dw_case",
+   "section": "dalys",
+   "label": "Disability weight for a case, mild and moderate averaged",
+   "format": "number",
+   "formula": "avg(dw_mild, dw_moderate)",
+   "expected": 0.0281907215
+  },
+  {
+   "id": "episode_days",
+   "section": "dalys",
+   "label": "Days a case lasts until cured",
+   "format": "number",
+   "unit": "days",
+   "value": 14,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "A79"
+   }
+  },
+  {
+   "id": "yld_cases",
+   "section": "dalys",
+   "label": "Years lived with disability averted, cases",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "cases_averted * dw_case * episode_days / 365",
+   "expected": 231.5579273
+  },
+  {
+   "id": "dalys",
+   "section": "dalys",
+   "label": "DALYs averted",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yld_cases + yld_admissions + yll",
+   "expected": 690.5155222
+  },
+  {
+   "id": "cost_capital",
+   "section": "costs",
+   "label": "Capital costs",
+   "format": "usd",
+   "unit": "$",
+   "value": 12028.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B69"
+   }
+  },
+  {
+   "id": "cost_recurrent",
+   "section": "costs",
+   "label": "Recurrent costs",
+   "format": "usd",
+   "unit": "$",
+   "value": 143005.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Ethiopia')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B70"
+   }
+  },
+  {
+   "id": "total_cost",
+   "section": "costs",
+   "label": "Total cost",
+   "format": "usd",
+   "unit": "$",
+   "formula": "cost_recurrent + cost_capital",
+   "expected": 155033
+  },
+  {
+   "id": "cost_per_daly",
+   "section": "bottom",
+   "label": "Cost per DALY averted",
+   "format": "usd",
+   "unit": "$ per DALY",
+   "formula": "total_cost / dalys",
+   "expected": 224.5177625
+  },
+  {
+   "id": "death_value_under5",
+   "section": "deaths_ours",
+   "label": "Value of a death of a child under five averted, in healthy years",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
+   "explainer": "**Changed for consistency.** The Life You Can Save counts a child's death averted as the child's remaining life expectancy at 2.5 years, discounted at 3%, about 28 years. The site values every death of a child under five the same way: GiveWell's moral weight (116.25 units of value), times the value-of-a-life slider, in healthy years at Your values' exchange rate (58 at the defaults)."
+  },
+  {
+   "id": "share_5_14_of_5plus",
+   "section": "deaths_ours",
+   "label": "Share of malaria deaths at five or older that are at ages 5 to 14",
+   "format": "percent",
+   "formula": "@death_ages.malaria_ssa_share_5_14 / (1 - @death_ages.malaria_ssa_share_under5)",
+   "explainer": "GBD 2023, sub-Saharan Africa (facts: death_ages)."
+  },
+  {
+   "id": "share_15_49_of_5plus",
+   "section": "deaths_ours",
+   "label": "Share of malaria deaths at five or older that are at ages 15 to 49",
+   "format": "percent",
+   "formula": "@death_ages.malaria_ssa_share_15_49 / (1 - @death_ages.malaria_ssa_share_under5)"
+  },
+  {
+   "id": "share_50plus_of_5plus",
+   "section": "deaths_ours",
+   "label": "Share of malaria deaths at five or older that are at 50 or older",
+   "format": "percent",
+   "formula": "@death_ages.malaria_ssa_share_50plus / (1 - @death_ages.malaria_ssa_share_under5)"
+  },
+  {
+   "id": "death_value_5plus",
+   "section": "deaths_ours",
+   "label": "Value of a malaria death at five or older averted, in healthy years",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "(share_5_14_of_5plus * @moral_weights.uov_per_death_age_5_14 + share_15_49_of_5plus * @moral_weights.uov_per_death_age_15_49 + share_50plus_of_5plus * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier / $uov_per_daly",
+   "explainer": "**Changed for consistency.** The Life You Can Save counts a death at five or older as the remaining life expectancy at 25 (the average age of malaria deaths it cites, 25.9), discounted at 3%. The sheet lumps every age from five up, so our view weights GiveWell's moral weights by age by the ages of sub-Saharan Africa's malaria deaths over five (GBD 2023), times the value-of-a-life slider, in healthy years."
+  },
+  {
+   "id": "death_value_all_ages",
+   "section": "deaths_ours",
+   "label": "Value of a malaria death at any age averted, in healthy years",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "@death_ages.malaria_ssa_share_under5 * death_value_under5 + (1 - @death_ages.malaria_ssa_share_under5) * death_value_5plus",
+   "explainer": "**Changed for consistency.** The sheet counts every death averted at the remaining life expectancy at 25, discounted at 3%; it doesn't split deaths by age. Our view takes the ages of sub-Saharan Africa's malaria deaths (GBD 2023: 63% under five) and values each band by GiveWell's moral weights, times the value-of-a-life slider."
+  },
+  {
+   "id": "dalys_ours",
+   "section": "deaths_ours",
+   "label": "Healthy years gained, deaths valued by age",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "deaths_averted * death_value_all_ages + yld_cases + yld_admissions"
+  },
+  {
+   "id": "ours_vs_tlycs",
+   "section": "deaths_ours",
+   "label": "Our healthy years for the same deaths and illness, per DALY of The Life You Can Save's",
+   "format": "percent",
+   "formula": "dalys_ours / dalys",
+   "explainer": "The evaluator view keeps The Life You Can Save's DALYs (1).",
+   "published": 1
+  },
+  {
+   "id": "counterfactual_share",
+   "section": "credit_ours",
+   "label": "Share of the effect that wouldn't have happened without Malaria Consortium",
+   "format": "percent",
+   "value": {
+    "low": 0.4,
+    "best": 0.7,
+    "high": 1
+   },
+   "kind": "judgment",
+   "explainer": "Our judgment, 70% (40% to 100%); the sheet credits Malaria Consortium with the whole fall. The indicator is measured against the region's malaria, which takes out the epidemic's general waning, but the health authorities and other partners responded in the same districts at the same time. Anchor: Malaria Consortium ran the emergency project with the national and regional authorities, so most but not all of the change is its work.",
+   "published": 1
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "credit_ours",
+   "label": "Staff pay as a share of programme cost",
+   "format": "percent",
+   "formula": "@staff_pay.share_staff_delivered",
+   "explainer": "Default for programmes where staff deliver the help themselves: case management, surveillance and community work. Our judgment."
+  },
+  {
+   "id": "salary_gap",
+   "section": "credit_ours",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "formula": "@staff_pay.gap_health_field",
+   "explainer": "Health workers and field staff at nonprofits. Our judgment."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "credit_ours",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "credit_ours",
+   "label": "Share of the full cost paid in cash",
+   "format": "percent",
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources on, staff's forgone pay counts as part of the cost. The sheet's costs already include everyone's money for the work it credits. Off, this is 100%."
+  },
+  {
+   "id": "dalys_per_dollar",
+   "section": "credit_ours",
+   "label": "Healthy years gained per dollar",
+   "format": "small",
+   "unit": "DALYs per $",
+   "formula": "1 / cost_per_daly * ours_vs_tlycs * counterfactual_share * donor_cost_share",
+   "explainer": "The Life You Can Save's DALYs per dollar, with deaths valued by age, times the share due to Malaria Consortium and the share of the cost paid in cash."
+  }
+ ],
+ "output": {
+  "row": "dalys_per_dollar",
+  "unit": "daly",
+  "label": "Healthy years gained per dollar",
+  "native": {
+   "row": "cost_per_daly",
+   "unit": "$ per DALY averted"
+  }
+ }
+}

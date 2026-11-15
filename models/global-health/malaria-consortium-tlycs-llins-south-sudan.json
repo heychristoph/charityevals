@@ -1,0 +1,504 @@
+{
+ "id": "malaria-consortium-tlycs-llins-south-sudan",
+ "name": "Malaria Consortium, digital net campaigns in South Sudan (The Life You Can Save, 2025)",
+ "kind": "charity",
+ "cause": "global-health",
+ "beneficiaries": {"SSD":1},
+ "beneficiaries_note": "The model's name: Malaria Consortium, digital net campaigns in South Sudan (The Life You Can Save, 2025).",
+ "missing_data": {"thin_share":0,"note":"Measured: the campaign's own household registration counted the people reached and the 13.55% more people found than projected, and the effect of nets on malaria and children's deaths is from the Cochrane review of randomised trials."},
+ "estimate_basis": "unit_cost",
+ "charity": "malaria-consortium",
+ "owner": "the-life-you-can-save",
+ "summary": "Malaria Consortium supported South Sudan's health ministry in moving its mass bednet campaigns from paper to phones, registering and geo-tagging households. The Life You Can Save credits it with the 13.55% more people the digital registration found than the projections, counts the cost of their nets as well as Malaria Consortium's own, and estimates $98 per DALY averted. Our view values each child's death averted by age the site's way and discounts the net's later years; the biggest uncertainty is whether the extra people found would otherwise have gone without nets.",
+ "source": {
+  "publisher": "The Life You Can Save",
+  "title": "Malaria Consortium: evaluation and cost-effectiveness analysis (South Sudan net campaigns)",
+  "url": "https://www.thelifeyoucansave.org/evaluation-hub/malaria-consortium/",
+  "published": "2025-08-26",
+  "retrieved": "2026-11-15",
+  "license": "No licence published; the sheet is linked publicly from The Life You Can Save's Evaluation Hub, which calls its figures highly approximate. Numbers cited with their source."
+ },
+ "resources": [
+  {
+   "title": "The Life You Can Save, Malaria Consortium Evaluation Hub page",
+   "url": "https://www.thelifeyoucansave.org/evaluation-hub/malaria-consortium/",
+   "type": "evaluation",
+   "note": "Links the main evaluation document, the quality-of-evidence and organisational-quality forms and the cost-effectiveness sheet. The page has no date; the sheet's file was created on 26 August 2025, the date used here."
+  },
+  {
+   "title": "The Life You Can Save, cost-effectiveness analysis spreadsheet for Malaria Consortium",
+   "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+   "type": "model",
+   "note": "Tab 'South Sudan' (2022–2024 digital net campaigns). The sheet's other tabs are Nigeria (imported separately), Ethiopia (imported separately) and Cambodia (marked as being updated). Every calculated row of this model reproduces its cell."
+  },
+  {
+   "title": "Pryce, Richardson and Lengeler, Insecticide-treated nets for preventing malaria (Cochrane 2018)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6418392/",
+   "type": "study"
+  },
+  {
+   "title": "Malaria Consortium",
+   "url": "https://www.malariaconsortium.org",
+   "type": "charity"
+  }
+ ],
+ "evaluator": {
+  "name": "The Life You Can Save",
+  "assumptions": {
+   "resource_shares": 0,
+   "discount_rate": 0.03,
+   "uov_per_daly": 2
+  }
+ },
+ "sections": [
+  {
+   "id": "reach",
+   "title": "People reached",
+   "explainer": "The people who received nets and the extra share the digital registration found."
+  },
+  {
+   "id": "effect",
+   "title": "Malaria and deaths averted"
+  },
+  {
+   "id": "dalys",
+   "title": "DALYs averted"
+  },
+  {
+   "id": "costs",
+   "title": "Costs"
+  },
+  {
+   "id": "bottom",
+   "title": "The Life You Can Save's bottom line"
+  },
+  {
+   "id": "deaths_ours",
+   "title": "Deaths valued by age",
+   "kind": "ours",
+   "explainer": "charityevals' step. The sheet counts a death averted as discounted remaining life expectancy; the site values every death by age with GiveWell's moral weights and the value-of-a-life slider."
+  },
+  {
+   "id": "credit_ours",
+   "title": "What would have happened anyway, and who pays",
+   "kind": "ours",
+   "explainer": "charityevals' step: the share of the effect due to Malaria Consortium and, with credit by share of resources on, staff's pay below market."
+  }
+ ],
+ "rows": [
+  {
+   "id": "people_received_nets",
+   "section": "reach",
+   "label": "People who received nets in the campaign",
+   "format": "integer",
+   "unit": "people",
+   "value": 7713018.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B119"
+   },
+   "explainer": "Malaria Consortium's monitoring report for the 2022–2024 net campaigns it supported in South Sudan."
+  },
+  {
+   "id": "digital_extra_coverage",
+   "section": "reach",
+   "label": "Extra people reached thanks to the digital campaign tools",
+   "format": "percent",
+   "value": 0.1355,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "A110",
+    "quote": "The campaign identified 13.55% more people than projected, helping calibrate ITN needs in real time."
+   },
+   "explainer": "Household registration on phones found 13.55% more people than the paper projections; the sheet counts them as the people who got nets only because of the digital tools."
+  },
+  {
+   "id": "extra_people",
+   "section": "reach",
+   "label": "People who received nets because of the digital tools",
+   "format": "integer",
+   "unit": "people",
+   "formula": "people_received_nets * digital_extra_coverage",
+   "expected": 1045113.939
+  },
+  {
+   "id": "net_incidence_reduction",
+   "section": "effect",
+   "label": "Reduction in malaria episodes among people using nets",
+   "format": "percent",
+   "value": 0.44,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "A107",
+    "quote": "44% reduction in severe malaria episodes in the ITN group."
+   },
+   "explainer": "From the Cochrane review of nets (Pryce et al. 2018)."
+  },
+  {
+   "id": "net_life_years",
+   "section": "effect",
+   "label": "Years a net protects",
+   "format": "number",
+   "unit": "years",
+   "value": 3,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B121"
+   },
+   "explainer": "In the formula of row 121."
+  },
+  {
+   "id": "net_use",
+   "section": "effect",
+   "label": "Share of people with nets who use them",
+   "format": "percent",
+   "value": 0.85,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B121"
+   },
+   "explainer": "In the formula of row 121."
+  },
+  {
+   "id": "protected_person_years",
+   "section": "effect",
+   "label": "Person-years of malaria averted among the extra people",
+   "format": "integer",
+   "unit": "person-years",
+   "formula": "extra_people * net_incidence_reduction * net_life_years * net_use",
+   "expected": 1172617.84,
+   "explainer": "The sheet calls these person-years protected and treats each as one case averted (row 124)."
+  },
+  {
+   "id": "u5_share",
+   "section": "effect",
+   "label": "Share of the population under five",
+   "format": "percent",
+   "value": 0.174,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "C108"
+   },
+   "explainer": "From South Sudan's population by age (the sheet's rows 58 to 80)."
+  },
+  {
+   "id": "u5_protected",
+   "section": "effect",
+   "label": "Children under five among them",
+   "format": "integer",
+   "unit": "children",
+   "formula": "protected_person_years * u5_share",
+   "expected": 204035.5041
+  },
+  {
+   "id": "u5_lives_per_1000",
+   "section": "effect",
+   "label": "Children's lives saved each year per 1,000 children protected by nets",
+   "format": "number",
+   "unit": "per 1,000",
+   "value": 5.6,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "A109",
+    "quote": "Saved 5.6 lives (95% CI 3.6 to 7.6) each year for every 1000 children protected with ITNs."
+   }
+  },
+  {
+   "id": "deaths_u5",
+   "section": "effect",
+   "label": "Deaths of children under five averted",
+   "format": "number",
+   "unit": "deaths",
+   "formula": "u5_protected / 1000 * u5_lives_per_1000",
+   "expected": 1142.598823
+  },
+  {
+   "id": "cases_averted",
+   "section": "effect",
+   "label": "Malaria cases averted (all ages)",
+   "format": "integer",
+   "unit": "cases",
+   "formula": "protected_person_years - deaths_u5",
+   "expected": 1171475.241
+  },
+  {
+   "id": "malaria_dw",
+   "section": "dalys",
+   "label": "Disability weight for moderate malaria",
+   "format": "number",
+   "value": 0.050594946,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B91"
+   }
+  },
+  {
+   "id": "episode_days",
+   "section": "dalys",
+   "label": "Days an episode of malaria lasts",
+   "format": "number",
+   "unit": "days",
+   "value": 14,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B125"
+   },
+   "explainer": "In the formula of row 125."
+  },
+  {
+   "id": "yld",
+   "section": "dalys",
+   "label": "Years lived with disability averted",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "cases_averted * malaria_dw * episode_days / 365",
+   "expected": 2273.397731
+  },
+  {
+   "id": "le_2_5",
+   "section": "dalys",
+   "label": "Life expectancy at 2.5 years, South Sudan",
+   "format": "number",
+   "unit": "years",
+   "value": 62.8,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B53"
+   }
+  },
+  {
+   "id": "le_disc_2_5",
+   "section": "dalys",
+   "label": "Discounted life expectancy at 2.5 years",
+   "format": "number",
+   "unit": "years",
+   "formula": "round((1 - (1 + $discount_rate) ^ -le_2_5) / $discount_rate, 1)",
+   "expected": 28.1,
+   "explainer": "The remaining years of life discounted at The Life You Can Save's 3% (the shared rate in our view, where it cancels: deaths are valued by age)."
+  },
+  {
+   "id": "yll",
+   "section": "dalys",
+   "label": "Years of life lost averted, under-five deaths",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "deaths_u5 * le_disc_2_5",
+   "expected": 32107.02692
+  },
+  {
+   "id": "dalys",
+   "section": "dalys",
+   "label": "DALYs averted",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yll + yld",
+   "expected": 34380.42465
+  },
+  {
+   "id": "mc_cost_2024",
+   "section": "costs",
+   "label": "Malaria Consortium's cost of the digital campaign work, 2024",
+   "format": "usd",
+   "unit": "$",
+   "value": 118769.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B49"
+   },
+   "explainer": "Capital and recurrent costs, $118,769 in 2024."
+  },
+  {
+   "id": "people_per_net",
+   "section": "costs",
+   "label": "People per net in the campaign's allocation",
+   "format": "number",
+   "value": 1.8,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B50"
+   },
+   "explainer": "The campaign's target of one net for 1.8 people (in the formula of row 50)."
+  },
+  {
+   "id": "cost_per_net_delivered",
+   "section": "costs",
+   "label": "Full economic cost of a net delivered in a campaign",
+   "format": "usd",
+   "unit": "$ per net",
+   "value": 5.62,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'South Sudan')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "C50",
+    "quote": "Overall economic costs of net distribution is US$ 4.41~$5.62 in 2024."
+   },
+   "explainer": "The top of the published range; the sheet counts the nets the extra people got at this cost, whoever paid for them."
+  },
+  {
+   "id": "net_cost",
+   "section": "costs",
+   "label": "Cost of the nets for the extra people",
+   "format": "usd",
+   "unit": "$",
+   "formula": "(extra_people / people_per_net) * cost_per_net_delivered",
+   "expected": 3263077.965
+  },
+  {
+   "id": "total_cost",
+   "section": "costs",
+   "label": "Total cost counted",
+   "format": "usd",
+   "unit": "$",
+   "formula": "net_cost + mc_cost_2024",
+   "expected": 3381846.965
+  },
+  {
+   "id": "cost_per_daly",
+   "section": "bottom",
+   "label": "Cost per DALY averted",
+   "format": "usd",
+   "unit": "$ per DALY",
+   "formula": "total_cost / dalys",
+   "expected": 98.36547975
+  },
+  {
+   "id": "death_value_under5",
+   "section": "deaths_ours",
+   "label": "Value of a death of a child under five averted, in healthy years",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
+   "explainer": "**Changed for consistency.** The Life You Can Save counts a child's death averted as the child's remaining life expectancy at 2.5 years, discounted at 3%, about 28 years. The site values every death of a child under five the same way: GiveWell's moral weight (116.25 units of value), times the value-of-a-life slider, in healthy years at Your values' exchange rate (58 at the defaults)."
+  },
+  {
+   "id": "years_discount_rate",
+   "section": "deaths_ours",
+   "label": "Discount rate on the years of protection",
+   "format": "percent",
+   "formula": "$discount_rate",
+   "explainer": "**Changed for consistency.** The sheet adds up the cases and deaths over the net's years at face value; our view discounts later years at the shared rate (Your values). The Life You Can Save discounts only life expectancy, so the evaluator view keeps 0 here.",
+   "published": 0
+  },
+  {
+   "id": "years_discount_factor",
+   "section": "deaths_ours",
+   "label": "Discounted years of protection per year counted",
+   "format": "percent",
+   "formula": "pv_annuity_due(1, years_discount_rate, net_life_years) / net_life_years",
+   "explainer": "A net's three years of protection, the later two discounted to today: at 4% the three years count as 2.89."
+  },
+  {
+   "id": "dalys_ours",
+   "section": "deaths_ours",
+   "label": "Healthy years gained, deaths valued by age",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "(deaths_u5 * death_value_under5 + yld) * years_discount_factor"
+  },
+  {
+   "id": "ours_vs_tlycs",
+   "section": "deaths_ours",
+   "label": "Our healthy years for the same deaths and illness, per DALY of The Life You Can Save's",
+   "format": "percent",
+   "formula": "dalys_ours / dalys",
+   "explainer": "The evaluator view keeps The Life You Can Save's DALYs (1).",
+   "published": 1
+  },
+  {
+   "id": "counterfactual_share",
+   "section": "credit_ours",
+   "label": "Share of the effect that wouldn't have happened without Malaria Consortium",
+   "format": "percent",
+   "value": 1,
+   "kind": "judgment",
+   "explainer": "×1, our judgment: the sheet credits Malaria Consortium only with the people the digital tools found beyond the projections, and counts the cost of their nets as well as its own."
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "credit_ours",
+   "label": "Staff pay as a share of programme cost",
+   "format": "percent",
+   "formula": "@staff_pay.share_goods",
+   "explainer": "Default for programmes that mostly buy and hand out goods: the nets are most of the cost counted. Our judgment."
+  },
+  {
+   "id": "salary_gap",
+   "section": "credit_ours",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "formula": "@staff_pay.gap_health_field",
+   "explainer": "Health workers and field staff at nonprofits. Our judgment."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "credit_ours",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "credit_ours",
+   "label": "Share of the full cost paid in cash",
+   "format": "percent",
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources on, staff's forgone pay counts as part of the cost. The sheet's costs already include everyone's money for the work it credits. Off, this is 100%."
+  },
+  {
+   "id": "dalys_per_dollar",
+   "section": "credit_ours",
+   "label": "Healthy years gained per dollar",
+   "format": "small",
+   "unit": "DALYs per $",
+   "formula": "1 / cost_per_daly * ours_vs_tlycs * counterfactual_share * donor_cost_share",
+   "explainer": "The Life You Can Save's DALYs per dollar, with deaths valued by age, times the share due to Malaria Consortium and the share of the cost paid in cash."
+  }
+ ],
+ "output": {
+  "row": "dalys_per_dollar",
+  "unit": "daly",
+  "label": "Healthy years gained per dollar",
+  "native": {
+   "row": "cost_per_daly",
+   "unit": "$ per DALY averted"
+  }
+ }
+}

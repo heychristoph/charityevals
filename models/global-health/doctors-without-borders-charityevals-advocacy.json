@@ -5,12 +5,18 @@
   "cause": "global-health",
   "beneficiaries": {"IND":0.308,"IDN":0.1155,"PHL":0.077,"PAK":0.077,"NGA":0.08285,"BGD":0.0539,"ZAF":0.0385,"COD":0.08975,"TCD":0.02125,"SDN":0.03625,"SSD":0.02125,"NER":0.02125,"AFG":0.02125,"SOM":0.02125,"KEN":0.015},
   "beneficiaries_note": "Our build: MSF Access's TB price cuts (77% of the result) spread over the high-burden countries that buy the tests and drugs (India, Indonesia, the Philippines, Pakistan, Nigeria, Bangladesh, South Africa, the DRC; our weights by TB burden); awareness-raising (17%) over the crisis countries of MSF's medical model, equally; DNDi (6%) over the DRC, Sudan and Kenya (sleeping sickness and leishmaniasis). A judgment.",
-  "destination_reads": ["givewell:against-malaria-foundation","givewell:malaria-consortium","givewell:helen-keller-intl","givewell:new-incentives","givedirectly"],
+  "destination_reads": [
+    "givewell:against-malaria-foundation",
+    "givewell:malaria-consortium",
+    "givewell:helen-keller-intl",
+    "givewell:new-incentives",
+    "givedirectly"
+  ],
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "doctors-without-borders",
   "owner": "charityevals",
-  "summary": "Besides medical care, Médecins Sans Frontières spends about 65 million euros a year on awareness-raising (public communications and witnessing), MSF Access (advocacy for affordable medicines and tests) and a grant to the Drugs for Neglected Diseases initiative. None publishes outcome data, so each is built from the research on its kind of work and counted at half by the shared missing-data slider: MSF Access as the buyers' savings from the TB price cuts it campaigned for in 2019-2025 (Xpert tests, bedaquiline), awareness-raising as the extra humanitarian funding its share of news coverage brings, DNDi at a drug-development partnership's measured return. Advocacy's effects are spread over many actors and MSF's share of them is small, the evidence is thin (all three branches discounted for missing data), and past wins count at the shared share of the average a next dollar does. The result is mostly uncertainty; the biggest questions are how much of the price cuts advocacy caused and MSF's share of it, and how far news coverage moves aid.",
+  "summary": "Besides medical care, Médecins Sans Frontières spends about 65 million euros a year on awareness-raising (public communications and witnessing), MSF Access (advocacy for affordable medicines and tests) and a grant to the Drugs for Neglected Diseases initiative. None publishes outcome data, so each is built from the research on its kind of work and counted at half by the shared missing-data slider: MSF Access as the buyers' savings from the TB price cuts it campaigned for in 2019-2025 (Xpert tests, bedaquiline), awareness-raising as the extra humanitarian funding its share of news coverage brings, DNDi at a drug-development partnership's measured return. Advocacy's effects are spread over many actors and MSF's share of them is small, the evidence is thin (all three branches discounted for missing data), and past wins count at MSF's own figure for how much a next dollar does compared with the average (40%). The result is mostly uncertainty; the biggest questions are how much of the price cuts advocacy caused and MSF's share of it, and how far news coverage moves aid.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Médecins Sans Frontières, advocacy and research (2025)",
@@ -549,12 +555,26 @@
       "formula": "(acc_spend_eur_2019 * @cpi.fra_2025 / @cpi.fra_2019 + acc_spend_eur_2020 * @cpi.fra_2025 / @cpi.fra_2020 + acc_spend_eur_2021 * @cpi.fra_2025 / @cpi.fra_2021 + acc_spend_eur_2022 * @cpi.fra_2025 / @cpi.fra_2022 + acc_spend_eur_2023 * @cpi.fra_2025 / @cpi.fra_2023 + acc_spend_eur_2024 * @cpi.fra_2025 / @cpi.fra_2024 + access_eur) / acc_campaign_years / access_eur"
     },
     {
+      "id": "acc_innovation_harm",
+      "side_effect": "factor",
+      "section": "effect",
+      "label": "MSF Access: share of the savings left after any loss of incentive to develop new tests and drugs",
+      "format": "percent",
+      "value": {
+        "low": 0.9,
+        "best": 0.98,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Pressing a sole supplier's price down could weaken its incentive to invest in products for low-income markets. Small here: the cuts are to concessional prices for high-burden countries, by our reading a small part of the makers' sales (they don't publish the split), and Cepheid kept launching TB cartridges after its 2012 concessional deal (Ultra in 2017, the XDR cartridge in 2021). Our judgment, 2% of the savings lost (none to 10%)."
+    },
+    {
       "id": "acc_value_per_year",
       "section": "effect",
       "label": "MSF Access: value per year of campaigning at 2025's spending (units of value, before adjustments)",
       "format": "number",
-      "formula": "downstream_value / (acc_campaign_years * acc_average_spend_vs_year)",
-      "explainer": "The period's wins over its years of spending, scaled to 2025's budget, so they set against the 2025 cost below."
+      "formula": "downstream_value * acc_innovation_harm / (acc_campaign_years * acc_average_spend_vs_year)",
+      "explainer": "The period's wins over its years of spending, less any loss of incentive to innovate, scaled to 2025's budget, so they set against the 2025 cost below."
     },
     {
       "id": "aw_requirements_usd",
@@ -835,7 +855,7 @@
       "label": "Missing data: MSF Access",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (templates.md Convention 12): the savings are published, but the share caused by advocacy and MSF's part in it are judgments, and no study measures what campaigns do to prices, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (templates.md Convention 12): the savings are published, but no study measures what campaigns do to prices, so the advocacy's effect is our judgment; the branch reads the shared missing-data slider."
     },
     {
       "id": "acc_total_adj",

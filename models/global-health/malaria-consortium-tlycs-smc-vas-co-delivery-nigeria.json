@@ -1,0 +1,808 @@
+{
+ "id": "malaria-consortium-tlycs-smc-vas-co-delivery-nigeria",
+ "name": "Malaria Consortium, vitamin A with seasonal malaria chemoprevention in Bauchi, Nigeria (The Life You Can Save, 2025)",
+ "kind": "charity",
+ "cause": "global-health",
+ "beneficiaries": {"NGA":1},
+ "beneficiaries_note": "The model's name: Malaria Consortium, vitamin A with seasonal malaria chemoprevention in Bauchi, Nigeria (The Life You Can Save, 2025).",
+ "missing_data": {"thin_share":0,"note":"Measured: Malaria Consortium's baseline and endline coverage surveys of the integrated SMC and vitamin A cycle, and effects from trials of SMC (Mali) and the Cochrane review of vitamin A supplementation."},
+ "estimate_basis": "unit_cost",
+ "charity": "malaria-consortium",
+ "owner": "the-life-you-can-save",
+ "summary": "Malaria Consortium added vitamin A capsules to the door-to-door seasonal malaria chemoprevention (SMC) campaign in two areas of Bauchi state, Nigeria, in 2021, raising vitamin A coverage from 1% to 83%. The Life You Can Save credits the programme with the deaths averted by the vitamin A and SMC coverage added, at $1.18 a child, and estimates $11 per DALY averted. Our view values each child's death averted by age the site's way and counts only what the one round costed buys: a quarter of a season's SMC effect and half a year's vitamin A effect. The biggest uncertainties are the baseline SMC coverage the sheet assumes and how much protection one round gives.",
+ "source": {
+  "publisher": "The Life You Can Save",
+  "title": "Malaria Consortium: evaluation and cost-effectiveness analysis (vitamin A with SMC, Nigeria)",
+  "url": "https://www.thelifeyoucansave.org/evaluation-hub/malaria-consortium/",
+  "published": "2025-08-26",
+  "retrieved": "2026-11-15",
+  "license": "No licence published; the sheet is linked publicly from The Life You Can Save's Evaluation Hub, which calls its figures highly approximate. Numbers cited with their source."
+ },
+ "resources": [
+  {
+   "title": "The Life You Can Save, Malaria Consortium Evaluation Hub page",
+   "url": "https://www.thelifeyoucansave.org/evaluation-hub/malaria-consortium/",
+   "type": "evaluation",
+   "note": "Links the main evaluation document, the quality-of-evidence and organisational-quality forms and the cost-effectiveness sheet. The page has no date; the sheet's file was created on 26 August 2025, the date used here."
+  },
+  {
+   "title": "The Life You Can Save, cost-effectiveness analysis spreadsheet for Malaria Consortium",
+   "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+   "type": "model",
+   "note": "Tab 'Nigeria' (October 2021 SMC cycle with vitamin A, Bauchi state). Every calculated row of this model reproduces its cell."
+  },
+  {
+   "title": "Malaria Consortium",
+   "url": "https://www.malariaconsortium.org",
+   "type": "charity"
+  }
+ ],
+ "evaluator": {
+  "name": "The Life You Can Save",
+  "assumptions": {
+   "resource_shares": 0,
+   "discount_rate": 0.03,
+   "uov_per_daly": 2
+  }
+ },
+ "sections": [
+  {
+   "id": "reach",
+   "title": "Children reached and coverage added"
+  },
+  {
+   "id": "vas",
+   "title": "Deaths averted by vitamin A"
+  },
+  {
+   "id": "smc",
+   "title": "Deaths and admissions averted by SMC"
+  },
+  {
+   "id": "morbidity",
+   "title": "Illness averted"
+  },
+  {
+   "id": "dalys",
+   "title": "DALYs averted"
+  },
+  {
+   "id": "costs",
+   "title": "Costs"
+  },
+  {
+   "id": "bottom",
+   "title": "The Life You Can Save's bottom line"
+  },
+  {
+   "id": "deaths_ours",
+   "title": "Deaths valued by age",
+   "kind": "ours",
+   "explainer": "charityevals' step. The sheet counts a death averted as discounted remaining life expectancy; the site values every death by age with GiveWell's moral weights and the value-of-a-life slider."
+  },
+  {
+   "id": "credit_ours",
+   "title": "What would have happened anyway, and who pays",
+   "kind": "ours",
+   "explainer": "charityevals' step: the share of the effect due to Malaria Consortium and, with credit by share of resources on, staff's pay below market."
+  }
+ ],
+ "rows": [
+  {
+   "id": "children_reached",
+   "section": "reach",
+   "label": "Children aged 6 to 59 months reached",
+   "format": "integer",
+   "unit": "children",
+   "value": 1212966.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B41"
+   },
+   "explainer": "Malaria Consortium's monitoring of the October 2021 SMC cycle in Giade and Katagum, Bauchi state, which delivered vitamin A with SMC."
+  },
+  {
+   "id": "vas_baseline",
+   "section": "reach",
+   "label": "Vitamin A coverage before the integration",
+   "format": "percent",
+   "value": 0.011,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B50"
+   }
+  },
+  {
+   "id": "vas_endline",
+   "section": "reach",
+   "label": "Vitamin A coverage with the integration",
+   "format": "percent",
+   "value": 0.83,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B54",
+    "quote": "VAS coverage increased from 1.1 percent at baseline (without SMC integration) to 82.3 percent at endline"
+   }
+  },
+  {
+   "id": "vas_added_coverage",
+   "section": "reach",
+   "label": "Vitamin A coverage added",
+   "format": "percent",
+   "formula": "vas_endline - vas_baseline",
+   "expected": 0.819
+  },
+  {
+   "id": "vas_children",
+   "section": "reach",
+   "label": "Children newly reached with vitamin A",
+   "format": "integer",
+   "unit": "children",
+   "formula": "vas_added_coverage * children_reached",
+   "expected": 993419.154
+  },
+  {
+   "id": "smc_baseline",
+   "section": "reach",
+   "label": "SMC coverage at baseline",
+   "format": "percent",
+   "value": 0.54,
+   "kind": "judgment",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B51"
+   },
+   "explainer": "The Life You Can Save takes 54% from the literature rather than the 91% Malaria Consortium's monitoring reported, \"to better illustrate the added value of VAS with SMC\" (its note on the cell)."
+  },
+  {
+   "id": "smc_endline",
+   "section": "reach",
+   "label": "SMC coverage with the integration",
+   "format": "percent",
+   "value": 0.894,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B55"
+   }
+  },
+  {
+   "id": "smc_added_coverage",
+   "section": "reach",
+   "label": "SMC coverage added",
+   "format": "percent",
+   "formula": "smc_endline - smc_baseline",
+   "expected": 0.354
+  },
+  {
+   "id": "smc_children",
+   "section": "reach",
+   "label": "Children newly covered by SMC",
+   "format": "integer",
+   "unit": "children",
+   "formula": "children_reached * smc_added_coverage",
+   "expected": 429389.964
+  },
+  {
+   "id": "u5mr",
+   "section": "vas",
+   "label": "Under-five deaths per 1,000 live births, Nigeria",
+   "format": "number",
+   "unit": "per 1,000",
+   "value": 105.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B62"
+   },
+   "explainer": "World Bank, 2023."
+  },
+  {
+   "id": "population",
+   "section": "vas",
+   "label": "Population of Nigeria, 2023",
+   "format": "integer",
+   "unit": "people",
+   "value": 227882945.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B63"
+   }
+  },
+  {
+   "id": "crude_birth_rate",
+   "section": "vas",
+   "label": "Births per 1,000 people a year",
+   "format": "number",
+   "unit": "per 1,000",
+   "value": 33.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B64"
+   }
+  },
+  {
+   "id": "live_births",
+   "section": "vas",
+   "label": "Live births a year",
+   "format": "integer",
+   "unit": "births",
+   "formula": "population / 1000 * crude_birth_rate",
+   "expected": 7520137.185
+  },
+  {
+   "id": "u5_deaths_national",
+   "section": "vas",
+   "label": "Under-five deaths a year",
+   "format": "integer",
+   "unit": "deaths",
+   "formula": "live_births / 1000 * u5mr",
+   "expected": 789614.4044
+  },
+  {
+   "id": "u5_population",
+   "section": "vas",
+   "label": "Children under five in Nigeria",
+   "format": "integer",
+   "unit": "children",
+   "value": 39351433.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B67"
+   }
+  },
+  {
+   "id": "u5_death_rate",
+   "section": "vas",
+   "label": "Deaths a year per child under five",
+   "format": "small",
+   "formula": "u5_deaths_national / u5_population",
+   "expected": 0.02006570903
+  },
+  {
+   "id": "deaths_among_vas_children",
+   "section": "vas",
+   "label": "Deaths expected among the children newly given vitamin A",
+   "format": "number",
+   "unit": "deaths",
+   "formula": "u5_death_rate * vas_children",
+   "expected": 19933.65969
+  },
+  {
+   "id": "vas_mortality_reduction",
+   "section": "vas",
+   "label": "Reduction in deaths from all causes with vitamin A",
+   "format": "percent",
+   "value": 0.12,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "A61",
+    "quote": "This study showed 12% reduction in all causes of death"
+   },
+   "explainer": "From the 2022 Cochrane review of vitamin A supplementation (Imdad et al.)."
+  },
+  {
+   "id": "deaths_vas",
+   "section": "vas",
+   "label": "Deaths averted by vitamin A",
+   "format": "number",
+   "unit": "deaths",
+   "formula": "deaths_among_vas_children * vas_mortality_reduction",
+   "expected": 2392.039162
+  },
+  {
+   "id": "smc_deaths_per_1000_control",
+   "section": "smc",
+   "label": "Deaths per 1,000 children a season without SMC",
+   "format": "number",
+   "unit": "per 1,000",
+   "value": 8.29,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B75"
+   },
+   "explainer": "From a trial in Ouelessebougou, Mali (in the formula of row 75)."
+  },
+  {
+   "id": "smc_deaths_per_1000_smc",
+   "section": "smc",
+   "label": "Deaths per 1,000 children a season with SMC",
+   "format": "number",
+   "unit": "per 1,000",
+   "value": 3.63,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B75"
+   }
+  },
+  {
+   "id": "smc_deaths_averted_per_1000",
+   "section": "smc",
+   "label": "Deaths averted per 1,000 children given SMC",
+   "format": "number",
+   "unit": "per 1,000",
+   "formula": "smc_deaths_per_1000_control - smc_deaths_per_1000_smc",
+   "expected": 4.66
+  },
+  {
+   "id": "smc_deaths_per_child",
+   "section": "smc",
+   "label": "Deaths averted per child given SMC",
+   "format": "small",
+   "formula": "smc_deaths_averted_per_1000 / 1000",
+   "expected": 0.00466
+  },
+  {
+   "id": "smc_children_per_death",
+   "section": "smc",
+   "label": "Children to protect for a season to avert one death",
+   "format": "number",
+   "unit": "children",
+   "formula": "1 / smc_deaths_per_child",
+   "expected": 214.5922747
+  },
+  {
+   "id": "deaths_smc",
+   "section": "smc",
+   "label": "Deaths averted by SMC",
+   "format": "number",
+   "unit": "deaths",
+   "formula": "smc_children / smc_children_per_death",
+   "expected": 2000.957232
+  },
+  {
+   "id": "admissions_control",
+   "section": "smc",
+   "label": "Hospital admissions per 1,000 children a season without SMC",
+   "format": "number",
+   "unit": "per 1,000",
+   "value": 33.45,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B79"
+   }
+  },
+  {
+   "id": "admissions_smc",
+   "section": "smc",
+   "label": "Hospital admissions per 1,000 children a season with SMC",
+   "format": "number",
+   "unit": "per 1,000",
+   "value": 19.6,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B79"
+   }
+  },
+  {
+   "id": "admissions_averted_rate",
+   "section": "smc",
+   "label": "Hospital admissions averted per child given SMC",
+   "format": "small",
+   "formula": "(admissions_control - admissions_smc) / 1000",
+   "expected": 0.01385
+  },
+  {
+   "id": "admissions_averted",
+   "section": "smc",
+   "label": "Hospital admissions averted",
+   "format": "number",
+   "unit": "admissions",
+   "formula": "(smc_children - deaths_smc) * admissions_averted_rate",
+   "expected": 5919.337744
+  },
+  {
+   "id": "severe_count_lit",
+   "section": "morbidity",
+   "label": "Children admitted with severe malaria, in the study cited",
+   "format": "number",
+   "unit": "children",
+   "value": 169.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B82"
+   }
+  },
+  {
+   "id": "moderate_count_lit",
+   "section": "morbidity",
+   "label": "Children admitted with moderate malaria, in the study cited",
+   "format": "number",
+   "unit": "children",
+   "value": 86.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B83"
+   }
+  },
+  {
+   "id": "all_count_lit",
+   "section": "morbidity",
+   "label": "Children admitted with malaria, in the study cited",
+   "format": "number",
+   "unit": "children",
+   "value": 357.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B85"
+   },
+   "explainer": "Severe, moderate and mild together (169 + 86 + 102), from a Nigerian hospital study (doi 10.4103/smj.smj_90_20)."
+  },
+  {
+   "id": "severe_share_lit",
+   "section": "morbidity",
+   "label": "Share of admissions severe",
+   "format": "percent",
+   "formula": "severe_count_lit / all_count_lit",
+   "expected": 0.4733893557
+  },
+  {
+   "id": "moderate_share_lit",
+   "section": "morbidity",
+   "label": "Share of admissions moderate",
+   "format": "percent",
+   "formula": "moderate_count_lit / all_count_lit",
+   "expected": 0.2408963585
+  },
+  {
+   "id": "severe_or_moderate_share",
+   "section": "morbidity",
+   "label": "Share of admissions severe or moderate",
+   "format": "percent",
+   "formula": "severe_share_lit + moderate_share_lit",
+   "expected": 0.7142857143
+  },
+  {
+   "id": "severe_share",
+   "section": "morbidity",
+   "label": "Severe share of the admissions averted",
+   "format": "percent",
+   "formula": "severe_share_lit / severe_or_moderate_share",
+   "expected": 0.662745098,
+   "explainer": "Only severe and moderate cases are taken to be admitted."
+  },
+  {
+   "id": "moderate_share",
+   "section": "morbidity",
+   "label": "Moderate share of the admissions averted",
+   "format": "percent",
+   "formula": "1 - severe_share",
+   "expected": 0.337254902
+  },
+  {
+   "id": "severe_cases",
+   "section": "morbidity",
+   "label": "Severe cases averted",
+   "format": "number",
+   "unit": "cases",
+   "formula": "admissions_averted * severe_share",
+   "expected": 3923.012073
+  },
+  {
+   "id": "moderate_cases",
+   "section": "morbidity",
+   "label": "Moderate cases averted",
+   "format": "number",
+   "unit": "cases",
+   "formula": "admissions_averted * moderate_share",
+   "expected": 1996.32567
+  },
+  {
+   "id": "dw_severe",
+   "section": "morbidity",
+   "label": "Disability weight for severe malaria",
+   "format": "number",
+   "value": 0.133412,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B99"
+   }
+  },
+  {
+   "id": "dw_moderate",
+   "section": "morbidity",
+   "label": "Disability weight for moderate malaria",
+   "format": "number",
+   "value": 0.050595,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B100"
+   }
+  },
+  {
+   "id": "hospital_days",
+   "section": "morbidity",
+   "label": "Days in hospital",
+   "format": "number",
+   "unit": "days",
+   "value": 5.1,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B14"
+   }
+  },
+  {
+   "id": "yld_severe",
+   "section": "morbidity",
+   "label": "Years lived with disability averted, severe cases",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "dw_severe * severe_cases * hospital_days / 365",
+   "expected": 7.312937321
+  },
+  {
+   "id": "yld_moderate",
+   "section": "morbidity",
+   "label": "Years lived with disability averted, moderate cases",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "dw_moderate * moderate_cases * hospital_days / 365",
+   "expected": 1.411290127
+  },
+  {
+   "id": "yld",
+   "section": "morbidity",
+   "label": "Years lived with disability averted",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yld_moderate + yld_severe",
+   "expected": 8.724227448
+  },
+  {
+   "id": "deaths_total",
+   "section": "dalys",
+   "label": "Deaths averted by vitamin A and SMC",
+   "format": "number",
+   "unit": "deaths",
+   "formula": "deaths_smc + deaths_vas",
+   "expected": 4392.996395
+  },
+  {
+   "id": "le_2_5",
+   "section": "dalys",
+   "label": "Life expectancy at 2.5 years, Nigeria",
+   "format": "number",
+   "unit": "years",
+   "value": 68.2,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B25"
+   }
+  },
+  {
+   "id": "le_disc_2_5",
+   "section": "dalys",
+   "label": "Discounted life expectancy at 2.5 years",
+   "format": "number",
+   "unit": "years",
+   "formula": "round((1 - (1 + $discount_rate) ^ -le_2_5) / $discount_rate, 1)",
+   "expected": 28.9,
+   "explainer": "The remaining years of life discounted at The Life You Can Save's 3% (the shared rate in our view, where it cancels: deaths are valued by age)."
+  },
+  {
+   "id": "yll",
+   "section": "dalys",
+   "label": "Years of life lost averted",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "deaths_total * le_disc_2_5",
+   "expected": 126957.5958
+  },
+  {
+   "id": "dalys",
+   "section": "dalys",
+   "label": "DALYs averted",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yll + yld",
+   "expected": 126966.32
+  },
+  {
+   "id": "cost_per_child",
+   "section": "costs",
+   "label": "Cost of SMC with vitamin A per child reached",
+   "format": "usd",
+   "unit": "$ per child",
+   "value": 1.18,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Malaria Consortium cost-effectiveness estimates (tab 'Nigeria')",
+    "url": "https://docs.google.com/spreadsheets/d/1g2qHBb1TxxV-v04fvtHZlpcetPl0UHtv/edit",
+    "retrieved": "2026-11-15",
+    "cell": "B106"
+   },
+   "explainer": "The published study's cost: $1.1 a child for SMC and vitamin A together, $0.9 for SMC alone; the sheet uses $1.18."
+  },
+  {
+   "id": "total_cost",
+   "section": "costs",
+   "label": "Total cost",
+   "format": "usd",
+   "unit": "$",
+   "formula": "children_reached * cost_per_child",
+   "expected": 1431299.88
+  },
+  {
+   "id": "cost_per_daly",
+   "section": "bottom",
+   "label": "Cost per DALY averted",
+   "format": "usd",
+   "unit": "$ per DALY",
+   "formula": "total_cost / dalys",
+   "expected": 11.27306737
+  },
+  {
+   "id": "death_value_under5",
+   "section": "deaths_ours",
+   "label": "Value of a death of a child under five averted, in healthy years",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
+   "explainer": "**Changed for consistency.** The Life You Can Save counts a child's death averted as the child's remaining life expectancy at 2.5 years, discounted at 3%, about 28 years. The site values every death of a child under five the same way: GiveWell's moral weight (116.25 units of value), times the value-of-a-life slider, in healthy years at Your values' exchange rate (58 at the defaults)."
+  },
+  {
+   "id": "smc_cycle_share",
+   "section": "deaths_ours",
+   "label": "Share of a season's SMC effect bought by the cycle costed",
+   "format": "percent",
+   "value": {
+    "low": 0.2,
+    "best": 0.25,
+    "high": 0.5
+   },
+   "kind": "judgment",
+   "explainer": "Our correction, 25% (20% to 50%). The project delivered vitamin A in the last of the season's SMC cycles (October 2021), and the cost per child, $1.18 ($0.9 for SMC alone in the study), is for that one round; the Mali trial's deaths and admissions averted are for a full season of four monthly cycles. Anchor: four cycles a season, so one cycle buys about a quarter of the season's protection; up to half if the late-season cycle matters more.",
+   "published": 1
+  },
+  {
+   "id": "vas_dose_share",
+   "section": "deaths_ours",
+   "label": "Share of a year's vitamin A effect bought by one dose",
+   "format": "percent",
+   "value": {
+    "low": 0.5,
+    "best": 0.5,
+    "high": 1
+   },
+   "kind": "judgment",
+   "explainer": "Our correction, 50% (50% to 100%). The 12% fewer deaths is for children supplemented every six months; the sheet applies it to a full year's deaths after the one dose given. Anchor: a dose protects for about six months, which is why programmes give two a year.",
+   "published": 1
+  },
+  {
+   "id": "dalys_ours",
+   "section": "deaths_ours",
+   "label": "Healthy years gained, deaths valued by age",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "(deaths_vas * vas_dose_share + deaths_smc * smc_cycle_share) * death_value_under5 + yld * smc_cycle_share",
+   "explainer": "All the deaths the sheet counts are of children aged 3 to 59 months, valued the site's way, with the SMC and vitamin A effects cut to what the one round costed buys; within a year, so nothing to discount."
+  },
+  {
+   "id": "ours_vs_tlycs",
+   "section": "deaths_ours",
+   "label": "Our healthy years for the same deaths and illness, per DALY of The Life You Can Save's",
+   "format": "percent",
+   "formula": "dalys_ours / dalys",
+   "explainer": "The evaluator view keeps The Life You Can Save's DALYs (1).",
+   "published": 1
+  },
+  {
+   "id": "counterfactual_share",
+   "section": "credit_ours",
+   "label": "Share of the effect that wouldn't have happened without Malaria Consortium",
+   "format": "percent",
+   "value": 1,
+   "kind": "judgment",
+   "explainer": "×1, our judgment: the sheet credits only the vitamin A and SMC coverage above the baseline and counts the whole cost per child; the SMC baseline it chose (54%, against the 91% monitored) is The Life You Can Save's, kept in both views."
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "credit_ours",
+   "label": "Staff pay as a share of programme cost",
+   "format": "percent",
+   "formula": "@staff_pay.share_staff_delivered",
+   "explainer": "Default for programmes where staff deliver the help themselves: community distributors go door to door with the drugs and capsules. Our judgment."
+  },
+  {
+   "id": "salary_gap",
+   "section": "credit_ours",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "formula": "@staff_pay.gap_health_field",
+   "explainer": "Health workers and field staff at nonprofits. Our judgment."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "credit_ours",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
+  },
+  {
+   "id": "donor_cost_share",
+   "section": "credit_ours",
+   "label": "Share of the full cost paid in cash",
+   "format": "percent",
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources on, staff's forgone pay counts as part of the cost. The sheet's costs already include everyone's money for the work it credits. Off, this is 100%."
+  },
+  {
+   "id": "dalys_per_dollar",
+   "section": "credit_ours",
+   "label": "Healthy years gained per dollar",
+   "format": "small",
+   "unit": "DALYs per $",
+   "formula": "1 / cost_per_daly * ours_vs_tlycs * counterfactual_share * donor_cost_share",
+   "explainer": "The Life You Can Save's DALYs per dollar, with deaths valued by age, times the share due to Malaria Consortium and the share of the cost paid in cash."
+  }
+ ],
+ "output": {
+  "row": "dalys_per_dollar",
+  "unit": "daly",
+  "label": "Healthy years gained per dollar",
+  "native": {
+   "row": "cost_per_daly",
+   "unit": "$ per DALY averted"
+  }
+ }
+}

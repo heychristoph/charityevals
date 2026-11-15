@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "doctors-without-borders",
   "owner": "charityevals",
-  "summary": "Médecins Sans Frontières (Doctors Without Borders) runs hospitals, clinics, feeding centres, vaccination and outbreak responses in about 70 countries, mostly in war zones and epidemics. This model counts what MSF's whole 2025 medical budget (about 2.1 billion dollars) did, service by service: deaths averted by treating malaria, severe malnutrition, cholera, TB, HIV and hospital emergencies, by assisting births and vaccinating in outbreaks, plus illness averted by surgery and mental-health care; four branches MSF publishes no count for (seasonal malaria chemoprevention, other outbreak vaccination, drug-resistant TB, water and sanitation) are built from the research literature with our estimates of their reach. MSF counts its patients; treating malaria, HIV, TB and hepatitis C is counted in full (their effects are the trials' of the same treatments), every other branch, whose effect or reach is a judgment, is discounted by the shared missing-data slider. The biggest uncertainties are how many of MSF's patients would have died without its care and how many would have been treated by someone else. Its awareness-raising, MSF Access and DNDi grant are a separate model.",
+  "summary": "Médecins Sans Frontières (Doctors Without Borders) runs hospitals, clinics, feeding centres, vaccination and outbreak responses in about 70 countries, mostly in war zones and epidemics. This model counts what MSF's whole 2025 medical budget (about 2.1 billion dollars) did, service by service: deaths averted by treating malaria, severe malnutrition, cholera, TB, HIV and hospital emergencies, by assisting births and vaccinating in outbreaks, plus illness averted by surgery and mental-health care; four branches MSF publishes no count for (seasonal malaria chemoprevention, other outbreak vaccination, drug-resistant TB, water and sanitation) are built from the research literature with our estimates of their reach. MSF counts its patients; treating malaria, TB and hepatitis C is counted in full (their effects are the trials' of the same treatments), every other branch, whose effect or reach is a judgment, is discounted by the shared missing-data slider. The biggest uncertainties are how many of MSF's patients would have died without its care and how many would have been treated by someone else. Its awareness-raising, MSF Access and DNDi grant are a separate model.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Médecins Sans Frontières, medical care in crises (2025)",
@@ -307,7 +307,7 @@
       "label": "Cost per patient episode",
       "format": "usd",
       "formula": "cost_total / people_reached",
-      "explainer": "Context: about 110 dollars per episode counted, across consultations, admissions, operations and vaccinations."
+      "explainer": "Context: about 130 dollars per episode counted, across consultations, admissions, operations and vaccinations."
     },
     {
       "id": "years_of_coverage",
@@ -613,20 +613,28 @@
       "explainer": "Summary for reading: each branch's reduction, weighted by its untreated deaths."
     },
     {
-      "id": "indirect_deaths_ratio",
+      "id": "indirect_deaths_share",
       "section": "effect",
-      "label": "Share of the deaths averted that are indirect (outcome-weighted average of the branches, for reading only)",
+      "label": "Share of the deaths averted that are indirect (outcome-weighted, for reading only)",
       "format": "number",
       "formula": "(malaria_deaths_averted * malaria_indirect_deaths_ratio * malaria_death_share_under5 / (1 + malaria_indirect_deaths_ratio * malaria_death_share_under5) + measles_deaths_averted * measles_indirect_deaths_ratio * measles_share_under5 / (1 + measles_indirect_deaths_ratio * measles_share_under5) + cholera_deaths_averted * cholera_indirect_deaths_ratio * cholera_share_under5 / (1 + cholera_indirect_deaths_ratio * cholera_share_under5) + smc_deaths_averted * @givewell.indirect_malaria_deaths_per_direct_malaria_death_2 / (1 + @givewell.indirect_malaria_deaths_per_direct_malaria_death_2) + wash_deaths_averted * @givewell_shared.indirect_deaths_per_direct_diarrhea_death * wash_share_under5 / (1 + @givewell_shared.indirect_deaths_per_direct_diarrhea_death * wash_share_under5)) / deaths_averted",
       "explainer": "Malaria, measles, cholera, SMC and water and sanitation carry indirect deaths (the after-effects GiveWell counts per direct death); the other branches' risks are all-cause case fatality of the episode treated. Summary: indirect deaths as a share of all deaths averted."
+    },
+    {
+      "id": "indirect_deaths_ratio",
+      "section": "effect",
+      "label": "Indirect deaths averted per direct death (outcome-weighted average of the branches, for reading only)",
+      "format": "number",
+      "formula": "indirect_deaths_share / (1 - indirect_deaths_share)",
+      "explainer": "Indirect ÷ direct deaths averted across the branches, as the template means it; each branch applies its own ratio."
     },
     {
       "id": "deaths_averted_per_person",
       "section": "effect",
       "label": "Deaths averted per patient, before counterfactual and adjustments (summary)",
       "format": "small",
-      "formula": "(malaria_patients * malaria_risk_untreated * malaria_risk_reduction + measles_doses * measles_risk_untreated * measles_share_averted + sam_in_patients * sam_in_risk_untreated * sam_in_risk_reduction + sam_out_patients * sam_out_risk_untreated * sam_out_risk_reduction + births * maternal_risk_untreated * maternal_risk_reduction + births * neonatal_risk_untreated * neonatal_risk_reduction + cholera_patients * cholera_risk_untreated * cholera_risk_reduction + hiv_patients * hiv_risk_untreated * hiv_risk_reduction + tb_patients * tb_risk_untreated * tb_risk_reduction + hcv_patients * hcv_risk_untreated * hcv_risk_reduction + vhf_patients * vhf_risk_untreated * vhf_risk_reduction + inpatient_patients * inpatient_risk_untreated * inpatient_risk_reduction + outpatient_patients * outpatient_risk_untreated * outpatient_risk_reduction + surgery_patients * surgery_risk_untreated * surgery_risk_reduction + smc_children * smc_malaria_mortality * smc_season_share * smc_risk_reduction + ovacc_doses * ovacc_attack_rate * ovacc_cfr * ovacc_share_averted + drtb_patients * tb_risk_untreated * drtb_risk_reduction + wash_people * wash_years * wash_diarrhoea_death_rate * wash_risk_reduction) / people_reached",
-      "explainer": "Summary for reading across the branches."
+      "formula": "deaths_averted / (people_reached * total_adj)",
+      "explainer": "Summary: deaths averted ÷ (patients × the average total adjustment), so the indirect deaths and each branch's own years are in it, as the template's row means."
     },
     {
       "id": "malaria_share_under5",
@@ -642,17 +650,50 @@
       "explainer": "MSF doesn't publish the age split of its malaria patients. Our judgment, 45%: in its high-transmission projects children under five carry most clinical malaria; in Sahel peaks and among displaced adults more are older. Low and high from projects dominated by adults (camps) or by paediatric hospitals."
     },
     {
+      "id": "malaria_delphi_cfr_under5",
+      "section": "effect",
+      "label": "Malaria: experts' death rate of untreated uncomplicated malaria, under five (age-weighted)",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.035,
+        "high": 0.05
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Thwing, Eisele & Steketee 2011, BMC Public Health 11(Suppl 3):S14",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3231887",
+        "retrieved": "2026-11-15",
+        "page": "Methods and Results: untreated mortality from a Delphi expert survey, 5% at 1-23 months and 2% at 24-59 months"
+      },
+      "explainer": "The Lives Saved Tool's Delphi survey: 5% of untreated uncomplicated falciparum episodes end in death under age two, 2% at two to five. About half of under-fives' clinical episodes are under two, so 3.5%; the ends are the two age groups' figures."
+    },
+    {
+      "id": "malaria_attributable_fraction",
+      "section": "effect",
+      "label": "Malaria: share of the counted under-five cases whose illness is malaria",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.45,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Dalrymple et al. 2017, Quantifying the contribution of Plasmodium falciparum malaria to febrile illness amongst African children, eLife 6:e29198",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5665646",
+        "retrieved": "2026-11-15",
+        "quote": "only 28.0% of those (10.0% of all fevers) were causally attributable to malaria"
+      },
+      "explainer": "In high-transmission areas many children carry parasites without being ill from them, so a positive rapid test in a febrile child doesn't mean the fever is malaria. Across 2014's household surveys only 28% of malaria-positive fevers in under-fives were caused by malaria (Nigeria 21%, Niger 15%). Those are all fevers at home; children brought to a clinic are sicker and more of their fevers are malaria. Our judgment, 45%: the survey figure as the low end's anchor (20%), most fevers malaria in the sickest presenters as the high end (80%)."
+    },
+    {
       "id": "malaria_cfr_untreated_under5",
       "section": "effect",
       "label": "Malaria: chance a child under five with a treated case would have died without treatment",
       "format": "percent",
-      "value": {
-        "low": 0.005,
-        "best": 0.015,
-        "high": 0.05
-      },
-      "kind": "judgment",
-      "explainer": "Experts in the Lives Saved Tool's Delphi survey put death from untreated uncomplicated falciparum malaria at 5% under age two and 2% at two to five (Thwing et al. 2011); untreated severe malaria kills 13-21% or more. The cases MSF counts include many mild, rapid-test-positive fevers, some of which would have resolved or had another cause, so our best guess is below the Delphi figures: 1.5%, the Delphi's 5% as the high end, 0.5% the low."
+      "explainer": "The Delphi survey's death rate of untreated malaria episodes × the share of the cases MSF counts that are malaria episodes rather than other fevers in a child carrying parasites. About 1.6%; untreated severe malaria kills 13-21% or more.",
+      "formula": "malaria_delphi_cfr_under5 * malaria_attributable_fraction"
     },
     {
       "id": "malaria_cfr_untreated_over5",
@@ -691,7 +732,7 @@
         "retrieved": "2026-11-03",
         "page": "Abstract and Conclusions: protective efficacy of ACT 99% (1-23 months) and 97% (24-59 months); severe malaria treatment 82% (63-94%)"
       },
-      "explainer": "Artemisinin combination treatment prevents nearly all deaths from uncomplicated malaria (protective efficacy 97-99%); treatment of severe malaria 82% (63-94%). 97% as best, the severe-case figure as the low end."
+      "explainer": "Artemisinin combination treatment prevents nearly all deaths from uncomplicated malaria: Thwing et al.'s protective efficacy, 97-99%, combines the deaths in ACT trials with the Delphi survey's untreated risk (no trial left malaria untreated). Treatment of severe malaria 82% (63-94%). 97% as best, the severe-case figure as the low end."
     },
     {
       "id": "malaria_death_share_5_14_of_over5",
@@ -819,25 +860,39 @@
       "label": "Complicated severe malnutrition: chance a child would have died without inpatient care",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.4
+        "low": 0.2,
+        "best": 0.3,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "No study leaves complicated severe malnutrition untreated. Children with severe wasting die at about 7 times the rate of well-nourished children even in the community (GiveWell's Chad figure, @givewell_chad), and complicated cases far more: inpatient case fatality was 20-30% before the WHO protocols. Our judgment, 20%."
+      "explainer": "No study leaves complicated severe malnutrition untreated. Children with severe wasting die at about 7 times the rate of well-nourished children even in the community (GiveWell's Chad figure, @givewell_chad), and complicated cases far more: inpatient case fatality was 20-30% before the WHO protocols, among children who were treated, so the untreated risk is at least that. Our judgment, 30%, the pre-protocol treated fatality as the floor."
+    },
+    {
+      "id": "sam_in_treated_cfr",
+      "section": "effect",
+      "label": "Complicated severe malnutrition: death rate in MSF's inpatient feeding centres",
+      "format": "percent",
+      "value": {
+        "low": 0.04,
+        "best": 0.064,
+        "high": 0.1
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Tapié de Céleyran et al. 2017, Mortality and causes of mortality in children 6-59 months admitted to inpatient therapeutic feeding centres (MSF, Mali and Niger), Field Exchange 54",
+        "url": "https://ennonline.net/fex/54/mortalitysamniger",
+        "retrieved": "2026-11-15",
+        "quote": "The inpatient mortality rates observed were 6.4%, 7.8% and 5.2% in Koutiala, Madarounfa and Madaoua respectively."
+      },
+      "explainer": "MSF's own inpatient feeding centres: 2,765 children in Mali and Niger, 2014-15, with death rates of 5.2-7.8%; the Koutiala figure (6.4%) is close to the pooled one. The range (4-10%) is wider than the three sites' for other years and places, our judgment."
     },
     {
       "id": "sam_in_risk_reduction",
       "section": "effect",
       "label": "Complicated severe malnutrition: share of those deaths inpatient care averts",
       "format": "percent",
-      "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "MSF's inpatient feeding centres report case fatality of a few per cent to about 10% in bad years; against a 20% untreated risk that is a 50-80% reduction. Our judgment, 60%."
+      "explainer": "The share of the untreated risk that MSF's care removes: 1 − the death rate in its centres ÷ the untreated risk (about 79%).",
+      "formula": "1 - sam_in_treated_cfr / sam_in_risk_untreated"
     },
     {
       "id": "sam_mortality_ratio",
@@ -1115,12 +1170,12 @@
       "label": "HIV: share of those deaths a year of treatment averts",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.75,
+        "low": 0.7,
+        "best": 0.8,
         "high": 0.9
       },
-      "kind": "estimate",
-      "explainer": "Antiretroviral treatment cuts mortality by about three-quarters: in a randomised trial in Haiti, starting treatment at once rather than at advanced disease cut deaths from 23 to 6 (hazard ratio 4.0, 1.6-9.8), a 75% reduction (38-90%), the best guess and range here; Africa's early-mortality cohorts of advanced patients agree.",
+      "kind": "judgment",
+      "explainer": "Our judgment, 80% (70-90%). The randomised trial closest to it is a floor: in Haiti, starting treatment at once rather than deferring it to advanced disease cut deaths from 23 to 6 (hazard ratio 4.0, 1.6-9.8), a 75% reduction, though its control arm also got antiretrovirals later. Against no treatment at all the reduction is larger: untreated patients with low CD4 counts die at 10-20% a year, patients on treatment in African programmes at a few per cent after the first year.",
       "source": {
         "title": "Severe et al. 2010, Early versus standard antiretroviral therapy for HIV-infected adults in Haiti, N Engl J Med 363:257-65",
         "url": "https://doi.org/10.1056/NEJMoa0910370",
@@ -1417,12 +1472,12 @@
       "label": "Consultations: share that are other branches' follow-up visits",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.35,
-        "high": 0.45
+        "low": 0.15,
+        "best": 0.4,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "MSF's 17.1 million consultations include visits that belong to patients counted in other branches: the outpatient-feeding programme's weekly visits (615,200 children × about 6 visits, 3.7 million), monthly ART and TB visits (about 0.8 million), antenatal visits of the births counted (about 1.2 million). That is about 40% of the 13.5 million non-malaria consultations; our judgment, 35%, as some are counted apart."
+      "explainer": "MSF's 17.1 million consultations include visits that belong to patients counted in other branches: the outpatient-feeding programme's weekly visits (615,200 children × about 6 visits, 3.7 million), monthly ART and TB visits (about 0.8 million), antenatal visits of the births counted (about 1.2 million), and the mental-health (548,400) and sexual-violence (82,800) consultations, which have branches of their own. That is about 45% of the 13.5 million non-malaria consultations; our judgment, 40%, as some are counted apart."
     },
     {
       "id": "outpatient_patients",
@@ -1846,6 +1901,51 @@
       "explainer": "SD-years of depression in healthy years by the site's one conversion (PHQ-9 points per SD × DALYs per PHQ-9 point-year), per consultation. The benefit comes over the effect's years, so it is discounted from their middle."
     },
     {
+      "id": "mh_suicide_rate",
+      "section": "effect",
+      "label": "Mental health: yearly suicide rate of the general population (WHO African region)",
+      "format": "small",
+      "value": {
+        "low": 8e-05,
+        "best": 0.000112,
+        "high": 0.0002
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "WHO, One in 100 deaths is by suicide (Suicide worldwide in 2019: global health estimates), 17 June 2021",
+        "url": "https://www.who.int/news/item/17-06-2021-one-in-100-deaths-is-by-suicide",
+        "retrieved": "2026-11-15",
+        "quote": "The suicide rates in the African (11.2 per 100 000), European (10.5 per 100 000) and South-East Asia (10.2 per 100 000) regions were higher than the global average (9.0 per 100 000) in 2019."
+      },
+      "explainer": "WHO's age-standardised rate for its African region, where most of MSF's mental-health care is, 11.2 per 100,000 a year; the global 9.0 and the Eastern Mediterranean's lower figure toward the low end, adults in conflict toward the high end."
+    },
+    {
+      "id": "mh_depression_suicide_rr",
+      "section": "effect",
+      "label": "Mental health: relative risk of suicide of the people treated",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 5,
+        "high": 15
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 5 (2-15), as in the site's other counselling models: the meta-analysis of Harris and Barraclough (1997, British Journal of Psychiatry 170:205-228, doi:10.1192/bjp.170.3.205) puts the standardised mortality ratio for suicide in major depression at about 20, but MSF's clients are a mix of severity, so a mid-point between community samples (about 2-3) and treated major depression."
+    },
+    {
+      "id": "mh_suicide_share_excess_removed",
+      "section": "effect",
+      "label": "Mental health: share of the excess suicide risk the care removes while it lasts",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 20% (5-40%), as in the site's other counselling models: trials of brief psychological care rarely show fewer suicides directly; the risk is taken to fall with part of the symptom change."
+    },
+    {
       "id": "mh_household_size",
       "section": "effect",
       "label": "Mental health: people per household (stand-in, DRC)",
@@ -1882,7 +1982,23 @@
       "label": "Share of the deaths averted that are under five (summary)",
       "format": "percent",
       "formula": "(malaria_deaths_averted * malaria_death_share_under5 + measles_deaths_averted * measles_share_under5 + sam_in_deaths_averted * 1 + sam_out_deaths_averted * 1 + maternal_deaths_averted * 0 + neonatal_deaths_averted * 1 + cholera_deaths_averted * cholera_share_under5 + hiv_deaths_averted * 0 + tb_deaths_averted * tb_share_under5 + hcv_deaths_averted * 0 + vhf_deaths_averted * vhf_share_under5 + inpatient_deaths_averted * inpatient_share_under5 + outpatient_deaths_averted * outpatient_share_under5 + surgery_deaths_averted * surgery_share_under5 + smc_deaths_averted * 1 + ovacc_deaths_averted * ovacc_share_under5 + drtb_deaths_averted * tb_share_under5 + wash_deaths_averted * wash_share_under5) / deaths_averted",
-      "explainer": "Outcome-weighted summary of the branches' age splits, for reading only."
+      "explainer": "Outcome-weighted summary of the branches' age splits, for reading only; suicides averted are all adults, so they enter only the denominator."
+    },
+    {
+      "id": "share_5_14_of_over5",
+      "section": "effect",
+      "label": "Share of the deaths averted over five that are 5 to 14 (summary)",
+      "format": "percent",
+      "formula": "(malaria_deaths_averted * (1 - malaria_death_share_under5) * (malaria_death_share_5_14_of_over5) + measles_deaths_averted * (1 - measles_share_under5) * (measles_share_5_14_of_over5) + maternal_deaths_averted * (1 - 0) * (0) + cholera_deaths_averted * (1 - cholera_share_under5) * (adult_cholera_share_5_14) + hiv_deaths_averted * (1 - hiv_share_under5) * (hiv_share_5_14_of_over5) + tb_deaths_averted * (1 - tb_share_under5) * (tb_share_5_14_of_over5) + hcv_deaths_averted * (1 - 0) * (0) + vhf_deaths_averted * (1 - vhf_share_under5) * (vhf_share_5_14_of_over5) + inpatient_deaths_averted * (1 - inpatient_share_under5) * (child_share_5_14_of_over5) + outpatient_deaths_averted * (1 - outpatient_share_under5) * (child_share_5_14_of_over5) + surgery_deaths_averted * (1 - surgery_share_under5) * (child_share_5_14_of_over5) + ovacc_deaths_averted * (1 - ovacc_share_under5) * (child_share_5_14_of_over5) + drtb_deaths_averted * (1 - tb_share_under5) * (tb_share_5_14_of_over5) + wash_deaths_averted * (1 - wash_share_under5) * (@death_ages.diarrhoea_ssa_share_5_14 / (1 - wash_share_under5)) + mh_suicides_averted * (1 - 0) * (0)) / (malaria_deaths_averted * (1 - malaria_death_share_under5) + measles_deaths_averted * (1 - measles_share_under5) + maternal_deaths_averted * (1 - 0) + cholera_deaths_averted * (1 - cholera_share_under5) + hiv_deaths_averted * (1 - hiv_share_under5) + tb_deaths_averted * (1 - tb_share_under5) + hcv_deaths_averted * (1 - 0) + vhf_deaths_averted * (1 - vhf_share_under5) + inpatient_deaths_averted * (1 - inpatient_share_under5) + outpatient_deaths_averted * (1 - outpatient_share_under5) + surgery_deaths_averted * (1 - surgery_share_under5) + ovacc_deaths_averted * (1 - ovacc_share_under5) + drtb_deaths_averted * (1 - tb_share_under5) + wash_deaths_averted * (1 - wash_share_under5) + mh_suicides_averted * (1 - 0))",
+      "explainer": "Outcome-weighted summary of the branches' age splits, for reading only; each branch values its deaths at its own split."
+    },
+    {
+      "id": "share_15_49_of_over15",
+      "section": "effect",
+      "label": "Share of the deaths averted over fifteen that are 15 to 49 (summary)",
+      "format": "percent",
+      "formula": "(malaria_deaths_averted * (1 - malaria_death_share_under5) * (1 - (malaria_death_share_5_14_of_over5)) * (malaria_death_share_15_49_of_over15) + measles_deaths_averted * (1 - measles_share_under5) * (1 - (measles_share_5_14_of_over5)) * (adult_share_15_49) + maternal_deaths_averted * (1 - 0) * (1 - (0)) * (1) + cholera_deaths_averted * (1 - cholera_share_under5) * (1 - (adult_cholera_share_5_14)) * (adult_share_15_49) + hiv_deaths_averted * (1 - hiv_share_under5) * (1 - (hiv_share_5_14_of_over5)) * (hiv_share_15_49_of_over15) + tb_deaths_averted * (1 - tb_share_under5) * (1 - (tb_share_5_14_of_over5)) * (tb_share_15_49_of_over15) + hcv_deaths_averted * (1 - 0) * (1 - (0)) * (hcv_share_15_49) + vhf_deaths_averted * (1 - vhf_share_under5) * (1 - (vhf_share_5_14_of_over5)) * (adult_share_15_49) + inpatient_deaths_averted * (1 - inpatient_share_under5) * (1 - (child_share_5_14_of_over5)) * (adult_share_15_49) + outpatient_deaths_averted * (1 - outpatient_share_under5) * (1 - (child_share_5_14_of_over5)) * (adult_share_15_49) + surgery_deaths_averted * (1 - surgery_share_under5) * (1 - (child_share_5_14_of_over5)) * (adult_share_15_49) + ovacc_deaths_averted * (1 - ovacc_share_under5) * (1 - (child_share_5_14_of_over5)) * (adult_share_15_49) + drtb_deaths_averted * (1 - tb_share_under5) * (1 - (tb_share_5_14_of_over5)) * (tb_share_15_49_of_over15) + wash_deaths_averted * (1 - wash_share_under5) * (1 - (@death_ages.diarrhoea_ssa_share_5_14 / (1 - wash_share_under5))) * (@death_ages.diarrhoea_ssa_share_15_49 / (@death_ages.diarrhoea_ssa_share_15_49 + @death_ages.diarrhoea_ssa_share_50plus)) + mh_suicides_averted * (1 - 0) * (1 - (0)) * (adult_share_15_49)) / (malaria_deaths_averted * (1 - malaria_death_share_under5) * (1 - (malaria_death_share_5_14_of_over5)) + measles_deaths_averted * (1 - measles_share_under5) * (1 - (measles_share_5_14_of_over5)) + maternal_deaths_averted * (1 - 0) * (1 - (0)) + cholera_deaths_averted * (1 - cholera_share_under5) * (1 - (adult_cholera_share_5_14)) + hiv_deaths_averted * (1 - hiv_share_under5) * (1 - (hiv_share_5_14_of_over5)) + tb_deaths_averted * (1 - tb_share_under5) * (1 - (tb_share_5_14_of_over5)) + hcv_deaths_averted * (1 - 0) * (1 - (0)) + vhf_deaths_averted * (1 - vhf_share_under5) * (1 - (vhf_share_5_14_of_over5)) + inpatient_deaths_averted * (1 - inpatient_share_under5) * (1 - (child_share_5_14_of_over5)) + outpatient_deaths_averted * (1 - outpatient_share_under5) * (1 - (child_share_5_14_of_over5)) + surgery_deaths_averted * (1 - surgery_share_under5) * (1 - (child_share_5_14_of_over5)) + ovacc_deaths_averted * (1 - ovacc_share_under5) * (1 - (child_share_5_14_of_over5)) + drtb_deaths_averted * (1 - tb_share_under5) * (1 - (tb_share_5_14_of_over5)) + wash_deaths_averted * (1 - wash_share_under5) * (1 - (@death_ages.diarrhoea_ssa_share_5_14 / (1 - wash_share_under5))) + mh_suicides_averted * (1 - 0) * (1 - (0)))",
+      "explainer": "Outcome-weighted summary of the branches' age splits, for reading only; each branch values its deaths at its own split."
     },
     {
       "id": "morbidity_value_ratio",
@@ -1911,7 +2027,7 @@
       "label": "Yearly ln(consumption) gain in adulthood per patient",
       "format": "number",
       "formula": "0",
-      "explainer": "0: there is no evidence that treating these episodes raises later earnings the way malaria prevention or deworming may; development effects of surviving severe malnutrition are in other_unmodelled_share. The prevention branches' later income (SMC's, as GiveWell counts it) is left out: they are about 1% of the value, so it would add well under 0.5%."
+      "explainer": "0 for the treatment branches: there is no evidence that treating these episodes raises later earnings the way malaria prevention or deworming may; development effects of surviving severe malnutrition are in other_unmodelled_share. SMC's later income is counted in its own row (smc_income_ratio)."
     },
     {
       "id": "years_until_income_gain",
@@ -2083,6 +2199,29 @@
       "explainer": "The site's one value of a death by age band (@moral_weights), times your value of a life."
     },
     {
+      "id": "ln_of_doubling",
+      "section": "effect",
+      "label": "Natural log of 2: the ln-consumption gain of a doubling",
+      "format": "small",
+      "value": 0.6931471806,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Cost-effectiveness analysis: moral weights and units of value",
+        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness",
+        "retrieved": "2026-11-15",
+        "page": "units of value: the value of doubling consumption for one person for one year"
+      },
+      "explainer": "GiveWell states income gains in doublings of consumption; the site values ln(consumption) ($uov_per_ln_consumption), and a doubling is ln 2 = 0.693 of it. A mathematical constant, as in the site's other models that re-base GiveWell's income ratio."
+    },
+    {
+      "id": "smc_income_ratio",
+      "section": "effect",
+      "label": "SMC: later-income gain of the children protected, as a share of the deaths' value",
+      "format": "percent",
+      "formula": "@givewell_shared.income_to_mortality_value_ratio * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_smc / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_smc) * $uov_per_ln_consumption * ln_of_doubling / $life_value_multiplier",
+      "explainer": "Children protected from malaria earn more as adults: GiveWell's shared ratio of the income gain to the value of deaths averted in its SMC and net models, re-based to the site's discount rate, value of income and value of a life, as in the site's other models that read it."
+    },
+    {
       "id": "smc_value_per_death",
       "section": "outcome",
       "label": "Value of a death averted: SMC (units of value)",
@@ -2171,7 +2310,7 @@
         "high": 0.75
       },
       "kind": "judgment",
-      "explainer": "MSF works where health systems have collapsed or never reached, but in many of its malaria projects it supports Ministry of Health facilities and community sites that would see some patients anyway, and families buy drugs privately (often not artemisinin combinations). Our judgment: half would have gone without effective treatment, anchored on treatment coverage of febrile children with ACT in the DRC, CAR and South Sudan surveys (roughly 20-40%) and the pull of a free, stocked MSF facility."
+      "explainer": "MSF works where health systems have collapsed or never reached, but in many of its malaria projects it supports Ministry of Health facilities and community sites that would see some patients anyway, and families buy drugs privately (often not artemisinin combinations). Across sub-Saharan Africa in 2015 only 19.7% (15.6-24.8%) of febrile under-fives with falciparum infection got an artemisinin combination (Bennett et al. 2017, Lancet Global Health 5:e418-27, https://doi.org/10.1016/S2214-109X(17)30076-1), and coverage has risen since. Our judgment: half would have gone without effective treatment, above what that coverage alone implies because MSF's free, stocked facilities draw patients who would otherwise have been treated elsewhere."
     },
     {
       "id": "measles_counterfactual_adj",
@@ -2356,17 +2495,38 @@
       "explainer": "Some survivors would reach other clinics in time for prophylaxis; most where MSF works wouldn't. Our judgment, 70%."
     },
     {
+      "id": "supported_care_share",
+      "section": "adjustments",
+      "label": "Share of MSF's counted care given in facilities it supports rather than runs alone",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "MSF runs some hospitals and clinics alone (in conflict zones, camps, epidemics) but many of its projects work inside Ministry of Health hospitals and health centres, and some of its counts are care it supports remotely or with partners. MSF publishes no split of its counted care by who runs the facility, and we found no study that measures one, so there is no reference class: our judgment, half of the care counted, with a wide range (80% if supported structures dominate the counts, 25% if MSF's own facilities do)."
+    },
+    {
+      "id": "partner_resource_share",
+      "section": "adjustments",
+      "label": "Share of the resources others provide in the facilities MSF supports",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Where MSF supports a government facility, MSF usually pays for the drugs, supplies, its own staff and incentives, and the government provides the building, some health workers and some drugs; outbreak vaccines often come from Gavi and UNICEF. No published cost split of MSF-supported facilities exists that we found, so there is no reference class: our judgment, 30% of the resources there are others', half where government staff carry most of the work."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "MSF's share of the resources behind the care",
       "format": "percent",
-      "value": {
-        "low": 0.6,
-        "best": 0.85,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "MSF runs some facilities alone but many inside Ministry of Health hospitals and health centres, whose buildings, some staff and some drugs are the government's; vaccines in outbreak campaigns often come from Gavi and UNICEF; and MSF's counts include care it supports remotely or in coordination with others, where most resources are others'. Our judgment, 85% of the resources are MSF's; 60% if remote support and shared facilities are a large part of the counts."
+      "explainer": "MSF's share of the resources behind the care: all of it where MSF runs the facility, less the others' share where it supports one (85%).",
+      "formula": "1 - supported_care_share * partner_resource_share"
     },
     {
       "id": "attribution_share",
@@ -2484,7 +2644,7 @@
       "label": "Missing data: malaria treated",
       "format": "percent",
       "formula": "1",
-      "explainer": "Measured (1, templates.md Convention 12): MSF counts the 3.6 million malaria patients it treated, and the share of deaths treatment averts is the trials' efficacy of the same artemisinin combination treatment it gives (Thwing et al.'s review: 97-99%). The untreated case fatality is the baseline risk, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
+      "explainer": "Measured (1, templates.md Convention 12): MSF counts the 3.6 million malaria patients it treated, and the drugs are the artemisinin combinations whose efficacy randomised trials measure (PCR-adjusted cure of 95% or more; Sinclair et al. 2009, Cochrane review of artemisinin-based combination therapy). The untreated case fatality is the baseline risk, not the effect."
     },
     {
       "id": "malaria_total_adj",
@@ -2579,8 +2739,8 @@
       "section": "adjustments",
       "label": "Missing data: HIV treatment",
       "format": "percent",
-      "formula": "1",
-      "explainer": "Measured (1, templates.md Convention 12): MSF counts the people on antiretroviral treatment in its care, and the share of deaths treatment averts is a randomised trial's (Severe et al. 2010: 75%). The untreated risk is the baseline, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
+      "formula": "$missing_data_discount",
+      "explainer": "Thin (templates.md Convention 12): MSF counts the people on antiretroviral treatment in its care, but no trial compares treatment with none (the closest, Severe et al. 2010, compares early with deferred treatment), so the share of deaths averted is our judgment and the branch reads the shared missing-data slider."
     },
     {
       "id": "hiv_total_adj",
@@ -2596,7 +2756,7 @@
       "label": "Missing data: TB treatment",
       "format": "percent",
       "formula": "1",
-      "explainer": "Measured (1, templates.md Convention 12): MSF counts the patients it started on standard TB treatment, and the share of deaths averted rests on randomised trials of the same regimen (about 85% cured). The untreated risk (pre-treatment cohorts) is the baseline, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
+      "explainer": "Measured (1, templates.md Convention 12): MSF counts the patients it started on standard TB treatment, and the share of deaths averted rests on randomised trials of the same regimen (about 85% cured). The untreated risk (pre-treatment cohorts) is the baseline, not the effect."
     },
     {
       "id": "tb_total_adj",
@@ -2612,7 +2772,7 @@
       "label": "Missing data: hepatitis C",
       "format": "percent",
       "formula": "1",
-      "explainer": "Measured (1, templates.md Convention 12): MSF counts the people it treated with direct-acting antivirals, and the cure is the placebo-controlled trials' of the same drugs (99%), its effect on liver deaths from cohorts of cured patients. The untreated risk is the baseline, not the effect. (Changed 2026-11-04 from the shared slider: the definition calls this branch measured.)"
+      "explainer": "Measured (1, templates.md Convention 12): MSF counts the people it treated with direct-acting antivirals, and the cure is the placebo-controlled trials' of the same drugs (99%), its effect on liver deaths from cohorts of cured patients. The untreated risk is the baseline, not the effect."
     },
     {
       "id": "hcv_total_adj",
@@ -2795,16 +2955,16 @@
       "section": "adjustments",
       "label": "Rebound from reduced immunity",
       "format": "percent",
-      "formula": "0",
-      "explainer": "0: treating malaria cases doesn't reduce the immunity children build, as prevention can."
+      "formula": "@givewell_common.rebound_effects_decreased_immunity_development * smc_deaths_averted * smc_value_per_death / uov_deaths",
+      "explainer": "SMC only: children protected build less immunity and catch more malaria later (the site's one figure, −4%), by SMC's share of the deaths' value. Treating malaria cases doesn't reduce immunity."
     },
     {
       "id": "investment_of_income_share",
       "section": "adjustments",
       "label": "Investment of income gains",
       "format": "percent",
-      "formula": "0",
-      "explainer": "0: no income gain is modelled, so there is none to invest (GiveWell's share applies only where it counts income)."
+      "formula": "@givewell_shared.investment_of_income_increases * smc_deaths_averted * smc_value_per_death / uov_deaths",
+      "explainer": "GiveWell's shared share for income gains that are invested (5% in its SMC sheets), for SMC, the one branch with an income gain, by its share of the deaths' value."
     },
     {
       "id": "other_unmodelled_share",
@@ -2840,14 +3000,14 @@
       "section": "outcome",
       "label": "Deaths averted, all branches",
       "format": "number",
-      "formula": "malaria_deaths_averted + measles_deaths_averted + sam_in_deaths_averted + sam_out_deaths_averted + maternal_deaths_averted + neonatal_deaths_averted + cholera_deaths_averted + hiv_deaths_averted + tb_deaths_averted + hcv_deaths_averted + vhf_deaths_averted + inpatient_deaths_averted + outpatient_deaths_averted + surgery_deaths_averted + smc_deaths_averted + ovacc_deaths_averted + drtb_deaths_averted + wash_deaths_averted"
+      "formula": "malaria_deaths_averted + measles_deaths_averted + sam_in_deaths_averted + sam_out_deaths_averted + maternal_deaths_averted + neonatal_deaths_averted + cholera_deaths_averted + hiv_deaths_averted + tb_deaths_averted + hcv_deaths_averted + vhf_deaths_averted + inpatient_deaths_averted + outpatient_deaths_averted + surgery_deaths_averted + smc_deaths_averted + ovacc_deaths_averted + drtb_deaths_averted + wash_deaths_averted + mh_suicides_averted"
     },
     {
       "id": "uov_deaths",
       "section": "outcome",
       "label": "Value of the deaths averted (units of value)",
       "format": "number",
-      "formula": "malaria_deaths_averted * malaria_value_per_death + measles_deaths_averted * measles_value_per_death + sam_in_deaths_averted * sam_in_value_per_death + sam_out_deaths_averted * sam_out_value_per_death + maternal_deaths_averted * maternal_value_per_death + neonatal_deaths_averted * neonatal_value_per_death + cholera_deaths_averted * cholera_value_per_death + hiv_deaths_averted * hiv_value_per_death + tb_deaths_averted * tb_value_per_death + hcv_deaths_averted * hcv_value_per_death + vhf_deaths_averted * vhf_value_per_death + inpatient_deaths_averted * inpatient_value_per_death + outpatient_deaths_averted * outpatient_value_per_death + surgery_deaths_averted * surgery_value_per_death + smc_deaths_averted * smc_value_per_death + ovacc_deaths_averted * ovacc_value_per_death + drtb_deaths_averted * drtb_value_per_death + wash_deaths_averted * wash_value_per_death",
+      "formula": "malaria_deaths_averted * malaria_value_per_death + measles_deaths_averted * measles_value_per_death + sam_in_deaths_averted * sam_in_value_per_death + sam_out_deaths_averted * sam_out_value_per_death + maternal_deaths_averted * maternal_value_per_death + neonatal_deaths_averted * neonatal_value_per_death + cholera_deaths_averted * cholera_value_per_death + hiv_deaths_averted * hiv_value_per_death + tb_deaths_averted * tb_value_per_death + hcv_deaths_averted * hcv_value_per_death + vhf_deaths_averted * vhf_value_per_death + inpatient_deaths_averted * inpatient_value_per_death + outpatient_deaths_averted * outpatient_value_per_death + surgery_deaths_averted * surgery_value_per_death + smc_deaths_averted * smc_value_per_death + ovacc_deaths_averted * ovacc_value_per_death + drtb_deaths_averted * drtb_value_per_death + wash_deaths_averted * wash_value_per_death + mh_suicides_averted * mh_suicide_value_per_death",
       "unit": "units of value",
       "explainer": "Each branch's deaths at its own age bands' value."
     },
@@ -2874,17 +3034,18 @@
       "section": "outcome",
       "label": "Value of long-term income gains",
       "format": "number",
-      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * shared_adj * $uov_per_ln_consumption",
+      "formula": "people_reached * ln_income_gain_per_person * resource_sharing_multiplier * shared_adj * $uov_per_ln_consumption + smc_deaths_averted * smc_value_per_death * smc_income_ratio",
       "unit": "units of value",
-      "explainer": "0: no income gain is modelled."
+      "explainer": "SMC's later income, as a share of its deaths' value; the treatment branches have none."
     },
     {
       "id": "uov_morbidity",
       "section": "outcome",
       "label": "Value of illness averted (share of the deaths' and income's value)",
       "format": "number",
-      "formula": "(uov_deaths - surgery_deaths_averted * surgery_value_per_death + uov_income) * morbidity_value_ratio",
-      "unit": "units of value"
+      "formula": "(uov_deaths - surgery_deaths_averted * surgery_value_per_death + uov_income) * morbidity_value_ratio + smc_deaths_averted * smc_value_per_death * (1 + smc_income_ratio) * (@givewell_common.malaria_morbidity - morbidity_value_ratio)",
+      "unit": "units of value",
+      "explainer": "Illness averted as a share of the deaths' and income's value; SMC at the site's malaria-prevention figure (@givewell_common.malaria_morbidity, 9%) in place of the treatments' 8%."
     },
     {
       "id": "dalys_bridged",
@@ -3033,6 +3194,23 @@
       "format": "number",
       "formula": "surgery_patients * surgery_risk_untreated * surgery_risk_reduction * surgery_total_adj",
       "explainer": "Patients × risk of death without care × share of it averted × the branch's counterfactual × the shared adjustments."
+    },
+    {
+      "id": "mh_suicides_averted",
+      "section": "outcome",
+      "label": "Deaths averted: suicides averted by mental-health care",
+      "format": "number",
+      "formula": "mental_health_consultations / mh_sessions_per_patient * mh_suicide_rate * (mh_depression_suicide_rr - 1) * mh_suicide_share_excess_removed * mh_effect_years / (1 + $discount_rate) ^ (mh_effect_years * 0.5) * mh_total_adj",
+      "explainer": "Patients (consultations ÷ sessions each) × their yearly suicide rate × the excess risk × the share of it removed, over the effect's years, discounted from their middle like the DALYs, × the branch's adjustments."
+    },
+    {
+      "id": "mh_suicide_value_per_death",
+      "section": "outcome",
+      "label": "Value of a death averted: suicide (units of value)",
+      "format": "number",
+      "unit": "units of value",
+      "formula": "(adult_share_15_49 * @moral_weights.uov_per_death_age_15_49 + (1 - adult_share_15_49) * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier",
+      "explainer": "Adults, at the site's value of a death by age band, the same adult split as the other mixed branches, times your value of a life."
     },
     {
       "id": "smc_deaths_averted",
