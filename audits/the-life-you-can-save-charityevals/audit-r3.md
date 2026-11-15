@@ -1,6 +1,6 @@
 # Audit: the-life-you-can-save-charityevals, round 3 (verification of the round-2 fix)
 Result: 14.03 years of healthy life per 1,000 dollars; cause median 0.0686 uov/$ (×204). Verdict: pass.
-Model-sha: 6bf3c822a142f9b9f9e37fb9a0feec71500969266a29ffc7e87e2bc29842e1b4
+Model-sha: 06c91e37d5edf4ac79bc8c8ea5547a148fa3a1542fca6b85c6618636038b7b2f
 Scope: only the round-2 finding (next-dollar figure), fixed in e683fb67.
 Mechanical: `scripts/audit-model.ts` shows one medium (far-above, judged in rounds 1 and 2), no high; the bottom line is 14.03 years per $1,000.
 Previous round: finding 1 (next-dollar room from the Australian balance sheet): resolved.
@@ -17,3 +17,4 @@ Checks:
 - The model's `marginal_vs_past_average` explainer, summary (about 14 years, 28%) and write-up (28%, 13% to 63%, A$5.2 million at the end of 2024, about 22 months, $4.8 million) agree with the fact and with the live result of 14.03. The write-up's "balance sheet for the end of 2025 isn't published yet" is consistent with using the 31 Dec 2024 figure plus the 2025 surplus.
 - No comparison with other charities, medians or peers in the summary or write-up (grep for median/peer/other charities finds only the sentence on where the other half of the new-money share would have gone, which is not a comparison).
 - `git status`: only the untracked scripts/zz-dump-tlycs.ts; generated/ untouched.
+Re-stamped (15 Nov 2026): TLYCS destinations: GAIN and Village Enterprise now read their new models (14.0 -> 13.1; mechanical)

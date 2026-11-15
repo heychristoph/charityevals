@@ -68,6 +68,7 @@ export const TLYCS_DESTINATIONS: [string, string][] = [
   ["development_media_international", "givewell:development-media-international"],
   ["evergreen_collaborative", "charityevals:clean-air-task-force"],
   ["evidence_action", "givewell:evidence-action"],
+  ["gain", "charityevals:global-alliance-for-improved-nutrition"],
   ["givedirectly", GIVEDIRECTLY],
   ["helen_keller_intl", "givewell:helen-keller-intl"],
   ["innovations_for_poverty_action", "givewell:innovations-for-poverty-action"],
@@ -77,6 +78,7 @@ export const TLYCS_DESTINATIONS: [string, string][] = [
   ["one_acre_fund", "givewell:one-acre-fund"],
   ["raising_the_village", "raising-the-village-2024"],
   ["unlimit_health", "sogive:unlimit-health"],
+  ["village_enterprise", "charityevals:village-enterprise"],
 ];
 
 export type TemplateRow = { id: string; label: string; format: "small" | "percent"; formula: string; explainer: string };
