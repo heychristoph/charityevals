@@ -25,7 +25,7 @@ Four kinds of work MSF does but doesn't count are branches built from the resear
 - **The missing-data slider** moves most of the model: from about 0.45 at 10% to 1.32 at full weight.
 - **Severe malnutrition and malaria**: about three-quarters of the deaths averted. How many of the malaria cases counted are really malaria rather than another fever in a child carrying parasites is the biggest single question (20-80%: 0.68 to 1.06); how often a child with complicated malnutrition would die untreated is next (20-50%: 0.72 to 1.09).
 - **The counterfactuals**: on average about three-fifths of MSF's patients are counted as people nobody else would have treated.
-- **MSF's share of the resources** where it supports government facilities (60-100%: 0.59 to 0.99).
+- **MSF's share of the resources**, built from two judgments with no reference class: the share of care in facilities MSF supports (25-80%: 0.91 to 0.75) and others' share of the resources there (15-50%: 0.91 to 0.74).
 - The shared sliders (healthy year vs income, value of a life, discount rate) move it as they move every health model.
 
 ### Biggest uncertainties
