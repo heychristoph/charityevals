@@ -16,7 +16,7 @@ Each win with published tonnes is a branch: its tonnes a year once in effect (RE
 
 ### What drives the result
 
-The federal law gives about four fifths of the value, Michigan's laws under a tenth, the household money a little under a tenth, the two EPA rules about 2%. The law's credits were cut back by the 2025 budget law (35% of its projected tonnes counted as delivered), the power-plant and vehicle standards have since been repealed (5% delivered), and Michigan's House voted in 2026 to repeal the state laws, which the Senate has not taken up (55% delivered).
+The federal law gives about four fifths of the value, Michigan's laws under a tenth, the household money a little under a tenth, the two EPA rules about 2%. The law's credits were cut back by the 2025 budget law (35% of its projected tonnes counted as delivered), the power-plant and vehicle standards have since been repealed (5% delivered), and Michigan's House voted in 2026 to repeal the state laws, a repeal expected to die in the Senate (55% delivered).
 
 ### Biggest uncertainties
 
@@ -28,7 +28,7 @@ The Pennsylvania grant, the freight strategy, EPA's other power-sector rules, th
 
 ### How this model was checked
 
-Independent audits are in audits/evergreen-collaborative-charityevals/. Round 1 passed with one medium finding, fixed: the share for other wins is now tagged as a side effect, so the side-effect weight moves it. Its lows were fixed too: Michigan's tonnes were cut from 22 to 15 million a year (8 to 30 million) after a check against the state's whole power sector (about 50 million tonnes, its coal exits already planned), which lowered the result about 4%; quotes, the grants to Michigan groups and the Senate's status were corrected; and the Michigan branch now says why it has no compliance-cost row. A scoped verification round checked these changes.
+Independent audits are in audits/evergreen-collaborative-charityevals/. Round 1 passed with one medium finding, fixed: the share for other wins is now tagged as a side effect, so the side-effect weight moves it. Its lows were fixed too: Michigan's tonnes were cut from 22 to 15 million a year (8 to 30 million) after a check against the state's whole power sector (about 50 million tonnes, its coal exits already planned), which lowered the result about 4%; quotes, the grants to Michigan groups and the repeal's status in the Senate were corrected; and the Michigan branch now says why it has no compliance-cost row. A scoped verification round checked these changes.
 
 ### Sources
 
