@@ -39,7 +39,7 @@ The general awareness work has no outcome of its own beyond the advocacy: its ef
 
 ### What isn't modelled
 
-As a share of what households gain: wins that carry no money (zoning and land-use reforms, which in US cities add about 0.8% to the housing stock within a decade, mostly at the upper end of rents: Stacy and colleagues, 2023; land-tenure rules abroad) any change in public attitudes from the awareness work, and illness averted by the water, sanitation and drainage works abroad add a few percent of what households gain, which is most of the result because the gain and the cost nearly cancel.
+As a share of what households gain: wins that carry no money (zoning and land-use reforms, which in US cities add about 0.8% to the housing stock within a decade, mostly at the upper end of rents: Stacy and colleagues, 2023; land-tenure rules abroad), any change in public attitudes from the awareness work, and illness averted by the water, sanitation and drainage works abroad add a few percent of what households gain, which is most of the result because the gain and the cost nearly cancel.
 
 ### How this model was checked
 
