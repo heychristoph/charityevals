@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "united-way",
   "owner": "charityevals",
-  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to local agencies (about 58% of its programme spending), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash; other grants and United Way's own services (about 80% of programme spending, including the cost of running the grants) built from the US research on programmes of their kind, children's tutoring, mentoring and early learning valued by the adult earnings the trials imply, job training and coaching by earnings gained, health services at what low-income recipients would pay for them; 211 by the help callers find that they wouldn't have found otherwise; and tax help by fees saved and credits that would have gone unclaimed. Every branch is discounted for missing data, since United Way measures none of these outcomes itself. The result, about 0.009 years of healthy life per $1,000, is low because the help goes to people in the US who consume around $23,000 a year: on the site's log-income scale a dollar does about a thirtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. About three-fifths of the result is the children's and youth programmes' lifelong earnings, so the discount rate, how much the programmes raise earnings and what they cost drive it, with the missing-data and income-to-health sliders.",
+  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to local agencies (about 58% of its programme spending), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash; other grants and United Way's own services (about 80% of programme spending, including the cost of running the grants) built from the US research on programmes of their kind, children's tutoring, mentoring, early learning and after-school programmes valued by the adult earnings the trials imply, job training and coaching by earnings gained, health services at what low-income recipients would pay for them; 211 by the help callers find that they wouldn't have found otherwise; and tax help by fees saved and credits that would have gone unclaimed. Every branch is discounted for missing data, since United Way measures none of these outcomes itself. The result, about 0.011 years of healthy life per $1,000, is low because the help goes to people in the US who consume around $23,000 a year (those getting food and rent help about $10,000): on the site's log-income scale a dollar does a thirteenth to a thirtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. About half the result is the children's and youth programmes' lifelong earnings, so the discount rate, how much the programmes raise earnings and what they cost drive it, with the missing-data and income-to-health sliders.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: United Way (US network)",
@@ -648,6 +648,22 @@
       "formula": "consumption_mean * recipients_consumption_share"
     },
     {
+      "id": "bn_consumption_share",
+      "section": "effect",
+      "label": "Basic-needs and 211 clients' consumption per person, as a share of the US average",
+      "format": "percent",
+      "formula": "@united_states.food_aid_recipients_consumption_share",
+      "explainer": "The site's shared figure for people getting US food aid (@united_states.food_aid_recipients_consumption_share): pantry food and emergency rent and utility help go to households at or below 130-200% of the poverty line, and 211's callers are the same households asking for the same help (47% of referrals housing and utilities, then food), so every US food-aid model values them the same way. Financial stability, health and tax help keep the general clients' share (recipients_consumption_share), since their users include the near-poor."
+    },
+    {
+      "id": "bn_baseline_consumption",
+      "section": "effect",
+      "label": "Basic-needs and 211 clients' consumption per person (US$)",
+      "format": "usd",
+      "formula": "consumption_mean * bn_consumption_share",
+      "explainer": "The baseline the basic-needs help and 211's help are set against on the log scale."
+    },
+    {
       "id": "income_years",
       "section": "effect",
       "label": "Years the help counts as income",
@@ -669,7 +685,7 @@
       "section": "effect",
       "label": "Basic needs: ln(consumption) gain per person",
       "format": "small",
-      "formula": "ln(1 + bn_value_per_person / baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)"
+      "formula": "ln(1 + bn_value_per_person / bn_baseline_consumption) * pv_annuity_due(1, $discount_rate, income_years)"
     },
     {
       "id": "svc_edu_share",
@@ -698,17 +714,25 @@
       "explainer": "Our judgment, from the same anchors as the children's share (Abilene's Financial Stability 40% including basic needs; United Way of Puerto Rico puts 22% of the funds it raises into financial stability; Greater Houston's THRIVE financial-stability network is its largest restricted fund). 30%, from 15% to 45%. The rest, 1 minus the two shares (30% at the defaults), is health and other services."
     },
     {
-      "id": "tutoring_share",
+      "id": "tutoring_weight",
       "section": "effect",
-      "label": "Children and youth: share of the spending on tutoring and reading",
-      "format": "percent",
+      "label": "Children and youth: weight of tutoring and reading in the children's spending (before normalising)",
+      "format": "number",
       "value": {
         "low": 0.15,
         "best": 0.25,
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 15% to 35%; after-school programmes take the rest."
+      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 0.15 to 0.35; the four weights are normalised to sum to 1."
+    },
+    {
+      "id": "tutoring_share",
+      "section": "effect",
+      "label": "Children and youth: share of the spending on tutoring and reading",
+      "format": "percent",
+      "explainer": "Its weight over the four kinds' weights, so the shares always sum to 1.",
+      "formula": "tutoring_weight / (tutoring_weight + mentoring_weight + early_weight + afterschool_weight)"
     },
     {
       "id": "tutoring_effect_sd",
@@ -751,11 +775,26 @@
       "explainer": "Our judgment: high-dosage tutoring at scale is mostly by paid tutors (the Saga trials' fellows), while United Way's reading programmes recruit volunteer readers for an hour or so a week through the school year. 10 hours a student-year, from 0 to 40."
     },
     {
+      "id": "tutoring_years_until_work",
+      "section": "effect",
+      "label": "Children and youth, tutoring and reading: years from the programme to working age",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 7,
+        "best": 11,
+        "high": 15
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: tutoring and reading programmes run from K-3 grade-level reading (age 6 to 9) to middle- and high-school maths tutoring (the Saga trials, grades 9-10); about age 11, 11 years before work at about 22, from 7 to 15."
+    },
+    {
       "id": "tutoring_ln_gain",
       "section": "effect",
       "label": "Children and youth, tutoring and reading: ln(consumption) gain per child, all working years, discounted",
       "format": "number",
-      "formula": "ln(1 + tutoring_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+      "formula": "ln(1 + tutoring_effect_sd * edu_earnings_per_sd) * edu_pv_factor / (1 + $discount_rate) ^ tutoring_years_until_work",
+      "explainer": "The proportional earnings gain on the log scale over the shared working years, discounted back over tutoring_years_until_work."
     },
     {
       "id": "tutoring_attribution",
@@ -766,17 +805,25 @@
       "explainer": "The programme's cost over its cost plus the volunteers' unpaid hours at the US volunteer wage (Convention 2): the volunteers' time is part of what the trials measure."
     },
     {
-      "id": "mentoring_share",
+      "id": "mentoring_weight",
       "section": "effect",
-      "label": "Children and youth: share of the spending on mentoring",
-      "format": "percent",
+      "label": "Children and youth: weight of mentoring in the children's spending (before normalising)",
+      "format": "number",
       "value": {
         "low": 0.15,
         "best": 0.25,
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 15% to 35%; after-school programmes take the rest."
+      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 0.15 to 0.35; the four weights are normalised to sum to 1."
+    },
+    {
+      "id": "mentoring_share",
+      "section": "effect",
+      "label": "Children and youth: share of the spending on mentoring",
+      "format": "percent",
+      "explainer": "Its weight over the four kinds' weights, so the shares always sum to 1.",
+      "formula": "mentoring_weight / (tutoring_weight + mentoring_weight + early_weight + afterschool_weight)"
     },
     {
       "id": "mentoring_effect_sd",
@@ -798,11 +845,11 @@
       "format": "usd",
       "value": {
         "low": 1500,
-        "best": 2500,
-        "high": 4400
+        "best": 3000,
+        "high": 5000
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the agency's full cash cost of a mentored youth-year: Big Brothers Big Sisters community mentoring about $1,500 to $3,300 per youth (Alfonso and others 2019); the Washington State Institute for Public Policy uses $4,399 per participant a year. $2,500, from $1,500 to $4,400. The mentor's own time is not in it: mentoring_volunteer_hours."
+      "explainer": "Our judgment, the agency's average cash cost of a mentored youth-year. Alfonso and others 2019 (Children and Youth Services Review 101: 23-32) give marginal costs: about $80 a mentor-month, $3,301 per community-based match of about 20 months, about $2,500 a year; the average cost per youth is higher (the Washington State Institute for Public Policy uses $4,399 per participant a year). $3,000, from $1,500 to $5,000. The mentor's own time is not in it: mentoring_volunteer_hours."
     },
     {
       "id": "mentoring_volunteer_hours",
@@ -819,11 +866,26 @@
       "explainer": "Our judgment: Big Brothers Big Sisters community matches meet two to four times a month for a few hours, about 50 to 100 hours a year; the mentor's time is part of what the trials measure. 60 hours a youth-year, from 30 to 100."
     },
     {
+      "id": "mentoring_years_until_work",
+      "section": "effect",
+      "label": "Children and youth, mentoring: years from the programme to working age",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 8,
+        "best": 10,
+        "high": 13
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the mentoring trials' mean age is about 12 (Raposa and others 2019), 10 years before work at about 22, from 8 to 13."
+    },
+    {
       "id": "mentoring_ln_gain",
       "section": "effect",
       "label": "Children and youth, mentoring: ln(consumption) gain per child, all working years, discounted",
       "format": "number",
-      "formula": "ln(1 + mentoring_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+      "formula": "ln(1 + mentoring_effect_sd * edu_earnings_per_sd) * edu_pv_factor / (1 + $discount_rate) ^ mentoring_years_until_work",
+      "explainer": "The proportional earnings gain on the log scale over the shared working years, discounted back over mentoring_years_until_work."
     },
     {
       "id": "mentoring_attribution",
@@ -834,17 +896,25 @@
       "explainer": "The programme's cost over its cost plus the volunteers' unpaid hours at the US volunteer wage (Convention 2): the volunteers' time is part of what the trials measure."
     },
     {
-      "id": "early_share",
+      "id": "early_weight",
       "section": "effect",
-      "label": "Children and youth: share of the spending on early learning",
-      "format": "percent",
+      "label": "Children and youth: weight of early learning in the children's spending (before normalising)",
+      "format": "number",
       "value": {
         "low": 0.15,
         "best": 0.25,
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 15% to 35%; after-school programmes take the rest."
+      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 0.15 to 0.35; the four weights are normalised to sum to 1."
+    },
+    {
+      "id": "early_share",
+      "section": "effect",
+      "label": "Children and youth: share of the spending on early learning",
+      "format": "percent",
+      "explainer": "Its weight over the four kinds' weights, so the shares always sum to 1.",
+      "formula": "early_weight / (tutoring_weight + mentoring_weight + early_weight + afterschool_weight)"
     },
     {
       "id": "early_effect_sd",
@@ -870,14 +940,29 @@
         "high": 14000
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the full cost of a child's year of pre-kindergarten: state pre-K spent $8,856 a child from all reported sources in 2023-24 (NIEER, The State of Preschool 2024), Head Start more per place. $9,000, from $6,000 (part-day places) to $14,000."
+      "explainer": "Our judgment, the full cost of a child's year of pre-kindergarten: state pre-K spent $8,856 a child from all reported sources in 2023-24, state spending alone $7,888 (NIEER, The State of Preschool 2024, https://nieer.org/yearbook/2024), Head Start more per place. $9,000, from $6,000 (part-day places) to $14,000."
+    },
+    {
+      "id": "early_years_until_work",
+      "section": "effect",
+      "label": "Children and youth, early learning: years from the programme to working age",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 17,
+        "best": 18,
+        "high": 19
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: pre-kindergarten at age 3 to 5, 17 to 19 years before work at about 22: 18."
     },
     {
       "id": "early_ln_gain",
       "section": "effect",
       "label": "Children and youth, early learning: ln(consumption) gain per child, all working years, discounted",
       "format": "number",
-      "formula": "ln(1 + early_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+      "formula": "ln(1 + early_effect_sd * edu_earnings_per_sd) * edu_pv_factor / (1 + $discount_rate) ^ early_years_until_work",
+      "explainer": "The proportional earnings gain on the log scale over the shared working years, discounted back over early_years_until_work."
     },
     {
       "id": "early_attribution",
@@ -888,12 +973,25 @@
       "explainer": "1: pre-kindergarten is taught by paid staff; no volunteers' time is in the trialled effect."
     },
     {
+      "id": "afterschool_weight",
+      "section": "effect",
+      "label": "Children and youth: weight of after-school programmes in the children's spending (before normalising)",
+      "format": "number",
+      "value": {
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 0.15 to 0.35; the four weights are normalised to sum to 1."
+    },
+    {
       "id": "afterschool_share",
       "section": "effect",
       "label": "Children and youth: share of the spending on after-school programmes",
       "format": "percent",
-      "formula": "1 - tutoring_share - mentoring_share - early_share",
-      "explainer": "The rest of the children's and youth spending after tutoring, mentoring and early learning."
+      "formula": "afterschool_weight / (tutoring_weight + mentoring_weight + early_weight + afterschool_weight)",
+      "explainer": "Its weight over the four kinds' weights, so the shares always sum to 1."
     },
     {
       "id": "afterschool_effect_sd",
@@ -936,11 +1034,26 @@
       "explainer": "Our judgment, as the Boys & Girls Clubs model: 160,000 volunteers giving about 30 hours each over 1.6 million members, about 3 hours a member-year, from 0 to 10."
     },
     {
+      "id": "afterschool_years_until_work",
+      "section": "effect",
+      "label": "Children and youth, after-school programmes: years from the programme to working age",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 8,
+        "best": 11,
+        "high": 15
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as the Boys & Girls Clubs model: members from about 6 to 18, mostly 8 to 14; 11 years before work, from 8 to 15."
+    },
+    {
       "id": "afterschool_ln_gain",
       "section": "effect",
       "label": "Children and youth, after-school programmes: ln(consumption) gain per child, all working years, discounted",
       "format": "number",
-      "formula": "ln(1 + afterschool_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+      "formula": "ln(1 + afterschool_effect_sd * edu_earnings_per_sd) * edu_pv_factor / (1 + $discount_rate) ^ afterschool_years_until_work",
+      "explainer": "The proportional earnings gain on the log scale over the shared working years, discounted back over afterschool_years_until_work."
     },
     {
       "id": "afterschool_attribution",
@@ -953,10 +1066,10 @@
     {
       "id": "edu_pv_factor",
       "section": "effect",
-      "label": "Children and youth: present value of a lasting proportional earnings gain, per unit of the gain",
+      "label": "Children and youth: present value at the start of work of a lasting proportional earnings gain, per unit of the gain",
       "format": "number",
-      "formula": "pv_annuity_due(1, $discount_rate, edu_working_years) / (1 + $discount_rate) ^ edu_years_until_work * edu_resource_sharing",
-      "explainer": "Each working year's proportional gain on the log scale, discounted to the programme year at the shared rate, shared with the household. A proportional gain is the same on the log scale whatever the adult's income, so the clients' consumption share doesn't enter. Taxes on the gain and benefits lost are not netted out (the site's other income models don't net them either)."
+      "formula": "pv_annuity_due(1, $discount_rate, edu_working_years) * edu_resource_sharing",
+      "explainer": "Each working year's proportional gain on the log scale, discounted to the start of work at the shared rate and shared with the household; each kind's row discounts it back over its own years to working age. A proportional gain is the same on the log scale whatever the adult's income, so the clients' consumption share doesn't enter. Taxes on the gain and benefits lost are not netted out (the site's other income models don't net them either)."
     },
     {
       "id": "edu_ln_gain_per_dollar",
@@ -981,19 +1094,6 @@
       "format": "percent",
       "explainer": "The shared figure for US youth programmes (facts/youth_programmes.json, from Chetty, Friedman and Rockoff 2014): about 13% higher adult earnings per SD of a one-year test gain, taken at 10% (5% to 13%) because much of the youth programmes' gain is in social-emotional or self-reported outcomes, which predict earnings less than test gains; this is the only place that doubt is counted.",
       "formula": "@youth_programmes.earnings_gain_per_sd_childhood"
-    },
-    {
-      "id": "edu_years_until_work",
-      "section": "effect",
-      "label": "Children and youth: years from the programme to working age",
-      "format": "number",
-      "value": {
-        "low": 8,
-        "best": 13,
-        "high": 18
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: United Way's youth work runs from early learning (age 3 to 5, 17 to 19 years before work at about 22) to mentoring and after-school programmes (average age about 12 in the mentoring trials, about 10 years). 13 years, from 8 to 18; every year is discounted at the shared rate. One figure for all four kinds: early learning, the furthest from work, is a quarter of the spending."
     },
     {
       "id": "edu_working_years",
@@ -1138,7 +1238,7 @@
       "section": "effect",
       "label": "211: ln(consumption) gain per person in a helped household",
       "format": "small",
-      "formula": "ln(1 + h211_help_obtained_share * h211_value_of_help / household_size / baseline_consumption)"
+      "formula": "ln(1 + h211_help_obtained_share * h211_value_of_help / household_size / bn_baseline_consumption)"
     },
     {
       "id": "tax_share_would_pay",
@@ -1283,7 +1383,7 @@
       "section": "adjustments",
       "label": "Value of a volunteer hour, US, 2025",
       "format": "usd",
-      "explainer": "The site's US value of a volunteer hour for 2025 (@united_states.volunteer_hour_value_2025, Independent Sector: the average private non-farm wage plus benefits), for tax volunteers' unpaid hours (Convention 2).",
+      "explainer": "The site's US value of a volunteer hour for 2025 (@united_states.volunteer_hour_value_2025, Independent Sector: the average private non-farm wage plus benefits), for the unpaid hours of tax volunteers and of the volunteers in the children's programmes (Convention 2).",
       "formula": "@united_states.volunteer_hour_value_2025"
     },
     {
@@ -1292,7 +1392,7 @@
       "label": "Basic needs: United Way's share of the resources behind the value counted",
       "format": "percent",
       "formula": "1",
-      "explainer": "1: this branch is valued at what United Way's own dollars buy (its spending times what a dollar of the services is worth), so nobody else's resources are in the value counted. Volunteers and co-funders working alongside (United Way counts 1.5 million volunteers) add services that aren't counted here, so they take no share of this value; Convention 2 applies where the value is an outcome several contributors produce, as for 211 and tax help."
+      "explainer": "1: this branch is valued at what United Way's own dollars buy (its spending times what a dollar of the services is worth), so nobody else's resources are in the value counted. Volunteers and co-funders working alongside (United Way counts 1.5 million volunteers) add services that aren't counted here, so they take no share of this value; Convention 2 applies where the value is an outcome several contributors produce, as for 211, tax help and the children's programmes."
     },
     {
       "id": "svc_attribution_share",

@@ -92,7 +92,7 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "US programme spending in fiscal 2025, net of the thrift stores' running costs and day-care fees",
+      "label": "US programme spending in fiscal 2025 that donations pay for (net of the thrift stores' running costs, day-care fees, donated goods and the overseas work)",
       "format": "usd",
       "formula": "program_expenses - thrift_store_costs - netted_fees - overseas_spend - goods_handed_out",
       "explainer": "All four programme lines of the combined US accounts (corps community centres, rehabilitation, residential and institutional services, other social services), less what the Adult Rehabilitation Centers' thrift stores cost to run and less the day-care fees clients paid (their own money for a service valued below net of them), less the donated goods handed out, and less the overseas work paid through these accounts (the World Service Office and the territories' support for the international Salvation Army), which is modelled separately (salvation-army-charityevals-international) and weighted by its spending on the charity's page. The stores are a self-financing trading arm: their sales pay for their own staff, trucks and rent, and only their net contribution pays for the recovery programme. Counting their gross running costs as charitable spending would make every donated dollar look as if it bought less help than it does. Fiscal year 1 October 2024 to 30 September 2025, the latest with audited accounts and service statistics for the same period."
@@ -183,7 +183,7 @@
       "label": "Overhead multiplier (total ÷ program expenses)",
       "format": "multiple",
       "formula": "(total_expenses - thrift_store_costs - netted_fees - goods_handed_out) / (program_expenses - thrift_store_costs - netted_fees - goods_handed_out)",
-      "explainer": "Management and fundraising spread over the programmes in proportion to their cost, as GiveWell and ACE do, with the thrift stores' running costs and day-care fees out of both totals (they are paid by the stores' sales and by the clients, not by donors)."
+      "explainer": "Management and fundraising spread over the programmes in proportion to their cost, as GiveWell and ACE do, with the thrift stores' running costs, day-care fees and the donated goods out of both totals (they are paid by the stores' sales and by the clients, or given in kind, not by donors)."
     },
     {
       "id": "cost_total",
@@ -339,11 +339,11 @@
       "format": "usd",
       "value": {
         "low": 5,
-        "best": 13,
+        "best": 12,
         "high": 25
       },
       "kind": "judgment",
-      "explainer": "Mostly donated clothing, toys and household goods; no published average. Cross-check: the Western Territory's audited note on donations in kind records clothing $23.9M, Angel Tree and other Christmas gifts $16.0M and household goods $17.1M, $57.1M of non-food goods, about $238M nationally at its 24% share of the households helped; at the shared ratio of value to recorded value for donated goods (0.85) that is about $200M over 15.05 million items, about $13 an item, before purchased items. Thrift-store prices for used clothing ($4-10) and new toys under Angel Tree ($15-30 a gift) bracket it: $13 (5-25)."
+      "explainer": "Mostly donated clothing, toys and household goods; no published average. Cross-check on the national accounts: the goods handed out (goods_handed_out, about $566M) times the Western Territory's non-food share of its in-kind goods (clothing $23.9M, Angel Tree and other Christmas gifts $16.0M and household goods $17.1M, $57.1M of $172.1M, note 7), times the shared ratio of value to recorded value for donated goods (@united_states.donated_goods_value_vs_recorded), over 15.05 million items: about $11 an item, before the Angel Tree gifts bought with kettle money and less some thrift-store goods in the same lines. Thrift-store prices for used clothing ($4-10) and new toys under Angel Tree ($15-30 a gift) bracket it: $12 (5-25)."
     },
     {
       "id": "financial_assistance_households",
@@ -376,6 +376,19 @@
         "retrieved": "2026-11-03"
       },
       "explainer": "Everything handed to clients, in kind or in money, in the one territory with public audited accounts."
+    },
+    {
+      "id": "wt_arc_store_goods",
+      "section": "effect",
+      "label": "Western Territory: goods donated for sale in the thrift stores, inside the in-kind goods, fiscal 2023",
+      "format": "usd",
+      "value": {
+        "low": 0,
+        "best": 6600000,
+        "high": 13300000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Note 7 of the Western Territory's statements says 'Goods donated for sale in ARC thrift stores consist primarily of clothing, household goods, and other miscellaneous items', recorded at a percentage of their sale price, and puts them in the same clothing, household and other lines as the goods handed out (wt_inkind_goods). They are sold, not handed out, and expensed in the rehabilitation column, where only supplies ($10.2M) and other expenses ($3.0M) can hold them besides its $2.6M of direct assistance (p. 7): at most about $13.3M. Half of that, $6.6M (0-13.3M), is not taken out of direct assistance when the cash paid for bills is worked out."
     },
     {
       "id": "wt_inkind_goods",
@@ -427,8 +440,8 @@
       "section": "effect",
       "label": "Financial help per household (US$)",
       "format": "usd",
-      "formula": "(wt_direct_assistance - wt_inkind_goods) / (financial_assistance_households * wt_share_of_households) * @cpi.usa_2025 / @cpi.usa_2023",
-      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, about $24M) over its share of the households helped, put from fiscal-2023 into 2025 prices by the US consumer price index (Convention 8): about $76 a household, the national figure taken at the Western rate. Bills paid on a household's behalf count at full value."
+      "formula": "(wt_direct_assistance - (wt_inkind_goods - wt_arc_store_goods)) / (financial_assistance_households * wt_share_of_households) * @cpi.usa_2025 / @cpi.usa_2023",
+      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, the thrift stores' goods excepted) over its share of the households helped, put from fiscal-2023 into 2025 prices by the US consumer price index (Convention 8): about $98 a household, the national figure taken at the Western rate. Bills paid on a household's behalf count at full value."
     },
     {
       "id": "veterans_served",
@@ -449,15 +462,15 @@
     {
       "id": "veterans_help_value",
       "section": "effect",
-      "label": "Temporary financial help and services per veteran household (US$)",
+      "label": "Case management and housing search per veteran household (US$)",
       "format": "usd",
       "value": {
-        "low": 100,
-        "best": 500,
-        "high": 2000
+        "low": 0,
+        "best": 100,
+        "high": 500
       },
       "kind": "judgment",
-      "explainer": "SSVF pays rent arrears, deposits and utilities for a few months besides case management, much more per household than one-off emergency help, but many of the touchpoints are case management only. $500 (100-2,000)."
+      "explainer": "SSVF pays rent arrears, deposits and utilities for a few months besides case management; that temporary financial assistance is cash in direct assistance, already in the bills paid (assistance_per_household spreads all of it over the households helped). This is the case management and housing search alone: $100 (0-500)."
     },
     {
       "id": "pathway_of_hope_families",
@@ -705,7 +718,7 @@
       "section": "effect",
       "label": "Value received per person in the year (US$, food, goods, money and services)",
       "format": "usd",
-      "explainer": "All food, goods, bills paid, transport, day care, clinic visits, anti-trafficking, correctional and disaster services handed out, and the earnings that case management and job help add (trial_earnings_value), at what the family would otherwise pay (in-kind goods at their cash-equivalent share), over the people reached. Only money value: the relief food brings is counted here once, not again as wellbeing.",
+      "explainer": "All food, goods, bills paid, transport, day care, clinic visits, anti-trafficking, correctional and disaster services handed out, and the earnings that case management and job help add (trial_earnings_value), at what the family would otherwise pay (in-kind goods at their cash-equivalent share), over the people reached. Only money value: the relief food brings is counted here once, not again as wellbeing. The trial earnings enter divided by aid_counterfactual_adj (trial_earnings_value), so the branch's counterfactual leaves them at full value; the value actually received is about $2 a person less than shown.",
       "formula": "((meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value) * inkind_cash_equivalence + financial_assistance_households * assistance_per_household + veterans_served * veterans_help_value + trial_earnings_value) / people_reached"
     },
     {
