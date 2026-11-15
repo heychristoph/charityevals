@@ -43,6 +43,8 @@ const ACE = T("ACE's estimate of a campaign or outreach programme: the animals o
 const AIM = T("an Ambitious Impact idea-stage estimate, made before the charity ran the work: reach and effect are projections from research on other programmes.");
 const BY_ID: Record<string, Rule> = {
   // Happier Lives Institute
+  // A charity's own analysis
+  "lead-exposure-elimination-project-leep": T("LEEP's projection of a regulation it had just helped start: the homes left unpainted with lead paint, the children spared and their health and earnings are modelled, not measured."),
   // GiveWell exceptions
   "global-alliance-for-improved-nutrition-givewell": T("GiveWell's 2014 salt iodization estimate: the cost per person is a generic figure for iodization plants, not GAIN's count of who got iodized salt, and GAIN's part in raising iodization is GiveWell's guessed 50% chance."),
   "actra-hli": T("a new programme: reach is projected and the effect is from trials of other delivery."),
