@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "The American Red Cross collects about 40% of the US blood supply (6.4 million blood products to some 2,500 hospitals in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 15 November 2026) and trains about 6 million people a year in CPR, first aid and water safety. Hospitals and course fees pay for both, and more than their cost (biomedical revenue $2.31 billion against $2.12 billion of expenses; programme-materials (mainly course) revenue $175 million against $143 million), so this model has weight 0 in what a donation to the Red Cross does; it shows what the work itself achieves per dollar spent on it, in years of healthy life per $1,000. Both branches are discounted for missing data: the deaths averted per blood product rest on judgments anchored on studies of patients who refused transfusion, and the training on registry studies of bystander CPR. The biggest uncertainty is the counterfactual: other US blood centres and course providers would supply most of it if the Red Cross didn't. Four steps shrink the result: other providers would step in (15% of a year's outcome counted: about 60% of the supply unreplaced at first, replaced over about a year, and the products hospitals then go without avert about half the average), the Red Cross's product is about a third of the resources behind each transfusion, both branches take the missing-data step, and a transfusion survivor lives about three-fifths of an average remaining life. Together the adjustments leave about 2% of the raw outcome; before them a death averted costs about $25,000 of blood. The judgments behind deaths averted per product span a wide range, so the result is mostly uncertainty.",
+  "summary": "The American Red Cross collects about 40% of the US blood supply (6.4 million blood products to some 2,500 hospitals in FY2025, the latest audited year) and trains about 6 million people a year in CPR, first aid and water safety. Hospitals and course fees pay for both, and more than their cost (biomedical revenue $2.31 billion against $2.12 billion of expenses; programme-materials (mainly course) revenue $175 million against $143 million), so this model has weight 0 in what a donation to the Red Cross does; it shows what the work itself achieves per dollar spent on it, in years of healthy life per $1,000. Both branches are discounted for missing data: the deaths averted per blood product rest on judgments anchored on studies of patients who refused transfusion, and the training on registry studies of bystander CPR. The biggest uncertainty is the counterfactual: other US blood centres and course providers would supply most of it if the Red Cross didn't. Four steps shrink the result: other providers would step in (20% of a year's outcome counted), the Red Cross's product is about a third of the resources behind each transfusion, both branches take the missing-data step, and a transfusion survivor lives about three-fifths of an average remaining life. Together the adjustments leave about 3% of the raw outcome; before them a death averted costs about $25,000 of blood. The judgments behind deaths averted per product span a wide range, so the result is mostly uncertainty.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross Biomedical and Training Services (FY2025)",
@@ -486,12 +486,12 @@
       "format": "number",
       "unit": "years",
       "value": {
-        "low": 0.25,
-        "best": 1,
+        "low": 0.5,
+        "best": 1.5,
         "high": 3
       },
       "kind": "judgment",
-      "explainer": "Other centres recruit donors and open drives; they have expanded before when big suppliers changed. About a year, from three months to three years, the gap closing steadily."
+      "explainer": "Replacing the Red Cross's 40% means the other centres' collection, testing and processing grows by two-thirds. Fast end: national stock recovered within weeks to months after the 2020 and January 2022 collection collapses, with the infrastructure intact, which bounds how fast donors return, not how fast capacity is built. Slow end: new collection sites, staff and testing labs for two-thirds more volume, which no US centre has built in a year. About a year and a half, from six months to three years, the gap closing steadily."
     },
     {
       "id": "bld_unreplaced_share_year",
@@ -552,7 +552,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "US distributions in 2023 were 10.98 million red cells, 2.62 million platelets and 3.03 million plasma units (McDavid et al. 2025, Transfusion, NBCUS 2023). An apheresis platelet costs a hospital roughly two and a half to three times a red-cell unit and plasma well under a red-cell unit, so red cells are about 60% of what hospitals pay, from 50% (a platelet-heavier mix, as the Red Cross's nearly 1 million pathogen-reduced platelets suggest) to 70%."
+      "explainer": "US distributions in 2023 were 10.98 million red cells, 2.62 million platelets and 3.03 million plasma units (McDavid et al. 2025, Transfusion, NBCUS 2023). By our judgment an apheresis platelet costs a hospital a few times a red-cell unit and plasma well under one, so red cells are about 60% of what hospitals pay, from 50% (the Red Cross's mix is platelet-heavier than the national 16% of components: 1.1 million platelet against 4.6 million blood donations, annual report p. 11) to 70%."
     },
     {
       "id": "bld_other_handling_multiple",
@@ -560,12 +560,12 @@
       "label": "Full cost of transfusing a platelet or plasma unit, as a multiple of its purchase price",
       "format": "multiple",
       "value": {
-        "low": 1.2,
-        "best": 1.5,
+        "low": 1.3,
+        "best": 1.75,
         "high": 2.5
       },
       "kind": "judgment",
-      "explainer": "Platelets and plasma go through the same administration and monitoring steps Shander et al. cost for red cells (about $761 a red-cell unit all in, acquisition included), but their purchase price is higher (platelets) or the handling lighter (thawed plasma), so the handling adds about half the price, from a fifth to one and a half times."
+      "explainer": "Platelets and plasma go through the same issue, administration and monitoring steps Shander et al. cost for red cells (about $761 a red-cell unit all in, acquisition included). Platelets, about nine-tenths of this revenue, add about half their high price in handling; plasma's handling is several times its low price, but it is about a tenth of the revenue. Together about 1.75, from 1.3 to 2.5."
     },
     {
       "id": "bld_donations",
@@ -721,13 +721,21 @@
       "explainer": "Health screening for donors (the Red Cross notified donors of about 69,000 high blood pressure and 80,000 A1C findings, annual report p. 11) (+), the national disaster reserve (+); transfusion reactions and infections (−, very rare), donor iron deficiency and donation reactions (−, small). The training branch's are in trn_unmodelled_share."
     },
     {
+      "id": "bld_value_weight",
+      "section": "adjustments",
+      "label": "Blood's share of the modelled value",
+      "format": "percent",
+      "formula": "1 - trn_deaths_averted * trn_value_per_death * trn_survivor_life_share / (uov_deaths + uov_from_daly)",
+      "explainer": "Weights each branch's own side-effect share by its value."
+    },
+    {
       "id": "unmodelled_benefits_adj",
       "side_effect": "added",
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
-      "explainer": "GiveWell-style supplementary adjustments, each its own row, summed: they add to the modelled value as one share, as in GiveWell's sheets."
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + bld_value_weight * other_unmodelled_share + (1 - bld_value_weight) * trn_unmodelled_share",
+      "explainer": "Supplementary adjustments, each its own row, summed (each branch's own share weighted by its value): they add to the modelled value as one share."
     },
     {
       "id": "trn_people_trained",
@@ -867,7 +875,6 @@
     },
     {
       "id": "trn_unmodelled_share",
-      "side_effect": "added",
       "section": "adjustments",
       "label": "Training: benefits and harms not modelled, as a share of the training deaths' value",
       "format": "percent",
@@ -1209,7 +1216,7 @@
       "section": "outcome",
       "label": "Value of a death averted, both branches (units of value)",
       "format": "number",
-      "formula": "(people_reached * bld_total_adj * (bld_acute_deaths_per_product * bld_survivor_life_share + bld_chronic_deaths_per_product * bld_dependent_survivor_life_share) * bld_value_per_death + trn_deaths_averted * trn_value_per_death * trn_survivor_life_share * (1 + trn_unmodelled_share)) / deaths_averted",
+      "formula": "(people_reached * bld_total_adj * (bld_acute_deaths_per_product * bld_survivor_life_share + bld_chronic_deaths_per_product * bld_dependent_survivor_life_share) * bld_value_per_death + trn_deaths_averted * trn_value_per_death * trn_survivor_life_share) / deaths_averted",
       "explainer": "The death-weighted value across the branches, each death at its own age mix times its survivors' remaining-life share (acute bleeding, transfusion-dependent, cardiac arrest), so uov_deaths = deaths_averted × value_per_death as in the template."
     },
     {

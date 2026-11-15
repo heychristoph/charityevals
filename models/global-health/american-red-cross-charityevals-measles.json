@@ -441,15 +441,10 @@
     {
       "id": "indirect_deaths_ratio",
       "section": "effect",
-      "label": "Deaths after measles (immune amnesia), per measles death averted",
+      "label": "Deaths caused indirectly (after measles), per measles death averted",
       "format": "number",
-      "explainer": "Measles wipes out existing immune memory, raising deaths from other infections for two to three years after it (Mina et al. 2015, Science 348:694, where measles explained much of childhood infectious mortality before vaccination). About 0.3 more deaths per measles death, from 0 to 1. Cross-check: with it, the protected years avert about 1.4 deaths per 1,000 unvaccinated child-years, about a tenth of all-cause deaths at ages 1-4 in the region; all-cause studies of measles vaccine report larger falls, so the ratio isn't too high.",
-      "value": {
-        "low": 0,
-        "best": 0.3,
-        "high": 1
-      },
-      "kind": "judgment"
+      "explainer": "GiveWell's shared figure for deaths indirectly caused by vaccine-preventable disease, as in the site's other vaccination models: measles wipes out existing immune memory, raising deaths from other infections for two to three years after it (Mina et al. 2015, Science 348:694). Cross-check: with it, the protected years avert about 1.8 deaths per 1,000 unvaccinated child-years, a minority of all-cause deaths at ages 1-4 in the region; all-cause studies of measles vaccine report larger falls.",
+      "formula": "@givewell.mortalities_indirectly_attributable_to_vaccine_preventable_d"
     },
     {
       "id": "deaths_averted_per_person",
@@ -485,13 +480,21 @@
       "section": "effect",
       "label": "Children aged 5-14 per household visited",
       "format": "number",
+      "explainer": "The four countries' average household size times the share aged 5-14.",
+      "formula": "avg(@household_size.kenya, @household_size.nigeria, @household_size.malawi, @household_size.mozambique_rural) * msl_5_14_share_of_household"
+    },
+    {
+      "id": "msl_5_14_share_of_household",
+      "section": "effect",
+      "label": "Share of household members aged 5-14",
+      "format": "percent",
       "value": {
-        "low": 0.9,
-        "best": 1.3,
-        "high": 1.8
+        "low": 0.22,
+        "best": 0.29,
+        "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "DHS household sizes of 4.2-4.6 with about 28-30% aged 5-14 give about 1.3; households with young children, which volunteers target, have about as many. From 0.9 to 1.8."
+      "explainer": "Children 5-14 are about 28-30% of the population in the four countries' DHS household rosters; households with young children, which volunteers target, have about as many. About 29%, from 22 to 35%."
     },
     {
       "id": "msl_5_14_risk_ratio",
@@ -508,12 +511,12 @@
       "format": "number",
       "unit": "years",
       "value": {
-        "low": 2.5,
-        "best": 4,
+        "low": 3,
+        "best": 5,
         "high": 5.5
       },
       "kind": "judgment",
-      "explainer": "A child of 5-14 is on average about 9.5, five years from fifteen; fewer where the next campaign three to four years on would reach the child anyway. About 4, from 2.5 to 5.5."
+      "explainer": "A child of 5-14 is on average about 9.5, five years from fifteen, and follow-up campaigns (9-59 months) don't reach the child again. About 5, from 3 (deaths after fifteen fall off, some caught by later routine contacts) to 5.5."
     },
     {
       "id": "msl_5_14_deaths_per_u5_child",
@@ -730,7 +733,7 @@
         "high": 5
       },
       "kind": "judgment",
-      "explainer": "Statutory minimum wages in the visit countries, 2024: Kenya KES 15,202 a month for urban general labourers (about $4.5 a day), Nigeria ₦70,000 a month (National Minimum Wage Act 2024, about $1.7 a day), Malawi MWK 3,462 a day (from 1 February 2024, about $2), Mozambique's agriculture minimum MZN 6,338 a month (about $3.8 a day): about $3 a day, net of stipends the grants pay (which are already the Red Cross's cost), from 0 (stipends cover it) to 5."
+      "explainer": "Statutory minimum wages in the visit countries, 2024: Kenya KES 15,202 a month for urban general labourers (about $4.3 a day at @fx.usd_per_kes_2024, 26 working days), Nigeria ₦70,000 a month (National Minimum Wage Act 2024, about $1.8 a day at @fx.usd_per_ngn_2024), Malawi MWK 3,462 a day (from 1 February 2024, about $2), Mozambique's agriculture minimum MZN 6,338 a month (about $3.8 a day). They average about $3 a day gross; volunteers often get a small stipend from the grant, which is already the Red Cross's cost, so the unpaid value is at most that: 3, from 0 (stipends cover it) to 5."
     },
     {
       "id": "attribution_share_shared",
@@ -895,6 +898,14 @@
       "explainer": "GiveWell's shared figure for vaccines' herd protection, as in the site's other vaccination models."
     },
     {
+      "id": "infecting_others_share",
+      "section": "adjustments",
+      "label": "Fewer infections passed on, as a share of modelled value",
+      "format": "percent",
+      "formula": "@givewell_common.lower_likelihood_of_infecting_others",
+      "explainer": "GiveWell's shared figure, listed beside herd immunity in its vaccine sheets."
+    },
+    {
       "id": "other_unmodelled_share",
       "section": "adjustments",
       "label": "Other benefits and harms not modelled, as a share of modelled value",
@@ -913,7 +924,7 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + herd_immunity_share + other_unmodelled_share",
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + herd_immunity_share + infecting_others_share + other_unmodelled_share",
       "explainer": "GiveWell-style supplementary adjustments, each its own row, summed: they add to the modelled value as one share, as in GiveWell's sheets."
     },
     {
