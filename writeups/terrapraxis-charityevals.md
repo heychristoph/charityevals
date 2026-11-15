@@ -1,6 +1,6 @@
 ### Summary
 
-TerraPraxis works to re-power the world's coal plants with advanced nuclear reactors, so the sites, grid connections and jobs outlive coal. It does this through designs, software and convening rather than by building anything itself. Our model counts what its work of 2022-2024 adds to the deployment of advanced nuclear power, against what it spent in those years. It comes to **<span data-figure="headline" data-model="terrapraxis-charityevals">0.02</span> years of healthy life per 1,000 dollars**. About three tenths of that is the tonnes of CO₂ the reactors avoid. The rest is money, mostly what reactors on coal sites save in construction, for power customers in China and India, where a dollar matters far more to the people paying. The result is mostly uncertainty. No coal plant has been re-powered yet, every step from TerraPraxis's work to a working reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces.
+TerraPraxis works to re-power the world's coal plants with advanced nuclear reactors, so the sites, grid connections and jobs outlive coal. It does this through designs, software and convening rather than by building anything itself. Our model counts what its work of 2022-2024 adds to the deployment of advanced nuclear power, against what it spent in those years. It comes to **<span data-figure="headline" data-model="terrapraxis-charityevals">0.02</span> years of healthy life per 1,000 dollars**. About three tenths of that is the tonnes of CO₂ the reactors avoid. The rest is money: mostly what reactors on coal sites save in construction, for power customers in China and other middle-income countries, where a dollar matters far more to the people paying. The result is mostly uncertainty. No coal plant has been re-powered yet, every step from TerraPraxis's work to a working reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces.
 
 ### What the charity does
 
@@ -35,7 +35,7 @@ Then come the money effects, valued as money gained or lost by those who pay for
 - Reactors moved to coal sites save 25% of their construction cost (DOE). The saving uses each region's reactor cost from the IEA and NEA.
 - The extra reactors' power costs more or less than the power it replaces, without any carbon price. The shared figures come from the IEA and NEA's levelised costs, at the site's 4% discount rate.
   - **Against fossil power.** New nuclear costs about $2 more per MWh in China, $6 less in India, $10 more in the US and $14 less in Korea and France.
-  - **Against wind and solar.** These are cheaper to build. After a shared $15 per MWh for their system costs, nuclear costs about $10 more in India and $7 more in the US, $5 less in China and much less in Korea and France.
+  - **Against wind and solar.** These are cheaper to build. After a shared $15 per MWh for their system costs, nuclear costs about $10 more in India and $4 more in the US, and $5 less in China. In Korea and France it costs much less.
   - **Each line's mix.** Each line splits the power it replaces into fossil and clean shares to match its own tonnes.
   - **Coal sites.** The coal-site reactors' power is cheaper by the site's construction saving.
 
