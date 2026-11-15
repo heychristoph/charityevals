@@ -73,6 +73,7 @@ const BY_ID: Record<string, Rule> = {
   "unlimit-health-deworming-sogive-2022": M("the treatments are counted, and the effect is from randomised trials of school-based deworming."),
   // GiveWell exceptions to the rules below
   "alima-primary-healthcare-malnutrition": T("primary health care and malnutrition treatment: the deaths either averts rest on judgment and case series, not on trials against no treatment."),
+  "iodine-global-network-givewell": T("a model of salt iodization generally: the cost per person, coverage and the organisation's chance of making a difference are GiveWell's judgments, with no count of the people whose salt or iodine status IGN's support changed."),
   "new-incentives-expected-cost-effectiveness-2017-rct": T("a forecast made before the randomised trial of the programme reported: the effect on vaccination was a judgment."),
   "new-incentives-june-2019": T("before the trial of the programme reported (2020), the effect on vaccination was a judgment."),
   "new-incentives-june-2019-endline-updated-ni-early-2018": T("before the trial of the programme reported (2020), the effect on vaccination was a judgment."),
