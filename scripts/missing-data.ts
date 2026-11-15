@@ -62,6 +62,7 @@ const BY_ID: Record<string, Rule> = {
   "breast-cancer-now-sogive": T("research funding: what the research achieves is a judgment from the returns-to-research literature."),
   "motor-neurone-disease-association-sogive-upper-bound": T("research and care: what the spending achieves is a judgment."),
   "versus-arthritis-sogive-upper-bound": T("research funding: what the research achieves is a judgment from the returns-to-research literature."),
+  "teaching-at-the-right-level-africa-tlycs": M("TaRL Africa counts the pupils reached in each country, and the learning gain is from randomised trials of Teaching at the Right Level, including government-run delivery (India, Ghana, Zambia), halved for fidelity at scale."),
   "compassion-uk-sogive": M("the sponsored children are counted, and the effect is from an evaluation of Compassion's own sponsorship programme (Wydick et al. 2013)."),
   "royal-national-lifeboat-institution-sogive": T("launches and rescues are counted, but the lives a rescue saves are a judgment, not measured against what would have happened."),
   "strongminds-sogive-march-2024": M("StrongMinds counts the people treated, and the effect is from trials of the same group therapy and its own trial."),
