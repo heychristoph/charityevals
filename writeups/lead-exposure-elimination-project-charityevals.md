@@ -1,6 +1,6 @@
 ### Summary
 
-The Lead Exposure Elimination Project (LEEP) works to get lead out of the paint sold in low- and middle-income countries. Our model counts what it spent from its founding in September 2020 to the end of 2025 against what it won in that time: lead paint rules in seven countries and measured switches to lead-free paint in seven more. It comes to **<span data-figure="headline" data-model="lead-exposure-elimination-project-charityevals">13</span> years of healthy life per 1,000 dollars**. The figure is very uncertain. Nobody has measured how much of children's blood lead in these countries comes from paint, and the benefits come decades later, so the discount rate moves the result a lot.
+The Lead Exposure Elimination Project (LEEP) works to get lead out of the paint sold in low- and middle-income countries. Our model counts what it spent from its founding in September 2020 to the end of 2025 against what it won in that time: lead paint rules in seven countries and measured switches to lead-free paint in seven more. It comes to **<span data-figure="headline" data-model="lead-exposure-elimination-project-charityevals">14</span> years of healthy life per 1,000 dollars**. The figure is very uncertain. Nobody has measured how much of children's blood lead in these countries comes from paint, and the benefits come decades later, so the discount rate moves the result a lot.
 
 ### What the charity does
 
@@ -14,16 +14,16 @@ Lead paint on walls flakes and wears into dust, and young children swallow it. L
 
 ### How the model works
 
-- **Cost:** LEEP's average yearly spending from September 2020 to December 2025, in 2025 prices. Half of 2025's spending is left out, because its wins come after the count (a quarter to nine tenths).
+- **Cost:** LEEP's average yearly spending from September 2020 to December 2025, in 2025 prices. Three quarters of 2025's spending is left out, because its wins come after the count (40% to all of it): LEEP's own wins came months to three years after the work.
 - **Wins counted:**
-  - lead paint rules adopted with LEEP's support in Madagascar, Nigeria, Burundi, Liberia, Niger, Peru and Sierra Leone. Nigeria's counts at half credit, because a partner LEEP funded led the advocacy there;
+  - lead paint rules adopted with LEEP's support in Madagascar, Nigeria, Burundi, Liberia, Niger, Peru and Sierra Leone. Nigeria's counts at half credit, because its regulator had drafted the rule in 2020 and a local group had campaigned since 2009, before LEEP's grant;
   - manufacturers switching to lead-free paint, shown by LEEP's follow-up testing, in Pakistan, Malawi, Zimbabwe, Ghana, Colombia, Senegal and South Africa;
   - spices, eyeliner and plastics: no change won yet, so this work counts as cost only. Drafted rules aren't counted either.
 - **Children protected:** each year a market stays free of lead paint spares about one birth cohort its childhood lead from paint, so a win counts each year's births in that country.
-- **What a child gains:** children in these countries average about 5 µg/dL of blood lead. We judge that 15% of it comes from paint (4% to 40%), and a child loses half an IQ point per µg/dL. That is about 0.4 IQ points per child. Each point raises earnings by 0.67% over a 40-year working life, shared in the household, and the gain starts about 27 years after the win.
-- **Delivered:** 40% of the lead paint is taken off the market, for both rules and switches. In Malawi the lead paint brands' share fell by two thirds in two years. In a large programme country it fell by a third in three years.
+- **What a child gains:** children in these countries average about 5 µg/dL of blood lead. We judge that 15% of it comes from paint (4% to 40%), and a child loses half an IQ point per µg/dL. That is about 0.4 IQ points per child. Each point raises earnings by 0.67% over a 40-year working life, shared in the household. The paint's exposure fades over about 25 years, and earnings start 17 years after a child's exposure.
+- **Delivered:** the rules take 40% of the lead paint off the market over the years counted, as most are new. The switches take 44%: in Pakistan the lead paint brands' share fell from 88% to 41% in three years, in Malawi lead raw materials fell from 89% of the market to 4%, and we take a fifth in the five countries without a measured share.
 - **Adjustments:** LEEP gets half the credit (the regulators, partner NGOs and UN agencies do the rest), and trust in the chain is 70%. A tenth of the wins would have come in the same years anyway. Each win counts for the years a won reform counts on the site.
-- **Side effect:** lead's other harms, mostly adults' heart and kidney disease, add a quarter (5% to 80%).
+- **Side effect:** lead's other harms, mostly adults' heart disease, add 30% (8% to 90%).
 - **The missing-data discount** applies throughout. LEEP measures the lead in paint on sale, not children's blood lead.
 - **The next dollar** is valued at 42% of the average. LEEP holds over three years of 2025's spending, mostly earmarked, and its next programmes are in new countries and newer lead sources.
 
@@ -33,8 +33,8 @@ The discount rate, the years a won reform counts, the share of blood lead that c
 
 ### Biggest uncertainties
 
-- **How much paint adds to blood lead:** LEEP's own Malawi analysis found no study and used 20% (4% to 60%). Ours is 15%, as many rural homes in these countries are unpainted.
-- **Delivery:** five of the seven rules are from 2025 and enforcement is just starting. Malawi's market was still 48% in breach of its limit in 2025, four years in.
+- **How much paint adds to blood lead:** LEEP's own Malawi analysis found no study and used 20%. Ours is 15%, as many rural homes in these countries are unpainted.
+- **Delivery:** five of the seven rules are from 2025 and enforcement is just starting. Only Pakistan and Malawi have measured market shares.
 - **Timing:** the earnings gain comes decades after the win, so at a lower discount rate the result is several times higher.
 
 ### What isn't modelled
