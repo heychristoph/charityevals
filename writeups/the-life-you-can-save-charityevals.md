@@ -73,7 +73,14 @@ The Life You Can Save reports its 3-year leverage ratio, money moved over costs:
 
 ### How this model was checked
 
-See audits/the-life-you-can-save-charityevals/ for every round.
+Three audit rounds (audits/the-life-you-can-save-charityevals/). Round 1 checked every cost, reach and fact figure against the charity's documents. Its fixes:
+
+- Its next-dollar figure now counts the Australian entity's operating surpluses.
+- The charity's recorded spending is both entities' own costs, not the grants passed on.
+- Two small climate recipients take Clean Air Task Force's figure.
+- Counts of the recipients modelled were corrected.
+
+Round 2 passed. It found the Australian entity's published net assets, which lowered the next-dollar figure from 33% to 28%. Round 3 checked that change and passed.
 
 ### Sources
 
