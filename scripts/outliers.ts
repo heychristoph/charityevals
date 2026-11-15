@@ -1,12 +1,11 @@
-// Ranked models near or over INV-15's line (ten times their cause's median) and whether their summary says why:
+// Ranked models far from their cause's median (a multiple of it, default 5): for audits, a pointer to a row that
+// may be wrong. Never site text: the median moves whenever models land.
 //   npx tsx scripts/outliers.ts [multiple, default 5]
-// A batch that adds many low models lowers a cause's median; this lists the models that will cross next.
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary } from "../src/engine/model";
 import { headline, assumptionValues } from "../src/engine/model";
 import { rankingPlan } from "../src/engine/ranking";
-import { OUTLIER_REASON } from "../src/engine/invariants";
 import type { ResolvedModel } from "../src/engine/model";
 
 const root = join(import.meta.dirname, "..");
@@ -27,5 +26,5 @@ for (const m of [...ranked.values()].sort((a, b) => h.get(b.id)! - h.get(a.id)!)
   if (peers.length < 3) continue;
   const median = peers.length % 2 ? peers[peers.length >> 1] : (peers[peers.length / 2 - 1] + peers[peers.length / 2]) / 2;
   const k = h.get(m.id)! / median;
-  if (k >= min) console.log(`${k.toFixed(1)}× ${m.cause} ${m.id} ${OUTLIER_REASON.test(m.summary ?? "") ? "says why" : "NO REASON"}`);
+  if (k >= min || k <= 1 / min) console.log(`${k.toFixed(1)}× ${m.cause} ${m.id}`);
 }

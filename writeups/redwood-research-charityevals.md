@@ -37,7 +37,7 @@ Redwood received under $10,000 in 2024 and spent from its reserves. It ended the
 
 ### What drives the result
 
-The result is under a tenth of the median for this cause and close to MIRI's (0.07). The reason is that all of Redwood's work is against misaligned AI. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
+The reason is that all of Redwood's work is against misaligned AI. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
 
 ### Biggest uncertainties
 

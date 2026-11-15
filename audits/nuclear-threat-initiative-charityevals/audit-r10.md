@@ -7,8 +7,10 @@ Checked only the one edit made after the SecureBio round-1 finding 6 (`git diff 
 
 New findings: none.
 
-Model-sha: ebfa773b9a89af1fc64bc7e95ffdddf59a62a4388a4da24ae7c0c1e8ccd0ec10
+Model-sha: 72b198941db2a7ffe578121f5ec345d6be4379ffbccde9ca88e9aeb4042a402c
 
 **Verdict: pass**
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

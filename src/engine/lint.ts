@@ -83,6 +83,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   const spec = TEMPLATES[family];
   if (!m.summary || m.summary.length < 120)
     add("medium", "summary", "summary missing or shorter than two sentences", "Write a plain-language summary: what the charity does, the bottom line, the biggest uncertainty.");
+  out.push(...comparisonFindings("summary", m.summary ?? "", namesFor(lib, m.charity)));
   if (m.evaluator) add("low", "evaluator", "charityevals models have no evaluator view", "Remove the evaluator block.");
 
   // Output and unit.
@@ -324,3 +325,87 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
 }
 
 export const SEVERITY_ORDER: Record<Severity, number> = { high: 0, medium: 1, low: 2 };
+
+// --- Site text never compares --------------------------------------------------------------------------
+// A summary or write-up says what the charity does and why its own figure is what it is; it never says how
+// the result relates to other charities, a cause's median or average, or its peers (those move whenever
+// models land). Linking another charity or cause is fine; comparing with it is not.
+// "Twice the dose", "the median learning gain of evaluated programmes", "less than the average dollar did"
+// (the charity's own past) and "valued at the site's average for a dollar of climate work" (how a row is
+// valued) are the model's own statements and pass.
+const TARGET = String.raw`(?:charit(?:y|ies)|peers?|organi[sz]ations?|nonprofits?)`;
+const RANK_TARGET = String.raw`(?:${TARGET}|groups|median|benchmark)`;
+const CAUSE = String.raw`(?:global[- ]health|animal[- ]welfare|climate|catastrophic[- ]risk|[a-z]+[- ](?:risk|welfare|health|rights|development))`;
+const METHOD = String.raw`(?<!\b(?:(?:valued|priced|counted|weighted|set|taken)\s+at|reads?)\s+(?:the\s+)?(?:site['’]s\s+)?(?:own\s+)?)`;
+const COMPARISON_PATTERNS: RegExp[] = [
+  // The site's, a cause's or the peers' median or average.
+  new RegExp(String.raw`${METHOD}\b(?:site|cause|peers?)['’]s?\s+(?:[\w-]+\s+)?(?:median|average)\b`, "i"),
+  new RegExp(String.raw`${METHOD}\b${CAUSE}\s+(?:median|average)\b`, "i"),
+  new RegExp(String.raw`${METHOD}\b(?:median|average|typical)\s+(?!of\b)(?:[\w-]+\s+){0,2}(?:${TARGET}|models?)\b`, "i"),
+  new RegExp(String.raw`${METHOD}\b(?:median|average)\s+of\s+(?:the\s+(?:site['’]s\s+|other\s+)?|its\s+|their\s+)(?:[\w-]+\s+){0,2}(?:models|${TARGET})\b`, "i"),
+  // Peers ("peer groups", "peer-reviewed" and the Lords' "hereditary peers" are something else).
+  /\b(?:its|the)\s+(?!hereditary\b)(?:[\w-]+\s+)?peers\b|\bpeers['’]|\bclosest\s+peers?\b|\bpeer\s+(?:charit|models?\b|organi[sz]ations?)/i,
+  // "It sits above the charities it funds", "between the Nuclear Threat Initiative's 23 and …".
+  /\bsits?\s+(?:far\s+|well\s+|a little\s+)?(?:above|below|near|among)\s+(?:the|its|our|other)\b|\bamong typical\b/i,
+  // Multiples and comparatives of others: "eight times its peers", "0.23× the median", "higher than GiveWell's top charities".
+  new RegExp(String.raw`(?:\btimes|×)\s+(?:(?:above|below|higher than|lower than|more than|less than)\s+)?(?:the|its|their|that of|those of|most|other)\s+(?:[\w'’-]+\s+){0,3}?(?:charities|peers?|organi[sz]ations|nonprofits|groups|median|benchmark)\b`, "i"),
+  new RegExp(String.raw`\b(?:higher|lower|better|worse|more|less|cheaper|costlier|bigger|larger|smaller)\s+(?:[\w-]+\s+)?than\s+(?![\d$£€])(?:(?:the|most|many|other|its|their|typical|our)\s+)*(?:[\w'’-]+\s+){0,2}?${RANK_TARGET}`, "i"),
+  /\bas\s+[\w-]+\s+as\s+(?:the|other|its|most|many|typical)\s+(?:[\w-]+\s+){0,2}(?:charities|peers|organi[sz]ations|nonprofits)\b/i,
+  /\b(?:like|unlike|as with)\s+(?:charityevals['’]|our|the site['’]s|its)\s+(?:other\s+)?(?:[\w-]+\s+){0,3}(?:models|charities)\b/i,
+  // Placed against the site's other models: "far below the site's global-health charities", "a little above our
+  // SecureBio model's", "close to charityevals' NRC advocacy model" ("as in the site's other policy models" is method).
+  /(?<!\breads\s)\b(?:than|below|above|under|over|near|like|close to|(?:the\s+)?same as|half|twice|times)\s+(?:the\s+)?(?:site['’]s|charityevals['’]|our|its|other)\s+(?:other\s+|top\s+|ranked\s+|recommended\s+)?(?:[\w'’-]+\s+){0,4}?(?:models?(?:['’]s)?|charities)(?![\w-])/i,
+  /\b(?:half|third|quarter|fifth|sixth|seventh|eighth|ninth|tenth|twentieth|fiftieth|hundredth|thousandth)s?\s+of\s+(?:the|our|its)\s+(?:site['’]s\s+)?(?:other\s+)?(?:[\w-]+\s+){0,3}(?:models|charities|median)\b/i,
+  /\b(?:middle of (?:the site['’]s|our)|(?:median|middle) (?:for|of) (?:this|its) cause)\b/i,
+  /\b(?:models|charities)\s+(?:come out|rank|score)\s+(?:far\s+|well\s+|some\s+\w+\s+times\s+)?(?:low|high|below|above|lower|higher)\b/i,
+  /\b(?:more|less|better|worse)\s+than\s+a\s+dollar\s+(?:to|for)\b/i,
+  /\b(?:above|below|near)\s+(?:the\s+(?:[\w-]+\s+){0,2}charities\s+on the site|the\s+median\b(?!\s+(?:of|for)\s+(?:the\s+)?(?:survey|draws?|simulation|studies|trials))|cash transfers\b)/i,
+  // Rank.
+  /\b(?:one of the|among the)\s+(?:(?:most|least)\s+(?:cost-)?effective|(?:best|highest|lowest|cheapest|top)\s+(?:[\w-]+\s+){0,2}(?:charit|programmes?\b|models\b|organi))/i,
+  /\b(?:highest|lowest|best|worst)\s+(?:on the site|of any|in (?:its|the) cause)\b/i,
+  /\branks?\s+(?:first|last|highest|lowest|top|above|below)\b/i,
+];
+
+/** The names a summary might compare with: each charity's name without "The " and its parenthesised short
+ * name ("IRAP"), longest first. Evaluators are left out: "lower than GiveWell's estimate" is the same
+ * charity in another view, not a comparison with another charity. */
+export function comparableNames(charities: Iterable<{ id: string; name?: string }>, evaluators: Iterable<string> = []): string[] {
+  const skip = new Set([...evaluators].map((x) => x.toLowerCase()));
+  const out = new Set<string>();
+  for (const c of charities) {
+    if (!c.name || skip.has(c.id) || skip.has(c.name.toLowerCase())) continue;
+    const short = c.name.match(/\(([^)]+)\)/)?.[1];
+    const base = c.name.replace(/\s*\([^)]*\)/g, "").replace(/^The\s+/, "").trim();
+    // Initials of a name of three or more capitalised words: "MIRI", "NRC".
+    const caps = base.split(/\s+/).filter((w) => /^[A-Z]/.test(w));
+    const initials = caps.length >= 3 ? caps.map((w) => w[0]).join("") : undefined;
+    for (const n of [base, short && !/^formerly\b/i.test(short) ? short : undefined, initials]) if (n && n.length >= 3) out.add(n);
+  }
+  return [...out].sort((a, b) => b.length - a.length);
+}
+
+/** The comparison phrases in a piece of site text (empty when it compares with nothing). `names` are the
+ * other charities (comparableNames, without the text's own charity). "Times GiveDirectly" is GiveWell's
+ * unit (multiples of cash transfers), not a comparison. */
+export function comparisons(text: string, names: string[] = []): string[] {
+  const hits: string[] = [];
+  for (const re of COMPARISON_PATTERNS) for (const m of text.matchAll(new RegExp(re.source, re.flags + "g"))) hits.push(m[0]);
+  if (names.length) {
+    const alt = names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+    // Case-sensitive: "CARE", "PATH". A comparison word, then optionally "our models of", then the name.
+    const re = new RegExp(String.raw`\b(?:than|times|twice|thrice|half|below|above|between|close to|near|similar to|(?:the\s+)?same as|level with|on a par with|in line with)\s+(?:(?:that of|those of|the|our|charityevals['’]|its)\s+)?(?:(?:models?|estimates?|figures?|results?)\s+(?:of|for)\s+)?(?:the\s+)?(?:${alt})(?![\w-])`, "g");
+    for (const m of text.matchAll(re)) if (!/^(?:times|twice|thrice|half)\s+GiveDirectly$/.test(m[0])) hits.push(m[0]);
+  }
+  return hits;
+}
+
+/** The other charities a text about `charity` might compare with, from the library. */
+export function namesFor(lib: Library, charity?: string): string[] {
+  const evaluators = [...lib.owners.values()].flatMap((o) => [o.id, o.name]);
+  return comparableNames([...lib.charities.values()].filter((c) => c.id !== charity), evaluators);
+}
+
+/** A finding for each comparison in a piece of site text (high: site text never compares). */
+export function comparisonFindings(where: string, text: string, names: string[]): Finding[] {
+  return comparisons(text, names).map((phrase) => ({ severity: "high" as const, code: "comparison", message: `${where} compares with others ("${phrase}"); comparisons move whenever models land`, fix: "Delete the comparison and keep the model's own reasons; linking another charity or cause is fine, comparing with it is not." }));
+}

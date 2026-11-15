@@ -1,6 +1,6 @@
 ### Summary
 
-Protect Democracy works to keep the United States from sliding into a more authoritarian government, through lawsuits, election protection, state laws, tools and public education. Our model of its 2024 work comes to **<span data-figure="headline" data-model="protect-democracy-charityevals">0.02</span> years of healthy life per 1,000 dollars**, about a quarter of the site's global-health median. It is a very uncertain figure: the main step, how much a year of the whole pro-democracy field's work lowers the chance of the US leaving the democracies, is our judgment.
+Protect Democracy works to keep the United States from sliding into a more authoritarian government, through lawsuits, election protection, state laws, tools and public education. Our model of its 2024 work comes to **<span data-figure="headline" data-model="protect-democracy-charityevals">0.02</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure: the main step, how much a year of the whole pro-democracy field's work lowers the chance of the US leaving the democracies, is our judgment.
 
 ### What the charity does
 

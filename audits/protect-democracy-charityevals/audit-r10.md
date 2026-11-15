@@ -1,6 +1,6 @@
 # Audit: protect-democracy-charityevals, round 10
 Result: 1.797e-5 daly/$ = 0.01797 years of healthy life per 1,000 dollars (combined range 0.00076–0.423); cause median 0.0652 (×0.28). Verdict: pass.
-Model-sha: 9da3c39922835824c82f2ac3ec2474e8d58a34a78cc3dfe2da8866c896a22e41
+Model-sha: df95220ed843354b93c61d0c32a55e05bbdba82174b3ec77335667ff98525445
 Scope: scoped verification of the change in commit 8fb7156 only (the answer to finding 4 of representus-education-fund-charityevals audit r1: the slide's severity moved inside the log). Rows bs_ln_gain, bs_severity, bs_evidence_adj, the canonical reading rows, the summary and the write-up. Nothing else re-audited.
 Mechanical: audit-model lint 0 findings. Result moved from 0.017370 to 0.017974 (+3.5%), no move above 2x.
 Previous round (r9): 1 low (commission inputs uncited) unchanged by this commit.
@@ -24,3 +24,5 @@ No source row changed in this commit; the shared figures read (democratization_g
 Unchanged from r9: the field's cut per year, win_years_counted, the missing-data discount, the 2030 loss chance, the income gain. slide_severity_share now acts through the log (low 0.3 to high 1: 0.0100 to 0.0280).
 
 Verdict: pass (0 high, 0 medium, 0 low new; r9's 1 low stands).
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

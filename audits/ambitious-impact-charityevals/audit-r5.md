@@ -8,4 +8,6 @@ Checked: informed_money (grantmaker training and research changed) is read only 
 | None | | | | |
 
 Verdict: pass
-Model-sha: 138576b6202612bce8bf2885a63c8a7bdcf42e805d6e0ffc8b7dc25c84e2ab33
+Model-sha: 2299b28f9ee67a48eead170dca4471a5bf02ffab69f2b5c2d9d58dddc3f238a9
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

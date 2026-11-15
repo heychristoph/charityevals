@@ -1,6 +1,6 @@
 # Audit: machine-intelligence-research-institute-charityevals, round 7 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 7.327e-5 daly/$ = 0.0733 years of healthy life per 1,000 dollars (combined range 0.0003–17.7); cause median 0.958 (×0.077). Verdict: pass.
-Model-sha: 83f8db53320b0fb780f6f221d43981118f80e1601228bef937e8fef5d53d06e1
+Model-sha: 778d833d01440f2889e64ce1510cced3243ab5f6c1ee06739c5832b171eab0ab
 Scope: unchanged from round 4. Checks only that both merged changes are present together and consistent: (a) rows bio_covid_scale_share, covid_scale_deaths_averted, covid_value_per_death and uov_bridged (round 5); (b) leverage_funging_adj 1 with the explainer naming the next-dollar room factor (round 6).
 Mechanical: lint no high or medium (lows: ranges on small-catastrophe rows, unused pol_/fb_cost_share, far-below confirmed by the summary's reason), invariants none, normalization-audit none (all checks 0 violations; generated restored), scripts/check.ts passes, simulation-check stable (5% 0.065, 95% 9.18 × best guess; single events miss 0%).
 Previous round: rounds 5 and 6 had no open findings.
@@ -26,3 +26,5 @@ AI catastrophe chance, extinction cut per dollar, discount rate, years a cut cou
 Verdict: pass
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

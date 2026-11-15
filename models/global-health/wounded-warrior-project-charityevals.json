@@ -3,7 +3,9 @@
   "name": "Wounded Warrior Project (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: Wounded Warrior Project's programmes for post-9/11 veterans in the US (mental health has its own model).",
   "template": "domestic-services",
   "estimate_basis": "unit_cost",
@@ -2303,6 +2305,14 @@
       "format": "number",
       "formula": "ind_wellbys * ($daly_per_wellby * $uov_per_daly) / ($uov_per_daly)",
       "unit": "DALYs"
+    },
+    {
+      "id": "consumption_na",
+      "section": "effect",
+      "label": "US consumption per person by the national accounts, fiscal-2025 dollars (US$)",
+      "format": "usd",
+      "formula": "@united_states.consumption_per_person_2024 * @cpi.usa_2025 / @cpi.usa_2024",
+      "explainer": "The taxpayers' side is spread over the whole country, so it uses the national-accounts mean (World Bank, $58,517 a person in 2024), in 2025 prices."
     }
   ],
   "output": {

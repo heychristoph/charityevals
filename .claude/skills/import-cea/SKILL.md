@@ -182,8 +182,8 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
 - **Every way the work has impact** is in the model: a step the evaluator leaves out (what would have
   happened anyway, the charity's credit, a side effect) gets a row in our section, ×1 with its reason or a
   value.
-- A ranked model more than ten times the median of its peers (same cause and intervention) says why in
-  its `summary` ("more than ten times its peers because …"; INV-15). Best guess kept; the reason stated.
+- The `summary` and write-up give the model's own reasons and never compare with other charities, a
+  median, an average or peers: those move whenever models land (lint code `comparison`). Linking is fine.
 - **Animals: the species step** (INV-3, normalization.md 2.4). Split SADs by species (`sads_<s>`,
   shares from facts such as `@sad_factors.meal_sads_share_<s>`), convert each with
   `ced_<s> = sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, @welfare_ranges.<s>_vs_chicken, @aim_sads.<s>_<v> / @aim_sads.chicken_2024)`
@@ -227,7 +227,7 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
 - The summary opens with one plain sentence on what the charity does, then the result as a live
   figure: `**<span data-figure="headline" data-model="<id>">130</span> years of healthy life per 1,000 dollars**`.
 - Results are always years of healthy life per 1,000 dollars, never multiples of GiveDirectly or another
-  benchmark (a multiple shifts whenever the benchmark's model does). A number that moves with the sliders is a live figure; a fixed number says whose it is
+  benchmark, and never set against other charities, a median or peers (they shift whenever models land). A number that moves with the sliders is a live figure; a fixed number says whose it is
   ("ACE's own figure, 94"). No numbers copied from an old run of the model.
 - "Where we differ": one bullet per changed-for-consistency row and per step of ours (species
   weights, discounting, value of life, staff pay, credit by share of resources), with the

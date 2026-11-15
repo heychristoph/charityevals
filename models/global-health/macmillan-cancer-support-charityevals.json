@@ -3,7 +3,9 @@
   "name": "Macmillan Cancer Support: information, support and care for people with cancer in the UK (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"GBR":1},
+  "beneficiaries": {
+    "GBR": 1
+  },
   "beneficiaries_note": "Our build: Macmillan works only in the UK.",
   "template": "domestic-services",
   "estimate_basis": "unit_cost",
@@ -1667,6 +1669,14 @@
       "format": "number",
       "formula": "dalys_per_dollar * donor_cost_share",
       "explainer": ""
+    },
+    {
+      "id": "consumption_na",
+      "section": "effect",
+      "label": "UK national-accounts consumption per person, 2025, in dollars",
+      "format": "usd",
+      "formula": "@united_kingdom.consumption_per_person_2024 / @fx.usd_per_gbp_2024 * @cpi.gbr_2025 / @cpi.gbr_2024 * usd_per_gbp",
+      "explainer": "Taxpayers' consumption: the national accounts, where everyone's consumption is meant (docs/normalization.md 2.13), converted as consumption_mean."
     }
   ],
   "output": {

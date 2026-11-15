@@ -1,7 +1,7 @@
 # Audit: refugee-council-charityevals, round 2 (verification)
 Result: 1.835e-6 daly/$ = 0.001835 years of healthy life per 1,000 dollars (combined range 0.00037-0.0090). Verdict: pass.
 Verdict: pass
-Model-sha: 7446c3f7ab63fa32d40ff62f304d93a5dd30a962be082a1986fa74d8f25ee919
+Model-sha: 7c42b3dffb6b3886a153ae4579fcab9d1f3c06995b1c723b9087f594624de284
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, summary gives the reason); simulation stable (5% 0.42, 95% 2.45 x best guess); normalization-audit printed no line for this model (generated/ reverted).
 
 Round-1 findings:
@@ -13,3 +13,5 @@ Round-1 findings:
 6. `int_homeless_ln_gain` explainer: reworded and now consistent with the formula: fixed.
 
 New findings: none. Spot-checked that the new rows are ranged judgments with explainers, the formula chain feeds the canonical `int_value_gbp`, and the weekly-value source quote (£49.18) is the GOV.UK page's wording.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

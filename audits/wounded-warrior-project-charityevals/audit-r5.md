@@ -1,7 +1,7 @@
 # Audit: wounded-warrior-project-charityevals, round 5 (verification)
 
 Result: 1.329e-5 daly/$ = 0.01329 years of healthy life per 1,000 dollars (combined range 0.0022-0.081); cause median 0.104 (x0.1275). Verdict: **pass** (no high findings).
-Model-sha: 3afd84d0cf906bfc33f76b317c52943681adcfb32a457fa89e73403df9b7b1c3
+Model-sha: e59e5e06691194edfa5780f4da2ea6986646429c08d7e3cc68a5e68969418669
 Scope: only the changes since round 4 (diff 09393a2..HEAD for this model and its write-up; main was merged in between, so the median moved from 0.338 to 0.104).
 
 Mechanical: audit-model 0 findings. normalization-audit: no violation for this model (its one INV-4 violation is another model's); `git checkout -- generated` run afterwards.
@@ -23,3 +23,5 @@ American Legion page (quote exact); VA 2026 Budget in Brief (3,899 exact, column
 
 ## Drivers
 `missing_data_discount`, `ben_income_years`, `uov_per_daly`, `ben_consumption_share`, `ben_counterfactual_adj` (judgments or shared; unchanged). `us_payer_multiple` is now a shared fact (1.4), the model's value rose from 1.3.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

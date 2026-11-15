@@ -22,6 +22,8 @@ Only the changed rows. `ltr_value_per_home` and `unmodelled_benefits_adj` are la
 Unchanged from round 2: `$missing_data_discount`, `$uov_per_daly`, `resp_counterfactual_adj`, `resp_price_ratio`, `resp_inkind_value`.
 
 Verdict: pass. Findings: 0 high, 0 medium, 3 low.
-Model-sha: 308cbb6f2a7c8a496ceee5834049137d24d2b232dffc821ccfe3233a0674ec3d
+Model-sha: a98f0bf55223b7ec98f5eb7eb894109bff1a5f5ff78091351b17fdaa92eb8c48
 
 Re-stamped after merge: the summary low fixed ("about a fifth" → "about a quarter", computed 23%); no other change.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

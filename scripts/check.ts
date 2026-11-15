@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, comparable, modelsOf } from "../src/engine/model";
 import { primaryModel } from "../src/engine/ranking";
 import { sensitivity, flags } from "../src/engine/sensitivity";
-import { lintModel } from "../src/engine/lint";
+import { comparisonFindings, lintModel, namesFor } from "../src/engine/lint";
 
 const root = join(import.meta.dirname, "..");
 const TOLERANCE = 1e-6;
@@ -79,6 +79,22 @@ for (const m of lib.models.values()) {
       console.log(`  ${sw.label.slice(0, 60).padEnd(60)} ${years(sw.atLow).padStart(8)} – ${years(sw.atHigh)}`);
     for (const f of flags(m, s)) console.log(`  [${f.level}] ${f.text}`);
   }
+}
+
+// Site text never compares with other charities, a cause's median or average, or peers (src/engine/lint.ts):
+// every model's summary (charityevals' own are linted above), every write-up and every charity's summary.
+if (!only) {
+  const say = (where: string, text: string, charity?: string) => {
+    for (const f of comparisonFindings(where, text, namesFor(lib, charity))) errors.push(`${f.message}: ${f.fix}`);
+  };
+  for (const m of lib.models.values()) if (m.owner !== "charityevals" || m.kind === "template") say(`${m.id} summary`, m.summary ?? "", m.charity);
+  for (const f of readdirSync(join(root, "writeups")).filter((f) => f.endsWith(".md"))) {
+    const id = f.replace(/\.md$/, "");
+    // A write-up is filed under a model id; a hidden model's charity is the longest charity id it starts with.
+    const charity = lib.models.get(id)?.charity ?? [...lib.charities.keys()].filter((c) => id === c || id.startsWith(`${c}-`)).sort((a, b) => b.length - a.length)[0];
+    say(`writeups/${f}`, readFileSync(join(root, "writeups", f), "utf8"), charity);
+  }
+  for (const c of lib.charities.values()) say(`charities/${c.id}.json summary`, c.summary ?? "", c.id);
 }
 
 if (errors.length) {

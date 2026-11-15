@@ -1,6 +1,6 @@
 # Audit: giving-what-we-can-charityevals, round 4 (scoped verification)
 Result: 0.1123 uov/$ = 56.17 years of healthy life per 1,000 dollars (combined range 10.9–289.7; joint low–high of the model's own ranges 27.2–105.0); cause median 0.06841 (×821). Verdict: pass.
-Model-sha: ce697203565a1fcf7e4358887be46b5f2305f99c4d81549a302dc12fee6d9736
+Model-sha: 5fdb40994f64c2255753e5666147f127f3a5f5584c9db2545c781e70cdcf1971
 Scope: unchanged from rounds 1 to 3. Scoped verification round: only the change since round 3 (the catastrophic-risk part of `value_destinations`: hand-typed `avg(#charityevals:center-for-ai-safety, #charityevals:far-ai, #charityevals:machine-intelligence-research-institute, #charityevals:nuclear-threat-initiative)` replaced by `#cause:catastrophic-risk`, normalization.md 2.8 "November 2026: a cause's average, read live"; the explainer, summary and write-up that follow from it). No source changed, so none re-fetched.
 Mechanical: invariants none (check.ts "all models valid"; scripts/normalization-audit.ts on the full library: INV-18 and every other invariant 0 violations for this model); lint none. `scripts/audit-model.ts` prints one "high" INV-18 finding (NaN → NaN), a false positive of the script, not of the model (finding 1).
 Previous round: r3 had no findings; r2's one low (effective-share fact typed from the model's own defaults) is unchanged, still accepted.
@@ -26,3 +26,5 @@ Unchanged from round 3. The catastrophic-risk term now moves with the rankings a
 Verdict: pass
 
 Re-stamped (orchestrator, 14 Nov 2026): marginal_vs_past_average explainer's range corrected to its fact's (20–85%, raised by One for the World's build); no value changed.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

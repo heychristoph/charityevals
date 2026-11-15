@@ -44,7 +44,7 @@ GovAI doubled its spending in 2025 and plans more growth; the UK office alone he
 
 ### What drives the result
 
-The result is close to the Center for AI Safety's and far above METR's, MIRI's and Redwood Research's, because a fifth of GovAI's catastrophe research is aimed at misuse, which Rethink's typical project values far above misalignment work. It is far below the Nuclear Threat Initiative's, because Rethink's typical AI project cuts much less expected harm per dollar than a nuclear one.
+A fifth of GovAI's catastrophe research is aimed at misuse, which Rethink's typical project values far above misalignment work.
 
 ### Biggest uncertainties
 

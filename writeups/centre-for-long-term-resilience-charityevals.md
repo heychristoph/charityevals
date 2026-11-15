@@ -34,7 +34,7 @@ CLTR holds about three months of spending in its own funds. Coefficient Giving o
 
 ### What drives the result
 
-After each part's adjustments, the biosecurity work brings about 85% of the result, the AI work a tenth and risk management about 5%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share. The result is about half the Council on Strategic Risks' and above the AI policy groups GovAI and the Institute for AI Policy and Strategy.
+After each part's adjustments, the biosecurity work brings about 85% of the result, the AI work a tenth and risk management about 5%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share.
 
 ### Biggest uncertainties
 

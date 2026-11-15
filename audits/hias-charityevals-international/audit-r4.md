@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-international, round 4 (scoped)
-Model-sha: 1719385acf930b5d3329bb8826a4dbd4ef034cb4320dd92f2457679a382dfcde
+Model-sha: 2765bb63cf3941d5395160a772af0a33c7745ba90aafc03e3ba465a6fe4c04e4
 Scope: rsc_people (now 200, range 50-600) and the write-up's RSC line.
 Mechanical: audit-model 0 high / 0 medium / 0 low; no files rewritten.
 
@@ -11,3 +11,5 @@ Mechanical: audit-model 0 high / 0 medium / 0 low; no files rewritten.
 Labelled judgment with sourced basis, range plausible, no double counting with the other rows. **PASS** (no high findings)
 
 **Verdict: PASS**
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

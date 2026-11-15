@@ -2,7 +2,7 @@
 
 Cool Earth backs Indigenous and local communities in Peru, Papua New Guinea and Cameroon to keep their rainforest standing, mostly with cash given directly to households and community committees. Our model of its year to 31 January 2026 comes to **<span data-figure="headline" data-model="cool-earth-charityevals">0.11</span> years of healthy life per $1,000**.
 
-That is far above the site's other climate models, and almost all of it is the cash, not the forest:
+Almost all of it is the cash, not the forest:
 
 - About £1.2 million of the year's £3.3 million of programme spending reached communities as cash. They are among the poorest people in Peru and Papua New Guinea, so the money raises their consumption by a lot. The model values that the way it values any cash transfer.
 - The forest kept is worth little in healthy years, as land carbon is everywhere on the site. And how much clearing Cool Earth's support actually prevents is a judgment.

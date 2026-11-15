@@ -34,7 +34,7 @@ HLI's figures come first, ending at WELLBYs per $1,000 at the middle cost, $53.5
 
 ### Biggest uncertainties
 
-Whether treatment removes the whole gap in life satisfaction, and for how long: HLI assumes all of it, for one year. HLI judged the result below its recommended charities and didn't take World Spine Care into its next round of research; it is interested in whether lay practitioners could cut costs.
+Whether treatment removes the whole gap in life satisfaction, and for how long: HLI assumes all of it, for one year. HLI didn't take World Spine Care into its next round of research; it is interested in whether lay practitioners could cut costs.
 
 ### What isn't modelled
 

@@ -2,7 +2,7 @@
 
 The Nature Conservancy (TNC) buys and protects land and water, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries in the US and about 80 other countries. Our model of its fiscal year 2025 comes to **<span data-figure="headline" data-model="the-nature-conservancy-charityevals">0.0004</span> years of healthy life per $1,000**.
 
-That is under a tenth of the site's other climate models, for two reasons:
+That is low, for two reasons:
 
 - Most of TNC's work keeps carbon in land. On the site's scale, a tonne of CO₂ kept out of the air is worth little in healthy years.
 - TNC is a small share of the money and people behind its big deals, rules and policies.

@@ -1,6 +1,6 @@
 ### Summary
 
-The Campaign Legal Center goes to court and to lawmakers for fair US elections: the freedom to vote, fair maps, campaign finance law and ethics in government. In 2025 it also fought the administration's executive order on elections. Our model of its 2025 work comes to **<span data-figure="headline" data-model="campaign-legal-center-charityevals">0.014</span> years of healthy life per 1,000 dollars**. That is about a fifth of the site's global-health median, close to our models of Protect Democracy and the League of Women Voters Education Fund. It is a very uncertain figure, built mostly on judgment: how much the whole field's work lowers the chance of a democratic slide, and how much a reform within a democracy changes how well people are governed.
+The Campaign Legal Center goes to court and to lawmakers for fair US elections: the freedom to vote, fair maps, campaign finance law and ethics in government. In 2025 it also fought the administration's executive order on elections. Our model of its 2025 work comes to **<span data-figure="headline" data-model="campaign-legal-center-charityevals">0.014</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure, built mostly on judgment: how much the whole field's work lowers the chance of a democratic slide, and how much a reform within a democracy changes how well people are governed.
 
 ### What the charity does
 

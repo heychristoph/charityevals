@@ -13,7 +13,7 @@ As for StrongMinds, HLI runs three bodies of evidence through the same chain (in
 - The dosage adjustment: many clients attend few sessions, and HLI scales the trial effects down sharply for it.
 - Monitoring data show a much smaller initial effect than the trials.
 
-### Comparing with other charities
+### The exchange rate
 
 HLI measures impact in WELLBYs: one point of life satisfaction on a 0–10 scale, for one person, for one year. To put it on the same scale as everything else we use one exchange rate for every HLI model, "1 point more life satisfaction for a year vs doubled-income year" under Your values. Its default is set so that depression counts the same whoever measured it: HLI counts one standard deviation of depression for a year as 2 WELLBYs, and the site counts the same fall in depression, about 4.2 points on the PHQ-9 questionnaire, as 0.13 years of healthy life by the Global Burden of Disease weights, which SoGive's analysis also goes through. That makes a WELLBY worth about 0.13 doubled-income years.
 

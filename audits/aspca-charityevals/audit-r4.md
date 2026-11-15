@@ -1,7 +1,7 @@
 # Audit: aspca-charityevals, round 4
 
 Result: 1.244 ced/$ = 1.368e-4 years of healthy life per $1,000 (combined range 1.59e-5 – 1.18e-3); cause median 4.87e-4 (×0.28). Verdict: pass.
-Model-sha: 9feed172a77edad8de8a274f9b629f33f976a9ba0a9fec7999eaccd2100d7571
+Model-sha: fb40b1651d4d5dd76be0b62e800d0ed328c4117bc854fddd86289580f10c4ac4
 
 Scope: unchanged from round 3 (every companion-animal programme in the 2025 accounts, `program_spend` $307.7m). This round checks only round 3's five findings and whether the changes (commit 02718f9) brought new problems. The diff of the model against the previous commit touches only the rows named below.
 
@@ -42,3 +42,5 @@ Previous round:
 5. `own_share_eased` and `vet_counterfactual_adj` (judgments): each about 9e-5 – 1.9e-4.
 
 Verdict: pass. Findings: 0 high, 0 medium, 3 low.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

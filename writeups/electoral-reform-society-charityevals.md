@@ -1,6 +1,6 @@
 ### Summary
 
-The Electoral Reform Society campaigns for proportional representation for the House of Commons and for other changes to how the UK votes and is governed. Our model of its work comes to **<span data-figure="headline" data-model="electoral-reform-society-charityevals">0.05</span> years of healthy life per 1,000 dollars**, about three quarters of the site's global-health median. It is a very uncertain figure: whether a voting method changes how well people are governed, and the chance that the UK adopts proportional representation, are both our judgments.
+The Electoral Reform Society campaigns for proportional representation for the House of Commons and for other changes to how the UK votes and is governed. Our model of its work comes to **<span data-figure="headline" data-model="electoral-reform-society-charityevals">0.05</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure: whether a voting method changes how well people are governed, and the chance that the UK adopts proportional representation, are both our judgments.
 
 ### What the charity does
 

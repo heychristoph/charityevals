@@ -39,7 +39,7 @@ FAR.AI ended 2024 with net assets of $22.5 million, about two and a half years o
 
 ### What drives the result
 
-The result is about 13 times MIRI's and close to the Center for AI Safety's. The main reason is the quarter of its work aimed at misuse. For catastrophes the world survives, Rethink's typical misuse project cuts the deaths about 450 times more per dollar than its typical misalignment project, because in its model most of those deaths come from misuse. So the misuse work carries almost all of the value. Deaths of people alive now are 99% of it: those catastrophes don't take the future, and at the default 4% discount rate the future counts for only about 8 years of the long-run population anyway.
+The main reason is the quarter of its work aimed at misuse. For catastrophes the world survives, Rethink's typical misuse project cuts the deaths about 450 times more per dollar than its typical misalignment project, because in its model most of those deaths come from misuse. So the misuse work carries almost all of the value. Deaths of people alive now are 99% of it: those catastrophes don't take the future, and at the default 4% discount rate the future counts for only about 8 years of the long-run population anyway.
 
 ### Biggest uncertainties
 
@@ -56,7 +56,7 @@ The result is about 13 times MIRI's and close to the Center for AI Safety's. The
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Machine Intelligence Research Institute's and the Center for AI Safety's models as worked examples. Round 1 of the independent audit found that the share of misuse work rested on four highlighted papers: rebuilt from all twelve 2024 papers, the red-teaming and the grant's likely topic, it fell from 25% to 23%, lowering the result by 8%. The round also found that adding FAR.AI gave the Nuclear Threat Initiative three peers, so its summary now says why it is more than ten times them. Round 2 passed with two medium findings, both fixed: the grant's project is three quarters misuse work, raising the share to 28%, and the next dollar can't buy the restricted grants, lowering it from 32% to 20%. Together they lower the result by a quarter. A verification round checked the changes. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. Independent audits are in audits/far-ai-charityevals/.
+The model was built from the catastrophic-risk template, with the Machine Intelligence Research Institute's and the Center for AI Safety's models as worked examples. Round 1 of the independent audit found that the share of misuse work rested on four highlighted papers: rebuilt from all twelve 2024 papers, the red-teaming and the grant's likely topic, it fell from 25% to 23%, lowering the result by 8%. Round 2 passed with two medium findings, both fixed: the grant's project is three quarters misuse work, raising the share to 28%, and the next dollar can't buy the restricted grants, lowering it from 32% to 20%. Together they lower the result by a quarter. A verification round checked the changes. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. Independent audits are in audits/far-ai-charityevals/.
 
 ### Sources
 

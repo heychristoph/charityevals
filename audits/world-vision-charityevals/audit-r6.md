@@ -24,4 +24,6 @@ Summary and write-up: both match the live result (0.29, about three times the me
 Unchanged: missing_data_discount, uov_per_daly, relief_counterfactual_adj, affected_consumption_share, health_cost_per_child. The aid multiple is not among them.
 
 Verdict: pass
-Model-sha: 2cf3282aba5b9e2cc26cdcc7b911bd5d239f83956f32fd5587340c2c8acabd27
+Model-sha: 7a88fff98eda5b7fdb8981b1281295770189822093a419ff4a4fbe28a6e24491
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

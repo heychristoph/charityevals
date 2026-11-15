@@ -1,6 +1,6 @@
 # Audit: cancer-research-uk-charityevals, round 5 (verification)
 Result: 1.649e-6 daly/$ = 0.001649 years of healthy life per 1,000 dollars (combined range 9.4e-5–0.0288); cause median 0.0667 (×0.025). Verdict: pass.
-Model-sha: d7fab7c182b06ec750f9354984b9dc0c54b5db0adf79f0e05190164edac877bc
+Model-sha: 092ba496a11e93aebbda5bbddc8fdcf1370cf384e9bd8784017b5e5e2b5b62e8
 Scope: verification of commit 3e68437 only (policy branch re-pointed to facts/tobacco.json; credit split into campaigners' share × the charity's share; second-hand-smoke and vaping side-effect rows; unmodelled share 10% -> 7%). Research and information branches untouched. Before: 0.00165905; after: 0.001649 (-0.6%).
 Mechanical: lint 0 high / 0 medium / 4 low (three unused context inputs, far-below note that the summary already explains), invariants none, normalization-audit none for this model (generated/ restored with git checkout). check.ts: all models valid, 0 expected values to reproduce. simulation-check: 5% 0.275, 50% 1, 95% 4.15 x best guess, stable.
 Previous round: round 4 findings not re-examined (out of scope); nothing in this diff reopens them.
@@ -34,3 +34,5 @@ Checked and fine:
 1. missing_data_discount (judgment, shared slider), 2. discount_rate (shared), 3. share_burden_averted_per_research_year (judgment), 4. @next_dollar.cancer_research_uk (estimate), 5. years_brought_forward (judgment). The policy branch is 38% of the result; its drivers are the shared tobacco figures (DALYs per young smoker, share of the campaign in the year), both judgments with ranges. Best improvement remains a sourced next-dollar figure and reference classes for the research branch's judgments (out of this round's scope).
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

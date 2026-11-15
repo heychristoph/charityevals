@@ -36,7 +36,7 @@ The Swiss list gets its share of the 2025 money, 27%. In both lists, recipients 
 - **Democracy (9%).** These are valued at the democracy charities on the rankings, weighted equally. None of its recipients has a model here.
 - **Other effective-giving organisations (2.4%)** take the average of the rest.
 
-Under the site's default values, a dollar to climate, animal welfare or democracy does far less than a dollar to GiveDirectly. Shifted money to these causes therefore counts slightly below zero: it was assumed to come from an ordinary charity valued at GiveDirectly's level. So the poverty half carries the whole result. Half the platform giving it caused counts as new money. The other half would have gone to other charities, so it counts only for the gain over where it would have gone. Both are the site's shared figures for every organisation that moves money.
+Shifted money to these causes therefore counts slightly below zero: it was assumed to come from an ordinary charity valued at GiveDirectly's level. So the poverty half carries the whole result. Half the platform giving it caused counts as new money. The other half would have gone to other charities, so it counts only for the gain over where it would have gone. Both are the site's shared figures for every organisation that moves money.
 
 ### How the model works
 

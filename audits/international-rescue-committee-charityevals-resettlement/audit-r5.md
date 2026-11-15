@@ -1,7 +1,7 @@
 # Audit: international-rescue-committee-charityevals-resettlement, round 5
 
 Result: 8.355e-6 daly/$ = 0.00836 years of healthy life per $1,000 (combined range 0.00165-0.0423). Verdict: **pass** (no findings above low; none open).
-Model-sha: 5b36216068e87fd0dde70f29b3ebb1a12a58ce68282dc353c330b773f980e170
+Model-sha: fb4f501c4c2b94b0a05c84f9090392a82d0e92b5c30238f738c6b585759e9092
 
 Scope: scoped verification of one change since round 4 (`git diff d38a65b~1`): `legal_undocumented_ln_gap` changed from a model-own judgment 0.15 (0.05-0.35) to the shared fact `@united_states.legal_status_ln_consumption_gain` (0.1, 0.04-0.25). The beneficiaries field was only reformatted.
 
@@ -16,4 +16,6 @@ Checks:
 No new findings.
 
 Verdict: **pass** (no findings; the swap to the shared fact is the same concept, sourced, and moves the result by -1.5%).
-Model-sha: 5b36216068e87fd0dde70f29b3ebb1a12a58ce68282dc353c330b773f980e170
+Model-sha: fb4f501c4c2b94b0a05c84f9090392a82d0e92b5c30238f738c6b585759e9092
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

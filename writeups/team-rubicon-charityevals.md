@@ -2,7 +2,7 @@
 
 Team Rubicon sends veteran-led volunteer crews, called Greyshirts, to disasters across the United States to clear roads and debris, muck out flooded homes, tarp roofs and cut fallen trees, and it rebuilds a few homes for families still without one years after a disaster. Its work in 2024 comes to **<span data-figure="headline" data-model="team-rubicon-charityevals">0.001</span> years of healthy life per $1,000**.
 
-That is far below the site's global-health charities. The help goes to American households, and the site's one income scale values a dollar of help to them at a small fraction of what it does for a family living on a few dollars a day. And Team Rubicon spends about $140 in cash for each volunteer hour, several times what the hour's work would cost to buy.
+The help goes to American households, and the site's one income scale values a dollar of help to them at a small fraction of what it does for a family living on a few dollars a day. And Team Rubicon spends about $140 in cash for each volunteer hour, several times what the hour's work would cost to buy.
 
 ### What the charity does
 
