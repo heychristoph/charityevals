@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "central-square-foundation",
   "owner": "charityevals",
-  "summary": "Central Square Foundation (CSF) supports Indian state governments' school reforms: the foundational literacy and numeracy missions of 11 states, new pre-primary classes, adaptive-learning software and other EdTech, school report cards for parents, and a pilot for high-potential students. We count its spending in the year to March 2026 against a year of those programmes' learning gains, credited by CSF's share of everyone's resources behind them (about 3% for the state missions, the largest branch) and valued as later earnings. At the defaults it comes to about 0.9 years of healthy life per $1,000, but the result is mostly uncertainty: how large the missions' learning gain is, how much of a test-score gain lasts into adult earnings, and the discount rate, since the earnings start a decade or more later. Every branch is discounted for missing data except adaptive learning in Andhra Pradesh, which has a randomised trial of the same software in the state's schools.",
+  "summary": "Central Square Foundation (CSF) supports Indian state governments' school reforms: the foundational literacy and numeracy missions of 11 states, new pre-primary classes, adaptive-learning software and other EdTech, school report cards for parents, and a pilot for high-potential students. We count its spending in the year to March 2026 against a year of those programmes' learning gains, credited by CSF's share of everyone's resources behind them (about 3% for the state missions, the largest branch) and valued as later earnings. At the defaults it comes to about 0.85 years of healthy life per $1,000, but the result is mostly uncertainty: how large the missions' learning gain is, how much of a test-score gain lasts into adult earnings, and the discount rate, since the earnings start a decade or more later. Every branch is discounted for missing data except adaptive learning in Andhra Pradesh, which has a randomised trial of the same software in the state's schools.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Central Square Foundation, year to March 2026",
@@ -822,6 +822,20 @@
       "unit": "years"
     },
     {
+      "id": "gov_years_per_student",
+      "section": "effect",
+      "label": "Years a student is in the grades whose report cards go to parents",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 3,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Jodhpur's disclosure covers Grades 6-9 (four years) and Angul's assessment Grades 5 and 8; a child moves through about three such years. The report cards' gain is a rise in the level of learning that lasts (Andrabi, Das and Khwaja), so it is credited once per child, not each year the child is covered. 3 (2 to 4).",
+      "unit": "years"
+    },
+    {
       "id": "gov_value_per_student_year",
       "section": "effect",
       "label": "School governance: value per student-year of disclosure (units of value)",
@@ -887,9 +901,9 @@
       "section": "effect",
       "label": "School governance: value of the disclosure reforms, before adjustments",
       "format": "number",
-      "formula": "gov_units_affected_per_year * gov_value_per_student_year * p_success * discounted_years",
+      "formula": "gov_units_affected_per_year / gov_years_per_student * gov_value_per_student_year * p_success * discounted_years",
       "unit": "units of value",
-      "explainer": "Students a year × value per student-year × the chance the practice lasts × the discounted years a won reform counts. The reform's running costs (district staff's and teachers' time on the assessments and report cards) count in CSF's share of the resources and in the side effects' teacher-time harm, not again here."
+      "explainer": "New students a year (students ÷ the years each is covered) × the value of the gain per student × the chance the practice lasts × the discounted years a won reform counts. The reform's running costs (district staff's and teachers' time on the assessments and report cards) count in CSF's share of the resources and in the side effects' teacher-time harm, not again here."
     },
     {
       "id": "hps_units_affected_per_year",
@@ -1179,7 +1193,7 @@
         "quote": "It also wants the government to increase budget allocation to Rs 6,000 crore from Rs 2,500 crore."
       },
       "unit": "₹",
-      "explainer": "The mission's central allocation, ₹2,500 crore a year, as the article on the standing committee's report gives it (the sentence is about the NIPUN Bharat mission; the committee notes the mission is due to end this financial year unless extended). Spending is the next rows."
+      "explainer": "The mission's central allocation, ₹2,500 crore a year, as the article on the standing committee's report gives it (the sentence is about the NIPUN Bharat mission, which the committee says 'is set to be wound up this financial Year'). Spending is the next rows."
     },
     {
       "id": "central_share_nipun",
@@ -1238,7 +1252,7 @@
         "high": 0.62
       },
       "kind": "judgment",
-      "explainer": "Our judgment: government schools enrol 12.16 crore of India's 24.69 crore school children in 2024-25 (UDISE+), and a larger share in the primary grades than in secondary. 55% (48% to 62%)."
+      "explainer": "Our judgment: government schools (central and state, not government-aided) enrol 12.16 crore of the 23.29 crore children in Grades 1-12 in 2024-25 (UDISE+), 52%, and a larger share in the primary grades than in secondary. 55% (48% to 62%)."
     },
     {
       "id": "csf_states_enrolment_share",
@@ -1273,7 +1287,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The ₹2,500 crore is an allocation. Samagra Shiksha, the scheme that funds the mission, had spent 54.9% of its 2025-26 budget estimate by the committee's report (same article), with the year's last weeks to come; earlier years spent most of it (₹9,903 crore of ₹12,467 crore revised in 2024-25, same article). 80% (55% to 100%)."
+      "explainer": "The ₹2,500 crore is an allocation. Samagra Shiksha, the scheme that funds the mission, had spent 54.9% of its 2025-26 budget estimate by the committee's report (same article), with the year's last weeks to come. 80% (55% to 100%)."
     },
     {
       "id": "fln_csf_inr",
@@ -1307,12 +1321,25 @@
       "unit": "₹"
     },
     {
+      "id": "ece_first_time_share",
+      "section": "adjustments",
+      "label": "Share of the states' pre-primary spending that serves the first-time children counted",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.6,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the benefit counts only the ~4 lakh children with pre-primary for the first time (p. 34); the states' spending also serves children who had some pre-primary before, mostly in anganwadis, whose smaller gain isn't counted. CSF's support is aimed at the new classes. 60% (40% to 80%)."
+    },
+    {
       "id": "ece_attribution_share",
       "section": "adjustments",
       "label": "Early childhood: CSF's share of the resources behind the new pre-primary classes",
       "format": "percent",
-      "formula": "total_expenses_inr * ece_spend_share / (total_expenses_inr * ece_spend_share + ece_state_inr)",
-      "explainer": "CSF's early-childhood spending, with its share of overhead, over its own and the states'."
+      "formula": "total_expenses_inr * ece_spend_share / (total_expenses_inr * ece_spend_share + ece_state_inr * ece_first_time_share)",
+      "explainer": "CSF's early-childhood spending, with its share of overhead, over its own and the states' spending on the first-time children."
     },
     {
       "id": "pal_share_of_edtech",
@@ -1380,22 +1407,44 @@
       "explainer": "CSF's other EdTech spending, with its share of overhead, over its own and the partners'."
     },
     {
+      "id": "gov_disclosure_share",
+      "section": "adjustments",
+      "label": "Share of CSF's governance spending on the disclosure pilots",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: the Jodhpur and Angul pilots against accreditation frameworks and school standards authorities in six states (pp. 44-45). 40% (20% to 60%)."
+    },
+    {
+      "id": "gov_district_inr",
+      "section": "adjustments",
+      "label": "Districts' yearly spending of staff and teachers' time on the assessments and report cards (₹)",
+      "format": "number",
+      "value": {
+        "low": 10000000,
+        "best": 30000000,
+        "high": 80000000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: district officials, teachers and parent-teacher meetings in about 2,700 schools for one assessment and report-card round a year (pp. 44-45). ₹3 crore (₹1 to ₹8 crore).",
+      "unit": "₹"
+    },
+    {
       "id": "gov_attribution_share",
       "section": "adjustments",
       "label": "School governance: CSF's share of the resources behind the disclosure reforms",
       "format": "percent",
-      "value": {
-        "low": 0.25,
-        "best": 0.5,
-        "high": 0.8
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: CSF designed the assessments and report cards and ran them with the district administrations, whose staff and teachers carried them out. 50% (25% to 80%)."
+      "formula": "total_expenses_inr * gov_spend_share * gov_disclosure_share / (total_expenses_inr * gov_spend_share * gov_disclosure_share + gov_district_inr)",
+      "explainer": "CSF's spending on the pilots, with its share of overhead, over its own and the districts'."
     },
     {
-      "id": "hps_attribution_share",
+      "id": "hps_pilot_share",
       "section": "adjustments",
-      "label": "High-potential students: CSF's share of the resources behind the pilot",
+      "label": "Share of CSF's high-potential students spending on the STEM pilot",
       "format": "percent",
       "value": {
         "low": 0.3,
@@ -1403,7 +1452,29 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Our judgment: CSF funded and ran the accelerator with five partner organisations in Navodaya Vidyalaya Samiti's schools. 50% (30% to 80%)."
+      "explainer": "Our judgment: the accelerator's first year against the new Delhi and Telangana partnerships, the Altius programme and two publications (pp. 47-48). 50% (30% to 80%)."
+    },
+    {
+      "id": "hps_partners_inr",
+      "section": "adjustments",
+      "label": "Partners' and the schools' yearly spending on the STEM pilot (₹)",
+      "format": "number",
+      "value": {
+        "low": 10000000,
+        "best": 20000000,
+        "high": 50000000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: five partner organisations' staff and materials and the Navodaya schools' teachers' time for about 400 students. ₹2 crore (₹1 to ₹5 crore).",
+      "unit": "₹"
+    },
+    {
+      "id": "hps_attribution_share",
+      "section": "adjustments",
+      "label": "High-potential students: CSF's share of the resources behind the pilot",
+      "format": "percent",
+      "formula": "total_expenses_inr * hps_spend_share * hps_pilot_share / (total_expenses_inr * hps_spend_share * hps_pilot_share + hps_partners_inr)",
+      "explainer": "CSF's spending on the pilot, with its share of overhead, over its own and the partners'."
     },
     {
       "id": "fln_missing_data_adj",
