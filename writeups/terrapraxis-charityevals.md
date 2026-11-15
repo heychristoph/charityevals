@@ -1,6 +1,6 @@
 ### Summary
 
-TerraPraxis works to re-power the world's coal plants with advanced nuclear reactors, so the sites, grid connections and jobs outlive coal. It does this through designs, software and convening rather than by building anything itself. Our model counts what its work of 2022-2024 adds to the deployment of advanced nuclear power, against what it spent in those years. It comes to **<span data-figure="headline" data-model="terrapraxis-charityevals">0.03</span> years of healthy life per 1,000 dollars**. About a fifth of that is the tonnes of CO₂ the reactors avoid. The rest is money: at the site's discount rate, new reactors' power is projected to be cheaper than the fossil power it replaces in India and much of the world. Most reactors would be built in China and India, where a dollar matters far more to the people paying for power. The result is mostly uncertainty. No coal plant has been re-powered yet, every step from TerraPraxis's work to a working reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces.
+TerraPraxis works to re-power the world's coal plants with advanced nuclear reactors, so the sites, grid connections and jobs outlive coal. It does this through designs, software and convening rather than by building anything itself. Our model counts what its work of 2022-2024 adds to the deployment of advanced nuclear power, against what it spent in those years. It comes to **<span data-figure="headline" data-model="terrapraxis-charityevals">0.02</span> years of healthy life per 1,000 dollars**. About three tenths of that is the tonnes of CO₂ the reactors avoid. The rest is money, mostly what reactors on coal sites save in construction, for power customers in China and India, where a dollar matters far more to the people paying. The result is mostly uncertainty. No coal plant has been re-powered yet, every step from TerraPraxis's work to a working reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces.
 
 ### What the charity does
 
@@ -33,19 +33,23 @@ Each reactor runs at the world fleet's 83% capacity factor. The tonnes include t
 Then come the money effects, valued as money gained or lost by those who pay for power:
 
 - Reactors moved to coal sites save 25% of their construction cost (DOE). The saving uses each region's reactor cost from the IEA and NEA.
-- The extra reactors' power costs more or less than the power it replaces, without any carbon price. For the fossil part, the shared figures come from the IEA and NEA's levelised costs, at the site's 4% discount rate. Per MWh, new nuclear costs about $2 more in China, $6 less in India, $10 more in the US and $14 less in Korea and France. For the clean part (wind, solar, hydro), the best guess is no gap. The coal-site reactors' power is cheaper by the site's construction saving.
+- The extra reactors' power costs more or less than the power it replaces, without any carbon price. The shared figures come from the IEA and NEA's levelised costs, at the site's 4% discount rate.
+  - **Against fossil power.** New nuclear costs about $2 more per MWh in China, $6 less in India, $10 more in the US and $14 less in Korea and France.
+  - **Against wind and solar.** These are cheaper to build. After a shared $15 per MWh for their system costs, nuclear costs about $10 more in India and $7 more in the US, $5 less in China and much less in Korea and France.
+  - **Each line's mix.** Each line splits the power it replaces into fossil and clean shares to match its own tonnes.
+  - **Coal sites.** The coal-site reactors' power is cheaper by the site's construction saving.
 
-Where the reactors are built decides who pays: 45% in China, 10% in India, 15% in the US, 10% in other middle-income countries and 20% elsewhere (our judgment; half of what is under construction today is in China). A dollar counts in proportion to 1 ÷ the payers' consumption on the site's survey scale: about $4,200 a year in China, $630 in India and $32,700 in the US. A small share is added for the remaining work (5%), and the side effects come in as small shares: jobs kept in coal towns, nuclear risk. The total is divided by a typical year's spending in 2022-2024. The next dollar is valued at 57% of that average, because money is short.
+Where the reactors are built decides who pays: 45% in China, 10% in India, 15% in the US, 10% in other middle-income countries (valued like China) and 20% elsewhere (our judgment; half of what is under construction today is in China). A dollar counts in proportion to 1 ÷ the payers' consumption on the site's survey scale: about $4,200 a year in China, $630 in India and $32,700 in the US. A small share is added for the remaining work (5%), and the side effects come in as small shares: jobs kept in coal towns, nuclear risk. The total is divided by a typical year's spending in 2022-2024. The next dollar is valued at 57% of that average, because money is short.
 
 ### What drives the result
 
-The two lines give about equal parts of the tonnes. The money effects come to about four times the tonnes' value, most of it cheaper power for India's customers. The biggest inputs are the cost gaps:
+The two lines give about equal parts of the tonnes. The money comes to about two and a half times the tonnes' value. Most of it is the construction saved on coal-site reactors, and part of that is offset by the advanced nuclear line's power costing more than India's wind and solar. The biggest inputs are these:
 
-- **Against the clean power replaced.** At $15 a MWh more, the result turns negative.
-- **The shared uncertainty on the IEA/NEA projections.**
-- **The discount rate.** At 7% the reactors' gap grows everywhere.
+- **The shared uncertainty on nuclear's projected costs.** At $15 a MWh more than projected, the result turns negative.
+- **The discount rate.**
+- **The system cost of wind and solar.**
 
-Next come the shared years a result counts and the 1.5% credited to enabling work.
+Next come the shared years a result counts and the credit shares.
 
 ### Biggest uncertainties
 

@@ -3,13 +3,13 @@
   "name": "TerraPraxis",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"world":0.36,"CHN":0.11,"IND":0.53},
-  "beneficiaries_note": "Our build: about four fifths of the value at the defaults is cheaper power for those who pay for it, three fifths of that in India (its payers' low consumption and India's cost gap below zero), the rest spread over the other middle-income builders and the siting savings (left in the world figure); the tonnes' fifth is heat deaths and methane (world) and air pollution split by coal capacity (China 54%, India 11%, Global Energy Monitor's Global Coal Plant Tracker via Carbon Brief, 2024) times each place's smoke per tonne. A judgment from the model's own rows at the defaults.",
+  "beneficiaries": {"world":0.21,"CHN":0.35,"IND":0.44},
+  "beneficiaries_note": "Our build: about seven tenths of the value at the defaults is money for those who pay for power, mostly construction saved on coal-site reactors, split by where reactors are built and payers' consumption (India about half, China about a third, the rest in the world figure); the tonnes' share is heat deaths and methane (world) and air pollution split by coal capacity (China 54%, India 11%, Global Energy Monitor via Carbon Brief, 2024) times each place's smoke per tonne. A judgment from the model's rows at the defaults.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "terrapraxis",
   "owner": "charityevals",
-  "summary": "TerraPraxis, a US non-profit with a small UK sister company, designs, convenes and builds software to re-power the world's coal plants with advanced nuclear reactors (its REPOWER consortium), and makes the case for advanced nuclear more broadly (the Ten-Terawatt Initiative). This model counts what its 2022-2024 work ($6.3M) adds to a yardstick, a third of the COP28 pledge to triple nuclear capacity built by 2050, a tenth of it on coal sites, crediting all groups' non-commercial enabling work with 1.5% of that deployment and TerraPraxis with 8% of that work on coal sites and 0.6% elsewhere. Besides the tonnes, the deployment changes what people pay for power: at the site's discount rate the IEA/NEA projections put new reactors' power below the fossil power it replaces in India and much of the rest of the world and a little above it in China and the US, and coal sites save construction costs; since most reactors would be built in China and India, where a dollar is worth far more to those paying it, these money effects outweigh the tonnes. At the defaults a dollar given comes to 0.03 years of healthy life per $1,000, four fifths of it from cheaper power. It is mostly uncertainty: nothing has been built yet, every step from the work to a reactor is a judgment, and the sign turns on what nuclear power will cost against the coal, gas and clean power it replaces; both lines are discounted for missing data.",
+  "summary": "TerraPraxis, a US non-profit with a small UK sister company, designs, convenes and builds software to re-power the world's coal plants with advanced nuclear reactors (its REPOWER consortium), and makes the case for advanced nuclear more broadly (the Ten-Terawatt Initiative). This model counts what its 2022-2024 work ($6.3M) adds to a yardstick, a third of the COP28 pledge to triple nuclear capacity built by 2050, a tenth of it on coal sites, crediting all groups' non-commercial enabling work with 1.5% of that deployment and TerraPraxis with 8% of that work on coal sites and 0.6% elsewhere. Besides the tonnes, the deployment changes what people pay for power: reactors on coal sites are cheaper to build (DOE: 15%-35%), while at the site's discount rate new reactors' power costs about as much as the coal and gas it replaces and, in India, more than the wind and solar it replaces (IEA/NEA projections, with wind and solar's system costs); since most reactors would be built in China and India, where a dollar is worth far more to those paying it, the coal sites' construction savings outweigh the tonnes. At the defaults a dollar given comes to 0.02 years of healthy life per $1,000, about seven tenths of it from those savings. It is mostly uncertainty: nothing has been built yet, every step from the work to a reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces; both lines are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: TerraPraxis",
@@ -833,7 +833,7 @@
         "quote": "Egypt, India and Türkiye each have around 5 GW under construction.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Egypt and Türkiye each have about 5 GW under construction, about 10 of the 34 GW outside China and India (IEA), and several middle-income newcomers plan reactors. Our judgment, 10% (5% to 20%) of the build, valued at China's survey-scale consumption as an upper-middle-income stand-in, with the reference premium of the rest."
+      "explainer": "Egypt and Türkiye each have about 5 GW under construction, about 10 of the 34 GW outside China and India (IEA), and several middle-income newcomers plan reactors. Our judgment, 10% (5% to 20%) of the build, valued at China's survey-scale consumption and costs as an upper-middle-income stand-in (cheap sun and wind, reactors built by Russian, Chinese and Korean vendors at near-Chinese costs)."
     },
     {
       "id": "build_share_rest",
@@ -900,6 +900,14 @@
       "explainer": "The shared IEA/NEA investment cost per MWh (facts: climate), interpolated at the site's discount rate: what a construction saving lowers per MWh."
     },
     {
+      "id": "clean_premium_chn",
+      "section": "adjustments",
+      "label": "New nuclear power's cost over the wind and solar it replaces, China, at the site's discount rate, system costs included (2018 US$ per MWh)",
+      "format": "usd",
+      "formula": "@climate.advanced_nuclear_clean_premium_usd_per_mwh_chn_3pct + (@climate.advanced_nuclear_clean_premium_usd_per_mwh_chn_7pct - @climate.advanced_nuclear_clean_premium_usd_per_mwh_chn_3pct) * rate_position - @climate.vre_system_cost_usd_per_mwh + @climate.advanced_nuclear_premium_uncertainty_usd_per_mwh",
+      "explainer": "The shared IEA/NEA plant-level gap over new wind and solar (facts: climate), interpolated at the site's discount rate, less the shared system cost of wind and solar, plus the shared uncertainty on nuclear's cost."
+    },
+    {
       "id": "premium_ind",
       "section": "adjustments",
       "label": "New nuclear power's cost over the fossil power it replaces, India, at the site's discount rate (2018 US$ per MWh)",
@@ -914,6 +922,14 @@
       "format": "usd",
       "formula": "@climate.advanced_nuclear_investment_usd_per_mwh_ind_3pct + (@climate.advanced_nuclear_investment_usd_per_mwh_ind_7pct - @climate.advanced_nuclear_investment_usd_per_mwh_ind_3pct) * rate_position",
       "explainer": "The shared IEA/NEA investment cost per MWh (facts: climate), interpolated at the site's discount rate: what a construction saving lowers per MWh."
+    },
+    {
+      "id": "clean_premium_ind",
+      "section": "adjustments",
+      "label": "New nuclear power's cost over the wind and solar it replaces, India, at the site's discount rate, system costs included (2018 US$ per MWh)",
+      "format": "usd",
+      "formula": "@climate.advanced_nuclear_clean_premium_usd_per_mwh_ind_3pct + (@climate.advanced_nuclear_clean_premium_usd_per_mwh_ind_7pct - @climate.advanced_nuclear_clean_premium_usd_per_mwh_ind_3pct) * rate_position - @climate.vre_system_cost_usd_per_mwh + @climate.advanced_nuclear_premium_uncertainty_usd_per_mwh",
+      "explainer": "The shared IEA/NEA plant-level gap over new wind and solar (facts: climate), interpolated at the site's discount rate, less the shared system cost of wind and solar, plus the shared uncertainty on nuclear's cost."
     },
     {
       "id": "premium_usa",
@@ -932,6 +948,14 @@
       "explainer": "The shared IEA/NEA investment cost per MWh (facts: climate), interpolated at the site's discount rate: what a construction saving lowers per MWh."
     },
     {
+      "id": "clean_premium_usa",
+      "section": "adjustments",
+      "label": "New nuclear power's cost over the wind and solar it replaces, United States, at the site's discount rate, system costs included (2018 US$ per MWh)",
+      "format": "usd",
+      "formula": "@climate.advanced_nuclear_clean_premium_usd_per_mwh_usa_3pct + (@climate.advanced_nuclear_clean_premium_usd_per_mwh_usa_7pct - @climate.advanced_nuclear_clean_premium_usd_per_mwh_usa_3pct) * rate_position - @climate.vre_system_cost_usd_per_mwh + @climate.advanced_nuclear_premium_uncertainty_usd_per_mwh",
+      "explainer": "The shared IEA/NEA plant-level gap over new wind and solar (facts: climate), interpolated at the site's discount rate, less the shared system cost of wind and solar, plus the shared uncertainty on nuclear's cost."
+    },
+    {
       "id": "premium_rest",
       "section": "adjustments",
       "label": "New nuclear power's cost over the fossil power it replaces, elsewhere, at the site's discount rate (2018 US$ per MWh)",
@@ -948,6 +972,14 @@
       "explainer": "The shared IEA/NEA investment cost per MWh (facts: climate), interpolated at the site's discount rate: what a construction saving lowers per MWh."
     },
     {
+      "id": "clean_premium_rest",
+      "section": "adjustments",
+      "label": "New nuclear power's cost over the wind and solar it replaces, elsewhere, at the site's discount rate, system costs included (2018 US$ per MWh)",
+      "format": "usd",
+      "formula": "@climate.advanced_nuclear_clean_premium_usd_per_mwh_rest_3pct + (@climate.advanced_nuclear_clean_premium_usd_per_mwh_rest_7pct - @climate.advanced_nuclear_clean_premium_usd_per_mwh_rest_3pct) * rate_position - @climate.vre_system_cost_usd_per_mwh + @climate.advanced_nuclear_premium_uncertainty_usd_per_mwh",
+      "explainer": "The shared IEA/NEA plant-level gap over new wind and solar (facts: climate), interpolated at the site's discount rate, less the shared system cost of wind and solar, plus the shared uncertainty on nuclear's cost."
+    },
+    {
       "id": "w_inv",
       "section": "adjustments",
       "label": "Payers' 1 ÷ consumption, averaged over where the reactors are built",
@@ -956,19 +988,11 @@
       "explainer": "A dollar gained or lost counts in proportion to 1 ÷ the payer's consumption on the site's log scale (docs/normalization.md 2.21), so the regions are averaged on that."
     },
     {
-      "id": "w_premium",
-      "section": "adjustments",
-      "label": "Cost gap per MWh ÷ payers' consumption, averaged over where the reactors are built",
-      "format": "small",
-      "formula": "build_share_chn * premium_chn / payer_consumption_chn + build_share_ind * premium_ind / payer_consumption_ind + build_share_usa * premium_usa / payer_consumption_usa + build_share_mid * premium_rest / payer_consumption_chn + build_share_rest * premium_rest / payer_consumption_rest",
-      "explainer": "Each region's cost gap over its payers' consumption, weighted by its share of the build."
-    },
-    {
       "id": "w_investment",
       "section": "adjustments",
       "label": "Construction cost per MWh ÷ payers' consumption, averaged over where the reactors are built",
       "format": "small",
-      "formula": "build_share_chn * investment_chn / payer_consumption_chn + build_share_ind * investment_ind / payer_consumption_ind + build_share_usa * investment_usa / payer_consumption_usa + build_share_mid * investment_rest / payer_consumption_chn + build_share_rest * investment_rest / payer_consumption_rest",
+      "formula": "build_share_chn * investment_chn / payer_consumption_chn + build_share_ind * investment_ind / payer_consumption_ind + build_share_usa * investment_usa / payer_consumption_usa + build_share_mid * investment_chn / payer_consumption_chn + build_share_rest * investment_rest / payer_consumption_rest",
       "explainer": "Each region's construction cost per MWh over its payers' consumption, weighted by its share of the build."
     },
     {
@@ -976,56 +1000,159 @@
       "section": "adjustments",
       "label": "Overnight cost per kW ÷ payers' consumption, averaged over where the reactors are built",
       "format": "small",
-      "formula": "build_share_chn * @climate.advanced_nuclear_overnight_usd_per_kw_chn / payer_consumption_chn + build_share_ind * @climate.advanced_nuclear_overnight_usd_per_kw_ind / payer_consumption_ind + build_share_usa * @climate.advanced_nuclear_overnight_usd_per_kw_usa / payer_consumption_usa + build_share_mid * @climate.advanced_nuclear_overnight_usd_per_kw_rest / payer_consumption_chn + build_share_rest * @climate.advanced_nuclear_overnight_usd_per_kw_rest / payer_consumption_rest",
+      "formula": "build_share_chn * @climate.advanced_nuclear_overnight_usd_per_kw_chn / payer_consumption_chn + build_share_ind * @climate.advanced_nuclear_overnight_usd_per_kw_ind / payer_consumption_ind + build_share_usa * @climate.advanced_nuclear_overnight_usd_per_kw_usa / payer_consumption_usa + build_share_mid * @climate.advanced_nuclear_overnight_usd_per_kw_chn / payer_consumption_chn + build_share_rest * @climate.advanced_nuclear_overnight_usd_per_kw_rest / payer_consumption_rest",
       "explainer": "Each region's overnight cost per kW (shared IEA/NEA figures) over its payers' consumption, weighted by its share of the build."
     },
     {
-      "id": "fossil_intensity_vs_coal",
+      "id": "gas_vs_coal_co2",
       "section": "adjustments",
-      "label": "CO₂ per MWh of the fossil power replaced, relative to coal",
+      "label": "CO₂ per MWh of gas power relative to coal power",
+      "format": "percent",
+      "value": {
+        "low": 0.38,
+        "best": 0.42,
+        "high": 0.48
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "US Energy Information Administration, FAQ: How much carbon dioxide is produced per kilowatthour of U.S. electricity generation?",
+        "url": "https://www.eia.gov/tools/faqs/faq.php?id=74&t=11",
+        "page": "Table, 2023: coal 2.30 pounds of CO2 per kWh, natural gas 0.96",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "0.96 ÷ 2.30 = 0.42 for US plants in 2023; newer gas and older coal plants elsewhere spread it 0.38 to 0.48."
+    },
+    {
+      "id": "coal_gen_share_chn",
+      "section": "adjustments",
+      "label": "Coal's share of the fossil power replaced, China",
       "format": "percent",
       "value": {
         "low": 0.7,
         "best": 0.85,
-        "high": 1.0
+        "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "The fossil power the reactors replace is mostly coal in China and India and part gas elsewhere (gas emits about 0.42 of coal's CO₂ per MWh). Weighted by generation over the build: about 0.85 of coal's (0.7 to 1.0). Used to split the replaced power the tonnes imply into fossil and clean."
+      "explainer": "The same weights as the shared IEA/NEA cost gap's fossil comparator (facts: climate). China's fossil power is overwhelmingly coal: 85% coal (70% to 95%)."
     },
     {
-      "id": "rep_fossil_share",
+      "id": "fossil_share_rep_chn",
       "section": "adjustments",
-      "label": "Coal repowering: share of the power the extra reactors replace that is fossil",
+      "label": "Coal repowering: share of the power the extra reactors replace that is fossil, China",
       "format": "percent",
-      "formula": "min(1, rep_displaced_vs_coal / fossil_intensity_vs_coal)",
-      "explainer": "The tonnes say the replaced power has half of coal's CO₂; at 0.85 of coal's CO₂ per fossil MWh, that is about 59% fossil and the rest clean power. The cost gap uses the same mix as the tonnes."
+      "formula": "min(1, rep_displaced_vs_coal / (coal_gen_share_chn + (1 - coal_gen_share_chn) * gas_vs_coal_co2))",
+      "explainer": "The replaced power's CO₂ relative to coal (the tonnes' own row) over this region's fossil mix's CO₂ relative to coal: the rest is clean power. The cost gap uses the same mix as the tonnes."
     },
     {
-      "id": "nuc_fossil_share",
+      "id": "fossil_share_nuc_chn",
       "section": "adjustments",
-      "label": "Advanced nuclear: share of the power the new reactors replace that is fossil",
+      "label": "Advanced nuclear: share of the power the new reactors replace that is fossil, China",
       "format": "percent",
-      "formula": "min(1, nuc_counterfactual_adj / fossil_intensity_vs_coal)",
-      "explainer": "The same split for the other line: 35% of coal's CO₂ means about 41% fossil."
+      "formula": "min(1, nuc_counterfactual_adj / (coal_gen_share_chn + (1 - coal_gen_share_chn) * gas_vs_coal_co2))",
+      "explainer": "As for the coal-repowering line, with this line's replaced-power CO₂."
     },
     {
-      "id": "clean_replaced_premium_usd_per_mwh",
+      "id": "coal_gen_share_ind",
       "section": "adjustments",
-      "label": "New nuclear power's cost over the clean power it replaces (2018 US$ per MWh)",
-      "format": "usd",
+      "label": "Coal's share of the fossil power replaced, India",
+      "format": "percent",
       "value": {
-        "low": -15,
-        "best": 0,
-        "high": 15
+        "low": 0.9,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "source": {
-        "title": "IEA and OECD Nuclear Energy Agency (2020), Projected Costs of Generating Electricity 2020",
-        "url": "https://iea.blob.core.windows.net/assets/ae17da3d-e8a5-4163-a3ec-2e6fb0b5677d/Projected-Costs-of-Generating-Electricity-2020.pdf",
-        "page": "Executive summary: system costs and value-adjusted costs of variable renewables",
-        "retrieved": "2026-11-15"
+      "explainer": "The same weights as the shared IEA/NEA cost gap's fossil comparator (facts: climate). India's fossil power is almost all coal: 100% (90% to 100%)."
+    },
+    {
+      "id": "fossil_share_rep_ind",
+      "section": "adjustments",
+      "label": "Coal repowering: share of the power the extra reactors replace that is fossil, India",
+      "format": "percent",
+      "formula": "min(1, rep_displaced_vs_coal / (coal_gen_share_ind + (1 - coal_gen_share_ind) * gas_vs_coal_co2))",
+      "explainer": "The replaced power's CO₂ relative to coal (the tonnes' own row) over this region's fossil mix's CO₂ relative to coal: the rest is clean power. The cost gap uses the same mix as the tonnes."
+    },
+    {
+      "id": "fossil_share_nuc_ind",
+      "section": "adjustments",
+      "label": "Advanced nuclear: share of the power the new reactors replace that is fossil, India",
+      "format": "percent",
+      "formula": "min(1, nuc_counterfactual_adj / (coal_gen_share_ind + (1 - coal_gen_share_ind) * gas_vs_coal_co2))",
+      "explainer": "As for the coal-repowering line, with this line's replaced-power CO₂."
+    },
+    {
+      "id": "coal_gen_share_usa",
+      "section": "adjustments",
+      "label": "Coal's share of the fossil power replaced, the United States",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.4,
+        "high": 0.6
       },
-      "explainer": "Where a reactor replaces wind, solar or hydro that would otherwise have been built, the plants' levelised costs are similar in the IEA/NEA projections, but wind and solar need storage and backup that reactors don't (the study's system-cost discussion). Our judgment, no gap at the best guess (−$15 to $15 per MWh)."
+      "kind": "judgment",
+      "explainer": "The same weights as the shared IEA/NEA cost gap's fossil comparator (facts: climate). US fossil power in the 2040s is mostly gas: 40% coal (25% to 60%)."
+    },
+    {
+      "id": "fossil_share_rep_usa",
+      "section": "adjustments",
+      "label": "Coal repowering: share of the power the extra reactors replace that is fossil, the United States",
+      "format": "percent",
+      "formula": "min(1, rep_displaced_vs_coal / (coal_gen_share_usa + (1 - coal_gen_share_usa) * gas_vs_coal_co2))",
+      "explainer": "The replaced power's CO₂ relative to coal (the tonnes' own row) over this region's fossil mix's CO₂ relative to coal: the rest is clean power. The cost gap uses the same mix as the tonnes."
+    },
+    {
+      "id": "fossil_share_nuc_usa",
+      "section": "adjustments",
+      "label": "Advanced nuclear: share of the power the new reactors replace that is fossil, the United States",
+      "format": "percent",
+      "formula": "min(1, nuc_counterfactual_adj / (coal_gen_share_usa + (1 - coal_gen_share_usa) * gas_vs_coal_co2))",
+      "explainer": "As for the coal-repowering line, with this line's replaced-power CO₂."
+    },
+    {
+      "id": "coal_gen_share_rest",
+      "section": "adjustments",
+      "label": "Coal's share of the fossil power replaced, elsewhere",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "The same weights as the shared IEA/NEA cost gap's fossil comparator (facts: climate). Korea's and Europe's fossil power mixes coal and gas: 50% coal (30% to 70%)."
+    },
+    {
+      "id": "fossil_share_rep_rest",
+      "section": "adjustments",
+      "label": "Coal repowering: share of the power the extra reactors replace that is fossil, elsewhere",
+      "format": "percent",
+      "formula": "min(1, rep_displaced_vs_coal / (coal_gen_share_rest + (1 - coal_gen_share_rest) * gas_vs_coal_co2))",
+      "explainer": "The replaced power's CO₂ relative to coal (the tonnes' own row) over this region's fossil mix's CO₂ relative to coal: the rest is clean power. The cost gap uses the same mix as the tonnes."
+    },
+    {
+      "id": "fossil_share_nuc_rest",
+      "section": "adjustments",
+      "label": "Advanced nuclear: share of the power the new reactors replace that is fossil, elsewhere",
+      "format": "percent",
+      "formula": "min(1, nuc_counterfactual_adj / (coal_gen_share_rest + (1 - coal_gen_share_rest) * gas_vs_coal_co2))",
+      "explainer": "As for the coal-repowering line, with this line's replaced-power CO₂."
+    },
+    {
+      "id": "w_gap_rep",
+      "section": "adjustments",
+      "label": "Coal repowering: cost gap per MWh ÷ payers' consumption, averaged over where the reactors are built",
+      "format": "small",
+      "formula": "build_share_chn * (fossil_share_rep_chn * premium_chn + (1 - fossil_share_rep_chn) * clean_premium_chn) / payer_consumption_chn + build_share_ind * (fossil_share_rep_ind * premium_ind + (1 - fossil_share_rep_ind) * clean_premium_ind) / payer_consumption_ind + build_share_usa * (fossil_share_rep_usa * premium_usa + (1 - fossil_share_rep_usa) * clean_premium_usa) / payer_consumption_usa + build_share_mid * (fossil_share_rep_chn * premium_chn + (1 - fossil_share_rep_chn) * clean_premium_chn) / payer_consumption_chn + build_share_rest * (fossil_share_rep_rest * premium_rest + (1 - fossil_share_rep_rest) * clean_premium_rest) / payer_consumption_rest",
+      "explainer": "Each region's gap over the fossil and the clean power replaced, in this line's mix, over its payers' consumption, weighted by its share of the build (the middle-income builders at China's gaps and consumption)."
+    },
+    {
+      "id": "w_gap_nuc",
+      "section": "adjustments",
+      "label": "Advanced nuclear: cost gap per MWh ÷ payers' consumption, averaged over where the reactors are built",
+      "format": "small",
+      "formula": "build_share_chn * (fossil_share_nuc_chn * premium_chn + (1 - fossil_share_nuc_chn) * clean_premium_chn) / payer_consumption_chn + build_share_ind * (fossil_share_nuc_ind * premium_ind + (1 - fossil_share_nuc_ind) * clean_premium_ind) / payer_consumption_ind + build_share_usa * (fossil_share_nuc_usa * premium_usa + (1 - fossil_share_nuc_usa) * clean_premium_usa) / payer_consumption_usa + build_share_mid * (fossil_share_nuc_chn * premium_chn + (1 - fossil_share_nuc_chn) * clean_premium_chn) / payer_consumption_chn + build_share_rest * (fossil_share_nuc_rest * premium_rest + (1 - fossil_share_nuc_rest) * clean_premium_rest) / payer_consumption_rest",
+      "explainer": "As for the coal-repowering line, in this line's mix."
     },
     {
       "id": "rep_site_cost_saving",
@@ -1061,8 +1188,8 @@
       "label": "Extra reactors: cost of their power over what it replaces, units of value",
       "format": "number",
       "unit": "uov",
-      "formula": "-p_success * twh_per_gw_year * 1e6 * @cpi.usa_2024 / @cpi.usa_2018 * discounted_years * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple * (rep_gw_repowered * rep_additional_share * rep_attribution_share * (rep_fossil_share * w_premium + (1 - rep_fossil_share) * clean_replaced_premium_usd_per_mwh * w_inv - rep_site_cost_saving * w_investment) + nuc_gw_not_coal * nuc_attribution_share * (nuc_fossil_share * w_premium + (1 - nuc_fossil_share) * clean_replaced_premium_usd_per_mwh * w_inv))",
-      "explainer": "The credited extra reactors' output (MWh a year) × their cost over what they replace: the fossil part at each region's gap, the clean part at the clean-power gap, and the coal-site reactors less the site's construction saving per MWh; each region over its payers' consumption, in 2024 dollars, over the same discounted years as the tonnes, with the evidence and missing-data steps; valued as money lost (or gained, if negative) by those who pay for power (docs/normalization.md 2.21)."
+      "formula": "-p_success * twh_per_gw_year * 1e6 * @cpi.usa_2024 / @cpi.usa_2018 * discounted_years * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple * (rep_gw_repowered * rep_additional_share * rep_attribution_share * (w_gap_rep - rep_site_cost_saving * w_investment) + nuc_gw_not_coal * nuc_attribution_share * w_gap_nuc)",
+      "explainer": "The credited extra reactors' output (MWh a year) × their cost over what they replace: the fossil and clean parts at each region's gaps (rows above), and the coal-site reactors less the site's construction saving per MWh; each region over its payers' consumption, in 2024 dollars, over the same discounted years as the tonnes, with the evidence and missing-data steps; valued as money lost (or gained, if negative) by those who pay for power (docs/normalization.md 2.21)."
     },
     {
       "id": "money_uov_per_year",
