@@ -39,6 +39,16 @@ describe("lint", () => {
   it("flags a sourced input without a URL", () => {
     expect(codes(withRow(base(), "animals_per_year", { source: { title: "somewhere" } }))).toContain("source:animals_per_year");
   });
+  it("flags an unmodelled_benefits_adj row without the side-effect tag, and accepts one weighted through its components", () => {
+    const raw = filled(files["direct-health"]);
+    expect(codes(raw)).not.toContain("side-effect-tag:unmodelled_benefits_adj");
+    const untagged = withRow(raw, "unmodelled_benefits_adj", { side_effect: undefined });
+    expect(codes(untagged)).toContain("side-effect-tag:unmodelled_benefits_adj");
+    const rows = [...(untagged.rows as Row[])];
+    rows.splice(rows.findIndex((r) => r.id === "unmodelled_benefits_adj"), 0, { id: "ue_spill", section: "adjustments", label: "Spillover", format: "percent", value: { low: 0, best: 0.05, high: 0.1 }, kind: "judgment", side_effect: "added", explainer: "A side effect with a rationale long enough to pass the lint check." });
+    const sum = rows.map((r) => (r.id === "unmodelled_benefits_adj" ? { ...r, formula: "ue_spill", value: undefined } : r));
+    expect(codes({ ...untagged, rows: sum })).not.toContain("side-effect-tag:unmodelled_benefits_adj");
+  });
   it("flags magic numbers in formulas", () => {
     expect(codes(withRow(base(), "outcome_total", { formula: "animals_affected_per_year * discounted_years * sads_per_animal_year * total_adj * 0.7" }))).toContain("magic-number:outcome_total");
   });
