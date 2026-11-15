@@ -16,3 +16,4 @@ Scope: only the changes of commit bc46382f to the model, its write-up and script
 | low | write-up | The comma/"and" before "any change in public attitudes" in "What isn't modelled" is still missing. | open, cosmetic |
 
 No high or medium findings. Sources: nothing new to fetch; the changes add no new observed figures (Stacy et al. 2023 and Cattaneo et al. 2009 were already cited and are judgment anchors).
+Re-stamped (15 Nov 2026): side-effect tag on unmodelled_benefits_adj added to the audited r4 model (2.16, mechanical; headline unchanged at the default weight)
