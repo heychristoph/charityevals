@@ -66,7 +66,7 @@ public_payer_uov_per_dollar = @public_funds.mcpf * $uov_per_ln_consumption / (pa
 <b>_public_cost_uov         = -<b>_public_usd_per_year * public_payer_uov_per_dollar * <b>'s years, wait, chance and adjustments
 ```
 
-Paid per unit: every adjustment; a fixed sum: not the evidence step. Households' money: their gain less
+Paid per unit: every adjustment; a fixed sum: not the evidence step; a levy: its spending's steps. Households' money: their gain less
 the payers' loss; a levy: no mcpf (the compliance row carries its resource cost). Payers: US federal
 (CE survey), rich donors (UK on the survey scale), the developing world (`lmy_na_consumption_per_person_2024`
 × the median survey ratio).

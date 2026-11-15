@@ -18,7 +18,7 @@ TerraPraxis doesn't campaign for laws. It tries to make reactors cheaper and fas
 
 ### How the model works
 
-The model starts from a yardstick rather than a forecast: the COP28 pledge to triple 2020's 392 GW of nuclear capacity by 2050, of which we judge 35% gets built. It splits that build into two lines.
+The model starts from a yardstick rather than a forecast: the COP28 pledge to triple 2020's 392 GW of nuclear capacity by 2050, of which we judge 35% gets built, read at about 2040, the middle of the years counted. It splits that build into two lines.
 
 - **Coal repowering.** A tenth of the new reactors stand on coal sites, about 27 GW. We count 40% of them as extra reactors rather than reactors moved from other sites. Each extra reactor replaces power with half of coal's CO₂.
 - **Advanced nuclear elsewhere.** The rest of the build. The grids these reactors join have 35% of coal's CO₂ per MWh.

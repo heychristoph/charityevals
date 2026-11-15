@@ -1,0 +1,26 @@
+# Audit: carbon180-charityevals, round 5 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
+Result: -0.01505 tco2e/$ = -0.002959 years of healthy life per $1,000 (was 0.000968 tco2e/$ = 0.00012 before; the gross tonnes are unchanged at 0.000968 tco2e/$, the conversion rose x1.6 with the 0.6 non-death damage). The sign change is what rule 2.23 implies, not an error. Verdict: fail (two medium findings, both stale sentences that contradict the new result; no number is wrong).
+Model-sha: b7023c466d7ddef6b4d05ae613c865bf154caea8930de60230054b5d407c5eab
+Scope: only the rows changed by commit 7e73f6cd (dac_hub_grants_usd, tech_public_usd_per_tco2, tech_research_usd_per_year, public_payer_uov_per_dollar, the five branch money and cost rows, forest cap and multiple, public_cost_uov_per_year, tco2e_from_uov, outcome_total) and the summary and write-up sentences stating the result.
+Mechanical: audit-model.ts 0 findings; check.ts "all models valid", -0.0030 years/$1k. tco2e_from_uov's formula equals `public_cost_uov_per_year / (tco2e to_common)` character for character and sits outside the (1 + unmodelled + deterrence) multiplier, so the bridge matches the unit's conversion including the 0.6 non-death factor.
+
+Arithmetic and rule 2.23 (recomputed from the engine's values):
+- public_payer_uov_per_dollar = 1.2 x 1.44 / (1.4 x 32,723) = 3.78e-5, as computed. Payers are US federal taxpayers on the survey scale (2.14): correct.
+- Gross not net: DAC credit and tech money use gross tonnes (2.5 M t x $180; tonnes x $150), while the counted tonnes are net (x 0.85 net share, in dac_tonnes_per_year and tech_downstream). Correct.
+- Same chain: each branch's money uses the branch's own p_success and discounted years (q45 and land and forest `discounted_years` 4.116; DAC 3.659; tech 2.571), the same factors as its `*_downstream` tonnes. Per-tonne money (credit, $150) takes `*_total_adj` whole; fixed sums (hub grants, research, FY2024 land money, trust fund) divide out the evidence step. Matches the rule.
+- No double counting: 45Q at other plants subtracts the DAC tonnes (57.5 M t) and money follows; hub grants and the per-tonne credit are different payments to the plants.
+- Sign: net cost -182 uov/year against tonnes worth about 11 uov/year (28,015 t x 3.93e-4). One tonne is worth about $10 of federal taxpayers' money on this scale while the credits pay $85 to $250 a tonne, so a net harm is what the rule gives; the DAC branch alone is -285 uov.
+
+| # | Severity | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|
+| 1 | medium | write-up, "How the model works" paragraph on public money | Says "what it costs taxpayers isn't netted, pending a site-wide rule on public money that buys tonnes". Rule 2.23 now nets it, and the model does. | writeups/carbon180-charityevals.md line 34 | Replace the last sentence with: the money is valued at what it buys less what it costs those who pay for it (docs/normalization.md 2.23). | none (text) |
+| 2 | medium | `adjustments` row combined-adjustment average (explainer) | Ends with "Public money that buys tonnes isn't netted against what it costs taxpayers, pending a site-wide rule on it." Same stale claim. | models/climate/carbon180-charityevals.json near line 1194 | Delete that sentence (the cost rows are below). | none (text) |
+| 3 | low | write-up "What drives the result" | Names only tonne shares (45Q half, technology a fifth) as drivers; the result is now driven by the public money per tonne, the payer multiple and the shared value of a tonne. | tornado: @public_funds.us_federal_payer_multiple, uov_per_daly, win years | Add one clause naming the money's cost to payers; keep it short. | none |
+| 4 | low | `dac_hub_grants_usd` | `quote` "up to $1.2 billion" is not verbatim on the page (it reads "$1.2 billion in two direct air capture, or DAC, facilities"); the best $1.1 billion (April 2026 cuts) is not in that source. | Utility Dive page fetched | Use the page's wording as the quote and name the April 2026 DOE source for $600M + $500M, or tag the best as judgment. | none (range 1.0-1.2) |
+| 5 | low | `land_public_usd_per_year` | NRCS page timed out twice; the $1.6B passage could not be re-read. $1.6B is all FY2024 IRA conservation financial assistance, while 11 M acres are the climate-focused contracts: scope is close but not stated by the source. | see Sources | Re-fetch an archived copy; if the climate-focused share is stated, use it. | the land branch is about 17% of the money cost; a halving moves the result under 10% |
+
+## Sources checked
+- Time (17 Sep 2024): both forest quotes verified ("antiquated $30 million cap placed on the agency's Reforestation Trust Fund"; "fivefold increase in annual funding").
+- Utility Dive (11 Aug 2023): $1.2 billion for two DAC hubs verified; the "up to" wording and the April 2026 cuts not on the page (finding 4).
+- NRCS: unreachable (finding 5). Facts q45_credit_usd_per_tco2 ($17 x 5), _dac ($36 x 5) and q45_credit_years (12) are quoted from 26 U.S.C. 45Q in the model's facts; not re-fetched here (outside the changed rows).
+- Summary: states -0.003 years, the net harm, the credits and the 0.001 t per $ correctly; no comparison with other charities.

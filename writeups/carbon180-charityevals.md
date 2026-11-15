@@ -31,10 +31,11 @@ Carbon180 is credited with 10% of the advocacy behind the plants, 8% behind the 
 
 Each branch has its own evidence step: the first plants count 70% because such plants have run below design, soil carbon 70% because farms keep practices less than trials do, replanted forests 50% for seedlings that die and stands that burn. The branches are added up and spread over the six years. Then come the shared missing-data step, other work not modelled (+5%: ocean research, standards, the community grants) and two side effects: emission cuts put off because removal is promised (−5%), and extra oil from captured CO₂ used in old wells (−8% of the 45Q branch). The total is divided by a typical year's spending in 2020-2025. The next dollar is valued at 27% of that average. Carbon180 spent three times its income in 2025 while holding about 20 months of spending in reserve, and its next dollar goes mostly to defending these wins and to newer fields.
 
-Removed or stored CO₂ counts for the heat deaths it prevents. It cuts no smoke from burning fuel, so it saves no air-pollution deaths. The programmes are public money, not rules, so no compliance cost is counted. The money is valued at what it buys; what it costs taxpayers isn't netted, pending a site-wide rule on public money that buys tonnes.
+Removed or stored CO₂ counts for the heat deaths it prevents. It cuts no smoke from burning fuel, so it saves no air-pollution deaths. The programmes are public money, not rules, so no compliance cost is counted. The public money is netted against what it costs taxpayers (method, section 2.23): the credits per tonne, the hub grants, the farm and forest money and the public purchases of the removals the faster build brings.
 
 ### What drives the result
 
+The public money's cost to taxpayers outweighs the tonnes, so the sign rests on the credits per tonne and the value of a tonne. 
 The 45Q credit at other plants gives about half the modelled tonnes, despite Carbon180's small share, because that credit is much bigger than the direct air capture programmes. The technology gives about a fifth, the first plants a sixth, the reforestation money a tenth and the farm money a few per cent. The shared value judgments move the result most: the discount rate, when heat deaths come, and the years a won reform counts.
 
 ### Biggest uncertainties

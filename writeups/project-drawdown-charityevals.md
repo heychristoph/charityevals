@@ -32,7 +32,7 @@ Each branch then takes the share that wouldn't have happened anyway (40-60%) and
 
 ### What drives the result
 
-Funders' giving carries about nine-tenths of the result; companies add about a twelfth, investors and the public a few per cent. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. A shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
+Funders' giving is the negative part of the result; companies' and investors' money is the positive part, about a third its size. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. A shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
 
 ### Biggest uncertainties
 

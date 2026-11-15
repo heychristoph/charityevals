@@ -1449,8 +1449,8 @@ the tonnes, `climate.q45_credit_usd_per_tco2` $85 and `_dac` $180; the law's yea
 `consumption_per_person_2024 × survey_to_na_gbr`, payers across the developing world at
 `survey_consumption.lmy_na_consumption_per_person_2024 × survey_to_na_world_median`), negative, over the branch's
 years, wait and adjustments (`<branch>_public_cost_uov`), into the tonnes through the uov bridge (2.6). Money paid per
-unit delivered (credits, procurement) takes every adjustment of the tonnes; a fixed sum (grants, appropriations,
-levies) all but the evidence step. Money landing as households' income counts as their gain on the survey scale
+unit delivered (credits, procurement) takes every adjustment of the tonnes; a fixed sum (grants, appropriations)
+all but the evidence step; a levy the steps of the spending it pays for. Money landing as households' income counts as their gain on the survey scale
 (Rewiring America's rebates); money paid to firms buys the cut and nothing more. A levy is the price that drives
 the cut, so its payers carry no cost of raising public funds on top, and its resource cost stays the compliance row
 (2.21). The lint checks it (`public-money`): a model reading a public-money win's tonnes reads the money's fact, and

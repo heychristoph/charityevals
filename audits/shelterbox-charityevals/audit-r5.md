@@ -12,5 +12,6 @@ Scope: only the methane_share change: new row methane_share and the rewritten br
 None.
 
 Verdict: pass
-Model-sha: 77b73d9f45c594637e5075575cb837f5aa7013797a21b11e16532fe732c15c39
+Model-sha: f0cf9785d2671b12c2ff671731ed2056cc32e0bd821481e1e7a4cf04d9f02bda
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed

@@ -31,4 +31,5 @@ The headline 0.01157 rounds to the 0.012 in the summary and write-up.
 None.
 
 Verdict: pass (0 high, 0 medium, 0 low).
-Model-sha: a1b9d204fe25ae427b3c0419523e5753faf94d1b43a8d426bea51a296747531e
+Model-sha: eaf5a8cff92fbc3b025f067372e59f602419e143ba8bb5a8a62f13b4dcce5bff
+Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
