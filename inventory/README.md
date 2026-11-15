@@ -115,3 +115,11 @@ Both asked us not to publish their models yet, so their inventories and models a
   - 5 private or deleted sheets; 1 breakeven analysis; 2 Fortify Health CEAs that are Fortify's own and already
     imported as GiveWell's.
 
+## The Life You Can Save: `the-life-you-can-save-models.json`
+
+- **Source so far:** one sheet, found while modelling Teaching at the Right Level Africa (November 2026): the
+  cost-effectiveness sheet linked from its Evaluation Hub page. The Evaluation Hub's other charities have not been
+  checked page by page yet.
+- **Imported:** TaRL Africa (learning-adjusted years of schooling per $100; our view turns the learning gain
+  into later earnings).
+
