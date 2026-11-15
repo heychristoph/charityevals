@@ -1,6 +1,6 @@
 ### Summary
 
-Bandhan-Konnagar, a non-profit society in Kolkata, gives the poorest women-headed households in 16 Indian states an asset, a weekly stipend and two years of coaching, so they can earn their way out of extreme poverty. It also runs health, education, skills, financial literacy and farming programmes. Our own model of its fiscal year 2024-25 (April 2024 to March 2025) comes to **<span data-figure="headline" data-model="bandhan-charityevals">5.5</span> years of healthy life per $1,000**.
+Bandhan-Konnagar, a non-profit society in Kolkata, gives the poorest women-headed households in 16 Indian states an asset, a weekly stipend and two years of coaching, so they can earn their way out of extreme poverty. It also runs health, education, skills, financial literacy and farming programmes. Our own model of its fiscal year 2024-25 (April 2024 to March 2025) comes to **<span data-figure="headline" data-model="bandhan-charityevals">6.0</span> years of healthy life per $1,000**.
 
 The result rests on a randomized trial of Bandhan's own programme in West Bengal that followed households for ten years. The range is wide, mostly because the trial was small, ran in 2007, and stopped at year ten.
 
@@ -22,7 +22,7 @@ It also sells training to Bandhan Bank, which our model leaves out because the b
 ### How the impact happens
 
 1. The asset and stipend let a woman start earning from livestock or a small business while the coaching helps her keep it going.
-2. Household consumption rises. In the trial, households that took part spent 22% to 50% more per person than the control group at 18 months, 3, 7 and 10 years. The gain grew to year 7 as members found better work, often by migrating.
+2. Household consumption rises. In the trial, households that took part spent 22% to 56% more per person than the control group at 18 months, 3, 7 and 10 years. The gain grew to year 7 as members found better work, often by migrating.
 3. Consumption is valued on a log scale, the site's shared way, so a gain counts for more the poorer the household.
 4. The other programmes add newborn lives saved, children's later earnings and small income gains.
 
@@ -33,7 +33,7 @@ The [model](/bandhan/bandhan-charityevals) follows the site's cash and income te
 - **Cost:** all charitable spending in 2024-25 from the audited accounts, ₹108.8 crore once administration is taken out, less the training sold to Bandhan Bank. Administration is spread over every programme. Each programme's share is a judgment, but the result barely depends on them, because every branch counts its own reach against the same total.
 - **Reach:** the 11,201 households enrolled, from the charity's own count, at India's household size scaled down because women-headed households are smaller.
 - **Effect:** the trial's effect at each survey, for the years around it: 18 months for years 1 and 2, 3 years for years 3 to 5, 7 years for years 6 to 8, 10 years for years 9 and 10. Each is divided by the share of households that took the programme when offered (52%), since the count is of households that took part. After year 10 the gain fades 10% a year for 10 more years (both judgments).
-- **Adjustments:** trust in the trial (0.75), what would have happened anyway (0.9), Bandhan-Konnagar's share of the resources (0.95), households counted but not served (0.95), other money freed or pulled in (0.95), and the wait while a gift sits as an unspent grant (about half a year) and before the first gains.
+- **Adjustments:** trust in the trial (0.75), what would have happened anyway (0.9), Bandhan-Konnagar's share of the resources (0.95), households counted but not served (0.95), other money freed or pulled in (0.95), and the wait while a gift sits as an unspent grant (about a third of a year) and before the first gains.
 - **Other programmes:** each is built from research on its kind of work and the charity's own counts, and discounted for missing data. Health uses a review of community health trials for newborn deaths, education a remedial-teaching trial in India, skills the trials of vocational training. Financial literacy and the farming pilots use judged gains. The Bihar help counts the government trial's gain, credited by Bandhan-Konnagar's share of the money.
 - **Side effects:** effects on neighbours add 5%. Health, mental health and other effects not counted in consumption add 10% net of harms such as lost animals or debts.
 - **Your dollar:** staff are mostly local coaches, so the shared figures for staff-delivered programmes and local pay apply.
@@ -59,6 +59,8 @@ The [model](/bandhan/bandhan-charityevals) follows the site's cash and income te
 ### How this model was checked
 
 The mechanical audit (lint and the site's invariants) passed before review.
+
+- **Round 1:** 3 high, 1 medium and 5 low findings. The trial's effect now uses the consumption column that counts migrant members, which the paper calls the better estimate. The duration rows of the smaller branches have their own labels, so they are not mistaken for the site's shared figure. The cost of the training sold to Bandhan Bank is a ranged judgment. The wait uses the year's average of unspent grants. The education count is explained as cumulative, the survey-years rule is stated, and the Bihar reach cites J-PAL's update. One finding, regenerating the site's generated files, is left to the merge step, as the batch rules say. The result went from 5.5 to 6.0.
 
 ### Sources
 

@@ -7,7 +7,7 @@
   "estimate_basis": "unit_cost",
   "charity": "bandhan",
   "owner": "charityevals",
-  "summary": "Bandhan-Konnagar, a non-profit society in Kolkata, runs Targeting the Hardcore Poor, a graduation programme for ultra-poor women-headed households in 16 Indian states (an asset, a weekly stipend and 24 months of coaching), and smaller health, education, skills, financial literacy and farming programmes, and advises Bihar's government graduation programme. Against its fiscal year 2024-25 spending (US$13.9M with overhead, 11,201 households enrolled), the randomized trial of its own programme in West Bengal, where participants' consumption was 22% to 50% above the control group's over ten years, gives about 5.5 years of healthy life per $1,000. The biggest uncertainties are how well that small 2007 trial carries to today's programme (a large trial of Bihar's version supports it) and how long the gain lasts after year ten; the accounts give no split by programme, so each programme's share of the spending is a judgment. The health, education, skills, financial literacy, farming and Bihar branches, about 5% of the result, are discounted for missing data.",
+  "summary": "Bandhan-Konnagar, a non-profit society in Kolkata, runs Targeting the Hardcore Poor, a graduation programme for ultra-poor women-headed households in 16 Indian states (an asset, a weekly stipend and 24 months of coaching), and smaller health, education, skills, financial literacy and farming programmes, and advises Bihar's government graduation programme. Against its fiscal year 2024-25 spending (US$13.9M with overhead, 11,201 households enrolled), the randomized trial of its own programme in West Bengal, where participants' consumption was 22% to 56% above the control group's over ten years, gives about 6 years of healthy life per $1,000. The biggest uncertainties are how well that small 2007 trial carries to today's programme (a large trial of Bihar's version supports it) and how long the gain lasts after year ten; the accounts give no split by programme, so each programme's share of the spending is a judgment. The health, education, skills, financial literacy, farming and Bihar branches, about 5% of the result, are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Bandhan-Konnagar's programmes, fiscal year 2024-25",
@@ -170,15 +170,28 @@
         "note": "Rupees crore, fiscal year 2024-25 (32.59 the year before)."
       },
       "unit": "INR",
-      "explainer": "Bandhan Bank pays Bandhan-Konnagar to train its staff in Bandhan-Konnagar's training centres: a service sold at a fee, not charitable work, so its cost leaves the modelled spending. Its cost is taken as equal to the fee (₹11.12 crore); the bank also paid ₹6.68 crore rent, which brings in income without programme spending."
+      "explainer": "Bandhan Bank pays Bandhan-Konnagar to train its staff in Bandhan-Konnagar's training centres: a service sold at a fee, not charitable work, so its cost leaves the modelled spending. Its cost, as a share of the fee, is the next row; the bank also paid ₹6.68 crore rent, which brings in income without programme spending."
+    },
+    {
+      "id": "bank_training_cost_share",
+      "section": "cost",
+      "label": "Cost of the training sold to Bandhan Bank, as a share of its fee",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.9,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "The accounts don't show what the training costs or where its costs sit (administration, personnel or depreciation of the training centres). A service sold to a related party is likely priced near cost; our judgment 90% of the fee, 40% (the fee also pays for the buildings, whose depreciation is a sunk cost) to 100%."
     },
     {
       "id": "fee_services_share",
       "section": "cost",
       "label": "Share of programme expenses that is training sold to Bandhan Bank",
       "format": "percent",
-      "formula": "bank_training_fee_inr / (total_expenses_inr - admin_expenses_inr)",
-      "explainer": "The fee over programme expenses, about 10%."
+      "formula": "bank_training_fee_inr * bank_training_cost_share / (total_expenses_inr - admin_expenses_inr)",
+      "explainer": "The training's cost over programme expenses, about 9%."
     },
     {
       "id": "program_spend",
@@ -411,9 +424,9 @@
       "label": "Rise in monthly consumption per person, all households offered, 18 months after the asset (2018 PPP $)",
       "format": "usd",
       "value": {
-        "low": 3.95,
-        "best": 7.554,
-        "high": 11.15
+        "low": 3.78,
+        "best": 8.196,
+        "high": 12.62
       },
       "kind": "observed",
       "interval": 0.95,
@@ -422,24 +435,24 @@
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Treatment 7.554 (1.837)"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Treatment 8.196 (2.255)"
       },
-      "explainer": "Per capita consumption excluding migrant members (column 1), intention to treat; 95% interval ± 1.96 × 1.837. The column counting migrants at the household average is larger; this one is the cautious reading of the same survey."
+      "explainer": "Per capita consumption counting migrant members at the household average (column 2), intention to treat; 95% interval ± 1.96 × 2.255. The paper notes that leaving migrants out (column 1) understates the effect, since treated households' members migrate more and send money home."
     },
     {
       "id": "thp_ctrl_18m",
       "section": "effect",
       "label": "Control group's monthly consumption per person, 18 months (2018 PPP $)",
       "format": "usd",
-      "value": 49.25,
+      "value": 52.77,
       "kind": "observed",
       "source": {
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Control Mean 49.25"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Control Mean 52.77"
       },
       "explainer": "Only the ratio of effect to this mean matters, so currency and year cancel."
     },
@@ -466,7 +479,7 @@
         "quote": "We track economic and health outcomes for treated and control households through four subsequent survey waves administered at 18 months, 3 years, 7 years, and 10 years following the transfer of productive assets."
       },
       "unit": "years",
-      "explainer": "Each survey stands for the years around it: years 1 and 2, ten years in all."
+      "explainer": "The survey dates are observed; which years each stands for is our rule: every year takes the survey nearest to it (midpoints at 2.25, 5 and 8.5 years), so this survey stands for years 1 and 2, ten years in all."
     },
     {
       "id": "thp_itt_3y",
@@ -474,9 +487,9 @@
       "label": "Rise in monthly consumption per person, all households offered, 3 years after the asset (2018 PPP $)",
       "format": "usd",
       "value": {
-        "low": 3.33,
-        "best": 7.08,
-        "high": 10.83
+        "low": 2.64,
+        "best": 7.429,
+        "high": 12.21
       },
       "kind": "observed",
       "interval": 0.95,
@@ -485,24 +498,24 @@
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Treatment 7.080 (1.913)"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Treatment 7.429 (2.441)"
       },
-      "explainer": "Per capita consumption excluding migrant members (column 1), intention to treat; 95% interval ± 1.96 × 1.913. The column counting migrants at the household average is larger; this one is the cautious reading of the same survey."
+      "explainer": "Per capita consumption counting migrant members at the household average (column 2), intention to treat; 95% interval ± 1.96 × 2.441. The paper notes that leaving migrants out (column 1) understates the effect, since treated households' members migrate more and send money home."
     },
     {
       "id": "thp_ctrl_3y",
       "section": "effect",
       "label": "Control group's monthly consumption per person, 3 years (2018 PPP $)",
       "format": "usd",
-      "value": 61.37,
+      "value": 66.59,
       "kind": "observed",
       "source": {
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Control Mean 61.37"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Control Mean 66.59"
       },
       "explainer": "Only the ratio of effect to this mean matters, so currency and year cancel."
     },
@@ -529,7 +542,7 @@
         "quote": "We track economic and health outcomes for treated and control households through four subsequent survey waves administered at 18 months, 3 years, 7 years, and 10 years following the transfer of productive assets."
       },
       "unit": "years",
-      "explainer": "Each survey stands for the years around it: years 3 to 5, ten years in all."
+      "explainer": "The survey dates are observed; which years each stands for is our rule: every year takes the survey nearest to it (midpoints at 2.25, 5 and 8.5 years), so this survey stands for years 3 to 5, ten years in all."
     },
     {
       "id": "thp_itt_7y",
@@ -537,9 +550,9 @@
       "label": "Rise in monthly consumption per person, all households offered, 7 years after the asset (2018 PPP $)",
       "format": "usd",
       "value": {
-        "low": 11.45,
-        "best": 17.385,
-        "high": 23.32
+        "low": 13.58,
+        "best": 21.252,
+        "high": 28.93
       },
       "kind": "observed",
       "interval": 0.95,
@@ -548,24 +561,24 @@
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Treatment 17.385 (3.030)"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Treatment 21.252 (3.916)"
       },
-      "explainer": "Per capita consumption excluding migrant members (column 1), intention to treat; 95% interval ± 1.96 × 3.03. The column counting migrants at the household average is larger; this one is the cautious reading of the same survey."
+      "explainer": "Per capita consumption counting migrant members at the household average (column 2), intention to treat; 95% interval ± 1.96 × 3.916. The paper notes that leaving migrants out (column 1) understates the effect, since treated households' members migrate more and send money home."
     },
     {
       "id": "thp_ctrl_7y",
       "section": "effect",
       "label": "Control group's monthly consumption per person, 7 years (2018 PPP $)",
       "format": "usd",
-      "value": 67.15,
+      "value": 72.95,
       "kind": "observed",
       "source": {
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Control Mean 67.15"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Control Mean 72.95"
       },
       "explainer": "Only the ratio of effect to this mean matters, so currency and year cancel."
     },
@@ -592,7 +605,7 @@
         "quote": "We track economic and health outcomes for treated and control households through four subsequent survey waves administered at 18 months, 3 years, 7 years, and 10 years following the transfer of productive assets."
       },
       "unit": "years",
-      "explainer": "Each survey stands for the years around it: years 6 to 8, ten years in all."
+      "explainer": "The survey dates are observed; which years each stands for is our rule: every year takes the survey nearest to it (midpoints at 2.25, 5 and 8.5 years), so this survey stands for years 6 to 8, ten years in all."
     },
     {
       "id": "thp_itt_10y",
@@ -600,9 +613,9 @@
       "label": "Rise in monthly consumption per person, all households offered, 10 years after the asset (2018 PPP $)",
       "format": "usd",
       "value": {
-        "low": 5.72,
-        "best": 14.037,
-        "high": 22.35
+        "low": 7.89,
+        "best": 18.454,
+        "high": 29.02
       },
       "kind": "observed",
       "interval": 0.95,
@@ -611,24 +624,24 @@
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Treatment 14.037 (4.242)"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Treatment 18.454 (5.390)"
       },
-      "explainer": "Per capita consumption excluding migrant members (column 1), intention to treat; 95% interval ± 1.96 × 4.242. The column counting migrants at the household average is larger; this one is the cautious reading of the same survey."
+      "explainer": "Per capita consumption counting migrant members at the household average (column 2), intention to treat; 95% interval ± 1.96 × 5.39. The paper notes that leaving migrants out (column 1) understates the effect, since treated households' members migrate more and send money home."
     },
     {
       "id": "thp_ctrl_10y",
       "section": "effect",
       "label": "Control group's monthly consumption per person, 10 years (2018 PPP $)",
       "format": "usd",
-      "value": 79.88,
+      "value": 86.88,
       "kind": "observed",
       "source": {
         "title": "Banerjee, Duflo and Sharma, 'Long-term Effects of the Targeting the Ultra Poor Program', NBER Working Paper 28074 (2020; published in American Economic Review: Insights 3(4), 2021)",
         "url": "https://www.nber.org/system/files/working_papers/w28074/w28074.pdf",
         "retrieved": "2026-11-15",
-        "page": "Table 2, PDF p. 21",
-        "quote": "Control Mean 79.88"
+        "page": "Table 2, PDF p. 21, column 2",
+        "quote": "Control Mean 86.88"
       },
       "explainer": "Only the ratio of effect to this mean matters, so currency and year cancel."
     },
@@ -655,7 +668,7 @@
         "quote": "We track economic and health outcomes for treated and control households through four subsequent survey waves administered at 18 months, 3 years, 7 years, and 10 years following the transfer of productive assets."
       },
       "unit": "years",
-      "explainer": "Each survey stands for the years around it: years 9 and 10, ten years in all."
+      "explainer": "The survey dates are observed; which years each stands for is our rule: every year takes the survey nearest to it (midpoints at 2.25, 5 and 8.5 years), so this survey stands for years 9 and 10, ten years in all."
     },
     {
       "id": "fade_rate",
@@ -833,6 +846,23 @@
       "explainer": "Donors' grants are restricted and held until spent."
     },
     {
+      "id": "grant_unutilized_open_inr",
+      "section": "adjustments",
+      "label": "Grants received but not yet spent, 31 March 2024 (rupees)",
+      "format": "number",
+      "value": 112886082,
+      "kind": "observed",
+      "source": {
+        "title": "Bandhan-Konnagar, Annual Report 2024-25, with the audited financial statements for the year ended 31 March 2025 (JSUS & Associates)",
+        "url": "https://www.bandhan.org/wp-content/uploads/2025/10/Bandhan-Konnagar-24-25_AR_20-09_25.pdf",
+        "retrieved": "2026-11-15",
+        "page": "Balance sheet, printed p. 59 (PDF p. 61), column 31-Mar-24",
+        "quote": "Grant Unutilized 6 47,53,19,377 11,28,86,082"
+      },
+      "unit": "INR",
+      "explainer": "The same balance a year earlier; the year-end figure is swollen by foundation grants received in December 2024 and March 2025, so the wait uses the mean of the two."
+    },
+    {
       "id": "grants_utilized_inr",
       "section": "adjustments",
       "label": "Donors' grants spent in the year (rupees)",
@@ -854,8 +884,8 @@
       "section": "adjustments",
       "label": "Years a donated rupee waits before it is spent",
       "format": "number",
-      "formula": "grant_unutilized_inr / grants_utilized_inr",
-      "explainer": "Unspent grants over a year's grant spending, about 0.54 years. A gift is a restricted grant, so it waits in the grant pool, not in the corpus."
+      "formula": "(grant_unutilized_inr + grant_unutilized_open_inr) * 0.5 / grants_utilized_inr",
+      "explainer": "The year's mean of unspent grants over a year's grant spending, about 0.33 years. A gift is a restricted grant, so it waits in the grant pool, not in the corpus."
     },
     {
       "id": "delay_years",
@@ -1071,7 +1101,7 @@
         "quote": "Number of Beneficiaries (BEP) 1,50,162 1,45,933 1,44,133",
         "note": "Cumulative at the end of each fiscal year; 150,162 - 145,933 = 4,229 new in 2024-25."
       },
-      "explainer": "Children who joined Bandhan Education Centres (free remedial centres run by trained local women) and Bandhan Academies (low-fee primary schools) in the year, Bandhan-Konnagar's count."
+      "explainer": "The annual report says its programme figures other than states and staff are cumulative (p. 8), and Bandhan Bank calls its part of the same count cumulative outreach (bank annual report p. 96), so the year's rise is new students. Children who joined Bandhan Education Centres (free remedial centres run by trained local women) and Bandhan Academies (low-fee primary schools) in the year, Bandhan-Konnagar's count."
     },
     {
       "id": "ed_years_enrolled",
@@ -1282,7 +1312,7 @@
     {
       "id": "eu_years",
       "section": "effect",
-      "label": "Years the trainees stay ahead of untrained peers",
+      "label": "Years skills trainees stay ahead of untrained peers",
       "format": "number",
       "value": {
         "low": 2,
@@ -1376,7 +1406,7 @@
     {
       "id": "fl_years",
       "section": "effect",
-      "label": "Years the gain lasts",
+      "label": "Years financial literacy graduates keep their new money habits",
       "format": "number",
       "value": {
         "low": 1,
@@ -1446,7 +1476,7 @@
     {
       "id": "fa_years",
       "section": "effect",
-      "label": "Years the gain lasts",
+      "label": "Years a supported farm or business keeps its higher income",
       "format": "number",
       "value": {
         "low": 1,
@@ -1497,7 +1527,13 @@
         "high": 45000
       },
       "kind": "judgment",
-      "explainer": "The Government of Bihar's graduation programme, launched in 2018, targets 200,000 ultra-poor households (annual report p. 13) and had enrolled 210,218 by April 2026 (J-PAL's update): about 26,000 a year. Our judgment 25,000, 10,000 to 45,000."
+      "source": {
+        "title": "J-PAL, 'Government of Bihar, JEEViKA and J-PAL South Asia present impact evaluation findings of Satat Jeevikoparjan Yojana', 16 October 2026",
+        "url": "https://www.povertyactionlab.org/updates/government-bihar-jeevika-and-j-pal-south-asia-present-impact-evaluation-findings-satat",
+        "retrieved": "2026-11-15",
+        "quote": "As of April 2026, SJY has reached 210,218 households across all 38 districts of Bihar"
+      },
+      "explainer": "The Government of Bihar's graduation programme, launched in 2018, targets 200,000 ultra-poor households (annual report p. 13) and had enrolled 210,218 by April 2026 (J-PAL's update of 16 October 2026): about 26,000 a year. Our judgment 25,000, 10,000 to 45,000."
     },
     {
       "id": "sj_gov_spend_inr",
@@ -1544,7 +1580,7 @@
     {
       "id": "sj_years",
       "section": "effect",
-      "label": "Years the Bihar gain lasts",
+      "label": "Years Bihar graduation households keep their consumption gain",
       "format": "number",
       "value": {
         "low": 3,
