@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "united-way",
   "owner": "charityevals",
-  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to local agencies (about 58% of its programme spending), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash; other grants and United Way's own services (about 80% of programme spending, including the cost of running the grants) built from the US research on programmes of their kind, children's tutoring, mentoring and early learning valued by the adult earnings the trials imply, job training and coaching by earnings gained, health services at what low-income recipients would pay for them; 211 by the help callers find that they wouldn't have found otherwise; and tax help by fees saved and credits that would have gone unclaimed. Every branch is discounted for missing data, since United Way measures none of these outcomes itself. The result, about 0.010 years of healthy life per $1,000 (0.0007 to 0.14), is low because the help goes to people in the US who consume around $41,000 a year: on the site's log-income scale a dollar does about a sixtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. About four-fifths of the result is the children's and youth programmes' lifelong earnings, so the discount rate, what a child's place in such a programme costs and how much it raises later earnings drive it, with the missing-data and income-to-health sliders.",
+  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to local agencies (about 58% of its programme spending), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash; other grants and United Way's own services (about 80% of programme spending, including the cost of running the grants) built from the US research on programmes of their kind, children's tutoring, mentoring and early learning valued by the adult earnings the trials imply, job training and coaching by earnings gained, health services at what low-income recipients would pay for them; 211 by the help callers find that they wouldn't have found otherwise; and tax help by fees saved and credits that would have gone unclaimed. Every branch is discounted for missing data, since United Way measures none of these outcomes itself. The result, about 0.009 years of healthy life per $1,000, is low because the help goes to people in the US who consume around $23,000 a year: on the site's log-income scale a dollar does about a thirtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. About three-fifths of the result is the children's and youth programmes' lifelong earnings, so the discount rate, how much the programmes raise earnings and what they cost drive it, with the missing-data and income-to-health sliders.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: United Way (US network)",
@@ -147,9 +147,9 @@
       "label": "Total expenses of the US United Way network, fiscal year to June 2025",
       "format": "usd",
       "value": {
-        "low": 3400000000.0,
-        "best": 3500000000.0,
-        "high": 3600000000.0
+        "low": 3400000000,
+        "best": 3500000000,
+        "high": 3600000000
       },
       "kind": "estimate",
       "source": {
@@ -167,9 +167,9 @@
       "label": "Charitable services (programme expenses) of the US United Way network, fiscal year to June 2025",
       "format": "usd",
       "value": {
-        "low": 2700000000.0,
-        "best": 2900000000.0,
-        "high": 2950000000.0
+        "low": 2700000000,
+        "best": 2900000000,
+        "high": 2950000000
       },
       "kind": "estimate",
       "source": {
@@ -250,22 +250,6 @@
       "label": "Other grants (education, early learning and child care, youth, health, financial stability)",
       "format": "usd",
       "formula": "grants_spend - bn_spend"
-    },
-    {
-      "id": "uww_total_expenses_2024",
-      "section": "cost",
-      "label": "United Way Worldwide (the national office) total expenses, 2024 (context)",
-      "format": "usd",
-      "value": 77350000,
-      "kind": "observed",
-      "source": {
-        "title": "United Way Worldwide and Subsidiaries, consolidated financial statements, December 31, 2024 and 2023 (Grant Thornton, 30 May 2025)",
-        "url": "https://www.unitedway.org/sites/default/files/2025-09/2024%20United%20Way%20Worldwide%20FS%20%281%29.pdf",
-        "retrieved": "2026-11-03",
-        "page": "Consolidated statement of activities, p. 6",
-        "quote": "Total expenses 77,350 (in thousands)"
-      },
-      "explainer": "Context only, not used in the result: the national office (brand, network support, donor-advised giving, training), funded largely by the locals' membership dues ($28.8 million in 2024). About 2% of the network's spending and part of its cost through those dues; a gift to United Way Worldwide itself is valued here as the network's average dollar."
     },
     {
       "id": "people_served_network",
@@ -433,11 +417,27 @@
       "explainer": "United Way's count for the 2023 filing season ('almost 1 million'); the low end allows for sites United Ways support only in part. Free tax filing is the largest of United Way's own programmes with published outcomes; its own branch (Convention 4)."
     },
     {
+      "id": "tax_mft_returns",
+      "section": "reach",
+      "label": "Federal returns filed through MyFreeTaxes in a year",
+      "format": "integer",
+      "value": 45000,
+      "kind": "observed",
+      "source": {
+        "title": "United Way, 'United Way and MyFreeTaxes' and 'IRS Volunteer Income Tax Assistance Program (VITA)' (two-page fact sheet, 2023-24)",
+        "url": "https://uwcf.org/wp-content/uploads/2025/01/MFT_and_VITA_One-Pager_1.pdf",
+        "retrieved": "2026-11-15",
+        "page": "p. 1, 'United Way and MyFreeTaxes'",
+        "quote": "In 2023 alone, MyFreeTaxes facilitated the preparation of approximately 45,000 federal returns"
+      },
+      "explainer": "United Way's free self-filing site, paid for from the same tax-help spending (tax_uw_cost_per_return); its returns are valued as the VITA returns are."
+    },
+    {
       "id": "tax_refunds",
       "section": "reach",
       "label": "Refunds on those returns",
       "format": "usd",
-      "value": 1800000000.0,
+      "value": 1800000000,
       "kind": "observed",
       "source": {
         "title": "United Way, 'United Way and MyFreeTaxes' and 'IRS Volunteer Income Tax Assistance Program (VITA)' (two-page fact sheet, 2023-24)",
@@ -493,7 +493,7 @@
       "section": "reach",
       "label": "People in the households filing",
       "format": "integer",
-      "formula": "tax_returns * household_size"
+      "formula": "(tax_returns + tax_mft_returns) * household_size"
     },
     {
       "id": "own_spend",
@@ -698,30 +698,281 @@
       "explainer": "Our judgment, from the same anchors as the children's share (Abilene's Financial Stability 40% including basic needs; United Way of Puerto Rico puts 22% of the funds it raises into financial stability; Greater Houston's THRIVE financial-stability network is its largest restricted fund). 30%, from 15% to 45%. The rest, 1 minus the two shares (30% at the defaults), is health and other services."
     },
     {
-      "id": "edu_cost_per_child",
+      "id": "tutoring_share",
       "section": "effect",
-      "label": "Children and youth: cost per child of a year of a programme as trialled",
-      "format": "usd",
+      "label": "Children and youth: share of the spending on tutoring and reading",
+      "format": "percent",
       "value": {
-        "low": 1200,
-        "best": 3000,
-        "high": 8000
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the full cost (the agency's overhead included, so grants are not reduced by agency_programme_share here) of one child's year in a programme of the kind the trials below test, since the trials' effects come with their dose. Anchors: Big Brothers Big Sisters community mentoring about $1,500 to $3,300 per youth (Alfonso and others 2019; the Washington State Institute for Public Policy uses $4,399 per participant a year), high-dosage tutoring about $3,000 to $4,000 per student-year (the Chicago Saga math tutoring trials, about $3,800), state pre-kindergarten several times that. $3,000, from $1,200 to $8,000: lighter-touch programmes cost less but would do less than the trials."
+      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 15% to 35%; after-school programmes take the rest."
     },
     {
-      "id": "edu_effect_sd",
+      "id": "tutoring_effect_sd",
       "section": "effect",
-      "label": "Children and youth: effect of a programme year, in standard deviations of the outcomes",
+      "label": "Children and youth, tutoring and reading: effect of a programme year, in standard deviations of the outcomes",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.19,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Tutoring and reading at scale: the midpoint of 0.16 to 0.22 SD on standardised tests (Kraft and others, 'What Impacts Should We Expect From Tutoring at Scale?', Review of Educational Research 2026, https://doi.org/10.3102/00346543261446660: 'Pooled effect sizes from studies with stronger target-equivalence are .16 to .22 standard deviations, relative to .40 standard deviations in our full sample.'), in the subset of its 263 RCTs with stronger target-equivalence (larger, policy-relevant programmes), against 0.40 in the full sample of mostly small efficacy trials; the earlier working paper (EdWorkingPaper ai24-1031, https://edworkingpapers.com/ai24-1031) puts the at-scale effects at 'only a third to a half as large' as the full sample, 0.13 to 0.20, the same range. 0.19, from 0.10 (lighter, volunteer-run reading programmes) to 0.25. Whether United Way's grantees run at the trials' dose is the missing-data step's question, not this row's."
+    },
+    {
+      "id": "tutoring_cost",
+      "section": "effect",
+      "label": "Children and youth, tutoring and reading: cost per child of a year of a programme as trialled (US$)",
+      "format": "usd",
+      "value": {
+        "low": 2500,
+        "best": 3800,
+        "high": 4500
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, the full cost of one student-year of high-dosage tutoring (the agency's overhead included, so grants are not reduced by agency_programme_share here): the Chicago Saga math tutoring trials, about $3,800; most at-scale programmes about $3,000 to $4,000. $3,800, from $2,500 (volunteer-run reading programmes) to $4,500."
+    },
+    {
+      "id": "tutoring_volunteer_hours",
+      "section": "adjustments",
+      "label": "Children and youth, tutoring and reading: volunteer hours per child-year",
+      "format": "number",
+      "unit": "hours",
+      "value": {
+        "low": 0,
+        "best": 10,
+        "high": 40
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: high-dosage tutoring at scale is mostly by paid tutors (the Saga trials' fellows), while United Way's reading programmes recruit volunteer readers for an hour or so a week through the school year. 10 hours a student-year, from 0 to 40."
+    },
+    {
+      "id": "tutoring_ln_gain",
+      "section": "effect",
+      "label": "Children and youth, tutoring and reading: ln(consumption) gain per child, all working years, discounted",
+      "format": "number",
+      "formula": "ln(1 + tutoring_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+    },
+    {
+      "id": "tutoring_attribution",
+      "section": "adjustments",
+      "label": "Children and youth, tutoring and reading: the paid programme's share of the resources behind the effect",
+      "format": "percent",
+      "formula": "tutoring_cost / (tutoring_cost + tutoring_volunteer_hours * volunteer_wage)",
+      "explainer": "The programme's cost over its cost plus the volunteers' unpaid hours at the US volunteer wage (Convention 2): the volunteers' time is part of what the trials measure."
+    },
+    {
+      "id": "mentoring_share",
+      "section": "effect",
+      "label": "Children and youth: share of the spending on mentoring",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 15% to 35%; after-school programmes take the rest."
+    },
+    {
+      "id": "mentoring_effect_sd",
+      "section": "effect",
+      "label": "Children and youth, mentoring: effect of a programme year, in standard deviations of the outcomes",
       "format": "number",
       "value": {
         "low": 0.05,
-        "best": 0.16,
+        "best": 0.21,
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "Our judgment, a blend of the research below. The research on programmes of this kind at the scale United Way funds them, weighted by a judged quarter each of its children's spending. Tutoring and reading at scale, 0.19 SD: the midpoint of 0.16 to 0.22 (Kraft and others, 'What Impacts Should We Expect From Tutoring at Scale?', Review of Educational Research 2026, https://doi.org/10.3102/00346543261446660: 'Pooled effect sizes from studies with stronger target-equivalence are .16 to .22 standard deviations, relative to .40 standard deviations in our full sample.') on standardised tests in the published article's large, policy-relevant RCTs (263 trials), against 0.40 in its full sample of mostly small efficacy trials; the earlier working paper (EdWorkingPaper ai24-1031, https://edworkingpapers.com/ai24-1031) puts the at-scale effects at 'only a third to a half as large' as the full sample, 0.13 to 0.20, the same range. Youth mentoring, 0.21: Raposa and others (Journal of Youth and Adolescence 2019), g = 0.21 across outcomes in 70 studies, mean age 12; the Big Brothers Big Sisters community-mentoring RCT finds small positive effects on emotional and conduct outcomes at 13 months (Herrera and others 2023) and, in its four-year report, less violent delinquency and substance use but no significant effect on arrests (DuBois and others, June 2025, https://youthrex.com/wp-content/uploads/2025/10/YRS-4-Year-Report_062025.pdf). Early learning, 0.15: Head Start's end-of-programme gains in its national RCT, about 0.1 to 0.2 SD on cognitive outcomes, fading on tests later (Puma and others, Head Start Impact Study final report, US HHS 2010). After-school programmes, 0.09: the national evaluation of 21st Century Community Learning Centers found no academic gains (James-Burdumy and others, Mathematica for the US Department of Education, 2005), while Durlak, Weissberg and Pachan's meta-analysis (American Journal of Community Psychology 2010) finds 0.12 on grades and 0.17 on tests (Table 3), with the effects in the programmes using sequenced, active, focused and explicit (SAFE) practices and the rest near zero; 0.09 is between them. (0.19 + 0.21 + 0.15 + 0.09) ÷ 4 = 0.16. The low end, 0.05, is programmes with little effect, 0.30 the high end. Whether United Way's grantees run at the trials' dose is the missing-data step's question, not this row's."
+      "explainer": "Our judgment. Youth mentoring: Raposa and others (Journal of Youth and Adolescence 2019, https://doi.org/10.1007/s10964-019-00982-8), g = 0.21 across outcomes in 70 studies, mean age 12; the Big Brothers Big Sisters community-mentoring RCT finds small positive effects on emotional and conduct outcomes at 13 months (Herrera and others 2023) and, in its four-year report, less violent delinquency and substance use but no significant effect on arrests (DuBois and others, June 2025, https://youthrex.com/wp-content/uploads/2025/10/YRS-4-Year-Report_062025.pdf). 0.21, from 0.05 (the four-year null on arrests) to 0.30."
+    },
+    {
+      "id": "mentoring_cost",
+      "section": "effect",
+      "label": "Children and youth, mentoring: cost per child of a year of a programme as trialled (US$)",
+      "format": "usd",
+      "value": {
+        "low": 1500,
+        "best": 2500,
+        "high": 4400
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, the agency's full cash cost of a mentored youth-year: Big Brothers Big Sisters community mentoring about $1,500 to $3,300 per youth (Alfonso and others 2019); the Washington State Institute for Public Policy uses $4,399 per participant a year. $2,500, from $1,500 to $4,400. The mentor's own time is not in it: mentoring_volunteer_hours."
+    },
+    {
+      "id": "mentoring_volunteer_hours",
+      "section": "adjustments",
+      "label": "Children and youth, mentoring: volunteer hours per child-year",
+      "format": "number",
+      "unit": "hours",
+      "value": {
+        "low": 30,
+        "best": 60,
+        "high": 100
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: Big Brothers Big Sisters community matches meet two to four times a month for a few hours, about 50 to 100 hours a year; the mentor's time is part of what the trials measure. 60 hours a youth-year, from 30 to 100."
+    },
+    {
+      "id": "mentoring_ln_gain",
+      "section": "effect",
+      "label": "Children and youth, mentoring: ln(consumption) gain per child, all working years, discounted",
+      "format": "number",
+      "formula": "ln(1 + mentoring_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+    },
+    {
+      "id": "mentoring_attribution",
+      "section": "adjustments",
+      "label": "Children and youth, mentoring: the paid programme's share of the resources behind the effect",
+      "format": "percent",
+      "formula": "mentoring_cost / (mentoring_cost + mentoring_volunteer_hours * volunteer_wage)",
+      "explainer": "The programme's cost over its cost plus the volunteers' unpaid hours at the US volunteer wage (Convention 2): the volunteers' time is part of what the trials measure."
+    },
+    {
+      "id": "early_share",
+      "section": "effect",
+      "label": "Children and youth: share of the spending on early learning",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: United Way publishes no split of its children's and youth spending; its locals describe early learning, grade-level reading and tutoring, mentoring and after-school programmes as the main kinds. A quarter each, from 15% to 35%; after-school programmes take the rest."
+    },
+    {
+      "id": "early_effect_sd",
+      "section": "effect",
+      "label": "Children and youth, early learning: effect of a programme year, in standard deviations of the outcomes",
+      "format": "number",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Early learning: Head Start's end-of-programme gains in its national RCT, about 0.1 to 0.2 SD on cognitive outcomes, fading on tests later (Puma and others, Head Start Impact Study final report, US HHS 2010). 0.15, from 0.05 to 0.25."
+    },
+    {
+      "id": "early_cost",
+      "section": "effect",
+      "label": "Children and youth, early learning: cost per child of a year of a programme as trialled (US$)",
+      "format": "usd",
+      "value": {
+        "low": 6000,
+        "best": 9000,
+        "high": 14000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, the full cost of a child's year of pre-kindergarten: state pre-K spent $8,856 a child from all reported sources in 2023-24 (NIEER, The State of Preschool 2024), Head Start more per place. $9,000, from $6,000 (part-day places) to $14,000."
+    },
+    {
+      "id": "early_ln_gain",
+      "section": "effect",
+      "label": "Children and youth, early learning: ln(consumption) gain per child, all working years, discounted",
+      "format": "number",
+      "formula": "ln(1 + early_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+    },
+    {
+      "id": "early_attribution",
+      "section": "adjustments",
+      "label": "Children and youth, early learning: the paid programme's share of the resources behind the effect",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "1: pre-kindergarten is taught by paid staff; no volunteers' time is in the trialled effect."
+    },
+    {
+      "id": "afterschool_share",
+      "section": "effect",
+      "label": "Children and youth: share of the spending on after-school programmes",
+      "format": "percent",
+      "formula": "1 - tutoring_share - mentoring_share - early_share",
+      "explainer": "The rest of the children's and youth spending after tutoring, mentoring and early learning."
+    },
+    {
+      "id": "afterschool_effect_sd",
+      "section": "effect",
+      "label": "Children and youth, after-school programmes: effect of a programme year, in standard deviations of the outcomes",
+      "format": "number",
+      "value": {
+        "low": 0.02,
+        "best": 0.09,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as the Boys & Girls Clubs model's after-school effect: the national evaluation of 21st Century Community Learning Centers found no academic gains (James-Burdumy and others, Mathematica for the US Department of Education, 2005), while Durlak, Weissberg and Pachan's meta-analysis (American Journal of Community Psychology 2010) finds 0.12 on grades and 0.17 on tests (Table 3), with the effects in the programmes using sequenced, active, focused and explicit (SAFE) practices and the rest near zero; 0.09 is between them, from 0.02 to 0.20."
+    },
+    {
+      "id": "afterschool_cost",
+      "section": "effect",
+      "label": "Children and youth, after-school programmes: cost per child of a year of a programme as trialled (US$)",
+      "format": "usd",
+      "value": {
+        "low": 950,
+        "best": 1700,
+        "high": 2900
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, the cost of a member-year of a Boys & Girls Club, the largest after-school provider, as that model takes it ($1,700, from $950 to $2,900: Boston about $2,300, the Valley of Arizona about $1,150, the movement's staff costs about $1,700)."
+    },
+    {
+      "id": "afterschool_volunteer_hours",
+      "section": "adjustments",
+      "label": "Children and youth, after-school programmes: volunteer hours per child-year",
+      "format": "number",
+      "unit": "hours",
+      "value": {
+        "low": 0,
+        "best": 3,
+        "high": 10
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, as the Boys & Girls Clubs model: 160,000 volunteers giving about 30 hours each over 1.6 million members, about 3 hours a member-year, from 0 to 10."
+    },
+    {
+      "id": "afterschool_ln_gain",
+      "section": "effect",
+      "label": "Children and youth, after-school programmes: ln(consumption) gain per child, all working years, discounted",
+      "format": "number",
+      "formula": "ln(1 + afterschool_effect_sd * edu_earnings_per_sd) * edu_pv_factor"
+    },
+    {
+      "id": "afterschool_attribution",
+      "section": "adjustments",
+      "label": "Children and youth, after-school programmes: the paid programme's share of the resources behind the effect",
+      "format": "percent",
+      "formula": "afterschool_cost / (afterschool_cost + afterschool_volunteer_hours * volunteer_wage)",
+      "explainer": "The programme's cost over its cost plus the volunteers' unpaid hours at the US volunteer wage (Convention 2): the volunteers' time is part of what the trials measure."
+    },
+    {
+      "id": "edu_pv_factor",
+      "section": "effect",
+      "label": "Children and youth: present value of a lasting proportional earnings gain, per unit of the gain",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, edu_working_years) / (1 + $discount_rate) ^ edu_years_until_work * edu_resource_sharing",
+      "explainer": "Each working year's proportional gain on the log scale, discounted to the programme year at the shared rate, shared with the household. A proportional gain is the same on the log scale whatever the adult's income, so the clients' consumption share doesn't enter. Taxes on the gain and benefits lost are not netted out (the site's other income models don't net them either)."
+    },
+    {
+      "id": "edu_ln_gain_per_dollar",
+      "section": "effect",
+      "label": "Children and youth: ln(consumption) gain per dollar",
+      "format": "number",
+      "formula": "tutoring_share * tutoring_ln_gain / tutoring_cost + mentoring_share * mentoring_ln_gain / mentoring_cost + early_share * early_ln_gain / early_cost + afterschool_share * afterschool_ln_gain / afterschool_cost",
+      "explainer": "Each kind's gain per child over its cost per child, weighted by its share of the children's spending."
+    },
+    {
+      "id": "edu_credited_ln_gain_per_dollar",
+      "section": "adjustments",
+      "label": "Children and youth: ln(consumption) gain per dollar, the paid programmes' share",
+      "format": "number",
+      "formula": "tutoring_share * tutoring_ln_gain / tutoring_cost * tutoring_attribution + mentoring_share * mentoring_ln_gain / mentoring_cost * mentoring_attribution + early_share * early_ln_gain / early_cost * early_attribution + afterschool_share * afterschool_ln_gain / afterschool_cost * afterschool_attribution",
+      "explainer": "As edu_ln_gain_per_dollar, each kind times the paid programme's share of the resources behind its effect."
     },
     {
       "id": "edu_earnings_per_sd",
@@ -742,7 +993,7 @@
         "high": 18
       },
       "kind": "judgment",
-      "explainer": "Our judgment: United Way's youth work runs from early learning (age 3 to 5, 17 to 19 years before work at about 22) to mentoring and after-school programmes (average age about 12 in the mentoring trials, about 10 years). 13 years, from 8 to 18; every year is discounted at the shared rate."
+      "explainer": "Our judgment: United Way's youth work runs from early learning (age 3 to 5, 17 to 19 years before work at about 22) to mentoring and after-school programmes (average age about 12 in the mentoring trials, about 10 years). 13 years, from 8 to 18; every year is discounted at the shared rate. One figure for all four kinds: early learning, the furthest from work, is a quarter of the spending."
     },
     {
       "id": "edu_working_years",
@@ -759,14 +1010,6 @@
       "format": "number",
       "formula": "@givewell_shared.resource_sharing_multiplier",
       "explainer": "The site's shared figure for a later-life earnings gain shared with the earner's household (GiveWell's 2, from 1 to 3), as in every model that values a childhood programme's adult income."
-    },
-    {
-      "id": "edu_ln_gain_per_child",
-      "section": "effect",
-      "label": "Children and youth: ln(consumption) gain per child, all working years, discounted",
-      "format": "number",
-      "formula": "ln(1 + edu_effect_sd * edu_earnings_per_sd) * pv_annuity_due(1, $discount_rate, edu_working_years) / (1 + $discount_rate) ^ edu_years_until_work * edu_resource_sharing",
-      "explainer": "The proportional earnings gain on the log scale for each working year, discounted to the programme year at the shared rate, shared with the household. A proportional gain is the same on the log scale whatever the adult's income, so the clients' consumption share doesn't enter. Taxes on the gain and benefits lost are not netted out (the site's other income models don't net them either)."
     },
     {
       "id": "fin_cost_per_participant",
@@ -861,7 +1104,7 @@
       "section": "effect",
       "label": "Other grants and own services: ln(consumption) gain per dollar of services",
       "format": "number",
-      "formula": "svc_edu_share * edu_ln_gain_per_child / edu_cost_per_child + svc_fin_share * fin_ln_gain_per_participant / fin_cost_per_participant + (1 - svc_edu_share - svc_fin_share) * hlth_ln_gain_per_participant / hlth_cost_per_participant",
+      "formula": "svc_edu_share * edu_ln_gain_per_dollar + svc_fin_share * fin_ln_gain_per_participant / fin_cost_per_participant + (1 - svc_edu_share - svc_fin_share) * hlth_ln_gain_per_participant / hlth_cost_per_participant",
       "explainer": "Each kind of service's gain per participant over its cost per participant, weighted by its share of the spending. The reach is the spending divided by what the trialled programmes cost: United Way's count of people served doesn't say who got which service."
     },
     {
@@ -1052,20 +1295,28 @@
       "explainer": "1: this branch is valued at what United Way's own dollars buy (its spending times what a dollar of the services is worth), so nobody else's resources are in the value counted. Volunteers and co-funders working alongside (United Way counts 1.5 million volunteers) add services that aren't counted here, so they take no share of this value; Convention 2 applies where the value is an outcome several contributors produce, as for 211 and tax help."
     },
     {
+      "id": "svc_attribution_share",
+      "section": "adjustments",
+      "label": "Other grants and own services: the paid services' share of the resources behind the value counted",
+      "format": "percent",
+      "formula": "(svc_edu_share * edu_credited_ln_gain_per_dollar + svc_fin_share * fin_ln_gain_per_participant / fin_cost_per_participant + (1 - svc_edu_share - svc_fin_share) * hlth_ln_gain_per_participant / hlth_cost_per_participant) / svc_ln_gain_per_dollar",
+      "explainer": "Each kind of service's attribution weighted by its value per dollar. The children's programmes share their effect with the volunteer mentors, tutors and club volunteers whose time is part of what the trials measure (Convention 2); financial coaching and health services are valued at what United Way's own dollars buy, so nobody else's resources are in that value."
+    },
+    {
       "id": "og_attribution_share",
       "section": "adjustments",
       "label": "Other grants: United Way's share of the resources behind the value counted",
       "format": "percent",
-      "formula": "1",
-      "explainer": "1: this branch is valued at what United Way's own dollars buy (its spending times what a dollar of the services is worth), so nobody else's resources are in the value counted. Volunteers and co-funders working alongside (United Way counts 1.5 million volunteers) add services that aren't counted here, so they take no share of this value; Convention 2 applies where the value is an outcome several contributors produce, as for 211 and tax help."
+      "formula": "svc_attribution_share",
+      "explainer": "The services' attribution (svc_attribution_share): the children's programmes share their credit with the volunteers whose time is in the trialled effect; the rest is valued at what United Way's own dollars buy."
     },
     {
       "id": "own_attribution_share",
       "section": "adjustments",
       "label": "Own services: United Way's share of the resources behind the value counted",
       "format": "percent",
-      "formula": "1",
-      "explainer": "1: this branch is valued at what United Way's own dollars buy (its spending times what a dollar of the services is worth), so nobody else's resources are in the value counted. Volunteers and co-funders working alongside (United Way counts 1.5 million volunteers) add services that aren't counted here, so they take no share of this value; Convention 2 applies where the value is an outcome several contributors produce, as for 211 and tax help."
+      "formula": "svc_attribution_share",
+      "explainer": "The services' attribution (svc_attribution_share): the children's programmes share their credit with the volunteers whose time is in the trialled effect; the rest is valued at what United Way's own dollars buy."
     },
     {
       "id": "bn_counterfactual_adj",
@@ -1367,7 +1618,7 @@
       "label": "Tax help: missing-data step",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Tax help: thin. The returns and refunds are United Way's counts, but whether filers would have paid a preparer or missed credits is a judgment, not a measured counterfactual. So it counts at the shared slider (templates.md Convention 12)."
+      "explainer": "Tax help: thin. The returns and refunds are United Way's counts, but the fee saved per return is MyFreeTaxes' figure for self-filers, not a measure of what VITA's filers would have paid. So it counts at the shared slider (templates.md Convention 12)."
     },
     {
       "id": "missing_data_adj",
@@ -1460,11 +1711,11 @@
       "format": "percent",
       "value": {
         "low": -0.05,
-        "best": 0.05,
+        "best": 0.07,
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Our judgment, effects not modelled, each with its sign: homelessness averted by rent help beyond the money (Evans, Sullivan and Wallskog, Science 2016) and any deaths it averts (+); youth programmes' effects on crime and teen births beyond earnings (+; the earnings are modelled); public-policy work for tax credits and 211 (+); the national office's administration of FEMA's Emergency Food and Shelter Program as fiscal agent (+, small); grants that keep weak agencies going out of habit (−). +5%, from −5% to +20%."
+      "explainer": "Our judgment, effects not modelled, each with its sign: homelessness averted by rent help beyond the money (Evans, Sullivan and Wallskog, Science 2016) and any deaths it averts (+); youth programmes' effects on crime and teen births beyond earnings (+; the earnings are modelled); public-policy work for tax credits and 211 (+); the national office's administration of FEMA's Emergency Food and Shelter Program as fiscal agent (+, small); collective-impact convening, nonprofit capacity building and the volunteers it mobilises (Generation Next, Volunteer United in Greater Twin Cities' note 15; +, about 2%), half of the own-programme spending counted as cost only; grants that keep weak agencies going out of habit (−). +7%, from −5% to +20%."
     },
     {
       "id": "uov_bridged",
@@ -1509,13 +1760,35 @@
       "unit": "DALYs"
     },
     {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a gift waits before it is spent",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0.25,
+        "best": 0.75,
+        "high": 1.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: workplace campaign pledges, United Way's main income, are made in the autumn campaign, paid by payroll deduction over the following year and allocated in the next grant cycle; gifts to 211, tax help and United Way's own programmes are spent sooner. 0.75 years, from 0.25 to 1.5."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait before the gift is spent",
+      "format": "multiple",
+      "formula": "(1 + $discount_rate) ^ -gift_to_grant_years",
+      "explainer": "The wait discounted at the shared rate."
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj)",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby) * (1 + unmodelled_benefits_adj) * wait_discount",
       "unit": "DALYs",
-      "explainer": "Every outcome in healthy years, each branch already adjusted (Convention 4), times the share for effects not modelled."
+      "explainer": "Every outcome in healthy years, each branch already adjusted (Convention 4), times the share for effects not modelled and the discount for the wait before a gift is spent."
     },
     {
       "id": "dalys_per_dollar",
