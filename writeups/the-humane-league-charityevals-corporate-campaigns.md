@@ -29,7 +29,7 @@ The year's spending is set against the year's switches, so the next dollar count
 THL has three models of its own on the site, and each hen is credited only once:
 
 - **THL UK's switches**, and its supermarket and broiler work, are in the grants line. They come out of THL's count here.
-- **The Alliance members' accountability wins** are one pool. The grants model credits the grants' share of it and the other-programmes model the alliance's running. Those switches come out of THL's count here.
+- **The switches at companies Alliance members pressed** are credited to the Alliance. One shared figure for them comes out of THL's count here and in the other-programmes model.
 - **The switches at companies THL pressed itself** are shared between this line and the other-programmes model's mobilisation, by each one's share of the same resources. Together they never get more than THL's share.
 - **THL's four new commitments of 2025** are in the other-programmes model only.
 
