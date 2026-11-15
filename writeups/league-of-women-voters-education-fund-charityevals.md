@@ -1,6 +1,6 @@
 ### Summary
 
-The League of Women Voters Education Fund runs VOTE411.org, registers voters, brings voting-rights lawsuits and campaigns for fairer US elections. Our model of its year to June 2025 comes to **<span data-figure="headline" data-model="league-of-women-voters-education-fund-charityevals">0.012</span> years of healthy life per 1,000 dollars**. That is about a fifth of the site's global-health median and about half our figure for the Common Cause Education Fund, because most of the League's money goes to voter information, which we count as acting on democracy less directly than litigation. It is a very uncertain figure, built mostly on judgment.
+The League of Women Voters Education Fund runs VOTE411.org, registers voters, brings voting-rights lawsuits and campaigns for fairer US elections. Our model of its year to June 2025 comes to **<span data-figure="headline" data-model="league-of-women-voters-education-fund-charityevals">0.011</span> years of healthy life per 1,000 dollars**. Most of the League's money goes to voter information, which we count as acting on democracy less directly than litigation. It is a very uncertain figure, built mostly on judgment.
 
 ### What the charity does
 
@@ -21,16 +21,16 @@ The work does good in two ways. First, it helps defend US democracy against a sl
 
 The model has four branches. Each counts what the whole field or movement achieved in a year, takes the Education Fund's share of the money behind it, and values better government as income.
 
-- **Direct work against a slide (about 32% of the result).** This branch reads the same shared figures as our Common Cause, Brennan Center and Protect Democracy models. Forecasters give the US an 11% chance of losing its democracy rating before 2030, and a year of the whole pro-democracy field's work cuts that chance by about a twentieth. A slide would cost a share of democracy's long-run income gain, built up over 25 years. We judge 15% of the programme to be direct work. That is less than Common Cause's 35%, because the League's lawsuits are argued mostly by donated counsel, whose work isn't the League's spending.
-- **Voter information and registration (about 32%).** This is 73% of the programme. We don't count it per user or per vote. We count it through what it changes. First, like the field's other turnout drives and civic education, it lowers the chance of a slide, at the shared weight of a fifth of a direct dollar. Second, it can change who wins elections in ordinary times (a side effect, about another 10% of the result). We value that with the chain for voting-access reforms, which already allows for nonpartisan turnout gains changing little. We judge a cycle of information worth a tenth of such a reform per dollar each year, because it reaches only the people it informs, and we count it only for the two-year term of those elected.
-- **Redistricting reform (about 11%).** Since 2008, about 79 million Americans have come under commission-drawn maps, and state Leagues were in most of those coalitions. We judge 2% of the programme goes to this, mostly national support for state campaigns such as Ohio's in 2024. That gives the Education Fund 1% of the movement's money. Its redistricting lawsuits count with its other litigation, in the direct branch.
-- **Other reforms (about 14%).** Voting access, the Electoral College and DC statehood count through any change in who is elected or what is decided. We judge a dollar of this work worth a quarter of a dollar of the redistricting movement, as in our Common Cause model.
+- **Direct work against a slide (about 36% of the result).** Forecasters give the US an 11% chance of losing its democracy rating before 2030, and a year of the whole pro-democracy field's work cuts that chance by about a twentieth. A slide would cost a share of democracy's long-run income gain, built up over 25 years. We judge 15% of the programme to be direct work: the League's lawsuits are argued mostly by donated counsel, whose work isn't the League's spending.
+- **Voter information and registration (about 36%).** This is 73% of the programme. We don't count it per user or per vote. Like the field's other turnout drives and civic education, it counts through what it changes in elections, at the shared weight of a fifth of a direct dollar against a slide. We don't credit it a second time for changing who is elected: that is how it acts on a slide, and each dollar counts in one chain.
+- **Redistricting reform (about 13%).** Since 2008, about 79 million Americans have come under commission-drawn maps, and state Leagues were in most of those coalitions. We judge 2% of the programme goes to this, mostly national support for state campaigns such as Ohio's in 2024. That gives the Education Fund 1% of the movement's money. Its redistricting lawsuits count with its other litigation, in the direct branch.
+- **Other reforms (about 16%).** Voting access, the Electoral College and DC statehood count through any change in who is elected or what is decided. We judge a dollar of this work worth a quarter of a dollar of the redistricting movement.
 
-Besides voter information's effect on who is elected, the side effects are shared figures. In the two slide branches they are democracy's value beyond income, less repression, and US democracy's effect on democracy abroad; the direct branch also has backlash. In the reform branches they are fairer elections valued beyond income, and the counter-measures that reforms provoke. With its next dollar at 52.5% of the past average, the result is <span data-figure="headline" data-model="league-of-women-voters-education-fund-charityevals">0.012</span>. The next-dollar figure reflects about six months of unrestricted reserves and two years of operating deficits.
+The side effects are shared figures. In the two slide branches they are democracy's value beyond income, less repression, and US democracy's effect on democracy abroad; the direct branch also has backlash. In the reform branches they are fairer elections valued beyond income, and the counter-measures that reforms provoke. With its next dollar at 52.5% of the past average, the result is <span data-figure="headline" data-model="league-of-women-voters-education-fund-charityevals">0.011</span>. The next-dollar figure reflects about six months of unrestricted reserves and two years of operating deficits.
 
 ### What drives the result
 
-The missing-data discount and the years a won reform counts move the result most, then the field's effect on the risk of a slide, then the size of democracy's income gain and the next-dollar figure. After those come the value of a healthy year against a doubled income, the chance of a slide by 2030, the redistricting gain share and the discount rate.
+The years a won reform counts and the missing-data discount move the result most, then the field's effect on the risk of a slide, then the size of democracy's income gain and the next-dollar figure. After those come the value of a healthy year against a doubled income, the chance of a slide by 2030, the discount rate and the redistricting gain share.
 
 ### Biggest uncertainties
 
@@ -45,7 +45,7 @@ The missing-data discount and the years a won reform counts move the result most
 
 ### How this model was checked
 
-An independent auditor reviews the model in rounds; the findings and fixes of each round are in audits/league-of-women-voters-education-fund-charityevals/.
+An independent auditor reviews the model in rounds; the findings and fixes of each round are in audits/league-of-women-voters-education-fund-charityevals/. Round 5 removed voter information's second credit, for who is elected.
 
 ### Sources
 
