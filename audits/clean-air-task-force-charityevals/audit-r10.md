@@ -1,6 +1,6 @@
 # Audit: clean-air-task-force-charityevals, round 10 (verification of the US nuclear cost gap at the site's discount rate)
 Result: 0.008964 tco2e/$ = 0.004124 years of healthy life per 1,000 dollars, against 0.003644 in round 9 (+13%). Verdict: pass.
-Model-sha: 5d93ee991baa7336b92a677e4d0a36f7b707110d43eecede41ebf3f939b73238
+Model-sha: 038e167a8dbf7f67d351077ac6841ada44f83f629321d4b5cfdc2b2fd7773ce9
 Scope: scoped verification of nuc_extra_power_cost_uov (new formula), the facts advanced_nuclear_premium_usd_per_mwh_usa_3pct and _7pct, pcge_discount_rate_low/high, advanced_nuclear_premium_uncertainty_usd_per_mwh, the 2018-dollar conversion, and the headline text (summary, write-up). Nothing else re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (warnings only: range runs from harm to good, judgment calls dominate, 14 point inputs); check.ts "all models valid", headline 0.0041 matches the summary and the write-up (data-figure 0.0041).
 Previous round: r9's low findings 1 to 3 carry over (finding 1 is restated below in the form the task asked for).
@@ -20,3 +20,4 @@ Checks against the PCGE 2020 extract (Tables 3.11a, 3.12, 3.13a):
 | 3 | low | source | advanced_nuclear_premium_usd_per_mwh_usa_3pct/_7pct | Carried over from r9 #3: 43.90 / 71.25 is the PCGE Gen III LWR, while the branch is about advanced reactors. The shared uncertainty fact (0, -10 to 15) is the stated cover, with the upward lean explained. | Fact note. | None needed beyond the existing range; consider naming in the uncertainty fact's explainer that this is what it also covers. | Within the range already. |
 
 Findings: 0 high, 0 medium, 3 low. Verdict: pass.
+Re-stamped (15 Nov 2026): merge of two verified changes (EPA rule-year facts; shared nuclear cost facts, r9-r10); mechanical
