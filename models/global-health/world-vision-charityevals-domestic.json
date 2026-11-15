@@ -3,7 +3,9 @@
   "name": "World Vision US: domestic programmes (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: donated goods passed to US churches, schools and nonprofits.",
   "template": "domestic-services",
   "estimate_basis": "unit_cost",
@@ -67,26 +69,26 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "Domestic programmes, fiscal 2025",
+      "label": "Domestic programmes, fiscal 2025, without the donated goods",
       "format": "usd",
-      "formula": "@world_vision.domestic_expenses",
-      "explainer": "The shared figure (facts/world_vision.json) from World Vision US's Form 990: donated goods passed to US churches, schools and nonprofits, and the warehouses, freight and staff behind them."
+      "formula": "@world_vision.domestic_expenses - @world_vision.domestic_gik_expense",
+      "explainer": "World Vision US's domestic line (Form 990) less the donated goods it handed out: the warehouses, freight, partner support and staff. The goods enter the credit share below (Convention 2)."
     },
     {
       "id": "total_expenses",
       "section": "cost",
-      "label": "Total expenses (all programmes, management, fundraising)",
+      "label": "Total expenses without donated goods, fiscal 2025",
       "format": "usd",
-      "formula": "@world_vision.total_expenses",
-      "explainer": "World Vision US's total functional expenses, fiscal 2025 (Form 990 Part IX)."
+      "formula": "@world_vision.total_expenses - @world_vision.domestic_gik_expense - @world_vision.intl_gik_nonfood_expense - @world_vision.intl_food_commodities_expense",
+      "explainer": "World Vision US's total expenses less all donated goods and food commodities it passed on, at home and abroad."
     },
     {
       "id": "program_expenses",
       "section": "cost",
-      "label": "Program expenses (all programmes)",
+      "label": "Programme expenses without donated goods, fiscal 2025",
       "format": "usd",
-      "formula": "@world_vision.program_expenses",
-      "explainer": "All three programme lines, same statement."
+      "formula": "@world_vision.program_expenses - @world_vision.domestic_gik_expense - @world_vision.intl_gik_nonfood_expense - @world_vision.intl_food_commodities_expense",
+      "explainer": "Programme expenses less the same donated goods and commodities."
     },
     {
       "id": "overhead_ratio",
@@ -102,7 +104,7 @@
       "label": "Cost of the modelled program, including overhead",
       "format": "usd",
       "formula": "program_spend * overhead_ratio",
-      "explainer": "The domestic line plus its share of overhead. The donated goods are in it at the wholesale value World Vision records them at."
+      "explainer": "The domestic line's own spending plus its share of overhead."
     },
     {
       "id": "goods_granted",
@@ -379,17 +381,33 @@
       "explainer": "What the families gain that the goods' other uses wouldn't have given similar families: about 67% at the best guesses."
     },
     {
+      "id": "goods_local_value",
+      "section": "adjustments",
+      "label": "Donated goods handed out, at US market value",
+      "format": "usd",
+      "formula": "goods_granted * @united_states.donated_goods_value_vs_recorded",
+      "explainer": "The goods at the donors' wholesale value, times the shared ratio of market to recorded value."
+    },
+    {
+      "id": "partner_resources_share",
+      "section": "adjustments",
+      "label": "Partners' resources, as a share of World Vision's own and the goods",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.18,
+        "high": 0.43
+      },
+      "kind": "judgment",
+      "explainer": "Partner churches and schools add volunteer time and space to hand the goods out (World Vision US counts 28,224 volunteers across all its work, 990 Part I). 18% (5-43%)."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "World Vision's share of the resources behind the goods reaching families",
       "format": "percent",
-      "value": {
-        "low": 0.7,
-        "best": 0.85,
-        "high": 0.95
-      },
-      "kind": "judgment",
-      "explainer": "The goods are in World Vision's cost; partner churches and schools add volunteer time and space to hand them out (World Vision US counts 28,224 volunteers across all its work, 990 Part I). 85% (70-95%)."
+      "formula": "cost_total / ((cost_total + goods_local_value) * (1 + partner_resources_share))",
+      "explainer": "Convention 2: World Vision's own spending over that plus the donated goods at market value, plus partners' resources."
     },
     {
       "id": "attribution_share",

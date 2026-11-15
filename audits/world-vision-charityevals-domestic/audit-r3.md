@@ -1,7 +1,7 @@
 # Audit: world-vision-charityevals-domestic, round 3
 
 Result: 5.540e-6 daly/$ = 0.00554 years of healthy life per 1,000 dollars; global-health median 0.338 (x0.016). Verdict: pass (0 high)
-Model-sha: 44454e4bc1e940652a382d90b0c9c7cee197e3dbb3c4f09d93dc9f4dcbca7c3f
+Model-sha: 318693437957005a5756f47b0a62c7dceccc16ae8a7f3b8ddba7ce554182108c
 
 Scope: unchanged. Only the changes after round 2 were checked.
 Mechanical: audit-model.ts 0 high or medium (one low, far-below, which the summary explains); check.ts all models valid.
@@ -14,3 +14,5 @@ Findings: none above low.
 - Write-up: the live-figure fallback 0.006 matches the result (0.00554).
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (15 Nov 2026): donated goods moved from the cost to the credit share at the shared US market value (Convention 2), partners' resources as their own row; 0.00554 → 0.00719.

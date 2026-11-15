@@ -1,5 +1,5 @@
 # Audit: hias-charityevals, round 4 (scoped)
-Model-sha: f2eaeb4054d9079c529db0cc9918d6fba2f928b89e1c7127020b80147d6cf797
+Model-sha: 46a6eb81c2ef5d531b7238f943034e2df8058ac09f5d346f226764e43a8061b5
 Scope: only the explainer changes since 04a7b33 (leg_wait_years, leg_removed_if_lost, leg_remit_share) and the write-up's legal bullet and RSC line. No input changed, so the result is unchanged (3.133e-6 daly/$).
 Mechanical: audit-model 0 high / 0 medium / 2 low (far-below, spread; both stated in the summary, unchanged); no files rewritten.
 
@@ -16,3 +16,5 @@ No new inconsistency found. **PASS** (no high findings)
 **Verdict: PASS**
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.00313 → 0.00314.

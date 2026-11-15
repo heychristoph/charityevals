@@ -67,7 +67,8 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    volunteers never goes into `cost_total`; it lowers `attribution_share_shared` to the charity's share
    of all resources, with `$resource_shares` on or off. Value government staff time and partners'
    delivery at their cost, and volunteers' unpaid hours (beyond stipends the charity pays) at the
-   local wage. `salary_sacrifice` is only the charity's own staff's forgone pay.
+   local wage. Donated goods likewise leave `cost_total` and both sides of the overhead ratio and enter
+   the credit share at local market value. `salary_sacrifice` is only the charity's own staff's forgone pay.
 3. **Flows, not stocks.** Reach is per year. Multiply by persistence only what was *added* in the period
    (new commitments, institutions, pledges): for a won reform, `$win_years_counted`. An ongoing
    programme's yearly flow counts one year, against one year's cost. Count everything the wins cover,

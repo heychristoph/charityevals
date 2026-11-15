@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-international, round 4 (scoped)
-Model-sha: 2765bb63cf3941d5395160a772af0a33c7745ba90aafc03e3ba465a6fe4c04e4
+Model-sha: 043c4aa1efcf079a2036e357cc6b92c1734fe42661b6821b4f522654660f25d7
 Scope: rsc_people (now 200, range 50-600) and the write-up's RSC line.
 Mechanical: audit-model 0 high / 0 medium / 0 low; no files rewritten.
 
@@ -13,3 +13,5 @@ Labelled judgment with sourced basis, range plausible, no double counting with t
 **Verdict: PASS**
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.0438 → 0.0441.

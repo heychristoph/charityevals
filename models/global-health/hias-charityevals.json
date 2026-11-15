@@ -3,7 +3,9 @@
   "name": "HIAS: refugee resettlement and legal services in the US",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: refugees, asylum seekers and other immigrants served in the US (resettlement and legal services).",
   "template": "domestic-services",
   "estimate_basis": "unit_cost",
@@ -411,7 +413,7 @@
       "section": "effect",
       "label": "Consumption per person, Kenya (PPP dollars, 2024)",
       "format": "usd",
-      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.ken_real_growth_survey_to_2024",
+      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.ken_real_growth_survey_to_2024 - 1))",
       "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
     },
     {
