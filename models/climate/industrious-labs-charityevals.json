@@ -3,13 +3,13 @@
   "name": "Industrious Labs (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"USA":0.85,"world":0.15},
-  "beneficiaries_note": "Our build: by share of the result's parts at the defaults, harms and goods alike. The rule's compliance costs (most of the size) and the Los Angeles basin's cleaner air fall in the United States; the tonnes' heat deaths are spread by world population.",
+  "beneficiaries": {"USA":0.97,"world":0.03},
+  "beneficiaries_note": "Our build: by share of the result's parts at the defaults, harms and goods alike. The rules' compliance costs and the deaths their cleaner air avoids (nearly all of the size) fall in the United States; the tonnes' heat deaths are spread by world population.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "industrious-labs",
   "owner": "charityevals",
-  "summary": "Industrious Labs (Cincinnati) campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. This model counts the one rule it helped win in 2023-2024, South Coast AQMD's Rule 1146.2 (2024), which moves about a million water heaters, boilers and pool heaters in the Los Angeles basin to heat pumps as they wear out, against its spending in those years (about $3.7 million a year, from Tides Foundation's grants to it; its own accounts aren't public), with its steel, aluminium and other work as a share of that value. At the defaults the rule's compliance costs (the district's own figure, about $60 a tonne) outweigh what its tonnes and cleaner air are worth on the site's scale, so the result is a small net harm, about -0.003 years of healthy life per $1,000; it turns positive if the basin’s street-level smoke kills about six times more per tonne than our middle figure, the biggest uncertainty. The branch is discounted for missing data: no tonne is measured for its work.",
+  "summary": "Industrious Labs (Cincinnati) campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. This model counts the four rules it helped win in 2023-2024 (South Coast AQMD's Rules 1146.2 for water heaters, boilers and pool heaters and 1153.1 for commercial ovens, and EPA's 2024 steel-mill and coke-oven air-toxics rules), with its lost steel and aluminium campaigns at zero, against its spending in those years (about $3.7 million a year, from Tides Foundation's grants to it; its own accounts aren't public). At the defaults the rules' compliance costs (the regulators' own figures) slightly outweigh their tonnes and the deaths their cleaner air avoids in the Los Angeles basin, a small net harm of about -0.001 years of healthy life per $1,000; the sign turns on the discount rate, the heat pumps' real cost and how many deaths a ton of NOx causes there. Every branch is discounted for missing data: nothing is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Industrious Labs",
@@ -37,6 +37,36 @@
       "title": "Industrious Labs, news archive",
       "url": "https://www.industriouslabs.org/archive",
       "type": "charity"
+    },
+    {
+      "title": "South Coast AQMD (2023), Draft Socioeconomic Impact Assessment for Proposed Amended Rule 1153.1",
+      "url": "https://www.aqmd.gov/docs/default-source/clean-air-plans/socioeconomic-analysis/first-draft-of-par-1153-1socioeconomic-impact-assessment_june30_2023.pdf",
+      "type": "study"
+    },
+    {
+      "title": "US EPA (2024), Integrated Iron and Steel NESHAP final amendments: fact sheet",
+      "url": "https://www.epa.gov/system/files/documents/2024-03/final-iis-fact-sheet_0.pdf",
+      "type": "study"
+    },
+    {
+      "title": "US EPA (2024), Economic Impact Analysis, Coke Ovens NESHAP final amendments",
+      "url": "https://www.epa.gov/system/files/documents/2024-05/coke-ovens-rtr-eia-final-2024-05.pdf",
+      "type": "study"
+    },
+    {
+      "title": "South Coast AQMD (2023), Draft Socioeconomic Impact Assessment for Proposed Amended Rule 1153.1",
+      "url": "https://www.aqmd.gov/docs/default-source/clean-air-plans/socioeconomic-analysis/first-draft-of-par-1153-1socioeconomic-impact-assessment_june30_2023.pdf",
+      "type": "study"
+    },
+    {
+      "title": "US EPA (2024), Integrated Iron and Steel NESHAP final amendments: fact sheet",
+      "url": "https://www.epa.gov/system/files/documents/2024-03/final-iis-fact-sheet_0.pdf",
+      "type": "study"
+    },
+    {
+      "title": "US EPA (2024), Economic Impact Analysis, Coke Ovens NESHAP final amendments",
+      "url": "https://www.epa.gov/system/files/documents/2024-05/coke-ovens-rtr-eia-final-2024-05.pdf",
+      "type": "study"
     }
   ],
   "sections": [
@@ -48,7 +78,7 @@
     {
       "id": "reach",
       "title": "Reach",
-      "explainer": "The tonnes a year the period's won rule would avert once in effect."
+      "explainer": "What the period's won rules would do once in effect: tonnes a year, and early deaths a year from cleaner local air."
     },
     {
       "id": "effect",
@@ -70,7 +100,7 @@
       "id": "bridges",
       "title": "Other outcomes, in tonnes",
       "kind": "ours",
-      "explainer": "The won rule's compliance costs (units of value) enter the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
+      "explainer": "The won rules' local health effects and compliance costs (units of value) enter the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
     },
     {
       "id": "outcome",
@@ -251,30 +281,84 @@
       "formula": "cost_total * average_spend_vs_year"
     },
     {
-      "id": "scaqmd_tco2_per_year",
+      "id": "s46_tco2_per_year",
       "section": "reach",
-      "label": "South Coast AQMD Rule 1146.2: tonnes of CO₂ a year averted once fully in effect",
+      "label": "Rule 1146.2 (water heaters, boilers, pool heaters; June 2024): tonnes of CO₂ a year averted once fully in effect",
       "format": "integer",
       "formula": "@climate.scaqmd_rule_1146_2_tco2_per_year",
       "unit": "t CO₂ / year",
-      "explainer": "The shared figure (facts: climate, 2.2 million tonnes, 1.6 to 2.5): gas no longer burned by about 1.07 million pool heaters, large and tankless water heaters, small boilers and process heaters in the Los Angeles basin, less the power their heat pumps draw, from the district's own per-unit energy figures."
+      "explainer": "The shared figure (facts: climate, 2.2 million tonnes, 1.4 to 2.5): gas no longer burned by about 1.07 million units in the Los Angeles basin, less the power their heat pumps draw, from the district's per-unit energy figures."
+    },
+    {
+      "id": "s53_tco2_per_year",
+      "section": "reach",
+      "label": "Rule 1153.1 (commercial food ovens; August 2023): tonnes of CO₂ a year averted once fully in effect",
+      "format": "integer",
+      "formula": "@climate.scaqmd_rule_1153_1_tco2_per_year",
+      "unit": "t CO₂ / year",
+      "explainer": "The shared figure (facts: climate, 16,000 tonnes, −15,000 to 26,000): electric ovens in about 100 bakeries and food plants, net of the power they draw; on a gas-fired grid they could add emissions."
+    },
+    {
+      "id": "s46_tonnes_per_year",
+      "section": "reach",
+      "label": "Rule 1146.2: tonnes of CO₂e a year, upstream methane included",
+      "format": "integer",
+      "formula": "s46_tco2_per_year / (1 - methane_share)",
+      "unit": "t CO₂e / year",
+      "explainer": "Gas not burned is also gas not leaked upstream: combustion CO₂ grossed up by the methane share (conversion section)."
+    },
+    {
+      "id": "s53_tonnes_per_year",
+      "section": "reach",
+      "label": "Rule 1153.1: tonnes of CO₂e a year, upstream methane included",
+      "format": "integer",
+      "formula": "s53_tco2_per_year / (1 - methane_share)",
+      "unit": "t CO₂e / year",
+      "explainer": "As for Rule 1146.2."
     },
     {
       "id": "tonnes_per_year_if_won",
       "section": "reach",
-      "label": "Tonnes of CO₂e a year the rule would avert once in effect, upstream methane included",
+      "label": "Tonnes of CO₂e a year the period's won rules would avert once in effect",
       "format": "integer",
-      "formula": "scaqmd_tco2_per_year / (1 - methane_share)",
+      "formula": "s46_tonnes_per_year + s53_tonnes_per_year",
       "unit": "t CO₂e / year",
-      "explainer": "Gas not burned is also gas not leaked upstream: the combustion CO₂ grossed up by the methane share of the cut (conversion section, row methane_share)."
+      "explainer": "The two South Coast rules; EPA's two steel air-toxics rules cut no greenhouse gas (their health effects are counted below)."
+    },
+    {
+      "id": "s46_nox_deaths_per_year",
+      "section": "reach",
+      "label": "Rule 1146.2: early deaths a year avoided by its NOx cut, once fully in effect",
+      "format": "number",
+      "formula": "@climate.scaqmd_rule_1146_2_nox_tons_per_day * @climate.south_coast_deaths_per_nox_ton_per_day",
+      "unit": "deaths / year",
+      "explainer": "The district's 5.6 tons a day of NOx (facts: climate) × the basin's deaths per ton a day from the district's modelling of its 2022 air plan (24.4, 12 to 30): about 137 a year, in line with the advocates' 2,800 over the phase-in."
+    },
+    {
+      "id": "s53_nox_deaths_per_year",
+      "section": "reach",
+      "label": "Rule 1153.1: early deaths a year avoided by its NOx cut, once fully in effect",
+      "format": "number",
+      "formula": "@climate.scaqmd_rule_1153_1_nox_tons_per_day * @climate.south_coast_deaths_per_nox_ton_per_day",
+      "unit": "deaths / year",
+      "explainer": "The district's 0.11 tons a day × the same deaths per ton a day: about 3 a year."
+    },
+    {
+      "id": "iis_deaths_per_year",
+      "section": "reach",
+      "label": "EPA's 2024 integrated iron and steel rule: early deaths a year avoided by its fine-particle cut",
+      "format": "number",
+      "formula": "@climate.us_iron_steel_neshap_2024_deaths_per_year",
+      "unit": "deaths / year",
+      "explainer": "From EPA's monetized fine-particle benefits (facts: climate, 20, 8 to 30); its HAP metals' benefits EPA could not quantify, so they count nothing here."
     },
     {
       "id": "p_success",
       "section": "effect",
-      "label": "Share of the win due to advocacy at all (all groups together)",
+      "label": "Share of each win due to advocacy at all (all groups together)",
       "format": "percent",
       "formula": "@climate.advocacy_share_of_policy_win",
-      "explainer": "The shared figure (facts: climate.advocacy_share_of_policy_win, 30%, 10% to 60%): the part of a won rule that is the advocates' doing rather than what the district, the state's climate laws and the federal ozone deadline would have brought at the same time. The rule is in, so this is not a chance of winning; Industrious Labs' part of the advocates' work is the attribution row."
+      "explainer": "The shared figure (facts: climate.advocacy_share_of_policy_win, 30%, 10% to 60%): the part of a won rule that is the advocates' doing rather than what regulators, courts and deadlines would have brought anyway. The rules are in, so this is not a chance of winning; Industrious Labs' part of the advocates' work is each branch's attribution row."
     },
     {
       "id": "years_of_impact",
@@ -288,41 +372,109 @@
     {
       "id": "years_until_avoided",
       "section": "effect",
-      "label": "Years from the rule (2024) until its tonnes are avoided",
+      "label": "Years from Rule 1146.2 (2024) until its tonnes are avoided",
       "format": "number",
       "formula": "@climate.scaqmd_rule_1146_2_years_until_avoided",
       "unit": "years",
-      "explainer": "The rule's own dates in place of the shared wait for regulations: units switch when they wear out, from 2026 in new buildings and 2029-2033 in existing ones, over lives of 15 to 25 years, so the middle of the cut is about 2040 (facts: climate, 16 years, 10 to 20)."
+      "explainer": "The rule's own dates: units switch when they wear out, from 2026 in new buildings and 2029-2033 in existing ones, over lives of 15 to 25 years, so the middle of the cut is about 2040 (facts: climate, 16 years, 10 to 20)."
     },
     {
       "id": "wait_discount",
       "section": "effect",
-      "label": "Discount for the wait until the tonnes are avoided",
+      "label": "Discount for the wait until Rule 1146.2's tonnes are avoided",
       "format": "percent",
       "formula": "(1 + $discount_rate) ^ -years_until_avoided",
       "explainer": "The wait discounted at the shared rate; the unit's conversion then discounts the heat deaths from the year the tonne is avoided, so nothing is discounted twice."
     },
     {
+      "id": "years_pv",
+      "section": "effect",
+      "label": "Discounted years a won reform counts, from the year it takes effect",
+      "format": "number",
+      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact)",
+      "unit": "years"
+    },
+    {
       "id": "discounted_years",
       "section": "effect",
-      "label": "Discounted years of impact",
+      "label": "Rule 1146.2: discounted years of impact",
       "format": "number",
-      "formula": "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount",
+      "formula": "years_pv * wait_discount",
       "unit": "years"
+    },
+    {
+      "id": "s53_years_until_avoided",
+      "section": "effect",
+      "label": "Years from Rule 1153.1 (2023) until its tonnes are avoided",
+      "format": "number",
+      "value": {
+        "low": 8,
+        "best": 12,
+        "high": 16
+      },
+      "kind": "judgment",
+      "explainer": "Ovens switch once they are 22 years old (and their burners 7), from 2027, with full implementation by 2043 (the district's report): the middle of the switch about 2035, 12 years after the rule (8 to 16). Our judgment.",
+      "unit": "years"
+    },
+    {
+      "id": "s53_discounted_years",
+      "section": "effect",
+      "label": "Rule 1153.1: discounted years of impact",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -s53_years_until_avoided",
+      "unit": "years"
+    },
+    {
+      "id": "epa_years_until_effect",
+      "section": "effect",
+      "label": "Years from EPA's 2024 steel and coke-oven rules until they take effect",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 3,
+        "high": 5
+      },
+      "kind": "judgment",
+      "explainer": "Compliance was due 2025-2027; a presidential exemption (April 2025) and EPA's interim rule (June 2025) pushed the steel rule's dates back about two years, and the coke-oven rules were restored in October 2025. Our judgment, 3 years from 2024 (2 to 5).",
+      "unit": "years"
+    },
+    {
+      "id": "epa_discounted_years",
+      "section": "effect",
+      "label": "EPA's steel rules: discounted years of impact",
+      "format": "number",
+      "formula": "years_pv * (1 + $discount_rate) ^ -epa_years_until_effect",
+      "unit": "years"
+    },
+    {
+      "id": "s46_downstream",
+      "section": "effect",
+      "label": "Rule 1146.2: expected tonnes before adjustments",
+      "format": "number",
+      "formula": "s46_tonnes_per_year * p_success * discounted_years",
+      "unit": "t CO₂e"
+    },
+    {
+      "id": "s53_downstream",
+      "section": "effect",
+      "label": "Rule 1153.1: expected tonnes before adjustments",
+      "format": "number",
+      "formula": "s53_tonnes_per_year * p_success * s53_discounted_years",
+      "unit": "t CO₂e"
     },
     {
       "id": "downstream_value",
       "section": "effect",
       "label": "Expected tonnes a year of the period, before adjustments",
       "format": "number",
-      "formula": "tonnes_per_year_if_won * p_success * discounted_years / period_years",
+      "formula": "(s46_downstream + s53_downstream) / period_years",
       "unit": "t CO₂e / year",
-      "explainer": "The period's one modelled win: its tonnes a year × the advocacy share × its discounted years, spread over the period's two years."
+      "explainer": "The period's won rules with tonnes, each its tonnes a year × the advocacy share × its discounted years, spread over the period's two years. The campaigns lost or still open in 2023-2024 count at zero against the same spending: DOE's 2024 clean-steel and aluminium awards (SSAB withdrew, DOE dismantled the programme in May 2025, Cleveland-Cliffs moved its Middletown award to coal in 2026), U.S. Steel's Gary blast-furnace reline (2025), Cleveland-Cliffs' Burns Harbor reline (put off three times, not decided), the Colorado and California landfill-methane rules (not adopted in the period), Century Aluminum's planned smelter (its power and award unsettled), and research and community training."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment: how far the tonnes from the district's figures should be trusted",
+      "label": "Evidence adjustment: how far the per-unit gas and electricity use behind the tonnes should be trusted",
       "format": "multiple",
       "value": {
         "low": 0.5,
@@ -330,20 +482,20 @@
         "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "The tonnes are our arithmetic on the district's ex-ante per-unit gas and electricity use (pool heaters run less than assumed in some homes, more in others; the mix of the 60,000 commercial units is inferred), not measured cuts. Our judgment, 0.8 (0.5 to 1.1), as for Clean Air Task Force's regulator-estimated rules; delivery and delays are in the implementation row, not here."
+      "explainer": "The tonnes are our arithmetic on the district's ex-ante per-unit gas and electricity use (pool heaters run less than assumed in some homes, more in others; the commercial mix is inferred), not measured cuts. The same use drives the owners' fuel bills, so the recurring cost rows take this adjustment too; the units' prices and the NOx figures don't. Our judgment, 0.8 (0.5 to 1.1), as for Clean Air Task Force's regulator-estimated rules."
     },
     {
-      "id": "counterfactual_adj",
+      "id": "s46_counterfactual_adj",
       "section": "adjustments",
-      "label": "Share of the tonnes that wouldn't have happened anyway",
+      "label": "Rule 1146.2: share of its effects that wouldn't have happened anyway",
       "format": "percent",
       "formula": "@climate.scaqmd_rule_1146_2_counterfactual",
       "explainer": "The shared figure for this rule (facts: climate, 75%, 50% to 90%): building codes, rebates and the market would have moved some units to heat pumps in the years counted anyway."
     },
     {
-      "id": "attribution_share_shared",
+      "id": "s46_attribution_share_shared",
       "section": "adjustments",
-      "label": "Industrious Labs' share of the advocates' resources behind the rule",
+      "label": "Rule 1146.2: Industrious Labs' share of the advocates' resources behind it",
       "format": "percent",
       "value": {
         "low": 0.05,
@@ -351,23 +503,160 @@
         "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "Industrious Labs calls Rules 1146.2 and 1153.1 'two landmark victories' it secured, organised the first rally for an industrial-boiler rule (Canary Media, 7 June 2024) and intervened to defend the rule in court with the People's Collective for Environmental Justice and the Sierra Club; Earthjustice was co-counsel and lead legal voice, and the Coalition for Clean Air, the Natural Resources Defense Council, RMI and many community groups pushed the district's 2022 plan that the rule carries out. Our judgment, 15% (5% to 35%) of all the groups' work."
+      "explainer": "Industrious Labs counts Rules 1146.2 and 1153.1 as 'two landmark victories' it secured, organised the first rally for an industrial-boiler rule (Canary Media, 7 June 2024) and intervened to defend the rule with the People's Collective for Environmental Justice and the Sierra Club; Earthjustice was co-counsel, and the Coalition for Clean Air, the Natural Resources Defense Council, RMI and community groups pushed the district's 2022 plan that the rule carries out. Our judgment, 15% (5% to 35%)."
     },
     {
-      "id": "attribution_share",
+      "id": "s46_attribution_share",
       "section": "adjustments",
-      "label": "Share of credit used",
+      "label": "Rule 1146.2: share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "s46_attribution_share_shared"
     },
     {
-      "id": "implementation_adj",
+      "id": "s46_implementation_adj",
       "section": "adjustments",
-      "label": "Share of the rule's tonnes delivered",
+      "label": "Rule 1146.2: share of its effects delivered",
       "format": "percent",
       "formula": "@climate.scaqmd_rule_1146_2_delivered_share",
-      "explainer": "The shared figure for this rule (facts: climate, 70%, 40% to 90%): upheld in district court (2025) and the Ninth Circuit (July 2026), but the 2027 technology review could delay the later dates."
+      "explainer": "The shared figure (facts: climate, 70%, 40% to 90%): upheld in district court (2025) and the Ninth Circuit (July 2026), but the 2027 technology review could delay the later dates."
+    },
+    {
+      "id": "s53_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Rule 1153.1: share of its effects that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Old gas ovens are rarely replaced by electric ones without a rule; some bakeries electrify for their own climate pledges. Our judgment, 70% (40% to 90%)."
+    },
+    {
+      "id": "s53_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Rule 1153.1: Industrious Labs' share of the advocates' resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.4
+      },
+      "kind": "judgment",
+      "explainer": "A smaller rule with fewer groups behind it: Industrious Labs and Earthjustice made the case for zero-emission ovens with community groups in the district's working groups. Our judgment, 20% (5% to 40%)."
+    },
+    {
+      "id": "s53_attribution_share",
+      "section": "adjustments",
+      "label": "Rule 1153.1: share of credit used",
+      "format": "percent",
+      "formula": "s53_attribution_share_shared"
+    },
+    {
+      "id": "s53_implementation_adj",
+      "section": "adjustments",
+      "label": "Rule 1153.1: share of its effects delivered",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.75,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "Not challenged in court that we found; the zero-emission phase starts in 2027 and ovens can be kept past 22 years with new burners only within the rule's limits. Our judgment, 75% (40% to 90%)."
+    },
+    {
+      "id": "iis_counterfactual_adj",
+      "section": "adjustments",
+      "label": "EPA's 2024 iron and steel rule: share that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "The Clean Air Act's eight-year technology reviews and a 2020 court ruling (LEAN v. EPA) required EPA to regulate the steel mills' unregulated air toxics, so a rule was due anyway; advocacy shaped how strict it was. Our judgment, 50% (30% to 80%)."
+    },
+    {
+      "id": "iis_attribution_share_shared",
+      "section": "adjustments",
+      "label": "EPA's 2024 iron and steel rule: Industrious Labs' share of the advocates' resources behind it",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "Earthjustice litigated for the rule with GASP, the Clean Air Council, the Sierra Club, the Environmental Integrity Project and community groups in Gary and Pittsburgh; Industrious Labs organised steel communities and commented. Our judgment, 5% (2% to 15%)."
+    },
+    {
+      "id": "iis_attribution_share",
+      "section": "adjustments",
+      "label": "EPA's 2024 iron and steel rule: share of credit used",
+      "format": "percent",
+      "formula": "iis_attribution_share_shared"
+    },
+    {
+      "id": "iis_implementation_adj",
+      "section": "adjustments",
+      "label": "EPA's 2024 iron and steel rule: share of its effects delivered",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "A presidential proclamation (April 2025) exempted the mills for two years, EPA's June 2025 interim rule pushed compliance dates back and EPA is reconsidering parts of the rule; it still stands. Our judgment, 40% (15% to 70%)."
+    },
+    {
+      "id": "coke_counterfactual_adj",
+      "section": "adjustments",
+      "label": "EPA's 2024 coke-oven rules: share that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Also a required technology review under court deadlines; advocacy shaped the fenceline monitoring. Our judgment, 50% (30% to 80%)."
+    },
+    {
+      "id": "coke_attribution_share_shared",
+      "section": "adjustments",
+      "label": "EPA's 2024 coke-oven rules: Industrious Labs' share of the advocates' resources behind them",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.06,
+        "high": 0.15
+      },
+      "kind": "judgment",
+      "explainer": "The same coalition; Industrious Labs' statement on the rules' restoration (9 October 2025) claims part of the win for steel communities. Our judgment, 6% (2% to 15%)."
+    },
+    {
+      "id": "coke_attribution_share",
+      "section": "adjustments",
+      "label": "EPA's 2024 coke-oven rules: share of credit used",
+      "format": "percent",
+      "formula": "coke_attribution_share_shared"
+    },
+    {
+      "id": "coke_implementation_adj",
+      "section": "adjustments",
+      "label": "EPA's 2024 coke-oven rules: share delivered",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "Exempted by proclamation in 2025 and restored in October 2025 ('Steel Communities Win Back Coke Rules from EPA', Industrious Labs); they may be weakened again. Our judgment, 60% (30% to 85%)."
     },
     {
       "id": "missing_data_adj",
@@ -375,42 +664,166 @@
       "label": "Counted less where the outcome isn't measured for this charity",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "The shared missing-data step (docs/normalization.md 2.12): no tonne is measured for Industrious Labs' work; the tonnes are our arithmetic on the regulator's figures and its part a judgment."
+      "explainer": "The shared missing-data step (docs/normalization.md 2.12): nothing is measured for Industrious Labs' work; the effects are regulators' estimates and its part a judgment. Every branch takes it."
+    },
+    {
+      "id": "s46_total_adj",
+      "section": "adjustments",
+      "label": "Rule 1146.2: tonnes' adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * s46_counterfactual_adj * s46_attribution_share * s46_implementation_adj * missing_data_adj"
+    },
+    {
+      "id": "s53_total_adj",
+      "section": "adjustments",
+      "label": "Rule 1153.1: tonnes' adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * s53_counterfactual_adj * s53_attribution_share * s53_implementation_adj * missing_data_adj"
+    },
+    {
+      "id": "counterfactual_adj",
+      "section": "adjustments",
+      "label": "Share of the tonnes that wouldn't have happened anyway (tonnes-weighted, for reading only)",
+      "format": "percent",
+      "formula": "(s46_downstream * s46_counterfactual_adj + s53_downstream * s53_counterfactual_adj) / (s46_downstream + s53_downstream)",
+      "explainer": "The outcome-weighted average of the branches with tonnes (weighted by expected tonnes), for reading only; the branches. own rows apply."
+    },
+    {
+      "id": "attribution_share_shared",
+      "section": "adjustments",
+      "label": "Industrious Labs' share of the resources behind the tonnes (tonnes-weighted, for reading only)",
+      "format": "percent",
+      "formula": "(s46_downstream * s46_attribution_share_shared + s53_downstream * s53_attribution_share_shared) / (s46_downstream + s53_downstream)",
+      "explainer": "The outcome-weighted average of the branches with tonnes, for reading only; the branches' own rows apply, and the EPA branches have their own."
+    },
+    {
+      "id": "attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used (for reading only)",
+      "format": "percent",
+      "formula": "attribution_share_shared",
+      "explainer": "The outcome-weighted average of the branches with tonnes, for reading only; each branch uses its own share."
+    },
+    {
+      "id": "implementation_adj",
+      "section": "adjustments",
+      "label": "Share of the tonnes delivered (tonnes-weighted, for reading only)",
+      "format": "percent",
+      "formula": "(s46_downstream * s46_implementation_adj + s53_downstream * s53_implementation_adj) / (s46_downstream + s53_downstream)",
+      "explainer": "The outcome-weighted average of the branches with tonnes, for reading only; the branches' own rows apply, and the EPA branches have their own."
     },
     {
       "id": "total_adj",
       "section": "adjustments",
-      "label": "All adjustments combined",
+      "label": "All adjustments on the tonnes combined (tonnes-weighted, for reading only)",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * implementation_adj * missing_data_adj",
-      "explainer": "The product of the adjustments above."
-    },
-    {
-      "id": "unmodelled_benefits_adj",
-      "section": "adjustments",
-      "label": "Other work of the period not modelled, as a share of the modelled value",
-      "format": "percent",
-      "value": {
-        "low": 0.05,
-        "best": 0.3,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Most of the spending went to steel, aluminium, cement and landfills, whose results so far are small or lost: DOE's 2024 clean-steel and aluminium awards were mostly withdrawn (SSAB pulled out, DOE dismantled the programme in May 2025, Cleveland-Cliffs moved its Middletown award to coal in August 2026), U.S. Steel relined its Gary blast furnace for 20 more years (2025); Century Aluminum's award led to a planned Oklahoma smelter with EGA whose power is not yet known. Still pending or small: Cleveland-Cliffs has put off relining a Burns Harbor blast furnace three times, EPA's 2024 coke-oven and steel air-toxics rules were restored after a 2025 exemption, the Colorado and California landfill-methane rules, the district's commercial-oven Rule 1153.1, the California industrial-heat laws AB 2083 (2024) and AB 1280 (2025), and the steel communities' training cohort. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 30% of the modelled value (5% to 100%: a coal furnace not relined would be worth more than the rule)."
+      "formula": "(s46_downstream * s46_total_adj + s53_downstream * s53_total_adj) / (s46_downstream + s53_downstream)",
+      "explainer": "The outcome-weighted average of the branches with tonnes, for reading only; the branches' own combined adjustments apply."
     },
     {
       "id": "refrigerant_leak_share",
       "section": "adjustments",
-      "label": "Side effect: refrigerant leaking from the new heat pumps, as a share of modelled value",
+      "label": "Side effect: refrigerant leaking from the new heat pumps, as a share of the tonnes",
       "format": "percent",
       "value": {
-        "low": -0.04,
+        "low": -0.06,
         "best": -0.02,
         "high": 0
       },
       "kind": "judgment",
-      "side_effect": "added",
-      "explainer": "Heat pumps hold refrigerants that warm the climate when they leak, which the tonnes above leave out. For US home heat pumps NREL's simulation puts leaks at about 0.07 tonnes a year against 2.5 to 4.4 tonnes cut (facts: climate.us_heat_pump_tco2e_per_household_year, its note), about 2%. Our judgment, −2% (−4% to 0)."
+      "explainer": "Heat pumps hold refrigerants that warm the climate when they leak, which the tonnes leave out. For US home heat pumps NREL puts leaks at about 0.07 tonnes a year against 2.5 to 4.4 tonnes cut (facts: climate.us_heat_pump_tco2e_per_household_year, its note), about 2%; a pool heat pump cuts only about 1.3 tonnes a year, so its leaks weigh more, while California limits new units' refrigerants to a warming potential of 750 from 2025. Our judgment, −2% (−6% to 0).",
+      "side_effect": "added"
+    },
+    {
+      "id": "v_air_death",
+      "section": "adjustments",
+      "label": "Value of an air-pollution death, units of value (by the ages air-pollution deaths come at)",
+      "format": "number",
+      "formula": "@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74",
+      "unit": "uov",
+      "explainer": "The site's value of a death by age, over the ages of air-pollution deaths (facts: death_ages, moral_weights), as the tonnes' conversion values its air-pollution deaths (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "s46_health_uov",
+      "section": "adjustments",
+      "label": "Rule 1146.2: early deaths avoided by its NOx cut, units of value",
+      "format": "number",
+      "formula": "s46_nox_deaths_per_year * v_air_death * $life_value_multiplier * p_success * discounted_years * s46_counterfactual_adj * s46_attribution_share * s46_implementation_adj * missing_data_adj",
+      "unit": "uov",
+      "explainer": "The rule's local smog and nitrate deaths, counted directly (the tonnes' own smoke weight is 0, so nothing counts twice), over the same years, wait, advocacy share, counterfactual, credit, delivered share and missing-data step as its tonnes; × $life_value_multiplier, as every death on the site."
+    },
+    {
+      "id": "s53_health_uov",
+      "section": "adjustments",
+      "label": "Rule 1153.1: early deaths avoided by its NOx cut, units of value",
+      "format": "number",
+      "formula": "s53_nox_deaths_per_year * v_air_death * $life_value_multiplier * p_success * s53_discounted_years * s53_counterfactual_adj * s53_attribution_share * s53_implementation_adj * missing_data_adj",
+      "unit": "uov",
+      "explainer": "As for Rule 1146.2."
+    },
+    {
+      "id": "iis_health_uov",
+      "section": "adjustments",
+      "label": "EPA's 2024 iron and steel rule: early deaths avoided, units of value",
+      "format": "number",
+      "formula": "iis_deaths_per_year * v_air_death * $life_value_multiplier * p_success * epa_discounted_years * iis_counterfactual_adj * iis_attribution_share * iis_implementation_adj * missing_data_adj",
+      "unit": "uov",
+      "explainer": "The fine-particle deaths EPA's monetized benefits imply, over the shared years and the rule's wait, with its advocacy share, counterfactual, credit, delivered share and missing-data step."
+    },
+    {
+      "id": "district_rate_low",
+      "section": "adjustments",
+      "label": "Real interest rate of the district's low cost case",
+      "format": "percent",
+      "value": 0.01,
+      "kind": "observed",
+      "explainer": "The district's two amortization cases are 1% and 4% real; the one-time costs are interpolated between them at the site's discount rate (rows below), so the cost moves with the discount-rate slider.",
+      "unit": "share",
+      "source": {
+        "title": "South Coast AQMD (May 2024), Draft Socioeconomic Impact Assessment for Proposed Amended Rule 1146.2",
+        "url": "https://www.aqmd.gov/docs/default-source/rule-book/Proposed-Rules/rule-1146-1146.1-and-1146.2/draft-par-1146-2-socioeconomic-impact-assessment.pdf",
+        "page": "Executive summary, p. ES-2",
+        "quote": "The average annual compliance costs of PAR 1146.2 are estimated to range from $48.99 million to $96.77 million, depending on the real interest rate assumed (1% to 4%).",
+        "retrieved": "2026-11-15"
+      }
+    },
+    {
+      "id": "district_rate_high",
+      "section": "adjustments",
+      "label": "Real interest rate of the district's high cost case",
+      "format": "percent",
+      "value": 0.04,
+      "kind": "observed",
+      "explainer": "As above.",
+      "unit": "share",
+      "source": {
+        "title": "South Coast AQMD (May 2024), Draft Socioeconomic Impact Assessment for Proposed Amended Rule 1146.2",
+        "url": "https://www.aqmd.gov/docs/default-source/rule-book/Proposed-Rules/rule-1146-1146.1-and-1146.2/draft-par-1146-2-socioeconomic-impact-assessment.pdf",
+        "page": "Executive summary, p. ES-2",
+        "quote": "The average annual compliance costs of PAR 1146.2 are estimated to range from $48.99 million to $96.77 million, depending on the real interest rate assumed (1% to 4%).",
+        "retrieved": "2026-11-15"
+      }
+    },
+    {
+      "id": "rate_position",
+      "section": "adjustments",
+      "label": "Where the site's discount rate sits between the district's two cases (0 at 1%, 1 at 4%)",
+      "format": "number",
+      "formula": "($discount_rate - district_rate_low) / (district_rate_high - district_rate_low)",
+      "explainer": "Linear between the two cases and beyond them at the slider's ends (−0.3 at 0.1%, 2.3 at 8%): the amortized capital cost rises about linearly with the rate over 15- to 25-year lives."
+    },
+    {
+      "id": "s53_phase_in_share",
+      "section": "adjustments",
+      "label": "Rule 1153.1: ovens switched on average over 2024-2051, as a share of all",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.6,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "The zero-emission phase starts in 2027 and is complete by 2043, so over the district's 2024-2051 window about 60% of the ovens have switched on average (45% to 75%). Our judgment; it scales the district's average costs to full implementation, as the tonnes are counted."
     },
     {
       "id": "scaqmd_phase_in_share",
@@ -434,22 +847,49 @@
       "explainer": "The district's cost is an average over 2026-2057, while units are still being replaced; the tonnes are counted once every unit has switched. Dividing the cost by this share puts both on the same full-implementation footing."
     },
     {
-      "id": "scaqmd_compliance_uov",
+      "id": "s46_compliance_uov",
       "section": "adjustments",
       "label": "Rule 1146.2: compliance costs, units of value (negative)",
       "format": "number",
+      "formula": "-((@compliance_costs.scaqmd_rule_1146_2_one_time_cost_1pct + (@compliance_costs.scaqmd_rule_1146_2_one_time_cost_4pct - @compliance_costs.scaqmd_rule_1146_2_one_time_cost_1pct) * rate_position) * @compliance_costs.scaqmd_rule_1146_2_capital_cost_factor + @compliance_costs.scaqmd_rule_1146_2_recurring_cost * evidence_adj) / scaqmd_phase_in_share * @cpi.usa_2024 / @cpi.usa_2023 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * p_success * discounted_years * s46_counterfactual_adj * s46_attribution_share * s46_implementation_adj * missing_data_adj",
       "unit": "uov",
-      "formula": "-@compliance_costs.scaqmd_rule_1146_2_net_cost_per_year / scaqmd_phase_in_share * @cpi.usa_2024 / @cpi.usa_2023 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * p_success * discounted_years * counterfactual_adj * attribution_share * implementation_adj * missing_data_adj",
-      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): owners' extra cost for heat pumps and panel upgrades less their fuel savings (the district's analysis, $96.8 million a year on average over 2026-2057 at 4%), scaled to full implementation, in 2023 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's tonnes, with the advocacy share, counterfactual, credit, delivered share and missing-data step, not the evidence adjustment (which is about the benefits)."
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21), the district's own analysis: the heat pumps' extra price and panel work, amortized at the site's discount rate (between the district's 1% and 4% cases) × the real-cost factor, plus the owners' fuel-bill change (a saving of $139 million a year on average, × the evidence adjustment, since it rests on the same per-unit use as the tonnes); scaled to full implementation, in 2023 dollars moved to 2024's, valued as money lost by consumers and owners (1.2 times average US consumption), on the log scale; over the same years, wait, advocacy share, counterfactual, credit, delivered share and missing-data step as the rule's tonnes."
     },
     {
-      "id": "compliance_uov_per_year",
+      "id": "s53_compliance_uov",
       "section": "adjustments",
-      "label": "Compliance costs of the won rule, units of value per year of the period",
+      "label": "Rule 1153.1: compliance costs, units of value (negative)",
       "format": "number",
+      "formula": "-((@compliance_costs.scaqmd_rule_1153_1_one_time_cost_1pct + (@compliance_costs.scaqmd_rule_1153_1_one_time_cost_4pct - @compliance_costs.scaqmd_rule_1153_1_one_time_cost_1pct) * rate_position) + @compliance_costs.scaqmd_rule_1153_1_recurring_cost * evidence_adj) / s53_phase_in_share * @cpi.usa_2024 / @cpi.usa_2023 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * p_success * s53_discounted_years * s53_counterfactual_adj * s53_attribution_share * s53_implementation_adj * missing_data_adj",
       "unit": "uov",
-      "formula": "scaqmd_compliance_uov / period_years",
-      "explainer": "In the main chain (docs/normalization.md 2.21), spread over the period's two years. The unmodelled work's share isn't applied to costs: most of it won no rule."
+      "explainer": "As for Rule 1146.2: the district's one-time costs at the site's rate plus the higher electricity bills ($10.3 million a year on average; electric ovens cost more to run than gas ones), scaled to full implementation."
+    },
+    {
+      "id": "iis_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA's 2024 iron and steel rule: compliance costs, units of value (negative)",
+      "format": "number",
+      "formula": "-@compliance_costs.us_iron_steel_neshap_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2022 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * p_success * epa_discounted_years * iis_counterfactual_adj * iis_attribution_share * iis_implementation_adj * missing_data_adj",
+      "unit": "uov",
+      "explainer": "EPA's estimate, $6.7 million a year (GAO's report of the rule), valued and carried through the branch as above."
+    },
+    {
+      "id": "coke_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA's 2024 coke-oven rules: compliance costs, units of value (negative)",
+      "format": "number",
+      "formula": "-@compliance_costs.us_coke_ovens_neshap_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2023 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * p_success * epa_discounted_years * coke_counterfactual_adj * coke_attribution_share * coke_implementation_adj * missing_data_adj",
+      "unit": "uov",
+      "explainer": "EPA's estimate, $4.0 million a year (2023 dollars), mostly fenceline monitoring. EPA quantified no health benefit, since the rules chiefly keep emissions from rising, so this branch counts only its cost."
+    },
+    {
+      "id": "uov_per_year",
+      "section": "adjustments",
+      "label": "The won rules' health effects and compliance costs, units of value per year of the period",
+      "format": "number",
+      "formula": "(s46_health_uov + s53_health_uov + iis_health_uov + s46_compliance_uov + s53_compliance_uov + iis_compliance_uov + coke_compliance_uov) / period_years",
+      "unit": "uov",
+      "explainer": "Deaths avoided by local air pollution and the rules' compliance costs, summed and spread over the period's two years, in the main chain (docs/normalization.md 2.21)."
     },
     {
       "id": "methane_share",
@@ -457,7 +897,7 @@
       "label": "Share of these tonnes that are methane",
       "format": "percent",
       "formula": "@climate.us_home_electrification_methane_share",
-      "explainer": "Gas a building stops burning also stops leaking upstream: the shared share for electrifying US buildings (facts: climate, 15%, 5% to 25%), weighted as the rule's one branch. The shared conversion values it by methane's own warming and ozone (docs/normalization.md 2.5)."
+      "explainer": "Gas a building or bakery stops burning also stops leaking upstream: the shared share for electrifying US buildings (facts: climate, 15%, 5% to 25%). The shared conversion values it by methane's own warming and ozone."
     },
     {
       "id": "fuel_share",
@@ -465,15 +905,15 @@
       "label": "Share of these tonnes from burning less fossil fuel near people",
       "format": "percent",
       "formula": "1 - methane_share",
-      "explainer": "Every CO₂ tonne is gas no longer burned in a water heater, boiler or pool heater at street level; the methane share carries no smoke (its ozone is counted through the methane share)."
+      "explainer": "Every CO₂ tonne is gas no longer burned at street level; the methane share carries no smoke."
     },
     {
       "id": "fuel_smoke_factor",
       "section": "conversion",
-      "label": "Air-pollution deaths per tonne cut, relative to the fossil-fuel average",
+      "label": "Air-pollution deaths per tonne counted through the shared rate (none here)",
       "format": "number",
-      "formula": "@climate.scaqmd_rule_1146_2_smoke_factor",
-      "explainer": "The shared figure for this rule (facts: climate, 0.05, 0.01 to 0.4): street-level NOx in the country's worst ozone basin, more smoke per tonne than electrifying an average US home (0.02), the top the advocates' count of 2,800 early deaths avoided."
+      "formula": "0",
+      "explainer": "0: the rules' local smog and nitrate deaths are counted directly from their NOx cuts (rows s46_health_uov, s53_health_uov), so the shared per-tonne smoke rate isn't applied as well. The power plants that make the added electricity are scrubbed gas plants, a small offset left out."
     },
     {
       "id": "air_pollution_weight",
@@ -489,15 +929,15 @@
       "label": "Air-pollution deaths averted per tonne, counted directly (none here)",
       "format": "small",
       "formula": "0",
-      "explainer": "0: the rule's smoke is in air_pollution_weight, so nothing is counted twice."
+      "explainer": "0: the deaths are counted in units of value through the bridge (they have their own branches and timing)."
     },
     {
       "id": "tco2e_from_uov",
       "section": "bridges",
-      "label": "The won rule's compliance costs, in tonnes of CO₂e (negative)",
+      "label": "The won rules' health effects and compliance costs, in tonnes of CO₂e",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "compliance_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "formula": "uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "explainer": "Units of value into tonnes at what a tonne of these is worth on the site's scale (its heat and air-pollution deaths by age, as the conversion counts them), the bridge Clean Air Task Force's and Environmental Defense Fund's models use (docs/normalization.md 2.6)."
     },
     {
@@ -505,9 +945,9 @@
       "section": "outcome",
       "label": "Tonnes of CO₂e averted per year of the period",
       "format": "number",
-      "formula": "downstream_value * total_adj * (1 + unmodelled_benefits_adj + refrigerant_leak_share) + tco2e_from_uov",
+      "formula": "(s46_downstream * s46_total_adj + s53_downstream * s53_total_adj) / period_years * (1 + refrigerant_leak_share) + tco2e_from_uov",
       "unit": "t CO₂e / year",
-      "explainer": "The rule's expected tonnes × its adjustments, with the other work and the refrigerant side effect added as shares, less the rule's compliance costs in tonnes."
+      "explainer": "The two South Coast rules' expected tonnes × their adjustments, the refrigerant side effect, and the four rules' local health effects and compliance costs in tonnes."
     },
     {
       "id": "tco2e_per_dollar",

@@ -1,6 +1,6 @@
 ### Summary
 
-Industrious Labs campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. Our model counts the one rule it helped win in 2023 and 2024, against what it spent in those years. It comes to **<span data-figure="headline" data-model="industrious-labs-charityevals">-0.003</span> years of healthy life per 1,000 dollars**: a small net harm. The rule's compliance costs outweigh what its tonnes and cleaner air are worth on the site's scale. How much the Los Angeles basin's smoke kills per tonne decides the sign.
+Industrious Labs campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. Our model counts the rules it helped win in 2023 and 2024, against what it spent in those years. It comes to **<span data-figure="headline" data-model="industrious-labs-charityevals">-0.001</span> years of healthy life per 1,000 dollars**: close to zero, slightly negative. The rules' compliance costs slightly outweigh their tonnes and the deaths their cleaner air avoids.
 
 ### What the charity does
 
@@ -15,43 +15,61 @@ Its campaigns:
 
 ### How the impact happens
 
-A won rule cuts emissions once it takes effect. The model counts the period's one clear win:
+A won rule cuts emissions or air pollution once it takes effect. The model counts four rules won in the period:
 
-- **South Coast AQMD's Rule 1146.2 (June 2024).** About 1.07 million gas-fired pool heaters, large and tankless water heaters, small boilers and process heaters in the Los Angeles basin must be replaced by heat pumps when they wear out. New buildings from 2026, existing ones from 2029 to 2033. Industrious Labs counts it among two "landmark victories" it secured and helped defend it in court. The Ninth Circuit upheld it in July 2026.
+- **South Coast AQMD's Rule 1146.2 (June 2024).** About 1.07 million gas-fired pool heaters, large and tankless water heaters, small boilers and process heaters in the Los Angeles basin switch to heat pumps as they wear out. That cuts about 2.2 million tonnes of CO₂ a year once complete, and 5.6 tons a day of smog-forming NOx. Industrious Labs counts it among two "landmark victories" it secured, and helped defend it in court.
+- **South Coast AQMD's Rule 1153.1 (August 2023).** Bakery and cooking ovens go electric once they are 22 years old: 0.11 tons a day of NOx. The tonnes are about 16,000 a year, and could be negative while the grid still runs on gas.
+- **EPA's 2024 rule for integrated steel mills.** It removes 473 tons a year of fine particles. EPA's monetized benefits imply about 20 early deaths a year avoided. A 2025 exemption delayed it.
+- **EPA's 2024 coke-oven rules.** These are mostly fenceline monitoring, and EPA quantified no benefit. They were exempted in 2025 and restored that October.
 
-From the district's own per-unit figures, the rule cuts about 2.2 million tonnes of CO₂ a year once every unit is replaced, net of the power the heat pumps draw. It also cuts 5.6 tons a day of the nitrogen oxides that form smog.
+The campaigns that lost or stayed open in the period count at zero against the same spending. These are DOE's clean-steel and aluminium awards (mostly withdrawn), U.S. Steel's Gary blast-furnace reline, Cleveland-Cliffs' delayed Burns Harbor reline, and the landfill rules.
 
 ### How the model works
 
-The rule's tonnes a year × the share of a won policy that is advocacy's doing (shared, 30%) × the years a won reform counts (the shared 5, discounted, after a wait of about 16 years to the middle of the phase-in) × the share that wouldn't have happened anyway (75%) × Industrious Labs' share of all the groups' work behind it (15%) × the share delivered (70%). The steps that follow are the shared evidence and missing-data steps, the other work not modelled (+30%) and a small side effect: refrigerant leaking from the heat pumps (−2%). Upstream gas leaks are counted as methane (the shared 15% for electrifying buildings).
+For each rule, the model multiplies:
 
-The rule's compliance costs come next (docs/normalization.md 2.21). The district's own analysis puts owners' extra cost, less their fuel savings, at $96.8 million a year on average over 2026–2057. Scaled to full implementation, that is about $60 for each tonne of CO₂e cut. These costs are valued as money lost by Southern California's owners and consumers. They pass through the same chain as the tonnes and enter the result through the bridge from units of value.
+- its effect a year (tonnes, and early deaths from cleaner local air);
+- the share of a won policy that is advocacy's doing (shared, 30%);
+- the years a won reform counts (the shared 5, discounted, after each rule's own wait: about 16 years to the middle of Rule 1146.2's phase-in);
+- the share that wouldn't have happened anyway;
+- Industrious Labs' share of all the groups' work behind it (15% and 20% for the South Coast rules, about 5% for EPA's);
+- the share delivered;
+- the missing-data step.
 
-The cost is a typical year of 2023–2024: Tides Foundation's grants over the share of the budget they paid (our judgment, 75%), plus the 501(c)(3)'s start-up costs. The next dollar counts 42% of the past average (room 0.7 × use 0.6 × run 1.0). The steel and aluminium campaigns it would fund lost their federal levers in 2025.
+The deaths from cleaner air in the basin use the district's own modelling of its 2022 air plan: 3,031 deaths avoided in 2037 for 124 tons a day of NOx, about 24 a year per ton a day.
+
+Each rule's compliance costs are the regulator's own figures (docs/normalization.md 2.21). For Rule 1146.2, the district's analysis gives the heat pumps' extra price, amortized at the site's discount rate, plus owners' fuel savings. The savings use the same evidence adjustment as the tonnes, since both rest on the same per-unit energy use. The costs are valued as money lost by owners and consumers, and pass through the same chain as the benefits. The cost is a typical year of 2023–2024: Tides Foundation's grants over the share of the budget they paid (our judgment, 75%). The next dollar counts 42% of the past average.
 
 ### What drives the result
 
-The compliance cost, about $60 a tonne, is large next to what a tonne is worth on the site's scale. A tonne avoids its share of heat deaths, which come late in the century and are discounted. Air pollution adds more here than for most tonnes. Water heaters and boilers burn gas at street level in the country's worst basin for ozone. Our middle figure is 0.05 of the world average fossil-fuel smoke per tonne. Near 0.3 the result turns positive, and at the advocates' own count of 2,800 early deaths avoided (about 0.4) it is positive. We found no regulator's figure behind that count.
+Rule 1146.2 is nearly the whole result. Its benefits and its costs are of similar size, so the sign is fragile:
+
+- **The discount rate.** At a lower rate the late tonnes and the cleaner air count for more than the up-front cost of the heat pumps.
+- **The heat pumps' real cost.** At 0.8 of the quotes the result turns positive.
+- **Deaths per ton of NOx** in the basin: 12 to 30.
 
 ### Biggest uncertainties
 
-- **Smoke per tonne in the Los Angeles basin** (0.01 to 0.4 of the world average): it decides the sign.
-- **The discount rate and years a won reform counts** (shared): the tonnes come 10 to 20 years after the rule.
-- **The compliance cost** ($49 million at a 1% rate to $150 million a year, before scaling).
-- **Industrious Labs' share** of the coalition (5% to 35%), alongside Earthjustice, the Sierra Club, the Coalition for Clean Air, community groups and the district's own 2022 plan.
-- **Its spending:** what share of its budget Tides paid (45% to 100%).
+- The discount rate and the years a won reform counts (shared).
+- What a dollar lost by Southern California's owners is worth on the site's scale (the shared payer multiple).
+- Deaths per ton of NOx: the district's plan-wide average stands in for these rules.
+- Industrious Labs' share of each coalition, and what share of its budget Tides paid (45% to 100%).
 
 ### What isn't modelled
 
-The other campaigns are one share of the modelled value (30%, 5% to 100%), because their results so far are small, lost or pending. DOE's 2024 clean-steel and aluminium awards were mostly withdrawn, and Cleveland-Cliffs moved its Middletown award to coal in 2026. U.S. Steel relined a Gary blast furnace for 20 more years. Cleveland-Cliffs has put off a Burns Harbor reline three times. EPA's coke-oven and steel air-toxics rules were restored after a 2025 exemption. The district's commercial-oven rule, California's industrial-heat laws and the landfill methane rules are not counted on their own. Nor is the steel communities' training. A coal furnace never relined would be worth more than the rule.
+California's industrial-heat laws (AB 2083 in 2024; AB 1280 came in 2025, after the period) fund studies and grants rather than rules. They are left out, as is work after 2024. The air-toxics metals' cancer benefits, which EPA could not quantify, count nothing.
 
 ### How this model was checked
 
+Two independent audits. The first found that the costs and benefits were treated unequally, and that Rule 1153.1 and EPA's two steel rules were missing as wins. It also found that the smoke per tonne was a guess, and that the cost range came from a discount rate. Each won rule now has its own branch, the deaths come from the district's NOx modelling, and the costs move with the discount rate.
+
 ### Sources
 
-- Tides Foundation, Form 990s for 2023 and 2024, Schedule I (grants to Climate Strategies Lab LLC): https://projects.propublica.org/nonprofits/organizations/510198509
+- Tides Foundation, Form 990s for 2023 and 2024, Schedule I: https://projects.propublica.org/nonprofits/organizations/510198509
 - Industrious Education Fund, Form 990 for 2024: https://projects.propublica.org/nonprofits/organizations/992396851
-- South Coast AQMD (May 2024), Draft Socioeconomic Impact Assessment for Proposed Amended Rule 1146.2: https://www.aqmd.gov/docs/default-source/rule-book/Proposed-Rules/rule-1146-1146.1-and-1146.2/draft-par-1146-2-socioeconomic-impact-assessment.pdf
-- South Coast AQMD (May 2024), Draft Staff Report for Proposed Amended Rule 1146.2: https://www.aqmd.gov/docs/default-source/rule-book/Proposed-Rules/rule-1146-1146.1-and-1146.2/par-1146-2-draft-staff-report.pdf
-- Industrious Labs, news archive and campaign pages: https://www.industriouslabs.org/archive
-- Axios (25 October 2022), The expanding push to curb industrial emissions: https://www.axios.com/2022/10/26/industrial-emissions-new-advocacy-group
+- South Coast AQMD (2024), Draft Socioeconomic Impact Assessment and Draft Staff Report for Rule 1146.2: https://www.aqmd.gov/docs/default-source/rule-book/Proposed-Rules/rule-1146-1146.1-and-1146.2/draft-par-1146-2-socioeconomic-impact-assessment.pdf
+- South Coast AQMD (2023), Draft Socioeconomic Impact Assessment for Rule 1153.1: https://www.aqmd.gov/docs/default-source/clean-air-plans/socioeconomic-analysis/first-draft-of-par-1153-1socioeconomic-impact-assessment_june30_2023.pdf
+- South Coast AQMD, 2022 AQMP socioeconomic analysis (REMI conference slides, 2023): https://wp.remi.com/wp-content/uploads/2023/10/Tony-Tian-presentaiton.pdf
+- US EPA (2024), Integrated Iron and Steel NESHAP fact sheet: https://www.epa.gov/system/files/documents/2024-03/final-iis-fact-sheet_0.pdf; GAO B-336203: https://www.gao.gov/products/b-336203
+- US EPA (2024), Coke Ovens NESHAP Economic Impact Analysis: https://www.epa.gov/system/files/documents/2024-05/coke-ovens-rtr-eia-final-2024-05.pdf
+- Industrious Labs, news archive: https://www.industriouslabs.org/archive
