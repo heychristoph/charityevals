@@ -98,6 +98,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "california-yimby-education-fund-charityevals": { b: { USA: 1 }, note: "Our build: renters and homeowners in California, through the extra homes state housing laws allow." },
   "economic-security-project-charityevals": { b: { USA: 1 }, note: "Our build: lower-income US families, through state tax credits, guaranteed income pilots and public options." },
   "prison-policy-initiative-charityevals": { b: { USA: 1 }, note: "Our build: incarcerated people and their families in the United States (federal phone caps, state free-call laws, decarceration)." },
+  "drug-policy-alliance-charityevals": { b: { USA: 1 }, note: "Our build: people in the United States spared drug arrests, overdose deaths averted, and cannabis users (New York, New Jersey, New Mexico, Oregon)." },
   "innocence-project-charityevals": { b: { USA: 1 }, note: "Our build: wrongly convicted people in US prisons and their families (exonerations, reforms that prevent wrongful convictions, compensation)." },
   "the-bail-project-charityevals": { b: { USA: 1 }, note: "Our build: people bailed out or supported pretrial at The Bail Project's US sites, and their families." },
   "the-bail-project-charityevals-advocacy": { b: { USA: 1 }, note: "Our build: people kept out of pretrial detention by the US state campaigns (Texas, Florida, Oklahoma and others)." },

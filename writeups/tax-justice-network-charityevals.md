@@ -20,7 +20,7 @@ Tax havens let multinationals and wealthy people avoid tax. When tax authorities
   - the win counts for the years a won reform counts on the site, less the shared yearly chance that such a reform is repealed;
   - the network gets 8% of the movement's credit in the years the standards were won, and civil society 15% of all credit: governments, the US FATCA law and leaked documents did most. Exchange of information on request, which predates the network's proposals, gets half that credit. That makes 1%;
   - we trust the revenue figure at 70%, and judge 60% of the identified revenue is collected;
-  - side effects: tax people now pay because evasion is harder adds half again, revenue from the other two standards adds 10%, and banks' reporting costs take away 2%.
+  - side effects: tax people now pay because evasion is harder adds half again, and revenue from the other two standards adds 10%; banks' reporting costs (the standards' compliance costs, counted in full) take away 2%.
 - **UN convention (about 49%):**
   - lower-income countries lose US$47 billion a year to cross-border tax abuse (the network's own 2023 estimate); all countries lose US$480 billion;
   - the chance it comes into force with substance is the site's shared 40% for a contested policy issue. If it does, its rules would recover 5% of the losses if applied in full (an upper anchor: the OECD expected its global minimum tax to raise about a third as much as the losses), starting in about five years, and 60% is applied;

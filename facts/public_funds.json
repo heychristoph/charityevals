@@ -48,7 +48,7 @@
     },
     {
       "id": "corporate_tax_payer_multiple",
-      "label": "Consumption per person of those who bear corporate income tax, as a multiple of the national average",
+      "label": "Consumption per person of those who bear corporate income tax, as a multiple of the average on the survey scale",
       "unit": "multiple",
       "format": "multiple",
       "value": {
@@ -66,6 +66,25 @@
         "retrieved": "2026-11-14"
       },
       "explainer": "On the log scale a dollar taken from someone costs 1 over their consumption, so the multiple that counts is the dollar-weighted harmonic mean of the payers' consumption, set by the least well-off who bear much. Corporate tax falls about three quarters on owners of capital (shareholders, mostly the richest tenth and pension funds) and a quarter on workers (JCT, CBO), who consume about the average (on the survey scale the recipients are on, docs/normalization.md 2.14): with a quarter on them, the multiple can't exceed 4 however rich the owners, and with the owners' share at 4 to 6 times the average it is about 2.3 to 2.7. 2.5, range 1.5 (more on labour in an open economy) to 4 (the 25/75 split with the owners very rich). Read by every model that values corporate tax raised or kept net of what it costs those who pay (Fair Tax Foundation, Tax Justice Network's profit shifting)."
+    },
+    {
+      "id": "compliance_cost_payer_multiple",
+      "label": "Consumption per person of those who bear a won rule's compliance costs, as a multiple of the average on the survey scale",
+      "unit": "multiple",
+      "format": "multiple",
+      "value": {
+        "low": 0.8,
+        "best": 1.2,
+        "high": 2
+      },
+      "kind": "judgment",
+      "shape": "lognormal",
+      "source": {
+        "title": "charityevals' judgment, anchored on the split of corporate income tax between owners and workers (public_funds.corporate_tax_payer_multiple) and on regulated utilities passing their costs to ratepayers",
+        "note": "One figure for every model that subtracts the compliance costs of a rule it helped win (docs/normalization.md 2.21).",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Compliance costs fall on consumers through prices and bills, and on owners through profits. Regulated power and water utilities pass nearly all of theirs to ratepayers, and carmakers most of theirs to buyers; oil and gas producers selling at world prices keep more. With about three quarters on consumers (about the average, or below it for water and energy bills, which take a larger share of poorer budgets) and a quarter on owners (2.5 times the average, as for corporate tax), the dollar-weighted harmonic mean is about 1.2. Range 0.8 (all on bill payers, regressive) to 2 (mostly on owners)."
     }
   ]
 }

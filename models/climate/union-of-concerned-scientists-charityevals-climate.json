@@ -1473,6 +1473,60 @@
       "format": "small",
       "formula": "tco2e_per_dollar * donor_cost_share * marginal_vs_past_average",
       "unit": "Tonnes of CO₂e averted / $"
+    },
+    {
+      "id": "pwr_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA power-plant standards: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_power_plant_rule_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2019 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * pwr_downstream / pwr_tonnes_per_year * pwr_counterfactual_adj * pwr_attribution_share * pwr_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the power system's extra cost (EPA's regulatory impact analysis, $0.98 billion a year), in 2019 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "veh_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA vehicle standards: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_light_medium_vehicle_rule_2024_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2022 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * veh_downstream / veh_tonnes_per_year * veh_counterfactual_adj * veh_attribution_share * veh_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): buyers' technology, charger and insurance costs less their fuel, maintenance and repair savings (EPA's rule, a net saving of $11.3 billion a year, so this row adds value), in 2022 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "accii_compliance_uov",
+      "section": "adjustments",
+      "label": "Advanced Clean Cars II: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.ca_advanced_clean_cars_ii_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2020 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * accii_downstream / accii_tonnes_per_year * accii_counterfactual_adj * accii_attribution_share * accii_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): owners' costs less their savings, taxes taken out (the Air Resources Board's analysis, a net saving of about $1.6 billion a year, so this row adds value), in 2020 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "capinv_compliance_uov",
+      "section": "adjustments",
+      "label": "Cap-and-invest extension: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.ca_cap_and_invest_2025_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2024 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * capinv_downstream / capinv_tonnes_per_year * capinv_counterfactual_adj * capinv_attribution_share * capinv_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): businesses' direct costs less allowance transfers and cost savings (the Air Resources Board's analysis, $2.65 billion a year), in 2024 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "compliance_uov_per_year",
+      "section": "adjustments",
+      "label": "Compliance costs of the won rules, units of value per year of the period",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(pwr_compliance_uov + veh_compliance_uov + accii_compliance_uov + capinv_compliance_uov) / period_years",
+      "explainer": "The rules' compliance costs summed, per year of the period, in the main chain (docs/normalization.md 2.21). The Inflation Reduction Act's credits are public money, not a rule's compliance cost (its household money is netted of taxpayers' cost above), so they have no row."
+    },
+    {
+      "id": "uov_counted_per_year",
+      "section": "adjustments",
+      "label": "Units of value a year counted outside the tonnes: public money won for households and the rules' compliance costs",
+      "format": "number",
+      "unit": "uov",
+      "formula": "ira_transfer_uov_per_year + compliance_uov_per_year",
+      "explainer": "The household money (recipients' gain less taxpayers' cost) plus the won rules' compliance costs (negative), the input of the bridge into tonnes."
     }
   ],
   "output": {

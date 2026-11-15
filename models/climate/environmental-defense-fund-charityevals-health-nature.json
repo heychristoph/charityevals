@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "environmental-defense-fund",
   "owner": "charityevals",
-  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, $110M with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (about 3,000 deaths a year avoided, between EPA's two estimates; upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about 0.0019 years of healthy life per $1,000, over half from the lead-pipe rule and most of the rest from the soot standard; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
+  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, $110M with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (about 3,000 deaths a year avoided, between EPA's two estimates; upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about 0.0012 years of healthy life per $1,000 after the two rules' compliance costs (EPA's own figures), over half from the soot standard and most of the rest from the lead-pipe rule; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Environmental Defense Fund (health and nature)",
@@ -1322,8 +1322,9 @@
       "section": "bridges",
       "label": "Deaths and income, in units of value, after adjustments",
       "format": "number",
-      "formula": "pm_uov * pm_credit + lcri_uov * lcri_credit + fish_uov * fish_credit + catastrophe_deaths * annual_risk_reduction * protection_years * catastrophe_value_per_death",
-      "unit": "UoV"
+      "formula": "pm_uov * pm_credit + lcri_uov * lcri_credit + fish_uov * fish_credit + catastrophe_deaths * annual_risk_reduction * protection_years * catastrophe_value_per_death + (pm_compliance_uov + lcri_compliance_uov) / (1 + unmodelled_benefits_adj)",
+      "unit": "UoV",
+      "explainer": " The won rules' compliance costs (docs/normalization.md 2.21, negative) are added here, divided by one plus the unmodelled-benefits share so that share, applied to the total below, doesn't scale them."
     },
     {
       "id": "dalys_from_uov",
@@ -1332,6 +1333,24 @@
       "format": "number",
       "formula": "uov_bridged / ($uov_per_daly)",
       "unit": "DALYs"
+    },
+    {
+      "id": "pm_compliance_uov",
+      "section": "bridges",
+      "label": "PM2.5 standard: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_pm_naaqs_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2017 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * p_success * pm_years * pm_counterfactual_adj * pm_attribution_share * pm_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): control costs in 2032 (EPA's regulatory impact analysis, $590 million a year), in 2017 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "lcri_compliance_uov",
+      "section": "bridges",
+      "label": "Lead-pipe rule: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_lcri_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2022 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * p_success * lcri_years * lcri_counterfactual_adj * lcri_attribution_share * lcri_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): water systems' lead-pipe replacement and other costs, passed to ratepayers (EPA's analysis, $1.47 to $1.95 billion a year), in 2022 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
     },
     {
       "id": "wellbys_bridged",

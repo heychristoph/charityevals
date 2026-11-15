@@ -112,7 +112,10 @@ export function figureIn(metric: Metric, factor: number): Figure {
     factor,
     format: (x) => {
       const s = formatYears(x * factor);
-      return s === "—" ? s : `${metric.prefix ?? ""}${s}${metric.suffix ?? ""}`;
+      if (s === "—") return s;
+      // The sign before the prefix: −$0.5, not $−0.5.
+      const neg = s.startsWith("−");
+      return `${neg ? "−" : ""}${metric.prefix ?? ""}${neg ? s.slice(1) : s}${metric.suffix ?? ""}`;
     },
   };
 }

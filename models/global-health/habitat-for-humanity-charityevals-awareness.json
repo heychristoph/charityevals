@@ -5,12 +5,18 @@
   "cause": "global-health",
   "beneficiaries": {"USA":0.02,"HND":0.0116,"DOM":0.0282,"PER":0.0314,"ARM":0.0494,"MKD":0.0245,"ROU":0.0123,"EGY":0.0993,"KEN":0.1268,"UGA":0.063,"MWI":0.1408,"ZMB":0.1528,"PHL":0.0995,"BGD":0.1404},
   "beneficiaries_note": "Our build: the global Home Equals campaign (98% of the result at the defaults), valued country by country over the 13 stand-in countries of the international build, each region a quarter of the people (Home Equals publishes no split, a judgment), so the shares follow each country's net value per person; US housing advocacy 2%.",
-  "destination_reads": ["givewell:against-malaria-foundation","givewell:malaria-consortium","givewell:helen-keller-intl","givewell:new-incentives","givedirectly"],
+  "destination_reads": [
+    "givewell:against-malaria-foundation",
+    "givewell:malaria-consortium",
+    "givewell:helen-keller-intl",
+    "givewell:new-incentives",
+    "givedirectly"
+  ],
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "habitat-for-humanity",
   "owner": "charityevals",
-  "summary": "Habitat for Humanity International's (HFHI) public awareness and education programme ($24.3 million in the year to June 2025, plus an estimated $3.5 million of advocacy booked in its other programmes) runs Habitat's media, website and learning events and its housing-policy advocacy: in the US, where the Habitat network counts 142 policy wins and $6.65 billion of state and local housing money in FY2025 ($369 million in FY2026), and worldwide through the Home Equals campaign for informal settlements ($1.24 billion of government money and 7.9 million people since 2023, Habitat's counts). Built from the research on whether advocacy changes policy (most campaigns change nothing; organised constituent contact moves a legislator's vote by about 12 points), valuing the money as housing for the households it reaches net of what it costs the taxpayers who pay for it (with the cost of raising taxes), on the site's log-income scale, and with HFHI's small share of the coalitions behind the wins, a dollar does about 0.007 years of healthy life per $1,000. In the US the households helped are only modestly poorer per person than those who pay, so after programme costs and the housing's in-kind form the money gains almost nothing on that scale; 98% of the value is Home Equals', where the gap is wider. Both branches are discounted for missing data. The biggest uncertainties are how much of the money reaches households, how much poorer they are than those who pay, and how much of it the advocacy caused: across those ranges the result can be negative (the payers losing more than the households gain), which the site's log-scale range doesn't show.",
+  "summary": "Habitat for Humanity International's (HFHI) public awareness and education programme ($24.3 million in the year to June 2025, plus an estimated $3.5 million of advocacy booked in its other programmes) runs Habitat's media, website and learning events and its housing-policy advocacy: in the US, where the Habitat network counts 142 policy wins and $6.65 billion of state and local housing money in FY2025 ($369 million in FY2026), and worldwide through the Home Equals campaign for informal settlements ($1.24 billion of government money and 7.9 million people since 2023, Habitat's counts). Built from the research on whether advocacy changes policy (most campaigns change nothing; organised constituent contact moves a legislator's vote by about 12 points), valuing the money as housing for the households it reaches net of what it costs the taxpayers who pay for it (with the cost of raising taxes), on the site's log-income scale, and with HFHI's small share of the coalitions behind the wins, a dollar does a small net harm, about −0.001 years of healthy life per $1,000: on the household-survey scale the households helped, in the US and in the Home Equals countries, are not much poorer than the taxpayers who pay, so after programme costs, the housing's in-kind form and the cost of raising taxes the payers lose a little more than the households gain. Both branches are discounted for missing data. The biggest uncertainties are how much of the money reaches households, how much poorer they are than those who pay, and how much of it the advocacy caused.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Habitat for Humanity International, public awareness and education (FY2025)",
@@ -424,7 +430,7 @@
       "section": "effect",
       "label": "US: ln(consumption) given up by those who pay, per person reached",
       "format": "number",
-      "formula": "us_funds_per_person * mcpf / (us_payer_multiple * @united_states.consumption_per_person_2024)",
+      "formula": "us_funds_per_person * mcpf / (us_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
       "explainer": "Public money isn't free: the same dollars come from taxpayers or from other public spending. Spread thinly over many payers, each dollar costs them its share of their consumption (the log curve is straight for small amounts): the money per person, times the marginal cost of public funds, over the payers' consumption. So only the move of money from better-off payers to poorer households counts, as a transfer does on the log scale."
     },
     {
@@ -562,7 +568,7 @@
         "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "Incidence only, as in the US branch (the payers' consumption level is the national-accounts mean, in he_net_<country>). Taxes in these countries are mostly consumption taxes, which are progressive in practice because poorer households buy more in informal markets that pay none: Bachas, Gadenne and Jensen (2024, Review of Economic Studies, 'Informality, consumption taxes, and redistribution') find effective consumption-tax rates rising with income across 31 countries. Part of the money is donors' and development banks' lending, repaid from the same taxes. 1.13, range 0.9 to 1.5."
+      "explainer": "Incidence only, as in the US branch (the payers' consumption level is the survey mean, in he_net_<country>, docs/normalization.md 2.14). Taxes in these countries are mostly consumption taxes, which are progressive in practice because poorer households buy more in informal markets that pay none: Bachas, Gadenne and Jensen (2024, Review of Economic Studies, 'Informality, consumption taxes, and redistribution') find effective consumption-tax rates rising with income across 31 countries. Part of the money is donors' and development banks' lending, repaid from the same taxes. 1.13, range 0.9 to 1.5."
     },
     {
       "id": "he_payer_cost_per_person",
@@ -640,7 +646,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Honduras",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_hnd) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.hnd_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_hnd) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_hnd)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -672,7 +678,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, the Dominican Republic",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_dom) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.dom_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_dom) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_dom)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -704,7 +710,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Peru",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_per) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.per_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_per) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_per)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -736,7 +742,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Armenia",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_arm) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.arm_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_arm) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_arm)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -768,7 +774,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, North Macedonia",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_mkd) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.mkd_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_mkd) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_mkd)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -800,7 +806,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Romania",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_rou) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.rou_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_rou) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_rou)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -832,7 +838,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Egypt",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_egy) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.egy_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_egy) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_egy)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -864,7 +870,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Kenya",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_ken) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.ken_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_ken) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_ken)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -896,7 +902,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Uganda",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_uga) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.uga_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_uga) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_uga)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -928,7 +934,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Malawi",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_mwi) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.mwi_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_mwi) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_mwi)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -960,7 +966,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Zambia",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_zmb) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.zmb_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_zmb) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_zmb)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -992,7 +998,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, the Philippines",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_phl) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @survey_consumption.phl_na_consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_phl) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_phl)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {
@@ -1024,7 +1030,7 @@
       "section": "effect",
       "label": "Home Equals: net ln(consumption) gain per person reached, Bangladesh",
       "format": "number",
-      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_bgd) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * @bangladesh.consumption_per_person_2024)",
+      "formula": "he_inkind_value * ln(1 + he_benefit_per_person_year / he_recipient_bgd) * pv_annuity_due(1, $discount_rate, he_benefit_years) - he_funds_per_person * mcpf / (he_payer_multiple * he_survey_bgd)",
       "explainer": "The households' gain at their own consumption, less the payers' cost at the national-accounts mean (true consumption), in this country."
     },
     {

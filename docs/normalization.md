@@ -1205,8 +1205,8 @@ new audit rounds):
   Drawdown 0.00517 → 0.00490, Fair Tax Foundation 0.0562 → 0.0687, Tax Justice Network 1.25 → 1.29, Make-A-Wish
   0.00129 → 0.00156, the Bail Project 0.0125 → 0.0135 and its advocacy 0.00283 → 0.00305, Save the Children's
   advocacy 0.417 → 0.413, the Federation of American Scientists, Council on Strategic Risks and UCS
-  catastrophic-risk models ×1.00. Habitat for Humanity's awareness model is held at the old base: on the one
-  scale it is below zero (0.0076 → −0.0010, verified correct), which the site can't yet show.
+  catastrophic-risk models ×1.00. Habitat for Humanity's awareness model 0.0076 → −0.0010 (its Home Equals
+  taxpayers on the survey scale too; a net harm, 2.22).
 - **Survivors' remaining life.** A death averted is valued at its age band; where studies show survivors
   live shorter than their age group, × the condition's shared remaining-life ratio (facts/survival.json),
   elsewhere nothing: out-of-hospital cardiac arrest 0.8 (0.65–0.95; 84% relative ten-year survival),
@@ -1388,6 +1388,37 @@ $1,000 (awareness-raising's humanitarian dollar 1× → 0.2×), the Norwegian Re
 relief), Save the Children's advocacy 0.426 → 0.417 (Elrha 0.3× → 0.2×; displaced aid 1× → `oda_vs_cash`),
 NRC's programmes 0.2044 → 0.2039 (NORCAP 0.25× → 0.2×), CARE's and World Vision's US aid unchanged at 1×
 (range 0.3-2.5 → 0.4-2). Each changed model had a verification round.
+
+### 2.21 Won rules: their compliance costs count (15 November 2026)
+
+Owner decision 2026-11-15: a regulation a model's work helps win costs those who must comply, and that
+cost enters the main chain as a negative row (never a side effect). **The figure** is the regulator's own
+impact analysis where one exists (EPA's regulatory impact analyses, the Air Resources Board's, the
+Commission's, the UK's), in facts/compliance_costs.json, never typed per model: its yearly cost, net of
+savings the analysis credits to the same payers (gas recovered, fuel saved, so a rule that saves its payers
+money adds value) and without transfers (taxes, allowances, duty). **The value**: money lost by those who
+bear it, as for other money lost (2.20, `@public_funds.*`): dollars over the payers' consumption on the log
+scale, `$uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple × consumption per person)`,
+the payers consumers and owners (1.2 times the survey-scale average of 2.14, 0.8-2, judgment). **The chain**: the
+branch's years, wait, chance, counterfactual, credit, delivered share and missing-data step, not its
+evidence adjustment (which is about the benefits); tonnes models take it through the bridge from uov
+(2.6). Only costs not already netted: money branches valued as the gain less the payers' loss (Prison
+Policy Initiative's call caps) and net income (fisheries) stay as they are, and public money (the
+Inflation Reduction Act's credits) is 2.20's, not a compliance cost. Where no analysis gives a cost, one
+line in the branch's explainer says so (coal retirements, Tongass, Swampbuster, the EU AI Code of Practice,
+Transparency International's changes, typical tobacco wins). At the defaults (years per $1,000):
+Earthjustice's health 0.0084 → 0.0059 (PFAS costs about its benefits, EPA's own finding), EDF's health
+and nature 0.0019 → 0.0012 (soot and lead-pipe rules), Clean Air Task Force 0.0067 → 0.0052, Earthjustice
+0.0024 → 0.0020, EDF's climate 0.0021 → 0.0017, Sierra Club Foundation 0.0058 → 0.0059 (the vehicle rules
+save buyers money), its lands and health 0.0011 → 0.0009, Union of Concerned Scientists' climate 0.0018 →
+0.0017, Cancer Research UK 0.00165 → 0.00153 and the British Heart Foundation 0.0103 → 0.0102 (the
+Tobacco and Vapes Act's shops' lost profits); the Tax Justice Network's judged reporting cost leaves the
+side effects for the main chain (unchanged at the defaults). Each changed model had a verification round.
+### 2.22 Net harm shows as a negative result (15 Nov 2026)
+
+Owner: "negative is allowed". A model whose honest result is net harm keeps a headline below zero; the lint
+no longer rejects it. It ranks last, sits at the left edge of the log-scale bars with its number signed,
+and its simulation is stored in the result's order (5% the most harmful). First: Drug Policy Alliance.
 
 ## 3. Invariants
 

@@ -320,7 +320,8 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     const eps = 1e-9 * Math.max(1, Math.abs(lo), Math.abs(hi));
     if (Number.isFinite(v) && (v < lo - eps || v > hi + eps)) add("high", "bounds", `${id} = ${+v.toPrecision(4)} is outside the plausible range [${lo}, ${hi}] for ${family}`, "Check the unit and the source; if the value is right, argue for it in the explainer (the auditor decides).", id);
   }
-  if (output && Number.isFinite(vals[output]) && vals[output] <= 0) add("high", "non-positive", `bottom line is ${vals[output]}`, "Check signs and the outcome chain.", output);
+  // A bottom line at or below zero is allowed: a programme whose honest result is net harm shows it
+  // (owner, 15 Nov 2026; docs/normalization.md 2.22). The audit checks the signs.
   return out;
 }
 
