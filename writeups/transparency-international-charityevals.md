@@ -1,6 +1,6 @@
 ### Summary
 
-Transparency International campaigns against corruption worldwide, through a Secretariat in Berlin and more than 100 national chapters. Our model of the Secretariat's 2025 work comes to **<span data-figure="headline" data-model="transparency-international-charityevals">0.03</span> years of healthy life per 1,000 dollars**, about half the site's global-health median. It is a very uncertain figure: how much of corruption's cost one change in a law or rule removes, and how many people an average change governs, are our judgments, with no study that measures them.
+Transparency International campaigns against corruption worldwide, through a Secretariat in Berlin and more than 100 national chapters. Our model of the Secretariat's 2025 work comes to **<span data-figure="headline" data-model="transparency-international-charityevals">0.03</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure: how much of corruption's cost one change in a law or rule removes, and how many people an average change governs, are our judgments, with no study that measures them.
 
 ### What the charity does
 

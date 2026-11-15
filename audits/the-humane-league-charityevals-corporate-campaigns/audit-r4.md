@@ -1,6 +1,6 @@
 # Audit: the-humane-league-charityevals-corporate-campaigns, round 4
 Result: 3.190 ced/$ = 3.509e-4 years of healthy life per 1,000 dollars (combined range 1.277e-5–0.009645); cause median 7.416e-4 (×0.47). Verdict: pass.
-Model-sha: 0456b924751dd104d8668748f54cd3658a5348484b10bedd70e993d4ae5c35da
+Model-sha: 208ebdc809ccd4fceb5c65e04b34f736ebf436705e4ba8468ef24e144fc5ea7d
 Scope: unchanged since round 3 (scoped verification after the merge into main): the cage-free accountability line, US and global, $5,108,314 of THL's 2025 programme spending; the model and write-up were not re-audited for sources.
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model "Findings (0)" on this model, on other-programmes and on owa-grants), invariants none, normalization-audit not re-run (not requested), check.ts "all models valid", simulation-check stable (5% 0.184, 50% 1, 95% 3.36 × best guess; same as round 3).
 Previous round: round 3: the model's own findings were none; its two lows (owa_coordination_cost section differing between other-programmes and grants; write-up not listing L5/L6) concern the other models and the write-up wording, no effect on this result. Round 2 and round 1: H1 (ACE blocks labelled US/global the right way round: ace_cost_us 3,372,446, ace_cost_global 1,604,910, program_spend = their sum × CPI 2025/2024), H2 (UK subtraction: uk_switches_in_count {0.1M, 0.4M, 1.85M} identical here and in other-programmes; animals_per_year = hens_switched − UK − alliance = 5.46M), H3 (drawn_with: no uk_cage_free rows left here), M1 (acc_counterfactual_share 0.3, {0.1, 0.3, 0.6} identical in this model and other-programmes), M2 (no training branch here), L1–L8: all resolved; thl_acc_share {0.7, 0.87, 0.95} is the same here and in other-programmes; overhead_ratio = total_expenses / program_expenses in all three models; the ACE costs are unchanged.
@@ -22,3 +22,5 @@ Previous round: round 3: the model's own findings were none; its two lows (owa_c
 
 ## Drivers
 Chicken vs person, years a won reform counts, missing-data discount, DALYs per SAD (the site's sliders), then acc_counterfactual_share (judgment 0.1–0.6, reason stated), @next_dollar.the_humane_league and the shared cage-to-aviary SADs. Peers: ×0.47 of the animal-welfare median, in line with the other two THL models (4.9e-4, 5.3e-4); no gap needing a reason.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

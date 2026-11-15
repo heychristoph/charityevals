@@ -35,7 +35,7 @@ FAS holds about two months of spending in unrestricted reserves and ran a small 
 
 ### What drives the result
 
-The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% and the science-policy work under 1%. The science-policy work counts for so little because it helps Americans, who are far richer than the people a dollar helps most. The result is far below the Arms Control Association's and the Nuclear Threat Initiative's, because only about 5% of FAS's spending is on catastrophic risks.
+The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% and the science-policy work under 1%. The science-policy work counts for so little because it helps Americans, who are far richer than the people a dollar helps most. Only about 5% of FAS's spending is on catastrophic risks.
 
 ### Biggest uncertainties
 
@@ -51,7 +51,7 @@ The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with a branch added for the science-policy work. Round 1 of the independent audit found that the split of the research line missed the Global Risk Program FAS ran in the year, which today's staff list no longer shows. It is now in, split between nuclear, pandemic and AI work. The nuclear evidence figure was brought into line with the peers, and the climate side effect was put on the site's scale for emissions. Round 2 passed. Its smaller findings were fixed: the program's size from the grant's real dates and the director's pay, and today's AI team left out of a year before it joined. A verification round checked those fixes. The rounds are in audits/federation-of-american-scientists-charityevals/.
+The model was built from the catastrophic-risk template, with a branch added for the science-policy work. Round 1 of the independent audit found that the split of the research line missed the Global Risk Program FAS ran in the year, which today's staff list no longer shows. It is now in, split between nuclear, pandemic and AI work. The nuclear evidence figure was brought into line with the site's other nuclear models, and the climate side effect was put on the site's scale for emissions. Round 2 passed. Its smaller findings were fixed: the program's size from the grant's real dates and the director's pay, and today's AI team left out of a year before it joined. A verification round checked those fixes. The rounds are in audits/federation-of-american-scientists-charityevals/.
 
 ### Sources
 

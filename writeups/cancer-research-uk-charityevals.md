@@ -38,7 +38,7 @@ The policy branch follows the government's impact assessment of the law. Its fig
 - **Effect:** 8 percentage points of each covered cohort kept from smoking.
 - **Health gain:** 3 healthy years lost per young smoker, arriving about 40 years later and discounted.
 - **Side effects:** less second-hand smoke (9% more), less the harm of those who vape instead (3%).
-- **Credit:** a fifth of the whole campaign took place this year. Campaigning groups had 40% of the resources behind the law, and Cancer Research UK a quarter of theirs: a tenth in all, twice the British Heart Foundation's share.
+- **Credit:** a fifth of the whole campaign took place this year. Campaigning groups had 40% of the resources behind the law, and Cancer Research UK a quarter of theirs: a tenth in all.
 - **Years counted:** the site's shared years a won reform counts.
 
 The information branch works at UK scale:

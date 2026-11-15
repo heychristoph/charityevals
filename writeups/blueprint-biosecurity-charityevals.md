@@ -44,7 +44,7 @@ At the end of 2024 Blueprint had under three months of spending in hand. Since t
 
 ### What drives the result
 
-The result is about four times the median for this cause, below SecureBio's (6.1) and the Johns Hopkins Center for Health Security's (7.5). Like them, it rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research is a step further from use than their work, and its next dollar counts for less. Deaths of people alive now are 90% of the value, the future lost 10%.
+Like them, it rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research is a step further from use than their work, and its next dollar counts for less. Deaths of people alive now are 90% of the value, the future lost 10%.
 
 ### Biggest uncertainties
 

@@ -1,6 +1,6 @@
 ### Summary
 
-The International Refugee Assistance Project (IRAP) gives refugees free legal help to reach safety, and litigates and campaigns to keep those pathways open. Our model of its legal services in the year to August 2025 comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals">0.07</span> years of healthy life per 1,000 dollars**, below the site's global-health median. Its litigation and policy work, modelled separately, comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals-advocacy">0.23</span>**.
+The International Refugee Assistance Project (IRAP) gives refugees free legal help to reach safety, and litigates and campaigns to keep those pathways open. Our model of its legal services in the year to August 2025 comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals">0.07</span> years of healthy life per 1,000 dollars**. Its litigation and policy work, modelled separately, comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals-advocacy">0.23</span>**.
 
 ### What the charity does
 

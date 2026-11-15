@@ -122,11 +122,12 @@ so the severity rests on a number.
   on the model's own ranges (audit-model's joint low–high with shared assumptions and facts at their
   best): the shared ones are the site's, not the builder's.
 - Peers: where the result sits among models in the same unit, intervention and cause (audit-model
-  prints the median), and which row explains the gap. More than 10× the cause's median needs a
-  stated, sourced reason in the `summary` (INV-15); without one it is high. Under a
-  tenth of it: find the row that explains the gap and check scope, reach and persistence first; a gap that comes from a different programme, year
-  or counting rule than the site's is a finding with its fix, a gap the evidence supports is stated in
-  the summary. Never tune toward a peer's or an evaluator's number: the fix is the rule, not the result.
+  prints the median), and which row explains the gap. Over 10× the cause's median or under a tenth of
+  it: find that row and check scope, reach and persistence first; a gap that comes from a different
+  programme, year or counting rule than the site's is a finding with its fix, a gap the evidence
+  supports is noted in the audit. Never in the summary or write-up: site text never compares with other
+  charities, a median, an average or peers (the lint's `comparison` code). Never tune toward a peer's
+  or an evaluator's number: the fix is the rule, not the result.
 
 ## 6. Severity
 
@@ -135,11 +136,11 @@ so the severity rests on a number.
   rules (an unsourced number, a shared figure retyped or replaced by an own conversion, a judgment filed
   as observed); a conservative or optimistic case where a best guess is possible (it would rank the
   model unfairly against best guesses); a funding counterfactual subtracted in our view (the ranking
-  is that comparison); an unfinished sheet imported; more than 10× the cause's median with no reason;
-  any lint high, invariant violation or `npm run check` failure.
+  is that comparison); an unfinished sheet imported; a summary or write-up that compares with other
+  charities, a median, an average or peers; any lint high, invariant violation or `npm run check` failure.
 - **medium**: moves the result 10–25%; weak source for a top-10 driver; judgment without a reference
-  class; range clearly too narrow or wide; a gap with peers left unexplained (including under a tenth of
-  the cause's median); a sign convention broken; a write-up with a stale or non-live result, or a result
+  class; range clearly too narrow or wide; a gap with peers (over 10× or under a tenth of the cause's
+  median) whose row isn't found; a sign convention broken; a write-up with a stale or non-live result, or a result
   as a multiple of GiveDirectly.
 - **low**: wording, context, cosmetic structure, better sources.
 

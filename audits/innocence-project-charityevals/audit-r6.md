@@ -14,4 +14,7 @@ Mechanical pass as a ranked charity model: `audit-model.ts` shows two standing L
 Previous round: both lows resolved.
 
 Verdict: pass (no high, no medium; the two standing low notes only)
-Model-sha: b786591a80a0c5f5637e00ca7c88622815755e06f6ca34b9411a19b1a138a3df
+Model-sha: b24b3ba064b91aaca02820dec17a542d94c83eb75f6581b6b66199a830179ef4
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000601 → 0.000489.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

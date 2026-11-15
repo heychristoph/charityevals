@@ -1,6 +1,6 @@
 # Audit: silverlining-charityevals, round 3 (scoped verification of commit a82f120)
 Result: 0.991 tco2e/$ = 0.1218 years of healthy life per 1,000 dollars (combined range 0.00098–15.2 tco2e/$, about 0.00012–1.9 years per $1,000); cause median 0.001926 (×63). Verdict: pass.
-Model-sha: 7a4dc15e9676f712d0de4445d7fd96f5c16916d72a4ea049739f691308b87f97
+Model-sha: 8c0b6fb04d7dd3e70c729e1aa9705e92338cfd55b13843787e6968a9ea6d2706
 Scope: unchanged from round 2 (four branches, 2019-2024, 2024 spending from the audited Form 990). Only the changes of a82f120 were checked.
 Mechanical: lint 0 high / 1 medium (outlier, INV-15 reason given in the summary) / 1 low (spread, stated in the summary); invariants none; check.ts all models valid; simulation-check stable (5% 0, 50% 0, 95% 20.3× the best guess; one single event, misses 68.2% of draws, matching the summary's "near zero at the default risk setting"). normalization-audit not re-run (no change touches what it checks: no row added, removed or re-typed, no shared figure changed). generated/ untouched; git status clean.
 Previous round (round 2's findings):
@@ -29,3 +29,5 @@ No source changed in this round. The $889,390 of other programmes in the new exp
 Unchanged from round 2: the share of the benefit the field's work adds (`decision_value_share`), the shared discount rate (and the timing correction that rides on it), the chance of use, the heat-death delay, and the missing-data discount: all judgments. What would most improve the model remains a quote for the heat_mcc facts from the Rethink Priorities PDF.
 
 Re-stamped (orchestrator, 14 Nov 2026): this round's wording low fixed (deaths_earlier_years: "within 5% at rates from 1% to 4%"); no value changed.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

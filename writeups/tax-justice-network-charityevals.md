@@ -1,6 +1,6 @@
 ### Summary
 
-The Tax Justice Network researches tax havens and campaigns for international tax rules. Our model counts its work since 2003 against two outcomes: the transparency standards it first proposed, now in force worldwide, and the UN tax convention now being negotiated. It comes to **<span data-figure="headline" data-model="tax-justice-network-charityevals">1.3</span> years of healthy life per 1,000 dollars**, more than ten times the site's global-health median, because the outcome is public revenue for lower-income governments, a large sum valued at what government spending does there. It is a very uncertain figure: the network's share of the credit, the years a win counts and what the convention will recover are our judgments.
+The Tax Justice Network researches tax havens and campaigns for international tax rules. Our model counts its work since 2003 against two outcomes: the transparency standards it first proposed, now in force worldwide, and the UN tax convention now being negotiated. It comes to **<span data-figure="headline" data-model="tax-justice-network-charityevals">1.3</span> years of healthy life per 1,000 dollars**, because the outcome is public revenue for lower-income governments, a large sum valued at what government spending does there. It is a very uncertain figure: the network's share of the credit, the years a win counts and what the convention will recover are our judgments.
 
 ### What the charity does
 

@@ -5,12 +5,18 @@
   "cause": "global-health",
   "beneficiaries": {"GBR":0.07,"NGA":0.12,"ETH":0.08,"COD":0.1,"PAK":0.08,"IND":0.06,"SDN":0.06,"SSD":0.04,"SOM":0.05,"AFG":0.05,"YEM":0.05,"BGD":0.05,"UKR":0.03,"PSE":0.04,"MMR":0.04,"TCD":0.04,"NER":0.04},
   "beneficiaries_note": "Our build: shares of the result by branch at the defaults. The two-child limit (about 7%) in the United Kingdom; the Gavi and Nutrition for Growth pledges (about 75%) and Elrha's research (about 20%) over the Gavi-eligible and crisis countries where Save the Children works, weighted towards the largest (Nigeria, the DRC, Ethiopia, Pakistan); a judgment.",
-  "destination_reads": ["givewell:against-malaria-foundation","givewell:malaria-consortium","givewell:helen-keller-intl","givewell:new-incentives","givedirectly"],
+  "destination_reads": [
+    "givewell:against-malaria-foundation",
+    "givewell:malaria-consortium",
+    "givewell:helen-keller-intl",
+    "givewell:new-incentives",
+    "givedirectly"
+  ],
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "save-the-children",
   "owner": "charityevals",
-  "summary": "Save the Children UK's advocacy and awareness work (£13.5m in 2025) and Elrha, its subsidiary that funds humanitarian research (£11.2m). None publishes a measured result, so each is built from what it won or funds, with ranged judgments, and all four branches are counted at half by the shared missing-data slider: the abolition of the UK's two-child limit on Universal Credit (announced November 2025, from April 2026) as affected families' gain in log income less the payers' loss, the 2026-2030 Gavi pledges and the Nutrition for Growth commitments as the value of the extra aid net of what it displaces, and Elrha's grants as the humanitarian spending improved by studies that change practice. It comes to about 0.42 years of healthy life per $1,000 (combined range 0.06-3.1), about six times charityevals' estimate for MSF's advocacy and about five times the site's global-health median, mostly from the Gavi pledges (about seven tenths of the result), then Nutrition for Growth, the two-child limit and Elrha; the result is mostly uncertainty, judgments on what campaigning adds to pledges driving it. The biggest uncertainties are how much of each win the campaigners caused and Save the Children's share of the campaigning.",
+  "summary": "Save the Children UK's advocacy and awareness work (£13.5m in 2025) and Elrha, its subsidiary that funds humanitarian research (£11.2m). None publishes a measured result, so each is built from what it won or funds, with ranged judgments, and all four branches are counted at half by the shared missing-data slider: the abolition of the UK's two-child limit on Universal Credit (announced November 2025, from April 2026) as affected families' gain in log income less the payers' loss, the 2026-2030 Gavi pledges and the Nutrition for Growth commitments as the value of the extra aid net of what it displaces, and Elrha's grants as the humanitarian spending improved by studies that change practice. It comes to about 0.41 years of healthy life per $1,000 (combined range 0.05-3.1), mostly from the Gavi pledges (about seven tenths of the result), then Nutrition for Growth, the two-child limit and Elrha; the result is mostly uncertainty, judgments on what campaigning adds to pledges driving it. The biggest uncertainties are how much of each win the campaigners caused and Save the Children's share of the campaigning.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Save the Children UK, advocacy and humanitarian research (2025)",
@@ -307,9 +313,9 @@
       "section": "effect",
       "label": "Two-child limit: value lost by those who pay for it, per year (units of value)",
       "format": "number",
-      "formula": "0 - tcl_cost_gbp * @fx.usd_per_gbp_2025 * tcl_taxpayer_share / @united_kingdom.consumption_per_person_2024 * $uov_per_ln_consumption",
+      "formula": "0 - tcl_cost_gbp * @fx.usd_per_gbp_2025 * tcl_taxpayer_share / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr) * $uov_per_ln_consumption",
       "unit": "units of value",
-      "explainer": "A side effect: the money comes from other households, at about the average UK consumption, so its loss on the log scale is the cost over average consumption per person (a small loss spread over many). About a third of the families' gain: they consume about 40% of the average per person, and part of the cost is not a loss to anyone entitled.",
+      "explainer": "A side effect: the money comes from other households, at about the UK survey average (the scale the families' share is on, docs/normalization.md 2.14), so its loss on the log scale is the cost over average consumption per person (a small loss spread over many). About a third of the families' gain: they consume about 40% of the average per person, and part of the cost is not a loss to anyone entitled.",
       "side_effect": "added"
     },
     {

@@ -14,5 +14,8 @@ None.
 ## Notes (low, no model change needed)
 - `informed_money` label reads "Philanthropy: giving that follows its guidance (money moved, all shifted, gross)". Since `money_moved` now means money moved gross, "money moved ... gross" in this label echoes the old name. Optional wording: "Philanthropy: giving that follows its guidance (spending changed, all shifted)".
 
-Model-sha: b2840ae74710cf86126ebc71eeda8f3eccce8d7f5cf708df5852ae83031881b6
+Model-sha: 882265ca3ae756bf50861c693ab860a631656b0c057010f7ddd0fa8ea386a3fb
 Verdict: pass
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00517 → 0.0049.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

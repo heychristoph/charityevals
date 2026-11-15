@@ -43,7 +43,7 @@ Money moved = new pledges × yearly giving × discounted years of giving × reco
 
 Its own estimate is a giving multiplier of 6x: $6 of value for effective charities per dollar spent in 2023–2024.
 
-- **What a dollar moved is worth.** It counts dollars to charities that pass its bar as equal. We value each recipient by its figure on the rankings, so a dollar to animal welfare counts far less than a dollar to malaria nets under the site's default species weights. We also count only half the money as new.
+- **What a dollar moved is worth.** It counts dollars to charities that pass its bar as equal. We value each recipient by its figure on the rankings. We also count only half the money as new.
 - **Charities below its bar.** It counts this giving as zero. We value it as an ordinary charity.
 - **Pledges.** It averages two methods (this period's recorded giving, and new pledges' lifetime giving). We count only the new pledges' lifetime giving, because a pledge added this period is a flow. Its two methods give similar totals ($19.3 million and $21.6 million).
 - **Discounting.** It discounts at 3.5%; we use the site's 4%.

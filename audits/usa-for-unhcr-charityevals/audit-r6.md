@@ -14,4 +14,6 @@ Checks passed:
 - years_exposed is a judgment with a range (0.25-1) feeding the tornado; no other new inputs.
 
 Verdict: pass
-Model-sha: 8d3bc7f44e187b78274a3dcfbcf4f72b3d4de2fe9276fa2d6dafd38dd5ff6f8f
+Model-sha: efe879ba4eed586e61a82fe90535590b989b3cd1b6de88a61984ce6cafa1ce6b
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

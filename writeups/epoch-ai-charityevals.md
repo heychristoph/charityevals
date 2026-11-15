@@ -42,7 +42,7 @@ Epoch raised $10.3 million in 2025 and spent $5 million. Since then Coefficient 
 
 ### What drives the result
 
-The result is under a tenth of the median for this cause and close to METR's (0.057). Only part of Epoch's work bears on catastrophic risk, it aims to inform rather than to reduce the risk, and its speed-up harm is among the family's largest. The small misuse share still gives about two thirds of the result: for catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its misalignment one. Deaths of people alive now are 95% of the value, the future lost 5%.
+Only part of Epoch's work bears on catastrophic risk, it aims to inform rather than to reduce the risk, and its speed-up harm is among the family's largest. The small misuse share still gives about two thirds of the result: for catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its misalignment one. Deaths of people alive now are 95% of the value, the future lost 5%.
 
 ### Biggest uncertainties
 

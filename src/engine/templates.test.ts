@@ -22,13 +22,13 @@ describe("build-cea templates, filled in", () => {
       const { lib, models: [m] } = load(filled(raw));
       const reports = checkAll(lib);
       it("loads", () => expect(lib.errors).toEqual([]));
-      // INV-14 (a figure typed into five models) and INV-15 (ten times the cause median) weigh a model against
-      // the charities on the site; a skeleton's example numbers are no charity's, so only they may trip those two.
+      // INV-14 (a figure typed into five models) weighs a model against the charities on the site; a
+      // skeleton's example numbers are no charity's, so only they may trip it.
       it("no invariant flags it", () => {
-        expect(reports.flatMap((r) => r.violations.filter((v) => v.model === m.id && v.inv !== "INV-14" && v.inv !== "INV-15").map((v) => `${v.inv} ${v.where}: ${v.detail}`))).toEqual([]);
+        expect(reports.flatMap((r) => r.violations.filter((v) => v.model === m.id && v.inv !== "INV-14").map((v) => `${v.inv} ${v.where}: ${v.detail}`))).toEqual([]);
       });
       it("every check that applies to a charity model looked at it", () => {
-        for (const id of ["INV-1", "INV-2a", "INV-2b", "INV-2c", "INV-2d", "INV-4", "INV-9", "INV-9b", "INV-10", "INV-11", "INV-13", "INV-14", "INV-15", "INV-18", "INV-19"])
+        for (const id of ["INV-1", "INV-2a", "INV-2b", "INV-2c", "INV-2d", "INV-4", "INV-9", "INV-9b", "INV-10", "INV-11", "INV-13", "INV-14", "INV-18", "INV-19"])
           expect(reports.find((x) => x.id === id)?.status, id).not.toBe("not checked");
         if (m.cause === "animal-welfare") expect(reports.find((x) => x.id === "INV-3")!.checked).toBeGreaterThan(0);
       });

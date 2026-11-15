@@ -51,7 +51,7 @@ The Center's main funder halved its general support in 2023, and that grant ends
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 103. The result is below our Nuclear Threat Initiative model's because the Center works only on pandemics: Rethink's typical nuclear project averts more deaths per dollar than a typical biosecurity one. It is far above our AI-safety models for the same reason the other way: a typical pandemic project averts many times more deaths per dollar than a typical AI project.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 103.
 
 ### Biggest uncertainties
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { lintModel } from "./lint";
+import { comparableNames, comparisons, lintModel } from "./lint";
 import { filled, load as loadAll, templateFiles } from "./test-library";
 
 const files = templateFiles();
@@ -137,5 +137,57 @@ describe("lint", () => {
     const old = { ...without(raw, "missing_data_adj"), source: { ...(raw.source as Row), published: "2026-11-01" } };
     expect(sev(withRow(old, "total_adj", { formula: "evidence_adj * counterfactual_adj * attribution_share * implementation_adj" }))).toContain("medium required-row:missing_data_adj");
     expect(sev(withRow(without(raw, "missing_data_adj"), "total_adj", { formula: "evidence_adj * counterfactual_adj * attribution_share * implementation_adj" }))).toContain("high required-row:missing_data_adj");
+  });
+});
+
+describe("site text never compares", () => {
+  const names = comparableNames([
+    { id: "save-the-children", name: "Save the Children (UK)" }, { id: "miri", name: "Machine Intelligence Research Institute" },
+    { id: "nti", name: "Nuclear Threat Initiative" }, { id: "irap", name: "International Refugee Assistance Project (IRAP)" },
+    { id: "givewell", name: "GiveWell" }, { id: "givedirectly", name: "GiveDirectly" },
+  ], ["givewell"]);
+  it("flags comparisons with peers, medians, averages and other charities", () => {
+    for (const text of [
+      "It is about eight times its peers because it moves sixteen dollars per dollar.",
+      "That is 0.23× the global-health median.",
+      "It comes to 0.003 years, far below the site's global-health median because the help goes to US households.",
+      "far below the median animal charity because care for individual dogs reaches few animals",
+      "It is higher than GiveWell's top charities.",
+      "It is under a tenth of its cause's median, close to METR's.",
+      "about twice charityevals' Save the Children model",
+      "close to our Common Cause and FairVote models",
+      "The result is about 320 times lower than the Nuclear Threat Initiative's.",
+      "MIRI's own adjustments are close to NTI's.",
+      "a little over twice the site's global-health median and about three times IRAP's legal services",
+      "That is far below the site's other wellbeing and global-health models.",
+      "It is far below the global-health charities on the site.",
+      "it sits above the charities it funds, not among typical global-health programmes",
+      "because the site's climate charities rank far below its global-health charities",
+      "a dollar to animal welfare counts far less than a dollar to malaria nets",
+      "about half the middle of the site's global-health charities",
+      "The result is under a tenth of the median for this cause.",
+      "with GovAI's model as the closest peer",
+      "It is one of the most cost-effective charities.",
+    ]) expect(comparisons(text, names), text).not.toEqual([]);
+  });
+  it("passes the model's own statements", () => {
+    for (const text of [
+      "Twice the dose halves the cases, at three times the cost of a net.",
+      "The rest get the median learning gain of randomised education evaluations.",
+      "The next dollar does less than the average did, since an organisation pursues its best opportunities first.",
+      "The climate coverage, valued at the site's own average for a dollar of climate work, adds almost nothing.",
+      "The model was built with a climate branch that reads the site's climate average.",
+      "Compliance costs aren't counted, as in the site's other policy models.",
+      "This page shows Bayelsa, the median location.",
+      "Save the Children UK says it mobilised more than 200 civil-society organisations.",
+      "Law firms gave $31 million of pro bono work, about as much as the organisation spent.",
+      "Events and peer groups ease isolation; the hereditary peers were removed from the Lords.",
+      "Versus Arthritis is credited with the UK's share of research times UK charities' share of UK research.",
+      "Where shifted money would otherwise have gone (one times GiveDirectly, from 0 to 3 times).",
+      "The payers consume two and a half times the UK average.",
+      "Our figure is lower than GiveWell's because we discount for age.",
+      "Newborns of low birth weight are among the most likely to die.",
+      "The result is about 0.11 years of healthy life per $1,000, over nine tenths of it the cash.",
+    ]) expect(comparisons(text, names), text).toEqual([]);
   });
 });

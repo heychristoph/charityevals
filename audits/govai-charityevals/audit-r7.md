@@ -1,6 +1,6 @@
 # Audit: govai-charityevals, round 7 (verification round)
 Result: 0.001576 daly/$ = 1.58 years of healthy life per 1,000 dollars (combined range 0.042-60; model's own ranges 0.12-15.8), unchanged. Verdict: pass.
-Model-sha: 1478e1317c50464352e11e83343f55c9205901508b321b5c928eea51443f04ee
+Model-sha: 78d8da4958713689cb9f9513fa80b54db287bfb444295f4de3c7f9cb8cd7e150
 Scope: only round 6's finding: the own-range figures in the model's `summary` and in writeups/govai-charityevals.md (commit 1696f63 changes only these two lines).
 Mechanical: audit-model lint 0/0/0, findings (0). Not re-run this round (scoped): check.ts, normalization-audit, simulation-check. No file in generated/ was changed.
 
@@ -13,3 +13,5 @@ No findings.
 None (scoped round; no source or row changed).
 
 **Verdict: pass**
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

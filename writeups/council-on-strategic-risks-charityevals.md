@@ -28,7 +28,7 @@ The return doesn't split the Nolan Center's spending by area. The fellowships ar
 | Work others would not have done now | 0.7 | 0.7 | 1 | 0.6 |
 | CSR's share of the resources | 0.8 | 0.9 | 0.95 | 0.7 |
 
-Every part is discounted 50% for missing data. The Converging Risks Lab's climate-nuclear project counts at 0.4 because foresight research is a step further from the risk. The climate-security figure is lower than our Federation of American Scientists model's because past gains in US defence planning are being undone.
+Every part is discounted 50% for missing data. The Converging Risks Lab's climate-nuclear project counts at 0.4 because foresight research is a step further from the risk. The climate-security figure allows for past gains in US defence planning being undone.
 
 Side effects add 5%. Most of that is work against a single detonation or a limited nuclear war, which has no shared forecast. The rest is chemical weapons and the climate-security work's gains beyond better spending. No harm is added beyond a typical project's chance of backfiring.
 
@@ -36,7 +36,7 @@ CSR holds about two months of spending in unrestricted reserves, but most of its
 
 ### What drives the result
 
-After each part's adjustments, the nuclear work brings 63% of the result, the biological work 20%, the fellowships 17% and the climate-security work under 0.01%. The fellowships count for more than their 8% of the cost because their adjustments are light: the alumni's work is already valued at a typical dollar of the field's work. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe. The result is about twice the median of the site's catastrophic-risk models. It sits between the Johns Hopkins Center for Health Security, which works only on pandemics, and the Nuclear Threat Initiative, which spends more of its money on nuclear risk.
+After each part's adjustments, the nuclear work brings 63% of the result, the biological work 20%, the fellowships 17% and the climate-security work under 0.01%. The fellowships count for more than their 8% of the cost because their adjustments are light: the alumni's work is already valued at a typical dollar of the field's work. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe.
 
 ### Biggest uncertainties
 

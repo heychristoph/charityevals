@@ -14,5 +14,7 @@ None.
 ## Notes (low, no model change needed)
 - The `informed_money` label starts "Money moved: funders' and advocacy organisations' spending whose allocation ... changed". With `money_moved` now meaning gross money moved, "Money moved:" is the old name. Optional wording: "Spending changed: funders' and advocacy organisations' spending whose allocation its 2025 animal welfare work changed (US$)".
 
-Model-sha: b4b2ca51bbfc0804e992152ac723d7ca9dfb0dbdefabd8c292cdb8a5a0680eff
+Model-sha: bf37c2772a15ee01a3e541e423dd0274b4274b704147269a0e82c8199c963907
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

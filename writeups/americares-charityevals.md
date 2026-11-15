@@ -1,6 +1,6 @@
 ### Summary
 
-Americares, based in Stamford, Connecticut, gets donated medicines and supplies to clinics and patients in the US and about 90 other countries, runs its own clinics, and responds to disasters. Our model of its medicine and health-services programmes, 93 million dollars of its own (cash) spending in the year to June 2025, gives **<span data-figure="headline" data-model="americares-charityevals">0.015</span> years of healthy life per 1,000 dollars**; its emergency programmes (40 million dollars) give **<span data-figure="headline" data-model="americares-charityevals-emergency">0.04</span>**. Both are far below the site's other global-health charities, mostly because the donated medicine and partners' own staff, not Americares' cash, are nearly all the resources behind the medicine it handles, and drug companies would most likely run their patient-assistance programmes without it.
+Americares, based in Stamford, Connecticut, gets donated medicines and supplies to clinics and patients in the US and about 90 other countries, runs its own clinics, and responds to disasters. Our model of its medicine and health-services programmes, 93 million dollars of its own (cash) spending in the year to June 2025, gives **<span data-figure="headline" data-model="americares-charityevals">0.015</span> years of healthy life per 1,000 dollars**; its emergency programmes (40 million dollars) give **<span data-figure="headline" data-model="americares-charityevals-emergency">0.04</span>**. Both are low, mostly because the donated medicine and partners' own staff, not Americares' cash, are nearly all the resources behind the medicine it handles, and drug companies would most likely run their patient-assistance programmes without it.
 
 ### What the charity does
 
@@ -27,7 +27,7 @@ Every branch's effect is our judgment, not measured, so each is discounted by th
 
 ### What drives the result
 
-The missing-data slider, then how much a trained health worker's patients gain, the clinic patients' risk of death, and the price of donated medicine where it's used. Valuing donated medicine at recorded US list prices would make Americares' share even smaller; valuing it at zero (much of it near-expiry stock the companies would have destroyed) would raise the donated-medicine branch over ten times but leave the result well below the median.
+The missing-data slider, then how much a trained health worker's patients gain, the clinic patients' risk of death, and the price of donated medicine where it's used. Valuing donated medicine at recorded US list prices would make Americares' share even smaller; valuing it at zero (much of it near-expiry stock the companies would have destroyed) would raise the donated-medicine branch over ten times.
 
 ### Biggest uncertainties
 

@@ -10,7 +10,7 @@
   "estimate_basis": "past_average",
   "charity": "economic-security-project",
   "owner": "charityevals",
-  "summary": "Economic Security Project's 501(c)(3), a US non-profit spending about $10 million a year, campaigns for state child and earned income tax credits, guaranteed income, the IRS's free Direct File service and public options such as city-run grocery stores. Its average year of spending over 2022-2024 is counted against a share of the $3.6 billion a year of state tax credits enacted in those years (15% caused by advocates, 13% of the advocates' resources its own), valued for lower-income families net of what the credits cost state taxpayers; guaranteed income pilots, Direct File (whose $73 million cost to taxpayers nearly cancels what it gave its users) and a planned public grocery store in Chicago add little. With its next dollar at 42% of the average, it comes to about 0.09 years of healthy life per 1,000 dollars. The result is mostly uncertainty: how much of the credits the advocates caused and Economic Security Project's share of them are judgments from the research on advocacy, and every branch is discounted by the shared missing-data slider.",
+  "summary": "Economic Security Project's 501(c)(3), a US non-profit spending about $10 million a year, campaigns for state child and earned income tax credits, guaranteed income, the IRS's free Direct File service and public options such as city-run grocery stores. Its average year of spending over 2022-2024 is counted against a share of the $3.6 billion a year of state tax credits enacted in those years (15% caused by advocates, 13% of the advocates' resources its own), valued for lower-income families net of what the credits cost state taxpayers; guaranteed income pilots, Direct File (whose $73 million cost to taxpayers outweighs what it gave its users) and a planned public grocery store in Chicago add little. With its next dollar at 42% of the average, it comes to about 0.07 years of healthy life per 1,000 dollars. The result is mostly uncertainty: how much of the credits the advocates caused and Economic Security Project's share of them are judgments from the research on advocacy, and every branch is discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Economic Security Project (501(c)(3)), 2022-2024",
@@ -572,8 +572,8 @@
       "section": "effect",
       "label": "State tax credits: ln(consumption) given up by those who pay, per person per year of credits",
       "format": "number",
-      "formula": "ctc_credit_per_person * mcpf / (ctc_payer_multiple * @united_states.consumption_per_person_2024)",
-      "explainer": "The credit's cost at the national-accounts consumption per person, times the cost of raising it."
+      "formula": "ctc_credit_per_person * mcpf / (ctc_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "explainer": "The credit's cost at the household survey's consumption per person (the recipients' scale, docs/normalization.md 2.14), times the cost of raising it."
     },
     {
       "id": "ctc_value_per_person_year",
@@ -768,8 +768,8 @@
       "section": "effect",
       "label": "IRS Direct File: users' savings and new credits less the programme's and credits' cost to taxpayers, ln(consumption)",
       "format": "number",
-      "formula": "(df_fees_saved + df_new_credits) / (df_filer_consumption_share * @united_states.ce_expenditure_per_person_2024) - (df_cost_2024 + df_cost_2025 + df_new_credits) * mcpf / (df_payer_multiple * @united_states.consumption_per_person_2024)",
-      "explainer": "A dollar saved, received or paid is worth one over the consumption of who saves, receives or pays it (the small-change form of the log scale): about $18 million saved and $20 million of credits newly claimed by moderate-income users, against $73 million of programme cost and the credits' cost to federal taxpayers. Slightly positive: the service cost taxpayers more dollars than it gave its users, but its users are poorer than those who pay. Users' time saved and tax-preparation firms' lost margins (borne by richer shareholders) are left out and roughly offset."
+      "formula": "(df_fees_saved + df_new_credits) / (df_filer_consumption_share * @united_states.ce_expenditure_per_person_2024) - (df_cost_2024 + df_cost_2025 + df_new_credits) * mcpf / (df_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "explainer": "A dollar saved, received or paid is worth one over the consumption of who saves, receives or pays it (the small-change form of the log scale): about $18 million saved and $20 million of credits newly claimed by moderate-income users, against $73 million of programme cost and the credits' cost to federal taxpayers. Slightly negative: the service cost taxpayers more dollars than it gave its users, more than its users being poorer than those who pay makes up for. Users' time saved and tax-preparation firms' lost margins (borne by richer shareholders) are left out and roughly offset."
     },
     {
       "id": "df_value",

@@ -1,7 +1,7 @@
 # Audit: wounded-warrior-project-charityevals-mental-health, round 5 (verification)
 
 Result: 2.478e-5 wellby/$ = 0.001618 years of healthy life per 1,000 dollars (combined range 0.00036-0.0072); cause median 0.104 (x0.0155). Verdict: **pass** (no high findings).
-Model-sha: 68d1c708abaf5422ccfc3998a4560818b610f9d89408b0a9f199b278aeb3c9ae
+Model-sha: 345ffdec9ae73b1c6ea963d78c05744ac87265e9adff780bf4edb279cc8ab94c
 Scope: only the changes since round 4 (diff 09393a2..HEAD; main was merged in between, so the median moved).
 
 Mechanical: audit-model 0 high / 0 medium / 1 low (far-below; the summary gives the reason and "under a fiftieth" matches x0.0155). normalization-audit: no violation for this model; `git checkout -- generated` run afterwards.
@@ -22,3 +22,5 @@ None re-fetched for this model (see items above); the arithmetic of the 0.60 was
 
 ## Drivers
 `iop_evidence_adj`, `iop_counterfactual_adj`, `wellby_factors.wellbys_per_sd_year`, effect duration, `missing_data_discount` on the therapy and support branches.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

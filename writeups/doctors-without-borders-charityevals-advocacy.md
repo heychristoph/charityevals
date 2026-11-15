@@ -18,7 +18,7 @@ The missing-data slider (0.013 to 0.13), the years a win counts (0.02 to 0.18), 
 
 ### Why it is so low
 
-About three fifths of the site's global-health median: advocacy's effects are spread over many actors and MSF's share of them is small, the evidence links spending to outcomes only through long chains of judgment, all three branches are discounted for missing data, and past wins count at half for the next dollar. A higher figure would need MSF to have caused more of the price cuts than a quarter of a half, or its communications to move much more aid than the research suggests.
+Advocacy's effects are spread over many actors and MSF's share of them is small, the evidence links spending to outcomes only through long chains of judgment, all three branches are discounted for missing data, and past wins count at half for the next dollar. A higher figure would need MSF to have caused more of the price cuts than a quarter of a half, or its communications to move much more aid than the research suggests.
 
 ### How this model was checked
 

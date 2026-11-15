@@ -1,8 +1,8 @@
 ### Summary
 
-Make-A-Wish America and its 58 chapters grant wishes to children with critical illnesses: a trip, a meeting with a hero, a gift or an experience the child chooses. Our model of the whole US network in fiscal 2024 comes to **<span data-figure="headline" data-model="make-a-wish-charityevals">0.001</span> years of healthy life per 1,000 dollars**.
+Make-A-Wish America and its 58 chapters grant wishes to children with critical illnesses: a trip, a meeting with a hero, a gift or an experience the child chooses. Our model of the whole US network in fiscal 2024 comes to **<span data-figure="headline" data-model="make-a-wish-charityevals">0.0016</span> years of healthy life per 1,000 dollars**.
 
-That is far below the site's other wellbeing and global-health models. A wish costs about $21,600 with fundraising and management, as much as therapy for dozens of people, and the one randomised trial of a wish found that it lifts a sick child's quality of life for some months. An observational study suggests it may save some hospital costs; nothing in the evidence suggests it changes whether the child survives. The biggest uncertainties are the size of the effect (one small trial) and how long it lasts (measured once, five weeks after the wish).
+A wish costs about $21,600 with fundraising and management, as much as therapy for dozens of people, and the one randomised trial of a wish found that it lifts a sick child's quality of life for some months. An observational study suggests it may save some hospital costs; nothing in the evidence suggests it changes whether the child survives. The biggest uncertainties are the size of the effect (one small trial) and how long it lasts (measured once, five weeks after the wish).
 
 ### What the charity does
 

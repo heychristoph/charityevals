@@ -1,6 +1,6 @@
 # Audit: campaign-for-tobacco-free-kids-charityevals, round 5 (verification of the shared tobacco figures)
 Result: 1.350e-4 daly/$ = 0.1350 years of healthy life per 1,000 dollars (combined range 0.0096–1.893); cause median 0.06415 (x2.1). Verdict: pass.
-Model-sha: f23d7cb07b701ec0a08d2f842063af9ecbfc7456f2699a288be866dbcbef50ff
+Model-sha: 9caaeac6fb8ff347babb170879d9fefecaef4bf3c63432d39125e997523b0c34
 Scope: verification round on commit 3e68437 only (re-pointing to facts/tobacco.json, the (1 - yld_share) removal, the vape-ban side effect, waivers, write-up). Programmes and year unchanged from round 4.
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model findings: 0), invariants none, normalization-audit none for this model (generated/ restored), check.ts passes, simulation stable (5%-95%: 0.246x-3.79x of best guess).
 Previous round: round 4 findings not re-examined (out of scope); nothing in this diff reopens them.
@@ -30,3 +30,5 @@ Result before 0.134368, after 0.1350 (+0.5%): the 40-year never-start lag lowers
 Win years counted (judgment, site rule), missing-data discount (judgment, site rule), next-dollar slider at 42% (estimate), the priority-country share averted (judgment anchored on Lyle and Hendrie), the discount rate. The tobacco facts now in the tornado (quit share 0.4-0.8, lags) move the result by under +/-20%. Best improvement: a sourced per-charity next-dollar figure (deferred by owner decision).
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

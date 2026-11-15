@@ -1,6 +1,6 @@
 ### Summary
 
-The ASPCA runs an animal hospital, adoption centre and low-cost clinics, moves animals from crowded shelters to places with more adopters, neuters, answers poison calls, rescues animals from disasters and cruelty, funds other shelters and lobbies for animal laws across the United States. Our model of its work for dogs, cats and horses comes to **<span data-figure="headline" data-model="aspca-charityevals">0.0001</span> years of healthy life per $1,000**, below the median animal charity on the site: care for one animal at a time reaches few animals per dollar. Its farm-animal work, modelled separately, comes to **<span data-figure="headline" data-model="aspca-charityevals-farm-animals">0.00004</span> years of healthy life per $1,000**.
+The ASPCA runs an animal hospital, adoption centre and low-cost clinics, moves animals from crowded shelters to places with more adopters, neuters, answers poison calls, rescues animals from disasters and cruelty, funds other shelters and lobbies for animal laws across the United States. Our model of its work for dogs, cats and horses comes to **<span data-figure="headline" data-model="aspca-charityevals">0.0001</span> years of healthy life per $1,000**: care for one animal at a time reaches few animals per dollar. Its farm-animal work, modelled separately, comes to **<span data-figure="headline" data-model="aspca-charityevals-farm-animals">0.00004</span> years of healthy life per $1,000**.
 
 ### What the charity does
 

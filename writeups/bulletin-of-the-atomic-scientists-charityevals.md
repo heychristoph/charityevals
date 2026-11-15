@@ -33,7 +33,7 @@ Each area gets its own adjustments:
 | The Bulletin's share of the resources | 0.85 | 0.85 | 0.85 | 0.85 |
 | Missing-data discount | 0.5 | 0.5 | 0.5 | 0.5 |
 
-The Bulletin reaches far more people than most groups in the field, but it informs rather than campaigns. So its nuclear work gets the site's figure for public-facing work, as Ploughshares Fund's own communications, below the Arms Control Association's briefs for Congress. Its AI and climate coverage sits in crowded fields, where much of it would be written elsewhere. Its share of the resources is below 1 because outside experts write most articles and the Clock's scientists give their time.
+The Bulletin informs rather than campaigns. So its nuclear work gets the site's figure for public-facing work. Its AI and climate coverage sits in crowded fields, where much of it would be written elsewhere. Its share of the resources is below 1 because outside experts write most articles and the Clock's scientists give their time.
 
 The Federation of American Scientists' model credits the Nuclear Notebook to its own spending, so no dollar is counted twice.
 
@@ -45,7 +45,7 @@ The Bulletin had about six months of reserves at June 2025, after deficits of $0
 
 The nuclear coverage brings 96% of the result, the pandemic coverage 4% and the AI coverage under 1%. The climate coverage adds almost nothing: a typical climate dollar averts far fewer deaths than a typical nuclear dollar. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 63.
 
-The result is below the Arms Control Association's 41, the Nuclear Threat Initiative's 23 and Ploughshares Fund's 26. Under half the Bulletin's spending is on nuclear risk, and journalism is further from decisions.
+Under half the Bulletin's spending is on nuclear risk, and journalism is further from decisions.
 
 ### Biggest uncertainties
 

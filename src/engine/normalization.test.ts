@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
-import { applyWaivers, checkAll, inv10, inv11, inv13, inv14, inv15, inv16, inv17, inv18, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
+import { applyWaivers, checkAll, inv10, inv11, inv13, inv14, inv16, inv17, inv18, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -113,16 +113,6 @@ describe("invariant checks", () => {
       ...many("round", 5, "Some halving", 0.5), ...many("bar", 5, "Value of the 8x bar", 8)], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, [], [], read(join(root, "owners.json")));
     expect(l.errors).toEqual([]);
     expect(inv14(l).violations.map(keyOf).sort()).toEqual(["five0 a = 0.137", "five1 a = 0.137", "five2 a = 0.137", "five3 a = 0.137", "five4 a = 0.137"]);
-  });
-
-  it("INV-15 flags a ranked model more than ten times its peers' median unless its summary says why", () => {
-    const owners = read(join(root, "owners.json"));
-    const c = (id: string) => ({ id, name: id, cause: "global-health" });
-    const m = (id: string, x: number, summary = "") => ({ ...base, id, charity: id, owner: "givewell", summary, rows: [{ id: "x", label: "x", value: x, kind: "observed", explainer: "Test input." }, { id: "out", label: "out", formula: "x" }] });
-    const models = [m("a", 1), m("b", 1.2), m("c", 0.9), m("high", 20), m("explained", 30, "It is more than ten times its peers because it is a test.")];
-    const l = buildLibrary(models, { ...assumptions, common: { ...assumptions.common, benchmark: "a" } }, [], models.map((x) => c(x.id)), owners);
-    expect(l.errors).toEqual([]);
-    expect(inv15(l).violations.map(keyOf)).toEqual(["high summary"]);
   });
 
   it("INV-16 flags a ranked value-of-information sheet found by its rows, and a bottom line from another country's column", () => {

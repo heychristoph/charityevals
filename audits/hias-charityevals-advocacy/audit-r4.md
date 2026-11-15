@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-advocacy, round 4 (scoped)
-Model-sha: 040d475799bd997edfeec7329356e69be1274f3d5ed90b5382165f93210da614
+Model-sha: f108d2f7fec1488096ec52d8a2cc3c90db83b2f73104e913c5ebb57d814455fe
 Scope: the reworded explainer of the read-only counterfactual_adj row.
 Mechanical: audit-model 0 high / 0 medium / 1 low (spread, stated in the summary, unchanged); no files rewritten.
 
@@ -10,3 +10,5 @@ Mechanical: audit-model 0 high / 0 medium / 1 low (spread, stated in the summary
 **PASS** (no high findings)
 
 **Verdict: PASS**
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

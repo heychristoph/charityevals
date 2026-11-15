@@ -47,7 +47,7 @@ ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 
 
 ### What drives the result
 
-Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 52. The result sits between the Nuclear Threat Initiative's 23 and the Arms Control Association's 41. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
+Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 52. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
 
 ### Biggest uncertainties
 

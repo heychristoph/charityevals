@@ -18,7 +18,7 @@ Every branch has the same delivery adjustment (85%) and funging factor (1). Ever
 
 ### What drives the result
 
-The missing-data slider comes first. Next are the death rate of severely wasted children without treatment, the value of a child's death, the cost of health care per person covered, and the share of excess deaths the care averts. The combined range runs from about 0.11 to 1.3 healthy years per $1,000. That is about four times the site's global-health median and twice Save the Children: more of the IRC's money goes to malnutrition treatment and cash, whose reach it counts.
+The missing-data slider comes first. Next are the death rate of severely wasted children without treatment, the value of a child's death, the cost of health care per person covered, and the share of excess deaths the care averts. The combined range runs from about 0.11 to 1.3 healthy years per $1,000. Much of the IRC's money goes to malnutrition treatment and cash, whose reach it counts.
 
 ### Side effects
 

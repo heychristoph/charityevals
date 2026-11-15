@@ -20,4 +20,7 @@ None open. The audit-model outlier (medium) and spread (low) lines remain by des
 
 **Verdict: PASS. The round-2 fixes settle all seven findings; no new issues.**
 
-Model-sha: 47e7216f4347e25cfaa1e17df53d9b5e1a045c6415689765cb395d59b9b01ced
+Model-sha: 6d2c0c71fbf3bf00a43228f01761a96a9e0e0acd7f9501a7ffedeab589f3e959
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000253 → 0.000453.
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

@@ -1,4 +1,4 @@
-Model-sha: a0d3a3c8e6782362af80cb9890f9905708fc10e470b28e95854ddc9fe2b00390
+Model-sha: e1370b52fd68b36f454e6ec235f4a2f1678a48880d17660ca776806f9f53cff2
 
 # Audit round 3: KIND advocacy (scoped verification)
 
@@ -14,3 +14,5 @@ Remaining findings:
 - [LOW] spread of ranges (32377x), disclosed in the summary.
 
 **Verdict: PASS (no high findings; no number changed)**
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
