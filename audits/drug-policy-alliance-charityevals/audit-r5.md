@@ -1,7 +1,7 @@
 # Audit: drug-policy-alliance-charityevals, round 5 (verification)
 Result: -4.185e-6 daly/$ native = -0.004185 years of healthy life per 1,000 dollars (combined range -0.0780 to -0.00022; simulation 5% to 95%: -0.030 to +0.0031, i.e. 7.17x to -0.74x the best guess). Verdict: pass.
 Verdict: pass
-Model-sha: df39c9935b07328016f112073a12d597102b9d081d14ecaa6806e5acd9fa5496
+Model-sha: a003eb1cedb19ecbc794b32451dcbee8bdbc69df8929261f45806283c38f8b9d
 Scope: unchanged from round 4 and correct; only the change since round 4 was checked (`git diff HEAD~1 -- models`: the `can_traffic_deaths_per_million` explainer and its `high`, 16 to 17).
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model "Findings (0)"). Invariants: none (INV-15 ignored, per owner). simulation-check: stable ("5% 7.17, 50% 1, 95% -0.742 x best guess"); the plausible-range-crosses-zero warning is expected for a net-harm model (normalization 2.21). normalization-audit not re-run (no rule change; scope was verification only).
 
@@ -26,4 +26,5 @@ Checked the change itself: the only edits are the explainer text and `high` 16 t
 Unchanged from round 4: `can_user_ln_gain` (judgment, largest gain), `can_traffic_deaths_per_million` with `can_traffic_evidence_adj` (largest harm; range 0 to 17 gives -0.0005 to -0.0130), `can_cud_or_26plus` with `can_health_evidence_adj`, `m110_od_evidence`, and the attribution, missing-data and period-share judgments. Most improving: reading the corrigendum and a published consumer-surplus estimate for legal cannabis.
 
 Verdict: pass (0 high, 0 medium, 1 low).
-Model-sha: df39c9935b07328016f112073a12d597102b9d081d14ecaa6806e5acd9fa5496
+Model-sha: a003eb1cedb19ecbc794b32451dcbee8bdbc69df8929261f45806283c38f8b9d
+Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)

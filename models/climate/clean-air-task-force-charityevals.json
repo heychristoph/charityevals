@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "clean-air-task-force",
   "owner": "charityevals",
-  "summary": "Clean Air Task Force (Boston, with offices in Europe and Africa) advocates and does research for climate policy: methane rules, carbon capture, advanced nuclear and fusion energy, power plants and clean fuels; this model counts the six largest policies it worked on that were won in 2022-2025 (the EU Methane Regulation, EPA's oil and gas methane rule, the Inflation Reduction Act's carbon-capture credit, EPA's power-plant standards, the ADVANCE Act and fusion's regulatory framework) against its spending over those years ($42.96M in 2025). At the defaults a dollar given averts about 0.015 tonnes of CO₂e (about $68 a tonne); less the rules' compliance costs (EPA's and the Commission's own figures, about a fifth), 0.0052 years of healthy life per $1,000, nearly all of it from the two methane rules, whose tonnes count for methane's own, earlier warming and for the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (Clean Air Task Force is credited with 1% to 6% of each win), and the US rules have since been weakened or repealed. The biggest uncertainties are the shared discount rate and years a won reform counts, methane's ozone deaths per tonne, and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "Clean Air Task Force (Boston, with offices in Europe and Africa) advocates and does research for climate policy: methane rules, carbon capture, advanced nuclear and fusion energy, power plants and clean fuels; this model counts the six largest policies it worked on that were won in 2022-2025 (the EU Methane Regulation, EPA's oil and gas methane rule, the Inflation Reduction Act's carbon-capture credit, EPA's power-plant standards, the ADVANCE Act and fusion's regulatory framework) against its spending over those years ($42.96M in 2025). At the defaults a dollar given averts about 0.015 tonnes of CO₂e (about $68 a tonne); less the rules' compliance costs (EPA's and the Commission's own figures) and the extra cost of the nuclear power the wins bring forward (the shared IEA/NEA-based figure at the site's discount rate), 0.0041 years of healthy life per $1,000, nearly all of it from the two methane rules, whose tonnes count for methane's own, earlier warming and for the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (Clean Air Task Force is credited with 1% to 6% of each win), and the US rules have since been weakened or repealed. The biggest uncertainties are the shared discount rate and years a won reform counts, methane's ozone deaths per tonne, and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Clean Air Task Force",
@@ -1029,7 +1029,8 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "The six wins are the period's largest, but much of the work isn't in them: the EU Methane Regulation's rules on Europe's own oil, gas and coal; the Fossil Fuel Regulatory Programme (methane rules with up to 20 low- and middle-income countries, from 2024); agricultural and waste methane; hydrogen and zero-carbon fuels rules; superhot-rock geothermal; US state laws; energy access in Africa; the defence of the Mercury and Air Toxics Standards. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 30% of the modelled value (10% to 70%), below the roughly two-fifths of spending they take because the modelled wins are the biggest."
+      "explainer": "The six wins are the period's largest, but much of the work isn't in them: the EU Methane Regulation's rules on Europe's own oil, gas and coal; the Fossil Fuel Regulatory Programme (methane rules with up to 20 low- and middle-income countries, from 2024); agricultural and waste methane; hydrogen and zero-carbon fuels rules; superhot-rock geothermal; US state laws; energy access in Africa; the defence of the Mercury and Air Toxics Standards. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 30% of the modelled value (10% to 70%), below the roughly two-fifths of spending they take because the modelled wins are the biggest.",
+      "side_effect": "added"
     },
     {
       "id": "eor_oil_share",
@@ -1095,13 +1096,22 @@
       "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the power system's extra cost (EPA's regulatory impact analysis, $0.98 billion a year), in 2019 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
     },
     {
-      "id": "compliance_uov_per_year",
+      "id": "nuc_extra_power_cost_uov",
       "section": "adjustments",
-      "label": "Compliance costs of the won rules, units of value per year of the period",
+      "label": "Advanced nuclear: cost of the extra reactors' power over what it replaces, units of value (negative at the best guess)",
       "format": "number",
       "unit": "uov",
-      "formula": "(eumr_compliance_uov + usmeth_compliance_uov + pwr_compliance_uov) / period_years",
-      "explainer": "The rules' compliance costs summed, per year of the period, in the main chain (docs/normalization.md 2.21). The carbon-capture credit is public money, not a rule's compliance cost, and the nuclear and fusion work wins support, not rules, so none has a row."
+      "formula": "-nuc_gw_2050 * nuc_twh_per_gw_year * 1e6 * nuc_deployment_share * nuc_policy_share * p_success * nuc_discounted_years * nuc_attribution_share * nuc_implementation_adj * missing_data_adj * (@climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct + (@climate.advanced_nuclear_premium_usd_per_mwh_usa_7pct - @climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct) * ($discount_rate - @climate.pcge_discount_rate_low) / (@climate.pcge_discount_rate_high - @climate.pcge_discount_rate_low) + @climate.advanced_nuclear_premium_uncertainty_usd_per_mwh) * @cpi.usa_2024 / @cpi.usa_2018 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "explainer": "The reactors the period's wins bring forward cost their customers more per MWh than the fossil power they replace: the shared US gap (facts: climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct and _7pct, from the IEA/NEA levelised costs in 2018 dollars, interpolated at the site's discount rate, plus the shared uncertainty), moved to 2024 dollars, times the branch's credited MWh a year (DOE's pathway × capacity factor × the built and policy shares × the advocacy share × Clean Air Task Force's share × delivered share), over the branch's discounted years, with the missing-data step; valued as money lost by US power customers (docs/normalization.md 2.21: the shared payer multiple × US consumption per person). Every MWh counts, since the deployment is what the wins add; not the evidence adjustment, which is about the tonnes, as for the rules' compliance costs."
+    },
+    {
+      "id": "compliance_uov_per_year",
+      "section": "adjustments",
+      "label": "Compliance costs of the won rules and the extra cost of nuclear power, units of value per year of the period",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(eumr_compliance_uov + usmeth_compliance_uov + pwr_compliance_uov + nuc_extra_power_cost_uov) / period_years",
+      "explainer": "The rules' compliance costs and the advanced nuclear branch's extra power cost summed, per year of the period, in the main chain (docs/normalization.md 2.21). The carbon-capture credit is public money, not a rule's compliance cost; fusion has no cost basis yet (no commercial plant has a published cost), so it has no row."
     },
     {
       "id": "eumr_expected_tonnes",
@@ -1203,7 +1213,7 @@
     {
       "id": "tco2e_from_uov",
       "section": "bridges",
-      "label": "The won rules' compliance costs, in tonnes of CO₂e (negative)",
+      "label": "The won rules' compliance costs and nuclear power's extra cost, in tonnes of CO₂e (negative)",
       "format": "number",
       "unit": "t CO₂e / year",
       "formula": "compliance_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",

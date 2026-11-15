@@ -45,6 +45,7 @@ const BY_ID: Record<string, Rule> = {
   // Happier Lives Institute
   // A charity's own analysis
   "lead-exposure-elimination-project-leep": T("LEEP's projection of a regulation it had just helped start: the homes left unpainted with lead paint, the children spared and their health and earnings are modelled, not measured."),
+  "lead-exposure-elimination-project-leep-2024": T("LEEP's projection to 2100 of rules it is helping bring in: the homes painted without lead, the children spared and their health and earnings are modelled, not measured."),
   // GiveWell exceptions
   "global-alliance-for-improved-nutrition-givewell": T("GiveWell's 2014 salt iodization estimate: the cost per person is a generic figure for iodization plants, not GAIN's count of who got iodized salt, and GAIN's part in raising iodization is GiveWell's guessed 50% chance."),
   "actra-hli": T("a new programme: reach is projected and the effect is from trials of other delivery."),

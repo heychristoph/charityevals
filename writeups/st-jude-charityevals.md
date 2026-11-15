@@ -2,7 +2,7 @@
 
 St. Jude Children's Research Hospital in Memphis treats children with cancer and other catastrophic diseases free to their families, runs one of the world's largest childhood cancer research programmes, and supports children's cancer care in other countries through St. Jude Global. It also trains clinicians and scientists and runs community health programmes in Memphis. Its fundraising arm, ALSAC, raises almost all of the money.
 
-Research comes to **<span data-figure="headline" data-model="st-jude-charityevals-research">0.005</span> years of healthy life per $1,000** you give, and patient care with St. Jude Global, training and community programmes to **<span data-figure="headline" data-model="st-jude-charityevals">0.004</span>**. The reason isn't that St. Jude does its work badly. Most of the patient-care result is St. Jude Global, whose partner hospitals and their governments carry most of the cost of treating the children it helps, and whose gains rest on before-and-after results at a few flagship sites. Its US patients would otherwise be treated at other US children's hospitals with nearly as good results, at US prices. Its research pays off only after many years, and only as one funder among many. St. Jude publishes no controlled measure of any programme's results, so every part of both models counts at the site's shared discount for missing data.
+Research comes to **<span data-figure="headline" data-model="st-jude-charityevals-research">0.002</span> years of healthy life per $1,000** you give, and patient care with St. Jude Global, training and community programmes to **<span data-figure="headline" data-model="st-jude-charityevals">0.004</span>**. The reason isn't that St. Jude does its work badly. Most of the patient-care result is St. Jude Global, whose partner hospitals and their governments carry most of the cost of treating the children it helps, and whose gains rest on before-and-after results at a few flagship sites. Its US patients would otherwise be treated at other US children's hospitals with nearly as good results, at US prices. Its research pays off only after many years, and only as one funder among many. St. Jude publishes no controlled measure of any programme's results, so every part of both models counts at the site's shared discount for missing data.
 
 ### What the charity does
 
@@ -39,37 +39,37 @@ St. Jude has two models, weighted by what each part spends from St. Jude's own f
 - **Graduate school:** graduates a year × the research each directs over a career × the extra output from better training × the health return of a research dollar, after the long wait for research to reach practice.
 - **Community programmes:** adolescents whose clinicians the HPV programme reaches × the rise in vaccination × the lifetime risk of dying of an HPV cancer × the vaccine's effect, decades later. The other community activities count at a share of the HPV work's value per dollar.
 
-Insurers', governments', hospitals' and other partners' money lowers St. Jude's share of the credit, compared at direct cost on both sides. Partner hospitals' costs are put in 2024 prices. Overhead is spread over the spending St. Jude pays for itself. Every wait is discounted at the shared rate, including the 3.7 years a donation spends in the reserves, where it earns a real return.
+Insurers', governments', hospitals' and other partners' money lowers St. Jude's share of the credit, compared at full cost on both sides (St. Jude's side with its share of the hospital's administration). Partner hospitals' costs are put in 2024 prices. Overhead is spread over the spending St. Jude pays for itself. Every wait is discounted at the shared rate, including the 3.7 years a donation spends in the reserves, where it earns a real return.
 
-**Research** (medical research) has two branches. The cancer branch starts from the world's childhood cancer burden: 11.7 million DALYs a year (GBD 2023), nearly all of it from 144,000 deaths. The non-cancer branch starts from sickle cell disease (376,000 deaths a year, counting the infections and other conditions it makes deadly, and about 0.6 million years lived with illness) and influenza in children under five (2.5 million DALYs, 27,600 deaths). Each multiplies four things:
+**Research** (medical research) has two branches. The cancer branch starts from the world's childhood cancer burden: 11.7 million DALYs a year (GBD 2023), nearly all of it from 144,000 deaths. The non-cancer branch starts from sickle cell disease (376,000 deaths a year, counting the infections and other conditions it makes deadly, and about 0.6 million years lived with illness) and influenza at every age (27,600 deaths under five in 2021, about 121,500 older ones in 2017, before the pandemic). Each multiplies four things:
 
 1. the share of that burden a year's advance averts;
 2. the chance a year of the field's research yields one;
 3. the years it brings the advance forward;
 4. the wait until the advance is in practice, discounted.
 
-St. Jude gets its share of each field's funding: about a fifth of childhood cancer research, about 7% of sickle cell and influenza research. The rest of the non-cancer research, mostly basic science, counts at half the targeted research's value per dollar. The deaths inside each burden are taken out of the DALYs and valued by age at the site's one value of a death, as in every other model; only the illness stays in DALYs. The cost per outcome comes from the field's past record, so the result is scaled by the shared "next dollar" slider.
+St. Jude gets its share of each field's funding: about a fifth of childhood cancer research, about 8% of sickle cell and influenza research. The rest of the non-cancer research, mostly basic science, counts at half the targeted research's value per dollar. The deaths inside each burden are taken out of the DALYs and valued by age at the site's one value of a death, as in every other model; only the illness stays in DALYs. The cost per outcome comes from the field's past record, so the result is scaled by St. Jude's own next-dollar figure: 21%, since it holds about 3.7 years of spending in reserve.
 
 ### What drives the result
 
 - **St. Jude Global's effect at partner hospitals:** the cut in deaths, the children reached, the evidence discount and the partners' own spending. St. Jude Global is 14% of the patient-care model's cost but brings nearly nine-tenths of its result. Partner hospitals and their governments carry most of the cost of treating these children, so St. Jude's share of the credit is about a fifth.
 - **The discount for missing data:** every branch of both models takes it, so the shared slider moves both results in proportion.
 - **Your values:** the value of a healthy year against a doubled income, and the value of a life. US patient care is almost all deaths averted.
-- **Research:** the chance a year's research yields an advance and how much of the burden it averts. Both are judgments, anchored on published returns to medical research. Two check rows bound them: the share of the burden a year's advances remove (0.5%) against the observed fall in childhood cancer deaths, and the field's result per dollar against the UK's roughly 10% a year health return on cancer research. They are sanity bounds, not validations: the UK study counts different gains in a different way. The shared "next dollar" slider moves research the most.
+- **Research:** the chance a year's research yields an advance and how much of the burden it averts. Both are judgments, anchored on published returns to medical research. Two check rows bound them: the share of the burden a year's advances remove (0.5%) against the observed fall in childhood cancer deaths, and the field's result per dollar against the UK's roughly 10% a year health return on cancer research. They are sanity bounds, not validations: the UK study counts different gains in a different way. St. Jude's own next-dollar figure (21%) moves research next most.
 
 ### Biggest uncertainties
 
 - How much better St. Jude's survival is than other US centres' once you allow for which patients it takes. The comparison is between trials; no children were randomised between centres.
 - How many children St. Jude Global's support reaches, and how much it improves their survival. There is no controlled evaluation, and St. Jude publishes no count.
-- The training, graduate-school and community branches rest on research about other programmes. They are small: together about 6% of the patient-care model's cost and 5% of its result.
-- The research chain is almost entirely judgment. Its plausible range spans about two-hundredfold, and the patient-care model's about a hundredfold.
+- The training, graduate-school and community branches rest on research about other programmes. They are small: together about 6% of the patient-care model's cost and 4% of its result.
+- The research chain is almost entirely judgment. Its plausible range spans about 140-fold, and the patient-care model's about sixtyfold.
 
 ### What isn't modelled
 
 - ALSAC's awareness messaging, counted as fundraising rather than as a programme.
 - Lost parental earnings during treatment, which St. Jude doesn't replace.
 - The knowledge St. Jude's patient care produces through its trials, which is in the research model rather than counted twice.
-- Influenza research's benefit to adults, and herd protection from HPV vaccination.
+- Illness from influenza over age five (its deaths are counted), and herd protection from HPV vaccination.
 
 ### How this model was checked
 
@@ -120,6 +120,14 @@ Mechanical checks run on both models (scripts/audit-model.ts, scripts/normalizat
 
 - **4 November 2026**: two site rules applied by script (docs/normalization.md 2.14): the families' savings are measured against the Consumer Expenditure Survey's consumption, and every death averted counts at the shared remaining-life share of childhood-cancer survivors (0.86, Yeh et al. 2020). A verification round of these and round 3's fixes found no high finding (four lows, fixed), so the model is published.
 
+**Audit with receipts (2026-11-15).** A fresh audit of both models found no high issue; its mediums and lows were fixed:
+
+- the evidence discounts rest on the research comparing historically controlled and non-randomised studies with randomised ones;
+- partner hospitals' baseline survival is sourced to Ward et al. 2019's regional estimates;
+- St. Jude's side of each credit share now carries its share of the hospital's administration, as the other funders' figures carry theirs;
+- influenza deaths over five (GBD 2017) are counted, valued by age;
+- the lows: the patient-growth range, HPV deaths at 75 and over valued at their ages, sources, labels and this text.
+
 ### Sources
 
 - [St. Jude and ALSAC, combined audited financial statements FY2025](https://www.stjude.org/content/dam/en_US/shared/www/about-st-jude/financial-information/2025%20St.%20Jude%20-%20ALSAC%20combined%20FS%20-%20ADA%20compliant.pdf)
@@ -130,7 +138,9 @@ Mechanical checks run on both models (scripts/audit-model.ts, scripts/normalizat
 - [National Cancer Institute, Cancer in Children and Adolescents](https://www.cancer.gov/types/childhood-cancers/child-adolescent-cancers-fact-sheet)
 - [Force et al., Lancet 2026](https://doi.org/10.1016/s0140-6736(26)00200-x) and [Force et al., Lancet Oncology 2019](https://doi.org/10.1016/S1470-2045(19)30339-0) (global childhood cancer burden)
 - [Thomson et al., Lancet Haematology 2023](https://doi.org/10.1016/s2352-3026(23)00118-7) and [Sahu et al., Blood 2025](https://doi.org/10.1182/blood-2025-2601) (sickle cell disease burden)
-- [Zhang et al., J Thorac Dis 2026](https://doi.org/10.21037/jtd-2025-aw-2363) (influenza in children under five)
+- [Zhang et al., J Thorac Dis 2026](https://doi.org/10.21037/jtd-2025-aw-2363) (influenza in children under five) and [GBD 2017 Influenza Collaborators, Lancet Respir Med 2019](https://doi.org/10.1016/s2213-2600(18)30496-x) (influenza at all ages)
+- [Ward et al., Lancet Oncology 2019](https://doi.org/10.1016/S1470-2045(19)30273-6) (childhood cancer survival by region)
+- [Sacks, Chalmers and Smith, Am J Med 1982](https://doi.org/10.1016/0002-9343(82)90815-4) and [Deeks et al., Health Technol Assess 2003](https://doi.org/10.3310/hta7270) (non-randomised against randomised evidence)
 - [Glover et al., BMC Medicine 2014](https://doi.org/10.1186/1741-7015-12-99) (returns to UK cancer research) and [Morris, Wooding and Grant, J R Soc Med 2011](https://doi.org/10.1258/jrsm.2011.110180) (the translation lag)
 - [Fung et al., BMJ Global Health 2019](https://pmc.ncbi.nlm.nih.gov/articles/PMC6830048/) (costs and cost-effectiveness of childhood cancer treatment in low- and middle-income countries)
 - [Howard et al., JAMA 2004](https://doi.org/10.1001/jama.291.20.2471) (Recife twinning) and [Ribeiro, Cancer Control 2014](https://www.cancercontrol.info/wp-content/uploads/2014/08/106-110-Ribeiro.pdf) (St. Jude's twinning model)
