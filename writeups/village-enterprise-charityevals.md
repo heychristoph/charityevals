@@ -6,16 +6,16 @@ The result rests on two randomized trials of the program itself, one of its core
 
 ### What the charity does
 
-Village Enterprise picks the poorest households in a village and trains one adult from each for four months. The trainees form business groups of three, which get a seed grant and then a second, smaller grant six months later, and they are mentored for eight more months. Thirty entrepreneurs form a savings group that keeps lending after the program ends. The grants are small: about $50 to $100 per household in the core program and about $200 in DREAMS.
+Village Enterprise picks the poorest households in a village and trains one adult from each for four months. The trainees form business groups of three, which get a seed grant and then a second, smaller grant six months later, and they are mentored for eight more months. Thirty entrepreneurs form a savings group that keeps lending after the program ends. The grants are small and go to the group: about $50 per household in the core program and about $70 in DREAMS.
 
-In fiscal year 2025 it trained 47,505 entrepreneurs, about 17,700 businesses, in Uganda, Kenya, Rwanda, Ethiopia and Tanzania. It spent $17.1M on programs and $21.0M in total, about $440 per household. About a third of program spending went to DREAMS, which runs in refugee settlements in Uganda and Ethiopia with Mercy Corps, and through local organisations Village Enterprise trains in Tanzania. Smaller parts were a version of the model adapted to child nutrition in northern Kenya (Nawiri, cut short when USAID closed in 2025) and work helping the Kenyan and Rwandan governments run graduation programs themselves.
+In fiscal year 2025 it trained 47,505 entrepreneurs, about 17,700 businesses, in Uganda, Kenya, Rwanda, Ethiopia and Tanzania. It spent $17.1M on programs and $21.0M in total, about $440 per household. About a third of program spending went to DREAMS, which runs in refugee settlements in Uganda and Ethiopia with Mercy Corps, and through local organisations Village Enterprise trains in Tanzania. Smaller parts were a version of the model adapted to child nutrition in northern Kenya (Nawiri, cut short when USAID closed in 2025), a digital version piloted in two Ugandan districts (SPRINT), and work helping the Kenyan and Rwandan governments run graduation programs themselves.
 
 ### How the impact happens
 
 1. The grants, training and mentoring let households start businesses: retail, livestock, crops, tailoring.
 2. The businesses' profits raise what households can spend on food, school fees, clothing and other needs. In the trials, household consumption was 7.3% higher in Kenya, 3.6% in Uganda and 17% in DREAMS (13% for its refugee households) than in comparable households that weren't offered the program.
 3. The gains keep coming for some years after the program ends, and the savings groups keep lending.
-4. Money spent in the village may raise neighbours' incomes too (spillovers).
+4. Money spent in the village may raise neighbours' incomes too (spillovers), and governments that adopt the model reach more households.
 
 Consumption is valued on a log scale, the site's shared way, so a gain counts for more the poorer the household.
 
@@ -24,40 +24,43 @@ Consumption is valued on a log scale, the site's shared way, so a gain counts fo
 The [model](/village-enterprise/village-enterprise-charityevals) follows the site's cash and income template.
 
 - **Cost:** all program spending in fiscal year 2025, with management and fundraising spread over it, from the audited financial statements. Every program is a version of the same model, so all of it is set against all the entrepreneurs it trained.
-- **Reach:** 47,505 households, about 6.5 people each, split by country with the charity's own counts. Household size starts from the site's survey figure for each country, weighted by where the charity worked. It is then raised by the ratio the trial measured: the poorest households the program enrols are about 1.4 times the national rural average.
-- **Effect:** each group of households gets the effect measured closest to it. Kenya and Uganda's core program get their own country's result from IDinsight's 2017–2021 trial for the development impact bond (7.3% and 3.6%), and Rwanda gets the mean of the two. DREAMS in Uganda and Tanzania gets the DREAMS trial's result (17%; IDinsight, 2026). Ethiopia's all-refugee camps get the trial's refugee result (13%), cut further because the camps differ from Uganda's settlements. These figures are for all households offered the program; the model uses the slightly larger effects on households that took part. Each group's effect has its own evidence adjustment: 0.87 for the core program and Tanzania, which run in settings the trials didn't cover, 0.95 for DREAMS Uganda, the trial's own setting, and 0.81 for Ethiopia. The gain fades 5% a year and stops after 8 years in our best guess, discounted at the shared rate.
-- **Adjustments:** what would have happened anyway (0.95), the share of the resources that are Village Enterprise's (0.85), counting errors, programs cut short in 2025 and wasted or diverted grants (0.96), and half a year to a year's wait before the gains start. Tanzania's DREAMS households, reached through local organisations no trial has tested, count at the shared missing-data discount. Spillovers add 10%. Other side effects add 10%: assets left over, governments copying the model and nutrition gains, minus competition with other traders.
+- **Reach:** 47,505 households, about 6.5 people each, split by country with the charity's published counts. Household size starts from the site's survey figure for each country, weighted by where the charity worked. It is then raised by the ratio the trial measured: the poorest households the program enrols are about 1.4 times the national rural average.
+- **Effect:** each group of households gets the effect measured closest to it. Kenya and Uganda's core program get their own country's result from IDinsight's 2017–2021 trial for the development impact bond (7.3% and 3.6%), and Rwanda gets the mean of the two. DREAMS in Uganda and Tanzania gets the DREAMS trial's result (17%; IDinsight, 2026). Ethiopia's all-refugee camps get the trial's refugee result (13%), cut further because the camps differ from Uganda's settlements. These figures are for all households offered the program; the model uses the slightly larger effects on households that took part. Each group's effect has its own evidence adjustment: 0.87 for the core program and Tanzania, 0.95 for DREAMS Uganda, the trial's own setting, 0.81 for Ethiopia and 0.75 for the SPRINT pilot. The gain fades 5% a year and stops after 8 years in our best guess, discounted at the shared rate.
+- **Adjustments:** what would have happened anyway (0.95); Village Enterprise's share of all the resources, about 0.95 once partners' own resources are valued (Mercy Corps beyond its subaward, government staff, BOMA, Tanzania's local organisations, savings-group leaders' time); counting errors, programs cut short in 2025 and wasted or diverted grants (0.96); and the wait while a gift sits in funds held (about 0.9 years) and before the first gains. Tanzania's DREAMS, the SPRINT pilot and the governments' programs, which no trial has tested, count at the shared missing-data discount.
+- **Side effects:** spillovers to neighbours add 10%; governments adopting the model add under 1%; other effects (assets left over, nutrition gains, minus competition with other traders) add 2%.
 - **Your dollar:** staff pay is 42% of Village Enterprise's spending (audited figure). Its staff, mostly local business mentors, earn the shared pay gap below other jobs, which counts as their in-kind donation when credit is shared by resources.
 
 ### What drives the result
 
 - **How long the gains last, and how fast they fade.** From 3 to 12 years, the result moves from about half to 1.3 times the best guess; no fade to 20% a year moves it from 1.2 to 0.64 times. Across the core trial's cohorts, 0.5 to 2.5 years after the program, the consumption effect showed no significant differences apart from one cohort hit by COVID-19. Only Kenya's cohorts hint at fade, and in DREAMS the cohort followed longest gained most. Heavier graduation programs have kept their gains for 7 to 10 years, and cash grants for trades in Uganda faded by year nine.
 - **The value of a year of healthy life against a doubled income** (a shared slider). It moves every income model the same way.
-- **Other side effects** (−16% to +27%), **the credit shared with partners** (−18% to +18%), **spillovers to neighbours** (−9% to +27%) and **the size of the Ugandan core effect** (−16% to +16%) come next. The trust put in the core trial moves it by −11% to +7%.
+- **Spillovers to neighbours** (−9% to +27%), **the size of the core effect** in Uganda (−17% to +16%) and Kenya (−12% to +12%), and **how much other funders would have paid anyway** (−15% to +10%) come next.
 
 ### Biggest uncertainties
 
 - **Persistence.** No follow-up of this program goes beyond 2.5 years after it ended, and the DREAMS trial measured only 6 to 18 months after.
-- **The core trial ran during COVID-19.** Effects were smaller for Ugandan households surveyed after the lockdown, so the core effect may understate a normal year. Against that, the program now runs in harder places (pastoral drylands, Somali refugee camps) and in lighter-touch digital versions the trials didn't test.
-- **DREAMS' share of the households.** The annual report gives DREAMS' reach only since the project began. The fiscal-year share, about 28%, is built from Ethiopia's and Tanzania's yearly counts (all DREAMS) and Uganda's cohort schedule.
+- **The core trial ran during COVID-19.** Effects were smaller for Ugandan households surveyed after the lockdown, so the core effect may understate a normal year. Against that, the program now runs in harder places (pastoral drylands, Somali refugee camps).
+- **DREAMS Uganda's households.** The annual report gives DREAMS' reach in Uganda only since the project began; the year's count comes from its cohort schedule.
 - **Ethiopia's camps.** No trial has run there. The model uses the Ugandan trial's refugee result and cuts it further (0.85).
 - **The yearly reach is the charity's own count.** In the trial, disbursements were verified independently.
 
 ### What isn't modelled
 
-- Child nutrition gains in the Nawiri program beyond what higher consumption captures, and gains in women's decision-making and wellbeing, which the DREAMS trial measured. The nutrition gains enter only as part of the 10% for other side effects; women's decision-making and wellbeing not at all.
-- Households reached by governments that adopted the model with Village Enterprise's help (Kenya's KSEIP, Rwanda's national graduation strategy). Its spending on that help is in the cost, but only a small share for those households is in the result.
+- Women's decision-making and wellbeing, which the DREAMS trial measured, count only through the consumption gain.
 - Room for more funding and organisational strength aren't scored.
 
 ### How this model was checked
 
-The mechanical audit (lint and the site's invariants) passed before review. A first version was built and reviewed three times in November 2026; this version brings it to the site's current rules (a missing-data step per branch, side effects as weighted rows, wasted grants moved into delivery, the other side effects' sum corrected from 13% to 10%; 4.2 to 3.8) and was reviewed again as a new build.
+The mechanical audit (lint and the site's invariants) passed before review. A first version was built and reviewed three times in November 2026; this version brings it to the site's current rules and was reviewed again as a new build.
+
+- **Round 1 (this version):** 2 high, 3 medium and 5 low findings, all fixed. Partners' resources are now valued one by one (credit share 0.85 to 0.95). The SPRINT digital pilot and governments' adoption of the model are their own branches at the missing-data discount. Households by country come from the charity's published counts. Money held before it is spent is discounted. The other side effects shrank to 2% once the assets item was limited to what outlasts the gain. The result went from 3.83 to 3.77.
 
 First version:
 
 - **Round 1:** no high-severity findings, 5 medium and 4 low, all fixed. The core trial's effect is now taken country by country, not pooled. Ethiopia's refugee camps take the DREAMS trial's refugee effect, with their own evidence cut. Tanzania is counted as DREAMS. The persistence reasoning was corrected (Kenya's cohorts hint at fade), a 10% yearly fade was added and the Raising the Village anchor named. The double cut for non-take-up was removed, and the evidence adjustment now names its anchor. The result went from 4.0 to 3.3.
-- **Round 2:** no high-severity findings, 2 medium and 6 low, all fixed. The model summary was corrected. The fade now names its anchors. The program's own trials show no detectable fade over 2.5 years, so the best guess fell from 10% to 5% a year. Each branch got its own evidence adjustment, which removed a double cut for Ethiopia and the cut for settings DREAMS Uganda's trial already covers. Ethiopia's and Tanzania's households are counted at the charity's own people-per-entrepreneur figures there. The refugee effect and its control mean now come from the same table. The result went from 3.3 to 4.2.
-- **Round 3:** no high or medium findings, 5 low, all fixed (wording, one basis for the effect percentages, section placement of the branch evidence rows, the drivers' figures). The result stayed at 4.2.
+- **Round 2:** no high-severity findings, 2 medium and 6 low, all fixed. The fade now names its anchors. The program's own trials show no detectable fade over 2.5 years, so the best guess fell from 10% to 5% a year. Each branch got its own evidence adjustment. The refugee effect and its control mean now come from the same table. The result went from 3.3 to 4.2.
+- **Round 3:** no high or medium findings, 5 low, all fixed (wording, one basis for the effect percentages, section placement, the drivers' figures). The result stayed at 4.2, then went to 3.8 under the site's current rules (a missing-data step per branch, side effects as weighted rows, wasted grants moved into delivery, the other effects' sum corrected).
+
 
 ### Sources
 

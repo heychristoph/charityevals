@@ -3,13 +3,13 @@
   "name": "Village Enterprise: poverty graduation in East Africa (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"UGA":0.3146,"KEN":0.2685,"ETH":0.2679,"RWA":0.1137,"TZA":0.0353},
-  "beneficiaries_note": "Our build: shares of the result by branch at the defaults (households × first-year gain × evidence and missing-data steps): Uganda's core program and DREAMS 31%, Kenya 27%, Ethiopia's DREAMS camps 27%, Rwanda 11%, Tanzania's DREAMS 4%.",
+  "beneficiaries": {"UGA":0.319,"KEN":0.2816,"ETH":0.2477,"RWA":0.1202,"TZA":0.0315},
+  "beneficiaries_note": "Our build: shares of the result by branch at the defaults (households × first-year gain × evidence and missing-data steps): Uganda's core program, DREAMS and SPRINT 32%, Kenya 28%, Ethiopia's DREAMS camps 25%, Rwanda 12%, Tanzania's DREAMS 3%; the government-adoption row, under 1%, left out.",
   "template": "cash-income",
   "estimate_basis": "unit_cost",
   "charity": "village-enterprise",
   "owner": "charityevals",
-  "summary": "Village Enterprise runs a one-year poverty graduation program for the poorest rural households in Uganda, Kenya, Rwanda, Ethiopia and Tanzania: business training, seed grants to groups of three entrepreneurs, mentoring and savings groups, a third of it (DREAMS) in refugee settlements with Mercy Corps in Uganda and Ethiopia and through local organisations in Tanzania. Against its fiscal year 2025 spending (US$21.0M with overhead, 47,505 households), two randomized trials of the program itself (consumption 7.3% higher in Kenya, 3.6% in Uganda, 17% in DREAMS and 13% for its refugees, among all households offered the program) give about 4 years of healthy life per $1,000. The biggest uncertainty is how long the consumption gain lasts: the trials followed households for at most 2.5 years after the program, and the model assumes a gain fading 5% a year for 8 years (3 to 12). Tanzania's DREAMS households (about 3%), reached through local organisations no trial has tested, are discounted for missing data.",
+  "summary": "Village Enterprise runs a one-year poverty graduation program for the poorest rural households in Uganda, Kenya, Rwanda, Ethiopia and Tanzania: business training, seed grants to groups of three entrepreneurs, mentoring and savings groups, a quarter of the households in DREAMS, its program for refugee settlements with Mercy Corps in Uganda and Ethiopia and through local organisations in Tanzania. Against its fiscal year 2025 spending (US$21.0M with overhead, 47,505 households), two randomized trials of the program itself (consumption 7.3% higher in Kenya, 3.6% in Uganda, 17% in DREAMS and 13% for its refugees, among all households offered the program) give about 4 years of healthy life per $1,000. The biggest uncertainty is how long the consumption gain lasts: the trials followed households for at most 2.5 years after the program, and the model assumes a gain fading 5% a year for 8 years (3 to 12). Tanzania's DREAMS households, the SPRINT digital pilot and governments' adoption of the model, which no trial has tested, are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Village Enterprise's poverty graduation program, fiscal year 2025",
@@ -176,7 +176,7 @@
         "page": "p. 6, lives transformed by country",
         "quote": "UGANDA 116,880"
       },
-      "explainer": "Village Enterprise's count of people in the households it reached in Uganda in FY2025. Used to split the year's households by country (households_uganda) and to weight each country's household size (@household_size.uganda_rural) in dhs_household_size_mix."
+      "explainer": "Village Enterprise's count of people in the households it reached in Uganda in FY2025. Used to weight each country's household size in dhs_household_size_mix."
     },
     {
       "id": "lives_kenya",
@@ -192,7 +192,7 @@
         "page": "p. 6, lives transformed by country",
         "quote": "KENYA 91,400"
       },
-      "explainer": "Village Enterprise's count of people in the households it reached in Kenya in FY2025. Used to split the year's households by country (households_kenya) and to weight each country's household size (@household_size.kenya_rural) in dhs_household_size_mix."
+      "explainer": "Village Enterprise's count of people in the households it reached in Kenya in FY2025. Used to weight each country's household size in dhs_household_size_mix."
     },
     {
       "id": "lives_rwanda",
@@ -208,7 +208,7 @@
         "page": "p. 6, lives transformed by country",
         "quote": "RWANDA 51,460"
       },
-      "explainer": "Village Enterprise's count of people in the households it reached in Rwanda in FY2025. Used to split the year's households by country (households_rwanda) and to weight each country's household size (@household_size.rwanda_rural) in dhs_household_size_mix."
+      "explainer": "Village Enterprise's count of people in the households it reached in Rwanda in FY2025. Used to weight each country's household size in dhs_household_size_mix."
     },
     {
       "id": "lives_ethiopia",
@@ -224,7 +224,7 @@
         "page": "p. 6, lives transformed by country",
         "quote": "ETHIOPIA 48,000"
       },
-      "explainer": "Village Enterprise's count of people in the households it reached in Ethiopia in FY2025. Used to split the year's households by country (households_ethiopia) and to weight each country's household size (@household_size.ethiopia_rural) in dhs_household_size_mix."
+      "explainer": "Village Enterprise's count of people in the households it reached in Ethiopia in FY2025. Used to weight each country's household size in dhs_household_size_mix."
     },
     {
       "id": "lives_tanzania",
@@ -240,7 +240,7 @@
         "page": "p. 6, lives transformed by country",
         "quote": "TANZANIA 9,020"
       },
-      "explainer": "Village Enterprise's count of people in the households it reached in Tanzania in FY2025. Used to split the year's households by country (households_tanzania) and to weight each country's household size (@household_size.tanzania_rural) in dhs_household_size_mix."
+      "explainer": "Village Enterprise's count of people in the households it reached in Tanzania in FY2025. Used to weight each country's household size in dhs_household_size_mix."
     },
     {
       "id": "lives_total",
@@ -314,108 +314,76 @@
       "formula": "households * household_size"
     },
     {
-      "id": "ethiopia_entrepreneurs_to_date",
-      "section": "reach",
-      "label": "Entrepreneurs trained in Ethiopia's DREAMS since it began",
-      "format": "integer",
-      "value": 10800,
-      "kind": "observed",
-      "source": {
-        "title": "Village Enterprise 2025 Annual Report (July 2024 - June 2025)",
-        "url": "https://2025annualreport.villageenterprise.org/other/VillageEnterprise_2025AnnualReport.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 11, Impact in Ethiopia",
-        "quote": "ENTREPRENEURS TRAINED 10,800 BUSINESSES STARTED 3,600 LIVES TRANSFORMED 64,800"
-      },
-      "explainer": "With the lives count below, gives the people per entrepreneur the charity counts in Ethiopia, which turns its FY2025 lives count back into households."
-    },
-    {
-      "id": "ethiopia_lives_to_date",
-      "section": "reach",
-      "label": "People reached in Ethiopia's DREAMS since it began (Village Enterprise's count)",
-      "format": "integer",
-      "value": 64800,
-      "kind": "observed",
-      "source": {
-        "title": "Village Enterprise 2025 Annual Report (July 2024 - June 2025)",
-        "url": "https://2025annualreport.villageenterprise.org/other/VillageEnterprise_2025AnnualReport.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 11, Impact in Ethiopia",
-        "quote": "ENTREPRENEURS TRAINED 10,800 BUSINESSES STARTED 3,600 LIVES TRANSFORMED 64,800"
-      },
-      "explainer": "64,800 ÷ 10,800 = 6.00 people per entrepreneur, against 6.67 in the charity's overall count."
-    },
-    {
-      "id": "tanzania_entrepreneurs_to_date",
-      "section": "reach",
-      "label": "Entrepreneurs trained in Tanzania's DREAMS since it began",
-      "format": "integer",
-      "value": 2800,
-      "kind": "observed",
-      "source": {
-        "title": "Village Enterprise 2025 Annual Report (July 2024 - June 2025)",
-        "url": "https://2025annualreport.villageenterprise.org/other/VillageEnterprise_2025AnnualReport.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 11, Impact in Tanzania",
-        "quote": "ENTREPRENEURS TRAINED 2,800 BUSINESSES STARTED 809 LIVES TRANSFORMED 16,180"
-      },
-      "explainer": "With the lives count below, gives the people per entrepreneur the charity counts in Tanzania, which turns its FY2025 lives count back into households."
-    },
-    {
-      "id": "tanzania_lives_to_date",
-      "section": "reach",
-      "label": "People reached in Tanzania's DREAMS since it began (Village Enterprise's count)",
-      "format": "integer",
-      "value": 16180,
-      "kind": "observed",
-      "source": {
-        "title": "Village Enterprise 2025 Annual Report (July 2024 - June 2025)",
-        "url": "https://2025annualreport.villageenterprise.org/other/VillageEnterprise_2025AnnualReport.pdf",
-        "retrieved": "2026-11-03",
-        "page": "p. 11, Impact in Tanzania",
-        "quote": "ENTREPRENEURS TRAINED 2,800 BUSINESSES STARTED 809 LIVES TRANSFORMED 16,180"
-      },
-      "explainer": "16,180 ÷ 2,800 = 5.78 people per entrepreneur, against 6.67 in the charity's overall count."
-    },
-    {
       "id": "households_ethiopia",
       "section": "reach",
       "label": "Households reached in Ethiopia, FY2025",
       "format": "integer",
-      "formula": "lives_ethiopia * ethiopia_entrepreneurs_to_date / ethiopia_lives_to_date",
-      "explainer": "About 8,000."
+      "explainer": "The entrepreneurs Village Enterprise trained in Ethiopia in FY2025, its own published count (one entrepreneur per household). All in DREAMS, in three refugee camps in Dollo Ado.",
+      "value": 7209,
+      "kind": "observed",
+      "source": {
+        "title": "Village Enterprise 2025 Annual Report, Our Impact (web edition, FY2025: July 2024 - June 2025)",
+        "url": "https://2025annualreport.villageenterprise.org/our-impact.html",
+        "retrieved": "2026-11-15",
+        "page": "Our Impact, entrepreneurs trained by country",
+        "quote": "Ethiopia ... Entrepreneurs Trained FY25 7,209"
+      }
     },
     {
       "id": "households_tanzania",
       "section": "reach",
       "label": "Households reached in Tanzania, FY2025",
       "format": "integer",
-      "formula": "lives_tanzania * tanzania_entrepreneurs_to_date / tanzania_lives_to_date",
-      "explainer": "About 1,560."
+      "formula": "households - households_ethiopia - households_kenya - households_rwanda - households_uganda",
+      "explainer": "The year's total less the four countries' published counts: about 1,360. The web report lists Tanzania only as \"Technical Assistance\", 9,020 lives (the local community-based organisations Village Enterprise trains to deliver DREAMS), with no entrepreneur count; 9,020 ÷ 1,356 = 6.65 people each, the charity's usual ratio."
     },
     {
       "id": "households_kenya",
       "section": "reach",
       "label": "Households reached in Kenya, FY2025",
       "format": "integer",
-      "formula": "(households - households_ethiopia - households_tanzania) * lives_kenya / (lives_kenya + lives_uganda + lives_rwanda)",
-      "explainer": "The year's households not in Ethiopia or Tanzania, split by each country's share of the people Village Enterprise reached. The reported total (47,505) is kept: the country lives counts imply about 2% more entrepreneurs than that, so these three countries come out at about 6.85 people per household in the charity's count rather than its usual 6.67; scaling all five countries to the total instead would move the result by under 1%."
+      "explainer": "The entrepreneurs Village Enterprise trained in Kenya in FY2025, its own published count (one entrepreneur per household).",
+      "value": 13642,
+      "kind": "observed",
+      "source": {
+        "title": "Village Enterprise 2025 Annual Report, Our Impact (web edition, FY2025: July 2024 - June 2025)",
+        "url": "https://2025annualreport.villageenterprise.org/our-impact.html",
+        "retrieved": "2026-11-15",
+        "page": "Our Impact, entrepreneurs trained by country",
+        "quote": "Kenya ... Entrepreneurs Trained FY25 13,642"
+      }
     },
     {
       "id": "households_uganda",
       "section": "reach",
       "label": "Households reached in Uganda, FY2025",
       "format": "integer",
-      "formula": "(households - households_ethiopia - households_tanzania) * lives_uganda / (lives_kenya + lives_uganda + lives_rwanda)",
-      "explainer": "The year's households not in Ethiopia or Tanzania, split by each country's share of the people Village Enterprise reached. The reported total (47,505) is kept: the country lives counts imply about 2% more entrepreneurs than that, so these three countries come out at about 6.85 people per household in the charity's count rather than its usual 6.67; scaling all five countries to the total instead would move the result by under 1%."
+      "explainer": "The entrepreneurs Village Enterprise trained in Uganda in FY2025, its own published count (one entrepreneur per household).",
+      "value": 17554,
+      "kind": "observed",
+      "source": {
+        "title": "Village Enterprise 2025 Annual Report, Our Impact (web edition, FY2025: July 2024 - June 2025)",
+        "url": "https://2025annualreport.villageenterprise.org/our-impact.html",
+        "retrieved": "2026-11-15",
+        "page": "Our Impact, entrepreneurs trained by country",
+        "quote": "Uganda ... Entrepreneurs Trained FY25 17,554"
+      }
     },
     {
       "id": "households_rwanda",
       "section": "reach",
       "label": "Households reached in Rwanda, FY2025",
       "format": "integer",
-      "formula": "(households - households_ethiopia - households_tanzania) * lives_rwanda / (lives_kenya + lives_uganda + lives_rwanda)",
-      "explainer": "The year's households not in Ethiopia or Tanzania, split by each country's share of the people Village Enterprise reached. The reported total (47,505) is kept: the country lives counts imply about 2% more entrepreneurs than that, so these three countries come out at about 6.85 people per household in the charity's count rather than its usual 6.67; scaling all five countries to the total instead would move the result by under 1%."
+      "explainer": "The entrepreneurs Village Enterprise trained in Rwanda in FY2025, its own published count (one entrepreneur per household).",
+      "value": 7744,
+      "kind": "observed",
+      "source": {
+        "title": "Village Enterprise 2025 Annual Report, Our Impact (web edition, FY2025: July 2024 - June 2025)",
+        "url": "https://2025annualreport.villageenterprise.org/our-impact.html",
+        "retrieved": "2026-11-15",
+        "page": "Our Impact, entrepreneurs trained by country",
+        "quote": "Rwanda ... Entrepreneurs Trained FY25 7,744"
+      }
     },
     {
       "id": "dreams_uganda_households",
@@ -428,14 +396,28 @@
         "high": 4800
       },
       "kind": "judgment",
-      "explainer": "DREAMS Uganda enrols cohorts of 1,200 households every four months (IDinsight's DREAMS report, PDF p. 5: ten cohorts, each starting four months after the previous one), so about three cohorts, 3,600 households, a year; two to four cohorts in the range, since the annual report gives DREAMS reach only since the project began. The rest of Uganda's households are in the core program (including the SPRINT digital pilot and the chimpanzee-forest project)."
+      "explainer": "DREAMS Uganda enrols cohorts of 1,200 households every four months (IDinsight's DREAMS report, PDF p. 5: ten cohorts, each starting four months after the previous one), so about three cohorts, 3,600 households, a year; two to four cohorts in the range, since the annual report gives DREAMS reach only since the project began. The rest of Uganda's households are in the core program (including the chimpanzee-forest project) or the SPRINT pilot."
+    },
+    {
+      "id": "sprint_households",
+      "section": "reach",
+      "label": "Households in SPRINT, the digital-delivery pilot in Uganda, FY2025",
+      "format": "integer",
+      "value": {
+        "low": 300,
+        "best": 1500,
+        "high": 4000
+      },
+      "kind": "judgment",
+      "explainer": "SPRINT gives training on Kolibri tablets, mentoring by WhatsApp and savings records on DreamSave, piloted in Kapelebyong and Omoro districts, each staff member \"supporting up to 600 businesses in a single year\" and aiming at 15,000 entrepreneurs by mid-2026 (annual report p. 16). The report gives no FY2025 count: a pilot in two districts, a few staff at up to 600 businesses (three entrepreneurs each) is about 1,500 entrepreneurs, 300 to 4,000. Taken out of Uganda's core households."
     },
     {
       "id": "core_uganda_households",
       "section": "reach",
       "label": "Core-program households in Uganda, FY2025",
       "format": "integer",
-      "formula": "households_uganda - dreams_uganda_households"
+      "formula": "households_uganda - dreams_uganda_households - sprint_households",
+      "explainer": "Uganda's published count less DREAMS Uganda and the SPRINT pilot, which have their own branches."
     },
     {
       "id": "dreams_household_share",
@@ -443,7 +425,7 @@
       "label": "Share of FY2025's households in DREAMS (Uganda, Ethiopia, Tanzania)",
       "format": "percent",
       "formula": "(dreams_uganda_households + households_ethiopia + households_tanzania) / households",
-      "explainer": "For reading only: about 28% of households. Ethiopia's program is all DREAMS (three refugee camps in Dollo Ado) and Tanzania's is DREAMS run by local community-based organisations Village Enterprise trains (annual report p. 11). DREAMS is 32% of program spending (Form 990 Part III), so its households cost more than the core program's, as its larger grants and Mercy Corps' market-systems work suggest. The small Kenyan DREAMS pilot in Garissa (720 entrepreneurs since 2024) is counted with Kenya's core program."
+      "explainer": "For reading only: about 26% of households. Ethiopia's program is all DREAMS (three refugee camps in Dollo Ado) and Tanzania's is DREAMS run by local community-based organisations Village Enterprise trains (annual report p. 11). DREAMS is 32% of program spending (Form 990 Part III), so its households cost more than the core program's, as its larger grants and Mercy Corps' market-systems work suggest. The small Kenyan DREAMS pilot in Garissa (720 entrepreneurs since 2024) is counted with Kenya's core program."
     },
     {
       "id": "core_itt_month",
@@ -512,6 +494,7 @@
         "high": 20.5
       },
       "kind": "observed",
+      "interval": 0.95,
       "source": {
         "title": "IDinsight (2021), Village Enterprise Development Impact Bond Evaluation Findings (RCT, Kenya and Uganda)",
         "url": "https://www.idinsight.org/wp-content/uploads/2022/03/FinalReport-Village-Enterprise.pdf",
@@ -548,6 +531,7 @@
         "high": 7.48
       },
       "kind": "observed",
+      "interval": 0.95,
       "source": {
         "title": "IDinsight (2021), Village Enterprise Development Impact Bond Evaluation Findings (RCT, Kenya and Uganda)",
         "url": "https://www.idinsight.org/wp-content/uploads/2022/03/FinalReport-Village-Enterprise.pdf",
@@ -604,7 +588,7 @@
         "title": "IDinsight (2026), Delivering Resilient Enterprises and Market Systems (DREAMS) Impact Evaluation, Uganda Endline Report 1 (RCT)",
         "url": "https://europe.mercycorps.org/sites/default/files/2026-06/dreams-uganda-impact-report-1.pdf",
         "retrieved": "2026-11-03",
-        "page": "Table C1, PDF p. 86; executive summary PDF p. 6",
+        "page": "Table C1, PDF p. 85; executive summary PDF p. 6",
         "quote": "Monthly Household Consumption (USD) 6560 112.06 19.10 *** 20.21 *** 18.86 ***"
       },
       "explainer": "IDinsight's household-level randomized trial of DREAMS (refugees and host communities in Bidi Bidi and Rhino Camp, West Nile, Uganda; 6,560 households; endline April-July 2025, 6 to 18 months after the program): 17.1% of control consumption. The report prints no standard error; the range is the spread of its cohort-level effects (15.90 to 22.88), a proxy that is likely wider than the pooled 95% interval since each cohort is about a quarter of the sample."
@@ -620,10 +604,10 @@
         "title": "IDinsight (2026), Delivering Resilient Enterprises and Market Systems (DREAMS) Impact Evaluation, Uganda Endline Report 1 (RCT)",
         "url": "https://europe.mercycorps.org/sites/default/files/2026-06/dreams-uganda-impact-report-1.pdf",
         "retrieved": "2026-11-03",
-        "page": "Table C1, PDF p. 86",
+        "page": "Table C1, PDF p. 85",
         "quote": "Monthly Household Consumption (USD) 6560 112.06 19.10 *** 20.21 *** 18.86 ***"
       },
-      "explainer": "Treatment on the treated, broad definition (any major component), since the reach counts participants; DREAMS gives larger grants (US$138 + 66 per household) and adds Mercy Corps' market-systems work."
+      "explainer": "Treatment on the treated, broad definition (any major component), since the reach counts participants; DREAMS gives larger grants (US$138 + 66 per business group of three, about US$68 per household) and adds Mercy Corps' market-systems work."
     },
     {
       "id": "dreams_itt_point",
@@ -636,7 +620,7 @@
         "title": "IDinsight (2026), Delivering Resilient Enterprises and Market Systems (DREAMS) Impact Evaluation, Uganda Endline Report 1 (RCT)",
         "url": "https://europe.mercycorps.org/sites/default/files/2026-06/dreams-uganda-impact-report-1.pdf",
         "retrieved": "2026-11-03",
-        "page": "Table C1, PDF p. 86",
+        "page": "Table C1, PDF p. 85",
         "quote": "Monthly Household Consumption (USD) 6560 112.06 19.10 *** 20.21 *** 18.86 ***"
       },
       "explainer": "The intention-to-treat point estimate, used only for the ratio of the effect on participants to the effect on everyone offered."
@@ -660,7 +644,7 @@
         "title": "IDinsight (2026), Delivering Resilient Enterprises and Market Systems (DREAMS) Impact Evaluation, Uganda Endline Report 1 (RCT)",
         "url": "https://europe.mercycorps.org/sites/default/files/2026-06/dreams-uganda-impact-report-1.pdf",
         "retrieved": "2026-11-03",
-        "page": "Table C1, PDF p. 86",
+        "page": "Table C1, PDF p. 85",
         "quote": "Monthly Household Consumption (USD) 6560 112.06 19.10 *** 20.21 *** 18.86 ***"
       },
       "explainer": "Mean monthly household consumption of the DREAMS trial's control group, refugee and host households together (64% refugees)."
@@ -741,7 +725,7 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "Internal validity, about 0.95: two independent, pre-registered randomized trials of this program itself (and a third, IPA's in Uganda, with the same consumption effect), large samples, disbursement verified; consumption is self-reported, and the impact-bond trial's outcome paid the charity, which may have raised delivery quality during the trial. External validity, about 0.92: the FY2025 core program is wider than the trial (northern Kenya's drylands, Rwanda's government-linked delivery, digital delivery pilots), against which the trial ran partly during COVID-19 lockdowns (which lowered its Ugandan effects). 0.87, 0.7 to 1. Anchor: the site's GiveDirectly model takes recipients' consumption gains from its trials at face value (1) and cuts the weaker spillover evidence to 0.6 × 0.8; this program's trials are as strong as GiveDirectly's for recipients but measure a smaller effect, of a program that has since changed more."
+      "explainer": "Internal validity, about 0.95: two independent, pre-registered randomized trials of this program itself (and a third, IPA's in Uganda, with the same consumption effect), large samples, disbursement verified; consumption is self-reported, and the impact-bond trial's outcome paid the charity, which may have raised delivery quality during the trial. External validity, about 0.92: the FY2025 core program is wider than the trial (northern Kenya's drylands, Rwanda's government-linked delivery; the SPRINT digital pilot is its own branch), against which the trial ran partly during COVID-19 lockdowns (which lowered its Ugandan effects). 0.87, 0.7 to 1. Anchor: the site's GiveDirectly model takes recipients' consumption gains from its trials at face value (1) and cuts the weaker spillover evidence to 0.6 × 0.8; this program's trials are as strong as GiveDirectly's for recipients but measure a smaller effect, of a program that has since changed more."
     },
     {
       "id": "dreams_uganda_evidence_adj",
@@ -797,6 +781,14 @@
       "explainer": "How long the (fading) gain lasts before it stops. The core trial measured households 6 months to 2.5 years after the program (3.5 years after it started) and still found gains; DREAMS only to 18 months. Anchors: GiveWell's 2024 value-of-information estimate for Raising the Village, a similar livelihoods program in Uganda, counts its effects 3 years as a best guess, from a trial with one year of follow-up (models/grants/givewell/raising-the-village-2024); heavier graduation programs kept their consumption gains at least a year after implementation ended in six countries (Banerjee et al. 2015), 7 years in Bangladesh (Bandiera et al. 2017) and 10 years in India (Banerjee, Duflo and Sharma 2021); cash grants to start trades in Uganda raised earnings at 4 years but the controls caught up by year 9 (Blattman, Fiala and Martinez 2020). This program has more follow-up than Raising the Village's trial but a lighter package than BRAC's, so 8 years with the fade above (worth about 6 years of the full gain), 3 (what the trial saw) to 12."
     },
     {
+      "id": "persistence_pv",
+      "section": "effect",
+      "label": "Present value of a yearly gain over its years, fading",
+      "format": "number",
+      "formula": "pv_annuity_due(1, (1 + $discount_rate) / (1 - fade_rate) - 1, persistence_years)",
+      "explainer": "The years a yearly gain counts, fading by fade_rate each year and discounted at the shared rate, the first year in full."
+    },
+    {
       "id": "core_ln_raw",
       "section": "effect",
       "label": "Core program (Kenya, Uganda, Rwanda): households times first-year ln gain",
@@ -826,11 +818,19 @@
       "formula": "households_ethiopia * dreams_ethiopia_ln_gain_year"
     },
     {
+      "id": "sprint_ln_raw",
+      "section": "effect",
+      "label": "SPRINT: households times first-year ln gain",
+      "format": "number",
+      "formula": "sprint_households * core_uganda_ln_gain_year",
+      "explainer": "SPRINT takes the core trial's Ugandan effect, the same program in the same country, with its doubt about digital delivery in sprint_evidence_adj."
+    },
+    {
       "id": "ln_gain_per_person",
       "section": "effect",
       "label": "Total ln(consumption) gain per person, present value",
       "format": "number",
-      "formula": "(core_ln_raw * core_evidence_adj * core_missing_data_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj * dreams_uganda_missing_data_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj * dreams_tanzania_missing_data_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj * dreams_ethiopia_missing_data_adj) / households * pv_annuity_due(1, (1 + $discount_rate) / (1 - fade_rate) - 1, persistence_years)",
+      "formula": "(core_ln_raw * core_evidence_adj * core_missing_data_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj * dreams_uganda_missing_data_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj * dreams_tanzania_missing_data_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj * dreams_ethiopia_missing_data_adj + sprint_ln_raw * sprint_evidence_adj * sprint_missing_data_adj) / households * persistence_pv",
       "explainer": "Each group's yearly gain (Kenya, Uganda and Rwanda from the core trial, DREAMS Uganda and Tanzania from the DREAMS trial, Ethiopia from its refugee subgroup), times its branch's evidence adjustment and missing-data step, weighted by its households, over the years it lasts, fading each year and discounted at the shared rate (the first year in full). A recurring income gain, as the template's explainer describes, not a one-off transfer: the seed grant is invested in the business, and the trials measure consumption from its returns."
     },
     {
@@ -865,7 +865,7 @@
       "label": "Core program: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "1",
-      "explainer": "Measured (templates.md Convention 12): Village Enterprise's own count of the entrepreneurs it trained in Kenya, Uganda and Rwanda meets two randomized trials of this program delivered by Village Enterprise itself (IDinsight's development impact bond trial in Kenya and Uganda; Sedlmayr, Shah and Sulaiman's in Uganda). Rwanda has no trial of its own, but the program there is the same one delivered by Village Enterprise's own staff; how well the Kenyan and Ugandan effects carry to it is in core_evidence_adj, not here."
+      "explainer": "Measured (templates.md Convention 12): Village Enterprise's own published count of the entrepreneurs it trained in Kenya, Uganda and Rwanda meets two randomized trials of this program delivered by Village Enterprise's own mentors (IDinsight's development impact bond trial in Kenya and Uganda; Sedlmayr, Shah and Sulaiman's in Uganda). The SPRINT digital pilot is split out as its own thin branch. Rwanda has no trial of its own, but its households are trained and mentored by Village Enterprise's staff in the same program; the 14,500 government parasocial workers it trains (annual report p. 9) are the government-adoption row, not this count; how well the Kenyan and Ugandan effects carry to Rwanda is in core_evidence_adj. Nawiri's adapted package in northern Kenya added cash transfers, but Village Enterprise's grants in Nawiri were US$68,384 in all (Form 990 Part III), so the cash it paid is a negligible addition, left in the core consumption effect."
     },
     {
       "id": "dreams_uganda_missing_data_adj",
@@ -892,20 +892,41 @@
       "explainer": "Measured: the charity's count of households in the Dollo Ado camps (its Ethiopian lives count over its own people-per-entrepreneur figure there) meets the DREAMS trial of the same program delivered the same way (Village Enterprise with Mercy Corps), in Uganda's refugee settlements; the effect's carry to Somali refugees in Ethiopia is in dreams_ethiopia_evidence_adj, not here."
     },
     {
+      "id": "sprint_evidence_adj",
+      "section": "adjustments",
+      "label": "Evidence adjustment, SPRINT digital delivery (internal and external validity)",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 1.0
+      },
+      "kind": "judgment",
+      "explainer": "Internal validity 0.95, as core_evidence_adj, times a carry of about 0.8 to delivery by tablet and WhatsApp with five to ten times more entrepreneurs per mentor, which no trial has tested: lighter mentoring may lower the effect, though the training content and grants are the same. 0.75, 0.5 to 1; anchored on core_evidence_adj's 0.87, cut further for the untested channel."
+    },
+    {
+      "id": "sprint_missing_data_adj",
+      "section": "adjustments",
+      "label": "SPRINT: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: digital delivery (tablets, WhatsApp mentoring) is other delivery than the in-person program the trials tested, and the reach is a judgment. The shared missing-data discount."
+    },
+    {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment (internal and external validity), outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "(core_ln_raw * core_evidence_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj) / (core_ln_raw + dreams_uganda_ln_raw + dreams_tanzania_ln_raw + dreams_ethiopia_ln_raw)",
-      "explainer": "The outcome-weighted average of the branch evidence adjustments (core_evidence_adj, dreams_uganda_evidence_adj, dreams_tanzania_evidence_adj, dreams_ethiopia_evidence_adj), for reading only: each branch's own row is applied in ln_gain_per_person (Convention 4). After all adjustments the model credits about this × 0.95 × 0.98 of the trials' effects on participants, before shared credit and the wait."
+      "formula": "(core_ln_raw * core_evidence_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj + sprint_ln_raw * sprint_evidence_adj) / (core_ln_raw + dreams_uganda_ln_raw + dreams_tanzania_ln_raw + dreams_ethiopia_ln_raw + sprint_ln_raw)",
+      "explainer": "The outcome-weighted average of the branch evidence adjustments (core_evidence_adj, dreams_uganda_evidence_adj, dreams_tanzania_evidence_adj, dreams_ethiopia_evidence_adj, sprint_evidence_adj), for reading only: each branch's own row is applied in ln_gain_per_person (Convention 4). After all adjustments the model credits about this × 0.95 × 0.98 of the trials' effects on participants, before shared credit and the wait."
     },
     {
       "id": "missing_data_adj",
       "section": "adjustments",
       "label": "Missing-data step (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(core_ln_raw * core_evidence_adj * core_missing_data_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj * dreams_uganda_missing_data_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj * dreams_tanzania_missing_data_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj * dreams_ethiopia_missing_data_adj) / (core_ln_raw * core_evidence_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj)",
-      "explainer": "The outcome-weighted average of the branches' missing-data steps, for reading only: each branch's own step is applied in ln_gain_per_person. Only Tanzania's DREAMS branch is thin, so this sits just below 1."
+      "formula": "(core_ln_raw * core_evidence_adj * core_missing_data_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj * dreams_uganda_missing_data_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj * dreams_tanzania_missing_data_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj * dreams_ethiopia_missing_data_adj + sprint_ln_raw * sprint_evidence_adj * sprint_missing_data_adj) / (core_ln_raw * core_evidence_adj + dreams_uganda_ln_raw * dreams_uganda_evidence_adj + dreams_tanzania_ln_raw * dreams_tanzania_evidence_adj + dreams_ethiopia_ln_raw * dreams_ethiopia_evidence_adj + sprint_ln_raw * sprint_evidence_adj)",
+      "explainer": "The outcome-weighted average of the branches' missing-data steps, for reading only: each branch's own step is applied in ln_gain_per_person (the government-adoption row applies its own). Tanzania's DREAMS and the SPRINT pilot are thin, so this sits a little below 1."
     },
     {
       "id": "counterfactual_adj",
@@ -921,17 +942,107 @@
       "explainer": "The trials' effects are already net of their control groups, who got what they would have got anyway (food rations in the settlements, government transfers in Kenya). Below 1 only for government graduation programs (Kenya's KSEIP II, Rwanda's national graduation strategy) now expanding into the same areas, which may reach some households Village Enterprise enrols."
     },
     {
+      "id": "dreams_spend",
+      "section": "adjustments",
+      "label": "Village Enterprise's DREAMS spending, FY2025",
+      "format": "usd",
+      "value": 5425322,
+      "kind": "observed",
+      "source": {
+        "title": "Village Enterprise Fund, Form 990 for the fiscal year ended June 30, 2025 (public disclosure copy)",
+        "url": "https://villageenterprise.org/wp-content/uploads/2026/06/Village-Enterprise-Fund-Form-990-Public-Disclosure-Copy-Fiscal-Year-End-June-2025.pdf",
+        "retrieved": "2026-11-15",
+        "page": "Part III, line 4a",
+        "quote": "DREAMS ... expenses of $ 5,425,322"
+      },
+      "explainer": "Village Enterprise's own DREAMS spending, including its US$2,323,287 subaward to Mercy Corps (Schedule I): the base for Mercy Corps' resources outside it."
+    },
+    {
+      "id": "mercy_corps_own_share",
+      "section": "adjustments",
+      "label": "Mercy Corps' own DREAMS resources outside Village Enterprise's books, as a share of its DREAMS spending",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "IDinsight's all-in DREAMS cost from both partners' data is US$540.95 per household (DREAMS report, section 5.3, PDF p. 77), against about US$548 from Village Enterprise's own books (its DREAMS spending with overhead over about 12,000 DREAMS households): so little of Mercy Corps' DREAMS work is paid outside the subaward. 5%, 0 to 20% for the market-systems work Mercy Corps may fund from other grants."
+    },
+    {
+      "id": "mercy_corps_own_usd",
+      "section": "adjustments",
+      "label": "Mercy Corps' own DREAMS resources",
+      "format": "usd",
+      "formula": "dreams_spend * mercy_corps_own_share"
+    },
+    {
+      "id": "government_staff_usd",
+      "section": "adjustments",
+      "label": "Government staff time helping target and deliver (Rwanda, Kenya)",
+      "format": "usd",
+      "value": {
+        "low": 100000,
+        "best": 300000,
+        "high": 1000000
+      },
+      "kind": "judgment",
+      "explainer": "Rwanda's local government officials and parasocial workers help target households and follow up (annual report p. 9), and Kenyan county and national staff work alongside the program. No figure is published: about 100 officials giving a tenth of their time at roughly US$3,000 a year in pay, about US$30,000, plus the parasocial workers' and Kenyan staff's hours, US$300,000, 100,000 to 1 million."
+    },
+    {
+      "id": "boma_usd",
+      "section": "adjustments",
+      "label": "BOMA's own resources in Kuza Jamii (northern Kenya)",
+      "format": "usd",
+      "value": {
+        "low": 50000,
+        "best": 200000,
+        "high": 600000
+      },
+      "kind": "judgment",
+      "explainer": "BOMA leads the Kuza Jamii consortium in which Village Enterprise works in northern Kenya; its own management and delivery for the households Village Enterprise reaches there is unpublished. A judgment: about a tenth of the Kenyan program's spending (US$5.24M), less what Village Enterprise itself pays, US$200,000, 50,000 to 600,000."
+    },
+    {
+      "id": "tanzania_cbo_usd",
+      "section": "adjustments",
+      "label": "Tanzanian community-based organisations' own delivery cost",
+      "format": "usd",
+      "value": {
+        "low": 30000,
+        "best": 100000,
+        "high": 300000
+      },
+      "kind": "judgment",
+      "explainer": "The local organisations deliver DREAMS to about 1,360 households after Village Enterprise trains them; their own staff and costs beyond what Village Enterprise pays are unpublished: about US$75 a household, US$100,000, 30,000 to 300,000."
+    },
+    {
+      "id": "savings_leader_usd",
+      "section": "adjustments",
+      "label": "Savings-group leaders' unpaid time, at the local wage",
+      "format": "usd",
+      "value": {
+        "low": 50000,
+        "best": 150000,
+        "high": 500000
+      },
+      "kind": "judgment",
+      "explainer": "About 1,600 savings groups a year (47,505 entrepreneurs, about 30 to a group), each with about three officers giving perhaps 1 to 2 hours a week beyond the meeting (about 75 hours a year) at a rural wage of about US$0.40 an hour: about US$150,000, 50,000 to 500,000."
+    },
+    {
+      "id": "partner_resources",
+      "section": "adjustments",
+      "label": "Partners' resources outside Village Enterprise's cost",
+      "format": "usd",
+      "formula": "mercy_corps_own_usd + government_staff_usd + boma_usd + tanzania_cbo_usd + savings_leader_usd"
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "value": {
-        "low": 0.7,
-        "best": 0.85,
-        "high": 1.0
-      },
-      "kind": "judgment",
-      "explainer": "Village Enterprise pays for the training, grants and mentoring itself, and its subaward to Mercy Corps is in its cost. Outside its cost: Mercy Corps' own funding for DREAMS' market-systems work, the government staff who help target and deliver in Rwanda and Kenya, BOMA's lead role in Kuza Jamii, the unpaid time of savings-group leaders, and in Tanzania the community-based organisations that deliver DREAMS after Village Enterprise trains them. Together judged at about 15% of all resources (0 to 30%)."
+      "explainer": "Village Enterprise's share of all resources behind the outcome (Convention 2): its own cost over its cost plus each partner's resources valued above (Mercy Corps beyond its subaward, government staff, BOMA, Tanzania's community organisations, savings-group leaders' unpaid hours). About 0.96.",
+      "formula": "cost_total / (cost_total + partner_resources)"
     },
     {
       "id": "attribution_share",
@@ -968,6 +1079,30 @@
       "explainer": "Village Enterprise is funded by many private donors and foundations, and the loss of USAID funding in 2025 left gaps it had to fill (annual report p. 3), so little of a gift displaces other money; outcome funders and governments co-funding the model pull some in. 1, 0.85 to 1.1; the governments' wider adoption is in unmodelled_benefits_adj, not here."
     },
     {
+      "id": "cash_and_investments",
+      "section": "adjustments",
+      "label": "Cash and investments held at the year's end",
+      "format": "usd",
+      "value": 19418647,
+      "kind": "observed",
+      "source": {
+        "title": "Village Enterprise Fund, Inc. and Affiliates, consolidated financial statements for the years ended June 30, 2025 and 2024 (audited, GRF CPAs & Advisors)",
+        "url": "https://villageenterprise.org/wp-content/uploads/2026/03/Village-Enterprise-Fund-FY25-Financial-Statements.pdf",
+        "retrieved": "2026-11-15",
+        "page": "Exhibit A, p. 5",
+        "quote": "Cash and cash equivalents 5,080,971 ... Investments 14,337,676"
+      },
+      "explainer": "Cash (US$5,080,971) plus investments (US$14,337,676) on 30 June 2025."
+    },
+    {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a gift waits in funds held before it is spent",
+      "format": "number",
+      "formula": "cash_and_investments / total_expenses",
+      "explainer": "Funds held over a year's spending, about 0.92 years: a gift joins the pool and is spent, on average, after that wait, as the site's other builds count it."
+    },
+    {
       "id": "delay_years",
       "section": "adjustments",
       "label": "Years from a donation to the first consumption gains",
@@ -979,15 +1114,15 @@
         "high": 1.25
       },
       "kind": "judgment",
-      "explainer": "Spending happens through the year (about half a year on average), and each cohort's four months of targeting and training come before its first grant (audited statements, note 1); gains start after the grant. Village Enterprise holds about a year of spending in cash and investments, but its net assets grew by only $0.5M in FY2025, so a gift is spent rather than added to reserves. 0.75 years, 0.4 to 1.25."
+      "explainer": "Spending happens through the year (about half a year on average), and each cohort's four months of targeting and training come before its first grant (audited statements, note 1); gains start after the grant. The wait in funds held is gift_to_grant_years. 0.75 years, 0.4 to 1.25."
     },
     {
       "id": "wait_discount",
       "section": "adjustments",
       "label": "Discount for the wait until the gains start",
       "format": "multiple",
-      "formula": "1 / (1 + $discount_rate) ^ delay_years",
-      "explainer": "The wait discounted at the shared rate."
+      "formula": "1 / (1 + $discount_rate) ^ (gift_to_grant_years + delay_years)",
+      "explainer": "The wait in funds held and to the first gains, discounted at the shared rate."
     },
     {
       "id": "total_adj",
@@ -1004,12 +1139,69 @@
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
-        "low": -0.08,
-        "best": 0.1,
-        "high": 0.4
+        "low": -0.05,
+        "best": 0.02,
+        "high": 0.07
       },
       "kind": "judgment",
-      "explainer": "Each effect not modelled, with its sign: assets left when the consumption gain ends (net assets +US$40 per household in the core trial, +US$184 in DREAMS) +5% (0 to +10%); governments adopting the model beyond the households Village Enterprise trains (Kenya's KSEIP II with US$127M from the World Bank, Rwanda's national strategy, three Kenyan counties; spending on this technical work is in the cost) +5% (0 to +25%); nutrition gains for malnourished children in the Nawiri program (6% of spending) beyond consumption +2% (0 to +5%); women's empowerment and wellbeing beyond consumption are not added (valued through income); business competition with non-participating traders -2% (0 to -8%). Net +10%, -8% to +40%. Wastage and diversion of grants are a delivery failure, in implementation_adj."
+      "explainer": "Each effect not modelled, with its sign: assets still held after the consumption gain ends, net of depreciation (the businesses' assets are what produce the gain, so only what is left after persistence_years counts: core trial +US$40 assets per household, DREAMS +US$278 net assets, +US$184 household assets) +2% (0 to +3%); nutrition gains for malnourished children in the Nawiri program (6% of spending) beyond consumption +2% (0 to +5%); business competition with non-participating traders -2% (0 to -8%). Women's empowerment and wellbeing beyond consumption are valued through income only. Net +2%, the parts' ranges combined as independent: -5% to +7%. Governments adopting the model are uov_government_adoption; wastage and diversion of grants are in implementation_adj."
+    },
+    {
+      "id": "gov_households_per_year",
+      "section": "effect",
+      "label": "Households a year reached by government graduation programs Village Enterprise helps",
+      "format": "integer",
+      "value": {
+        "low": 2000,
+        "best": 10000,
+        "high": 40000
+      },
+      "kind": "judgment",
+      "explainer": "Village Enterprise gives technical help to Rwanda's National Strategy for Sustainable Graduation (it is training 14,500 parasocial workers on its model and building the national management information system, annual report p. 9), three Kenyan counties adopting graduation frameworks and Kenya's KSEIP II (US$127M from the World Bank across 25 counties). None publishes how many households a year get graduation through it: 10,000, 2,000 to 40,000, about a fifth of Village Enterprise's own yearly reach."
+    },
+    {
+      "id": "gov_credit_share",
+      "section": "effect",
+      "label": "Village Enterprise's share of the credit for those households",
+      "format": "percent",
+      "value": {
+        "low": 0.03,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "The governments and the World Bank pay for the delivery and would run some graduation programs anyway; Village Enterprise's technical help is a small part of the cost and of the decision. 10%, 3 to 30%."
+    },
+    {
+      "id": "gov_evidence_adj",
+      "section": "effect",
+      "label": "Evidence adjustment, government-delivered graduation",
+      "format": "multiple",
+      "value": {
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "A government-run graduation program in Niger had large effects in a trial (Bossuroy et al. 2022, Nature), but these programs differ from Village Enterprise's in package, mentoring intensity and targeting, and none is measured here: 0.6, 0.3 to 0.9, below core_evidence_adj's 0.87 for Village Enterprise's own delivery."
+    },
+    {
+      "id": "gov_missing_data_adj",
+      "section": "effect",
+      "label": "Government adoption: counted less where the outcome isn't measured",
+      "format": "percent",
+      "formula": "$missing_data_discount",
+      "explainer": "Thin: neither the reach nor the effect of the governments' programs is measured for this charity. The shared missing-data discount."
+    },
+    {
+      "id": "uov_government_adoption",
+      "side_effect": "added",
+      "section": "effect",
+      "label": "Units of value from governments adopting the model",
+      "format": "number",
+      "unit": "units of value",
+      "formula": "gov_households_per_year * gov_credit_share * household_size * core_ln_raw / (households_kenya + core_uganda_households + households_rwanda) * persistence_pv * gov_evidence_adj * gov_missing_data_adj * $uov_per_ln_consumption * wait_discount",
+      "explainer": "Households reached through the governments × Village Enterprise's share of the credit × people per household × the core program's average yearly gain per household × the years it lasts × the evidence and missing-data steps, valued at the shared rate and after the same wait. One year's flow against one year's cost."
     },
     {
       "id": "uov_consumption",
@@ -1041,7 +1233,7 @@
       "section": "outcome",
       "label": "Total units of value",
       "format": "number",
-      "formula": "(uov_consumption + uov_spillovers + uov_mortality) * (1 + unmodelled_benefits_adj)",
+      "formula": "(uov_consumption + uov_spillovers + uov_mortality + uov_government_adoption) * (1 + unmodelled_benefits_adj)",
       "unit": "units of value"
     },
     {
