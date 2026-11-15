@@ -1,6 +1,6 @@
 # Audit: environmental-defense-fund-charityevals, round 9
 Result: 0.004669 tco2e/$ = 0.002067 years of healthy life per 1,000 dollars (combined range 9.9e-5 to 0.0430); cause median 0.002145 (x0.96), against 0.001973 in round 8 (+4.8%). Verdict: pass.
-Model-sha: 8639d2320cece42c0236e194bd06d5264c8c794ff27efbed08ace428cb7bc818
+Model-sha: 62fee3e513e2af2ed661eb8ecb524347230a1b7352fe767e9a9b6ef20056f4bd
 Scope: scoped verification of the last commit's changes to this model: the public-money branch for the Inflation Reduction Act's home rebates and credits (rows ira_payer_cost_per_dollar, ira_rebate_uov, ira_credit_years_counted, ira_credit_uov, ira_household_focus_adj, ira_transfer_uov_per_year, the bridge tco2e_from_uov, outcome_total), the summary, beneficiaries (and scripts/beneficiary-countries.ts) and the write-up. Unchanged rows not re-audited.
 Mechanical: audit-model.ts 0 findings (lint, invariants); check.ts all valid; normalization-audit: no violation for this model (generated/ untouched).
 Previous round: round 8's finding 1 (extra_deaths_per_tco2e through methane_share) stays resolved: the row is unchanged and INV-10 passes.
@@ -26,3 +26,5 @@ None re-fetched: the facts `climate.ira_home_*` are the same ones Rewiring Ameri
 Of the result: win_years_counted (judgment, shared), missing_data_discount (judgment, shared), discount_rate (shared), the advocacy share of a won policy (shared judgment), and EDF's next-dollar figure (estimate). The new branch is 4.6% of the result and is driven by EDF's 2% attribution (judgment) x the 0.5 focus (judgment), not by any top-5 input. Best improvement: a sourced EDF share of the advocacy behind the law, which would fix both the tonnes and the money.
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00207 → 0.00199.

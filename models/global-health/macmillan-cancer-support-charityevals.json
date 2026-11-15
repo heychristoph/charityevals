@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "macmillan-cancer-support",
   "owner": "charityevals",
-  "summary": "Macmillan Cancer Support helps people with cancer in the UK: a phone line with cancer nurses, information advisers and welfare rights advisers, an online community, information centres, volunteer Buddies and small grants, plus learning for the 11,100 NHS nurses and other professionals in its network, funding for community and end-of-life care, and grants to community groups. Our model of all its charitable spending in 2025 (£112m in the year; 476,000 people with cancer supported) values the support by its effect on wellbeing, from trials of telephone and online support for people with cancer, and the welfare benefits its advisers help people claim on the site's log-income scale, net of what they cost taxpayers. It comes to about 0.002 years of healthy life per $1,000, under a hundredth of the site's global-health median, because the help is light (a call or two, or reading a forum) for people who already have NHS care, and its biggest money gain, benefits identified at about £8,500 a year for each of 13,200 households (about £5,100 awarded), is mostly a transfer from other UK households that are only somewhat richer. Most of the result comes from those benefits. Every branch but the grants (audited money paid) is discounted for missing data, since none of Macmillan's services has a controlled evaluation: the Support Line, Buddies and online support, welfare rights, the professionals and the posts its grants paid for, and the community and system work. The biggest uncertainties are how much of the identified benefits are paid and would not have been claimed anyway, and how far below average the claimants' consumption is; with every judgment at its ends the result spans over a thousandfold, so it is mostly uncertainty.",
+  "summary": "Macmillan Cancer Support helps people with cancer in the UK: a phone line with cancer nurses, information advisers and welfare rights advisers, an online community, information centres, volunteer Buddies and small grants, plus learning for the 11,100 NHS nurses and other professionals in its network, funding for community and end-of-life care, and grants to community groups. Our model of all its charitable spending in 2025 (£112m in the year; 476,000 people with cancer supported) values the support by its effect on wellbeing, from trials of telephone and online support for people with cancer, and the welfare benefits its advisers help people claim on the site's log-income scale, net of what they cost taxpayers. It comes to about 0.002 years of healthy life per $1,000, because the help is light (a call or two, or reading a forum) for people who already have NHS care, and its biggest money gain, benefits identified at about £8,500 a year for each of 13,200 households (about £5,100 awarded), is mostly a transfer from other UK households that are only somewhat richer. About half of the result comes from those benefits. Every branch but the grants (audited money paid) is discounted for missing data, since none of Macmillan's services has a controlled evaluation: the Support Line, Buddies and online support, welfare rights, the professionals and the posts its grants paid for, and the community and system work. The biggest uncertainties are how much of the identified benefits are paid and would not have been claimed anyway, and how far below average the claimants' consumption is; with every judgment at its ends the result spans over a thousandfold, so it is mostly uncertainty.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Macmillan Cancer Support",
@@ -927,14 +927,6 @@
       "explainer": "One year's consumption raised by the grant."
     },
     {
-      "id": "consumption_na",
-      "section": "effect",
-      "label": "UK national-accounts consumption per person, 2025, in dollars",
-      "format": "usd",
-      "formula": "@united_kingdom.consumption_per_person_2024 / @fx.usd_per_gbp_2024 * @cpi.gbr_2025 / @cpi.gbr_2024 * usd_per_gbp",
-      "explainer": "Taxpayers' consumption: the national accounts, where everyone's consumption is meant (docs/normalization.md 2.13), converted as consumption_mean."
-    },
-    {
       "id": "mcpf",
       "section": "effect",
       "label": "Marginal cost of public funds: what a pound of public money costs those who pay",
@@ -953,14 +945,14 @@
         "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "On the log scale a pound taken from someone costs 1 over their consumption, so a tax proportional to consumption costs 1 over the national-accounts mean (a multiple of 1); a progressive tax costs less (above 1). UK taxes as a whole take a similar share of gross income across income fifths (ONS, Effects of taxes and benefits on household income), so against consumption, which is more equal than income, they are mildly progressive. 1.1, range 0.85 (money taken from other spending on poorer people) to 1.5."
+      "explainer": "On the log scale a pound taken from someone costs 1 over their consumption, so a tax proportional to consumption costs 1 over the survey mean the claimants are measured on (a multiple of 1); a progressive tax costs less (above 1). UK taxes as a whole take a similar share of gross income across income fifths (ONS, Effects of taxes and benefits on household income), so against consumption, which is more equal than income, they are mildly progressive. 1.1, range 0.85 (money taken from other spending on poorer people) to 1.5."
     },
     {
       "id": "taxpayer_ln_loss_per_dollar",
       "section": "effect",
       "label": "Taxpayers' log-consumption loss per dollar of benefits paid",
       "format": "number",
-      "formula": "mcpf / (uk_payer_multiple * consumption_na)",
+      "formula": "mcpf / (uk_payer_multiple * consumption_mean)",
       "explainer": "Benefits are paid by taxpayers (or by spending cut elsewhere), spread thinly over many people: each dollar costs the marginal cost of public funds over the payers' consumption."
     },
     {
@@ -1409,7 +1401,7 @@
       "label": "Units of value: the taxpayers' cost of the extra benefits, adjusted",
       "format": "number",
       "formula": "0 - wr_identified_gbp / wr_years_in_figure * wr_award_share * usd_per_gbp * pv_annuity_due(1, $discount_rate, income_years) * taxpayer_ln_loss_per_dollar * $uov_per_ln_consumption * wr_total_adj",
-      "explainer": "The benefits the welfare rights team adds are paid from taxes: the same pounds, at the marginal cost of public funds, spread over taxpayers at national-accounts consumption, valued on the same scale and over the same years. Negative, part of the welfare rights branch: a transfer counts only by moving money from richer payers to poorer claimants."
+      "explainer": "The benefits the welfare rights team adds are paid from taxes: the same pounds, at the marginal cost of public funds, spread over taxpayers at the survey mean, valued on the same scale and over the same years. Negative, part of the welfare rights branch: a transfer counts only by moving money from richer payers to poorer claimants."
     },
     {
       "id": "wr_uov",

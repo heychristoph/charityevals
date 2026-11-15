@@ -23,6 +23,8 @@ No findings.
 
 **Verdict: pass (all four round-1 findings settled; no new findings).**
 
-Model-sha: 01adf044600aef63b931966903b39f34a3eaae99e5ec7da23fe87bd223f22db8
+Model-sha: f249617235f3bf527987879741413bf1ed88061cd8efb9dc55bd72033de6b823
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 15.8 → 15.8.

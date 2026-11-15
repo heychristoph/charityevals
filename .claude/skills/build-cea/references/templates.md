@@ -246,7 +246,7 @@ Three branches summed into `outcome_total`, each 0 with a reason where it doesn'
   reference class.
 - **Money moved or raised**: `money_moved × moved_dollar_net_value` (rules below).
 - **Aid or public money won or kept** is worth what that aid does: its known use's figure (a downstream
-  model live, `@givewell_shared.cf_value_*`, or recipients' gain less payers' cost), else
+  model live, `@givewell_shared.cf_value_*`, or recipients' gain less payers' cost, both on the survey scale), else
   `@aid_value.humanitarian_vs_cash` or `@aid_value.oda_vs_cash` × `@cash.uov_per_dollar`; never a model's own multiple.
 - **Career changes**: `careers_changed × career_change_value × careers_missing_data_adj`.
 - Downstream WELLBYs: rename `uov_*` to `wellbys_*`, unit `wellby`. Animals: `sads_*` and the species

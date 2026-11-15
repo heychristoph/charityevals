@@ -23,4 +23,6 @@ Round 2 findings: all low or resolved; the round-2 low about `fuel_share` having
 None.
 
 Verdict: pass
-Model-sha: df1f1ab43e725ff2169b10acb37c415c4b951ee9e34d63315ec524f553bc1e3c
+Model-sha: 6f3d1e7c57a8dbaf4742d4122513c46249dcf38e1507d0de17ec5922447f25ae
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0183 → 0.0169.

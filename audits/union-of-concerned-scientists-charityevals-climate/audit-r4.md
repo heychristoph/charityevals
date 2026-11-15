@@ -1,7 +1,7 @@
 # Audit r4: Union of Concerned Scientists (climate, transport and western states)
 
 Result: 0.006919 tCO2e/$ = 0.001796 years of healthy life per $1,000 (combined range 0.00006-0.055; model's own ranges 0.00026-0.0089); cause median 0.002238 (x0.80). Verdict: pass.
-Model-sha: de1ceff8b2e9d746c6c440200bd61cc3bdeae568644d7526aea7987a5276f30b
+Model-sha: c6e1c464911811a35a8da669a87b0b2ea14f0a9b433fbaf55a74bc4da0628d53
 Scope: only what HEAD (53b88fe) changed: the public-money branch for the Inflation Reduction Act's home rebates and credits (rows `ira_payer_cost_per_dollar`, `ira_rebate_uov`, `ira_credit_years_counted`, `ira_credit_uov`, `ira_household_focus_adj`, `ira_transfer_uov_per_year`, bridge `tco2e_from_uov`, `outcome_total`), the shared `climate.ira_home_*` facts as read here, summary, beneficiaries (and scripts/beneficiary-countries.ts), write-up figures. Rest of the model not re-opened.
 Mechanical: lint 0/0/0 (audit-model findings: 0), invariants none, normalization-audit none for this model, check.ts all models valid.
 Previous round: r3 had no findings.
@@ -29,3 +29,5 @@ Previous round: r3 had no findings.
 Top inputs for the new branch: the focus judgment (0.5), `ira_attribution_share_shared` (1%, judgment anchored on EDF's 2%), `$win_years_counted` (caps credits at 3), the shared recipient consumption ratios (judgments) and `ira_home_rebates_paid_share` (judgment). Best improvement: a UCS-specific source for the focus share.
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0018 → 0.00151.

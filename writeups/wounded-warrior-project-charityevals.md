@@ -1,8 +1,8 @@
 ### Summary
 
-Wounded Warrior Project (WWP) serves US veterans injured in service since 2001 and their families. Our two models of its fiscal 2025 (October 2024 to September 2025) cover every programme. The mental health programmes ($98.7M of $274.6M programme spending) come to **<span data-figure="headline" data-model="wounded-warrior-project-charityevals-mental-health">0.002</span> years of healthy life per $1,000** ([mental health](/wounded-warrior-project/wounded-warrior-project-charityevals-mental-health)); the other six programmes ($175.9M) come to **<span data-figure="headline" data-model="wounded-warrior-project-charityevals">0.01</span>**.
+Wounded Warrior Project (WWP) serves US veterans injured in service since 2001 and their families. Our two models of its fiscal 2025 (October 2024 to September 2025) cover every programme. The mental health programmes ($98.7M of $274.6M programme spending) come to **<span data-figure="headline" data-model="wounded-warrior-project-charityevals-mental-health">0.002</span> years of healthy life per $1,000** ([mental health](/wounded-warrior-project/wounded-warrior-project-charityevals-mental-health)); the other six programmes ($175.9M) come to **<span data-figure="headline" data-model="wounded-warrior-project-charityevals">0.006</span>**.
 
-The help reaches US households that already consume about $27,000 a person, so on the site's one log-income scale even large sums are small gains, and most of it competes with free help from the VA and other veteran groups. Over four-fifths of the second model is the benefits service: WWP's representatives win VA disability awards it values at $263.7M (about a year of the added payments plus some back pay).
+The help reaches US households that already consume about $27,000 a person, so on the site's one log-income scale even large sums are small gains, and most of it competes with free help from the VA and other veteran groups. About four-fifths of the second model is the benefits service: WWP's representatives win VA disability awards it values at $263.7M (about a year of the added payments plus some back pay).
 
 ### What the charity does
 
@@ -30,7 +30,7 @@ Veterans with PTSD who finish trauma-focused therapy have fewer symptoms and les
 
 ### What drives the result
 
-The benefits service is over four-fifths of the second model; in the mental-health model the intensive programmes and the therapy branch are about 95%. The swings: how many years of payments an award adds, the veterans' consumption, the counterfactual for awards, the missing-data discount and the site's value of a WELLBY.
+The benefits service is about four-fifths of the second model; in the mental-health model the intensive programmes and the therapy branch are about 95%. The swings: how many years of payments an award adds, the veterans' consumption, the counterfactual for awards, the missing-data discount and the site's value of a WELLBY.
 
 ### Biggest uncertainties
 

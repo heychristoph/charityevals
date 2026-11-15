@@ -1200,8 +1200,19 @@ new audit rounds):
   Habitat for Humanity US (×1.75), the Salvation Army US (×1.54), United Way (×1.16), and the drafts (St.
   Jude ×1.01, Habitat's awareness ×3.4: ×1.30 from its US branch and ×2.6 more once its verification round found the 13 Home Equals baselines still adding a share of the gap to the national accounts (the share, gap_top_share, is gone);
   the Red Cross's and Salvation Army's international work, whose shares were re-expressed on the survey
-  scale, ×1.00). The national accounts stay where everyone's consumption is meant (the taxpayers who fund
-  public money).
+  scale, ×1.00). Amended 15 Nov 2026 (owner): one consumption scale for public money. Taxpayers, and
+  everyone else once valued at "everyone's" consumption, go on the same survey scale as the recipients
+  (the US Consumer Expenditure Survey; elsewhere the survey mean or national accounts × `survey_to_na_<iso3>`),
+  real income differences staying as the payer multiples; the 1.8× US gap between the sources had counted as a
+  false gain. Years per $1,000: Rewiring America 0.0278 → 0.0120, Wounded Warrior Project 0.0133 → 0.0064
+  (both verified), Economic Security Project 0.0867 → 0.0689, Feeding America 0.0183 → 0.0169 and its advocacy
+  0.104 → 0.087, Innocence Project 0.00060 → 0.00049, Macmillan 0.00211 → 0.00167, Prison Policy Initiative
+  0.0603 → 0.0540, UCS climate 0.00180 → 0.00151 and food 0.00025 → 0.00045, EDF 0.00207 → 0.00199, Project
+  Drawdown 0.00517 → 0.00490, Fair Tax Foundation 0.0562 → 0.0687, Tax Justice Network 1.25 → 1.29, Make-A-Wish
+  0.00129 → 0.00156, the Bail Project 0.0125 → 0.0135 and its advocacy 0.00283 → 0.00305, Save the Children's
+  advocacy 0.417 → 0.413, the Federation of American Scientists, Council on Strategic Risks and UCS
+  catastrophic-risk models ×1.00. Habitat for Humanity's awareness model is held at the old base: on the one
+  scale it is below zero (0.0076 → −0.0010, verified correct), which the site can't yet show.
 - **Survivors' remaining life.** A death averted is valued at its age band; where studies show survivors
   live shorter than their age group, × the condition's shared remaining-life ratio (facts/survival.json),
   elsewhere nothing: out-of-hospital cardiac arrest 0.8 (0.65–0.95; 84% relative ten-year survival),
@@ -1371,7 +1382,8 @@ A dollar of aid or public money a model's work wins, keeps, displaces or improve
 does per dollar. Where its use is known, that use's figure: a downstream model read live, GiveWell's
 `@givewell_shared.cf_value_*` (Gavi pledges, buyers' savings, nutrition commitments at the government-spending
 figure), money to a
-modelled agency at that model's value, domestic benefits as the recipients' gain less the payers' cost. Else
+modelled agency at that model's value, domestic benefits as the recipients' gain less the payers' cost, both
+on the recipients' survey scale (since 15 Nov 2026, 2.14). Else
 one of two shared figures in facts/aid_value.json × `@cash.uov_per_dollar`: `humanitarian_vs_cash` 0.2
 (0.05-0.8; the site's 17 relief models before their missing-data step, median 0.21) and `oda_vs_cash` 1
 (0.4-2; a donor's whole aid budget: health at GiveWell's Global Fund and Gavi figures, humanitarian at 0.2,
