@@ -63,10 +63,10 @@ export const LIVELIHOODS = "cause:livelihoods";
  * joins the list (its fact is kept). */
 export const TLYCS_DESTINATIONS: [string, string][] = [
   ["against_malaria_foundation", "givewell:against-malaria-foundation"],
-  ["carbon180", "charityevals:clean-air-task-force"],
+  ["carbon180", "charityevals:carbon180"],
   ["clean_air_task_force", "charityevals:clean-air-task-force"],
   ["development_media_international", "givewell:development-media-international"],
-  ["evergreen_collaborative", "charityevals:clean-air-task-force"],
+  ["evergreen_collaborative", "charityevals:evergreen-collaborative"],
   ["evidence_action", "givewell:evidence-action"],
   ["gain", "charityevals:global-alliance-for-improved-nutrition"],
   ["givedirectly", GIVEDIRECTLY],
