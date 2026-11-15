@@ -11,7 +11,7 @@
   "estimate_basis": "past_average",
   "charity": "central-square-foundation",
   "owner": "charityevals",
-  "summary": "Central Square Foundation (CSF) supports Indian state governments' school reforms: the foundational literacy and numeracy missions of 11 states, new pre-primary classes, adaptive-learning software and other EdTech, school report cards for parents, and a pilot for high-potential students. We count its spending in the year to March 2026 against a year of those programmes' learning gains, credited by CSF's share of everyone's resources behind them (about 3% for the state missions, the largest branch) and valued as later earnings. At the defaults it comes to about 0.5 years of healthy life per $1,000, but the result is mostly uncertainty: how large the missions' learning gain is, how much of a test-score gain lasts into adult earnings, and the discount rate, since the earnings start a decade or more later. Every branch is discounted for missing data; adaptive learning has a randomised trial behind it, but no published effect size.",
+  "summary": "Central Square Foundation (CSF) supports Indian state governments' school reforms: the foundational literacy and numeracy missions of 11 states, new pre-primary classes, adaptive-learning software and other EdTech, school report cards for parents, and a pilot for high-potential students. We count its spending in the year to March 2026 against a year of those programmes' learning gains, credited by CSF's share of everyone's resources behind them (about 3% for the state missions, the largest branch) and valued as later earnings. At the defaults it comes to about 0.9 years of healthy life per $1,000, but the result is mostly uncertainty: how large the missions' learning gain is, how much of a test-score gain lasts into adult earnings, and the discount rate, since the earnings start a decade or more later. Every branch is discounted for missing data except adaptive learning in Andhra Pradesh, which has a randomised trial of the same software in the state's schools.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Central Square Foundation, year to March 2026",
@@ -470,28 +470,18 @@
     {
       "id": "earnings_gain_per_sd",
       "section": "effect",
-      "label": "Adult earnings gain per standard deviation of lasting learning (share of earnings)",
+      "label": "Adult earnings gain per standard deviation of skill held in adult life (share of earnings)",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.25
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, a placeholder until the site's shared figure for low- and middle-income countries lands (another build is adding it; this row is to be repointed to it). Anchor: across rich countries, one standard deviation more numeracy in adulthood goes with about 18% higher wages (Hanushek, Schwerdt, Wiederhold and Woessmann, 'Returns to skills around the world', European Economic Review 2015); in India's labour market, with more informal and agricultural work, likely lower. 15% (8% to 25%). The fade-out of a programme's gain is the next row."
+      "formula": "@education.earnings_gain_per_sd_adult_skills_lmic",
+      "explainer": "The site's shared figure for low- and middle-income countries: 20% (10% to 30%), from the Center for Global Development's review of studies linking adults' tests to their earnings."
     },
     {
       "id": "learning_persistence",
       "section": "effect",
-      "label": "Share of an end-of-programme learning gain that lasts into adulthood",
+      "label": "Share of an end-of-programme test-score gain still there as skill in adult life",
       "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.7
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, a placeholder until the site's shared figure lands (to be repointed). Test-score gains fade: in Banerjee, Cole, Duflo and Linden's remedial-education trial in Indian cities (Quarterly Journal of Economics 2007) the gain shrank to about a third a year after the programme ended; long-run studies in the US find earnings effects larger than the faded test scores suggest (Chetty and others 2011). 40% (20% to 70%)."
+      "formula": "@education.test_gain_persistence_to_adulthood",
+      "explainer": "The site's shared figure: 40% (20% to 70%). Test gains fade after a programme ends; this is the share that lasts into working life."
     },
     {
       "id": "resource_sharing",
@@ -529,7 +519,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "Our judgment of the missions' causal gain, net of trends and the post-pandemic recovery. Anchors: between 2022 and 2024 Std III reading in rural government schools, where the missions run, rose 7.1 percentage points (to 23.4%) against 2.4 in private schools, and arithmetic 7.4 against 4.4, 'substantially more than recovery' (ASER 2024 all-India presentation, slide 11, https://asercentre.org/wp-content/uploads/2022/12/ASER-2024-All-India-ppt-Jan-27-11am.pdf): the government schools' extra 3-5 points is about 0.1-0.17 SD on a normal scale; Uttar Pradesh, where CSF has worked since 2019, gained 15.6 points in reading and 20.6 in arithmetic since 2018 (annual report p. 30); structured pedagogy, the missions' model, is among the Global Education Evidence Advisory Panel's 'great buys' (2023 Smart Buys report). Government-run missions at state scale get less than trials do. 0.12 SD (0.04 to 0.25).",
+      "explainer": "Our judgment of the missions' causal gain, net of trends and the post-pandemic recovery. Anchors: between 2022 and 2024 Std III reading in rural government schools, where the missions run, rose 7.1 percentage points (to 23.4%) against 2.4 in private schools, and arithmetic 7.4 against 4.4, 'substantially more than recovery' (ASER 2024 all-India presentation, slide 11, https://asercentre.org/wp-content/uploads/2022/12/ASER-2024-All-India-ppt-Jan-27-11am.pdf): the government schools' extra 3-5 points is about 0.1-0.17 SD on a normal scale; Uttar Pradesh, where CSF has worked since 2019, gained 15.6 points in reading and 20.6 in arithmetic since 2018 (annual report p. 30); structured pedagogy, the missions' model, is among the Global Education Evidence Advisory Panel's 'great buys' (2023 Smart Buys report). ASER's phrase 'substantially more than recovery' is for arithmetic; and between 2022 and 2024 fewer underage children were enrolled in Std I and government schools' share of enrolment fell, either of which can move the gap between government and private schools: reasons for the low end. Government-run missions at state scale get less than trials do. 0.12 SD (0.04 to 0.25).",
       "unit": "SD"
     },
     {
@@ -655,25 +645,41 @@
     {
       "id": "pal_units_affected_per_year",
       "section": "reach",
-      "label": "Students using personalised adaptive learning in state deployments CSF supports",
+      "label": "Students using personalised adaptive learning in Andhra Pradesh's deployment",
       "format": "number",
-      "formula": "pal_students_ap + pal_students_hp",
+      "formula": "pal_students_ap",
       "unit": "children",
       "explainer": "A year's users against a year's support. Odisha's 762-school procurement had only been tendered by March 2026: not counted."
+    },
+    {
+      "id": "php_units_affected_per_year",
+      "section": "reach",
+      "label": "Students using personalised adaptive learning in Himachal Pradesh's deployment",
+      "format": "number",
+      "formula": "pal_students_hp",
+      "unit": "children",
+      "explainer": "A year's users against a year's support; a separate branch because the trial is of Andhra Pradesh's deployment."
     },
     {
       "id": "pal_gain_sd",
       "section": "effect",
       "label": "Learning gain from a year of personalised adaptive learning in government schools (standard deviations)",
       "format": "number",
+      "unit": "SD",
       "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.35
+        "low": 0.15,
+        "best": 0.3,
+        "high": 0.4
       },
-      "kind": "judgment",
-      "explainer": "Our judgment from the trials. In Andhra Pradesh's randomised trial across 120 government schools (about 20,000 students in Grades 6-9, Kremer and the University of Chicago's Development Innovation Lab), PAL students gained 2.35 times as much as controls over 17 months, 'roughly 1.9 additional years of learning' (annual report p. 40; the working paper's effect in SD wasn't found). At the 0.1-0.2 SD a year of learning typical in Indian government middle schools, that is about 0.2-0.35 SD over 17 months; Mindspark, the same kind of software, raised scores by 0.37 SD in maths and 0.23 SD in Hindi in 4.5 months in Delhi (Muralidharan, Singh and Ganimian, American Economic Review 2019). Use falls at scale. 0.2 SD a year (0.1 to 0.35).",
-      "unit": "SD"
+      "kind": "estimate",
+      "source": {
+        "title": "Central Square Foundation, 'PAL Works' brochure (28 January 2026), Study 1: randomised trial in Andhra Pradesh by the University of Chicago's Development Innovation Lab",
+        "url": "https://res.cloudinary.com/dmfdkajkq/images/v1770618828/PAL_Works_Brochure_28Jan2026/PAL_Works_Brochure_28Jan2026.pdf",
+        "page": "p. 3",
+        "quote": "In just 17 months, students in PAL-enabled classrooms improved 2.5x times (0.43 SD) compared to those in non-PAL classrooms.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The Andhra Pradesh trial of the same software (SwiftPAL) in the state's own deployment, 14,000 students in Grades 6-9, maths: 0.74 SD against 0.31 SD in control schools over 17 months, 0.43 SD more, about 0.3 SD a year (0.43 × 12 ÷ 17). Range: 0.15 (Rajasthan's government-school trial of Mindspark, 0.22 SD in maths over 18 months, same brochure p. 4) to 0.4; only maths was measured, and use at scale is 80 minutes a week."
     },
     {
       "id": "pal_years_to_work",
@@ -699,9 +705,18 @@
       "explainer": "Students × the lasting gain valued as later earnings."
     },
     {
-      "id": "edo_units_affected_per_year",
+      "id": "php_downstream_value",
+      "section": "effect",
+      "label": "Adaptive learning in Himachal Pradesh: value of a year's use, before adjustments",
+      "format": "number",
+      "formula": "php_units_affected_per_year * ln(1 + pal_gain_sd * learning_persistence * earnings_gain_per_sd) * lnc_value_per_unit_gain * (1 + $discount_rate) ^ -pal_years_to_work",
+      "unit": "units of value",
+      "explainer": "The Andhra Pradesh trial's gain taken for Himachal Pradesh's PM SHRI schools, thin (its missing-data row)."
+    },
+    {
+      "id": "edo_learners_2023_2025",
       "section": "reach",
-      "label": "Learners benefiting from the EdTech accelerator's product improvements",
+      "label": "Learners benefiting from the EdTech accelerator's product improvements, 2023 to 2025",
       "format": "number",
       "value": 3000000,
       "kind": "observed",
@@ -709,11 +724,34 @@
         "title": "Central Square Foundation, Annual Report 2025-26, 'Learning to Build Tomorrow'",
         "url": "https://res.cloudinary.com/dmfdkajkq/images/v1786431379/Annual-Report-25-26-Final-Digtal-Cut/Annual-Report-25-26-Final-Digtal-Cut.pdf?_i=AA",
         "retrieved": "2026-11-15",
-        "quote": "reached over 55 lakh users, including more than 30 lakh learners who directly benefited from accelerator-driven innovations",
+        "quote": "Between 2023 and 2025, the LiftEd EdTech Accelerator worked with eight organisations and reached over 55 lakh users, including more than 30 lakh learners who directly benefited from accelerator-driven innovations",
         "page": "p. 39"
       },
       "unit": "children",
-      "explainer": "The LiftEd accelerator's 30 lakh learners (2023-2025, counted as a year's flow, a generous reading). EdTech Tulna's product reviews (56 lakh students in states' procurement) and AI Samarth's AI-literacy lessons (25 lakh learners) reach many of the same children with no measured learning effect; the small judged gain below covers them too."
+      "explainer": "The accelerator's 30 lakh learners over its three years. EdTech Tulna's product reviews (56 lakh students in states' procurement) and AI Samarth's AI-literacy lessons (25 lakh learners) reach many of the same children with no measured learning effect; the small judged gain below covers them too."
+    },
+    {
+      "id": "edo_accelerator_years",
+      "section": "reach",
+      "label": "Years the accelerator's learner count covers",
+      "format": "number",
+      "value": {
+        "low": 2,
+        "best": 3,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "'Between 2023 and 2025' (p. 39): three years, or two if the count is from the start of 2023 to the start of 2025.",
+      "unit": "years"
+    },
+    {
+      "id": "edo_units_affected_per_year",
+      "section": "reach",
+      "label": "Learners a year benefiting from the accelerator's product improvements",
+      "format": "number",
+      "formula": "edo_learners_2023_2025 / edo_accelerator_years",
+      "unit": "children",
+      "explainer": "The three years' count as a yearly flow."
     },
     {
       "id": "edo_gain_sd",
@@ -795,7 +833,7 @@
     {
       "id": "p_success",
       "section": "effect",
-      "label": "Share of the disclosure pilots that become lasting district practice",
+      "label": "Chance each disclosure pilot becomes lasting district practice",
       "format": "percent",
       "value": {
         "low": 0.2,
@@ -851,7 +889,7 @@
       "format": "number",
       "formula": "gov_units_affected_per_year * gov_value_per_student_year * p_success * discounted_years",
       "unit": "units of value",
-      "explainer": "Students a year × value per student-year × the chance the practice lasts × the discounted years a won reform counts."
+      "explainer": "Students a year × value per student-year × the chance the practice lasts × the discounted years a won reform counts. The reform's running costs (district staff's and teachers' time on the assessments and report cards) count in CSF's share of the resources and in the side effects' teacher-time harm, not again here."
     },
     {
       "id": "hps_units_affected_per_year",
@@ -898,7 +936,7 @@
       "section": "reach",
       "label": "Children reached a year, all branches (for reading)",
       "format": "number",
-      "formula": "fln_units_affected_per_year + ece_units_affected_per_year + pal_units_affected_per_year + edo_units_affected_per_year + gov_units_affected_per_year + hps_units_affected_per_year",
+      "formula": "fln_units_affected_per_year + ece_units_affected_per_year + pal_units_affected_per_year + php_units_affected_per_year + edo_units_affected_per_year + gov_units_affected_per_year + hps_units_affected_per_year",
       "unit": "children",
       "explainer": "For reading only: the branches' values are computed separately."
     },
@@ -916,7 +954,7 @@
       "section": "effect",
       "label": "Value of all branches, before adjustments",
       "format": "number",
-      "formula": "fln_downstream_value + ece_downstream_value + pal_downstream_value + edo_downstream_value + gov_downstream_value + hps_downstream_value",
+      "formula": "fln_downstream_value + ece_downstream_value + pal_downstream_value + php_downstream_value + edo_downstream_value + gov_downstream_value + hps_downstream_value",
       "unit": "units of value"
     },
     {
@@ -1013,7 +1051,7 @@
       "label": "Pay a career changer gives up per year (US$)",
       "format": "usd",
       "formula": "@meta.career_forgone_pay_default",
-      "explainer": "The site's shared default (facts/meta.json); LEEP changes no careers, so it doesn't move the result."
+      "explainer": "The site's shared default (facts/meta.json); CSF changes no careers, so it doesn't move the result."
     },
     {
       "id": "career_years_stayed",
@@ -1022,7 +1060,7 @@
       "format": "number",
       "formula": "@meta.career_years_stayed_default",
       "unit": "years",
-      "explainer": "The site's shared default (facts/meta.json); LEEP changes no careers."
+      "explainer": "The site's shared default (facts/meta.json); CSF changes no careers."
     },
     {
       "id": "career_years",
@@ -1040,7 +1078,7 @@
       "format": "small",
       "formula": "moved_dollar_value",
       "unit": "units of value / $",
-      "explainer": "The moved-money destinations; LEEP changes no careers, so it doesn't move the result."
+      "explainer": "The moved-money destinations; CSF changes no careers, so it doesn't move the result."
     },
     {
       "id": "career_counterfactual_share",
@@ -1048,7 +1086,7 @@
       "label": "Share of the career changes the charity caused",
       "format": "percent",
       "formula": "@meta.career_counterfactual_share_default",
-      "explainer": "The site's shared default (facts/meta.json); LEEP changes no careers."
+      "explainer": "The site's shared default (facts/meta.json); CSF changes no careers."
     },
     {
       "id": "career_change_value",
@@ -1078,15 +1116,15 @@
     {
       "id": "evidence_adj",
       "section": "adjustments",
-      "label": "Evidence adjustment: how far the learning-to-earnings chain should be trusted here",
+      "label": "Evidence adjustment: publication bias and the conversion to standard deviations",
       "format": "multiple",
       "value": {
-        "low": 0.35,
-        "best": 0.6,
-        "high": 0.9
+        "low": 0.65,
+        "best": 0.85,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Learning gains are measured on tests the states and partners often run themselves (administrative assessments can inflate), converted to standard deviations by our judgment, and carried to adult earnings by the shared-style figures above, which rest on rich-country wage data. Our judgment, 0.6 (0.35 to 0.9), below LEEP's 0.7 for the lead-to-IQ-to-earnings chain, which rests on cohort studies of the same outcome."
+      "explainer": "One question no other row asks: education trials with large effects are more often published, which inflates the trial evidence behind the judged gains (pre-primary, report cards, software), and ASER's threshold shares become standard deviations only on an assumed normal scale. How the states' tests or rich-country wage data fit is in each gain's and the shared earnings figure's own range, and not being measured for CSF is the missing-data step. Our judgment, 0.85 (0.65 to 1)."
     },
     {
       "id": "counterfactual_adj",
@@ -1099,7 +1137,33 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The missions are national policy and would run without CSF; their gain is already credited to CSF only by its share of the resources. This row asks a different question: would another technical partner (Language and Learning Foundation, Pratham, consulting firms) have filled CSF's role, as several already work alongside it (Haryana: p. 20)? Our judgment, 85% (60% to 100%)."
+      "explainer": "For the branches where CSF supports a state programme (FLN, early childhood, adaptive learning) or other organisations' products (other EdTech): the programmes would run without CSF, and their gain is credited to CSF only by its share of the resources. This row asks whether another technical partner (Language and Learning Foundation, Pratham, consulting firms, other funders of EdTech) would have filled CSF's role, as several already work alongside it (Haryana: p. 20). Our judgment, 85% (60% to 100%)."
+    },
+    {
+      "id": "gov_counterfactual_adj",
+      "section": "adjustments",
+      "label": "School governance: share that wouldn't have come without CSF rather than another partner",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "CSF designed and ran the Jodhpur and Angul disclosure pilots with the districts (pp. 44-45); no other partner was doing this there. 95% (80% to 100%)."
+    },
+    {
+      "id": "hps_counterfactual_adj",
+      "section": "adjustments",
+      "label": "High-potential students: share that wouldn't have come without CSF rather than another partner",
+      "format": "percent",
+      "value": {
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "CSF set up and funded the STEM accelerator itself (p. 47). 95% (80% to 100%)."
     },
     {
       "id": "nipun_central_inr",
@@ -1115,7 +1179,7 @@
         "quote": "It also wants the government to increase budget allocation to Rs 6,000 crore from Rs 2,500 crore."
       },
       "unit": "₹",
-      "explainer": "The mission's central budget, ₹2,500 crore, as the standing committee reports it."
+      "explainer": "The mission's central allocation, ₹2,500 crore a year, as the article on the standing committee's report gives it (the sentence is about the NIPUN Bharat mission; the committee notes the mission is due to end this financial year unless extended). Spending is the next rows."
     },
     {
       "id": "central_share_nipun",
@@ -1131,17 +1195,58 @@
       "explainer": "Samagra Shiksha, through which the mission is funded, is shared 60:40 between the centre and most states and 90:10 for the north-eastern and Himalayan states (Assam among CSF's 11): 62% (60% to 70%) for CSF's states."
     },
     {
-      "id": "csf_states_enrolment_share",
+      "id": "india_primary_enrolment",
       "section": "adjustments",
-      "label": "CSF's 11 FLN states' share of India's government primary-school children",
+      "label": "Children enrolled in Grades 1-5 in India, all schools, 2024-25",
+      "format": "number",
+      "value": 104381347,
+      "kind": "observed",
+      "source": {
+        "title": "UDISE+ 2024-25 national summary (Ministry of Education data), compiled by Education for All in India",
+        "url": "https://educationforallinindia.com/wp-content/uploads/2025/09/National_2020-21-and-2024-25.pdf",
+        "retrieved": "2026-11-15",
+        "quote": "Enrolment in Primary: 107837711 (2023-24), 104381347 (2024-25)",
+        "page": "p. 1"
+      },
+      "unit": "children",
+      "explainer": "All schools, government and private."
+    },
+    {
+      "id": "primary_grades",
+      "section": "adjustments",
+      "label": "Grades in India's primary stage",
+      "format": "number",
+      "value": 5,
+      "kind": "observed",
+      "source": {
+        "title": "Unacademy, 'School enrolment trends: UDISE+ 2024-25' (29 August 2025)",
+        "url": "https://unacademy.com/content/upsc/daily-news-analysis-school-enrolment-trends-udise-ministry-of-education-29-august/",
+        "retrieved": "2026-11-15",
+        "quote": "Primary level (Classes 1–5)."
+      },
+      "unit": "grades",
+      "explainer": "UDISE+ counts primary enrolment over Classes 1 to 5."
+    },
+    {
+      "id": "govt_share_primary",
+      "section": "adjustments",
+      "label": "Government schools' share of Grade 1-5 enrolment",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.4,
-        "high": 0.5
+        "low": 0.48,
+        "best": 0.55,
+        "high": 0.62
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the 11 states' counts sum to about 2.6 crore (rows above) against roughly 6.5 crore children in government primary grades nationally (UDISE+); they include Uttar Pradesh and Bihar, the two largest. 40% (30% to 50%)."
+      "explainer": "Our judgment: government schools enrol 12.16 crore of India's 24.69 crore school children in 2024-25 (UDISE+), and a larger share in the primary grades than in secondary. 55% (48% to 62%)."
+    },
+    {
+      "id": "csf_states_enrolment_share",
+      "section": "adjustments",
+      "label": "CSF's 11 FLN states' share of India's government primary-school children, per grade",
+      "format": "percent",
+      "formula": "(fln_enrolled / fln_grades_counted) / (india_primary_enrolment * govt_share_primary / primary_grades)",
+      "explainer": "One grade's worth of children in the 11 states over one grade's worth in government primary schools nationally (Grades 1-5, so five grades)."
     },
     {
       "id": "fln_other_partners_inr",
@@ -1158,6 +1263,19 @@
       "unit": "₹"
     },
     {
+      "id": "nipun_utilisation",
+      "section": "adjustments",
+      "label": "Share of the mission's central allocation actually spent",
+      "format": "percent",
+      "value": {
+        "low": 0.55,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The ₹2,500 crore is an allocation. Samagra Shiksha, the scheme that funds the mission, had spent 54.9% of its 2025-26 budget estimate by the committee's report (same article), with the year's last weeks to come; earlier years spent most of it (₹9,903 crore of ₹12,467 crore revised in 2024-25, same article). 80% (55% to 100%)."
+    },
+    {
       "id": "fln_csf_inr",
       "section": "adjustments",
       "label": "CSF's own yearly spending on FLN, with its share of overhead (₹)",
@@ -1171,47 +1289,95 @@
       "section": "adjustments",
       "label": "FLN: CSF's share of the resources behind the missions' gain",
       "format": "percent",
-      "formula": "fln_csf_inr / (fln_csf_inr + nipun_central_inr / central_share_nipun * csf_states_enrolment_share + fln_other_partners_inr)",
-      "explainer": "CSF's FLN spending over everyone's: the mission's central budget grossed up by the states' share and taken for CSF's 11 states, plus other partners'. Teachers' regular pay isn't counted: they were teaching anyway, and the gain is measured against schooling as usual."
+      "formula": "fln_csf_inr / (fln_csf_inr + nipun_central_inr * nipun_utilisation / central_share_nipun * csf_states_enrolment_share + fln_other_partners_inr)",
+      "explainer": "CSF's FLN spending over everyone's: the mission's central budget, as spent, grossed up by the states' share and taken for CSF's 11 states, plus other partners'. Teachers' regular pay isn't counted: they were teaching anyway, and the gain is measured against schooling as usual."
+    },
+    {
+      "id": "ece_state_inr",
+      "section": "adjustments",
+      "label": "States' yearly spending on the new pre-primary classes CSF supports (₹)",
+      "format": "number",
+      "value": {
+        "low": 2000000000,
+        "best": 3000000000,
+        "high": 4000000000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: over 5,000 educators deployed in Uttar Pradesh alone (about ₹60 crore a year at contract pay), materials for 70,000 Balvatikas and 45,000 Sishu Vatikas, educators and helpers in Telangana's 1,362 schools (pp. 35-37). ₹300 crore (₹200 to ₹400 crore).",
+      "unit": "₹"
     },
     {
       "id": "ece_attribution_share",
       "section": "adjustments",
       "label": "Early childhood: CSF's share of the resources behind the new pre-primary classes",
       "format": "percent",
+      "formula": "total_expenses_inr * ece_spend_share / (total_expenses_inr * ece_spend_share + ece_state_inr)",
+      "explainer": "CSF's early-childhood spending, with its share of overhead, over its own and the states'."
+    },
+    {
+      "id": "pal_share_of_edtech",
+      "section": "adjustments",
+      "label": "Share of CSF's EdTech spending on the states' adaptive-learning deployments",
+      "format": "percent",
       "value": {
-        "low": 0.02,
-        "best": 0.04,
-        "high": 0.12
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Our judgment: CSF's early-childhood spending (about ₹10 crore at its share above) against the states' — over 5,000 educators deployed in Uttar Pradesh alone (about ₹60 crore a year at contract pay), materials for 70,000 Balvatikas and 45,000 Sishu Vatikas, educators and helpers in Telangana's 1,362 schools — roughly ₹200-400 crore a year. 4% (2% to 12%)."
+      "explainer": "Our judgment: technical support units in Andhra Pradesh and Himachal Pradesh, against the accelerator, product reviews, AI literacy, the evidence studies and the units in Odisha and Uttar Pradesh (pp. 39-41). 25% (15% to 40%)."
+    },
+    {
+      "id": "pal_state_inr",
+      "section": "adjustments",
+      "label": "States' and researchers' yearly spending behind the adaptive-learning deployments (₹)",
+      "format": "number",
+      "value": {
+        "low": 600000000,
+        "best": 1000000000,
+        "high": 2000000000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: about 4.3 lakh students' software licences, devices and teachers' 80 minutes a week of class time in 1,500-plus schools (Andhra Pradesh is fully state-funded: brochure p. 3), and the University of Chicago team's trial. ₹100 crore (₹60 to ₹200 crore).",
+      "unit": "₹"
+    },
+    {
+      "id": "php_attribution_share",
+      "section": "adjustments",
+      "label": "Adaptive learning in Himachal Pradesh: CSF's share of the resources",
+      "format": "percent",
+      "formula": "pal_attribution_share",
+      "explainer": "The same share as Andhra Pradesh's: the deployments' costs and CSF's support are counted together."
     },
     {
       "id": "pal_attribution_share",
       "section": "adjustments",
       "label": "Adaptive learning: CSF's share of the resources behind the state deployments",
       "format": "percent",
+      "formula": "total_expenses_inr * edtech_spend_share * pal_share_of_edtech / (total_expenses_inr * edtech_spend_share * pal_share_of_edtech + pal_state_inr)",
+      "explainer": "CSF's spending on the deployments, with its share of overhead, over its own and the others'."
+    },
+    {
+      "id": "edo_partners_inr",
+      "section": "adjustments",
+      "label": "Partner organisations' yearly spending on the products the accelerator improves (₹)",
+      "format": "number",
       "value": {
-        "low": 0.04,
-        "best": 0.1,
-        "high": 0.25
+        "low": 150000000,
+        "best": 400000000,
+        "high": 1000000000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the states pay for devices, licences and teachers' time (about 4.3 lakh students), the University of Chicago's team ran the trial; CSF's technical support units in Andhra Pradesh and Himachal Pradesh are a few crore a year. 10% (4% to 25%)."
+      "explainer": "Our judgment: Sesame Workshop India, ThinkZone, Top Parent, Chimple and the accelerator's other partners build and run their products with their own funders' money, several on budgets of a few crore to tens of crore a year. ₹40 crore (₹15 to ₹100 crore).",
+      "unit": "₹"
     },
     {
       "id": "edo_attribution_share",
       "section": "adjustments",
       "label": "Other EdTech: CSF's share of the resources behind the product improvements",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: the accelerator's grants and advice against the partner organisations' own spending on their products (Sesame Workshop India, ThinkZone, Top Parent, Chimple and others) and the states' procurement. 30% (10% to 60%)."
+      "formula": "total_expenses_inr * edtech_spend_share * (1 - pal_share_of_edtech) / (total_expenses_inr * edtech_spend_share * (1 - pal_share_of_edtech) + edo_partners_inr)",
+      "explainer": "CSF's other EdTech spending, with its share of overhead, over its own and the partners'."
     },
     {
       "id": "gov_attribution_share",
@@ -1258,10 +1424,18 @@
     {
       "id": "pal_missing_data_adj",
       "section": "adjustments",
-      "label": "Adaptive learning: counted less where the outcome isn't measured for this charity",
+      "label": "Adaptive learning in Andhra Pradesh: counted less where the outcome isn't measured for this charity",
+      "format": "percent",
+      "formula": "1",
+      "explainer": "Measured: the students are Andhra Pradesh's count and the effect is the randomised trial of the same software in the state's own deployment (pal_gain_sd)."
+    },
+    {
+      "id": "php_missing_data_adj",
+      "section": "adjustments",
+      "label": "Adaptive learning in Himachal Pradesh: counted less where the outcome isn't measured for this charity",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin, though close to measured: the students are the states' counts and a randomised trial of the same software in Andhra Pradesh's government schools exists, but its effect in standard deviations isn't published, so the gain per year is our conversion of its years of learning."
+      "explainer": "Thin: the effect is Andhra Pradesh's trial, taken for another state's deployment."
     },
     {
       "id": "edo_missing_data_adj",
@@ -1304,9 +1478,16 @@
     {
       "id": "pal_total_adj",
       "section": "adjustments",
-      "label": "Adaptive learning: all adjustments combined",
+      "label": "Adaptive learning in Andhra Pradesh: all adjustments combined",
       "format": "multiple",
       "formula": "evidence_adj * counterfactual_adj * pal_attribution_share * pal_missing_data_adj"
+    },
+    {
+      "id": "php_total_adj",
+      "section": "adjustments",
+      "label": "Adaptive learning in Himachal Pradesh: all adjustments combined",
+      "format": "multiple",
+      "formula": "evidence_adj * counterfactual_adj * php_attribution_share * php_missing_data_adj"
     },
     {
       "id": "edo_total_adj",
@@ -1320,21 +1501,21 @@
       "section": "adjustments",
       "label": "School governance: all adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * gov_attribution_share * gov_missing_data_adj"
+      "formula": "evidence_adj * gov_counterfactual_adj * gov_attribution_share * gov_missing_data_adj"
     },
     {
       "id": "hps_total_adj",
       "section": "adjustments",
       "label": "High-potential students: all adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * hps_attribution_share * hps_missing_data_adj"
+      "formula": "evidence_adj * hps_counterfactual_adj * hps_attribution_share * hps_missing_data_adj"
     },
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "CSF's share of the resources, outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(fln_downstream_value * fln_attribution_share + ece_downstream_value * ece_attribution_share + pal_downstream_value * pal_attribution_share + edo_downstream_value * edo_attribution_share + gov_downstream_value * gov_attribution_share + hps_downstream_value * hps_attribution_share) / downstream_value",
+      "formula": "(fln_downstream_value * fln_attribution_share + ece_downstream_value * ece_attribution_share + pal_downstream_value * pal_attribution_share + php_downstream_value * php_attribution_share + edo_downstream_value * edo_attribution_share + gov_downstream_value * gov_attribution_share + hps_downstream_value * hps_attribution_share) / downstream_value",
       "explainer": "Each branch's own share applies in its branch; this average is for reading only."
     },
     {
@@ -1350,15 +1531,15 @@
       "section": "adjustments",
       "label": "Missing-data step, outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(fln_downstream_value * fln_attribution_share * fln_missing_data_adj + ece_downstream_value * ece_attribution_share * ece_missing_data_adj + pal_downstream_value * pal_attribution_share * pal_missing_data_adj + edo_downstream_value * edo_attribution_share * edo_missing_data_adj + gov_downstream_value * gov_attribution_share * gov_missing_data_adj + hps_downstream_value * hps_attribution_share * hps_missing_data_adj) / (fln_downstream_value * fln_attribution_share + ece_downstream_value * ece_attribution_share + pal_downstream_value * pal_attribution_share + edo_downstream_value * edo_attribution_share + gov_downstream_value * gov_attribution_share + hps_downstream_value * hps_attribution_share)",
-      "explainer": "Every branch takes the shared missing-data step; this average is for reading only."
+      "formula": "(fln_downstream_value * fln_attribution_share * fln_missing_data_adj + ece_downstream_value * ece_attribution_share * ece_missing_data_adj + pal_downstream_value * pal_attribution_share * pal_missing_data_adj + php_downstream_value * php_attribution_share * php_missing_data_adj + edo_downstream_value * edo_attribution_share * edo_missing_data_adj + gov_downstream_value * gov_attribution_share * gov_missing_data_adj + hps_downstream_value * hps_attribution_share * hps_missing_data_adj) / (fln_downstream_value * fln_attribution_share + ece_downstream_value * ece_attribution_share + pal_downstream_value * pal_attribution_share + php_downstream_value * php_attribution_share + edo_downstream_value * edo_attribution_share + gov_downstream_value * gov_attribution_share + hps_downstream_value * hps_attribution_share)",
+      "explainer": "Every branch takes the shared missing-data step except Andhra Pradesh's adaptive learning; this average is for reading only."
     },
     {
       "id": "total_adj",
       "section": "adjustments",
       "label": "All adjustments combined, outcome-weighted average of the branches, for reading only",
       "format": "multiple",
-      "formula": "(fln_downstream_value * fln_total_adj + ece_downstream_value * ece_total_adj + pal_downstream_value * pal_total_adj + edo_downstream_value * edo_total_adj + gov_downstream_value * gov_total_adj + hps_downstream_value * hps_total_adj) / downstream_value",
+      "formula": "(fln_downstream_value * fln_total_adj + ece_downstream_value * ece_total_adj + pal_downstream_value * pal_total_adj + php_downstream_value * php_total_adj + edo_downstream_value * edo_total_adj + gov_downstream_value * gov_total_adj + hps_downstream_value * hps_total_adj) / downstream_value",
       "explainer": "For reading only: the outcome below applies each branch's own combined adjustment."
     },
     {
@@ -1380,7 +1561,7 @@
       "section": "outcome",
       "label": "Total value (units of value)",
       "format": "number",
-      "formula": "(fln_downstream_value * fln_total_adj + ece_downstream_value * ece_total_adj + pal_downstream_value * pal_total_adj + edo_downstream_value * edo_total_adj + gov_downstream_value * gov_total_adj + hps_downstream_value * hps_total_adj) * (1 + unmodelled_benefits_adj) + moved_value + careers_value",
+      "formula": "(fln_downstream_value * fln_total_adj + ece_downstream_value * ece_total_adj + pal_downstream_value * pal_total_adj + php_downstream_value * php_total_adj + edo_downstream_value * edo_total_adj + gov_downstream_value * gov_total_adj + hps_downstream_value * hps_total_adj) * (1 + unmodelled_benefits_adj) + moved_value + careers_value",
       "unit": "units of value",
       "explainer": "Each branch's value × its own adjustments, plus the side effects; money moved and career changes are zero."
     },

@@ -1,6 +1,6 @@
 ### Summary
 
-Central Square Foundation (CSF) helps Indian state governments improve what children learn in government schools. Our model counts its spending in the year to March 2026 against a year of the learning gains from the state programmes it supports, credited by CSF's share of everyone's resources behind them, and valued as the children's later earnings. It comes to **<span data-figure="headline" data-model="central-square-foundation-charityevals">0.5</span> years of healthy life per 1,000 dollars**. The figure is very uncertain: nobody has measured how much the state missions themselves raise learning, a test-score gain partly fades before adulthood, and the earnings start a decade or more later, so the discount rate moves the result a lot.
+Central Square Foundation (CSF) helps Indian state governments improve what children learn in government schools. Our model counts its spending in the year to March 2026 against a year of the learning gains from the state programmes it supports, credited by CSF's share of everyone's resources behind them, and valued as the children's later earnings. It comes to **<span data-figure="headline" data-model="central-square-foundation-charityevals">0.9</span> years of healthy life per 1,000 dollars**. The figure is very uncertain: nobody has measured how much the state missions themselves raise learning, a test-score gain partly fades before adulthood, and the earnings start a decade or more later, so the discount rate moves the result a lot.
 
 ### What the charity does
 
@@ -19,30 +19,30 @@ Children who can read and do basic maths by Grade 3 learn more in later grades a
 ### How the model works
 
 - **Cost:** all of CSF's spending in the year to March 2026, at the 2025 exchange rate. The accounts don't split spending by programme, so each area's share is our judgment from the annual report: FLN about 63%, EdTech 17%, early childhood 10%, governance 7%, high-potential students 3%.
-- **Children reached:** for FLN, one grade's worth of children a year in the 11 states (enrolment ÷ about 4 grades). Each year one cohort finishes the foundational grades with the missions' gain. The other branches use the annual report's counts of children reached in the year.
-- **Learning gain:** in standard deviations of test scores, all our judgments with ranges:
-  - the state missions: 0.12 by the end of Grade 3. Between 2022 and 2024, reading in rural government schools rose 7.1 points, against 2.4 in private schools, which the missions don't cover;
-  - a year of pre-primary: 0.15;
-  - a year of adaptive learning: 0.2, from Andhra Pradesh's randomised trial, where students gained 2.35 times as much as controls over 17 months;
-  - better EdTech products: 0.01;
-  - report cards for parents: 0.04;
-  - the STEM pilot: 0.1.
-- **From learning to earnings:** 40% of a gain lasts into adulthood, and each lasting standard deviation raises earnings 15%. The gain is shared in the household and lasts a 40-year working life, which starts at about 20 and is discounted. These two figures are placeholders until the site's shared figures for education in low- and middle-income countries are added.
-- **CSF's credit:** its share of all resources behind each outcome. For FLN that is about 3%: CSF's FLN spending against the mission's ₹2,500 crore central budget grossed up by the states' share and taken for CSF's states, plus other partners' spending. Early childhood 4%, adaptive learning 10%, other EdTech 30%, governance 50%, the STEM pilot 50%.
-- **Adjustments:** trust in the learning-to-earnings chain is 60%. 85% of the credit is CSF's own rather than what another technical partner would have done in its place. The report cards count as won reforms, for the years a won reform counts on the site, with a 50% chance that they become lasting practice.
+- **Children reached:** for FLN, one grade's worth of children a year in the 11 states (enrolment ÷ about 4 grades). Each year one cohort finishes the foundational grades with the missions' gain. The other branches use the annual report's counts of children reached in the year; the EdTech accelerator's 30 lakh learners over 2023-2025 count as 10 lakh a year.
+- **Learning gain:** in standard deviations of test scores:
+  - the state missions: 0.12 by the end of Grade 3, our judgment. Between 2022 and 2024, reading in rural government schools rose 7.1 points, against 2.4 in private schools, which the missions don't cover;
+  - a year of adaptive learning: 0.3, from Andhra Pradesh's randomised trial of the same software in the state's schools (0.43 more over 17 months, in maths);
+  - a year of pre-primary: 0.15, our judgment;
+  - better EdTech products: 0.01, our judgment;
+  - report cards for parents: 0.04, our judgment;
+  - the STEM pilot: 0.1, our judgment.
+- **From learning to earnings:** the site's shared figures for low- and middle-income countries. 40% of a gain lasts into adulthood, and each lasting standard deviation raises earnings 20%. The gain is shared in the household and lasts a 40-year working life, which starts at about 20 and is discounted.
+- **CSF's credit:** its share of all resources behind each outcome. For FLN that is about 3%: CSF's FLN spending against the mission's ₹2,500 crore central allocation (80% of it spent), grossed up by the states' share and taken for CSF's states, plus other partners' spending. Early childhood about 3%, adaptive learning about 4%, other EdTech about 25% (each CSF's spending against the states' or the partners'), governance and the STEM pilot 50%.
+- **Adjustments:** 85% for publication bias in the trials behind the judged gains and the conversion of ASER's shares to standard deviations. 85% of the credit is CSF's own rather than what another technical partner would have done in its place (95% for the report cards and the STEM pilot, which CSF ran itself). The report cards count as won reforms, for the years a won reform counts on the site, with a 50% chance that each becomes lasting practice.
 - **Side effects:** a net +5%. Longer schooling, later marriage and better health for the children's own children count for, teachers' time taken by data entry and reporting against.
-- **The missing-data discount** applies to every branch. Adaptive learning has a trial of the same software in the same schools, but its effect in standard deviations isn't published.
-- **The next dollar** is valued at 42% of the average. CSF holds about 15 months of spending in cash and deposits, and its next programmes go to new districts, grades and workstreams.
+- **The missing-data discount** applies to every branch except adaptive learning in Andhra Pradesh, where the state counts the students and a trial measured the same software in the same schools.
+- **The next dollar** is valued at 42% of the average. CSF holds about 15 months of spending in cash and deposits, its next programmes go to new districts, grades and workstreams, and the national mission was due to end in 2026-27 unless extended.
 
 ### What drives the result
 
-The discount rate, the value of a healthy year in units of value, the next dollar's value, the missing-data slider, how much of a learning gain lasts, and earnings per standard deviation move the result most. Next come household sharing of earnings, trust in the chain and the missions' learning gain. About half the result is FLN, a fifth adaptive learning, a sixth the other EdTech work, a tenth the report cards and a twentieth early childhood.
+The discount rate, the missing-data slider, the value of a healthy year in units of value, the next dollar's value, how much of a learning gain lasts, household sharing and earnings per standard deviation move the result most. Next come the missions' learning gain, the counterfactual and the evidence adjustment. About half the result is FLN, a quarter adaptive learning, an eighth the report cards, and a twentieth each other EdTech and early childhood.
 
 ### Biggest uncertainties
 
 - **The missions' gain:** learning rose in government schools after 2022, but how much of that is the missions, and how much is recovery from the pandemic and other changes, is our judgment. States' own assessments are not independent.
 - **Fade-out:** test-score gains from school programmes shrink over the following years. How much reaches adult earnings in India is not measured.
-- **CSF's share:** the state budgets behind the missions are only roughly known. CSF's share could be half or twice ours.
+- **CSF's share:** the state budgets behind the missions are only roughly known, and the national mission's future after 2026-27 is open. CSF's share could be half or twice ours.
 
 ### What isn't modelled
 
