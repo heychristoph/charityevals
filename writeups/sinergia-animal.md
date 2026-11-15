@@ -34,8 +34,6 @@ Comparing animals with people is where the uncertainty lives. The three biggest 
 - **Years a won reform counts before it would have come anyway** (your value judgment, 1 to 20 years): 82 to 1,160. Evaluators answer this one question anywhere from half a year to 35 years.
 - **Healthy hours lost per day of disabling pain:** 93 to 930. AIM publishes no official rate, so this is our least grounded number.
 
-At the low end of the chicken slider alone, Sinergia falls to about GiveDirectly's level; at the low end of either of the others it stays far above. All of them at once push it well below.
-
 ### Where we differ from ACE
 
 - **Species weights.** ACE's figures weigh each species by Ambitious Impact's weights; we use Rethink Priorities' estimates relative to a chicken, and the chicken slider for chickens against people, the same for every animal model. ACE's own figure, 910 years of healthy life per $1,000, still reproduces in its own view.

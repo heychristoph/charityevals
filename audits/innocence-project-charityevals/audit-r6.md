@@ -14,4 +14,6 @@ Mechanical pass as a ranked charity model: `audit-model.ts` shows two standing L
 Previous round: both lows resolved.
 
 Verdict: pass (no high, no medium; the two standing low notes only)
-Model-sha: b786591a80a0c5f5637e00ca7c88622815755e06f6ca34b9411a19b1a138a3df
+Model-sha: 10c75521b66d1e7792a9f7fa8c7b7fa28b825d1a97e361185f4d8e09ffe72485
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

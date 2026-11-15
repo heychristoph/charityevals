@@ -42,9 +42,9 @@ UCS's net assets were about 17 months of spending in September 2025, and its don
 
 ### What drives the result
 
-The nuclear work is about half the first model's cost and almost all its value. The result is below the Arms Control Association's 41, because only half this spending is on nuclear risk and the next dollar counts for less. It is above the Federation of American Scientists' 1.4, which spends only about 3% on nuclear work.
+The nuclear work is about half the first model's cost and almost all its value. Only half this spending is on nuclear risk, and the next dollar counts for less.
 
-The climate result is near our other climate advocacy models: the Environmental Defense Fund 0.0021 and Clean Air Task Force 0.0067. About three-fifths of it comes from the Inflation Reduction Act, a fifth of it from the public money the act won for households. The food result is far below our other environmental models because the lawsuit was unlikely to win, the government and four other groups fought it, only farmed wetlands were at stake and they drain slowly, and the flood damage averted is money for US households.
+About three-fifths of it comes from the Inflation Reduction Act, a fifth of it from the public money the act won for households. The food result is low because the lawsuit was unlikely to win, the government and four other groups fought it, only farmed wetlands were at stake and they drain slowly, and the flood damage averted is money for US households.
 
 ### Biggest uncertainties
 

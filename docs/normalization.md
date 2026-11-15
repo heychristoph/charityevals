@@ -307,14 +307,8 @@ Since late October 2026 the same factor applies in every cause (2.9, "Past avera
 Evaluators' subjective best guesses are filed as `judgment`. Won policies count `$win_years_counted` years,
 discounted (2.9).
 
-**Terrapraxis is more than ten times its peers** because it values a single event (an implied $81,000 grant), not
-lower. Best guess kept, the reason stated on the model and write-up.
-
-Before → after (healthy years per $1,000, our view at the defaults): Clean Air Task Force 0.12 → 4.2 (its US deaths
-counted, 1.3; then 5 years per won rule); Coalition for Rainforest Nations 0.55 → 0.34; Carbon180 0.19 → 0.076;
-Evergreen 2021 0.32 → 0.12, 2023 0.039 → 0.030; Future Cleantech Architects 2.2 → 0.78; Good Food Institute 0.019
-→ 0.0077; Industrious Labs 0.86 → 0.30; Opportunity Green 3.0 → 0.99; Terrapraxis 77.6 → 25.7; Woodland Trust
-0.0029 → 0.0024. Neev 2.0 → 1.9, Concentric Policies 17.4 → 14.7, ARMoR 9.1 → 8.1 (evaluator views unchanged).
+Before → after (healthy years per $1,000, our view at the defaults): Woodland Trust 0.0029 → 0.0024. Neev 2.0 → 1.9,
+Concentric Policies 17.4 → 14.7, ARMoR 9.1 → 8.1 (evaluator views unchanged).
 
 - `air_pollution_weight` (a row of the model, fixed id): the air-pollution deaths each of the model's
   tonnes avoids, as a multiple of the fossil-fuel average behind Rethink's rate (1.46 per 10,000
@@ -1409,7 +1403,6 @@ shrinks).
 | INV-2d | No literal times a lever. | Every formula row on the path is split into its product and quotient chains and its function calls' argument lists; a chain holding both a non-toggle shared assumption and a constant outside lint's allowed literals (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`, `pv_annuity_due(1, $discount_rate, 5)`) is flagged: the constant reads the shared fact (evaluator's figure in `published`) or becomes its own labelled input row, where INV-2c, INV-4 and INV-13 see it. Late October 2026: 437 rows in 100 models, GiveWell's moral weights typed beside the lever (now `@moral_weights` bands and GiveWell's curve by age, the sheet's figure in `published`), old per-staff columns and 2018/2019 units, `ln(2)` written as a number. |
 | INV-13 | Same concept, same value across models. | Rows on the path (not variants) whose label names one of a curated list of concepts several evaluators state (resource sharing, treatment costs averted, investment of income gains, years long-term gains last, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception, of a stillbirth, indirect deaths per diarrhoea death, household spillover of therapy, pledges kept, depression per PHQ-9 point) read the concept's shared fact, the evaluator's figure in `published`. A place or year the facts don't cover is the only reason to differ, recorded as a waiver with the reason. Late October 2026: 81 rows; deworming's 10% investment share became a fact, the true copies in SoGive's and Ambitious Impact's models read `@givewell_shared` (the 18 INV-4 waivers for them are gone), GiveWell's 2022 water sheets take the current 20% treatment costs averted. |
 | INV-14 | No house constant without a shared fact. | Input rows on the path (not variants), grouped by whose figure it is (SoGive's copies of GiveWell's sheets count as GiveWell's), label (places and "overall" dropped) and value: a group in five or more models is a constant copied by hand and becomes a shared fact every copy reads. Round structural numbers (lint's allowed literals) and numbers that define their row (an arbitrary donation's size, a "10x bar" of 10) are exempt. Late October 2026: facts/givewell_common.json (298 figures, read by 2,275 rows in 118 models) and facts/staff_pay.json (our staff-pay defaults by kind of work and two charities' own shares, read by 487 rows); no value changed. |
-| INV-15 | A ranked model far above its peers says why. | Every model the rankings use whose headline is more than 10× the median of the other ranked models of its cause (at least three) states the reason in its summary, "more than ten times its peers because …". Late October 2026: |
 | INV-16 | Side sheets never rank; the ranked column is the grant's. | Every model the rankings use has at most one row on its path that reads like a value-of-information or decision sheet (future funding bar, CE of reallocated funding, value of information, probability the decision changes, P(… x cash)); and where its native row's label names a place in parentheses, the model's name, id or title names that place too when it names any. Complements `isSideSheet` (title and template) in src/engine/ranking.ts. |
 | INV-17 | Deaths in WELLBY models don't move with the WELLBY rate. | A WELLBY model that values a death (a row on the path reads `@moral_weights.*` or `$life_value_multiplier`) values it in units of value in `uov_valued_outside_wellbys` and converts it only in `wellbys_from_uov`; by computation, the deaths' part of the headline doesn't move when `$daly_per_wellby` moves, and the rest (every bridge's input at 0) doesn't move with `$life_value_multiplier`. Any other model with a bridge from uov values its deaths only upstream of that bridge. |
 | INV-18 | Past averages, and only past averages, read the next-dollar slider (2.10). | Every model with an output has `estimate_basis` (variants inherit it). `past_average`: a row on the path to the output reads `$marginal_vs_past_average`, halving it lowers our headline, and every row reading it has `published` (or the evaluator pins it). `marginal` and `unit_cost`: no row reads it, and the headline doesn't move with it except through a model read live (`#id`). |
@@ -1562,7 +1555,7 @@ evaluator view still reproduces every `expected`. Every slider moves every model
 
 The owner's rule ("one consistent way") is now checked where the earlier invariants couldn't see: a constant
 beside a lever inside a formula (INV-2d), one concept answered two ways (INV-13), a constant copied by hand
-into five or more models (INV-14), an outlier with no stated reason (INV-15), a side sheet or another
+into five or more models (INV-14), an outlier with no stated reason (INV-15, retired on 15 November 2026: site text never compares), a side sheet or another
 location's column in the ranking (INV-16), deaths in WELLBY models moving with the WELLBY rate (INV-17). The
 allowlist stays empty; waivers are only checked false positives, each with its reason.
 

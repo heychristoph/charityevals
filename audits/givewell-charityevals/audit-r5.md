@@ -1,6 +1,6 @@
 # Audit: givewell-charityevals, round 5 (scoped verification)
 Result: 0.07209 uov/$ = 36.04 years of healthy life per 1,000 dollars (combined range 14.27–91.05); cause median 0.06312 (×571). Verdict: **pass**.
-Model-sha: 29b54bdaf716217fa4929e67937cc954e97c20ffce42638f3ff27e77afb479a3
+Model-sha: fd7f9989a81988c0ae9f1fb4d3e5917f159ee361bc900c7c8b498a0a95ca29ef
 Scope: only the new row `shifted_dollar_value` and `moved_value` reading it (docs/normalization.md 2.8, src/engine/moved-money.ts, INV-12). Sources unchanged, not re-fetched.
 Mechanical: audit-model "Findings (0)"; normalization-audit 0 violations (orchestrator ran it; not rerun).
 Previous round: r4 passed; nothing open.
@@ -17,3 +17,5 @@ Previous round: r4 passed; nothing open.
 
 ## Sources checked
 Unchanged; none re-fetched by instruction.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

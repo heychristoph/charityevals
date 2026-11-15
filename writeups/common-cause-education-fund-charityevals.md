@@ -1,6 +1,6 @@
 ### Summary
 
-The Common Cause Education Fund runs Election Protection and campaigns for fairer US elections: commission-drawn maps, easier voting, limits on big money and ethics rules. Our model of its year to June 2025 comes to **<span data-figure="headline" data-model="common-cause-education-fund-charityevals">0.02</span> years of healthy life per 1,000 dollars**. That is about a third of the site's global-health median, close to our models of FairVote and Protect Democracy. It is a very uncertain figure, built mostly on judgment: how much the whole field's work lowers the chance of a democratic slide, and how much a reform within a democracy changes how well people are governed.
+The Common Cause Education Fund runs Election Protection and campaigns for fairer US elections: commission-drawn maps, easier voting, limits on big money and ethics rules. Our model of its year to June 2025 comes to **<span data-figure="headline" data-model="common-cause-education-fund-charityevals">0.02</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure, built mostly on judgment: how much the whole field's work lowers the chance of a democratic slide, and how much a reform within a democracy changes how well people are governed.
 
 ### What the charity does
 

@@ -42,7 +42,7 @@ MATS ended 2024 with about a year of spending in reserve, and its main funder pa
 
 ### What drives the result
 
-The result is about two thirds of the Institute for AI Policy and Strategy's and half of GovAI's, the closest peers with fellowships. Less of MATS's work is aimed at misuse, and stipends paid by AI Safety Support and mentors' time lower its share of the credit.
+Less of MATS's work is aimed at misuse, and stipends paid by AI Safety Support and mentors' time lower its share of the credit.
 
 ### Biggest uncertainties
 
@@ -59,7 +59,7 @@ The result is about two thirds of the Institute for AI Policy and Strategy's and
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the models of the Institute for AI Policy and Strategy and GovAI as the closest peers. No audit round found a high-severity problem. The first showed that the scholars' own research during the ten weeks was undervalued by the model's own arithmetic, and corrected several sources: the stipends, the research tracks and the next-dollar quote. The second moved that research out of other benefits into the training branch, where the branch's own adjustments apply. A later round checked the changes. The audit rounds are in audits/mats-charityevals/.
+The model was built from the catastrophic-risk template. No audit round found a high-severity problem. The first showed that the scholars' own research during the ten weeks was undervalued by the model's own arithmetic, and corrected several sources: the stipends, the research tracks and the next-dollar quote. The second moved that research out of other benefits into the training branch, where the branch's own adjustments apply. A later round checked the changes. The audit rounds are in audits/mats-charityevals/.
 
 ### Sources
 

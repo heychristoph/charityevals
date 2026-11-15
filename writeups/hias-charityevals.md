@@ -2,8 +2,8 @@
 
 HIAS is a Jewish humanitarian organisation, founded in 1881, that serves refugees and asylum seekers. In the US it resettles refugees with about 30 local partner agencies, runs immigration legal services with pro bono lawyers, and campaigns and litigates for refugee admissions. Abroad it runs legal protection, mental-health support, violence prevention, cash assistance and economic inclusion in about 15 countries. We model each of its three lines on its own.
 
-- **US resettlement and legal services**: about **<span data-figure="headline" data-model="hias-charityevals">0.003</span> years of healthy life per 1,000 dollars**, far below the site's global-health charities. The help goes to people in the US, where a dollar is a small gain on the log-income scale. And another resettlement agency would have taken most of the same refugees with the same federal money.
-- **Programmes abroad**: about **<span data-figure="headline" data-model="hias-charityevals-international">0.05</span>**, below the middle of the site's humanitarian charities.
+- **US resettlement and legal services**: about **<span data-figure="headline" data-model="hias-charityevals">0.003</span> years of healthy life per 1,000 dollars**. The help goes to people in the US, where a dollar is a small gain on the log-income scale. And another resettlement agency would have taken most of the same refugees with the same federal money.
+- **Programmes abroad**: about **<span data-figure="headline" data-model="hias-charityevals-international">0.05</span>**.
 - **US advocacy and litigation**: about **<span data-figure="headline" data-model="hias-charityevals-advocacy">0.3</span>**, mostly uncertainty. Even a small chance of restoring refugee admissions is worth a lot, because each refugee resettled gains decades at US consumption.
 
 HIAS counts the people it serves but publishes no controlled measure of its results. So every part is built from its spending, its counts and the research on that kind of work, and every part is discounted for missing data.

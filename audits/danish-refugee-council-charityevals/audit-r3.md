@@ -17,4 +17,6 @@ Other changes checked:
 (none)
 
 Verdict: pass (0 high, 0 medium, 0 low)
-Model-sha: 2ba01b4db6decd193d5813a347226db10e011e4f5155b6264ca06a9f2b916f56
+Model-sha: 123c09ecc93c4262d0f7bec27fa131e40dd97aa4eb41d4b63f1f4c2724984f2d
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

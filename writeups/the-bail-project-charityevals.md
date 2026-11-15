@@ -1,6 +1,6 @@
 ### Summary
 
-The Bail Project pays bail for people held in US jails because they can't afford it, and helps them get to court until their cases close. Its bail work comes to about **<span data-figure="headline" data-model="the-bail-project-charityevals">0.013</span> years of healthy life per 1,000 dollars**, and its policy, public-education and research work, modelled separately, to about **<span data-figure="headline" data-model="the-bail-project-charityevals-advocacy">0.003</span>**. Both are well below the median of the site's global-health models: a few weeks out of jail for a poor American is worth a lot to them, but costs about $2,900 a bailout, on a scale where the same money goes much further for the world's poorest.
+The Bail Project pays bail for people held in US jails because they can't afford it, and helps them get to court until their cases close. Its bail work comes to about **<span data-figure="headline" data-model="the-bail-project-charityevals">0.013</span> years of healthy life per 1,000 dollars**, and its policy, public-education and research work, modelled separately, to about **<span data-figure="headline" data-model="the-bail-project-charityevals-advocacy">0.003</span>**. Both are low: a few weeks out of jail for a poor American is worth a lot to them, but costs about $2,900 a bailout, on a scale where the same money goes much further for the world's poorest.
 
 ### What the charity does
 

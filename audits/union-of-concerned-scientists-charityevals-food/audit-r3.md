@@ -20,4 +20,6 @@ None open. The audit-model outlier (medium) and spread (low) lines remain by des
 
 **Verdict: PASS. The round-2 fixes settle all seven findings; no new issues.**
 
-Model-sha: 47e7216f4347e25cfaa1e17df53d9b5e1a045c6415689765cb395d59b9b01ced
+Model-sha: f29310ce7b91652f8cc1357bd711dfe2fbfaa2a5bf1822ad6047e0e20962f96f
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

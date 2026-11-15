@@ -46,7 +46,7 @@ CEPI is asking for $2.5 billion more for its 2027–2031 strategy, and aid budge
 
 ### What drives the result
 
-The result is about a third of the median for this cause, well below SecureBio's (6.1), Blueprint Biosecurity's (5.9) and the Johns Hopkins Center for Health Security's (7.5). Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 7.5. Deaths of people alive now are about 90% of the value and the future lost about 10%. The outbreak vaccines add under 1%.
+Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 7.5. Deaths of people alive now are about 90% of the value and the future lost about 10%. The outbreak vaccines add under 1%.
 
 ### Biggest uncertainties
 

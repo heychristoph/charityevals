@@ -132,8 +132,9 @@ Copy `templates/<family>.json` to the output path and fill it in.
 - **Adjustments**: Convention 5 (one question each, signs); an RCT's effect is already net of its
   control group; say what isn't adjusted for. **Animals**: Convention 3 (reach is every animal under
   the commitments won or pressed, delivery only in the shared fulfilment rate, stocks as yearly flows).
-- **Summary**: say why when the result is over ten times its cause's median (INV-15). Far below: check
-  scope, reach and persistence first.
+- **Summary** and write-up: the model's own reasons, never a comparison with other charities, a median,
+  an average or peers (they move whenever models land; linking them is fine). Far from the cause's
+  median: check scope, reach and persistence first.
 - **Write-up** `writeups/<id>.md` for the charity's main model, following import-cea section 7, plus
   "How this model was checked" (audit rounds and what changed).
 - **Charity record** `charities/<id>.json` if missing, with `spending` and `lines`.

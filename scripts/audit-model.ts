@@ -5,8 +5,7 @@
 //   2. the bottom line, joint low/high and the tornado (which inputs drive the result)
 //   3. the reference class: other hand-built models in the same unit, and other charityevals models
 //      of the same template family row by row, so implausible values stand out; the model against its
-//      cause's median (more than 10× above without a stated reason: high, INV-15; under a tenth: medium,
-//      low when the summary says why)
+//      cause's median (more than 10× above or under a tenth: medium, a pointer to a wrong row for the audit)
 //   4. every normalization invariant (src/engine/invariants.ts) on the model, in a library of it and the
 //      models it reads live, waivers applied: any violation is a high finding (drafts outside models/ too)
 // --exclude drops models from the library (for blind tests: the auditor mustn't see the answer).
@@ -20,7 +19,7 @@ import { sensitivity } from "../src/engine/sensitivity";
 import { uncertainty } from "../src/engine/uncertainty";
 import { lintModel, SEVERITY_ORDER, type Finding } from "../src/engine/lint";
 import { TEMPLATES, type Family } from "../src/engine/templates";
-import { OUTLIER_REASON, applyWaivers, checkAll, type Waivers } from "../src/engine/invariants";
+import { applyWaivers, checkAll, type Waivers } from "../src/engine/invariants";
 
 const root = join(import.meta.dirname, "..");
 const args = process.argv.slice(2);
@@ -107,30 +106,26 @@ const peers = [...lib.models.values()]
 if (peers.length >= 3 && Number.isFinite(line.native)) {
   const lo = peers[0].native, hi = peers[peers.length - 1].native;
   if (line.native > 10 * hi || line.native < lo / 10)
-    findings.push({ severity: "medium", code: "outlier", message: `bottom line ${line.native.toPrecision(3)} ${m.output!.unit}/$ is more than 10× outside the range of ${peers.length} peer models (${lo.toPrecision(3)}–${hi.toPrecision(3)})`, fix: "Find the row that makes the difference (compare intermediates with the closest peer) and either correct it or argue for it in the explainer and write-up." });
+    findings.push({ severity: "medium", code: "outlier", message: `bottom line ${line.native.toPrecision(3)} ${m.output!.unit}/$ is more than 10× outside the range of ${peers.length} peer models (${lo.toPrecision(3)}–${hi.toPrecision(3)})`, fix: "Find the row that makes the difference (compare intermediates with the closest peer) and either correct it or argue for it in the row's explainer." });
 }
-// Against its cause on the site (INV-15): the median of the other hand-built charity models of the cause,
-// in years of healthy life per $1,000. Far above needs a stated reason; far below usually means another
-// scope (a side programme, a case study, another year) or reach and persistence counted short, and is
-// low once the summary says why (it names the gap, "far below" or "under a tenth of" the median or its peers).
-const FAR_BELOW_REASON = /\b(far below|(?:under|less than) (?:a|one) (?:tenth|hundredth|thousandth) of)\b[^.]*\b(median|peers)\b/i;
+// Against its cause on the site: the median of the other hand-built charity models of the cause, in years of
+// healthy life per $1,000. Far off either way is a pointer to a wrong row (far below usually means another
+// scope, or reach and persistence counted short), checked in the audit. A comparison never goes into the
+// summary or write-up: the median moves whenever models land.
 const causePeers = [...lib.models.values()]
   .filter((x) => x.id !== m.id && x.kind === "charity" && x.output && !x.bulk && x.cause === m.cause)
   .map((x) => headline(lib, x, av)).filter((x) => Number.isFinite(x) && x > 0).sort((a, b) => a - b);
 const causeMedian = causePeers.length >= 3 ? (causePeers.length % 2 ? causePeers[causePeers.length >> 1] : (causePeers[causePeers.length / 2 - 1] + causePeers[causePeers.length / 2]) / 2) : NaN;
 if (Number.isFinite(causeMedian) && Number.isFinite(years)) {
-  if (years > 10 * causeMedian && !OUTLIER_REASON.test(m.summary ?? ""))
-    findings.push({ severity: "high", code: "INV-15", message: `${years.toPrecision(3)} years of healthy life per $1,000 is ${(years / causeMedian).toPrecision(3)}× the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)}) and the summary doesn't say why`, fix: 'Find the row that makes the difference; correct it, or state the reason in the summary ("more than ten times its peers because …").' });
-  // Said in the summary already ("far below the median because …"): low, a reminder to keep the sentence.
-  if (years < causeMedian / 10) {
-    const said = FAR_BELOW_REASON.test(m.summary ?? "");
-    findings.push({ severity: said ? "low" : "medium", code: "far-below", message: `${years.toPrecision(3)} years of healthy life per $1,000 is under a tenth of the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)})${said ? "; the summary says why" : ""}`, fix: said ? "Keep the summary's reason; check it still matches the rows that make the gap." : "Check scope first (the charity's main programme by spending, all programmes by funding weight, the latest year), then reach and persistence (every animal under the commitments won, the shared years and fulfilment rate), and the shared per-change figures; fix what is wrong, or say in the summary why it is low (\"far below the median because …\")." });
-  }
+  const where = `${years.toPrecision(3)} years of healthy life per $1,000 is ${(years / causeMedian).toPrecision(3)}× the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)})`;
+  if (years > 10 * causeMedian)
+    findings.push({ severity: "medium", code: "far-above", message: where, fix: "Find the row that makes the difference (compare intermediates with the closest model of the cause); correct it if it is wrong. If it is right, say why in the audit, not in the summary or write-up." });
+  if (years < causeMedian / 10)
+    findings.push({ severity: "medium", code: "far-below", message: where, fix: "Check scope first (the charity's main programme by spending, all programmes by funding weight, the latest year), then reach and persistence (every animal under the commitments won, the shared years and fulfilment rate), and the shared per-change figures; fix what is wrong. If it is right, say why in the audit, not in the summary or write-up." });
 }
 
 // The normalization invariants (docs/normalization.md section 3) on this model, in a library of it and the
-// models it reads live: what scripts/normalization-audit.ts checks, also for drafts outside models/. INV-15
-// needs the full rankings and is checked above against the cause's median instead.
+// models it reads live: what scripts/normalization-audit.ts checks, also for drafts outside models/.
 const liveIds = (x: Record<string, unknown>): string[] => {
   const text = ((x.rows ?? []) as { formula?: string }[]).map((r) => r.formula ?? "").join(" ");
   // `#cause:x`: every model of the charities in cause or area x; `#owner:charity`: that evaluator's models of it.
@@ -147,7 +142,7 @@ visit(raw);
 visit({ rows: [{ formula: `#${read(join(root, "assumptions/default.json")).common.benchmark}` }] });
 const invLib = buildLibrary([...closure.values(), raw], read(join(root, "assumptions/default.json")), facts, charities, read(join(root, "owners.json")));
 const waivers: Waivers = read(join(root, "src/engine/normalization-waivers.json"));
-for (const r of applyWaivers(checkAll(invLib).filter((x) => x.id !== "INV-15"), waivers).reports)
+for (const r of applyWaivers(checkAll(invLib), waivers).reports)
   for (const v of r.violations.filter((v) => v.model === raw.id))
     findings.push({ severity: "high", code: v.inv, row: v.where, message: v.detail, fix: "Fix the model so the invariant holds (docs/normalization.md section 3); a waiver only for a checked false positive, with its reason." });
 findings.sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);

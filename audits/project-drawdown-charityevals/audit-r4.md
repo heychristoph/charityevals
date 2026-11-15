@@ -14,5 +14,7 @@ None.
 ## Notes (low, no model change needed)
 - `informed_money` label reads "Philanthropy: giving that follows its guidance (money moved, all shifted, gross)". Since `money_moved` now means money moved gross, "money moved ... gross" in this label echoes the old name. Optional wording: "Philanthropy: giving that follows its guidance (spending changed, all shifted)".
 
-Model-sha: b2840ae74710cf86126ebc71eeda8f3eccce8d7f5cf708df5852ae83031881b6
+Model-sha: 5a2bd0ed735378382fcebe3b4f3f866bc54c25bd6e744e0d4a8e3e215f0e59e5
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

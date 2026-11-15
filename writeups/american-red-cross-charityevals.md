@@ -4,7 +4,7 @@ The American Red Cross helps people after home fires and large disasters across 
 
 The blood service and the CPR and first-aid courses are paid for by hospitals and course fees, which bring in more than they cost. So a donation funds none of that work. We model them too, at <span data-figure="headline" data-model="american-red-cross-charityevals-biomedical">0.008</span> per $1,000 spent on them, but they get no weight in what a gift does.
 
-The result is far below the site's global-health charities. Most of the value is money, goods, meals and shelter for American households. The site's one income scale values that at a small fraction of what the same dollar does for a family living on a few dollars a day.
+Most of the value is money, goods, meals and shelter for American households. The site's one income scale values that at a small fraction of what the same dollar does for a family living on a few dollars a day.
 
 ### What the charity does
 

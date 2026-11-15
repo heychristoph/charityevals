@@ -218,7 +218,7 @@ def model(family, name, unit, prefix, unit_label, cause, rows, summary, basis, s
         "output": out,
     }
 
-BOTTOM = "the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty. If the result is more than ten times its cause's median on the site, say why (\"more than ten times its peers because …\")."
+BOTTOM = "the year modelled, the bottom line in years of healthy life per $1,000 (quote it live in the write-up), and the biggest uncertainty."
 
 T = {}
 

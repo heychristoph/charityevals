@@ -42,7 +42,7 @@ CAIS holds about a year and a half of spending in reserve after two years of sur
 
 ### What drives the result
 
-The result is far below the Nuclear Threat Initiative's 23. That is because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects; nothing particular to CAIS causes it. Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 3.3. The course adds under a tenth.
+That is because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects; nothing particular to CAIS causes it. Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 3.3. The course adds under a tenth.
 
 ### Biggest uncertainties
 

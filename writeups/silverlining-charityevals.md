@@ -30,7 +30,7 @@ SilverLining's dollars enter at that value. Each branch takes the share that wou
 
 ### What drives the result
 
-The result is far above the climate median, more than ten times its peers. Cooling would offset the warming of hundreds of billions of tonnes at once, and the field whose work shapes that use is small. Its peers' tonnes are each one policy's emissions cut. After all its steps the model comes to about $1 a tonne, near the climate funds' best picks ($0.50-3.50 a tonne). The biggest swings are the share of the benefit the field's work adds, the shared discount rate, the chance cooling is used, and its size and length.
+Cooling would offset the warming of hundreds of billions of tonnes at once, and the field whose work shapes that use is small. After all its steps the model comes to about $1 a tonne. The biggest swings are the share of the benefit the field's work adds, the shared discount rate, the chance cooling is used, and its size and length.
 
 ### Biggest uncertainties
 

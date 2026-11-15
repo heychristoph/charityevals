@@ -1,6 +1,6 @@
 # Audit: federation-of-american-scientists-charityevals, round 3 (verification round)
 Result: 0.001425 daly/$ = 1.425 years of healthy life per 1,000 dollars (combined range 0.069–29.3; model's own ranges 0.12–7.66); cause median 1.58 (×0.90). Verdict: pass.
-Model-sha: 68a033e4c77a08ee184c5ceac830a4efb892f969ff385d664bf9eab7c60afe82
+Model-sha: 7916f0a5a8c519575e1094b83d2fcd599cca3cb538d70924915b5f8e63d69021
 Scope: unchanged from round 2 (every programme, year to 30 June 2025, $32,215,480 of programme spending). Only the round-2 fixes were checked.
 Mechanical: audit-model lint 0 findings, invariants none (run on the current model); normalization-audit, check.ts and simulation-check not re-run: the fixes changed two estimate values, text, and the charity record's wording, no structure.
 Previous round: finding 1 (global_risk_share timing): resolved, rebuilt from the dated grant and the 990 pay. Finding 2 (ai_staff_share): resolved, 0.02 (0.005–0.06), explainer now says today's staff joined after the year and matches the range. Finding 3 (branch shares): resolved, see below. Finding 4 (charity record): resolved, summary and line label name the Global Risk Program.
@@ -31,3 +31,5 @@ Nuclear cut per million (estimate; Rethink placeholders), win_years_counted (jud
 Verdict: pass
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

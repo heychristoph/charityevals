@@ -1,6 +1,6 @@
 ### Summary
 
-FairVote researches and campaigns for new ways of electing American governments: ranked-choice voting and proportional representation. Our model of its 2024 work comes to **<span data-figure="headline" data-model="fairvote-charityevals">0.02</span> years of healthy life per 1,000 dollars**, about a third of the site's global-health median. It is a very uncertain figure: whether a new voting method changes how well people are governed, and by how much, is our judgment.
+FairVote researches and campaigns for new ways of electing American governments: ranked-choice voting and proportional representation. Our model of its 2024 work comes to **<span data-figure="headline" data-model="fairvote-charityevals">0.02</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure: whether a new voting method changes how well people are governed, and by how much, is our judgment.
 
 ### What the charity does
 

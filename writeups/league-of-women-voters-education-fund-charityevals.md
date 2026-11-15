@@ -1,6 +1,6 @@
 ### Summary
 
-The League of Women Voters Education Fund runs VOTE411.org, registers voters, brings voting-rights lawsuits and campaigns for fairer US elections. Our model of its year to June 2025 comes to **<span data-figure="headline" data-model="league-of-women-voters-education-fund-charityevals">0.012</span> years of healthy life per 1,000 dollars**. That is about a fifth of the site's global-health median and about half our figure for the Common Cause Education Fund, because most of the League's money goes to voter information, which we count as acting on democracy less directly than litigation. It is a very uncertain figure, built mostly on judgment.
+The League of Women Voters Education Fund runs VOTE411.org, registers voters, brings voting-rights lawsuits and campaigns for fairer US elections. Our model of its year to June 2025 comes to **<span data-figure="headline" data-model="league-of-women-voters-education-fund-charityevals">0.012</span> years of healthy life per 1,000 dollars**. Most of the League's money goes to voter information, which we count as acting on democracy less directly than litigation. It is a very uncertain figure, built mostly on judgment.
 
 ### What the charity does
 

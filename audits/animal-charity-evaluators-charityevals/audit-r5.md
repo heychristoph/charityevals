@@ -1,6 +1,6 @@
 # Audit: animal-charity-evaluators-charityevals, round 5 (scoped verification)
 Result: 2.182e-6 uov/$ = 0.001091 years of healthy life per 1,000 dollars (combined range 1.4e-5–0.083); cause median 4.19e-4 (×2.60). Verdict: pass.
-Model-sha: 48652a60452c5de71d46d59cf0488d5242da91259752b2868545a5d05d61b8f2
+Model-sha: daf0db328ae6cd91082bfbf73b9733abc9f11c979991f7b14ff4383a93e3cc91
 Scope: only the change that the gain of grantmakers' money (all shifted) reads the new shared row `shifted_dollar_value = moved_dollar_value - prior_dollar_value` instead of the inline difference in `moved_value` (docs/normalization.md 2.8, src/engine/moved-money.ts, INV-12). Sources unchanged, not re-fetched.
 Mechanical: audit-model 0 findings; normalization-audit run by the orchestrator (0 violations), not rerun.
 Previous round: r4 had one low finding (shared slider range), accepted; nothing to resolve.
@@ -17,3 +17,5 @@ Previous round: r4 had one low finding (shared slider range), accepted; nothing 
 4. audit-model: no findings, so no high finding.
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

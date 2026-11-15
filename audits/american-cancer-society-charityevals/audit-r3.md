@@ -1,7 +1,7 @@
 # Audit: american-cancer-society-charityevals, round 3 (verification of the shared tobacco figures)
 
 Result: 6.005e-6 daly/$ = 0.006005 years of healthy life per 1,000 dollars (combined range 6.1e-4 to 0.059; joint low-high of the model's own ranges 0.0015 to 0.065); cause median 0.0667 (x0.090). Before the change: 0.00332745; after: 0.006005 (x1.80). Verdict: pass.
-Model-sha: 27e9bf82f15cad5916335e7c2b495cdb3f3371d7aea410de867f298defb5ddfc
+Model-sha: e9c9e8d67930a7021d7c86b1a0767f38100bca6ba86458055105a73389b5c38c
 Scope: only what commit 3e68437 changed for this model (tobacco branch `tob_*` reading facts/tobacco.json, coverage branch `adv_*` with its own figures, p_success 1 in both, write-up and summary). Programmes and year (FY to March 2026) unchanged from rounds 1 and 2.
 Mechanical: lint 0 high / 0 medium / 3 low (two context rows unused, far-below, the summary gives the reason); invariants none violated; `check.ts` all models valid; `simulation-check.ts` stable (5% 0.31, 50% 1.0, 95% 3.09 x best guess; the "range spans 1,000,000x" and "90% judgment" warnings are the known ones). `normalization-audit.ts` not run: the commit's waivers (in src/engine/normalization-waivers.json) are for Cancer Research UK and Campaign for Tobacco-Free Kids rows, none for this model, and no tob_* row retypes a shared figure.
 Previous round: rounds 1 and 2 had no open high or medium findings; their lows (A: research low end; B: reading-only gap row) are unaffected by this commit.
@@ -44,3 +44,5 @@ Previous round: rounds 1 and 2 had no open high or medium findings; their lows (
 Findings by severity: high 0, medium 0, low 4.
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

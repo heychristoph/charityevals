@@ -27,13 +27,18 @@ function canonical(x: unknown): string {
   return JSON.stringify(x);
 }
 
+/** The fingerprint of a parsed model's content. */
+export function contentSha(model: Record<string, unknown>): string {
+  const m = { ...model };
+  for (const k of TOOL_WRITTEN) delete m[k];
+  return createHash("sha256").update(canonical(m)).digest("hex");
+}
+
 /** The fingerprint of a model's content, or undefined for a model id with no file. */
 export function modelSha(id: string): string | undefined {
   const file = walk(join(root, "models")).find((p) => JSON.parse(readFileSync(p, "utf8")).id === id);
   if (!file) return undefined;
-  const model = JSON.parse(readFileSync(file, "utf8")) as Record<string, unknown>;
-  for (const k of TOOL_WRITTEN) delete model[k];
-  return createHash("sha256").update(canonical(model)).digest("hex");
+  return contentSha(JSON.parse(readFileSync(file, "utf8")) as Record<string, unknown>);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

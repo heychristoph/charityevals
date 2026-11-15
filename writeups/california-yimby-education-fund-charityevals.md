@@ -1,6 +1,6 @@
 ### Summary
 
-The California YIMBY Education Fund is the tax-deductible arm of California YIMBY, which campaigns for state laws that let more homes be built in California. Counting both organisations' spending over 2017 to 2024 against the Education Fund's share of the homes the laws of those years added, our model comes to **<span data-figure="headline" data-model="california-yimby-education-fund-charityevals">0.13</span> years of healthy life per $1,000**, about twice the median of the site's global-health models. About 85% of it is the ADU laws that followed the 2016 reforms. A little over half the value is the fall in rents an extra home brings, which renters gain and better-off landlords lose. The result is mostly uncertainty, and the organisations' share of the coalitions is a judgment.
+The California YIMBY Education Fund is the tax-deductible arm of California YIMBY, which campaigns for state laws that let more homes be built in California. Counting both organisations' spending over 2017 to 2024 against the Education Fund's share of the homes the laws of those years added, our model comes to **<span data-figure="headline" data-model="california-yimby-education-fund-charityevals">0.13</span> years of healthy life per $1,000**. About 85% of it is the ADU laws that followed the 2016 reforms. A little over half the value is the fall in rents an extra home brings, which renters gain and better-off landlords lose. The result is mostly uncertainty, and the organisations' share of the coalitions is a judgment.
 
 ### Which organisation
 

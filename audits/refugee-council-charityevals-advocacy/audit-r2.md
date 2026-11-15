@@ -1,7 +1,7 @@
 # Audit: refugee-council-charityevals-advocacy, round 2 (verification)
 Result: 2.942e-6 daly/$ = 0.002942 years of healthy life per $1,000 (combined range 0.00043-0.0201). Verdict: pass.
 Verdict: pass
-Model-sha: 767aaa9ac12c536237272372bf64b893d2d8d138c167a96b860c24aeb823da1c
+Model-sha: a95cb7ebc3223049bb053b07072c8784c242a0d9a1c62aad35276484192a7edb
 Mechanical: lint 0 high / 1 medium (spread, own ranges 2713x) / 2 low (attribution_share diagnostic, far-below); simulation stable (5% 0.25, 95% 3.93 x best guess); normalization-audit printed no line for this model (generated/ reverted).
 
 Round-1 findings:
@@ -13,3 +13,5 @@ Round-1 findings:
 6. Own-range spread: lint medium "spread" remains at 2713x (own ranges, shared assumptions at best). I accept it: it is inherent in the two judged counterfactual and attribution shares (counterfactual 30% / 5%, credit 25% / 12%, each ranged several-fold and multiplied through two branches), the model has no lever left to narrow without inventing evidence, and the summary states that the result is mostly judgment spanning ten-fold per win. Fine for a pass; the best narrowing would be a published campaign-attribution study. The spread rose from 1183x because the lasting branch (which carried a narrow range) is gone.
 
 New findings: none. A hidden wrinkle checked: with the lasting branch at zero the template's win-years row still reads `$win_years_counted` but multiplies 0, so no stray credit; "advocacy line only counts the pilot" is stated in the summary.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

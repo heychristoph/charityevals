@@ -27,7 +27,7 @@ All the work is valued as pandemic work. No law or standard was won in 2025: the
 
 | Adjustment | Value | Reason |
 |---|---|---|
-| How far a typical project's effect applies | 0.8 | Providers use commec and it passed an independent benchmark. But only a handful of providers use it, and the standards and rules aren't in force yet. The same as our Nuclear Threat Initiative model, close to SecureBio's DNA screening |
+| How far a typical project's effect applies | 0.8 | Providers use commec and it passed an independent benchmark. But only a handful of providers use it, and the standards and rules aren't in force yet. As in our Nuclear Threat Initiative model |
 | Work no one else would have done now | 0.7 | Others also build screening tools and standards. Few do outreach to providers outside the US and EU |
 | IBBIS's share of the resources | 0.75 | Unpaid expert time in its two consortia, Microsoft's lead on the 2025 study, NIST's test sets, workshop co-hosts |
 | Missing data | slider | Nothing about IBBIS's effect on the risk is measured, and even its spending is estimated |
@@ -38,7 +38,7 @@ IBBIS is raising money in small grants for named work, and Founders Pledge's 202
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 115. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike. The result sits a little above our SecureBio model's, mainly because IBBIS's next dollar counts for more (60% against 49%), and above our Johns Hopkins Center for Health Security model's, whose outbreak analytics count for less per dollar and whose main funder may give less if others give more.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 115. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
 
 ### Biggest uncertainties
 

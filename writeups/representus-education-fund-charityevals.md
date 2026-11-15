@@ -1,6 +1,6 @@
 ### Summary
 
-The RepresentUs Education Fund explains corruption and threats to US democracy to large online audiences, and backs ballot measures for ranked-choice voting, independent redistricting commissions and anti-corruption laws. Our model of its 2024 work comes to **<span data-figure="headline" data-model="representus-education-fund-charityevals">0.026</span> years of healthy life per 1,000 dollars**. That is about two fifths of the site's global-health median, close to our models of Common Cause and FairVote. It is a very uncertain figure, built mostly on judgment: how much a voting reform changes how well people are governed, and how the Education Fund's spending divides between its kinds of work.
+The RepresentUs Education Fund explains corruption and threats to US democracy to large online audiences, and backs ballot measures for ranked-choice voting, independent redistricting commissions and anti-corruption laws. Our model of its 2024 work comes to **<span data-figure="headline" data-model="representus-education-fund-charityevals">0.026</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure, built mostly on judgment: how much a voting reform changes how well people are governed, and how the Education Fund's spending divides between its kinds of work.
 
 ### What the charity does
 

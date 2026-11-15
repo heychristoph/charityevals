@@ -32,12 +32,12 @@ Each branch then takes the share that wouldn't have happened anyway (40-60%) and
 
 ### What drives the result
 
-Funders' giving carries about nine-tenths of the result; companies add about a twelfth, investors and the public a few per cent. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. The result is above the climate median because a shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
+Funders' giving carries about nine-tenths of the result; companies add about a twelfth, investors and the public a few per cent. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. A shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
 
 ### Biggest uncertainties
 
 - **How much money it really moves.** Drawdown says its work has "helped guide billions of dollars", but that is a total since 2017 and includes money that would have gone the same way. No funder has published what it changed.
-- **Whether its advice beats an ordinary climate charity.** The shared method assumes the money goes to work as good as the ranked climate charities. Drawdown's rankings long favoured big, mature solutions that markets already fund.
+- **Whether its advice beats an ordinary climate charity.** The shared method values the money at the ranked climate charities' figures. Drawdown's rankings long favoured big, mature solutions that markets already fund.
 - **Drawdown's part.** Funders weigh many advisers; its share is our judgment, from 10% to 60%.
 
 ### What isn't modelled

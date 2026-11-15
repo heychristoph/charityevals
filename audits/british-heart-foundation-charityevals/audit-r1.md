@@ -1,6 +1,6 @@
 # Audit: british-heart-foundation-charityevals, round 1 (verification of the shared tobacco figures)
 Result: 1.034e-5 daly/$ = 0.01034 years of healthy life per 1,000 dollars (combined range 6.6e-4 to 0.162); cause median 0.0667 (x0.155). Verdict: pass.
-Model-sha: 86055460c9d2f9b0bfb073b7b53ac6bfa685c775dd0f6f057b5363980d7609d0
+Model-sha: 0d317c6aee36f14311123951288078810036800687109560c131443041ecaeda
 Scope: commit 3e68437 only (policy branch re-pointed to facts/tobacco.json, credit restructured, side-effect rows, unmodelled share).
 Mechanical: audit-model lint no high or medium, invariants none; check.ts "all models valid"; simulation-check ran with only info/warn notes on range width. normalization-audit not run (scoped).
 Result before 0.0103830, after 0.01034 (-0.4%).
@@ -33,3 +33,5 @@ Statements match the model: 8 points, 3 healthy years, 40 years, side effects 9%
 share_burden_averted_per_research_year (judgment), missing_data_discount (judgment), discount_rate (judgment), years_brought_forward (judgment), @next_dollar (estimate). The change touches none of the top drivers; the policy branch is about 9% of the result.
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

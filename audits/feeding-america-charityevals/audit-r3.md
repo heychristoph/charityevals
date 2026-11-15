@@ -23,4 +23,6 @@ Round 2 findings: all low or resolved; the round-2 low about `fuel_share` having
 None.
 
 Verdict: pass
-Model-sha: df1f1ab43e725ff2169b10acb37c415c4b951ee9e34d63315ec524f553bc1e3c
+Model-sha: bdd9f30a67eb4921f2a3e3300b7083cba254e4168937bab7dba9bbb66d484ecd
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

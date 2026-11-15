@@ -42,7 +42,7 @@ The next dollar is valued at 35% of the period's average. Earthjustice holds abo
 
 In the climate model, the methane rule and the coal closings each give about half the value; the power-plant standards, mostly repealed, give little. In the health model, the PM2.5 standard gives nearly all of it. The shared value judgments move all three models most: the years a won reform counts, the discount rate and the missing-data step. Then come the share of a policy due to advocacy and Earthjustice's own shares.
 
-The biodiversity model is far below other conservation models. The Forest Service expected the 2020 exemption to change overall logging little, so the restored protection spares about a hundred hectares a year. Much of that timber is cut elsewhere instead, and the protection is under threat again.
+The Forest Service expected the 2020 exemption to change overall logging little, so the restored protection spares about a hundred hectares a year. Much of that timber is cut elsewhere instead, and the protection is under threat again.
 
 ### Biggest uncertainties
 

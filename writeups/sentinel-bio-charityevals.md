@@ -33,7 +33,7 @@ At the end of 2024 Sentinel held $9.1 million, six times what it spent from May 
 
 ### What drives the result
 
-The three grants valued as typical pandemic work bring about half of the result and the fellowships a fifth. The grant to the Council on Strategic Risks brings a quarter, and the advised gift a few percent. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 58. The result sits near the other pandemic charities the site models, such as IBBIS and the Johns Hopkins Center for Health Security.
+The three grants valued as typical pandemic work bring about half of the result and the fellowships a fifth. The grant to the Council on Strategic Risks brings a quarter, and the advised gift a few percent. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 58.
 
 ### Biggest uncertainties
 

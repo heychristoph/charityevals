@@ -1147,32 +1147,6 @@ export function inv14(lib: Library): InvariantReport {
   };
 }
 
-// --- INV-15: an outlier says why ----------------------------------------------------------------------
-
-/** The phrase a summary uses to say why a ranked model is far above its peers. */
-export const OUTLIER_REASON = /more than (ten|\d+) times (its|the) peers\b[^.]*\bbecause\b/i;
-
-/** INV-15: a ranked model more than ten times the median of its peers (the other models the rankings use
- * in the same cause) says why in its summary. Best guesses stay; the reader is told why one stands out. */
-export function inv15(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
-  const ranked = new Map<string, ResolvedModel>();
-  for (const c of lib.charities.keys()) for (const p of rankingPlan(lib, c)) for (const part of p.parts) ranked.set(part.model.id, part.model);
-  const h = new Map([...ranked.values()].map((m) => [m.id, headline(lib, m, av)]));
-  const violations: Violation[] = [];
-  for (const m of ranked.values()) {
-    const peers = [...ranked.values()].filter((o) => o.id !== m.id && o.cause === m.cause).map((o) => h.get(o.id)!).filter((x) => Number.isFinite(x) && x > 0).sort((a, b) => a - b);
-    if (peers.length < 3) continue;
-    const median = peers.length % 2 ? peers[peers.length >> 1] : (peers[peers.length / 2 - 1] + peers[peers.length / 2]) / 2;
-    const x = h.get(m.id)!;
-    if (x > 10 * median && !OUTLIER_REASON.test(m.summary ?? ""))
-      violations.push({ inv: "INV-15", model: m.id, where: "summary", detail: `${fmt(x)} healthy years per $1,000 is ${fmt(x / median)}× the median of its ${peers.length} ranked peers in ${m.cause} (${fmt(median)}); its summary must say why ("more than ten times its peers because …")` });
-  }
-  return {
-    id: "INV-15", title: "A ranked model far above its peers says why", status: "checked", checked: ranked.size, violations,
-    how: "For every model the rankings use (rankingPlan), at the defaults in our view: if its headline is more than 10× the median of the other ranked models of the same cause (at least three), its summary must state the reason in the words \"more than ten times its peers because …\". The best guess stays; the outlier is explained where readers meet it.",
-  };
-}
-
 // --- INV-16: side sheets never rank; the ranked column is the grant's -------------------------------
 
 /** Rows of a value-of-information or decision sheet that the title-and-template test can miss. Money a
@@ -1481,7 +1455,7 @@ export function inv21(lib: Library, av = assumptionValues(lib.assumptions)): Inv
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv15(lib, av), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

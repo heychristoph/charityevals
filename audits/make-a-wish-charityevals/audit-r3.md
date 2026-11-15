@@ -1,7 +1,7 @@
 # Audit: make-a-wish-charityevals, round 3
 
 Result: 1.981e-5 wellby/$ = 0.001293 years of healthy life per $1,000 (combined range 2.98e-4 – 5.61e-3); cause median 0.3585 (×0.0036). Verdict: pass.
-Model-sha: b82dc73d0cdf0f3e42fda8d4192a3e5f017fa7eee8bcec9b2bc6a172fe9da76c
+Model-sha: abf015dab99d63bcc994c492aa56bb835c36ee6af443a2d6aae959e40d571edf
 
 Scope: unchanged and right (whole US network, fiscal 2024, programme services $201.4M, 16,295 wishes). Round 3 checks only the seven changes made after round 2.
 
@@ -36,3 +36,5 @@ Previous round (round 2):
 5. `evidence_adj`: a judgment anchored on HLI's shrinkage of single trials.
 
 Verdict: pass. Findings: 0 high, 0 medium, 0 low.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

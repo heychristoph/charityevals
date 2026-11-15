@@ -1,6 +1,6 @@
 ### Summary
 
-World Central Kitchen, founded by the chef José Andrés, cooks and delivers hot meals to people hit by disasters and wars. Our model of its 2025 relief work, 372.5 million dollars and 130 to 179 million meals, gives **<span data-figure="headline" data-model="world-central-kitchen-charityevals">0.12</span> years of healthy life per 1,000 dollars**, a little above the median of the site's global-health charities. Over 70% of it comes from Gaza, where the meals fed about a million people through a year of blockade and famine.
+World Central Kitchen, founded by the chef José Andrés, cooks and delivers hot meals to people hit by disasters and wars. Our model of its 2025 relief work, 372.5 million dollars and 130 to 179 million meals, gives **<span data-figure="headline" data-model="world-central-kitchen-charityevals">0.12</span> years of healthy life per 1,000 dollars**. Over 70% of it comes from Gaza, where the meals fed about a million people through a year of blockade and famine.
 
 ### What the charity does
 

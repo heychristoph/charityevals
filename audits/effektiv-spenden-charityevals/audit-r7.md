@@ -12,5 +12,7 @@ Mechanical: audit-model lint 0 findings, no invariant violation (INV-12 incl. do
 ## Findings
 None.
 
-Model-sha: 0c5ccfc85ce86d381605c9451d344b9e47a4467d281fd77ac9a928e7f83ac358
+Model-sha: b09d21ecc854430c67cc1f05347edbf7dd675d0e4db26839ab4a33b122f73534
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

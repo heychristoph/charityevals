@@ -40,7 +40,7 @@ METR ended 2024 with net assets of $5.4 million, about five months of spending. 
 
 ### What drives the result
 
-The result is under a tenth of the median for this cause and close to Redwood Research's (0.07) and MIRI's (0.07). The reason is that all of METR's work is against AI escaping control. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
+The reason is that all of METR's work is against AI escaping control. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
 
 ### Biggest uncertainties
 

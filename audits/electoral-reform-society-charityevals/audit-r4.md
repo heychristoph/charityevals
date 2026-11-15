@@ -1,6 +1,6 @@
 # Audit: electoral-reform-society-charityevals, round 4 (verification round)
 Result: 4.912e-5 daly/$ = 0.0491 years of healthy life per 1,000 dollars, unchanged from round 3. Verdict: pass.
-Model-sha: dd10f869b4087582fed1a366b4d6a9b5b119dfb28c6f374354ae31cfc9eb07c0
+Model-sha: 768b0d40bf9a849b63a9d14709955ec6d364544e9125365bfad1edbf1a6c84fe
 Scope: scoped verification of the two low findings of round 3 against `git diff 22eb2aa 415060f` (model, facts/united_kingdom.json, audit-r3.md). The only changed model line is the spend_2021_gbp note; no inputs or formulas changed.
 Mechanical: audit-model.ts: 0.04912 per $1,000, 0 findings.
 Previous round:
@@ -14,3 +14,5 @@ None re-fetched; text-only changes.
 
 ## Drivers
 Unchanged: the chance and share of proportional representation, whether a voting method changes governance, the next-dollar room, and the supplementary-vote share.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

@@ -40,7 +40,7 @@ At the end of 2024 1Day had about ten months of spending in hand, after a $1 mil
 
 ### What drives the result
 
-The result is about 3.3 times the median for this cause, a little below SecureBio (6.1) and the Johns Hopkins Center for Health Security (7.5). Like theirs, most of it rests on Rethink's typical pandemic project. 1Day is small ($2.4 million), so no correction for size is needed. Its hepatitis C and malaria work count for less per dollar than its pandemic work, because they save lives today rather than cutting a catastrophic risk.
+Like theirs, most of it rests on Rethink's typical pandemic project. 1Day is small ($2.4 million), so no correction for size is needed. Its hepatitis C and malaria work count for less per dollar than its pandemic work, because they save lives today rather than cutting a catastrophic risk.
 
 ### Biggest uncertainties
 

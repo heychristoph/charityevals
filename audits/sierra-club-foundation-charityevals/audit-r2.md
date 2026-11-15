@@ -1,6 +1,6 @@
 # Audit: sierra-club-foundation-charityevals, round 2 (verification of commit 7d83d8e)
 Result: 0.01561 tco2e/$ = 0.005821 years of healthy life per 1,000 dollars (round 1: 0.005293, +10.0%, as round 1's finding 2 computed). Combined range 0.000206-0.165; own ranges joint 0.00128-0.0187; cause median 0.001672 (x3.48; the reason is unchanged and stated in the summary: Beyond Coal is the field's largest coal campaign). Verdict: pass.
-Model-sha: ab9c3810fada9592636cc0f4a84f1e8ccc0dcd36713763c5cb252240faa6a6ee
+Model-sha: 25844fc8815566ed1c56a638093816df07dc908fd18948c973f6d76fc0d66c3d
 Scope: scoped verification of the changed rows against round 1's findings 1-6: our_wild_america_2022/2023 and the climate_spend rows, the program_expenses source notes, the five shared coal facts, the share_of_sierra_club_resources and outcome_total explainers, the write-up. Unchanged rows not re-audited.
 Mechanical: audit-model.ts 0 findings, no invariant violations; check.ts all models valid. normalization-audit and simulation-check not re-run (no structural change; the added rows are observed point values).
 Previous round: round 1's findings 1-6 all addressed (below).
@@ -31,3 +31,5 @@ Previous round: round 1's findings 1-6 all addressed (below).
 
 ## Drivers
 Unchanged from round 1: win_years_counted, missing_data_discount, deaths_per_tco2e, discount_rate, the next-dollar factor, advocacy's share of the closings. Peers x3.48 of the climate median, with the reason in the summary.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

@@ -12,4 +12,6 @@ Previous round: audits/earthjustice-charityevals-biodiversity/audit-r2.md (pass)
 None.
 
 Verdict: pass
-Model-sha: ae92505d59fe6cc59e41d350a871c548b8f20088beb00e8dc1f58a66d79d2b58
+Model-sha: 137d05a037841238a7dddbe98608cbd3fa0d43f5f6bd19379778a1c876ba487e
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

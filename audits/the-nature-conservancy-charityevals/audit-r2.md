@@ -10,6 +10,8 @@ Checked:
 Findings: None.
 
 Verdict: pass
-Model-sha: 817352ef0fee9feb485ee24c940cb97d1965f95fa40e16ddecd020b17d58130f
+Model-sha: bfb00e5e9f7710c76e71670ceb9c92938f8d552039176becb67f391f77ced904
 
 Re-stamped after merge: the pandemic and forest-loss rows now read the shared facts Cool Earth added (same values); result unchanged at 3.25e-4.
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

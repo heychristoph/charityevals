@@ -72,7 +72,7 @@ Each item is a way a model can count something twice, miss a step or mix units; 
 
 - [ ] Cost per unit reached compared with the charity's own published figure and with peers.
 - [ ] Effect sizes within the CI of the cited meta-analysis.
-- [ ] Result within 10× of peers in the same unit (years of healthy life per $1,000), or a sourced reason why not.
+- [ ] Result within 10× of peers in the same unit (years of healthy life per $1,000), or the row that explains it found (in the audit, never in site text).
 - [ ] The same physical change uses the same SADs figure as every other model (`@sad_factors`).
 - [ ] Canonical rows compared with other charityevals models of the same family.
 - [ ] Ranges: judgment ranges reflect real disagreement (cite the disagreeing sources), not a

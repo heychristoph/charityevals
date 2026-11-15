@@ -15,4 +15,6 @@ Previous round:
 (none)
 
 Verdict: pass
-Model-sha: 274e8babae4ef1efa7f3d6e1019a34d9a14c6e9a6746ee38c2717f842a36918c
+Model-sha: 19b9dbdf8539731b9b56ff325be88ea3a9e987c0e4912eb48a6065ff1b46d65f
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

@@ -18,4 +18,6 @@ None at high or medium. One note, not a finding: the legal submissions' 5% sit w
 
 Verdict: pass
 
-Model-sha: d8796e52466b0bbef241a0a7acd614d26669ab3c29aa781fa74fb363101d70c4
+Model-sha: 081aaca94ded05fb7fcf66f349ec62080ceb5032c00a44894c9a1a4736d09292
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

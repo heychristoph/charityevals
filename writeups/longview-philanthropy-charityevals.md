@@ -1,6 +1,6 @@
 ### Summary
 
-Longview Philanthropy advises major donors who want to reduce catastrophic risks from advanced AI, nuclear weapons and biological threats. It recommends grants, runs regranting funds and holds convenings. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="longview-philanthropy-charityevals">1.2</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to a little over a dollar of giving it caused through its funds, and a little over a dollar of advised giving it redirected. That giving is valued at what the site's charities in its three areas achieve. The nuclear part carries most of the value, because the site's nuclear charities rank far above its AI charities.
+Longview Philanthropy advises major donors who want to reduce catastrophic risks from advanced AI, nuclear weapons and biological threats. It recommends grants, runs regranting funds and holds convenings. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="longview-philanthropy-charityevals">1.2</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to a little over a dollar of giving it caused through its funds, and a little over a dollar of advised giving it redirected. That giving is valued at what the site's charities in its three areas achieve. The nuclear part carries most of the value.
 
 ### What the charity does
 
@@ -32,7 +32,7 @@ A 5% side effect is added, with a range of −5% to +20% (our judgment). On the 
 ### What drives the result
 
 - **Where shifted money would otherwise have gone** (an ordinary charity of the same areas, from nothing to three times that). At the high end, shifted money counts as a loss.
-- **The share that went to nuclear work** (12%, from 6% to 19%). The site's nuclear charities rank about thirty times above its AI charities, so nuclear grants carry most of the value.
+- **The share that went to nuclear work** (12%, from 6% to 19%). Nuclear grants carry most of the value.
 - **The discount rate**, through its destinations' long-run benefits.
 - **The next dollar** (36%, from 15% to 75%). Longview holds over a year and a half of operating costs in unrestricted reserves. Its 2025 average comes from the year its private AI fund made its grants rise fivefold.
 - **How much unmeasured results and won reforms count**, through the charities it funds.

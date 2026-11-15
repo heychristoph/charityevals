@@ -1,6 +1,6 @@
 ### Summary
 
-The Brennan Center for Justice is a nonpartisan law and policy institute that researches, litigates and campaigns for fair elections, checks on presidential power and an end to mass incarceration in the United States. Our model of its work in the year to June 2025 comes to **<span data-figure="headline" data-model="brennan-center-for-justice-charityevals">0.07</span> years of healthy life per 1,000 dollars**, about the site's global-health median.
+The Brennan Center for Justice is a nonpartisan law and policy institute that researches, litigates and campaigns for fair elections, checks on presidential power and an end to mass incarceration in the United States. Our model of its work in the year to June 2025 comes to **<span data-figure="headline" data-model="brennan-center-for-justice-charityevals">0.07</span> years of healthy life per 1,000 dollars**.
 
 ### What the charity does
 

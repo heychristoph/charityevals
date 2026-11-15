@@ -1,6 +1,6 @@
 ### Summary
 
-The Humane League (THL) presses food companies to keep the cage-free promises they made, in the US and around the world. We put this work at about $5.1 million of its 2025 programme spending. Our estimate of a dollar given for it is **<span data-figure="headline" data-model="the-humane-league-charityevals-corporate-campaigns">0.0004</span> years of healthy life per $1,000**, below the median animal model on the site.
+The Humane League (THL) presses food companies to keep the cage-free promises they made, in the US and around the world. We put this work at about $5.1 million of its 2025 programme spending. Our estimate of a dollar given for it is **<span data-figure="headline" data-model="the-humane-league-charityevals-corporate-campaigns">0.0004</span> years of healthy life per $1,000**.
 
 The result is this work's share of the 5.5 million hens that left cages in 2025 at companies THL pressed itself. That is an outcome many groups, and THL's own grassroots work, share. THL's count is its own and what the pressure brought forward is our judgment, so the result takes the site's shared discount for missing data.
 

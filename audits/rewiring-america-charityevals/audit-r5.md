@@ -1,6 +1,6 @@
 # Audit: rewiring-america-charityevals, round 5
 Result: 0.0278 years of healthy life per 1,000 dollars at the defaults (unchanged from round 4's 0.02783; 0.027771 with the shared years counted at the default 5). Verdict: pass.
-Model-sha: 64af6dac83955a2b8ab034741373a6a77b011f83916f815587a92bbc31413795
+Model-sha: 155a7fd1761222690ee809e4b24388c0ef7dc7d84bce0b58bd27ea6db9741836
 Scope: scoped verification of the last commit's rows (the law's public-money inputs moved to shared facts `ira_home_*`, new row `credit_years_counted`, new `credit_uov`, reworded `ira_household_delivery_vs_law`, the summary and write-up lines on the peer models) and of round 4's two open lows. The rest of the model not re-opened.
 Mechanical: audit-model 0 findings; check.ts rewiring-america-charityevals "all models valid" (the usual "about 90% of the uncertainty is judgment" warning and the 13 inputs without published range, as before); generated/ untouched (git status clean). normalization-audit not re-run (scoped round).
 Previous round:
@@ -26,3 +26,5 @@ Previous round:
 Unchanged from round 4: `missing_data_discount` and `@climate.advocacy_share_of_policy_win`, `@next_dollar.rewiring_america`, `uov_per_daly`, `rebate_attribution_share_shared`, `rebate_paid_share` (now `@climate.ira_home_rebates_paid_share`, shared with the two peers), `rebate_recipient_consumption_ratio`. Most improving: DOE's or the states' paid-out figures for the home rebates (now moving three models at once) and IRS SOI tax-year 2024-2025 claims for 25C and 25D.
 
 Verdict: pass
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

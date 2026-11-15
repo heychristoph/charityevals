@@ -10,4 +10,6 @@ Scope: since round 7 only the explainer of ue_family_tx was reworded (diff: one 
 Previous round: round 7's low finding (explainer wording) resolved.
 
 Verdict: pass (no high, no medium, no low)
-Model-sha: 145684e1a3f3ccf61a09c9bc32cf520a5139840d736c5b761e1ef7fa7969ed34
+Model-sha: 32487db9f606b1b6a0527c53c7d73157397afeeb6d62b639c0badd32ae54a1e5
+
+Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
