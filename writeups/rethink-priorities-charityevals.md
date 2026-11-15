@@ -11,7 +11,7 @@ Its own four research departments spent $3.4 million:
 - **Animal welfare** ($1.40 million): research and coordination for animal advocates and funders. In 2025 it helped funders deploy almost $10 million of grants for EU farmed animal welfare advocacy, ran a strategy forum for 26 advocacy groups, built a fish welfare roadmap with 18, and did three commissioned projects for Open Philanthropy.
 - **Global health and development** ($0.98 million): 12 commissioned projects for foundations such as the Gates Foundation, Packard, Open Philanthropy and D-Prize, paid for by their fees, and a donor guide to the US foreign aid pause.
 - **Worldview investigations** ($0.72 million): cross-cause prioritisation, moral weights, digital minds and models of movement building.
-- **Surveys and data analysis** ($0.32 million): polls and message tests, mostly private commissions for effective altruism organisations and funders.
+- **Surveys and data analysis** ($0.32 million): polls and message tests, mostly private commissions for effective-giving organisations and funders.
 
 Management and fundraising cost another $3.3 million. We judge that about 70% of it serves the four departments; the rest serves the sponsored projects, which pay fees.
 

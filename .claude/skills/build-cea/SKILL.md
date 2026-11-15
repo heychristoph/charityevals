@@ -133,7 +133,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
   control group; say what isn't adjusted for. **Animals**: Convention 3 (reach is every animal under
   the commitments won or pressed, delivery only in the shared fulfilment rate, stocks as yearly flows).
 - **Summary** and write-up: the model's own reasons, never a comparison with other charities, a median,
-  an average or peers (they move whenever models land; linking them is fine). Far from the cause's
+  an average or peers (they move whenever models land; linking them is fine). Never mention effective altruism or EA as a movement; name organisations. Far from the cause's
   median: check scope, reach and persistence first. An honest net harm keeps its negative result (normalization.md 2.22).
 - **Write-up** `writeups/<id>.md` for the charity's main model, following import-cea section 7, plus
   "How this model was checked" (audit rounds and what changed).

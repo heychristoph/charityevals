@@ -12,7 +12,7 @@ Astro with React islands, static build (Cloudflare Pages or Vercel). Per-charity
 
 ## Users
 
-Primary: EA-aligned donors deciding where to give. They want to see why a charity ranks where it does, which numbers carry the result, and how the ranking changes under their own values (moral weights, exchange rates between causes). They read carefully but are not economists.
+Primary: donors who care about effectiveness deciding where to give. They want to see why a charity ranks where it does, which numbers carry the result, and how the ranking changes under their own values (moral weights, exchange rates between causes). They read carefully but are not economists.
 
 Secondary, not designed for first: grantmakers and analysts auditing inputs; researchers building or critiquing CEAs who fork models.
 

@@ -80,7 +80,7 @@ const example = `{
 
   <h3 id="itn">Importance, neglectedness, tractability</h3>
   <p>
-    Effective altruists often compare causes on three factors: how big the problem is, how few resources already go to it, and how much of it more effort would solve. <a href="https://80000hours.org/articles/problem-framework/">80,000 Hours</a> shows that multiplied together they give the good done per extra dollar, which is exactly what our models estimate, charity by charity. So we don't score the three separately: scoring them on top would count them twice. The framework is a rough guide where no direct estimate exists (as <a href="https://forum.effectivealtruism.org/posts/Eav7tedvX96Gk2uKE/the-itn-framework-cost-effectiveness-and-cause">Halstead</a> and <a href="https://forum.effectivealtruism.org/posts/MtCAsPMftvJqRBYzr/review-of-itn-critiques">a review of the critiques</a> argue). Here is where each factor lives in our models:
+    A common way to compare causes rates three factors: how big the problem is, how few resources already go to it, and how much of it more effort would solve. <a href="https://80000hours.org/articles/problem-framework/">80,000 Hours</a> shows that multiplied together they give the good done per extra dollar, which is exactly what our models estimate, charity by charity. So we don't score the three separately: scoring them on top would count them twice. The framework is a rough guide where no direct estimate exists (as <a href="https://forum.effectivealtruism.org/posts/Eav7tedvX96Gk2uKE/the-itn-framework-cost-effectiveness-and-cause">Halstead</a> and <a href="https://forum.effectivealtruism.org/posts/MtCAsPMftvJqRBYzr/review-of-itn-critiques">a review of the critiques</a> argue). Here is where each factor lives in our models:
   </p>
   <div class="itn" role="table" aria-label="Where importance, neglectedness and tractability are in our models">
     <div class="itn-row itn-head" role="row"><span role="columnheader">Factor</span><span role="columnheader">In our models</span></div>
@@ -111,7 +111,23 @@ const example = `{
     <strong>Imported:</strong> every public cost-effectiveness model we found and could read, from <a href="/evaluators/givewell">GiveWell</a>, <a href="/evaluators/ace">Animal Charity Evaluators</a>, the <a href="/evaluators/hli">Happier Lives Institute</a>, <a href="/evaluators/ambitious-impact">Ambitious Impact</a>, <a href="/evaluators/sogive">SoGive</a> and <a href="/evaluators">others</a> (the <a href={`${repo}/tree/main/inventory`}>inventory</a> lists everything and why anything was left out). Each spreadsheet is traced from its bottom line, and every calculated row must match the sheet, or the build fails.
   </p>
   <p id="our-models">
-    <strong>Ours:</strong> where no evaluator has looked, an AI agent builds the model by a fixed, published method from the charity's accounts and reports and the research on its kind of work. It covers every programme the money pays for, weighted by spending, and every way the work does good or harm, with every number traced to a source or stated as a judgment with a range. A separate AI reviewer checks it against its sources, for up to three rounds, and it is published only once no serious finding is left. Built blind for seven charities evaluators have analysed, four landed within 3× of the evaluator (<a href={`${repo}/blob/main/docs/eval-skills.md`}>details</a>).
+    <strong>Ours:</strong> where no evaluator has looked, we build the model by the method below.
+  </p>
+
+  <h3 id="build">How we build and check a model</h3>
+  <p>
+    An AI agent follows published instructions: the <a href={`${repo}/blob/main/.claude/skills/build-cea/SKILL.md`}>build skill</a> for our models, the <a href={`${repo}/blob/main/.claude/skills/import-cea/SKILL.md`}>import skill</a> for evaluators' and the <a href={`${repo}/blob/main/.claude/skills/audit-cea/SKILL.md`}>audit skill</a> for the review.
+  </p>
+  <ol class="build-steps">
+    <li><strong>Scope.</strong> Every programme the money pays for, from the charity's accounts, weighted by spending.</li>
+    <li><strong>Template.</strong> A fixed template for each kind of work, ending on years of healthy life, with every way the work does good or harm.</li>
+    <li><strong>Sources.</strong> Every number traced to a source, or stated as a judgment with a range.</li>
+    <li><strong>Automatic checks.</strong> Scripts test units, formulas, the standard steps and the simulation; any failure stops the model.</li>
+    <li><strong>Independent audit.</strong> A fresh AI reviewer, given the model and its write-up but not the builder's notes, fetches the key sources and checks each number, looking for double counting, missing adjustments and unit errors. The builder fixes what it finds and a new reviewer checks again, for up to three rounds.</li>
+    <li><strong>Publish.</strong> Only once the latest audit, of the model exactly as it is, finds nothing serious; a test checks this.</li>
+  </ol>
+  <p>
+    Every audit round is public in the <a href={`${repo}/tree/main/audits`}>audits folder</a>. Built blind for seven charities evaluators have analysed, four landed within 3× of the evaluator (<a href={`${repo}/blob/main/docs/eval-skills.md`}>details</a>).
   </p>
   <p id="views">
     Inputs are marked <strong>observed</strong>, <strong>estimate</strong> or <strong>judgment</strong>, and each model's history page shows every change. We keep each evaluator's analysis as published, so it still reproduces, but rank our version: the site's shared figures and your values in place of the evaluator's own. A row where we use a different number is marked "changed for consistency". Each model page starts from the evaluator's own final figure and shows, step by step, how it becomes ours.
@@ -309,6 +325,12 @@ const example = `{
   .lede {
     font-size: 19px;
     color: var(--ink-2);
+  }
+  .build-steps {
+    padding-left: 1.25rem;
+  }
+  .build-steps li {
+    margin-bottom: 0.5rem;
   }
   .flow {
     list-style: none;

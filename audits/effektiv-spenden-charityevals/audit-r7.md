@@ -12,7 +12,8 @@ Mechanical: audit-model lint 0 findings, no invariant violation (INV-12 incl. do
 ## Findings
 None.
 
-Model-sha: b09d21ecc854430c67cc1f05347edbf7dd675d0e4db26839ab4a33b122f73534
+Model-sha: 9f976ac51da9f682a4fcba8fc9522b80ca032050e405db2a4b1975fc166439ac
 Verdict: pass
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-risk trims); no number changed

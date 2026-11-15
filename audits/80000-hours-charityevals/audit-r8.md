@@ -1,6 +1,6 @@
 # Audit: 80000-hours-charityevals, round 8 (scoped verification)
 Result: 0.002108 uov/$ = 1.054 years of healthy life per 1,000 dollars (combined range 0.0542–20.50). Verdict: **pass**.
-Model-sha: af6fa5a99dd23dcb1745f9c660fee53e66ec5df794b406317b0ab97cc65f6c56
+Model-sha: e0df06223bc480aea1f08544f76f451a62cefcbb07e0a9252b1932a866596f77
 Scope: only the text fix since round 7: the summary's range "0.06–24" now "0.05–21". Nothing else re-checked.
 
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
@@ -16,3 +16,4 @@ Scope: only the text fix since round 7: the summary's range "0.06–24" now "0.0
 None re-fetched; no source or number changed.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-risk trims); no number changed
