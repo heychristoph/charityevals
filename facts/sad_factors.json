@@ -278,6 +278,119 @@
         "retrieved": "2026-10-28"
       },
       "explainer": "When someone eats one pound less chicken, prices fall a little and other people buy a little more, so total consumption, and therefore production, falls by less than a pound. Norwood and Lusk estimate 0.76 lb for chicken, 0.74 for pork, 0.68 for beef, 0.56 for milk and 0.91 eggs per egg.\n\nBest guess is chicken's, since chickens and fish dominate the animal count of a typical replaced meal; the range spans milk (0.56) to eggs (0.91). Diet-change models multiply by this; ACE's models don't, which is one reason charityevals' diet-change results can run lower than ACE's."
+    },
+    {
+      "id": "alt_protein_meal_vs_reference",
+      "label": "Suffering in a meal replaced by an alternative protein, relative to the reference replaced meal",
+      "change": "a meat or seafood meal replaced by a plant-based, cultivated or fermentation-made analogue",
+      "unit": "multiple",
+      "format": "multiple",
+      "value": {
+        "low": 0.1,
+        "best": 0.19,
+        "high": 0.5
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "GFI, Analyzing plant-based meat and seafood sales (US retail and foodservice, 2025), with ACE's global meal replacement estimates (2024) and FAO production",
+        "url": "https://gfi.org/resource/analyzing-plant-based-meat-and-seafood-sales/",
+        "quote": "The three largest animal-type subcategories—plant-based beef, chicken, and pork—accounted for 86 percent of total plant-based meat category sales in 2025.",
+        "note": "Product mix of alternative proteins (ours from GFI's shares of sales, taken as a stand-in for weight): mammals (beef and pork) 62%, chicken and other birds 35%, seafood 3% (1-10%; GFI publishes no seafood share; plant-based beef holds about a third of foodservice analogues). Reference: ACE's global split of a replaced meal's SADs (fish 92.2%, birds 6.5%, mammals 1.3%, the meal_sads_share facts) over the tonnes eaten (FAO: aquatic animals for food 165 Mt live weight, SOFIA 2024; poultry 150 Mt, pig, bovine and ovine 222 Mt, Food Outlook November 2025 table 1.7), which gives SADs per tonne by group relative to the average tonne: fish 3.0, birds 0.23, mammals 0.031. The analogue mix's average: 0.03 × 3.0 + 0.35 × 0.23 + 0.62 × 0.031 = 0.19. Range 0.1 (1% seafood gives 0.13) to 0.5 (10% seafood gives 0.39, with room for larger bird portions). 2024 SADs, as the reference figure.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Alternative proteins mostly copy beef, chicken and pork, while the shared reference meal's suffering is mostly fish. This ratio puts the shared per-meal figure on the meals alternative proteins replace, for every model of alternative proteins: SADs per tonne by animal group from ACE's global split and FAO's tonnes, averaged over the analogues' product mix. Use it with the alt_protein_meal_sads_share facts for the species split."
+    },
+    {
+      "id": "alt_protein_meal_sads_share_fish",
+      "label": "Share of an alternative-protein meal's suffering that falls on fish",
+      "unit": "share",
+      "format": "percent",
+      "value": 0.47,
+      "kind": "estimate",
+      "source": {
+        "title": "Derived with alt_protein_meal_vs_reference",
+        "url": "https://gfi.org/resource/analyzing-plant-based-meat-and-seafood-sales/",
+        "note": "0.03 × 3.0 / 0.19 = 0.47 (see alt_protein_meal_vs_reference).",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Even at 3% of the analogues by weight, seafood carries about half of their suffering, because a tonne of fish involves far more animals than a tonne of meat."
+    },
+    {
+      "id": "alt_protein_meal_sads_share_chicken",
+      "label": "Share of an alternative-protein meal's suffering that falls on chickens",
+      "unit": "share",
+      "format": "percent",
+      "value": 0.43,
+      "kind": "estimate",
+      "source": {
+        "title": "Derived with alt_protein_meal_vs_reference",
+        "url": "https://gfi.org/resource/analyzing-plant-based-meat-and-seafood-sales/",
+        "note": "0.35 × 0.23 / 0.19 = 0.43.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Birds' share of the suffering in the meals alternative proteins replace."
+    },
+    {
+      "id": "alt_protein_meal_sads_share_pig",
+      "label": "Share of an alternative-protein meal's suffering that falls on pigs and other mammals",
+      "unit": "share",
+      "format": "percent",
+      "value": 0.1,
+      "kind": "estimate",
+      "source": {
+        "title": "Derived with alt_protein_meal_vs_reference",
+        "url": "https://gfi.org/resource/analyzing-plant-based-meat-and-seafood-sales/",
+        "note": "0.62 × 0.031 / 0.19 = 0.10; mammals counted as pigs, as ACE does.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Mammals' share (beef and pork, counted as pigs as in ACE's figures)."
+    },
+    {
+      "id": "alt_protein_seafood_share",
+      "label": "Share of alternative-protein meals that replace seafood",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.01,
+        "best": 0.03,
+        "high": 0.1
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: GFI reports that beef, chicken and pork analogues were 86% of US plant-based meat sales in 2025 (the rest mixed and unspecified products as well as seafood) and publishes no seafood share; plant-based seafood is a small niche. 3%, range 1-10%. The same figure is behind alt_protein_meal_vs_reference."
+    },
+    {
+      "id": "sads_per_egg_meal_replaced",
+      "label": "SADs averted per egg meal replaced by a plant-based or fermentation-made one",
+      "change": "an egg meal (about two eggs) replaced",
+      "unit": "SADs / meal",
+      "format": "number",
+      "value": {
+        "low": 0.06,
+        "best": 0.16,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "From the shared hen figures (ACE's 2024 SADs) and eggs per hen",
+        "url": "https://docs.google.com/spreadsheets/d/1BcZB3WeYarZC67MgFUjGKLWdLw2WVVZO8LitYcQb3fU/edit",
+        "note": "A caged hen's whole year is 28.94 SADs and a cage-free hen's about 11.45 (28.94 less the 17.49 a move to an aviary spares; sads_per_hen_year_cage_to_aviary); about 70% of the world's laying hens are caged (our judgment, 50-90%), so an average hen-year is about 23.7 SADs. A hen lays about 300 eggs a year, so two eggs are 1/150 of a hen-year: 0.16 SADs. Range: cage-free hens and higher yields (0.06) to caged hens with male chicks counted (0.3). 2024 SADs.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Suffering averted when an egg meal is replaced: the share of a laying hen's year its eggs take. Chickens only. Production response: the shared figure, whose range reaches eggs' 0.91."
+    },
+    {
+      "id": "sads_per_dairy_meal_replaced",
+      "label": "SADs averted per dairy meal replaced by a plant-based or fermentation-made one",
+      "change": "a dairy serving (about 250 ml of milk or its equivalent) replaced",
+      "unit": "SADs / meal",
+      "format": "number",
+      "value": {
+        "low": 0.0005,
+        "best": 0.002,
+        "high": 0.01
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment; Ambitious Impact publishes no SADs figure for dairy cows. A serving of about 0.25 kg of milk is about 1/10,000 of a cow's yearly milk (global average yields about 2,500-3,000 kg; far higher in rich countries). Anchored on a confined sow's year (16.7 SADs spared by group housing, sads_per_sow_year_group_housing): about 15 SADs a cow-year, with calves, gives 0.002 a serving. Range 0.0005 to 0.01 (cheese, which takes about ten litres of milk per kg). Mammals, counted as pigs, 2024 SADs."
     }
   ]
 }
