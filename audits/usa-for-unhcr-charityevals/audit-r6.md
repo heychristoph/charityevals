@@ -14,8 +14,9 @@ Checks passed:
 - years_exposed is a judgment with a range (0.25-1) feeding the tornado; no other new inputs.
 
 Verdict: pass
-Model-sha: cca53477427869391fd0797e2753995d0148867b2871df827216712ad8a884b2
+Model-sha: 5b07d69ae7cb021ce1b6ee456c04095e760c893a0b6b644dde711cd21b5d1a7b
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.0599 → 0.0599.
+Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)

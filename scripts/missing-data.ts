@@ -43,6 +43,8 @@ const ACE = T("ACE's estimate of a campaign or outreach programme: the animals o
 const AIM = T("an Ambitious Impact idea-stage estimate, made before the charity ran the work: reach and effect are projections from research on other programmes.");
 const BY_ID: Record<string, Rule> = {
   // Happier Lives Institute
+  // A charity's own analysis
+  "lead-exposure-elimination-project-leep": T("LEEP's projection of a regulation it had just helped start: the homes left unpainted with lead paint, the children spared and their health and earnings are modelled, not measured."),
   // GiveWell exceptions
   "global-alliance-for-improved-nutrition-givewell": T("GiveWell's 2014 salt iodization estimate: the cost per person is a generic figure for iodization plants, not GAIN's count of who got iodized salt, and GAIN's part in raising iodization is GiveWell's guessed 50% chance."),
   "actra-hli": T("a new programme: reach is projected and the effect is from trials of other delivery."),
@@ -62,6 +64,7 @@ const BY_ID: Record<string, Rule> = {
   "breast-cancer-now-sogive": T("research funding: what the research achieves is a judgment from the returns-to-research literature."),
   "motor-neurone-disease-association-sogive-upper-bound": T("research and care: what the spending achieves is a judgment."),
   "versus-arthritis-sogive-upper-bound": T("research funding: what the research achieves is a judgment from the returns-to-research literature."),
+  "teaching-at-the-right-level-africa-tlycs": M("TaRL Africa counts the pupils reached in each country, and the learning gain is from randomised trials of Teaching at the Right Level, including government-run delivery (India, Ghana, Zambia), halved for fidelity at scale."),
   "compassion-uk-sogive": M("the sponsored children are counted, and the effect is from an evaluation of Compassion's own sponsorship programme (Wydick et al. 2013)."),
   "royal-national-lifeboat-institution-sogive": T("launches and rescues are counted, but the lives a rescue saves are a judgment, not measured against what would have happened."),
   "strongminds-sogive-march-2024": M("StrongMinds counts the people treated, and the effect is from trials of the same group therapy and its own trial."),
@@ -72,6 +75,7 @@ const BY_ID: Record<string, Rule> = {
   "unlimit-health-deworming-sogive-2022": M("the treatments are counted, and the effect is from randomised trials of school-based deworming."),
   // GiveWell exceptions to the rules below
   "alima-primary-healthcare-malnutrition": T("primary health care and malnutrition treatment: the deaths either averts rest on judgment and case series, not on trials against no treatment."),
+  "iodine-global-network-givewell": T("a model of salt iodization generally: the cost per person, coverage and the organisation's chance of making a difference are GiveWell's judgments, with no count of the people whose salt or iodine status IGN's support changed."),
   "new-incentives-expected-cost-effectiveness-2017-rct": T("a forecast made before the randomised trial of the programme reported: the effect on vaccination was a judgment."),
   "new-incentives-june-2019": T("before the trial of the programme reported (2020), the effect on vaccination was a judgment."),
   "new-incentives-june-2019-endline-updated-ni-early-2018": T("before the trial of the programme reported (2020), the effect on vaccination was a judgment."),

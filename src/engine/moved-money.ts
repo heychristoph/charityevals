@@ -72,11 +72,13 @@ export const TLYCS_DESTINATIONS: [string, string][] = [
   ["givedirectly", GIVEDIRECTLY],
   ["helen_keller_intl", "givewell:helen-keller-intl"],
   ["innovations_for_poverty_action", "givewell:innovations-for-poverty-action"],
+  ["iodine_global_network", "charityevals:iodine-global-network"],
   ["lafiya", "givewell:lafiya-nigeria"],
   ["malaria_consortium", "givewell:malaria-consortium"],
   ["new_incentives", "givewell:new-incentives"],
   ["one_acre_fund", "givewell:one-acre-fund"],
   ["raising_the_village", "raising-the-village-2024"],
+  ["teaching_at_the_right_level_africa", "the-life-you-can-save:teaching-at-the-right-level-africa"],
   ["unlimit_health", "sogive:unlimit-health"],
   ["village_enterprise", "charityevals:village-enterprise"],
 ];

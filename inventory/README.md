@@ -64,6 +64,11 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   - older reports superseded by the imported ones, cause explorations with no organisation, and
     methodology. `hli-reports.json` gives every report a status.
 
+## Lead Exposure Elimination Project (the charity's own analyses): `leep-models.json`
+
+- **Imported:** the January 2022 Malawi analysis, from the totals on LEEP's page (its Causal model no longer shows).
+- **Not imported:** the 2021 first version (superseded) and, for now, the 2024 analysis of 13 paint programmes.
+
 ## Founders Pledge and Giving Green
 
 Both asked us not to publish their models yet, so their inventories and models are not in this repository.
@@ -114,4 +119,12 @@ Both asked us not to publish their models yet, so their inventories and models a
   - 6 pages with no AIM estimate of their own (only literature figures, partial costs or none).
   - 5 private or deleted sheets; 1 breakeven analysis; 2 Fortify Health CEAs that are Fortify's own and already
     imported as GiveWell's.
+
+## The Life You Can Save: `the-life-you-can-save-models.json`
+
+- **Source so far:** one sheet, found while modelling Teaching at the Right Level Africa (November 2026): the
+  cost-effectiveness sheet linked from its Evaluation Hub page. The Evaluation Hub's other charities have not been
+  checked page by page yet.
+- **Imported:** TaRL Africa (learning-adjusted years of schooling per $100; our view turns the learning gain
+  into later earnings).
 
