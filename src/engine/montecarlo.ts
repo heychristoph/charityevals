@@ -169,11 +169,15 @@ function quantiles(xs: number[]) {
   return QUANTILES.map((p) => round(at(p)));
 }
 
-function summarise(xs: number[], smooth: number[], draws: number): Distribution | undefined {
+function summarise(xs: number[], smooth: number[], draws: number, negative = false): Distribution | undefined {
   if (xs.length < draws / 2) return undefined;
-  const q = quantiles(xs);
+  // Multiples of the best guess, in ascending order: the result's order unless the best guess is below
+  // zero (net harm, docs/normalization.md 2.21), where the largest multiple is the most harm. Stored in the
+  // result's order either way, so q[0] is always the lowest result.
+  const up = quantiles(xs);
+  const q = negative ? [...up].reverse() : up;
   // Reliability is judged on the smooth draws: a long shot's yes/no is meant to swing.
-  const s = smooth.length ? quantiles(smooth) : q;
+  const s = smooth.length ? quantiles(smooth) : up;
   const mid = s[9], lo = s[0], hi = s[s.length - 1];
   // Broken, not just wide: the middle far from the best guess, or an end more than 100× from it (either
   // way, harm included: a grant can do worse than the money's alternative).
@@ -181,7 +185,8 @@ function summarise(xs: number[], smooth: number[], draws: number): Distribution 
   return {
     q,
     mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
-    zero: round(xs.filter((x) => x <= 1e-6).length / xs.length),
+    // Draws whose result is at zero or below: multiples at or below zero, or for a negative best guess at or above.
+    zero: round(xs.filter((x) => (negative ? x >= -1e-6 : x <= 1e-6)).length / xs.length),
     ...(unstable ? { unstable: true } : {}),
     ...(smooth.length ? { middle: mid } : {}),
   };
@@ -195,7 +200,7 @@ export function simulate(lib: Library, m: ResolvedModel, draws = 1000, av?: Reco
   if (!p) return undefined;
   const xs: number[] = [], smooth: number[] = [];
   drawInto(p, draws, xs, smooth);
-  return summarise(xs, smooth, draws);
+  return summarise(xs, smooth, draws, p.central < 0);
 }
 
 /** The same, in batches that give the page back between them (a model page re-simulating after the
@@ -210,5 +215,5 @@ export async function simulateInSteps(lib: Library, m: ResolvedModel, av: Record
     drawInto(p, Math.min(batch, draws - done), xs, smooth);
     await new Promise((r) => setTimeout(r, 0));
   }
-  return cancelled() ? undefined : summarise(xs, smooth, draws);
+  return cancelled() ? undefined : summarise(xs, smooth, draws, p.central < 0);
 }

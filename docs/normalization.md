@@ -1414,6 +1414,11 @@ save buyers money), its lands and health 0.0011 → 0.0009, Union of Concerned S
 0.0017, Cancer Research UK 0.00165 → 0.00153 and the British Heart Foundation 0.0103 → 0.0102 (the
 Tobacco and Vapes Act's shops' lost profits); the Tax Justice Network's judged reporting cost leaves the
 side effects for the main chain (unchanged at the defaults). Each changed model had a verification round.
+### 2.21 Net harm shows as a negative result (15 Nov 2026)
+
+Owner: "negative is allowed". A model whose honest result is net harm keeps a headline below zero; the lint
+no longer rejects it. It ranks last, sits at the left edge of the log-scale bars with its number signed,
+and its simulation is stored in the result's order (5% the most harmful). First: Drug Policy Alliance.
 
 ## 3. Invariants
 

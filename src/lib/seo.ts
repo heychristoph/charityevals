@@ -46,7 +46,8 @@ export function defaultYears(m: ResolvedModel): number | undefined {
   if (!comparable(lib, m)) return undefined;
   const av = assumptionValues(lib.assumptions);
   const v = headline(lib, m, av);
-  return Number.isFinite(v) && v > 0 ? v : undefined;
+  // Below zero too: a net harm shows as one (docs/normalization.md 2.21).
+  return Number.isFinite(v) && v !== 0 ? v : undefined;
 }
 
 const spaced = (s: string) => s.replace(/\s+/g, " ").trim();

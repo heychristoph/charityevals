@@ -90,7 +90,9 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
       : line({ ...av, [id]: v }));
     swings.push(swing(id, a.label, "assumption", a.kind, low, high, at(low), at(high)));
   }
-  swings.sort((a, b) => b.logSwing - a.logSwing);
+  // Swings through zero have no log measure (Infinity): among them, the wider in the result's own units first.
+  const width = (s: Swing) => Math.abs(s.atHigh - s.atLow);
+  swings.sort((a, b) => b.logSwing - a.logSwing || width(b) - width(a));
 
   const joint = (wantHigh: boolean) => {
     const inputs: Record<string, number> = { ...edits };
@@ -107,10 +109,12 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
     return headline(lib, mm, a, inputs, view);
   };
 
-  const total = swings.reduce((t, s) => t + s.logSwing, 0);
+  // A swing through zero has no log measure: then every swing is measured in the result's own units.
+  const measure = swings.some((s) => s.logSwing === Infinity) ? width : (s: Swing) => s.logSwing;
+  const total = swings.reduce((t, s) => t + measure(s), 0);
   const judgment = swings
     .filter((s) => s.kind === "judgment" || s.scope === "assumption")
-    .reduce((t, s) => t + s.logSwing, 0);
+    .reduce((t, s) => t + measure(s), 0);
 
   return {
     central,
@@ -123,7 +127,8 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
 }
 
 function swing(id: string, label: string, scope: Swing["scope"], kind: Kind | undefined, low: number, high: number, atLow: number, atHigh: number): Swing {
-  const logSwing = atLow > 0 && atHigh > 0 ? Math.abs(Math.log(atHigh / atLow)) : Math.abs(atHigh - atLow) > 0 ? Infinity : 0;
+  // Both ends on one side of zero (a net harm's both below): the ratio of their sizes.
+  const logSwing = atLow * atHigh > 0 ? Math.abs(Math.log(atHigh / atLow)) : Math.abs(atHigh - atLow) > 0 ? Infinity : 0;
   return { id, label, scope, kind, low, high, atLow, atHigh, logSwing };
 }
 
@@ -154,8 +159,11 @@ export const THEORETICAL_TEXT = "Purely theoretical: an estimate of the idea, wr
 export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Flag[] {
   const out: Flag[] = [];
   if (m.theoretical) out.push({ level: "warn", short: "purely theoretical", text: THEORETICAL_TEXT });
-  const spread = s.jointHigh / s.jointLow;
-  if (spread > 100) out.push({ level: "warn", short: "wide range", text: `The plausible range spans about ${roughly(spread)}×` });
+  // A range below zero (net harm) spans the ratio of its ends' sizes; one through zero runs from harm to good.
+  const lo = Math.min(s.jointLow, s.jointHigh), hi = Math.max(s.jointLow, s.jointHigh);
+  const spread = hi < 0 ? lo / hi : hi / lo;
+  if (lo < 0 && hi > 0) out.push({ level: "warn", short: "wide range", text: "The plausible range runs from harm to good" });
+  else if (spread > 100) out.push({ level: "warn", short: "wide range", text: `The plausible range spans about ${roughly(spread)}×` });
   if (s.judgmentShare > 0.5) out.push({ level: "warn", short: "mostly judgment", text: `About ${Math.round(s.judgmentShare * 10) * 10}% of the uncertainty comes from judgment calls and shared assumptions` });
   if (s.pointInputs.length) out.push({ level: "info", short: "point inputs", text: `${s.pointInputs.length} inputs on the result's path have no published range, so this range leaves them out` });
   const published = m.source?.published ? new Date(m.source.published) : undefined;

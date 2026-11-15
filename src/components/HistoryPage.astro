@@ -45,11 +45,15 @@ const repo = "https://github.com/heychristoph/charityevals";
 // A small step chart of the result over the versions, on a log scale.
 const pts = entries.filter((e) => e.ours !== undefined);
 const vals = pts.map((e) => e.ours!);
-const [lo, hi] = vals.length ? [Math.min(...vals) / 1.3, Math.max(...vals) * 1.3] : [0.5, 2];
+// A version at or below zero (net harm, docs/normalization.md 2.21) has no log: the scale is then linear.
+const logScale = vals.every((v) => v > 0);
+const pad = 0.15 * ((Math.max(...vals) - Math.min(...vals)) || Math.abs(vals[0] ?? 1) || 1);
+const [lo, hi] = !vals.length ? [0.5, 2] : logScale ? [Math.min(...vals) / 1.3, Math.max(...vals) * 1.3] : [Math.min(...vals) - pad, Math.max(...vals) + pad];
 // Each point carries its result above and its date below; side padding keeps the end labels inside.
 const W = 640, H = 150, PX = 36, PT = 26, PB = 26;
 const x = (i: number) => (pts.length < 2 ? W / 2 : PX + (i * (W - 2 * PX)) / (pts.length - 1));
-const y = (v: number) => H - PB - ((Math.log(v) - Math.log(lo)) / (Math.log(hi) - Math.log(lo))) * (H - PT - PB);
+const at = (v: number) => (logScale ? (Math.log(v) - Math.log(lo)) / (Math.log(hi) - Math.log(lo)) : (v - lo) / (hi - lo));
+const y = (v: number) => H - PB - at(v) * (H - PT - PB);
 // A flat line says nothing: chart only when the result moved between versions.
 const moved = new Set(pts.map((e) => formatYears(e.ours!))).size > 1;
 const path = (get: (e: (typeof pts)[number]) => number | undefined) =>
