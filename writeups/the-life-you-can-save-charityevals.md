@@ -1,6 +1,6 @@
 ### Summary
 
-The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="the-life-you-can-save-charityevals">20</span> years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused, about three dollars for each dollar it spends. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
+The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="the-life-you-can-save-charityevals">17</span> years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused, about three dollars for each dollar it spends. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
 
 ### What the charity does
 
@@ -22,7 +22,7 @@ Only about half its recommended charities report such gifts, and fewer than 100 
 
 Not all of this giving happened because of it. Many donors give through it because it passes gifts on tax-deductibly, or would have found its charities anyway. It publishes no survey of what its donors would have done. So the model takes the site's shared figure for a charity that moves money without its own survey: it caused 30% of the giving (15% to 45%). That is about $7.3 million in 2025.
 
-A dollar moved is worth what its recipients achieve. The charity publishes its 2025 money moved by charity. Each of the 13 recipients modelled here is read live, under your values, at its figure on the rankings. The others, 21 charities and the emergency fund, have no model here. Together they took more than half the money, and they are valued at the average of the modelled ones.
+A dollar moved is worth what its recipients achieve. The charity publishes its 2025 money moved by charity. Each of the 13 recipients modelled here is read live, under your values, at its figure on the rankings. Two small climate recipients without a model take Clean Air Task Force's figure, the one climate charity modelled. The others, 18 charities and the emergency fund, have no model here. Together they took more than half the money, and they are valued at the average of the modelled ones.
 
 Half the giving it caused counts as new money. The other half would have gone to other charities, so it counts only for the gain over where it would have gone. Both are the site's shared figures for every charity that moves money.
 
@@ -34,18 +34,18 @@ Each dollar moved is valued at its recipients' figures, net of where shifted mon
 
 Its US entity received $250,000 of donated services in 2025. They are others' resources behind the same money moved, so its credit is its share of its cost and theirs, 91%.
 
-The result is multiplied by how much the next dollar does compared with the 2025 average: 39% (14% to 80%). From 2024 to 2025 its costs rose 43% and its money moved 18%: the extra cost came with about half the money moved per dollar of the year's average. Part of 2025's money moved was a one-off emergency fund. The US entity's work ran at a deficit while the Australian entity's ran at a surplus.
+The result is multiplied by how much the next dollar does compared with the 2025 average: 33% (11% to 76%). From 2024 to 2025 its costs rose 43% and its money moved 18%: the extra cost came with about half the money moved per dollar of the year's average. Part of 2025's money moved was a one-off emergency fund. The US entity ran a small deficit, while the Australian entity's operations ran surpluses that may hold more than a year of both entities' costs.
 
 Money moved is counted, not estimated, so the model takes no missing-data discount. Each recipient read live brings its own.
 
 ### What drives the result
 
-- **The next dollar** (39%, from 14% to 80%).
+- **The next dollar** (33%, from 11% to 76%).
 - **The share of the giving it caused** (the shared 30%, from 15% to 45%).
 - **Credit by share of resources.** When it's on, the donors' new money shares the credit with your dollar.
 - **The value of a young child's life, the discount rate and the worth of a healthy year in income.** These act through its recipients' own results.
 - **Where shifted money would otherwise have gone** (one times GiveDirectly, from 0 to 3 times).
-- Gifts nobody reported, the side effect and the emergency fund's credit move it by up to a fifth.
+- Gifts nobody reported, the side effect and the emergency fund's credit move it by up to a seventh.
 
 ### Where we differ from The Life You Can Save's own figures
 
@@ -56,14 +56,14 @@ The Life You Can Save reports its 3-year leverage ratio, money moved over costs:
 - **What a dollar moved is worth.** We value each recipient at its figure on the rankings.
 - **Gifts nobody reported.** It counts only the gifts reported to it. We add an allowance for the rest.
 - **The emergency fund and donated services.** We take out Founders Pledge's share of the fund it ran with it, and the donated services' share of the credit.
-- **The wait and the next dollar.** It reports an undiscounted average. We discount the wait for its grants and take 39% of the average for the next dollar.
+- **The wait and the next dollar.** It reports an undiscounted average. We discount the wait for its grants and take 33% of the average for the next dollar.
 - **Staff time.** We credit staff for the pay they give up, as in every model on the site (credit by share of resources, off by default).
 
 ### Biggest uncertainties
 
 - The share of the giving it caused. No survey of its own donors exists, so the figure comes from another organisation's donor surveys.
 - The recipients without a model here, more than half the money: Fistula Foundation, Sanku, Educate Girls, Living Goods, Village Enterprise, Teaching at the Right Level Africa and the emergency fund are the largest.
-- The next dollar: its 2025 money moved included a one-off emergency fund, and the two entities' finances point different ways.
+- The next dollar: its 2025 money moved included a one-off emergency fund, and the Australian entity's reserves weren't available to us.
 - Gifts nobody reported. Its own reports say they undercount, but not by how much, and the channels may overlap.
 
 ### What isn't modelled

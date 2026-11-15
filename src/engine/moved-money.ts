@@ -57,12 +57,16 @@ export const GLOBAL_HEALTH_DESTINATIONS = ["givewell:against-malaria-foundation"
 export const LIVELIHOODS = "cause:livelihoods";
 /** The Life You Can Save's own split of the money it moved in 2025 (facts/meta.json tlycs_moved_2025_*),
  * each charity at the figure the rankings show for it (`#owner:charity`), or at its model where it has no
- * figure on the rankings (Raising the Village). Its other charities have no model here and drop out:
- * they're valued at the average of these. A charity that gets a model joins the list (its fact is kept). */
+ * figure on the rankings (Raising the Village); its climate charities without a model at the one climate
+ * recipient modelled (Clean Air Task Force), their cause's average within the split. Its other charities
+ * have no model here and drop out: they're valued at the average of these. A charity that gets a model
+ * joins the list (its fact is kept). */
 export const TLYCS_DESTINATIONS: [string, string][] = [
   ["against_malaria_foundation", "givewell:against-malaria-foundation"],
+  ["carbon180", "charityevals:clean-air-task-force"],
   ["clean_air_task_force", "charityevals:clean-air-task-force"],
   ["development_media_international", "givewell:development-media-international"],
+  ["evergreen_collaborative", "charityevals:clean-air-task-force"],
   ["evidence_action", "givewell:evidence-action"],
   ["givedirectly", GIVEDIRECTLY],
   ["helen_keller_intl", "givewell:helen-keller-intl"],
@@ -96,7 +100,7 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
   value_tlycs_recommended: {
     id: "value_tlycs_recommended", format: "small", formula: tl,
     label: "Value of a dollar to The Life You Can Save's recommended charities (its 2025 split, live), units of value",
-    explainer: "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its figure on the rankings under your values (its programmes and locations weighted by funding; Evidence Action, for one: syphilis screening, iron and folic acid, deworming, in-line chlorination and Dispensers for Safe Water); a charity with no figure on the rankings (Raising the Village) at its model. The 13 charities with a model here took $11.3 million of the $24.1 million; the rest (21 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix.",
+    explainer: "The Life You Can Save's own published split of the money it moved in 2025, by charity, each charity at its figure on the rankings under your values (its programmes and locations weighted by funding; Evidence Action, for one: syphilis screening, iron and folic acid, deworming, in-line chlorination and Dispensers for Safe Water); a charity with no figure on the rankings (Raising the Village) at its model; Carbon180 and Evergreen Collaborative, climate charities without a model, at Clean Air Task Force's, the one climate recipient modelled. The 13 charities with a model here took $11.3 million of the $24.1 million; the rest (18 charities and its Rapid Response Fund, none modelled here) is valued at the average of these, so it drops out of the mix.",
   },
   prior_dollar_value: {
     id: "prior_dollar_value", format: "small", formula: `@meta.prior_vs_cash * #${CASH_BENCHMARK}`,
