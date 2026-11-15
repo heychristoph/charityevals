@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "The American Red Cross collects about 40% of the US blood supply (6.4 million blood products to some 2,500 hospitals in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 4 November 2026) and trains about 6 million people a year in CPR, first aid and water safety. Hospitals and course fees pay for both, and more than their cost (biomedical revenue $2.31 billion against $2.12 billion of expenses; programme-materials (mainly course) revenue $175 million against $143 million), so this model has weight 0 in what a donation to the Red Cross does; it shows what the work itself achieves per dollar spent on it, in years of healthy life per $1,000. Both branches are discounted for missing data: the deaths averted per blood product rest on judgments anchored on studies of patients who refused transfusion, and the training on registry studies of bystander CPR. The biggest uncertainty is the counterfactual: other US blood centres and course providers would supply most of it if the Red Cross didn't. The result is low because other providers would step in (only 15% of the outcome counted), the Red Cross's product is under a quarter of the resources behind each transfusion, both branches take the missing-data step, and a transfusion survivor lives about three-fifths of an average remaining life. Together the adjustments leave about 1% of the raw outcome; before them a death averted costs about $25,000 of blood; it is mostly uncertainty (the judgments behind deaths averted per product span a wide range).",
+  "summary": "The American Red Cross collects about 40% of the US blood supply (6.4 million blood products to some 2,500 hospitals in FY2025, the latest audited year) and trains about 6 million people a year in CPR, first aid and water safety. Hospitals and course fees pay for both, and more than their cost (biomedical revenue $2.31 billion against $2.12 billion of expenses; programme-materials (mainly course) revenue $175 million against $143 million), so this model has weight 0 in what a donation to the Red Cross does; it shows what the work itself achieves per dollar spent on it, in years of healthy life per $1,000. Both branches are discounted for missing data: the deaths averted per blood product rest on judgments anchored on studies of patients who refused transfusion, and the training on registry studies of bystander CPR. The biggest uncertainty is the counterfactual: other US blood centres and course providers would supply most of it if the Red Cross didn't. Four steps shrink the result: other providers would step in (20% of a year's outcome counted), the Red Cross's product is about a third of the resources behind each transfusion, both branches take the missing-data step, and a transfusion survivor lives about three-fifths of an average remaining life. Together the adjustments leave about 3% of the raw outcome; before them a death averted costs about $25,000 of blood. The judgments behind deaths averted per product span a wide range, so the result is mostly uncertainty.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross Biomedical and Training Services (FY2025)",
@@ -223,7 +223,7 @@
         "title": "American Red Cross, Annual Report, Fiscal Year 2025 (July 2024 - June 2025)",
         "url": "https://www.redcross.org/content/dam/redcross/about-us/publications/2025-publications/510901-02-FY25-Annual-Report-EN-Final.pdf",
         "retrieved": "2026-11-03",
-        "page": "p. 12, Biomedical Services highlights",
+        "page": "p. 11, Biomedical Services highlights",
         "quote": "6.4 million blood products provided to help patients."
       },
       "explainer": "Red cells, platelets, plasma and cryoprecipitate; the blood chain below counts per product, not per patient (a patient often gets several)."
@@ -256,7 +256,7 @@
         "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Trauma, obstetric, surgical and gastrointestinal haemorrhage; the rest goes to chronic anaemia (cancer, blood disorders, kidney disease) and prophylactic platelets. Anchor: US and UK audits of red-cell use put surgery and trauma at about a third to a half of units and medical (chronic) use at the rest."
+      "explainer": "Trauma, obstetric, surgical and gastrointestinal haemorrhage; the rest goes to chronic anaemia (cancer, blood disorders, kidney disease) and prophylactic platelets. Anchor: red-cell units by location in the US in 2023 (McDavid et al. 2025, Transfusion, NBCUS 2023, Table 3): surgery 1.22 million, emergency department 1.42 million, obstetrics 0.22 million, critical care 1.66 million and inpatient medicine (with haematology-oncology) 3.64 million of about 9.8 million; surgery, emergency and obstetrics plus half of critical care is about 0.38. About 0.35, from 0.2 to 0.5."
     },
     {
       "id": "bld_death_risk_without",
@@ -429,11 +429,11 @@
       "section": "adjustments",
       "label": "Blood: internal validity of the blood chain",
       "format": "multiple",
-      "explainer": "No trial withholds blood; the chain is built from audit shares and judgments about survival without transfusion. Anchor: the site's observational health effects at 0.5-0.8.",
+      "explainer": "The chain's inputs are best guesses, not a study estimate to correct; that no trial measures them is the missing-data step (bld_missing_data_adj), so no second discount here. From 0.8 to 1.1 for biases of either sign in the anchors (Carson's cohort of patients who refused blood includes only those who lived to a post-operative haemoglobin count, which biases the death risk down).",
       "value": {
-        "low": 0.5,
-        "best": 0.75,
-        "high": 1
+        "low": 0.8,
+        "best": 1,
+        "high": 1.1
       },
       "kind": "judgment"
     },
@@ -463,26 +463,69 @@
       "section": "adjustments",
       "label": "Blood: share of the outcome that wouldn't have happened anyway",
       "format": "percent",
+      "explainer": "One year's supply against one year's cost: the share of a year's Red Cross supply others wouldn't have replaced, times the value of the products hospitals then go without relative to the average product. The thinner disaster reserve is in other_unmodelled_share.",
+      "formula": "bld_unreplaced_share_year * bld_rationed_value_share"
+    },
+    {
+      "id": "bld_initial_unreplaced_share",
+      "section": "adjustments",
+      "label": "Blood: share of the Red Cross's supply other centres couldn't replace at first",
+      "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.4
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "If the Red Cross didn't collect, hospitals would buy from the other US blood centres (America's Blood Centers members and Vitalant supply the other 60%), which have expanded before when big suppliers changed. But the system runs with only a few days' stock: national shortage declarations (the Red Cross's January 2022 'national blood crisis', the 2024 emergency shortage) show that supply lost is not replaced at once, and hospitals then postpone surgery. What is lost without the Red Cross is mostly the transition (a year or two of a 40% gap filling) and a thinner reserve for disasters. About 0.15 of its product's value, from 0.05 (others replace it within months) to 0.4 (lasting shortfall)."
+      "explainer": "If the Red Cross didn't collect, hospitals would buy from the other US blood centres (America's Blood Centers members and Vitalant supply the other 60%), but the system runs with only a few days' stock: national shortage declarations (the Red Cross's January 2022 'national blood crisis', the 2024 emergency shortage) show lost supply isn't replaced at once. About 60% of its supply unreplaced at first, from 30% (others have spare collection capacity) to 85%."
+    },
+    {
+      "id": "bld_refill_years",
+      "section": "adjustments",
+      "label": "Blood: years for other centres to replace the Red Cross's supply",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 0.5,
+        "best": 1.5,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Replacing the Red Cross's 40% means the other centres' collection, testing and processing grows by two-thirds. Fast end: national stock recovered within weeks to months after the 2020 and January 2022 collection collapses, with the infrastructure intact, which bounds how fast donors return, not how fast capacity is built. Slow end: new collection sites, staff and testing labs for two-thirds more volume, which no US centre has built in a year. About a year and a half, from six months to three years, the gap closing steadily."
+    },
+    {
+      "id": "bld_unreplaced_share_year",
+      "section": "adjustments",
+      "label": "Blood: share of a year's Red Cross supply not replaced",
+      "format": "percent",
+      "formula": "bld_initial_unreplaced_share * (min(bld_refill_years, 1) - 0.5 * min(bld_refill_years, 1) * min(bld_refill_years, 1) / bld_refill_years)",
+      "explainer": "The initial gap closing in a straight line over bld_refill_years, averaged over one year: half the initial gap at a year."
+    },
+    {
+      "id": "bld_rationed_value_share",
+      "section": "adjustments",
+      "label": "Blood: deaths averted by the products hospitals go without, relative to the average product",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "explainer": "When supply falls, hospitals postpone elective surgery and transfuse at restrictive thresholds first, and US distributions exceed transfusions by about 650,000 red-cell units a year (McDavid et al. 2025, Transfusion, NBCUS 2023), slack that rationing uses first; trauma and haemorrhage are served last. About half the average product's deaths averted, from a quarter to 0.9."
     },
     {
       "id": "bld_attribution_share",
       "section": "adjustments",
       "label": "Blood: this charity's share of the resources behind the outcome",
       "format": "percent",
-      "explainer": "The Red Cross's full cost (overhead included, as in cost_total) against all the resources behind the transfusions: its own cost, the hospitals' costs of transfusing beyond the purchase price, and the donors' time at the US value of an hour: about a quarter.",
-      "formula": "bio_spend * overhead_ratio / (bio_spend * overhead_ratio + (bld_abc_cost_multiple - 1) * bio_revenue + bld_donations * bld_hours_per_donation * trn_hour_value)"
+      "explainer": "The Red Cross's full cost (overhead included, as in cost_total) against all the resources behind the transfusions: its own cost, the hospitals' costs of transfusing beyond the purchase price (red cells at Shander's multiple, platelets and plasma at their own), and the donors' time at the US value of an hour: about a third.",
+      "formula": "bio_spend * overhead_ratio / (bio_spend * overhead_ratio + (bld_abc_cost_multiple - 1) * bld_rbc_revenue_share * bio_revenue + (bld_other_handling_multiple - 1) * (1 - bld_rbc_revenue_share) * bio_revenue + bld_donations * bld_hours_per_donation * us_hour_value)"
     },
     {
       "id": "bld_abc_cost_multiple",
       "section": "adjustments",
-      "label": "Full cost of transfusing a unit, as a multiple of its purchase price",
+      "label": "Full cost of transfusing a red-cell unit in surgery, as a multiple of its purchase price",
       "format": "multiple",
       "value": {
         "low": 3.2,
@@ -496,7 +539,33 @@
         "retrieved": "2026-11-04",
         "quote": "3.2- to 4.8-fold higher than blood product acquisition costs"
       },
-      "explainer": "Activity-based costing at four hospitals: testing, storage, administration and monitoring make the full cost several times the purchase price. Midpoint 4."
+      "explainer": "Activity-based costing of red-cell transfusions to surgical patients at four hospitals: testing, storage, administration and monitoring make the full cost several times the purchase price. Midpoint 4. It is for red cells only, so it applies to the red-cell part of the revenue (bld_rbc_revenue_share); platelets and plasma take bld_other_handling_multiple."
+    },
+    {
+      "id": "bld_rbc_revenue_share",
+      "section": "adjustments",
+      "label": "Share of biomedical revenue from red cells",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.55,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "US distributions in 2023 were 10.98 million red cells, 2.62 million platelets and 3.03 million plasma units (McDavid et al. 2025, Transfusion, NBCUS 2023). By our judgment an apheresis platelet costs a hospital a few times a red-cell unit and plasma well under one, so red cells are about 55% of what hospitals pay nationally, from 45% (the Red Cross's mix may hold more platelets: 1.1 million of its 5.7 million donations are platelet donations, annual report p. 11) to 70%."
+    },
+    {
+      "id": "bld_other_handling_multiple",
+      "section": "adjustments",
+      "label": "Full cost of transfusing a platelet or plasma unit, as a multiple of its purchase price",
+      "format": "multiple",
+      "value": {
+        "low": 1.3,
+        "best": 1.75,
+        "high": 2.5
+      },
+      "kind": "judgment",
+      "explainer": "Platelets and plasma go through the same issue, administration and monitoring steps Shander et al. cost for red cells (about $761 a red-cell unit all in, acquisition included). Platelets, about nine-tenths of this revenue, add about half their high price in handling; plasma's handling is several times its low price, but it is about a tenth of the revenue. Together about 1.75, from 1.3 to 2.5."
     },
     {
       "id": "bld_donations",
@@ -533,12 +602,12 @@
       "label": "Blood: delivery adjustment (fidelity, compliance, follow-through)",
       "format": "percent",
       "value": {
-        "low": 0.9,
-        "best": 0.95,
-        "high": 1
+        "low": 0.8,
+        "best": 0.87,
+        "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Products distributed that expire unused in hospitals (a few per cent of red cells, more for platelets)."
+      "explainer": "Products transfused over products distributed in the US in 2023 (McDavid et al. 2025, Transfusion, NBCUS 2023): red cells 10.33 of 10.98 million (94%), platelets 2.22 of 2.62 (85%), plasma 1.88 of 3.03 (62%); about 0.87 at the national mix, from 0.8 (the Red Cross's mix holds more platelets) to 0.95."
     },
     {
       "id": "bld_leverage_funging_adj",
@@ -641,7 +710,7 @@
     {
       "id": "other_unmodelled_share",
       "section": "adjustments",
-      "label": "Other benefits and harms not modelled, as a share of modelled value",
+      "label": "Blood: other benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
       "value": {
         "low": -0.05,
@@ -649,7 +718,15 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Health screening for donors (the Red Cross notifies donors with high blood pressure and other findings) (+), the national disaster reserve (+), drownings averted by water safety and first aid beyond CPR (+); transfusion reactions and infections (−, very rare) and CPR survivors left with brain injury (−)."
+      "explainer": "Health screening for donors (the Red Cross notified donors of about 69,000 high blood pressure and 80,000 A1C findings, annual report p. 11) (+), the national disaster reserve (+); transfusion reactions and infections (−, very rare), donor iron deficiency and donation reactions (−, small). The training branch's are in trn_unmodelled_share."
+    },
+    {
+      "id": "bld_value_weight",
+      "section": "adjustments",
+      "label": "Blood's share of the modelled value",
+      "format": "percent",
+      "formula": "1 - trn_deaths_averted * trn_value_per_death * trn_survivor_life_share / (uov_deaths + uov_from_daly)",
+      "explainer": "Weights each branch's own side-effect share by its value."
     },
     {
       "id": "unmodelled_benefits_adj",
@@ -657,8 +734,8 @@
       "section": "adjustments",
       "label": "Benefits and harms not modelled, as a share of modelled value",
       "format": "percent",
-      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + other_unmodelled_share",
-      "explainer": "GiveWell-style supplementary adjustments, each its own row, summed: they add to the modelled value as one share, as in GiveWell's sheets."
+      "formula": "treatment_costs_share + rebound_share + investment_of_income_share + bld_value_weight * other_unmodelled_share + (1 - bld_value_weight) * trn_unmodelled_share",
+      "explainer": "Supplementary adjustments, each its own row, summed (each branch's own share weighted by its value): they add to the modelled value as one share."
     },
     {
       "id": "trn_people_trained",
@@ -781,7 +858,7 @@
       "label": "Cardiac-arrest deaths averted by a year's trainees (before adjustments)",
       "format": "number",
       "formula": "trn_people_trained * trn_cpr_share * trn_ohca_per_year * trn_bystanders_per_arrest / trn_us_population * trn_extra_cpr_prob * trn_survival_gain * pv_annuity_due(1, $discount_rate, trn_skill_years)",
-      "explainer": "Trainees × CPR share × yearly chance of being at an arrest × extra chance of acting × extra survival × discounted years. About 160, against the 230 lives the Red Cross credited to its trainees in FY2025 (annual report p. 15, its lifesaving awards, many of whom would have been saved anyway)."
+      "explainer": "Trainees × CPR share × yearly chance of being at an arrest × extra chance of acting × extra survival × discounted years. About 160, against the 230 lives the Red Cross credited to its trainees in FY2025 (annual report p. 14, its lifesaving awards, many of whom would have been saved anyway)."
     },
     {
       "id": "trn_evidence_adj",
@@ -789,12 +866,25 @@
       "label": "Training: evidence adjustment",
       "format": "multiple",
       "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.8
+        "low": 0.5,
+        "best": 0.75,
+        "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "The survival effect is observational, survivors are sometimes left with brain damage, and the chain's middle steps are judgments. Anchor: the blood chain's 0.75, lower for more steps."
+      "explainer": "The survival effect of bystander CPR is from registries (observational: arrests that get bystander CPR are often found sooner), so it is shaded to about three-quarters, from a half to 0.95. The chain's other steps are judgments, which is the missing-data step, and survivors' brain injury is in trn_unmodelled_share."
+    },
+    {
+      "id": "trn_unmodelled_share",
+      "section": "adjustments",
+      "label": "Training: benefits and harms not modelled, as a share of the training deaths' value",
+      "format": "percent",
+      "value": {
+        "low": -0.1,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Drownings averted by water safety and lifeguarding (more than 30,000 trained) and first aid beyond CPR (choking, bleeding) (+); CPR survivors left with brain injury (−). About +10%, from −10% to +30%."
     },
     {
       "id": "trn_counterfactual_adj",
@@ -824,9 +914,9 @@
       "explainer": "Blended First Aid/CPR/AED courses take about 2-5 hours, Basic Life Support about 3-4, lifeguarding much longer."
     },
     {
-      "id": "trn_hour_value",
+      "id": "us_hour_value",
       "section": "adjustments",
-      "label": "Value of an hour of a trainee's time (US$)",
+      "label": "Value of an hour of unpaid time, US (trainees and blood donors) (US$)",
       "format": "usd",
       "explainer": "The site's US value of an hour of unpaid time, 2024 (@united_states.volunteer_hour_value_2024, Independent Sector: the BLS wage plus fringe benefits), as for the Red Cross's volunteers in the disaster model; also prices the blood donors' time.",
       "formula": "@united_states.volunteer_hour_value_2024"
@@ -836,7 +926,7 @@
       "section": "adjustments",
       "label": "Training: the Red Cross's share of the resources behind it",
       "format": "percent",
-      "formula": "trn_spend * overhead_ratio / (trn_spend * overhead_ratio + trn_people_trained * trn_course_hours * trn_hour_value)",
+      "formula": "trn_spend * overhead_ratio / (trn_spend * overhead_ratio + trn_people_trained * trn_course_hours * us_hour_value)",
       "explainer": "Course costs (overhead included) against the trainees' (or their employers') own hours on the course, which are most of the resources: about 0.15. Licensed partner instructors teaching Red Cross courses are counted at zero (their cost isn't published), so this errs high."
     },
     {
@@ -1183,7 +1273,7 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Haematology and oncology patients through chemotherapy and stem-cell transplant, severe aplastic anaemia, thalassaemia major and sickle-cell crises: without platelet and red-cell support their treatment can't be given and many would die. Reference: of the 14.4 million components transfused in the US in 2023 (10.3 million red cells, 2.2 million platelets, 1.9 million plasma: McDavid et al. 2025, Transfusion, NBCUS 2023), platelets, about 15%, go mostly to haematology-oncology patients, who also take a large share of medical red-cell use. So about 40% of the non-acute products (about a quarter of all), from 20 to 60%. No US survey splits use by diagnosis."
+      "explainer": "Haematology and oncology patients through chemotherapy and stem-cell transplant, severe aplastic anaemia, thalassaemia major and sickle-cell crises: without platelet and red-cell support their treatment can't be given and many would die. Reference: of the 14.4 million components transfused in the US in 2023 (10.3 million red cells, 2.2 million platelets, 1.9 million plasma: McDavid et al. 2025, Transfusion, NBCUS 2023), platelets are about 15% of components, a third or more of them in inpatient medicine including haematology-oncology, whose patients also take a large share of medical red-cell use. So about 40% of the non-acute products (about a quarter of all), from 20 to 60%. No US survey splits use by diagnosis."
     },
     {
       "id": "bld_dependent_death_risk",
