@@ -1,6 +1,6 @@
 # Audit: ican-charityevals, round 3
 Result: 0.007595 daly/$ = 7.6 years of healthy life per 1,000 dollars (combined range 0.27–217; model's own ranges 0.12–630). Verdict: pass (one low finding on a citation's wording).
-Model-sha: 4ae5e3c4219707625532312808c2970a14c6da7eded449512f986a562b68a190
+Model-sha: ceab2693764b8019fc1133cd4113fb3f3cf69e3ef7346c1af3325287610e8fb9
 Scope: scoped verification of the four round-2 fixes (commit 8e359e1) and the write-up. Nothing else re-audited.
 
 Fixes against the round-2 findings:
@@ -27,3 +27,4 @@ Nothing else was changed or re-checked; no new double counting from the four fix
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
