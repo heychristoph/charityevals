@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-humane-league",
   "owner": "charityevals",
-  "summary": "The Humane League's grants of 2025 ($4.26 million), each counted as what the recipients did with the money: $1.76 million to Open Wing Alliance groups abroad for corporate cage-free and broiler campaigns (credited with the grants' share of the alliance's 2025 wins outside the US: 216 new cage-free policies, restored pledges such as REWE's, 18 broiler policies implemented), $2.15 million to The Humane League UK (Tesco's and Aldi's space commitments for 240 million broilers a year, won in its year and delivered since, UK hens moved out of cages, and its part in a UK cage ban and in the legal case against fast-growing breeds, both counted at their chance), and $0.35 million to US policy groups (defending state cage-free sales laws against federal preemption, and local food-policy wins). Each grant buys a small share of wins that many groups share, and every branch rests on counts or chances we judged, so all are discounted for missing data. The US sales laws and the UK cage ban count their compliance costs from the regulators' own analyses, which outweigh the hens' and sows' gain in those two branches. The biggest uncertainties are those costs, how much more space does for a broiler of a fast-growing breed (the UK space commitments are two thirds of the result), THL UK's share of the supermarket campaigns, the long shot of the breed case, and the hens behind an average new pledge abroad.",
+  "summary": "The Humane League's grants of 2025 ($4.26 million), each counted as what the recipients did with the money: $1.76 million to Open Wing Alliance groups abroad for corporate cage-free and broiler campaigns (credited with the grants' share of the alliance's 2025 wins outside the US: 216 new cage-free policies, restored pledges such as REWE's, 18 broiler policies implemented), $2.15 million to The Humane League UK (Tesco's and Aldi's space commitments for 240 million broilers a year, won in its year and delivered since, UK hens moved out of cages, and its part in a UK cage ban and in the legal case against fast-growing breeds, both counted at their chance), and $0.35 million to US policy groups (defending state cage-free sales laws against federal preemption, and local food-policy wins). Each grant buys a small share of wins that many groups share, and every branch rests on counts or chances we judged, so all are discounted for missing data. The US sales laws and the UK cage ban count their compliance costs from the regulators' own analyses, which outweigh the hens' and sows' gain in those two branches. The biggest uncertainties are those costs, how much more space does for a broiler of a fast-growing breed (the UK space commitments are the largest branch), THL UK's share of the supermarket campaigns, the long shot of the breed case, and the hens behind an average new pledge abroad.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Humane League's grants (Open Wing Alliance, THL UK, Animal Policy Alliance), 2025",
@@ -152,17 +152,39 @@
       "formula": "grants_domestic"
     },
     {
-      "id": "apa_grant_federal_share",
+      "id": "legal_defence_gift",
       "section": "cost",
-      "label": "Share of the US grants spent opposing federal preemption",
-      "format": "percent",
+      "label": "Of the US grants, the gift to the Animal Activist Legal Defense Project",
+      "format": "usd",
+      "value": 50000,
+      "kind": "observed",
+      "source": {
+        "title": "The Humane League, Form 990 for 2025 (public disclosure copy)",
+        "url": "https://assets.ctfassets.net/ww1ie0z745y7/6WLliKUVCOcObDcOcBy98N/677ca120386240c5bae939727477b922/THL_Public_Disclosure_Copy_990.pdf",
+        "page": "Schedule I Part II",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "Not a campaign grant: it defends activists in court, so it counts through the side-effect row on stronger groups, not the US branches' credit."
+    },
+    {
+      "id": "apa_grant_federal",
+      "section": "cost",
+      "label": "Of the APA grants, the part spent opposing federal preemption",
+      "format": "usd",
       "value": {
-        "low": 0.05,
-        "best": 0.2,
-        "high": 0.5
+        "low": 5000,
+        "best": 15000,
+        "high": 35000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: most of the grants paid for members' state and local campaigns; a part went to federal work (the Missouri Alliance for Animal Legislation, Strategic Action for Animals). 0.2, range 0.05-0.5."
+      "explainer": "Our judgment: THL's 2025 announcement of the grants ($295K to 12 members) names no project on the EATS language, the 'Save Our Bacon' Act or the Farm Bill; only the Missouri Alliance for Animal Legislation names federal lobbying, and Humane Action Pennsylvania federal priorities. About $15,000, range $5,000-35,000."
+    },
+    {
+      "id": "apa_grant_local",
+      "section": "cost",
+      "label": "Of the APA grants, the part spent on state and local campaigns",
+      "format": "usd",
+      "formula": "apa_grant - legal_defence_gift - apa_grant_federal"
     },
     {
       "id": "def_share_of_total",
@@ -688,7 +710,11 @@
       "section": "reach",
       "label": "Share of the US population in states with cage-free sales laws",
       "format": "percent",
-      "value": 0.23,
+      "value": {
+        "low": 0.23,
+        "best": 0.23,
+        "high": 0.27
+      },
       "kind": "observed",
       "source": {
         "title": "USDA ERS, Amber Waves (April 2023)",
@@ -696,7 +722,7 @@
         "retrieved": "2026-11-13",
         "quote": "by 2026 more than 23 percent of the U.S. population would reside in States with retail sales restrictions"
       },
-      "explainer": "USDA's Economic Research Service; eggs are eaten roughly in proportion to population, so about this share of US hens supply those states."
+      "explainer": "USDA's Economic Research Service, the same as the other-programmes model's (ERS says 'more than' 23%; Arizona, Utah and Rhode Island add about 3.5 points, the high end); eggs are eaten roughly in proportion to population, so about this share of US hens supply those states."
     },
     {
       "id": "apadef_hens",
@@ -737,7 +763,7 @@
         "quote": "approximately 700,000 sows would be needed to meet historical demand levels in California",
         "retrieved": "2026-11-13"
       },
-      "explainer": "The same as the other-programmes model's: sows housed to Proposition 12's standard to supply California, which the 'Save Our Bacon' Act would undo (Massachusetts's Question 3 adds a little). Low end, our judgment: the testimony gives only the 700,000 needed; fewer sows were compliant at the law's start. Veal calves, also covered, are a few tens of thousands and left out."
+      "explainer": "The same as the other-programmes model's: sows housed to Proposition 12's standard to supply California, which the 'Save Our Bacon' Act would undo (Massachusetts's Question 3 adds a little). Low end, our judgment: the testimony gives only the 700,000 needed; fewer sows were compliant at the law's start. Veal calves, also covered (and in the cost), are left out: the veal market supplying California is small (our judgment, a few tens of thousands of calves a year), so the gain left out is small beside the sows'."
     },
     {
       "id": "apadef_cost_egg_share",
@@ -757,7 +783,7 @@
         "quote": "Egg producers in California face higher costs by $72 million",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Our judgment, the same as the other-programmes model's: the notice puts most of the gross on eggs ($40 of $50 a person), but retailers' extra egg margin (about $970 million, a transfer) is nearly all of that egg spending, so the net egg part is about California's egg producers' $72 million of the roughly $300 million net: 0.25. Range 0.05 to 0.5."
+      "explainer": "Our judgment, the same as the other-programmes model's: the notice puts most of the gross on eggs ($40 of $50 a person), but retailers' extra egg margin (about $970 million, a transfer) is nearly all of that egg spending, so we take the net egg part to be about the size of California's egg producers' $72 million against the roughly $300 million net: 0.25. The net is built from spending and the Department of Finance notes producers' costs are not quantified, so this is a judgment, not an identity. Range 0.05 to 0.5."
     },
     {
       "id": "ca_pop_share",
@@ -1391,7 +1417,7 @@
       "section": "adjustments",
       "label": "The APA grants' share of all resources opposing preemption in 2025",
       "format": "percent",
-      "formula": "apa_grant * apa_grant_federal_share / (apa_grant * apa_grant_federal_share + def_share_of_total * program_expenses + def_coalition_spend)",
+      "formula": "apa_grant_federal / (apa_grant_federal + def_share_of_total * program_expenses + def_coalition_spend)",
       "explainer": "The grants' federal part over all resources against preemption: itself, THL's own policy work and the other groups' (the same pool as the other-programmes model's)."
     },
     {
@@ -1412,7 +1438,7 @@
       "section": "adjustments",
       "label": "The APA grants' share of the resources behind the food-policy wins",
       "format": "percent",
-      "formula": "apa_grant * (1 - apa_grant_federal_share) / (apa_share_of_total * program_expenses + apa_members_spend)",
+      "formula": "apa_grant_local / (apa_share_of_total * program_expenses + apa_members_spend)",
       "explainer": "The grants' local part over the Alliance's whole pool (THL's Alliance spending, grants included, and the members' own), the same pool as the other-programmes model's."
     },
     {
@@ -2005,7 +2031,7 @@
         "high": 0.05
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as a share of the modelled result: cage eggs a pledged buyer stops taking can be sold to others (leakage), and dearer cage-free eggs move a few buyers to chicken meat, more animals per calorie; fewer eggs bought offsets part. For the broilers given more space (two thirds of the result), dearer chicken sold under the commitments moves some buyers to other chicken or to pork, and fewer birds are raised for the same meat; the two roughly offset, so the same range covers them. A harm, so negative.",
+      "explainer": "Our judgment, as a share of the modelled result: cage eggs a pledged buyer stops taking can be sold to others (leakage), and dearer cage-free eggs move a few buyers to chicken meat, more animals per calorie; fewer eggs bought offsets part. For the broilers given more space (the largest branch), dearer chicken sold under the commitments moves some buyers to other chicken or to pork, and fewer birds are raised for the same meat; the two roughly offset, so the same range covers them. A harm, so negative.",
       "side_effect": "added"
     },
     {
