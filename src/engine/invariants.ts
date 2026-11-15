@@ -1018,6 +1018,7 @@ export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]
   { id: "investment-of-income", test: /\binvestment of income increases\b/i, facts: ["givewell_shared.investment_of_income_increases", "givewell_shared.investment_of_income_increases_nets", "givewell_shared.investment_of_income_increases_vas", "givewell_shared.investment_of_income_increases_deworming"] },
   { id: "long-term-benefit-years", test: /\b(years|duration)\b[^.;]{0,30}\b(long[- ]term|income|earnings?)\b[^.;]{0,20}\b(benefits?|gains?|increases?|effects?)\b[^.;]{0,20}\b(last|persist|counted)|\bduration of (long[- ]term )?(income|earnings) (benefits?|gains?|effects?)\b/i, not: /until|before|start|delay/i, facts: ["givewell_shared.long_term_benefit_years"] },
   { id: "wage-gain-per-iq-point", test: /\b(wages?|income|consumption|earnings)\b[^.;]{0,40}\b(iq|1 point)\b/i, facts: ["givewell_shared.wage_gain_per_iq_point"] },
+  { id: "iq-per-blood-lead", test: /\biq\b[^.;]{0,50}\b(per|each|a)\s*(1\s*)?(µg|μg|ug|microgram)/i, facts: ["lead.iq_points_per_ug_dl"] },
   { id: "cf-value-government", test: /\bcounterfactual value\b[^.;]{0,40}\b(government|domestic)\b/i, facts: ["givewell_shared.cf_value_government"], context: (t) => (/india/i.test(t) ? "India" : undefined) },
   // Per dollar, not "as percentage of value of AMF spending" (a ratio, another quantity).
   { id: "cf-value-global-fund", test: /\bcounterfactual value\b[^.;]{0,40}\b(global fund|pmi)\b/i, not: /percent|% of|as a share/i, facts: ["givewell_shared.cf_value_global_fund"] },

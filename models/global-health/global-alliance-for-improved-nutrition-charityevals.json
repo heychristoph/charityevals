@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "global-alliance-for-improved-nutrition",
   "owner": "charityevals",
-  "summary": "GAIN, a Geneva foundation, spent 61.6 million dollars on programmes in its year to June 2025: helping governments and food companies fortify salt, flour, oil and rice (1.55 billion people reached, by its own count), building markets and small businesses for nutritious food in Africa and Asia, workplace nutrition, and food-systems planning and policy. We estimate about 0.7 years of healthy life per 1,000 dollars, almost all from fortification: children's later earnings from iodized salt and less anaemia from iron-fortified food. The biggest uncertainty is how much of the yearly benefit of long-running national fortification programmes depends on GAIN's support (we credit GAIN with about a tenth of the resources, and a quarter of the benefit as depending on support), and everything but the anaemia effect, which comes from evaluations of real fortification programmes, is discounted for missing data. The dollar is a past average (a year's spending over what it reached, not a price per item), so the result is scaled by our figure for GAIN's next dollar. With every judgment this uncertain, the result is mostly uncertainty: from a few hundredths to several years per 1,000 dollars.",
+  "summary": "GAIN, a Geneva foundation, spent 61.6 million dollars on programmes in its year to June 2025: helping governments and food companies fortify salt, flour, oil and rice (1.55 billion people reached, by its own count), building markets and small businesses for nutritious food in Africa and Asia, workplace nutrition, and food-systems planning and policy. We estimate about 0.6 years of healthy life per 1,000 dollars, almost all from fortification: children's later earnings from iodized salt and less anaemia from iron-fortified food. The biggest uncertainty is how much of the yearly benefit of long-running national fortification programmes depends on GAIN's support (we credit GAIN with about a tenth of the resources, and a quarter of the benefit as depending on support), and everything but the anaemia effect, which comes from evaluations of real fortification programmes, is discounted for missing data. The dollar is a past average (a year's spending over what it reached, not a price per item), so the result is scaled by our figure for GAIN's next dollar. With every judgment this uncertain, the result is mostly uncertainty: from a few hundredths to several years per 1,000 dollars.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Global Alliance for Improved Nutrition (GAIN)",
@@ -488,26 +488,35 @@
         "high": 18
       },
       "kind": "judgment",
-      "explainer": "Anchored on GiveWell's salt iodization model (Iodine!B17, 15 years by definition): the full benefit comes from iodine throughout 15 years of childhood, so a year of iodized salt gives a fifteenth of it. The range is ours: the benefit may come mostly in fewer early years (in the womb and the first years of life)."
+      "explainer": "Anchored on GiveWell's salt iodization model (Iodine!B17, 15 years by definition), the full benefit spread over 15 years of childhood. Children under 15 over these 15 years (0.32 ÷ 15 = 2.1% a year) is about the yearly births per person in GAIN's countries, weighted towards Asia, so each year of iodized salt protects about one year's births in pregnancy and infancy, when iodine matters most (the IQ gap below is in children up to five). The range is ours."
     },
     {
-      "id": "ff_iq_gain_sd",
+      "id": "ff_iq_points_deficient",
       "section": "effect",
-      "label": "IQ gain from iodine throughout childhood (standard deviations)",
+      "label": "IQ points lower in iodine-deficient children than in iodine-replete ones (meta-analysis)",
       "format": "number",
+      "unit": "IQ points",
+      "formula": "@iodine.iq_points_deficient_vs_replete",
+      "explainer": "The site's one figure (@iodine.iq_points_deficient_vs_replete: 7.5 points, 5 to 10), from a meta-analysis of trials and cohorts in children up to five, mostly in moderate to severe deficiency; the milder deficiency of GAIN's countries is the next row."
+    },
+    {
+      "id": "ff_severity_vs_meta",
+      "section": "effect",
+      "label": "IQ loss iodized salt prevents in GAIN's countries, relative to the meta-analysis's",
+      "format": "percent",
       "value": {
-        "low": 0.18,
-        "best": 0.25,
-        "high": 0.36
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.7
       },
-      "kind": "estimate",
+      "kind": "judgment",
       "source": {
         "title": "GiveWell, salt iodization cost-effectiveness analysis (Parameters, row 55)",
         "url": "https://docs.google.com/spreadsheets/d/1NhGAq9X1e7OsyUeI_h1fNGGrTMQAXTIoIq7EM151CD0/edit",
         "cell": "Parameters!G55",
         "retrieved": "2026-11-15"
       },
-      "explainer": "A quarter of a standard deviation (about 4 IQ points) where deficiency is mild to moderate, GiveWell's reading of the randomised trials (Zimmermann et al. 2006, Gordon et al. 2009 average 0.24); range from GiveWell's low and high cases."
+      "explainer": "Our judgment, anchored on GiveWell's salt iodization model: a quarter of a standard deviation (about 4 IQ points) where deficiency is mild to moderate, its reading of the randomised trials (Zimmermann et al. 2006, Gordon et al. 2009 average 0.24), 0.18 to 0.36 SD in its low and high cases. Against the meta-analysis's 7.5 points (0.5 SD) that is half, from 0.35 to 0.7, the same half the site's Iodine Global Network model takes for mild to moderate deficiency."
     },
     {
       "id": "ff_lasting_share",
@@ -527,16 +536,16 @@
       "section": "effect",
       "label": "Yearly gain in ln(earnings) in adulthood per person reached, from iodine",
       "format": "small",
-      "formula": "ff_iodine_share * ff_share_under15 / ff_childhood_years * ff_iq_gain_sd * @givewell_shared.iq_points_per_sd * @givewell_shared.wage_gain_per_iq_point * ff_lasting_share",
-      "explainer": "Per person-year of iodized salt: the children's share of the people reached, a fifteenth of the full childhood benefit, the IQ gain in points at the site's one wage gain per IQ point (GiveWell's 0.67%), less fade-out."
+      "formula": "ff_iodine_share * ff_share_under15 / ff_childhood_years * ff_iq_points_deficient * ff_severity_vs_meta * @givewell_shared.wage_gain_per_iq_point * ff_lasting_share",
+      "explainer": "Per person-year of iodized salt: the children's share of the people reached, a fifteenth of the full childhood benefit, the IQ points kept at the site's one wage gain per IQ point (GiveWell's 0.67%), less fade-out."
     },
     {
       "id": "years_until_income_gain",
       "section": "effect",
       "label": "Years from childhood exposure until the earnings gain starts",
       "format": "number",
-      "formula": "@givewell_shared.years_until_income_benefits_iron",
-      "explainer": "The site's figure for a childhood micronutrient (iron fortification or supplementation, 10 years), the closest to iodine: GiveWell's iodine sheet also waits 10 years."
+      "formula": "@iodine.years_until_income_benefits_iodine",
+      "explainer": "The site's one figure for iodine (@iodine.years_until_income_benefits_iodine: 15 years, 12 to 20): the gain from protecting a child in pregnancy and infancy starts when that child starts work."
     },
     {
       "id": "years_income_gain_lasts",

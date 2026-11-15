@@ -24,9 +24,10 @@ Summary and write-up: both match the live result (0.29, about three times the me
 Unchanged: missing_data_discount, uov_per_daly, relief_counterfactual_adj, affected_consumption_share, health_cost_per_child. The aid multiple is not among them.
 
 Verdict: pass
-Model-sha: dbe4031b5da4dda3ce76d1543eac614376327d2eaea84a44f40d2c5b46bae1e5
+Model-sha: 26cc14b02951bef93c52c4e8e8bbb34d75b915b3009a48dddae3ed890e5d4971
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (15 Nov 2026): donated goods and food commodities moved from the cost to the credit shares (Convention 2; a judged 10% handling cost for the goods); the income-mortality ratio read from the shared fact; consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); the summary's relief share now "more than half"; 0.290 → 0.268.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)
