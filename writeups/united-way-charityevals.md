@@ -1,8 +1,8 @@
 ### Summary
 
-United Way is a network of about 1,100 local United Ways in the US, led by United Way Worldwide, that raises money mostly through workplace giving campaigns and spends it on grants to local social-service agencies, the 211 helplines, free tax filing and programmes of its own. Our estimate for the whole network's programme spending is **<span data-figure="headline" data-model="united-way-charityevals">0.010</span> years of healthy life per $1,000** (from about 0.0007 to 0.14 with every range combined).
+United Way is a network of about 1,100 local United Ways in the US, led by United Way Worldwide, that raises money mostly through workplace giving campaigns and spends it on grants to local social-service agencies, the 211 helplines, free tax filing and programmes of its own. Our estimate for the whole network's programme spending is **<span data-figure="headline" data-model="united-way-charityevals">0.011</span> years of healthy life per $1,000**.
 
-That is low, mainly because the help goes to people in the US, who consume around $41,000 a year each (the poorest fifth about $39,000): on the site's one log-income scale a dollar of food or rent help does about a sixtieth of what it does for a household living on about $2 a day, and the services are bought at US prices. United Way measures none of its outcomes itself, so every branch is built from the research on its kind of work and counts at the site's missing-data slider (default 50%). Most of the result is children's and youth programmes: the US trials of tutoring, mentoring and early learning imply a small but lifelong gain in earnings.
+That is low, mainly because the help goes to people in the US: food and rent help to households consuming about $10,000 a person a year, other services to people consuming about $23,000. On the site's one log-income scale a dollar for them does a thirteenth to a thirtieth of what it does for a household living on about $2 a day, and the services are bought at US prices. United Way measures none of its outcomes itself, so every branch is built from the research on its kind of work and counts at the site's missing-data slider (default 50%). Most of the result is children's and youth programmes: the US trials of tutoring, mentoring, early learning and after-school programmes imply a small but lifelong gain in earnings.
 
 ### What the charity does
 
@@ -10,38 +10,38 @@ Each local United Way is a separate charity with its own board and accounts; Uni
 
 | Branch | Spending | How it is valued | Share of the result |
 |---|---|---|---|
-| Grants for basic needs (food, shelter, rent and utility help) | about $420 million (15%) | near cash, at what the help is worth to the household | 6% |
-| Other grants (education, child care, youth, health, financial stability) | about $1.26 billion (43%) | from the US research on programmes of each kind | 59% |
-| United Way's own programmes (early learning, reading, the 988 line, coaching, and the staff who run the grantmaking) | about $1.05 billion (36%) | the 50% that is services, as the other grants; the rest is the cost of running the grants and convening | 32% |
-| 211 helplines (United Way's share) | about $125 million (4%) | help callers find that they wouldn't have found otherwise | 2% |
-| Free tax filing (VITA, MyFreeTaxes) | about $40 million (1%) | fees saved and credits that would have gone unclaimed | 2% |
+| Grants for basic needs (food, shelter, rent and utility help) | about $420 million (15%) | near cash, at what the help is worth to the household | 20% |
+| Other grants (education, child care, youth, health, financial stability) | about $1.26 billion (43%) | from the US research on programmes of each kind | 46% |
+| United Way's own programmes (early learning, reading, the 988 line, coaching, and the staff who run the grantmaking) | about $1.05 billion (36%) | the 50% that is services, as the other grants; the rest is the cost of running the grants and convening | 25% |
+| 211 helplines (United Way's share) | about $125 million (4%) | help callers find that they wouldn't have found otherwise | 6% |
+| Free tax filing (VITA, MyFreeTaxes) | about $40 million (1%) | fees saved and credits that would have gone unclaimed | 3% |
 
 All five branches are *thin*: United Way publishes who it reaches only as one network-wide count, and no outcomes with a comparison group, so each counts at the missing-data slider.
 
 ### How the model works
 
-Every branch counts as income to the people helped, on the site's log scale at the clients' consumption (70% of the US average per person: the poorest fifth of households consume 67% of the average person's), valued at the shared value of a doubled income and converted to healthy years by the site's rate.
+Every branch counts as income to the people helped, on the site's log scale at the clients' consumption (70% of the US average per person: the poorest fifth of households consume 67% of the average person's; the basic-needs and 211 clients 30%, the site's figure for people getting US food aid), valued at the shared value of a doubled income and converted to healthy years by the site's rate.
 
 - **Basic-needs grants**: a grantee spends about 82% of a dollar on services; the help is worth about 90% of its cost to the household; 80% of it wouldn't have come from government or family, and 85% wouldn't have been given anyway with other donors' money (emergency help is rationed: in Chicago, people who asked for rent help after the funds ran out entered shelters far more often than those helped; Evans, Sullivan and Wallskog, Science 2016).
 - **Other grants and own services**, split into three kinds of service (40% children and youth, 30% financial stability, 30% health and other, a judgment anchored on local United Ways' impact areas), each valued from its research, at the full cost of a participant's place in the programmes the trials test:
-  - *Children and youth* (about 88% of this branch's value): a programme year at scale raises outcomes by about 0.16 standard deviations (a quarter each: tutoring and reading at scale 0.19, Kraft and others 2026; mentoring 0.21, Raposa and others 2019; early learning 0.15, the Head Start Impact Study; after-school programmes 0.09, between the 21st Century Community Learning Centers evaluation's null and Durlak, Weissberg and Pachan's meta-analysis), each SD worth about 10% higher adult earnings (a better teacher's 0.1 SD test gain raises earnings at 28 by 1.3%: Chetty, Friedman and Rockoff 2014; below their 13% because much of the youth programmes' gain is social-emotional), for the site's shared 40 working years, shared with the household (the site's shared factor of 2), starting about 13 years later and discounted at the shared rate. A place costs about $3,000 a year (mentoring $1,500 to $4,400, tutoring $3,000 to $4,000, pre-K more).
-  - *Financial stability* (9%): about $500 a year more earnings or savings for 3 years per $2,000 participant, from the job-training meta-analysis (Card, Kluve and Weber 2018), the WIA Gold Standard RCT and the financial-coaching trials, whose financial effects are mostly small and mixed (systematic review, Birkenmaier and others 2026).
-  - *Health and other* (4%): worth 30 cents a dollar to the people who get it, the Oregon Medicaid experiment's $0.20 to $0.40 (Finkelstein, Hendren and Luttmer 2019), which is already net of the free care they would get anyway.
+  - *Children and youth* (about three-quarters of this branch's value): a quarter each of the spending, by our judgment, on tutoring and reading at scale (0.19 standard deviations a programme year, Kraft and others 2026; about $3,800 a student-year), mentoring (0.21, Raposa and others 2019; about $2,700 a youth), early learning (0.15, the Head Start Impact Study; about $9,000 a child, state pre-K's spending) and after-school programmes (0.09, between the 21st Century Community Learning Centers evaluation's null and Durlak, Weissberg and Pachan's meta-analysis; about $1,700, as the Boys & Girls Clubs model), each SD worth about 10% higher adult earnings (a better teacher's 0.1 SD test gain raises earnings at 28 by 1.3%: Chetty, Friedman and Rockoff 2014; below their 13% because much of the youth programmes' gain is social-emotional), for the site's shared 40 working years, shared with the household (the site's shared factor of 2), starting 10 to 18 years later and discounted at the shared rate.
+  - *Financial stability* (18%): about $500 a year more earnings or savings for 3 years per $2,000 participant, from the job-training meta-analysis (Card, Kluve and Weber 2018), the WIA Gold Standard RCT and the financial-coaching trials, whose financial effects are mostly small and mixed (systematic review, Birkenmaier and others 2026).
+  - *Health and other* (7%): worth 30 cents a dollar to the people who get it, the Oregon Medicaid experiment's $0.20 to $0.40 (Finkelstein, Hendren and Luttmer 2019), which is already net of the free care they would get anyway.
   - The trials' effects are net of what their control groups got elsewhere, so nothing is taken off for what would have come anyway; what is left is funging, whether the agency would have run the service without United Way's money: 85% wouldn't (90% for United Way's own programmes; agencies do adjust their fundraising to the grants they get, Andreoni and Payne 2011). The chain counts at 85% for publication bias and self-reported mentoring outcomes. United Way's own programme spending is grossed up to the trialled programmes' full-cost basis, since its own overhead is already in the cost.
-- **Volunteers and co-funders**: where the value is what United Way's own dollars buy (the grants and its own services), nobody else's resources are in it. Where it is an outcome several contributors produce, United Way gets its share of the resources: for tax help, prepared by volunteers with IRS grants, about 30%; for 211, about a tenth.
+- **Volunteers and co-funders**: volunteers whose time is part of a trialled effect share its credit at the US volunteer wage: a mentor gives about 60 hours a year, so the paid mentoring programme gets a little over half of its effect, and the services as a whole about 84%. Where the value is an outcome several contributors produce, United Way gets its share of the resources: for tax help, prepared by volunteers with IRS grants, about 30%; for 211, about a tenth.
 - **211**: 16.8 million requests in 2024; about half end with the caller getting help worth about $300, of which 211 added 30%; United Way is credited only its share of the cost of finding that help (the agency that gives the help is credited the rest).
-- **Tax help**: about 950,000 returns a year; half the filers would have paid a preparer (about $200), and 7% of the $1.8 billion in refunds would have gone unclaimed.
+- **Tax help**: about 950,000 VITA returns and 45,000 through MyFreeTaxes a year; half the filers would have paid a preparer (about $200), and 7% of the $1.8 billion in refunds would have gone unclaimed.
 - **Missing data**: every branch × the shared slider (50%, from 10% to 100%), the same step every site model takes where the charity doesn't measure its own outcomes.
 
-A share for effects not modelled (+5%) and the overhead (management and fundraising, 16%) follow.
+A share for effects not modelled (+7%), a discount for the nine months or so a gift waits before it is granted, and the overhead (management and fundraising, 16%) follow.
 
 **Why not money moved?** United Way raises money for other charities, but a gift to United Way is itself passed on: the donor's dollar is the cost, and what it buys is the agencies' services, so the grants count as what the agencies do (the site's rule for grants to other organisations). Its fundraising is overhead, as for every charity, and isn't credited with the gifts it brings in from others.
 
 ### What drives the result
 
-- **The missing-data slider**: from 10% to 100% the result runs from 0.002 to 0.020.
-- **The discount rate**: the children's earnings gains come 13 to 53 years after the programme (0.005 at 8%, 0.027 at 0.1%).
-- **What a child's place costs and how much it does**: $1,200 to $8,000 a year (0.022 to 0.005); 0.05 to 0.3 SD (0.005 to 0.017); 5% to 13% earnings per SD (0.006 to 0.012).
+- **The missing-data slider**: from 10% to 100% the result runs from 0.002 to 0.023.
+- **The discount rate**: the children's earnings gains come 10 to 58 years after the programme (0.0075 at 8%, 0.024 at 0.1%).
+- **How much the programmes do**: the financial programmes' earnings gain (0.010 to 0.017), adult earnings per SD of a child's gain (0.008 to 0.013), the after-school effect (0.010 to 0.014), and the children's share of the services (0.009 to 0.013).
 - **The rate between healthy years and income** (your values), as for every income result.
 
 ### Biggest uncertainties
@@ -53,7 +53,7 @@ A share for effects not modelled (+5%) and the overhead (management and fundrais
 
 ### What isn't modelled
 
-Homelessness averted by rent help beyond the money itself, youth programmes' effects on crime and teen births beyond earnings, United Way's public-policy work, and the national office's role as fiscal agent for FEMA's Emergency Food and Shelter Program are in the share for effects not modelled, with grants that keep weak agencies going on the other side. Health and deaths aren't counted separately: clinics and shelters among the grants are valued at what recipients would pay for them.
+Homelessness averted by rent help beyond the money itself, youth programmes' effects on crime and teen births beyond earnings, United Way's public-policy work, the national office's role as fiscal agent for FEMA's Emergency Food and Shelter Program, and United Way's convening, capacity building and the volunteers it mobilises are in the share for effects not modelled, with grants that keep weak agencies going on the other side. Health and deaths aren't counted separately: clinics and shelters among the grants are valued at what recipients would pay for them.
 
 ### How this model was checked
 
@@ -66,6 +66,8 @@ Rebuild (2026-11-04), to the site's current rules: no programme is valued at ano
 - **Round 2** (1 high, 2 medium, 3 low): the tutoring quote is now cited to the published article whose abstract carries it (the working paper's wording differs and is given too); the after-school quarter of the effect is anchored on after-school evidence (0.09, so 0.16 in all); the funging anchor states how crowd-out bounds it; the own-services share leaves convening out (50%, Greater Twin Cities' note 15); sources added. The result moved from 0.012 to 0.010.
 
 - **Round 3** (0 high, 0 medium, 3 low): passed. Citations given checkable locations (Education Next, Durlak and others' Table 3, the Crossref record of the tutoring article), the funging floor's wording corrected, and shares rounded as the engine gives them; the result is unchanged at 0.010.
+
+The site's survey-scale consumption baseline (2026-11-04) then moved the result to 0.012. A new audit on file (2026-11-15, audits/united-way-charityevals/) found the text's figures stale and the volunteers' share of the children's programmes left out: the volunteer mentors', tutors' and club volunteers' hours now share the credit, the children's chain is split into its four kinds with a cost each, a gift's wait before it is granted is discounted, MyFreeTaxes' own returns are counted, and convening is in the share for effects not modelled (0.012 to 0.009). A second round put the basic-needs and 211 clients at the site's shared consumption figure for people getting US food aid and gave each children's programme its own years to working age (0.009 to 0.011).
 
 ### Sources
 
