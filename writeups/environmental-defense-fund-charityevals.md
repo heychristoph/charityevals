@@ -1,6 +1,7 @@
 ### Summary
 
 The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about 0.0020 years of healthy life per $1,000 (about $220 a tonne of CO₂e), the health and nature work about 0.0019.
+The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about 0.0017 years of healthy life per $1,000 (about $220 a tonne of CO₂e), the health and nature work about 0.0012.
 
 ### What the charity does
 
@@ -26,7 +27,7 @@ The shared years a won reform counts, the missing-data discount, the shared advo
 
 ### What isn't modelled
 
-The Inflation Reduction Act's repealed methane fee, the heavy-duty truck standards, state laws, the regional teams' work on China's carbon market and Europe's shipping, aviation and carbon market are in a share of the climate model's value (30%, 10% to 80%); toxic-chemical rules, PFAS, water and resilience in the health and nature model's (30%). The US methane rule's local smog cut is a side effect (+1.5%). Costs the rules put on industry and consumers aren't counted, as in the site's other policy models.
+The Inflation Reduction Act's repealed methane fee, the heavy-duty truck standards, state laws, the regional teams' work on China's carbon market and Europe's shipping, aviation and carbon market are in a share of the climate model's value (30%, 10% to 80%); toxic-chemical rules, PFAS, water and resilience in the health and nature model's (30%). The US methane rule's local smog cut is a side effect (+1.5%). Costs the rules put on industry and consumers are subtracted, from the regulators' own figures (the vehicle rules save buyers money).
 
 ### How this model was checked
 

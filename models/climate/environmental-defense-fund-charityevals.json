@@ -3,7 +3,10 @@
   "name": "Environmental Defense Fund: climate (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"world":0.954,"USA":0.046},
+  "beneficiaries": {
+    "world": 0.954,
+    "USA": 0.046
+  },
   "beneficiaries_note": "Our build: shares of the result at the defaults. The public money the Inflation Reduction Act won for US households (4.6%) is in the United States; the tonnes (95.4%) spare people everywhere, spread by world population, the small US power-plant and vehicle smoke share left in the world figure.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
@@ -1561,6 +1564,60 @@
       "format": "small",
       "formula": "tco2e_per_dollar * donor_cost_share * marginal_vs_past_average",
       "unit": "Tonnes of CO₂e averted / $"
+    },
+    {
+      "id": "eumr_compliance_uov",
+      "section": "adjustments",
+      "label": "EU Methane Regulation: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.eu_methane_regulation_imports_cost_per_tco2e * eumr_tonnes_per_year * @cpi.usa_2024 / @cpi.usa_2018 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_kingdom.consumption_per_person_2024) * eumr_downstream / eumr_tonnes_per_year * eumr_counterfactual_adj * eumr_attribution_share * eumr_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the impact assessment's proxy for the import measures, exporters' abatement at $3.65 a tonne of CO₂e (2018 dollars, net of gas sold; @compliance_costs), times the import tonnes, valued as money lost by exporters' owners and EU buyers at the shared payer multiple times UK consumption per person (the site's European consumption figure); over the same years and wait as the tonnes, with the branch's chance, counterfactual, credit, delivered share and missing-data step."
+    },
+    {
+      "id": "usmeth_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA oil and gas methane rule: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_oil_gas_methane_rule_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2019 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * usmeth_downstream / usmeth_tonnes_per_year * usmeth_counterfactual_adj * usmeth_attribution_share * usmeth_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): operators' net cost after the gas they recover and sell (EPA's regulatory impact analysis, $1.5 billion a year), in 2019 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "pwr_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA power-plant standards: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_power_plant_rule_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2019 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * pwr_downstream / pwr_tonnes_per_year * pwr_counterfactual_adj * pwr_attribution_share * pwr_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the power system's extra cost (EPA's regulatory impact analysis, $0.98 billion a year), in 2019 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "veh_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA vehicle standards: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_light_medium_vehicle_rule_2024_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2022 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * veh_downstream / veh_tonnes_per_year * veh_counterfactual_adj * veh_attribution_share * veh_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): buyers' technology, charger and insurance costs less their fuel, maintenance and repair savings (EPA's rule, a net saving of $11.3 billion a year, so this row adds value), in 2022 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "compliance_uov_per_year",
+      "section": "adjustments",
+      "label": "Compliance costs of the won rules, units of value per year of the period",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(eumr_compliance_uov + usmeth_compliance_uov + pwr_compliance_uov + veh_compliance_uov) / period_years",
+      "explainer": "The rules' compliance costs summed, per year of the period, in the main chain (docs/normalization.md 2.21). The Inflation Reduction Act's credits are public money, not a rule's compliance cost (its home rebates and credits are netted of taxpayers' cost above); MethaneSAT is data, not a rule, so neither has a row."
+    },
+    {
+      "id": "uov_counted_per_year",
+      "section": "adjustments",
+      "label": "Units of value a year counted outside the tonnes: public money won for households and the rules' compliance costs",
+      "format": "number",
+      "unit": "uov",
+      "formula": "ira_transfer_uov_per_year + compliance_uov_per_year",
+      "explainer": "The household money (recipients' gain less taxpayers' cost) plus the won rules' compliance costs (negative), the input of the bridge into tonnes."
     }
   ],
   "output": {

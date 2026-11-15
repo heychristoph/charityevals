@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "clean-air-task-force",
   "owner": "charityevals",
-  "summary": "Clean Air Task Force (Boston, with offices in Europe and Africa) advocates and does research for climate policy: methane rules, carbon capture, advanced nuclear and fusion energy, power plants and clean fuels; this model counts the six largest policies it worked on that were won in 2022-2025 (the EU Methane Regulation, EPA's oil and gas methane rule, the Inflation Reduction Act's carbon-capture credit, EPA's power-plant standards, the ADVANCE Act and fusion's regulatory framework) against its spending over those years ($42.96M in 2025). At the defaults a dollar given averts about 0.015 tonnes of CO₂e (about $68 a tonne), 0.0067 years of healthy life per $1,000, nearly all of it from the two methane rules, whose tonnes count for methane's own, earlier warming and for the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (Clean Air Task Force is credited with 1% to 6% of each win), and the US rules have since been weakened or repealed. The biggest uncertainties are the shared discount rate and years a won reform counts, methane's ozone deaths per tonne, and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "Clean Air Task Force (Boston, with offices in Europe and Africa) advocates and does research for climate policy: methane rules, carbon capture, advanced nuclear and fusion energy, power plants and clean fuels; this model counts the six largest policies it worked on that were won in 2022-2025 (the EU Methane Regulation, EPA's oil and gas methane rule, the Inflation Reduction Act's carbon-capture credit, EPA's power-plant standards, the ADVANCE Act and fusion's regulatory framework) against its spending over those years ($42.96M in 2025). At the defaults a dollar given averts about 0.015 tonnes of CO₂e (about $68 a tonne); less the rules' compliance costs (EPA's and the Commission's own figures, about a fifth), 0.0052 years of healthy life per $1,000, nearly all of it from the two methane rules, whose tonnes count for methane's own, earlier warming and for the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (Clean Air Task Force is credited with 1% to 6% of each win), and the US rules have since been weakened or repealed. The biggest uncertainties are the shared discount rate and years a won reform counts, methane's ozone deaths per tonne, and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Clean Air Task Force",
@@ -65,6 +65,12 @@
       "title": "Air pollution these tonnes carry",
       "kind": "ours",
       "explainer": "Every tonne avoids its heat deaths; a tonne from burning less fossil fuel near people also avoids air-pollution deaths. These rows say how much of the shared air-pollution rate applies to this charity's tonnes (docs/normalization.md 2.5); the rates themselves stay shared."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in tonnes",
+      "kind": "ours",
+      "explainer": "The public money won for US households (units of value) is counted in its own unit and enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
     },
     {
       "id": "outcome",
@@ -1076,6 +1082,42 @@
       "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
     },
     {
+      "id": "eumr_compliance_uov",
+      "section": "adjustments",
+      "label": "EU Methane Regulation: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.eu_methane_regulation_imports_cost_per_tco2e * eumr_tonnes_per_year * @cpi.usa_2024 / @cpi.usa_2018 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_kingdom.consumption_per_person_2024) * eumr_downstream / eumr_tonnes_per_year * eumr_counterfactual_adj * eumr_attribution_share * eumr_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the impact assessment's proxy for the import measures, exporters' abatement at $3.65 a tonne of CO₂e (2018 dollars, net of gas sold; @compliance_costs), times the import tonnes, valued as money lost by exporters' owners and EU buyers at the shared payer multiple times UK consumption per person (the site's European consumption figure); over the same years and wait as the tonnes, with the branch's chance, counterfactual, credit, delivered share and missing-data step."
+    },
+    {
+      "id": "usmeth_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA oil and gas methane rule: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_oil_gas_methane_rule_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2019 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * usmeth_downstream / usmeth_tonnes_per_year * usmeth_counterfactual_adj * usmeth_attribution_share * usmeth_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): operators' net cost after the gas they recover and sell (EPA's regulatory impact analysis, $1.5 billion a year), in 2019 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "pwr_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA power-plant standards: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_power_plant_rule_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2019 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * pwr_downstream / pwr_tonnes_per_year * pwr_counterfactual_adj * pwr_attribution_share * pwr_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the power system's extra cost (EPA's regulatory impact analysis, $0.98 billion a year), in 2019 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "compliance_uov_per_year",
+      "section": "adjustments",
+      "label": "Compliance costs of the won rules, units of value per year of the period",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(eumr_compliance_uov + usmeth_compliance_uov + pwr_compliance_uov) / period_years",
+      "explainer": "The rules' compliance costs summed, per year of the period, in the main chain (docs/normalization.md 2.21). The carbon-capture credit is public money, not a rule's compliance cost, and the nuclear and fusion work wins support, not rules, so none has a row."
+    },
+    {
       "id": "eumr_expected_tonnes",
       "section": "conversion",
       "label": "EU Methane Regulation: expected tonnes a year once in effect (weight for the fuel share)",
@@ -1173,11 +1215,20 @@
       "formula": "@climate.us_oil_gas_methane_rule_voc_deaths_per_year"
     },
     {
+      "id": "tco2e_from_uov",
+      "section": "bridges",
+      "label": "The won rules' compliance costs, in tonnes of CO₂e (negative)",
+      "format": "number",
+      "unit": "t CO₂e / year",
+      "formula": "compliance_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "explainer": "Units of value into tonnes at what a tonne of these is worth on the site's scale (its heat and air-pollution deaths by age, as the conversion counts them), the bridge Environmental Defense Fund's model uses (docs/normalization.md 2.6)."
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂e averted per year of the period",
       "format": "number",
-      "formula": "(eumr_downstream * eumr_total_adj + usmeth_downstream * usmeth_total_adj + pwr_downstream * pwr_total_adj + ccs_downstream * ccs_total_adj + nuc_downstream * nuc_total_adj + fus_downstream * fus_total_adj) / period_years * (1 + unmodelled_benefits_adj + eor_oil_share + nuclear_harm_share)",
+      "formula": "(eumr_downstream * eumr_total_adj + usmeth_downstream * usmeth_total_adj + pwr_downstream * pwr_total_adj + ccs_downstream * ccs_total_adj + nuc_downstream * nuc_total_adj + fus_downstream * fus_total_adj) / period_years * (1 + unmodelled_benefits_adj + eor_oil_share + nuclear_harm_share) + tco2e_from_uov",
       "unit": "t CO₂e / year",
       "explainer": "Each win's expected tonnes × its own adjustments, summed, spread over the period's four years, with the other wins and the remaining side effects added as shares."
     },

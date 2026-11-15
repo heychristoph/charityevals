@@ -1389,6 +1389,32 @@ relief), Save the Children's advocacy 0.426 → 0.417 (Elrha 0.3× → 0.2×; di
 NRC's programmes 0.2044 → 0.2039 (NORCAP 0.25× → 0.2×), CARE's and World Vision's US aid unchanged at 1×
 (range 0.3-2.5 → 0.4-2). Each changed model had a verification round.
 
+### 2.21 Won rules: their compliance costs count (15 November 2026)
+
+Owner decision 2026-11-15: a regulation a model's work helps win costs those who must comply, and that
+cost enters the main chain as a negative row (never a side effect). **The figure** is the regulator's own
+impact analysis where one exists (EPA's regulatory impact analyses, the Air Resources Board's, the
+Commission's, the UK's), in facts/compliance_costs.json, never typed per model: its yearly cost, net of
+savings the analysis credits to the same payers (gas recovered, fuel saved, so a rule that saves its payers
+money adds value) and without transfers (taxes, allowances, duty). **The value**: money lost by those who
+bear it, as for other money lost (2.20, `@public_funds.*`): dollars over the payers' consumption on the log
+scale, `$uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple × consumption per person)`,
+the payers consumers and owners (1.2 times the national average, 0.8-2, judgment). **The chain**: the
+branch's years, wait, chance, counterfactual, credit, delivered share and missing-data step, not its
+evidence adjustment (which is about the benefits); tonnes models take it through the bridge from uov
+(2.6). Only costs not already netted: money branches valued as the gain less the payers' loss (Prison
+Policy Initiative's call caps) and net income (fisheries) stay as they are, and public money (the
+Inflation Reduction Act's credits) is 2.20's, not a compliance cost. Where no analysis gives a cost, one
+line in the branch's explainer says so (coal retirements, Tongass, Swampbuster, the EU AI Code of Practice,
+Transparency International's changes, typical tobacco wins). At the defaults (years per $1,000):
+Earthjustice's health 0.0084 → 0.0059 (PFAS costs about its benefits, EPA's own finding), EDF's health
+and nature 0.0019 → 0.0012 (soot and lead-pipe rules), Clean Air Task Force 0.0067 → 0.0052, Earthjustice
+0.0024 → 0.0020, EDF's climate 0.0021 → 0.0017, Sierra Club Foundation 0.0058 → 0.0059 (the vehicle rules
+save buyers money), its lands and health 0.0011 → 0.0009, Union of Concerned Scientists' climate 0.0018 →
+0.0017, Cancer Research UK 0.00165 → 0.00153 and the British Heart Foundation 0.0103 → 0.0102 (the
+Tobacco and Vapes Act's shops' lost profits); the Tax Justice Network's judged reporting cost leaves the
+side effects for the main chain (unchanged at the defaults). Each changed model had a verification round.
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
