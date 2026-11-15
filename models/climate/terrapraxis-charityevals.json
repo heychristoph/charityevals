@@ -3,18 +3,13 @@
   "name": "TerraPraxis",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {
-    "world": 0.45,
-    "CHN": 0.4,
-    "IND": 0.08,
-    "USA": 0.07
-  },
-  "beneficiaries_note": "Our build: about a quarter of a tonne's value here is heat deaths, spread by world population; the rest is air pollution where the coal and gas are burned, split by the countries' shares of the world's coal capacity (China about 55%, India about 11%, the US about 9%; the scattered rest left in the world figure), a judgment, as the reactors' locations are unknown.",
+  "beneficiaries": {"world":0.37,"CHN":0.36,"IND":0.27},
+  "beneficiaries_note": "Our build: about a fifth of a tonne's value here is heat deaths and methane, spread by world population; the rest is air pollution where the coal and gas are burned, split by coal capacity (China 54%, India 11%, Global Energy Monitor's Global Coal Plant Tracker via Carbon Brief, 2024) times each place's smoke per tonne, the rest left in the world figure. The money effects fall on the same countries' power customers and are not split.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "terrapraxis",
   "owner": "charityevals",
-  "summary": "TerraPraxis, a US non-profit with a small UK sister company, designs, convenes and builds software to re-power the world's coal plants with advanced nuclear reactors (its REPOWER consortium), and makes the case for advanced nuclear more broadly (the Ten-Terawatt Initiative). This model counts what its 2022-2024 work ($6.3M) adds to a yardstick, a third of the COP28 pledge to triple nuclear capacity built by 2050, a tenth of it on coal sites, crediting all groups' non-commercial enabling work with 1.5% of that deployment and TerraPraxis with 8% of that work on coal sites and 0.6% elsewhere; the reactors' extra power cost, less the coal sites' construction savings, takes off about two fifths. At the defaults a dollar given averts about 0.005 tonnes of CO₂e, 0.004 years of healthy life per $1,000. The result is mostly uncertainty: nothing has been built yet, every step from the work to a reactor is a judgment, and the range spans many orders of magnitude; both lines are discounted for missing data.",
+  "summary": "TerraPraxis, a US non-profit with a small UK sister company, designs, convenes and builds software to re-power the world's coal plants with advanced nuclear reactors (its REPOWER consortium), and makes the case for advanced nuclear more broadly (the Ten-Terawatt Initiative). This model counts what its 2022-2024 work ($6.3M) adds to a yardstick, a third of the COP28 pledge to triple nuclear capacity built by 2050, a tenth of it on coal sites, crediting all groups' non-commercial enabling work with 1.5% of that deployment and TerraPraxis with 8% of that work on coal sites and 0.6% elsewhere. The tonnes avoided are outweighed by what the extra reactors cost those who pay for power: new nuclear costs more per MWh than the coal and gas it replaces (IEA/NEA), and most reactors would be built in China and India, where a dollar is worth far more to the people paying it; the coal sites' construction savings offset a quarter of that. At the defaults the result is a net harm, −0.03 years of healthy life per $1,000, four fifths of the cost from the tenth of reactors judged to be built in India. It is mostly uncertainty: nothing has been built yet, every step from the work to a reactor is a judgment, and the sign turns on nuclear's cost in China and India; both lines are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: TerraPraxis",
@@ -349,9 +344,9 @@
       "section": "reach",
       "label": "Coal repowering: tonnes of CO₂e a year the re-powered plants would avert if each replaced coal",
       "format": "integer",
-      "formula": "rep_gw_repowered * twh_per_gw_year * 1e6 * @climate.us_coal_tco2_per_mwh * (1 + coal_share_of_displaced_tonnes * coal_mine_methane_per_coal_co2)",
+      "formula": "rep_gw_repowered * twh_per_gw_year * 1e6 * @climate.us_coal_tco2_per_mwh * (1 + methane_uplift)",
       "unit": "t CO₂e / year",
-      "explainer": "Gigawatts × electricity per gigawatt-year (× 1e6 MWh per TWh) × CO₂ per MWh of coal power (facts: climate.us_coal_tco2_per_mwh, 1.05 tonnes; coal plants elsewhere emit about the same per MWh), plus the mine methane of the coal not burned (rows below). The counterfactual row below says how much of this is a real cut."
+      "explainer": "Gigawatts × electricity per gigawatt-year (× 1e6 MWh per TWh) × CO₂ per MWh of coal power (facts: climate.us_coal_tco2_per_mwh, 1.05 tonnes; coal plants elsewhere emit about the same per MWh), plus the supply methane of the coal and gas not burned (rows below). The counterfactual row below says how much of this is a real cut."
     },
     {
       "id": "nuc_gw_2020",
@@ -430,9 +425,9 @@
       "section": "reach",
       "label": "Advanced nuclear: tonnes of CO₂e a year those reactors would avert if each replaced coal",
       "format": "integer",
-      "formula": "nuc_gw_not_coal * twh_per_gw_year * 1e6 * @climate.us_coal_tco2_per_mwh * (1 + coal_share_of_displaced_tonnes * coal_mine_methane_per_coal_co2)",
+      "formula": "nuc_gw_not_coal * twh_per_gw_year * 1e6 * @climate.us_coal_tco2_per_mwh * (1 + methane_uplift)",
       "unit": "t CO₂e / year",
-      "explainer": "Measured against coal for comparability with the line above, with the coal's mine methane; the counterfactual row below says how much cleaner the grid the reactors join is."
+      "explainer": "Measured against coal for comparability with the line above, with the supply methane; the counterfactual row below says how much cleaner the grid the reactors join is."
     },
     {
       "id": "coal_share_of_displaced_tonnes",
@@ -464,7 +459,34 @@
         "page": "Coal: more than 40 Mt of methane in 2024, including over 4 Mt from abandoned mines",
         "retrieved": "2026-11-15"
       },
-      "explainer": "About 40 million tonnes of methane a year from coal mines × 29.8 (methane's 100-year warming potential, IPCC AR6) = 1.2 billion tonnes of CO₂e, against about 15.4 billion tonnes of CO₂ from burning coal (IEA): 7.7%. Abandoned mines keep leaking, so not all of it stops with the coal; range 5% to 10%."
+      "explainer": "About 40 million tonnes of methane a year from coal (IEA) × 29.8 (methane's 100-year warming potential, IPCC AR6) = 1.2 billion tonnes of CO₂e, against roughly 15 billion tonnes of CO₂ from burning coal (about two fifths of the world's 37 billion tonnes of energy CO₂): 7.7%. Abandoned mines (4 Mt) keep leaking, so not all of it stops with the coal; range 5% to 10%."
+    },
+    {
+      "id": "gas_supply_methane_per_gas_co2",
+      "section": "reach",
+      "label": "Methane from gas supply, in CO₂e, per tonne of CO₂ from burning gas",
+      "format": "number",
+      "value": {
+        "low": 0.08,
+        "best": 0.14,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "IEA (2025), Global Methane Tracker 2025: understanding methane emissions",
+        "url": "https://www.iea.org/reports/global-methane-tracker-2025/understanding-methane-emissions",
+        "page": "Natural gas operations: nearly 35 Mt of methane in 2024",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "About 35 million tonnes of methane a year from gas operations (IEA) × 29.8 = 1.0 billion tonnes of CO₂e, against roughly 7.4 billion tonnes of CO₂ from burning gas (about a fifth of the world's energy CO₂): 14%. Leaks scale only partly with the gas burned; range 8% to 20%."
+    },
+    {
+      "id": "methane_uplift",
+      "section": "reach",
+      "label": "CO₂e of the displaced power's supply methane, per tonne of its CO₂",
+      "format": "number",
+      "formula": "coal_share_of_displaced_tonnes * coal_mine_methane_per_coal_co2 + (1 - coal_share_of_displaced_tonnes) * gas_supply_methane_per_gas_co2",
+      "explainer": "Mine methane on the coal tonnes and supply-chain methane on the gas tonnes, weighted by their shares of the displaced tonnes."
     },
     {
       "id": "p_success",
@@ -612,12 +634,12 @@
       "label": "Coal repowering: TerraPraxis's share of the non-commercial resources behind the enabling work",
       "format": "percent",
       "value": {
-        "low": 0.03,
+        "low": 0.02,
         "best": 0.08,
-        "high": 0.2
+        "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "TerraPraxis has led coal repowering as an organised idea since 2020 (the REPOWER consortium, standard designs, site-assessment software), on about $2 million a year. Others doing the same kind of work: DOE and its national laboratories (the 2022 coal-to-nuclear study and later site work), the IAEA, EPRI, the Nuclear Innovation Alliance, Clean Air Task Force, the World Nuclear Association, and utilities' own studies; reactor vendors' business development is commercial and sits outside this share. Our judgment, 8% (3% to 20%) of the resources."
+      "explainer": "TerraPraxis has led coal repowering as an organised idea since 2020 (the REPOWER consortium, standard designs, site-assessment software), on about $2 million a year. Others doing the same kind of work: DOE and its national laboratories (the 2022 coal-to-nuclear study and later site work), the IAEA, EPRI, the Nuclear Innovation Alliance, Clean Air Task Force, the World Nuclear Association, and utilities' own studies; reactor vendors' business development is commercial and sits outside this share. No source sizes the field's budgets, so the range is wide: our judgment, 8% (2% to 25%) of the resources."
     },
     {
       "id": "nuc_attribution_share_shared",
@@ -625,12 +647,12 @@
       "label": "Advanced nuclear: TerraPraxis's share of the non-commercial resources behind the enabling work",
       "format": "percent",
       "value": {
-        "low": 0.002,
+        "low": 0.001,
         "best": 0.006,
-        "high": 0.02
+        "high": 0.03
       },
       "kind": "judgment",
-      "explainer": "Its broader advanced nuclear work (the Ten-Terawatt Initiative, launched in 2024 and its white paper presented at Davos in January 2025, AI licensing tools with Microsoft, papers on industrial heat and shipping) is a small part of a large field: the Nuclear Energy Institute, Clean Air Task Force's $5 million a year on advanced nuclear, ClearPath, the Breakthrough Institute, Third Way, the World Nuclear Association, the IAEA and the OECD Nuclear Energy Agency, and governments' own deployment programmes. Our judgment, 0.6% (0.2% to 2%)."
+      "explainer": "Its broader advanced nuclear work (the Ten-Terawatt Initiative, launched in 2024 and its white paper presented at Davos in January 2025, AI licensing tools with Microsoft, papers on industrial heat and shipping) is a small part of a large field: the Nuclear Energy Institute, Clean Air Task Force's $5 million a year on advanced nuclear, ClearPath, the Breakthrough Institute, Third Way, the World Nuclear Association, the IAEA and the OECD Nuclear Energy Agency, and governments' own deployment programmes. No source sizes the field's budgets, so the range is wide: our judgment, 0.6% (0.1% to 3%)."
     },
     {
       "id": "rep_attribution_share",
@@ -744,23 +766,111 @@
       "explainer": "A re-powered plant keeps a coal town's jobs and tax base: DOE's case study counts more than 650 permanent jobs at one converted site. Most of these jobs would exist somewhere else (a reactor built elsewhere, other work), so only the gain from keeping them in place counts, a small amount of income beside the tonnes. Our judgment, +0.3% of the modelled value (0 to 1%)."
     },
     {
-      "id": "overnight_usd_per_kw",
+      "id": "build_share_chn",
       "section": "adjustments",
-      "label": "Overnight cost of building an advanced reactor, per kW (2022 dollars)",
-      "format": "usd",
+      "label": "Share of the new reactors built in China",
+      "format": "percent",
       "value": {
-        "low": 3600,
-        "best": 5000,
-        "high": 8000
+        "low": 0.3,
+        "best": 0.45,
+        "high": 0.6
       },
       "kind": "judgment",
       "source": {
-        "title": "US Department of Energy (30 March 2023), Commercializing advanced nuclear reactors, explained in five charts",
-        "url": "https://www.energy.gov/ne/articles/commercializing-advanced-nuclear-reactors-explained-five-charts",
-        "quote": "overnight capital costs of a first-of-a-kind (FOAK) advanced nuclear power plant are expected to range from ~$6,000-$10,000",
+        "title": "IEA (2026), Global Energy Review 2026: nuclear",
+        "url": "https://www.iea.org/reports/global-energy-review-2026/technology-nuclear",
+        "quote": "Half of capacity under construction globally is in China.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "DOE puts a first advanced reactor at about $6,000 to $10,000 per kW and expects repeat builds to cost 40% less. The reactors of the 2040s are mostly repeat builds: our judgment, $5,000 per kW ($3,600, DOE's repeat-build cost of a $6,000 first plant, to $8,000)."
+      "explainer": "Where the reactors are built decides who pays for them. Half of the 78 GW under construction worldwide is in China (IEA); China's build is steady and state-planned, while the pledge's growth elsewhere is less certain. Our judgment, 45% (30% to 60%) of the reactors built to 2050, for both lines."
+    },
+    {
+      "id": "build_share_ind",
+      "section": "adjustments",
+      "label": "Share of the new reactors built in India",
+      "format": "percent",
+      "value": {
+        "low": 0.04,
+        "best": 0.1,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "IEA (2026), Global Energy Review 2026: nuclear",
+        "url": "https://www.iea.org/reports/global-energy-review-2026/technology-nuclear",
+        "quote": "Egypt, India and Türkiye each have around 5 GW under construction.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "India has about 5 of the 78 GW under construction (6%) and plans a large expansion; it also has the world's second-largest coal fleet, so coal repowering matters there. Our judgment, 10% (4% to 20%)."
+    },
+    {
+      "id": "build_share_usa",
+      "section": "adjustments",
+      "label": "Share of the new reactors built in the United States",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Almost nothing is under construction in the US today, but DOE's pathway (200 GW by 2050) and data-centre demand point to a large share later if costs fall. Our judgment, 15% (5% to 30%)."
+    },
+    {
+      "id": "build_share_rest",
+      "section": "adjustments",
+      "label": "Share of the new reactors built elsewhere (Europe, Korea, Russia, newcomers)",
+      "format": "percent",
+      "formula": "1 - build_share_chn - build_share_ind - build_share_usa",
+      "explainer": "The rest of the build, valued at the site's European stand-in for payers' consumption."
+    },
+    {
+      "id": "payer_consumption_chn",
+      "section": "adjustments",
+      "label": "Consumption per person of those who pay for power, China (survey scale, 2024 US$)",
+      "format": "usd",
+      "formula": "@survey_consumption.chn_na_consumption_per_person_2024 * @survey_consumption.survey_to_na_chn",
+      "explainer": "National-accounts consumption per person times the shared survey ratio (docs/normalization.md 2.14)."
+    },
+    {
+      "id": "payer_consumption_ind",
+      "section": "adjustments",
+      "label": "Consumption per person of those who pay for power, India (survey scale, 2024 US$)",
+      "format": "usd",
+      "formula": "@survey_consumption.ind_na_consumption_per_person_2024 * @survey_consumption.survey_to_na_ind",
+      "explainer": "National-accounts consumption per person times the shared survey ratio (docs/normalization.md 2.14)."
+    },
+    {
+      "id": "payer_consumption_usa",
+      "section": "adjustments",
+      "label": "Consumption per person of those who pay for power, United States (survey scale, 2024 US$)",
+      "format": "usd",
+      "formula": "@united_states.ce_expenditure_per_person_2024",
+      "explainer": "The Consumer Expenditure Survey per person, the site's US survey scale."
+    },
+    {
+      "id": "payer_consumption_rest",
+      "section": "adjustments",
+      "label": "Consumption per person of those who pay for power, elsewhere (survey scale, 2024 US$)",
+      "format": "usd",
+      "formula": "@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr",
+      "explainer": "The site's European figure (UK consumption on the survey scale) stands in for the rest of the build, as the other climate models value European payers."
+    },
+    {
+      "id": "inv_consumption_weighted",
+      "section": "adjustments",
+      "label": "Payers' 1 ÷ consumption, averaged over where the reactors are built",
+      "format": "small",
+      "formula": "build_share_chn / payer_consumption_chn + build_share_ind / payer_consumption_ind + build_share_usa / payer_consumption_usa + build_share_rest / payer_consumption_rest",
+      "explainer": "A dollar gained or lost counts in proportion to 1 ÷ the payer's consumption on the site's log scale (docs/normalization.md 2.21), so the regions are averaged on that."
+    },
+    {
+      "id": "premium_over_consumption_weighted",
+      "section": "adjustments",
+      "label": "Extra cost per MWh ÷ payers' consumption, averaged over where the reactors are built",
+      "format": "small",
+      "formula": "build_share_chn * @climate.advanced_nuclear_premium_usd_per_mwh_chn / payer_consumption_chn + build_share_ind * @climate.advanced_nuclear_premium_usd_per_mwh_ind / payer_consumption_ind + build_share_usa * @climate.advanced_nuclear_premium_usd_per_mwh_usa / payer_consumption_usa + build_share_rest * @climate.advanced_nuclear_premium_usd_per_mwh_rest / payer_consumption_rest",
+      "explainer": "Each region's extra cost of nuclear power per MWh (shared facts: climate, from the IEA/NEA levelised costs, 2019 dollars) over its payers' consumption, weighted by its share of the build."
     },
     {
       "id": "rep_site_cost_saving",
@@ -787,27 +897,8 @@
       "label": "Coal repowering: construction cost saved on reactors moved to coal sites, units of value",
       "format": "number",
       "unit": "uov",
-      "formula": "rep_gw_repowered * p_success * (1 - rep_additional_share) * rep_attribution_share * overnight_usd_per_kw * 1e6 * rep_site_cost_saving * @cpi.usa_2024 / @cpi.usa_2022 * (1 - (1 + $discount_rate) ^ -years_of_impact) * wait_discount * evidence_adj * missing_data_adj * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
-      "explainer": "The reactors the counterfactual treats as moved from other sites still save their builders and customers the coal site's construction saving. Credited gigawatts moved (the line's chance, share not extra, TerraPraxis's share) × cost per kW × the saving, in 2024 dollars; the saving would have come anyway once the shared years counted are over, so only bringing it forward counts (1 − (1 + rate)^−years), after the shared wait, with the evidence and missing-data steps. Valued as money gained by those who pay for power (docs/normalization.md 2.21: the shared payer multiple × US consumption per person, a stand-in: payers in poorer countries would gain more per dollar)."
-    },
-    {
-      "id": "premium_usd_per_mwh",
-      "section": "adjustments",
-      "label": "Extra cost of the extra reactors' power over the power it replaces, per MWh (2022 dollars)",
-      "format": "usd",
-      "value": {
-        "low": -15,
-        "best": 10,
-        "high": 40
-      },
-      "kind": "judgment",
-      "source": {
-        "title": "US Department of Energy (30 March 2023), Commercializing advanced nuclear reactors, explained in five charts",
-        "url": "https://www.energy.gov/ne/articles/commercializing-advanced-nuclear-reactors-explained-five-charts",
-        "page": "Chart on overnight cost: first plants ~$6,000-$10,000 per kW, repeat builds 40% less",
-        "retrieved": "2026-11-15"
-      },
-      "explainer": "Reactors cost more to build than gas or wind and solar but run all year; against firmed clean power or coal with its fuel costs the gap narrows or reverses, and in China reactors are already built at a fraction of Western costs. For the repeat builds of the 2040s, our judgment, $10 per MWh more than what they replace ($15 less to $40 more). A cost to customers, valued as money lost."
+      "formula": "rep_gw_repowered * p_success * (1 - rep_additional_share) * rep_attribution_share * @climate.advanced_nuclear_overnight_usd_per_kw * 1e6 * rep_site_cost_saving * @cpi.usa_2024 / @cpi.usa_2022 * (1 - (1 + $discount_rate) ^ -years_of_impact) * wait_discount * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple * inv_consumption_weighted",
+      "explainer": "The reactors the counterfactual treats as moved from other sites still save their builders and customers the coal site's construction saving. Credited gigawatts moved (the line's chance, share not extra, TerraPraxis's share) × the shared cost per kW (facts: climate) × the saving, in 2024 dollars; the saving would have come anyway once the shared years counted are over, so only bringing it forward counts (1 − (1 + rate)^−years), after the shared wait, with the evidence and missing-data steps. Valued as money gained by those who pay for power, at the shared payer multiple over their consumption, averaged over where the reactors are built (docs/normalization.md 2.21)."
     },
     {
       "id": "extra_power_cost_uov",
@@ -815,8 +906,8 @@
       "label": "Extra reactors: cost of their power over what it replaces, units of value (negative at the best guess)",
       "format": "number",
       "unit": "uov",
-      "formula": "-(rep_gw_repowered * rep_additional_share * rep_attribution_share + nuc_gw_not_coal * nuc_attribution_share) * p_success * twh_per_gw_year * 1e6 * premium_usd_per_mwh * @cpi.usa_2024 / @cpi.usa_2022 * discounted_years * evidence_adj * missing_data_adj * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
-      "explainer": "The credited extra reactors' output (MWh a year: coal-site reactors that are extra, and all of the other line's) × the extra cost per MWh, in 2024 dollars, over the same discounted years as the tonnes, with the evidence and missing-data steps; valued as money lost by those who pay for power (docs/normalization.md 2.21, the US stand-in as above)."
+      "formula": "-(rep_gw_repowered * rep_additional_share * rep_attribution_share + nuc_gw_not_coal * nuc_attribution_share) * p_success * twh_per_gw_year * 1e6 * @cpi.usa_2024 / @cpi.usa_2019 * discounted_years * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple * premium_over_consumption_weighted",
+      "explainer": "The credited extra reactors' output (MWh a year: coal-site reactors that are extra, and all of the other line's) × each region's extra cost per MWh over its payers' consumption (row above), in 2024 dollars, over the same discounted years as the tonnes, with the evidence and missing-data steps; valued as money lost by those who pay for power (docs/normalization.md 2.21)."
     },
     {
       "id": "money_uov_per_year",
@@ -849,7 +940,7 @@
       "label": "Share of these tonnes from burning less fossil fuel near people",
       "format": "percent",
       "formula": "1 - methane_share",
-      "explainer": "Every CO₂ tonne in both lines is coal or gas power not burned; the mine methane (row below) carries no fuel smoke."
+      "explainer": "Every CO₂ tonne in both lines is coal or gas power not burned; the supply methane (row below) carries no fuel smoke."
     },
     {
       "id": "coal_smoke_factor",
@@ -918,8 +1009,8 @@
       "section": "conversion",
       "label": "Share of these tonnes that are methane",
       "format": "percent",
-      "formula": "coal_share_of_displaced_tonnes * coal_mine_methane_per_coal_co2 / (1 + coal_share_of_displaced_tonnes * coal_mine_methane_per_coal_co2)",
-      "explainer": "The mine methane of the coal not burned, as a share of the CO₂e tonnes (both lines carry the same mix); the shared conversion values it by methane's own timing and ozone (docs/normalization.md 2.5)."
+      "formula": "methane_uplift / (1 + methane_uplift)",
+      "explainer": "The supply methane of the coal and gas not burned (mine and gas-system leaks), as a share of the CO₂e tonnes (both lines carry the same mix); the shared conversion values it by methane's own timing and ozone (docs/normalization.md 2.5)."
     },
     {
       "id": "tco2e_from_uov",
