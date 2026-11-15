@@ -1,6 +1,6 @@
 # Audit: council-on-strategic-risks-charityevals, round 3 (scoped verification)
 Result: 0.01198 daly/$ = 12.0 years of healthy life per 1,000 dollars (combined range 0.79–181), unchanged from round 2. Verdict: pass.
-Model-sha: 776abfa1581b397f18271bbdb2eb40ac02195a1d7f5859abeb53b139faca04e4
+Model-sha: 6ebb1fb598467b872674edb53c4b1e08be03864617bbf8ea8afb732694734965
 Scope: only the changes since round 2 (git diff 7f2b23d HEAD, model and write-up). audit-model: 0 findings, invariants none. check.ts: all models valid. simulation-check: 5% 0.158×, median 1.0×, 95% 6.76×, one single event misses 0% of draws. A scratch script (deleted afterwards) printed the engine's row values.
 
 Round 2 findings:
@@ -12,3 +12,4 @@ Round 2 findings:
 New findings: none.
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 12 → 12.
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)

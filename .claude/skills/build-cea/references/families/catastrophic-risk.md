@@ -7,7 +7,7 @@ adjustments (its figure carries its own).
 ## The chain
 
 ```
-risk by area   <a>_extinction_per_year   chance by 2100 ÷ forecast_years  (AI: $ai_catastrophe_chance)
+risk by area   <a>_extinction_per_year   chance by 2100 ÷ forecast_years  (sliders: $ai_, $bio_, $nuclear_catastrophe_chance)
                <a>_catastrophe_per_year  survivable (>10% die), × <a>_deaths_if_catastrophe
                <a>_smaller_per_year      a smaller size (pandemics: COVID-scale, shared; else 0 or sourced)
 field work     cost_total × <a>_cost_share / 1e6 × <a>_deaths_per_million (and _future_per_million)
@@ -53,7 +53,7 @@ Why this shape:
 | Figure | Value | Source |
 |---|---|---|
 | `nuclear_`/`bio_` `extinction_by_2100`, `_catastrophe_by_2100` | experts' medians; superforecasters the low end | Existential Risk Persuasion Tournament (Karger et al. 2023, Tables 2–3; pandemics from its post-tournament survey) |
-| `$ai_catastrophe_chance` (slider), `ai_catastrophe_vs_extinction` | 3% by 2100; ×4 | the same tournament (owner decision 2026-11-04) |
+| `$ai_catastrophe_chance`, `$bio_catastrophe_chance`, `$nuclear_catastrophe_chance` (sliders), `ai_catastrophe_vs_extinction` | 3%, 1.01%, 0.55% by 2100; AI ×4 | the same tournament (owner decision 2026-11-04) |
 | `<a>_extinction_cut_per_million`, `_catastrophe_cut_per_million` | AI misalignment 7.7e-7 / 2.7e-7 (90% of extinction, 32% of survivable catastrophes' deaths), `ai_misuse_` 1.0e-6 / 1.2e-4 (10%, 68%); pandemics 1.3e-4 / 2.3e-4; nuclear 2.0e-4 / 3.6e-4 | Rethink Priorities' cross-cause model, small-project presets × its backfire step 0.772; range ×10 either way, ours |
 | `<a>_catastrophe_death_share` | nuclear 45%, pandemics 15%, AI 25% | judgments; nuclear from Xia et al. 2022's famine deaths |
 | `pandemic_probability_covid_scale`, `covid_excess_deaths` | 2% a year; 14.9M | Marani 2021; WHO |

@@ -1,6 +1,6 @@
 # Audit: center-for-ai-safety-charityevals, round 9 (verification round)
 Result: 0.001576 daly/$ = 1.576 years of healthy life per 1,000 dollars (combined range 0.035-71.3), unchanged from round 8. Verdict: pass.
-Model-sha: 24927e42f2207c392012762dd2f3f1bf8913ebf275db14dea15dc63c2764f601
+Model-sha: 246f83555359c1c5a08c4e87d6aa2fa0e70073d886d218bcf36929729a7b80cd
 Scope: only the change in commit a6b0860: the row fb_work_years (a typed judgment, 2 / 5 / 10 years) now reads the shared fact `@catastrophe.field_work_years` (INV-14), and its explainer.
 Mechanical: audit-model lint no new findings; scripts/check.ts: all models valid. Not re-run this round (scoped): normalization-audit, simulation-check.
 
@@ -11,3 +11,4 @@ No findings.
 **Verdict: pass**
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
