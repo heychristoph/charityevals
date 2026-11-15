@@ -228,7 +228,9 @@ split by `@sad_factors.meal_sads_share_<s>`.
 
 - `meal_mix_vs_reference` is 1 (0.5–2) unless one published estimate compares this country's meal with
   the reference meal the same way; never a per-meal figure from a meat mix of your own, nor a ratio of
-  two studies.
+  two studies. Alternative proteins replace mostly land meat: a step `alt_protein_mix` =
+  `@sad_factors.alt_protein_meal_vs_reference` (its species split in `alt_protein_meal_sads_share_*`);
+  milk and eggs read `sads_per_dairy_meal_replaced` and `sads_per_egg_meal_replaced`.
 - **Basis**: Convention 11 (estimate basis); a year's trainings, events or pledges against that year's
   spending are `unit_cost`.
 - **A stock of running wins** (only the meals a year still served under all changes won so far): wins
