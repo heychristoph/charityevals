@@ -108,7 +108,7 @@ const example = `{
 
   <h2 id="sources">Where models come from</h2>
   <p>
-    <strong>Imported:</strong> every public cost-effectiveness model we found and could read, from <a href="/evaluators/givewell">GiveWell</a>, <a href="/evaluators/ace">Animal Charity Evaluators</a>, the <a href="/evaluators/hli">Happier Lives Institute</a>, <a href="/evaluators/ambitious-impact">Ambitious Impact</a>, <a href="/evaluators/sogive">SoGive</a> and <a href="/evaluators">others</a> (the <a href={`${repo}/tree/main/inventory`}>inventory</a> lists everything and why anything was left out). Each spreadsheet is traced from its bottom line, and every calculated row must match the sheet, or the build fails.
+    <strong>Imported:</strong> every public cost-effectiveness model we found and could read, from <a href="/evaluators/givewell">GiveWell</a>, <a href="/evaluators/ace">Animal Charity Evaluators</a>, the <a href="/evaluators/hli">Happier Lives Institute</a>, <a href="/evaluators/ambitious-impact">Ambitious Impact</a>, <a href="/evaluators/sogive">SoGive</a>, <a href="/evaluators/the-life-you-can-save">The Life You Can Save</a> and <a href="/evaluators">others</a> (the <a href={`${repo}/tree/main/inventory`}>inventory</a> lists everything and why anything was left out). Each spreadsheet is traced from its bottom line, and every calculated row must match the sheet, or the build fails.
   </p>
   <p id="our-models">
     <strong>Ours:</strong> where no evaluator has looked, we build the model by the method below.
@@ -169,8 +169,14 @@ const example = `{
 
   <h3 id="climate">Climate</h3>
   <p>
-    A tonne of CO₂ is valued by the deaths it causes: about 1.9 per 10,000 tonnes (Rethink Priorities), three quarters from the air pollution of burning fuel and a quarter from heat. Pollution deaths come at once, but only tonnes from burning less fuel avert them; heat deaths come about 60 years later and are discounted. Damage that isn't death, such as lost harvests, counts as zero, so climate figures are probably low.
+    A tonne of CO₂ is valued by the deaths it causes: about 1.9 per 10,000 tonnes (Rethink Priorities), three quarters from the air pollution of burning fuel and a quarter from heat. Pollution deaths come at once, but only tonnes from burning less fuel avert them; heat deaths come about 60 years later and are discounted. Damage that isn't death, such as lost harvests, property and work, adds 60% more (30–110%, the EPA's 2023 split of the social cost of carbon), counted as a side effect.
   </p>
+
+  <h3 id="catastrophic">Catastrophic risks</h3>
+  <p>
+    Work on AI, pandemics and nuclear war is valued by how much it cuts the chance of a catastrophe this century. How likely each catastrophe is, is yours to set; the defaults are the median expert forecasts in a 2022 forecasting tournament.
+  </p>
+  <Setting client:load ids={["ai_catastrophe_chance", "bio_catastrophe_chance", "nuclear_catastrophe_chance"]} />
 
   <h3 id="measures">Which measure you see</h3>
   <p>
@@ -188,6 +194,11 @@ const example = `{
     Besides what a programme is for, it often does other good or harm: to people around those it helps, to other health outcomes, or by pushing work elsewhere. Each is an estimate in the model like any other number, and this sets how much they count.
   </p>
   <Setting client:load ids={["side_effect_weight"]} />
+
+  <h3 id="costs-to-others">Costs to others, and gifts in kind</h3>
+  <p>
+    A rule a charity helps win costs those who must comply, and public money it wins costs those who pay taxes: both count against the good, at what that money means to the people who lose it. Goods and services given in kind count at what they are worth to those who get them, usually less than the same money in cash.
+  </p>
 
   <h3 id="missing-data">Results nobody measured</h3>
   <p>

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "evergreen-collaborative",
   "owner": "charityevals",
-  "summary": "Evergreen Collaborative, the tax-deductible research and education arm of the Evergreen climate groups (its sister Evergreen Action, a 501(c)(4), does most of the lobbying), writes US federal and state clean-energy policy and makes the public case for it ($8.6M spent in 2024). This model counts its wins of 2021-2024 with published tonnes (the Inflation Reduction Act, Michigan's 2023 clean-energy laws and EPA's 2024 power-plant and vehicle standards), its other wins as a share, against the same years' spending. At the defaults that is 0.0026 years of healthy life per $1,000: a dollar given averts about 0.012 tonnes of CO₂e (about $80 a tonne), most of it through the federal law; each win is shared with hundreds of groups (Evergreen Collaborative is credited with 0.1% to 2% of the advocacy behind each) and with what would have happened anyway, and since 2025 the law's credits have been cut back and the EPA rules repealed. The biggest uncertainties are the discount rate, the missing-data discount and the years a won reform counts; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "Evergreen Collaborative, the tax-deductible research and education arm of the Evergreen climate groups (its sister Evergreen Action, a 501(c)(4), does most of the lobbying), writes US federal and state clean-energy policy and makes the public case for it ($8.6M spent in 2024). This model counts its wins of 2021-2024 with published tonnes (the Inflation Reduction Act, Michigan's 2023 clean-energy laws and EPA's 2024 power-plant and vehicle standards), its other wins as a share, against the same years' spending. At the defaults that is a net harm, −0.0064 years of healthy life per $1,000: a dollar given averts about 0.012 tonnes of CO₂e (about $80 a tonne), most of it through the federal law, whose public money (about $65 billion a year) costs taxpayers more than its tonnes are worth on the site's scale; each win is shared with hundreds of groups (Evergreen Collaborative is credited with 0.1% to 2% of the advocacy behind each) and with what would have happened anyway, and since 2025 the law's credits have been cut back and the EPA rules repealed. The biggest uncertainties are the discount rate, the missing-data discount and the years a won reform counts; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Evergreen Collaborative",
@@ -777,6 +777,24 @@
       "explainer": "The law's branch steps for the money: advocacy's share of the win, Evergreen Collaborative's share of the advocacy behind the home provisions, what wouldn't have come anyway and the missing-data step, spread over the period's four years. The tonnes' evidence and delivery steps are left out, as in Rewiring America's model: the money is a sum in the statute and the claims Treasury counted, its delivery in the paid share."
     },
     {
+      "id": "ira_public_usd_per_year",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act: public money a year behind the tonnes counted here",
+      "format": "integer",
+      "formula": "@climate.ira_public_cost_usd_per_year * (1 - @climate.ira_household_cost_share) - @climate.ira_45q_capture_tco2_per_year * @climate.q45_credit_usd_per_tco2",
+      "explainer": "The law's energy and climate money a year (facts: climate.ira_public_cost_usd_per_year, about $65 billion) less the home rebates and credits, valued in the row above as money to households (climate.ira_household_cost_share), and less the carbon-capture credit, whose tonnes are left out here too (climate.ira_45q_capture_tco2_per_year × climate.q45_credit_usd_per_tco2).",
+      "unit": "$ / year"
+    },
+    {
+      "id": "ira_public_cost_uov",
+      "section": "adjustments",
+      "label": "Inflation Reduction Act: what that money costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-ira_public_usd_per_year * ira_payer_cost_per_dollar * $uov_per_ln_consumption * p_success * discounted_years * ira_total_adj",
+      "explainer": "Public money that buys tonnes is netted against what it costs those who pay for it (docs/normalization.md 2.23): the money × the value lost per dollar (row ira_payer_cost_per_dollar, on the log scale), over the same years, wait, advocacy share, counterfactual, credit, delivered share, evidence and missing-data steps as the law's tonnes, since the credits are paid per unit built.",
+      "unit": "units of value"
+    },
+    {
       "id": "pwr_compliance_uov",
       "section": "adjustments",
       "label": "EPA power-plant standards: compliance costs, units of value (negative)",
@@ -806,11 +824,11 @@
     {
       "id": "uov_counted_per_year",
       "section": "adjustments",
-      "label": "Units of value a year counted outside the tonnes: public money won for households and the rules' compliance costs",
+      "label": "Units of value a year counted outside the tonnes: public money won for households, the law's public money and the rules' compliance costs",
       "format": "number",
       "unit": "uov",
-      "formula": "ira_transfer_uov_per_year + compliance_uov_per_year",
-      "explainer": "The household money (recipients' gain less taxpayers' cost) plus the won rules' compliance costs (negative), the input of the bridge into tonnes."
+      "formula": "ira_transfer_uov_per_year + compliance_uov_per_year + ira_public_cost_uov / period_years",
+      "explainer": "The household money (recipients' gain less taxpayers' cost), the cost to taxpayers of the law's other money (negative) and the won rules' compliance costs (negative), the input of the bridge into tonnes."
     },
     {
       "id": "counterfactual_adj",
@@ -947,7 +965,7 @@
       "label": "Public money won for households and the rules' compliance costs (negative), in tonnes of CO₂e",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "uov_counted_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "formula": "uov_counted_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "explainer": "The households' gain and the won rules' compliance costs (uov_counted_per_year) enter the tonnes only through the site's fixed bridge (docs/normalization.md 2.6): they move with the value of consumption, not with the climate sliders."
     },
     {

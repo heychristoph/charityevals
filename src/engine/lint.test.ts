@@ -39,6 +39,14 @@ describe("lint", () => {
   it("flags a sourced input without a URL", () => {
     expect(codes(withRow(base(), "animals_per_year", { source: { title: "somewhere" } }))).toContain("source:animals_per_year");
   });
+  it("flags a model counting public-money tonnes without the money's cost to its payers (normalization.md 2.23)", () => {
+    const raw = filled(files["policy-research-meta-climate"]);
+    const won = withRow(raw, "tonnes_per_year_if_won", { formula: "@climate.ira_45q_capture_tco2_per_year", value: undefined, kind: undefined, source: undefined });
+    expect(codes(won)).toContain("public-money:tonnes_per_year_if_won");
+    const netted = withRow(won, "public_usd_per_year", { formula: "tonnes_per_year_if_won * @climate.q45_credit_usd_per_tco2" });
+    expect(codes(netted)).not.toContain("public-money:tonnes_per_year_if_won");
+    expect(codes(withRow(netted, "public_payer_uov_per_dollar", { formula: "1 / @united_states.ce_expenditure_per_person_2024" }))).toContain("public-money:public_cost_uov");
+  });
   it("flags an unmodelled_benefits_adj row without the side-effect tag, and accepts one weighted through its components", () => {
     const raw = filled(files["direct-health"]);
     expect(codes(raw)).not.toContain("side-effect-tag:unmodelled_benefits_adj");

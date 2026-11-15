@@ -497,11 +497,19 @@ T["policy-research-meta-climate"] = model("policy-research-meta", "climate polic
         f("methane_share", "conversion", "Share of these tonnes that are methane", "0",
           "TEMPLATE: the share of the tonnes (CO₂e) that is methane, weighted by tonnes a year before waits and years counted (a conversion row reads no shared assumption); the shared conversion values it by methane's own timing and adds its ozone deaths (docs/normalization.md 2.5). 0 for CO₂ only.", "percent"),
     ] + adj_rows(implementation=False) + [
-        f("outcome_total", "outcome", "Tonnes of CO₂e averted", "downstream_value * total_adj", None, "number", "t CO₂e"),
+        f("public_usd_per_year", "adjustments", "Public money a year that buys the tonnes or funds the work (none here)", "0",
+          "TEMPLATE: public money the win spends a year once in effect (a tax credit per tonne × the tonnes, grants, public procurement, a won fund's levies) from a shared fact (facts/climate.json: the credit per tonne, the law's yearly cost), as an input with its source; 0 when the tonnes come with no public money.", "integer", "$ / year"),
+        f("public_payer_uov_per_dollar", "adjustments", "Value lost per dollar of that money, units of value", "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+          "TEMPLATE: what a dollar of public money costs its payers (docs/normalization.md 2.23): the shared cost of raising it over the payers' consumption on the survey scale (2.14), here US federal taxpayers. Other payers: their country's survey-scale consumption; a levy on traded goods: its payers at the shared compliance-cost multiple, without the cost of raising public funds.", "small", "units of value / $"),
+        f("public_cost_uov", "adjustments", "What the public money costs its payers, units of value (negative)", "-public_usd_per_year * public_payer_uov_per_dollar * p_success * discounted_years * total_adj",
+          "Netted against the tonnes it buys (docs/normalization.md 2.23), over the same years, wait and adjustments as the tonnes: money paid per unit delivered takes every adjustment; a fixed sum (grants, appropriations) all but the evidence step (divide total_adj by evidence_adj); a levy the steps of the spending it pays for.", "number", "units of value"),
+        f("tco2e_from_uov", "bridges", "The public money's cost to its payers, in tonnes of CO₂e (negative)", bridge("public_cost_uov", "uov", "tco2e"),
+          "Units of value into tonnes by the site's fixed bridge (docs/normalization.md 2.6). Fixed.", "number", "t CO₂e"),
+        f("outcome_total", "outcome", "Tonnes of CO₂e averted", "downstream_value * total_adj + tco2e_from_uov", None, "number", "t CO₂e"),
         f("tco2e_per_dollar", "outcome", "Tonnes of CO₂e averted per dollar", "outcome_total / cost_total", None, "small", "t CO₂e / $"),
     ] + donor_rows("tco2e", "Tonnes of CO₂e averted", "research", marginal=True) + donor_tail("tco2e", "Tonnes of CO₂e averted", marginal=True, unit="tco2e"),
     "what the charity does, the causal chain to the tonnes, " + BOTTOM, "past_average",
-    sections=SECTIONS[:4] + [CONV_SECTION] + SECTIONS[4:], id="template-policy-research-meta-climate")
+    sections=SECTIONS[:4] + [CONV_SECTION, BRIDGE_SECTION] + SECTIONS[4:], id="template-policy-research-meta-climate")
 
 # --- outcomes in several units (the new families) --------------------------------------------
 VPD = "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier"

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "project-drawdown",
   "owner": "charityevals",
-  "summary": "Project Drawdown (Saint Paul, Minnesota) researches which climate solutions matter most (Drawdown Explorer, the Drawdown Roadmap) and guides philanthropists, companies and investors toward them, with storytelling for the public; this model values that information by the money it changed in 2023-2025: funders' climate giving by the site's shared rule for spending research changed (all shifted money, at the gain of a dollar at the climate charities on the rankings over an ordinary one, with evidence and missing-data steps), companies' and investors' money by the difference in tonnes per dollar between the new and old use, against its spending over those years ($5.6M in 2025). At the defaults a dollar given averts the equivalent of about 0.01 tonnes of CO₂e, about 0.005 years of healthy life per $1,000, nine-tenths of it from funders' giving, a shifted dollar valued at the ranked climate charities' figures, forest protection among them. The result is mostly uncertainty: how much giving follows its guidance, how much is its doing rather than other advisers', and how an ordinary climate charity compares with the ranked ones; every branch is discounted for missing data, since no decision it changed is counted or followed up.",
+  "summary": "Project Drawdown (Saint Paul, Minnesota) researches which climate solutions matter most (Drawdown Explorer, the Drawdown Roadmap) and guides philanthropists, companies and investors toward them, with storytelling for the public; this model values that information by the money it changed in 2023-2025: funders' climate giving by the site's shared rule for spending research changed (all shifted money, at the gain of a dollar at the climate charities on the rankings over an ordinary one, with evidence and missing-data steps), companies' and investors' money by the difference in tonnes per dollar between the new and old use, against its spending over those years ($5.6M in 2025). At the defaults a dollar given comes to the equivalent of about −0.0013 tonnes of CO₂e, about −0.0008 years of healthy life per $1,000, from funders' giving, a shifted dollar valued at the ranked climate charities' figures, which average below zero at the defaults once public money's cost to taxpayers is counted; companies' and investors' money is the positive part. The result is mostly uncertainty: how much giving follows its guidance, how much is its doing rather than other advisers', and how an ordinary climate charity compares with the ranked ones; every branch is discounted for missing data, since no decision it changed is counted or followed up.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Project Drawdown",
@@ -549,7 +549,7 @@
       "section": "bridges",
       "label": "Philanthropy, in tonnes of CO₂e (after the evidence and missing-data steps)",
       "format": "number",
-      "formula": "uov_bridged / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "formula": "uov_bridged / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "unit": "t CO₂e",
       "explainer": ""
     },
@@ -832,16 +832,16 @@
       "section": "adjustments",
       "label": "Share of the outcome that wouldn't have happened anyway",
       "format": "percent",
-      "explainer": "Outcome-weighted average of the branches, for reading only.",
-      "formula": "(phil_downstream * phil_counterfactual_adj + corp_downstream * corp_counterfactual_adj + inv_downstream * inv_counterfactual_adj + pub_downstream * pub_counterfactual_adj) / (phil_downstream + corp_downstream + inv_downstream + pub_downstream)"
+      "explainer": "Outcome-weighted average of the branches, for reading only. Weighted by each branch's size, whatever its sign.",
+      "formula": "(abs(phil_downstream) * phil_counterfactual_adj + abs(corp_downstream) * corp_counterfactual_adj + abs(inv_downstream) * inv_counterfactual_adj + abs(pub_downstream) * pub_counterfactual_adj) / (abs(phil_downstream) + abs(corp_downstream) + abs(inv_downstream) + abs(pub_downstream))"
     },
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "explainer": "Outcome-weighted average of the branches, for reading only.",
-      "formula": "(phil_downstream * phil_counterfactual_adj * phil_attribution_share_shared + corp_downstream * corp_counterfactual_adj * corp_attribution_share_shared + inv_downstream * inv_counterfactual_adj * inv_attribution_share_shared + pub_downstream * pub_counterfactual_adj * pub_attribution_share_shared) / (phil_downstream * phil_counterfactual_adj + corp_downstream * corp_counterfactual_adj + inv_downstream * inv_counterfactual_adj + pub_downstream * pub_counterfactual_adj)"
+      "explainer": "Outcome-weighted average of the branches, for reading only. Weighted by each branch's size, whatever its sign.",
+      "formula": "(abs(phil_downstream) * phil_counterfactual_adj * phil_attribution_share_shared + abs(corp_downstream) * corp_counterfactual_adj * corp_attribution_share_shared + abs(inv_downstream) * inv_counterfactual_adj * inv_attribution_share_shared + abs(pub_downstream) * pub_counterfactual_adj * pub_attribution_share_shared) / (abs(phil_downstream) * phil_counterfactual_adj + abs(corp_downstream) * corp_counterfactual_adj + abs(inv_downstream) * inv_counterfactual_adj + abs(pub_downstream) * pub_counterfactual_adj)"
     },
     {
       "id": "attribution_share",
@@ -856,8 +856,8 @@
       "section": "adjustments",
       "label": "All adjustments combined",
       "format": "multiple",
-      "explainer": "Outcome-weighted average of the branches, for reading only.",
-      "formula": "(tco2e_from_uov * phil_total_adj + corp_downstream * corp_total_adj + inv_downstream * inv_total_adj + pub_downstream * pub_total_adj) / (phil_downstream + corp_downstream + inv_downstream + pub_downstream)"
+      "explainer": "Outcome-weighted average of the branches, for reading only. Weighted by each branch's size, whatever its sign.",
+      "formula": "(abs(tco2e_from_uov) * phil_total_adj + abs(corp_downstream) * corp_total_adj + abs(inv_downstream) * inv_total_adj + abs(pub_downstream) * pub_total_adj) / (abs(phil_downstream) + abs(corp_downstream) + abs(inv_downstream) + abs(pub_downstream))"
     },
     {
       "id": "unmodelled_benefits_adj",

@@ -20,4 +20,5 @@ Checks: (3) summary, model summary and write-up headline read 0.0016 against the
 | `alt_protein_meal_vs_reference` | gfi.org/resource/analyzing-plant-based-meat-and-seafood-sales/ | page reachable, quote present | the 86% sentence matches; share of sales, now stated as a stand-in for weight |
 
 Verdict: pass (no high findings; no medium; no low).
-Model-sha: 8f1fd3d9194890da0d61f60d04a69f4471b9cc7d49cca665e95cb5ef845fcf1b
+Model-sha: 5aab44e6fa535406d411715d8ec2bbf35fda95f0e6c967dea723a5a8ba502c16
+Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed

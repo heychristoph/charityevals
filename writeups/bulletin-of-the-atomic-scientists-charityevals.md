@@ -58,7 +58,6 @@ Under half the Bulletin's spending is on nuclear risk, and journalism is further
 
 - Losses beyond deaths, such as survivors' lost income and health, are a shared figure set to 0.
 - The forecasts are spread evenly over the century, though forecasters put much of the risk later.
-- Climate damage other than deaths is a shared figure set to 0.
 
 ### How this model was checked
 

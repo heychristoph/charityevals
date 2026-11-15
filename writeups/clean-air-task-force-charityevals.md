@@ -1,6 +1,6 @@
 ### Summary
 
-Clean Air Task Force (CATF) does research and advocacy for climate policy, from methane rules to advanced nuclear power. Our model counts the six biggest policies it worked on that were won between 2022 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="clean-air-task-force-charityevals">0.0041</span> years of healthy life per $1,000**. Nearly all of that comes from two methane rules. The result is low for two reasons: CATF shares each win with many other groups and with what governments would have done anyway, and the US rules have since been weakened or repealed.
+Clean Air Task Force (CATF) does research and advocacy for climate policy, from methane rules to advanced nuclear power. Our model counts the six biggest policies it worked on that were won between 2022 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="clean-air-task-force-charityevals">0.0035</span> years of healthy life per $1,000**. Nearly all of that comes from two methane rules. The result is low for two reasons: CATF shares each win with many other groups and with what governments would have done anyway, and the US rules have since been weakened or repealed.
 
 ### What the charity does
 
@@ -43,7 +43,7 @@ The EU regulation gives about half the modelled tonnes, the US methane rule abou
 
 ### What isn't modelled
 
-Wins before 2022 aren't counted: the US methane and coal-plant rules of the 2010s and the 2018 carbon-capture credit. Their cost isn't in the period either. Smaller wins of the period are covered only by the 30% for other work: Europe's own methane rules, methane programmes in other countries, hydrogen rules, state laws. Climate damage other than deaths is left at the shared zero.
+Wins before 2022 aren't counted: the US methane and coal-plant rules of the 2010s and the 2018 carbon-capture credit. Their cost isn't in the period either. Smaller wins of the period are covered only by the 30% for other work: Europe's own methane rules, methane programmes in other countries, hydrogen rules, state laws.
 
 ### How this model was checked
 

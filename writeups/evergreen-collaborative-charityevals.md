@@ -1,6 +1,6 @@
 ### Summary
 
-Evergreen Collaborative researches and drafts US federal and state clean-energy policy and makes the public case for it ($8.6M of expenses in 2024). Counting the wins of 2021-2024 that have published tonnes against the same years' spending, a dollar given today does about **<span data-figure="headline" data-model="evergreen-collaborative-charityevals">0.0026</span> years of healthy life per 1,000 dollars**, through the greenhouse gas and air pollution those policies avert.
+Evergreen Collaborative researches and drafts US federal and state clean-energy policy and makes the public case for it ($8.6M of expenses in 2024). Counting the wins of 2021-2024 that have published tonnes against the same years' spending, a dollar given today does about **<span data-figure="headline" data-model="evergreen-collaborative-charityevals">−0.0064</span> years of healthy life per 1,000 dollars**, a net harm: most of its tonnes come from the Inflation Reduction Act, whose public money costs taxpayers more than the greenhouse gas and air pollution it averts are worth on the site's scale.
 
 ### What the charity does
 

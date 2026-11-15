@@ -1,6 +1,6 @@
 # Audit: earthjustice-charityevals, round 6 (verification of the compliance-cost rule 2.21)
 Result: 0.004546 tco2e/$ = 0.001995 years of healthy life per 1,000 dollars (cause median 0.001704, x1.17), against 0.002409 in round 5 (-17%). Verdict: pass.
-Model-sha: aa3ff7e0ff7fc15836d60e71ce5de929998dc345e62c78f0c85b3e7ef36f79aa
+Model-sha: 55b27c068ccff97552a741e6dd71d21f925b2c976f4182e940ce025ba6f17809
 Scope: scoped verification of the changed rows: usmeth_compliance_uov, pwr_compliance_uov, compliance_uov_per_year, the new `bridges` section and tco2e_from_uov, outcome_total, the summary and the write-up's figures (this model's and the health model's headline spans). Unchanged rows not re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (lint, invariants); normalization-audit and check.ts not re-run (scoped round).
 Previous round: not re-checked beyond the changed rows.
@@ -28,3 +28,4 @@ Previous round: not re-checked beyond the changed rows.
 Of the changed rows: the US methane rule's cost ($1.5B, 1.0 to 2.4B) times the rule's 40% delivered share and 8% credit, and the payer multiple. Both sourced or ranged.
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): value-neutral: the EPA 2024 rules' estimate and final years now read shared facts in facts/climate.json (INV-14), same values
+Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
