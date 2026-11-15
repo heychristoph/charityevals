@@ -1,7 +1,7 @@
 # Audit: environmental-defense-fund-charityevals-health-nature, round 8 (verification of the compliance-cost rule 2.21, text fixes of round 7)
 Result: 1.221e-6 daly/$ = 0.001221 years of healthy life per 1,000 dollars (unchanged from round 7). Verdict: pass.
 Verdict: pass
-Model-sha: 4a696dcec97a925a4ff2d40672f0b832d9ad29d27738531d6d40d8701d342e36
+Model-sha: ac3e4dbfff71ea2d5660af0c8d3c877a7a29651098dbf6494cceeb16e47b0baf
 
 Scope: scoped verification of the `summary` sentence on shares (over half from the soot standard, most of the rest from the lead-pipe rule). No formula changed.
 
@@ -22,5 +22,6 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 4a696dcec97a925a4ff2d40672f0b832d9ad29d27738531d6d40d8701d342e36
+Model-sha: ac3e4dbfff71ea2d5660af0c8d3c877a7a29651098dbf6494cceeb16e47b0baf
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
+Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)

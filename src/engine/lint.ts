@@ -173,6 +173,21 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
   if (m.missing_data) add("high", "missing-data", "a charityevals model carries missing_data", "Remove the field: an own build's branches carry the step in their missing_data_adj rows (the field is for imported models, INV-21).");
   const down = new Map<string, string[]>();
   for (const r of m.rows) for (const d of r.deps) down.set(d, [...(down.get(d) ?? []), r.id]);
+  // Side effects (docs/normalization.md 2.16): the unmodelled-benefits row is read through $side_effect_weight
+  // only when it, or a row it reads or is read by, carries `side_effect`.
+  for (const r of m.rows.filter((x) => /unmodelled_benefits_adj$/.test(x.id) && !x.side_effect)) {
+    const near = new Set(upstream(m, r.id));
+    const stack = [...(down.get(r.id) ?? [])];
+    while (stack.length) {
+      const d = stack.pop()!;
+      if (near.has(d)) continue;
+      near.add(d);
+      stack.push(...(down.get(d) ?? []));
+    }
+    near.delete(r.id);
+    if (![...near].some((d) => m.byId.get(d)?.side_effect))
+      add("medium", "side-effect-tag", `${r.id} carries no side_effect tag, so the side-effects slider doesn't move it`, `Add "side_effect": "added" to ${r.id} (a share added to the result, read as 1 + x), or to the rows it sums.`, r.id);
+  }
   const isInput = (id: string) => { const r = m.byId.get(id); return !!r && r.formula === undefined && r.value !== undefined; };
   for (const mk of m.rows.filter((r) => /(^|_)missing_data_adj$/.test(r.id))) {
     const f = squash(mk.formula ?? "");

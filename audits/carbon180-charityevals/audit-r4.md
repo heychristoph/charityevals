@@ -1,6 +1,6 @@
 # Audit: carbon180-charityevals, round 4 (scoped verification of the round-3 fixes)
 Result: 0.0009677 tco2e/$ = 0.00012 years of healthy life per 1,000 dollars (unchanged from round 3: 0.000968 tco2e/$, 0.000119 years/$1k). Verdict: pass.
-Model-sha: ac532b383bf79db0f81c1a5e860d0bb59bc69840a5c472a0d53979a2ee476c4a
+Model-sha: 04351bf7b234a96f08229098058237e99890d19901a365d52b121b18f55be93b
 Scope: only the explainer edits of commit 5464261a (git diff of the model). Nothing else re-audited.
 Mechanical: check.ts gives 9.677e-4 tco2e/$ and 0.00012 years/$1k, all models valid. audit-model.ts: 0 high, 1 medium (far-below, ×0.065, supported as in rounds 2 and 3), no other finding. The diff touches only five `explainer` strings; no value, range or formula changed.
 Previous round (round 3's four findings):
@@ -14,3 +14,4 @@ Previous round (round 3's four findings):
 
 ## Sources checked
 None new; the round-3 fixes removed an unverified citation figure rather than adding one.
+Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)

@@ -1,0 +1,24 @@
+# Audit: clean-air-task-force-charityevals, round 10 (verification of the US nuclear cost gap at the site's discount rate)
+Result: 0.008964 tco2e/$ = 0.004124 years of healthy life per 1,000 dollars, against 0.003644 in round 9 (+13%). Verdict: pass.
+Model-sha: 1d5beb629e27d25b1418ee20c5fcd56813cfb7d8579e09ab1a4131ffbc7ff585
+Scope: scoped verification of nuc_extra_power_cost_uov (new formula), the facts advanced_nuclear_premium_usd_per_mwh_usa_3pct and _7pct, pcge_discount_rate_low/high, advanced_nuclear_premium_uncertainty_usd_per_mwh, the 2018-dollar conversion, and the headline text (summary, write-up). Nothing else re-audited.
+Mechanical: audit-model.ts exit 0, 0 findings (warnings only: range runs from harm to good, judgment calls dominate, 14 point inputs); check.ts "all models valid", headline 0.0041 matches the summary and the write-up (data-figure 0.0041).
+Previous round: r9's low findings 1 to 3 carry over (finding 1 is restated below in the form the task asked for).
+
+Checks against the PCGE 2020 extract (Tables 3.11a, 3.12, 3.13a):
+- US LWR nuclear LCOE 43.90 / 71.25 at 3% / 7%: matches.
+- US supercritical pulverised coal 75.09 / 88.13, carbon 24.47: matches. Less carbon: 50.62 / 63.66.
+- US CCGT 40.73 / 44.98, carbon 10.20: matches. Less carbon: 30.53 / 34.78.
+- 40% coal, 60% gas: 0.4 × 50.62 + 0.6 × 30.53 = 38.57; 0.4 × 63.66 + 0.6 × 34.78 = 46.33. Gaps 43.90 − 38.57 = 5.33 and 71.25 − 46.33 = 24.92: both facts match. All figures are 2018 USD in the study, so the @cpi.usa_2024 / @cpi.usa_2018 conversion is the right base year.
+- Formula: linear interpolation g3 + (g7 − g3) × (r − 0.03) / (0.07 − 0.03), plus the shared uncertainty term (added after interpolation, in 2018 dollars, then converted): correct and consistent with the other regions' pattern. At the default 4% rate the gap is 5.33 + 19.59 × 0.25 = 10.2 $/MWh (2018), about 13 in 2024 dollars. Sign (negative cost row), units (MWh × $/MWh / (payer multiple × consumption per person) × uov per ln consumption) and the factor list (credited MWh, discounted years, attribution, implementation, missing-data; not the evidence adjustment) are unchanged from round 9 and still pass.
+- The headline moved 0.0036 to 0.0041 as the gap fell from the old single 7% figure (24.9, in effect 25 in round 9) to about 10 at 4%: consistent with the model (cost row roughly 0.4 of its round-9 size).
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | low | consistency | nuc_extra_power_cost_uov vs nuc_tonnes_per_year | The gap is a fossil-fuel gap (nuclear against 40% coal and 60% gas), but it is applied to every credited MWh. The tonnes side prices the same MWh at the grid average 0.366 t/MWh, which already counts that part of the replaced power is clean. Where the replaced power is not fossil, the avoided cost is that of whatever it is (renewables, existing nuclear), not a fossil gap. TerraPraxis's model applies its gap to the fossil share only. | formula multiplies the full MWh count by the interpolated gap; the explainer calls it "the fossil power they replace". | Multiply the gap by the fossil share of the replaced power, using the same source as the tonnes side's grid share (the fossil share of US generation by the 2040s that the tonnes row's counterfactual implies, as TerraPraxis does), or state in the explainer that the whole MWh is treated as fossil and set the tonnes side to match. | Lowers the cost row in proportion to the clean share (order 40% of it if fossil is about 60%), raising the headline by perhaps 5 to 10%. |
+| 2 | low | scope | nuc_extra_power_cost_uov | The interpolation extrapolates linearly outside 3% to 7% (the $discount_rate slider). Below about 2.7% the gap turns negative and the cost row becomes a saving; above 7% it keeps rising. The study gives a 10% point (nuclear 98.56) that could bound the upper side. | Formula has no clamp; gap = 5.33 at 3%, 24.92 at 7%. | Optional: add the 10% figures as a third point, or note in the explainer that the row is extrapolated outside 3 to 7%. | None at the default; small at the slider ends. |
+| 3 | low | source | advanced_nuclear_premium_usd_per_mwh_usa_3pct/_7pct | Carried over from r9 #3: 43.90 / 71.25 is the PCGE Gen III LWR, while the branch is about advanced reactors. The shared uncertainty fact (0, -10 to 15) is the stated cover, with the upward lean explained. | Fact note. | None needed beyond the existing range; consider naming in the uncertainty fact's explainer that this is what it also covers. | Within the range already. |
+
+Findings: 0 high, 0 medium, 3 low. Verdict: pass.
+Re-stamped (15 Nov 2026): merge of two verified changes (EPA rule-year facts; shared nuclear cost facts, r9-r10); mechanical
+Re-stamped (15 Nov 2026): side-effect tag on unmodelled_benefits_adj (2.16, mechanical; headline unchanged)
