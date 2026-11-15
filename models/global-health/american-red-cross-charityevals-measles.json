@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "american-red-cross",
   "owner": "charityevals",
-  "summary": "Through the Measles & Rubella Partnership the American Red Cross funds Red Cross and Red Crescent volunteers who visit households before vaccination campaigns to bring children in (3 million households in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 15 November 2026). This model counts the measles deaths averted among the few extra children vaccinated because of a visit (and the deaths after measles), in years of healthy life per $1,000, at about 8% of the international programme's spending (the measles grants' share of its grants abroad in the Form 990). Nothing in the chain is measured for this programme: the extra vaccinations per visit (a Kenyan Red Cross survey's 26% of children who would have missed the dose, discounted to about 3%), the deaths each averts and the programme's spending are wide judgments, so the result is mostly uncertainty and the model is discounted for missing data. Most children would have been vaccinated without a visit, so the Red Cross's cost per extra child vaccinated is about $35 (older children counted where the campaign covers them), and the dose protects an under-five for only the two years or so left under five, often on top of an earlier dose.",
+  "summary": "Through the Measles & Rubella Partnership the American Red Cross funds Red Cross and Red Crescent volunteers who visit households before vaccination campaigns to bring children in (3 million households in its fiscal year to June 2025, the latest audited year: the FY2026 accounts weren't on the Red Cross's financials page on 15 November 2026). This model counts the measles deaths averted among the few extra children vaccinated because of a visit (and the deaths after measles), in years of healthy life per $1,000, at about 8% of the international programme's spending (the measles grants' share of its grants abroad in the Form 990). Nothing in the chain is measured for this programme: the extra vaccinations per visit (a Kenyan Red Cross survey's 26% of children who would have missed the dose, discounted to about 3%), the deaths each averts and the programme's spending are wide judgments, so the result is mostly uncertainty and the model is discounted for missing data. Most children would have been vaccinated without a visit, so the Red Cross's cost per extra child vaccinated is about $35 (older children counted where the campaign covers them), and the dose often comes on top of an earlier dose.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Red Cross Measles & Rubella Partnership mobilisation (FY2025)",
@@ -200,12 +200,12 @@
       "label": "Children under five per household visited",
       "format": "number",
       "value": {
-        "low": 0.7,
+        "low": 0.65,
         "best": 1,
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "In Kenya's 2012 campaign, Red Cross volunteers counted 161,695 eligible children aged 9-59 months in the 164,643 households they visited, 0.98 a household (Mbabazi et al. 2014, Health Policy and Planning): volunteers target households with young children. The national average (DHS household sizes of 4.2-4.6 with about 15% under five) is about 0.7, the low end. Children 5-14 vaccinated in wide-age campaigns are counted in msl_5_14_deaths_per_u5_child."
+      "explainer": "In Kenya's 2012 campaign, Red Cross volunteers counted 161,695 eligible children aged 9-59 months in the 164,643 households they visited, 0.98 a household (Mbabazi et al. 2014, Health Policy and Planning): volunteers target households with young children. The national average (the four countries' average household size of about 4.25, @household_size, with about 15% under five) is about 0.65, the low end. Children 5-14 vaccinated in wide-age campaigns are counted in msl_5_14_deaths_per_u5_child."
     },
     {
       "id": "people_reached",
@@ -451,8 +451,8 @@
       "section": "effect",
       "label": "Deaths averted per person reached (before adjustments)",
       "format": "small",
-      "formula": "msl_u5_deaths_per_child + msl_5_14_deaths_per_u5_child",
-      "explainer": "Measles deaths averted per under-five reached, its own and those of the older children vaccinated in wide-age campaigns alongside."
+      "formula": "msl_u5_deaths_per_child + msl_u5_after_five_deaths_per_child + msl_5_14_deaths_per_u5_child",
+      "explainer": "Measles deaths averted per under-five reached: its own before and after five, and those of the older children vaccinated in wide-age campaigns alongside."
     },
     {
       "id": "msl_u5_deaths_per_child",
@@ -461,6 +461,28 @@
       "format": "small",
       "formula": "baseline_mortality_rate * msl_age_risk_ratio * mortality_reduction * (1 + indirect_deaths_ratio) * years_of_coverage",
       "explainer": "Yearly risk at the protected ages × the dose's added protection × deaths after measles × years left under five."
+    },
+    {
+      "id": "msl_u5_years_after_five",
+      "section": "effect",
+      "label": "Years of risk after five a campaign dose covers for an under-five",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 2,
+        "best": 5,
+        "high": 10
+      },
+      "kind": "judgment",
+      "explainer": "The dose keeps protecting after the fifth birthday, at the 5-14 risk; up to ten years to fifteen, fewer where a later wide-age campaign or routine contact would have reached the child anyway. About 5, from 2 to 10."
+    },
+    {
+      "id": "msl_u5_after_five_deaths_per_child",
+      "section": "effect",
+      "label": "Measles deaths averted per under-five vaccinated, after age five",
+      "format": "small",
+      "formula": "baseline_mortality_rate * msl_5_14_risk_ratio * mortality_reduction * (1 + indirect_deaths_ratio) * msl_u5_years_after_five",
+      "explainer": "The same dose's protection at ages 5-14, at the GBD age ratio of the unvaccinated under-five rate."
     },
     {
       "id": "msl_wide_age_campaign_share",
@@ -516,7 +538,7 @@
         "high": 5.5
       },
       "kind": "judgment",
-      "explainer": "A child of 5-14 is on average about 9.5, five years from fifteen, and follow-up campaigns (9-59 months) don't reach the child again. About 5, from 3 (deaths after fifteen fall off, some caught by later routine contacts) to 5.5."
+      "explainer": "A child of 5-14 is on average about 10, five years from fifteen, and follow-up campaigns (9-59 months) don't reach the child again. About 5, from 3 (deaths after fifteen fall off, some caught by later routine contacts) to 5.5."
     },
     {
       "id": "msl_5_14_deaths_per_u5_child",
@@ -531,7 +553,7 @@
       "section": "effect",
       "label": "Share of the deaths averted that are of children under five",
       "format": "percent",
-      "explainer": "The under-fives' share of the deaths averted; the rest are children aged 5-14.",
+      "explainer": "The share of the deaths averted before five; the rest are at ages 5-14.",
       "formula": "msl_u5_deaths_per_child / deaths_averted_per_person"
     },
     {
@@ -547,7 +569,7 @@
       "section": "effect",
       "label": "Of the deaths averted at 15 or older, share aged 15 to 49",
       "format": "percent",
-      "explainer": "Not used: the chain counts only under-fives (older children are in unmodelled benefits).",
+      "explainer": "Not used: no deaths at 15 or older are counted.",
       "formula": "0"
     },
     {
@@ -837,9 +859,9 @@
       "section": "adjustments",
       "label": "Years from delivery to the middle of the protection",
       "format": "number",
-      "formula": "years_of_coverage * 0.5",
+      "formula": "(msl_u5_deaths_per_child * 0.5 * years_of_coverage + msl_u5_after_five_deaths_per_child * (years_of_coverage + 0.5 * msl_u5_years_after_five) + msl_5_14_deaths_per_u5_child * 0.5 * msl_5_14_years_at_risk) / deaths_averted_per_person",
       "unit": "years",
-      "explainer": "Half the years of protection: the measles deaths averted come over childhood, discounted from the middle."
+      "explainer": "Years from the dose to the middle of each branch's protected years, weighted by its deaths averted."
     },
     {
       "id": "wait_discount",
