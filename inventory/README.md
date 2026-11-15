@@ -122,9 +122,16 @@ Both asked us not to publish their models yet, so their inventories and models a
 
 ## The Life You Can Save: `the-life-you-can-save-models.json`
 
-- **Source so far:** one sheet, found while modelling Teaching at the Right Level Africa (November 2026): the
-  cost-effectiveness sheet linked from its Evaluation Hub page. The Evaluation Hub's other charities have not been
-  checked page by page yet.
-- **Imported:** TaRL Africa (learning-adjusted years of schooling per $100; our view turns the learning gain
-  into later earnings).
+- **Source:** the 26 charity pages of TLYCS's Evaluation Hub (from its sitemap, checked page by page in
+  November 2026). 24 link a cost-effectiveness sheet: TLYCS's own analyses (cost per DALY for health, LAYS for
+  education, income gain per dollar for livelihoods); every one imported is TLYCS's own, not a copy of another
+  evaluator's model. The pages state
+  no figure of their own beyond the sheets, except TLYCS's $9.19 raised per dollar of its operations.
+- **Imported:** 15 models of 11 charities, the ten largest by spending plus TaRL Africa: One Acre Fund, Against
+  Malaria Foundation, Helen Keller Intl, Malaria Consortium (three tabs), Evidence Action (three tabs), Educate
+  Girls, New Incentives, Living Goods, Fistula Foundation, Village Enterprise. Sheets without an overall figure
+  are pooled by money across their countries.
+- **Not imported:** Malaria Consortium's Cambodia tab (marked as being updated); Fred Hollows (sheet being
+  updated) and GiveDirectly (sheet on request only); 13 smaller charities' sheets and TLYCS's own $9.19, for now
+  (batch limit).
 

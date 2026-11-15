@@ -1,0 +1,985 @@
+{
+ "id": "evidence-action-tlycs-dispensers-for-safe-water",
+ "name": "Evidence Action's Dispensers for Safe Water (The Life You Can Save, 2025)",
+ "kind": "charity",
+ "cause": "global-health",
+ "beneficiaries": {
+  "KEN": 0.259126,
+  "UGA": 0.389235,
+  "MWI": 0.351639
+ },
+ "beneficiaries_note": "The three countries in the sheet, weighted by Evidence Action's cost in each.",
+ "missing_data": {"thin_share":0,"note":"Measured: Evidence Action counts the dispensers installed and the people with access in each country, and its deaths and cases averted apply the effect of water chlorination from randomised trials to those children."},
+ "estimate_basis": "unit_cost",
+ "charity": "evidence-action",
+ "owner": "the-life-you-can-save",
+ "summary": "Evidence Action installs chlorine dispensers at village water points in Kenya, Uganda and Malawi so families can treat their drinking water. The Life You Can Save turns Evidence Action's 2024 estimates of children's deaths and diarrhoea cases averted into DALYs and divides by the programme's 2024 cost in each country. Our view values the deaths the site's way and adds the benefits the sheet leaves out (older people's health, later earnings, treatment costs); the biggest uncertainties are Evidence Action's own estimates of deaths averted, still under review for Uganda and Malawi.",
+ "source": {
+  "publisher": "The Life You Can Save",
+  "title": "Evidence Action's Dispensers for Safe Water: The Life You Can Save's evaluation and cost-effectiveness analysis",
+  "url": "https://www.thelifeyoucansave.org/evaluation-hub/evidence-action/",
+  "published": "2026-02-27",
+  "retrieved": "2026-11-15",
+  "license": "No licence published; the sheet is linked publicly from The Life You Can Save's Evaluation Hub, which calls its figures highly approximate. Numbers cited with their source."
+ },
+ "resources": [
+  {
+   "title": "The Life You Can Save, Evidence Action Evaluation Hub page",
+   "url": "https://www.thelifeyoucansave.org/evaluation-hub/evidence-action/",
+   "type": "evaluation",
+   "note": "Links the main evaluation document, the quality-of-evidence and organisational-quality forms and the cost-effectiveness sheet. No date on the page; 27 February 2026 is the page's last change in the site's sitemap, and the sheet's figures are for 2024."
+  },
+  {
+   "title": "The Life You Can Save, cost-effectiveness analysis spreadsheet for Evidence Action",
+   "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+   "type": "model",
+   "note": "Three tabs, one per programme; this model is the 'DSW' tab (Kenya, Uganda, Malawi, 2024). Every calculated row of this model reproduces its cell."
+  },
+  {
+   "title": "Evidence Action",
+   "url": "https://www.evidenceaction.org",
+   "type": "charity"
+  }
+ ],
+ "evaluator": {
+  "name": "The Life You Can Save",
+  "assumptions": {
+   "resource_shares": 0,
+   "discount_rate": 0.03,
+   "uov_per_daly": 2,
+   "daly_per_child_death": 58.12631
+  }
+ },
+ "sections": [
+  {
+   "id": "dw",
+   "title": "Diarrhoea: weights and durations",
+   "explainer": "The Life You Can Save splits the cases averted by how they would have been treated (a proxy for severity, from Kenya's 2022 Demographic and Health Survey), and counts each at GBD 2021's disability weight for the length of an episode."
+  },
+  {
+   "id": "c_kenya",
+   "title": "Kenya"
+  },
+  {
+   "id": "c_uganda",
+   "title": "Uganda"
+  },
+  {
+   "id": "c_malawi",
+   "title": "Malawi"
+  },
+  {
+   "id": "bottom",
+   "title": "The Life You Can Save's figures pooled"
+  },
+  {
+   "id": "deaths",
+   "title": "Deaths valued the site's way",
+   "explainer": "charityevals' step: each child's death averted is valued like every child's death on the site; the illness averted keeps the sheet's DALYs; benefits the sheet leaves out are added as side effects.",
+   "kind": "ours"
+  },
+  {
+   "id": "costs_ours",
+   "title": "Costs the sheet leaves out",
+   "explainer": "charityevals' step: Evidence Action's central costs, and with credit by share of resources on, its staff's pay below market.",
+   "kind": "ours"
+  },
+  {
+   "id": "bottom_ours",
+   "title": "Bottom line",
+   "kind": "ours"
+  }
+ ],
+ "rows": [
+  {
+   "id": "dw_mild",
+   "section": "dw",
+   "label": "Disability weight, mild diarrhoea",
+   "format": "number",
+   "formula": "@gbd_disability_weights.diarrhoea_mild",
+   "published": 0.073536964,
+   "explainer": "**Changed for consistency.** The sheet uses 0.0735 (GBD 2021, cell B69); the site uses GBD 2019's 0.074 for every model (facts: gbd_disability_weights)."
+  },
+  {
+   "id": "dw_moderate",
+   "section": "dw",
+   "label": "Disability weight, moderate diarrhoea",
+   "format": "number",
+   "formula": "@gbd_disability_weights.diarrhoea_moderate",
+   "published": 0.187874199,
+   "explainer": "**Changed for consistency.** The sheet uses 0.1879 (GBD 2021, cell B70); the site uses GBD 2019's 0.188 for every model."
+  },
+  {
+   "id": "dw_severe",
+   "section": "dw",
+   "label": "Disability weight, severe diarrhoea",
+   "format": "number",
+   "formula": "@gbd_disability_weights.diarrhoea_severe",
+   "published": 0.247095773,
+   "explainer": "**Changed for consistency.** The sheet uses 0.2471 (GBD 2021, cell B71); the site uses GBD 2019's 0.247 for every model."
+  },
+  {
+   "id": "days_mild",
+   "section": "dw",
+   "label": "Length of a mild diarrhoea episode",
+   "format": "number",
+   "unit": "days",
+   "value": 4.3,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B74",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "From the study the sheet cites (PMC3364857); the same in all three countries."
+  },
+  {
+   "id": "days_moderate",
+   "section": "dw",
+   "label": "Length of a moderate diarrhoea episode",
+   "format": "number",
+   "unit": "days",
+   "value": 6.4,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B75",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "From the study the sheet cites (PMC3364857); the same in all three countries."
+  },
+  {
+   "id": "days_severe",
+   "section": "dw",
+   "label": "Length of a severe diarrhoea episode",
+   "format": "number",
+   "unit": "days",
+   "value": 8.4,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B76",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "From the study the sheet cites (PMC3364857); the same in all three countries."
+  },
+  {
+   "id": "deaths_averted_kenya",
+   "section": "c_kenya",
+   "label": "Child deaths averted, Kenya, 2024",
+   "format": "number",
+   "unit": "deaths",
+   "value": 170.0,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B37",
+    "retrieved": "2026-11-15",
+    "quote": "Indicator 1 - Deaths averted"
+   },
+   "explainer": "Evidence Action's own estimate of the deaths of children under five its dispensers averted in 2024 (its 'marginal impact': the effect of chlorination on child deaths applied to the children with access, against the baseline). Evidence Action says the Uganda and Malawi figures may change after an ongoing review."
+  },
+  {
+   "id": "cases_averted_kenya",
+   "section": "c_kenya",
+   "label": "Diarrhoea cases averted among children under five, Kenya, 2024",
+   "format": "number",
+   "unit": "cases",
+   "value": 46000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B38",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "Evidence Action's own estimate."
+  },
+  {
+   "id": "cost_kenya",
+   "section": "c_kenya",
+   "label": "Evidence Action's cost, Kenya, 2024",
+   "format": "usd",
+   "unit": "$",
+   "value": 4039000.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B41",
+    "retrieved": "2026-11-15",
+    "quote": "Total cost to Evidence Action (US$)"
+   },
+   "explainer": "Cost actuals billed to the programme in 2024, including salaries and operating costs."
+  },
+  {
+   "id": "le_kenya",
+   "section": "c_kenya",
+   "label": "Life expectancy at age 2.5, Kenya",
+   "format": "number",
+   "unit": "years",
+   "value": 66.6,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B54",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "le_disc_kenya",
+   "section": "c_kenya",
+   "label": "Life expectancy at age 2.5, discounted, Kenya",
+   "format": "number",
+   "unit": "years",
+   "formula": "round(if($discount_rate, (1 - (1 + $discount_rate) ^ -le_kenya) / $discount_rate, le_kenya), 1)",
+   "expected": 28.7,
+   "explainer": "The sheet's remaining life expectancy discounted at 3% a year, rounded to one decimal (ROUND(((1-(1+3%)^-LE))/3%,1)); here at the shared discount rate, 3% in the evaluator view. Only the evaluator view uses it for deaths: our view values deaths by age."
+  },
+  {
+   "id": "yll_kenya",
+   "section": "c_kenya",
+   "label": "Years of life lost averted, Kenya",
+   "format": "number",
+   "unit": "years",
+   "formula": "le_disc_kenya * deaths_averted_kenya",
+   "expected": 4879,
+   "explainer": ""
+  },
+  {
+   "id": "pct_moderate_kenya",
+   "section": "c_kenya",
+   "label": "Share of cases treated with antibiotics (moderate), Kenya",
+   "format": "number",
+   "unit": "%",
+   "value": 14.3,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B59",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "Percent, from Kenya's 2022 Demographic and Health Survey (the sheet's note)."
+  },
+  {
+   "id": "pct_severe_kenya",
+   "section": "c_kenya",
+   "label": "Share of cases treated with antimotility drugs or intravenously (severe), Kenya",
+   "format": "number",
+   "unit": "%",
+   "value": 2.9,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B60",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "Percent; the sheet's 2.6 + 0.3."
+  },
+  {
+   "id": "pct_untreated_kenya",
+   "section": "c_kenya",
+   "label": "Share of cases not treated, Kenya",
+   "format": "number",
+   "unit": "%",
+   "value": 18.6,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "B61",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "pct_mild_kenya",
+   "section": "c_kenya",
+   "label": "Share of cases treated at home or with ORS (mild), Kenya",
+   "format": "number",
+   "unit": "%",
+   "formula": "100 - (pct_moderate_kenya + pct_severe_kenya + pct_untreated_kenya)",
+   "expected": 64.2,
+   "explainer": ""
+  },
+  {
+   "id": "pct_total_kenya",
+   "section": "c_kenya",
+   "label": "All cases, Kenya",
+   "format": "number",
+   "unit": "%",
+   "formula": "pct_mild_kenya + pct_moderate_kenya + pct_severe_kenya + pct_untreated_kenya",
+   "expected": 100,
+   "explainer": "100% by construction (the sheet types 100 for Uganda and Malawi)."
+  },
+  {
+   "id": "cases_mild_kenya",
+   "section": "c_kenya",
+   "label": "Mild cases averted, Kenya",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_mild_kenya / pct_total_kenya * cases_averted_kenya + pct_untreated_kenya * cases_averted_kenya / 100",
+   "expected": 38088,
+   "explainer": "Untreated cases are counted as mild."
+  },
+  {
+   "id": "cases_moderate_kenya",
+   "section": "c_kenya",
+   "label": "Moderate cases averted, Kenya",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_moderate_kenya * cases_averted_kenya / 100",
+   "expected": 6578,
+   "explainer": ""
+  },
+  {
+   "id": "cases_severe_kenya",
+   "section": "c_kenya",
+   "label": "Severe cases averted, Kenya",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_severe_kenya * cases_averted_kenya / 100",
+   "expected": 1334,
+   "explainer": ""
+  },
+  {
+   "id": "yld_kenya",
+   "section": "c_kenya",
+   "label": "Years lived with disability averted, Kenya",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "(days_mild * dw_mild * cases_mild_kenya) / 365 + (cases_moderate_kenya * dw_moderate * days_moderate) / 365 + (cases_severe_kenya * dw_severe * days_severe) / 365",
+   "expected": 62.25198953,
+   "explainer": ""
+  },
+  {
+   "id": "dalys_kenya",
+   "section": "c_kenya",
+   "label": "DALYs averted, Kenya",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yld_kenya + yll_kenya",
+   "expected": 4941.25199,
+   "explainer": ""
+  },
+  {
+   "id": "cost_per_daly_kenya",
+   "section": "c_kenya",
+   "label": "Cost per DALY averted, Kenya",
+   "format": "usd",
+   "unit": "$ per DALY",
+   "formula": "cost_kenya / dalys_kenya",
+   "expected": 817.4041738,
+   "explainer": ""
+  },
+  {
+   "id": "deaths_averted_uganda",
+   "section": "c_uganda",
+   "label": "Child deaths averted, Uganda, 2024",
+   "format": "number",
+   "unit": "deaths",
+   "value": 1700.0,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "C37",
+    "retrieved": "2026-11-15",
+    "quote": "Indicator 1 - Deaths averted"
+   },
+   "explainer": "Evidence Action's own estimate of the deaths of children under five its dispensers averted in 2024 (its 'marginal impact': the effect of chlorination on child deaths applied to the children with access, against the baseline). Evidence Action says the Uganda and Malawi figures may change after an ongoing review."
+  },
+  {
+   "id": "cases_averted_uganda",
+   "section": "c_uganda",
+   "label": "Diarrhoea cases averted among children under five, Uganda, 2024",
+   "format": "number",
+   "unit": "cases",
+   "value": 526000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "C38",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "Evidence Action's own estimate."
+  },
+  {
+   "id": "cost_uganda",
+   "section": "c_uganda",
+   "label": "Evidence Action's cost, Uganda, 2024",
+   "format": "usd",
+   "unit": "$",
+   "value": 6067000.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "C41",
+    "retrieved": "2026-11-15",
+    "quote": "Total cost to Evidence Action (US$)"
+   },
+   "explainer": "Cost actuals billed to the programme in 2024, including salaries and operating costs."
+  },
+  {
+   "id": "le_uganda",
+   "section": "c_uganda",
+   "label": "Life expectancy at age 2.5, Uganda",
+   "format": "number",
+   "unit": "years",
+   "value": 67.25,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "C54",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "le_disc_uganda",
+   "section": "c_uganda",
+   "label": "Life expectancy at age 2.5, discounted, Uganda",
+   "format": "number",
+   "unit": "years",
+   "formula": "round(if($discount_rate, (1 - (1 + $discount_rate) ^ -le_uganda) / $discount_rate, le_uganda), 1)",
+   "expected": 28.8,
+   "explainer": "The sheet's remaining life expectancy discounted at 3% a year, rounded to one decimal (ROUND(((1-(1+3%)^-LE))/3%,1)); here at the shared discount rate, 3% in the evaluator view. Only the evaluator view uses it for deaths: our view values deaths by age."
+  },
+  {
+   "id": "yll_uganda",
+   "section": "c_uganda",
+   "label": "Years of life lost averted, Uganda",
+   "format": "number",
+   "unit": "years",
+   "formula": "le_disc_uganda * deaths_averted_uganda",
+   "expected": 48960,
+   "explainer": ""
+  },
+  {
+   "id": "pct_moderate_uganda",
+   "section": "c_uganda",
+   "label": "Share of cases treated with antibiotics (moderate), Uganda",
+   "format": "number",
+   "unit": "%",
+   "value": 16.8,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "C59",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "pct_severe_uganda",
+   "section": "c_uganda",
+   "label": "Share of cases treated with antimotility drugs or intravenously (severe), Uganda",
+   "format": "number",
+   "unit": "%",
+   "value": 4.2,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "C60",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "pct_untreated_uganda",
+   "section": "c_uganda",
+   "label": "Share of cases not treated, Uganda",
+   "format": "number",
+   "unit": "%",
+   "value": 5.8,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "C61",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "pct_mild_uganda",
+   "section": "c_uganda",
+   "label": "Share of cases treated at home or with ORS (mild), Uganda",
+   "format": "number",
+   "unit": "%",
+   "formula": "100 - (pct_moderate_uganda + pct_severe_uganda + pct_untreated_uganda)",
+   "expected": 73.2,
+   "explainer": ""
+  },
+  {
+   "id": "pct_total_uganda",
+   "section": "c_uganda",
+   "label": "All cases, Uganda",
+   "format": "number",
+   "unit": "%",
+   "formula": "pct_mild_uganda + pct_moderate_uganda + pct_severe_uganda + pct_untreated_uganda",
+   "expected": 100.0,
+   "explainer": "100% by construction (the sheet types 100 for Uganda and Malawi)."
+  },
+  {
+   "id": "cases_mild_uganda",
+   "section": "c_uganda",
+   "label": "Mild cases averted, Uganda",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_mild_uganda / pct_total_uganda * cases_averted_uganda + pct_untreated_uganda * cases_averted_uganda / 100",
+   "expected": 415540,
+   "explainer": "Untreated cases are counted as mild."
+  },
+  {
+   "id": "cases_moderate_uganda",
+   "section": "c_uganda",
+   "label": "Moderate cases averted, Uganda",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_moderate_uganda * cases_averted_uganda / 100",
+   "expected": 88368,
+   "explainer": ""
+  },
+  {
+   "id": "cases_severe_uganda",
+   "section": "c_uganda",
+   "label": "Severe cases averted, Uganda",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_severe_uganda * cases_averted_uganda / 100",
+   "expected": 22092,
+   "explainer": ""
+  },
+  {
+   "id": "yld_uganda",
+   "section": "c_uganda",
+   "label": "Years lived with disability averted, Uganda",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "(days_mild * dw_mild * cases_mild_uganda) / 365 + (cases_moderate_uganda * dw_moderate * days_moderate) / 365 + (cases_severe_uganda * dw_severe * days_severe) / 365",
+   "expected": 776.7258897,
+   "explainer": ""
+  },
+  {
+   "id": "dalys_uganda",
+   "section": "c_uganda",
+   "label": "DALYs averted, Uganda",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yld_uganda + yll_uganda",
+   "expected": 49736.72589,
+   "explainer": ""
+  },
+  {
+   "id": "cost_per_daly_uganda",
+   "section": "c_uganda",
+   "label": "Cost per DALY averted, Uganda",
+   "format": "usd",
+   "unit": "$ per DALY",
+   "formula": "cost_uganda / dalys_uganda",
+   "expected": 121.9822956,
+   "explainer": ""
+  },
+  {
+   "id": "deaths_averted_malawi",
+   "section": "c_malawi",
+   "label": "Child deaths averted, Malawi, 2024",
+   "format": "number",
+   "unit": "deaths",
+   "value": 1100.0,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "D37",
+    "retrieved": "2026-11-15",
+    "quote": "Indicator 1 - Deaths averted"
+   },
+   "explainer": "Evidence Action's own estimate of the deaths of children under five its dispensers averted in 2024 (its 'marginal impact': the effect of chlorination on child deaths applied to the children with access, against the baseline). Evidence Action says the Uganda and Malawi figures may change after an ongoing review."
+  },
+  {
+   "id": "cases_averted_malawi",
+   "section": "c_malawi",
+   "label": "Diarrhoea cases averted among children under five, Malawi, 2024",
+   "format": "number",
+   "unit": "cases",
+   "value": 292000.0,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "D38",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": "Evidence Action's own estimate."
+  },
+  {
+   "id": "cost_malawi",
+   "section": "c_malawi",
+   "label": "Evidence Action's cost, Malawi, 2024",
+   "format": "usd",
+   "unit": "$",
+   "value": 5481000.0,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "D41",
+    "retrieved": "2026-11-15",
+    "quote": "Total cost to Evidence Action (US$)"
+   },
+   "explainer": "Cost actuals billed to the programme in 2024, including salaries and operating costs."
+  },
+  {
+   "id": "le_malawi",
+   "section": "c_malawi",
+   "label": "Life expectancy at age 2.5, Malawi",
+   "format": "number",
+   "unit": "years",
+   "value": 65.95,
+   "kind": "estimate",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "D54",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "le_disc_malawi",
+   "section": "c_malawi",
+   "label": "Life expectancy at age 2.5, discounted, Malawi",
+   "format": "number",
+   "unit": "years",
+   "formula": "round(if($discount_rate, (1 - (1 + $discount_rate) ^ -le_malawi) / $discount_rate, le_malawi), 1)",
+   "expected": 28.6,
+   "explainer": "The sheet's remaining life expectancy discounted at 3% a year, rounded to one decimal (ROUND(((1-(1+3%)^-LE))/3%,1)); here at the shared discount rate, 3% in the evaluator view. Only the evaluator view uses it for deaths: our view values deaths by age."
+  },
+  {
+   "id": "yll_malawi",
+   "section": "c_malawi",
+   "label": "Years of life lost averted, Malawi",
+   "format": "number",
+   "unit": "years",
+   "formula": "le_disc_malawi * deaths_averted_malawi",
+   "expected": 31460,
+   "explainer": ""
+  },
+  {
+   "id": "pct_moderate_malawi",
+   "section": "c_malawi",
+   "label": "Share of cases treated with antibiotics (moderate), Malawi",
+   "format": "number",
+   "unit": "%",
+   "value": 16.8,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "D59",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "pct_severe_malawi",
+   "section": "c_malawi",
+   "label": "Share of cases treated with antimotility drugs or intravenously (severe), Malawi",
+   "format": "number",
+   "unit": "%",
+   "value": 4.2,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "D60",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "pct_untreated_malawi",
+   "section": "c_malawi",
+   "label": "Share of cases not treated, Malawi",
+   "format": "number",
+   "unit": "%",
+   "value": 5.8,
+   "kind": "observed",
+   "source": {
+    "title": "The Life You Can Save, Evidence Action cost-effectiveness estimates (tab 'DSW')",
+    "url": "https://docs.google.com/spreadsheets/d/1mkIeRqDVcwxHNy1fSNEpAS2nOTeU9UPm/edit",
+    "cell": "D61",
+    "retrieved": "2026-11-15"
+   },
+   "explainer": ""
+  },
+  {
+   "id": "pct_mild_malawi",
+   "section": "c_malawi",
+   "label": "Share of cases treated at home or with ORS (mild), Malawi",
+   "format": "number",
+   "unit": "%",
+   "formula": "100 - (pct_moderate_malawi + pct_severe_malawi + pct_untreated_malawi)",
+   "expected": 73.2,
+   "explainer": ""
+  },
+  {
+   "id": "pct_total_malawi",
+   "section": "c_malawi",
+   "label": "All cases, Malawi",
+   "format": "number",
+   "unit": "%",
+   "formula": "pct_mild_malawi + pct_moderate_malawi + pct_severe_malawi + pct_untreated_malawi",
+   "expected": 100.0,
+   "explainer": "100% by construction (the sheet types 100 for Uganda and Malawi)."
+  },
+  {
+   "id": "cases_mild_malawi",
+   "section": "c_malawi",
+   "label": "Mild cases averted, Malawi",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_mild_malawi / pct_total_malawi * cases_averted_malawi + pct_untreated_malawi * cases_averted_malawi / 100",
+   "expected": 230680,
+   "explainer": "Untreated cases are counted as mild."
+  },
+  {
+   "id": "cases_moderate_malawi",
+   "section": "c_malawi",
+   "label": "Moderate cases averted, Malawi",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_moderate_malawi * cases_averted_malawi / 100",
+   "expected": 49056,
+   "explainer": ""
+  },
+  {
+   "id": "cases_severe_malawi",
+   "section": "c_malawi",
+   "label": "Severe cases averted, Malawi",
+   "format": "number",
+   "unit": "cases",
+   "formula": "pct_severe_malawi * cases_averted_malawi / 100",
+   "expected": 12264,
+   "explainer": ""
+  },
+  {
+   "id": "yld_malawi",
+   "section": "c_malawi",
+   "label": "Years lived with disability averted, Malawi",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "(days_mild * dw_mild * cases_mild_malawi) / 365 + (cases_moderate_malawi * dw_moderate * days_moderate) / 365 + (cases_severe_malawi * dw_severe * days_severe) / 365",
+   "expected": 431.1862353,
+   "explainer": ""
+  },
+  {
+   "id": "dalys_malawi",
+   "section": "c_malawi",
+   "label": "DALYs averted, Malawi",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yld_malawi + yll_malawi",
+   "expected": 31891.18624,
+   "explainer": ""
+  },
+  {
+   "id": "cost_per_daly_malawi",
+   "section": "c_malawi",
+   "label": "Cost per DALY averted, Malawi",
+   "format": "usd",
+   "unit": "$ per DALY",
+   "formula": "cost_malawi / dalys_malawi",
+   "expected": 171.8656672,
+   "explainer": ""
+  },
+  {
+   "id": "cost_per_daly_pooled",
+   "section": "bottom",
+   "label": "Cost per DALY averted, the three countries pooled by money",
+   "format": "usd",
+   "unit": "$ per DALY",
+   "formula": "(cost_kenya + cost_uganda + cost_malawi) / (dalys_kenya + dalys_uganda + dalys_malawi)",
+   "expected": 180.05256442575433,
+   "explainer": "Our pooling of The Life You Can Save's three country figures ($817 in Kenya, $122 in Uganda, $172 in Malawi): all the cost over all the DALYs, so the figure is what the average dollar did. The sheet gives no overall figure."
+  },
+  {
+   "id": "deaths_total",
+   "section": "deaths",
+   "label": "Child deaths averted, the three countries",
+   "format": "number",
+   "unit": "deaths",
+   "formula": "deaths_averted_kenya + deaths_averted_uganda + deaths_averted_malawi",
+   "explainer": ""
+  },
+  {
+   "id": "yld_total",
+   "section": "deaths",
+   "label": "Years lived with disability averted, the three countries",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "yld_kenya + yld_uganda + yld_malawi",
+   "explainer": ""
+  },
+  {
+   "id": "dalys_total",
+   "section": "deaths",
+   "label": "The Life You Can Save's DALYs averted, the three countries",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "dalys_kenya + dalys_uganda + dalys_malawi",
+   "explainer": ""
+  },
+  {
+   "id": "cost_total",
+   "section": "deaths",
+   "label": "Evidence Action's cost, the three countries",
+   "format": "usd",
+   "unit": "$",
+   "formula": "cost_kenya + cost_uganda + cost_malawi",
+   "explainer": ""
+  },
+  {
+   "id": "healthy_years_per_death",
+   "section": "deaths",
+   "label": "Value of averting a child's death, in healthy years",
+   "format": "number",
+   "unit": "DALYs",
+   "formula": "@moral_weights.uov_per_death_under5 * $life_value_multiplier / $uov_per_daly",
+   "explainer": "**Changed for consistency.** The Life You Can Save counts a child's death averted as the remaining life expectancy at age 2.5, discounted at 3% (28.6 to 28.8 years). The site values every child's death the same way: GiveWell's moral weight for a death under five times the value-of-a-life slider, in healthy years at Your values' exchange rate."
+  },
+  {
+   "id": "counterfactual_share",
+   "section": "deaths",
+   "label": "Share of the deaths and cases averted that wouldn't have been without Evidence Action",
+   "format": "percent",
+   "value": 1,
+   "kind": "judgment",
+   "published": 1,
+   "explainer": "×1, our judgment: Evidence Action's figures are already its marginal impact, against the disease burden without the dispensers, and nobody else would chlorinate these water points."
+  },
+  {
+   "id": "income_share",
+   "section": "deaths",
+   "label": "Later earnings of children kept healthy, as a share of the deaths' value",
+   "format": "percent",
+   "formula": "@givewell_shared.income_to_mortality_value_ratio",
+   "published": 0,
+   "side_effect": "added",
+   "explainer": "The sheet counts only health. Children spared diarrhoea grow and learn better and earn more as adults; the site's shared figure (GiveWell's long-term income gains as a share of the value of the deaths averted)."
+  },
+  {
+   "id": "over_five_share",
+   "section": "deaths",
+   "label": "Health of people aged five and over, as a share of the children's",
+   "format": "percent",
+   "value": {
+    "low": 0,
+    "best": 0.1,
+    "high": 0.3
+   },
+   "kind": "judgment",
+   "published": 0,
+   "side_effect": "added",
+   "explainer": "Everyone drinking from the water point is protected, but the sheet counts only children under five, whose deaths are most of diarrhoea's burden. Our judgment, 10% (0 to 30%)."
+  },
+  {
+   "id": "treatment_costs_share",
+   "section": "deaths",
+   "label": "Treatment costs households and clinics are spared, as a share of the health value",
+   "format": "percent",
+   "formula": "@givewell_shared.treatment_costs_averted",
+   "published": 0,
+   "side_effect": "added",
+   "explainer": "Fewer cases mean less spent on treatment (Evidence Action's monitoring puts the medical costs averted at about $5 million in 2024). The site's shared figure, GiveWell's supplemental adjustment."
+  },
+  {
+   "id": "ours_vs_tlycs",
+   "section": "deaths",
+   "label": "Our healthy years for the same work, as a share of The Life You Can Save's DALYs",
+   "format": "percent",
+   "formula": "(deaths_total * healthy_years_per_death * (1 + income_share + over_five_share) + yld_total) * counterfactual_share * (1 + treatment_costs_share) / dalys_total",
+   "published": 1,
+   "explainer": "The evaluator view keeps The Life You Can Save's (1)."
+  },
+  {
+   "id": "central_cost_share",
+   "section": "costs_ours",
+   "label": "Evidence Action's spending beyond the country costs, per dollar of them",
+   "format": "percent",
+   "value": {
+    "low": 0,
+    "best": 0.1,
+    "high": 0.2
+   },
+   "kind": "judgment",
+   "published": 0,
+   "explainer": "The country costs are those billed to the programme; Evidence Action's headquarters, management and fundraising come on top. Our judgment, 10% (0 to 20%)."
+  },
+  {
+   "id": "staff_cost_share",
+   "section": "costs_ours",
+   "label": "Staff pay as a share of programme cost",
+   "format": "percent",
+   "formula": "@staff_pay.share_goods",
+   "explainer": "Default for programmes that mostly buy and hand out goods: dispensers and chlorine, kept filled by local promoters. Our judgment."
+  },
+  {
+   "id": "salary_gap",
+   "section": "costs_ours",
+   "label": "Pay gap versus comparable jobs elsewhere",
+   "format": "percent",
+   "formula": "@staff_pay.gap_local_delivery",
+   "explainer": "Promoters and field staff are hired locally. Our judgment."
+  },
+  {
+   "id": "salary_sacrifice",
+   "section": "costs_ours",
+   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "format": "number",
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)",
+   "explainer": ""
+  },
+  {
+   "id": "cost_multiplier",
+   "section": "costs_ours",
+   "label": "Full cost per dollar of the sheet's costs",
+   "format": "multiple",
+   "formula": "(1 + central_cost_share) * (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "Central costs always; with credit by share of resources on, staff's forgone pay as well."
+  },
+  {
+   "id": "dalys_per_dollar",
+   "section": "bottom_ours",
+   "label": "Healthy years gained per dollar",
+   "format": "small",
+   "unit": "DALYs per $",
+   "formula": "1 / cost_per_daly_pooled * ours_vs_tlycs / cost_multiplier",
+   "explainer": "The Life You Can Save's pooled DALYs per dollar, deaths valued the site's way, with the side effects and all costs."
+  }
+ ],
+ "output": {
+  "row": "dalys_per_dollar",
+  "unit": "daly",
+  "label": "DALYs averted per dollar",
+  "native": {
+   "row": "cost_per_daly_pooled",
+   "unit": "$ per DALY averted"
+  }
+ }
+}
