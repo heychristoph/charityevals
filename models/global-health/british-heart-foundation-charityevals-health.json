@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "british-heart-foundation",
   "owner": "charityevals",
-  "summary": "The British Heart Foundation's health and support work in the UK, year to March 2026. About three quarters of this spending is information and support: health information pages (35 million views, most of them from the UK), the Heart Matters magazine and printed guides, the nurse-led Heart Helpline (26,000 people) and online peer support, modelled from trials of patient education for coronary heart disease (a fifth fewer deaths and better quality of life, at a small fraction of a trial programme's dose for one call or a few pages read). The rest is CPR training through the free RevivR app (190,000 people trained) and The Circuit, the national defibrillator network, modelled from cardiac-arrest survival registries. The result, about 0.005 years of healthy life per $1,000, is low because a page read or a call is a tiny dose of education, much of it would reach patients from the NHS anyway, cardiac arrests are rare and three in four already get bystander CPR; every branch is discounted for missing data, since BHF measures no outcomes. The dose of education a reader or caller gets is the biggest uncertainty, and the result is mostly uncertainty (the range spans orders of magnitude).",
+  "summary": "The British Heart Foundation's health and support work in the UK, year to March 2026. About three quarters of this spending is information and support: health information pages (35 million views, most of them from the UK), the Heart Matters magazine and printed guides, the nurse-led Heart Helpline (26,000 people) and online peer support, modelled from trials of patient education for coronary heart disease (a fifth fewer deaths and better quality of life, at a small fraction of a trial programme's dose for one call or a few pages read). The rest is CPR training through the free RevivR app (190,000 people trained) and The Circuit, the national defibrillator network, modelled from cardiac-arrest survival registries. The result, about 0.004 years of healthy life per $1,000, is low because a page read or a call is a tiny dose of education, much of it would reach patients from the NHS anyway, cardiac arrests are rare and three in four already get bystander CPR; every branch is discounted for missing data, since BHF measures no outcomes. The dose of education a reader or caller gets is the biggest uncertainty, and the result is mostly uncertainty (the range spans orders of magnitude).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: British Heart Foundation information, support, CPR and defibrillators",
@@ -699,6 +699,14 @@
       "explainer": "Deaths of heart patients at the ages UK cardiovascular deaths happen (GBD 2023, facts: death_ages: four in five at 70 or older), each at GiveWell's moral weight for its age (50–69 at the 50–74 band, 70 and over at the five-year weights; references: families/high-income-care.md), times the value-of-a-life slider."
     },
     {
+      "id": "info_patient_life_share",
+      "section": "effect",
+      "label": "Information and support: a heart patient's remaining life as a share of an average person's of the same age",
+      "format": "percent",
+      "formula": "@survival.chd_remaining_life_ratio",
+      "explainer": "People with coronary heart disease die sooner than their age peers, so a death averted counts at this share of the value of a death at the patient's age (the shared figure, docs/normalization.md 2.14, survivors' remaining life)."
+    },
+    {
       "id": "share_under5",
       "section": "effect",
       "label": "Share of deaths averted under age 5",
@@ -1205,9 +1213,9 @@
       "section": "outcome",
       "label": "Value of deaths averted",
       "format": "number",
-      "formula": "(revivr_deaths_unadj * revivr_total_adj + circuit_deaths_averted * circuit_total_adj) * value_per_death * ohca_survivor_life_share + info_deaths_averted * info_total_adj * info_value_per_death",
+      "formula": "(revivr_deaths_unadj * revivr_total_adj + circuit_deaths_averted * circuit_total_adj) * value_per_death * ohca_survivor_life_share + info_deaths_averted * info_total_adj * info_value_per_death * info_patient_life_share",
       "unit": "UoV",
-      "explainer": "Cardiac-arrest survivors at their age mix (value_per_death) and remaining-life share (ohca_survivor_life_share), heart patients at theirs (info_value_per_death)."
+      "explainer": "Cardiac-arrest survivors at their age mix (value_per_death) and remaining-life share (ohca_survivor_life_share), heart patients at theirs (info_value_per_death, info_patient_life_share)."
     },
     {
       "id": "uov_stillbirths",

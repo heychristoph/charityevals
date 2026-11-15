@@ -1,6 +1,6 @@
 # Audit: environmental-defense-fund-charityevals, round 12 (scoped verification of the restated drivers and the INV-4 waivers)
 Result: 0.003094 t CO₂e/$ = 0.001369 years of healthy life per $1,000 (combined range 3.083e-5–0.06083); cause median 0.002152 (×0.64). Verdict: pass.
-Model-sha: 382a6aa8ed3f2213050872b75309d7600a83d5c81d68608c56b6d2fd0dc8f007
+Model-sha: 33ae0d65c21d256444184f43a21a3f6a7a66be20454fb3995aa21c05cdeb2467
 Scope: scoped to what changed since round 11: the summary and write-up drivers, and the INV-4 waivers for usmeth_first_year in src/engine/normalization-waivers.json. Programmes and sources of earlier rounds not re-audited.
 Mechanical: audit-model exit 0, "Findings (0)"; normalization-audit: 0 violations anywhere, INV-4 included.
 Previous round: the round-11 findings are not re-examined here.
@@ -18,5 +18,6 @@ Previous round: the round-11 findings are not re-examined here.
 Unchanged: the discount rate, the years a won reform counts, the missing-data discount, deaths per tonne and the shared advocacy share (judgments or estimates); the US methane rule's attribution and counterfactual rows set its 46% of the tonnes.
 
 Verdict: pass (no high or medium finding; one low).
-Model-sha: 382a6aa8ed3f2213050872b75309d7600a83d5c81d68608c56b6d2fd0dc8f007
+Model-sha: 33ae0d65c21d256444184f43a21a3f6a7a66be20454fb3995aa21c05cdeb2467
 Re-stamped (15 Nov 2026): summary wording only, the round's two lows: no value changed
+Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
