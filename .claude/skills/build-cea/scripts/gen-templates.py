@@ -781,9 +781,9 @@ T["rights-advocacy"] = model("rights-advocacy", "rights and advocacy", "daly", "
 # death (world age split), the future lost by future_years_per_person.
 AREAS = [("ai", "AI", "$ai_catastrophe_chance / forecast_years", "$ai_catastrophe_chance * (@catastrophe.ai_catastrophe_vs_extinction - 1) / forecast_years", 0.3,
           "AI (technical safety research, evaluations, AI governance and policy)"),
-         ("bio", "Pandemics", "@catastrophe.bio_extinction_by_2100 / forecast_years", "(@catastrophe.bio_catastrophe_by_2100 - @catastrophe.bio_extinction_by_2100) / forecast_years", 0.3,
+         ("bio", "Pandemics", "$bio_catastrophe_chance / forecast_years", "max(0, @catastrophe.bio_catastrophe_by_2100 - $bio_catastrophe_chance) / forecast_years", 0.3,
           "pandemics (biosecurity, DNA synthesis screening, biosafety policy, preparedness)"),
-         ("nuclear", "Nuclear war", "@catastrophe.nuclear_extinction_by_2100 / forecast_years", "(@catastrophe.nuclear_catastrophe_by_2100 - @catastrophe.nuclear_extinction_by_2100) / forecast_years", 0.2,
+         ("nuclear", "Nuclear war", "$nuclear_catastrophe_chance / forecast_years", "max(0, @catastrophe.nuclear_catastrophe_by_2100 - $nuclear_catastrophe_chance) / forecast_years", 0.2,
           "nuclear war (arms control, diplomacy, materials security, resilience such as food after a nuclear winter)")]
 
 def area_rows(a, name, ext, cat, share, what):
