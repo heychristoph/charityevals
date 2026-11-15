@@ -66,7 +66,7 @@ export const TLYCS_DESTINATIONS: [string, string][] = [
   ["carbon180", "charityevals:carbon180"],
   ["clean_air_task_force", "charityevals:clean-air-task-force"],
   ["development_media_international", "givewell:development-media-international"],
-  ["evergreen_collaborative", "charityevals:clean-air-task-force"],
+  ["evergreen_collaborative", "charityevals:evergreen-collaborative"],
   ["evidence_action", "givewell:evidence-action"],
   ["gain", "charityevals:global-alliance-for-improved-nutrition"],
   ["givedirectly", GIVEDIRECTLY],
