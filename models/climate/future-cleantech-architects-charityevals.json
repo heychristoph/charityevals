@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "future-cleantech-architects",
   "owner": "charityevals",
-  "summary": "Future Cleantech Architects (Remscheid and Brussels) does technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors in the EU, with a small sideline of publicly co-funded research on work and learning in manufacturing firms; this model counts the two policies it helped win in 2021-2025, the Renewable Energy Directive's indicative target that 5% of new renewable capacity be innovative technology (2023) and the European Parliament's backing of the low-carbon fuels delegated act (2025), against its spending over those years (€1.37M in 2024). At the defaults a dollar given averts about 0.002 tonnes of CO₂e, about 0.0008 years of healthy life per $1,000, nearly all from the 5% target: the capacity it causes where that displaces fossil power, and the cheaper technology that capacity buys later; it is low because the target is loosely defined and voluntary (an eighth of the capacity reported against it is credited to it), Future Cleantech Architects is credited with a tenth of the advocacy, and the next dollar counts 24% of the past average, as it holds about two years of spending in reserve. The result is mostly uncertainty, resting on judgments no study settles (how much capacity the target causes and how much fossil power that displaces); the extra cost of the newest technologies is not counted, as no impact analysis gives one, and every branch, the research consortia included, is discounted for missing data.",
+  "summary": "Future Cleantech Architects (Remscheid and Brussels) does technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors in the EU, with a small sideline of publicly co-funded research on work and learning in manufacturing firms; this model counts the two policies it helped win in 2021-2025, the Renewable Energy Directive's indicative target that 5% of new renewable capacity be innovative technology (2023) and the European Parliament's backing of the low-carbon fuels delegated act (2025), against its spending over those years (€1.37M in 2024). At the defaults a dollar given averts about 0.0009 tonnes of CO₂e, about 0.001 years of healthy life per $1,000, nearly all from the 5% target: the capacity it causes where that displaces fossil power (a net cut only in the part the EU emissions trading cap doesn't take back), and the cheaper technology that capacity buys later, anywhere; it is low because the target is loosely defined and voluntary (an eighth of the capacity reported against it is credited to it), Future Cleantech Architects is credited with a tenth of the advocacy, and the next dollar counts 24% of the past average, as it holds about two years of spending in reserve. The result is mostly uncertainty, resting on judgments no study settles (how much capacity the target causes, how much fossil power that displaces, the later learning); the extra cost of the newest technologies is not counted, as no impact analysis gives one, and every branch, the research consortia included, is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Future Cleantech Architects",
@@ -361,18 +361,66 @@
       "explainer": "The directive's definition is broad (any technology that \"improves, in at least one way, comparable state-of-the-art renewable energy technology\", Article 2(14b)): improved solar and wind as much as floating offshore wind, ocean energy or next-generation geothermal. Our judgment, a capacity factor of 30% (15% for improved solar to 50% for a geothermal-heavy mix), times the 8,760 hours of a year."
     },
     {
+      "id": "coal_share_of_displaced_power",
+      "section": "reach",
+      "label": "Coal's share of the fossil power displaced (by MWh)",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.2,
+        "high": 0.45
+      },
+      "kind": "judgment",
+      "explainer": "Gas plants set the margin in most EU hours, coal in some until its phase-out: coal made 269 TWh of EU power in 2024 and gas 430 TWh (Ember, European Electricity Review 2025), so 38% of fossil power, falling by 2030 as countries close their plants. Our judgment, 20% of the displaced fossil power is coal (gas only, 0, to 45% where lignite still runs)."
+    },
+    {
+      "id": "gas_tco2_per_mwh",
+      "section": "reach",
+      "label": "CO₂ per MWh of a gas combined-cycle plant",
+      "format": "small",
+      "value": {
+        "low": 0.35,
+        "best": 0.37,
+        "high": 0.49
+      },
+      "kind": "estimate",
+      "unit": "t CO₂ / MWh",
+      "source": {
+        "title": "IPCC (2014), Climate Change 2014: Mitigation, Working Group III, Annex III: Technology-specific cost and performance parameters",
+        "url": "https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf",
+        "retrieved": "2026-11-15",
+        "page": "Table A.III.2, gas combined cycle, direct emissions: 350 / 370 / 490 g CO₂eq/kWh (min / median / max)"
+      },
+      "explainer": "Direct emissions of a gas combined-cycle plant, the IPCC's median and range."
+    },
+    {
+      "id": "coal_tco2_per_mwh",
+      "section": "reach",
+      "label": "CO₂ per MWh of a coal plant",
+      "format": "small",
+      "value": {
+        "low": 0.67,
+        "best": 0.76,
+        "high": 1.1
+      },
+      "kind": "estimate",
+      "unit": "t CO₂ / MWh",
+      "source": {
+        "title": "IPCC (2014), Climate Change 2014: Mitigation, Working Group III, Annex III: Technology-specific cost and performance parameters",
+        "url": "https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf",
+        "retrieved": "2026-11-15",
+        "page": "Table A.III.2, coal pulverised, direct emissions: 670 / 760 / 870 g CO₂eq/kWh (min / median / max)"
+      },
+      "explainer": "Direct emissions of a hard-coal plant, the IPCC's median; the high end is lignite's, about 1.0-1.1, which still runs in Germany, Poland and the Czech Republic."
+    },
+    {
       "id": "displaced_fossil_tco2_per_mwh",
       "section": "reach",
       "label": "CO₂ per MWh of the fossil power displaced",
       "format": "small",
-      "value": {
-        "low": 0.35,
-        "best": 0.45,
-        "high": 0.65
-      },
-      "kind": "judgment",
+      "formula": "gas_tco2_per_mwh * (1 - coal_share_of_displaced_power) + coal_tco2_per_mwh * coal_share_of_displaced_power",
       "unit": "t CO₂ / MWh",
-      "explainer": "Gas plants set the margin in most EU hours, coal in some until its phase-out: a gas combined-cycle plant emits a median 0.37 tonnes of CO₂ per MWh and a hard-coal plant 0.76 (0.67-0.87; IPCC AR5 WG III, Annex III, direct emissions), lignite about 1.0-1.1. Coal made 269 TWh of EU power in 2024 and gas 430 TWh (Ember, European Electricity Review 2025), so coal was 38% of fossil power, falling by the 2030s. Our judgment, 0.45 (gas only 0.35 to a coal- and lignite-heavy margin 0.65)."
+      "explainer": "Gas and coal by their shares of the displaced power, about 0.45 tonnes per MWh at the defaults."
     },
     {
       "id": "ren_fossil_displaced_share",
@@ -385,7 +433,15 @@
         "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "The innovative capacity counts towards the same national renewable targets, so much of it replaces cheaper solar and wind that would otherwise have been built; it adds tonnes only where it is extra (countries short of their targets, which most are: Wind Europe and SolarPower Europe both expect the EU to miss its 2030 goals) or where firm output (geothermal, ocean) runs when wind and solar don't and gas would. Our judgment, 30% (10% to 60%)."
+      "explainer": "The innovative capacity counts towards the same national renewable targets. The final national plans add up to a renewables share 1.5 points short of the EU's 42.5% (Commission assessment, COM(2025) 274), so where the plans are met, extra innovative capacity mostly replaces solar and wind that would have been built; the industry outlooks fall short of the plans (wind 351 GW by 2030 against a 425 GW goal, WindEurope; solar 718 against 750 GW, SolarPower Europe), so in practice part of it is extra, and firm output (geothermal, ocean) runs when wind and solar don't and gas would. Our judgment, 30% (10% to 60%)."
+    },
+    {
+      "id": "eu_ets_net_share",
+      "section": "reach",
+      "label": "Share of a cut in EU power emissions that is a net cut under the emissions trading cap",
+      "format": "percent",
+      "formula": "@climate.eu_ets_net_reduction_share",
+      "explainer": "The shared figure (facts: climate.eu_ets_net_reduction_share, 30%, 5% to 60%): EU power plants are under the emissions trading cap, so most allowances the displaced fossil power frees are used elsewhere; only those the Market Stability Reserve cancels, or a cap tightened in response, are a net cut. The target's tonnes come around 2030, late for the reserve."
     },
     {
       "id": "ren_tonnes_per_year",
@@ -393,8 +449,8 @@
       "label": "Tonnes of CO₂ a year the innovative capacity avoids directly, if the target is met",
       "format": "integer",
       "unit": "t CO₂ / year",
-      "formula": "ren_gw_if_met * ren_twh_per_gw_year * 1e6 * displaced_fossil_tco2_per_mwh * ren_fossil_displaced_share",
-      "explainer": "Capacity × output a year (TWh × 1,000,000 MWh) × CO₂ per MWh of fossil power × the share that displaces fossil power. No cost is counted against these tonnes (docs/normalization.md 2.21): the target began as a Parliament amendment that no impact analysis costed, and member states meet it through their own support schemes (public money or consumer levies), so no regulator's figure exists; the newest technologies cost more per MWh than the solar and wind they replace, so a cost row would lower this branch."
+      "formula": "ren_gw_if_met * ren_twh_per_gw_year * 1e6 * displaced_fossil_tco2_per_mwh * ren_fossil_displaced_share * eu_ets_net_share",
+      "explainer": "Capacity × output a year (TWh × 1,000,000 MWh) × CO₂ per MWh of fossil power × the share that displaces fossil power × the share that is a net cut under the EU emissions trading cap. No cost is counted against these tonnes (docs/normalization.md 2.21): the target began as a Parliament amendment that no impact analysis costed, and member states meet it through their own support schemes (public money or consumer levies), so no regulator's figure exists; the newest technologies cost more per MWh than the solar and wind they replace, so a cost row would lower this branch."
     },
     {
       "id": "ren_caused_gw",
@@ -427,15 +483,28 @@
     {
       "id": "deployment_cost_elasticity",
       "section": "reach",
-      "label": "Extra later deployment per unit of cost fall (elasticity)",
+      "label": "Extra yearly deployment per unit of cost fall (elasticity)",
       "format": "multiple",
       "value": {
         "low": 0.5,
-        "best": 1.5,
-        "high": 3
+        "best": 1,
+        "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "How much more of a technology is built when it gets cheaper, in percent per percent: near 1 or above for technologies competing on cost at the margin of power markets (solar's and wind's growth followed their cost falls), lower where grid access, permits or the resource limit it. Our judgment, 1.5 (0.5 to 3)."
+      "explainer": "How much more of a technology is installed in a year when it gets cheaper, percent per percent. Measured demand for solar panels: about 1.2 in California (Hughes & Podolefsky 2015, Journal of the Association of Environmental and Resource Economists) and about 0.65 in Connecticut (Gillingham & Tsvetanov 2019, Quantitative Economics). Utility-scale wind and geothermal compete on price in auctions, but grid access, permits and sites also limit them. Our judgment, 1 (0.5 to 1.5)."
+    },
+    {
+      "id": "learn_stock_growth",
+      "section": "reach",
+      "label": "Growth of these technologies' worldwide capacity from 2030 to the end of the years counted",
+      "format": "multiple",
+      "value": {
+        "low": 2,
+        "best": 5,
+        "high": 15
+      },
+      "kind": "judgment",
+      "explainer": "Floating wind, ocean energy and next-generation geothermal start the 2030s at a few tens of GW worldwide and grow fast where they work; our judgment, 5 times by the late 2040s (2 to 15)."
     },
     {
       "id": "learn_gw",
@@ -443,8 +512,21 @@
       "label": "Extra capacity built later because the technologies got cheaper",
       "format": "number",
       "unit": "GW",
-      "formula": "ren_caused_gw * deployment_cost_elasticity * -ln(1 - learning_rate) / ln(1 + 1)",
-      "explainer": "Adding a small capacity to a technology's cumulative stock lowers its cost by the learning exponent (−log₂ of one minus the learning rate) times the stock's share added; times the deployment elasticity, later deployment grows by that same share of the stock, so the extra later capacity is the added capacity × the learning exponent × the elasticity, whatever the stock's size."
+      "formula": "ren_caused_gw * deployment_cost_elasticity * -ln(1 - learning_rate) / ln(1 + 1) * ln(learn_stock_growth)",
+      "explainer": "Adding a small capacity to a technology's stock lowers its cost by the learning exponent (−log₂ of one minus the learning rate) times the stock's share added; yearly deployment then grows by the elasticity times that, so over the years the stock grows by a factor G the extra capacity built adds up to the capacity caused × the learning exponent × the elasticity × ln G, whatever the stock's size (about 0.5 GW per GW caused at the defaults)."
+    },
+    {
+      "id": "learn_eu_share",
+      "section": "reach",
+      "label": "Share of the later capacity built in the EU",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Floating offshore wind, ocean energy and next-generation geothermal are led by European firms and sites, with the US and Asia growing; our judgment, 40% of the later capacity in the EU (20% to 70%), where its tonnes are under the emissions trading cap."
     },
     {
       "id": "ren_learn_tonnes_per_year",
@@ -452,8 +534,8 @@
       "label": "Later tonnes a year from the extra capacity built",
       "format": "integer",
       "unit": "t CO₂ / year",
-      "formula": "learn_gw * ren_twh_per_gw_year * 1e6 * displaced_fossil_tco2_per_mwh * ren_fossil_displaced_share",
-      "explainer": "The extra later capacity × output × CO₂ per MWh of fossil power × the share displacing fossil power, as for the target's own capacity; it may come anywhere, so the EU figures stand in. The counterfactual and delivered share are already in the capacity caused, so this branch takes only the credit, evidence and missing-data steps."
+      "formula": "learn_gw * ren_twh_per_gw_year * 1e6 * displaced_fossil_tco2_per_mwh * ren_fossil_displaced_share * (learn_eu_share * eu_ets_net_share + 1 - learn_eu_share)",
+      "explainer": "The extra later capacity × output × CO₂ per MWh of fossil power × the share displacing fossil power, as for the target's own capacity (the EU figures stand in elsewhere), with the EU part a net cut only in the emissions trading share. The counterfactual and delivered share are already in the capacity caused, so this branch takes only the credit, evidence and missing-data steps."
     },
     {
       "id": "h2_volume_t_per_year",
@@ -499,11 +581,11 @@
       "format": "percent",
       "value": {
         "low": 0.01,
-        "best": 0.03,
-        "high": 0.05
+        "best": 0.02,
+        "high": 0.04
       },
       "kind": "judgment",
-      "explainer": "The consortia's public grants were €40-50k (AgilOLab, budget year 2024) and €20-30k (DICoLab) on the 2026 Lobbyregister entry, and research grants were about 2.8% of 2025 funding (Annual Report 2025, p. 22), against €1.4M-2.0M of spending; the solar-cement consortium CemSol is climate work and stays in the climate branches. Our judgment, 3% of the period's spending (1% to 5%), FCA's own staff time on them included."
+      "explainer": "The consortia's public grants were €40-50k (AgilOLab, budget year 2024) and €20-30k (DICoLab, from 2025) on the 2026 Lobbyregister entry, and research grants were about 2.8% of 2025 funding (Annual Report 2025, p. 22); AgilOLab began in 2021 (Milestones 2021). Over 2021-2025 that is about 2% of spending, FCA's own staff time on them included (1% to 4%); the solar-cement consortium CemSol is climate work and stays in the climate branches."
     },
     {
       "id": "rc_spend_per_year",
@@ -513,17 +595,54 @@
       "formula": "cost_per_period_year * rc_share_of_spend"
     },
     {
-      "id": "rc_return_per_dollar",
+      "id": "rc_gain_per_dollar_per_year",
       "section": "reach",
-      "label": "Research consortia: later income gains per dollar spent on applied research",
-      "format": "multiple",
+      "label": "Research consortia: yearly income gains per dollar spent, once they come",
+      "format": "number",
       "value": {
-        "low": 0.5,
-        "best": 2,
-        "high": 5
+        "low": 0.06,
+        "best": 0.25,
+        "high": 0.6
       },
       "kind": "judgment",
-      "explainer": "Estimates of the social return to research and development put a dollar of it at several dollars of later output on average (Jones & Summers 2020, NBER Working Paper 27863, about $4 to $5 per dollar, present value); small applied projects on how manufacturing firms organise work and learning, with partners in the Bergisches Land, are less likely to change much. Our judgment, $2 per dollar (0.5 to 5), as gains to the firms' workers and owners, present value."
+      "unit": "$ / $ / year",
+      "explainer": "Estimates of the social return to research and development put a dollar of it at many dollars of later output (Jones & Summers 2020, NBER Working Paper 27863); small applied projects on how manufacturing firms organise work and learning, with partners in the Bergisches Land, are less likely to change much. Our judgment, 25 cents a year per dollar (6 to 60 cents) over the years below: about $2 in present value at the defaults, as gains to the firms' workers and owners."
+    },
+    {
+      "id": "rc_years_until_gain",
+      "section": "reach",
+      "label": "Research consortia: years until the gains start",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 6
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "The projects run three years (DICoLab 2025-2027) and firms adopt their results after; our judgment, 3 years (1 to 6)."
+    },
+    {
+      "id": "rc_gain_years",
+      "section": "reach",
+      "label": "Research consortia: years the gains last",
+      "format": "number",
+      "value": {
+        "low": 5,
+        "best": 10,
+        "high": 20
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Ways of organising work spread and then age as firms and tools change; our judgment, 10 years (5 to 20)."
+    },
+    {
+      "id": "rc_return_per_dollar",
+      "section": "reach",
+      "label": "Research consortia: later income gains per dollar, discounted",
+      "format": "multiple",
+      "formula": "rc_gain_per_dollar_per_year * pv_annuity_due(1, $discount_rate, rc_gain_years) * (1 + $discount_rate) ^ -rc_years_until_gain",
+      "explainer": "The yearly gain over its years, after the wait, discounted at the shared rate."
     },
     {
       "id": "rc_uov_per_year",
@@ -532,7 +651,7 @@
       "format": "number",
       "unit": "UoV / year",
       "formula": "rc_spend_per_year * rc_return_per_dollar * $uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr) * rc_attribution_share * rc_missing_data_adj * evidence_adj",
-      "explainer": "Income gains to German workers and owners, on the log scale at average consumption (the site's European figure: UK consumption per person on the survey scale), with the consortia's credit, evidence and missing-data steps. The return per dollar is already a present value, so no further wait is discounted."
+      "explainer": "Income gains to German workers and owners, on the log scale at average consumption (the site's European figure: UK consumption per person on the survey scale), with the consortia's credit, evidence and missing-data steps."
     },
     {
       "id": "p_success",
@@ -667,7 +786,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The tonnes are our own chains from industry outlooks and engineering figures, not a regulator's impact assessment, and the learning branch rests on the general learning-curve literature rather than these technologies; ex-ante estimates of technology policy have often run ahead of what was built. Our judgment, 0.7 (0.4 to 1), applied to every branch."
+      "explainer": "The tonnes are our own chains from industry outlooks and engineering figures, not a regulator's impact assessment, and the learning branch rests on the general learning-curve literature rather than these technologies; ex-ante estimates of technology policy have often run ahead of what was built. For the consortia, the return is from research on research spending in general, not these projects. Our judgment, 0.7 (0.4 to 1), applied to every branch."
     },
     {
       "id": "ren_counterfactual_adj",
@@ -755,13 +874,8 @@
       "section": "adjustments",
       "label": "Research consortia: Future Cleantech Architects' share of the resources behind them",
       "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.7
-      },
-      "kind": "judgment",
-      "explainer": "The return above is per dollar of all the consortia's spending; their universities and firms bring their own staff and the ministries' grants, so FCA's spending is part of the whole. Our judgment, 40% (20% to 70%): its spending here is mostly the grant money passed through for its own part of the work, so the partners' own time is the rest."
+      "explainer": "1: the spending is Future Cleantech Architects' own and the return is per dollar of anyone's research spending, so its spending × the return is already its share; the partners' own staff time isn't in its cost.",
+      "formula": "1"
     },
     {
       "id": "rc_attribution_share",
@@ -890,6 +1004,67 @@
       "formula": "h2_tonnes_per_year * h2_counterfactual_adj * h2_attribution_share_shared"
     },
     {
+      "id": "gas_deaths_per_twh",
+      "section": "conversion",
+      "label": "Air-pollution deaths per TWh of gas power, Europe",
+      "format": "number",
+      "value": {
+        "low": 0.7,
+        "best": 2.8,
+        "high": 11.2
+      },
+      "kind": "estimate",
+      "unit": "deaths / TWh",
+      "source": {
+        "title": "Markandya & Wilkinson (2007), Electricity generation and health, The Lancet 370(9591), 979-990",
+        "url": "https://doi.org/10.1016/S0140-6736(07)61253-7",
+        "retrieved": "2026-11-15",
+        "page": "Table 2 (deaths from air pollution per TWh, Europe): gas 2.8 (range 0.7-11.2)"
+      },
+      "explainer": "Markandya & Wilkinson's figure for European gas plants, from the ExternE studies."
+    },
+    {
+      "id": "coal_deaths_per_twh",
+      "section": "conversion",
+      "label": "Air-pollution deaths per TWh of coal power, Europe",
+      "format": "number",
+      "value": {
+        "low": 6.1,
+        "best": 24.5,
+        "high": 98
+      },
+      "kind": "estimate",
+      "unit": "deaths / TWh",
+      "source": {
+        "title": "Markandya & Wilkinson (2007), Electricity generation and health, The Lancet 370(9591), 979-990",
+        "url": "https://doi.org/10.1016/S0140-6736(07)61253-7",
+        "retrieved": "2026-11-15",
+        "page": "Table 2 (deaths from air pollution per TWh, Europe): coal 24.5 (range 6.1-98.0)"
+      },
+      "explainer": "Markandya & Wilkinson's figure for European hard-coal plants (lignite is higher, 32.6)."
+    },
+    {
+      "id": "direct_smoke_factor",
+      "section": "conversion",
+      "label": "Air-pollution deaths per tonne of the target's own tonnes, relative to the fossil-fuel average",
+      "format": "number",
+      "formula": "(gas_deaths_per_twh * (1 - coal_share_of_displaced_power) + coal_deaths_per_twh * coal_share_of_displaced_power) / (displaced_fossil_tco2_per_mwh * 1e6) / @climate.deaths_per_tco2e_air_pollution",
+      "explainer": "Deaths per TWh of the displaced mix over its tonnes per TWh, relative to the average fossil tonne behind the shared air-pollution rate (facts: climate.deaths_per_tco2e_air_pollution): about 0.11 at the defaults, gas alone 0.05."
+    },
+    {
+      "id": "learn_smoke_factor",
+      "section": "conversion",
+      "label": "Air-pollution deaths per tonne of the later tonnes from cheaper technology, relative to the fossil-fuel average",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.4,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The later capacity may be built anywhere, displacing gas in Europe and coal in Asia, by the 2040s with cleaner plants than today's; the shared rate's average fossil tonne is 1 and European coal about 0.2. Our judgment, 0.4 (0.1 to 1)."
+    },
+    {
       "id": "fuel_share",
       "section": "conversion",
       "label": "Share of these tonnes from burning less fossil fuel near people",
@@ -902,13 +1077,8 @@
       "section": "conversion",
       "label": "Air-pollution deaths per tonne of these power tonnes, relative to the fossil-fuel average",
       "format": "number",
-      "value": {
-        "low": 0.03,
-        "best": 0.08,
-        "high": 0.22
-      },
-      "kind": "judgment",
-      "explainer": "Per-fuel evidence: Markandya & Wilkinson (2007, The Lancet, \"Electricity generation and health\") give 2.8 deaths per TWh for gas and 24.5 for coal in Europe; at 0.37 and 0.76 tonnes of CO₂ per MWh that is 7.6 and 32 deaths per million tonnes, 0.05 and 0.22 of the 146 per million tonnes behind the shared air-pollution rate. The direct tonnes displace mostly EU gas; the later tonnes from cheaper technology may come anywhere, coal included. Our judgment, 0.08 (gas only 0.03 to coal 0.22)."
+      "formula": "(ren_expected_tonnes * direct_smoke_factor + learn_expected_tonnes * learn_smoke_factor) / (ren_expected_tonnes + learn_expected_tonnes)",
+      "explainer": "The two power branches' factors, weighted by their expected tonnes a year."
     },
     {
       "id": "air_pollution_weight",
