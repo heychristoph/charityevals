@@ -1,6 +1,6 @@
 ### Summary
 
-Teaching at the Right Level Africa (TaRL Africa) helps governments run daily sessions in which primary pupils are grouped by what they can read and count rather than by grade. The Life You Can Save estimates 3.57 learning-adjusted years of schooling per $100 from TaRL Africa's 2024 figures for Zambia, Nigeria and Côte d'Ivoire; turning the learning into later earnings, that is **<span data-figure="headline" data-model="teaching-at-the-right-level-africa-tlycs">21</span> years of healthy life per 1,000 dollars**.
+Teaching at the Right Level Africa (TaRL Africa) helps governments run daily sessions in which primary pupils are grouped by what they can read and count rather than by grade. The Life You Can Save estimates 3.57 learning-adjusted years of schooling per $100 from TaRL Africa's 2024 figures for Zambia, Nigeria and Côte d'Ivoire; turning the learning into later earnings, that is **<span data-figure="headline" data-model="teaching-at-the-right-level-africa-tlycs">17</span> years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 
@@ -22,28 +22,28 @@ The Life You Can Save's sheet comes first, ending at its average of the three co
 - **Back to learning gains.** Learning-adjusted years are the sheet's own unit, with nothing on the site to convert them. The site values learning by the later earnings a test-score gain brings, so each country's figure is turned back into standard deviations of learning per dollar.
 - **Pooled by money.** The three countries are weighted by the money spent in each, so the figure is what the average dollar did; the sheet's plain average counts the three countries equally.
 - **Central costs.** The sheet counts only the three country programmes' spending; a donated dollar also pays TaRL Africa's central team, so a judged 20% is added to its costs.
-- **Earnings.** Each standard deviation of a childhood test gain raises adult earnings by the site's shared figure, the gain starts about 9 years later and lasts a working life, shared within the household, discounted at the shared rate and valued like every income gain on the site.
+- **Earnings.** The site's shared figures for low- and middle-income countries: 40% of a test gain lasts into adult skill, and each standard deviation of adult skill raises earnings by 20%; the gain starts about 9 years later and lasts a working life, shared within the household, discounted at the shared rate and valued like every income gain on the site.
 - **What would have happened anyway:** we judge that 80% of the learning wouldn't have happened without TaRL Africa, since other organisations also help governments run the approach.
 - **Beyond earnings:** a small side effect for better learning's other gains (staying in school longer, healthier children later).
 - **Staff pay:** with credit by share of resources on, TaRL Africa's staff's pay below market counts as part of the cost.
 
 ### What drives the result
 
-- **How much of a childhood test gain shows up in adult earnings.** No study has yet followed Teaching at the Right Level's pupils into work; the shared figure comes from US children followed to age 28.
+- **How much of a childhood test gain shows up in adult earnings.** No study has yet followed Teaching at the Right Level's pupils into work; the shared figures come from studies of adults' skills and earnings and of how fast test gains fade.
 - **The learning gain at scale:** 0.15 standard deviations halved for fidelity. The trials found up to 0.7, and fidelity across studies ranged from 23% to 83%.
 - **The discount rate**, since the earnings come 9 to 50 years after the money is spent.
 - **The cost per pupil**, which differs almost fourfold between Zambia and Côte d'Ivoire.
 
 ### Where we differ from The Life You Can Save
 
-- **The unit.** The Life You Can Save stops at learning-adjusted years of schooling; we value the learning by later earnings, with the site's shared figure for earnings per standard deviation (The Life You Can Save sets no value on a learning-adjusted year).
+- **The unit.** The Life You Can Save stops at learning-adjusted years of schooling; we value the learning by later earnings, with the site's shared figures for earnings per standard deviation and for how much of a test gain lasts (The Life You Can Save sets no value on a learning-adjusted year).
 - **Pooling.** By money spent in each country rather than a plain average of the three countries' ratios (3.13 rather than 3.57 learning-adjusted years per $100).
 - **Central costs** (20%, our judgment) and **what would have happened anyway** (80%, our judgment), steps the sheet leaves out.
 - **Discounting** the later earnings at the shared rate. The sheet has no earnings step; the evaluator view applies ours with no discounting.
 
 ### Biggest uncertainties
 
-- Whether gains in test scores in Zambia, Nigeria and Côte d'Ivoire raise earnings as much as gains in the US do. The shared figure (10%) sits below the US study's 13% because youth programmes' gains are partly social and emotional; TaRL's gain is a pure test gain, so the figure may be low by up to a third.
+- How much of the pupils' test gain lasts into adult skill (40%, from 20% to 70%) and what that skill earns (20% per standard deviation, from 10% to 30%): neither is measured for these pupils.
 - How well the government programmes are delivered at this scale: the 50% kept is The Life You Can Save's judgment, not a measurement of these programmes.
 - The costs and reach are TaRL Africa's own figures given to The Life You Can Save. The organisation's only public accounts are the US arm's Form 990 (1.14 million dollars of programme spending in 2025); the Kenyan entity that runs the country programmes publishes none.
 
