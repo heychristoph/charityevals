@@ -178,6 +178,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "givewell-charityevals": { b: "destinations", note: "Moves money: each charity it funds, read live, brings its own countries." },
   "effektiv-spenden-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
   "one-for-the-world-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
+  "the-life-you-can-save-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
   "longview-philanthropy-charityevals": { b: "destinations", note: "Moves money: each area its directed money goes to, read live, brings its own countries." },
   "founders-pledge-charityevals": { b: "destinations", note: "Moves money: each cause its members' and donors' money goes to, read live, brings its own countries." },
   "animal-charity-evaluators-charityevals": { b: "destinations", note: "Moves money: each animal charity it reaches, read live, brings its own countries." },
