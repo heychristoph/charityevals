@@ -19,3 +19,4 @@ Model-sha: 2d5ff7665ae97ce25e9c4143001a42d18168e629d4b68f0cc5740e5ac045d6f8
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000601 → 0.000489.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
+Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
