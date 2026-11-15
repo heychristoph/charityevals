@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-humane-league",
   "owner": "charityevals",
-  "summary": "The Humane League's grants of 2025 ($4.26 million), each counted as what the recipients did with the money: $1.76 million to Open Wing Alliance groups abroad for corporate cage-free and broiler campaigns (credited with the grants' share of the alliance's 2025 wins outside the US: 216 new cage-free policies, restored pledges such as REWE's, 18 broiler policies implemented), $2.15 million to The Humane League UK (Tesco's and Aldi's space commitments for 240 million broilers a year, won in its year and delivered since, UK hens moved out of cages, and its part in a UK cage ban and in the legal case against fast-growing breeds, both counted at their chance), and $0.35 million to US policy groups (defending state cage-free sales laws against federal preemption, and local food-policy wins). Each grant buys a small share of wins that many groups share, and every branch rests on counts or chances we judged, so all are discounted for missing data. The US sales laws and the UK cage ban count their compliance costs from the regulators' own analyses, which take about three quarters off the animals' gain. The biggest uncertainties are those costs, how much more space does for a broiler of a fast-growing breed (the UK space commitments are two thirds of the result), THL UK's share of the supermarket campaigns, the long shot of the breed case, and the hens behind an average new pledge abroad.",
+  "summary": "The Humane League's grants of 2025 ($4.26 million), each counted as what the recipients did with the money: $1.76 million to Open Wing Alliance groups abroad for corporate cage-free and broiler campaigns (credited with the grants' share of the alliance's 2025 wins outside the US: 216 new cage-free policies, restored pledges such as REWE's, 18 broiler policies implemented), $2.15 million to The Humane League UK (Tesco's and Aldi's space commitments for 240 million broilers a year, won in its year and delivered since, UK hens moved out of cages, and its part in a UK cage ban and in the legal case against fast-growing breeds, both counted at their chance), and $0.35 million to US policy groups (defending state cage-free sales laws against federal preemption, and local food-policy wins). Each grant buys a small share of wins that many groups share, and every branch rests on counts or chances we judged, so all are discounted for missing data. The US sales laws and the UK cage ban count their compliance costs from the regulators' own analyses, which outweigh the hens' and sows' gain in those two branches. The biggest uncertainties are those costs, how much more space does for a broiler of a fast-growing breed (the UK space commitments are two thirds of the result), THL UK's share of the supermarket campaigns, the long shot of the breed case, and the hens behind an average new pledge abroad.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Humane League's grants (Open Wing Alliance, THL UK, Animal Policy Alliance), 2025",
@@ -152,6 +152,59 @@
       "formula": "grants_domestic"
     },
     {
+      "id": "apa_grant_federal_share",
+      "section": "cost",
+      "label": "Share of the US grants spent opposing federal preemption",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: most of the grants paid for members' state and local campaigns; a part went to federal work (the Missouri Alliance for Animal Legislation, Strategic Action for Animals). 0.2, range 0.05-0.5."
+    },
+    {
+      "id": "def_share_of_total",
+      "section": "cost",
+      "label": "THL's US public policy work, share of its spending (ACE, 2024)",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.03,
+        "high": 0.045
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "ACE, The Humane League theory of change table (2025 evaluation)",
+        "url": "https://docs.google.com/document/d/1JVoo4ZQOU3l7jUuurmTkNWV2NEixogBNU2XsElrTtwI/edit",
+        "page": "Program expenses (% total expenditures)",
+        "quote": "US Public Policy Work 3%",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The same as the other-programmes model's: ACE's breakdown, applied to programme expenses, for THL's own part of the opposition to preemption."
+    },
+    {
+      "id": "apa_share_of_total",
+      "section": "cost",
+      "label": "THL's US Animal Policy Alliance programme, share of its spending (ACE, 2024)",
+      "format": "percent",
+      "value": {
+        "low": 0.03,
+        "best": 0.04,
+        "high": 0.055
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "ACE, The Humane League theory of change table (2025 evaluation)",
+        "url": "https://docs.google.com/document/d/1JVoo4ZQOU3l7jUuurmTkNWV2NEixogBNU2XsElrTtwI/edit",
+        "page": "Program expenses (% total expenditures)",
+        "quote": "US Animal Policy Alliance Program 4%",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The same as the other-programmes model's: THL's spending on the Alliance, its grants included, for the pool behind the local wins."
+    },
+    {
       "id": "program_spend",
       "section": "cost",
       "label": "Spending on the grants line, 2025 (all grants THL made)",
@@ -249,15 +302,22 @@
     {
       "id": "thl_uk_other_funding_share",
       "section": "cost",
-      "label": "Share of THL UK's spending paid by funders other than THL",
+      "label": "Share of THL UK's income from funders other than THL",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
+        "low": 0.265,
+        "best": 0.27,
         "high": 0.35
       },
-      "kind": "judgment",
-      "explainer": "Our judgment: THL UK's income was £1.74 million in its year to March 2025, £1.53 million of it unrestricted donations and grants (its accounts, financial review), and it says it has 'reduced our reliance on the grant we receive from THL in the US' and spent £0.17 million on raising funds; the accounts' income note, which splits THL's grant from other funders, is not legible in the filed copy. 15%, range 5-35%."
+      "kind": "estimate",
+      "source": {
+        "title": "The Humane League UK, annual report and accounts to 31 March 2025",
+        "url": "https://opencharities.uk/ew/1177926/files/2025-03-31-accounts.md",
+        "page": "Note 2, Donations and legacies; Financial review",
+        "quote": "Total income during the period was £1.74m",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Note 2 splits the £1,740,644 income into donations (£462,053) and grants (£1,278,591). THL's grant is at most the grants line, so at least 26.5% came from others: 0.27, up to 0.35 if some grants came from other foundations."
     },
     {
       "id": "owanew_policies",
@@ -660,30 +720,68 @@
       "explainer": "Our judgment: the federal bills (EATS, 'Save Our Bacon') would void the states' rules for eggs and pork produced elsewhere; in-state housing laws and company pledges would keep most cage-free supply, and barns already built rarely go back to cages."
     },
     {
+      "id": "apadef_sows",
+      "section": "reach",
+      "label": "Breeding sows supplying California under Proposition 12",
+      "format": "integer",
+      "value": {
+        "low": 400000,
+        "best": 700000,
+        "high": 900000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Holly Cook (National Pork Producers Council), testimony to the House Agriculture Committee, July 2025",
+        "url": "https://nppc.org/wp-content/uploads/2025/07/Holly-Cook-Prop.-12-House-Ag-Written-Testimony-07.23.25.pdf",
+        "page": "p. 5",
+        "quote": "approximately 700,000 sows would be needed to meet historical demand levels in California",
+        "retrieved": "2026-11-13"
+      },
+      "explainer": "The same as the other-programmes model's: sows housed to Proposition 12's standard to supply California, which the 'Save Our Bacon' Act would undo (Massachusetts's Question 3 adds a little). Low end, our judgment: the testimony gives only the 700,000 needed; fewer sows were compliant at the law's start. Veal calves, also covered, are a few tens of thousands and left out."
+    },
+    {
       "id": "apadef_cost_egg_share",
       "section": "reach",
       "label": "Share of Proposition 12's net compliance cost that falls on eggs",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.8
+        "low": 0.05,
+        "best": 0.25,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the same as the other-programmes model's: in the regulator's analysis most of the extra egg spending is retailers' margin (a transfer, left out of the shared figure), so the net cost is mostly pork and veal producers' and buyers'. California's egg producers' extra costs alone are about $72 million of the roughly $300 million net (the Department of Finance's comments on the SRIA). The laws defended here are the egg laws."
+      "source": {
+        "title": "California Department of Food and Agriculture (2021), Animal Confinement: Notice of Proposed Action",
+        "url": "https://www.cdfa.ca.gov/ahfss/pdfs/regulations/AnimalConfinement1stNoticePropReg_05252021.pdf",
+        "page": "p. 14",
+        "quote": "Egg producers in California face higher costs by $72 million",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Our judgment, the same as the other-programmes model's: the notice puts most of the gross on eggs ($40 of $50 a person), but retailers' extra egg margin (about $970 million, a transfer) is nearly all of that egg spending, so the net egg part is about California's egg producers' $72 million of the roughly $300 million net: 0.25. Range 0.05 to 0.5."
+    },
+    {
+      "id": "ca_pop_share",
+      "section": "reach",
+      "label": "California's share of the US population, 2024",
+      "format": "percent",
+      "value": 0.116,
+      "kind": "observed",
+      "source": {
+        "title": "US Census Bureau, QuickFacts: California; United States (Vintage 2024 estimates)",
+        "url": "https://www.census.gov/quickfacts/fact/table/CA,US/PST045224",
+        "page": "Population estimates, July 1, 2024, (V2024)",
+        "note": "California 39,431,263; United States 340,110,988.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "39,431,263 of 340,110,988 people."
     },
     {
       "id": "apadef_states_vs_ca",
       "section": "reach",
       "label": "People in the states with cage-free sales laws, relative to California",
       "format": "multiple",
-      "value": {
-        "low": 1.8,
-        "best": 2,
-        "high": 2.2
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, the same as the other-programmes model's: California has about 39 million of the US's 340 million people (Census Bureau, 2024 estimates), 11.6%, against the 23% living in the seven states with sales laws, so the egg part of the cost scales by about 2."
+      "formula": "us_sales_law_population_share / ca_pop_share",
+      "explainer": "The egg part of Proposition 12's cost, scaled from California to all seven states' egg laws by population. Pork's part stays California's."
     },
     {
       "id": "apalocal_meals",
@@ -1293,26 +1391,42 @@
       "section": "adjustments",
       "label": "The APA grants' share of all resources opposing preemption in 2025",
       "format": "percent",
+      "formula": "apa_grant * apa_grant_federal_share / (apa_grant * apa_grant_federal_share + def_share_of_total * program_expenses + def_coalition_spend)",
+      "explainer": "The grants' federal part over all resources against preemption: itself, THL's own policy work and the other groups' (the same pool as the other-programmes model's)."
+    },
+    {
+      "id": "def_coalition_spend",
+      "section": "adjustments",
+      "label": "Other groups' spending on defending the state laws, 2025",
+      "format": "usd",
       "value": {
-        "low": 0.003,
-        "best": 0.01,
-        "high": 0.03
+        "low": 3000000,
+        "best": 8000000,
+        "high": 20000000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: a part of the $351,300 went to federal work (the Missouri Alliance for Animal Legislation, Strategic Action for Animals), beside Humane World for Animals', the ASPCA's and THL's own lobbying, millions of dollars a year."
+      "explainer": "Our judgment, the same as the other-programmes model's: the coalition is led by Humane World for Animals with the ASPCA, Animal Wellness Action, Mercy For Animals and others, plus farm and state allies; their federal lobbying and litigation on these laws is several times THL's ($406,653 of lobbying in all, Form 990 Schedule C)."
     },
     {
       "id": "apalocal_coalition_share",
       "section": "adjustments",
       "label": "The APA grants' share of the resources behind the food-policy wins",
       "format": "percent",
+      "formula": "apa_grant * (1 - apa_grant_federal_share) / (apa_share_of_total * program_expenses + apa_members_spend)",
+      "explainer": "The grants' local part over the Alliance's whole pool (THL's Alliance spending, grants included, and the members' own), the same pool as the other-programmes model's."
+    },
+    {
+      "id": "apa_members_spend",
+      "section": "adjustments",
+      "label": "Member groups' own spending on the winning campaigns, 2025",
+      "format": "usd",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 500000,
+        "best": 1500000,
+        "high": 4000000
       },
       "kind": "judgment",
-      "explainer": "Our judgment: the grants paid for the grantees' campaigns (Compassionate Action for Animals' Hennepin County default was named as grant-funded); students, the MSPCA, the Plant Powered School Meals Coalition and others did much of the work."
+      "explainer": "Our judgment, the same as the other-programmes model's: 31 member groups in 21 states, most small; the 12 THL funds received $300K, and the campaigns behind ten wins drew on members' staff and volunteers several times that."
     },
     {
       "id": "owanew_evidence_adj",
@@ -1747,13 +1861,8 @@
       "section": "adjustments",
       "label": "US sales laws defended: evidence adjustment",
       "format": "multiple",
-      "value": {
-        "low": 0.7,
-        "best": 0.9,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: hens are counted by population share, and some of those states' eggs come from in-state flocks covered by housing laws."
+      "formula": "1",
+      "explainer": "1: the population share is ERS's figure, and supply under in-state housing laws an override wouldn't touch is already in the share that would revert."
     },
     {
       "id": "apadef_counterfactual_adj",
@@ -2007,11 +2116,27 @@
       "explainer": "No compliance cost is counted: no regulator's analysis gives a cost for ending fast-growing breeds through the courts (docs/normalization.md 2.21)."
     },
     {
+      "id": "apadef_sads_hens",
+      "section": "outcome",
+      "label": "US sales laws defended: SADs averted, hens",
+      "format": "number",
+      "formula": "apadef_hens * apadef_share_reverting * apadef_p_preempt_without * apadef_opposition_risk_cut * hen_sads_battery * apadef_discounted_years * apadef_total_adj",
+      "unit": "SADs"
+    },
+    {
+      "id": "apadef_sads_sows",
+      "section": "outcome",
+      "label": "US sales laws defended: SADs averted, sows",
+      "format": "number",
+      "formula": "apadef_sows * apadef_share_reverting * apadef_p_preempt_without * apadef_opposition_risk_cut * @sad_factors.sads_per_sow_year_group_housing * apadef_discounted_years * apadef_total_adj",
+      "unit": "SADs"
+    },
+    {
       "id": "apadef_sads",
       "section": "outcome",
       "label": "US sales laws defended: SADs averted",
       "format": "number",
-      "formula": "apadef_hens * apadef_share_reverting * apadef_p_preempt_without * apadef_opposition_risk_cut * hen_sads_battery * apadef_discounted_years * apadef_total_adj",
+      "formula": "apadef_sads_hens + apadef_sads_sows",
       "unit": "SADs"
     },
     {
@@ -2019,9 +2144,9 @@
       "section": "outcome",
       "label": "US sales laws defended: their compliance costs, units of value (negative)",
       "format": "number",
-      "formula": "-@compliance_costs.ca_prop12_net_cost_per_year * apadef_cost_egg_share * apadef_states_vs_ca * @cpi.usa_2024 / @cpi.usa_2020 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * apadef_share_reverting * apadef_p_preempt_without * apadef_opposition_risk_cut * apadef_discounted_years * apadef_counterfactual_adj * apadef_attribution_share * apadef_missing_data_adj",
+      "formula": "-@compliance_costs.ca_prop12_net_cost_per_year * (apadef_cost_egg_share * apadef_states_vs_ca + 1 - apadef_cost_egg_share) * @cpi.usa_2024 / @cpi.usa_2020 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * apadef_share_reverting * apadef_p_preempt_without * apadef_opposition_risk_cut * apadef_discounted_years * apadef_counterfactual_adj * apadef_attribution_share * apadef_missing_data_adj",
       "unit": "uov",
-      "explainer": "The defended rules' compliance costs (docs/normalization.md 2.21): the egg part of the regulator's analysis of Proposition 12 (the shared figure, net of retailers' extra margin), scaled to all seven states' egg laws, in 2024 dollars, valued as money lost by those who bear it (shoppers and owners: the shared payer multiple times US spending per person), on the log scale; kept only where the laws would otherwise revert, over the same chance, years, counterfactual, credit and missing-data step as the hens' gain, not its evidence adjustment."
+      "explainer": "The defended rules' compliance costs (docs/normalization.md 2.21): the regulator's analysis of Proposition 12 (the shared figure, net of retailers' extra margin), its egg part scaled to all seven states' egg laws, in 2024 dollars, valued as money lost by those who bear it (shoppers and owners: the shared payer multiple times US spending per person), on the log scale; kept only where the laws would otherwise revert, over the same chance, years, counterfactual, credit and missing-data step as the animals' gain, not its evidence adjustment."
     },
     {
       "id": "apalocal_sads_mixed",
@@ -2249,7 +2374,7 @@
       "section": "species",
       "label": "SADs averted per dollar you give: chickens, 2024 SAD figures",
       "format": "number",
-      "formula": "sads_per_donor_dollar * (owanew_sads_2024 + owaacc_sads_2024 + apadef_sads + apalocal_sads_mixed * @sad_factors.meal_sads_share_chicken) / branch_sads",
+      "formula": "sads_per_donor_dollar * (owanew_sads_2024 + owaacc_sads_2024 + apadef_sads_hens + apalocal_sads_mixed * @sad_factors.meal_sads_share_chicken) / branch_sads",
       "explainer": "The share of the SADs from hens out of battery cages and the chicken part of the meals replaced, both 2024 SAD figures."
     },
     {
@@ -2273,8 +2398,8 @@
       "section": "species",
       "label": "SADs averted per dollar you give: pigs and other mammals",
       "format": "number",
-      "formula": "sads_per_donor_dollar * (apalocal_sads_mixed * @sad_factors.meal_sads_share_pig + apalocal_sads_dairy) / branch_sads",
-      "explainer": "The mammal part of the mixed meals replaced, and the dairy servings (cows counted as pigs)."
+      "formula": "sads_per_donor_dollar * (apalocal_sads_mixed * @sad_factors.meal_sads_share_pig + apalocal_sads_dairy + apadef_sads_sows) / branch_sads",
+      "explainer": "The mammal part of the mixed meals replaced, the dairy servings (cows counted as pigs) and the sows under Proposition 12."
     },
     {
       "id": "compliance_uov_per_donor_dollar",

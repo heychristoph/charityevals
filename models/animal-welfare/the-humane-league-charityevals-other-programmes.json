@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-humane-league",
   "owner": "charityevals",
-  "summary": "The Humane League's other programmes cost about $5.2 million in 2025, its programme spending less its grants and its accountability campaigns (two other lines): defending US state cage-free and crate-free laws against a federal override and supporting the Animal Policy Alliance's local campaigns, winning new corporate cage-free commitments (four companies, 1.6 million hens), running the Open Wing Alliance (its team, summits, trainings and Fair and Fowl report, credited with a share of the members' 216 new cage-free policies, 16 restored pledges and 18 broiler policies abroad), and mobilising volunteers and supporters to press companies to keep their commitments (a share of the 5.5 million hens out of cages at companies THL pressed itself). The money is split by THL's annual report and ACE's 2024 breakdown, and each part is built from THL's own counts and the site's shared figures per hen, broiler, sow and meal; every branch is discounted for missing data. Past wins count at THL's own next-dollar figure. Defending the state laws also keeps their compliance costs (the regulator's figure for California's Proposition 12, about $300 million a year net of retailers' margin), which at the site's values outweigh the animals' gain, so the result is below zero. The biggest uncertainties are that cost and the share of the override risk the opposition removed, how much grassroots pressure adds to what companies would do anyway, THL's share among the groups behind its new commitments, the hens behind the Alliance's average new policy.",
+  "summary": "The Humane League's other programmes cost about $5.2 million in 2025, its programme spending less its grants and its accountability campaigns (two other lines): defending US state cage-free and crate-free laws against a federal override and supporting the Animal Policy Alliance's local campaigns, winning new corporate cage-free commitments (four companies, 1.6 million hens), running the Open Wing Alliance (its team, summits, trainings and Fair and Fowl report, credited with a share of the members' 216 new cage-free policies, 16 restored pledges and 18 broiler policies abroad), and mobilising volunteers and supporters to press companies to keep their commitments (a share of the 5.5 million hens out of cages at companies THL pressed itself). The money is split by THL's annual report and ACE's 2024 breakdown, and each part is built from THL's own counts and the site's shared figures per hen, broiler, sow and meal; every branch is discounted for missing data. Past wins count at THL's own next-dollar figure. Defending the state laws also keeps their compliance costs (the regulator's figure for California's Proposition 12, about $300 million a year net of retailers' margin), which at the site's values outweigh the animals' gain, so the result is below zero. The biggest uncertainties are that cost and the share of the override risk the opposition removed, how much grassroots pressure adds to what companies would do anyway, THL's share among the groups behind its new commitments, and the hens behind the Alliance's average new policy.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Humane League, policy, new commitments, volunteers and the Open Wing Alliance (2025)",
@@ -789,7 +789,7 @@
         "quote": "approximately 700,000 sows would be needed to meet historical demand levels in California",
         "retrieved": "2026-11-13"
       },
-      "explainer": "Sows housed to Proposition 12's standard to supply California (Massachusetts's Question 3 adds a little). Low end, our judgment: the testimony gives only the 700,000 needed; fewer sows were compliant at the law's start, a shortfall the industry cites."
+      "explainer": "Sows housed to Proposition 12's standard to supply California (Massachusetts's Question 3 adds a little). Low end, our judgment: the testimony gives only the 700,000 needed; fewer sows were compliant at the law's start, a shortfall the industry cites. Veal calves, also covered (and in the cost), are a few tens of thousands and left out (under 0.1%)."
     },
     {
       "id": "def_cost_egg_share",
@@ -797,25 +797,43 @@
       "label": "Share of Proposition 12's net compliance cost that falls on eggs",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.8
+        "low": 0.05,
+        "best": 0.25,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Our judgment: in the regulator's analysis most of the extra egg spending is retailers' margin (a transfer, left out of the shared figure), so the net cost is mostly pork and veal producers' and buyers'. California's egg producers' extra costs alone are about $72 million of the roughly $300 million net (the Department of Finance's comments on the SRIA)."
+      "source": {
+        "title": "California Department of Food and Agriculture (2021), Animal Confinement: Notice of Proposed Action",
+        "url": "https://www.cdfa.ca.gov/ahfss/pdfs/regulations/AnimalConfinement1stNoticePropReg_05252021.pdf",
+        "page": "p. 14",
+        "quote": "Egg producers in California face higher costs by $72 million",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Our judgment, the same as the grants line's model: the notice puts most of the gross on eggs ($40 of $50 a person), but retailers' extra egg margin (about $970 million, a transfer) is nearly all of that egg spending, so the net egg part is about California's egg producers' $72 million of the roughly $300 million net: 0.25. Range 0.05 to 0.5."
+    },
+    {
+      "id": "ca_pop_share",
+      "section": "reach",
+      "label": "California's share of the US population, 2024",
+      "format": "percent",
+      "value": 0.116,
+      "kind": "observed",
+      "source": {
+        "title": "US Census Bureau, QuickFacts: California; United States (Vintage 2024 estimates)",
+        "url": "https://www.census.gov/quickfacts/fact/table/CA,US/PST045224",
+        "page": "Population estimates, July 1, 2024, (V2024)",
+        "note": "California 39,431,263; United States 340,110,988.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "39,431,263 of 340,110,988 people."
     },
     {
       "id": "def_egg_states_vs_ca",
       "section": "reach",
       "label": "People in the states with cage-free sales laws, relative to California",
       "format": "multiple",
-      "value": {
-        "low": 1.8,
-        "best": 2,
-        "high": 2.2
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: California has about 39 million of the US's 340 million people (Census Bureau, 2024 estimates), 11.6%, against the 23% living in the seven states with sales laws (def_pop_share), so the egg part of the cost scales by about 2. Pork's part stays California's (Massachusetts adds a little)."
+      "formula": "def_pop_share / ca_pop_share",
+      "explainer": "The egg part of Proposition 12's cost, scaled from California to all seven states' egg laws by population, drawn with the hens' reach. Pork's part stays California's (Massachusetts adds a little)."
     },
     {
       "id": "apa_meals_per_year",
@@ -1276,13 +1294,8 @@
       "section": "adjustments",
       "label": "Evidence adjustment (how far the reach and effect above can be trusted)",
       "format": "multiple",
-      "value": {
-        "low": 0.7,
-        "best": 0.9,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, about the validity of the counts only (that the outcome isn't measured is the missing-data step): the hens are taken by population share, and some of those states' supply is under in-state housing laws an override wouldn't touch (as in the grants line's model of THL, 0.9)."
+      "formula": "1",
+      "explainer": "1: the population share is ERS's figure, and supply under in-state housing laws an override wouldn't touch is already in the share that would revert (def_revert_share)."
     },
     {
       "id": "apa_evidence_adj",
