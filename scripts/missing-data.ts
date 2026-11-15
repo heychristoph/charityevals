@@ -35,7 +35,7 @@ const P = (share: number, note: string): Rule => ({ share, note: `Partly thin ($
 const SWAPS: Record<string, { row: string; why: string }[]> = {
   "evidence-action-ifa-supplementation-2022": [{ row: "overall_skeptical_adjustment", why: "GiveWell's 25% discount on the charity's own guess of the coverage it adds, from a prior that charities overestimate their impact" }],
   "evidence-action-iron-folic-acid-supplementation-india": [{ row: "overall_skeptical_adjustment", why: "GiveWell's 25% discount on the charity's own guess of the coverage it adds, from a prior that charities overestimate their impact" }],
-  "nutrition-international-rice-fortification-2024": [{ row: "skeptical_adjustment_givewell_s_best_guess", why: "GiveWell's 20% skeptical discount on the coverage the programme projects" }]
+  "nutrition-international-rice-fortification-2024": [{ row: "skeptical_adjustment_givewell_s_best_guess", why: "GiveWell's 20% skeptical discount on the coverage the programme projects" }],
 };
 
 // --- Per-model classifications (non-GiveWell evaluators, and GiveWell exceptions) ---------------------

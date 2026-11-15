@@ -1,6 +1,7 @@
 # Inventory of public evaluator models
 
 Every public cost-effectiveness model we could find from GiveWell, Animal Charity Evaluators, the
+Happier Lives Institute, SoGive (`sogive.md`), Ambitious Impact (`ambitious-impact-models.json`), checked page by page in October 2026, and what we did with each. Each entry
 has a `status`: `imported` (with the model id), or `not imported:` with the reason.
 
 ## GiveWell: `givewell-models.json`, `givewell-sheets.json`
@@ -63,15 +64,9 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   - older reports superseded by the imported ones, cause explorations with no organisation, and
     methodology. `hli-reports.json` gives every report a status.
 
+## Founders Pledge and Giving Green
 
-  them with a public sheet.
-- **Imported:** 14 models: Clean Air Task Force and Coalition for Rainforest Nations (climate, in
-  tonnes of CO₂e), and twelve global health, wellbeing, education and policy models.
-- **Not imported:** recommendation pages with no published model (most since 2022, and every
-  climate, catastrophic-risk and animal page since 2020), pages that rest on GiveWell's models,
-  sheets behind sign-in, intervention-level or hypothetical sheets, and three sheets whose unit or
-  figure doesn't carry over (No Means No Worldwide, TerraPraxis, The Humane League 2019). The file
-  lists every entry and its reason.
+Both asked us not to publish their models yet, so their inventories and models are not in this repository.
 
 ## Ambitious Impact (formerly Charity Entrepreneurship): `ambitious-impact-models.json`
 
@@ -120,13 +115,3 @@ has a `status`: `imported` (with the model id), or `not imported:` with the reas
   - 5 private or deleted sheets; 1 breakeven analysis; 2 Fortify Health CEAs that are Fortify's own and already
     imported as GiveWell's.
 
-
-  the PDFs they link, and every linked Google Sheet (tested through its public export): 42 entries
-  with a cost-effectiveness claim, a dollars-per-tonne figure or a linked model.
-- **Imported:** 7 models, all climate, in tonnes of CO₂e converted with the shared climate rate: The
-  Good Food Institute, Future Cleantech Architects, Opportunity Green, Evergreen Collaborative (2022,
-  2024 deep dive; no sheet is published).
-  benchmark, and most of its pages are qualitative. Left out: recommendations with no published figure
-  Australian list and the grantee spotlights), strategy-level sheets with no charity, companies selling
-  offsets, not charities (BURN, Tradewater, Climeworks and others), and a superseded copy of the GFI
-  sheet. The file lists every entry and its reason.

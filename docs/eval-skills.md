@@ -54,7 +54,8 @@ since moved to the current scale; they have not been re-evaluated.
 ## Re-run, November 2026
 
 The skills brought up to today's rules (below, "Before the re-run") and run again on the same split,
-plus two charities for the families the first run had no test for: Village Enterprise (cash-income,
+plus two charities for families the first run had no test for (cash-income, policy-research-meta), left
+out below because their evaluator asked us not to publish its models yet. Figures are years of
 healthy life per $1,000 under the site's defaults, with the estimate-age discount off for both sides
 (a blind build is dated today, an evaluator's estimate earlier). `evaluation/compare.ts` prints them.
 
@@ -72,10 +73,10 @@ healthy life per $1,000 under the site's defaults, with the estimate-age discoun
 
 ("First run": the October runs recomputed on today's scale, the same way. "Combined range": every input's range combined as independent errors in log space, a 90% interval if each range is one; the joint low–high, every input at its end at once, spans 10³–10¹⁴×.)
 
-**Test set summary.** 4 of 7 blind builds land within 3× of the evaluator's model in the same view
-(Friendship Bench, Helen Keller, Village Enterprise, The Life You Can Save); Dansk Vegetarisk Forening is
+**Test set summary.** 2 of 5 blind builds land within 3× of the evaluator's model in the same view
+(Friendship Bench, Helen Keller); Dansk Vegetarisk Forening is
 just outside (3.1× below), New Incentives 3.5× above, Shrimp Welfare Project 6× below. The geometric mean
-of the seven ratios is 1.0. Every evaluator figure but New Incentives' lies inside the blind model's combined range. Against
+of the five ratios is 0.9. Every evaluator figure but New Incentives' lies inside the blind model's combined range. Against
 the first run: Dansk Vegetarisk Forening moved from 1/105 to 1/3 (the scope rule: the builder modelled
 the policy work the money paid for, a fund won, not a case study); New Incentives and Shrimp Welfare
 Project moved away (the vaccination model now counts adult deaths band by band and the cash; the shrimp

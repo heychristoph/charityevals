@@ -103,9 +103,6 @@ def close(a, b):
 
 # Rows a link needs that the sheet folds into a constant.
 EXTRA_ROWS = {
-    "innovation-in-government-initiative-founders-pledge": ("usd_per_rs_crore", {
-        "id": "rupees_per_crore", "section": "india", "label": "Rupees in a crore", "format": "integer", "value": 10000000, "kind": "observed",
-        "explainer": "A crore is ten million rupees in Indian numbering; the sheet's =7.8207*10000000 for Rs 500 crore carries it."}),
 }
 
 
