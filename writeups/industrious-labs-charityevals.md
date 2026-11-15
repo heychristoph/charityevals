@@ -51,7 +51,8 @@ Benefits and costs are of similar size, so the sign is fragile:
 - **The discount rate.** At a lower rate the late tonnes and the cleaner air count for more than the up-front cost of the heat pumps.
 - **The heat pumps' real cost.** At 0.75 of the quotes the result turns positive.
 - **The district's per-unit energy use** (the evidence adjustment). At 1.1 it turns positive.
-- **Deaths per ton of NOx** in the basin: 12 to 30.
+
+Deaths per ton of NOx in the basin (12 to 30) move the size, not the sign.
 
 ### Biggest uncertainties
 
