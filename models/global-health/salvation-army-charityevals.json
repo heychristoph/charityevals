@@ -388,7 +388,7 @@
         "high": 13300000
       },
       "kind": "judgment",
-      "explainer": "Our judgment. Note 7 of the Western Territory's statements says 'Goods donated for sale in ARC thrift stores consist primarily of clothing, household goods, and other miscellaneous items', recorded at a percentage of their sale price, and puts them in the same clothing, household and other lines as the goods handed out (wt_inkind_goods). They are sold, not handed out, and expensed in the rehabilitation column, where only supplies ($10.2M) and other expenses ($3.0M) can hold them besides its $2.6M of direct assistance (p. 7): at most about $13.3M. Half of that, $6.6M (0-13.3M), is not taken out of direct assistance when the cash paid for bills is worked out."
+      "explainer": "Our judgment. Note 7 of the Western Territory's statements says 'Goods donated for sale in ARC thrift stores consist primarily of clothing, household goods, and other miscellaneous items', recorded at a percentage of their sale price, and puts them in its clothing, household and other lines; wt_inkind_goods holds the clothing and household lines (the 'other' line, mostly vehicles, jewellery and books sold, is left out of it), so only the store goods in those two lines are inside it. They are sold, not handed out, and expensed in the rehabilitation column, where only supplies ($10.2M) and other expenses ($3.0M) can hold them besides its $2.6M of direct assistance (p. 7): at most about $13.3M. Half of that, $6.6M (0-13.3M), taken as the clothing and household part, is not taken out of direct assistance when the cash paid for bills is worked out."
     },
     {
       "id": "wt_inkind_goods",
@@ -470,7 +470,7 @@
         "high": 500
       },
       "kind": "judgment",
-      "explainer": "SSVF pays rent arrears, deposits and utilities for a few months besides case management; that temporary financial assistance is cash in direct assistance, already in the bills paid (assistance_per_household spreads all of it over the households helped). This is the case management and housing search alone: $100 (0-500)."
+      "explainer": "SSVF pays rent arrears, deposits and utilities for a few months besides case management; that temporary financial assistance is cash in direct assistance, already in the bills paid (assistance_per_household spreads all of it over the households helped). This is the case management and housing search alone, a service valued with the other services at the shared cash-equivalent ratio (inkind_cash_equivalence); the housing found is valued in the placements branch. $100 (0-500)."
     },
     {
       "id": "pathway_of_hope_families",
@@ -719,7 +719,7 @@
       "label": "Value received per person in the year (US$, food, goods, money and services)",
       "format": "usd",
       "explainer": "All food, goods, bills paid, transport, day care, clinic visits, anti-trafficking, correctional and disaster services handed out, and the earnings that case management and job help add (trial_earnings_value), at what the family would otherwise pay (in-kind goods at their cash-equivalent share), over the people reached. Only money value: the relief food brings is counted here once, not again as wellbeing. The trial earnings enter divided by aid_counterfactual_adj (trial_earnings_value), so the branch's counterfactual leaves them at full value; the value actually received is about $2 a person less than shown.",
-      "formula": "((meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value) * inkind_cash_equivalence + financial_assistance_households * assistance_per_household + veterans_served * veterans_help_value + trial_earnings_value) / people_reached"
+      "formula": "((meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value + veterans_served * veterans_help_value) * inkind_cash_equivalence + financial_assistance_households * assistance_per_household + trial_earnings_value) / people_reached"
     },
     {
       "id": "consumption_mean",

@@ -609,7 +609,7 @@
       "label": "Average consumption per person in the country (US$)",
       "format": "usd",
       "formula": "@united_states.ce_expenditure_per_person_2024",
-      "explainer": "The site's US consumption per person, 2024 (@united_states.ce_expenditure_per_person_2024, Consumer Expenditure Survey), scaled to the clients by recipients_consumption_share. Changed 2026-11-04 (docs/normalization.md, consumption baselines): the base is the household survey of the people served, the Consumer Expenditure Survey's $32,723 a person in 2024, not the national accounts' $58,517, which also count imputed rents, employer- and government-paid health care and non-profits' spending; the quintile ratios that scale it to the clients are the same survey's. A shared conversion, not thin data."
+      "explainer": "The site's US consumption per person, 2024 (@united_states.ce_expenditure_per_person_2024, Consumer Expenditure Survey), scaled to the clients by recipients_consumption_share (and, for basic needs and 211, bn_consumption_share). Changed 2026-11-04 (docs/normalization.md, consumption baselines): the base is the household survey of the people served, the Consumer Expenditure Survey's $32,723 a person in 2024, not the national accounts' $58,517, which also count imputed rents, employer- and government-paid health care and non-profits' spending; the quintile ratios that scale it to the clients are the same survey's. A shared conversion, not thin data."
     },
     {
       "id": "poorest_fifth_consumption_share",
@@ -638,7 +638,7 @@
         "high": 1.27
       },
       "kind": "judgment",
-      "explainer": "United Way's grants, 211 and tax help go mostly to households below or near the poverty line ('ALICE' and below, about the poorest 40%): a little above the poorest fifth's 0.67 of the average per person (poorest_fifth_consumption_share), so 1.05 of it (0.7 of the average), from 0.82 (mostly well below the poverty line) to 1.27 (many near-poor and middle-income users of child care, youth and tax programmes)."
+      "explainer": "The users of the financial-stability, health and tax programmes are mostly households below or near the poverty line ('ALICE' and below, about the poorest 40%; basic needs and 211 read bn_consumption_share): a little above the poorest fifth's 0.67 of the average per person (poorest_fifth_consumption_share), so 1.05 of it (0.7 of the average), from 0.82 (mostly well below the poverty line) to 1.27 (many near-poor and middle-income users of child care, youth and tax programmes)."
     },
     {
       "id": "baseline_consumption",
@@ -845,11 +845,11 @@
       "format": "usd",
       "value": {
         "low": 1500,
-        "best": 3000,
-        "high": 5000
+        "best": 2700,
+        "high": 4000
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the agency's average cash cost of a mentored youth-year. Alfonso and others 2019 (Children and Youth Services Review 101: 23-32) give marginal costs: about $80 a mentor-month, $3,301 per community-based match of about 20 months, about $2,500 a year; the average cost per youth is higher (the Washington State Institute for Public Policy uses $4,399 per participant a year). $3,000, from $1,500 to $5,000. The mentor's own time is not in it: mentoring_volunteer_hours."
+      "explainer": "Our judgment, the agency's average cash cost of a mentored youth-year, the mentor's own time left out (mentoring_volunteer_hours counts it). The Washington State Institute for Public Policy's cash cost of Big Brothers Big Sisters community-based mentoring (program 765, taxpayer costs only, https://www.wsipp.wa.gov/BenefitCost/Program/765) is $1,675 a participant in 2016 dollars, about $2,250 in 2025 prices; its $4,399 (program 766) adds about 68 volunteer hours at $39.99, which this model counts separately. Alfonso and others 2019 (Children and Youth Services Review 101: 23-32) give marginal costs from one site's 2008-2015 records: about $80 a mentor-month, $3,301 per community-based match of about 20 months, about $2,500 a year in those years' prices. The average cost per youth sits a little above the marginal. $2,700, from $1,500 to $4,000."
     },
     {
       "id": "mentoring_volunteer_hours",
@@ -940,7 +940,7 @@
         "high": 14000
       },
       "kind": "judgment",
-      "explainer": "Our judgment, the full cost of a child's year of pre-kindergarten: state pre-K spent $8,856 a child from all reported sources in 2023-24, state spending alone $7,888 (NIEER, The State of Preschool 2024, https://nieer.org/yearbook/2024), Head Start more per place. $9,000, from $6,000 (part-day places) to $14,000."
+      "explainer": "Our judgment, the full cost of a child's year of pre-kindergarten: state pre-K spent $8,856 a child from all reported sources in 2023-24, state spending alone $7,888 (NIEER, The State of Preschool 2024, the report linked from https://nieer.org/yearbook/2024; quoted by The 74, https://www.the74million.org/zero2eight/preschool-enrollment-spending-hit-record-highs-but-access-and-quality-gaps-persist/), Head Start more per place. $9,000, from $6,000 (part-day places) to $14,000."
     },
     {
       "id": "early_years_until_work",
@@ -1458,7 +1458,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment, validity only (delivery is implementation_adj, targeting is in bn_inkind_factor and recipients_consumption_share): food, rent and utility help is valued at its near-cash worth, which rests on prices, and the study evidence for the main kind (Evans et al. 2016: emergency rent help cut shelter entry) supports it doing what it says. 1, down to 0.85 if agencies report more help than they give."
+      "explainer": "Our judgment, validity only (delivery is implementation_adj, targeting is in bn_inkind_factor and bn_consumption_share): food, rent and utility help is valued at its near-cash worth, which rests on prices, and the study evidence for the main kind (Evans et al. 2016: emergency rent help cut shelter entry) supports it doing what it says. 1, down to 0.85 if agencies report more help than they give."
     },
     {
       "id": "og_evidence_adj",
