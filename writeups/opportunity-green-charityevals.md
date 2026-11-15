@@ -26,7 +26,7 @@ The model takes the expected tonnes from both policies over the years a won refo
 
 The IMO framework also moves money, and the model counts both sides in the main chain:
 
-- **Compliance costs.** Ships' extra fuel costs, about $280 per tonne cut, count as money lost by the people who pay them. Freight costs follow the volume of goods shipped, and about half of that goes to poorer countries, where a dollar counts for more.
+- **Compliance costs.** Ships' extra costs, about $300 per tonne cut by the IMO's own impact assessment, count as money lost by the people who pay them. Freight costs follow the volume of goods shipped, and about half of that goes to poorer countries, where a dollar counts for more.
 - **Just-transition funding.** The share of the fund that reaches climate-vulnerable countries is valued as development aid of the kind the IMO lists: infrastructure, training, technology and capacity. That aid is taken to do half as much as the same money given as cash. We take 40% of the fund's revenue in the first five years, with a range of 10% to 70%. A seventh of it is taken to replace aid donors would have given anyway.
 
 Ships' payments into the fund are transfers, not compliance costs. They are not subtracted from the aid's value either: how to count public money against what it costs those who pay it awaits a site-wide rule. The fund's rewards for clean fuels buy tonnes that are already in the framework's projected cut.
@@ -35,7 +35,7 @@ The next dollar is counted at 39% of the past average. Opportunity Green holds a
 
 ### What drives the result
 
-On the site's values, a tonne of CO₂ kept out of the air is worth far less than the $280 ships would pay to cut it, so the IMO framework's climate effect alone is a net cost. The money the fund would send to climate-vulnerable countries pulls the other way and offsets part of the cost. The two are large and close, so the sign of the result turns on a few figures: how much of the fund reaches those countries, what that aid does per dollar, the cost per tonne, and how poor the people who end up paying it are.
+On the site's values, a tonne of CO₂ kept out of the air is worth far less than the $300 ships would pay to cut it, so the IMO framework's climate effect alone is a net cost. The money the fund would send to climate-vulnerable countries pulls the other way and offsets part of the cost. The two are large and close, so the sign of the result turns on a few figures: how much of the fund reaches those countries, what that aid does per dollar, the cost per tonne, and how poor the people who end up paying it are. Because the result is a small difference between two large, uncertain amounts, its range runs from clear harm to clear good, and the site shows a warning on it. We keep each range as the evidence gives it rather than narrowing them to steady the result.
 
 ### Biggest uncertainties
 
@@ -51,12 +51,13 @@ Any outcome of the pending EU Taxonomy case. The value of the advertising ruling
 
 ### How this model was checked
 
-A new build (November 2026), audited by independent reviewers. The first round found that the fund's money was valued too generously. It took a whole aid budget's value, which includes health aid, so the model now uses development aid's value. The money also missed the evidence step and any allowance for displacing other aid. The share of shipping costs borne in poorer countries was too low. With these fixes the result went from positive to slightly negative. The second round found that the displaced aid should be valued as donors' own aid, which made the result more negative. It also found that the result is unstable: it is the difference of two large, uncertain amounts. The rounds are in audits/opportunity-green-charityevals/.
+A new build (November 2026), audited by independent reviewers. The first round found that the fund's money was valued too generously. It took a whole aid budget's value, which includes health aid, so the model now uses development aid's value. The money also missed the evidence step and any allowance for displacing other aid. The share of shipping costs borne in poorer countries was too low. With these fixes the result went from positive to slightly negative. The second round found that the displaced aid should be valued as donors' own aid, which made the result more negative. It also found that the result is unstable, being the difference of two large, uncertain amounts; we kept the ranges as they are. Before the third round, the compliance cost moved to the IMO's own impact assessment, about $300 a tonne, which made the result a little more negative. The rounds are in audits/opportunity-green-charityevals/.
 
 ### Sources
 
 - Opportunity Green, Report and Financial Statements for the year ended 31 March 2026 (Charity Commission register, charity 1199413)
 - Charity Commission register, financial history, 2023-2026
+- IMO (2024), MEPC 82/INF.8/Add.1, comprehensive impact assessment of the mid-term measures (DNV)
 - Transport & Environment (April 2025), Assessing the impact of the IMO's draft Net-Zero Framework
 - Climate Home News (1 May 2026) and IUMI (December 2025), on the IMO adoption timetable and the October 2025 vote
 - UNFCCC decision 1/CMA.6 (2024), the climate-finance goal
