@@ -7,10 +7,11 @@ Checked only the one edit made after the SecureBio round-1 finding 6 (`git diff 
 
 New findings: none.
 
-Model-sha: 72b198941db2a7ffe578121f5ec345d6be4379ffbccde9ca88e9aeb4042a402c
+Model-sha: 431886e3a1d407145ac22f06120d7bb53b68207a0469aa9da198091fac78fee7
 
 **Verdict: pass**
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)

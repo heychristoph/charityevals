@@ -14,6 +14,7 @@ Previous round: finding 1 (unsourced SFF $78K clause): resolved, clause dropped 
 No findings.
 
 Verdict: **pass**
-Model-sha: 8dbada791af3fa491b3e03448b01b51a5c529daaab6ee085f80d035b837c79b6
+Model-sha: 00312824d60971c17e0c0ac44090e547d81bc30d8054edb2bf55582e6c13e539
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)

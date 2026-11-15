@@ -9,8 +9,9 @@ Checked only the change since round 3: evidence_adj applied per branch, weighted
 
 New findings: none.
 
-Model-sha: cf35481ab32ecb875ff38b613760e138d7e798508e5e20a6b04a1dff5c7b9c5f
+Model-sha: 091bf2a2f2d1ea2c9b20061df68cd0744c3a3f9ea32c035b0ce77346560d05f3
 
 **Verdict: pass**
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
