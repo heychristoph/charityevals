@@ -1,6 +1,6 @@
 # Audit: union-of-concerned-scientists-charityevals-climate, round 7 (scoped verification of the summary and write-up restatement and the INV-4 waivers)
 Result: 0.005202 t CO₂e/$ = 0.001350 years of healthy life per $1,000 (combined range 1.265e-5–0.1441); cause median 0.002152 (×0.63), unchanged from round 6 (0.001350). Verdict: pass.
-Model-sha: 44ccab49793dcb00d21879d1b5b818b38dac860f757f4928b906b87c96120812
+Model-sha: 8af7ff4ae1a335a361cbfb5fa9991421c53414520e928622485e0b617e89cbf0
 Scope: scoped to what changed since round 6: the summary ("about -11%"), the write-up's 0.0014, and src/engine/normalization-waivers.json (INV-4 waivers for usmeth_first_year, none of them for this model). Programmes and sources of earlier rounds not re-audited.
 Mechanical: audit-model exit 0, "Findings (0)"; normalization-audit: 0 violations (INV-4 included).
 Previous round: round 6 finding 1 (compliance costs "-12%", IRA money "+3%") resolved for the compliance figure.
@@ -18,5 +18,6 @@ Previous round: round 6 finding 1 (compliance costs "-12%", IRA money "+3%") res
 Unchanged: the vehicle rule's compliance cost, its delivered share, the shared advocacy share, the next-dollar figure (judgments or estimates); the IRA branch gives most of the tonnes.
 
 Verdict: pass (no high or medium finding; two lows).
-Model-sha: 44ccab49793dcb00d21879d1b5b818b38dac860f757f4928b906b87c96120812
+Model-sha: 8af7ff4ae1a335a361cbfb5fa9991421c53414520e928622485e0b617e89cbf0
 Re-stamped (15 Nov 2026): summary wording only, the round's two lows: no value changed
+Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
