@@ -12,7 +12,8 @@ Checks passed:
 - (c) Summary range text now 0.05-0.80, matching the combined range 0.0496-0.8015; no other stale figure found.
 
 Verdict: pass
-Model-sha: c28e20e8f6d2f3a66a7ee388baaf169e795c40b214d333a239066d8a20f8d1f7
+Model-sha: a9ff15bfa74458987cf1c62101bc13fe3ccb4bc890ce259425e5f7d7e3c6fc06
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)

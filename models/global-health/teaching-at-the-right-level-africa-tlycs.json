@@ -921,12 +921,28 @@
       "explainer": "The learning per dollar over the learning per pupil (0.075 SD): about one pupil for every 6 dollars of all the programme's money."
     },
     {
+      "id": "earnings_gain_per_adult_sd",
+      "section": "earnings",
+      "label": "Adult earnings gain per standard deviation of skill still there in adult life",
+      "format": "percent",
+      "formula": "@education.earnings_gain_per_sd_adult_skills_lmic",
+      "explainer": "The site's one figure for low- and middle-income countries (@education.earnings_gain_per_sd_adult_skills_lmic: 20%, 10% to 30%), from the Center for Global Development's review of the studies linking adults' reading and maths to their earnings, per SD of skill still there in adult life."
+    },
+    {
+      "id": "learning_persistence",
+      "section": "earnings",
+      "label": "Share of the pupils' learning gain still there in adult life",
+      "format": "percent",
+      "formula": "@education.test_gain_persistence_to_adulthood",
+      "explainer": "The site's one figure (@education.test_gain_persistence_to_adulthood: 40%, 20% to 70%): test-score gains fade, a fifth to a half of a year's learning carrying into the next grade in Pakistan's schools (Andrabi and others 2011). No study yet follows Teaching at the Right Level's pupils into work."
+    },
+    {
       "id": "earnings_gain_per_sd",
       "section": "earnings",
       "label": "Adult earnings gain per standard deviation of a childhood learning gain",
       "format": "percent",
-      "formula": "@youth_programmes.earnings_gain_per_sd_childhood",
-      "explainer": "The site's one figure for how much a test-score gain in childhood raises adult earnings (@youth_programmes.earnings_gain_per_sd_childhood: 10%, 5% to 13%), from Chetty, Friedman and Rockoff's estimate of earnings at 28 per standard deviation of a one-year test gain. It is measured in adulthood, so the fade-out of test scores after the programme is already in it. It is the only estimate of its kind that follows children's test gains to their earnings; no study yet follows Teaching at the Right Level's pupils into work. The Life You Can Save stops at learning-adjusted years and puts no value on them."
+      "formula": "earnings_gain_per_adult_sd * learning_persistence",
+      "explainer": "20% per SD of adult skill × 40% of the gain lasting = 8% higher earnings per SD of a childhood learning gain. The Life You Can Save stops at learning-adjusted years and puts no value on them."
     },
     {
       "id": "ln_gain_per_pupil",
@@ -934,7 +950,7 @@
       "label": "Gain in ln(earnings) per pupil, each working year",
       "format": "small",
       "formula": "ln(1 + adjusted_sd_increase * earnings_gain_per_sd)",
-      "explainer": "0.075 SD × 10% = 0.75% higher earnings, as a change in log consumption."
+      "explainer": "0.075 SD × 8% = 0.6% higher earnings, as a change in log consumption."
     },
     {
       "id": "years_until_work",
