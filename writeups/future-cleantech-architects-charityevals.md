@@ -1,6 +1,6 @@
 ### Summary
 
-Future Cleantech Architects is a small German think tank that gives EU and German lawmakers technical analysis on clean technologies for the hardest sectors: industrial heat, steel, cement, hydrogen, and aviation and shipping fuels. Our model counts the two policies it helped win between 2021 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="future-cleantech-architects-charityevals">0.0007</span> years of healthy life per $1,000**. Nearly all of that comes from one win: the EU's target that 5% of new renewable capacity be innovative technology. The result is mostly uncertainty.
+Future Cleantech Architects is a small German think tank that gives EU and German lawmakers technical analysis on clean technologies for the hardest sectors: industrial heat, steel, cement, hydrogen, and aviation and shipping fuels. Our model counts the two policies it helped win between 2021 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="future-cleantech-architects-charityevals">0.0008</span> years of healthy life per $1,000**. Nearly all of that comes from one win: the EU's target that 5% of new renewable capacity be innovative technology. The result is mostly uncertainty.
 
 ### What the charity does
 
@@ -53,7 +53,7 @@ The 5% target gives most of the result: more than half from the later learning a
 
 The extra cost of the newest technologies isn't counted. Floating offshore wind, ocean energy and new geothermal cost more per MWh than the solar and wind they replace, and consumers or taxpayers pay the difference. The site counts a won rule's costs only from a regulator's impact analysis (method, section 2.21). The Commission's impact assessment of the directive's revision (SWD(2021) 621) costs no such target: its section on innovation covers sub-targets for hydrogen-based fuels. The 5% target came later, from a Parliament amendment that no analysis costed. So there is no figure to use. A cost would lower the result, and could outweigh the tonnes if the later savings from learning are small.
 
-Climate work without a decided law in the period is counted only through the 30% for other work. The delegated act's compliance costs aren't counted either: Delegated Regulation (EU) 2025/2359 came with no impact assessment and gives no figure. Climate damage other than deaths is left at the shared zero. The 2025 spending is a judgment until those accounts are filed.
+Climate work without a decided law in the period is counted only through the 30% for other work. The delegated act's compliance costs aren't counted either: Delegated Regulation (EU) 2025/2359 came with no impact assessment and gives no figure. The 2025 spending is a judgment until those accounts are filed.
 
 ### How this model was checked
 

@@ -337,6 +337,15 @@
       "explainer": "The site's shared figure for a donor's aid budget (docs/normalization.md 2.20), for the adaptation aid gained and the other aid displaced alike."
     },
     {
+      "id": "donor_payer_uov_per_dollar",
+      "section": "reach",
+      "label": "Value lost per dollar of rich donor countries' public money, units of value",
+      "format": "small",
+      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr)",
+      "explainer": "What a dollar of a donor government's money costs its taxpayers (docs/normalization.md 2.23): the shared cost of raising public funds (facts: public_funds.mcpf) over taxpayers' consumption on the survey scale, at the site's European figure (UK consumption per person × its survey ratio, 2.14) for the donors (Norway, Germany, the Green Climate Fund's contributors, Japan, Switzerland), with the US federal payer multiple as the shared stand-in for how a national tax falls (our judgment: no other country's figure is shared yet).",
+      "unit": "units of value / $"
+    },
+    {
       "id": "fin_price_level_2035_vs_2024",
       "section": "reach",
       "label": "Climate-finance goal: prices in 2035 against 2024",
@@ -372,11 +381,11 @@
     {
       "id": "fin_uov_per_year",
       "section": "reach",
-      "label": "Climate-finance goal: value as aid a year, net of the aid displaced",
+      "label": "Climate-finance goal: value as aid a year, net of the aid displaced and of what the new money costs its payers",
       "format": "number",
-      "formula": "fin_grant_dollars_per_year * fin_value_per_dollar * (fin_adaptation_share * fin_new_aid_share - (1 - fin_adaptation_share) * (1 - fin_new_aid_share) * (1 - fin_rebadged_share))",
+      "formula": "fin_grant_dollars_per_year * fin_value_per_dollar * (fin_adaptation_share * fin_new_aid_share - (1 - fin_adaptation_share) * (1 - fin_new_aid_share) * (1 - fin_rebadged_share)) - fin_grant_dollars_per_year * fin_new_aid_share * donor_payer_uov_per_dollar",
       "unit": "uov",
-      "explainer": "New money for adaptation adds the value of aid; money moved to adaptation from other aid nets to nothing (aid for aid); money moved to mitigation loses the aid it replaced, and its tonnes are counted separately; rebadged money changes nothing. Negative when the money moved to mitigation outweighs the new adaptation money."
+      "explainer": "New money for adaptation adds the value of aid; money moved to adaptation from other aid nets to nothing (aid for aid); money moved to mitigation loses the aid it replaced, and its tonnes are counted separately; rebadged money changes nothing. Negative when the money moved to mitigation outweighs the new adaptation money. New money also costs the donors' taxpayers (row donor_payer_uov_per_dollar, docs/normalization.md 2.23); money moved from other aid costs them nothing more."
     },
     {
       "id": "fin_mitigation_cost_per_tco2e",
@@ -956,6 +965,24 @@
       "unit": "uov"
     },
     {
+      "id": "rbf_payer_uov",
+      "section": "effect",
+      "label": "Results-based finance: what the donors' payments cost their taxpayers, units of value (negative)",
+      "format": "number",
+      "formula": "-rbp_per_year * donor_payer_uov_per_dollar * protection_years",
+      "explainer": "Public money that buys tonnes is netted against what it costs those who pay for it (docs/normalization.md 2.23): the year's payments × the value lost per dollar, over the same discounted years as the forest kept; credited with the branch (in uov_bridged), all but its evidence step, which is about the tonnes.",
+      "unit": "units of value"
+    },
+    {
+      "id": "itmo_payer_uov",
+      "section": "effect",
+      "label": "Carbon markets: what governments' purchases of credits cost their taxpayers, units of value (negative)",
+      "format": "number",
+      "formula": "-itmo_finance_per_year * itmo_share_country_buyers * donor_payer_uov_per_dollar * protection_years",
+      "explainer": "The credits bought by countries for their own targets are bought with public money (docs/normalization.md 2.23); companies' purchases are their own money, as any private purchase. Over the same discounted years as the forest kept, credited with the branch.",
+      "unit": "units of value"
+    },
+    {
       "id": "itmo_uov_pandemic",
       "section": "effect",
       "label": "Carbon markets: pandemic deaths averted, in units of value",
@@ -1331,14 +1358,14 @@
       "section": "adjustments",
       "label": "Results-based finance: healthy years before adjustments (weight for the averages)",
       "format": "number",
-      "formula": "abs(rbf_tco2e * tco2e_value_here + rbf_uov_pandemic * uov_value_here)"
+      "formula": "abs(rbf_tco2e * tco2e_value_here + (rbf_uov_pandemic + rbf_payer_uov) * uov_value_here)"
     },
     {
       "id": "itmo_dalys_raw",
       "section": "adjustments",
       "label": "Carbon markets: healthy years before adjustments, ignoring sign (weight for the averages)",
       "format": "number",
-      "formula": "abs(itmo_tco2e * tco2e_value_here + itmo_uov_pandemic * uov_value_here)"
+      "formula": "abs(itmo_tco2e * tco2e_value_here + (itmo_uov_pandemic + itmo_payer_uov) * uov_value_here)"
     },
     {
       "id": "fin_dalys_raw",
@@ -1513,11 +1540,11 @@
     {
       "id": "uov_bridged",
       "section": "bridges",
-      "label": "Catastrophic risk, in units of value (credited)",
+      "label": "Catastrophic risk, aid and public money, in units of value (credited)",
       "format": "number",
-      "formula": "livelihood_people * ln_gain_per_person_year * protection_years * $uov_per_ln_consumption + rbf_uov_pandemic * rbf_credit + itmo_uov_pandemic * itmo_credit + fin_uov * fin_credit",
+      "formula": "livelihood_people * ln_gain_per_person_year * protection_years * $uov_per_ln_consumption + rbf_uov_pandemic * rbf_credit + itmo_uov_pandemic * itmo_credit + fin_uov * fin_credit + rbf_payer_uov * rbf_credit / rbf_evidence_adj + itmo_payer_uov * itmo_credit",
       "unit": "uov",
-      "explainer": "Each forest branch's pandemic deaths averted and the climate-finance goal's aid, each × its credit; the template's income term stays, at 0 (no incomes are counted)."
+      "explainer": "Each forest branch's pandemic deaths averted, the climate-finance goal's aid and the cost of the public money that pays for forest results and credits, each × its credit (the payments without the evidence step, which is about the tonnes); the template's income term stays, at 0 (no incomes are counted)."
     },
     {
       "id": "dalys_from_uov",
@@ -1558,7 +1585,7 @@
       "section": "bridges",
       "label": "Climate, in healthy years",
       "format": "number",
-      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
+      "formula": "tco2e_bridged * (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier) / ($uov_per_daly)",
       "unit": "DALYs",
       "explainer": "The bridge from t CO₂e into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },

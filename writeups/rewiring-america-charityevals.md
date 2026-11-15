@@ -50,7 +50,7 @@ The public money counts at Rewiring America's large share of the advocacy behind
 
 ### What isn't modelled
 
-The affiliate's Greenhouse Gas Reduction Fund work is its own organisation's and was frozen in 2025. Solar and insulation households' own net gain is left out, since no figure gives it before the credit. Climate damage other than deaths is left at the shared zero.
+The affiliate's Greenhouse Gas Reduction Fund work is its own organisation's and was frozen in 2025. Solar and insulation households' own net gain is left out, since no figure gives it before the credit.
 
 ### How this model was checked
 

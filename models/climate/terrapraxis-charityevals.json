@@ -3,13 +3,17 @@
   "name": "TerraPraxis",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"world":0.35,"CHN":0.52,"IND":0.13},
+  "beneficiaries": {
+    "world": 0.35,
+    "CHN": 0.52,
+    "IND": 0.13
+  },
   "beneficiaries_note": "Our build: from the model's rows at the defaults, about seven tenths of the value is money for power customers where reactors are built (China about 60%, other countries about 33%, India about 7%), the rest the tonnes (heat deaths world-wide, air pollution by coal capacity times smoke per tonne: China and India).",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "terrapraxis",
   "owner": "charityevals",
-  "summary": "TerraPraxis, a US non-profit with a small UK sister company, designs, convenes and builds software to re-power the world's coal plants with advanced nuclear reactors (its REPOWER consortium), and makes the case for advanced nuclear more broadly (the Ten-Terawatt Initiative). This model counts what its 2022-2024 work ($6.3M) adds to a yardstick, a third of the COP28 pledge to triple nuclear capacity built by 2050, a tenth of it on coal sites, crediting all groups' non-commercial enabling work with 1.5% of that deployment and TerraPraxis with 8% of that work on coal sites and 0.6% elsewhere. Besides the tonnes, the deployment changes what people pay for power: reactors on coal sites are cheaper to build (DOE: 15%-35%), while at the site's discount rate new reactors' power costs about as much as the coal and gas it replaces and, in India, more than the wind and solar it replaces (IEA/NEA projections, with wind and solar's system costs); since most reactors would be built in China and other middle-income countries, where a dollar is worth far more to those paying it, the coal sites' construction savings outweigh the tonnes (in India they are largely offset by nuclear's cost over the wind and solar it replaces). At the defaults a dollar given comes to 0.02 years of healthy life per $1,000, about seven tenths of it from those savings. It is mostly uncertainty: nothing has been built yet, every step from the work to a reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces; both lines are discounted for missing data.",
+  "summary": "TerraPraxis, a US non-profit with a small UK sister company, designs, convenes and builds software to re-power the world's coal plants with advanced nuclear reactors (its REPOWER consortium), and makes the case for advanced nuclear more broadly (the Ten-Terawatt Initiative). This model counts what its 2022-2024 work ($6.3M) adds to a yardstick, a third of the COP28 pledge to triple nuclear capacity, read at about 2040 (the middle of the years counted), a tenth of it on coal sites, crediting all groups' non-commercial enabling work with 1.5% of that deployment and TerraPraxis with 8% of that work on coal sites and 0.6% elsewhere. Besides the tonnes, the deployment changes what people pay for power: reactors on coal sites are cheaper to build (DOE: 15%-35%), while at the site's discount rate new reactors' power costs about as much as the coal and gas it replaces and, in India, more than the wind and solar it replaces (IEA/NEA projections, with wind and solar's system costs); since most reactors would be built in China and other middle-income countries, where a dollar is worth far more to those paying it, the coal sites' construction savings outweigh the tonnes (in India they are largely offset by nuclear's cost over the wind and solar it replaces). At the defaults a dollar given comes to 0.015 years of healthy life per $1,000, about seven tenths of it from those savings. It is mostly uncertainty: nothing has been built yet, every step from the work to a reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces; both lines are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: TerraPraxis",
@@ -544,11 +548,60 @@
       "unit": "years"
     },
     {
+      "id": "pathway_first_year",
+      "section": "effect",
+      "label": "Tripling pathway: its base year",
+      "format": "integer",
+      "value": 2020,
+      "kind": "observed",
+      "unit": "year",
+      "source": {
+        "title": "US Department of Energy (1 December 2023), At COP28, countries launch declaration to triple nuclear energy capacity by 2050",
+        "url": "https://www.energy.gov/articles/cop28-countries-launch-declaration-triple-nuclear-energy-capacity-2050-recognizing-key",
+        "quote": "advance a global aspirational goal of tripling nuclear energy capacity from 2020 by 2050",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The pledge triples 2020's capacity: no new capacity counted at 2020."
+    },
+    {
+      "id": "pathway_last_year",
+      "section": "effect",
+      "label": "Tripling pathway: the year it reaches three times 2020's capacity",
+      "format": "integer",
+      "value": 2050,
+      "kind": "observed",
+      "unit": "year",
+      "source": {
+        "title": "US Department of Energy (1 December 2023), At COP28, countries launch declaration to triple nuclear energy capacity by 2050",
+        "url": "https://www.energy.gov/articles/cop28-countries-launch-declaration-triple-nuclear-energy-capacity-2050-recognizing-key",
+        "quote": "advance a global aspirational goal of tripling nuclear energy capacity from 2020 by 2050",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The pledge's end point."
+    },
+    {
+      "id": "pathway_middle_year",
+      "section": "effect",
+      "label": "Middle year of the years the work counts",
+      "format": "number",
+      "formula": "(period_first_year + period_last_year) * 0.5 + years_until_avoided + years_of_impact * 0.5",
+      "explainer": "The period's middle year, the wait and half the years counted: the year at which the pathway is read (families/climate.md, technology acceleration).",
+      "unit": "year"
+    },
+    {
+      "id": "pathway_counted_share",
+      "section": "effect",
+      "label": "Share of the pathway's 2050 build reached by that year",
+      "format": "percent",
+      "formula": "min(1, max(0, (pathway_middle_year - pathway_first_year) / (pathway_last_year - pathway_first_year)))",
+      "explainer": "The pathway read at the middle of the years counted, straight between 2020 (nothing new) and 2050, at most its 2050 level: the same reading as every technology pathway on the site. About 0.68 at the defaults (about 2040). The capacity rows above are the 2050 build; this share scales the tonnes and the money counted from them (the smoke weights read the full build, since they read no shared value)."
+    },
+    {
       "id": "rep_downstream",
       "section": "effect",
       "label": "Coal repowering: expected tonnes before adjustments",
       "format": "number",
-      "formula": "rep_tonnes_per_year * p_success * discounted_years",
+      "formula": "rep_tonnes_per_year * pathway_counted_share * p_success * discounted_years",
       "unit": "t CO₂"
     },
     {
@@ -556,7 +609,7 @@
       "section": "effect",
       "label": "Advanced nuclear: expected tonnes before adjustments",
       "format": "number",
-      "formula": "nuc_tonnes_per_year * p_success * discounted_years",
+      "formula": "nuc_tonnes_per_year * pathway_counted_share * p_success * discounted_years",
       "unit": "t CO₂"
     },
     {
@@ -735,7 +788,8 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Synthetic fuels, industrial heat and shipping are uses of the reactors in the advanced nuclear line. What remains is small: advanced geothermal and energy-system modelling, each a page of the website and a few reports. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 5% of the modelled net value (0 to 15%), the same kind of work as the rest."
+      "explainer": "Synthetic fuels, industrial heat and shipping are uses of the reactors in the advanced nuclear line. What remains is small: advanced geothermal and energy-system modelling, each a page of the website and a few reports. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 5% of the modelled net value (0 to 15%), the same kind of work as the rest.",
+      "side_effect": "added"
     },
     {
       "id": "nuclear_harm_share",
@@ -880,8 +934,8 @@
       "section": "adjustments",
       "label": "Where the site's discount rate sits between the IEA/NEA's 3% and 7%",
       "format": "number",
-      "formula": "($discount_rate - @climate.pcge_discount_rate_low) / (@climate.pcge_discount_rate_high - @climate.pcge_discount_rate_low)",
-      "explainer": "0 at 3%, 1 at 7%: the regions' cost figures are interpolated at the same discount rate the model applies to everything else, so the slider moves them too."
+      "formula": "min(1, max(0, ($discount_rate - @climate.pcge_discount_rate_low) / (@climate.pcge_discount_rate_high - @climate.pcge_discount_rate_low)))",
+      "explainer": "0 at 3%, 1 at 7%, straight between, and held at the nearer end outside: the IEA/NEA study gives no costs beyond its two rates, so they aren't extrapolated."
     },
     {
       "id": "premium_chn",
@@ -1179,7 +1233,7 @@
       "label": "Coal repowering: construction cost saved on reactors moved to coal sites, units of value",
       "format": "number",
       "unit": "uov",
-      "formula": "rep_gw_repowered * p_success * (1 - rep_additional_share) * rep_attribution_share * 1e6 * rep_site_cost_saving * w_overnight * @cpi.usa_2024 / @cpi.usa_2018 * (1 - (1 + $discount_rate) ^ -years_of_impact) * wait_discount * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple",
+      "formula": "rep_gw_repowered * pathway_counted_share * p_success * (1 - rep_additional_share) * rep_attribution_share * 1e6 * rep_site_cost_saving * w_overnight * @cpi.usa_2024 / @cpi.usa_2018 * (1 - (1 + $discount_rate) ^ -years_of_impact) * wait_discount * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple",
       "explainer": "The reactors the counterfactual treats as moved from other sites still save their builders and customers the coal site's construction saving. Credited gigawatts moved (the line's chance, share not extra, TerraPraxis's share) × the saving × each region's overnight cost over its payers' consumption (row above), in 2024 dollars; the saving would have come anyway once the shared years counted are over, so only bringing it forward counts (1 − (1 + rate)^−years), after the shared wait, with the evidence and missing-data steps. Valued as money gained by those who pay for power, at the shared payer multiple (docs/normalization.md 2.21)."
     },
     {
@@ -1188,7 +1242,7 @@
       "label": "Extra reactors: cost of their power over what it replaces, units of value",
       "format": "number",
       "unit": "uov",
-      "formula": "-p_success * twh_per_gw_year * 1e6 * @cpi.usa_2024 / @cpi.usa_2018 * discounted_years * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple * (rep_gw_repowered * rep_additional_share * rep_attribution_share * (w_gap_rep - rep_site_cost_saving * w_investment) + nuc_gw_not_coal * nuc_attribution_share * w_gap_nuc)",
+      "formula": "-pathway_counted_share * p_success * twh_per_gw_year * 1e6 * @cpi.usa_2024 / @cpi.usa_2018 * discounted_years * evidence_adj * missing_data_adj * $uov_per_ln_consumption / @public_funds.compliance_cost_payer_multiple * (rep_gw_repowered * rep_additional_share * rep_attribution_share * (w_gap_rep - rep_site_cost_saving * w_investment) + nuc_gw_not_coal * nuc_attribution_share * w_gap_nuc)",
       "explainer": "The credited extra reactors' output (MWh a year) × their cost over what they replace: the fossil and clean parts at each region's gaps (rows above), and the coal-site reactors less the site's construction saving per MWh; each region over its payers' consumption, in 2024 dollars, over the same discounted years as the tonnes, with the evidence and missing-data steps; valued as money lost (or gained, if negative) by those who pay for power (docs/normalization.md 2.21)."
     },
     {
@@ -1300,7 +1354,7 @@
       "label": "The deployment's money effects, in tonnes of CO₂e",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "money_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "formula": "money_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "explainer": "Units of value into tonnes at what a tonne of these is worth on the site's scale (its heat and air-pollution deaths by age, as the conversion counts them), the bridge the other climate models use (docs/normalization.md 2.6)."
     },
     {

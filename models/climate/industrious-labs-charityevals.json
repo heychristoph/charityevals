@@ -3,7 +3,10 @@
   "name": "Industrious Labs (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"USA":0.97,"world":0.03},
+  "beneficiaries": {
+    "USA": 0.97,
+    "world": 0.03
+  },
   "beneficiaries_note": "Our build: by share of the result's parts at the defaults, harms and goods alike. The rules' compliance costs and the deaths their cleaner air avoids (nearly all of the size) fall in the United States; the tonnes' heat deaths are spread by world population.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
@@ -345,7 +348,7 @@
       "format": "number",
       "formula": "@climate.us_iron_steel_neshap_2024_deaths_per_year",
       "unit": "deaths / year",
-      "explainer": "From EPA's monetized fine-particle benefits (facts: climate, 20, 8 to 30); its HAP metals' benefits EPA could not quantify, so they count nothing here."
+      "explainer": "From EPA's monetized fine-particle benefits (facts: climate, 20, 8 to 30); its HAP metals' benefits EPA could not quantify, so they count nothing here. The benefit figure includes the illness avoided, so these deaths take no morbidity share on top."
     },
     {
       "id": "p_success",
@@ -896,14 +899,14 @@
         "quote": "Morbidity-related benefits $0.7 $1.4 $0.7 $4.7",
         "retrieved": "2026-11-15"
       },
-      "explainer": "The district's own valuation of its 2022 air plan puts illness avoided at $1.4 billion against $39.1 billion for deaths in 2037: 3.6% (2% to 8%, EPA's analyses often find a little more). Added to each rule's deaths."
+      "explainer": "The district's own valuation of its 2022 air plan puts illness avoided at $1.4 billion against $39.1 billion for deaths in 2037: 3.6% (2% to 8%, EPA's analyses often find a little more). Added to the district rules' deaths, not to EPA's steel rule, whose deaths are read off EPA's benefit figure, illness included."
     },
     {
       "id": "uov_per_year",
       "section": "adjustments",
       "label": "The won rules' health effects and compliance costs, units of value per year of the period",
       "format": "number",
-      "formula": "((s46_health_uov + s53_health_uov + iis_health_uov) * (1 + air_morbidity_share) + s46_compliance_uov + s53_compliance_uov + iis_compliance_uov + coke_compliance_uov) / period_years",
+      "formula": "((s46_health_uov + s53_health_uov) * (1 + air_morbidity_share) + iis_health_uov + s46_compliance_uov + s53_compliance_uov + iis_compliance_uov + coke_compliance_uov) / period_years",
       "unit": "uov",
       "explainer": "Deaths and illness avoided by cleaner local air and the rules' compliance costs, summed and spread over the period's two years, in the main chain (docs/normalization.md 2.21)."
     },
@@ -953,7 +956,7 @@
       "label": "The won rules' health effects and compliance costs, in tonnes of CO₂e",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "formula": "uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "explainer": "Units of value into tonnes at what a tonne of these is worth on the site's scale (its heat and air-pollution deaths by age, as the conversion counts them), the bridge Clean Air Task Force's and Environmental Defense Fund's models use (docs/normalization.md 2.6)."
     },
     {

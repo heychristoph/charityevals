@@ -44,6 +44,12 @@
       "explainer": "Every tonne avoids its heat deaths; a tonne from burning less fossil fuel near people also avoids air-pollution deaths. These rows say how much of the shared air-pollution rate applies to this charity's tonnes (docs/normalization.md 2.5); the rates themselves stay shared."
     },
     {
+      "id": "bridges",
+      "title": "Other outcomes, in this model's unit",
+      "kind": "ours",
+      "explainer": "charityevals' standard step for outcomes in more than one unit (docs/normalization.md 2.6): each outcome is counted in its own unit (units of value for income and deaths, WELLBYs for life satisfaction, tonnes of CO₂e, chicken pain days) and put into this model's unit by its unit's conversion over this unit's, which the headline's conversion cancels. So each moves only with its own sliders, exactly as in a model of its own unit. The rows are fixed; don't edit them."
+    },
+    {
       "id": "outcome",
       "title": "Outcome",
       "explainer": "The outcome in the family's shared unit, per dollar."
@@ -324,11 +330,47 @@
       "explainer": "The product of the adjustments above."
     },
     {
+      "id": "public_usd_per_year",
+      "section": "adjustments",
+      "label": "Public money a year that buys the tonnes or funds the work (none here)",
+      "format": "integer",
+      "formula": "0",
+      "unit": "$ / year",
+      "explainer": "TEMPLATE: public money the win spends a year once in effect (a tax credit per tonne × the tonnes, grants, public procurement, a won fund's levies) from a shared fact (facts/climate.json: the credit per tonne, the law's yearly cost), as an input with its source; 0 when the tonnes come with no public money."
+    },
+    {
+      "id": "public_payer_uov_per_dollar",
+      "section": "adjustments",
+      "label": "Value lost per dollar of that money, units of value",
+      "format": "small",
+      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "unit": "units of value / $",
+      "explainer": "TEMPLATE: what a dollar of public money costs its payers (docs/normalization.md 2.23): the shared cost of raising it over the payers' consumption on the survey scale (2.14), here US federal taxpayers. Other payers: their country's survey-scale consumption; a levy on traded goods: its payers at the shared compliance-cost multiple, without the cost of raising public funds."
+    },
+    {
+      "id": "public_cost_uov",
+      "section": "adjustments",
+      "label": "What the public money costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-public_usd_per_year * public_payer_uov_per_dollar * p_success * discounted_years * total_adj",
+      "unit": "units of value",
+      "explainer": "Netted against the tonnes it buys (docs/normalization.md 2.23), over the same years, wait and adjustments as the tonnes: money paid per unit delivered takes every adjustment; a fixed sum (grants, appropriations, levies) all but the evidence step (divide total_adj by evidence_adj)."
+    },
+    {
+      "id": "tco2e_from_uov",
+      "section": "bridges",
+      "label": "The public money's cost to its payers, in tonnes of CO₂e (negative)",
+      "format": "number",
+      "formula": "public_cost_uov / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "unit": "t CO₂e",
+      "explainer": "Units of value into tonnes by the site's fixed bridge (docs/normalization.md 2.6). Fixed."
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂e averted",
       "format": "number",
-      "formula": "downstream_value * total_adj",
+      "formula": "downstream_value * total_adj + tco2e_from_uov",
       "unit": "t CO₂e"
     },
     {

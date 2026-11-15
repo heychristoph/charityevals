@@ -1,6 +1,6 @@
 ### Summary
 
-The Good Food Institute (GFI) works to make plant-based, cultivated and fermentation-made foods good and cheap enough to replace part of the meat, seafood, milk and eggs people eat. Our model credits its 2024 spending with its share of what the whole alternative-protein field may achieve, and comes to **<span data-figure="headline" data-model="good-food-institute-charityevals">0.0016</span> years of healthy life per 1,000 dollars**. At the site's default weights most of that is the greenhouse gases and farm air pollution of the meat not produced, about a third the eaters' health, and under one percent the animals spared. Nothing in the chain is measured, so the figure is very uncertain.
+The Good Food Institute (GFI) works to make plant-based, cultivated and fermentation-made foods good and cheap enough to replace part of the meat, seafood, milk and eggs people eat. Our model credits its 2024 spending with its share of what the whole alternative-protein field may achieve, and comes to **<span data-figure="headline" data-model="good-food-institute-charityevals">0.0017</span> years of healthy life per 1,000 dollars**. At the site's default weights most of that is the greenhouse gases and farm air pollution of the meat not produced, about a third the eaters' health, and under one percent the animals spared. Nothing in the chain is measured, so the figure is very uncertain.
 
 ### What the charity does
 
