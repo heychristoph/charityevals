@@ -1125,39 +1125,19 @@
       "explainer": "Judgment 10% (0-30%): diarrhoeal illness and cholera outbreaks averted; the time saved fetching water is in unmodelled_benefits_adj."
     },
     {
-      "id": "wash_hours_saved",
+      "id": "wash_time_saved_share",
       "section": "effect",
-      "label": "Water: hours of fetching water saved per person a year",
-      "format": "number",
-      "value": {
-        "low": 5,
-        "best": 15,
-        "high": 40
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 15 hours (5-40) a person a year: households without a nearby source spend about half an hour or more a day fetching water (WHO/UNICEF JMP); a new or repaired water point saves part of that, spread over the household's members; trucking to camps saves less.",
-      "unit": "hours"
-    },
-    {
-      "id": "wash_hours_per_year",
-      "section": "effect",
-      "label": "Water: working hours in a year, to value an hour at consumption",
-      "format": "number",
-      "value": {
-        "low": 1500,
-        "best": 2000,
-        "high": 2500
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 2,000 hours (1,500-2,500): an hour saved is valued at a year's consumption ÷ a working year, so the gain is ln(1 + hours saved ÷ hours a year) on the site's log-income scale.",
-      "unit": "hours"
+      "label": "Water: value of water-fetching time saved, as a share of consumption",
+      "format": "percent",
+      "explainer": "The shared figure for time saved fetching water, mostly women's and girls' (@water.time_saved_consumption_share, 0.75% of consumption, 0-3%).",
+      "formula": "@water.time_saved_consumption_share"
     },
     {
       "id": "wash_time_ln_per_person",
       "section": "effect",
       "label": "Water: gain in ln(consumption) from time saved, per person",
       "format": "small",
-      "formula": "ln(1 + wash_hours_saved / wash_hours_per_year)",
+      "formula": "ln(1 + wash_time_saved_share)",
       "explainer": "A side effect of the water supply: time freed for work, school or care, valued at consumption. Read at the shared side-effect weight.",
       "side_effect": "added"
     },

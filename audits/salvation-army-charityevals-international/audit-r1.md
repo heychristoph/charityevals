@@ -1,6 +1,6 @@
 # Audit: salvation-army-charityevals-international, round 1 (verification of the rule changes)
 Result: 2.576e-4 daly/$ = 0.2576 years of healthy life per 1,000 dollars (combined range 0.040-1.662); cause median 0.0898 (x2.87). Verdict: pass.
-Model-sha: ae90e0d9160746ab3a65513f1e41e4c3288b761435aeb60a542d1ed76bcc6d00
+Model-sha: fdc5c543e7a1c485e4e3afb9a6c97d035b3eb0eebb109aa4fa2fc257645e9c2f
 Scope: only the changes: ln_gain_per_person (disaster relief), livelihoods' mortality step (income_mortality_uov_ratio, livelihood_uov), relief evidence/attribution rows (rule 2), summary and write-up sentences. Not a full re-audit.
 Mechanical: lint none above low (one low: spread), invariants none, check.ts all valid, simulation-check 5%/50%/95% = 0.343/1/2.77 x best guess, normalization-audit none (coordinator).
 Previous round: none kept (grandfathered).
@@ -21,8 +21,9 @@ Checks passed: ln_gain_per_person formula and explainer agree (years_exposed x l
 missing_data_discount, livelihood_consumption_gain, uov_per_daly, discount_rate, livelihood_cost_per_member (all judgment; 98% of uncertainty is judgment). Most improving: a SAWSO-published reach or outcome count for the livelihoods and schools branches.
 
 Verdict: pass
-Model-sha: ae90e0d9160746ab3a65513f1e41e4c3288b761435aeb60a542d1ed76bcc6d00
+Model-sha: fdc5c543e7a1c485e4e3afb9a6c97d035b3eb0eebb109aa4fa2fc257645e9c2f
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (15 Nov 2026): overhead ratio without the US donated goods (Convention 2); the income-mortality ratio read from the shared fact; 0.258 → 0.245.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

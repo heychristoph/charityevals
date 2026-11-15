@@ -687,15 +687,10 @@
     {
       "id": "inkind_cash_equivalence",
       "section": "effect",
-      "label": "What in-kind goods are worth to the family, as a share of their retail price",
+      "label": "What in-kind help is worth to the family against cash (food, goods and services, weighted by their value)",
       "format": "percent",
-      "value": {
-        "low": 0.6,
-        "best": 0.8,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Food, clothing and care given in kind are worth less to the family than the same money, since they can't choose what to buy; households who would have bought the goods anyway value them at about full price. 80% (60-100%), anchored on the literature valuing in-kind transfers (food stamps at 80-95% of face value for most households, less for goods the family wouldn't have bought). Bills paid count at full value."
+      "explainer": "The shared figures for food (0.8), goods (0.7) and services (0.8) given in kind (@aid_value), weighted by the value of the meals, items and services handed out. Bills paid count at full value.",
+      "formula": "(meals_provided * meal_value * @aid_value.inkind_food_vs_cash + tangible_items * item_value * @aid_value.inkind_goods_vs_cash + (day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value) * @aid_value.inkind_services_vs_cash) / (meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value)"
     },
     {
       "id": "value_per_person",
@@ -870,13 +865,8 @@
       "section": "effect",
       "label": "Value of a night's shelter to the person (US$)",
       "format": "usd",
-      "value": {
-        "low": 10,
-        "best": 20,
-        "high": 40
-      },
-      "kind": "judgment",
-      "explainer": "What the cheapest alternative roof would cost: a room in a rooming house or single-room-occupancy hotel rents for $300-1,200 a month in most US cities, $10-40 a night. Judgment $20; the full cost of running a shelter bed ($40-80) is not its value to the person, who would never pay it."
+      "explainer": "The shared value of a night's shelter in the US (@united_states.shelter_night_value_2024, about $21, $10-40): what the poorest fifth of US households pay for a roof per person-night. The full cost of running a shelter bed ($40-80) is not its value to the person, who would never pay it.",
+      "formula": "@united_states.shelter_night_value_2024"
     },
     {
       "id": "shelter_consumption_share",
@@ -1067,17 +1057,25 @@
       "explainer": "Some placements are into the Salvation Army's own permanent and supportive residences, whose nights may be inside the report's nights of shelter (the report doesn't define them). Those years are counted there, so the placement branch counts the rest: 80% (50% if all supportive placements are its own residences and inside the count, 100% if none)."
     },
     {
+      "id": "own_home_premium_share",
+      "section": "effect",
+      "label": "Value of one's own home over a shelter bed, as a share of a night's shelter",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.25,
+        "high": 0.75
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: what a tenant gains over a shelter bed (privacy, safety, storage, a fixed address), a quarter of a night's roof (0-75%)."
+    },
+    {
       "id": "own_home_premium_per_night",
       "section": "effect",
       "label": "Value of one's own home over a shelter bed, per night (US$)",
       "format": "usd",
-      "value": {
-        "low": 0,
-        "best": 5,
-        "high": 15
-      },
-      "kind": "judgment",
-      "explainer": "Privacy, safety, storage and a fixed address: what a tenant gains over a shelter bed. A judgment of $5 a night (0-15), a quarter of a room's rent."
+      "explainer": "Privacy, safety, storage and a fixed address over a shelter bed, at the share of a night's roof below.",
+      "formula": "own_home_premium_share * shelter_value_per_night"
     },
     {
       "id": "tenant_rent_share",

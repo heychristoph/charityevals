@@ -43,7 +43,7 @@ Each item is a way a model can count something twice, miss a step or mix units; 
 - [ ] Funging and leverage (global health): would a government or the Global Fund have paid?
 - [ ] Production response (diet change): `@sad_factors.production_response` applied.
 - [ ] Won reforms: `$win_years_counted`, the wait until effect discounted, pledges kept from the shared rate.
-- [ ] Past averages: `$marginal_vs_past_average` on the path, and only for `past_average`.
+- [ ] Past averages: the charity's `@next_dollar.<charity>` on the path, and only for `past_average`.
 - [ ] Scope: every programme, by funding weight; the latest year. Thin branches × `$missing_data_discount`.
 - [ ] Several units: each outcome in its own unit, entering only through the template's bridge rows.
 - [ ] Negative effects: substitution, rebound, harms of the intervention.

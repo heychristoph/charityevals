@@ -1,6 +1,6 @@
 # Audit: international-refugee-assistance-project-charityevals, round 3 (scoped to the round-2 changes)
 Result: 7.404e-5 daly/$ = 0.0740 years of healthy life per 1,000 dollars (combined range 0.0096-0.572); round 2 was 0.0707 (+4.7%).
-Model-sha: 4a84c15de0ee91efbe1265a42a80c0e7bad6849d9958ba04f3dc68f3ce03bff6
+Model-sha: 5b373ae89bde1b6c49350360969857cd4bbb7fb863042c1db414e31b2a6f6618
 Mechanical: `scripts/audit-model.ts` lint 0 findings.
 
 | Round-2 finding | Status | Check |
@@ -15,3 +15,4 @@ New issues: none. Only the two files in scope and the script changed; `generated
 Verdict: pass
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

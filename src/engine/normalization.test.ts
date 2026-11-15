@@ -150,24 +150,24 @@ describe("invariant checks", () => {
     expect(deathsPart(av)).toBeCloseTo((0.0001 * 116.25262 / av.uov_per_daly) * 1000, 6);
   });
 
-  it("INV-18 wants every past average, and nothing else, to read the next-dollar slider", () => {
+  it("INV-18 wants every past average, and nothing else, to read its next-dollar figure", () => {
     const x = { id: "x", label: "Pledges won per dollar of past spending", value: 2, kind: "observed", explainer: "Test input." };
-    const slider = { id: "marginal_vs_past_average", label: "Next dollar vs average", formula: "$marginal_vs_past_average", published: 1, explainer: "Changed for consistency: the evaluator publishes the average." };
+    const slider = { id: "marginal_vs_past_average", label: "Next dollar vs average", formula: "@next_dollar.no_evidence", published: 1, explainer: "Changed for consistency: the evaluator publishes the average." };
     const m = (id: string, estimate_basis: string | undefined, rows: object[]) => ({ ...base, id, ...(estimate_basis ? { estimate_basis } : {}), rows });
     const good = m("good", "past_average", [x, slider, { id: "out", label: "out", formula: "x * marginal_vs_past_average" }]);
     const missed = m("missed", "past_average", [x, { id: "out", label: "out", formula: "x" }]);
     const twice = m("twice", "marginal", [x, slider, { id: "out", label: "out", formula: "x * marginal_vs_past_average" }]);
     const both = m("both", "past_average", [x, { ...slider, published: undefined }, { id: "out", label: "out", formula: "x * marginal_vs_past_average" }]);
     const unstated = m("unstated", undefined, [x, { id: "out", label: "out", formula: "x" }]);
-    const l = buildLibrary([{ ...base, estimate_basis: "unit_cost" }, good, missed, twice, both, unstated], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    const l = buildLibrary([{ ...base, estimate_basis: "unit_cost" }, good, missed, twice, both, unstated], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, [read(join(root, "facts/next_dollar.json"))]);
     expect(l.errors).toEqual([]);
     expect(inv18(l).violations.map(keyOf).sort()).toEqual([
-      "both marginal_vs_past_average evaluator view", "missed $marginal_vs_past_average", "twice marginal_vs_past_average $marginal_vs_past_average", "unstated estimate_basis",
+      "both marginal_vs_past_average evaluator view", "missed next_dollar", "twice marginal_vs_past_average next_dollar", "unstated estimate_basis",
     ]);
-    // On the site: every charity model says what its dollar is, and the slider's readers are exactly the past averages.
+    // On the site: every charity model says what its dollar is, and the next-dollar readers are exactly the past averages.
     const charities = [...lib.models.values()].filter((t) => t.kind === "charity");
     expect(charities.filter((t) => !t.estimate_basis).map((t) => t.id)).toEqual([]);
-    const readers = charities.filter((t) => t.rows.some((r) => r.assumptionDeps.includes("marginal_vs_past_average") || r.factDeps.some((f) => f.startsWith("next_dollar.")))).map((t) => t.id).sort();
+    const readers = charities.filter((t) => t.rows.some((r) => r.factDeps.some((f) => f.startsWith("next_dollar.")))).map((t) => t.id).sort();
     expect(readers).toEqual(charities.filter((t) => t.estimate_basis === "past_average").map((t) => t.id).sort());
   });
 

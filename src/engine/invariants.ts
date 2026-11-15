@@ -10,7 +10,7 @@ import {
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
-import { CAREER_CHANGE_FORMULA, INFORMED_MONEY, MARGINAL_ASSUMPTION, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SET_DESTINATIONS, SUCCESS_FACT, causeSplitShares, destinationSetRows, destinationSets, isDestinationMix, priorDollarValue, priorDollarValueMix, sameFormula } from "./moved-money";
+import { CAREER_CHANGE_FORMULA, INFORMED_MONEY, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SET_DESTINATIONS, SUCCESS_FACT, causeSplitShares, destinationSetRows, destinationSets, isDestinationMix, priorDollarValue, priorDollarValueMix, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
@@ -1227,11 +1227,9 @@ export function inv17(lib: Library, av = assumptionValues(lib.assumptions)): Inv
 }
 
 /** INV-18 (docs/normalization.md 2.10): every model states what its dollar is (`estimate_basis`); every
- * past average reads the "next dollar vs average dollar" slider on the path to its output, in our view only;
- * no marginal or unit-cost estimate reads it, which would count diminishing returns twice. A model that
- * reads another model live (`#id`) moves with that model's slider through it, which is not a read. */
+ * past average reads its charity's next-dollar figure on the path to its output, in our view only; no
+ * marginal or unit-cost estimate reads one, which would count diminishing returns twice. */
 export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
-  const A = MARGINAL_ASSUMPTION;
   const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template");
   const violations: Violation[] = [];
   for (const m of models) {
@@ -1240,20 +1238,11 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
       violations.push({ inv: "INV-18", model: m.id, where: "estimate_basis", detail: "no estimate_basis: say whether the result is a past_average, marginal or unit_cost estimate" });
       continue;
     }
-    // A charity's own next-dollar figure (facts/next_dollar.json) stands in for the shared slider.
+    // The charity's own next-dollar figure (facts/next_dollar.json).
     const own = m.rows.filter((r) => r.factDeps.some((f) => f.startsWith("next_dollar.")));
-    const readers = m.rows.filter((r) => r.assumptionDeps.includes(A));
     if (basis !== "past_average") {
       for (const r of own)
         violations.push({ inv: "INV-18", model: m.id, where: `${r.id} next_dollar`, detail: `reads a next-dollar figure, but its estimate is ${basis}: diminishing returns twice` });
-      for (const r of readers)
-        violations.push({ inv: "INV-18", model: m.id, where: `${r.id} $${A}`, detail: `reads $${A}, but its estimate is ${basis}: already about the next dollar, so the slider would count diminishing returns twice` });
-      // Nor through anything else, unless through another model it reads live.
-      if (!readers.length && !referencedModels(lib, m).some((t) => usedAssumptions(lib, t).includes(A))) {
-        const h0 = headline(lib, m, av), h1 = headline(lib, m, { ...av, [A]: av[A] * 0.5 });
-        if (Number.isFinite(h0) && !close(h0, h1, 1e-9))
-          violations.push({ inv: "INV-18", model: m.id, where: `$${A} moves`, detail: `a ${basis} estimate whose headline moves with $${A} (${fmt(h0)} → ${fmt(h1)})` });
-      }
       continue;
     }
     const path = rowsFeeding(m);
@@ -1268,22 +1257,11 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
         violations.push({ inv: "INV-18", model: m.id, where: `${r.id} evaluator view`, detail: "reads a next-dollar figure with no `published` value: the evaluator view must keep the evaluator's 1" });
       continue;
     }
-    if (!readers.some((r) => path.has(r.id))) {
-      violations.push({ inv: "INV-18", model: m.id, where: `$${A}`, detail: `a past average, but no row on the path to the output reads $${A}` });
-      continue;
-    }
-    const half = { ...av, [A]: av[A] * 0.5 };
-    const h0 = headline(lib, m, av), h1 = headline(lib, m, half);
-    if (!(Number.isFinite(h0) && Math.abs(h1) < Math.abs(h0)))
-      violations.push({ inv: "INV-18", model: m.id, where: `$${A} moves`, detail: `halving $${A} doesn't shrink our headline (${fmt(h0)} → ${fmt(h1)})` });
-    // The evaluator publishes the average: its view keeps 1. (Destinations read live through `#id` move in
-    // both views, so this is checked on the rows, not the headline.)
-    for (const r of readers) if (r.published === undefined && m.evaluator?.assumptions[A] === undefined)
-      violations.push({ inv: "INV-18", model: m.id, where: `${r.id} evaluator view`, detail: `reads $${A} with no \`published\` value: the evaluator view must keep the evaluator's 1` });
+    violations.push({ inv: "INV-18", model: m.id, where: "next_dollar", detail: "a past average, but no row on the path to the output reads its charity's next-dollar figure (facts/next_dollar.json)" });
   }
   return {
-    id: "INV-18", title: "Past averages, and only past averages, read the next-dollar slider", status: "checked", checked: models.length, violations,
-    how: `Every model with an output (variants inherit the field) declares estimate_basis. past_average: a row on the path to the output reads $${A}, halving it lowers our headline, and every row reading it has the evaluator's value in \`published\` (or the evaluator pins it), so the evaluator view keeps the average. marginal and unit_cost: no row reads $${A}.`,
+    id: "INV-18", title: "Past averages, and only past averages, read the charity's next-dollar figure", status: "checked", checked: models.length, violations,
+    how: "Every model with an output (variants inherit the field) declares estimate_basis. past_average: a row on the path to the output reads the charity's figure in facts/next_dollar.json (normalization.md 2.10), halving it lowers our headline, and that row has `published` 1, so the evaluator view keeps the average. marginal and unit_cost: no row reads a next-dollar figure.",
   };
 }
 

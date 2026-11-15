@@ -17,7 +17,7 @@ The good is mostly the work itself. A household that would have had to pay a con
 
 ### How the model works
 
-- **Response work** (US). Each muck and gut, sanitation and smoke clean-up counts at a judged contractor's price, anchored on published cost guides: $5,000, $2,200 and $8,000. Help in kind counts at 90% of its price, and the clients' consumption is set a little above that of America's poorest fifth. This branch is about four-fifths of the US result.
+- **Response work** (US). Each muck and gut, sanitation and smoke clean-up counts at a judged contractor's price, anchored on published cost guides: $5,000, $2,200 and $8,000. Help in kind counts at 80% of its price, and the clients' consumption is set a little above that of America's poorest fifth. This branch is about four-fifths of the US result.
 - **Repairs** (US). An estimated 90 homes at $20,000 of repairs each, valued as housing over 15 years.
 - **Volunteers' wellbeing.** The 2,526 volunteers gain a little life satisfaction for the year, discounted for those who would have volunteered elsewhere.
 - **Credit.** All Hands and Hearts' cash is about half the resources behind the US work. The rest is the volunteers' unpaid hours (about 190,000, at the US value of a volunteer hour), donated goods and services, and partners.

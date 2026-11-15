@@ -1,6 +1,6 @@
 # Audit: american-red-cross-charityevals, round 1 (verification of the mc_years change)
 Result: 4.533e-6 daly/$ = 0.004533 years of healthy life per 1,000 dollars (combined range 0.001906–0.01078); cause median 0.1100 (×0.041). Verdict: pass.
-Model-sha: d27820dfdc36fea15fae3af593ad69a5e492865fd26e512a0c2e274fcb005612
+Model-sha: 3c7ff9f3ac3f6bb9de37a15c071e025b60f7440324af2cc654de4656da351244
 Scope: scoped to the changes only: new row mc_years, row ln_gain_per_person and its readers (inc_uov, uov_bridged, missing_data_adj's mc_value_share weight), the income_years explainer, the summary and the write-up sentences about this model. Programmes and year (FY2025, $721 million domestic) not re-audited.
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, the summary gives the reason), invariants none, check.ts all valid, simulation-check stable (5% 0.617, 50% 1, 95% 1.57 × best guess), normalization-audit not rerun (coordinator: none).
 Previous round: none kept (model is in audits/grandfathered.json).
@@ -27,6 +27,7 @@ Not in scope (no source changed).
 Result is driven by uov_per_daly (judgment), inc_cf_large (judgment), uov_per_ln_consumption (estimate), unmodelled_benefits_adj and large_vs_poorest_fifth (both judgment). The mc_years row is not among them. What would most improve the model: sourced counterfactual shares for large-disaster help (FEMA, insurers).
 
 Verdict: pass
-Model-sha: d27820dfdc36fea15fae3af593ad69a5e492865fd26e512a0c2e274fcb005612
+Model-sha: 3c7ff9f3ac3f6bb9de37a15c071e025b60f7440324af2cc654de4656da351244
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

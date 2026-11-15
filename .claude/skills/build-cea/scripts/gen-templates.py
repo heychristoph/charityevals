@@ -15,12 +15,12 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
   wellbeing         household size @household_size.<place>, spillover and SD-years @wellby_factors,
                     deaths only through uov_valued_outside_wellbys -> wellbys_from_uov (INV-17)
   corporate-campaign  $win_years_counted, the wait until the pledges take effect discounted,
-                    pledges kept @sad_factors.commitment_fulfilment_*, $marginal_vs_past_average
+                    pledges kept @sad_factors.commitment_fulfilment_*, @next_dollar.<charity>
   diet-change       @sad_factors.sads_per_meal_replaced x meal_mix_vs_reference,
                     @sad_factors.production_response, $win_years_counted for won menu changes
   policy-research-meta  won policy ($win_years_counted, the wait), money moved through the shared
                     rows of src/engine/moved-money.ts (#model-id, @meta), the career-change step,
-                    $marginal_vs_past_average; a climate skeleton in tco2e with years_until_avoided,
+                    @next_dollar.<charity>; a climate skeleton in tco2e with years_until_avoided,
                     air_pollution_weight, extra_deaths_per_tco2e and methane_share
   domestic-services, humanitarian-relief, medical-research, conservation, rights-advocacy  in DALYs,
                     each other unit's outcome through one fixed bridge row (src/engine/bridges.ts,
@@ -139,8 +139,8 @@ def donor_rows(prefix, unit_label, staff, marginal=False):
         f("salary_sacrifice", "donor", "Salary forgone by staff (in-kind donation)", "cost_total * staff_cost_share * salary_gap / (1 - salary_gap)", None, "usd"),
     ]
     if marginal:
-        rows.append(f("marginal_vs_past_average", "donor", "How much the next dollar does compared with the average dollar so far", "$marginal_vs_past_average",
-                      "TEMPLATE: replace the formula with `@next_dollar.<charity id, - as _>`, the charity's own figure written by docs/normalization.md 2.10 (room × use × run) in facts/next_dollar.json; the slider here is only a placeholder that loads. This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued as a share of the average. 1 in `published`: what the past average itself says.", "percent", published=1))
+        rows.append(f("marginal_vs_past_average", "donor", "How much the next dollar does compared with the average dollar so far", "@next_dollar.no_evidence",
+                      "TEMPLATE: replace the formula with `@next_dollar.<charity id, - as _>`, the charity's own figure written by docs/normalization.md 2.10 (room × use × run) in facts/next_dollar.json; the no-evidence figure here is only a placeholder that loads. This model's cost per outcome is the charity's past spending over what it won (estimate_basis past_average), so the next dollar is valued as a share of the average. 1 in `published`: what the past average itself says.", "percent", published=1))
     return rows
 
 UNITS = json.load(open(os.path.join(ROOT, "assumptions", "default.json")))["units"]

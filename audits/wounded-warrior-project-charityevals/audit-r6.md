@@ -1,7 +1,7 @@
 # Audit: wounded-warrior-project-charityevals, round 6 (verification)
 
 Result: 6.425e-6 daly/$ = 0.006425 years of healthy life per 1,000 dollars (combined range 0.0007-0.057); cause median 0.0688 (x0.093). Verdict: **pass** (no high findings).
-Model-sha: 4b72073158e4d698eb5ac6807842814e26a925130412b04d922ba0fa37d664e4
+Model-sha: 3f7aef5885d6138c48d45e0ccfa97363ce043ea703e8185f53cf6401df4c1d5f
 Scope: only the owner change of 15 Nov 2026 (docs/normalization.md 2.14): `consumption_na` deleted, `taxpayer_ln_loss_per_dollar = mcpf / (us_payer_multiple * consumption_mean)`, summary reworded. Diff against main for this model; write-up checked for stale assumptions only.
 
 Mechanical: audit-model 1 finding (medium, far-below; it asks the summary to compare with the median, which the owner rule now forbids, so not a model finding); no invariant violation except the retiring INV-15 note.
@@ -26,3 +26,4 @@ No source changed. `ce_expenditure_per_person_2024`, `us_federal_payer_multiple`
 
 Verdict: pass
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

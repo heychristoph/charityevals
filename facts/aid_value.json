@@ -52,6 +52,84 @@
       },
       "kind": "judgment",
       "explainer": "Our judgment, read by every model that adds a livelihood, income or food gain abroad: higher household incomes avert some child deaths (cash transfers cut under-five deaths by about 8% in Richterman et al. 2023), and GiveWell's mortality effect for cash is about 0.2 of its consumption value. Models multiply it by the value of a life slider. 20% (0-50%)."
+    },
+    {
+      "id": "inkind_food_vs_cash",
+      "label": "What a dollar of food given in kind is worth to the household, against a dollar of cash",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Whitmore, 'What Are Food Stamps Worth?', Princeton Industrial Relations Section Working Paper 468 (2002); Cunha, 'Testing Paternalism: Cash versus In-Kind Transfers', American Economic Journal: Applied Economics 6(2), 2014",
+        "url": "https://ideas.repec.org/p/pri/indrel/468.html",
+        "quote": "value their total benefits at 80 percent of their face value",
+        "note": "Whitmore: the 20-30% of US food-stamp recipients who would spend less on food with cash value the stamps at 80% of face value; the rest value them at face value; stamps sell for about 65% of face value on the underground market. Cunha (Mexico's PAL, randomised food basket against cash): the basket was infra-marginal for total food but extra-marginal for many of its ten items (https://doi.org/10.1257/app.6.2.195). A pantry box or food parcel is a fixed bundle with less choice than food stamps (@snap.cash_equivalence 0.95), so lower: 0.8, low 0.6 (bundles far from what the household eats, some resold or wasted), high 0.95 (as SNAP).",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Food handed out in kind (pantry boxes, food parcels, meals, grocery vouchers) frees money the household would have spent on food, but the bundle is chosen by others: some items replace cheaper ones or go unused. US food stamps are worth about 80% of face value to the households they push to buy more food than they would with cash (Whitmore 2002), and a fixed basket has less choice than stamps. 0.8 (0.6-0.95). Read by every model of ours that values food given in kind; SNAP itself is @snap.cash_equivalence."
+    },
+    {
+      "id": "inkind_goods_vs_cash",
+      "label": "What a dollar of clothing and household goods given in kind is worth to the household, against a dollar of cash",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.45,
+        "best": 0.7,
+        "high": 0.9
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Wydick, Katz, Calvo, Gutierrez and Janet, 'Shoeing the Children: The Impact of the TOMS Shoe Donation Program in Rural El Salvador', World Bank Economic Review 32(3), 2018",
+        "url": "https://doi.org/10.1093/wber/lhw042",
+        "note": "In the one randomised trial of donated goods to households most children already owned shoes, so the gift mostly replaced a purchase or went unused. Goods further from a household's usual budget than food are worth less than food in kind (inkind_food_vs_cash, 0.8); goods the household doesn't want sell at a discount (food stamps at about 65% of face value, Whitmore 2002). 0.7, low 0.45 (unwanted goods resold at a loss), high 0.9 (staples such as hygiene items and school supplies the household buys anyway).",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Clothing, shoes, hygiene items, school supplies and household goods given in kind are further from what a household would have bought than food, and some go unused or are sold at a loss. 0.7 (0.45-0.9), below food in kind. Valued at what the goods would cost the household; a donor's recorded value above that is a separate price step (@united_states.donated_goods_value_vs_recorded). Read by every model of ours that values goods given in kind."
+    },
+    {
+      "id": "inkind_housing_vs_cash",
+      "label": "What a dollar of housing, shelter or repairs given in kind is worth to the household, against a dollar of cash",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "Olsen, 'Housing Programs for Low-Income Households', in Moffitt (ed.), Means-Tested Transfer Programs in the United States, University of Chicago Press and NBER, 2003",
+        "url": "https://www.nber.org/papers/w8208",
+        "note": "Olsen's review of US housing assistance: recipients value subsidised housing at less than its cost, since it is a fixed, illiquid amount of housing, often more than they would have bought with the cash. Help the household chooses (repairs, incremental improvements it would otherwise save for) is closer to cash, emergency shelter kits that don't fit the need further from it. 0.8 (0.6-0.95).",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "A home, a rebuilt or repaired house, building materials or emergency shelter is a lumpy transfer of a fixed size the household can't spend on anything else; studies of US housing assistance find recipients value it below its cost (Olsen 2003). 0.8 (0.6-0.95): repairs and improvements a family would otherwise save for at the top, a fixed design or a kit that doesn't fit the need at the bottom. Read by every model of ours that values housing or shelter given in kind."
+    },
+    {
+      "id": "inkind_services_vs_cash",
+      "label": "What a dollar of services given in kind (lodging, transport, care, clean-up) is worth to the people served, against a dollar of cash",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' judgment, anchored on the in-kind figures above and Finkelstein, Hendren and Luttmer, 'The Value of Medicaid', Journal of Political Economy 127(6), 2019 (NBER Working Paper 21308)",
+        "url": "https://www.nber.org/papers/w21308",
+        "quote": "Our baseline estimates of Medicaid's welfare benefit to recipients per dollar of government spending range from about $0.2 to $0.4",
+        "note": "Services that stand in for something the household would otherwise pay for or do itself (a night's lodging near the hospital, a ride, home care, gutting a flooded house, day care) are worth close to their price to a household that needs them, less where some of it isn't the household's top need. Health insurance, much of whose value is care that would have been given anyway, is the far end (0.2-0.4) and is valued apart. 0.8 (0.5-1).",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Services bought or given for people (lodging, rides, home care and therapy, disaster clean-up, meals and care in social services) are worth less to them than the same money, since they can't spend it on something else, but close to their price where they replace what the household would have paid for. 0.8 (0.5-1), as food and housing in kind. Read by every model of ours that values services given in kind at their cost."
     }
   ]
 }

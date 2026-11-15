@@ -12,6 +12,7 @@ Checks passed:
 - (c) Summary range text now 0.05-0.80, matching the combined range 0.0496-0.8015; no other stale figure found.
 
 Verdict: pass
-Model-sha: 44f92759b3027de9c322f40b5ad15ff256cf84c1484bf0c94c6d120a2c6f707c
+Model-sha: c28e20e8f6d2f3a66a7ee388baaf169e795c40b214d333a239066d8a20f8d1f7
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

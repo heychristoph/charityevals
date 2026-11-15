@@ -865,21 +865,16 @@
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(dir_uov_consumption_raw * dir_evidence_adj + mkt_uov_consumption_raw * mkt_evidence_adj) / (dir_uov_consumption_raw + mkt_uov_consumption_raw)",
-      "explainer": "The outcome-weighted average of the two branch adjustments, for reading only; each branch applies its own."
+      "formula": "(dir_uov_consumption_raw + mkt_uov_consumption_raw * mkt_evidence_adj) / (dir_uov_consumption_raw + mkt_uov_consumption_raw)",
+      "explainer": "The outcome-weighted average of the market branch adjustment and 1 for the direct branch (its in-kind value is dir_inkind_value), for reading only; each branch applies its own."
     },
     {
-      "id": "dir_evidence_adj",
+      "id": "dir_inkind_value",
       "section": "adjustments",
       "label": "Direct branch: what a housing dollar is worth to the family against a cash dollar",
       "format": "multiple",
-      "value": {
-        "low": 0.6,
-        "best": 0.85,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "One question: how much a dollar of housing help is worth against a dollar of cash. Families choose incremental improvements they want and would otherwise save for (a room, a floor), so the help is close to inframarginal, where in-kind transfers are valued near their cost (Cunha 2014, American Economic Journal: Applied, on Mexico's food transfers); a fixed design and timing lowers it a little. 0.85, range 0.6 to 1."
+      "explainer": "The shared figure for housing given in kind (@aid_value.inkind_housing_vs_cash, 0.8, 0.6-0.95): families choose incremental improvements they would otherwise save for, close to cash; a fixed design and timing lower it.",
+      "formula": "@aid_value.inkind_housing_vs_cash"
     },
     {
       "id": "mkt_evidence_adj",
@@ -1004,7 +999,7 @@
       "section": "adjustments",
       "label": "Direct branch: all adjustments combined",
       "format": "multiple",
-      "formula": "dir_evidence_adj * dir_counterfactual_adj * dir_attribution_share * leverage_funging_adj * dir_missing_data_adj"
+      "formula": "dir_inkind_value * dir_counterfactual_adj * dir_attribution_share * leverage_funging_adj * dir_missing_data_adj"
     },
     {
       "id": "mkt_total_adj",

@@ -17,6 +17,7 @@ Other changes checked:
 (none)
 
 Verdict: pass (0 high, 0 medium, 0 low)
-Model-sha: 123c09ecc93c4262d0f7bec27fa131e40dd97aa4eb41d4b63f1f4c2724984f2d
+Model-sha: 33547cebf0a4cdd340d8c8d32c9eef63cb473381ad21176752b4e3ab0b00c860
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

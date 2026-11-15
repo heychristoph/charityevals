@@ -12,4 +12,5 @@ Scope: only the methane_share change: new row methane_share and the rewritten br
 None.
 
 Verdict: pass
-Model-sha: b0a5817b9ed6da75b8e304c395a54bf791625842453ef164de38ac97e39459c6
+Model-sha: 77b73d9f45c594637e5075575cb837f5aa7013797a21b11e16532fe732c15c39
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

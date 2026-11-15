@@ -1,7 +1,7 @@
 # Audit: american-cancer-society-charityevals-support, round 2 (verification of the changes since round 1)
 
 Result: 3.630e-6 daly/$ = 0.00363 years of healthy life per $1,000 (combined range 8.4e-4 – 0.0157); cause median 0.338 (x0.011). Verdict: pass.
-Model-sha: af7401e8688337bd84ec99ebcc8fa28810345249159aabb7c42b9152c8dd5e74
+Model-sha: 4f4e83f78b82679715301b9ed85e0cf7f81f79a95d80300e2d4ad672a51789c1
 
 Mechanical: `scripts/audit-model.ts` gives 0 high, 0 medium, 1 low (far-below; the summary's reason still matches the rows). Result moved from 0.00378 to 0.00363 (-4%), inside the builder's stated 0.0038 to 0.0036. Peers unchanged (Red Cross 0.0045, Salvation Army 0.0052, Habitat 0.0054). Only the changes were checked; no new source other than Ambroggi was fetched.
 
@@ -35,3 +35,4 @@ No change introduced a unit error, double count or breach: the counterfactual an
 Verdict: pass. Findings: 0 high, 0 medium, 4 new low (plus round-1 lows 7 and 9 open).
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

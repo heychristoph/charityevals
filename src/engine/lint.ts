@@ -225,12 +225,12 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
 
   // What the model's dollar is (INV-18): past averages, and only past averages, read the next-dollar slider.
   const basis = m.estimate_basis;
-  // The charity's own figure (facts/next_dollar.json, docs/normalization.md 2.10) or, until it has one, the slider.
+  // The charity's own figure (facts/next_dollar.json, docs/normalization.md 2.10).
   const marginalReaders = m.rows.filter((r) => r.assumptionDeps.includes(MARGINAL) || r.factDeps.some((f) => f.startsWith("next_dollar.")));
   if (!basis) add("high", "estimate-basis", "no estimate_basis", `Set "estimate_basis": past_average (past spending over past wins: campaigns, policy, research, money moved), marginal (a forecast of planned work) or unit_cost (a price per item delivered). The ${family} template's is ${spec.basis}.`);
   else {
     if (basis === "past_average" && !marginalReaders.some((r) => path.has(r.id)))
-      add("high", "estimate-basis", "a past average whose result doesn't read the next-dollar figure", 'Add the row marginal_vs_past_average = @next_dollar.<charity> (facts/next_dollar.json, normalization.md 2.10; $marginal_vs_past_average until the charity has one), `published` 1, in the donor section, and multiply the per-donor-dollar row by it.');
+      add("high", "estimate-basis", "a past average whose result doesn't read the next-dollar figure", 'Add the row marginal_vs_past_average = @next_dollar.<charity> (facts/next_dollar.json, normalization.md 2.10), `published` 1, in the donor section, and multiply the per-donor-dollar row by it.');
     if (basis !== "past_average")
       for (const r of marginalReaders) add("high", "estimate-basis", `reads the next-dollar figure but estimate_basis is ${basis}`, "Only a past average takes the next-dollar figure: remove the row, or set estimate_basis to past_average if the cost is past spending over past wins.", r.id);
     if (basis !== spec.basis && !spec.altBasis?.includes(basis))

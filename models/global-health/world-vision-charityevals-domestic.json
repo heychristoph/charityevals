@@ -190,13 +190,8 @@
       "section": "effect",
       "label": "What the goods are worth to the family, as a share of their recorded value",
       "format": "percent",
-      "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.85
-      },
-      "kind": "judgment",
-      "explainer": "Two questions only: choice (families can't pick what they get, so goods they wouldn't have bought are worth less to them than their price: the literature values in-kind transfers at 80-95% of face value for food stamps, less for goods outside the usual budget) and the donors' own wholesale valuation of surplus stock, which may overstate what the goods would sell for. Unused goods are in implementation_adj, not here. Anchored on the Salvation Army model's 80% for food and clothing it buys, lower for corporate surplus: 60% (40-85%)."
+      "explainer": "Two steps: the donors' wholesale value of surplus stock against what it would sell for (@united_states.donated_goods_value_vs_recorded, 0.85) and what goods given in kind are worth to a family against cash (@aid_value.inkind_goods_vs_cash, 0.7): about 0.6. Unused goods are in implementation_adj, not here.",
+      "formula": "@united_states.donated_goods_value_vs_recorded * @aid_value.inkind_goods_vs_cash"
     },
     {
       "id": "value_per_person",

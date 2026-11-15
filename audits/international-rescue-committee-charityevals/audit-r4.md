@@ -1,6 +1,6 @@
 # Audit: international-rescue-committee-charityevals, round 4 (scoped verification)
 Result: 3.764e-4 daly/$ = 0.38 years of healthy life per 1,000 dollars (combined range 0.11–1.29); cause median 0.102 (×3.7). Verdict: pass (no findings).
-Model-sha: e06e2c0f3ca36e3e4031ee9ea3b86fc1251cbe41ba81116b0dffd2c3c40a5e0e
+Model-sha: 04028df47032574579c929bcc44e85fee0adfa4a9effb3af306bf819b2de72d9
 Scope: only the round-3 fix (`git diff eab604a 135055d` on the model and write-up). Nothing else re-audited.
 Mechanical: audit-model lint 0 findings, no invariant findings; result 0.3764 unchanged; `generated/` and the tree otherwise unchanged.
 
@@ -15,6 +15,7 @@ None needed; wording-only change.
 Unchanged from round 3.
 
 Verdict: pass.
-Model-sha: e06e2c0f3ca36e3e4031ee9ea3b86fc1251cbe41ba81116b0dffd2c3c40a5e0e
+Model-sha: 04028df47032574579c929bcc44e85fee0adfa4a9effb3af306bf819b2de72d9
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

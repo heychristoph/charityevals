@@ -568,17 +568,25 @@
       "explainer": "Our judgment: a grant pays for the agency's overhead too. Programme ratios of US human-service charities are typically 75% to 90% (United Way's own network: 84%); 82%. It reduces the basic-needs grants to what reaches clients, and grosses United Way's own programme-only spending up to the full-cost basis of the trialled programmes' costs (own_uov_raw), since United Way's own overhead is already in overhead_ratio."
     },
     {
+      "id": "bn_food_share",
+      "section": "effect",
+      "label": "Basic needs: share of the help that is food (the rest rent, utility and other bills paid)",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: housing and utilities were 47% of 211's 2024 referrals, and food banks and pantries are the other main basic-needs grantees. 0.5 (0.3-0.7)."
+    },
+    {
       "id": "bn_inkind_factor",
       "section": "effect",
       "label": "Basic needs: what a dollar of food, rent or utility help is worth to the household against cash",
       "format": "number",
-      "value": {
-        "low": 0.7,
-        "best": 0.9,
-        "high": 1
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: food, rent and utility help frees money the household would spend on the same things, so it is close to cash; the gap is for help that isn't the household's own top need. Food aid within what a household buys anyway is valued near cash (the usual finding for SNAP); 0.9, from 0.7 to 1."
+      "explainer": "Food help at the shared figure for food given in kind (@aid_value.inkind_food_vs_cash, 0.8); rent and utility bills paid free the same money as cash, so they count in full.",
+      "formula": "bn_food_share * @aid_value.inkind_food_vs_cash + (1 - bn_food_share)"
     },
     {
       "id": "bn_value_per_person",

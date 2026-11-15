@@ -1,6 +1,6 @@
 # Audit: all-hands-and-hearts-charityevals, round 3
 Result: 2.760e-6 daly/$ = 0.00276 years of healthy life per 1,000 dollars (combined range 0.00057-0.0135); cause median 0.0866 (x0.032). Verdict: pass (no findings).
-Model-sha: 9517db171908e6620537457f11aaf6a3c8c8f22cb9b2f38a267a8f4a9f3abd1d
+Model-sha: 912ca988c52dbd9d8222f5a4d6dc29d07bb2dd93aca76e523daf253098675e21
 Scope: unchanged; only the changes of commit 001c6e4 since 95fed69 were checked (`git diff 95fed69 001c6e4 -- models/ writeups/`).
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, the same as round 2, covered by the summary's reason); invariants none; check.ts all models valid; normalization-audit and simulation-check not re-run (a value and two explainers changed).
 
@@ -15,3 +15,4 @@ No new findings.
 Verdict: pass.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
