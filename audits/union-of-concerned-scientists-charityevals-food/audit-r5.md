@@ -1,0 +1,26 @@
+# Audit: union-of-concerned-scientists-charityevals-food, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
+Result: 5.069e-7 uov/$ = 2.534e-4 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
+Verdict: pass
+Model-sha: d8dd03909ebb989a7e98fb35060a60428186326f8d59eb6b9c0dbc16cab99f45
+
+Scope: scoped verification of the compliance-cost sentence on `wetland_flood_damage_study`.
+
+Mechanical: `audit-model.ts` exit 0; one low (spread). normalization-audit, simulation-check not run (caller runs them).
+
+Previous round: round 4 finding 1 (wording) fixed; 2 (peer comparison in summary) still open, low.
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | low | presentation | summary | "It is far below its peers" compares with other charities (owner rule). | Summary text. | Delete the clause, keep the reasons. | none |
+
+Checks:
+- The sentence now matches AER-765 as read in round 4: converting farmers "would gain only minor income" and farm income as a whole falls $1.6 to 3.2 billion; "no impact analysis gives farmers' cost" is right for the 2025 case.
+
+## Sources checked
+None in scope (no regulator figure read by the changed text).
+
+## Drivers
+Unchanged: text-only fixes.
+
+Verdict: pass
+Model-sha: d8dd03909ebb989a7e98fb35060a60428186326f8d59eb6b9c0dbc16cab99f45

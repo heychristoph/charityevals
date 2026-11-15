@@ -3,13 +3,16 @@
   "name": "Union of Concerned Scientists: climate, transport and western states (charityevals)",
   "kind": "charity",
   "cause": "climate",
-  "beneficiaries": {"world":0.815,"USA":0.185},
+  "beneficiaries": {
+    "world": 0.815,
+    "USA": 0.185
+  },
   "beneficiaries_note": "Our build: shares of the result at the defaults. The public money the Inflation Reduction Act won for US households (18.5%) is in the United States; the tonnes (81.5%) spare people everywhere, spread by world population, the small US power-plant and vehicle smoke share left in the world figure.",
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists' climate and clean energy, clean transportation and western states programmes ($32.8M with overhead in the year to September 2025) do technical analysis and advocacy for US climate policy; this model counts the five largest policies it worked on that were won in October 2021 to September 2025 with published tonnes (the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, California's Advanced Clean Cars II rule and its 2025 extension of its carbon market to 2045), with its other state clean-energy laws and its climate-accountability science as a share. At the defaults that is 0.0018 years of healthy life per $1,000: a dollar given averts about 0.0056 tonnes of CO₂e (about $180 a tonne), and the public money the Inflation Reduction Act won for US households' home rebates and credits, valued as the recipients' gain less the taxpayers' cost, adds about a fifth; the act gives about three-fifths of the result; it is low because each win is shared with many groups and with what governments would have done anyway (UCS is credited with 1% to 10% of the advocacy behind each), and the federal rules and the law's credits have since been repealed or cut back and California's car rule has lost its federal waiver. The biggest uncertainties are the discount rate, the shared years a won reform counts and the deaths per tonne; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "The Union of Concerned Scientists' climate and clean energy, clean transportation and western states programmes ($32.8M with overhead in the year to September 2025) do technical analysis and advocacy for US climate policy; this model counts the five largest policies it worked on that were won in October 2021 to September 2025 with published tonnes (the Inflation Reduction Act, EPA's 2024 vehicle and power-plant standards, California's Advanced Clean Cars II rule and its 2025 extension of its carbon market to 2045), with its other state clean-energy laws and its climate-accountability science as a share. At the defaults that is 0.0017 years of healthy life per $1,000 after the rules' compliance costs (the regulators' own figures): a dollar given averts about 0.0056 tonnes of CO₂e (about $180 a tonne), and the public money the Inflation Reduction Act won for US households' home rebates and credits, valued as the recipients' gain less the taxpayers' cost, adds about a fifth; the act gives about three-fifths of the result; it is low because each win is shared with many groups and with what governments would have done anyway (UCS is credited with 1% to 10% of the advocacy behind each), and the federal rules and the law's credits have since been repealed or cut back and California's car rule has lost its federal waiver. The biggest uncertainties are the discount rate, the shared years a won reform counts and the deaths per tonne; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Union of Concerned Scientists (climate, transport and western states)",
@@ -1308,6 +1311,60 @@
       "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
     },
     {
+      "id": "pwr_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA power-plant standards: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_power_plant_rule_2024_cost_per_year * @cpi.usa_2024 / @cpi.usa_2019 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * pwr_downstream / pwr_tonnes_per_year * pwr_counterfactual_adj * pwr_attribution_share * pwr_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the power system's extra cost (EPA's regulatory impact analysis, $0.98 billion a year), in 2019 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "veh_compliance_uov",
+      "section": "adjustments",
+      "label": "EPA vehicle standards: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.us_light_medium_vehicle_rule_2024_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2022 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * veh_downstream / veh_tonnes_per_year * veh_counterfactual_adj * veh_attribution_share * veh_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): buyers' technology, charger and insurance costs less their fuel, maintenance and repair savings (EPA's rule, a net saving of $11.3 billion a year, so this row adds value), in 2022 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "accii_compliance_uov",
+      "section": "adjustments",
+      "label": "Advanced Clean Cars II: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.ca_advanced_clean_cars_ii_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2020 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * accii_downstream / accii_tonnes_per_year * accii_counterfactual_adj * accii_attribution_share * accii_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): owners' costs less their savings, taxes taken out (the Air Resources Board's analysis, a net saving of about $1.6 billion a year, so this row adds value), in 2020 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "capinv_compliance_uov",
+      "section": "adjustments",
+      "label": "Cap-and-invest extension: compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.ca_cap_and_invest_2025_net_cost_per_year * @cpi.usa_2024 / @cpi.usa_2024 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.consumption_per_person_2024) * capinv_downstream / capinv_tonnes_per_year * capinv_counterfactual_adj * capinv_attribution_share * capinv_implementation_adj * missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): businesses' direct costs less allowance transfers and cost savings (the Air Resources Board's analysis, $2.65 billion a year), in 2024 dollars moved to 2024's, valued as money lost by those who bear it, consumers and owners (@public_funds.compliance_cost_payer_multiple, 1.2 times average US consumption), on the log scale; over the same years and wait as the rule's benefits, with the branch's chance, counterfactual, credit, delivered share and missing-data step, not its evidence adjustment (which is about the benefits)."
+    },
+    {
+      "id": "compliance_uov_per_year",
+      "section": "adjustments",
+      "label": "Compliance costs of the won rules, units of value per year of the period",
+      "format": "number",
+      "unit": "uov",
+      "formula": "(pwr_compliance_uov + veh_compliance_uov + accii_compliance_uov + capinv_compliance_uov) / period_years",
+      "explainer": "The rules' compliance costs summed, per year of the period, in the main chain (docs/normalization.md 2.21). The Inflation Reduction Act's credits are public money, not a rule's compliance cost (its household money is netted of taxpayers' cost above), so they have no row."
+    },
+    {
+      "id": "uov_counted_per_year",
+      "section": "adjustments",
+      "label": "Units of value a year counted outside the tonnes: public money won for households and the rules' compliance costs",
+      "format": "number",
+      "unit": "uov",
+      "formula": "ira_transfer_uov_per_year + compliance_uov_per_year",
+      "explainer": "The household money (recipients' gain less taxpayers' cost) plus the won rules' compliance costs (negative), the input of the bridge into tonnes."
+    },
+    {
       "id": "pwr_expected_tonnes",
       "section": "conversion",
       "label": "EPA power-plant standards: expected tonnes a year once in effect (weight for the fuel and methane shares)",
@@ -1389,11 +1446,11 @@
     {
       "id": "tco2e_from_uov",
       "section": "bridges",
-      "label": "Public money won for households, in tonnes of CO₂e",
+      "label": "Public money won for households, in tonnes of CO₂e and the rules' compliance costs (negative)",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "ira_transfer_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
-      "explainer": "The households' gain enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6): it moves with the value of consumption, not with the climate sliders."
+      "formula": "uov_counted_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "explainer": "The households' gain enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6): it moves with the value of consumption, not with the climate sliders. The won rules' compliance costs (compliance_uov_per_year) enter the same way."
     },
     {
       "id": "outcome_total",

@@ -72,7 +72,7 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    (new commitments, institutions, pledges): for a won reform, `$win_years_counted`. An ongoing
    programme's yearly flow counts one year, against one year's cost. Count everything the wins cover,
    delivery only in `implementation_adj` (a delivered-only count × the fulfilment rate counts it twice);
-   a stock becomes a flow by the recipes below.
+   a stock becomes a flow by the recipes below. A won rule's compliance costs are a negative row in its branch (normalization.md 2.21), or one line in an explainer saying why none is counted.
 4. **Several branches in one family** (new and pressed commitments; two countries): prefixed rows
    (`new_…`, `acc_…`) summed into `outcome_total`. Branch adjustments are `<branch>_<canonical id>`
    (`acc_evidence_adj`, `acc_years_until_effect`, …), each applied in its branch; the canonical rows

@@ -3,7 +3,10 @@
   "name": "Cancer Research UK: research, policy and information (charityevals, 2025-26)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"world":0.57,"GBR":0.43},
+  "beneficiaries": {
+    "world": 0.57,
+    "GBR": 0.43
+  },
   "beneficiaries_note": "Our build: research valued as a share of the world's cancer burden (57% of the result at the defaults, spread by world population), UK tobacco policy and UK cancer information and awareness (43%).",
   "template": "medical-research",
   "estimate_basis": "past_average",
@@ -1033,6 +1036,24 @@
       "explainer": "The bridge from UoV into healthy years (docs/normalization.md 2.6): fixed, don't edit."
     },
     {
+      "id": "adv_compliance_uov",
+      "section": "bridges",
+      "label": "Advocacy: the Act's compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.uk_smokefree_generation_cost_per_year_gbp * @fx.usd_per_gbp_2019 * @cpi.usa_2024 / @cpi.usa_2019 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_kingdom.consumption_per_person_2024) * adv_p_success * adv_discounted_years * adv_counterfactual_adj * adv_attribution_share * adv_missing_data_adj",
+      "explainer": "The won rule's compliance costs (docs/normalization.md 2.21): the impact assessment's £132 million a year, mostly shops' and wholesalers' lost profits (lost duty is a transfer), in 2019 pounds moved to 2024 dollars, valued as money lost by those who bear it, owners and their customers (@public_funds.compliance_cost_payer_multiple times UK consumption per person), on the log scale; over the same years and wait as the cohorts counted, with the branch's share of the campaign, counterfactual, credit and missing-data step, not its evidence adjustment (which is about the health gain)."
+    },
+    {
+      "id": "dalys_from_compliance",
+      "section": "bridges",
+      "label": "Advocacy: the Act's compliance costs, in DALYs (negative)",
+      "format": "number",
+      "unit": "DALYs",
+      "formula": "adv_compliance_uov / ($uov_per_daly)",
+      "explainer": "The bridge from units of value (docs/normalization.md 2.6), in the main chain, outside the unmodelled-benefits share."
+    },
+    {
       "id": "wellbys_bridged",
       "section": "bridges",
       "label": "Life satisfaction (none measured), in wellbeing-adjusted life years (before adjustments)",
@@ -1064,7 +1085,7 @@
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(research_illness_credited + adv_illness_credited + info_illness_credited + dalys_from_uov + dalys_from_wellby * total_adj) * (1 + unmodelled_benefits_adj)",
+      "formula": "(research_illness_credited + adv_illness_credited + info_illness_credited + dalys_from_uov + dalys_from_wellby * total_adj) * (1 + unmodelled_benefits_adj) + dalys_from_compliance",
       "unit": "DALYs",
       "explainer": "Each branch's illness with its own adjustments, plus the deaths through the bridge (already adjusted branch by branch, Convention 4), times the unmodelled share."
     },

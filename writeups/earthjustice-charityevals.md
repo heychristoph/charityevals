@@ -2,8 +2,8 @@
 
 Earthjustice is the largest US non-profit environmental law firm. It represents community, health and environmental groups and tribes for free, in court, before federal agencies and before state utility commissions. We model its three focus areas separately, each against what it spent on that area over its fiscal years 2022 to 2025:
 
-- **Climate and clean energy:** **<span data-figure="headline" data-model="earthjustice-charityevals">0.0024</span> years of healthy life per $1,000**, about $180 a tonne of CO₂e averted.
-- **Healthy communities:** **<span data-figure="headline" data-model="earthjustice-charityevals-health">0.0084</span> years of healthy life per $1,000**, from cleaner air and drinking water.
+- **Climate and clean energy:** **<span data-figure="headline" data-model="earthjustice-charityevals">0.0020</span> years of healthy life per $1,000**, about $180 a tonne of CO₂e averted.
+- **Healthy communities:** **<span data-figure="headline" data-model="earthjustice-charityevals-health">0.0059</span> years of healthy life per $1,000**, from cleaner air and drinking water.
 - **Biodiversity:** **<span data-figure="headline" data-model="earthjustice-charityevals-biodiversity">0.0000007</span> years of healthy life per $1,000**, from the Tongass forest's carbon.
 
 All three are low for the same reasons. Earthjustice is one of many groups behind each rule. Advocacy is only one cause of a rule. And the federal rules it won are now being weakened or repealed.
@@ -55,7 +55,7 @@ The biodiversity model is far below other conservation models. The Forest Servic
 
 Wins before July 2021 aren't counted, and neither is their cost. Smaller wins of the period count only through the share for other wins. These include vehicle standards, gas plants blocked, building electrification and efficiency programmes, offshore lease sales, chemical-plant and coal-ash rules, community enforcement. Gray wolves and other species count nothing: their welfare effect is unknown.
 
-Compliance costs to industry and water systems aren't counted, as in the site's other policy models. For the PFAS standards EPA puts them near the benefits' dollar value. Species and wild animals count only where a welfare effect is known: we don't know whether more wild animals alive is good or bad for them, so they count nothing.
+Compliance costs to industry and water systems are subtracted, from EPA's own figures; for the PFAS standards they exceed the value of the deaths averted on our scale. Species and wild animals count only where a welfare effect is known: we don't know whether more wild animals alive is good or bad for them, so they count nothing.
 
 ### How this model was checked
 
