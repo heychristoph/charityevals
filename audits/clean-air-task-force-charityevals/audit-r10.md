@@ -1,6 +1,6 @@
 # Audit: clean-air-task-force-charityevals, round 10 (verification of the US nuclear cost gap at the site's discount rate)
 Result: 0.008964 tco2e/$ = 0.004124 years of healthy life per 1,000 dollars, against 0.003644 in round 9 (+13%). Verdict: pass.
-Model-sha: 038e167a8dbf7f67d351077ac6841ada44f83f629321d4b5cfdc2b2fd7773ce9
+Model-sha: 1d5beb629e27d25b1418ee20c5fcd56813cfb7d8579e09ab1a4131ffbc7ff585
 Scope: scoped verification of nuc_extra_power_cost_uov (new formula), the facts advanced_nuclear_premium_usd_per_mwh_usa_3pct and _7pct, pcge_discount_rate_low/high, advanced_nuclear_premium_uncertainty_usd_per_mwh, the 2018-dollar conversion, and the headline text (summary, write-up). Nothing else re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (warnings only: range runs from harm to good, judgment calls dominate, 14 point inputs); check.ts "all models valid", headline 0.0041 matches the summary and the write-up (data-figure 0.0041).
 Previous round: r9's low findings 1 to 3 carry over (finding 1 is restated below in the form the task asked for).
@@ -21,3 +21,4 @@ Checks against the PCGE 2020 extract (Tables 3.11a, 3.12, 3.13a):
 
 Findings: 0 high, 0 medium, 3 low. Verdict: pass.
 Re-stamped (15 Nov 2026): merge of two verified changes (EPA rule-year facts; shared nuclear cost facts, r9-r10); mechanical
+Re-stamped (15 Nov 2026): side-effect tag on unmodelled_benefits_adj (2.16, mechanical; headline unchanged)
