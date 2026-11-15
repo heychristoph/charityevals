@@ -8,7 +8,7 @@ TerraPraxis Inc, a US non-profit founded in 2021, spent $2.01 million in 2024, $
 
 The programme has these parts:
 
-- **REPOWER (coal repowering).** Standard designs for replacing a coal plant's boilers with mass-made reactors ("heat boxes"), developed with the architects Bryden Wood. Site-assessment software built with Microsoft from 2022. The REPOWER consortium of more than 38 utilities, vendors, financiers and governments, with yearly retreats.
+- **REPOWER (coal repowering).** Standard designs for replacing a coal plant's boilers with mass-made reactors ("heat boxes"), developed with the architects Bryden Wood. Site-assessment software built with Microsoft from 2022. The REPOWER consortium of utilities, vendors, financiers and governments, with yearly retreats.
 - **The Ten-Terawatt Initiative.** Launched in 2024; its white paper was presented at Davos in January 2025. It sets out what would let clean firm power grow fast enough to replace fossil fuels, and it includes AI tools for nuclear licensing built with Microsoft.
 - **Smaller work.** Papers on synthetic fuels, industrial heat and nuclear-powered shipping, and pages on advanced geothermal and energy modelling.
 
