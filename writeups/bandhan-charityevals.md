@@ -61,6 +61,7 @@ The [model](/bandhan/bandhan-charityevals) follows the site's cash and income te
 The mechanical audit (lint and the site's invariants) passed before review.
 
 - **Round 1:** 3 high, 1 medium and 5 low findings. The trial's effect now uses the consumption column that counts migrant members, which the paper calls the better estimate. The duration rows of the smaller branches have their own labels, so they are not mistaken for the site's shared figure. The cost of the training sold to Bandhan Bank is a ranged judgment. The wait uses the year's average of unspent grants. The education count is explained as cumulative, the survey-years rule is stated, and the Bihar reach cites J-PAL's update. One finding, regenerating the site's generated files, is left to the merge step, as the batch rules say. The result went from 5.5 to 6.0.
+- **Round 2:** a pass, with 3 low findings, all left as they are with a reason. The survey years stay recorded as observed: the survey dates are observed and the rule is stated, and a range on each would stop the ten years adding up. The trial's baseline consumption is a row every model of this kind keeps, shown for context. The education reach stays at new students times years enrolled, because the report says its counts are cumulative.
 
 ### Sources
 
