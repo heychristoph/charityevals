@@ -211,93 +211,27 @@
       "section": "reach",
       "label": "Of those, UK hens switched at companies THL UK pressed (credited in the grants line)",
       "format": "integer",
-      "value": {
-        "low": 100000,
-        "best": 400000,
-        "high": 1850000
-      },
-      "kind": "judgment",
       "unit": "hens / year",
-      "explainer": "Our judgment. THL's count is of hens at the companies it and the Alliance pressed, so its UK part is the switches at THL UK's engaged companies, not the whole country's change: ACE's sheet puts those companies' supply chains at 2.55 million hens, most already compliant. The high end is the UK's whole change in 2025 (82.7% against 78.6% cage-free of about 45 million hens, Our World in Data and the British Egg Information Service). THL UK is a separate charity THL funds by a grant, so these switches are credited in the grants line (as a share of the UK's whole change) and taken out here."
+      "formula": "@the_humane_league.uk_switches_in_count",
+      "explainer": "The shared figure (facts/the_humane_league.json), one number in charityevals' THL models: the switches at THL UK's engaged companies, credited in the grants line and taken out here."
     },
     {
-      "id": "owaacc_rewe_hens",
+      "id": "member_switches_in_count",
       "section": "reach",
-      "label": "Hens a year in REWE Group's egg supply",
+      "label": "Of those, hens switched at companies the Alliance's members pressed (credited to the Alliance)",
       "format": "integer",
-      "value": 7000000,
-      "kind": "observed",
       "unit": "hens / year",
-      "source": {
-        "title": "Open Wing Alliance, 2025 end-of-year review",
-        "url": "https://thehumaneleague.org/article/2025-owa-end-of-year-review",
-        "retrieved": "2026-11-13",
-        "quote": "That shift affects an estimated 7 million hens each year"
-      },
-      "explainer": "REWE (Germany and central and eastern Europe) dropped its global cage-free deadline and reinstated it eleven days after the alliance's Fair and Fowl report named it, with 83% progress."
-    },
-    {
-      "id": "owaacc_rewe_progress",
-      "section": "reach",
-      "label": "Share of REWE's eggs already cage-free when it recommitted",
-      "format": "percent",
-      "value": 0.83,
-      "kind": "observed",
-      "source": {
-        "title": "Open Wing Alliance, 2025 end-of-year review",
-        "url": "https://thehumaneleague.org/article/2025-owa-end-of-year-review",
-        "retrieved": "2026-11-13",
-        "quote": "It reinstated its cage-free commitment and shared an update showing 83% progress worldwide."
-      },
-      "explainer": "REWE's own update after recommitting."
-    },
-    {
-      "id": "owaacc_wins",
-      "section": "reach",
-      "label": "Accountability wins from the Fair and Fowl report, 2025",
-      "format": "number",
-      "value": 16,
-      "kind": "observed",
-      "unit": "wins",
-      "source": {
-        "title": "Open Wing Alliance, 2025 end-of-year review",
-        "url": "https://thehumaneleague.org/article/2025-owa-end-of-year-review",
-        "retrieved": "2026-11-13",
-        "quote": "With direct outreach and oversight, the report helped secure 16 wins"
-      },
-      "explainer": "Companies that restored, re-dated or reported progress on stalled pledges after the alliance's outreach (REWE and Best Western among them)."
-    },
-    {
-      "id": "owaacc_hens_per_other_win",
-      "section": "reach",
-      "label": "Hens a year still caged under each other accountability win",
-      "format": "number",
-      "value": {
-        "low": 5000,
-        "best": 30000,
-        "high": 200000
-      },
-      "kind": "judgment",
-      "unit": "hens / win",
-      "explainer": "Our judgment for the 15 wins besides REWE: the hens not yet cage-free under a stalled pledge that was restored or re-dated. The review's other named win, Best Western (hotels, about 30% of its eggs not yet cage-free), is far smaller than REWE; the 'six companies' that updated policies are mostly hospitality and food-service firms. The grants line's model's judgment."
-    },
-    {
-      "id": "owaacc_hens",
-      "section": "reach",
-      "label": "Of those, hens at companies Alliance members pressed (credited in the grants line)",
-      "format": "integer",
-      "formula": "owaacc_rewe_hens * (1 - owaacc_rewe_progress) + (owaacc_wins - 1) * owaacc_hens_per_other_win",
-      "unit": "hens / year",
-      "explainer": "REWE's hens not yet cage-free and the other 15 wins of the Fair and Fowl report, the grants line's pool for the members' accountability wins, standing in for the year's switches at the companies they pressed (THL's count gives no split). Taken out here, as in the other-programmes model, so the same hens count in one pool only."
+      "formula": "@the_humane_league.member_switches_in_count",
+      "explainer": "The shared figure (facts/the_humane_league.json), one number in charityevals' THL models: the switches at companies the Alliance's members pressed abroad, about a fifth (1.6 million) of the 7.5 million, credited in the Alliance's branches of the grants line and taken out here, as in the other-programmes model, so the same hens count in one pool only."
     },
     {
       "id": "animals_per_year",
       "section": "reach",
       "label": "Hens moved out of cages at companies THL pressed itself, 2025",
       "format": "integer",
-      "formula": "hens_switched - uk_switches_in_count - owaacc_hens",
+      "formula": "hens_switched - uk_switches_in_count - member_switches_in_count",
       "unit": "hens / year",
-      "explainer": "THL's 7.5 million less THL UK's and the Alliance members' switches: the pool this model and the other-programmes model's grassroots branch share. Observed switches are delivered already: no pledges-kept rate, and no division by years of pressure (templates.md, corporate-campaign accountability)."
+      "explainer": "THL's 7.5 million less THL UK's and the Alliance members' switches (the shared figures): the pool this model and the other-programmes model's grassroots branch share. Observed switches are delivered already: no pledges-kept rate, and no division by years of pressure (templates.md, corporate-campaign accountability)."
     },
     {
       "id": "battery_share",
@@ -310,7 +244,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as in the other-programmes model: the hens taken out above (THL UK's and REWE's) are nearly all in enriched cages; the switches left at companies THL pressed itself are in the US and the multinationals' supply chains in Latin America and Asia, out of battery cages, with some European ones from enriched cages."
+      "explainer": "Our judgment, as in the other-programmes model: the hens taken out above (THL UK's and the Alliance members') are nearly all in enriched cages; the switches left at companies THL pressed itself are in the US and the multinationals' supply chains in Latin America and Asia, out of battery cages, with some European ones from enriched cages."
     },
     {
       "id": "sads_per_animal_year",

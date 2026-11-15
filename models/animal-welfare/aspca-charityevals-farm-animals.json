@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "aspca",
   "owner": "charityevals",
-  "summary": "The ASPCA's farm animal welfare team, a small part of its $422m spending in 2025 (about $8m with its share of public education, our judgment), lobbied against federal and state rollbacks of the laws that keep hens out of cages and sows out of crates, and pushed shoppers, farmers and producers toward higher-welfare products and in-ovo sexed eggs. At the site's defaults it comes to about 0.00004 years of healthy life per $1,000 because the defence, which matters for some 70 million hens, is shared with a coalition in which the ASPCA's own spending (about $1.5m of lobbying and outreach) is a small part, its 2025 work moved the chance of an override only a little, and its large reserves make the next dollar worth less than the average. The biggest uncertainties are those chances, how many hens and sows would go back into cages if the laws fell, the coalition's total spending and the share of the ASPCA's policy spending that goes on farm animals, which the accounts don't give; the result is mostly uncertainty, spanning several orders of magnitude, and both branches are discounted for missing outcome data.",
+  "summary": "The ASPCA's farm animal welfare team, a small part of its $422m spending in 2025 (about $8m with its share of public education, our judgment), lobbied against federal and state rollbacks of the laws that keep hens out of cages and sows out of crates, and pushed shoppers, farmers and producers toward higher-welfare products and in-ovo sexed eggs. Defending the laws also keeps their compliance costs (the regulator's figure for California's Proposition 12, about $300 million a year net of retailers' margin), which at the site's values outweigh the animals' gain, so the result is below zero, about −0.001 years of healthy life per $1,000. Both are small per dollar: the defence is shared with a coalition in which the ASPCA's own spending (about $1.5m of lobbying and outreach) is a small part, its 2025 work removed only a share of the override risk, and its large reserves make the next dollar worth less than the average. The biggest uncertainties are that cost, the share of the risk the opposition removed, how many hens and sows would go back into cages if the laws fell, the coalition's total spending and the share of the ASPCA's policy spending that goes on farm animals, which the accounts don't give; the result is mostly uncertainty, spanning several orders of magnitude, and both branches are discounted for missing outcome data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: ASPCA farm animal welfare (defending state cage and crate laws, higher-welfare market work, 2025)",
@@ -236,19 +236,8 @@
       "section": "reach",
       "label": "Share of Americans living in states that ban sales of eggs from caged hens",
       "format": "percent",
-      "value": {
-        "low": 0.23,
-        "best": 0.23,
-        "high": 0.27
-      },
-      "kind": "observed",
-      "source": {
-        "title": "USDA Economic Research Service, Amber Waves (April 2023)",
-        "url": "https://www.ers.usda.gov/amber-waves/2023/april/farm-animal-welfare-policies-cover-breeding-sows-veal-calves-or-laying-hens-in-14-u-s-states",
-        "quote": "by 2026 more than 23 percent of the U.S. population would reside in States with retail sales restrictions",
-        "retrieved": "2026-11-13"
-      },
-      "explainer": "The seven states ERS counts (California, Colorado, Massachusetts, Michigan, Nevada, Oregon, Washington); a federal override of state sales laws would undo them. Their egg supply is taken as the same share of the US flock; Arizona, Utah and Rhode Island add a few points (the high end)."
+      "formula": "@farm_animal_laws.us_sales_law_population_share",
+      "explainer": "The shared figure (facts/farm_animal_laws.json), one number in every model of the same fight: the seven states ERS counts (more than 23% of Americans); their egg supply is taken as the same share of the US flock."
     },
     {
       "id": "def_hens",
@@ -262,20 +251,32 @@
       "section": "reach",
       "label": "Breeding sows supplying California under Proposition 12",
       "format": "integer",
-      "value": {
-        "low": 400000,
-        "best": 700000,
-        "high": 900000
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Holly Cook (National Pork Producers Council), testimony to the House Agriculture Committee, July 2025",
-        "url": "https://nppc.org/wp-content/uploads/2025/07/Holly-Cook-Prop.-12-House-Ag-Written-Testimony-07.23.25.pdf",
-        "page": "p. 5",
-        "quote": "approximately 700,000 sows would be needed to meet historical demand levels in California",
-        "retrieved": "2026-11-13"
-      },
-      "explainer": "Sows housed to Proposition 12's standard to supply California; low end the 400,000 compliant sows reported at the law's start; the sows supplying Massachusetts under Question 3 are few beside them and inside the range, the same range as in charityevals' models of The Humane League."
+      "formula": "@farm_animal_laws.ca_prop12_sows",
+      "explainer": "The shared figure (facts/farm_animal_laws.json), one number in every model of the same fight: the 700,000 sows California's demand needs (the pork producers' testimony), from the about 400,000 reported compliant when enforcement began in 2024 (National Hog Farmer); the sows supplying Massachusetts under Question 3 are few beside them and inside the range."
+    },
+    {
+      "id": "ca_pop_share",
+      "section": "reach",
+      "label": "California's share of the US population, 2024",
+      "format": "percent",
+      "formula": "@farm_animal_laws.ca_population_share",
+      "explainer": "The shared figure (facts/farm_animal_laws.json), one number in every model of the same fight: 39,431,263 of 340,110,988 people (Census, 2024)."
+    },
+    {
+      "id": "def_egg_states_vs_ca",
+      "section": "reach",
+      "label": "People in the states with cage-free sales laws, relative to California",
+      "format": "multiple",
+      "formula": "def_pop_share / ca_pop_share",
+      "explainer": "The egg part of Proposition 12's cost, scaled from California to all seven states' egg laws by population. Pork's part stays California's."
+    },
+    {
+      "id": "def_cost_egg_share",
+      "section": "reach",
+      "label": "Share of Proposition 12's net compliance cost that falls on eggs",
+      "format": "percent",
+      "formula": "@farm_animal_laws.ca_prop12_cost_egg_share",
+      "explainer": "The shared figure (facts/farm_animal_laws.json), one number in every model of the same fight: about California's egg producers' $72 million of the roughly $300 million net, 0.25."
     },
     {
       "id": "def_state_factor",
@@ -351,13 +352,8 @@
       "section": "effect",
       "label": "Share of the animals under the laws that would go back into cages or crates within the years counted if the laws fell",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, as in charityevals' models of The Humane League (the same fight): in-state housing laws and company pledges would keep most cage-free and crate-free supply, and barns already built rarely go back to cages; replacement barns, buyers without pledges and price pressure after bird flu would bring some back."
+      "formula": "@farm_animal_laws.us_sales_laws_revert_share",
+      "explainer": "The shared figure (facts/farm_animal_laws.json), one number in every model of the same fight: in-state housing laws, company pledges and barns already built would keep most animals out of cages and crates."
     },
     {
       "id": "def_p_override_without",
@@ -370,7 +366,7 @@
         "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as in charityevals' models of The Humane League: EATS-style language was in the House Farm Bill drafts of 2024-25, and ahead of the July 2025 House Agriculture hearing on Proposition 12 the ASPCA gathered farmers' views against it; the coalition (Humane World for Animals, the ASPCA, The Humane League and others) gathered letters from more than 200 members of Congress against it. Without that opposition we put an override in the next Farm Bill at 30%. One event, drawn as happens or doesn't.",
+      "explainer": "Our judgment, as in charityevals' models of The Humane League: EATS-style language was in the House Farm Bill drafts of 2024-25, and ahead of the July 2025 House Agriculture hearing on Proposition 12 the ASPCA gathered farmers' views against it; the coalition (Humane World for Animals, the ASPCA, The Humane League and others) gathered letters from more than 200 members of Congress against it. Without that opposition we put an override in the next Farm Bill at 30%. One event, drawn as happens or doesn't; the opposition removes a share of it (next row).",
       "source": {
         "title": "ASPCA press release: U.S. House Agriculture Committee holds hearing on Proposition 12 (July 2025)",
         "url": "https://www.aspca.org/about-us/press-releases/us-house-agriculture-committee-holds-hearing-proposition-12",
@@ -382,28 +378,19 @@
       }
     },
     {
-      "id": "def_p_override_with",
+      "id": "def_opposition_risk_cut",
       "section": "effect",
-      "label": "Chance it passes with the coalition's 2025 opposition",
+      "label": "Share of the override risk the coalition's 2025 opposition removed",
       "format": "percent",
-      "value": {
-        "low": 0.08,
-        "best": 0.25,
-        "high": 0.45
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, as in charityevals' models of The Humane League (the same event): the year's opposition takes about 5 points off (a sixth of the risk). Research on lobbying finds most campaigns change nothing (Baumgartner and colleagues, 2009); organised constituent contact moved legislators' support by about 12 points in a field experiment (Bergan and Cole, 2015). Drawn together with the chance without it.",
-      "single_event": {
-        "with": "eats"
-      },
-      "drawn_with": "def_p_override_without"
+      "formula": "@farm_animal_laws.us_preemption_opposition_risk_cut",
+      "explainer": "The shared figure (facts/farm_animal_laws.json), one number in every model of the same fight: the year's opposition takes about 5 points off a 30% risk, a sixth of it; a share of the risk, so it never raises it."
     },
     {
       "id": "def_raw",
       "section": "effect",
       "label": "Defence: SADs averted before adjustments",
       "format": "number",
-      "formula": "(def_hens * def_sads_per_hen_year + def_sows * def_sads_per_sow_year) * def_revert_share * (def_p_override_without - def_p_override_with) * def_discounted_years * def_state_factor",
+      "formula": "(def_hens * def_sads_per_hen_year + def_sows * def_sads_per_sow_year) * def_revert_share * def_p_override_without * def_opposition_risk_cut * def_discounted_years * def_state_factor",
       "unit": "SADs"
     },
     {
@@ -425,7 +412,7 @@
       "label": "Defence: share that wouldn't have happened anyway",
       "format": "percent",
       "formula": "1",
-      "explainer": "1: the difference in the chance of an override with and without the opposition already is the counterfactual (Convention 5)."
+      "explainer": "1: the opposition's share of the override risk already is the counterfactual (Convention 5)."
     },
     {
       "id": "def_spend",
@@ -439,13 +426,8 @@
       "section": "adjustments",
       "label": "Defence: the whole coalition's spending on defending the state laws, 2025 (programme spending, before overhead)",
       "format": "usd",
-      "value": {
-        "low": 3500000,
-        "best": 8500000,
-        "high": 20500000
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, set to the total charityevals' model of The Humane League's other programmes implies for the same fight (its $8m for every other group, the ASPCA included, plus THL's own $0.44m), so the two charities' credit comes from one coalition total: Humane World for Animals, the ASPCA, THL, Animal Wellness Action, Mercy For Animals and others, with farm and state allies; federal lobbying, litigation and campaigns. $8.5m, $3.5m to $20.5m."
+      "formula": "@farm_animal_laws.us_preemption_coalition_spend_2025",
+      "explainer": "The shared figure (facts/farm_animal_laws.json), one number in every model of the same fight: every group's spending against the override, the ASPCA's and The Humane League's included, so each charity's credit is its own spending over one total."
     },
     {
       "id": "def_others_spend",
@@ -490,6 +472,15 @@
       "format": "number",
       "formula": "def_raw * def_total_adj",
       "unit": "SADs"
+    },
+    {
+      "id": "def_compliance_uov",
+      "section": "outcome",
+      "label": "Defence: the defended laws' compliance costs, units of value (negative)",
+      "format": "number",
+      "unit": "uov",
+      "formula": "-@compliance_costs.ca_prop12_net_cost_per_year * (def_cost_egg_share * def_egg_states_vs_ca + 1 - def_cost_egg_share) * @cpi.usa_2024 / @cpi.usa_2020 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * def_revert_share * def_p_override_without * def_opposition_risk_cut * def_discounted_years * def_state_factor * def_counterfactual_adj * def_attribution_share * def_missing_data_adj",
+      "explainer": "The defended rules' compliance costs (docs/normalization.md 2.21): the regulator's analysis of Proposition 12 (the shared figure, net of retailers' extra margin), its egg part scaled to all seven states' sales laws, in 2024 dollars, valued as money lost by those who bear it (shoppers and owners: the shared payer multiple times US spending per person), on the log scale; kept only where the laws would otherwise revert, over the same chance, years, state fights, counterfactual, credit and missing-data step as the animals' gain, not its evidence adjustment."
     },
     {
       "id": "mkt_hen_years",
@@ -865,6 +856,22 @@
       "formula": "sads_per_donor_dollar - sads_chicken"
     },
     {
+      "id": "compliance_uov_per_donor_dollar",
+      "section": "species",
+      "label": "Compliance costs of the defended laws per dollar you give, units of value (negative)",
+      "format": "small",
+      "unit": "uov / $",
+      "formula": "def_compliance_uov / cost_total * donor_cost_share * marginal_vs_past_average"
+    },
+    {
+      "id": "ced_from_uov",
+      "section": "species",
+      "label": "Compliance costs, in chicken-equivalent pain days per dollar you give (negative)",
+      "format": "number",
+      "formula": "compliance_uov_per_donor_dollar / ($chicken_vs_person * $daly_per_sad * $uov_per_daly)",
+      "explainer": "The bridge from units of value into this model's unit (docs/normalization.md 2.6): the headline multiplies the unit's conversion back, so the people's cost reaches healthy years through the shared money conversion, not the animal one."
+    },
+    {
       "id": "ced_chicken",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: hens",
@@ -885,7 +892,7 @@
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give",
       "format": "small",
-      "formula": "ced_chicken + ced_pig",
+      "formula": "ced_chicken + ced_pig + ced_from_uov",
       "unit": "chicken pain days / $"
     }
   ],
