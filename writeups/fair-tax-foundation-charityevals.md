@@ -1,6 +1,6 @@
 ### Summary
 
-The Fair Tax Foundation runs the Fair Tax Mark, a certification for businesses that pay their tax responsibly. Our model counts its work since 2014 against three outcomes: tax that certified businesses pay and would otherwise avoid, the same for the multinationals on its benchmarking index, and a small chance that the UK makes multinationals publish their tax country by country. It comes to **<span data-figure="headline" data-model="fair-tax-foundation-charityevals">0.07</span> years of healthy life per 1,000 dollars**, a little above the site's global-health median. The figure is very uncertain: nobody has measured how much tax the mark changes.
+The Fair Tax Foundation runs the Fair Tax Mark, a certification for businesses that pay their tax responsibly. Our model counts its work since 2014 against three outcomes: tax that certified businesses pay and would otherwise avoid, the same for the multinationals on its benchmarking index, and a small chance that the UK makes multinationals publish their tax country by country. It comes to **<span data-figure="headline" data-model="fair-tax-foundation-charityevals">0.07</span> years of healthy life per 1,000 dollars**. The figure is very uncertain: nobody has measured how much tax the mark changes.
 
 ### What the charity does
 

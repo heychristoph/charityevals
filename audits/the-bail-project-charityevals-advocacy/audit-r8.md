@@ -10,4 +10,6 @@ Scope: since round 7 only the explainer of ue_family_tx was reworded (diff: one 
 Previous round: round 7's low finding (explainer wording) resolved.
 
 Verdict: pass (no high, no medium, no low)
-Model-sha: 145684e1a3f3ccf61a09c9bc32cf520a5139840d736c5b761e1ef7fa7969ed34
+Model-sha: 2dcd97153cbd6167ad4d05ed0439768ed192236187460e8c284b2a1a335f3706
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00283 → 0.00305.

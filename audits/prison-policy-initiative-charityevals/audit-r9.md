@@ -1,6 +1,6 @@
 # Audit: prison-policy-initiative-charityevals, round 9 (scoped verification)
 Result: 6.033e-5 daly/$ = 0.0603 years of healthy life per 1,000 dollars (combined range 0.0054–0.678); cause median 0.0682 (×0.88). Verdict: pass.
-Model-sha: 351ffc8d9eb3d81e574331bda6996f9ff7a7ec50b94f905f0275f086897eda5a
+Model-sha: 02a0ace0516305fb1069ea4af18c1c3da07c0325f652b77c03fe44828dbc4838
 Scope: scoped to the change since round 8: row fed_uov_per_dollar (phone-company owners' term now fed_owner_multiple x @united_states.ce_expenditure_per_person_2024), fed_owner_multiple's label/explainer, and the write-up. Nothing else re-audited.
 Mechanical: lint 0/0/0 (audit-model: Findings (0)), invariants none, normalization-audit no violations (run in background, then `git checkout -- generated`), summaries and simulation-check ran without instability; result 0.0631 to 0.0603 (-4.4%).
 Previous round: round 8 had no findings.
@@ -26,3 +26,5 @@ Previous round: round 8 had no findings.
 Unchanged from round 8 (win_years_counted, missing_data_discount, dec_attribution_share, next-dollar figure, dec_people). The owners' multiple is a minor driver.
 
 Re-stamped: low and medium findings fixed after the round (wording in the model and write-up only, no formula or number changed).
+
+Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0603 → 0.054.

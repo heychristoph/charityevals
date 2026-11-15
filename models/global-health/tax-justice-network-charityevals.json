@@ -10,7 +10,7 @@
   "estimate_basis": "past_average",
   "charity": "tax-justice-network",
   "owner": "charityevals",
-  "summary": "The Tax Justice Network, a UK non-profit research and advocacy company founded in 2003 (GBP 2.09 million spent in 2025), proposed the tax-transparency standards now in force worldwide (automatic exchange of tax information, ownership registers, country-by-country reporting) and campaigns for the UN tax convention due in 2027. An average year of its spending since 2003 (from its accounts, about 45% of 2025's in real terms) is counted against its judged 1% share of five years of the revenue those standards raise (the OECD Global Forum's EUR 4 billion a year, 70% in developing countries), and against 3% of a 40% chance that the convention recovers a twentieth of the US$47 billion lower-income countries lose each year, two thirds of that work already done. Revenue in low and lower-middle income countries is valued as GiveWell values government spending there (about 1.5 times cash, India's a quarter of that), elsewhere as money spread over citizens' consumption, both net of what the tax costs the rich who pay it. With the next dollar at 54% of the average, it comes to about 1.3 years of healthy life per 1,000 dollars, more than ten times its peers because the work is valued through public revenue for lower-income governments, a large sum worth more per dollar than the outcomes most advocacy models count, of which a small credited share still outweighs a budget under US$3 million a year. The result is mostly uncertainty: the network's share of the credit, the years a win counts and the share of losses the convention recovers are judgments with no study behind them, and its own ranges span over ten-thousandfold; both branches are discounted by the shared missing-data slider.",
+  "summary": "The Tax Justice Network, a UK non-profit research and advocacy company founded in 2003 (GBP 2.09 million spent in 2025), proposed the tax-transparency standards now in force worldwide (automatic exchange of tax information, ownership registers, country-by-country reporting) and campaigns for the UN tax convention due in 2027. An average year of its spending since 2003 (from its accounts, about 45% of 2025's in real terms) is counted against its judged 1% share of five years of the revenue those standards raise (the OECD Global Forum's EUR 4 billion a year, 70% in developing countries), and against 3% of a 40% chance that the convention recovers a twentieth of the US$47 billion lower-income countries lose each year, two thirds of that work already done. Revenue in low and lower-middle income countries is valued as GiveWell values government spending there (about 1.5 times cash, India's a quarter of that), elsewhere as money spread over citizens' consumption, both net of what the tax costs the rich who pay it. With the next dollar at 54% of the average, it comes to about 1.3 years of healthy life per 1,000 dollars: the work is valued through public revenue for lower-income governments, a large sum of which a small credited share still outweighs a budget under US$3 million a year. The result is mostly uncertainty: the network's share of the credit, the years a win counts and the share of losses the convention recovers are judgments with no study behind them, and its own ranges span over ten-thousandfold; both branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Tax Justice Network",
@@ -812,7 +812,7 @@
       "section": "effect",
       "label": "Cost to the payers of a dollar of tax, units of value",
       "format": "small",
-      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * payer_consumption_vs_uk)",
+      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr * payer_consumption_vs_uk)",
       "explainer": "Domestic money's rule (docs/normalization.md 2.20): the recipients' gain less the payers' cost; a dollar taken from someone consuming c costs 1/c in ln(consumption), valued at the shared rate, times the shared marginal cost of public funds (@public_funds.mcpf: the excess burden of tax, including less investment)."
     },
     {
@@ -897,7 +897,7 @@
       "section": "effect",
       "label": "Value of a dollar of revenue in an upper-middle income country, net of its payers' cost, units of value",
       "format": "small",
-      "formula": "$uov_per_ln_consumption / (@brazil.consumption_per_person_2024 * umic_consumption_vs_brazil) - payer_cost_per_dollar",
+      "formula": "$uov_per_ln_consumption / (@brazil.consumption_per_person_2024 * @survey_consumption.survey_to_na_bra * umic_consumption_vs_brazil) - payer_cost_per_dollar",
       "explainer": "No shared figure values these governments' spending, so the domestic rule (normalization.md 2.20): the money spread over everyone's consumption, 1/c per dollar on the log scale, less the payers' cost."
     },
     {
@@ -918,7 +918,7 @@
       "section": "effect",
       "label": "Value of a dollar of revenue in a high-income country, net of its payers' cost, units of value",
       "format": "small",
-      "formula": "$uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * hic_consumption_vs_uk) - payer_cost_per_dollar",
+      "formula": "$uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr * hic_consumption_vs_uk) - payer_cost_per_dollar",
       "explainer": "The domestic rule again (normalization.md 2.20): spread over citizens' consumption, less the payers' cost. About a hundredth of cash per dollar."
     },
     {

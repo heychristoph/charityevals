@@ -1,6 +1,6 @@
 ### Summary
 
-Economic Security Project campaigns for cash policies in the US: state child and earned income tax credits, guaranteed income, the IRS's free Direct File service, and public options such as city-run grocery stores. We count its tax-deductible arm's spending over 2022 to 2024 against its share of what those years' campaigns won. Our model comes to **<span data-figure="headline" data-model="economic-security-project-charityevals">0.09</span> years of healthy life per $1,000**, close to the median of the site's global-health models. Almost all of it is the state tax credits. The result is mostly uncertainty: how much of the credits the advocates caused, and how much of that was Economic Security Project's, are judgments.
+Economic Security Project campaigns for cash policies in the US: state child and earned income tax credits, guaranteed income, the IRS's free Direct File service, and public options such as city-run grocery stores. We count its tax-deductible arm's spending over 2022 to 2024 against its share of what those years' campaigns won. Our model comes to **<span data-figure="headline" data-model="economic-security-project-charityevals">0.07</span> years of healthy life per $1,000**. Almost all of it is the state tax credits. The result is mostly uncertainty: how much of the credits the advocates caused, and how much of that was Economic Security Project's, are judgments.
 
 ### Which organisation
 

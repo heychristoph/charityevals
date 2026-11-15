@@ -1,6 +1,6 @@
 ### Summary
 
-Prison Policy Initiative (PPI) researches mass incarceration in the United States and campaigns with others to change it. Counting its spending over fiscal years 2021 to 2025 against a share of the wins of those years, our model comes to **<span data-figure="headline" data-model="prison-policy-initiative-charityevals">0.03</span> years of healthy life per $1,000**. About half of that comes from deaths averted by the decarceration PPI's data fed, and about two fifths from the federal caps on prison and jail phone rates. Two things hold it down. Money saved by poor American families counts for little on a scale set by the world's poorest people. And PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the past average.
+Prison Policy Initiative (PPI) researches mass incarceration in the United States and campaigns with others to change it. Counting its spending over fiscal years 2021 to 2025 against a share of the wins of those years, our model comes to **<span data-figure="headline" data-model="prison-policy-initiative-charityevals">0.05</span> years of healthy life per $1,000**. About two thirds of that comes from deaths averted by the decarceration PPI's data fed, and about three tenths from the federal caps on prison and jail phone rates. Two things hold it down. Money saved by poor American families counts for little on a scale set by the world's poorest people. And PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the past average.
 
 ### What the charity does
 
@@ -21,7 +21,7 @@ The cost is PPI's average real spending over fiscal years 2021 to 2025, with man
 
 ### What drives the result
 
-Deaths averted by decarceration give about half of the result, the federal caps about two fifths and the state laws about a fifteenth. The decarceration wellbeing term and gerrymandering give about 2% each. The largest swings are the years a win counts, the missing-data discount, PPI's next-dollar figure, PPI's share of the federal campaign, the site's exchange rate between units of value and healthy years, and the value of fairer representation.
+Deaths averted by decarceration give about two thirds of the result, the federal caps about three tenths and the state laws about a thirtieth. The decarceration wellbeing term and gerrymandering give about 2% each. The largest swings are the years a win counts, the missing-data discount, PPI's next-dollar figure, PPI's share of the federal campaign, the site's exchange rate between units of value and healthy years, and the value of fairer representation.
 
 ### Biggest uncertainties
 

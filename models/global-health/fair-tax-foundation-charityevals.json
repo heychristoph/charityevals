@@ -520,7 +520,7 @@
       "section": "effect",
       "label": "Cost to the payers of a dollar of tax, units of value",
       "format": "small",
-      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * payer_consumption_vs_uk)",
+      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr * payer_consumption_vs_uk)",
       "explainer": "Domestic money's rule (docs/normalization.md 2.20), as in the Tax Justice Network model: a dollar taken from someone consuming c costs 1/c in ln(consumption), valued at the shared rate, times the shared marginal cost of public funds (@public_funds.mcpf)."
     },
     {
@@ -528,7 +528,7 @@
       "section": "effect",
       "label": "Value of a dollar of UK public revenue, net of its payers' cost, units of value",
       "format": "small",
-      "formula": "$uov_per_ln_consumption / @united_kingdom.consumption_per_person_2024 - payer_cost_per_dollar",
+      "formula": "$uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr) - payer_cost_per_dollar",
       "explainer": "Its known use: UK public spending, spread over everyone's consumption (1/c per dollar on the log scale at the UK average), less the payers' cost. About a hundredth of cash per dollar."
     },
     {
@@ -549,7 +549,7 @@
       "section": "effect",
       "label": "Value of a dollar of revenue in a high-income country, net of its payers' cost, units of value",
       "format": "small",
-      "formula": "$uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * hic_consumption_vs_uk) - payer_cost_per_dollar",
+      "formula": "$uov_per_ln_consumption / (@united_kingdom.consumption_per_person_2024 * @survey_consumption.survey_to_na_gbr * hic_consumption_vs_uk) - payer_cost_per_dollar",
       "explainer": "The domestic rule again: spread over citizens' consumption, less the payers' cost."
     },
     {
@@ -570,7 +570,7 @@
       "section": "effect",
       "label": "Value of a dollar of revenue in an upper-middle income country, net of its payers' cost, units of value",
       "format": "small",
-      "formula": "$uov_per_ln_consumption / (@brazil.consumption_per_person_2024 * umic_consumption_vs_brazil) - payer_cost_per_dollar",
+      "formula": "$uov_per_ln_consumption / (@brazil.consumption_per_person_2024 * @survey_consumption.survey_to_na_bra * umic_consumption_vs_brazil) - payer_cost_per_dollar",
       "explainer": "No shared figure values these governments' spending, so the domestic rule (normalization.md 2.20): spread over everyone's consumption, less the payers' cost."
     },
     {
