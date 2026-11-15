@@ -24,19 +24,19 @@ Figures are the audited consolidated accounts for 2024, the latest audited year 
 ### How the model works
 
 - **Cost**: Convoy's own spending on each programme, with all of its fundraising and management spread over it. Donated goods are left out of the cost and enter the credit share instead; a donor's money pays for the sourcing, warehouses, trucks, staff and partners' grants that move them.
-- **Goods' worth**: donated food at its US retail value (about a quarter above the wholesale value it is booked at), clothing and household goods a little below their booked value, both lower abroad at local prices (about a third of US prices), then a step for goods given in kind rather than chosen (80% for food, 70% for other goods). Donated medicines abroad are valued at about 30% of their US list price, and what they buy in health at the recipient health systems' cost of a healthy year at the margin.
-- **School meals**: the donated food at local prices plus the food bought locally, divided over 635,000 children, about 40 dollars of food a child a year, against the consumption of poor households in the programme countries (about 730 dollars a person a year).
+- **Goods' worth**: donated food at its US retail value (about a quarter above the wholesale value it is booked at), clothing and household goods a little below their booked value, both lower abroad at local prices (food at about half of US prices, other goods at about a third), then a step for goods given in kind rather than chosen (80% for food, 70% for other goods). Donated medicines abroad are valued at about 30% of their US list price, and what they buy in health at the recipient health systems' cost of a healthy year at the margin.
+- **School meals**: the donated food at local prices plus the food bought locally by Convoy and, with part of its grants, by its partners, divided over 635,000 children, about 60 dollars of food a child a year, against the consumption of poor households in the programme countries (about 990 dollars a person a year). A small share of deaths averted by better-fed households is added, as for the training and the goods sent abroad.
 - **Partner resourcing**: about 30% of the goods judged to go abroad; the people served are Convoy's total of 45 million less the other programmes' counts. Goods in the US are valued against the consumption of food-aid recipients.
-- **Training**: a judged 1.5% gain in household consumption for two years, discounted.
-- **Disasters**: about 55% of the response judged to be in the US. US survivors' goods count against low-income US consumption over a month; abroad, over the four days of meals per person served, with excess deaths a small share of a small post-disaster rise in the death rate.
-- **Adjustments**: what other channels would have delivered anyway (60% of the donated goods would not have reached similar people otherwise, 85% of the school meals), Convoy's share of the resources (its own spending over that plus the donated goods at local value plus partners' and volunteers' work: about 6% for partner resourcing, 53% for community development), goods lost or double counted, the ten months a gift waits in reserves and five weeks in the warehouse. Goods valued at their worth take no evidence step; the training and the deaths averted do. Every branch is discounted for missing data.
-- **Side effects**: schooling and nutrition from the school meals (+4%), the events' screenings and job help, wells and water filters, surplus kept out of landfill (each small and positive), free goods undercutting local sellers (−1%) and aid tied to church outreach (−0.5%).
+- **Training**: a judged 1.5% gain in household consumption, for two years for new participants and one more year for those continuing (the counts are each year's participants in programmes that run several years).
+- **Disasters**: about 55% of the response judged to be in the US; partners' grants partly buy relief. US survivors' goods count against low-income US consumption over a month; abroad, over the four days of meals per person served, with excess deaths a small share of a small post-disaster rise in the death rate.
+- **Adjustments**: what other channels would have delivered anyway (60% of the donated goods would not have reached similar people otherwise, 85% of the school meals), Convoy's share of the resources (its own spending over that plus the donated goods at local value plus partners' and volunteers' work: about 6% for partner resourcing, 39% for the school meals, 54% for the training and rural work), goods lost or double counted, the ten months a gift waits in reserves and five weeks in the warehouse. Goods valued at their worth take no evidence step; the training and the deaths averted do. Every branch is discounted for missing data.
+- **Side effects**: schooling and nutrition from the school meals (+6.6%), the events' screenings and job help, wells and water filters, surplus kept out of landfill (each small and positive), free goods undercutting local sellers (−1%) and aid tied to church outreach (−0.5%).
 
 ### What drives the result
 
 - **The missing-data slider**: every branch is thin, so it scales the whole result.
 - **How poor the children fed are**: the school meals are about two thirds of the result.
-- **The livelihood gain from training**: zero to 5% of consumption moves the result by about a sixth.
+- **The livelihood gain from training**: zero to 5% of consumption moves the result from a sixth lower to a third higher.
 - **The goods' worth**: the food's local price and its in-kind worth, and how much of the donated goods go abroad.
 
 ### Biggest uncertainties
@@ -53,6 +53,8 @@ Beyond the side-effect shares: Convoy's faith outreach has no value on this scal
 ### How this model was checked
 
 The mechanical audit (`scripts/audit-model.ts`) runs on the model, and independent auditors (a fresh agent each round, using the audit-cea skill) check it; the rounds are in `audits/convoy-of-hope-charityevals/`.
+
+- **Round 1**: passed (no high finding). Fixed after it: the Dominican Republic added to the programme countries' consumption; donated food abroad valued at a food price level above the overall one; a share of deaths averted by higher consumption added for the school meals, training and goods abroad; part of the grants to partner ministries valued as food and relief; continuing training participants credited one more year rather than the full gain; separate credit shares for the school meals and the rest of community development; the school meals' schooling side effect sized on the branch's real share; the disasters abroad no longer leaned on Brazil, Spain and Chile. Together these moved the result from 0.0600 to 0.0593.
 
 ### Sources
 

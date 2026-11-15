@@ -3,11 +3,13 @@
   "name": "Convoy of Hope (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
+  "beneficiaries": {"USA":0.049,"GTM":0.0634,"SLV":0.0634,"HND":0.0634,"NIC":0.0634,"HTI":0.0634,"DOM":0.0634,"KEN":0.0634,"TZA":0.0634,"ETH":0.0634,"MWI":0.0634,"BFA":0.0634,"NER":0.0634,"NPL":0.0634,"PHL":0.0634,"MDA":0.0634},
+  "beneficiaries_note": "Our build, by each branch's share of the modelled outcome: the US 4.9% (partner resourcing's US goods, US disaster relief, community events and rural initiatives); the rest (children's feeding, agriculture, women's programmes, goods and medicines sent abroad, and the disasters abroad, most of them unnamed and in or near the programme countries) split equally over 15 programme countries named in Convoy's 2024 annual report or known feeding countries (a judgment: no country split is published).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
   "charity": "convoy-of-hope",
   "owner": "charityevals",
-  "summary": "Convoy of Hope, a faith-based charity in Springfield, Missouri, passed $532 million of donated food, clothing, household goods and medicines (at the donors' wholesale values) to partners in the US and abroad in 2024 and spent $123 million of its own across four programmes (audited accounts): partner resourcing, community development (a school-day meal for 635,000 children abroad, and training for 39,000 farmers and 61,000 women and girls), community events in US cities, and relief in 53 US and 46 overseas disasters. The result, about 0.06 years of healthy life per 1,000 dollars, comes mostly from the school meals, valued as food for very poor children, then the farmers' and women's training and the goods and medicines sent abroad; goods handed out in the US add little on the site's log-income scale, and Convoy is credited only with its own spending's share of the resources behind the donated goods. Every branch rests on Convoy's own counts and judged prices and splits, and every branch is discounted for missing data; the biggest uncertainties are that discount, how poor the children fed are, and what the donated goods' recorded values are worth to the people who get them.",
+  "summary": "Convoy of Hope, a faith-based charity in Springfield, Missouri, passed $532 million of donated food, clothing, household goods and medicines (at the donors' wholesale values) to partners in the US and abroad in 2024 and spent $123 million of its own ($66 million on its four programmes, the rest on fundraising and management; audited accounts): partner resourcing, community development (a school-day meal for 635,000 children abroad, and training for 39,000 farmers and 61,000 women and girls), community events in US cities, and relief in 53 US and 46 overseas disasters. The result, about 0.06 years of healthy life per 1,000 dollars, comes mostly from the school meals, valued as food for very poor children, then the farmers' and women's training and the goods and medicines sent abroad; goods handed out in the US add little on the site's log-income scale, and Convoy is credited only with its own spending's share of the resources behind the donated goods. Every branch rests on Convoy's own counts and judged prices and splits, and every branch is discounted for missing data; the biggest uncertainties are that discount, how poor the children fed are, and what the donated goods' recorded values are worth to the people who get them.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Convoy of Hope",
@@ -511,6 +513,14 @@
       "explainer": "Convoy's own spending, overhead included, over everyone it counts as served: context only, since most of them got a small share of donated goods through partners."
     },
     {
+      "id": "cons_dom",
+      "section": "effect",
+      "label": "Dominican Republic: survey consumption per person, 2024 US$",
+      "format": "usd",
+      "formula": "@survey_consumption.dom_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.dom_real_growth_survey_to_2024 * @survey_consumption.dom_consumption_price_level_2024",
+      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices, as the site's other builds compute it."
+    },
+    {
       "id": "cons_hnd",
       "section": "effect",
       "label": "Honduras: survey consumption per person, 2024 US$",
@@ -555,8 +565,8 @@
       "section": "effect",
       "label": "Programme countries abroad: survey consumption per person (stand-in mean)",
       "format": "usd",
-      "formula": "avg(cons_hnd, cons_ken, cons_mwi, cons_npl, cons_phl)",
-      "explainer": "Convoy works in 65 countries; its feeding and community-development countries span Central America and the Caribbean (Guatemala, El Salvador, Honduras, Haiti), East and Southern Africa (Ethiopia, Tanzania, Kenya, Malawi), West Africa (Burkina Faso, Niger), Asia (Nepal, the Philippines) and Moldova. Stand-in: the equal mean of the five such countries the site has survey data for."
+      "formula": "avg(cons_dom, cons_hnd, cons_ken, cons_mwi, cons_npl, cons_phl)",
+      "explainer": "Convoy works in 65 countries; its feeding and community-development countries span Central America and the Caribbean (Guatemala, El Salvador, Honduras, Haiti, the Dominican Republic), East and Southern Africa (Ethiopia, Tanzania, Kenya, Malawi), West Africa (Burkina Faso, Niger), Asia (Nepal, the Philippines) and Moldova. Stand-in: the equal mean of the six such countries with a full set of survey figures on the site (survey mean, growth since the survey, price level); Guatemala and El Salvador have survey means but no price level or growth there, and Convoy publishes no split of children by country."
     },
     {
       "id": "abroad_recipient_share",
@@ -584,8 +594,8 @@
       "section": "effect",
       "label": "Price level of the programme countries against the US (market prices)",
       "format": "multiple",
-      "formula": "avg(@survey_consumption.hnd_consumption_price_level_2024, @survey_consumption.ken_consumption_price_level_2024, @survey_consumption.mwi_consumption_price_level_2024, @survey_consumption.npl_consumption_price_level_2024, @survey_consumption.phl_consumption_price_level_2024)",
-      "explainer": "The World Bank's ratio of each country's consumption prices to US prices, the same five countries: food and goods cost about a third as much at local market prices as in the US."
+      "formula": "avg(@survey_consumption.dom_consumption_price_level_2024, @survey_consumption.hnd_consumption_price_level_2024, @survey_consumption.ken_consumption_price_level_2024, @survey_consumption.mwi_consumption_price_level_2024, @survey_consumption.npl_consumption_price_level_2024, @survey_consumption.phl_consumption_price_level_2024)",
+      "explainer": "The World Bank's ratio of each country's consumption prices to US prices, the same six countries: food and goods cost about a third as much at local market prices as in the US."
     },
     {
       "id": "us_baseline",
@@ -622,12 +632,25 @@
       "explainer": "Corporate surplus clothing and household goods are booked at the donors' wholesale valuations, which can overstate what slow-moving stock would sell for. 0.85 (0.5-1.1); with the in-kind step below it gives 60% of the recorded value, World Vision US's domestic model's figure for the same kind of goods."
     },
     {
+      "id": "food_vs_overall_price_level",
+      "section": "effect",
+      "label": "Programme countries: food prices against all consumption prices (both relative to the US)",
+      "format": "multiple",
+      "value": {
+        "low": 1.1,
+        "best": 1.4,
+        "high": 1.9
+      },
+      "kind": "judgment",
+      "explainer": "Food is traded, so in poorer countries its price level is closer to the US one than the overall consumption level, which cheap local services pull down (the Balassa-Samuelson pattern in the World Bank's International Comparison Program, where food and non-alcoholic beverages typically stand at about half to two thirds of US prices in low- and lower-middle-income countries against about a third to two fifths for all household consumption). The site has no food price-level fact; judgment 1.4 (1.1-1.9)."
+    },
+    {
       "id": "food_abroad_price_ratio",
       "section": "effect",
       "label": "Donated food sent abroad: local value per dollar of its recorded value",
       "format": "multiple",
-      "formula": "food_us_price_ratio * abroad_price_level",
-      "explainer": "Valued at local market prices, not US ones (families/humanitarian-relief.md): the US retail value times the programme countries' price level."
+      "formula": "food_us_price_ratio * abroad_price_level * food_vs_overall_price_level",
+      "explainer": "Valued at local market prices, not US ones (families/humanitarian-relief.md): the US retail value times the programme countries' price level for food."
     },
     {
       "id": "nonfood_abroad_price_ratio",
@@ -932,6 +955,36 @@
       "drawn_with": "audited_total_expenses"
     },
     {
+      "id": "dr_grants",
+      "section": "effect",
+      "label": "Disaster response: grants to partner ministries, 2024",
+      "format": "usd",
+      "value": 2962000,
+      "kind": "observed",
+      "source": {
+        "title": "Convoy of Hope, consolidated financial statements for the years ended December 31, 2024 and 2023 (Batts Morrison Wales & Lee, P.A., report dated June 10, 2025): Convoy-of-Hope-Financial-Statements-BMWL-2023-2024.pdf on convoyofhope.org",
+        "url": "https://convoyofhope.org/financials/",
+        "retrieved": "2026-11-15",
+        "quote": "Grants to other ministries 314 8,179 25 2,962",
+        "page": "p. 14 (note K, functional allocation of expenses, 2024)"
+      },
+      "explainer": "Cash the disaster response granted to local churches and partners responding (the line's fourth column).",
+      "drawn_with": "audited_total_expenses"
+    },
+    {
+      "id": "dr_grants_relief_share",
+      "section": "effect",
+      "label": "Disaster response grants: share that buys food and relief goods",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Partners responding to a disaster buy food, water and supplies locally with part of a grant and pay for staff, fuel and repairs with the rest. Judgment 50% (20-80%)."
+    },
+    {
       "id": "dis_food_share",
       "section": "effect",
       "label": "Disaster response: food and water's share of the goods",
@@ -949,8 +1002,8 @@
       "section": "effect",
       "label": "US disasters: goods' worth to the households",
       "format": "usd",
-      "formula": "dr_us_share * (dr_gik * (dis_food_share * food_us_price_ratio * food_equivalence + (1 - dis_food_share) * nonfood_us_price_ratio * nonfood_equivalence) + dr_relief_purchases * food_equivalence)",
-      "explainer": "The US share of the donated relief goods at US prices and their in-kind worth, plus the bought relief at cost."
+      "formula": "dr_us_share * (dr_gik * (dis_food_share * food_us_price_ratio * food_equivalence + (1 - dis_food_share) * nonfood_us_price_ratio * nonfood_equivalence) + (dr_relief_purchases + dr_grants * dr_grants_relief_share) * food_equivalence)",
+      "explainer": "The US share of the donated relief goods at US prices and their in-kind worth, plus the relief bought by Convoy and by partners with its grants, at cost."
     },
     {
       "id": "dus_years_exposed",
@@ -1008,8 +1061,8 @@
       "section": "effect",
       "label": "Disasters abroad: goods' worth per person served",
       "format": "usd",
-      "formula": "(1 - dr_us_share) * (dr_gik * (dis_food_share * food_abroad_price_ratio * food_equivalence + (1 - dis_food_share) * nonfood_abroad_price_ratio * nonfood_equivalence) + dr_relief_purchases * food_equivalence) / dint_people",
-      "explainer": "The share of the relief goods abroad at local prices and their in-kind worth, plus the bought relief at cost, per person served: a few dollars each."
+      "formula": "(1 - dr_us_share) * (dr_gik * (dis_food_share * food_abroad_price_ratio * food_equivalence + (1 - dis_food_share) * nonfood_abroad_price_ratio * nonfood_equivalence) + (dr_relief_purchases + dr_grants * dr_grants_relief_share) * food_equivalence) / dint_people",
+      "explainer": "The share of the relief goods abroad at local prices and their in-kind worth, plus the relief bought by Convoy and its partners at cost, per person served: a few dollars each."
     },
     {
       "id": "dint_meals_per_day",
@@ -1044,7 +1097,7 @@
         "high": 2
       },
       "kind": "judgment",
-      "explainer": "The 2024 responses abroad were in middle-income countries (Brazil, Chile, the Philippines) and Spain as well as poorer ones, while survivors had lost homes and income for a time. 1 (0.6-2)."
+      "explainer": "Convoy names few of its 46 responses abroad (Brazil, Spain and Chile together under 1% of the meals); most are in or near its programme countries, where survivors had lost homes and income for a time. 1 (0.6-2) times the programme countries' mean."
     },
     {
       "id": "baseline_consumption",
@@ -1167,6 +1220,36 @@
       "drawn_with": "audited_total_expenses"
     },
     {
+      "id": "cd_grants",
+      "section": "effect",
+      "label": "Community development: grants to partner ministries, 2024",
+      "format": "usd",
+      "value": 8179000,
+      "kind": "observed",
+      "source": {
+        "title": "Convoy of Hope, consolidated financial statements for the years ended December 31, 2024 and 2023 (Batts Morrison Wales & Lee, P.A., report dated June 10, 2025): Convoy-of-Hope-Financial-Statements-BMWL-2023-2024.pdf on convoyofhope.org",
+        "url": "https://convoyofhope.org/financials/",
+        "retrieved": "2026-11-15",
+        "quote": "Grants to other ministries 314 8,179 25 2,962",
+        "page": "p. 14 (note K, functional allocation of expenses, 2024)"
+      },
+      "explainer": "Cash community development granted to the local churches and partners that run the feeding, agriculture and women's programmes (the line's second column).",
+      "drawn_with": "audited_total_expenses"
+    },
+    {
+      "id": "cd_grants_food_share",
+      "section": "effect",
+      "label": "Community development grants: share that buys food for the meals",
+      "format": "percent",
+      "value": {
+        "low": 0.1,
+        "best": 0.4,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "Local churches and partners cook and serve the meals (Hope Quarterly 37, p. 18); part of the grants buys local food, the rest pays cooks, kitchens and the other programmes. Judgment 40% (10-80%)."
+    },
+    {
       "id": "feed_gik_share",
       "section": "effect",
       "label": "Community development: share of its donated goods that is food for the children's meals",
@@ -1184,8 +1267,8 @@
       "section": "effect",
       "label": "Children's feeding: the meals' worth to the children",
       "format": "usd",
-      "formula": "(cd_gik * feed_gik_share * food_abroad_price_ratio + cd_food_purchases) * food_equivalence",
-      "explainer": "Donated food at local prices plus the food bought locally, times its in-kind worth."
+      "formula": "(cd_gik * feed_gik_share * food_abroad_price_ratio + cd_food_purchases + cd_grants * cd_grants_food_share) * food_equivalence",
+      "explainer": "Donated food at local prices plus the food bought locally, by Convoy and by its partners with its grants, times its in-kind worth."
     },
     {
       "id": "feed_ln_per_child",
@@ -1223,6 +1306,19 @@
       "unit": "years"
     },
     {
+      "id": "liv_new_share",
+      "section": "effect",
+      "label": "Agriculture and women's programmes: share of the year's participants who are new",
+      "format": "percent",
+      "value": {
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.8
+      },
+      "kind": "judgment",
+      "explainer": "The counts are each year's participants in programmes that run several years (the featured farmer in Nepal joined four years before, Hope Quarterly 37, p. 19), so a participant appears in several yearly counts. New participants get the whole gain over the years it lasts; those continuing get one more year of it. Judgment 50% (30-80%)."
+    },
+    {
       "id": "liv_household_size",
       "section": "effect",
       "label": "Agriculture and women's programmes: household size",
@@ -1235,8 +1331,21 @@
       "section": "effect",
       "label": "Agriculture and women's programmes: log-consumption gain per household member",
       "format": "small",
-      "formula": "ln(1 + liv_consumption_gain) * pv_annuity_due(1, $discount_rate, liv_years)",
-      "explainer": "The yearly gain over the years it lasts, discounted."
+      "formula": "ln(1 + liv_consumption_gain) * (liv_new_share * pv_annuity_due(1, $discount_rate, liv_years) + (1 - liv_new_share))",
+      "explainer": "For new participants the yearly gain over the years it lasts, discounted; for continuing ones (Convention 3, flows not stocks) the one more year this year's spending adds."
+    },
+    {
+      "id": "income_mortality_uov_ratio",
+      "section": "effect",
+      "label": "Deaths averted by higher consumption, as a share of its value (poor households abroad)",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.2,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "More food and income in very poor households lowers child mortality a little (cash transfers in Kenya and elsewhere reduce infant deaths); the site's models of livelihoods and cash abroad add these deaths as a share of the consumption gain's value, moving with the value of a life. 20% (0-50%), as World Vision's livelihoods branch; applied to the school meals, the training and the goods sent abroad, not to a few days of disaster food."
     },
     {
       "id": "wom_gain_ratio",
@@ -1257,7 +1366,7 @@
       "label": "Rural initiatives (US): goods' worth to the households",
       "format": "usd",
       "formula": "rur_lbs * @feeding_america.fair_value_per_lb_fy2025 * food_us_price_ratio * food_equivalence",
-      "explainer": "The pounds delivered at the shared wholesale value of a pound of donated food, at retail and in-kind worth (most of the resources are food)."
+      "explainer": "The pounds delivered at the shared wholesale value of a pound of donated food (Feeding America's fiscal year to June 2025, half of it in 2024; its 2024 figure was 1.97 dollars), at retail and in-kind worth (most of the resources are food)."
     },
     {
       "id": "rur_ln_per_person",
@@ -1359,7 +1468,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "In Brazil, Spain and Chile governments and local groups responded at scale; in poorer settings appeals are underfunded. 70% (45-90%), as Samaritan's Purse's relief abroad."
+      "explainer": "Most responses abroad are in Convoy's poorer programme countries, where government relief is thin and appeals underfunded, and local churches and other agencies also respond. 70% (45-90%), as Samaritan's Purse's relief abroad."
     },
     {
       "id": "dint_evidence_adj",
@@ -1443,20 +1552,33 @@
       "explainer": "Convention 2: Convoy's own spending on the line, with overhead, over that plus the donors' goods at local value plus partners' and volunteers' resources."
     },
     {
-      "id": "cd_goods_local_value",
+      "id": "feed_cash_share",
       "section": "adjustments",
-      "label": "Community development: donated goods at local value",
-      "format": "usd",
-      "formula": "cd_gik * (feed_gik_share * food_abroad_price_ratio + (1 - feed_gik_share) * nonfood_us_price_ratio)",
-      "explainer": "The food for the meals at local prices abroad, the rest (rural initiatives' and programme supplies) at US prices."
+      "label": "Community development: the feeding programme's share of the line's own spending",
+      "format": "percent",
+      "value": {
+        "low": 0.35,
+        "best": 0.5,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "No split is published. Freight ($4.1 million) and the bought food go mostly with the meals, the travel ($2.8 million) mostly with the field teams and training, staff and grants to both (note K). Judgment 50% (35-70%)."
     },
     {
-      "id": "cd_attribution_share",
+      "id": "feed_attribution_share",
       "section": "adjustments",
-      "label": "Community development: Convoy's share of the resources",
+      "label": "Children's feeding: Convoy's share of the resources",
       "format": "percent",
-      "formula": "cd_cash * overhead_ratio / ((cd_cash * overhead_ratio + cd_goods_local_value) * (1 + partner_resources_share))",
-      "explainer": "Convention 2, as above: local churches and partners cook and serve the meals and run the groups, in the partners' share."
+      "formula": "cd_cash * feed_cash_share * overhead_ratio / ((cd_cash * feed_cash_share * overhead_ratio + cd_gik * feed_gik_share * food_abroad_price_ratio) * (1 + partner_resources_share))",
+      "explainer": "Convention 2, as above: the feeding programme's share of the line's own spending, with overhead, over that plus the donated food at local prices plus the partners' and volunteers' resources (local churches cook and serve the meals)."
+    },
+    {
+      "id": "cdo_attribution_share",
+      "section": "adjustments",
+      "label": "Training and rural initiatives: Convoy's share of the resources",
+      "format": "percent",
+      "formula": "cd_cash * (1 - feed_cash_share) * overhead_ratio / ((cd_cash * (1 - feed_cash_share) * overhead_ratio + cd_gik * (1 - feed_gik_share) * food_us_price_ratio) * (1 + partner_resources_share))",
+      "explainer": "Convention 2 for the rest of community development: its own spending over that plus its donated goods (mostly the rural initiatives' food, at US prices) plus partners' and volunteers' resources."
     },
     {
       "id": "ev_goods_local_value",
@@ -1694,7 +1816,7 @@
       "section": "adjustments",
       "label": "Children's feeding: all adjustments",
       "format": "percent",
-      "formula": "feed_counterfactual_adj * cd_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * feed_missing_data_adj",
+      "formula": "feed_counterfactual_adj * feed_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * feed_missing_data_adj",
       "explainer": "Food at its worth: no evidence step."
     },
     {
@@ -1702,7 +1824,7 @@
       "section": "adjustments",
       "label": "Agriculture and women's programmes: all adjustments",
       "format": "percent",
-      "formula": "liv_evidence_adj * liv_counterfactual_adj * cd_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * liv_missing_data_adj",
+      "formula": "liv_evidence_adj * liv_counterfactual_adj * cdo_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * liv_missing_data_adj",
       "explainer": "Each step for the training programmes."
     },
     {
@@ -1710,8 +1832,8 @@
       "section": "adjustments",
       "label": "Rural initiatives: all adjustments",
       "format": "percent",
-      "formula": "pr_counterfactual_adj * cd_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * rur_missing_data_adj",
-      "explainer": "Donated goods' counterfactual, community development's credit share."
+      "formula": "pr_counterfactual_adj * cdo_attribution_share * implementation_adj * leverage_funging_adj * wait_discount * rur_missing_data_adj",
+      "explainer": "Donated goods' counterfactual, the rest of community development's credit share."
     },
     {
       "id": "ev_total_adj",
@@ -1728,11 +1850,11 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.04,
-        "high": 0.12
+        "best": 0.066,
+        "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "School meals raise enrolment and attendance and, less surely, learning and girls' schooling (Snilstveit et al. 2016, 3ie systematic review 24; Aurino et al. 2023 on Ghana's programme), beyond the food's value counted above. The feeding branch is about two fifths of the result; a tenth more there: +4% (0-12%).",
+      "explainer": "School meals raise enrolment and attendance and, less surely, learning and girls' schooling (Snilstveit et al. 2016, 3ie systematic review 24; Aurino et al. 2023 on Ghana's programme), beyond the food's value counted above. The feeding branch is about two thirds of the result; a tenth more there: +6.6% (0-20%).",
       "side_effect": "added"
     },
     {
@@ -1818,7 +1940,7 @@
       "section": "bridges",
       "label": "Partner resourcing goods: units of value before adjustments",
       "format": "number",
-      "formula": "(prus_people * prus_ln_per_person + prab_people * prab_ln_per_person) * $uov_per_ln_consumption",
+      "formula": "(prus_people * prus_ln_per_person + prab_people * prab_ln_per_person * (1 + income_mortality_uov_ratio * $life_value_multiplier)) * $uov_per_ln_consumption",
       "unit": "UoV"
     },
     {
@@ -1866,7 +1988,7 @@
       "section": "bridges",
       "label": "Children's feeding: units of value before adjustments",
       "format": "number",
-      "formula": "feed_children * feed_ln_per_child * $uov_per_ln_consumption",
+      "formula": "feed_children * feed_ln_per_child * $uov_per_ln_consumption * (1 + income_mortality_uov_ratio * $life_value_multiplier)",
       "unit": "UoV"
     },
     {
@@ -1882,7 +2004,7 @@
       "section": "bridges",
       "label": "Agriculture and women's programmes: units of value before adjustments",
       "format": "number",
-      "formula": "(ag_participants + wom_participants * wom_gain_ratio) * liv_household_size * liv_ln_per_person * $uov_per_ln_consumption",
+      "formula": "(ag_participants + wom_participants * wom_gain_ratio) * liv_household_size * liv_ln_per_person * $uov_per_ln_consumption * (1 + income_mortality_uov_ratio * $life_value_multiplier)",
       "unit": "UoV"
     },
     {
@@ -2300,7 +2422,7 @@
       "section": "adjustments",
       "label": "Convoy's share of the resources (outcome-weighted average)",
       "format": "percent",
-      "formula": "(pr_dalys_unadjusted * pr_attribution_share + med_dalys_unadjusted * pr_attribution_share + dus_dalys_unadjusted * dr_attribution_share + dint_dalys_unadjusted * dr_attribution_share + feed_dalys_unadjusted * cd_attribution_share + liv_dalys_unadjusted * cd_attribution_share + rur_dalys_unadjusted * cd_attribution_share + ev_dalys_unadjusted * ev_attribution_share) / dalys_unadjusted_total",
+      "formula": "(pr_dalys_unadjusted * pr_attribution_share + med_dalys_unadjusted * pr_attribution_share + dus_dalys_unadjusted * dr_attribution_share + dint_dalys_unadjusted * dr_attribution_share + feed_dalys_unadjusted * feed_attribution_share + liv_dalys_unadjusted * cdo_attribution_share + rur_dalys_unadjusted * cdo_attribution_share + ev_dalys_unadjusted * ev_attribution_share) / dalys_unadjusted_total",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -2417,27 +2539,5 @@
       "row": "dalys_per_dollar",
       "unit": "daly"
     }
-  },
-  "beneficiaries": {
-    "USA": 0.048,
-    "BRA": 0.0165,
-    "ESP": 0.0165,
-    "CHL": 0.0165,
-    "GTM": 0.059067,
-    "SLV": 0.059067,
-    "HND": 0.059067,
-    "NIC": 0.059067,
-    "HTI": 0.059067,
-    "DOM": 0.059067,
-    "KEN": 0.059067,
-    "TZA": 0.059067,
-    "ETH": 0.059067,
-    "MWI": 0.059067,
-    "BFA": 0.059067,
-    "NER": 0.059067,
-    "NPL": 0.059067,
-    "MDA": 0.059067,
-    "PHL": 0.075562
-  },
-  "beneficiaries_note": "Our build, by each branch's share of the modelled outcome: the US 4.8% (partner resourcing's US goods, US disaster relief, community events and rural initiatives), disasters abroad 6.6% split equally over the main 2024 responses (Brazil, Spain, Chile, the Philippines), and the rest (children's feeding, agriculture, women's programmes, goods and medicines sent abroad) split equally over 15 programme countries named in Convoy's 2024 annual report or known feeding countries (a judgment: no country split is published)."
+  }
 }
