@@ -1,6 +1,6 @@
 ### Summary
 
-Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **<span data-figure="headline" data-model="opportunity-green-charityevals">0.47</span> years of healthy life per $1,000**. Almost all of that is money: the share of a new IMO fund that would go to climate-vulnerable countries. The emissions cuts themselves count for little, and less than the extra fuel costs ships would pay for them.
+Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **<span data-figure="headline" data-model="opportunity-green-charityevals">−0.018</span> years of healthy life per $1,000**, slightly below zero. On the site's values, the shipping framework's emissions cuts are worth far less than the extra fuel costs ships would pay for them. The money a new IMO fund would send to climate-vulnerable countries almost, but not quite, makes up the difference.
 
 ### What the charity does
 
@@ -26,8 +26,8 @@ The model takes the expected tonnes from both policies over the years a won refo
 
 The IMO framework also moves money, and the model counts both sides in the main chain:
 
-- **Compliance costs.** Ships' extra fuel costs, about $280 per tonne cut, count as money lost by the people who pay them. About a third of that falls on poorer importing countries, where a dollar counts for more.
-- **Just-transition funding.** The share of the fund that reaches climate-vulnerable countries is valued as development aid. We take 40% of the fund's revenue in the first five years, with a range of 10% to 70%.
+- **Compliance costs.** Ships' extra fuel costs, about $280 per tonne cut, count as money lost by the people who pay them. Freight costs follow the volume of goods shipped, and about half of that goes to poorer countries, where a dollar counts for more.
+- **Just-transition funding.** The share of the fund that reaches climate-vulnerable countries is valued as development aid of the kind the IMO lists: infrastructure, training, technology and capacity. That aid is taken to do half as much as the same money given as cash. We take 40% of the fund's revenue in the first five years, with a range of 10% to 70%. A seventh of it is taken to replace aid donors would have given anyway.
 
 Ships' payments into the fund are transfers, not compliance costs. They are not subtracted from the aid's value either: how to count public money against what it costs those who pay it awaits a site-wide rule. The fund's rewards for clean fuels buy tonnes that are already in the framework's projected cut.
 
@@ -35,14 +35,15 @@ The next dollar is counted at 39% of the past average. Opportunity Green holds a
 
 ### What drives the result
 
-On the site's values, a tonne of CO₂ kept out of the air is worth far less than the $280 ships would pay to cut it, so the IMO framework's climate effect alone is a net cost. The result is positive because of the money the fund would send to climate-vulnerable countries: a dollar there does many times more than the same dollar lost by the people who pay for shipping. The share of the fund that goes to those countries, what that aid does per dollar, and whether the framework is adopted move the result most.
+On the site's values, a tonne of CO₂ kept out of the air is worth far less than the $280 ships would pay to cut it, so the IMO framework's climate effect alone is a net cost. The money the fund would send to climate-vulnerable countries pulls the other way, and the two nearly cancel. So the sign of the result turns on a few figures: how much of the fund reaches those countries, what that aid does per dollar, the cost per tonne, and how poor the people who end up paying it are.
 
 ### Biggest uncertainties
 
-- **How the fund will be spent.** That is not yet decided. If rewards for clean fuels take almost all of it, the result turns slightly negative.
-- **Adoption.** At the IMO's last meeting, about as many states backed reopening the framework as backed it, and an adopted text may be weaker.
+- **How the fund will be spent.** That is not yet decided. If the just-transition share is 70% rather than 40%, the result turns positive. If rewards for clean fuels take almost all of it, the result is more negative.
+- **What the aid does.** At the value of cash, the result is clearly positive. At a fifth of cash, it is clearly negative.
+- **The compliance cost.** Cheaper biofuels and LNG would lower it, and tight biofuel markets would raise it.
+- **Adoption.** At the IMO's last meeting, about as many states pushed to reopen the framework as backed it, and an adopted text may be weaker.
 - **Opportunity Green's share.** Many groups and governments work on both files. 3% and 4% are judgments.
-- **What a dollar of that aid does.** The use isn't known, so it takes the shared value of a donor's development aid.
 
 ### What isn't modelled
 
@@ -50,13 +51,17 @@ Any outcome of the pending EU Taxonomy case. The value of the advertising ruling
 
 ### How this model was checked
 
-A new build (November 2026), audited by independent reviewers. The rounds and what changed are in audits/opportunity-green-charityevals/.
+A new build (November 2026), audited by independent reviewers. The first round found that the fund's money was valued too generously. It took a whole aid budget's value, which includes health aid, so the model now uses development aid's value. The money also missed the evidence step and any allowance for displacing other aid. The share of shipping costs borne in poorer countries was too low. With these fixes the result went from positive to slightly negative. The rounds are in audits/opportunity-green-charityevals/.
 
 ### Sources
 
 - Opportunity Green, Report and Financial Statements for the year ended 31 March 2026 (Charity Commission register, charity 1199413)
 - Charity Commission register, financial history, 2023-2026
 - Transport & Environment (April 2025), Assessing the impact of the IMO's draft Net-Zero Framework
-- GreenAir News (21 July 2026), on the Commission's proposal to extend emissions trading to departing flights
+- Climate Home News (1 May 2026) and IUMI (December 2025), on the IMO adoption timetable and the October 2025 vote
+- UNFCCC decision 1/CMA.6 (2024), the climate-finance goal
+- UNCTADstat, maritime transport insights (seaborne trade by destination)
+- Beveridge & Diamond (July 2026) and GreenAir News (21 July 2026), on the Commission's proposal to extend emissions trading to departing flights
+- ICCT (2026), carbon leakage from a higher EU ETS aviation price
 - Sofiev et al. (2018), Nature Communications; Yim et al. (2015), Environmental Research Letters (air pollution from ships and aircraft)
-- IMO (2020), Fourth IMO Greenhouse Gas Study
+- IMO (2020), Fourth IMO Greenhouse Gas Study; Regulation (EU) 2018/2066 (jet fuel emission factor)
