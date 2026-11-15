@@ -1,10 +1,10 @@
 ### Summary
 
-Imagine Worldwide puts tablets with child-directed literacy and numeracy software into African government primary schools, above all Malawi's national programme with its Ministry of Education. Our model of its 2024 work gives **<span data-figure="headline" data-model="imagine-worldwide-charityevals">2.8</span> years of healthy life per 1,000 dollars**. The result rests on how much of a child's learning gain lasts into adult earnings and how well the trials' effects hold at national scale; the countries outside Malawi are discounted for missing data.
+Imagine Worldwide puts tablets with child-directed literacy and numeracy software into African government primary schools, above all Malawi's national programme with its Ministry of Education. Our model of its 2024 work gives **<span data-figure="headline" data-model="imagine-worldwide-charityevals">2.3</span> years of healthy life per 1,000 dollars**. The result rests on how much of a child's learning gain lasts into adult earnings and how well the trials' effects hold at national scale; the countries outside Malawi are discounted for missing data.
 
 ### What the charity does
 
-Imagine spent 24.7 million dollars in 2024, 23.5 million on its one programme. Children in Standards 1 to 4 spend 30 to 35 minutes a day on solar-charged offline tablets running onebillion's onecourse software, which teaches reading and maths in the local language at each child's own level. Imagine buys the tablets and solar systems, funds local partners to train teachers and monitor schools, coordinates the roll-out through its Malawian organisation, and researches the results. In 2024 it served 369,360 children in Malawi's BEFIT programme, which the government plans to take to all 6,000 public primary schools, and 65,252 more in Sierra Leone, Liberia, Senegal, Ghana, Burkina Faso, Tanzania and the Dzaleka refugee camp.
+Imagine spent 24.7 million dollars in 2024, 23.5 million on its one programme. Children in Standards 1 to 4 have three to five 30- to 35-minute sessions a week on solar-charged offline tablets running onebillion's onecourse software, which teaches reading and maths in the local language at each child's own level. Imagine buys the tablets and solar systems, funds local partners to train teachers and monitor schools, coordinates the roll-out through its Malawian organisation, and researches the results. In 2024 it served 369,360 children in Malawi's BEFIT programme, which the government plans to take to all 6,000 public primary schools, and 65,252 more in Sierra Leone, Liberia, Senegal, Ghana, Burkina Faso, Tanzania and the Dzaleka refugee camp.
 
 ### How the impact happens
 
@@ -12,7 +12,7 @@ Children who learn to read and count earlier learn more later, and adults with b
 
 ### How the model works
 
-The cost is 2024's programme spending, with the tablets and solar systems bought that year replaced by the yearly cost of all the equipment in use, so a year's cost matches a year's children. The learning gain per child-year is the effect of Imagine's randomised trial of the combined literacy and maths software in Tanzanian government schools (0.30 standard deviations, the average of the two subjects), within the range of its other trials in Malawi. Each standard deviation of learning that lasts into adult life raises earnings by a fifth, and two fifths of the gain are counted as lasting; the earnings come after about ten years and are discounted. Then the model asks how far to trust small trials run by the charity itself, what would have happened anyway, what share of the resources behind the outcome are Imagine's (government teachers run the sessions; the software is given royalty-free), and how much of the trial's effect survives at scale. Malawi's branch rests on Imagine's own trials of the same software in Malawian government schools and isn't discounted for missing data; the other countries are.
+The cost is 2024's programme spending, with the tablets and solar systems bought that year replaced by the yearly cost of all the equipment in use, so a year's cost matches a year's children. The children are counted as years of learning in 2024: two terms of BEFIT's first school year and the first term of its second. The learning gain per child-year, 0.25 standard deviations (the average of literacy and maths), sits below Imagine's after-school trial of the combined software in Tanzania (0.30) because BEFIT's sessions replace other lessons, which its school-day trials in Malawi show needs more time for the same gain. Each standard deviation of learning that lasts into adult life raises earnings by a fifth, and two fifths of the gain are counted as lasting; the earnings come after about ten years and are discounted. Then the model asks how far to trust small trials run by the charity itself, what would have happened anyway, what share of the resources behind the outcome are Imagine's (government teachers run the sessions; the software is given royalty-free), and how much of the trial's effect survives at scale. Malawi's branch rests on Imagine's own trials of the same software in Malawian government schools and isn't discounted for missing data; the other countries are.
 
 ### What drives the result
 
@@ -30,7 +30,7 @@ Literacy's benefits beyond earnings, the solar power left in schools and teacher
 
 ### How this model was checked
 
-Independent audits (audits/imagine-worldwide-charityevals/).
+Independent audits (audits/imagine-worldwide-charityevals/). Round 1 passed with no high findings; the fixes that followed: the effect per child-year lowered from the after-school trial's 0.30 to 0.25 because BEFIT's sessions replace lessons, the trust in the trials no longer also counts shrinkage at scale (0.6 to 0.7), Malawi's children counted as years of learning in 2024 (about 319,000) rather than children reached at any time (369,360), and partners' shares outside Malawi added to the credit share.
 
 ### Sources
 

@@ -3,13 +3,13 @@
   "name": "Imagine Worldwide: tablet-based literacy and numeracy (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"MWI":0.9386,"SLE":0.0433,"LBR":0.0059,"SEN":0.0053,"GHA":0.0032,"BFA":0.003,"TZA":0.0007},
-  "beneficiaries_note": "Our build: shares of the result by branch at the defaults: BEFIT in Malawi's government schools (93.5%) and the Dzaleka camp in Malawi; the other countries by the children Imagine served there in 2024 (Annual Report p. 12).",
+  "beneficiaries": {"MWI":0.93,"SLE":0.0494,"LBR":0.0067,"SEN":0.006,"GHA":0.0037,"BFA":0.0035,"TZA":0.0007},
+  "beneficiaries_note": "Our build: shares of the result by branch at the defaults: BEFIT in Malawi's government schools (92.6%) and the Dzaleka camp in Malawi; the other countries by the children Imagine served there in 2024 (Annual Report p. 12).",
   "template": "cash-income",
   "estimate_basis": "unit_cost",
   "charity": "imagine-worldwide",
   "owner": "charityevals",
-  "summary": "Imagine Worldwide funds and coordinates tablet-based, child-directed literacy and numeracy software (onebillion's onecourse) in government primary schools, chiefly Malawi's national BEFIT roll-out, with pilots in Sierra Leone and five other African countries; in 2024 it served about 435,000 children. Counting a year of tablet learning per child against 2024's cost (equipment spread over its life), and the learning gain as later earnings, the model gives about 2.8 years of healthy life per 1,000 dollars. The biggest uncertainties are how much of a learning gain lasts into adult earnings and how well the trials' effects hold at national scale; the countries outside Malawi, with no trial of the programme as delivered there, are discounted for missing data.",
+  "summary": "Imagine Worldwide funds and coordinates tablet-based, child-directed literacy and numeracy software (onebillion's onecourse) in government primary schools, chiefly Malawi's national BEFIT roll-out, with pilots in Sierra Leone and five other African countries; in 2024 it served about 435,000 children. Counting a year of tablet learning per child against 2024's cost (equipment spread over its life), and the learning gain as later earnings, the model gives about 2.3 years of healthy life per 1,000 dollars. The biggest uncertainties are how much of a learning gain lasts into adult earnings and how well the trials' effects hold at national scale; the countries outside Malawi, with no trial of the programme as delivered there, are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Imagine Worldwide, 2024",
@@ -87,7 +87,7 @@
         "quote": "Total functional expenses. Add lines 1 through 24e 24,722,965 23,521,561 644,476 556,928",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Programme-service expenses for calendar 2024 on Imagine Worldwide's Form 990 (Part IX line 25, column B), including $6,176,018 of grants abroad (line 16), mostly to its Malawian organisation Imagine Malawi, which runs the BEFIT roll-out. The return lists one programme, tablet-based literacy and numeracy."
+      "explainer": "Programme-service expenses for calendar 2024 on Imagine Worldwide's Form 990 (Part IX line 25, column B), including $6,176,018 of grants abroad (line 16), mostly to its Malawian organisation Imagine Malawi, which runs the BEFIT roll-out. The return lists one programme, tablet-based literacy and numeracy. The same figures are in the IRS e-file of the return (TEOS XML, tax period 2024-12, EIN 82-0990106), read with scripts/irs-990.py."
     },
     {
       "id": "total_expenses",
@@ -132,10 +132,14 @@
     {
       "id": "tablets_in_service_2023",
       "section": "cost",
-      "label": "Tablets delivered before 2024 (BEFIT Phase 1, Malawi)",
+      "label": "Tablets delivered before 2024 (BEFIT Phase 1 in Malawi, and earlier pilots)",
       "format": "integer",
-      "value": 80000,
-      "kind": "observed",
+      "value": {
+        "low": 80000,
+        "best": 80000,
+        "high": 88000
+      },
+      "kind": "estimate",
       "source": {
         "title": "Imagine Worldwide and Malawi Ministry of Education, 'Building Education Foundations through Innovation & Technology' (BEFIT overview with Phase 1 updates, academic year 2023/24)",
         "url": "https://www.imagineworldwide.org/wp-content/uploads/Malawi-Project-Overview-General-2-27-23.pdf",
@@ -143,7 +147,7 @@
         "quote": "80k tablets and accessories were procured and delivered and 500 solar power systems were installed",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Tablets bought for BEFIT's first school year (from September 2023). Earlier pilots elsewhere used far fewer, so 2024's purchases are about the difference to the 2024 total."
+      "explainer": "Tablets bought for BEFIT's first school year (from September 2023): 80,000. Earlier pilots elsewhere (6,534 children in 2022, at about five a tablet) may add up to 8,000 still in service, the high end. 2024's purchases are the difference to the 2024 total."
     },
     {
       "id": "solar_systems_2024",
@@ -253,7 +257,7 @@
       "label": "Programme cost of 2024, equipment counted at its yearly cost",
       "format": "usd",
       "formula": "program_expenses - equipment_bought_2024 + equipment_yearly_cost",
-      "explainer": "The year's programme spending with equipment bought replaced by the yearly cost of the equipment in use, so the cost matches the children served in the same year (one year's flow against one year's cost). Everything else (Imagine Malawi's coordination, local partners' training and monitoring, research, the new country teams) counts as spent."
+      "explainer": "The year's programme spending with equipment bought replaced by the yearly cost of the equipment in use, so the cost matches the children served in the same year (one year's flow against one year's cost). Everything else (Imagine Malawi's coordination, local partners' training and monitoring, research, the new country teams) counts as spent in the year, including the training for schools launched in September 2024 that serves them in later years too; no published figure splits it out, so the cost is slightly high on this count."
     },
     {
       "id": "cost_total",
@@ -263,20 +267,70 @@
       "formula": "program_spend * overhead_ratio"
     },
     {
-      "id": "mw_children",
+      "id": "befit_y1_learners",
       "section": "reach",
-      "label": "Malawi: children served by BEFIT in 2024",
+      "label": "Malawi: BEFIT Year 1 learners (school year 2023/24, 500 schools)",
       "format": "integer",
-      "value": 369360,
+      "value": 270000,
       "kind": "observed",
       "source": {
         "title": "Imagine Worldwide, 2024 Annual Report",
         "url": "https://www.imagineworldwide.org/wp-content/uploads/IW_AnnualReport_2024_Final_V2.pdf",
-        "page": "p. 12 (Implementations by Country, 2024 calendar year)",
-        "quote": "MALAWI 369,360 students served, 681 schools*",
+        "page": "p. 11 (Key Highlights)",
+        "quote": "In Malawi, Year 1 of the BEFIT tablet program (2023/24) rolled out on time and under budget, serving 500 schools and over 270,000 learners and training nearly 7,000 educators.",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Children in Standards 1-4 using the tablets in BEFIT schools during calendar 2024, Imagine's own count. Calendar 2024 spans two terms of BEFIT's first school year (about 300,000 children in 500 schools) and the first term of its second (575,000 in 960 schools): about 200,000 + 190,000 child-school-years, close to this count, so it is used as a year's flow of children."
+      "explainer": "Children in Standards 1-4 in BEFIT's first 500 schools, from September 2023 to July 2024; Imagine's own count ('over 270,000')."
+    },
+    {
+      "id": "befit_y2_learners",
+      "section": "reach",
+      "label": "Malawi: BEFIT Year 2 learners (school year 2024/25, 960 schools)",
+      "format": "integer",
+      "value": 575000,
+      "kind": "observed",
+      "source": {
+        "title": "Imagine Worldwide, 2024 Annual Report",
+        "url": "https://www.imagineworldwide.org/wp-content/uploads/IW_AnnualReport_2024_Final_V2.pdf",
+        "page": "p. 12 (footnote)",
+        "quote": "Year 2 of BEFIT program ends Q2 2025, serving 960 schools and 575,000 students total",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Children in all 960 BEFIT schools in the school year from September 2024; Imagine's own count."
+    },
+    {
+      "id": "y1_share_in_2024",
+      "section": "reach",
+      "label": "Share of Year 1's school year that fell in 2024",
+      "format": "percent",
+      "value": {
+        "low": 0.6,
+        "best": 0.65,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 65% (60-70%): Malawi's school year runs September to July in three terms; January to July 2024 is the second and third."
+    },
+    {
+      "id": "y2_share_in_2024",
+      "section": "reach",
+      "label": "Share of Year 2's school year delivered in 2024",
+      "format": "percent",
+      "value": {
+        "low": 0.15,
+        "best": 0.25,
+        "high": 0.33
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 25% (15-33%): September to December 2024 is the first of three terms, and only 681 of the 960 Year 2 schools were running in calendar 2024 (Annual Report p. 12, '369,360 students served, 681 schools'), so the new schools started late."
+    },
+    {
+      "id": "mw_children",
+      "section": "reach",
+      "label": "Malawi: child-years of BEFIT in 2024",
+      "format": "integer",
+      "formula": "befit_y1_learners * y1_share_in_2024 + befit_y2_learners * y2_share_in_2024",
+      "explainer": "A year's flow, matched to 2024's cost: two terms of Year 1 and the part of Year 2 delivered in 2024. Imagine's own calendar-year count, 369,360 children served (Annual Report p. 12), counts children reached at any time in the year, not years of learning."
     },
     {
       "id": "oth_children",
@@ -313,12 +367,12 @@
     {
       "id": "rct_learning_gain_sd",
       "section": "effect",
-      "label": "Learning gain in a randomised trial of the combined literacy and numeracy software (SD, average of the two)",
+      "label": "Learning gain per child-year of the combined literacy and numeracy software (SD, average of the two)",
       "format": "number",
       "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.45
+        "low": 0.12,
+        "best": 0.25,
+        "high": 0.4
       },
       "kind": "estimate",
       "source": {
@@ -328,7 +382,7 @@
         "quote": "Effect size for overall math (EGMA average % correct) 0.07(5) 0.54** 0.26* 0.02(5) 0.44***",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Imagine's five-month randomised trial in Tanzanian government schools gave the combined literacy-and-maths software, as BEFIT now does, for 40 minutes a day (20 hours a subject): intent-to-treat effects of 0.34 SD on literacy and 0.26 SD on maths, average 0.30. The range runs over its other trials of the same software: in Malawi government schools 0.34 literacy and 0.07 maths after 8 months on one subject (56 hours), 0.37 literacy and 0.54 maths after 13 months on one subject (101 hours); a 2-month holiday programme in a Tanzanian camp 0.20 and 0.44. Intent-to-treat effects include children who missed sessions; each is against classmates taught as usual in the same time, so displaced lessons are netted out."
+      "explainer": "Imagine's five-month randomised trial in Tanzanian government schools gave the combined literacy-and-maths software, as BEFIT now does, for 40 minutes a day after school (20 hours a subject): intent-to-treat effects of 0.34 SD on literacy and 0.26 SD on maths, average 0.30. Being after school, it adds time rather than replacing lessons; BEFIT's sessions replace other lessons in the school day, as in Imagine's Malawi trials, which are net of the lessons displaced but needed more time on one subject for similar effects (0.34 literacy and 0.07 maths after 56 hours, 0.37 literacy and 0.54 maths after 101 hours). BEFIT children averaged 36 hours a year across both subjects. 0.25 (0.12-0.40): below the Tanzanian trial for school-day delivery at that dose. Intent-to-treat effects include children who missed sessions."
     },
     {
       "id": "edu_earnings_per_sd",
@@ -354,7 +408,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Judgment 40% (20-80%), the same figure as charityevals' other education branches, to be read from a shared fact once one exists: test-score effects of education programmes fade in the years after them (Bailey, Duncan, Odgers and Yu 2017, 'initially promising but then quickly disappearing impacts', https://pmc.ncbi.nlm.nih.gov/articles/PMC5779101/); BEFIT's own data show smaller gains in a school's second year than its first (Year 2 report p. 26)."
+      "explainer": "Judgment 40% (20-80%), the same figure as charityevals' other education branches, to be read from a shared fact once one exists: test-score effects of education programmes fade in the years after them (Bailey, Duncan, Odgers and Yu 2017, 'initially promising but then quickly disappearing impacts', https://pmc.ncbi.nlm.nih.gov/articles/PMC5779101/)."
     },
     {
       "id": "years_until_work",
@@ -431,12 +485,12 @@
       "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
       "value": {
-        "low": 0.35,
-        "best": 0.6,
-        "high": 0.85
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Judgment 0.6 (0.35-0.85), as charityevals' Save the Children education branch. The trials are consistent (nine randomised trials of the software, all positive) but each is small (one or two schools, children randomised within them), run and reported by Imagine itself, and the charity's own summary is where the effects are collected. Education effects usually shrink when trials are scaled. The independent evaluations of BEFIT at scale (a World Bank comparison of 40 schools with 40 matched ones, and a University of Chicago trial in 348 schools, Year 2 report p. 7) aren't published yet."
+      "explainer": "Judgment 0.7 (0.4-0.9): how far to trust the trials themselves; how much survives at scale is mw_implementation_adj. The trials are consistent (nine randomised trials of the software, all positive) but each is small (one or two schools, children randomised within them), run and reported by Imagine itself, and the charity's own summary is where the effects are collected, so some selection and small-sample inflation is likely. Above charityevals' Save the Children education branch (0.6), whose effect is a literature median for programmes unlike its own. The independent evaluations of BEFIT at scale (a World Bank comparison of 40 schools with 40 matched ones, and a University of Chicago trial in 348 schools, Year 2 report p. 7) aren't published yet."
     },
     {
       "id": "counterfactual_adj",
@@ -458,11 +512,11 @@
       "format": "percent",
       "value": {
         "low": 0.7,
-        "best": 0.85,
+        "best": 0.84,
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Judgment 85% (70-95%): Imagine pays for the tablets, solar power, training and coordination, but government teachers run the sessions in school time (90-175 minutes a week a class, Year 2 report p. 6), the Ministry's BEFIT unit manages the roll-out, and onebillion gives the software royalty-free (BEFIT overview p. 3) after developing it with other funding. About 10,000 teachers trained, giving perhaps a tenth of their time at Malawi's teacher pay, is a few per cent of the cost; onebillion's development and the Ministry's staff a few per cent more."
+      "explainer": "Judgment 84% (70-95%): Imagine pays for the tablets, solar power, training and coordination, but government teachers run the sessions in school time (90-175 minutes a week a class, Year 2 report p. 6), the Ministry's BEFIT unit manages the roll-out, and onebillion gives the software royalty-free (BEFIT overview p. 3) after developing it with other funding. About 10,000 teachers trained, giving perhaps a tenth of their time at Malawi's teacher pay, is a few per cent of the cost; onebillion's development and the Ministry's staff a few per cent more. Outside Malawi, partners pay part of the work (the USDA McGovern-Dole programme with Counterpart and Catholic Relief Services in Senegal and Burkina Faso, Rising Academy in Liberia and Ghana; Annual Report p. 12), about one per cent of the whole."
     },
     {
       "id": "attribution_share",
@@ -483,7 +537,7 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "Judgment 1 (0.85-1.2). Above 1: philanthropy matched 1:1 brought in $15.2 million of Global Partnership for Education money for Malawi (Annual Report p. 9), and the government commits to pay running costs later. Below 1: that money would otherwise fund other education in Malawi, and some of Imagine's funders might have funded the same roll-out anyway. No net direction is evident."
+      "explainer": "Judgment 1 (0.85-1.2). Above 1: philanthropy matched 1:1 brought in $15.2 million of Global Partnership for Education money for Malawi (Annual Report p. 9), and the government commits to pay running costs later. Below 1: that money would otherwise fund other education in Malawi. No net direction is evident."
     },
     {
       "id": "mw_implementation_adj",
@@ -517,7 +571,7 @@
       "label": "Malawi: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "1",
-      "explainer": "1, measured: Imagine's own count of the children in BEFIT schools meets effects from its own randomised trials of the same software, in Chichewa, in Malawian government schools during the school day."
+      "explainer": "1, measured: Imagine's own count of the children in BEFIT schools meets effects from its own randomised trials of the same software in government schools: the combined-software trial in Tanzania gives the effect, and its trials in Chichewa in Malawian government schools during the school day, BEFIT's own setting, bound it."
     },
     {
       "id": "oth_missing_data_adj",
@@ -525,7 +579,7 @@
       "label": "Other countries: counted less where the outcome isn't measured",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "The shared missing-data step: in Sierra Leone, Liberia, Ghana, Senegal and Burkina Faso no controlled trial measures the programme as delivered there (English or French software, partners' delivery); the effect is the Tanzanian trial's."
+      "explainer": "The shared missing-data step: in Sierra Leone, Liberia, Ghana, Senegal and Burkina Faso (94% of these children) no controlled trial measures the programme as delivered there (English or French software, partners' delivery); the effect is the Tanzanian trial's. Dzaleka camp (3,653) had a trial, but of an English maths-only version that found almost no effect, unlike the programme now run there by refugee-led partners; Tanzania's 650 are in schools handed to local control. Both stay in this branch, too few to split out."
     },
     {
       "id": "mw_total_adj",
