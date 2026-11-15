@@ -3,7 +3,21 @@
   "name": "HIAS: programmes for refugees abroad",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"TCD":0.4,"KEN":0.05,"COL":0.16,"ECU":0.12,"PAN":0.05,"MEX":0.03,"VEN":0.03,"CRI":0.02,"UKR":0.06,"MDA":0.02,"ISR":0.02,"GRC":0.02,"AUT":0.02},
+  "beneficiaries": {
+    "TCD": 0.4,
+    "KEN": 0.05,
+    "COL": 0.16,
+    "ECU": 0.12,
+    "PAN": 0.05,
+    "MEX": 0.03,
+    "VEN": 0.03,
+    "CRI": 0.02,
+    "UKR": 0.06,
+    "MDA": 0.02,
+    "ISR": 0.02,
+    "GRC": 0.02,
+    "AUT": 0.02
+  },
   "beneficiaries_note": "Our build: HIAS's country programmes weighted by our judgment of where the spending and the result go, as HIAS publishes no spending by country: Chad (257,700 served, many through cheap camp-wide services, and most of the cash), then Colombia, Ecuador and Panama (36,700, about 21,000 and 23,000 served, with more cash per person and the legal work), Ukraine and Moldova (32,300), Costa Rica, Mexico, Venezuela, Kenya, Israel, Greece and the Resettlement Support Center in Austria (Form 990 Schedule O).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
@@ -295,7 +309,7 @@
       "section": "effect",
       "label": "Consumption per person, Kenya (2024 US dollars)",
       "format": "usd",
-      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.ken_real_growth_survey_to_2024 * @survey_consumption.ken_consumption_price_level_2024",
+      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.ken_real_growth_survey_to_2024 - 1)) * @survey_consumption.ken_consumption_price_level_2024",
       "explainer": "The site's household-survey consumption per person in 2024 market US dollars (World Bank PIP mean, PPP dollars a day × 365, to 2024 prices and growth, × the price level), the same dollars as the aid delivered."
     },
     {
@@ -303,7 +317,7 @@
       "section": "effect",
       "label": "Consumption per person, Uganda (2024 US dollars)",
       "format": "usd",
-      "formula": "@survey_consumption.uga_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.uga_real_growth_survey_to_2024 * @survey_consumption.uga_consumption_price_level_2024",
+      "formula": "@survey_consumption.uga_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.uga_real_growth_survey_to_2024 - 1)) * @survey_consumption.uga_consumption_price_level_2024",
       "explainer": "The site's household-survey consumption per person in 2024 market US dollars (World Bank PIP mean, PPP dollars a day × 365, to 2024 prices and growth, × the price level), the same dollars as the aid delivered."
     },
     {
@@ -923,7 +937,7 @@
       "section": "effect",
       "label": "Consumption per person, Egypt (PPP dollars, 2024)",
       "format": "usd",
-      "formula": "@survey_consumption.egy_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.egy_real_growth_survey_to_2024",
+      "formula": "@survey_consumption.egy_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.egy_real_growth_survey_to_2024 - 1))",
       "explainer": "The site's household-survey consumption per person (World Bank PIP mean, 2021 PPP dollars a day, × 365, US prices to 2024, real growth to 2024), in purchasing-power dollars, so it compares directly with US consumption."
     },
     {

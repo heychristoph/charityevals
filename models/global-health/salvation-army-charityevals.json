@@ -3,7 +3,9 @@
   "name": "The Salvation Army USA: services in the US (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":1},
+  "beneficiaries": {
+    "USA": 1
+  },
   "beneficiaries_note": "Our build: the Salvation Army's services in the US (its overseas work has its own model).",
   "template": "domestic-services",
   "estimate_basis": "unit_cost",
@@ -94,8 +96,8 @@
       "section": "cost",
       "label": "US programme spending in fiscal 2025, net of the thrift stores' running costs and day-care fees",
       "format": "usd",
-      "explainer": "All four programme lines of the combined US accounts (corps community centres, rehabilitation, residential and institutional services, other social services), less what the Adult Rehabilitation Centers' thrift stores cost to run and less the day-care fees clients paid (their own money for a service valued below net of them), and less the overseas work paid through these accounts (the World Service Office and the territories' support for the international Salvation Army), which is modelled separately (salvation-army-charityevals-international) and weighted by its spending on the charity's page. The stores are a self-financing trading arm: their sales pay for their own staff, trucks and rent, and only their net contribution pays for the recovery programme. Counting their gross running costs as charitable spending would make every donated dollar look as if it bought less help than it does. Fiscal year 1 October 2024 to 30 September 2025, the latest with audited accounts and service statistics for the same period.",
-      "formula": "program_expenses - thrift_store_costs - netted_fees - overseas_spend"
+      "formula": "program_expenses - thrift_store_costs - netted_fees - overseas_spend - goods_handed_out",
+      "explainer": "All four programme lines of the combined US accounts (corps community centres, rehabilitation, residential and institutional services, other social services), less what the Adult Rehabilitation Centers' thrift stores cost to run and less the day-care fees clients paid (their own money for a service valued below net of them), less the donated goods handed out, and less the overseas work paid through these accounts (the World Service Office and the territories' support for the international Salvation Army), which is modelled separately (salvation-army-charityevals-international) and weighted by its spending on the charity's page. The stores are a self-financing trading arm: their sales pay for their own staff, trucks and rent, and only their net contribution pays for the recovery programme. Counting their gross running costs as charitable spending would make every donated dollar look as if it bought less help than it does. Fiscal year 1 October 2024 to 30 September 2025, the latest with audited accounts and service statistics for the same period."
     },
     {
       "id": "total_expenses",
@@ -170,11 +172,19 @@
       "explainer": "The rehabilitation line less the recovery programme. Corps-run thrift stores (in the corps line) are small next to the ARC stores and are left in."
     },
     {
+      "id": "goods_handed_out",
+      "section": "cost",
+      "label": "Donated goods handed out, fiscal 2025",
+      "format": "usd",
+      "formula": "@salvation_army.nonfinancial_contributions * @salvation_army.goods_handed_out_share",
+      "explainer": "The donated food, clothing, toys and household goods in the programme lines (the shared figures). They leave the cost and enter the credit share below (Convention 2)."
+    },
+    {
       "id": "overhead_ratio",
       "section": "cost",
       "label": "Overhead multiplier (total ÷ program expenses)",
       "format": "multiple",
-      "formula": "(total_expenses - thrift_store_costs - netted_fees) / (program_expenses - thrift_store_costs - netted_fees)",
+      "formula": "(total_expenses - thrift_store_costs - netted_fees - goods_handed_out) / (program_expenses - thrift_store_costs - netted_fees - goods_handed_out)",
       "explainer": "Management and fundraising spread over the programmes in proportion to their cost, as GiveWell and ACE do, with the thrift stores' running costs and day-care fees out of both totals (they are paid by the stores' sales and by the clients, not by donors)."
     },
     {
@@ -384,6 +394,22 @@
         "retrieved": "2026-11-03"
       },
       "explainer": "The goods the note says are recorded mainly in direct assistance, government food commodities included (the 'other' line, $12.2M, mostly vehicles sold, is left out). What is left of direct assistance is roughly the cash paid out for bills."
+    },
+    {
+      "id": "wt_inkind_food",
+      "section": "effect",
+      "label": "Western Territory: donated and government food, fiscal 2023",
+      "format": "usd",
+      "value": 115048000,
+      "kind": "observed",
+      "source": {
+        "title": "The Salvation Army USA, Western Territory and Affiliates, Combined Financial Statements, 2023 and 2022 (audited)",
+        "url": "https://docs.candid.org/edoc/10680020/document.pdf",
+        "page": "Note 7, Donations-in-kind",
+        "quote": "Food from public support 109,313 ... Food from government agencies 5,735",
+        "retrieved": "2026-11-03"
+      },
+      "explainer": "The food in the donated goods above."
     },
     {
       "id": "wt_share_of_households",
@@ -1593,12 +1619,20 @@
       "formula": "@united_states.volunteer_hour_value_2025"
     },
     {
+      "id": "goods_local_value",
+      "section": "adjustments",
+      "label": "Donated goods handed out, at US market value",
+      "format": "usd",
+      "formula": "goods_handed_out * (wt_inkind_food / wt_inkind_goods * @united_states.donated_food_retail_vs_fair_value + (1 - wt_inkind_food / wt_inkind_goods) * @united_states.donated_goods_value_vs_recorded)",
+      "explainer": "The goods at their recorded value, food at retail and the rest at market value (the shared ratios), in the Western Territory's food share."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "explainer": "The Salvation Army's spending already includes the government grants ($540M) and donated goods it uses, so only its volunteers' unpaid hours, at the US volunteer wage, are resources from outside its cost. Partner food banks' food arrives as recorded in-kind gifts and is in the cost.",
-      "formula": "cost_total / (cost_total + volunteers * volunteer_hours_each * volunteer_hour_value)"
+      "formula": "cost_total / (cost_total + goods_local_value + volunteers * volunteer_hours_each * volunteer_hour_value)",
+      "explainer": "Convention 2: the Salvation Army's own spending (government grants, $540M, included) over that plus the donated goods at market value and its volunteers' unpaid hours at the US volunteer wage."
     },
     {
       "id": "attribution_share",

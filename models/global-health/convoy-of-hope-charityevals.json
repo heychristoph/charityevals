@@ -3,7 +3,24 @@
   "name": "Convoy of Hope (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"USA":0.049,"GTM":0.0634,"SLV":0.0634,"HND":0.0634,"NIC":0.0634,"HTI":0.0634,"DOM":0.0634,"KEN":0.0634,"TZA":0.0634,"ETH":0.0634,"MWI":0.0634,"BFA":0.0634,"NER":0.0634,"NPL":0.0634,"PHL":0.0634,"MDA":0.0634},
+  "beneficiaries": {
+    "USA": 0.049,
+    "GTM": 0.0634,
+    "SLV": 0.0634,
+    "HND": 0.0634,
+    "NIC": 0.0634,
+    "HTI": 0.0634,
+    "DOM": 0.0634,
+    "KEN": 0.0634,
+    "TZA": 0.0634,
+    "ETH": 0.0634,
+    "MWI": 0.0634,
+    "BFA": 0.0634,
+    "NER": 0.0634,
+    "NPL": 0.0634,
+    "PHL": 0.0634,
+    "MDA": 0.0634
+  },
   "beneficiaries_note": "Our build, by each branch's share of the modelled outcome: the US 4.9% (partner resourcing's US goods, US disaster relief, community events and rural initiatives); the rest (children's feeding, agriculture, women's programmes, goods and medicines sent abroad, and the disasters abroad, most of them unnamed and in or near the programme countries) split equally over 15 programme countries named in Convoy's 2024 annual report or known feeding countries (a judgment: no country split is published).",
   "template": "humanitarian-relief",
   "estimate_basis": "unit_cost",
@@ -521,6 +538,14 @@
       "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices, as the site's other builds compute it."
     },
     {
+      "id": "cons_gtm",
+      "section": "effect",
+      "label": "Guatemala: survey consumption per person, 2024 US$",
+      "format": "usd",
+      "formula": "@survey_consumption.gtm_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.gtm_real_growth_survey_to_2024 * @survey_consumption.gtm_consumption_price_level_2024",
+      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices; an income survey, so carried forward by all of real growth."
+    },
+    {
       "id": "cons_hnd",
       "section": "effect",
       "label": "Honduras: survey consumption per person, 2024 US$",
@@ -533,24 +558,24 @@
       "section": "effect",
       "label": "Kenya: survey consumption per person, 2024 US$",
       "format": "usd",
-      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.ken_real_growth_survey_to_2024 * @survey_consumption.ken_consumption_price_level_2024",
-      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices, as the site's other builds compute it."
+      "formula": "@survey_consumption.ken_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.ken_real_growth_survey_to_2024 - 1)) * @survey_consumption.ken_consumption_price_level_2024",
+      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices; a consumption survey, so carried forward by 0.7 of real growth (@survey_consumption.pip_growth_passthrough_consumption)."
     },
     {
       "id": "cons_mwi",
       "section": "effect",
       "label": "Malawi: survey consumption per person, 2024 US$",
       "format": "usd",
-      "formula": "@survey_consumption.mwi_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.mwi_real_growth_survey_to_2024 * @survey_consumption.mwi_consumption_price_level_2024",
-      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices, as the site's other builds compute it."
+      "formula": "@survey_consumption.mwi_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.mwi_real_growth_survey_to_2024 - 1)) * @survey_consumption.mwi_consumption_price_level_2024",
+      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices; a consumption survey, so carried forward by 0.7 of real growth (@survey_consumption.pip_growth_passthrough_consumption)."
     },
     {
       "id": "cons_npl",
       "section": "effect",
       "label": "Nepal: survey consumption per person, 2024 US$",
       "format": "usd",
-      "formula": "@survey_consumption.npl_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.npl_real_growth_survey_to_2024 * @survey_consumption.npl_consumption_price_level_2024",
-      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices, as the site's other builds compute it."
+      "formula": "@survey_consumption.npl_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * (1 + @survey_consumption.pip_growth_passthrough_consumption * (@survey_consumption.npl_real_growth_survey_to_2024 - 1)) * @survey_consumption.npl_consumption_price_level_2024",
+      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices; a consumption survey, so carried forward by 0.7 of real growth (@survey_consumption.pip_growth_passthrough_consumption)."
     },
     {
       "id": "cons_phl",
@@ -561,12 +586,20 @@
       "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices, as the site's other builds compute it."
     },
     {
+      "id": "cons_slv",
+      "section": "effect",
+      "label": "El Salvador: survey consumption per person, 2024 US$",
+      "format": "usd",
+      "formula": "@survey_consumption.slv_survey_mean_2021ppp_day * 365 * @cpi.usa_2024 / @cpi.usa_2021 * @survey_consumption.slv_real_growth_survey_to_2024 * @survey_consumption.slv_consumption_price_level_2024",
+      "explainer": "The household-survey mean (World Bank PIP) in 2024 US$ at market prices; an income survey, so carried forward by all of real growth."
+    },
+    {
       "id": "abroad_consumption",
       "section": "effect",
       "label": "Programme countries abroad: survey consumption per person (stand-in mean)",
       "format": "usd",
-      "formula": "avg(cons_dom, cons_hnd, cons_ken, cons_mwi, cons_npl, cons_phl)",
-      "explainer": "Convoy works in 65 countries; its feeding and community-development countries span Central America and the Caribbean (Guatemala, El Salvador, Honduras, Haiti, the Dominican Republic), East and Southern Africa (Ethiopia, Tanzania, Kenya, Malawi), West Africa (Burkina Faso, Niger), Asia (Nepal, the Philippines) and Moldova. Stand-in: the equal mean of the six such countries with a full set of survey figures on the site (survey mean, growth since the survey, price level); Guatemala and El Salvador have survey means but no price level or growth there, and Convoy publishes no split of children by country."
+      "formula": "avg(cons_dom, cons_gtm, cons_hnd, cons_ken, cons_mwi, cons_npl, cons_phl, cons_slv)",
+      "explainer": "Convoy works in 65 countries; its feeding and community-development countries span Central America and the Caribbean (Guatemala, El Salvador, Honduras, Haiti, the Dominican Republic), East and Southern Africa (Ethiopia, Tanzania, Kenya, Malawi), West Africa (Burkina Faso, Niger), Asia (Nepal, the Philippines) and Moldova. Stand-in: the equal mean of the eight such countries with a full set of survey figures on the site (survey mean, growth since the survey, price level); Convoy publishes no split of children by country."
     },
     {
       "id": "abroad_recipient_share",
@@ -594,8 +627,8 @@
       "section": "effect",
       "label": "Price level of the programme countries against the US (market prices)",
       "format": "multiple",
-      "formula": "avg(@survey_consumption.dom_consumption_price_level_2024, @survey_consumption.hnd_consumption_price_level_2024, @survey_consumption.ken_consumption_price_level_2024, @survey_consumption.mwi_consumption_price_level_2024, @survey_consumption.npl_consumption_price_level_2024, @survey_consumption.phl_consumption_price_level_2024)",
-      "explainer": "The World Bank's ratio of each country's consumption prices to US prices, the same six countries: food and goods cost about a third as much at local market prices as in the US."
+      "formula": "avg(@survey_consumption.dom_consumption_price_level_2024, @survey_consumption.gtm_consumption_price_level_2024, @survey_consumption.hnd_consumption_price_level_2024, @survey_consumption.ken_consumption_price_level_2024, @survey_consumption.mwi_consumption_price_level_2024, @survey_consumption.npl_consumption_price_level_2024, @survey_consumption.phl_consumption_price_level_2024, @survey_consumption.slv_consumption_price_level_2024)",
+      "explainer": "The World Bank's ratio of each country's consumption prices to US prices, the same eight countries: goods cost about two fifths as much at local market prices as in the US (food more, the next rows)."
     },
     {
       "id": "us_baseline",
@@ -610,39 +643,24 @@
       "section": "effect",
       "label": "Donated food: US retail value per dollar of its recorded wholesale value",
       "format": "multiple",
-      "value": {
-        "low": 1.1,
-        "best": 1.25,
-        "high": 1.5
-      },
-      "kind": "judgment",
-      "explainer": "Convoy books donated food at the donors' wholesale fair value checked against a third-party website (note B); a household getting it saves what it would pay at retail. 1.25 (1.1-1.5), as Feeding America's model's retail-to-wholesale ratio for donated food."
+      "formula": "@united_states.donated_food_retail_vs_fair_value",
+      "explainer": "Convoy books donated food at the donors' wholesale fair value checked against a third-party website (note B); a household getting it saves the retail price (the shared ratio)."
     },
     {
       "id": "nonfood_us_price_ratio",
       "section": "effect",
       "label": "Donated clothing, household goods and supplies: US value per dollar of their recorded value",
       "format": "multiple",
-      "value": {
-        "low": 0.5,
-        "best": 0.85,
-        "high": 1.1
-      },
-      "kind": "judgment",
-      "explainer": "Corporate surplus clothing and household goods are booked at the donors' wholesale valuations, which can overstate what slow-moving stock would sell for. 0.85 (0.5-1.1); with the in-kind step below it gives 60% of the recorded value, World Vision US's domestic model's figure for the same kind of goods."
+      "formula": "@united_states.donated_goods_value_vs_recorded",
+      "explainer": "Corporate surplus clothing and household goods are booked at the donors' wholesale valuations, which can overstate what slow-moving stock would sell for (the shared ratio)."
     },
     {
       "id": "food_vs_overall_price_level",
       "section": "effect",
       "label": "Programme countries: food prices against all consumption prices (both relative to the US)",
       "format": "multiple",
-      "value": {
-        "low": 1.1,
-        "best": 1.4,
-        "high": 1.9
-      },
-      "kind": "judgment",
-      "explainer": "Food is traded, so in poorer countries its price level is closer to the US one than the overall consumption level, which cheap local services pull down (the Balassa-Samuelson pattern in the World Bank's International Comparison Program, where food and non-alcoholic beverages typically stand at about half to two thirds of US prices in low- and lower-middle-income countries against about a third to two fifths for all household consumption). The site has no food price-level fact; judgment 1.4 (1.1-1.9)."
+      "formula": "avg(@survey_consumption.dom_food_vs_consumption_price_level_2021, @survey_consumption.gtm_food_vs_consumption_price_level_2021, @survey_consumption.hnd_food_vs_consumption_price_level_2021, @survey_consumption.ken_food_vs_consumption_price_level_2021, @survey_consumption.mwi_food_vs_consumption_price_level_2021, @survey_consumption.npl_food_vs_consumption_price_level_2021, @survey_consumption.phl_food_vs_consumption_price_level_2021, @survey_consumption.slv_food_vs_consumption_price_level_2021)",
+      "explainer": "The World Bank's International Comparison Program (2021): food against all household consumption prices in each of the eight countries, relative to the same ratio in the US. Food is traded, so it costs closer to US prices than cheap local services."
     },
     {
       "id": "food_abroad_price_ratio",
@@ -1339,13 +1357,8 @@
       "section": "effect",
       "label": "Deaths averted by higher consumption, as a share of its value (poor households abroad)",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.2,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "More food and income in very poor households lowers child mortality a little (cash transfers in Kenya and elsewhere reduce infant deaths); the site's models of livelihoods and cash abroad add these deaths as a share of the consumption gain's value, moving with the value of a life. 20% (0-50%), as World Vision's livelihoods branch; applied to the school meals, the training and the goods sent abroad, not to a few days of disaster food."
+      "formula": "@aid_value.income_mortality_uov_ratio",
+      "explainer": "The shared figure (facts/aid_value.json), times your value of a life, for the school meals, the training and the goods sent abroad, not a few days of disaster food."
     },
     {
       "id": "wom_gain_ratio",
@@ -1577,8 +1590,8 @@
       "section": "adjustments",
       "label": "Training and rural initiatives: Convoy's share of the resources",
       "format": "percent",
-      "formula": "cd_cash * (1 - feed_cash_share) * overhead_ratio / ((cd_cash * (1 - feed_cash_share) * overhead_ratio + cd_gik * (1 - feed_gik_share) * food_us_price_ratio) * (1 + partner_resources_share))",
-      "explainer": "Convention 2 for the rest of community development: its own spending over that plus its donated goods (mostly the rural initiatives' food, at US prices) plus partners' and volunteers' resources."
+      "formula": "cd_cash * (1 - feed_cash_share) * overhead_ratio / ((cd_cash * (1 - feed_cash_share) * overhead_ratio + rur_lbs * @feeding_america.fair_value_per_lb_fy2025 * food_us_price_ratio + (cd_gik * (1 - feed_gik_share) - rur_lbs * @feeding_america.fair_value_per_lb_fy2025) * nonfood_abroad_price_ratio) * (1 + partner_resources_share))",
+      "explainer": "Convention 2 for the rest of community development: its own spending over that plus its other donated goods at local prices (the rural initiatives' food in the US, the agriculture and women's groups' supplies abroad) plus partners' and volunteers' resources."
     },
     {
       "id": "ev_goods_local_value",
@@ -1850,11 +1863,11 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.066,
-        "high": 0.2
+        "best": 0.06,
+        "high": 0.18
       },
       "kind": "judgment",
-      "explainer": "School meals raise enrolment and attendance and, less surely, learning and girls' schooling (Snilstveit et al. 2016, 3ie systematic review 24; Aurino et al. 2023 on Ghana's programme), beyond the food's value counted above. The feeding branch is about two thirds of the result; a tenth more there: +6.6% (0-20%).",
+      "explainer": "School meals raise enrolment and attendance and, less surely, learning and girls' schooling (Snilstveit et al. 2016, 3ie systematic review 24; Aurino et al. 2023 on Ghana's programme), beyond the food's value counted above. The feeding branch is about three fifths of the result; a tenth more there: +6% (0-18%).",
       "side_effect": "added"
     },
     {

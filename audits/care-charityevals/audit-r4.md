@@ -33,4 +33,6 @@ Unchanged from round 3: missing-data discount, `$uov_per_daly`, `livelihood_cons
 Findings by severity: high 0, medium 0, low 1.
 
 Verdict: pass
-Model-sha: 21dc6d44514011a7c9ad2fe2b96e4c69a71bbe69b90d6df34b38e16072fd35b0
+Model-sha: 8ad8ae48220a248235e3061dec8fb8f1070d7c856da92c431dd1951c9c6fb161
+
+Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.331 → 0.332.

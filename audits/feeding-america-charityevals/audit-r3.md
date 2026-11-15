@@ -23,7 +23,9 @@ Round 2 findings: all low or resolved; the round-2 low about `fuel_share` having
 None.
 
 Verdict: pass
-Model-sha: 6f3d1e7c57a8dbaf4742d4122513c46249dcf38e1507d0de17ec5922447f25ae
+Model-sha: 9b13174c8422c29f31a0666a138614b7292fc97fc417b0953a0220b7502fc9f9
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0183 → 0.0169.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (15 Nov 2026): the retail-to-wholesale ratio read from the shared fact; no value changed; 0.0169 → 0.0169.
