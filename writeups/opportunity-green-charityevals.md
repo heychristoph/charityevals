@@ -1,6 +1,6 @@
 ### Summary
 
-Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **<span data-figure="headline" data-model="opportunity-green-charityevals">−0.018</span> years of healthy life per $1,000**, slightly below zero. On the site's values, the shipping framework's emissions cuts are worth far less than the extra fuel costs ships would pay for them. The money a new IMO fund would send to climate-vulnerable countries almost, but not quite, makes up the difference.
+Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **<span data-figure="headline" data-model="opportunity-green-charityevals">−0.018</span> years of healthy life per $1,000**, below zero. On the site's values, the shipping framework's emissions cuts are worth far less than the extra fuel costs ships would pay for them. The money a new IMO fund would send to climate-vulnerable countries makes up only part of the difference, and even the sign of the result is uncertain.
 
 ### What the charity does
 
@@ -35,7 +35,7 @@ The next dollar is counted at 39% of the past average. Opportunity Green holds a
 
 ### What drives the result
 
-On the site's values, a tonne of CO₂ kept out of the air is worth far less than the $280 ships would pay to cut it, so the IMO framework's climate effect alone is a net cost. The money the fund would send to climate-vulnerable countries pulls the other way, and the two nearly cancel. So the sign of the result turns on a few figures: how much of the fund reaches those countries, what that aid does per dollar, the cost per tonne, and how poor the people who end up paying it are.
+On the site's values, a tonne of CO₂ kept out of the air is worth far less than the $280 ships would pay to cut it, so the IMO framework's climate effect alone is a net cost. The money the fund would send to climate-vulnerable countries pulls the other way and offsets part of the cost. The two are large and close, so the sign of the result turns on a few figures: how much of the fund reaches those countries, what that aid does per dollar, the cost per tonne, and how poor the people who end up paying it are.
 
 ### Biggest uncertainties
 
@@ -51,7 +51,7 @@ Any outcome of the pending EU Taxonomy case. The value of the advertising ruling
 
 ### How this model was checked
 
-A new build (November 2026), audited by independent reviewers. The first round found that the fund's money was valued too generously. It took a whole aid budget's value, which includes health aid, so the model now uses development aid's value. The money also missed the evidence step and any allowance for displacing other aid. The share of shipping costs borne in poorer countries was too low. With these fixes the result went from positive to slightly negative. The rounds are in audits/opportunity-green-charityevals/.
+A new build (November 2026), audited by independent reviewers. The first round found that the fund's money was valued too generously. It took a whole aid budget's value, which includes health aid, so the model now uses development aid's value. The money also missed the evidence step and any allowance for displacing other aid. The share of shipping costs borne in poorer countries was too low. With these fixes the result went from positive to slightly negative. The second round found that the displaced aid should be valued as donors' own aid, which made the result more negative. It also found that the result is unstable: it is the difference of two large, uncertain amounts. The rounds are in audits/opportunity-green-charityevals/.
 
 ### Sources
 
