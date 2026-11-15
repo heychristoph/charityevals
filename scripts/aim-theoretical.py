@@ -21,7 +21,7 @@ REMOVE = {
     "family-empowerment-media-aim": OTHER.format("GiveWell, family-empowerment-media-planning-radio-campaigns-with-fem-kano"),
     "fortify-health-aim": OTHER.format("GiveWell's Fortify Health models and HLI's fortify-health-hli"),
     "healthy-futures-aim": OTHER.format("GiveWell, healthy-futures-phl-based-on-updated-23-feb-2026"),
-    "lead-exposure-elimination-project-aim": OTHER.format(""),
+    "lead-exposure-elimination-project-aim": OTHER.format("charityevals, lead-exposure-elimination-project-charityevals"),
     "notify-health-aim": OTHER.format("GiveWell, notify-health-sms-feb-2025"),
     "spiro-aim": OTHER.format("GiveWell, spiro-community-based-tb-hcm-april-2025"),
     "shrimp-welfare-project-aim": "the Shrimp Welfare Project never ran the modelled aeration subsidies (it works on stunning at slaughter and stocking density), and ACE's model of its actual work exists (shrimp-welfare-project)",

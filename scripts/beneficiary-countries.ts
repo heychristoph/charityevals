@@ -180,6 +180,7 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "effektiv-spenden-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
   "one-for-the-world-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
   "the-life-you-can-save-charityevals": { b: "destinations", note: "Moves money: each recipient its donors give to, read live, brings its own countries." },
+  "lead-exposure-elimination-project-charityevals": { b: { PAK: 0.4706, NGA: 0.1827, MWI: 0.0769, NER: 0.0533, MDG: 0.0487, ZAF: 0.0306, PER: 0.0263, GHA: 0.0229, BDI: 0.0224, COL: 0.0182, SEN: 0.0137, ZWE: 0.0128, SLE: 0.0126, LBR: 0.0083 }, note: "Our build: shares of the result at the defaults by country, each country's births times its branch's discounted years and its own delivery share (regulations 35%, Nigeria at half credit; market switches 65%, Pakistan at its measured 53%, Malawi 90%, the other five 20%)." },
   "longview-philanthropy-charityevals": { b: "destinations", note: "Moves money: each area its directed money goes to, read live, brings its own countries." },
   "founders-pledge-charityevals": { b: "destinations", note: "Moves money: each cause its members' and donors' money goes to, read live, brings its own countries." },
   "animal-charity-evaluators-charityevals": { b: "destinations", note: "Moves money: each animal charity it reaches, read live, brings its own countries." },
