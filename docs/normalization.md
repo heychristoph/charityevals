@@ -1351,8 +1351,10 @@ The `catastrophic-risk` build-cea family (AI, pandemics, nuclear war; .claude/sk
 values a charity's work as a cut in the yearly chance of catastrophes of three sizes, each from shared figures in
 facts/catastrophe.json. **Chances**: the Existential Risk Persuasion Tournament's medians by 2100 (Karger et al.
 2023), spread evenly over 2022-2100; the domain experts' figure is the best guess and the superforecasters' the low
-end, the rule the owner set for AI, whose extinction-level chance is the slider `$ai_catastrophe_chance` (Your
-values, 3%, 0.01-20%; catastrophes it survives × `ai_catastrophe_vs_extinction`). **Sizes**: extinction-level (all
+end, the rule the owner set for AI. Each area's extinction-level chance is a slider (Your values; owner, 15 November
+2026): `$ai_catastrophe_chance` (3%, 0.01-20%; catastrophes it survives × `ai_catastrophe_vs_extinction`),
+`$bio_catastrophe_chance` (1.01%) and `$nuclear_catastrophe_chance` (0.55%, both 0.01-3%; catastrophes the world
+survives are `<area>_catastrophe_by_2100` less the slider, at least 0). **Sizes**: extinction-level (all
 8.14 billion alive die and the future is lost); a catastrophe the world survives (over 10% die:
 `<area>_catastrophe_death_share`, nuclear 45% after Xia et al.'s famine estimates, pandemics 15%, AI 25%); smaller
 ones where a shared forecast exists (a COVID-scale pandemic, 2% a year). **The cut**: Rethink Priorities'

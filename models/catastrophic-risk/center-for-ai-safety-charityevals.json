@@ -379,7 +379,7 @@
       "section": "effect",
       "label": "Pandemics: yearly chance of a catastrophe that ends humanity's future",
       "format": "small",
-      "formula": "@catastrophe.bio_extinction_by_2100 / forecast_years",
+      "formula": "$bio_catastrophe_chance / forecast_years",
       "unit": "per year",
       "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament). Fixed; don't edit."
     },
@@ -388,7 +388,7 @@
       "section": "effect",
       "label": "Pandemics: yearly chance of a catastrophe the world survives (over 10% of people die)",
       "format": "small",
-      "formula": "(@catastrophe.bio_catastrophe_by_2100 - @catastrophe.bio_extinction_by_2100) / forecast_years",
+      "formula": "max(0, @catastrophe.bio_catastrophe_by_2100 - $bio_catastrophe_chance) / forecast_years",
       "unit": "per year",
       "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
     },
@@ -521,7 +521,7 @@
       "section": "effect",
       "label": "Nuclear war: yearly chance of a catastrophe that ends humanity's future",
       "format": "small",
-      "formula": "@catastrophe.nuclear_extinction_by_2100 / forecast_years",
+      "formula": "$nuclear_catastrophe_chance / forecast_years",
       "unit": "per year",
       "explainer": "The shared chance by 2100 spread over the forecasts' years (@catastrophe, from the Existential Risk Persuasion Tournament). Fixed; don't edit."
     },
@@ -530,7 +530,7 @@
       "section": "effect",
       "label": "Nuclear war: yearly chance of a catastrophe the world survives (over 10% of people die)",
       "format": "small",
-      "formula": "(@catastrophe.nuclear_catastrophe_by_2100 - @catastrophe.nuclear_extinction_by_2100) / forecast_years",
+      "formula": "max(0, @catastrophe.nuclear_catastrophe_by_2100 - $nuclear_catastrophe_chance) / forecast_years",
       "unit": "per year",
       "explainer": "The tournament's catastrophes (over 10% of the people alive die within five years) less the extinction-level ones, per year. Fixed; don't edit."
     },
