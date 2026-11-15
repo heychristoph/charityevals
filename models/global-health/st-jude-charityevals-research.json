@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "st-jude",
   "owner": "charityevals",
-  "summary": "St. Jude spends about $880 million a year on research into childhood cancer and other catastrophic childhood diseases, $720 million of it from its own funds; its cancer research is about a fifth of all childhood cancer research worldwide. For its fiscal year to June 2025 this model credits each of its two branches, cancer (about 70% of the research spending) and the other diseases (sickle cell disease, influenza and basic science, about 30%), with St. Jude's share of what a year of the field's research does to the world's burden of those diseases (the deaths in it valued by age at the site's value of a death, the illness as healthy years), anchored on published returns to medical research. The result, about 0.005 years of healthy life per $1,000, is low because research pays off only after a long lag, through uptake by others, and the field's progress is shared among all its funders. Both branches are discounted for missing data, since St. Jude's research has no outcome measure of its own; the result is mostly uncertainty, dominated by judgment (the chance a year's research yields an advance and the share of the burden it averts), and its plausible range spans about two-hundredfold (0.0004 to 0.07).",
+  "summary": "St. Jude spends about $880 million a year on research into childhood cancer and other catastrophic childhood diseases, $720 million of it from its own funds; its cancer research is about a fifth of all childhood cancer research worldwide. For its fiscal year to June 2025 this model credits each of its two branches, cancer (about 70% of the research spending) and the other diseases (sickle cell disease, influenza and basic science, about 30%), with St. Jude's share of what a year of the field's research does to the world's burden of those diseases (the deaths in it valued by age at the site's value of a death, the illness as healthy years), anchored on published returns to medical research. The result is about 0.002 years of healthy life per $1,000: research pays off only after a long lag, through uptake by others, and the field's progress is shared among all its funders. St. Jude's next dollar counts at 21% of its past average, since it holds about 3.7 years of spending in reserve. Both branches are discounted for missing data, since St. Jude's research has no outcome measure of its own; the result is mostly uncertainty, dominated by judgment (the chance a year's research yields an advance and the share of the burden it averts), and its plausible range spans about 140-fold (0.0002 to 0.03).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: St. Jude Children's Research Hospital, research (FY2025)",
@@ -241,6 +241,14 @@
       "explainer": "The hospital's three programmes: patient care, research and its education and training. With ALSAC's awareness content as fundraising the overhead multiplier is 1.61, against 1.42 at the accounts' own split."
     },
     {
+      "id": "hospital_indirect_uplift",
+      "section": "cost",
+      "label": "St. Jude's programme spending with its share of the hospital's administration, as a multiple of direct cost",
+      "format": "multiple",
+      "formula": "1 + hospital_admin_expenses / program_expenses",
+      "explainer": "About 1.08: the hospital's administration over its three programmes. The other funders' side of a credit share is at full cost (NIH and NCI awards include grantees' indirect costs; partner hospitals' costing studies include their overheads), so St. Jude's side is put on the same footing when it is compared with them (Convention 2). ALSAC's fundraising and administration stay out: they are the cost of raising the money, not resources behind the work."
+    },
+    {
       "id": "patient_service_revenue",
       "section": "cost",
       "label": "What insurers paid for patient care (net patient service revenue), FY2025",
@@ -371,20 +379,6 @@
       "explainer": "The burden St. Jude's cancer research addresses, worldwide, since its protocols and drugs travel; GBD 2023, the latest round (GBD 2017 gave 11.5 million, 82.2% of it in low, low-middle and middle Socio-demographic Index countries, where access, not knowledge, limits survival: ca_share_burden_addressable takes that into account). Nearly all of it is years of life lost to 144,000 deaths a year, valued below by age at the site's value of a death (ca_deaths_per_daly); the rest is illness (ca_yld_share). The study's 95% uncertainty interval is the range."
     },
     {
-      "id": "nc_scd_dalys_per_year",
-      "section": "reach",
-      "label": "Non-cancer branch: sickle cell disease, DALYs a year worldwide (for reading and weighting)",
-      "format": "integer",
-      "value": {
-        "low": 5000000.0,
-        "best": 11000000.0,
-        "high": 25000000.0
-      },
-      "kind": "judgment",
-      "explainer": "Context, for the reading averages only (not on the result's path). Judgment built from two GBD 2021 analyses, since the papers give no global DALY total. Thomson et al. (GBD 2021 Sickle Cell Disease Collaborators, Lancet Haematology 2023, https://doi.org/10.1016/s2352-3026(23)00118-7): 515,000 babies born with sickle cell disease a year and 376,000 deaths a year (303,000-467,000) once deaths sickle cell disease causes through infections and other conditions are counted, 34,400 assigned to it as the single underlying cause; 81,100 of them under five. Sahu et al. (Blood 2025, GBD 2021 DALYs, https://doi.org/10.1182/blood-2025-2601): Nigeria alone 'an estimated 2.1 million SCD-attributable DALYs' with about 100,000 of the births, a fifth of the world's, so about 11 million DALYs worldwide if the rest of the world carries it alike. 5 million if only part of the total-mortality burden counts (the cause-specific deaths alone would give about 2.5 million), 25 million at the high end of the total-mortality estimate with India's and the Americas' longer-lived patients. Read only to weight the branch's reading averages and its two diseases' shares: the outcome is built from the deaths (nc_scd_deaths_per_year, valued by age) and the illness (nc_scd_yld_per_year), since 376,000 deaths at their ages would by themselves carry more than 11 million years of life lost.",
-      "unit": "DALYs / year"
-    },
-    {
       "id": "nc_scd_deaths_per_year",
       "section": "reach",
       "label": "Non-cancer branch: deaths from sickle cell disease a year worldwide (total mortality)",
@@ -428,7 +422,7 @@
         "high": 3280725
       },
       "kind": "estimate",
-      "explainer": "St. Jude's influenza work (a WHO collaborating centre for the ecology of animal influenza, surveillance, vaccine and antiviral research) bears on influenza at every age; this branch counts the under-fives, the paediatric burden the hospital's mission names, so it is low if the work also cuts adult influenza deaths (about 85% of the GBD influenza death toll). 2021 was a low influenza year after the pandemic; the GBD interval is the range.",
+      "explainer": "St. Jude's influenza work (a WHO collaborating centre for the ecology of animal influenza, surveillance, vaccine and antiviral research) bears on influenza at every age; the under-fives are counted here and everyone older in nc_flu_deaths_over5_per_year. 2021 was a low influenza year after the pandemic; the GBD interval is the range.",
       "unit": "DALYs / year",
       "source": {
         "title": "Zhang et al., Global burden of influenza lower respiratory tract infections in children younger than 5 years from 1990 to 2021, Journal of Thoracic Disease 2026 (GBD 2021)",
@@ -455,12 +449,59 @@
       "explainer": ""
     },
     {
+      "id": "nc_flu_deaths_over5_per_year",
+      "section": "reach",
+      "label": "Non-cancer branch: deaths from influenza lower respiratory infections at five or older a year (before the pandemic)",
+      "format": "integer",
+      "value": {
+        "low": 75000,
+        "best": 121500,
+        "high": 177000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "GBD 2017 Influenza Collaborators, Mortality, morbidity, and hospitalisations due to influenza lower respiratory tract infections, 2017: an analysis for the Global Burden of Disease Study 2017, Lancet Respiratory Medicine 2019;7:69-89",
+        "url": "https://doi.org/10.1016/s2213-2600(18)30496-x",
+        "retrieved": "2026-11-15",
+        "page": "summary, findings; results",
+        "quote": "responsible for an estimated 145 000 (95% UI 99 000-200 000) deaths among all ages",
+        "note": "Less the under-fives: influenza's 2.9% (2.0-4.0) of the 808,920 lower respiratory infection deaths under five in 2017 (GBD 2017 Lower Respiratory Infections Collaborators, Lancet Infect Dis 2020;20:60-79, https://doi.org/10.1016/S1473-3099(19)30410-4), about 23,500; the range is the all-age interval less the same."
+      },
+      "explainer": "Everyone older than five, from a pre-pandemic GBD year (2017), since the 2021 figures are held down by the pandemic. St. Jude's influenza work (the WHO collaborating centre, surveillance, vaccine strain and antiviral research) serves every age, as the field's funding it is credited against (nc_field_research_funding) does. Valued by age (nc_flu_over5_value_per_death). Their years lived with disability aren't counted: GBD 2017 gives none for influenza, and for under-fives they are about 1% of the DALYs."
+    },
+    {
+      "id": "nc_flu_over5_share_under50_of_under70",
+      "section": "reach",
+      "label": "Non-cancer branch: share of influenza deaths at 5-69 that are under 50",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.35,
+        "high": 0.5
+      },
+      "kind": "judgment",
+      "explainer": "Judgment: GBD 2017 gives 71,000 of the 145,000 deaths at 70 or older (@death_ages.influenza_lri_share_70plus_of_over5_world) and no finer split; influenza death rates rise steeply with age after 50, while children and young adults die mostly in low-income countries with high under-50 mortality. 35% under 50 (valued at the 15-49 band), the rest at 50-69 (the 50-74 band)."
+    },
+    {
+      "id": "nc_flu_share_80plus_of_70plus",
+      "section": "reach",
+      "label": "Non-cancer branch: share of influenza deaths at 70 or older that are at 80 or older",
+      "format": "percent",
+      "value": {
+        "low": 0.42,
+        "best": 0.52,
+        "high": 0.62
+      },
+      "kind": "judgment",
+      "explainer": "Judgment: the world's population at 80 or older is about 0.4 times that at 70-79, and influenza death rates at 80 or older are about 2.5 to 3 times those at 70-79, so about as many deaths in each decade, a little more over 80: 52%. Each decade is valued at its middle five-year band (75-79 and 80-84) in nc_flu_over5_value_per_death."
+    },
+    {
       "id": "nc_disease_dalys_per_year",
       "section": "reach",
-      "label": "Non-cancer branch: burden of the diseases the targeted research addresses, DALYs a year",
+      "label": "Non-cancer branch: burden of the diseases the targeted research addresses, DALYs a year (for reading)",
       "format": "integer",
-      "formula": "nc_scd_dalys_per_year + nc_flu_dalys_per_year",
-      "explainer": "Sickle cell disease and children's influenza. HIV, neurological and immune disorders, which St. Jude also studies, have no burden counted here; their research enters through nc_other_research_ratio below.",
+      "formula": "(nc_scd_deaths_per_year + nc_flu_deaths_per_year + nc_flu_deaths_over5_per_year) * nc_value_per_death * dalys_from_uov / uov_bridged + nc_scd_yld_per_year + nc_flu_yld_per_year",
+      "explainer": "Sickle cell disease and influenza, built from what the outcome counts: the deaths at their value, through the bridge, and the illness. Read only to weight the reading averages. HIV, neurological and immune disorders, which St. Jude also studies, have no burden counted here; their research enters through nc_other_research_ratio below.",
       "unit": "DALYs / year"
     },
     {
@@ -828,8 +869,8 @@
       "section": "adjustments",
       "label": "Cancer branch: St. Jude's share of the field's funding",
       "format": "percent",
-      "formula": "ca_program_spend / ca_field_research_funding",
-      "explainer": "St. Jude's own cancer research ÷ all funders' childhood cancer research (Convention 2): about a fifth. The NIH grants St. Jude receives are counted in the field, not in St. Jude's share."
+      "formula": "ca_program_spend * hospital_indirect_uplift / (ca_field_research_funding + ca_program_spend * (hospital_indirect_uplift - 1))",
+      "explainer": "St. Jude's own cancer research ÷ all funders' childhood cancer research (Convention 2): about a fifth. St. Jude's side, in the numerator and in its part of the field, carries its share of the hospital's administration (hospital_indirect_uplift), since the other funders' awards include their grantees' indirect costs. The NIH grants St. Jude receives are counted in the field, not in St. Jude's share."
     },
     {
       "id": "ca_missing_data_adj",
@@ -946,15 +987,15 @@
         "high": 3000000000.0
       },
       "kind": "judgment",
-      "explainer": "Judgment built up from its parts: the US National Institutes of Health, by far the largest public funder of both, spends on the order of $100-150 million a year on sickle cell disease and several hundred million on influenza (NIH RePORT, research, condition and disease categories); drug companies' sickle cell gene therapies and drugs (Vertex and CRISPR Therapeutics, bluebird bio, Novartis, Pfizer) a few hundred million; influenza vaccine and antiviral development by industry several hundred million; the CDC, WHO, Gates Foundation, European and other public funders the rest. $1.5 billion; $0.8 billion if industry's influenza work is mostly adult and out of scope, $3 billion with it."
+      "explainer": "Judgment built up from its parts: the US National Institutes of Health, by far the largest public funder of both, spends on the order of $100-150 million a year on sickle cell disease and several hundred million on influenza (NIH RePORT, research, condition and disease categories); drug companies' sickle cell gene therapies and drugs (Vertex and CRISPR Therapeutics, bluebird bio, Novartis, Pfizer) a few hundred million; influenza vaccine and antiviral development by industry several hundred million; the CDC, WHO, Gates Foundation, European and other public funders the rest. All ages, as the burden it is set against (nc_flu_deaths_per_year and nc_flu_deaths_over5_per_year). $1.5 billion; $0.8 billion if most of industry's influenza spending is vaccine manufacturing and licensing rather than research, $3 billion if all of it is research."
     },
     {
       "id": "nc_attribution_share",
       "section": "adjustments",
       "label": "Non-cancer branch: St. Jude's share of the field's funding",
       "format": "percent",
-      "formula": "nc_program_spend * nc_targeted_share / nc_field_research_funding",
-      "explainer": "St. Jude's own sickle cell and influenza research ÷ all funders' (Convention 2): about 7%."
+      "formula": "nc_program_spend * nc_targeted_share * hospital_indirect_uplift / (nc_field_research_funding + nc_program_spend * nc_targeted_share * (hospital_indirect_uplift - 1))",
+      "explainer": "St. Jude's own sickle cell and influenza research ÷ all funders' (Convention 2): about 8%. St. Jude's side carries its share of the hospital's administration (hospital_indirect_uplift), as in the cancer branch."
     },
     {
       "id": "nc_missing_data_adj",
@@ -1147,11 +1188,20 @@
       "unit": "uov"
     },
     {
+      "id": "nc_flu_over5_value_per_death",
+      "section": "outcome",
+      "label": "Non-cancer branch: value of an influenza death at five or older averted",
+      "format": "number",
+      "formula": "((1 - @death_ages.influenza_lri_share_70plus_of_over5_world) * (nc_flu_over5_share_under50_of_under70 * @moral_weights.uov_per_death_age_15_49 + (1 - nc_flu_over5_share_under50_of_under70) * @moral_weights.uov_per_death_age_50_74) + @death_ages.influenza_lri_share_70plus_of_over5_world * ((1 - nc_flu_share_80plus_of_70plus) * @moral_weights.givewell_age_75_79 + nc_flu_share_80plus_of_70plus * @moral_weights.givewell_age_80_84)) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights for the ages of influenza deaths over five, times your multiplier on the value of a life: deaths at 70 or older (GBD 2017) at the 75-79 and 80-84 bands by decade, the rest at the 15-49 and 50-74 bands.",
+      "unit": "uov"
+    },
+    {
       "id": "nc_value_per_death",
       "section": "outcome",
       "label": "Non-cancer branch: value of a death averted",
       "format": "number",
-      "formula": "(nc_scd_deaths_per_year * nc_scd_value_per_death + nc_flu_deaths_per_year * nc_flu_value_per_death) / (nc_scd_deaths_per_year + nc_flu_deaths_per_year)",
+      "formula": "(nc_scd_deaths_per_year * nc_scd_value_per_death + nc_flu_deaths_per_year * nc_flu_value_per_death + nc_flu_deaths_over5_per_year * nc_flu_over5_value_per_death) / (nc_scd_deaths_per_year + nc_flu_deaths_per_year + nc_flu_deaths_over5_per_year)",
       "explainer": "Deaths-weighted.",
       "unit": "uov"
     },
@@ -1169,7 +1219,7 @@
       "section": "outcome",
       "label": "Non-cancer branch: deaths averted credited to St. Jude, in units of value",
       "format": "integer",
-      "formula": "nc_research_fraction * (nc_scd_deaths_per_year + nc_flu_deaths_per_year) * nc_value_per_death * nc_total_adj",
+      "formula": "nc_research_fraction * (nc_scd_deaths_per_year + nc_flu_deaths_per_year + nc_flu_deaths_over5_per_year) * nc_value_per_death * nc_total_adj",
       "explainer": "Into healthy years through the bridge (uov_bridged).",
       "unit": "uov"
     },

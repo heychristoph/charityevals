@@ -3,13 +3,13 @@
   "name": "St. Jude Children's Research Hospital: patient care, St. Jude Global, training and community programmes (charityevals)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"world":0.89,"USA":0.11},
-  "beneficiaries_note": "Our build: St. Jude Global's partner hospitals in more than 70 countries and the graduate school's research (89% of the result at the defaults, spread by world population: a judgment, the build names no split), and patient care, clinical training and community programmes in the US (11%).",
+  "beneficiaries": {"world":0.88,"USA":0.12},
+  "beneficiaries_note": "Our build: St. Jude Global's partner hospitals in more than 70 countries and the graduate school's research (88% of the result at the defaults, spread by world population: a judgment, the build names no split), and patient care, clinical training and community programmes in the US (12%).",
   "template": "direct-health",
   "estimate_basis": "unit_cost",
   "charity": "st-jude",
   "owner": "charityevals",
-  "summary": "St. Jude Children's Research Hospital in Memphis treats about 1,000 new patients a year with childhood cancer and other catastrophic diseases, free to families, supports children's cancer care at partner hospitals in more than 70 countries through St. Jude Global, and trains clinicians and scientists and runs community health programmes. For its fiscal year to June 2025 these come to about 0.004 years of healthy life per $1,000 (0.0004 to 0.04). St. Jude Global, 14% of the cost, brings nearly nine-tenths of the result: partner hospitals in middle-income countries save more children per improvement, but they and their governments carry most of the cost of treatment, so St. Jude's share of the credit is about a fifth, and the gain rests on before-and-after results at a few flagship sites. US care is lower still: about $1 million of St. Jude's own money per new patient buys a few points of survival over the other US centres these children would otherwise attend. Every branch (patient care, St. Jude Global, clinical training, the graduate school, community programmes) is discounted for missing data, since St. Jude publishes no controlled outcome for any of them; training and the community programmes are built from the research on training and on HPV vaccination promotion. The result is mostly uncertainty, above all whether St. Jude Global's support changes survival at partner hospitals at all.",
+  "summary": "St. Jude Children's Research Hospital in Memphis treats about 1,000 new patients a year with childhood cancer and other catastrophic diseases, free to families, supports children's cancer care at partner hospitals in more than 70 countries through St. Jude Global, and trains clinicians and scientists and runs community health programmes. For its fiscal year to June 2025 these come to about 0.004 years of healthy life per $1,000 (0.0005 to 0.03). St. Jude Global, 14% of the cost, brings nearly nine-tenths of the result: partner hospitals in middle-income countries save more children per improvement, but they and their governments carry most of the cost of treatment, so St. Jude's share of the credit is about a fifth, and the gain rests on before-and-after results at a few flagship sites. US care is lower still: about $1 million of St. Jude's own money per new patient buys a few points of survival over the other US centres these children would otherwise attend. Every branch (patient care, St. Jude Global, clinical training, the graduate school, community programmes) is discounted for missing data, since St. Jude publishes no controlled outcome for any of them; training and the community programmes are built from the research on training and on HPV vaccination promotion. The result is mostly uncertainty, above all whether St. Jude Global's support changes survival at partner hospitals at all.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: St. Jude Children's Research Hospital, patient care, St. Jude Global, training and community programmes (FY2025)",
@@ -191,7 +191,7 @@
         "page": "filing for the fiscal year ending June 2025, summary",
         "quote": "Expenses $1,897,571,834"
       },
-      "explainer": "The hospital alone, without ALSAC. Its programmes are patient care, research and education and training; its only other expense is its own administration. The FY2024 return checks the split: the hospital's $1,772.7 million were its three programmes ($823.2 million research, $695.6 million patient care, $113.6 million education and training) plus $140.2 million administration, the same figures as the combined accounts' hospital lines."
+      "explainer": "Context: the total hospital_et_expenses is derived from. The hospital alone, without ALSAC. Its programmes are patient care, research and education and training; its only other expense is its own administration. The FY2024 return checks the split: the hospital's $1,772.7 million were its three programmes ($823.2 million research, $695.6 million patient care, $113.6 million education and training) plus $140.2 million administration, the same figures as the combined accounts' hospital lines."
     },
     {
       "id": "patient_care_expenses",
@@ -223,7 +223,7 @@
         "page": "p. 4, combined statements of activities, expenses (in 000s)",
         "quote": "Research 883,216"
       },
-      "explainer": "Basic, translational and clinical research at the hospital."
+      "explainer": "Context: basic, translational and clinical research at the hospital, modelled in charityevals' model of St. Jude's research; here it is one of the lines hospital_et_expenses is derived from."
     },
     {
       "id": "hospital_admin_expenses",
@@ -253,9 +253,9 @@
         "url": "https://projects.propublica.org/nonprofits/organizations/620646012",
         "retrieved": "2026-11-03",
         "note": "The hospital's total expenses ($1,897,571,834) less patient care ($726,650,000), research ($883,216,000) and administration ($141,472,000) from the audited statements.",
-        "page": "Form 990 Part III, program service accomplishments (education and training); the subtracted figures from the audited statements"
+        "page": "filing for the fiscal year ending June 2025, summary (total expenses); the subtracted figures from the audited statements, pp. 4-5"
       },
-      "explainer": "What is left of the hospital's own spending after its two other programmes and its administration: $146.2 million, up from $113.6 million in FY2024 (Form 990 Part III, 'education and training: ... a global initiative (St. Jude Global)'). One reported figure, not drawn from its four parts: each is known to a few percent, but their difference would swing by more than its own size."
+      "explainer": "What is left of the hospital's own spending after its two other programmes and its administration: $146.2 million, up from $113.6 million in FY2024 (Form 990 Part III, 'education and training: ... a global initiative (St. Jude Global)'). Derived once from the 990's total and three audited lines, and typed so the simulation doesn't draw a remainder (docs/normalization.md 2.18): each part is known to a few percent, but their difference would swing by more than its own size."
     },
     {
       "id": "alsac_et_expenses",
@@ -272,6 +272,14 @@
       "format": "usd",
       "formula": "combined_program_expenses - alsac_et_expenses",
       "explainer": "The hospital's three programmes: patient care, research and its education and training. With ALSAC's awareness content as fundraising the overhead multiplier is 1.61, against 1.42 at the accounts' own split."
+    },
+    {
+      "id": "hospital_indirect_uplift",
+      "section": "cost",
+      "label": "St. Jude's programme spending with its share of the hospital's administration, as a multiple of direct cost",
+      "format": "multiple",
+      "formula": "1 + hospital_admin_expenses / program_expenses",
+      "explainer": "About 1.08: the hospital's administration over its three programmes. The other funders' side of a credit share is at full cost (NIH and NCI awards include grantees' indirect costs; partner hospitals' costing studies include their overheads), so St. Jude's side is put on the same footing when it is compared with them (Convention 2). ALSAC's fundraising and administration stay out: they are the cost of raising the money, not resources behind the work."
     },
     {
       "id": "patient_service_revenue",
@@ -496,10 +504,10 @@
       "value": {
         "low": 1.0,
         "best": 1.13,
-        "high": 1.35
+        "high": 1.5
       },
       "kind": "judgment",
-      "explainer": "Judgment. The pandemic held FY2020-21 down (national referrals fell from 21% to 15.6% of new patients with travel shut down, CHNA 2022 p. 10), and the FY22-27 strategic plan is expanding care: the hospital's Form 990 (FY2024, Schedule H) describes a $12.9 billion plan for 2,300 more jobs and two 15-storey towers for patient care and clinical research. The FY2025 accounts report more than 9,300 patients seen a year (note 1). 1.13 (13% more new patients than in FY2019-21); 1.0 if new patients didn't grow, 1.35 if the expansion added more new patients than follow-up visits."
+      "explainer": "Judgment. The pandemic held FY2020-21 down (national referrals fell from 21% to 15.6% of new patients with travel shut down, CHNA 2022 p. 10), and the FY22-27 strategic plan is expanding care: the hospital's Form 990 (FY2024, Schedule H) describes a $12.9 billion plan for 2,300 more jobs and two 15-storey towers for patient care and clinical research. Patients served rose from 'more than 6,400 patients in FY2021' (CHNA 2022, p. 7) to 'more than 9,300 patients' seen a year (FY2025 accounts, note 1), 45% in four years; the two counts may be defined differently (services provided against patients seen), and patients in follow-up and survivorship care accumulate faster than new patients. 1.13 (13% more new patients than in FY2019-21); 1.0 if new patients didn't grow, 1.5 if they grew as fast as all patients seen."
     },
     {
       "id": "us_new_patients",
@@ -520,7 +528,7 @@
         "title": "St. Jude Children's Research Hospital, Community Health Needs Assessment 2022",
         "url": "https://www.stjude.org/content/dam/en_US/shared/www/patient-support/sjcrh-chna-report-2022.pdf",
         "retrieved": "2026-11-03",
-        "page": "p. 10, key findings",
+        "page": "p. 3, key findings; p. 20, Figure 10",
         "quote": "The majority of new St. Jude patients in FY2019-FY2021 have a primary diagnosis of childhood cancer (61.3%)"
       },
       "explainer": "The rest: blood disorders (20.1%), sickle cell disease (6.0%), HIV (3.2%) and other catastrophic diseases. Among the cancers, brain and nervous system tumours are 32%, leukaemia 25%, lymphoma 9.5%."
@@ -739,7 +747,7 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Judgment. Survival from childhood cancer is about 20-30% in low-income countries ('an overwhelming 70 per cent death rate', UN News on the Global Platform's launch, https://news.un.org/feed/view/en/story/2025/02/1160036) and more than 80% in high-income ones; St. Jude's partners are mostly referral hospitals in middle-income countries, where 40-60% survive."
+      "explainer": "Judgment. Survival from childhood cancer is about 20-30% in low-income countries ('an overwhelming 70 per cent death rate', UN News on the Global Platform's launch, https://news.un.org/feed/view/en/story/2025/02/1160036) and more than 80% in high-income ones. Five-year net survival of diagnosed children in 2015-19 by region (Ward et al., Lancet Oncology 2019;20:972-83, https://doi.org/10.1016/S1470-2045(19)30273-6, Table 3 of the accepted manuscript): South America 60.2%, the Caribbean 55.0%, Central America 45.4%, Western Asia 56.7%, Eastern Asia 53.8%, South-Eastern Asia 28.8%, South-Central Asia 31.3%, Northern Africa 30.3%; upper-middle-income countries 55.5%, lower-middle-income 24.0%. St. Jude Global's partners are mostly in Latin America, the Middle East and Asia, roughly evenly between upper- and lower-middle-income countries (a judgment: the Alliance publishes no count by region), which gives about 40-45% surviving; they are mostly national referral hospitals, which do better than their country's average. 50% die (50% survive); 35% for upper-middle-income referral units (65% survive), 70% for lower-middle-income ones (30%)."
     },
     {
       "id": "gl_mortality_reduction",
@@ -1056,7 +1064,7 @@
         "high": 0.114
       },
       "kind": "estimate",
-      "explainer": "Read as percentage points: the review pools vaccination rates in the trial arms, and its abstract reports the gain in vaccination 'rates'; the full text (MDPI) wasn't reachable to confirm it is a risk difference, and a relative 5.2% would make this branch, under 0.1% of the result, smaller still. Six US randomised trials with 245,195 adolescents: 5.2 points on average, 2.3 for passive conversational techniques, 11.4 with presumptive communication and audit and feedback; the range. A broader review of US interventions found HPV vaccine initiation 1.84 times as likely (95% CI 1.36-2.48; Rodriguez et al., Am J Prev Med 2019, https://doi.org/10.1016/j.amepre.2018.10.033).",
+      "explainer": "A risk difference, 5.2 percentage points (95% CI 1.9-8.5; full text, https://pmc.ncbi.nlm.nih.gov/articles/PMC11209355/, section 3.2). Six US randomised trials with 245,195 adolescents: 5.2 points on average, 2.3 for passive conversational techniques, 11.4 with presumptive communication and audit and feedback; the range. A broader review of US interventions found HPV vaccine initiation 1.84 times as likely (95% CI 1.36-2.48; Rodriguez et al., Am J Prev Med 2019, https://doi.org/10.1016/j.amepre.2018.10.033).",
       "source": {
         "title": "Chandeying et al., Clinician Communication Training to Increase Human Papillomavirus Vaccination Uptake: A Systematic Review and Meta-Analysis, Vaccines 2024",
         "url": "https://doi.org/10.3390/vaccines12060611",
@@ -1120,7 +1128,8 @@
         "high": 0.87
       },
       "kind": "estimate",
-      "explainer": "Invasive cervical cancer in 926,362 Swedish girls and women followed up to 18 years, with no sign of waning; the 2020 analysis found 0.12 (Lei et al., NEJM 2020, https://doi.org/10.1056/nejmoa1917338). Applied to every HPV cancer, whose evidence for the other sites is from infection and lesions, not cancer; herd protection of others isn't counted. The interval is the range.",
+      "explainer": "Invasive cervical cancer in 926,362 Swedish girls and women followed up to 18 years, with no sign of waning; the 2020 analysis found 0.12 (Lei et al., NEJM 2020, https://doi.org/10.1056/nejmoa1917338). Applied to every HPV cancer, whose evidence for the other sites is from infection and lesions, not cancer; herd protection of others isn't counted. The 95% interval is the range.",
+      "interval": 0.95,
       "source": {
         "title": "Wu et al., Extended follow-up of invasive cervical cancer risk after quadrivalent HPV vaccination: nationwide, register based study, The BMJ 2026",
         "url": "https://doi.org/10.1136/bmj-2025-087326",
@@ -1149,12 +1158,51 @@
       "label": "Community branch: share of the deaths averted under 50",
       "format": "percent",
       "value": {
-        "low": 0.15,
-        "best": 0.3,
+        "low": 0.1,
+        "best": 0.18,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Judgment from SEER's US deaths by age, 2020-24: cervical cancer deaths (about half of the HPV cancer deaths) come younger, median age 60, with 18.5% under 45 and 19.5% at 45-54 (https://seer.cancer.gov/statfacts/html/cervix.html); oral cavity and pharynx cancer deaths, median 70, 2.3% under 45 and 7.2% at 45-54 (https://seer.cancer.gov/statfacts/html/oralcav.html); anal cancer between them. About 28% of cervical and 6% of the other deaths are under 50: 18%."
+    },
+    {
+      "id": "cm_share_75_plus",
+      "section": "effect",
+      "label": "Community branch: share of the deaths averted at 75 or older",
+      "format": "percent",
+      "value": {
+        "low": 0.18,
+        "best": 0.26,
+        "high": 0.35
+      },
+      "kind": "judgment",
+      "explainer": "Judgment from the same SEER figures: 18.5% of cervical cancer deaths are at 75 or older (12.4% at 75-84, 6.1% over 84) and 35.5% of oral cavity and pharynx cancer deaths (23.1%, 12.4%); about half each: 26%."
+    },
+    {
+      "id": "cm_share_85_plus_of_75_plus",
+      "section": "effect",
+      "label": "Community branch: share of the deaths at 75 or older that are over 84",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.34,
         "high": 0.45
       },
       "kind": "judgment",
-      "explainer": "Judgment: cervical cancer deaths come younger (median about 59) than throat and anal cancer deaths; deaths after 75 are valued at the 50-74 band."
+      "explainer": "Judgment from the same SEER figures: over 84, 6.1% of cervical and 12.4% of oral cavity and pharynx cancer deaths, against 18.5% and 35.5% at 75 or older; (6.1 + 12.4) ÷ (18.5 + 35.5) = 34%."
+    },
+    {
+      "id": "cm_share_80_84_of_75_84",
+      "section": "effect",
+      "label": "Community branch: share of the deaths at 75-84 that are at 80-84",
+      "format": "percent",
+      "value": {
+        "low": 0.4,
+        "best": 0.5,
+        "high": 0.6
+      },
+      "kind": "judgment",
+      "explainer": "Judgment: SEER gives 75-84 as one band; death rates from these cancers rise with age while the population at each age shrinks, so about even."
     },
     {
       "id": "cm_hpv_share_of_spend",
@@ -1449,7 +1497,7 @@
         "high": 1.0
       },
       "kind": "judgment",
-      "explainer": "Judgment. The survival gain comes from comparing trials run by different groups, not from randomising children between centres: St. Jude's trial patients may differ from the Children's Oncology Group's in risk and in who enrols. GiveWell's internal-validity adjustments for randomised trials run from 0.73 (syphilis treatment) to 0.95 (malaria trials) (@givewell_common.internal_validity_adjustment_*); a non-randomised comparison between study groups is well below them: 0.6, 1 if the 3-point gap is all St. Jude's care."
+      "explainer": "Judgment. The survival gain comes from comparing trials run by different groups, not from randomising children between centres: St. Jude's trial patients may differ from the Children's Oncology Group's in risk and in who enrols. GiveWell's internal-validity adjustments for randomised trials run from 0.73 (syphilis treatment) to 0.95 (malaria trials) (@givewell_common.internal_validity_adjustment_*); a non-randomised comparison between study groups is well below them. Reference class: concurrent non-randomised comparisons, whose bias runs either way and can be large enough to make a null effect look significant (Deeks et al., Health Technol Assess 2003;7(27), https://doi.org/10.3310/hta7270); trials against earlier patients, the weaker design, found benefit four times as often as randomised trials of the same therapies (Sacks, Chalmers and Smith, Am J Med 1982;72:233-40, https://doi.org/10.1016/0002-9343(82)90815-4). These trials ran in the same years, so the gap is not a time trend: 0.6, 0.3 if the groups' risk mix explains most of it, 1 if the 3-point gap is all St. Jude's care."
     },
     {
       "id": "us_counterfactual_adj",
@@ -1499,7 +1547,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Judgment on the validity of the before-and-after evidence itself: published series are the ones that went well (publication selection), and event-free survival counts relapse and abandonment, so deaths fell by less than events (allowed for in gl_mortality_reduction, as is the step from the flagship twinnings to the average partner). The background trend a before-and-after comparison can't separate is in gl_counterfactual_adj, so it isn't taken off here. 0.6, as the US branch's non-randomised comparison (internal_validity_adj); 0.3 if the published series are a best-case subset, 0.9 if not."
+      "explainer": "Judgment on the validity of the before-and-after evidence itself: published series are the ones that went well (publication selection), and event-free survival counts relapse and abandonment, so deaths fell by less than events (allowed for in gl_mortality_reduction, as is the step from the flagship twinnings to the average partner). The background trend a before-and-after comparison can't separate is in gl_counterfactual_adj, so it isn't taken off here. Reference class: trials against historical controls. Of 56 such trials of six therapies, 44 (79%) found the new therapy better, against 10 of 50 randomised trials (20%) of the same therapies, mostly because the historical controls did worse (Sacks, Chalmers and Smith, Am J Med 1982;72:233-40, https://doi.org/10.1016/0002-9343(82)90815-4). Non-randomised comparisons' bias runs either way and can be large enough to turn a null effect into a significant one (Deeks et al., Health Technol Assess 2003;7(27), https://doi.org/10.3310/hta7270). Together with the background trend (0.7) this keeps 0.42 of the published gain, inside that reference class, where most of a historically controlled gain doesn't survive randomisation but the largest ones (here abandonment of treatment falling from 16% to 0.5%) do. 0.6; 0.3 if the published series are a best-case subset, 0.9 if not."
     },
     {
       "id": "gl_counterfactual_adj",
@@ -1553,8 +1601,8 @@
       "section": "adjustments",
       "label": "Global branch: St. Jude's share of the resources behind the care at partner hospitals",
       "format": "percent",
-      "formula": "gl_program_spend / (gl_program_spend + gl_children_reached * (gl_local_cost_per_child + gl_other_partner_cost_per_child))",
-      "explainer": "St. Jude Global's spending ÷ its spending plus what governments, hospitals, local foundations, families and other international partners spend treating these children (Convention 2). Both sides at direct cost, as in the research model's shares of the field: St. Jude's fundraising and administration (the overhead) are in the cost, not resources behind the care. About 21% at the best guesses. That is far above St. Jude's share of a mature twinning unit's own budget, which Ribeiro (Cancer Control 2014) describes as falling to a few per cent, because St. Jude Global's spending also pays for what never enters a unit's budget: the Memphis-based faculty and staff who consult, train and adapt protocols, the Alliance's central programmes and registries, and the medicines the Global Platform supplies; the share is of all resources behind the children's care, not of the unit's budget."
+      "formula": "gl_program_spend * hospital_indirect_uplift / (gl_program_spend * hospital_indirect_uplift + gl_children_reached * (gl_local_cost_per_child + gl_other_partner_cost_per_child))",
+      "explainer": "St. Jude Global's spending ÷ its spending plus what governments, hospitals, local foundations, families and other international partners spend treating these children (Convention 2). Both sides at full cost, as in the research model's shares of the field: St. Jude's side with its share of the hospital's administration (hospital_indirect_uplift), as the partners' costing studies include their overheads; ALSAC's fundraising and administration are in the cost, not resources behind the care. About 22% at the best guesses. That is far above St. Jude's share of a mature twinning unit's own budget, which Ribeiro (Cancer Control 2014) describes as falling to a few per cent, because St. Jude Global's spending also pays for what never enters a unit's budget: the Memphis-based faculty and staff who consult, train and adapt protocols, the Alliance's central programmes and registries, and the medicines the Global Platform supplies; the share is of all resources behind the children's care, not of the unit's budget."
     },
     {
       "id": "gl_implementation_adj",
@@ -1575,7 +1623,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Judgment on the validity of the training-site studies: they adjust for patients and hospitals but not for which trainees go to which programmes, so part of a strong programme's better outcomes is its stronger recruits (selection). 0.6, as for the other non-randomised comparisons in this model (internal_validity_adj, gl_evidence_adj)."
+      "explainer": "Judgment on the validity of the training-site studies: they adjust for patients and hospitals but not for which trainees go to which programmes, so part of a strong programme's better outcomes is its stronger recruits (selection). Reference class: observational comparisons against randomised ones, whose bias runs either way and can be large (Deeks et al., Health Technol Assess 2003;7(27), https://doi.org/10.3310/hta7270). Concurrent and adjusted for patients, so closer to the US branch's comparison than to St. Jude Global's before-and-after series: 0.6, as internal_validity_adj; 0.3 if selection explains most of it, 0.9 if little."
     },
     {
       "id": "tr_counterfactual_adj",
@@ -2053,8 +2101,8 @@
       "section": "outcome",
       "label": "Community branch: value of a death averted",
       "format": "number",
-      "formula": "(cm_share_15_49 * @moral_weights.uov_per_death_age_15_49 + (1 - cm_share_15_49) * @moral_weights.uov_per_death_age_50_74) * $life_value_multiplier",
-      "explainer": "GiveWell's moral weights for the ages of HPV cancer deaths, times your multiplier on the value of a life.",
+      "formula": "(cm_share_15_49 * @moral_weights.uov_per_death_age_15_49 + (1 - cm_share_15_49 - cm_share_75_plus) * @moral_weights.uov_per_death_age_50_74 + cm_share_75_plus * ((1 - cm_share_85_plus_of_75_plus) * ((1 - cm_share_80_84_of_75_84) * @moral_weights.givewell_age_75_79 + cm_share_80_84_of_75_84 * @moral_weights.givewell_age_80_84) +cm_share_85_plus_of_75_plus * @moral_weights.givewell_age_85_plus)) * $life_value_multiplier",
+      "explainer": "GiveWell's moral weights for the ages of HPV cancer deaths, times your multiplier on the value of a life; deaths at 75 or older mix the five-year weights by SEER's ages at death (cm_share_75_plus).",
       "unit": "uov"
     },
     {
@@ -2165,8 +2213,8 @@
       "label": "Total units of value",
       "format": "number",
       "unit": "units of value",
-      "formula": "(us_deaths_averted * us_value_per_death + gl_deaths_averted * gl_value_per_death + uov_stillbirths + uov_income + uov_cash + uov_from_daly) * (1 + unmodelled_benefits_adj) + tr_deaths_averted * us_value_per_death + gs_deaths_averted * gs_value_per_death + cm_deaths_averted * cm_value_per_death + uov_morbidity",
-      "explainer": "Every branch's deaths, families' costs covered and the outcomes counted in DALYs through their bridge; the other effects (unmodelled_benefits_adj: care during treatment and partner hospitals' other care) apply to patient care and St. Jude Global only, which they concern."
+      "formula": "(us_deaths_averted * us_value_per_death + gl_deaths_averted * gl_value_per_death + uov_stillbirths + uov_income + uov_cash) * (1 + unmodelled_benefits_adj) + uov_from_daly + tr_deaths_averted * us_value_per_death + gs_deaths_averted * gs_value_per_death + cm_deaths_averted * cm_value_per_death + uov_morbidity",
+      "explainer": "Every branch's deaths, families' costs covered and the outcomes counted in DALYs through their bridge; the other effects (unmodelled_benefits_adj: care during treatment and partner hospitals' other care) apply to patient care's deaths and families' costs and St. Jude Global's deaths only, which they concern, not to the outcomes counted in DALYs."
     },
     {
       "id": "us_outcome",
