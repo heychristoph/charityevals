@@ -256,7 +256,7 @@ V_air         = Σ_band @death_ages.air_pollution_share_<band> × @moral_weights
 methane heat  = @climate.methane_heat_deaths_vs_co2 × (1 + $discount_rate) ^ -@climate.methane_heat_death_delay
 ozone factor  = 1 / (1 + ln(1 + $discount_rate) × @climate.methane_lifetime_years)
 healthy years = tonnes × [ $deaths_per_tco2e × $climate_heat_share × ((1 − methane_share) × heat factor + methane_share × methane heat)
-                             × (1 + @climate.nondeath_damages_vs_deaths) × V_heat
+                             × (1 + $side_effect_weight × @climate.nondeath_damages_vs_deaths) × V_heat
                          + ($deaths_per_tco2e × (1 − $climate_heat_share) × air_pollution_weight + extra_deaths_per_tco2e
                              + methane_share × @climate.ozone_deaths_per_tco2e_methane × ozone factor) × V_air ]
                 × $life_value_multiplier / $uov_per_daly     (= $daly_per_child_death / 116.25: no $uov_per_daly left)
@@ -296,8 +296,18 @@ evaluator counts deaths beside its tonnes). They are added per tonne at the air-
 tonnes' wait and credit steps, move with the value of a life and not with `$deaths_per_tco2e` (a waiver records that
 for INV-10). The row is taken per year brought forward, so it reads no shared value (INV-2b).
 
-**Judgments, labelled.** Damage that isn't death counts as 0 (`@climate.nondeath_damages_vs_deaths`, judgment,
-range to the social cost of carbon's 1.06), a visible factor on the heat part. A cost per tonne that is an
+**Damage beyond deaths (15 Nov 2026, owner).** Lost labour, crops, energy and coasts add 0.6 times the heat deaths'
+value (`@climate.nondeath_damages_vs_deaths`, 0.3–1.1): EPA's 2023 social cost of carbon split by impact category
+(Table 3.1.4), non-mortality over mortality in its two sectoral damage modules together, the range the two modules
+(DSCIM 0.30, GIVE after Rennert et al. 2022 1.11). A side effect (2.16): the conversion reads it as
+`1 + $side_effect_weight × ratio` on the heat part, the one place it enters (every tonne and every tco2e bridge copy
+alike); before, 0. Years per $1,000 at the defaults: ×1.6 for models without smoke (Carbon180 0.00012 → 0.00019,
+SilverLining 0.12 → 0.19, Woodland Trust 0.00089 → 0.0014), ×1.2–1.5 with it (Clean Air Task Force 0.0041 → 0.0062,
+Earthjustice 0.0017 → 0.0023, EDF's climate 0.0014 → 0.0020, Sierra Club Foundation 0.0058 → 0.0071, UCS's climate
+0.0014 → 0.0018, Evergreen 0.0026 → 0.0035, Project Drawdown 0.0020 → 0.0029), less for models where tonnes are a
+part (Good Food Institute ×1.07, TerraPraxis ×1.04).
+
+**Judgments, labelled.** A cost per tonne that is an
 organisation's past budget over its past wins is an average; a model built that way multiplies tonnes per dollar
 by the one shared next-dollar figure (2.10: since November 2026 each charity's own, in facts/next_dollar.json)
 (`published` 1). Woodland Trust (cost per tree delivered) doesn't take it.
@@ -354,8 +364,8 @@ Concentric Policies 17.4 → 14.7, ARMoR 9.1 → 8.1 (evaluator views unchanged)
   $90 is the same heat deaths valued at income-weighted, 2%-discounted prices (Rethink Priorities' re-run; a cross-check, no longer stored as a fact since no model reads it);
   Giving What We Can's 2016 estimate, 258,200 tonnes per life (a cross-check, no longer stored as a fact),
   about 50 times below our default because it leaves out air pollution.
-- What it leaves out: damage that isn't death (crops, income, migration), tipping points and growth
-  effects (Rethink's Model 2+ multiplies its whole-damages figure by 2.5 to 6). Air pollution per
+- What it leaves out: damage the social cost of carbon's sectors don't cover (migration, conflict, biodiversity),
+  tipping points and growth effects (Rethink's Model 2+ multiplies its whole-damages figure by 2.5 to 6). Air pollution per
   tonne differs by fuel and place; each model's `air_pollution_weight` carries that. Methane is valued by its own timing and ozone (Methane, above). At the slider's high end
   (a stand-in for all damage) the 23% heat share undercounts what tonnes with a low `air_pollution_weight` carry.
 - **The wait is discounted.** Most tonnes are avoided years after the grant (a policy that takes
@@ -1423,6 +1433,43 @@ side effects for the main chain (unchanged at the defaults). Each changed model 
 Owner: "negative is allowed". A model whose honest result is net harm keeps a headline below zero; the lint
 no longer rejects it. It ranks last, sits at the left edge of the log-scale bars with its number signed,
 and its simulation is stored in the result's order (5% the most harmful). First: Drug Policy Alliance.
+
+### 2.23 Public money: netted against what it costs its payers (15 Nov 2026)
+
+Owner decision 2026-11-15: public money that buys tonnes or funds climate work (tax credits such as 45Q and the
+Inflation Reduction Act's, DOE and other grants and loans, public procurement of removals, EU and UK public funds,
+donors' results-based payments, and a won fund's levies such as the IMO Net-Zero Framework's) counts as what it buys
+less what it costs those who pay for it, as money moved (2.8) and aid won (2.20) already do. **The recipe**, one row
+each per branch: the money a year (`<branch>_public_usd_per_year`, from a shared fact: the credit per tonne ×
+the tonnes, `climate.q45_credit_usd_per_tco2` $85 and `_dac` $180; the law's yearly cost
+`climate.ira_public_cost_usd_per_year`, $65 billion, less the home money valued as money to households,
+`climate.ira_household_cost_share`), × the value lost per dollar (`public_payer_uov_per_dollar`:
+`@public_funds.mcpf × $uov_per_ln_consumption / (payer multiple × the payers' consumption on the survey scale)`,
+2.14: US federal taxpayers at `@united_states.ce_expenditure_per_person_2024`, rich donors at
+`consumption_per_person_2024 × survey_to_na_gbr`, payers across the developing world at
+`survey_consumption.lmy_na_consumption_per_person_2024 × survey_to_na_world_median`), negative, over the branch's
+years, wait and adjustments (`<branch>_public_cost_uov`), into the tonnes through the uov bridge (2.6). Money paid per
+unit delivered (credits, procurement) takes every adjustment of the tonnes; a fixed sum (grants, appropriations)
+all but the evidence step; a levy the steps of the spending it pays for. Money landing as households' income counts as their gain on the survey scale
+(Rewiring America's rebates); money paid to firms buys the cut and nothing more. A levy is the price that drives
+the cut, so its payers carry no cost of raising public funds on top, and its resource cost stays the compliance row
+(2.21). The lint checks it (`public-money`): a model reading a public-money win's tonnes reads the money's fact, and
+every `*_public_cost_uov` row reads the cost of public funds on the log scale; the climate skeleton has the rows.
+At the defaults (years per $1,000, before → after this rule): Carbon180 0.00019 → −0.0030 (45Q, the direct air
+capture credit and hub grants, the removals the faster build brings at $150 a tonne of public money, the farm
+conservation and reforestation money), Union of Concerned Scientists' climate 0.0018 → −0.0015, Evergreen
+0.0035 → −0.0064, Environmental Defense Fund's climate 0.0020 → 0.0010 (the law's money), Clean Air Task Force
+0.0062 → 0.0035 (45Q, with the fix-ups below), Opportunity Green −0.11 → −0.44 (the Fund's levies, and its poorer
+payers on the shared survey scale, $2,100 for a typed $3,000), Coalition for Rainforest Nations −0.021 → −0.024
+(donors' results-based payments, governments' credit purchases, the finance goal's new money), SilverLining 0.195 →
+0.194 (NOAA's research line); Project Drawdown 0.0029 → −0.0008 through the climate charities it moves money to.
+Rewiring America already netted its money this way (unchanged). Fix-ups in the same pass: Clean Air Task Force's
+capture branch no longer cuts the shared 45Q tonnes a second time (its own evidence and delivered shares, as
+Carbon180's); every technology pathway is read at the middle of the years a win counts (families/climate.md; Clean
+Air Task Force's nuclear and fusion, TerraPraxis's tripling, as Carbon180 and Future Cleantech Architects did);
+nuclear's cost gap is over fossil power for the fossil share replaced and over wind and solar for the rest; the
+IEA/NEA cost gaps are held at their 3% or 7% figure outside that range; Industrious Labs' illness share leaves EPA's
+steel deaths, whose benefit figure includes illness (−0.0018, unchanged at two figures). TerraPraxis 0.0219 → 0.0149.
 
 ## 3. Invariants
 

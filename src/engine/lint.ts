@@ -22,6 +22,13 @@ function readsRef(m: ResolvedModel, row: string, ref: string): boolean {
   });
 }
 
+/** Shared tonnes of a win that public money buys, and the shared facts for that money (any one of them read
+ * counts: the household rebates are netted as money to households, docs/normalization.md 2.23). */
+export const PUBLIC_MONEY_WINS: Record<string, string[]> = {
+  "climate.ira_tco2e_per_year_2030": ["climate.ira_public_cost_usd_per_year", "climate.ira_home_electrification_rebates_usd"],
+  "climate.ira_45q_capture_tco2_per_year": ["climate.q45_credit_usd_per_tco2"],
+};
+
 const MARGINAL = "marginal_vs_past_average";
 const MISSING = "missing_data_discount";
 /** Models built before the missing-data rule of docs/normalization.md 2.12 (published before this date)
@@ -188,6 +195,17 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     if (![...near].some((d) => m.byId.get(d)?.side_effect))
       add("medium", "side-effect-tag", `${r.id} carries no side_effect tag, so the side-effects slider doesn't move it`, `Add "side_effect": "added" to ${r.id} (a share added to the result, read as 1 + x), or to the rows it sums.`, r.id);
   }
+  // Public money (docs/normalization.md 2.23): a model counting a public-money win's tonnes also counts what
+  // that money costs its payers, and every *_public_cost_uov row values it at the shared cost of public funds
+  // on the log scale.
+  for (const [tonnes, costs] of Object.entries(PUBLIC_MONEY_WINS)) {
+    const reader = m.rows.find((r) => r.factDeps.includes(tonnes));
+    if (reader && !m.rows.some((r) => costs.some((c) => r.factDeps.includes(c))))
+      add("high", "public-money", `${reader.id} counts the tonnes of @${tonnes} but no row counts the public money behind them`, `Net the money against its payers' loss (docs/normalization.md 2.23): a row reading @${costs[0]}, through a <branch>_public_cost_uov row and the uov bridge.`, reader.id);
+  }
+  for (const r of m.rows.filter((x) => /(^|_)public_cost_uov$/.test(x.id)))
+    for (const ref of ["@public_funds.mcpf", "$uov_per_ln_consumption"])
+      if (!readsRef(m, r.id, ref)) add("high", "public-money", `${r.id} doesn't read ${ref}`, `Value public money at what it costs its payers (docs/normalization.md 2.23): ${ref} through the payer row (public_payer_uov_per_dollar).`, r.id);
   const isInput = (id: string) => { const r = m.byId.get(id); return !!r && r.formula === undefined && r.value !== undefined; };
   for (const mk of m.rows.filter((r) => /(^|_)missing_data_adj$/.test(r.id))) {
     const f = squash(mk.formula ?? "");

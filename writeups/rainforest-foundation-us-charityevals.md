@@ -1,6 +1,6 @@
 ### Summary
 
-Rainforest Foundation US (RFUS) backs Indigenous peoples in Peru, Brazil, Guyana and Panama to secure and defend their forest. Our model of its 2025 spending comes to **<span data-figure="headline" data-model="rainforest-foundation-us-charityevals">0.012</span> years of healthy life per $1,000**.
+Rainforest Foundation US (RFUS) backs Indigenous peoples in Peru, Brazil, Guyana and Panama to secure and defend their forest. Our model of its 2025 spending comes to **<span data-figure="headline" data-model="rainforest-foundation-us-charityevals">0.013</span> years of healthy life per $1,000**.
 
 Most of that is not the forest's carbon:
 

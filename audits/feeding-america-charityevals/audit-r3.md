@@ -23,10 +23,11 @@ Round 2 findings: all low or resolved; the round-2 low about `fuel_share` having
 None.
 
 Verdict: pass
-Model-sha: ffa8e9c711702fce0cc46b4bee2cccd72c998c4b3ed335ed4793890d639d0d3c
+Model-sha: b1f75db1944c7c4e88391988f7fdd6ada567e4f6d20bff4e81f60453fb8c5727
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0183 → 0.0169.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (15 Nov 2026): the retail-to-wholesale ratio read from the shared fact; no value changed; 0.0169 → 0.0169.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed

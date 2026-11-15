@@ -1,6 +1,6 @@
 ### Summary
 
-The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about <span data-figure="headline" data-model="environmental-defense-fund-charityevals">0.0014</span> years of healthy life per $1,000 (about $320 a tonne of CO₂e), the health and nature work about <span data-figure="headline" data-model="environmental-defense-fund-charityevals-health-nature">0.0012</span>.
+The Environmental Defense Fund (EDF) is one of the largest US environmental groups ($319M of operating expenses in its year to September 2025). We model all of its programmes in two models: its climate and regional work (this model, 61% of programme spending with its share of core capacities) and its health and nature work (environmental-defense-fund-charityevals-health-nature, 39%). At the defaults the climate work gives about <span data-figure="headline" data-model="environmental-defense-fund-charityevals">0.0010</span> years of healthy life per $1,000 (about $560 a tonne of CO₂e, net of what the Inflation Reduction Act's public money costs taxpayers and the rules' compliance costs), the health and nature work about <span data-figure="headline" data-model="environmental-defense-fund-charityevals-health-nature">0.0012</span>.
 
 ### What the charity does
 
@@ -18,7 +18,7 @@ The health and nature model values EPA's deaths at the ages of rich-country hear
 
 ### What drives the result
 
-Climate: the two methane rules give about two thirds of the gross tonnes, the Inflation Reduction Act's tonnes about a quarter and the money it won for households under 1%; the repealed rules and MethaneSAT the rest, and the won rules' compliance costs take about a third off. Methane's tonnes count for their own, earlier warming and the ozone methane forms (the shared conversion), which is why methane rules dominate. Health and nature: the lead-pipe rule gives about 55%, the soot standard most of the rest.
+Climate: the two methane rules give about two thirds of the gross tonnes, the Inflation Reduction Act's tonnes about a quarter and the money it won for households under 1%; the repealed rules and MethaneSAT the rest; what the act's public money costs taxpayers takes about a third off and the won rules' compliance costs about a quarter. Methane's tonnes count for their own, earlier warming and the ozone methane forms (the shared conversion), which is why methane rules dominate. Health and nature: the lead-pipe rule gives about 55%, the soot standard most of the rest.
 
 ### Biggest uncertainties
 

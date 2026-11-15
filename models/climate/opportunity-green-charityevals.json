@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "opportunity-green",
   "owner": "charityevals",
-  "summary": "Opportunity Green (London and Brussels) uses law, policy and analysis to cut shipping and aviation emissions: it supports climate-vulnerable countries at the International Maritime Organization, runs the SASHA Coalition of clean-fuel companies and brings legal cases; this model counts its part in the two policies its work of June 2022 to March 2026 pressed most, both still pending (it spent £2.54M in the year to March 2026): the IMO's Net-Zero Framework for shipping, whose adoption was adjourned and is due for decision in December 2026, and the EU's proposal to extend emissions trading to more international flights. At the defaults the result is negative, −0.11 years of healthy life per $1,000: on the site's values the framework's tonnes are worth far less than ships' extra fuel costs (about $300 a tonne by the IMO's own impact assessment, about half of it borne in poorer importing countries), and the part of the IMO Fund's revenue that would go to climate-vulnerable countries as development aid makes up only part of the difference; even the sign is uncertain. The sign turns on how much of the Fund reaches those countries and what that aid does, the compliance cost per tonne and who bears it; Opportunity Green's share of the advocacy is small (about 3%), and both branches are discounted for missing data.",
+  "summary": "Opportunity Green (London and Brussels) uses law, policy and analysis to cut shipping and aviation emissions: it supports climate-vulnerable countries at the International Maritime Organization, runs the SASHA Coalition of clean-fuel companies and brings legal cases; this model counts its part in the two policies its work of June 2022 to March 2026 pressed most, both still pending (it spent £2.54M in the year to March 2026): the IMO's Net-Zero Framework for shipping, whose adoption was adjourned and is due for decision in December 2026, and the EU's proposal to extend emissions trading to more international flights. At the defaults the result is negative, −0.44 years of healthy life per $1,000: on the site's values the framework's tonnes are worth far less than ships' extra fuel costs (about $300 a tonne by the IMO's own impact assessment, about half of it borne in poorer importing countries), and the part of the IMO Fund's revenue that would go to climate-vulnerable countries as development aid makes up only part of the difference, less what the ships' payments into the Fund cost those who pay them; even the sign is uncertain. The sign turns on how much of the Fund reaches those countries and what that aid does, the compliance cost per tonne and who bears it; Opportunity Green's share of the advocacy is small (about 3%), and both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Opportunity Green",
@@ -274,7 +274,7 @@
         "page": "p. 2 (summary) and p. 5",
         "quote": "While the framework should be in a position to generate approx. revenues of $10 billion per year until 2035"
       },
-      "explainer": "Payments for remedial units by ships that miss the targets go to the IMO Net-Zero Fund: about $10 billion a year until 2035 (T&E, from the IMO's impact assessment). Range $6-14 billion: more ships may buy surplus units from others, or pay rather than switch fuels. These payments are transfers from shipping to the Fund, so they are not a compliance cost (docs/normalization.md 2.21)."
+      "explainer": "Payments for remedial units by ships that miss the targets go to the IMO Net-Zero Fund: about $10 billion a year until 2035 (T&E, from the IMO's impact assessment). Range $6-14 billion: more ships may buy surplus units from others, or pay rather than switch fuels. These payments are transfers from shipping to the Fund, so they are not a compliance cost (docs/normalization.md 2.21); what they cost the payers is netted against what the Fund buys (row imo_levy_payer_uov, 2.23)."
     },
     {
       "id": "imo_jet_share",
@@ -883,13 +883,8 @@
       "section": "adjustments",
       "label": "IMO branch: consumption per person of those payers in low- and middle-income countries (survey scale, US dollars)",
       "format": "usd",
-      "value": {
-        "low": 1500,
-        "best": 3000,
-        "high": 6000
-      },
-      "kind": "judgment",
-      "explainer": "Household consumption per person on the national accounts is about $2,900-3,000 in Egypt and the Philippines, $5,200 in Peru and $12,500 in Romania (facts: survey_consumption, 2024); China's is higher; surveys find less than the national accounts. Our judgment, $3,000 on the survey scale (1,500 to 6,000); the shared payer multiple (owners and buyers of traded goods are better off than average) applies on top."
+      "explainer": "Household consumption per person in low- and middle-income countries together by the national accounts (facts: survey_consumption.lmy_na_consumption_per_person_2024, $3,109 in 2024) × the median survey ratio (survey_to_na_world_median), on the survey scale like every payer (docs/normalization.md 2.14): about $2,100. The shared payer multiple (owners and buyers of traded goods are better off than average) applies on top.",
+      "formula": "@survey_consumption.lmy_na_consumption_per_person_2024 * @survey_consumption.survey_to_na_world_median"
     },
     {
       "id": "imo_payer_uov_per_dollar",
@@ -947,7 +942,16 @@
       "format": "number",
       "unit": "uov",
       "formula": "imo_fund_revenue_per_year * imo_jet_share * (@aid_value.development_vs_cash - imo_jet_displaced_share * @aid_value.oda_vs_cash) * @cash.uov_per_dollar * evidence_adj * imo_p_adopted * p_success * discounted_years * imo_attribution_share * imo_period_share * imo_revenue_delivered_adj * missing_data_adj",
-      "explainer": "Aid won is worth what that aid does (docs/normalization.md 2.20). The Fund's uses are of a known kind: the IMO lists infrastructure, research, technology transfer, training, capacity building and help for small island and least developed states, none of it health or relief, so a dollar of development aid of that kind (facts: aid_value.development_vs_cash, half of cash) times cash to the very poor (facts: cash.uov_per_dollar). Less the donors' own aid it replaces, valued as a dollar of a donor's aid budget (facts: aid_value.oda_vs_cash), since that is what the recipients lose; times the evidence adjustment, since the revenue and its split are the same ex-ante modelling as the tonnes; same years, wait, chance, credit and period share as the tonnes, and its own delivered share. The yearly figure is the first five years' and is held flat over the years a won reform counts (a judgment: T&E's fuel-rewards-first case has none left after 2031). The ships' payments are not netted against it: public money's cost to its payers waits for a site-wide rule (pending), so this gain is gross. The Fund's rewards for clean fuels buy tonnes already in the framework's projected cut and are not counted again."
+      "explainer": "Aid won is worth what that aid does (docs/normalization.md 2.20). The Fund's uses are of a known kind: the IMO lists infrastructure, research, technology transfer, training, capacity building and help for small island and least developed states, none of it health or relief, so a dollar of development aid of that kind (facts: aid_value.development_vs_cash, half of cash) times cash to the very poor (facts: cash.uov_per_dollar). Less the donors' own aid it replaces, valued as a dollar of a donor's aid budget (facts: aid_value.oda_vs_cash), since that is what the recipients lose; times the evidence adjustment, since the revenue and its split are the same ex-ante modelling as the tonnes; same years, wait, chance, credit and period share as the tonnes, and its own delivered share. The yearly figure is the first five years' and is held flat over the years a won reform counts (a judgment: T&E's fuel-rewards-first case has none left after 2031). The ships' payments into the Fund are netted in their own row (imo_levy_payer_uov). The Fund's rewards for clean fuels buy tonnes already in the framework's projected cut and are not counted again."
+    },
+    {
+      "id": "imo_levy_payer_uov",
+      "section": "adjustments",
+      "label": "IMO branch: what the payments into the Fund cost those who pay them, units of value (negative)",
+      "format": "number",
+      "formula": "-imo_fund_revenue_per_year * imo_payer_uov_per_dollar * evidence_adj * imo_p_adopted * p_success * discounted_years * imo_attribution_share * imo_period_share * imo_revenue_delivered_adj * missing_data_adj",
+      "explainer": "A won fund's levies are netted against what they cost their payers (docs/normalization.md 2.23): the whole revenue (the just transition's share and the fuel rewards alike), passed through freight rates to importers and their consumers and valued per dollar as the compliance cost is (row imo_payer_uov_per_dollar), with the same steps as the Fund's spending (imo_jet_uov). No cost of raising public funds on top: the levy is the price that drives the cut, whose resource cost is the compliance row.",
+      "unit": "units of value"
     },
     {
       "id": "uov_per_year",
@@ -955,7 +959,7 @@
       "label": "Money effects of the IMO branch, units of value per period year",
       "format": "number",
       "unit": "uov",
-      "formula": "(imo_compliance_uov + imo_jet_uov) / period_years",
+      "formula": "(imo_compliance_uov + imo_jet_uov + imo_levy_payer_uov) / period_years",
       "explainer": "The just-transition funding less the compliance costs, per year of the period, in the main chain."
     },
     {
@@ -964,7 +968,7 @@
       "label": "The IMO branch's money effects, in tonnes of CO₂e",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "formula": "uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "explainer": "Units of value into tonnes at what a tonne of these is worth on the site's scale (its heat and air-pollution deaths by age, as the conversion counts them), the bridge our other climate models use (docs/normalization.md 2.6)."
     },
     {

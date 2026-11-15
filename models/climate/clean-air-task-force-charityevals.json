@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "clean-air-task-force",
   "owner": "charityevals",
-  "summary": "Clean Air Task Force (Boston, with offices in Europe and Africa) advocates and does research for climate policy: methane rules, carbon capture, advanced nuclear and fusion energy, power plants and clean fuels; this model counts the six largest policies it worked on that were won in 2022-2025 (the EU Methane Regulation, EPA's oil and gas methane rule, the Inflation Reduction Act's carbon-capture credit, EPA's power-plant standards, the ADVANCE Act and fusion's regulatory framework) against its spending over those years ($42.96M in 2025). At the defaults a dollar given averts about 0.015 tonnes of CO₂e (about $68 a tonne); less the rules' compliance costs (EPA's and the Commission's own figures) and the extra cost of the nuclear power the wins bring forward (the shared IEA/NEA-based figure at the site's discount rate), 0.0041 years of healthy life per $1,000, nearly all of it from the two methane rules, whose tonnes count for methane's own, earlier warming and for the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (Clean Air Task Force is credited with 1% to 6% of each win), and the US rules have since been weakened or repealed. The biggest uncertainties are the shared discount rate and years a won reform counts, methane's ozone deaths per tonne, and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "Clean Air Task Force (Boston, with offices in Europe and Africa) advocates and does research for climate policy: methane rules, carbon capture, advanced nuclear and fusion energy, power plants and clean fuels; this model counts the six largest policies it worked on that were won in 2022-2025 (the EU Methane Regulation, EPA's oil and gas methane rule, the Inflation Reduction Act's carbon-capture credit, EPA's power-plant standards, the ADVANCE Act and fusion's regulatory framework) against its spending over those years ($42.96M in 2025). At the defaults a dollar given averts about 0.015 tonnes of CO₂e (about $68 a tonne); less the rules' compliance costs (EPA's and the Commission's own figures), the extra cost of the nuclear power the wins bring forward (the shared IEA/NEA-based figure at the site's discount rate) and what the carbon-capture credit's $85 a tonne costs taxpayers, 0.0035 years of healthy life per $1,000, nearly all of it from the two methane rules, whose tonnes count for methane's own, earlier warming and for the ozone it forms; it is low because each win is shared with many groups and with what governments would have done anyway (Clean Air Task Force is credited with 1% to 6% of each win), and the US rules have since been weakened or repealed. The biggest uncertainties are the shared discount rate and years a won reform counts, methane's ozone deaths per tonne, and how much of each win was advocacy's doing; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Clean Air Task Force",
@@ -404,11 +404,11 @@
     {
       "id": "nuc_tonnes_per_year",
       "section": "reach",
-      "label": "Advanced nuclear: tonnes of CO₂ a year the full pathway would avert at today's grid intensity",
+      "label": "Advanced nuclear: tonnes of CO₂ a year the full 2050 pathway would avert at today's grid intensity",
       "format": "integer",
       "formula": "nuc_gw_2050 * nuc_twh_per_gw_year * grid_tco2_per_mwh * 1e6",
       "unit": "t CO₂ / year",
-      "explainer": "200 GW × 7.97 TWh per GW-year × 0.366 tonnes per MWh (× 1e6 MWh per TWh): about 580 million tonnes a year once the pathway is built."
+      "explainer": "200 GW × 7.97 TWh per GW-year × 0.366 tonnes per MWh (× 1e6 MWh per TWh): about 580 million tonnes a year once the whole pathway is built. The branch counts the pathway at the middle of its years counted (nuc_pathway_counted_share); this full level weights the smoke rows, which read no shared value."
     },
     {
       "id": "fus_scale_vs_nuc",
@@ -421,7 +421,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Fusion line. If fusion works commercially, how much it would be built in its first decades, against DOE's 200 GW advanced-nuclear pathway as the yardstick for a new firm clean power source. Our judgment, half (0.1 to 1): fusion would start later and from a smaller supply chain; Clean Air Task Force's fusion work is international, which the yardstick doesn't count. Reference class: the advanced-nuclear pathway itself, a firm clean source starting about two decades earlier."
+      "explainer": "Fusion line. If fusion works commercially, how much it would be built in its first decades, against DOE's 200 GW advanced-nuclear pathway as the yardstick for a new firm clean power source. Our judgment, half (0.1 to 1): fusion would start later and from a smaller supply chain; Clean Air Task Force's fusion work is international, which the yardstick doesn't count. Reference class: the advanced-nuclear pathway itself, a firm clean source starting about two decades earlier. Read at the same stage of its build as nuclear's (nuc_pathway_counted_share), its later start being in its own wait."
     },
     {
       "id": "fus_tonnes_per_year",
@@ -543,6 +543,55 @@
       "unit": "years"
     },
     {
+      "id": "nuc_pathway_first_year",
+      "section": "effect",
+      "label": "Advanced nuclear: year DOE's pathway starts building",
+      "format": "integer",
+      "value": 2030,
+      "kind": "observed",
+      "unit": "year",
+      "source": {
+        "title": "US Department of Energy (2023), Pathways to Commercial Liftoff: Advanced Nuclear, explained in five charts",
+        "url": "https://www.energy.gov/ne/articles/commercializing-advanced-nuclear-reactors-explained-five-charts",
+        "quote": "if new nuclear deployment starts by 2030",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "DOE's commercial-liftoff pathway: deployment from about 2030, ramping to 200 GW by 2050 (row nuc_gw_2050)."
+    },
+    {
+      "id": "nuc_pathway_last_year",
+      "section": "effect",
+      "label": "Advanced nuclear: year DOE's pathway reaches 200 GW",
+      "format": "integer",
+      "value": 2050,
+      "kind": "observed",
+      "unit": "year",
+      "source": {
+        "title": "US Department of Energy (2023), Pathways to Commercial Liftoff: Advanced Nuclear, explained in five charts",
+        "url": "https://www.energy.gov/ne/articles/commercializing-advanced-nuclear-reactors-explained-five-charts",
+        "quote": "the U.S. could deploy an additional 200 GW by 2050",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The pathway's end point (row nuc_gw_2050)."
+    },
+    {
+      "id": "nuc_middle_year",
+      "section": "effect",
+      "label": "Advanced nuclear: middle year of the years the wins count",
+      "format": "number",
+      "formula": "(period_first_year + period_last_year) * 0.5 + nuc_years_until_avoided + years_of_impact * 0.5",
+      "explainer": "The period's middle year, the wait and half the years counted: the year at which the pathway is read (families/climate.md, technology acceleration).",
+      "unit": "year"
+    },
+    {
+      "id": "nuc_pathway_counted_share",
+      "section": "effect",
+      "label": "Advanced nuclear: share of the pathway's 2050 capacity built by that year",
+      "format": "percent",
+      "formula": "min(1, max(0, (nuc_middle_year - nuc_pathway_first_year) / (nuc_pathway_last_year - nuc_pathway_first_year)))",
+      "explainer": "The pathway read at the middle of the years counted, straight between its start (none built in 2030) and its 2050 level, and at most that level: the same reading as every technology pathway on the site. About 0.55 at the defaults (the early 2040s)."
+    },
+    {
       "id": "fus_p_commercial",
       "section": "effect",
       "label": "Fusion: chance it becomes a commercial power source by the 2050s",
@@ -637,7 +686,7 @@
       "section": "effect",
       "label": "Advanced nuclear: expected tonnes before adjustments",
       "format": "number",
-      "formula": "nuc_tonnes_per_year * nuc_deployment_share * nuc_policy_share * p_success * nuc_discounted_years",
+      "formula": "nuc_tonnes_per_year * nuc_pathway_counted_share * nuc_deployment_share * nuc_policy_share * p_success * nuc_discounted_years",
       "unit": "t CO₂"
     },
     {
@@ -645,7 +694,7 @@
       "section": "effect",
       "label": "Fusion: expected tonnes before adjustments",
       "format": "number",
-      "formula": "fus_tonnes_per_year * fus_p_commercial * fus_policy_share * p_success * fus_discounted_years",
+      "formula": "fus_tonnes_per_year * nuc_pathway_counted_share * fus_p_commercial * fus_policy_share * p_success * fus_discounted_years",
       "unit": "t CO₂"
     },
     {
@@ -668,7 +717,20 @@
         "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "The tonnes are ex-ante estimates by the regulators (EPA) and modellers (Oeko-Institut, DOE, the shared judgment on the capture credit), not measured cuts. Regulators' estimates of a rule's cuts are sometimes too high (compliance short of the rule) and sometimes too low (methane leaks larger than inventories say); 2022's capture projections ran far ahead of what was built. Our judgment, 0.8 (0.5 to 1.1), applied to every branch; delivery and repeal are in each branch's implementation row, not here."
+      "explainer": "The tonnes are ex-ante estimates by the regulators (EPA) and modellers (Oeko-Institut, DOE), not measured cuts. Regulators' estimates of a rule's cuts are sometimes too high (compliance short of the rule) and sometimes too low (methane leaks larger than inventories say). Our judgment, 0.8 (0.5 to 1.1), applied to every branch but the capture credit, whose shared tonnes already carry it (ccs_evidence_adj); delivery and repeal are in each branch's implementation row, not here."
+    },
+    {
+      "id": "ccs_evidence_adj",
+      "section": "adjustments",
+      "label": "Carbon-capture credit: evidence adjustment",
+      "format": "percent",
+      "value": {
+        "low": 0.85,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The shared tonnes (facts: climate.ira_45q_capture_tco2_per_year) are already a third of the 2022 projection, for the pipelines, wells and permits not built and the projections that ran ahead, so this branch takes no second cut for it. Our judgment, 1 (0.85 to 1), as in Carbon180's model for the same credit."
     },
     {
       "id": "eumr_counterfactual_adj",
@@ -835,12 +897,12 @@
       "label": "Carbon-capture credit: share of the win's tonnes delivered",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.85,
-        "high": 0.95
+        "low": 0.8,
+        "best": 0.95,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Share of the credit's tonnes delivered: the 2025 budget law kept 45Q (and gave stored and used carbon the same rate) while cutting most other clean-energy credits; projects still face permits for wells and pipelines. Our judgment, 85% (60% to 95%)."
+      "explainer": "Share of the credit's tonnes delivered: the 2025 budget law kept 45Q (and gave stored and used carbon the same rate) while cutting most other clean-energy credits. The slow building of wells and pipelines is already in the shared tonnes. Our judgment, 95% (80% to 100%), as in Carbon180's model for the same credit."
     },
     {
       "id": "nuc_counterfactual_adj",
@@ -970,7 +1032,7 @@
       "section": "adjustments",
       "label": "Carbon-capture credit: all adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * ccs_counterfactual_adj * ccs_attribution_share * ccs_implementation_adj * missing_data_adj"
+      "formula": "ccs_evidence_adj * ccs_counterfactual_adj * ccs_attribution_share * ccs_implementation_adj * missing_data_adj"
     },
     {
       "id": "nuc_total_adj",
@@ -1069,6 +1131,63 @@
       "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
     },
     {
+      "id": "us_power_twh_2023",
+      "section": "adjustments",
+      "label": "US utility-scale electricity generation, 2023 (TWh)",
+      "format": "integer",
+      "value": 4178,
+      "kind": "observed",
+      "unit": "TWh",
+      "source": {
+        "title": "US Energy Information Administration, FAQ: What is U.S. electricity generation by energy source? (2023)",
+        "url": "https://www.eia.gov/tools/faqs/faq.php?id=427&t=3",
+        "retrieved": "2026-11-15",
+        "quote": "about 4,178 billion kilowatthours"
+      },
+      "explainer": "All utility-scale generation: with the fossil row below, the share of today's power that is fossil."
+    },
+    {
+      "id": "us_fossil_power_twh_2023",
+      "section": "adjustments",
+      "label": "US fossil-fuel electricity generation, 2023 (TWh)",
+      "format": "integer",
+      "value": 2505,
+      "kind": "observed",
+      "unit": "TWh",
+      "source": {
+        "title": "US Energy Information Administration, FAQ: What is U.S. electricity generation by energy source? (2023)",
+        "url": "https://www.eia.gov/tools/faqs/faq.php?id=427&t=3",
+        "retrieved": "2026-11-15",
+        "quote": "Fossil fuels (total) 2,505 60.0%"
+      },
+      "explainer": "Coal, gas, oil and other fossil gases: 60% of US generation."
+    },
+    {
+      "id": "nuc_fossil_share",
+      "section": "adjustments",
+      "label": "Advanced nuclear: share of the power the new reactors replace that is fossil",
+      "format": "percent",
+      "formula": "min(1, nuc_counterfactual_adj * us_fossil_power_twh_2023 / us_power_twh_2023)",
+      "explainer": "The displaced power's CO₂ per MWh (today's average × nuc_counterfactual_adj) over fossil power's own (today's average × all generation ÷ fossil generation): the share of the replaced MWh that is fossil, the rest clean. About 42% at the best guesses."
+    },
+    {
+      "id": "pcge_rate_position",
+      "section": "adjustments",
+      "label": "Where the site's discount rate falls between the cost study's 3% and 7%",
+      "format": "percent",
+      "formula": "min(1, max(0, ($discount_rate - @climate.pcge_discount_rate_low) / (@climate.pcge_discount_rate_high - @climate.pcge_discount_rate_low)))",
+      "explainer": "0 at 3%, 1 at 7%, straight between, and held at the nearer end outside: the IEA/NEA study gives no costs beyond its two rates, so they aren't extrapolated."
+    },
+    {
+      "id": "nuc_premium_usd_per_mwh",
+      "section": "adjustments",
+      "label": "Advanced nuclear: extra cost of a MWh of the new reactors' power over what it replaces (2018 US$)",
+      "format": "number",
+      "formula": "nuc_fossil_share * (@climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct + (@climate.advanced_nuclear_premium_usd_per_mwh_usa_7pct - @climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct) * pcge_rate_position) + (1 - nuc_fossil_share) * (@climate.advanced_nuclear_clean_premium_usd_per_mwh_usa_3pct + (@climate.advanced_nuclear_clean_premium_usd_per_mwh_usa_7pct - @climate.advanced_nuclear_clean_premium_usd_per_mwh_usa_3pct) * pcge_rate_position - @climate.vre_system_cost_usd_per_mwh) + @climate.advanced_nuclear_premium_uncertainty_usd_per_mwh",
+      "explainer": "The shared US gaps (facts: climate, IEA/NEA levelised costs at the site's discount rate): over coal and gas for the fossil share of the power replaced, over new wind and solar less their system costs for the clean share, plus the shared uncertainty, as in TerraPraxis's model.",
+      "unit": "$ / MWh"
+    },
+    {
       "id": "eumr_compliance_uov",
       "section": "adjustments",
       "label": "EU Methane Regulation: compliance costs, units of value (negative)",
@@ -1101,17 +1220,44 @@
       "label": "Advanced nuclear: cost of the extra reactors' power over what it replaces, units of value (negative at the best guess)",
       "format": "number",
       "unit": "uov",
-      "formula": "-nuc_gw_2050 * nuc_twh_per_gw_year * 1e6 * nuc_deployment_share * nuc_policy_share * p_success * nuc_discounted_years * nuc_attribution_share * nuc_implementation_adj * missing_data_adj * (@climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct + (@climate.advanced_nuclear_premium_usd_per_mwh_usa_7pct - @climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct) * ($discount_rate - @climate.pcge_discount_rate_low) / (@climate.pcge_discount_rate_high - @climate.pcge_discount_rate_low) + @climate.advanced_nuclear_premium_uncertainty_usd_per_mwh) * @cpi.usa_2024 / @cpi.usa_2018 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
-      "explainer": "The reactors the period's wins bring forward cost their customers more per MWh than the fossil power they replace: the shared US gap (facts: climate.advanced_nuclear_premium_usd_per_mwh_usa_3pct and _7pct, from the IEA/NEA levelised costs in 2018 dollars, interpolated at the site's discount rate, plus the shared uncertainty), moved to 2024 dollars, times the branch's credited MWh a year (DOE's pathway × capacity factor × the built and policy shares × the advocacy share × Clean Air Task Force's share × delivered share), over the branch's discounted years, with the missing-data step; valued as money lost by US power customers (docs/normalization.md 2.21: the shared payer multiple × US consumption per person). Every MWh counts, since the deployment is what the wins add; not the evidence adjustment, which is about the tonnes, as for the rules' compliance costs."
+      "formula": "-nuc_gw_2050 * nuc_pathway_counted_share * nuc_twh_per_gw_year * 1e6 * nuc_deployment_share * nuc_policy_share * p_success * nuc_discounted_years * nuc_attribution_share * nuc_implementation_adj * missing_data_adj * nuc_premium_usd_per_mwh * @cpi.usa_2024 / @cpi.usa_2018 * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "explainer": "The reactors the period's wins bring forward cost their customers more per MWh than the power they replace (row nuc_premium_usd_per_mwh: over fossil power for the fossil share, over wind and solar for the rest), moved from 2018 to 2024 dollars, times the branch's credited MWh a year (DOE's pathway read at the middle of the years counted × capacity factor × the built and policy shares × the advocacy share × Clean Air Task Force's share × delivered share), over the branch's discounted years, with the missing-data step; valued as money lost by US power customers (docs/normalization.md 2.21: the shared payer multiple × US consumption per person). Not the evidence adjustment, which is about the tonnes, as for the rules' compliance costs."
+    },
+    {
+      "id": "public_payer_uov_per_dollar",
+      "section": "adjustments",
+      "label": "Value lost per dollar of US public money, units of value",
+      "format": "small",
+      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "explainer": "What a dollar of federal money costs those who pay for it (docs/normalization.md 2.23): the shared cost of raising it (facts: public_funds.mcpf) over federal taxpayers' consumption on the survey scale (the shared payer multiple × US consumption per person, 2.14), on the log scale.",
+      "unit": "units of value / $"
+    },
+    {
+      "id": "ccs_public_usd_per_year",
+      "section": "adjustments",
+      "label": "Carbon-capture credit: public money a year for the stored tonnes",
+      "format": "integer",
+      "formula": "ccs_tonnes_per_year * @climate.q45_credit_usd_per_tco2",
+      "explainer": "The credit the Treasury pays for each tonne stored (facts: climate.q45_credit_usd_per_tco2, $85) × the branch's tonnes.",
+      "unit": "$ / year"
+    },
+    {
+      "id": "ccs_public_cost_uov",
+      "section": "adjustments",
+      "label": "Carbon-capture credit: what that money costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-ccs_public_usd_per_year * public_payer_uov_per_dollar * p_success * discounted_years * ccs_total_adj",
+      "explainer": "Public money that buys tonnes is netted against its payers' loss (docs/normalization.md 2.23), over the branch's years, wait, advocacy share and every adjustment of its tonnes, since the credit is paid per tonne stored.",
+      "unit": "units of value"
     },
     {
       "id": "compliance_uov_per_year",
       "section": "adjustments",
-      "label": "Compliance costs of the won rules and the extra cost of nuclear power, units of value per year of the period",
+      "label": "Compliance costs of the won rules, the extra cost of nuclear power and the capture credit's cost to taxpayers, units of value per year of the period",
       "format": "number",
       "unit": "uov",
-      "formula": "(eumr_compliance_uov + usmeth_compliance_uov + pwr_compliance_uov + nuc_extra_power_cost_uov) / period_years",
-      "explainer": "The rules' compliance costs and the advanced nuclear branch's extra power cost summed, per year of the period, in the main chain (docs/normalization.md 2.21). The carbon-capture credit is public money, not a rule's compliance cost; fusion has no cost basis yet (no commercial plant has a published cost), so it has no row."
+      "formula": "(eumr_compliance_uov + usmeth_compliance_uov + pwr_compliance_uov + nuc_extra_power_cost_uov + ccs_public_cost_uov) / period_years",
+      "explainer": "The rules' compliance costs (docs/normalization.md 2.21), the advanced nuclear branch's extra power cost and the carbon-capture credit's public money (2.23) summed, per year of the period, in the main chain. Fusion has no cost basis yet (no commercial plant has a published cost), so it has no row."
     },
     {
       "id": "eumr_expected_tonnes",
@@ -1213,10 +1359,10 @@
     {
       "id": "tco2e_from_uov",
       "section": "bridges",
-      "label": "The won rules' compliance costs and nuclear power's extra cost, in tonnes of CO₂e (negative)",
+      "label": "The won rules' compliance costs, nuclear power's extra cost and the credit's public money, in tonnes of CO₂e (negative)",
       "format": "number",
       "unit": "t CO₂e / year",
-      "formula": "compliance_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "formula": "compliance_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
       "explainer": "Units of value into tonnes at what a tonne of these is worth on the site's scale (its heat and air-pollution deaths by age, as the conversion counts them), the bridge Environmental Defense Fund's model uses (docs/normalization.md 2.6)."
     },
     {

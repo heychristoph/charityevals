@@ -64,22 +64,24 @@
     },
     {
       "id": "nondeath_damages_vs_deaths",
-      "label": "Climate damage other than deaths, as a multiple of the heat deaths' value (not counted: 0)",
+      "label": "Climate damage other than deaths, as a multiple of the heat deaths' value",
       "unit": "multiple",
       "format": "number",
       "value": {
-        "low": 0,
-        "best": 0,
-        "high": 1.06
+        "low": 0.3,
+        "best": 0.6,
+        "high": 1.1
       },
-      "kind": "judgment",
+      "kind": "estimate",
       "source": {
-        "title": "Rennert et al. (2022), Comprehensive evidence implies a higher social cost of CO₂, Nature",
-        "url": "https://www.nature.com/articles/s41586-022-05224-9",
-        "note": "Of the $185 social cost of carbon, about $90 is heat deaths; the other $95 (crops, energy, sea level) is 1.06 times the deaths' value. The high end of the range is that ratio; the best guess stays 0, our judgment.",
-        "retrieved": "2026-10-31"
+        "title": "US EPA (2023), Report on the Social Cost of Greenhouse Gases: Estimates Incorporating Recent Scientific Advances, Table 3.1.4 (damage modules after Rennert et al. 2022, GIVE, and the Climate Impact Lab's DSCIM)",
+        "url": "https://www.epa.gov/environmental-economics/scghg",
+        "page": "p. 81, Table 3.1.4: Impact Category Disaggregation of Social Cost of Carbon (SC-CO2) for 2030 under a 2.0% Near-Term Ramsey Discount Rate",
+        "quote": "Health $179 $104 ... Total $233 $219 $238",
+        "note": "EPA's two sectoral damage modules split the social cost of carbon by impact category (2020 dollars per tonne, 2030 emissions, 2%). DSCIM: health (temperature mortality) $179 of $233, the other $54 (labour $47, agriculture $4, coastal $3, energy -$4) 0.30 times the deaths. GIVE (Rennert et al. 2022): health $104 of $219, the other $115 (agriculture $103, energy $10, coastal $2) 1.11 times. EPA's central estimate averages the modules; its meta-analysis module ($238) has no split, so the two sectoral modules' sums give the best guess: (54 + 115) / (179 + 104) = 0.60. Range: the two modules (0.30 to 1.11). Read from the report as filed in the oil and gas rule's docket (https://www.energy.gov/sites/default/files/2024-02/114.%20EPA%2C%20Final%20Report%20on%20the%20Social%20Cost%20of%20GHGs.pdf).",
+        "retrieved": "2026-11-15"
       },
-      "explainer": "Said openly, like the meta charities' long-run value: climate counts only the deaths a tonne causes. Lost crops, income, sea-level damage and tail risks are left at 0, a judgment, not a finding: no source turns them into healthy years on this site's scale. It multiplies the heat part of every tonne (1 + this), so changing it on a page moves every climate model alike. The range runs to the social cost of carbon's own ratio of other damage to death damage (1.06)."
+      "explainer": "Damage a tonne does besides the deaths it causes: lost labour and crops, energy, coasts. EPA's 2023 social cost of carbon puts it at 0.6 times the death damage (0.3 in one damage module, 1.1 in the other). Counted as a side effect: it multiplies the heat part of every tonne by 1 + this × the side-effects weight, in the climate unit's conversion, so every climate model moves alike."
     },
     {
       "id": "advocacy_share_of_policy_win",
@@ -226,6 +228,53 @@
         "retrieved": "2026-11-14"
       },
       "explainer": "The 2022 law raised the 45Q credit (to $85 a tonne stored, $180 for direct air capture) and lowered the size a plant must be; the 2025 budget law kept it. Princeton's REPEAT Project projected about 200 million tonnes a year captured and stored by 2030, 13 times what the earlier policy (the 2018 credit and the 2021 infrastructure law) would give: about 185 million tonnes a year due to the 2022 law. Our judgment, 60 million tonnes a year once built (20 to 185 million), a third of the projection: the projection assumed pipelines and storage permits built at the pace needed, and by mid-2025 US capture running was still about 20 million tonnes a year, about the level before the law, with over 130 million announced but not built (CSIS, 2025). The high end is REPEAT's own increment."
+    },
+    {
+      "id": "q45_credit_usd_per_tco2",
+      "label": "45Q credit per tonne of CO₂ captured and stored, plants other than direct air capture (US$)",
+      "unit": "$ / t CO₂",
+      "format": "number",
+      "value": 85,
+      "kind": "observed",
+      "source": {
+        "title": "26 U.S. Code § 45Q, Credit for carbon oxide sequestration (Legal Information Institute)",
+        "url": "https://www.law.cornell.edu/uscode/text/26/45Q",
+        "retrieved": "2026-11-15",
+        "quote": "for any taxable year beginning in a calendar year after 2024 and before 2027, $17",
+        "note": "The base amount × 5 for plants meeting the wage and apprenticeship rules (subsection (h)(1): 'multiplied by 5'): $85 a tonne stored; the 2025 budget law gave carbon used (enhanced oil recovery included) the same rate."
+      },
+      "explainer": "What the Treasury pays a capture plant for each tonne of CO₂ it stores, $85: the public money behind the credit's tonnes (climate.ira_45q_capture_tco2_per_year)."
+    },
+    {
+      "id": "q45_credit_usd_per_tco2_dac",
+      "label": "45Q credit per tonne of CO₂ removed from the air and stored (direct air capture, US$)",
+      "unit": "$ / t CO₂",
+      "format": "number",
+      "value": 180,
+      "kind": "observed",
+      "source": {
+        "title": "26 U.S. Code § 45Q, Credit for carbon oxide sequestration (Legal Information Institute)",
+        "url": "https://www.law.cornell.edu/uscode/text/26/45Q",
+        "retrieved": "2026-11-15",
+        "quote": "substituting “$36” for “$17” each place it appears",
+        "note": "Direct air capture plants placed in service after 2022: $36 × 5 (subsection (h)(1)) = $180 a tonne stored."
+      },
+      "explainer": "What the Treasury pays a direct air capture plant for each tonne it stores, $180."
+    },
+    {
+      "id": "q45_credit_years",
+      "label": "Years a capture plant can claim the 45Q credit",
+      "unit": "years",
+      "format": "integer",
+      "value": 12,
+      "kind": "observed",
+      "source": {
+        "title": "26 U.S. Code § 45Q, Credit for carbon oxide sequestration (Legal Information Institute)",
+        "url": "https://www.law.cornell.edu/uscode/text/26/45Q",
+        "retrieved": "2026-11-15",
+        "quote": "during the 12-year period beginning on the date the equipment was originally placed in service"
+      },
+      "explainer": "The credit runs for 12 years from the plant's start; a one-off grant to the same plants is spread over these years."
     },
     {
       "id": "ozone_deaths_per_tco2e_methane",
@@ -663,6 +712,44 @@
         "retrieved": "2026-11-14"
       },
       "explainer": "The whole law's projected cut in 2030 against the policies in force before it: clean-power, vehicle, efficiency, carbon-capture and methane provisions together. Best guess 900 million tonnes a year (600 million to 1.1 billion), the middle of REPEAT's, Energy Innovation's and Rhodium Group's projections. The 2025 budget law cut much of it back; each model's delivered share says how much survives, and a model counting only part of the law (the carbon-capture credit, climate.ira_45q_capture_tco2_per_year) subtracts that part."
+    },
+    {
+      "id": "ira_public_cost_usd_per_year",
+      "label": "Public money the Inflation Reduction Act's energy and climate provisions spend a year, early 2030s (US$)",
+      "unit": "$ / year",
+      "format": "integer",
+      "value": {
+        "low": 40000000000,
+        "best": 65000000000,
+        "high": 120000000000
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Committee for a Responsible Federal Budget (6 July 2023), IRA Energy Provisions Could Cost Two-Thirds More Than Originally Estimated",
+        "url": "https://www.crfb.org/blogs/ira-energy-provisions-could-cost-two-thirds-more-originally-estimated",
+        "quote": "have risen by about two-thirds, to $660 billion through 2031 and to $790 billion through 2033",
+        "note": "From the Joint Committee on Taxation's and CBO's later scores: $790 billion through 2033 less $660 billion through 2031 is $130 billion for 2032-2033, about $65 billion a year around the years the law's tonnes are counted (climate.ira_tco2e_per_year_2030). Low end: the scorekeepers' original $400 billion through 2031, about $40 billion a year; high end: outside estimates of the credits (Cato Institute, 2024: $70-180 billion a year for the clean-electricity credits 45Y and 48E alone near the end of the decade, https://www.cato.org/policy-analysis/budgetary-cost-inflation-reduction-acts-energy-subsidies). The 2025 budget law's repeals are not in these figures: each model's delivered share (climate.ira_delivered_share) cuts the money with the tonnes.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "What the law's credits, grants and loans for energy and climate cost the Treasury a year, about $65 billion ($40 to $120 billion). Its tonnes come with this money; every model that counts the law's tonnes also counts what the money costs its payers (docs/normalization.md 2.23)."
+    },
+    {
+      "id": "ira_household_cost_share",
+      "label": "Share of the Inflation Reduction Act's climate money paid to households as home rebates and credits",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.08,
+        "best": 0.15,
+        "high": 0.25
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "charityevals' judgment from the shared home-credit and rebate figures (facts: climate.ira_home_*)",
+        "note": "The home-credit increments, about $8.4 billion a year (climate.ira_home_credits_increment_2024_2025_usd_per_year), and the $8.8 billion of home rebates spread over their years, against about $65 billion a year (climate.ira_public_cost_usd_per_year): about 15%. The electric-vehicle credits to buyers and the low-income solar money widen the range up; slower rebates narrow it down.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The part of the law's money that reaches households as home rebates and credits: models value it as money to those households less what it costs the payers, in their own rows, so the payers' cost of the rest of the money leaves this share out."
     },
     {
       "id": "us_light_medium_vehicle_rule_2024_counterfactual",

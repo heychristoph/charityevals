@@ -1,6 +1,6 @@
 ### Summary
 
-SilverLining funds and coordinates research on solar radiation modification: cooling the planet by reflecting a little sunlight, for example with fine particles high in the atmosphere. It also works with governments and others on how the idea is researched and governed. Our model values what it added to that field in 2019-2024 by what the field's work could be worth: a better-designed use of cooling, if there is one. Against what SilverLining spent over those years, that comes to **<span data-figure="headline" data-model="silverlining-charityevals">0.12</span> years of healthy life per $1,000**. Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. Every step is a judgment that no study settles.
+SilverLining funds and coordinates research on solar radiation modification: cooling the planet by reflecting a little sunlight, for example with fine particles high in the atmosphere. It also works with governments and others on how the idea is researched and governed. Our model values what it added to that field in 2019-2024 by what the field's work could be worth: a better-designed use of cooling, if there is one. Against what SilverLining spent over those years, that comes to **<span data-figure="headline" data-model="silverlining-charityevals">0.19</span> years of healthy life per $1,000**. Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. Every step is a judgment that no study settles.
 
 ### What the charity does
 
@@ -41,7 +41,7 @@ Cooling would offset the warming of hundreds of billions of tonnes at once, and 
 
 ### What isn't modelled
 
-Climate damage other than deaths stays at the site's shared zero, as for every climate model. So do cooling's effects on crops and on tipping points such as melting ice sheets, where its supporters see most of its value. Value in worlds where cooling is never used (a harmful use talked out of) is not counted. If cooling were used, its own harms (air pollution from the particles, rainfall shifts) count inside the share the field's work adds, not separately. Federal funding after fiscal 2024 counts only through the shared years for a won reform.
+Cooling's own effects on crops and on tipping points such as melting ice sheets, where its supporters see most of its value, are not counted. Value in worlds where cooling is never used (a harmful use talked out of) is not counted. If cooling were used, its own harms (air pollution from the particles, rainfall shifts) count inside the share the field's work adds, not separately. Federal funding after fiscal 2024 counts only through the shared years for a won reform.
 
 ### How this model was checked
 

@@ -24,7 +24,9 @@ conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra
 - **Technology acceleration** (advanced reactors, fusion, new fuels): a won policy speeds a share of a
   published deployment pathway. Tonnes = pathway capacity × output per unit × displaced emissions ×
   share built × share due to the policy; a technology that may never work adds a `single_event`
-  chance.
+  chance. The pathway is read at the middle of the years counted (period's middle year + wait + half
+  of `$win_years_counted`), straight between its published points, capped at the last; the smoke
+  weights read the full level (they read no shared value).
 - **Forest protection**: hectares protected in the year × tonnes per hectare-year × years protected,
   the counterfactual from matched comparisons of protected and unprotected land, leakage as a negative
   share (families/conservation.md). Land carbon carries no fuel smoke; clearing fires only a little.
@@ -50,7 +52,24 @@ conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra
   year before waits); the conversion gives it methane's own warming (`methane_heat_*`) and ozone
   (`ozone_deaths_per_tco2e_methane`, discounted over `methane_lifetime_years`). Never in
   `extra_deaths_per_tco2e`.
-- `nondeath_damages_vs_deaths` stays a visible shared zero.
+- `nondeath_damages_vs_deaths` (0.6): damage beyond deaths, a side effect in the unit's conversion;
+  never in a model.
+
+## Public money (normalization.md 2.23)
+
+Credits, grants, procurement, donors' payments and a won fund's levies are netted against their payers'
+loss, per branch, into the uov bridge (the climate skeleton's rows):
+
+```
+public_payer_uov_per_dollar = @public_funds.mcpf * $uov_per_ln_consumption / (payer multiple * payers' survey-scale consumption)
+<b>_public_usd_per_year     = shared fact (credit per tonne × tonnes: q45_credit_usd_per_tco2[_dac]; ira_public_cost_usd_per_year)
+<b>_public_cost_uov         = -<b>_public_usd_per_year * public_payer_uov_per_dollar * <b>'s years, wait, chance and adjustments
+```
+
+Paid per unit: every adjustment; a fixed sum: not the evidence step; a levy: its spending's steps. Households' money: their gain less
+the payers' loss; a levy: no mcpf (the compliance row carries its resource cost). Payers: US federal
+(CE survey), rich donors (UK on the survey scale), the developing world (`lmy_na_consumption_per_person_2024`
+× the median survey ratio).
 
 ## Evidence to look for
 

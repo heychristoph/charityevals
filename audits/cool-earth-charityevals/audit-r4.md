@@ -1,6 +1,6 @@
 # Audit: cool-earth-charityevals, round 4 (verification of the round-3 fix)
 Result: 1.099e-4 daly/$ = 0.110 years of healthy life per 1,000 dollars (unchanged). Verdict: pass (no findings).
-Model-sha: 8e7476a7a18b46f0986b285647e2c1090e8c7150f68bab225253d6601c2b322c
+Model-sha: 6e7114000c205c4a8deb7552f8d66d2e3e8cbd0427d9621e82356fabf2c1c116
 Mechanical: `scripts/audit-model.ts` reports 0 findings.
 
 ## Findings (0)
@@ -13,3 +13,4 @@ None. Round 3's low finding (unsourced "Peru's national 1.6%") is resolved.
 3. The text is consistent with the row's kind ("judgment") and with the 0.25 x 3/5 derivation from round 2.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed

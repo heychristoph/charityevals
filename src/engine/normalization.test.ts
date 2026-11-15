@@ -295,6 +295,12 @@ describe("climate conversion", () => {
   const heatDeathValue = () => mix("heat") * (1 + ((fact("climate.nondeath_damages_vs_deaths") as { best: number }).best));
   const airPollutionDeathValue = () => mix("air_pollution");
 
+  it("damage beyond deaths is a side effect: read through the side-effects weight, once, in the unit's conversion (docs/normalization.md 2.5, 2.16)", () => {
+    const to = assumptions.units.tco2e.to_common;
+    expect(to).toContain("(1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths)");
+    expect(to.split("nondeath_damages_vs_deaths").length).toBe(2);
+  });
+
   it("the deaths-per-tonne assumption is Rethink Priorities' figure, range and all", () => {
     expect(row("deaths_per_tco2e").value).toEqual(fact("climate.deaths_per_tco2e"));
   });

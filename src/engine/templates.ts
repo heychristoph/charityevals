@@ -111,6 +111,12 @@ const WON_REFORM: Read[] = [
   { row: "discounted_years", ref: "$discount_rate", why: "the years counted and the wait before them are discounted at the shared rate" },
 ];
 
+/** Public money a win spends (docs/normalization.md 2.23): its payers' loss at the shared cost of public funds, on the log scale. */
+const PUBLIC_MONEY: Read[] = [
+  { row: "public_payer_uov_per_dollar", ref: "@public_funds.mcpf", why: "a dollar of public money costs its payers the shared cost of raising it (docs/normalization.md 2.23)" },
+  { row: "public_payer_uov_per_dollar", ref: "$uov_per_ln_consumption", why: "the payers' loss is valued on the log scale of their consumption, like all money (docs/normalization.md 2.23)" },
+];
+
 const donor = (unit: string) => [`${unit}_per_dollar`, `${unit}_per_donor_dollar`] as const;
 
 function spec(title: string, unit: string, prefix: string, required: string[], bounds: Record<string, [number, number]>, basis: Basis, reads: Read[]): TemplateSpec {
@@ -209,7 +215,7 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     ["p_success", "downstream_value", "years_of_impact", "discounted_years"],
     { p_success: [0, 1] },
     "past_average",
-    WON_REFORM,
+    [...WON_REFORM, ...PUBLIC_MONEY],
   ),
   "domestic-services": spec(
     "Social services in rich countries (food, housing, youth, veterans, older people, gifts)",

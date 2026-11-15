@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "silverlining",
   "owner": "charityevals",
-  "summary": "SilverLining (Washington, DC) funds and coordinates research on solar radiation modification (cooling the planet by reflecting a little sunlight) and works with governments and others on how it is researched and governed; this model values what it added to that field in 2019-2024: its own research grants and science, its engagement work and grants abroad, other funders' money it directed, and the US federal research line (NOAA's Earth's Radiation Budget, about $8M a year since 2020) its policy work helped start, against its spending over those years ($6.5M in 2024). A dollar of the field's work is worth a share of the heat deaths a use of cooling would avert, put into tonnes of CO₂ by how much a tonne warms: a 30% chance of a use this century, 0.6°C for 50 years, the field's work adding a tenth of its benefit by improving how it is used, over all the field's funding until then. At the defaults a dollar given averts the heat deaths of about 1.0 tonne of CO₂, about 0.12 years of healthy life per $1,000; cooling acts on the warming itself, so the decision the field informs weighs hundreds of billions of tonnes, and the field is small (about $44M a year). Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. The result is mostly uncertainty, resting on judgments no study settles (how much the field's work improves a use, whether there is one), and every branch is discounted for missing data.",
+  "summary": "SilverLining (Washington, DC) funds and coordinates research on solar radiation modification (cooling the planet by reflecting a little sunlight) and works with governments and others on how it is researched and governed; this model values what it added to that field in 2019-2024: its own research grants and science, its engagement work and grants abroad, other funders' money it directed, and the US federal research line (NOAA's Earth's Radiation Budget, about $8M a year since 2020) its policy work helped start, against its spending over those years ($6.5M in 2024). A dollar of the field's work is worth a share of the heat deaths a use of cooling would avert, put into tonnes of CO₂ by how much a tonne warms: a 30% chance of a use this century, 0.6°C for 50 years, the field's work adding a tenth of its benefit by improving how it is used, over all the field's funding until then. At the defaults a dollar given averts the heat deaths of about 1.0 tonne of CO₂, about 0.19 years of healthy life per $1,000; cooling acts on the warming itself, so the decision the field informs weighs hundreds of billions of tonnes, and the field is small (about $44M a year). Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. The result is mostly uncertainty, resting on judgments no study settles (how much the field's work improves a use, whether there is one), and every branch is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: SilverLining",
@@ -70,6 +70,12 @@
       "title": "Air pollution these tonnes carry",
       "kind": "ours",
       "explainer": "Every tonne avoids its heat deaths; these rows say how much of the shared air-pollution rate applies (none: cooling avoids no fuel smoke). The rates stay shared (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in tonnes",
+      "kind": "ours",
+      "explainer": "The public money's cost to its payers (units of value) is counted in its own unit and enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
     },
     {
       "id": "outcome",
@@ -1118,6 +1124,33 @@
       "formula": "(res_downstream * res_total_adj + eng_downstream * eng_total_adj + dir_downstream * dir_total_adj + pol_downstream * pol_total_adj) / downstream_value"
     },
     {
+      "id": "public_payer_uov_per_dollar",
+      "section": "adjustments",
+      "label": "Value lost per dollar of US public money, units of value",
+      "format": "small",
+      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "explainer": "What a dollar of federal money costs those who pay for it (docs/normalization.md 2.23): the shared cost of raising it (facts: public_funds.mcpf) over federal taxpayers' consumption on the survey scale (the shared payer multiple × US consumption per person, 2.14), on the log scale.",
+      "unit": "units of value / $"
+    },
+    {
+      "id": "pol_public_cost_uov",
+      "section": "adjustments",
+      "label": "Federal research line: what the money counted costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-noaa_srm_dollars * public_payer_uov_per_dollar * pol_p_success * discounted_years * pol_counterfactual_adj * pol_attribution_share * missing_data_adj",
+      "explainer": "Public money that funds the climate work counted is netted against its payers' loss (docs/normalization.md 2.23): the line's yearly money counted as field work (the share whose research the branch values) × the value lost per dollar, over the same years and with the same advocacy share, counterfactual, credit and missing-data step as the branch, not its evidence step, which is about what the research is worth.",
+      "unit": "units of value"
+    },
+    {
+      "id": "public_cost_uov_per_year",
+      "section": "adjustments",
+      "label": "Public money's cost to its payers, units of value a year of the period (negative)",
+      "format": "number",
+      "formula": "pol_public_cost_uov / period_years",
+      "explainer": "The input of the bridge into tonnes.",
+      "unit": "units of value"
+    },
+    {
       "id": "unmodelled_benefits_adj",
       "section": "adjustments",
       "label": "Side effect: atmospheric science that serves other uses, as a share of the modelled value",
@@ -1201,12 +1234,21 @@
       "formula": "0"
     },
     {
+      "id": "tco2e_from_uov",
+      "section": "bridges",
+      "label": "The public money's cost to its payers, in tonnes of CO₂e (negative)",
+      "format": "number",
+      "formula": "public_cost_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "explainer": "Units of value into tonnes by the site's fixed bridge: × the uov unit's conversion, ÷ the tonne's (docs/normalization.md 2.6).",
+      "unit": "t CO₂e"
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂e whose heat deaths it averts, per year of 2019-2024",
       "format": "number",
       "explainer": "The three branches after their adjustments, with the side effects, over the period's years.",
-      "formula": "(res_downstream * res_total_adj + eng_downstream * eng_total_adj + dir_downstream * dir_total_adj + pol_downstream * pol_total_adj) * (1 + unmodelled_benefits_adj + moral_hazard_share + premature_use_share) / period_years",
+      "formula": "(res_downstream * res_total_adj + eng_downstream * eng_total_adj + dir_downstream * dir_total_adj + pol_downstream * pol_total_adj) * (1 + unmodelled_benefits_adj + moral_hazard_share + premature_use_share) / period_years + tco2e_from_uov",
       "unit": "t CO₂e"
     },
     {

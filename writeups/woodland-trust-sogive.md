@@ -1,6 +1,6 @@
 ### Summary
 
-The Woodland Trust is the UK's largest woodland conservation charity: it plants trees, restores damaged woodland and campaigns to protect ancient woods. SoGive estimated from its 2019 annual report that its tree planting takes up a tonne of CO₂ for over £2.14. Counting all three of its woodland projects, SoGive's own caveats on survival and permanence, and the decades the trees take to grow, that is **<span data-figure="headline" data-model="woodland-trust-sogive">0.0039</span> years of healthy life per $1,000** on our scale.
+The Woodland Trust is the UK's largest woodland conservation charity: it plants trees, restores damaged woodland and campaigns to protect ancient woods. SoGive estimated from its 2019 annual report that its tree planting takes up a tonne of CO₂ for over £2.14. Counting all three of its woodland projects, SoGive's own caveats on survival and permanence, and the decades the trees take to grow, that is **<span data-figure="headline" data-model="woodland-trust-sogive">0.0014</span> years of healthy life per $1,000** on our scale.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £2.14 and its £7.40 for restoration. SoGive rates the Woodland Trust "Not Recommended (tentative)".
 
@@ -22,7 +22,7 @@ SoGive's planting figure is its bottom line. Our steps follow:
 - **SoGive's caveats:** SoGive lists assumptions it didn't test; our view applies them as judgments: 70% of trees survive (1.1 million of the 4.1 million were given away to schools and groups), half of a restored hectare's uptake is extra (the land was degraded, not bare), and 80% of the carbon stays stored.
 - **Pounds to dollars** at the 2019 average exchange rate.
 - **The delay:** trees take up their carbon over a century, on average about 50 years after planting. Like every model's tonnes that come later, they are discounted at the shared rate for the wait until they are taken up: about 40 years (30 to 55, our judgment), the single wait worth the same as SoGive's yearly uptake discounted year by year at 4%. A tonne taken up then counts like a tonne kept out of the air then, its heat deaths discounted again from that year by the site's conversion.
-- **No air pollution:** trees taking up carbon leave the fuel burned elsewhere unchanged, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0, and the tonnes count for their heat deaths only.
+- **No air pollution:** trees taking up carbon leave the fuel burned elsewhere unchanged, so the model's row "Air pollution these tonnes cut, relative to an average fossil-fuel tonne" is 0.
 
 ### What drives the result
 
@@ -34,7 +34,7 @@ SoGive's planting figure is its bottom line. Our steps follow:
 
 - **Deaths valued by age.** Each death a tonne avoids is valued at GiveWell's moral weight for the age it comes at, over the ages of today's heat and air-pollution deaths (GBD 2023: most are of people over 50), about 30 and 24 healthy years, where the site used GiveWell's all-ages adult value (36.6) until late October 2026: the same rule as every death on the site.
 - **All projects**, not planting alone.
-- **Tonnes become healthy years** through the shared climate rate, counting heat deaths only; SoGive compares pounds per tonne with its benchmark.
+- **Tonnes become healthy years** through the shared climate rate: heat deaths, and the shared figure for a tonne's other damage; SoGive compares pounds per tonne with its benchmark.
 - **SoGive's untested assumptions** (survival, extra uptake, permanence) applied as our judgments.
 - **The wait for the carbon is discounted.** SoGive counts a tonne the same whenever the trees take it up; like every future benefit on the site, the tonnes are discounted at the shared rate for the decades the trees take to grow (about 40 years, our judgment from SoGive's uptake rates), in both of the site's views, since SoGive takes no view on discounting.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution. Volunteers' time isn't counted.

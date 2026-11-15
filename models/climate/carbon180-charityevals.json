@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "carbon180",
   "owner": "charityevals",
-  "summary": "Carbon180, a US non-profit, does policy advocacy, analysis and community regranting for carbon removal; this model counts the federal programmes it worked on that were won or defended in 2020-2025 (the first megaton direct air capture plants under the 2021 Regional DAC Hubs and the 2022 45Q credit, the speed-up those programmes and the Department of Energy's carbon-removal research give the technology worldwide, the larger 45Q credit's capture at other plants, the 2022 law's farm conservation money and the 2021 law's reforestation money) against its spending over those years ($10.06M in 2025). At the defaults a dollar given removes or stores about 0.001 tonnes of CO₂ (about $1,000 a tonne), 0.0001 years of healthy life per $1,000: direct air capture is still small and costly, each win is shared with many groups, companies and what Congress would have done anyway (Carbon180 is credited with 0.3% to 10% of the advocacy behind each), the hubs have been cut back, and the next dollar mostly defends these wins (27% of the period's average). The biggest uncertainties are the shared discount rate and years a won reform counts, how far direct air capture will scale, and Carbon180's share of the 45Q credit, whose branch gives about half the result; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "Carbon180, a US non-profit, does policy advocacy, analysis and community regranting for carbon removal; this model counts the federal programmes it worked on that were won or defended in 2020-2025 (the first megaton direct air capture plants under the 2021 Regional DAC Hubs and the 2022 45Q credit, the speed-up those programmes and the Department of Energy's carbon-removal research give the technology worldwide, the larger 45Q credit's capture at other plants, the 2022 law's farm conservation money and the 2021 law's reforestation money) against its spending over those years ($10.06M in 2025). At the defaults a dollar given removes or stores about 0.001 tonnes of CO₂ (about $1,000 a tonne), but the public money behind those tonnes (the $85 and $180 credits, the hub grants, the farm and forest money, the removals bought later) costs its taxpayers more than the tonnes are worth on the site's scale: a net harm of about −0.003 years of healthy life per $1,000. Direct air capture is still small and costly, each win is shared with many groups, companies and what Congress would have done anyway (Carbon180 is credited with 0.3% to 10% of the advocacy behind each), the hubs have been cut back, and the next dollar mostly defends these wins (27% of the period's average). The biggest uncertainties are the shared discount rate and years a won reform counts, how far direct air capture will scale, the public money per tonne and Carbon180's share of each win; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Carbon180",
@@ -80,6 +80,12 @@
       "title": "Air pollution these tonnes carry",
       "kind": "ours",
       "explainer": "Every tonne avoids its heat deaths; a tonne from burning less fossil fuel near people also avoids air-pollution deaths. Removed and stored CO₂ carries none (docs/normalization.md 2.5)."
+    },
+    {
+      "id": "bridges",
+      "title": "Other outcomes, in tonnes",
+      "kind": "ours",
+      "explainer": "The public money's cost to its payers (units of value) is counted in its own unit and enters the tonnes only through the site's fixed bridge (docs/normalization.md 2.6)."
     },
     {
       "id": "outcome",
@@ -346,6 +352,26 @@
       "explainer": "The three megaton-class plants under the hubs programme and the 45Q credit for direct air capture, at design capacity once built."
     },
     {
+      "id": "dac_hub_grants_usd",
+      "section": "reach",
+      "label": "Direct air capture hubs: federal grants to the two hubs (US$)",
+      "format": "integer",
+      "value": {
+        "low": 1000000000,
+        "best": 1100000000,
+        "high": 1200000000
+      },
+      "kind": "estimate",
+      "unit": "$",
+      "source": {
+        "title": "Utility Dive (August 2023), DOE to invest up to $1.2B in direct air capture hubs in Texas, Louisiana",
+        "url": "https://utilitydive.com/news/department-energy-doe-carbon-capture-direct-air-billion-occidental-battelle/690639",
+        "quote": "up to a total of $1.2 billion in two direct air capture, or DAC, facilities",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "DOE selected the two hubs for up to $1.2 billion in August 2023 and kept up to $600 million (Cypress) and $500 million (South Texas) in April 2026: $1.1 billion, of which the delivered share below counts its part, as for the tonnes."
+    },
+    {
       "id": "dac_net_removal_share",
       "section": "reach",
       "label": "Share of the CO₂ captured that is a net removal, after the energy and materials the plants use",
@@ -438,6 +464,34 @@
         "retrieved": "2026-11-15"
       },
       "explainer": "The calendar year of the 600 million tonnes."
+    },
+    {
+      "id": "tech_public_usd_per_tco2",
+      "section": "reach",
+      "label": "Technology: public money per tonne for the removals the faster build brings (US$)",
+      "format": "number",
+      "value": {
+        "low": 60,
+        "best": 150,
+        "high": 300
+      },
+      "kind": "judgment",
+      "unit": "$ / t CO₂",
+      "explainer": "Removals built on the pathway are bought by someone, mostly governments: the US credit pays $180 a tonne (facts: climate.q45_credit_usd_per_tco2_dac), and Europe, Canada and Japan buy removals for their own targets; voluntary buyers (Frontier, Microsoft) pay the rest. Anchor: costs of $100-300 a tonne by the 2040s in the learning studies the IEA cites, against several hundred today. Our judgment, $150 a tonne of public money (60 to 300)."
+    },
+    {
+      "id": "tech_research_usd_per_year",
+      "section": "reach",
+      "label": "Technology: DOE carbon-removal research money a year (US$)",
+      "format": "integer",
+      "value": {
+        "low": 90000000,
+        "best": 116500000,
+        "high": 140000000
+      },
+      "kind": "judgment",
+      "unit": "$ / year",
+      "explainer": "The Energy Act of 2020's carbon-removal research programmes at the Department of Energy: public money that funds the technology work counted in this branch. Anchor: about $116.5 million a year, held in the 2026 appropriations (Carbon180's own account of the line, row tech_policy_share); our judgment, $116.5 million ($90 to $140 million), since the line is not reported separately in one place."
     },
     {
       "id": "land_acres_per_year",
@@ -795,7 +849,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Without the hub grants and the $180 credit no megaton plant would be built in the US this decade (the voluntary price of a tonne removed by direct air capture is several hundred dollars, and buyers are few). Some of the removal sold to companies replaces removal they would have bought elsewhere (forests, biochar, weathering), which this counts against the plants. The public money that pays for them is valued at what it buys (docs/normalization.md 2.20); what it costs taxpayers isn't netted, pending a site-wide rule on public money that buys tonnes. Our judgment, 75% (50% to 95%)."
+      "explainer": "Without the hub grants and the $180 credit no megaton plant would be built in the US this decade (the voluntary price of a tonne removed by direct air capture is several hundred dollars, and buyers are few). Some of the removal sold to companies replaces removal they would have bought elsewhere (forests, biochar, weathering), which this counts against the plants. What the public money that pays for them costs taxpayers is the branch's own row (dac_public_cost_uov, docs/normalization.md 2.23). Our judgment, 75% (50% to 95%)."
     },
     {
       "id": "dac_attribution_share_shared",
@@ -1137,7 +1191,136 @@
       "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
       "formula": "(dac_downstream * dac_total_adj + tech_downstream * tech_total_adj + q45_downstream * q45_total_adj + land_downstream * land_total_adj + forest_downstream * forest_total_adj) / (dac_downstream + tech_downstream + q45_downstream + land_downstream + forest_downstream)",
-      "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only. The wins are tax credits, grants and research and conservation money, not rules, so no compliance cost is counted (docs/normalization.md 2.21: public money is not a compliance cost). Public money that buys tonnes isn't netted against what it costs taxpayers, pending a site-wide rule on it."
+      "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only. The wins are tax credits, grants and research and conservation money, not rules, so no compliance cost is counted (docs/normalization.md 2.21: public money is not a compliance cost). What the public money costs taxpayers is netted in each branch's public-cost row (docs/normalization.md 2.23)."
+    },
+    {
+      "id": "public_payer_uov_per_dollar",
+      "section": "adjustments",
+      "label": "Value lost per dollar of US public money, units of value",
+      "format": "small",
+      "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+      "explainer": "What a dollar of federal money costs those who pay for it (docs/normalization.md 2.23): the shared cost of raising it (facts: public_funds.mcpf) over federal taxpayers' consumption on the survey scale (the shared payer multiple × US consumption per person, 2.14), on the log scale.",
+      "unit": "units of value / $"
+    },
+    {
+      "id": "q45_public_usd_per_year",
+      "section": "adjustments",
+      "label": "45Q at other plants: public money a year for the stored tonnes",
+      "format": "integer",
+      "formula": "q45_tonnes_per_year * @climate.q45_credit_usd_per_tco2",
+      "explainer": "The credit the Treasury pays for each tonne stored (facts: climate.q45_credit_usd_per_tco2, $85) × the branch's tonnes.",
+      "unit": "$ / year"
+    },
+    {
+      "id": "q45_public_cost_uov",
+      "section": "adjustments",
+      "label": "45Q at other plants: what that money costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-q45_public_usd_per_year * public_payer_uov_per_dollar * p_success * discounted_years * q45_total_adj",
+      "explainer": "Public money that buys tonnes is netted against its payers' loss (docs/normalization.md 2.23), over the branch's years, wait, advocacy share and every adjustment of its tonnes, since the credit is paid per tonne stored.",
+      "unit": "units of value"
+    },
+    {
+      "id": "dac_public_usd_per_year",
+      "section": "adjustments",
+      "label": "Direct air capture plants: public money a year (credit and hub grants)",
+      "format": "integer",
+      "formula": "dac_gross_tonnes_per_year * @climate.q45_credit_usd_per_tco2_dac",
+      "explainer": "The $180 credit for each tonne captured and stored (facts: climate.q45_credit_usd_per_tco2_dac) × the plants' gross tonnes; the hub grants are in the next row.",
+      "unit": "$ / year"
+    },
+    {
+      "id": "dac_public_cost_uov",
+      "section": "adjustments",
+      "label": "Direct air capture plants: what that money costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-(dac_public_usd_per_year * dac_total_adj + dac_hub_grants_usd / @climate.q45_credit_years * dac_total_adj / dac_evidence_adj) * public_payer_uov_per_dollar * p_success * dac_discounted_years",
+      "explainer": "The credit, paid per tonne, takes every adjustment of the plants' tonnes; the hub grants, a fixed sum spread over the credit's 12 years (facts: climate.q45_credit_years), all but the evidence step, which is about the tonnes (docs/normalization.md 2.23).",
+      "unit": "units of value"
+    },
+    {
+      "id": "tech_public_cost_uov",
+      "section": "adjustments",
+      "label": "Technology: what the public money costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-(tech_pathway_tonnes_counted * tech_deployment_share * tech_policy_share * tech_public_usd_per_tco2 * tech_total_adj + tech_research_usd_per_year * tech_total_adj / tech_evidence_adj) * public_payer_uov_per_dollar * p_success * tech_discounted_years",
+      "explainer": "The removals the faster build brings, bought with public money (row tech_public_usd_per_tco2, per tonne captured), with every adjustment of the branch's tonnes; and the research money, a fixed sum, without the evidence step (docs/normalization.md 2.23). Rich-country payers, at the US figure.",
+      "unit": "units of value"
+    },
+    {
+      "id": "land_public_usd_per_year",
+      "section": "adjustments",
+      "label": "Farm conservation money: Inflation Reduction Act money obligated a year (FY2024, US$)",
+      "format": "integer",
+      "value": 1600000000,
+      "kind": "observed",
+      "unit": "$ / year",
+      "source": {
+        "title": "USDA NRCS (December 2024), Biden-Harris Administration Delivers Record Investments in Private Lands Conservation",
+        "url": "https://www.nrcs.usda.gov/news/biden-harris-0",
+        "quote": "obligated 97.6% of all available fiscal year 2024 Inflation Reduction Act conservation program financial assistance funds, or more than $1.6 billion",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The law's conservation money obligated in fiscal 2024 for the climate-focused contracts counted above (11 million acres)."
+    },
+    {
+      "id": "land_public_cost_uov",
+      "section": "adjustments",
+      "label": "Farm conservation money: what it costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-land_public_usd_per_year * public_payer_uov_per_dollar * p_success * discounted_years * land_total_adj / land_evidence_adj",
+      "explainer": "A fixed sum a year, with the branch's years, wait, advocacy share, counterfactual, credit, delivered share and missing-data step, not its evidence step, which is about the tonnes per acre (docs/normalization.md 2.23). The practices' other gains (water, soil) are not counted, like every unmodelled benefit, in unmodelled_benefits_adj.",
+      "unit": "units of value"
+    },
+    {
+      "id": "forest_trust_fund_cap_before",
+      "section": "adjustments",
+      "label": "Forests: the Reforestation Trust Fund's yearly cap before the 2021 law (US$)",
+      "format": "integer",
+      "value": 30000000,
+      "kind": "observed",
+      "unit": "$ / year",
+      "source": {
+        "title": "Time (17 September 2024), National Forests Are Being Replanted Post-Wildfire Thanks to the Infrastructure Bill",
+        "url": "https://time.com/7021976/replanting-national-forests-infrastructure-bill-success",
+        "quote": "an antiquated $30 million cap placed on the agency’s Reforestation Trust Fund",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The cap the REPLANT provisions lifted; the yearly money since is about five times it (next row)."
+    },
+    {
+      "id": "forest_funding_multiple",
+      "section": "adjustments",
+      "label": "Forests: the trust fund's yearly money since the law, as a multiple of the old cap",
+      "format": "number",
+      "value": 5,
+      "kind": "observed",
+      "unit": "multiple",
+      "source": {
+        "title": "Time (17 September 2024), National Forests Are Being Replanted Post-Wildfire Thanks to the Infrastructure Bill",
+        "url": "https://time.com/7021976/replanting-national-forests-infrastructure-bill-success",
+        "quote": "Eliminating the cap equates to a fivefold increase in annual funding now available for reforestation.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The yearly money behind the acres counted: five times the old cap."
+    },
+    {
+      "id": "forest_public_cost_uov",
+      "section": "adjustments",
+      "label": "Forests: what the reforestation money costs its payers, units of value (negative)",
+      "format": "number",
+      "formula": "-forest_trust_fund_cap_before * forest_funding_multiple * public_payer_uov_per_dollar * p_success * discounted_years * forest_total_adj / forest_evidence_adj",
+      "explainer": "The trust fund's yearly money (tariff revenue, so public money), a fixed sum, with the branch's chain except its evidence step (docs/normalization.md 2.23).",
+      "unit": "units of value"
+    },
+    {
+      "id": "public_cost_uov_per_year",
+      "section": "adjustments",
+      "label": "Public money's cost to its payers, units of value a year of the period (negative)",
+      "format": "number",
+      "formula": "(q45_public_cost_uov + dac_public_cost_uov + tech_public_cost_uov + land_public_cost_uov + forest_public_cost_uov) / period_years",
+      "explainer": "Every branch's public money netted against its tonnes (docs/normalization.md 2.23), the input of the bridge into tonnes.",
+      "unit": "units of value"
     },
     {
       "id": "fuel_share",
@@ -1180,11 +1363,20 @@
       "explainer": "The tonnes are CO₂ removed or stored, and soil carbon; the farm practices' small methane and nitrous-oxide changes are left in the CO₂ figure."
     },
     {
+      "id": "tco2e_from_uov",
+      "section": "bridges",
+      "label": "The public money's cost to its payers, in tonnes of CO₂e (negative)",
+      "format": "number",
+      "formula": "public_cost_uov_per_year / (($deaths_per_tco2e * $climate_heat_share * ((1 - methane_share) * (1 + $discount_rate) ^ -$climate_heat_death_delay + methane_share * @climate.methane_heat_deaths_vs_co2 * (1 + $discount_rate) ^ -@climate.methane_heat_death_delay) * (1 + $side_effect_weight * @climate.nondeath_damages_vs_deaths) * (@death_ages.heat_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.heat_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.heat_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.heat_share_50plus * @moral_weights.uov_per_death_age_50_74) + ($deaths_per_tco2e * (1 - $climate_heat_share) * air_pollution_weight + extra_deaths_per_tco2e + methane_share * @climate.ozone_deaths_per_tco2e_methane / (1 + ln(1 + $discount_rate) * @climate.methane_lifetime_years)) * (@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74)) * $life_value_multiplier)",
+      "explainer": "Units of value into tonnes by the site's fixed bridge: × the uov unit's conversion, ÷ the tonne's (docs/normalization.md 2.6).",
+      "unit": "t CO₂e"
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Tonnes of CO₂ averted or removed per year of the period",
       "format": "number",
-      "formula": "(dac_downstream * dac_total_adj + tech_downstream * tech_total_adj + q45_downstream * q45_total_adj * (1 + q45_eor_share) + land_downstream * land_total_adj + forest_downstream * forest_total_adj) / period_years * (1 + unmodelled_benefits_adj + mitigation_deterrence_share)",
+      "formula": "(dac_downstream * dac_total_adj + tech_downstream * tech_total_adj + q45_downstream * q45_total_adj * (1 + q45_eor_share) + land_downstream * land_total_adj + forest_downstream * forest_total_adj) / period_years * (1 + unmodelled_benefits_adj + mitigation_deterrence_share) + tco2e_from_uov",
       "unit": "t CO₂e / year",
       "explainer": "Each branch's expected tonnes × its own adjustments, summed, spread over the period's six years, with the other wins and the side effects added as shares."
     },

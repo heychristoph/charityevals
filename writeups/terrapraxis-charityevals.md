@@ -1,6 +1,6 @@
 ### Summary
 
-TerraPraxis works to re-power the world's coal plants with advanced nuclear reactors, so the sites, grid connections and jobs outlive coal. It does this through designs, software and convening rather than by building anything itself. Our model counts what its work of 2022-2024 adds to the deployment of advanced nuclear power, against what it spent in those years. It comes to **<span data-figure="headline" data-model="terrapraxis-charityevals">0.02</span> years of healthy life per 1,000 dollars**. About three tenths of that is the tonnes of CO₂ the reactors avoid. The rest is money: mostly what reactors on coal sites save in construction, for power customers in China and other middle-income countries, where a dollar matters far more to the people paying. The result is mostly uncertainty. No coal plant has been re-powered yet, every step from TerraPraxis's work to a working reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces.
+TerraPraxis works to re-power the world's coal plants with advanced nuclear reactors, so the sites, grid connections and jobs outlive coal. It does this through designs, software and convening rather than by building anything itself. Our model counts what its work of 2022-2024 adds to the deployment of advanced nuclear power, against what it spent in those years. It comes to **<span data-figure="headline" data-model="terrapraxis-charityevals">0.015</span> years of healthy life per 1,000 dollars**. About three tenths of that is the tonnes of CO₂ the reactors avoid. The rest is money: mostly what reactors on coal sites save in construction, for power customers in China and other middle-income countries, where a dollar matters far more to the people paying. The result is mostly uncertainty. No coal plant has been re-powered yet, every step from TerraPraxis's work to a working reactor is a judgment, and the sign turns on what nuclear power will cost against what it replaces.
 
 ### What the charity does
 
@@ -18,7 +18,7 @@ TerraPraxis doesn't campaign for laws. It tries to make reactors cheaper and fas
 
 ### How the model works
 
-The model starts from a yardstick rather than a forecast: the COP28 pledge to triple 2020's 392 GW of nuclear capacity by 2050, of which we judge 35% gets built. It splits that build into two lines.
+The model starts from a yardstick rather than a forecast: the COP28 pledge to triple 2020's 392 GW of nuclear capacity by 2050, of which we judge 35% gets built, read at about 2040, the middle of the years counted. It splits that build into two lines.
 
 - **Coal repowering.** A tenth of the new reactors stand on coal sites, about 27 GW. We count 40% of them as extra reactors rather than reactors moved from other sites. Each extra reactor replaces power with half of coal's CO₂.
 - **Advanced nuclear elsewhere.** The rest of the build. The grids these reactors join have 35% of coal's CO₂ per MWh.
