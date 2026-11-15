@@ -1,6 +1,6 @@
 # Audit: global-alliance-for-improved-nutrition-charityevals, round 2 (verification)
 Result: 0.001440 uov/$ = 0.720 years of healthy life per 1,000 dollars (combined range 0.088–5.86); cause median 0.0687 (x10.5). Verdict: pass (no high findings, 0 medium, 1 low; the far-above medium is explained below).
-Model-sha: 324dd2bbd04be88248d5fb70bbe1fb130d53e3e3d37022e18a457bc257aaa30e
+Model-sha: 275b6cbb0a130cd3837201f642decd4336fb375365fec3ec65c69e7bbda02b8c
 Scope: unchanged from round 1 (all four programme lines, year to 30 June 2025, 61.6 million programme costs); only the round-1 fixes and the rows they touched were checked.
 Mechanical: lint 0 high / 1 medium (far-above, explained below) / 2 low (estimate-basis, spread; both as in round 1); invariants none; check.ts "all models valid"; normalization-audit skipped in this sandbox (no violation reported for the model).
 Previous round: 9 findings, all resolved (table below).
@@ -50,3 +50,4 @@ Checked scope, reach and persistence; the gap is supported, not an error, so it 
 Verdict: pass (no high findings).
 
 Builder's response to the low finding: the quote was checked against the PDF's extracted text (stdlib extractor): page 6 reads "approximately $0.05/person/year for iodine and $0.12/person/year for iron fortification of wheat and maize flour", as cited; no model change.
+Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)

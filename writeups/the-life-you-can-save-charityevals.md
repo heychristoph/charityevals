@@ -1,6 +1,6 @@
 ### Summary
 
-The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="the-life-you-can-save-charityevals">14</span> years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused, about three dollars for each dollar it spends. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
+The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="the-life-you-can-save-charityevals">13</span> years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused, about three dollars for each dollar it spends. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
 
 ### What the charity does
 
@@ -18,7 +18,7 @@ Donors give, and give to better charities, because of The Life You Can Save. Its
 - emergency-fund gifts that went straight to the fund ($0.8 million);
 - gifts the charities, donors and giving platforms told it it had influenced ($4.5 million).
 
-Only about half its recommended charities report such gifts, and fewer than 100 donors did. So we allow for gifts nobody reported: a quarter more than the reported ones (our judgment, from 0.9 to 2 times). Founders Pledge takes a quarter of the credit for the emergency-fund money it counts (our judgment, a half to none).
+Only about one in two of the charities it recommends report such gifts, and fewer than 100 donors did. So we allow for gifts nobody reported: a quarter more than the reported ones (our judgment, from 0.9 to 2 times). Founders Pledge takes a quarter of the credit for the emergency-fund money it counts (our judgment, a half to none).
 
 Not all of this giving happened because of it. Many donors give through it because it passes gifts on tax-deductibly, or would have found its charities anyway. It publishes no survey of what its donors would have done. So the model takes the site's shared figure for a charity that moves money without its own survey: it caused 30% of the giving (15% to 45%). That is about $7.3 million in 2025.
 
