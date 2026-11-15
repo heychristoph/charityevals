@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "carbon180",
   "owner": "charityevals",
-  "summary": "Carbon180, a US non-profit, does policy advocacy, analysis and community regranting for carbon removal; this model counts the federal programmes it worked on that were won or defended in 2020-2025 (the first megaton direct air capture plants under the 2021 Regional DAC Hubs and the 2022 45Q credit, the speed-up those programmes and the Department of Energy's carbon-removal research give the technology worldwide, the larger 45Q credit's capture at other plants, and the 2022 law's farm conservation money) against its spending over those years ($10.06M in 2025). At the defaults a dollar given removes or stores about 0.0009 tonnes of CO₂ (about $1,100 a tonne), 0.0001 years of healthy life per $1,000: direct air capture is still small and costly, each win is shared with many groups, companies and what Congress would have done anyway (Carbon180 is credited with 0.3% to 10% of the advocacy behind each), the hubs have been cut back, and the next dollar mostly defends these wins (27% of the period's average). The biggest uncertainties are the shared discount rate and years a won reform counts, how far direct air capture will scale, and Carbon180's share of the 45Q credit, whose branch gives more than half the result; every branch is discounted for missing data, since no tonne is measured for its work.",
+  "summary": "Carbon180, a US non-profit, does policy advocacy, analysis and community regranting for carbon removal; this model counts the federal programmes it worked on that were won or defended in 2020-2025 (the first megaton direct air capture plants under the 2021 Regional DAC Hubs and the 2022 45Q credit, the speed-up those programmes and the Department of Energy's carbon-removal research give the technology worldwide, the larger 45Q credit's capture at other plants, the 2022 law's farm conservation money and the 2021 law's reforestation money) against its spending over those years ($10.06M in 2025). At the defaults a dollar given removes or stores about 0.001 tonnes of CO₂ (about $1,000 a tonne), 0.0001 years of healthy life per $1,000: direct air capture is still small and costly, each win is shared with many groups, companies and what Congress would have done anyway (Carbon180 is credited with 0.3% to 10% of the advocacy behind each), the hubs have been cut back, and the next dollar mostly defends these wins (27% of the period's average). The biggest uncertainties are the shared discount rate and years a won reform counts, how far direct air capture will scale, and Carbon180's share of the 45Q credit, whose branch gives about half the result; every branch is discounted for missing data, since no tonne is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Carbon180",
@@ -453,27 +453,7 @@
         "quote": "These investments cover over 11 million acres in fiscal year 2024",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Land line of the policy work: the law's $19.5 billion for USDA's conservation programmes (EQIP, CSP, RCPP, ACEP) paid more than 23,000 climate-focused contracts in fiscal 2024, a year of the money's flow."
-    },
-    {
-      "id": "land_soc_t_c_per_ha_year",
-      "section": "reach",
-      "label": "Soil carbon gained a year per hectare under cover crops (meta-analysis)",
-      "format": "number",
-      "value": {
-        "low": 0.24,
-        "best": 0.32,
-        "high": 0.4
-      },
-      "kind": "estimate",
-      "unit": "t C / ha / year",
-      "source": {
-        "title": "Poeplau & Don (2015), Carbon sequestration in agricultural soils via cultivation of cover crops: a meta-analysis, Agriculture, Ecosystems & Environment 200: 33-41",
-        "url": "https://ui.adsabs.harvard.edu/abs/2015AgEE..200...33P",
-        "quote": "annual change rate of 0.32 ± 0.08 Mg ha−1 yr−1",
-        "retrieved": "2026-11-15"
-      },
-      "explainer": "The best-measured climate practice the money funds; the range is the paper's ± (one standard error)."
+      "explainer": "Land line of the policy work: the law's $19.5 billion for USDA's conservation programmes (EQIP, CSP, RCPP, ACEP) paid more than 23,000 climate-focused contracts in fiscal 2024. USDA doesn't say whether these are new or all acres under contract; the model takes the fiscal-2024 figure as a typical year of acres under contracts in force, with overlapping multi-year contracts and the 2025 rescission netted in the implementation row below."
     },
     {
       "id": "land_practice_vs_cover_crop",
@@ -493,9 +473,62 @@
       "section": "reach",
       "label": "Farm conservation money: tonnes of CO₂e a year on the funded acres",
       "format": "integer",
-      "formula": "land_acres_per_year * @climate.ha_per_acre * land_soc_t_c_per_ha_year * @climate.co2_per_tonne_carbon * land_practice_vs_cover_crop",
+      "formula": "land_acres_per_year * @climate.ha_per_acre * @climate.cover_crop_soc_tco2_per_ha_year * land_practice_vs_cover_crop",
       "unit": "t CO₂e / year",
-      "explainer": "Acres in hectares (facts: climate.ha_per_acre) × soil carbon per hectare-year × CO₂ per tonne of carbon (facts: climate.co2_per_tonne_carbon) × the practice mix: about 3.1 million tonnes a year."
+      "explainer": "Acres in hectares (facts: climate.ha_per_acre) × the shared soil-carbon figure for cover crops (facts: climate.cover_crop_soc_tco2_per_ha_year, 0.7 t CO₂ a hectare a year, 0.1 to 1.5: Poeplau & Don's meta-analysis and a re-analysis of sound trials) × the practice mix: about 1.9 million tonnes a year."
+    },
+    {
+      "id": "forest_acres_per_year",
+      "section": "reach",
+      "label": "Forests: national-forest acres reforested a year since the 2021 law lifted the Reforestation Trust Fund's cap",
+      "format": "integer",
+      "value": 180000,
+      "kind": "observed",
+      "unit": "acres",
+      "source": {
+        "title": "Time (17 September 2024), National Forests Are Being Replanted Post-Wildfire Thanks to the Infrastructure Bill",
+        "url": "https://time.com/7021976/replanting-national-forests-infrastructure-bill-success",
+        "quote": "In the Act's first two years, the U.S. Forest Service reforested 360,000 acres, reducing the agency's backlog by 10%.",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "Forestry part of the policy line: the 2021 infrastructure law's REPLANT provisions lifted the $30 million cap on the Reforestation Trust Fund (about a fivefold increase in yearly funding) and set the Forest Service to clear its 3.6-million-acre backlog within a decade; Carbon180's 2021 report lists these reforestation investments among the provisions 'our policy team helped structure'. 360,000 acres in two years: 180,000 a year."
+    },
+    {
+      "id": "forest_tco2_per_ha_year",
+      "section": "reach",
+      "label": "Forests: CO₂ a replanted hectare takes up a year over its growth",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 3,
+        "high": 6
+      },
+      "kind": "judgment",
+      "unit": "t CO₂ / ha / year",
+      "explainer": "Temperate forest regrowth takes up about 0.5-1 t of carbon a hectare a year, 2-4 t CO₂ (Cook-Patton et al. 2020, Nature, doi 10.1038/s41586-020-2686-x); the national-forest plantings are mostly western conifers on burned land, slow in their first decade and faster after. Our judgment, 3 t CO₂ (1 to 6) averaged over the growth years below."
+    },
+    {
+      "id": "forest_growth_years",
+      "section": "reach",
+      "label": "Forests: years a replanted stand keeps taking up carbon at that rate",
+      "format": "number",
+      "value": {
+        "low": 30,
+        "best": 50,
+        "high": 80
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Western conifer stands keep adding carbon for many decades before growth slows. Our judgment, 50 years (30 to 80); losses to later fire are in the evidence row."
+    },
+    {
+      "id": "forest_tonnes_per_year",
+      "section": "reach",
+      "label": "Forests: CO₂ the acres planted in a year take up over their growth, discounted",
+      "format": "integer",
+      "formula": "forest_acres_per_year * @climate.ha_per_acre * forest_tco2_per_ha_year * pv_annuity_due(1, $discount_rate, forest_growth_years)",
+      "unit": "t CO₂ / year of planting",
+      "explainer": "Each year's plantings take up carbon for decades: acres in hectares (facts: climate.ha_per_acre) × uptake a year × the growth years, each year's uptake discounted at the shared rate. This is what a year of the won programme adds, counted like the other branches for the years a won reform counts."
     },
     {
       "id": "p_success",
@@ -525,16 +558,16 @@
     {
       "id": "years_until_avoided",
       "section": "effect",
-      "label": "Years from a won tax credit until its tonnes are avoided (the 45Q branch)",
+      "label": "Years from a won credit or programme until its tonnes are avoided (the 45Q, farm and forest branches)",
       "format": "number",
       "formula": "@climate.years_until_avoided_regulation",
       "unit": "years",
-      "explainer": "The shared figure for rules and tax credits (facts: climate.years_until_avoided_regulation, 3 years, 1 to 6); the direct air capture plants and the technology have their own waits below."
+      "explainer": "The shared figure for rules, tax credits and programme money (facts: climate.years_until_avoided_regulation, 3 years, 1 to 6); the direct air capture plants and the technology have their own waits below."
     },
     {
       "id": "wait_discount",
       "section": "effect",
-      "label": "Discount for the wait until the 45Q branch's tonnes are avoided",
+      "label": "Discount for the wait until the tonnes are avoided (the 45Q, farm and forest branches)",
       "format": "percent",
       "formula": "(1 + $discount_rate) ^ -years_until_avoided",
       "explainer": "The wait discounted at the shared rate; the unit's conversion then discounts the heat deaths from the year the tonne is avoided, so nothing is discounted twice."
@@ -542,7 +575,7 @@
     {
       "id": "discounted_years",
       "section": "effect",
-      "label": "Discounted years of impact (the 45Q branch)",
+      "label": "Discounted years of impact (the 45Q, farm and forest branches)",
       "format": "number",
       "formula": "years_pv * wait_discount",
       "unit": "years"
@@ -593,7 +626,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "The wins of 2020-2025 that speed the technology rather than the first plants alone: the Department of Energy's carbon-removal research programmes (the Energy Act of 2020; about $116.5 million a year, held in the 2026 appropriations), learning by doing on the first megaton plants the hubs and the $180 credit pay for, and the $35 million purchase prize. Anchor: the three US plants (2.5 million tonnes a year at design) are most of the megaton-class direct air capture under development anywhere, so the US programmes weigh more here than licensing reform does for nuclear in Clean Air Task Force's model (5%); but cost declines come from deployment worldwide and from buyers (Frontier's $925 million advance commitment, Microsoft), and Europe, Canada and Japan support it too. Our judgment, 8% (2% to 20%)."
+      "explainer": "The wins of 2020-2025 that speed the technology rather than the first plants alone: the Department of Energy's carbon-removal research programmes (the Energy Act of 2020; about $116.5 million a year, held in the 2026 appropriations), learning by doing on the first megaton plants the hubs and the $180 credit pay for, and the $35 million purchase prize. Anchor: in mid-2024 all 53 direct air capture plants running in the US, Canada and Europe captured about 0.1 million tonnes a year (Third Way 2024, https://www.thirdway.org/memo/status-report-american-competitiveness-in-direct-air-capture.pdf: 'capturing about 0.1 Mt of carbon annually'), so the three US plants' 2.5 million tonnes of design capacity are 25 times all of it; the US programmes therefore weigh more here than licensing reform does for nuclear in Clean Air Task Force's model (5%). But cost declines come from deployment worldwide and from buyers (Frontier's $925 million advance commitment, Microsoft), and Europe, Canada and Japan support it too. Our judgment, 8% (2% to 20%)."
     },
     {
       "id": "tech_years_until_avoided",
@@ -662,13 +695,21 @@
       "unit": "t CO₂e"
     },
     {
+      "id": "forest_downstream",
+      "section": "effect",
+      "label": "Forests: expected tonnes, before adjustments",
+      "format": "number",
+      "formula": "forest_tonnes_per_year * p_success * discounted_years",
+      "unit": "t CO₂"
+    },
+    {
       "id": "downstream_value",
       "section": "effect",
       "label": "Expected tonnes a year of the period, before adjustments",
       "format": "number",
-      "formula": "(dac_downstream + tech_downstream + q45_downstream + land_downstream) / period_years",
+      "formula": "(dac_downstream + tech_downstream + q45_downstream + land_downstream + forest_downstream) / period_years",
       "unit": "t CO₂ / year",
-      "explainer": "The four branches, each its tonnes a year × the advocacy share × its discounted years (× the built and policy shares for the technology), summed and spread over the period's six years."
+      "explainer": "The five branches, each its tonnes a year × the advocacy share × its discounted years (× the built and policy shares for the technology), summed and spread over the period's six years."
     },
     {
       "id": "dac_evidence_adj",
@@ -712,22 +753,35 @@
     {
       "id": "land_evidence_adj",
       "section": "adjustments",
-      "label": "Farm conservation money: evidence adjustment (soil-carbon measurement and permanence)",
+      "label": "Farm conservation money: evidence adjustment (working farms, practices kept)",
+      "format": "multiple",
+      "value": {
+        "low": 0.4,
+        "best": 0.7,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "The shared soil-carbon figure already covers the doubt about trials and measurement; what is left is that gains on working farms run below trial plots and are lost when a practice stops after payments end. Our judgment, 0.7 (0.4 to 1)."
+    },
+    {
+      "id": "forest_evidence_adj",
+      "section": "adjustments",
+      "label": "Forests: evidence adjustment (seedlings surviving, stands lost to fire)",
       "format": "multiple",
       "value": {
         "low": 0.25,
         "best": 0.5,
-        "high": 0.9
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Soil-carbon gains from field trials are often smaller on working farms, measured at shallow depth only, and lost when a practice stops; part of the funded acres are practices with smaller or uncertain effects. Our judgment, 0.5 (0.25 to 0.9)."
+      "explainer": "Many planted seedlings die in the first years on dry burned sites, and western stands face rising fire risk over the decades counted. Our judgment, 0.5 (0.25 to 0.8)."
     },
     {
       "id": "evidence_adj",
       "section": "adjustments",
       "label": "Evidence adjustment (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(dac_downstream * dac_evidence_adj + tech_downstream * tech_evidence_adj + q45_downstream * q45_evidence_adj + land_downstream * land_evidence_adj) / (dac_downstream + tech_downstream + q45_downstream + land_downstream)",
+      "formula": "(dac_downstream * dac_evidence_adj + tech_downstream * tech_evidence_adj + q45_downstream * q45_evidence_adj + land_downstream * land_evidence_adj + forest_downstream * forest_evidence_adj) / (dac_downstream + tech_downstream + q45_downstream + land_downstream + forest_downstream)",
       "explainer": "The branches' own rows apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
     },
     {
@@ -741,7 +795,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Without the hub grants and the $180 credit no megaton plant would be built in the US this decade (the voluntary price of a tonne removed by direct air capture is several hundred dollars, and buyers are few). Some of the removal sold to companies replaces removal they would have bought elsewhere (forests, biochar, weathering), which this counts against the plants. The public money that pays for them is valued at what it buys, as for every won public programme (docs/normalization.md 2.20); its other uses are not counted. Our judgment, 75% (50% to 95%)."
+      "explainer": "Without the hub grants and the $180 credit no megaton plant would be built in the US this decade (the voluntary price of a tonne removed by direct air capture is several hundred dollars, and buyers are few). Some of the removal sold to companies replaces removal they would have bought elsewhere (forests, biochar, weathering), which this counts against the plants. The public money that pays for them is valued at what it buys (docs/normalization.md 2.20); what it costs taxpayers isn't netted, pending a site-wide rule on public money that buys tonnes. Our judgment, 75% (50% to 95%)."
     },
     {
       "id": "dac_attribution_share_shared",
@@ -754,7 +808,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "Carbon180 was among the first carbon-removal policy groups and says its policy team helped structure the hubs programme in the 2021 law and shaped the hubs' design and their 2025 defence (annual reports 2021, 2022 and 2025); others behind the same wins: the Carbon Capture Coalition, Clean Air Task Force, ClearPath, the Bipartisan Policy Center, Third Way, the DAC Coalition, and the companies themselves (Occidental, Climeworks, Heirloom). Resources: Carbon180 spent $3.6M to $12M a year in 2021-2025, of it $0.19M on lobbying in 2025 (Form 990); the companies' and the coalition's federal lobbying covers many issues at once, so lobbying filings can't be split by provision, and the share is a judgment on budgets. Our judgment, 10% (4% to 25%)."
+      "explainer": "Carbon180 says its policy team helped structure the hubs programme in the 2021 law and shaped the hubs' design and their 2025 defence (annual reports 2021, 2022 and 2025). Budgets in 2022 (Form 990s, total expenses): Clean Air Task Force $40.5M, the Bipartisan Policy Center $32.2M, Third Way Institute $18.6M, the Great Plains Institute, which convenes the Carbon Capture Coalition, $7.4M (year to June 2022), Carbon180 $7.1M. Each × the share it spent on carbon capture and removal (judged: 15%, 5%, 10%, 25%, 60%) gives $6.1M, $1.6M, $1.9M, $1.9M and Carbon180's $4.3M, 27% of the groups' resources. The companies' own lobbying (Occidental, Climeworks, Heirloom, the DAC Coalition's members) and ClearPath, judged at one and a half times the groups together, bring it to about 11%; lobbying filings report one amount across all issues, so they can't split this further. Our judgment, 10% (4% to 25%)."
     },
     {
       "id": "dac_attribution_share",
@@ -800,7 +854,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "As for the plants, a little lower: the research programmes and the purchase prize had wider backing (universities, the national laboratories, industry groups). Carbon180 says it secured the first $60 million of carbon-removal appropriations in 2019 and wrote appropriations requests every year since. Our judgment, 8% (3% to 20%)."
+      "explainer": "As for the plants (the groups' 2022 budgets on carbon capture and removal, about $15.8M with Carbon180's $4.3M, and the companies at one and a half times that), plus the universities and national laboratories behind the research money, judged at three-quarters of the groups again: about 8%. Carbon180 says it secured the first $60 million of carbon-removal appropriations in 2019 and wrote appropriations requests every year since. Our judgment, 8% (3% to 20%)."
     },
     {
       "id": "tech_attribution_share",
@@ -906,7 +960,7 @@
         "high": 0.06
       },
       "kind": "judgment",
-      "explainer": "Carbon180's 2022 annual report says its advocacy was 'realized' in the law's conservation investments; the agriculture title was carried by the National Sustainable Agriculture Coalition, American Farmland Trust, The Nature Conservancy, Environmental Defense Fund, farm groups and the committees' own staff. Our judgment, 2% (0.5% to 6%)."
+      "explainer": "Carbon180's 2022 annual report says its advocacy was 'realized' in the law's conservation investments; its land team took about a sixth of its $7.1M in 2022 ($1.1M, judged). The agriculture title was carried by the National Sustainable Agriculture Coalition, American Farmland Trust, The Nature Conservancy's and Environmental Defense Fund's agriculture programmes, the farm groups and the committees' own staff, together judged at about fifty times Carbon180's land team. Our judgment, 2% (0.5% to 6%)."
     },
     {
       "id": "land_attribution_share",
@@ -927,6 +981,52 @@
       },
       "kind": "judgment",
       "explainer": "The 2025 budget law rescinded the Inflation Reduction Act's unobligated conservation money and moved it into the programmes' ordinary funding without its climate targeting; contracts already signed run on, and some practices lapse when payments end. Our judgment, 50% (25% to 80%) of the counted years."
+    },
+    {
+      "id": "forest_counterfactual_adj",
+      "section": "adjustments",
+      "label": "Forests: share of the plantings that wouldn't have happened anyway",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 0.85
+      },
+      "kind": "judgment",
+      "explainer": "The capped fund paid about a fifth of today's yearly reforestation money, and other Forest Service budgets and partners also plant; some burned land would regrow naturally. Our judgment, 70% (50% to 85%)."
+    },
+    {
+      "id": "forest_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Forests: Carbon180's share of the advocacy resources behind the reforestation money",
+      "format": "percent",
+      "value": {
+        "low": 0.005,
+        "best": 0.02,
+        "high": 0.06
+      },
+      "kind": "judgment",
+      "explainer": "American Forests led the REPLANT Act's coalition of more than 100 groups (the state foresters, the Society of American Foresters, conservation and timber groups); Carbon180's forestry work was a small part of its $3.6M in 2021 (about $0.2M, judged), against a coalition judged at about fifty times that. Our judgment, 2% (0.5% to 6%)."
+    },
+    {
+      "id": "forest_attribution_share",
+      "section": "adjustments",
+      "label": "Forests: share of credit used",
+      "format": "percent",
+      "formula": "forest_attribution_share_shared"
+    },
+    {
+      "id": "forest_implementation_adj",
+      "section": "adjustments",
+      "label": "Forests: share of the programme delivered",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.75,
+        "high": 0.95
+      },
+      "kind": "judgment",
+      "explainer": "The cap's removal is permanent and the fund is paid from tariffs on imported wood, but the Forest Service lost much of its staff in 2025, and planting needs nurseries and crews. Our judgment, 75% (50% to 95%)."
     },
     {
       "id": "missing_data_adj",
@@ -965,11 +1065,18 @@
       "formula": "land_evidence_adj * land_counterfactual_adj * land_attribution_share * land_implementation_adj * missing_data_adj"
     },
     {
+      "id": "forest_total_adj",
+      "section": "adjustments",
+      "label": "Forests: all adjustments combined",
+      "format": "multiple",
+      "formula": "forest_evidence_adj * forest_counterfactual_adj * forest_attribution_share * forest_implementation_adj * missing_data_adj"
+    },
+    {
       "id": "counterfactual_adj",
       "section": "adjustments",
       "label": "Share of the tonnes that wouldn't have happened anyway (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dac_downstream * dac_counterfactual_adj + tech_downstream * tech_counterfactual_adj + q45_downstream * q45_counterfactual_adj + land_downstream * land_counterfactual_adj) / (dac_downstream + tech_downstream + q45_downstream + land_downstream)",
+      "formula": "(dac_downstream * dac_counterfactual_adj + tech_downstream * tech_counterfactual_adj + q45_downstream * q45_counterfactual_adj + land_downstream * land_counterfactual_adj + forest_downstream * forest_counterfactual_adj) / (dac_downstream + tech_downstream + q45_downstream + land_downstream + forest_downstream)",
       "explainer": "The branches' own rows apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only."
     },
     {
@@ -977,7 +1084,7 @@
       "section": "adjustments",
       "label": "Carbon180's share of the resources behind the wins (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dac_downstream * dac_counterfactual_adj * dac_attribution_share_shared + tech_downstream * tech_counterfactual_adj * tech_attribution_share_shared + q45_downstream * q45_counterfactual_adj * q45_attribution_share_shared + land_downstream * land_counterfactual_adj * land_attribution_share_shared) / (dac_downstream * dac_counterfactual_adj + tech_downstream * tech_counterfactual_adj + q45_downstream * q45_counterfactual_adj + land_downstream * land_counterfactual_adj)",
+      "formula": "(dac_downstream * dac_counterfactual_adj * dac_attribution_share_shared + tech_downstream * tech_counterfactual_adj * tech_attribution_share_shared + q45_downstream * q45_counterfactual_adj * q45_attribution_share_shared + land_downstream * land_counterfactual_adj * land_attribution_share_shared + forest_downstream * forest_counterfactual_adj * forest_attribution_share_shared) / (dac_downstream * dac_counterfactual_adj + tech_downstream * tech_counterfactual_adj + q45_downstream * q45_counterfactual_adj + land_downstream * land_counterfactual_adj + forest_downstream * forest_counterfactual_adj)",
       "explainer": "The branches' own rows apply; this is their average, weighted by each branch's tonnes after the counterfactual, for reading only."
     },
     {
@@ -993,7 +1100,7 @@
       "section": "adjustments",
       "label": "Share of the wins' tonnes delivered (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dac_downstream * dac_counterfactual_adj * dac_attribution_share * dac_implementation_adj + tech_downstream * tech_counterfactual_adj * tech_attribution_share * tech_implementation_adj + q45_downstream * q45_counterfactual_adj * q45_attribution_share * q45_implementation_adj + land_downstream * land_counterfactual_adj * land_attribution_share * land_implementation_adj) / (dac_downstream * dac_counterfactual_adj * dac_attribution_share + tech_downstream * tech_counterfactual_adj * tech_attribution_share + q45_downstream * q45_counterfactual_adj * q45_attribution_share + land_downstream * land_counterfactual_adj * land_attribution_share)",
+      "formula": "(dac_downstream * dac_counterfactual_adj * dac_attribution_share * dac_implementation_adj + tech_downstream * tech_counterfactual_adj * tech_attribution_share * tech_implementation_adj + q45_downstream * q45_counterfactual_adj * q45_attribution_share * q45_implementation_adj + land_downstream * land_counterfactual_adj * land_attribution_share * land_implementation_adj + forest_downstream * forest_counterfactual_adj * forest_attribution_share * forest_implementation_adj) / (dac_downstream * dac_counterfactual_adj * dac_attribution_share + tech_downstream * tech_counterfactual_adj * tech_attribution_share + q45_downstream * q45_counterfactual_adj * q45_attribution_share + land_downstream * land_counterfactual_adj * land_attribution_share + forest_downstream * forest_counterfactual_adj * forest_attribution_share)",
       "explainer": "The branches' own rows apply; this is their average, weighted by each branch's tonnes after the counterfactual and credit, for reading only."
     },
     {
@@ -1002,12 +1109,12 @@
       "label": "Other work of the period not modelled, as a share of the modelled value",
       "format": "percent",
       "value": {
-        "low": 0.03,
-        "best": 0.1,
-        "high": 0.3
+        "low": 0.02,
+        "best": 0.05,
+        "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "What the four branches leave out: forestry (the 2021 law's reforestation money, which Carbon180 says it helped structure, and the $37M for urban and community forestry, $32M for the forest inventory and $2M for agroforestry it worked on in 2025, mostly funding held at earlier levels), ocean carbon-removal research ($10.5M at NOAA in 2025, the first bicameral bill in 2026: an addition to the research in the technology branch), the CORE standards framework, the community regranting ($0.9M in 2025) and the newsletters and briefings. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 10% of the modelled value (3% to 30%): the forestry wins are mostly money held rather than new programmes, and Carbon180 was one of many groups behind them."
+      "explainer": "What the five branches leave out: ocean carbon-removal research ($10.5M at NOAA in 2025, the first bicameral bill in 2026: an addition to the research in the technology branch), the 2025 forestry appropriations it worked on ($37M for urban and community forestry, $32M for the forest inventory, $2M for agroforestry: funding held at earlier levels), the CORE standards framework, the community regranting ($0.9M in 2025) and the newsletters and briefings. Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 5% of the modelled value (2% to 15%)."
     },
     {
       "id": "mitigation_deterrence_share",
@@ -1028,8 +1135,8 @@
       "section": "adjustments",
       "label": "All adjustments combined (outcome-weighted average of the branches, for reading only)",
       "format": "multiple",
-      "formula": "(dac_downstream * dac_total_adj + tech_downstream * tech_total_adj + q45_downstream * q45_total_adj + land_downstream * land_total_adj) / (dac_downstream + tech_downstream + q45_downstream + land_downstream)",
-      "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only. The wins are tax credits, grants and research and conservation money, not rules, so no compliance cost is counted (docs/normalization.md 2.21: public money is not a compliance cost)."
+      "formula": "(dac_downstream * dac_total_adj + tech_downstream * tech_total_adj + q45_downstream * q45_total_adj + land_downstream * land_total_adj + forest_downstream * forest_total_adj) / (dac_downstream + tech_downstream + q45_downstream + land_downstream + forest_downstream)",
+      "explainer": "The branches' own combined adjustments apply; this is their average, weighted by each branch's expected tonnes before adjustments, for reading only. The wins are tax credits, grants and research and conservation money, not rules, so no compliance cost is counted (docs/normalization.md 2.21: public money is not a compliance cost). Public money that buys tonnes isn't netted against what it costs taxpayers, pending a site-wide rule on it."
     },
     {
       "id": "fuel_share",
@@ -1037,7 +1144,7 @@
       "label": "Share of these tonnes from burning less fossil fuel near people",
       "format": "percent",
       "formula": "0",
-      "explainer": "None: direct air capture removes CO₂ from the air, capture at a running plant stores its CO₂ while the plant keeps burning, and soil carbon is land, so no fuel smoke is avoided."
+      "explainer": "None: direct air capture removes CO₂ from the air, capture at a running plant stores its CO₂ while the plant keeps burning, and soil and forest carbon are land, so no fuel smoke is avoided."
     },
     {
       "id": "fuel_smoke_factor",
@@ -1076,7 +1183,7 @@
       "section": "outcome",
       "label": "Tonnes of CO₂ averted or removed per year of the period",
       "format": "number",
-      "formula": "(dac_downstream * dac_total_adj + tech_downstream * tech_total_adj + q45_downstream * q45_total_adj * (1 + q45_eor_share) + land_downstream * land_total_adj) / period_years * (1 + unmodelled_benefits_adj + mitigation_deterrence_share)",
+      "formula": "(dac_downstream * dac_total_adj + tech_downstream * tech_total_adj + q45_downstream * q45_total_adj * (1 + q45_eor_share) + land_downstream * land_total_adj + forest_downstream * forest_total_adj) / period_years * (1 + unmodelled_benefits_adj + mitigation_deterrence_share)",
       "unit": "t CO₂e / year",
       "explainer": "Each branch's expected tonnes × its own adjustments, summed, spread over the period's six years, with the other wins and the side effects added as shares."
     },
