@@ -1,4 +1,4 @@
-// A net harm shows as a negative result (docs/normalization.md 2.21): the lint allows it, its simulation is
+// A net harm shows as a negative result (docs/normalization.md 2.22): the lint allows it, its simulation is
 // stored in the result's order, the reader's risk and the plausible range run the right way, the tornado
 // measures it, and figures carry a minus sign.
 import { describe, expect, it } from "vitest";

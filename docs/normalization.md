@@ -1205,8 +1205,8 @@ new audit rounds):
   Drawdown 0.00517 → 0.00490, Fair Tax Foundation 0.0562 → 0.0687, Tax Justice Network 1.25 → 1.29, Make-A-Wish
   0.00129 → 0.00156, the Bail Project 0.0125 → 0.0135 and its advocacy 0.00283 → 0.00305, Save the Children's
   advocacy 0.417 → 0.413, the Federation of American Scientists, Council on Strategic Risks and UCS
-  catastrophic-risk models ×1.00. Habitat for Humanity's awareness model is held at the old base: on the one
-  scale it is below zero (0.0076 → −0.0010, verified correct), which the site can't yet show.
+  catastrophic-risk models ×1.00. Habitat for Humanity's awareness model 0.0076 → −0.0010 (its Home Equals
+  taxpayers on the survey scale too; a net harm, 2.22).
 - **Survivors' remaining life.** A death averted is valued at its age band; where studies show survivors
   live shorter than their age group, × the condition's shared remaining-life ratio (facts/survival.json),
   elsewhere nothing: out-of-hospital cardiac arrest 0.8 (0.65–0.95; 84% relative ten-year survival),
@@ -1414,7 +1414,7 @@ save buyers money), its lands and health 0.0011 → 0.0009, Union of Concerned S
 0.0017, Cancer Research UK 0.00165 → 0.00153 and the British Heart Foundation 0.0103 → 0.0102 (the
 Tobacco and Vapes Act's shops' lost profits); the Tax Justice Network's judged reporting cost leaves the
 side effects for the main chain (unchanged at the defaults). Each changed model had a verification round.
-### 2.21 Net harm shows as a negative result (15 Nov 2026)
+### 2.22 Net harm shows as a negative result (15 Nov 2026)
 
 Owner: "negative is allowed". A model whose honest result is net harm keeps a headline below zero; the lint
 no longer rejects it. It ranks last, sits at the left edge of the log-scale bars with its number signed,

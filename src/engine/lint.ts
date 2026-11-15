@@ -321,7 +321,7 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     if (Number.isFinite(v) && (v < lo - eps || v > hi + eps)) add("high", "bounds", `${id} = ${+v.toPrecision(4)} is outside the plausible range [${lo}, ${hi}] for ${family}`, "Check the unit and the source; if the value is right, argue for it in the explainer (the auditor decides).", id);
   }
   // A bottom line at or below zero is allowed: a programme whose honest result is net harm shows it
-  // (owner, 15 Nov 2026; docs/normalization.md 2.21). The audit checks the signs.
+  // (owner, 15 Nov 2026; docs/normalization.md 2.22). The audit checks the signs.
   return out;
 }
 
