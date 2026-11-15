@@ -50,6 +50,8 @@ export const SAD_FACT_VERSION: Record<string, string> = {
   "sad_factors.sads_per_broiler_space_only": "2025",
   "sad_factors.sads_per_shrimp_stunned": "2025",
   "sad_factors.sads_per_sow_year_group_housing": "2024",
+  "sad_factors.sads_per_egg_meal_replaced": "2024",
+  "sad_factors.sads_per_dairy_meal_replaced": "2024",
 };
 
 /** Shared by every family. */

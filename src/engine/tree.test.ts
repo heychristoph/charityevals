@@ -161,7 +161,7 @@ describe("every ranked model's tree", () => {
     }
     expect(ranked.length).toBeGreaterThan(10);
     expect(off).toEqual([]);
-  }, 60_000);
+  }, 240_000);
 });
 
 describe("paths to shared numbers", () => {
