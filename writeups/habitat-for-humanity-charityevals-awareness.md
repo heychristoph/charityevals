@@ -39,11 +39,11 @@ The general awareness work has no outcome of its own beyond the advocacy: its ef
 
 ### What isn't modelled
 
-As a share of what households gain: wins that carry no money (zoning and land-use reforms, which in US cities add about 0.8% to the housing stock within a decade, mostly at the upper end of rents: Stacy and colleagues, 2023; land-tenure rules abroad) any change in public attitudes from the awareness work, and illness averted by the water, sanitation and drainage works abroad are a small positive share on top.
+As a share of what households gain: wins that carry no money (zoning and land-use reforms, which in US cities add about 0.8% to the housing stock within a decade, mostly at the upper end of rents: Stacy and colleagues, 2023; land-tenure rules abroad) any change in public attitudes from the awareness work, and illness averted by the water, sanitation and drainage works abroad add a few percent of what households gain, which is most of the result because the gain and the cost nearly cancel.
 
 ### How this model was checked
 
-Independent reviews, each by a fresh reviewer working from the model alone: three rounds at the first build, two verification rounds after the 4 November 2026 move to survey-scale consumption, and an audit on 15 November 2026. That audit added the spillovers and child deaths averted that the international model counts for the same housing, moved Home Equals to its Year 3 totals (the same window as the US branch), anchored the share of the money reaching households, and took donated advertising out of the cost; the result went from a small net harm to a small net good.
+Independent reviews, each by a fresh reviewer working from the model alone: three rounds at the first build, two verification rounds after the 4 November 2026 move to survey-scale consumption, and an audit on 15 November 2026. That audit added the spillovers and child deaths averted that the international model counts for the same housing, moved Home Equals to its Year 3 totals (from the 2023 launch), anchored the share of the money reaching households, and took donated advertising out of the cost; the result went from a small net harm to a small net good.
 
 ### Sources
 

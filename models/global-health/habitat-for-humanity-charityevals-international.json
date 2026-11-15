@@ -984,17 +984,25 @@
       "explainer": "Most are local volunteers giving a day or two; Global Village teams give a week (2,803 volunteers and 91,353 hours since its relaunch, about 33 hours each, FY2025 annual report). 10, range 4 to 30."
     },
     {
+      "id": "int_household_work_hours",
+      "section": "adjustments",
+      "label": "Hours of paid or own-account work per household a year, Habitat's countries",
+      "format": "number",
+      "value": {
+        "low": 3000,
+        "best": 4000,
+        "high": 5000
+      },
+      "kind": "judgment",
+      "explainer": "About two working adults per household at about 2,000 hours a year each (40 hours a week for 50 weeks; part-time and seasonal work lower, long informal hours higher): 4,000, range 3,000 to 5,000."
+    },
+    {
       "id": "int_volunteer_hour_value",
       "section": "adjustments",
       "label": "Value of a volunteer hour in Habitat's international work (US$)",
       "format": "usd",
-      "value": {
-        "low": 1,
-        "best": 3,
-        "high": 10
-      },
-      "kind": "judgment",
-      "explainer": "At local wages for unskilled construction work, from under $1 an hour in Malawi or Bangladesh to several dollars in Latin America and $10 or more in Romania or North Macedonia, weighted by where the work is (half in Africa and Asia): $3, range $1 to $10."
+      "explainer": "An hour of local work valued at what it earns: the regions' household-survey consumption per household (the shared survey means and household sizes this model reads), over the household's working hours, weighted by where the direct work is. About $2 an hour, from about $0.50 in Africa to about $3 in Latin America.",
+      "formula": "(lac_share * cons_mean_lac * hh_lac + eme_share * cons_mean_eme * hh_eme + afr_share * cons_mean_afr * hh_afr + (1 - lac_share - eme_share - afr_share) * cons_mean_ap * hh_ap) / int_household_work_hours"
     },
     {
       "id": "int_volunteer_value",

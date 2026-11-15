@@ -4,22 +4,21 @@
   "kind": "charity",
   "cause": "global-health",
   "beneficiaries": {
-    "USA": 0.02,
-    "HND": 0.0116,
-    "DOM": 0.0282,
-    "PER": 0.0314,
-    "ARM": 0.0494,
-    "MKD": 0.0245,
-    "ROU": 0.0123,
-    "EGY": 0.0993,
-    "KEN": 0.1268,
-    "UGA": 0.063,
-    "MWI": 0.1408,
-    "ZMB": 0.1528,
-    "PHL": 0.0995,
-    "BGD": 0.1404
+    "HND": 0.0379,
+    "DOM": 0.0246,
+    "PER": 0.0306,
+    "ARM": 0.041,
+    "MKD": 0.0216,
+    "ROU": 0.0108,
+    "EGY": 0.082,
+    "KEN": 0.097,
+    "UGA": 0.1095,
+    "MWI": 0.1719,
+    "ZMB": 0.1553,
+    "PHL": 0.0853,
+    "BGD": 0.1325
   },
-  "beneficiaries_note": "Our build: the global Home Equals campaign (98% of the result at the defaults), valued country by country over the 13 stand-in countries of the international build, each region a quarter of the people (Home Equals publishes no split, a judgment), so the shares follow each country's net value per person; US housing advocacy 2%.",
+  "beneficiaries_note": "Our build: Home Equals carries the result (the US branch is a small net harm, so 0); shares follow each country's contribution, each region a quarter of the people (a judgment).",
   "destination_reads": [
     "givewell:against-malaria-foundation",
     "givewell:malaria-consortium",
@@ -145,7 +144,7 @@
         "page": "p. 6, Consolidated statements of activities, Program services",
         "quote": "Public awareness and education 24,292"
       },
-      "explainer": "Habitat for Humanity International's (HFHI) third programme in its audited accounts, in US dollars (thousands in the statement): staff ($12.5 million), grants to Habitat organisations ($3.1 million), professional services ($3.5 million), donated media ($1.9 million) and office costs. The Form 990 describes it as sharing Habitat's message through media, habitat.org, social media and learning events; it also holds HFHI's housing-policy advocacy in the US (Habitat Voices in Action, which followed the Cost of Home campaign) and worldwide (Home Equals). Every dollar of it is counted as the cost of the policy wins below: the general awareness work has no outcome of its own beyond them (its effect on giving and volunteering is fundraising, already spread over the programmes as overhead, and volunteers' value is in the other models' attribution). The Home Equals wins run from 2023 to mid-2026; FY2024's cash line ($23.7 million) is within 6% of FY2025's, so one year's cost stands for the window until FY2026's statements are out."
+      "explainer": "Habitat for Humanity International's (HFHI) third programme in its audited accounts, in US dollars (thousands in the statement): staff ($12.5 million), grants to Habitat organisations ($3.1 million), professional services ($3.5 million), donated media ($1.9 million) and office costs. The Form 990 describes it as sharing Habitat's message through media, habitat.org, social media and learning events; it also holds HFHI's housing-policy advocacy in the US (Habitat Voices in Action, which followed the Cost of Home campaign) and worldwide (Home Equals). Every dollar of it is counted as the cost of the policy wins below: the general awareness work has no outcome of its own beyond them (its effect on giving and volunteering is fundraising, already spread over the programmes as overhead, and volunteers' value is in the other models' attribution). The Home Equals wins run from 2023 to mid-2026; FY2024's cash line ($23.7 million) is about 6% above FY2025's, so one year's cost stands for the window until FY2026's statements are out."
     },
     {
       "id": "pae_donated_advertising",
@@ -535,7 +534,7 @@
         "high": 0.75
       },
       "kind": "judgment",
-      "explainer": "Informal-settlement households are poorer than their countries' average but urban, and urban consumption is above rural: the bottom 40%'s survey consumption is 0.28 to 0.59 of the mean in the countries in he_cons_mean (World Bank SI.SPR.PC40 ÷ SI.SPR.PCAP, in facts/survey_consumption.json). And the average is over regions as different as Africa ($470) and Latin America ($3,100), so the range is wide: 0.5, range 0.25 (the poorest countries' bottom 40%) to 0.75 (the top of the bottom-40% range, 0.59, with an urban premium of about a quarter)."
+      "explainer": "Informal-settlement households are poorer than their countries' average but urban, and urban consumption is above rural: the bottom 40%'s survey consumption is 0.28 to 0.59 of the mean in the countries in he_cons_mean (World Bank SI.SPR.PC40 ÷ SI.SPR.PCAP, in facts/survey_consumption.json). And the average is over regions as different as Africa ($470) and Latin America ($3,100), so the range is wide: 0.5, range 0.25 (the poorest countries' bottom 40%) to 0.75 (the top of the bottom-40% range, 0.59, plus some of informal-settlement households' higher money consumption in cities, most of which urban prices take back)."
     },
     {
       "id": "he_baseline_consumption",
@@ -597,7 +596,7 @@
     {
       "id": "he_payer_cost_per_person",
       "section": "effect",
-      "label": "Home Equals: ln(consumption) given up by those who pay, per person reached",
+      "label": "ln(consumption) given up by those who pay and their sellers, per person reached",
       "format": "number",
       "formula": "avg(avg(he_gross_hnd, he_gross_dom, he_gross_per), avg(he_gross_arm, he_gross_mkd, he_gross_rou, he_gross_egy), avg(he_gross_ken, he_gross_uga, he_gross_mwi, he_gross_zmb), avg(he_gross_phl, he_gross_bgd)) - avg(avg(he_net_hnd, he_net_dom, he_net_per), avg(he_net_arm, he_net_mkd, he_net_rou, he_net_egy), avg(he_net_ken, he_net_uga, he_net_mwi, he_net_zmb), avg(he_net_phl, he_net_bgd))",
       "explainer": "For reading: the payers' cost per person reached, averaged over the countries (gross gain less net), each at its country's survey mean × he_payer_multiple."
@@ -1476,12 +1475,26 @@
       "label": "Benefits and harms not modelled, as a share of the households' gross value",
       "format": "percent",
       "value": {
-        "low": -0.05,
-        "best": 0.08,
-        "high": 0.25
+        "low": -0.02,
+        "best": 0.04,
+        "high": 0.1
       },
       "kind": "judgment",
-      "explainer": "Not modelled, as a share of the households' gross value (before the payers' cost): (+) wins that carry no money, such as land-use and zoning reforms (in US cities, loosening reforms raise the housing stock by about 0.8% within three to nine years, mostly at the upper end of the rent distribution: Stacy et al. 2023, Urban Studies) and land-tenure rules in Home Equals countries, +3%; (+) public attitudes to affordable housing from the awareness work, not measured, +1%; (+) illness averted by the water, sanitation and drainage works in Home Equals countries (children's diarrhoea and parasites; Cattaneo et al. 2009 for cement floors), +5%, as the international model counts for its floors and latrines; (−) wins that crowd out other housing spending, −1%. Range −5% to +25% (the high end allows larger health effects)."
+      "explainer": "Not modelled, as a share of the households' gross value (before the payers' cost): (+) wins that carry no money, such as land-use and zoning reforms (in US cities, loosening reforms raise the housing stock by about 0.8% within three to nine years, mostly at the upper end of the rent distribution: Stacy et al. 2023, Urban Studies) and land-tenure rules in Home Equals countries, +3%; (+) public attitudes to affordable housing from the awareness work, not measured, +1%. Wins that shift money from other housing programmes for similar households lose those households' gain but also save the payers' cost, so on the net value they are under 1% and left out. Illness averted abroad is its own row (he_illness_adj). Range −2% to +10%."
+    },
+    {
+      "id": "he_illness_adj",
+      "side_effect": "added",
+      "section": "adjustments",
+      "label": "Home Equals: illness averted, as a share of the households' gross value",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.05,
+        "high": 0.2
+      },
+      "kind": "judgment",
+      "explainer": "Illness averted by the water, sanitation and drainage works in Home Equals countries (children's diarrhoea and parasites), as the international model counts for its floors and latrines (Cattaneo et al. 2009 measured it for cement floors in Mexico): 0.05, range 0 to 0.2. Deaths averted are in he_mortality_ratio. Home Equals only."
     },
     {
       "id": "outcome_total",
@@ -1489,7 +1502,7 @@
       "label": "Total units of value",
       "format": "number",
       "unit": "units of value",
-      "formula": "us_value * us_total_adj + he_value * he_total_adj + unmodelled_benefits_adj * (us_gross_value * us_total_adj + he_gross_value * he_total_adj) + moved_value + careers_value",
+      "formula": "us_value * us_total_adj + he_value * he_total_adj + unmodelled_benefits_adj * (us_gross_value * us_total_adj + he_gross_value * he_total_adj) + he_illness_adj * he_gross_value * he_total_adj + moved_value + careers_value",
       "explainer": "Each branch's net value times its own adjustments, plus what isn't modelled as a share of the households' gross value (so its sign doesn't flip when the net does); money moved and careers are 0. The result can be negative across the ranges: when the households gain less than the payers lose."
     },
     {
@@ -1523,7 +1536,7 @@
       "label": "Staff pay as a share of the programme's cost",
       "format": "percent",
       "formula": "pae_salaries / (pae_spend - pae_donated_advertising)",
-      "explainer": "The awareness programme's own salaries over its expenses (52%), its own figure in place of the shared default (Convention 1); the advocacy cost from the other lines is mostly staff too."
+      "explainer": "The awareness programme's own salaries over its expenses (56%), its own figure in place of the shared default (Convention 1); the advocacy cost from the other lines is mostly staff too."
     },
     {
       "id": "salary_gap",
