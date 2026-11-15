@@ -1,6 +1,6 @@
 ### Summary
 
-Industrious Labs campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. Our model counts the rules it helped win in 2023 and 2024, against what it spent in those years. It comes to **<span data-figure="headline" data-model="industrious-labs-charityevals">-0.001</span> years of healthy life per 1,000 dollars**: close to zero, slightly negative. The rules' compliance costs slightly outweigh their tonnes and the deaths their cleaner air avoids.
+Industrious Labs campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. Our model counts the rules it helped win in 2023 and 2024, against what it spent in those years. It comes to **<span data-figure="headline" data-model="industrious-labs-charityevals">-0.002</span> years of healthy life per 1,000 dollars**: a small net harm. The rules' compliance costs outweigh their tonnes and the deaths and illness their cleaner air avoids.
 
 ### What the charity does
 
@@ -19,7 +19,7 @@ A won rule cuts emissions or air pollution once it takes effect. The model count
 
 - **South Coast AQMD's Rule 1146.2 (June 2024).** About 1.07 million gas-fired pool heaters, large and tankless water heaters, small boilers and process heaters in the Los Angeles basin switch to heat pumps as they wear out. That cuts about 2.2 million tonnes of CO₂ a year once complete, and 5.6 tons a day of smog-forming NOx. Industrious Labs counts it among two "landmark victories" it secured, and helped defend it in court.
 - **South Coast AQMD's Rule 1153.1 (August 2023).** Bakery and cooking ovens go electric once they are 22 years old: 0.11 tons a day of NOx. The tonnes are about 16,000 a year, and could be negative while the grid still runs on gas.
-- **EPA's 2024 rule for integrated steel mills.** It removes 473 tons a year of fine particles. EPA's monetized benefits imply about 20 early deaths a year avoided. A 2025 exemption delayed it.
+- **EPA's 2024 rule for integrated steel mills.** It removes 473 tons a year of fine particles. EPA's two benefit cases imply about 16 to 35 early deaths a year avoided. A 2025 exemption delayed it.
 - **EPA's 2024 coke-oven rules.** These are mostly fenceline monitoring, and EPA quantified no benefit. They were exempted in 2025 and restored that October.
 
 The campaigns that lost or stayed open in the period count at zero against the same spending. These are DOE's clean-steel and aluminium awards (mostly withdrawn), U.S. Steel's Gary blast-furnace reline, Cleveland-Cliffs' delayed Burns Harbor reline, and the landfill rules.
@@ -36,16 +36,21 @@ For each rule, the model multiplies:
 - the share delivered;
 - the missing-data step.
 
-The deaths from cleaner air in the basin use the district's own modelling of its 2022 air plan: 3,031 deaths avoided in 2037 for 124 tons a day of NOx, about 24 a year per ton a day.
+The deaths from cleaner air in the basin use the district's own modelling of its 2022 air plan: 3,031 deaths avoided in 2037 for 124 tons a day of NOx, about 24 a year per ton a day. They are valued at the ages US air-pollution deaths come at, and illness avoided adds 3.6% (the district's own valuation).
 
-Each rule's compliance costs are the regulator's own figures (docs/normalization.md 2.21). For Rule 1146.2, the district's analysis gives the heat pumps' extra price, amortized at the site's discount rate, plus owners' fuel savings. The savings use the same evidence adjustment as the tonnes, since both rest on the same per-unit energy use. The costs are valued as money lost by owners and consumers, and pass through the same chain as the benefits. The cost is a typical year of 2023–2024: Tides Foundation's grants over the share of the budget they paid (our judgment, 75%). The next dollar counts 42% of the past average.
+Each rule's compliance costs are the regulator's own figures (docs/normalization.md 2.21). For Rule 1146.2, the district's analysis gives the heat pumps' extra price, amortized at the site's discount rate, plus owners' fuel savings. The tonnes, the fuel savings and the NOx cut all rest on the same per-unit energy use, so all three take the same evidence adjustment (0.8). The costs are valued as money lost by owners and consumers, and pass through the same chain as the benefits. The cost is a typical year of 2023–2024: Tides Foundation's grants over the share of the budget they paid (our judgment, 75%). The next dollar counts 42% of the past average.
 
 ### What drives the result
 
-Rule 1146.2 is nearly the whole result. Its benefits and its costs are of similar size, so the sign is fragile:
+- **Rule 1146.2** is about two-thirds of the net harm. Its costs exceed its tonnes and health benefits by about a third.
+- **Rule 1153.1** is most of the rest: electric ovens cost more to run than gas ones, and the higher bills are several times the value of their small NOx cut.
+- **EPA's steel-mill rule** adds a little good. The coke-oven rules add a small cost.
+
+Benefits and costs are of similar size, so the sign is fragile:
 
 - **The discount rate.** At a lower rate the late tonnes and the cleaner air count for more than the up-front cost of the heat pumps.
-- **The heat pumps' real cost.** At 0.8 of the quotes the result turns positive.
+- **The heat pumps' real cost.** At 0.75 of the quotes the result turns positive.
+- **The district's per-unit energy use** (the evidence adjustment). At 1.1 it turns positive.
 - **Deaths per ton of NOx** in the basin: 12 to 30.
 
 ### Biggest uncertainties
@@ -61,7 +66,7 @@ California's industrial-heat laws (AB 2083 in 2024; AB 1280 came in 2025, after 
 
 ### How this model was checked
 
-Two independent audits. The first found that the costs and benefits were treated unequally, and that Rule 1153.1 and EPA's two steel rules were missing as wins. It also found that the smoke per tonne was a guess, and that the cost range came from a discount rate. Each won rule now has its own branch, the deaths come from the district's NOx modelling, and the costs move with the discount rate.
+Two independent audits. The first found that the costs and benefits were treated unequally, and that Rule 1153.1 and EPA's two steel rules were missing as wins. It also found that the smoke per tonne was a guess, and that the cost range came from a discount rate. Each won rule now has its own branch, the deaths come from the district's NOx modelling, and the costs move with the discount rate. The second audit found that the NOx deaths lacked the evidence adjustment on per-unit use, and that the EPA branches asked the advocacy question twice. It also found that illness, a US age mix and EPA's two benefit cases were missing. All were fixed. A third, scoped check verified the changes.
 
 ### Sources
 

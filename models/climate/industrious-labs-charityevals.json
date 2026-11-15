@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "industrious-labs",
   "owner": "charityevals",
-  "summary": "Industrious Labs (Cincinnati) campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. This model counts the four rules it helped win in 2023-2024 (South Coast AQMD's Rules 1146.2 for water heaters, boilers and pool heaters and 1153.1 for commercial ovens, and EPA's 2024 steel-mill and coke-oven air-toxics rules), with its lost steel and aluminium campaigns at zero, against its spending in those years (about $3.7 million a year, from Tides Foundation's grants to it; its own accounts aren't public). At the defaults the rules' compliance costs (the regulators' own figures) slightly outweigh their tonnes and the deaths their cleaner air avoids in the Los Angeles basin, a small net harm of about -0.001 years of healthy life per $1,000; the sign turns on the discount rate, the heat pumps' real cost and how many deaths a ton of NOx causes there. Every branch is discounted for missing data: nothing is measured for its work.",
+  "summary": "Industrious Labs (Cincinnati) campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. This model counts the four rules it helped win in 2023-2024 (South Coast AQMD's Rules 1146.2 for water heaters, boilers and pool heaters and 1153.1 for commercial ovens, and EPA's 2024 steel-mill and coke-oven air-toxics rules), with its lost steel and aluminium campaigns at zero, against its spending in those years (about $3.7 million a year, from Tides Foundation's grants to it; its own accounts aren't public). At the defaults the rules' compliance costs (the regulators' own figures) outweigh their tonnes and the deaths and illness their cleaner air avoids in the Los Angeles basin, a small net harm of about -0.002 years of healthy life per $1,000: the heat-pump rule's costs exceed its benefits by about a third, and the oven rule's higher electricity bills are several times its health benefit. The sign turns on the discount rate, the heat pumps' real cost and how far the district's per-unit energy use holds. Every branch is discounted for missing data: nothing is measured for its work.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Industrious Labs",
@@ -54,18 +54,13 @@
       "type": "study"
     },
     {
-      "title": "South Coast AQMD (2023), Draft Socioeconomic Impact Assessment for Proposed Amended Rule 1153.1",
-      "url": "https://www.aqmd.gov/docs/default-source/clean-air-plans/socioeconomic-analysis/first-draft-of-par-1153-1socioeconomic-impact-assessment_june30_2023.pdf",
+      "title": "US GAO (2024), B-336203: EPA's integrated iron and steel rule (major rule report)",
+      "url": "https://www.gao.gov/products/b-336203",
       "type": "study"
     },
     {
-      "title": "US EPA (2024), Integrated Iron and Steel NESHAP final amendments: fact sheet",
-      "url": "https://www.epa.gov/system/files/documents/2024-03/final-iis-fact-sheet_0.pdf",
-      "type": "study"
-    },
-    {
-      "title": "US EPA (2024), Economic Impact Analysis, Coke Ovens NESHAP final amendments",
-      "url": "https://www.epa.gov/system/files/documents/2024-05/coke-ovens-rtr-eia-final-2024-05.pdf",
+      "title": "South Coast AQMD, 2022 AQMP socioeconomic analysis (REMI users' conference slides, 2023)",
+      "url": "https://wp.remi.com/wp-content/uploads/2023/10/Tony-Tian-presentaiton.pdf",
       "type": "study"
     }
   ],
@@ -199,7 +194,7 @@
       "label": "Spending on the modelled programmes, 2024",
       "format": "usd",
       "formula": "program_expenses",
-      "explainer": "All of Industrious Labs' work (steel, aluminium, cement, clean industrial heat, landfills and field building): the one rule modelled below and the other work's share of value are set against all of it."
+      "explainer": "All of Industrious Labs' work: the four won rules below, and the lost campaigns at zero, are set against all of it."
     },
     {
       "id": "overhead_ratio",
@@ -482,7 +477,7 @@
         "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "The tonnes are our arithmetic on the district's ex-ante per-unit gas and electricity use (pool heaters run less than assumed in some homes, more in others; the commercial mix is inferred), not measured cuts. The same use drives the owners' fuel bills, so the recurring cost rows take this adjustment too; the units' prices and the NOx figures don't. Our judgment, 0.8 (0.5 to 1.1), as for Clean Air Task Force's regulator-estimated rules."
+      "explainer": "The tonnes are our arithmetic on the district's ex-ante per-unit gas and electricity use (pool heaters run less than assumed in some homes, more in others; the commercial mix is inferred), not measured cuts. The same operating hours drive the owners' fuel bills and the district's NOx cut, so the recurring cost rows and the South Coast deaths take this adjustment too; the units' prices and EPA's steel figures don't. Our judgment, 0.8 (0.5 to 1.1), as for Clean Air Task Force's regulator-estimated rules."
     },
     {
       "id": "s46_counterfactual_adj",
@@ -572,12 +567,12 @@
       "label": "EPA's 2024 iron and steel rule: share that wouldn't have happened anyway",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.8
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "The Clean Air Act's eight-year technology reviews and a 2020 court ruling (LEAN v. EPA) required EPA to regulate the steel mills' unregulated air toxics, so a rule was due anyway; advocacy shaped how strict it was. Our judgment, 50% (30% to 80%)."
+      "explainer": "Share of the controls the plants wouldn't have adopted without any rule: spending with no private return, so little would have come anyway. Whether the rule itself would have come later is the shared advocacy share and years a won reform counts, not this row. Our judgment, 90% (70% to 100%)."
     },
     {
       "id": "iis_attribution_share_shared",
@@ -618,12 +613,12 @@
       "label": "EPA's 2024 coke-oven rules: share that wouldn't have happened anyway",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.5,
-        "high": 0.8
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Also a required technology review under court deadlines; advocacy shaped the fenceline monitoring. Our judgment, 50% (30% to 80%)."
+      "explainer": "Share of the fenceline monitoring and controls the plants wouldn't have adopted without any rule: spending with no private return, so little would have come anyway. Whether the rule itself would have come later is the shared advocacy share and years a won reform counts, not this row. Our judgment, 90% (70% to 100%)."
     },
     {
       "id": "coke_attribution_share_shared",
@@ -686,7 +681,7 @@
       "label": "Share of the tonnes that wouldn't have happened anyway (tonnes-weighted, for reading only)",
       "format": "percent",
       "formula": "(s46_downstream * s46_counterfactual_adj + s53_downstream * s53_counterfactual_adj) / (s46_downstream + s53_downstream)",
-      "explainer": "The outcome-weighted average of the branches with tonnes (weighted by expected tonnes), for reading only; the branches. own rows apply."
+      "explainer": "The outcome-weighted average of the branches with tonnes (weighted by expected tonnes), for reading only; the branches' own rows apply."
     },
     {
       "id": "attribution_share_shared",
@@ -737,27 +732,27 @@
     {
       "id": "v_air_death",
       "section": "adjustments",
-      "label": "Value of an air-pollution death, units of value (by the ages air-pollution deaths come at)",
+      "label": "Value of a US air-pollution death, units of value (by the ages US air-pollution deaths come at)",
       "format": "number",
-      "formula": "@death_ages.air_pollution_share_under5 * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14 * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49 * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus * @moral_weights.uov_per_death_age_50_74",
+      "formula": "@death_ages.air_pollution_share_under5_usa * @moral_weights.uov_per_death_under5 + @death_ages.air_pollution_share_5_14_usa * @moral_weights.uov_per_death_age_5_14 + @death_ages.air_pollution_share_15_49_usa * @moral_weights.uov_per_death_age_15_49 + @death_ages.air_pollution_share_50plus_usa * @moral_weights.uov_per_death_age_50_74",
       "unit": "uov",
-      "explainer": "The site's value of a death by age, over the ages of air-pollution deaths (facts: death_ages, moral_weights), as the tonnes' conversion values its air-pollution deaths (docs/normalization.md 2.5)."
+      "explainer": "The site's value of a death by age, over the ages of US air-pollution deaths (facts: death_ages, the United States' GBD 2023 mix; moral_weights): these deaths are local, mostly at 70 or older."
     },
     {
       "id": "s46_health_uov",
       "section": "adjustments",
       "label": "Rule 1146.2: early deaths avoided by its NOx cut, units of value",
       "format": "number",
-      "formula": "s46_nox_deaths_per_year * v_air_death * $life_value_multiplier * p_success * discounted_years * s46_counterfactual_adj * s46_attribution_share * s46_implementation_adj * missing_data_adj",
+      "formula": "s46_nox_deaths_per_year * v_air_death * $life_value_multiplier * evidence_adj * p_success * discounted_years * s46_counterfactual_adj * s46_attribution_share * s46_implementation_adj * missing_data_adj",
       "unit": "uov",
-      "explainer": "The rule's local smog and nitrate deaths, counted directly (the tonnes' own smoke weight is 0, so nothing counts twice), over the same years, wait, advocacy share, counterfactual, credit, delivered share and missing-data step as its tonnes; × $life_value_multiplier, as every death on the site."
+      "explainer": "The rule's local smog and nitrate deaths, counted directly (the tonnes' own smoke weight is 0, so nothing counts twice), × the evidence adjustment (the district's NOx cut rests on the same operating hours as the gas use), over the same years, wait, advocacy share, counterfactual, credit, delivered share and missing-data step as its tonnes; × $life_value_multiplier, as every death on the site."
     },
     {
       "id": "s53_health_uov",
       "section": "adjustments",
       "label": "Rule 1153.1: early deaths avoided by its NOx cut, units of value",
       "format": "number",
-      "formula": "s53_nox_deaths_per_year * v_air_death * $life_value_multiplier * p_success * s53_discounted_years * s53_counterfactual_adj * s53_attribution_share * s53_implementation_adj * missing_data_adj",
+      "formula": "s53_nox_deaths_per_year * v_air_death * $life_value_multiplier * evidence_adj * p_success * s53_discounted_years * s53_counterfactual_adj * s53_attribution_share * s53_implementation_adj * missing_data_adj",
       "unit": "uov",
       "explainer": "As for Rule 1146.2."
     },
@@ -883,13 +878,34 @@
       "explainer": "EPA's estimate, $4.0 million a year (2023 dollars), mostly fenceline monitoring. EPA quantified no health benefit, since the rules chiefly keep emissions from rising, so this branch counts only its cost."
     },
     {
+      "id": "air_morbidity_share",
+      "section": "adjustments",
+      "label": "Side effect: illness avoided by cleaner air (asthma, hospital visits, lost days), as a share of the deaths' value",
+      "format": "percent",
+      "value": {
+        "low": 0.02,
+        "best": 0.036,
+        "high": 0.08
+      },
+      "kind": "estimate",
+      "side_effect": "added",
+      "source": {
+        "title": "South Coast AQMD, 2022 AQMP Socioeconomic Analysis (presented at the REMI users' conference, 2023)",
+        "url": "https://wp.remi.com/wp-content/uploads/2023/10/Tony-Tian-presentaiton.pdf",
+        "page": "slide 13, Summary of Public Health Benefits, 2037",
+        "quote": "Morbidity-related benefits $0.7 $1.4 $0.7 $4.7",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "The district's own valuation of its 2022 air plan puts illness avoided at $1.4 billion against $39.1 billion for deaths in 2037: 3.6% (2% to 8%, EPA's analyses often find a little more). Added to each rule's deaths."
+    },
+    {
       "id": "uov_per_year",
       "section": "adjustments",
       "label": "The won rules' health effects and compliance costs, units of value per year of the period",
       "format": "number",
-      "formula": "(s46_health_uov + s53_health_uov + iis_health_uov + s46_compliance_uov + s53_compliance_uov + iis_compliance_uov + coke_compliance_uov) / period_years",
+      "formula": "((s46_health_uov + s53_health_uov + iis_health_uov) * (1 + air_morbidity_share) + s46_compliance_uov + s53_compliance_uov + iis_compliance_uov + coke_compliance_uov) / period_years",
       "unit": "uov",
-      "explainer": "Deaths avoided by local air pollution and the rules' compliance costs, summed and spread over the period's two years, in the main chain (docs/normalization.md 2.21)."
+      "explainer": "Deaths and illness avoided by cleaner local air and the rules' compliance costs, summed and spread over the period's two years, in the main chain (docs/normalization.md 2.21)."
     },
     {
       "id": "methane_share",
@@ -945,9 +961,9 @@
       "section": "outcome",
       "label": "Tonnes of CO₂e averted per year of the period",
       "format": "number",
-      "formula": "(s46_downstream * s46_total_adj + s53_downstream * s53_total_adj) / period_years * (1 + refrigerant_leak_share) + tco2e_from_uov",
+      "formula": "(s46_downstream * s46_total_adj * (1 + refrigerant_leak_share) + s53_downstream * s53_total_adj) / period_years + tco2e_from_uov",
       "unit": "t CO₂e / year",
-      "explainer": "The two South Coast rules' expected tonnes × their adjustments, the refrigerant side effect, and the four rules' local health effects and compliance costs in tonnes."
+      "explainer": "The two South Coast rules' expected tonnes × their adjustments (the refrigerant side effect on the heat pumps only; electric ovens hold none), and the four rules' local health effects and compliance costs in tonnes."
     },
     {
       "id": "tco2e_per_dollar",
