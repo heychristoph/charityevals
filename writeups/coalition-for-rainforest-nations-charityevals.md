@@ -1,9 +1,9 @@
 ### Summary
 
-The Coalition for Rainforest Nations (CfRN) works with rainforest countries in the UN climate talks and helps them get paid for cutting deforestation. Our model of its 2024 spending comes to **<span data-figure="headline" data-model="coalition-for-rainforest-nations-charityevals">−0.12</span> years of healthy life per $1,000**: a net harm, though the result is mostly uncertainty.
+The Coalition for Rainforest Nations (CfRN) works with rainforest countries in the UN climate talks and helps them get paid for cutting deforestation. Our model of its 2024 spending comes to **<span data-figure="headline" data-model="coalition-for-rainforest-nations-charityevals">−0.02</span> years of healthy life per $1,000**: a small net harm, close to zero. The result is mostly uncertainty: in our simulation it is harmful in about three draws of five.
 
-- Nearly all of it is CfRN's small share of the climate-finance goal agreed at COP29. Much climate finance is aid moved from health, education and other development work into cutting emissions, which is worth far less in healthy years. At our best guesses the aid lost outweighs the new aid for adaptation and the emissions cut.
-- Whether the goal's money is new aid decides the sign. If about two thirds of it were new, the result would be positive.
+- Nearly all of it is CfRN's small share of the climate-finance goal agreed at COP29. Some climate finance is aid moved from health, education and other development work into cutting emissions, which is worth far less in healthy years. At our best guesses the aid lost slightly outweighs the new aid for adaptation and the emissions cut, with the cleaner air that comes with them.
+- Whether the goal's money is new aid decides the sign. If about half of it were new, the result would be zero; more, and it would be positive.
 - The forest CfRN's work helps keep standing adds a little: a small cut in pandemic risk, and carbon, which is worth little in healthy years, as everywhere on the site.
 - Selling forest credits can do harm too. A country that counts a credit against its own target can emit a tonne more. At our best guesses the credit sales are a small net harm.
 
@@ -34,8 +34,9 @@ The [model](/coalition-for-rainforest-nations/coalition-for-rainforest-nations-c
 - half of that rise as not coming anyway: a new goal was required from a $100 billion floor, and the presidency's draft of 22 November 2024 already offered $250 billion;
 - 15% of the rise in finance as the goal's own doing (the $100 billion goal was met two years late);
 - 40% of the money as worth a grant (the goal counts loans and private money at face value), and half of it as delivered;
-- 35% for adaptation, valued as aid; the rest for cutting emissions, at $40 a tonne, with the smoke the fuel would have made;
-- 40% as new aid, and the rest as moved from other aid, which loses the value of that aid (CARE found 7% to 48% of climate finance new, by its strict and weak tests).
+- the money in 2024 dollars (prices about a quarter higher by 2035);
+- 35% for adaptation, valued as aid; the rest for cutting emissions, at $10 a tonne over the projects' 20-year lives (about three times the Green Climate Fund's own projection), with the smoke the fuel would have made;
+- 40% as new aid (CARE found 7% to 48% of climate finance new, by its strict and weak tests). Of the rest, 40% is existing aid relabelled as climate finance, which changes nothing, and 60% is aid moved to new uses, which loses the value of that aid.
 
 The win is counted like every won policy on the site: the advocates' shared part of a won climate policy (30%), the site's years a win counts, discounted to 2035, and one of the three years of talks per year of work. CfRN's share of the credit is its spending on the talks over all advocates' and support groups' spending on them: about half a percent, at our judgment of $80 million a year in all.
 
@@ -57,11 +58,12 @@ The win is counted like every won policy on the site: the advocates' shared part
 
 The biggest swings are:
 
-- the share of the goal's money that is new aid;
-- how much of the rise in finance the goal itself causes;
-- the years a won policy counts;
-- everyone else's spending on the finance talks, which sets CfRN's share;
-- the share of CfRN's work on the finance talks.
+- the share of the goal's money that is new aid, and how much of the rest is only relabelled;
+- the share for adaptation;
+- the value of a dollar of aid;
+- the cost per tonne of the mitigation, and the smoke it removes.
+
+Each of these can turn the result from harm to good.
 
 ### Biggest uncertainties
 
@@ -79,7 +81,7 @@ These sit in one row for effects not modelled, at zero net (−20% to +20%).
 
 ### How this model was checked
 
-Built on 15 November 2026 from CfRN's 2024 Form 990 and Impact Statement. The first two rounds of the independent audit failed. After round 1 we added the climate-finance goal as its own branch, put Guyana's cost per tonne into 2024 prices and split credit buyers by what they would otherwise do. After round 2 we valued the goal's mitigation money in tonnes, counted the aid it moves from other uses, set CfRN's share from its own spending, and allowed for the goal coming anyway. Later rounds are in audits/coalition-for-rainforest-nations-charityevals/.
+Built on 15 November 2026 from CfRN's 2024 Form 990 and Impact Statement. The first two rounds of the independent audit failed. After round 1 we added the climate-finance goal as its own branch, put Guyana's cost per tonne into 2024 prices and split credit buyers by what they would otherwise do. After round 2 we valued the goal's mitigation money in tonnes, counted the aid it moves from other uses, set CfRN's share from its own spending, and allowed for the goal coming anyway. Round 3 also failed: we then separated relabelled aid from aid moved, discounted the projects' tonnes over their lives, put the goal into 2024 prices, restated the cost per tonne on the Green Climate Fund's grant-equivalent basis, and made the effects not modelled count the right way round for a net harm. All rounds are in audits/coalition-for-rainforest-nations-charityevals/.
 
 ### Sources
 

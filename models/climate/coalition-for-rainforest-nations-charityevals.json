@@ -7,7 +7,7 @@
   "estimate_basis": "past_average",
   "charity": "coalition-for-rainforest-nations",
   "owner": "charityevals",
-  "summary": "The Coalition for Rainforest Nations helps rainforest countries in the UN climate talks, trains their teams to measure and report their forest results so they can be paid for cutting deforestation, and helps them sell forest carbon credits under Article 6 of the Paris Agreement. We model all of its 2024 programme spending ($4.0 million) in three branches: the forest kept by donors' results-based payments; the forest kept by credit sales, less the extra emissions of buyers who count the credits against their own targets; and the climate-finance goal agreed at COP29, its adaptation money valued as aid and its mitigation money in tonnes. The result is a net harm, and nearly all of it is the finance goal: much climate finance is aid moved from health, education and other development work into mitigation, which is worth far less in healthy years, so at the best guesses the aid lost outweighs the adaptation aid and the mitigation gained. The share of the goal's money that is new aid decides the sign: at about two thirds new the result turns positive. The forest branches rest on one evaluation, Norway's payments to Guyana, credit CfRN with its small share of all the money behind the forest kept, and are small; the credit sales are a small net harm. Every branch takes the missing-data discount, and the result is mostly uncertainty.",
+  "summary": "The Coalition for Rainforest Nations helps rainforest countries in the UN climate talks, trains their teams to measure and report their forest results so they can be paid for cutting deforestation, and helps them sell forest carbon credits under Article 6 of the Paris Agreement. We model all of its 2024 programme spending ($4.0 million) in three branches: the forest kept by donors' results-based payments; the forest kept by credit sales, less the extra emissions of buyers who count the credits against their own targets; and the climate-finance goal agreed at COP29, its adaptation money valued as aid and its mitigation money in tonnes. The result is a small net harm, close to zero, and nearly all of it is the finance goal: some climate finance is aid moved from health, education and other development work into mitigation, which is worth far less in healthy years, and at the best guesses the aid lost slightly outweighs the new adaptation aid and the mitigation gained, with its cleaner air. The share of the goal's money that is new aid decides the sign: at about half new the result is zero, and above it positive. The forest branches rest on one evaluation, Norway's payments to Guyana, credit CfRN with its small share of all the money behind the forest kept, and are small; the credit sales are a small net harm. Every branch takes the missing-data discount, and the result is mostly uncertainty: in the simulation it is harmful in about three draws of five.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Coalition for Rainforest Nations",
@@ -335,43 +335,83 @@
       "explainer": "The site's shared figure for a donor's aid budget (docs/normalization.md 2.20), for the adaptation aid gained and the other aid displaced alike."
     },
     {
+      "id": "fin_price_level_2035_vs_2024",
+      "section": "reach",
+      "label": "Climate-finance goal: prices in 2035 against 2024",
+      "format": "multiple",
+      "value": {
+        "low": 1.15,
+        "best": 1.24,
+        "high": 1.4
+      },
+      "kind": "judgment",
+      "explainer": "The goal is in dollars of the day, not indexed, and the model counts in 2024 dollars (Convention 8). Anchor: the Federal Reserve's and the ECB's 2% inflation targets over eleven years, 1.02^11 = 1.24 (1.15-1.40). No shared inflation forecast exists in facts/."
+    },
+    {
       "id": "fin_grant_dollars_per_year",
       "section": "reach",
-      "label": "Climate-finance goal: grant-equivalent finance it adds a year at the 2035 level",
+      "label": "Climate-finance goal: grant-equivalent finance it adds a year at the 2035 level, in 2024 dollars",
       "format": "usd",
-      "formula": "(fin_goal_per_year - fin_old_goal_per_year) * fin_added_by_goal_share * fin_grant_equivalent_share"
+      "formula": "(fin_goal_per_year - fin_old_goal_per_year) * fin_added_by_goal_share * fin_grant_equivalent_share / fin_price_level_2035_vs_2024"
+    },
+    {
+      "id": "fin_rebadged_share",
+      "section": "reach",
+      "label": "Climate-finance goal: share of the money that isn't new whose use is unchanged (rebadged)",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.7
+      },
+      "kind": "judgment",
+      "explainer": "Money that fails CARE's test of new aid isn't all aid moved to new uses: CARE calls much of it development finance \"rebadged\" with climate objectives (Seeing Double 2023, p. 7), and its p. 6 cites studies finding that donors over-report the climate relevance of their projects. Rebadged money neither loses an aid project nor builds a mitigation project: its value is zero. Our judgment 40% (20-70%) of the money that isn't new."
     },
     {
       "id": "fin_uov_per_year",
       "section": "reach",
       "label": "Climate-finance goal: value as aid a year, net of the aid displaced",
       "format": "number",
-      "formula": "fin_grant_dollars_per_year * fin_value_per_dollar * (fin_adaptation_share * fin_new_aid_share - (1 - fin_adaptation_share) * (1 - fin_new_aid_share))",
+      "formula": "fin_grant_dollars_per_year * fin_value_per_dollar * (fin_adaptation_share * fin_new_aid_share - (1 - fin_adaptation_share) * (1 - fin_new_aid_share) * (1 - fin_rebadged_share))",
       "unit": "uov",
-      "explainer": "New money for adaptation adds the value of aid; money diverted to adaptation from other aid nets to nothing (aid for aid); money diverted to mitigation loses the aid it replaced, and its tonnes are counted separately. Negative when the diverted mitigation money outweighs the new adaptation money."
+      "explainer": "New money for adaptation adds the value of aid; money moved to adaptation from other aid nets to nothing (aid for aid); money moved to mitigation loses the aid it replaced, and its tonnes are counted separately; rebadged money changes nothing. Negative when the money moved to mitigation outweighs the new adaptation money."
     },
     {
       "id": "fin_mitigation_cost_per_tco2e",
       "section": "reach",
-      "label": "Climate-finance goal: finance per tonne of CO₂e its mitigation projects avoid",
+      "label": "Climate-finance goal: grant-equivalent finance per tonne of CO₂e its mitigation projects avoid over their lives",
       "format": "usd",
       "value": {
-        "low": 10,
-        "best": 40,
-        "high": 150
+        "low": 3,
+        "best": 10,
+        "high": 40
       },
       "kind": "judgment",
       "unit": "$ / t CO₂e",
-      "explainer": "Anchor: the Green Climate Fund's 286 projects ($15.9 billion of its own money, $61.5 billion with co-financing) \"are expected to abate a total of 3.1 billion tonnes\" (GCF report to COP29, UNFCCC FCCC/CP/2024/3, https://unfccc.int/sites/default/files/resource/cp2024_03a01.pdf), about $5 a tonne of GCF money and $20 of all of it, ex ante and for adaptation and mitigation together; projections run ahead of what is built (the GCF's later report gives 1.36 billion tonnes for $20.4 billion). Our judgment $40 (10-150)."
+      "explainer": "Anchor on the row's own basis: the Green Climate Fund's 286 projects \"are expected to abate a total of 3.1 billion tonnes\" over their lives, and its allocation \"stands in grant equivalent terms at ... 44 per cent (USD 4.3 billion) for mitigation\" (GCF report to COP29, UNFCCC FCCC/CP/2024/3, p. 3, https://unfccc.int/sites/default/files/resource/cp2024_03a01.pdf): about $1.4 a tonne of grant-equivalent GCF money, about $3.6 with the co-financing counted at a quarter of its face value. Those are the accredited entities' own ex-ante estimates; projections of this kind run ahead of what is built and claim cuts that would have come anyway (families/climate.md), so our judgment is about three times the ex-ante figure, $10 ($3-40, from no haircut to ten times)."
     },
     {
       "id": "fin_mitigation_tco2e_per_year",
       "section": "reach",
-      "label": "Climate-finance goal: CO₂e its added mitigation finance avoids a year at the 2035 level",
+      "label": "Climate-finance goal: CO₂e its added mitigation finance avoids over the projects' lives, per year of finance at the 2035 level",
       "format": "number",
-      "formula": "fin_grant_dollars_per_year * (1 - fin_adaptation_share) / fin_mitigation_cost_per_tco2e",
+      "formula": "fin_grant_dollars_per_year * (1 - fin_adaptation_share) * (fin_new_aid_share + (1 - fin_new_aid_share) * (1 - fin_rebadged_share)) / fin_mitigation_cost_per_tco2e",
       "unit": "t CO₂e",
-      "explainer": "New and diverted mitigation money alike: the projects are built either way."
+      "explainer": "New and moved mitigation money alike build projects; rebadged money builds nothing new."
+    },
+    {
+      "id": "fin_mitigation_lifetime_years",
+      "section": "reach",
+      "label": "Climate-finance goal: years over which a mitigation project's tonnes come",
+      "format": "number",
+      "value": {
+        "low": 10,
+        "best": 20,
+        "high": 30
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "The cost per tonne buys a project's lifetime tonnes, which come over its years of use and are discounted (the climate family's direct cuts). Anchor: energy access and power generation take \"the largest portion of GCF funding (39 per cent)\" of its mitigation (GCF report, p. 3); power plants and grids run 20-30 years, efficiency and transport projects less. 20 years (10-30)."
     },
     {
       "id": "fin_mitigation_smoke_factor",
@@ -384,7 +424,7 @@
         "high": 1.2
       },
       "kind": "judgment",
-      "explainer": "Most mitigation finance goes to energy and transport in developing countries (renewable power displacing coal and diesel, whose plants mostly lack scrubbers), some to forests and farming, which carry no fuel smoke. Our judgment half the world fossil-fuel average (10-120%), against the site's 0.013 for US power and 0.067 for US coal (facts/climate.json)."
+      "explainer": "Anchor: energy and power take about two fifths of mitigation finance (GCF report, p. 3: 39%), and low-emission transport much of the rest; in developing countries the power displaced is largely coal and diesel without scrubbers, whose smoke per tonne is at or above the world fossil average the shared rate is built on; forests and farming carry no fuel smoke. Our judgment half the world fossil-fuel average (10-120%)."
     },
     {
       "id": "rbp_committed_2010_2021",
@@ -510,7 +550,7 @@
         "retrieved": "2026-11-15",
         "quote": "US$37.5 million for 2.5 million ART-TREES credits from 2016 at a price of US$15/tonne of CO2e"
       },
-      "explainer": "Hess's deal with Guyana, the largest sale of a country's forest credits so far, is worth at least $750 million between 2022 and 2032; its first payment priced the 2016 and 2017 credits at $15 a tonne, and later vintages are priced higher (Hess's announcement gives 37.5 million credits for the $750 million, $20 on average). Our estimate $20 ($10-30): $10 is the low end of jurisdictional forest credits, $30 a price only the best-rated units reach."
+      "explainer": "Hess's deal with Guyana, the largest sale of a country's forest credits so far, is worth at least $750 million between 2022 and 2032; its first payment priced the 2016 and 2017 credits at $15 a tonne, and later vintages are priced higher. Our estimate $15 ($10-30), the quoted price: $10 is the low end of jurisdictional forest credits, $30 a price only the best-rated units reach."
     },
     {
       "id": "itmo_units_per_year",
@@ -997,8 +1037,9 @@
       "section": "effect",
       "label": "Climate-finance goal: mitigation tonnes, one year's share of the win, discounted years",
       "format": "number",
-      "formula": "fin_mitigation_tco2e_pre_wait * fin_years",
-      "unit": "t CO₂e"
+      "formula": "fin_mitigation_tco2e_pre_wait * fin_years * pv_annuity_due(1, $discount_rate, fin_mitigation_lifetime_years) / fin_mitigation_lifetime_years",
+      "unit": "t CO₂e",
+      "explainer": "The tonnes × the discounted years counted (from 2035) × the projects' tonnes spread over their lives, discounted (section 2: every future benefit is discounted). The smoke weight (fin_mitigation_tco2e_pre_wait) leaves the discounting out, since a conversion row reads no shared value."
     },
     {
       "id": "future_share_lost",
@@ -1208,12 +1249,12 @@
       "label": "Climate-finance goal: all advocates' and negotiation-support groups' resources on it a year",
       "format": "usd",
       "value": {
-        "low": 25000000.0,
+        "low": 20000000.0,
         "best": 80000000.0,
-        "high": 250000000.0
+        "high": 300000000.0
       },
       "kind": "judgment",
-      "explainer": "The same kind of resource and the same groups as fin_p_success (advocates, not governments): the research, campaign and negotiation-support groups that worked on the finance goal (climate-finance think tanks, development and environment NGOs and their networks, groups backing developing-country blocs, CfRN among them). Our judgment: about 50 groups at $0.5-3 million a year each on this item, about $80 million ($25-250 million). Government delegations are left out: they are what fin_p_success already sets aside."
+      "explainer": "The same kind of resource and the same groups as fin_p_success (advocates, not governments): the research, campaign and negotiation-support groups that worked on the finance goal (climate-finance think tanks, development and environment NGOs and their networks, groups backing developing-country blocs, CfRN among them). Our judgment, a rough count without a published tally: about 50 groups at $0.5-3 million a year each on this item, about $80 million, with a wide range ($20-300 million) because the count is ours. Government delegations are left out: they are what fin_p_success already sets aside."
     },
     {
       "id": "fin_attribution_share",
@@ -1543,12 +1584,20 @@
       "formula": "health_people * dalys_per_person_year * protection_years + future_dalys_averted"
     },
     {
+      "id": "outcome_before_unmodelled",
+      "section": "outcome",
+      "label": "Years of healthy life before the effects not modelled",
+      "format": "number",
+      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby + dalys_from_tco2e + dalys_from_ced) * leverage_funging_adj",
+      "explainer": "The branches' outcomes, each already × its own credit (the bridged rows), × leverage."
+    },
+    {
       "id": "outcome_total",
       "section": "outcome",
       "label": "Years of healthy life",
       "format": "number",
-      "formula": "(dalys_direct + dalys_from_uov + dalys_from_wellby + dalys_from_tco2e + dalys_from_ced) * leverage_funging_adj * (1 + unmodelled_benefits_adj)",
-      "explainer": "Both branches' outcomes, each already × its own credit (the bridged rows), × leverage and the effects not modelled."
+      "formula": "outcome_before_unmodelled + abs(outcome_before_unmodelled) * unmodelled_benefits_adj",
+      "explainer": "The effects not modelled as a share of the result's size, so that their good end adds good and their harmful end adds harm whatever the result's sign."
     },
     {
       "id": "dalys_per_dollar",
