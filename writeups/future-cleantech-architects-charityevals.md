@@ -40,7 +40,7 @@ Each tonne counts for its heat deaths and for the smoke of the power it displace
 
 ### What drives the result
 
-The 5% target gives most of the result: about half from the later learning and a third from the capacity it causes. The research consortia give about 11% and the delegated act about 2%. The shared value judgments move the result most: the years a won reform counts, the deaths per tonne and the discount rate. Of the model's own judgments, these matter most: how much of the target's capacity is there because of it, Future Cleantech Architects' share of the advocacy, and how much fossil power that capacity displaces.
+The 5% target gives most of the result: more than half from the later learning and under a third from the capacity it causes. The research consortia give about 11% and the delegated act about 2%. The shared value judgments move the result most: the years a won reform counts, the deaths per tonne and the discount rate. Of the model's own judgments, these matter most: how much of the target's capacity is there because of it, Future Cleantech Architects' share of the advocacy, and how much fossil power that capacity displaces.
 
 ### Biggest uncertainties
 
@@ -57,7 +57,7 @@ Climate work without a decided law in the period is counted only through the 30%
 
 ### How this model was checked
 
-Independent audits are in audits/future-cleantech-architects-charityevals/. Round 1 found the research consortia missing; they are now a branch. It also started the period in 2021, when the work on the directive began. It split the target's adjustment into one question for what is reported and one for what the target caused, and derived the learning from the learning-curve literature. Round 2 added the EU emissions trading cap, a new shared figure that takes back most of the target's direct cut. It also derived the smoke of the displaced power from one coal share, and discounted the consortia's gains at the shared rate. Round 3 re-anchored the technologies' growth on floating-wind outlooks and gave the later tonnes their own coal share. Round 4 checked those changes.
+Independent audits are in audits/future-cleantech-architects-charityevals/. Round 1 found the research consortia missing; they are now a branch. It also started the period in 2021, when the work on the directive began. It split the target's adjustment into one question for what is reported and one for what the target caused, and derived the learning from the learning-curve literature. Round 2 added the EU emissions trading cap, a new shared figure that takes back most of the target's direct cut. It also derived the smoke of the displaced power from one coal share, and discounted the consortia's gains at the shared rate. Round 3 re-anchored the technologies' growth on floating-wind outlooks and gave the later tonnes their own coal share. Round 4 checked those changes and passed; a few explainers were then tightened and checked once more (round 5).
 
 ### Sources
 
