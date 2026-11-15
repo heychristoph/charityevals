@@ -30,7 +30,7 @@ Literacy's benefits beyond earnings, the solar power left in schools and teacher
 
 ### How this model was checked
 
-Independent audits (audits/imagine-worldwide-charityevals/). Round 1 passed with no high findings; the fixes that followed: the effect per child-year lowered from the after-school trial's 0.30 to 0.25 because BEFIT's sessions replace lessons, the trust in the trials no longer also counts shrinkage at scale (0.6 to 0.7), Malawi's children counted as years of learning in 2024 (about 319,000) rather than children reached at any time (369,360), and partners' shares outside Malawi added to the credit share.
+Independent audits (audits/imagine-worldwide-charityevals/). Round 1 passed with no high findings; the fixes that followed: the effect per child-year lowered from the after-school trial's 0.30 to 0.25 because BEFIT's sessions replace lessons, the trust in the trials no longer also counts shrinkage at scale (0.6 to 0.7), Malawi's children counted as years of learning in 2024 (about 319,000) rather than children reached at any time (369,360), and partners' shares outside Malawi added to the credit share. The earnings per standard deviation of learning and the share that lasts now read the site's shared figures for education.
 
 ### Sources
 
@@ -39,5 +39,3 @@ Independent audits (audits/imagine-worldwide-charityevals/). Round 1 passed with
 - [Imagine Worldwide, Summary of Research on onebillion's Learning Software (September 2023)](https://www.imagineworldwide.org/wp-content/uploads/Imagine-Worldwide_Research-Summary_Sept-2023.pdf)
 - [BEFIT Year 2 Final Research Report (February 2026)](https://www.imagineworldwide.org/wp-content/uploads/BEFIT_Year2_ResearchReport2026_ImagineWorldwide.pdf)
 - [BEFIT programme overview with Phase 1 updates](https://www.imagineworldwide.org/wp-content/uploads/Malawi-Project-Overview-General-2-27-23.pdf)
-- [Hanushek, Schwerdt, Wiederhold and Woessmann, Returns to Skills around the World (NBER Working Paper 19762)](https://www.nber.org/papers/w19762)
-- [Bailey, Duncan, Odgers and Yu, Persistence and Fadeout in the Impacts of Child and Adolescent Interventions](https://pmc.ncbi.nlm.nih.gov/articles/PMC5779101/)
