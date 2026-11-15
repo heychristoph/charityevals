@@ -1,6 +1,6 @@
 # Audit: environmental-defense-fund-charityevals, round 10 (verification of the compliance-cost rule 2.21)
 Result: 0.003829 tco2e/$ = 0.001695 years of healthy life per 1,000 dollars (combined range 6.1e-5 to 0.0468); cause median 0.001995 (x0.85), against 0.002067 in round 9 (-18%). Verdict: pass.
-Model-sha: 9a419d0f36bc7a2ebfd31bd64f8ab3f44526467891249bb906eaf2b0b51a93bb
+Model-sha: b8f7e50bdda8ae9ba131e3461b4462b815570a35e6c3a5dc11f0d6a30b410e29
 Scope: scoped verification of the changed rows: eumr_compliance_uov, usmeth_compliance_uov, pwr_compliance_uov, veh_compliance_uov, compliance_uov_per_year, uov_counted_per_year, tco2e_from_uov, outcome_total (via the bridge), the summary; the facts compliance_costs.* the model reads and public_funds.compliance_cost_payer_multiple. Unchanged rows not re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (lint, invariants); normalization-audit and check.ts not re-run (scoped round).
 Previous round: round 9's findings 1 and 2 (low) were wording and are untouched by this change; not re-checked.
@@ -31,3 +31,4 @@ Previous round: round 9's findings 1 and 2 (low) were wording and are untouched 
 
 ## Drivers
 Of the changed rows: the US methane rule's cost ($1.5B, 1.0-2.4B), the payer multiple (1.2, 0.8-2) and the shared attribution and delivered-share steps (the rule's 40% delivery halves its cost with its benefits). All the cost figures are sourced; the multiple is a ranged judgment.
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

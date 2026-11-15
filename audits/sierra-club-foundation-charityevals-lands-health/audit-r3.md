@@ -1,7 +1,7 @@
 # Audit: sierra-club-foundation-charityevals-lands-health, round 3 (verification of the compliance-cost rule 2.21)
 Result: 9.286e-7 daly/$ = 0.0009286 years of healthy life per 1,000 dollars (combined range 6.1e-5 to 0.0142); cause median 0.001995 (x0.47). Round 2: 0.001075, so -14%. Verdict: pass.
 Verdict: pass
-Model-sha: 4c1b9124097d9464690660f6584f18d11843fd35600f3320069e2b51137b498e
+Model-sha: 2d60bb0b1948497e8f4084efd428f0d0c28f94d8a32e00bde06e5591050a8f1d
 
 Scope: scoped verification of the changed rows (`pm_compliance_uov`, `uov_bridged`, `summary`, and the figure in writeups/sierra-club-foundation-charityevals.md). Unchanged rows not re-audited.
 
@@ -31,4 +31,5 @@ Checks:
 Unchanged: the Sierra Club's share of the rule (4%), the next dollar, the delivered share. The compliance row removes about 21% of the soot benefit.
 
 Verdict: pass
-Model-sha: 4c1b9124097d9464690660f6584f18d11843fd35600f3320069e2b51137b498e
+Model-sha: 2d60bb0b1948497e8f4084efd428f0d0c28f94d8a32e00bde06e5591050a8f1d
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

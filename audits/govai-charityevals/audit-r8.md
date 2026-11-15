@@ -1,6 +1,6 @@
 # Audit: govai-charityevals, round 8 (verification of the compliance-cost rule 2.21)
 Result: 0.001576 daly/$ = 1.576 years of healthy life per $1,000 (combined range 0.0416–59.73); cause median 5.255 (×0.30). Verdict: pass.
-Model-sha: a4e5b29aa16d9dd143c7d019f125f506f5da26b549ec9e67443ba8b38bb05c40
+Model-sha: 0752c066cf80440c34e036a59895ea198fe624f1979acc235d568e8e2e610ef5
 Scope: scoped verification of the changed rows (one sentence appended to the explainer of `pol_wins`); headline unchanged.
 Mechanical: `audit-model.ts` exit 0, no high or medium finding; invariants none (the peer lines are being removed elsewhere and ignored).
 Previous round: not applicable (verification of one changed row).
@@ -20,3 +20,4 @@ The appended sentence is accurate: the Code of Practice is a voluntary, Commissi
 
 ## Drivers
 Unchanged: ai_catastrophe_chance (judgment), the misuse cut per million (estimate), win_years_counted, missing_data_discount, @next_dollar.govai. The Code branch is a tenth of the result and carries no compliance cost, so the omission moves it by nothing at the defaults.
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

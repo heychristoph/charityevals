@@ -1,7 +1,7 @@
 # Audit: union-of-concerned-scientists-charityevals-food, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 5.069e-7 uov/$ = 2.534e-4 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: d8dd03909ebb989a7e98fb35060a60428186326f8d59eb6b9c0dbc16cab99f45
+Model-sha: bfee96a369e3fc716fc4545cbf7b0685060d98b53b3911338f82ec0883c982c5
 
 Scope: scoped verification of the compliance-cost sentence on `wetland_flood_damage_study`.
 
@@ -23,4 +23,5 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: d8dd03909ebb989a7e98fb35060a60428186326f8d59eb6b9c0dbc16cab99f45
+Model-sha: bfee96a369e3fc716fc4545cbf7b0685060d98b53b3911338f82ec0883c982c5
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

@@ -1,6 +1,6 @@
 # Audit: sierra-club-foundation-charityevals, round 3 (verification of the compliance-cost rule 2.21)
 Result: 0.01589 t CO₂e/$ = 0.005929 years of healthy life per $1,000 (combined range 2.149e-4–0.1636); cause median 0.001704 (×3.48). Verdict: pass.
-Model-sha: fdc33fb9f47f0988cd29c3d9179173e6244fddf54cf01f508326694c02109cf1
+Model-sha: ab6e5c947d5380b27d05f329b3932e6ba5d5e396773c814fdc9100de4e57211e
 Scope: scoped verification of the changed rows (usmeth/pwr/veh/accii_compliance_uov, compliance_uov_per_year, the `bridges` section's tco2e_from_uov, outcome_total, summary, write-up figure). Programmes and year as in earlier rounds, not re-audited.
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model exit 0, "Findings (0)"), invariants none, normalization-audit not re-run (changed rows only)
 Previous round: earlier findings not re-examined in this scoped round.
@@ -34,3 +34,4 @@ No finding on the formulas. Checks:
 Compliance costs move the result +1.8%. Larger inputs are unchanged: win_years_counted, missing_data_discount, deaths_per_tco2e, discount_rate, next-dollar figure. The new row's own judgments: the payer multiple (1.2, ranged) and the taxes-as-transfers share in ACC II; the vehicle rule's net saving rests on EPA's modelled fuel and maintenance savings (range in the fact: a saving of $25B to a cost of $5B).
 
 Text: the summary's 0.0059 and "the vehicle rules a net saving to buyers" match the computed result (0.005929); it makes no peer comparison. Write-up figure 0.0059 matches.
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

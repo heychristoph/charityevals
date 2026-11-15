@@ -1,7 +1,7 @@
 # Audit: american-cancer-society-charityevals, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 6.005e-6 daly/$ = 0.006005 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: 9e60d1f8281b7e2426b62957b16ee1fe6ad82c4751f70cd794ddf23930d9dae0
+Model-sha: e9c9e8d67930a7021d7c86b1a0767f38100bca6ba86458055105a73389b5c38c
 
 Scope: scoped verification of the line on `adv_share_burden_averted`. No formula changed.
 
@@ -23,4 +23,5 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 9e60d1f8281b7e2426b62957b16ee1fe6ad82c4751f70cd794ddf23930d9dae0
+Model-sha: e9c9e8d67930a7021d7c86b1a0767f38100bca6ba86458055105a73389b5c38c
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

@@ -1,7 +1,7 @@
 # Audit: earthjustice-charityevals-biodiversity, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 7.148e-10 daly/$ = 7.148e-7 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: 3fde57f198b48b529e25b6fe15a9f60fbbb246613ff74be960434c8d019e8c55
+Model-sha: 137d05a037841238a7dddbe98608cbd3fa0d43f5f6bd19379778a1c876ba487e
 
 Scope: scoped verification of the compliance-cost sentence on `tongass_acres`.
 
@@ -23,4 +23,5 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 3fde57f198b48b529e25b6fe15a9f60fbbb246613ff74be960434c8d019e8c55
+Model-sha: 137d05a037841238a7dddbe98608cbd3fa0d43f5f6bd19379778a1c876ba487e
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

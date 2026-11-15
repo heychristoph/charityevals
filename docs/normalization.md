@@ -1399,7 +1399,7 @@ savings the analysis credits to the same payers (gas recovered, fuel saved, so a
 money adds value) and without transfers (taxes, allowances, duty). **The value**: money lost by those who
 bear it, as for other money lost (2.20, `@public_funds.*`): dollars over the payers' consumption on the log
 scale, `$uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple × consumption per person)`,
-the payers consumers and owners (1.2 times the national average, 0.8-2, judgment). **The chain**: the
+the payers consumers and owners (1.2 times the survey-scale average of 2.14, 0.8-2, judgment). **The chain**: the
 branch's years, wait, chance, counterfactual, credit, delivered share and missing-data step, not its
 evidence adjustment (which is about the benefits); tonnes models take it through the bridge from uov
 (2.6). Only costs not already netted: money branches valued as the gain less the payers' loss (Prison

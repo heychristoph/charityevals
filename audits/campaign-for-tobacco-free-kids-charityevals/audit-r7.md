@@ -1,7 +1,7 @@
 # Audit: campaign-for-tobacco-free-kids-charityevals, round 7 (verification of the compliance-cost rule 2.21, text fixes of round 6)
 Result: 1.350e-4 daly/$ = 0.1350 years of healthy life per 1,000 dollars (unchanged from round 6). Verdict: pass.
 Verdict: pass
-Model-sha: 2d13dc273728fb872adb4c6bc73932452f7f8277d07b6874b8d6ea1b8a83d15e
+Model-sha: 9caaeac6fb8ff347babb170879d9fefecaef4bf3c63432d39125e997523b0c34
 
 Scope: scoped verification of the compliance-cost lines on `us_share_burden_averted`, `glob_share_burden_averted`, `ghai_share_burden_averted`. No formula changed.
 
@@ -24,4 +24,5 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 2d13dc273728fb872adb4c6bc73932452f7f8277d07b6874b8d6ea1b8a83d15e
+Model-sha: 9caaeac6fb8ff347babb170879d9fefecaef4bf3c63432d39125e997523b0c34
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

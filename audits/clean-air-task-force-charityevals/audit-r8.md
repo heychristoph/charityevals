@@ -1,6 +1,6 @@
 # Audit: clean-air-task-force-charityevals, round 8 (verification of the compliance-cost rule 2.21)
 Result: 0.01140 tco2e/$ = 0.005244 years of healthy life per 1,000 dollars (combined range 1.3e-4 to 0.2116); cause median 0.001704 (x3.08), against 0.006699 in round 7 (-22%). Verdict: pass.
-Model-sha: eb8188e6c4ae7b44b7298e07fbb4e2b3e97d13872f1db78276f4caff1682d7be
+Model-sha: 168bec3b01644905efa810498e17fc239fd7b75e478e83c1e5902ca49db5de02
 Scope: scoped verification of the changed rows: eumr_compliance_uov, usmeth_compliance_uov, pwr_compliance_uov, compliance_uov_per_year, the new `bridges` section and tco2e_from_uov, outcome_total, the summary and the write-up's headline figure; the compliance facts and payer multiple read. Unchanged rows not re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (lint, invariants; the new section and bridge pass INV-2b and INV-10); normalization-audit and check.ts not re-run (scoped round).
 Previous round: round 7's findings are not touched by this change; not re-checked.
@@ -28,3 +28,4 @@ Previous round: round 7's findings are not touched by this change; not re-checke
 
 ## Drivers
 Of the changed rows: the EU rule's $3.65 a tonne (1 to 10, the largest single compliance term here: -589 uov, as the import-measure cost is a proxy the impact assessment did not itself cost), the US methane rule's $1.5B, and the payer multiple. The EU proxy is the weakest figure (the IA costed the cost-effective cuts in eight exporters, not the regulation's import limit); its range 1 to 10 covers it.
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.

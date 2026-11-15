@@ -1,6 +1,6 @@
 # Audit: union-of-concerned-scientists-charityevals-climate, round 5 (verification of the compliance-cost rule 2.21)
 Result: 0.006566 t CO₂e/$ = 0.001704 years of healthy life per $1,000 (combined range 4.387e-5–0.06621); cause median 0.001995 (×0.85). Verdict: pass.
-Model-sha: 3d21309a1b46ea8e121ca733b26cf2d3d0d8facc0b5e3c7796f70cdac466c5e4
+Model-sha: da41586bb994a2b5ff21ebed6e6a127df8a57d408ec5ddd5df909bafdd8d8a5c
 Scope: scoped verification of the changed rows (pwr/veh/accii/capinv_compliance_uov, compliance_uov_per_year, uov_counted_per_year, tco2e_from_uov, summary, write-up figure). Programmes and year as in earlier rounds, not re-audited.
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model exit 0, "Findings (0)"), invariants none, normalization-audit not re-run (changed rows only)
 Previous round: earlier findings not re-examined in this scoped round.
@@ -33,3 +33,4 @@ No finding on the formulas. Checks:
 Compliance costs move the result -5.1%, driven by the cap-and-invest cost (-591 uov, 4% attribution) against the vehicle and ACC II savings (+535 uov). The cap-and-invest net cost is ARB's own analysis, but the high end ($4.5B) is a judgment from the earlier SRIA. The payer multiple and the taxes-as-transfers share in ACC II are the judgments.
 
 Text: summary and write-up (0.0017) match the computed result; no peer comparison in the summary.
+Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
