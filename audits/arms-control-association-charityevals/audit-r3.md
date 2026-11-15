@@ -14,8 +14,9 @@ Previous round:
 None needed; no source, figure or value changed.
 
 Verdict: pass (no findings)
-Model-sha: 532402a4ee3332de7a0091c2b95bf27d72a4689885562c41da1a52791054fc37
+Model-sha: e7930591a53cb35e7a946186ef9730af3394fbb73aac62ff627ad7a246a8cf44
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)

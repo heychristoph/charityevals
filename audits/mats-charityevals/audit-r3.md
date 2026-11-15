@@ -1,6 +1,6 @@
 # Audit: mats-charityevals, round 3 (verification round)
 Result: 0.000811 daly/$ = 0.81 years of healthy life per 1,000 dollars (combined range 0.018-36; model's own ranges 0.072-4.4); cause median 5.26 (x0.15). Verdict: pass.
-Model-sha: 04b9cf69374fc8b7cb984d4545ffbcc38adfd47be99a5e8d8e51ba1b6c4467d6
+Model-sha: 742ac23cc4207b9564c64aee8641210b624b5d635ce86d5ce85d65d0ba5f673f
 Scope: only round 2's fixes (commit 772e4ae): the scholars' research during the programme moved into the training branch (fb_research_weeks, fb_research_value_share, fb_research_dollars, the two fb_* outcome rows, unmodelled_benefits_adj 0.05), the 37% wording, "four months or longer", three verbatim quotes, and the summary and write-up figures.
 Mechanical: audit-model lint 0/0/0, findings (0); check.ts all models valid; simulation-check stable (5% 0.103, 50% 1, 95% 13.2 x best guess; no missed draws); normalization-audit no violation (generated/ restored with git checkout).
 
@@ -21,3 +21,4 @@ Previous round (round 2):
 - MATS transparency page: Anthropic API credits "Estimated Value: $35,000 (Late 2024)" verbatim.
 
 **Verdict: pass** (no high or medium finding)
+Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
