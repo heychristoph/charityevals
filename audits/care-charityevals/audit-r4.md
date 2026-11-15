@@ -33,7 +33,8 @@ Unchanged from round 3: missing-data discount, `$uov_per_daly`, `livelihood_cons
 Findings by severity: high 0, medium 0, low 1.
 
 Verdict: pass
-Model-sha: 8086acfd13d70689a66c4a6a4cf983aa88fe79e4208f4b351f50beae48fe3ee6
+Model-sha: 313bd75006f270f53766e92dde2badcc27b3579b31c926f3eabd187a46583758
 
 Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.331 → 0.332.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)
