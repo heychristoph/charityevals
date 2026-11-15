@@ -11,5 +11,6 @@ Checked:
 Findings: None.
 
 Verdict: pass
-Model-sha: d816889fb4a8b61440aa01f27b1ca6a5530db86c01eee1c43e75aa74e7865308
+Model-sha: a323e5dfeaaf65145f62850235c77fc731ccca1a6541ff3fa698e5199e0841c5
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
+Re-stamped (15 Nov 2026): one explainer clause comparing with another evaluator's removed model dropped (text only; result unchanged)
