@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "salvation-army",
   "owner": "charityevals",
-  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, housing placements, residential addiction recovery funded by its thrift stores, and community centres. Our model of every US programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs, clients' day-care fees and the overseas work (a draft model of its own, not yet published) left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed, recovery by remissions and deaths, and the community and church programmes by life satisfaction. It comes to about 0.005 years of healthy life per $1,000, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about $18,000, a 0.2% gain on the log scale, where a GiveDirectly transfer raises a Kenyan household's consumption by about 40%. About half the result comes from food, goods, money and services, a quarter from shelter. Every branch is discounted for missing data, since none of the Salvation Army's services has a controlled evaluation: food, goods and money, shelter, placements, recovery, community programmes and worship. The biggest uncertainties are what families would have got without the Salvation Army, how well its counts reflect help delivered, and how much the recovery programme changes.",
+  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, housing placements, residential addiction recovery funded by its thrift stores, and community centres. Our model of every US programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs, clients' day-care fees and the overseas work (a model of its own) left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed, recovery by remissions and deaths, and the community and church programmes by life satisfaction. It comes to about 0.005 years of healthy life per $1,000, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about $10,000, a 0.3% gain on the log scale. Almost two-thirds of the result comes from food, goods, money and services, a fifth from shelter. Every branch is discounted for missing data, since none of the Salvation Army's services has a controlled evaluation: food, goods and money, shelter, placements, recovery, community programmes and worship. The biggest uncertainties are what families would have got without the Salvation Army, how well its counts reflect help delivered, and how poor the clients are.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Salvation Army USA, services in the US",
@@ -92,7 +92,7 @@
     {
       "id": "program_spend",
       "section": "cost",
-      "label": "US programme spending in fiscal 2025, net of the thrift stores' running costs and day-care fees",
+      "label": "US programme spending in fiscal 2025 that donations pay for (net of the thrift stores' running costs, day-care fees, donated goods and the overseas work)",
       "format": "usd",
       "formula": "program_expenses - thrift_store_costs - netted_fees - overseas_spend - goods_handed_out",
       "explainer": "All four programme lines of the combined US accounts (corps community centres, rehabilitation, residential and institutional services, other social services), less what the Adult Rehabilitation Centers' thrift stores cost to run and less the day-care fees clients paid (their own money for a service valued below net of them), less the donated goods handed out, and less the overseas work paid through these accounts (the World Service Office and the territories' support for the international Salvation Army), which is modelled separately (salvation-army-charityevals-international) and weighted by its spending on the charity's page. The stores are a self-financing trading arm: their sales pay for their own staff, trucks and rent, and only their net contribution pays for the recovery programme. Counting their gross running costs as charitable spending would make every donated dollar look as if it bought less help than it does. Fiscal year 1 October 2024 to 30 September 2025, the latest with audited accounts and service statistics for the same period."
@@ -183,7 +183,7 @@
       "label": "Overhead multiplier (total ÷ program expenses)",
       "format": "multiple",
       "formula": "(total_expenses - thrift_store_costs - netted_fees - goods_handed_out) / (program_expenses - thrift_store_costs - netted_fees - goods_handed_out)",
-      "explainer": "Management and fundraising spread over the programmes in proportion to their cost, as GiveWell and ACE do, with the thrift stores' running costs and day-care fees out of both totals (they are paid by the stores' sales and by the clients, not by donors)."
+      "explainer": "Management and fundraising spread over the programmes in proportion to their cost, as GiveWell and ACE do, with the thrift stores' running costs, day-care fees and the donated goods out of both totals (they are paid by the stores' sales and by the clients, or given in kind, not by donors)."
     },
     {
       "id": "cost_total",
@@ -338,12 +338,12 @@
       "label": "Value of an item handed out (US$)",
       "format": "usd",
       "value": {
-        "low": 4,
-        "best": 10,
+        "low": 5,
+        "best": 12,
         "high": 25
       },
       "kind": "judgment",
-      "explainer": "Mostly donated clothing and toys: a judgment anchored on thrift-store prices for used clothing ($4-10), new toys under Angel Tree ($15-30 a gift) and furniture at the top. No published average."
+      "explainer": "Mostly donated clothing, toys and household goods; no published average. Cross-check on the national accounts: the goods handed out (goods_handed_out, about $566M) times the Western Territory's non-food share of its in-kind goods (clothing $23.9M, Angel Tree and other Christmas gifts $16.0M and household goods $17.1M, $57.1M of $172.1M, note 7), times the shared ratio of value to recorded value for donated goods (@united_states.donated_goods_value_vs_recorded), over 15.05 million items: about $11 an item, before the Angel Tree gifts bought with kettle money and less some thrift-store goods in the same lines. Thrift-store prices for used clothing ($4-10) and new toys under Angel Tree ($15-30 a gift) bracket it: $12 (5-25)."
     },
     {
       "id": "financial_assistance_households",
@@ -376,6 +376,19 @@
         "retrieved": "2026-11-03"
       },
       "explainer": "Everything handed to clients, in kind or in money, in the one territory with public audited accounts."
+    },
+    {
+      "id": "wt_arc_store_goods",
+      "section": "effect",
+      "label": "Western Territory: goods donated for sale in the thrift stores, inside the in-kind goods, fiscal 2023",
+      "format": "usd",
+      "value": {
+        "low": 0,
+        "best": 6600000,
+        "high": 13300000
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment. Note 7 of the Western Territory's statements says 'Goods donated for sale in ARC thrift stores consist primarily of clothing, household goods, and other miscellaneous items', recorded at a percentage of their sale price, and puts them in its clothing, household and other lines; wt_inkind_goods holds the clothing and household lines (the 'other' line, mostly vehicles, jewellery and books sold, is left out of it), so only the store goods in those two lines are inside it. They are sold, not handed out, and expensed in the rehabilitation column, where only supplies ($10.2M) and other expenses ($3.0M) can hold them besides its $2.6M of direct assistance (p. 7): at most about $13.3M. Half of that, $6.6M (0-13.3M), taken as the clothing and household part, is not taken out of direct assistance when the cash paid for bills is worked out."
     },
     {
       "id": "wt_inkind_goods",
@@ -427,8 +440,8 @@
       "section": "effect",
       "label": "Financial help per household (US$)",
       "format": "usd",
-      "formula": "(wt_direct_assistance - wt_inkind_goods) / (financial_assistance_households * wt_share_of_households) * @cpi.usa_2025 / @cpi.usa_2023",
-      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, about $24M) over its share of the households helped, put from fiscal-2023 into 2025 prices by the US consumer price index (Convention 8): about $76 a household, the national figure taken at the Western rate. Bills paid on a household's behalf count at full value."
+      "formula": "(wt_direct_assistance - (wt_inkind_goods - wt_arc_store_goods)) / (financial_assistance_households * wt_share_of_households) * @cpi.usa_2025 / @cpi.usa_2023",
+      "explainer": "Cash direct assistance in the Western Territory's audited accounts (direct assistance less the donated and government goods recorded in it, the thrift stores' goods excepted) over its share of the households helped, put from fiscal-2023 into 2025 prices by the US consumer price index (Convention 8): about $98 a household, the national figure taken at the Western rate. Bills paid on a household's behalf count at full value."
     },
     {
       "id": "veterans_served",
@@ -449,15 +462,15 @@
     {
       "id": "veterans_help_value",
       "section": "effect",
-      "label": "Temporary financial help and services per veteran household (US$)",
+      "label": "Case management and housing search per veteran household (US$)",
       "format": "usd",
       "value": {
-        "low": 100,
-        "best": 500,
-        "high": 2000
+        "low": 0,
+        "best": 100,
+        "high": 500
       },
       "kind": "judgment",
-      "explainer": "SSVF pays rent arrears, deposits and utilities for a few months besides case management, much more per household than one-off emergency help, but many of the touchpoints are case management only. $500 (100-2,000)."
+      "explainer": "SSVF pays rent arrears, deposits and utilities for a few months besides case management; that temporary financial assistance is cash in direct assistance, already in the bills paid (assistance_per_household spreads all of it over the households helped). This is the case management and housing search alone, a service valued with the other services at the shared cash-equivalent ratio (inkind_cash_equivalence); the housing found is valued in the placements branch. $100 (0-500)."
     },
     {
       "id": "pathway_of_hope_families",
@@ -690,15 +703,23 @@
       "label": "What in-kind help is worth to the family against cash (food, goods and services, weighted by their value)",
       "format": "percent",
       "explainer": "The shared figures for food (0.8), goods (0.7) and services (0.8) given in kind (@aid_value), weighted by the value of the meals, items and services handed out. Bills paid count at full value.",
-      "formula": "(meals_provided * meal_value * @aid_value.inkind_food_vs_cash + tangible_items * item_value * @aid_value.inkind_goods_vs_cash + (day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value) * @aid_value.inkind_services_vs_cash) / (meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value)"
+      "formula": "(meals_provided * meal_value * @aid_value.inkind_food_vs_cash + tangible_items * item_value * @aid_value.inkind_goods_vs_cash + (day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value + veterans_served * veterans_help_value) * @aid_value.inkind_services_vs_cash) / (meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value + veterans_served * veterans_help_value)"
+    },
+    {
+      "id": "trial_earnings_value",
+      "section": "effect",
+      "label": "Earnings added by Pathway of Hope and job help, before the aid counterfactual (US$)",
+      "format": "usd",
+      "explainer": "Families in Pathway of Hope times their income gain, plus people given employment help times their discounted earnings gain. Both gains are trial differences against control groups that already had other job services (US job-search trials, MDRC's Family Self-Sufficiency evaluation), so they are already net of what other providers would have done: they are divided by aid_counterfactual_adj here so that the aid branch's counterfactual, which multiplies all the help, leaves them at full value.",
+      "formula": "(pathway_of_hope_families * pathway_income_gain + employment_assisted * employment_earnings_gain) / aid_counterfactual_adj"
     },
     {
       "id": "value_per_person",
       "section": "effect",
       "label": "Value received per person in the year (US$, food, goods, money and services)",
       "format": "usd",
-      "explainer": "All food, goods, bills paid, transport, day care, clinic visits, anti-trafficking, correctional and disaster services handed out, and the earnings that case management and job help add, at what the family would otherwise pay (in-kind goods at their cash-equivalent share), over the people reached. Only money value: the relief food brings is counted here once, not again as wellbeing.",
-      "formula": "((meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value) * inkind_cash_equivalence + financial_assistance_households * assistance_per_household + veterans_served * veterans_help_value + pathway_of_hope_families * pathway_income_gain + employment_assisted * employment_earnings_gain) / people_reached"
+      "explainer": "All food, goods, bills paid, transport, day care, clinic visits, anti-trafficking, correctional and disaster services handed out, and the earnings that case management and job help add (trial_earnings_value), at what the family would otherwise pay (in-kind goods at their cash-equivalent share), over the people reached. Only money value: the relief food brings is counted here once, not again as wellbeing. The trial earnings enter divided by aid_counterfactual_adj (trial_earnings_value), so the branch's counterfactual leaves them at full value; the value actually received is about $2 a person less than shown.",
+      "formula": "((meals_provided * meal_value + tangible_items * item_value + day_care_children * day_care_value + medical_visits * medical_visit_value + trafficking_survivors * trafficking_service_value + correctional_served * correctional_value + disaster_assisted * disaster_extra_value + veterans_served * veterans_help_value) * inkind_cash_equivalence + financial_assistance_households * assistance_per_household + trial_earnings_value) / people_reached"
     },
     {
       "id": "consumption_mean",
@@ -849,7 +870,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The report doesn't say whether recovery residents' nights (about 8,500 beds, up to 3.1 million nights) are inside its nights of shelter. Their stay is valued in the recovery branch, so they are taken out here for the part that may be inside: 85% (70% if all are inside, 100% if none)."
+      "explainer": "The report doesn't say whether recovery residents' nights (about 8,500 beds, up to 3.1 million nights) are inside its nights of shelter. Their stay is part of the treatment, valued through the recovery branch's remissions and deaths, not as shelter, so they are taken out here for the part that may be inside: 85% (70% if all are inside, 100% if none)."
     },
     {
       "id": "shelter_person_years",
@@ -865,8 +886,8 @@
       "section": "effect",
       "label": "Value of a night's shelter to the person (US$)",
       "format": "usd",
-      "explainer": "The shared value of a night's shelter in the US (@united_states.shelter_night_value_2024, about $21, $10-40): what the poorest fifth of US households pay for a roof per person-night. The full cost of running a shelter bed ($40-80) is not its value to the person, who would never pay it.",
-      "formula": "@united_states.shelter_night_value_2024"
+      "explainer": "The shared value of a night's shelter in the US (@united_states.shelter_night_value_2024, about $21, $10-40): what the poorest fifth of US households pay for a roof per person-night, put from 2024 into 2025 prices by the US consumer price index (@cpi.usa_2025 / @cpi.usa_2024, Convention 8), the same year's dollars as the consumption it is set against. The full cost of running a shelter bed ($40-80) is not its value to the person, who would never pay it.",
+      "formula": "@united_states.shelter_night_value_2024 * @cpi.usa_2025 / @cpi.usa_2024"
     },
     {
       "id": "shelter_consumption_share",
@@ -874,12 +895,12 @@
       "label": "Sheltered people's consumption per person, as a share of the US average",
       "format": "percent",
       "value": {
-        "low": 0.08,
-        "best": 0.15,
-        "high": 0.3
+        "low": 0.12,
+        "best": 0.2,
+        "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "People in shelters are among the poorest in the country: many live on SSI ($967 a month in 2025, about $11,600 a year or 20% of the mean) or less. 15% (8-30%), below the food-help clients' 30%."
+      "explainer": "People in shelters are among the poorest in the country. In California's statewide study of people experiencing homelessness (UCSF Benioff Homelessness and Housing Initiative, June 2023, https://homelessness.ucsf.edu/sites/default/files/2023-06/CASPEH_Report_62023.pdf, ch. 3), the median income of participants' current households in the month before was $400 (IQR $100-1,000) and 16% had none: about $5,000-5,500 a year in 2025 prices, 15-16% of the survey mean, before SNAP and in-kind help. People on SSI ($967 a month in 2025, about $11,600 a year) are at 35%, the high end. 20% (12-35%), below the food-help clients' 30%."
     },
     {
       "id": "shelter_ln_gain_per_person_year",
