@@ -1,6 +1,6 @@
 # Audit: johns-hopkins-center-for-health-security-charityevals, round 4 (verification round)
 Result: 0.007521 daly/$ = 7.52 years of healthy life per 1,000 dollars (combined range 0.42-134), unchanged from round 3. Verdict: pass.
-Model-sha: 2a76817bb0082f49d471caad9cea6a2fbee7eda4e31efbb02fdc2e04127ac30b
+Model-sha: 068e4b3909208006b26b44cd66a32e2a38fe921d242784e216ea5701b6b496b7
 Scope: only the change in commit a6b0860: the row fb_work_years (a typed judgment, 2 / 5 / 10 years) now reads the shared fact `@catastrophe.field_work_years` (INV-14), and its explainer.
 Mechanical: audit-model lint no new findings; scripts/check.ts: all models valid. Not re-run this round (scoped): normalization-audit, simulation-check.
 
@@ -14,3 +14,5 @@ Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value cha
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
+
+Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
