@@ -64,7 +64,7 @@ const MONTH = /\b(January|February|March|April|May|June|July|August|September|Oc
 // The headline's unit, right after the number.
 const YEARS_AFTER = /^(?:\s*(?:\*\*|<\/span>))*\s*(?:healthy\s+years?|years?\s+of\s+healthy\s+life|(?:healthy\s+)?life[- ]years?|DALYs?\s+averted|years?\s*(?:\(|,)?[^.;\n]{0,40}per\s+\$1,000|[^.;\n]{0,25}per\s+\$1,000)/i;
 // A source's own figure, quoted as theirs: kept typed.
-const ATTRIBUTED = /\b(?:reports?|reported|according to|cites?|cited|quotes?|quoted|surveys?|study|studies|trials?|papers?|publish(?:es|ed)?|finds|found|their|says|said|states|stated|claims?|anchors?|model's)\b/i;
+const ATTRIBUTED = /\b(?:reports?|reported|according to|cites?|cited|quotes?|quoted|surveys?|study|studies|trials?|papers?|publish(?:es|ed)?|finds|found|their|says|said|states|stated|claims?|anchors?|model's|et al|(?:19|20)\d\d's)\b/i;
 // "0.17 to 5.4", "between 17 and 31", "15%–40%": a range's end, not a value.
 const RANGE_AFTER = /^\s*(?:to|–|-|and)\s*(?:about\s+)?[−-]?\$?\d/;
 const RANGE_BEFORE = /(?:\b(?:from|between|to|and)\s+(?:about\s+)?|\d[%×]?\s*(?:–|-)\s*)$/;
