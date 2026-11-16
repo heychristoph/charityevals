@@ -6,7 +6,7 @@ Usage:
       One organisation's filing: finds it in the yearly indexes and reads it out of the bulk zip.
       EIN       with or without the dash (45-5620445)
       --year    tax year (the TAX_PERIOD year: 2024 = fiscal year ending in 2024). Default: the latest found.
-      --out     output XML path (default: ./<ein>_<taxperiod>.xml)
+      --out     output XML path (default: <ein>_<taxperiod>.xml in a new folder under $TMPDIR/charityevals-irs-990-out)
       --summary also print key Part I / Part IX figures (990 and 990EZ; 990PF XML is saved only)
   python3 scripts/irs-990.py extract ZIP_URL NAME [--out PATH]
       Range-read one entry of any remote zip (an IRS bulk zip is 0.1-2 GB) without downloading it whole:
@@ -18,8 +18,9 @@ Usage:
 
 How it works (standard library + curl, and the system `unzip` only for Deflate64 entries; needs network):
   1. Streams https://apps.irs.gov/pub/epostcard/990/xml/<Y>/index_<Y>.csv (Y = submission year; tax year T
-     is usually filed in T+1, sometimes T or T+2) and keeps the EIN's rows; per tax period the highest
-     OBJECT_ID (an amendment) wins.
+     is usually filed in T+1, sometimes T or T+2) and keeps the EIN's rows. The return read is the 990
+     (else the 990-EZ, else the 990-PF; a 990-T or other return only if there is nothing else), of the
+     latest tax period, the highest OBJECT_ID (an amendment) winning; the EIN's other returns are listed.
   2. The bulk zips of year Y: the ones the IRS downloads page lists (cached a day), else the usual names.
      2023 on: <Y>_TEOS_XML_<MM><L>.zip, monthly; the index's XML_BATCH_ID is tried first, then its
      neighbouring letters, then the months nearest the submission date. 2021-22: <Y>_TEOS_XML_01A.zip.
@@ -281,6 +282,11 @@ def summary(xml, row):
               *[val(g, t) for t in ("TotalAmt", "ProgramServicesAmt", "ManagementAndGeneralAmt", "FundraisingAmt")])
 
 
+# Which return to read when an EIN filed several for the year: the full 990 first (a 990-T, the
+# unrelated-business income return, has none of the figures).
+FORM_RANK = {"990": 3, "990EZ": 2, "990PF": 1}
+
+
 def fetch(a):
     ein = a.ein.replace("-", "").strip()
     now = datetime.date.today().year
@@ -298,10 +304,17 @@ def fetch(a):
             break
     if not cands:
         sys.exit(f"No filing found for EIN {ein}" + (f" tax year {a.year}" if a.year else "") + f" in the indexes of {years}")
-    cands.sort(key=lambda r: (r["TAX_PERIOD"], r["OBJECT_ID"]))
+    cands.sort(key=lambda r: (FORM_RANK.get(r.get("RETURN_TYPE", "").upper().replace("-", ""), 0), r["TAX_PERIOD"], r["OBJECT_ID"]))
     row = cands[-1]
+    for r in cands[:-1]:
+        print(f"also filed: {r.get('RETURN_TYPE', '?')} period {r['TAX_PERIOD']} (object {r['OBJECT_ID']}); read it with `extract`", file=sys.stderr)
     name = f"{row['OBJECT_ID']}_public.xml"
-    out = a.out or f"{ein}_{row['TAX_PERIOD']}.xml"
+    if a.out:
+        out = a.out
+    else:
+        base = os.path.join(tempfile.gettempdir(), "charityevals-irs-990-out")
+        os.makedirs(base, exist_ok=True)
+        out = os.path.join(tempfile.mkdtemp(dir=base), f"{ein}_{row['TAX_PERIOD']}.xml")
     batches, from_page = candidate_batches(row, row["_Y"])
     tried = 0
     for b in batches:

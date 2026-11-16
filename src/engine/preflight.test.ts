@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { parseUnit } from "./units";
-import { copiedFigureProblems, kindProblems, sharedFactProblems, typedValue, unitProblems } from "./preflight";
+import { copiedFigureProblems, kindProblems, pairKey, sharedFactProblems, simulationProblems, typedValue, unitProblems } from "./preflight";
 import { CONTEXT_ONLY, lintModel } from "./lint";
 import { checkModel } from "./check-model";
 import { assumptionValues } from "./model";
@@ -82,6 +82,18 @@ describe("shared facts typed by hand", () => {
     ]));
     expect(sharedFactProblems(lib, m).find((x) => x.where === "gain_years")?.message).toMatch(/@irap\.years_gain_lasts/);
   });
+  it("leaves a sourced household size of the programme's own recipients alone, not a typed national one", () => {
+    const hh = (extra: Row) => model([
+      { id: "hh_size", label: "Household size of the trial households (Kenya)", value: 6.5, kind: "observed", explainer: "Measured at baseline in the trial of the programme.", source: { title: "Trial report", url: "https://example.com/trial" }, ...extra },
+      { id: "uov_per_dollar", label: "Result", formula: "people * years * hh_size / cost_total" },
+    ]);
+    const own = one(hh({}));
+    expect(where(sharedFactProblems(own.lib, own.m), "shared-fact")).toEqual([]);
+    const judged = one(hh({ kind: "judgment", source: undefined }));
+    expect(where(sharedFactProblems(judged.lib, judged.m), "shared-fact")).toContain("hh_size");
+    const national = one(hh({ label: "Average household size in Kenya", explainer: "DHS." }));
+    expect(where(sharedFactProblems(national.lib, national.m), "shared-fact")).toContain("hh_size");
+  });
   it("flags a typed next-dollar figure, and leaves a round judgment alone", () => {
     const { lib, m } = one(model([
       { id: "marginal_vs_past_average", label: "How much the next dollar does compared with the average dollar so far", format: "percent", value: 0.5, kind: "judgment", explainer: "Room for more funding." },
@@ -98,6 +110,30 @@ describe("shared facts typed by hand", () => {
     const b = { ...a, id: "other-test-charityevals", charity: "the-humane-league" };
     const { lib, models } = load(a, b);
     expect(where(copiedFigureProblems(lib, models[0]), "shared-fact")).toContain("us_hens");
+  });
+  it("leaves calendar years out: a counting period's first year, a row in unit Year", () => {
+    const rows = [
+      { id: "period_first_year", label: "First year of the spending period counted", value: 2021, kind: "observed", explainer: "Accounts." },
+      { id: "start_year_of_programme", label: "Programme year it started in the region", unit: "Year", value: 2019, kind: "observed", explainer: "Report." },
+      { id: "uov_per_dollar", label: "Result", formula: "people * years * (2025 - period_first_year) * (2025 - start_year_of_programme) / cost_total" },
+    ];
+    const a = model(rows);
+    const { lib, models } = load(a, { ...a, id: "other-test-charityevals", charity: "the-humane-league" });
+    const ws = where(copiedFigureProblems(lib, models[0]), "shared-fact");
+    expect(ws).not.toContain("period_first_year");
+    expect(ws).not.toContain("start_year_of_programme");
+  });
+  it("leaves out a pair waived as different quantities, either way round", () => {
+    const row = { id: "us_hens", label: "Table-egg laying hens in the US, 2025", value: 303e6, kind: "observed", explainer: "USDA." };
+    const a = model([row, { id: "uov_per_dollar", label: "Result", formula: "us_hens * years / cost_total" }]);
+    const b = { ...a, id: "other-test-charityevals", charity: "the-humane-league" };
+    const { lib, models } = load(a, b);
+    const key = pairKey("other-test-charityevals", "us_hens", "unit-test-charityevals", "us_hens");
+    const hens = (ps: { where: string; message: string }[]) => ps.filter((p) => p.where === "us_hens");
+    expect(hens(copiedFigureProblems(lib, models[0]))[0].message).toContain(`"shared-fact-pair": { "${key}"`);
+    const used = new Set<string>();
+    expect(hens(copiedFigureProblems(lib, models[0], new Set(), { "shared-fact-pair": { [key]: "Different flocks." } }, used))).toEqual([]);
+    expect([...used]).toEqual([key]);
   });
   it("reads a typed number only where nothing is referenced", () => {
     const { m } = one(model([{ id: "x", label: "X", formula: "110000 * 0.6" }, { id: "uov_per_dollar", label: "Result", formula: "x * people / cost_total" }]));
@@ -120,6 +156,23 @@ describe("kinds and reference classes", () => {
       { id: "uov_per_dollar", label: "Result", formula: "people * years * effect / cost_total" },
     ]));
     expect(kindProblems(lib, m).find((p) => p.where === "effect")?.severity).toBe("high");
+  });
+});
+
+describe("simulation", () => {
+  const sim = (keys: string[], unstable = true) => ({ unstable, brokenEvents: false, shape: { q5: 0.01, q50: 1, q95: 100 }, wild: keys.map((key) => ({ key, low: 0, high: 1, atLow: 0.01, atHigh: 30 })) });
+  const result = (ps: { where: string; severity: string }[]) => ps.find((p) => p.where === "result")?.severity;
+  it("is high where the model's own rows flip it, medium where only shared facts do", () => {
+    expect(result(simulationProblems("x", sim(["effect", "@welfare_ranges.shrimp_vs_chicken"])))).toBe("high");
+    expect(result(simulationProblems("x", sim(["@welfare_ranges.shrimp_vs_chicken", "@sad_factors.sads_per_shrimp_stunned"])))).toBe("medium");
+    expect(result(simulationProblems("x", sim([])))).toBe("high");
+  });
+  it("a waiver with its reason clears it, and goes once the result is stable", () => {
+    const w = { simulation: { x: "The spread is the shared welfare range's." } };
+    const ps = simulationProblems("x", sim(["@welfare_ranges.shrimp_vs_chicken"]), w);
+    expect(result(ps)).toBeUndefined();
+    expect(ps.every((p) => p.severity === "low")).toBe(true);
+    expect(simulationProblems("x", sim([], false), w).map((p) => p.check)).toEqual(["waiver"]);
   });
 });
 

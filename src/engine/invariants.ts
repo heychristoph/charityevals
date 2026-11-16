@@ -1012,7 +1012,19 @@ const HOUSEHOLD_PLACES: [string, RegExp][] = [
 ];
 const HOUSEHOLD_SIZE_FACTS = ["household_size.*"];
 
-export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]; context?: (text: string) => string | undefined }[] = [
+/** Words that say a figure was measured in the programme's own people: its recipients, participants or
+ * clients, the households it enrols, the trial's or study's households. */
+const OWN_POPULATION = /\b(recipients?|participants?|beneficiar(y|ies)|clients?|enrol(l)?ees?|enrol(l)?s|enrol(l)?ed|trial|(study|survey)['’]?s? (households?|participants|population)|programme['’]?s? (own )?(households?|people|population)|program['’]?s? (own )?(households?|people|population)|households? (it )?(reach(es|ed)?|serve[sd]?|target(s|ed)?))\b/i;
+
+/** A figure read from a source (kind observed or estimate, with its own url) and measured in the
+ * programme's own population (templates.md cash-income: the recipients' own household size): the
+ * programme's own number, not a copy of the shared one for the place. */
+export function measuredInOwnPopulation(r: Pick<ResolvedRow, "kind" | "source" | "label" | "explainer">): boolean {
+  return (r.kind === "observed" || r.kind === "estimate") && !!r.source?.url && OWN_POPULATION.test(`${r.label} ${r.explainer ?? ""}`);
+}
+
+/** `own`: the programme's own measured figure (measuredInOwnPopulation) is no copy of the concept's fact. */
+export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]; context?: (text: string) => string | undefined; own?: boolean }[] = [
   { id: "resource-sharing", test: /\bresource sharing\b|\bhousehold sharing\b/i, facts: ["givewell_shared.resource_sharing_multiplier"] },
   { id: "treatment-costs-averted", test: /\btreatment costs averted\b/i, not: /malnutrition|sam\b|wasting/i, facts: ["givewell_shared.treatment_costs_averted"] },
   { id: "investment-of-income", test: /\binvestment of income increases\b/i, facts: ["givewell_shared.investment_of_income_increases", "givewell_shared.investment_of_income_increases_nets", "givewell_shared.investment_of_income_increases_vas", "givewell_shared.investment_of_income_increases_deworming"] },
@@ -1033,7 +1045,7 @@ export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]
   { id: "indirect-deaths-diarrhea", test: /\bindirect deaths?\b[^.;]{0,40}\b(per|for every)\b[^.;]{0,30}\b(diarrh\w*|ors|zinc)\b/i, facts: ["givewell_shared.indirect_deaths_per_direct_diarrhea_death"] },
   { id: "household-spillover-therapy", test: /\b(spillover|household)\b[^.;]{0,40}\b(psychotherapy|therapy|recipient'?s? (own )?effect|per (household )?member)\b/i, facts: ["wellby_factors.household_spillover_ratio_psychotherapy"] },
   // One household size per place (facts/household_size.json, the latest DHS survey): a row naming a household's size reads its place's fact.
-  { id: "household-size", test: /\bhousehold size\b|\b(people|persons) per household\b|\bnumber of household members\b|\bother household members\b|\bpeople in the client's household\b/i, not: /\bprofit\b|extrapolation|\bnpv\b/i, facts: HOUSEHOLD_SIZE_FACTS, context: (t) => HOUSEHOLD_PLACES.find(([, re]) => re.test(t))?.[0] },
+  { id: "household-size", test: /\bhousehold size\b|\b(people|persons) per household\b|\bnumber of household members\b|\bother household members\b|\bpeople in the client's household\b/i, not: /\bprofit\b|extrapolation|\bnpv\b/i, facts: HOUSEHOLD_SIZE_FACTS, context: (t) => HOUSEHOLD_PLACES.find(([, re]) => re.test(t))?.[0], own: true },
   { id: "commitment-fulfilment", test: /\b(fulfil\w*|compliance|kept|keep)\b[^.;]{0,40}\b(commitments?|(?<!founders )pledges?)\b|\bcommitments?\b[^.;]{0,30}\b(fulfil\w*|compliance)\b/i, not: /\bpigs?\b|gestation|sows?|shrimp|fish/i, facts: ["sad_factors.commitment_fulfilment_cage_free", "sad_factors.commitment_fulfilment_broiler"] },
   { id: "depression-per-phq9-point", test: /\bphq[- ]?9?\b[^.;]{0,40}\b(daly|healthy|disability)\b|\bdalys? per (phq|point)\b/i, facts: ["depression.dalys_per_phq9_point_year", "depression.phq9_sd"] },
 ];
@@ -1071,7 +1083,7 @@ export function conceptRows(lib: Library) {
       if (!path.has(r.id)) continue;
       for (const c of CONCEPTS) {
         const text = `${r.id.replace(/_/g, " ")} ${r.label}`;
-        if (!c.test.test(r.label) || c.not?.test(text)) continue;
+        if (!c.test.test(r.label) || c.not?.test(text) || (c.own && measuredInOwnPopulation(r))) continue;
         const readsShared = [...upstream(m, r.id)].some((id) => m.byId.get(id)?.factDeps.some((f) => conceptReads(c.facts, f)));
         if (r.formula !== undefined && !readsShared) continue;
         const ctx = c.context?.(`${text} ${m.name} ${m.id}`) ?? "";
@@ -1481,7 +1493,9 @@ export function applyWaivers(reports: InvariantReport[], waivers: Waivers): { re
     });
     return { ...r, violations, waived: r.violations.length - violations.length };
   });
-  const stale = Object.entries(waivers).flatMap(([id, w]) => Object.keys(w).map((k) => `${id} ${k}`)).filter((k) => !used.has(k));
+  // Sections of checks that aren't invariants (scripts/preflight.ts's PREFLIGHT_WAIVERS) are theirs to judge.
+  const ids = new Set(reports.map((r) => r.id));
+  const stale = Object.entries(waivers).filter(([id]) => ids.has(id)).flatMap(([id, w]) => Object.keys(w).map((k) => `${id} ${k}`)).filter((k) => !used.has(k));
   return { reports: out, stale };
 }
 
