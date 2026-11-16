@@ -8,7 +8,9 @@
 | d | Lint (audit-model) | 1 low (spread across joint ranges, already stated in the summary); unchanged |
 
 Verdict: pass
-Model-sha: 539373d3878bd5ddc92043e8bf63a72e4dcc68bb1f33fbb9f4df0661ed8e04a8
+Model-sha: 8281a18fdceb3ba231b2b7581e67e2af26a2ddf4d027fa885b191e20fade2850
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
+
+Re-stamped (16 Nov 2026): Unused field-building adjustments fixed at 1 (fb_people 0); headline unchanged. Mechanical: headline unchanged, 1 row changed, against ee138d3d.

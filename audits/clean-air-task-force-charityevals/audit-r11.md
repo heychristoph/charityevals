@@ -1,6 +1,6 @@
 # Audit: clean-air-task-force-charityevals, round 11 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: 0.005801 tco2e/$ = 0.003461 years of healthy life per 1,000 dollars (summary and write-up say 0.0035; round 10 plus the non-death change 0.0062). Verdict: pass.
-Model-sha: 571a369f9910781bd77a240993e156c81cf725191e56ebe7b820242bdedaa805
+Model-sha: 8fec36778af7eaa85958d8ae87f4b7adb8e6e1b853ea2daad9510ceacd3c4601
 Scope: ccs_evidence_adj, ccs_total_adj, ccs_implementation_adj; nuc_pathway_first_year, nuc_pathway_last_year, nuc_middle_year, nuc_pathway_counted_share and their use in nuc_downstream, fus_downstream, nuc_extra_power_cost_uov; us_power_twh_2023, us_fossil_power_twh_2023, nuc_fossil_share, pcge_rate_position, nuc_premium_usd_per_mwh; public_payer_uov_per_dollar, ccs_public_usd_per_year, ccs_public_cost_uov, compliance_uov_per_year, tco2e_from_uov (side-effect form); summary and write-up headline. Nothing else re-audited.
 Mechanical: audit-model.ts 0 findings (warnings only); check.ts "all models valid". Conversion-section rows (methane_share, fuel_share, fuel_smoke_factor) read no shared assumption (INV-2b clean).
 
@@ -23,3 +23,5 @@ Checks:
 - facts/climate.json q45_credit_usd_per_tco2 ($17 x 5 = $85, 26 USC 45Q) read; not refetched. IEA/NEA clean-premium and system-cost facts read (inputs from round 10 checks).
 
 Findings: 0 high, 0 medium, 3 low. Verdict: pass.
+
+Re-stamped (16 Nov 2026): EPA methane rule and Advanced Clean Cars II dates read the shared facts (climate.us_oil_gas_methane_rule_*_year, climate.ca_advanced_clean_cars_ii_*_year); same values. Mechanical: headline unchanged, against 1a9667aa.

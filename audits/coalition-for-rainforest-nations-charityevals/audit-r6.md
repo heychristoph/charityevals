@@ -4,7 +4,7 @@ Result: -0.0212 -> -0.0244 years per $1,000 (commit 7e73f6cd), reproduced at the
 
 Verdict: pass
 
-Model-sha: cc545ecd710e42188c6489e399e7d57bcc43f79aeea2461f3aa5f82e306face0
+Model-sha: 84fd2bbd9032b86be5aeea98babb7265c2acfab22ff5420a0b3f6d3a857c6ae0
 
 Scope: the rows changed in 7e73f6cd (`donor_payer_uov_per_dollar`, `fin_uov_per_year`, `rbf_payer_uov`, `itmo_payer_uov`, `uov_bridged`, `rbf_dalys_raw`, `itmo_dalys_raw`), the summary and write-up sentences that state the result, and the bridge formula of `climate_dalys` against the unit's conversion for the 0.6 non-death damage (mechanical).
 
@@ -29,3 +29,5 @@ Checks, all passing:
 - facts/public_funds.json `mcpf` (1.2, judgment) and `us_federal_payer_multiple` (1.4, judgment): read, as 2.23 and the explainer state.
 - facts/united_kingdom.json `consumption_per_person_2024` (32,412, World Bank NE.CON.PRVT.CD / SP.POP.TOTL) and facts/survey_consumption.json `survey_to_na_gbr` (best 0.842): exist and are read as 2.23 prescribes; unchanged since earlier rounds.
 - docs/normalization.md 2.23 and 2.5 ("Damage beyond deaths"); climate recipe "Public money". No new observed or estimate input in this model to fetch.
+
+Re-stamped (16 Nov 2026): Why the simulation is too wide to use, said in outcome_total's explainer (normalization.md 2.18); values unchanged. Mechanical: headline unchanged, against 1a9667aa.
