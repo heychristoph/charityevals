@@ -46,7 +46,7 @@ Its influence before 2023 is left out, along with its cost: the 2017 book and th
 
 ### How this model was checked
 
-Independent audits are in audits/project-drawdown-charityevals/. Round 1 found the funders' giving valued by our own tonnes-per-dollar judgments; it now goes through the site's shared money-moved rows, which raised the result about eightfold. It also removed an evidence discount that repeated the missing-data step and timing reasons from a counterfactual that the years counted already cover. Donated services left the cost. Round 2 found the shifted giving read the climate charities without their own missing-data and age steps; the model now reads them as a money mover does, which lowered the result by about two-thirds. Before the last round the funders' branch moved to the site's new shared rule for spending research changed, with its evidence step (70%, as for Rethink Priorities).
+Independent audits are in audits/project-drawdown-charityevals/. Round 1 found the funders' giving valued by our own tonnes-per-dollar judgments; it now goes through the site's shared money-moved rows, which raised the result about eightfold. It also removed an evidence discount that repeated the missing-data step and timing reasons from a counterfactual that the years counted already cover. Donated services left the cost. Round 2 found the shifted giving read the climate charities without their own missing-data and age steps; the model now reads them as a money mover does, which lowered the result by about two-thirds. Before the last round the funders' branch moved to the site's new shared rule for spending research changed, with its evidence step (70%).
 
 ### Sources
 

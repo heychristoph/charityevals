@@ -51,7 +51,7 @@ Wins before 2020 aren't counted, such as the first $60 million of carbon-removal
 
 ### How this model was checked
 
-Independent audits are in audits/carbon180-charityevals/. Round 1 found the slow build-out of the 45Q tonnes counted three times (the shared figure already allows for it), so each branch now has its own evidence step. It also asked for a branch for the farm conservation money in place of a share, and for the technology's pathway to be read in the years counted rather than at 2050. Round 2 asked for the reforestation money as a branch, the attribution shares anchored on the other groups' budgets, and one shared soil-carbon figure for cover crops, which The Nature Conservancy's model now reads too.
+Independent audits are in audits/carbon180-charityevals/. Round 1 found the slow build-out of the 45Q tonnes counted three times (the shared figure already allows for it), so each branch now has its own evidence step. It also asked for a branch for the farm conservation money in place of a share, and for the technology's pathway to be read in the years counted rather than at 2050. Round 2 asked for the reforestation money as a branch, the attribution shares anchored on the other groups' budgets, and one shared soil-carbon figure for cover crops.
 
 ### Sources
 
