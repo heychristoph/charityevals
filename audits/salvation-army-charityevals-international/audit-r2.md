@@ -1,6 +1,6 @@
 # Audit: salvation-army-charityevals-international, round 2 (verification of the overhead explainer and the shared-fact move)
 Result: 2.455e-4 daly/$ = 0.2455 years of healthy life per 1,000 dollars (combined range 0.0379-1.589); cause median 0.1001 (x2.45). Verdict: pass.
-Model-sha: a0b604dd30354fec8c0b485564cafa5885bb9de38d0241033018d02dd297ac35
+Model-sha: 71364a4c9d995c691a89f02eb854c155b2096e5f39fc38a55e6bffdee0edb587
 Scope: verification of the changes in 646c0f7e only; not a full re-audit. Changed: the overhead_ratio explainer. Also confirmed: the shared fact `@salvation_army.goods_handed_out_share` moved 0.9 to 0.85 (commit 3a3e1602, verified in the US model's audit-r3) and moves this model's result 0.2447 to 0.2455 through the overhead ratio.
 Mechanical: `npx tsx scripts/audit-model.ts models/global-health/salvation-army-charityevals-international.json` lint 0 high / 0 medium / 1 low (spread, 1874x, unchanged from round 1), invariants none; `npx tsx scripts/check.ts salvation-army-charityevals-international` all models valid, 0.25; `npx tsx scripts/simulation-check.ts salvation-army-charityevals-international` stable (5% 0.343, 50% 1, 95% 2.87 x best guess). normalization-audit not run (verification round).
 Previous round: audit-r1 findings 1 and 2 were lows with no fix asked; unchanged. The US audit-r3's finding 3 (the stale overhead_ratio explainer) is resolved.
@@ -20,3 +20,5 @@ Unchanged from round 1; the overhead explainer is not a driver.
 Verdict: pass
 
 Re-stamped (16 Nov 2026): Pre-audit gate cleanup: typed figures now read shared facts at the same best values (@sub_saharan_africa.*, @newborn_care.*, @education.learning_gain_sd_median_rct_lmic, @education.years_primary_programme_to_work, @relief_development.*); where a copy's range differed it takes the fact's (livelihood years 1-4, years to work 6-15); explainers no longer compare with other charities' models; headline unchanged. Mechanical: headline unchanged, against 0b12c4f1.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 52be53be.

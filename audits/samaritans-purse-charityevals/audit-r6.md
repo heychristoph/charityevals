@@ -1,6 +1,6 @@
 # Audit: samaritans-purse-charityevals, round 6
 Result: 5.071e-5 daly/$ = 0.05071 years of healthy life per 1,000 dollars (combined range 0.01222–0.2104); cause median 0.1132 (×0.4478). Verdict: pass.
-Model-sha: 91f1443a748681801624fc204391dc4281ab18013dd563812822f599a0f583ad
+Model-sha: 96c4d7c189761d644e35c40771cdce1d64054ea5fd3cb18e2ecae12e120d28c0
 Scope: verification of the one change since round 5: us_evidence_adj 0.95 (0.8-1) judgment to formula 1 with a new explainer, and the write-up edits ("US relief" added to the no-evidence-step list; sentence on the site-wide pass 0.047 to 0.051 in "How this model was checked"); summary and write-up figures against the live result. Not a full re-audit.
 Mechanical: audit-model 0 findings; check.ts all valid; simulation-check stable (5% 0.553, 50% 1, 95% 1.8 x best); normalization-audit not rerun (coordinator ran it: none).
 Previous round: round 5 had two low findings (us_evidence_adj left at 0.95; write-up list missing US relief). Both resolved.
@@ -14,7 +14,7 @@ Figures check: summary "about 0.05 ... about half the site's global-health media
 Drivers note: unchanged; the result is still dominated by the missing-data discount (0.5 on every branch), the shoebox worth and relief cost per person. The change moves the result by +0.04%.
 
 Verdict: pass
-Model-sha: 91f1443a748681801624fc204391dc4281ab18013dd563812822f599a0f583ad
+Model-sha: 96c4d7c189761d644e35c40771cdce1d64054ea5fd3cb18e2ecae12e120d28c0
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -24,3 +24,5 @@ Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (co
 Re-stamped (16 Nov 2026): Pre-audit gate cleanup: typed figures now read shared facts at the same best values (@sub_saharan_africa.*, @newborn_care.*, @education.learning_gain_sd_median_rct_lmic, @education.years_primary_programme_to_work, @relief_development.*); where a copy's range differed it takes the fact's (livelihood years 1-4, years to work 6-15); explainers no longer compare with other charities' models; headline unchanged. Mechanical: headline unchanged, against bebc953e.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 52be53be.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
