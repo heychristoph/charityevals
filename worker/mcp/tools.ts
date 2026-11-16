@@ -230,10 +230,19 @@ async function rank(ctx: Context, args: Args): Promise<Json> {
     unit: YEARS,
     total: list.length,
     rankings: rows.map((r) => r.row),
-    page: abs(`${cause ? `/causes/${cause}` : "/"}${v.query}`),
+    page: abs(`${causePage(cat, cause, list)}${v.query}`),
     licences: licences([OWN_LICENCE, ...rows.map((r) => r.l)]),
     note: "Each charity's figure is its primary evaluator's, its programmes combined by funding; low and high are the plausible range. The ranking itself is charityevals' (first licence); each figure keeps its model's licence.",
   };
+}
+
+/** The page that shows a filtered ranking: /causes/<cause> for a cause, the area's own cause for an area
+ * (the site has pages per cause only, src/pages/causes/[cause].astro), else the homepage. */
+function causePage(cat: Awaited<ReturnType<typeof catalogue>>["cat"], cause: string | undefined, ranked: string[]): string {
+  if (!cause) return "/";
+  const causes = new Set(ranked.map((id) => cat.charities[id].cause));
+  if (ranked.some((id) => cat.charities[id].cause === cause)) return `/causes/${cause}`;
+  return causes.size === 1 ? `/causes/${[...causes][0]}` : "/";
 }
 
 // --- list_assumptions ----------------------------------------------------------------------------

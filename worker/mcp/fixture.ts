@@ -29,7 +29,7 @@ export const fixture = (): LibraryInput => ({
   ],
   charities: [
     { id: "cash", name: "Cash Charity", cause: "global-health", summary: "Sends money to poor households." },
-    { id: "nets", name: "Bednet Foundation", cause: "global-health", summary: "Buys malaria nets." },
+    { id: "nets", name: "Bednet Foundation", cause: "global-health", area: "malaria", summary: "Buys malaria nets." },
     { id: "hens", name: "Hen Welfare League", cause: "animal-welfare", summary: "Campaigns for cage-free hens." },
     { id: "widgetco", name: "Widget Co", cause: "climate" },
     { id: "secret", name: "Secret Charity", cause: "climate" },

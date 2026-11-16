@@ -238,6 +238,10 @@ describe("MCP tools", () => {
     expect(health.rankings.map((r: { id: string }) => r.id)).toEqual(["nets"]);
     expect(health.total).toBe(2);
     expect(health.page).toBe("https://charityevals.org/causes/global-health?set=patient");
+    // An area has no page of its own: its ranking links to its cause's page.
+    const malaria = (await call("rank", { cause: "malaria" })).out;
+    expect(malaria.rankings.map((r: { id: string }) => r.id)).toEqual(["nets"]);
+    expect(malaria.page).toBe("https://charityevals.org/causes/global-health");
     expect((await call("rank", { limit: 0 })).error).toContain("limit");
   });
 
