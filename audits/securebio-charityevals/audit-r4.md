@@ -9,7 +9,7 @@ Checked only the change since round 3: evidence_adj applied per branch, weighted
 
 New findings: none.
 
-Model-sha: e7c5071eb5dede9e9b41f732288acdccad3da4954038df17ce74108bbdd05f05
+Model-sha: f66ec7eb35745016eb338b10b2a2d78f9bd734ee9c8fb44c576ddbc500449a54
 
 **Verdict: pass**
 
@@ -17,3 +17,5 @@ Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastr
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
+
+Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.

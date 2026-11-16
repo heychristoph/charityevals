@@ -1,6 +1,6 @@
 # Audit: machine-intelligence-research-institute-charityevals, round 7 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 7.327e-5 daly/$ = 0.0733 years of healthy life per 1,000 dollars (combined range 0.0003–17.7); cause median 0.958 (×0.077). Verdict: pass.
-Model-sha: 3dd52d633a1f4c2bbdbe3e3565300b73f7ac66a051f3cc05aa0c6ce8c3417f18
+Model-sha: 4ad6f1bbe6f85580e163d6d6b90aa9fe472c6aecb185726f88ebe2b4299d60ae
 Scope: unchanged from round 4. Checks only that both merged changes are present together and consistent: (a) rows bio_covid_scale_share, covid_scale_deaths_averted, covid_value_per_death and uov_bridged (round 5); (b) leverage_funging_adj 1 with the explainer naming the next-dollar room factor (round 6).
 Mechanical: lint no high or medium (lows: ranges on small-catastrophe rows, unused pol_/fb_cost_share, far-below confirmed by the summary's reason), invariants none, normalization-audit none (all checks 0 violations; generated restored), scripts/check.ts passes, simulation-check stable (5% 0.065, 95% 9.18 × best guess; single events miss 0%).
 Previous round: rounds 5 and 6 had no open findings.
@@ -31,3 +31,5 @@ Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value cha
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
+
+Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.

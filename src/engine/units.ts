@@ -110,17 +110,6 @@ const same = (a?: number, b?: number) => (both(a, b) && close(a!, b!) ? a : unde
 
 export type UnitIssue = { row: string; kind: "money" | "time" | "scale" | "sum"; message: string };
 
-/** A row's id or label saying it is per dollar (per $1 million) where its unit doesn't. */
-const PER_DOLLAR = /\$1(?:,000)? ?million\b|\$1m\b|\bper_million$/i;
-
-/** What a row declares: its unit, read as its label where the unit leaves out the dollar its label names
- * ("deaths a year by a typical $1 million of work" in "deaths / year"). */
-function rowDeclared(r: { id: string; label?: string; unit?: string; format?: string }): Dim {
-  const dim = declaredDim(r);
-  if (r.unit && dim.money === 0 && dim.time !== undefined && (PER_DOLLAR.test(r.label ?? "") || PER_DOLLAR.test(r.id))) return { ...dim, money: -1, scale: undefined };
-  return dim;
-}
-
 /** The conversion factors a scale finding names: per $ against per $1,000, a percent against a
  * fraction, thousands and millions, months, weeks and days against years. */
 const FACTORS: [number, string][] = [[1e3, "1,000 (per $ against per $1,000, or ones against thousands)"], [1e6, "a million"], [1e5, "100,000"], [100, "100 (a percent against a fraction)"], [12, "12 (a month against a year)"], [52, "52 (a week against a year)"], [365, "365 (a day against a year)"]];
@@ -133,7 +122,7 @@ const FACTORS: [number, string][] = [[1e3, "1,000 (per $ against per $1,000, or 
 export function unitIssues(lib: Library, m: ResolvedModel, exempt: (r: ResolvedRow) => boolean = () => false): UnitIssue[] {
   const issues: UnitIssue[] = [];
   const dims = new Map<string, Dim>();
-  const factDim = (key: string): Dim => { const f = lib.facts.get(key); return f ? rowDeclared(f) : UNKNOWN; };
+  const factDim = (key: string): Dim => { const f = lib.facts.get(key); return f ? declaredDim(f) : UNKNOWN; };
   const assumptions = new Map(lib.assumptions.rows.map((a) => [a.id, a]));
   const assumptionDim = (id: string): Dim => { const a = assumptions.get(id); return a ? declaredDim(a) : UNKNOWN; };
   type D = Dim & { literal?: number };
@@ -199,7 +188,7 @@ export function unitIssues(lib: Library, m: ResolvedModel, exempt: (r: ResolvedR
   for (const id of m.order) {
     const r = m.byId.get(id);
     if (!r) continue;
-    const dec = rowDeclared(r);
+    const dec = declaredDim(r);
     if (!r.node) { dims.set(id, dec); continue; }
     const sums: string[] = [];
     const got = dimOf(r.node, sums);
