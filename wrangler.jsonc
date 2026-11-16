@@ -23,6 +23,13 @@
   // The MCP server's per-IP limit (worker/mcp/server.ts): public and without sign-in, so 120 calls a
   // minute per address. The namespace id is any number unique on the account.
   "ratelimits": [{ "name": "MCP_LIMITER", "namespace_id": "1001", "simple": { "limit": 120, "period": 60 } }],
+  // The MCP server's global daily budget for calculations with custom values (worker/mcp/budget.ts):
+  // one Durable Object counts them for every isolate.
+  "durable_objects": { "bindings": [{ "name": "MCP_BUDGET", "class_name": "McpBudget" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["McpBudget"] }],
+  // No request may run away: 5 s of CPU at most (Workers Paid). The MCP server's heaviest call, a
+  // ranking at custom values in a fresh isolate, takes about 2 s.
+  "limits": { "cpu_ms": 5000 },
   "routes": [
     { "pattern": "charityevals.org", "custom_domain": true },
     { "pattern": "www.charityevals.org", "custom_domain": true }

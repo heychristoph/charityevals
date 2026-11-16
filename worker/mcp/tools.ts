@@ -2,71 +2,90 @@
 // values or the reader's own. Every answer is compact JSON in years of healthy life per $1,000 (a model
 // in a unit nobody converts: its own unit per dollar), with the plausible range, the page and the terms
 // the figures can be reused under (src/lib/licence.ts).
-import { compute, headline, modelsOf, pickValue, usedAssumptions, type Library, type ResolvedModel } from "../../src/engine/model";
-import { primaryModel } from "../../src/engine/ranking";
-import { renderText } from "../../src/engine/prose";
-import { sensitivity, type Swing } from "../../src/engine/sensitivity";
-import { licenceOf, OWN_LICENCE, type Licence } from "../../src/lib/licence";
-import { charityFigure, cheapFlags, comparable, modelFigure, rankings, type CharityFigure, type Figure } from "./figures";
+//
+// What it costs: the defaults and every value set are answered from what the build computed
+// (/data/mcp-results.json) and get_model from the build's answers (/data/mcp/<id>.json), with no engine.
+// Only a reader's own values load the library and compute; those computations count against a global
+// daily budget, and the last few are kept per isolate, so a repeated request is free.
+import { assumptionValues } from "../../src/engine/model";
+import { OWN_LICENCE } from "../../src/lib/licence";
+import { catalogueOf, LiveFigures, StoredFigures, YEARS, type Catalogue, type Figures, type Precomputed } from "./catalogue";
+import { getModelAnswer } from "./detail";
+import { abs, charityItem, charityLicence, figure, item, licence, licences, modelItem, modelLicence, ownerName, short, unknownId, type Json } from "./items";
 import type { Loaded } from "./library";
-import { parseValues, settable, ToolError, type Values } from "./values";
+import { DEFAULTS, parseValues, settable, ToolError, type Values } from "./values";
 
-export const SITE = "https://charityevals.org";
-const YEARS = "years of healthy life per $1,000";
 const MAX_IDS = 10;
 const MAX_RANK = 100;
 const MAX_SEARCH = 25;
-const MAX_TEXT = 600;
-const DRIVERS = 8;
+/** Computations with a reader's own values kept per isolate. */
+const MEMO = 8;
 
-type Json = Record<string, unknown>;
 type Args = Record<string, unknown>;
 
-/** Three significant figures: the models aren't more precise than that. */
-const r3 = (x: number) => (Number.isFinite(x) ? Number(x.toPrecision(3)) : null);
-const short = (s: string | undefined, n = MAX_TEXT) => (s && s.length > n ? `${s.slice(0, n - 1).trimEnd()}…` : s);
-const abs = (path: string) => `${SITE}${path}`;
-const licence = (l: Licence) => ({ name: l.name, ...(l.url ? { url: l.url } : {}), attribution: l.attribution });
+/** A global count of computations with readers' own values: false once today's are used up. */
+export type Budget = { take(): Promise<boolean> };
 
-function unitOf(lib: Library, m: ResolvedModel): string {
-  return comparable(lib, m) ? YEARS : `${lib.assumptions.units[m.output!.unit]?.label ?? m.output!.unit} per dollar`;
+export type Context = {
+  /** The build's catalogue and figures (/data/mcp-results.json); undefined if it can't be read. */
+  results(): Promise<Precomputed | undefined>;
+  /** The library, for a reader's own values (/data/mcp-library.json). */
+  library(): Promise<Loaded>;
+  /** get_model's answer for an id, as the build wrote it (/data/mcp/<id>.json). */
+  answer?(id: string): Promise<Json | undefined>;
+  budget?: Budget;
+};
+
+// --- Where the figures come from -----------------------------------------------------------------
+
+type Memo = { catalogue?: Catalogue; scenarios: Map<string, LiveFigures>; custom: Map<string, LiveFigures> };
+const memos = new WeakMap<Loaded, Memo>();
+const memoOf = (loaded: Loaded) => memos.get(loaded) ?? memos.set(loaded, { scenarios: new Map(), custom: new Map() }).get(loaded)!;
+
+async function catalogue(ctx: Context): Promise<{ cat: Catalogue; pre?: Precomputed }> {
+  const pre = await ctx.results().catch(() => undefined);
+  if (pre) return { cat: pre.catalogue, pre };
+  const loaded = await ctx.library();
+  const memo = memoOf(loaded);
+  return { cat: (memo.catalogue ??= catalogueOf(loaded.lib)) };
 }
 
-/** A model's page: the charity's page for its main model, else /<charity>/<model> (src/lib/data.ts modelUrl). */
-function modelPath(lib: Library, m: ResolvedModel): string {
-  return primaryModel(lib, m.charity)?.id === m.id ? `/${m.charity}` : `/${m.charity}/${m.id}`;
-}
-
-const ownerName = (lib: Library, id: string) => lib.owners.get(id)?.name ?? id;
-const figure = (f: Figure) => ({ result: r3(f.central), low: r3(Math.min(f.low, f.high)), high: r3(Math.max(f.low, f.high)) });
-
-/** A model's text rendered at the default values (`{{result}}` placeholders, docs/prose-numbers.md). Text
- * a variant inherits renders with its parent's values, as on the pages (prose.ts renderLibraryProse). */
-function rendered(lib: Library, m: ResolvedModel, get: (x: ResolvedModel) => string | undefined): string | undefined {
-  const text = get(m);
-  if (!text) return text;
-  let at = m;
-  for (let p = at.extends ? lib.models.get(at.extends) : undefined; p && get(p) === text; p = p.extends ? lib.models.get(p.extends) : undefined) at = p;
-  try {
-    return renderText(lib, at, text);
-  } catch {
-    return text;
+/** The figures under values `v`: stored for the defaults and the value sets, else computed (from the
+ * isolate's last few, or counted against the daily budget). */
+async function figuresFor(ctx: Context, v: Values, pre: Precomputed | undefined): Promise<Figures> {
+  const stored = v.scenario !== "custom" && pre?.scenarios[v.scenario];
+  if (stored) return new StoredFigures(stored);
+  const loaded = await ctx.library();
+  const memo = memoOf(loaded);
+  const av = () => (v.scenario === "default" ? loaded.defaults : assumptionValues(loaded.lib.assumptions, v.applied));
+  if (v.scenario !== "custom") {
+    let f = memo.scenarios.get(v.scenario);
+    if (!f) memo.scenarios.set(v.scenario, (f = new LiveFigures(loaded.lib, av())));
+    return f;
   }
-}
-
-const models = (lib: Library) => [...lib.models.values()].filter((m) => m.kind !== "template" && m.output);
-
-/** A model by id, or a charity's main model by the charity's id. */
-function findModel(lib: Library, id: string): ResolvedModel | undefined {
-  const m = lib.models.get(id);
-  if (m && m.kind !== "template" && m.output) return m;
-  return lib.charities.has(id) ? primaryModel(lib, id) : undefined;
-}
-
-function unknownId(lib: Library, id: string): ToolError {
-  const q = id.toLowerCase();
-  const near = [...lib.charities.values()].filter((c) => c.id.includes(q) || q.includes(c.id) || c.name.toLowerCase().includes(q)).slice(0, 5).map((c) => c.id);
-  return new ToolError(`No charity or model "${id}".${near.length ? ` Did you mean: ${near.join(", ")}?` : ""} search_charities finds ids.`);
+  const key = JSON.stringify(Object.entries(v.applied).sort(([a], [b]) => a.localeCompare(b)));
+  const hit = memo.custom.get(key);
+  if (hit) {
+    // Most recently used last.
+    memo.custom.delete(key);
+    memo.custom.set(key, hit);
+    return hit;
+  }
+  if (ctx.budget) {
+    let ok: boolean;
+    try {
+      ok = await ctx.budget.take();
+    } catch (e) {
+      console.error("mcp: budget unavailable", (e as Error).message);
+      ok = false;
+    }
+    if (!ok)
+      throw new ToolError("Today's quota of calculations with custom values is used up (it resets at midnight UTC). The defaults and the value sets (list_assumptions) still work: pass { \"set\": \"<id>\" }, or no values.");
+  }
+  const f = new LiveFigures(loaded.lib, av());
+  memo.custom.set(key, f);
+  if (memo.custom.size > MEMO) memo.custom.delete(memo.custom.keys().next().value!);
+  return f;
 }
 
 const idArg = (args: Args, key = "id") => {
@@ -77,85 +96,10 @@ const idArg = (args: Args, key = "id") => {
 
 const valuesOut = (v: Values) => (v.set || Object.keys(v.applied).length ? { ...(v.set ? { set: v.set } : {}), applied: v.applied } : "defaults");
 
-/** The licences an answer's figures carry, once each, and each item's by name. */
-function licences(items: Licence[]) {
-  const seen = new Map<string, Licence>();
-  for (const l of items) seen.set(`${l.name}|${l.attribution}`, l);
-  return [...seen.values()].map(licence);
-}
-
-// --- Items ---------------------------------------------------------------------------------------
-
-/** One model's figure at the reader's values. */
-function modelItem(lib: Library, m: ResolvedModel, v: Values): Json {
-  return {
-    type: "model",
-    id: m.id,
-    name: m.name,
-    charity: { id: m.charity, name: lib.charities.get(m.charity)?.name ?? m.charity },
-    evaluator: ownerName(lib, m.owner),
-    ...figure(modelFigure(lib, m, v.av)),
-    unit: unitOf(lib, m),
-    url: abs(modelPath(lib, m) + v.query),
-    licence: licenceOf(m).name,
-  };
-}
-
-/** One charity's figure at the reader's values, as the rankings make it. */
-function charityItem(lib: Library, f: CharityFigure, v: Values, ranked: boolean): Json {
-  const lead = f.evaluators.find((e) => e.owner === f.primary)!;
-  const parts = lead.programmes;
-  return {
-    type: "charity",
-    id: f.charity.id,
-    name: f.charity.name,
-    cause: f.charity.cause,
-    evaluator: ownerName(lib, f.primary),
-    ...figure(f),
-    unit: YEARS,
-    on_rankings: ranked,
-    // The models behind the figure, where it combines more than one.
-    ...(parts.length > 1 || parts[0].locations > 1
-      ? { combines: { how: lead.basis === "weighted" ? "funding-weighted" : lead.basis, programmes: parts.map((p) => ({ programme: p.programme || undefined, model: p.model.id, ...figure(p), ...(p.locations > 1 ? { locations: p.locations } : {}) })) } }
-      : { model: parts[0].model.id }),
-    ...(f.evaluators.length > 1 ? { other_evaluators: f.evaluators.filter((e) => e !== lead).map((e) => ({ evaluator: ownerName(lib, e.owner), ...figure(e) })) } : {}),
-    url: abs(`/${f.charity.id}${v.query}`),
-    licence: licenceOf(parts[0].model).name,
-  };
-}
-
-/** A charity's figure at the reader's values: as ranked where it is on the rankings at them, else as its page shows it. */
-function charityFigureAny(lib: Library, id: string, av: Record<string, number>) {
-  const ranked = charityFigure(lib, id, av, true);
-  return ranked ? { f: ranked, ranked: true } : { f: charityFigure(lib, id, av, false), ranked: false };
-}
-
-// --- search_charities ----------------------------------------------------------------------------
-
-const norm = (s: string) => s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-type Entry = { id: string; name: string; text: string; models: ResolvedModel[] };
-const indexes = new WeakMap<Library, Entry[]>();
-function searchIndex(lib: Library): Entry[] {
-  let ix = indexes.get(lib);
-  if (!ix) {
-    ix = [...lib.charities.values()].flatMap((c) => {
-      const ms = modelsOf(lib, c.id);
-      if (!ms.length) return [];
-      return [{ id: c.id, name: norm(c.name), text: norm([c.id, c.name, c.cause, c.area ?? "", c.summary ?? "", ...ms.map((m) => `${m.name} ${ownerName(lib, m.owner)}`)].join(" ")), models: ms }];
-    });
-    indexes.set(lib, ix);
-  }
-  return ix;
-}
-
-function causes(lib: Library): string[] {
-  return [...new Set([...lib.charities.values()].flatMap((c) => [c.cause, ...(c.area ? [c.area] : [])]))].sort();
-}
-
-function causeArg(lib: Library, args: Args): string | undefined {
+function causeArg(cat: Catalogue, args: Args): string | undefined {
   const cause = args.cause;
   if (cause === undefined || cause === null || cause === "") return undefined;
-  const all = causes(lib);
+  const all = [...new Set(Object.values(cat.charities).flatMap((c) => [c.cause, ...(c.area ? [c.area] : [])]))].sort();
   if (typeof cause !== "string" || !all.includes(cause)) throw new ToolError(`No cause "${String(cause)}". Causes: ${all.join(", ")}.`);
   return cause;
 }
@@ -166,13 +110,32 @@ function limitArg(args: Args, fallback: number, max: number): number {
   return Math.min(n, max);
 }
 
-function searchCharities({ lib, defaults }: Loaded, args: Args): Json {
+// --- search_charities ----------------------------------------------------------------------------
+
+const norm = (s: string) => s.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+type Entry = { id: string; name: string; text: string };
+const indexes = new WeakMap<Catalogue, Entry[]>();
+function searchIndex(cat: Catalogue): Entry[] {
+  let ix = indexes.get(cat);
+  if (!ix) {
+    ix = Object.entries(cat.charities).map(([id, c]) => ({
+      id,
+      name: norm(c.name),
+      text: norm([id, c.name, c.cause, c.area ?? "", c.summary ?? "", ...c.models.map((m) => `${cat.models[m].name} ${ownerName(cat, cat.models[m].owner)}`)].join(" ")),
+    }));
+    indexes.set(cat, ix);
+  }
+  return ix;
+}
+
+async function searchCharities(ctx: Context, args: Args): Promise<Json> {
+  const { cat, pre } = await catalogue(ctx);
   const query = typeof args.query === "string" ? norm(args.query) : "";
-  const cause = causeArg(lib, args);
+  const cause = causeArg(cat, args);
   const limit = limitArg(args, 10, MAX_SEARCH);
   const words = query.split(" ").filter(Boolean);
-  const scored = searchIndex(lib).flatMap((e) => {
-    const c = lib.charities.get(e.id)!;
+  const scored = searchIndex(cat).flatMap((e) => {
+    const c = cat.charities[e.id];
     if (cause && c.cause !== cause && c.area !== cause) return [];
     if (!words.length) return [{ e, score: 0 }];
     if (!words.every((w) => e.text.includes(w))) return [];
@@ -180,18 +143,18 @@ function searchCharities({ lib, defaults }: Loaded, args: Args): Json {
     return [{ e, score }];
   });
   scored.sort((a, b) => b.score - a.score || a.e.name.localeCompare(b.e.name));
-  const v: Values = { av: defaults, applied: {}, query: "" };
-  const hits = scored.slice(0, limit).map(({ e }) => {
-    const c = lib.charities.get(e.id)!;
-    const { f, ranked } = charityFigureAny(lib, e.id, defaults);
-    const main = primaryModel(lib, e.id) ?? e.models[0];
-    const base = { id: c.id, name: c.name, cause: c.cause, ...(c.area ? { area: c.area } : {}), summary: short(c.summary, 300) };
+  const top = scored.slice(0, limit);
+  const figs = top.length ? await figuresFor(ctx, DEFAULTS, pre) : undefined;
+  const hits = top.map(({ e }) => {
+    const c = cat.charities[e.id];
+    const f = figs!.charity(e.id);
+    const base = { id: e.id, name: c.name, cause: c.cause, ...(c.area ? { area: c.area } : {}), summary: short(c.summary, 300) };
     const fig = f
-      ? charityItem(lib, f, v, ranked)
-      : { ...figure(modelFigure(lib, main, defaults)), unit: unitOf(lib, main), on_rankings: false, url: abs(`/${c.id}`), licence: licenceOf(main).name };
+      ? charityItem(cat, e.id, f, DEFAULTS)
+      : { ...figure(figs!.model(c.main) ?? { central: NaN, low: NaN, high: NaN }), unit: cat.models[c.main].unit, on_rankings: false, url: abs(`/${e.id}`), licence: modelLicence(cat, c.main).name };
     const { type: _t, id: _i, name: _n, cause: _c, combines: _x, model: _m, other_evaluators: _o, ...rest } = fig as Json;
-    const l = licenceOf(f ? f.evaluators.find((x) => x.owner === f.primary)!.programmes[0].model : main);
-    return { hit: { ...base, ...rest, models: e.models.slice(0, 8).map((m) => ({ id: m.id, name: m.name, evaluator: ownerName(lib, m.owner) })), ...(e.models.length > 8 ? { more_models: e.models.length - 8 } : {}) }, l };
+    const l = f ? charityLicence(cat, f) : modelLicence(cat, c.main);
+    return { hit: { ...base, ...rest, models: c.models.slice(0, 8).map((m) => ({ id: m, name: cat.models[m].name, evaluator: ownerName(cat, cat.models[m].owner) })), ...(c.models.length > 8 ? { more_models: c.models.length - 8 } : {}) }, l };
   });
   return {
     query: args.query ?? "",
@@ -205,120 +168,61 @@ function searchCharities({ lib, defaults }: Loaded, args: Args): Json {
 
 // --- get_model -----------------------------------------------------------------------------------
 
-function driver(lib: Library, m: ResolvedModel, s: Swing, vals: Record<string, number>, av: Record<string, number>): Json {
-  const value = s.scope === "row" ? vals[s.id] : s.scope === "assumption" ? av[s.id] : pickValue(lib.facts.get(s.id.slice(1))?.value);
-  const explainer = s.scope === "row" ? rendered(lib, m, (x) => x.byId.get(s.id)?.explainer)
-    : s.scope === "assumption" ? lib.assumptions.rows.find((r) => r.id === s.id)?.explainer
-    : lib.facts.get(s.id.slice(1))?.explainer;
-  return {
-    id: s.id,
-    label: s.label,
-    what: s.scope === "row" ? "input" : s.scope === "assumption" ? "shared assumption" : "shared fact",
-    ...(s.kind ? { kind: s.kind } : {}),
-    value: r3(value),
-    low: r3(s.low),
-    high: r3(s.high),
-    result_at_low: r3(s.atLow),
-    result_at_high: r3(s.atHigh),
-    explainer: short(explainer),
-  };
-}
-
-function modelDetail(lib: Library, m: ResolvedModel, defaults: Record<string, number>): Json {
-  const s = sensitivity(lib, m, defaults);
-  const vals = compute(lib, m, defaults);
-  const big = s.swings.some((x) => x.logSwing === Infinity);
-  const top = [...s.swings].sort((a, b) => (big ? Math.abs(b.atHigh - b.atLow) - Math.abs(a.atHigh - a.atLow) : b.logSwing - a.logSwing)).slice(0, DRIVERS);
-  const sets = settable(lib);
-  const evaluatorView = m.owner !== "charityevals" && comparable(lib, m) ? r3(headline(lib, m, defaults, {}, "evaluator")) : undefined;
-  return {
-    type: "model",
-    id: m.id,
-    name: m.name,
-    charity: { id: m.charity, name: lib.charities.get(m.charity)?.name ?? m.charity },
-    evaluator: ownerName(lib, m.owner),
-    cause: m.cause,
-    ...figure(modelFigure(lib, m, defaults)),
-    unit: unitOf(lib, m),
-    at: "default values",
-    ...(evaluatorView !== undefined ? { evaluator_view: { result: evaluatorView, note: "The evaluator's model as published, at its own values and conversions, in the same unit." } } : {}),
-    summary: rendered(lib, m, (x) => x.summary),
-    caveats: cheapFlags(lib, m),
-    top_drivers: top.map((x) => driver(lib, m, x, vals, defaults)),
-    assumptions_used: usedAssumptions(lib, m).filter((id) => sets.has(id)),
-    ...(m.source ? { source: { publisher: m.source.publisher, title: m.source.title, url: m.source.url, ...(m.source.published ? { published: m.source.published } : {}) } } : {}),
-    url: abs(modelPath(lib, m)),
-    history: abs(`${modelPath(lib, m)}/history`),
-    full_model: abs(`/data/models/${m.id}.json`),
-    licence: licence(licenceOf(m)),
-  };
-}
-
-function getModel({ lib, defaults }: Loaded, args: Args): Json {
+async function getModel(ctx: Context, args: Args): Promise<Json> {
   const id = idArg(args);
-  const m = lib.models.get(id);
-  if (m && m.kind !== "template" && m.output) return modelDetail(lib, m, defaults);
-  const c = lib.charities.get(id);
-  const main = c && primaryModel(lib, id);
-  if (!c || !main) throw unknownId(lib, id);
-  const { f, ranked } = charityFigureAny(lib, id, defaults);
-  const v: Values = { av: defaults, applied: {}, query: "" };
-  return {
-    charity: f ? charityItem(lib, f, v, ranked) : { type: "charity", id, name: c.name, cause: c.cause, on_rankings: false, url: abs(`/${id}`) },
-    models: modelsOf(lib, id).slice(0, 20).map((x) => ({ id: x.id, name: x.name, evaluator: ownerName(lib, x.owner), ...figure(modelFigure(lib, x, defaults)), unit: unitOf(lib, x) })),
-    main_model: modelDetail(lib, main, defaults),
-    licence: licence(licenceOf(main)),
-  };
+  // The build's answer (ids are lowercase letters, digits and hyphens: nothing else is looked up).
+  if (/^[a-z0-9-]+$/.test(id) && ctx.answer) {
+    const stored = await ctx.answer(id).catch(() => undefined);
+    if (stored) return stored;
+  }
+  const { cat } = await catalogue(ctx);
+  if (!(id in cat.models) && !(id in cat.charities)) throw unknownId(cat, id);
+  const loaded = await ctx.library();
+  const answer = getModelAnswer(loaded.lib, cat, await figuresFor(ctx, DEFAULTS, undefined), loaded.defaults, id);
+  if (!answer) throw unknownId(cat, id);
+  return answer;
 }
 
 // --- run_model and compare -----------------------------------------------------------------------
 
-/** An id as a figure: `prefer` says which reading wins where an id is both a model's and a charity's. */
-function item(lib: Library, id: string, v: Values, prefer: "model" | "charity"): { json: Json; licence: Licence } {
-  const m = lib.models.get(id);
-  const isModel = !!m && m.kind !== "template" && !!m.output;
-  if (lib.charities.has(id) && (prefer === "charity" || !isModel)) {
-    const { f, ranked } = charityFigureAny(lib, id, v.av);
-    if (f) return { json: charityItem(lib, f, v, ranked), licence: licenceOf(f.evaluators.find((e) => e.owner === f.primary)!.programmes[0].model) };
-    const main = primaryModel(lib, id);
-    if (main) return { json: modelItem(lib, main, v), licence: licenceOf(main) };
-  }
-  if (isModel) return { json: modelItem(lib, m!, v), licence: licenceOf(m!) };
-  throw unknownId(lib, id);
-}
-
-function runModel({ lib, defaults }: Loaded, args: Args): Json {
+async function runModel(ctx: Context, args: Args): Promise<Json> {
   const id = idArg(args);
-  const v = parseValues(lib, defaults, args.values);
-  const { json, licence: l } = item(lib, id, v, "model");
-  const at = item(lib, id, { av: defaults, applied: {}, query: "" }, "model").json;
+  const { cat, pre } = await catalogue(ctx);
+  const v = parseValues(cat.assumptions, args.values);
+  // An unknown id fails before anything is computed.
+  const at = item(cat, id, await figuresFor(ctx, DEFAULTS, pre), DEFAULTS, "model").json;
+  const { json, licence: l } = item(cat, id, await figuresFor(ctx, v, pre), v, "model");
   return { values: valuesOut(v), ...json, at_defaults: { result: at.result, low: at.low, high: at.high }, licence: licence(l) };
 }
 
-function compare({ lib, defaults }: Loaded, args: Args): Json {
+async function compare(ctx: Context, args: Args): Promise<Json> {
   const ids = args.ids;
   if (!Array.isArray(ids) || !ids.length || ids.some((x) => typeof x !== "string")) throw new ToolError(`ids is required: a list of charity or model ids (1 to ${MAX_IDS}).`);
   if (ids.length > MAX_IDS) throw new ToolError(`Compare at most ${MAX_IDS} at once.`);
-  const v = parseValues(lib, defaults, args.values);
-  const items = [...new Set(ids as string[])].map((id) => item(lib, id.trim(), v, "charity"));
+  const { cat, pre } = await catalogue(ctx);
+  const v = parseValues(cat.assumptions, args.values);
+  const unique = [...new Set((ids as string[]).map((x) => x.trim()))];
+  for (const id of unique) if (!(id in cat.models) && !(id in cat.charities)) throw unknownId(cat, id);
+  const figs = await figuresFor(ctx, v, pre);
+  const items = unique.map((id) => item(cat, id, figs, v, "charity"));
   return { values: valuesOut(v), items: items.map((x) => x.json), licences: licences(items.map((x) => x.licence)) };
 }
 
 // --- rank ----------------------------------------------------------------------------------------
 
-const ranks = new WeakMap<Record<string, number>, CharityFigure[]>();
-
-function rank({ lib, defaults }: Loaded, args: Args): Json {
-  const cause = causeArg(lib, args);
+async function rank(ctx: Context, args: Args): Promise<Json> {
+  const { cat, pre } = await catalogue(ctx);
+  const cause = causeArg(cat, args);
   const limit = limitArg(args, 20, MAX_RANK);
-  const v = parseValues(lib, defaults, args.values);
-  let all = ranks.get(v.av);
-  if (!all) ranks.set(v.av, (all = rankings(lib, v.av)));
-  const list = cause ? all.filter((f) => f.charity.cause === cause || f.charity.area === cause) : all;
-  const rows = list.slice(0, limit).map((f, i) => {
-    const lead = f.evaluators.find((e) => e.owner === f.primary)!;
-    const l = licenceOf(lead.programmes[0].model);
-    return { row: { rank: i + 1, id: f.charity.id, name: f.charity.name, cause: f.charity.cause, ...figure(f), evaluator: ownerName(lib, f.primary), url: abs(`/${f.charity.id}${v.query}`), licence: l.name }, l };
+  const v = parseValues(cat.assumptions, args.values);
+  const figs = await figuresFor(ctx, v, pre);
+  const all = figs.rankings();
+  const list = cause ? all.filter((id) => cat.charities[id].cause === cause || cat.charities[id].area === cause) : all;
+  const rows = list.slice(0, limit).map((id, i) => {
+    const f = figs.charity(id)!;
+    const l = charityLicence(cat, f);
+    const c = cat.charities[id];
+    return { row: { rank: i + 1, id, name: c.name, cause: c.cause, ...figure(f), evaluator: ownerName(cat, f.primary), url: abs(`/${id}${v.query}`), licence: l.name }, l };
   });
   return {
     values: valuesOut(v),
@@ -334,12 +238,15 @@ function rank({ lib, defaults }: Loaded, args: Args): Json {
 
 // --- list_assumptions ----------------------------------------------------------------------------
 
-function listAssumptions({ lib, defaults }: Loaded): Json {
-  const groups = new Map(lib.assumptions.groups.map((g) => [g.id, g.title]));
-  const sets = settable(lib);
+async function listAssumptions(ctx: Context): Promise<Json> {
+  const { cat } = await catalogue(ctx);
+  const a = cat.assumptions;
+  const defaults = assumptionValues(a);
+  const groups = new Map(a.groups.map((g) => [g.id, g.title]));
+  const sets = settable(a);
   return {
     how: 'Pass values to run_model, compare or rank as { "<id>": <number>, ... }, or a value set as { "set": "<id>" } (single values on top of a set are allowed). Any value the models can run on is taken, past low and high (the slider\'s ends) too; shares are fractions (0.04 is 4%).',
-    assumptions: lib.assumptions.rows.filter((r) => r.formula === undefined).map((r) => {
+    assumptions: a.rows.filter((r) => r.formula === undefined).map((r) => {
       const range = typeof r.value === "object" ? r.value : undefined;
       return {
         id: r.id,
@@ -354,7 +261,7 @@ function listAssumptions({ lib, defaults }: Loaded): Json {
         explainer: short(r.explainer, 400),
       };
     }),
-    value_sets: (lib.assumptions.presets ?? []).map((p) => ({ id: p.id, label: p.label, about: p.about, values: p.values })),
+    value_sets: (a.presets ?? []).map((p) => ({ id: p.id, label: p.label, about: p.about, values: p.values })),
     url: abs("/assumptions"),
     licence: licence(OWN_LICENCE),
   };
@@ -374,7 +281,7 @@ export type Tool = {
   title: string;
   description: string;
   inputSchema: Json;
-  run: (loaded: Loaded, args: Args) => Json;
+  run: (ctx: Context, args: Args) => Promise<Json>;
 };
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };

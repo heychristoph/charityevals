@@ -1,24 +1,38 @@
 import { describe, expect, it } from "vitest";
+import { nextCount } from "./budget";
+import { precompute, StoredFigures } from "./catalogue";
+import { answerIds, getModelAnswer } from "./detail";
 import { fixture } from "./fixture";
-import { cachedLoader, libraryFrom } from "./library";
+import { cachedLoader, libraryFrom, LoadError, type Loaded } from "./library";
 import { handleMcp, MAX_ANSWER, type RateLimiter } from "./server";
+import type { Budget, Context } from "./tools";
 
-const loaded = libraryFrom(fixture());
-const load = async () => loaded;
+/** The server as deployed: the build's files (through JSON, as the worker reads them) and the library. */
+function contexts(budget?: Budget) {
+  const loaded = libraryFrom(fixture());
+  const pre = precompute(loaded.lib);
+  const answers = Object.fromEntries(answerIds(pre.catalogue).map((id) => [id, getModelAnswer(loaded.lib, pre.catalogue, new StoredFigures(pre.scenarios.default), loaded.defaults, id)]));
+  const results = JSON.parse(JSON.stringify(pre));
+  const stored: Context = { results: async () => results, library: async () => loaded, answer: async (id) => (id in answers ? JSON.parse(JSON.stringify(answers[id])) : undefined), budget };
+  // Without the build's files: everything computed from the library.
+  const live: Context = { results: async () => undefined, library: async () => libraryFrom(fixture()) as Loaded, budget };
+  return { loaded, stored, live };
+}
+const { stored } = contexts();
 
-const post = (body: unknown, headers: Record<string, string> = {}, limiter?: RateLimiter) =>
-  handleMcp(new Request("https://charityevals.org/mcp", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream", ...headers }, body: typeof body === "string" ? body : JSON.stringify(body) }), load, limiter);
+const post = (body: unknown, headers: Record<string, string> = {}, limiter?: RateLimiter, ctx: Context = stored) =>
+  handleMcp(new Request("https://charityevals.org/mcp", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream", ...headers }, body: typeof body === "string" ? body : JSON.stringify(body) }), ctx, limiter);
 
 let n = 0;
-async function rpc(method: string, params?: unknown) {
-  const res = await post({ jsonrpc: "2.0", id: ++n, method, params });
+async function rpc(method: string, params?: unknown, ctx: Context = stored) {
+  const res = await post({ jsonrpc: "2.0", id: ++n, method, params }, {}, undefined, ctx);
   expect(res.status).toBe(200);
   return (await res.json()) as { result?: any; error?: { code: number; message: string } };
 }
 
 /** A tool's answer: its JSON, or its error message. */
-async function call(name: string, args: Record<string, unknown> = {}) {
-  const { result, error } = await rpc("tools/call", { name, arguments: args });
+async function call(name: string, args: Record<string, unknown> = {}, ctx: Context = stored) {
+  const { result, error } = await rpc("tools/call", { name, arguments: args }, ctx);
   if (error) throw new Error(error.message);
   if (result.isError) return { error: result.content[0].text as string, out: undefined as any };
   expect(JSON.parse(result.content[0].text)).toEqual(result.structuredContent);
@@ -67,12 +81,13 @@ describe("MCP protocol", () => {
   });
 
   it("gives browsers a note, refuses an event stream, and allows any origin", async () => {
-    const get = (accept: string) => handleMcp(new Request("https://charityevals.org/mcp", { headers: { Accept: accept } }), load);
+    const get = (accept: string) => handleMcp(new Request("https://charityevals.org/mcp", { headers: { Accept: accept } }), stored);
     const page = await get("text/html");
     expect(page.status).toBe(200);
+    expect(page.headers.get("X-Robots-Tag")).toBe("noindex");
     expect(await page.text()).toContain("no authentication");
     expect((await get("text/event-stream")).status).toBe(405);
-    const pre = await handleMcp(new Request("https://charityevals.org/mcp", { method: "OPTIONS" }), load);
+    const pre = await handleMcp(new Request("https://charityevals.org/mcp", { method: "OPTIONS" }), stored);
     expect(pre.status).toBe(204);
     expect(pre.headers.get("Access-Control-Allow-Origin")).toBe("*");
     expect(pre.headers.get("Access-Control-Allow-Headers")).toContain("MCP-Protocol-Version");
@@ -104,7 +119,7 @@ describe("MCP protocol", () => {
   });
 
   it("says so when the library can't load", async () => {
-    const res = await handleMcp(new Request("https://charityevals.org/mcp", { method: "POST", body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "rank", arguments: {} } }) }), () => Promise.reject(new Error("404")));
+    const res = await handleMcp(new Request("https://charityevals.org/mcp", { method: "POST", body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "rank", arguments: {} } }) }), { results: () => Promise.reject(new LoadError("404")), library: () => Promise.reject(new LoadError("404")) });
     expect(((await res.json()) as { error: { code: number } }).error.code).toBe(-32603);
   });
 });
@@ -255,5 +270,81 @@ describe("MCP tools", () => {
   it("keeps every answer under the size cap", async () => {
     for (const [name, args] of [["search_charities", { limit: 25 }], ["rank", { limit: 100 }], ["list_assumptions", {}]] as const)
       expect(JSON.stringify((await call(name, args)).out).length).toBeLessThan(MAX_ANSWER);
+  });
+});
+
+/** Calls every tool makes, at the defaults, a value set and custom values. */
+const CALLS: [string, Record<string, unknown>][] = [
+  ["search_charities", {}],
+  ["search_charities", { query: "bednet" }],
+  ["get_model", { id: "cash" }],
+  ["get_model", { id: "nets" }],
+  ["get_model", { id: "widgetco" }],
+  ["run_model", { id: "cash" }],
+  ["run_model", { id: "nets-charityevals-chad", values: { set: "patient" } }],
+  ["run_model", { id: "cash", values: { discount_rate: 0.08 } }],
+  ["compare", { ids: ["nets", "hens", "widgetco", "cash"] }],
+  ["compare", { ids: ["nets", "hens"], values: { set: "patient" } }],
+  ["compare", { ids: ["nets", "hens"], values: { uov_per_daly: 3 } }],
+  ["rank", {}],
+  ["rank", { values: { set: "patient" } }],
+  ["rank", { cause: "global-health", values: { discount_rate: 0.02 } }],
+  ["list_assumptions", {}],
+];
+
+describe("precomputed answers", () => {
+  it("are the answers computed from the library", async () => {
+    const { stored, live } = contexts();
+    for (const [name, args] of CALLS) expect((await call(name, args, stored)).out, `${name} ${JSON.stringify(args)}`).toEqual((await call(name, args, live)).out);
+  });
+
+  it("need no library for the defaults, the value sets and get_model", async () => {
+    const { stored } = contexts();
+    const noLibrary: Context = { ...stored, library: () => Promise.reject(new LoadError("not loaded")) };
+    for (const [name, args] of CALLS.filter(([, a]) => !a.values || "set" in (a.values as object)))
+      expect((await call(name, args, noLibrary)).error, `${name} ${JSON.stringify(args)}`).toBeUndefined();
+    expect((await rpc("tools/call", { name: "rank", arguments: { values: { uov_per_daly: 3 } } }, noLibrary)).error!.code).toBe(-32603);
+  });
+});
+
+describe("the daily budget for custom values", () => {
+  it("counts each new calculation, not the defaults, value sets or a repeat", async () => {
+    let taken = 0;
+    const { stored } = contexts({ take: async () => (taken++, true) });
+    await call("rank", {}, stored);
+    await call("rank", { values: { set: "patient" } }, stored);
+    await call("run_model", { id: "cash", values: { discount_rate: 0.03 } }, stored);
+    await call("compare", { ids: ["cash", "nets"], values: { discount_rate: 0.03 } }, stored);
+    expect(taken).toBe(1);
+    await call("rank", { values: { discount_rate: 0.02 } }, stored);
+    expect(taken).toBe(2);
+  });
+
+  it("refuses custom values once used up, while the defaults and value sets still answer", async () => {
+    const { stored } = contexts({ take: async () => false });
+    expect((await call("rank", { values: { discount_rate: 0.02 } }, stored)).error).toContain("quota");
+    expect((await call("rank", { values: { set: "patient" } }, stored)).out.rankings.length).toBe(3);
+    expect((await call("run_model", { id: "cash" }, stored)).out.result).toBe(1.44);
+    // A budget that can't be reached counts as used up.
+    const down = contexts({ take: () => Promise.reject(new Error("unreachable")) }).stored;
+    expect((await call("run_model", { id: "cash", values: { discount_rate: 0.02 } }, down)).error).toContain("quota");
+  });
+
+  it("keeps only the last calculations per isolate", async () => {
+    let taken = 0;
+    const { stored } = contexts({ take: async () => (taken++, true) });
+    for (let i = 1; i <= 9; i++) await call("rank", { values: { uov_per_daly: 1 + i / 10 } }, stored);
+    await call("rank", { values: { uov_per_daly: 1.9 } }, stored);
+    expect(taken).toBe(9);
+    // The first was dropped to make room.
+    await call("rank", { values: { uov_per_daly: 1.1 } }, stored);
+    expect(taken).toBe(10);
+  });
+
+  it("counts a day's calculations up to the limit, and starts again the next day", () => {
+    expect(nextCount(undefined, "2026-11-16", 2)).toEqual({ day: "2026-11-16", used: 1 });
+    expect(nextCount({ day: "2026-11-16", used: 1 }, "2026-11-16", 2)).toEqual({ day: "2026-11-16", used: 2 });
+    expect(nextCount({ day: "2026-11-16", used: 2 }, "2026-11-16", 2)).toBeUndefined();
+    expect(nextCount({ day: "2026-11-16", used: 2 }, "2026-11-17", 2)).toEqual({ day: "2026-11-17", used: 1 });
   });
 });

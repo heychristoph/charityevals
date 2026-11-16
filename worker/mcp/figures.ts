@@ -2,7 +2,7 @@
 // a model's headline and plausible range, and a charity's figure as the rankings show it: each
 // evaluator's programmes over their locations, by funding, and the charity's primary evaluator's
 // figure as its number.
-import { comparable, headline, plausibleRange, tooOld, unstableFlag, type Library, type ResolvedModel } from "../../src/engine/model";
+import { headline, plausibleRange, tooOld, unstableFlag, type Library, type ResolvedModel } from "../../src/engine/model";
 import { combine, combineLocations, coverageFlag, declaredLocations, locationsOf, locationWeights, nextDollarFlag, primaryModel, rankingPlan, type Basis, type EvaluatorPlan } from "../../src/engine/ranking";
 import { sensitivity, THEORETICAL_TEXT } from "../../src/engine/sensitivity";
 import type { Charity } from "../../src/engine/schema";
@@ -85,4 +85,3 @@ export function rankings(lib: Library, av: Record<string, number>): CharityFigur
     .sort((a, b) => b.central - a.central);
 }
 
-export { comparable };
