@@ -84,5 +84,13 @@ skill dumps the sheet, writes the model row by row with sources and explainers, 
 
 ## Licences
 
-Code: MIT. Models derived from GiveWell are CC BY-NC-SA 3.0 US. ACE's terms for derived data are
-not yet confirmed. GiveWell and ACE have not reviewed or endorsed this project.
+- Our own models, write-ups, shared facts and assumptions, and the site's figures:
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Credit "charityevals (charityevals.org)"
+  with a link to the page; each model page has a Cite button.
+- Models rebuilt from an evaluator's analysis, and figures taken from one, keep that evaluator's
+  terms (`source.license`, shown on each model page): GiveWell's are
+  [CC BY-NC-SA 3.0 US](https://creativecommons.org/licenses/by-nc-sa/3.0/us/); for others, check
+  their terms. The evaluators have not reviewed or endorsed this project.
+- Code: [MIT](LICENSE).
+
+One place decides a model's terms: `src/lib/licence.ts` (`licenceOf`).
