@@ -1,6 +1,6 @@
 # Verification round (scoped)
 Result: 3.213 ced/$ = 0.000353451 years of healthy life per $1,000 (was 0.000350880). Verdict: **pass**
-Model-sha: 65427a0de89890e23626dffbed255f5791f3941c03841f10f75035fc09d16c24
+Model-sha: 4060abeeb5136f4622d128a162dfae2c0ba3fb6ad92167875d12ad23208d0792
 Scope: the stock deduction (member_switches_in_count replaces owaacc_hens), uk_switches_in_count read from facts/the_humane_league.json, the new facts file, the write-up's double-counting bullet and summary.
 Mechanical: audit-model 0 findings; scripts/check.ts "all models valid".
 
@@ -16,3 +16,5 @@ Mechanical: audit-model 0 findings; scripts/check.ts "all models valid".
 | 1 | low | battery_share explainer | Still reads "the hens taken out above (THL UK's and REWE's) are nearly all in enriched cages", but the deduction is now the Alliance members' switches, not REWE. | Reword to "the hens taken out above (THL UK's and the Alliance members') ..." |
 | 2 | low | the_humane_league.member_switches_in_count | Explainer says "best guess about a fifth of the 7.5 million" while the best is 1.6M (21%); fine, but the unrelated owaacc rows in the sister models also sit near 1.6M by construction. | Optional: say "about a fifth (1.6 million)". |
 Re-stamped (15 Nov 2026): this round's low findings fixed in explainers, write-ups and the egg-share fact's wording; no value changed.
+
+Re-stamped (16 Nov 2026): pre-audit cleanup: shared facts read (US layers, preemption chance, market leakage, evaluator side effects), reference classes named, ranges widened where evidence is thin; headline unchanged. Mechanical: headline unchanged, against 9d3d36e4.
