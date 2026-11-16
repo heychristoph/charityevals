@@ -19,6 +19,7 @@ import { sensitivity } from "../src/engine/sensitivity";
 import { uncertainty } from "../src/engine/uncertainty";
 import { lintModel, SEVERITY_ORDER, type Finding } from "../src/engine/lint";
 import { TEMPLATES, type Family } from "../src/engine/templates";
+import { templateRowIds } from "../src/engine/template-files";
 import { applyWaivers, checkAll, type Waivers } from "../src/engine/invariants";
 
 const root = join(import.meta.dirname, "..");
@@ -74,7 +75,7 @@ const av = assumptionValues(lib.assumptions);
 const findings: Finding[] = [
   ...own.map((e) => ({ severity: "high" as const, code: "schema", message: e, fix: "Fix the model file so it loads." })),
   // The lint holds build-cea's rules: an evaluator's model is checked by the invariants instead (as check.ts does).
-  ...(m.owner === "charityevals" ? lintModel(lib, m, new Date()) : []),
+  ...(m.owner === "charityevals" ? lintModel(lib, m, new Date(), { templateRows: templateRowIds().get(m.template ?? "") }) : []),
 ].sort((a, b) => SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity]);
 
 // Results, ranges and swings are in years of healthy life per $1,000, as the site shows them.

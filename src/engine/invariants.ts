@@ -1038,6 +1038,25 @@ export const CONCEPTS: { id: string; test: RegExp; not?: RegExp; facts: string[]
   { id: "depression-per-phq9-point", test: /\bphq[- ]?9?\b[^.;]{0,40}\b(daly|healthy|disability)\b|\bdalys? per (phq|point)\b/i, facts: ["depression.dalys_per_phq9_point_year", "depression.phq9_sd"] },
 ];
 
+/** More concepts with a shared fact, checked by scripts/preflight.ts on the models it is given (from the
+ * first typed copy) but not yet by INV-13 across the site: a concept moves up into CONCEPTS once no model
+ * types it any more. */
+export const PREFLIGHT_CONCEPTS: typeof CONCEPTS = [
+  // The shared figures audits most often found typed by hand (13-16 Nov 2026 batch).
+  { id: "field-work-years", test: /\byears?\b[^.;]{0,50}\b(stays?|remains?)\b[^.;]{0,30}\b(in it|in the field|in (the |that )?work)\b|\bfield[- ]work years\b/i, facts: ["catastrophe.field_work_years"] },
+  { id: "resettled-gain-years", test: /\byears?\b[^.;]{0,40}\b(resettled|in the us|in a rich country)\b[^.;]{0,30}\b(gain\w*|consumption|lasts?)\b|\bresettled refugee['’]?s?\b[^.;]{0,40}\b(gain\w*|consumption)\b[^.;]{0,20}\blasts?\b/i, facts: ["irap.years_gain_lasts"] },
+  { id: "lobbied-issue-change", test: /\bshare of (contested |lobbied )?(policy )?issues\b[^.;]{0,40}\bchang/i, facts: ["democracy.lobbied_issue_change_rate"] },
+  { id: "cash-benchmark", test: /\bvalue of a dollar (given )?(as|in) cash\b|\bunits? of value per dollar\b[^.;]{0,30}\bcash\b|\bcash benchmark\b/i, facts: ["cash.uov_per_dollar"] },
+  { id: "prison-life-years", test: /\byears? of life lost per (year|prison[- ]year)\b[^.;]{0,30}\b(prison|incarcerat\w*|jail)\b|\blife[- ]years? lost\b[^.;]{0,30}\b(prison|incarcerat\w*|jail)\b/i, facts: ["incarceration.life_years_lost_per_year_incarcerated", "incarceration.life_years_lost_per_year_long_term"] },
+  { id: "democracy-years-to-effect", test: /\byears? until\b[^.;]{0,40}\bdemocra\w*\b[^.;]{0,30}\b(income|gain|effect)/i, facts: ["democracy.democratization_years_to_effect"] },
+  { id: "democracy-backlash", test: /\bbacklash\b[^.;]{0,40}\b(democra\w*|polari[sz]\w*)\b/i, facts: ["democracy.democracy_work_backlash_share"] },
+  { id: "climate-advocacy-share", test: /\bshare of (a|the) (won )?(climate )?polic(y|ies)( win)?\b[^.;]{0,30}\bdue to advocacy\b|\badvocacy['’]?s? share of\b[^.;]{0,30}\b(polic\w*|win)\b/i, facts: ["climate.advocacy_share_of_policy_win"] },
+  { id: "wellbys-per-sd-year", test: /\bwellbys? per (sd|standard[- ]deviation)[- ]years?\b/i, facts: ["wellby_factors.wellbys_per_sd_year"] },
+  { id: "humanitarian-vs-cash", test: /\bhumanitarian (aid|relief)\b[^.;]{0,40}\b(multiple of|vs\.?|against|compared with) cash\b/i, facts: ["aid_value.humanitarian_vs_cash"] },
+  { id: "incarceration-family-harm", test: /\b(harm|cost)s? to (the )?famil(y|ies)\b[^.;]{0,40}\b(prison|incarcerat\w*|jail)/i, facts: ["incarceration.family_share_of_incarceration_value"] },
+  { id: "us-lowest-quintile-spending", test: /\blowest[- ](income )?(fifth|quintile)\b[^.;]{0,40}\b(spending|consumption)\b/i, facts: ["united_states.ce_lowest_quintile_vs_all_2024"] },
+];
+
 /** A concept's facts: "file.*" stands for every fact in that file (one per place). */
 const conceptReads = (facts: string[], f: string) => facts.some((x) => x === f || (x.endsWith(".*") && f.startsWith(x.slice(0, -1))));
 const conceptFacts = (lib: Library, facts: string[]) => [...lib.facts.keys()].filter((f) => conceptReads(facts, f));

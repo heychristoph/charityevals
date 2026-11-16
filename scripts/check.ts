@@ -3,13 +3,12 @@
 //   npm run check            all models
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, compute, comparable, modelsOf } from "../src/engine/model";
-import { primaryModel } from "../src/engine/ranking";
+import { buildLibrary, assumptionValues, compute, comparable } from "../src/engine/model";
+import { checkModel } from "../src/engine/check-model";
 import { sensitivity, flags } from "../src/engine/sensitivity";
-import { comparisonFindings, lintModel, namesFor } from "../src/engine/lint";
+import { comparisonFindings, namesFor } from "../src/engine/lint";
 
 const root = join(import.meta.dirname, "..");
-const TOLERANCE = 1e-6;
 
 function jsonFiles(dir: string): string[] {
   return readdirSync(dir).flatMap((f) => {
@@ -35,35 +34,13 @@ const years = (x: number) => (Math.abs(x) >= 100 ? x.toFixed(0) : Math.abs(x) >=
 
 for (const m of lib.models.values()) {
   if (only && m.id !== only) continue;
-  // `expected` values are the source's own figures, so they're checked in the evaluator view.
-  const evalVals = compute(lib, m, av, {}, "evaluator");
   const vals = compute(lib, m, av);
-  let matched = 0;
-  for (const r of m.rows) {
-    if (r.expected === undefined) continue;
-    const got = evalVals[r.id];
-    // Relative, with a floor so a sheet's 0 matches our 3e-11 from subtracting equal totals.
-    if (!(Math.abs(got - r.expected) <= Math.max(TOLERANCE * Math.abs(r.expected), 1e-9))) errors.push(`${m.id}.${r.id}: expected ${r.expected}, got ${got}`);
-    else matched++;
-  }
+  const { errors: own, matched } = checkModel(lib, m, (id) => existsSync(join(root, "writeups", `${id}.md`)), av);
+  errors.push(...own);
   if (!m.output) { console.log(`${m.id}: template, ${matched} expected values reproduced`); continue; }
-  // Every estimate says when it was made: our view discounts it by its age ($estimate_age_discount).
-  if (m.kind !== "template" && !m.source?.published) errors.push(`${m.id}: no source.published, the date the estimate was made (our view discounts it by its age)`);
-  // A build copied from a template must say it's a charity's model: a template is skipped by the lint below.
-  if (m.kind === "template" && m.charity) errors.push(`${m.id}: kind "template" on a charity's model (copied from a template): set "kind": "charity"`);
-  // charityevals' own models (build-cea) must follow their template and source every number.
-  if (m.owner === "charityevals" && m.kind !== "template")
-    for (const f of lintModel(lib, m)) if (f.severity === "high") errors.push(`${m.id}${f.row ? `.${f.row}` : ""}: ${f.message} (npx tsx scripts/audit-model.ts ${m.id})`);
-  // Each charity's main page carries a write-up: its main model's, or the one filed under its first
-  // model (a hand-written evaluation outlives a newer sheet becoming the main model).
-  const has = (id?: string) => !!id && existsSync(join(root, "writeups", `${id}.md`));
-  if (m.kind === "charity" && primaryModel(lib, m.charity)?.id === m.id && !has(m.id) && !has(modelsOf(lib, m.charity)[0]?.id))
-    errors.push(`${m.id}: missing write-up writeups/${m.id}.md`);
   const s = sensitivity(lib, m, av);
   const se = sensitivity(lib, m, av, "evaluator");
   if (!comparable(lib, m)) {
-    // Every charity is ranked: a new unit needs an exchange rate (a shared assumption) in assumptions/default.json.
-    if (m.kind === "charity") errors.push(`${m.id}: unit ${m.output.unit} has no exchange rate (to_common), so the charity can't be ranked`);
     console.log(`${m.id.padEnd(22)} ${fmt(vals[m.output.row])} ${m.output.unit}/$  [${fmt(s.jointLow)} – ${fmt(s.jointHigh)}]  not ranked (no exchange rate)  ${matched} expected values reproduced`);
     continue;
   }

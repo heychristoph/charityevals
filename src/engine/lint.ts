@@ -75,7 +75,16 @@ function monthsSince(date: string, today: Date): number | undefined {
   return (today.getFullYear() - d.getFullYear()) * 12 + today.getMonth() - d.getMonth();
 }
 
-export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): Finding[] {
+/** An input kept for the reader, not the result: its explainer says it is context (a cross-check, a figure
+ * shown for reference), so the unused-row finding skips it. */
+export const CONTEXT_ONLY = /\bcontext\b|\bfor reference\b|\bcross-?check\b|\bnot used in the (result|calculation|chain)\b|\bdoes(?: not|n['’]t) feed\b|\bnot on the (result['’]s )?path\b|\bfor (the )?reader\b/i;
+
+/** `templateRows`: the row ids of the model's family skeleton (src/engine/template-files.ts). A row the
+ * skeleton has stays in the model even where it doesn't feed the result (a branch at 0, a context figure
+ * such as a household's size or the hectares protected), so it isn't flagged unused. */
+export type LintOptions = { templateRows?: ReadonlySet<string> };
+
+export function lintModel(lib: Library, m: ResolvedModel, today = new Date(), opts: LintOptions = {}): Finding[] {
   const out: Finding[] = [];
   const add = (severity: Severity, code: string, message: string, fix: string, row?: string) => out.push({ severity, code, row, message, fix });
 
@@ -329,7 +338,8 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date()): F
     } else if (onPath && (r.kind === "estimate") && !hasRange(r.value)) {
       add("low", "range", "estimate with no range", "If the source gives a confidence interval or the estimate is uncertain, give it as low/high.", r.id);
     }
-    if (!onPath && r.id !== "donation") add("low", "unused", "input doesn't feed the bottom line", "Delete it, or mark it as context in the explainer.", r.id);
+    if (!onPath && r.id !== "donation" && !opts.templateRows?.has(r.id) && !CONTEXT_ONLY.test(r.explainer ?? ""))
+      add("low", "unused", "input doesn't feed the bottom line", "Delete it, or say in the explainer that it is context (shown for reference, a cross-check).", r.id);
   }
 
   // Facts used: they need sources too.
