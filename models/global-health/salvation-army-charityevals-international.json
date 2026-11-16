@@ -924,27 +924,17 @@
       "section": "effect",
       "label": "Consumption gain per household offered, share of consumption (intention to treat)",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.03,
-        "high": 0.07
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 3% (0-7%), from the meta-analysis. The systematic review of randomized trials of saving promotion in sub-Saharan Africa pools an intention-to-treat gain in household expenditure and income of 0.066 SD (SE 0.02, 11 studies, the three-country savings-group trial among them; Steinert et al. 2018, World Development, doi:10.1016/j.worlddev.2017.11.018, Table 3 and note 15 of the discussion-paper version, Courant Research Centre 226). Its meta-regression of the consumption effects (Table 5) finds smaller effects for programmes that run over a longer cycle, as savings groups are coded (0.10 - 0.05 = 0.05 SD), and for mainly female participants (0.09 - 0.06 = 0.03 SD), as most savings-group members are: 0.03 SD (0-0.07). Per-capita consumption in these samples has an SD about equal to its mean (35.5 against 35.7 in the three-country trial's control group, Karlan et al. 2017, Table 1), so 0.03 SD is about 3% of consumption per household offered. The three-country trial on its own found -1.7% (SE 2.1%) per household offered; it is already in the pool, so it is not weighted again."
+      "explainer": "The shared figure for livelihood programmes abroad (@relief_development.livelihood_package_consumption_gain, 3%, 0.5-8%), per household offered. The meta-analysis of randomized trials of saving promotion in sub-Saharan Africa pools an intention-to-treat gain in household expenditure and income of 0.066 SD (11 studies, the three-country savings-group trial among them; Steinert et al. 2018, World Development, Table 3); its meta-regression (Table 5) finds smaller effects for longer-cycle programmes and mainly female participants, as savings groups are: about 0.03 SD, and per-capita consumption's SD is about its mean (Karlan et al. 2017, Table 1), so about 3% per household offered.",
+      "formula": "@relief_development.livelihood_package_consumption_gain"
     },
     {
       "id": "livelihood_years",
       "section": "effect",
       "label": "Years the gain lasts",
       "format": "number",
-      "value": {
-        "low": 1,
-        "best": 2,
-        "high": 3
-      },
-      "kind": "judgment",
       "unit": "years",
-      "explainer": "Judgment 2 (1-3): the trials measured 2-3 years after groups began, and the review finds effects smaller at later follow-ups (Table 5); groups often keep running, but gains fade."
+      "explainer": "The shared figure for livelihood programmes abroad (@relief_development.livelihood_gain_years, 2 years, 1-4): the savings-group trials measured 2-3 years after groups began, and the review finds effects smaller at later follow-ups (Table 5); groups often keep running, but gains fade.",
+      "formula": "@relief_development.livelihood_gain_years"
     },
     {
       "id": "livelihood_ln_gain_per_person",
@@ -984,20 +974,8 @@
       "section": "effect",
       "label": "Learning gain per child (standard deviations)",
       "format": "number",
-      "value": {
-        "low": 0.03,
-        "best": 0.1,
-        "high": 0.2
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Evans & Yuan (2022), How Big Are Effect Sizes in International Education Studies?, Educational Evaluation and Policy Analysis, doi:10.3102/01623737221079646",
-        "url": "https://doi.org/10.3102/01623737221079646",
-        "retrieved": "2026-11-04",
-        "quote": "We identify a median effect size of 0.10 standard deviations on learning and 0.07 standard deviations on access among randomized controlled trials.",
-        "page": "abstract"
-      },
-      "explainer": "The median effect on learning of 234 studies of education programmes in low- and middle-income countries, 0.10 SD (larger, and more variable, in small studies such as these); the range runs from school-management programmes (0.03 SD, Anand et al. 2023, Economics of Education Review) to teacher-training programmes (0.12 SD, McEwan 2015, Review of Educational Research)."
+      "explainer": "The median effect on learning of education programmes in low- and middle-income countries (@education.learning_gain_sd_median_rct_lmic, Evans & Yuan 2022, 0.10 SD; larger, and more variable, in small studies such as these); the range runs from school-management programmes (0.03 SD) to teacher-training programmes (0.12-0.2 SD).",
+      "formula": "@education.learning_gain_sd_median_rct_lmic"
     },
     {
       "id": "education_earnings_per_sd",
@@ -1097,20 +1075,8 @@
       "section": "effect",
       "label": "Relative risk of neonatal death with community maternal and newborn care packages",
       "format": "number",
-      "value": {
-        "low": 0.67,
-        "best": 0.75,
-        "high": 0.83
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Lassi & Bhutta (2015), Community-based intervention packages for reducing maternal and neonatal morbidity and mortality and improving neonatal outcomes, Cochrane Database of Systematic Reviews, doi:10.1002/14651858.CD007754.pub3",
-        "url": "https://doi.org/10.1002/14651858.CD007754.pub3",
-        "retrieved": "2026-11-04",
-        "quote": "neonatal mortality (average RR 0.75; 95% CI 0.67 to 0.83; 21 studies",
-        "page": "abstract, main results"
-      },
-      "explainer": "The Cochrane review of 26 cluster-randomised and quasi-randomised trials, random effects; the confidence interval as the range. An all-cause effect, so no indirect deaths are added (direct-health's indirect_deaths_ratio is 0). The fit to SAWSO's and the territories' health work is in health_evidence_adj."
+      "explainer": "The Cochrane review of 26 cluster-randomised and quasi-randomised trials of community maternal and newborn packages (@newborn_care.community_package_neonatal_rr, 0.75, 0.67-0.83), random effects. An all-cause effect, so no indirect deaths are added (direct-health's indirect_deaths_ratio is 0). The fit to SAWSO's and the territories' health work is in health_evidence_adj.",
+      "formula": "@newborn_care.community_package_neonatal_rr"
     },
     {
       "id": "health_stillbirth_rate",
@@ -1130,20 +1096,8 @@
       "section": "effect",
       "label": "Relative risk of stillbirth with community packages",
       "format": "number",
-      "value": {
-        "low": 0.73,
-        "best": 0.81,
-        "high": 0.91
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Lassi & Bhutta (2015), Community-based intervention packages, Cochrane Database of Systematic Reviews, doi:10.1002/14651858.CD007754.pub3",
-        "url": "https://doi.org/10.1002/14651858.CD007754.pub3",
-        "retrieved": "2026-11-04",
-        "quote": "stillbirths (average RR 0.81; 95% CI 0.73 to 0.91; 15 studies",
-        "page": "abstract, main results"
-      },
-      "explainer": "The same review; the confidence interval as the range."
+      "explainer": "The same review's effect on stillbirths (@newborn_care.community_package_stillbirth_rr, 0.81, 0.73-0.91).",
+      "formula": "@newborn_care.community_package_stillbirth_rr"
     },
     {
       "id": "health_deaths_per_birth",
@@ -1182,13 +1136,8 @@
       "section": "effect",
       "label": "Illness averted, as a share of the deaths' value",
       "format": "percent",
-      "value": {
-        "low": 0,
-        "best": 0.1,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 10% (0-30%), as direct-health's morbidity_value_ratio: maternal illness and newborn complications averted beside the deaths (the review also finds maternal morbidity down 25%); the site has no shared figure for newborn care."
+      "explainer": "The shared figure for health programmes abroad (@relief_development.health_programme_illness_value_ratio, 10%, 0-30%): maternal illness and newborn complications averted beside the deaths (the review also finds maternal morbidity down 25%).",
+      "formula": "@relief_development.health_programme_illness_value_ratio"
     },
     {
       "id": "social_value_per_person",

@@ -1,6 +1,6 @@
 # Audit: bandhan-charityevals, round 2
 Result: 0.01203 uov/$ = 6.017 years of healthy life per 1,000 dollars (combined range 1.885-19.21); cause median 0.0803 (x74.9). Verdict: pass (no high findings).
-Model-sha: de43f0ad6fa471b75ac0d4df394e76072e7acad310e661258066b09a3835e28e
+Model-sha: e94b66ad7a965952ae0d38ddd318f3702989dad15256db67edd8646357757936
 Scope: unchanged from round 1 and still right: fiscal year 2024-25, programme spending Rs 108.81 crore (expenditure less administration, scanned I&E account), the Rs 11.12 crore training sold to Bandhan Bank partly taken out, Targeting the Hardcore Poor plus six branches covering every programme heading of the annual report; charities/bandhan.json spending and lines match the accounts.
 Mechanical: lint 0 high / 1 medium (far-above, explained under Plausibility) / 1 low (unused baseline_consumption); invariants none; normalization-audit no violation for this model (INV-14 gone: `fl_years` is labelled as the financial-literacy branch's own duration); `check.ts` all models valid; simulation 5% 0.563, 50% 1, 95% 1.78 x best guess (stable). `summaries.ts --check` still reports generated/usage.json out of date: that is the batch rule (agents do not regenerate generated/; it is rebuilt once after the merge), so it is not a finding. generated/ restored with `git checkout -- generated`.
 Previous round:
@@ -42,4 +42,6 @@ Best improvement: a sourced anchor for the tail (a longer follow-up of the 2007 
 
 Plausibility: THP is about 95% of the outcome on 54% of the spending; the six other branches are small and each discounted for missing data. The cost per enrolled household (about Rs 47,000 before overhead) is in line with the trial's US$2,163 at 2018 PPP. The 75x gap to the cause's median comes from the programme (a cash-and-coaching income programme with a 10-year trial plus a tail), not from a wrong row; the median itself is dominated by advocacy and research models. No site text compares with other charities: the write-up is clean, and its figure is live (`data-figure`).
 
-Model-sha: de43f0ad6fa471b75ac0d4df394e76072e7acad310e661258066b09a3835e28e
+Model-sha: e94b66ad7a965952ae0d38ddd318f3702989dad15256db67edd8646357757936
+
+Re-stamped (16 Nov 2026): Pre-audit gate cleanup: typed figures now read shared facts at the same best values (@sub_saharan_africa.*, @newborn_care.*, @education.learning_gain_sd_median_rct_lmic, @education.years_primary_programme_to_work, @relief_development.*); where a copy's range differed it takes the fact's (livelihood years 1-4, years to work 6-15); explainers no longer compare with other charities' models; headline unchanged. Mechanical: headline unchanged, against 0da5e7f6.
