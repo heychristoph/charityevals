@@ -5,7 +5,13 @@
   "cause": "global-health",
   "beneficiaries": {"AFG":0.037,"BGD":0.008,"IRQ":0.014,"IRN":0.017,"JOR":0.023,"LBN":0.042,"MMR":0.027,"PSE":0.059,"SYR":0.052,"YEM":0.046,"BFA":0.015,"CMR":0.015,"CAF":0.012,"TCD":0.01,"COD":0.04,"DJI":0.004,"ETH":0.053,"KEN":0.004,"LBY":0.014,"MLI":0.021,"MOZ":0.013,"NER":0.012,"NGA":0.023,"SDN":0.112,"SOM":0.048,"SSD":0.054,"TZA":0.004,"UGA":0.011,"MDA":0.015,"UKR":0.132,"COL":0.028,"ECU":0.005,"PAN":0.001,"HND":0.008,"SLV":0.003,"GTM":0.002,"MEX":0.002,"HTI":0.002,"VEN":0.012},
   "beneficiaries_note": "Our build: almost all of the result is humanitarian funding kept or added across the appeals, the rest access in Sudan and the DRC; spread like NRC's programmes by its 2025 project revenue by country office (Annual Accounts 2025, note 2), as a stand-in for the crises the appeals fund; a judgment.",
-  "destination_reads": ["givewell:against-malaria-foundation","givewell:malaria-consortium","givewell:helen-keller-intl","givewell:new-incentives","givedirectly"],
+  "destination_reads": [
+    "givewell:against-malaria-foundation",
+    "givewell:malaria-consortium",
+    "givewell:helen-keller-intl",
+    "givewell:new-incentives",
+    "givedirectly"
+  ],
   "template": "policy-research-meta",
   "estimate_basis": "past_average",
   "charity": "norwegian-refugee-council",
@@ -220,32 +226,16 @@
       "section": "reach",
       "label": "Humanitarian appeals funding received, 2025 (US$)",
       "format": "usd",
-      "value": 16600000000,
-      "kind": "observed",
-      "source": {
-        "title": "ALNAP, The State of the Humanitarian System 2026, 1.1 The reality of funding gaps",
-        "url": "https://alnap.org/help-library/resources/sohs-2026/chapter-1-prioritisation-under-pressure/1-1-the-reality-of-funding-gaps/",
-        "page": "1.1 The reality of funding gaps",
-        "quote": "Only 35% of the total 2025 appeals target was met.",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "Funding received against the 2025 UN-coordinated appeals, 'to US$16.6 billion', against a shortfall of US$30.5 billion (same page, from OCHA's Financial Tracking Service). Appeals funding leaves out aid given outside the appeals (the Red Cross movement, MSF, bilateral aid), so it understates aid per person; the access share below is judged against it."
+      "explainer": "Funding received against the 2025 UN-coordinated appeals (@humanitarian_response.appeals_funding_received_2025_usd, US$16.6 billion). Appeals funding leaves out aid given outside the appeals (the Red Cross movement, MSF, bilateral aid), so it understates aid per person; the access share below is judged against it.",
+      "formula": "@humanitarian_response.appeals_funding_received_2025_usd"
     },
     {
       "id": "people_in_need_world",
       "section": "reach",
       "label": "People in need of humanitarian aid worldwide, 2025",
       "format": "integer",
-      "value": 305100000,
-      "kind": "observed",
-      "source": {
-        "title": "Norwegian Refugee Council, Annual Report from the Board 2025 (published 18 June 2026)",
-        "url": "https://www.nrc.no/globalassets/pdf/annual-reports/2025/global/annual-report-from-the-board-2025.pdf",
-        "page": "p. 10, Global humanitarian needs",
-        "quote": "prioritising 114 million people out of the 305.1 million people in need",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "OCHA's global figure as NRC's board report gives it."
+      "explainer": "OCHA's global figure (@humanitarian_response.people_in_need_2025), as NRC's board report gives it.",
+      "formula": "@humanitarian_response.people_in_need_2025"
     },
     {
       "id": "aid_per_person_in_need",
@@ -393,13 +383,8 @@
       "section": "effect",
       "label": "Funding: share of a year's humanitarian funding kept or added by NGOs' collective funding advocacy",
       "format": "percent",
-      "value": {
-        "low": 0.002,
-        "best": 0.01,
-        "high": 0.04
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 1% (0.2-4%): donors' humanitarian aid fell 35.8% in 2025 (OECD, preliminary 2025 data, 9 April 2026, https://www.oecd.org/en/about/news/press-releases/2026/04/international-aid-fell-sharply-in-2025-says-oecd.html), a cut of about 56% of what was left; NGOs' advocacy on the funding gap (p. 40) may have kept some budgets from falling further and steered some to underfunded crises. 1% of 2025's funding is keeping about 2% of the cut (0.4-7% across the range): the cuts were driven by budget decisions that advocacy barely moved, chiefly the US's."
+      "explainer": "The shared figure for the humanitarian NGOs' collective funding advocacy (@humanitarian_response.ngo_funding_advocacy_aid_share, 1%, 0.2-4%), which NRC took part in on the funding gap (p. 40).",
+      "formula": "@humanitarian_response.ngo_funding_advocacy_aid_share"
     },
     {
       "id": "fund_attribution_share",
@@ -419,13 +404,8 @@
       "section": "effect",
       "label": "Funding: share of the money kept or added that comes from other aid",
       "format": "percent",
-      "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 0.9
-      },
-      "kind": "judgment",
-      "explainer": "Judgment 60% (30-90%): humanitarian budgets kept are partly taken from development aid within the same aid totals; the rest from donors' general spending. As Save the Children's advocacy model."
+      "explainer": "The shared figure (@humanitarian_response.funding_advocacy_displaced_share, 60%, 30-90%): humanitarian budgets kept are partly taken from development aid within the same aid totals.",
+      "formula": "@humanitarian_response.funding_advocacy_displaced_share"
     },
     {
       "id": "fund_value_per_year",

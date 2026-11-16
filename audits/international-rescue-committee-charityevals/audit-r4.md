@@ -1,6 +1,6 @@
 # Audit: international-rescue-committee-charityevals, round 4 (scoped verification)
 Result: 3.764e-4 daly/$ = 0.38 years of healthy life per 1,000 dollars (combined range 0.11–1.29); cause median 0.102 (×3.7). Verdict: pass (no findings).
-Model-sha: 253164d519e7c725484a332d14780f9945695f04f1d89d9bc043ed27e809d0e1
+Model-sha: 960ff0d2fa71c390b39faac8e5be44e50b7606c2caf38d53141e498b52af684a
 Scope: only the round-3 fix (`git diff eab604a 135055d` on the model and write-up). Nothing else re-audited.
 Mechanical: audit-model lint 0 findings, no invariant findings; result 0.3764 unchanged; `generated/` and the tree otherwise unchanged.
 
@@ -15,8 +15,10 @@ None needed; wording-only change.
 Unchanged from round 3.
 
 Verdict: pass.
-Model-sha: 253164d519e7c725484a332d14780f9945695f04f1d89d9bc043ed27e809d0e1
+Model-sha: 960ff0d2fa71c390b39faac8e5be44e50b7606c2caf38d53141e498b52af684a
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
 Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)
+
+Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@humanitarian_response.*, @ukraine.war_affected_aid_recipients_consumption_share) at the same values; judgment explainers anchored on studies and published data (pre-audit gate cleanup). Mechanical: headline unchanged, against 4a6180e3.

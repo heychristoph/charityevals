@@ -1030,19 +1030,8 @@
       "section": "effect",
       "label": "Share of people in conflict-affected populations with a mental disorder",
       "format": "percent",
-      "value": {
-        "low": 0.188,
-        "best": 0.221,
-        "high": 0.257
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Charlson et al. (2019), New WHO prevalence estimates of mental disorders in conflict settings, The Lancet",
-        "url": "https://doi.org/10.1016/S0140-6736(19)30934-1",
-        "quote": "the age-standardised point prevalence of mental disorders (depression, anxiety, post-traumatic stress disorder, bipolar disorder, and schizophrenia) was 22·1% (95% UI 18·8–25·7)",
-        "retrieved": "2026-11-14"
-      },
-      "explainer": "Survivors of violence and separated children are at higher risk than the average refugee; people without a disorder are counted at nothing here."
+      "explainer": "The shared WHO prevalence in conflict-affected populations (@humanitarian_response.conflict_mental_disorder_prevalence, 22.1%, 18.8-25.7%). Survivors of violence and separated children are at higher risk than the average refugee; people without a disorder are counted at nothing here.",
+      "formula": "@humanitarian_response.conflict_mental_disorder_prevalence"
     },
     {
       "id": "pro_effect_sd",
@@ -1146,14 +1135,9 @@
       "section": "effect",
       "label": "Years the gain lasts",
       "format": "number",
-      "value": {
-        "low": 1,
-        "best": 3,
-        "high": 6
-      },
-      "kind": "judgment",
-      "explainer": "Papers and status last years; displacement lasts a decade on average, but rights are often withdrawn. Judgment 3 years (1-6).",
-      "unit": "years"
+      "explainer": "The shared figure for how long a document or legal status helps (@humanitarian_response.legal_aid_years, 3 years, 1-6): papers and status last years, but displaced people move on and rights are often withdrawn.",
+      "unit": "years",
+      "formula": "@humanitarian_response.legal_aid_years"
     },
     {
       "id": "pro_doc_ln_gain",
@@ -1301,7 +1285,7 @@
         "high": 80
       },
       "kind": "judgment",
-      "explainer": "A few items of new clothing or a hygiene kit per person. As World Vision's gifts in kind."
+      "explainer": "Our judgment, $30 ($10-80): a hygiene kit or a few items of new clothing per person. Reference class: UNFPA puts a dignity kit (pads, soap, underwear, a torch, a comb, toothbrush and toothpaste) at US$15 for donors (https://www.unfpa.org/donate/DignityKits) and lists a customised kit in its procurement catalogue at a price of up to US$30 (https://globalsupply.unfpa.org/products/customized-dignity-kit-for-price-less-than-30-usd-1001916.html); new clothing at the donors' fair market value is dearer per item, so a person given clothes and a kit sits at the top."
     },
     {
       "id": "gik_us_goods",
@@ -1338,8 +1322,8 @@
       "section": "effect",
       "label": "ln(consumption) gain per refugee in the US given clothes",
       "format": "number",
-      "formula": "ln(1 + gik_value_per_person * gik_inkind_equivalence / (@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024))",
-      "explainer": "At the lowest US quintile's spending per person (BLS 2024); both in current dollars."
+      "formula": "ln(1 + gik_value_per_person * @united_states.donated_goods_value_vs_recorded * @aid_value.inkind_goods_vs_cash / (@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024))",
+      "explainer": "Clothes given in the US at the shared US figures for donated goods (US value per recorded dollar × goods in kind against cash), against the lowest US quintile's spending per person (BLS 2024); both in current dollars."
     },
     {
       "id": "gik_inkind_equivalence",
@@ -1352,7 +1336,7 @@
         "high": 0.75
       },
       "kind": "judgment",
-      "explainer": "US fair market value is far above what the same goods cost in local markets, and people can't choose what they get. As World Vision's gifts in kind abroad."
+      "explainer": "Our judgment, 45% (25-75%), for goods given abroad. Reference class: the site's shared figures put donated goods given in the US at about 60% of their recorded value (@united_states.donated_goods_value_vs_recorded 0.85 × @aid_value.inkind_goods_vs_cash 0.7, Wydick et al. 2018 on donated goods); abroad the same clothing and hygiene items cost less in local markets than their US fair market value, though traded goods' prices fall far less than the overall price level, so about three quarters of that. Refugees in the US are valued at the shared US figures (gik_us_ln_gain_per_person)."
     },
     {
       "id": "gik_ln_gain_per_person",
