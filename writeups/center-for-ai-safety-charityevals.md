@@ -60,7 +60,7 @@ That is because Rethink's typical AI project cuts much less expected harm per do
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. In November 2026 the attribution share was applied to each branch's own value instead of blended by spending; a verification round checked it. The independent audit rounds are in audits/center-for-ai-safety-charityevals/.
+The model was built from the catastrophic-risk template. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. In November 2026 the attribution share was applied to each branch's own value instead of blended by spending; a verification round checked it. The independent audit rounds are in audits/center-for-ai-safety-charityevals/.
 
 ### Sources
 

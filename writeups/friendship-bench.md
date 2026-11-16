@@ -6,7 +6,7 @@ The model reproduces all 32 of HLI's intermediate figures.
 
 ### How the impact happens
 
-As for StrongMinds, HLI runs three bodies of evidence through the same chain (initial effect and decay, WELLBY conversion, adjustments, household spillovers) and combines them: the meta-analytic prior (50%), randomised trials of Friendship Bench (37%) and its monitoring data (12%). The cost is low, about $16 per person treated, which is why it comes out ahead of StrongMinds despite a smaller effect per person.
+HLI runs three bodies of evidence through one chain (initial effect and decay, WELLBY conversion, adjustments, household spillovers) and combines them: the meta-analytic prior (50%), randomised trials of Friendship Bench (37%) and its monitoring data (12%). The cost is low, about $16 per person treated.
 
 ### Biggest uncertainties
 
@@ -21,7 +21,7 @@ HLI itself values them against GiveDirectly's cash transfers, which implies a ra
 
 ### Where we differ from HLI
 
-- **Exchange rate (changed for consistency):** WELLBYs are converted at the rate that makes a fall in depression count the same as in the site's other depression models, 0.065 healthy years per WELLBY, not at a rate that matches HLI's view of cash transfers (0.575 healthy years per WELLBY, the evaluator view). About 9 times lower.
+- **Exchange rate (changed for consistency):** WELLBYs are converted at the site's shared exchange rate, 0.065 healthy years per WELLBY, not at a rate that matches HLI's view of cash transfers (0.575 healthy years per WELLBY, the evaluator view). About 9 times lower.
 - **Discounting (ours):** later benefits count less at the discount rate under Your values; HLI doesn't discount (0 in the evaluator view).
 - **Household size (changed for consistency):** every model reads one household size per place, the latest DHS survey's: Zimbabwe's 4.1 people in place of HLI's 3.92 (kept in the evaluator view).
 - **Staff pay and credit by share of resources (ours):** off by default.

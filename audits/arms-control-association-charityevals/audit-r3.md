@@ -14,7 +14,7 @@ Previous round:
 None needed; no source, figure or value changed.
 
 Verdict: pass (no findings)
-Model-sha: a6e7b9657224af7aceae6f7185bc666565837acd02db865d8fb47b3a950648cb
+Model-sha: a9ffe59ed97c5ebd9d0be5a0d415f82be8b0ee13b9b4734b113e7bf7ea092397
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
@@ -24,3 +24,5 @@ Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new s
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.

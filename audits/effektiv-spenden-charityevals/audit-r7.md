@@ -12,7 +12,7 @@ Mechanical: audit-model lint 0 findings, no invariant violation (INV-12 incl. do
 ## Findings
 None.
 
-Model-sha: 478eb4bc4fdf9ea7d816e43d94f9c3f0553fbc41d8a8ac20e8bac59718144f38
+Model-sha: 948b8d659c7fd857fd1bbf51961a9915f5f8f657c9490a8dbba5f43c576eeeb9
 Verdict: pass
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -21,3 +21,7 @@ Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-
 Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline 23.69 → 23.69 (−0.0016%), 11 rows changed, against bf8498ee.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline 23.69 → 23.69 (+2.4e-8%), against a8d130f3.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

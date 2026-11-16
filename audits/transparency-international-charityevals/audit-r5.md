@@ -1,7 +1,7 @@
 # Audit: transparency-international-charityevals, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 3.360e-5 daly/$ = 0.03360 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: 7cb8a42440f1e54e7f850d5f844a4611f169531f78c701c13cde98822f53118e
+Model-sha: c6eebfb55253f5a208c88a1515e571e274e7123567b51df735650fa3decfc9b0
 
 Scope: scoped verification of the compliance-cost sentence on `pol_people_per_change`.
 
@@ -23,8 +23,10 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 7cb8a42440f1e54e7f850d5f844a4611f169531f78c701c13cde98822f53118e
+Model-sha: c6eebfb55253f5a208c88a1515e571e274e7123567b51df735650fa3decfc9b0
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-risk trims); no number changed
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against bf8498ee.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.

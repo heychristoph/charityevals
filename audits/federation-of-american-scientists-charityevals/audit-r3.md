@@ -1,6 +1,6 @@
 # Audit: federation-of-american-scientists-charityevals, round 3 (verification round)
 Result: 0.001425 daly/$ = 1.425 years of healthy life per 1,000 dollars (combined range 0.069–29.3; model's own ranges 0.12–7.66); cause median 1.58 (×0.90). Verdict: pass.
-Model-sha: 82e6bc45d46182490c136074f37ffed84f293ffb6ea3c7e163f7c34a32c2e7cb
+Model-sha: 9a3bcb55042610293b5d07d1b24c6a62890b9cfc67b318edac632f639c20aae7
 Scope: unchanged from round 2 (every programme, year to 30 June 2025, $32,215,480 of programme spending). Only the round-2 fixes were checked.
 Mechanical: audit-model lint 0 findings, invariants none (run on the current model); normalization-audit, check.ts and simulation-check not re-run: the fixes changed two estimate values, text, and the charity record's wording, no structure.
 Previous round: finding 1 (global_risk_share timing): resolved, rebuilt from the dated grant and the 990 pay. Finding 2 (ai_staff_share): resolved, 0.02 (0.005–0.06), explainer now says today's staff joined after the year and matches the range. Finding 3 (branch shares): resolved, see below. Finding 4 (charity record): resolved, summary and line label name the Global Risk Program.
@@ -39,3 +39,7 @@ Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new s
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.

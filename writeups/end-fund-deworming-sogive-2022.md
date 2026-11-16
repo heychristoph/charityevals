@@ -31,7 +31,7 @@ SoGive took GiveWell's 2022 deworming model for each charity and changed one mai
 - **Discount rate:** linked to the shared rate under Your values; SoGive's sheet uses GiveWell's 4%, pinned in the evaluator view.
 - **Value of income and of a life:** linked to the shared assumptions; SoGive uses GiveWell's 2022 moral weights, pinned in the evaluator view.
 - **Credit by share of resources:** when on, each location's value per dollar is SoGive's value per dollar of everyone's spending on the program, instead of GiveWell's leverage and funging adjustment for what governments' and other funders' money would have done otherwise.
-- **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution (our default for delivery programs: staff pay about 15% of cost, a 10% pay gap).
+- **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution (our default for delivery programs: staff pay about {{row:staff_cost_share}} of cost, a 10% pay gap).
 
 ### Biggest uncertainties
 

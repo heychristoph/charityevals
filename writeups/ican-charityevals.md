@@ -35,7 +35,7 @@ The first blends two parts. About 15% of the campaign is the treaty's implementa
 
 The other 5% is the justice work, which cuts no risk of a future war and counts as a side effect. Side effects add 10% in all: a norm against any use also makes a single detonation or a limited war less likely, which has no shared forecast. The treaty is contested among the states it wants to persuade, so harm is allowed down to −10%. Every branch takes the missing-data discount (0.5).
 
-ICAN's income fell from CHF 3.6 million in 2023 to 2.0 million in 2024, and it ran deficits in 2024 and 2025, drawn from funds set aside in 2023. The states left to join are harder to win than those already in. The next dollar counts at 54% of the past average.
+ICAN's income fell from CHF 3.6 million in 2023 to 2.0 million in 2024, and it ran deficits in 2024 and 2025, drawn from funds set aside in 2023. The states left to join are harder to win than those already in. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

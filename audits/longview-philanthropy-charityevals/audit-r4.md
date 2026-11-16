@@ -12,9 +12,11 @@ Mechanical: audit-model lint 0 findings, no invariant violation (INV-12 incl. do
 ## Findings
 None.
 
-Model-sha: 8c158b7b62baa2551eb6a786f2dcfd4a35a95fdf9daaa79fae3b817e7af79a67
+Model-sha: 0bbb492d7d12ca16fcfa54ab227debdb31f704915f222a59cf309e1d52cb97e2
 Verdict: pass
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts); the receipt passed on HEAD's model, whose headline moved since its audit only through models and facts it reads. Mechanical: headline unchanged, against HEAD.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

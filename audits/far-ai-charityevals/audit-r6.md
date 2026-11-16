@@ -1,6 +1,6 @@
 # Audit: far-ai-charityevals, round 6 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 9.578e-4 daly/$ = 0.9578 years of healthy life per 1,000 dollars (combined range 0.0195–47.0); cause median 0.0733 (×13.1). Verdict: pass.
-Model-sha: 521004f87f5edcd47afbbd1efd2f54268fb812cca6e5be2f38950622e947193b
+Model-sha: a8af4cd2342779a4ab319314467ce79875de8c1f8d397c9219368dac71c55728
 Scope: unchanged from round 3 (all four programmes, 2024); this round checks that the two changes verified on separate branches (round 4: COVID-scale death ages; round 5: `leverage_funging_adj` = 1) are both present in the merged model and consistent with each other.
 Mechanical: audit-model lint no high or medium; invariants none (INV-15 included); normalization-audit none (full run, "all models valid", 0 violations); `scripts/check.ts far-ai-charityevals` passes.
 Previous round: rounds 4 and 5 had no open findings; both changes are present.
@@ -30,3 +30,5 @@ Re-stamped (16 Nov 2026): Reference class named in a judgment's explainer (publi
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.

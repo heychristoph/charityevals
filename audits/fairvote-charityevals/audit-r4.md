@@ -1,6 +1,6 @@
 # Audit: fairvote-charityevals, round 4
 Result: 2.264e-5 daly/$ = 0.0226 years of healthy life per 1,000 dollars (combined range 0.0014–0.38); cause median 0.0693 (×0.33). Verdict: pass.
-Model-sha: 7c110a151de5ee1f5c0779addbdd4494334da2b075ba919bc8401cf63b761973
+Model-sha: f01faab2a3d2fd7ccb0a6fcad2d9744ef9e59c2e7aead0171b8d6f39312893bc
 Scope: scoped verification of commit 61b6097 only (the answer to round 3's 3 low findings): facts/democracy.json (rcv_local_coverage, rcv_state_federal_coverage, us_pr_movement_resources_per_year, local_offices_weight explainer), the model's rcv_implementation_adj and the explainers that state its numbers, charities/fairvote.json summary, the write-up. Everything else as in rounds 1-3.
 Mechanical: audit-model lint 0 findings; invariants none; check.ts "all models valid" (this and protect-democracy-charityevals); simulation-check stable (5% 0.155×, 50% 1.00×, 95% 5.46× the best guess); normalization-audit not re-run (no row of the kinds it checks changed; scoped round). No script wrote generated/ (working tree clean). Result moved from 0.0230 to 0.0226 (-1.6%), no move above 2×.
 Previous round (r3):
@@ -34,3 +34,7 @@ Verdict: pass (0 high, 0 medium, 2 low).
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against e247896f.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

@@ -400,7 +400,7 @@
    "section": "reach",
    "label": "Share of the advised money whose destination Longview's advice changed",
    "format": "percent",
-   "explainer": "No survey of the donors it advises: the site's shared figure for a meta charity without one (30%, 15% to 45%), read as the share of the advised money whose destination its advice changed, as for Effektiv Spenden's advised gifts. None of it counts as new money: the people it advises are existing givers of $1M or more a year who were giving anyway (templates.md: advice that changes where money is spent is all shifted); new philanthropists drawn in by its convenings are in the side effects.",
+   "explainer": "No survey of the donors it advises: the site's shared figure for a meta charity without one (30%, 15% to 45%), read as the share of the advised money whose destination its advice changed. None of it counts as new money: the people it advises are existing givers of $1M or more a year who were giving anyway (templates.md: advice that changes where money is spent is all shifted); new philanthropists drawn in by its convenings are in the side effects.",
    "formula": "@meta.own_effect_share"
   },
   {
@@ -514,8 +514,8 @@
    "section": "moved_money",
    "label": "Value of a dollar to the causes Longview directs money to (live), units of value",
    "format": "small",
-   "formula": "(@meta.longview_2025_share_ai * (@meta.longview_2025_metr_share_of_ai * #charityevals:metr + (1 - @meta.longview_2025_metr_share_of_ai) * #cause:ai) + @meta.longview_2025_share_nuclear * #cause:nuclear + @meta.longview_2025_share_bio * #cause:biosecurity) / (@meta.longview_2025_share_ai + @meta.longview_2025_share_nuclear + @meta.longview_2025_share_bio)",
-   "explainer": "Where its directed money went in 2025, by area (our judgment, a dollar-weighted blend of its itemised US grants and a judged split of the rest, facts/meta.json longview_2025_share_*: AI 81%, nuclear 12%, biosecurity 3%), each area at its charities' figures on the rankings under your values (#cause:ai, #cause:nuclear, #cause:biosecurity, equal weights), by the site's rule for a split (normalization.md 2.8). Of its itemised grantees only METR has a model here, read at its own figure for its 3.4% of the AI grants; the rest have none and take their area's charities. Digital sentience (its Digital Sentience Fund and two US grants), a cause with no model here, and Rethink Priorities' grant (a money mover) drop out at the average of the rest."
+   "formula": "(@meta.longview_2025_share_ai * (@meta.longview_2025_mats_share_of_ai * #charityevals:mats + @meta.longview_2025_metr_share_of_ai * #charityevals:metr + (1 - @meta.longview_2025_mats_share_of_ai - @meta.longview_2025_metr_share_of_ai) * #cause:ai) + @meta.longview_2025_share_nuclear * #cause:nuclear + @meta.longview_2025_share_bio * #cause:biosecurity) / (@meta.longview_2025_share_ai + @meta.longview_2025_share_nuclear + @meta.longview_2025_share_bio)",
+   "explainer": "Where its directed money went in 2025, by area (our judgment, a dollar-weighted blend of its itemised US grants and a judged split of the rest, facts/meta.json longview_2025_share_*: AI 81%, nuclear 12%, biosecurity 3%), each area at its charities' figures on the rankings under your values (#cause:ai, #cause:nuclear, #cause:biosecurity, equal weights), by the site's rule for a split (normalization.md 2.8). Every itemised grantee with a model here is read at its own live result for its share of the AI grants: MATS (21%) and METR (3.4%); the other grantees and the money no list itemises take their area's charities. Digital sentience (its Digital Sentience Fund and two US grants), a cause with no model here, and Rethink Priorities' grant (a money mover) drop out at the average of the rest."
   },
   {
    "id": "moved_dollar_value",
@@ -568,7 +568,7 @@
     "high": 0.2
    },
    "kind": "judgment",
-   "explainer": "Good and harm of Longview's own beyond the money counted: its convenings and donor education draw new philanthropists to these risks and its grant reports inform other funders (positive); a few advisers steering much of a field's private money narrows its views and its bets (negative). The grantees' own chance of backfiring is in their figures already. 5% (−5% to +20%) of the modelled value, our judgment, anchored on Effektiv Spenden's and Giving What We Can's 5% for the same kind of effects.",
+   "explainer": "Good and harm of Longview's own beyond the money counted: its convenings and donor education draw new philanthropists to these risks and its grant reports inform other funders (positive); a few advisers steering much of a field's private money narrows its views and its bets (negative). The grantees' own chance of backfiring is in their figures already. 5% (−5% to +20%) of the modelled value, our judgment, with no reference class.",
    "side_effect": "added"
   },
   {
@@ -668,7 +668,7 @@
     "high": 0.9
    },
    "kind": "judgment",
-   "explainer": "Applies to the advised money its advice changed (informed_money_value) and to the empty policy branch: how far the redirected giving does what its area's charities on the rankings do, given that nobody measures what its advice changed or how its grantees compare with the ranked ones. 0.7 (0.5 to 0.9), the template's figure, as for Effektiv Spenden and 80,000 Hours; above Rethink Priorities' 0.6 for research, since its recommendations name the grant; Effektiv Spenden's advised gifts take the same 0.7."
+   "explainer": "Applies to the advised money its advice changed (informed_money_value) and to the empty policy branch: how far the redirected giving does what its area's charities on the rankings do, given that nobody measures what its advice changed or how its grantees compare with the ranked ones. 0.7 (0.5 to 0.9), the template's figure."
   },
   {
    "id": "counterfactual_adj",
@@ -741,7 +741,7 @@
    "label": "Pay gap versus comparable jobs elsewhere",
    "format": "percent",
    "formula": "@staff_pay.gap_research_policy",
-   "explainer": "The shared gap between what research and policy staff earn at a non-profit and what they could earn elsewhere (@staff_pay.gap_research_policy, 30%): Longview's grantmakers and advisers come from foundations, finance and government, where pay is higher."
+   "explainer": "The shared gap between what research and policy staff earn at a non-profit and what they could earn elsewhere (@staff_pay.gap_research_policy, {{row:salary_gap}}): Longview's grantmakers and advisers come from foundations, finance and government, where pay is higher."
   },
   {
    "id": "salary_sacrifice",
@@ -756,7 +756,7 @@
    "label": "How much the next dollar does compared with the average dollar so far",
    "format": "percent",
    "formula": "@next_dollar.longview_philanthropy",
-   "explainer": "Longview's own figure (facts/next_dollar.json): 36% (15–75%). The result is its 2025 average, the year its grants rose fivefold with its new private AI fund; it holds over a year and a half of operating costs unrestricted, and the next dollar of advising reaches donors further from its circle.",
+   "explainer": "Longview's own figure (facts/next_dollar.json): {{row:marginal_vs_past_average}} (15–75%). The result is its 2025 average, the year its grants rose fivefold with its new private AI fund; it holds over a year and a half of operating costs unrestricted, and the next dollar of advising reaches donors further from its circle.",
    "published": 1
   },
   {

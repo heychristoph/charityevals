@@ -22,7 +22,7 @@ The brain is most sensitive to iodine in the womb and in the first years of life
   - **Policy reviews and tools** in the 19 countries using IGN's toolkit (India, Germany, the Maldives, South Sudan, Bhutan, Cameroon, Sri Lanka, Armenia, Tanzania, Moldova and nine unnamed): about one new rule every two years the size of Moldova's requirement of iodized salt in bread (in force since 2011, re-issued in 2025 after IGN's processed-food assessment), which protects about 12,700 births a year.
   - **Regional advocacy** in Europe, South Asia and North America: about one such rule every four years.
 - **Credit:** IGN gets 20% to 40% of each result, as UNICEF, WHO, ministries, universities and the producers themselves put in resources too; each result counts for the years a won change counts on the site, and is discounted by the shared missing-data slider, as no change in children's iodine status is measured.
-- **The next dollar** is valued at 56% of the average: money is tight after aid cuts, but the 2025 accounts close with a surplus.
+- **The next dollar** is valued at {{row:marginal_vs_past_average}} of the average: money is tight after aid cuts, but the 2025 accounts close with a surplus.
 
 ### What drives the result
 

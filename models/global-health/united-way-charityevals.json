@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "united-way",
   "owner": "charityevals",
-  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to local agencies (about 58% of its programme spending), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash; other grants and United Way's own services (about 80% of programme spending, including the cost of running the grants) built from the US research on programmes of their kind, children's tutoring, mentoring, early learning and after-school programmes valued by the adult earnings the trials imply, job training and coaching by earnings gained, health services at what low-income recipients would pay for them; 211 by the help callers find that they wouldn't have found otherwise; and tax help by fees saved and credits that would have gone unclaimed. Every branch is discounted for missing data, since United Way measures none of these outcomes itself. The result, about {{result}} years of healthy life per $1,000, is low because the help goes to people in the US who consume around $23,000 a year (those getting food and rent help about $10,000): on the site's log-income scale a dollar does a thirteenth to a thirtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. About half the result is the children's and youth programmes' lifelong earnings, so the discount rate, how much the programmes raise earnings and what they cost drive it, with the missing-data and income-to-health sliders.",
+  "summary": "The US United Way network (about 1,100 local United Ways and their national office, United Way Worldwide) raises money, mostly through workplace campaigns, and spends it on grants to local agencies (about 58% of its programme spending), the 211 helplines it runs or funds, free tax filing and programmes of its own. All of it is modelled, for the network's fiscal year to June 2025 ($3.5 billion spent), in five branches: basic-needs grants valued near cash; other grants and United Way's own services (about 80% of programme spending, including the cost of running the grants) built from the US research on programmes of their kind, children's tutoring, mentoring, early learning and after-school programmes valued by the adult earnings the trials imply, job training and coaching by earnings gained, health services at what low-income recipients would pay for them; 211 by the help callers find that they wouldn't have found otherwise; and tax help by fees saved and credits that would have gone unclaimed. Every branch is discounted for missing data, since United Way measures none of these outcomes itself. The result, about {{result}} years of healthy life per $1,000, is low because the help goes to people in the US who consume around {{row:baseline_consumption}} a year (those getting food and rent help about $10,000): on the site's log-income scale a dollar does a thirteenth to a thirtieth of what it does for a household living on about $2 a day, and United Way's money buys services at US prices. About half the result is the children's and youth programmes' lifelong earnings, so the discount rate, how much the programmes raise earnings and what they cost drive it, with the missing-data and income-to-health sliders.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: United Way (US network)",
@@ -1004,7 +1004,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as the Boys & Girls Clubs model's after-school effect: the national evaluation of 21st Century Community Learning Centers found no academic gains (James-Burdumy and others, Mathematica for the US Department of Education, 2005), while Durlak, Weissberg and Pachan's meta-analysis (American Journal of Community Psychology 2010) finds 0.12 on grades and 0.17 on tests (Table 3), with the effects in the programmes using sequenced, active, focused and explicit (SAFE) practices and the rest near zero; 0.09 is between them, from 0.02 to 0.20."
+      "explainer": "Our judgment: the national evaluation of 21st Century Community Learning Centers found no academic gains (James-Burdumy and others, Mathematica for the US Department of Education, 2005), while Durlak, Weissberg and Pachan's meta-analysis (American Journal of Community Psychology 2010) finds 0.12 on grades and 0.17 on tests (Table 3), with the effects in the programmes using sequenced, active, focused and explicit (SAFE) practices and the rest near zero; 0.09 is between them, from 0.02 to 0.20."
     },
     {
       "id": "afterschool_cost",
@@ -1031,7 +1031,7 @@
         "high": 10
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as the Boys & Girls Clubs model: 160,000 volunteers giving about 30 hours each over 1.6 million members, about 3 hours a member-year, from 0 to 10."
+      "explainer": "Our judgment: about 160,000 volunteers giving about 30 hours each over 1.6 million members (Boys & Girls Clubs of America's counts), about 3 hours a member-year, from 0 to 10."
     },
     {
       "id": "afterschool_years_until_work",
@@ -1045,7 +1045,7 @@
         "high": 15
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as the Boys & Girls Clubs model: members from about 6 to 18, mostly 8 to 14; 11 years before work, from 8 to 15."
+      "explainer": "Our judgment: members from about 6 to 18, mostly 8 to 14; 11 years before work, from 8 to 15."
     },
     {
       "id": "afterschool_ln_gain",
@@ -1069,7 +1069,7 @@
       "label": "Children and youth: present value at the start of work of a lasting proportional earnings gain, per unit of the gain",
       "format": "number",
       "formula": "pv_annuity_due(1, $discount_rate, edu_working_years) * edu_resource_sharing",
-      "explainer": "Each working year's proportional gain on the log scale, discounted to the start of work at the shared rate and shared with the household; each kind's row discounts it back over its own years to working age. A proportional gain is the same on the log scale whatever the adult's income, so the clients' consumption share doesn't enter. Taxes on the gain and benefits lost are not netted out (the site's other income models don't net them either)."
+      "explainer": "Each working year's proportional gain on the log scale, discounted to the start of work at the shared rate and shared with the household; each kind's row discounts it back over its own years to working age. A proportional gain is the same on the log scale whatever the adult's income, so the clients' consumption share doesn't enter. Taxes on the gain and benefits lost are not netted out."
     },
     {
       "id": "edu_ln_gain_per_dollar",
@@ -1316,7 +1316,7 @@
       "section": "effect",
       "label": "Of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
-      "explainer": "The relief models' shared figure (@death_ages.crisis_share_5_14_of_over5, 20%, 10-40%): most deaths over five in crises are of adults. Not used here (no deaths are counted); kept so the row reads the shared value of a death.",
+      "explainer": "The relief models' shared figure (@death_ages.crisis_share_5_14_of_over5, {{row:share_5_14_of_over5}}, 10-40%): most deaths over five in crises are of adults. Not used here (no deaths are counted); kept so the row reads the shared value of a death.",
       "formula": "@death_ages.crisis_share_5_14_of_over5"
     },
     {
@@ -1607,7 +1607,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment: agencies replace part of a lost United Way grant from other donors. United Way is usually one funder among several and below the template's 0.95, since its grants are general operating money that other donors can more easily make up. How the anchors lead to 0.85: Andreoni and Payne (Journal of Public Economics 2011) find a government grant cuts a charity's private giving by about 75 cents on the dollar, mostly because the charity then fundraises less. Read in reverse, an agency that loses a grant can raise part of it back, but only by fundraising harder, over time and at a cost; If 75 cents of a lost dollar could come back, the floor would be 25%; the low end sits above it, at 60%, because the replacement money costs the agency fundraising and comes from donors who would otherwise give to charities doing similar good. United Way grants are general operating money, which other donors make up more easily than restricted grants, so the best guess sits below the template's 0.95 for domestic services, at 0.85; the American Red Cross model has 0.95 and GiveWell's top charities typically 0.85 to 0.95. 85%, from 60% to 100%."
+      "explainer": "Our judgment: agencies replace part of a lost United Way grant from other donors. United Way is usually one funder among several and below the template's 0.95, since its grants are general operating money that other donors can more easily make up. How the anchors lead to 0.85: Andreoni and Payne (Journal of Public Economics 2011) find a government grant cuts a charity's private giving by about 75 cents on the dollar, mostly because the charity then fundraises less. Read in reverse, an agency that loses a grant can raise part of it back, but only by fundraising harder, over time and at a cost; If 75 cents of a lost dollar could come back, the floor would be 25%; the low end sits above it, at 60%, because the replacement money costs the agency fundraising and comes from donors who would otherwise give to charities doing similar good. United Way grants are general operating money, which other donors make up more easily than restricted grants, so the best guess sits below the template's 0.95 for domestic services, at 0.85. 85%, from 60% to 100%."
     },
     {
       "id": "og_funging_adj",
@@ -1620,7 +1620,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Our judgment, as for basic needs: United Way is one funder of the agency's programme among several, and agencies make up part of a lost grant. How the anchors lead to 0.85: Andreoni and Payne (Journal of Public Economics 2011) find a government grant cuts a charity's private giving by about 75 cents on the dollar, mostly because the charity then fundraises less. Read in reverse, an agency that loses a grant can raise part of it back, but only by fundraising harder, over time and at a cost; If 75 cents of a lost dollar could come back, the floor would be 25%; the low end sits above it, at 50%, because the replacement money costs the agency fundraising and comes from donors who would otherwise give to charities doing similar good. United Way grants are general operating money, which other donors make up more easily than restricted grants, so the best guess sits below the template's 0.95 for domestic services, at 0.85; the American Red Cross model has 0.95 and GiveWell's top charities typically 0.85 to 0.95. 85%, from 50% to 100%."
+      "explainer": "Our judgment, as for basic needs: United Way is one funder of the agency's programme among several, and agencies make up part of a lost grant. How the anchors lead to 0.85: Andreoni and Payne (Journal of Public Economics 2011) find a government grant cuts a charity's private giving by about 75 cents on the dollar, mostly because the charity then fundraises less. Read in reverse, an agency that loses a grant can raise part of it back, but only by fundraising harder, over time and at a cost; If 75 cents of a lost dollar could come back, the floor would be 25%; the low end sits above it, at 50%, because the replacement money costs the agency fundraising and comes from donors who would otherwise give to charities doing similar good. United Way grants are general operating money, which other donors make up more easily than restricted grants, so the best guess sits below the template's 0.95 for domestic services, at 0.85. 85%, from 50% to 100%."
     },
     {
       "id": "own_funging_adj",

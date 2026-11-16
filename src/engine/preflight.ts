@@ -401,7 +401,7 @@ const MODEL_ADJ = /^\s+(?:life\s+tables?|list|laws?|legislation|bills?|ordinance
 const BREAK_WORD = /^(?:is|are|was|were|be|been|has|have|had|does|do|did|uses?|used|reads?|gives?|puts?|takes?|finds?|found|says?|said|reports?|reported|which|that|whose|where|when|while|it|its|their|this|these|those|a|an|in|on|at|to|of|for|by|with|from|per|than|as|not|no|but|if|so|because|after|before|into|about|over|under|between)$/i;
 /** Comparison words just before a name. Strong ones ("as in", "than", "unlike") compare by themselves;
  * weak ones ("like", "following") only with a model word or a possessive after the name. */
-const COMPARE_STRONG = /(?:\bas\s+(?:in|for|with|does|did)|\bunlike|\bthan|\b(?:the\s+)?same\s+as|\bsimilar\s+to|\bin\s+line\s+with|\bon\s+a\s+par\s+with|\blevel\s+with|\bmirror(?:s|ed|ing)?|\bcompared?\s+(?:with|to)|\bversus|\bvs\.?|\bbelow|\babove|\bnear|\bclose\s+to)\s+$/i;
+const COMPARE_STRONG = /(?:\bas\s+(?:in|for|with|does|did)|\b(?:comes?|came|ranks?|sits?|lies)\s+(?:out\s+)?(?:well\s+|far\s+|just\s+)?(?:ahead\s+of|behind)|\bunlike|\bthan|\b(?:the\s+)?same\s+as|\bsimilar\s+to|\bin\s+line\s+with|\bon\s+a\s+par\s+with|\blevel\s+with|\bmirror(?:s|ed|ing)?|\bcompared?\s+(?:with|to)|\bversus|\bvs\.?|\bbelow|\babove|\bnear|\bclose\s+to)\s+$/i;
 const COMPARE_WEAK = /(?:\blike|\bfollow(?:s|ed|ing)?|\bmatch(?:es|ed|ing)?|\bcopie[sd]\s+(?:from\s+)?|\bborrow(?:s|ed)?\s+(?:from\s+)?)\s+$/i;
 /** Multiples and splits ("three times Clean Air Task Force's budget", "between NTI and …"): a comparison, except of a source's figures. */
 const COMPARE_TIMES = /(?:\btimes|×|\btwice|\bthrice|\bhalf|\bbetween)\s+$/i;
@@ -423,6 +423,19 @@ const PEER_PATTERNS: RegExp[] = [
   // Placed among the site's other charities or models.
   /\b(?:sits?|lies|ranks?|comes?\s+out)\s+(?:far\s+|well\s+|a little\s+)?(?:above|below|near|among)\s+(?:the|its|our|other)\s+(?:[\w'’-]+\s+){0,3}(?:charities|models|peers|median|average)\b/i,
   /\b(?:like|unlike|as with|as in|as for)\s+(?:charityevals['’]|our|the site['’]s|its)\s+other\s+(?:[\w-]+\s+){0,3}(?:charities)\b/i,
+];
+
+/** Other models' figures and the site's other models, in any field (lint's summary patterns don't look for
+ * them): another model's attribution share ("credited 10% in its model", "the modelled groups' shares sum
+ * to"), the models that read a figure ("read by every model that counts it (X, Y)"), "the site's other
+ * advocacy model", "X's model as the worked example", a ranking against another ("comes out ahead of"). */
+const OTHER_MODEL_PATTERNS: RegExp[] = [
+  /\bcredited\s+(?:with\s+)?(?:about\s+)?[\d.]+%\s+(?:in|by)\s+(?:its|their|that|the\s+other|each)\s+(?:own\s+)?models?\b/i,
+  /\bthe\s+modell?ed\s+(?:groups|charities|organi[sz]ations|campaigns|partners|grantees|members|coalitions?)['’]\s+shares?\b/i,
+  /\b(?:read|used|counted)\s+by\s+(?:every|each|all(?:\s+the)?)\s+(?:other\s+)?models?\s+(?:that|which)\s+(?:counts?|reads?|uses?)\s+it\b/i,
+  /\b(?:the\s+)?site['’]s\s+other\s+(?:[\w-]+\s+){0,3}models?\b/i,
+  /\bmodels?\s+as\s+(?:the|a|its)\s+worked\s+example\b/i,
+  /\b(?:comes?|came|ranks?|sits?|lies)\s+(?:out\s+)?(?:well\s+|far\s+|just\s+)?(?:ahead\s+of|behind)(?=\s+(?:the|its|other|our)\s)/i,
 ];
 
 type NameIndex = { re: RegExp; owner: Map<string, string>; ids: RegExp | undefined; modelCharity: Map<string, string> };
@@ -536,6 +549,7 @@ export function peerMentionProblems(lib: Library, m: ResolvedModel, writeup?: st
       const sentence = text.slice(text.lastIndexOf(". ", at) + 1, (text.indexOf(". ", at + h[0].length) + 1 || text.length + 1) - 1);
       if (!/(?<![\w&])#[a-z]/.test(sentence)) report(h[0], "compares with others");
     }
+    for (const p of OTHER_MODEL_PATTERNS) for (const h of text.matchAll(new RegExp(p.source, p.flags + "g"))) report(h[0], "compares with others");
     for (const x of text.matchAll(re)) {
       const name = x[0], c = owner.get(name);
       if (!c || c === own) continue;
@@ -569,7 +583,9 @@ export function peerMentionProblems(lib: Library, m: ResolvedModel, writeup?: st
       // A multiple or split of a source's figure ("times Rethink Priorities' range") is arithmetic, unless
       // it is that charity's model's; "times GiveDirectly" is GiveWell's unit (multiples of cash transfers).
       const multiple = times && (!source || modelMention) && !(name === "GiveDirectly" && !poss && /times|×/i.test(times[0]));
-      const cw = strong ?? (multiple ? times : null) ?? (weak && (word || poss) ? weak : null);
+      // "as X's 10%": another charity's figure taken as this one's.
+      const asFigure = !source && poss && /\bas\s+$/i.test(head) && !lead[0].trim() && /^\s*(?:own\s+)?[−-]?\$?\d/.test(tail) ? /\bas\s+$/i.exec(head) : null;
+      const cw = strong ?? (multiple ? times : null) ?? (weak && (word || poss) ? weak : null) ?? asFigure;
       if (cw) report(`${cw[0]}${phrase}`, `compares with ${lib.charities.get(c)?.name ?? c}`);
       else if (modelMention || ofModel) {
         // A publisher's own model or figure ("Rethink Priorities' cross-cause model"), named as such.

@@ -40,7 +40,7 @@ The adjustments, each applied to its own branch:
 
 Side effects: other benefits +5%, from the Observatory's open data for tracking ordinary viruses. The Virology Capabilities Test is a benchmark AI developers could tune toward, at −2%. Published findings about where AI helps attackers cost −3%.
 
-SecureBio held about a year of unrestricted reserves at the end of 2024, and its main funder renewed its support. A gift can no longer buy SecureDNA, so it buys detection and AI evaluations. The next dollar counts at 49% of the past average.
+SecureBio held about a year of unrestricted reserves at the end of 2024, and its main funder renewed its support. A gift can no longer buy SecureDNA, so it buys detection and AI evaluations. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
@@ -60,7 +60,7 @@ Pandemics that end humanity's future bring about half the pandemic work's share 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, starting from our Johns Hopkins Center for Health Security model. Round 1 of the independent audit checked every figure against the Form 990 and found no high issues and three medium ones. First, the reserves: much of the net assets was a multi-year grant booked in 2024, so the room factor is now neutral. Second, the use factor was above neutral without support; it is now neutral too, and the next dollar went from 48% to 49%. Third, one multiplier hid a blend, so the AI evaluations and the pandemic work now have their own. The low findings were fixed too: the system-card wording, an anchor for the other benefits, and a contradiction in our Nuclear Threat Initiative model. A verification round checked those changes and asked for the next-dollar range to be the product of its factors' ranges (now 17% to 85%); a last round checked that. Later the multipliers were applied to each branch's own value instead of blended by spending, checked in a further round. The rounds are in audits/securebio-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit checked every figure against the Form 990 and found no high issues and three medium ones. First, the reserves: much of the net assets was a multi-year grant booked in 2024, so the room factor is now neutral. Second, the use factor was above neutral without support; it is now neutral too, and the next dollar went from 48% to 49%. Third, one multiplier hid a blend, so the AI evaluations and the pandemic work now have their own. The low findings were fixed too: the system-card wording and the other benefits' explanation. A verification round checked those changes and asked for the next-dollar range to be the product of its factors' ranges (now 17% to 85%); a last round checked that. Later the multipliers were applied to each branch's own value instead of blended by spending, checked in a further round. The rounds are in audits/securebio-charityevals/.
 
 ### Sources
 

@@ -8,7 +8,7 @@ In ACE's own view the model reproduces all 24 of ACE's intermediate figures.
 
 1. **Humane Slaughter Initiative:** producers commit to installing stunners; ACE counts 9 commitments in 2024 covering about 1.7 billion shrimp a year.
 2. Stunners are likely (ACE: 90%) to be deployed and used for about ten years.
-3. Each stunned shrimp avoids a small amount of suffering (about 0.0045 days, weighted by intensity), which adds up at this scale. We weigh a shrimp's pain against a chicken's by Rethink Priorities' estimate: about 9% of a chicken.
+3. Each stunned shrimp avoids a small amount of suffering (about {{row:p1_sads_averted_per_shrimp_stunned}} days, weighted by intensity), which adds up at this scale. We weigh a shrimp's pain against a chicken's by Rethink Priorities' estimate: about 9% of a chicken.
 4. **Sustainable Shrimp Farmers of India:** farm-level welfare improvements, modelled separately.
 
 ACE lists retailer commitments (Tesco and others) as secondary effects it didn't add to the total.

@@ -1,6 +1,6 @@
 # Audit: all-hands-and-hearts-charityevals, round 3
 Result: 2.760e-6 daly/$ = 0.00276 years of healthy life per 1,000 dollars (combined range 0.00057-0.0135); cause median 0.0866 (x0.032). Verdict: pass (no findings).
-Model-sha: 82378688e0d165ec69e2d5213099a795c0daea61357f6e4e87b02fc7fb3a7e1f
+Model-sha: 51f7b27b7af3fb815cffabb907a7a71ab6048bf0a6dbf4b3d357a8af12d79fa5
 Scope: unchanged; only the changes of commit 001c6e4 since 95fed69 were checked (`git diff 95fed69 001c6e4 -- models/ writeups/`).
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, the same as round 2, covered by the summary's reason); invariants none; check.ts all models valid; normalization-audit and simulation-check not re-run (a value and two explainers changed).
 
@@ -20,3 +20,7 @@ Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (co
 Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against bebc953e.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b370f40.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

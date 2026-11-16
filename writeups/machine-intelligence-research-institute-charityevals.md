@@ -31,7 +31,7 @@ All of MIRI's spending is on AI. The model's pandemic and nuclear areas are set 
 
 Side effects: other benefits add 5% (AI Impacts' surveys, and a public debate that also covers smaller harms). A harm of −5% (down to −30%) reflects that arguments about superintelligence can also draw money and people into building it, and that a contested call for a halt can make others' proposals look extreme.
 
-MIRI roughly tripled its reserves in 2026 and is well above its two-year target, so the next dollar counts at 35% of the past average.
+MIRI roughly tripled its reserves in 2026 and is well above its two-year target, so the next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
@@ -52,7 +52,7 @@ The main reason is that Rethink's typical AI project cuts its risk far less per 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Nuclear Threat Initiative's model as the worked example. Round 1 of the independent audit found one high issue: the shared cut per dollar for AI came from Rethink's misalignment project but was applied to all AI risk. The shared figure now counts only misalignment's nine tenths, for every model, which lowered this result by a tenth. The round also corrected the write-up's account of what drives the result, and netted the office-sharing fees out of overhead. Round 2 found that the same nine tenths had been applied to catastrophes the world survives, where Rethink's model makes misalignment only about a third of the deaths. The shared figure for those catastrophes now uses that third (counted by deaths after round 3), which lowered this result by about a quarter. Round 3 passed with two low findings, both fixed and checked in a verification round. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. Independent audits are in audits/machine-intelligence-research-institute-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit found one high issue: the shared cut per dollar for AI came from Rethink's misalignment project but was applied to all AI risk. The shared figure now counts only misalignment's nine tenths, for every model, which lowered this result by a tenth. The round also corrected the write-up's account of what drives the result, and netted the office-sharing fees out of overhead. Round 2 found that the same nine tenths had been applied to catastrophes the world survives, where Rethink's model makes misalignment only about a third of the deaths. The shared figure for those catastrophes now uses that third (counted by deaths after round 3), which lowered this result by about a quarter. Round 3 passed with two low findings, both fixed and checked in a verification round. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. Independent audits are in audits/machine-intelligence-research-institute-charityevals/.
 
 ### Sources
 

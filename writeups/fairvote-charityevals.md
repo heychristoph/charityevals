@@ -19,11 +19,11 @@ Ranked-choice voting now reaches about 17 million Americans (14 million voters),
   - they use it for only some of their governments' elections (New York City its primaries, cities their own offices): counted at 44% of a full switch;
   - the gain: a judged 2% of the income becoming a democracy brings (about a fifth more income per person in the long run), counted at 0.5 for doubt that the effect is real;
   - the movement spent about $19 million a year, ballot campaigns included.
-- **Proportional-representation branch (about a fifth):** about 103,000 people a year in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. A city's own elections count as half of a full switch. The gain is a judged 5% of democracy's, at 0.6 for doubt. The movement spent about $3.4 million a year. The Protect Democracy model shares these figures.
+- **Proportional-representation branch (about a fifth):** about {{row:pr_people}} people a year in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. A city's own elections count as half of a full switch. The gain is a judged 5% of democracy's, at 0.6 for doubt. The movement spent about $3.4 million a year.
 - **Years:** the gain builds over about 25 years. A win counts as brought forward by the site's five years, with a 3% yearly chance of repeal.
 - **Both branches** are discounted by the missing-data slider. Ranked-choice voting gives about four fifths of the result.
-- **Side effects:** the good of fairer elections beyond income (+20%) and the state bans the wins provoke (−10%), shared with the Protect Democracy model.
-- **Next dollar:** 42% of the average. The easier wins came first, every statewide ranked-choice measure in 2024 failed except Alaska's defence of its own, and nineteen states now ban it.
+- **Side effects:** the good of fairer elections beyond income (+20%) and the state bans the wins provoke (−10%), both shared figures.
+- **Next dollar:** {{row:marginal_vs_past_average}} of the average. The easier wins came first, every statewide ranked-choice measure in 2024 failed except Alaska's defence of its own, and nineteen states now ban it.
 
 ### What drives the result
 
@@ -50,7 +50,7 @@ Ranked-choice voting now reaches about 17 million Americans (14 million voters),
 
 ### How this model was checked
 
-Built from the template and audited by independent reviewers (rounds in audits/fairvote-charityevals/). Round 1 moved proportional representation from a forecast to the 2016-2025 record, counted against the movement's average spending over the same years, and shared its figures and side effects with the Protect Democracy model. Round 2 counted a city's own elections as half of a full switch and built the share of elections ranked ballots cover from the places themselves, lowering the result by about 30%; a last round checked those changes.
+Built from the template and audited by independent reviewers (rounds in audits/fairvote-charityevals/). Round 1 moved proportional representation from a forecast to the 2016-2025 record, counted against the movement's average spending over the same years, and made its figures and side effects shared figures. Round 2 counted a city's own elections as half of a full switch and built the share of elections ranked ballots cover from the places themselves, lowering the result by about 30%; a last round checked those changes.
 
 ### Sources
 

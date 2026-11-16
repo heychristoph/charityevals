@@ -39,7 +39,7 @@ Then come the money effects, valued as money gained or lost by those who pay for
   - **Each line's mix.** Each line splits the power it replaces into fossil and clean shares to match its own tonnes.
   - **Coal sites.** The coal-site reactors' power is cheaper by the site's construction saving.
 
-Where the reactors are built decides who pays: 45% in China, 10% in India, 15% in the US, 10% in other middle-income countries (valued like China) and 20% elsewhere (our judgment; half of what is under construction today is in China). A dollar counts in proportion to 1 ÷ the payers' consumption on the site's survey scale: about $4,200 a year in China, $630 in India and $32,700 in the US. A small share is added for the remaining work (5%), and the side effects come in as small shares: jobs kept in coal towns, nuclear risk. The total is divided by a typical year's spending in 2022-2024. The next dollar is valued at 57% of that average, because money is short.
+Where the reactors are built decides who pays: 45% in China, 10% in India, 15% in the US, 10% in other middle-income countries (valued like China) and 20% elsewhere (our judgment; half of what is under construction today is in China). A dollar counts in proportion to 1 ÷ the payers' consumption on the site's survey scale: about $4,200 a year in China, $630 in India and $32,700 in the US. A small share is added for the remaining work (5%), and the side effects come in as small shares: jobs kept in coal towns, nuclear risk. The total is divided by a typical year's spending in 2022-2024. The next dollar is valued at {{row:marginal_vs_past_average}} of that average, because money is short.
 
 ### What drives the result
 

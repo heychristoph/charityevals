@@ -40,7 +40,7 @@ Funging by large funders is 1, counted once in the next-dollar figure. The missi
 
 Side effects: other benefits +15% (the economics work, smaller attacks, events, the Policy Program), −2% for speeding up AI (its US competitiveness work) and −3% for published threat models that could draw attackers' attention.
 
-GovAI doubled its spending in 2025 and plans more growth; the UK office alone held about eight months of spending in cash at the year's end. The next dollar counts at 42% of the past average.
+GovAI doubled its spending in 2025 and plans more growth; the UK office alone held about eight months of spending in cash at the year's end. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
@@ -61,7 +61,7 @@ A fifth of GovAI's catastrophe research is aimed at misuse, which Rethink's typi
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the Center for AI Safety's model as the worked example. The first audit round moved the Code of Practice into the policy branch, split the counterfactual by branch so the training's is not counted twice, and lowered the research's uptake factor to 1. The second round put GovAI's part of the Code into the counterfactual and credit rows, counted it over its safety chapter's 9 drafters, anchored the Code's cut on the AI Act and Rethink's rate (0.1%), and chained the adjustments so each branch keeps its own product. The third credited GovAI's part of the Code by its share of everyone's resources behind it (about 1%, not 1 in 9 drafters) and weighted the adjustments by healthy years. The audit rounds are in audits/govai-charityevals/.
+The model was built from the catastrophic-risk template. The first audit round moved the Code of Practice into the policy branch, split the counterfactual by branch so the training's is not counted twice, and lowered the research's uptake factor to 1. The second round put GovAI's part of the Code into the counterfactual and credit rows, counted it over its safety chapter's 9 drafters, anchored the Code's cut on the AI Act and Rethink's rate (0.1%), and chained the adjustments so each branch keeps its own product. The third credited GovAI's part of the Code by its share of everyone's resources behind it (about 1%, not 1 in 9 drafters) and weighted the adjustments by healthy years. The audit rounds are in audits/govai-charityevals/.
 
 ### Sources
 

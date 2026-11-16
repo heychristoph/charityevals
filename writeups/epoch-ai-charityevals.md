@@ -38,7 +38,7 @@ About 1.7% of spending, under 3% of the counted work, is work against misuse: tr
 
 Side effects: other benefits add 10% (its economics and energy work informs central banks and planners). Speeding up AI subtracts 9%: about 30% of the value of the work it concerns, which excludes the biological tracking. Its benchmarks give labs targets to race on, its paid work for AI companies and investors can pull money into AI, and in April 2025 a co-founder and three staff left to found Mechanize, a start-up that aims to automate all work. Information hazards subtract nothing: it publishes no threat analyses.
 
-Epoch raised $10.3 million in 2025 and spent $5 million. Since then Coefficient Giving has given it $22.7 million of general support and more for a data-centre tracker and compute. Money is not its main constraint, so the next dollar counts at 23% of the past average.
+Epoch raised $10.3 million in 2025 and spent $5 million. Since then Coefficient Giving has given it $22.7 million of general support and more for a data-centre tracker and compute. Money is not its main constraint, so the next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
@@ -60,7 +60,7 @@ Only part of Epoch's work bears on catastrophic risk, it aims to inform rather t
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with METR's and the Centre for the Governance of AI's models as worked examples. Round 1 of the independent audit found one high finding and three medium ones, all fixed: clients' fees for commissioned work are now credited to the clients, the misuse share is taken over the work counted, the speed-up harm applies only to the part of the value it concerns, and a source link was corrected. Round 2 passed. Its medium finding, that fees paid across 2024 and 2025 were undercounted, was fixed, lowering the result by about a tenth, and a verification round checked the changes. Independent audits are in audits/epoch-ai-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit found one high finding and three medium ones, all fixed: clients' fees for commissioned work are now credited to the clients, the misuse share is taken over the work counted, the speed-up harm applies only to the part of the value it concerns, and a source link was corrected. Round 2 passed. Its medium finding, that fees paid across 2024 and 2025 were undercounted, was fixed, lowering the result by about a tenth, and a verification round checked the changes. Independent audits are in audits/epoch-ai-charityevals/.
 
 ### Sources
 

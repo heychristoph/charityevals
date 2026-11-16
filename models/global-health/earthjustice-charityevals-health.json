@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "earthjustice",
   "owner": "charityevals",
-  "summary": "Earthjustice's healthy-communities work, toxics in air and water (our judgment: 25% of its programme spending, $34.3M in the year to June 2025): this model counts EPA's 2024 fine-particle (PM2.5) air standard, which Earthjustice's clients pressed for and defended in court (upheld in June 2026), and the 2024 PFAS drinking-water standards it defends, by EPA's own estimates of deaths avoided (about 3,000 a year for PM2.5, between EPA's two estimates for 2032; 9,600 over decades for PFAS), plus 50% for its other wins of fiscal 2022-2025 (chemical plants, coal ash, refineries, pesticides). At the defaults it comes to 0.0059 years of healthy life per $1,000, nearly all from the PM2.5 standard, after both rules' compliance costs (EPA's own figures; on this scale the PFAS standards' costs exceed the deaths they avert, so that branch counts below zero); it is low because the deaths come years after the rules, advocacy is one cause of a rule and Earthjustice one of many groups behind it, the deaths are mostly of people over 70, and both rules' survival is in doubt. The biggest uncertainties are the years a won rule counts, the share of a rule due to advocacy and Earthjustice's share; both branches are discounted for missing data.",
+  "summary": "Earthjustice's healthy-communities work, toxics in air and water (our judgment: 25% of its programme spending, $34.3M in the year to June 2025): this model counts EPA's 2024 fine-particle (PM2.5) air standard, which Earthjustice's clients pressed for and defended in court (upheld in June 2026), and the 2024 PFAS drinking-water standards it defends, by EPA's own estimates of deaths avoided (about {{row:pm_deaths_per_year}} a year for PM2.5, between EPA's two estimates for 2032; 9,600 over decades for PFAS), plus 50% for its other wins of fiscal 2022-2025 (chemical plants, coal ash, refineries, pesticides). At the defaults it comes to 0.0059 years of healthy life per $1,000, nearly all from the PM2.5 standard, after both rules' compliance costs (EPA's own figures; on this scale the PFAS standards' costs exceed the deaths they avert, so that branch counts below zero); it is low because the deaths come years after the rules, advocacy is one cause of a rule and Earthjustice one of many groups behind it, the deaths are mostly of people over 70, and both rules' survival is in doubt. The biggest uncertainties are the years a won rule counts, the share of a rule due to advocacy and Earthjustice's share; both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Earthjustice (healthy communities)",
@@ -144,7 +144,7 @@
       "label": "Healthy communities' share of programme spending",
       "format": "percent",
       "formula": "@earthjustice.health_share",
-      "explainer": "Our judgment, shared by Earthjustice's three models (facts: earthjustice.health_share, 25%, 15% to 35%): the accounts split programmes only into litigation and public information; this focus area is the toxics in air and water work (national air standards, chemical plants and refineries, drinking water, pesticides, coal ash)."
+      "explainer": "Our judgment, shared by Earthjustice's three models (facts: earthjustice.health_share, {{row:area_share}}, 15% to 35%): the accounts split programmes only into litigation and public information; this focus area is the toxics in air and water work (national air standards, chemical plants and refineries, drinking water, pesticides, coal ash)."
     },
     {
       "id": "program_spend",
@@ -334,7 +334,7 @@
       "label": "EPA's 2024 fine-particle (PM2.5) standard: premature deaths avoided a year once in effect",
       "format": "integer",
       "unit": "deaths / year",
-      "explainer": "The shared figure for this rule (facts: climate), read by every model that counts it: 3,000 a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults (Pope et al. 2019) and 2,100 for the over-64s (Wu et al. 2020).",
+      "explainer": "The shared figure for this rule (facts: climate): 3,000 a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults (Pope et al. 2019) and 2,100 for the over-64s (Wu et al. 2020).",
       "formula": "@climate.us_pm_naaqs_2024_deaths_per_year"
     },
     {
@@ -459,7 +459,7 @@
       "format": "number",
       "formula": "(1 - @death_ages.cvd_share_80plus_of_70plus_usa) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cvd_share_80plus_of_70plus_usa * @moral_weights.givewell_age_80_84",
       "unit": "units of value",
-      "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of US cardiovascular deaths at 70 or older that are at 80 or older (facts: death_ages), as in the site's other models of rich-country deaths (Environmental Defense Fund, British Heart Foundation)."
+      "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of US cardiovascular deaths at 70 or older that are at 80 or older (facts: death_ages)."
     },
     {
       "id": "cvd_value_per_death",
@@ -609,7 +609,7 @@
       "format": "number",
       "formula": "@death_ages.cvd_yld_share_gbr / @death_ages.cvd_deaths_per_daly_gbr",
       "unit": "DALYs",
-      "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (facts: death_ages, cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About 2.5 healthy years of illness per death."
+      "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (facts: death_ages, cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About {{row:pm_illness_dalys_per_death}} healthy years of illness per death."
     },
     {
       "id": "pfas_illness_dalys_per_death",
@@ -655,7 +655,7 @@
         "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "EPA's PFAS deaths rest on dose-response models for heart disease and kidney cancer from observational studies, and on its own exposure modelling, which can run high or low. Our judgment, 0.8 (0.5 to 1.1), as in the site's other models of EPA's estimates (Environmental Defense Fund, Earthjustice's climate work); the PM2.5 branch reads the rule's shared evidence row, and delivery and repeal are in each branch's implementation row."
+      "explainer": "EPA's PFAS deaths rest on dose-response models for heart disease and kidney cancer from observational studies, and on its own exposure modelling, which can run high or low. Our judgment, 0.8 (0.5 to 1.1); the PM2.5 branch reads the rule's shared evidence row, and delivery and repeal are in each branch's implementation row."
     },
     {
       "id": "pm_evidence_adj",
@@ -670,7 +670,7 @@
       "section": "adjustments",
       "label": "PM2.5 standard: share of the deaths that wouldn't have been avoided anyway",
       "format": "percent",
-      "explainer": "The shared figure for this rule (facts: climate): 90% (70% to 100%); EPA's baseline already holds the rules then in force.",
+      "explainer": "The shared figure for this rule (facts: climate): {{row:pm_counterfactual_adj}} (70% to 100%); EPA's baseline already holds the rules then in force.",
       "formula": "@climate.us_pm_naaqs_2024_counterfactual"
     },
     {
@@ -855,7 +855,7 @@
         "quote": "Collectively, these changes removed over 740 tons per year of toxic pollution from oil refineries in the region.",
         "retrieved": "2026-11-14"
       },
-      "explainer": "The two rules are the period's largest countable health wins, but much of the work isn't in them: the 2024 chemical-plant and ethylene-oxide sterilizer rules, the 2024 mercury and air toxics update (since exempted for dozens of plants, which Earthjustice is suing over), coal-ash rules, the Fifth Circuit ruling that Texas and Louisiana must plan for interstate air pollution, the chlorpyrifos ban on food crops (2021, later vacated and partly restored), lead-pipe replacement, community enforcement cases (the Phillips 66 refineries near Los Angeles, over 740 tons a year of toxic pollution cut before they closed). Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 50% of the modelled value (20% to 100%): Clean Air Task Force's model takes 30% for a specialist's smaller set of other wins; Earthjustice's health docket is broader (several national rules a year besides community cases).",
+      "explainer": "The two rules are the period's largest countable health wins, but much of the work isn't in them: the 2024 chemical-plant and ethylene-oxide sterilizer rules, the 2024 mercury and air toxics update (since exempted for dozens of plants, which Earthjustice is suing over), coal-ash rules, the Fifth Circuit ruling that Texas and Louisiana must plan for interstate air pollution, the chlorpyrifos ban on food crops (2021, later vacated and partly restored), lead-pipe replacement, community enforcement cases (the Phillips 66 refineries near Los Angeles, over 740 tons a year of toxic pollution cut before they closed). Their spending is in the cost, so leaving them out would count them as worth nothing. Our judgment, 50% of the modelled value (20% to 100%): Earthjustice's health docket is broad (several national rules a year besides community cases).",
       "side_effect": "added"
     },
     {
@@ -973,7 +973,7 @@
       "label": "How much the next dollar does compared with the average dollar so far",
       "format": "percent",
       "formula": "@next_dollar.earthjustice",
-      "explainer": "Earthjustice's own figure (facts: next_dollar, docs/normalization.md 2.10), the same for its three models: room 0.5 × use 0.7 × run 1.0 = 35% (11% to 79%). The model's dollar is fiscal 2022-2025 spending over that period's wins. 1 in `published`: what the past average itself says.",
+      "explainer": "Earthjustice's own figure (facts: next_dollar, docs/normalization.md 2.10), the same for its three models: room 0.5 × use 0.7 × run 1.0 = {{row:marginal_vs_past_average}} (11% to 79%). The model's dollar is fiscal 2022-2025 spending over that period's wins. 1 in `published`: what the past average itself says.",
       "published": 1
     },
     {

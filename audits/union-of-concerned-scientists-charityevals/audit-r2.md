@@ -23,7 +23,7 @@ No findings.
 
 **Verdict: pass (all four round-1 findings settled; no new findings).**
 
-Model-sha: ed4dabd087a8f15c0994d978685a12c314ef45acda5310886635acd436b1cff2
+Model-sha: 241cfb528adb6864e840cf5a3c68f6aec4b1a007ab0c5d529df7731a3ee5e967
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
@@ -34,3 +34,7 @@ Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new s
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.

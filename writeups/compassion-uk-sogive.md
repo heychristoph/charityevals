@@ -25,7 +25,7 @@ SoGive's figures come first, ending at its cost per year of additional income. O
 
 ### What drives the result
 
-- **The discount rate**, since the earnings come between 6 and 46 years after the money is spent: at the default 4% that cuts the figure to about two fifths, far more than the log scale adds.
+- **The discount rate**, since the earnings come between 6 and 46 years after the money is spent: at the default {{row:discount_rate_per_year}} that cuts the figure to about two fifths, far more than the log scale adds.
 - **Extra schooling and its return**: 1 year rather than 1.5 cuts the result by a third.
 - **The value of doubling an income**, a value you set.
 

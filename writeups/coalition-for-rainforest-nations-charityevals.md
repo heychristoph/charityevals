@@ -50,7 +50,7 @@ The win is counted like every won policy on the site: the advocates' shared part
 
 **Carbon markets.** CfRN's share of the resources behind the forest-credit market is set the same way, about a quarter of a percent; the market's size cancels out. Credits sell at about $15. We judge that half go to countries, half of whose credits replace their own cuts at home, with the smoke those cuts would have removed. Other buyers (airlines, taxed companies, voluntary buyers) would otherwise have bought another credit or paid a tax; we count only the real cuts in the credits they would have bought, 12%.
 
-**Pandemic risk.** The forest kept cuts the risk by the same shared figures as the site's other forest models.
+**Pandemic risk.** The forest kept cuts the risk by the shared figures.
 
 **The next dollar.** The result is a past average, so the next dollar is valued at 64% of it: CfRN has run deficits for two years and holds about two months of liquid reserves.
 

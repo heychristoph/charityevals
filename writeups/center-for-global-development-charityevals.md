@@ -22,7 +22,7 @@ Ideas become policy when governments and agencies adopt them. An advance market 
 - **Development banks' capital reforms (about 17%):** the banks' US$200 billion of extra lending capacity, trusted at 80%, lent over about ten years, 60% of it used; a dollar lent is worth its grant element, judged 15% of a dollar of aid, at the site's shared value of aid of unknown use; CGD gets 5% of the credit; extra debt risk takes away 5%.
 - **Millennium Challenge Corporation (3%):** its US$18 billion of compacts signed since 2005, about US$1.2 billion a year in 2025 prices, judged 10% better used than other aid because of the design CGD argued for, CGD credited with 10%; reforms countries make to qualify add 2% of MCC's whole value.
 - **All three** count for the years a won reform counts on the site, after a discounted wait, are spread over the 24 years of work, and are discounted by the shared missing-data slider, as no study measures CGD's part. Its other work (3ie, the Commitment to Development Index, labour mobility, Nigeria's debt relief, health technology assessment, education) adds a judged 40%, anchored on the spread of the three modelled wins.
-- **The next dollar** is valued at 36% of the average: CGD holds about 21 months of spending in reserve and its biggest wins are behind it.
+- **The next dollar** is valued at {{row:marginal_vs_past_average}} of the average: CGD holds about 21 months of spending in reserve and its biggest wins are behind it.
 
 ### What drives the result
 
@@ -40,7 +40,7 @@ CGD's other wins enter only as a share of the three modelled; none is valued on 
 
 ### How this model was checked
 
-Audit rounds are listed in audits/center-for-global-development-charityevals/. Round 1 found two high, two medium and four low issues. The vaccine branch now counts the children's later income and GiveWell's shared supplements on the deaths' value, as the site's other child-vaccine models do, and values the vaccine money at Gavi's and governments' figures, since its use is known. The banks' and MCC's evidence adjustments no longer discount twice; the dose price, MCC's yearly funding (from compacts signed) and the size of the MCC effect were corrected, and the other work's share is anchored. Together these took the result from 1.0 to 1.6. Round 2 passed; its fixes (GiveWell's supplements on the income gain too, the other work's range, an anchor for CGD's share of the AMC, MCC's compacts in 2025 prices and before terminations, two quotes) took it to 1.7, checked in a verification round.
+Audit rounds are listed in audits/center-for-global-development-charityevals/. Round 1 found two high, two medium and four low issues. The vaccine branch now counts the children's later income and GiveWell's shared supplements on the deaths' value, and values the vaccine money at Gavi's and governments' figures, since its use is known. The banks' and MCC's evidence adjustments no longer discount twice; the dose price, MCC's yearly funding (from compacts signed) and the size of the MCC effect were corrected, and the other work's share is anchored. Together these took the result from 1.0 to 1.6. Round 2 passed; its fixes (GiveWell's supplements on the income gain too, the other work's range, an anchor for CGD's share of the AMC, MCC's compacts in 2025 prices and before terminations, two quotes) took it to 1.7, checked in a verification round.
 
 ### Sources
 

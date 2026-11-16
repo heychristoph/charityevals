@@ -25,7 +25,7 @@ Each part counts the money its research informed in 2025 and the share of it tha
 
 All of this money would have been spent anyway, so it counts only for what it gains. By the site's rule for shifted money, it moves from an ordinary charity of its cause to the cause's charities on the rankings, read live. For animal welfare, that is the animal charities. For global health, it is the global health charities against GiveDirectly. For the cross-cause work it is global health, animal welfare and AI safety, weighted by our judgment of the teams' 2025 work (25%, 35% and 30%), each against an ordinary charity of the same cause; its digital minds and movement work have no cause on the site and drop out.
 
-Each part then takes an evidence step (0.7; 0.6 for cross-cause work, whose judgments are more contested) for research that points the wrong way. It also takes the site's discount for outcomes nobody has measured. Side effects are a row in each part. A further dollar does less than the average dollar so far: 26% for animal welfare, which holds two years of restricted money; 17% for global health, whose commissioned work paid for itself, so a gift buys its independent research; 31% for the rest.
+Each part then takes an evidence step (0.7; 0.6 for cross-cause work, whose judgments are more contested) for research that points the wrong way. It also takes the site's discount for outcomes nobody has measured. Side effects are a row in each part. A further dollar does less than the average dollar so far: {{row:marginal_vs_past_average}} for animal welfare, which holds two years of restricted money; 17% for global health, whose commissioned work paid for itself, so a gift buys its independent research; 31% for the rest.
 
 ### What drives the result
 

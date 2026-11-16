@@ -47,7 +47,7 @@ The adjustments, each applied to its own branch:
 
 Side effects: other benefits +5%, mainly CORI's help to health departments in ordinary outbreaks. Harm −2%: the Center's 2019 coronavirus exercise, Event 201, became a focus of conspiracy theories about COVID-19, and published pathogen analyses carry some risk of misuse.
 
-The Center's main funder halved its general support in 2023, and that grant ends in 2026, so money is likelier than usual to be the constraint. CORI is paid by a restricted CDC grant, so a gift buys the policy research and training, which the model values more highly. The next dollar counts at 64% of the past average.
+The Center's main funder halved its general support in 2023, and that grant ends in 2026, so money is likelier than usual to be the constraint. CORI is paid by a restricted CDC grant, so a gift buys the policy research and training, which the model values more highly. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
@@ -63,12 +63,12 @@ Pandemics that end humanity's future bring about half the result, mostly through
 ### What isn't modelled
 
 - The good CORI and the Center's preparedness research do in ordinary outbreaks is a 5% share of the benefits, not a branch of its own.
-- The Center's work on AI and biological weapons is valued with the pandemic area, as in our Nuclear Threat Initiative model, not as AI risk.
+- The Center's work on AI and biological weapons is valued with the pandemic area, not as AI risk.
 - Losses beyond deaths, such as survivors' lost income and health, are a shared figure set to 0.
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, starting from our Nuclear Threat Initiative model. Round 1 of the independent audit found no high issues and two medium ones. The first was the next-dollar figure: a gift cannot buy CORI, which a restricted CDC grant pays for, so it now buys the higher-valued policy work and the figure rose from 53% to 64%. The second was the other benefits, now 5% with an anchor instead of 15%. The low findings were fixed too: the university's and the School's assessments on gifts, funging at 0.9 as for the Nuclear Threat Initiative, and the grant terms. A verification round checked those changes. Later the evidence multiplier was applied to each branch's own value instead of blended by spending, checked in a further round. The rounds are in audits/johns-hopkins-center-for-health-security-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit found no high issues and two medium ones. The first was the next-dollar figure: a gift cannot buy CORI, which a restricted CDC grant pays for, so it now buys the higher-valued policy work and the figure rose from 53% to 64%. The second was the other benefits, now 5% with an anchor instead of 15%. The low findings were fixed too: the university's and the School's assessments on gifts, funging at 0.9, and the grant terms. A verification round checked those changes. Later the evidence multiplier was applied to each branch's own value instead of blended by spending, checked in a further round. The rounds are in audits/johns-hopkins-center-for-health-security-charityevals/.
 
 ### Sources
 

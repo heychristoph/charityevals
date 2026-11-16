@@ -1,6 +1,6 @@
 # Audit: british-heart-foundation-charityevals, round 2 (verification of the compliance-cost rule 2.21)
 Result: 1.016e-5 daly/$ = 0.01016 years of healthy life per 1,000 dollars (combined range 6.3e-4 to 0.165); cause median 0.0686 (x0.148). Verdict: pass.
-Model-sha: 92ee2982a42cf8e393cdfbeb8d87578b56999bb260b2e7e6f2c605ef3af2f89c
+Model-sha: a074dc07a01b849c97fe35affc82eaf9afaf2b8fcfe9f1629bdc6111e8c11a86
 Scope: scoped verification of the changed rows (adv_compliance_uov, dalys_from_compliance, outcome_total), the fact uk_smokefree_generation_cost_per_year_gbp and compliance_cost_payer_multiple. Same rows and formula as the Cancer Research UK model (verified in its round 6).
 Mechanical: audit-model exit 0, lint low only (2 unused context inputs), invariants none. normalization-audit not run (scoped).
 Result before 0.01034, after 0.01016 (-1.7%).
@@ -29,3 +29,7 @@ Verdict: pass
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1807d315.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

@@ -8,7 +8,7 @@ Transparency International e.V., the Secretariat, spent EUR 28.0 million in 2025
 
 ### How the impact happens
 
-Corruption costs people income: contracts go to the wrong firms, roads cost more and last less, and investment and taxes are lost. About 2% of the world's income is paid in bribes each year. A new rule, register or practice that is applied removes a small share of that cost for everyone it governs. People who get help from an advice centre may get back a bribe, a service or land. A won case returns public money and deters others.
+Corruption costs people income: contracts go to the wrong firms, roads cost more and last less, and investment and taxes are lost. About {{row:pol_bribery_share}} of the world's income is paid in bribes each year. A new rule, register or practice that is applied removes a small share of that cost for everyone it governs. People who get help from an advice centre may get back a bribe, a service or land. A won case returns public money and deters others.
 
 ### How the model works
 

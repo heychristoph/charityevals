@@ -1,6 +1,6 @@
 # Audit: environmental-defense-fund-charityevals, round 14 (verification of the round 13 text fixes)
 Result: 0.001792 t CO₂e/$ = 0.001033 years of healthy life per $1,000, unchanged. Verdict: pass (no high or medium finding).
-Model-sha: 3267b2f8f13e1eb5b1e69aaf799e2bc0a27884fe158982abb8e58d766712f092
+Model-sha: c63525e2a4a2cfd74f672d1a61f70b18044671d278bc07aa43f3aab0d4fe40d1
 Scope: round 13's two mediums, in the uncommitted diff of the model summary and the write-up.
 Mechanical: audit-model.ts "Findings (0)"; check.ts all models valid, 0.001033.
 
@@ -17,3 +17,7 @@ No comparison with other charities in the edited text.
 Re-stamped (16 Nov 2026): EPA methane rule and Advanced Clean Cars II dates read the shared facts (climate.us_oil_gas_methane_rule_*_year, climate.ca_advanced_clean_cars_ii_*_year); same values. Mechanical: headline unchanged, against 2492e3fc.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.

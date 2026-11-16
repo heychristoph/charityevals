@@ -225,7 +225,7 @@
       "format": "number",
       "formula": "@climate.ira_tco2e_per_year_2030 * ira_household_share",
       "unit": "t CO₂e / year",
-      "explainer": "The shared projection of the law's whole cut (facts: climate.ira_tco2e_per_year_2030), the same figure the Union of Concerned Scientists' and the Environmental Defense Fund's models start from, times the home-energy provisions' share."
+      "explainer": "The shared projection of the law's whole cut (facts: climate.ira_tco2e_per_year_2030), times the home-energy provisions' share."
     },
     {
       "id": "tools_users_2024",
@@ -350,7 +350,7 @@
       "label": "Share of the law's home-energy provisions due to advocacy at all",
       "format": "percent",
       "formula": "@climate.advocacy_share_of_policy_win",
-      "explainer": "The law is in: what's uncertain is how much of a won policy advocacy caused rather than the government's agenda, events and opinion. The shared share for every climate model (facts: climate.advocacy_share_of_policy_win, 30%), split among all advocates by the attribution row."
+      "explainer": "The law is in: what's uncertain is how much of a won policy advocacy caused rather than the government's agenda, events and opinion. The shared share for every climate model (facts: climate.advocacy_share_of_policy_win, {{row:p_success}}), split among all advocates by the attribution row."
     },
     {
       "id": "years_of_impact",
@@ -472,7 +472,7 @@
         "high": 1.1
       },
       "kind": "judgment",
-      "explainer": "The law's tonnes are a modeller's projection and the per-home cut a simulation, not measured cuts; projections of tax credits have run ahead of what was built, and homes that switch with a tool's help may not be the stock's average. 0.8 (0.5 to 1.1), our judgment, as the Union of Concerned Scientists' and the Environmental Defense Fund's models for the same kinds of estimate."
+      "explainer": "The law's tonnes are a modeller's projection and the per-home cut a simulation, not measured cuts; projections of tax credits have run ahead of what was built, and homes that switch with a tool's help may not be the stock's average. 0.8 (0.5 to 1.1), our judgment."
     },
     {
       "id": "ira_counterfactual_adj",
@@ -480,7 +480,7 @@
       "label": "Inflation Reduction Act: share of its tonnes that wouldn't have happened anyway",
       "format": "percent",
       "formula": "@climate.ira_counterfactual",
-      "explainer": "The shared figure for the law (facts: climate.ira_counterfactual, 80%), as every model counting it uses."
+      "explainer": "The shared figure for the law (facts: climate.ira_counterfactual, {{row:ira_counterfactual_adj}}), as every model counting it uses."
     },
     {
       "id": "ira_attribution_share_shared",
@@ -928,7 +928,7 @@
       "label": "Share of the rebate money that reaches households",
       "format": "percent",
       "formula": "@climate.ira_home_rebates_paid_share",
-      "explainer": "The shared figure (facts: climate.ira_home_rebates_paid_share, 55%)."
+      "explainer": "The shared figure (facts: climate.ira_home_rebates_paid_share, {{row:rebate_paid_share}})."
     },
     {
       "id": "rebate_years_until_paid",
@@ -937,7 +937,7 @@
       "format": "number",
       "formula": "@climate.ira_home_rebates_years_until_paid",
       "unit": "years",
-      "explainer": "The shared figure (facts: climate.ira_home_rebates_years_until_paid, 5.5 years). The rebates are a fixed sum and count once, as Habitat for Humanity's model counts one-off public money."
+      "explainer": "The shared figure (facts: climate.ira_home_rebates_years_until_paid, {{row:rebate_years_until_paid}} years). The rebates are a fixed sum and count once."
     },
     {
       "id": "rebate_recipient_consumption_ratio",
@@ -979,7 +979,7 @@
       "format": "number",
       "formula": "@climate.ira_home_credits_years_until_paid",
       "unit": "years",
-      "explainer": "The shared figure (facts: climate.ira_home_credits_years_until_paid, 1.5 years)."
+      "explainer": "The shared figure (facts: climate.ira_home_credits_years_until_paid, {{row:credit_years_until_paid}} years)."
     },
     {
       "id": "credit_recipient_consumption_ratio",
@@ -995,7 +995,7 @@
       "label": "ln(consumption) given up by taxpayers per dollar of federal money",
       "format": "small",
       "formula": "@public_funds.mcpf / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
-      "explainer": "The shared cost of public money (facts: public_funds.mcpf, 1.2) over how federal taxes fall (public_funds.us_federal_payer_multiple, 1.4) times the household survey's consumption per person (the recipients' scale: one consumption scale for US public money, docs/normalization.md 2.14), as Feeding America's and Wounded Warrior Project's models count it."
+      "explainer": "The shared cost of public money (facts: public_funds.mcpf, 1.2) over how federal taxes fall (public_funds.us_federal_payer_multiple, 1.4) times the household survey's consumption per person (the recipients' scale: one consumption scale for US public money, docs/normalization.md 2.14)."
     },
     {
       "id": "rebate_uov",
@@ -1056,7 +1056,7 @@
       "label": "Share of these tonnes that are methane",
       "format": "percent",
       "formula": "@climate.us_home_electrification_methane_share",
-      "explainer": "Gas a home stops burning also stops leaking upstream (facts: climate.us_home_electrification_methane_share, 15%): both branches' tonnes come from homes electrified. The shared conversion values it by methane's own, earlier warming and ozone."
+      "explainer": "Gas a home stops burning also stops leaking upstream (facts: climate.us_home_electrification_methane_share, {{row:methane_share}}): both branches' tonnes come from homes electrified. The shared conversion values it by methane's own, earlier warming and ozone."
     },
     {
       "id": "fuel_share",
@@ -1170,7 +1170,7 @@
       "format": "percent",
       "formula": "@next_dollar.rewiring_america",
       "published": 1,
-      "explainer": "Rewiring America's own figure (facts/next_dollar.json, docs/normalization.md 2.10), 40%: the law it shaped is in and its home credits are gone, so the next dollar goes to state electricity costs and a marketplace for upgrades."
+      "explainer": "Rewiring America's own figure (facts/next_dollar.json, docs/normalization.md 2.10), {{row:marginal_vs_past_average}}: the law it shaped is in and its home credits are gone, so the next dollar goes to state electricity costs and a marketplace for upgrades."
     },
     {
       "id": "donor_cost_share",

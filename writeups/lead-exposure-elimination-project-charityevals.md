@@ -20,12 +20,12 @@ Lead paint on walls flakes and wears into dust, and young children swallow it. L
   - manufacturers switching to lead-free paint, shown by LEEP's follow-up testing, in Pakistan, Malawi, Zimbabwe, Ghana, Colombia, Senegal and South Africa;
   - spices, eyeliner and plastics: no change won yet, so this work counts as cost only. Drafted rules aren't counted either.
 - **Children protected:** each year a market stays free of lead paint spares about one birth cohort its childhood lead from paint, so a win counts each year's births in that country.
-- **What a child gains:** children in these countries average about 5 µg/dL of blood lead. We judge that 15% of it comes from paint (4% to 40%), and a child loses half an IQ point per µg/dL. That is about 0.4 IQ points per child. Each point raises earnings by 0.67% over a 40-year working life, shared in the household. The paint's exposure fades over about 25 years, and earnings start 17 years after a child's exposure.
+- **What a child gains:** children in these countries average about 5 µg/dL of blood lead. We judge that {{row:paint_share}} of it comes from paint (4% to 40%), and a child loses half an IQ point per µg/dL. That is about 0.4 IQ points per child. Each point raises earnings by {{row:iq_wage_gain}} over a 40-year working life, shared in the household. The paint's exposure fades over about 25 years, and earnings start 17 years after a child's exposure.
 - **Delivered:** the rules take 40% of the lead paint off the market over the years counted, as most are new. For the switches each country takes its own share: in Pakistan the lead paint brands' share fell from 88% to 41% in three years (53% gone), in Malawi lead raw materials fell from 89% of the market to 4% (90%), and we take a fifth in the five countries without a measured share.
 - **Adjustments:** LEEP gets half the credit (the regulators, partner NGOs and UN agencies do the rest), and trust in the chain is 70%. A tenth of the wins would have come in the same years anyway. Each win counts for the years a won reform counts on the site.
 - **Side effect:** adults in the same homes die less of lead's heart disease. Lead caused over 3.5 million deaths in 2023; we count paint's share of adults' blood lead as a quarter of its share of children's, and value the deaths at the site's value of a death by age.
 - **The missing-data discount** applies throughout. LEEP measures the lead in paint on sale, not children's blood lead.
-- **The next dollar** is valued at 42% of the average. LEEP holds over three years of 2025's spending, mostly earmarked, and its next programmes are in new countries and newer lead sources.
+- **The next dollar** is valued at {{row:marginal_vs_past_average}} of the average. LEEP holds over three years of 2025's spending, mostly earmarked, and its next programmes are in new countries and newer lead sources.
 
 ### What drives the result
 

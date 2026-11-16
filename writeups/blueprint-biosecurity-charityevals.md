@@ -40,11 +40,11 @@ Together the uptake figures come to about 0.75 of a typical project.
 
 Side effects: other benefits add 15%. These tools also fight ordinary infections between pandemics, such as tuberculosis, flu and COVID, net of a small risk that far-UVC adds indoor pollution if used too soon. Speeding up dangerous biology and information hazards subtract nothing: Blueprint studies defences and publishes no threat analyses.
 
-At the end of 2024 Blueprint had under three months of spending in hand. Since then, by its grant records, Coefficient Giving has given it $7.1 million to pass on as research grants, $3.2 million for policy advocacy (shared with its advocacy arm) and $6.4 million of general support over two years, and Blueprint says it raised over $17.5 million in 2025. Money is less of a constraint now. Founders Pledge, which recommends it, rates its team highly. The next dollar counts at 37% of the past average.
+At the end of 2024 Blueprint had under three months of spending in hand. Since then, by its grant records, Coefficient Giving has given it $7.1 million to pass on as research grants, $3.2 million for policy advocacy (shared with its advocacy arm) and $6.4 million of general support over two years, and Blueprint says it raised over $17.5 million in 2025. Money is less of a constraint now. Founders Pledge, which recommends it, rates its team highly. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
-Like them, it rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research is a step further from use than their work, and its next dollar counts for less. Deaths of people alive now are 90% of the value, the future lost 10%.
+The result rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research comes a step before use, and its next dollar counts for less than the past average. Deaths of people alive now are 90% of the value, the future lost 10%.
 
 ### Biggest uncertainties
 
@@ -63,7 +63,7 @@ Like them, it rests on Rethink's typical pandemic project, which averts many mor
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with SecureBio's and the Johns Hopkins Center for Health Security's models as worked examples. Round 1 of the independent audit passed, with two medium findings and three low ones, all fixed. A policy memo citing the respirator work turned out to be written by Blueprint's own staff, so that work's uptake fell from 1 to 0.8. The next-dollar figure now cites the right grant records and Founders Pledge's assessment, and rose from 35% to 37%. Two verification rounds checked the changes and passed. Independent audits are in audits/blueprint-biosecurity-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit passed, with two medium findings and three low ones, all fixed. A policy memo citing the respirator work turned out to be written by Blueprint's own staff, so that work's uptake fell from 1 to 0.8. The next-dollar figure now cites the right grant records and Founders Pledge's assessment, and rose from 35% to 37%. Two verification rounds checked the changes and passed. Independent audits are in audits/blueprint-biosecurity-charityevals/.
 
 ### Sources
 

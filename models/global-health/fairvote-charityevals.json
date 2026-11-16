@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "fairvote",
   "owner": "charityevals",
-  "summary": "FairVote researches and campaigns for ranked-choice voting and proportional representation in the United States ($6.4 million in 2024). A dollar to FairVote is counted as doing what the average dollar behind each movement did in 2016-2025: the ranked-choice movement (about $19 million a year, ballot campaigns included) put about 1.4 million more Americans a year under ranked ballots for some of their offices, and the proportional-representation movement (about $3.4 million a year) about 103,000 a year under proportional representation, each valued as a small share (2% and 5%) of the income democracy brings (Acemoglu et al. 2019), building over 25 years, brought forward by the years a win counts and repealed at 3% a year; ranked-choice voting gives about four fifths of the result. With its next dollar at 42% of the average that comes to about {{result}} years of healthy life per 1,000 dollars. The biggest uncertainty is whether a voting method changes how well people are governed at all, a judgment with no study of its size; both branches are discounted by the shared missing-data slider.",
+  "summary": "FairVote researches and campaigns for ranked-choice voting and proportional representation in the United States ($6.4 million in 2024). A dollar to FairVote is counted as doing what the average dollar behind each movement did in 2016-2025: the ranked-choice movement (about $19 million a year, ballot campaigns included) put about 1.4 million more Americans a year under ranked ballots for some of their offices, and the proportional-representation movement (about $3.4 million a year) about 103,000 a year under proportional representation, each valued as a small share (2% and 5%) of the income democracy brings (Acemoglu et al. 2019), building over 25 years, brought forward by the years a win counts and repealed at 3% a year; ranked-choice voting gives about four fifths of the result. With its next dollar at {{row:marginal_vs_past_average}} of the average that comes to about {{result}} years of healthy life per 1,000 dollars. The biggest uncertainty is whether a voting method changes how well people are governed at all, a judgment with no study of its size; both branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: FairVote",
@@ -107,7 +107,7 @@
       "label": "Total expenses, calendar 2024",
       "format": "usd",
       "formula": "@democracy.fairvote_expenses_2024",
-      "explainer": "The shared figure from the same return ($6,405,004: management and general $1,146,245, fundraising $923,917); shared because the Protect Democracy model divides credit for proportional representation by FairVote's spending too."
+      "explainer": "The shared figure from the same return ($6,405,004: management and general $1,146,245, fundraising $923,917)."
     },
     {
       "id": "program_spend",
@@ -248,7 +248,7 @@
       "label": "People newly governed under proportional representation per year of the movement's work (PR branch)",
       "format": "integer",
       "formula": "@democracy.us_pr_people_covered_per_year",
-      "explainer": "The shared figure the Protect Democracy model reads too: the movement's 2016-2025 record, about 103,000 people a year (85,000 to 115,000), Portland, Oregon's 2022 reform most of it."
+      "explainer": "The shared figure: the movement's 2016-2025 record, about {{row:pr_people}} people a year (85,000 to 115,000), Portland, Oregon's 2022 reform most of it."
     },
     {
       "id": "pr_ln_gain",
@@ -256,7 +256,7 @@
       "label": "Income gained per person-year once the effect is fully built, ln(consumption) (PR branch)",
       "format": "small",
       "formula": "ln(1 + @democracy.democratization_gdp_gain * @democracy.pr_gain_share)",
-      "explainer": "Proportional representation's share (@democracy.pr_gain_share, 5%, 1% to 15%) of the democratization gain, shared with the Protect Democracy model.",
+      "explainer": "Proportional representation's share (@democracy.pr_gain_share, 5%, 1% to 15%) of the democratization gain.",
       "unit": "ln / year"
     },
     {
@@ -404,7 +404,7 @@
       "label": "Evidence adjustment, PR branch",
       "format": "multiple",
       "formula": "@democracy.pr_evidence_adj",
-      "explainer": "The shared figure (0.6, 0.3 to 0.9), read by the Protect Democracy model too."
+      "explainer": "The shared figure (0.6, 0.3 to 0.9)."
     },
     {
       "id": "rcv_counterfactual_adj",
@@ -436,7 +436,7 @@
       "label": "Share of a full switch that the places counted get, PR branch",
       "format": "percent",
       "formula": "@democracy.pr_offices_share * @democracy.local_offices_weight",
-      "explainer": "The shared figures, read by the Protect Democracy model too: the adopting places use proportional representation for about 82% of their own elections (Portland, Oregon its whole council, Arlington County only its board), and a city's own elections are about half of a full switch (@democracy.local_offices_weight): about 41%."
+      "explainer": "The shared figures: the adopting places use proportional representation for about 82% of their own elections (Portland, Oregon its whole council, Arlington County only its board), and a city's own elections are about half of a full switch (@democracy.local_offices_weight): about 41%."
     },
     {
       "id": "rcv_attribution_share",
@@ -452,7 +452,7 @@
       "label": "FairVote's share of the proportional-representation movement's resources",
       "format": "percent",
       "formula": "cost_total * pr_spend_share / @democracy.us_pr_movement_resources_per_year",
-      "explainer": "FairVote's 2024 spending on proportional representation (about $1.3 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, FairVote and Protect Democracy included; Convention 2), the same denominator the Protect Democracy model divides by: about {{row:pr_attribution_share}}. As in the RCV branch, a 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
+      "explainer": "FairVote's 2024 spending on proportional representation (about $1.3 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, FairVote and Protect Democracy included; Convention 2): about {{row:pr_attribution_share}}. As in the RCV branch, a 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
     },
     {
       "id": "rcv_missing_data_adj",
@@ -548,7 +548,7 @@
       "label": "Side effect: the good of fairer elections beyond income, as a share of the income value",
       "format": "percent",
       "formula": "@democracy.electoral_reform_democratic_goods",
-      "explainer": "The shared figure for a won voting-method reform (20%, 5% to 60%), read by the Protect Democracy model's reform branch too: voters value having their vote count and a say in who represents them beyond what it does for income (Frey and Stutzer 2000).",
+      "explainer": "The shared figure for a won voting-method reform (20%, 5% to 60%): voters value having their vote count and a say in who represents them beyond what it does for income (Frey and Stutzer 2000).",
       "side_effect": "added"
     },
     {

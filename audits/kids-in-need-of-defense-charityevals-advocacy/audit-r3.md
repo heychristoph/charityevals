@@ -1,4 +1,4 @@
-Model-sha: 8649bea17a7cacdbb9d86823727328ee40cb0959a85ad05a8fea602ec1c1d3df
+Model-sha: 65f1879376e29d14ef56077013bfc782c3fbc865f1d0fe6c285b36d46bb16e94
 
 # Audit round 3: KIND advocacy (scoped verification)
 
@@ -18,3 +18,7 @@ Remaining findings:
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against e247896f.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

@@ -36,11 +36,11 @@ All the work counts as work against AI escaping control. Some of its tasks are c
 
 Side effects: other benefits add 10% (its measures inform governments and the public about AI progress). Two harms subtract 10% and 2%. A report that finds nothing dangerous can make a release look safe, and its benchmarks give developers targets and feed the race. Its published methods show a little about building autonomous agents.
 
-METR ended 2024 with net assets of $5.4 million, about five months of spending. But The Audacious Project committed about $17 million in October 2024, and METR raised commitments of about $71 million in the six months to August 2026. Money is not its main constraint, so the next dollar counts at 28% of the past average.
+METR ended 2024 with net assets of $5.4 million, about five months of spending. But The Audacious Project committed about $17 million in October 2024, and METR raised commitments of about $71 million in the six months to August 2026. Money is not its main constraint, so the next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
-The reason is that all of METR's work is against AI escaping control. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
+All of METR's work is against AI escaping control. For catastrophes the world survives, Rethink's typical misalignment project cuts deaths far less per dollar than its typical misuse project. Here, deaths of people alive now carry most of the value.
 
 ### Biggest uncertainties
 
@@ -57,7 +57,7 @@ The reason is that all of METR's work is against AI escaping control. FAR.AI and
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with Redwood Research's model as the worked example. Round 1 of the independent audit passed with two medium findings, both fixed: the tax return covers only May to December 2024, and the funging adjustment asked again whether money is the constraint, which the next-dollar figure already asks. Funging is now 1 here and in every catastrophic-risk model, raising this result from 0.048 to 0.057. Independent audits are in audits/metr-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit passed with two medium findings, both fixed: the tax return covers only May to December 2024, and the funging adjustment asked again whether money is the constraint, which the next-dollar figure already asks. Funging is now 1 here and in every catastrophic-risk model, raising this result from 0.048 to 0.057. Independent audits are in audits/metr-charityevals/.
 
 ### Sources
 

@@ -39,11 +39,11 @@ Then come the adjustments for the nuclear work:
 | ALLFED's share of the resources | 0.62 |
 | Missing-data discount | 0.5 |
 
-The first matches what our Arms Control Association and Nuclear Threat Initiative models give their research and policy work, with a wider range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' and its president's unpaid time and its co-authors' and partners' time.
+The first is our judgment, with a wide range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' and its president's unpaid time and its co-authors' and partners' time.
 
 Benefits not modelled add 25%. The largest part is the same food work after a volcanic winter: a large eruption has about a one-in-six chance this century. Smaller nuclear wars, the loss-of-industry work and ordinary food shocks make up the rest. One harm is counted: preparing for a war could make it seem more survivable, at −2%.
 
-ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 and, short of it, halved its programmes and team in 2025. It still held about 21 months of reserves at the end of 2024. The next dollar counts at 56% of the past average.
+ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 and, short of it, halved its programmes and team in 2025. It still held about 21 months of reserves at the end of 2024. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

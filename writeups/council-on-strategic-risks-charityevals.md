@@ -16,7 +16,7 @@ Nuclear war and pandemics carry a yearly chance of catastrophe, taken from the s
 
 Fellows count through the work they add to the field: the share who go on to work on these risks because of the fellowship, valued at a typical dollar of that work. The fellowships get credit for their share of the cost behind that work.
 
-The climate-security work aims to get militaries and governments to plan and spend for climate risks as their scale warrants. A dollar of it is taken to bear on about $500 of public money a year. The anchor is the US Defense Department's $5.1 billion request for climate-risk work in 2024, at most half of which is left after the 2025 cuts. Rich countries' public investment loses about 13% of its value to inefficiency. The work is taken to close 0.3% of that gap in what it touches. That makes about 20 cents of public value a year per dollar, valued at what a dollar is worth to the average American.
+The climate-security work aims to get militaries and governments to plan and spend for climate risks as their scale warrants. A dollar of it is taken to bear on about $500 of public money a year. The anchor is the US Defense Department's $5.1 billion request for climate-risk work in 2024, at most half of which is left after the 2025 cuts. Rich countries' public investment loses about {{row:gov_efficiency_gap}} of its value to inefficiency. The work is taken to close 0.3% of that gap in what it touches. The public value gained is valued at what a dollar is worth to the average American.
 
 ### How the model works
 
@@ -32,7 +32,7 @@ Every part is discounted 50% for missing data. The Converging Risks Lab's climat
 
 Side effects add 5%. Most of that is work against a single detonation or a limited nuclear war, which has no shared forecast. The rest is chemical weapons and the climate-security work's gains beyond better spending. No harm is added beyond a typical project's chance of backfiring.
 
-CSR holds about two months of spending in unrestricted reserves, but most of its money is in multi-year grants for set purposes. The next dollar counts at 49% of the past average.
+CSR holds about two months of spending in unrestricted reserves, but most of its money is in multi-year grants for set purposes. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
@@ -52,7 +52,7 @@ After each part's adjustments, the nuclear work brings 63% of the result, the bi
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the climate-security branch from our Federation of American Scientists model. Round 1 of the independent audit checked every source and found the figures right. Its one high finding was that the years a fellow stays in the work had been typed into many models. That figure is now one shared figure that every catastrophic-risk model reads, with the same value. Its smaller findings were fixed too. The Nolan Center's biological share was set from the grant's arithmetic (65% to 60%). The lab's climate-nuclear project got its own, lower multiplier. The climate-security budgets are now those of 2025. Round 2 passed. Its smaller findings were fixed: the branch shares are now given after each branch's adjustments, and the switched-off policy branch values pandemic deaths at the same age mix as the biological work. A verification round checked those fixes. The rounds are in audits/council-on-strategic-risks-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit checked every source and found the figures right. Its one high finding was that the years a fellow stays in the work had been typed into many models. That figure is now one shared figure that every catastrophic-risk model reads, with the same value. Its smaller findings were fixed too. The Nolan Center's biological share was set from the grant's arithmetic (65% to 60%). The lab's climate-nuclear project got its own, lower multiplier. The climate-security budgets are now those of 2025. Round 2 passed. Its smaller findings were fixed: the branch shares are now given after each branch's adjustments, and the switched-off policy branch values pandemic deaths at the same age mix as the biological work. A verification round checked those fixes. The rounds are in audits/council-on-strategic-risks-charityevals/.
 
 ### Sources
 

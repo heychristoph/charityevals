@@ -34,7 +34,7 @@ In every case the government or the Senedd made the change, with the Society as 
 - **Years:** the gain builds over about 25 years. A win counts as brought forward by the site's five years, with a 3% yearly chance of repeal.
 - **Every branch** is discounted by the missing-data slider.
 - **Side effects:** the good of fairer elections beyond income (+20%) and the counter-measures reforms provoke (−10%), shared with the US voting-reform models. In 2022, for example, a new law switched mayors to first past the post.
-- **Next dollar:** 21% of the average. The capital fund holds about 18 years of spending, so a gift mostly lets the fund grow.
+- **Next dollar:** {{row:marginal_vs_past_average}} of the average. The capital fund holds about 18 years of spending, so a gift mostly lets the fund grow.
 
 ### What drives the result
 

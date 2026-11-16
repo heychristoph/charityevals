@@ -1,7 +1,7 @@
 # Audit: environmental-defense-fund-charityevals-health-nature, round 8 (verification of the compliance-cost rule 2.21, text fixes of round 7)
 Result: 1.221e-6 daly/$ = 0.001221 years of healthy life per 1,000 dollars (unchanged from round 7). Verdict: pass.
 Verdict: pass
-Model-sha: 5080adea9794411a7472c66e37b0cced1237d3781421f65a97a5753e2d595a56
+Model-sha: b32026c8a33471246927b58ca39a5ebe704b44136691b9b15d9375faaf4456d4
 
 Scope: scoped verification of the `summary` sentence on shares (over half from the soot standard, most of the rest from the lead-pipe rule). No formula changed.
 
@@ -22,9 +22,13 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 5080adea9794411a7472c66e37b0cced1237d3781421f65a97a5753e2d595a56
+Model-sha: b32026c8a33471246927b58ca39a5ebe704b44136691b9b15d9375faaf4456d4
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.

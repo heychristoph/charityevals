@@ -31,14 +31,14 @@ Each effective giving organisation is expected to record $2 million of donations
 
 ### How the model works
 
-Money raised = 9 charities × $1.8 million × 2.5 × the discounted waits × 60%, the projected part discounted for missing data. To that come the giving organisations' and companies' expected donations and the circles' share. Each dollar is valued at its charities' figures: institutional grants at their gain over where they would have gone, the rest net of where shifted money would have gone. The changed spending of the grantmakers and readers of its research and its fellows' careers are added. Then come two side effects: +8% for founders who go on to lead elsewhere and ideas others use, and −2% for partners' time spent on charities that fail. The total is then multiplied by how much the next dollar does compared with the past average: 36%, our figure for Ambitious Impact. It has over a year of spending in reserve, and its constraint is founders and ideas as much as money. The third of a further gift that goes to seed grants is valued at its charities' figures instead.
+Money raised = 9 charities × $1.8 million × 2.5 × the discounted waits × 60%, the projected part discounted for missing data. To that come the giving organisations' and companies' expected donations and the circles' share. Each dollar is valued at its charities' figures: institutional grants at their gain over where they would have gone, the rest net of where shifted money would have gone. The changed spending of the grantmakers and readers of its research and its fellows' careers are added. Then come two side effects: +8% for founders who go on to lead elsewhere and ideas others use, and −2% for partners' time spent on charities that fail. The total is then multiplied by how much the next dollar does compared with the past average: {{row:marginal_vs_past_average}}, our figure for Ambitious Impact. It has over a year of spending in reserve, and its constraint is founders and ideas as much as money. The third of a further gift that goes to seed grants is valued at its charities' figures instead.
 
 ### What drives the result
 
 - **The missing-data discount.** It applies to the projected part of the charities' fundraising, the giving organisations' and companies' future donations, and the idea-stage figures of its youngest charities.
 - **Where shifted money would otherwise have gone** (one times GiveDirectly, from 0 to 3 times). Most of its charities' money is institutional and counts only for this gain.
 - **The discount rate.** The charities' money comes over years, so at 0.1% the result is about three times higher.
-- **The next dollar** (36%, from 15% to 75%).
+- **The next dollar** ({{row:marginal_vs_past_average}}, from 15% to 75%).
 - **Founding to Give's expected donations** ($150,000 a company, from $15,000 to $1.5 million).
 - **How much of their existence it caused** (60%, from 30% to 85%) and **their lifetime fundraising** (2.5 times what they have raised so far, from 1.5 to 5).
 

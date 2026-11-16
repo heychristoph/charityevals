@@ -33,9 +33,7 @@ Each area gets its own adjustments:
 | The Bulletin's share of the resources | 0.85 | 0.85 | 0.85 | 0.85 |
 | Missing-data discount | 0.5 | 0.5 | 0.5 | 0.5 |
 
-The Bulletin informs rather than campaigns. So its nuclear work gets the site's figure for public-facing work. Its AI and climate coverage sits in crowded fields, where much of it would be written elsewhere. Its share of the resources is below 1 because outside experts write most articles and the Clock's scientists give their time.
-
-The Federation of American Scientists' model credits the Nuclear Notebook to its own spending, so no dollar is counted twice.
+The Bulletin informs rather than campaigns, so its nuclear work counts below a typical project's. Its AI and climate coverage sits in crowded fields, where much of it would be written elsewhere. Its share of the resources is below 1 because outside experts write most articles and the Clock's scientists give their time.
 
 Side effects add 10%: coverage of a single detonation or a limited war, which has no shared forecast, the subjects outside the four risks, and the archive. No harm is added beyond a typical project's chance of backfiring.
 

@@ -1,5 +1,5 @@
 # Audit: hias-charityevals, round 4 (scoped)
-Model-sha: 51dd8ef52839b5d816d7b05a6cfc46dacd5d847643c337aba98f63636be9896d
+Model-sha: c0205711c93196e0a429c28905014ac10c6c7a7a0f51803924bc197bc0b5a853
 Scope: only the explainer changes since 04a7b33 (leg_wait_years, leg_removed_if_lost, leg_remit_share) and the write-up's legal bullet and RSC line. No input changed, so the result is unchanged (3.133e-6 daly/$).
 Mechanical: audit-model 0 high / 0 medium / 2 low (far-below, spread; both stated in the summary, unchanged); no files rewritten.
 
@@ -22,3 +22,5 @@ Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real gro
 Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against migrate/data-model.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 480880ba.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.

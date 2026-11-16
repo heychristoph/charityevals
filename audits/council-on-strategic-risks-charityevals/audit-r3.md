@@ -1,6 +1,6 @@
 # Audit: council-on-strategic-risks-charityevals, round 3 (scoped verification)
 Result: 0.01198 daly/$ = 12.0 years of healthy life per 1,000 dollars (combined range 0.79–181), unchanged from round 2. Verdict: pass.
-Model-sha: 88598e1614405b3be98a2c0b7d7906b4cfff1b170e91dbc5fd374223c6af373d
+Model-sha: e6205e2c19d62c9164df500823be1f251b0c3ea8b5a02ef3cfe22b34d85212df
 Scope: only the changes since round 2 (git diff 7f2b23d HEAD, model and write-up). audit-model: 0 findings, invariants none. check.ts: all models valid. simulation-check: 5% 0.158×, median 1.0×, 95% 6.76×, one single event misses 0% of draws. A scratch script (deleted afterwards) printed the engine's row values.
 
 Round 2 findings:
@@ -17,3 +17,7 @@ Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new s
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.

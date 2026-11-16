@@ -236,6 +236,23 @@ describe("peer mentions", () => {
     expect(ps.map((p) => p.where)).toContain("note_0 explainer");
   });
 
+  it("flags other models' shares, the models that read a figure, the site's other models and rankings", () => {
+    const ps = texts([
+      "The coalition's lead group is credited 10% in its model.",
+      "Together the modelled groups' shares sum to 60%.",
+      "The shared figure, read by every model that counts it (one, two).",
+      "As in the site's other advocacy model.",
+      "Built with Protect Democracy's model as the worked example.",
+      "0.1, as Clean Air Task Force's 10%.",
+      "It comes out ahead of Protect Democracy.",
+    ]);
+    expect(phrases(ps)).toEqual(expect.arrayContaining([
+      "credited 10% in its model", "the modelled groups' shares", "read by every model that counts it", "the site's other advocacy model",
+      "model as the worked example", "as Clean Air Task Force's", "comes out ahead of Protect Democracy",
+    ]));
+    expect(phrases(texts([], { summary: "It comes out ahead of the other ranked models." }))).toEqual(["comes out ahead of"]);
+  });
+
   it("leaves the model's own charity, sources, evaluators, links and other meanings alone", () => {
     expect(phrases(texts([
       "As in our FairVote model's reform branch.",

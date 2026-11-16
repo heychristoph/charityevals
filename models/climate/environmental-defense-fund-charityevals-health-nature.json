@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "environmental-defense-fund",
   "owner": "charityevals",
-  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, {{row:program_spend}} with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (about 3,000 deaths a year avoided, between EPA's two estimates; upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about 0.0012 years of healthy life per $1,000 after the two rules' compliance costs (EPA's own figures), over half from the soot standard and most of the rest from the lead-pipe rule; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
+  "summary": "The Environmental Defense Fund's health and nature work (air pollution, lead and toxic chemicals; oceans, fisheries, farms, water and resilience: $78.2M in its year to September 2025, {{row:program_spend}} with its share of core capacities) is modelled from the policies it helped win in October 2021 to September 2025: EPA's 2024 soot standard (about {{row:pm_deaths_per_year}} deaths a year avoided, between EPA's two estimates; upheld in court in 2026) and lead-pipe rule (up to 1,500 deaths and 200,000 IQ points a year), fisheries reforms and farm emissions. At the defaults it gives about {{result}} years of healthy life per $1,000 after the two rules' compliance costs (EPA's own figures), over half from the soot standard and most of the rest from the lead-pipe rule; it is low because EDF is one of many groups behind each rule (credited with 10% and 20%), advocacy is credited with only part of a rule, the deaths it averts are mostly of older adults, the benefits come years later and the soot standard's roll-out has stalled. The biggest uncertainties are the shared years a won reform counts, the missing-data discount and EDF's shares of the two rules; every branch is discounted for missing data, and the fisheries and farm branches, small here, rest on judged reach.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Environmental Defense Fund (health and nature)",
@@ -480,7 +480,7 @@
       "section": "reach",
       "label": "EPA soot standard (2024): deaths a year avoided once in effect",
       "format": "integer",
-      "explainer": "The shared figure for this rule (facts: climate), read by every model that counts it: 3,000 a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults and 2,100 for the over-64s.",
+      "explainer": "The shared figure for this rule (facts: climate): {{row:pm_deaths_per_year}} a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults and 2,100 for the over-64s.",
       "unit": "deaths / year",
       "formula": "@climate.us_pm_naaqs_2024_deaths_per_year"
     },
@@ -586,7 +586,7 @@
       "format": "number",
       "formula": "0",
       "unit": "animal-years",
-      "explainer": "Fisheries limits leave more fish in the sea; whether a wild fish's life is better or worse than none is unknown, so their welfare is left out (0), as in the site's other fisheries branches."
+      "explainer": "Fisheries limits leave more fish in the sea; whether a wild fish's life is better or worse than none is unknown, so their welfare is left out (0)."
     },
     {
       "id": "p_success",
@@ -636,7 +636,7 @@
       "format": "number",
       "formula": "(1 - @death_ages.cvd_share_80plus_of_70plus_usa) * 0.5 * (@moral_weights.givewell_age_70_74 + @moral_weights.givewell_age_75_79) + @death_ages.cvd_share_80plus_of_70plus_usa * @moral_weights.givewell_age_80_84",
       "unit": "units of value",
-      "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of US cardiovascular deaths at 70 or older that are at 80 or older, as in the British Heart Foundation model (families/high-income-care.md)."
+      "explainer": "GiveWell's five-year weights for 70-74 and 75-79 (their mean) and for 80 and over, mixed by the share of US cardiovascular deaths at 70 or older that are at 80 or older (families/high-income-care.md)."
     },
     {
       "id": "rich_value_per_death",
@@ -663,7 +663,7 @@
       "format": "number",
       "formula": "@death_ages.cvd_yld_share_gbr / @death_ages.cvd_deaths_per_daly_gbr",
       "unit": "DALYs per death",
-      "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About 2.5 healthy years of illness per death, counted in healthy years (row pm_illness_dalys)."
+      "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About {{row:pm_illness_dalys_per_death}} healthy years of illness per death, counted in healthy years (row pm_illness_dalys)."
     },
     {
       "id": "pm_wait",
@@ -722,7 +722,7 @@
       "label": "Increase in earnings per IQ point",
       "format": "percent",
       "formula": "@givewell_shared.wage_gain_per_iq_point",
-      "explainer": "The shared figure (GiveWell, 0.67% per IQ point), read as a gain in ln(consumption)."
+      "explainer": "The shared figure (GiveWell, {{row:iq_wage_gain}} per IQ point), read as a gain in ln(consumption)."
     },
     {
       "id": "resource_sharing",
@@ -730,7 +730,7 @@
       "label": "Household sharing multiplier on an earnings gain",
       "format": "multiple",
       "formula": "@givewell_shared.resource_sharing_multiplier",
-      "explainer": "The shared multiplier for later-life income gains shared within the household (facts: givewell_shared), as the site's other US models apply it."
+      "explainer": "The shared multiplier for later-life income gains shared within the household (facts: givewell_shared)."
     },
     {
       "id": "iq_years",
@@ -819,7 +819,7 @@
         "high": 0.03
       },
       "kind": "judgment",
-      "explainer": "No income evaluation of these reforms was found. Catch limits with secure access let stocks recover (Costello, Gaines & Lynham 2008, Science 321: catch-share fisheries half as likely to collapse), raising catch value once they do; in the first years fishers may catch less, and fishing is only part of most small-scale fishers' income. Our judgment, +0.5% a year (−0.5% to +3%), the same as The Nature Conservancy model's fisheries rules, for the same kind of reform."
+      "explainer": "No income evaluation of these reforms was found. Catch limits with secure access let stocks recover (Costello, Gaines & Lynham 2008, Science 321: catch-share fisheries half as likely to collapse), raising catch value once they do; in the first years fishers may catch less, and fishing is only part of most small-scale fishers' income. Our judgment, +0.5% a year (−0.5% to +3%)."
     },
     {
       "id": "fish_wait",
@@ -934,7 +934,7 @@
       "section": "adjustments",
       "label": "EPA soot standard: share of the deaths that wouldn't have been avoided anyway",
       "format": "percent",
-      "explainer": "The shared figure for this rule (facts: climate): 90% (70% to 100%); EPA's baseline already holds the rules then in force.",
+      "explainer": "The shared figure for this rule (facts: climate): {{row:pm_counterfactual_adj}} (70% to 100%); EPA's baseline already holds the rules then in force.",
       "formula": "@climate.us_pm_naaqs_2024_counterfactual"
     },
     {
@@ -948,7 +948,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "EDF and the Moms Clean Air Force pressed for a strong standard and EDF intervened to defend it in the D.C. Circuit (upheld 26 June 2026), beside the American Lung Association, Earthjustice, NRDC, Sierra Club, the Clean Air Task Force and community groups; EPA's science advisers backed a tighter limit, and industry lobbied against it. Earthjustice, counsel to several of these groups, is credited with 25% in its own model; the two shares sum well within the advocacy behind the rule. Our judgment, 10% (4% to 25%).",
+      "explainer": "EDF and the Moms Clean Air Force pressed for a strong standard and EDF intervened to defend it in the D.C. Circuit (upheld 26 June 2026), beside the American Lung Association, Earthjustice, NRDC, Sierra Club, the Clean Air Task Force and community groups; EPA's science advisers backed a tighter limit, and industry lobbied against it. Our judgment, 10% (4% to 25%).",
       "source": {
         "title": "EDF (2025), Trump's EPA abandons defense of national soot standard that saves lives",
         "url": "https://www.edf.org/media/trumps-epa-abandons-defense-national-soot-standard-saves-lives",

@@ -15,7 +15,7 @@ Previous round:
 (none)
 
 Verdict: pass
-Model-sha: 9492085184dab31ae4615c2099a5073fb212ca2706f670618f0a56d021e9df4f
+Model-sha: 71b3816a6126f76c3548676651095f217a62aafa8e1ec5c6e8970da53db6387c
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -24,3 +24,5 @@ Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@h
 Re-stamped (16 Nov 2026): Pre-audit gate cleanup: judgments' explainers name their reference class (sourced); bystanders per arrest read from @cardiac_arrest.ohca_bystanders_per_arrest and ln 2 from @givewell_shared.ln_consumption_per_doubling (same best values); some judgment ranges widened where no evidence anchors them; no peer-model comparisons in explainers. Mechanical: headline unchanged, against 2b148c62.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.

@@ -1,6 +1,6 @@
 # Audit: silverlining-charityevals, round 4 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: 0.9885 tco2e/$ = 0.1944 years of healthy life per 1,000 dollars (combined range 0.0016-24.0 tco2e/$); cause median 0.001421 (x137, unchanged cause, see round 3). Verdict: pass
-Model-sha: 4faccb30419583d3209d3ef23d53489c2ff3cbe16b7a51a5f481e23296d31790
+Model-sha: e9fd0c5b59ba5e3f0e2fb0c15d49ec340f7c7ff905cdba172bdb7c5d618c00d2
 Scope: commit 7e73f6cd only: new rows `public_payer_uov_per_dollar`, `pol_public_cost_uov`, `public_cost_uov_per_year`, `tco2e_from_uov` (new `bridges` section), `outcome_total` (+ `tco2e_from_uov`); the non-death damage change (0.6, side effect) as it reaches the bridge copy; the summary and write-up sentences stating the result.
 Mechanical: lint 0 high / 1 medium (outlier, reason given in the summary, as round 3) / 1 low; invariants none; `check.ts` all models valid; normalization-audit not re-run (brief did not ask).
 
@@ -23,3 +23,7 @@ Mechanical: lint 0 high / 1 medium (outlier, reason given in the summary, as rou
 | `@public_funds.mcpf`, `us_federal_payer_multiple` | facts/public_funds.json (judgments, Dahlby 2008 anchor) | not new to this commit | read as shared; no input of this model |
 | `@united_states.ce_expenditure_per_person_2024` | https://www.bls.gov/news.release/archives/cesan_12192025.htm | not re-fetched | existing shared fact, quote $78,535 per consumer unit / 2.4 people = 32,723 checked arithmetically |
 | `noaa_srm_dollars` inputs | unchanged | not in scope | used as the branch's own dollars |
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 1a9667aa.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.

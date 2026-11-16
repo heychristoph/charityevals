@@ -20,7 +20,7 @@ Families who have lost their homes get shelter and the basics to cook, sleep and
 ### How the model works
 
 - **Cost:** the 2025 accounts. Fundraising, and ShelterBox USA's own costs, are spread over the programme. Donated stock and freight (£0.6m) count as others' resources, not as ShelterBox's cost.
-- **Value per person:** the money that reaches people as shelter, items, materials or cash (our judgment: 65% of grants and direct costs), divided by the people reached. That comes to about 46 dollars a person, worth 80% of that to the people who get it (in-kind aid is worth somewhat less to people than its cost).
+- **Value per person:** the money that reaches people as shelter, items, materials or cash (our judgment: 65% of grants and direct costs), divided by the people reached. That comes to about 46 dollars a person, worth {{row:inkind_value_share}} of that to the people who get it (in-kind aid is worth somewhat less to people than its cost).
 - **Consumption:** the goods are valued against the consumption of poor households in two stand-in countries, weighted by our judgment of where the people were (the grants, adjusted for ShelterBox's own deliveries). Mozambique stands in for the poorest settings (Syria, Yemen, Chad, Somalia, Afghanistan, Burkina Faso, Gaza) and Bangladesh for the rest (Cameroon, Ethiopia, the rest of Asia and Jamaica). Durable shelter and repairs count over the years they are used.
 - **Deaths averted:** the crisis's excess death rate, times the share the aid averts (our judgment: 2%), over half a year.
 - **Illness averted:** acute episodes averted, times their length and disability weight.

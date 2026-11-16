@@ -37,7 +37,7 @@ Redwood received under $10,000 in 2024 and spent from its reserves. It ended the
 
 ### What drives the result
 
-The reason is that all of Redwood's work is against misaligned AI. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
+All of Redwood's work is against misaligned AI. For catastrophes the world survives, Rethink's typical misalignment project cuts deaths far less per dollar than its typical misuse project. Here, deaths of people alive now carry most of the value.
 
 ### Biggest uncertainties
 
@@ -54,7 +54,7 @@ The reason is that all of Redwood's work is against misaligned AI. FAR.AI and th
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with FAR.AI's model as the worked example. Round 1 of the independent audit found that 5% of the work had been counted as misuse work, from a paper that serves misuse and misalignment tests alike. By the template's rule such work counts as misalignment, so the share is now 0. That lowered the result from 0.26 to about 0.05. The round also split the transfers to Constellation: the office fit-out, already in use, now counts at a sixth of the cash. Round 2 passed with two medium findings, both fixed: the next dollar buys only research now the spin-off is done, raising it from 33% to 40%, and the high end of the misuse share is now set by the paper's likely share of the research. Credit is now weighted part by part, lowering the result by 5%. A verification round checked the changes. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. Independent audits are in audits/redwood-research-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit found that 5% of the work had been counted as misuse work, from a paper that serves misuse and misalignment tests alike. By the template's rule such work counts as misalignment, so the share is now 0. That lowered the result from 0.26 to about 0.05. The round also split the transfers to Constellation: the office fit-out, already in use, now counts at a sixth of the cash. Round 2 passed with two medium findings, both fixed: the next dollar buys only research now the spin-off is done, raising it from 33% to 40%, and the high end of the misuse share is now set by the paper's likely share of the research. Credit is now weighted part by part, lowering the result by 5%. A verification round checked the changes. The funging adjustment was set to 1 in November 2026 because the next-dollar figure already asks whether money is the constraint. Independent audits are in audits/redwood-research-charityevals/.
 
 ### Sources
 

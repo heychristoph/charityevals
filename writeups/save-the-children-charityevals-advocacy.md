@@ -10,9 +10,9 @@ Besides its programmes, Save the Children UK spends about 13.5 million pounds a 
 
 **Nutrition for Growth** (about a seventh). The March 2025 summit's $27 billion of commitments, half of them spent, valued at the site's shared figure for a dollar of government spending, less the aid displaced; the campaign added 1% and Save the Children UK has 10% of the credit.
 
-**The two-child limit** (under a tenth). The UK government removes the two-child limit on Universal Credit from April 2026, costing £2.4 billion in its first year, about £5,000 a year for each of the 470,000 households affected. The gain is valued on the log-income scale at these families' consumption (40% of the UK average per person), less the loss to those who pay for it (a side effect), for the years a won reform counts. Campaigners caused 30% of the decision, Save the Children UK has 12% of the coalition's resources, and the campaign ran about four years.
+**The two-child limit** (under a tenth). The UK government removes the two-child limit on Universal Credit from April 2026, costing £2.4 billion in its first year, about £5,000 a year for each of the 470,000 households affected. The gain is valued on the log-income scale at these families' consumption ({{row:tcl_consumption_share}} of the UK average per person), less the loss to those who pay for it (a side effect), for the years a won reform counts. Campaigners caused 30% of the decision, Save the Children UK has 12% of the coalition's resources, and the campaign ran about four years.
 
-The three wins get 30% more for the year's other campaigns (aid cuts, debt, child marriage, school safety, children in the COP30 text). Because they are past wins set against past spending, the next dollar counts at Save the Children's own share of the average (54%, from its accounts: money is short after the aid cuts, but the campaigns credited here are won).
+The three wins get 30% more for the year's other campaigns (aid cuts, debt, child marriage, school safety, children in the COP30 text). Because they are past wins set against past spending, the next dollar counts at Save the Children's own share of the average ({{row:marginal_vs_past_average}}, from its accounts: money is short after the aid cuts, but the campaigns credited here are won).
 
 ### What drives the result
 

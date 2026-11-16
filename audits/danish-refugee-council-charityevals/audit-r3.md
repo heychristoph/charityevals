@@ -17,7 +17,7 @@ Other changes checked:
 (none)
 
 Verdict: pass (0 high, 0 medium, 0 low)
-Model-sha: 6a5f2f76c1c9bcf695ba38580bf4f9da2bccd9935d7c6a970c370d37100e088d
+Model-sha: 5af7b823789317c83f07147bec19bb4849a9b26724250d6999a96c2c8987ffeb
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
@@ -27,3 +27,7 @@ Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@h
 Re-stamped (16 Nov 2026): Local market spillover reads the new shared fact cash.local_market_spillover_share (same value and range). Mechanical: headline unchanged, against 2b148c62.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

@@ -1,7 +1,7 @@
 # Audit: refugee-council-charityevals, round 2 (verification)
 Result: 1.835e-6 daly/$ = 0.001835 years of healthy life per 1,000 dollars (combined range 0.00037-0.0090). Verdict: pass.
 Verdict: pass
-Model-sha: e35fbb477a4227ce898886f980188bb06193b0a513bfc0ea93f814fe3eaaf145
+Model-sha: 8ec471f9ffe2b9f0d6c71aca281052f94ba4d847c25df7b586be6d9b004f0e77
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, summary gives the reason); simulation stable (5% 0.42, 95% 2.45 x best guess); normalization-audit printed no line for this model (generated/ reverted).
 
 Round-1 findings:
@@ -17,3 +17,7 @@ New findings: none. Spot-checked that the new rows are ranged judgments with exp
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against e247896f.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.

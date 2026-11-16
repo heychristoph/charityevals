@@ -33,7 +33,7 @@ This is a past average: the period's wins against the period's spending. The law
 
 The tools' switches take 80% for overlap with the law's projected uptake of its own credits, and 50% for the contractors, rebate programmes and volunteers who also brought them about, of which Rewiring America's own share of the cost it ran with its affiliate is {{row:tools_own_cost_share}}. Both branches take the evidence step (80%) and the shared missing-data step. The rest of the work, mainly manufacturer deals, the incentives database and advice to states, adds 20% to the tonnes. The households' money and the asthma averted go into tonnes only through the site's fixed bridges, so they move with their own sliders.
 
-The total is divided by a typical year's spending in 2021-2024. Those years are inside the Windward Fund's accounts, so we judge the average year at 0.9 of 2024's reported cost. The tonnes carry a little more air pollution than US power's, since gas is no longer burned at ground level, and 15% of them are upstream methane. The next dollar is valued at 40% of the average: the once-only win is in, its home credits are gone, and new money goes to state work on electricity costs.
+The total is divided by a typical year's spending in 2021-2024. Those years are inside the Windward Fund's accounts, so we judge the average year at 0.9 of 2024's reported cost. The tonnes carry a little more air pollution than US power's, since gas is no longer burned at ground level, and 15% of them are upstream methane. The next dollar is valued at {{row:marginal_vs_past_average}} of the average: the once-only win is in, its home credits are gone, and new money goes to state work on electricity costs.
 
 ### What drives the result
 

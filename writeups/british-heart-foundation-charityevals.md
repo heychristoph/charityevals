@@ -42,7 +42,7 @@ The implementation pilots follow the same chain at UK scale:
 - **Timing:** brought forward 3 years, after a 5-year wait.
 - **Adjustments:** trust 0.6, and BHF's share of the resources behind the piloting 60%. As for research, credit is for the piloting, not for the NHS's later cost of delivery.
 
-The policy branch follows the government's own impact assessment of the law. Its figures are the site's shared tobacco figures, the same as in our Cancer Research UK model:
+The policy branch follows the government's own impact assessment of the law. Its figures are the site's shared tobacco figures:
 
 - **Effect:** 8 percentage points of each covered cohort kept from smoking. The assessment's central scenario says 9.2.
 - **Health gain:** 3 healthy years lost per young smoker, arriving about 40 years later and discounted.
@@ -112,7 +112,7 @@ Rebuild, independent audit round 1 (1 high, 6 medium, 7 low). What changed:
 
 Rebuild, independent audit round 2: no high findings, 1 medium, 10 low. The auditor checked every new death-age fact against the source. The medium is that the family's other charityevals research model (St Jude) doesn't yet split its DALYs into deaths valued by age. The lows each move this result by 3% or less, so they are left as they are: weighting the research deaths by where the gains fall, five-year weights at 50–69, a UK illness share for smoking, and judged over-80 shares where data exists. Two wording fixes were made.
 
-Change of method (2026-11-13), from the audit of our Cancer Research UK model: industry's part of the field is now global pharmaceutical R&D times cardiovascular's share of it (about 7%, a judgment), as for cancer, instead of the share industry pays of all US medical research. BHF's share of the field fell from 1% to 0.5%, and the result by about half.
+Change of method (2026-11-13): industry's part of the field is now global pharmaceutical R&D times cardiovascular's share of it (about 7%, a judgment), instead of the share industry pays of all US medical research. BHF's share of the field fell from 1% to 0.5%, and the result by about half.
 
 Shared tobacco figures (2026-11-14), verified in audits/british-heart-foundation-charityevals/audit-r1.md: the policy branch reads the site's shared tobacco figures, with credit as BHF's share of the campaigning groups' share, and second-hand smoke and vaping as side-effect rows in place of part of the unmodelled share. The result moved by under 1%.
 

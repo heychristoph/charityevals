@@ -22,7 +22,7 @@ Only the changed rows. `ltr_value_per_home` and `unmodelled_benefits_adj` are la
 Unchanged from round 2: `$missing_data_discount`, `$uov_per_daly`, `resp_counterfactual_adj`, `resp_price_ratio`, `resp_inkind_value`.
 
 Verdict: pass. Findings: 0 high, 0 medium, 3 low.
-Model-sha: 6f164cc34f0e2b3762cb3a5c3537201c375abf96698c87d1308c0d762f2f1bf5
+Model-sha: ffb56327c2eb886fb884b245d943293bac122763933b2c33dce31759c8c32ff2
 
 Re-stamped after merge: the summary low fixed ("about a fifth" → "about a quarter", computed 23%); no other change.
 
@@ -32,3 +32,5 @@ Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (co
 Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against bebc953e.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b370f40.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

@@ -35,7 +35,7 @@ No single input changes the result by more than about a quarter. The joint range
 
 Only in the adjustments we add on top. These are judgments of ours and are labelled as such.
 
-- **Salary sacrifice:** we treat the gap between staff pay and what staff could earn elsewhere as an in-kind donation. For GiveDirectly it is small: staff pay is about 8% of cost and the gap about 15%, so the result falls by about 1.4%.
+- **Salary sacrifice:** we treat the gap between staff pay and what staff could earn elsewhere as an in-kind donation. For GiveDirectly it is small: staff pay is about {{row:staff_cost_share}} of cost and the gap about 15%, so the result falls by about 1.4%.
 - **Shared credit:** GiveDirectly delivers transfers itself, so full credit and shared credit give the same answer.
 
 

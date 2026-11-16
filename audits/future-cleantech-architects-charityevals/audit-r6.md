@@ -1,6 +1,6 @@
 # Audit: future-cleantech-architects-charityevals, round 6 (verification of the two cost explainers only)
 Result: 0.001216 tco2e/$ = 7.275e-4 years of healthy life per 1,000 dollars (unchanged; combined range 1.573e-5 to 0.03364).
-Model-sha: b617b37cef687e2d1407c18cfc7dc39dcc80d19fedf665b8daa109a5ba84d1ba
+Model-sha: fde487198e8be66c9891ddb8a93e5258a2622459db16f5c0463fe4c59e58c0ac
 Scope: the `ren_tonnes_per_year` and `h2_tonnes_per_year` explainers and the matching write-up sentences. Mechanical: `audit-model.ts` reproduces the result and range; `check.ts` all models valid. No value or formula changed.
 
 ## Checks
@@ -23,3 +23,5 @@ Verdict: pass
 Re-stamped (15 Nov 2026): damage beyond deaths in the tco2e bridge copy (mechanical); unmodelled_benefits_adj tagged side_effect added (2.16, mechanical; headline unchanged at the default); summary figure updated
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.

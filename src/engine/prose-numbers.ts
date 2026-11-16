@@ -64,16 +64,20 @@ const MONTH = /\b(January|February|March|April|May|June|July|August|September|Oc
 // The headline's unit, right after the number.
 const YEARS_AFTER = /^(?:\s*(?:\*\*|<\/span>))*\s*(?:healthy\s+years?|years?\s+of\s+healthy\s+life|(?:healthy\s+)?life[- ]years?|DALYs?\s+averted|years?\s*(?:\(|,)?[^.;\n]{0,40}per\s+\$1,000|[^.;\n]{0,25}per\s+\$1,000)/i;
 // A source's own figure, quoted as theirs: kept typed.
-const ATTRIBUTED = /\b(?:reports?|reported|according to|cites?|cited|quotes?|quoted|surveys?|study|studies|trials?|papers?|publish(?:es|ed)?|finds|found|their|says|said|states|stated|claims?|anchors?|model's|et al|(?:19|20)\d\d's)\b/i;
+const ATTRIBUTED = /\b(?:reports?|reported|according to|cites?|cited|quotes?|quoted|surveys?|study|studies|trials?|papers?|reviews?|publish(?:es|ed)?|finds|found|their|says|said|states|stated|claims?|anchors?|model's|et al|(?:19|20)\d\d's)\b/i;
 // "0.17 to 5.4", "between 17 and 31", "15%–40%": a range's end, not a value.
 const RANGE_AFTER = /^\s*(?:to|–|-|and)\s*(?:about\s+)?[−-]?\$?\d/;
 const RANGE_BEFORE = /(?:\b(?:from|between|to|and)\s+(?:about\s+)?|\d[%×]?\s*(?:–|-)\s*)$/;
+// An audit round's history ("Round 3 … now judged at about $15,000"): what was set then, kept typed.
+const HISTORY = /^Round\s+\d|\bround\s+\d+\b/i;
 const CONDITIONAL =/\b(?:if|when|unless|otherwise|would|were)\b|^(?:off|on)\b/i;
 const STOP = new Set("with from that this than each year years dollar dollars share value total cost costs count counts people person rate number other into over after before their which about model result adjustment factor ours what where them they then also only more less much many some such per".split(" "));
 const words = (s: string) => new Set(s.toLowerCase().split(/[^a-z]+/).filter((w) => w.length >= 4 && !STOP.has(w)).map((w) => w.slice(0, 5)));
 /** Whether a sentence names what a row is (a word of its label). */
 const mentions = (sentence: string, label: string) => { const s = words(sentence); return [...words(label)].some((w) => s.has(w)); };
 const HEDGE =/\b(?:about|around|roughly|some|nearly|almost|approximately|over|under|~)\s*(?:\*\*)?\s*$/i;
+// The model's own headline sentence, just before the number: "At the defaults it averts about".
+const STALE_HEAD = /\bat\s+the\s+defaults,?\s+(?:it|this\s+model|the\s+model|the\s+work|[\w'’ -]{1,40}?)\s+(?:averts?|gives?|buys?|adds?|comes?\s+to)\s+(?:about\s+|around\s+|roughly\s+)?(?:\*\*)?\s*$/i;
 
 /** Regions no number in is the model's: placeholders, code, link targets, URLs, HTML tags, quotations,
  * block quotes, a write-up's sources. Figure spans are matched separately. */
@@ -127,8 +131,10 @@ function figuresOf(lib: Library, m: ResolvedModel): Figure[] {
   const ours = compute(lib, m, av), theirs = compute(lib, m, av, {}, "evaluator");
   for (const r of m.rows) {
     const t = formatValue(ours[r.id], r.format);
-    // A row that reads no other row (a number, a shared fact, an assumption) is given, not worked out.
-    const input = !r.node || !r.deps.length;
+    // A row typed in the model (a number, a constant formula) is given, usually its source's figure. A row
+    // that reads a shared fact, an assumption or another model is the model's own, and goes stale when that
+    // moves ("the next dollar counts at 64%" for @next_dollar.x).
+    const input = !r.node || (!r.deps.length && !r.factDeps.length && !r.assumptionDeps.length && !r.modelDeps.length);
     out.push({ text: t, placeholder: `{{row:${r.id}}}`, what: `row ${r.id}`, input, row: r.id });
     const e = formatValue(theirs[r.id], r.format);
     if (e !== t) out.push({ text: e, placeholder: `{{row:${r.id}:evaluator}}`, what: `row ${r.id} (evaluator view)`, input, row: r.id });
@@ -193,6 +199,12 @@ export function scanText(lib: Library, m: ResolvedModel, text: string, opts: { w
         continue;
       }
     }
+    // The headline typed and gone stale: the model's own result at the defaults ("At the defaults it
+    // averts about 4.7 years…" where the model now gives 4.6), not a source's, a case or a range's end.
+    if (years && !hits.length && STALE_HEAD.test(text.slice(Math.max(0, i - 80), i)) && !named && !attributed && !CONDITIONAL.test(sentence) && !HISTORY.test(sentence) && !RANGE_AFTER.test(after) && !RANGE_BEFORE.test(before)) {
+      const head = figs.find((f) => f.placeholder === "{{result}}");
+      if (head) { add({ placeholder: "{{result}}", what: `the result, typed stale (the page shows ${head.text})`, safe: true, coarse: true }); continue; }
+    }
     // The plausible range: both ends typed in one sentence that says it's the range.
     const ends = hits.filter((f) => f.placeholder === "{{low}}" || f.placeholder === "{{high}}");
     if (ends.length && /\brange\b/i.test(sentence)) {
@@ -213,6 +225,7 @@ export function scanText(lib: Library, m: ResolvedModel, text: string, opts: { w
       : !enough ? "too few digits to be sure"
       : attributed || named ? "attributed to a source"
       : CONDITIONAL.test(sentence) ? "a case, not the value (if, when, would)"
+      : HISTORY.test(sentence) ? "an audit round's history"
       : RANGE_AFTER.test(after) || RANGE_BEFORE.test(before) ? "one end of a range"
       : !opts.row && !mentions(sentence, m.byId.get(f.row!)!.label) ? "the sentence doesn't name the row"
       : undefined;

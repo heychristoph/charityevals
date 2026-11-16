@@ -35,7 +35,7 @@ The [model](/cool-earth/cool-earth-charityevals) follows the site's conservation
 - **Delivery:** 90%.
 - **Evidence:** 0.7.
 
-The pandemic risk uses the same shared figures as the site's other forest model.
+The pandemic risk uses the shared figures.
 
 **The cash.** Cool Earth says it gave £2 million directly to communities. Its accounts suggest about £1.2 million of that was cash. The rest is the hubs' local staff, equipment and non-cash projects.
 
@@ -44,7 +44,7 @@ We take the cash as shared by about 40,000 people. That is a judgment: Cool Eart
 Two side effects are added, as for other cash:
 
 - deaths averted, +12% (anchored on GiveWell's analysis of GiveDirectly, scaled to the communities' lower child mortality);
-- gains to traders and others where the money is spent, +10%.
+- gains to traders and others where the money is spent, +{{row:liv_spillover_share}}.
 
 Credit and the counterfactual are 1: the cash is Cool Earth's own, and no one else would have given it.
 
@@ -83,7 +83,7 @@ Independent auditors checked the model in four rounds; the receipts are in audit
 - **Round 2** passed. It moved the deaths averted onto GiveWell's 2024 analysis of GiveDirectly and capped the cash at what the accounts allow. It also set the forest's baseline loss from Cool Earth's own record, which lowered the forest branch.
 - **Rounds 3 and 4** verified those changes. One explainer figure without a source was removed.
 
-The site's shared figures for tropical forest loss, the pandemic risk of deforestation and a COVID-scale pandemic's ages were moved into shared data in this build. The Nature Conservancy's model reads them too, with its result unchanged.
+The site's shared figures for tropical forest loss, the pandemic risk of deforestation and a COVID-scale pandemic's ages were moved into shared data in this build.
 
 ### Sources
 
