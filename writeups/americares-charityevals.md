@@ -20,7 +20,7 @@ Each programme branch counts patients, the risk of death the care removes and th
 
 - **Donated goods count in the credit share, not the cost.** The medicines are drug companies' resources, valued at what they would cost where they're used (half of US list price for US brand drugs, about a third for medicine shipped abroad), and partner clinics' staff are theirs. Americares' cash is credited with its share of all of that: about 2% for the assistance programme, 8% for donated medicine to clinics, 85% for its own clinics.
 - **The assistance programme** (about 224,000 patient-years of medicine, our estimate from its value) adds little: the companies would most likely run their programmes in-house or through another administrator without Americares.
-- **Its clinics and training** carry most of the result: clinic patients at outpatient-care risks as in our model of Doctors Without Borders' outpatients, trained health workers from the research on training (Rowe et al. 2018).
+- **Its clinics and training** carry most of the result: clinic patients at our judged risk reduction for outpatient care, trained health workers from the research on training (Rowe et al. 2018).
 - **Emergencies** are a humanitarian-relief model: excess deaths during the crisis, a share averted by the health care, illness treated, and goods, water and cash on the site's log-income scale over the months they cover, in four stand-in places (the US a third). The goods take no evidence step, being valued at their cost.
 
 Every branch's effect is our judgment, not measured, so each is discounted by the shared missing-data slider.

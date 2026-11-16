@@ -25,7 +25,7 @@ Raising money cost £140.2m. The shops and events cost £0.9m more than they bro
 
 ### How the model works
 
-Research is the medical-research template's chain, as in our [British Heart Foundation model](/british-heart-foundation-charityevals):
+Research is the medical-research template's chain:
 
 - **Burden:** the world's cancer burden, 255 million DALYs a year (WHO Global Health Estimates 2021).
 - **Share averted:** what a year of the field's research averts once adopted, 0.13% a year (one judgment, 0.03% to 0.5%). The US cancer death rate fell 34% from 1991 to 2022. About half of that came from earlier detection and better treatment, the rest mostly from less smoking. Rich countries carry under a quarter of the world's cancer burden, uptake elsewhere is lower, and about half of the gain is uptake of older advances rather than new research.
@@ -33,7 +33,7 @@ Research is the medical-research template's chain, as in our [British Heart Foun
 - **Adjustments:** our trust in the evidence (0.7), then Cancer Research UK's share of the world's cancer research funding, about 0.6%. All funders together spend about $100bn a year: some $16bn from governments and charities, and some $85bn from industry, for which cancer is the largest area (38% of its new trials).
 - **Check:** the 10% return in UK health gains found for UK cancer research implies about 30 times the chain's figure per pound. That study credits UK research with UK gains generously and calls itself a best case. The world also spends several times as much on cancer research as on heart research, for a smaller burden. The model shows both rows.
 
-The policy branch follows the government's impact assessment of the law. Its figures are the site's shared tobacco figures, which our British Heart Foundation, American Cancer Society and Campaign for Tobacco-Free Kids models also read:
+The policy branch follows the government's impact assessment of the law. Its figures are the site's shared tobacco figures:
 
 - **Effect:** 8 percentage points of each covered cohort kept from smoking.
 - **Health gain:** 3 healthy years lost per young smoker, arriving about 40 years later and discounted.
@@ -83,14 +83,13 @@ Mechanical checks: lint, the normalization invariants and the reference class (`
 
 Independent audit round 1 (1 high, 0 medium, 2 low). What changed:
 - **Cancer Research UK's share of the field:** industry's cancer research was scaled from the share industry pays of all US medical research. Cancer is industry's largest area (38% of its new trials), so industry's part is now global pharmaceutical R&D times cancer's share. The share fell from 1.5% to 0.6%, and the result from 0.003 to 0.002.
-- **Our British Heart Foundation model** counted industry the old way. It now counts cardiovascular's share of the industry's R&D too, which halves its result.
 - **Smaller fixes:** the half of the fall in cancer deaths credited to detection and treatment is labelled as our judgment; the royalty shares passed on are said to be counted as cost.
 
 Independent audit round 2: a pass, with no high findings, 1 medium and 2 low. What changed:
-- **The medium:** the British Heart Foundation change above.
+- **The medium** was in another model and is fixed there.
 - **The lows:** the range of the share of the field now says what widens it beyond its anchors, and the check against the returns study gives the right ratio, about 30 times.
 
-Verification round 3: a pass. It corrected one figure in the share of the field's explainer and the British Heart Foundation write-up's branch shares; a last verification checked those.
+Verification round 3: a pass. It corrected one figure in the share of the field's explainer; a last verification checked those.
 
 Verification round 5 (2026-11-14): a pass. The policy branch now reads the site's shared tobacco figures, with credit as Cancer Research UK's share of the campaigning groups' share, and second-hand smoke and vaping as side-effect rows in place of part of the unmodelled share. The result moved by under 1%.
 

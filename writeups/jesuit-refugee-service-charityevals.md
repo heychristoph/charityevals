@@ -26,7 +26,7 @@ Violence averted by reconciliation, education's gains beyond earnings, livelihoo
 
 ### How this model was checked
 
-Built with charityevals' humanitarian-relief template on 14 November 2026, as branches over JRS's 2025 programme expenses (Convention 4), mirroring our NRC model wherever the two charities do the same work; the mechanical audit passes. Round 1 of the independent audit verified every spending line, reach count and key study and found no high findings, three medium and five low. Education's counterfactual now asks only whether another provider would have run the schools (the children's lack of schooling is in the access share), the access share fell from 30% to 25% with a wider range because JRS publishes no pupil count and its Chad secondary schools lost US funding, and MHPSS's suicides averted and health care's deaths averted became rows of their own. The result fell from 0.40 to 0.37. A scoped verification round checked the changes.
+Built with charityevals' humanitarian-relief template on 14 November 2026, as branches over JRS's 2025 programme expenses (Convention 4); the mechanical audit passes. Round 1 of the independent audit verified every spending line, reach count and key study and found no high findings, three medium and five low. Education's counterfactual now asks only whether another provider would have run the schools (the children's lack of schooling is in the access share), the access share fell from 30% to 25% with a wider range because JRS publishes no pupil count and its Chad secondary schools lost US funding, and MHPSS's suicides averted and health care's deaths averted became rows of their own. The result fell from 0.40 to 0.37. A scoped verification round checked the changes.
 
 ### Sources
 

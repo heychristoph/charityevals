@@ -1,7 +1,7 @@
 # Audit: brennan-center-for-justice-charityevals, round 12 (scoped: jus_ue_families, jus_ue_earnings and the two shared facts)
 
 Result: 0.07019 years of healthy life per $1,000 (7.019e-5 DALYs per dollar), up 0.1% from round 11 (0.0701159) (combined range 0.006484-0.7599); cause median 0.06519 (x1.08). Verdict: pass.
-Model-sha: 35ff70bac580c71042f3e370d45d2fdcc8670e00328440040b56b8f21624f33e
+Model-sha: 29bd8bb0b308f3ad8265c8c0c5932bd0d63e40d6de1fa4d252ebb15675e7a03f
 Scope: scoped verification round, not a re-audit; only the two rows changed on this branch and the two facts they read.
 Mechanical: audit-model findings (0).
 Previous round: no open findings from round 11.
@@ -34,3 +34,5 @@ Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against b10cf49b.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

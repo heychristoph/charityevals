@@ -4,7 +4,7 @@ The International Rescue Committee spent $1.33 billion in the year to September 
 
 ### How the model works
 
-**Nutrition** (about two fifths of the result). The IRC admitted 638,187 children under five and 85,163 pregnant or lactating women for treatment. Its own cost is about $110 an admission; UNICEF and WFP supply most of the therapeutic food. Half the children are severely wasted. Untreated, about 10% of them die, and treatment averts 60% of those deaths. A moderately wasted child counts at a fifth of that. These are the same figures as charityevals' Save the Children model.
+**Nutrition** (about two fifths of the result). The IRC admitted 638,187 children under five and 85,163 pregnant or lactating women for treatment. Its own cost is about $110 an admission; UNICEF and WFP supply most of the therapeutic food. Half the children are severely wasted. Untreated, about 10% of them die, and treatment averts 60% of those deaths. A moderately wasted child counts at a fifth of that. These are the site's shared figures for treating wasting.
 
 **Other health care** (about a sixth). This is primary, maternal and mental health care at 2,713 supported facilities, about $300 million once contraception, nutrition, vaccination and water are taken out. At $25 a person covered for a year, that is about 12 million people. A third of them live in acute crises, where deaths run at three times the normal rate, and the rest in protracted ones at 1.3 times. The care averts 10% of the excess.
 

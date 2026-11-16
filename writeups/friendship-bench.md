@@ -6,7 +6,7 @@ The model reproduces all 32 of HLI's intermediate figures.
 
 ### How the impact happens
 
-As for StrongMinds, HLI runs three bodies of evidence through the same chain (initial effect and decay, WELLBY conversion, adjustments, household spillovers) and combines them: the meta-analytic prior (50%), randomised trials of Friendship Bench (37%) and its monitoring data (12%). The cost is low, about $16 per person treated, which is why it comes out ahead of StrongMinds despite a smaller effect per person.
+HLI runs three bodies of evidence through one chain (initial effect and decay, WELLBY conversion, adjustments, household spillovers) and combines them: the meta-analytic prior (50%), randomised trials of Friendship Bench (37%) and its monitoring data (12%). The cost is low, about $16 per person treated.
 
 ### Biggest uncertainties
 

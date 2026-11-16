@@ -80,7 +80,7 @@ Six audit rounds (audits/effektiv-spenden-charityevals/). Round 1 found no high-
 - Lowered the wait for the funds' grants below the year-end balances, which December's giving inflates.
 - Corrected the write-up.
 
-Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes. Round 4 checked the move of two equal-weight lists to the site's live cause averages, and passed. Round 5 checked the advised gifts' move to the site's rule for advice (redirected money, counted only for the gain, with the evidence and missing-data steps), made when Longview Philanthropy's model was built, and passed; round 6 checked the wording that followed.
+Round 2 verified those changes and passed. Its two low findings were explainer wording. Round 3 checked those fixes. Round 4 checked the move of two equal-weight lists to the site's live cause averages, and passed. Round 5 checked the advised gifts' move to the site's rule for advice (redirected money, counted only for the gain, with the evidence and missing-data steps), and passed; round 6 checked the wording that followed.
 
 ### Sources
 
