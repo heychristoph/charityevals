@@ -12,14 +12,15 @@ merge of JSON can still drop or duplicate rows):
     by id, keeping each side's additions in place and honouring removals; lists of strings are unions with
     removals honoured; where both sides changed the same leaf differently, models/ take the branch's value
     (its audited version) and every other file keeps ours, each printed as CONFLICT. When the result equals
-    one side, that side's text is kept byte for byte; otherwise it is written as JSON.stringify(x, null, 2)
-    would (JS number format), with a model's one-line "beneficiaries".
+    one side, that side's text is kept byte for byte; otherwise every part equal to a side keeps that side's
+    text and the rest is laid out as JSON.stringify(x, null, 2) would (a model's "beneficiaries" on one line).
   - generated/ files the regeneration rewrites (bulk-summaries, distributions, usage, normalization-audit):
     ours, then regenerated.
   - audits/<id>/audit-r<n>.md added on both sides: ours keeps the number, the branch's moves to the next free one.
   - other text (scripts' registers such as the OURS table in beneficiary-countries.ts): each conflict hunk
     becomes the union of both sides' lines minus the lines either side removed; where both sides have an
-    entry with the same quoted key ("id": ...), the branch's wins (CONFLICT printed).
+    entry with the same quoted key ("id": ...), or a receipt's Model-sha or Verdict line, the branch's wins
+    (CONFLICT printed). A receipt's fingerprint is checked by vitest afterwards like any other.
   Anything left unmerged (a file deleted on one side and changed on the other): stops, merge left in progress.
 Then (unless --no-regen) the after-merge scripts: missing-data.ts, beneficiary-countries.ts --all, summaries.ts,
 normalization-audit.ts; generated/ and the models they touched are staged. Then (unless --no-checks)
@@ -243,7 +244,8 @@ def merge_json(path, base_txt, ours_txt, theirs_txt, log):
     return render(merged, cands, top_compact=("beneficiaries",) if path.startswith("models/") else ()) + "\n"
 
 
-KEYED = re.compile(r'^(\s*)"([^"]+)"\s*:')
+# An entry with a key: a quoted key in a register ("id": ...), or a receipt's Model-sha / Verdict line.
+KEYED = re.compile(r'^(\s*)(?:"([^"]+)"\s*:|((?:\W*)(?:Model-sha|Verdict))\b)')
 
 
 def merge_text_hunks(text, path, log):
@@ -253,7 +255,7 @@ def merge_text_hunks(text, path, log):
 
     def key(l):
         k = KEYED.match(l)
-        return k.group(1, 2) if k else None
+        return (k.group(1), k.group(2) or k.group(3)) if k else None
 
     def resolve(m):
         ours, base, theirs = (m.group(i).splitlines(keepends=True) for i in (1, 2, 3))
@@ -284,6 +286,8 @@ def resolve(branch, log):
     r = git("merge", "--no-ff", "--no-commit", branch, check=False)
     if "Already up to date" in r.stdout:
         return None
+    if git("rev-parse", "-q", "--verify", "MERGE_HEAD", check=False).returncode:
+        raise SystemExit(f"git merge didn't start: {(r.stdout + r.stderr).strip()[:500]}")
     status = {l[3:]: l[:2] for l in git("status", "--porcelain", "--no-renames").stdout.splitlines()}
     unmerged = {p for p, s in status.items() if s in UNMERGED}
     unresolved = []
@@ -420,7 +424,7 @@ def self_test():
         write("facts/next_dollar.json", {"id": "next_dollar", "rows": [{"id": "one", "value": 0.5}]})
         write("facts/shared.json", {"id": "shared", "rows": [{"id": "k", "value": 10}]})
         write("scripts/list.ts", 'const OURS = {\n  "a-model": { b: 1 },\n  "b-model": { b: 2 },\n};\n')
-        write("audits/m/audit-r1.md", "round 1\n")
+        write("audits/m/audit-r1.md", "round 1\nVerdict: pass\nModel-sha: " + "a" * 64 + "\n")
         write("generated/usage.json", "{}\n")
         compact = '{\n  "id": "n",\n  "source": { "title": "T", "url": "u" },\n  "rows": [\n    { "id": "a", "value": 1 },\n    { "id": "b", "value": 2.5e-7 }\n  ]\n}\n'
         write("models/n.json", compact)
@@ -436,6 +440,7 @@ def self_test():
         write("facts/shared.json", {"id": "shared", "rows": [{"id": "k", "value": 12}]})
         write("scripts/list.ts", 'const OURS = {\n  "a-model": { b: 1 },\n  "b-model": { b: 2 },\n  "t-model": { b: 3 },\n};\n')
         write("audits/m/audit-r2.md", "round 2 theirs\n")
+        write("audits/m/audit-r1.md", "round 1\nVerdict: pass\nModel-sha: " + "c" * 64 + "\nTheirs note.\n")
         write("generated/usage.json", '{"theirs": 1}\n')
         write("models/n.json", compact.replace('"value": 1 }', '"value": 7 }'))
         commit("feature")
@@ -450,6 +455,7 @@ def self_test():
         write("facts/shared.json", {"id": "shared", "rows": [{"id": "k", "value": 11}]})
         write("scripts/list.ts", 'const OURS = {\n  "a-model": { b: 1 },\n  "o-model": { b: 4 },\n};\n')  # ours removes b-model, adds o-model
         write("audits/m/audit-r2.md", "round 2 ours\n")
+        write("audits/m/audit-r1.md", "round 1\nVerdict: pass\nModel-sha: " + "b" * 64 + "\nOurs note.\n")
         write("generated/usage.json", '{"ours": 1}\n')
         write("models/n.json", compact.replace('    { "id": "b", "value": 2.5e-7 }\n', '    { "id": "b", "value": 2.5e-7 },\n    { "id": "c", "value": 3 }\n'))
         commit("main")
@@ -470,6 +476,8 @@ def self_test():
         assert rd("generated/usage.json") == '{"ours": 1}\n', "regenerated files keep ours (then the scripts rewrite them)"
         assert any(l.startswith("CONFLICT models/m.json .rows[b].value") and l.endswith("theirs") for l in logs), logs
         assert any(l.startswith("CONFLICT facts/shared.json") and l.endswith("ours") for l in logs), logs
+        r1 = rd("audits/m/audit-r1.md")
+        assert "c" * 64 in r1 and "b" * 64 not in r1 and "Ours note." in r1 and "Theirs note." in r1, r1
         n = rd("models/n.json")
         assert '"source": { "title": "T", "url": "u" },' in n and '{ "id": "a", "value": 7 }' in n and '{ "id": "b", "value": 2.5e-7 }' in n and '{ "id": "c", "value": 3 }' in n, n
         assert not git("status", "--porcelain").stdout.strip(), "everything committed"
