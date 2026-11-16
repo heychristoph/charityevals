@@ -1,6 +1,6 @@
 # Verification round (scoped)
 Result: -0.000428899 years of healthy life per $1,000 (ced per donor dollar -3.899). Verdict: **pass**.
-Model-sha: 8c19085b2323a5acbcc93e19de2a6c84e3a48a6d692678de8953a2f2af310a09
+Model-sha: 3c1a1e1f06fa53830110f59cb33e9d7b51c2a2252ee3df3cd6c30efbcbef8f5d
 Scope: only the mechanical round-5 changes (nine judgments moved into shared facts; one coalition pool with the grants' federal part in the denominator). audit-model.ts: 0 findings. check.ts: all models valid.
 
 Verdict: **pass**
@@ -16,3 +16,5 @@ Verdict: **pass**
 |---|---|---|---|
 | low | write-up, "State-law defence" bullet | Says the coalition's spending is "about $8 million"; the pool is now $8.5 million (3.5-20.5m). | Change "(about $8 million)" to "(about $8.5 million)" in writeups/the-humane-league-charityevals-other-programmes.md line 22. |
 Re-stamped (15 Nov 2026): this round's low findings fixed in explainers, write-ups and the egg-share fact's wording; no value changed.
+
+Re-stamped (16 Nov 2026): pre-audit cleanup: shared facts read (US layers, preemption chance, market leakage, evaluator side effects), reference classes named, ranges widened where evidence is thin; headline unchanged. Mechanical: headline unchanged, against 9d3d36e4.
