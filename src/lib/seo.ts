@@ -5,6 +5,7 @@ import { lib, modelUrl, primaryOf, modelFile, rankable } from "./data";
 import { assumptionValues, comparable, headline, modelsOf, type ResolvedModel } from "../engine/model";
 import { formatYears, plainModelName } from "./format";
 import { publisher, repo } from "./site";
+import { licenceOf } from "./licence";
 
 export const SITE = "https://charityevals.org";
 export const SITE_NAME = "charityevals";
@@ -112,8 +113,6 @@ export function modelMeta(m: ResolvedModel) {
   return { charity, owner, primary, name, title, description: clip(description), cause: CAUSE[charity.cause] };
 }
 
-const CC_BY_NC_SA_3_US = "https://creativecommons.org/licenses/by-nc-sa/3.0/us/";
-
 /** JSON-LD for a model page: the page, the charity it is about, the model as a dataset, breadcrumbs. */
 export function modelSchema(m: ResolvedModel, description: string) {
   const { charity, owner, primary, name } = modelMeta(m);
@@ -128,6 +127,9 @@ export function modelSchema(m: ResolvedModel, description: string) {
     name: charity.name,
     ...(charity.website && { url: charity.website, sameAs: [charity.website] }),
   };
+  // The terms the model can be reused under: a licence's address where it has one, else its wording.
+  const lic = licenceOf(m);
+  const license = lic.url ?? { "@type": "CreativeWork", name: lic.name };
   const dataset = {
     "@type": "Dataset",
     "@id": `${url}#model`,
@@ -137,6 +139,7 @@ export function modelSchema(m: ResolvedModel, description: string) {
     creator: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
     isAccessibleForFree: true,
+    license,
     about: { "@id": `${charityUrl}#charity` },
     keywords: ["cost-effectiveness analysis", CAUSE[charity.cause].toLowerCase(), charity.name, owner.name],
     distribution: [{
@@ -153,7 +156,7 @@ export function modelSchema(m: ResolvedModel, description: string) {
           url: m.source.url,
           author: ownerNode,
           ...(m.source.published && { datePublished: m.source.published }),
-          ...(m.source.license === "CC BY-NC-SA 3.0 US" && { license: CC_BY_NC_SA_3_US }),
+          ...(m.owner !== "charityevals" && { license }),
         },
         ...(m.source.sheet ? [{ "@type": "DigitalDocument", name: `${m.source.title}: spreadsheet`, url: m.source.sheet, author: ownerNode }] : []),
       ],

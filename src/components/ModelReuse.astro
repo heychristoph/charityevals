@@ -1,0 +1,49 @@
+---
+// A model's reuse terms and a one-line citation, in the links under its name: the licence from
+// licenceOf (ours, or the source's), anything slotted (an evaluator's permission), and a "Cite" button
+// that copies the citation with today's date.
+import { licenceLabel, licenceOf } from "../lib/licence";
+import { plainModelName } from "../lib/format";
+import { lib, modelUrl } from "../lib/data";
+import { abs } from "../lib/seo";
+import type { ResolvedModel } from "../engine/model";
+
+interface Props {
+  model: ResolvedModel;
+}
+const { model } = Astro.props;
+const licence = licenceOf(model);
+const text = licenceLabel(licence);
+const cite = JSON.stringify({ owner: model.owner, name: plainModelName(model.name), source: { publisher: model.source?.publisher }, url: abs(modelUrl(lib, model)) });
+---
+
+<span class="muted"> · {licence.url ? <a href={licence.url} rel="license noopener" data-track-kind="licence">{text}</a> : text}</span><slot />
+{" · "}<button type="button" class="link-button cite-button" data-cite={cite}>Cite</button>
+
+<script>
+  import { citation } from "../lib/licence";
+
+  // Delegated: the button sits in an island's slot.
+  document.addEventListener("click", (e) => {
+    const button = (e.target as Element | null)?.closest<HTMLButtonElement>("[data-cite]");
+    if (!button) return;
+    const { url, ...m } = JSON.parse(button.dataset.cite!);
+    const line = citation(m, url, new Date());
+    const done = () => {
+      button.textContent = "Citation copied";
+      setTimeout(() => (button.textContent = "Cite"), 1600);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(line).then(done, () => window.prompt("Citation", line));
+    else window.prompt("Citation", line);
+  });
+</script>
+
+<style>
+  .cite-button {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+</style>
