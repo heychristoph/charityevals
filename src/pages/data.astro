@@ -112,6 +112,13 @@ const newSection = (rows: { section?: string }[], i: number) => rows[i].section 
         </details>
       ))}
     </section>
+
+    <section class="download" aria-labelledby="download-title">
+      <h2 id="download-title">Download</h2>
+      <p class="small">
+        {[["/data/models.json", "Models"], ["/data/results.csv", "Results (CSV)"], ["/data/charities.json", "Charities"], ["/data/assumptions.json", "Assumptions"], ["/data/facts.json", "Facts"], ["/data/library.json", "Library"], ["/llms-full.txt", "All as text"]].map(([href, label], i) => <>{i > 0 && " · "}<a href={href}>{label}</a></>)}
+      </p>
+    </section>
   </div>
 </Base>
 
@@ -253,5 +260,10 @@ const newSection = (rows: { section?: string }[], i: number) => rows[i].section 
   }
   .facts tr:target {
     background: var(--blue-wash);
+  }
+  .download {
+    margin-top: var(--s7);
+    display: grid;
+    gap: var(--s2);
   }
 </style>
