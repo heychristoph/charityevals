@@ -6,6 +6,7 @@ import { licenceLabel, licenceOf } from "../lib/licence";
 import { plainModelName } from "../lib/format";
 import { lib, modelUrl } from "../lib/data";
 import { abs } from "../lib/seo";
+import { repo } from "../lib/site";
 import type { ResolvedModel } from "../engine/model";
 
 interface Props {
@@ -14,11 +15,15 @@ interface Props {
 const { model } = Astro.props;
 const licence = licenceOf(model);
 const text = licenceLabel(licence);
-const cite = JSON.stringify({ owner: model.owner, name: plainModelName(model.name), source: { publisher: model.source?.publisher }, url: abs(modelUrl(lib, model)) });
+const url = abs(modelUrl(lib, model));
+const cite = JSON.stringify({ owner: model.owner, name: plainModelName(model.name), source: { publisher: model.source?.publisher }, url });
+// Field ids from .github/ISSUE_TEMPLATE/report-error.yml.
+const report = `${repo}/issues/new?${new URLSearchParams({ template: "report-error.yml", model: model.id, page: url })}`;
 ---
 
 <span class="muted"> · {licence.url ? <a href={licence.url} rel="license noopener" data-track-kind="licence">{text}</a> : text}</span><slot />
 {" · "}<button type="button" class="link-button cite-button" data-cite={cite}>Cite</button>
+{" · "}<a href={report} rel="noopener" data-track-kind="report-error">Report an error</a>
 
 <script>
   import { citation } from "../lib/licence";

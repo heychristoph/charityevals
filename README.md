@@ -6,6 +6,8 @@ Every model is a JSON file in this repo. Every input has a source, a low/best/hi
 (observed, estimate, judgment) and a plain-language explainer. Shared moral weights and cross-cause
 exchange rates live in one file, and visitors can change them in the browser to re-rank everything.
 
+To suggest a charity, report an error or add a model, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Layout
 
 ```
