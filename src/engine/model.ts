@@ -451,21 +451,13 @@ export function hasRange(value: number | Range | undefined): value is Range {
   return typeof value === "object" && (value.low ?? value.best) !== (value.high ?? value.best);
 }
 
-/** Default assumption values (best guesses) with the user's overrides on top. */
 /** Every shared assumption's value: the reader's where they set one, else the default. A fixed rate
- * (taken from evidence, not offered as a slider) always has its default, whatever an old link says. */
+ * (taken from evidence, not offered as a slider) always has its default, whatever an old link says. The
+ * reader's values are taken as given, past a slider's ends too: src/lib/share-values.ts says which
+ * values a reader may set (the panel, share links and the MCP server all apply it). */
 export function assumptionValues(a: Assumptions, user: Record<string, number> = {}): Record<string, number> {
-  // A saved setting outside a slider's current range (an old link or saved value from before a range
-  // changed, e.g. a 0% discount rate once the floor became 0.1%) is moved to the nearest end.
-  // The control's own ends: the slider's where it has them (its zero stop allowed), else the range.
-  const clamp = (r: (typeof a.rows)[number], v: number | undefined) => {
-    if (v === undefined || typeof r.value !== "object") return v;
-    if (r.slider?.zero && v === 0) return 0;
-    const low = r.slider?.low ?? r.value.low, high = r.slider?.high ?? r.value.high;
-    return Math.min(high ?? Infinity, Math.max(low ?? -Infinity, v));
-  };
   // A derived assumption has no value of its own: formulas read it as its formula (expandDerived).
-  return Object.fromEntries(a.rows.filter((r) => r.formula === undefined).map((r) => [r.id, clamp(r, r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
+  return Object.fromEntries(a.rows.filter((r) => r.formula === undefined).map((r) => [r.id, (r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
 }
 
 // --- Derived assumptions ----------------------------------------------------------------------------

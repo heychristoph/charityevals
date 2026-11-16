@@ -338,7 +338,7 @@ function listAssumptions({ lib, defaults }: Loaded): Json {
   const groups = new Map(lib.assumptions.groups.map((g) => [g.id, g.title]));
   const sets = settable(lib);
   return {
-    how: 'Pass values to run_model, compare or rank as { "<id>": <number>, ... }, or a value set as { "set": "<id>" } (single values on top of a set are allowed). Values outside a slider\'s ends move to the nearest end.',
+    how: 'Pass values to run_model, compare or rank as { "<id>": <number>, ... }, or a value set as { "set": "<id>" } (single values on top of a set are allowed). Any value the models can run on is taken, past low and high (the slider\'s ends) too; shares are fractions (0.04 is 4%).',
     assumptions: lib.assumptions.rows.filter((r) => r.formula === undefined).map((r) => {
       const range = typeof r.value === "object" ? r.value : undefined;
       return {

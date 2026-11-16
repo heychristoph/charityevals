@@ -173,14 +173,24 @@ describe("MCP tools", () => {
     expect(set.url).toBe("https://charityevals.org/cash?set=patient");
     const both = (await call("run_model", { id: "cash", values: { set: "patient", uov_per_daly: 4 } })).out;
     expect(both.result).toBe(0.749);
-    expect(both.url).toBe("https://charityevals.org/cash?set=patient&values=uov_per_daly:4");
+    // Not exactly a value set any more: the link carries every changed value, as the site writes it.
+    expect(both.url).toBe("https://charityevals.org/cash?values=discount_rate:1e-3,uov_per_daly:4");
     // The share link's form works too.
     expect((await call("run_model", { id: "cash", values: "uov_per_daly:4" })).out.result).toBe(0.72);
   });
 
-  it("run_model moves a value outside a slider's ends to the nearest end", async () => {
-    const { out } = await call("run_model", { id: "cash", values: { discount_rate: 0.5 } });
-    expect(out.values.applied.discount_rate).toBe(0.08);
+  it("run_model takes any value the models can run on, past a slider's ends too, as the site does", async () => {
+    const { out } = await call("run_model", { id: "cash", values: { discount_rate: 0.5, uov_per_daly: 40 } });
+    expect(out.values.applied).toEqual({ discount_rate: 0.5, uov_per_daly: 40 });
+    expect(out.result).toBe(0.0375);
+    // At the default: nothing changed, no link values.
+    const same = (await call("run_model", { id: "cash", values: { discount_rate: 0.04 } })).out;
+    expect(same.values).toBe("defaults");
+    expect(same.url).toBe("https://charityevals.org/cash");
+    // Values the models can't run on: negative, a share above 100%, 0 on a log scale.
+    expect((await call("run_model", { id: "cash", values: { uov_per_daly: -2 } })).error).toContain("negative");
+    expect((await call("run_model", { id: "cash", values: { discount_rate: 1.5 } })).error).toContain("at most 1");
+    expect((await call("run_model", { id: "cash", values: { uov_per_daly: 0 } })).error).toContain("can't be 0");
   });
 
   it("run_model explains bad ids and values", async () => {
