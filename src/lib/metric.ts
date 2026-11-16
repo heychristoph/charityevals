@@ -5,6 +5,7 @@
 import { useMemo, useSyncExternalStore } from "react";
 import type { Library } from "../engine/model";
 import { formatYears } from "./format";
+import { editQuery } from "./query";
 
 export type MetricId = "daly" | "dollars" | "wellby";
 
@@ -80,10 +81,7 @@ export function setMetric(id: MetricId) {
   } catch {
     /* private mode: the URL still carries it */
   }
-  const url = new URL(window.location.href);
-  if (id === "daly") url.searchParams.delete("m");
-  else url.searchParams.set("m", id);
-  history.replaceState(null, "", url);
+  history.replaceState(history.state, "", editQuery(window.location.href, (k) => k === "m", id === "daly" ? [] : [["m", id]]));
   listeners.forEach((l) => l());
 }
 
