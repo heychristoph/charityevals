@@ -1,6 +1,6 @@
 # Audit: earthjustice-charityevals, round 6 (verification of the compliance-cost rule 2.21)
 Result: 0.004546 tco2e/$ = 0.001995 years of healthy life per 1,000 dollars (cause median 0.001704, x1.17), against 0.002409 in round 5 (-17%). Verdict: pass.
-Model-sha: 51743000479f92a8320e7f0bb41fbb6061024db6de693caa6cd1d11c4b88173a
+Model-sha: 5469670c6f932aed76fbb0e82fc6ab1138c61c03af0f29550eda9931752065d1
 Scope: scoped verification of the changed rows: usmeth_compliance_uov, pwr_compliance_uov, compliance_uov_per_year, the new `bridges` section and tco2e_from_uov, outcome_total, the summary and the write-up's figures (this model's and the health model's headline spans). Unchanged rows not re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (lint, invariants); normalization-audit and check.ts not re-run (scoped round).
 Previous round: not re-checked beyond the changed rows.
@@ -33,3 +33,5 @@ Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge 
 Re-stamped (16 Nov 2026): EPA methane rule and Advanced Clean Cars II dates read the shared facts (climate.us_oil_gas_methane_rule_*_year, climate.ca_advanced_clean_cars_ii_*_year); same values. Mechanical: headline unchanged, against 1a9667aa.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

@@ -20,7 +20,7 @@ After the value judgments about animals, the years a won commitment counts befor
 
 - **A chicken against a person.** ACE's SADs count a hen's suffering against a person's with Ambitious Impact's weight; we count days of a chicken's pain and let the chicken slider set how they compare with a person's, as in every animal model.
 - **Suffering per hen (changed for consistency).** ACE's 2026 figure is 17.9 SADs per hen; we use the shared figure for a hen-year out of a battery cage, times ACE's 1.5-year life. ACE's 2026 SADs reweight pain intensities, so they can't be mixed with the older SADs other models use.
-- **Years counted (changed for consistency).** ACE credits 7 years for each new commitment and 0.5 to 3 years for each accountability tier; we use the shared "A won reform would have happened anyway … years later" for both, as for The Humane League's accountability work.
+- **Years counted (changed for consistency).** ACE credits 7 years for each new commitment and 0.5 to 3 years for each accountability tier; we use the shared "A won reform would have happened anyway … years later" for both.
 - **Compliance (changed for consistency).** ACE's 80% of companies keeping a new pledge becomes the shared share of cage-free commitments fulfilled.
 - **Discounting.** ACE discounts at 1.4% a year; our view uses your discount rate.
 - **Credit.** ACE's shares for other organisations stay in both views; with "Credit by share of resources" on, staff's forgone pay also counts as an in-kind donation.

@@ -1,7 +1,7 @@
 # Audit: sierra-club-foundation-charityevals-lands-health, round 3 (verification of the compliance-cost rule 2.21)
 Result: 9.286e-7 daly/$ = 0.0009286 years of healthy life per 1,000 dollars (combined range 6.1e-5 to 0.0142); cause median 0.001995 (x0.47). Round 2: 0.001075, so -14%. Verdict: pass.
 Verdict: pass
-Model-sha: ad8ae5a6d44406aca75e3f53248b61bfc3ceabc0f1ecf25b631c41e10fabe591
+Model-sha: fb32db4a1bd702cd2121313260f2c8f8bf1fac33bcf55a51eb3c14262a94b98f
 
 Scope: scoped verification of the changed rows (`pm_compliance_uov`, `uov_bridged`, `summary`, and the figure in writeups/sierra-club-foundation-charityevals.md). Unchanged rows not re-audited.
 
@@ -31,9 +31,11 @@ Checks:
 Unchanged: the Sierra Club's share of the rule (4%), the next dollar, the delivered share. The compliance row removes about 21% of the soot benefit.
 
 Verdict: pass
-Model-sha: ad8ae5a6d44406aca75e3f53248b61bfc3ceabc0f1ecf25b631c41e10fabe591
+Model-sha: fb32db4a1bd702cd2121313260f2c8f8bf1fac33bcf55a51eb3c14262a94b98f
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

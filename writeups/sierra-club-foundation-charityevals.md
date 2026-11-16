@@ -15,16 +15,16 @@ In 2024 the Foundation spent $102.1 million (Form 990), $87.5 million of it on p
 
 The Sierra Club's organisers, lawyers and volunteers argue before utility commissions, comment on and defend federal rules, sue, and run campaigns in most states. The models count the wins of 2022-2024 that can be put on the site's scale:
 
-- **US coal plants closed in 2022-2024** (26 gigawatts, EIA). Advocacy is credited with 15% of the closings; most were utilities' economic choices. Beyond Coal, the largest campaign against coal plants, gets 40% of that advocacy and Earthjustice, often its lawyer, 10% in its own model.
-- **EPA's 2023 methane rule, its 2024 power-plant and vehicle standards, and California's Advanced Clean Cars II.** The same tonnes, status and steps as our models of the Environmental Defense Fund, Clean Air Task Force, Earthjustice and the Union of Concerned Scientists. The Sierra Club gets 5%, 10%, 8% and 8% of the advocacy behind them.
-- **EPA's 2024 soot standard**, about 3,000 deaths a year avoided once in effect. The Sierra Club gets 4% for its own comments and members; Earthjustice, its lawyer in court, gets 25% in its model.
+- **US coal plants closed in 2022-2024** (26 gigawatts, EIA). Advocacy is credited with 15% of the closings; most were utilities' economic choices. Beyond Coal, the largest campaign against coal plants, gets 40% of that advocacy.
+- **EPA's 2023 methane rule, its 2024 power-plant and vehicle standards, and California's Advanced Clean Cars II.** The site's shared tonnes, status and steps for each rule. The Sierra Club gets 5%, 10%, 8% and 8% of the advocacy behind them.
+- **EPA's 2024 soot standard**, about 3,000 deaths a year avoided once in effect. The Sierra Club gets 4% for its own comments and members.
 - **Inspiring Connections Outdoors**, 5,127 people a year on nature trips, counted as a small gain in life satisfaction.
 
 The Foundation is credited with 70% of the Sierra Club's part: it pays for the charitable campaigns, and the Sierra Club's own money is counted among the other groups' resources.
 
 ### How the model works
 
-Each win is a branch: its tonnes or deaths a year once in effect, the share due to advocacy, the years a won reform counts (shared) after its own wait, what would have happened anyway, the Sierra Club's and the Foundation's shares, and how much of it is delivered (the federal rules' shared delivered shares already allow for their repeals; 85% of coal closings stay closed despite emergency orders keeping some plants open). The coal figures are now shared facts that Earthjustice's model reads too. Tonnes become healthy years through the site's one climate conversion, with coal and traffic smoke and the methane rule's local smog added. The sum is divided by an average year's spending in 2024 prices, then by the Foundation's next-dollar factor (44%).
+Each win is a branch: its tonnes or deaths a year once in effect, the share due to advocacy, the years a won reform counts (shared) after its own wait, what would have happened anyway, the Sierra Club's and the Foundation's shares, and how much of it is delivered (the federal rules' shared delivered shares already allow for their repeals; 85% of coal closings stay closed despite emergency orders keeping some plants open). The coal figures are shared facts. Tonnes become healthy years through the site's one climate conversion, with coal and traffic smoke and the methane rule's local smog added. The sum is divided by an average year's spending in 2024 prices, then by the Foundation's next-dollar factor (44%).
 
 ### What drives the result
 

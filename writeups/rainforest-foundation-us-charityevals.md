@@ -68,7 +68,7 @@ RFUS's credit here is 40%: the regional government grants the titles, and the fe
 
 **Pandemic risk.** The forest kept in both branches cuts the risk by the same shared figures as the site's other forest models.
 
-**The pay.** We take 400 patrollers × 60 patrol days a year (our judgment) × the $8 a day the trial paid, about $10 in 2025 prices. Half of that is a net gain, since patrol days take time from fishing and farming. That is about $120,000 for about 1,500 people. We put their consumption at 35% of Peru's average, as for the site's other model of Amazonian Indigenous communities. Two side effects are added, as for other cash: deaths averted (+12%) and gains to local traders (+10%).
+**The pay.** We take 400 patrollers × 60 patrol days a year (our judgment) × the $8 a day the trial paid, about $10 in 2025 prices. Half of that is a net gain, since patrol days take time from fishing and farming. That is about $120,000 for about 1,500 people. We put their consumption at 35% of Peru's average. Two side effects are added, as for other cash: deaths averted (+12%) and gains to local traders (+10%).
 
 **A unit cost.** More money pays for more patrollers, titles and partner support at about the same cost, so the model has no next-dollar factor.
 

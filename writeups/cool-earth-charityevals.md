@@ -83,7 +83,7 @@ Independent auditors checked the model in four rounds; the receipts are in audit
 - **Round 2** passed. It moved the deaths averted onto GiveWell's 2024 analysis of GiveDirectly and capped the cash at what the accounts allow. It also set the forest's baseline loss from Cool Earth's own record, which lowered the forest branch.
 - **Rounds 3 and 4** verified those changes. One explainer figure without a source was removed.
 
-The site's shared figures for tropical forest loss, the pandemic risk of deforestation and a COVID-scale pandemic's ages were moved into shared data in this build. The Nature Conservancy's model reads them too, with its result unchanged.
+The site's shared figures for tropical forest loss, the pandemic risk of deforestation and a COVID-scale pandemic's ages were moved into shared data in this build.
 
 ### Sources
 
