@@ -3,10 +3,11 @@
 // hand (docs/normalization.md 2.7-2.10). Each returns problems; `high` blocks the audit.
 import { evaluate } from "./expr";
 import { ALLOWED_LITERALS } from "./lint";
-import { CONCEPTS, PREFLIGHT_CONCEPTS, likeness, words, type Waivers } from "./invariants";
+import { CONCEPTS, PREFLIGHT_CONCEPTS, likeness, measuredInOwnPopulation, words, type Waivers } from "./invariants";
 import { assumptionValues, bottomLine, pickValue, type FactRow, type Library, type ResolvedModel, type ResolvedRow } from "./model";
 import { rowsFeeding, sensitivity } from "./sensitivity";
 import { unitIssues } from "./units";
+import type { SimulationCheck } from "./simulation-check";
 
 export type Severity = "high" | "medium" | "low";
 export type Problem = { severity: Severity; check: string; where: string; message: string };
@@ -230,6 +231,8 @@ export function sharedFactProblems(lib: Library, m: ResolvedModel, waivers: Waiv
     const v = typedValue(r);
     // 0: the branch or effect doesn't apply here (said in the explainer), not a copy of anything.
     if (v === undefined || !Number.isFinite(v) || v === 0) continue;
+    // The programme's own people, measured and sourced (the recipients' household size): its own figure.
+    if (measuredInOwnPopulation(r)) continue;
     const hits = new Map<string, string>();
     // 1. The concept table (INV-13's and the preflight's additions): the concept's fact, whatever the value.
     for (const c of allConcepts) {
@@ -282,9 +285,19 @@ export function sharedFactProblems(lib: Library, m: ResolvedModel, waivers: Waiv
   return out;
 }
 
+/** Waiver sections (src/engine/normalization-waivers.json) for checks of the preflight's own:
+ * `simulation`, keyed by model id: a wide spread that is honest (shared facts' ranges), with the reason;
+ * `shared-fact-pair`, keyed by "<model> <row> = <model> <row>" (either order): two typed figures that are
+ * different quantities, with the reason. */
+export const PREFLIGHT_WAIVERS = { simulation: "simulation", pair: "shared-fact-pair" } as const;
+
+/** A pair's waiver key, the two sides in order so either way round is the same entry. */
+export const pairKey = (a: string, ar: string, b: string, br: string) => [`${a} ${ar}`, `${b} ${br}`].sort().join(" = ");
+
 /** The same label and value typed into another of our models (the second copy; INV-14 fires at the fifth):
- * one figure, so a shared fact that both read. Our own adjustments (`*_adj`) are each build's judgment. */
-export function copiedFigureProblems(lib: Library, m: ResolvedModel, templateRows: ReadonlySet<string> = new Set()): Problem[] {
+ * one figure, so a shared fact that both read. Our own adjustments (`*_adj`) are each build's judgment.
+ * A pair waived as different quantities (`shared-fact-pair`) is left out; `used` collects those keys. */
+export function copiedFigureProblems(lib: Library, m: ResolvedModel, templateRows: ReadonlySet<string> = new Set(), waivers: Waivers = {}, used?: Set<string>): Problem[] {
   const out: Problem[] = [];
   if (m.owner !== "charityevals" || !m.output) return out;
   const av = assumptionValues(lib.assumptions);
@@ -297,6 +310,8 @@ export function copiedFigureProblems(lib: Library, m: ResolvedModel, templateRow
     const skeleton = templateRows.has(r.id) || templateRows.has(r.id.replace(/^[a-z]{1,8}_/, ""));
     if (v === undefined || skeleton || !path.has(r.id) || r.id.endsWith("_adj") || ALLOWED_LITERALS.has(v) || r.format === "toggle" || r.id === "donation" || words(r.label).size < 3) continue;
     if ([...r.label.matchAll(/(?<![\w.])(\d+(?:\.\d+)?)(?![\w.])/g)].some((x) => Number(x[1]) === v)) continue;
+    // A calendar year (a counting period's first or last year) is a date, not a figure to share.
+    if (/^year$/i.test(r.unit ?? "") || (Number.isInteger(v) && v >= 1990 && v <= 2100 && /\b(year|period|first|last|start|end|since|until|from)\b|_(year|period|first|last|start|end)\b/i.test(textOf(r)))) continue;
     mine.set(`${key(r.label)} = ${fmt(v)}`, r);
   }
   if (!mine.size) return out;
@@ -310,11 +325,31 @@ export function copiedFigureProblems(lib: Library, m: ResolvedModel, templateRow
       const k = `${key(r.label)} = ${fmt(v)}`;
       const here = mine.get(k);
       if (!here || seen.has(here.id)) continue;
+      const pk = pairKey(m.id, here.id, o.id, r.id);
+      if (pk in (waivers[PREFLIGHT_WAIVERS.pair] ?? {})) { used?.add(pk); continue; }
       if (!moves(lib, m, here.id, v, av)) continue;
       seen.add(here.id);
-      out.push({ severity: "medium", check: "shared-fact", where: here.id, message: `"${here.label}" = ${fmt(v)} is typed into ${o.id} too (${r.id}): one figure belongs in a shared fact (facts/*.json, with its source and range) that both read` });
+      out.push({ severity: "medium", check: "shared-fact", where: here.id, message: `"${here.label}" = ${fmt(v)} is typed into ${o.id} too (${r.id}): one figure belongs in a shared fact (facts/*.json, with its source and range) that both read; if they are different quantities, a waiver in src/engine/normalization-waivers.json, "${PREFLIGHT_WAIVERS.pair}": { "${pk}": "<why they differ>" }` });
     }
   }
+  return out;
+}
+
+// --- Simulation ----------------------------------------------------------------------------------
+
+/** What scripts/simulation-check.ts found, as problems. An unstable result is high where the model's own
+ * rows flip it, medium where only shared facts and assumptions do (their ranges are the site's, an
+ * honest spread); a `simulation` waiver with its reason clears it, and the single inputs show as low. */
+export function simulationProblems(id: string, sim: SimulationCheck, waivers: Waivers = {}): Problem[] {
+  const out: Problem[] = [];
+  const waiver = waivers[PREFLIGHT_WAIVERS.simulation]?.[id];
+  const shared = sim.wild.length > 0 && sim.wild.every((w) => w.key.startsWith("@") || w.key.startsWith("$"));
+  if (sim.unstable && !waiver)
+    out.push({ severity: shared ? "medium" : "high", check: "simulation", where: "result", message: `the simulation is unstable (5% ${sim.shape?.q5.toPrecision(3)}, 95% ${sim.shape?.q95.toPrecision(3)} × the best guess): see the inputs that flip it, and normalization.md 2.18${shared ? `; only shared facts flip it: if the spread is honest, a waiver in src/engine/normalization-waivers.json, "${PREFLIGHT_WAIVERS.simulation}": { "${id}": "<why>" }` : ""}` });
+  if (waiver && !sim.unstable)
+    out.push({ severity: "low", check: "waiver", where: PREFLIGHT_WAIVERS.simulation, message: `the simulation is stable now: remove the "${id}" waiver from src/engine/normalization-waivers.json` });
+  if (sim.brokenEvents) out.push({ severity: "high", check: "simulation", where: "single_event", message: "a single event never happens or always does, or the draws are broken: check the single_event tags" });
+  for (const w of sim.wild.slice(0, 5)) out.push({ severity: sim.unstable && !waiver ? "medium" : "low", check: "simulation", where: w.key, message: `alone at ${w.low.toPrecision(3)}..${w.high.toPrecision(3)} it moves the result ×${w.atLow.toPrecision(3)} / ×${w.atHigh.toPrecision(3)}: a calendar year drawn, a remainder of large figures or a net near zero?` });
   return out;
 }
 

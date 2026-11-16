@@ -399,8 +399,13 @@ function fromModel(m: ResolvedModel): { b: Record<string, number>; method: strin
 
 // --- Which models to write -----------------------------------------------------------------------------
 const git = (...a: string[]) => execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
-/** Models whose file changed since the branch left main (committed, staged, unstaged or untracked). */
+/** Models whose file changed since the branch left main (committed, staged, unstaged or untracked).
+ * Outside a git checkout (a blind-run sandbox, evaluation/make-sandbox.sh): the models without the
+ * field yet, which are the new builds. */
 function changedOnBranch(): Set<string> {
+  try { git("rev-parse", "--is-inside-work-tree"); } catch {
+    return new Set([...raws].filter(([, p]) => read(p).beneficiaries === undefined).map(([id]) => id));
+  }
   let base = "HEAD";
   try { base = git("merge-base", "HEAD", "main").trim(); } catch { /* no main: uncommitted changes only */ }
   const paths = [...git("diff", "--name-only", base, "--", "models").split("\n"), ...git("ls-files", "--others", "--exclude-standard", "--", "models").split("\n")].filter(Boolean);
