@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { parseUnit } from "./units";
-import { copiedFigureProblems, kindProblems, pairKey, sharedFactProblems, simulationProblems, typedValue, unitProblems } from "./preflight";
+import { charityAliases, copiedFigureProblems, kindProblems, pairKey, peerMentionProblems, sharedFactProblems, simulationProblems, typedValue, unitProblems } from "./preflight";
 import { CONTEXT_ONLY, lintModel } from "./lint";
 import { checkModel } from "./check-model";
 import { assumptionValues } from "./model";
@@ -193,5 +193,78 @@ describe("refactored gates", () => {
   it("check.ts's per-model checks are importable", () => {
     const { lib, m } = one({ ...model([{ id: "uov_per_dollar", label: "Result", formula: "people / cost_total" }]), kind: "template" });
     expect(checkModel(lib, m, () => true, assumptionValues(lib.assumptions)).errors.join()).toMatch(/kind "template" on a charity's model/);
+  });
+});
+
+describe("peer mentions", () => {
+  /** The model's own rows, with one explainer per text to check, on FairVote's model. */
+  const texts = (xs: string[], extra: Record<string, unknown> = {}, writeup?: string) => {
+    const rows = xs.map((t, i) => ({ id: `note_${i}`, label: `Context ${i}`, value: 1, kind: "observed", explainer: t }));
+    const { lib, m } = one(model([...rows, { id: "uov_per_dollar", label: "Result", formula: "people / cost_total" }], { charity: "fairvote", ...extra }));
+    return peerMentionProblems(lib, m, writeup);
+  };
+  const phrases = (ps: { message: string }[]) => ps.map((p) => /\("(.*)"\): site text/.exec(p.message)?.[1]);
+
+  it("names a charity's other names: initials, short and former names, without a trailing qualifier", () => {
+    expect(charityAliases({ id: "x", name: "Against Malaria Foundation" })).toEqual(expect.arrayContaining(["Against Malaria Foundation", "AMF"]));
+    expect(charityAliases({ id: "x", name: "The Humane League" })).toContain("THL");
+    expect(charityAliases({ id: "x", name: "Habitat for Humanity International" })).toContain("Habitat for Humanity");
+    expect(charityAliases({ id: "x", name: "Brennan Center for Justice" })).toContain("Brennan Center");
+    expect(charityAliases({ id: "x", name: "Unlimit Health (formerly SCI Foundation)" })).toContain("SCI Foundation");
+    expect(charityAliases({ id: "x", name: "Centre for Effective Altruism" })).not.toContain("CEA");
+  });
+
+  it("flags another charity's model or results, comparisons with it, peers and ids in prose", () => {
+    const ps = texts([
+      "0.8, as in the New Incentives model.",
+      "Our judgment; our GiveDirectly model uses the same.",
+      "The same judgment as charityevals' NRC and Save the Children models.",
+      "0.7, below GovAI's 0.9.",
+      "About three times Clean Air Task Force's whole budget.",
+      "Twice the advocacy peers' figure.",
+      "Far above the climate median.",
+      "The shared figure, read by the Protect Democracy model too.",
+      "As for treatment in the Dogs Trust model.",
+      "See #givedirectly for the cash benchmark.",
+    ]);
+    expect(ps.every((p) => p.check === "peer-mention" && p.severity === "medium")).toBe(true);
+    expect(phrases(ps)).toEqual(expect.arrayContaining([
+      "as in the New Incentives model", "our GiveDirectly model", "charityevals' NRC and Save the Children models", "below GovAI's",
+      "times Clean Air Task Force's", "the advocacy peers'", "above the climate median", "the Protect Democracy model",
+      "As for treatment in the Dogs Trust model", "#givedirectly",
+    ]));
+    expect(ps.map((p) => p.where)).toContain("note_0 explainer");
+  });
+
+  it("leaves the model's own charity, sources, evaluators, links and other meanings alone", () => {
+    expect(phrases(texts([
+      "As in our FairVote model's reform branch.",
+      "The ratio GiveWell took from its AMF and SMC models.",
+      "From GiveWell's AMF model, cell B12.",
+      "GiveWell's 2024 estimate for GiveDirectly's programme.",
+      "Valued in multiples of cash, eight times GiveDirectly.",
+      "The WHO model list of essential medicines.",
+      "Against Malaria Foundation distributes nets whose results are surveyed.",
+      "The peers left the House on commencement; their peers' wages rose.",
+      "Converted at the IRS average for every model.",
+      "Like [the report](https://example.org/amf-model) says, nets last three years.",
+      "Fighting in the DRC cut access.",
+    ]))).toEqual([]);
+  });
+
+  it("takes a model read live as a source, but still flags a comparison with it", () => {
+    const note = "Read live from #givedirectly: the GiveDirectly model's result. Higher than GiveDirectly's.";
+    const { lib, m } = one(model([
+      { id: "cash", label: "Cash benchmark", formula: "#givedirectly" },
+      { id: "note", label: "Context", value: 1, kind: "observed", explainer: note },
+      { id: "uov_per_dollar", label: "Result", formula: "cash * people / cost_total" },
+    ], { charity: "fairvote" }));
+    expect(phrases(peerMentionProblems(lib, m))).toEqual(["than GiveDirectly's"]);
+    expect(phrases(texts([note]))).toEqual(expect.arrayContaining(["#givedirectly", "the GiveDirectly model's"]));
+  });
+
+  it("checks the summary and write-up without repeating lint's and check.ts's comparisons", () => {
+    const ps = texts([], { summary: "Lower than the Against Malaria Foundation model. The AMF model reads the same." }, "As in our New Incentives model.");
+    expect(ps.map((p) => `${p.where}: ${phrases([p])[0]}`)).toEqual(["summary: The AMF model", "write-up: As in our New Incentives model"]);
   });
 });

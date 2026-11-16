@@ -2,7 +2,7 @@
 // before a model goes to audit: units, how judgments are filed, and above all shared figures typed in by
 // hand (docs/normalization.md 2.7-2.10). Each returns problems; `high` blocks the audit.
 import { evaluate } from "./expr";
-import { ALLOWED_LITERALS } from "./lint";
+import { ALLOWED_LITERALS, comparisons, namesFor } from "./lint";
 import { CONCEPTS, PREFLIGHT_CONCEPTS, likeness, measuredInOwnPopulation, words, type Waivers } from "./invariants";
 import { assumptionValues, bottomLine, pickValue, type FactRow, type Library, type ResolvedModel, type ResolvedRow } from "./model";
 import { rowsFeeding, sensitivity } from "./sensitivity";
@@ -353,6 +353,249 @@ export function simulationProblems(id: string, sim: SimulationCheck, waivers: Wa
     out.push({ severity: "low", check: "waiver", where: PREFLIGHT_WAIVERS.simulation, message: `the simulation is stable now: remove the "${id}" waiver from src/engine/normalization-waivers.json` });
   if (sim.brokenEvents) out.push({ severity: "high", check: "simulation", where: "single_event", message: "a single event never happens or always does, or the draws are broken: check the single_event tags" });
   for (const w of sim.wild.slice(0, 5)) out.push({ severity: sim.unstable && !waiver ? "medium" : "low", check: "simulation", where: w.key, message: `alone at ${w.low.toPrecision(3)}..${w.high.toPrecision(3)} it moves the result ×${w.atLow.toPrecision(3)} / ×${w.atHigh.toPrecision(3)}: a calendar year drawn, a remainder of large figures or a net near zero?` });
+  return out;
+}
+
+// --- Other charities in the text -----------------------------------------------------------------
+
+/** Names prose uses for a charity that its name doesn't give (initials, a short form). */
+const NICKNAMES: Record<string, string[]> = {
+  "american-red-cross": ["Red Cross"],
+  "habitat-for-humanity": ["Habitat"],
+  "center-for-ai-safety": ["CAIS"],
+  "johns-hopkins-center-for-health-security": ["CHS"],
+  "unlimit-health": ["SCI"],
+  "rethink-priorities": ["Rethink"],
+};
+/** Initials that mean something else in the models' text (a cost-effectiveness analysis, a Medical Research
+ * Council, the DR Congo, the World Health Organization as a source). */
+const NOT_INITIALS = new Set(["CEA", "MRC", "BCJ", "CRU", "FAF", "DRC", "WHO"]);
+
+/** A charity's names in prose: its name without "The" and parentheses, its short name and former name
+ * ("(IRAP)", "(formerly SCI Foundation)"), the initials of a name of three capitalised words or more (with
+ * "The": THL), the name without a trailing International / Intl / Education Fund, and NICKNAMES. */
+export function charityAliases(c: { id: string; name?: string }): string[] {
+  if (!c.name) return [];
+  const out = new Set<string>(NICKNAMES[c.id] ?? []);
+  const base = c.name.replace(/\s*\([^)]*\)/g, "").replace(/^The\s+/, "").trim();
+  out.add(base);
+  for (const [, inner] of c.name.matchAll(/\(([^)]+)\)/g)) out.add(inner.replace(/^formerly\s+/i, "").trim());
+  const caps = base.split(/\s+/).filter((w) => /^\p{Lu}/u.test(w));
+  if (caps.length >= 3) out.add(caps.map((w) => w[0]).join(""));
+  if (/^The\s/.test(c.name) && caps.length >= 2) out.add(`T${caps.map((w) => w[0]).join("")}`);
+  // A trailing qualifier dropped ("Brennan Center", "Habitat for Humanity", "Ploughshares"), leaving two
+  // words or one long one.
+  const short = base.replace(/\s+(?:International|Intl|Education Fund|for Justice|of America|Fund|Foundation)$/, "");
+  if (short !== base && (short.split(/\s+/).length >= 2 || short.length >= 8)) out.add(short);
+  return [...out].filter((n) => n.length >= 3 && !NOT_INITIALS.has(n));
+}
+
+/** Words for a model or its result after a charity's name ("the FairVote model", "our AMF relief build"). */
+const MODEL_WORD = /^(?:models?|builds?|results?|headlines?|CEAs?|write-?ups?|rankings?|figures?|estimates?)$/;
+/** Of these, the ones that are a source's own figure when the evaluator or the charity published it. */
+const FIGURE_WORD = /^(?:figures?|estimates?|results?)$/;
+/** "model" as an adjective ("the WHO model list", "a model law"). */
+const MODEL_ADJ = /^\s+(?:life\s+tables?|list|laws?|legislation|bills?|ordinances?|villages?|farms?|schools?|clinics?|of\s+care|policy)\b/i;
+/** Words between a name and its model word that end the phrase: verbs and function words ("AMF uses
+ * nets whose results"), so only qualifiers ("relief", "US", "other", "and NRC") stand between. */
+const BREAK_WORD = /^(?:is|are|was|were|be|been|has|have|had|does|do|did|uses?|used|reads?|gives?|puts?|takes?|finds?|found|says?|said|reports?|reported|which|that|whose|where|when|while|it|its|their|this|these|those|a|an|in|on|at|to|of|for|by|with|from|per|than|as|not|no|but|if|so|because|after|before|into|about|over|under|between)$/i;
+/** Comparison words just before a name. Strong ones ("as in", "than", "unlike") compare by themselves;
+ * weak ones ("like", "following") only with a model word or a possessive after the name. */
+const COMPARE_STRONG = /(?:\bas\s+(?:in|for|with|does|did)|\bunlike|\bthan|\b(?:the\s+)?same\s+as|\bsimilar\s+to|\bin\s+line\s+with|\bon\s+a\s+par\s+with|\blevel\s+with|\bmirror(?:s|ed|ing)?|\bcompared?\s+(?:with|to)|\bversus|\bvs\.?|\bbelow|\babove|\bnear|\bclose\s+to)\s+$/i;
+const COMPARE_WEAK = /(?:\blike|\bfollow(?:s|ed|ing)?|\bmatch(?:es|ed|ing)?|\bcopie[sd]\s+(?:from\s+)?|\bborrow(?:s|ed)?\s+(?:from\s+)?)\s+$/i;
+/** Multiples and splits ("three times Clean Air Task Force's budget", "between NTI and …"): a comparison, except of a source's figures. */
+const COMPARE_TIMES = /(?:\btimes|×|\btwice|\bthrice|\bhalf|\bbetween)\s+$/i;
+/** A source just before a name: where a figure is from ("from GiveWell's AMF model", "per the 2024 estimate"). */
+const SOURCE_BEFORE = /(?:\bfrom|\bper|\baccording\s+to|\bsee|\bsource:?|\bcited\s+(?:in|by)|\breported\s+(?:in|by)|\bpublished\s+(?:in|by)|\bin)\s+$/i;
+/** What may stand between the comparison or source word and the name: "the", "our", an evaluator's. */
+const LEAD = /(?:(?:[Tt]he|[Oo]ur|[Ii]ts|[Tt]heir|charityevals['’]|that\s+of|those\s+of|[\p{Lu}][\w.-]*['’]s?)\s+){0,2}$/u;
+
+/** Peers, medians and averages in an explainer (lint's summary patterns misread explainers' arithmetic:
+ * "× the median survey ratio", "more than savings groups cost"). */
+const CAUSE_WORD = String.raw`(?:global[- ]health|animal[- ]welfare|climate|catastrophic[- ]risk|democracy|policy|advocacy|nuclear|biosecurity|AI)`;
+const PEER_PATTERNS: RegExp[] = [
+  // Placed against the site's or a cause's median or average (a value read from it, "valued at the
+  // site's climate average", is method).
+  new RegExp(String.raw`\b(?:above|below|than|near|close\s+to|times|×|twice|half)\s+(?:the\s+)?(?:(?:site['’]s|cause['’]s|peers['’])\s+(?:own\s+)?(?:${CAUSE_WORD}\s+)?|${CAUSE_WORD}\s+)(?:charities['’]?\s+|models['’]?\s+)?(?:median|average)\b(?!\s+(?:survey|ratio|rate|share|exchange|price|household|person|consumption|temperature|warming|emissions|draw))`, "i"),
+  // Peers: the charity's ("our peers use", "the peers' 0.65", "the nuclear peers"); not people's ("their
+  // peers'"), the Lords' ("the peers left the House"), "peer groups" or "peer-reviewed".
+  new RegExp(String.raw`\b(?:its|our)\s+(?:${CAUSE_WORD}\s+|closest\s+)?peers\b|\bthe\s+(?:${CAUSE_WORD}\s+|closest\s+)?peers['’]|\bthe\s+${CAUSE_WORD}\s+peers\b|\bpeer\s+(?:charit|models?\b|organi[sz]ations?)`, "i"),
+  // Placed among the site's other charities or models.
+  /\b(?:sits?|lies|ranks?|comes?\s+out)\s+(?:far\s+|well\s+|a little\s+)?(?:above|below|near|among)\s+(?:the|its|our|other)\s+(?:[\w'’-]+\s+){0,3}(?:charities|models|peers|median|average)\b/i,
+  /\b(?:like|unlike|as with|as in|as for)\s+(?:charityevals['’]|our|the site['’]s|its)\s+other\s+(?:[\w-]+\s+){0,3}(?:charities)\b/i,
+];
+
+type NameIndex = { re: RegExp; owner: Map<string, string>; ids: RegExp | undefined; modelCharity: Map<string, string> };
+const nameIndexes = new WeakMap<Library, NameIndex>();
+/** Every charity's names (evaluators left out: "GiveWell's estimate" is a source, not a peer), longest first,
+ * as one case-sensitive pattern, and which charity each name is; the models' ids, for ids typed in prose. */
+function nameIndex(lib: Library): NameIndex {
+  const hit = nameIndexes.get(lib);
+  if (hit) return hit;
+  const evaluators = new Set([...lib.owners.values()].flatMap((o) => [o.id, o.name.toLowerCase()]));
+  // A name two charities share is kept for the one whose own name it is ("J-PAL"), else dropped.
+  const claims = new Map<string, { base: string[]; other: string[] }>();
+  for (const c of lib.charities.values()) {
+    if (evaluators.has(c.id) || evaluators.has((c.name ?? "").toLowerCase())) continue;
+    const base = (c.name ?? "").replace(/\s*\([^)]*\)/g, "").replace(/^The\s+/, "").trim();
+    for (const n of charityAliases(c)) {
+      const x = claims.get(n) ?? { base: [], other: [] };
+      (n === base ? x.base : x.other).push(c.id);
+      claims.set(n, x);
+    }
+  }
+  const owner = new Map<string, string>();
+  for (const [n, { base, other }] of claims) {
+    const ids = base.length ? base : other;
+    if (ids.length === 1) owner.set(n, ids[0]);
+  }
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const alt = [...owner.keys()].sort((a, b) => b.length - a.length).map(esc).join("|");
+  const modelCharity = new Map([...lib.models.values()].map((x) => [x.id, x.charity]));
+  const idAlt = [...modelCharity.keys()].filter((id) => id.includes("-") && id.length >= 8).sort((a, b) => b.length - a.length).map(esc).join("|");
+  const out: NameIndex = {
+    re: new RegExp(`(?<![\\w-])(?:${alt})(?![\\w-])`, "gu"),
+    owner,
+    ids: idAlt ? new RegExp(`(?<![\\w/.-])#?(?:${idAlt})(?![\\w-])`, "g") : undefined,
+    modelCharity,
+  };
+  nameIndexes.set(lib, out);
+  return out;
+}
+
+/** The text fields of a model that the site shows, by where they are; a variant's only where they differ
+ * from its parent's. Links' targets are blanked (a link is fine; its text is checked). */
+export function modelTexts(lib: Library, m: ResolvedModel, writeup?: string): { where: string; text: string }[] {
+  const parent = m.extends ? lib.models.get(m.extends) : undefined;
+  const out: { where: string; text: string }[] = [];
+  const add = (where: string, text: string | undefined, inherited?: string) => { if (text && text !== inherited) out.push({ where, text }); };
+  add("summary", m.summary, parent?.summary);
+  add("output label", m.output?.label, parent?.output?.label);
+  for (const s of m.sections ?? []) {
+    const p = parent?.sections?.find((x) => x.id === s.id);
+    add(`section ${s.id} title`, s.title, p?.title);
+    add(`section ${s.id} explainer`, s.explainer, p?.explainer);
+  }
+  for (const r of ownRows(m)) {
+    const p = parent?.byId.get(r.id);
+    add(`${r.id} label`, r.label, p?.label);
+    add(`${r.id} explainer`, r.explainer, p?.explainer);
+    add(`${r.id} range note`, r.range?.note, p?.range?.note);
+  }
+  (m.resources ?? []).forEach((x, i) => add(`resources[${i}] note`, x.note, parent?.resources?.find((y) => y.url === x.url)?.note));
+  add("theoretical reason", m.theoretical?.reason);
+  add("write-up", writeup);
+  // Blank link targets and bare URLs, keeping positions.
+  return out.map(({ where, text }) => ({ where, text: text.replace(/\]\([^)\s]*\)/g, (x) => `]${" ".repeat(x.length - 1)}`).replace(/https?:\/\/\S+/g, (x) => " ".repeat(x.length)) }));
+}
+
+/** Mentions of another charity's model or results in a model's text and write-up (site text never compares
+ * with other charities, their models or results, medians or peers): another charity's name (or short
+ * name, initials, nickname) with a model word ("the FairVote model", "our AMF relief model", "charityevals'
+ * NRC and Save the Children models"), after a comparison ("as in", "than", "below GovAI's 0.9", "like"), a
+ * model id or `#id` typed in prose, "model of <charity>", and peers, medians and averages (PEER_PATTERNS)
+ * in fields lint and check.ts don't cover. Allowed: the model's own charity; a charity whose model this
+ * one reads live, or a publisher of facts it reads ("Rethink Priorities' cross-cause model"), named as
+ * where a figure is from, not compared with; a published source ("from GiveWell's AMF model"); evaluators;
+ * links. Medium: the fix is to say it in the model's own terms. Summary and write-up phrases lint or
+ * check.ts already reports (high) aren't repeated. */
+export function peerMentionProblems(lib: Library, m: ResolvedModel, writeup?: string): Problem[] {
+  const out: Problem[] = [];
+  const { re, owner, ids, modelCharity } = nameIndex(lib);
+  const own = m.charity;
+  // Charities whose models this one reads live (formulas, destinations): where its figures are from.
+  const reads = new Set<string>();
+  for (const r of m.rows) for (const d of r.modelDeps) { const c = modelCharity.get(d) ?? lib.models.get(d)?.charity; if (c) reads.add(c); }
+  // Publishers of the facts it reads (a source's title, not our own judgment): "Rethink Priorities'
+  // cross-cause model" is where a figure is from, "the Protect Democracy model" isn't.
+  const publishes = new Set<string>();
+  for (const r of m.rows) for (const k of r.factDeps) {
+    const title = lib.facts.get(k)?.source?.title ?? "";
+    if (/^charityevals\b/i.test(title)) continue;
+    for (const n of title.match(re) ?? []) { const c = owner.get(n); if (c) publishes.add(c); }
+  }
+  const formulaRefs = new Set(m.rows.flatMap((r) => [...(r.formula ?? "").matchAll(/#([a-z0-9-]+(?::[a-z0-9-]+)?)/g)].map((x) => x[1])));
+  for (const d of m.destination_reads ?? []) formulaRefs.add(d);
+  const others = namesFor(lib, own);
+  const say = (where: string, phrase: string, why: string) => out.push({ severity: "medium", check: "peer-mention", where, message: `${why} ("${phrase.replace(/\s+/g, " ").trim()}"): site text never compares with other charities, their models or results; say it in this model's own terms (the evidence, the rule or the shared figure it reads), and name another organisation only as the source of a figure` });
+  for (const { where, text } of modelTexts(lib, m, writeup)) {
+    const covered = where === "summary" || where === "write-up";
+    const already = covered ? comparisons(text, others) : [];
+    // Each phrase once a field: lint's "below FAS" and this check's "below FAS's" are one finding.
+    const seen: string[] = [];
+    const report = (phrase: string, why: string) => {
+      const k = phrase.replace(/\s+/g, " ").trim();
+      if ([...seen, ...already].some((h) => h.includes(k) || k.includes(h))) return;
+      seen.push(k);
+      say(where, k, why);
+    };
+    // Peers, medians and averages without a name, where lint and check.ts don't look (rows, sections,
+    // notes); not in a sentence about what the model reads live (#cause:…).
+    if (!covered) for (const re of PEER_PATTERNS) for (const h of text.matchAll(new RegExp(re.source, re.flags + "g"))) {
+      const at = h.index!;
+      const sentence = text.slice(text.lastIndexOf(". ", at) + 1, (text.indexOf(". ", at + h[0].length) + 1 || text.length + 1) - 1);
+      if (!/(?<![\w&])#[a-z]/.test(sentence)) report(h[0], "compares with others");
+    }
+    for (const x of text.matchAll(re)) {
+      const name = x[0], c = owner.get(name);
+      if (!c || c === own) continue;
+      const s = x.index!, e = s + name.length;
+      const before = text.slice(Math.max(0, s - 80), s);
+      const lead = LEAD.exec(before)!;
+      const head = before.slice(0, before.length - lead[0].length);
+      // After the name: a possessive, then up to three qualifiers, then a model word.
+      const rest = text.slice(e, e + 120);
+      const poss = /^['’]s?(?![\w])/.exec(rest);
+      const tail = rest.slice(poss ? poss[0].length : 0);
+      const stop = tail.search(/[.;:!?()[\]\n—–"“”]/);
+      // Another name in a list is one qualifier ("NRC and Save the Children models").
+      const clause = (stop < 0 ? tail : tail.slice(0, stop)).replace(re, (n) => "N".repeat(n.length));
+      let word: string | undefined, end = 0;
+      const toks = [...clause.matchAll(/[\p{L}\p{N}&'’-]+/gu)];
+      for (const [i, t] of toks.entries()) {
+        if (i > 3) break;
+        if (MODEL_WORD.test(t[0].replace(/['’]s?$/, "")) && !MODEL_ADJ.test(clause.slice(t.index! + t[0].length))) { word = t[0]; end = t.index! + t[0].length; break; }
+        if (BREAK_WORD.test(t[0])) break;
+      }
+      const after = text.slice(e, e + (poss ? poss[0].length : 0) + end);
+      const phrase = `${lead[0]}${name}${word ? after : poss ? poss[0] : ""}`;
+      const source = reads.has(c) || publishes.has(c);
+      const strong = COMPARE_STRONG.exec(head), weak = COMPARE_WEAK.exec(head), times = COMPARE_TIMES.exec(head);
+      const ofModel = /\bmodels?\s+(?:of|for)\s+$/i.test(head);
+      // A figure word ("GiveDirectly's estimate") is a source's own figure unless a comparison or "our"
+      // comes first.
+      const ours = /\b(?:our|charityevals['’])\s+/i.test(lead[0]);
+      const modelMention = !!word && (!FIGURE_WORD.test(word) || ours);
+      // A multiple or split of a source's figure ("times Rethink Priorities' range") is arithmetic, unless
+      // it is that charity's model's; "times GiveDirectly" is GiveWell's unit (multiples of cash transfers).
+      const multiple = times && (!source || modelMention) && !(name === "GiveDirectly" && !poss && /times|×/i.test(times[0]));
+      const cw = strong ?? (multiple ? times : null) ?? (weak && (word || poss) ? weak : null);
+      if (cw) report(`${cw[0]}${phrase}`, `compares with ${lib.charities.get(c)?.name ?? c}`);
+      else if (modelMention || ofModel) {
+        // A publisher's own model or figure ("Rethink Priorities' cross-cause model"), named as such.
+        if (publishes.has(c) && poss && !lead[0].trim()) continue;
+        if (reads.has(c) && !ours) continue;
+        // A published source ("from GiveWell's AMF model", an evaluator's "from its AMF and SMC models"):
+        // someone's possessive leads, not "the" or "our".
+        if (SOURCE_BEFORE.test(head) && /(?:[\p{Lu}][\w.-]*['’]s?|\bits|\btheir)\s+$/u.test(lead[0]) && !ours) continue;
+        // A comparison earlier in the clause ("as for treatment in the Dogs Trust model").
+        const earlier = /\b(?:as\s+(?:in|for|with)|unlike|(?:the\s+)?same\s+as|similar\s+to)\b[^.;:()]{1,40}$/i.exec(head);
+        if (earlier) report(`${earlier[0]}${phrase}`, `compares with ${lib.charities.get(c)?.name ?? c}`);
+        else report(ofModel ? `${/\bmodels?\s+(?:of|for)\s+$/i.exec(head)![0]}${phrase}` : phrase, `names ${lib.charities.get(c)?.name ?? c}'s model or result`);
+      }
+    }
+    // `#id`, `#owner:charity` and model ids typed in prose, of another charity's model this one doesn't read.
+    for (const x of text.matchAll(/(?<![\w&/])#([a-z0-9-]+)(?::([a-z0-9-]+))?(?![\w-])/g)) {
+      const [ref, a, b] = x;
+      if (a === "cause" || formulaRefs.has(b ? `${a}:${b}` : a)) continue;
+      const c = b ?? modelCharity.get(a) ?? (lib.charities.has(a) ? a : undefined);
+      if (c && c !== own && !reads.has(c)) report(ref, `names ${lib.charities.get(c)?.name ?? c}'s model`);
+    }
+    if (ids) for (const x of text.matchAll(ids)) {
+      const id = x[0].replace(/^#/, ""), c = modelCharity.get(id);
+      if (c && c !== own && !formulaRefs.has(id) && !reads.has(c) && !x[0].startsWith("#")) report(x[0], `names ${lib.charities.get(c)?.name ?? c}'s model`);
+    }
+  }
   return out;
 }
 

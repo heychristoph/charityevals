@@ -14,6 +14,8 @@
 //   shared-fact a typed number a shared fact holds (from the first copy; not the programme's own measured
 //               people), a typed next-dollar figure, a figure typed into another of our models too (a
 //               "shared-fact-pair" waiver marks two such rows different quantities)
+//   peer-mention another charity's model or results named in the model's text or write-up ("as in the
+//               FairVote model", "our AMF model", "below GovAI's 0.9"); a source of a figure is fine
 // Waivers: src/engine/normalization-waivers.json (src/engine/preflight.ts PREFLIGHT_WAIVERS for the formats).
 //   generated   generated/distributions.json and usage.json out of date for the model (a warning)
 //   prose       numbers in the write-up and summary against the model (src/engine/prose-numbers.ts, when present)
@@ -25,7 +27,7 @@ import { lintModel } from "../src/engine/lint";
 import { applyWaivers, checkAll, type Waivers } from "../src/engine/invariants";
 import { simulationCheck } from "../src/engine/simulation-check";
 import { simulate } from "../src/engine/montecarlo";
-import { copiedFigureProblems, kindProblems, PREFLIGHT_WAIVERS, sameJson, sharedFactProblems, simulationProblems, unitProblems, type Problem } from "../src/engine/preflight";
+import { copiedFigureProblems, kindProblems, peerMentionProblems, PREFLIGHT_WAIVERS, sameJson, sharedFactProblems, simulationProblems, unitProblems, type Problem } from "../src/engine/preflight";
 import { templateRowIds, TEMPLATE_DIR } from "../src/engine/template-files";
 import { Model } from "../src/engine/schema";
 
@@ -173,6 +175,8 @@ for (const id of ids) {
     out.push(...simulationProblems(id, sim, waivers));
     const usedPairs = new Set<string>();
     out.push(...unitProblems(lib, m, asCopied(m)), ...kindProblems(lib, m), ...sharedFactProblems(lib, m, waivers), ...copiedFigureProblems(lib, m, templates.get(m.template ?? ""), waivers, usedPairs));
+    const writeup = join(root, "writeups", `${id}.md`);
+    out.push(...peerMentionProblems(lib, m, existsSync(writeup) ? readFileSync(writeup, "utf8") : undefined));
     for (const k of Object.keys(waivers[PREFLIGHT_WAIVERS.pair] ?? {}))
       if (k.split(" = ").some((side) => side.split(" ")[0] === id) && !usedPairs.has(k))
         out.push({ severity: "low", check: "waiver", where: PREFLIGHT_WAIVERS.pair, message: `"${k}" matches no figure typed twice any more: remove it from src/engine/normalization-waivers.json` });
