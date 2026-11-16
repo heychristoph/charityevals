@@ -1,6 +1,6 @@
 # Audit: all-hands-and-hearts-charityevals, round 3
 Result: 2.760e-6 daly/$ = 0.00276 years of healthy life per 1,000 dollars (combined range 0.00057-0.0135); cause median 0.0866 (x0.032). Verdict: pass (no findings).
-Model-sha: 912ca988c52dbd9d8222f5a4d6dc29d07bb2dd93aca76e523daf253098675e21
+Model-sha: 85e65ac23de1bd6d7b4d5a8219b689e54c586f8c5e5d694e140608de478d1415
 Scope: unchanged; only the changes of commit 001c6e4 since 95fed69 were checked (`git diff 95fed69 001c6e4 -- models/ writeups/`).
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, the same as round 2, covered by the summary's reason); invariants none; check.ts all models valid; normalization-audit and simulation-check not re-run (a value and two explainers changed).
 
@@ -16,3 +16,5 @@ Verdict: pass.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+
+Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against bebc953e.

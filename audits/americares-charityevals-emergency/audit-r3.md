@@ -1,6 +1,6 @@
 # Audit: americares-charityevals-emergency, round 3 (verification of the rule 1/2/4 changes)
 Result: 4.125e-5 daly/$ = 0.04125 years of healthy life per 1,000 dollars (combined range 0.00846–0.2011); cause median 0.1100 (×0.37). Verdict: pass.
-Model-sha: 53bd998bdab4066ca852804afbff843e9dcd271ac040385835c8ba4a421fb050
+Model-sha: fc03151165ff9b1609d4b04defae82b6c3f53b131640b790548429fff0f86768
 Scope: verification only: ln_gain_usa/_lebanon/_ukraine/_myanmar, the split of the single adjustment branch into deaths-and-illness and goods, the reading-only averages, bridge/outcome labels, the summary and the write-up sentences on the emergency model. Programmes and year unchanged (emergency response, year to June 2025, 40.1M cash). Rule 3 (livelihood mortality step) does not apply: the model has no livelihood branch.
 Mechanical: lint 0 findings (3 info/warn notes: range width, judgment share, 8 point inputs), invariants none, normalization-audit none (coordinator's run; not rerun), check.ts all valid, simulation-check stable (5% 0.384, 50% 1, 95% 2.33 x best guess).
 Previous round: round 2 passed with no open findings; nothing carried over.
@@ -25,6 +25,8 @@ None needed: no source or observed input changed.
 Missing-data discount (shared), uov_per_daly (shared), counterfactual_adj (judgment, 0.3-0.8, OCHA funding anchor), em_goods_share (judgment, 0.15-0.5), affected_consumption_share (judgment). All judgments carry anchors; result remains 0.37 × the cause median, explained in the summary (US third, few deaths averted per person reached).
 
 Verdict: pass
-Model-sha: 53bd998bdab4066ca852804afbff843e9dcd271ac040385835c8ba4a421fb050
+Model-sha: fc03151165ff9b1609d4b04defae82b6c3f53b131640b790548429fff0f86768
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against e247896f.

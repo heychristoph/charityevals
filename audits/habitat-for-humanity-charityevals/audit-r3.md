@@ -1,7 +1,7 @@
 # Audit r3: habitat-for-humanity-charityevals (scoped verification)
 
 Result: 4.933e-6 daly/$ = 0.00493 years of healthy life per $1,000 (unchanged from r2; combined range 0.00112–0.0217).
-Model-sha: 06d09ccff98413f0a1c3c31204043b472c40926af6fe42cafed96666075f63f9
+Model-sha: a9e22c337164f1de2841b37d9c36c882214459f9cfcf3da464d4b43cb6238907
 Verdict: pass
 
 Scope: only the changes of commit 5f6554f1 to the model, its write-up and facts/habitat_for_humanity.json, checked against the four r2 lows, the move of the volunteer rows to shared facts, the result and the mechanical audit.
@@ -15,3 +15,5 @@ Scope: only the changes of commit 5f6554f1 to the model, its write-up and facts/
 | none | `network_volunteers`, `us_volunteer_share` | Both now read `@habitat_for_humanity.network_volunteers_fy2025` and `@habitat_for_humanity.us_volunteer_share` by formula. Values unchanged: 828,000 (same Form 990 Schedule O source and quote) and 0.3 / 0.5 / 0.75 with the same judgment explainer. The international model reads the same two facts. | verified |
 | none | result | `check.ts` all models valid. audit-model prints 0.004933 years of healthy life per $1,000, the same as r2; no change from the shared-fact move. | verified |
 | medium (judged right in r1 and r2) | whole result | audit-model `far-below` (0.0422× the global-health median). Still the only finding; no lint high, no invariant violation. | accepted |
+
+Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against d90d80aa.

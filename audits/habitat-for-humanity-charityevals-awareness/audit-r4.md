@@ -1,6 +1,6 @@
 # Audit r4: habitat-for-humanity-charityevals-awareness (scoped verification)
 Result: 1.180e-5 uov/$ = 0.0059 years of healthy life per 1,000 dollars (combined range 9.1e-6 to 3.82; model's own ranges -0.078 to +4.06).
-Model-sha: 5e196022a9b5b3b8d2380c44f14f539bf9bfad34579f5fa0f5c7d81b31254bee
+Model-sha: 9d2e7b94b503782b0067cdb32f4882915dd074406e8303af670a4de17d8a7ce9
 Verdict: pass
 
 Scope: only the changes of commit bc46382f to the model, its write-up and scripts/beneficiary-countries.ts: each round 3 low, the new he_illness_adj row, the outcome_total formula and the narrowed unmodelled_benefits_adj. Mechanical: audit-model has no high (its only notes are the judgment-share warning and the far-below medium from netting public money, judged in r3); check.ts valid; simulation-check stable, exit 0 (5% -9.2x, 50% 1x, 95% 40.8x the best guess; the sign crosses, allowed for negative results).
@@ -17,3 +17,5 @@ Scope: only the changes of commit bc46382f to the model, its write-up and script
 
 No high or medium findings. Sources: nothing new to fetch; the changes add no new observed figures (Stacy et al. 2023 and Cattaneo et al. 2009 were already cited and are judgment anchors).
 Re-stamped (15 Nov 2026): side-effect tag on unmodelled_benefits_adj added to the audited r4 model (2.16, mechanical; headline unchanged at the default weight)
+
+Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against d90d80aa.
