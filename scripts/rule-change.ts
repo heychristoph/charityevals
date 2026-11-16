@@ -114,7 +114,7 @@ const owners = plan.filter((p) => p.action.startsWith("owner"));
 const stamped: string[] = [];
 for (const p of plan.filter((x) => x.action === "re-stamp")) {
   const model = afterTree.models.find((m) => m.id === p.l.id)!;
-  stamped.push(stamp(model, why, { before: p.l.before, after: p.l.after, rows: p.l.rows, base: `before rule ${rule}` }, { rule, dry }));
+  stamped.push(stamp(model, why, { before: p.l.before, after: p.l.after, rows: p.l.rows, base: "the tree before the rule" }, { rule, dry }));
 }
 stamped.forEach((s) => console.log(s));
 
