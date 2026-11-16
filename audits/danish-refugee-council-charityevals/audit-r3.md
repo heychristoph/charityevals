@@ -17,9 +17,11 @@ Other changes checked:
 (none)
 
 Verdict: pass (0 high, 0 medium, 0 low)
-Model-sha: 9eb9424980c30c23233ea066c8de02e1366c17c3d1c213182a58f5795c11c3f4
+Model-sha: 4e1c967e8873bab7cbb22182f0f3efa24004805a8955e86941ea4c47341e5b3d
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
 
 Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@humanitarian_response.*, @ukraine.war_affected_aid_recipients_consumption_share) at the same values; judgment explainers anchored on studies and published data (pre-audit gate cleanup). Mechanical: headline unchanged, against bebc953e.
+
+Re-stamped (16 Nov 2026): Local market spillover reads the new shared fact cash.local_market_spillover_share (same value and range). Mechanical: headline unchanged, against 2b148c62.

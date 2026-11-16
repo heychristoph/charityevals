@@ -12,10 +12,12 @@ Checks passed:
 - (c) Summary range text now 0.05-0.80, matching the combined range 0.0496-0.8015; no other stale figure found.
 
 Verdict: pass
-Model-sha: 52ddf8753669fcc06380597393ab87fc9de439d6f1e887961e32f829a421b082
+Model-sha: 113ef7e20fbe909a335d9fc948c077d9b48d2769bd62f4d1eab303120c379e9f
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
 Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)
 
 Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@humanitarian_response.*, @ukraine.war_affected_aid_recipients_consumption_share) at the same values; judgment explainers anchored on studies and published data (pre-audit gate cleanup). Mechanical: headline unchanged, against 4a6180e3.
+
+Re-stamped (16 Nov 2026): Local market spillover reads the new shared fact cash.local_market_spillover_share (same value and range). Mechanical: headline unchanged, against 2b148c62.

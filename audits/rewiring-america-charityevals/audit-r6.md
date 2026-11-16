@@ -1,6 +1,6 @@
 # Audit: rewiring-america-charityevals, round 6
 Result: 0.0120 years of healthy life per 1,000 dollars at the defaults (0.012034 by scripts/headlines.ts; combined range 0.0008-0.174; down from round 5's 0.0278). Verdict: pass.
-Model-sha: 67a4486c20c613d53de5748181679ad62ad7268475f8dd2db815f9e3a26d543b
+Model-sha: e9d54dc813e6bf666d43152a8d9f4ceaf07ef8ce442bacbb2268a54079cd319d
 Scope: scoped verification after the owner's one-consumption-scale rule (docs/normalization.md 2.14): the changed row `payer_cost_per_dollar` and its readers `rebate_uov` and `credit_uov`, the summary's quoted figures, and any remaining national-accounts reading in the model and write-up. The rest of the model not re-opened.
 Mechanical: audit-model 0 findings (INV-15 not applicable per the owner's rule; the peer line prints x6.06 of the climate median, not a finding); the other mechanical scripts not re-run (scoped round).
 Previous round: round 5 had no findings; nothing open.
@@ -28,3 +28,5 @@ Top of the tornado now: `@public_funds.us_federal_payer_multiple` (judgment, the
 
 Verdict: pass
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
+
+Re-stamped (16 Nov 2026): Reference class named in a judgment's explainer (published data on disclosure windows, rule start dates or grant-voucher periods); Rewiring America's cohort tonnes unit corrected; values unchanged. Mechanical: headline unchanged, against 1a9667aa.

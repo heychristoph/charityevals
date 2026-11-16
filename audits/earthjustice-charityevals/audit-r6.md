@@ -1,6 +1,6 @@
 # Audit: earthjustice-charityevals, round 6 (verification of the compliance-cost rule 2.21)
 Result: 0.004546 tco2e/$ = 0.001995 years of healthy life per 1,000 dollars (cause median 0.001704, x1.17), against 0.002409 in round 5 (-17%). Verdict: pass.
-Model-sha: 55b27c068ccff97552a741e6dd71d21f925b2c976f4182e940ce025ba6f17809
+Model-sha: 1bd0fc90b7c093684db872c200fdecd2a6452868cb9f8c0a78c1fc760f614627
 Scope: scoped verification of the changed rows: usmeth_compliance_uov, pwr_compliance_uov, compliance_uov_per_year, the new `bridges` section and tco2e_from_uov, outcome_total, the summary and the write-up's figures (this model's and the health model's headline spans). Unchanged rows not re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (lint, invariants); normalization-audit and check.ts not re-run (scoped round).
 Previous round: not re-checked beyond the changed rows.
@@ -29,3 +29,5 @@ Of the changed rows: the US methane rule's cost ($1.5B, 1.0 to 2.4B) times the r
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): value-neutral: the EPA 2024 rules' estimate and final years now read shared facts in facts/climate.json (INV-14), same values
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
+
+Re-stamped (16 Nov 2026): EPA methane rule and Advanced Clean Cars II dates read the shared facts (climate.us_oil_gas_methane_rule_*_year, climate.ca_advanced_clean_cars_ii_*_year); same values. Mechanical: headline unchanged, against 1a9667aa.
