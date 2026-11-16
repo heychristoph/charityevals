@@ -451,21 +451,13 @@ export function hasRange(value: number | Range | undefined): value is Range {
   return typeof value === "object" && (value.low ?? value.best) !== (value.high ?? value.best);
 }
 
-/** Default assumption values (best guesses) with the user's overrides on top. */
 /** Every shared assumption's value: the reader's where they set one, else the default. A fixed rate
- * (taken from evidence, not offered as a slider) always has its default, whatever an old link says. */
+ * (taken from evidence, not offered as a slider) always has its default, whatever an old link says. The
+ * reader's values are taken as given, past a slider's ends too: src/lib/share-values.ts says which
+ * values a reader may set (the panel, share links and the MCP server all apply it). */
 export function assumptionValues(a: Assumptions, user: Record<string, number> = {}): Record<string, number> {
-  // A saved setting outside a slider's current range (an old link or saved value from before a range
-  // changed, e.g. a 0% discount rate once the floor became 0.1%) is moved to the nearest end.
-  // The control's own ends: the slider's where it has them (its zero stop allowed), else the range.
-  const clamp = (r: (typeof a.rows)[number], v: number | undefined) => {
-    if (v === undefined || typeof r.value !== "object") return v;
-    if (r.slider?.zero && v === 0) return 0;
-    const low = r.slider?.low ?? r.value.low, high = r.slider?.high ?? r.value.high;
-    return Math.min(high ?? Infinity, Math.max(low ?? -Infinity, v));
-  };
   // A derived assumption has no value of its own: formulas read it as its formula (expandDerived).
-  return Object.fromEntries(a.rows.filter((r) => r.formula === undefined).map((r) => [r.id, clamp(r, r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
+  return Object.fromEntries(a.rows.filter((r) => r.formula === undefined).map((r) => [r.id, (r.fixed ? undefined : user[r.id]) ?? pickValue(r.value)]));
 }
 
 // --- Derived assumptions ----------------------------------------------------------------------------
@@ -647,8 +639,9 @@ function downstream(g: Graph, k: number): number[] {
 /** Every row's value by position, and each model read live (`#id`). */
 type Run = { v: number[]; models: Record<string, number> };
 
-// A model's values with no inputs changed, per assumption values and view: a sensitivity swing or an
-// uncertainty step changes one input and recomputes only the rows that read it.
+// A model's values with no inputs changed, per assumption values and view: computed once (a model's
+// headline, its result read by other models and its page all ask for it), and the base a sensitivity
+// swing or an uncertainty step starts from, changing one input and recomputing only the rows that read it.
 const bases = new WeakMap<Record<string, number>, WeakMap<ResolvedModel, Partial<Record<View, Run>>>>();
 
 function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs: Record<string, number>, view: View): Run {
@@ -659,6 +652,7 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
   if (!byModel) bases.set(av, (byModel = new WeakMap()));
   let byView = byModel.get(m);
   if (!byView) byModel.set(m, (byView = {}));
+  if (!keys.length && byView[view]) return byView[view]!;
   const base = keys.length ? (byView[view] ??= run(lib, m, av, {}, view)) : undefined;
   // Another model's result is kept beside the rows, so every later lookup over these values (the tree,
   // uncertainty) reads the same number. It is always our view at the reader's values: the evaluator
@@ -684,14 +678,14 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
         const r = p.rows[k];
         env.v[k] = inputs[r.id] ?? (formula(k) ? evaluate(r.node!, look) : inputValue(r, view));
       }
-      return { v: env.v, models };
+      return (byView[view] = { v: env.v, models });
     }
     const fns = compiled(p);
     for (let k = 0; k < n; k++) {
       const r = p.rows[k];
       env.v[k] = inputs[r.id] ?? (formula(k) ? fns[k]!(env) : inputValue(r, view));
     }
-    return { v: env.v, models };
+    return (byView[view] = { v: env.v, models });
   }
   // From the base: only the rows given a value or reading a changed fact or model, and the rows
   // computed from them, are recomputed, in computing order.

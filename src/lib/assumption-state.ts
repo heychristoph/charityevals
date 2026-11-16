@@ -10,9 +10,8 @@
 // history entries, and analytics records only the path (worker/events.ts drops the query).
 import { useSyncExternalStore } from "react";
 import assumptions from "../../assumptions/default.json";
-import { pickValue } from "../engine/model";
-import { byCode } from "../engine/countries";
-import type { Row } from "../engine/schema";
+import type { Assumptions } from "../engine/schema";
+import { isDefault, presetIn, sanitizeValues, serialiseValues, shortNumber, sliderEnds } from "./share-values";
 import { editQuery } from "./query";
 
 const KEY = "charityevals:assumptions";
@@ -51,46 +50,12 @@ export function upgrade(o: Overrides): Overrides {
   return out;
 }
 
-/** A slider's ends: its own where it has them, else the value's range (a tenth to ten times a bare
- * value). `zero`: on a log scale, 0 is a stop below `low`. */
-export function sliderEnds(r: Pick<Row, "value" | "slider">): { low: number; high: number; zero: boolean } {
-  const best = pickValue(r.value);
-  const v = typeof r.value === "object" ? r.value : { best, low: undefined, high: undefined };
-  let low = r.slider?.low ?? v.low ?? best / 10;
-  let high = r.slider?.high ?? v.high ?? best * 10;
-  if (low === high) {
-    low = best / 10;
-    high = best * 10;
-  }
-  return { low, high, zero: low > 0 && !r.slider?.linear && !!r.slider?.zero };
-}
+export { sliderEnds };
 
-const ROWS = new Map((assumptions.rows as unknown as Row[]).map((r) => [r.id, r]));
-const isDefault = (v: number, best: number) => Math.abs(v - best) <= Math.abs(best) * 1e-9;
-
-/** Whether the models can run on a value, as typing it in the panel allows: not negative, not 0 on a log
- * slider without a zero stop, and a share, rate or probability shown as a percent at most 100%. Past the
- * slider's ends is fine. */
-function runnable(r: Row, v: number): boolean {
-  const { low, zero } = sliderEnds(r);
-  if (v < 0 || (v === 0 && low > 0 && !r.slider?.linear && !zero)) return false;
-  return !(r.format === "percent" && !r.shown_as && v > 1);
-}
-
-/** Only values a reader can set, each one the models can run on; values at the default are dropped. */
+/** Only values a reader can set, each one the models can run on; values at the default are dropped
+ * (src/lib/share-values.ts, the same rules the MCP server applies). */
 export function sanitize(o: Overrides): Overrides {
-  const out: Overrides = {};
-  for (const [id, raw] of Object.entries(o)) {
-    const r = ROWS.get(id);
-    if (!r || r.fixed || r.value === undefined || typeof raw !== "number" || !Number.isFinite(raw)) continue;
-    let v = raw;
-    if (r.control === "country") {
-      if (v !== 0 && !byCode.has(v)) continue;
-    } else if (r.format === "toggle") v = v >= 0.5 ? 1 : 0;
-    else if (!runnable(r, v)) continue;
-    if (!isDefault(v, pickValue(r.value))) out[id] = v;
-  }
-  return out;
+  return sanitizeValues(assumptions as unknown as Assumptions, o);
 }
 
 /** The overrides a URL's query sets, or undefined when it sets none (then the stored ones apply). */
@@ -113,21 +78,10 @@ export function parseShare(search: string): Overrides | undefined {
   return named || Object.keys(out).length ? out : undefined;
 }
 
-/** A number in as few characters as read back to 6 significant figures: 0.04, 7.1e-5, 840. */
-export function shortNumber(v: number): string {
-  const n = Number(v.toPrecision(6));
-  const plain = String(n);
-  const exp = n.toExponential().replace("e+", "e");
-  return exp.length < plain.length ? exp : plain;
-}
+export { shortNumber };
 
 /** The query for a state: a value set's id when it is exactly one, else the changed values. */
-export function serialise(o: Overrides): { set?: string; values?: string } {
-  const preset = presetOf(o);
-  if (preset === "default") return {};
-  if (preset !== "custom") return { set: preset };
-  return { values: Object.entries(o).map(([k, v]) => `${k}:${shortNumber(v)}`).join(",") };
-}
+export const serialise = (o: Overrides) => serialiseValues(PRESETS, o);
 
 const STATE_PARAM = (k: string) => k === "set" || k === "values" || k === "view" || k.startsWith("a.");
 
@@ -213,12 +167,7 @@ export function applyPreset(id: string) {
 
 /** Which set the values are: "default" with none changed, a set's id when they are exactly its values,
  * else "custom". */
-export function presetOf(o: Overrides): string {
-  const keys = Object.keys(o);
-  if (!keys.length) return "default";
-  const same = (a: number, b: number) => Math.abs(a - b) <= Math.abs(b) * 1e-6;
-  return PRESETS.find((p) => Object.keys(p.values).length === keys.length && keys.every((k) => k in p.values && same(o[k], p.values[k])))?.id ?? "custom";
-}
+export const presetOf = (o: Overrides) => presetIn(PRESETS, o);
 
 const EMPTY: Overrides = {};
 
