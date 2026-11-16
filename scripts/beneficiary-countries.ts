@@ -15,12 +15,19 @@
 // Several countries from one source share equally. A variant that names no other country inherits its
 // parent's. A charity's figure over its programmes and locations needs nothing here: each model's
 // headline carries its own weight, so the combination follows from the parts.
-//   npx tsx scripts/beneficiary-countries.ts           write the fields, print counts by method
-//   npx tsx scripts/beneficiary-countries.ts --check   exit 1 if any model's field would change
+//   npx tsx scripts/beneficiary-countries.ts               write the fields of the models changed on this branch
+//                                                          (since its merge base with main, committed or not)
+//   npx tsx scripts/beneficiary-countries.ts <id> [<id>…]  write those models' fields only
+//   npx tsx scripts/beneficiary-countries.ts --all         write every model's (after a merge on main)
+//   npx tsx scripts/beneficiary-countries.ts --check       exit 1 if any model's field would change
+// It edits the two fields' lines and nothing else in a file (scripts/lib/json-text.ts), so a model it
+// doesn't change keeps its bytes; a branch run never touches other agents' models.
+import { execFileSync } from "node:child_process";
 import { readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative } from "node:path";
 import { buildLibrary, comparable, type ResolvedModel } from "../src/engine/model";
 import { COUNTRIES } from "../src/engine/countries";
+import { setTopLevel } from "./lib/json-text";
 
 const root = join(import.meta.dirname, "..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -390,6 +397,20 @@ function fromModel(m: ResolvedModel): { b: Record<string, number>; method: strin
   return undefined;
 }
 
+// --- Which models to write -----------------------------------------------------------------------------
+const git = (...a: string[]) => execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+/** Models whose file changed since the branch left main (committed, staged, unstaged or untracked). */
+function changedOnBranch(): Set<string> {
+  let base = "HEAD";
+  try { base = git("merge-base", "HEAD", "main").trim(); } catch { /* no main: uncommitted changes only */ }
+  const paths = [...git("diff", "--name-only", base, "--", "models").split("\n"), ...git("ls-files", "--others", "--exclude-standard", "--", "models").split("\n")].filter(Boolean);
+  const byPath = new Map([...raws].map(([id, p]) => [relative(root, p), id]));
+  return new Set(paths.map((p) => byPath.get(p)).filter((x): x is string => !!x));
+}
+const ids = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+for (const id of ids) if (!raws.has(id)) throw new Error(`no model "${id}"`);
+const targets: Set<string> | "all" = check || process.argv.includes("--all") ? "all" : ids.length ? new Set(ids) : changedOnBranch();
+
 // --- Write ---------------------------------------------------------------------------------------------
 const byMethod: Record<string, string[]> = {};
 let changed = 0;
@@ -398,42 +419,22 @@ for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id)
   const d = decide(m);
   (byMethod[d.method] ??= []).push(m.id);
   if (process.argv.includes("--table")) console.log(`${m.id} | ${d.method} | ${"b" in d ? JSON.stringify(d.b) : "-"}`);
+  if (targets !== "all" && !targets.has(m.id)) continue;
   const path = raws.get(m.id)!;
   const text = readFileSync(path, "utf8");
-  // The fields as this script writes them (one line each), or an object spread over lines by a JSON
-  // pretty-printer (`"beneficiaries": {` … `},`), which a one-line match would cut in half.
-  let next = text
-    .replace(/^[ \t]+"beneficiaries": \{\n(?:[ \t]+"[^"\n]+": [0-9.e-]+,?\n)*[ \t]+\},?\n/m, "")
-    .replace(/^[ \t]+"beneficiaries(_note)?": .*\n/gm, "");
-  if ("b" in d) {
-    const b = typeof d.b === "object" && Object.keys(d.b).length === 1 && d.b.world === 1 ? "world" : d.b;
-    next = next.replace(/^([ \t]+)"cause": "[a-z-]+",\n/m, (line, indent: string) => `${line}${indent}"beneficiaries": ${JSON.stringify(b)},\n${indent}"beneficiaries_note": ${JSON.stringify(d.note)},\n`);
-    if (!next.includes('"beneficiaries"')) throw new Error(`${m.id}: no top-level "cause" line to write after`);
-  }
-  // A layout the text edit doesn't know (keys with spaces, a last field without a comma): rewrite the parsed
-  // object instead, fields in their old order with the two written after "cause".
-  let parsed: Record<string, unknown> | undefined;
-  try { parsed = JSON.parse(next); } catch { /* rewritten below */ }
   const want = "b" in d ? (typeof d.b === "object" && Object.keys(d.b).length === 1 && d.b.world === 1 ? "world" : d.b) : undefined;
-  if (!parsed || JSON.stringify(parsed.beneficiaries) !== JSON.stringify(want)) {
-    const o = JSON.parse(text) as Record<string, unknown>;
-    delete o.beneficiaries; delete o.beneficiaries_note;
-    const out: Record<string, unknown> = {};
-    for (const [k, v] of Object.entries(o)) {
-      out[k] = v;
-      if (k === "cause" && want !== undefined) { out.beneficiaries = want; out.beneficiaries_note = (d as { note?: string }).note; }
-    }
-    // The field on one line, as the text edit writes it, so the next run finds nothing to change.
-    next = (JSON.stringify(out, null, 2) + "\n").replace(/^([ \t]+)"beneficiaries": \{\n(?:[^\n]*\n)*?\1\},\n/m, (_, indent: string) => `${indent}"beneficiaries": ${JSON.stringify(want)},\n`);
-  }
+  // Only the two fields' text changes (each on one line, after "cause"); the rest of the file keeps its bytes.
+  const next = setTopLevel(text, { beneficiaries: want, beneficiaries_note: "b" in d ? d.note : undefined }, { after: "cause" });
   if (next !== text) {
     changed++;
     if (!check) writeFileSync(path, next);
+    if (targets !== "all" || check) console.log(`${check ? "would change" : "wrote"} ${relative(root, path)}`);
   }
 }
 for (const [method, ids] of Object.entries(byMethod).sort((a, b) => b[1].length - a[1].length)) {
   console.log(`${method}: ${ids.length}`);
   if (process.argv.includes("--list") || /judgment|unresolved/.test(method)) for (const id of ids) console.log(`  ${id}`);
 }
-console.log(`${changed} file${changed === 1 ? "" : "s"} ${check ? "would change" : "changed"}`);
+const scope = targets === "all" ? "" : ` (of ${targets.size} model${targets.size === 1 ? "" : "s"} asked for)`;
+console.log(`${changed} file${changed === 1 ? "" : "s"} ${check ? "would change" : "changed"}${scope}`);
 if (check && changed) process.exit(1);
