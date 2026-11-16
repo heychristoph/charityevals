@@ -22,9 +22,11 @@ Only the changed rows. `ltr_value_per_home` and `unmodelled_benefits_adj` are la
 Unchanged from round 2: `$missing_data_discount`, `$uov_per_daly`, `resp_counterfactual_adj`, `resp_price_ratio`, `resp_inkind_value`.
 
 Verdict: pass. Findings: 0 high, 0 medium, 3 low.
-Model-sha: d42711ea0f24b660900ad5991e1cf356b24d63af22b0c067a28f3c0767b96f64
+Model-sha: 661e0e614e2f3b1501bb61a8d8ee6687cb7fc689e5f9d54a9029d6da79e505f6
 
 Re-stamped after merge: the summary low fixed ("about a fifth" → "about a quarter", computed 23%); no other change.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+
+Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against bebc953e.
