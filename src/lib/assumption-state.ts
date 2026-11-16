@@ -1,8 +1,19 @@
 // The visitor's assumption overrides: kept in the URL (so a set of values is a shareable link)
 // and mirrored to localStorage (so they survive navigation). Only values that differ from the
 // defaults are stored. Every island on the page subscribes to the same store.
+//
+// The URL: `?set=<value set id>` for a ready-made set, else `?values=<id>:<number>,<id>:<number>` with
+// the values that differ from the defaults. A link's values win over stored ones and become the
+// visitor's; unknown ids, non-numbers and values the models can't run on are dropped (any value the
+// panel takes when typed is kept, past the slider's ends too). Links
+// from before (`?a.<id>=<n>`) still read. The URL follows each change by history.replaceState: no
+// history entries, and analytics records only the path (worker/events.ts drops the query).
 import { useSyncExternalStore } from "react";
 import assumptions from "../../assumptions/default.json";
+import { pickValue } from "../engine/model";
+import { byCode } from "../engine/countries";
+import type { Row } from "../engine/schema";
+import { editQuery } from "./query";
 
 const KEY = "charityevals:assumptions";
 /** Where an evaluator view, since removed, was kept: cleared so no one is left in it. */
@@ -40,36 +51,124 @@ export function upgrade(o: Overrides): Overrides {
   return out;
 }
 
-function load(): Overrides {
-  if (typeof window === "undefined") return {};
-  const params = new URLSearchParams(window.location.search);
-  const fromUrl: Overrides = {};
-  for (const [k, v] of params) if (k.startsWith("a.") && Number.isFinite(Number(v))) fromUrl[k.slice(2)] = Number(v);
-  if (Object.keys(fromUrl).length) return upgrade(fromUrl);
+/** A slider's ends: its own where it has them, else the value's range (a tenth to ten times a bare
+ * value). `zero`: on a log scale, 0 is a stop below `low`. */
+export function sliderEnds(r: Pick<Row, "value" | "slider">): { low: number; high: number; zero: boolean } {
+  const best = pickValue(r.value);
+  const v = typeof r.value === "object" ? r.value : { best, low: undefined, high: undefined };
+  let low = r.slider?.low ?? v.low ?? best / 10;
+  let high = r.slider?.high ?? v.high ?? best * 10;
+  if (low === high) {
+    low = best / 10;
+    high = best * 10;
+  }
+  return { low, high, zero: low > 0 && !r.slider?.linear && !!r.slider?.zero };
+}
+
+const ROWS = new Map((assumptions.rows as unknown as Row[]).map((r) => [r.id, r]));
+const isDefault = (v: number, best: number) => Math.abs(v - best) <= Math.abs(best) * 1e-9;
+
+/** Whether the models can run on a value, as typing it in the panel allows: not negative, not 0 on a log
+ * slider without a zero stop, and a share, rate or probability shown as a percent at most 100%. Past the
+ * slider's ends is fine. */
+function runnable(r: Row, v: number): boolean {
+  const { low, zero } = sliderEnds(r);
+  if (v < 0 || (v === 0 && low > 0 && !r.slider?.linear && !zero)) return false;
+  return !(r.format === "percent" && !r.shown_as && v > 1);
+}
+
+/** Only values a reader can set, each one the models can run on; values at the default are dropped. */
+export function sanitize(o: Overrides): Overrides {
+  const out: Overrides = {};
+  for (const [id, raw] of Object.entries(o)) {
+    const r = ROWS.get(id);
+    if (!r || r.fixed || r.value === undefined || typeof raw !== "number" || !Number.isFinite(raw)) continue;
+    let v = raw;
+    if (r.control === "country") {
+      if (v !== 0 && !byCode.has(v)) continue;
+    } else if (r.format === "toggle") v = v >= 0.5 ? 1 : 0;
+    else if (!runnable(r, v)) continue;
+    if (!isDefault(v, pickValue(r.value))) out[id] = v;
+  }
+  return out;
+}
+
+/** The overrides a URL's query sets, or undefined when it sets none (then the stored ones apply). */
+export function parseShare(search: string): Overrides | undefined {
+  const params = new URLSearchParams(search);
+  const raw: Overrides = {};
+  let named = false;
+  const set = params.get("set");
+  const preset = PRESETS.find((p) => p.id === set);
+  if (set === "default" || preset) named = true;
+  if (preset) Object.assign(raw, preset.values);
+  // Single values on top of a set.
+  for (const pair of (params.get("values") ?? "").split(",")) {
+    const i = pair.indexOf(":");
+    const v = pair.slice(i + 1).trim();
+    if (i > 0 && v) raw[pair.slice(0, i).trim()] = Number(v);
+  }
+  for (const [k, v] of params) if (k.startsWith("a.") && v.trim()) raw[k.slice(2)] = Number(v);
+  const out = sanitize(upgrade(raw));
+  return named || Object.keys(out).length ? out : undefined;
+}
+
+/** A number in as few characters as read back to 6 significant figures: 0.04, 7.1e-5, 840. */
+export function shortNumber(v: number): string {
+  const n = Number(v.toPrecision(6));
+  const plain = String(n);
+  const exp = n.toExponential().replace("e+", "e");
+  return exp.length < plain.length ? exp : plain;
+}
+
+/** The query for a state: a value set's id when it is exactly one, else the changed values. */
+export function serialise(o: Overrides): { set?: string; values?: string } {
+  const preset = presetOf(o);
+  if (preset === "default") return {};
+  if (preset !== "custom") return { set: preset };
+  return { values: Object.entries(o).map(([k, v]) => `${k}:${shortNumber(v)}`).join(",") };
+}
+
+const STATE_PARAM = (k: string) => k === "set" || k === "values" || k === "view" || k.startsWith("a.");
+
+/** `href` carrying the given values (by default the current ones), its other params and hash kept. */
+export function shareUrl(href: string, o?: Overrides): string {
+  if (!o) ensureLoaded();
+  const { set, values } = serialise(o ?? current);
+  const add: [string, string][] = [];
+  if (set) add.push(["set", set]);
+  if (values) add.push(["values", values]);
+  return editQuery(href, STATE_PARAM, add);
+}
+
+function stored(): Overrides {
   try {
-    return upgrade(JSON.parse(localStorage.getItem(KEY) ?? "{}"));
+    return sanitize(upgrade(JSON.parse(localStorage.getItem(KEY) ?? "{}")));
   } catch {
     return {};
   }
 }
 
-function persist() {
+function save() {
   try {
     localStorage.setItem(KEY, JSON.stringify(current));
   } catch {
     /* private mode: URL still carries the state */
   }
-  const url = new URL(window.location.href);
-  url.searchParams.delete("view");
-  for (const k of [...url.searchParams.keys()]) if (k.startsWith("a.")) url.searchParams.delete(k);
-  for (const [k, v] of Object.entries(current)) url.searchParams.set(`a.${k}`, String(Number(v.toPrecision(6))));
-  history.replaceState(null, "", url);
+}
+
+function persist() {
+  save();
+  history.replaceState(history.state, "", shareUrl(window.location.href, current));
 }
 
 function ensureLoaded() {
   if (!loaded && typeof window !== "undefined") {
-    current = load();
     loaded = true;
+    // A link's values become the visitor's, so they stay as the reader moves to another page.
+    const fromUrl = parseShare(window.location.search);
+    current = fromUrl ?? stored();
+    if (fromUrl) save();
     try {
       localStorage.removeItem(OLD_VIEW_KEY);
     } catch {
@@ -78,17 +177,24 @@ function ensureLoaded() {
   }
 }
 
+/** Set one value; undefined or the default puts it back. A value no link could carry (one the models
+ * can't run on) is ignored, so every state round-trips through a link. */
 export function setAssumption(id: string, value: number | undefined, defaultValue: number) {
   ensureLoaded();
   const next = { ...current };
-  if (value === undefined || Math.abs(value - defaultValue) <= Math.abs(defaultValue) * 1e-9) delete next[id];
-  else next[id] = value;
+  if (value === undefined || isDefault(value, defaultValue)) delete next[id];
+  else {
+    const v = sanitize({ [id]: value })[id];
+    if (v === undefined) return;
+    next[id] = v;
+  }
   current = next;
   persist();
   listeners.forEach((l) => l());
 }
 
 export function resetAssumptions() {
+  ensureLoaded();
   current = {};
   persist();
   listeners.forEach((l) => l());
@@ -99,6 +205,7 @@ export const PRESETS: { id: string; label: string; about: string; values: Overri
 
 /** Every slider at a set's values, the rest at the defaults. */
 export function applyPreset(id: string) {
+  ensureLoaded();
   current = { ...(PRESETS.find((p) => p.id === id)?.values ?? {}) };
   persist();
   listeners.forEach((l) => l());

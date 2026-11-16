@@ -1131,7 +1131,7 @@ them. Your values → Lives near and far:
 
 - "Where you live" (`$home_country`, a dropdown, not a slider: the assumption schema's `control: "country"`):
   an ISO 3166 numeric code, **0 = not set**, which means no distance weighting at all. Stored as a number, it
-  travels through the overrides, the URL (`?a.home_country=840`) and localStorage like any other value.
+  travels through the overrides, the URL (`?values=home_country:840`) and localStorage like any other value.
 - "Each step further from you, a life counts less by" (`$distance_discount`, judgment, **default 0%**, range
   0–90%). Steps: your country (weight 1), the rest of your world region (× (1 − d)), the rest of the world
   (× (1 − d)²). Regions are the UN M49 sub-regions, Africa and Latin America split into their M49 intermediate

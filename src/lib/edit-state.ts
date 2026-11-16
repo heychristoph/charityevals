@@ -1,8 +1,9 @@
 // The reader's edits to one model's numbers: its inputs by row id, shared facts by "@key". They live in
 // the page's URL only (n.<id>=value), so a link carries them and they never leak into another model or
-// the rankings. Assumption overrides (a.<id>) sit beside them in the same URL.
+// the rankings. Assumption overrides (set=, values=) sit beside them in the same URL.
 import { useSyncExternalStore } from "react";
 import { usedFacts, type Library, type ResolvedModel } from "../engine/model";
+import { editQuery } from "./query";
 
 type Edits = Record<string, number>;
 const PREFIX = "n.";
@@ -19,10 +20,8 @@ function ensureLoaded() {
 }
 
 function persist() {
-  const url = new URL(window.location.href);
-  for (const k of [...url.searchParams.keys()]) if (k.startsWith(PREFIX)) url.searchParams.delete(k);
-  for (const [k, v] of Object.entries(current)) url.searchParams.set(`${PREFIX}${k}`, String(Number(v.toPrecision(6))));
-  history.replaceState(null, "", url);
+  const add = Object.entries(current).map(([k, v]): [string, string] => [`${PREFIX}${k}`, String(Number(v.toPrecision(6)))]);
+  history.replaceState(history.state, "", editQuery(window.location.href, (k) => k.startsWith(PREFIX), add));
   listeners.forEach((l) => l());
 }
 
