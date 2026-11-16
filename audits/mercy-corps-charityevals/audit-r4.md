@@ -1,7 +1,7 @@
 # Audit: mercy-corps-charityevals, round 4
 
 Result: 1.721e-4 daly/$ = 0.172 years of healthy life per $1,000 (combined range 0.032–0.940); global-health median 0.099 (×1.73). Verdict: pass (0 high, 0 medium, 1 low).
-Model-sha: 152f41c8c62cf51315cfc054eaacd3adb76a876dee44677e202e7bd4dba42bc1
+Model-sha: ae4f2ed8570d962af4ea9de1da880b83c18240e7972fda5930f33a2d4db89581
 
 Scope: only commit 9a98fcc (`git show 9a98fcc -- models writeups`): the within-a-year transfer rule for relief and recovery, the anchor of `liv_participant_only_share`, summary and write-up figures.
 
@@ -44,3 +44,5 @@ Re-stamped (16 Nov 2026): Pre-audit gate cleanup: typed figures now read shared 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 52be53be.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

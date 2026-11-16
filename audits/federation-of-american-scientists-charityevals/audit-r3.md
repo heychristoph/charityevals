@@ -1,6 +1,6 @@
 # Audit: federation-of-american-scientists-charityevals, round 3 (verification round)
 Result: 0.001425 daly/$ = 1.425 years of healthy life per 1,000 dollars (combined range 0.069–29.3; model's own ranges 0.12–7.66); cause median 1.58 (×0.90). Verdict: pass.
-Model-sha: 9a3bcb55042610293b5d07d1b24c6a62890b9cfc67b318edac632f639c20aae7
+Model-sha: 20e228facb8d55f67dcd332c74bcdc5162bb10c27e2e35dfca9f51e08491587c
 Scope: unchanged from round 2 (every programme, year to 30 June 2025, $32,215,480 of programme spending). Only the round-2 fixes were checked.
 Mechanical: audit-model lint 0 findings, invariants none (run on the current model); normalization-audit, check.ts and simulation-check not re-run: the fixes changed two estimate values, text, and the charity record's wording, no structure.
 Previous round: finding 1 (global_risk_share timing): resolved, rebuilt from the dated grant and the 990 pay. Finding 2 (ai_staff_share): resolved, 0.02 (0.005–0.06), explainer now says today's staff joined after the year and matches the range. Finding 3 (branch shares): resolved, see below. Finding 4 (charity record): resolved, summary and line label name the Global Risk Program.
@@ -43,3 +43,5 @@ Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanica
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

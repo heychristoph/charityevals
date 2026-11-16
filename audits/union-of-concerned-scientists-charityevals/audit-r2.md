@@ -23,7 +23,7 @@ No findings.
 
 **Verdict: pass (all four round-1 findings settled; no new findings).**
 
-Model-sha: 241cfb528adb6864e840cf5a3c68f6aec4b1a007ab0c5d529df7731a3ee5e967
+Model-sha: f1068a0ee277cb22472f180473cd3e6f64828473a3f08283b0fb339311c4f496
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
@@ -38,3 +38,5 @@ Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanica
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

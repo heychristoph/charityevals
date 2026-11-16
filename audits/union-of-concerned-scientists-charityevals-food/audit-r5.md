@@ -1,7 +1,7 @@
 # Audit: union-of-concerned-scientists-charityevals-food, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 5.069e-7 uov/$ = 2.534e-4 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: c546cd72dabd5ac7279c3ebedd3e0f77b51a5dd271581f13065d0da69321b60d
+Model-sha: 459e9633707c5d991bee9f062a8c651b3dd779d8fc2b496123637ff52c07fa64
 
 Scope: scoped verification of the compliance-cost sentence on `wetland_flood_damage_study`.
 
@@ -23,7 +23,7 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: c546cd72dabd5ac7279c3ebedd3e0f77b51a5dd271581f13065d0da69321b60d
+Model-sha: 459e9633707c5d991bee9f062a8c651b3dd779d8fc2b496123637ff52c07fa64
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 
@@ -32,3 +32,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

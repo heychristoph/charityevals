@@ -31,7 +31,7 @@ The headline 0.01157 rounds to the 0.012 in the summary and write-up.
 None.
 
 Verdict: pass (0 high, 0 medium, 0 low).
-Model-sha: 2b138548e971b767c506e0d1fa4276ccacfd61d337ccf20ee0a89fa4b6cf811c
+Model-sha: 1f4da19c1c164e538894be3ed6ce5d076432db299a09564bd2eed2091c3a72b8
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): Local market spillover reads the new shared fact cash.local_market_spillover_share (same value and range). Mechanical: headline unchanged, against 2492e3fc.
@@ -41,3 +41,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

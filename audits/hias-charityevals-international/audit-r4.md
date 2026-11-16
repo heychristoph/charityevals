@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-international, round 4 (scoped)
-Model-sha: 31fea63d634484e72573064e747540a28647729bfc4dce9622addb165c151a7b
+Model-sha: d4b4ed736290ca17f164feb89a30013055512879ba2fbd3b7a4b442d09278039
 Scope: rsc_people (now 200, range 50-600) and the write-up's RSC line.
 Mechanical: audit-model 0 high / 0 medium / 0 low; no files rewritten.
 
@@ -21,3 +21,5 @@ Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@h
 Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline unchanged, against 2b148c62.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against a8d130f3.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

@@ -12,7 +12,7 @@ Checks passed:
 - (c) Summary range text now 0.05-0.80, matching the combined range 0.0496-0.8015; no other stale figure found.
 
 Verdict: pass
-Model-sha: a457026e3aa3bd9aecb1d41d8d99b36686c2a9096f8c0278f3ffcc128e60d296
+Model-sha: e059d42fe3522f1d72066889f76416ff7045aa50cc814f0062a804f546d9c0cf
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

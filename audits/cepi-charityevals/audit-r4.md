@@ -1,6 +1,6 @@
 # Audit: cepi-charityevals, round 4 (verification of round 3's one low)
 Result: 5.205e-4 daly/$ = 0.5205 years of healthy life per 1,000 dollars (unchanged from round 3); cause median 1.576 over 15 catastrophic-risk models (×0.33). Verdict: **pass** (no high findings; 0 medium, 0 low).
-Model-sha: d4b1dd9d63239279fb2ce0a7b4716f582b4cd8109b62f6027340e701e26e70b3
+Model-sha: e558dbb903c98b158a9f7a2d200613a7fd385446b325592d05de87360cd45431
 Scope: only the two changes since round 3: the `mpox_deaths_per_year` explainer and the write-up's "How this model was checked" paragraph.
 Mechanical: audit-model.ts 0 findings; check.ts: all models valid (warnings only: joint-extreme span, judgment share ~70%, 30 point inputs); result 0.52 years per $1,000, as in round 3. Invariants, normalization-audit and simulation-check: not re-run (no formula, value, range or shared figure changed).
 Previous round: finding 1 (`mpox_deaths_per_year` high end read as a measured figure): resolved, see below.
@@ -28,3 +28,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against 7dbeec92.

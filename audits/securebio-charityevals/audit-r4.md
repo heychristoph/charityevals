@@ -9,7 +9,7 @@ Checked only the change since round 3: evidence_adj applied per branch, weighted
 
 New findings: none.
 
-Model-sha: 589202f0a2b05f94857282ad0659190fd08859df5d5c52c1b71b2f597d70f0af
+Model-sha: 26b8c56aaaa587094f55dbf02722d5ffdb281a2bb65501fb4e7fea3888e70d13
 
 **Verdict: pass**
 
@@ -21,3 +21,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against 7dbeec92.

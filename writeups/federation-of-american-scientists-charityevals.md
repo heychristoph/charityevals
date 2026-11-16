@@ -19,7 +19,7 @@ The rest of the work aims to make US public spending and regulation work better.
 
 ### How the model works
 
-The return doesn't split the research line by issue, so the model splits it by headcount. About 5 of the roughly 35 issue-team staff work on nuclear weapons, 14% of the research line. The Global Risk Program, worked out from its grant and its director's pay, adds about 12%, split 40% nuclear, 20% pandemics and 40% AI. Other AI policy work adds 2%; today's AI team joined after the year. A few Day One proposals on catastrophic risks are added to the AI work. That puts about {{row:nuclear_cost_share}} of the cost on nuclear risk, {{row:ai_cost_share}} on AI, 0.4% on pandemics and the rest on science policy and government capacity. Each part has its own adjustments:
+The return doesn't split the research line by issue, so the model splits it by headcount. About 5 of the roughly 35 issue-team staff work on nuclear weapons, 14% of the research line. The Global Risk Program, worked out from its grant and its director's pay, adds about 12%, split 40% nuclear, 20% pandemics and 40% AI. Other AI policy work adds 2%; today's AI team joined after the year. A few Day One proposals on catastrophic risks are added to the AI work. That puts about {{row:nuclear_cost_share}} of the cost on nuclear risk, {{row:ai_cost_share}} on AI, {{row:bio_cost_share}} on pandemics and the rest on science policy and government capacity. Each part has its own adjustments:
 
 | Adjustment | Nuclear | AI | Pandemics | Science policy |
 |---|---|---|---|---|

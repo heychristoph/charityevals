@@ -7,7 +7,7 @@ Checked only the one edit made after the SecureBio round-1 finding 6 (`git diff 
 
 New findings: none.
 
-Model-sha: 476652324594098ebaa04515f91ecbc629cef1391c6f37f6b8ddb7463de9a914
+Model-sha: e906b369e92293db2d1ad9247e2364af375007bc5fa53d6558b1b4d513cf0218
 
 **Verdict: pass**
 
@@ -21,3 +21,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

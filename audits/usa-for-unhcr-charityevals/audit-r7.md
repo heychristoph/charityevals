@@ -14,10 +14,12 @@ Checks passed:
 - Explainers: no comparison with other charities, medians or peers (the World Vision mention is gone from both rows).
 
 Verdict: pass
-Model-sha: 2701927f8e108e45602a74b76ad8556829cc43ff7b511d6e41d1794c0f8dde25
+Model-sha: 7d1e8f5177f89dafa49f4ecbff79c389a96909116c41286b042d01379a1a99f9
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b148c62.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

@@ -17,7 +17,7 @@ Other changes checked:
 (none)
 
 Verdict: pass (0 high, 0 medium, 0 low)
-Model-sha: 5af7b823789317c83f07147bec19bb4849a9b26724250d6999a96c2c8987ffeb
+Model-sha: e8575944c6ed894da6cbdc846cdef6e528e12087dc36d2d5d2327786d4afe7e9
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
@@ -31,3 +31,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

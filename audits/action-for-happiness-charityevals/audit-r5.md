@@ -2,7 +2,7 @@
 
 Result: 0.1169 years of healthy life per $1,000 (0.001791 wellby/$), unchanged from round 4; the r4 low finding is fixed.
 Verdict: pass
-Model-sha: d30e7fd5137f51e0359d99761ba43e90099699a0d83e6f5ea254bd0fb0e2da3f
+Model-sha: b04fffdc9490dd3ef4d02bcfbac7cdb44ec8f06a5b122172b48064bbdb85e81b
 
 | # | Check | Outcome |
 |---|---|---|
@@ -19,3 +19,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

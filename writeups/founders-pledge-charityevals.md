@@ -36,11 +36,11 @@ Shifted money would otherwise have gone to an ordinary charity of the same cause
 
 The cost is the group's direct and support costs, without the grants. The money is the year's flow, set against the year's costs. A pledge fulfilled in 2025 counts in 2025, and the year's new pledges aren't counted on top, so nothing is counted twice.
 
-A 3% side effect is added, with a range of −5% to +20% (our judgment). On the plus side, its public research and funds guide other platforms' donors, and its pledge spreads a norm of giving among founders. On the minus side, money can sit in donor-advised funds for years, and a few advisers steering much private money narrow a field's views. The recipients' own risks are already in their figures. The result is then multiplied by the next dollar's figure, 33% of the 2025 average. Credit by share of resources, off by default, would share the result with staff's forgone pay and with new money its fund donors and members gave, to its recommended charities and to others.
+A 3% side effect is added, with a range of −5% to +20% (our judgment). On the plus side, its public research and funds guide other platforms' donors, and its pledge spreads a norm of giving among founders. On the minus side, money can sit in donor-advised funds for years, and a few advisers steering much private money narrow a field's views. The recipients' own risks are already in their figures. The result is then multiplied by the next dollar's figure, {{row:marginal_vs_past_average}} of the 2025 average. Credit by share of resources, off by default, would share the result with staff's forgone pay and with new money its fund donors and members gave, to its recommended charities and to others.
 
 ### What drives the result
 
-- **The next dollar** (33%, from 14% to 71%). Founders Pledge holds 20 months of operating costs in reserve, above its own 15-month minimum, and plans to grow through donors further from its members.
+- **The next dollar** ({{row:marginal_vs_past_average}}, from 14% to 71%). Founders Pledge holds 20 months of operating costs in reserve, above its own 15-month minimum, and plans to grow through donors further from its members.
 - **The share of giving it caused** (30%, from 15% to 45%): the site's shared figure, since it publishes no donor survey.
 - **The discount rate and the value of a life**, through the charities it funds.
 - **How much weight side effects get**, since members' other giving is a side effect.

@@ -8,7 +8,7 @@
 | d | Lint (audit-model) | 1 low (spread across joint ranges, already stated in the summary); unchanged |
 
 Verdict: pass
-Model-sha: fcb6e265d8cff705daf62615ef09c3013592d149934eeb834140c7da373c5070
+Model-sha: e59fab663d76134026b7a5f284af3ee02be78b4599ce3e3023fcd8559ab5d181
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
@@ -20,3 +20,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.

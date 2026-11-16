@@ -1,6 +1,6 @@
 # Audit: salvation-army-charityevals-international, round 2 (verification of the overhead explainer and the shared-fact move)
 Result: 2.455e-4 daly/$ = 0.2455 years of healthy life per 1,000 dollars (combined range 0.0379-1.589); cause median 0.1001 (x2.45). Verdict: pass.
-Model-sha: 17e130a41abb9773aff8d42a716495eadfb76cb0bd286ccc2a41830a66287ddc
+Model-sha: dd607d673660cf2dd87b8b9ae7d6db52c7883ae978a8b1430953750201622c04
 Scope: verification of the changes in 646c0f7e only; not a full re-audit. Changed: the overhead_ratio explainer. Also confirmed: the shared fact `@salvation_army.goods_handed_out_share` moved 0.9 to 0.85 (commit 3a3e1602, verified in the US model's audit-r3) and moves this model's result 0.2447 to 0.2455 through the overhead ratio.
 Mechanical: `npx tsx scripts/audit-model.ts models/global-health/salvation-army-charityevals-international.json` lint 0 high / 0 medium / 1 low (spread, 1874x, unchanged from round 1), invariants none; `npx tsx scripts/check.ts salvation-army-charityevals-international` all models valid, 0.25; `npx tsx scripts/simulation-check.ts salvation-army-charityevals-international` stable (5% 0.343, 50% 1, 95% 2.87 x best guess). normalization-audit not run (verification round).
 Previous round: audit-r1 findings 1 and 2 were lows with no fix asked; unchanged. The US audit-r3's finding 3 (the stale overhead_ratio explainer) is resolved.
@@ -24,3 +24,5 @@ Re-stamped (16 Nov 2026): Pre-audit gate cleanup: typed figures now read shared 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 52be53be.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.
