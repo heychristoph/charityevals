@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-international, round 4 (scoped)
-Model-sha: 0e06d98dbcba8836f9494e430784f4e717ae05c58bf5abff6b4966d9c3ef70b3
+Model-sha: e53d2af285dbccbcfdde0a008aa8466634f7ba2b2d1428692974b8b84dc4ba3f
 Scope: rsc_people (now 200, range 50-600) and the write-up's RSC line.
 Mechanical: audit-model 0 high / 0 medium / 0 low; no files rewritten.
 
@@ -17,3 +17,5 @@ Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value cha
 Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.0438 → 0.0441.
 
 Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@humanitarian_response.*, @ukraine.war_affected_aid_recipients_consumption_share) at the same values; judgment explainers anchored on studies and published data (pre-audit gate cleanup). Mechanical: headline unchanged, against 03a5c049.
+
+Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline unchanged, against 2b148c62.

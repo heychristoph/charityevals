@@ -1,7 +1,7 @@
 # Audit: refugee-council-charityevals-therapy, round 2 (verification)
 Result: 4.023e-5 WELLBYs/$ = 0.002626 years of healthy life per $1,000 (combined range 0.00043-0.0161). Verdict: pass.
 Verdict: pass
-Model-sha: 88f09b9187b7564ed279e28fc776f7aadcc0fe99115b614962f8ed359225a6de
+Model-sha: e2f2f8acba740b31f4b64cbd27fa2cc74f2e3cdb0235b2f145159a2097761cfd
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, summary gives the reason); simulation stable (5% 0.32, 95% 2.92 x best guess); normalization-audit printed no line for this model (generated/ reverted).
 
 Round-1 findings:
@@ -15,3 +15,5 @@ Round-1 findings:
 New findings: none. Summary updated (0.003, range 0.0004-0.016, $7,000 a person with the 50 MyView children in the count, credit and delivery named).
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline unchanged, against e247896f.
