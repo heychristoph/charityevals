@@ -1,6 +1,6 @@
 # Audit: league-of-women-voters-education-fund-charityevals, round 5
 Result: 1.118e-5 daly/$ = 0.01118 years of healthy life per 1,000 dollars (combined range 0.00059–0.213; joint low–high of the model's own ranges 0.0077–0.0193). Verdict: **pass**.
-Model-sha: ab36ac06e3ad1d425aed6d0e93ec54a4abac8635268a4bd526fee23a09f18890
+Model-sha: 15ec03ac0dffa6b90dd63dcff79dc76a252281baf63fc0126e6d1c0c2f135538
 Scope: scoped verification of round 5's change (removal of the side effect `vie_uov` and its chain rows); nothing else re-audited.
 Mechanical: audit-model.ts exit 0, Findings (0); `check.ts` all models valid; `simulation-check.ts` stable (5% 0.122, 50% 1, 95% 6.65 x best guess). INV-15 ignored per instructions. normalization-audit not rerun (no standard-step row touched).
 
@@ -29,3 +29,5 @@ Owner rule (no comparison with other charities, medians or peers): none remains 
 5. `@next_dollar.league_of_women_voters_education_fund` (estimate): 0.0045–0.021.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against f281c102.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

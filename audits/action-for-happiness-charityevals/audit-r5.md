@@ -2,7 +2,7 @@
 
 Result: 0.1169 years of healthy life per $1,000 (0.001791 wellby/$), unchanged from round 4; the r4 low finding is fixed.
 Verdict: pass
-Model-sha: 7b6d62e946579a2ad2445393e6f72117a52d86338f8c99fc695d09cadf244dc7
+Model-sha: de2e2f5da999cf6cd785b31b04303bfc8f7267254b3d1fe844b4de11efd74194
 
 | # | Check | Outcome |
 |---|---|---|
@@ -15,3 +15,5 @@ No findings.
 Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline unchanged, against abfc2f3a.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against a8d130f3.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

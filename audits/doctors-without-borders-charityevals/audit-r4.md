@@ -1,7 +1,7 @@
 # Audit: doctors-without-borders-charityevals, round 4
 Result: 0.001677 uov/$ = 0.839 years of healthy life per 1,000 dollars (combined range 0.315–2.231); the cause median was not re-read in this scoped round. Verdict: pass.
 Verdict: pass
-Model-sha: c2333104cddb5f1693f5070b81842f754c07fce3e15e27dd35edcd1ae78dbd43
+Model-sha: d379dd9ab30cc4d659d1aa00fc673201642ac3339eacff36b8c029191d9365b4
 Scope: verification round only: commits 36d2fd53 and 1f524029 (g4 cleanup): ln 2 row replaced by @givewell_shared.ln_consumption_per_doubling; cholera and other-admissions 5-14 shares read @death_ages.crisis_share_5_14_of_over5; WASH death rate and reduction read the @humanitarian_response facts; wash_years format; eight rewritten explainers. Programmes, year and the rest of the model were not re-audited.
 Mechanical: audit-model: 0 findings, result 0.8386 (round 3: 0.8390, about -0.05%, the WASH facts); preflight passes, with two low "generated files out of date" lines (run npx tsx scripts/summaries.ts); other scripts not re-run.
 
@@ -36,3 +36,5 @@ Unchanged: missing_data_discount, daly_per_child_death, malaria_attributable_fra
 Re-stamped (16 Nov 2026): Explainers only: wash_missing_data_adj gives the reach as its reason; an unchecked citation dropped from surgery_share_under5 (audit r4's low findings). Mechanical: headline unchanged, against 1f524029.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

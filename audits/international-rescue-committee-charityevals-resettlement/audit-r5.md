@@ -1,7 +1,7 @@
 # Audit: international-rescue-committee-charityevals-resettlement, round 5
 
 Result: 8.355e-6 daly/$ = 0.00836 years of healthy life per $1,000 (combined range 0.00165-0.0423). Verdict: **pass** (no findings above low; none open).
-Model-sha: 34d7cd3114be3a261cdc0d1ed21745da07e2b35bfab75114905827924bbccaa9
+Model-sha: f1a4d789d4ae1a1c912e35906ecab8e414bea1be995609fd72a9dc0faca7c0a4
 
 Scope: scoped verification of one change since round 4 (`git diff d38a65b~1`): `legal_undocumented_ln_gap` changed from a model-own judgment 0.15 (0.05-0.35) to the shared fact `@united_states.legal_status_ln_consumption_gain` (0.1, 0.04-0.25). The beneficiaries field was only reformatted.
 
@@ -16,8 +16,10 @@ Checks:
 No new findings.
 
 Verdict: **pass** (no findings; the swap to the shared fact is the same concept, sourced, and moves the result by -1.5%).
-Model-sha: 34d7cd3114be3a261cdc0d1ed21745da07e2b35bfab75114905827924bbccaa9
+Model-sha: f1a4d789d4ae1a1c912e35906ecab8e414bea1be995609fd72a9dc0faca7c0a4
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against e247896f.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.

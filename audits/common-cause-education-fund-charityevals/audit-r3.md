@@ -1,7 +1,7 @@
 # Audit: common-cause-education-fund-charityevals, round 3 (scoped: movement figures read from shared facts)
 
 Result: 0.0225563 years of healthy life per $1,000, unchanged from round 2 (0.0226). Verdict: pass.
-Model-sha: 24de00b63cb344afa8060da2e8e6d107318350fc6921c6775cf2cf2155a0cf2d
+Model-sha: 78601a6c1e3427bec3e75223476de43cc0d1432ca689ddb479a56ccb7488b269
 Scope: scoped verification; only that eight rows now read shared facts in facts/democracy.json instead of holding their own values.
 Mechanical: audit-model findings (0); `npx tsx scripts/headlines.ts` gives 0.0225563 for this model (Brennan Center 0.0701159).
 
@@ -24,3 +24,5 @@ The result is unchanged at 0.0225563, as required. The same facts are read by th
 Verdict: pass
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8befb8ad.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
