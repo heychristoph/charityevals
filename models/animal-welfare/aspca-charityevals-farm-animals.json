@@ -221,15 +221,8 @@
       "section": "reach",
       "label": "Table-egg laying hens in the US, 1 December 2025",
       "format": "integer",
-      "value": 303000000,
-      "kind": "observed",
-      "source": {
-        "title": "USDA NASS, Chickens and Eggs (December 2025)",
-        "url": "https://esmis.nal.usda.gov/sites/default/release-files/795695/ckeg1225.pdf",
-        "quote": "The 367 million layers consisted of 303 million layers producing table or market type eggs",
-        "retrieved": "2026-11-13"
-      },
-      "explainer": "USDA's monthly count."
+      "explainer": "USDA's monthly count (the shared figure).",
+      "formula": "@united_states.table_egg_layers_2025_12"
     },
     {
       "id": "def_pop_share",
@@ -360,22 +353,11 @@
       "section": "effect",
       "label": "Chance a federal override of the state laws passes without the coalition's 2025 opposition",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, as in charityevals' models of The Humane League: EATS-style language was in the House Farm Bill drafts of 2024-25, and ahead of the July 2025 House Agriculture hearing on Proposition 12 the ASPCA gathered farmers' views against it; the coalition (Humane World for Animals, the ASPCA, The Humane League and others) gathered letters from more than 200 members of Congress against it. Without that opposition we put an override in the next Farm Bill at 30%. One event, drawn as happens or doesn't; the opposition removes a share of it (next row).",
-      "source": {
-        "title": "ASPCA press release: U.S. House Agriculture Committee holds hearing on Proposition 12 (July 2025)",
-        "url": "https://www.aspca.org/about-us/press-releases/us-house-agriculture-committee-holds-hearing-proposition-12",
-        "quote": "calling on Congress to protect state animal protection laws that have improved the lives of millions of farm animals",
-        "retrieved": "2026-11-13"
-      },
+      "explainer": "The shared figure: EATS-style language was in the House Farm Bill drafts of 2024-25, and ahead of the July 2025 House Agriculture hearing on Proposition 12 the ASPCA gathered farmers' views against it; without the coalition's opposition an override in the next Farm Bill is put at 30% (10% to 50%). One event, drawn as happens or doesn't; the opposition removes a share of it (next row).",
       "single_event": {
         "with": "eats"
-      }
+      },
+      "formula": "@farm_animal_laws.us_preemption_override_chance_without_opposition"
     },
     {
       "id": "def_opposition_risk_cut",
@@ -731,14 +713,9 @@
       "section": "adjustments",
       "label": "Side effect: caged eggs and crated pork sold elsewhere, as a share of the animals' gain",
       "format": "percent",
-      "value": {
-        "low": -0.25,
-        "best": -0.1,
-        "high": 0
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment, as in charityevals' models of The Humane League: when buyers stop taking caged eggs some are sold elsewhere for a while, and dearer cage-free eggs move a few buyers to chicken meat (more animals per calorie). A harm, so negative; 0 to -25%.",
-      "side_effect": "added"
+      "explainer": "The shared figure: when buyers or states stop taking caged eggs or crated pork, some of it is sold elsewhere for a while (Norwood and Lusk's 0.91 eggs per egg not bought leaves about 9%), and dearer cage-free eggs move a few buyers to chicken meat. A harm, so negative: −10%, from −25% to 0.",
+      "side_effect": "added",
+      "formula": "@sad_factors.cage_crate_market_leakage_share"
     },
     {
       "id": "unmodelled_benefits_adj",
