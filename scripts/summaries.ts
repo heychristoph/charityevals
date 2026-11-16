@@ -90,15 +90,21 @@ export function summaries({ raws, lib }: ReturnType<typeof library>, dist?: Reco
 /** Same structure and strings, numbers equal to 1 part in 10^12. Exact text would fail across Node
  * versions: V8 releases differ in the last bit of Math.exp, Math.log and **, so a file written on
  * Node 22 and regenerated on Node 24 (as CI does) differs in a few final digits. */
-function same(a: unknown, b: unknown): boolean {
-  if (typeof a === "number" && typeof b === "number") return a === b || Math.abs(a - b) <= 1e-12 * Math.max(Math.abs(a), Math.abs(b));
-  if (Array.isArray(a) && Array.isArray(b)) return a.length === b.length && a.every((x, i) => same(x, b[i]));
+function same(a: unknown, b: unknown, path = ""): boolean {
+  const ok = (cond: boolean) => {
+    // The first difference, so a failing check says where (and by how much) rather than only "out of date".
+    if (!cond && !firstDiff) firstDiff = `${path || "(root)"}: committed ${JSON.stringify(a)?.slice(0, 80)}, regenerated ${JSON.stringify(b)?.slice(0, 80)}`;
+    return cond;
+  };
+  if (typeof a === "number" && typeof b === "number") return ok(a === b || Math.abs(a - b) <= 1e-12 * Math.max(Math.abs(a), Math.abs(b)));
+  if (Array.isArray(a) && Array.isArray(b)) return ok(a.length === b.length) && a.every((x, i) => same(x, b[i], `${path}[${i}]`));
   if (a && b && typeof a === "object" && typeof b === "object") {
     const ka = Object.keys(a), kb = Object.keys(b);
-    return ka.length === kb.length && ka.every((k) => same((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]));
+    return ok(ka.length === kb.length && ka.every((k) => k in (b as object))) && ka.every((k) => same((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k], `${path}.${k}`));
   }
-  return a === b;
+  return ok(a === b);
 }
+let firstDiff = "";
 
 /** Per model, its result as a distribution from a Monte Carlo at the defaults (src/engine/montecarlo.ts),
  * the reader's own value judgments left out: what the risk slider ($risk_quantile) and the plausible
@@ -118,7 +124,7 @@ const dist = distributions(built.lib);
 for (const [file, fresh] of [[out, summaries(built, dist)], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
-      console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts`);
+      console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts${firstDiff ? `\n  first difference ${firstDiff}` : ""}`);
       process.exit(1);
     }
   } else writeFileSync(file, JSON.stringify(fresh) + "\n");

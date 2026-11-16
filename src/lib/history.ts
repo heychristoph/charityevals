@@ -2,7 +2,8 @@
 // files it extends) count; for each we rebuild the library as it was at that commit, compute the
 // result and every row, and keep the commit message, so the page shows what changed and why.
 import { execFileSync } from "node:child_process";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { AGE_DISCOUNT, MISSING_DATA_DISCOUNT, buildLibrary, assumptionValues, comparable, compute, headline, type Library, type ResolvedModel } from "../engine/model";
 import { formatValue } from "./format";
@@ -118,6 +119,73 @@ function loadLibrary(root: string, sha: string | null): Library | undefined {
   }
 }
 
+/** What a history entry needs of one model at one commit: its rows as written, its result and row values.
+ * Small enough to cache on disk per commit, unlike the library it comes from. */
+type SnapRow = Pick<ResolvedModel["rows"][number], "id" | "label" | "formula" | "value" | "format">;
+type Snapshot = { rows?: SnapRow[]; ours?: number; values?: Record<string, number> };
+type Snap = { rows: SnapRow[]; byId: Map<string, SnapRow> };
+const snapOf = (rows: SnapRow[] | undefined): Snap | undefined => (rows ? { rows, byId: new Map(rows.map((r) => [r.id, r])) } : undefined);
+
+function snapshot(lib: Library | undefined, id: string): Snapshot {
+  const m = lib?.models.get(id);
+  if (!m) return {};
+  const rows = m.rows.map((r) => ({ id: r.id, label: r.label, formula: r.formula, value: r.value, format: r.format }));
+  return { rows, ...evaluate(lib, id) };
+}
+
+/** On-disk cache of past commits' snapshots (.cache/history, kept between CI runs by actions/cache): a past
+ * commit's files never change, so only a change to the engine or to this file (the hash) makes them
+ * stale. Without it every build rebuilds the library at every commit that touched a model. */
+let cacheDir: string | null | undefined;
+function historyCache(root: string): string | null {
+  if (cacheDir !== undefined) return cacheDir;
+  try {
+    const h = createHash("sha1");
+    const engine = join(root, "src/engine");
+    for (const f of readdirSync(engine).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts")).sort()) h.update(f).update(readFileSync(join(engine, f)));
+    h.update(readFileSync(join(root, "src/lib/history.ts"))).update(readFileSync(join(root, "src/lib/format.ts")));
+    // Past versions are read with today's assumptions rows and missing-data classification (withAgeDiscount,
+    // withMissingData), so those are part of the key too.
+    h.update(readFileSync(join(root, "assumptions/default.json")));
+    for (const m of jsonFilesWorking(root, "models") as { id?: string; missing_data?: unknown }[])
+      if (m?.missing_data) h.update(`${m.id}:${JSON.stringify(m.missing_data)}`);
+    const base = join(root, ".cache/history"), key = h.digest("hex").slice(0, 16);
+    cacheDir = join(base, key);
+    mkdirSync(cacheDir, { recursive: true });
+    // Only the current key is worth keeping: older ones were built by an engine that no longer runs.
+    for (const d of readdirSync(base)) if (d !== key) rmSync(join(base, d), { recursive: true, force: true });
+  } catch {
+    cacheDir = null;
+  }
+  return cacheDir;
+}
+
+/** Snapshots of these models at a commit: from the cache when every one is there, else built and stored. */
+function snapshotsAt(root: string, sha: string, ids: string[]): Map<string, Snapshot> {
+  const dir = historyCache(root);
+  const file = dir ? join(dir, `${sha}.json`) : null;
+  let cached: Record<string, Snapshot> = {};
+  if (file && existsSync(file)) {
+    try {
+      cached = JSON.parse(readFileSync(file, "utf8"));
+    } catch {
+      cached = {};
+    }
+  }
+  if (!ids.every((id) => id in cached)) {
+    const lib = loadLibrary(root, sha);
+    for (const id of ids) if (!(id in cached)) cached[id] = snapshot(lib, id);
+    if (file) {
+      try {
+        writeFileSync(file, JSON.stringify(cached));
+      } catch {
+        /* a read-only cache only costs time */
+      }
+    }
+  }
+  return new Map(ids.map((id) => [id, cached[id]]));
+}
+
 function evaluate(lib: Library | undefined, id: string): { ours?: number; values?: Record<string, number> } {
   const m = lib?.models.get(id);
   if (!lib || !m || !m.output) return {};
@@ -134,9 +202,9 @@ function evaluate(lib: Library | undefined, id: string): { ours?: number; values
 }
 
 /** Rows whose input or calculation changed between two versions, shown by their values. */
-function diffRows(before: ResolvedModel | undefined, bv: Record<string, number> | undefined, after: ResolvedModel | undefined, av: Record<string, number> | undefined): RowChange[] {
+function diffRows(before: Snap | undefined, bv: Record<string, number> | undefined, after: Snap | undefined, av: Record<string, number> | undefined): RowChange[] {
   if (!after) return [];
-  const show = (r: ResolvedModel["rows"][number], v: Record<string, number> | undefined) => (v && Number.isFinite(v[r.id]) ? formatValue(v[r.id], r.format) : "—");
+  const show = (r: SnapRow, v: Record<string, number> | undefined) => (v && Number.isFinite(v[r.id]) ? formatValue(v[r.id], r.format) : "—");
   const out: RowChange[] = [];
   for (const r of after.rows) {
     const b = before?.byId.get(r.id);
@@ -182,11 +250,11 @@ function commitsOf(root: string, filePaths: string[]): Commit[] {
 /** One model's history as it is built, commit by commit. */
 class Builder {
   entries: HistoryEntry[] = [];
-  private prev: { m: ResolvedModel; values?: Record<string, number> } | undefined;
+  private prev: { m: Snap; values?: Record<string, number> } | undefined;
   constructor(private id: string) {}
-  step(lib: Library | undefined, c: Commit | { sha: null; date: string; author: string; subject: string; body: string }) {
-    const m = lib?.models.get(this.id);
-    const { ours, values } = evaluate(lib, this.id);
+  step(s: Snapshot, c: Commit | { sha: null; date: string; author: string; subject: string; body: string }) {
+    const m = snapOf(s.rows);
+    const { ours, values } = s;
     this.entries.push({
       sha: c.sha, date: c.date, author: c.author, subject: c.subject, body: reason(c.body), ours,
       changes: this.prev ? diffRows(this.prev.m, this.prev.values, m, values) : [],
@@ -227,8 +295,8 @@ export function histories(root: string, reqs: HistoryRequest[], { uncommitted = 
   for (const sha of bySha.keys()) if (!order.includes(sha)) order.push(sha);
   for (const sha of order) {
     const { commit, ids } = bySha.get(sha)!;
-    const lib = loadLibrary(root, sha);
-    for (const id of ids) builders.get(id)!.step(lib, commit);
+    const snaps = snapshotsAt(root, sha, ids);
+    for (const id of ids) builders.get(id)!.step(snaps.get(id)!, commit);
   }
   if (uncommitted) {
     const dirty = reqs.filter((r) => {
@@ -241,7 +309,7 @@ export function histories(root: string, reqs: HistoryRequest[], { uncommitted = 
     if (dirty.length) {
       const lib = loadLibrary(root, null);
       const c = { sha: null, date: new Date().toISOString().slice(0, 10), author: "", subject: "Uncommitted changes", body: "" };
-      for (const r of dirty) builders.get(r.model.id)!.step(lib, c);
+      for (const r of dirty) builders.get(r.model.id)!.step(snapshot(lib, r.model.id), c);
     }
   }
   return new Map([...builders].map(([id, b]) => [id, b.done()]));

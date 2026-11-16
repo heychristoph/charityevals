@@ -24,7 +24,8 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # A cold history cache rebuilds the library at every past model commit (about 45 minutes); warm, a few.
+    timeout-minutes: 90
     steps:
       - name: Refuse refs other than main
         if: github.ref != 'refs/heads/main'
@@ -52,7 +53,21 @@ jobs:
       # wrangler is pinned through package-lock.json.
       - run: npm ci
 
+      # The history pages' per-commit results (src/lib/history.ts), shared with CI's.
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .cache/history
+          key: history-${{ github.sha }}
+          restore-keys: history-
+
       - name: Build and deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: npm run deploy
+
+      # Saved even when a later step fails, so a cold cache warms up once rather than on every run.
+      - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: always()
+        with:
+          path: .cache/history
+          key: history-${{ github.sha }}
