@@ -24,7 +24,7 @@ Half of other donors' giving that GiveWell caused is counted as new money. The o
 
 ### How the model works
 
-Money moved = (funds raised − what paid for operations) × the share GiveWell caused, by source, plus the influenced funding. That is about $231 million against $20.7 million of spending. Each dollar moved is valued at its recipients' live results, net of where shifted money would have gone. A 10% side effect is added, our judgment: research used by funders and governments who don't report it, less donor attention drawn to what can be measured. That average is multiplied by 70% for the next dollar of work, because its research is moving into less proven areas. A further dollar for operations is then 95% a dollar granted and 5% that work. Money moved is counted, not estimated, so no branch is discounted for missing data.
+Money moved = (funds raised − what paid for operations) × the share GiveWell caused, by source, plus the influenced funding. That is about $231 million against $20.7 million of spending. Each dollar moved is valued at its recipients' live results, net of where shifted money would have gone. A 10% side effect is added, our judgment: research used by funders and governments who don't report it, less donor attention drawn to what can be measured. That average is multiplied by {{row:marginal_vs_past_average}} for the next dollar of work, because its research is moving into less proven areas. A further dollar for operations is then 95% a dollar granted and 5% that work. Money moved is counted, not estimated, so no branch is discounted for missing data.
 
 ### What drives the result
 

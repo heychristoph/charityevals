@@ -24,7 +24,7 @@ The Foundation is credited with 70% of the Sierra Club's part: it pays for the c
 
 ### How the model works
 
-Each win is a branch: its tonnes or deaths a year once in effect, the share due to advocacy, the years a won reform counts (shared) after its own wait, what would have happened anyway, the Sierra Club's and the Foundation's shares, and how much of it is delivered (the federal rules' shared delivered shares already allow for their repeals; 85% of coal closings stay closed despite emergency orders keeping some plants open). The coal figures are shared facts. Tonnes become healthy years through the site's one climate conversion, with coal and traffic smoke and the methane rule's local smog added. The sum is divided by an average year's spending in 2024 prices, then by the Foundation's next-dollar factor (44%).
+Each win is a branch: its tonnes or deaths a year once in effect, the share due to advocacy, the years a won reform counts (shared) after its own wait, what would have happened anyway, the Sierra Club's and the Foundation's shares, and how much of it is delivered (the federal rules' shared delivered shares already allow for their repeals; 85% of coal closings stay closed despite emergency orders keeping some plants open). The coal figures are shared facts. Tonnes become healthy years through the site's one climate conversion, with coal and traffic smoke and the methane rule's local smog added. The sum is divided by an average year's spending in 2024 prices, then by the Foundation's next-dollar factor ({{row:marginal_vs_past_average}}).
 
 ### What drives the result
 
@@ -39,7 +39,7 @@ The coal closings are about four fifths of the climate model's tonnes; the feder
 
 ### What isn't modelled
 
-Gas pipelines, export terminals and other climate work are a 50% share on top of the climate wins; the lands wins (national monuments, the Public Lands Rule and Western Arctic leasing limits, mostly rescinded in 2025, and species protections), clean-water cases and chapters' local work are a 30% share on the soot standard. The Sierra Club's opposition to nuclear power counts as a small harm.
+Gas pipelines, export terminals and other climate work are a 50% share on top of the climate wins; the lands wins (national monuments, the Public Lands Rule and Western Arctic leasing limits, mostly rescinded in 2025, and species protections), clean-water cases and chapters' local work are a {{row:p_success}} share on the soot standard. The Sierra Club's opposition to nuclear power counts as a small harm.
 
 ### How this model was checked
 

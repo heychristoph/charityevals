@@ -31,7 +31,7 @@ The IMO framework also moves money, and the model counts both sides in the main 
 
 Ships' payments into the fund are transfers, not compliance costs. What they cost those who pay them is netted against what the fund buys (method, section 2.23). The fund's rewards for clean fuels buy tonnes that are already in the framework's projected cut.
 
-The next dollar is counted at 39% of the past average. Opportunity Green holds about eleven months of spending in unrestricted reserves, and new money goes partly to newer, unproven fields.
+The next dollar is counted at {{row:marginal_vs_past_average}} of the past average. Opportunity Green holds about eleven months of spending in unrestricted reserves, and new money goes partly to newer, unproven fields.
 
 ### What drives the result
 

@@ -42,7 +42,7 @@ The size step matters most. Rethink's typical projects cost $0.5–30 million; C
 
 Side effects: other benefits add 5%, because the manufacturing and regulatory networks also serve routine vaccines. Information hazards subtract 1%: vaccine libraries and AI-aided vaccine design add knowledge about dangerous viruses, which CEPI's biosecurity policy limits.
 
-CEPI is asking for $2.5 billion more for its 2027–2031 strategy, and aid budgets fell in 2025. But its income ran well above its spending in 2024 and 2025, and it held $1.1 billion at the end of 2025, most of it already promised to vaccine developers. The next dollar counts at 49% of the past average.
+CEPI is asking for $2.5 billion more for its 2027–2031 strategy, and aid budgets fell in 2025. But its income ran well above its spending in 2024 and 2025, and it held $1.1 billion at the end of 2025, most of it already promised to vaccine developers. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

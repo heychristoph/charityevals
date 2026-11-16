@@ -43,7 +43,7 @@ The first is our judgment, with a wide range. ALLFED is most of a small field, b
 
 Benefits not modelled add 25%. The largest part is the same food work after a volcanic winter: a large eruption has about a one-in-six chance this century. Smaller nuclear wars, the loss-of-industry work and ordinary food shocks make up the rest. One harm is counted: preparing for a war could make it seem more survivable, at −2%.
 
-ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 and, short of it, halved its programmes and team in 2025. It still held about 21 months of reserves at the end of 2024. The next dollar counts at 56% of the past average.
+ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 and, short of it, halved its programmes and team in 2025. It still held about 21 months of reserves at the end of 2024. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

@@ -1,6 +1,6 @@
 # Audit: kids-in-need-of-defense-charityevals, round 2
 Result: 1.354e-5 daly/$ = 0.0135 years of healthy life per 1,000 dollars (combined range 0.0016–0.118); cause median 0.0866 (x0.16). Verdict: **pass** (no high finding; one low residual, F3).
-Model-sha: 5bfd7bffc4886d875fb431f5534cc38970865b053fb2d73c4c96de9d77dd802d
+Model-sha: 5b82383cbd3cefb65881f35e9f9c98c27b6aaeb0325e859f130a37ef5fb276ff
 Scope: scoped verification of round 1's F1-F8 and the changed rows only; scope of the model unchanged (2024, legal services plus regional columns with overhead, now including the other children served outside the US).
 Mechanical: lint 0/0/0 (audit-model: Findings (0)), invariants none, simulation stable (5% 0.351, 95% 2.7 x best guess). normalization-audit not re-run (scoped round; no standard-step row changed).
 Previous round: F1 resolved, F2 resolved, F3 partly resolved (source still unchecked, anchor argument improved; now low), F4 resolved, F5 resolved, F6 resolved, F7 resolved, F8 resolved.
@@ -36,3 +36,5 @@ Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value cha
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against e247896f.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

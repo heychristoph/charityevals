@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "salvation-army",
   "owner": "charityevals",
-  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, housing placements, residential addiction recovery funded by its thrift stores, and community centres. Our model of every US programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs, clients' day-care fees and the overseas work (a model of its own) left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed, recovery by remissions and deaths, and the community and church programmes by life satisfaction. It comes to about {{result}} years of healthy life per $1,000, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about $10,000, a 0.3% gain on the log scale. Almost two-thirds of the result comes from food, goods, money and services, a fifth from shelter. Every branch is discounted for missing data, since none of the Salvation Army's services has a controlled evaluation: food, goods and money, shelter, placements, recovery, community programmes and worship. The biggest uncertainties are what families would have got without the Salvation Army, how well its counts reflect help delivered, and how poor the clients are.",
+  "summary": "The Salvation Army is a church that runs the largest network of social services in the United States: food (184 million meals), shelters (10 million nights), help with bills, holiday gifts, housing placements, residential addiction recovery funded by its thrift stores, and community centres. Our model of every US programme in fiscal 2025 (October 2024 to September 2025), with the thrift stores' running costs, clients' day-care fees and the overseas work (a model of its own) left out, values the food, goods, bills and services at what families would otherwise pay on the site's log-income scale, shelter by a room's value and the deaths it averts, housing placements by the trials' extra years housed, recovery by remissions and deaths, and the community and church programmes by life satisfaction. It comes to about {{result}} years of healthy life per $1,000, because the help is small next to what even poor US households consume: about $30 of food, goods, money and services a person in a year against consumption of about {{row:baseline_consumption}}, a 0.3% gain on the log scale. Almost two-thirds of the result comes from food, goods, money and services, a fifth from shelter. Every branch is discounted for missing data, since none of the Salvation Army's services has a controlled evaluation: food, goods and money, shelter, placements, recovery, community programmes and worship. The biggest uncertainties are what families would have got without the Salvation Army, how well its counts reflect help delivered, and how poor the clients are.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Salvation Army USA, services in the US",
@@ -142,7 +142,7 @@
       "section": "cost",
       "label": "Share of programme fees that are day-care fees",
       "format": "percent",
-      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. No split is published. 67 day care centres with 17,617 participants at sliding fees of a few thousand dollars a year would collect $20-80M of the $167M; camps, Kroc memberships and residents' rent the rest. 30% (15-50%).",
+      "explainer": "The shared Salvation Army figure (facts/salvation_army.json), read by this model and by the overseas model so the two split the combined accounts in full. No split is published. 67 day care centres with 17,617 participants at sliding fees of a few thousand dollars a year would collect $20-80M of the $167M; camps, Kroc memberships and residents' rent the rest. {{row:day_care_fee_share}} (15-50%).",
       "formula": "@salvation_army.day_care_fee_share"
     },
     {
@@ -734,7 +734,7 @@
       "section": "effect",
       "label": "The people served's consumption per person, as a share of the average",
       "format": "percent",
-      "explainer": "The shared figure for people getting US food aid (@united_states.food_aid_recipients_consumption_share, 30%, range 20-50%): Salvation Army clients, like food-pantry clients, are mostly below or near the poverty line, poorer than the poorest fifth of households on average.",
+      "explainer": "The shared figure for people getting US food aid (@united_states.food_aid_recipients_consumption_share, {{row:recipients_consumption_share}}, range 20-50%): Salvation Army clients, like food-pantry clients, are mostly below or near the poverty line, poorer than the poorest fifth of households on average.",
       "formula": "@united_states.food_aid_recipients_consumption_share"
     },
     {
@@ -886,7 +886,7 @@
       "section": "effect",
       "label": "Value of a night's shelter to the person (US$)",
       "format": "usd",
-      "explainer": "The shared value of a night's shelter in the US (@united_states.shelter_night_value_2024, about $21, $10-40): what the poorest fifth of US households pay for a roof per person-night, put from 2024 into 2025 prices by the US consumer price index (@cpi.usa_2025 / @cpi.usa_2024, Convention 8), the same year's dollars as the consumption it is set against. The full cost of running a shelter bed ($40-80) is not its value to the person, who would never pay it.",
+      "explainer": "The shared value of a night's shelter in the US (@united_states.shelter_night_value_2024, about {{row:shelter_value_per_night}}, $10-40): what the poorest fifth of US households pay for a roof per person-night, put from 2024 into 2025 prices by the US consumer price index (@cpi.usa_2025 / @cpi.usa_2024, Convention 8), the same year's dollars as the consumption it is set against. The full cost of running a shelter bed ($40-80) is not its value to the person, who would never pay it.",
       "formula": "@united_states.shelter_night_value_2024 * @cpi.usa_2025 / @cpi.usa_2024"
     },
     {

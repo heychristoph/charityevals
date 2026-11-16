@@ -40,7 +40,7 @@ Funging by large funders is 1, counted once in the next-dollar figure. The missi
 
 Side effects: other benefits +15% (the economics work, smaller attacks, events, the Policy Program), −2% for speeding up AI (its US competitiveness work) and −3% for published threat models that could draw attackers' attention.
 
-GovAI doubled its spending in 2025 and plans more growth; the UK office alone held about eight months of spending in cash at the year's end. The next dollar counts at 42% of the past average.
+GovAI doubled its spending in 2025 and plans more growth; the UK office alone held about eight months of spending in cash at the year's end. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

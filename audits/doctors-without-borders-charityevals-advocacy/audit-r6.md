@@ -1,6 +1,6 @@
 # Audit: doctors-without-borders-charityevals-advocacy, round 6 (verification round: only the change of commit 10728797)
 Result: 1.281e-4 uov/$ = 0.0640 years of healthy life per 1,000 dollars, unchanged from round 5. Verdict: pass.
-Model-sha: db7cb8832a5cad753517d616e0aeb14e5d4a3054d15721f37d050e69a7f630cc
+Model-sha: 2adf6b3294455b5a98ddf9e4ca44c02542f9776f9e6399bd976e9094146dfa21
 Verdict: pass
 Scope: verification round. Checked only that the commit's one change (the `acc_innovation_harm` explainer) fixes the round-5 low finding and that the result is unchanged. Nothing else was rechecked; all other rows were verified in earlier rounds and the diff touches no other model row.
 Mechanical: `audit-model.ts` runs clean (0 findings), result 1.281e-4 uov/$ (0.0640), same as round 5. The diff changes only explainer text; no value, range or weight moved.
@@ -18,3 +18,5 @@ Unchanged from round 5.
 Re-stamped (16 Nov 2026): Pre-audit gate cleanup: judgments' explainers name their reference class (sourced); bystanders per arrest read from @cardiac_arrest.ohca_bystanders_per_arrest and ln 2 from @givewell_shared.ln_consumption_per_doubling (same best values); some judgment ranges widened where no evidence anchors them; no peer-model comparisons in explainers. Mechanical: headline unchanged, against 74f2c29c.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.

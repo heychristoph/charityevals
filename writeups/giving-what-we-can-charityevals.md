@@ -30,12 +30,12 @@ Half the giving it caused is counted as new money. The other half would have gon
 
 ### How the model works
 
-Money moved = new pledges × yearly giving × discounted years of giving × recording × the share it caused, plus the same for Trial Pledges and for other donors' platform giving. That comes to about $34 million over the two years, against $3.9 million of spending. Each dollar moved is valued at its recipients' figures on the rankings, net of where shifted money would have gone. A 5% side effect is added, our judgment, for giving it inspires but doesn't record, less a 10% norm that may anchor some who would give more. The result is then multiplied by how much the next dollar does compared with the past average: 42%, Giving What We Can's own figure. Money moved is counted, not estimated, so no branch is discounted for missing data.
+Money moved = new pledges × yearly giving × discounted years of giving × recording × the share it caused, plus the same for Trial Pledges and for other donors' platform giving. That comes to about $34 million over the two years, against $3.9 million of spending. Each dollar moved is valued at its recipients' figures on the rankings, net of where shifted money would have gone. A 5% side effect is added, our judgment, for giving it inspires but doesn't record, less a 10% norm that may anchor some who would give more. The result is then multiplied by how much the next dollar does compared with the past average: {{row:marginal_vs_past_average}}, Giving What We Can's own figure. Money moved is counted, not estimated, so no branch is discounted for missing data.
 
 ### What drives the result
 
 - **The discount rate.** At 0.1% a pledge's 35 years count almost in full and the result is nearly three times higher. At 8% it falls by about two fifths.
-- **The next dollar** (42%, from 20% to 85%). Spending grew about 2.5 times from 2020–2022 while pledge growth slowed, and the organisation itself expects diminishing returns.
+- **The next dollar** ({{row:marginal_vs_past_average}}, from 20% to 85%). Spending grew about 2.5 times from 2020–2022 while pledge growth slowed, and the organisation itself expects diminishing returns.
 - **The value of a life** and **where shifted money would otherwise have gone** (one times GiveDirectly, from 0 to 3 times).
 - **The share it caused** (33% and 28%), from donor surveys that rely on what people say they would have done.
 
@@ -48,7 +48,7 @@ Its own estimate is a giving multiplier of 6x: $6 of value for effective chariti
 - **Pledges.** It averages two methods (this period's recorded giving, and new pledges' lifetime giving). We count only the new pledges' lifetime giving, because a pledge added this period is a flow. Its two methods give similar totals ($19.3 million and $21.6 million).
 - **Discounting.** It discounts at 3.5%; we use the site's 4%.
 - **Staff time.** It subtracts the good its staff could do earning elsewhere and donating half of it. We credit staff instead for pay they give up, as in every model on the site (credit by share of resources, off by default).
-- **The next dollar.** It reports an average. We take 42% of it for the next dollar.
+- **The next dollar.** It reports an average. We take {{row:marginal_vs_past_average}} of it for the next dollar.
 
 ### Biggest uncertainties
 
@@ -60,7 +60,7 @@ Its own estimate is a giving multiplier of 6x: $6 of value for effective chariti
 
 - The Company Pledge, which its evaluation leaves out of its own multiplier.
 - The largest donors (over $140,000 a year on the platform, or pledgers giving over $1 million a year). Its surveys found little sign it caused their giving, so they count as zero.
-- Effects of its research on donors who never use its platform, beyond the 5% side effect.
+- Effects of its research on donors who never use its platform, beyond the {{row:moved_side_effects}} side effect.
 
 ### How this model was checked
 

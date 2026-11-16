@@ -40,7 +40,7 @@ Together the uptake figures come to about 0.75 of a typical project.
 
 Side effects: other benefits add 15%. These tools also fight ordinary infections between pandemics, such as tuberculosis, flu and COVID, net of a small risk that far-UVC adds indoor pollution if used too soon. Speeding up dangerous biology and information hazards subtract nothing: Blueprint studies defences and publishes no threat analyses.
 
-At the end of 2024 Blueprint had under three months of spending in hand. Since then, by its grant records, Coefficient Giving has given it $7.1 million to pass on as research grants, $3.2 million for policy advocacy (shared with its advocacy arm) and $6.4 million of general support over two years, and Blueprint says it raised over $17.5 million in 2025. Money is less of a constraint now. Founders Pledge, which recommends it, rates its team highly. The next dollar counts at 37% of the past average.
+At the end of 2024 Blueprint had under three months of spending in hand. Since then, by its grant records, Coefficient Giving has given it $7.1 million to pass on as research grants, $3.2 million for policy advocacy (shared with its advocacy arm) and $6.4 million of general support over two years, and Blueprint says it raised over $17.5 million in 2025. Money is less of a constraint now. Founders Pledge, which recommends it, rates its team highly. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

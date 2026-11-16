@@ -1,6 +1,6 @@
 # Audit: world-central-kitchen-charityevals, round 6
 Result: 1.223e-4 daly/$ = 0.122 years of healthy life per 1,000 dollars; cause median 0.0898 (×1.36). Verdict: **pass**.
-Model-sha: 573149ade2d49b8bea8cd1903fecb0fd0e70ca0f96002c403f0641f171fd9c51
+Model-sha: 3816a58202492ab53019937240b599f268dd1823e047c6361fc1b0a46248e917
 Scope: verification of round 5's low finding 1 only (attribution_share_shared 0.9 (0.75-1) → 0.95 (0.8-1), new explainer; summary and write-up sentences). Not the whole model.
 Mechanical: audit-model 0 findings; check.ts valid; simulation-check 5% 0.533, 50% 1.00, 95% 1.84 × best guess; normalization-audit not rerun (coordinator).
 Previous round: round 5 passed with one low finding (this change).
@@ -18,10 +18,12 @@ None new.
 Unchanged from round 5: missing-data discount, the dollars-per-DALY bridge, Gaza counterfactual share, baseline consumption in Gaza, the consumption-to-UoV step.
 
 Verdict: pass
-Model-sha: 573149ade2d49b8bea8cd1903fecb0fd0e70ca0f96002c403f0641f171fd9c51
+Model-sha: 3816a58202492ab53019937240b599f268dd1823e047c6361fc1b0a46248e917
 
 Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against 2b6e501e.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b370f40.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.

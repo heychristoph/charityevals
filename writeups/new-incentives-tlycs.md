@@ -35,7 +35,7 @@ The Life You Can Save's sheet comes first, ending at its $347 per DALY. Our step
 ### Where we differ from The Life You Can Save
 
 - **Value of a death.** The Life You Can Save counts 28.9 discounted years; we count GiveWell's value of a death under five at the value-of-a-life slider.
-- **Disability weights:** GBD's best estimates (for example 0.051 rather than 0.032 for a moderate acute infection) and tuberculosis without HIV (0.333 rather than 0.438).
+- **Disability weights:** GBD's best estimates (for example {{row:dw_acute_moderate}} rather than 0.032 for a moderate acute infection) and tuberculosis without HIV (0.333 rather than 0.438).
 - **Lengths of illness** (our judgment) and **tuberculosis credited by share** (a correction).
 - **The side effect** (10%, our judgment) and **staff pay and others' costs** under credit by share of resources.
 

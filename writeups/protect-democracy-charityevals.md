@@ -8,7 +8,7 @@ Protect Democracy was founded in 2016 by former government lawyers. Its 501(c)(3
 
 ### How the impact happens
 
-Forecasters give the US about an 11% chance of falling to a "hybrid regime" before 2030. If that happened, people would lose part of what democracy brings. Across 175 countries, becoming a democracy raises income per person by about a fifth in the long run. People would also lose freedoms and fair treatment by the state. Protect Democracy's work, with that of hundreds of other groups, aims to lower that chance: through the courts, election officials and state laws.
+Forecasters give the US about an {{row:bs_breakdown_chance}} chance of falling to a "hybrid regime" before 2030. If that happened, people would lose part of what democracy brings. Across 175 countries, becoming a democracy raises income per person by about a fifth in the long run. People would also lose freedoms and fair treatment by the state. Protect Democracy's work, with that of hundreds of other groups, aims to lower that chance: through the courts, election officials and state laws.
 
 ### How the model works
 
@@ -19,8 +19,8 @@ Forecasters give the US about an 11% chance of falling to a "hybrid regime" befo
   - a slide to a hybrid regime counts as 60% of the full loss, and the cross-country effect counts at 0.8 for a rich country;
   - a year of the field's work removes a judged 4.5% of the 11% chance;
   - Protect Democracy's credit is its share of the money behind that work, about 1.3%. The field is $3 billion a year of foundation money, scaled up for other donors, with the work that acts less directly counted at a fifth.
-- **Proportional-representation branch (about 7% of spending):** about 103,000 people a year newly governed under proportional representation in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. The reform is worth a judged 5% of democracy's gain. A dollar counts as the movement's average dollar: about $3.4 million a year, FairVote's and Protect Democracy's included. This branch is about a twelfth of the result.
-- **Side effects:** in the backsliding branch, the good of democracy beyond income (+30%), backlash (−5%), repression averted (+5%) and effects on democracy abroad (+20%); in the reform branch, the shared figures for a won voting-method reform, fairer elections (+20%) and bans it provokes (−10%). Each is a share of the income value.
+- **Proportional-representation branch (about 7% of spending):** about {{row:ref_people_covered}} people a year newly governed under proportional representation in 2016-2025, most of them in Portland, Oregon, which adopted it in 2022. The reform is worth a judged 5% of democracy's gain. A dollar counts as the movement's average dollar: about $3.4 million a year, FairVote's and Protect Democracy's included. This branch is about a twelfth of the result.
+- **Side effects:** in the backsliding branch, the good of democracy beyond income (+{{row:ue_freedom_wellbeing}}), backlash (−5%), repression averted (+5%) and effects on democracy abroad (+20%); in the reform branch, the shared figures for a won voting-method reform, fairer elections (+20%) and bans it provokes (−10%). Each is a share of the income value.
 - **Next dollar:** 35% of the average. Protect Democracy held $93 million of net assets at the end of 2024, about 2.7 years of spending, almost all of it unrestricted.
 
 ### What drives the result

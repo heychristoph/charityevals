@@ -44,7 +44,7 @@ The adjustments apply to all branches:
 
 Side effects: other benefits +10% (mainly lower terrorism risk from materials security). No harm is added beyond a typical project's chance of backfiring, which is already in the cut per dollar.
 
-NTI holds about three years of spending in reserve and has run deficits, so the next dollar counts at 42% of the past average.
+NTI holds about three years of spending in reserve and has run deficits, so the next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

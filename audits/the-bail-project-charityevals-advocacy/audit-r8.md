@@ -10,9 +10,11 @@ Scope: since round 7 only the explainer of ue_family_tx was reworded (diff: one 
 Previous round: round 7's low finding (explainer wording) resolved.
 
 Verdict: pass (no high, no medium, no low)
-Model-sha: 06358f69e04b13e702d3abda1afefae818f5a44162f5d896e7cc3979d3bf2568
+Model-sha: feedb293299084d8b5f3d62727903ec7956047d25f83208a1ca029b0e1d6024d
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00283 → 0.00305.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 44d23366.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.

@@ -30,17 +30,17 @@ Half the giving it caused counts as new money. The other half would have gone to
 
 Money moved = recorded money moved (with unreported gifts allowed for, and the emergency fund's shared credit taken out) × the share it caused. Gifts through its accounts wait about two months before they reach the charities (our judgment, from a few weeks to the third of a year its year-end balance implies). That wait is discounted at the site's rate.
 
-Each dollar moved is valued at its recipients' figures, net of where shifted money would have gone. A 5% side effect is added (our judgment). It covers gifts inspired by its book and recommendations that nobody reports, against donor attention drawn from other good uses.
+Each dollar moved is valued at its recipients' figures, net of where shifted money would have gone. A {{row:moved_side_effects}} side effect is added (our judgment). It covers gifts inspired by its book and recommendations that nobody reports, against donor attention drawn from other good uses.
 
 Its US entity received $250,000 of donated services in 2025. They are others' resources behind the same money moved, so its credit is its share of its cost and theirs, 91%.
 
-The result is multiplied by how much the next dollar does compared with the 2025 average: 28% (13% to 63%). From 2024 to 2025 its costs rose 43% and its money moved 18%: the extra cost came with about half the money moved per dollar of the year's average. Part of 2025's money moved was a one-off emergency fund. The US entity's operations took in $1.07 million against $2.19 million of cost in 2025, but the two entities hold about $4.8 million in reserve, about 22 months of their costs, most of it in Australia (A$5.2 million of net assets at the end of 2024).
+The result is multiplied by how much the next dollar does compared with the 2025 average: {{row:marginal_vs_past_average}} (13% to 63%). From 2024 to 2025 its costs rose 43% and its money moved 18%: the extra cost came with about half the money moved per dollar of the year's average. Part of 2025's money moved was a one-off emergency fund. The US entity's operations took in $1.07 million against $2.19 million of cost in 2025, but the two entities hold about $4.8 million in reserve, about 22 months of their costs, most of it in Australia (A$5.2 million of net assets at the end of 2024).
 
 Money moved is counted, not estimated, so the model takes no missing-data discount. Each recipient read live brings its own.
 
 ### What drives the result
 
-- **The next dollar** (28%, from 13% to 63%).
+- **The next dollar** ({{row:marginal_vs_past_average}}, from 13% to 63%).
 - **The share of the giving it caused** (the shared 30%, from 15% to 45%).
 - **Credit by share of resources.** When it's on, the donors' new money shares the credit with your dollar.
 - **The value of a young child's life, the discount rate and the worth of a healthy year in income.** These act through its recipients' own results.
@@ -56,7 +56,7 @@ The Life You Can Save reports its 3-year leverage ratio, money moved over costs:
 - **What a dollar moved is worth.** We value each recipient at its figure on the rankings.
 - **Gifts nobody reported.** It counts only the gifts reported to it. We add an allowance for the rest.
 - **The emergency fund and donated services.** We take out Founders Pledge's share of the fund it ran with it, and the donated services' share of the credit.
-- **The wait and the next dollar.** It reports an undiscounted average. We discount the wait for its grants and take 28% of the average for the next dollar.
+- **The wait and the next dollar.** It reports an undiscounted average. We discount the wait for its grants and take {{row:marginal_vs_past_average}} of the average for the next dollar.
 - **Staff time.** We credit staff for the pay they give up, as in every model on the site (credit by share of resources, off by default).
 
 ### Biggest uncertainties

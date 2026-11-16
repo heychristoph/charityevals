@@ -40,7 +40,7 @@ The adjustments, each applied to its own branch:
 
 Side effects: other benefits +5%, from the Observatory's open data for tracking ordinary viruses. The Virology Capabilities Test is a benchmark AI developers could tune toward, at −2%. Published findings about where AI helps attackers cost −3%.
 
-SecureBio held about a year of unrestricted reserves at the end of 2024, and its main funder renewed its support. A gift can no longer buy SecureDNA, so it buys detection and AI evaluations. The next dollar counts at 49% of the past average.
+SecureBio held about a year of unrestricted reserves at the end of 2024, and its main funder renewed its support. A gift can no longer buy SecureDNA, so it buys detection and AI evaluations. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

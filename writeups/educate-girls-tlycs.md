@@ -41,7 +41,7 @@ The Life You Can Save's sheet comes first, ending at its learning-adjusted years
 
 ### Biggest uncertainties
 
-- How much of the children's test gain lasts into adult skill (40%, from 20% to 70%) and what that skill earns (20% per standard deviation, from 10% to 30%).
+- How much of the children's test gain lasts into adult skill ({{row:learning_persistence}}, from 20% to 70%) and what that skill earns ({{row:earnings_gain_per_adult_sd}} per standard deviation, from 10% to 30%).
 - How well the learning sessions are delivered at this scale: the 50% kept is The Life You Can Save's judgment.
 - Whether a year of school for a girl who was out of school brings the learning of an ordinary year; she may also stay longer than the one year counted.
 

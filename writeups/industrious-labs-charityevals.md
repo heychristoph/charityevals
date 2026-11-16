@@ -29,7 +29,7 @@ The campaigns that lost or stayed open in the period count at zero against the s
 For each rule, the model multiplies:
 
 - its effect a year (tonnes, and early deaths from cleaner local air);
-- the share of a won policy that is advocacy's doing (shared, 30%);
+- the share of a won policy that is advocacy's doing (shared, {{row:p_success}});
 - the years a won reform counts (the shared 5, discounted, after each rule's own wait: about 16 years to the middle of Rule 1146.2's phase-in);
 - the share that wouldn't have happened anyway;
 - Industrious Labs' share of all the groups' work behind it (15% and 20% for the South Coast rules, about 5% for EPA's);
@@ -38,7 +38,7 @@ For each rule, the model multiplies:
 
 The deaths from cleaner air in the basin use the district's own modelling of its 2022 air plan: 3,031 deaths avoided in 2037 for 124 tons a day of NOx, about 24 a year per ton a day. They are valued at the ages US air-pollution deaths come at, and illness avoided adds 3.6% (the district's own valuation).
 
-Each rule's compliance costs are the regulator's own figures (docs/normalization.md 2.21). For Rule 1146.2, the district's analysis gives the heat pumps' extra price, amortized at the site's discount rate, plus owners' fuel savings. The tonnes, the fuel savings and the NOx cut all rest on the same per-unit energy use, so all three take the same evidence adjustment (0.8). The costs are valued as money lost by owners and consumers, and pass through the same chain as the benefits. The cost is a typical year of 2023–2024: Tides Foundation's grants over the share of the budget they paid (our judgment, 75%). The next dollar counts 42% of the past average.
+Each rule's compliance costs are the regulator's own figures (docs/normalization.md 2.21). For Rule 1146.2, the district's analysis gives the heat pumps' extra price, amortized at the site's discount rate, plus owners' fuel savings. The tonnes, the fuel savings and the NOx cut all rest on the same per-unit energy use, so all three take the same evidence adjustment (0.8). The costs are valued as money lost by owners and consumers, and pass through the same chain as the benefits. The cost is a typical year of 2023–2024: Tides Foundation's grants over the share of the budget they paid (our judgment, 75%). The next dollar counts {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

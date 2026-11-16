@@ -47,7 +47,7 @@ The adjustments, each applied to its own branch:
 
 Side effects: other benefits +5%, mainly CORI's help to health departments in ordinary outbreaks. Harm −2%: the Center's 2019 coronavirus exercise, Event 201, became a focus of conspiracy theories about COVID-19, and published pathogen analyses carry some risk of misuse.
 
-The Center's main funder halved its general support in 2023, and that grant ends in 2026, so money is likelier than usual to be the constraint. CORI is paid by a restricted CDC grant, so a gift buys the policy research and training, which the model values more highly. The next dollar counts at 64% of the past average.
+The Center's main funder halved its general support in 2023, and that grant ends in 2026, so money is likelier than usual to be the constraint. CORI is paid by a restricted CDC grant, so a gift buys the policy research and training, which the model values more highly. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

@@ -19,7 +19,7 @@ Longview says it directed over $50 million in 2025, as of mid-November. We take 
 - **Money through its funds.** Longview publishes no survey of its donors, so the share it caused is the site's shared figure for a meta charity without one: 30%, from 15% to 45%. Half of that counts as new money. The other half would have been given anyway, so it counts only for the gain over where it would have gone. Both are the site's shared rules.
 - **Advised money.** Donors who ask for its advice already give to these risks. The same shared 30% is read as the share of the advised money whose destination its advice changed. That money would have been given anyway, so it counts only for the gain over an ordinary charity of the same areas. It also takes the site's evidence and missing-data steps, because nobody counts what its advice changed. This is the one branch discounted for missing data.
 
-A dollar it directs is worth what its areas' charities achieve, read live under your values. Its US grants list purposes by recipient: of the $5.7 million it classifies, 89% went to AI, 10% to nuclear and 2% to biosecurity. Its UK grants and its advised money, about $49 million, publish no split. For that rest our judgment is AI 80%, nuclear 12%, biosecurity 3% and digital sentience and other work 5%. It had two nuclear grantmakers in 2025 (four going into 2026) beside a larger AI team, and no biosecurity fund or grantmaker. Weighted by dollars, that gives AI 81%, nuclear 12% and biosecurity 3% of the money it directed. Each area is valued at its charities on the rankings, with equal weights. METR is the one 2025 grantee with a model here, and it is read at its own figure for its share of the AI grants. Digital sentience has no model here, so that money takes the average of the rest.
+A dollar it directs is worth what its areas' charities achieve, read live under your values. Its US grants list purposes by recipient: of the $5.7 million it classifies, 89% went to AI, 10% to nuclear and 2% to biosecurity. Its UK grants and its advised money, about $49 million, publish no split. For that rest our judgment is AI 80%, nuclear 12%, biosecurity 3% and digital sentience and other work 5%. It had two nuclear grantmakers in 2025 (four going into 2026) beside a larger AI team, and no biosecurity fund or grantmaker. Weighted by dollars, that gives AI 81%, nuclear 12% and biosecurity 3% of the money it directed. Each area is valued at its charities on the rankings, with equal weights. The 2025 grantees with a model here, MATS and METR, are read at their own live results for their shares of the AI grants. Digital sentience has no model here, so that money takes the average of the rest.
 
 Shifted money would otherwise have gone to an ordinary charity of the same areas, valued in the same mix. That is the site's shared rule for an organisation moving money across causes.
 
@@ -27,21 +27,21 @@ Shifted money would otherwise have gone to an ordinary charity of the same areas
 
 The cost is both entities' expenses less their grants: $6.9 million. Money through its funds is the grants both paid, plus the Emerging Challenges Fund's donations. One $5.7 million US grant to an unnamed recipient in Europe could have gone to the UK company, and so would be counted twice. We take out 5% of it, with a range of 0% to 50%. Neither set of accounts reports a transfer between them, and the UK company's unrestricted donations, where general support would land, were only £2,054. The grants are taken as the year's flow to grantees, against the year's costs.
 
-A 5% side effect is added, with a range of −5% to +20% (our judgment). On the plus side, its convenings draw new donors and its reports inform other funders. On the minus side, a few advisers steering much of a field's private money narrow its views. The grantees' own chance of backfiring is already in their figures. The result is then multiplied by the next dollar's figure, 36% of the 2025 average. Credit by share of resources, off by default, would share the result with staff's forgone pay and with new money its fund donors gave.
+A 5% side effect is added, with a range of −5% to +20% (our judgment). On the plus side, its convenings draw new donors and its reports inform other funders. On the minus side, a few advisers steering much of a field's private money narrow its views. The grantees' own chance of backfiring is already in their figures. The result is then multiplied by the next dollar's figure, {{row:marginal_vs_past_average}} of the 2025 average. Credit by share of resources, off by default, would share the result with staff's forgone pay and with new money its fund donors gave.
 
 ### What drives the result
 
 - **Where shifted money would otherwise have gone** (an ordinary charity of the same areas, from nothing to three times that). At the high end, shifted money counts as a loss.
 - **The share that went to nuclear work** (12%, from 6% to 19%). Nuclear grants carry most of the value.
 - **The discount rate**, through its destinations' long-run benefits.
-- **The next dollar** (36%, from 15% to 75%). Longview holds over a year and a half of operating costs in unrestricted reserves. Its 2025 average comes from the year its private AI fund made its grants rise fivefold.
+- **The next dollar** ({{row:marginal_vs_past_average}}, from 15% to 75%). Longview holds over a year and a half of operating costs in unrestricted reserves. Its 2025 average comes from the year its private AI fund made its grants rise fivefold.
 - **How much unmeasured results and won reforms count**, through the charities it funds.
 
 ### Biggest uncertainties
 
 - **How much its advice changes.** No donor survey or count exists. Its donors are a few large givers, many already committed to these risks.
 - **Where the money went.** Its UK grants and advised giving publish no split by area or recipient. Its 2025 annual report sits in a file that can't be opened without signing in.
-- **The value of a dollar in each area.** Few of its grantees have a model here. RAND, the Horizon Institute and MATS, its largest US grantees, are valued at the average of their area's charities on the rankings.
+- **The value of a dollar in each area.** Few of its grantees have a model here. RAND and the Horizon Institute, its largest US grantees after MATS, are valued at the average of their area's charities on the rankings.
 
 ### What isn't modelled
 

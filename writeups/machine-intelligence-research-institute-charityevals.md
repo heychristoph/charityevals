@@ -31,7 +31,7 @@ All of MIRI's spending is on AI. The model's pandemic and nuclear areas are set 
 
 Side effects: other benefits add 5% (AI Impacts' surveys, and a public debate that also covers smaller harms). A harm of −5% (down to −30%) reflects that arguments about superintelligence can also draw money and people into building it, and that a contested call for a halt can make others' proposals look extreme.
 
-MIRI roughly tripled its reserves in 2026 and is well above its two-year target, so the next dollar counts at 35% of the past average.
+MIRI roughly tripled its reserves in 2026 and is well above its two-year target, so the next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

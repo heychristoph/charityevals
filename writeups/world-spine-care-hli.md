@@ -27,7 +27,7 @@ HLI's figures come first, ending at WELLBYs per $1,000 at the middle cost, $53.5
 
 ### Where we differ from HLI
 
-- **Exchange rate (changed for consistency):** every HLI model converts WELLBYs at one rate, set so that a fall in depression counts the same in HLI's analyses as in the site's other depression models (0.065 healthy years per WELLBY; "1 point more life satisfaction for a year vs doubled-income year" under Your values). HLI compares charities with GiveDirectly's cash transfers, which implies about 0.575 healthy years per WELLBY, nine times higher; the evaluator view converts at that rate.
+- **Exchange rate (changed for consistency):** every HLI model converts WELLBYs at one rate, the site's shared exchange rate (0.065 healthy years per WELLBY; "1 point more life satisfaction for a year vs doubled-income year" under Your values). HLI compares charities with GiveDirectly's cash transfers, which implies about 0.575 healthy years per WELLBY, nine times higher; the evaluator view converts at that rate.
 - **Household size (changed for consistency):** every model reads one household size per place. HLI uses an average for low- and middle-income countries (3.33 other members); we take the two countries whose clinic data HLI uses, Botswana (3.3 people, 2022 census) and the Dominican Republic (3.5, DHS), less the patient: 2.4 other members. The evaluator view keeps HLI's 3.33.
 - **A central figure.** HLI gives the range; we use the middle of its cost range.
 - **Staff pay:** with credit by share of resources, staff's forgone pay counts as an in-kind contribution: here large, because most clinicians are volunteers from rich countries on below-market stipends.

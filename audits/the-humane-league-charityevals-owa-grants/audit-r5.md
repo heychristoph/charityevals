@@ -1,6 +1,6 @@
 # Verification round (scoped)
 Result: 0.00021 years of healthy life per $1,000 (0.000210297; ced per donor dollar 1.912). Verdict: **pass**.
-Model-sha: 113bbf29e2374d726ff2e4cdb37f0bde78733bcef3f4c96745c4b0dbe87f3d29
+Model-sha: f5f611d1cc81336572a912924b44ab0ed268d2a199507aaafbe3d8191851ff6f
 Scope: only the mechanical move of shared judgments into facts/the_humane_league.json and facts/farm_animal_laws.json, and the single coalition pool (def_coalition_spend, apadef_coalition_share). audit-model.ts: 0 findings; check.ts: all models valid.
 
 Verdict: **pass**
@@ -20,3 +20,5 @@ Re-stamped (15 Nov 2026): this round's low findings fixed in explainers, write-u
 Re-stamped (16 Nov 2026): pre-audit cleanup: shared facts read (US layers, preemption chance, market leakage, evaluator side effects), reference classes named, ranges widened where evidence is thin; headline unchanged. Mechanical: headline unchanged, against 9d3d36e4.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 1b0eb29e.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.

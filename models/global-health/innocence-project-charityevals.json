@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "innocence-project",
   "owner": "charityevals",
-  "summary": "The Innocence Project is a US legal organisation (31.5 million dollars spent in the year to June 2025) that frees wrongly convicted people, mostly with DNA evidence, campaigns for laws that prevent wrongful convictions and compensate exonerees, and supports the Innocence Network's groups. Its spending over fiscal years 2021-2025 is counted as a past average over what those years achieved: about a third of the credit for its 24 exonerations (the years in prison they would still have served, the deaths prison causes, and compensation counted as a transfer, the exoneree's gain less the taxpayers' cost), shared with pro bono law firms that give about as much as it spends, about a third of a small cut in wrongful imprisonment from the eyewitness, interrogation, discovery and compensation laws it won or defended, and a small share of other innocence groups' exonerations; every branch is discounted for missing data. The result is about {{result}} years of healthy life per 1,000 dollars: its casework costs about two million dollars per exoneration, each freeing one person from about a dozen more years in prison; the reforms of the window remove only about 1% of the country's wrongful imprisonment; and the next dollar counts at a third of the average as it holds over three years of spending in reserve. The model's own ranges span more than a thousandfold, so the result is mostly uncertainty; the biggest are how many people in US prisons are innocent, how much the window's reforms cut that, and the Innocence Project's share of the coalitions behind the reforms.",
+  "summary": "The Innocence Project is a US legal organisation (31.5 million dollars spent in the year to June 2025) that frees wrongly convicted people, mostly with DNA evidence, campaigns for laws that prevent wrongful convictions and compensate exonerees, and supports the Innocence Network's groups. Its spending over fiscal years 2021-2025 is counted as a past average over what those years achieved: about a third of the credit for its 24 exonerations (the years in prison they would still have served, the deaths prison causes, and compensation counted as a transfer, the exoneree's gain less the taxpayers' cost), shared with pro bono law firms that give about as much as it spends, about a third of a small cut in wrongful imprisonment from the eyewitness, interrogation, discovery and compensation laws it won or defended, and a small share of other innocence groups' exonerations; every branch is discounted for missing data. The result is about {{result}} years of healthy life per 1,000 dollars: its casework costs about two million dollars per exoneration, each freeing one person from about a dozen more years in prison; the reforms of the window remove only about {{row:pol_reduction_share}} of the country's wrongful imprisonment; and the next dollar counts at a third of the average as it holds over three years of spending in reserve. The model's own ranges span more than a thousandfold, so the result is mostly uncertainty; the biggest are how many people in US prisons are innocent, how much the window's reforms cut that, and the Innocence Project's share of the coalitions behind the reforms.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Innocence Project",
@@ -913,7 +913,7 @@
       "label": "Consumption per person in an exoneree's household (US$ a year)",
       "format": "usd",
       "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile",
-      "explainer": "People leaving prison after decades start with nothing: the shared US survey consumption per person times the poorest fifth's spending share, per person with the shared household sizes, as the site's other US models of people in prison do."
+      "explainer": "People leaving prison after decades start with nothing: the shared US survey consumption per person times the poorest fifth's spending share, per person with the shared household sizes."
     },
     {
       "id": "comp_recipient_uov",
@@ -1034,7 +1034,7 @@
       "label": "Value of a death averted at prison ages",
       "format": "number",
       "formula": "@moral_weights.uov_per_death_age_15_49 * $life_value_multiplier",
-      "explainer": "People spared a wrongful conviction are mostly young (27 on average among the Innocence Project's clients, data page): the shared value of a death at 15-49, as in the site's other prison models.",
+      "explainer": "People spared a wrongful conviction are mostly young (27 on average among the Innocence Project's clients, data page): the shared value of a death at 15-49.",
       "unit": "UoV"
     },
     {
@@ -1453,7 +1453,7 @@
       "section": "adjustments",
       "label": "Side effect: families and children with a parent or partner home, as a share of the incarceration value",
       "format": "percent",
-      "explainer": "Children and partners of people freed or kept out of prison are spared separation and lost income: the shared share (facts/incarceration.json, Wakefield and Wildeman 2013), 15% of the incarceration value, from 0 to 40%.",
+      "explainer": "Children and partners of people freed or kept out of prison are spared separation and lost income: the shared share (facts/incarceration.json, Wakefield and Wildeman 2013), {{row:ue_family}} of the incarceration value, from 0 to 40%.",
       "side_effect": "added",
       "formula": "@incarceration.family_share_of_incarceration_value"
     },
@@ -1464,7 +1464,7 @@
       "format": "percent",
       "formula": "@incarceration.earnings_share_of_incarceration_value",
       "side_effect": "added",
-      "explainer": "Fewer years in prison mean higher earnings after release, which the life-satisfaction gap of the year inside doesn't cover: the shared share (facts/incarceration.json, Western 2002), 10%, from 0 to 30%. An exoneree's record is cleared too; the share is kept as it is."
+      "explainer": "Fewer years in prison mean higher earnings after release, which the life-satisfaction gap of the year inside doesn't cover: the shared share (facts/incarceration.json, Western 2002), {{row:ue_earnings}}, from 0 to 30%. An exoneree's record is cleared too; the share is kept as it is."
     },
     {
       "id": "ue_true_perpetrator",

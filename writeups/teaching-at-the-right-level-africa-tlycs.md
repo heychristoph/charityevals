@@ -11,7 +11,7 @@ TaRL Africa was set up by J-PAL Africa and Pratham to help African governments a
 ### How the impact happens
 
 1. **Learning:** randomised trials of Teaching at the Right Level in India and several African countries found gains of 0.15 to 0.7 standard deviations in reading and maths. The Life You Can Save takes 0.15 and keeps half of it for weaker delivery at scale: 0.075 per pupil.
-2. **Learning-adjusted years:** {{row:adjusted_sd_increase}} standard deviations is worth 0.35 years of school (4.7 years per standard deviation, a World Bank estimate), scaled by how much pupils learn in a year in each country.
+2. **Learning-adjusted years:** {{row:adjusted_sd_increase}} standard deviations is worth {{row:eyos_per_child}} years of school (4.7 years per standard deviation, a World Bank estimate), scaled by how much pupils learn in a year in each country.
 3. **Cost:** TaRL Africa's spending and the governments' costs as TaRL Africa gave them, together, 3.28 dollars per pupil in Zambia, 4.40 in Nigeria and 12.19 in Côte d'Ivoire (The Life You Can Save's figures).
 4. **Earnings (our step):** better reading and maths in childhood raise adult earnings, shared by the earner's household for a working life.
 
@@ -43,7 +43,7 @@ The Life You Can Save's sheet comes first, ending at its average of the three co
 
 ### Biggest uncertainties
 
-- How much of the pupils' test gain lasts into adult skill (40%, from 20% to 70%) and what that skill earns (20% per standard deviation, from 10% to 30%): neither is measured for these pupils.
+- How much of the pupils' test gain lasts into adult skill ({{row:learning_persistence}}, from 20% to 70%) and what that skill earns (20% per standard deviation, from 10% to 30%): neither is measured for these pupils.
 - How well the government programmes are delivered at this scale: the 50% kept is The Life You Can Save's judgment, not a measurement of these programmes.
 - The costs and reach are TaRL Africa's own figures given to The Life You Can Save. The organisation's only public accounts are the US arm's Form 990 (1.14 million dollars of programme spending in 2025); the Kenyan entity that runs the country programmes publishes none.
 

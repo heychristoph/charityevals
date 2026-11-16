@@ -20,7 +20,7 @@ All five branches are *thin*: United Way publishes who it reaches only as one ne
 
 ### How the model works
 
-Every branch counts as income to the people helped, on the site's log scale at the clients' consumption ({{row:recipients_consumption_share}} of the US average per person: the poorest fifth of households consume 67% of the average person's; the basic-needs and 211 clients 30%, the site's figure for people getting US food aid), valued at the shared value of a doubled income and converted to healthy years by the site's rate.
+Every branch counts as income to the people helped, on the site's log scale at the clients' consumption ({{row:recipients_consumption_share}} of the US average per person: the poorest fifth of households consume {{row:poorest_fifth_consumption_share}} of the average person's; the basic-needs and 211 clients 30%, the site's figure for people getting US food aid), valued at the shared value of a doubled income and converted to healthy years by the site's rate.
 
 - **Basic-needs grants**: a grantee spends about 82% of a dollar on services; the help is worth about 90% of its cost to the household; 80% of it wouldn't have come from government or family, and 85% wouldn't have been given anyway with other donors' money (emergency help is rationed: in Chicago, people who asked for rent help after the funds ran out entered shelters far more often than those helped; Evans, Sullivan and Wallskog, Science 2016).
 - **Other grants and own services**, split into three kinds of service (40% children and youth, 30% financial stability, 30% health and other, a judgment anchored on local United Ways' impact areas), each valued from its research, at the full cost of a participant's place in the programmes the trials test:

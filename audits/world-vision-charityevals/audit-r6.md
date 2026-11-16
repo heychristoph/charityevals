@@ -24,7 +24,7 @@ Summary and write-up: both match the live result (0.29, about three times the me
 Unchanged: missing_data_discount, uov_per_daly, relief_counterfactual_adj, affected_consumption_share, health_cost_per_child. The aid multiple is not among them.
 
 Verdict: pass
-Model-sha: 15966dc693a399bc1ee8a61092cea0a538122e610d35d9299677e75ba9a9ead6
+Model-sha: 6d386152f5a716b1cff9252700a96ac313ff539daaf12dbc03b187924ca9a991
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -37,3 +37,5 @@ Re-stamped (16 Nov 2026): Pre-audit gate cleanup: typed figures now read shared 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 52be53be.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.

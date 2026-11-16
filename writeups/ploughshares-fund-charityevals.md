@@ -34,7 +34,7 @@ Grants for people harmed by past testing don't cut the risk, so they don't count
 
 Side effects add 13%. They cover a limited nuclear war or a single detonation, which has no shared forecast, war prevention beyond nuclear weapons, compensation won for people harmed by testing, and Ploughshares' influence on what other funders give. No harm is added beyond a typical project's chance of backfiring, which is already in the cut per dollar.
 
-Ploughshares holds almost no unrestricted reserves. It has drawn on its restricted capital pool through two years of deficits, and funding for the field is shrinking. The next dollar counts at 53% of the past average.
+Ploughshares holds almost no unrestricted reserves. It has drawn on its restricted capital pool through two years of deficits, and funding for the field is shrinking. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

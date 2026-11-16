@@ -34,7 +34,7 @@ Each branch counts the money that reached people, valued on the site's log-incom
 - **Direct File.** It saved its users about $18 million in filing fees, and about $20 million of credits were claimed by people who wouldn't otherwise have filed (a judged 7% of its refunds). It cost the Treasury $73 million. Its users are poorer than the taxpayers who pay, so on the log scale it comes out slightly positive.
 - **Grocery store.** A store is worth a little to the residents it serves, net of the city's subsidy, times a 30% chance it opens. The rest of the shaping-markets line (anti-monopoly and public-option grants, AI convenings) had no win in the period we could credit, so it counts nothing, its cost still counted.
 
-The cost is the 501(c)(3)'s average real spending over the three years, 109% of 2024's. The next dollar counts at 42% of the past average. The organisation added $4.5 million to its reserves in 2024, and its next campaigns defend credits already won. Every branch takes the shared missing-data discount.
+The cost is the 501(c)(3)'s average real spending over the three years, 109% of 2024's. The next dollar counts at {{row:marginal_vs_past_average}} of the past average. The organisation added $4.5 million to its reserves in 2024, and its next campaigns defend credits already won. Every branch takes the shared missing-data discount.
 
 Three side effects are rows of their own:
 

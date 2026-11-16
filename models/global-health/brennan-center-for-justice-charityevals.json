@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "brennan-center-for-justice",
   "owner": "charityevals",
-  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Four branches: its 1.2% share of the litigation that ended the emergency tariffs in February 2026 (about 0.12% of long-run US GDP restored, and more than as much again for trading partners), half of it done in the year; its direct work against a slide (about a third of its democracy spending), 0.7% of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up; the rest of its democracy spending (voting rights, redistricting, money in politics), counted as reform work only, at the site's shared figures for reforms within a democracy, never also against a slide; and its 1.6% share of the reform field's part in the fall in incarceration, valued by prisoners' wellbeing and shortened lives. With its next dollar at 32% of the average (it holds about two years of spending in liquid reserves), it comes to about {{result}} years of healthy life per 1,000 dollars, four fifths of it from the tariff ruling. The result is mostly uncertainty (the Center's share of the tariff litigation, the years a win counts, the field's effect on the breakdown risk, how much a reform dollar does against a redistricting dollar; the model's own ranges alone span several hundredfold), and all branches are discounted by the shared missing-data slider.",
+  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Four branches: its 1.2% share of the litigation that ended the emergency tariffs in February 2026 (about 0.12% of long-run US GDP restored, and more than as much again for trading partners), half of it done in the year; its direct work against a slide (about a third of its democracy spending), 0.7% of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up; the rest of its democracy spending (voting rights, redistricting, money in politics), counted as reform work only, at the site's shared figures for reforms within a democracy, never also against a slide; and its 1.6% share of the reform field's part in the fall in incarceration, valued by prisoners' wellbeing and shortened lives. With its next dollar at {{row:marginal_vs_past_average}} of the average (it holds about two years of spending in liquid reserves), it comes to about {{result}} years of healthy life per 1,000 dollars, four fifths of it from the tariff ruling. The result is mostly uncertainty (the Center's share of the tariff litigation, the years a win counts, the field's effect on the breakdown risk, how much a reform dollar does against a redistricting dollar; the model's own ranges alone span several hundredfold), and all branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Brennan Center for Justice",
@@ -380,7 +380,7 @@
       "label": "Chance the US falls to a hybrid regime before 2030",
       "format": "percent",
       "formula": "@democracy.us_democracy_loss_chance_2030",
-      "explainer": "The shared forecast (about 11%, 5% to 28%): the stake the democracy work acts on. A cut in a chance is counted at its expected value, as the catastrophic-risk models count a cut in a hazard: the field's work is thousands of cases and campaigns, not one bet, so it isn't a single event."
+      "explainer": "The shared forecast (about {{row:dem_p_breakdown}}, 5% to 28%): the stake the democracy work acts on. A cut in a chance is counted at its expected value, as the catastrophic-risk models count a cut in a hazard: the field's work is thousands of cases and campaigns, not one bet, so it isn't a single event."
     },
     {
       "id": "dem_field_cut",
@@ -1029,7 +1029,7 @@
       "format": "number",
       "formula": "@incarceration.ls_loss_per_year_incarcerated",
       "unit": "points",
-      "explainer": "The shared figure for what a year in prison or jail costs in life satisfaction (1.2 points, 0.5 to 3), read by every model that counts years of incarceration averted."
+      "explainer": "The shared figure for what a year in prison or jail costs in life satisfaction ({{row:jus_ls_gain}} points, 0.5 to 3), read by every model that counts years of incarceration averted."
     },
     {
       "id": "jus_life_years_lost",
@@ -1225,7 +1225,7 @@
       "section": "adjustments",
       "label": "Families and children of people kept out of prison, as a share of the justice branch",
       "format": "percent",
-      "explainer": "A parent's imprisonment harms partners' and children's wellbeing, income and schooling: the shared share (facts/incarceration.json, Wakefield and Wildeman 2013), 15%, from 0 to 40%.",
+      "explainer": "A parent's imprisonment harms partners' and children's wellbeing, income and schooling: the shared share (facts/incarceration.json, Wakefield and Wildeman 2013), {{row:jus_ue_families}}, from 0 to 40%.",
       "side_effect": "added",
       "formula": "@incarceration.family_share_of_incarceration_value"
     },
@@ -1234,7 +1234,7 @@
       "section": "adjustments",
       "label": "Earnings kept by people kept out of prison, as a share of the justice branch",
       "format": "percent",
-      "explainer": "Imprisonment lowers later earnings, outside the life-satisfaction gap of the year inside: the shared share (facts/incarceration.json, Western 2002), 10%, from 0 to 30%.",
+      "explainer": "Imprisonment lowers later earnings, outside the life-satisfaction gap of the year inside: the shared share (facts/incarceration.json, Western 2002), {{row:jus_ue_earnings}}, from 0 to 30%.",
       "side_effect": "added",
       "formula": "@incarceration.earnings_share_of_incarceration_value"
     },

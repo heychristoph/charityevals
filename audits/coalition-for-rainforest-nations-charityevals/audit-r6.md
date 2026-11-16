@@ -4,7 +4,7 @@ Result: -0.0212 -> -0.0244 years per $1,000 (commit 7e73f6cd), reproduced at the
 
 Verdict: pass
 
-Model-sha: 9d2b305c16d06855a0dfacc8a8c7a844af106b637319a2b768728ed77b7597a1
+Model-sha: 4e725f5c8b630f3f1a7e84474627690deef0b6255451fc317448f60c53a14914
 
 Scope: the rows changed in 7e73f6cd (`donor_payer_uov_per_dollar`, `fin_uov_per_year`, `rbf_payer_uov`, `itmo_payer_uov`, `uov_bridged`, `rbf_dalys_raw`, `itmo_dalys_raw`), the summary and write-up sentences that state the result, and the bridge formula of `climate_dalys` against the unit's conversion for the 0.6 non-death damage (mechanical).
 
@@ -35,3 +35,5 @@ Re-stamped (16 Nov 2026): Why the simulation is too wide to use, said in outcome
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.

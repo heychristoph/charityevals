@@ -33,7 +33,7 @@ The first two are our judgment. The share of resources is below 1 because outsid
 
 Side effects add 10%: work against a single detonation or a limited war, which has no shared forecast, and the conventional and chemical arms work. No harm is added beyond a typical project's chance of backfiring.
 
-The Association has under nine months of reserves and ran deficits in both of the last two years, while the field's large funders are leaving. The next dollar counts at 56% of the past average.
+The Association has under nine months of reserves and ran deficits in both of the last two years, while the field's large funders are leaving. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

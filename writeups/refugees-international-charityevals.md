@@ -14,7 +14,7 @@ Both programme lines (advocacy, and the media and public education of strategic 
 
 **Other campaigns** add 42% of these: Ukraine's localisation of aid, the Gaza scorecard on aid obstruction, the Sudan envoy and genocide determination, bills it helped draft that haven't passed, climate displacement, family-reunification parole, its Refugee Fellows and the Refugee Advocacy Lab.
 
-Each branch has its own evidence, counterfactual and credit adjustments and the missing-data discount. Past wins count at Refugees International's own share for the next dollar (36%): it holds about nine months of spending in reserve, and the US ground has turned harder since 2024.
+Each branch has its own evidence, counterfactual and credit adjustments and the missing-data discount. Past wins count at Refugees International's own share for the next dollar ({{row:marginal_vs_past_average}}): it holds about nine months of spending in reserve, and the US ground has turned harder since 2024.
 
 ### What drives the result
 

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "american-cancer-society",
   "owner": "charityevals",
-  "summary": "The American Cancer Society funds cancer research ($193m in the year to March 2026: 934 active grants at 219 institutions and its own population and statistics research), campaigns through its advocacy affiliate ACS CAN ($55m: tobacco taxes, insurance coverage of screening and testing, cancer-research budgets), and promotes screening and prevention (about 45% of its $426m patient-support line, a judgment). Research is valued as ACS's share (about 0.25%, drug companies' research included) of the world cancer burden a year of the field's research averts sooner; tobacco advocacy as ACS CAN's share of the US smoking burden a typical year's US tobacco wins avert (the site's shared tobacco figures), coverage advocacy as its share of the US cancer burden the year's coverage and budget wins avert; screening as ACS's share of the year's gain in US screening; the deaths inside every branch's DALYs are valued by age. The result, about {{result}} years of healthy life per $1,000, is low because research results arrive after about 15 years and are shared with a field spending about $70bn a year, policy and screening gains are shared with many groups and fall mostly on people over 50, and a past average counts at the next dollar's share (46%); all three branches are discounted for missing data, since ACS measures no health outcome of its own spending. It is dominated by judgment (the share of the burden the year's policy wins avert, the share of the burden a year of research averts, ACS's shares of the credit), so the result is mostly uncertainty; Hope Lodge, rides to treatment and the helpline are the separate patient-services model.",
+  "summary": "The American Cancer Society funds cancer research ($193m in the year to March 2026: 934 active grants at 219 institutions and its own population and statistics research), campaigns through its advocacy affiliate ACS CAN ($55m: tobacco taxes, insurance coverage of screening and testing, cancer-research budgets), and promotes screening and prevention (about {{row:prevention_share_of_support}} of its $426m patient-support line, a judgment). Research is valued as ACS's share (about 0.25%, drug companies' research included) of the world cancer burden a year of the field's research averts sooner; tobacco advocacy as ACS CAN's share of the US smoking burden a typical year's US tobacco wins avert (the site's shared tobacco figures), coverage advocacy as its share of the US cancer burden the year's coverage and budget wins avert; screening as ACS's share of the year's gain in US screening; the deaths inside every branch's DALYs are valued by age. The result, about {{result}} years of healthy life per $1,000, is low because research results arrive after about 15 years and are shared with a field spending about $70bn a year, policy and screening gains are shared with many groups and fall mostly on people over 50, and a past average counts at the next dollar's share ({{row:marginal_vs_past_average}}); all three branches are discounted for missing data, since ACS measures no health outcome of its own spending. It is dominated by judgment (the share of the burden the year's policy wins avert, the share of the burden a year of research averts, ACS's shares of the credit), so the result is mostly uncertainty; Hope Lodge, rides to treatment and the helpline are the separate patient-services model.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: American Cancer Society: research, advocacy and screening promotion (charityevals, 2025-26)",
@@ -585,7 +585,7 @@
       "label": "Tobacco advocacy: share of US smoking DALYs a typical year's US tobacco-control wins avert once in full effect",
       "format": "percent",
       "formula": "@tobacco.us_wins_share_smoking_burden_averted",
-      "explainer": "The shared figure (facts: tobacco) for the wins of everyone working on US tobacco control in a year: one or two state tax rises, local flavour bans, youth rules and court wins. 0.25%, worked out from a price elasticity of about -0.4, half of it fewer smokers. ACS CAN's part of the credit is tob_attribution_share_shared."
+      "explainer": "The shared figure (facts: tobacco) for the wins of everyone working on US tobacco control in a year: one or two state tax rises, local flavour bans, youth rules and court wins. {{row:tob_share_burden_averted}}, worked out from a price elasticity of about -0.4, half of it fewer smokers. ACS CAN's part of the credit is tob_attribution_share_shared."
     },
     {
       "id": "tob_health_lag_discount",
@@ -1064,7 +1064,7 @@
       "label": "Tobacco advocacy side effect: second-hand smoke averted, as a share of the smoking burden averted",
       "format": "percent",
       "formula": "@tobacco.shs_dalys_usa / @tobacco.smoking_dalys_usa",
-      "explainer": "Fewer smokers means less second-hand smoke for the people around them, which GBD counts apart from smoking (US 2023: 1.0 million DALYs against 9.4 million, 10%, facts: tobacco); smoke-free laws cut it directly. Taken as falling in step with smoking and valued with the smokers' ages.",
+      "explainer": "Fewer smokers means less second-hand smoke for the people around them, which GBD counts apart from smoking (US 2023: 1.0 million DALYs against 9.4 million, {{row:tob_secondhand_smoke_share}}, facts: tobacco); smoke-free laws cut it directly. Taken as falling in step with smoking and valued with the smokers' ages.",
       "side_effect": "added"
     },
     {
@@ -1310,7 +1310,7 @@
       "label": "How much the American Cancer Society's next dollar does compared with its average so far",
       "format": "percent",
       "formula": "@next_dollar.american_cancer_society",
-      "explainer": "The American Cancer Society's own figure (shared data, next_dollar): this is a past average (a year's research, campaigns and promotion over what they achieved), and the next dollar does less, from its room for more money, what the next dollar buys and how well it is run (room x use x run, 46%). The evaluator view keeps 100%.",
+      "explainer": "The American Cancer Society's own figure (shared data, next_dollar): this is a past average (a year's research, campaigns and promotion over what they achieved), and the next dollar does less, from its room for more money, what the next dollar buys and how well it is run (room x use x run, {{row:marginal_vs_past_average}}). The evaluator view keeps {{row:marginal_vs_past_average:evaluator}}.",
       "published": 1
     },
     {

@@ -8,7 +8,7 @@ We estimate **{{result}} years of healthy life per $1,000** you give to this wor
 
 ACS spent $674.8m on its programmes in the year to March 2026 (audited accounts; it moved its year end from December to March in 2025):
 
-- **Patient support, $426.5m (63%):** cancer information and the helpline (284,000 calls, chats, emails and texts), 565,000 free nights at its Hope Lodge communities, 93,000 volunteer rides to treatment, and prevention and early-detection work: screening guidelines, partnerships with health systems and community health centres, national roundtables on colorectal, lung and breast cancer screening, and public education. The accounts don't split this line. We judge prevention and early detection at about 45% of it (30% to 60%): $41.9m of donated advertising for prevention and screening and $76.3m of mail and digital appeals with prevention messages are booked here.
+- **Patient support, $426.5m (63%):** cancer information and the helpline (284,000 calls, chats, emails and texts), 565,000 free nights at its Hope Lodge communities, 93,000 volunteer rides to treatment, and prevention and early-detection work: screening guidelines, partnerships with health systems and community health centres, national roundtables on colorectal, lung and breast cancer screening, and public education. The accounts don't split this line. We judge prevention and early detection at about {{row:prevention_share_of_support}} of it (30% to 60%): $41.9m of donated advertising for prevention and screening and $76.3m of mail and digital appeals with prevention messages are booked here.
 - **Research, $193.3m (29%):** $128.5m of grants (934 active grants at 219 institutions; $123.9m of new grants in the year) and its own research on cancer statistics, cancer disparities and the Cancer Prevention Study cohorts.
 - **Advocacy, $55.1m (8%):** ACS CAN's work on tobacco taxes and smoke-free laws, insurance coverage of screening and biomarker testing, Medicaid and federal cancer-research budgets.
 
@@ -24,7 +24,7 @@ Four branches on the medical-research template:
 - In both, a year's work is credited with a typical year's wins, since each campaign runs two to three years, and a won policy counts the site's shared number of years.
 - **Screening:** US screening coverage rises about 0.8 points a year across colorectal, breast, cervical and lung cancer. Half of that is due to promotion, and ACS has 15% of the promotion's resources. People brought up to date have about a quarter fewer deaths from the screened cancer (trials: 0.74 for sigmoidoscopy), counted for 3 years, about 6 years later.
 
-Each branch's DALYs are split into the illness part and the deaths behind the rest, and each death is valued at the site's value of a death by age (WHO's age split: 62% of US cancer deaths come at 70 or older). Each branch is multiplied by the shared missing-data discount. The result is a past average, counted at ACS's next-dollar figure, 46% (reserves of about 7 months, inside its own policy, and a surplus in the year).
+Each branch's DALYs are split into the illness part and the deaths behind the rest, and each death is valued at the site's value of a death by age (WHO's age split: 62% of US cancer deaths come at 70 or older). Each branch is multiplied by the shared missing-data discount. The result is a past average, counted at ACS's next-dollar figure, {{row:marginal_vs_past_average}} (reserves of about 7 months, inside its own policy, and a surplus in the year).
 
 ### What drives the result
 

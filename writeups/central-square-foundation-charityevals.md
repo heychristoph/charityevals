@@ -27,12 +27,12 @@ Children who can read and do basic maths by Grade 3 learn more in later grades a
   - better EdTech products: 0.01, our judgment;
   - report cards for parents: 0.04, our judgment;
   - the STEM pilot: 0.1, our judgment.
-- **From learning to earnings:** the site's shared figures for low- and middle-income countries. 40% of a gain lasts into adulthood, and each lasting standard deviation raises earnings 20%. The gain is shared in the household and lasts a 40-year working life, which starts at about 20 and is discounted.
+- **From learning to earnings:** the site's shared figures for low- and middle-income countries. 40% of a gain lasts into adulthood, and each lasting standard deviation raises earnings {{row:earnings_gain_per_sd}}. The gain is shared in the household and lasts a 40-year working life, which starts at about 20 and is discounted.
 - **CSF's credit:** its share of all resources behind each outcome. For FLN that is about 3%: CSF's FLN spending against the mission's ₹2,500 crore central allocation (80% of it spent), grossed up by the states' share and taken for CSF's states, plus other partners' spending. Early childhood about 6% (against the states' spending on the first-time children), adaptive learning about 4%, other EdTech about 25%, governance about 50%, the STEM pilot about 45%: each CSF's spending against the states', districts' or partners'.
 - **Adjustments:** 85% for publication bias in the trials behind the judged gains and the conversion of ASER's shares to standard deviations. 85% of the credit is CSF's own rather than what another technical partner would have done in its place (95% for the report cards and the STEM pilot, which CSF ran itself). The report cards count as won reforms, for the years a won reform counts on the site, with a 50% chance that each becomes lasting practice; each child is credited once, not every year they are covered.
 - **Side effects:** a net +5%. Longer schooling, later marriage and better health for the children's own children count for, teachers' time taken by data entry and reporting against.
 - **The missing-data discount** applies to every branch except adaptive learning in Andhra Pradesh, where the state counts the students and a trial measured the same software in the same schools.
-- **The next dollar** is valued at 42% of the average. CSF holds about 15 months of spending in cash and deposits, its next programmes go to new districts, grades and workstreams, and the national mission was set to be wound up in 2025-26 unless extended.
+- **The next dollar** is valued at {{row:marginal_vs_past_average}} of the average. CSF holds about 15 months of spending in cash and deposits, its next programmes go to new districts, grades and workstreams, and the national mission was set to be wound up in 2025-26 unless extended.
 
 ### What drives the result
 

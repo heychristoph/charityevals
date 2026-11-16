@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-bail-project",
   "owner": "charityevals",
-  "summary": "The Bail Project's policy, public-education and research work (about $5 million a year with overhead, fiscal 2023-2025) campaigns in the states where it bails people out, and its wins of those years are counted as a past average: shares of the defeat of Texas's 2023 bail-denial amendment and personal-bond bill (held off two years, until Proposition 3 and SB 9 passed in 2025, plus a twentieth of Proposition 3's effect through the protections it carries), of the defeat of two further denial amendments in 2025 (sized on their sponsor's own figure), and of blocking a year's bills against charitable bail in Florida and Oklahoma, each valued as the detention, sentences, lost earnings, jail costs and deaths avoided, with the bail model's shared figures, the Texas measures sized on Harris County's flow of eligible defendants and its prosecutors' first months of no-bail hearings; the campaigns it lost count nothing. The result is about {{result}} years of healthy life per 1,000 dollars, low because the wins are defensive and short-lived, the charity's share of the coalitions is small and the next dollar counts at 29% of the average, with years of spending in reserve. Every branch is discounted for missing data, and the result is mostly uncertainty: how much detention the defeated measures would have added and how much of their defeat is the campaign's.",
+  "summary": "The Bail Project's policy, public-education and research work (about $5 million a year with overhead, fiscal 2023-2025) campaigns in the states where it bails people out, and its wins of those years are counted as a past average: shares of the defeat of Texas's 2023 bail-denial amendment and personal-bond bill (held off two years, until Proposition 3 and SB 9 passed in 2025, plus a twentieth of Proposition 3's effect through the protections it carries), of the defeat of two further denial amendments in 2025 (sized on their sponsor's own figure), and of blocking a year's bills against charitable bail in Florida and Oklahoma, each valued as the detention, sentences, lost earnings, jail costs and deaths avoided, with the bail model's shared figures, the Texas measures sized on Harris County's flow of eligible defendants and its prosecutors' first months of no-bail hearings; the campaigns it lost count nothing. The result is about {{result}} years of healthy life per 1,000 dollars, low because the wins are defensive and short-lived, the charity's share of the coalitions is small and the next dollar counts at {{row:marginal_vs_past_average}} of the average, with years of spending in reserve. Every branch is discounted for missing data, and the result is mostly uncertainty: how much detention the defeated measures would have added and how much of their defeat is the campaign's.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Bail Project, policy, public education and research",
@@ -248,7 +248,7 @@
       "format": "number",
       "formula": "@incarceration.ls_loss_per_year_incarcerated",
       "unit": "points",
-      "explainer": "The site's shared figure (1.2 points, 0.5 to 3)."
+      "explainer": "The site's shared figure ({{row:ls_gain_per_person_year}} points, 0.5 to 3)."
     },
     {
       "id": "deaths_per_detention_year",
@@ -281,7 +281,7 @@
       "label": "Consumption per person of people held before trial (US$ a year)",
       "format": "usd",
       "formula": "@united_states.ce_expenditure_per_person_2024 * @united_states.ce_lowest_quintile_vs_all_2024 * @household_size.united_states / @household_size.united_states_lowest_quintile",
-      "explainer": "People held because they can't pay bail are poor: the poorest fifth's spending per person, as the site's other models of incarcerated people."
+      "explainer": "People held because they can't pay bail are poor: the poorest fifth's spending per person."
     },
     {
       "id": "ln_gain_per_release",
@@ -306,7 +306,7 @@
       "format": "number",
       "formula": "$uov_per_ln_consumption * @public_funds.mcpf / (@public_funds.us_state_local_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
       "unit": "UoV / $",
-      "explainer": "Counties' money is worth what it spares their taxpayers, as the site's other US models count public money."
+      "explainer": "Counties' money is worth what it spares their taxpayers."
     },
     {
       "id": "validity_adj",
@@ -791,7 +791,7 @@
       "label": "The charity's bailouts a year (fiscal 2025)",
       "format": "integer",
       "formula": "@the_bail_project.bailouts_fy2025",
-      "explainer": "The shared estimate, as in the bail model: about 3,300."
+      "explainer": "The shared estimate, as in the bail model: about {{row:cb_tbp_bailouts}}."
     },
     {
       "id": "cb_site_share",
@@ -1224,7 +1224,7 @@
       "label": "Side effect: children and partners spared a parent's detention, as a share of the Florida and Oklahoma branch's value",
       "format": "percent",
       "formula": "@the_bail_project.family_spillover_share",
-      "explainer": "The shared figure for weeks of detention, as in the bail model: 10% (0 to 30%).",
+      "explainer": "The shared figure for weeks of detention, as in the bail model: {{row:ue_family}} (0 to 30%).",
       "side_effect": "added"
     },
     {
@@ -1232,7 +1232,7 @@
       "section": "adjustments",
       "label": "Side effect: children and partners spared a parent's months of detention, as a share of the Texas branches' value",
       "format": "percent",
-      "explainer": "Months of pretrial detention separate families as a prison term does: the shared share of a prison-year's value that falls on partners and children (facts/incarceration.json, Wakefield and Wildeman 2013), 15%, from 0 to 40%.",
+      "explainer": "Months of pretrial detention separate families as a prison term does: the shared share of a prison-year's value that falls on partners and children (facts/incarceration.json, Wakefield and Wildeman 2013), {{row:ue_family_tx}}, from 0 to 40%.",
       "side_effect": "added",
       "formula": "@incarceration.family_share_of_incarceration_value"
     },
@@ -1242,7 +1242,7 @@
       "label": "Side effect: crime by people bailed out in Florida and Oklahoma, as a share of that branch's value",
       "format": "percent",
       "formula": "@the_bail_project.crime_side_effect_share",
-      "explainer": "The shared figure, as in the bail model: -5% (-20% to +5%).",
+      "explainer": "The shared figure, as in the bail model: {{row:ue_crime_cb}} (-20% to +5%).",
       "side_effect": "added"
     },
     {

@@ -12,7 +12,7 @@ Mechanical: audit-model lint 0 findings, no invariant violation (INV-12 incl. do
 ## Findings
 None.
 
-Model-sha: 6e246dbee5073defd7901c2879d822d42dd141853e810467ba28712bc79c3dd5
+Model-sha: 948b8d659c7fd857fd1bbf51961a9915f5f8f657c9490a8dbba5f43c576eeeb9
 Verdict: pass
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -23,3 +23,5 @@ Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its sh
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline 23.69 → 23.69 (+2.4e-8%), against a8d130f3.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

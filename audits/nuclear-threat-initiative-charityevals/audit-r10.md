@@ -7,7 +7,7 @@ Checked only the one edit made after the SecureBio round-1 finding 6 (`git diff 
 
 New findings: none.
 
-Model-sha: b7ac017f94c77a763f3a8994c9c9e435d5a6718627b8184902ce5d1b564f1c16
+Model-sha: 476652324594098ebaa04515f91ecbc629cef1391c6f37f6b8ddb7463de9a914
 
 **Verdict: pass**
 
@@ -19,3 +19,5 @@ Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new s
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against e8ecb2b3.

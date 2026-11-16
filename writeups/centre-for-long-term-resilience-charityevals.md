@@ -30,7 +30,7 @@ The AI figure includes a 15% cut for its work on chronic and societal AI risks, 
 
 Side effects add 10%, mostly risk management's value in ordinary emergencies and the AI unit's societal work. Harms take off 3.5%: a little faster progress in the technologies, and published analyses of how they could be misused.
 
-CLTR holds about three months of spending in its own funds. Coefficient Giving offered in October 2024 to match other donors' gifts, up to £3 million, and CLTR says it turns down most of what it is asked to do. The next dollar counts at 53% of the past average.
+CLTR holds about three months of spending in its own funds. Coefficient Giving offered in October 2024 to match other donors' gifts, up to £3 million, and CLTR says it turns down most of what it is asked to do. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

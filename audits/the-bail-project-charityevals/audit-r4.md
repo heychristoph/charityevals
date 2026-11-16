@@ -1,6 +1,6 @@
 # Audit: the-bail-project-charityevals, round 4
 Result: 1.251e-5 daly/$ = 0.0125 years of healthy life per 1,000 dollars, unchanged from round 3. Verdict: pass (no high findings).
-Model-sha: 026ff1c1773fd95978f5826b94080b20fa84a62caa04d1dacf00c37adfc4bcf0
+Model-sha: 28b3703f0be574e1dd24f0474e5d64905119fe3fe8af800b36a04f31d71990a0
 Scope: scoped verification of the one round-3 low and the changed text only (facts `bailouts_fy2025` source note). No values changed.
 Mechanical: `audit-model.ts` on models/global-health/the-bail-project-charityevals.json: 0 findings.
 
@@ -10,9 +10,11 @@ Round-3 findings:
 New findings: none.
 
 Verdict: pass (0 high).
-Model-sha: 026ff1c1773fd95978f5826b94080b20fa84a62caa04d1dacf00c37adfc4bcf0
+Model-sha: 28b3703f0be574e1dd24f0474e5d64905119fe3fe8af800b36a04f31d71990a0
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0125 → 0.0135.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2ef0280a.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.

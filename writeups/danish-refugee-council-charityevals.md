@@ -10,7 +10,7 @@ The Danish Refugee Council (DRC, Dansk Flygtningehjælp) spent DKK 3.5 billion (
 
 **Shelter, water and sanitation, infrastructure** (1.6 million people; about 20%). Shelter (18% of the sector's people) is valued at its cost to households over two years, with a little exposure and illness averted. WASH (74%) averts diarrhoeal deaths and illness at 15% of a crisis's diarrhoea, as household trials suggest, and saves a little time. Rebuilt hospitals, schools and water and energy systems, mostly in Ukraine (11%), are valued at their cost over five years.
 
-**Protection** (1.3 million people; about 4%). A quarter is taken to be legal aid: a resolved document or legal-stay case adds 5% to consumption for three years. The rest gets community-based protection, child protection and psychosocial support. The 22% of people in conflict settings with a mental disorder gain 0.2 standard deviations for a year.
+**Protection** (1.3 million people; about 4%). A quarter is taken to be legal aid: a resolved document or legal-stay case adds 5% to consumption for three years. The rest gets community-based protection, child protection and psychosocial support. The {{row:share_distressed}} of people in conflict settings with a mental disorder gain 0.2 standard deviations for a year.
 
 **Mine action and peacebuilding** (under 1%). Over 14 square kilometres released, 5,928 explosive items removed and 1.5 million people given risk education avert about 38 casualties over the years the work brings safety forward. A third of them are deaths, many of them children; the rest are lasting injuries. The released land adds to its users' harvests. Victims' assistance and 45,300 mediation and dialogue participants add small wellbeing gains.
 

@@ -40,11 +40,11 @@ Shifted money to these causes therefore counts slightly below zero: it was assum
 
 ### How the model works
 
-Money moved = donations received for charities × the share it caused, plus advised gifts × the shared 30% its advice is taken to have redirected. People who ask for advice were giving anyway, so the advised gifts count only for the gain over where they would have gone, after the site's evidence and missing-data steps (the rule for advice that changes where money goes). That comes to about $11 million against $1.34 million of costs. Platform donations wait about a third of a year before reaching the charities, because its funds grant twice a year (our judgment, 0.1 to 0.6 years). That wait is discounted at the site's rate. Each dollar moved is valued at its recipients' figures, net of where shifted money would have gone. A 5% side effect is added (our judgment) for giving its recommendations inspire outside the platform and advice. The result is multiplied by how much the next dollar does compared with the past average: 32%. Its German company holds about two years of costs in reserve after two surpluses, and Open Philanthropy covers half its costs, so a further gift does less than the average dollar so far. Platform money is counted, not estimated, so it takes no missing-data discount; the advised gifts, whose redirection is judged, do.
+Money moved = donations received for charities × the share it caused, plus advised gifts × the shared 30% its advice is taken to have redirected. People who ask for advice were giving anyway, so the advised gifts count only for the gain over where they would have gone, after the site's evidence and missing-data steps (the rule for advice that changes where money goes). That comes to about $11 million against $1.34 million of costs. Platform donations wait about a third of a year before reaching the charities, because its funds grant twice a year (our judgment, 0.1 to 0.6 years). That wait is discounted at the site's rate. Each dollar moved is valued at its recipients' figures, net of where shifted money would have gone. A {{row:moved_side_effects}} side effect is added (our judgment) for giving its recommendations inspire outside the platform and advice. The result is multiplied by how much the next dollar does compared with the past average: {{row:marginal_vs_past_average}}. Its German company holds about two years of costs in reserve after two surpluses, and Open Philanthropy covers half its costs, so a further gift does less than the average dollar so far. Platform money is counted, not estimated, so it takes no missing-data discount; the advised gifts, whose redirection is judged, do.
 
 ### What drives the result
 
-- **The next dollar** (32%, from 14% to 66%).
+- **The next dollar** ({{row:marginal_vs_past_average}}, from 14% to 66%).
 - **The discount rate.** It matters through the destinations' own long-run benefits and the wait for the funds' grants.
 - **How far the survey's non-respondents were influenced** (half the respondents' influence, from a quarter to all).
 - **Where shifted money would otherwise have gone** (one times GiveDirectly, from 0 to 3 times) and **the value of a young child's life**.
@@ -58,7 +58,7 @@ Its own figures are a ratio of donations to costs of about 21 for 2024 (23 with 
 - **New and shifted money.** We use the site's shared 50%. Its survey alone would put new money at about 29% of the giving it caused.
 - **Advised gifts.** Its evaluation leaves them out. We count them, using the 2024 figure, as redirected money: only the gain over where they would have gone.
 - **Staff time.** It subtracts what its staff could have given by earning more elsewhere. We credit staff for the pay they give up instead, as in every model on the site (credit by share of resources, off by default).
-- **The wait and the next dollar.** It reports an undiscounted average. We discount the time money waits in its funds and take 32% of the average for the next dollar.
+- **The wait and the next dollar.** It reports an undiscounted average. We discount the time money waits in its funds and take {{row:marginal_vs_past_average}} of the average for the next dollar.
 
 ### Biggest uncertainties
 
@@ -69,7 +69,7 @@ Its own figures are a ratio of donations to costs of about 21 for 2024 (23 with 
 
 ### What isn't modelled
 
-- Gifts to its recommended charities from people who read its recommendations but never use the platform or ask for advice, beyond the 5% side effect.
+- Gifts to its recommended charities from people who read its recommendations but never use the platform or ask for advice, beyond the {{row:moved_side_effects}} side effect.
 - The interest its held donations earn (€135,000 in 2025), which pays part of its own costs. This counts only as part of the wait and in the side effect.
 
 ### How this model was checked

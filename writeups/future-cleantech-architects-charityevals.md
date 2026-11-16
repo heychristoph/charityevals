@@ -34,7 +34,7 @@ The target's purpose is learning: early capacity makes these technologies cheape
 
 The wins are added up and spread over the five years. Then come our evidence adjustment, the shared missing-data step and 30% more for climate work with no decided law yet: industrial heat, thermal storage, cement and steel, aviation fuels and hydrogen priorities. The total is divided by a typical year's spending in 2021-2025; 2021 and 2025 are our estimates, as their accounts aren't published.
 
-The next dollar is valued at 24% of that average. Future Cleantech Architects held about two years of spending in reserve at the end of 2024 and raised about twice its spending in 2025, so money isn't what limits it. Its next dollar goes to files that have no decided law yet.
+The next dollar is valued at {{row:marginal_vs_past_average}} of that average. Future Cleantech Architects held about two years of spending in reserve at the end of 2024 and raised about twice its spending in 2025, so money isn't what limits it. Its next dollar goes to files that have no decided law yet.
 
 Each tonne counts for its heat deaths and for the smoke of the power it displaces. In Europe that power is mostly gas, with a fifth coal (Markandya and Wilkinson's deaths per unit of electricity). The later tonnes displace more coal (two-fifths), so their smoke is higher. The act's tonnes are methane, which warms sooner and forms ozone.
 

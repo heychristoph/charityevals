@@ -34,7 +34,7 @@ The Life You Can Save's sheet comes first: organisation-wide, for the core progr
 ### Where we differ from The Life You Can Save
 
 - **The unit.** The Life You Can Save stops at dollars of profit per dollar; we value the profit as a rise in household consumption, the site's way for every income gain.
-- **Deaths averted by higher incomes and benefits beyond the profit,** which the sheet leaves out (the shared 20% and our judged 10%).
+- **Deaths averted by higher incomes and benefits beyond the profit,** which the sheet leaves out (the shared {{row:income_mortality_uov_ratio}} and our judged 10%).
 - **Discounting** the wait until harvest at the shared rate; the sheet has no discounting.
 - **Staff pay and partners' credit,** with credit by share of resources on.
 

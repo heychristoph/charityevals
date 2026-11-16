@@ -23,14 +23,14 @@ The accounts split programmes into litigation and public information only. Publi
 Earthjustice sues agencies to make them act, defends their rules against industry and states, and argues before state utility commissions. A rule or ruling it helps win cuts pollution once it takes effect. The models count the wins of the period that can be put on the site's scale:
 
 - **EPA's 2023 oil and gas methane rule and its 2024 power-plant carbon standards.** We use the site's shared tonnes, status and steps for each rule. Earthjustice is credited with 8% and 10% of the advocacy behind them.
-- **US coal plants that closed in 2022 to 2025: 28.9 GW (EIA).** Most closed for economic reasons. Advocacy is credited with 15% of the closings and Earthjustice with a tenth of that advocacy. Sierra Club's Beyond Coal campaign leads that field.
+- **US coal plants that closed in 2022 to 2025: 28.9 GW (EIA).** Most closed for economic reasons. Advocacy is credited with {{row:coal_advocacy_share}} of the closings and Earthjustice with a tenth of that advocacy. Sierra Club's Beyond Coal campaign leads that field.
 - **EPA's 2024 fine-particle (PM2.5) air standard.** EPA's two estimates for 2032 are 2,100 and 4,500 deaths a year avoided; we take 3,000. Earthjustice's clients pressed for it and defended it in court, where it was upheld in June 2026. Earthjustice is credited with 25% of the advocacy.
-- **EPA's 2024 PFAS drinking-water standards.** EPA estimates 9,600 deaths prevented over its 82-year analysis. Earthjustice represents community groups defending the standards and is credited with 15%.
+- **EPA's 2024 PFAS drinking-water standards.** EPA estimates 9,600 deaths prevented over its 82-year analysis. Earthjustice represents community groups defending the standards and is credited with {{row:coal_advocacy_share}}.
 - **The Tongass National Forest's roadless protection, restored in January 2023 on 9.37 million acres.** Earthjustice represented the tribes and groups that sued over the 2020 exemption. It is counted for the old-growth carbon that logging would have released.
 
 ### How the model works
 
-For each win: the tonnes or deaths a year once it takes effect, × the share of a won policy due to advocacy (the site's shared 30%) × the shared 5 years a won reform counts, discounted after the wait until it takes effect. That is then multiplied by the share that wouldn't have happened anyway, Earthjustice's share of all the groups' work, and the share actually delivered.
+For each win: the tonnes or deaths a year once it takes effect, × the share of a won policy due to advocacy (the site's shared {{row:p_success}}) × the shared 5 years a won reform counts, discounted after the wait until it takes effect. That is then multiplied by the share that wouldn't have happened anyway, Earthjustice's share of all the groups' work, and the share actually delivered.
 
 The wins are added up and spread over the four years. Then come the shared evidence and missing-data steps, and a share for other wins of the period too small to model one by one (+50% for climate and health, +20% for biodiversity). The total is divided by a typical year's spending on that area.
 

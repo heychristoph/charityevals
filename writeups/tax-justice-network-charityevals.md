@@ -28,7 +28,7 @@ Tax havens let multinationals and wealthy people avoid tax. When tax authorities
   - we trust the loss estimate at 60%;
   - side effect: the shared 5% for counter-measures such work provokes.
 - **Both branches** are spread over the 23 years of work since 2003, and both are discounted by the shared missing-data slider, as no study measures the network's part.
-- **The next dollar** is valued at 54% of the average: money is short, but the main standards are already won and new money goes to the harder convention work.
+- **The next dollar** is valued at {{row:marginal_vs_past_average}} of the average: money is short, but the main standards are already won and new money goes to the harder convention work.
 
 ### What drives the result
 

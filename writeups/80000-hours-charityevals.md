@@ -36,7 +36,7 @@ The value of a dollar of work depends on the cause. A donation now buys today's 
 - **Missing data.** The count rests on people's own reports, and no study compares people it advised with people it didn't. The career branch therefore takes the site's discount for missing outcome data.
 - **Backfire.** Some roles it fills at AI companies also speed up more capable systems. This takes 10% (0 to 40%) off the value, beyond the typical backfire already in the AI models.
 - **Side benefits.** These count through the side-effects weight in Your values: 10% (0 to 30%). They cover giving inspired by its content among people who don't change careers, and others' work improved by its research. People it advised to earn and give are plan changes like the rest.
-- **The next dollar.** The result is a past average, and 80,000 Hours now spends five times its 2012–2022 yearly average. The extra money goes to marketing, video and a larger team, while advising calls have stayed flat. It holds about a year of confirmed grants. The next dollar is counted at 36% (15 to 75%) of the average one.
+- **The next dollar.** The result is a past average, and 80,000 Hours now spends five times its 2012–2022 yearly average. The extra money goes to marketing, video and a larger team, while advising calls have stayed flat. It holds about a year of confirmed grants. The next dollar is counted at {{row:marginal_vs_past_average}} (15 to 75%) of the average one.
 - **Credit for staff.** Staff are estimated at 50% of its costs over the period, from its spending per full-time staff-year. Staff who earn less than they could elsewhere share the credit, as in every model.
 
 ### What drives the result

@@ -1,6 +1,6 @@
 # Audit: giving-what-we-can-charityevals, round 4 (scoped verification)
 Result: 0.1123 uov/$ = 56.17 years of healthy life per 1,000 dollars (combined range 10.9–289.7; joint low–high of the model's own ranges 27.2–105.0); cause median 0.06841 (×821). Verdict: pass.
-Model-sha: bebc006c2180ea963b30a3c1d46135e6ac74a9c33224ff8eced0680e30feba9a
+Model-sha: 21ff39becbfcc0f9eeaa573261f09e9fa372cf95649e4b975a7e75447f8447cd
 Scope: unchanged from rounds 1 to 3. Scoped verification round: only the change since round 3 (the catastrophic-risk part of `value_destinations`: hand-typed `avg(#charityevals:center-for-ai-safety, #charityevals:far-ai, #charityevals:machine-intelligence-research-institute, #charityevals:nuclear-threat-initiative)` replaced by `#cause:catastrophic-risk`, normalization.md 2.8 "November 2026: a cause's average, read live"; the explainer, summary and write-up that follow from it). No source changed, so none re-fetched.
 Mechanical: invariants none (check.ts "all models valid"; scripts/normalization-audit.ts on the full library: INV-18 and every other invariant 0 violations for this model); lint none. `scripts/audit-model.ts` prints one "high" INV-18 finding (NaN → NaN), a false positive of the script, not of the model (finding 1).
 Previous round: r3 had no findings; r2's one low (effective-share fact typed from the model's own defaults) is unchanged, still accepted.
@@ -30,3 +30,5 @@ Re-stamped (orchestrator, 14 Nov 2026): marginal_vs_past_average explainer's ran
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline 55.49 → 55.49 (+0.00068%), 9 rows changed, against e247896f.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline 55.49 → 55.49 (+2.7e-8%), against a8d130f3.

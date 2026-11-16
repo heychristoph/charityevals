@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "sierra-club-foundation",
   "owner": "charityevals",
-  "summary": "The Sierra Club Foundation's grants to the Sierra Club for public lands and waters, clean air and water and the outdoors programmes (its Our Wild America lands campaign and, by our judgment, half its other grants outside Beyond Coal; $35.2M in 2024) are modelled from what can be put on the site's scale in 2022-2024: the Sierra Club's share of EPA's 2024 fine-particle (soot) standard (about 3,000 deaths a year avoided once in effect; upheld in court in 2026) and the 5,127 people a year on its Inspiring Connections Outdoors trips. At the defaults it gives about 0.0009 years of healthy life per $1,000 after the standard's compliance costs (EPA's own figure), nearly all from the soot standard; it is low because the Sierra Club is one of many groups behind the rule (4%), advocacy is credited with only part of it, the deaths are mostly of older adults and come years later, and the lands wins (monuments, the Public Lands Rule, Western Arctic leasing limits, mostly rescinded in 2025) count only in a share for other work, since their species and unleased oil and gas don't reach the scale. The biggest uncertainties are the share of the rule due to advocacy, the next dollar and how much of the rule is delivered; both branches are discounted for missing data.",
+  "summary": "The Sierra Club Foundation's grants to the Sierra Club for public lands and waters, clean air and water and the outdoors programmes (its Our Wild America lands campaign and, by our judgment, half its other grants outside Beyond Coal; $35.2M in 2024) are modelled from what can be put on the site's scale in 2022-2024: the Sierra Club's share of EPA's 2024 fine-particle (soot) standard (about {{row:pm_deaths_per_year}} deaths a year avoided once in effect; upheld in court in 2026) and the 5,127 people a year on its Inspiring Connections Outdoors trips. At the defaults it gives about 0.0009 years of healthy life per $1,000 after the standard's compliance costs (EPA's own figure), nearly all from the soot standard; it is low because the Sierra Club is one of many groups behind the rule (4%), advocacy is credited with only part of it, the deaths are mostly of older adults and come years later, and the lands wins (monuments, the Public Lands Rule, Western Arctic leasing limits, mostly rescinded in 2025) count only in a share for other work, since their species and unleased oil and gas don't reach the scale. The biggest uncertainties are the share of the rule due to advocacy, the next dollar and how much of the rule is delivered; both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Sierra Club Foundation (lands, clean air and outdoors)",
@@ -257,7 +257,7 @@
       "label": "Share of the other programme grants that fund lands, clean-air and outdoors work",
       "format": "percent",
       "formula": "1 - @sierra_club_foundation.climate_share_other_grants",
-      "explainer": "The rest of the shared split for the Foundation's two models (facts: sierra_club_foundation.climate_share_other_grants, 50% climate): its grants outside Beyond Coal are not split by campaign; this half funds public lands and waters, species, clean air and water, the outdoors programmes and the chapters' work on them."
+      "explainer": "The rest of the shared split for the Foundation's two models (facts: sierra_club_foundation.climate_share_other_grants, {{row:lands_share_other}} climate): its grants outside Beyond Coal are not split by campaign; this half funds public lands and waters, species, clean air and water, the outdoors programmes and the chapters' work on them."
     },
     {
       "id": "lands_spend_2022",
@@ -378,7 +378,7 @@
       "section": "reach",
       "label": "EPA soot standard (2024): deaths a year avoided once in effect",
       "format": "integer",
-      "explainer": "The shared figure for this rule (facts: climate), read by every model that counts it: 3,000 a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults and 2,100 for the over-64s.",
+      "explainer": "The shared figure for this rule (facts: climate): {{row:pm_deaths_per_year}} a year (1,900 to 5,700), between the two estimates of EPA's regulatory impact analysis for 2032, 4,500 for all adults and 2,100 for the over-64s.",
       "unit": "deaths / year",
       "formula": "@climate.us_pm_naaqs_2024_deaths_per_year"
     },
@@ -431,7 +431,7 @@
       "format": "number",
       "formula": "0",
       "unit": "animal-years",
-      "explainer": "The species wins (grizzly bears' and wolves' protections kept in court, salmon on the Snake River) leave more wild animals alive; whether a wild animal's life is better or worse than none is unknown, so their welfare is left out (0), as in the site's other species branches."
+      "explainer": "The species wins (grizzly bears' and wolves' protections kept in court, salmon on the Snake River) leave more wild animals alive; whether a wild animal's life is better or worse than none is unknown, so their welfare is left out (0)."
     },
     {
       "id": "p_success",
@@ -439,7 +439,7 @@
       "label": "Share of each won rule due to advocacy at all (all groups together)",
       "format": "percent",
       "formula": "@climate.advocacy_share_of_policy_win",
-      "explainer": "The shared figure for a won policy (facts: climate.advocacy_share_of_policy_win, 30%, 10% to 60%), whose reference class is policy in general, so it serves the soot standard too. The Foundation's part of the advocates' work is the branch's attribution row."
+      "explainer": "The shared figure for a won policy (facts: climate.advocacy_share_of_policy_win, {{row:p_success}}, 10% to 60%), whose reference class is policy in general, so it serves the soot standard too. The Foundation's part of the advocates' work is the branch's attribution row."
     },
     {
       "id": "years_protected",
@@ -508,7 +508,7 @@
       "format": "number",
       "formula": "@death_ages.cvd_yld_share_gbr / @death_ages.cvd_deaths_per_daly_gbr",
       "unit": "DALYs per death",
-      "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About 2.5 healthy years of illness per death, counted in healthy years (row pm_illness_dalys)."
+      "explainer": "Illness comes with the deaths (heart attacks, strokes, lung disease): the shared share of a rich country's cardiovascular DALYs that is illness (cvd_yld_share_gbr, 14%) over its deaths per DALY (cvd_deaths_per_daly_gbr), so both describe one population; the UK stands in for the US, the nearest the facts hold. About {{row:pm_illness_dalys_per_death}} healthy years of illness per death, counted in healthy years (row pm_illness_dalys)."
     },
     {
       "id": "pm_wait",
@@ -655,7 +655,7 @@
       "section": "adjustments",
       "label": "EPA soot standard: share of the deaths that wouldn't have been avoided anyway",
       "format": "percent",
-      "explainer": "The shared figure for this rule (facts: climate): 90% (70% to 100%); EPA's baseline already holds the rules then in force.",
+      "explainer": "The shared figure for this rule (facts: climate): {{row:pm_counterfactual_adj}} (70% to 100%); EPA's baseline already holds the rules then in force.",
       "formula": "@climate.us_pm_naaqs_2024_counterfactual"
     },
     {
@@ -683,7 +683,7 @@
       "label": "The Foundation's share of the Sierra Club's resources behind these wins",
       "format": "percent",
       "formula": "@sierra_club_foundation.share_of_sierra_club_resources",
-      "explainer": "The shared figure for both Foundation models (facts: sierra_club_foundation.share_of_sierra_club_resources, 70%, 50% to 90%): the Foundation funds the Sierra Club's charitable campaigns; the Sierra Club's own money is among the others' resources."
+      "explainer": "The shared figure for both Foundation models (facts: sierra_club_foundation.share_of_sierra_club_resources, {{row:scf_share}}, 50% to 90%): the Foundation funds the Sierra Club's charitable campaigns; the Sierra Club's own money is among the others' resources."
     },
     {
       "id": "pm_attribution_share_shared",
@@ -1063,7 +1063,7 @@
       "format": "percent",
       "formula": "@next_dollar.sierra_club_foundation",
       "published": 1,
-      "explainer": "The Foundation's own figure (facts: next_dollar, docs/normalization.md 2.10), the same for its two models: room 0.7 × use 0.7 × run 0.9 = 44% (17% to 85%). The model's dollar is 2022-2024 spending over that period's wins. 1 in `published`: what the past average itself says."
+      "explainer": "The Foundation's own figure (facts: next_dollar, docs/normalization.md 2.10), the same for its two models: room 0.7 × use 0.7 × run 0.9 = {{row:marginal_vs_past_average}} (17% to 85%). The model's dollar is 2022-2024 spending over that period's wins. 1 in `published`: what the past average itself says."
     },
     {
       "id": "donor_cost_share",

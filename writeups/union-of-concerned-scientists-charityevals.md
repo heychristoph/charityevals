@@ -38,7 +38,7 @@ UCS is credited with 6% of the advocacy behind EPA's vehicle standards, 10% behi
 
 Some value is added as shares. The nuclear part adds 7%: work against a limited nuclear war and the 2025 expansion of radiation compensation. The climate part adds 15%: other state laws, grid plans and the science behind climate lawsuits. It takes off 2% for safety campaigns that may slow nuclear power. The food part adds 50% for its fertilizer, groundwater, farm bill and farmworker work.
 
-UCS's net assets were about 17 months of spending in September 2025, and its donations grew that year. The next dollar of its nuclear, science and food work counts at 42% of the past average. Its climate work now faces harder ground, so its next dollar counts at 33%.
+UCS's net assets were about 17 months of spending in September 2025, and its donations grew that year. The next dollar of its nuclear, science and food work counts at {{row:marginal_vs_past_average}} of the past average. Its climate work now faces harder ground, so its next dollar counts at 33%.
 
 ### What drives the result
 

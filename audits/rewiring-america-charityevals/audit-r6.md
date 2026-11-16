@@ -1,6 +1,6 @@
 # Audit: rewiring-america-charityevals, round 6
 Result: 0.0120 years of healthy life per 1,000 dollars at the defaults (0.012034 by scripts/headlines.ts; combined range 0.0008-0.174; down from round 5's 0.0278). Verdict: pass.
-Model-sha: b1407f071ddb36c08cdcfed4cb9c75857efdb3ce579bac6f97a35e2a26f8dd8b
+Model-sha: 387a918605f9eaeaef223cef49215968a6d886b8f6f6d18f1fc39e47ae5356e3
 Scope: scoped verification after the owner's one-consumption-scale rule (docs/normalization.md 2.14): the changed row `payer_cost_per_dollar` and its readers `rebate_uov` and `credit_uov`, the summary's quoted figures, and any remaining national-accounts reading in the model and write-up. The rest of the model not re-opened.
 Mechanical: audit-model 0 findings (INV-15 not applicable per the owner's rule; the peer line prints x6.06 of the climate median, not a finding); the other mechanical scripts not re-run (scoped round).
 Previous round: round 5 had no findings; nothing open.
@@ -34,3 +34,5 @@ Re-stamped (16 Nov 2026): Reference class named in a judgment's explainer (publi
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.

@@ -1,6 +1,6 @@
 # Audit: jesuit-refugee-service-charityevals, round 3 (scoped verification)
 Result: 3.696e-4 daly/$ = 0.370 years of healthy life per 1,000 dollars (combined range 0.028–4.9), unchanged from round 2. Verdict: **PASS** (no findings).
-Model-sha: 57654777ba75e892ebae3328dcc36144b3aea5f800d41d4bb8976ff3f50cb10d
+Model-sha: 62818d4d89ebe0dc930d7cb5253448156325bf4bac05385f03859ee6c3c3cc6a
 Scope: the text change since round 2 only (the two page citations); nothing else re-verified.
 Mechanical: `audit-model` lint 0 high / 0 medium / 1 low (spread 2,739× on the model's own ranges; the summary says so), result identical to round 2. A field-by-field comparison of the JSON against `HEAD~1` shows exactly two differences, both explainer text: `edu_spend` (row 0) and `edu_access_share` (row 47). The `beneficiaries` block was only re-indented; its values are identical.
 
@@ -20,3 +20,5 @@ Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@h
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b148c62.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.

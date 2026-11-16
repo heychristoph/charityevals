@@ -37,7 +37,7 @@ Redwood received under $10,000 in 2024 and spent from its reserves. It ended the
 
 ### What drives the result
 
-All of Redwood's work is against misaligned AI. For catastrophes the world survives, Rethink's typical misalignment project cuts deaths far less per dollar than its typical misuse project. Here, deaths of people alive now are 85% of the value and the future lost 15%.
+All of Redwood's work is against misaligned AI. For catastrophes the world survives, Rethink's typical misalignment project cuts deaths far less per dollar than its typical misuse project. Here, deaths of people alive now carry most of the value.
 
 ### Biggest uncertainties
 

@@ -64,4 +64,20 @@ describe("typed numbers", () => {
     const text = `In 2024 (docs/normalization.md 2.6) the source says "${result} years of healthy life per $1,000".`;
     expect(scanText(lib, m, text).filter((c) => c.safe)).toEqual([]);
   });
+
+  it("finds the headline typed stale in the model's own sentence, but not a source's or a case", () => {
+    const stale = String(Number(result.replace(/,/g, "")) * 3 + 0.1);
+    const cs = scanText(lib, m, `At the defaults it averts about ${stale} years of healthy life per $1,000.`);
+    expect(cs.filter((c) => c.safe).map((c) => c.placeholder)).toEqual(["{{result}}"]);
+    expect(scanText(lib, m, `The study found ${stale} years of healthy life per $1,000.`).filter((c) => c.safe)).toEqual([]);
+    expect(scanText(lib, m, `If the rate were higher, at the defaults it averts about ${stale} years of healthy life per $1,000.`).filter((c) => c.safe)).toEqual([]);
+  });
+
+  it("takes a row that reads a shared fact or an assumption as the model's own figure, not an input", () => {
+    const fact = m.rows.find((r) => r.node && !r.deps.length && (r.factDeps.length || r.assumptionDeps.length) && /percent|usd|multiple/.test(r.format ?? ""));
+    if (!fact) return;
+    const shown = formatValue(compute(lib, m, av)[fact.id], fact.format);
+    const cs = scanText(lib, m, `Here it is ${shown}.`, { row: fact.id });
+    expect(cs.find((c) => c.placeholder === `{{row:${fact.id}}}`)?.note ?? "").not.toMatch(/an input/);
+  });
 });

@@ -42,7 +42,7 @@ The [model](/rainforest-foundation-us/rainforest-foundation-us-charityevals) fol
 
 - **The share lost each year without the support.** We judge it by country. Peru's is 0.25%, the trial's control communities' rate. Elsewhere it is about 0.08%: Guyana loses about 0.06% a year by its national monitoring, and Guyana is 70% of that area.
 - **The share that stays lost** rather than being delayed: half.
-- **Carbon per hectare lost:** the tropics' average, about 650 tonnes of CO₂.
+- **Carbon per hectare lost:** the tropics' average, about {{row:tco2_per_ha_lost}} tonnes of CO₂.
 
 In the randomised trial (Slough et al. 2021, 76 communities in Loreto), alerts, training and paid patrols cut forest loss by 52% in the first year and about 21% in the second. Most of Peru's communities are now past their first year. The trial had about 2,200 hectares per monitor. Then the adjustments:
 
@@ -66,7 +66,7 @@ Elsewhere, most of the work is the organisations RFUS strengthens, such as Guyan
 
 RFUS's credit here is 40%: the regional government grants the titles, and the federations file the claims.
 
-**Pandemic risk.** The forest kept in both branches cuts the risk by the same shared figures as the site's other forest models.
+**Pandemic risk.** The forest kept in both branches cuts the risk by the shared figures.
 
 **The pay.** We take 400 patrollers × 60 patrol days a year (our judgment) × the $8 a day the trial paid, about $10 in 2025 prices. Half of that is a net gain, since patrol days take time from fishing and farming. That is about $120,000 for about 1,500 people. We put their consumption at 35% of Peru's average. Two side effects are added, as for other cash: deaths averted (+12%) and gains to local traders (+10%).
 

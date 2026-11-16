@@ -29,7 +29,7 @@ Sentinel's own costs are in the cost, but earn nothing of their own. They are wh
 
 Side effects for the grants and fellowships valued as typical work add 2%. Screening also catches orders for toxins, and the fellowships link protein designers with policy. Against that, stress-testing screening finds ways around it, which could help an attacker if published.
 
-At the end of 2024 Sentinel held $9.1 million, six times what it spent from May to December 2024. But its grants have grown several times over since, and it now asks for gifts. The next dollar counts at 49% of the past average.
+At the end of 2024 Sentinel held $9.1 million, six times what it spent from May to December 2024. But its grants have grown several times over since, and it now asks for gifts. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 

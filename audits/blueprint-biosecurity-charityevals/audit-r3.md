@@ -14,7 +14,7 @@ Previous round: finding 1 (unsourced SFF $78K clause): resolved, clause dropped 
 No findings.
 
 Verdict: **pass**
-Model-sha: 7c97349322ee0c8a0b54a0a117e9791ce77c3e4b4a7172f0adc0a836da678334
+Model-sha: b53c7d177f7de895da1b1978c0fd3b71ed6ea04dd7a7eac8a6845831802e4669
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
@@ -24,3 +24,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.

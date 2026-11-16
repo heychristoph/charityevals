@@ -16,7 +16,7 @@ Nuclear war and pandemics carry a yearly chance of catastrophe, taken from the s
 
 Fellows count through the work they add to the field: the share who go on to work on these risks because of the fellowship, valued at a typical dollar of that work. The fellowships get credit for their share of the cost behind that work.
 
-The climate-security work aims to get militaries and governments to plan and spend for climate risks as their scale warrants. A dollar of it is taken to bear on about $500 of public money a year. The anchor is the US Defense Department's $5.1 billion request for climate-risk work in 2024, at most half of which is left after the 2025 cuts. Rich countries' public investment loses about 13% of its value to inefficiency. The work is taken to close 0.3% of that gap in what it touches. That makes about 20 cents of public value a year per dollar, valued at what a dollar is worth to the average American.
+The climate-security work aims to get militaries and governments to plan and spend for climate risks as their scale warrants. A dollar of it is taken to bear on about $500 of public money a year. The anchor is the US Defense Department's $5.1 billion request for climate-risk work in 2024, at most half of which is left after the 2025 cuts. Rich countries' public investment loses about {{row:gov_efficiency_gap}} of its value to inefficiency. The work is taken to close 0.3% of that gap in what it touches. The public value gained is valued at what a dollar is worth to the average American.
 
 ### How the model works
 
@@ -32,7 +32,7 @@ Every part is discounted 50% for missing data. The Converging Risks Lab's climat
 
 Side effects add 5%. Most of that is work against a single detonation or a limited nuclear war, which has no shared forecast. The rest is chemical weapons and the climate-security work's gains beyond better spending. No harm is added beyond a typical project's chance of backfiring.
 
-CSR holds about two months of spending in unrestricted reserves, but most of its money is in multi-year grants for set purposes. The next dollar counts at 49% of the past average.
+CSR holds about two months of spending in unrestricted reserves, but most of its money is in multi-year grants for set purposes. The next dollar counts at {{row:marginal_vs_past_average}} of the past average.
 
 ### What drives the result
 
