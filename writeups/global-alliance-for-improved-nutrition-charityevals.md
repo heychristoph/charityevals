@@ -1,6 +1,6 @@
 ### Summary
 
-The Global Alliance for Improved Nutrition (GAIN), a Geneva foundation, works with governments and food companies so that more people eat nutritious, safe food. Our model of all its programmes, 61.6 million dollars in its year to June 2025, gives **<span data-figure="headline" data-model="global-alliance-for-improved-nutrition-charityevals">0.6</span> years of healthy life per 1,000 dollars**, almost all from food fortification. The result rests on how much of long-running national fortification programmes' yearly benefit depends on GAIN's support, a judgment, and everything but the anaemia effect is discounted for missing data.
+The Global Alliance for Improved Nutrition (GAIN), a Geneva foundation, works with governments and food companies so that more people eat nutritious, safe food. Our model of all its programmes, 61.6 million dollars in its year to June 2025, gives **{{result}} years of healthy life per 1,000 dollars**, almost all from food fortification. The result rests on how much of long-running national fortification programmes' yearly benefit depends on GAIN's support, a judgment, and everything but the anaemia effect is discounted for missing data.
 
 ### What the charity does
 

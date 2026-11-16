@@ -1,6 +1,6 @@
 ### Summary
 
-METR (Model Evaluation and Threat Research) measures what frontier AI agents can do on their own, and whether the companies that build them could lose control of them. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="metr-charityevals">0.06</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.004 to about 0.5.
+METR (Model Evaluation and Threat Research) measures what frontier AI agents can do on their own, and whether the companies that build them could lose control of them. Our model of its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.004 to about 0.5.
 
 ### What the charity does
 

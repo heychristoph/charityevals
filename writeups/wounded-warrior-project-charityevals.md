@@ -1,8 +1,8 @@
 ### Summary
 
-Wounded Warrior Project (WWP) serves US veterans injured in service since 2001 and their families. Our two models of its fiscal 2025 (October 2024 to September 2025) cover every programme. The mental health programmes ($98.7M of $274.6M programme spending) come to **<span data-figure="headline" data-model="wounded-warrior-project-charityevals-mental-health">0.002</span> years of healthy life per $1,000** ([mental health](/wounded-warrior-project/wounded-warrior-project-charityevals-mental-health)); the other six programmes ($175.9M) come to **<span data-figure="headline" data-model="wounded-warrior-project-charityevals">0.006</span>**.
+Wounded Warrior Project (WWP) serves US veterans injured in service since 2001 and their families. Our two models of its fiscal 2025 (October 2024 to September 2025) cover every programme. The mental health programmes ($98.7M of $274.6M programme spending) come to **{{result:wounded-warrior-project-charityevals-mental-health}} years of healthy life per $1,000** ([mental health](/wounded-warrior-project/wounded-warrior-project-charityevals-mental-health)); the other six programmes ($175.9M) come to **{{result}}**.
 
-The help reaches US households that already consume about $27,000 a person, so on the site's one log-income scale even large sums are small gains, and most of it competes with free help from the VA and other veteran groups. About four-fifths of the second model is the benefits service: WWP's representatives win VA disability awards it values at $263.7M (about a year of the added payments plus some back pay).
+The help reaches US households that already consume about {{row:ben_baseline_consumption}} a person, so on the site's one log-income scale even large sums are small gains, and most of it competes with free help from the VA and other veteran groups. About four-fifths of the second model is the benefits service: WWP's representatives win VA disability awards it values at $263.7M (about a year of the added payments plus some back pay).
 
 ### What the charity does
 
@@ -26,7 +26,7 @@ Veterans with PTSD who finish trauma-focused therapy have fewer symptoms and les
 - Jobs: the placements' pay, net of taxes and what the household had before, for about a year, a quarter of it due to WWP.
 - Emergency grants (measured: cash paid), financial readiness, the Independence Program's services at their value to the household, and the community partnerships' grants as services to veterans' households.
 - Connection and physical health: small life-satisfaction gains for months, and a small number of suicides averted by peer groups; caregivers' respite in the Independence Program.
-- Advocacy: the chance the Star Act becomes law by January 2029 (8%; it was left out of both chambers' 2027 defence bills), half of it due to the veterans' groups and 4% of that to WWP's fiscal-2025 work, times $10,000 a person a year for 54,000 retirees' households, net of taxpayers, over the site's years for a won law, and half as much again for the rest of WWP's agenda.
+- Advocacy: the chance the Star Act becomes law by January 2029 (8%; it was left out of both chambers' 2027 defence bills), half of it due to the veterans' groups and 4% of that to WWP's fiscal-2025 work, times {{row:adv_value_per_person}} a person a year for 54,000 retirees' households, net of taxpayers, over the site's years for a won law, and half as much again for the rest of WWP's agenda.
 
 ### What drives the result
 

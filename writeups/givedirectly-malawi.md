@@ -1,6 +1,6 @@
 ### Summary
 
-The same GiveDirectly program, delivered in Malawi. It comes to **<span data-figure="headline" data-model="givedirectly-malawi">6.4</span> years of healthy life per $1,000**, against <span data-figure="headline" data-model="givedirectly">4.4</span> for GiveDirectly's Kenya program. Our adjustments change it as little as they change Kenya.
+The same GiveDirectly program, delivered in Malawi. It comes to **{{result}} years of healthy life per $1,000**, against {{result:givedirectly}} for GiveDirectly's Kenya program. Our adjustments change it as little as they change Kenya.
 
 ### Why Malawi comes out higher
 

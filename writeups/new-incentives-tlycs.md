@@ -1,6 +1,6 @@
 ### Summary
 
-New Incentives gives mothers in northern Nigeria small cash payments when they bring their infants for routine vaccinations. The Life You Can Save estimates $347 per DALY averted from its 2024 figures; valuing the deaths the site's way and counting illness for as long as it lasts, that is **<span data-figure="headline" data-model="new-incentives-tlycs">3.9</span> years of healthy life per 1,000 dollars**.
+New Incentives gives mothers in northern Nigeria small cash payments when they bring their infants for routine vaccinations. The Life You Can Save estimates $347 per DALY averted from its 2024 figures; valuing the deaths the site's way and counting illness for as long as it lasts, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 
@@ -11,7 +11,7 @@ New Incentives enrolls infants at government clinics and pays their caregivers a
 ### How the impact happens
 
 1. **Coverage:** Nigeria's coverage of the routine vaccines rose from 2022 to 2024 (pentavalent from 39% to 65%).
-2. **Deaths:** the Lives Saved Tool estimates the child deaths that rise averted in 2023 and 2024; the sheet credits New Incentives with its share of Nigeria's under-fives, 4.4%.
+2. **Deaths:** the Lives Saved Tool estimates the child deaths that rise averted in 2023 and 2024; the sheet credits New Incentives with its share of Nigeria's under-fives, {{row:share_of_u5_reached}}.
 3. **Illness:** diarrhoea, pneumonia and meningitis cases from the same tool; tuberculosis, diphtheria, whooping cough, hepatitis B and measles from national figures in the literature and the rise in coverage.
 4. **DALYs:** each death counts life expectancy at birth discounted at 3%, and each case its disability weight.
 

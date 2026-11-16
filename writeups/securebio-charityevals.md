@@ -1,6 +1,6 @@
 ### Summary
 
-SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="securebio-charityevals">6.1</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 94.
+SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 94.
 
 ### What the charity does
 

@@ -7,7 +7,7 @@ Checked only the one edit made after the SecureBio round-1 finding 6 (`git diff 
 
 New findings: none.
 
-Model-sha: 431886e3a1d407145ac22f06120d7bb53b68207a0469aa9da198091fac78fee7
+Model-sha: a994bbf4e99eda6d1c070c316f84dd78d81dff9dded07e2f72f3ff9d782c4b75
 
 **Verdict: pass**
 
@@ -15,3 +15,5 @@ Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastr
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.

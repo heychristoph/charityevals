@@ -1,6 +1,6 @@
 ### Summary
 
-Aquatic Life Institute (ALI) pushes retailers, certifiers and policymakers to adopt welfare standards for farmed fish. ACE's analysis (2024 evaluation, renewed in 2025) estimates SADs for its corporate and institutional outreach: **<span data-figure="headline" data-model="aquatic-life-institute">1.9</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Aquatic Life Institute (ALI) pushes retailers, certifiers and policymakers to adopt welfare standards for farmed fish. ACE's analysis (2024 evaluation, renewed in 2025) estimates SADs for its corporate and institutional outreach: **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 In ACE's own view the model reproduces all 23 of ACE's intermediate figures, which come to 530.
 
@@ -19,7 +19,7 @@ ALI's policy feedback program has no SADs estimate and is left out of the bottom
 ### Where we differ from ACE
 
 - **Suffering per stunned shrimp (changed for consistency).** ACE uses 0.097 days of suffering per shrimp stunned; we use the shared 0.0045, ACE's more recent figure from its 2025 Shrimp Welfare Project review, so the same change counts the same in every model.
-- **Shrimp weight.** ACE's figures carry Ambitious Impact's weight for a shrimp, about 40% of a hen's in its 2024 SADs (57% in the 2025 SADs of the shared figure we use); we use Rethink Priorities', about 9%. Together with the points around it, this takes ACE's 530 to <span data-figure="headline" data-model="aquatic-life-institute">1.9</span>.
+- **Shrimp weight.** ACE's figures carry Ambitious Impact's weight for a shrimp, about 40% of a hen's in its 2024 SADs (57% in the 2025 SADs of the shared figure we use); we use Rethink Priorities', about 9%. Together with the points around it, this takes ACE's 530 to {{result}}.
 - **Years counted (changed for consistency).** ACE counts 15 years from 2023 (4 to 36), less the years until stunning starts; we count the shared "Years a won reform counts before it would have come anyway" (5 by default) from when stunning starts, the wait discounted as ACE's formula does.
 - **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.
 - **Credit for shared outcomes.** ACE's discounts for other organisations' contributions are built into its inputs here, and we keep them. They are ACE's estimate of ALI's share of the work, so they are also what "Credit by share of resources" uses.

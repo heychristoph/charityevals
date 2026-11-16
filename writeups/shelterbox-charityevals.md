@@ -1,6 +1,6 @@
 ### Summary
 
-ShelterBox gives emergency shelter, household items and cash to families after disasters and conflict. Our model of its 2025 work comes to **<span data-figure="headline" data-model="shelterbox-charityevals">0.2</span> years of healthy life per 1,000 dollars**. That is above most relief models on the site, because most of its aid goes to very poor displaced families, for whom a few dozen dollars of shelter and goods count for a lot.
+ShelterBox gives emergency shelter, household items and cash to families after disasters and conflict. Our model of its 2025 work comes to **{{result}} years of healthy life per 1,000 dollars**. That is above most relief models on the site, because most of its aid goes to very poor displaced families, for whom a few dozen dollars of shelter and goods count for a lot.
 
 ### What the charity does
 

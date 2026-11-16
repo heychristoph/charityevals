@@ -1,6 +1,6 @@
 ### Summary
 
-Sinergia Animal campaigns for farmed animals across Latin America and Southeast Asia. ACE's 2026 analysis of its Laying Hens programme works out to **<span data-figure="headline" data-model="sinergia-animal-ace-2026">0.5</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is. ACE's own figure is 5.7 SADs averted per dollar (0.008 to 106), far below its 2025 estimate: Arcor's commitment is very roughly sized, and ACE's 2026 SADs count less suffering per hen.
+Sinergia Animal campaigns for farmed animals across Latin America and Southeast Asia. ACE's 2026 analysis of its Laying Hens programme works out to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is. ACE's own figure is 5.7 SADs averted per dollar (0.008 to 106), far below its 2025 estimate: Arcor's commitment is very roughly sized, and ACE's 2026 SADs count less suffering per hen.
 
 The model reproduces ACE's calculated figures (23 rows; the rest are inputs).
 

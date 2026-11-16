@@ -1,6 +1,6 @@
 ### Summary
 
-Pallium India provides palliative care in Kerala and helps other Indian states build pain relief and opioid access for people with serious illness. The Happier Lives Institute's rough estimate for Pallium helping Karnataka catch up with Kerala is 16 to 108 WELLBYs per $1,000; we take the middle of that range, which on our scale is **<span data-figure="headline" data-model="pallium-india-hli">2.3</span> years of healthy life per $1,000**.
+Pallium India provides palliative care in Kerala and helps other Indian states build pain relief and opioid access for people with serious illness. The Happier Lives Institute's rough estimate for Pallium helping Karnataka catch up with Kerala is 16 to 108 WELLBYs per $1,000; we take the middle of that range, which on our scale is **{{result}} years of healthy life per $1,000**.
 
 HLI calls this "a highly uncertain BOTEC" (back-of-the-envelope calculation) and plans a fuller report. It gives only the range and no spreadsheet; the model takes HLI's two ends, quoted, and uses their geometric mean as the central figure, which is our choice.
 

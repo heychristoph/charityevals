@@ -1,6 +1,6 @@
 # Audit: st-jude-charityevals-research, round 3
 Result: 2.251e-6 daly/$ = 0.002251 years of healthy life per 1,000 dollars (combined range 0.000189–0.0268); cause median 0.1085 (×0.021). Verdict: pass.
-Model-sha: ce6a74fbe23f9ae09ab95503832107bd26e467cb0fb5d3412d24e679c34f0eb3
+Model-sha: 66534f0f87b082284cdcc727d3122f2cb5fe8768b2b3b4ce4a9bbf061ca36091
 Scope: scoped verification of commit a1555789 (the corrected quote in `nc_flu_deaths_over5_per_year`) and round 2's items. Scope of the model (own-funded research, FY2025) unchanged.
 Mechanical: lint 0 high / 1 medium (`far-below`, explained in round 1's Drivers, unchanged) / 1 low (`spread`, the summary states it). Invariants: none. `scripts/check.ts st-jude-charityevals-research`: all models valid. normalization-audit and simulation-check not re-run (no structural change). generated/ untouched.
 Previous round: R2-1 not applied, and the reason holds (below); R2-2 resolved.
@@ -26,3 +26,5 @@ Quote for `nc_flu_deaths_over5_per_year` verified against the abstract wording c
 ## Drivers
 Unchanged from round 2.
 Re-stamped (15 Nov 2026): side-effect tag on unmodelled_benefits_adj (2.16, mechanical; headline unchanged)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 6e174700.

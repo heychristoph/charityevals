@@ -1,6 +1,6 @@
 ### Summary
 
-Shrimp Welfare Project (SWP) persuades shrimp producers to stun shrimp electrically before slaughter, and works with farmers in India on welfare improvements. ACE's 2025 analysis of its two programs works out to **<span data-figure="headline" data-model="shrimp-welfare-project">10</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Shrimp Welfare Project (SWP) persuades shrimp producers to stun shrimp electrically before slaughter, and works with farmers in India on welfare improvements. ACE's 2025 analysis of its two programs works out to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 In ACE's own view the model reproduces all 24 of ACE's intermediate figures.
 

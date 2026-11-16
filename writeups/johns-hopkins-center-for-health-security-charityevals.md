@@ -1,6 +1,6 @@
 ### Summary
 
-The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="johns-hopkins-center-for-health-security-charityevals">7.5</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 134.
+The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 134.
 
 ### What the charity does
 

@@ -1,6 +1,6 @@
 ### Summary
 
-ACTRA (Acción Transformadora) runs group cognitive behavioural therapy for young men with violent or criminal backgrounds in Colombia, to cut crime and help the men themselves. The Happier Lives Institute predicts it creates 37 WELLBYs per $1,000 donated; on our scale that is **<span data-figure="headline" data-model="actra-hli">2.0</span> years of healthy life per $1,000**.
+ACTRA (Acción Transformadora) runs group cognitive behavioural therapy for young men with violent or criminal backgrounds in Colombia, to cut crime and help the men themselves. The Happier Lives Institute predicts it creates 37 WELLBYs per $1,000 donated; on our scale that is **{{result}} years of healthy life per $1,000**.
 
 HLI publishes no spreadsheet for this estimate. The model is built from the figures in HLI's report, each quoted on its row, and reproduces HLI's 37.
 

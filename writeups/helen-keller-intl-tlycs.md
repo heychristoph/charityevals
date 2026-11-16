@@ -1,6 +1,6 @@
 ### Summary
 
-Helen Keller Intl supports governments' twice-yearly campaigns that give young children vitamin A capsules. The Life You Can Save estimates a cost per DALY averted in each of 13 African countries from Helen Keller Intl's 2024 costs and children reached; pooled by money, its figures give $30 per DALY. Valuing the deaths averted the site's way and taking out the doses that would have been given anyway, that is **<span data-figure="headline" data-model="helen-keller-intl-tlycs">44</span> years of healthy life per 1,000 dollars**.
+Helen Keller Intl supports governments' twice-yearly campaigns that give young children vitamin A capsules. The Life You Can Save estimates a cost per DALY averted in each of 13 African countries from Helen Keller Intl's 2024 costs and children reached; pooled by money, its figures give $30 per DALY. Valuing the deaths averted the site's way and taking out the doses that would have been given anyway, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

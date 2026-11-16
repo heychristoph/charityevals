@@ -1,6 +1,6 @@
 ### Summary
 
-Dansk Vegetarisk Forening (DVF) promotes plant-based food in Denmark, including training chefs and influencing public funding. ACE's analysis (2024 evaluation, recommendation renewed in 2025) estimates SADs only for the chef education program: **<span data-figure="headline" data-model="dansk-vegetarisk-forening">0.87</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Dansk Vegetarisk Forening (DVF) promotes plant-based food in Denmark, including training chefs and influencing public funding. ACE's analysis (2024 evaluation, recommendation renewed in 2025) estimates SADs only for the chef education program: **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 In ACE's own view the model reproduces all 21 of ACE's intermediate figures, which come to 20.
 

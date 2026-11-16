@@ -1,6 +1,6 @@
 ### Summary
 
-Imagine Worldwide puts tablets with child-directed literacy and numeracy software into African government primary schools, above all Malawi's national programme with its Ministry of Education. Our model of its 2024 work gives **<span data-figure="headline" data-model="imagine-worldwide-charityevals">2.3</span> years of healthy life per 1,000 dollars**. The result rests on how much of a child's learning gain lasts into adult earnings and how well the trials' effects hold at national scale; the countries outside Malawi are discounted for missing data.
+Imagine Worldwide puts tablets with child-directed literacy and numeracy software into African government primary schools, above all Malawi's national programme with its Ministry of Education. Our model of its 2024 work gives **{{result}} years of healthy life per 1,000 dollars**. The result rests on how much of a child's learning gain lasts into adult earnings and how well the trials' effects hold at national scale; the countries outside Malawi are discounted for missing data.
 
 ### What the charity does
 

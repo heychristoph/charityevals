@@ -1,6 +1,6 @@
 # Audit: ibbis-charityevals, round 3
 Result: 0.008344 daly/$ = 8.34 years of healthy life per 1,000 dollars (combined range 0.43–160); cause median 1.50 (×5.6). Verdict: pass.
-Model-sha: 117b54ae1777040bd4ed1dd48228ce86e1f9b8d0c4a7137b0d26829fbd3f0f48
+Model-sha: 04911df946b3a7856f522d5b454348f76bd4fc462be28fd102e291e89918ba60
 Scope: a scoped verification of the changes since round 2 (its two low findings and the newly written audit section of the write-up). No other part of the model was re-audited.
 Mechanical: audit-model.ts 0 high / 0 medium (only the low "estimate with no range" lines for the switched-off branches' point inputs, as in round 2); check.ts all models valid; result and combined range unchanged from round 2 (8.344, 0.43–160), as expected since spending does not enter the per-dollar result.
 
@@ -19,3 +19,5 @@ Verdict: pass (no high or medium findings; no findings).
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.

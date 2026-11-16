@@ -1,6 +1,6 @@
 ### Summary
 
-Transparency International campaigns against corruption worldwide, through a Secretariat in Berlin and more than 100 national chapters. Our model of the Secretariat's 2025 work comes to **<span data-figure="headline" data-model="transparency-international-charityevals">0.03</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure: how much of corruption's cost one change in a law or rule removes, and how many people an average change governs, are our judgments, with no study that measures them.
+Transparency International campaigns against corruption worldwide, through a Secretariat in Berlin and more than 100 national chapters. Our model of the Secretariat's 2025 work comes to **{{result}} years of healthy life per 1,000 dollars**. It is a very uncertain figure: how much of corruption's cost one change in a law or rule removes, and how many people an average change governs, are our judgments, with no study that measures them.
 
 ### What the charity does
 
@@ -15,7 +15,7 @@ Corruption costs people income: contracts go to the wrong firms, roads cost more
 - **Cost:** the audited consolidated statements. The 2025 wins came from several years of work, so the cost is the average real spending of 2023-2025, about 9% below 2025's. Administration, fundraising, evaluation and the CEO's office are spread over the programmes. Grants to chapters count as the work they fund.
 - **Policy branch (about 94% of the result):**
   - the organisation's own count of at least 60 changes in policy, law and practice it contributed to in 2025;
-  - each governs on average about 29 million people: three EU-wide rules govern 452 million each, and the national, agency and city changes about 9 million each (3 to 30 million). Global resolutions count no one here: their effect comes through the national laws that implement them. About 73% of the people governed live in the EU;
+  - each governs on average about 29 million people: three EU-wide rules govern 452 million each, and the national, agency and city changes about 9 million each (3 to 30 million). Global resolutions count no one here: their effect comes through the national laws that implement them. About {{row:pol_eu_people_share}} of the people governed live in the EU;
   - corruption costs about 1.6% of income in the EU (above the European Commission's and the European Parliament's floors) and is taken as about the 2% of income paid in bribes elsewhere. A change removes 0.3% of it where applied, if it works as tested measures do: a judgment anchored on Olken's trial in Indonesia, where audits cut the money missing from road projects by 8 percentage points;
   - 40% of a change is applied as written, and the evidence that such rules work gets a factor of one half;
   - the gain builds up over about four years and is counted for the years a won reform counts on the site, less a yearly chance of repeal;

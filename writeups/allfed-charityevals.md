@@ -1,6 +1,6 @@
 ### Summary
 
-ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="allfed-charityevals">26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from about 0.9 to about 750.
+ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from about 0.9 to about 750.
 
 ### What the charity does
 
@@ -26,7 +26,7 @@ The money is split by the catastrophe each dollar is against:
 
 | Share of the money | Against | Valued as |
 |---|---|---|
-| 82% | Sun-blocking catastrophes, chiefly nuclear winter | A typical nuclear dollar, applied to the famine |
+| {{row:nuclear_cost_share}} | Sun-blocking catastrophes, chiefly nuclear winter | A typical nuclear dollar, applied to the famine |
 | 8% | Food supply in an extreme pandemic | A typical pandemic dollar, applied to the 10% of deaths from hunger |
 | 10% | Loss of electricity and industry | A share of the benefits not modelled |
 

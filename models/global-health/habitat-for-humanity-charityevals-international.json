@@ -226,7 +226,7 @@
       "label": "Share of HFHI's transfers that reaches families as housing",
       "format": "percent",
       "formula": "dir_transfers_share * (consolidated_transfer_share * consolidated_delivery_share + (1 - consolidated_transfer_share) * nso_delivery_share)",
-      "explainer": "The share of the transfers for direct housing, times the share reaching families: nearly all of what the consolidated national organisations spend (their staff are in HFHI's salaries line), the delivery share of what the independent ones spend. About 55%."
+      "explainer": "The share of the transfers for direct housing, times the share reaching families: nearly all of what the consolidated national organisations spend (their staff are in HFHI's salaries line), the delivery share of what the independent ones spend. About {{row:transfer_delivery_share}}."
     },
     {
       "id": "transfer_per_household",
@@ -678,7 +678,7 @@
       "format": "number",
       "unit": "people",
       "formula": "lac_share * hh_lac + eme_share * hh_eme + afr_share * hh_afr + (1 - lac_share - eme_share - afr_share) * hh_ap",
-      "explainer": "The regions' household sizes (the consumption stand-ins' own, from the site's facts) weighted by where Habitat's direct-housing families are: about 3.8 people."
+      "explainer": "The regions' household sizes (the consumption stand-ins' own, from the site's facts) weighted by where Habitat's direct-housing families are: about {{row:household_size}} people."
     },
     {
       "id": "people_reached",
@@ -987,7 +987,7 @@
       "section": "adjustments",
       "label": "Value of a volunteer hour in Habitat's international work (US$)",
       "format": "usd",
-      "explainer": "An hour of local work valued at what it earns: the regions' household-survey consumption per household (the shared survey means and household sizes this model reads), over the household's working hours, weighted by where the direct work is. About $2 an hour, from about $0.50 in Africa to about $3 in Latin America.",
+      "explainer": "An hour of local work valued at what it earns: the regions' household-survey consumption per household (the shared survey means and household sizes this model reads), over the household's working hours, weighted by where the direct work is. About {{row:int_volunteer_hour_value}} an hour, from about $0.50 in Africa to about $3 in Latin America.",
       "formula": "(lac_share * cons_mean_lac * hh_lac + eme_share * cons_mean_eme * hh_eme + afr_share * cons_mean_afr * hh_afr + (1 - lac_share - eme_share - afr_share) * cons_mean_ap * hh_ap) / int_household_work_hours"
     },
     {
@@ -1249,7 +1249,7 @@
       "label": "Staff pay as a share of HFHI's cost",
       "format": "percent",
       "formula": "staff_pay_total / total_expenses",
-      "explainer": "HFHI's own salaries over its total expenses (35%), its own figure in place of the shared default."
+      "explainer": "HFHI's own salaries over its total expenses ({{row:staff_cost_share}}), its own figure in place of the shared default."
     },
     {
       "id": "salary_gap",

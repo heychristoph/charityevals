@@ -1,10 +1,10 @@
 ### Summary
 
-The Electoral Reform Society campaigns for proportional representation for the House of Commons and for other changes to how the UK votes and is governed. Our model of its work comes to **<span data-figure="headline" data-model="electoral-reform-society-charityevals">0.05</span> years of healthy life per 1,000 dollars**. It is a very uncertain figure: whether a voting method changes how well people are governed, and the chance that the UK adopts proportional representation, are both our judgments.
+The Electoral Reform Society campaigns for proportional representation for the House of Commons and for other changes to how the UK votes and is governed. Our model of its work comes to **{{result}} years of healthy life per 1,000 dollars**. It is a very uncertain figure: whether a voting method changes how well people are governed, and the chance that the UK adopts proportional representation, are both our judgments.
 
 ### What the charity does
 
-The Society was founded in 1884. It has offices in London, Edinburgh (ERS Scotland) and Cardiff (ERS Cymru), 18 staff and about 7,000 members. In the year to March 2025 it spent £2.4 million ($3.0 million), £1.6 million of it on campaign staff and campaigns. It publishes research on elections, briefs MPs and peers, runs petitions and convenes coalitions such as Democracy Group Cymru.
+The Society was founded in 1884. It has offices in London, Edinburgh (ERS Scotland) and Cardiff (ERS Cymru), 18 staff and about 7,000 members. In the year to March 2025 it spent £2.4 million ($3.0 million), £{{row:pr_discounted_years}} million of it on campaign staff and campaigns. It publishes research on elections, briefs MPs and peers, runs petitions and convenes coalitions such as Democracy Group Cymru.
 
 It is a company limited by guarantee owned by its members, not a registered charity. Gifts to it get no Gift Aid or tax relief. It is the only entity that takes donations, so it is what this models. Most of its spending is drawn from a £43 million capital fund, built from the 2018 sale of its former ballot-services business.
 

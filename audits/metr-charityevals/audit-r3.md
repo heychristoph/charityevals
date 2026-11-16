@@ -1,7 +1,7 @@
 # Audit: metr-charityevals, round 3
 
 Result: unchanged from round 2 (0.0565 years of healthy life per 1,000 dollars). Verdict: pass (no high, medium or low findings).
-Model-sha: fc2f24985a741d06029a6bb5ecda52f94c0fac6221321c9b470e599d63a77215
+Model-sha: 02544573a6341320d85ef5240fbed1f9fa97c979a5a089861cc65d8586ab64c8
 Scope: the one round-2 finding. Mechanical: `check.ts metr-charityevals` all models valid; `audit-model.ts` shows no high findings (only low range, unused-input and far-below notes, as before). `generated/` restored after the scripts.
 Previous round: round 2 (one low).
 
@@ -19,3 +19,5 @@ Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastr
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.

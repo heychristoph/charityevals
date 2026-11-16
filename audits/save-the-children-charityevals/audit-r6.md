@@ -9,4 +9,6 @@ Checked:
 No findings.
 
 Verdict: pass.
-Model-sha: fc38937d1a098fd77e336b6c3fc56040dbd2106fefda6fe1548e45735fe1aa75
+Model-sha: 6241905951a204a2009dcb24886ce697aaf9b29a7e7dceba22f6b4ee23ab9678
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 52be53be.

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "representus-education-fund",
   "owner": "charityevals",
-  "summary": "The RepresentUs Education Fund, the 501(c)(3) of the US anti-corruption and democracy-reform group RepresentUs (Represent.Us itself is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $7.8 million in 2024 on national videos and social media about corruption and threats to democracy, education and volunteer outreach behind state and local ballot measures, research, the American Democracy Summit and grants to Represent.Us for campaign outreach. Four branches, each its share of the money behind what its field or movement achieves: its 14% share of the resources behind the ranked-choice voting movement (its volunteers' time counted with the others'), which puts about 1.4 million more Americans a year under ranked ballots (about a third of the result); its 3% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about a quarter); its other reforms (anti-corruption laws, money in politics, ethics), judged a quarter as effective per dollar as the redistricting movement (about a fifth); and its direct work's small share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about a fifth). With its next dollar at 49% of the average, it comes to about 0.026 years of healthy life per 1,000 dollars; the result is mostly judgment (the years a win counts, how much a voting reform changes how well people are governed, the split of its spending between the branches), and all four branches are discounted by the shared missing-data slider.",
+  "summary": "The RepresentUs Education Fund, the 501(c)(3) of the US anti-corruption and democracy-reform group RepresentUs (Represent.Us itself is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $7.8 million in 2024 on national videos and social media about corruption and threats to democracy, education and volunteer outreach behind state and local ballot measures, research, the American Democracy Summit and grants to Represent.Us for campaign outreach. Four branches, each its share of the money behind what its field or movement achieves: its {{row:rcv_attribution_share}} share of the resources behind the ranked-choice voting movement (its volunteers' time counted with the others'), which puts about 1.4 million more Americans a year under ranked ballots (about a third of the result); its 3% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about a quarter); its other reforms (anti-corruption laws, money in politics, ethics), judged a quarter as effective per dollar as the redistricting movement (about a fifth); and its direct work's small share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about a fifth). With its next dollar at 49% of the average, it comes to about {{result}} years of healthy life per 1,000 dollars; the result is mostly judgment (the years a win counts, how much a voting reform changes how well people are governed, the split of its spending between the branches), and all four branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: RepresentUs Education Fund",
@@ -796,7 +796,7 @@
       "label": "The Education Fund's share of the ranked-choice movement's resources",
       "format": "percent",
       "formula": "cost_total * rcv_spend_share / (@democracy.us_rcv_movement_resources_per_year + volunteer_value * rcv_reform_share)",
-      "explainer": "Its 2024 spending on ranked-choice voting (about $2.8 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million in 2024 dollars, ballot campaigns, FairVote and RepresentUs included; Convention 2), the denominator the FairVote model divides by too, plus its own volunteers' time on this work (the shared figure counts money): about 14%. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar spent. 2024 was a year of large ballot spending, most of it on statewide measures that failed (all but Alaska's defence; Washington DC's Initiative 83 passed), which is why the average year is the base, not 2024's record."
+      "explainer": "Its 2024 spending on ranked-choice voting (about $2.8 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million in 2024 dollars, ballot campaigns, FairVote and RepresentUs included; Convention 2), the denominator the FairVote model divides by too, plus its own volunteers' time on this work (the shared figure counts money): about {{row:rcv_attribution_share}}. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar spent. 2024 was a year of large ballot spending, most of it on statewide measures that failed (all but Alaska's defence; Washington DC's Initiative 83 passed), which is why the average year is the base, not 2024's record."
     },
     {
       "id": "rcv_missing_data_adj",
@@ -935,7 +935,7 @@
       "label": "The Education Fund's other reform spending over the redistricting movement's resources",
       "format": "percent",
       "formula": "cost_total * oth_spend_share / (maps_movement_resources + volunteer_value * (1 - rcv_reform_share - maps_reform_share))",
-      "explainer": "Its 2024 spending on the other reforms over the redistricting movement's yearly resources, the scale oth_relative_effect is set against (as in the Common Cause model), plus its own volunteers' time on this work: about 12%."
+      "explainer": "Its 2024 spending on the other reforms over the redistricting movement's yearly resources, the scale oth_relative_effect is set against (as in the Common Cause model), plus its own volunteers' time on this work: about {{row:oth_attribution_share}}."
     },
     {
       "id": "oth_evidence_adj",
@@ -1334,7 +1334,7 @@
       "label": "Staff pay as a share of cost",
       "format": "percent",
       "formula": "(staff_personnel + staff_payroll_taxes) / total_expenses",
-      "explainer": "Personnel and payroll taxes over total expenses (Convention 1): 60%. Consulting ($1.3 million, mostly video, digital and campaign agencies in the education programme) is bought work, not staff-like, so it is left out."
+      "explainer": "Personnel and payroll taxes over total expenses (Convention 1): {{row:staff_cost_share}}. Consulting ($1.3 million, mostly video, digital and campaign agencies in the education programme) is bought work, not staff-like, so it is left out."
     },
     {
       "id": "salary_gap",

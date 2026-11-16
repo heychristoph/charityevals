@@ -1,6 +1,6 @@
 ### Summary
 
-Drug Policy Alliance (DPA) campaigns to end the war on drugs in the United States. We count its spending over fiscal years 2021 to 2025 against the share of that period's wins its work in those years bought. On that basis our model comes to **<span data-figure="headline" data-model="drug-policy-alliance-charityevals">−0.0042</span> years of healthy life per $1,000**. That is a small net harm. The harms we count are cannabis use disorder and traffic deaths after legal sales, and overdose deaths Measure 110 may have caused. They outweigh what the wins gained: arrests ended, records cleared, users' gains from legal supply and overdose deaths averted. Each side is small and uncertain, so the true result could be anywhere from a larger harm to a small gain.
+Drug Policy Alliance (DPA) campaigns to end the war on drugs in the United States. We count its spending over fiscal years 2021 to 2025 against the share of that period's wins its work in those years bought. On that basis our model comes to **{{result}} years of healthy life per $1,000**. That is a small net harm. The harms we count are cannabis use disorder and traffic deaths after legal sales, and overdose deaths Measure 110 may have caused. They outweigh what the wins gained: arrests ended, records cleared, users' gains from legal supply and overdose deaths averted. Each side is small and uncertain, so the true result could be anywhere from a larger harm to a small gain.
 
 ### What the charity does
 

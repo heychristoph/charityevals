@@ -1,6 +1,6 @@
 ### Summary
 
-The Iodine Global Network (formerly ICCIDD) advises governments and salt producers on iodizing salt, so that children grow up without the iodine deficiency that lowers IQ. GiveWell's salt iodization analysis, built in 2014 for GAIN and ICCIDD and updated with its 2021 moral weights, gives **<span data-figure="headline" data-model="iodine-global-network-givewell">6.5</span> years of healthy life per 1,000 dollars** in our view (GiveWell's own figure: about 7 times cash transfers). It is the same sheet as on GAIN's page, credited here to the Iodine Global Network.
+The Iodine Global Network (formerly ICCIDD) advises governments and salt producers on iodizing salt, so that children grow up without the iodine deficiency that lowers IQ. GiveWell's salt iodization analysis, built in 2014 for GAIN and ICCIDD and updated with its 2021 moral weights, gives **{{result}} years of healthy life per 1,000 dollars** in our view (GiveWell's own figure: about 7 times cash transfers). It is the same sheet as on GAIN's page, credited here to the Iodine Global Network.
 
 ### How the model works
 

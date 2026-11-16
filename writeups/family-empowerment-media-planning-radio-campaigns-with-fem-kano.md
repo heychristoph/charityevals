@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in March 2023.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Family planning radio campaigns rough estimate with FEM Kano data](/family-empowerment-media) | [GW](/evaluators/givewell) | March 2023 | <span data-figure="headline" data-model="family-empowerment-media-planning-radio-campaigns-with-fem-kano">26</span> | 37 |
+| [Family planning radio campaigns rough estimate with FEM Kano data](/family-empowerment-media) | [GW](/evaluators/givewell) | March 2023 | {{result}} | 37 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

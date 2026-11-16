@@ -1,6 +1,6 @@
 ### Summary
 
-Bandhan-Konnagar, a non-profit society in Kolkata, gives the poorest women-headed households in 16 Indian states an asset, a weekly stipend and two years of coaching, so they can earn their way out of extreme poverty. It also runs health, education, skills, financial literacy and farming programmes. Our own model of its fiscal year 2024-25 (April 2024 to March 2025) comes to **<span data-figure="headline" data-model="bandhan-charityevals">6.0</span> years of healthy life per $1,000**.
+Bandhan-Konnagar, a non-profit society in Kolkata, gives the poorest women-headed households in 16 Indian states an asset, a weekly stipend and two years of coaching, so they can earn their way out of extreme poverty. It also runs health, education, skills, financial literacy and farming programmes. Our own model of its fiscal year 2024-25 (April 2024 to March 2025) comes to **{{result}} years of healthy life per $1,000**.
 
 The result rests on a randomized trial of Bandhan's own programme in West Bengal that followed households for ten years. The range is wide, mostly because the trial was small, ran in 2007, and stopped at year ten.
 

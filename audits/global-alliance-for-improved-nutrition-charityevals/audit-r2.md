@@ -1,6 +1,6 @@
 # Audit: global-alliance-for-improved-nutrition-charityevals, round 2 (verification)
 Result: 0.001440 uov/$ = 0.720 years of healthy life per 1,000 dollars (combined range 0.088–5.86); cause median 0.0687 (x10.5). Verdict: pass (no high findings, 0 medium, 1 low; the far-above medium is explained below).
-Model-sha: 904d24ef1bf6a902e06e759a01615fcb6605f07b72d62eff5ab46a5a87f3634b
+Model-sha: f9a275c38615ed8b9442c50dd15d73f35e4cdd6d8f6e9a70fe58927a3c2f2c23
 Scope: unchanged from round 1 (all four programme lines, year to 30 June 2025, 61.6 million programme costs); only the round-1 fixes and the rows they touched were checked.
 Mechanical: lint 0 high / 1 medium (far-above, explained below) / 2 low (estimate-basis, spread; both as in round 1); invariants none; check.ts "all models valid"; normalization-audit skipped in this sandbox (no violation reported for the model).
 Previous round: 9 findings, all resolved (table below).
@@ -53,3 +53,5 @@ Builder's response to the low finding: the quote was checked against the PDF's e
 Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)
 
 Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against migrate/data-model.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 480880ba.

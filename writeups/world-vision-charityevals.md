@@ -1,10 +1,10 @@
 ### Summary
 
-World Vision is a Christian humanitarian organisation. World Vision US raises money, mostly through child sponsorship, and receives US government and UN food grants. It passes them to World Vision's field offices for community development and disaster and food-crisis response, mostly in Sub-Saharan Africa. Its international programmes do about **<span data-figure="headline" data-model="world-vision-charityevals">0.27</span> years of healthy life per 1,000 dollars**.
+World Vision is a Christian humanitarian organisation. World Vision US raises money, mostly through child sponsorship, and receives US government and UN food grants. It passes them to World Vision's field offices for community development and disaster and food-crisis response, mostly in Sub-Saharan Africa. Its international programmes do about **{{result}} years of healthy life per 1,000 dollars**.
 
 More than half of that is relief: food and cash for people in food crises, and a few deaths averted. Livelihoods work, child health and nutrition, clean water and education make up the rest. World Vision US publishes no outcome figures for its own spending, so every part is built from its spending, judged costs per person and the research on that kind of work. Every part is discounted for missing data.
 
-Its US programme passes donated goods to churches, schools and nonprofits. It does about <span data-figure="headline" data-model="world-vision-charityevals-domestic">0.006</span> per 1,000 dollars, because the goods go to people in a rich country, where they add little to what a family consumes.
+Its US programme passes donated goods to churches, schools and nonprofits. It does about {{result:world-vision-charityevals-domestic}} per 1,000 dollars, because the goods go to people in a rich country, where they add little to what a family consumes.
 
 ### What the charity does
 

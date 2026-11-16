@@ -1,6 +1,6 @@
 ### Summary
 
-IBBIS works to stop DNA synthesis being used to make pandemic pathogens: it gives synthesis companies a free tool to screen what they are asked to make, and works on the standards and rules that make screening the norm. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="ibbis-charityevals">8.3</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 160.
+IBBIS works to stop DNA synthesis being used to make pandemic pathogens: it gives synthesis companies a free tool to screen what they are asked to make, and works on the standards and rules that make screening the norm. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 160.
 
 ### What the charity does
 

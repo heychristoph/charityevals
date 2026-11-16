@@ -4,7 +4,7 @@ Result: -0.0212 -> -0.0244 years per $1,000 (commit 7e73f6cd), reproduced at the
 
 Verdict: pass
 
-Model-sha: 84fd2bbd9032b86be5aeea98babb7265c2acfab22ff5420a0b3f6d3a857c6ae0
+Model-sha: 276960f00abdaa7e679086ffd12b3378c141389b4f1dbb6acfc0202369b61482
 
 Scope: the rows changed in 7e73f6cd (`donor_payer_uov_per_dollar`, `fin_uov_per_year`, `rbf_payer_uov`, `itmo_payer_uov`, `uov_bridged`, `rbf_dalys_raw`, `itmo_dalys_raw`), the summary and write-up sentences that state the result, and the bridge formula of `climate_dalys` against the unit's conversion for the 0.6 non-death damage (mechanical).
 
@@ -31,3 +31,5 @@ Checks, all passing:
 - docs/normalization.md 2.23 and 2.5 ("Damage beyond deaths"); climate recipe "Public money". No new observed or estimate input in this model to fetch.
 
 Re-stamped (16 Nov 2026): Why the simulation is too wide to use, said in outcome_total's explainer (normalization.md 2.18); values unchanged. Mechanical: headline unchanged, against 1a9667aa.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.

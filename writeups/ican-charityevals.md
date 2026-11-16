@@ -1,6 +1,6 @@
 ### Summary
 
-ICAN, the International Campaign to Abolish Nuclear Weapons, is a Geneva-based coalition of over 700 groups that campaigns for states to join the Treaty on the Prohibition of Nuclear Weapons and against nuclear deterrence. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="ican-charityevals">8</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on an estimate of what a typical dollar of nuclear work does to the risk, and on our judgment of how much a treaty that no nuclear-armed state has joined can do. All three are deeply uncertain, so the plausible range runs from about 0.27 to about 220.
+ICAN, the International Campaign to Abolish Nuclear Weapons, is a Geneva-based coalition of over 700 groups that campaigns for states to join the Treaty on the Prohibition of Nuclear Weapons and against nuclear deterrence. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on an estimate of what a typical dollar of nuclear work does to the risk, and on our judgment of how much a treaty that no nuclear-armed state has joined can do. All three are deeply uncertain, so the plausible range runs from about 0.27 to about 220.
 
 ### What the charity does
 
@@ -21,7 +21,7 @@ A typical project cuts that risk by a share per dollar, taken from Rethink Prior
 
 The model has two branches.
 
-**The campaign (65% of the cost).** Each dollar counts as a typical dollar of nuclear work, then three adjustments:
+**The campaign ({{row:nuclear_cost_share}} of the cost).** Each dollar counts as a typical dollar of nuclear work, then three adjustments:
 
 | Adjustment | Value |
 |---|---|

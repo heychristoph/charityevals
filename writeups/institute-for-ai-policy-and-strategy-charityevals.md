@@ -1,6 +1,6 @@
 ### Summary
 
-The Institute for AI Policy and Strategy (IAPS) is a think tank in Washington. It researches policy on advanced AI and national security, briefs officials and runs an AI Policy Fellowship. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="institute-for-ai-policy-and-strategy-charityevals">1.2</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain: on the model's own ranges the result runs from about 0.1 to about 5, and wider with the shared assumptions.
+The Institute for AI Policy and Strategy (IAPS) is a think tank in Washington. It researches policy on advanced AI and national security, briefs officials and runs an AI Policy Fellowship. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain: on the model's own ranges the result runs from about 0.1 to about 5, and wider with the shared assumptions.
 
 ### What the charity does
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Refugees International is a Washington advocacy group that researches displacement crises and presses governments and the UN for aid, access and protection for displaced people. It takes no government or UN money. It spent $4.5 million on advocacy and strategic outreach in 2024, its latest full audited year. We estimate **<span data-figure="headline" data-model="refugees-international-charityevals">0.13</span> years of healthy life per $1,000**. It publishes no measured outcome, so each result below is built from public data and ranged judgments and counted at half by the site's missing-data slider.
+Refugees International is a Washington advocacy group that researches displacement crises and presses governments and the UN for aid, access and protection for displaced people. It takes no government or UN money. It spent $4.5 million on advocacy and strategic outreach in 2024, its latest full audited year. We estimate **{{result}} years of healthy life per $1,000**. It publishes no measured outcome, so each result below is built from public data and ranged judgments and counted at half by the site's missing-data slider.
 
 ### How the model works
 

@@ -1,6 +1,6 @@
 ### Summary
 
-StrongMinds provides group interpersonal therapy for depression, mostly to women, through trained lay facilitators in Uganda and Zambia. The Happier Lives Institute (HLI) rates it a top charity, at about $25 per point of life satisfaction for a year: **<span data-figure="headline" data-model="strongminds">2.5</span> years of healthy life per $1,000** with our default exchange rate. SoGive's analysis of the same therapy gives <span data-figure="headline" data-model="strongminds-sogive-march-2024">0.57</span>.
+StrongMinds provides group interpersonal therapy for depression, mostly to women, through trained lay facilitators in Uganda and Zambia. The Happier Lives Institute (HLI) rates it a top charity, at about $25 per point of life satisfaction for a year: **{{result}} years of healthy life per $1,000** with our default exchange rate. SoGive's analysis of the same therapy gives {{result:strongminds-sogive-march-2024}}.
 
 The model reproduces all 32 of HLI's intermediate figures.
 

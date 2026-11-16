@@ -1,6 +1,6 @@
 ### Summary
 
-Longview Philanthropy advises major donors who want to reduce catastrophic risks from advanced AI, nuclear weapons and biological threats. It recommends grants, runs regranting funds and holds convenings. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="longview-philanthropy-charityevals">1.2</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to a little over a dollar of giving it caused through its funds, and a little over a dollar of advised giving it redirected. That giving is valued at what the site's charities in its three areas achieve. The nuclear part carries most of the value.
+Longview Philanthropy advises major donors who want to reduce catastrophic risks from advanced AI, nuclear weapons and biological threats. It recommends grants, runs regranting funds and holds convenings. Our model of all its work in 2025 comes to **{{result}} years of healthy life per 1,000 dollars**. Each dollar it spends leads to a little over a dollar of giving it caused through its funds, and a little over a dollar of advised giving it redirected. That giving is valued at what the site's charities in its three areas achieve. The nuclear part carries most of the value.
 
 ### What the charity does
 

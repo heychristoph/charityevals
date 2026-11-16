@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "future-cleantech-architects",
   "owner": "charityevals",
-  "summary": "Future Cleantech Architects (Remscheid and Brussels) does technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors in the EU, with a small sideline of publicly co-funded research on work and learning in manufacturing firms; this model counts the two policies it helped win in 2021-2025, the Renewable Energy Directive's indicative target that 5% of new renewable capacity be innovative technology (2023) and the European Parliament's backing of the low-carbon fuels delegated act (2025), against its spending over those years (€1.37M in 2024). At the defaults a dollar given averts about 0.0012 tonnes of CO₂e, about 0.0008 years of healthy life per $1,000, nearly all from the 5% target: the cheaper technology the capacity it causes buys later, anywhere (about half), and that capacity itself where it displaces fossil power (a net cut only in the part the EU emissions trading cap doesn't take back); it is low because the target is loosely defined and voluntary (an eighth of the capacity reported against it is credited to it), Future Cleantech Architects is credited with a tenth of the advocacy, and the next dollar counts 24% of the past average, as it holds about two years of spending in reserve. The result is mostly uncertainty, resting on judgments no study settles (how much capacity the target causes, how much fossil power that displaces, the later learning); the extra cost of the newest technologies is not counted, as no impact analysis gives one, and every branch, the research consortia included, is discounted for missing data.",
+  "summary": "Future Cleantech Architects (Remscheid and Brussels) does technical analysis and policy advice on clean technologies for hard-to-decarbonise sectors in the EU, with a small sideline of publicly co-funded research on work and learning in manufacturing firms; this model counts the two policies it helped win in 2021-2025, the Renewable Energy Directive's indicative target that 5% of new renewable capacity be innovative technology (2023) and the European Parliament's backing of the low-carbon fuels delegated act (2025), against its spending over those years (€1.37M in 2024). At the defaults a dollar given averts about 0.0012 tonnes of CO₂e, about {{result}} years of healthy life per $1,000, nearly all from the 5% target: the cheaper technology the capacity it causes buys later, anywhere (about half), and that capacity itself where it displaces fossil power (a net cut only in the part the EU emissions trading cap doesn't take back); it is low because the target is loosely defined and voluntary (an eighth of the capacity reported against it is credited to it), Future Cleantech Architects is credited with a tenth of the advocacy, and the next dollar counts 24% of the past average, as it holds about two years of spending in reserve. The result is mostly uncertainty, resting on judgments no study settles (how much capacity the target causes, how much fossil power that displaces, the later learning); the extra cost of the newest technologies is not counted, as no impact analysis gives one, and every branch, the research consortia included, is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Future Cleantech Architects",
@@ -1072,7 +1072,7 @@
       "label": "Air-pollution deaths per tonne of the target's own tonnes, relative to the fossil-fuel average",
       "format": "number",
       "formula": "(gas_deaths_per_twh * (1 - coal_share_of_displaced_power) + coal_deaths_per_twh * coal_share_of_displaced_power) / (displaced_fossil_tco2_per_mwh * 1e6) / @climate.deaths_per_tco2e_air_pollution",
-      "explainer": "Deaths per TWh of the displaced mix over its tonnes per TWh, relative to the average fossil tonne behind the shared air-pollution rate (facts: climate.deaths_per_tco2e_air_pollution): about 0.11 at the defaults, gas alone 0.05."
+      "explainer": "Deaths per TWh of the displaced mix over its tonnes per TWh, relative to the average fossil tonne behind the shared air-pollution rate (facts: climate.deaths_per_tco2e_air_pollution): about {{row:direct_smoke_factor}} at the defaults, gas alone 0.05."
     },
     {
       "id": "learn_smoke_factor",
@@ -1080,7 +1080,7 @@
       "label": "Air-pollution deaths per tonne of the later tonnes from cheaper technology, relative to the fossil-fuel average",
       "format": "number",
       "formula": "(gas_deaths_per_twh * (1 - learn_coal_share) + coal_deaths_per_twh * learn_coal_share) / (learn_tco2_per_mwh * 1e6) / @climate.deaths_per_tco2e_air_pollution",
-      "explainer": "The same per-fuel figures as the target's own tonnes, at the later capacity's own coal share (European plants' deaths per TWh stand in; plants elsewhere are often dirtier, which the coal figure's high end covers): about 0.15 at the defaults."
+      "explainer": "The same per-fuel figures as the target's own tonnes, at the later capacity's own coal share (European plants' deaths per TWh stand in; plants elsewhere are often dirtier, which the coal figure's high end covers): about {{row:learn_smoke_factor}} at the defaults."
     },
     {
       "id": "fuel_share",
@@ -1154,7 +1154,7 @@
       "label": "Staff pay as a share of cost",
       "format": "percent",
       "formula": "staff_costs_eur_2024 / total_expenses_eur_2024",
-      "explainer": "Its own share from the 2024 accounts (79%), in place of the shared default (templates.md Convention 1)."
+      "explainer": "Its own share from the 2024 accounts ({{row:staff_cost_share}}), in place of the shared default (templates.md Convention 1)."
     },
     {
       "id": "salary_gap",

@@ -1,6 +1,6 @@
 ### Summary
 
-Versus Arthritis (formerly Arthritis Research UK) funds arthritis research and runs information, support and awareness work in the UK. SoGive published only an upper bound for it: at most about £4,000 per life-saved equivalent, under assumptions SoGive itself thinks are unlikely. On our scale that bound is **<span data-figure="headline" data-model="versus-arthritis-sogive-upper-bound">7.6</span> years of healthy life per $1,000**. It is a ceiling, not an estimate, so it does not count on the rankings.
+Versus Arthritis (formerly Arthritis Research UK) funds arthritis research and runs information, support and awareness work in the UK. SoGive published only an upper bound for it: at most about £4,000 per life-saved equivalent, under assumptions SoGive itself thinks are unlikely. On our scale that bound is **{{result}} years of healthy life per $1,000**. It is a ceiling, not an estimate, so it does not count on the rankings.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its calculation. SoGive rates Versus Arthritis "Not Recommended (tentative)".
 

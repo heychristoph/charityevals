@@ -1,6 +1,6 @@
 ### Summary
 
-Giving What We Can asks people to pledge part of their income to effective charities, recommends where to give and runs a donation platform. Our model of all its work in 2023 and 2024 comes to **<span data-figure="headline" data-model="giving-what-we-can-charityevals">56</span> years of healthy life per $1,000**. Each dollar it spends leads to about nine dollars of giving it caused, valued at what the charities its donors actually chose achieve on this site. The figure moves most with the discount rate, because a pledge pays out over decades, and with how much the next dollar does compared with the past average.
+Giving What We Can asks people to pledge part of their income to effective charities, recommends where to give and runs a donation platform. Our model of all its work in 2023 and 2024 comes to **{{result}} years of healthy life per $1,000**. Each dollar it spends leads to about nine dollars of giving it caused, valued at what the charities its donors actually chose achieve on this site. The figure moves most with the discount rate, because a pledge pays out over decades, and with how much the next dollar does compared with the past average.
 
 ### What the charity does
 

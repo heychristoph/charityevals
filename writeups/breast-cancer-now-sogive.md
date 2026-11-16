@@ -1,6 +1,6 @@
 ### Summary
 
-Breast Cancer Now funds breast cancer research in the UK, runs support services for people with breast cancer, and campaigns on screening and treatment. SoGive could not trace the charity's own research to health gains, so it estimated what UK breast cancer research as a whole has cost per year of healthy life gained: £1,000 to £8,800. At the middle of that range, allowing for the share of a donation that goes to research and the years research takes to pay off, that is **<span data-figure="headline" data-model="breast-cancer-now-sogive">0.060</span> years of healthy life per $1,000** on our scale.
+Breast Cancer Now funds breast cancer research in the UK, runs support services for people with breast cancer, and campaigns on screening and treatment. SoGive could not trace the charity's own research to health gains, so it estimated what UK breast cancer research as a whole has cost per year of healthy life gained: £1,000 to £8,800. At the middle of that range, allowing for the share of a donation that goes to research and the years research takes to pay off, that is **{{result}} years of healthy life per $1,000** on our scale.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row; its two bounds on the unlabelled spending give SoGive's two ends. SoGive rates Breast Cancer Now "Not Recommended (tentative)".
 

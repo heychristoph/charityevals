@@ -1,6 +1,6 @@
 # Audit: convoy-of-hope-charityevals, round 2
 Result: 5.926e-5 daly/$ = 0.0593 years of healthy life per 1,000 dollars (combined range 0.0127–0.277); cause median 0.0687 (×0.86). Verdict: pass.
-Model-sha: a6bc78a2ee48143051f0a004a87bff870986aad18cd97aa7df8371c1bd31243e
+Model-sha: 425df077244099f74d2e4841236aee832e20779678ce5600982db024317bae01
 Scope: verification round on the 11 round-1 findings and the rows they changed; scope and accounts unchanged from round 1 (all four programme lines, cost = Convoy's own cash with overhead).
 Mechanical: lint 0/0/0; invariants none; check.ts valid (own build, no `expected` values); simulation stable (5% 0.566, 50% 1.00, 95% 1.77 × best guess); every formula constant in the changed rows is a row, `1`, or `365`.
 Previous round: round 1 (5 medium, 6 low). Branch shares now: children's feeding 66% (4,513 of 6,856 healthy years before the unmodelled share), agriculture and women 15%, partner resourcing 9%, disasters abroad 6%, medicines 2%.
@@ -42,3 +42,5 @@ Verdict: pass (no high findings; five low)
 
 Re-stamped (15 Nov 2026): Guatemala and El Salvador added to the programme countries (World Bank price level and growth facts); food abroad at the World Bank ICP 2021 food price levels (1.87, was a judged 1.4); consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); the income-mortality ratio read from the shared fact and the shared US values of donated food and goods; the training's donated supplies valued at local prices in its credit share; the school meals' side effect resized to the branch's three-fifths share (6%); 0.0593 → 0.0600.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against bebc953e.

@@ -1,6 +1,6 @@
 ### Summary
 
-One for the World asks students and young professionals to take the 1% Pledge: to give 1% of their income, now or after they graduate, to charities GiveWell recommends. It works through volunteer chapters at universities and graduate schools and through talks at companies, in the US, UK, Canada and Australia. Our model of its year to June 2024 comes to **<span data-figure="headline" data-model="one-for-the-world-charityevals">13</span> years of healthy life per 1,000 dollars**. Each dollar it spends leads to about a dollar of discounted giving it caused, almost all of it to top global-health charities. The figure moves most with the discount rate, how much the next dollar does compared with the past average, its own count of the giving it caused, and the value of a young child's life.
+One for the World asks students and young professionals to take the 1% Pledge: to give 1% of their income, now or after they graduate, to charities GiveWell recommends. It works through volunteer chapters at universities and graduate schools and through talks at companies, in the US, UK, Canada and Australia. Our model of its year to June 2024 comes to **{{result}} years of healthy life per 1,000 dollars**. Each dollar it spends leads to about a dollar of discounted giving it caused, almost all of it to top global-health charities. The figure moves most with the discount rate, how much the next dollar does compared with the past average, its own count of the giving it caused, and the value of a young child's life.
 
 ### What the charity does
 

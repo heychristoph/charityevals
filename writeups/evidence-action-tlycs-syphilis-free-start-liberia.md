@@ -1,6 +1,6 @@
 ### Summary
 
-Evidence Action helps Liberia's health system test pregnant women for syphilis at antenatal visits and treat those infected with penicillin. The Life You Can Save counts Evidence Action's estimate of the stillbirths, newborn deaths and congenital syphilis averted from 2020 to 2024, at $127 per DALY; valuing those deaths the site's way, that is **<span data-figure="headline" data-model="evidence-action-tlycs-syphilis-free-start-liberia">5.7</span> years of healthy life per 1,000 dollars**.
+Evidence Action helps Liberia's health system test pregnant women for syphilis at antenatal visits and treat those infected with penicillin. The Life You Can Save counts Evidence Action's estimate of the stillbirths, newborn deaths and congenital syphilis averted from 2020 to 2024, at $127 per DALY; valuing those deaths the site's way, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **<span data-figure="headline" data-model="redwood-research-charityevals">0.068</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.005 to about 0.7.
+Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.005 to about 0.7.
 
 ### What the charity does
 

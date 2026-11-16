@@ -1,6 +1,6 @@
 ### Summary
 
-The Humane League passes more than a quarter of its programme spending on as grants: in 2025, $4.26 million to Open Wing Alliance groups abroad, to its sister charity The Humane League UK, and to US groups in its Animal Policy Alliance. Counting each grant as what its recipients did with the money, we estimate **<span data-figure="headline" data-model="the-humane-league-charityevals-owa-grants">0.0002</span> years of healthy life per $1,000**. Every branch rests on counts or chances we had to judge, so each is counted at half by the site's shared missing-data slider. The US and UK laws count their compliance costs, from the regulators' own analyses, against the hens' gain. THL's own accountability campaigns are modelled [here](/the-humane-league-charityevals-corporate-campaigns).
+The Humane League passes more than a quarter of its programme spending on as grants: in 2025, $4.26 million to Open Wing Alliance groups abroad, to its sister charity The Humane League UK, and to US groups in its Animal Policy Alliance. Counting each grant as what its recipients did with the money, we estimate **{{result}} years of healthy life per $1,000**. Every branch rests on counts or chances we had to judge, so each is counted at half by the site's shared missing-data slider. The US and UK laws count their compliance costs, from the regulators' own analyses, against the hens' gain. THL's own accountability campaigns are modelled [here](/the-humane-league-charityevals-corporate-campaigns).
 
 ### What the grants do
 

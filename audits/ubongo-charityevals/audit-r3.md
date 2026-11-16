@@ -1,7 +1,7 @@
 # Audit r3: ubongo-charityevals (scoped verification)
 
 Result: pass (0 high, 0 medium findings of our own; audit-model's far-above medium is explained in round 2 #1 and unchanged)
-Model-sha: 338c7dd3e6bf1b7c56bc7ab2ebae9718ae2a1615c603e8ec3beee5440b518f06
+Model-sha: d2a8cb9a947d8ed9620b3566cb572ef0f54526feaae50c0e8d1f0ae46baf5311
 Verdict: pass
 
 Scope: the one change since round 2 (HEAD~1 to HEAD), the `effect_sd` explainer's Watson cross-check wording. `git diff` shows one line changed in the model file, in that explainer only. No value, range, formula or source change. `scripts/check.ts` reports all models valid; `scripts/audit-model.ts` gives the same result (51.9) and the same two findings as round 2 (far-above, explained; spread, low).
@@ -13,3 +13,5 @@ Scope: the one change since round 2 (HEAD~1 to HEAD), the `effect_sd` explainer'
 | R2 #4 | low | `implementation_adj` | Kept by the builder: Ubongo's monthly count includes occasional viewers whom the surveys would class as non-viewers or light viewers, so the 0.55 cut is a defensible match of populations, and it errs conservative at worst. Accepted. | accepted |
 
 No new findings.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against e1436081.

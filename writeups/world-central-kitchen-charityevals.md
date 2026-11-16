@@ -1,6 +1,6 @@
 ### Summary
 
-World Central Kitchen, founded by the chef José Andrés, cooks and delivers hot meals to people hit by disasters and wars. Our model of its 2025 relief work, 372.5 million dollars and 130 to 179 million meals, gives **<span data-figure="headline" data-model="world-central-kitchen-charityevals">0.12</span> years of healthy life per 1,000 dollars**. Over 70% of it comes from Gaza, where the meals fed about a million people through a year of blockade and famine.
+World Central Kitchen, founded by the chef José Andrés, cooks and delivers hot meals to people hit by disasters and wars. Our model of its 2025 relief work, 372.5 million dollars and 130 to 179 million meals, gives **{{result}} years of healthy life per 1,000 dollars**. Over 70% of it comes from Gaza, where the meals fed about a million people through a year of blockade and famine.
 
 ### What the charity does
 
@@ -27,7 +27,7 @@ The model has three branches, split by the Form 990's regions: Gaza and the Midd
 
 ### What drives the result
 
-The shared discount for unmeasured outcomes, then how much food in Gaza others would have brought in through the same crossings, and how little people there consumed without the meals. A day's food is a large gain to someone with almost nothing, so Gaza carries the result; the same meal in a US disaster adds almost nothing on the log scale and the rich-country branch is under 1% of the total. Deaths averted are a small part even in Gaza: fewer than one person in a thousand fed.
+The shared discount for unmeasured outcomes, then how much food in Gaza others would have brought in through the same crossings, and how little people there consumed without the meals. A day's food is a large gain to someone with almost nothing, so Gaza carries the result; the same meal in a US disaster adds almost nothing on the log scale and the rich-country branch is under {{row:lm_deaths_share_unadj}} of the total. Deaths averted are a small part even in Gaza: fewer than one person in a thousand fed.
 
 ### Biggest uncertainties
 

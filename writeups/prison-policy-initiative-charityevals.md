@@ -1,6 +1,6 @@
 ### Summary
 
-Prison Policy Initiative (PPI) researches mass incarceration in the United States and campaigns with others to change it. Counting its spending over fiscal years 2021 to 2025 against a share of the wins of those years, our model comes to **<span data-figure="headline" data-model="prison-policy-initiative-charityevals">0.05</span> years of healthy life per $1,000**. About two thirds of that comes from deaths averted by the decarceration PPI's data fed, and about three tenths from the federal caps on prison and jail phone rates. Two things hold it down. Money saved by poor American families counts for little on a scale set by the world's poorest people. And PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the past average.
+Prison Policy Initiative (PPI) researches mass incarceration in the United States and campaigns with others to change it. Counting its spending over fiscal years 2021 to 2025 against a share of the wins of those years, our model comes to **{{result}} years of healthy life per $1,000**. About two thirds of that comes from deaths averted by the decarceration PPI's data fed, and about three tenths from the federal caps on prison and jail phone rates. Two things hold it down. Money saved by poor American families counts for little on a scale set by the world's poorest people. And PPI holds about five years of spending in reserve, so the next dollar counts at a quarter of the past average.
 
 ### What the charity does
 

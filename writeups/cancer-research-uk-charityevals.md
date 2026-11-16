@@ -2,7 +2,7 @@
 
 Cancer Research UK is the world's largest charitable funder of cancer research. It also campaigns on cancer policy and runs public cancer information. This is charityevals' own model of all its charitable work in the year to 31 March 2026: research, policy and information.
 
-We estimate **<span data-figure="headline" data-model="cancer-research-uk-charityevals">0.002</span> years of healthy life per $1,000** you give. Almost all of it rests on judgment: how much of the world's cancer a year of research averts, how many years sooner, and what share of the field Cancer Research UK is. The range runs across several orders of magnitude. None of the three branches has measured outcomes for Cancer Research UK's own spending, so each is discounted for missing data.
+We estimate **{{result}} years of healthy life per $1,000** you give. Almost all of it rests on judgment: how much of the world's cancer a year of research averts, how many years sooner, and what share of the field Cancer Research UK is. The range runs across several orders of magnitude. None of the three branches has measured outcomes for Cancer Research UK's own spending, so each is discounted for missing data.
 
 ### What the charity does
 

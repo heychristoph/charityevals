@@ -1,6 +1,6 @@
 ### Summary
 
-The Coalition for Rainforest Nations (CfRN) works with rainforest countries in the UN climate talks and helps them get paid for cutting deforestation. Our model of its 2024 spending comes to **<span data-figure="headline" data-model="coalition-for-rainforest-nations-charityevals">−0.02</span> years of healthy life per $1,000**: a small net harm, close to zero. The result is mostly uncertainty: in our simulation it is harmful in about three draws of five.
+The Coalition for Rainforest Nations (CfRN) works with rainforest countries in the UN climate talks and helps them get paid for cutting deforestation. Our model of its 2024 spending comes to **{{result}} years of healthy life per $1,000**: a small net harm, close to zero. The result is mostly uncertainty: in our simulation it is harmful in about three draws of five.
 
 - Nearly all of it is CfRN's small share of the climate-finance goal agreed at COP29. Some climate finance is aid moved from health, education and other development work into cutting emissions, which is worth far less in healthy years. At our best guesses the aid lost slightly outweighs the new aid for adaptation and the emissions cut, with the cleaner air that comes with them.
 - Whether the goal's money is new aid decides the sign. If about half of it were new, the result would be zero; more, and it would be positive.

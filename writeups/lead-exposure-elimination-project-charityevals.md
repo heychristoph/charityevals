@@ -1,6 +1,6 @@
 ### Summary
 
-The Lead Exposure Elimination Project (LEEP) works to get lead out of the paint sold in low- and middle-income countries. Our model counts what it spent from its founding in September 2020 to the end of 2025 against what it won in that time: lead paint rules in seven countries and measured switches to lead-free paint in seven more. It comes to **<span data-figure="headline" data-model="lead-exposure-elimination-project-charityevals">15</span> years of healthy life per 1,000 dollars**. The figure is very uncertain. Nobody has measured how much of children's blood lead in these countries comes from paint, and the benefits come decades later, so the discount rate moves the result a lot.
+The Lead Exposure Elimination Project (LEEP) works to get lead out of the paint sold in low- and middle-income countries. Our model counts what it spent from its founding in September 2020 to the end of 2025 against what it won in that time: lead paint rules in seven countries and measured switches to lead-free paint in seven more. It comes to **{{result}} years of healthy life per 1,000 dollars**. The figure is very uncertain. Nobody has measured how much of children's blood lead in these countries comes from paint, and the benefits come decades later, so the discount rate moves the result a lot.
 
 ### What the charity does
 

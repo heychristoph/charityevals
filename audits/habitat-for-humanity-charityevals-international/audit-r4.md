@@ -1,6 +1,6 @@
 # Audit r4: habitat-for-humanity-charityevals-international (scoped verification)
 Result: 2.690e-4 uov/$ = 0.1345 years of healthy life per 1,000 dollars (combined range 0.0304-0.595). Verdict line below.
-Model-sha: a768cab014c1ed9c72d263aa47e13a6e802c8e388d720bdef8aaec4e5830fc6a
+Model-sha: e46d4c5aed76ddc8990e3d54276187b3aee77b4947e8e7a52359af5dc3686175
 Verdict: pass
 
 Scope: only the change of commit bc46382f to the model (`int_volunteer_hour_value` now a formula over the new judgment `int_household_work_hours`), plus whether r3's two other lows still stand. `audit-model.ts` shows no lint, invariant or peer problem; `check.ts` is valid; `simulation-check.ts` exits 0 and is stable (5% 0.55x, 50% 1x, 95% 1.86x). The result moved 0.134 to 0.1345, as the builder said (a lower volunteer value is a lower resource total, so a slightly higher result).
@@ -14,3 +14,5 @@ Scope: only the change of commit bc46382f to the model (`int_volunteer_hour_valu
 | 5 | none | write-up, direct housing bullet | r3 low 2 (cost-share wording) is fixed: it now reads "about four-fifths of its international cost: its transfers for housing and a judged share of its staff". | resolved |
 
 Checked, no finding: `int_volunteer_value` still reads the shared `network_volunteers` and `us_volunteer_share`; the formula adds no typed constants; the hour value rises or falls with the shared survey consumption and household sizes (one consistent way); r3's r3-3 (no anchor named for the hour value) is resolved by the formula. Top drivers are unchanged.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against d90d80aa.

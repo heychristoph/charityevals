@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "usa-for-unhcr",
   "owner": "charityevals",
-  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.6 million of donated clothes, hygiene kits, software and transport passed on (the donors' resources, so credited by share rather than costed), and $8.2 million on awareness work; fundraising took $26.6 million, so each cash dollar granted costs about $1.61 of donations. The grants are valued as UNHCR's 2025 programme mix (its audited impact areas, split further by judgment): cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about 0.060 years of healthy life per $1,000 (combined range 0.014-0.27: the result is mostly uncertainty), mostly because about 38% of each cash dollar pays for fundraising and management in the US and a quarter of UNHCR's for its own support costs; the biggest uncertainties are the missing-data discount, how many refugees' papers bring them rights, and how poor the people reached are.",
+  "summary": "USA for UNHCR raises money in the United States for UNHCR, the UN refugee agency: in 2025 it spent $95.5 million, of which $44.3 million went as cash grants to UNHCR's operations (most to Sub-Saharan Africa, the Middle East and South Asia), $10.6 million of donated clothes, hygiene kits, software and transport passed on (the donors' resources, so credited by share rather than costed), and $8.2 million on awareness work; fundraising took $26.6 million, so each cash dollar granted costs about $1.61 of donations. The grants are valued as UNHCR's 2025 programme mix (its audited impact areas, split further by judgment): cash, relief items and shelter (excess deaths averted and goods on the site's log-income scale), health care in camps (deaths averted), registration, documents and protection services (consumption and mental-health gains), education, livelihoods, and resettlement and returns. Neither USA for UNHCR nor UNHCR counts who this money reached, so every branch rests on judged costs per person and the research on its kind of work and is discounted for missing data. It comes to about {{result}} years of healthy life per $1,000 (combined range 0.014-0.27: the result is mostly uncertainty), mostly because about 38% of each cash dollar pays for fundraising and management in the US and a quarter of UNHCR's for its own support costs; the biggest uncertainties are the missing-data discount, how many refugees' papers bring them rights, and how poor the people reached are.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: USA for UNHCR (2025)",
@@ -279,7 +279,7 @@
       "label": "Share of UNHCR's spending on basic needs, shelter and water (relief)",
       "format": "percent",
       "formula": "unhcr_exp_ia2 / unhcr_exp_total - hlt_share - edu_share",
-      "explainer": "The audited impact area 2 (45% of spending) less the judged health and education shares: about 33%. Cross-check: UNHCR's Global Report 2025 puts the basic needs outcome area at $689M (18%) and shelter at about $285M (7.5%), with water 3-5%."
+      "explainer": "The audited impact area 2 (45% of spending) less the judged health and education shares: about {{row:rel_share}}. Cross-check: UNHCR's Global Report 2025 puts the basic needs outcome area at $689M (18%) and shelter at about $285M (7.5%), with water 3-5%."
     },
     {
       "id": "hlt_share",
@@ -326,7 +326,7 @@
       "label": "Share of UNHCR's spending on solutions (impact area 4)",
       "format": "percent",
       "formula": "unhcr_exp_solutions / unhcr_exp_total",
-      "explainer": "From the audited table: about 11%."
+      "explainer": "From the audited table: about {{row:sol_share}}."
     },
     {
       "id": "pro_share",
@@ -334,7 +334,7 @@
       "label": "Share of UNHCR's spending on protection (the rest)",
       "format": "percent",
       "formula": "1 - rel_share - hlt_share - edu_share - liv_share - sol_share",
-      "explainer": "Everything else: registration and documentation, refugee status determination, protection policy and law, gender-based violence, child protection, safety and access to justice, community engagement; about 40%, impact area 1 (31%) and impact area 3 (14%) less livelihoods."
+      "explainer": "Everything else: registration and documentation, refugee status determination, protection policy and law, gender-based violence, child protection, safety and access to justice, community engagement; about {{row:pro_share}}, impact area 1 (31%) and impact area 3 (14%) less livelihoods."
     },
     {
       "id": "unhcr_exp_programme",
@@ -1195,7 +1195,7 @@
       "label": "UNHCR's full cost per refugee resettled",
       "format": "usd",
       "formula": "unhcr_exp_solutions * 1e6 * sol_resettle_share / unhcr_departures_2025",
-      "explainer": "UNHCR's resettlement spending (its solutions spending × the resettlement share) over its 2025 departures: about $1,700, support costs included."
+      "explainer": "UNHCR's resettlement spending (its solutions spending × the resettlement share) over its 2025 departures: about {{row:sol_cost_per_departure}}, support costs included."
     },
     {
       "id": "sol_departures",

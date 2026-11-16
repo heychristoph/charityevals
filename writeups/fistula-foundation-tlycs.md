@@ -1,6 +1,6 @@
 ### Summary
 
-Fistula Foundation pays partner hospitals in Africa and Asia to repair obstetric fistula, an injury from obstructed labour that leaves women leaking urine or faeces. The Life You Can Save estimates $76 per DALY averted from Fistula Foundation's 16,587 surgeries in 2024; with the full cost of a surgery and the repairs that fail or would have happened anyway, that is **<span data-figure="headline" data-model="fistula-foundation-tlycs">3.8</span> years of healthy life per 1,000 dollars**.
+Fistula Foundation pays partner hospitals in Africa and Asia to repair obstetric fistula, an injury from obstructed labour that leaves women leaking urine or faeces. The Life You Can Save estimates $76 per DALY averted from Fistula Foundation's 16,587 surgeries in 2024; with the full cost of a surgery and the repairs that fail or would have happened anyway, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

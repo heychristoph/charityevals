@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists (Cambridge, Massachusetts) uses technical analysis and advocacy against the risk of nuclear war (its Global Security programme: the Sentinel missile, plutonium pits, missile defence, nuclear testing) and, through its Center for Science and Democracy, for independent federal science and its use in policy; this model covers those two programmes in the year to September 2025 ($11.9M with overhead; its climate, transport and food work is a separate model). At the defaults it averts about 16 years of healthy life per $1,000, from 0.7 to 370 on the combined range: almost all of it the nuclear work (48% of the cost), valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the science-and-democracy work, valued as better use of US public money, adds under 0.01%. Only half the spending here is on nuclear risk, and its net assets of about 17 months of spending make the next dollar count for less. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work is measured.",
+  "summary": "The Union of Concerned Scientists (Cambridge, Massachusetts) uses technical analysis and advocacy against the risk of nuclear war (its Global Security programme: the Sentinel missile, plutonium pits, missile defence, nuclear testing) and, through its Center for Science and Democracy, for independent federal science and its use in policy; this model covers those two programmes in the year to September 2025 ($11.9M with overhead; its climate, transport and food work is a separate model). At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.7 to 370 on the combined range: almost all of it the nuclear work ({{row:nuclear_cost_share}} of the cost), valued as a typical project's cut in the forecast risk of nuclear war (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the science-and-democracy work, valued as better use of US public money, adds under 0.01%. Only half the spending here is on nuclear risk, and its net assets of about 17 months of spending make the next dollar count for less. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the years a cut counts and the discount rate. Every branch is discounted for missing data: no outcome of the work is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Union of Concerned Scientists (global security, science and democracy)",
@@ -168,7 +168,7 @@
       "label": "Share of the legislative work for these two programmes",
       "format": "percent",
       "formula": "(gs_line + csd_line) / (program_expenses - legislative_line)",
-      "explainer": "The two programmes' share of the other programme spending ($10.46M of $43.67M, 24%): the legislative line serves all programmes and the 990 doesn't split it, so it is spread by cost."
+      "explainer": "The two programmes' share of the other programme spending ($10.46M of $43.67M, {{row:legislative_share}}): the legislative line serves all programmes and the 990 doesn't split it, so it is spread by cost."
     },
     {
       "id": "program_spend",
@@ -941,7 +941,7 @@
       "label": "Science and democracy: share of the cost",
       "format": "percent",
       "formula": "1 - ai_cost_share - bio_cost_share - nuclear_cost_share - other_cost_share - pol_cost_share - fb_cost_share",
-      "explainer": "Everything else, about 44% of the cost: the Center for Science and Democracy's work for federal science and its use in rules and policy. It aims at better use of US public money and regulation, so the Federation of American Scientists' government-capacity chain values it (one chain for the same kind of work)."
+      "explainer": "Everything else, about {{row:gov_cost_share}} of the cost: the Center for Science and Democracy's work for federal science and its use in rules and policy. It aims at better use of US public money and regulation, so the Federation of American Scientists' government-capacity chain values it (one chain for the same kind of work)."
     },
     {
       "id": "gov_public_dollars_per_dollar",
@@ -1537,7 +1537,7 @@
       "label": "Staff pay as a share of program cost",
       "format": "percent",
       "formula": "staff_pay / total_expenses",
-      "explainer": "UCS's own salaries and benefits over total expenses (Convention 1), not the shared default: 71%."
+      "explainer": "UCS's own salaries and benefits over total expenses (Convention 1), not the shared default: {{row:staff_cost_share}}."
     },
     {
       "id": "salary_gap",

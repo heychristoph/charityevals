@@ -1,6 +1,6 @@
 ### Summary
 
-The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="council-on-strategic-risks-charityevals">12</span> years of healthy life per $1,000**. About 63% of that comes from the nuclear work, about a quarter of the cost. A fifth comes from the biological work, about a third of the cost, and 17% from the fellowships. The plausible range runs from about 0.8 to about 180.
+The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. About 63% of that comes from the nuclear work, about a quarter of the cost. A fifth comes from the biological work, about a third of the cost, and 17% from the fellowships. The plausible range runs from about 0.8 to about 180.
 
 ### What the charity does
 
@@ -20,7 +20,7 @@ The climate-security work aims to get militaries and governments to plan and spe
 
 ### How the model works
 
-The return doesn't split the Nolan Center's spending by area. The fellowships are taken to cost about $350,000. Of the rest, 60% is put on biological threats. The anchor is Coefficient Giving's three-year grant for biosecurity fellowships, policy and operations, about $2.2 million a year from November 2024. Less the fellowships and a share for running the organisation, that leaves about 58% of the Center's other work. Half of the Converging Risks Lab counts as nuclear work and half as climate security. That puts about 32% of the cost on pandemics, 24% on nuclear risk, 8% on the fellowships and 36% on climate security. Each part has its own adjustments:
+The return doesn't split the Nolan Center's spending by area. The fellowships are taken to cost about $350,000. Of the rest, 60% is put on biological threats. The anchor is Coefficient Giving's three-year grant for biosecurity fellowships, policy and operations, about $2.2 million a year from November 2024. Less the fellowships and a share for running the organisation, that leaves about 58% of the Center's other work. Half of the Converging Risks Lab counts as nuclear work and half as climate security. That puts about {{row:bio_cost_share}} of the cost on pandemics, {{row:nuclear_cost_share}} on nuclear risk, 8% on the fellowships and 36% on climate security. Each part has its own adjustments:
 
 | Adjustment | Pandemics | Nuclear | Fellowships | Climate security |
 |---|---|---|---|---|

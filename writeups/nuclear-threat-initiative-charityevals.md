@@ -1,6 +1,6 @@
 ### Summary
 
-The Nuclear Threat Initiative (NTI) works to lower the chance of nuclear war, nuclear terrorism and catastrophic pandemics, mostly through diplomacy, policy work and convening. Our model of all its programmes in 2025 comes to **<span data-figure="headline" data-model="nuclear-threat-initiative-charityevals">24</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely these catastrophes are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1 to about 450.
+The Nuclear Threat Initiative (NTI) works to lower the chance of nuclear war, nuclear terrorism and catastrophic pandemics, mostly through diplomacy, policy work and convening. Our model of all its programmes in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely these catastrophes are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1 to about 450.
 
 ### What the charity does
 

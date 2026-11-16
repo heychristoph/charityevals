@@ -1,6 +1,6 @@
 ### Summary
 
-Besides its programmes, Save the Children UK spends about 13.5 million pounds a year on advocacy and awareness, and its subsidiary Elrha spends about 11 million pounds funding research and innovation for humanitarian crises. We estimate **<span data-figure="headline" data-model="save-the-children-charityevals-advocacy">0.41</span> years of healthy life per $1,000** for this work, about a tenth of Save the Children UK's charitable spending in 2025. None of it publishes a measured result, so each branch is built from what the campaigns won or what Elrha funds, with wide ranges, and counted at half by the site's shared missing-data slider. Save the Children's programmes are in its main model, [here](/save-the-children/save-the-children-charityevals).
+Besides its programmes, Save the Children UK spends about 13.5 million pounds a year on advocacy and awareness, and its subsidiary Elrha spends about 11 million pounds funding research and innovation for humanitarian crises. We estimate **{{result}} years of healthy life per $1,000** for this work, about a tenth of Save the Children UK's charitable spending in 2025. None of it publishes a measured result, so each branch is built from what the campaigns won or what Elrha funds, with wide ranges, and counted at half by the site's shared missing-data slider. Save the Children's programmes are in its main model, [here](/save-the-children/save-the-children-charityevals).
 
 ### How the model works
 

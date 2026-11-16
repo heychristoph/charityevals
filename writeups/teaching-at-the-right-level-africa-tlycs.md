@@ -1,6 +1,6 @@
 ### Summary
 
-Teaching at the Right Level Africa (TaRL Africa) helps governments run daily sessions in which primary pupils are grouped by what they can read and count rather than by grade. The Life You Can Save estimates 3.57 learning-adjusted years of schooling per $100 from TaRL Africa's 2024 figures for Zambia, Nigeria and Côte d'Ivoire; turning the learning into later earnings, that is **<span data-figure="headline" data-model="teaching-at-the-right-level-africa-tlycs">17</span> years of healthy life per 1,000 dollars**.
+Teaching at the Right Level Africa (TaRL Africa) helps governments run daily sessions in which primary pupils are grouped by what they can read and count rather than by grade. The Life You Can Save estimates 3.57 learning-adjusted years of schooling per $100 from TaRL Africa's 2024 figures for Zambia, Nigeria and Côte d'Ivoire; turning the learning into later earnings, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 
@@ -11,7 +11,7 @@ TaRL Africa was set up by J-PAL Africa and Pratham to help African governments a
 ### How the impact happens
 
 1. **Learning:** randomised trials of Teaching at the Right Level in India and several African countries found gains of 0.15 to 0.7 standard deviations in reading and maths. The Life You Can Save takes 0.15 and keeps half of it for weaker delivery at scale: 0.075 per pupil.
-2. **Learning-adjusted years:** 0.075 standard deviations is worth 0.35 years of school (4.7 years per standard deviation, a World Bank estimate), scaled by how much pupils learn in a year in each country.
+2. **Learning-adjusted years:** {{row:adjusted_sd_increase}} standard deviations is worth 0.35 years of school (4.7 years per standard deviation, a World Bank estimate), scaled by how much pupils learn in a year in each country.
 3. **Cost:** TaRL Africa's spending and the governments' costs as TaRL Africa gave them, together, 3.28 dollars per pupil in Zambia, 4.40 in Nigeria and 12.19 in Côte d'Ivoire (The Life You Can Save's figures).
 4. **Earnings (our step):** better reading and maths in childhood raise adult earnings, shared by the earner's household for a working life.
 

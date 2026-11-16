@@ -2,7 +2,7 @@
 
 The American Cancer Society (ACS) is the largest US cancer charity. It funds cancer research and does its own, campaigns on policy through its advocacy affiliate ACS CAN, promotes screening and prevention, and supports patients with free lodging, rides to treatment and a 24/7 helpline. This is charityevals' own model of its research, advocacy and screening promotion in the year to 31 March 2026. Its patient services are a separate model, [Hope Lodge, rides and the helpline](/american-cancer-society-charityevals-support).
 
-We estimate **<span data-figure="headline" data-model="american-cancer-society-charityevals">0.006</span> years of healthy life per $1,000** you give to this work. The patient-services model gives **<span data-figure="headline" data-model="american-cancer-society-charityevals-support">0.004</span>**. The charity's figure in the rankings weights the two by spending: about two thirds this model, one third patient services. Almost all of it rests on judgment, and the range runs across several orders of magnitude. No branch has measured outcomes for ACS's own spending, so each is discounted for missing data.
+We estimate **{{result}} years of healthy life per $1,000** you give to this work. The patient-services model gives **{{result:american-cancer-society-charityevals-support}}**. The charity's figure in the rankings weights the two by spending: about two thirds this model, one third patient services. Almost all of it rests on judgment, and the range runs across several orders of magnitude. No branch has measured outcomes for ACS's own spending, so each is discounted for missing data.
 
 ### What the charity does
 

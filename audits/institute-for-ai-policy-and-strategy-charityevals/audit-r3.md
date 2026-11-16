@@ -1,6 +1,6 @@
 # Audit: institute-for-ai-policy-and-strategy-charityevals, round 3 (verification round)
 Result: 0.001240 daly/$ = 1.24 years of healthy life per 1,000 dollars (combined range 0.028-55; model's own ranges 0.096-4.9); cause median 5.57 (x0.22). Verdict: pass.
-Model-sha: c33f856271dac327f60248ca39b44036285bdf2480bae35acf37f1e2a937415e
+Model-sha: f36687703d7e91fe433382bf8adb3c468fc210311033c4ee39d2e5d9bdc479eb
 Scope: only round 2's finding 1 (the model's `summary`), the change in commit 1696f63 (the file's only change is the `summary` line); every number in the new summary was checked against audit-model and the model's rows.
 Mechanical: audit-model lint 0/0/0, findings (0). Not re-run this round (scoped): check.ts, normalization-audit, simulation-check. No file in generated/ was changed.
 
@@ -17,3 +17,5 @@ None re-fetched (scoped round; no source or row changed).
 
 **Verdict: pass** (no high or medium finding; one low presentation note)
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.

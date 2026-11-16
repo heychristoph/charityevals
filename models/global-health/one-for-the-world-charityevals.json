@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "one-for-the-world",
  "owner": "charityevals",
- "summary": "One for the World asks students and young professionals in the US, UK, Canada and Australia to give 1% of their income to charities GiveWell recommends, through chapters at universities and graduate schools and talks at companies; this model covers its year to June 2024 ($758K of its own costs across its US company and UK charity; donors' money passed on is left out). At the defaults it averts about 13 years of healthy life per $1,000: its 166 new pledges and the year's new corporate donors' discounted lifetime giving (at the yearly gift of its active pledgers, on the shared pledge curve lowered for its faster attrition) and the year's one-off gifts, of which it caused about half (its own strict count: 44%), come to about $720K, each dollar valued at its donors' charities (84% to GiveWell's recommended charities), half counted as new money, the next dollar at 57% of the past average. The money it moves goes almost all to top global-health charities, and it causes about one dollar of discounted giving per dollar it spends. The result moves most with the discount rate, its next-dollar figure, its own count of what it caused and the value of a child's life; no branch is discounted for missing data, since money moved is counted.",
+ "summary": "One for the World asks students and young professionals in the US, UK, Canada and Australia to give 1% of their income to charities GiveWell recommends, through chapters at universities and graduate schools and talks at companies; this model covers its year to June 2024 ($758K of its own costs across its US company and UK charity; donors' money passed on is left out). At the defaults it averts about {{result}} years of healthy life per $1,000: its 166 new pledges and the year's new corporate donors' discounted lifetime giving (at the yearly gift of its active pledgers, on the shared pledge curve lowered for its faster attrition) and the year's one-off gifts, of which it caused about half (its own strict count: 44%), come to about $720K, each dollar valued at its donors' charities (84% to GiveWell's recommended charities), half counted as new money, the next dollar at 57% of the past average. The money it moves goes almost all to top global-health charities, and it causes about one dollar of discounted giving per dollar it spends. The result moves most with the discount rate, its next-dollar figure, its own count of what it caused and the value of a child's life; no branch is discounted for missing data, since money moved is counted.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: One for the World",
@@ -452,7 +452,7 @@
    "label": "Pledgers giving in 2023-2024, on the shared curve at its own retention (pledger-years)",
    "format": "number",
    "formula": "((pledges_to_date - pledges_to_mid_2020) / recent_cohort_years * (@meta.pledge_recording_floor * recent_cohort_years + (@meta.pledge_recording_first_year - @meta.pledge_recording_floor) * (1 - (1 - @meta.pledge_recording_decay) ^ recent_cohort_years) / @meta.pledge_recording_decay) + pledges_to_mid_2020 / (cohort_years_giving - recent_cohort_years) * (@meta.pledge_recording_floor * (cohort_years_giving - recent_cohort_years) + (@meta.pledge_recording_first_year - @meta.pledge_recording_floor) * ((1 - @meta.pledge_recording_decay) ^ recent_cohort_years - (1 - @meta.pledge_recording_decay) ^ cohort_years_giving) / @meta.pledge_recording_decay)) * (1 - stock_retention_link * (1 - own_retention_adj))",
-   "explainer": "Each group of cohorts by its published size, at its ages' shares on the shared pledge curve (floor + (first year − floor) × (1 − decay)^t): the 415 or so pledges of 2020-2023 at ages 0 to 2, the 2,498 before at ages 3 to 8; thinned for its own faster attrition by the link above. About 830 pledgers giving."
+   "explainer": "Each group of cohorts by its published size, at its ages' shares on the shared pledge curve (floor + (first year − floor) × (1 − decay)^t): the 415 or so pledges of 2020-2023 at ages 0 to 2, the 2,498 before at ages 3 to 8; thinned for its own faster attrition by the link above. About {{row:active_pledger_years}} pledgers giving."
   },
   {
    "id": "corporate_moved_ay24",
@@ -548,7 +548,7 @@
    "label": "Discounted years of giving per new pledge (share still giving each year, summed)",
    "format": "number",
    "formula": "@meta.pledge_recording_floor * pv_annuity_due(1, $discount_rate, pledge_giving_years) + (@meta.pledge_recording_first_year - @meta.pledge_recording_floor) * pv_annuity_due(1, (1 + $discount_rate) / (1 - @meta.pledge_recording_decay) - 1, pledge_giving_years)",
-   "explainer": "The shared pledge-persistence figures (facts/meta.json, from Giving What We Can's cohort data): the share of pledgers giving in year t is floor + (first year − floor) × (1 − decay)^t, each year discounted at the site's rate. The fading part is an annuity at the combined rate (1 + discount) / (1 − decay) − 1. About 6.2 at 4%; its own pledgers drop out faster (own_retention_adj)."
+   "explainer": "The shared pledge-persistence figures (facts/meta.json, from Giving What We Can's cohort data): the share of pledgers giving in year t is floor + (first year − floor) × (1 − decay)^t, each year discounted at the site's rate. The fading part is an annuity at the combined rate (1 + discount) / (1 − decay) − 1. About {{row:pledge_persistence_years}} at 4%; its own pledgers drop out faster (own_retention_adj)."
   },
   {
    "id": "own_retention_adj",
@@ -957,7 +957,7 @@
    "label": "Staff share of costs",
    "format": "percent",
    "formula": "staff_pay / total_expenses",
-   "explainer": "Its own share from its accounts: personnel and the UK charity's freelancers over both entities' own costs (about 49%)."
+   "explainer": "Its own share from its accounts: personnel and the UK charity's freelancers over both entities' own costs (about {{row:staff_cost_share}})."
   },
   {
    "id": "salary_gap",

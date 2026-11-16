@@ -1,6 +1,6 @@
 # Audit: british-heart-foundation-charityevals-health, round 4
 Result: 8.420e-6 uov/$ = 0.00421 years of healthy life per 1,000 dollars (combined range 4.9e-4 to 0.036); cause median 0.1085 (x0.039). Verdict: pass.
-Model-sha: a21f6fea81f62cf0ed6409dec561980c16d9fca633bacac81cd9553524ce46bc
+Model-sha: 6dae8d41d82e38b1827c942092dfacfc0b40e9ca6a967c66c773e4ea898e7c8b
 Scope: unchanged since round 3 (health expenditure £54.2m, year to 31 March 2026, less policy and pilots; information and support 74%, RevivR and The Circuit 15%). Scoped round: only the changes in commit 5ebec4e3 were checked (new shared fact chd_remaining_life_ratio, row info_patient_life_share and its use, summary and write-up edits, the compliance-cost quote).
 Mechanical: lint 0 high / 1 medium (far-below, found and explained in round 3, finding 2) / 1 low (spread; the summary says so); invariants none; normalization-audit not run (by instruction).
 Previous round: finding 1 (medium, remaining-life ratio for heart patients): resolved (fact added, row added, applied in uov_deaths; result 0.00469 -> 0.00421, -10%, as predicted). Finding 2 (far-below, medium): evidence-supported, no change, still stands as noted. Finding 3 (stale figures, low): resolved (write-up now 1.7 million people, 21,000 trial programmes). Finding 4 (unit_cost basis, low): no change, stands.
@@ -27,3 +27,5 @@ Previous round: finding 1 (medium, remaining-life ratio for heart patients): res
 Unchanged from round 3: missing_data_discount (shared slider), info_reading_dose (judgment, anchored on ISLAND), info_mortality_rrr (sourced, Cochrane), info_views_per_reader and info_patient_share (judgments). chd_remaining_life_ratio is not in the top 12 of the tornado. Most useful addition remains any measured outcome for BHF's information or helpline users.
 
 Re-stamped (16 Nov 2026): Pre-audit gate cleanup: judgments' explainers name their reference class (sourced); bystanders per arrest read from @cardiac_arrest.ohca_bystanders_per_arrest and ln 2 from @givewell_shared.ln_consumption_per_doubling (same best values); some judgment ranges widened where no evidence anchors them; no peer-model comparisons in explainers. Mechanical: headline unchanged, against 3ccb8f65.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.

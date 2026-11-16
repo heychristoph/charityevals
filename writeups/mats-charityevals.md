@@ -1,6 +1,6 @@
 ### Summary
 
-MATS (ML Alignment & Theory Scholars) trains researchers for AI safety in Berkeley and London. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="mats-charityevals">0.8</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on how many scholars MATS brings into the field. All three are deeply uncertain: on the model's own ranges the result runs from about 0.07 to about 4, and wider with the shared assumptions.
+MATS (ML Alignment & Theory Scholars) trains researchers for AI safety in Berkeley and London. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on how many scholars MATS brings into the field. All three are deeply uncertain: on the model's own ranges the result runs from about 0.07 to about 4, and wider with the shared assumptions.
 
 ### What the charity does
 

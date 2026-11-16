@@ -1,6 +1,6 @@
 ### Summary
 
-Direct Relief ships medicines and supplies that drug companies donate, requested by health facilities abroad and by safety-net clinics in the US, and gives cash grants to local health organisations. Our model of its work abroad comes to **<span data-figure="headline" data-model="direct-relief-charityevals">0.4</span> years of healthy life per $1,000**; its US work, modelled separately, comes to **<span data-figure="headline" data-model="direct-relief-charityevals-us">0.003</span> years of healthy life per $1,000**, because a year of healthy life costs far more at the margin in the US. Almost all of what Direct Relief hands out is donated: a donor's dollar pays for the sourcing, storage and shipping that get the goods to patients, and is credited with its share of the resources behind them.
+Direct Relief ships medicines and supplies that drug companies donate, requested by health facilities abroad and by safety-net clinics in the US, and gives cash grants to local health organisations. Our model of its work abroad comes to **{{result}} years of healthy life per $1,000**; its US work, modelled separately, comes to **{{result:direct-relief-charityevals-us}} years of healthy life per $1,000**, because a year of healthy life costs far more at the margin in the US. Almost all of what Direct Relief hands out is donated: a donor's dollar pays for the sourcing, storage and shipping that get the goods to patients, and is credited with its share of the resources behind them.
 
 ### What the charity does
 

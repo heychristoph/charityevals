@@ -1,6 +1,6 @@
 ### Summary
 
-Animal Charity Evaluators (ACE) evaluates animal advocacy charities, recommends the ones it finds most effective, and passes donors' money to them. This model is of a gift for ACE's own work, not of the money that passes through it to other charities. It comes to **<span data-figure="headline" data-model="animal-charity-evaluators-charityevals">0.0011</span> years of healthy life per $1,000**. Each dollar ACE spent led to about three dollars of giving it caused. That giving goes to animal charities, which at the site's animal weights do very little per dollar on the common scale, so ACE does too.
+Animal Charity Evaluators (ACE) evaluates animal advocacy charities, recommends the ones it finds most effective, and passes donors' money to them. This model is of a gift for ACE's own work, not of the money that passes through it to other charities. It comes to **{{result}} years of healthy life per $1,000**. Each dollar ACE spent led to about three dollars of giving it caused. That giving goes to animal charities, which at the site's animal weights do very little per dollar on the common scale, so ACE does too.
 
 ### What the charity does
 

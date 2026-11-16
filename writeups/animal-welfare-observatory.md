@@ -1,6 +1,6 @@
 ### Summary
 
-Animal Welfare Observatory (Observatorio de Bienestar Animal) campaigns in Spain for corporate pledges: the European Chicken Commitment for broilers and cage-free eggs. ACE's 2025 analysis works out to **<span data-figure="headline" data-model="animal-welfare-observatory">26</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Animal Welfare Observatory (Observatorio de Bienestar Animal) campaigns in Spain for corporate pledges: the European Chicken Commitment for broilers and cage-free eggs. ACE's 2025 analysis works out to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 In ACE's own view the model reproduces all 28 of ACE's intermediate figures.
 

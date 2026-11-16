@@ -1,6 +1,6 @@
 # Audit: cool-earth-charityevals, round 4 (verification of the round-3 fix)
 Result: 1.099e-4 daly/$ = 0.110 years of healthy life per 1,000 dollars (unchanged). Verdict: pass (no findings).
-Model-sha: f3c0a72736fa0d3c395f4c645adfb020c8fffcb54f26cba3e799741f8b1da096
+Model-sha: ff9127cc2348874184df75b0a5e69284f8806f627eb074ecc3d10e12d5b6afb8
 Mechanical: `scripts/audit-model.ts` reports 0 findings.
 
 ## Findings (0)
@@ -16,3 +16,5 @@ Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value cha
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): Local market spillover reads the new shared fact cash.local_market_spillover_share (same value and range). Mechanical: headline unchanged, against 1a9667aa.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 8904b83b.

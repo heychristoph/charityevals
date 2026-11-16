@@ -74,6 +74,9 @@ describe("shared facts typed by hand", () => {
     const p = sharedFactProblems(lib, m).find((x) => x.where === "share_5_14");
     expect(p?.severity).toBe("high");
     expect(p?.message).toMatch(/@death_ages\.crisis_share_5_14_of_over5/);
+    // A coincidence INV-4 doesn't flag goes in the preflight's own section, with its reason.
+    const w = { "shared-fact": { [`${m.id} share_5_14 = @death_ages.crisis_share_5_14_of_over5`]: "another quantity" } };
+    expect(sharedFactProblems(lib, m, w).find((x) => x.where === "share_5_14")).toBeUndefined();
   });
   it("flags a concept the site answers once whatever the value", () => {
     const { lib, m } = one(model([

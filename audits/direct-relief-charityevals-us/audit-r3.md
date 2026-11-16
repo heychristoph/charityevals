@@ -23,10 +23,12 @@ Result: 6.248e-6 uov/$ = 0.003124 years of healthy life per $1,000 (combined ran
 
 No high or medium findings. check.ts and normalization-audit were not re-run beyond audit-model (the round-2 pass stands; the changes touch one formula, two explainers and one template formula). generated/ untouched.
 
-Model-sha: 0637ac15bbfc4e58bb0de5ba8a9eaa710b7dc594cc8b0a06d9470a45181bd697
+Model-sha: 01ddf49e39a096a11db6db15cde522cc897e7bc2f8b5dc08e1f91f24482b9af9
 
 **Verdict: pass** (0 high, 0 medium, 2 low).
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against e247896f.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 480880ba.

@@ -1,6 +1,6 @@
 # Audit: california-yimby-education-fund-charityevals, round 4
 Result: 1.308e-4 daly/$ = 0.131 years of healthy life per 1,000 dollars. Verdict: pass.
-Model-sha: 0a35467bf875c321c25da32adab9c614b8f11d2d2f7f234479299fcd390eb2a0
+Model-sha: 61a8ed422e23e1cf8056b4d36559ed38715af4d314808a6340c1de318d260aad
 Scope: scoped verification of the round-3 fixes only (coalition resources built from parts, ADU permits series, ADU survey cost inflation, write-up and summary numbers).
 Mechanical: audit-model lint 0 high / 0 medium / 1 low (spread, the summary says it); check.ts passes ("all models valid"). normalization-audit, summaries and simulation-check not re-run (only observed/judgment rows and formulas on shared CPI changed).
 
@@ -22,3 +22,5 @@ Write-up and summary: headline 0.13 matches 0.1308; about 11,000 extra ADUs a ye
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.131 → 0.131.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.

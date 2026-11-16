@@ -1,6 +1,6 @@
 ### Summary
 
-The Federation of American Scientists is a Washington DC science-policy organisation founded in 1945 by Manhattan Project scientists. It counts the world's nuclear arsenals in the open, ran a Global Risk Program on AI, nuclear and biological risk, and has a small team on AI safety and security. Most of its money goes to making US science policy and government work better. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="federation-of-american-scientists-charityevals">1.4</span> years of healthy life per $1,000**. Almost all of that comes from the nuclear work, which is about 3% of the cost. The plausible range runs from about 0.07 to about 29.
+The Federation of American Scientists is a Washington DC science-policy organisation founded in 1945 by Manhattan Project scientists. It counts the world's nuclear arsenals in the open, ran a Global Risk Program on AI, nuclear and biological risk, and has a small team on AI safety and security. Most of its money goes to making US science policy and government work better. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. Almost all of that comes from the nuclear work, which is about 3% of the cost. The plausible range runs from about 0.07 to about 29.
 
 ### What the charity does
 
@@ -19,7 +19,7 @@ The rest of the work aims to make US public spending and regulation work better.
 
 ### How the model works
 
-The return doesn't split the research line by issue, so the model splits it by headcount. About 5 of the roughly 35 issue-team staff work on nuclear weapons, 14% of the research line. The Global Risk Program, worked out from its grant and its director's pay, adds about 12%, split 40% nuclear, 20% pandemics and 40% AI. Other AI policy work adds 2%; today's AI team joined after the year. A few Day One proposals on catastrophic risks are added to the AI work. That puts about 3.2% of the cost on nuclear risk, 1.5% on AI, 0.4% on pandemics and the rest on science policy and government capacity. Each part has its own adjustments:
+The return doesn't split the research line by issue, so the model splits it by headcount. About 5 of the roughly 35 issue-team staff work on nuclear weapons, 14% of the research line. The Global Risk Program, worked out from its grant and its director's pay, adds about 12%, split 40% nuclear, 20% pandemics and 40% AI. Other AI policy work adds 2%; today's AI team joined after the year. A few Day One proposals on catastrophic risks are added to the AI work. That puts about {{row:nuclear_cost_share}} of the cost on nuclear risk, 1.5% on AI, 0.4% on pandemics and the rest on science policy and government capacity. Each part has its own adjustments:
 
 | Adjustment | Nuclear | AI | Pandemics | Science policy |
 |---|---|---|---|---|

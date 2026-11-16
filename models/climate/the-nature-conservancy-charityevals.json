@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-nature-conservancy",
   "owner": "charityevals",
-  "summary": "The Nature Conservancy (TNC) buys and protects land and water in the US and about 80 countries, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries. We model all of its fiscal year 2025 spending (July 2024 to June 2025, $1.28 billion of conservation programmes and land purchases), each of its nine pathways from the research on its kind of work, in 13 branches: forest kept by the Ecuador Amazon deal, the land it bought and its protection policy; power displaced by mine-land solar and renewable siting maps; Pará's deforestation-free cattle rule, zero-conversion soy in the Gran Chaco, regenerative farming and the PRANA no-burn programme in India; restoration; fisheries rules; and climate adaptation. The result is about 0.0003 years of healthy life per $1,000, because most of TNC's work keeps land carbon, which is worth little in healthy years, and TNC is a small share of the resources behind its large deals, rules and policies. Nearly half of it is the air-pollution deaths averted by less crop burning in Punjab and Haryana, most of whose fall would have come anyway; a third is the Pará cattle rule, mostly through the least grounded step, a small cut in pandemic risk from forest kept, and its roll-out has barely begun. Every branch rests on thin data and is discounted for missing data, and the result is mostly uncertainty (combined range about 0.00005-0.0021).",
+  "summary": "The Nature Conservancy (TNC) buys and protects land and water in the US and about 80 countries, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries. We model all of its fiscal year 2025 spending (July 2024 to June 2025, $1.28 billion of conservation programmes and land purchases), each of its nine pathways from the research on its kind of work, in 13 branches: forest kept by the Ecuador Amazon deal, the land it bought and its protection policy; power displaced by mine-land solar and renewable siting maps; Pará's deforestation-free cattle rule, zero-conversion soy in the Gran Chaco, regenerative farming and the PRANA no-burn programme in India; restoration; fisheries rules; and climate adaptation. The result is about {{result}} years of healthy life per $1,000, because most of TNC's work keeps land carbon, which is worth little in healthy years, and TNC is a small share of the resources behind its large deals, rules and policies. Nearly half of it is the air-pollution deaths averted by less crop burning in Punjab and Haryana, most of whose fall would have come anyway; a third is the Pará cattle rule, mostly through the least grounded step, a small cut in pandemic risk from forest kept, and its roll-out has barely begun. Every branch rests on thin data and is discounted for missing data, and the result is mostly uncertainty (combined range about 0.00005-0.0021).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Nature Conservancy",
@@ -542,7 +542,7 @@
       "format": "number",
       "unit": "hectares",
       "formula": "prana_target_ha / prana_target_farmers",
-      "explainer": "The programme's own targets, 500,000 hectares for 220,000 farmers: about 2.3 hectares each (Punjab's average holding is larger, about 3.6 hectares)."
+      "explainer": "The programme's own targets, 500,000 hectares for 220,000 farmers: about {{row:prana_ha_per_farmer}} hectares each (Punjab's average holding is larger, about 3.6 hectares)."
     },
     {
       "id": "rest_ha_per_year",
@@ -676,7 +676,7 @@
       "format": "number",
       "unit": "t CO₂ / ha",
       "formula": "tropical_loss_emissions_2023 / tropical_loss_2023",
-      "explainer": "2.4 billion tonnes over 3.7 million hectares: about 650 tonnes a hectare, the tropics' average, used for the Ecuadorian Amazon, protection policy and Pará."
+      "explainer": "2.4 billion tonnes over 3.7 million hectares: about {{row:amazon_tco2_per_ha_lost}} tonnes a hectare, the tropics' average, used for the Ecuadorian Amazon, protection policy and Pará."
     },
     {
       "id": "tco2e_per_hectare_year",
@@ -770,7 +770,7 @@
       "label": "Ecuadorian Amazon: yearly forest loss rate without the protection (2021-2022 average)",
       "format": "percent",
       "formula": "(amazon_forest_loss_2022 + amazon_forest_loss_2022 / (1 + amazon_loss_growth_2022)) * 0.5 / amazon_forest_area * site_vs_regional_loss",
-      "explainer": "The average of 2021 and 2022 losses over the forest area: about 0.15% a year at the best guesses. The record year alone (0.19%) is within site_vs_regional_loss's range."
+      "explainer": "The average of 2021 and 2022 losses over the forest area: about {{row:amazon_loss_rate}} a year at the best guesses. The record year alone (0.19%) is within site_vs_regional_loss's range."
     },
     {
       "id": "deal_at_risk_ha_per_year",
@@ -958,7 +958,7 @@
       "format": "number",
       "unit": "t CO₂ / year",
       "formula": "energy_neyveli_lifetime_tco2 / energy_project_life_years + energy_homes * energy_mwh_per_home * energy_grid_tco2_per_mwh",
-      "explainer": "Neyveli (about 47,000 t a year) and the Appalachian projects (about 39,000 t a year): about 86,000 t a year."
+      "explainer": "Neyveli (about 47,000 t a year) and the Appalachian projects (about 39,000 t a year): about {{row:energy_named_tco2_per_year}} t a year."
     },
     {
       "id": "energy_tco2_per_year",
@@ -2111,7 +2111,7 @@
       "label": "Land bought: TNC's share of the resources",
       "format": "percent",
       "formula": "1 - land_sales / land_purchases",
-      "explainer": "Agencies and other buyers pay back part of what TNC spends on land: TNC's share is what it keeps paying, one minus sales over purchases (about 56% in FY2025, a steady-state reading, since the year's sales are of land bought earlier)."
+      "explainer": "Agencies and other buyers pay back part of what TNC spends on land: TNC's share is what it keeps paying, one minus sales over purchases (about {{row:land_attribution_share}} in FY2025, a steady-state reading, since the year's sales are of land bought earlier)."
     },
     {
       "id": "land_implementation_adj",
@@ -3496,7 +3496,7 @@
       "label": "Staff pay as a share of program cost",
       "format": "percent",
       "formula": "salaries_and_benefits / gaap_total_expenses",
-      "explainer": "TNC's own staff share of its expenses, 44% (templates.md Convention 1), from its audited statement of functional expenses rather than the shared default."
+      "explainer": "TNC's own staff share of its expenses, {{row:staff_cost_share}} (templates.md Convention 1), from its audited statement of functional expenses rather than the shared default."
     },
     {
       "id": "salaries_and_benefits",

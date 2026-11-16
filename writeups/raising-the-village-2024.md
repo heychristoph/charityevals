@@ -3,6 +3,6 @@ GiveWell published one public model of this charity's work, in November 2024.
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Raising the Village rough estimate 2024](/raising-the-village) | [GW](/evaluators/givewell) | November 2024 | <span data-figure="headline" data-model="raising-the-village-2024">9.3</span> | 62 |
+| [Raising the Village rough estimate 2024](/raising-the-village) | [GW](/evaluators/givewell) | November 2024 | {{result}} | 62 |
 
 We haven't written our own evaluation of this charity yet. [How imported models work](/method#imported-models).

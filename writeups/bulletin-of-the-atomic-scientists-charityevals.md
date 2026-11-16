@@ -1,6 +1,6 @@
 ### Summary
 
-The Bulletin of the Atomic Scientists is a Chicago non-profit that publishes expert journalism on nuclear weapons, climate change, biological threats and AI, and sets the Doomsday Clock each January. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="bulletin-of-the-atomic-scientists-charityevals">16</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.8 to about 340.
+The Bulletin of the Atomic Scientists is a Chicago non-profit that publishes expert journalism on nuclear weapons, climate change, biological threats and AI, and sets the Doomsday Clock each January. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.8 to about 340.
 
 ### What the charity does
 

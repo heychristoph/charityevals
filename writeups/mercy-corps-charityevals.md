@@ -1,6 +1,6 @@
 ### Summary
 
-Mercy Corps, renamed Prosper Global in 2026, works in about 35 countries hit by conflict, disaster and poverty. It runs emergency response and recovery, livelihood and market programmes, peacebuilding and local governance, youth education, and nutrition. Its programmes do about **<span data-figure="headline" data-model="mercy-corps-charityevals">0.17</span> years of healthy life per 1,000 dollars**.
+Mercy Corps, renamed Prosper Global in 2026, works in about 35 countries hit by conflict, disaster and poverty. It runs emergency response and recovery, livelihood and market programmes, peacebuilding and local governance, youth education, and nutrition. Its programmes do about **{{result}} years of healthy life per 1,000 dollars**.
 
 Half of that comes from livelihoods: small consumption gains for the 19 million people its economic programmes reach, most of them only indirectly. A third comes from emergency relief: cash, water and supplies, and a few excess crisis deaths averted. Recovery, water, nutrition, education and peace work make up the rest. The result is mostly uncertainty: its plausible range runs from about a fifth of it to five times it. Mercy Corps counts the people it reaches but publishes no controlled measure of what its spending achieved. So every part is built from its spending, its reach or a judged cost per person, and the research on that kind of work. Every part is discounted for missing data.
 

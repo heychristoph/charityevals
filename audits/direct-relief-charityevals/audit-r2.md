@@ -23,6 +23,8 @@ New changes (deaths split by age): `deaths_averted_per_person` and `grt_deaths` 
 No high or medium finding.
 
 Verdict: **pass** (0 high, 0 medium, 2 low).
-Model-sha: 0e12a6636d0aa5e53adfbebd4d46e03ca5ea19abfc5a3c2707d5f9b1549f4e3b
+Model-sha: 702d1eca0940ef0dab0f7ef9f32848a9b5dfb1ff4ca54542784caf42dbcf4d33
 
 Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against migrate/data-model.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 480880ba.

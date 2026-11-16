@@ -182,10 +182,11 @@ export function nextDollarKey(lib: Library, charity: string): string | undefined
 
 const MARGINAL_TEXT = /\bnext dollar\b|\bpast average\b|\baverage dollar so far\b/i;
 
-/** Waived pairs: INV-4's `row = @ref` and INV-13's `concept row`, for this model. */
+/** Waived pairs: INV-4's and the preflight's own `shared-fact` section's `row = @ref`, and INV-13's
+ * `concept row`, for this model. */
 function waived(waivers: Waivers, model: string) {
   const pairs = new Set<string>(), concepts = new Set<string>();
-  for (const k of Object.keys(waivers["INV-4"] ?? {})) {
+  for (const k of [...Object.keys(waivers["INV-4"] ?? {}), ...Object.keys(waivers[PREFLIGHT_WAIVERS.fact] ?? {})]) {
     const [mm, rest] = [k.slice(0, k.indexOf(" ")), k.slice(k.indexOf(" ") + 1)];
     if (mm === model) pairs.add(rest.replace(/\s+/g, " "));
   }
@@ -280,7 +281,7 @@ export function sharedFactProblems(lib: Library, m: ResolvedModel, waivers: Waiv
     }
     if (!hits.size || !moves(lib, m, r.id, v, av)) continue;
     for (const [ref, why] of hits)
-      out.push({ severity: "high", check: "shared-fact", where: r.id, message: `"${r.label}" ${why}: read ${ref} instead of typing ${fmt(v)} (the evaluator's or source's own figure, if it differs, in \`published\`; a different place or programme is a waiver with its reason)` });
+      out.push({ severity: "high", check: "shared-fact", where: r.id, message: `"${r.label}" ${why}: read ${ref} instead of typing ${fmt(v)} (the evaluator's or source's own figure, if it differs, in \`published\`; a different place or programme is a waiver with its reason: src/engine/normalization-waivers.json, "shared-fact": { "${m.id} ${r.id} = ${ref}": "<why>" })` });
   }
   return out;
 }
@@ -288,8 +289,10 @@ export function sharedFactProblems(lib: Library, m: ResolvedModel, waivers: Waiv
 /** Waiver sections (src/engine/normalization-waivers.json) for checks of the preflight's own:
  * `simulation`, keyed by model id: a wide spread that is honest (shared facts' ranges), with the reason;
  * `shared-fact-pair`, keyed by "<model> <row> = <model> <row>" (either order): two typed figures that are
- * different quantities, with the reason. */
-export const PREFLIGHT_WAIVERS = { simulation: "simulation", pair: "shared-fact-pair" } as const;
+ * different quantities, with the reason;
+ * `shared-fact`, keyed by "<model> <row> = @<fact>": a typed figure that only happens to equal a fact
+ * INV-4 doesn't flag, with the reason. */
+export const PREFLIGHT_WAIVERS = { simulation: "simulation", pair: "shared-fact-pair", fact: "shared-fact" } as const;
 
 /** A pair's waiver key, the two sides in order so either way round is the same entry. */
 export const pairKey = (a: string, ar: string, b: string, br: string) => [`${a} ${ar}`, `${b} ${br}`].sort().join(" = ");

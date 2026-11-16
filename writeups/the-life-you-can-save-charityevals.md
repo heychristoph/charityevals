@@ -1,6 +1,6 @@
 ### Summary
 
-The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="the-life-you-can-save-charityevals">13</span> years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused, about three dollars for each dollar it spends. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
+The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **{{result}} years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused, about three dollars for each dollar it spends. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
 
 ### What the charity does
 

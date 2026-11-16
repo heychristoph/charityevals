@@ -1,6 +1,6 @@
 ### Summary
 
-Epoch AI tracks and forecasts how AI is developing, and publishes data, benchmarks and research on it. Our model of its work in 2025 comes to **<span data-figure="headline" data-model="epoch-ai-charityevals">0.07</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so on the model's own ranges the result runs from about 0.001 to about 0.9.
+Epoch AI tracks and forecasts how AI is developing, and publishes data, benchmarks and research on it. Our model of its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so on the model's own ranges the result runs from about 0.001 to about 0.9.
 
 ### What the charity does
 

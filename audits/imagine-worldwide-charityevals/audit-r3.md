@@ -1,6 +1,6 @@
 # Audit: imagine-worldwide-charityevals, round 3 (scoped to the changes since round 2)
 Result: 0.004626 uov/$ = 2.313 years of healthy life per 1,000 dollars, unchanged from round 2 (the shared facts have the same best values, 20% and 40%). Verdict: pass.
-Model-sha: b290da80ed4bdc365d75d9c1de270a82de3f606920702e2a47da0c83c00212ac
+Model-sha: 9b299f13f38c7af928a780a358e3e6da1174c1f314564e97a00f9b2b447eb2ec
 Scope: only the changes since 4423e385 (tablets_in_service_2023, edu_earnings_per_sd, edu_persistence, write-up).
 Mechanical: audit-model 0 high, 1 medium (far-above, 28.8x the cause median; reasoning unchanged from rounds 1-2); the round-2 spread finding no longer appears. check.ts: all models valid. generated/ unchanged.
 
@@ -20,3 +20,5 @@ None.
 - Write-up: line 11 and the main-driver and uncertainty text speak of the earnings gain per SD, the share that lasts and fade-out, consistent with the rows; "How this model was checked" notes the shared figures; the two removed source links are no longer referenced by the model.
 
 Findings by severity: high 0, medium 0, low 0.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 3f77fd0e.

@@ -1,6 +1,6 @@
 ### Summary
 
-FAR.AI works to make advanced AI safe. It does technical research on how AI systems can be attacked and broken, runs a research hub in Berkeley, holds workshops for alignment researchers and funds research by others. Our model of all four programmes in 2024 comes to **<span data-figure="headline" data-model="far-ai-charityevals">0.96</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.02 to about 47.
+FAR.AI works to make advanced AI safe. It does technical research on how AI systems can be attacked and broken, runs a research hub in Berkeley, holds workshops for alignment researchers and funds research by others. Our model of all four programmes in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.02 to about 47.
 
 ### What the charity does
 

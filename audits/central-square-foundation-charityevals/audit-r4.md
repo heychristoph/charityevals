@@ -1,6 +1,6 @@
 # Audit: central-square-foundation-charityevals, round 4 (scoped to the round 3 low)
 Result: 0.001704 uov/$ = 0.852 years of healthy life per 1,000 dollars; cause median 0.0803 (x10.6). Verdict: pass (no high findings; 0 medium beyond the far-above judged right in rounds 2 and 3; 0 low).
-Model-sha: 62106b5e6e099786daca9fbbb2c6a217de340ec3b0b029417934011d8dd874b4
+Model-sha: f4d3e054695514178d5d7e3d23942ae92b43cdfa81c12e7405f1dee8eaa61456
 Scope: only the round 3 low (labels of `gov_value_per_student_year` and `gov_gain_sd`) and that no value changed.
 Mechanical: audit-model gives 0 high / 1 medium (far-above, same chain as rounds 2 and 3, still judged right) / 0 low. Headline 0.852, identical to round 3. generated/ was not rewritten (git status clean apart from the untracked scratch-rows.ts).
 Previous round:
@@ -12,3 +12,5 @@ Previous round:
 
 ## Sources checked
 None needed (label-only change; no figures touched).
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 39682758.

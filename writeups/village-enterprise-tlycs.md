@@ -1,6 +1,6 @@
 ### Summary
 
-Village Enterprise trains groups of people in extreme poverty in rural East Africa to start a small business, gives each a cash grant and sets up savings groups. The Life You Can Save puts the income gain at 3.92 dollars per dollar spent, from Village Enterprise's 2023/24 monitoring in Kenya, Rwanda and Uganda; counting the part of the gain the programme caused, over the years it lasts, that is **<span data-figure="headline" data-model="village-enterprise-tlycs">3.6</span> years of healthy life per 1,000 dollars**.
+Village Enterprise trains groups of people in extreme poverty in rural East Africa to start a small business, gives each a cash grant and sets up savings groups. The Life You Can Save puts the income gain at 3.92 dollars per dollar spent, from Village Enterprise's 2023/24 monitoring in Kenya, Rwanda and Uganda; counting the part of the gain the programme caused, over the years it lasts, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Living Goods supports community health workers in Kenya, Uganda and Burkina Faso who treat sick children at home and follow pregnant women. The Life You Can Save estimates the children's and mothers' deaths averted by the rise in treatments and pregnancy registrations since an earlier year, at $52 per DALY across the three countries; counting the whole programme's cost, valuing the deaths the site's way and adding family planning, that is **<span data-figure="headline" data-model="living-goods-tlycs">4.0</span> years of healthy life per 1,000 dollars**.
+Living Goods supports community health workers in Kenya, Uganda and Burkina Faso who treat sick children at home and follow pregnant women. The Life You Can Save estimates the children's and mothers' deaths averted by the rise in treatments and pregnancy registrations since an earlier year, at $52 per DALY across the three countries; counting the whole programme's cost, valuing the deaths the site's way and adding family planning, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate, and Living Goods says the 2024 figures come from an earlier version of its impact tool.
 

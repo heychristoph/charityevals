@@ -1,6 +1,6 @@
 # Audit: mats-charityevals, round 3 (verification round)
 Result: 0.000811 daly/$ = 0.81 years of healthy life per 1,000 dollars (combined range 0.018-36; model's own ranges 0.072-4.4); cause median 5.26 (x0.15). Verdict: pass.
-Model-sha: 742ac23cc4207b9564c64aee8641210b624b5d635ce86d5ce85d65d0ba5f673f
+Model-sha: 11ac3666f34a6a041e39459f1075bea4ae01b3144e9dec514b50793ebffe80a9
 Scope: only round 2's fixes (commit 772e4ae): the scholars' research during the programme moved into the training branch (fb_research_weeks, fb_research_value_share, fb_research_dollars, the two fb_* outcome rows, unmodelled_benefits_adj 0.05), the 37% wording, "four months or longer", three verbatim quotes, and the summary and write-up figures.
 Mechanical: audit-model lint 0/0/0, findings (0); check.ts all models valid; simulation-check stable (5% 0.103, 50% 1, 95% 13.2 x best guess; no missed draws); normalization-audit no violation (generated/ restored with git checkout).
 
@@ -22,3 +22,5 @@ Previous round (round 2):
 
 **Verdict: pass** (no high or medium finding)
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.

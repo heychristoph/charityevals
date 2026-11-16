@@ -1,6 +1,6 @@
 ### Summary
 
-The Campaign for Tobacco-Free Kids campaigns for laws that cut smoking: tobacco taxes, smoke-free places, warnings, bans on advertising and flavours. Its work comes to about **<span data-figure="headline" data-model="campaign-for-tobacco-free-kids-charityevals">0.13</span> years of healthy life per 1,000 dollars**. Smoking kills about 1.6 million people a year in the ten countries it works in most, and a tax or law once won keeps cutting smoking. But the figure rests on judgments about how much a year's wins cut smoking and how much of the credit is CTFK's. It also counts the next dollar at 42% of the average dollar.
+The Campaign for Tobacco-Free Kids campaigns for laws that cut smoking: tobacco taxes, smoke-free places, warnings, bans on advertising and flavours. Its work comes to about **{{result}} years of healthy life per 1,000 dollars**. Smoking kills about 1.6 million people a year in the ten countries it works in most, and a tax or law once won keeps cutting smoking. But the figure rests on judgments about how much a year's wins cut smoking and how much of the credit is CTFK's. It also counts the next dollar at 42% of the average dollar.
 
 ### What the charity does
 

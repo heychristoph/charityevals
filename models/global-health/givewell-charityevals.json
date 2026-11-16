@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "givewell",
   "owner": "charityevals",
-  "summary": "GiveWell researches global health and poverty programmes and directs donors' money to the most cost-effective ones; this model covers a gift for its own operations in 2024 ($20.7M, audited), not the $163M of grants it paid out, which are the funded charities' cost and counted in their own models. Its operations aren't short of money (unrestricted gifts were five times its operating costs, the excess granted out), so a further dollar for them mostly frees another donor's dollar for grants and is worth about a dollar granted; the small rest does operations work, where each dollar moved about eleven dollars it caused in 2024 (a quarter of Open Philanthropy's money, all of it shifted, and 59% of other donors' giving, by its own donor survey with non-respondents counted at half, plus $45M its research influenced), each dollar valued at the charities it went to, read live. At the defaults that comes to about 36 years of healthy life per $1,000, because a dollar for GiveWell ends up with GiveWell's grantees; the result moves most with the share freed for grants, the value of a life and the discount rate, and no branch is discounted for missing data, since money moved is counted.",
+  "summary": "GiveWell researches global health and poverty programmes and directs donors' money to the most cost-effective ones; this model covers a gift for its own operations in 2024 ($20.7M, audited), not the $163M of grants it paid out, which are the funded charities' cost and counted in their own models. Its operations aren't short of money (unrestricted gifts were five times its operating costs, the excess granted out), so a further dollar for them mostly frees another donor's dollar for grants and is worth about a dollar granted; the small rest does operations work, where each dollar moved about eleven dollars it caused in 2024 (a quarter of Open Philanthropy's money, all of it shifted, and 59% of other donors' giving, by its own donor survey with non-respondents counted at half, plus $45M its research influenced), each dollar valued at the charities it went to, read live. At the defaults that comes to about {{result}} years of healthy life per $1,000, because a dollar for GiveWell ends up with GiveWell's grantees; the result moves most with the share freed for grants, the value of a life and the discount rate, and no branch is discounted for missing data, since money moved is counted.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: GiveWell",
@@ -353,14 +353,14 @@
       "label": "Share of the surveyed donors' giving covered by the answers",
       "format": "percent",
       "formula": "survey_respondents_giving / surveyed_donors_giving",
-      "explainer": "The donors who answered gave 42% of what all surveyed donors gave; the rest didn't answer the question."
+      "explainer": "The donors who answered gave {{row:survey_response_share}} of what all surveyed donors gave; the rest didn't answer the question."
     },
     {
       "id": "survey_response_adj",
       "section": "reach",
       "label": "Survey answer to own effect: non-respondents counted at the shared share of respondents' influence",
       "format": "percent",
-      "explainer": "Donors who answer a survey are the engaged ones; those who didn't are counted at half the respondents' influence (the shared @meta.survey_nonrespondent_influence, Giving What We Can's rule for its own surveys). 71% (56% to 100%).",
+      "explainer": "Donors who answer a survey are the engaged ones; those who didn't are counted at half the respondents' influence (the shared @meta.survey_nonrespondent_influence, Giving What We Can's rule for its own surveys). {{row:survey_response_adj}} (56% to 100%).",
       "formula": "survey_response_share + (1 - survey_response_share) * @meta.survey_nonrespondent_influence"
     },
     {
@@ -754,7 +754,7 @@
       "label": "Share of cost that is staff pay",
       "format": "percent",
       "formula": "(staff_salaries + staff_benefits) / total_expenses",
-      "explainer": "Its own share from the audited accounts (Convention 1): salaries, payroll taxes and benefits over operating expenses, 64%. Contractors paid as professional fees ($2.2M) are left out."
+      "explainer": "Its own share from the audited accounts (Convention 1): salaries, payroll taxes and benefits over operating expenses, {{row:staff_cost_share}}. Contractors paid as professional fees ($2.2M) are left out."
     },
     {
       "id": "salary_gap",

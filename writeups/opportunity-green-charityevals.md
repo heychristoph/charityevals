@@ -1,6 +1,6 @@
 ### Summary
 
-Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **<span data-figure="headline" data-model="opportunity-green-charityevals">−0.44</span> years of healthy life per $1,000**, below zero. On the site's values, the shipping framework's emissions cuts are worth far less than the extra fuel costs ships would pay for them. Ships' payments into a new IMO fund cost those who pay them; the part the fund would send to climate-vulnerable countries makes up only part of that. Even the sign of the result is uncertain.
+Opportunity Green uses law, policy and economic analysis to cut emissions from shipping and aviation, working from London and Brussels. Our model counts its part in the two policies its work from mid-2022 to March 2026 pressed hardest. Both are still waiting for a decision. It comes to **{{result}} years of healthy life per $1,000**, below zero. On the site's values, the shipping framework's emissions cuts are worth far less than the extra fuel costs ships would pay for them. Ships' payments into a new IMO fund cost those who pay them; the part the fund would send to climate-vulnerable countries makes up only part of that. Even the sign of the result is uncertain.
 
 ### What the charity does
 

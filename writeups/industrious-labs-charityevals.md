@@ -1,6 +1,6 @@
 ### Summary
 
-Industrious Labs campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. Our model counts the rules it helped win in 2023 and 2024, against what it spent in those years. It comes to **<span data-figure="headline" data-model="industrious-labs-charityevals">-0.002</span> years of healthy life per 1,000 dollars**: a small net harm. The rules' compliance costs outweigh their tonnes and the deaths and illness their cleaner air avoids.
+Industrious Labs campaigns to cut emissions from US heavy industry: steel, aluminium, cement, industrial heat and landfills. Our model counts the rules it helped win in 2023 and 2024, against what it spent in those years. It comes to **{{result}} years of healthy life per 1,000 dollars**: a small net harm. The rules' compliance costs outweigh their tonnes and the deaths and illness their cleaner air avoids.
 
 ### What the charity does
 

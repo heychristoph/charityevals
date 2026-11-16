@@ -1,6 +1,6 @@
 ### Summary
 
-No Means No Worldwide writes a school course that teaches girls to recognise, avoid and resist sexual assault, and boys to respect consent and step in. It trains local partners and teachers to give the course. In 2025 it does about **<span data-figure="headline" data-model="no-means-no-worldwide-charityevals">0.14</span> years of healthy life per 1,000 dollars**.
+No Means No Worldwide writes a school course that teaches girls to recognise, avoid and resist sexual assault, and boys to respect consent and step in. It trains local partners and teachers to give the course. In 2025 it does about **{{result}} years of healthy life per 1,000 dollars**.
 
 Three cluster-randomised trials tested the course for girls against a standard life-skills class. Two found almost half fewer rapes in the year after it. The third, the only one with independent data collectors and linked surveys, found none two years on. Most of the value is the post-traumatic stress and depression that each rape averted spares. The result is mostly uncertainty.
 
@@ -20,7 +20,7 @@ All figures are from NMNW's audited accounts for calendar 2025:
 ### How the model works
 
 - **Cost**: all of NMNW's 2025 spending. Partners' and governments' own delivery costs stay out of the cost. Instead they lower NMNW's share of the credit, judged at about $3 a young person from a costing of instructor hours.
-- **Reach**: the 128,000, split by judgment into the standard course (55%) and the 90-minute course. Girls are 72% of the standard course, from NMNW's pre/post questionnaires (14,860 girls and 5,825 boys).
+- **Reach**: the 128,000, split by judgment into the standard course (55%) and the 90-minute course. Girls are {{row:girls_share_full}} of the standard course, from NMNW's pre/post questionnaires (14,860 girls and 5,825 boys).
 - **Effect**: the trials' outcome, forced sex in the past year. We judge 6% of the girls taught would be raped in a year without the course, anchored on the trials' control arms (6.6% to 13.8%) and Zimbabwe's national survey (2.4% of girls 13 to 17 in a year, in interviews that under-report). The two trials that measured the year after the course are pooled: a risk ratio of 0.56 (95% CI 0.43 to 0.73). The protection counts for that year.
 - **Health per rape**: post-traumatic stress from the meta-analysis of prospective studies (75% of survivors meet the criteria a month after, 41% a year after). We judge about 1.1 years beyond what a girl would have anyway, at GBD's anxiety-disorder weights. On top come judged extra depression and a small risk of death (mostly suicide, about 0.0006 per rape). All are discounted to when they come: about 0.3 of a healthy year, plus the deaths.
 - **Adjustments**: internal validity 0.6 (in the two trials pooled, the course's own instructors gave out the surveys; the trial without that problem found no effect), external validity 0.9 (other countries, a shorter course), counterfactual 0.8, delivery 0.85, NMNW's share of the resources about 80%.

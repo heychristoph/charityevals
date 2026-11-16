@@ -1,6 +1,6 @@
 ### Summary
 
-Malaria Consortium delivers seasonal malaria chemoprevention (SMC): monthly courses of antimalarial drugs for children aged 3–59 months during the four or five months of peak transmission. GiveWell models twenty locations. This page shows Nigeria's Federal Capital Territory, the median one: **<span data-figure="headline" data-model="malaria-consortium-smc">25</span> years of healthy life per $1,000**; GiveDirectly comes to about <span data-figure="headline" data-model="givedirectly">4.4</span>. Across locations the result runs from about 8.8 (Northern Bahr el Ghazal, South Sudan) to 100 (Kebbi, Nigeria).
+Malaria Consortium delivers seasonal malaria chemoprevention (SMC): monthly courses of antimalarial drugs for children aged 3–59 months during the four or five months of peak transmission. GiveWell models twenty locations. This page shows Nigeria's Federal Capital Territory, the median one: **{{result}} years of healthy life per $1,000**; GiveDirectly comes to about {{result:givedirectly}}. Across locations the result runs from about 8.8 (Northern Bahr el Ghazal, South Sudan) to 100 (Kebbi, Nigeria).
 
 The model reproduces all 88 of GiveWell's intermediate figures, and those of every other location.
 

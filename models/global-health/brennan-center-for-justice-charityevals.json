@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "brennan-center-for-justice",
   "owner": "charityevals",
-  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Four branches: its 1.2% share of the litigation that ended the emergency tariffs in February 2026 (about 0.12% of long-run US GDP restored, and more than as much again for trading partners), half of it done in the year; its direct work against a slide (about a third of its democracy spending), 0.7% of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up; the rest of its democracy spending (voting rights, redistricting, money in politics), counted as reform work only, at the figures the Common Cause Education Fund model uses for reforms within a democracy, never also against a slide; and its 1.6% share of the reform field's part in the fall in incarceration, valued by prisoners' wellbeing and shortened lives. With its next dollar at 32% of the average (it holds about two years of spending in liquid reserves), it comes to about 0.07 years of healthy life per 1,000 dollars, four fifths of it from the tariff ruling. The result is mostly uncertainty (the Center's share of the tariff litigation, the years a win counts, the field's effect on the breakdown risk, how much a reform dollar does against a redistricting dollar; the model's own ranges alone span several hundredfold), and all branches are discounted by the shared missing-data slider.",
+  "summary": "The Brennan Center for Justice, a nonpartisan law and policy institute in New York and Washington, spent $57.6 million in the year to June 2025 on research, litigation and advocacy for voting rights and fair elections, checks on presidential power, and ending mass incarceration. Four branches: its 1.2% share of the litigation that ended the emergency tariffs in February 2026 (about 0.12% of long-run US GDP restored, and more than as much again for trading partners), half of it done in the year; its direct work against a slide (about a third of its democracy spending), 0.7% of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up; the rest of its democracy spending (voting rights, redistricting, money in politics), counted as reform work only, at the figures the Common Cause Education Fund model uses for reforms within a democracy, never also against a slide; and its 1.6% share of the reform field's part in the fall in incarceration, valued by prisoners' wellbeing and shortened lives. With its next dollar at 32% of the average (it holds about two years of spending in liquid reserves), it comes to about {{result}} years of healthy life per 1,000 dollars, four fifths of it from the tariff ruling. The result is mostly uncertainty (the Center's share of the tariff litigation, the years a win counts, the field's effect on the breakdown risk, how much a reform dollar does against a redistricting dollar; the model's own ranges alone span several hundredfold), and all branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Brennan Center for Justice",
@@ -276,7 +276,7 @@
       "label": "Democracy branch's share of the cost",
       "format": "percent",
       "formula": "(dem_fy2025 + lns_fy2025) / (dem_fy2025 + lns_fy2025 + jus_fy2025)",
-      "explainer": "Democracy and Liberty and National Security over the three substantive programmes (the cost of both the breakdown-risk branch and the tariff branch, which comes from the emergency-powers work); communications, fellows and policy advocacy (and overhead) follow the same split (88%)."
+      "explainer": "Democracy and Liberty and National Security over the three substantive programmes (the cost of both the breakdown-risk branch and the tariff branch, which comes from the emergency-powers work); communications, fellows and policy advocacy (and overhead) follow the same split ({{row:dem_cost_share}})."
     },
     {
       "id": "dem_cost",
@@ -452,7 +452,7 @@
       "format": "number",
       "formula": "(1 - (1 + dem_rate) ^ (0 - years_of_impact)) * (1 - (1 + dem_rate) ^ (0 - dem_ramp_years)) / (ln(1 + dem_rate) * ln(1 + dem_rate) * dem_ramp_years) * dem_wait_discount",
       "unit": "years",
-      "explainer": "The family's shifted ramp: a slide's loss builds evenly over dem_ramp_years; putting the slide off by the years counted ($win_years_counted) moves the whole ramp later, so the loss avoided rises to a fifth of the full loss over the first five years, stays there until the ramp is complete and falls back to nothing five years later, years_of_impact full-loss years in all before discounting. Its present value (continuous form) at dem_rate, times the wait at the shared rate: about 1.5 full-loss years at the defaults."
+      "explainer": "The family's shifted ramp: a slide's loss builds evenly over dem_ramp_years; putting the slide off by the years counted ($win_years_counted) moves the whole ramp later, so the loss avoided rises to a fifth of the full loss over the first five years, stays there until the ramp is complete and falls back to nothing five years later, years_of_impact full-loss years in all before discounting. Its present value (continuous form) at dem_rate, times the wait at the shared rate: about {{row:dem_loss_years}} full-loss years at the defaults."
     },
     {
       "id": "dem_uov",
@@ -748,7 +748,7 @@
       "label": "The Brennan Center's share of the resources behind the tariff litigation",
       "format": "percent",
       "formula": "tar_bcj_briefs / tar_amicus_briefs * tar_amici_resource_share",
-      "explainer": "Its briefs over all the challengers' amicus briefs, × the amici's share of the litigation (Convention 2): about 1.2%."
+      "explainer": "Its briefs over all the challengers' amicus briefs, × the amici's share of the litigation (Convention 2): about {{row:tar_attribution_share}}."
     },
     {
       "id": "tar_evidence_adj",
@@ -1174,7 +1174,7 @@
       "label": "The Brennan Center's share of the reform field's resources",
       "format": "percent",
       "formula": "jus_cost / jus_field_spending",
-      "explainer": "Its justice cost over the field's spending (Convention 2): about 1.6%."
+      "explainer": "Its justice cost over the field's spending (Convention 2): about {{row:jus_attribution_share}}."
     },
     {
       "id": "jus_evidence_adj",
@@ -1654,7 +1654,7 @@
       "label": "Staff pay as a share of cost",
       "format": "percent",
       "formula": "(staff_salaries + staff_benefits) / total_expenses",
-      "explainer": "The Brennan Center's own figure (Convention 1): salaries and benefits over total expenses (61%)."
+      "explainer": "The Brennan Center's own figure (Convention 1): salaries and benefits over total expenses ({{row:staff_cost_share}})."
     },
     {
       "id": "salary_gap",

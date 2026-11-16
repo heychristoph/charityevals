@@ -1,6 +1,6 @@
 # Audit: opportunity-green-charityevals, round 5 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.2352 tco2e/$ = -0.4376 years of healthy life per $1,000 (combined range -10.92 to -0.0175). Verdict: pass.
-Model-sha: 4dd4c31acf545694041ee42e29c61041f4b3ba836cd4ac3bb7224ef295415766
+Model-sha: 384d405b1df3abcc3ff36613d58687c94f1d06108dfb7f92ad8ffdb95850b964
 Scope: only the rows changed in commit 7e73f6cd (imo_low_income_payer_consumption, new imo_levy_payer_uov, uov_per_year, explainers of imo_fund_revenue_per_year and imo_jet_uov, the bridge's side-effect-weight term) and the summary and write-up sentences stating the result.
 Mechanical: lint 0 findings (3 warn/info only), invariants none, normalization-audit none for this model; check.ts all models valid.
 Previous round: round-4 findings all resolved and unaffected.
@@ -19,3 +19,5 @@ Other checks, no finding: imo_low_income_payer_consumption = 3,109 × 0.68 = abo
 |---|---|---|---|
 | facts survey_consumption.lmy_na_consumption_per_person_2024 | https://api.worldbank.org/v2/country/LMY/indicator/NE.CON.PRVT.CD?format=json&date=2024 | verified | Low & middle income, 2024: 20,904,671,580,531 current US$ |
 | same, population | https://api.worldbank.org/v2/country/LMY/indicator/SP.POP.TOTL?format=json&date=2024 | verified | 6,722,971,301; quotient 3,109.4, matches the fact (3,109) |
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.

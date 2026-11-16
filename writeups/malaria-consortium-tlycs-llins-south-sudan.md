@@ -1,6 +1,6 @@
 ### Summary
 
-Malaria Consortium helped South Sudan's health ministry run its bednet campaigns on phones instead of paper, registering and mapping every household. The Life You Can Save credits the digital tools with the 13.55% more people the registration found than the projections and estimates $98 per DALY averted; valuing each child's death averted by age and discounting the nets' later years, that is **<span data-figure="headline" data-model="malaria-consortium-tlycs-llins-south-sudan">18</span> years of healthy life per 1,000 dollars**.
+Malaria Consortium helped South Sudan's health ministry run its bednet campaigns on phones instead of paper, registering and mapping every household. The Life You Can Save credits the digital tools with the 13.55% more people the registration found than the projections and estimates $98 per DALY averted; valuing each child's death averted by age and discounting the nets' later years, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of the sheet's South Sudan tab. The Life You Can Save calls its figures highly approximate.
 

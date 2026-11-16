@@ -2,8 +2,8 @@
 
 The Sierra Club Foundation is the tax-deductible arm of the Sierra Club. It raises money and passes almost all of it to the Sierra Club for its charitable campaigns; the Sierra Club itself is a 501(c)(4) that also lobbies and backs candidates. We model the Foundation's grants in two parts, each against what it granted for that part in 2022 to 2024:
 
-- **Climate and clean energy:** **<span data-figure="headline" data-model="sierra-club-foundation-charityevals">0.0071</span> years of healthy life per $1,000**, about $64 a tonne of CO₂e averted, mostly from the coal plants that closed.
-- **Lands, clean air and outdoors:** **<span data-figure="headline" data-model="sierra-club-foundation-charityevals-lands-health">0.0009</span> years of healthy life per $1,000**, mostly from EPA's 2024 soot standard.
+- **Climate and clean energy:** **{{result}} years of healthy life per $1,000**, about $64 a tonne of CO₂e averted, mostly from the coal plants that closed.
+- **Lands, clean air and outdoors:** **{{result:sierra-club-foundation-charityevals-lands-health}} years of healthy life per $1,000**, mostly from EPA's 2024 soot standard.
 
 Both are low on the site's scale for the same reasons as the other US advocacy groups: each win has many authors, advocacy is only one cause of it, and much of what was won federally is being reversed.
 

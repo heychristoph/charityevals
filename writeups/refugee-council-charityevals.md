@@ -1,6 +1,6 @@
 ### Summary
 
-The Refugee Council is the UK's national refugee charity. Our three models of its year to March 2025 cover every programme in its audited accounts (£16.9m of charitable spending). The four service lines (£12.25m) come to **<span data-figure="headline" data-model="refugee-council-charityevals">0.002</span> years of healthy life per $1,000**; [therapeutic services](/refugee-council/refugee-council-charityevals-therapy) (£1.74m) to **<span data-figure="headline" data-model="refugee-council-charityevals-therapy">0.003</span>**; and [advocacy and awareness raising](/refugee-council/refugee-council-charityevals-advocacy) (£2.94m) to **<span data-figure="headline" data-model="refugee-council-charityevals-advocacy">0.003</span>**.
+The Refugee Council is the UK's national refugee charity. Our three models of its year to March 2025 cover every programme in its audited accounts (£16.9m of charitable spending). The four service lines (£12.25m) come to **{{result}} years of healthy life per $1,000**; [therapeutic services](/refugee-council/refugee-council-charityevals-therapy) (£1.74m) to **{{result:refugee-council-charityevals-therapy}}**; and [advocacy and awareness raising](/refugee-council/refugee-council-charityevals-advocacy) (£2.94m) to **{{result:refugee-council-charityevals-advocacy}}**.
 
 All three are low: the people helped live in the UK, where the same help is a smaller gain on the site's one income and wellbeing scales than overseas, and councils, the Home Office or the new government would have provided much of it anyway.
 

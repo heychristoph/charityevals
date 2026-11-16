@@ -1,6 +1,6 @@
 ### Summary
 
-Compassion UK is a Christian child-sponsorship charity: sponsors pay for children in poor countries to attend local church centres that provide schooling support, health care and meals. SoGive estimated that sponsorship's extra schooling brings an extra year's income for about £500; on our scale that is **<span data-figure="headline" data-model="compassion-uk-sogive">0.43</span> years of healthy life per $1,000**.
+Compassion UK is a Christian child-sponsorship charity: sponsors pay for children in poor countries to attend local church centres that provide schooling support, health care and meals. SoGive estimated that sponsorship's extra schooling brings an extra year's income for about £500; on our scale that is **{{result}} years of healthy life per $1,000**.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £500. SoGive rates Compassion UK "Not Recommended (firm)".
 

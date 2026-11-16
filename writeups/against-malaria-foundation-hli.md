@@ -1,6 +1,6 @@
 ### Summary
 
-The Happier Lives Institute (HLI) values AMF's bed nets by their effect on wellbeing, measured in wellbeing-adjusted life years (WELLBYs). HLI's own figure, with a neutral point of 2 (see below), is 74 WELLBYs per $1,000. In our view, which counts deaths the way every model on the site does and takes the middle of HLI's estimate of the health and income benefits, it comes to **<span data-figure="headline" data-model="against-malaria-foundation-hli">11</span> years of healthy life per $1,000**. GiveWell's model of the same charity gives about <span data-figure="headline" data-model="against-malaria-foundation">24</span>; the rankings show both.
+The Happier Lives Institute (HLI) values AMF's bed nets by their effect on wellbeing, measured in wellbeing-adjusted life years (WELLBYs). HLI's own figure, with a neutral point of 2 (see below), is 74 WELLBYs per $1,000. In our view, which counts deaths the way every model on the site does and takes the middle of HLI's estimate of the health and income benefits, it comes to **{{result}} years of healthy life per $1,000**. GiveWell's model of the same charity gives about {{result:against-malaria-foundation}}; the rankings show both.
 
 The evaluator view reproduces HLI's published figures exactly, for every neutral point HLI reports (0 to 5).
 

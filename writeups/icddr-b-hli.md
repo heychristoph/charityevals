@@ -1,6 +1,6 @@
 ### Summary
 
-icddr,b is a health research institute in Bangladesh that also runs health programmes, among them Reach Up, in which health workers visit parents of young children and run parenting groups. The Happier Lives Institute estimates Reach Up creates 50 WELLBYs per $1,000; on our scale that is **<span data-figure="headline" data-model="icddr-b-hli">1.9</span> years of healthy life per $1,000**.
+icddr,b is a health research institute in Bangladesh that also runs health programmes, among them Reach Up, in which health workers visit parents of young children and run parenting groups. The Happier Lives Institute estimates Reach Up creates 50 WELLBYs per $1,000; on our scale that is **{{result}} years of healthy life per $1,000**.
 
 HLI found no way for donors to fund this programme directly, so it does not recommend it; the estimate is here because HLI published it. HLI publishes no spreadsheet for it: the model is built from the figures in HLI's report, each quoted on its row, and reproduces HLI's 50.
 

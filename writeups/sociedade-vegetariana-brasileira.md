@@ -1,6 +1,6 @@
 ### Summary
 
-Sociedade Vegetariana Brasileira (SVB) works with Brazilian schools and public institutions to replace some meat meals with plant-based ones. ACE's 2025 analysis of the institutional program works out to **<span data-figure="headline" data-model="sociedade-vegetariana-brasileira">24</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Sociedade Vegetariana Brasileira (SVB) works with Brazilian schools and public institutions to replace some meat meals with plant-based ones. ACE's 2025 analysis of the institutional program works out to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 In ACE's own view the model reproduces all 11 of ACE's intermediate figures.
 

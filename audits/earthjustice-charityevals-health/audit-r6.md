@@ -1,7 +1,7 @@
 # Audit: earthjustice-charityevals-health, round 6 (verification of the compliance-cost rule 2.21, text fixes of round 5)
 Result: 1.186e-5 uov/$ = 0.005932 years of healthy life per 1,000 dollars (unchanged from round 5). Verdict: pass.
 Verdict: pass
-Model-sha: 7bd54fdad29a85aed41a54354ba1ef5fb3d40cf201a8af98bc56371df27c25ab
+Model-sha: 2f0d429c32a735d22faba664bbaacfc1c7434d4ac389b09a2d1a1439de6990da
 
 Scope: scoped verification of the text fixes (`summary`, writeups/earthjustice-charityevals.md compliance line, facts/compliance_costs.json PM2.5 table label and power-plant url). No formula changed.
 
@@ -29,5 +29,7 @@ Checks:
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 7bd54fdad29a85aed41a54354ba1ef5fb3d40cf201a8af98bc56371df27c25ab
+Model-sha: 2f0d429c32a735d22faba664bbaacfc1c7434d4ac389b09a2d1a1439de6990da
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1807d315.

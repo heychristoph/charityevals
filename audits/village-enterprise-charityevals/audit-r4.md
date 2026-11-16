@@ -17,4 +17,6 @@ Mechanical: audit-model reports no high finding; the one medium (far-above) is t
 No findings.
 
 Verdict: pass. Findings: 0 high, 0 medium, 0 low.
-Model-sha: f637fc84f57aa280b7d9ba90858aabcab35363d23096cb23ad79f3b32d4713f7
+Model-sha: 1f8d02ae4d9286306fa60efc39a5d347d0b417908110166cfb87a5d95a0ef570
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 32c25050.

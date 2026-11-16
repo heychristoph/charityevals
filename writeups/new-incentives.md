@@ -1,6 +1,6 @@
 ### Summary
 
-New Incentives pays caregivers in northern Nigeria small cash incentives for bringing infants to clinics for their routine vaccinations. GiveWell models 40 state-level programs. This page shows Bayelsa, the median: **<span data-figure="headline" data-model="new-incentives">4.4</span> years of healthy life per $1,000**.
+New Incentives pays caregivers in northern Nigeria small cash incentives for bringing infants to clinics for their routine vaccinations. GiveWell models 40 state-level programs. This page shows Bayelsa, the median: **{{result}} years of healthy life per $1,000**.
 
 As with vitamin A, location dominates: from about 1.8 years of healthy life per $1,000 (Ebonyi) to about 64 (Sokoto). GiveWell funds the northern states where few children are vaccinated and disease burden is high; those are at the top of the list.
 

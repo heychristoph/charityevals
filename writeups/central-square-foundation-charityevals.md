@@ -1,6 +1,6 @@
 ### Summary
 
-Central Square Foundation (CSF) helps Indian state governments improve what children learn in government schools. Our model counts its spending in the year to March 2026 against a year of the learning gains from the state programmes it supports, credited by CSF's share of everyone's resources behind them, and valued as the children's later earnings. It comes to **<span data-figure="headline" data-model="central-square-foundation-charityevals">0.85</span> years of healthy life per 1,000 dollars**. The figure is very uncertain: nobody has measured how much the state missions themselves raise learning, a test-score gain partly fades before adulthood, and the earnings start a decade or more later, so the discount rate moves the result a lot.
+Central Square Foundation (CSF) helps Indian state governments improve what children learn in government schools. Our model counts its spending in the year to March 2026 against a year of the learning gains from the state programmes it supports, credited by CSF's share of everyone's resources behind them, and valued as the children's later earnings. It comes to **{{result}} years of healthy life per 1,000 dollars**. The figure is very uncertain: nobody has measured how much the state missions themselves raise learning, a test-score gain partly fades before adulthood, and the earnings start a decade or more later, so the discount rate moves the result a lot.
 
 ### What the charity does
 

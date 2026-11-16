@@ -1,6 +1,6 @@
 ### Summary
 
-The Tax Justice Network researches tax havens and campaigns for international tax rules. Our model counts its work since 2003 against two outcomes: the transparency standards it first proposed, now in force worldwide, and the UN tax convention now being negotiated. It comes to **<span data-figure="headline" data-model="tax-justice-network-charityevals">1.3</span> years of healthy life per 1,000 dollars**, because the outcome is public revenue for lower-income governments, a large sum valued at what government spending does there. It is a very uncertain figure: the network's share of the credit, the years a win counts and what the convention will recover are our judgments.
+The Tax Justice Network researches tax havens and campaigns for international tax rules. Our model counts its work since 2003 against two outcomes: the transparency standards it first proposed, now in force worldwide, and the UN tax convention now being negotiated. It comes to **{{result}} years of healthy life per 1,000 dollars**, because the outcome is public revenue for lower-income governments, a large sum valued at what government spending does there. It is a very uncertain figure: the network's share of the credit, the years a win counts and what the convention will recover are our judgments.
 
 ### What the charity does
 
@@ -18,7 +18,7 @@ Tax havens let multinationals and wealthy people avoid tax. When tax authorities
   - we judge 35% of the developing countries' share is in low and lower-middle income countries, 35% of that in India. That revenue is valued as GiveWell values a dollar of government spending: about 1.5 times cash in its African programme countries, a quarter of that in India. Revenue in upper-middle and high-income countries is valued as money spread over everyone's consumption, much less per dollar;
   - each dollar is net of what it costs the people who pay, judged to consume about four and a half times the UK average (a blend of multinationals' shareholders, at the shared 2.5 times, and offshore wealth's owners, at 20 times), with the shared extra cost of raising public money;
   - the win counts for the years a won reform counts on the site, less the shared yearly chance that such a reform is repealed;
-  - the network gets 8% of the movement's credit in the years the standards were won, and civil society 15% of all credit: governments, the US FATCA law and leaked documents did most. Exchange of information on request, which predates the network's proposals, gets half that credit. That makes 1%;
+  - the network gets 8% of the movement's credit in the years the standards were won, and civil society 15% of all credit: governments, the US FATCA law and leaked documents did most. Exchange of information on request, which predates the network's proposals, gets half that credit. That makes {{row:a_attribution_share}};
   - we trust the revenue figure at 70%, and judge 60% of the identified revenue is collected;
   - side effects: tax people now pay because evasion is harder adds half again, and revenue from the other two standards adds 10%; banks' reporting costs (the standards' compliance costs, counted in full) take away 2%.
 - **UN convention (about 49%):**

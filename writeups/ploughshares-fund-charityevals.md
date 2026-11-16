@@ -1,6 +1,6 @@
 ### Summary
 
-Ploughshares Fund is a San Francisco foundation that funds and connects the groups working to lower the chance of nuclear war. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="ploughshares-fund-charityevals">26</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.2 to about 480.
+Ploughshares Fund is a San Francisco foundation that funds and connects the groups working to lower the chance of nuclear war. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.2 to about 480.
 
 ### What the charity does
 

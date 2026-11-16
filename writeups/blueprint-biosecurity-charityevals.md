@@ -1,6 +1,6 @@
 ### Summary
 
-Blueprint Biosecurity works on defences that would protect people against any airborne pandemic: far-UVC light and other ways to clean indoor air, and better respirators. Our model of all its work in 2024 comes to **<span data-figure="headline" data-model="blueprint-biosecurity-charityevals">5.9</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of pandemic work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 115.
+Blueprint Biosecurity works on defences that would protect people against any airborne pandemic: far-UVC light and other ways to clean indoor air, and better respirators. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of pandemic work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 115.
 
 ### What the charity does
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Malaria Consortium added vitamin A capsules to the door-to-door seasonal malaria chemoprevention (SMC) round in two areas of Bauchi state, Nigeria, raising vitamin A coverage from 1% to 83% of young children. The Life You Can Save estimates $11 per DALY averted; valuing each child's death averted by age and counting only what the one round costed buys, that is **<span data-figure="headline" data-model="malaria-consortium-tlycs-smc-vas-co-delivery-nigeria">65</span> years of healthy life per 1,000 dollars**.
+Malaria Consortium added vitamin A capsules to the door-to-door seasonal malaria chemoprevention (SMC) round in two areas of Bauchi state, Nigeria, raising vitamin A coverage from 1% to 83% of young children. The Life You Can Save estimates $11 per DALY averted; valuing each child's death averted by age and counting only what the one round costed buys, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of the sheet's Nigeria tab. The Life You Can Save calls its figures highly approximate.
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Project Drawdown researches which climate solutions matter most and helps funders, companies and investors put their money there. Our model values that advice by the money it changed in 2023-2025. Each dollar counts only for how much better its new use is than its old one. Against what Drawdown spent over those years, that comes to **<span data-figure="headline" data-model="project-drawdown-charityevals">−0.0008</span> years of healthy life per $1,000**. Most of it is foundation and family giving that follows its guidance, valued at the ranked climate charities' figures, which average below zero at the defaults. The result is very uncertain: nobody has counted the decisions it changed, so the money and Drawdown's part in it are our judgments.
+Project Drawdown researches which climate solutions matter most and helps funders, companies and investors put their money there. Our model values that advice by the money it changed in 2023-2025. Each dollar counts only for how much better its new use is than its old one. Against what Drawdown spent over those years, that comes to **{{result}} years of healthy life per $1,000**. Most of it is foundation and family giving that follows its guidance, valued at the ranked climate charities' figures, which average below zero at the defaults. The result is very uncertain: nobody has counted the decisions it changed, so the money and Drawdown's part in it are our judgments.
 
 ### What the charity does
 

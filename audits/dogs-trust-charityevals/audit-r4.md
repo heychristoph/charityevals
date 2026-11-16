@@ -1,7 +1,7 @@
 # Audit: dogs-trust-charityevals, round 4
 
 Result: 0.4858 ced/$ = 5.34e-5 years of healthy life per $1,000 (combined range 8.6e-6 – 3.3e-4); cause median 7.43e-4 (×0.072). Verdict: pass.
-Model-sha: 456e56a0616ef1834dccc3a0c19473454ff88ecf4bac3df9ccf1076e9ffe6ffd
+Model-sha: cb2d6872e5da8897b6775fa53edaa4b8bb5f65446898532975a1378d3b2c7666
 
 Scope: unchanged from round 3 (rehoming, prevention, brand and 80% of international work, year to 31 Dec 2025; the rabies model takes the other 20%). This round checks only whether round 3's high is settled and whether the change and the text updates brought new problems.
 
@@ -51,3 +51,5 @@ Verdict: pass. Findings: 0 high, 3 medium, 4 low.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): compliance costs of won rules (normalization.md 2.21): the policy branch's explainer names the analyses checked, none of which gives a cost; no value changed.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 9d3d36e4.

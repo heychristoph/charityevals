@@ -1,6 +1,6 @@
 ### Summary
 
-Educate Girls' community volunteers find girls who are out of school in villages of Rajasthan, Madhya Pradesh and Uttar Pradesh, bring them into school, and teach children in grades 3 to 5 remedial reading and maths. The Life You Can Save estimates 5.23 learning-adjusted years of schooling per $100 for this work (Vidya) from Educate Girls' FY 2023-24 costs; turning the schooling and learning into later earnings, that is **<span data-figure="headline" data-model="educate-girls-tlycs">24</span> years of healthy life per 1,000 dollars**.
+Educate Girls' community volunteers find girls who are out of school in villages of Rajasthan, Madhya Pradesh and Uttar Pradesh, bring them into school, and teach children in grades 3 to 5 remedial reading and maths. The Life You Can Save estimates 5.23 learning-adjusted years of schooling per $100 for this work (Vidya) from Educate Girls' FY 2023-24 costs; turning the schooling and learning into later earnings, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 
@@ -12,7 +12,7 @@ Educate Girls trains village volunteers (Team Balika) who go door to door to fin
 
 1. **Enrolment:** each girl enrolled who completes a year (85%, Educate Girls' figure) gets a year of school she would otherwise have missed. The Life You Can Save counts one year per girl.
 2. **Learning:** the randomised evaluation of Educate Girls' programme found large learning gains; The Life You Can Save takes 1.25 standard deviations and keeps half for delivery at scale: 0.625 per child.
-3. **Learning-adjusted years:** the learning gain is worth 2.9 years of school (4.7 years per standard deviation, a World Bank estimate), and every year of school is scaled by how much pupils in India learn in a year.
+3. **Learning-adjusted years:** the learning gain is worth {{row:eyos_per_child}} years of school (4.7 years per standard deviation, a World Bank estimate), and every year of school is scaled by how much pupils in India learn in a year.
 4. **Cost:** Educate Girls' audited total less Pragati, 12.5 million dollars, about 19 dollars per child reached.
 5. **Earnings (our step):** better reading and maths in childhood raise adult earnings, shared by the earner's household for a working life.
 

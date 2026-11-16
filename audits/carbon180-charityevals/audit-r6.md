@@ -1,6 +1,6 @@
 # Audit: carbon180-charityevals, round 6 (verification of the round 5 text fixes)
 Result: -0.01505 tco2e/$ = -0.002959 years of healthy life per $1,000, unchanged. Verdict: pass (no high or medium finding).
-Model-sha: a929cf5c4c563b678a82cf2fba41f3d6b2c4ca89a7e850e3aea9836bdedde3aa
+Model-sha: 533025185e9b6ce066bca2fdb5eb5db5be1724048ff9818e36f2c22078173393
 Scope: round 5's mediums (1, 2) and lows (3, 4) only, in the uncommitted diff of the model and write-up.
 Mechanical: audit-model.ts 0 findings; check.ts all models valid, -0.002959.
 
@@ -15,3 +15,5 @@ Finding 5 of round 5 (NRCS page unreachable) was not in this round's scope and i
 
 ## Sources checked
 - Summary and write-up headline: -0.003 years, net harm, about $1,000 a tonne gross (1/0.000968 = $1,033); no comparison with other charities.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against a2bc6e8e.

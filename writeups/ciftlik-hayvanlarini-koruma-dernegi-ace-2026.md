@@ -1,6 +1,6 @@
 ### Summary
 
-Çiftlik Hayvanlarını Koruma Derneği (ÇHKD) campaigns for cage-free egg commitments from companies in Türkiye, through its Kafessiz Türkiye programme. ACE's 2026 analysis works out to **<span data-figure="headline" data-model="ciftlik-hayvanlarini-koruma-dernegi-ace-2026">0.8</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is. ACE's own figure is 30.7 SADs averted per dollar (0.7 to 196).
+Çiftlik Hayvanlarını Koruma Derneği (ÇHKD) campaigns for cage-free egg commitments from companies in Türkiye, through its Kafessiz Türkiye programme. ACE's 2026 analysis works out to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is. ACE's own figure is 30.7 SADs averted per dollar (0.7 to 196).
 
 The model reproduces ACE's calculated figures (9 rows; the rest are inputs).
 

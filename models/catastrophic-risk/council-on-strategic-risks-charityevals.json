@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "council-on-strategic-risks",
   "owner": "charityevals",
-  "summary": "The Council on Strategic Risks (Washington DC) works against biological weapons and pandemics, nuclear risks and the security risks of climate change: its Nolan Center on Strategic Weapons (policy, dialogues with allied governments and four fellowships), its Center for Climate and Security and a small Converging Risks Lab; this model covers all its programmes in 2025 ($5.2M spent). At the defaults it averts about 12 years of healthy life per $1,000, from 0.8 to 180 on the combined range: after each branch's adjustments, about 63% of that is the nuclear work (about a quarter of the cost) and a fifth the biological work (about a third), each dollar valued as a typical project's cut in the forecast risks of nuclear war and pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the fellowships (8% of the cost) add 17%, counted through the work their alumni add, and the climate-security work (over a third of the cost), valued as better use of the public money it bears on, almost nothing. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way), and CSR doesn't say how the Nolan Center's spending splits between biological and nuclear work. Every branch is discounted for missing data: no outcome of the work is measured.",
+  "summary": "The Council on Strategic Risks (Washington DC) works against biological weapons and pandemics, nuclear risks and the security risks of climate change: its Nolan Center on Strategic Weapons (policy, dialogues with allied governments and four fellowships), its Center for Climate and Security and a small Converging Risks Lab; this model covers all its programmes in 2025 ($5.2M spent). At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.8 to 180 on the combined range: after each branch's adjustments, about 63% of that is the nuclear work (about a quarter of the cost) and a fifth the biological work (about a third), each dollar valued as a typical project's cut in the forecast risks of nuclear war and pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the fellowships (8% of the cost) add 17%, counted through the work their alumni add, and the climate-security work (over a third of the cost), valued as better use of the public money it bears on, almost nothing. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way), and CSR doesn't say how the Nolan Center's spending splits between biological and nuclear work. Every branch is discounted for missing data: no outcome of the work is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Council on Strategic Risks",
@@ -560,7 +560,7 @@
       "section": "effect",
       "label": "Pandemics: share of the cost spent on work against pandemics risk (research, evaluations, convening, advocacy)",
       "format": "percent",
-      "explainer": "The Nolan Center's biological-threat work (its line less the fellowships, × csw_bio_share) over all programme spending: about 32%. Overhead is spread alike (cost_total).",
+      "explainer": "The Nolan Center's biological-threat work (its line less the fellowships, × csw_bio_share) over all programme spending: about {{row:bio_cost_share}}. Overhead is spread alike (cost_total).",
       "formula": "(csw_line - fb_cost) * csw_bio_share / program_spend"
     },
     {
@@ -686,7 +686,7 @@
       "section": "effect",
       "label": "Nuclear war: share of the cost spent on work against nuclear war risk (research, evaluations, convening, advocacy)",
       "format": "percent",
-      "explainer": "The Nolan Center's nuclear and arms-control work and the Converging Risks Lab's climate-nuclear-security project over all programme spending: about 24%.",
+      "explainer": "The Nolan Center's nuclear and arms-control work and the Converging Risks Lab's climate-nuclear-security project over all programme spending: about {{row:nuclear_cost_share}}.",
       "formula": "((csw_line - fb_cost) * (1 - csw_bio_share) + crl_line * crl_nuclear_share) / program_spend"
     },
     {
@@ -985,7 +985,7 @@
       "label": "Climate security: share of the cost",
       "format": "percent",
       "formula": "1 - ai_cost_share - bio_cost_share - nuclear_cost_share - pol_cost_share - fb_cost_share",
-      "explainer": "Everything else, about 36%: the Center for Climate and Security and the Converging Risks Lab's other half (foresight, ecological security), (ccs_line + crl_line × (1 − crl_nuclear_share)) over all programme spending. Their aim is that militaries, security agencies and governments plan and spend for climate risks as their scale warrants, so one chain values them as better use of public money."
+      "explainer": "Everything else, about {{row:gov_cost_share}}: the Center for Climate and Security and the Converging Risks Lab's other half (foresight, ecological security), (ccs_line + crl_line × (1 − crl_nuclear_share)) over all programme spending. Their aim is that militaries, security agencies and governments plan and spend for climate risks as their scale warrants, so one chain values them as better use of public money."
     },
     {
       "id": "gov_public_dollars_per_dollar",
@@ -1595,7 +1595,7 @@
       "label": "Staff pay as a share of program cost",
       "format": "percent",
       "formula": "staff_pay / total_expenses",
-      "explainer": "CSR's own salaries and benefits over total expenses (Convention 1), not the shared default: 81%."
+      "explainer": "CSR's own salaries and benefits over total expenses (Convention 1), not the shared default: {{row:staff_cost_share}}."
     },
     {
       "id": "salary_gap",

@@ -1,6 +1,6 @@
 ### Summary
 
-Greener by Default helps hospitals, universities, stadiums and corporate cafeterias serve plant-based meals by default. ACE's 2026 analysis works out to **<span data-figure="headline" data-model="greener-by-default">0.03</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is. ACE's own figure is 2.14 SADs averted per dollar (0.33 to 13.0).
+Greener by Default helps hospitals, universities, stadiums and corporate cafeterias serve plant-based meals by default. ACE's 2026 analysis works out to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is. ACE's own figure is 2.14 SADs averted per dollar (0.33 to 13.0).
 
 The model reproduces ACE's calculated figures (31 rows; the rest are inputs).
 

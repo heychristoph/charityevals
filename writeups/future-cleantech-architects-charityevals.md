@@ -1,6 +1,6 @@
 ### Summary
 
-Future Cleantech Architects is a small German think tank that gives EU and German lawmakers technical analysis on clean technologies for the hardest sectors: industrial heat, steel, cement, hydrogen, and aviation and shipping fuels. Our model counts the two policies it helped win between 2021 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="future-cleantech-architects-charityevals">0.0008</span> years of healthy life per $1,000**. Nearly all of that comes from one win: the EU's target that 5% of new renewable capacity be innovative technology. The result is mostly uncertainty.
+Future Cleantech Architects is a small German think tank that gives EU and German lawmakers technical analysis on clean technologies for the hardest sectors: industrial heat, steel, cement, hydrogen, and aviation and shipping fuels. Our model counts the two policies it helped win between 2021 and 2025, against what it spent over those years. It comes to **{{result}} years of healthy life per $1,000**. Nearly all of that comes from one win: the EU's target that 5% of new renewable capacity be innovative technology. The result is mostly uncertainty.
 
 ### What the charity does
 

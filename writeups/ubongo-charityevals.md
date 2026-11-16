@@ -1,6 +1,6 @@
 ### Summary
 
-Ubongo makes educational cartoons for television, radio and phones in Africa: *Akili and Me* for children of 3 to 6 and *Ubongo Kids* for 7 to 14. Our model of its 2024 work gives **<span data-figure="headline" data-model="ubongo-charityevals">52</span> years of healthy life per 1,000 dollars**. Almost all of that comes from the shows' very low cost per child. The result is mostly uncertainty, chiefly how much children learn from watching at home and how much of it lasts, and the whole programme is discounted for missing data.
+Ubongo makes educational cartoons for television, radio and phones in Africa: *Akili and Me* for children of 3 to 6 and *Ubongo Kids* for 7 to 14. Our model of its 2024 work gives **{{result}} years of healthy life per 1,000 dollars**. Almost all of that comes from the shows' very low cost per child. The result is mostly uncertainty, chiefly how much children learn from watching at home and how much of it lasts, and the whole programme is discounted for missing data.
 
 ### What the charity does
 
@@ -19,7 +19,7 @@ The model starts from the households Ubongo counts. We multiply by people per ho
 - **Earnings.** 40% of the gain lasts into adult life, and each standard deviation of adult skill raises earnings 20%: the site's shared figures for poorer countries. The gain is spread over working life and shared with the household, discounted for the 12 years until the children start work.
 - **Who watches enough.** About half the children counted watch regularly, like the surveys' viewers; occasional viewers gain less.
 - **Evidence.** We take 0.55 of the effect: children who choose to watch may differ from those who don't, and small studies overstate effects.
-- **Credit and timing.** Ubongo International's share of the group's and partners' resources, including airtime stations may give, is about 60%. Part of a new gift replaces money large funders would have given anyway. A gift waits about 1.6 years, Ubongo's cash over its spending, before it is spent.
+- **Credit and timing.** Ubongo International's share of the group's and partners' resources, including airtime stations may give, is about 60%. Part of a new gift replaces money large funders would have given anyway. A gift waits about {{row:gift_to_grant_years}} years, Ubongo's cash over its spending, before it is spent.
 
 ### What drives the result
 

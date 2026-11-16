@@ -1,6 +1,6 @@
 ### Summary
 
-Evidence Action installs chlorine dispensers at village water points in Kenya, Uganda and Malawi so families can make their drinking water safe. The Life You Can Save turns Evidence Action's 2024 estimates of children's deaths and diarrhoea cases averted into DALYs, at $817 per DALY in Kenya, $122 in Uganda and $172 in Malawi; valuing the deaths the site's way and adding what the sheet leaves out, that is **<span data-figure="headline" data-model="evidence-action-tlycs-dispensers-for-safe-water">17</span> years of healthy life per 1,000 dollars**.
+Evidence Action installs chlorine dispensers at village water points in Kenya, Uganda and Malawi so families can make their drinking water safe. The Life You Can Save turns Evidence Action's 2024 estimates of children's deaths and diarrhoea cases averted into DALYs, at $817 per DALY in Kenya, $122 in Uganda and $172 in Malawi; valuing the deaths the site's way and adding what the sheet leaves out, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

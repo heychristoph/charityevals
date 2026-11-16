@@ -2,13 +2,13 @@
 
 This is the British Heart Foundation's health and support work in the UK, in the year to 31 March 2026. It covers health information, the Heart Helpline, the Heart Matters magazine, online peer support, CPR training and the national defibrillator network. BHF's research, NHS pilots and policy work are the [main model](/british-heart-foundation-charityevals).
 
-We estimate **<span data-figure="headline" data-model="british-heart-foundation-charityevals-health">0.004</span> years of healthy life per $1,000** you give to this work. About nine tenths of that comes from information and support, the rest from CPR training and defibrillators. BHF measures no outcomes for any of it, so every part is built from research on that kind of work and discounted for missing data.
+We estimate **{{result}} years of healthy life per $1,000** you give to this work. About nine tenths of that comes from information and support, the rest from CPR training and defibrillators. BHF measures no outcomes for any of it, so every part is built from research on that kind of work and discounted for missing data.
 
 ### What the charity does
 
 BHF's health spending was £54.2m. The accounts don't split it by activity, so the shares below are our estimates:
 
-- **Information and support, about 74%.** This covers the health information pages (35 million views), the Heart Matters magazine and printed guides (over 150,000 accessible copies), the nurse-led Heart Helpline (26,000 people), online peer support (9,000 active users a month) and awareness campaigns.
+- **Information and support, about {{row:info_share_of_health}}.** This covers the health information pages (35 million views), the Heart Matters magazine and printed guides (over 150,000 accessible copies), the nurse-led Heart Helpline (26,000 people), online peer support (9,000 active users a month) and awareness campaigns.
 - **CPR and defibrillators, about 15%.** The free RevivR app teaches CPR in about 15 minutes, and 190,000 people completed it in the year. The Circuit is the defibrillator map every UK ambulance service uses to send 999 callers to the nearest device. It lists 118,800 defibrillators.
 - **Policy (about 6%) and NHS implementation pilots (about 5%).** These are modelled in the main model.
 

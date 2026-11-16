@@ -1,6 +1,6 @@
 ### Summary
 
-The Nature Conservancy (TNC) buys and protects land and water, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries in the US and about 80 other countries. Our model of its fiscal year 2025 comes to **<span data-figure="headline" data-model="the-nature-conservancy-charityevals">0.0003</span> years of healthy life per $1,000**.
+The Nature Conservancy (TNC) buys and protects land and water, brokers debt-for-nature deals with governments, and works on clean energy, food systems, fresh water and fisheries in the US and about 80 other countries. Our model of its fiscal year 2025 comes to **{{result}} years of healthy life per $1,000**.
 
 That is low, for two reasons:
 
@@ -71,7 +71,7 @@ The [model](/the-nature-conservancy/the-nature-conservancy-charityevals) follows
 | Clean energy, siting maps | about 30% each |
 | PRANA | about 35% (of the resources behind its own increment, after the fall that India's machinery subsidies and burning bans brought anyway) |
 | Restoration | about 40% |
-| Land bought | about 56% (agencies and other buyers repay the rest) |
+| Land bought | about {{row:land_attribution_share}} (agencies and other buyers repay the rest) |
 
 **The next dollar.** The won deals, rules and policies are a year's spending set against wins that took years to prepare. They read the shared next-dollar slider, like other past averages. Land purchases, restoration, foodscapes and PRANA are bought unit by unit and don't.
 

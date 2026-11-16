@@ -1,6 +1,6 @@
 ### Summary
 
-Ambitious Impact, formerly Charity Entrepreneurship, finds promising ideas for new charities and trains people to found them. Our model of all its programmes in the year to March 2025 comes to **<span data-figure="headline" data-model="ambitious-impact-charityevals">15</span> years of healthy life per $1,000**. Each charity it founds goes on to raise and spend money for years, and the model values that money at what the charities it has launched achieve on this site. The giving organisations and companies it launched are valued by the donations they are expected to move. The figure moves most with the missing-data discount, where funders' money would otherwise have gone, the discount rate and how much the next dollar does compared with the past average.
+Ambitious Impact, formerly Charity Entrepreneurship, finds promising ideas for new charities and trains people to found them. Our model of all its programmes in the year to March 2025 comes to **{{result}} years of healthy life per $1,000**. Each charity it founds goes on to raise and spend money for years, and the model values that money at what the charities it has launched achieve on this site. The giving organisations and companies it launched are valued by the donations they are expected to move. The figure moves most with the missing-data discount, where funders' money would otherwise have gone, the discount rate and how much the next dollar does compared with the past average.
 
 ### What the charity does
 

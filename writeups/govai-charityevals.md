@@ -1,6 +1,6 @@
 ### Summary
 
-The Centre for the Governance of AI (GovAI) researches how governments and AI companies can manage the risks of advanced AI, advises them, and trains people for the field. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="govai-charityevals">1.6</span> years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on our judgment of what the EU's Code of Practice for general-purpose AI does and how much of it is GovAI's. All are deeply uncertain: on the model's own ranges the result runs from about 0.1 to about 16, and wider with the shared assumptions.
+The Centre for the Governance of AI (GovAI) researches how governments and AI companies can manage the risks of advanced AI, advises them, and trains people for the field. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on our judgment of what the EU's Code of Practice for general-purpose AI does and how much of it is GovAI's. All are deeply uncertain: on the model's own ranges the result runs from about 0.1 to about 16, and wider with the shared assumptions.
 
 ### What the charity does
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Helen Keller Intl supports vitamin A supplementation campaigns: a high-dose capsule for every child aged 6–59 months, twice a year. GiveWell models 33 locations, more than for any other top charity, because the benefit depends heavily on how common vitamin A deficiency and child deaths still are in each place. This page shows Togo, the median: **<span data-figure="headline" data-model="helen-keller-vas">7.8</span> years of healthy life per $1,000**; GiveDirectly comes to about <span data-figure="headline" data-model="givedirectly">4.4</span>.
+Helen Keller Intl supports vitamin A supplementation campaigns: a high-dose capsule for every child aged 6–59 months, twice a year. GiveWell models 33 locations, more than for any other top charity, because the benefit depends heavily on how common vitamin A deficiency and child deaths still are in each place. This page shows Togo, the median: **{{result}} years of healthy life per $1,000**; GiveDirectly comes to about {{result:givedirectly}}.
 
 The spread across locations is the widest on the site: from about 2.3 years of healthy life per $1,000 in Anambra, Nigeria, to about 130 in Niger. GiveWell funds the locations at the top of that list. The median describes the evidence base, not where the next dollar goes.
 

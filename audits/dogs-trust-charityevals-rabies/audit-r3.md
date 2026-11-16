@@ -1,7 +1,7 @@
 # Audit: dogs-trust-charityevals-rabies, round 3
 
 Result: 4.834e-4 uov/$ = 0.2417 years of healthy life per $1,000 (combined range 0.041–1.415); global-health median 0.403 (×0.60). Verdict: pass (0 high).
-Model-sha: d9defadcfb9e7407f256b58b88ce56a8789e6dfc4cbeaf4d879e679eb91612fa
+Model-sha: 4415659a3f0bb23ccce3a717ef7e3077b271d863704fd3d6d48061108219a218
 
 Scope: unchanged from round 2 (the "rabies" line, 20% of the 2025 international line, $6.877m; sister model takes the rest). Round 3 checks only the round-2 highs and mediums and what the changes introduced.
 
@@ -44,3 +44,5 @@ What would most improve the model: compute `incidence_ratio` from GHE deaths and
 Findings by severity: high 0, medium 2, low 2.
 
 Re-stamped: mechanical template-rule change (direct-health outcome_total: bridged DALYs inside the side-effect share, as the template now has it); result 0.2417 → 0.2417 healthy years per $1,000.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against df65bca4.

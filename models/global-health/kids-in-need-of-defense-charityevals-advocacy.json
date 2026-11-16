@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "kids-in-need-of-defense",
   "owner": "charityevals",
-  "summary": "KIND's advocacy and communications ($4.2 million in 2024, about $3.6 million a year over 2023-2024 in 2024 prices) are counted as a past average over the period's wins: its share as one of five counsel in the J.O.P. v. DHS settlement (approved November 2024), which keeps thousands of former unaccompanied children's asylum claims with USCIS's asylum officers rather than immigration court, and the District of Columbia's 2024 Vulnerable Youth Guardianship Protection Amendment Act, each valued per status gained as in charityevals' model of KIND's legal services, plus a judged share for wins not modelled one by one. With its next dollar at 67% of the average, it comes to about 0.009 years of healthy life per 1,000 dollars, low because the two wins change the status of only a few hundred people a year and KIND's share of the J.O.P. counsel's resources is small (about a tenth). The result is mostly uncertainty, its own ranges alone spanning over ten thousandfold (the class size, the gain in the chance of asylum, KIND's share of counsel, the wins not modelled), and both wins are discounted by the shared missing-data slider.",
+  "summary": "KIND's advocacy and communications ($4.2 million in 2024, about $3.6 million a year over 2023-2024 in 2024 prices) are counted as a past average over the period's wins: its share as one of five counsel in the J.O.P. v. DHS settlement (approved November 2024), which keeps thousands of former unaccompanied children's asylum claims with USCIS's asylum officers rather than immigration court, and the District of Columbia's 2024 Vulnerable Youth Guardianship Protection Amendment Act, each valued per status gained as in charityevals' model of KIND's legal services, plus a judged share for wins not modelled one by one. With its next dollar at 67% of the average, it comes to about {{result}} years of healthy life per 1,000 dollars, low because the two wins change the status of only a few hundred people a year and KIND's share of the J.O.P. counsel's resources is small (about a tenth). The result is mostly uncertainty, its own ranges alone spanning over ten thousandfold (the class size, the gain in the chance of asylum, KIND's share of counsel, the wins not modelled), and both wins are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Kids in Need of Defense's advocacy and communications",
@@ -191,7 +191,7 @@
       "label": "A year in the US instead of at home, on the log scale",
       "format": "number",
       "formula": "ln(adv_destination_consumption / adv_baseline_consumption)",
-      "explainer": "About 1.5; the wins below value it through the chance of removal, as in the legal-services model."
+      "explainer": "About {{row:ln_gain_per_person_year}}; the wins below value it through the chance of removal, as in the legal-services model."
     },
     {
       "id": "adv_ln_gain_status",
@@ -323,7 +323,7 @@
       "label": "J.O.P.: KIND's share of the resources behind the win",
       "format": "percent",
       "formula": "jop_kind_share_vs_equal / jop_counsel_count",
-      "explainer": "About 10%."
+      "explainer": "About {{row:jop_attribution_share}}."
     },
     {
       "id": "jop_implementation_adj",
@@ -784,7 +784,7 @@
       "label": "Staff pay as a share of the cost",
       "format": "percent",
       "formula": "adv_personnel / adv_2024",
-      "explainer": "KIND's own figure: personnel over the column's spending (76%)."
+      "explainer": "KIND's own figure: personnel over the column's spending ({{row:staff_cost_share}})."
     },
     {
       "id": "salary_gap",

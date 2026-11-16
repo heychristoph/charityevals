@@ -1,6 +1,6 @@
 ### Summary
 
-The Arms Control Association is a Washington DC membership organisation that works to lower the chance of nuclear war through research, its journal Arms Control Today, the press and Congress. Our model of all its work in the year to June 2025 comes to **<span data-figure="headline" data-model="arms-control-association-charityevals">41</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.9 to about 900.
+The Arms Control Association is a Washington DC membership organisation that works to lower the chance of nuclear war through research, its journal Arms Control Today, the press and Congress. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1.9 to about 900.
 
 ### What the charity does
 

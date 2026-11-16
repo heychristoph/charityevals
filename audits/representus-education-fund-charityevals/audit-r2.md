@@ -1,6 +1,6 @@
 # Audit: representus-education-fund-charityevals, round 2
 Result: 2.563e-5 daly/$ = 0.02563 years of healthy life per 1,000 dollars (combined range 0.00174–0.378); cause median 0.0652 (×0.39). Verdict: pass.
-Model-sha: a1d5803bf6bbc362ccf31c02fa1009025d0083a73ba7d1424a6ffad8e3ba75fb
+Model-sha: 3e5d10cb1541130419331d18da5b909b26fbdea9275a03b902bb278a42c15ed5
 Scope: scoped verification of commit 8fb7156 only (the answers to round 1's findings 1 to 6): the three volunteer rows and the three reform denominators of the model, the volunteers rule in two movement facts, the next-dollar note, the write-up's "What isn't modelled", the charity record, and the peer change in protect-democracy-charityevals (audited in its own r10). Nothing else re-audited.
 Mechanical: audit-model lint 0 findings; simulation-check and normalization-audit not re-run (scoped; no checked row kind changed). Working tree clean. Result moved from 0.02645 to 0.02563 (-3.1%), no move above 2x.
 Previous round (r1):
@@ -36,3 +36,5 @@ Unchanged from round 1 (win_years_counted, missing_data_discount, democratizatio
 Verdict: pass (0 high, 0 medium, 1 low).
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against e247896f.

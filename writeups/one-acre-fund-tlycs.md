@@ -1,6 +1,6 @@
 ### Summary
 
-One Acre Fund sells smallholder farmers seed and fertiliser on credit, with training and delivery, and runs farm shops, tree-seedling and extension programmes with governments. The Life You Can Save puts its return at 4.43 dollars of extra farm profit per dollar spent, from One Acre Fund's 2024 figures; valuing that profit as a rise in the household's consumption, that is **<span data-figure="headline" data-model="one-acre-fund-tlycs">7.4</span> years of healthy life per 1,000 dollars**.
+One Acre Fund sells smallholder farmers seed and fertiliser on credit, with training and delivery, and runs farm shops, tree-seedling and extension programmes with governments. The Life You Can Save puts its return at 4.43 dollars of extra farm profit per dollar spent, from One Acre Fund's 2024 figures; valuing that profit as a rise in the household's consumption, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

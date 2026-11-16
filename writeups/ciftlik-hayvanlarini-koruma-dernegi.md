@@ -1,6 +1,6 @@
 ### Summary
 
-Çiftlik Hayvanlarını Koruma Derneği (CHKD) campaigns for cage-free egg commitments from companies in Turkey. ACE's analysis (2024 evaluation, renewed in 2025) works out to **<span data-figure="headline" data-model="ciftlik-hayvanlarini-koruma-dernegi">17</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+Çiftlik Hayvanlarını Koruma Derneği (CHKD) campaigns for cage-free egg commitments from companies in Turkey. ACE's analysis (2024 evaluation, renewed in 2025) works out to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 The model reproduces ACE's intermediate figures (6 calculated rows; the rest are inputs).
 

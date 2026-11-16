@@ -1,6 +1,6 @@
 ### Summary
 
-Dogs Trust rehomes dogs across the UK and Ireland, helps owners with problem behaviour, fosters the dogs of people escaping domestic abuse, campaigns for dog welfare laws and, through its sister charity Worldwide Veterinary Service (WVS), treats, neuters and vaccinates dogs overseas. Our model of everything but rabies control comes to **<span data-figure="headline" data-model="dogs-trust-charityevals">0.00005</span> years of healthy life per $1,000**: care for one dog at a time reaches few animals per dollar. Its rabies vaccination, modelled separately, comes to **<span data-figure="headline" data-model="dogs-trust-charityevals-rabies">0.5</span> years of healthy life per $1,000**, by preventing human deaths.
+Dogs Trust rehomes dogs across the UK and Ireland, helps owners with problem behaviour, fosters the dogs of people escaping domestic abuse, campaigns for dog welfare laws and, through its sister charity Worldwide Veterinary Service (WVS), treats, neuters and vaccinates dogs overseas. Our model of everything but rabies control comes to **{{result}} years of healthy life per $1,000**: care for one dog at a time reaches few animals per dollar. Its rabies vaccination, modelled separately, comes to **{{result:dogs-trust-charityevals-rabies}} years of healthy life per $1,000**, by preventing human deaths.
 
 ### What the charity does
 

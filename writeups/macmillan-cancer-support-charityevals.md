@@ -1,6 +1,6 @@
 ### Summary
 
-Macmillan Cancer Support is the UK's largest cancer support charity. Our model of all its charitable work in 2025 comes to **<span data-figure="headline" data-model="macmillan-cancer-support-charityevals">0.002</span> years of healthy life per $1,000**.
+Macmillan Cancer Support is the UK's largest cancer support charity. Our model of all its charitable work in 2025 comes to **{{result}} years of healthy life per $1,000**.
 
 The result is low because of what the help is. Most people get light support: a call or two to the Support Line, or reading the Online Community and the website. They already have NHS care. The biggest gain in money is the welfare benefits Macmillan's advisers help people claim, identified at about £8,500 a year for each of 13,200 households, of which we count about £5,100 as awarded. That money is paid by other UK taxpayers, who are only somewhat richer than the claimants, so on the site's log-income scale the net gain is about a third of the claimants' own gain. Over two thirds of the result comes from welfare rights, net of that cost, and about a tenth from grants. Every branch but the grants (audited money paid) is counted at half (the site's shared slider for results nobody measured), since none of Macmillan's services has a controlled evaluation.
 

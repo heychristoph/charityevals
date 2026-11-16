@@ -1,6 +1,6 @@
 ### Summary
 
-Unlimit Health, called the SCI Foundation (Schistosomiasis Control Initiative) until 2023, helps governments in sub-Saharan Africa treat children and adults for schistosomiasis and soil-transmitted worms. SoGive's 2022 analysis of its deworming work, the only public cost-effectiveness model of it we have, comes to **<span data-figure="headline" data-model="unlimit-health-deworming-sogive-2022">10</span> years of healthy life per $1,000**.
+Unlimit Health, called the SCI Foundation (Schistosomiasis Control Initiative) until 2023, helps governments in sub-Saharan Africa treat children and adults for schistosomiasis and soil-transmitted worms. SoGive's 2022 analysis of its deworming work, the only public cost-effectiveness model of it we have, comes to **{{result}} years of healthy life per $1,000**.
 
 That is SoGive's figure on our scale; SoGive's own figure is £37 per year of doubled consumption. Almost all of the value comes from higher adult earnings decades after treatment, and SoGive trusts that link much less than GiveWell does.
 

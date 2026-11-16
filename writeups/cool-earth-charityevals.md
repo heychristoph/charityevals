@@ -1,6 +1,6 @@
 ### Summary
 
-Cool Earth backs Indigenous and local communities in Peru, Papua New Guinea and Cameroon to keep their rainforest standing, mostly with cash given directly to households and community committees. Our model of its year to 31 January 2026 comes to **<span data-figure="headline" data-model="cool-earth-charityevals">0.11</span> years of healthy life per $1,000**.
+Cool Earth backs Indigenous and local communities in Peru, Papua New Guinea and Cameroon to keep their rainforest standing, mostly with cash given directly to households and community committees. Our model of its year to 31 January 2026 comes to **{{result}} years of healthy life per $1,000**.
 
 Almost all of it is the cash, not the forest:
 

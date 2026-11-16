@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "campaign-legal-center",
   "owner": "charityevals",
-  "summary": "The Campaign Legal Center, a nonpartisan legal organisation in Washington (its 501(c)(4), Campaign Legal Center Action, is left out: gifts to it aren't tax-deductible), spent $21.5 million in 2025 on litigation and advocacy for voting rights, fair maps, campaign finance law and ethics, and against the administration's executive order on elections. Two branches: its direct work against a slide (about a third of its spending), 0.29% of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up (nearly half of the result); and the rest, its voting-rights, redistricting, campaign-finance and ethics work, counted as reform work only at the figures the Brennan Center model uses for reforms within a democracy. With its next dollar at 36% of the average (it holds about 19 months of spending available), it comes to about 0.014 years of healthy life per 1,000 dollars. The result is mostly judgment (the years a win counts, the field's effect on the breakdown risk, how much a reform dollar does against a redistricting dollar, the split of its spending between the branches), and both branches are discounted by the shared missing-data slider.",
+  "summary": "The Campaign Legal Center, a nonpartisan legal organisation in Washington (its 501(c)(4), Campaign Legal Center Action, is left out: gifts to it aren't tax-deductible), spent $21.5 million in 2025 on litigation and advocacy for voting rights, fair maps, campaign finance law and ethics, and against the administration's executive order on elections. Two branches: its direct work against a slide (about a third of its spending), 0.29% of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (the shared 11%, cut by about a twentieth), valued by the income a slide would cost as it builds up (nearly half of the result); and the rest, its voting-rights, redistricting, campaign-finance and ethics work, counted as reform work only at the figures the Brennan Center model uses for reforms within a democracy. With its next dollar at 36% of the average (it holds about 19 months of spending available), it comes to about {{result}} years of healthy life per 1,000 dollars. The result is mostly judgment (the years a win counts, the field's effect on the breakdown risk, how much a reform dollar does against a redistricting dollar, the split of its spending between the branches), and both branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Campaign Legal Center",
@@ -459,7 +459,7 @@
       "format": "number",
       "formula": "(1 - (1 + dem_rate) ^ (0 - years_of_impact)) * (1 - (1 + dem_rate) ^ (0 - dem_ramp_years)) / (ln(1 + dem_rate) * ln(1 + dem_rate) * dem_ramp_years) * dem_wait_discount",
       "unit": "years",
-      "explainer": "The family's shifted ramp: a slide's loss builds evenly over dem_ramp_years; putting the slide off by the years counted ($win_years_counted) moves the whole ramp later, so the loss avoided rises to a fifth of the full loss over the first five years, stays there until the ramp is complete and falls back to nothing five years later, years_of_impact full-loss years in all before discounting. Its present value (continuous form) at dem_rate, times the wait at the shared rate: about 1.5 full-loss years at the defaults."
+      "explainer": "The family's shifted ramp: a slide's loss builds evenly over dem_ramp_years; putting the slide off by the years counted ($win_years_counted) moves the whole ramp later, so the loss avoided rises to a fifth of the full loss over the first five years, stays there until the ramp is complete and falls back to nothing five years later, years_of_impact full-loss years in all before discounting. Its present value (continuous form) at dem_rate, times the wait at the shared rate: about {{row:dem_loss_years}} full-loss years at the defaults."
     },
     {
       "id": "dem_uov",
@@ -507,7 +507,7 @@
       "label": "The Campaign Legal Center's share of the field's resources",
       "format": "percent",
       "formula": "dem_slide_cost / dem_field_spending",
-      "explainer": "Its direct cost (dem_slide_cost) over the field's effect-weighted resources (Convention 2, the same denominator as the other models of the field): about 0.29%. Only direct work against a slide counts here; its reform work is valued in the reform branch alone."
+      "explainer": "Its direct cost (dem_slide_cost) over the field's effect-weighted resources (Convention 2, the same denominator as the other models of the field): about {{row:dem_attribution_share}}. Only direct work against a slide counts here; its reform work is valued in the reform branch alone."
     },
     {
       "id": "dem_evidence_adj",
@@ -1092,7 +1092,7 @@
       "label": "Staff pay as a share of cost",
       "format": "percent",
       "formula": "staff_pay / (total_expenses - donated_services)",
-      "explainer": "The Campaign Legal Center's own figure (Convention 1): salaries and benefits over cash spending (77%)."
+      "explainer": "The Campaign Legal Center's own figure (Convention 1): salaries and benefits over cash spending ({{row:staff_cost_share}})."
     },
     {
       "id": "salary_gap",

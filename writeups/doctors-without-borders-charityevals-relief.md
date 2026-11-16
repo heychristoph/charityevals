@@ -1,6 +1,6 @@
 ### Summary
 
-Besides medical care, Médecins Sans Frontières hands out relief items to displaced families (653,300 families in 2025) and runs search and rescue in the Mediterranean. We estimate **<span data-figure="headline" data-model="doctors-without-borders-charityevals-relief">0.70</span> years of healthy life per $1,000** for this work, about 1.7% of MSF's programme spending. The result is mostly uncertainty: MSF doesn't publish what the distributions cost or how many people it rescued in 2025 beyond the first week's press reports, and no study measures how many deaths household items avert, so both branches are counted at half by the site's shared missing-data slider. MSF's main model, its medical care, is [here](/doctors-without-borders/doctors-without-borders-charityevals).
+Besides medical care, Médecins Sans Frontières hands out relief items to displaced families (653,300 families in 2025) and runs search and rescue in the Mediterranean. We estimate **{{result}} years of healthy life per $1,000** for this work, about 1.7% of MSF's programme spending. The result is mostly uncertainty: MSF doesn't publish what the distributions cost or how many people it rescued in 2025 beyond the first week's press reports, and no study measures how many deaths household items avert, so both branches are counted at half by the site's shared missing-data slider. MSF's main model, its medical care, is [here](/doctors-without-borders/doctors-without-borders-charityevals).
 
 ### How the model works
 

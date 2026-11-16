@@ -1,6 +1,6 @@
 # Audit: one-for-the-world-charityevals, round 4 (scoped verification of the round-3 fixes)
 Result: 0.02566 uov/$ = 12.83 years of healthy life per 1,000 dollars (combined range 2.43–67.7); cause median 0.06519 (x197). Verdict: pass.
-Model-sha: 953ba025202551ebfa9af69c1342e779136db5e12f8757b6a43542c5a6a40469
+Model-sha: 265b670380819eef3c8b4ea0508b606ba50240b1f34e9716c7e4bd593835bbab
 Scope: only the five round-3 fixes (new_pledge_size_adj, recurring_share explainer, corporate_pledge_moved, cohort_years_giving explainer, the summary and write-up driver lists) and the numbers in the summary, those explainers and the write-up. Everything else is as audited in rounds 2 and 3.
 Mechanical: audit-model reports 0 findings and no invariant violations; result 12.83 years per $1,000 (the summary's "about 13"). Row values recomputed with the engine (script in the scratchpad): new_pledge_size_adj 0.95, yearly_gift_per_pledger $1,074, active_pledger_years 828.7, pledge_persistence_years 6.23, pledge_moved $323.5K, corporate_pledge_moved $151.3K (= 55,000 x recording_adj x 6.23 x 0.5 x 1.65 x 0.5), oneoff_moved $248.8K, money_moved $723.6K, moved_per_dollar 0.955, cost_total $758,075.
 Previous round (round 3):
@@ -44,3 +44,5 @@ Re-stamped (orchestrator, 14 Nov 2026): this round's summary low fixed (pledgers
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline unchanged, against e247896f.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against a8d130f3.

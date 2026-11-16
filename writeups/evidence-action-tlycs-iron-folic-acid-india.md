@@ -1,6 +1,6 @@
 ### Summary
 
-Evidence Action helps Indian states give school-aged children and adolescents a weekly iron and folic acid tablet to prevent anaemia. The Life You Can Save counts the anaemia cases and deaths Evidence Action estimates it averted in 2024, at $70 per DALY; valuing the deaths the site's way and adding the later gains of less anaemia, that is **<span data-figure="headline" data-model="evidence-action-tlycs-iron-folic-acid-india">14</span> years of healthy life per 1,000 dollars**.
+Evidence Action helps Indian states give school-aged children and adolescents a weekly iron and folic acid tablet to prevent anaemia. The Life You Can Save counts the anaemia cases and deaths Evidence Action estimates it averted in 2024, at $70 per DALY; valuing the deaths the site's way and adding the later gains of less anaemia, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

@@ -1,6 +1,6 @@
 # Audit: no-means-no-worldwide-charityevals, round 3 (scoped verification of the round-2 fixes)
 Result: 2.002e-4 uov/$ = 0.1001 years of healthy life per 1,000 dollars (combined range 0.015–0.665); cause median 0.0688 (×1.455). Verdict: pass.
-Model-sha: eb88a2b5ddd9b51fe19ad8acfdd6cdf5cb3ad9d6c8bb3296c63c569db5e6fe72
+Model-sha: cfc7fb33cdf082a6c17b12644685ab3479dd66d0557a834f3d594594116a785f
 Scope: only the changes in commit 9ff8fd19 (new fact anxiety_mild, rows ptsd_mild_share / ptsd_severe_share / ptsd_disability_weight, assault_rate explainer and quote, others_cost_per_youth wage label, summary and write-up numbers). Nothing else re-audited.
 Mechanical: audit-model lint 0 high / 0 medium / 1 low (spread, already answered in the summary); check.ts all valid; simulation-check stable (5% 0.122×, 50% 1×, 95% 6.56× the best guess).
 
@@ -24,3 +24,5 @@ Arithmetic checked:
 | 2 | low | source | `assault_rate` | The source's `page` label names the table's columns but not "Table 2" (round 2 asked for it). | Source block. | Add "Table 2". | none |
 
 Counts: 0 high, 0 medium, 2 low. Round 2's two mediums are resolved (finding 1 downgraded to a residual low).
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 94da5a14.

@@ -1,6 +1,6 @@
 ### Summary
 
-The Woodland Trust is the UK's largest woodland conservation charity: it plants trees, restores damaged woodland and campaigns to protect ancient woods. SoGive estimated from its 2019 annual report that its tree planting takes up a tonne of CO₂ for over £2.14. Counting all three of its woodland projects, SoGive's own caveats on survival and permanence, and the decades the trees take to grow, that is **<span data-figure="headline" data-model="woodland-trust-sogive">0.0014</span> years of healthy life per $1,000** on our scale.
+The Woodland Trust is the UK's largest woodland conservation charity: it plants trees, restores damaged woodland and campaigns to protect ancient woods. SoGive estimated from its 2019 annual report that its tree planting takes up a tonne of CO₂ for over £2.14. Counting all three of its woodland projects, SoGive's own caveats on survival and permanence, and the decades the trees take to grow, that is **{{result}} years of healthy life per $1,000** on our scale.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £2.14 and its £7.40 for restoration. SoGive rates the Woodland Trust "Not Recommended (tentative)".
 

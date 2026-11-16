@@ -1,6 +1,6 @@
 ### Summary
 
-Kids in Need of Defense (KIND) gives unaccompanied migrant children free lawyers in US immigration proceedings and supports children on the move in Mexico, Central America and Europe. Our model of its legal services and regional work in 2024 comes to **<span data-figure="headline" data-model="kids-in-need-of-defense-charityevals">0.013</span> years of healthy life per 1,000 dollars**. Its advocacy, modelled separately, comes to **<span data-figure="headline" data-model="kids-in-need-of-defense-charityevals-advocacy">0.009</span>**.
+Kids in Need of Defense (KIND) gives unaccompanied migrant children free lawyers in US immigration proceedings and supports children on the move in Mexico, Central America and Europe. Our model of its legal services and regional work in 2024 comes to **{{result}} years of healthy life per 1,000 dollars**. Its advocacy, modelled separately, comes to **{{result:kids-in-need-of-defense-charityevals-advocacy}}**.
 
 ### What the charity does
 

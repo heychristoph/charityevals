@@ -1,6 +1,6 @@
 ### Summary
 
-The RNLI runs lifeboats, beach lifeguards and water-safety campaigns around the coasts of the UK and Ireland, crewed mostly by volunteers. SoGive estimated from its 2019 annual report that it spent over £420,000 of direct costs per life saved, and closer to £500,000 with overheads. That is an average over the RNLI's whole service, and the next dollar saves fewer lives; counting it at half the average (the default under Your values), on our scale that is **<span data-figure="headline" data-model="royal-national-lifeboat-institution-sogive">0.029</span> years of healthy life per $1,000**.
+The RNLI runs lifeboats, beach lifeguards and water-safety campaigns around the coasts of the UK and Ireland, crewed mostly by volunteers. SoGive estimated from its 2019 annual report that it spent over £420,000 of direct costs per life saved, and closer to £500,000 with overheads. That is an average over the RNLI's whole service, and the next dollar saves fewer lives; counting it at half the average (the default under Your values), on our scale that is **{{result}} years of healthy life per $1,000**.
 
 SoGive publishes no spreadsheet; the model is built from the figures in SoGive's analysis, each quoted on its row, and reproduces its £420,000. SoGive rates the RNLI "Not Recommended (firm)".
 

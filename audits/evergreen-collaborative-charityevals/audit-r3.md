@@ -1,6 +1,6 @@
 # Audit: evergreen-collaborative-charityevals, round 3 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.02179 t CO₂e/$ = -0.006390 years of healthy life per $1,000 (combined range -0.2047 to -1.995e-4), against 0.0035 after the non-death change (sign change). Verdict: pass.
-Model-sha: fe625949471ce9c1b0a9b62da6f2495da535fd4bcb55effb0054a22c3c337f8f
+Model-sha: defcff712ffcaddb372a11843d375d7e02c5bc5fbf7ae578e403cca259baae18
 Scope: the rows added or changed by commit 7e73f6cd: ira_public_usd_per_year, ira_public_cost_uov, uov_counted_per_year, the bridge row (0.6 side-effect form), the summary and the write-up headline sentence. Programmes and sources of earlier rounds not re-audited.
 Mechanical: audit-model exit 0, "Findings (0)"; check.ts all valid.
 Previous round: round 2's findings are not re-examined.
@@ -21,4 +21,6 @@ Previous round: round 2's findings are not re-examined.
 The law's cost per tonne against the tonnes' value; Evergreen's attribution share scales both and cancels in the sign.
 
 Verdict: pass (no high or medium finding; one low).
-Model-sha: fe625949471ce9c1b0a9b62da6f2495da535fd4bcb55effb0054a22c3c337f8f
+Model-sha: defcff712ffcaddb372a11843d375d7e02c5bc5fbf7ae578e403cca259baae18
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2492e3fc.

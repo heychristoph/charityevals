@@ -10,7 +10,7 @@
   "estimate_basis": "past_average",
   "charity": "economic-security-project",
   "owner": "charityevals",
-  "summary": "Economic Security Project's 501(c)(3), a US non-profit spending about $10 million a year, campaigns for state child and earned income tax credits, guaranteed income, the IRS's free Direct File service and public options such as city-run grocery stores. Its average year of spending over 2022-2024 is counted against a share of the $3.6 billion a year of state tax credits enacted in those years (15% caused by advocates, 13% of the advocates' resources its own), valued for lower-income families net of what the credits cost state taxpayers; guaranteed income pilots, Direct File (whose $73 million cost to taxpayers outweighs what it gave its users) and a planned public grocery store in Chicago add little. With its next dollar at 42% of the average, it comes to about 0.07 years of healthy life per 1,000 dollars. The result is mostly uncertainty: how much of the credits the advocates caused and Economic Security Project's share of them are judgments from the research on advocacy, and every branch is discounted by the shared missing-data slider.",
+  "summary": "Economic Security Project's 501(c)(3), a US non-profit spending about $10 million a year, campaigns for state child and earned income tax credits, guaranteed income, the IRS's free Direct File service and public options such as city-run grocery stores. Its average year of spending over 2022-2024 is counted against a share of the $3.6 billion a year of state tax credits enacted in those years (15% caused by advocates, 13% of the advocates' resources its own), valued for lower-income families net of what the credits cost state taxpayers; guaranteed income pilots, Direct File (whose $73 million cost to taxpayers outweighs what it gave its users) and a planned public grocery store in Chicago add little. With its next dollar at 42% of the average, it comes to about {{result}} years of healthy life per 1,000 dollars. The result is mostly uncertainty: how much of the credits the advocates caused and Economic Security Project's share of them are judgments from the research on advocacy, and every branch is discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Economic Security Project (501(c)(3)), 2022-2024",
@@ -339,7 +339,7 @@
       "label": "State tax credits: average yearly credit per household (US$)",
       "format": "usd",
       "formula": "ctc_dollars_all / ctc_households",
-      "explainer": "About $1,500 a household a year."
+      "explainer": "About {{row:ctc_credit_per_household}} a household a year."
     },
     {
       "id": "ctc_one_parent_share",
@@ -360,7 +360,7 @@
       "label": "State tax credits: people in a recipient household",
       "format": "number",
       "formula": "ctc_one_parent_share * @household_size.united_states_one_parent_with_children + (1 - ctc_one_parent_share) * @household_size.united_states_married_with_children_6_17",
-      "explainer": "The shared US household sizes of one-parent families (3.0) and couples with children (4.2), weighted: about 3.6."
+      "explainer": "The shared US household sizes of one-parent families (3.0) and couples with children (4.2), weighted: about {{row:ctc_household_size}}."
     },
     {
       "id": "ctc_credit_per_person",
@@ -809,7 +809,7 @@
       "label": "Guaranteed income pilots: ln(consumption) gain per person per year of payments",
       "format": "number",
       "formula": "ln(1 + gi_payment_per_person / gi_baseline_consumption)",
-      "explainer": "About 0.22. The large-pilot employment fall (-3 points, the paper's Table 3) takes a little of the gain, in gi_evidence_adj."
+      "explainer": "About {{row:gi_gross_ln_per_person_year}}. The large-pilot employment fall (-3 points, the paper's Table 3) takes a little of the gain, in gi_evidence_adj."
     },
     {
       "id": "gi_alt_use_share",
@@ -1428,7 +1428,7 @@
       "label": "Staff pay as a share of total expenses",
       "format": "percent",
       "formula": "salaries_2024 / expenses_2024",
-      "explainer": "Its own figure (54%) in place of the shared default (Convention 1)."
+      "explainer": "Its own figure ({{row:staff_cost_share}}) in place of the shared default (Convention 1)."
     },
     {
       "id": "salary_gap",

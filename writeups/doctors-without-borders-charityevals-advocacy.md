@@ -1,6 +1,6 @@
 ### Summary
 
-Besides medical care, Médecins Sans Frontières spends about 65 million euros a year on awareness-raising (public communications and witnessing, *témoignage*), MSF Access (advocacy for affordable medicines and tests) and a grant to the Drugs for Neglected Diseases initiative (DNDi), which it co-founded. We estimate **<span data-figure="headline" data-model="doctors-without-borders-charityevals-advocacy">0.064</span> years of healthy life per $1,000** for this work, 3.3% of MSF's social-mission spending. None of the three publishes outcome data, so each is built from the research on its kind of work, with wide ranges, and counted at half by the site's shared missing-data slider. MSF's main model, its medical care, is [here](/doctors-without-borders/doctors-without-borders-charityevals).
+Besides medical care, Médecins Sans Frontières spends about 65 million euros a year on awareness-raising (public communications and witnessing, *témoignage*), MSF Access (advocacy for affordable medicines and tests) and a grant to the Drugs for Neglected Diseases initiative (DNDi), which it co-founded. We estimate **{{result}} years of healthy life per $1,000** for this work, 3.3% of MSF's social-mission spending. None of the three publishes outcome data, so each is built from the research on its kind of work, with wide ranges, and counted at half by the site's shared missing-data slider. MSF's main model, its medical care, is [here](/doctors-without-borders/doctors-without-borders-charityevals).
 
 ### How the model works
 

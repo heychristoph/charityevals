@@ -1,6 +1,6 @@
 ### Summary
 
-World Spine Care runs clinics that give free physiotherapy and chiropractic care for back and neck pain in low- and middle-income countries. The Happier Lives Institute's rough estimate is 15 to 21 WELLBYs per $1,000; at the middle of its cost range that is **<span data-figure="headline" data-model="world-spine-care-hli">1.1</span> years of healthy life per $1,000** on our scale.
+World Spine Care runs clinics that give free physiotherapy and chiropractic care for back and neck pain in low- and middle-income countries. The Happier Lives Institute's rough estimate is 15 to 21 WELLBYs per $1,000; at the middle of its cost range that is **{{result}} years of healthy life per $1,000** on our scale.
 
 HLI publishes no spreadsheet for this estimate. The model is built from the figures in HLI's report, each quoted on its row, and reproduces HLI's 0.92 WELLBYs per patient and its 15 to 21 at the two ends of its cost range.
 

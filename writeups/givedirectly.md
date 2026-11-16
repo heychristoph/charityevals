@@ -1,6 +1,6 @@
 ### Summary
 
-GiveDirectly sends about $1,000 by mobile money to each poor household it enrols in East Africa, with no conditions. GiveWell's January 2025 model of its Cash for Poverty Relief program, the one the rankings use, comes to **<span data-figure="headline" data-model="givedirectly-cash-poverty-relief-2024">5.5</span> years of healthy life per $1,000**. GiveWell's earlier model of the Kenya program, which we rebuilt row by row and describe below, comes to <span data-figure="headline" data-model="givedirectly">4.4</span>.
+GiveDirectly sends about $1,000 by mobile money to each poor household it enrols in East Africa, with no conditions. GiveWell's January 2025 model of its Cash for Poverty Relief program, the one the rankings use, comes to **{{result:givedirectly-cash-poverty-relief-2024}} years of healthy life per $1,000**. GiveWell's earlier model of the Kenya program, which we rebuilt row by row and describe below, comes to {{result}}.
 
 Our adjustments barely move either: most of GiveDirectly's cost is the transfers themselves, so the staff-pay adjustment has little to act on. The plausible range is wide, almost entirely because of GiveWell's own uncertainty about spillovers and long-run returns.
 

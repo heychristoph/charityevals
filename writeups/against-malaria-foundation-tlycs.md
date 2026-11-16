@@ -1,6 +1,6 @@
 ### Summary
 
-The Against Malaria Foundation (AMF) pays for insecticide-treated bednets handed out in mass campaigns run by governments and partners. The Life You Can Save estimates $93 per DALY averted in the DRC, $50 in Nigeria and $85 in South Sudan from AMF's 2024 distributions; pooled by money, valuing each death averted by age and discounting the nets' later years, that is **<span data-figure="headline" data-model="against-malaria-foundation-tlycs">17</span> years of healthy life per 1,000 dollars**.
+The Against Malaria Foundation (AMF) pays for insecticide-treated bednets handed out in mass campaigns run by governments and partners. The Life You Can Save estimates $93 per DALY averted in the DRC, $50 in Nigeria and $85 in South Sudan from AMF's 2024 distributions; pooled by money, valuing each death averted by age and discounting the nets' later years, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of The Life You Can Save's sheet. The Life You Can Save calls its figures highly approximate.
 

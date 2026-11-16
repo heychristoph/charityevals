@@ -1,6 +1,6 @@
 # Verification round (scoped)
 Result: 3.213 ced/$ = 0.000353451 years of healthy life per $1,000 (was 0.000350880). Verdict: **pass**
-Model-sha: 4060abeeb5136f4622d128a162dfae2c0ba3fb6ad92167875d12ad23208d0792
+Model-sha: b86cce395c274c334dca7c1c605e90e644ff61fc577701155c1dfc0df2275dad
 Scope: the stock deduction (member_switches_in_count replaces owaacc_hens), uk_switches_in_count read from facts/the_humane_league.json, the new facts file, the write-up's double-counting bullet and summary.
 Mechanical: audit-model 0 findings; scripts/check.ts "all models valid".
 
@@ -18,3 +18,5 @@ Mechanical: audit-model 0 findings; scripts/check.ts "all models valid".
 Re-stamped (15 Nov 2026): this round's low findings fixed in explainers, write-ups and the egg-share fact's wording; no value changed.
 
 Re-stamped (16 Nov 2026): pre-audit cleanup: shared facts read (US layers, preemption chance, market leakage, evaluator side effects), reference classes named, ranges widened where evidence is thin; headline unchanged. Mechanical: headline unchanged, against 9d3d36e4.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1b0eb29e.

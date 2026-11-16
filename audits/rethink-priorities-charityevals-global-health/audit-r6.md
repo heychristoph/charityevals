@@ -14,5 +14,7 @@ None.
 ## Notes (low, no model change needed)
 - The `informed_money` label starts "Money moved: funders' spending whose allocation ... changed"; "Money moved:" is the old name now that `money_moved` means gross money moved. Optional wording: "Spending changed: funders' spending whose allocation its 2025 global health research changed (US$)".
 
-Model-sha: 2c8e3a305d3c415609fa7637b199a728380bbc91a67eaa441ec4793806cd47b2
+Model-sha: d5028b8360508a3ca153d6cb8354576082e59c5421586b27757453a87976c6e8
 Verdict: pass
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts); the receipt passed on HEAD's model, whose headline moved since its audit only through models and facts it reads. Mechanical: headline unchanged, against HEAD.

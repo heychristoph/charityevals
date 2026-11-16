@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "samaritans-purse",
   "owner": "charityevals",
-  "summary": "Samaritan's Purse, an evangelical relief charity, spent $1.15 billion on its ministries in 2025 (audited accounts): $490 million on Operation Christmas Child's 10.9 million shoebox gifts to children abroad, $295 million on food, water, shelter and health care in crises abroad (Sudan, South Sudan, the DRC, Gaza, Ukraine, Myanmar, Jamaica), $185 million on US disaster relief and rebuilding, $72 million on mission hospitals and field hospitals, and $103 million on Christian education and other faith work, which the site's scale gives no value beyond its material aid. The result, about 0.05 years of healthy life per 1,000 dollars: almost all of it is goods valued as consumption (about four months of food rations a person abroad, half of them outside famine settings, and the shoeboxes' contents at about a third of their US retail value), with few deaths averted; US rebuilding counts little because a few thousand dollars means little to a US household and most of its Helene money waits years to be spent. Every branch is built from spending, Samaritan's Purse's own counts and judged costs, and discounted for missing data; the biggest uncertainties are that discount, the shoeboxes' worth to the children and the cost per person of the relief.",
+  "summary": "Samaritan's Purse, an evangelical relief charity, spent $1.15 billion on its ministries in 2025 (audited accounts): $490 million on Operation Christmas Child's 10.9 million shoebox gifts to children abroad, $295 million on food, water, shelter and health care in crises abroad (Sudan, South Sudan, the DRC, Gaza, Ukraine, Myanmar, Jamaica), $185 million on US disaster relief and rebuilding, $72 million on mission hospitals and field hospitals, and $103 million on Christian education and other faith work, which the site's scale gives no value beyond its material aid. The result, about {{result}} years of healthy life per 1,000 dollars: almost all of it is goods valued as consumption (about four months of food rations a person abroad, half of them outside famine settings, and the shoeboxes' contents at about a third of their US retail value), with few deaths averted; US rebuilding counts little because a few thousand dollars means little to a US household and most of its Helene money waits years to be spent. Every branch is built from spending, Samaritan's Purse's own counts and judged costs, and discounted for missing data; the biggest uncertainties are that discount, the shoeboxes' worth to the children and the cost per person of the relief.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Samaritan's Purse",
@@ -573,7 +573,7 @@
       "label": "Food delivered per person, at local prices (2024 US$)",
       "format": "usd",
       "formula": "food_kg_per_person * food_price_per_kg * @cpi.usa_2024 / @cpi.usa_2025",
-      "explainer": "About $41 in 2024 prices, the price year of the consumption figures; the rest of the cost per person is transport, storage, staff and the health, water and livelihood work around the food."
+      "explainer": "About {{row:value_delivered_per_person}} in 2024 prices, the price year of the consumption figures; the rest of the cost per person is transport, storage, staff and the health, water and livelihood work around the food."
     },
     {
       "id": "cons_ken",
@@ -781,7 +781,7 @@
       "label": "Value delivered per US household (2024 US$)",
       "format": "usd",
       "formula": "us_spend * us_value_share / us_households * @cpi.usa_2024 / @cpi.usa_2025",
-      "explainer": "About $10,000 a household: a mucked-out house is a few thousand dollars of work, a rebuilt home $150,000 or more."
+      "explainer": "About {{row:us_value_per_household}} a household: a mucked-out house is a few thousand dollars of work, a rebuilt home $150,000 or more."
     },
     {
       "id": "us_years",
@@ -1760,7 +1760,7 @@
       "format": "number",
       "formula": "avg(us_restricted_end, us_restricted_start) / us_spend",
       "unit": "years",
-      "explainer": "Unspent restricted funds over a year's spending: about 3.4 years, the Helene money being spent over several years of rebuilding."
+      "explainer": "Unspent restricted funds over a year's spending: about {{row:us_gift_to_grant_years}} years, the Helene money being spent over several years of rebuilding."
     },
     {
       "id": "us_wait_discount",
@@ -2377,7 +2377,7 @@
       "label": "Staff pay as a share of cost",
       "format": "percent",
       "formula": "employment_cost / total_expenses",
-      "explainer": "Employment over total expenses from the financials (Convention 1), about 22%."
+      "explainer": "Employment over total expenses from the financials (Convention 1), about {{row:staff_cost_share}}."
     },
     {
       "id": "salary_gap",

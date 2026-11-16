@@ -1,8 +1,8 @@
 ### Summary
 
-Boys & Girls Clubs of America (BGCA) is the national organisation of about 1,000 local Club organisations, which run nearly 5,500 Clubs (in schools, stand-alone buildings, public housing, on Native lands and on military bases) for 1.6 million members aged 5 to 18, and reach 2.57 million more children through outreach. Our estimate for BGCA's programme spending in 2025 is **<span data-figure="headline" data-model="boys-girls-clubs-of-america-charityevals">0.029</span> years of healthy life per $1,000** (from about 0.002 to 0.5 with every range combined).
+Boys & Girls Clubs of America (BGCA) is the national organisation of about 1,000 local Club organisations, which run nearly 5,500 Clubs (in schools, stand-alone buildings, public housing, on Native lands and on military bases) for 1.6 million members aged 5 to 18, and reach 2.57 million more children through outreach. Our estimate for BGCA's programme spending in 2025 is **{{result}} years of healthy life per $1,000** (from about 0.002 to 0.5 with every range combined).
 
-That is low because the help goes to US families, who consume around $24,000 a person a year: on the site's one log-income scale a dollar does far less for them than for a household living on a few dollars a day, and a year at a Club costs about $1,700. No controlled evaluation of Club membership exists, so the model is built from the research on after-school programmes and counts at the site's missing-data slider (default 50%).
+That is low because the help goes to US families, who consume around {{row:baseline_consumption}} a person a year: on the site's one log-income scale a dollar does far less for them than for a household living on a few dollars a day, and a year at a Club costs about $1,700. No controlled evaluation of Club membership exists, so the model is built from the research on after-school programmes and counts at the site's missing-data slider (default 50%).
 
 ### What the charity does
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Carbon180 is a US non-profit that writes and campaigns for federal policy to scale up carbon removal: pulling CO₂ out of the air and storing it. Our model counts the federal programmes it worked on that were won or defended between 2020 and 2025, against what it spent over those years. It comes to **<span data-figure="headline" data-model="carbon180-charityevals">−0.003</span> years of healthy life per $1,000**, a net harm: the tonnes come with public money (tax credits of $85 and $180 a tonne, grants, farm and forest money) that costs US taxpayers more than the tonnes are worth on the site's scale. Direct air capture is still small and costly, each win is shared with many groups, companies and what Congress would have done anyway, and the next dollar mostly defends wins already made.
+Carbon180 is a US non-profit that writes and campaigns for federal policy to scale up carbon removal: pulling CO₂ out of the air and storing it. Our model counts the federal programmes it worked on that were won or defended between 2020 and 2025, against what it spent over those years. It comes to **{{result}} years of healthy life per $1,000**, a net harm: the tonnes come with public money (tax credits of $85 and $180 a tonne, grants, farm and forest money) that costs US taxpayers more than the tonnes are worth on the site's scale. Direct air capture is still small and costly, each win is shared with many groups, companies and what Congress would have done anyway, and the next dollar mostly defends wins already made.
 
 ### What the charity does
 

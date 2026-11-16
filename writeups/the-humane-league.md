@@ -1,6 +1,6 @@
 ### Summary
 
-The Humane League (THL) gets food companies to honour the cage-free and broiler-welfare pledges they have already made, by tracking progress publicly and campaigning against laggards. ACE's 2025 analysis covers two accountability programs, one global cage-free and one for Better Chicken Commitment pledges in the UK and EU. In our view it comes to **<span data-figure="headline" data-model="the-humane-league">120</span> years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
+The Humane League (THL) gets food companies to honour the cage-free and broiler-welfare pledges they have already made, by tracking progress publicly and campaigning against laggards. ACE's 2025 analysis covers two accountability programs, one global cage-free and one for Better Chicken Commitment pledges in the UK and EU. In our view it comes to **{{result}} years of healthy life per $1,000** you give. That uses our default exchange rates between suffering and healthy life, which is where most of the uncertainty is.
 
 In ACE's own view the model reproduces all 44 of ACE's intermediate figures.
 
@@ -17,7 +17,7 @@ After the cross-cause exchange rates and your weight on animal suffering, the la
 
 ### Where we differ from ACE
 
-- **Suffering per hen (changed for consistency).** ACE uses 7.9 days of suffering per hen-year out of a battery cage; we use the shared 17.5, so the same change counts the same in every model. With the points below, they take ACE's own figure, 94, to <span data-figure="headline" data-model="the-humane-league">120</span>.
+- **Suffering per hen (changed for consistency).** ACE uses 7.9 days of suffering per hen-year out of a battery cage; we use the shared 17.5, so the same change counts the same in every model. With the points below, they take ACE's own figure, 94, to {{result}}.
 - **Years brought forward (changed for consistency).** ACE's dates "if not for accountability" are 3 to 15 years after the expected ones; we use the shared slider for every group (5 years by default), so THL is credited the same span as every other won reform.
 - **Pledges kept (changed for consistency).** ACE's own probabilities (90% and 80% for cage-free, 30% and 25% for broilers) become the shared figures: 77% of cage-free commitments fulfilled (Chicken Watch, North America) and 30% for Better Chicken Commitment pledges.
 - **A chicken against a person.** ACE's figures count a hen's suffering at 35% of a person's (Ambitious Impact's weight in ACE's 2025 SADs; 46% in the 2024 SADs behind the 17.5). We take out whichever weight each figure was built with. We count days of a chicken's pain and let the chicken slider (default 33%) set how they compare with a person's, as in every animal model.

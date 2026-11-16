@@ -1,6 +1,6 @@
 ### Summary
 
-The Machine Intelligence Research Institute (MIRI) works to prevent extinction from AI smarter than humans. Since 2024 it has worked mainly through communications and governance research rather than technical alignment research. Our model of both its programmes in 2025 comes to **<span data-figure="headline" data-model="machine-intelligence-research-institute-charityevals">0.073</span> years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.0003 to about 18.
+The Machine Intelligence Research Institute (MIRI) works to prevent extinction from AI smarter than humans. Since 2024 it has worked mainly through communications and governance research rather than technical alignment research. Our model of both its programmes in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.0003 to about 18.
 
 ### What the charity does
 

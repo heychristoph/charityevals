@@ -1,6 +1,6 @@
 ### Summary
 
-All Hands and Hearts sends volunteers, led by its own staff, to disasters. In the US they muck out and sanitise flooded homes, clean smoke-damaged houses and repair homes. Abroad it rebuilds schools and funds relief through local partners. Its US work in the year to August 2025 comes to **<span data-figure="headline" data-model="all-hands-and-hearts-charityevals">0.003</span> years of healthy life per $1,000**, its work abroad to <span data-figure="headline" data-model="all-hands-and-hearts-charityevals-international">0.09</span> (a model of its own).
+All Hands and Hearts sends volunteers, led by its own staff, to disasters. In the US they muck out and sanitise flooded homes, clean smoke-damaged houses and repair homes. Abroad it rebuilds schools and funds relief through local partners. Its US work in the year to August 2025 comes to **{{result}} years of healthy life per $1,000**, its work abroad to {{result:all-hands-and-hearts-charityevals-international}} (a model of its own).
 
 The help goes to American households, and the site's one income scale values a dollar of help to them at a small fraction of what it does for a family living on a few dollars a day. Volunteers' unpaid time and donated materials are also much of what the work takes, so All Hands and Hearts' cash gets about half the credit.
 

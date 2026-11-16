@@ -1,6 +1,6 @@
 ### Summary
 
-CARE USA is the largest member of CARE International, a confederation founded in 1945 (the first "CARE packages"). It runs emergency response and long-term development through its own country offices and local partners, mostly in Sub-Saharan Africa and the Middle East. Its programmes do about **<span data-figure="headline" data-model="care-charityevals">0.33</span> years of healthy life per 1,000 dollars**.
+CARE USA is the largest member of CARE International, a confederation founded in 1945 (the first "CARE packages"). It runs emergency response and long-term development through its own country offices and local partners, mostly in Sub-Saharan Africa and the Middle East. Its programmes do about **{{result}} years of healthy life per 1,000 dollars**.
 
 About three-fifths of that is relief: food, cash and goods for some 15 million people in crises, and a few excess deaths averted. Food security and savings groups for women are about a sixth each; maternal and newborn health, education and water make up the rest. CARE counts the people it reaches for the whole confederation but publishes no outcome figures for CARE USA's own spending. So every part is built from its spending, a judged cost per person and the research on that kind of work, and every part is discounted for missing data.
 

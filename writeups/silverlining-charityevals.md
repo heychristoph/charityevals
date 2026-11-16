@@ -1,6 +1,6 @@
 ### Summary
 
-SilverLining funds and coordinates research on solar radiation modification: cooling the planet by reflecting a little sunlight, for example with fine particles high in the atmosphere. It also works with governments and others on how the idea is researched and governed. Our model values what it added to that field in 2019-2024 by what the field's work could be worth: a better-designed use of cooling, if there is one. Against what SilverLining spent over those years, that comes to **<span data-figure="headline" data-model="silverlining-charityevals">0.19</span> years of healthy life per $1,000**. Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. Every step is a judgment that no study settles.
+SilverLining funds and coordinates research on solar radiation modification: cooling the planet by reflecting a little sunlight, for example with fine particles high in the atmosphere. It also works with governments and others on how the idea is researched and governed. Our model values what it added to that field in 2019-2024 by what the field's work could be worth: a better-designed use of cooling, if there is one. Against what SilverLining spent over those years, that comes to **{{result}} years of healthy life per $1,000**. Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. Every step is a judgment that no study settles.
 
 ### What the charity does
 

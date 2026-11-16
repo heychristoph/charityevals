@@ -1,6 +1,6 @@
 ### Summary
 
-The Iodine Global Network (IGN) helps governments and salt producers keep salt iodized, so that children are not born and raised short of iodine. Our model counts what its 2025 work achieved: **<span data-figure="headline" data-model="iodine-global-network-charityevals">2.4</span> years of healthy life per 1,000 dollars**. The figure is very uncertain: it rests on judgments of what each piece of work changed and on how much mild iodine deficiency harms a child's development.
+The Iodine Global Network (IGN) helps governments and salt producers keep salt iodized, so that children are not born and raised short of iodine. Our model counts what its 2025 work achieved: **{{result}} years of healthy life per 1,000 dollars**. The figure is very uncertain: it rests on judgments of what each piece of work changed and on how much mild iodine deficiency harms a child's development.
 
 ### What the charity does
 

@@ -1,6 +1,6 @@
 ### Summary
 
-Founders Pledge is a community of entrepreneurs who pledge part of their exit proceeds to charity. It researches where to give, advises its members and a few ultra-wealthy Philanthropy Partners, and runs donor-advised funds and public funds. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="founders-pledge-charityevals">8.0</span> years of healthy life per 1,000 dollars**. For each dollar it spends, about sixteen dollars go to the charities it recommends. The share of that money it caused is valued at what the site's models of its grantees and causes achieve. Most of the value comes from its health and education giving and from members' other giving it caused; its climate giving adds little.
+Founders Pledge is a community of entrepreneurs who pledge part of their exit proceeds to charity. It researches where to give, advises its members and a few ultra-wealthy Philanthropy Partners, and runs donor-advised funds and public funds. Our model of all its work in 2025 comes to **{{result}} years of healthy life per 1,000 dollars**. For each dollar it spends, about sixteen dollars go to the charities it recommends. The share of that money it caused is valued at what the site's models of its grantees and causes achieve. Most of the value comes from its health and education giving and from members' other giving it caused; its climate giving adds little.
 
 ### What the charity does
 

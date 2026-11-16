@@ -1,6 +1,6 @@
 ### Summary
 
-Sentinel Bio is a Washington DC grantmaker, founded in 2024, that pools philanthropists' money to prevent catastrophic pandemics. Our model of all it spent in its first tax year, May to December 2024, comes to **<span data-figure="headline" data-model="sentinel-bio-charityevals">4.7</span> years of healthy life per $1,000**. The figure rests on forecasts of how likely a catastrophic pandemic is and on an estimate of what a typical dollar of work against it does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 60.
+Sentinel Bio is a Washington DC grantmaker, founded in 2024, that pools philanthropists' money to prevent catastrophic pandemics. Our model of all it spent in its first tax year, May to December 2024, comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely a catastrophic pandemic is and on an estimate of what a typical dollar of work against it does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 60.
 
 ### What the charity does
 

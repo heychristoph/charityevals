@@ -2,7 +2,7 @@
 
 Sinergia Animal campaigns for farmed animals in Latin America and Southeast Asia. ACE recommended it in 2025. ACE's cost-effectiveness analysis covers three programs, about 84% of programme spending. Most of the impact comes from cage-free egg commitments.
 
-Our model gives **<span data-figure="headline" data-model="sinergia-animal">380</span> years of healthy life per $1,000** you give, converting with our default exchange rates. The range runs from about 0.02 to 23,000. Treat the headline as an order of magnitude that depends on your values, not a measurement.
+Our model gives **{{result}} years of healthy life per $1,000** you give, converting with our default exchange rates. The range runs from about 0.02 to 23,000. Treat the headline as an order of magnitude that depends on your values, not a measurement.
 
 ### What the charity does
 
@@ -36,7 +36,7 @@ Comparing animals with people is where the uncertainty lives. The three biggest 
 
 ### Where we differ from ACE
 
-- **Species weights.** ACE's figures weigh each species by Ambitious Impact's weights; we use Rethink Priorities' estimates relative to a chicken, and the chicken slider for chickens against people, the same for every animal model. ACE's own figure, 910 years of healthy life per $1,000, still reproduces in its own view.
+- **Species weights.** ACE's figures weigh each species by Ambitious Impact's weights; we use Rethink Priorities' estimates relative to a chicken, and the chicken slider for chickens against people, the same for every animal model. ACE's own figure, {{result:evaluator}} years of healthy life per $1,000, still reproduces in its own view.
 - **Salary sacrifice (off by default).** Campaign work is mostly people, and campaigners could earn far more in corporate roles. Turn on "Credit by share of resources" and we count the forgone pay as an in-kind donation: we guess staff are 65% of cost and take a 35% pay cut, so the forgone salary is 35% of cash spending, which cuts the impact credited to each donated dollar by about a quarter. Both numbers are guesses with wide ranges.
 - **Credit for shared outcomes (shared, as ACE does).** The cage-free and pig results count Sinergia's share of each hen and pig covered, from ACE's inputs, not every animal covered. ACE's split is a share of the campaigning work, so it is also what "Credit by share of resources" uses.
 - **Years counted (changed for consistency).** ACE credits cage-free commitments for Rethink Priorities' 15 years and each pig commitment until Brazil's legal deadline (1 to 22 years); we use the shared slider for every won reform, 5 years by default.

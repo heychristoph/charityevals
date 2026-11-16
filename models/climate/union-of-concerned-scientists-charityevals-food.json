@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, $5.1M with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year was part of the case for the federal wetland protections (Swampbuster) that a court upheld in May 2025 against a challenge filed in 2024; its other work is a share. At the defaults a dollar given keeps about 0.0005 years of healthy life per $1,000 (flood damage averted, valued as consumption to the average American), from 0.000008 to 0.025 on the combined range. It is low because the challenge was unlikely to succeed, the government and four other groups fought the case (UCS, not a party, is credited with 1%), only farmed wetlands are at stake and drain slowly, and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the chance the challenge would have won and the drainage rate each move it several times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
+  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, {{row:cost_total}} with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year was part of the case for the federal wetland protections (Swampbuster) that a court upheld in May 2025 against a challenge filed in 2024; its other work is a share. At the defaults a dollar given keeps about 0.0005 years of healthy life per $1,000 (flood damage averted, valued as consumption to the average American), from 0.000008 to 0.025 on the combined range. It is low because the challenge was unlikely to succeed, the government and four other groups fought the case (UCS, not a party, is credited with 1%), only farmed wetlands are at stake and drain slowly, and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the chance the challenge would have won and the drainage rate each move it several times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Union of Concerned Scientists (food and farms)",
@@ -210,7 +210,7 @@
       "format": "number",
       "formula": "(1 - (years_of_impact + 1) * year_discount_factor ^ years_of_impact + years_of_impact * year_discount_factor ^ (years_of_impact + 1)) / ((1 - year_discount_factor) * (1 - year_discount_factor)) / pv_annuity_due(1, $discount_rate, years_of_impact)",
       "unit": "years",
-      "explainer": "In year t of the years counted, t years' drainage is gone: the discounted sum of 1, 2, … over the years counted (an increasing annuity), over the discounted years themselves, so the build-up is weighted like the years it multiplies. About 2.9 at 5 years and 4%."
+      "explainer": "In year t of the years counted, t years' drainage is gone: the discounted sum of 1, 2, … over the years counted (an increasing annuity), over the discounted years themselves, so the build-up is weighted like the years it multiplies. About {{row:buildup_years}} at 5 years and 4%."
     },
     {
       "id": "farmed_wetland_share",
@@ -458,7 +458,7 @@
       "label": "Staff pay as a share of cost",
       "format": "percent",
       "formula": "staff_pay / total_expenses",
-      "explainer": "UCS's own salaries and benefits over total expenses (Convention 1): 71%."
+      "explainer": "UCS's own salaries and benefits over total expenses (Convention 1): {{row:staff_cost_share}}."
     },
     {
       "id": "salary_gap",

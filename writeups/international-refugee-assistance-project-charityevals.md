@@ -1,6 +1,6 @@
 ### Summary
 
-The International Refugee Assistance Project (IRAP) gives refugees free legal help to reach safety, and litigates and campaigns to keep those pathways open. Our model of its legal services in the year to August 2025 comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals">0.07</span> years of healthy life per 1,000 dollars**. Its litigation and policy work, modelled separately, comes to **<span data-figure="headline" data-model="international-refugee-assistance-project-charityevals-advocacy">0.23</span>**.
+The International Refugee Assistance Project (IRAP) gives refugees free legal help to reach safety, and litigates and campaigns to keep those pathways open. Our model of its legal services in the year to August 2025 comes to **{{result}} years of healthy life per 1,000 dollars**. Its litigation and policy work, modelled separately, comes to **{{result:international-refugee-assistance-project-charityevals-advocacy}}**.
 
 ### What the charity does
 
@@ -28,7 +28,7 @@ A refugee waiting in Jordan, Lebanon, Kenya or Afghanistan lives on a few dollar
 
 ### What drives the result
 
-The value of one move is large, about 50 units of value, because a move multiplies a very poor person's consumption for decades. The legal services' result is low anyway, because casework costs about $4,700 a client and few clients get out in a year. That was especially true after the US suspended refugee admissions in January 2025. The litigation and policy result is higher because a won pathway moves thousands of people for the cost of one campaign. But it rests on how much of the US rebuild advocacy caused, and IRAP's share of that advocacy.
+The value of one move is large, about 50 units of value, because a move multiplies a very poor person's consumption for decades. The legal services' result is low anyway, because casework costs about {{row:cost_per_person}} a client and few clients get out in a year. That was especially true after the US suspended refugee admissions in January 2025. The litigation and policy result is higher because a won pathway moves thousands of people for the cost of one campaign. But it rests on how much of the US rebuild advocacy caused, and IRAP's share of that advocacy.
 
 ### Biggest uncertainties
 

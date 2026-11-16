@@ -1,6 +1,6 @@
 ### Summary
 
-Malaria Consortium ran an emergency malaria response with the health authorities in 18 high-burden districts of South Ethiopia from mid-2024, after the country's cases rose eightfold in three years. The Life You Can Save reads the fall in the districts' malaria indicators as cases, admissions and deaths averted and estimates $225 per DALY averted; valuing each death averted by age and crediting Malaria Consortium with most of the change, that is **<span data-figure="headline" data-model="malaria-consortium-tlycs-emergency-response-ethiopia">2.9</span> years of healthy life per 1,000 dollars**.
+Malaria Consortium ran an emergency malaria response with the health authorities in 18 high-burden districts of South Ethiopia from mid-2024, after the country's cases rose eightfold in three years. The Life You Can Save reads the fall in the districts' malaria indicators as cases, admissions and deaths averted and estimates $225 per DALY averted; valuing each death averted by age and crediting Malaria Consortium with most of the change, that is **{{result}} years of healthy life per 1,000 dollars**.
 
 The model reproduces every calculated cell of the sheet's Ethiopia tab. The Life You Can Save calls its figures highly approximate.
 

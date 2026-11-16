@@ -1,6 +1,6 @@
 # Verification round (scoped)
 Result: -0.000428899 years of healthy life per $1,000 (ced per donor dollar -3.899). Verdict: **pass**.
-Model-sha: 3c1a1e1f06fa53830110f59cb33e9d7b51c2a2252ee3df3cd6c30efbcbef8f5d
+Model-sha: faf94e27ef3812384f059e8da6948f3b8a0d72faa355f0357ff48828c28f21a5
 Scope: only the mechanical round-5 changes (nine judgments moved into shared facts; one coalition pool with the grants' federal part in the denominator). audit-model.ts: 0 findings. check.ts: all models valid.
 
 Verdict: **pass**
@@ -18,3 +18,5 @@ Verdict: **pass**
 Re-stamped (15 Nov 2026): this round's low findings fixed in explainers, write-ups and the egg-share fact's wording; no value changed.
 
 Re-stamped (16 Nov 2026): pre-audit cleanup: shared facts read (US layers, preemption chance, market leakage, evaluator side effects), reference classes named, ranges widened where evidence is thin; headline unchanged. Mechanical: headline unchanged, against 9d3d36e4.
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1b0eb29e.

@@ -1,6 +1,6 @@
 # Audit: terrapraxis-charityevals, round 7 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: 0.01493 years of healthy life per $1,000 (was 0.0219 after the non-death change); cause median 0.001421 (x10.5). Verdict: pass (no high or medium except the explained far-above; two lows).
-Model-sha: 33badb1800447e458f413bd1a22b33c37accff74da26ba2b846933210c22f7cd
+Model-sha: 611be9002778a1261480582ab2d93a7b2351a1734373af0b657b63f0e427f23f
 Scope: commit 7e73f6cd on this model and its write-up: (1) the tripling pathway read at the middle of the years counted (pathway_first_year, pathway_last_year, pathway_middle_year, pathway_counted_share and the four rows that multiply by it), (2) rate_position clamped to 3%-7%, (3) unmodelled_benefits_adj tagged side_effect: added, and the bridge's `1 + $side_effect_weight × ratio`. Rule 2.23 (public money) has no branch here. Row values dumped from the live model (temporary script, deleted).
 Mechanical: audit-model: 0 high, 1 medium (far-above, below), 3 low (the reading-only summary rows, already labelled). check.ts: all models valid. Receipt above.
 
@@ -27,3 +27,5 @@ Mechanical: audit-model: 0 high, 1 medium (far-above, below), 3 low (the reading
 | pathway_first_year 2020, pathway_last_year 2050 | DOE, 1 Dec 2023, COP28 declaration (fetched) | verified | page has "advance a global aspirational goal of tripling nuclear energy capacity from 2020 by 2050", as quoted |
 | pcge_discount_rate_low / high (3%, 7%) | IEA/NEA PCGE 2020, as in round 6 | verified earlier | unchanged |
 Re-stamped (15 Nov 2026): round 7's low fixed: pathway_counted_share explainer reworded (text only)
+
+Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2492e3fc.

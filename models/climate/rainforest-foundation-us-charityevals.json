@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "rainforest-foundation-us",
   "owner": "charityevals",
-  "summary": "Rainforest Foundation US backs Indigenous peoples in Peru, Brazil, Guyana and Panama to secure and defend their forest: titling their land, training and paying community patrollers who act on satellite deforestation alerts, and strengthening and funding their own organisations and their global alliance. We model all of its 2025 programme spending ($9.3 million) in five branches: the forest the year's monitoring keeps in Peru's territories, where the programme is the one a randomised trial of RFUS's own work measured; the forest its thinner monitoring and organisational support keep in Guyana, Brazil and Panama; the forest its global work with the Global Alliance of Territorial Communities keeps; the forest titles won and advanced keep; and the patrollers' pay to their households. The result is about 0.013 years of healthy life per $1,000, nearly three fifths of it a small cut in pandemic risk from forest kept, the least grounded step, three tenths the patrollers' pay and the rest the forest's carbon, which is worth little in healthy years; Peru's territories are about half of it. The biggest uncertainties are how much of the loss the patrols prevent and whether forest loss drives pandemics; every branch but Peru's territories takes the missing-data discount, and the result is mostly uncertainty (combined range about 0.002-0.06).",
+  "summary": "Rainforest Foundation US backs Indigenous peoples in Peru, Brazil, Guyana and Panama to secure and defend their forest: titling their land, training and paying community patrollers who act on satellite deforestation alerts, and strengthening and funding their own organisations and their global alliance. We model all of its 2025 programme spending ($9.3 million) in five branches: the forest the year's monitoring keeps in Peru's territories, where the programme is the one a randomised trial of RFUS's own work measured; the forest its thinner monitoring and organisational support keep in Guyana, Brazil and Panama; the forest its global work with the Global Alliance of Territorial Communities keeps; the forest titles won and advanced keep; and the patrollers' pay to their households. The result is about {{result}} years of healthy life per $1,000, nearly three fifths of it a small cut in pandemic risk from forest kept, the least grounded step, three tenths the patrollers' pay and the rest the forest's carbon, which is worth little in healthy years; Peru's territories are about half of it. The biggest uncertainties are how much of the loss the patrols prevent and whether forest loss drives pandemics; every branch but Peru's territories takes the missing-data discount, and the result is mostly uncertainty (combined range about 0.002-0.06).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Rainforest Foundation US",
@@ -428,7 +428,7 @@
       "label": "Livelihoods: net income to patrollers' households in the year, US$",
       "format": "usd",
       "formula": "liv_patrollers * liv_patrol_days * liv_stipend_2025 * liv_net_gain_share",
-      "explainer": "About $120,000: a small part of the $3.77 million of partner and community costs, most of which pays for equipment, travel, meetings and the partner organisations' own staff (counted in the forest branches' cost, not as income)."
+      "explainer": "About {{row:liv_cash_usd}}: a small part of the $3.77 million of partner and community costs, most of which pays for equipment, travel, meetings and the partner organisations' own staff (counted in the forest branches' cost, not as income)."
     },
     {
       "id": "livelihood_people",
@@ -574,7 +574,7 @@
       "label": "Territories: share of the forest lost a year without the support, area-weighted",
       "format": "percent",
       "formula": "(ter_guy_acres * ter_guy_loss_rate + ter_bra_acres * ter_bra_loss_rate + ter_per_acres * ter_per_loss_rate + ter_pan_acres * ter_pan_loss_rate) / (ter_guy_acres + ter_bra_acres + ter_per_acres + ter_pan_acres)",
-      "explainer": "For reading only: about 0.1% a year. Guyana's low rate on 60% of the area pulls it well below the Peruvian trial's 0.25%."
+      "explainer": "For reading only: about {{row:ter_baseline_loss_rate}} a year. Guyana's low rate on 60% of the area pulls it well below the Peruvian trial's 0.25%."
     },
     {
       "id": "tero_baseline_loss_rate",
@@ -582,7 +582,7 @@
       "label": "Other territories: share of the forest lost a year without the support, area-weighted",
       "format": "percent",
       "formula": "(ter_guy_acres * ter_guy_loss_rate + ter_bra_acres * ter_bra_loss_rate + ter_pan_acres * ter_pan_loss_rate) / (ter_guy_acres + ter_bra_acres + ter_pan_acres)",
-      "explainer": "Guyana, Brazil and Panama by area: about 0.08% a year."
+      "explainer": "Guyana, Brazil and Panama by area: about {{row:tero_baseline_loss_rate}} a year."
     },
     {
       "id": "tco2e_per_hectare_year",
@@ -1717,7 +1717,7 @@
       "label": "Staff pay as a share of program cost",
       "format": "percent",
       "formula": "staff_costs / total_expenses",
-      "explainer": "RFUS's own staff share of its expenses (33%), from the functional expenses rather than the shared default (Convention 1)."
+      "explainer": "RFUS's own staff share of its expenses ({{row:staff_cost_share}}), from the functional expenses rather than the shared default (Convention 1)."
     },
     {
       "id": "salary_gap",

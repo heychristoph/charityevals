@@ -1,6 +1,6 @@
 ### Summary
 
-CEPI funds vaccines against epidemics and pandemics, aiming to have a vaccine ready within 100 days of a new threat. Our model of all its work in 2025 comes to **<span data-figure="headline" data-model="cepi-charityevals">0.52</span> years of healthy life per $1,000**. The figure rests on forecasts of how likely catastrophic pandemics are, on what a typical dollar of pandemic work does to that risk, and on how much less a dollar does at CEPI's size. All three are deeply uncertain, so the plausible range runs from about 0.02 to about 13.
+CEPI funds vaccines against epidemics and pandemics, aiming to have a vaccine ready within 100 days of a new threat. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely catastrophic pandemics are, on what a typical dollar of pandemic work does to that risk, and on how much less a dollar does at CEPI's size. All three are deeply uncertain, so the plausible range runs from about 0.02 to about 13.
 
 ### What the charity does
 

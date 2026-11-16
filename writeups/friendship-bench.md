@@ -1,6 +1,6 @@
 ### Summary
 
-Friendship Bench trains lay health workers, often older women known as "grandmothers", to deliver problem-solving talk therapy for depression on benches outside clinics in Zimbabwe. The Happier Lives Institute (HLI) rates it a top charity, at about $21 per point of life satisfaction for a year: **<span data-figure="headline" data-model="friendship-bench">3.0</span> years of healthy life per $1,000** with our default exchange rate.
+Friendship Bench trains lay health workers, often older women known as "grandmothers", to deliver problem-solving talk therapy for depression on benches outside clinics in Zimbabwe. The Happier Lives Institute (HLI) rates it a top charity, at about $21 per point of life satisfaction for a year: **{{result}} years of healthy life per $1,000** with our default exchange rate.
 
 The model reproduces all 32 of HLI's intermediate figures.
 
