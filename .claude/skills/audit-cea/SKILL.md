@@ -16,9 +16,17 @@ model**; you write findings its builder can act on. Work only from the model, it
 list and the previous round's findings, never the builder's notes, so your check
 doesn't inherit the builder's reasoning.
 
-Inputs: the model path; optionally the write-up path, the previous round's findings, a blind list
-(sources and model ids you must not read; pass the ids to `--exclude`) and where to
-write findings (default: print them).
+Inputs: the model path; optionally the write-up path, the preflight output, the previous round's
+findings, a blind list (sources and model ids you must not read; pass the ids to `--exclude`) and where
+to write findings (default: print them).
+
+## Rounds
+
+- **Round 1** (opus): this whole skill.
+- **Round 2 and later** (sonnet), a scoped verification: only the previous round's highs and mediums
+  and the changes made for them, each resolved or not (a note is not a fix), plus any new high or
+  medium those changes introduced. No full re-audit. Lows are the builder's to fix and never re-open a
+  round; a round with no open high or medium passes.
 
 The rules: docs/normalization.md (standard steps, shared versions, invariants in section 3, owner
 decisions), import-cea (evaluator models), build-cea's SKILL.md and references/templates.md
@@ -26,22 +34,16 @@ decisions), import-cea (evaluator models), build-cea's SKILL.md and references/t
 every slider moving every model it concerns, so models stay comparable), **best guesses**, and **fix,
 don't flag**: every finding names the concrete fix.
 
-## 1. Mechanical pass (any violation is high)
+## 1. Mechanical pass (any blocking line is high)
 
-- `npx tsx scripts/audit-model.ts <path> [--exclude id,id]`: the lint, every invariant, the result and
-  range, the tornado, the peers and the cause's median. For an evaluator model, ignore the lint codes that
-  only apply to charityevals models (owner, template, required-row, unit, output, sections, donor,
-  species, shared, published).
-- `npx tsx scripts/check.ts <id>` (in models/): `expected` values (the sheet's own numbers) reproduce
-  in the evaluator view.
-- `npx tsx scripts/normalization-audit.ts [--exclude id,id]` (model in models/; run it in the
-  background): any violation for this model is **high** (models it skips in a sandbox are not). A
-  waiver is acceptable only for a checked false positive, with its reason; the allowlist stays `{}`.
-- `npx tsx scripts/summaries.ts`, then `npx tsx scripts/simulation-check.ts <id>`: an unstable simulation
-  is **high** for a charityevals model, medium for an import; the inputs it prints are the usual cause.
+Read the preflight output (`npx tsx scripts/preflight.ts <id>`; run it yourself only if none was given
+or the model changed since): copy every blocking line as a high, don't re-run its checks by hand. For
+an evaluator model, the lint codes for charityevals models only don't apply. A waiver is acceptable
+only for a checked false positive, with its reason. Then `npx tsx scripts/audit-model.ts <path>
+[--exclude id,id]` for the result, range, tornado, peers and the cause's median.
 
-Copy every high and medium mechanical finding, then go further: a rule broken under
-other words is yours to find. Reading shared facts and sliders is never a finding, even in a blind run.
+Then go further: a rule broken under other words is yours to find. Reading shared facts and sliders is
+never a finding, even in a blind run.
 
 ## 2. Structure and standard steps
 
@@ -57,15 +59,12 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
   Check the accounts yourself: a programme missing is high; charities/<id>.json `spending` and `lines`
   match them (normalization.md 2.17).
 - **Every model** (docs/normalization.md is the rule; these are the usual breaches):
-  - output in uov, daly, wellby, ced or tco2e; `output.native` set; rows after it in `ours` sections;
-    `source.published` the estimate's date;
-  - `estimate_basis` right for what the dollar is (INV-18, only past averages read the next-dollar
-    slider; Convention 11): a past average's cost and wins from the same period, in one year's prices
+  - `source.published` the estimate's date;
+  - `estimate_basis` right for what the dollar is (Convention 11): a past average's cost and wins from the same period, in one year's prices
     (`@cpi`); a wrong basis is high;
   - one consistent way: every conversion reads the shared version in our view, the evaluator's figure
     in `published`; name the shared version in the fix;
-  - deaths by age band (an `@death_ages` mix, or WHO Global Health Estimates shares) × `$life_value_multiplier`; in a WELLBY
-    model only through `wellbys_from_uov` (INV-17, so deaths don't move with the WELLBY rate); suicides
+  - deaths by age band (an `@death_ages` mix, or WHO Global Health Estimates shares) × `$life_value_multiplier`; suicides
     averted from the treated population's rate, fading and discounted with the effect;
   - every future benefit and every wait (funds held, delivery, the middle of the protection) discounted
     at `$discount_rate`;
@@ -86,8 +85,7 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
     left out is missing-adjustment;
   - the simulation (2.18): ranges' `interval` and `shape` as the source states; one-off chances tagged
     `single_event`, no yearly rate or share of many; no range on a year; no remainder of large figures;
-  - a past average reads the charity's `@next_dollar` figure (2.10), sourced and dated within a year
-    (the slider instead: medium);
+  - a past average's `@next_dollar` figure sourced and dated within a year (2.10);
   - missing data (Convention 12, glossary "measured / thin", both ways): a thin branch at 1 is high; so
     is a branch at the slider whose reach the charity counts and whose effect is an RCT's of the same
     intervention delivered the same way (thin over-applied); a judged baseline or counterfactual never makes it thin;
@@ -103,7 +101,9 @@ or reach, fetch `source.url` and find the number:
 - **verified**: the passage is there; number, unit, year and currency match;
 - **mismatch**: the source says something else (quote it);
 - **unsupported**: reachable, but the number isn't there;
-- **unreachable**: say so; ask for an archived copy or a second source (PDFs: the Read tool, by page).
+- **unreachable**: say so; ask for an archived copy or a second source.
+
+Pages: `scripts/fetch.sh <url>`; PDFs: `scripts/pdf-text.sh <pdf>`; IRS 990s: `scripts/irs-990.py`.
 
 A mismatch or unsupported number among the top 5 swings is **high**; elsewhere **medium**. Check facts added for this model the same way. For an import,
 "the source" is the evaluator's sheet: spot-check the top drivers' cells.
@@ -137,7 +137,7 @@ so the severity rests on a number.
   as observed); a conservative or optimistic case where a best guess is possible (it would rank the
   model unfairly against best guesses); a funding counterfactual subtracted in our view (the ranking
   is that comparison); an unfinished sheet imported; a summary or write-up that compares with other
-  charities, a median, an average or peers; any lint high, invariant violation or `npm run check` failure.
+  charities, a median, an average or peers; any blocking preflight line.
 - **medium**: moves the result 10–25%; weak source for a top-10 driver; judgment without a reference
   class; range clearly too narrow or wide; a gap with peers (over 10× or under a tenth of the cause's
   median) whose row isn't found; a sign convention broken; a write-up with a stale or non-live result, or a result
@@ -151,8 +151,8 @@ so the severity rests on a number.
 Result: <x> <unit>/$ = <y> years of healthy life per 1,000 dollars (combined range <lo>–<hi>); cause median <m> (×<r>). Verdict: <pass | fix needed>.
 Model-sha: <what `npx tsx scripts/audit-receipt.ts <id>` prints for the model you audited>
 Scope: <programmes and year modelled, against the charity's spending breakdown>
-Mechanical: lint <h/m/l>, invariants <violations or none>, normalization-audit <violations or none>
-Previous round: <each earlier finding: resolved / not resolved (a note is not a fix)>
+Preflight: <pass | blocking lines>
+Previous round: <each earlier high and medium: resolved / not resolved>
 
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|

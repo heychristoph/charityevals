@@ -1,20 +1,23 @@
 # Research checklist
 
-Every number must trace to a source a reader can open: the log below feeds the model's `source`
+Every number must trace to a source a reader can open: the research notes feed the model's `source`
 fields and the auditor's checks. Terms: [templates.md](templates.md#glossary).
 
-WebFetch doesn't parse most PDFs: download them into your scratch directory (its own empty folder)
-and read them with the Read tool, page by page (`pages`). Many publishers (PubMed, ScienceDirect,
-Cochrane) show bot checks: use the PMC copy, a preprint or the abstract,
-and say which. Never bypass a bot check; if the latest accounts sit only behind one, stop and name the file. For every number you take, log: URL, retrieval date,
-page/table, a verbatim quote of at most one sentence, and the number as you'll enter it (unit,
-currency, year).
+Pages: `scripts/fetch.sh <url>` (verbatim text; WebFetch paraphrases). PDFs: download into their own
+empty scratch folder, then `scripts/pdf-text.sh <pdf>`. Many publishers (PubMed, ScienceDirect,
+Cochrane) show bot checks: use the PMC copy, a preprint or the abstract, and say which. Never bypass a
+bot check; if the latest accounts sit only behind one, stop and name the file.
+
+**Research notes** (`<scratch>/<charity id>/research-notes.md`), one table per section below, a row
+per number: `| what | value | unit, currency, year | URL | retrieved | page/table | quote (≤1 sentence) |`.
+Accounts go by programme and year (fiscal year end, audited or not); reach and effects name the
+programme; end with **Gaps**: what wasn't found and where you looked.
 
 ## Money (cost section, donor section)
 
 - Start with the charity's own financials page (audited statements, 990s it hosts): open the listing
   page and take the latest audited year it links, never a guessed URL (a missing file isn't
-  proof the year is unaudited). ProPublica's downloads often show a bot check; `python3 scripts/irs-990.py EIN --year T --summary` fetches the IRS e-file XML.
+  proof the year is unaudited). ProPublica's downloads often show a bot check; `python3 scripts/irs-990.py EIN --year T --summary` fetches the IRS e-file XML (its range-read subcommand reads one return from the bulk zip).
 - US charities: Form 990 via ProPublica Nonprofit Explorer (`projects.propublica.org/nonprofits`),
   Part IX (functional expenses: program, management, fundraising; salaries lines 5–9). UK: Charity
   Commission register (accounts PDF). Elsewhere: the audited statements on the charity's site.
@@ -53,8 +56,8 @@ currency, year).
   Estimates (by cause, age, sex and country, latest year; IHME GBD where WHO has no split). Consumption and PPP: World Bank (PIP, WDI).
   Household size: facts/household_size.json first; a missing place gets its latest DHS figure
   (StatCompiler, mean usual members per household) as a new fact there.
-- Before adding a fact, grep `facts/` for it. New country data goes in `facts/<country>.json` with
-  `source.url`, `retrieved`, and a range when sources disagree.
+- New country data goes in `facts/<country>.json` with `source.url`, `retrieved`, and a range when
+  sources disagree.
 - Animals: SADs (suffering-adjusted days) per physical change come from facts/sad_factors.json (one figure per change; a new
   change gets a new fact with a `change` note and its SAD version). Reach is the animals under the
   commitments won or tracked in the year (Chicken Watch, the Cage-Free Tracker, company reports);

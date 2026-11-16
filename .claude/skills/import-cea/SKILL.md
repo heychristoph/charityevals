@@ -10,7 +10,7 @@ with two views: the **evaluator view** reproduces every number of their sheet; *
 their bottom line on to **years of healthy life per 1,000 dollars donated**, the site's one scale, by the
 same steps as every other model, so charities rated by different evaluators can be ranked side by
 side. The loop: import, check that every number reproduces
-(`scripts/check.ts`), run the invariants, fix; audit-cea reviews it when asked. Terms (uov, SAD,
+(`scripts/preflight.ts`), fix; audit-cea reviews it when asked. Terms (uov, SAD,
 `published`, INV-n): [glossary](../build-cea/references/templates.md#glossary).
 
 Job: **reproduce the evaluator's model faithfully, then normalise it.** Their rows, numbers and
@@ -89,12 +89,9 @@ every `expected` (the sheet's cached values).
 - Shared data from facts (`@kenya.ppp_factor_2017`, `@givewell*`, `@givewell_shared` (GiveWell's house
   constants: resource sharing, long-term income block, funders' money, CYP and stillbirth values),
   `@gbd_disability_weights`, `@moral_weights`, `@sad_factors`, `@wellby_factors`): reuse before adding;
-  new shared data goes into the facts file. A literal equal to a fact is an INV-4 violation (label
-  synonyms, 0.2% tolerance); a constant written into a formula next to a lever (`8 * $life_value_multiplier`)
-  is INV-2d: make it its own input row or read the fact. The same concept at another value in another
-  model is INV-13 (only place and year justify a difference, recorded as a waiver); a literal copied into
-  five or more models with no fact behind it is INV-14 (make it a fact). Another evaluator's copy of
-  GiveWell's figure reads the `@givewell_shared` fact, its own number in `published`.
+  new shared data goes into the facts file. Before typing a number, search facts/ (preflight flags a
+  typed copy; only place and year justify a different value, recorded as a waiver). Another evaluator's
+  copy of GiveWell's figure reads the `@givewell_shared` fact, its own number in `published`.
 - Where our view uses another number inside layer E (a shared fact, a correction): the row holds ours,
   `published` holds the evaluator's, and the explainer says "changed for consistency", their number
   and why. The evaluator view uses `published`, so the sheet still reproduces.
@@ -228,7 +225,7 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
   figure: `**<span data-figure="headline" data-model="<id>">130</span> years of healthy life per 1,000 dollars**`.
 - Results are always years of healthy life per 1,000 dollars, never multiples of GiveDirectly or another
   benchmark, and never set against other charities, a median or peers (they shift whenever models land). A number that moves with the sliders is a live figure; a fixed number says whose it is
-  ("ACE's own figure, 94"). No numbers copied from an old run of the model.
+  ("ACE's own figure, 94"). Other model numbers are placeholders (docs/prose-numbers.md), never typed.
 - "Where we differ": one bullet per changed-for-consistency row and per step of ours (species
   weights, discounting, value of life, staff pay, credit by share of resources), with the
   evaluator's number.
@@ -238,14 +235,10 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
 
 ## 8. Verify
 
-- `npx tsx scripts/check.ts <id>`: every `expected` reproduces (1e-6), both views' results and the
-  tornado. A mismatch means the translation is wrong: fix it, never `expected`.
-  (`npm run check -- <id>` passes the id to the summaries check, not to check.ts.)
-- `npx tsx scripts/normalization-audit.ts`: no violation for the model (every invariant, plus SAME-CHANGE,
-  one SADs figure per physical change). Fix it. A flag you have
-  checked by hand and found false (a coincidence of values, a word used otherwise) gets a waiver with
-  its reason in src/engine/normalization-waivers.json; the allowlist stays empty. Remove stale waivers.
-- `npx tsx scripts/simulation-check.ts <id>`: if unstable, fix the cause it prints in our view.
+- `npx tsx scripts/preflight.ts <id>` passes. An `expected` mismatch means the translation is wrong:
+  fix it, never `expected`. A flag checked by hand and found false (a coincidence of values, a word used
+  otherwise) gets a waiver with its reason in src/engine/normalization-waivers.json; the allowlist
+  stays empty. Remove stale waivers. An unstable simulation: fix the cause it prints in our view.
 - `npx tsx scripts/summaries.ts`, `npm run check`, `npx vitest run`, `npx tsc --noEmit`, the page
   (`npm run dev`); in a batch run these come after merging (references/batch.md).
 

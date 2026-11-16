@@ -16,21 +16,25 @@ For an orchestrator running many import-cea or build-cea agents, and for each ag
   repository; `npx tsx scripts/batch-status.ts <file>` then says where each item stands at any time, from
   the repository alone: resume from it after a crash or a lost context, not from memory.
 
+## Waves
+
+- **Rules are frozen during a wave** (skills, templates, docs/normalization.md, shared facts): no agent
+  gets a rule change mid-build.
+- At most 20 subagents run at once, researchers and auditors included: leave each builder room for its
+  own, and when the cap refuses a launch, queue it and launch when one finishes.
+
 ## Each agent
 
 - Works in its own git worktree (`isolation: "worktree"`), one charity or one evaluator source per agent,
   so a half-written model never breaks another agent's checks. First: if this file isn't in the worktree,
   or `git log -1 main` is newer than the worktree's start, `git merge --ff-only main`.
+- Shell: the worktree guard refuses heredocs, compound commands, `git -C` and any word containing
+  "git": put multi-step shell in a script file and run that; git one command at a time.
 - Changes only `models/`, `charities/`, `facts/`, `writeups/`, `inventory/`, `audits/`,
-  `scripts/resource-shares-switches.json` and its own entries in the shared registers (below); commits on
-  its branch; never commits `generated/` (normalization-audit writes there: `git checkout -- generated`).
-- Runs its own model's checks: `scripts/check.ts <id>`, `scripts/audit-model.ts <path>`,
-  `scripts/simulation-check.ts <id>`, `scripts/normalization-audit.ts`, `npx tsc --noEmit`; skips
-  `npm run dev` (it never exits). `npm run check` and the full vitest wait for the merge (they need fresh
-  `generated/`).
-- A build keeps every audit round in `audits/<id>/audit-r<n>.md`, the last one a pass on the model as it
-  is (its `Model-sha`, from `npx tsx scripts/audit-receipt.ts <id>`): src/engine/audit-receipts.test.ts
-  fails any of our models without one.
+  `scripts/resource-shares-switches.json`, new files in `.claude/skills/build-cea/templates/proposals/`
+  and its own entries in the shared registers (below); commits on its branch; never commits `generated/`.
+- Passes `npx tsx scripts/preflight.ts <id>` before each audit round; skips `npm run dev` (it never
+  exits). `npm run check` and the full vitest wait for the merge.
 - Records every source it looked at in `inventory/<owner>-models.json` (a new evaluator gets a new file and
   a line in inventory/README.md): `{ "title", "report", "sheet", "published", "charity", "status":
   "imported" | "not imported: <reason>", "model_id" }`. Text-only figures get a minimal model from the
@@ -47,15 +51,14 @@ For an orchestrator running many import-cea or build-cea agents, and for each ag
 classification in scripts/missing-data.ts, src/engine/normalization-waivers.json, facts/next_dollar.json
 and owners.json. Two agents adding to the same register conflict only textually: keep both entries.
 
-## After merging the branches, once, in this order
+## Between waves
 
-1. `npx tsx scripts/missing-data.ts`
-2. `npx tsx scripts/beneficiary-countries.ts`
-3. `npx tsx scripts/summaries.ts` (stand-ins and simulations)
-4. `npx tsx scripts/bulk-writeups.ts`
-5. `npx tsx scripts/simulation-check.ts <new ids>`: fix any unstable model before going on
-6. `npx tsx scripts/normalization-audit.ts`: no violation
-7. `npm run check`, `npx vitest run`, `npx tsc --noEmit`
-8. `npx tsx scripts/batch-status.ts <file>`: every item done
-
-A failure at a step goes back to the agent (or a fresh one) for that model; the others proceed.
+1. Merge each finished branch with `python3 scripts/merge-branch.py <branch>` (it merges, regenerates
+   `generated/` and runs the checks): no separate After-merge commit. A failure goes back to the agent
+   (or a fresh one) for that model; the others proceed.
+2. Apply `.claude/skills/build-cea/templates/proposals/` (its README).
+3. Land each rule change with `npx tsx scripts/rule-change.ts <rule-id> --apply <script>`; it writes
+   inventory/rule-changes/<rule-id>.md, the models to verify, each once by a scoped verification.
+4. A change that moves no result (wording, a rename) is re-stamped, not re-audited:
+   `npx tsx scripts/restamp.ts <ids> --note "<what changed>"`.
+5. `npx tsx scripts/batch-status.ts <file>`: every item of the wave done, then start the next.

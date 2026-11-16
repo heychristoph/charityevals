@@ -7,8 +7,8 @@ description: Build charityevals' own cost-effectiveness analysis (CEA) for a cha
 
 This skill produces charityevals' own model of one charity, `models/<cause>/<charity>-charityevals.json`:
 from what the charity spent in a year and what that did to **years of healthy life per 1,000 dollars
-donated**, the site's one scale. The loop: build from a template, have an independent auditor (audit-cea, in a
-fresh subagent) check it, fix what it finds, repeat until no high-severity finding remains. Terms
+donated**, the site's one scale. The loop: research, build from a template, preflight, an independent audit (audit-cea,
+fresh subagent), fix, verify until no high or medium finding remains. Terms
 (uov, SAD, canonical row, INV-n, Convention n): [glossary](references/templates.md#glossary).
 
 1. **One consistent way.** Every conversion, value of a death, discount, cash benchmark, currency rate,
@@ -19,13 +19,14 @@ fresh subagent) check it, fix what it finds, repeat until no high-severity findi
    goes into the range.
 3. **Every number accounted for**: a sourced fact (URL, retrieval date, quote or page), a shared
    figure, or a labelled judgment (`kind: "judgment"`) with a reason, an anchor and a range.
-   Formulas hold no constants beyond `ALLOWED_LITERALS` (src/engine/lint.ts), never one beside a lever.
 4. **Faithful to the evidence**: thin evidence gets a wide range and a plain sentence.
-5. **Fix, don't flag.** An inconsistency you find (model, template, shared fact) is fixed.
+5. **Fix, don't flag.** An inconsistency you find (model, template, shared fact) is fixed; a
+   template or family-doc gap gets a proposal (step 3).
 
 The templates read every shared figure their family needs and pass every check as they stand
-(src/engine/templates.test.ts): keep those rows and you stay consistent. The lint and the invariants
-enforce the mechanical rules (audit-model runs them, step 3).
+(src/engine/templates.test.ts): keep those rows and you stay consistent. `npx tsx scripts/preflight.ts
+<id>` enforces the mechanical rules (lint, invariants, units, simulation, shared-fact matches): run it
+as you go, not the checks one by one.
 
 ## 0. Scope and setup
 
@@ -71,10 +72,18 @@ country's costs and rates. Each new family's chain, shared figures and pitfalls:
 [references/families/](references/families/). Never force a programme into a family whose chain
 doesn't fit.
 
-## 2. Research
+## 2. Research (a sonnet subagent), then model from its notes
 
-Work through [references/research.md](references/research.md), keeping its research log (every URL,
-date, number, quote and page) in your scratch directory, not the repo.
+A **sonnet** subagent collects the sources into research notes in the fixed format of
+[references/research.md](references/research.md); you model from that file and fetch only what is
+missing or a top driver the notes don't quote:
+
+```
+Agent(subagent_type: "general-purpose", model: "sonnet", description: "Research <charity>",
+      prompt: "Follow .claude/skills/build-cea/references/research.md for <charity> (<website>).
+               Write the research notes to <scratch>/<charity id>/research-notes.md. <blind list>.
+               Don't write to the repository.")
+```
 
 ## 3. Write the model
 
@@ -89,10 +98,9 @@ Copy `templates/<family>.json` to the output path and fill it in.
 - **Keep every canonical row id, `output` and the section kinds**. Replace every `TEMPLATE:` explainer and example value; each says which shared figure
   the row reads and when to change it. A branch that doesn't apply stays at 0 with an explainer saying
   why. Added rows feed canonical rows.
-- **Inputs** (the lint checks the fields): `observed` and `estimate` cite `source.url`, `retrieved` and
-  `quote` or `page`; a `judgment` has a range and an explainer with its reason and anchor.
-- **Shared numbers** come from `@facts` and `$assumptions`, never retyped, or sliders and fact updates
-  miss the copy (INV-4, INV-13, INV-14: no typed copy, one value per concept):
+- **Before you type a number**, look for it in this order: facts/ (`grep -rn <concept> facts/`), then
+  `@next_dollar.<charity>`, then the template's default. Typing your own value for a shared concept is
+  a finding; missing shared data goes into the right facts file with a source and range. The usual reads:
   - deaths `@moral_weights.<age band>` (an `@death_ages` mix for many ages), stillbirths
     `@givewell_shared.uov_per_stillbirth`, both × `$life_value_multiplier`;
   - income ln(consumption) × `$uov_per_ln_consumption`; GiveWell's house constants `@givewell_shared.*`
@@ -104,22 +112,18 @@ Copy `templates/<family>.json` to the output path and fill it in.
     `meal_sads_share_<s>`; species weights only in the `ced_*` rows;
   - staff pay `@staff_pay.share_<kind>` / `gap_<kind>` (the charity's own share where its financials
     give one); meta `@meta.*` and the moved-money rows.
-  Missing shared data goes into the right facts file with a source and range. A new assumption only for
-  a cross-model value judgment no fact can settle; never relabel existing ones.
+  A new assumption only for a cross-model value judgment no fact can settle; never relabel existing ones.
 - **The standard steps** are in the template; keep them intact:
   - every future benefit, and every wait before it, reads `$discount_rate`; never a typed present value;
   - a won reform counts `$win_years_counted` years, the wait until it takes effect discounted; coalition
     credit is the charity's share of all groups' resources (Convention 2);
-  - `estimate_basis` (INV-18, Convention 11): a `past_average` keeps or adds the
-    `marginal_vs_past_average` row (corporate-campaign.json), formula `@next_dollar.<charity id, - as _, a leading digit spelled out>`
-    (normalization.md 2.10 if missing); change the basis only with a written reason;
+  - `estimate_basis` (Convention 11): a `past_average` keeps or adds the `marginal_vs_past_average`
+    row reading `@next_dollar` (normalization.md 2.10 if missing); change the basis only with a written reason;
   - money moved goes through the shared rows of src/engine/moved-money.ts word for word
     (`python3 scripts/moved-money.py <model> <set> net`), destinations live;
     career changes through `career_change_value` (INV-12);
-  - deaths outside a uov model enter only through its bridge from uov (`wellbys_from_uov`, INV-17);
   - every branch's `missing_data_adj`: `$missing_data_discount` unless measured (Convention 12);
-  - no exchange rate between outcomes inside the model (INV-2): the output unit's conversion does
-    that once; another unit's outcome enters only through the template's bridge rows (2.6);
+  - another unit's outcome enters only through the template's bridge rows (2.6);
   - animal families, the species step: SADs → `sads_<s>` → `ced_<s>` with the SAD version of the
     figure it divides (templates.md), the species split a sourced fact or ranged judgment;
   - climate: the climate skeleton's `years_until_avoided` and `conversion` rows (normalization.md 2.5).
@@ -136,45 +140,42 @@ Copy `templates/<family>.json` to the output path and fill it in.
   an average or peers (they move whenever models land; linking them is fine). Never mention effective altruism or EA as a movement; name organisations. Far from the cause's
   median: check scope, reach and persistence first. An honest net harm keeps its negative result (normalization.md 2.22).
 - **Write-up** `writeups/<id>.md` for the charity's main model, following import-cea section 7, plus
-  "How this model was checked" (audit rounds and what changed).
+  "How this model was checked" (audit rounds and what changed). Model numbers in the summary,
+  write-up and explainers are placeholders (`{{result}}`, `{{row:<id>}}`; docs/prose-numbers.md), never typed.
 - **Charity record** `charities/<id>.json` if missing, with `spending` and `lines`.
+- **A template or family-doc gap** (a missing path, row or recipe): model this charity right, and write
+  `templates/proposals/<date>-<slug>.md` (what, why, the diff) instead of a note in the report; the
+  orchestrator applies proposals between waves (templates/proposals/README.md).
 
-As you go: `npx tsx scripts/audit-model.ts <path>` (exit
-1 on a high finding), then `npx tsx scripts/check.ts <id>` once in models/.
+## 4. Preflight, then the audit loop (independent)
 
-## 4. Audit loop (independent)
+`npx tsx scripts/preflight.ts <id>` (model in models/) must pass: fix every blocking line first, and
+keep its output for the auditor. Waivers only for checked false positives, with reasons.
 
-With no mechanical highs, a **fresh subagent** audits the model, given only the model, write-up, blind
-list and previous findings (not your notes):
+Round 1 is an **opus** full audit in a **fresh subagent**, given only the model, write-up, blind list
+and the preflight output (not your notes):
 
 ```
-Agent(subagent_type: "general-purpose", description: "Audit CEA <id> round <n>",
+Agent(subagent_type: "general-purpose", model: "opus", description: "Audit CEA <id> round 1",
       prompt: "Use the audit-cea skill (.claude/skills/audit-cea/SKILL.md) to audit <path>.
-               Write the findings to audits/<id>/audit-r<n>.md. <blind list, if any, and
-               --exclude <ids> for audit-model.ts and normalization-audit.ts>. Don't edit the model.")
+               Preflight output: <path>. Write the findings to audits/<id>/audit-r1.md.
+               <blind list, if any, and --exclude <ids>>. Don't edit the model.")
 ```
-
-Audits go in `audits/<model id>/`, one folder per model id.
 
 1. Fix every **high** and **medium** finding with the fix it names (or a better one, said next round);
-   fix lows unless the fix would be wrong, and say why.
-2. Re-run `scripts/audit-model.ts`, then a **new** auditor (round n+1) with the previous findings.
-3. Stop at an audit with no high findings, or after **3 rounds**. **Verification round**: any later change
-   gets a fresh auditor given the model, write-up, last
-   findings and the changes, checking only those. Publish only on a passing latest audit of the model as
-   it is (its `Model-sha`; a test checks); else fix and verify once more, or keep it out of `models/`.
+   fix lows unless the fix would be wrong, and say why. Lows need no further round.
+2. Preflight again, then round n+1: a **sonnet** scoped verification (audit-cea, "Rounds"), given the
+   model, write-up, preflight output, `audit-r<n>.md` and what you changed, writing `audit-r<n+1>.md`.
+3. Stop at the first round with no open high or medium. Publish only on a passing latest round on the
+   model as it is (its `Model-sha`; a test checks); else fix and verify once more, or keep it out of `models/`.
 
 ## 5. Verify and report
 
-`npx tsx scripts/check.ts <id>`, `npx tsx scripts/summaries.ts` (the simulations), `npx tsx
-scripts/simulation-check.ts <id>` (exit 0: stable, single events drawn), `npm run check`, `npx vitest run`, `npx tsc --noEmit`,
-`npx tsx scripts/normalization-audit.ts [--exclude <ids>]` (no violation for the model; waivers only
-for checked false positives, with reasons; the allowlist stays `{}`; in a sandbox it skips models that
-don't load and says so), and the pages (`npm run dev`: `/<charity>`, `/<id>`; not in an unattended run; many at once:
-import-cea references/batch.md).
+`npm run check`, `npx vitest run`, `npx tsc --noEmit` and the pages (`npm run dev`: `/<charity>`,
+`/<id>`; not in an unattended run; many at once: import-cea references/batch.md).
 
 Report: the result (native unit; years per 1,000 dollars with its range), year and programmes (weights; which
-are thin), top 3 swings, audit rounds with counts, facts or assumptions added.
+are thin), top 3 swings, audit rounds with counts, facts, assumptions and proposals added.
 
-To change the templates: edit and run `scripts/gen-templates.py`, keep src/engine/templates.ts in step,
+To apply a template proposal: edit and run `scripts/gen-templates.py`, keep src/engine/templates.ts in step,
 run `npx vitest run src/engine/templates.test.ts src/engine/lint.test.ts`.
