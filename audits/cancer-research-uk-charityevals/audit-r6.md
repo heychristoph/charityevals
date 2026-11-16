@@ -1,6 +1,6 @@
 # Audit: cancer-research-uk-charityevals, round 6 (verification of the compliance-cost rule 2.21)
 Result: 1.531e-6 daly/$ = 0.001531 years of healthy life per 1,000 dollars (combined range 7.6e-5 to 0.0308); cause median 0.0686 (x0.022). Verdict: pass.
-Model-sha: e1cf556992824902fe1354ac6ed35cfcbd72496b74ed7a36bb58b4b75a956547
+Model-sha: 8c2ebe32bdbd194f0d0a7a310e84b979a92841c49b46fa03656e6c5877d14c05
 Scope: scoped verification of the changed rows (adv_compliance_uov, dalys_from_compliance, outcome_total) and the fact uk_smokefree_generation_cost_per_year_gbp read by them, plus compliance_cost_payer_multiple.
 Mechanical: audit-model exit 0, lint low only (3 unused context inputs, far-below, ignored per brief), invariants none. normalization-audit not run (scoped).
 Result before 0.001649, after 0.001531 (-7.2%).
@@ -30,3 +30,5 @@ Unchanged: missing_data_discount, discount_rate, share_burden_averted_per_resear
 
 Verdict: pass
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
+
+Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against 1807d315.

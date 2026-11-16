@@ -1,6 +1,6 @@
 # Audit: lead-exposure-elimination-project-charityevals, round 4
 Result: 0.03040 uov/$ = 15.2 years of healthy life per 1,000 dollars, unchanged from round 3. Verdict: pass (no high findings; one low carried over).
-Model-sha: 1b752064622afaa5402934f8d20a950df2ab48952b5829f256651c177337557f
+Model-sha: 4ff64b10c9c68fb036c95155647b2f3de360d0e6b846762d51b9064e15bb3b19
 Scope: round 3's two lows only. The diff since round 3 is one sentence in the explainer of `adult_deaths_value_per_birth`; `git diff HEAD~1 -U0` shows no other line changed.
 Mechanical: audit-model 0 high / 1 medium (far-above, explained in round 2: reach) / 1 low (spread, accepted); result identical to round 3.
 
@@ -16,3 +16,5 @@ Previous round:
 | Row | URL | Status | Note |
 |---|---|---|---|
 | lead_deaths_2023 | https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health | verified (number, year, cause); wording differs, finding 1 | more than 3.5 million deaths in 2023, primarily cardiovascular |
+
+Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against migrate/data-model.

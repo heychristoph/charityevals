@@ -8,6 +8,8 @@ Checked: informed_money (grantmaker training and research changed) is read only 
 | None | | | | |
 
 Verdict: pass
-Model-sha: 2299b28f9ee67a48eead170dca4471a5bf02ffab69f2b5c2d9d58dddc3f238a9
+Model-sha: 3d3ce99d31d2867119b66ffc0fc6013e538b9dd99dcb0c2465a466314a659551
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (16 Nov 2026): Preflight cleanup: two judgments' explainers say plainly there is no reference class; no value changed (its headline had moved 14.6 → 17.66 since the audited version e247896f through the models and facts it reads, not this edit). Mechanical: headline 17.66 → 17.66 (+5.1e-9%), against migrate/data-model.

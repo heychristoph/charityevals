@@ -1,6 +1,6 @@
 # Audit: the-life-you-can-save-charityevals, round 3 (verification of the round-2 fix)
 Result: 14.03 years of healthy life per 1,000 dollars; cause median 0.0686 uov/$ (×204). Verdict: pass.
-Model-sha: c707123e08143c1ccbf23bfbdcc7a3167e010798a54e6bc01886befa55fb1fec
+Model-sha: 3794764767907a19ffec2fcfbdb1d2137bcc33ef1af3a2954b204bc2125c74bb
 Scope: only the round-2 finding (next-dollar figure), fixed in e683fb67.
 Mechanical: `scripts/audit-model.ts` shows one medium (far-above, judged in rounds 1 and 2), no high; the bottom line is 14.03 years per $1,000.
 Previous round: finding 1 (next-dollar room from the Australian balance sheet): resolved.
@@ -23,3 +23,5 @@ Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (con
 Re-stamped (15 Nov 2026): TLYCS destinations: Carbon180 reads its new model (mechanical)
 Re-stamped (15 Nov 2026): TLYCS destinations: Evergreen reads its new model (mechanical)
 Re-stamped (15 Nov 2026): TLYCS destinations: newly modelled charities read their models (mechanical)
+
+Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline 11.2 → 11.2 (+0.00060%), 9 rows changed, against b794b426.

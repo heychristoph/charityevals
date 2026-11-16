@@ -12,8 +12,10 @@ Mechanical: audit-model lint 0 findings, no invariant violation (INV-12 incl. do
 ## Findings
 None.
 
-Model-sha: 9f976ac51da9f682a4fcba8fc9522b80ca032050e405db2a4b1975fc166439ac
+Model-sha: 71b7080971381110e527be5781a09d5b955b9aaa4e6d0c4d4334597288bde5c9
 Verdict: pass
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-risk trims); no number changed
+
+Re-stamped (16 Nov 2026): Preflight cleanup: a typed figure now read from its shared fact at the same value (@depression.suicide_rr_with_depression, @meta.fundraiser_side_effects_share, @irap.years_gain_lasts); labels and explainers reworded. Mechanical: headline 23.69 → 23.69 (−0.0016%), 11 rows changed, against bf8498ee.

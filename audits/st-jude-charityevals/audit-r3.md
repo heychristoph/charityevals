@@ -1,6 +1,6 @@
 # Audit: st-jude-charityevals, round 3
 Result: 7.206e-6 uov/$ = 0.003603 years of healthy life per 1,000 dollars (combined range 0.00047–0.0276); cause median 0.1085 (×0.033). Verdict: pass.
-Model-sha: d4b24096672667ae3ec3c42171eeb4d5432b37cc27a2d0bda90bc527483af947
+Model-sha: cf043522051e51d93ef93d926bf430869a7008a29cc9a9d253558a7345629c7e
 Scope: scoped verification of commit a1555789 (the two deleted rows and the three reworded explainers) and round 2's items. Scope of the model itself (FY2025, all programmes) unchanged since round 1 and not re-audited.
 Mechanical: lint 0 high / 1 medium (`far-below`, explained in round 1 #3, unchanged) / 1 low (`spread`, the summary states it); the two `unused` lows of round 2 are gone. Invariants: none. `scripts/check.ts st-jude-charityevals`: all models valid. normalization-audit and simulation-check not re-run (no shared-figure conversion touched). generated/ untouched (git status clean).
 Previous round: round 2's three lows (#13, #14, #15) all resolved (table below); no new findings.
@@ -26,3 +26,5 @@ Not re-fetched this round (no number, URL or quote changed in this model; the Sa
 
 ## Drivers
 Unchanged: the shared missing-data discount, `gl_mortality_reduction`, `gl_local_cost_per_child_2018`, `gl_evidence_adj`, `daly_per_child_death`. The most useful remaining improvement is a published outcome series across St. Jude Global sites.
+
+Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against migrate/data-model.
