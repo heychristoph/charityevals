@@ -137,9 +137,19 @@ export function rankingPlan(lib: Library, charity: string): EvaluatorPlan[] {
   }));
 }
 
+const variantsOf = new WeakMap<Library, Map<string, ResolvedModel[]>>();
+
 /** A model and its location variants. */
 export function locationsOf(lib: Library, m: ResolvedModel): ResolvedModel[] {
-  return [m, ...[...lib.models.values()].filter((v) => v.kind === "variant" && v.extends === m.id && v.output)];
+  // Every figure that combines locations asks, many times per change of values: the variants are
+  // indexed once per library, in the library's order.
+  let index = variantsOf.get(lib);
+  if (!index) {
+    variantsOf.set(lib, (index = new Map()));
+    for (const v of lib.models.values())
+      if (v.kind === "variant" && v.extends && v.output) index.set(v.extends, [...(index.get(v.extends) ?? []), v]);
+  }
+  return [m, ...(index.get(m.id) ?? [])];
 }
 
 /** Rows that size a location's grant in GiveWell's sheets. */

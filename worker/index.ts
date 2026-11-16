@@ -1,10 +1,13 @@
-// The site is static: Cloudflare serves dist/ directly. This Worker only runs for /api/* (see
-// run_worker_first in wrangler.jsonc) and handles two things: the "suggest a charity" form, sent
+// The site is static: Cloudflare serves dist/ directly. This Worker only runs for /api/* and /mcp (see
+// run_worker_first in wrangler.jsonc) and handles three things: the MCP server for AI assistants
+// (worker/mcp/, answering from /data/library.json); the "suggest a charity" form, sent
 // through Email Routing, which only delivers to the account's verified destination addresses (the
 // secret SUGGEST_TO, the inbox hello@charityevals.org forwards to); and visitor analytics events,
 // written to Workers Analytics Engine (worker/events.ts, docs/analytics.md).
 
 import { toDataPoint } from "./events";
+import { cachedLoader, type LibraryInput } from "./mcp/library";
+import { handleMcp, type RateLimiter } from "./mcp/server";
 
 const CONTACT = "hello@charityevals.org";
 const FROM = { email: "forms@charityevals.org", name: "charityevals suggestions" };
@@ -110,9 +113,20 @@ async function event(request: Request, env: Env): Promise<Response> {
   return done;
 }
 
+// The models, built once per isolate from the build's /data/library.json (worker/mcp/library.ts).
+let loadLibrary: ReturnType<typeof cachedLoader> | undefined;
+
 export default {
   async fetch(request, env): Promise<Response> {
     const { pathname } = new URL(request.url);
+    if (pathname === "/mcp" || pathname === "/mcp/") {
+      loadLibrary ??= cachedLoader(async () => {
+        const res = await env.ASSETS.fetch(new Request(new URL("/data/library.json", request.url)));
+        if (!res.ok) throw new Error(`/data/library.json: ${res.status}`);
+        return res.json<LibraryInput>();
+      });
+      return handleMcp(request, loadLibrary, (env as { MCP_LIMITER?: RateLimiter }).MCP_LIMITER);
+    }
     if (pathname === "/api/suggest") return suggest(request, env);
     if (pathname === "/api/event") return event(request, env);
     return env.ASSETS.fetch(request);

@@ -647,8 +647,9 @@ function downstream(g: Graph, k: number): number[] {
 /** Every row's value by position, and each model read live (`#id`). */
 type Run = { v: number[]; models: Record<string, number> };
 
-// A model's values with no inputs changed, per assumption values and view: a sensitivity swing or an
-// uncertainty step changes one input and recomputes only the rows that read it.
+// A model's values with no inputs changed, per assumption values and view: computed once (a model's
+// headline, its result read by other models and its page all ask for it), and the base a sensitivity
+// swing or an uncertainty step starts from, changing one input and recomputing only the rows that read it.
 const bases = new WeakMap<Record<string, number>, WeakMap<ResolvedModel, Partial<Record<View, Run>>>>();
 
 function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs: Record<string, number>, view: View): Run {
@@ -659,6 +660,7 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
   if (!byModel) bases.set(av, (byModel = new WeakMap()));
   let byView = byModel.get(m);
   if (!byView) byModel.set(m, (byView = {}));
+  if (!keys.length && byView[view]) return byView[view]!;
   const base = keys.length ? (byView[view] ??= run(lib, m, av, {}, view)) : undefined;
   // Another model's result is kept beside the rows, so every later lookup over these values (the tree,
   // uncertainty) reads the same number. It is always our view at the reader's values: the evaluator
@@ -684,14 +686,14 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
         const r = p.rows[k];
         env.v[k] = inputs[r.id] ?? (formula(k) ? evaluate(r.node!, look) : inputValue(r, view));
       }
-      return { v: env.v, models };
+      return (byView[view] = { v: env.v, models });
     }
     const fns = compiled(p);
     for (let k = 0; k < n; k++) {
       const r = p.rows[k];
       env.v[k] = inputs[r.id] ?? (formula(k) ? fns[k]!(env) : inputValue(r, view));
     }
-    return { v: env.v, models };
+    return (byView[view] = { v: env.v, models });
   }
   // From the base: only the rows given a value or reading a changed fact or model, and the rows
   // computed from them, are recomputed, in computing order.
