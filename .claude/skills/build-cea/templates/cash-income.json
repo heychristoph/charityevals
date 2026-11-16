@@ -208,6 +208,116 @@
       "explainer": "TEMPLATE: recipients' consumption per person per year before the transfer, in 2017 international dollars, from the program's baseline survey or the World Bank poverty data for the region (household-survey consumption, @survey_consumption.*); a national-accounts figure only × the country's shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_<iso3>, a shared conversion, not thin data)."
     },
     {
+      "id": "gain_ratio",
+      "section": "effect",
+      "label": "Measured consumption gain, as a share of the control group's",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.12,
+        "high": 0.2
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: programme RCT",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. the trial's consumption gain per person ÷ the control group's mean (treatment-on-treated where take-up is partial), the CI as low/high. Several trials: blend by precision, weights from <trial>_ratio_se rows built from fixed point rows (CI width ÷ 3.92 ÷ control mean), never from the ranged estimate itself, or each draw moves its own weight."
+    },
+    {
+      "id": "y1_share",
+      "section": "effect",
+      "label": "Share of the first year with the gain",
+      "format": "percent",
+      "value": {
+        "low": 0.25,
+        "best": 0.5,
+        "high": 0.75
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: programme RCT",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. how much of the first year after delivery already has the full gain (it builds while assets and training arrive); 1 when it starts at once."
+    },
+    {
+      "id": "measured_years",
+      "section": "effect",
+      "label": "Further years the gain is measured to hold",
+      "format": "number",
+      "value": {
+        "low": 1,
+        "best": 2,
+        "high": 3
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: programme RCT follow-up",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. years after the first that the trials' follow-ups show the gain at full size (last follow-up minus one)."
+    },
+    {
+      "id": "fade_rate",
+      "section": "effect",
+      "label": "Yearly fade of the gain after the last follow-up",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "TEMPLATE: follow-up study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. the share of the gain lost each year after the measured years, from the trend across follow-ups or longer studies of the same kind of programme; below 1."
+    },
+    {
+      "id": "tail_years",
+      "section": "effect",
+      "label": "Years the fading gain is counted after the last follow-up",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 5,
+        "high": 10
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: follow-up study",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. how long the fading gain is counted beyond the measured years; 0 counts only what was measured."
+    },
+    {
+      "id": "measured_ln_gain_per_person",
+      "section": "effect",
+      "label": "Total ln(consumption) gain per person, measured-gain path",
+      "format": "number",
+      "formula": "ln(1 + gain_ratio) * (y1_share + pv_annuity_due(1, $discount_rate, measured_years) / (1 + $discount_rate) + (1 - fade_rate) / (1 + $discount_rate) ^ (1 + measured_years) * pv_annuity_due(1, (1 + $discount_rate) / (1 - fade_rate) - 1, tail_years))",
+      "explainer": "TEMPLATE: measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. Part of the first year, the measured years and a fading tail, each discounted at the shared rate from delivery (the wait before delivery is wait_discount)."
+    },
+    {
       "id": "share_consumed_y1",
       "section": "effect",
       "label": "Share of the transfer consumed in year 1",
@@ -252,7 +362,7 @@
         "quote": "REPLACE: verbatim sentence",
         "retrieved": "2026-01-01"
       },
-      "explainer": "TEMPLATE: returns on the invested share in each later year, relative to the year-1 consumption gain, from the follow-up studies you cite. For a recurring income gain instead of a lump sum, replace y1_ln_gain and the later-years rows with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years)."
+      "explainer": "TEMPLATE: returns on the invested share in each later year, relative to the year-1 consumption gain, from the follow-up studies you cite. For a gain measured by the programme's own trials, use the measured-gain rows instead."
     },
     {
       "id": "later_years",
@@ -391,6 +501,56 @@
       "explainer": "TEMPLATE: below 1 when other funders (governments, the Global Fund) would have paid for this work without the donation; above 1 when the donation pulls in other money. GiveWell's top charities typically sit at 0.85–0.95."
     },
     {
+      "id": "gift_to_grant_years",
+      "section": "adjustments",
+      "label": "Years a donation waits before the charity spends it",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 0.5,
+        "high": 1
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: audited financial statements",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: the charity's unspent funds at year end ÷ its yearly spending (balance sheet and statement of activities); 0 for one that spends as it raises."
+    },
+    {
+      "id": "delay_years",
+      "section": "adjustments",
+      "label": "Years from the charity's spending to the transfer or assets reaching households",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.5
+      },
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "TEMPLATE: charity programme reports",
+        "url": "https://example.org/REPLACE",
+        "page": "REPLACE: page/table",
+        "quote": "REPLACE: verbatim sentence",
+        "retrieved": "2026-01-01"
+      },
+      "explainer": "TEMPLATE: enrolment, targeting and payment or asset schedules, from the charity's programme reports."
+    },
+    {
+      "id": "wait_discount",
+      "section": "adjustments",
+      "label": "Discount for the wait until the transfer or assets arrive",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years)",
+      "explainer": "Every wait is discounted at the shared rate, like every future benefit; the gains themselves are counted from delivery."
+    },
+    {
       "id": "missing_data_adj",
       "section": "adjustments",
       "label": "Counted less where the outcome isn't measured for this charity",
@@ -403,7 +563,7 @@
       "section": "adjustments",
       "label": "All adjustments combined",
       "format": "multiple",
-      "formula": "evidence_adj * counterfactual_adj * attribution_share * leverage_funging_adj * missing_data_adj",
+      "formula": "evidence_adj * counterfactual_adj * attribution_share * leverage_funging_adj * wait_discount * missing_data_adj",
       "explainer": "The product of the adjustments above."
     },
     {

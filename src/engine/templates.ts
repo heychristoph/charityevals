@@ -170,6 +170,8 @@ export const TEMPLATES: Record<Family, TemplateSpec> = {
     [
       { row: "household_size", ref: "@household_size.", why: "household size is the site's one figure for the place (facts/household_size.json); a size measured in the program's own recipients needs that reason", severity: "medium" },
       { row: "uov_consumption", ref: "$uov_per_ln_consumption", why: "income gains are valued at the shared value of a doubled income" },
+      { row: "wait_discount", ref: "$discount_rate", why: "the wait until the transfer or assets arrive (funds held, delivery) is discounted at the shared rate" },
+      { row: "measured_ln_gain_per_person", ref: "$discount_rate", why: "a measured gain's later years are discounted at the shared rate" },
     ],
   ),
   wellbeing: spec(

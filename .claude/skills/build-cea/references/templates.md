@@ -165,12 +165,10 @@ spillovers and mortality as ratios.
 - Baseline consumption per person per year from a household survey of the people served
   (`@survey_consumption.*`), in the transfer's PPP base; national accounts only × the shared
   `survey_to_na_<iso3>` ratio (a shared conversion, not thin data).
-- Household size is the place's fact (rural where recipients are rural); the recipients' own
-  size only with that reason stated.
 - A benefit stated as a multiple of cash is that multiple × `@cash.uov_per_dollar`; GiveDirectly as a
   destination is `#givewell:givedirectly`, as a comparison `#givedirectly` (read live).
-- Recurring income gains: `ln(1+gain/baseline) × pv_annuity_due(1,$discount_rate,persistence_years)`,
-  persistence from follow-up studies.
+- A gain the programme's own trials measure (graduation, livelihoods): the measured-gain rows replace
+  the transfer chain. Every wait before delivery is in `wait_discount`.
 
 ## wellbeing (wellby, unit_cost)
 

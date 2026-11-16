@@ -11,7 +11,7 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
                     estimate_basis (INV-18), staff pay from @staff_pay, $discount_rate on every wait
   direct-health     deaths by age band (@moral_weights) x $life_value_multiplier, stillbirths at
                     @givewell_shared.uov_per_stillbirth, long-term income years @givewell_shared
-  cash-income       household size @household_size.<place>, PPP @<country>
+  cash-income       household size @household_size.<place>, PPP @<country>, the wait before delivery
   wellbeing         household size @household_size.<place>, spillover and SD-years @wellby_factors,
                     deaths only through uov_valued_outside_wellbys -> wellbys_from_uov (INV-17)
   corporate-campaign  $win_years_counted, the wait until the pledges take effect discounted,
@@ -320,11 +320,24 @@ T["cash-income"] = model("cash-income", "cash transfers and income gains", "uov"
         f("transfer_per_person_ppp", "reach", "Transfer per person (PPP)", "transfer_per_household * ppp_factor / household_size", None, "usd"),
         inp("baseline_consumption", "effect", "Baseline annual consumption per person (PPP)", {"low": 500, "best": 650, "high": 800}, "observed",
             "recipients' consumption per person per year before the transfer, in 2017 international dollars, from the program's baseline survey or the World Bank poverty data for the region (household-survey consumption, @survey_consumption.*); a national-accounts figure only × the country's shared survey-to-national-accounts ratio (@survey_consumption.survey_to_na_<iso3>, a shared conversion, not thin data).", "usd", source=src("baseline survey / World Bank PIP")),
+        inp("gain_ratio", "effect", "Measured consumption gain, as a share of the control group's", {"low": 0.05, "best": 0.12, "high": 0.2}, "estimate",
+            "measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. the trial's consumption gain per person ÷ the control group's mean (treatment-on-treated where take-up is partial), the CI as low/high. Several trials: blend by precision, weights from <trial>_ratio_se rows built from fixed point rows (CI width ÷ 3.92 ÷ control mean), never from the ranged estimate itself, or each draw moves its own weight.", "percent", source=src("programme RCT")),
+        inp("y1_share", "effect", "Share of the first year with the gain", {"low": 0.25, "best": 0.5, "high": 0.75}, "estimate",
+            "measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. how much of the first year after delivery already has the full gain (it builds while assets and training arrive); 1 when it starts at once.", "percent", source=src("programme RCT")),
+        inp("measured_years", "effect", "Further years the gain is measured to hold", {"low": 1, "best": 2, "high": 3}, "estimate",
+            "measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. years after the first that the trials' follow-ups show the gain at full size (last follow-up minus one).", "number", "years", src("programme RCT follow-up")),
+        inp("fade_rate", "effect", "Yearly fade of the gain after the last follow-up", {"low": 0, "best": 0.1, "high": 0.3}, "estimate",
+            "measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. the share of the gain lost each year after the measured years, from the trend across follow-ups or longer studies of the same kind of programme; below 1.", "percent", source=src("follow-up study")),
+        inp("tail_years", "effect", "Years the fading gain is counted after the last follow-up", {"low": 0, "best": 5, "high": 10}, "estimate",
+            "measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. how long the fading gain is counted beyond the measured years; 0 counts only what was measured.", "number", "years", src("follow-up study")),
+        f("measured_ln_gain_per_person", "effect", "Total ln(consumption) gain per person, measured-gain path",
+          "ln(1 + gain_ratio) * (y1_share + pv_annuity_due(1, $discount_rate, measured_years) / (1 + $discount_rate) + (1 - fade_rate) / (1 + $discount_rate) ^ (1 + measured_years) * pv_annuity_due(1, (1 + $discount_rate) / (1 - fade_rate) - 1, tail_years))",
+          "TEMPLATE: measured-gain path (graduation, livelihood: the programme's own trials measure consumption); when used, delete the transfer-chain rows (share_consumed_y1 to later_years_ratio) and set ln_gain_per_person to measured_ln_gain_per_person. Part of the first year, the measured years and a fading tail, each discounted at the shared rate from delivery (the wait before delivery is wait_discount).", "number"),
         inp("share_consumed_y1", "effect", "Share of the transfer consumed in year 1", {"low": 0.45, "best": 0.57, "high": 0.7}, "estimate",
             "the rest is invested. From the RCT literature (Egger et al. 2022; Haushofer & Shapiro 2016).", "percent", source=src("RCT")),
         f("y1_ln_gain", "effect", "Increase in ln(consumption) in year 1", "ln(1 + share_consumed_y1 * transfer_per_person_ppp / baseline_consumption)", None, "number"),
         inp("later_gain_share_per_year", "effect", "Yearly gain in later years, as a share of the year-1 gain", {"low": 0.1, "best": 0.165, "high": 0.23}, "estimate",
-            "returns on the invested share in each later year, relative to the year-1 consumption gain, from the follow-up studies you cite. For a recurring income gain instead of a lump sum, replace y1_ln_gain and the later-years rows with ln(1 + gain / baseline) × pv_annuity_due(1, $discount_rate, persistence_years).", "percent", source=src("follow-up study")),
+            "returns on the invested share in each later year, relative to the year-1 consumption gain, from the follow-up studies you cite. For a gain measured by the programme's own trials, use the measured-gain rows instead.", "percent", source=src("follow-up study")),
         inp("later_years", "effect", "Years the later gains last", {"low": 5, "best": 9, "high": 15}, "estimate",
             "how long the invested share keeps paying returns, from follow-up studies.", "number", "years", src("follow-up study")),
         f("later_years_ratio", "effect", "Value of later-year gains relative to year 1, present value", "later_gain_share_per_year * pv_annuity_due(1, $discount_rate, later_years) / (1 + $discount_rate)",
@@ -334,7 +347,14 @@ T["cash-income"] = model("cash-income", "cash transfers and income gains", "uov"
             "local economic spillovers. Weakly identified (Egger et al. 2022), so give a wide range.", "percent", source=src("Egger et al. 2022")),
         inp("mortality_uov_ratio", "effect", "Mortality benefits as a share of consumption benefits", {"low": 0, "best": 0.2, "high": 0.5}, "estimate",
             "child-mortality effects of cash, as a share of consumption value. 0 for programs without mortality evidence. Where the evidence gives deaths averted, count them as deaths instead (@moral_weights by age band × $life_value_multiplier, as the direct-health template).", "percent", source=src("study")),
-    ] + adj_rows(leverage=True, unmodelled=True, implementation=False) + [
+    ] + adj_rows(leverage=True, unmodelled=True, implementation=False, factors_extra=["wait_discount"], extra=[
+        inp("gift_to_grant_years", "adjustments", "Years a donation waits before the charity spends it", {"low": 0, "best": 0.5, "high": 1}, "estimate",
+            "the charity's unspent funds at year end ÷ its yearly spending (balance sheet and statement of activities); 0 for one that spends as it raises.", "number", "years", src("audited financial statements")),
+        inp("delay_years", "adjustments", "Years from the charity's spending to the transfer or assets reaching households", {"low": 0.1, "best": 0.25, "high": 0.5}, "estimate",
+            "enrolment, targeting and payment or asset schedules, from the charity's programme reports.", "number", "years", src("charity programme reports")),
+        f("wait_discount", "adjustments", "Discount for the wait until the transfer or assets arrive", "(1 + $discount_rate) ^ -(gift_to_grant_years + delay_years)",
+          "Every wait is discounted at the shared rate, like every future benefit; the gains themselves are counted from delivery.", "percent"),
+    ]) + [
         f("uov_consumption", "outcome", "Units of value from recipients' consumption", "people_reached * ln_gain_per_person * $uov_per_ln_consumption * total_adj", None, "number", "units of value"),
         f("uov_spillovers", "outcome", "Units of value from spillovers", "uov_consumption * spillover_ratio", None, "number", "units of value"),
         f("uov_mortality", "outcome", "Units of value from mortality effects", "uov_consumption * mortality_uov_ratio * $life_value_multiplier", None, "number", "units of value"),
