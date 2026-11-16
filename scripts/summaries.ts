@@ -13,6 +13,7 @@ import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Distribution, type Library } from "../src/engine/model";
 import { simulate } from "../src/engine/montecarlo";
 import { isValueOfInformation } from "../src/engine/ranking";
+import { renderRaw } from "../src/engine/prose";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
@@ -35,9 +36,12 @@ function library() {
   ) };
 }
 
-export function summaries({ raws, lib }: ReturnType<typeof library>): unknown[] {
+export function summaries({ raws, lib }: ReturnType<typeof library>, dist?: Record<string, Distribution>): unknown[] {
   const av = assumptionValues(lib.assumptions);
-  return raws.map((raw) => {
+  // The browser shows a stand-in's summary as written, so its numbers (`{{result}}`) are rendered here.
+  const withRanges: Library = { ...lib, distributions: dist };
+  return raws.map((written) => {
+    const raw = renderRaw(withRanges, written);
     const m = lib.models.get(raw.id)!;
     const values = compute(lib, m, av);
     // Live: reads an assumption or a ranged input, directly or through other rows.
@@ -110,7 +114,8 @@ export function distributions(lib: Library): Record<string, Distribution> {
 }
 
 const built = library();
-for (const [file, fresh] of [[out, summaries(built)], [usageOut, factUsage(built.lib)], [distributionsOut, distributions(built.lib)]] as const) {
+const dist = distributions(built.lib);
+for (const [file, fresh] of [[out, summaries(built, dist)], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
       console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts`);

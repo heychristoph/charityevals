@@ -24,14 +24,13 @@ const av = assumptionValues(lib.assumptions);
 const month = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long", timeZone: "UTC" }) : "undated");
 // Rounded as the site rounds it.
 const fmt = formatYears;
-// The site's own number: the headline the model page shows (engine headline(), default values), in
-// years of healthy life per $1,000. The span lets the page keep it in step with the reader's values
-// (src/components/Headline.tsx); the text inside is the default. A unit with no exchange rate stays in
-// its own terms.
-const result = (m: ResolvedModel) => {
-  const v = headline(lib, m, av);
-  if (!comparable(lib, m)) return `${fmt(v)} ${lib.assumptions.units[m.output!.unit].label} per dollar`;
-  return `<span data-figure="headline" data-model="${m.id}">${fmt(v)}</span> years of healthy life per $1,000`;
+// The site's own number: the headline the model page shows, in years of healthy life per $1,000, as a
+// placeholder the site renders from the model (docs/prose-numbers.md), so it never goes stale. A unit
+// with no exchange rate stays in its own terms.
+const figure = (m: ResolvedModel, main: ResolvedModel) => (m.id === main.id ? "{{result}}" : `{{result:${m.id}}}`);
+const result = (m: ResolvedModel, main: ResolvedModel) => {
+  if (!comparable(lib, m)) return `${fmt(headline(lib, m, av))} ${lib.assumptions.units[m.output!.unit].label} per dollar`;
+  return `${figure(m, main)} years of healthy life per $1,000`;
 };
 const fidelity = (m: ResolvedModel) => {
   const reproduced = m.rows.filter((r) => r.expected !== undefined).length;
@@ -82,7 +81,7 @@ for (const c of lib.charities.values()) {
     "| --- | --- | --- | --- | --- |",
     ...models.map((m) => {
       const f = fidelity(m);
-      return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | [${lib.owners.get(m.owner)!.short}](/evaluators/${m.owner}) | ${month(m.source?.published)} | ${comparable(lib, m) ? `<span data-figure="headline" data-model="${m.id}">${fmt(headline(lib, m, av))}</span>` : result(m)} | ${f.reproduced ? `${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""}` : "none: built from the published figures"} |`;
+      return `| [${plainModelName(m.name).replace(/\|/g, "/")}](${url(m)}) | [${lib.owners.get(m.owner)!.short}](/evaluators/${m.owner}) | ${month(m.source?.published)} | ${comparable(lib, m) ? figure(m, main) : result(m, main)} | ${f.reproduced ? `${f.reproduced}${f.fixed ? `, ${f.fixed} kept fixed` : ""}` : "none: built from the published figures"} |`;
     }),
     "",
     ...(main.theoretical

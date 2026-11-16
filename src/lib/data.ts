@@ -6,6 +6,7 @@
 // passes its full rows to the island (bulkRaw).
 import { buildLibrary, modelsOf, type Library, type ResolvedModel } from "../engine/model";
 import { primaryModel, rankingPlan } from "../engine/ranking";
+import { renderLibraryProse, renderRaw } from "../engine/prose";
 import assumptions from "../../assumptions/default.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
 import distributions from "../../generated/distributions.json";
@@ -33,11 +34,22 @@ export const lib = buildLibrary(
 
 if (lib.errors.length) throw new Error(`Model errors (run npm run check):\n${lib.errors.join("\n")}`);
 
-/** A bulk model's full file. On the server, from models/grants/; in the browser, the copy the page's
- * client:model directive fetched before hydrating (lib/model-directive.ts). */
+// Numbers in the models' text come from the models (`{{result}}`, docs/prose-numbers.md): rendered once,
+// at the default assumptions, before any page reads a summary or an explainer.
+const proseErrors = renderLibraryProse(lib);
+if (proseErrors.length) throw new Error(`Placeholders that name nothing (docs/prose-numbers.md):\n${proseErrors.join("\n")}`);
+
+const renderedBulk = new Map<string, unknown>();
+/** A bulk model's full file, its text rendered. On the server, from models/grants/; in the browser, the
+ * copy the page's client:model directive fetched before hydrating (lib/model-directive.ts), which the
+ * server rendered (pages/models/[id].json.ts). */
 export function bulkRaw(id: string): unknown {
   if (!import.meta.env.SSR) return globalThis.__charityevalsModels?.[id];
-  return Object.values(bulkFiles).find((f) => f.default.id === id)?.default;
+  if (!renderedBulk.has(id)) {
+    const raw = Object.values(bulkFiles).find((f) => f.default.id === id)?.default;
+    renderedBulk.set(id, raw && renderRaw(lib, raw));
+  }
+  return renderedBulk.get(id);
 }
 
 /** Models with a page: charities and their variants, not templates. */

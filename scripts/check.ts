@@ -7,6 +7,7 @@ import { buildLibrary, assumptionValues, compute, comparable } from "../src/engi
 import { checkModel } from "../src/engine/check-model";
 import { sensitivity, flags } from "../src/engine/sensitivity";
 import { comparisonFindings, namesFor } from "../src/engine/lint";
+import { checkProseNumbers } from "../src/engine/prose-numbers";
 
 const root = join(import.meta.dirname, "..");
 
@@ -72,6 +73,13 @@ if (!only) {
     say(`writeups/${f}`, readFileSync(join(root, "writeups", f), "utf8"), charity);
   }
   for (const c of lib.charities.values()) say(`charities/${c.id}.json summary`, c.summary ?? "", c.id);
+}
+
+// Numbers in prose come from the model (docs/prose-numbers.md): a placeholder must name something, and a
+// write-up never types the headline, which would go stale the next time the model changes.
+for (const m of lib.models.values()) {
+  if (only && m.id !== only) continue;
+  for (const f of checkProseNumbers(m.id)) if (f.severity === "high") errors.push(`${m.id} ${f.field}: ${f.message}`);
 }
 
 if (errors.length) {

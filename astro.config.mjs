@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { lastmodFor } from "./scripts/sitemap-lastmod.mjs";
+import { proseNumbers } from "./src/lib/prose-plugin.ts";
 
 // The history pages read git from the repository root, wherever the build is started from.
 const repoRoot = fileURLToPath(new URL(".", import.meta.url));
@@ -34,5 +35,6 @@ export default defineConfig({
     }),
   ],
   devToolbar: { enabled: false },
-  vite: { define: { __REPO_ROOT__: JSON.stringify(repoRoot) } },
+  // Write-ups' numbers come from the models (docs/prose-numbers.md).
+  vite: { define: { __REPO_ROOT__: JSON.stringify(repoRoot) }, plugins: [proseNumbers()] },
 });
