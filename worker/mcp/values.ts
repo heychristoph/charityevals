@@ -78,7 +78,7 @@ export function parseValues(a: Assumptions, raw: unknown): Values {
     user[id] = n;
   }
   const applied = sanitizeValues(a, user);
-  const { set: linkSet, values } = serialiseValues(presets, applied);
+  const { set: linkSet, values } = serialiseValues(presets, applied, { explicitDefault: true });
   const query = linkSet ? `?set=${encodeURIComponent(linkSet)}` : values ? `?values=${values}` : "";
   return { set: preset, applied, query, scenario: presetIn(presets, applied) };
 }

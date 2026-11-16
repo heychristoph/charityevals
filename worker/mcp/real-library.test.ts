@@ -71,6 +71,16 @@ describe("MCP server on the real library", () => {
     }
   });
 
+  it("gives a charity with several evaluators the primary's figure and the range across all of them, as the rankings do", () => {
+    const multi = rankings(loaded.lib, assumptionValues(loaded.lib.assumptions)).filter((f) => f.evaluators.length > 1);
+    expect(multi.length).toBeGreaterThan(5);
+    for (const f of multi) {
+      expect(f.low).toBe(Math.min(...f.evaluators.map((e) => e.low)));
+      expect(f.high).toBe(Math.max(...f.evaluators.map((e) => e.high)));
+      expect(f.central).toBe(f.evaluators.find((e) => e.owner === f.primary)!.central);
+    }
+  });
+
   it("answers each tool from the build's files as it would compute them, within the size cap, without unpublished evaluators", async () => {
     // What the build writes, through JSON as the worker reads it.
     const pre = precompute(site);

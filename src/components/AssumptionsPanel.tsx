@@ -365,7 +365,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
             type="button"
             className="link-button"
             onClick={() => {
-              navigator.clipboard?.writeText(shareUrl(window.location.href)).then(() => {
+              navigator.clipboard?.writeText(shareUrl(window.location.href, undefined, { explicitDefault: true })).then(() => {
                 track("link_copy", { value: changedCount });
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1600);

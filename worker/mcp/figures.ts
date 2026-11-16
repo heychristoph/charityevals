@@ -75,7 +75,12 @@ export function charityFigure(lib: Library, charity: string, av: Record<string, 
   });
   if (!evaluators.length) return undefined;
   const lead = evaluators.find((e) => e.owner === primaryModel(lib, charity)?.owner) ?? evaluators[0];
-  return { charity: c, primary: lead.owner, central: lead.central, low: lead.low, high: lead.high, evaluators };
+  // The primary evaluator's figure, with the range across every evaluator kept, as the rankings show it
+  // (computeResults in src/lib/use-results.ts).
+  return {
+    charity: c, primary: lead.owner, central: lead.central,
+    low: Math.min(...evaluators.map((e) => e.low)), high: Math.max(...evaluators.map((e) => e.high)), evaluators,
+  };
 }
 
 /** Every charity on the rankings at values `av`, best first (the homepage's order). */

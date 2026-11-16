@@ -81,14 +81,15 @@ export function parseShare(search: string): Overrides | undefined {
 export { shortNumber };
 
 /** The query for a state: a value set's id when it is exactly one, else the changed values. */
-export const serialise = (o: Overrides) => serialiseValues(PRESETS, o);
+export const serialise = (o: Overrides, opts?: { explicitDefault?: boolean }) => serialiseValues(PRESETS, o, opts);
 
 const STATE_PARAM = (k: string) => k === "set" || k === "values" || k === "view" || k.startsWith("a.");
 
-/** `href` carrying the given values (by default the current ones), its other params and hash kept. */
-export function shareUrl(href: string, o?: Overrides): string {
+/** `href` carrying the given values (by default the current ones), its other params and hash kept.
+ * `explicitDefault` for a link to share: the defaults travel as `set=default` (see serialiseValues). */
+export function shareUrl(href: string, o?: Overrides, opts?: { explicitDefault?: boolean }): string {
   if (!o) ensureLoaded();
-  const { set, values } = serialise(o ?? current);
+  const { set, values } = serialise(o ?? current, opts);
   const add: [string, string][] = [];
   if (set) add.push(["set", set]);
   if (values) add.push(["values", values]);

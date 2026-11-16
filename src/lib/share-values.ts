@@ -67,10 +67,12 @@ export function presetIn(presets: Preset[], o: Record<string, number>): string {
 }
 
 /** A share link's query for a state (`?set=` / `?values=`): a value set's id when it is exactly one, else
- * the changed values. */
-export function serialiseValues(presets: Preset[], o: Record<string, number>): { set?: string; values?: string } {
+ * the changed values. `explicitDefault`: the defaults as `set=default`, so a link someone shares (Copy link,
+ * an MCP answer) shows the defaults even to a recipient with saved values of their own; the address bar,
+ * which follows every change, leaves the defaults out. */
+export function serialiseValues(presets: Preset[], o: Record<string, number>, { explicitDefault = false } = {}): { set?: string; values?: string } {
   const preset = presetIn(presets, o);
-  if (preset === "default") return {};
+  if (preset === "default") return explicitDefault ? { set: "default" } : {};
   if (preset !== "custom") return { set: preset };
   return { values: Object.entries(o).map(([k, v]) => `${k}:${shortNumber(v)}`).join(",") };
 }

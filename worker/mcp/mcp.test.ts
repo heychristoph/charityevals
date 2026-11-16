@@ -201,7 +201,7 @@ describe("MCP tools", () => {
     // At the default: nothing changed, no link values.
     const same = (await call("run_model", { id: "cash", values: { discount_rate: 0.04 } })).out;
     expect(same.values).toBe("defaults");
-    expect(same.url).toBe("https://charityevals.org/cash");
+    expect(same.url).toBe("https://charityevals.org/cash?set=default");
     // Values the models can't run on: negative, a share above 100%, 0 on a log scale.
     expect((await call("run_model", { id: "cash", values: { uov_per_daly: -2 } })).error).toContain("negative");
     expect((await call("run_model", { id: "cash", values: { discount_rate: 1.5 } })).error).toContain("at most 1");

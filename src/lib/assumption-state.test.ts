@@ -121,6 +121,13 @@ describe("share links", () => {
     expect(shareUrl(href, { discount_rate: 0.001 })).toBe("https://charityevals.org/givedirectly?m=wellby&n.cost=250&set=longtermist#flags");
     expect(shareUrl(href, {})).toBe("https://charityevals.org/givedirectly?m=wellby&n.cost=250#flags");
   });
+
+  it("say the defaults out loud in a link to share, so a recipient's saved values don't replace them", () => {
+    const href = "https://charityevals.org/givedirectly?set=longtermist";
+    expect(shareUrl(href, {}, { explicitDefault: true })).toBe("https://charityevals.org/givedirectly?set=default");
+    expect(parseShare("?set=default")).toEqual({});
+    expect(shareUrl(href, { discount_rate: 0.001 }, { explicitDefault: true })).toBe("https://charityevals.org/givedirectly?set=longtermist");
+  });
 });
 
 describe("on load", () => {
