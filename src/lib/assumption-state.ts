@@ -4,7 +4,8 @@
 //
 // The URL: `?set=<value set id>` for a ready-made set, else `?values=<id>:<number>,<id>:<number>` with
 // the values that differ from the defaults. A link's values win over stored ones and become the
-// visitor's; unknown ids and non-numbers are dropped, numbers are clamped to the slider's ends. Links
+// visitor's; unknown ids, non-numbers and values the models can't run on are dropped (any value the
+// panel takes when typed is kept, past the slider's ends too). Links
 // from before (`?a.<id>=<n>`) still read. The URL follows each change by history.replaceState: no
 // history entries, and analytics records only the path (worker/events.ts drops the query).
 import { useSyncExternalStore } from "react";
@@ -67,7 +68,16 @@ export function sliderEnds(r: Pick<Row, "value" | "slider">): { low: number; hig
 const ROWS = new Map((assumptions.rows as unknown as Row[]).map((r) => [r.id, r]));
 const isDefault = (v: number, best: number) => Math.abs(v - best) <= Math.abs(best) * 1e-9;
 
-/** Only values a reader can set, each within its control's reach; values at the default are dropped. */
+/** Whether the models can run on a value, as typing it in the panel allows: not negative, not 0 on a log
+ * slider without a zero stop, and a share, rate or probability shown as a percent at most 100%. Past the
+ * slider's ends is fine. */
+function runnable(r: Row, v: number): boolean {
+  const { low, zero } = sliderEnds(r);
+  if (v < 0 || (v === 0 && low > 0 && !r.slider?.linear && !zero)) return false;
+  return !(r.format === "percent" && !r.shown_as && v > 1);
+}
+
+/** Only values a reader can set, each one the models can run on; values at the default are dropped. */
 export function sanitize(o: Overrides): Overrides {
   const out: Overrides = {};
   for (const [id, raw] of Object.entries(o)) {
@@ -77,10 +87,7 @@ export function sanitize(o: Overrides): Overrides {
     if (r.control === "country") {
       if (v !== 0 && !byCode.has(v)) continue;
     } else if (r.format === "toggle") v = v >= 0.5 ? 1 : 0;
-    else {
-      const { low, high, zero } = sliderEnds(r);
-      v = zero && v <= 0 ? 0 : Math.min(high, Math.max(low, v));
-    }
+    else if (!runnable(r, v)) continue;
     if (!isDefault(v, pickValue(r.value))) out[id] = v;
   }
   return out;
@@ -170,13 +177,17 @@ function ensureLoaded() {
   }
 }
 
-/** Set one value, within the slider's ends (as a link would carry it); undefined or the default puts it back. */
+/** Set one value; undefined or the default puts it back. A value no link could carry (one the models
+ * can't run on) is ignored, so every state round-trips through a link. */
 export function setAssumption(id: string, value: number | undefined, defaultValue: number) {
   ensureLoaded();
   const next = { ...current };
-  const v = value === undefined || isDefault(value, defaultValue) ? undefined : sanitize({ [id]: value })[id];
-  if (v === undefined) delete next[id];
-  else next[id] = v;
+  if (value === undefined || isDefault(value, defaultValue)) delete next[id];
+  else {
+    const v = sanitize({ [id]: value })[id];
+    if (v === undefined) return;
+    next[id] = v;
+  }
   current = next;
   persist();
   listeners.forEach((l) => l());

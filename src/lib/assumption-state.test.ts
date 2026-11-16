@@ -94,12 +94,15 @@ describe("share links", () => {
     expect(parseShare("?set=nope&values=nope:1,discount_rate:abc")).toBeUndefined();
   });
 
-  it("drop unknown, fixed and derived ids and non-numbers; clamp to the slider's ends", () => {
+  it("drop unknown, fixed and derived ids, non-numbers and values the models can't run on", () => {
     expect(parseShare("?values=nope:1,climate_heat_share:0.5,life_value_multiplier:,discount_rate:x,uov_per_daly:3")).toEqual({ uov_per_daly: 3 });
-    expect(parseShare("?values=discount_rate:0.5,uov_per_daly:-2")).toEqual({ discount_rate: 0.08, uov_per_daly: 1 });
-    // A zero stop below the log scale's low end; above the top, the top.
+    // Past the slider's ends, as typed in the panel: kept.
+    expect(parseShare("?values=discount_rate:0.1,uov_per_daly:40")).toEqual({ discount_rate: 0.1, uov_per_daly: 40 });
+    // Negative; a probability above 1; 0 on a log slider without a zero stop: dropped.
+    expect(parseShare("?values=uov_per_daly:-2,ai_catastrophe_chance:1.5,discount_rate:0")).toBeUndefined();
+    // A zero stop; a weight shown in other terms (chickens per person) may pass 100%.
     expect(parseShare("?values=chicken_vs_person:0")).toEqual({ chicken_vs_person: 0 });
-    expect(parseShare("?values=chicken_vs_person:3")).toEqual({ chicken_vs_person: 1 });
+    expect(parseShare("?values=chicken_vs_person:3")).toEqual({ chicken_vs_person: 3 });
     // Toggles are on or off; a country must exist (0 is "not set", the default).
     expect(parseShare("?values=ignore_old_estimates:0.2,home_country:840")).toEqual({ ignore_old_estimates: 0, home_country: 840 });
     expect(parseShare("?values=home_country:12345")).toBeUndefined();
@@ -145,8 +148,11 @@ describe("on load", () => {
     href = "https://charityevals.org/?m=wellby";
     const s = await import("./assumption-state");
     expect(s.shareUrl(href)).toBe("https://charityevals.org/?m=wellby&values=uov_per_daly:3");
-    s.setAssumption("discount_rate", 0.5, 0.04);
-    expect(href).toBe("https://charityevals.org/?m=wellby&values=uov_per_daly:3,discount_rate:0.08");
+    // A typed value past the slider's end stays; one the models can't run on is ignored.
+    s.setAssumption("discount_rate", 0.1, 0.04);
+    s.setAssumption("ai_catastrophe_chance", 2, 0.05);
+    expect(href).toBe("https://charityevals.org/?m=wellby&values=uov_per_daly:3,discount_rate:0.1");
+    expect(s.parseShare(new URL(href).search)).toEqual({ uov_per_daly: 3, discount_rate: 0.1 });
     s.resetAssumptions();
     expect(href).toBe("https://charityevals.org/?m=wellby");
     s.applyPreset("ai-concerned");
