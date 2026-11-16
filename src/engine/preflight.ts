@@ -253,7 +253,9 @@ export function sharedFactProblems(lib: Library, m: ResolvedModel, waivers: Waiv
     // 3. The same value (within 1%) as a fact whose words the row shares.
     // Our adjustments (`*_adj`) are each build's judgment of its charity: an equal round value elsewhere is
     // the same judgment reached, not a copy (as INV-14).
-    if (own && !r.id.endsWith("_adj") && !ALLOWED_LITERALS.has(v) && (!Number.isInteger(v) || Math.abs(v) > 12)) {
+    // Nor are small whole numbers or calendar years (2023 is within 1% of 2024).
+    const calendar = Number.isInteger(v) && v >= 1900 && v <= 2100;
+    if (own && !r.id.endsWith("_adj") && !calendar && !ALLOWED_LITERALS.has(v) && (!Number.isInteger(v) || Math.abs(v) > 12)) {
       const context = stems(`${text} ${r.explainer ?? ""} ${modelText} ${m.template ?? ""}`);
       for (const x of facts) {
         const hit = x.values.find((y) => y !== 0 && Math.abs(y - v) <= 0.01 * Math.abs(y));

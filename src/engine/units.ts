@@ -39,6 +39,8 @@ export function parseUnit(unit: string): Dim | undefined {
   if (!u) return undefined;
   // A calendar year (2025) is a date, not a duration.
   if (/^(calendar )?year$/i.test(u) || /%/.test(u) || /percentage points?/i.test(u)) return undefined;
+  // "deaths / year per short ton / day": which part divides which is ambiguous.
+  if (/\bper\b/i.test(u) && u.includes("/")) return undefined;
   // A share, ratio or index: a fraction of something, often of a year's worth ("a share per year" is
   // written "share" as often as not), so its time is left unknown.
   if (DESCRIPTOR.test(u)) return { money: 0, scale: 1 };

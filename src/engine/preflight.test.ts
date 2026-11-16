@@ -26,7 +26,7 @@ const where = (ps: { check: string; where: string }[], check: string) => ps.filt
 describe("units", () => {
   it("reads money, time and scale from unit strings", () => {
     expect(parseUnit("DALYs / $")).toEqual({ money: -1, time: 1, scale: 1 });
-    expect(parseUnit("deaths per $1,000 / year")).toMatchObject({ money: -1, time: -1, scale: 1e-3 });
+    expect(parseUnit("deaths / $1,000 / year")).toMatchObject({ money: -1, time: -1, scale: 1e-3 });
     expect(parseUnit("t CO₂e / ha / year")).toMatchObject({ money: 0, time: -1 });
     // No time in the unit says nothing about time; a calendar year is a date; an exchange rate hides its currency.
     expect(parseUnit("deaths")?.time).toBeUndefined();
