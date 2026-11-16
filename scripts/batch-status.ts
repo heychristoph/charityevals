@@ -59,7 +59,7 @@ for (const it of items) {
   else if (it.branch && !merged) next = `merge ${it.branch}`;
   else if (!here.length) next = "no model here: check the agent's report";
   else if (it.kind === "build" && audits.some((a) => !/pass$|before receipts$/.test(a))) next = "audit or verification round";
-  else if (notSimulated.length) next = "run the after-merge steps (batch.md)";
+  else if (notSimulated.length) next = "merge with scripts/merge-branch.py (regenerates generated/)";
   else if (unstable.length) next = `fix the unstable simulation: npx tsx scripts/simulation-check.ts ${unstable.join(" ")}`;
   else next = "done";
   if (next !== "done") open++;
