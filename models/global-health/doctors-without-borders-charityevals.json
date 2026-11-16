@@ -321,7 +321,7 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "A treatment averts deaths during the illness, days to weeks; so half of it is the wait from care to benefit (a year's ART is the long end). Our judgment."
+      "explainer": "A treatment averts deaths during the illness, days to weeks: acute admissions last a few days, a severe-malnutrition stay about three weeks, and a year's ART is the long end; half of it is the wait from care to benefit. MSF publishes no lengths of stay, so 0.05 years (about 18 days), from 0.02 to 0.25."
     },
     {
       "id": "malaria_patients",
@@ -1106,13 +1106,8 @@
       "section": "effect",
       "label": "Cholera: of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.3
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment from the age profile of cholera cases in African outbreaks (school-age children a minority)."
+      "explainer": "The relief models' shared figure (@death_ages.crisis_share_5_14_of_over5, 20%, 10-40%): no GBD or WHO split of cholera deaths over five exists for these outbreaks, and school-age children are a minority of them.",
+      "formula": "@death_ages.crisis_share_5_14_of_over5"
     },
     {
       "id": "adult_share_15_49",
@@ -1365,7 +1360,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "Ebola patients are mostly adults; children are about a sixth in DRC outbreaks. Our judgment."
+      "explainer": "In the 2018-2020 North Kivu and Ituri Ebola outbreak, children under five were 15% of cases (182 under one and 293 aged 1-4 of 3,233, WHO, December 2019, https://www.who.int/emergencies/disease-outbreak-news/item/2019-DON226), with a higher case fatality (70-78%) than older patients; Epicentre found 24% in North Kivu against 13% in Ituri (https://www.msf.org/children-are-being-left-behind-ebola-disease-response). 15%, from 5% to 25%."
     },
     {
       "id": "vhf_share_5_14_of_over5",
@@ -1378,7 +1373,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "School-age children are a minority of Ebola deaths. Our judgment."
+      "explainer": "In the same outbreak under-18s were 28% of cases and under-fives 15% (WHO, December 2019), so 5-17-year-olds were about 15% of the cases over five and 5-14-year-olds somewhat fewer. 15%, from 5% to 25%."
     },
     {
       "id": "inpatient_share_not_counted",
@@ -1438,20 +1433,15 @@
         "high": 0.65
       },
       "kind": "judgment",
-      "explainer": "MSF's hospitals are dominated by paediatric and neonatal wards in Africa; adults in the Middle East and trauma centres. Our judgment, half."
+      "explainer": "MSF admitted 600,000 children under five in 2022 (https://paediatrics.msf.org/why-paediatrics) of 1,214,100 admissions that year (International Activity Report 2022), about half, feeding centres included; these other admissions leave the feeding centres out but keep the paediatric and neonatal wards that dominate its African hospitals, while its Middle East hospitals and trauma centres admit mostly adults. Half, from 30% to 65%."
     },
     {
       "id": "child_share_5_14_of_over5",
       "section": "effect",
       "label": "Other admissions and consultations: of the deaths averted at five or older, share aged 5 to 14",
       "format": "percent",
-      "value": {
-        "low": 0.1,
-        "best": 0.2,
-        "high": 0.4
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment from the age structure of MSF's patients (young populations, adult wards smaller than paediatric ones)."
+      "explainer": "The relief models' shared figure (@death_ages.crisis_share_5_14_of_over5, 20%, 10-40%): in crisis populations most deaths over five are adults'; MSF publishes no age split of its older patients.",
+      "formula": "@death_ages.crisis_share_5_14_of_over5"
     },
     {
       "id": "er_share_not_admitted",
@@ -1524,7 +1514,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Deaths averted by outpatient care in these settings are mostly young children's. Our judgment."
+      "explainer": "MSF saw almost 6 million children under five as outpatients in 2022 (https://paediatrics.msf.org/why-paediatrics) of 16.3 million consultations (International Activity Report 2022), 37%; they are far likelier than older patients to die of the conditions treated (pneumonia, diarrhoea, malaria), so they are a larger share of the deaths averted than of the visits. 60%, from 40% (about their share of visits) to 80%."
     },
     {
       "id": "csection_share_of_surgery",
@@ -1583,7 +1573,7 @@
         "high": 0.15
       },
       "kind": "judgment",
-      "explainer": "Surgical patients are mostly young adults (violence, road accidents). Our judgment."
+      "explainer": "In MSF's surgical programme in Masisi, eastern DRC (2007-2009), 6% of patients were under five and the median age was 24 (Chu et al. 2010, https://pmc.ncbi.nlm.nih.gov/articles/PMC2873460). 8%, from 3% to 15%."
     },
     {
       "id": "surgery_dalys_disability_averted",
@@ -1788,46 +1778,31 @@
       "id": "wash_years",
       "section": "effect",
       "label": "Water and sanitation: years of service per person",
-      "format": "percent",
+      "format": "number",
       "value": {
         "low": 0.25,
         "best": 0.5,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Emergency water and sanitation run for the months of an emergency or outbreak response. Our judgment, half a year."
+      "explainer": "Cholera outbreaks in sub-Saharan Africa in 2010-2019 lasted a median 13 weeks (interquartile range 8-19; https://pmc.ncbi.nlm.nih.gov/articles/PMC9439956), the low end; water and sanitation for newly displaced people in camps run longer before others take over. Half a year, from a quarter to a year.",
+      "unit": "years"
     },
     {
       "id": "wash_diarrhoea_death_rate",
       "section": "effect",
       "label": "Water and sanitation: yearly diarrhoea death rate in the people served",
       "format": "percent",
-      "value": {
-        "low": 0.0002,
-        "best": 0.0006,
-        "high": 0.002
-      },
-      "kind": "judgment",
-      "explainer": "Diarrhoea kills about 2-3 of every 1,000 children under five a year in sub-Saharan Africa and fewer adults; with under-fives about a fifth of a camp's people and crowding raising the risk, about 0.6 per 1,000 people a year. Our judgment."
+      "explainer": "The shared crisis-site figure (@humanitarian_response.wash_crisis_diarrhoea_deaths_per_person_year, 0.0008 a year, 0.0004-0.002): the Global Burden of Disease's diarrhoeal death rate for sub-Saharan Africa, raised for camps and crowded sites with broken water systems and cholera.",
+      "formula": "@humanitarian_response.wash_crisis_diarrhoea_deaths_per_person_year"
     },
     {
       "id": "wash_risk_reduction",
       "section": "effect",
       "label": "Water and sanitation: share of diarrhoea deaths averted",
       "format": "percent",
-      "value": {
-        "low": 0.16,
-        "best": 0.45,
-        "high": 0.65
-      },
-      "kind": "estimate",
-      "source": {
-        "title": "Sharma Waddington et al. 2023, Impact on childhood mortality of interventions to improve drinking water, sanitation, and hygiene (WASH) to households: systematic review and meta-analysis (PLOS Medicine)",
-        "url": "https://doi.org/10.1371/journal.pmed.1004215",
-        "retrieved": "2026-11-04",
-        "quote": "a significant reduction in diarrhoea mortality of 45% (OR = 0.55, 95% CI = 0.35, 0.84; 10 interventions)"
-      },
-      "explainer": "Household WASH interventions cut diarrhoea mortality in childhood by 45% (16-65%) in 10 interventions (Sharma Waddington et al. 2023); diarrhoea itself falls 24-50% by type (Wolf et al. 2022, https://doi.org/10.1016/s0140-6736(22)00937-0). Emergency supply is basic, which the evidence and validity adjustments cover."
+      "explainer": "The shared figure for emergency water and sanitation (@humanitarian_response.wash_crisis_diarrhoea_death_reduction, 15%, 3-35%): household water, sanitation and hygiene each cut diarrhoea by a fifth to a third where used (Wolf et al. 2022), but emergency supply reaches many people with light services.",
+      "formula": "@humanitarian_response.wash_crisis_diarrhoea_death_reduction"
     },
     {
       "id": "wash_share_under5",
@@ -2199,27 +2174,12 @@
       "explainer": "The site's one value of a death by age band (@moral_weights), times your value of a life."
     },
     {
-      "id": "ln_of_doubling",
-      "section": "effect",
-      "label": "Natural log of 2: the ln-consumption gain of a doubling",
-      "format": "small",
-      "value": 0.6931471806,
-      "kind": "observed",
-      "source": {
-        "title": "GiveWell, Cost-effectiveness analysis: moral weights and units of value",
-        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness",
-        "retrieved": "2026-11-15",
-        "page": "units of value: the value of doubling consumption for one person for one year"
-      },
-      "explainer": "GiveWell states income gains in doublings of consumption; the site values ln(consumption) ($uov_per_ln_consumption), and a doubling is ln 2 = 0.693 of it. A mathematical constant, as in the site's other models that re-base GiveWell's income ratio."
-    },
-    {
       "id": "smc_income_ratio",
       "section": "effect",
       "label": "SMC: later-income gain of the children protected, as a share of the deaths' value",
       "format": "percent",
-      "formula": "@givewell_shared.income_to_mortality_value_ratio * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_smc / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_smc) * $uov_per_ln_consumption * ln_of_doubling / $life_value_multiplier",
-      "explainer": "Children protected from malaria earn more as adults: GiveWell's shared ratio of the income gain to the value of deaths averted in its SMC and net models, re-based to the site's discount rate, value of income and value of a life, as in the site's other models that read it."
+      "formula": "@givewell_shared.income_to_mortality_value_ratio * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_smc / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_smc) * $uov_per_ln_consumption * @givewell_shared.ln_consumption_per_doubling / $life_value_multiplier",
+      "explainer": "Children protected from malaria earn more as adults: GiveWell's shared ratio of the income gain to the value of deaths averted in its SMC and net models, re-based to the site's discount rate, value of income (a doubling is ln 2 of ln-consumption, @givewell_shared.ln_consumption_per_doubling) and value of a life."
     },
     {
       "id": "smc_value_per_death",
@@ -2595,7 +2555,7 @@
       },
       "kind": "judgment",
       "unit": "years",
-      "explainer": "Spending on staff and drugs is spent as care is given; some supplies are bought months ahead. Our judgment."
+      "explainer": "Half of MSF's spending is its staff (International Activity Report 2023, https://www.msf.org/international-activity-report-2023/2023-figures), paid as care is given; drugs and supplies are partly bought months ahead. 0.05 years (under three weeks), from 0 to 0.2."
     },
     {
       "id": "benefit_midpoint_years",
@@ -2932,7 +2892,7 @@
       "label": "Missing data: water and sanitation",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (templates.md Convention 12): MSF counts who got this care, but MSF publishes no count of the people served (the reach is our judgment) and the effect is from household trials, not emergency supply, so the branch reads the shared missing-data slider."
+      "explainer": "Thin (templates.md Convention 12): MSF publishes no count of the people served (the reach is our judgment), so the branch reads the shared missing-data slider."
     },
     {
       "id": "wash_total_adj",

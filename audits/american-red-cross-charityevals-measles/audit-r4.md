@@ -1,6 +1,6 @@
 # Audit: american-red-cross-charityevals-measles, round 4
 Result: 2.484e-3 uov/$ = 1.242 years of healthy life per 1,000 dollars (combined range 0.158–9.77); cause median 0.0938 (×13.24). Verdict: pass.
-Model-sha: f93ff18a11ee4eb959793253183ebb093803dda19bf710b52cf5619fdf4e6bed
+Model-sha: 8c7d3161a58c8bfa2f3c55fc371477081ae13dc546ff78a25878b5a34fd410ed
 Scope: scoped to the changes since round 3 (`git diff a0d083b9 b76ba3ed`): the new rows `msl_u5_years_after_five` and `msl_u5_after_five_deaths_per_child`, and the changed `deaths_averted_per_person`, `share_under5`, `benefit_midpoint_years`, `msl_u5_per_household`, `msl_5_14_years_at_risk` and `share_15_49_of_over15`, the summary's changed sentence, and the write-up's measles lines. Programme, year, cost and reach are as in round 3 and not rechecked.
 Mechanical: lint 0 high / 1 medium (`far-above`, ×13.24, dealt with under Peers) / 1 low (the spread, which the summary states). Invariants: none. check.ts: all valid. Simulation stable: 5% 0.19×, 50% 1×, 95% 4.99× the best guess. Nothing written to generated/.
 Previous round: #1 (protection after five) resolved: the two rows are added as the fix named and `deaths_averted_per_person` sums them. The explainer slip in `msl_5_14_years_at_risk` and the typed household sizes in the sibling explainer are resolved. Round-3 low #3 (regional GBD ratio) was not adopted: see finding 3. The other round-3 lows are unchanged.
@@ -35,3 +35,5 @@ The move from 1.036 to 1.242 (×1.20) is the +20% that round 3 predicted for #1.
 1. `$missing_data_discount` (shared slider). 2. `msl_report_to_behaviour` (judgment). 3. `@american_red_cross.msl_spend_share` (estimate, Form 990 Schedule F). 4. `msl_setting_risk` (judgment, MMWR-anchored). 5. `msl_years_unvaccinated` (judgment). The new `msl_u5_years_after_five` is not in the top 12. Best improvement: the partnership's FY2025 campaign list with countries and age bands.
 
 Verdict: pass
+
+Re-stamped (16 Nov 2026): Pre-audit gate cleanup: judgments' explainers name their reference class (sourced); bystanders per arrest read from @cardiac_arrest.ohca_bystanders_per_arrest and ln 2 from @givewell_shared.ln_consumption_per_doubling (same best values); some judgment ranges widened where no evidence anchors them; no peer-model comparisons in explainers. Mechanical: headline unchanged, against 14a782cd.
