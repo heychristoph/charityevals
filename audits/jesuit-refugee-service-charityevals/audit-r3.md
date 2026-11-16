@@ -1,6 +1,6 @@
 # Audit: jesuit-refugee-service-charityevals, round 3 (scoped verification)
 Result: 3.696e-4 daly/$ = 0.370 years of healthy life per 1,000 dollars (combined range 0.028–4.9), unchanged from round 2. Verdict: **PASS** (no findings).
-Model-sha: 5257393fb0fd16dc1645180a49f6f6384c020d54947b5ea7fa8b2f114d2155d3
+Model-sha: e1c8da3a7dd8eb86995c9df244b2aba20b6cadd7b47b1e15163d0f5a1adbfbd5
 Scope: the text change since round 2 only (the two page citations); nothing else re-verified.
 Mechanical: `audit-model` lint 0 high / 0 medium / 1 low (spread 2,739× on the model's own ranges; the summary says so), result identical to round 2. A field-by-field comparison of the JSON against `HEAD~1` shows exactly two differences, both explainer text: `edu_spend` (row 0) and `edu_access_share` (row 47). The `beneficiaries` block was only re-indented; its values are identical.
 
@@ -14,3 +14,5 @@ No findings. Drivers unchanged from round 2.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared LMIC learning-to-earnings and iodine facts (consistency, mechanical)
+
+Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@humanitarian_response.*, @ukraine.war_affected_aid_recipients_consumption_share) at the same values; judgment explainers anchored on studies and published data (pre-audit gate cleanup). Mechanical: headline unchanged, against 4a6180e3.

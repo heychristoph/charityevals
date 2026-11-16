@@ -15,6 +15,8 @@ Previous round:
 (none)
 
 Verdict: pass
-Model-sha: 19b9dbdf8539731b9b56ff325be88ea3a9e987c0e4912eb48a6065ff1b46d65f
+Model-sha: ecf0476e0726604cdfe8d29769792481e8978cd2a8a87b5163c13406137c69bb
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
+
+Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@humanitarian_response.*, @ukraine.war_affected_aid_recipients_consumption_share) at the same values; judgment explainers anchored on studies and published data (pre-audit gate cleanup). Mechanical: headline unchanged, against e247896f.

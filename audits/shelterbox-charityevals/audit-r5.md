@@ -12,6 +12,8 @@ Scope: only the methane_share change: new row methane_share and the rewritten br
 None.
 
 Verdict: pass
-Model-sha: f0cf9785d2671b12c2ff671731ed2056cc32e0bd821481e1e7a4cf04d9f02bda
+Model-sha: 9557d590a17615bc68879773c74a1ea011c146cc65a5f0a5037207124b666fd0
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
+
+Re-stamped (16 Nov 2026): Typed refugee-relief figures now read shared facts (@humanitarian_response.*, @ukraine.war_affected_aid_recipients_consumption_share) at the same values; judgment explainers anchored on studies and published data (pre-audit gate cleanup). Mechanical: headline unchanged, against 1a9667aa.
