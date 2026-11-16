@@ -866,27 +866,12 @@
       "explainer": "The shared value of a donor's aid budget dollar (@aid_value.oda_vs_cash, about 1 times cash, 0.4 to 2) times cash's value (normalization.md 2.20): what the money the banks lend or MCC spends would otherwise have done (both of unknown use: every sector)."
     },
     {
-      "id": "ln_of_doubling",
-      "section": "effect",
-      "label": "Natural log of 2: the ln-consumption gain of a doubling",
-      "format": "small",
-      "value": 0.6931471806,
-      "kind": "observed",
-      "source": {
-        "title": "GiveWell, Cost-effectiveness analysis: moral weights and units of value",
-        "url": "https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness",
-        "retrieved": "2026-11-14",
-        "page": "units of value: the value of doubling consumption for one person for one year"
-      },
-      "explainer": "GiveWell states income gains in doublings of consumption; the site values ln(consumption) ($uov_per_ln_consumption), and a doubling is ln 2 = 0.693 of it. A mathematical constant, as in the New Incentives model's re-basing of the same ratio."
-    },
-    {
       "id": "a_income_ratio",
       "section": "effect",
       "label": "AMC: later-income gain of the children protected, as a share of the deaths' value",
       "format": "percent",
-      "formula": "@givewell_shared.income_to_mortality_value_ratio * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln_of_doubling / $life_value_multiplier",
-      "explainer": "Children spared pneumococcal disease earn more as adults: GiveWell's shared ratio of the income gain to the value of deaths averted, re-based to the site's discount rate, value of income and value of a life, the same row as the New Incentives model's (childhood vaccines)."
+      "formula": "@givewell_shared.income_to_mortality_value_ratio * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * @givewell_shared.ln_consumption_per_doubling / $life_value_multiplier",
+      "explainer": "Children spared pneumococcal disease earn more as adults: GiveWell's shared ratio of the income gain to the value of deaths averted, re-based to the site's discount rate, value of income (a doubling is ln 2 of ln-consumption, @givewell_shared.ln_consumption_per_doubling) and value of a life."
     },
     {
       "id": "a_value_per_year",
@@ -1390,7 +1375,7 @@
         "page": "limitations of the impact estimates",
         "quote": "is not included in the analysis"
       },
-      "explainer": "PCV cuts carriage, protecting older children and adults who weren't vaccinated. The evaluation's deaths leave herd protection out, so it is added at GiveWell's shared figure for PCV (as in the New Incentives model)."
+      "explainer": "PCV cuts carriage, protecting older children and adults who weren't vaccinated. The evaluation's deaths leave herd protection out, so it is added at GiveWell's shared figure for PCV."
     },
     {
       "id": "a_ue_serotype_replacement",
