@@ -51,7 +51,7 @@ After each part's adjustments, the biosecurity work brings about 85% of the resu
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with the branch layout of our Council on Strategic Risks model. Round 1 of the independent audit checked every source, recomputed the branch shares and passed. Its smaller findings were fixed: the staff share of costs is now taken from CLTR's own accounts (the tax owed at the year end and the year's surplus) rather than a peer; employer costs include the advertised benefits; the other job adverts are linked; text left over from the Council on Strategic Risks model is gone. A verification round checked those fixes and passed. CLTR's share of the resources behind its biosecurity work was then raised from 0.8 to 0.85, as for the Johns Hopkins Center for Health Security, since most of that work is its own staff's analysis; a second verification round checked that change. The rounds are in audits/centre-for-long-term-resilience-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit checked every source, recomputed the branch shares and passed. Its smaller findings were fixed: the staff share of costs is now taken from CLTR's own accounts (the tax owed at the year end and the year's surplus); employer costs include the advertised benefits; the other job adverts are linked. A verification round checked those fixes and passed. CLTR's share of the resources behind its biosecurity work was then raised from 0.8 to 0.85, since most of that work is its own staff's analysis; a second verification round checked that change. The rounds are in audits/centre-for-long-term-resilience-charityevals/.
 
 ### Sources
 

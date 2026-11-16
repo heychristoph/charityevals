@@ -40,7 +40,7 @@ METR ended 2024 with net assets of $5.4 million, about five months of spending. 
 
 ### What drives the result
 
-The reason is that all of METR's work is against AI escaping control. FAR.AI and the Center for AI Safety do part of their work against misuse. For catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its typical misalignment project, and that carries most of their results. Here, deaths of people alive now are 85% of the value and the future lost 15%.
+All of METR's work is against AI escaping control. For catastrophes the world survives, Rethink's typical misalignment project cuts deaths far less per dollar than its typical misuse project. Here, deaths of people alive now are 85% of the value and the future lost 15%.
 
 ### Biggest uncertainties
 
@@ -57,7 +57,7 @@ The reason is that all of METR's work is against AI escaping control. FAR.AI and
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with Redwood Research's model as the worked example. Round 1 of the independent audit passed with two medium findings, both fixed: the tax return covers only May to December 2024, and the funging adjustment asked again whether money is the constraint, which the next-dollar figure already asks. Funging is now 1 here and in every catastrophic-risk model, raising this result from 0.048 to 0.057. Independent audits are in audits/metr-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit passed with two medium findings, both fixed: the tax return covers only May to December 2024, and the funging adjustment asked again whether money is the constraint, which the next-dollar figure already asks. Funging is now 1 here and in every catastrophic-risk model, raising this result from 0.048 to 0.057. Independent audits are in audits/metr-charityevals/.
 
 ### Sources
 

@@ -1,6 +1,6 @@
 # Audit: ican-charityevals, round 3
 Result: 0.007595 daly/$ = 7.6 years of healthy life per 1,000 dollars (combined range 0.27–217; model's own ranges 0.12–630). Verdict: pass (one low finding on a citation's wording).
-Model-sha: 4799757f3eac253b8e5bcfdd10ad1d7c6eb323b728caaaa91ef2f7401c463f69
+Model-sha: 44a768412084a65f3f1611a8e63b24146ee18a9a5dc08286a431388b97b4cd7e
 Scope: scoped verification of the four round-2 fixes (commit 8e359e1) and the write-up. Nothing else re-audited.
 
 Fixes against the round-2 findings:
@@ -32,3 +32,5 @@ Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new s
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.

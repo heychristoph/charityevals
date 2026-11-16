@@ -60,7 +60,7 @@ Only part of Epoch's work bears on catastrophic risk, it aims to inform rather t
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with METR's and the Centre for the Governance of AI's models as worked examples. Round 1 of the independent audit found one high finding and three medium ones, all fixed: clients' fees for commissioned work are now credited to the clients, the misuse share is taken over the work counted, the speed-up harm applies only to the part of the value it concerns, and a source link was corrected. Round 2 passed. Its medium finding, that fees paid across 2024 and 2025 were undercounted, was fixed, lowering the result by about a tenth, and a verification round checked the changes. Independent audits are in audits/epoch-ai-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit found one high finding and three medium ones, all fixed: clients' fees for commissioned work are now credited to the clients, the misuse share is taken over the work counted, the speed-up harm applies only to the part of the value it concerns, and a source link was corrected. Round 2 passed. Its medium finding, that fees paid across 2024 and 2025 were undercounted, was fixed, lowering the result by about a tenth, and a verification round checked the changes. Independent audits are in audits/epoch-ai-charityevals/.
 
 ### Sources
 

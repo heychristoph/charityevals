@@ -38,7 +38,7 @@ Ploughshares holds almost no unrestricted reserves. It has drawn on its restrict
 
 ### What drives the result
 
-The grants bring about three fifths of the result, Ploughshares' own work under a third and the fellowship about 8%. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 83. Ploughshares works only on nuclear risk, while NTI also works on pandemics, where Rethink's typical project cuts less per dollar. Ploughshares' next-dollar figure is also higher.
+The grants bring about three fifths of the result, Ploughshares' own work under a third and the fellowship about 8%. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 83.
 
 ### Biggest uncertainties
 

@@ -34,7 +34,7 @@ UCS spent $49.8 million in the year to September 2025, $44.0 million of it on pr
 | Share of the win still delivered | | | 5% to 65% (shared) | |
 | Missing-data discount | 0.5 | 0.5 | 0.5 | 0.5 |
 
-UCS is credited with 6% of the advocacy behind EPA's vehicle standards, 10% behind California's car rule, 4% behind the carbon-market extension, 3% behind the power-plant standards and 1% behind the Inflation Reduction Act. EPA has since repealed the vehicle standards and is repealing the power-plant standards; Congress revoked California's waiver in 2025, now in court; the 2025 budget law cut much of the act's credits. Each counts only what survives, by the same shared figures our other climate models use.
+UCS is credited with 6% of the advocacy behind EPA's vehicle standards, 10% behind California's car rule, 4% behind the carbon-market extension, 3% behind the power-plant standards and 1% behind the Inflation Reduction Act. EPA has since repealed the vehicle standards and is repealing the power-plant standards; Congress revoked California's waiver in 2025, now in court; the 2025 budget law cut much of the act's credits. Each counts only what survives, by shared figures.
 
 Some value is added as shares. The nuclear part adds 7%: work against a limited nuclear war and the 2025 expansion of radiation compensation. The climate part adds 15%: other state laws, grid plans and the science behind climate lawsuits. It takes off 2% for safety campaigns that may slow nuclear power. The food part adds 50% for its fertilizer, groundwater, farm bill and farmworker work.
 
@@ -61,7 +61,7 @@ About three-fifths of it comes from the Inflation Reduction Act, a fifth of it f
 
 ### How this model was checked
 
-The three models were built from their family templates: the catastrophic-risk one, as for the Federation of American Scientists; the climate policy one, as for the Environmental Defense Fund; and the policy one. The Environmental Defense Fund's model now reads the same shared figures for the vehicle standards and the Inflation Reduction Act, including the act's methane share. The first climate audit asked for the carbon-market extension as its own win and the food work as its own model, both done. The audit rounds are in audits/ under each model's name.
+The three models were built from their family templates: catastrophic risk, climate policy and policy. The vehicle standards and the Inflation Reduction Act, including the act's methane share, are shared figures. The first climate audit asked for the carbon-market extension as its own win and the food work as its own model, both done. The audit rounds are in audits/ under each model's name.
 
 ### Sources
 

@@ -4,7 +4,7 @@ The Institute for AI Policy and Strategy (IAPS) is a think tank in Washington. I
 
 ### What the charity does
 
-In 2025 IAPS was a project of Rethink Priorities, its fiscal sponsor. Rethink Priorities' tax return lists it as its own programme, $3.9 million, inside its audited accounts. With its share of the sponsor's central costs (finance, HR, fundraising) it cost about $4.2 million. In 2026 IAPS became its own charity. Our models of Rethink Priorities leave IAPS out, so its money is counted once, here.
+In 2025 IAPS was a project of Rethink Priorities, its fiscal sponsor. Rethink Priorities' tax return lists it as its own programme, $3.9 million, inside its audited accounts. With its share of the sponsor's central costs (finance, HR, fundraising) it cost about $4.2 million. In 2026 IAPS became its own charity. Its money is counted here, not in Rethink Priorities' cost, so it is counted once.
 
 - **Research and policy engagement: about 70%.** About 20 researchers in three teams. Frontier Security works on AI-enabled cyber attacks, AI agents, AI security in government and data centre security. Compute Policy works on export controls, chip smuggling and location verification for AI chips. International Strategy works on the US and China. It published 8 major reports in 2025. Its recommendations are reflected in America's AI Action Plan, and two bills on chip security draw on its research (location verification for chips, a whistleblower programme for export controls).
 - **The AI Policy Fellowship: about 30%.** 28 fellows spent three months on AI policy, chosen from over 5,600 applicants, on stipends of $15,000 to $22,000. The split is our estimate.
@@ -54,7 +54,7 @@ At the end of 2025 about two years of spending was set aside for IAPS, and it ha
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template. The first audit round found no high-severity problem. It raised the share of work counted as misuse from 15% to 20%, since two of the year's eight major items are cyber work. It also corrected the fellowship's source, computed the fellowship's credit from its inputs, and narrowed the range of the sponsor's central costs so none are counted twice against our Rethink Priorities models. Two verification rounds checked the changes. The audit rounds are in audits/institute-for-ai-policy-and-strategy-charityevals/.
+The model was built from the catastrophic-risk template. The first audit round found no high-severity problem. It raised the share of work counted as misuse from 15% to 20%, since two of the year's eight major items are cyber work. It also corrected the fellowship's source, computed the fellowship's credit from its inputs, and narrowed the range of the sponsor's central costs so none are counted twice. Two verification rounds checked the changes. The audit rounds are in audits/institute-for-ai-policy-and-strategy-charityevals/.
 
 ### Sources
 

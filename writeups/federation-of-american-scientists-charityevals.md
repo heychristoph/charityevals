@@ -27,7 +27,7 @@ The return doesn't split the research line by issue, so the model splits it by h
 | Work others would not have done now | 0.7 | 0.6 | 0.7 | 0.6 |
 | FAS's share of the resources | 0.9 | 0.9 | 0.8 | 0.7 |
 
-Every part is discounted 50% for missing data. The nuclear figures match those of our Arms Control Association and Ploughshares Fund models. Ploughshares' grant to FAS ($90,000) is part of FAS's costs, so a donor here and Ploughshares each get credit only for their own dollars.
+Every part is discounted 50% for missing data. Ploughshares' grant to FAS ($90,000) is part of FAS's costs, so a donor here and Ploughshares each get credit only for their own dollars.
 
 Side effects add 8%. Most of that is work against a single detonation or a limited war, which has no shared forecast. The rest is the public record of the arsenals and the wildfire and heat work's health gains, beyond what better spending counts. The climate teams' emissions cuts add almost nothing. No harm is added beyond a typical project's chance of backfiring.
 
@@ -51,7 +51,7 @@ The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with a branch added for the science-policy work. Round 1 of the independent audit found that the split of the research line missed the Global Risk Program FAS ran in the year, which today's staff list no longer shows. It is now in, split between nuclear, pandemic and AI work. The nuclear evidence figure was brought into line with the site's other nuclear models, and the climate side effect was put on the site's scale for emissions. Round 2 passed. Its smaller findings were fixed: the program's size from the grant's real dates and the director's pay, and today's AI team left out of a year before it joined. A verification round checked those fixes. The rounds are in audits/federation-of-american-scientists-charityevals/.
+The model was built from the catastrophic-risk template, with a branch added for the science-policy work. Round 1 of the independent audit found that the split of the research line missed the Global Risk Program FAS ran in the year, which today's staff list no longer shows. It is now in, split between nuclear, pandemic and AI work. The climate side effect was put on the site's scale for emissions. Round 2 passed. Its smaller findings were fixed: the program's size from the grant's real dates and the director's pay, and today's AI team left out of a year before it joined. A verification round checked those fixes. The rounds are in audits/federation-of-american-scientists-charityevals/.
 
 ### Sources
 

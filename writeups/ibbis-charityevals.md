@@ -27,7 +27,7 @@ All the work is valued as pandemic work. No law or standard was won in 2025: the
 
 | Adjustment | Value | Reason |
 |---|---|---|
-| How far a typical project's effect applies | 0.8 | Providers use commec and it passed an independent benchmark. But only a handful of providers use it, and the standards and rules aren't in force yet. As in our Nuclear Threat Initiative model |
+| How far a typical project's effect applies | 0.8 | Providers use commec and it passed an independent benchmark. But only a handful of providers use it, and the standards and rules aren't in force yet |
 | Work no one else would have done now | 0.7 | Others also build screening tools and standards. Few do outreach to providers outside the US and EU |
 | IBBIS's share of the resources | 0.75 | Unpaid expert time in its two consortia, Microsoft's lead on the 2025 study, NIST's test sets, workshop co-hosts |
 | Missing data | slider | Nothing about IBBIS's effect on the risk is measured, and even its spending is estimated |
@@ -55,7 +55,7 @@ Pandemics that end humanity's future bring about half the result, mostly through
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with our SecureBio and Johns Hopkins Center for Health Security models as the nearest examples. Round 1 of the independent audit checked the figures against IBBIS's annual letter and its Manifund page and found one high issue: ten rows still carried the template's placeholder sources. They now cite the forecasting tournament and IBBIS's own pages. A medium issue was in this write-up: it said most of the result came from catastrophes the world survives, but about half comes from pandemics that end humanity's future. That was corrected here and in the SecureBio and Johns Hopkins write-ups. The low issues were fixed too: the evidence wording, the comparison with Johns Hopkins, and fellows paid by their own programmes, now left out of IBBIS's cost. Round 2 passed with two low issues. Fellows may already be in the team of 10, so fewer are added, and Sentinel Bio's 2026 grant is now in the next-dollar note. A verification round checked those changes. The rounds are in audits/ibbis-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit checked the figures against IBBIS's annual letter and its Manifund page and found one high issue: ten rows still carried the template's placeholder sources. They now cite the forecasting tournament and IBBIS's own pages. A medium issue was in this write-up: it said most of the result came from catastrophes the world survives, but about half comes from pandemics that end humanity's future. That was corrected. The low issues were fixed too: the evidence wording and fellows paid by their own programmes, now left out of IBBIS's cost. Round 2 passed with two low issues. Fellows may already be in the team of 10, so fewer are added, and Sentinel Bio's 2026 grant is now in the next-dollar note. A verification round checked those changes. The rounds are in audits/ibbis-charityevals/.
 
 ### Sources
 
