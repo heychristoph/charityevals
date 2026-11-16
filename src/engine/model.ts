@@ -147,6 +147,14 @@ export function buildLibrary(
 
   const models = new Map<string, ResolvedModel>();
   const resolving = new Set<string>();
+  // A formula as written and as read (derived assumptions expanded), parsed once: a variant inherits its
+  // parent's rows, and many models share formulas. Nodes are never changed once parsed.
+  const formulas = new Map<string, { written: ReturnType<typeof refs>; node: Node }>();
+  const formulaOf = (f: string) => {
+    let x = formulas.get(f);
+    if (!x) formulas.set(f, (x = { written: refs(parse(f)), node: parse(expandDerived(assumptions, f)) }));
+    return x;
+  };
 
   function resolve(id: string): ResolvedModel | undefined {
     if (models.has(id)) return models.get(id);
@@ -168,9 +176,10 @@ export function buildLibrary(
           overridden: undefined,
         }))
       : [];
+    const at = new Map(rows.map((r, k) => [r.id, k]));
     for (const patch of file.rows) {
-      const i = rows.findIndex((r) => r.id === patch.id);
-      if (i === -1) { rows.push({ ...patch }); continue; }
+      const i = at.get(patch.id) ?? -1;
+      if (i === -1) { at.set(patch.id, rows.length); rows.push({ ...patch }); continue; }
       const merged: RowPatch & Partial<ResolvedRow> = { ...rows[i], ...patch };
       // Switching an inherited row between input and formula drops the other side.
       if (patch.value !== undefined) delete merged.formula;
@@ -195,8 +204,8 @@ export function buildLibrary(
           // A derived assumption reads as its formula, so every path sees the sliders it rests on;
           // assumptionDeps keeps the name the row wrote as well. factDeps are the facts the row wrote
           // (a derived assumption's own are the assumption's, checked below).
-          const written = refs(parse(row.formula));
-          row.node = withSideEffectWeight(parse(expandDerived(assumptions, row.formula)), sideEffects);
+          const { written, node } = formulaOf(row.formula);
+          row.node = withSideEffectWeight(node, sideEffects);
           const used = refs(row.node);
           row.deps = [...used.rows];
           row.assumptionDeps = [...new Set([...written.assumptions, ...used.assumptions])];
@@ -282,6 +291,7 @@ export function buildLibrary(
   }
 
   for (const id of files.keys()) resolve(id);
+  formulas.clear();
   // Evaluators who asked us not to publish their models yet (owners.json `published: false`): their models,
   // variants included, leave the library.
   for (const [id, m] of models) if (owners.get(m.owner)?.published === false) models.delete(id);

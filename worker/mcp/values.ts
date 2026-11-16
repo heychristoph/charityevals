@@ -2,28 +2,30 @@
 // or both (the set first, single values on top), as the site's ?set= and ?values= links take them. The
 // same values are accepted as in the panel and in share links (src/lib/share-values.ts): any value the
 // models can run on, past a slider's ends too. Where the site would silently drop one, this says why.
-import { assumptionValues, type Library } from "../../src/engine/model";
+import type { Assumptions } from "../../src/engine/schema";
 import { byCode } from "../../src/engine/countries";
-import { runnable, sanitizeValues, serialiseValues, sliderEnds } from "../../src/lib/share-values";
+import { presetIn, runnable, sanitizeValues, serialiseValues, sliderEnds } from "../../src/lib/share-values";
 
 export class ToolError extends Error {}
 
 export type Values = {
-  /** Every assumption's value for the engine: one object per call. */
-  av: Record<string, number>;
   /** The value set picked, if any. */
   set?: string;
   /** The values that differ from the defaults (the set's and the reader's own): assumption id → value used. */
   applied: Record<string, number>;
   /** The share link's query string (?set=… or ?values=…, as the site writes it), "" at the defaults. */
   query: string;
+  /** "default", a value set's id when the values are exactly its values, else "custom". */
+  scenario: string;
 };
 
-type AssumptionRow = Library["assumptions"]["rows"][number];
+export const DEFAULTS: Values = { applied: {}, query: "", scenario: "default" };
+
+type AssumptionRow = Assumptions["rows"][number];
 
 /** Assumptions a reader can set: neither derived from others nor fixed by evidence. */
-export function settable(lib: Library): Map<string, AssumptionRow> {
-  return new Map(lib.assumptions.rows.filter((r) => r.formula === undefined && !r.fixed && r.value !== undefined).map((r) => [r.id, r]));
+export function settable(a: Assumptions): Map<string, AssumptionRow> {
+  return new Map(a.rows.filter((r) => r.formula === undefined && !r.fixed && r.value !== undefined).map((r) => [r.id, r]));
 }
 
 /** "a:1,b:2" (a share link's ?values=) as a map. */
@@ -45,14 +47,13 @@ function whyNot(r: AssumptionRow, v: number): string {
   return `${r.id} can't be 0 (its scale starts at ${sliderEnds(r).low}).`;
 }
 
-export function parseValues(lib: Library, defaults: Record<string, number>, raw: unknown): Values {
-  if (raw === undefined || raw === null || (typeof raw === "object" && !Array.isArray(raw) && !Object.keys(raw).length))
-    return { av: defaults, applied: {}, query: "" };
+export function parseValues(a: Assumptions, raw: unknown): Values {
+  if (raw === undefined || raw === null || (typeof raw === "object" && !Array.isArray(raw) && !Object.keys(raw).length)) return DEFAULTS;
   const given = typeof raw === "string" ? fromString(raw) : raw;
   if (typeof given !== "object" || Array.isArray(given) || given === null)
     throw new ToolError('values must be an object: { "<assumption id>": <number>, ... } or { "set": "<value set id>" }. list_assumptions gives the ids.');
   const { set, ...rest } = given as Record<string, unknown>;
-  const presets = lib.assumptions.presets ?? [];
+  const presets = a.presets ?? [];
   const user: Record<string, number> = {};
   let preset: string | undefined;
   if (set !== undefined) {
@@ -61,11 +62,11 @@ export function parseValues(lib: Library, defaults: Record<string, number>, raw:
     preset = p.id;
     Object.assign(user, p.values);
   }
-  const rows = settable(lib);
+  const rows = settable(a);
   for (const [id, v] of Object.entries(rest)) {
     const r = rows.get(id);
     if (!r) {
-      const known = lib.assumptions.rows.find((x) => x.id === id);
+      const known = a.rows.find((x) => x.id === id);
       throw new ToolError(known
         ? `${id} can't be set: it is ${known.formula !== undefined ? "derived from other assumptions" : "a fixed rate taken from evidence"}.`
         : `No assumption "${id}". Assumptions you can set: ${[...rows.keys()].join(", ")} (list_assumptions describes them).`);
@@ -76,8 +77,8 @@ export function parseValues(lib: Library, defaults: Record<string, number>, raw:
     if (!ok) throw new ToolError(whyNot(r, n));
     user[id] = n;
   }
-  const applied = sanitizeValues(lib.assumptions, user);
+  const applied = sanitizeValues(a, user);
   const { set: linkSet, values } = serialiseValues(presets, applied);
   const query = linkSet ? `?set=${encodeURIComponent(linkSet)}` : values ? `?values=${values}` : "";
-  return { av: assumptionValues(lib.assumptions, applied), set: preset, applied, query };
+  return { set: preset, applied, query, scenario: presetIn(presets, applied) };
 }

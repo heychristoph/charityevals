@@ -1,13 +1,20 @@
 // The site is static: Cloudflare serves dist/ directly. This Worker only runs for /api/* and /mcp (see
 // run_worker_first in wrangler.jsonc) and handles three things: the MCP server for AI assistants
-// (worker/mcp/, answering from /data/library.json); the "suggest a charity" form, sent
+// (worker/mcp/, answering from the build's /data/mcp-*.json files); the "suggest a charity" form, sent
 // through Email Routing, which only delivers to the account's verified destination addresses (the
 // secret SUGGEST_TO, the inbox hello@charityevals.org forwards to); and visitor analytics events,
 // written to Workers Analytics Engine (worker/events.ts, docs/analytics.md).
 
 import { toDataPoint } from "./events";
-import { cachedLoader, type LibraryInput } from "./mcp/library";
+import { DAILY_CUSTOM } from "./mcp/budget";
+import { cached, cachedLoader, LoadError, type LibraryInput } from "./mcp/library";
 import { handleMcp, type RateLimiter } from "./mcp/server";
+import type { Context } from "./mcp/tools";
+import type { Json } from "./mcp/items";
+import type { Precomputed } from "./mcp/catalogue";
+import type { McpBudget } from "./budget-do";
+
+export { McpBudget } from "./budget-do";
 
 const CONTACT = "hello@charityevals.org";
 const FROM = { email: "forms@charityevals.org", name: "charityevals suggestions" };
@@ -113,20 +120,40 @@ async function event(request: Request, env: Env): Promise<Response> {
   return done;
 }
 
-// The models, built once per isolate from the build's /data/library.json (worker/mcp/library.ts).
-let loadLibrary: ReturnType<typeof cachedLoader> | undefined;
+type McpEnv = Env & { MCP_LIMITER?: RateLimiter; MCP_BUDGET?: DurableObjectNamespace<McpBudget> };
+
+/** A file the build wrote under /data/, as JSON; undefined where there is none. */
+async function asset<T>(env: Env, origin: string, path: string): Promise<T | undefined> {
+  const res = await env.ASSETS.fetch(new Request(new URL(path, origin)));
+  if (!res.ok || !(res.headers.get("Content-Type") ?? "").includes("json")) return undefined;
+  return res.json<T>();
+}
+
+// What the MCP server answers from, each read once per isolate (worker/mcp/tools.ts): the build's
+// catalogue and precomputed figures, and the library for custom values.
+let mcp: Omit<Context, "budget"> | undefined;
+function mcpContext(env: McpEnv, origin: string): Context {
+  mcp ??= {
+    results: cached(async () => {
+      const r = await asset<Precomputed>(env, origin, "/data/mcp-results.json");
+      if (!r) throw new LoadError("/data/mcp-results.json is missing");
+      return r;
+    }),
+    library: cachedLoader(async () => {
+      const r = await asset<LibraryInput>(env, origin, "/data/mcp-library.json");
+      if (!r) throw new LoadError("/data/mcp-library.json is missing");
+      return r;
+    }),
+    answer: (id) => asset<Json>(env, origin, `/data/mcp/${id}.json`),
+  };
+  const ns = env.MCP_BUDGET;
+  return { ...mcp, ...(ns ? { budget: { take: () => ns.get(ns.idFromName("global")).take(DAILY_CUSTOM) } } : {}) };
+}
 
 export default {
   async fetch(request, env): Promise<Response> {
     const { pathname } = new URL(request.url);
-    if (pathname === "/mcp" || pathname === "/mcp/") {
-      loadLibrary ??= cachedLoader(async () => {
-        const res = await env.ASSETS.fetch(new Request(new URL("/data/library.json", request.url)));
-        if (!res.ok) throw new Error(`/data/library.json: ${res.status}`);
-        return res.json<LibraryInput>();
-      });
-      return handleMcp(request, loadLibrary, (env as { MCP_LIMITER?: RateLimiter }).MCP_LIMITER);
-    }
+    if (pathname === "/mcp" || pathname === "/mcp/") return handleMcp(request, mcpContext(env, new URL(request.url).origin), (env as McpEnv).MCP_LIMITER);
     if (pathname === "/api/suggest") return suggest(request, env);
     if (pathname === "/api/event") return event(request, env);
     return env.ASSETS.fetch(request);

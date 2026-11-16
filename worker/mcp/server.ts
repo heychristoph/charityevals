@@ -1,10 +1,11 @@
 // /mcp: a remote MCP server (Streamable HTTP, protocol 2025-06-18 and later; older clients' versions
 // accepted) that answers from charityevals' models. Stateless: every POST carries one JSON-RPC message
 // (or, from older clients, a batch) and gets its answer as JSON; there is no session and no server-sent
-// stream. Public, read-only and without sign-in; answers are capped in size, and a rate limit per IP
-// applies where the Worker has one bound (MCP_LIMITER).
-import type { Loaded } from "./library";
-import { toolList, TOOLS, ToolError } from "./tools";
+// stream. Public, read-only and without sign-in; answers are capped in size, a rate limit per IP applies
+// where the Worker has one bound (MCP_LIMITER), and calculations with custom values have a global daily
+// budget (worker/mcp/tools.ts). Nothing here is for search engines (X-Robots-Tag: noindex).
+import { LoadError } from "./library";
+import { toolList, TOOLS, ToolError, type Context } from "./tools";
 
 export const PROTOCOL_VERSIONS = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"];
 const MAX_REQUEST = 64_000;
@@ -20,15 +21,11 @@ const CORS = {
   "Access-Control-Allow-Headers": "Content-Type, Accept, Authorization, Mcp-Session-Id, MCP-Protocol-Version, Last-Event-ID",
   "Access-Control-Expose-Headers": "Mcp-Session-Id, MCP-Protocol-Version",
   "Access-Control-Max-Age": "86400",
+  "X-Robots-Tag": "noindex",
 };
 
-const NOTE = `charityevals MCP server
-
-This address is for AI assistants and other MCP clients, not for browsers. Add it to your client as a
-remote MCP server (Streamable HTTP), no authentication: https://charityevals.org/mcp
-
-Tools: ${TOOLS.map((t) => t.name).join(", ")}.
-More: https://charityevals.org/ai
+const NOTE = `charityevals MCP server, for AI assistants: add https://charityevals.org/mcp to your client as a
+remote MCP server (Streamable HTTP, no authentication). How: https://charityevals.org/ai
 `;
 
 type Id = string | number | null;
@@ -44,7 +41,7 @@ function json(body: unknown, status = 200, headers: Record<string, string> = {})
 
 export type RateLimiter = { limit(o: { key: string }): Promise<{ success: boolean }> };
 
-async function answer(msg: Message, load: () => Promise<Loaded>): Promise<Reply | undefined> {
+async function answer(msg: Message, ctx: Context): Promise<Reply | undefined> {
   const isRequest = msg.id !== undefined && msg.id !== null && (typeof msg.id === "string" || typeof msg.id === "number");
   const id: Id = isRequest ? (msg.id as string | number) : null;
   // A response from the client (to a request this server never sends): nothing to answer.
@@ -72,20 +69,17 @@ async function answer(msg: Message, load: () => Promise<Loaded>): Promise<Reply 
       if (!tool) return fail(id, -32602, `Unknown tool: ${String(params.name)}. Tools: ${TOOLS.map((t) => t.name).join(", ")}.`);
       const args = params.arguments ?? {};
       if (typeof args !== "object" || Array.isArray(args)) return fail(id, -32602, "arguments must be an object.");
-      let loaded: Loaded;
       try {
-        loaded = await load();
-      } catch (e) {
-        console.error("mcp: library failed to load", (e as Error).message);
-        return fail(id, -32603, "The models couldn't be loaded. Please try again shortly.");
-      }
-      try {
-        const out = tool.run(loaded, args as Record<string, unknown>);
+        const out = await tool.run(ctx, args as Record<string, unknown>);
         const text = JSON.stringify(out);
         if (text.length > MAX_ANSWER) return ok(id, toolError("That answer is too large. Ask for fewer results (limit) or fewer ids."));
         return ok(id, { content: [{ type: "text", text }], structuredContent: out });
       } catch (e) {
         if (e instanceof ToolError) return ok(id, toolError(e.message));
+        if (e instanceof LoadError) {
+          console.error("mcp: data failed to load", e.message);
+          return fail(id, -32603, "The models couldn't be loaded. Please try again shortly.");
+        }
         console.error(`mcp: ${tool.name} failed`, (e as Error).stack);
         return ok(id, toolError("Something went wrong computing that. Please check the ids and values."));
       }
@@ -104,7 +98,7 @@ async function answer(msg: Message, load: () => Promise<Loaded>): Promise<Reply 
 
 const toolError = (message: string) => ({ content: [{ type: "text", text: message }], isError: true });
 
-export async function handleMcp(request: Request, load: () => Promise<Loaded>, limiter?: RateLimiter): Promise<Response> {
+export async function handleMcp(request: Request, ctx: Context, limiter?: RateLimiter): Promise<Response> {
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
   if (request.method === "GET") {
     // A client opening a server-sent stream: this server has none (the spec's answer is 405).
@@ -132,11 +126,11 @@ export async function handleMcp(request: Request, load: () => Promise<Loaded>, l
   }
   if (Array.isArray(body)) {
     if (!body.length || body.length > 20) return json(fail(null, -32600, "A batch holds 1 to 20 messages."), 400);
-    const replies = (await Promise.all(body.map((m) => answer((m ?? {}) as Message, load)))).filter((r): r is Reply => !!r);
+    const replies = (await Promise.all(body.map((m) => answer((m ?? {}) as Message, ctx)))).filter((r): r is Reply => !!r);
     return replies.length ? json(replies) : new Response(null, { status: 202, headers: CORS });
   }
   if (!body || typeof body !== "object") return json(fail(null, -32600, "Invalid request."), 400);
-  const reply = await answer(body as Message, load);
+  const reply = await answer(body as Message, ctx);
   // Notifications and responses from the client: accepted, nothing to say.
   return reply ? json(reply) : new Response(null, { status: 202, headers: CORS });
 }

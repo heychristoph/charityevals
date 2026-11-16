@@ -1,9 +1,9 @@
-// The library the MCP server answers from: /data/library.json (the build writes it from the same files
-// the pages read: published models only), built once per isolate with src/engine, as the browser builds
-// it. Every figure is computed from it, so the answers move with the reader's values like the site does.
+// The library the MCP server computes custom values with: /data/mcp-library.json (the build writes it
+// from the same files the pages read: published models only, without the text no answer quotes;
+// worker/mcp/slim.ts), built once per isolate with src/engine, as the browser builds it.
 import { assumptionValues, buildLibrary, type Distribution, type Library } from "../../src/engine/model";
 
-/** /data/library.json (src/lib/open-data.ts libraryJson): buildLibrary's inputs in its order, the last
+/** /data/library.json (src/lib/open-data.ts libraryJson) and its slimmed copy: buildLibrary's inputs in its order, the last
  * its options, carrying the simulations the plausible ranges and the risk setting read
  * (generated/distributions.json). Bulk imports are their browser stand-ins; text keeps its
  * `{{placeholders}}`, rendered here as an answer quotes it. */
@@ -34,15 +34,21 @@ export function libraryFrom(input: LibraryInput): Loaded {
   return { lib, defaults: assumptionValues(lib.assumptions) };
 }
 
-/** One library per isolate: loaded on the first call, shared by every later one. A failed load isn't
+/** Data the server couldn't load (a missing or broken file): the call fails, the next one tries again. */
+export class LoadError extends Error {}
+
+/** One copy per isolate: loaded on the first call, shared by every later one. A failed load isn't
  * kept, so the next request tries again. */
-export function cachedLoader(fetchInput: () => Promise<LibraryInput>): () => Promise<Loaded> {
-  let loading: Promise<Loaded> | undefined;
+export function cached<T>(load: () => Promise<T>): () => Promise<T> {
+  let loading: Promise<T> | undefined;
   return () => {
-    loading ??= fetchInput().then(libraryFrom).catch((e) => {
+    loading ??= load().catch((e) => {
       loading = undefined;
-      throw e;
+      throw e instanceof LoadError ? e : new LoadError((e as Error).message);
     });
     return loading;
   };
 }
+
+/** The library, built once per isolate from its inputs. */
+export const cachedLoader = (fetchInput: () => Promise<LibraryInput>): (() => Promise<Loaded>) => cached(() => fetchInput().then(libraryFrom));
