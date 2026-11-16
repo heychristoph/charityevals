@@ -44,7 +44,7 @@ At the end of 2024 Blueprint had under three months of spending in hand. Since t
 
 ### What drives the result
 
-Like them, it rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research is a step further from use than their work, and its next dollar counts for less. Deaths of people alive now are 90% of the value, the future lost 10%.
+The result rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research comes a step before use, and its next dollar counts for less than the past average. Deaths of people alive now are 90% of the value, the future lost 10%.
 
 ### Biggest uncertainties
 
@@ -63,7 +63,7 @@ Like them, it rests on Rethink's typical pandemic project, which averts many mor
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template, with SecureBio's and the Johns Hopkins Center for Health Security's models as worked examples. Round 1 of the independent audit passed, with two medium findings and three low ones, all fixed. A policy memo citing the respirator work turned out to be written by Blueprint's own staff, so that work's uptake fell from 1 to 0.8. The next-dollar figure now cites the right grant records and Founders Pledge's assessment, and rose from 35% to 37%. Two verification rounds checked the changes and passed. Independent audits are in audits/blueprint-biosecurity-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit passed, with two medium findings and three low ones, all fixed. A policy memo citing the respirator work turned out to be written by Blueprint's own staff, so that work's uptake fell from 1 to 0.8. The next-dollar figure now cites the right grant records and Founders Pledge's assessment, and rose from 35% to 37%. Two verification rounds checked the changes and passed. Independent audits are in audits/blueprint-biosecurity-charityevals/.
 
 ### Sources
 

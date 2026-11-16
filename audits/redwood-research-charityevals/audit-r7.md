@@ -1,6 +1,6 @@
 # Audit: redwood-research-charityevals, round 7 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 6.847e-5 daly/$ = 0.0685 years of healthy life per 1,000 dollars (simulation 5%-95%: 0.0046-0.655; audit-model's combined range is far wider); cause median 0.958 (x0.071). Verdict: pass.
-Model-sha: 03bb3647bf77147d261192b889f73e51611a99feb572000cb8005f3d53a7a0f5
+Model-sha: e6da0d70122a0cf55edb17727c8ffbd2cf4420ea13f4c72d16ad0371ce82c73f
 Scope: unchanged; scoped to the two merged changes, both present and consistent.
 Mechanical: lint 0 high / 0 medium (four range lows, two unused lows, far-below low whose reason the summary gives); invariants none; normalization-audit none (full run, 0 violations; generated output restored); check.ts passes; simulation-check stable (5% 0.067, 95% 9.57 x best guess).
 Previous round: round 6 had no open findings.
@@ -28,3 +28,5 @@ Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new s
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against ee138d3d.
 
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
