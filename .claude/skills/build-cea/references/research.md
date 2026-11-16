@@ -38,7 +38,10 @@ programme; end with **Gaps**: what wasn't found and where you looked.
 
 ## Effect (effect section)
 
-- Meta-analyses and systematic reviews first (Cochrane, Campbell, 3ie), then the large RCTs, then
+- Evaluations of this charity's own programmes first: search its name and each programme's name with
+  "RCT", "evaluation", "impact", "trial" (charity site, 3ie, AEA RCT Registry, J-PAL/IPA, government
+  pilots it ran or scaled); list every one found, or "none found" with the queries, in its own table.
+- Then meta-analyses and systematic reviews (Cochrane, Campbell, 3ie), the large RCTs, then
   implementation-specific evidence. Search with the Consensus research MCP (its `search` tool) where
   connected, else PubMed, Europe PMC or web search; cite the paper itself, never Consensus. Record
   the point estimate and the 95% CI as the range. A programme with thin or no outcome data is built
@@ -71,5 +74,6 @@ programme; end with **Gaps**: what wasn't found and where you looked.
 
 - `npx tsx scripts/audit-model.ts <path>` prints the other hand-built models in the same unit (in
   years of healthy life per $1,000) and the canonical rows (the row ids every model of a family shares)
-  of other charityevals models of the same family. Anchor judgments on them ("evidence_adj 0.7, as for
-  X, because …") or explain why this charity differs: an unanchored guess can't be checked.
+  of other charityevals models of the same family: use them to keep judgments consistent. The
+  explainer anchors on studies, evaluations or data, never on another charity or model (site text
+  never compares charities): an unanchored guess can't be checked.

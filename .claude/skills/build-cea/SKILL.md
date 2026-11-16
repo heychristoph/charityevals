@@ -82,8 +82,11 @@ missing or a top driver the notes don't quote:
 Agent(subagent_type: "general-purpose", model: "sonnet", description: "Research <charity>",
       prompt: "Follow .claude/skills/build-cea/references/research.md for <charity> (<website>).
                Write the research notes to <scratch>/<charity id>/research-notes.md. <blind list>.
-               Don't write to the repository.")
+               Work only in <repo dir>; don't write to it.")
 ```
+
+Before modelling, check the notes' evaluations table: a programme with a tenth or more of spending
+and "none found" gets your own search before you build on literature alone.
 
 ## 3. Write the model
 
@@ -144,8 +147,8 @@ Copy `templates/<family>.json` to the output path and fill it in.
   write-up and explainers are placeholders (`{{result}}`, `{{row:<id>}}`; docs/prose-numbers.md), never typed.
 - **Charity record** `charities/<id>.json` if missing, with `spending` and `lines`.
 - **A template or family-doc gap** (a missing path, row or recipe): model this charity right, and write
-  `templates/proposals/<date>-<slug>.md` (what, why, the diff) instead of a note in the report; the
-  orchestrator applies proposals between waves (templates/proposals/README.md).
+  `.claude/skills/build-cea/templates/proposals/<date>-<slug>.md` (what, why, the diff) instead of a
+  note in the report; the orchestrator applies proposals between waves (README.md there).
 
 ## 4. Preflight, then the audit loop (independent)
 
@@ -159,11 +162,14 @@ and the preflight output (not your notes):
 Agent(subagent_type: "general-purpose", model: "opus", description: "Audit CEA <id> round 1",
       prompt: "Use the audit-cea skill (.claude/skills/audit-cea/SKILL.md) to audit <path>.
                Preflight output: <path>. Write the findings to audits/<id>/audit-r1.md.
-               <blind list, if any, and --exclude <ids>>. Don't edit the model.")
+               <blind list, if any, and --exclude <ids>>. Work only in <repo dir>. Don't edit the model.")
 ```
 
+(A blind run writes receipts where its builder prompt says.)
+
 1. Fix every **high** and **medium** finding with the fix it names (or a better one, said next round);
-   fix lows unless the fix would be wrong, and say why. Lows need no further round.
+   fix lows unless the fix would be wrong, and say why, before the next round. Lows of the passing
+   round: fix only value-preserving ones and re-stamp (`scripts/restamp.ts`); list the rest.
 2. Preflight again, then round n+1: a **sonnet** scoped verification (audit-cea, "Rounds"), given the
    model, write-up, preflight output, `audit-r<n>.md` and what you changed, writing `audit-r<n+1>.md`.
 3. Stop at the first round with no open high or medium. Publish only on a passing latest round on the

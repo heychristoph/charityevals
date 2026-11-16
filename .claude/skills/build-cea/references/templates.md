@@ -97,7 +97,7 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    (`python3 scripts/link-cpi.py <ISO3>` adds a country), then the year-Y rate.
 9. **Year and programme**: as SKILL.md step 0. A newer run-rate is context or a range end, never
    silently the best guess.
-10. **Judgment anchors**: a judgment that drives the result names its reference class in the explainer.
+10. **Judgment anchors**: a judgment that drives the result names its reference class in the explainer: studies, evaluations or data, never another charity or model.
 11. **Estimate basis**: keep the template's unless the dollar is another kind, and say why. A past average's cost and wins come from the *same period*: `program_spend ×
     average_spend_vs_year`, the average real spending over the wins' years (Convention 8) ÷ the
     modelled year's. Years without published accounts: a ranged judgment anchored on the nearest one.
