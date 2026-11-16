@@ -16,19 +16,19 @@ programme; end with **Gaps**: what wasn't found and where you looked.
 ## Money (cost section, donor section)
 
 - Start with the charity's own financials page (audited statements, 990s it hosts): open the listing
-  page and take the latest audited year it links, never a guessed URL (a missing file isn't
-  proof the year is unaudited). ProPublica's downloads often show a bot check; `python3 scripts/irs-990.py EIN --year T --summary` fetches the IRS e-file XML (its range-read subcommand reads one return from the bulk zip).
+  page and take the latest audited year it links, never a guessed URL (a missing file isn't proof the
+  year is unaudited). ProPublica's downloads often show a bot check; `python3 scripts/irs-990.py EIN
+  --year T --summary` fetches the IRS e-file XML (its range-read subcommand reads one return from the
+  bulk zip).
 - US charities: Form 990 via ProPublica Nonprofit Explorer (`projects.propublica.org/nonprofits`),
   Part IX (functional expenses: program, management, fundraising; salaries lines 5–9). UK: Charity
   Commission register (accounts PDF). Elsewhere: the audited statements on the charity's site.
-- Use the latest complete fiscal year for which you also have reach numbers (cost and reach must
-  describe the same work); note the fiscal year end. Program costs per activity, where reported, go in `program_spend`.
-- Currency: the local-currency amount times `@fx.usd_per_<cur>_<year>` (the IRS yearly average
-  where the IRS lists the currency, else the World Bank's official rate; `scripts/link-fx.py` adds a
-  missing year), never a typed rate or a constant in a formula.
+- The latest complete fiscal year for which you also have reach (cost and reach describe the same
+  work); note the fiscal year end. Program costs per activity, where reported, go in `program_spend`.
+- Currency: record the local-currency amount; the model converts it at `@fx` (templates.md Convention 8).
 - Programmes: list every programme with its spending for the year (the statement of functional
-  expenses or the annual report's breakdown); model every one, by
-  spending (SKILL.md step 0); note which have thin outcome data (templates.md Convention 12).
+  expenses or the annual report's breakdown), noting which have thin outcome data (templates.md
+  Convention 12).
 
 ## Reach (reach section)
 
@@ -48,32 +48,27 @@ programme; end with **Gaps**: what wasn't found and where you looked.
   from this: effect per person or per dollar, and persistence.
 - Check whether the trial population resembles the charity's (age, baseline risk, country) and
   put the gap into `evidence_adj` (external validity) with a reason.
-- Evaluator intervention reports (GiveWell, ACE, HLI, Rethink Priorities)
-  summarise the literature; cite the underlying study. In a blind run, the blind
-  list says which of these you must not read.
+- Evaluator intervention reports (GiveWell, ACE, HLI, Rethink Priorities) summarise the literature;
+  cite the underlying study. In a blind run, the blind list says which of these you must not read.
 
 ## Baselines and shared facts
 
-- Mortality: IHME GBD results tool, UN IGME (childmortality.org). The age split of the deaths (each
-  band is valued at its own `@moral_weights`, the shared value of a death by age): WHO Global Health
-  Estimates (by cause, age, sex and country, latest year; IHME GBD where WHO has no split). Consumption and PPP: World Bank (PIP, WDI).
+- Mortality: IHME GBD results tool, UN IGME (childmortality.org). The deaths' age split (each band is
+  valued at its own `@moral_weights`): WHO Global Health Estimates (by cause, age, sex and country,
+  latest year; IHME GBD where WHO has no split). Consumption and PPP: World Bank (PIP, WDI).
   Household size: facts/household_size.json first; a missing place gets its latest DHS figure
   (StatCompiler, mean usual members per household) as a new fact there.
 - New country data goes in `facts/<country>.json` with `source.url`, `retrieved`, and a range when
   sources disagree.
-- Animals: SADs (suffering-adjusted days) per physical change come from facts/sad_factors.json (one figure per change; a new
-  change gets a new fact with a `change` note and its SAD version). Reach is the animals under the
-  commitments won or tracked in the year (Chicken Watch, the Cage-Free Tracker, company reports);
-  pledges kept, years counted and production response are shared figures, not research targets (every
-  animal model uses the same ones). A country's meal mix only from a published estimate covering both
-  it and the reference meal. Species weights come only from facts/welfare_ranges.json (Rethink
-  Priorities, relative to a chicken), through the `ced_<s>` rows (the species step); a species it lacks
-  uses the stand-ins of docs/normalization.md, decision 6.
+- Animals: SADs per physical change from facts/sad_factors.json (a new change: templates.md,
+  corporate-campaign). Reach is the animals under the commitments won or tracked in the year (Chicken
+  Watch, the Cage-Free Tracker, company reports). Pledges kept, years counted, production response
+  and species weights (facts/welfare_ranges.json; a species it lacks takes the stand-ins of
+  docs/normalization.md, decision 6) are shared figures, not research targets. A country's meal mix
+  only from a published estimate covering both it and the reference meal.
 
 ## Reference classes for judgments
 
-- `npx tsx scripts/audit-model.ts <path>` prints the other hand-built models in the same unit (in
-  years of healthy life per $1,000) and the canonical rows (the row ids every model of a family shares)
-  of other charityevals models of the same family: use them to keep judgments consistent. The
-  explainer anchors on studies, evaluations or data, never on another charity or model (site text
-  never compares charities): an unanchored guess can't be checked.
+- `npx tsx scripts/audit-model.ts <path>` prints the other hand-built models in the same unit and the
+  canonical rows of other charityevals models of the same family: use them to keep judgments
+  consistent. The explainer anchors on studies, evaluations or data (templates.md Convention 10).

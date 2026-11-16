@@ -17,21 +17,18 @@ win:  tonnes_per_year (once in effect) × p_success × pv($win_years_counted) ×
 conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra_deaths_per_tco2e; methane_share
 ```
 
-- **Policy and litigation** are past averages: the wins of a period (several years: one year's wins
-  are noise) against the same years' real spending (Convention 11). Each win is a branch
-  (`<win>_counterfactual_adj`, `<win>_attribution_share_shared`, `<win>_implementation_adj`,
-  `<win>_total_adj`); the canonical rows are outcome-weighted averages for reading only.
+- **Policy and litigation** are past averages over several years (one year's wins are noise;
+  Convention 11). Each win is a branch (Convention 4: `<win>_counterfactual_adj`, `<win>_total_adj`, …).
 - **Technology acceleration** (advanced reactors, fusion, new fuels): a won policy speeds a share of a
   published deployment pathway. Tonnes = pathway capacity × output per unit × displaced emissions ×
   share built × share due to the policy; a technology that may never work adds a `single_event`
   chance. The pathway is read at the middle of the years counted (period's middle year + wait + half
   of `$win_years_counted`), straight between its published points, capped at the last; the smoke
-  weights read the full level (they read no shared value).
-- **Forest protection**: hectares protected in the year × tonnes per hectare-year × years protected,
-  the counterfactual from matched comparisons of protected and unprotected land, leakage as a negative
-  share (families/conservation.md). Land carbon carries no fuel smoke; clearing fires only a little.
+  weights read the full level.
+- **Forest protection**: families/conservation.md (land carbon carries no fuel smoke; clearing fires
+  only a little).
 - **Direct emissions cuts** (`unit_cost`): units installed × tonnes per unit-year, measured where it can
-  be, × years of use, discounted; no win years and no next-dollar factor.
+  be, × years of use, discounted; no win years.
 
 ## Shared figures (facts/climate.json)
 
@@ -41,14 +38,12 @@ conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra
 - `years_until_avoided_regulation` (3, 1-6) for rules and tax credits;
   `years_until_avoided_technology` (15, 8-25) for technologies not yet deployed. A policy with its own
   compliance dates uses them.
-- Tonnes of particular wins, for every model that counts them: the EU Methane Regulation's import
-  cut, EPA's 2023 oil and gas methane rule, EPA's 2024 power-plant standards, the 2022 carbon-capture
-  credit. Add a new win's tonnes here (the regulator's impact assessment or a modelling study), never
-  inside one model.
-- `us_power_smoke_factor` for tonnes from US power plants burning less, `us_coal_power_smoke_factor`
-  for coal plants'; other fuels and places from per-fuel evidence (deaths per TWh) in the model's
-  `fuel_smoke_factor`, weighted by branch.
-- Methane: the model's `methane_share` row (methane's part of the CO₂e tonnes, weighted by tonnes a
+- Particular wins' tonnes, counterfactual and delivered share are facts there, for every model that
+  counts them; a new win's go there too, never inside one model.
+- `us_power_smoke_factor` (US power plants), `us_coal_power_smoke_factor` (coal plants); other fuels
+  and places from per-fuel evidence (deaths per TWh) in the model's `fuel_smoke_factor`, weighted by
+  branch.
+- Methane: the `methane_share` row (methane's part of the CO₂e tonnes, weighted by tonnes a
   year before waits); the conversion gives it methane's own warming (`methane_heat_*`) and ozone
   (`ozone_deaths_per_tco2e_methane`, discounted over `methane_lifetime_years`). Never in
   `extra_deaths_per_tco2e`.
@@ -58,7 +53,7 @@ conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra
 ## Public money (normalization.md 2.23)
 
 Credits, grants, procurement, donors' payments and a won fund's levies are netted against their payers'
-loss, per branch, into the uov bridge (the climate skeleton's rows):
+loss, per branch, into the uov bridge:
 
 ```
 public_payer_uov_per_dollar = @public_funds.mcpf * $uov_per_ln_consumption / (payer multiple * payers' survey-scale consumption)
@@ -66,36 +61,32 @@ public_payer_uov_per_dollar = @public_funds.mcpf * $uov_per_ln_consumption / (pa
 <b>_public_cost_uov         = -<b>_public_usd_per_year * public_payer_uov_per_dollar * <b>'s years, wait, chance and adjustments
 ```
 
-Paid per unit: every adjustment; a fixed sum: not the evidence step; a levy: its spending's steps. Households' money: their gain less
-the payers' loss; a levy: no mcpf (the compliance row carries its resource cost). Payers: US federal
-(CE survey), rich donors (UK on the survey scale), the developing world (`lmy_na_consumption_per_person_2024`
-× the median survey ratio).
+Paid per unit: every adjustment; a fixed sum: not the evidence step; a levy: its spending's steps.
+Households' money: their gain less the payers' loss; a levy: no mcpf (the compliance row carries its
+resource cost). Payers: US federal (CE survey), rich donors (UK on the survey scale), the developing
+world (`lmy_na_consumption_per_person_2024` × the median survey ratio).
 
 ## Evidence to look for
 
-- **Wins**: laws, rules, rulings and credits in the period that the charity's annual or impact report
-  claims, checked against the official record (dates, current status).
-- **Tonnes**: the regulator's impact assessment, the modelling of independent groups; GWP100 (IPCC
-  AR6) for methane, as the sources state it.
+- **Wins** in the period the charity's reports claim, checked against the official record.
+- **Tonnes**: the regulator's impact assessment, independent modelling; GWP100 (IPCC AR6) for
+  methane, as the sources state it.
 - **Status since**: repeals, delays, court stays and weakening amendments set `implementation_adj`;
   a rule repealed keeps only the chance it is restored within the years counted.
-- **Share of the work**: the coalition behind each win (the other groups, industry lobbies, their
-  budgets where known), for `attribution_share_shared`.
-- **Fuel**: what the tonnes replace (coal, gas, oil, other clean power), for `fuel_share` and the
+- **Share of the work**: the coalition behind each win and its budgets, for
+  `attribution_share_shared`.
+- **Fuel**: what the tonnes replace (coal, gas, oil, clean power), for `fuel_share` and the
   counterfactual.
 
 ## Pitfalls
 
-- **Counted twice**: years a win counts and the counterfactual are one question each; trade
-  reshuffling (cleaner supply sent to the regulated market) is the counterfactual, not a lower tonnes
-  figure; smoke already in a death count goes in `extra_deaths_per_tco2e` with `air_pollution_weight` 0.
-- **Rows feeding the conversion** read no shared assumption (INV-2b): weight `fuel_share` by tonnes
-  before waits and years counted, and say so.
+- **Counted twice**: trade reshuffling (cleaner supply sent to the regulated market) is the
+  counterfactual, not a lower tonnes figure; smoke already in a death count goes in
+  `extra_deaths_per_tco2e` with `air_pollution_weight` 0.
+- **`fuel_share`** feeds the conversion (no shared assumption, INV-2b): weight it by tonnes before
+  waits and years counted, and say so.
 - **Pathways are not forecasts**: a government's 2050 target is the yardstick, the share built a
   ranged judgment.
-- **Wins outside the period** are out with their cost: never a famous old win against this year's
-  budget.
-- **Projections run ahead**: ex-ante tonnes of tax credits and technology have often exceeded what
-  was built; say so in `evidence_adj`.
-- The organisation's own credit claims ("thanks in part to our advocacy") name the win, not its
-  share.
+- **Projections run ahead**: ex-ante tonnes of credits and technology often exceed what gets
+  built; say so in `evidence_adj`.
+- An organisation's credit claims name the win, not its share.

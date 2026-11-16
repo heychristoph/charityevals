@@ -29,24 +29,22 @@ Why this shape:
   deaths. Only extinction-level ones take the future: people not yet born, through the one discount
   rate (`future_years_per_person`). People alive now count as deaths, never twice.
 - **A typical dollar, then this charity.** The cut per dollar is Rethink Priorities' typical project per
-  area, its backfire step included. The charity enters through its spending and each branch's evidence
-  multiplier (how far its outputs beat or trail a typical project); no free-hand multiplier. Spending far
-  above a typical project (about $30M a year) takes `<a>_scale_adj`.
-- **Adjustments by branch.** Each branch has its own evidence, counterfactual and attribution; the
-  canonical rows chain them weighted by each branch's healthy years (`w_<branch>`), never by spending.
+  area. The charity enters through its spending and each branch's evidence multiplier (how far its
+  outputs beat or trail a typical project); no free-hand multiplier. Spending far above a typical
+  project (about $30M a year) takes `<a>_scale_adj`.
+- **Adjustments by branch** (Convention 4): the canonical rows weight the branches by their healthy
+  years (`w_<branch>`), never by spending.
 - **AI: misuse or misalignment.** `ai_misuse_cost_share` (default 0) is the AI spending aimed at misuse
   (uplift evaluations, unlearning, refusal work); it takes the `ai_misuse_` cuts, the rest (and work
   aimed at both) the misalignment ones.
-- **Climate** (an option): valued at `#cause:climate`, the site's own average per dollar of typical
-  climate work, never a hand-wired bridge; it takes its own `climate_` adjustments.
+- **Climate** (an option): `#cause:climate`, never a hand-wired bridge, with its own `climate_`
+  adjustments.
 - **Specific outcomes** (a treaty, law, standard, institution launched) go in the policy branch, with
   their spending left out of the areas' shares (`cost_shares_total` must be 1). Calibrate
-  `pol_relative_cut` per risk: the default 1% is about $30M of typical nuclear work but tens of billions
-  of AI misalignment work. Start from everyone's resources behind the measure × the area's cuts per $1
-  million (both sizes), then a named multiple. People trained go in field-building.
+  `pol_relative_cut` per risk: everyone's resources behind the measure × the area's cuts per $1 million
+  (both sizes), then a named multiple. People trained go in field-building.
 - **Years.** Every cut counts `$win_years_counted` years (normalization.md 2.9), the wait discounted;
   someone else doing the work now is `counterfactual_adj`.
-- **Basis.** `past_average`, reading `@next_dollar.<id>` (normalization.md 2.10).
 
 ## Shared figures (facts/catastrophe.json)
 
