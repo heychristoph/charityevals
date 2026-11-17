@@ -60,7 +60,8 @@ lag is a sanity bound, not an input.
   charity's spending allows (Convention 4).
 - **Share of the field**: the charity's research spending ÷ all funders' spending on the disease
   (national funders' databases, the UK Health Research Classification System, NIH RePORTER, the
-  charity sector's own totals) as `attribution_share_shared`.
+  charity sector's own totals) as `attribution_share_shared`. Health systems that adopt the result are
+  under `mobiliser_share` (`"credit": "research"`; an advocacy branch `"win"`), never in that total.
 - **Advocacy**: the policy pressed or won, its population, and the evidence for its health effect.
 
 ## Pitfalls

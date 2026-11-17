@@ -2,6 +2,7 @@ import { parse, refs, evaluate, compile, type Compiled, type Env, type Node, typ
 import { Model, Row, Assumptions, Facts, Charity, Owner, Cause, type ModelFile, type RowPatch, type Range } from "./schema";
 import { causeFigure, causeModels, evaluatorFigure, evaluatorFigureModels } from "./ranking";
 import { byIso3 } from "./countries";
+import { MOBILISER_SHARE } from "./moved-money";
 
 export type ResolvedRow = Row & {
   /** Id of the model this row was first defined in, when that isn't this model. */
@@ -265,6 +266,7 @@ export function buildLibrary(
       beneficiaries_note: file.beneficiaries ? file.beneficiaries_note : parent?.beneficiaries_note,
       destination_reads: file.destination_reads ?? parent?.destination_reads,
       missing_data: file.missing_data ?? parent?.missing_data,
+      mobilised: file.mobilised ?? parent?.mobilised,
       charity: file.charity ?? parent?.charity ?? "",
       owner: file.owner ?? parent?.owner ?? "",
       sections,
@@ -1077,13 +1079,15 @@ export function headlineExprOf(lib: Library, m: ResolvedModel, result: Node, vie
 
 const readers = new WeakMap<Record<string, number>, Record<string, number>>();
 /** The values a view reads other models (`#id`) at: the reader's own in our view; in the evaluator
- * view the same with no discount for age or distance and missing data counted in full, so that view
- * never applies them, however deep. One object per `av`, so modelResult's cache still hits. */
+ * view the same with no discount for age or distance, missing data counted in full and mobilised
+ * resources credited in full (`$mobiliser_share` = 1, docs/normalization.md 2.24), so that view never
+ * applies them, however deep. One object per `av`, so modelResult's cache still hits. */
 export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
   const riskMoves = RISK_QUANTILE in av && av[RISK_QUANTILE] !== RISK_OFF;
-  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1) && !riskMoves)) return av;
+  const shareMoves = MOBILISER_SHARE in av && av[MOBILISER_SHARE] !== 1;
+  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1) && !riskMoves && !shareMoves)) return av;
   let r = readers.get(av);
-  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: RISK_OFF } : {}) }));
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: RISK_OFF } : {}), ...(MOBILISER_SHARE in av ? { [MOBILISER_SHARE]: 1 } : {}) }));
   return r;
 }
 
@@ -1165,6 +1169,8 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   // weighs it by distance and never discounts an imported model for missing data.
   if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT, RISK_QUANTILE].forEach((x) => used.delete(x));
   if (view === "evaluator" && !m.rows.some((r) => r.assumptionDeps.includes(MISSING_DATA_DISCOUNT))) used.delete(MISSING_DATA_DISCOUNT);
+  // The evaluator view credits mobilised resources in full: its own rows by the pin (INV-22), the models it reads by readerValues.
+  if (view === "evaluator" && (MOBILISER_SHARE in (m.evaluator?.assumptions ?? {}) || !m.rows.some((r) => r.assumptionDeps.includes(MOBILISER_SHARE)))) used.delete(MOBILISER_SHARE);
   // The evaluator view fixes its accounting choices; it never toggles them.
   if (view === "evaluator" && m.evaluator)
     for (const [id] of Object.entries(m.evaluator.assumptions))

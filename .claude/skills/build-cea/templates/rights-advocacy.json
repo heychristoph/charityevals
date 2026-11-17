@@ -346,7 +346,7 @@
     {
       "id": "attribution_share_shared",
       "section": "adjustments",
-      "label": "This charity's share of the resources behind the outcome",
+      "label": "This charity's share among those who worked for the result",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -354,15 +354,24 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+      "explainer": "TEMPLATE: this charity's share among those who campaigned, advised or researched alongside it for the same result (coalition partners, co-authors, other funders of the same work), by everyone's spending and staff time on it. Whoever adopts or carries out the result (the government that legislates and enforces, the company that complies, the lab, funder or health system that uses the research) is never in this denominator: the mobiliser's share below covers them. 1 when it worked alone."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
     },
     {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
     },
     {
       "id": "implementation_adj",

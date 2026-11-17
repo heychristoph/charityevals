@@ -76,9 +76,9 @@ with better government as an income gain per person governed, `ln(1 + gain)` in
   already repealed counts its years in force.
 - **Pending campaigns**: `p_success` from `@democracy.lobbied_issue_change_rate`, moved by the issue's
   own record (a jurisdiction's past ballot measures, a court's rulings), `single_event` for one measure.
-- **Coalitions**: credit is the charity's share of the money behind the win (Convention 2): the ballot
-  committee's donors in the campaign-finance filings, else the named coalition members' spending on it
-  (their 990s), the charity's in-kind staff time counted; never an equal split. A measure put on the
+- **Coalitions**: the charity's share of the campaigners' money (Convention 2; wins `"credit": "win"`,
+  legal services `"delivery"`): the ballot committee's donors in the campaign-finance filings, else the
+  coalition members' spending (their 990s), in-kind staff time counted; never an equal split. A measure put on the
   ballot by the charity's own petition wouldn't have been voted on without it: that is the counterfactual,
   `$win_years_counted` already saying it would have come some day.
 - **Backlash** (bans or counter-measures a win provokes, as at state level against local wins): a
