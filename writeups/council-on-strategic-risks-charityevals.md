@@ -42,8 +42,8 @@ After each part's adjustments, the fellowships bring 69% of the result, the nucl
 
 - **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. From about 17 to 190.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
-- **How the Nolan Center's spending splits between biological and nuclear work.** From 45% to 80% biological, which moves the result from about 34 to 29.
-- **How many fellows work on these risks because of the fellowships.** 10%, from 3% to 25%; no alumni survey is published. The result runs from about 17 to 65.
+- **How the Nolan Center's spending splits between biological and nuclear work.** From 45% to 80% biological, which moves the result from about 10 to 8.7.
+- **How many fellows work on these risks because of the fellowships.** 10%, from 3% to 25%; no alumni survey is published. The result runs from about 5.1 to 20.
 - **How much a dollar of pandemic work cuts the risk.** Also ten times either way.
 
 ### What isn't modelled

@@ -281,7 +281,7 @@ describe("invariant checks", () => {
     const chance = (o: { chance?: boolean }) => (o.chance === false ? "" : " * p_success");
     const win = (id: string, o: { used?: string; credit?: string; cost?: string; out?: string; chance?: boolean; share?: boolean } = {}) => ({
       ...base, id, owner: "charityevals",
-      rows: [num("benefit", 10), num("harm", 3), ...(o.chance === false ? [] : [num("p_success", 0.5, "Probability the law passes")]), num("attribution_share_shared", 0.5),
+      rows: [num("benefit", 10), num("harm", 2), ...(o.chance === false ? [] : [num("p_success", 0.5, "Probability the law passes")]), num("attribution_share_shared", 0.5),
         ...(o.share === false ? [] : [SHARE]),
         { id: "attribution_share", label: "Share used", formula: o.used ?? "attribution_share_shared * mobiliser_share", ...(o.credit === "" ? {} : { credit: o.credit ?? "win" }) },
         { id: "compliance_uov", label: "Compliance cost", formula: o.cost ?? `-harm${chance(o)} * attribution_share` },

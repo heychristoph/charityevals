@@ -39,7 +39,7 @@ The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% 
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.35 to 12.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.10 to 3.6.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much of the research spending is on catastrophic risks.** The Nuclear Information Project's share is by headcount, from 10% to 22%; the Global Risk Program's comes from its grant and pay, from 8% to 20%.
 - **How much the science-policy work improves public spending.** That is a judgment with a range of a hundred times either way, but it moves the result very little.

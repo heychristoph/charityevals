@@ -1,8 +1,7 @@
 // The mobiliser's share (docs/normalization.md 2.24): the shared formulas carry it, the evaluator view never
-// applies it, and, while the default is 100%, wiring it into the models changes no headline. The last is a
-// stored snapshot of every model's headline at 100% (src/engine/mobiliser-share-snapshot.json): it must
-// pass at every commit that adds the share to a model. The step that sets the default below 100% replaces
-// the snapshot test with one on the share's range.
+// applies it, the default is 30%, and at 100% every headline is the one before the share existed (a stored
+// snapshot, src/engine/mobiliser-share-snapshot.json). Over the slider's range no result grows as the
+// share falls, except the net-harm and mixed models listed below.
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -55,8 +54,7 @@ describe("the setting", () => {
     const ids = assumptions.rows.filter((r: { section?: string }) => r.section === "accounting").map((r: { id: string }) => r.id);
     expect(ids).toEqual(["resource_shares", MOBILISER_SHARE]);
   });
-  // Deliberate: the step that flips the default (inventory/credit-plan-2026-11-17.md, step 7) changes this line.
-  it("defaults to 100% until every model is wired", () => expect(row.value.best).toBe(1));
+  it("defaults to 30% (inventory/rule-changes/mobiliser-share-30.md)", () => expect(row.value.best).toBe(0.3));
 });
 
 describe("views", () => {
@@ -85,9 +83,48 @@ describe("views", () => {
   });
 });
 
+// Net harm is shared like credit: these headlines are below zero at every share and shrink towards zero
+// with it (a climate or welfare cost outweighs the good in our view).
+const NET_HARM = [
+  "aspca-charityevals-farm-animals", "carbon180-charityevals", "coalition-for-rainforest-nations-charityevals",
+  "drug-policy-alliance-charityevals", "evergreen-collaborative-charityevals", "industrious-labs-charityevals",
+  "opportunity-green-charityevals", "the-humane-league-charityevals-other-programmes",
+  "union-of-concerned-scientists-charityevals-climate",
+];
+// Mixed: money these two shift earns only the gain over where it would have gone (V − V_before, 2.8), and
+// the recipients' own value V falls with the share too (chains compound), so the gain can change sign.
+const MIXED = ["animal-charity-evaluators-charityevals", "project-drawdown-charityevals"];
+const GRID = [1, 0.75, 0.5, 0.3, 0.15, 0.05];
+
+const lib = buildLibrary(walk(join(root, "models")).map(read), assumptions,
+  walk(join(root, "facts")).map(read), walk(join(root, "charities")).map(read), read(join(root, "owners.json")));
+
+describe("every headline over the share's range", () => {
+  const base = assumptionValues(lib.assumptions);
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
+  const grid = new Map(models.map((m) => [m.id, GRID.map((s) => headline(lib, m, { ...base, [MOBILISER_SHARE]: s }))]));
+  const rises = (h: number[]) => h.some((x, i) => i > 0 && x > h[i - 1] + 1e-12 * Math.abs(h[i - 1]));
+
+  it("is a number at every share", () => {
+    expect([...grid].filter(([, h]) => h.some((x) => !Number.isFinite(x))).map(([id]) => id)).toEqual([]);
+  });
+
+  it("a result that isn't net harm never rises as the share falls", () => {
+    const skip = new Set([...NET_HARM, ...MIXED]);
+    expect([...grid].filter(([id, h]) => !skip.has(id) && (h[0] < 0 || rises(h))).map(([id]) => id)).toEqual([]);
+  });
+
+  it("net harm stays below zero and never grows as the share falls; the lists hold only what needs them", () => {
+    for (const id of NET_HARM) {
+      const h = grid.get(id)!;
+      expect(h.every((x) => x < 0), id).toBe(true);
+      expect(rises(h.map((x) => -x)), id).toBe(false);
+    }
+    for (const id of MIXED) expect(rises(grid.get(id)!), id).toBe(true);
+  });
+});
+
 describe("every headline at a mobiliser's share of 100%", () => {
-  const lib = buildLibrary(walk(join(root, "models")).map(read), assumptions,
-    walk(join(root, "facts")).map(read), walk(join(root, "charities")).map(read), read(join(root, "owners.json")));
   const snapshot: Record<string, number | null> = read(join(import.meta.dirname, "mobiliser-share-snapshot.json"));
   const av = { ...assumptionValues(lib.assumptions), [MOBILISER_SHARE]: 1 };
   const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));

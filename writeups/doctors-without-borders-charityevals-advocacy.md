@@ -14,7 +14,7 @@ Because the price cuts and DNDi's treatments are past wins set against past spen
 
 ### What drives the result
 
-The missing-data slider (0.013 to 0.13), the years a win counts (0.02 to 0.18), MSF's share of the price campaigns (0.03 to 0.12), the value of a healthy year against income (0.036 to 0.13; most of the value is buyers' savings and aid, counted in income terms), the next dollar's share of the average (0.03 to 0.11), and how much of the cuts wouldn't have come yet (0.03 to 0.10). The result is mostly uncertainty: the combined range runs from 0.005 to 0.95.
+The missing-data slider (0.0039 to 0.039), the years a win counts (0.006 to 0.054), MSF's share of the price campaigns (0.009 to 0.036), the value of a healthy year against income (0.011 to 0.039; most of the value is buyers' savings and aid, counted in income terms), the next dollar's share of the average (0.009 to 0.033), and how much of the cuts wouldn't have come yet (0.009 to 0.030). The result is mostly uncertainty: the combined range runs from 0.0015 to 0.28.
 
 ### Why it is so low
 

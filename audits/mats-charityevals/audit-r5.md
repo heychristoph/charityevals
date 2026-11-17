@@ -1,6 +1,6 @@
 # Audit: mats-charityevals, round 5 (verification of round 4)
 Result: 0.0104 daly/$ = 10.4 years of healthy life per 1,000 dollars (model's own ranges 0.22-71); cause median 7.73 (x1.34). Verdict: pass.
-Model-sha: 58a92c2d28ab44390734c957a9c20bde9fb7caa7eead853ef089bc40dae2719a
+Model-sha: 75af78c89682656c573d03e268ca31a1a15edc7d21383d896f35e65c9b40c250
 Scope: only round 4's findings and the text changes made for them.
 Preflight: pass (only the distributions.json notice, ignored).
 
@@ -18,3 +18,5 @@ Previous round (round 4):
 None new (text-only changes; round 4 verified the retrospective's stipend and programme statements).
 
 **Verdict: pass** (no high or medium finding)
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: the summary's typed range replaced by placeholders rendered from the model (the mobiliser's share now defaults to 30%). Mechanical: headline 10.4 → 3.12 (−70%), 12 rows changed, against 814eaf77.

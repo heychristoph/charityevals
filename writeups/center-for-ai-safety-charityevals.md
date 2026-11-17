@@ -42,15 +42,15 @@ CAIS holds about a year and a half of spending in reserve after two years of sur
 
 ### What drives the result
 
-Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 28. The course carries about four fifths of the result: the students who go on to work on AI risk, valued at a typical dollar of that work, are worth far more than the course costs.
+Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 8.4. The course carries about four fifths of the result: the students who go on to work on AI risk, valued at a typical dollar of that work, are worth far more than the course costs.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.4% to 20% by 2100, which moves the result from 1.0 to 52.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 1.9 to 125, the largest swing.
-- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (5.6 to 20.5).
+- **How likely an AI catastrophe is.** The slider runs from 0.4% to 20% by 2100, which moves the result from 0.30 to 16.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.57 to 38, the largest swing.
+- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (1.7 to 6.1).
 - **The discount rate and the years a cut counts.** Each moves the result several-fold.
-- **How many course students go on to work on AI risk.** No alumni survey is published; the 5% we assume runs from 1% to 15% (4.4 to 35).
+- **How many course students go on to work on AI risk.** No alumni survey is published; the 5% we assume runs from 1% to 15% (1.3 to 10).
 - **How CAIS's work compares with a typical project.** Its benchmarks are widely used, but use isn't the same as lower risk.
 
 ### What isn't modelled

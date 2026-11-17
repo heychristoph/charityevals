@@ -44,10 +44,10 @@ All of METR's work is against AI escaping control. For catastrophes the world su
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.007 to 0.38.
-- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.015 to 0.47.
-- **Whether any of the work counts as misuse work.** If the cybersecurity tasks counted as misuse work (about 10% of the work), the result would be 0.52.
-- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 1.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.0021 to 0.11.
+- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.0045 to 0.14.
+- **Whether any of the work counts as misuse work.** If the cybersecurity tasks counted as misuse work (about 10% of the work), the result would be 0.16.
+- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 0.3.
 
 ### What isn't modelled
 

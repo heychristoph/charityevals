@@ -287,10 +287,10 @@ describe("INV-12: money moved is valued one way", () => {
   it("values spending research changed as all shifted, with the evidence and missing-data steps", () => {
     const av = assumptionValues(l.assumptions);
     const v = compute(l, l.models.get("informed-good")!, av);
-    expect(v.shifted_dollar_value).toBeCloseTo(v.moved_dollar_value - v.prior_dollar_value, 12);
+    expect(v.shifted_dollar_value).toBeCloseTo(av.mobiliser_share * (v.moved_dollar_value - v.prior_dollar_value), 12);
     expect(v.out).toBeCloseTo(10 * v.shifted_dollar_value * 0.6 * av.missing_data_discount, 12);
     // No new money: the same spending counted as moved gross would be worth more.
-    expect(v.out).toBeLessThan(10 * (0.5 * v.moved_dollar_value + 0.5 * v.shifted_dollar_value) * 0.6 * av.missing_data_discount);
+    expect(v.out).toBeLessThan(10 * (0.5 * av.mobiliser_share * v.moved_dollar_value + 0.5 * v.shifted_dollar_value) * 0.6 * av.missing_data_discount);
   });
 
   it("compares a cross-cause mover's shifted money with each cause's ordinary charity, in its own shares", () => {
@@ -313,7 +313,7 @@ describe("INV-12: money moved is valued one way", () => {
     const av = assumptionValues(l.assumptions);
     const v = compute(l, m, av);
     expect(v.moved_dollar_value).toBeGreaterThan(v[`#${CASH_BENCHMARK}`]);
-    expect(v.moved_dollar_net_value).toBeCloseTo(0.5 * v.moved_dollar_value + 0.5 * (v.moved_dollar_value - v[`#${CASH_BENCHMARK}`]));
+    expect(v.moved_dollar_net_value).toBeCloseTo(av.mobiliser_share * (0.5 * v.moved_dollar_value + 0.5 * (v.moved_dollar_value - v[`#${CASH_BENCHMARK}`])), 12);
     // Each destination at its charity's figure on the rankings, never one of its location models alone.
     expect(GLOBAL_HEALTH_DESTINATIONS.every((d) => d.includes(":"))).toBe(true);
     const weights = ["gw_weight_amf", "gw_weight_smc", "gw_weight_vas", "gw_weight_ni"].map((k) => pickValue(l.facts.get(`meta.${k}`)!.value));

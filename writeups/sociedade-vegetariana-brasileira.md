@@ -10,7 +10,7 @@ Institutions commit to serving plant-based meals; each replaced meal means fewer
 
 ### What drives the result
 
-**How much a fish can suffer relative to a chicken** (about 4.6 to 150 years of healthy life per $1,000 on its own) and **how much suffering a replaced meal spares** (2.6 to 45) move the result most. Next comes **how many years a won reform counts** (6.4 to 41 over the slider's 1 to 20 years), where ACE uses 5.5 years for how long institutions keep the change.
+**How much a fish can suffer relative to a chicken** (about 1.4 to 45 years of healthy life per $1,000 on its own) and **how much suffering a replaced meal spares** (0.78 to 14) move the result most. Next comes **how many years a won reform counts** (1.9 to 12 over the slider's 1 to 20 years), where ACE uses 5.5 years for how long institutions keep the change.
 
 ### What isn't modelled
 

@@ -44,7 +44,7 @@ SecureBio held about a year of unrestricted reserves at the end of 2024, and its
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the pandemic work's share of the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 69. The pandemic work gives most of the result; a dollar of the AI evaluations averts about as many deaths as a dollar of pandemic work, but little of the future, because the misuse disasters it guards against are mostly ones the world survives.
+Pandemics that end humanity's future bring about half the pandemic work's share of the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 21. The pandemic work gives most of the result; a dollar of the AI evaluations averts about as many deaths as a dollar of pandemic work, but little of the future, because the misuse disasters it guards against are mostly ones the world survives.
 
 ### Biggest uncertainties
 

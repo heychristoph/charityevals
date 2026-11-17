@@ -38,7 +38,7 @@ IBBIS is raising money in small grants for named work, and Founders Pledge's 202
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 120. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 36. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
 
 ### Biggest uncertainties
 

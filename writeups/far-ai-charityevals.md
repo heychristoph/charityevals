@@ -43,9 +43,9 @@ The main reason is the quarter of its work aimed at misuse. For catastrophes the
 
 ### Biggest uncertainties
 
-- **How much a dollar of misuse work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.13 to 9.2.
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.12 to 6.4.
-- **How much of the work is against misuse.** FAR.AI publishes no split. From 11% to 40% moves the result from 0.40 to 1.4.
+- **How much a dollar of misuse work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.039 to 2.8.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.036 to 1.9.
+- **How much of the work is against misuse.** FAR.AI publishes no split. From 11% to 40% moves the result from 0.12 to 0.42.
 - **The years a cut counts and the discount rate.** These are shared sliders.
 
 ### What isn't modelled
