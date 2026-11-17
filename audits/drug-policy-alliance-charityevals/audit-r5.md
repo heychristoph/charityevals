@@ -1,7 +1,7 @@
 # Audit: drug-policy-alliance-charityevals, round 5 (verification)
 Result: -4.185e-6 daly/$ native = -0.004185 years of healthy life per 1,000 dollars (combined range -0.0780 to -0.00022; simulation 5% to 95%: -0.030 to +0.0031, i.e. 7.17x to -0.74x the best guess). Verdict: pass.
 Verdict: pass
-Model-sha: 97eeeb4aca84298ed45f91750acdb5c48dc63497a430ea5795ff6df306a757c5
+Model-sha: 840bf7c98f0990e75cb8156f7e0997097584adf413c09dd94022c9a17e36eb3c
 Scope: unchanged from round 4 and correct; only the change since round 4 was checked (`git diff HEAD~1 -- models`: the `can_traffic_deaths_per_million` explainer and its `high`, 16 to 17).
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model "Findings (0)"). Invariants: none (INV-15 ignored, per owner). simulation-check: stable ("5% 7.17, 50% 1, 95% -0.742 x best guess"); the plausible-range-crosses-zero warning is expected for a net-harm model (normalization 2.21). normalization-audit not re-run (no rule change; scope was verification only).
 
@@ -26,7 +26,9 @@ Checked the change itself: the only edits are the explainer text and `high` 16 t
 Unchanged from round 4: `can_user_ln_gain` (judgment, largest gain), `can_traffic_deaths_per_million` with `can_traffic_evidence_adj` (largest harm; range 0 to 17 gives -0.0005 to -0.0130), `can_cud_or_26plus` with `can_health_evidence_adj`, `m110_od_evidence`, and the attribution, missing-data and period-share judgments. Most improving: reading the corrigendum and a published consumer-surplus estimate for legal cannabis.
 
 Verdict: pass (0 high, 0 medium, 1 low).
-Model-sha: 97eeeb4aca84298ed45f91750acdb5c48dc63497a430ea5795ff6df306a757c5
+Model-sha: 840bf7c98f0990e75cb8156f7e0997097584adf413c09dd94022c9a17e36eb3c
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against b10cf49b.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 4 rows changed, against 5724c36c.

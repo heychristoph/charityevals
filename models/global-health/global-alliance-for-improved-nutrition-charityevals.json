@@ -995,7 +995,7 @@
       "explainer": "Governments draft these plans under the UN Food Systems Summit process with many partners; GAIN's tools and staff help. 30%, from 10% to 60%."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "GAIN's share of resources behind the plans",
       "format": "percent",
@@ -1006,6 +1006,23 @@
       },
       "kind": "judgment",
       "explainer": "Governments' own staff, FAO, GIZ, the World Bank and others work on the same plans: 15%, from 5% to 30%."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: GAIN's share of resources behind the plans",
+      "credit": "win",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pol_missing_data_adj",
@@ -1174,7 +1191,7 @@
       "section": "adjustments",
       "label": "GAIN's share of resources (average)",
       "format": "percent",
-      "formula": "(ff_spend * ff_attribution_share + vc_spend * vc_attribution_share + wf_spend * wf_attribution_share + pol_spend * pol_attribution_share) / (ff_spend + vc_spend + wf_spend + pol_spend)",
+      "formula": "(ff_spend * ff_attribution_share + vc_spend * vc_attribution_share + wf_spend * wf_attribution_share + pol_spend * pol_attribution_share_shared) / (ff_spend + vc_spend + wf_spend + pol_spend)",
       "explainer": "Spending-weighted average of the branches, for reading only."
     },
     {
@@ -1182,8 +1199,8 @@
       "section": "adjustments",
       "label": "GAIN's share of the resources behind the outcome",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The spending-weighted average of the branches' shares, for reading only: each branch applies its own."
+      "formula": "(ff_spend * ff_attribution_share + vc_spend * vc_attribution_share + wf_spend * wf_attribution_share + pol_spend * pol_attribution_share) / (ff_spend + vc_spend + wf_spend + pol_spend)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

@@ -911,7 +911,7 @@
       "formula": "1"
     },
     {
-      "id": "fed_attribution_share",
+      "id": "fed_attribution_share_shared",
       "section": "adjustments",
       "label": "Federal caps: PPI's share of the campaign's resources",
       "format": "percent",
@@ -922,6 +922,23 @@
       },
       "kind": "judgment",
       "explainer": "PPI has campaigned on prison phone rates for two decades (its reports on fees in 2013, video calling in 2015 and the State of Phone Justice in 2019 and 2022, cited in the FCC's proceedings); the Wright petitioners' lawyers, Worth Rises, the United Church of Christ's media justice ministry, Color of Change and others carried the Act and the rulemaking. PPI spends perhaps a fifth of its 1.6 million a year on the issue, about 1.6 million over the five years, against roughly 3 million a year across the coalition over eight years, about 24 million: 7% with its research's weight in the proceedings. The share is PPI's resources in fiscal years 2021-2025 (the cost counted here) over the coalition's over the whole campaign that won the Act and the caps (from about 2017), since PPI's earlier spending isn't in the cost: 7%, from 3% to 18%."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "fed_attribution_share",
+      "section": "adjustments",
+      "label": "Federal caps: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "fed_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "fed_implementation_adj",
@@ -945,7 +962,7 @@
       "formula": "1"
     },
     {
-      "id": "st_attribution_share",
+      "id": "st_attribution_share_shared",
       "section": "adjustments",
       "label": "State laws: PPI's share of the campaigns' resources",
       "format": "percent",
@@ -956,6 +973,15 @@
       },
       "kind": "judgment",
       "explainer": "Worth Rises led these state campaigns (2020-2023, almost all inside the cost period, so the share is over the whole campaigns) with local coalitions and sponsors; PPI's rate data and testimony supported them: 4%, from 1% to 10%."
+    },
+    {
+      "id": "st_attribution_share",
+      "section": "adjustments",
+      "label": "State laws: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "st_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "st_implementation_adj",
@@ -992,7 +1018,7 @@
       "formula": "1"
     },
     {
-      "id": "dec_attribution_share",
+      "id": "dec_attribution_share_shared",
       "section": "adjustments",
       "label": "Decarceration: PPI's share of the reform movement's resources",
       "format": "percent",
@@ -1003,6 +1029,15 @@
       },
       "kind": "judgment",
       "explainer": "The movement spends hundreds of millions a year (national and state advocacy groups, public defenders' campaigns, foundations); PPI's 1.6 million is under 1% of it, but its data are used widely: 0.5%, from 0.1% to 2%."
+    },
+    {
+      "id": "dec_attribution_share",
+      "section": "adjustments",
+      "label": "Decarceration: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "dec_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dec_implementation_adj",
@@ -1058,7 +1093,7 @@
       "formula": "dec_evidence_adj * dec_counterfactual_adj * dec_attribution_share * dec_implementation_adj * dec_missing_data_adj"
     },
     {
-      "id": "ger_attribution_share",
+      "id": "ger_attribution_share_shared",
       "section": "adjustments",
       "label": "Gerrymandering: PPI's share of the campaign's resources",
       "format": "percent",
@@ -1069,6 +1104,15 @@
       },
       "kind": "judgment",
       "explainer": "PPI started and led the national campaign (its Prisoners of the Census project) and drafted model bills; state groups and legislators carried them: 50%, from 30% to 80%."
+    },
+    {
+      "id": "ger_attribution_share",
+      "section": "adjustments",
+      "label": "Gerrymandering: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "ger_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ger_missing_data_adj",
@@ -1139,7 +1183,7 @@
       "section": "adjustments",
       "label": "PPI's share of the resources behind the outcome (outcome-weighted average)",
       "format": "percent",
-      "formula": "(fed_value_per_year * fed_attribution_share + st_value_per_year * st_attribution_share) / (fed_value_per_year + st_value_per_year)",
+      "formula": "(fed_value_per_year * fed_attribution_share_shared + st_value_per_year * st_attribution_share_shared) / (fed_value_per_year + st_value_per_year)",
       "explainer": "Outcome-weighted average of the branches, for reading only: the two phone branches, both in units of value (the decarceration and gerrymandering branches, in WELLBYs and a few percent of the result, have their own rows and are left out so the average needs no exchange rate)."
     },
     {
@@ -1147,8 +1191,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "PPI's share of the resources behind the outcome: the outcome-weighted average of the branches, for reading only (each branch applies its own share)."
+      "formula": "(fed_value_per_year * fed_attribution_share + st_value_per_year * st_attribution_share) / (fed_value_per_year + st_value_per_year)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

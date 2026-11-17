@@ -20,9 +20,11 @@ Checks: (3) summary, model summary and write-up headline read 0.0016 against the
 | `alt_protein_meal_vs_reference` | gfi.org/resource/analyzing-plant-based-meat-and-seafood-sales/ | page reachable, quote present | the 86% sentence matches; share of sales, now stated as a stand-in for weight |
 
 Verdict: pass (no high findings; no medium; no low).
-Model-sha: 53e5d7e217a2cc4c8e8f2ba8fd0119918d94d4e8b7347176d168cb4d9d99017a
+Model-sha: 9cf0fab5cddc7921829b2da84d344b63050d21e4a3ce613dcc60c974d31b06fe
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.

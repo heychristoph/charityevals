@@ -502,12 +502,29 @@
       "explainer": "Institutional philanthropy for democracy (2021-2022, the shared figure) × the whole field against it × the direct share plus the rest at its relative effect, in 2025 prices (Convention 8): about $2.6 billion, the field whose year of work the cut in risk belongs to."
     },
     {
-      "id": "dem_attribution_share",
+      "id": "dem_attribution_share_shared",
       "section": "adjustments",
       "label": "The Campaign Legal Center's share of the field's resources",
       "format": "percent",
       "formula": "dem_slide_cost / dem_field_spending",
-      "explainer": "Its direct cost (dem_slide_cost) over the field's effect-weighted resources (Convention 2, the same denominator as the other models of the field): about {{row:dem_attribution_share}}. Only direct work against a slide counts here; its reform work is valued in the reform branch alone."
+      "explainer": "Its direct cost (dem_slide_cost) over the field's effect-weighted resources (Convention 2, the same denominator as the other models of the field): about {{row:dem_attribution_share_shared}}. Only direct work against a slide counts here; its reform work is valued in the reform branch alone."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "dem_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Campaign Legal Center's share of the field's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "dem_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dem_evidence_adj",
@@ -690,12 +707,21 @@
       "formula": "@democracy.redistricting_movement_resources * @cpi.usa_2025 / @cpi.usa_2024"
     },
     {
-      "id": "ref_attribution_share",
+      "id": "ref_attribution_share_shared",
       "section": "adjustments",
       "label": "The Campaign Legal Center's reform spending as a share of the redistricting movement's yearly spending",
       "format": "multiple",
       "formula": "ref_cost / ref_movement_real",
       "explainer": "Reform value scales with dollars (Convention 2, the shared movement figure): the Center's reform spending is about three fifths of the movement's yearly spending, and each reform dollar is credited a quarter of a movement dollar's effect (ref_relative_effect). Diminishing returns to a larger programme are not modelled."
+    },
+    {
+      "id": "ref_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Campaign Legal Center's reform spending as a share of the redistricting movement's yearly spending",
+      "credit": "win",
+      "format": "multiple",
+      "formula": "ref_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ref_weak_delivery",
@@ -995,7 +1021,7 @@
       "section": "adjustments",
       "label": "The Campaign Legal Center's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_attribution_share + ref_raw * ref_attribution_share) / raw_total",
+      "formula": "(dem_raw * dem_attribution_share_shared + ref_raw * ref_attribution_share_shared) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
@@ -1003,8 +1029,8 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own (dem_attribution_share, ref_attribution_share)."
+      "formula": "(dem_raw * dem_attribution_share + ref_raw * ref_attribution_share) / raw_total",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "missing_data_adj",

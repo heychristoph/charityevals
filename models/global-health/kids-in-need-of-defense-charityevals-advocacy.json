@@ -318,12 +318,29 @@
       "explainer": "A large firm's pro bono team (Goodwin Procter, whose address is the class counsel contact on the class notices) carries most of the litigation hours in cases like this; KIND and the other legal-aid groups supply class representatives, practice alerts and implementation work (KIND hosts the class notices and practice alerts on its site). Our judgment half of an equal fifth, from a quarter to 1.2 (KIND among the leads)."
     },
     {
-      "id": "jop_attribution_share",
+      "id": "jop_attribution_share_shared",
       "section": "adjustments",
       "label": "J.O.P.: KIND's share of the resources behind the win",
       "format": "percent",
       "formula": "jop_kind_share_vs_equal / jop_counsel_count",
-      "explainer": "About {{row:jop_attribution_share}}."
+      "explainer": "About {{row:jop_attribution_share_shared}}."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "jop_attribution_share",
+      "section": "adjustments",
+      "label": "J.O.P.: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "jop_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "jop_implementation_adj",
@@ -456,7 +473,7 @@
       "explainer": "The years counted already say the change would have come some day (Convention 5); this is whether the council would have passed it in the period without the coalition's push: 50%, from 20% to 80%."
     },
     {
-      "id": "dc_attribution_share",
+      "id": "dc_attribution_share_shared",
       "section": "adjustments",
       "label": "D.C. act: KIND's share of the coalition",
       "format": "percent",
@@ -467,6 +484,15 @@
       },
       "kind": "judgment",
       "explainer": "KIND worked with D.C. legal-aid and youth groups and the council's sponsors: 30%, from 10% to 60%."
+    },
+    {
+      "id": "dc_attribution_share",
+      "section": "adjustments",
+      "label": "D.C. act: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "dc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dc_missing_data_adj",
@@ -597,7 +623,7 @@
       "section": "adjustments",
       "label": "KIND's share of the resources (average)",
       "format": "percent",
-      "formula": "(jop_value_per_year * jop_attribution_share + dc_value_per_year * dc_attribution_share) / (jop_value_per_year + dc_value_per_year)",
+      "formula": "(jop_value_per_year * jop_attribution_share_shared + dc_value_per_year * dc_attribution_share_shared) / (jop_value_per_year + dc_value_per_year)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row."
     },
     {
@@ -605,8 +631,8 @@
       "section": "adjustments",
       "label": "Attribution share",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "KIND's share of the resources behind the outcome: the outcome-weighted average of the branches' shares, for reading only."
+      "formula": "(jop_value_per_year * jop_attribution_share + dc_value_per_year * dc_attribution_share) / (jop_value_per_year + dc_value_per_year)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "missing_data_adj",

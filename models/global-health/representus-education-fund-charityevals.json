@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "representus-education-fund",
   "owner": "charityevals",
-  "summary": "The RepresentUs Education Fund, the 501(c)(3) of the US anti-corruption and democracy-reform group RepresentUs (Represent.Us itself is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $7.8 million in 2024 on national videos and social media about corruption and threats to democracy, education and volunteer outreach behind state and local ballot measures, research, the American Democracy Summit and grants to Represent.Us for campaign outreach. Four branches, each its share of the money behind what its field or movement achieves: its {{row:rcv_attribution_share}} share of the resources behind the ranked-choice voting movement (its volunteers' time counted with the others'), which puts about 1.4 million more Americans a year under ranked ballots (about a third of the result); its 3% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about a quarter); its other reforms (anti-corruption laws, money in politics, ethics), judged a quarter as effective per dollar as the redistricting movement (about a fifth); and its direct work's small share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about a fifth). With its next dollar at {{row:marginal_vs_past_average}} of the average, it comes to about {{result}} years of healthy life per 1,000 dollars; the result is mostly judgment (the years a win counts, how much a voting reform changes how well people are governed, the split of its spending between the branches), and all four branches are discounted by the shared missing-data slider.",
+  "summary": "The RepresentUs Education Fund, the 501(c)(3) of the US anti-corruption and democracy-reform group RepresentUs (Represent.Us itself is a 501(c)(4), and gifts to it aren't tax-deductible, so this models the Education Fund only), spent $7.8 million in 2024 on national videos and social media about corruption and threats to democracy, education and volunteer outreach behind state and local ballot measures, research, the American Democracy Summit and grants to Represent.Us for campaign outreach. Four branches, each its share of the money behind what its field or movement achieves: its {{row:rcv_attribution_share_shared}} share of the resources behind the ranked-choice voting movement (its volunteers' time counted with the others'), which puts about 1.4 million more Americans a year under ranked ballots (about a third of the result); its 3% share of the movement that moved 79 million Americans' maps to redistricting commissions since 2008 (about a quarter); its other reforms (anti-corruption laws, money in politics, ethics), judged a quarter as effective per dollar as the redistricting movement (about a fifth); and its direct work's small share of the US pro-democracy field's yearly cut in the chance that the US falls to a hybrid regime before 2030 (about a fifth). With its next dollar at {{row:marginal_vs_past_average}} of the average, it comes to about {{result}} years of healthy life per 1,000 dollars; the result is mostly judgment (the years a win counts, how much a voting reform changes how well people are governed, the split of its spending between the branches), and all four branches are discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: RepresentUs Education Fund",
@@ -637,12 +637,29 @@
       "explainer": "Institutional philanthropy for US democracy (2021-2022 dollars) × the whole field's multiple of it, counted in direct-work dollars (the direct share plus the rest at its relative effect), in 2024 prices: the shared chain every model of work against a US slide uses."
     },
     {
-      "id": "bs_attribution_share",
+      "id": "bs_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's share of the field's resources against a slide",
       "format": "percent",
       "formula": "cost_total * bs_direct_share / bs_field_spending",
       "explainer": "Its 2024 spending on direct work over the field's direct-work dollars (Convention 2: share of resources, never an equal split): about 0.06%. Its reform work counts in the three reform branches only."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "bs_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Education Fund's share of the field's resources against a slide",
+      "credit": "win",
+      "format": "percent",
+      "formula": "bs_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "bs_evidence_adj",
@@ -791,12 +808,21 @@
       "explainer": "The shared figures, about 44%: the local part (@democracy.rcv_local_coverage, 68%) × the share of a full switch a city's own elections bring (@democracy.local_offices_weight, 50%), plus the state and federal part (@democracy.rcv_state_federal_coverage, 10%); weighted by the people added: New York City uses ranked ballots for its primaries and special elections, Maine for primaries and federal races, Hawaii only for special elections, cities for their own offices."
     },
     {
-      "id": "rcv_attribution_share",
+      "id": "rcv_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's share of the ranked-choice movement's resources",
       "format": "percent",
       "formula": "cost_total * rcv_spend_share / (@democracy.us_rcv_movement_resources_per_year + volunteer_value * rcv_reform_share)",
-      "explainer": "Its 2024 spending on ranked-choice voting (about $2.8 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million in 2024 dollars, ballot campaigns, FairVote and RepresentUs included; Convention 2), plus its own volunteers' time on this work (the shared figure counts money): about {{row:rcv_attribution_share}}. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar spent. 2024 was a year of large ballot spending, most of it on statewide measures that failed (all but Alaska's defence; Washington DC's Initiative 83 passed), which is why the average year is the base, not 2024's record."
+      "explainer": "Its 2024 spending on ranked-choice voting (about $2.8 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million in 2024 dollars, ballot campaigns, FairVote and RepresentUs included; Convention 2), plus its own volunteers' time on this work (the shared figure counts money): about {{row:rcv_attribution_share_shared}}. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar spent. 2024 was a year of large ballot spending, most of it on statewide measures that failed (all but Alaska's defence; Washington DC's Initiative 83 passed), which is why the average year is the base, not 2024's record."
+    },
+    {
+      "id": "rcv_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Education Fund's share of the ranked-choice movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "rcv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "rcv_missing_data_adj",
@@ -848,12 +874,21 @@
       "formula": "@democracy.redistricting_movement_resources"
     },
     {
-      "id": "maps_attribution_share",
+      "id": "maps_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's share of the redistricting movement's resources",
       "format": "percent",
       "formula": "cost_total * maps_spend_share / (maps_movement_resources + volunteer_value * maps_reform_share)",
       "explainer": "Its 2024 spending on redistricting reform (about $0.7 million) over the movement's average yearly spending in 2008-2025 (@democracy.redistricting_movement_resources, $22 million in 2024 dollars, RepresentUs named among the standing organisations; Convention 2), plus its own volunteers' time on this work (the shared figure counts money): about 3%. Both are 2024 dollars, so no price step."
+    },
+    {
+      "id": "maps_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Education Fund's share of the redistricting movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "maps_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "maps_weak_delivery",
@@ -930,12 +965,21 @@
       "explainer": "The redistricting branch's side effects, each weighted by the side-effect slider."
     },
     {
-      "id": "oth_attribution_share",
+      "id": "oth_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's other reform spending over the redistricting movement's resources",
       "format": "percent",
       "formula": "cost_total * oth_spend_share / (maps_movement_resources + volunteer_value * (1 - rcv_reform_share - maps_reform_share))",
-      "explainer": "Its 2024 spending on the other reforms over the redistricting movement's yearly resources, the scale oth_relative_effect is set against, plus its own volunteers' time on this work: about {{row:oth_attribution_share}}."
+      "explainer": "Its 2024 spending on the other reforms over the redistricting movement's yearly resources, the scale oth_relative_effect is set against, plus its own volunteers' time on this work: about {{row:oth_attribution_share_shared}}."
+    },
+    {
+      "id": "oth_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Education Fund's other reform spending over the redistricting movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "oth_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "oth_evidence_adj",
@@ -1243,7 +1287,7 @@
       "section": "adjustments",
       "label": "The Education Fund's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(bs_raw * bs_attribution_share + rcv_raw * rcv_attribution_share + maps_raw * maps_attribution_share + oth_raw * oth_attribution_share) / raw_total"
+      "formula": "(bs_raw * bs_attribution_share_shared + rcv_raw * rcv_attribution_share_shared + maps_raw * maps_attribution_share_shared + oth_raw * oth_attribution_share_shared) / raw_total"
     },
     {
       "id": "missing_data_adj",
@@ -1264,7 +1308,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared"
+      "formula": "(bs_raw * bs_attribution_share + rcv_raw * rcv_attribution_share + maps_raw * maps_attribution_share + oth_raw * oth_attribution_share) / raw_total"
     },
     {
       "id": "unmodelled_benefits_adj",
