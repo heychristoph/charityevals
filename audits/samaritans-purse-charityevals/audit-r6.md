@@ -1,6 +1,6 @@
 # Audit: samaritans-purse-charityevals, round 6
 Result: 5.071e-5 daly/$ = 0.05071 years of healthy life per 1,000 dollars (combined range 0.01222–0.2104); cause median 0.1132 (×0.4478). Verdict: pass.
-Model-sha: 51b58810a19b2e2a4a1398ae90d55d2a3aed1f3025b079a4ba6b7bd7eae3010b
+Model-sha: e6912d4ec0c0fc9b8303276455dba1c9418750107688ceb37814a4429944ed1a
 Scope: verification of the one change since round 5: us_evidence_adj 0.95 (0.8-1) judgment to formula 1 with a new explainer, and the write-up edits ("US relief" added to the no-evidence-step list; sentence on the site-wide pass 0.047 to 0.051 in "How this model was checked"); summary and write-up figures against the live result. Not a full re-audit.
 Mechanical: audit-model 0 findings; check.ts all valid; simulation-check stable (5% 0.553, 50% 1, 95% 1.8 x best); normalization-audit not rerun (coordinator ran it: none).
 Previous round: round 5 had two low findings (us_evidence_adj left at 0.95; write-up list missing US relief). Both resolved.
@@ -14,7 +14,7 @@ Figures check: summary "about 0.05 ... about half the site's global-health media
 Drivers note: unchanged; the result is still dominated by the missing-data discount (0.5 on every branch), the shoebox worth and relief cost per person. The change moves the result by +0.04%.
 
 Verdict: pass
-Model-sha: 51b58810a19b2e2a4a1398ae90d55d2a3aed1f3025b079a4ba6b7bd7eae3010b
+Model-sha: e6912d4ec0c0fc9b8303276455dba1c9418750107688ceb37814a4429944ed1a
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -28,3 +28,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.

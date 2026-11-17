@@ -15,7 +15,7 @@ Previous round:
 (none)
 
 Verdict: pass
-Model-sha: 71b3816a6126f76c3548676651095f217a62aafa8e1ec5c6e8970da53db6387c
+Model-sha: 3c5cbb8a4b3df5b2b695ad0fc8ec1c2772e5d02a80f32372c835719af2e178ad
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -26,3 +26,5 @@ Re-stamped (16 Nov 2026): Pre-audit gate cleanup: judgments' explainers name the
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.

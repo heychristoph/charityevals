@@ -958,12 +958,21 @@
       "explainer": "The other-reforms branch's side effects, each weighted by the side-effect slider."
     },
     {
-      "id": "vi_attribution_share",
+      "id": "vi_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's share of the field's resources against a slide (voter information)",
       "format": "percent",
       "formula": "cost_total * vi_spend_share * bs_indirect_relative_effect / bs_field_spending",
       "explainer": "Its voter-information spending at the field's indirect weight, over the field's resources in direct-work dollars (Convention 2): the same weight the field's denominator gives every turnout drive and civic-education dollar, so the shares of all the field's members add up to the field."
+    },
+    {
+      "id": "vi_attribution_share",
+      "section": "adjustments",
+      "label": "Voter information: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "vi_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "vi_evidence_adj",

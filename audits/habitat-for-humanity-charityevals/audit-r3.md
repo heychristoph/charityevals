@@ -1,7 +1,7 @@
 # Audit r3: habitat-for-humanity-charityevals (scoped verification)
 
 Result: 4.933e-6 daly/$ = 0.00493 years of healthy life per $1,000 (unchanged from r2; combined range 0.00112–0.0217).
-Model-sha: b1b1181c5318ad34769788fe170edede27ae7e1b5b2911c02f1b95a2678ebfc4
+Model-sha: 82e7b3913b6ee9238f75d0d24d37a835e0c3848ef396aa845e9f06fd76025ef6
 Verdict: pass
 
 Scope: only the changes of commit 5f6554f1 to the model, its write-up and facts/habitat_for_humanity.json, checked against the four r2 lows, the move of the volunteer rows to shared facts, the result and the mechanical audit.
@@ -19,3 +19,5 @@ Scope: only the changes of commit 5f6554f1 to the model, its write-up and facts/
 Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against d90d80aa.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b370f40.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.

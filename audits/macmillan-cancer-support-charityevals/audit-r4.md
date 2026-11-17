@@ -1,7 +1,7 @@
 # Audit: macmillan-cancer-support-charityevals, round 4 (verification of the changes since round 3)
 
 Result: 2.110e-6 daly/$ = 0.002110 years of healthy life per $1,000 (combined range 4.1e-4 – 0.0108; joint low–high on the model's own ranges 8.4e-5 – 0.047); cause median 0.3585 (×0.0059). Verdict: pass.
-Model-sha: 296b49072d6c137d8ab2c62cdc13b8e9c5a30ff1cc6b043f1289f2f7bf8d4624
+Model-sha: d768fb055c6d048b585faabc8e652ef56c06964e208e12da30318fe63b2fe9ee
 
 Scope: only the changes in commit 4cfb259 (model rows, write-up). Mechanical: audit-model.ts gives 0 high / 0 medium / 5 low, the same five as round 3 (evidence_adj diagnostic, three unused context rows, far-below with its explanation in the summary). The result moved from 2.111e-6 to 2.110e-6 daly/$ (under 0.1%), as expected from adding `wait_discount` to a branch worth about 4%. generated/ untouched (git status clean apart from this file).
 
@@ -21,3 +21,5 @@ Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value cha
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against bebc953e.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.

@@ -47,7 +47,7 @@ The policy branch follows the government's own impact assessment of the law. Its
 - **Effect:** 8 percentage points of each covered cohort kept from smoking. The assessment's central scenario says 9.2.
 - **Health gain:** 3 healthy years lost per young smoker, arriving about 40 years later and discounted.
 - **Side effects:** less second-hand smoke (9% more), less the harm of those who vape instead (3%).
-- **Credit:** a fifth of the whole campaign took place this year. Campaigning groups had 40% of the resources behind the law, and BHF an eighth of theirs: a twentieth in all.
+- **Credit:** a fifth of the whole campaign took place this year. BHF has an eighth of the campaigning groups' resources behind the law; the government and Parliament that made it are credited through the mobiliser's share.
 - **Years counted:** the site's shared years a won reform counts.
 
 **Deaths by age.** The DALYs in every branch are mostly years lost to deaths, and these deaths are mostly at old ages. As everywhere on the site, each DALY is split into its illness part and the deaths behind the rest. Each death is valued at the site's value of a death by age, using GBD's age split: two thirds of the world's cardiovascular deaths come at 70 or older, and four in five of the UK's. So the value-of-a-life setting moves this model, and each DALY counts about 0.6 to 0.75 of a healthy year.
@@ -64,7 +64,7 @@ The result divides spending by what past work of the kind achieved, so it is a p
 - **BHF's share of the field:** 0.3% to 0.8%.
 - **The discount rate:** a 17-year wait makes the result sensitive to it.
 
-Research is about 86% of the result, policy about 9% and the pilots about 4%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
+Research is about 76% of the result, policy about 20% and the pilots about 4%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
 
 ### Biggest uncertainties
 

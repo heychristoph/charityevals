@@ -19,9 +19,9 @@ Corruption costs people income: contracts go to the wrong firms, roads cost more
   - corruption costs about 1.6% of income in the EU (above the European Commission's and the European Parliament's floors) and is taken as about the 2% of income paid in bribes elsewhere. A change removes 0.3% of it where applied, if it works as tested measures do: a judgment anchored on Olken's trial in Indonesia, where audits cut the money missing from road projects by 8 percentage points;
   - 40% of a change is applied as written, and the evidence that such rules work gets a factor of one half;
   - the gain builds up over about four years and is counted for the years a won reform counts on the site, less a yearly chance of repeal;
-  - the Secretariat gets about 40% of the movement's credit, and the movement about 15% of all groups', governments' own reformers doing about half the work.
+  - the Secretariat gets about 40% of the movement's credit, and the movement about 35% of the outside groups' work. Governments' own reformers, who adopt and carry out the changes, are credited through the mobiliser's share.
 - **Advice-centre branch:** 14,000 people supported. We judge that 10% get their problem put right, gaining about 30% of a year's consumption. 60% of that wouldn't have happened without the centre, and the Secretariat gets 30% of the credit.
-- **Legal-submission branch:** 62 submissions, 15% of them successful, recovering or saving about $2 million each. That money is valued as income spread over the people whose budget it is, and deterrence adds as much again.
+- **Legal-submission branch:** 62 submissions, 15% of them successful, recovering or saving about $2 million each; the Secretariat gets 35% of the civil-society work behind them, prosecutors and courts sitting under the mobiliser's share. That money is valued as income spread over the people whose budget it is, and deterrence adds as much again.
 - **Side effects:** fairer treatment by the state beyond income adds about 30% to the policy branch. Backlash against the work takes away 5%, and reprisals against people who report take away 3% of the advice-centre branch.
 - **Next dollar:** about half the past average. Reserves are modest and most of the money is tied to donors' projects.
 

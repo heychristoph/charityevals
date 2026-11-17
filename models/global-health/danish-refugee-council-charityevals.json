@@ -1893,6 +1893,7 @@
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used, relief branches",
+      "credit": "delivery",
       "format": "percent",
       "formula": "attribution_share_shared",
       "explainer": "DRC's share of the resources behind the outcome; it applies whichever way credit is shared."
@@ -1901,6 +1902,7 @@
       "id": "pro_attribution_share",
       "section": "adjustments",
       "label": "DRC's share of the resources, protection",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.6,
@@ -1914,6 +1916,7 @@
       "id": "pbd_attribution_share",
       "section": "adjustments",
       "label": "DRC's share of the resources, peacebuilding",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.4,
@@ -1927,6 +1930,7 @@
       "id": "sit_attribution_share",
       "section": "adjustments",
       "label": "DRC's share of the resources, site management",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.25,
@@ -1940,6 +1944,7 @@
       "id": "sbr_attribution_share",
       "section": "adjustments",
       "label": "DRC's share of the resources, Standby Roster",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.3,
@@ -1950,17 +1955,34 @@
       "explainer": "Judgment 60% (30-90%): the improvement is made by the host's team and budget with the expert; DRC pays the expert. As NRC's NORCAP."
     },
     {
-      "id": "mmc_attribution_share",
+      "id": "mobiliser_share",
       "section": "adjustments",
-      "label": "DRC's share of the resources, Mixed Migration Centre",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "mmc_attribution_share_shared",
+      "section": "adjustments",
+      "label": "DRC's share of the work behind the research, Mixed Migration Centre",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.6,
-        "high": 0.9
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 60% (30-90%): the people who use the research and their own analysts make the decisions."
+      "explainer": "DRC's share among those who produce the research: the centre is part of DRC, and some of its work is done with partners (our judgment of their part). The agencies and donors that use the research in their own programmes are under the mobiliser's share, not here. Judgment 90% (70-100%)."
+    },
+    {
+      "id": "mmc_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used, Mixed Migration Centre",
+      "credit": "research",
+      "format": "percent",
+      "formula": "mmc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dnk_volunteer_value",
@@ -1974,6 +1996,7 @@
       "id": "dnk_attribution_share",
       "section": "adjustments",
       "label": "DRC's share of the resources, Denmark",
+      "credit": "delivery",
       "format": "percent",
       "formula": "dnk_spend * overhead_ratio / (dnk_spend * overhead_ratio + dnk_volunteer_value)",
       "explainer": "DRC's own spending on the work in Denmark over it plus its volunteers' unpaid hours at DRC's own valuation (Convention 2): about 70%. Volunteers' unpaid time is the in-kind resource that applies whichever way credit is shared."

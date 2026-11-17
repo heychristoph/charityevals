@@ -5,9 +5,9 @@ The Nature Conservancy (TNC) buys and protects land and water, brokers debt-for-
 That is low, for two reasons:
 
 - Most of TNC's work keeps carbon in land. On the site's scale, a tonne of CO₂ kept out of the air is worth little in healthy years.
-- TNC is a small share of the money and people behind its big deals, rules and policies.
+- TNC is one of several groups behind its big deals, rules and policies.
 
-Nearly half of the result comes from PRANA, which helps farmers in Punjab and Haryana stop burning crop residue, whose smoke kills tens of thousands of people a year in northern India. Burning has fallen across both states, so most of the fall among PRANA's farmers would have come anyway. A third comes from Pará's deforestation-free cattle rule, two-thirds of that from its least grounded step: a small cut in pandemic risk from the forest kept. The rule's roll-out has barely begun: under 0.2% of the state's herd had been tagged by July 2025.
+Over half of the result comes from Pará's deforestation-free cattle rule, two-thirds of that from its least grounded step: a small cut in pandemic risk from the forest kept. The rule's roll-out has barely begun: under 0.2% of the state's herd had been tagged by July 2025. About a seventh comes from PRANA, which helps farmers in Punjab and Haryana stop burning crop residue, whose smoke kills tens of thousands of people a year in northern India. Burning has fallen across both states, so most of the fall among PRANA's farmers would have come anyway.
 
 Every programme is modelled from the research on that kind of work, using TNC's own spending and the reach it reports. None of them is measured against a comparison group, so every one takes the site's missing-data discount, and the result is mostly uncertainty.
 
@@ -60,17 +60,17 @@ The [model](/the-nature-conservancy/the-nature-conservancy-charityevals) follows
 
 **Years.** A won deal, rule or policy counts the site's shared years a win counts (5 by default), discounted, after its wait. Restoration counts the years a regrowing forest takes up carbon (20), and foodscapes the years a farm keeps the practice (8). PRANA counts one year of avoided burning against one year's spending.
 
-**Credit.** TNC's share of all the resources behind each outcome:
+**Credit.** TNC's share among the groups that arranged, advised or delivered each outcome. Those who adopt or carry out the result (governments, companies, farmers) are credited through the mobiliser's share, not here:
 
 | Branch | Share |
 |---|---|
-| Ecuador deal, protection policy, Chaco soy | about 5% each |
-| Ocean deal, Pará cattle rule | about 10% each (the cattle rule's is built from the resources of the state, ranchers, meatpackers, retailers and other funders) |
-| Fisheries rules, adaptation | about 20% each |
-| Foodscapes | about 25% |
-| Clean energy, siting maps | about 30% each |
-| PRANA | about 35% (of the resources behind its own increment, after the fall that India's machinery subsidies and burning bans brought anyway) |
-| Restoration | about 40% |
+| Protection policy | about 15% |
+| Chaco soy | about 25% |
+| Ecuador deal, Pará cattle rule | about 30% each |
+| Ocean deal, fisheries rules, siting maps | about 40% each |
+| Foodscapes | about 50% |
+| PRANA | about 60% (of the programme's own increment, after the fall that India's machinery subsidies and burning bans brought anyway) |
+| Clean energy, adaptation, restoration | about 60% each |
 | Land bought | about {{row:land_attribution_share}} (agencies and other buyers repay the rest) |
 
 **The next dollar.** The won deals, rules and policies are a year's spending set against wins that took years to prepare. They read the shared next-dollar slider, like other past averages. Land purchases, restoration, foodscapes and PRANA are bought unit by unit and don't.
@@ -81,11 +81,13 @@ At the defaults the branches contribute:
 
 | Branch | Share of the result |
 |---|---|
-| PRANA | 48% |
-| Pará cattle rule | 32% (about two-thirds of it the pandemic-risk step) |
+| Pará cattle rule | 55% (about two-thirds of it the pandemic-risk step) |
+| PRANA | 15% |
+| Ecuador deal | 8% |
 | Adaptation | 6% |
-| Ecuador deal, fisheries rules, local incomes, protection policy, restoration and Chaco soy | about 1.4-2.8% each |
-| Land bought, siting maps, foodscapes and mine-land solar | under 1% each |
+| Chaco soy, local incomes | about 5% each |
+| Protection policy, fisheries rules | about 2-3% each |
+| Restoration, land bought, siting maps, foodscapes and mine-land solar | under 1% each |
 
 The biggest swings:
 
@@ -95,7 +97,7 @@ The biggest swings:
 
 ### Where we differ
 
-There is no evaluator model of TNC to differ from. TNC's own goals count hectares "conserved" and tonnes "avoided or sequestered" without a counterfactual or shared credit. We count only what each programme changes against what would have happened anyway, for the shared years a win counts, at TNC's share of the resources.
+There is no evaluator model of TNC to differ from. TNC's own goals count hectares "conserved" and tonnes "avoided or sequestered" without a counterfactual or shared credit. We count only what each programme changes against what would have happened anyway, for the shared years a win counts, at TNC's share of the credit.
 
 ### Biggest uncertainties
 
