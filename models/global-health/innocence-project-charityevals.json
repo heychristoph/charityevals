@@ -1312,6 +1312,7 @@
       "id": "ex_attribution_share",
       "section": "adjustments",
       "label": "Exonerations: the Innocence Project's share of the resources behind them",
+      "credit": "delivery",
       "format": "percent",
       "explainer": "The Innocence Project's casework spending (legal services and the research and communications behind it) with overhead, against that plus the pro bono work on cases, less the partners' share (Convention 2).",
       "formula": "(legal_services_expenses + other_programme_expenses * other_casework_share) * overhead_ratio / ((legal_services_expenses + other_programme_expenses * other_casework_share) * overhead_ratio + pro_bono_services * pro_bono_casework_share) * (1 - ex_partner_share)"
@@ -1362,12 +1363,29 @@
       "explainer": "That a reform would have come some day is the shared years counted (Convention 5)."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Reforms: the Innocence Project's share of the coalitions behind them",
       "format": "percent",
       "explainer": "Its policy and litigation spending (with the communications and research behind them) with overhead, against that plus the pro bono work on them, less the coalition partners' share (Convention 2).",
       "formula": "(litigation_policy_expenses + other_programme_expenses * other_reform_share) * overhead_ratio / ((litigation_policy_expenses + other_programme_expenses * other_reform_share) * overhead_ratio + pro_bono_services * pro_bono_litigation_share) * (1 - pol_coalition_share)"
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Reforms: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pol_implementation_adj",
@@ -1418,6 +1436,7 @@
       "id": "net_attribution_share",
       "section": "adjustments",
       "label": "Network: the Innocence Project's share of other innocence groups' exonerations",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.01,
@@ -1521,7 +1540,7 @@
       "section": "adjustments",
       "label": "Share of the resources (outcome-weighted average of the branches)",
       "format": "percent",
-      "formula": "(released_people * (ex_death_uov_per_freed + ex_execution_uov_per_freed) * ex_attribution_share + pol_death_uov_per_year * pol_attribution_share + net_freed_per_year * (ex_death_uov_per_freed + ex_execution_uov_per_freed) * net_attribution_share) / (released_people * (ex_death_uov_per_freed + ex_execution_uov_per_freed) + pol_death_uov_per_year + net_freed_per_year * (ex_death_uov_per_freed + ex_execution_uov_per_freed))",
+      "formula": "(released_people * (ex_death_uov_per_freed + ex_execution_uov_per_freed) * ex_attribution_share + pol_death_uov_per_year * pol_attribution_share_shared + net_freed_per_year * (ex_death_uov_per_freed + ex_execution_uov_per_freed) * net_attribution_share) / (released_people * (ex_death_uov_per_freed + ex_execution_uov_per_freed) + pol_death_uov_per_year + net_freed_per_year * (ex_death_uov_per_freed + ex_execution_uov_per_freed))",
       "explainer": "Outcome-weighted average of the branches (weighted by their deaths averted, most of the result), for reading only: each branch applies its own row."
     },
     {
@@ -1529,8 +1548,8 @@
       "section": "adjustments",
       "label": "Share of the resources",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches (the row above), for reading only: each branch applies its own share."
+      "formula": "(released_people * (ex_death_uov_per_freed + ex_execution_uov_per_freed) * ex_attribution_share + pol_death_uov_per_year * pol_attribution_share + net_freed_per_year * (ex_death_uov_per_freed + ex_execution_uov_per_freed) * net_attribution_share) / (released_people * (ex_death_uov_per_freed + ex_execution_uov_per_freed) + pol_death_uov_per_year + net_freed_per_year * (ex_death_uov_per_freed + ex_execution_uov_per_freed))",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

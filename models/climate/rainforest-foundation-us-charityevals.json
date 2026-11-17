@@ -1022,6 +1022,7 @@
       "id": "terpe_attribution_share",
       "section": "adjustments",
       "label": "Peru territories: RFUS's share of the resources behind the forest kept",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.45,
@@ -1035,6 +1036,7 @@
       "id": "tero_attribution_share",
       "section": "adjustments",
       "label": "Other territories: RFUS's share of the resources behind the forest kept",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.25,
@@ -1173,7 +1175,7 @@
       "explainer": "What a year of the alliance's work buys: finance and recognition won for its members (at least 20% of the Tropical Forest Forever Facility's payments earmarked for Indigenous peoples and local communities, with GATC co-designing the mechanism; the COP30 pledge to secure nearly 400 million acres by 2030; the 2021 Forest Tenure Funders' $1.7 billion), spread over 958 million hectares and many years, much of it still pledged, not paid. Against the territories' 8% from patrols and organisations on the ground, a tenth of a percent of the whole area's loss. Our judgment 0.1% (0.01-0.5%)."
     },
     {
-      "id": "glob_attribution_share",
+      "id": "glob_attribution_share_shared",
       "section": "adjustments",
       "label": "Global work: RFUS's share of the resources behind the alliance's results",
       "format": "percent",
@@ -1184,6 +1186,23 @@
       },
       "kind": "judgment",
       "explainer": "Convention 2: the alliance's member networks (COIAB, AMPB, AMAN, REPALEAC and others) and their own staff, its other funders and partners (the Ford Foundation, the Rights and Resources Initiative, the Tenure Facility, Nia Tero), and the governments that negotiate the pledges, against RFUS's roughly $1-1.5 million a year (Schedule F's two regions; GATC's restricted $1.37 million). A rough count of a year's resources: RFUS about $1.3 million; the member networks' own staff and budgets for the alliance's work and its secretariat, a few million dollars (our guess: no accounts are published); the other funders' and partners' tenure and finance advocacy (the Rights and Resources Initiative and the Tenure Facility each spend several million a year), together roughly $8-15 million. RFUS about 1.3 of 12: our judgment 10% (3-30%)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "glob_attribution_share",
+      "section": "adjustments",
+      "label": "Global work: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "glob_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "glob_implementation_adj",
@@ -1351,6 +1370,7 @@
       "id": "liv_attribution_share",
       "section": "adjustments",
       "label": "Livelihoods: RFUS's share of the resources behind the pay",
+      "credit": "delivery",
       "format": "percent",
       "formula": "1",
       "explainer": "1: RFUS pays the patrollers."
@@ -1519,7 +1539,7 @@
       "section": "adjustments",
       "label": "RFUS's share of the resources: weighted average of the branches",
       "format": "percent",
-      "formula": "(terpe_dalys_raw * terpe_attribution_share + tero_dalys_raw * tero_attribution_share + glob_dalys_raw * glob_attribution_share + land_dalys_raw * land_attribution_share + liv_dalys_raw * liv_attribution_share) / (terpe_dalys_raw + tero_dalys_raw + glob_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "formula": "(terpe_dalys_raw * terpe_attribution_share + tero_dalys_raw * tero_attribution_share + glob_dalys_raw * glob_attribution_share_shared + land_dalys_raw * land_attribution_share + liv_dalys_raw * liv_attribution_share) / (terpe_dalys_raw + tero_dalys_raw + glob_dalys_raw + land_dalys_raw + liv_dalys_raw)",
       "explainer": "Outcome-weighted average of the five branches, for reading only: each branch applies its own row (Convention 4), weighted by its healthy years before adjustments."
     },
     {
@@ -1527,8 +1547,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row (Convention 4), weighted by the branch's healthy years before adjustments."
+      "formula": "(terpe_dalys_raw * terpe_attribution_share + tero_dalys_raw * tero_attribution_share + glob_dalys_raw * glob_attribution_share + land_dalys_raw * land_attribution_share + liv_dalys_raw * liv_attribution_share) / (terpe_dalys_raw + tero_dalys_raw + glob_dalys_raw + land_dalys_raw + liv_dalys_raw)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

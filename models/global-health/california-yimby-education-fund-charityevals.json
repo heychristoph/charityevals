@@ -1097,7 +1097,7 @@
       "explainer": "Their spending on these laws over all the resources behind them (Convention 2): about 9% at the best guesses."
     },
     {
-      "id": "adu_attribution_share",
+      "id": "adu_attribution_share_shared",
       "section": "adjustments",
       "label": "ADU laws: the Education Fund's share of the resources",
       "format": "percent",
@@ -1105,12 +1105,38 @@
       "explainer": "Both organisations' share, times the Education Fund's share of their spending."
     },
     {
-      "id": "oth_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "adu_attribution_share",
+      "section": "adjustments",
+      "label": "ADU laws: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "adu_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "oth_attribution_share_shared",
       "section": "adjustments",
       "label": "Other laws: the Education Fund's share of the resources",
       "format": "percent",
       "formula": "oth_coalition_share * edfund_share_2024",
       "explainer": "As for the ADU laws."
+    },
+    {
+      "id": "oth_attribution_share",
+      "section": "adjustments",
+      "label": "Other laws: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "oth_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "adu_implementation_adj",
@@ -1184,7 +1210,7 @@
       "section": "adjustments",
       "label": "The Education Fund's share of the resources (outcome-weighted average)",
       "format": "percent",
-      "formula": "(adu_value_per_year * adu_attribution_share + oth_value_per_year * oth_attribution_share) / (adu_value_per_year + oth_value_per_year)",
+      "formula": "(adu_value_per_year * adu_attribution_share_shared + oth_value_per_year * oth_attribution_share_shared) / (adu_value_per_year + oth_value_per_year)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1192,8 +1218,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The Education Fund's share of the resources behind the outcome: the outcome-weighted average of the branches, for reading only (each branch applies its own)."
+      "formula": "(adu_value_per_year * adu_attribution_share + oth_value_per_year * oth_attribution_share) / (adu_value_per_year + oth_value_per_year)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

@@ -1888,7 +1888,7 @@
       "explainer": "Every later year's healthy life the catastrophe would take from people not yet born (the long-run world population × the share lost × future_years_per_person), discounted for ever at the shared rate; 0 at the best guess (future_share_lost). Already credited by branch."
     },
     {
-      "id": "ocean_attribution_share",
+      "id": "ocean_attribution_share_shared",
       "section": "adjustments",
       "label": "The year's ocean deals: TNC's share of their resources",
       "format": "percent",
@@ -1899,6 +1899,23 @@
       },
       "kind": "judgment",
       "explainer": "The Bahamas' debt conversion is paid for by the country's debt savings with a guarantee and insurance from others; TNC structured it and leads the marine planning (as in the Seychelles, where it led the marine spatial plan). A larger role than in the Amazon deal: 10% (3-30%)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ocean_attribution_share",
+      "section": "adjustments",
+      "label": "The year's ocean deals: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "ocean_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "land_sales",
@@ -1938,7 +1955,7 @@
       "explainer": "The share of the forest at risk that protection keeps (Wolf et al. 2021's 41%): applied once here, since deal_tco2e and the pandemic rows count the forest at risk before protection."
     },
     {
-      "id": "deal_attribution_share",
+      "id": "deal_attribution_share_shared",
       "section": "adjustments",
       "label": "Ecuador Amazon deal (forest): TNC's share of the resources",
       "format": "percent",
@@ -1949,6 +1966,15 @@
       },
       "kind": "judgment",
       "explainer": "The Biocorridor is paid for by about $460 million over 17 years from Ecuador's debt savings, made possible by an IDB guarantee, DFC political-risk insurance and Bank of America's financing, with Indigenous nations co-designing and the government delivering. TNC designed the deal and gives technical support; its own cost isn't published but is likely in the tens of millions over the years of preparation and support. Its share of all resources is about 5% (2-15%). This is TNC's share of the deal's own resources over its life, not of TNC's yearly deal budget (that is in the cost)."
+    },
+    {
+      "id": "deal_attribution_share",
+      "section": "adjustments",
+      "label": "Ecuador Amazon deal (forest): share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "deal_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "deal_implementation_adj",
@@ -2025,6 +2051,7 @@
       "id": "liv_attribution_share",
       "section": "adjustments",
       "label": "The year's deals (local incomes): TNC's share of the resources",
+      "credit": "win",
       "format": "percent",
       "formula": "(amazon_livelihood_people * deal_attribution_share + ocean_livelihood_people * ocean_attribution_share) / livelihood_people",
       "explainer": "TNC's share of each deal's resources, weighted by the people in it: the Amazon deal's share (deal_attribution_share) and the ocean deals' (ocean_attribution_share)."
@@ -2109,6 +2136,7 @@
       "id": "land_attribution_share",
       "section": "adjustments",
       "label": "Land bought: TNC's share of the resources",
+      "credit": "delivery",
       "format": "percent",
       "formula": "1 - land_sales / land_purchases",
       "explainer": "Agencies and other buyers pay back part of what TNC spends on land: TNC's share is what it keeps paying, one minus sales over purchases (about {{row:land_attribution_share}} in FY2025, a steady-state reading, since the year's sales are of land bought earlier)."
@@ -2180,7 +2208,7 @@
       "explainer": "The share of the forest at risk that protection keeps (Wolf et al. 2021), applied once here."
     },
     {
-      "id": "prot_attribution_share",
+      "id": "prot_attribution_share_shared",
       "section": "adjustments",
       "label": "Protection policy: TNC's share of the resources",
       "format": "percent",
@@ -2191,6 +2219,15 @@
       },
       "kind": "judgment",
       "explainer": "TNC is one adviser among governments, Indigenous nations, funders and other NGOs behind national protection: 5% (2-15%), as for the Amazon deal."
+    },
+    {
+      "id": "prot_attribution_share",
+      "section": "adjustments",
+      "label": "Protection policy: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "prot_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "prot_implementation_adj",
@@ -2442,7 +2479,7 @@
       "explainer": "1: zdc_ha_per_year is already the clearing the rule removes (Levy et al.'s effect against no rule), so the share that would be lost anyway isn't counted again; whether the rule would have come anyway is the years counted."
     },
     {
-      "id": "zdc_attribution_share",
+      "id": "zdc_attribution_share_shared",
       "section": "adjustments",
       "label": "Deforestation-free cattle (Pará): TNC's share of the resources",
       "format": "percent",
@@ -2453,6 +2490,15 @@
       },
       "kind": "judgment",
       "explainer": "TNC's share of the resources behind the rule, built from who pays: Pará's state government designs, legislates and enforces it (its animal-health agency ADEPARÁ registers and tags every animal across about 25 million head); tagging the whole herd costs ranchers and the state on the order of $100 million (25 million head at about $4); TNC and JBS jointly donated 2 million pairs of ear tags (The Agribiz, theagribiz.com), and meatpackers and retailers fund their own monitoring (JBS about $5 million, Carrefour R$10 million); other funders and NGOs (IDH, the Amazon Fund, Imaflora and others) support the roll-out. TNC's side is its Brazil programme, a few million dollars a year over about six years, plus half the tags. Our judgment: 10% (4-20%)."
+    },
+    {
+      "id": "zdc_attribution_share",
+      "section": "adjustments",
+      "label": "Deforestation-free cattle (Pará): share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "zdc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "zdc_implementation_adj",
@@ -2526,7 +2572,7 @@
       "explainer": "1: conv_ha_per_year is already the clearing removed (against no rules); whether the commitments would have come anyway is the years counted."
     },
     {
-      "id": "conv_attribution_share",
+      "id": "conv_attribution_share_shared",
       "section": "adjustments",
       "label": "Zero-conversion soy (Gran Chaco): TNC's share of the resources",
       "format": "percent",
@@ -2537,6 +2583,15 @@
       },
       "kind": "judgment",
       "explainer": "Traders, banks, Argentina's soy chamber and other NGOs build and run VISEC and the farmers' fund; TNC convenes and advises: 5% (2-15%)."
+    },
+    {
+      "id": "conv_attribution_share",
+      "section": "adjustments",
+      "label": "Zero-conversion soy (Gran Chaco): share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "conv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "conv_implementation_adj",
@@ -2877,7 +2932,7 @@
       "explainer": "1: the income gain is against no new rules (matched comparisons in the anchors); whether the rules would have come anyway is the years counted."
     },
     {
-      "id": "fish_attribution_share",
+      "id": "fish_attribution_share_shared",
       "section": "adjustments",
       "label": "Fisheries rules: TNC's share of the resources",
       "format": "percent",
@@ -2888,6 +2943,15 @@
       },
       "kind": "judgment",
       "explainer": "Governments, fishers' organisations, scientists and other NGOs make and enforce the rules; TNC brings the process and science: 20% (5-50%)."
+    },
+    {
+      "id": "fish_attribution_share",
+      "section": "adjustments",
+      "label": "Fisheries rules: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "fish_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "fish_implementation_adj",
@@ -3268,7 +3332,7 @@
       "section": "adjustments",
       "label": "TNC's share of the resources: weighted average of the branches",
       "format": "percent",
-      "formula": "(deal_dalys_raw * deal_attribution_share + liv_dalys_raw * liv_attribution_share + land_dalys_raw * land_attribution_share + prot_dalys_raw * prot_attribution_share + energy_dalys_raw * energy_attribution_share + siting_dalys_raw * siting_attribution_share + zdc_dalys_raw * zdc_attribution_share + conv_dalys_raw * conv_attribution_share + fscape_dalys_raw * fscape_attribution_share + prana_dalys_raw * prana_attribution_share + rest_dalys_raw * rest_attribution_share + fish_dalys_raw * fish_attribution_share + adapt_dalys_raw * adapt_attribution_share) / (deal_dalys_raw + liv_dalys_raw + land_dalys_raw + prot_dalys_raw + energy_dalys_raw + siting_dalys_raw + zdc_dalys_raw + conv_dalys_raw + fscape_dalys_raw + prana_dalys_raw + rest_dalys_raw + fish_dalys_raw + adapt_dalys_raw)",
+      "formula": "(deal_dalys_raw * deal_attribution_share_shared + liv_dalys_raw * liv_attribution_share + land_dalys_raw * land_attribution_share + prot_dalys_raw * prot_attribution_share_shared + energy_dalys_raw * energy_attribution_share + siting_dalys_raw * siting_attribution_share + zdc_dalys_raw * zdc_attribution_share_shared + conv_dalys_raw * conv_attribution_share_shared + fscape_dalys_raw * fscape_attribution_share + prana_dalys_raw * prana_attribution_share + rest_dalys_raw * rest_attribution_share + fish_dalys_raw * fish_attribution_share_shared + adapt_dalys_raw * adapt_attribution_share) / (deal_dalys_raw + liv_dalys_raw + land_dalys_raw + prot_dalys_raw + energy_dalys_raw + siting_dalys_raw + zdc_dalys_raw + conv_dalys_raw + fscape_dalys_raw + prana_dalys_raw + rest_dalys_raw + fish_dalys_raw + adapt_dalys_raw)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row (Convention 4), weighted by the branch's healthy years before adjustments."
     },
     {
@@ -3276,8 +3340,8 @@
       "section": "adjustments",
       "label": "Attribution share used: weighted average of the branches",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row (Convention 4), weighted by the branch's healthy years before adjustments."
+      "formula": "(deal_dalys_raw * deal_attribution_share + liv_dalys_raw * liv_attribution_share + land_dalys_raw * land_attribution_share + prot_dalys_raw * prot_attribution_share + energy_dalys_raw * energy_attribution_share + siting_dalys_raw * siting_attribution_share + zdc_dalys_raw * zdc_attribution_share + conv_dalys_raw * conv_attribution_share + fscape_dalys_raw * fscape_attribution_share + prana_dalys_raw * prana_attribution_share + rest_dalys_raw * rest_attribution_share + fish_dalys_raw * fish_attribution_share + adapt_dalys_raw * adapt_attribution_share) / (deal_dalys_raw + liv_dalys_raw + land_dalys_raw + prot_dalys_raw + energy_dalys_raw + siting_dalys_raw + zdc_dalys_raw + conv_dalys_raw + fscape_dalys_raw + prana_dalys_raw + rest_dalys_raw + fish_dalys_raw + adapt_dalys_raw)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

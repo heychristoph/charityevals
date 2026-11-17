@@ -504,20 +504,46 @@
       "explainer": "Institutional philanthropy for democracy (2021-2022) × the whole field's money against it × the direct share plus the rest at its relative effect, in 2024 prices: the field whose year of work the risk cut belongs to."
     },
     {
-      "id": "bs_attribution_share",
+      "id": "bs_attribution_share_shared",
       "section": "adjustments",
       "label": "Protect Democracy's share of the field's resources, backsliding branch",
       "format": "percent",
       "formula": "cost_total * bs_spend_share / field_resources",
-      "explainer": "Its 2024 spending on this work over the field's (Convention 2: share of resources, never an equal split): about {{row:bs_attribution_share}}. It applies whichever way credit is shared."
+      "explainer": "Its 2024 spending on this work over the field's (Convention 2: share of resources, never an equal split): about {{row:bs_attribution_share_shared}}. It applies whichever way credit is shared."
     },
     {
-      "id": "ref_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "bs_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: Protect Democracy's share of the field's resources, backsliding branch",
+      "credit": "win",
+      "format": "percent",
+      "formula": "bs_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "ref_attribution_share_shared",
       "section": "adjustments",
       "label": "Protect Democracy's share of the proportional-representation movement's resources",
       "format": "percent",
       "formula": "cost_total * ref_spend_share / @democracy.us_pr_movement_resources_per_year",
-      "explainer": "Its 2024 spending on this work (about $2.4 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, its own and FairVote's included; Convention 2): about {{row:ref_attribution_share}}. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
+      "explainer": "Its 2024 spending on this work (about $2.4 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, its own and FairVote's included; Convention 2): about {{row:ref_attribution_share_shared}}. A 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
+    },
+    {
+      "id": "ref_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: Protect Democracy's share of the proportional-representation movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "ref_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "bs_missing_data_adj",
@@ -596,7 +622,7 @@
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(bs_value * bs_attribution_share + ref_value * ref_attribution_share) / (bs_value + ref_value)",
+      "formula": "(bs_value * bs_attribution_share_shared + ref_value * ref_attribution_share_shared) / (bs_value + ref_value)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -604,8 +630,8 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches' shares (bs_attribution_share, ref_attribution_share), for reading only: each branch applies its own."
+      "formula": "(bs_value * bs_attribution_share + ref_value * ref_attribution_share) / (bs_value + ref_value)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "missing_data_adj",

@@ -1,6 +1,6 @@
 # Audit: global-alliance-for-improved-nutrition-charityevals, round 2 (verification)
 Result: 0.001440 uov/$ = 0.720 years of healthy life per 1,000 dollars (combined range 0.088–5.86); cause median 0.0687 (x10.5). Verdict: pass (no high findings, 0 medium, 1 low; the far-above medium is explained below).
-Model-sha: 15aec1dd1bf2131b1401d5d80ef768678a9850529921f1ed488dc8de3b7a22f2
+Model-sha: 6afe876263877b1456e7cfb5f26868bbdb0d267e98ec349b2fef8861a9a8faed
 Scope: unchanged from round 1 (all four programme lines, year to 30 June 2025, 61.6 million programme costs); only the round-1 fixes and the rows they touched were checked.
 Mechanical: lint 0 high / 1 medium (far-above, explained below) / 2 low (estimate-basis, spread; both as in round 1); invariants none; check.ts "all models valid"; normalization-audit skipped in this sandbox (no violation reported for the model).
 Previous round: 9 findings, all resolved (table below).
@@ -57,3 +57,5 @@ Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their re
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 480880ba.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 2 rows changed, against 5724c36c.

@@ -449,6 +449,7 @@
       "id": "ben_attribution_share",
       "section": "adjustments",
       "label": "WWP's share of the resources behind the awards it changes",
+      "credit": "delivery",
       "format": "percent",
       "formula": "fin_spend * ben_team_share * overhead_ratio / (fin_spend * ben_team_share * overhead_ratio + vba_cost_per_claim * ben_households * ben_counterfactual_adj)",
       "explainer": "WWP's cost of the benefits service against the VA's cost of deciding the claims whose award WWP changes: about 0.8 at the best guesses."
@@ -1308,9 +1309,27 @@
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "attribution_share_shared",
       "explainer": "WWP's share of the resources behind the outcome; it applies whichever way credit is shared."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "adv_attribution_share",
+      "section": "adjustments",
+      "label": "Advocacy: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "implementation_adj",
@@ -1738,7 +1757,7 @@
       "section": "adjustments",
       "label": "All adjustments combined, advocacy",
       "format": "multiple",
-      "formula": "adv_evidence_adj * adv_counterfactual_adj * attribution_share * adv_implementation_adj * leverage_funging_adj * wait_discount * adv_missing_data_adj"
+      "formula": "adv_evidence_adj * adv_counterfactual_adj * adv_attribution_share * adv_implementation_adj * leverage_funging_adj * wait_discount * adv_missing_data_adj"
     },
     {
       "id": "evidence_adj",

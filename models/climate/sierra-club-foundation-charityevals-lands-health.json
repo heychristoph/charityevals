@@ -694,11 +694,20 @@
       "explainer": "The Sierra Club's share × the Foundation's part of the Sierra Club's resources."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "pm_attribution_share",
       "section": "adjustments",
       "label": "EPA soot standard: share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "pm_attribution_share_shared"
+      "formula": "pm_attribution_share_shared * mobiliser_share"
     },
     {
       "id": "pm_implementation_adj",
@@ -740,6 +749,7 @@
       "id": "out_attribution_share",
       "section": "adjustments",
       "label": "Inspiring Connections Outdoors: the Foundation's share of the resources behind the trips",
+      "credit": "delivery",
       "format": "percent",
       "formula": "scf_share * out_paid_share",
       "explainer": "The trips are led by unpaid volunteers with the Sierra Club's staff and the Foundation's grants: the Foundation's part of the Sierra Club's resources (scf_share) × the paid share of all the resources behind the trips, the volunteers' time valued at the local wage counted as others' resources (templates.md Convention 2)."

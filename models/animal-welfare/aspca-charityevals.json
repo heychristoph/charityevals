@@ -401,6 +401,7 @@
       "id": "reh_attribution_share",
       "section": "adjustments",
       "label": "Placements: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "reh_attribution_share_shared"
     },
@@ -550,6 +551,7 @@
       "id": "vet_attribution_share",
       "section": "adjustments",
       "label": "Veterinary care: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "vet_attribution_share_shared"
     },
@@ -678,6 +680,7 @@
       "id": "apc_attribution_share",
       "section": "adjustments",
       "label": "Poison control: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "apc_attribution_share_shared"
     },
@@ -935,6 +938,7 @@
       "id": "neu_attribution_share",
       "section": "adjustments",
       "label": "Neutering: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "neu_attribution_share_shared"
     },
@@ -1109,6 +1113,7 @@
       "id": "dis_attribution_share",
       "section": "adjustments",
       "label": "Disaster response and pet food: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "dis_attribution_share_shared"
     },
@@ -1255,6 +1260,7 @@
       "id": "crl_attribution_share",
       "section": "adjustments",
       "label": "Cruelty response: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "crl_attribution_share_shared"
     },
@@ -1420,6 +1426,7 @@
       "id": "grt_attribution_share",
       "section": "adjustments",
       "label": "Grants: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "grt_attribution_share_shared"
     },
@@ -1593,6 +1600,7 @@
       "id": "trn_attribution_share",
       "section": "adjustments",
       "label": "Training: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "trn_attribution_share_shared"
     },
@@ -1757,11 +1765,20 @@
       "explainer": "Our judgment: the ASPCA led the New York law and co-sponsored the California ones with other groups (Humane World for Animals, Bark, local shelters) and legislators' own staff. 25%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "pol_attribution_share",
       "section": "adjustments",
       "label": "Policy: share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "pol_attribution_share_shared"
+      "formula": "pol_attribution_share_shared * mobiliser_share"
     },
     {
       "id": "pol_implementation_adj",
@@ -1867,6 +1884,7 @@
       "id": "edu_attribution_share",
       "section": "adjustments",
       "label": "Public education: share of credit used",
+      "credit": "delivery",
       "format": "percent",
       "formula": "edu_attribution_share_shared"
     },
@@ -1973,7 +1991,7 @@
       "label": "Attribution share (outcome-weighted average of the branches)",
       "format": "percent",
       "formula": "(reh_raw * reh_attribution_share + vet_raw * vet_attribution_share + apc_raw * apc_attribution_share + neuter_pain_days * neu_attribution_share + dis_raw * dis_attribution_share + crl_raw * crl_attribution_share + grt_raw * grt_attribution_share + trn_raw * trn_attribution_share + pol_raw * pol_attribution_share + edu_raw * edu_attribution_share) / raw_total",
-      "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

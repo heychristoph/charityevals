@@ -1286,12 +1286,29 @@
       "explainer": "The same kind of resource and the same groups as fin_p_success (advocates, not governments): the research, campaign and negotiation-support groups that worked on the finance goal (climate-finance think tanks, development and environment NGOs and their networks, groups backing developing-country blocs, CfRN among them). Our judgment, a rough count without a published tally: about 50 groups at $0.5-3 million a year each on this item, about $80 million, with a wide range ($20-300 million) because the count is ours. Government delegations are left out: they are what fin_p_success already sets aside."
     },
     {
-      "id": "fin_attribution_share",
+      "id": "fin_attribution_share_shared",
       "section": "adjustments",
       "label": "Climate-finance goal: CfRN's share of all advocates' resources on it",
       "format": "percent",
       "formula": "fin_spend / fin_others_resources_per_year",
       "explainer": "CfRN's spending on the finance talks over all advocates' resources on them (Convention 2): about half a percent at the best guesses."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "fin_attribution_share",
+      "section": "adjustments",
+      "label": "Climate-finance goal: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "fin_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "fin_implementation_adj",
@@ -1319,15 +1336,15 @@
       "section": "adjustments",
       "label": "Climate-finance goal: adjustments that read no shared value",
       "format": "multiple",
-      "formula": "fin_evidence_adj * fin_counterfactual_adj * fin_attribution_share * fin_implementation_adj",
-      "explainer": "Split out so the smoke of the mitigation tonnes can be weighted by branch (air_pollution_weight)."
+      "formula": "fin_evidence_adj * fin_counterfactual_adj * fin_attribution_share_shared * fin_implementation_adj",
+      "explainer": "Split out so the smoke of the mitigation tonnes can be weighted by branch (air_pollution_weight), before the mobiliser's share."
     },
     {
       "id": "fin_total_adj",
       "section": "adjustments",
       "label": "Climate-finance goal: all adjustments",
       "format": "multiple",
-      "formula": "fin_credit_before_shared * fin_missing_data_adj"
+      "formula": "fin_evidence_adj * fin_counterfactual_adj * fin_attribution_share * fin_implementation_adj * fin_missing_data_adj"
     },
     {
       "id": "fin_credit",
@@ -1395,7 +1412,7 @@
       "section": "adjustments",
       "label": "CfRN's share of the resources: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(rbf_dalys_raw * rbf_attribution_share + itmo_dalys_raw * itmo_attribution_share + fin_dalys_raw * fin_attribution_share) / (rbf_dalys_raw + itmo_dalys_raw + fin_dalys_raw)",
+      "formula": "(rbf_dalys_raw * rbf_attribution_share + itmo_dalys_raw * itmo_attribution_share + fin_dalys_raw * fin_attribution_share_shared) / (rbf_dalys_raw + itmo_dalys_raw + fin_dalys_raw)",
       "explainer": "Weighted by each branch's healthy years before adjustments, ignoring sign; nothing upstream of the result reads it (Convention 4)."
     },
     {
@@ -1427,8 +1444,8 @@
       "section": "adjustments",
       "label": "Share of credit used: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches' shares of the resources (rbf_attribution_share, itmo_attribution_share, fin_attribution_share), for reading only: each branch applies its own."
+      "formula": "(rbf_dalys_raw * rbf_attribution_share + itmo_dalys_raw * itmo_attribution_share + fin_dalys_raw * fin_attribution_share) / (rbf_dalys_raw + itmo_dalys_raw + fin_dalys_raw)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "leverage_funging_adj",
