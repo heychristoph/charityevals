@@ -798,18 +798,29 @@
    "format": "usd"
   },
   {
+   "id": "years_counted",
+   "label": "Years the reform counts before it would have come anyway",
+   "section": "cea_mongolia_50_tax_increas",
+   "unit": "years",
+   "format": "number",
+   "formula": "$win_years_counted",
+   "published": 47,
+   "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. Ambitious Impact counts the higher tax for every year of its sheet once it is in force, years 4 to 50 (47 years), each year cut by its chance that the government would have raised the tax anyway (the next row); that span is kept as the evaluator's and used in the evaluator view. Our view counts the health benefit and the government's cost of running the tax for this many years from year 4. The wait and every year counted are discounted at \"Next year's good counts less by\", as Ambitious Impact's sheet does."
+  },
+  {
    "id": "likelihood_each_year_of_government_passing_law_without_our_i",
    "label": "% likelihood each year of government passing law without our intervention",
    "section": "cea_mongolia_50_tax_increas",
-   "value": 0.075,
-   "kind": "estimate",
+   "value": 0,
+   "kind": "judgment",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/1i1wTJgeXiqvJF_OuYcZtMrCUlh_UHJu7a5BpDi56Npc/edit",
     "cell": "CEA - Mongolia (50% tax increas!B11"
    },
-   "explainer": "Our best guess so that it is comparable with other CEAs",
-   "format": "percent"
+   "explainer": "Changed for consistency. Ambitious Impact adds 7.5% a year to the discount rate of the health benefit and the government's costs for the chance that the government would have raised the tax anyway (\"Our best guess so that it is comparable with other CEAs\"); kept in the evaluator view. Our view answers the same question with the years the reform counts (the row above), so this is 0 and the same thing isn't cut twice.",
+   "format": "percent",
+   "published": 0.075
   },
   {
    "id": "government_costs_expected",
@@ -889,7 +900,7 @@
    "id": "government_costs_2",
    "label": "Government costs (year 4)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 0))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -897,7 +908,7 @@
    "id": "government_costs_3",
    "label": "Government costs (year 5)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 1))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -905,7 +916,7 @@
    "id": "government_costs_corrected_cell_was",
    "label": "Government costs (year 6)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 2))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -913,7 +924,7 @@
    "id": "government_costs_4",
    "label": "Government costs (year 7)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 3))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -921,7 +932,7 @@
    "id": "government_costs_calculation_excise_tax_rate_tax_rate_increa",
    "label": "Government costs (year 8)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 4))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -929,7 +940,7 @@
    "id": "government_costs_5",
    "label": "Government costs (year 9)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 5))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -937,7 +948,7 @@
    "id": "government_costs_6",
    "label": "Government costs (year 10)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 6))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -945,7 +956,7 @@
    "id": "government_costs_7",
    "label": "Government costs (year 11)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 7))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -953,7 +964,7 @@
    "id": "government_costs_8",
    "label": "Government costs (year 12)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 8))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -961,7 +972,7 @@
    "id": "government_costs_9",
    "label": "Government costs (year 13)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 9))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -969,7 +980,7 @@
    "id": "government_costs_10",
    "label": "Government costs (year 14)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 10))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -977,7 +988,7 @@
    "id": "government_costs_11",
    "label": "Government costs (year 15)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 11))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -985,7 +996,7 @@
    "id": "government_costs_12",
    "label": "Government costs (year 16)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 12))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -993,7 +1004,7 @@
    "id": "government_costs_13",
    "label": "Government costs (year 17)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 13))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1001,7 +1012,7 @@
    "id": "government_costs_14",
    "label": "Government costs (year 18)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 14))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1009,7 +1020,7 @@
    "id": "government_costs_15",
    "label": "Government costs (year 19)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 15))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1017,7 +1028,7 @@
    "id": "government_costs_16",
    "label": "Government costs (year 20)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 16))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1025,7 +1036,7 @@
    "id": "government_costs_17",
    "label": "Government costs (year 21)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 17))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1033,7 +1044,7 @@
    "id": "government_costs_18",
    "label": "Government costs (year 22)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 18))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1041,7 +1052,7 @@
    "id": "government_costs_19",
    "label": "Government costs (year 23)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 19))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1049,7 +1060,7 @@
    "id": "government_costs_20",
    "label": "Government costs (year 24)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 20))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1057,7 +1068,7 @@
    "id": "government_costs_21",
    "label": "Government costs (year 25)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 21))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1065,7 +1076,7 @@
    "id": "government_costs_22",
    "label": "Government costs (year 26)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 22))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1073,7 +1084,7 @@
    "id": "government_costs_23",
    "label": "Government costs (year 27)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 23))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1081,7 +1092,7 @@
    "id": "government_costs_24",
    "label": "Government costs (year 28)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 24))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1089,7 +1100,7 @@
    "id": "government_costs_25",
    "label": "Government costs (year 29)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 25))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1097,7 +1108,7 @@
    "id": "government_costs_26",
    "label": "Government costs (year 30)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 26))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1105,7 +1116,7 @@
    "id": "government_costs_27",
    "label": "Government costs (year 31)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 27))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1113,7 +1124,7 @@
    "id": "government_costs_28",
    "label": "Government costs (year 32)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 28))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1121,7 +1132,7 @@
    "id": "government_costs_29",
    "label": "Government costs (year 33)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 29))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1129,7 +1140,7 @@
    "id": "government_costs_30",
    "label": "Government costs (year 34)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 30))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1137,7 +1148,7 @@
    "id": "government_costs_31",
    "label": "Government costs (year 35)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 31))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1145,7 +1156,7 @@
    "id": "government_costs_32",
    "label": "Government costs (year 36)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 32))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1153,7 +1164,7 @@
    "id": "government_costs_33",
    "label": "Government costs (year 37)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 33))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1161,7 +1172,7 @@
    "id": "government_costs_34",
    "label": "Government costs (year 38)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 34))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1169,7 +1180,7 @@
    "id": "government_costs_35",
    "label": "Government costs (year 39)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 35))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1177,7 +1188,7 @@
    "id": "government_costs_36",
    "label": "Government costs (year 40)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 36))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1185,7 +1196,7 @@
    "id": "government_costs_37",
    "label": "Government costs (year 41)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 37))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1193,7 +1204,7 @@
    "id": "government_costs_38",
    "label": "Government costs (year 42)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 38))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1201,7 +1212,7 @@
    "id": "government_costs_39",
    "label": "Government costs (year 43)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 39))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1209,7 +1220,7 @@
    "id": "government_costs_40",
    "label": "Government costs (year 44)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 40))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1217,7 +1228,7 @@
    "id": "government_costs_41",
    "label": "Government costs (year 45)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 41))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1225,7 +1236,7 @@
    "id": "government_costs_42",
    "label": "Government costs (year 46)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 42))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1233,7 +1244,7 @@
    "id": "government_costs_43",
    "label": "Government costs (year 47)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 43))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1241,7 +1252,7 @@
    "id": "government_costs_44",
    "label": "Government costs (year 48)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 44))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1249,7 +1260,7 @@
    "id": "government_costs_45",
    "label": "Government costs (year 49)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 45))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1257,7 +1268,7 @@
    "id": "government_costs_46",
    "label": "Government costs (year 50)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "ongoing_cost_of_regulation * probability_of_success",
+   "formula": "ongoing_cost_of_regulation * probability_of_success * max(0, min(1, years_counted - 46))",
    "expected": 44494.1468,
    "format": "usd"
   },
@@ -1408,329 +1419,329 @@
    "id": "health_benefit_dalys_2",
    "label": "Health benefit (DALYs) (year 4)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 0))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_3",
    "label": "Health benefit (DALYs) (year 5)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 1))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_corrected_cell_was",
    "label": "Health benefit (DALYs) (year 6)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 2))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_4",
    "label": "Health benefit (DALYs) (year 7)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 3))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_calculation_excise_tax_rate_tax_rate_in",
    "label": "Health benefit (DALYs) (year 8)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 4))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_5",
    "label": "Health benefit (DALYs) (year 9)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 5))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_6",
    "label": "Health benefit (DALYs) (year 10)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 6))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_7",
    "label": "Health benefit (DALYs) (year 11)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 7))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_8",
    "label": "Health benefit (DALYs) (year 12)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 8))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_9",
    "label": "Health benefit (DALYs) (year 13)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 9))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_10",
    "label": "Health benefit (DALYs) (year 14)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 10))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_11",
    "label": "Health benefit (DALYs) (year 15)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 11))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_12",
    "label": "Health benefit (DALYs) (year 16)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 12))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_13",
    "label": "Health benefit (DALYs) (year 17)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 13))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_14",
    "label": "Health benefit (DALYs) (year 18)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 14))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_15",
    "label": "Health benefit (DALYs) (year 19)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 15))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_16",
    "label": "Health benefit (DALYs) (year 20)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 16))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_17",
    "label": "Health benefit (DALYs) (year 21)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 17))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_18",
    "label": "Health benefit (DALYs) (year 22)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 18))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_19",
    "label": "Health benefit (DALYs) (year 23)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 19))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_20",
    "label": "Health benefit (DALYs) (year 24)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 20))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_21",
    "label": "Health benefit (DALYs) (year 25)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 21))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_22",
    "label": "Health benefit (DALYs) (year 26)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 22))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_23",
    "label": "Health benefit (DALYs) (year 27)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 23))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_24",
    "label": "Health benefit (DALYs) (year 28)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 24))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_25",
    "label": "Health benefit (DALYs) (year 29)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 25))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_26",
    "label": "Health benefit (DALYs) (year 30)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 26))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_27",
    "label": "Health benefit (DALYs) (year 31)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 27))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_28",
    "label": "Health benefit (DALYs) (year 32)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 28))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_29",
    "label": "Health benefit (DALYs) (year 33)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 29))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_30",
    "label": "Health benefit (DALYs) (year 34)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 30))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_31",
    "label": "Health benefit (DALYs) (year 35)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 31))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_32",
    "label": "Health benefit (DALYs) (year 36)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 32))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_33",
    "label": "Health benefit (DALYs) (year 37)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 33))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_34",
    "label": "Health benefit (DALYs) (year 38)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 34))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_35",
    "label": "Health benefit (DALYs) (year 39)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 35))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_36",
    "label": "Health benefit (DALYs) (year 40)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 36))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_37",
    "label": "Health benefit (DALYs) (year 41)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 37))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_38",
    "label": "Health benefit (DALYs) (year 42)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 38))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_39",
    "label": "Health benefit (DALYs) (year 43)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 39))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_40",
    "label": "Health benefit (DALYs) (year 44)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 40))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_41",
    "label": "Health benefit (DALYs) (year 45)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 41))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_42",
    "label": "Health benefit (DALYs) (year 46)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 42))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_43",
    "label": "Health benefit (DALYs) (year 47)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 43))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_44",
    "label": "Health benefit (DALYs) (year 48)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 44))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_45",
    "label": "Health benefit (DALYs) (year 49)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 45))",
    "expected": 3592.541974
   },
   {
    "id": "health_benefit_dalys_46",
    "label": "Health benefit (DALYs) (year 50)",
    "section": "cea_mongolia_50_tax_increas",
-   "formula": "dalys_averted",
+   "formula": "dalys_averted * max(0, min(1, years_counted - 46))",
    "expected": 3592.541974
   },
   {
@@ -1812,7 +1823,7 @@
    "format": "number",
    "formula": "total_charity_and_gov_discounted_costs / charity_discounted_costs",
    "published": 1,
-   "explainer": "**Changed for consistency.** The government that would run the higher tobacco tax carry out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps Ambitious Impact's cost (1)."
+   "explainer": "**Changed for consistency.** The government that would run the higher tobacco tax carries out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps Ambitious Impact's cost (1)."
   },
   {
    "id": "gov_cost_share_of_good",
@@ -1821,7 +1832,7 @@
    "format": "percent",
    "formula": "(total_charity_and_gov_discounted_costs - charity_discounted_costs) * @givewell_shared.cf_value_government / $uov_per_daly / (discounted_health_benefit_dalys * gbd_daly_revaluation)",
    "published": 0,
-   "explainer": "**Changed for consistency.** The government's discounted cost of running the tax (Ambitious Impact's figure, weighted by the chance of success), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over the healthy years gained. A cost of the resources the advocacy mobilises: netted from the good before the mobiliser's share. The tax's revenue isn't counted. The evaluator view counts the government's costs in the cost instead (0 here)."
+   "explainer": "**Changed for consistency.** The government's discounted cost of running the tax (Ambitious Impact's yearly figure, weighted by the chance of success, over the years the reform counts), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over the healthy years gained. A cost of the resources the advocacy mobilises: netted from the good before the mobiliser's share. The tax's revenue isn't counted. The evaluator view counts the government's costs in the cost instead (0 here)."
   },
   {
    "id": "mobiliser_share",

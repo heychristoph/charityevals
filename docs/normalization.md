@@ -674,9 +674,9 @@ model was removed); INV-12 requires it of any model with a row on its path about
   costs alike; a failed organisation moves `@meta.failure_money_share` (Ambitious Impact's 20%) and spends for
   `@meta.failure_years_run` (3) years. Better Futures Guide's sheet already does this (its 20% now reads the fact);
   CEARCH used to multiply benefits by the chance and charge all five years of costs.
-- *One credit-by-share-of-resources formula* (`META_DONOR_COST_SHARE_FORMULA`): donors' new money moved per dollar
-  (`moved_per_dollar × new_money_share`) and staff's forgone pay share the outcome (before: CEARCH all money
-  influenced, Better Futures Guide none).
+- *One credit-by-share-of-resources formula* (`META_DONOR_COST_SHARE_FORMULA`): staff's forgone pay shares the
+  outcome; the donors whose money is moved are mobilised, under the mobiliser's share (2.24, since 17 November
+  2026; before, their new money, `moved_per_dollar × new_money_share`, sat in this formula).
 - *Labelled judgments*: `prior_vs_cash` says "our judgment" on the model rows; Ambitious
   Impact's subjective inputs in CEARCH and Better Futures Guide are filed as `judgment`.
 
@@ -771,8 +771,8 @@ shifted, as half new in its credit by share of resources: now donors' money only
   result moved.
 - *Both kinds in one model* (Longview's funds and advice, Effektiv Spenden's platform and advice): the
   spending it changed is its own row, `informed_money`; `money_moved` stays the money moved gross, valued
-  net, and alone enters the credit by share of resources (`money_moved × new_money_share`: changed spending
-  brings no new money; INV-12 checks `donor_cost_share` never reads `informed_money`). No result moved.
+  net. Neither enters the credit by share of resources (INV-12 checks `donor_cost_share` reads no money
+  moved, 2.24). No result moved.
 - *A second destination set* (Ambitious Impact: its founded charities, and the global health charities its
   giving organisations fund): the main set's rows word for word with `<set>_` before every set row and the
   set's own money rows (`gh_moved_dollar_value = value_global_health`, `gh_prior_dollar_value`,
@@ -799,8 +799,15 @@ benefit of a win = per year once in effect × fulfilment × credit
   5.5, 10, 15, 20.5, Ambitious Impact 35 and 55). Every model that credits a won commitment or policy reads it in our
   view; the evaluator's years are in `published` (or, where the sheet works with dates, the "date without the
   campaign" row becomes `expected date + $win_years_counted`, ACE's date in `published`: The Humane League, Animal
-  Welfare Observatory). Ambitious Impact's year-by-year sheets weight each year after the five years to
-  implementation by `max(0, min(1, years_counted - (year - 6)))`.
+  Welfare Observatory). Ambitious Impact's year-by-year sheets weight each year by
+  `max(0, min(1, years_counted - k))`, k counting from the year the sheet's benefit (or the government's
+  payment) starts; a sheet's own yearly chance that the change would have come anyway is 0 in our view (its
+  figure in `published`), the same question answered once. Sheets of totals (LEEP's) scale by the years
+  brought forward over the evaluator's. Since 17 November 2026 every import that credits a won policy or
+  commitment does (INV-23): ARMoR 3,041 → 462 years per $1,000 at a 100% mobiliser's share, Concentric
+  Policies 7.5 → 4.8, LABRI 22.5 → 8.5, Lead Research for Action 50.8 → 10.9, LEEP Malawi 49.7 → 31.1,
+  LEEP 2024 172 → 159, Pure Earth 35.3 → 26.2 (GiveWell) and 1.06 → 0.57 (HLI), Shrimp Welfare Project
+  0.0014 → 0.0010.
 - **The wait** until the reform takes effect is discounted at `$discount_rate` in every such model: rows
   `*_years_until_effect` (judgment, from the commitments' deadlines, with ranges) and a discount factor with
   `published` 1 where the evaluator doesn't discount it. Already done by the evaluator: The Humane League, Animal
@@ -1525,12 +1532,28 @@ by that row.
 
 - **Costs.** s applies to the benefit minus the cost of the mobilised resources (compliance costs 2.21, public
   money 2.23, an incubated organisation's running costs), never to the benefit alone: those cost rows read the
-  branch's used share. Net harm is shared like credit.
+  branch's used share. Net harm is shared like credit. An evaluator whose cost counts the adopter's spending
+  (Ambitious Impact's ARMoR and Concentric Policies, The Life You Can Save's Teaching at the Right Level
+  Africa and South Sudan nets, LEEP's two sheets) is read, in our view, per dollar of the charity's own cost
+  (`adopter_cost_out`, 1 in `published`), net of what the adopter's money would otherwise have done
+  (`@givewell_shared.cf_value_government` or `cf_value_global_fund`, 2.20; rich countries' taxpayers by 2.23).
 - **Chains compound.** Each layer splits only the share it received: a fundraiser that moves money to a
   campaigning charity is credited s of that charity's s. That is what makes the total add up. The evaluator
   view reads every model at 100%.
 - **Overlap.** Several mobilisers of the same dollar share s between them, modelled where a source gives the
-  overlap (a reach row); elsewhere it is a known over-count, logged here.
+  overlap, as reach rows on the amount of money (`<x>_shared_moved`, `<x>_credit_share`), never on s. One
+  shared split: the organisation nearer the donor takes `@meta.shared_credit_donor_side` (50%, 30–70%), the
+  other side 1 − it, so each pair adds to 1; the shared recipients' weights in the destination mix take the
+  same share. Modelled: money that Giving What We Can's, Effektiv Spenden's, One for the World's and The Life
+  You Can Save's donors give on GiveWell's recommendations (each fundraiser's published split; on GiveWell's
+  side the giving groups in its 2024 metrics report), Giving What We Can pledgers' giving through Effektiv
+  Spenden, The Life You Can Save's fund co-run with Founders Pledge (`rrf_credit_share`), and the giving
+  organisations Ambitious Impact incubated (`egi_credit_share`, their running costs with it). Known
+  over-counts, not sized by any source: GiveWell's side is a floor (fundraisers' donors who give at
+  GiveWell's own site count there as individual donors); the funding GiveWell's research influenced at
+  unnamed organisations; money Ambitious Impact's giving organisations and founders' companies move to
+  GiveWell's charities; money to recipients that other evaluators direct (animal, climate and long-term
+  funds); three-way overlaps, split pairwise.
 - **Floor.** The slider runs from 5%: at 0 shares of a total become 0/0.
 - **Deferred, logged.** Delivery that also crowds in public money (GiveWell's leverage, technical assistance)
   is classed whole, as delivery or as mobilised; the blend (own share + s × the rest) comes later. Redirected
@@ -1539,9 +1562,10 @@ by that row.
   a drug partnership's medicines, governments and Gavi buying vaccines).
 
 **State.** The default is 100%, which reproduces every headline (src/engine/mobiliser-share.test.ts holds
-them), while the models are wired pattern by pattern; INV-22's entries in
-src/engine/normalization-allowlist.json are the models still to wire. `$resource_shares` on still counts a
-money mover's donors as co-funders (`META_DONOR_COST_SHARE_FORMULA`) until they move under s.
+them); every model is wired (INV-22's allowlist is empty). `$resource_shares` counts co-funders only: staff's
+forgone pay, volunteers, in-kind gifts, other philanthropic funders. A money mover's donors
+(`META_DONOR_COST_SHARE_FORMULA`, INV-12) and the governments and funders that carry out a technical-assistance
+or policy import's programme are under s, with their spending netted as in the default view, on or off.
 
 ## 3. Invariants
 
@@ -1565,7 +1589,7 @@ shrinks).
 | INV-9 | Shared levers reach every model they apply to. | Models declare `mortality: true` / `multi_year: true` (lint suggests them from keywords: death, mortality, years of impact). Declared mortality → reads `$life_value_multiplier` (so `$daly_per_child_death`); declared multi-year → reads `$discount_rate`. |
 | INV-10 | Each slider moves exactly the models it should, in the expected shape. | Property test at defaults (a money mover, `beneficiaries: "destinations"`, takes no shape in the sliders its destinations read): every `ced` model's headline is linear in `$chicken_vs_person` and in `$daly_per_sad`, and independent of `$uov_per_daly`, `$daly_per_wellby`, `$uov_per_ln_consumption`; every non-animal model is independent of `$chicken_vs_person` and `$daly_per_sad`; WELLBY models, with the deaths they value outside their WELLBYs held at 0 (INV-17 checks those), are linear in `$daly_per_wellby` and independent of `$uov_per_daly`; climate (`tco2e`) models are linear in `$deaths_per_tco2e` and `$daly_per_child_death` and independent of `$uov_per_daly`. Every bridge's input (2.6) is held at 0 for the output unit's expectations, and the part it brings in moves as a model of its own unit would. |
 | INV-11 | No evaluator-internal exchange rate survives in our view where a shared one exists. | Every evaluator's model (Ambitious Impact's only until 2026-11-02). Every row on the path to the output whose label states an income-to-DALY rate, a value of a death averted (DALYs or years of life per death), a value of a stillbirth averted or a pound/euro exchange rate reads the shared version (`$uov_per_ln_consumption`, `@moral_weights.*`, `@givewell_shared.uov_per_stillbirth`, `@fx.*`), itself or through a row it is computed from. |
-| INV-12 | Money moved and career changes are valued one way (2.8). | Every model (not variants) whose native unit or a row on its path names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations reaches its output through `moved_dollar_value` with one of the two shared formulas; every shared row it has (src/engine/moved-money.ts) has the shared formula word for word (`prior_dollar_value` the one for the model's cause); `moved_dollar_net_value` is on the path unless the result is already counterfactual dollars of effective donations (CEARCH); no other row on the path reads `prior_dollar_value` except as `(moved_dollar_value - prior_dollar_value)`; every row on its path stating an organisation's chance of success reads `@meta.success_chance_new_org`. A row on the path about career changes needs `career_change_value` with the shared formula. The net, shifted and career formulas each multiply by `mobiliser_share` (2.24); a result already in counterfactual dollars, and a cost valued at `prior_dollar_value`, multiply by it in the model's own row. A charity's own fundraising (Ansh) and GiveWell's value-of-information sheet (IDinsight) are waived with reasons. Tiny-model checks in src/engine/model-refs.test.ts. |
+| INV-12 | Money moved and career changes are valued one way (2.8). | Every model (not variants) whose native unit or a row on its path names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or EA donations reaches its output through `moved_dollar_value` with one of the two shared formulas; every shared row it has (src/engine/moved-money.ts) has the shared formula word for word (`prior_dollar_value` the one for the model's cause); `moved_dollar_net_value` is on the path unless the result is already counterfactual dollars of effective donations (CEARCH); no other row on the path reads `prior_dollar_value` except as `(moved_dollar_value - prior_dollar_value)`; every row on its path stating an organisation's chance of success reads `@meta.success_chance_new_org`. A row on the path about career changes needs `career_change_value` with the shared formula. The net, shifted and career formulas each multiply by `mobiliser_share` (2.24); a result already in counterfactual dollars, and a cost valued at `prior_dollar_value`, multiply by it in the model's own row. `donor_cost_share` reads no money moved (`new_money_share`, `moved_per_dollar`, `*money_moved`, `*informed_money`): the donors are under the share, not co-funders. A charity's own fundraising (Ansh) and GiveWell's value-of-information sheet (IDinsight) are waived with reasons. Tiny-model checks in src/engine/model-refs.test.ts. |
 | INV-2d | No literal times a lever. | Every formula row on the path is split into its product and quotient chains and its function calls' argument lists; a chain holding both a non-toggle shared assumption and a constant outside lint's allowed literals (`8 * $life_value_multiplier`, `0.005 * $discount_rate / 0.04`, `pv_annuity_due(1, $discount_rate, 5)`) is flagged: the constant reads the shared fact (evaluator's figure in `published`) or becomes its own labelled input row, where INV-2c, INV-4 and INV-13 see it. Late October 2026: 437 rows in 100 models, GiveWell's moral weights typed beside the lever (now `@moral_weights` bands and GiveWell's curve by age, the sheet's figure in `published`), old per-staff columns and 2018/2019 units, `ln(2)` written as a number. |
 | INV-13 | Same concept, same value across models. | Rows on the path (not variants) whose label names one of a curated list of concepts several evaluators state (resource sharing, treatment costs averted, investment of income gains, years long-term gains last, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception, of a stillbirth, indirect deaths per diarrhoea death, household spillover of therapy, pledges kept, depression per PHQ-9 point) read the concept's shared fact, the evaluator's figure in `published`. A place or year the facts don't cover is the only reason to differ, recorded as a waiver with the reason. Late October 2026: 81 rows; deworming's 10% investment share became a fact, the true copies in SoGive's and Ambitious Impact's models read `@givewell_shared` (the 18 INV-4 waivers for them are gone), GiveWell's 2022 water sheets take the current 20% treatment costs averted. |
 | INV-14 | No house constant without a shared fact. | Input rows on the path (not variants), grouped by whose figure it is (SoGive's copies of GiveWell's sheets count as GiveWell's), label (places and "overall" dropped) and value: a group in five or more models is a constant copied by hand and becomes a shared fact every copy reads. Round structural numbers (lint's allowed literals) and numbers that define their row (an arbitrary donation's size, a "10x bar" of 10) are exempt. Late October 2026: facts/givewell_common.json (298 figures, read by 2,275 rows in 118 models) and facts/staff_pay.json (our staff-pay defaults by kind of work and two charities' own shares, read by 487 rows); no value changed. |
@@ -1576,6 +1600,7 @@ shrinks).
 | INV-20 | Lives near and far are weighed by where they are, in our view only (2.13). | Every model with a result in common units has `beneficiaries`: shares by ISO alpha-3 codes in facts/countries.json (and `"world"`) summing to 1, `"world"`, or `"destinations"` when it reads models live. With `$home_country` = 0 at 50% and 90%, and with homes United States, Nigeria, India and the United Kingdom at 0%, every headline is exactly its headline with neither. At 50% a step with each of those homes, live reads held, the headline is the unweighted one times Σ share × (1 − d)^steps worked out country by country (1 for "destinations"); the evaluator view never moves. |
 | INV-21 | Missing outcome data: one rule for every model, in our view only (2.12). | Every model with a result in common units is classified: charityevals' own by their `missing_data_adj` rows (and no `missing_data` field), every import by `missing_data` (own or inherited) with a reason and no row reading `$missing_data_discount`. At 1 nothing moves (an import's factor is exactly 1; an own build's headline equals its headline with every marker at 1). With live reads held, an import's headline at the default and 10% is its headline at 1 × (1 − thin_share × (1 − d)); the evaluator view never moves. |
 | INV-22 | Mobilised resources take the mobiliser's share, once (2.24). | Every model with a result in common units. Only the row `mobiliser_share = $mobiliser_share` reads the setting. (a) Reach: every `*moved_dollar_net_value`, `*shifted_dollar_value` and `career_change_value` row on the path reads it; in a charityevals model with a win (a `*p_success` row, `$win_years_counted`, or a share classed win or research) every used share (`attribution_share`, `<branch>_attribution_share`) reads it or carries `"credit": "delivery"`; every imported model declares `mobilised`, and reads it on the path if true. (b) Once, the models read live held: the headline at the default, half and a quarter of the share lies on a straight line, and the part of the headline behind each mobilised row and each cost of mobilised resources (`*compliance_uov`, `*public_cost_uov`) halves exactly with the share. (c) A model with an evaluator view that reads it pins it to 1, in a row of an ours section, and its evaluator headline doesn't move (the evaluator view reads other models at 100% too). (d) A model that mobilises nothing, and a delivery share, read none. (e) No headline breaks at the slider's low end (5%). Models not yet wired are INV-22's entries in src/engine/normalization-allowlist.json, a list that only shrinks. Tiny-model checks in src/engine/normalization.test.ts; src/engine/mobiliser-share.test.ts holds every headline at 100%. |
+| INV-23 | An import that credits a won policy or commitment counts the shared years (2.9). | Every imported model (not variants) classed mobilised with a result in common units and a row on the path whose label names a chance of success or of the change coming anyway, a commitment or pledge, years brought forward or sustained, or a duration of impact: a row on the path reads `$win_years_counted`, and the evaluator view is the same at twice the years. Waived with reasons (`WON_REFORM_WAIVERS`, src/engine/invariants.ts): outreach, services, pilots, technical assistance and money moved that credit no reform for a number of years. charityevals' own builds read it through their templates. |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),
 `daly_per_sad`, toggle `rp_species_weights`; `output.native` and `output.species` in the

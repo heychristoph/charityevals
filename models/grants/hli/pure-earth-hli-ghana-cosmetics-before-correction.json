@@ -249,10 +249,49 @@
       "expected": 10.0
     },
     {
+      "id": "counterfactual_years",
+      "label": "Counterfactual years",
+      "section": "ghana_cf_yrs_analysis",
+      "formula": "$win_years_counted",
+      "published": 8,
+      "unit": "years",
+      "explainer": "Changed for consistency. HLI counts 8 years of lower lead in cosmetics that would not have come without the work. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps HLI's 8."
+    },
+    {
+      "id": "years_until_effect",
+      "section": "ghana_cf_yrs_analysis",
+      "label": "Years until the regulation takes effect",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 2,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, 2 years (0 to 3): the advocacy runs about two years before the rules are enforced. HLI doesn't model the wait."
+    },
+    {
+      "id": "wait_discount",
+      "section": "ghana_cf_yrs_analysis",
+      "label": "Discount for the wait until the regulation takes effect",
+      "format": "number",
+      "formula": "(1 + discount_rate_per_year) ^ -years_until_effect",
+      "published": 1,
+      "explainer": "Changed for consistency. The wait until a won reform takes effect is discounted at the shared rate in every such model (docs/normalization.md 2.9); HLI doesn't discount it, so the evaluator view keeps 1."
+    },
+    {
+      "id": "counterfactual_years_discounted",
+      "label": "Counterfactual years, the wait and later years discounted",
+      "section": "ghana_cf_yrs_analysis",
+      "formula": "pv_annuity_due(1, discount_rate_per_year, counterfactual_years) * wait_discount",
+      "unit": "years",
+      "explainer": "Changed for consistency. In our view each later year counts less, at the shared rate (Next year's good counts less by); HLI doesn't discount, so the evaluator view counts all 8 in full."
+    },
+    {
       "id": "counterfactual_years_adjusted_and_attributed",
       "label": "Counterfactual years [adjusted and attributed]",
       "section": "ghana_cf_yrs_analysis",
-      "formula": "8 * (advocacy_now + monitoring_and_enforcement_now) / full",
+      "formula": "counterfactual_years_discounted * (advocacy_now + monitoring_and_enforcement_now) / full",
       "expected": 4.0
     },
     {

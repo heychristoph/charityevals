@@ -11,7 +11,7 @@ BHF spent £150.4m on its charitable work in 2025-26:
 - **Research, £96.2m (64%):** 247 new grants worth £103.3m, mostly fellowships, programme and project grants and its research centres, across 45 UK institutions. In 2022 BHF paid for about half of the UK's public and charity cardiovascular research.
 - **Health, £54.2m (36%):** health information (35 million web page views), the Heart Matters magazine, the nurse-led Heart Helpline (26,000 people), CPR training through the free RevivR app (190,000 people trained in the year), The Circuit (the defibrillator map ambulance services use), pilots of new care through the Healthcare Implementation Fund, and policy work in all four UK nations.
 
-The accounts don't split health spending by activity. We judge policy at about 6% of it and the implementation pilots at about 5% (the fund has awarded £5.74m since it began, in awards of up to £500,000). Both are in this model; the rest of health spending is the health-and-support model.
+The accounts don't split health spending by activity. We judge policy at about {{row:policy_share_of_health}} of it and the implementation pilots at about {{row:hif_share_of_health}} (the fund has awarded £5.74m since it began, in awards of up to £500,000). Both are in this model; the rest of health spending is the health-and-support model.
 
 BHF's 651 shops lost £6.7m on trading this year, so they don't pay for the charitable work. We count them by that net result, not their £240m of trading costs. Raising money cost £50.3m. Both costs are spread over the charitable spending, about 38p on each pound.
 
@@ -30,7 +30,7 @@ Research is the medical-research template's chain:
 - **Burden:** the world's cardiovascular burden, 436 million DALYs a year (GBD 2023).
 - **Share averted:** what a year of the field's research averts once adopted, 0.3% a year (one judgment, 0.05% to 1%). Coronary deaths in England and Wales fell about 4% a year from 1981 to 2000, and treatments explain 42% of that. Rich countries carry a fifth of the world's burden, uptake elsewhere is lower, and about half of the gain is uptake of older advances rather than new research.
 - **Timing:** brought forward 5 years, after a 17-year wait.
-- **Adjustments:** our trust in the evidence (0.7), then BHF's share of the world's cardiovascular research funding, industry's included (about 0.5%).
+- **Adjustments:** our trust in the evidence (0.7), then BHF's share of the world's cardiovascular research funding, industry's included (about {{row:research_attribution_share_shared}}).
 - **Check:** a 9% return in UK health gains with a 17-year lag, the figure for UK cardiovascular research, implies about twice the healthy years per pound of the chain. The model shows both rows.
 
 The implementation pilots follow the same chain at UK scale:
@@ -61,15 +61,15 @@ The result divides spending by what past work of the kind achieved, so it is a p
 - **The share of the burden a year of research averts:** moves the result about 14 times across its range.
 - **The missing-data discount and the next dollar against the past average** (your value judgments).
 - **Years brought forward:** 2 to 15 years.
-- **BHF's share of the field:** 0.3% to 0.8%.
+- **BHF's share of the field:** {{low:research_attribution_share_shared}} to {{high:research_attribution_share_shared}}.
 - **The discount rate:** a 17-year wait makes the result sensitive to it.
 
-Research is about 76% of the result, policy about 20% and the pilots about 4%. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
+Research gives most of the result, then policy; the pilots give little. The policy gains come 40 years out and BHF is one of many groups behind the law. The pilots are a small budget, and few pilots spread.
 
 ### Biggest uncertainties
 
 - No study measures what one funder's research is worth. The chain is calibrated on returns-to-research studies: 9% a year in health gains for UK cardiovascular research, 10% for cancer. Their authors call these best-case figures, and they count only UK gains.
-- Credit is split by share of funding. Industry pays for most cardiovascular research, and we count all of it; BHF is about 0.5% of the total.
+- Credit is split by share of funding. Industry pays for most cardiovascular research, and we count all of it; BHF is about {{row:research_attribution_share_shared}} of the total.
 - The smokefree-generation effect is modelled, not observed. New Zealand repealed its own ban before it took effect.
 - The pilots are new and report no outcomes yet. How often a pilot spreads, and how much its care achieves outside a trial, are our judgments.
 

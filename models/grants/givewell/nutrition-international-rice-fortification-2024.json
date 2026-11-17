@@ -3928,7 +3928,7 @@
       "id": "adjustment_for_leverage_2",
       "label": "Adjustment for leverage",
       "section": "iron_fortification_cea",
-      "formula": "if($resource_shares, 0, (program_cost_west_bengal_2 / 2 * 0.005 / (total_units_of_value * (1 + adjustment_for_behavioural_activities_2)) * -1))",
+      "formula": "program_cost_west_bengal_2 / 2 * 0.005 / (total_units_of_value * (1 + adjustment_for_behavioural_activities_2)) * -1",
       "expected": -0.0697919292,
       "format": "percent"
     },
@@ -3936,7 +3936,8 @@
       "id": "adjustment_for_leverage",
       "label": "Adjustment for leverage",
       "section": "simple_iron_fortification_cea",
-      "formula": "if($resource_shares, 0, (adjustment_for_leverage_2))",
+      "formula": "adjustment_for_leverage_2",
+      "explainer": "Credit by share of resources doesn't change this row: the government pays for the fortified rice because of the programme, so the value their money would otherwise have produced stays netted, and their part is under the charity's share of the good (mobiliser_share).",
       "expected": -0.0697919292,
       "format": "percent"
     },

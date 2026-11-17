@@ -66,11 +66,11 @@ First match on the model's id wins.
 - Better Futures Guide and CEARCH (money moved): their shared money rows carry the share (scripts/moved-money.py), so they get the field and the pin only, no second factor.
 - GiveWell's Iodine Global Network sheet has no result in common units: it gets the field only.
 
-## For the step that re-judges shares: the adopter is in the evaluator's denominator
+## The adopter in the evaluator's denominator (done, 17 November 2026)
 
 Mobilised, and the evaluator's cost already includes the spending of the party that carries out the good, so below 100% that
-party would be cut twice. Nothing changes here (the default is 100%); in our view the adopter's spending has to leave the
-denominator (a cost of the mobilised resources instead, inside the share), heaviest first:
+party would be cut twice. In our view the adopter's spending has left the denominator (`adopter_cost_out`, 1 in `published`) and
+is netted from the good at what the money would otherwise have done, inside the share; the evaluator view is unchanged:
 
 - alliance-for-reducing-microbial-resistance-aim: Ambitious Impact's cost per DALY counts the governments' payments for the pull incentive (about $300 million a year, weighted by the chance of success) beside the charity's few million.
 - teaching-at-the-right-level-africa-tlycs: The Life You Can Save's figure is per dollar of all the programme's money; the governments pay 39 to 77% of it in the three countries.

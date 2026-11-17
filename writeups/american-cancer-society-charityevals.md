@@ -18,19 +18,19 @@ Management and fundraising cost $155.4m, spread over the programmes, about 23 ce
 
 Four branches on the medical-research template:
 
-- **Research:** a year of the world's cancer research brings new drugs, tests and risk findings into use sooner. The world's cancer burden is 261 million DALYs a year (WHO Global Health Estimates 2023). A year of the field's research averts about 0.25% of it once in use (one judgment, 0.05% to 0.6%), brought forward 5 years, after a 15-year wait (Glover et al. 2014). ACS is credited with its share of all funders' cancer research, about 0.25%, drug companies' research (about $50-65bn a year, from $252bn of cancer-medicine sales) included.
-- **Tobacco advocacy:** a typical year's US tobacco wins by everyone (state tax rises, flavour and youth rules) avert about 0.25% of the US smoking burden, 9.4 million DALYs a year, once in effect. Half the gain comes from smokers quitting, about 8 years later, half from young people who never start, about 40 years later; less second-hand smoke adds 10%. These are the site's shared tobacco figures. ACS CAN has 35% of the campaigning groups' resources; legislators and agencies are credited through the mobiliser's share.
-- **Coverage advocacy:** the year's coverage and budget wins (biomarker testing, screening follow-up, cancer-research budgets) avert about 0.05% of the US cancer burden (0.01% to 0.2%), about 3 years after they take effect. ACS CAN has 35% of the campaigning groups'.
+- **Research:** a year of the world's cancer research brings new drugs, tests and risk findings into use sooner. The world's cancer burden is 261 million DALYs a year (WHO Global Health Estimates 2023). A year of the field's research averts about 0.25% of it once in use (one judgment, 0.05% to 0.6%), brought forward 5 years, after a 15-year wait (Glover et al. 2014). ACS is credited with its share of all funders' cancer research, about {{row:research_attribution_share_shared}}, drug companies' research (about $50-65bn a year, from $252bn of cancer-medicine sales) included.
+- **Tobacco advocacy:** a typical year's US tobacco wins by everyone (state tax rises, flavour and youth rules) avert about 0.25% of the US smoking burden, 9.4 million DALYs a year, once in effect. Half the gain comes from smokers quitting, about 8 years later, half from young people who never start, about 40 years later; less second-hand smoke adds 10%. These are the site's shared tobacco figures. ACS CAN has {{row:tob_attribution_share_shared}} of the campaigning groups' resources; legislators and agencies are credited through the mobiliser's share.
+- **Coverage advocacy:** the year's coverage and budget wins (biomarker testing, screening follow-up, cancer-research budgets) avert about 0.05% of the US cancer burden (0.01% to 0.2%), about 3 years after they take effect. ACS CAN has {{row:adv_attribution_share_shared}} of the campaigning groups'.
 - In both, a year's work is credited with a typical year's wins, since each campaign runs two to three years, and a won policy counts the site's shared number of years.
-- **Screening:** US screening coverage rises about 0.8 points a year across colorectal, breast, cervical and lung cancer. Half of that is due to promotion, and ACS has 15% of the promotion's resources. People brought up to date have about a quarter fewer deaths from the screened cancer (trials: 0.74 for sigmoidoscopy), counted for 3 years, about 6 years later.
+- **Screening:** US screening coverage rises about 0.8 points a year across colorectal, breast, cervical and lung cancer. Half of that is due to promotion, and ACS has {{row:screen_attribution_share_shared}} of the promotion's resources. People brought up to date have about a quarter fewer deaths from the screened cancer (trials: 0.74 for sigmoidoscopy), counted for 3 years, about 6 years later.
 
 Each branch's DALYs are split into the illness part and the deaths behind the rest, and each death is valued at the site's value of a death by age (WHO's age split: 62% of US cancer deaths come at 70 or older). Each branch is multiplied by the shared missing-data discount. The result is a past average, counted at ACS's next-dollar figure, {{row:marginal_vs_past_average}} (reserves of about 7 months, inside its own policy, and a surplus in the year).
 
 ### What drives the result
 
-- **The share of the burden the year's policy wins avert:** tobacco advocacy is about 56% of the result, coverage advocacy about 27%.
+- **The share of the burden the year's policy wins avert:** tobacco advocacy gives most of the result, then coverage advocacy.
 - **The missing-data discount, the years a won policy counts and the next dollar against the past average** (your value judgments and the shared figure).
-- **The share of the burden a year of research averts, and ACS's share of the field.** Research is about 13% of the result, screening about 4%.
+- **The share of the burden a year of research averts, and ACS's share of the field.** Research and screening give less.
 
 ### Biggest uncertainties
 

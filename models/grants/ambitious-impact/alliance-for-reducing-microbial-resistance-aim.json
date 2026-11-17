@@ -1253,6 +1253,16 @@
    }
   },
   {
+   "id": "years_counted",
+   "label": "Years the reform counts before it would have come anyway",
+   "section": "cea",
+   "unit": "years",
+   "format": "number",
+   "formula": "$win_years_counted",
+   "published": 45,
+   "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. Ambitious Impact counts the governments' payments for every year of its sheet once the law is in force, years 6 to 50 (45 years), and the new antibiotics' benefit from year 12, when the first one is in use, as if the law would never have come otherwise; that span is kept as the evaluator's and used in the evaluator view. Our view counts the payments for this many years from year 6 and the benefit for as many years from year 12. The wait and every year counted are discounted at \"Next year's good counts less by\", as Ambitious Impact's sheet does."
+  },
+  {
    "id": "modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas",
    "label": "Years of full government payments before they start to fall",
    "section": "cea",
@@ -1311,7 +1321,7 @@
    "id": "benefits_sam_s_estimate_government_costs_expected",
    "label": "Government costs (year 1)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(expected_row_58 <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(expected_row_58 <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(expected_row_58 > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (expected_row_58 - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(expected_row_58 <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(expected_row_58 <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(expected_row_58 > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (expected_row_58 - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (expected_row_58 - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 0.0,
    "format": "usd"
   },
@@ -1319,7 +1329,7 @@
    "id": "benefits_sam_s_estimate_government_costs_bcg_report",
    "label": "Government costs (year 2)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(bcg_report_row_58 <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(bcg_report_row_58 <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(bcg_report_row_58 > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (bcg_report_row_58 - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(bcg_report_row_58 <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(bcg_report_row_58 <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(bcg_report_row_58 > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (bcg_report_row_58 - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (bcg_report_row_58 - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 0.0,
    "format": "usd"
   },
@@ -1327,7 +1337,7 @@
    "id": "benefits_sam_s_estimate_government_costs",
    "label": "Government costs (year 3)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_d58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_d58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_d58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_d58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_d58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_d58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_d58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_d58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_d58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 0.0,
    "format": "usd"
   },
@@ -1335,7 +1345,7 @@
    "id": "benefits_sam_s_estimate_government_costs_2",
    "label": "Government costs (year 4)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_e58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_e58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_e58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_e58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_e58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_e58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_e58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_e58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_e58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 0.0,
    "format": "usd"
   },
@@ -1343,7 +1353,7 @@
    "id": "benefits_sam_s_estimate_government_costs_3",
    "label": "Government costs (year 5)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_f58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_f58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_f58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_f58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_f58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_f58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_f58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_f58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_f58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 0.0,
    "format": "usd"
   },
@@ -1351,7 +1361,7 @@
    "id": "benefits_sam_s_estimate_government_costs_4",
    "label": "Government costs (year 6)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_g58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_g58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_g58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_g58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_g58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_g58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_g58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_g58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_g58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1359,7 +1369,7 @@
    "id": "benefits_sam_s_estimate_government_costs_calcaulted_figure",
    "label": "Government costs (year 7)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(calcaulted_figure_row_58 <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(calcaulted_figure_row_58 <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(calcaulted_figure_row_58 > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (calcaulted_figure_row_58 - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(calcaulted_figure_row_58 <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(calcaulted_figure_row_58 <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(calcaulted_figure_row_58 > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (calcaulted_figure_row_58 - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (calcaulted_figure_row_58 - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1367,7 +1377,7 @@
    "id": "benefits_sam_s_estimate_government_costs_5",
    "label": "Government costs (year 8)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_i58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_i58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_i58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_i58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_i58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_i58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_i58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_i58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_i58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1375,7 +1385,7 @@
    "id": "benefits_sam_s_estimate_government_costs_6",
    "label": "Government costs (year 9)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_j58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_j58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_j58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_j58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_j58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_j58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_j58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_j58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_j58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1383,7 +1393,7 @@
    "id": "benefits_sam_s_estimate_government_costs_7",
    "label": "Government costs (year 10)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_k58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_k58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_k58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_k58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_k58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_k58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_k58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_k58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_k58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1391,7 +1401,7 @@
    "id": "benefits_sam_s_estimate_government_costs_8",
    "label": "Government costs (year 11)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_l58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_l58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_l58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_l58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_l58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_l58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_l58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_l58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_l58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1399,7 +1409,7 @@
    "id": "benefits_sam_s_estimate_government_costs_9",
    "label": "Government costs (year 12)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_m58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_m58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_m58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_m58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_m58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_m58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_m58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_m58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_m58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1407,7 +1417,7 @@
    "id": "benefits_sam_s_estimate_government_costs_10",
    "label": "Government costs (year 13)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_n58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_n58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_n58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_n58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_n58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_n58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_n58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_n58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_n58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1415,7 +1425,7 @@
    "id": "benefits_sam_s_estimate_government_costs_11",
    "label": "Government costs (year 14)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_o58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_o58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_o58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_o58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_o58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_o58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_o58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_o58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_o58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1423,7 +1433,7 @@
    "id": "benefits_sam_s_estimate_government_costs_12",
    "label": "Government costs (year 15)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_p58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_p58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_p58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_p58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_p58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_p58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_p58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_p58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_p58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 300000000.0,
    "format": "usd"
   },
@@ -1431,7 +1441,7 @@
    "id": "benefits_sam_s_estimate_government_costs_13",
    "label": "Government costs (year 16)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_q58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_q58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_q58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_q58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_q58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_q58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_q58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_q58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_q58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 285000000.0,
    "format": "usd"
   },
@@ -1439,7 +1449,7 @@
    "id": "benefits_sam_s_estimate_government_costs_14",
    "label": "Government costs (year 17)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_r58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_r58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_r58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_r58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_r58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_r58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_r58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_r58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_r58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 270750000.0,
    "format": "usd"
   },
@@ -1447,7 +1457,7 @@
    "id": "benefits_sam_s_estimate_government_costs_15",
    "label": "Government costs (year 18)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_s58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_s58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_s58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_s58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_s58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_s58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_s58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_s58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_s58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 257212500.0,
    "format": "usd"
   },
@@ -1455,7 +1465,7 @@
    "id": "benefits_sam_s_estimate_government_costs_16",
    "label": "Government costs (year 19)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_t58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_t58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_t58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_t58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_t58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_t58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_t58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_t58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_t58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 244351875.0,
    "format": "usd"
   },
@@ -1463,7 +1473,7 @@
    "id": "benefits_sam_s_estimate_government_costs_17",
    "label": "Government costs (year 20)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_u58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_u58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_u58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_u58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_u58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_u58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_u58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_u58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_u58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 232134281.3,
    "format": "usd"
   },
@@ -1471,7 +1481,7 @@
    "id": "benefits_sam_s_estimate_government_costs_18",
    "label": "Government costs (year 21)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_v58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_v58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_v58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_v58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_v58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_v58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_v58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_v58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_v58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 220527567.2,
    "format": "usd"
   },
@@ -1479,7 +1489,7 @@
    "id": "benefits_sam_s_estimate_government_costs_19",
    "label": "Government costs (year 22)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_w58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_w58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_w58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_w58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_w58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_w58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_w58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_w58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_w58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 209501188.8,
    "format": "usd"
   },
@@ -1487,7 +1497,7 @@
    "id": "benefits_sam_s_estimate_government_costs_20",
    "label": "Government costs (year 23)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_x58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_x58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_x58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_x58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_x58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_x58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_x58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_x58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_x58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 199026129.4,
    "format": "usd"
   },
@@ -1495,7 +1505,7 @@
    "id": "benefits_sam_s_estimate_government_costs_21",
    "label": "Government costs (year 24)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_y58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_y58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_y58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_y58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_y58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_y58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_y58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_y58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_y58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 189074822.9,
    "format": "usd"
   },
@@ -1503,7 +1513,7 @@
    "id": "benefits_sam_s_estimate_government_costs_22",
    "label": "Government costs (year 25)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_z58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_z58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_z58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_z58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_z58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_z58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_z58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_z58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_z58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 179621081.8,
    "format": "usd"
   },
@@ -1511,7 +1521,7 @@
    "id": "benefits_sam_s_estimate_government_costs_23",
    "label": "Government costs (year 26)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aa58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aa58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aa58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aa58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aa58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aa58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aa58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aa58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_aa58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 170640027.7,
    "format": "usd"
   },
@@ -1519,7 +1529,7 @@
    "id": "benefits_sam_s_estimate_government_costs_24",
    "label": "Government costs (year 27)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ab58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ab58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ab58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ab58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ab58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ab58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ab58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ab58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ab58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 162108026.3,
    "format": "usd"
   },
@@ -1527,7 +1537,7 @@
    "id": "benefits_sam_s_estimate_government_costs_25",
    "label": "Government costs (year 28)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ac58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ac58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ac58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ac58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ac58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ac58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ac58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ac58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ac58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 154002625.0,
    "format": "usd"
   },
@@ -1535,7 +1545,7 @@
    "id": "benefits_sam_s_estimate_government_costs_26",
    "label": "Government costs (year 29)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ad58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ad58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ad58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ad58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ad58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ad58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ad58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ad58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ad58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 146302493.7,
    "format": "usd"
   },
@@ -1543,7 +1553,7 @@
    "id": "benefits_sam_s_estimate_government_costs_27",
    "label": "Government costs (year 30)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ae58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ae58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ae58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ae58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ae58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ae58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ae58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ae58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ae58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 138987369.0,
    "format": "usd"
   },
@@ -1551,7 +1561,7 @@
    "id": "benefits_sam_s_estimate_government_costs_28",
    "label": "Government costs (year 31)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_af58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_af58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_af58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_af58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_af58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_af58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_af58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_af58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_af58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 132038000.6,
    "format": "usd"
   },
@@ -1559,7 +1569,7 @@
    "id": "benefits_sam_s_estimate_government_costs_29",
    "label": "Government costs (year 32)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ag58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ag58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ag58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ag58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ag58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ag58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ag58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ag58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ag58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 125436100.6,
    "format": "usd"
   },
@@ -1567,7 +1577,7 @@
    "id": "benefits_sam_s_estimate_government_costs_30",
    "label": "Government costs (year 33)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ah58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ah58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ah58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ah58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ah58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ah58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ah58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ah58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ah58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 119164295.5,
    "format": "usd"
   },
@@ -1575,7 +1585,7 @@
    "id": "benefits_sam_s_estimate_government_costs_31",
    "label": "Government costs (year 34)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ai58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ai58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ai58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ai58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ai58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ai58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ai58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ai58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ai58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 113206080.8,
    "format": "usd"
   },
@@ -1583,7 +1593,7 @@
    "id": "benefits_sam_s_estimate_government_costs_32",
    "label": "Government costs (year 35)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aj58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aj58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aj58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aj58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aj58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aj58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aj58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aj58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_aj58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 107545776.7,
    "format": "usd"
   },
@@ -1591,7 +1601,7 @@
    "id": "benefits_sam_s_estimate_government_costs_33",
    "label": "Government costs (year 36)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ak58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ak58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ak58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ak58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ak58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ak58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ak58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ak58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ak58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 102168487.9,
    "format": "usd"
   },
@@ -1599,7 +1609,7 @@
    "id": "benefits_sam_s_estimate_government_costs_34",
    "label": "Government costs (year 37)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_al58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_al58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_al58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_al58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_al58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_al58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_al58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_al58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_al58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 97060063.49,
    "format": "usd"
   },
@@ -1607,7 +1617,7 @@
    "id": "benefits_sam_s_estimate_government_costs_35",
    "label": "Government costs (year 38)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_am58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_am58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_am58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_am58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_am58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_am58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_am58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_am58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_am58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 92207060.32,
    "format": "usd"
   },
@@ -1615,7 +1625,7 @@
    "id": "benefits_sam_s_estimate_government_costs_36",
    "label": "Government costs (year 39)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_an58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_an58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_an58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_an58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_an58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_an58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_an58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_an58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_an58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 87596707.3,
    "format": "usd"
   },
@@ -1623,7 +1633,7 @@
    "id": "benefits_sam_s_estimate_government_costs_37",
    "label": "Government costs (year 40)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ao58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ao58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ao58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ao58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ao58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ao58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ao58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ao58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ao58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 83216871.94,
    "format": "usd"
   },
@@ -1631,7 +1641,7 @@
    "id": "benefits_sam_s_estimate_government_costs_38",
    "label": "Government costs (year 41)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ap58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ap58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ap58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ap58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ap58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ap58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ap58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ap58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ap58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 79056028.34,
    "format": "usd"
   },
@@ -1639,7 +1649,7 @@
    "id": "benefits_sam_s_estimate_government_costs_39",
    "label": "Government costs (year 42)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aq58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aq58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aq58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aq58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aq58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aq58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aq58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aq58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_aq58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 75103226.92,
    "format": "usd"
   },
@@ -1647,7 +1657,7 @@
    "id": "benefits_sam_s_estimate_government_costs_40",
    "label": "Government costs (year 43)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ar58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ar58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ar58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ar58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ar58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ar58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ar58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ar58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ar58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 71348065.58,
    "format": "usd"
   },
@@ -1655,7 +1665,7 @@
    "id": "benefits_sam_s_estimate_government_costs_41",
    "label": "Government costs (year 44)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_as58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_as58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_as58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_as58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_as58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_as58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_as58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_as58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_as58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 67780662.3,
    "format": "usd"
   },
@@ -1663,7 +1673,7 @@
    "id": "benefits_sam_s_estimate_government_costs_42",
    "label": "Government costs (year 45)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_at58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_at58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_at58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_at58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_at58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_at58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_at58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_at58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_at58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 64391629.18,
    "format": "usd"
   },
@@ -1671,7 +1681,7 @@
    "id": "benefits_sam_s_estimate_government_costs_43",
    "label": "Government costs (year 46)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_au58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_au58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_au58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_au58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_au58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_au58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_au58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_au58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_au58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 61172047.72,
    "format": "usd"
   },
@@ -1679,7 +1689,7 @@
    "id": "benefits_sam_s_estimate_government_costs_44",
    "label": "Government costs (year 47)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_av58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_av58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_av58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_av58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_av58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_av58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_av58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_av58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_av58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 58113445.34,
    "format": "usd"
   },
@@ -1687,7 +1697,7 @@
    "id": "benefits_sam_s_estimate_government_costs_45",
    "label": "Government costs (year 48)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aw58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aw58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aw58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aw58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_aw58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_aw58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_aw58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_aw58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_aw58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 55207773.07,
    "format": "usd"
   },
@@ -1695,7 +1705,7 @@
    "id": "benefits_sam_s_estimate_government_costs_46",
    "label": "Government costs (year 49)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ax58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ax58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ax58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ax58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ax58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ax58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ax58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ax58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ax58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 52447384.42,
    "format": "usd"
   },
@@ -1703,7 +1713,7 @@
    "id": "benefits_sam_s_estimate_government_costs_47",
    "label": "Government costs (year 50)",
    "section": "cea",
-   "formula": "0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ay58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ay58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ay58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ay58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))",
+   "formula": "(0.5 * (total_increased_probability_of_success + total_increased_probability_of_success_2) * if(cell_ay58_on_cea <= time_taken_for_law_to_pass_and_provisions_come_into_force, 0, if(cell_ay58_on_cea <= modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, cost_for_other_countries + cost_for_us_government, if(cell_ay58_on_cea > modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas + time_taken_for_law_to_pass_and_provisions_come_into_force, (cost_for_other_countries + cost_for_us_government) * (1 - discount_on_government_cost) ^ (cell_ay58_on_cea - modelled_for_an_organisation_that_lobbies_for_pasteur_to_pas - time_taken_for_law_to_pass_and_provisions_come_into_force), 0)))) * max(0, min(1, years_counted - (cell_ay58_on_cea - time_taken_for_law_to_pass_and_provisions_come_into_force - 1)))",
    "expected": 49825015.2,
    "format": "usd"
   },
@@ -1904,350 +1914,350 @@
    "id": "benefits_sam_s_estimate_dalys_affected_expected",
    "label": "DALYs affected (year 1)",
    "section": "cea",
-   "formula": "if(expected_row_58 > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(expected_row_58 < years_increase_lasts, expected_row_58, years_increase_lasts) - 1), 0)",
+   "formula": "(if(expected_row_58 > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(expected_row_58 < years_increase_lasts, expected_row_58, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (expected_row_58 - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_bcg_report",
    "label": "DALYs affected (year 2)",
    "section": "cea",
-   "formula": "if(bcg_report_row_58 > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(bcg_report_row_58 < years_increase_lasts, bcg_report_row_58, years_increase_lasts) - 1), 0)",
+   "formula": "(if(bcg_report_row_58 > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(bcg_report_row_58 < years_increase_lasts, bcg_report_row_58, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (bcg_report_row_58 - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected",
    "label": "DALYs affected (year 3)",
    "section": "cea",
-   "formula": "if(cell_d58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_d58_on_cea < years_increase_lasts, cell_d58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_d58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_d58_on_cea < years_increase_lasts, cell_d58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_d58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_2",
    "label": "DALYs affected (year 4)",
    "section": "cea",
-   "formula": "if(cell_e58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_e58_on_cea < years_increase_lasts, cell_e58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_e58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_e58_on_cea < years_increase_lasts, cell_e58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_e58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_3",
    "label": "DALYs affected (year 5)",
    "section": "cea",
-   "formula": "if(cell_f58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_f58_on_cea < years_increase_lasts, cell_f58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_f58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_f58_on_cea < years_increase_lasts, cell_f58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_f58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_4",
    "label": "DALYs affected (year 6)",
    "section": "cea",
-   "formula": "if(cell_g58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_g58_on_cea < years_increase_lasts, cell_g58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_g58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_g58_on_cea < years_increase_lasts, cell_g58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_g58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_calcaulted_figure",
    "label": "DALYs affected (year 7)",
    "section": "cea",
-   "formula": "if(calcaulted_figure_row_58 > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(calcaulted_figure_row_58 < years_increase_lasts, calcaulted_figure_row_58, years_increase_lasts) - 1), 0)",
+   "formula": "(if(calcaulted_figure_row_58 > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(calcaulted_figure_row_58 < years_increase_lasts, calcaulted_figure_row_58, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (calcaulted_figure_row_58 - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_5",
    "label": "DALYs affected (year 8)",
    "section": "cea",
-   "formula": "if(cell_i58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_i58_on_cea < years_increase_lasts, cell_i58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_i58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_i58_on_cea < years_increase_lasts, cell_i58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_i58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_6",
    "label": "DALYs affected (year 9)",
    "section": "cea",
-   "formula": "if(cell_j58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_j58_on_cea < years_increase_lasts, cell_j58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_j58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_j58_on_cea < years_increase_lasts, cell_j58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_j58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_7",
    "label": "DALYs affected (year 10)",
    "section": "cea",
-   "formula": "if(cell_k58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_k58_on_cea < years_increase_lasts, cell_k58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_k58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_k58_on_cea < years_increase_lasts, cell_k58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_k58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_8",
    "label": "DALYs affected (year 11)",
    "section": "cea",
-   "formula": "if(cell_l58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_l58_on_cea < years_increase_lasts, cell_l58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_l58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_l58_on_cea < years_increase_lasts, cell_l58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_l58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 0.0
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_9",
    "label": "DALYs affected (year 12)",
    "section": "cea",
-   "formula": "if(cell_m58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_m58_on_cea < years_increase_lasts, cell_m58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_m58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_m58_on_cea < years_increase_lasts, cell_m58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_m58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 1596259.723
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_10",
    "label": "DALYs affected (year 13)",
    "section": "cea",
-   "formula": "if(cell_n58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_n58_on_cea < years_increase_lasts, cell_n58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_n58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_n58_on_cea < years_increase_lasts, cell_n58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_n58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 1676072.709
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_11",
    "label": "DALYs affected (year 14)",
    "section": "cea",
-   "formula": "if(cell_o58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_o58_on_cea < years_increase_lasts, cell_o58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_o58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_o58_on_cea < years_increase_lasts, cell_o58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_o58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 1759876.345
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_12",
    "label": "DALYs affected (year 15)",
    "section": "cea",
-   "formula": "if(cell_p58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_p58_on_cea < years_increase_lasts, cell_p58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_p58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_p58_on_cea < years_increase_lasts, cell_p58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_p58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 1847870.162
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_13",
    "label": "DALYs affected (year 16)",
    "section": "cea",
-   "formula": "if(cell_q58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_q58_on_cea < years_increase_lasts, cell_q58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_q58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_q58_on_cea < years_increase_lasts, cell_q58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_q58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 1940263.67
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_14",
    "label": "DALYs affected (year 17)",
    "section": "cea",
-   "formula": "if(cell_r58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_r58_on_cea < years_increase_lasts, cell_r58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_r58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_r58_on_cea < years_increase_lasts, cell_r58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_r58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2037276.853
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_15",
    "label": "DALYs affected (year 18)",
    "section": "cea",
-   "formula": "if(cell_s58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_s58_on_cea < years_increase_lasts, cell_s58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_s58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_s58_on_cea < years_increase_lasts, cell_s58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_s58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2139140.696
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_16",
    "label": "DALYs affected (year 19)",
    "section": "cea",
-   "formula": "if(cell_t58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_t58_on_cea < years_increase_lasts, cell_t58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_t58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_t58_on_cea < years_increase_lasts, cell_t58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_t58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2246097.731
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_17",
    "label": "DALYs affected (year 20)",
    "section": "cea",
-   "formula": "if(cell_u58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_u58_on_cea < years_increase_lasts, cell_u58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_u58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_u58_on_cea < years_increase_lasts, cell_u58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_u58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2358402.617
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_18",
    "label": "DALYs affected (year 21)",
    "section": "cea",
-   "formula": "if(cell_v58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_v58_on_cea < years_increase_lasts, cell_v58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_v58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_v58_on_cea < years_increase_lasts, cell_v58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_v58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2476322.748
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_19",
    "label": "DALYs affected (year 22)",
    "section": "cea",
-   "formula": "if(cell_w58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_w58_on_cea < years_increase_lasts, cell_w58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_w58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_w58_on_cea < years_increase_lasts, cell_w58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_w58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2600138.886
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_20",
    "label": "DALYs affected (year 23)",
    "section": "cea",
-   "formula": "if(cell_x58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_x58_on_cea < years_increase_lasts, cell_x58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_x58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_x58_on_cea < years_increase_lasts, cell_x58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_x58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2730145.83
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_21",
    "label": "DALYs affected (year 24)",
    "section": "cea",
-   "formula": "if(cell_y58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_y58_on_cea < years_increase_lasts, cell_y58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_y58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_y58_on_cea < years_increase_lasts, cell_y58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_y58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 2866653.121
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_22",
    "label": "DALYs affected (year 25)",
    "section": "cea",
-   "formula": "if(cell_z58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_z58_on_cea < years_increase_lasts, cell_z58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_z58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_z58_on_cea < years_increase_lasts, cell_z58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_z58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3009985.777
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_23",
    "label": "DALYs affected (year 26)",
    "section": "cea",
-   "formula": "if(cell_aa58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aa58_on_cea < years_increase_lasts, cell_aa58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_aa58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aa58_on_cea < years_increase_lasts, cell_aa58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_aa58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_24",
    "label": "DALYs affected (year 27)",
    "section": "cea",
-   "formula": "if(cell_ab58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ab58_on_cea < years_increase_lasts, cell_ab58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ab58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ab58_on_cea < years_increase_lasts, cell_ab58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ab58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_25",
    "label": "DALYs affected (year 28)",
    "section": "cea",
-   "formula": "if(cell_ac58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ac58_on_cea < years_increase_lasts, cell_ac58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ac58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ac58_on_cea < years_increase_lasts, cell_ac58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ac58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_26",
    "label": "DALYs affected (year 29)",
    "section": "cea",
-   "formula": "if(cell_ad58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ad58_on_cea < years_increase_lasts, cell_ad58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ad58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ad58_on_cea < years_increase_lasts, cell_ad58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ad58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_27",
    "label": "DALYs affected (year 30)",
    "section": "cea",
-   "formula": "if(cell_ae58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ae58_on_cea < years_increase_lasts, cell_ae58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ae58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ae58_on_cea < years_increase_lasts, cell_ae58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ae58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_28",
    "label": "DALYs affected (year 31)",
    "section": "cea",
-   "formula": "if(cell_af58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_af58_on_cea < years_increase_lasts, cell_af58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_af58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_af58_on_cea < years_increase_lasts, cell_af58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_af58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_29",
    "label": "DALYs affected (year 32)",
    "section": "cea",
-   "formula": "if(cell_ag58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ag58_on_cea < years_increase_lasts, cell_ag58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ag58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ag58_on_cea < years_increase_lasts, cell_ag58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ag58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_30",
    "label": "DALYs affected (year 33)",
    "section": "cea",
-   "formula": "if(cell_ah58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ah58_on_cea < years_increase_lasts, cell_ah58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ah58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ah58_on_cea < years_increase_lasts, cell_ah58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ah58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_31",
    "label": "DALYs affected (year 34)",
    "section": "cea",
-   "formula": "if(cell_ai58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ai58_on_cea < years_increase_lasts, cell_ai58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ai58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ai58_on_cea < years_increase_lasts, cell_ai58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ai58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_32",
    "label": "DALYs affected (year 35)",
    "section": "cea",
-   "formula": "if(cell_aj58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aj58_on_cea < years_increase_lasts, cell_aj58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_aj58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aj58_on_cea < years_increase_lasts, cell_aj58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_aj58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_33",
    "label": "DALYs affected (year 36)",
    "section": "cea",
-   "formula": "if(cell_ak58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ak58_on_cea < years_increase_lasts, cell_ak58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ak58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ak58_on_cea < years_increase_lasts, cell_ak58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ak58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_34",
    "label": "DALYs affected (year 37)",
    "section": "cea",
-   "formula": "if(cell_al58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_al58_on_cea < years_increase_lasts, cell_al58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_al58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_al58_on_cea < years_increase_lasts, cell_al58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_al58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_35",
    "label": "DALYs affected (year 38)",
    "section": "cea",
-   "formula": "if(cell_am58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_am58_on_cea < years_increase_lasts, cell_am58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_am58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_am58_on_cea < years_increase_lasts, cell_am58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_am58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_36",
    "label": "DALYs affected (year 39)",
    "section": "cea",
-   "formula": "if(cell_an58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_an58_on_cea < years_increase_lasts, cell_an58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_an58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_an58_on_cea < years_increase_lasts, cell_an58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_an58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_37",
    "label": "DALYs affected (year 40)",
    "section": "cea",
-   "formula": "if(cell_ao58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ao58_on_cea < years_increase_lasts, cell_ao58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ao58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ao58_on_cea < years_increase_lasts, cell_ao58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ao58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_38",
    "label": "DALYs affected (year 41)",
    "section": "cea",
-   "formula": "if(cell_ap58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ap58_on_cea < years_increase_lasts, cell_ap58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ap58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ap58_on_cea < years_increase_lasts, cell_ap58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ap58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_39",
    "label": "DALYs affected (year 42)",
    "section": "cea",
-   "formula": "if(cell_aq58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aq58_on_cea < years_increase_lasts, cell_aq58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_aq58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aq58_on_cea < years_increase_lasts, cell_aq58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_aq58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_40",
    "label": "DALYs affected (year 43)",
    "section": "cea",
-   "formula": "if(cell_ar58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ar58_on_cea < years_increase_lasts, cell_ar58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ar58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ar58_on_cea < years_increase_lasts, cell_ar58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ar58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_41",
    "label": "DALYs affected (year 44)",
    "section": "cea",
-   "formula": "if(cell_as58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_as58_on_cea < years_increase_lasts, cell_as58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_as58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_as58_on_cea < years_increase_lasts, cell_as58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_as58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_42",
    "label": "DALYs affected (year 45)",
    "section": "cea",
-   "formula": "if(cell_at58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_at58_on_cea < years_increase_lasts, cell_at58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_at58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_at58_on_cea < years_increase_lasts, cell_at58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_at58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_43",
    "label": "DALYs affected (year 46)",
    "section": "cea",
-   "formula": "if(cell_au58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_au58_on_cea < years_increase_lasts, cell_au58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_au58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_au58_on_cea < years_increase_lasts, cell_au58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_au58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_44",
    "label": "DALYs affected (year 47)",
    "section": "cea",
-   "formula": "if(cell_av58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_av58_on_cea < years_increase_lasts, cell_av58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_av58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_av58_on_cea < years_increase_lasts, cell_av58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_av58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_45",
    "label": "DALYs affected (year 48)",
    "section": "cea",
-   "formula": "if(cell_aw58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aw58_on_cea < years_increase_lasts, cell_aw58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_aw58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_aw58_on_cea < years_increase_lasts, cell_aw58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_aw58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_46",
    "label": "DALYs affected (year 49)",
    "section": "cea",
-   "formula": "if(cell_ax58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ax58_on_cea < years_increase_lasts, cell_ax58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ax58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ax58_on_cea < years_increase_lasts, cell_ax58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ax58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
    "id": "benefits_sam_s_estimate_dalys_affected_47",
    "label": "DALYs affected (year 50)",
    "section": "cea",
-   "formula": "if(cell_ay58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ay58_on_cea < years_increase_lasts, cell_ay58_on_cea, years_increase_lasts) - 1), 0)",
+   "formula": "(if(cell_ay58_on_cea > total_years_for_first_benefit_to_be_seen, expect_dalys_affected_in_year_1 * (1 + expected_annual_increase_in_daly_burden) ^ (if(cell_ay58_on_cea < years_increase_lasts, cell_ay58_on_cea, years_increase_lasts) - 1), 0)) * max(0, min(1, years_counted - (cell_ay58_on_cea - total_years_for_first_benefit_to_be_seen - 1)))",
    "expected": 3160485.066
   },
   {
@@ -2344,7 +2354,7 @@
    "label": "Value lost per dollar of public money by those who pay it, units of value",
    "format": "small",
    "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
-   "explainer": "Public money isn't free (docs/normalization.md 2.23): a dollar of it costs its payers the marginal cost of public funds, on the log scale over their consumption. The payers are taxpayers of the United States and other rich countries, taken at the site's figures for US federal taxes and US consumption per person."
+   "explainer": "Public money isn't free (docs/normalization.md 2.23): a dollar of it costs its payers the marginal cost of public funds, on the log scale over their consumption. The payers are taxpayers of the United States and other rich countries, all taken at the site's figures for US federal taxes and US consumption per person (two thirds of the money is other rich countries')."
   },
   {
    "id": "gov_public_cost_uov",
@@ -2352,7 +2362,7 @@
    "label": "What the governments' payments cost those who pay them, units of value (negative)",
    "format": "number",
    "formula": "-government_discounted_costs * public_payer_uov_per_dollar",
-   "explainer": "The governments' discounted payments for new antibiotics (Ambitious Impact's figure, already weighted by the chance of success) at what they cost taxpayers. A cost of the resources the advocacy mobilises: it is netted from the good before the mobiliser's share."
+   "explainer": "The governments' discounted payments for new antibiotics (Ambitious Impact's yearly figure, already weighted by the chance of success, over the years the reform counts) at what they cost taxpayers. A cost of the resources the advocacy mobilises: it is netted from the good before the mobiliser's share."
   },
   {
    "id": "gov_cost_share_of_good",

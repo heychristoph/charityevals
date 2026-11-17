@@ -103,6 +103,40 @@
       "explainer": "LEEP's budget for its 13 country programmes (about five to six years each) plus the governments' staff time to enforce the rules in the years they are brought forward, counted at half (LEEP: that money would otherwise be spent less well), discounted at 4% a year. LEEP states the total as about $4 million; the figure here is the one its $4.49 per DALY-equivalent and its 901,000 DALY-equivalents imply."
     },
     {
+      "id": "leep_years_brought_forward",
+      "section": "leep",
+      "label": "Years LEEP brings enforcement forward, average of the 13 countries",
+      "format": "number",
+      "value": 5.4,
+      "kind": "estimate",
+      "unit": "years",
+      "source": {
+        "title": "LEEP, LEEP Multi-Country Sensitivity Analysis (April 2024)",
+        "url": "https://docs.google.com/spreadsheets/d/1PeNSD1pqSQWF2afvQM0dIj1C-UcRHh4XGU_OmmjstZ4/edit",
+        "retrieved": "2026-11-17",
+        "note": "Start of enforcement or compliance without and with LEEP, best estimates: Malawi 2030 and 2022, Madagascar 2030 and 2024, Sierra Leone 2028 and 2024, Liberia 2029 and 2025, Angola 2032 and 2025, Pakistan 2028 and 2023, Niger 2029 and 2024, Zimbabwe 2030 and 2025, Bolivia 2032 and 2025, Ghana 2028 and 2024, Nigeria 2030 and 2025, Côte d'Ivoire 2029 and 2024, Senegal 2029 and 2024: 70 years over 13 countries."
+      },
+      "explainer": "LEEP states no average. This is the plain mean of the gaps between its two enforcement dates for each country (four to eight years), not weighted by each country's size."
+    },
+    {
+      "id": "years_brought_forward",
+      "section": "leep",
+      "label": "Years enforcement is brought forward",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "published": 5.4,
+      "unit": "years",
+      "explainer": "Changed for consistency. LEEP credits itself with four to eight years of earlier enforcement, 5.4 on average. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps LEEP's years."
+    },
+    {
+      "id": "brought_forward_scale",
+      "section": "leep",
+      "label": "Years brought forward, as a share of LEEP's average",
+      "format": "percent",
+      "formula": "years_brought_forward / leep_years_brought_forward",
+      "explainer": "Changed for consistency. LEEP publishes totals, not its yearly rows, so our view scales the children spared, the health years and the governments' enforcement spending in proportion to the years brought forward. An approximation: paint sales grow each year and lead paint's share falls only gradually once a rule is enforced, so the true figure doesn't move exactly in proportion, and one average stands in for 13 countries. LEEP's own spending stays as it is. 100% in the evaluator view."
+    },
+    {
       "id": "years_to_exposure",
       "section": "leep",
       "label": "Average wait from 2021 to the childhood exposure averted",
@@ -249,8 +283,9 @@
       "section": "health",
       "label": "Health years gained, deaths valued by age",
       "format": "number",
-      "formula": "health_dalys * gbd_daly_revaluation",
-      "unit": "DALYs"
+      "formula": "health_dalys * gbd_daly_revaluation * brought_forward_scale",
+      "unit": "DALYs",
+      "explainer": "Scaled to the years enforcement is brought forward in our view (brought_forward_scale)."
     },
     {
       "id": "children_spared",
@@ -290,8 +325,9 @@
       "section": "income",
       "label": "Children spared, expected and discounted to 2021",
       "format": "number",
-      "formula": "children_spared * p_success * (1 + $discount_rate) ^ -years_to_exposure",
-      "unit": "children"
+      "formula": "children_spared * p_success * (1 + $discount_rate) ^ -years_to_exposure * brought_forward_scale",
+      "unit": "children",
+      "explainer": "Scaled to the years enforcement is brought forward in our view (brought_forward_scale)."
     },
     {
       "id": "bll_increase",
@@ -485,9 +521,9 @@
       "section": "bottom_line",
       "label": "Governments' enforcement spending, at what the money would otherwise have done, as a share of the good done",
       "format": "percent",
-      "formula": "govt_cost_uncounted / govt_cost_counted_fraction * @givewell_shared.cf_value_government / $uov_per_daly / (total_daly_equivalents * ours_vs_leep)",
+      "formula": "govt_cost_uncounted / govt_cost_counted_fraction * brought_forward_scale * @givewell_shared.cf_value_government / $uov_per_daly / (total_daly_equivalents * ours_vs_leep)",
       "published": 0,
-      "explainer": "**Changed for consistency.** The governments' enforcement spending in full (the half LEEP counts, over that half), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over our healthy years gained. A cost of the resources LEEP mobilises: netted from the good before the mobiliser's share. The evaluator view counts half the spending in the cost instead (0 here)."
+      "explainer": "**Changed for consistency.** The governments' enforcement spending in full, for the years enforcement is brought forward (LEEP's figure times brought_forward_scale), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over our healthy years gained. A cost of the resources LEEP mobilises: netted from the good before the mobiliser's share. The evaluator view counts half the spending in the cost instead (0 here)."
     },
     {
       "id": "mobiliser_share",

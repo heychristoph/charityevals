@@ -1,6 +1,6 @@
 # Audit: ploughshares-fund-charityevals, round 11
 Result: 28.13 years of healthy life per $1,000 (unchanged from round 10; combined range as in round 10). Verdict: pass. Short re-stamp after wording fixes.
-Model-sha: 190e1a617ae606776244ac0cadceecf66728a61434060f619c8e125be99c20d2
+Model-sha: 43a5728009588a977cbc64bab282eb6814559f35ec50e566524d3574b88a6ba7
 Scope: unchanged from round 10.
 Preflight: pass (as in round 10).
 Previous round (r10, no high or medium; four lows):
@@ -20,3 +20,5 @@ None needed: no fix added a factual claim.
 
 ## Drivers
 As in round 10.
+
+Re-stamped (17 Nov 2026): Credit step 6 loose ends: the previous round's low findings fixed in wording and sources (IBBIS's study cited, Ploughshares' fellowship wording, Habitat's funder anchor); no value changed. Mechanical: headline 28.13 → 28.13 (−7.6e-9%), 2 rows changed, against 814eaf77.

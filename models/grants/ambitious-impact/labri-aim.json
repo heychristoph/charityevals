@@ -3761,7 +3761,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_daly_equivelents, impact_period_2_running_at_scale_daly_equivelents)",
+   "formula": "sum(impact_period_1_initial_scaling_daly_equivelents, impact_period_2_running_at_scale_daly_equivelents) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, timeline_year_1 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, timeline_year_1 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, timeline_year_1 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, timeline_year_1 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 0.0
   },
   {
@@ -3779,18 +3779,29 @@
    "published": 0.014
   },
   {
+   "id": "years_counted",
+   "label": "Years the reform counts before it would have come anyway",
+   "section": "main_model",
+   "unit": "years",
+   "format": "number",
+   "formula": "$win_years_counted",
+   "published": 29,
+   "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. Ambitious Impact counts each country's regulation from the year it takes effect (one country in year 3, three by year 6) to the last year of its sheet, year 31 (29 years for the first country), each year cut by its chance that the change would have happened anyway (the next row); that span is kept as the evaluator's and used in the evaluator view. Our view counts each country's regulation for this many years from the year it takes effect: a year's impact leaves out the countries whose years have run out. The wait and every year counted are discounted at \"Next year's good counts less by\"."
+  },
+  {
    "id": "probability_change_happens_anyway_per_year_suggest_0_for_dir",
    "label": "Probability change happens anyway, per year [suggest: 0% for direct, suggest 1%-7% for policy]",
    "section": "main_model",
-   "value": 0.04,
-   "kind": "estimate",
+   "value": 0,
+   "kind": "judgment",
    "source": {
     "title": "Source spreadsheet",
     "url": "https://docs.google.com/spreadsheets/d/18D2h-PDdpo2_ev1LK8nN_otvsLc-fZk13z_k0wtjfOw/edit",
     "cell": "Main model!B121"
    },
-   "explainer": "% discounted One would expect, now that there is the LEAF funding, that change might happen anyway. Via their awareness raising or via UN/UNEP/OP there would be a policy level change.",
-   "format": "percent"
+   "explainer": "Changed for consistency. Ambitious Impact adds 4% a year to the discount rate of the impact for the chance that the change happens anyway (\"One would expect, now that there is the LEAF funding, that change might happen anyway. Via their awareness raising or via UN/UNEP/OP there would be a policy level change.\"); kept in the evaluator view. Our view answers the same question with the years the reform counts (the row above), so this is 0 and the same thing isn't cut twice.",
+   "format": "percent",
+   "published": 0.04
   },
   {
    "id": "impacted_population_growth_rate_if_relevant_e_g_5_if_interve",
@@ -3853,7 +3864,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_shou",
    "label": "DALY equivelents total cost/benefit: Intermediate impact (Should explain this)",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_should_explain_this, impact_period_2_running_at_scale_should_explain_this)",
+   "formula": "sum(impact_period_1_initial_scaling_should_explain_this, impact_period_2_running_at_scale_should_explain_this) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, should_explain_this_row_241 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, should_explain_this_row_241 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, should_explain_this_row_241 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, should_explain_this_row_241 - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 0.0
   },
   {
@@ -3881,7 +3892,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_2",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling, impact_period_2_running_at_scale)",
+   "formula": "sum(impact_period_1_initial_scaling, impact_period_2_running_at_scale) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_e241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_e241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_e241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_e241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 5563.177821
   },
   {
@@ -3909,7 +3920,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_3",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_2, impact_period_2_running_at_scale_2)",
+   "formula": "sum(impact_period_1_initial_scaling_2, impact_period_2_running_at_scale_2) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_f241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_f241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_f241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_f241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 9271.963036
   },
   {
@@ -3937,7 +3948,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_4",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_3, impact_period_2_running_at_scale_3)",
+   "formula": "sum(impact_period_1_initial_scaling_3, impact_period_2_running_at_scale_3) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_g241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_g241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_g241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_g241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 12980.74825
   },
   {
@@ -3965,7 +3976,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_5",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_4, impact_period_2_running_at_scale_4)",
+   "formula": "sum(impact_period_1_initial_scaling_4, impact_period_2_running_at_scale_4) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_h241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_h241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_h241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_h241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -3993,7 +4004,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_6",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_5, impact_period_2_running_at_scale_5)",
+   "formula": "sum(impact_period_1_initial_scaling_5, impact_period_2_running_at_scale_5) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_i241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_i241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_i241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_i241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4021,7 +4032,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_7",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_6, impact_period_2_running_at_scale_6)",
+   "formula": "sum(impact_period_1_initial_scaling_6, impact_period_2_running_at_scale_6) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_j241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_j241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_j241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_j241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4049,7 +4060,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_8",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_7, impact_period_2_running_at_scale_7)",
+   "formula": "sum(impact_period_1_initial_scaling_7, impact_period_2_running_at_scale_7) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_k241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_k241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_k241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_k241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4077,7 +4088,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_9",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_8, impact_period_2_running_at_scale_8)",
+   "formula": "sum(impact_period_1_initial_scaling_8, impact_period_2_running_at_scale_8) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_l241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_l241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_l241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_l241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4105,7 +4116,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_10",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_9, impact_period_2_running_at_scale_9)",
+   "formula": "sum(impact_period_1_initial_scaling_9, impact_period_2_running_at_scale_9) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_m241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_m241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_m241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_m241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4141,7 +4152,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_11",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_10, impact_period_2_running_at_scale_10)",
+   "formula": "sum(impact_period_1_initial_scaling_10, impact_period_2_running_at_scale_10) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_n241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_n241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_n241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_n241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4169,7 +4180,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_12",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_11, impact_period_2_running_at_scale_11)",
+   "formula": "sum(impact_period_1_initial_scaling_11, impact_period_2_running_at_scale_11) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_o241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_o241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_o241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_o241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4197,7 +4208,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_13",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_12, impact_period_2_running_at_scale_12)",
+   "formula": "sum(impact_period_1_initial_scaling_12, impact_period_2_running_at_scale_12) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_p241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_p241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_p241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_p241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4225,7 +4236,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_14",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_13, impact_period_2_running_at_scale_13)",
+   "formula": "sum(impact_period_1_initial_scaling_13, impact_period_2_running_at_scale_13) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_q241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_q241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_q241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_q241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4253,7 +4264,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_15",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_14, impact_period_2_running_at_scale_14)",
+   "formula": "sum(impact_period_1_initial_scaling_14, impact_period_2_running_at_scale_14) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_r241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_r241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_r241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_r241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4281,7 +4292,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_16",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_15, impact_period_2_running_at_scale_15)",
+   "formula": "sum(impact_period_1_initial_scaling_15, impact_period_2_running_at_scale_15) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_s241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_s241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_s241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_s241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4309,7 +4320,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_17",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_16, impact_period_2_running_at_scale_16)",
+   "formula": "sum(impact_period_1_initial_scaling_16, impact_period_2_running_at_scale_16) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_t241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_t241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_t241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_t241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4337,7 +4348,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_18",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_17, impact_period_2_running_at_scale_17)",
+   "formula": "sum(impact_period_1_initial_scaling_17, impact_period_2_running_at_scale_17) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_u241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_u241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_u241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_u241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4365,7 +4376,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_19",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_18, impact_period_2_running_at_scale_18)",
+   "formula": "sum(impact_period_1_initial_scaling_18, impact_period_2_running_at_scale_18) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_v241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_v241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_v241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_v241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4393,7 +4404,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_20",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_19, impact_period_2_running_at_scale_19)",
+   "formula": "sum(impact_period_1_initial_scaling_19, impact_period_2_running_at_scale_19) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_w241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_w241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_w241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_w241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4421,7 +4432,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_21",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_20, impact_period_2_running_at_scale_20)",
+   "formula": "sum(impact_period_1_initial_scaling_20, impact_period_2_running_at_scale_20) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_x241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_x241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_x241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_x241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4449,7 +4460,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_22",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_21, impact_period_2_running_at_scale_21)",
+   "formula": "sum(impact_period_1_initial_scaling_21, impact_period_2_running_at_scale_21) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_y241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_y241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_y241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_y241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4477,7 +4488,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_23",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_22, impact_period_2_running_at_scale_22)",
+   "formula": "sum(impact_period_1_initial_scaling_22, impact_period_2_running_at_scale_22) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_z241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_z241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_z241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_z241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4505,7 +4516,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_24",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_23, impact_period_2_running_at_scale_23)",
+   "formula": "sum(impact_period_1_initial_scaling_23, impact_period_2_running_at_scale_23) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_aa241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_aa241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_aa241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_aa241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4533,7 +4544,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_25",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_24, impact_period_2_running_at_scale_24)",
+   "formula": "sum(impact_period_1_initial_scaling_24, impact_period_2_running_at_scale_24) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_ab241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_ab241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_ab241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_ab241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4561,7 +4572,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_26",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_25, impact_period_2_running_at_scale_25)",
+   "formula": "sum(impact_period_1_initial_scaling_25, impact_period_2_running_at_scale_25) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_ac241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_ac241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_ac241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_ac241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4602,7 +4613,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_27",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_26, impact_period_2_running_at_scale_26)",
+   "formula": "sum(impact_period_1_initial_scaling_26, impact_period_2_running_at_scale_26) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_ad241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_ad241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_ad241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_ad241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4643,7 +4654,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_28",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_27, impact_period_2_running_at_scale_27)",
+   "formula": "sum(impact_period_1_initial_scaling_27, impact_period_2_running_at_scale_27) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_ae241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_ae241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_ae241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_ae241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4684,7 +4695,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_29",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_28, impact_period_2_running_at_scale_28)",
+   "formula": "sum(impact_period_1_initial_scaling_28, impact_period_2_running_at_scale_28) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_af241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_af241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_af241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_af241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {
@@ -4725,7 +4736,7 @@
    "id": "daly_equivelents_total_cost_benefit_intermediate_impact_30",
    "label": "DALY equivelents total cost/benefit: Intermediate impact",
    "section": "main_model",
-   "formula": "sum(impact_period_1_initial_scaling_29, impact_period_2_running_at_scale_29)",
+   "formula": "sum(impact_period_1_initial_scaling_29, impact_period_2_running_at_scale_29) - total_net_impact_per_country_per_year_at_scale * (number_of_countries_reached_in_first_year_of_period_1_sugges * max(0, min(1, cell_ag241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted + 1)) + additional_countries_reached_each_year_when_scaling * (max(0, min(1, cell_ag241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted)) + max(0, min(1, cell_ag241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 1)) + max(0, min(1, cell_ag241_on_main_model - impact_period_begins_in_year_suggest_0_suggest_range_0_2 - years_counted - 2))))",
    "expected": 16689.53346
   },
   {

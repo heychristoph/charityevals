@@ -1,6 +1,6 @@
 ### Summary
 
-The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **{{result}} years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused, about three dollars for each dollar it spends. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
+The Life You Can Save recommends about thirty charities fighting extreme poverty and raises money for them. Our model of its work in 2025 comes to **{{result}} years of healthy life per 1,000 dollars**. It reports moving $24 million that year, for $2.6 million of its own costs. We count the share of that giving it caused and is credited with, {{row:moved_per_dollar}} its spending. Each dollar is valued at what its recipients achieve on this site. The figure moves most with how much the next dollar does compared with the 2025 average, and with the share of the giving it caused.
 
 ### What the charity does
 
@@ -20,7 +20,7 @@ Donors give, and give to better charities, because of The Life You Can Save. Its
 
 Only about one in two of the charities it recommends report such gifts, and fewer than 100 donors did. So we allow for gifts nobody reported: a quarter more than the reported ones (our judgment, from 0.9 to 2 times). Founders Pledge takes a quarter of the credit for the emergency-fund money it counts (our judgment, a half to none).
 
-Not all of this giving happened because of it. Many donors give through it because it passes gifts on tax-deductibly, or would have found its charities anyway. It publishes no survey of what its donors would have done. So the model takes the site's shared figure for a charity that moves money without its own survey: it caused 30% of the giving (15% to 45%). That is about $7.3 million in 2025.
+Not all of this giving happened because of it. Many donors give through it because it passes gifts on tax-deductibly, or would have found its charities anyway. It publishes no survey of what its donors would have done. So the model takes the site's shared figure for a charity that moves money without its own survey: it caused 30% of the giving (15% to 45%). With the shared credit below taken out, that is {{row:money_moved}} in 2025.
 
 A dollar moved is worth what its recipients achieve. The charity publishes its 2025 money moved by charity. Each of the 13 recipients modelled here is read live, under your values, at its figure on the rankings. Two small climate recipients without a model take Clean Air Task Force's figure, the one climate charity modelled. The others, 18 charities and the emergency fund, have no model here. Together they took more than half the money, and they are valued at the average of the modelled ones.
 
@@ -28,7 +28,7 @@ Half the giving it caused counts as new money. The other half would have gone to
 
 ### How the model works
 
-Money moved = recorded money moved (with unreported gifts allowed for, and the emergency fund's shared credit taken out) × the share it caused. Gifts through its accounts wait about two months before they reach the charities (our judgment, from a few weeks to the third of a year its year-end balance implies). That wait is discounted at the site's rate.
+Money moved = recorded money moved (with unreported gifts allowed for, and the emergency fund's shared credit taken out) × the share it caused. The {{row:givewell_shared_moved}} that went to GiveWell's Top Charities, which it recommends on GiveWell's research, was moved by both: they share the credit, {{row:givewell_credit_share}} to The Life You Can Save. Gifts through its accounts wait about two months before they reach the charities (our judgment, from a few weeks to the third of a year its year-end balance implies). That wait is discounted at the site's rate.
 
 Each dollar moved is valued at its recipients' figures, net of where shifted money would have gone. A {{row:moved_side_effects}} side effect is added (our judgment). It covers gifts inspired by its book and recommendations that nobody reports, against donor attention drawn from other good uses.
 

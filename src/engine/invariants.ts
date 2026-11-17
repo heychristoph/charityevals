@@ -1616,10 +1616,64 @@ export function inv22(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   };
 }
 
+// --- INV-23: an import that credits a won policy or commitment counts the shared years (2.9) -----------
+
+/** What marks a won policy or commitment in an evaluator's model: a chance that the campaign succeeds or
+ * that the change would have come anyway, a commitment or pledge, years brought forward or sustained. */
+const WON_REFORM = /\b(probability|chance|likelihood)\b[^.]{0,60}\b(success|succeed|pass|happens? anyway|come anyway)|\bcommitments?\b|\bpledges?\b|brought forward|counterfactually sustained|duration of impact/i;
+/** Mobilised imports whose rows read like a win but credit none for a number of years, each with its reason. */
+export const WON_REFORM_WAIVERS: Record<string, string> = {
+  "good-food-fund": "ACE counts people reached once by its kitchen, summit and youth programme; no commitment or policy is credited for a number of years",
+  "vegan-outreach-ace-2016": "one-off outreach to individuals; its years are years of suffering spared per person reached",
+  "pallium-india-hli": "its duration is the period its own palliative care service reaches patients, not a won policy",
+  "wild-animal-initiative": "ACE counts papers and grants; no commitment or policy is credited",
+  "cearch-aim": "money moved by research: its chance of success is the organisation's, valued by the shared money rows (2.8)",
+  "better-futures-guide-aim": "money moved by an evaluator: its chance of success is the organisation's, valued by the shared money rows (2.8)",
+  "dimagi-optionality-mother-baby-wellness": "the value of a pilot: its chance of success is the product's, no law, regulation or pledge is credited",
+  "evidence-action-india-water-pilot-expansion-2023": "the value of a pilot: its chance of success is the programme's, no law, regulation or pledge is credited",
+  "evidence-action-in-line-chlorination-india-2023": "technical assistance to a programme the states run: its chance is the programme's success, counted for GiveWell's programme years, not a law, regulation or pledge",
+  "evidence-action-maternal-syphilis-zambia-cameroon": "technical assistance: the chance a test is adopted in a health service, counted for GiveWell's programme years, not a law, regulation or pledge",
+  "evidence-action-syphilis-screening-treatment-in": "technical assistance: the chance a test is adopted in a health service, counted for GiveWell's programme years, not a law, regulation or pledge",
+  "innovations-for-poverty-action-ipa-m-e-msi-family-planning-outreach": "the value of an evaluation: contraception brought forward for clients, not a reform",
+};
+
+/** INV-23 (docs/normalization.md 2.9): every imported model that credits a won policy or commitment (a
+ * mobilised import with a row on the path that reads like one) reads $win_years_counted on the path to
+ * its output, the evaluator's years in `published`; its evaluator view doesn't move with the setting. */
+export function inv23(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const W = WIN_YEARS;
+  const title = "An import that credits a won policy or commitment counts the shared years";
+  const violations: Violation[] = [];
+  if (!(W in av)) return { id: "INV-23", title, status: "not checked", checked: 0, violations, how: `No $${W} in the assumptions.` };
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && m.kind !== "variant" && !isOwnBuild(m) && m.mobilised && headlineConversion(lib, m.output.unit));
+  let checked = 0;
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    const onPath = m.rows.filter((r) => path.has(r.id));
+    const reads = onPath.some((r) => r.assumptionDeps.includes(W));
+    const sign = onPath.find((r) => WON_REFORM.test(r.label));
+    if (!sign && !reads) continue;
+    checked++;
+    if (m.id in WON_REFORM_WAIVERS) {
+      if (reads) violations.push({ inv: "INV-23", model: m.id, where: "waiver", detail: `waived (${WON_REFORM_WAIVERS[m.id]}) but reads $${W}: remove the waiver` });
+      continue;
+    }
+    if (!reads) { violations.push({ inv: "INV-23", model: m.id, where: W, detail: `credits a won policy or commitment ("${sign!.label}") but no row on the path to the output reads $${W}: count the win for the shared years in our view, the evaluator's years in \`published\` (docs/normalization.md 2.9), or waive it with a reason (WON_REFORM_WAIVERS)` }); continue; }
+    if (m.evaluator) {
+      const e0 = headline(lib, m, av, {}, "evaluator"), e1 = headline(lib, m, { ...av, [W]: av[W] * 2 }, {}, "evaluator");
+      if (!(close(e0, e1, 1e-12) || (Number.isNaN(e0) && Number.isNaN(e1)))) violations.push({ inv: "INV-23", model: m.id, where: "evaluator view", detail: `the evaluator view moves with $${W}: ${fmt(e0)} at the default, ${fmt(e1)} at twice the years; the evaluator's years belong in \`published\`` });
+    }
+  }
+  return {
+    id: "INV-23", title, status: "checked", checked, violations,
+    how: `Every imported model (not variants) classed mobilised with a result in common units and a row on the path to its output whose label names a chance of success or of the change coming anyway, a commitment or pledge, years brought forward or sustained, or a duration of impact: a row on the path reads $${W}, and the evaluator view is the same at twice the years. Waived with reasons (WON_REFORM_WAIVERS): outreach, services and money moved that credit no win for a number of years. charityevals' own builds read it through their templates (src/engine/templates.ts).`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
