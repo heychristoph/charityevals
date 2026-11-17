@@ -1,6 +1,6 @@
 # Audit: govai-charityevals, round 10 (verification of round 9's findings)
 Result: 0.009032 daly/$ = 9.03 years of healthy life per $1,000. Verdict: pass.
-Model-sha: dd5d9163157521f8c91a0b9c1266fe638fa818986c431dda844fd96308ad6ae0
+Model-sha: 7c69e27f153c743cf13b12b97c4a26fb9a15dc8446dea0194a768024ee8406ab
 Scope: scoped verification of round 9's four findings and what they introduced.
 Preflight: pass (lows only: unused code_resources, out-of-date distributions line).
 Previous round: finding 1 (high, attr_policy denominator) resolved; finding 2 (medium, fb_share_working) resolved; findings 3 and 4 (low) resolved.
@@ -20,3 +20,5 @@ Verdict: pass
 
 ## Writeup edits (writeups/govai-charityevals.md)
 Code bullet: $20 million sentence replaced by the $7 million co-advocates' resources and about 3%; "about 2%" to "about 8%" (also in the uncertainties); training: 22% to 17% (twice), "85% / 12%" to "78% / 14%"; table: Code resource share "about 0.01 (its spending over everyone's)" to "about 0.03 (its spending over its co-advocates')".
+
+Re-stamped (17 Nov 2026): credit rule 2.24: fb_credit_share is the skeleton's row (unused here, or wording only): no value change. Mechanical: headline unchanged, against 814eaf77.

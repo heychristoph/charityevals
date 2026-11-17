@@ -1,6 +1,6 @@
 # Audit: cepi-charityevals, round 6 (wording-only follow-up to round 5)
 Result: 5.577e-4 daly/$ = 0.5577 years of healthy life per 1,000 dollars at mobiliser_share 100%, unchanged from round 5. Verdict: **pass** (no high, no medium; 2 low left open).
-Model-sha: 7baeb47773154efa23916346afd3cec62fead1f1b87bd1f777a037c0f62d83a5
+Model-sha: 1ad27890cefecb8e32d09d279db391d54fa3c7228417436a0b3378d17aab07ab
 Scope: confirm only wording changed since round 5 and that the fix reads correctly.
 Preflight: not re-run (no value, formula or class changed).
 Previous round (round 5, four lows):
@@ -17,3 +17,5 @@ None needed.
 
 ## Drivers
 Unchanged from round 5.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: the verification round's low findings fixed (wording, no value change). Mechanical: headline unchanged, 1 row changed, against 2b24b73c.

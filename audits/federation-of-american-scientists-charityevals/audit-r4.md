@@ -1,6 +1,6 @@
 # Audit: federation-of-american-scientists-charityevals, round 4 (scoped verification, credit rule 2.24)
 Result: 0.001468 daly/$ = 1.468 years of healthy life per 1,000 dollars (combined range 0.052–41.3; model's own ranges 0.12–8.16). Verdict: pass.
-Model-sha: 55796b83d4f5f6e52a81cb4d516baef956af331402cc80eccff141d0b9277337
+Model-sha: 6ee92927ccb8e4ff04bca3cb6c3a669c7188ab7aad15b5f230c4a4f6c3f38d57
 Scope: only gov_attribution_share_shared (0.7 (0.4-0.95) -> 0.9 (0.7-1)) and the classes on the used share rows.
 Preflight: pass (only the generated/distributions.json line, ignored as instructed).
 Previous round: round 3 had no open high or medium.
@@ -26,3 +26,5 @@ Previous round: round 3 had no open high or medium.
 Unchanged: nuclear cut per million, win_years_counted, mobiliser_share (now the second largest tornado input, as intended), missing_data_discount, discount_rate.
 
 Verdict: pass
+
+Re-stamped (17 Nov 2026): credit rule 2.24: fb_credit_share is the skeleton's row (unused here, or wording only): no value change. Mechanical: headline unchanged, 1 row changed, against 2b24b73c.
