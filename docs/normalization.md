@@ -1534,7 +1534,9 @@ by that row.
 - **Floor.** The slider runs from 5%: at 0 shares of a total become 0/0.
 - **Deferred, logged.** Delivery that also crowds in public money (GiveWell's leverage, technical assistance)
   is classed whole, as delivery or as mobilised; the blend (own share + s × the rest) comes later. Redirected
-  public money is netted for money moved (2.8), aid (2.20) and climate (2.23), not yet for other wins.
+  public money is netted for money moved (2.8), aid (2.20) and climate (2.23), not yet for other wins,
+  nor are the adopters' delivery and procurement costs behind adopted research (health systems delivering
+  a drug partnership's medicines, governments and Gavi buying vaccines).
 
 **State.** The default is 100%, which reproduces every headline (src/engine/mobiliser-share.test.ts holds
 them), while the models are wired pattern by pattern; INV-22's entries in

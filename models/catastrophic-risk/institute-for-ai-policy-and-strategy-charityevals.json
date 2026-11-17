@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "institute-for-ai-policy-and-strategy",
   "owner": "charityevals",
-  "summary": "The Institute for AI Policy and Strategy (IAPS, Washington) researches policy on advanced AI and national security (frontier security and AI-enabled cyber attacks, compute policy such as export controls, chip smuggling and location verification, US-China strategy), briefs officials in Washington and runs a three-month AI Policy Fellowship (28 fellows in 2025). This model covers all its work in 2025, when it was still a project of Rethink Priorities ($3.9M of programme spending in its sponsor's audited accounts and Form 990, about $4.2M with its share of the sponsor's central costs); it became a separate charity in 2026. At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.1 to 5 on the model's own ranges, so the result is mostly uncertainty: each dollar of its research and policy work is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), the fellows' later work at a typical dollar of such work credited by the fellowship's share of its cost, deaths valued like every death and the future lost counted through the discount rate; the research and the fellowship give about half of the result each, no measure it worked on had become law by the end of 2025, and the next dollar counts at 38.5% of the past average. A fifth of the work is aimed at misuse (its cyber work) and its US-China framing adds a race risk; the biggest swings are Rethink's typical cut per dollar for misuse work, the chance of an AI catastrophe (the slider), the years a cut counts and the next-dollar figure, and every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Institute for AI Policy and Strategy (IAPS, Washington) researches policy on advanced AI and national security (frontier security and AI-enabled cyber attacks, compute policy such as export controls, chip smuggling and location verification, US-China strategy), briefs officials in Washington and runs a three-month AI Policy Fellowship (28 fellows in 2025). This model covers all its work in 2025, when it was still a project of Rethink Priorities ($3.9M of programme spending in its sponsor's audited accounts and Form 990, about $4.2M with its share of the sponsor's central costs); it became a separate charity in 2026. At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.2 to 40 on the model's own ranges, so the result is mostly uncertainty: each dollar of its research and policy work is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), the fellows' later work at a typical dollar of such work, credited to the fellowship in full because no other programme is known to have trained the same people (the employers who pay for it are under the mobiliser's share), deaths valued like every death and the future lost counted through the discount rate; the fellowship gives most of the result, no measure it worked on had become law by the end of 2025, and the next dollar counts at 38.5% of the past average. A fifth of the work is aimed at misuse (its cyber work) and its US-China framing adds a race risk; the biggest swings are the chance of an AI catastrophe (the slider), Rethink's typical cut per dollar for misuse work, the mobiliser's share, the years a cut counts and the share of fellows who work on the risk because of the fellowship, and every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Institute for AI Policy and Strategy",
@@ -869,10 +869,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "The employers pay for the alumni's work itself, so the fellowship gets credit by share of resources: its spending over that plus the alumni's added work (fb_work_dollars), computed so it moves with its inputs. At the best guesses about $1.25M against about $6.5M (28 × 20% × five discounted years at the shared $250,000 a work-year), {{row:fb_credit_share}}.",
-      "formula": "cost_total * fb_cost_share / (cost_total * fb_cost_share + fb_work_dollars)"
+      "explainer": "1: no other programme trained the same fellows; down to 0.5 if another fellowship shares them. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1185,7 +1190,7 @@
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "Most reports are IAPS staff's own; some are co-authored with outside researchers (verification for international AI governance), and its policy influence runs with partners and other think tanks pressing the same measures. Our judgment, 75% (60% to 90%)."
+      "explainer": "Most reports are IAPS staff's own; some are co-authored with outside researchers (verification for international AI governance), and its policy influence runs with partners and other think tanks pressing the same measures. Our judgment, 75% (60% to 90%). These are co-authors' and co-advocates' resources behind the same reports and measures; what others would have done anyway is in ai_counterfactual_adj."
     },
     {
       "id": "mobiliser_share",
@@ -1281,7 +1286,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "IAPS pays the fellows' stipends, the in-person programme and their mentors; outside speakers and host organisations give some time. Our judgment, 95% (85% to 100%). The alumni's employers' share is in fb_credit_share."
+      "explainer": "IAPS pays the fellows' stipends, the in-person programme and their mentors; outside speakers and host organisations give some time. Our judgment, 95% (85% to 100%). The alumni's employers are mobilised, under the mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_attribution_share",

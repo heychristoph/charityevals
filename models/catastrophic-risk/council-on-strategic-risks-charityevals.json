@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "council-on-strategic-risks",
   "owner": "charityevals",
-  "summary": "The Council on Strategic Risks (Washington DC) works against biological weapons and pandemics, nuclear risks and the security risks of climate change: its Nolan Center on Strategic Weapons (policy, dialogues with allied governments and four fellowships), its Center for Climate and Security and a small Converging Risks Lab; this model covers all its programmes in 2025 ($5.2M spent). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on its plausible range: after each branch's adjustments, about 63% of that is the nuclear work (about a quarter of the cost) and a fifth the biological work (about a third), each dollar valued as a typical project's cut in the forecast risks of nuclear war and pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the fellowships (8% of the cost) add 17%, counted through the work their alumni add, and the climate-security work (over a third of the cost), valued as better use of the public money it bears on, almost nothing. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way), and CSR doesn't say how the Nolan Center's spending splits between biological and nuclear work. Every branch is discounted for missing data: no outcome of the work is measured.",
+  "summary": "The Council on Strategic Risks (Washington DC) works against biological weapons and pandemics, nuclear risks and the security risks of climate change: its Nolan Center on Strategic Weapons (policy, dialogues with allied governments and four fellowships), its Center for Climate and Security and a small Converging Risks Lab; this model covers all its programmes in 2025 ($5.2M spent). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on its plausible range: after each branch's adjustments, about 69% of that is the fellowships (8% of the cost), counted through the work their alumni add, about 23% the nuclear work (about a quarter of the cost) and 8% the biological work (about a third), each dollar of those two valued as a typical project's cut in the forecast risks of nuclear war and pandemics (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; the climate-security work (over a third of the cost), valued as better use of the public money it bears on, almost nothing. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way), and CSR doesn't say how the Nolan Center's spending splits between biological and nuclear work. Every branch is discounted for missing data: no outcome of the work is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Council on Strategic Risks",
@@ -919,10 +919,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "Credit by share of resources: the fellowships' cost (with overhead) over that plus what employers pay for the work-years they add (fb_work_dollars).",
-      "formula": "cost_total * fb_cost_share / (cost_total * fb_cost_share + fb_work_dollars)"
+      "explainer": "1: no other programme trained or placed the same fellows; down to 0.5 if another fellowship shares them. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_bio_share",
@@ -1431,7 +1436,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The fellows' own time and their employers' is in fb_credit_share; the share left is CSR's, 0.95 (0.7 to 1), the template's figure."
+      "explainer": "CSR's share among those who run the fellowships: 0.95 (0.7 to 1), the template's figure. The fellows' employers are mobilised, under the mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_attribution_share",
@@ -1558,11 +1563,11 @@
       "format": "percent",
       "value": {
         "low": 0,
-        "best": 0.05,
-        "high": 0.2
+        "best": 0.025,
+        "high": 0.1
       },
       "kind": "judgment",
-      "explainer": "Good beyond what is counted, each part a share of the modelled value (about 60% of it, after adjustments, the nuclear branch's): work against a single detonation or a limited nuclear war, which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0), 4% (6% of the nuclear value); chemical weapons, which the Nolan Center covers in its framing but with no programme, 0.5%; the climate-security work's benefits beyond better public spending (militaries' disaster response, which its MiRCH tracker follows, conflict and displacement that planning may avert, militaries' own emissions), 0.5%: its counted value is under 0.1% of the total, so even a hundredfold more stays small. 5% (0 to 20%) in all, our judgment.",
+      "explainer": "Good beyond what is counted, each part a share of the modelled value (about a quarter of it, after adjustments, the nuclear branch's): work against a single detonation or a limited nuclear war, which kills far fewer than 10% of people and has no shared forecast (nuclear_smaller_per_year 0), 1.4% (6% of the nuclear value); chemical weapons, which the Nolan Center covers in its framing but with no programme, 0.5%; the climate-security work's benefits beyond better public spending (militaries' disaster response, which its MiRCH tracker follows, conflict and displacement that planning may avert, militaries' own emissions), 0.5%: its counted value is under 0.1% of the total, so even a hundredfold more stays small. 2.5% (0 to 10%) in all, our judgment.",
       "side_effect": "added"
     },
     {

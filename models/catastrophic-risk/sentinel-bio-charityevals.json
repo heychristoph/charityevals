@@ -10,7 +10,7 @@
   "estimate_basis": "past_average",
   "charity": "sentinel-bio",
   "owner": "charityevals",
-  "summary": "Sentinel Bio (Washington DC, founded 2024) pools philanthropists' money and grants it for work against catastrophic pandemics, mostly on screening orders for synthetic DNA and on AI tools that can design biology; this model covers all it spent in its first tax year, May to December 2024 ($1.53M, $1.11M of it grants made in November and December), and the $1.08M it advised another donor to give the Johns Hopkins Center for Health Security. At the defaults it averts about {{result}} years of healthy life per $1,000 ({{low}} to {{high}} on its plausible range): about half from three grants valued as a typical dollar of pandemic work (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a fifth from two fellowships counted through the work they add to the field, a quarter from its grant to the Council on Strategic Risks, read at that charity's figure on this site, and a few percent from the advised gift, valued as money shifted to a better use; its own costs ({{row:own_cost_share}} of the spending) count only through the grants and advice they buy. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate, the years a cut counts and what its next dollar does (49%: its reserves were six years of 2024's spending, but its grants have since grown several times over). Every branch is discounted for missing data: no outcome of the grants or the advice on the risk is measured.",
+  "summary": "Sentinel Bio (Washington DC, founded 2024) pools philanthropists' money and grants it for work against catastrophic pandemics, mostly on screening orders for synthetic DNA and on AI tools that can design biology; this model covers all it spent in its first tax year, May to December 2024 ($1.53M, $1.11M of it grants made in November and December), and the $1.08M it advised another donor to give the Johns Hopkins Center for Health Security. At the defaults it averts about {{result}} years of healthy life per $1,000 ({{low}} to {{high}} on its plausible range): about two fifths from its grant to the Council on Strategic Risks, read at that charity's figure on this site, three tenths from three grants valued as a typical dollar of pandemic work (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a quarter from two fellowships counted through the work they add to the field, and a few percent from the advised gift, valued as money shifted to a better use; its own costs ({{row:own_cost_share}} of the spending) count only through the grants and advice they buy. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate, the years a cut counts and what its next dollar does (49%: its reserves were six years of 2024's spending, but its grants have since grown several times over). Every branch is discounted for missing data: no outcome of the grants or the advice on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Sentinel Bio",
@@ -942,10 +942,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "Credit by share of resources: the fellowships' cost over that plus what employers pay for the work-years they add (fb_work_dollars). The fellowship year's own work is part of what the fellowship cost buys, not counted again.",
-      "formula": "cost_total * fb_cost_share / (cost_total * fb_cost_share + fb_work_dollars)"
+      "explainer": "1: no other programme is named as training or placing these fellows (the grant pages name none); down to 0.5 if another fellowship shares them. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1384,7 +1389,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "A grant buys its own share of a grantee's work: the cut is per dollar, so co-funders' dollars are already left out; only partners' unpaid time (providers and experts consulted on the stress-testing study and the EU roadmap) adds resources. 0.9, our judgment, 0.7 to 1."
+      "explainer": "A grant buys its own share of a grantee's work: the cut is per dollar, so co-funders' dollars are already left out; only partners' unpaid time (providers and experts consulted on the stress-testing study and the EU roadmap) adds resources. 0.9, our judgment, 0.7 to 1. The providers that adopt the findings and the EU institutions that legislate are mobilised: the mobiliser's share covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "bio_attribution_share",
@@ -1472,7 +1477,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The fellows' and employers' own time is in fb_credit_share; the hosts (Rosetta Commons, the University) give supervision Sentinel doesn't pay for: 0.95 (0.7 to 1), the template's figure."
+      "explainer": "The fellows' employers are mobilised, under the mobiliser's share (docs/normalization.md 2.24); the hosts (Rosetta Commons, the University) give supervision Sentinel doesn't pay for: 0.95 (0.7 to 1), the template's figure."
     },
     {
       "id": "fb_attribution_share",
