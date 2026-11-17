@@ -58,23 +58,40 @@ export type Candidate = {
 };
 
 // A number as prose types it: 24, 4.4, 1,200, $3.40, 35%, 1.5×, $2.4M, −3.1.
-const NUMBER = /(?<![\w$.,/#@\-−])([−-]?\$?)(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(%|×|[MB](?![a-z]))?(?![\w%×]|[.,]\d)/g;
+const NUMBER = /(?<![\w$£€¥₹.,/#@\-−])([−-]?\$?)(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(%|×|[MB](?![a-z]))?(?![\w%×]|[.,]\d)/g;
 const YEAR = /^(1[89]|20|21)\d\d$/;
+// "340 million Americans", "2.4 billion pounds": a count in words, which no figure prints. "17-year wait": a modifier.
+const MAGNITUDE = /^\s*(?:million|billion|trillion|thousand|hundred|mn|bn)\b/i;
+const COMPOUND = /^[-‑][A-Za-z]/;
 const MONTH = /\b(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s*$/;
 // The headline's unit, right after the number.
 const YEARS_AFTER = /^(?:\s*(?:\*\*|<\/span>))*\s*(?:healthy\s+years?|years?\s+of\s+healthy\s+life|(?:healthy\s+)?life[- ]years?|DALYs?\s+averted|years?\s*(?:\(|,)?[^.;\n]{0,40}per\s+\$1,000|[^.;\n]{0,25}per\s+\$1,000)/i;
 // A source's own figure, quoted as theirs: kept typed.
-const ATTRIBUTED = /\b(?:reports?|reported|according to|cites?|cited|quotes?|quoted|surveys?|study|studies|trials?|papers?|reviews?|publish(?:es|ed)?|finds|found|their|says|said|states|stated|claims?|anchors?|model's|et al|(?:19|20)\d\d's)\b/i;
+const ATTRIBUTED = /\b(?:reports?|reported|according to|cites?|cited|quotes?|quoted|surveys?|study|studies|trials?|papers?|reviews?|publish(?:es|ed)?|finds|found|their|says|said|states|stated|claims?|anchors?|model's|et al|(?:19|20)\d\d's|sheet(?:'s)?|spreadsheet|evaluator view|GBD|census)\b/i;
 // "0.17 to 5.4", "between 17 and 31", "15%–40%": a range's end, not a value.
 const RANGE_AFTER = /^\s*(?:to|–|-|and)\s*(?:about\s+)?[−-]?\$?\d/;
 const RANGE_BEFORE = /(?:\b(?:from|between|to|and)\s+(?:about\s+)?|\d[%×]?\s*(?:–|-)\s*)$/;
 // An audit round's history ("Round 3 … now judged at about $15,000"): what was set then, kept typed.
 const HISTORY = /^Round\s+\d|\bround\s+\d+\b/i;
+// "The result moved from 0.18 to 0.20, 0.14 and then 0.12": what it was, kept typed.
+const MOVED = /\b(?:moved|went|rose|fell|changed|dropped|grew)\s+from\b/i;
+// "under 1% of the total", "more than 30%": a bound, not the value.
+const BOUND = /\b(?:under|over|above|below|more\s+than|less\s+than|fewer\s+than|at\s+least|at\s+most|up\s+to)\s+(?:about\s+)?(?:\*\*)?$/i;
+// "Ambitious Impact's 4%", "the households' own 4%": somebody's figure, stated as theirs.
+const POSSESSED = /(?:'s|’s|s['’])\s+(?:own\s+)?(?:\*\*)?$/;
+// A named party's figure in the clause before the number: "Bangladesh's households consume 70%".
+const PARTY = /\b([A-Z][\w&.-]*(?:\s+[A-Z][\w&.-]*)*)(?:'s|’s)\s+(?:[a-z-]+\s+){0,4}(?:\*\*)?$/;
+// Words after a bare number that don't name a unit.
+const FUNCTION = new Set("a an the of in on at to from for and or per with by as is are was were that which each every more less higher lower above below over under than when if so but because since while here there it its this these those not no after before into out about then both all".split(" "));
+const stems = (s: string) => new Set(s.toLowerCase().split(/[^a-z]+/).filter((w) => w.length >= 3).map((w) => w.slice(0, 5)));
 const CONDITIONAL =/\b(?:if|when|unless|otherwise|would|were)\b|^(?:off|on)\b/i;
 const STOP = new Set("with from that this than each year years dollar dollars share value total cost costs count counts people person rate number other into over after before their which about model result adjustment factor ours what where them they then also only more less much many some such per".split(" "));
 const words = (s: string) => new Set(s.toLowerCase().split(/[^a-z]+/).filter((w) => w.length >= 4 && !STOP.has(w)).map((w) => w.slice(0, 5)));
-/** Whether a sentence names what a row is (a word of its label). */
-const mentions = (sentence: string, label: string) => { const s = words(sentence); return [...words(label)].some((w) => s.has(w)); };
+/** Whether a sentence names what a row is: two words of its label (one, where the label has under three). */
+const mentions = (sentence: string, label: string) => {
+  const s = words(sentence), l = [...words(label)];
+  return l.filter((w) => s.has(w)).length >= Math.min(2, Math.max(1, l.length - 1));
+};
 const HEDGE =/\b(?:about|around|roughly|some|nearly|almost|approximately|over|under|~)\s*(?:\*\*)?\s*$/i;
 // The model's own headline sentence, just before the number: "At the defaults it averts about".
 const STALE_HEAD = /\bat\s+the\s+defaults,?\s+(?:it|this\s+model|the\s+model|the\s+work|[\w'’ -]{1,40}?)\s+(?:averts?|gives?|buys?|adds?|comes?\s+to)\s+(?:about\s+|around\s+|roughly\s+)?(?:\*\*)?\s*$/i;
@@ -90,11 +107,16 @@ function masked(text: string): boolean[] {
   cover(/\]\([^)\s]*\)/g);
   cover(/https?:\/\/[^\s)\]]+/g);
   cover(/<[^>\n]+>/g);
-  cover(/“[^”\n]*”|"[^"\n]{1,300}"/g);
+  // Quotations, however long: a source's words.
+  cover(/“[^”\n]*”|"[^"\n]{1,3000}"/g);
   cover(/^>.*$/gm);
   // References to numbered things: docs/normalization.md 2.6, §2.6, Convention 1, INV-8, Part III line 2.
   cover(/(?:\.md|§|\b(?:sections?|conventions?|decisions?|steps?|lines?|part|schedule|table|figure|pages?|pp?\.|INV-?))\s*#?\d+(?:\.\d+)*(?:\s*(?:and|to|–|-)\s*\d+(?:\.\d+)*)?/gi);
-  cover(/^#{2,3} Sources\s*$[\s\S]*?(?=^#{2,3} |(?![\s\S]))/gm);
+  // Laws and other numbered names: Measure 110, Proposition 47, Rule 1153.1, HB 1234, Phase 2, Form 990.
+  cover(/\b(?:Measure|Proposition|Prop\.?|Amendment|Act|Bill|Rule|Title|Article|Question|Initiative|Resolution|Regulation|Directive|Order|Chapter|Clause|Annex|Appendix|Form|Law|Issue|Goal|Target|Phase|Round|Tier|Class|Category|Type|Level|Stage|Group|Wave|Cohort|No\.|HB|SB|AB|HR|H\.R\.|H\.B\.|S\.B\.|EO|SDG)\s*#?\d+(?:[.,/-]\d+)*[A-Za-z]?/g);
+  // The headline's own denominator: "per $1,000", "per 1,000 dollars".
+  cover(/\bper\s+\$?1,000(?:\s+dollars)?(?![\d,])/gi);
+  cover(/^#{2,3} (?:Sources|How this model was checked)\s*$[\s\S]*?(?=^#{2,3} |(?![\s\S]))/gm);
   return mask;
 }
 
@@ -149,6 +171,10 @@ export function scanText(lib: Library, m: ResolvedModel, text: string, opts: { w
   const out: Candidate[] = [];
   const figs = figures(lib, m);
   const owner = lib.owners.get(m.owner);
+  // The parties whose figures the model's are: its charity and its owner, by name, short name or initials.
+  const mine = [lib.charities.get(m.charity)?.name, owner?.name, owner?.short].filter((n): n is string => !!n);
+  const initials = (n: string) => n.split(/[^A-Za-z]+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join("");
+  const own = (party: string) => mine.some((n) => n.includes(party) || party.includes(n) || initials(n) === party);
   const evaluatorNamed = (s: string) => !!owner && owner.kind !== "charityevals" && [owner.name, owner.short].some((n) => n && new RegExp(`\\b${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(s));
 
   // A write-up's figure spans: the headline, kept in step in the browser but typed at build time.
@@ -170,6 +196,7 @@ export function scanText(lib: Library, m: ResolvedModel, text: string, opts: { w
     const digits = x[2];
     const before = text.slice(Math.max(0, i - 30), i), after = text.slice(i + typed.length, i + typed.length + 90);
     if (!x[1] && !x[3] && YEAR.test(digits)) continue;
+    if (COMPOUND.test(after) || (!x[3] && MAGNITUDE.test(after))) continue;
     if (MONTH.test(before) || /^\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\b/.test(after)) continue;
     const sentence = sentenceAt(text, i);
     const norm = typed.replace(/^-/, "−");
@@ -185,7 +212,8 @@ export function scanText(lib: Library, m: ResolvedModel, text: string, opts: { w
       // Both views print the same: the sentence's subject decides (an evaluator named: theirs).
       const pick = heads.length > 1 ? heads.find((f) => (named ? f.placeholder === "{{result:evaluator}}" : f.placeholder === "{{result}}"))! : heads[0];
       const unsure = heads.length === 1 && pick.placeholder === "{{result}}" && named && figs.some((f) => f.placeholder === "{{result:evaluator}}");
-      add({ placeholder: pick.placeholder, what: pick.what, safe: !unsure, note: unsure ? "the sentence names the evaluator but gives our view's figure" : undefined });
+      const past = HISTORY.test(sentence) || MOVED.test(sentence);
+      add({ placeholder: pick.placeholder, what: pick.what, safe: !unsure && !past, note: past ? "what the result was, not what it is" : unsure ? "the sentence names the evaluator but gives our view's figure" : undefined });
       continue;
     }
     // The headline typed with fewer digits ("about 5" for 5.3).
@@ -220,14 +248,24 @@ export function scanText(lib: Library, m: ResolvedModel, text: string, opts: { w
     const enough = marked || (digits.includes(".") ? sigDigits(digits) >= 2 : digits.replace(/,/g, "").length >= 3);
     const distinct = new Set(rows.map((f) => f.row));
     const f = rows[0];
+    const row = m.byId.get(f.row!)!;
+    // A number before a noun counts that noun ("100 countries", "50% climate"): the row's only if its label (or id) names it.
+    const noun = /^\s+([A-Za-z][A-Za-z'’-]*)/.exec(after)?.[1].toLowerCase();
+    const otherUnit = !!noun && !FUNCTION.has(noun) && !stems(`${row.label} ${row.id.replace(/_/g, " ")}`).has(noun.slice(0, 5));
+    const clause = text.slice(Math.max(0, i - 70), i).split(/[.;:]\s/).at(-1)!;
+    const party = PARTY.exec(clause)?.[1];
     const why = distinct.size > 1 ? `ambiguous: ${[...distinct].join(", ")}`
       : f.input ? "an input: its own figure, usually the source's"
       : !enough ? "too few digits to be sure"
       : attributed || named ? "attributed to a source"
+      : POSSESSED.test(before) || (party && !own(party)) ? "somebody's figure, stated as theirs"
+      : BOUND.test(before) ? "a bound, not the value"
+      : otherUnit ? `a count of something else (${noun})`
+      : MOVED.test(sentence) ? "what it was, not what it is"
       : CONDITIONAL.test(sentence) ? "a case, not the value (if, when, would)"
       : HISTORY.test(sentence) ? "an audit round's history"
       : RANGE_AFTER.test(after) || RANGE_BEFORE.test(before) ? "one end of a range"
-      : !opts.row && !mentions(sentence, m.byId.get(f.row!)!.label) ? "the sentence doesn't name the row"
+      : !opts.row && !mentions(sentence, row.label) ? "the sentence doesn't name the row"
       : undefined;
     add({ placeholder: f.placeholder, what: f.what, safe: !why, note: why });
   }
