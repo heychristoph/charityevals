@@ -2,7 +2,7 @@
 
 Sinergia Animal campaigns for farmed animals in Latin America and Southeast Asia. ACE recommended it in 2025. ACE's cost-effectiveness analysis covers three programs, about 84% of programme spending. Most of the impact comes from cage-free egg commitments.
 
-Our model gives **{{result}} years of healthy life per $1,000** you give, converting with our default exchange rates. The range runs from about 0.02 to 23,000. Treat the headline as an order of magnitude that depends on your values, not a measurement.
+Our model gives **{{result}} years of healthy life per $1,000** you give, converting with our default exchange rates. The plausible range runs from {{low}} to {{high}}. Treat the headline as an order of magnitude that depends on your values, not a measurement.
 
 ### What the charity does
 

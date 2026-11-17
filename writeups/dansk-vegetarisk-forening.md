@@ -10,7 +10,7 @@ About 50 chefs a year are trained; each prepares thousands of plant-based meals 
 
 ### What drives the result
 
-**How much a fish can suffer relative to a chicken** (about 0.051 to 1.6 years of healthy life per $1,000 on its own) and **suffering spared per meal swapped** (0.030 to 0.51) move the result most: most of a replaced meal's suffering falls on fish. Next come the years counted (0.057 to 0.81 over the slider's 1 to 20 years) and how a Danish meal compares with the Latin American reference meal (0.44 to 1.7, our labelled judgment).
+**How much a fish can suffer relative to a chicken** (about 0.0000070 to 0.00022 years of healthy life per $1,000 on its own) and **suffering spared per meal swapped** (0.0000040 to 0.000068) move the result most: most of a replaced meal's suffering falls on fish. Next come the years counted (0.0000077 to 0.00011 over the slider's 1 to 20 years) and how a Danish meal compares with the Latin American reference meal (0.000018 to 0.000071, our labelled judgment).
 
 ### What isn't modelled
 

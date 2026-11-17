@@ -1,6 +1,6 @@
 # Verification round (scoped)
 Result: -0.000428899 years of healthy life per $1,000 (ced per donor dollar -3.899). Verdict: **pass**.
-Model-sha: 6fc8eec9dea0e9c94a870049b2591d36f03f552a7218043f3299ae800c2f48b6
+Model-sha: 97bee8689e49c3449bfe830c7662c538b0740a0a7c051a58fb2c79b10bf722a0
 Scope: only the mechanical round-5 changes (nine judgments moved into shared facts; one coalition pool with the grants' federal part in the denominator). audit-model.ts: 0 findings. check.ts: all models valid.
 
 Verdict: **pass**
@@ -26,3 +26,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 10 rows changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline -0.0004289 → -0.0001287 (+70%), 48 rows changed, against 7c76c006.

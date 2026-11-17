@@ -7,6 +7,10 @@
 // range's ends together, a calculated row, in a row's own text only that row), not a source's own figure,
 // not one end of a range or a case ("if…"), plus a write-up's figure spans and the headline typed with
 // fewer digits after "about". Inputs, ambiguous and attributed numbers are reported, never replaced.
+// Never a candidate: a law's or a rule's number ("Measure 110"), a count in words ("340 million Americans"),
+// a year, another currency, "per $1,000", a quotation, a write-up's audit history. Reported but left typed:
+// a count of something the row's label doesn't name ("100 countries"), the sheet's or another party's
+// figure ("the sheet uses 4%", "Bangladesh's households consume 70%"), a bound ("under 1%"), a past value.
 // A model's text is part of its audit fingerprint (scripts/audit-receipt.ts): --apply prints the
 // scripts/restamp.ts command for the audited models it changed (no value moves).
 import { existsSync, readFileSync, writeFileSync } from "node:fs";

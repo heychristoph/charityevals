@@ -27,7 +27,7 @@ The model has three branches, split by the Form 990's regions: Gaza and the Midd
 
 ### What drives the result
 
-The shared discount for unmeasured outcomes, then how much food in Gaza others would have brought in through the same crossings, and how little people there consumed without the meals. A day's food is a large gain to someone with almost nothing, so Gaza carries the result; the same meal in a US disaster adds almost nothing on the log scale and the rich-country branch is under {{row:lm_deaths_share_unadj}} of the total. Deaths averted are a small part even in Gaza: fewer than one person in a thousand fed.
+The shared discount for unmeasured outcomes, then how much food in Gaza others would have brought in through the same crossings, and how little people there consumed without the meals. A day's food is a large gain to someone with almost nothing, so Gaza carries the result; the same meal in a US disaster adds almost nothing on the log scale and the rich-country branch is under 1% of the total. Deaths averted are a small part even in Gaza: fewer than one person in a thousand fed.
 
 ### Biggest uncertainties
 

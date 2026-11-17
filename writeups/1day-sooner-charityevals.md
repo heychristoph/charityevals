@@ -1,6 +1,6 @@
 ### Summary
 
-1Day Sooner speaks for people who volunteer to be deliberately infected in medical studies (challenge studies), and uses that voice to push for faster vaccines and better pandemic preparedness. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. About 70% of that comes from its pandemic work, valued as a typical pandemic project's effect on the forecast risk. Its malaria vaccine campaign adds about a sixth, its hepatitis C work and its part in stopping a California bill against far-UV air cleaners the rest. Every part is uncertain, so the plausible range runs from about 0.4 to about 75.
+1Day Sooner speaks for people who volunteer to be deliberately infected in medical studies (challenge studies), and uses that voice to push for faster vaccines and better pandemic preparedness. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. About 70% of that comes from its pandemic work, valued as a typical pandemic project's effect on the forecast risk. Its malaria vaccine campaign adds about a sixth, its hepatitis C work and its part in stopping a California bill against far-UV air cleaners the rest. Every part is uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -44,11 +44,11 @@ Like theirs, most of it rests on Rethink's typical pandemic project. 1Day is sma
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 18; at 8% it is about 1.2.
-- **The years a cut counts.** At one year the result is 0.42; at twenty it is 4.5.
-- **How much a typical pandemic dollar cuts the risk.** Rethink's figures run ten times either way: the extinction figure alone moves the result from 0.99 to 7.5.
-- **How much the next dollar does.** From 24% to 99% of the past average, the result moves from 0.66 to 2.7.
-- **The malaria children added.** From 33,000 to 833,000 a year, the result moves from 1.3 to 2.6.
+- **The discount rate.** At 0.1% the result is about 19; at 8% it is about 1.3.
+- **The years a cut counts.** At one year the result is 0.48; at twenty it is 4.8.
+- **How much a typical pandemic dollar cuts the risk.** Rethink's figures run ten times either way: the extinction figure alone moves the result from 1.1 to 7.7.
+- **How much the next dollar does.** From 24% to 99% of the past average, the result moves from 0.70 to 2.9.
+- **The malaria children added.** From 33,000 to 833,000 a year, the result moves from 1.5 to 2.8.
 
 ### What isn't modelled
 

@@ -1,7 +1,7 @@
 # Audit: earthjustice-charityevals-health, round 6 (verification of the compliance-cost rule 2.21, text fixes of round 5)
 Result: 1.186e-5 uov/$ = 0.005932 years of healthy life per 1,000 dollars (unchanged from round 5). Verdict: pass.
 Verdict: pass
-Model-sha: d7bf2d08801304e35076cf64f8db3bf52db9b66cb580e7c580134db16a8e09c3
+Model-sha: cd05ec2df561b91998139cfe44c603f5c85a5734da3dd25ca721632921c9ac51
 
 Scope: scoped verification of the text fixes (`summary`, writeups/earthjustice-charityevals.md compliance line, facts/compliance_costs.json PM2.5 table label and power-plant url). No formula changed.
 
@@ -29,7 +29,7 @@ Checks:
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: d7bf2d08801304e35076cf64f8db3bf52db9b66cb580e7c580134db16a8e09c3
+Model-sha: cd05ec2df561b91998139cfe44c603f5c85a5734da3dd25ca721632921c9ac51
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1807d315.
@@ -39,3 +39,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 0.00397 → 0.001191 (−70%), 15 rows changed, against ca214e5f.

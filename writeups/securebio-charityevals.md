@@ -1,6 +1,6 @@
 ### Summary
 
-SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 190.
+SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -49,7 +49,7 @@ Pandemics that end humanity's future bring about half the pandemic work's share 
 ### Biggest uncertainties
 
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.7 to 23.6.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 5 to 30 for the pandemic figure.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 1.6 to 9.1 for the pandemic figure.
 - **How much the next dollar does.** 17% to 85% of the past average: 2.7 to 13.4.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 

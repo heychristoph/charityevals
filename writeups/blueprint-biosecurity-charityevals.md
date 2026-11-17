@@ -1,6 +1,6 @@
 ### Summary
 
-Blueprint Biosecurity works on defences that would protect people against any airborne pandemic: far-UVC light and other ways to clean indoor air, and better respirators. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of pandemic work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 115.
+Blueprint Biosecurity works on defences that would protect people against any airborne pandemic: far-UVC light and other ways to clean indoor air, and better respirators. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of pandemic work does to that risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -49,9 +49,9 @@ The result rests on Rethink's typical pandemic project, which averts many more d
 ### Biggest uncertainties
 
 - **The discount rate.** At 0.1% the result is about 25; at 8% it is about 1.4.
-- **The years a cut counts.** At one year the result is 0.39; at twenty it is 5.4.
+- **The years a cut counts.** At one year the result is 0.38; at twenty it is 5.4.
 - **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the extinction figure alone moves the result from 0.90 to 10.
-- **How much the next dollar does.** From 13.5% to 79% of the past average, the result moves from 0.66 to 3.8.
+- **How much the next dollar does.** From 13.5% to 79% of the past average, the result moves from 0.64 to 3.8.
 - **Whether far-UVC works and is safe in real buildings.** This is what Blueprint is funding studies to find out; the far-UVC uptake runs from 0.4 to 1.2.
 
 ### What isn't modelled

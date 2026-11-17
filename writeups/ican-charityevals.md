@@ -1,6 +1,6 @@
 ### Summary
 
-ICAN, the International Campaign to Abolish Nuclear Weapons, is a Geneva-based coalition of over 700 groups that campaigns for states to join the Treaty on the Prohibition of Nuclear Weapons and against nuclear deterrence. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on an estimate of what a typical dollar of nuclear work does to the risk, and on our judgment of how much a treaty that no nuclear-armed state has joined can do. All three are deeply uncertain, so the plausible range runs from about 0.22 to about 340.
+ICAN, the International Campaign to Abolish Nuclear Weapons, is a Geneva-based coalition of over 700 groups that campaigns for states to join the Treaty on the Prohibition of Nuclear Weapons and against nuclear deterrence. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on an estimate of what a typical dollar of nuclear work does to the risk, and on our judgment of how much a treaty that no nuclear-armed state has joined can do. All three are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -43,9 +43,9 @@ Deaths in a war the world survives bring almost all of the result. At the defaul
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 0.51 to 23.
-- **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 1.8 to 11.
-- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 1.2 to 6.6.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 0.50 to 24.
+- **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 1.7 to 11.
+- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 1.2 to 6.5.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 

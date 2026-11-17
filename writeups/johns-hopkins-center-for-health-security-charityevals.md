@@ -1,6 +1,6 @@
 ### Summary
 
-The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 134.
+The Johns Hopkins Center for Health Security works to prevent pandemics and other biological catastrophes and to prepare for them. It does this through policy research and advocacy, pandemic exercises, outbreak analytics for health departments and training. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -51,11 +51,11 @@ The Center's main funder halved its general support in 2023, and that grant ends
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 31.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 45.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 4 to 44.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 1.6 to 19.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.6 to 23.
 - **The Center's budget.** We built it from its grants. The result barely moves with it, because the cut is counted per dollar.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.

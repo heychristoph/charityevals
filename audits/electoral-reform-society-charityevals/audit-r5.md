@@ -20,6 +20,8 @@ Credit rule 2.24, step 5: the six win-branch shares re-judged from "share of the
 No high or medium findings.
 
 Verdict: pass
-Model-sha: 866c27fb568fa6301ef147032967d6d9c210816cfef3791f4de5831a9d61e6d4
+Model-sha: 94d528b0eb96abe06fe8c6a0ad9bbce10039737012d16f7922ed49b99345e025
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 0.07988 → 0.02396 (−70%), 29 rows changed, against bc9e3979.

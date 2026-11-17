@@ -1,7 +1,7 @@
 # Audit: union-of-concerned-scientists-charityevals-food, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 5.069e-7 uov/$ = 2.534e-4 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: f40b870e7d3528cba7d7c1789188de0f3ce35dad7a0d5ecb3728cf414c214f53
+Model-sha: 9273f82fc881928f50a87e71dadd479a1e676647307df8dd32896432a5809482
 
 Scope: scoped verification of the compliance-cost sentence on `wetland_flood_damage_study`.
 
@@ -23,7 +23,7 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: f40b870e7d3528cba7d7c1789188de0f3ce35dad7a0d5ecb3728cf414c214f53
+Model-sha: 9273f82fc881928f50a87e71dadd479a1e676647307df8dd32896432a5809482
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 
@@ -38,3 +38,5 @@ Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the pag
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 0.0004532 → 0.000136 (−70%), 6 rows changed, against 2b24b73c.
