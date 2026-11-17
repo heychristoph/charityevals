@@ -6,9 +6,9 @@ Each item is a way a model can count something twice, miss a step or mix units; 
 ## Double counting
 
 - [ ] Overhead counted twice: `program_spend` already includes allocated overhead *and* `overhead_ratio` > 1.
-- [ ] Credit shared twice: reach is already "attributable to the charity" (an evaluator's attributed
-      count) *and* `attribution_share_shared` < 1. Or reach only counts the charity's share *and* the
-      formula multiplies by full-credit totals.
+- [ ] Credit shared twice: reach attributed to the charity *and* `attribution_share_shared` < 1;
+      the charity's share of reach × full-credit totals; or the adopter (government, company) in the
+      share's denominator *and* `mobiliser_share` applied.
 - [ ] Counterfactual twice: the effect is an RCT treatment-vs-control difference (already net of
       what would have happened) *and* `counterfactual_adj` discounts for the same thing. In this
       setting `counterfactual_adj` is only for what's different from the trial (other providers here).

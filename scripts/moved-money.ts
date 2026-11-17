@@ -7,7 +7,8 @@
 //     own-split      an organisation's own published split: moved_dollar_value reads the model's
 //                    hand-written value_destinations (normalization.md 2.8, isDestinationMix)
 //     net            also the new/shifted rows (for money moved gross); omit for a result already
-//                    stated as counterfactual value in dollars of effective donations (CEARCH)
+//                    stated as counterfactual value in dollars of effective donations (CEARCH), which
+//                    multiplies by the row mobiliser_share itself (written with every scope)
 //     informed       spending research or advice changed, all shifted: prior_dollar_value,
 //                    shifted_dollar_value and informed_money_value (evidence and missing-data steps)
 //     <cause>        the model's cause, when it isn't global-health: shifted money is compared with an
@@ -48,8 +49,10 @@ const prior = cause.includes("=")
       return [k, c.includes("+") ? c.split("+") : c];
     }))
   : priorDollarValue(cause);
-const steps = { net: [prior, R.new_money_share, R.moved_dollar_net_value], informed: [prior, R.shifted_dollar_value, R.informed_money_value] };
-const rows = [...destinations, ...(step ? steps[step as keyof typeof steps] : [])].map((r) => ({
+// The mobiliser's share (docs/normalization.md 2.24) is written with every scope: the net and shifted rows
+// read it, and a result already in counterfactual dollars (no step) multiplies by it in the model's own row.
+const steps = { net: [prior, R.new_money_share, R.mobiliser_share, R.moved_dollar_net_value], informed: [prior, R.mobiliser_share, R.shifted_dollar_value, R.informed_money_value] };
+const rows = [...destinations, ...(step ? steps[step as keyof typeof steps] : [R.mobiliser_share])].map((r) => ({
   id: r.id, section: MOVED_MONEY_SECTION.id, label: r.label, format: r.format, formula: r.formula, explainer: r.explainer,
 }));
 console.log(JSON.stringify({ section: MOVED_MONEY_SECTION, rows }));

@@ -63,5 +63,6 @@ bridge applies the shared deaths per tonne, heat-death delay and value of a deat
   wide range, its anchor named, and said in the summary when it dominates.
 - **Campaigns** (a marine reserve won, a logging rule changed) are past averages:
   `estimate_basis: past_average`, add `marginal_vs_past_average` in the donor section, and count the
-  win's years with `$win_years_counted` in `years_protected` (normalization.md 2.9).
+  win's years with `$win_years_counted` in `years_protected` (normalization.md 2.9). A campaign branch
+  is `"credit": "win"` (used share × `mobiliser_share`, Convention 2); land bought or managed `"delivery"`.
 - Never a charity's or an evaluator's own value of a hectare or a species.
