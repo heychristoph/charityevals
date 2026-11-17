@@ -1267,7 +1267,7 @@
       "explainer": "Not used: the fb branch has no spending here (weight w_fb is 0); kept so every catastrophic-risk model has the same rows."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1280,7 +1280,23 @@
       "explainer": "Not used: the ai branch has no spending here (weight w_ai is 0); kept so every catastrophic-risk model has the same rows."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1293,7 +1309,15 @@
       "explainer": "Not used: the bio branch has no spending here (weight w_bio is 0); kept so every catastrophic-risk model has the same rows."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1306,7 +1330,15 @@
       "explainer": "UCS's share of the resources behind the work: its staff are in the cost, and the foundation grants that pay for some of it (13% of its donor revenue) are in its spending; co-authors, partner groups and Science Network members' unpaid advocacy add some. 0.9 (0.75 to 1), our judgment; a grant-maker's credit covers only its own dollars, so no dollar's effect counts twice."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1319,7 +1351,16 @@
       "explainer": "Not used: the pol branch has no spending here (weight w_pol is 0); kept so every catastrophic-risk model has the same rows."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1330,6 +1371,14 @@
       },
       "kind": "judgment",
       "explainer": "Not used: the fb branch has no spending here (weight w_fb is 0); kept so every catastrophic-risk model has the same rows."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "gov_evidence_adj",
@@ -1358,7 +1407,7 @@
       "explainer": "Other groups do similar work (the American Association for the Advancement of Science, the Environmental Protection Network, the Silencing Science Tracker at Columbia's Sabin Center, the scientific societies themselves): 0.6 (0.3 to 0.9), our judgment, for a crowded field."
     },
     {
-      "id": "gov_attribution_share",
+      "id": "gov_attribution_share_shared",
       "section": "adjustments",
       "label": "Science and democracy: UCS's share of the resources behind the change",
       "format": "percent",
@@ -1369,6 +1418,14 @@
       },
       "kind": "judgment",
       "explainer": "Its campaigns are coalitions: the 56 scientific societies that co-signed its letter, partner groups in its lawsuits and FOIA requests, its 22,000 Science Network members' unpaid time. UCS's share of all resources behind a change, 0.5 (0.25 to 0.8), our judgment, low since these are joint campaigns."
+    },
+    {
+      "id": "gov_attribution_share",
+      "section": "adjustments",
+      "label": "Science and democracy: share of credit used",
+      "format": "percent",
+      "formula": "gov_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

@@ -972,6 +972,14 @@
    "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
   },
   {
+   "id": "mobiliser_share",
+   "section": "moved_money",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "moved_dollar_net_value",
    "section": "moved_money",
    "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
@@ -1114,8 +1122,9 @@
    "section": "adjustments",
    "label": "Share of credit used",
    "format": "percent",
-   "formula": "attribution_share_shared",
-   "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+   "formula": "attribution_share_shared * mobiliser_share",
+   "credit": "win",
+   "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
   },
   {
    "id": "reg_implementation_adj",

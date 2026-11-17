@@ -747,12 +747,21 @@
       }
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "eumr_attribution_share",
       "section": "adjustments",
       "label": "EU Methane Regulation: share of credit used",
       "format": "percent",
-      "formula": "eumr_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the win (Convention 2); it applies whichever way credit is shared, since no evaluator's other split is used."
+      "formula": "eumr_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "eumr_implementation_adj",
@@ -795,8 +804,9 @@
       "section": "adjustments",
       "label": "EPA methane rule: share of credit used",
       "format": "percent",
-      "formula": "usmeth_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the win (Convention 2); it applies whichever way credit is shared, since no evaluator's other split is used."
+      "formula": "usmeth_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "usmeth_implementation_adj",
@@ -832,8 +842,9 @@
       "section": "adjustments",
       "label": "EPA power-plant standards: share of credit used",
       "format": "percent",
-      "formula": "pwr_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the win (Convention 2); it applies whichever way credit is shared, since no evaluator's other split is used."
+      "formula": "pwr_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pwr_implementation_adj",
@@ -874,8 +885,9 @@
       "section": "adjustments",
       "label": "Carbon-capture credit: share of credit used",
       "format": "percent",
-      "formula": "ccs_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the win (Convention 2); it applies whichever way credit is shared, since no evaluator's other split is used."
+      "formula": "ccs_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ccs_implementation_adj",
@@ -921,8 +933,8 @@
       "section": "adjustments",
       "label": "Advanced nuclear: share of credit used",
       "format": "percent",
-      "formula": "nuc_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the win (Convention 2); it applies whichever way credit is shared, since no evaluator's other split is used."
+      "formula": "nuc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "nuc_implementation_adj",
@@ -968,8 +980,8 @@
       "section": "adjustments",
       "label": "Fusion: share of credit used",
       "format": "percent",
-      "formula": "fus_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the win (Convention 2); it applies whichever way credit is shared, since no evaluator's other split is used."
+      "formula": "fus_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "fus_implementation_adj",
@@ -1055,7 +1067,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(eumr_downstream * eumr_counterfactual_adj * eumr_attribution_share + usmeth_downstream * usmeth_counterfactual_adj * usmeth_attribution_share + pwr_downstream * pwr_counterfactual_adj * pwr_attribution_share + ccs_downstream * ccs_counterfactual_adj * ccs_attribution_share + nuc_downstream * nuc_counterfactual_adj * nuc_attribution_share + fus_downstream * fus_counterfactual_adj * fus_attribution_share) / (eumr_downstream * eumr_counterfactual_adj + usmeth_downstream * usmeth_counterfactual_adj + pwr_downstream * pwr_counterfactual_adj + ccs_downstream * ccs_counterfactual_adj + nuc_downstream * nuc_counterfactual_adj + fus_downstream * fus_counterfactual_adj)",
       "explainer": "The same as the branches' average share of resources; the branches' own rows apply."
     },
     {
