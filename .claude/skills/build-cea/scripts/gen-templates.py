@@ -481,7 +481,7 @@ T["policy-research-meta"] = model("policy-research-meta", "policy, research and 
         f("downstream_value", "effect", "Expected value of the policy or research (before adjustments)", "units_affected_per_year * value_per_unit_year * p_success * discounted_years", None, "number"),
         inp("money_moved", "reach", "Money moved or raised for other charities in the year modelled (US$)", 500_000, "observed",
             "donations the charity moved or raised for other charities in the same year as the cost, gross, from its own report (0 with an explanation if it moves none). Valued only through the shared rows below: never a multiple of cash, a counterfactual share or a leverage ratio of the charity's or an evaluator's own.", "usd", source=src("charity money-moved report")),
-        f("moved_per_dollar", "reach", "Money moved per dollar of the charity's cost", "money_moved / cost_total", "Context, and the donors' share of the resources with credit by share of resources on.", "multiple"),
+        f("moved_per_dollar", "reach", "Money moved per dollar of the charity's cost", "money_moved / cost_total", "Context.", "multiple"),
     ] + MM["rows"] + [
         f("moved_value", "effect", "Value of the money moved (units of value)", "money_moved * moved_dollar_net_value", None, "number", "units of value"),
         inp("careers_changed", "careers", "Careers changed to high-impact work in the year modelled", 0, "observed",
@@ -503,7 +503,7 @@ T["policy-research-meta"] = model("policy-research-meta", "policy, research and 
           "The adjustments apply to the policy and research branch; money moved counts its counterfactual through the shared new-money share (its dollars are measured, so no missing-data step), career changes through their own share and missing-data step.", "number", "units of value"),
         f("uov_per_dollar", "outcome", "Value per dollar", "outcome_total / cost_total", "For WELLBYs, rename the uov_* rows to wellbys_* and report in wellby. For animals, rename them to sads_* and add the species section of the corporate-campaign template (output ced_per_donor_dollar). For climate, start from the climate skeleton.", "small"),
     ] + donor_rows("uov", "Units of value", "research", marginal=True)
-      + donor_tail("uov", "Units of value", marginal=True, dcs="cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"),
+      + donor_tail("uov", "Units of value", marginal=True),
     "what the charity does, the causal chain to the outcome, " + BOTTOM, "past_average", sections=POLICY_SECTIONS)
 
 CONV_SECTION = {"id": "conversion", "title": "Air pollution these tonnes carry", "kind": "ours", "explainer": "Every tonne avoids its heat deaths; a tonne from burning less fossil fuel near people also avoids air-pollution deaths. These rows say how much of the shared air-pollution rate applies to this charity's tonnes (docs/normalization.md 2.5); the rates themselves stay shared."}

@@ -1,6 +1,6 @@
 # Audit: ibbis-charityevals, round 5
 Result: 0.008900 daly/$ = 8.90 years of healthy life per 1,000 dollars (combined range 0.33–244). Verdict: pass.
-Model-sha: 2d723ab49a43dae7232d0b646ce3d9566996ffde370b3b0ef3188c0bcebba031
+Model-sha: 5fe3b48bbdced37ac3d5f20a5f1606c75d625626b7250b4373d200da8e8aa489
 Scope: re-stamp after wording fixes to `bio_attribution_share_shared`'s explainer. Headline 8.89994 equals round 4; the row's value and range are still 0.8 (0.55 to 0.95); no formula or class was touched.
 
 Previous round (round 4, all low):
@@ -11,3 +11,5 @@ Previous round (round 4, all low):
 Findings: none new.
 
 Verdict: pass (no high or medium findings).
+
+Re-stamped (17 Nov 2026): Credit step 6 loose ends: the previous round's low findings fixed in wording and sources (IBBIS's study cited, Ploughshares' fellowship wording, Habitat's funder anchor); no value changed. Mechanical: headline unchanged, against 814eaf77.

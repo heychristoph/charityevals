@@ -2355,15 +2355,15 @@
    "label": "Money moved per dollar of Better Futures Guide's cost (expected, gross)",
    "format": "multiple",
    "formula": "(npv(this_cea_examines_the_cost_effectivess_of_a_charity_evaluato, money_raised_if_succesful_usd_2023, money_raised_if_succesful_note_we_still_use_givewell_s_pre_n, money_raised_if_succesful_coville_and_vivalt_s_2017, money_raised_if_succesful, money_raised_if_succesful_2) * probability_of_success + npv(this_cea_examines_the_cost_effectivess_of_a_charity_evaluato, money_raised_if_unsuccesful_usd_2023, money_raised_if_unsuccesful_note_we_still_use_givewell_s_pre, money_raised_if_unsuccesful_coville_and_vivalt_s_2017) * (1 - probability_of_success)) / expected_56_npv_costs",
-   "explainer": "Expected money moved over expected costs, both discounted as the sheet does: what credit by share of resources counts as the donors' contribution (times the new-money share), the same formula as every meta model."
+   "explainer": "Expected money moved over expected costs, both discounted as the sheet does."
   },
   {
    "id": "donor_cost_share",
    "section": "staff_pay",
    "label": "Share of the full cost paid in cash",
    "format": "percent",
-   "formula": "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))",
-   "explainer": "The site's one formula for every meta charity (src/engine/moved-money.ts): with credit by share of resources on, the donors whose new money the organisation moves are contributors too, alongside staff's forgone pay, so the outcome is shared with them. Off, this is 100%."
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "The site's one formula for every meta charity (src/engine/moved-money.ts): with credit by share of resources on, staff's forgone pay is a contribution too, so the outcome is shared with them. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24). Off, this is 100%."
   },
   {
    "id": "uov_per_dollar",

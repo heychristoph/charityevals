@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "givewell",
   "owner": "charityevals",
-  "summary": "GiveWell researches global health and poverty programmes and directs donors' money to the most cost-effective ones; this model covers a gift for its own operations in 2024 ($20.7M, audited), not the $163M of grants it paid out, which are the funded charities' cost and counted in their own models. Its operations aren't short of money (unrestricted gifts were five times its operating costs, the excess granted out), so a further dollar for them mostly frees another donor's dollar for grants and is worth about a dollar granted; the small rest does operations work, where each dollar moved about eleven dollars it caused in 2024 (a quarter of Open Philanthropy's money, all of it shifted, and 59% of other donors' giving, by its own donor survey with non-respondents counted at half, plus $45M its research influenced), each dollar valued at the charities it went to, read live. At the defaults that comes to about {{result}} years of healthy life per $1,000, because a dollar for GiveWell ends up with GiveWell's grantees; the result moves most with the share freed for grants, the value of a life and the discount rate, and no branch is discounted for missing data, since money moved is counted.",
+  "summary": "GiveWell researches global health and poverty programmes and directs donors' money to the most cost-effective ones; this model covers a gift for its own operations in 2024 ($20.7M, audited), not the $163M of grants it paid out, which are the funded charities' cost and counted in their own models. Its operations aren't short of money (unrestricted gifts were five times its operating costs, the excess granted out), so a further dollar for them mostly frees another donor's dollar for grants and is worth about a dollar granted; the small rest does operations work, where each dollar moved about eleven dollars it caused in 2024 (a quarter of Open Philanthropy's money, all of it shifted, and 59% of other donors' giving, by its own donor survey with non-respondents counted at half, the {{row:fundraisers_shared_moved}} that fundraising organisations brought at GiveWell's share of the credit, plus $45M its research influenced), each dollar valued at the charities it went to, read live. At the defaults that comes to about {{result}} years of healthy life per $1,000, because a dollar for GiveWell ends up with GiveWell's grantees; the result moves most with the share freed for grants, the value of a life and the discount rate, and no branch is discounted for missing data, since money moved is counted.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: GiveWell",
@@ -277,6 +277,56 @@
       "explainer": "Individuals, family foundations and effective-giving groups ($307M), less what their unrestricted gifts paid for GiveWell's operations: its operating expenses (the same audited figure as the cost above, so cost and deduction are one period) less Open Philanthropy's $5M part."
     },
     {
+      "id": "effective_giving_through_givewell",
+      "section": "reach",
+      "label": "Of other donors' money: from effective giving groups, given through GiveWell (US$)",
+      "format": "usd",
+      "value": 3924509,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+        "page": "p. 8, 'Source of Funds Raised'",
+        "quote": "giving groups $3,924,509 1%",
+        "note": "Table rows 'Donations through GiveWell', 'Effective giving groups'. Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-17"
+      },
+      "explainer": "Fundraising organisations that pass their donors' gifts to GiveWell's funds."
+    },
+    {
+      "id": "effective_giving_direct",
+      "section": "reach",
+      "label": "Of other donors' money: from effective giving groups, paid straight to the charities (US$)",
+      "format": "usd",
+      "value": 28136642,
+      "kind": "observed",
+      "source": {
+        "title": "GiveWell, Metrics Report 2024 (February 2024 – January 2025)",
+        "url": "https://files.givewell.org/files/metrics/GiveWell_Metrics_Report_2024.pdf",
+        "page": "p. 8, 'Source of Funds Raised'",
+        "quote": "giving groups $28,136,642 7%",
+        "note": "Table rows 'Direct-to-Charity', 'Effective giving groups'. 'Charity aggregators who rely on our research and recommendations contributed $32 million (8%), most of which was provided directly to organizations.' The report doesn't name them. Read from the Internet Archive's copy; the site itself shows a bot check.",
+        "retrieved": "2026-11-17"
+      },
+      "explainer": "Fundraising organisations that send their donors' gifts to the charities GiveWell recommends."
+    },
+    {
+      "id": "fundraisers_shared_moved",
+      "section": "reach",
+      "label": "Of other donors' money: money that fundraising organisations brought (US$)",
+      "format": "usd",
+      "formula": "effective_giving_through_givewell + effective_giving_direct",
+      "explainer": "A fundraising organisation brought these donors and GiveWell's research decided where their gifts went: both moved these dollars. A floor: their donors who give at GiveWell's own site are counted among individual donors."
+    },
+    {
+      "id": "fundraisers_credit_share",
+      "section": "reach",
+      "label": "GiveWell's share of the credit for the money fundraising organisations brought",
+      "format": "percent",
+      "formula": "1 - @meta.shared_credit_donor_side",
+      "explainer": "The site's one split for a dollar two organisations both moved (docs/normalization.md 2.24, overlap): the organisation that brought the donor takes its part, GiveWell the rest, {{row:fundraisers_credit_share}}."
+    },
+    {
       "id": "influenced_funding",
       "section": "reach",
       "label": "Other funding GiveWell's research influenced in 2024 (US$)",
@@ -383,8 +433,8 @@
       "section": "reach",
       "label": "Other donors' money and influenced funding GiveWell moved, the part GiveWell caused (US$)",
       "format": "usd",
-      "formula": "donors_moved_gross * donor_own_effect + influenced_funding * survey_response_adj",
-      "explainer": "Other donors' giving through GiveWell at the share it caused; the influenced funding is giving its funders already said was due to GiveWell's research, so only the survey-response step applies (funders who said so are the ones who answered)."
+      "formula": "(donors_moved_gross - fundraisers_shared_moved * (1 - fundraisers_credit_share)) * donor_own_effect + influenced_funding * survey_response_adj",
+      "explainer": "Other donors' giving through GiveWell, less the part of the fundraising organisations' money credited to them, at the share it caused; the influenced funding is giving its funders already said was due to GiveWell's research, so only the survey-response step applies (funders who said so are the ones who answered)."
     },
     {
       "id": "money_moved",
@@ -400,7 +450,7 @@
       "label": "Money moved per dollar of the charity's cost",
       "format": "multiple",
       "formula": "money_moved / cost_total",
-      "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+      "explainer": "Context."
     },
     {
       "id": "value_per_unit_year",
@@ -794,8 +844,8 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + donors_moved * new_money_share, 0))",
-      "explainer": "With credit by share of resources on, GiveWell's cost shares the outcome with its staff's forgone pay and the new money other donors gave through it; Open Philanthropy's money is all shifted, as it is valued, so it adds none."
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources on, GiveWell's cost shares the outcome with its staff's forgone pay. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24)."
     },
     {
       "id": "next_dollar_freed_for_grants",

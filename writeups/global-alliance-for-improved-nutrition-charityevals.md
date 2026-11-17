@@ -4,12 +4,12 @@ The Global Alliance for Improved Nutrition (GAIN), a Geneva foundation, works wi
 
 ### What the charity does
 
-GAIN's audited accounts give 65.6 million dollars of spending, 61.6 million of it on programmes, but no split by programme. From its donors and annual report, its work falls into four parts (shares of spending are our judgments):
+GAIN's audited accounts give 65.6 million dollars of spending, 61.6 million of it on programmes, with no split by programme; its website gives one for 2023/24, from which we take the four parts' shares, spreading cross-cutting and structural costs in proportion:
 
-- **Food fortification** (about a quarter): technical help to governments and millers to add iodine to salt, iron, folic acid and vitamins to flour, oil and rice, a revolving fund that supplies the vitamin and mineral mix (the Premix Facility), biofortified crops, and multiple-micronutrient tablets for pregnant women in Bangladesh. GAIN counts 1.55 billion people reached in the year, by methods an audit reviewed.
-- **Nutritious food markets and businesses** (about 45%, mostly the Netherlands' programme): value chains for vegetables, eggs, fish and dairy in Kenya, Uganda, Benin, Mozambique, Ethiopia and Nigeria, trained vendors, rebuilt markets and a lending fund for small food firms; at least 9 million consumers targeted, 3 million reached by the funded firms.
-- **Workforce nutrition** (about 3%): 572,237 workers in about 100 workplaces whose employers adopted nutrition programmes.
-- **Policy, food-systems planning and evidence** (about a quarter): planning tools and support for national food-systems plans approved in five African countries, global advocacy, 36 evaluations and 43 papers.
+- **Food fortification** (about {{row:ff_share}}): technical help to governments and millers to add iodine to salt, iron, folic acid and vitamins to flour, oil and rice, a revolving fund that supplies the vitamin and mineral mix (the Premix Facility), biofortified crops, and multiple-micronutrient tablets for pregnant women in Bangladesh. GAIN counts 1.55 billion people reached in the year, by methods an audit reviewed.
+- **Nutritious food markets and businesses** (about {{row:vc_share}}): value chains for vegetables, eggs, fish and dairy in Kenya, Uganda, Benin, Mozambique, Ethiopia and Nigeria, trained vendors, rebuilt markets and a lending fund for small food firms; at least 9 million consumers targeted, 3 million reached by the funded firms.
+- **Workforce nutrition** (about {{row:wf_share}}): 572,237 workers in about 100 workplaces whose employers adopted nutrition programmes.
+- **Policy, food-systems planning and evidence** (about {{row:pol_share}}): planning tools and support for national food-systems plans approved in five African countries, global advocacy, 36 evaluations and 43 papers.
 
 ### How the impact happens
 

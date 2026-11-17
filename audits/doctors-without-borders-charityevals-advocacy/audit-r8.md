@@ -1,6 +1,6 @@
 # Audit: doctors-without-borders-charityevals-advocacy, round 8 (scoped verification of round 7's findings)
 Result: 1.322e-4 uov/$ = 0.0661 years of healthy life per 1,000 dollars (combined range 0.0046-0.95). Verdict: pass.
-Model-sha: b3cd4645375574d5f3d7d7e3e9f592e96c9ac3212939b60a4404c800a23a4116
+Model-sha: 6d719ade6e160d0f66a46ec57fb5a885fc06b3f516f49e6240f82703597d7ef7
 Verdict: pass
 Scope: only round 7's findings and the changes made for them.
 Preflight: pass (only the out-of-date distributions line, ignored).
@@ -20,3 +20,5 @@ None new.
 
 ## Drivers
 Unchanged: `mobiliser_share`, `missing_data_discount`, `win_years_counted`, `acc_attribution_share_shared`, `@next_dollar.doctors_without_borders`.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

@@ -71,7 +71,7 @@
   {
    "id": "costs_ours",
    "title": "Costs the sheet leaves out",
-   "explainer": "charityevals' step: Evidence Action's central costs, and with credit by share of resources on, its staff's pay below market and the states' cost of the extra tablets.",
+   "explainer": "charityevals' step: Evidence Action's central costs, and with credit by share of resources on, its staff's pay below market.",
    "kind": "ours"
   },
   {
@@ -546,20 +546,6 @@
    "explainer": "The programme cost is what was billed to it; Evidence Action's headquarters, management and fundraising come on top. Our judgment, 10% (0 to 20%)."
   },
   {
-   "id": "others_cost_per_child",
-   "section": "costs_ours",
-   "label": "States' cost per extra child given tablets for a year",
-   "format": "usd",
-   "unit": "$ per child",
-   "value": {
-    "low": 0.05,
-    "best": 0.2,
-    "high": 0.5
-   },
-   "kind": "judgment",
-   "explainer": "The states buy and distribute the tablets; the sheet takes their extra cost as zero because their budgets didn't rise against 2020-21. With credit by share of resources on, their money spent on the extra children shares the outcome. Our judgment of the tablets and teachers' time per child-year."
-  },
-  {
    "id": "staff_cost_share",
    "section": "costs_ours",
    "label": "Staff pay as a share of programme cost",
@@ -588,8 +574,8 @@
    "section": "costs_ours",
    "label": "Full cost per dollar of the sheet's costs",
    "format": "multiple",
-   "formula": "(cost * (1 + central_cost_share) * (1 + if($resource_shares, salary_sacrifice, 0)) + if($resource_shares, others_cost_per_child * marginal_reached, 0)) / cost",
-   "explainer": "Central costs always; with credit by share of resources on, staff's forgone pay and the states' money as well."
+   "formula": "(1 + central_cost_share) * (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "Central costs always; with credit by share of resources on, staff's forgone pay as well. The states that buy and give out the tablets do so because of Evidence Action's support: their part is under the charity's share of the good (mobiliser_share), not a co-funder's share here."
   },
   {
    "id": "mobiliser_share",

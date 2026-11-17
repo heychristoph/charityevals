@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "one-for-the-world",
  "owner": "charityevals",
- "summary": "One for the World asks students and young professionals in the US, UK, Canada and Australia to give 1% of their income to charities GiveWell recommends, through chapters at universities and graduate schools and talks at companies; this model covers its year to June 2024 ($758K of its own costs across its US company and UK charity; donors' money passed on is left out). At the defaults it averts about {{result}} years of healthy life per $1,000: its 166 new pledges and the year's new corporate donors' discounted lifetime giving (at the yearly gift of its active pledgers, on the shared pledge curve lowered for its faster attrition) and the year's one-off gifts, of which it caused about half (its own strict count: 44%), come to about $720K, each dollar valued at its donors' charities (84% to GiveWell's recommended charities), half counted as new money, the next dollar at {{row:marginal_vs_past_average}} of the past average. The money it moves goes almost all to top global-health charities, and it causes about one dollar of discounted giving per dollar it spends. The result moves most with the discount rate, its next-dollar figure, its own count of what it caused and the value of a child's life; no branch is discounted for missing data, since money moved is counted.",
+ "summary": "One for the World asks students and young professionals in the US, UK, Canada and Australia to give 1% of their income to charities GiveWell recommends, through chapters at universities and graduate schools and talks at companies; this model covers its year to June 2024 ($758K of its own costs across its US company and UK charity; donors' money passed on is left out). At the defaults it averts about {{result}} years of healthy life per $1,000: its 166 new pledges and the year's new corporate donors' discounted lifetime giving (at the yearly gift of its active pledgers, on the shared pledge curve lowered for its faster attrition) and the year's one-off gifts, of which it caused about half (its own strict count: 44%), come to {{row:caused_donations}}, of which {{row:money_moved}} is credited to it once the credit for the money to GiveWell's recommended charities (84%) is shared with GiveWell, whose research directed it, each dollar valued at its donors' charities, half counted as new money, the next dollar at {{row:marginal_vs_past_average}} of the past average. The money it moves goes almost all to top global-health charities, and it causes about one dollar of discounted giving per dollar it spends. The result moves most with the discount rate, its next-dollar figure, its own count of what it caused and the value of a child's life; no branch is discounted for missing data, since money moved is counted.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: One for the World",
@@ -614,12 +614,36 @@
    "explainer": "One-off gifts are a flow already: the year's, against the year's cost."
   },
   {
-   "id": "money_moved",
+   "id": "caused_donations",
    "section": "reach",
-   "label": "Money moved that it caused (US$)",
+   "label": "Donations that it caused (US$)",
    "format": "usd",
    "formula": "pledge_moved + corporate_pledge_moved + oneoff_moved",
-   "explainer": "This year's university and corporate recruits' discounted lifetime giving and the year's one-off gifts, net of what donors would have given to GiveWell's charities anyway: about $720K. Where it went is in value_destinations; half of it counts as new money, the rest only for the gain over where it would have gone (the shared rows)."
+   "explainer": "This year's university and corporate recruits' discounted lifetime giving and the year's one-off gifts, net of what donors would have given to GiveWell's charities anyway: {{row:caused_donations}}. Where it went is in value_destinations; half of it counts as new money, the rest only for the gain over where it would have gone (the shared rows)."
+  },
+  {
+   "id": "givewell_shared_moved",
+   "section": "reach",
+   "label": "Of the donations it caused: money that GiveWell's research also directed (US$)",
+   "format": "usd",
+   "formula": "caused_donations * @meta.oftw_givewell_share_ay24",
+   "explainer": "The share of its money moved that went to charities GiveWell recommends, much of it granted to GiveWell itself. One for the World brought the donor and GiveWell's research decided where the gift went: both moved these dollars, and GiveWell counts them too (its 2024 metrics report: $32 million from charity aggregators that rely on its research)."
+  },
+  {
+   "id": "givewell_credit_share",
+   "section": "reach",
+   "label": "Its share of the credit for the money GiveWell also directed",
+   "format": "percent",
+   "formula": "@meta.shared_credit_donor_side",
+   "explainer": "The site's one split for a dollar two organisations both moved (docs/normalization.md 2.24, overlap): {{row:givewell_credit_share}} to the one that brought the donor, the rest to GiveWell."
+  },
+  {
+   "id": "money_moved",
+   "section": "reach",
+   "label": "Money moved credited to it (US$)",
+   "format": "usd",
+   "formula": "caused_donations - givewell_shared_moved * (1 - givewell_credit_share)",
+   "explainer": "The donations it caused, less the part of the shared money credited to GiveWell."
   },
   {
    "id": "moved_per_dollar",
@@ -627,7 +651,7 @@
    "label": "Money moved it caused per dollar of its own costs",
    "format": "number",
    "formula": "money_moved / cost_total",
-   "explainer": "Context: about one dollar of caused, discounted giving per dollar it spends; its gross yearly ratio of money moved to own costs is about 2."
+   "explainer": "Context: {{row:moved_per_dollar}} dollars of discounted giving credited to it per dollar it spends; its gross yearly ratio of money moved to own costs is about 2."
   },
   {
    "id": "grant_wait_years",
@@ -703,8 +727,8 @@
    "section": "moved_money",
    "label": "Value of a dollar to the charities One for the World's donors gave to (its 2023-2024 split, live), units of value",
    "format": "small",
-   "formula": "@meta.oftw_givewell_share_ay24 * ((@meta.oftw_granted_fy24_givewell + @meta.oftw_granted_fy24_every_org) * value_global_health + @meta.oftw_granted_fy24_against_malaria_foundation * #givewell:against-malaria-foundation) / (@meta.oftw_granted_fy24_givewell + @meta.oftw_granted_fy24_every_org + @meta.oftw_granted_fy24_against_malaria_foundation) + (1 - @meta.oftw_givewell_share_ay24) * @meta.prior_vs_cash * #givedirectly",
-   "explainer": "Where its donors' money went in 2023-2024, each recipient at its figure on the rankings under your values, by the site's rule for a split (normalization.md 2.8). 84% went to charities GiveWell recommends (its 'effective money moved', $1.30M of $1.55M); split as the donations through its own books were (Form 990 Schedule I): $495,387 to GiveWell for its recommended charities and $10,217 through Every.org to them, both at GiveWell's Top Charities (value_global_health), and $162,953 to Against Malaria Foundation at its figure. Gifts made off its books follow the same portfolio (Malaria Consortium, Against Malaria Foundation, Helen Keller Intl, New Incentives and GiveWell's All Grants Fund), so they take the same split. The other 16% went to charities outside GiveWell's list, such as GiveDirectly (Impact Report p. 19), below its own bar: valued as an ordinary charity (the shared prior multiple of GiveDirectly's live result)."
+   "formula": "(@meta.oftw_givewell_share_ay24 * @meta.shared_credit_donor_side * ((@meta.oftw_granted_fy24_givewell + @meta.oftw_granted_fy24_every_org) * value_global_health + @meta.oftw_granted_fy24_against_malaria_foundation * #givewell:against-malaria-foundation) / (@meta.oftw_granted_fy24_givewell + @meta.oftw_granted_fy24_every_org + @meta.oftw_granted_fy24_against_malaria_foundation) + (1 - @meta.oftw_givewell_share_ay24) * @meta.prior_vs_cash * #givedirectly) / (@meta.oftw_givewell_share_ay24 * @meta.shared_credit_donor_side + 1 - @meta.oftw_givewell_share_ay24)",
+   "explainer": "Where its donors' money went in 2023-2024, each recipient at its figure on the rankings under your values, by the site's rule for a split (normalization.md 2.8). 84% went to charities GiveWell recommends (its 'effective money moved', $1.30M of $1.55M); split as the donations through its own books were (Form 990 Schedule I): $495,387 to GiveWell for its recommended charities and $10,217 through Every.org to them, both at GiveWell's Top Charities (value_global_health), and $162,953 to Against Malaria Foundation at its figure. Gifts made off its books follow the same portfolio (Malaria Consortium, Against Malaria Foundation, Helen Keller Intl, New Incentives and GiveWell's All Grants Fund), so they take the same split. The other 16% went to charities outside GiveWell's list, such as GiveDirectly (Impact Report p. 19), below its own bar: valued as an ordinary charity (the shared prior multiple of GiveDirectly's live result). The money credited to it holds fewer GiveWell-directed dollars than its donors gave (the rest of their credit is GiveWell's), so that part of the giving is taken out of the mix at one minus the shared split."
   },
   {
    "id": "value_per_unit_year",
@@ -1034,8 +1058,8 @@
    "section": "donor",
    "label": "Share of the full cost paid by cash donations",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + us_inkind + volunteer_value + money_moved * new_money_share, 0))",
-   "explainer": "With credit by share of resources: staff's forgone pay, the donated legal work, its chapter leaders' unpaid time and the new money its donors gave share the outcome with your dollar."
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + us_inkind + volunteer_value, 0))",
+   "explainer": "With credit by share of resources: staff's forgone pay, the donated legal work and its chapter leaders' unpaid time share the outcome with your dollar. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24)."
   },
   {
    "id": "uov_per_donor_dollar",

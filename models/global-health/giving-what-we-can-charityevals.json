@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "giving-what-we-can",
   "owner": "charityevals",
-  "summary": "Giving What We Can promotes effective giving through the 10% Pledge, research on where to give and a donation platform; this model covers all its spending in 2023 and 2024 ($3.9M in 2024 prices, run by Effective Ventures until August 2024 and by its own UK and US charities after). At the defaults it averts about 56 years of healthy life per $1,000: its 1,347 new 10% Pledges, 1,259 Trial Pledges and other donors' platform giving add up to about $34M it caused (by its donor surveys a third of pledgers' giving and 28% of others' would not have happened without it), each dollar valued at the charities its donors actually gave to, each at its figure on the rankings (mostly GiveWell's top charities), half of it counted as new money, the next dollar at 42% of the past average. It moves about nine dollars, most of it to top global-health charities, for each dollar it spends. The result moves most with the discount rate (pledgers give for 35 years), its next-dollar figure, the value of a life and where shifted money would otherwise have gone; no branch is discounted for missing data, since money moved is counted.",
+  "summary": "Giving What We Can promotes effective giving through the 10% Pledge, research on where to give and a donation platform; this model covers all its spending in 2023 and 2024 ($3.9M in 2024 prices, run by Effective Ventures until August 2024 and by its own UK and US charities after). At the defaults it averts about {{result}} years of healthy life per $1,000: its 1,347 new 10% Pledges, 1,259 Trial Pledges and other donors' platform giving add up to {{row:caused_donations}} it caused (by its donor surveys a third of pledgers' giving and 28% of others' would not have happened without it), of which {{row:money_moved}} is credited to it once the credit for money GiveWell's research also directed ({{row:givewell_shared_share}} of the giving) and for pledgers' gifts through Effektiv Spenden is shared, each dollar valued at the charities its donors actually gave to, each at its figure on the rankings (mostly GiveWell's top charities), half of it counted as new money, the next dollar at 42% of the past average. The money moved credited to it is {{row:moved_per_dollar}} its spending, most of it to top global-health charities. The result moves most with the discount rate (pledgers give for 35 years), its next-dollar figure, the value of a life and where shifted money would otherwise have gone; no branch is discounted for missing data, since money moved is counted.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Giving What We Can",
@@ -396,12 +396,60 @@
       "formula": "other_donations * other_recording_adj * other_own_effect"
     },
     {
-      "id": "money_moved",
+      "id": "caused_donations",
       "section": "reach",
-      "label": "Money moved for other charities, 2023 and 2024, caused by Giving What We Can (US$)",
+      "label": "Donations to other charities, 2023 and 2024, caused by Giving What We Can (US$)",
       "format": "usd",
       "explainer": "Pledges (their discounted lifetime giving), Trial Pledges and other platform giving, each net of what donors would have given to effective charities anyway. All recipients: the share that reached charities it rates high-impact is in value_destinations.",
       "formula": "pledge_moved + trial_moved + other_moved"
+    },
+    {
+      "id": "givewell_shared_share",
+      "section": "reach",
+      "label": "Share of its donors' giving that went to GiveWell's funds, funds that follow GiveWell, and GiveWell's Top Charities",
+      "format": "percent",
+      "formula": "(@meta.gwwc_moved_2023_24_global_health_funds + @meta.gwwc_moved_2023_24_against_malaria_foundation + @meta.gwwc_moved_2023_24_malaria_consortium_smc + @meta.gwwc_moved_2023_24_malaria_consortium + @meta.gwwc_moved_2023_24_helen_keller_intl + @meta.gwwc_moved_2023_24_new_incentives) / (@meta.gwwc_donations_2023_24_pledge + @meta.gwwc_donations_2023_24_other)",
+      "explainer": "From its donation classification sheet: the named recipients among the top 100 of pledgers' giving and the top 30 of other platform giving, over all the donations classified. Smaller recipients aren't named, which understates it; the funds that follow GiveWell without being its own (EA Funds' Global Health and Development Fund, Giving What We Can's Global Health and Wellbeing Fund) are counted whole, an upper reading for them. GiveWell counts this money too: gifts to its funds, grants it recommends to other funds, and gifts to its Top Charities on its recommendation (its 2024 metrics report)."
+    },
+    {
+      "id": "givewell_shared_moved",
+      "section": "reach",
+      "label": "Of the donations it caused: money that GiveWell's research also directed (US$)",
+      "format": "usd",
+      "formula": "caused_donations * givewell_shared_share",
+      "explainer": "Giving What We Can brought the donor and GiveWell's research decided where the gift went: both moved these dollars."
+    },
+    {
+      "id": "givewell_credit_share",
+      "section": "reach",
+      "label": "Its share of the credit for the money GiveWell also directed",
+      "format": "percent",
+      "formula": "@meta.shared_credit_donor_side",
+      "explainer": "The site's one split for a dollar two organisations both moved (docs/normalization.md 2.24, overlap): {{row:givewell_credit_share}} to the one that brought the donor, the rest to GiveWell."
+    },
+    {
+      "id": "effektiv_spenden_shared_moved",
+      "section": "reach",
+      "label": "Of the pledge donations it caused: money given through Effektiv Spenden (US$)",
+      "format": "usd",
+      "formula": "(pledge_moved + trial_moved) * @meta.gwwc_moved_2023_24_via_effektiv_spenden / @meta.gwwc_donations_2023_24_pledge * (1 - givewell_shared_share)",
+      "explainer": "Its pledgers in Germany and Switzerland record gifts made through Effektiv Spenden's platform and funds; Effektiv Spenden counts the same gifts as donations through its platform. The share is of pledgers' recorded giving in 2023–2024 (its classification sheet, top 100 recipients), less the part already shared with GiveWell."
+    },
+    {
+      "id": "effektiv_spenden_credit_share",
+      "section": "reach",
+      "label": "Its share of the credit for pledgers' money given through Effektiv Spenden",
+      "format": "percent",
+      "formula": "@meta.shared_credit_donor_side",
+      "explainer": "The same split: Giving What We Can holds the pledge, Effektiv Spenden's platform and funds carry the gift and take the rest."
+    },
+    {
+      "id": "money_moved",
+      "section": "reach",
+      "label": "Money moved for other charities, 2023 and 2024, credited to Giving What We Can (US$)",
+      "format": "usd",
+      "explainer": "The donations it caused, less the part of the shared money credited to GiveWell and to Effektiv Spenden.",
+      "formula": "caused_donations - givewell_shared_moved * (1 - givewell_credit_share) - effektiv_spenden_shared_moved * (1 - effektiv_spenden_credit_share)"
     },
     {
       "id": "moved_per_dollar",
@@ -409,7 +457,7 @@
       "label": "Money moved per dollar of the charity's cost",
       "format": "multiple",
       "formula": "money_moved / cost_total",
-      "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+      "explainer": "Context."
     },
     {
       "id": "value_per_unit_year",
@@ -496,8 +544,8 @@
       "section": "moved_money",
       "label": "Value of a dollar to the charities Giving What We Can's donors gave to (its 2023–2024 split, live), units of value",
       "format": "small",
-      "formula": "@meta.gwwc_effective_share_2023_24 * (@meta.gwwc_high_impact_2023_24_ghw * (@meta.gwwc_moved_2023_24_global_health_funds * value_global_health + @meta.gwwc_moved_2023_24_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.gwwc_moved_2023_24_givedirectly * #givewell:givedirectly + @meta.gwwc_moved_2023_24_malaria_consortium_smc * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_malaria_consortium * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_helen_keller_intl * #givewell:helen-keller-intl + @meta.gwwc_moved_2023_24_new_incentives * #givewell:new-incentives + @meta.gwwc_moved_2023_24_deworm_the_world * #givewell:evidence-action + @meta.gwwc_moved_2023_24_unlimit_health * #sogive:unlimit-health + @meta.gwwc_moved_2023_24_strongminds * #hli:strongminds) / (@meta.gwwc_moved_2023_24_global_health_funds + @meta.gwwc_moved_2023_24_against_malaria_foundation + @meta.gwwc_moved_2023_24_givedirectly + @meta.gwwc_moved_2023_24_malaria_consortium_smc + @meta.gwwc_moved_2023_24_malaria_consortium + @meta.gwwc_moved_2023_24_helen_keller_intl + @meta.gwwc_moved_2023_24_new_incentives + @meta.gwwc_moved_2023_24_deworm_the_world + @meta.gwwc_moved_2023_24_unlimit_health + @meta.gwwc_moved_2023_24_strongminds) + @meta.gwwc_high_impact_2023_24_animals * #ace:the-humane-league + @meta.gwwc_high_impact_2023_24_gcr * #cause:catastrophic-risk) / (@meta.gwwc_high_impact_2023_24_ghw + @meta.gwwc_high_impact_2023_24_animals + @meta.gwwc_high_impact_2023_24_gcr) + (1 - @meta.gwwc_effective_share_2023_24) * @meta.prior_vs_cash * #givedirectly",
-      "explainer": "Where its donors' money went in 2023–2024 (its donation classification sheet), each recipient at its figure on the rankings under your values (the charity's, its programmes and locations weighted by funding), by the site's rule for a split (normalization.md 2.8). Of the giving, 82% (55–90%) went to recipients it rates high-impact; the rest, to charities it couldn't place, is valued as an ordinary charity (the shared prior multiple of GiveDirectly). The high-impact part by cause, its weights: global health and wellbeing ($40.2M): GiveWell-following funds at GiveWell's Top Charities (value_global_health), and the named charities with a model here (Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives, Deworm the World at Evidence Action's figure, Unlimit Health, StrongMinds), weighted by their money; the smaller recipients take that average; animal welfare ($9.8M): The Humane League (ACE's figure, the one the rankings show), the only animal recipient it names that the site models (the Animal Welfare Fund, ACE's and its own animal funds take its figure); catastrophic risk ($11.5M): none of its recipients (Long-Term Future Fund, Longview, its Risks and Resilience Fund) has a model, so the catastrophic-risk charities on the rankings, equal weights (#cause:catastrophic-risk). Climate change ($6.3M: no published model of the climate work its donors fund) and movement building ($10.9M: other meta charities) take the average of the rest."
+      "formula": "(@meta.gwwc_effective_share_2023_24 * (@meta.gwwc_high_impact_2023_24_ghw * (@meta.gwwc_moved_2023_24_global_health_funds * value_global_health + @meta.gwwc_moved_2023_24_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.gwwc_moved_2023_24_givedirectly * #givewell:givedirectly + @meta.gwwc_moved_2023_24_malaria_consortium_smc * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_malaria_consortium * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_helen_keller_intl * #givewell:helen-keller-intl + @meta.gwwc_moved_2023_24_new_incentives * #givewell:new-incentives + @meta.gwwc_moved_2023_24_deworm_the_world * #givewell:evidence-action + @meta.gwwc_moved_2023_24_unlimit_health * #sogive:unlimit-health + @meta.gwwc_moved_2023_24_strongminds * #hli:strongminds) / (@meta.gwwc_moved_2023_24_global_health_funds + @meta.gwwc_moved_2023_24_against_malaria_foundation + @meta.gwwc_moved_2023_24_givedirectly + @meta.gwwc_moved_2023_24_malaria_consortium_smc + @meta.gwwc_moved_2023_24_malaria_consortium + @meta.gwwc_moved_2023_24_helen_keller_intl + @meta.gwwc_moved_2023_24_new_incentives + @meta.gwwc_moved_2023_24_deworm_the_world + @meta.gwwc_moved_2023_24_unlimit_health + @meta.gwwc_moved_2023_24_strongminds) + @meta.gwwc_high_impact_2023_24_animals * #ace:the-humane-league + @meta.gwwc_high_impact_2023_24_gcr * #cause:catastrophic-risk) / (@meta.gwwc_high_impact_2023_24_ghw + @meta.gwwc_high_impact_2023_24_animals + @meta.gwwc_high_impact_2023_24_gcr) + (1 - @meta.gwwc_effective_share_2023_24) * @meta.prior_vs_cash * #givedirectly - (1 - @meta.shared_credit_donor_side) * (@meta.gwwc_moved_2023_24_global_health_funds * value_global_health + @meta.gwwc_moved_2023_24_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.gwwc_moved_2023_24_malaria_consortium_smc * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_malaria_consortium * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_helen_keller_intl * #givewell:helen-keller-intl + @meta.gwwc_moved_2023_24_new_incentives * #givewell:new-incentives) / (@meta.gwwc_donations_2023_24_pledge + @meta.gwwc_donations_2023_24_other)) / (1 - (1 - @meta.shared_credit_donor_side) * (@meta.gwwc_moved_2023_24_global_health_funds + @meta.gwwc_moved_2023_24_against_malaria_foundation + @meta.gwwc_moved_2023_24_malaria_consortium_smc + @meta.gwwc_moved_2023_24_malaria_consortium + @meta.gwwc_moved_2023_24_helen_keller_intl + @meta.gwwc_moved_2023_24_new_incentives) / (@meta.gwwc_donations_2023_24_pledge + @meta.gwwc_donations_2023_24_other))",
+      "explainer": "Where its donors' money went in 2023–2024 (its donation classification sheet), each recipient at its figure on the rankings under your values (the charity's, its programmes and locations weighted by funding), by the site's rule for a split (normalization.md 2.8). Of the giving, 82% (55–90%) went to recipients it rates high-impact; the rest, to charities it couldn't place, is valued as an ordinary charity (the shared prior multiple of GiveDirectly). The high-impact part by cause, its weights: global health and wellbeing ($40.2M): GiveWell-following funds at GiveWell's Top Charities (value_global_health), and the named charities with a model here (Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives, Deworm the World at Evidence Action's figure, Unlimit Health, StrongMinds), weighted by their money; the smaller recipients take that average; animal welfare ($9.8M): The Humane League (ACE's figure, the one the rankings show), the only animal recipient it names that the site models (the Animal Welfare Fund, ACE's and its own animal funds take its figure); catastrophic risk ($11.5M): none of its recipients (Long-Term Future Fund, Longview, its Risks and Resilience Fund) has a model, so the catastrophic-risk charities on the rankings, equal weights (#cause:catastrophic-risk). Climate change ($6.3M: no published model of the climate work its donors fund) and movement building ($10.9M: other meta charities) take the average of the rest. The money credited to it holds fewer GiveWell-directed dollars than its donors gave (the rest of their credit is GiveWell's), so that part of the giving is taken out of the mix at one minus the shared split. The pledgers' gifts through Effektiv Spenden are under 1% of the credited money and left in the mix as they are."
     },
     {
       "id": "moved_dollar_value",
@@ -758,7 +806,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "uov_per_donor_dollar",

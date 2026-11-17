@@ -10,7 +10,7 @@
  "charity": "malaria-consortium",
  "owner": "the-life-you-can-save",
  "mobilised": true,
- "summary": "Malaria Consortium supported South Sudan's health ministry in moving its mass bednet campaigns from paper to phones, registering and geo-tagging households. The Life You Can Save credits it with the 13.55% more people the digital registration found than the projections, counts the cost of their nets as well as Malaria Consortium's own, and estimates $98 per DALY averted. Our view values each child's death averted by age the site's way and discounts the net's later years; the biggest uncertainty is whether the extra people found would otherwise have gone without nets.",
+ "summary": "Malaria Consortium supported South Sudan's health ministry in moving its mass bednet campaigns from paper to phones, registering and geo-tagging households. The Life You Can Save credits it with the 13.55% more people the digital registration found than the projections, counts the cost of their nets as well as Malaria Consortium's own, and estimates $98 per DALY averted. Our view takes the nets out of the cost and nets their money from the good instead, values each child's death averted by age the site's way and discounts the net's later years; the biggest uncertainty is whether the extra people found would otherwise have gone without nets.",
  "source": {
   "publisher": "The Life You Can Save",
   "title": "Malaria Consortium: evaluation and cost-effectiveness analysis (South Sudan net campaigns)",
@@ -451,28 +451,28 @@
    "format": "percent",
    "value": 1,
    "kind": "judgment",
-   "explainer": "×1, our judgment: the sheet credits Malaria Consortium only with the people the digital tools found beyond the projections, and counts the cost of their nets as well as its own."
+   "explainer": "×1, our judgment: the sheet credits Malaria Consortium only with the people the digital tools found beyond the projections."
   },
   {
    "id": "staff_cost_share",
    "section": "credit_ours",
    "label": "Staff pay as a share of programme cost",
    "format": "percent",
-   "formula": "@staff_pay.share_goods",
-   "explainer": "Default for programmes that mostly buy and hand out goods: the nets are most of the cost counted. Our judgment."
+   "formula": "@staff_pay.share_research_policy",
+   "explainer": "Default for research, technical assistance and policy work: Malaria Consortium's own cost here is its support to the health ministry's campaign (the nets are no longer in the cost). Our judgment."
   },
   {
    "id": "salary_gap",
    "section": "credit_ours",
    "label": "Pay gap versus comparable jobs elsewhere",
    "format": "percent",
-   "formula": "@staff_pay.gap_health_field",
-   "explainer": "Health workers and field staff at nonprofits. Our judgment."
+   "formula": "@staff_pay.gap_research_policy",
+   "explainer": "Advisers and technical staff at nonprofits. Our judgment."
   },
   {
    "id": "salary_sacrifice",
    "section": "credit_ours",
-   "label": "Salary forgone by staff per dollar of cost (in-kind donation)",
+   "label": "Salary forgone by staff per dollar of Malaria Consortium's cost (in-kind donation)",
    "format": "number",
    "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
   },
@@ -482,7 +482,25 @@
    "label": "Share of the full cost paid in cash",
    "format": "percent",
    "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
-   "explainer": "With credit by share of resources on, staff's forgone pay counts as part of the cost. The sheet's costs already include everyone's money for the work it credits. Off, this is 100%."
+   "explainer": "With credit by share of resources on, staff's forgone pay counts as part of Malaria Consortium's cost. Off, this is 100%."
+  },
+  {
+   "id": "adopter_cost_out",
+   "section": "credit_ours",
+   "label": "Cost the sheet counts per dollar of Malaria Consortium's own (the nets leave the cost)",
+   "format": "number",
+   "formula": "total_cost / mc_cost_2024",
+   "published": 1,
+   "explainer": "**Changed for consistency.** The campaign's funders and the health ministry, who bought and handed out the nets for the extra people, carry out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps The Life You Can Save's cost (1)."
+  },
+  {
+   "id": "nets_cost_share_of_good",
+   "section": "credit_ours",
+   "label": "The extra nets, at what their money would otherwise have done, as a share of the good done",
+   "format": "percent",
+   "formula": "net_cost * @givewell_shared.cf_value_global_fund / $uov_per_daly / dalys_ours",
+   "published": 0,
+   "explainer": "**Changed for consistency.** The cost of the nets for the extra people, valued at GiveWell's figure for what a dollar of Global Fund or President's Malaria Initiative money would otherwise have done (@givewell_shared.cf_value_global_fund, about 4.6 times cash; the site's figure for malaria funders' money, docs/normalization.md 2.20), over our healthy years gained. South Sudan's mass campaigns run through UNICEF with Global Fund money, and in some rounds the Against Malaria Foundation's; the sheet doesn't say who paid for these nets. A cost of the resources Malaria Consortium mobilises: netted from the good before the mobiliser's share. The evaluator view counts the nets in the cost instead (0 here)."
   },
   {
    "id": "mobiliser_share",
@@ -498,8 +516,8 @@
    "label": "Healthy years gained per dollar",
    "format": "small",
    "unit": "DALYs per $",
-   "formula": "(1 / cost_per_daly * ours_vs_tlycs * counterfactual_share * donor_cost_share) * mobiliser_share",
-   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nThe Life You Can Save's DALYs per dollar, with deaths valued by age, times the share due to Malaria Consortium and the share of the cost paid in cash."
+   "formula": "(1 / cost_per_daly * ours_vs_tlycs * counterfactual_share * donor_cost_share) * adopter_cost_out * (1 - nets_cost_share_of_good) * mobiliser_share",
+   "explainer": "The Life You Can Save's DALYs per dollar of all costs, with deaths valued by age, times the share due to Malaria Consortium, per dollar of Malaria Consortium's own cost (adopter_cost_out), net of what the nets' money would otherwise have done, times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources on, times the share of Malaria Consortium's full cost paid in cash."
   }
  ],
  "output": {

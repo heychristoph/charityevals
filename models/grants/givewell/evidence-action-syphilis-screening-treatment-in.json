@@ -882,17 +882,17 @@
       "id": "total_value_generated_after_leverage",
       "label": "Total value generated, after leverage",
       "section": "cea",
-      "formula": "if($resource_shares, total_value_generated_before_leverage, (total_value_generated_before_leverage + (total_counterfactual_value_of_spending_from_the_global_fund + total_counterfactual_value_of_spending_from_other_partners)))",
+      "formula": "total_value_generated_before_leverage + (total_counterfactual_value_of_spending_from_the_global_fund + total_counterfactual_value_of_spending_from_other_partners)",
       "expected": 714614.4545,
-      "explainer": "With credit by share of resources, this is GiveWell's figure before leverage and funging."
+      "explainer": "Credit by share of resources doesn't change this row: the Global Fund, PEPFAR and the government's partners pay for the tests and treatment because of the programme, so the value their money would otherwise have produced stays netted, and their part is under the charity's share of the good (mobiliser_share)."
     },
     {
       "id": "evidence_action_units_of_value_per_100k",
       "label": "Evidence Action units of value per 100K",
       "section": "cea",
-      "formula": "if($resource_shares, total_value_generated_before_leverage * (100000 / (costs_to_evidence_action + additional_costs_to_global_fund_pepfar + additional_costs_to_other_partners_guess)), (total_value_generated_after_leverage * (100000 / costs_to_evidence_action)))",
+      "formula": "total_value_generated_after_leverage * (100000 / costs_to_evidence_action)",
       "expected": 10141.77124,
-      "explainer": "With credit by share of resources, this is GiveWell's figure before leverage and funging."
+      "explainer": "Per $100,000 of Evidence Action's own cost, with credit by share of resources on or off: the Global Fund's, PEPFAR's and other partners' spending is netted in the value, not added to the cost."
     },
     {
       "id": "benchmark_units_of_value_per_100k",

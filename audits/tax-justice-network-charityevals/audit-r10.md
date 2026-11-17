@@ -1,7 +1,7 @@
 # Audit: tax-justice-network-charityevals, round 10 (verification of round 9 finding 1 and 2)
 Result: 0.005594 uov/$ = 2.797 years of healthy life per 1,000 dollars. Verdict: pass.
 Verdict: pass
-Model-sha: fe28ad55645dda4365562981dffaa24675380e6dd8c530fa0011eea8b3127169
+Model-sha: 2b40e4126c88a2f03691d363a2adda5093ab9946e076b407b961b0cd190edd25
 
 Previous round: finding 1 (medium) resolved: a_movement_credit 0.35 (0.2-0.6) and b_movement_credit 0.5 (0.3-0.8), governments that pushed on their own account (G20 2009, FATCA, EU directives; African Group) named as co-campaigners, only secretariats and applying/enforcing governments as adopters, as proposed. Finding 2 (low) resolved: the adjustments section explainer now reads "civil society's share among those who campaigned for it".
 
@@ -13,3 +13,5 @@ Checks: headline 2.797 matches summary ("about 2.8"). Shares: a = 8% x 35% x (1 
 
 ## Sources checked
 Annual Report 2025 p. 4 quote verified in round 9; unchanged.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

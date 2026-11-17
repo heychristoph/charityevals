@@ -1,6 +1,6 @@
 # Audit: central-square-foundation-charityevals, round 6 (scoped to the round 5 lows)
 Result: 0.001757 uov/$ = 0.879 years of healthy life per 1,000 dollars. Verdict: pass (0 high, 0 medium, 0 low).
-Model-sha: cdd03eefcded579aaa56e032578a9033522f3255e624a284d9d561cc8439ee0c
+Model-sha: 5c34085786dfce322f23782a58ed1fc345f98e161c6724fe05999c9e3de98efe
 Scope: only the two wording fixes from round 5 and that nothing else changed.
 Preflight: pass.
 Previous round:
@@ -15,3 +15,5 @@ Nothing else changed: headline 0.878592, identical to round 5. The six delivery 
 
 ## Sources checked
 None needed (no factual claim added; the page citation was verified in round 5).
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

@@ -80,20 +80,51 @@
       "id": "p1_duration_of_impact",
       "section": "p1_program_1_hsi_cea",
       "label": "Duration of impact [years]",
-      "value": 10.0,
-      "kind": "estimate",
+      "formula": "$win_years_counted",
+      "published": 10.0,
       "source": {
         "title": "ACE (Estimate (ACE))",
         "cell": "Program 1 HSI CEA!B12"
       },
-      "explainer": "Based on the stunners' lifespan of 10 years. There is a likelihood that producers will purchase or receive a stunner, especially if they are under a public commitment.\n\nACE's input, source type: Estimate (ACE)."
+      "explainer": "Changed for consistency: how long a won stunner commitment counts before it would have come anyway reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. ACE's own figure, 10 years, is kept as the evaluator's and used in the evaluator view. ACE's future spending on implementation and monitoring moves with the years, as in ACE's sheet.\n\nACE's note: Based on the stunners' lifespan of 10 years. There is a likelihood that producers will purchase or receive a stunner, especially if they are under a public commitment.\n\nACE's input, source type: Estimate (ACE)."
     },
     {
       "id": "p1_total_number_of_shrimps_stunned_thanks_to_swp_s",
       "section": "p1_program_1_hsi_cea",
       "label": "Total number of shrimps stunned thanks to SWP's work",
-      "formula": "p1_total_number_of_shrimps_produced_annually_covere * p1_likelihood_of_stunners_being_deployed * p1_duration_of_impact",
+      "formula": "p1_total_number_of_shrimps_produced_annually_covere * p1_likelihood_of_stunners_being_deployed * p1_duration_of_impact * p1_years_discount * p1_wait_discount",
       "expected": 15660000000
+    },
+    {
+      "id": "p1_years_discount",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Discount on the years counted",
+      "format": "percent",
+      "formula": "p1_annual_discount",
+      "published": 1,
+      "explainer": "Changed for consistency: every model discounts the years a won reform counts at \"Next year's good counts less by\". ACE's sheet works out this discount (Annual discount, below) but counts the shrimps stunned in every year in full, so the evaluator view uses 1."
+    },
+    {
+      "id": "p1_years_until_effect",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Years from winning the commitments until the stunners are in use",
+      "value": {
+        "low": 0,
+        "best": 1,
+        "high": 2
+      },
+      "kind": "judgment",
+      "unit": "years",
+      "explainer": "Ours, not ACE's. The commitments were secured in 2024; a stunner has to be delivered, installed and put to use, and ACE notes two cases of delay or redirection. Our judgment: 1 year, 0 to 2. ACE counts the benefit from the year the commitment is won; the evaluator view keeps that."
+    },
+    {
+      "id": "p1_wait_discount",
+      "section": "p1_program_1_hsi_cea",
+      "label": "Discount for the wait until the stunners are in use",
+      "format": "percent",
+      "formula": "(1 + $discount_rate) ^ -p1_years_until_effect",
+      "published": 1,
+      "explainer": "Changed for consistency: every model discounts the wait until a won reform takes effect at \"Next year's good counts less by\". ACE counts the shrimps from the year of the win, so the evaluator view uses 1."
     },
     {
       "id": "p1_sads_averted_per_shrimp_stunned",

@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "effektiv-spenden",
  "owner": "charityevals",
- "summary": "Effektiv Spenden runs a donation platform for Germany, Switzerland and Austria that passes tax-deductible gifts on to charities recommended by evaluators, with its own funds and donor advice; this model covers all its spending in 2025 ($1.34M across its German, Swiss and Austrian entities). At the defaults it averts about 24 years of healthy life per $1,000: of the $32M donors gave through it, its own donor survey suggests it caused about 31% (giving that would not have happened or would have gone to an ordinary charity), which with the gifts its advice steered comes to about $11M, eight dollars per dollar it spends, each dollar valued at the causes its donors chose (48% to fighting poverty, mostly GiveWell's charities; climate, animal welfare, catastrophic risks and democracy at the site's figures for their recipients), half of the platform giving counted as new money and the advised gifts only for the gain over where they would have gone, after the wait for its funds' half-yearly grants, and the next dollar at 32% of the past average. It moves about eight dollars, half of it to top global-health charities, for each dollar it spends. The result moves most with its next-dollar figure, the discount rate, how far its survey's non-respondents were influenced and where shifted money would otherwise have gone; only the advised gifts are discounted for missing data, since what its advice changed is judged; platform money is counted.",
+ "summary": "Effektiv Spenden runs a donation platform for Germany, Switzerland and Austria that passes tax-deductible gifts on to charities recommended by evaluators, with its own funds and donor advice; this model covers all its spending in 2025 ($1.34M across its German, Swiss and Austrian entities). At the defaults it averts about {{result}} years of healthy life per $1,000: of the $32M donors gave through it, its own donor survey suggests it caused about 31% (giving that would not have happened or would have gone to an ordinary charity), {{row:caused_donations}}, of which {{row:money_moved}} is credited to it once the credit for money GiveWell's research also directed ({{row:givewell_shared_share}} of the giving) and for gifts by Giving What We Can's pledgers is shared; with the gifts its advice steered that is {{row:moved_per_dollar}} its spending, each dollar valued at the causes its donors chose (48% to fighting poverty, mostly GiveWell's charities; climate, animal welfare, catastrophic risks and democracy at the site's figures for their recipients), half of the platform giving counted as new money and the advised gifts only for the gain over where they would have gone, after the wait for its funds' half-yearly grants, and the next dollar at 32% of the past average. About half the money goes to top global-health charities. The result moves most with its next-dollar figure, the discount rate, how far its survey's non-respondents were influenced and where shifted money would otherwise have gone; only the advised gifts are discounted for missing data, since what its advice changed is judged; platform money is counted.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Effektiv Spenden",
@@ -416,12 +416,76 @@
    "explainer": "Its own effect (the shared rule, facts/meta.json own_effect_share: the organisation's own donor survey where it has one): the respondents who would not have given or would have given elsewhere (66%), non-respondents at the shared share, large gifts at their lower influence. About 31%, beside its own best guess of 32% (which also folds in how much better the recommended charities are, a step the shared rows take here). The survey is from 2019–2022, three years before the money counted."
   },
   {
-   "id": "money_moved",
+   "id": "caused_donations",
    "section": "reach",
    "label": "Platform donations Effektiv Spenden caused, 2025 (US$)",
    "format": "usd",
    "formula": "recorded_donations * donor_own_effect",
    "explainer": "Donations for charities net of what donors would have given to the same effective charities anyway."
+  },
+  {
+   "id": "givewell_shared_share",
+   "section": "reach",
+   "label": "Share of its donors' giving that went to its poverty fund, which follows GiveWell, and to GiveWell's Top Charities",
+   "format": "percent",
+   "formula": "@meta.es_moved_2025_share_poverty * ((1 - @meta.es_ch_share_2025) * (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation) / (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_givedirectly + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation + @meta.es_poverty_2024_share_deworm_the_world) + @meta.es_ch_share_2025 * (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives) / (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_evidence_action + @meta.es_ch_2025_givedirectly + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives + @meta.es_ch_2025_strongminds + @meta.es_ch_2025_lafiya_nigeria))",
+   "explainer": "The poverty share of its 2025 giving, times the part of it that went to its poverty fund and to Malaria Consortium, Against Malaria Foundation, Helen Keller Intl and New Incentives, from the two recipient lists value_destinations blends (the organisation-wide 2024 split and the Swiss 2025 grants). GiveWell counts this money too: its 2024 metrics report counts $32 million from charity aggregators that rely on its research, most of it paid straight to the charities."
+  },
+  {
+   "id": "givewell_shared_moved",
+   "section": "reach",
+   "label": "Of the donations it caused: money that GiveWell's research also directed (US$)",
+   "format": "usd",
+   "formula": "caused_donations * givewell_shared_share",
+   "explainer": "Effektiv Spenden brought the donor and GiveWell's research decided where the gift went: both moved these dollars."
+  },
+  {
+   "id": "givewell_credit_share",
+   "section": "reach",
+   "label": "Its share of the credit for the money GiveWell also directed",
+   "format": "percent",
+   "formula": "@meta.shared_credit_donor_side",
+   "explainer": "The site's one split for a dollar two organisations both moved (docs/normalization.md 2.24, overlap): {{row:givewell_credit_share}} to the one that brought the donor, the rest to GiveWell."
+  },
+  {
+   "id": "gwwc_shared_moved",
+   "section": "reach",
+   "label": "Of the donations it caused: gifts by Giving What We Can's pledgers, a year (US$)",
+   "format": "usd",
+   "formula": "@meta.gwwc_moved_2023_24_via_effektiv_spenden / gwwc_sheet_years * donor_own_effect * (1 - givewell_shared_share)",
+   "explainer": "What Giving What We Can's pledgers recorded giving through Effektiv Spenden in 2023 and 2024 (its donation classification sheet, 2024 prices), a year, taken as the same in 2025. Giving What We Can counts these gifts as its pledgers' giving. Less the part already shared with GiveWell."
+  },
+  {
+   "id": "gwwc_sheet_years",
+   "section": "reach",
+   "label": "Years that Giving What We Can's figure for its pledgers' giving through Effektiv Spenden covers",
+   "format": "number",
+   "unit": "years",
+   "value": 2,
+   "kind": "observed",
+   "source": {
+    "title": "Giving What We Can, 2023–2024 impact evaluation: donation classification sheet",
+    "url": "https://docs.google.com/spreadsheets/d/1o7hliIEVepjHTv7u3E6LJDRY46rgnnN9oaO2a7Ohv2Y/edit",
+    "quote": "Organisation name, 2023 Donations, 2024 Donations, Total donations",
+    "note": "Sheet 'Pledger-Top100': the totals sum 2023 and 2024.",
+    "retrieved": "2026-11-17"
+   }
+  },
+  {
+   "id": "gwwc_credit_share",
+   "section": "reach",
+   "label": "Its share of the credit for pledgers' gifts through its platform",
+   "format": "percent",
+   "formula": "1 - @meta.shared_credit_donor_side",
+   "explainer": "The same split: Giving What We Can, which holds the pledge, takes the donor's side; Effektiv Spenden, whose platform and funds carry the gift, the rest."
+  },
+  {
+   "id": "money_moved",
+   "section": "reach",
+   "label": "Platform donations credited to Effektiv Spenden, 2025 (US$)",
+   "format": "usd",
+   "formula": "caused_donations - givewell_shared_moved * (1 - givewell_credit_share) - gwwc_shared_moved * (1 - gwwc_credit_share)",
+   "explainer": "The donations it caused, less the part of the shared money credited to GiveWell and to Giving What We Can."
   },
   {
    "id": "advised_donations_eur",
@@ -458,7 +522,7 @@
    "section": "reach",
    "label": "Advised donations its advice redirected, 2025 (US$), valued as all shifted",
    "format": "usd",
-   "explainer": "The money the shared informed_money_value row reads: advised gifts its advice redirected, given anyway, so valued only for the gain over where they would have gone, after the evidence and missing-data steps. Platform donations it caused (money_moved, about $10M) are valued separately as money moved, net of where shifted money would have gone. Its 10% Pledge (with Giving What We Can) is given through the platform and counted there, not again.",
+   "explainer": "The money the shared informed_money_value row reads: advised gifts its advice redirected, given anyway, so valued only for the gain over where they would have gone, after the evidence and missing-data steps. Platform donations it caused (money_moved, {{row:money_moved}}) are valued separately as money moved, net of where shifted money would have gone. Its 10% Pledge (with Giving What We Can) is given through the platform and counted there, not again.",
    "formula": "advised_moved"
   },
   {
@@ -632,8 +696,8 @@
    "section": "moved_money",
    "label": "Value of a dollar to the charities Effektiv Spenden's donors gave to (its 2025 split by cause, live), units of value",
    "format": "small",
-   "formula": "(@meta.es_moved_2025_share_poverty * ((1 - @meta.es_ch_share_2025) * (@meta.es_poverty_2024_share_fund * value_global_health + @meta.es_poverty_2024_share_givedirectly * #givewell:givedirectly + @meta.es_poverty_2024_share_malaria_consortium * #givewell:malaria-consortium + @meta.es_poverty_2024_share_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_poverty_2024_share_deworm_the_world * #givewell:evidence-action) / (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_givedirectly + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation + @meta.es_poverty_2024_share_deworm_the_world) + @meta.es_ch_share_2025 * (@meta.es_ch_2025_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_ch_2025_evidence_action * #givewell:evidence-action + @meta.es_ch_2025_givedirectly * #givewell:givedirectly + @meta.es_ch_2025_helen_keller_intl * #givewell:helen-keller-intl + @meta.es_ch_2025_malaria_consortium * #givewell:malaria-consortium + @meta.es_ch_2025_new_incentives * #givewell:new-incentives + @meta.es_ch_2025_strongminds * #hli:strongminds + @meta.es_ch_2025_lafiya_nigeria * #givewell:lafiya-nigeria) / (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_evidence_action + @meta.es_ch_2025_givedirectly + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives + @meta.es_ch_2025_strongminds + @meta.es_ch_2025_lafiya_nigeria)) + @meta.es_moved_2025_share_climate * #charityevals:clean-air-task-force + @meta.es_moved_2025_share_animals * ((1 - @meta.es_ch_share_2025) * #ace:the-humane-league + @meta.es_ch_share_2025 * (@meta.es_ch_2025_the_humane_league * #ace:the-humane-league + @meta.es_ch_2025_sinergia_animal * #ace:sinergia-animal + @meta.es_ch_2025_wild_animal_initiative * #ace:wild-animal-initiative) / (@meta.es_ch_2025_the_humane_league + @meta.es_ch_2025_sinergia_animal + @meta.es_ch_2025_wild_animal_initiative)) + @meta.es_moved_2025_share_future * ((1 - @meta.es_ch_share_2025) * #cause:catastrophic-risk + @meta.es_ch_share_2025 * #charityevals:metr) + @meta.es_moved_2025_share_democracy * #cause:democracy) / (@meta.es_moved_2025_share_poverty + @meta.es_moved_2025_share_climate + @meta.es_moved_2025_share_animals + @meta.es_moved_2025_share_future + @meta.es_moved_2025_share_democracy)",
-   "explainer": "Where its donors' money went in 2025 by cause (Transparenz page), each cause at its recipients' figures on the rankings under your values, by the site's rule for a split (normalization.md 2.8). Within each cause two recipient lists are blended by the Swiss association's share of the 2025 money (27%), an approximation since the 2024 list already includes Swiss giving: the organisation-wide 2024 split, the latest it publishes for the whole organisation, and the Swiss association's 2025 grants by recipient (audited accounts, the only recipient-level list for 2025); in each, recipients without a model here take the average of the modelled ones in their cause. Fighting poverty (48%): 2024, its poverty fund (which follows GiveWell's All Grants Fund) at GiveWell's Top Charities (value_global_health), GiveDirectly, Malaria Consortium, Against Malaria Foundation and Deworm the World (Evidence Action's figure) by their money; Swiss 2025, Evidence Action, Helen Keller Intl, GiveDirectly, StrongMinds, Against Malaria Foundation, Malaria Consortium, New Incentives and Lafiya by their grants. Climate (21%): Clean Air Task Force (our model) is the one recipient in either list with a published model here; its fund (which follows Founders Pledge's Climate Fund), Future Cleantech Architects, the Good Food Institute, DEPLOY/US and the rest take its figure (Founders Pledge's and Giving Green's models of them are not published). Animal welfare (7%): 2024, The Humane League (ACE's figure, the one the rankings show), the one modelled recipient, its fund (which follows the EA Animal Welfare Fund) and Rethink Priorities taking its figure; Swiss 2025, The Humane League, Sinergia Animal and Wild Animal Initiative by their grants. Catastrophic risks (12%): 2024, none of its recipients (its Longview-advised funds, Safe AI Forum, Civic AI Security Program, Future Matters) has a model, so the catastrophic-risk charities on the rankings, equal weights (#cause:catastrophic-risk; money movers such as 80,000 Hours left out); Swiss 2025, METR, the one modelled recipient. Democracy (9%): none of its recipients (HateAid, CORRECTIV, Campact; from August 2025 Power for Democracies' picks) has a model, so the democracy charities on the rankings, equal weights (#cause:democracy). Meta organisations (2.4%) take the average of the rest."
+   "formula": "((@meta.es_moved_2025_share_poverty * ((1 - @meta.es_ch_share_2025) * (@meta.es_poverty_2024_share_fund * value_global_health + @meta.es_poverty_2024_share_givedirectly * #givewell:givedirectly + @meta.es_poverty_2024_share_malaria_consortium * #givewell:malaria-consortium + @meta.es_poverty_2024_share_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_poverty_2024_share_deworm_the_world * #givewell:evidence-action) / (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_givedirectly + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation + @meta.es_poverty_2024_share_deworm_the_world) + @meta.es_ch_share_2025 * (@meta.es_ch_2025_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_ch_2025_evidence_action * #givewell:evidence-action + @meta.es_ch_2025_givedirectly * #givewell:givedirectly + @meta.es_ch_2025_helen_keller_intl * #givewell:helen-keller-intl + @meta.es_ch_2025_malaria_consortium * #givewell:malaria-consortium + @meta.es_ch_2025_new_incentives * #givewell:new-incentives + @meta.es_ch_2025_strongminds * #hli:strongminds + @meta.es_ch_2025_lafiya_nigeria * #givewell:lafiya-nigeria) / (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_evidence_action + @meta.es_ch_2025_givedirectly + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives + @meta.es_ch_2025_strongminds + @meta.es_ch_2025_lafiya_nigeria)) + @meta.es_moved_2025_share_climate * #charityevals:clean-air-task-force + @meta.es_moved_2025_share_animals * ((1 - @meta.es_ch_share_2025) * #ace:the-humane-league + @meta.es_ch_share_2025 * (@meta.es_ch_2025_the_humane_league * #ace:the-humane-league + @meta.es_ch_2025_sinergia_animal * #ace:sinergia-animal + @meta.es_ch_2025_wild_animal_initiative * #ace:wild-animal-initiative) / (@meta.es_ch_2025_the_humane_league + @meta.es_ch_2025_sinergia_animal + @meta.es_ch_2025_wild_animal_initiative)) + @meta.es_moved_2025_share_future * ((1 - @meta.es_ch_share_2025) * #cause:catastrophic-risk + @meta.es_ch_share_2025 * #charityevals:metr) + @meta.es_moved_2025_share_democracy * #cause:democracy) / (@meta.es_moved_2025_share_poverty + @meta.es_moved_2025_share_climate + @meta.es_moved_2025_share_animals + @meta.es_moved_2025_share_future + @meta.es_moved_2025_share_democracy) - (1 - @meta.shared_credit_donor_side) * @meta.es_moved_2025_share_poverty * ((1 - @meta.es_ch_share_2025) * (@meta.es_poverty_2024_share_fund * value_global_health + @meta.es_poverty_2024_share_malaria_consortium * #givewell:malaria-consortium + @meta.es_poverty_2024_share_against_malaria_foundation * #givewell:against-malaria-foundation) / (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_givedirectly + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation + @meta.es_poverty_2024_share_deworm_the_world) + @meta.es_ch_share_2025 * (@meta.es_ch_2025_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.es_ch_2025_helen_keller_intl * #givewell:helen-keller-intl + @meta.es_ch_2025_malaria_consortium * #givewell:malaria-consortium + @meta.es_ch_2025_new_incentives * #givewell:new-incentives) / (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_evidence_action + @meta.es_ch_2025_givedirectly + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives + @meta.es_ch_2025_strongminds + @meta.es_ch_2025_lafiya_nigeria))) / (1 - (1 - @meta.shared_credit_donor_side) * @meta.es_moved_2025_share_poverty * ((1 - @meta.es_ch_share_2025) * (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation) / (@meta.es_poverty_2024_share_fund + @meta.es_poverty_2024_share_givedirectly + @meta.es_poverty_2024_share_malaria_consortium + @meta.es_poverty_2024_share_against_malaria_foundation + @meta.es_poverty_2024_share_deworm_the_world) + @meta.es_ch_share_2025 * (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives) / (@meta.es_ch_2025_against_malaria_foundation + @meta.es_ch_2025_evidence_action + @meta.es_ch_2025_givedirectly + @meta.es_ch_2025_helen_keller_intl + @meta.es_ch_2025_malaria_consortium + @meta.es_ch_2025_new_incentives + @meta.es_ch_2025_strongminds + @meta.es_ch_2025_lafiya_nigeria)))",
+   "explainer": "Where its donors' money went in 2025 by cause (Transparenz page), each cause at its recipients' figures on the rankings under your values, by the site's rule for a split (normalization.md 2.8). Within each cause two recipient lists are blended by the Swiss association's share of the 2025 money (27%), an approximation since the 2024 list already includes Swiss giving: the organisation-wide 2024 split, the latest it publishes for the whole organisation, and the Swiss association's 2025 grants by recipient (audited accounts, the only recipient-level list for 2025); in each, recipients without a model here take the average of the modelled ones in their cause. Fighting poverty (48%): 2024, its poverty fund (which follows GiveWell's All Grants Fund) at GiveWell's Top Charities (value_global_health), GiveDirectly, Malaria Consortium, Against Malaria Foundation and Deworm the World (Evidence Action's figure) by their money; Swiss 2025, Evidence Action, Helen Keller Intl, GiveDirectly, StrongMinds, Against Malaria Foundation, Malaria Consortium, New Incentives and Lafiya by their grants. Climate (21%): Clean Air Task Force (our model) is the one recipient in either list with a published model here; its fund (which follows Founders Pledge's Climate Fund), Future Cleantech Architects, the Good Food Institute, DEPLOY/US and the rest take its figure (Founders Pledge's and Giving Green's models of them are not published). Animal welfare (7%): 2024, The Humane League (ACE's figure, the one the rankings show), the one modelled recipient, its fund (which follows the EA Animal Welfare Fund) and Rethink Priorities taking its figure; Swiss 2025, The Humane League, Sinergia Animal and Wild Animal Initiative by their grants. Catastrophic risks (12%): 2024, none of its recipients (its Longview-advised funds, Safe AI Forum, Civic AI Security Program, Future Matters) has a model, so the catastrophic-risk charities on the rankings, equal weights (#cause:catastrophic-risk; money movers such as 80,000 Hours left out); Swiss 2025, METR, the one modelled recipient. Democracy (9%): none of its recipients (HateAid, CORRECTIV, Campact; from August 2025 Power for Democracies' picks) has a model, so the democracy charities on the rankings, equal weights (#cause:democracy). Meta organisations (2.4%) take the average of the rest. The money credited to it holds fewer GiveWell-directed dollars than its donors gave (the rest of their credit is GiveWell's), so that part of the giving is taken out of the mix at one minus the shared split. The gifts by Giving What We Can's pledgers are under 1% of the credited money and left in the mix as they are."
   },
   {
    "id": "moved_side_effects",
@@ -854,8 +918,8 @@
    "section": "donor",
    "label": "Share of the full cost paid by cash donations",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))",
-   "explainer": "With credit by share of resources: staff's forgone pay and the new money its platform donors gave share the outcome with your dollar; advised gifts, all shifted, add no resources."
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources: staff's forgone pay shares the outcome with your dollar. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24)."
   },
   {
    "id": "uov_per_donor_dollar",

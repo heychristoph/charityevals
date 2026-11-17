@@ -1,7 +1,7 @@
 # Audit: fair-tax-foundation-charityevals, round 8 (scoped verification, credit rule 2.24, step 5)
 Result: 0.0967 years of healthy life per $1,000 at mobiliser_share 100% (0.0953 in round 7).
 Verdict: pass
-Model-sha: afdc3dbf97977467b9da019ef2050b939f5a2e58890f8eaa57165df24c2d1462
+Model-sha: 9677c62a15a83ce5a027e33f477bf3b5344adea4b8ea30c83a14c5fae21300fd
 
 Scope: round 7's one low finding, b_movement_credit, and the text that follows.
 
@@ -12,3 +12,5 @@ Scope: round 7's one low finding, b_movement_credit, and the text that follows.
 
 Preflight output was not re-read (the script was slow on this machine); round 7's pass stood and only one judgment value and its text changed.
 Writeup edits made: none needed.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

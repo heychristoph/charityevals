@@ -1,6 +1,6 @@
 # Audit: givewell-charityevals, round 5 (scoped verification)
 Result: 0.07209 uov/$ = 36.04 years of healthy life per 1,000 dollars (combined range 14.27–91.05); cause median 0.06312 (×571). Verdict: **pass**.
-Model-sha: b249cf31abc343544ff7457aa3490dfc9b6392779ac5cddf24794895f8a25461
+Model-sha: c26f1a9e739a92059aeb01093bf679570f983d9953dbde87cb3d7c7088807293
 Scope: only the new row `shifted_dollar_value` and `moved_value` reading it (docs/normalization.md 2.8, src/engine/moved-money.ts, INV-12). Sources unchanged, not re-fetched.
 Mechanical: audit-model "Findings (0)"; normalization-audit 0 violations (orchestrator ran it; not rerun).
 Previous round: r4 passed; nothing open.
@@ -29,3 +29,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 593b1bba.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

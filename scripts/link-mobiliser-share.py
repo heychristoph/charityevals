@@ -370,10 +370,10 @@ def table(rows):
         for c, pat, why in rules:
             lines.append(f"| {o} | {c} | `{pat.replace('|', ' ¦ ')}` | {why} |")
     lines += ["", "## Calls near the line", ""] + [f"- {c}" for c in CALLS]
-    lines += ["", "## For the step that re-judges shares: the adopter is in the evaluator's denominator", "",
+    lines += ["", "## The adopter in the evaluator's denominator (done, 17 November 2026)", "",
               "Mobilised, and the evaluator's cost already includes the spending of the party that carries out the good, so below 100% that",
-              "party would be cut twice. Nothing changes here (the default is 100%); in our view the adopter's spending has to leave the",
-              "denominator (a cost of the mobilised resources instead, inside the share), heaviest first:", ""] + [f"- {c}" for c in REJUDGE]
+              "party would be cut twice. In our view the adopter's spending has left the denominator (`adopter_cost_out`, 1 in `published`) and",
+              "is netted from the good at what the money would otherwise have done, inside the share; the evaluator view is unchanged:", ""] + [f"- {c}" for c in REJUDGE]
     lines += ["", "## Every import", "", "| Model | Evaluator | Class | Mobilised | Reason |", "|---|---|---|---|---|"]
     for mid, o, c, why in sorted(rows, key=lambda r: (r[1], not CLASSES[r[2]], r[2], r[0])):
         lines.append(f"| {mid} | {o} | {c} | {'yes' if CLASSES[c] else 'no'} | {why} |")

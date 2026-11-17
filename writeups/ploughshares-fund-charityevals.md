@@ -8,7 +8,7 @@ Ploughshares spent $7.6 million in the year to June 2025. Its one programme cost
 
 - **Grants: $3.1 million to 46 organisations.** These fund arms-control research and advocacy (the Arms Control Association, the Federation of American Scientists, the Stimson Center, RAND), lobbying for diplomacy in Congress, talks on Korea, nuclear-policy media, watchdogs of the weapons laboratories and groups for people harmed by nuclear testing.
 - **Its own work: $2.6 million.** It runs the field's coalitions (on the new arms race, Iran and North Korea), a day lobbying Congress with about 30 partners, the Story Center and other communications, and a new network of women security leaders.
-- **The Nuclear Futures Fellowship.** Run with Horizon 2045, it took in a second group of nine mid-career fellows. It paid $10,000 to each first-year fellow's organisation for a final project.
+- **The Nuclear Futures Fellowship.** Run with Horizon 2045, it took in a second group of nine fellows already working in the field. It paid $10,000 to each first-year fellow's organisation for a final project.
 
 ### How the impact happens
 

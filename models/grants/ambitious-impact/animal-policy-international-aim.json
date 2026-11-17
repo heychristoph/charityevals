@@ -83,7 +83,7 @@
    "id": "credit",
    "title": "Costs counted (ours)",
    "kind": "ours",
-   "explainer": "charityevals' step, not Ambitious Impact's. Ambitious Impact reports welfare points per dollar of the charity's costs, and separately per dollar of the charity's and the government's costs (the government pays to enforce the ban). With credit by share of resources on, the government's enforcement costs count as part of the cost, so your dollar gets the charity's share of the outcome."
+   "explainer": "charityevals' step, not Ambitious Impact's. Ambitious Impact reports welfare points per dollar of the charity's costs, and separately per dollar of the charity's and the government's costs (the government pays to enforce the ban). Our view keeps the figure per dollar of the charity's costs: the government acts only because of the campaign, so it is credited through the mobiliser's share, not as a co-funder."
   },
   {
    "id": "staff_pay",
@@ -3313,19 +3313,12 @@
    "explainer": "\"Best guess based on an estimate that this would happen in ~20 years without intervention\" (AIM, C11). AIM lists this counterfactual but no formula uses it, so AIM's result assumes the ban would never happen without the charity. Our view counts the ban only for the shared \"Years a won reform counts before it would have come anyway\" (row years_counted) instead, so this row stays for reference and doesn't feed the result."
   },
   {
-   "id": "charity_cost_share",
-   "section": "credit",
-   "label": "Charity's share of the full cost (charity and government)",
-   "format": "percent",
-   "formula": "if($resource_shares, charity_discounted_costs / (charity_discounted_costs + government_discounted_costs), 1)",
-   "explainer": "Off: 100%, Ambitious Impact's figure per dollar of charity costs. On: the charity's discounted costs as a share of its own and the government's (about 14%), which gives Ambitious Impact's 22.8 welfare points per dollar of all costs. Compliance costs (docs/normalization.md 2.21): none counted, as no analysis gives one: New Zealand has not proposed the ban, so no regulatory impact statement exists; Ambitious Impact counts only the government's enforcement."
-  },
-  {
    "id": "wp_per_dollar_credited",
    "section": "credit",
    "label": "Welfare points affected per dollar of the costs counted",
    "format": "number",
-   "formula": "wps_charity_costs * charity_cost_share"
+   "formula": "wps_charity_costs",
+   "explainer": "Ambitious Impact's figure per dollar of the charity's costs. The government would enforce the ban only because of the campaign, so it is no co-funder: it is credited through the mobiliser's share below (docs/normalization.md 2.24), and its enforcement costs stay out of the cost with credit by share of resources on or off (Ambitious Impact's figure per dollar of all costs is 22.8). Its enforcement money isn't netted from the good: welfare points have no money value (redirected public money outside money moved, aid and climate is not yet netted, 2.24). Compliance costs (docs/normalization.md 2.21): none counted, as no analysis gives one: New Zealand has not proposed the ban, so no regulatory impact statement exists."
   },
   {
    "id": "staff_cost_share",

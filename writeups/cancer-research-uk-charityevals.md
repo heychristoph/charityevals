@@ -11,7 +11,7 @@ Cancer Research UK spent £474.0m on its charitable work in 2025/26:
 - **Research, £441.4m (93%):** grants to universities and hospitals (£313.5m), its own institutes, clinical trials units and Cancer Research Horizons (£115.5m), and support costs. On a cash basis it spent £416m: £88m on basic biology, £185m on research into specific cancers (bowel, lung, brain and leukaemia lead), £87m on research relevant to all cancers, £24m on turning results into drugs and tools, and the rest on administration and royalty shares.
 - **Cancer information and influencing, £32.6m (7%):** policy campaigns in all four UK nations, and public information (its website, Cancer Chat, a nurse helpline, roadshows and workshops: about 27 million interactions).
 
-The accounts don't split information from influencing; we judge policy at about 40% of it.
+The accounts don't split information from influencing; we judge policy at about {{row:policy_share_of_info}} of it.
 
 Raising money cost £140.2m. The shops and events cost £0.9m more than they brought in. Both are spread over the charitable spending, about 30p on each pound.
 
@@ -30,7 +30,7 @@ Research is the medical-research template's chain:
 - **Burden:** the world's cancer burden, 255 million DALYs a year (WHO Global Health Estimates 2021).
 - **Share averted:** what a year of the field's research averts once adopted, 0.13% a year (one judgment, 0.03% to 0.5%). The US cancer death rate fell 34% from 1991 to 2022. About half of that came from earlier detection and better treatment, the rest mostly from less smoking. Rich countries carry under a quarter of the world's cancer burden, uptake elsewhere is lower, and about half of the gain is uptake of older advances rather than new research.
 - **Timing:** brought forward 5 years, after a 15-year wait.
-- **Adjustments:** our trust in the evidence (0.7), then Cancer Research UK's share of the world's cancer research funding, about 0.6%. All funders together spend about $100bn a year: some $16bn from governments and charities, and some $85bn from industry, for which cancer is the largest area (38% of its new trials).
+- **Adjustments:** our trust in the evidence (0.7), then Cancer Research UK's share of the world's cancer research funding, about {{row:research_attribution_share_shared}}. All funders together spend about $100bn a year: some $16bn from governments and charities, and some $85bn from industry, for which cancer is the largest area (38% of its new trials).
 - **Check:** the 10% return in UK health gains found for UK cancer research implies about 30 times the chain's figure per pound. That study credits UK research with UK gains generously and calls itself a best case. The world also spends several times as much on cancer research as on heart research, for a smaller burden. The model shows both rows.
 
 The policy branch follows the government's impact assessment of the law. Its figures are the site's shared tobacco figures:
@@ -56,10 +56,10 @@ Each branch is multiplied by the shared "How much we count a programme whose res
 - **The missing-data discount** (your value judgment).
 - **The share of the burden a year of research averts:** 0.03% to 0.5%.
 - **The discount rate:** a 15-year wait makes the result sensitive to it.
-- **Years brought forward** (2 to 15) and **Cancer Research UK's share of the field** (0.3% to 1.2%).
+- **Years brought forward** (2 to 15) and **Cancer Research UK's share of the field** ({{low:research_attribution_share_shared}} to {{high:research_attribution_share_shared}}).
 - **The next dollar against the past average:** 30% to 85%.
 
-Research is about 34% of the result, policy about 62% and information about 4%. Per pound, the policy work does about sixty times as well as research and the information work about twice as well, but together they are 7% of the spending.
+Policy gives most of the result, then research; information gives little. Per pound, the policy work does far better than research, but policy and information together are a small part of the spending.
 
 ### Biggest uncertainties
 
