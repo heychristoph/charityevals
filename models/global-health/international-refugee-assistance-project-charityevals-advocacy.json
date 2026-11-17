@@ -690,7 +690,7 @@
       "explainer": "1: what would have come without the litigation is the share in siv_p_success (Convention 5, one question each)."
     },
     {
-      "id": "siv_attribution_share",
+      "id": "siv_attribution_share_shared",
       "section": "adjustments",
       "label": "IRAP's share of the resources behind the SIV case",
       "format": "percent",
@@ -701,6 +701,23 @@
       },
       "kind": "judgment",
       "explainer": "IRAP is lead counsel with pro bono co-counsel (Freshfields Bruckhaus Deringer) giving many hours; our judgment 0.5, from 0.3 to 0.8."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "siv_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: IRAP's share of the resources behind the SIV case",
+      "credit": "win",
+      "format": "percent",
+      "formula": "siv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "usrap_counterfactual_adj",
@@ -716,7 +733,7 @@
       "kind": "judgment"
     },
     {
-      "id": "usrap_attribution_share",
+      "id": "usrap_attribution_share_shared",
       "section": "adjustments",
       "label": "IRAP's share of the advocacy coalition's resources",
       "format": "percent",
@@ -727,6 +744,15 @@
       },
       "kind": "judgment",
       "explainer": "Dozens of groups pressed for the rebuild, the resettlement agencies largest among them; IRAP co-founded the Refugee Advocacy Lab and led its letters of elected officials (380 in 2022, over 300 in 2025). Our judgment 6%, from 2% to 15%."
+    },
+    {
+      "id": "usrap_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: IRAP's share of the advocacy coalition's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "usrap_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pacito_counterfactual_adj",
@@ -742,7 +768,7 @@
       "explainer": "Without the injunctions, a few of these refugees might have travelled under the ban's case-by-case exceptions or after a later lifting; 0.7, from 0.4 to 0.9."
     },
     {
-      "id": "pacito_attribution_share",
+      "id": "pacito_attribution_share_shared",
       "section": "adjustments",
       "label": "IRAP's share of the resources behind Pacito v. Trump",
       "format": "percent",
@@ -753,6 +779,15 @@
       },
       "kind": "judgment",
       "explainer": "IRAP leads the case with pro bono co-counsel and plaintiff organisations (resettlement agencies); 0.5, from 0.3 to 0.8."
+    },
+    {
+      "id": "pacito_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: IRAP's share of the resources behind Pacito v. Trump",
+      "credit": "win",
+      "format": "percent",
+      "formula": "pacito_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "siv_missing_data_adj",
@@ -826,15 +861,15 @@
       "section": "adjustments",
       "label": "IRAP's share of the resources (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(siv_value_per_year * siv_attribution_share + usrap_value_per_year * usrap_attribution_share + pacito_value_per_year * pacito_attribution_share) / (siv_value_per_year + usrap_value_per_year + pacito_value_per_year)"
+      "formula": "(siv_value_per_year * siv_attribution_share_shared + usrap_value_per_year * usrap_attribution_share_shared + pacito_value_per_year * pacito_attribution_share_shared) / (siv_value_per_year + usrap_value_per_year + pacito_value_per_year)"
     },
     {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "IRAP's share of the resources behind the outcome: the outcome-weighted average of the branches' shares, for reading only."
+      "formula": "(siv_value_per_year * siv_attribution_share + usrap_value_per_year * usrap_attribution_share + pacito_value_per_year * pacito_attribution_share) / (siv_value_per_year + usrap_value_per_year + pacito_value_per_year)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "missing_data_adj",

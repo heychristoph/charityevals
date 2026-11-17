@@ -8,7 +8,7 @@ import { assumptionValues, compute, hasRange, isCharityRef, readsAsDestination, 
 import { MOVED_MONEY_SECTION } from "./moved-money";
 import { rowsFeeding } from "./sensitivity";
 import { bridgesOf } from "./bridges";
-import { CLIMATE_REQUIRED, SAD_FACT_VERSION, TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
+import { CLIMATE_REQUIRED, MOBILISER_ROW, SAD_FACT_VERSION, TEMPLATES, allowedUnits, perDollarIds, type Family } from "./templates";
 
 /** Does a row read `ref` ($assumption, or @fact; a trailing `.` or `_` is a prefix), itself or
  * through the rows it is computed from? */
@@ -158,6 +158,24 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date(), op
   const dcs = m.byId.get("donor_cost_share");
   if (dcs && !dcs.assumptionDeps.includes("resource_shares"))
     add("medium", "salary-sacrifice", "donor_cost_share ignores $resource_shares", "donor_cost_share = cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0)).", "donor_cost_share");
+
+  // The mobiliser's share (docs/normalization.md 2.24): one canonical row reads the slider; a branch's class
+  // sits on its used share, a win or research share reading the row and a delivery share not. The class
+  // is accepted on any used share and not yet required (INV-22 lists the models still to migrate).
+  const shareRow = m.byId.get(MOBILISER_ROW.id);
+  if (shareRow && squash(shareRow.formula ?? "") !== MOBILISER_ROW.formula)
+    add("high", "mobiliser-share", `${MOBILISER_ROW.id} is ${shareRow.formula ?? "a typed number"}, not ${MOBILISER_ROW.formula}`, `Set ${MOBILISER_ROW.id} = ${MOBILISER_ROW.formula}: the share of the good done with mobilised resources is the reader's one setting, never a model's own number.`, MOBILISER_ROW.id);
+  for (const r of m.rows) {
+    if (r.id !== MOBILISER_ROW.id && r.assumptionDeps.includes(MOBILISER_ROW.id))
+      add("high", "mobiliser-share", `${r.id} reads $${MOBILISER_ROW.id} itself`, `Add the row ${MOBILISER_ROW.id} = ${MOBILISER_ROW.formula} (adjustments) and multiply by that row.`, r.id);
+    if (!r.credit) continue;
+    if (!/(^|_)attribution_share$/.test(r.id))
+      add("medium", "credit-class", `${r.id} carries a credit class, which belongs on a branch's used share`, "Move \"credit\" to the branch's attribution_share (or <branch>_attribution_share) row.", r.id);
+    else if (r.credit === "delivery" && readsRef(m, r.id, `$${MOBILISER_ROW.id}`))
+      add("high", "credit-class", `${r.id} is a delivery branch's share but reads ${MOBILISER_ROW.id}`, `Own services, grants and purchases take no mobiliser's share: drop ${MOBILISER_ROW.id} from the formula, or class the branch win or research.`, r.id);
+    else if (r.credit !== "delivery" && !readsRef(m, r.id, `$${MOBILISER_ROW.id}`))
+      add("high", "credit-class", `${r.id} is a ${r.credit} branch's share but doesn't read ${MOBILISER_ROW.id}`, `Set ${r.id} = ${r.id}_shared * ${MOBILISER_ROW.id}: the share among co-advocates times the mobiliser's share (docs/normalization.md 2.24).`, r.id);
+  }
 
   // Bridges (docs/normalization.md 2.6): a row named as one is the exact bridge formula, so each outcome
   // reaches the headline through its own unit's shared conversion.

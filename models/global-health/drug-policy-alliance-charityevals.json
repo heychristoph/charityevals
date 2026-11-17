@@ -1423,7 +1423,7 @@
       "formula": "1"
     },
     {
-      "id": "od_attribution_share",
+      "id": "od_attribution_share_shared",
       "section": "adjustments",
       "label": "Harm reduction: DPA's share of the resources behind it",
       "format": "percent",
@@ -1434,6 +1434,23 @@
       },
       "kind": "judgment",
       "explainer": "The centres are paid for and run by OnPoint NYC (entirely from non-government funds for the consumption rooms) and were sanctioned by the city's health department under Mayor de Blasio; VOCAL-NY, Housing Works and the SIF NYC coalition campaigned beside DPA, which had pressed for them since about 2016. The resources behind the deaths averted are mostly the centres' running costs. Our judgment: 5% (2% to 15%)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "od_attribution_share",
+      "section": "adjustments",
+      "label": "Harm reduction: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "od_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "od_period_share",
@@ -1502,7 +1519,7 @@
       "formula": "1"
     },
     {
-      "id": "can_attribution_share",
+      "id": "can_attribution_share_shared",
       "section": "adjustments",
       "label": "Legalisation: DPA's share of the resources behind it",
       "format": "percent",
@@ -1513,6 +1530,15 @@
       },
       "kind": "judgment",
       "explainer": "DPA ran the Start SMART NY campaign and coalition for the New York law, helped draft and pass New Mexico's (its own press releases), and pressed New Jersey's decriminalisation and expungement terms after the 2020 ballot question its sister 501(c)(4)'s allies ran; VOCAL-NY, the NYCLU, Citizen Action, the cannabis industry's lobbyists and the governors' budget drives carried the same laws, and the c4's own spending isn't in the cost here. Our judgment: 15% (5% to 30%)."
+    },
+    {
+      "id": "can_attribution_share",
+      "section": "adjustments",
+      "label": "Legalisation: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "can_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "can_period_share",
@@ -1581,7 +1607,7 @@
       "formula": "1"
     },
     {
-      "id": "m110_attribution_share",
+      "id": "m110_attribution_share_shared",
       "section": "adjustments",
       "label": "Measure 110: DPA's share of the resources behind it",
       "format": "percent",
@@ -1592,6 +1618,15 @@
       },
       "kind": "judgment",
       "explainer": "Measure 110 was put on the ballot and paid for by a campaign committee funded mostly by Drug Policy Action, the 501(c)(4), and Dr. Bronner's; the c3 counted here worked on its drafting, implementation and defence (DPA says it prevented full repeal in 2024 and protected funding for services) beside Oregon's Health Justice Recovery Alliance. Our judgment: 8% (2% to 20%)."
+    },
+    {
+      "id": "m110_attribution_share",
+      "section": "adjustments",
+      "label": "Measure 110: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "m110_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "m110_period_share",
@@ -1712,7 +1747,7 @@
       "section": "adjustments",
       "label": "DPA's share of the resources (outcome-weighted average, for reading only)",
       "format": "percent",
-      "formula": "(od_value_per_year * od_attribution_share + can_record_value_per_year * can_attribution_share) / (od_value_per_year + can_record_value_per_year)",
+      "formula": "(od_value_per_year * od_attribution_share_shared + can_record_value_per_year * can_attribution_share_shared) / (od_value_per_year + can_record_value_per_year)",
       "explainer": "The outcome-weighted average of the branches (harm reduction and records), for reading only: each branch applies its own."
     },
     {
@@ -1720,8 +1755,8 @@
       "section": "adjustments",
       "label": "DPA's share of the resources behind the wins",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches (the row above), for reading only: each branch applies its own share."
+      "formula": "(od_value_per_year * od_attribution_share + can_record_value_per_year * can_attribution_share) / (od_value_per_year + can_record_value_per_year)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

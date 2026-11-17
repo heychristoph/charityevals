@@ -1,6 +1,6 @@
 # Audit: ican-charityevals, round 3
 Result: 0.007595 daly/$ = 7.6 years of healthy life per 1,000 dollars (combined range 0.27–217; model's own ranges 0.12–630). Verdict: pass (one low finding on a citation's wording).
-Model-sha: 81f840796c485cbf897d6e4ee45e4ed6cfcab069f7bc22f9bbcefdebaa21ca95
+Model-sha: 5a07a4e772169a451723554c95c017b14683711c62d0e9c93e33cd53a6752711
 Scope: scoped verification of the four round-2 fixes (commit 8e359e1) and the write-up. Nothing else re-audited.
 
 Fixes against the round-2 findings:
@@ -36,3 +36,5 @@ Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanica
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
 
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against 7dbeec92.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 6 rows changed, against HEAD.

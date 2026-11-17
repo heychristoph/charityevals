@@ -1,7 +1,7 @@
 # Audit: sierra-club-foundation-charityevals-lands-health, round 3 (verification of the compliance-cost rule 2.21)
 Result: 9.286e-7 daly/$ = 0.0009286 years of healthy life per 1,000 dollars (combined range 6.1e-5 to 0.0142); cause median 0.001995 (x0.47). Round 2: 0.001075, so -14%. Verdict: pass.
 Verdict: pass
-Model-sha: 53af9fbbcf97379d16aa0462a670908ead23916e37a094b16bd64c87bca0c41c
+Model-sha: dbe0b9de44ceefa286dcbd64e57ebacac7a9da7c84842a2dc9ffadce064a4993
 
 Scope: scoped verification of the changed rows (`pm_compliance_uov`, `uov_bridged`, `summary`, and the figure in writeups/sierra-club-foundation-charityevals.md). Unchanged rows not re-audited.
 
@@ -31,7 +31,7 @@ Checks:
 Unchanged: the Sierra Club's share of the rule (4%), the next dollar, the delivered share. The compliance row removes about 21% of the soot benefit.
 
 Verdict: pass
-Model-sha: 53af9fbbcf97379d16aa0462a670908ead23916e37a094b16bd64c87bca0c41c
+Model-sha: dbe0b9de44ceefa286dcbd64e57ebacac7a9da7c84842a2dc9ffadce064a4993
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
@@ -41,3 +41,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.

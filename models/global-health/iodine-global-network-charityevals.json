@@ -1245,12 +1245,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Net value of a dollar moved, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -1323,8 +1331,8 @@
       "section": "careers",
       "label": "Value per career changed, units of value",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",
@@ -1407,8 +1415,8 @@
       "section": "adjustments",
       "label": "Lebanon: IGN's credit",
       "format": "percent",
-      "formula": "leb_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "leb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leb_implementation_adj",
@@ -1499,8 +1507,8 @@
       "section": "adjustments",
       "label": "Producer quality assurance: IGN's credit",
       "format": "percent",
-      "formula": "qa_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "qa_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "qa_implementation_adj",
@@ -1592,8 +1600,8 @@
       "section": "adjustments",
       "label": "Vietnam: IGN's credit",
       "format": "percent",
-      "formula": "vnm_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "vnm_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "vnm_implementation_adj",
@@ -1684,8 +1692,8 @@
       "section": "adjustments",
       "label": "Davao City: IGN's credit",
       "format": "percent",
-      "formula": "dav_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "dav_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dav_implementation_adj",
@@ -1776,8 +1784,8 @@
       "section": "adjustments",
       "label": "Policy reviews and tools: IGN's credit",
       "format": "percent",
-      "formula": "net_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "net_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "net_implementation_adj",
@@ -1863,8 +1871,8 @@
       "section": "adjustments",
       "label": "Regional advocacy: IGN's credit",
       "format": "percent",
-      "formula": "reg_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "reg_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "reg_implementation_adj",

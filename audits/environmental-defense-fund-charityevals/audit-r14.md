@@ -1,6 +1,6 @@
 # Audit: environmental-defense-fund-charityevals, round 14 (verification of the round 13 text fixes)
 Result: 0.001792 t CO₂e/$ = 0.001033 years of healthy life per $1,000, unchanged. Verdict: pass (no high or medium finding).
-Model-sha: c63525e2a4a2cfd74f672d1a61f70b18044671d278bc07aa43f3aab0d4fe40d1
+Model-sha: 16c621f01e2b6dcae7c76d678ecd337fd405e31cd7c33263fccba2ccb0952ca0
 Scope: round 13's two mediums, in the uncommitted diff of the model summary and the write-up.
 Mechanical: audit-model.ts "Findings (0)"; check.ts all models valid, 0.001033.
 
@@ -21,3 +21,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.

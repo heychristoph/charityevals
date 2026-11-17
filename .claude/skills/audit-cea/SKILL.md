@@ -75,8 +75,11 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
   - animal reach: every animal under the commitments, delivery only in the fulfilment rate (a
     delivered-only count × the rate is high when it moves the result >25%); every species through its
     own `ced_<s>` row with the right SAD version; one SADs figure per physical change;
-  - credit: every contributor's resources in `attribution_share_shared` (partners, governments,
-    volunteers' time at the local wage), staff's forgone pay in `salary_sacrifice`; a wellbeing trial's
+  - credit (Convention 2, normalization.md 2.24): co-funders' resources in `attribution_share_shared`
+    (partners, co-advocates, volunteers' time at the local wage), never the adopter's (cut twice with
+    `mobiliser_share`: high); a win's or research branch's used share × `mobiliser_share`, its cost rows
+    reading it; an import classified (`mobilised`), with our row and the pin `mobiliser_share: 1`;
+    staff's forgone pay in `salary_sacrifice`; a wellbeing trial's
     effect already net of care as usual (`counterfactual_adj` 1);
   - climate, money moved and careers: the shared rows (normalization.md 2.5, 2.8; INV-12, valued one way);
   - signs and one question per adjustment (Convention 5);

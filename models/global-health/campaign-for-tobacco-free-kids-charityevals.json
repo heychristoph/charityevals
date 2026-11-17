@@ -667,12 +667,21 @@
       "explainer": "US tobacco wins are coalition wins: ACS CAN (whose own model credits it 30% of its wins across all its issues), the American Heart Association, the American Lung Association, Truth Initiative, state and local health departments and coalitions, and CTFK's own 501(c)(4) Action Fund, which pays for most direct lobbying. CTFK is a lead strategist (state tax campaigns, FDA litigation, the yearly state reports). 12%, 5% to 25% of the people and money behind the wins."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "us_attribution_share",
       "section": "adjustments",
       "label": "US: attribution share",
+      "credit": "win",
       "format": "percent",
-      "formula": "us_attribution_share_shared",
-      "explainer": "The share of resources (Convention 2)."
+      "formula": "us_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "us_implementation_adj",
@@ -754,9 +763,10 @@
       "id": "glob_attribution_share",
       "section": "adjustments",
       "label": "Global: attribution share",
+      "credit": "win",
       "format": "percent",
-      "formula": "glob_attribution_share_shared",
-      "explainer": "The share of resources (Convention 2)."
+      "formula": "glob_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "glob_implementation_adj",
@@ -843,9 +853,10 @@
       "id": "ghai_attribution_share",
       "section": "adjustments",
       "label": "GHAI: attribution share",
+      "credit": "win",
       "format": "percent",
-      "formula": "ghai_attribution_share_shared",
-      "explainer": "The share of resources (Convention 2)."
+      "formula": "ghai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ghai_implementation_adj",
@@ -924,7 +935,7 @@
       "label": "attribution share (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
       "formula": "(us_dalys * us_attribution_share + glob_dalys * glob_attribution_share + ghai_dalys * ghai_attribution_share) / advocacy_dalys",
-      "explainer": "The branches' figures weighted by their DALYs before adjustments; no row upstream of the outcome reads it."
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

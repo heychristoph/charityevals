@@ -1,6 +1,6 @@
 # Audit: prison-policy-initiative-charityevals, round 9 (scoped verification)
 Result: 6.033e-5 daly/$ = 0.0603 years of healthy life per 1,000 dollars (combined range 0.0054–0.678); cause median 0.0682 (×0.88). Verdict: pass.
-Model-sha: dab33b2f68ca0626a23fc5c488a7d8a03ce16eab9a57de63c9eb6ede5dabdb4f
+Model-sha: ee8808ec6b18d3299a967f2105a1a7eebe856f89add98a6c5718fecfbf96be09
 Scope: scoped to the change since round 8: row fed_uov_per_dollar (phone-company owners' term now fed_owner_multiple x @united_states.ce_expenditure_per_person_2024), fed_owner_multiple's label/explainer, and the write-up. Nothing else re-audited.
 Mechanical: lint 0/0/0 (audit-model: Findings (0)), invariants none, normalization-audit no violations (run in background, then `git checkout -- generated`), summaries and simulation-check ran without instability; result 0.0631 to 0.0603 (-4.4%).
 Previous round: round 8 had no findings.
@@ -37,3 +37,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 5 rows changed, against cc9a04dd.

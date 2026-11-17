@@ -844,15 +844,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the employers pay for the work itself: the training's cost over training plus the employers' cost of the work-years is the anchor (credit by share of resources); name it."
+      "explainer": "TEMPLATE: 1 when no other programme trained or placed the same people; else this programme's cost over all such programmes' cost for them, named. The employers who pay for the work itself are not in this denominator: the mobiliser's share (fb_attribution_share) covers them."
     },
     {
       "id": "fb_deaths_per_million",
@@ -999,6 +999,14 @@
       "format": "number",
       "formula": "w_ai + w_bio + w_nuclear + w_climate + w_pol + w_fb",
       "unit": "DALYs"
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
     },
     {
       "id": "ai_evidence_adj",
@@ -1157,9 +1165,9 @@
       "explainer": "TEMPLATE: 1 by default: those who would have got there anyway are already out of fb_share_working; below 1 only where another programme would have trained the same people (a substitute course), named."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
-      "label": "AI field work: this charity's share of the resources behind it",
+      "label": "AI field work: this charity's share among those who worked for it",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -1167,12 +1175,43 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+      "explainer": "TEMPLATE: this charity's share among those who campaigned, advised or researched alongside it for the same result (coalition partners, co-authors, other funders of the same work), by everyone's spending and staff time on it. Whoever adopts or carries out the result (the government that legislates and enforces, the company that complies, the lab, funder or health system that uses the research) is never in this denominator: the mobiliser's share below covers them. 1 when it worked alone."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
+    },
+    {
+      "id": "bio_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Pandemic field work: this charity's share among those who worked for it",
+      "format": "percent",
+      "value": {
+        "low": 0.5,
+        "best": 0.8,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "TEMPLATE: this charity's share among those who campaigned, advised or researched alongside it for the same result (coalition partners, co-authors, other funders of the same work), by everyone's spending and staff time on it. Whoever adopts or carries out the result (the government that legislates and enforces, the company that complies, the lab, funder or health system that uses the research) is never in this denominator: the mobiliser's share below covers them. 1 when it worked alone."
     },
     {
       "id": "bio_attribution_share",
       "section": "adjustments",
-      "label": "Pandemic field work: this charity's share of the resources behind it",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Nuclear field work: this charity's share among those who worked for it",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -1180,12 +1219,21 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+      "explainer": "TEMPLATE: this charity's share among those who campaigned, advised or researched alongside it for the same result (coalition partners, co-authors, other funders of the same work), by everyone's spending and staff time on it. Whoever adopts or carries out the result (the government that legislates and enforces, the company that complies, the lab, funder or health system that uses the research) is never in this denominator: the mobiliser's share below covers them. 1 when it worked alone."
     },
     {
       "id": "nuclear_attribution_share",
       "section": "adjustments",
-      "label": "Nuclear field work: this charity's share of the resources behind it",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
+    },
+    {
+      "id": "climate_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Climate work: this charity's share among those who worked for it",
       "format": "percent",
       "value": {
         "low": 0.5,
@@ -1193,38 +1241,43 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+      "explainer": "TEMPLATE: this charity's share among those who campaigned, advised or researched alongside it for the same result (coalition partners, co-authors, other funders of the same work), by everyone's spending and staff time on it. Whoever adopts or carries out the result (the government that legislates and enforces, the company that complies, the lab, funder or health system that uses the research) is never in this denominator: the mobiliser's share below covers them. 1 when it worked alone."
     },
     {
       "id": "climate_attribution_share",
       "section": "adjustments",
-      "label": "Climate work: this charity's share of the resources behind it",
+      "label": "Climate work: share of credit used",
+      "format": "percent",
+      "formula": "climate_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
+    },
+    {
+      "id": "pol_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Policy win: this charity's share among those who worked for it",
       "format": "percent",
       "value": {
-        "low": 0.5,
-        "best": 0.8,
-        "high": 1
+        "low": 0.05,
+        "best": 0.3,
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
+      "explainer": "TEMPLATE: the campaign's spending (pol_cost_share × cost_total) over the resources of everyone who campaigned for the win (coalition partners' spending and staff time, the submissions), each valued; name them. The officials who draft, pass and enforce it are not in this denominator: the mobiliser's share covers them. Counting seats or signatures overstates it where others did most of the campaigning."
     },
     {
       "id": "pol_attribution_share",
       "section": "adjustments",
-      "label": "Policy win: this charity's share of the resources behind it",
+      "label": "Policy win: share of credit used",
       "format": "percent",
-      "value": {
-        "low": 0.01,
-        "best": 0.1,
-        "high": 0.5
-      },
-      "kind": "judgment",
-      "explainer": "TEMPLATE: credit by share of resources: the campaign's spending (pol_cost_share × cost_total) over everyone's resources behind the win (coalition partners' spending and staff time, the officials drafting it, the submissions), each valued; name them. Counting seats or signatures overstates it where others did most of the work."
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
-      "label": "Field-building: this charity's share of the resources behind it",
+      "label": "Field-building: this charity's share among those who worked for it",
       "format": "percent",
       "value": {
         "low": 0.7,
@@ -1232,7 +1285,16 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "TEMPLATE: the charity's share of the programme's own resources (co-hosts, mentors' unpaid time, a partner's venue); the employers' share of the alumni's work is fb_credit_share, not here."
+      "explainer": "TEMPLATE: the charity's share of the programme's own resources (co-hosts, mentors' unpaid time, a partner's venue); the employers who pay for the alumni's work are under the mobiliser's share, not here."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
     },
     {
       "id": "evidence_adj",

@@ -1026,12 +1026,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -1105,9 +1113,9 @@
       "section": "careers",
       "label": "Value of one career change (units of value)",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
       "unit": "units of value",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",
@@ -1297,12 +1305,20 @@
       "explainer": "FLN's share of all CSF's spending."
     },
     {
-      "id": "fln_attribution_share",
+      "id": "fln_attribution_share_shared",
       "section": "adjustments",
       "label": "FLN: CSF's share of the resources behind the missions' gain",
       "format": "percent",
       "formula": "fln_csf_inr / (fln_csf_inr + nipun_central_inr * nipun_utilisation / central_share_nipun * csf_states_enrolment_share + fln_other_partners_inr)",
       "explainer": "CSF's FLN spending over everyone's: the mission's central budget, as spent, grossed up by the states' share and taken for CSF's 11 states, plus other partners'. Teachers' regular pay isn't counted: they were teaching anyway, and the gain is measured against schooling as usual."
+    },
+    {
+      "id": "fln_attribution_share",
+      "section": "adjustments",
+      "label": "FLN: share of credit used",
+      "format": "percent",
+      "formula": "fln_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ece_state_inr",
@@ -1332,12 +1348,20 @@
       "explainer": "Our judgment: the benefit counts only the ~4 lakh children with pre-primary for the first time (p. 34); the states' spending also serves children who had some pre-primary before, mostly in anganwadis, whose smaller gain isn't counted. CSF's support is aimed at the new classes. 60% (40% to 80%)."
     },
     {
-      "id": "ece_attribution_share",
+      "id": "ece_attribution_share_shared",
       "section": "adjustments",
       "label": "Early childhood: CSF's share of the resources behind the new pre-primary classes",
       "format": "percent",
       "formula": "total_expenses_inr * ece_spend_share / (total_expenses_inr * ece_spend_share + ece_state_inr * ece_first_time_share)",
       "explainer": "CSF's early-childhood spending, with its share of overhead, over its own and the states' spending on the first-time children."
+    },
+    {
+      "id": "ece_attribution_share",
+      "section": "adjustments",
+      "label": "Early childhood: share of credit used",
+      "format": "percent",
+      "formula": "ece_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pal_share_of_edtech",
@@ -1375,12 +1399,20 @@
       "explainer": "The same share as Andhra Pradesh's: the deployments' costs and CSF's support are counted together."
     },
     {
-      "id": "pal_attribution_share",
+      "id": "pal_attribution_share_shared",
       "section": "adjustments",
       "label": "Adaptive learning: CSF's share of the resources behind the state deployments",
       "format": "percent",
       "formula": "total_expenses_inr * edtech_spend_share * pal_share_of_edtech / (total_expenses_inr * edtech_spend_share * pal_share_of_edtech + pal_state_inr)",
       "explainer": "CSF's spending on the deployments, with its share of overhead, over its own and the others'."
+    },
+    {
+      "id": "pal_attribution_share",
+      "section": "adjustments",
+      "label": "Adaptive learning: share of credit used",
+      "format": "percent",
+      "formula": "pal_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "edo_partners_inr",
@@ -1397,12 +1429,20 @@
       "unit": "₹"
     },
     {
-      "id": "edo_attribution_share",
+      "id": "edo_attribution_share_shared",
       "section": "adjustments",
       "label": "Other EdTech: CSF's share of the resources behind the product improvements",
       "format": "percent",
       "formula": "total_expenses_inr * edtech_spend_share * (1 - pal_share_of_edtech) / (total_expenses_inr * edtech_spend_share * (1 - pal_share_of_edtech) + edo_partners_inr)",
       "explainer": "CSF's other EdTech spending, with its share of overhead, over its own and the partners'."
+    },
+    {
+      "id": "edo_attribution_share",
+      "section": "adjustments",
+      "label": "Other EdTech: share of credit used",
+      "format": "percent",
+      "formula": "edo_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "gov_disclosure_share",
@@ -1432,12 +1472,20 @@
       "unit": "₹"
     },
     {
-      "id": "gov_attribution_share",
+      "id": "gov_attribution_share_shared",
       "section": "adjustments",
       "label": "School governance: CSF's share of the resources behind the disclosure reforms",
       "format": "percent",
       "formula": "total_expenses_inr * gov_spend_share * gov_disclosure_share / (total_expenses_inr * gov_spend_share * gov_disclosure_share + gov_district_inr)",
       "explainer": "CSF's spending on the pilots, with its share of overhead, over its own and the districts'."
+    },
+    {
+      "id": "gov_attribution_share",
+      "section": "adjustments",
+      "label": "School governance: share of credit used",
+      "format": "percent",
+      "formula": "gov_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "hps_pilot_share",
@@ -1467,12 +1515,20 @@
       "unit": "₹"
     },
     {
-      "id": "hps_attribution_share",
+      "id": "hps_attribution_share_shared",
       "section": "adjustments",
       "label": "High-potential students: CSF's share of the resources behind the pilot",
       "format": "percent",
       "formula": "total_expenses_inr * hps_spend_share * hps_pilot_share / (total_expenses_inr * hps_spend_share * hps_pilot_share + hps_partners_inr)",
       "explainer": "CSF's spending on the pilot, with its share of overhead, over its own and the partners'."
+    },
+    {
+      "id": "hps_attribution_share",
+      "section": "adjustments",
+      "label": "High-potential students: share of credit used",
+      "format": "percent",
+      "formula": "hps_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "fln_missing_data_adj",
@@ -1584,7 +1640,7 @@
       "section": "adjustments",
       "label": "CSF's share of the resources, outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(fln_downstream_value * fln_attribution_share + ece_downstream_value * ece_attribution_share + pal_downstream_value * pal_attribution_share + php_downstream_value * php_attribution_share + edo_downstream_value * edo_attribution_share + gov_downstream_value * gov_attribution_share + hps_downstream_value * hps_attribution_share) / downstream_value",
+      "formula": "(fln_downstream_value * fln_attribution_share_shared + ece_downstream_value * ece_attribution_share_shared + pal_downstream_value * pal_attribution_share_shared + php_downstream_value * php_attribution_share + edo_downstream_value * edo_attribution_share_shared + gov_downstream_value * gov_attribution_share_shared + hps_downstream_value * hps_attribution_share_shared) / downstream_value",
       "explainer": "Each branch's own share applies in its branch; this average is for reading only."
     },
     {
@@ -1592,7 +1648,7 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(fln_downstream_value * fln_attribution_share + ece_downstream_value * ece_attribution_share + pal_downstream_value * pal_attribution_share + php_downstream_value * php_attribution_share + edo_downstream_value * edo_attribution_share + gov_downstream_value * gov_attribution_share + hps_downstream_value * hps_attribution_share) / downstream_value",
       "explainer": "The outcome-weighted average of the branches, for reading only: each branch's own share applies in its branch."
     },
     {

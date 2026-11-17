@@ -902,11 +902,21 @@
       "explainer": "UCS's part of the advocacy behind EPA's 2024 power-plant standards: its energy analysts commented on the rule and briefed members, but the litigation and the rule's design were led by the Environmental Defense Fund, Earthjustice, the Natural Resources Defense Council, Clean Air Task Force and the Sierra Club. 3% (1% to 8%), our judgment."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "pwr_attribution_share",
       "section": "adjustments",
       "label": "EPA power-plant standards: UCS's share of the advocacy behind it, as counted",
       "format": "percent",
-      "formula": "pwr_attribution_share_shared"
+      "formula": "pwr_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pwr_implementation_adj",
@@ -942,7 +952,9 @@
       "section": "adjustments",
       "label": "EPA vehicle standards: UCS's share of the advocacy behind it, as counted",
       "format": "percent",
-      "formula": "veh_attribution_share_shared"
+      "formula": "veh_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "veh_implementation_adj",
@@ -978,7 +990,9 @@
       "section": "adjustments",
       "label": "Inflation Reduction Act: UCS's share of the advocacy behind it, as counted",
       "format": "percent",
-      "formula": "ira_attribution_share_shared"
+      "formula": "ira_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ira_implementation_adj",
@@ -1014,7 +1028,9 @@
       "section": "adjustments",
       "label": "Advanced Clean Cars II: UCS's share of the advocacy behind it, as counted",
       "format": "percent",
-      "formula": "accii_attribution_share_shared"
+      "formula": "accii_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "accii_implementation_adj",
@@ -1057,7 +1073,9 @@
       "section": "adjustments",
       "label": "Cap-and-invest extension: UCS's share of the advocacy behind it, as counted",
       "format": "percent",
-      "formula": "capinv_attribution_share_shared"
+      "formula": "capinv_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "capinv_implementation_adj",
@@ -1205,7 +1223,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared"
+      "formula": "(pwr_downstream * pwr_counterfactual_adj * pwr_attribution_share + veh_downstream * veh_counterfactual_adj * veh_attribution_share + ira_downstream * ira_counterfactual_adj * ira_attribution_share + accii_downstream * accii_counterfactual_adj * accii_attribution_share + capinv_downstream * capinv_counterfactual_adj * capinv_attribution_share) / (pwr_downstream * pwr_counterfactual_adj + veh_downstream * veh_counterfactual_adj + ira_downstream * ira_counterfactual_adj + accii_downstream * accii_counterfactual_adj + capinv_downstream * capinv_counterfactual_adj)"
     },
     {
       "id": "implementation_adj",

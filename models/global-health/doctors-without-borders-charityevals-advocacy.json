@@ -837,7 +837,7 @@
       "explainer": "Each cut counts the shared years brought forward; this is the share of it that wouldn't have come yet without the campaigners. Bedaquiline's came with the primary patent's expiry, GDF's competitive tender and Lupin's generic ready at $194 (a lower share); Xpert's after four years of the coalition's pressure with no competitor, though the agreement was the Global Fund's, Stop TB's and USAID's with Danaher. Our judgment, half."
     },
     {
-      "id": "acc_attribution_share",
+      "id": "acc_attribution_share_shared",
       "section": "adjustments",
       "label": "MSF Access: MSF's share of the advocates' resources",
       "format": "percent",
@@ -848,6 +848,14 @@
       },
       "kind": "judgment",
       "explainer": "Time for $5 was coordinated by the MSF Access Campaign, Partners in Health and Treatment Action Group with more than 150 civil society organisations; the Xpert agreement was the Global Fund's, Stop TB's and USAID's with Danaher, and the bedaquiline price was negotiated by the Global Drug Facility with USAID and the Global Fund, with activists' patent challenges in India and South Africa. Our judgment, a quarter."
+    },
+    {
+      "id": "acc_attribution_share",
+      "section": "adjustments",
+      "label": "MSF Access: share of credit used",
+      "format": "percent",
+      "formula": "acc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "acc_missing_data_adj",
@@ -887,7 +895,7 @@
       "formula": "1"
     },
     {
-      "id": "aw_attribution_share",
+      "id": "aw_attribution_share_shared",
       "section": "adjustments",
       "label": "Awareness: MSF's share of the resources behind the extra coverage",
       "format": "percent",
@@ -898,6 +906,14 @@
       },
       "kind": "judgment",
       "explainer": "The coverage is journalists' and editors' work too. No study divides the credit for news coverage between the NGOs that prompt it and the newsrooms: the one study found of NGOs in humanitarian news (Sunderland & Jackson 2026, International Journal of Communication, https://ijoc.org/index.php/ijoc/article/download/26567/5453/111865?inline=1) analyses their press releases, not the share of coverage they cause. Our judgment, three quarters, widened to 30-100% because nothing anchors it."
+    },
+    {
+      "id": "aw_attribution_share",
+      "section": "adjustments",
+      "label": "Awareness: share of credit used",
+      "format": "percent",
+      "formula": "aw_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "aw_missing_data_adj",
@@ -976,12 +992,20 @@
       "unit": "EUR"
     },
     {
-      "id": "dndi_attribution_share",
+      "id": "dndi_attribution_share_shared",
       "section": "adjustments",
       "label": "DNDi: its share of the resources behind its R&D",
       "format": "percent",
       "formula": "dndi_spend_eur / (dndi_spend_eur + dndi_in_kind_eur)",
       "explainer": "DNDi's spending over its spending plus partners' in-kind work (Convention 2); MSF's grant is credited with its dollars' share through the cost."
+    },
+    {
+      "id": "dndi_attribution_share",
+      "section": "adjustments",
+      "label": "DNDi: share of credit used",
+      "format": "percent",
+      "formula": "dndi_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dndi_missing_data_adj",
@@ -1038,7 +1062,7 @@
       "section": "adjustments",
       "label": "MSF's share of the resources: outcome-weighted average of the branches",
       "format": "multiple",
-      "formula": "(acc_value_per_year * acc_total_adj * acc_attribution_share + aw_value_per_year * aw_total_adj * aw_attribution_share + uov_from_daly * dndi_attribution_share) / (acc_value_per_year * acc_total_adj + aw_value_per_year * aw_total_adj + uov_from_daly)",
+      "formula": "(acc_value_per_year * acc_total_adj * acc_attribution_share_shared + aw_value_per_year * aw_total_adj * aw_attribution_share_shared + uov_from_daly * dndi_attribution_share_shared) / (acc_value_per_year * acc_total_adj + aw_value_per_year * aw_total_adj + uov_from_daly)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1046,7 +1070,7 @@
       "section": "adjustments",
       "label": "Share of credit used (average of the branches)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(acc_value_per_year * acc_total_adj * acc_attribution_share + aw_value_per_year * aw_total_adj * aw_attribution_share + uov_from_daly * dndi_attribution_share) / (acc_value_per_year * acc_total_adj + aw_value_per_year * aw_total_adj + uov_from_daly)",
       "explainer": "The branches' average share of the resources, for reading only."
     },
     {
@@ -1114,12 +1138,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -1185,9 +1217,9 @@
       "section": "careers",
       "label": "Value of one career change (units of value)",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
       "unit": "units of value",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",

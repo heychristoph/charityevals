@@ -865,12 +865,29 @@
       "explainer": "Judgment built up from its parts: the US National Cancer Institute 'spent more than $600 million on childhood cancer' in FY2023 (St. Baldrick's, https://blog.stbaldricks.org/?p=36179), St. Jude's own cancer research about $500 million, other US children's hospitals' and charities' own funds (St. Baldrick's, Alex's Lemonade Stand, Dana-Farber, CHOP and others) a few hundred million, Europe and the rest of the world (national research councils, Children with Cancer UK, the Princess Máxima Centre, EU programmes) about $500 million, and drug companies' paediatric trials (required by US and EU paediatric rules) several hundred million."
     },
     {
-      "id": "ca_attribution_share",
+      "id": "ca_attribution_share_shared",
       "section": "adjustments",
       "label": "Cancer branch: St. Jude's share of the field's funding",
       "format": "percent",
       "formula": "ca_program_spend * hospital_indirect_uplift / (ca_field_research_funding + ca_program_spend * (hospital_indirect_uplift - 1))",
       "explainer": "St. Jude's own cancer research ÷ all funders' childhood cancer research (Convention 2): about a fifth. St. Jude's side, in the numerator and in its part of the field, carries its share of the hospital's administration (hospital_indirect_uplift), since the other funders' awards include their grantees' indirect costs. The NIH grants St. Jude receives are counted in the field, not in St. Jude's share."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ca_attribution_share",
+      "section": "adjustments",
+      "label": "Cancer branch: share of credit used",
+      "credit": "research",
+      "format": "percent",
+      "formula": "ca_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ca_missing_data_adj",
@@ -990,12 +1007,21 @@
       "explainer": "Judgment built up from its parts: the US National Institutes of Health, by far the largest public funder of both, spends on the order of $100-150 million a year on sickle cell disease and several hundred million on influenza (NIH RePORT, research, condition and disease categories); drug companies' sickle cell gene therapies and drugs (Vertex and CRISPR Therapeutics, bluebird bio, Novartis, Pfizer) a few hundred million; influenza vaccine and antiviral development by industry several hundred million; the CDC, WHO, Gates Foundation, European and other public funders the rest. All ages, as the burden it is set against (nc_flu_deaths_per_year and nc_flu_deaths_over5_per_year). $1.5 billion; $0.8 billion if most of industry's influenza spending is vaccine manufacturing and licensing rather than research, $3 billion if all of it is research."
     },
     {
-      "id": "nc_attribution_share",
+      "id": "nc_attribution_share_shared",
       "section": "adjustments",
       "label": "Non-cancer branch: St. Jude's share of the field's funding",
       "format": "percent",
       "formula": "nc_program_spend * nc_targeted_share * hospital_indirect_uplift / (nc_field_research_funding + nc_program_spend * nc_targeted_share * (hospital_indirect_uplift - 1))",
       "explainer": "St. Jude's own sickle cell and influenza research ÷ all funders' (Convention 2): about 8%. St. Jude's side carries its share of the hospital's administration (hospital_indirect_uplift), as in the cancer branch."
+    },
+    {
+      "id": "nc_attribution_share",
+      "section": "adjustments",
+      "label": "Non-cancer branch: share of credit used",
+      "credit": "research",
+      "format": "percent",
+      "formula": "nc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "nc_missing_data_adj",
@@ -1034,7 +1060,7 @@
       "section": "adjustments",
       "label": "St. Jude's share of the fields' funding, outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "ca_outcome_share * ca_attribution_share + (1 - ca_outcome_share) * nc_attribution_share",
+      "formula": "ca_outcome_share * ca_attribution_share_shared + (1 - ca_outcome_share) * nc_attribution_share_shared",
       "explainer": "Each branch applies its own."
     },
     {
@@ -1042,8 +1068,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches' shares, for reading only; each branch applies its own (ca_attribution_share, nc_attribution_share)."
+      "formula": "ca_outcome_share * ca_attribution_share + (1 - ca_outcome_share) * nc_attribution_share",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "missing_data_adj",

@@ -470,12 +470,21 @@
       "explainer": "Credit by share of resources (Convention 2): THL's share among the groups (ACE's estimates), times this line's share of THL's own resources on those campaigns. The other-programmes model takes the mobilisation's share of the same pool over the same total, and the volunteers' time is credited to no dollar, so together the two lines never get more than THL's share."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "This line's share of the resources behind the switches; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "implementation_adj",

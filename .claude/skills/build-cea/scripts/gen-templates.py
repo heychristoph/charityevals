@@ -29,6 +29,9 @@ needs is already read from its shared fact or slider (docs/normalization.md 2.7-
   catastrophic-risk  yearly chances by size (@catastrophe, $ai_catastrophe_chance), a typical dollar's cut
                     (AI: misalignment and misuse presets weighted by ai_misuse_cost_share), deaths by the world's age split, the future through future_years_per_person,
                     each branch's adjustments applied to its own value (chained by healthy years, w_<branch>)
+  win and research  corporate-campaign, diet-change, policy-research-meta, medical-research, rights-advocacy,
+                    catastrophic-risk: the used share is the share among co-advocates x mobiliser_share
+                    (= $mobiliser_share), its class in "credit" (docs/normalization.md 2.24, INV-22)
   every skeleton    missing_data_adj in total_adj (a branch's <branch>_missing_data_adj): the shared
                     $missing_data_discount where the outcome isn't measured for this charity, else 1 with
                     the reason (docs/normalization.md 2.12)
@@ -52,8 +55,9 @@ def inp(id, section, label, value, kind, explainer, fmt="number", unit=None, sou
     r["explainer"] = "TEMPLATE: " + explainer
     return r
 
-def f(id, section, label, formula, explainer=None, fmt="number", unit=None, published=None):
+def f(id, section, label, formula, explainer=None, fmt="number", unit=None, published=None, credit=None):
     r = {"id": id, "section": section, "label": label, "format": fmt, "formula": formula}
+    if credit: r["credit"] = credit
     if unit: r["unit"] = unit
     if published is not None: r["published"] = published
     if explainer: r["explainer"] = explainer
@@ -90,7 +94,14 @@ def missing_data_row(id, section, what="this branch's outcome"):
 
 ATTRIBUTION = "where other organisations contributed to the same outcome (co-funders, coalition campaigns, government delivery), this charity's share of everyone's spending on it. Others' in-kind work counts too: government staff time, partners' own delivery costs, and volunteers' unpaid time (beyond any stipend the charity pays, which is in its cost), valued at the local wage for the hours given. 1 when it delivers alone."
 
-def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None, leverage_row=None, attribution_row=None):
+# The mobiliser's share (docs/normalization.md 2.24, templates.md Convention 2): a win or research branch's
+# used share is its share among co-advocates times the row mobiliser_share; a delivery branch reads none.
+ATTRIBUTION_WIN = "this charity's share among those who campaigned, advised or researched alongside it for the same result (coalition partners, co-authors, other funders of the same work), by everyone's spending and staff time on it. Whoever adopts or carries out the result (the government that legislates and enforces, the company that complies, the lab, funder or health system that uses the research) is never in this denominator: the mobiliser's share below covers them. 1 when it worked alone."
+MOBILISER_ROW = {"id": "mobiliser_share", "section": "adjustments", "label": "This charity's share of the good done with money, work or budgets it brings in", "format": "percent", "formula": "$mobiliser_share",
+                 "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."}
+USED_WIN = "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24). For a branch of the charity's own services, grants or purchases, drop mobiliser_share from the formula and set \"credit\": \"delivery\"."
+
+def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, implementation_row=None, factors_extra=(), evidence_rows=None, counterfactual_row=None, unmodelled_rows=None, leverage_row=None, attribution_row=None, credit=None, share_row=True):
     rows = list(evidence_rows) if evidence_rows else [
         inp("evidence_adj", "adjustments", "Evidence adjustment (internal and external validity), a multiplier", {"low": 0.5, "best": 0.7, "high": 0.9}, "judgment",
             "how far the effect size above should be trusted for this charity's setting: publication bias, self-report bias, replication, differences between study populations and this program. A multiplier (1 = take the studies at face value), the product of its parts; say each part, its anchor (the same adjustment in another model of this intervention) and the range.", "multiple"),
@@ -98,8 +109,10 @@ def adj_rows(extra=(), leverage=False, unmodelled=False, implementation=True, im
     rows.append(counterfactual_row or inp("counterfactual_adj", "adjustments", "Share of the outcome that wouldn't have happened anyway", {"low": 0.6, "best": 0.8, "high": 0.95}, "judgment",
             "the share of the outcome that would not have happened without the program (other providers, existing trends, government). Cite coverage data or trend data where possible.", "percent"))
     rows += [
-        attribution_row or inp("attribution_share_shared", "adjustments", "This charity's share of the resources behind the outcome", {"low": 0.5, "best": 0.8, "high": 1}, "judgment",
-            ATTRIBUTION, "percent"),
+        attribution_row or inp("attribution_share_shared", "adjustments", "This charity's share among those who worked for the result" if credit else "This charity's share of the resources behind the outcome", {"low": 0.5, "best": 0.8, "high": 1}, "judgment",
+            ATTRIBUTION_WIN if credit else ATTRIBUTION, "percent"),
+    ] + ([MOBILISER_ROW] if credit and share_row else []) + [
+        f("attribution_share", "adjustments", "Share of credit used", "attribution_share_shared * mobiliser_share", USED_WIN, "percent", credit=credit) if credit else
         f("attribution_share", "adjustments", "Share of credit used", "attribution_share_shared",
           "The charity's share of the resources behind the outcome; it applies whichever way credit is shared.", "percent"),
     ]
@@ -414,7 +427,7 @@ T["corporate-campaign"] = model("corporate-campaign", "corporate and producer we
             "the wait from the win to the deadline by which companies switch, from the commitments' own deadlines (cite them); the wait is discounted at the shared rate. For an accountability branch credited with the year's observed switches (templates.md, corporate-campaign), the lag between the pressure and the switches it causes (0–2 years), not the time left to every deadline.", "number", "years"),
         f("wait_discount", "effect", "Discount for the wait until the commitments take effect", "(1 + $discount_rate) ^ -years_until_effect", "The wait discounted at the shared rate, like every future benefit.", "percent"),
         f("discounted_years", "effect", "Discounted years of impact", "pv_annuity_due(1, $discount_rate, years_of_impact) * wait_discount", "Years counted, discounted at the shared rate from when the reform takes effect.", "number", "years"),
-    ] + adj_rows(implementation_row=f("implementation_adj", "adjustments", "Share of commitments companies keep", "@sad_factors.commitment_fulfilment_cage_free",
+    ] + adj_rows(credit="win", implementation_row=f("implementation_adj", "adjustments", "Share of commitments companies keep", "@sad_factors.commitment_fulfilment_cage_free",
             "TEMPLATE: the site's one rate of pledges kept: @sad_factors.commitment_fulfilment_cage_free for cage-free pledges, @sad_factors.commitment_fulfilment_broiler for broiler (BCC/ECC) pledges. A charity's own \"92% of pledges kept\" is the same Chicken Watch data (global, by commitment, among those due) the shared rate is built from: never in its place. Pig, fish and shrimp pledges have no shared record: a judgment input with a range and the tracker it rests on. Not applied to a count of hens already switched (an observed flow is delivered already).", "percent")) + [
         f("outcome_total", "outcome", "SADs averted", "animals_affected_per_year * discounted_years * sads_per_animal_year * total_adj", None, "number", "SADs"),
         f("sads_per_dollar", "outcome", "SADs averted per dollar", "outcome_total / cost_total", None, "number", "SADs / $"),
@@ -434,7 +447,7 @@ T["diet-change"] = model("diet-change", "diet change and meal replacement", "sad
         f("years_of_impact", "effect", "Years a won menu change counts", "$win_years_counted",
           "TEMPLATE: a menu or procurement change the charity won counts the site's one number of years (docs/normalization.md 2.9; no wait for meal policies). If meals_replaced_per_year is the year's whole flow from all partners, old and new, set 1 (a flow is credited once). For individuals' diet change, replace with a sourced estimate of how long it lasts.", "number", "years"),
         f("discounted_years", "effect", "Discounted years of impact", "pv_annuity_due(1, $discount_rate, years_of_impact)", None, "number", "years"),
-    ] + adj_rows() + [
+    ] + adj_rows(credit="win") + [
         f("outcome_total", "outcome", "SADs averted", "meals_replaced_per_year * discounted_years * sads_per_meal * production_response * total_adj", None, "number", "SADs"),
         f("sads_per_dollar", "outcome", "SADs averted per dollar", "outcome_total / cost_total", None, "number", "SADs / $"),
     ] + donor_rows("sads", "SADs averted", "advocacy") + donor_tail("sads", "SADs averted", unit="ced", animal=True),
@@ -482,10 +495,10 @@ T["policy-research-meta"] = model("policy-research-meta", "policy, research and 
           "TEMPLATE: the employer's live result per dollar (#model-id) where the jobs are at one charity the site models; the moved-money destinations where they are spread over many.", "small", "units of value / $"),
         f("career_counterfactual_share", "careers", "Share of the career changes the charity caused", "@meta.career_counterfactual_share_default",
           "TEMPLATE: the site's shared default (facts/meta.json) while careers_changed is 0; else an input: the share of the changes that wouldn't have happened without the charity, from its own survey of what people would have done, or a labelled reference class.", "percent"),
-        f("career_change_value", "careers", "Value of one career change (units of value)", "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share", "The site's one career-change step (docs/normalization.md 2.8).", "number", "units of value"),
+        f("career_change_value", "careers", "Value of one career change (units of value)", "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share", "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay.", "number", "units of value"),
         missing_data_row("careers_missing_data_adj", "careers", "the career changes' count or counterfactual share"),
         f("careers_value", "careers", "Value of the career changes (units of value)", "careers_changed * career_change_value * careers_missing_data_adj", None, "number", "units of value"),
-    ] + adj_rows(implementation=False) + [
+    ] + adj_rows(implementation=False, credit="win", share_row=False) + [
         f("outcome_total", "outcome", "Total value (units of value)", "downstream_value * total_adj + moved_value + careers_value",
           "The adjustments apply to the policy and research branch; money moved counts its counterfactual through the shared new-money share (its dollars are measured, so no missing-data step), career changes through their own share and missing-data step.", "number", "units of value"),
         f("uov_per_dollar", "outcome", "Value per dollar", "outcome_total / cost_total", "For WELLBYs, rename the uov_* rows to wellbys_* and report in wellby. For animals, rename them to sads_* and add the species section of the corporate-campaign template (output ced_per_donor_dollar). For climate, start from the climate skeleton.", "small"),
@@ -516,13 +529,13 @@ T["policy-research-meta-climate"] = model("policy-research-meta", "climate polic
           "TEMPLATE: deaths a source counts directly beside the tonnes (a coal plant's own death count), per tonne brought forward, as an input with its source; 0 when the smoke is in air_pollution_weight, so nothing is counted twice.", "small"),
         f("methane_share", "conversion", "Share of these tonnes that are methane", "0",
           "TEMPLATE: the share of the tonnes (CO₂e) that is methane, weighted by tonnes a year before waits and years counted (a conversion row reads no shared assumption); the shared conversion values it by methane's own timing and adds its ozone deaths (docs/normalization.md 2.5). 0 for CO₂ only.", "percent"),
-    ] + adj_rows(implementation=False) + [
+    ] + adj_rows(implementation=False, credit="win") + [
         f("public_usd_per_year", "adjustments", "Public money a year that buys the tonnes or funds the work (none here)", "0",
           "TEMPLATE: public money the win spends a year once in effect (a tax credit per tonne × the tonnes, grants, public procurement, a won fund's levies) from a shared fact (facts/climate.json: the credit per tonne, the law's yearly cost), as an input with its source; 0 when the tonnes come with no public money.", "integer", "$ / year"),
         f("public_payer_uov_per_dollar", "adjustments", "Value lost per dollar of that money, units of value", "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
           "TEMPLATE: what a dollar of public money costs its payers (docs/normalization.md 2.23): the shared cost of raising it over the payers' consumption on the survey scale (2.14), here US federal taxpayers. Other payers: their country's survey-scale consumption; a levy on traded goods: its payers at the shared compliance-cost multiple, without the cost of raising public funds.", "small", "units of value / $"),
         f("public_cost_uov", "adjustments", "What the public money costs its payers, units of value (negative)", "-public_usd_per_year * public_payer_uov_per_dollar * p_success * discounted_years * total_adj",
-          "Netted against the tonnes it buys (docs/normalization.md 2.23), over the same years, wait and adjustments as the tonnes: money paid per unit delivered takes every adjustment; a fixed sum (grants, appropriations) all but the evidence step (divide total_adj by evidence_adj); a levy the steps of the spending it pays for.", "number", "units of value"),
+          "Netted against the tonnes it buys (docs/normalization.md 2.23), over the same years, wait and adjustments as the tonnes, the mobiliser's share included (it is in total_adj: the share applies to the tonnes net of this cost, 2.24): money paid per unit delivered takes every adjustment; a fixed sum (grants, appropriations) all but the evidence step (divide total_adj by evidence_adj); a levy the steps of the spending it pays for.", "number", "units of value"),
         f("tco2e_from_uov", "bridges", "The public money's cost to its payers, in tonnes of CO₂e (negative)", bridge("public_cost_uov", "uov", "tco2e"),
           "Units of value into tonnes by the site's fixed bridge (docs/normalization.md 2.6). Fixed.", "number", "t CO₂e"),
         f("outcome_total", "outcome", "Tonnes of CO₂e averted", "downstream_value * total_adj + tco2e_from_uov", None, "number", "t CO₂e"),
@@ -670,7 +683,7 @@ T["medical-research"] = model("medical-research", "medical research and disease 
             "from the policy's own start date; discounted at the shared rate.", "number", "years"),
         f("adv_discounted_years", "effect", "Advocacy: discounted years of impact", "pv_annuity_due(1, $discount_rate, adv_years_of_impact) * (1 + $discount_rate) ^ -adv_years_until_effect", None, "number", "years"),
         f("advocacy_dalys", "effect", "Expected DALYs averted by advocacy (before adjustments)", "adv_people_affected_per_year * adv_dalys_per_person_year * adv_p_success * adv_discounted_years", None, "number", "DALYs"),
-    ] + adj_rows(implementation=False, unmodelled=True) + multi({
+    ] + adj_rows(implementation=False, unmodelled=True, credit="research") + multi({
         "uov": ("0", "Value in units of value (none by default: the burden is counted in DALYs)"),
         "wellby": ("0", "Life satisfaction (patients' wellbeing gains, where evidence is in WELLBYs)"),
     }, "research_dalys + advocacy_dalys") + donor_rows("dalys", "Years of healthy life", "research", marginal=True) + donor_tail("dalys", "Years of healthy life", marginal=True, unit="daly"),
@@ -793,7 +806,7 @@ T["rights-advocacy"] = model("rights-advocacy", "rights and advocacy", "daly", "
         inp("released_ls_gain_per_year", "effect", "Wellbeing gained per year of freedom (points, 0-10)", {"low": 0.5, "best": 1, "high": 2}, "estimate",
             "the life-satisfaction gap between detention and release, from surveys of prisoners or detainees and the released.", "number", "points", src("wellbeing study")),
         f("released_value", "effect", "WELLBYs per person released, discounted", "released_ls_gain_per_year * pv_annuity_due(1, $discount_rate, released_years)", "The person's own years, discounted at the shared rate (a release isn't a won reform).", "number", "WELLBYs"),
-    ] + adj_rows(implementation=True, implementation_row=inp("implementation_adj", "adjustments", "Share of the win that is enforced", {"low": 0.4, "best": 0.7, "high": 0.95}, "judgment",
+    ] + adj_rows(credit="win", implementation=True, implementation_row=inp("implementation_adj", "adjustments", "Share of the win that is enforced", {"low": 0.4, "best": 0.7, "high": 0.95}, "judgment",
             "how much of a law or ruling is applied in practice (compliance, enforcement), from studies of similar wins.", "percent"), unmodelled=True) + multi({
         "uov": ("people_affected_per_year * ln_gain_per_person_year * $uov_per_ln_consumption * p_success * discounted_years", "Income gained"),
         "wellby": ("people_affected_per_year * ls_gain_per_person_year * p_success * discounted_years + released_people * released_value", "Wellbeing gained"),
@@ -886,8 +899,8 @@ CR_ADJ_INPUTS = {
         "pol": ({"low": 0.3, "best": 0.6, "high": 0.9}, "the share of the win no one else (other campaigners, the government on its own) would have brought about now; for a pending measure the chance it passes is pol_p_success, not here. Name the closest substitutes."),
         "fb": ({"low": 0.8, "best": 1, "high": 1}, "1 by default: those who would have got there anyway are already out of fb_share_working; below 1 only where another programme would have trained the same people (a substitute course), named.")}),
     "attribution_share": ("This charity's share of the resources behind it", "percent", {"low": 0.5, "best": 0.8, "high": 1}, {
-        "pol": ({"low": 0.01, "best": 0.1, "high": 0.5}, "credit by share of resources: the campaign's spending (pol_cost_share × cost_total) over everyone's resources behind the win (coalition partners' spending and staff time, the officials drafting it, the submissions), each valued; name them. Counting seats or signatures overstates it where others did most of the work."),
-        "fb": ({"low": 0.7, "best": 0.95, "high": 1}, "the charity's share of the programme's own resources (co-hosts, mentors' unpaid time, a partner's venue); the employers' share of the alumni's work is fb_credit_share, not here.")}),
+        "pol": ({"low": 0.05, "best": 0.3, "high": 0.8}, "the campaign's spending (pol_cost_share × cost_total) over the resources of everyone who campaigned for the win (coalition partners' spending and staff time, the submissions), each valued; name them. The officials who draft, pass and enforce it are not in this denominator: the mobiliser's share covers them. Counting seats or signatures overstates it where others did most of the campaigning."),
+        "fb": ({"low": 0.7, "best": 0.95, "high": 1}, "the charity's share of the programme's own resources (co-hosts, mentors' unpaid time, a partner's venue); the employers who pay for the alumni's work are under the mobiliser's share, not here.")}),
 }
 
 def cr_adjustment_rows():
@@ -902,9 +915,16 @@ def cr_adjustment_rows():
         rows.append(f(f"w_{b}", "adjustments", f"Weight: healthy years from {what} (before adjustments)", f"{b}_deaths_averted * {value} * dalys_per_death_value + {b}_future_dalys",
                       "The branch's deaths averted in healthy years" + (" (the COVID-scale part at COVID-19's age mix)" if b == "bio" else " (a policy or field-building branch pointed at pandemics: its deaths at w_bio's mix, as in covid_scale_deaths_averted)" if b in ("pol", "fb") else "") + ", plus its future healthy years kept: the weight its adjustments carry. Fixed.", "number", "DALYs"))
     rows.append(f("w_total", "adjustments", "Weight: healthy years from every branch (before adjustments)", " + ".join(f"w_{b}" for b, _, _ in CR_BRANCHES), None, "number", "DALYs"))
+    rows.append(MOBILISER_ROW)
     for adj, (label, fmt, default, special) in CR_ADJ_INPUTS.items():
         for b, name, what in CR_BRANCHES:
-            value, text = special.get(b, (default, {"evidence_adj": CR_EVIDENCE, "counterfactual_adj": CR_CF, "attribution_share": ATTRIBUTION}[adj].format(what=what)))
+            value, text = special.get(b, (default, {"evidence_adj": CR_EVIDENCE, "counterfactual_adj": CR_CF, "attribution_share": ATTRIBUTION_WIN}[adj].format(what=what)))
+            if adj == "attribution_share":
+                # The share among those who did the same work, then the used share: field work and people trained
+                # are taken up by others (research), a policy win is carried out by others (win).
+                rows.append(inp(f"{b}_attribution_share_shared", "adjustments", f"{name}: this charity's share among those who worked for it", value, "judgment", text, fmt))
+                rows.append(f(f"{b}_attribution_share", "adjustments", f"{name}: share of credit used", f"{b}_attribution_share_shared * mobiliser_share", USED_WIN, fmt, credit="win" if b == "pol" else "research"))
+                continue
             rows.append(inp(f"{b}_{adj}", "adjustments", f"{name}: {label[0].lower() + label[1:]}", value, "judgment", text, fmt))
     return rows
 
@@ -956,8 +976,8 @@ T["catastrophic-risk"] = model("catastrophic-risk", "global catastrophic risks (
           "The shared figure (@catastrophe.field_work_years), one for every model; discounted at the shared rate. Fixed.", "number", "years"),
         f("fb_work_dollars", "effect", "Field-building: the alumni's added work, in dollars of typical work", "fb_people * fb_share_working * pv_annuity_due(1, $discount_rate, fb_work_years) * @catastrophe.cost_per_work_year",
           "Work-years added × what a year of such work costs its employer (@catastrophe.cost_per_work_year), so it is valued at the area's typical dollar.", "usd"),
-        inp("fb_credit_share", "effect", "Field-building: the training's share of the credit for that work", {"low": 0.1, "best": 0.3, "high": 0.6}, "judgment",
-            "the employers pay for the work itself: the training's cost over training plus the employers' cost of the work-years is the anchor (credit by share of resources); name it.", "percent"),
+        inp("fb_credit_share", "effect", "Field-building: the training's share among those who trained or placed the same people", {"low": 0.5, "best": 1, "high": 1}, "judgment",
+            "1 when no other programme trained or placed the same people; else this programme's cost over all such programmes' cost for them, named. The employers who pay for the work itself are not in this denominator: the mobiliser's share (fb_attribution_share) covers them.", "percent"),
         f("fb_deaths_per_million", "effect", "Field-building: deaths averted a year by a typical $1 million of the alumni's work", "ai_deaths_per_million", CR_POINT.format(what="alumni's work", row="deaths_per_million"), "small", "deaths / year / $1M"),
         f("fb_future_per_million", "effect", "Field-building: future healthy years kept a year by a typical $1 million of the alumni's work", "ai_future_per_million", CR_POINT.format(what="alumni's work", row="future_per_million"), "small", "DALYs / year / $1M"),
         f("fb_deaths_averted", "effect", "Field-building: deaths averted (expected, before adjustments)", "fb_work_dollars / 1e6 * fb_credit_share * fb_deaths_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)", None, "small", "deaths"),

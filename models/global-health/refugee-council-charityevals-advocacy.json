@@ -551,7 +551,7 @@
       "explainer": "Judgment 5% (1-15%): both were in the winning party's manifesto, so the election decided them; the campaigning's part is the arguments and costings the new ministers used ('clear on the immediate steps needed', p. 15) and keeping the plan from starting before the election."
     },
     {
-      "id": "mvo_attribution_share",
+      "id": "mvo_attribution_share_shared",
       "section": "adjustments",
       "label": "Move-on: the Refugee Council's share of the coalition's resources",
       "format": "percent",
@@ -564,7 +564,24 @@
       "explainer": "Judgment 25% (10-45%): the move-on campaign was led by a coalition (NACCOM, the British Red Cross, Crisis, St Mungo's, Homeless Link, councils through the Local Government Association); the Refugee Council is one of the largest refugee charities in it."
     },
     {
-      "id": "ima_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "mvo_attribution_share",
+      "section": "adjustments",
+      "label": "Move-on: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "mvo_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "ima_attribution_share_shared",
       "section": "adjustments",
       "label": "Processing and Rwanda: the Refugee Council's share of the campaigners' resources",
       "format": "percent",
@@ -577,11 +594,20 @@
       "explainer": "Judgment 12% (5-25%): many organisations opposed the Act and the Rwanda plan (Amnesty, the Refugee Council, Freedom from Torture, Care4Calais, the Joint Council for the Welfare of Immigrants, lawyers who litigated it, the UNHCR); the Refugee Council's costings and reports were among the most cited."
     },
     {
+      "id": "ima_attribution_share",
+      "section": "adjustments",
+      "label": "Processing and Rwanda: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "ima_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "The charity's share of the resources behind the outcome (outcome-weighted average)",
       "format": "percent",
-      "formula": "(mvo_dalys_unadjusted * mvo_attribution_share + ima_dalys_unadjusted * ima_attribution_share) / (mvo_dalys_unadjusted + ima_dalys_unadjusted)",
+      "formula": "(mvo_dalys_unadjusted * mvo_attribution_share_shared + ima_dalys_unadjusted * ima_attribution_share_shared) / (mvo_dalys_unadjusted + ima_dalys_unadjusted)",
       "explainer": "Outcome-weighted average of the branches, for reading only: each branch applies its own row."
     },
     {
@@ -589,8 +615,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "For reading only, as the row above."
+      "formula": "(mvo_dalys_unadjusted * mvo_attribution_share + ima_dalys_unadjusted * ima_attribution_share) / (mvo_dalys_unadjusted + ima_dalys_unadjusted)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "counterfactual_adj",

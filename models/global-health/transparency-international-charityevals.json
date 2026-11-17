@@ -823,11 +823,28 @@
       "explainer": "Credit by share of all the resources behind the wins (Convention 2), government staff time included: governments' own reformers and officials about 50-60%; other NGOs (Global Witness, Open Ownership, ONE, the FACT coalition, OCCRP's reporting), donors and international bodies about 25-35%; the Transparency International movement, one of the largest specialised groups in most of the coalitions named, about 15% (5% to 40%)."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "The Secretariat's credit for the changes",
       "format": "percent",
       "formula": "pol_tis_share * pol_movement_share"
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Secretariat's credit for the changes",
+      "credit": "win",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pol_implementation_adj",
@@ -912,6 +929,7 @@
       "id": "alac_attribution_share",
       "section": "adjustments",
       "label": "The Secretariat's share of the resources behind the centres",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.1,
@@ -1089,7 +1107,7 @@
       "section": "adjustments",
       "label": "Share of credit (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(pol_raw * pol_attribution_share + alac_raw * alac_attribution_share + enf_raw * enf_attribution_share) / raw_total",
+      "formula": "(pol_raw * pol_attribution_share_shared + alac_raw * alac_attribution_share + enf_raw * enf_attribution_share) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
@@ -1097,8 +1115,8 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches, for reading only."
+      "formula": "(pol_raw * pol_attribution_share + alac_raw * alac_attribution_share + enf_raw * enf_attribution_share) / raw_total",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "unmodelled_benefits_adj",

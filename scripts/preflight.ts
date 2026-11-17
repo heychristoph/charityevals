@@ -27,7 +27,7 @@ import { lintModel } from "../src/engine/lint";
 import { applyWaivers, checkAll, type Waivers } from "../src/engine/invariants";
 import { simulationCheck } from "../src/engine/simulation-check";
 import { simulate } from "../src/engine/montecarlo";
-import { copiedFigureProblems, kindProblems, peerMentionProblems, PREFLIGHT_WAIVERS, sameJson, sharedFactProblems, simulationProblems, unitProblems, type Problem } from "../src/engine/preflight";
+import { copiedFigureProblems, creditProblems, kindProblems, peerMentionProblems, PREFLIGHT_WAIVERS, sameJson, sharedFactProblems, simulationProblems, unitProblems, type Problem } from "../src/engine/preflight";
 import { templateRowIds, TEMPLATE_DIR } from "../src/engine/template-files";
 import { Model } from "../src/engine/schema";
 
@@ -174,7 +174,7 @@ for (const id of ids) {
     const sim = simulationCheck(lib, m);
     out.push(...simulationProblems(id, sim, waivers));
     const usedPairs = new Set<string>();
-    out.push(...unitProblems(lib, m, asCopied(m)), ...kindProblems(lib, m), ...sharedFactProblems(lib, m, waivers), ...copiedFigureProblems(lib, m, templates.get(m.template ?? ""), waivers, usedPairs));
+    out.push(...unitProblems(lib, m, asCopied(m)), ...kindProblems(lib, m), ...creditProblems(lib, m), ...sharedFactProblems(lib, m, waivers), ...copiedFigureProblems(lib, m, templates.get(m.template ?? ""), waivers, usedPairs));
     const writeup = join(root, "writeups", `${id}.md`);
     out.push(...peerMentionProblems(lib, m, existsSync(writeup) ? readFileSync(writeup, "utf8") : undefined));
     for (const k of Object.keys(waivers[PREFLIGHT_WAIVERS.pair] ?? {}))

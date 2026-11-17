@@ -1346,7 +1346,7 @@
       "explainer": "Others push the UK's resilience structures (the Institute for Government, the National Preparedness Commission, Parliament's committees, the Covid-19 Inquiry's recommendations): 0.7 (0.4 to 0.9), our judgment, the family's usual figure."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1359,7 +1359,23 @@
       "kind": "judgment"
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1372,7 +1388,15 @@
       "kind": "judgment"
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1385,7 +1409,15 @@
       "explainer": "Not used: nuclear_cost_share is 0. The template's figure kept."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1398,7 +1430,16 @@
       "explainer": "Not used: pol_cost_share is 0, since no law, treaty or standard was won in the year with CLTR's work. The template's range kept for the switched-on check."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1411,7 +1452,15 @@
       "explainer": "Not used: fb_people is 0, since CLTR ran no fellowship in the year. The template's figure kept for the switched-on check."
     },
     {
-      "id": "rm_attribution_share",
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "rm_attribution_share_shared",
       "section": "adjustments",
       "label": "Risk management: this charity's share of the resources behind it",
       "format": "percent",
@@ -1422,6 +1471,14 @@
       },
       "kind": "judgment",
       "explainer": "Changes in government risk management are made by civil servants and ministers, with many outside voices: CLTR's share 0.75 (0.5 to 1), our judgment, a little below the policy units' 0.8."
+    },
+    {
+      "id": "rm_attribution_share",
+      "section": "adjustments",
+      "label": "Risk management: share of credit used",
+      "format": "percent",
+      "formula": "rm_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

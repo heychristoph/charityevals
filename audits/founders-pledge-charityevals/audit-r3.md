@@ -1,6 +1,6 @@
 # Audit: founders-pledge-charityevals, round 3 (scoped verification of round 2's fixes)
 Result: 0.01591 uov/$ = 7.955 years of healthy life per 1,000 dollars (combined range 2.05–30.9; the model's own ranges alone 6.77–10.68); cause median 0.06519 (×122, explained in the summary: about sixteen dollars to recommended charities per dollar spent; INV-15 passes). Verdict: pass.
-Model-sha: 26da1f1a2ed096d36b9426bad9b43674d0d6d0c5e3e678b221bdf2706009e6a8
+Model-sha: 0ecef10235df6711c81b9fb1d52e4c55708ac292466d2c36a1c0fd234d11c4a7
 Scope: unchanged (whole group, 2025, costs £9,147,150 = $12.05M); only round 2's changed rows were checked.
 Mechanical: lint none shown by audit-model (no findings printed), invariants none; check.ts "all models valid"; simulation-check stable (5% 0.337×, 50% 1×, 95% 2.65× the best guess). normalization-audit not re-run (scoped round; no rule change).
 Previous round (round 2): finding 1 (donor_cost_share missing other giving's new money) resolved; finding 2 (SilverLining, Save the Children) resolved; finding 3 (£7.3M) resolved; finding 4 (Bandhan, Resolve to Save Lives in lists) resolved; finding 5 (93% anchor, system change / global security wording) resolved.
@@ -33,10 +33,12 @@ Previous round (round 2): finding 1 (donor_cost_share missing other giving's new
 5. The destination valuation and `other_giving_value`. A members' and partners' survey would improve the model most.
 
 Verdict: pass (no high or medium finding).
-Model-sha: 26da1f1a2ed096d36b9426bad9b43674d0d6d0c5e3e678b221bdf2706009e6a8
+Model-sha: 0ecef10235df6711c81b9fb1d52e4c55708ac292466d2c36a1c0fd234d11c4a7
 
 Re-stamped (orchestrator, 14 Nov 2026): on merge the summary's "more than ten times its peers" corrected to "about eight times" (7.9× the global-health median); no value changed.
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders (scripts/prose-numbers.ts); the receipt passed on HEAD's model, whose headline moved since its audit only through models it reads. Mechanical: headline unchanged, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.

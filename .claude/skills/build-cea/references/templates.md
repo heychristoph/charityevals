@@ -39,6 +39,8 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
   with no trial against none) or from other delivery, or no outcome data. A judged baseline,
   counterfactual or attribution never makes a branch thin.
 - **Combined range**: audit-model's, every input's range as independent log-space errors.
+- **Mobiliser's share** (`$mobiliser_share`, read by the row `mobiliser_share` only): the charity's share
+  of the good done with resources others commit only because of it, net of their cost (INV-22).
 
 ## What each shared row means
 
@@ -48,7 +50,8 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
 | `overhead_ratio` | total ÷ programme expenses: management and fundraising spread over every programme by cost |
 | `evidence_adj` | trust in the effect size here: internal × external validity; 1 = face value (a judgment anchored on studies) |
 | `counterfactual_adj` | share of the outcome that wouldn't have happened anyway (coverage, trend, other providers) |
-| `attribution_share_shared` / `attribution_share` | the charity's share of all resources behind the outcome (Convention 2) |
+| `attribution_share_shared` / `attribution_share` | the charity's share among those who paid for or did the same work; the share used (Convention 2) |
+| `mobiliser_share` | `$mobiliser_share`, in a win's or research branch's used share (Convention 2) |
 | `implementation_adj` | share of reported reach that gets the intervention as studied (monitoring, trackers, the shared fulfilment rate) |
 | `leverage_funging_adj` | others would have paid anyway (<1), or the money pulls others in (>1) |
 | `unmodelled_benefits_adj` | effects not modelled, each listed as a signed share of modelled value |
@@ -62,12 +65,16 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
    `program_spend = program_expenses × program_share` (a judgment anchored on headcount or the
    charity's own description) when costs aren't split by programme; `staff_cost_share = staff_pay /
    total_expenses` when the financials give staff pay (contractors who work like staff count).
-2. **Cost is the charity's own spending.** Money or in-kind work by co-funders, governments, partners or
-   volunteers never goes into `cost_total`; it lowers `attribution_share_shared` to the charity's share
-   of all resources, with `$resource_shares` on or off. Value government staff time and partners'
-   delivery at their cost, and volunteers' unpaid hours (beyond stipends the charity pays) at the
-   local wage. Donated goods likewise leave `cost_total` and both sides of the overhead ratio and enter
-   the credit share at local market value. `salary_sacrifice` is only the charity's own staff's forgone pay.
+2. **Cost is the charity's own spending; credit asks one question** (normalization.md 2.24): would the
+   party have committed its resources without the charity? *Yes, a co-funder* (co-advocates,
+   co-deliverers, partners, volunteers, donated goods): never in `cost_total`; it lowers
+   `attribution_share_shared` to the charity's share among those who paid for or did the same work, at
+   cost (unpaid hours at the local wage; goods at market value, off both sides of the overhead ratio). *No, mobilised* (the government that enforces, the company that
+   complies, whoever adopts the research): never in that denominator; the branch's used share is
+   `<branch>_attribution_share_shared * mobiliser_share` (`"credit": "win"` or `"research"`); the
+   win's cost rows read it. Own services, grants and purchases: `"credit": "delivery"`.
+   Beneficiaries' own time is no resource. `salary_sacrifice` is only the charity's
+   own staff's forgone pay.
 3. **Flows, not stocks.** Reach is per year. Multiply by persistence only what was *added* in the period
    (new commitments, institutions, pledges): for a won reform, `$win_years_counted`. An ongoing
    programme's yearly flow counts one year, against one year's cost. Count everything the wins cover,

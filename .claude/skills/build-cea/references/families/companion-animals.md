@@ -48,7 +48,7 @@ the `ced_` rows.
   its own (the site counts suffering averted).
 - **Neutering and rehoming overlap** (a neutered rehomed animal): count each change once.
 - **Inspection and prosecution** work: animals removed from cruelty are `animals_helped`; a law or
-  deterrence effect is a won-reform branch, in this model (its pain-day path) or policy-research-meta.
+  deterrence effect is a won-reform branch (`"credit": "win"`, Convention 2; services `"delivery"`), in this model (its pain-day path) or policy-research-meta.
 - **People's health and wellbeing**: dog vaccination against rabies is a direct-health model of its own
   (deaths averted per dose); owners' and survivors' wellbeing enter through the template's bridge rows.
 - **Shop and lottery income** isn't programme cost; their cost is fundraising (overhead).

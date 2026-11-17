@@ -439,20 +439,46 @@
       "explainer": "The shared figures: the adopting places use proportional representation for about 82% of their own elections (Portland, Oregon its whole council, Arlington County only its board), and a city's own elections are about half of a full switch (@democracy.local_offices_weight): about 41%."
     },
     {
-      "id": "rcv_attribution_share",
+      "id": "rcv_attribution_share_shared",
       "section": "adjustments",
       "label": "FairVote's share of the ranked-choice movement's resources",
       "format": "percent",
       "formula": "cost_total * rcv_spend_share / @democracy.us_rcv_movement_resources_per_year",
-      "explainer": "FairVote's 2024 spending on single-winner ranked-choice voting (about $5.1 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million, ballot campaigns and FairVote included; Convention 2): about {{row:rcv_attribution_share}}. Its 2024 spending is above its 2016-2024 average ($4.1 million a year nominal, $4.7 million in 2024 prices), so this is the share a 2024 year of its work would be of an average movement year; the result per dollar is the movement's wins per dollar it spent, whatever FairVote's own spending."
+      "explainer": "FairVote's 2024 spending on single-winner ranked-choice voting (about $5.1 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_rcv_movement_resources_per_year, $19 million, ballot campaigns and FairVote included; Convention 2): about {{row:rcv_attribution_share_shared}}. Its 2024 spending is above its 2016-2024 average ($4.1 million a year nominal, $4.7 million in 2024 prices), so this is the share a 2024 year of its work would be of an average movement year; the result per dollar is the movement's wins per dollar it spent, whatever FairVote's own spending."
     },
     {
-      "id": "pr_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "rcv_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: FairVote's share of the ranked-choice movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "rcv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pr_attribution_share_shared",
       "section": "adjustments",
       "label": "FairVote's share of the proportional-representation movement's resources",
       "format": "percent",
       "formula": "cost_total * pr_spend_share / @democracy.us_pr_movement_resources_per_year",
-      "explainer": "FairVote's 2024 spending on proportional representation (about $1.3 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, FairVote and Protect Democracy included; Convention 2): about {{row:pr_attribution_share}}. As in the RCV branch, a 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
+      "explainer": "FairVote's 2024 spending on proportional representation (about $1.3 million) over the whole movement's average yearly spending in 2016-2025 (@democracy.us_pr_movement_resources_per_year, $3.4 million, FairVote and Protect Democracy included; Convention 2): about {{row:pr_attribution_share_shared}}. As in the RCV branch, a 2024 year of its work against an average movement year, so the result per dollar is the movement's wins per dollar it spent."
+    },
+    {
+      "id": "pr_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: FairVote's share of the proportional-representation movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "pr_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "rcv_missing_data_adj",
@@ -507,7 +533,7 @@
       "section": "adjustments",
       "label": "FairVote's share of the resources behind the wins (outcome-weighted, for reading only)",
       "format": "percent",
-      "formula": "(rcv_value * rcv_attribution_share + pr_value * pr_attribution_share) / (rcv_value + pr_value)",
+      "formula": "(rcv_value * rcv_attribution_share_shared + pr_value * pr_attribution_share_shared) / (rcv_value + pr_value)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -539,8 +565,8 @@
       "section": "adjustments",
       "label": "FairVote's share of the credit",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The same as attribution_share_shared, the outcome-weighted average of the branches' shares (rcv_attribution_share, pr_attribution_share), for reading only: each branch applies its own."
+      "formula": "(rcv_value * rcv_attribution_share + pr_value * pr_attribution_share) / (rcv_value + pr_value)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "ue_democratic_goods",

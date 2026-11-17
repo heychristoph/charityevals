@@ -20,5 +20,7 @@ Mechanical: `scripts/preflight.ts`: passes, 2 low (simulation `@meta.prior_vs_ca
 
 No high or medium finding.
 
-Model-sha: 70f010f3f975663e755ff00b3b33c3d7e10c6ff226d6aea6e85254ca3de25b89
+Model-sha: d7d5ee2c026270e3fc8527b462a014cc582426af5d9a3fd3425ea1f1d38c28c9
 Verdict: pass
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.

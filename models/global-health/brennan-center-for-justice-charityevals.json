@@ -495,12 +495,29 @@
       "explainer": "Institutional philanthropy for democracy (2021-2022, the shared figure) × the whole field against it × the direct share plus the rest at its relative effect, in 2025 prices (Convention 8): about $2.6 billion, the field whose year of work the cut in risk belongs to."
     },
     {
-      "id": "dem_attribution_share",
+      "id": "dem_attribution_share_shared",
       "section": "adjustments",
       "label": "The Brennan Center's share of the field's resources",
       "format": "percent",
       "formula": "dem_slide_cost / dem_field_spending",
       "explainer": "Its direct democracy cost (dem_slide_cost) over the field's effect-weighted resources (Convention 2): under 1%. Only direct work against a slide counts here; its reform work is valued in the reform branch alone. Its tariff briefs' dollars sit in Liberty and National Security too; the tariff branch is valued by brief share, so the overlap (under 0.5%) is left."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "dem_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Brennan Center's share of the field's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "dem_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dem_evidence_adj",
@@ -743,12 +760,21 @@
       "explainer": "Anchored on countable effort. At the Supreme Court the amici wrote more than the parties: about 37 briefs of up to 8,000 words each (Supreme Court Rule 33.1(g), against 13,000 for a party's merits brief) beside the parties' six merits briefs and replies, up to about four times the parties' words (a ceiling: briefs often run shorter than the limit). But the parties' counsel (the Liberty Justice Center for the importers in V.O.S. Selections, Akin Gump for Learning Resources, twelve states' attorneys general) also built the record, briefed and argued every motion and appeal at four levels of court and argued the cases, which amici never do, and most of an amicus brief's value is in the few the justices draw on. 15%, from 5% (the parties' work as most of the effort) to 35% (counting words alone, discounted for the arguments and the record)."
     },
     {
-      "id": "tar_attribution_share",
+      "id": "tar_attribution_share_shared",
       "section": "adjustments",
       "label": "The Brennan Center's share of the resources behind the tariff litigation",
       "format": "percent",
       "formula": "tar_bcj_briefs / tar_amicus_briefs * tar_amici_resource_share",
-      "explainer": "Its briefs over all the challengers' amicus briefs, × the amici's share of the litigation (Convention 2): about {{row:tar_attribution_share}}."
+      "explainer": "Its briefs over all the challengers' amicus briefs, × the amici's share of the litigation (Convention 2): about {{row:tar_attribution_share_shared}}."
+    },
+    {
+      "id": "tar_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Brennan Center's share of the resources behind the tariff litigation",
+      "credit": "win",
+      "format": "percent",
+      "formula": "tar_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "tar_evidence_adj",
@@ -889,12 +915,21 @@
       "formula": "@democracy.redistricting_movement_resources * @cpi.usa_2025 / @cpi.usa_2024"
     },
     {
-      "id": "ref_attribution_share",
+      "id": "ref_attribution_share_shared",
       "section": "adjustments",
       "label": "The Brennan Center's reform spending as a multiple of the redistricting movement's yearly spending",
       "format": "multiple",
       "formula": "ref_cost / ref_movement_real",
       "explainer": "Reform value scales with dollars (Convention 2, the shared movement figure); the Center's reform spending is about one and a half times the movement's, so this is not a share of anything. Each reform dollar is credited a quarter of a movement dollar's effect (ref_relative_effect), so the branch comes to about 0.4 movement-years. Diminishing returns to a larger programme are not modelled."
+    },
+    {
+      "id": "ref_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Brennan Center's reform spending as a multiple of the redistricting movement's yearly spending",
+      "credit": "win",
+      "format": "multiple",
+      "formula": "ref_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ref_weak_delivery",
@@ -1169,12 +1204,21 @@
       "explainer": "The field's spending in the years the decline comes from (Convention 11), in 2025 prices (Convention 8), so the Center's 2025 justice cost is credited at the field's past rate of achievement per dollar."
     },
     {
-      "id": "jus_attribution_share",
+      "id": "jus_attribution_share_shared",
       "section": "adjustments",
       "label": "The Brennan Center's share of the reform field's resources",
       "format": "percent",
       "formula": "jus_cost / jus_field_spending",
-      "explainer": "Its justice cost over the field's spending (Convention 2): about {{row:jus_attribution_share}}."
+      "explainer": "Its justice cost over the field's spending (Convention 2): about {{row:jus_attribution_share_shared}}."
+    },
+    {
+      "id": "jus_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Brennan Center's share of the reform field's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "jus_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "jus_evidence_adj",
@@ -1556,7 +1600,7 @@
       "section": "adjustments",
       "label": "The Brennan Center's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(dem_raw * dem_attribution_share + tar_raw * tar_attribution_share + ref_raw * ref_attribution_share + jus_raw * jus_attribution_share) / raw_total",
+      "formula": "(dem_raw * dem_attribution_share_shared + tar_raw * tar_attribution_share_shared + ref_raw * ref_attribution_share_shared + jus_raw * jus_attribution_share_shared) / raw_total",
       "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own."
     },
     {
@@ -1564,8 +1608,8 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches, for reading only: every branch applies its own (dem_attribution_share, tar_attribution_share, jus_attribution_share)."
+      "formula": "(dem_raw * dem_attribution_share + tar_raw * tar_attribution_share + ref_raw * ref_attribution_share + jus_raw * jus_attribution_share) / raw_total",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "missing_data_adj",

@@ -865,11 +865,21 @@
       "explainer": "Carbon180 says its policy team helped structure the hubs programme in the 2021 law and shaped the hubs' design and their 2025 defence (annual reports 2021, 2022 and 2025). Budgets in 2022 (Form 990s, total expenses): Clean Air Task Force $40.5M, the Bipartisan Policy Center $32.2M, Third Way Institute $18.6M, the Great Plains Institute, which convenes the Carbon Capture Coalition, $7.4M (year to June 2022), Carbon180 $7.1M. Each × the share it spent on carbon capture and removal (judged: 15%, 5%, 10%, 25%, 60%) gives $6.1M, $1.6M, $1.9M, $1.9M and Carbon180's $4.3M, 27% of the groups' resources. The companies' own lobbying (Occidental, Climeworks, Heirloom, the DAC Coalition's members) and ClearPath, judged at one and a half times the groups together, bring it to about 11%; lobbying filings report one amount across all issues, so they can't split this further. Our judgment, 10% (4% to 25%)."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "dac_attribution_share",
       "section": "adjustments",
       "label": "Direct air capture plants: share of credit used",
       "format": "percent",
-      "formula": "dac_attribution_share_shared"
+      "formula": "dac_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dac_implementation_adj",
@@ -915,7 +925,9 @@
       "section": "adjustments",
       "label": "Technology: share of credit used",
       "format": "percent",
-      "formula": "tech_attribution_share_shared"
+      "formula": "tech_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "tech_implementation_adj",
@@ -961,7 +973,9 @@
       "section": "adjustments",
       "label": "45Q at other plants: share of credit used",
       "format": "percent",
-      "formula": "q45_attribution_share_shared"
+      "formula": "q45_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "q45_implementation_adj",
@@ -1021,7 +1035,9 @@
       "section": "adjustments",
       "label": "Farm conservation money: share of credit used",
       "format": "percent",
-      "formula": "land_attribution_share_shared"
+      "formula": "land_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "land_implementation_adj",
@@ -1067,7 +1083,9 @@
       "section": "adjustments",
       "label": "Forests: share of credit used",
       "format": "percent",
-      "formula": "forest_attribution_share_shared"
+      "formula": "forest_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "forest_implementation_adj",
@@ -1146,7 +1164,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(dac_downstream * dac_counterfactual_adj * dac_attribution_share + tech_downstream * tech_counterfactual_adj * tech_attribution_share + q45_downstream * q45_counterfactual_adj * q45_attribution_share + land_downstream * land_counterfactual_adj * land_attribution_share + forest_downstream * forest_counterfactual_adj * forest_attribution_share) / (dac_downstream * dac_counterfactual_adj + tech_downstream * tech_counterfactual_adj + q45_downstream * q45_counterfactual_adj + land_downstream * land_counterfactual_adj + forest_downstream * forest_counterfactual_adj)",
       "explainer": "The outcome-weighted average of the branches' credit shares, for reading only; each branch applies its own."
     },
     {
