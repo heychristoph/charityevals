@@ -150,7 +150,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Some fellows come from AI-and-biosecurity fellowship programmes that may pay their stipends; contractors IBBIS pays itself. Our judgment, 60% (20% if most fellows are paid by their programmes, to all of it). The unpaid rest is others' resources, inside bio_attribution_share."
+      "explainer": "Some fellows come from AI-and-biosecurity fellowship programmes that may pay their stipends; contractors IBBIS pays itself. Our judgment, 60% (20% if most fellows are paid by their programmes, to all of it). The unpaid rest is others' resources, inside bio_attribution_share_shared."
     },
     {
       "id": "other_costs_ratio",
@@ -1179,7 +1179,7 @@
       "explainer": "Not used: IBBIS does no training that moves people into the field (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others would have done it."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1192,7 +1192,23 @@
       "explainer": "Not used: IBBIS does no AI work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1205,7 +1221,15 @@
       "explainer": "IBBIS's share of the resources behind its outputs: its consortia run on members' unpaid expert time (about 30 in the DSSC, over 60 in the SBRC), the 2025 study on AI-redesigned toxins was led by Microsoft with Twist and IDT, NIST writes the evaluation portal's test sets, and the map and workshops had co-hosts (Asia Centre for Health Security, Tianjin University, Nigeria's biosafety agency). About 90 experts giving 2 to 5% of a year at a work-year's cost is $0.5M to $1.1M beside IBBIS's $2.3M; fellows' time paid by their own programmes adds a little. 0.75, our judgment, 0.5 to 0.95. The Nuclear Threat Initiative's 2025 grant to IBBIS ($38,343, its Form 990's Schedule F) is inside IBBIS's spending here, so it lowers nothing; the screening tool's development under NTI's incubation (2019 to 2023) belongs to those years, not to 2025."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1218,7 +1242,15 @@
       "explainer": "Not used: IBBIS does no nuclear work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1231,7 +1263,16 @@
       "explainer": "Not used: IBBIS does no policy campaign with a win in 2025 (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1242,6 +1283,14 @@
       },
       "kind": "judgment",
       "explainer": "Not used: IBBIS does no training that moves people into the field (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, the default for a branch without evidence either way, down to 0.5 if others shared the work."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

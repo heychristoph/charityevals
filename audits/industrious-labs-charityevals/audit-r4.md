@@ -1,6 +1,6 @@
 # Audit: industrious-labs-charityevals, round 4 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.006819 tco2e/$ = -0.001835 years of healthy life per 1,000 dollars (combined range -1.811 to -1.9e-6). Verdict: pass.
-Model-sha: 68f7c7dc27ca14716dde6c065328262a488dbfc21e9449ce64ca9dff2fee0a18
+Model-sha: 53c8f72c1466c9da167bec63233d36229132cd02ece3e187e5423f48c35c85a4
 Scope: the changed rows only: `uov_per_year`, the explainers of `air_morbidity_share` and `iis_deaths_per_year`, the tonnes bridge's damage-beyond-deaths factor, and the write-up's headline sentence. No public-money branch (its EPA and district rules carry compliance costs through the 2.21 compliance rows; no credit, grant or levy), so rule 2.23 adds no row here.
 Mechanical: audit-model 0 findings (warnings only: range runs from harm to good, 90% judgment share); check.ts all models valid; invariants none.
 Previous round: round 3 low #3 (morbidity share multiplied EPA's steel deaths): resolved.
@@ -21,10 +21,12 @@ Checked:
 | `@climate.us_iron_steel_neshap_2024_deaths_per_year` | gao.gov/products/b-336203 | verified (round 3), unchanged | the figure includes illness, which is why the share leaves it |
 
 Verdict: pass (no findings).
-Model-sha: 68f7c7dc27ca14716dde6c065328262a488dbfc21e9449ce64ca9dff2fee0a18
+Model-sha: 53c8f72c1466c9da167bec63233d36229132cd02ece3e187e5423f48c35c85a4
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2492e3fc.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.

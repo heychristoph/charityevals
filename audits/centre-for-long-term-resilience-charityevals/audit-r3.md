@@ -1,6 +1,6 @@
 # Audit: centre-for-long-term-resilience-charityevals, round 3 (verification)
 Result: 0.005666 daly/$ = 5.67 years of healthy life per 1,000 dollars (combined range 0.34–95.6); cause median 5.26 (×1.08). Verdict: pass.
-Model-sha: f855c3fb51d5d32b89aad3fc031a86a875aac2d7ac7bbbc8b884bc070d6989b6
+Model-sha: 793f1fa742951c1de2c7de22ac32e1b74181fd5776f70d8bcd5026f6c8686f1a
 Scope: scoped verification of the change since round 2 (git diff 9172ae4..HEAD): bio_attribution_share 0.8 to 0.85, the figures that follow from it, and the charity record's spending. No other part re-audited. audit-model: 0 findings; check.ts: all models valid.
 
 | Item | Check |
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.
 
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 7 rows changed, against HEAD.

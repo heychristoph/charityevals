@@ -1004,6 +1004,14 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
       "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
@@ -1106,7 +1114,7 @@
       "explainer": "0: no careers changed."
     },
     {
-      "id": "a_attribution_share",
+      "id": "a_attribution_share_shared",
       "section": "adjustments",
       "label": "Certification: the society's share of the resources behind the change",
       "format": "percent",
@@ -1117,6 +1125,14 @@
       },
       "kind": "judgment",
       "explainer": "Coalition credit by resources (Convention 2): the firms' own tax and finance staff do the work of changing policies and reporting, and the pressure that makes them want the mark comes partly from others (the Tax Justice Network and other campaigns, the press, HMRC's own disclosure rules). The fees the firms pay are the society's own income and spending, already in its cost. Judged half (25% to 80%)."
+    },
+    {
+      "id": "a_attribution_share",
+      "section": "adjustments",
+      "label": "Certification: share of credit used",
+      "format": "percent",
+      "formula": "a_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "a_evidence_adj",
@@ -1215,7 +1231,7 @@
       "explainer": "The branch's side effects summed."
     },
     {
-      "id": "c_attribution_share",
+      "id": "c_attribution_share_shared",
       "section": "adjustments",
       "label": "Benchmarking: the society's share of the resources behind the change",
       "format": "percent",
@@ -1225,7 +1241,15 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "As certification (a_attribution_share, 0.5), lower because the index was developed and is run with CSR Europe (2024 accounts, p. 5). Judged 40% (20% to 70%)."
+      "explainer": "As certification (a_attribution_share_shared, 0.5), lower because the index was developed and is run with CSR Europe (2024 accounts, p. 5). Judged 40% (20% to 70%)."
+    },
+    {
+      "id": "c_attribution_share",
+      "section": "adjustments",
+      "label": "Benchmarking: share of credit used",
+      "format": "percent",
+      "formula": "c_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "c_evidence_adj",
@@ -1299,12 +1323,21 @@
       "explainer": "The EU's and Australia's laws, the OECD's reporting rules, investors and parliamentarians would also drive a UK decision. Judged 30% (10% to 50%): no group of governments leads in the UK."
     },
     {
-      "id": "b_attribution_share",
+      "id": "b_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy: the society's share of the credit",
       "format": "percent",
       "formula": "b_ftf_movement_share * b_movement_credit",
       "explainer": "Its share of the campaign times the campaign's share of the credit."
+    },
+    {
+      "id": "b_attribution_share",
+      "section": "adjustments",
+      "label": "Policy: share of credit used",
+      "format": "percent",
+      "formula": "b_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "b_evidence_adj",
@@ -1402,7 +1435,7 @@
       "section": "adjustments",
       "label": "The society's share of the credit, outcome-weighted average of the branches",
       "format": "percent",
-      "formula": "(a_value * a_attribution_share + b_value * b_attribution_share + c_value * c_attribution_share) / downstream_value",
+      "formula": "(a_value * a_attribution_share_shared + b_value * b_attribution_share_shared + c_value * c_attribution_share_shared) / downstream_value",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1410,7 +1443,7 @@
       "section": "adjustments",
       "label": "Attribution share",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(a_value * a_attribution_share + b_value * b_attribution_share + c_value * c_attribution_share) / downstream_value",
       "explainer": "The shared attribution share: the outcome-weighted average of the branches, for reading only."
     },
     {
