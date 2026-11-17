@@ -63,7 +63,7 @@ First match on the model's id wins.
 - Ambitious Impact's Neev, Learning Alliance and First Embrace: own delivery. The charity pays for the training; what kiln owners, teachers and hospitals add is small.
 - SoGive: Motor Neurone Disease Association is research (91% of the healthy years in its figure), Versus Arthritis own delivery (research is 30%).
 - HLI's Pallium India: technical assistance, on the model's own staff-pay class (research and policy); HLI gives only a range.
-- Better Futures Guide and CEARCH (money moved): the field and the pin are set by this script once their shared money rows carry the share (scripts/moved-money.py); until then they stay on INV-22's list.
+- Better Futures Guide and CEARCH (money moved): their shared money rows carry the share (scripts/moved-money.py), so they get the field and the pin only, no second factor.
 - GiveWell's Iodine Global Network sheet has no result in common units: it gets the field only.
 
 ## For the step that re-judges shares: the adopter is in the evaluator's denominator

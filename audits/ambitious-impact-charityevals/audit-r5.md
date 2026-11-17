@@ -8,7 +8,7 @@ Checked: informed_money (grantmaker training and research changed) is read only 
 | None | | | | |
 
 Verdict: pass
-Model-sha: d6d83687a10cb303f5afebf7ea1e774e6978fc1b358bd9f3a6a43ffd83a39163
+Model-sha: 848b8fc057cb0991faccbaa22291fad5485d2f4d5299b4ebd25aaffe7189a5b6
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -19,3 +19,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.

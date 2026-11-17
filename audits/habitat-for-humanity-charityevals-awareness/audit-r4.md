@@ -1,6 +1,6 @@
 # Audit r4: habitat-for-humanity-charityevals-awareness (scoped verification)
 Result: 1.180e-5 uov/$ = 0.0059 years of healthy life per 1,000 dollars (combined range 9.1e-6 to 3.82; model's own ranges -0.078 to +4.06).
-Model-sha: 2b2a51cd51be97ccab13db925abbfc97bab6c98cf26c436f02d4a5639d50d87e
+Model-sha: 7a6e5fbf2ecd48e4efe470242eb6cd326ce4cfd3c8c90f86c3d967a6e5f24605
 Verdict: pass
 
 Scope: only the changes of commit bc46382f to the model, its write-up and scripts/beneficiary-countries.ts: each round 3 low, the new he_illness_adj row, the outcome_total formula and the narrowed unmodelled_benefits_adj. Mechanical: audit-model has no high (its only notes are the judgment-share warning and the far-below medium from netting public money, judged in r3); check.ts valid; simulation-check stable, exit 0 (5% -9.2x, 50% 1x, 95% 40.8x the best guess; the sign crosses, allowed for negative results).
@@ -25,3 +25,6 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 3 rows changed, against HEAD.
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combined; no value change). Mechanical: headline unchanged, against HEAD.
