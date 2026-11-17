@@ -37,11 +37,11 @@ The Association has under nine months of reserves and ran deficits in both of th
 
 ### What drives the result
 
-Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 150. Nearly all the Association's work is on nuclear risk, none of it is grants that another funder might have paid for, and its smaller reserves make the next dollar count for more.
+Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 45. Nearly all the Association's work is on nuclear risk, none of it is grants that another funder might have paid for, and its smaller reserves make the next dollar count for more.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 8 to 370.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 2.4 to 110.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 - **How far the Association's work beats or trails a typical project.** Nothing about it is measured.

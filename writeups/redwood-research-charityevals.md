@@ -41,10 +41,10 @@ All of Redwood's work is against misaligned AI. For catastrophes the world survi
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.009 to 0.46.
-- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.018 to 0.57.
-- **Whether any of the work counts as misuse work.** If the paper on hidden capabilities counted as misuse work (about 15% of the research), the result would be 0.90.
-- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 1.4.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.0027 to 0.14.
+- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.0054 to 0.17.
+- **Whether any of the work counts as misuse work.** If the paper on hidden capabilities counted as misuse work (about 15% of the research), the result would be 0.27.
+- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 0.42.
 
 ### What isn't modelled
 

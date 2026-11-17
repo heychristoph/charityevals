@@ -35,11 +35,11 @@ MIRI roughly tripled its reserves in 2026 and is well above its two-year target,
 
 ### What drives the result
 
-The main reason is that Rethink's typical AI project cuts its risk far less per dollar than a typical nuclear or pandemic project: a 170th to a 260th as much for extinction, and about a thousandth as much for catastrophes the world survives. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment. In its model that is nine tenths of the risk of extinction from AI but only about a third of the deaths in catastrophes the world survives, most of which come from misuse. Deaths of people alive now are about 85% of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 1.5.
+The main reason is that Rethink's typical AI project cuts its risk far less per dollar than a typical nuclear or pandemic project: a 170th to a 260th as much for extinction, and about a thousandth as much for catastrophes the world survives. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment. In its model that is nine tenths of the risk of extinction from AI but only about a third of the deaths in catastrophes the world survives, most of which come from misuse. Deaths of people alive now are about 85% of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 0.45.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.009 to 0.49.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.0027 to 0.15.
 - **How much a dollar of AI safety work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way.
 - **The discount rate and the years a cut counts.** These are shared sliders.
 - **Whether the book changes policy.** Its reach is measured; its effect on governments is not.

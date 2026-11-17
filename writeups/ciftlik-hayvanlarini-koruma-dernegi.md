@@ -10,7 +10,7 @@ Companies make cage-free pledges after CHKD's campaigns; some keep them, by a de
 
 ### What drives the result
 
-**How many years a won commitment counts** before it would have come anyway is the largest lever after the value judgments about animals (about 4 to 53 years of healthy life per $1,000 over the slider's 1 to 20 years). ACE credits 20.5 years; the shared default is 5. Next come the SADs a hen is spared each year out of a cage (about 10 to 29) and **the share of companies that keep their commitments** (about 7 to 18).
+**How many years a won commitment counts** before it would have come anyway is the largest lever after the value judgments about animals (about 1.2 to 16 years of healthy life per $1,000 over the slider's 1 to 20 years). ACE credits 20.5 years; the shared default is 5. Next come the SADs a hen is spared each year out of a cage (about 3 to 8.7) and **the share of companies that keep their commitments** (about 2.1 to 5.4).
 
 ### Where we differ from ACE
 

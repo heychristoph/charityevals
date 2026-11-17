@@ -48,10 +48,10 @@ The result rests on Rethink's typical pandemic project, which averts many more d
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 84; at 8% it is about 4.7.
-- **The years a cut counts.** At one year the result is 1.3; at twenty it is 18.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the extinction figure alone moves the result from 3.0 to 35.
-- **How much the next dollar does.** From 13.5% to 79% of the past average, the result moves from 2.2 to 12.6.
+- **The discount rate.** At 0.1% the result is about 25; at 8% it is about 1.4.
+- **The years a cut counts.** At one year the result is 0.39; at twenty it is 5.4.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the extinction figure alone moves the result from 0.90 to 10.
+- **How much the next dollar does.** From 13.5% to 79% of the past average, the result moves from 0.66 to 3.8.
 - **Whether far-UVC works and is safe in real buildings.** This is what Blueprint is funding studies to find out; the far-UVC uptake runs from 0.4 to 1.2.
 
 ### What isn't modelled

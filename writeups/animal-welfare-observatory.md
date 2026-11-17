@@ -10,7 +10,7 @@ Companies make pledges; some implement them, on a timeline the campaigns can bri
 
 ### What drives the result
 
-**How many years a won reform counts** before it would have come anyway moves the result most among the inputs that aren't about animals' weight (about 6 to 81 years of healthy life per $1,000 over the slider's 1 to 20 years; ACE's own spans run from 1 to 15 years). Next come the suffering a hen is spared out of an enriched cage (about 16 to 48) and the share of cage-free pledges kept (about 14 to 27).
+**How many years a won reform counts** before it would have come anyway moves the result most among the inputs that aren't about animals' weight (about 1.8 to 24 years of healthy life per $1,000 over the slider's 1 to 20 years; ACE's own spans run from 1 to 15 years). Next come the suffering a hen is spared out of an enriched cage (about 4.8 to 14) and the share of cage-free pledges kept (about 4.2 to 8.1).
 
 ### Where we differ from ACE
 

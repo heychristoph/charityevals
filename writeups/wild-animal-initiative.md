@@ -12,7 +12,7 @@ Our rough Fermi estimate: a paper earns 1 in 5,000 of the credit for a field tha
 
 ### What drives the result
 
-Beyond the exchange rates, our guesses on the path from papers to pain spared: each alone moves the result between about 0.007 and 0.045 years of healthy life per $1,000. Within ACE's figures, WAI's estimates of how many funded projects will be completed and published, and ACE's estimate of operational costs per program.
+Beyond the exchange rates, our guesses on the path from papers to pain spared: each alone moves the result between about 0.0021 and 0.013 years of healthy life per $1,000. Within ACE's figures, WAI's estimates of how many funded projects will be completed and published, and ACE's estimate of operational costs per program.
 
 ### Where we differ from ACE
 

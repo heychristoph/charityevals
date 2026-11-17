@@ -38,11 +38,11 @@ Ploughshares holds almost no unrestricted reserves. It has drawn on its restrict
 
 ### What drives the result
 
-The grants bring about half of the result, Ploughshares' own work a quarter and the fellowship about a quarter. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 99.
+The grants bring about half of the result, Ploughshares' own work a quarter and the fellowship about a quarter. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 30.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 5.9 to 250.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 1.8 to 75.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 - **How far the grantees' work beats or trails a typical project.** Nothing about it is measured.

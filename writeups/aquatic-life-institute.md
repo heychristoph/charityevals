@@ -10,7 +10,7 @@ Companies such as retailers commit to standards (for example stunning at slaught
 
 ### What drives the result
 
-Two shared figures matter most: **how much a shrimp can suffer relative to a chicken** (about 0.03 to 70 years of healthy life per $1,000 on its own) and **suffering spared per stunned shrimp** (1.9 to 43; the high end is ACE's own figure, restated with the 2025 shrimp weight). Next come **how many years a won reform counts** before it would have come anyway (0.4 to 5.7 over the slider's 1 to 20 years) and **how certain Tesco's stunning commitment is** (1.5 to 2.2).
+Two shared figures matter most: **how much a shrimp can suffer relative to a chicken** (about 0.009 to 21 years of healthy life per $1,000 on its own) and **suffering spared per stunned shrimp** (0.57 to 13; the high end is ACE's own figure, restated with the 2025 shrimp weight). Next come **how many years a won reform counts** before it would have come anyway (0.12 to 1.7 over the slider's 1 to 20 years) and **how certain Tesco's stunning commitment is** (0.45 to 0.66).
 
 ### What isn't modelled
 

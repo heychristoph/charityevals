@@ -37,7 +37,7 @@ About 77% of the result comes from the global branch, 15% from GHAI and 7% from 
 - how many years a won policy counts;
 - the missing-data discount;
 - the next-dollar figure;
-- the share of the ten countries' smoking burden a year's wins avert (0.08 to 0.35 years per 1,000 dollars across its range);
+- the share of the ten countries' smoking burden a year's wins avert (0.024 to 0.10 years per 1,000 dollars across its range);
 - CTFK's share of the credit abroad.
 
 ### Biggest uncertainties

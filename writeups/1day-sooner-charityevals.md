@@ -44,11 +44,11 @@ Like theirs, most of it rests on Rethink's typical pandemic project. 1Day is sma
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 60; at 8% it is about 4.1.
-- **The years a cut counts.** At one year the result is 1.4; at twenty it is 15.
-- **How much a typical pandemic dollar cuts the risk.** Rethink's figures run ten times either way: the extinction figure alone moves the result from 3.3 to 25.
-- **How much the next dollar does.** From 24% to 99% of the past average, the result moves from 2.2 to 9.1.
-- **The malaria children added.** From 33,000 to 833,000 a year, the result moves from 4.5 to 8.8.
+- **The discount rate.** At 0.1% the result is about 18; at 8% it is about 1.2.
+- **The years a cut counts.** At one year the result is 0.42; at twenty it is 4.5.
+- **How much a typical pandemic dollar cuts the risk.** Rethink's figures run ten times either way: the extinction figure alone moves the result from 0.99 to 7.5.
+- **How much the next dollar does.** From 24% to 99% of the past average, the result moves from 0.66 to 2.7.
+- **The malaria children added.** From 33,000 to 833,000 a year, the result moves from 1.3 to 2.6.
 
 ### What isn't modelled
 

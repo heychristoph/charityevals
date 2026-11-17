@@ -48,11 +48,11 @@ NTI holds about three years of spending in reserve and has run deficits, so the 
 
 ### What drives the result
 
-Nuclear work is most of the result: it is two thirds of the spending, and Rethink's typical nuclear project cuts its risk more per dollar than a biosecurity one. Catastrophes the world survives account for more than extinction does, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 100.
+Nuclear work is most of the result: it is two thirds of the spending, and Rethink's typical nuclear project cuts its risk more per dollar than a biosecurity one. Catastrophes the world survives account for more than extinction does, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 30.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 6 to 194.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 1.8 to 58.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely the catastrophes are.** The tournament's superforecasters put nuclear war at half the experts' chance, and engineered pandemics at a hundredth for extinction.
 - **How many people a catastrophe the world survives kills.** For nuclear war our judgment is 45%, with a range from 15% to 85% (Xia et al. 2022's regional and large wars).

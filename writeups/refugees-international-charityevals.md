@@ -18,7 +18,7 @@ Each branch has its own evidence, counterfactual and credit adjustments and the 
 
 ### What drives the result
 
-The missing-data slider and the next-dollar share come first. Then the value of a humanitarian dollar, the share of Sudan's funding advocacy added, the share of the parole pathway due to advocacy, how long parolees stay, and Refugees International's share of each campaign. The combined range runs from about 0.02 to 1.1.
+The missing-data slider and the next-dollar share come first. Then the value of a humanitarian dollar, the share of Sudan's funding advocacy added, the share of the parole pathway due to advocacy, how long parolees stay, and Refugees International's share of each campaign. The combined range runs from about 0.006 to 0.33.
 
 ### Biggest uncertainties
 

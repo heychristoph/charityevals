@@ -50,11 +50,11 @@ Those charities spend $3–14 million a year, so the typical-project rate applie
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 8.3; at 8% it is about 0.4.
-- **The years a cut counts.** At one year the result is 0.12; at twenty it is 1.7.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.29 to 3.3.
-- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.19; at 60% it is 1.1. The mission's cost moves it from 0.28 to 1.1.
-- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.26 to 1.0.
+- **The discount rate.** At 0.1% the result is about 2.5; at 8% it is about 0.12.
+- **The years a cut counts.** At one year the result is 0.036; at twenty it is 0.51.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.087 to 0.99.
+- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.057; at 60% it is 0.33. The mission's cost moves it from 0.084 to 0.33.
+- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.078 to 0.30.
 
 ### What isn't modelled
 

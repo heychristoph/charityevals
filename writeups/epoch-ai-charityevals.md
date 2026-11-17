@@ -46,11 +46,11 @@ Only part of Epoch's work bears on catastrophic risk, it aims to inform rather t
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%; the result moves from 0.009 to 0.47.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the misuse figure alone moves the result from 0.026 to 0.51.
-- **How much of the work counts as misuse work.** At none the result is 0.021; at 8% of spending it is 0.25.
+- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%; the result moves from 0.0027 to 0.14.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the misuse figure alone moves the result from 0.0078 to 0.15.
+- **How much of the work counts as misuse work.** At none the result is 0.0063; at 8% of spending it is 0.075.
 - **Whether Epoch's information makes AI safer or faster.** The speed-up harm runs from −1.5% to −18%, and the uptake from 0.3 to 1.2 of a typical project.
-- **The discount rate and the years a cut counts.** At a 0.1% discount rate the result is about 0.49.
+- **The discount rate and the years a cut counts.** At a 0.1% discount rate the result is about 0.15.
 
 ### What isn't modelled
 

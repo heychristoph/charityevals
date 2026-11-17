@@ -23,7 +23,7 @@ The deaths averted are valued like every death on the site, across the world's a
 
 The model has two branches.
 
-- **Training.** It counts the scholars who go on to work on AI risk because of MATS: 25%. MATS says 75% of its alumni work in AI safety, and many would have got there anyway. Each stays five years, and the work is valued at a typical dollar of AI safety work. MATS gets credit as the training's share among those who paid for it: its own cost against the stipends, mentors' time and donated compute, about 42%. The alumni's employers, who pay for the work itself, count only through the site's setting for work others commit because of a charity, 100% by default. The scholars' own research during the ten weeks counts here too, at a quarter of a typical work-year's value.
+- **Training.** It counts the scholars who go on to work on AI risk because of MATS: 25%. MATS says 75% of its alumni work in AI safety, and many would have got there anyway. Each stays five years, and the work is valued at a typical dollar of AI safety work. MATS gets credit as the training's share among those who paid for it: its own cost against the stipends, mentors' time and donated compute, about 42%. The alumni's employers, who pay for the work itself, count only through the site's setting for work others commit because of a charity, {{row:mobiliser_share}} by default. The scholars' own research during the ten weeks counts here too, at a quarter of a typical work-year's value.
 - **Extension research**, valued as typical AI safety research at 0.8 of a typical project, because it is early-career work.
 
 Training gives nearly all of the result, about 98%. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
