@@ -1,6 +1,6 @@
 ### Summary
 
-The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in three parts. Its nuclear-weapons and science-and-democracy work comes to **{{result}} years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from about 0.7 to about 370. Its climate, transport and western states work comes to **{{result:union-of-concerned-scientists-charityevals-climate}}**, a small net harm: it averts a tonne of CO₂e for about $190, but most of its tonnes come from the Inflation Reduction Act, whose public money costs taxpayers more than the tonnes are worth on the site's scale. Its food and farm work comes to **{{result:union-of-concerned-scientists-charityevals-food}}**. All three rest on judgments about how much of each outcome is due to UCS.
+The Union of Concerned Scientists (UCS) puts scientists' and engineers' analysis behind advocacy: against the risk of nuclear war, for climate and clean-energy policy, and for independent federal science. We model all its programmes in the year to September 2025 in three parts. Its nuclear-weapons and science-and-democracy work comes to **{{result}} years of healthy life per $1,000**, almost all from the nuclear work; the plausible range runs from {{low}} to {{high}}. Its climate, transport and western states work comes to **{{result:union-of-concerned-scientists-charityevals-climate}}**, a small net harm: it averts a tonne of CO₂e for about $190, but most of its tonnes come from the Inflation Reduction Act, whose public money costs taxpayers more than the tonnes are worth on the site's scale. Its food and farm work comes to **{{result:union-of-concerned-scientists-charityevals-food}}**. All three rest on judgments about how much of each outcome is due to UCS.
 
 ### What the charity does
 
@@ -48,7 +48,7 @@ About three-fifths of it comes from the Inflation Reduction Act, a fifth of it f
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: 2.6 to 124.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: 0.91 to 43.
 - **How many years a cut or a won policy counts.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The share of people who die in a war the world survives runs from 15% to 85%.
 - **UCS's share of each climate win, and how much of each survives.** These are judgments.

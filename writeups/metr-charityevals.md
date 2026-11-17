@@ -1,6 +1,6 @@
 ### Summary
 
-METR (Model Evaluation and Threat Research) measures what frontier AI agents can do on their own, and whether the companies that build them could lose control of them. Our model of its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.004 to about 0.5.
+METR (Model Evaluation and Threat Research) measures what frontier AI agents can do on their own, and whether the companies that build them could lose control of them. Our model of its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -44,10 +44,10 @@ All of METR's work is against AI escaping control. For catastrophes the world su
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.0021 to 0.11.
-- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.0045 to 0.14.
-- **Whether any of the work counts as misuse work.** If the cybersecurity tasks counted as misuse work (about 10% of the work), the result would be 0.16.
-- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 0.3.
+- **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.0025 to 0.32.
+- **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.0084 to 0.27.
+- **Whether any of the work counts as misuse work.** If the cybersecurity tasks counted as misuse work (about 10% of the work), the result would be 0.29.
+- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 0.65.
 
 ### What isn't modelled
 

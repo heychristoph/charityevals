@@ -1,6 +1,6 @@
 ### Summary
 
-CEPI funds vaccines against epidemics and pandemics, aiming to have a vaccine ready within 100 days of a new threat. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely catastrophic pandemics are, on what a typical dollar of pandemic work does to that risk, and on how much less a dollar does at CEPI's size. All three are deeply uncertain, so the plausible range runs from about 0.02 to about 13.
+CEPI funds vaccines against epidemics and pandemics, aiming to have a vaccine ready within 100 days of a new threat. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely catastrophic pandemics are, on what a typical dollar of pandemic work does to that risk, and on how much less a dollar does at CEPI's size. All three are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -46,15 +46,15 @@ CEPI is asking for $2.5 billion more for its 2027–2031 strategy, and aid budge
 
 ### What drives the result
 
-Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 8. Deaths of people alive now are about 90% of the value and the future lost about 10%. The outbreak vaccines add under 1%.
+Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 2.4. Deaths of people alive now are about 90% of the value and the future lost about 10%. The outbreak vaccines add under 1%.
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 2.5; at 8% it is about 0.12.
-- **The years a cut counts.** At one year the result is 0.036; at twenty it is 0.51.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.087 to 0.99.
-- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.057; at 60% it is 0.33. The mission's cost moves it from 0.084 to 0.33.
-- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.078 to 0.30.
+- **The discount rate.** At 0.1% the result is about 2.5; at 8% it is about 0.13.
+- **The years a cut counts.** At one year the result is 0.037; at twenty it is 0.51.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.086 to 0.98.
+- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.056; at 60% it is 0.33. The mission's cost moves it from 0.084 to 0.33.
+- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.077 to 0.30.
 
 ### What isn't modelled
 

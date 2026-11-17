@@ -1,6 +1,6 @@
 ### Summary
 
-The Bulletin of the Atomic Scientists is a Chicago non-profit that publishes expert journalism on nuclear weapons, climate change, biological threats and AI, and sets the Doomsday Clock each January. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.8 to about 340.
+The Bulletin of the Atomic Scientists is a Chicago non-profit that publishes expert journalism on nuclear weapons, climate change, biological threats and AI, and sets the Doomsday Clock each January. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -47,8 +47,8 @@ Under half the Bulletin's spending is on nuclear risk, and journalism is further
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 1.2 to 42.
-- **How many years a cut counts.** The shared slider runs from 1 to 20 years, moving the result from 0.9 to 15.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 1.1 to 42.
+- **How many years a cut counts.** The shared slider runs from 1 to 20 years, moving the result from 1.1 to 15.
 - **How the spending splits between areas.** The accounts report one programme, so the split follows the year's articles.
 - **How far journalism beats or trails a typical project.** Nothing about it is measured.
 

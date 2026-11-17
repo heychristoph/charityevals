@@ -1,7 +1,7 @@
 # Audit: american-red-cross-charityevals-international, round 2
 Re-stamped: label-only change (summary 'far below' → 'below' the median (round 1's low)); no formula or value changed since round 1, which passed.
 Verdict: pass
-Model-sha: 33b39a7a44572b9fa0c4c89a06e64d60aec423e781d2d31a4b3b36caddf85ee2
+Model-sha: 0a4e8da3701ed3107bcac043440288967a45b45048a5668432d431a0784aaf89
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -12,3 +12,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the typed text or pointed at the evaluator view, and typed results in the summary made placeholders or recomputed at the 30% mobiliser share (no value moves). Mechanical: headline unchanged, against bc9e3979.

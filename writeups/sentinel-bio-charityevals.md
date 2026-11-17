@@ -33,12 +33,12 @@ At the end of 2024 Sentinel held $9.1 million, six times what it spent from May 
 
 ### What drives the result
 
-The grant to the Council on Strategic Risks brings about two fifths of the result, the three grants valued as typical pandemic work about three tenths, and the fellowships about a quarter; the advised gift brings a few percent. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 28.
+The grant to the Council on Strategic Risks brings about two fifths of the result, the three grants valued as typical pandemic work about three tenths, and the fellowships about a quarter; the advised gift brings under 1%. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 26.
 
 ### Biggest uncertainties
 
 - **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way.
-- **The discount rate and how many years a cut counts.** These are shared sliders, and they swing the result from about 0.3 to about 28.
+- **The discount rate and how many years a cut counts.** These are shared sliders, and they swing the result from about 0.49 to about 26.
 - **What the next dollar does.** Sentinel's spending has grown fast, so the room it has for more money is hard to judge. The figure runs from 17% to 90%.
 - **How far the grants beat or trail a typical project.** Their results weren't out by the end of 2024, and nothing about them is measured.
 

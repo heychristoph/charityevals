@@ -1,6 +1,6 @@
 ### Summary
 
-ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from about 0.9 to about 750.
+ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -47,11 +47,11 @@ ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 
 
 ### What drives the result
 
-Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 16. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
+Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 17. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the deaths.** Rethink's figures are placeholders for work against the threat or severity of a nuclear war, not set with food resilience in mind, and the range runs ten times either way. This is the largest swing, from 1.0 to 75.
+- **How much a dollar of this work cuts the deaths.** Rethink's figures are placeholders for work against the threat or severity of a nuclear war, not set with food resilience in mind, and the range runs ten times either way. This is the largest swing, from 1.1 to 80.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely a nuclear war is, and how deadly.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 - **Whether food plans would work after a real war.** None has been tested, and governments would have to act fast amid chaos.

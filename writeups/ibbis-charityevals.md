@@ -1,6 +1,6 @@
 ### Summary
 
-IBBIS works to stop DNA synthesis being used to make pandemic pathogens: it gives synthesis companies a free tool to screen what they are asked to make, and works on the standards and rules that make screening the norm. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 240.
+IBBIS works to stop DNA synthesis being used to make pandemic pathogens: it gives synthesis companies a free tool to screen what they are asked to make, and works on the standards and rules that make screening the norm. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -38,12 +38,12 @@ IBBIS is raising money in small grants for named work, and Founders Pledge's 202
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 36. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 37. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
 
 ### Biggest uncertainties
 
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.9 to 27.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 4.5 to 52 for the pandemic figure.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 1.4 to 16 for the pandemic figure.
 - **How much the next dollar does.** 26% to 95% of the past average: 3.9 to 14.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 

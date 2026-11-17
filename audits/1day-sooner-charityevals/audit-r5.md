@@ -1,6 +1,6 @@
 # Audit: 1day-sooner-charityevals, round 5 (verification of wording fixes)
 Result: 5.46 daly/$ = 5.464 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
-Model-sha: 2d8abdb9800394d4c9c604450fae95c32d26ee468557b02e6a4205a8331a55cf
+Model-sha: 224efc616ae91b9aa02125130b514ccfabd1a2c882182e49cf2437ce14559616
 Scope: wording changes since round 4 only.
 Preflight: pass.
 Previous round: round 4 lows: #1 summary "add about 23%" resolved (now "add about 25%"); #3 mal_counterfactual_adj explainer resolved (appended "That is how replaceable its part was; its pro rata share of the effort is in mal_attribution_share_shared"); #2 write-up typed sensitivities not resolved (low, builder's).
@@ -15,3 +15,5 @@ Checks: headline 5.46441 equals round 4; hcv and mal shares (0.85, 5%), formulas
 None needed.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: fb_credit_share is the skeleton's row (unused here, or wording only): no value change. Mechanical: headline unchanged, 1 row changed, against 2b24b73c.
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 5.464 → 1.639 (−70%), 14 rows changed, against 814eaf77.

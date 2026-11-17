@@ -16,7 +16,7 @@ The three wins get 30% more for the year's other campaigns (aid cuts, debt, chil
 
 ### What drives the result
 
-The missing-data slider, the value of a healthy year in units of value, and the two judgments on the Gavi pledges (how much the campaign added and Save the Children's share of it), then the next dollar's share of the average and how much humanitarian spending a changed study improves. The result is mostly uncertainty: the combined range runs from 0.012 to 1.6.
+The missing-data slider, the value of a healthy year in units of value, and the two judgments on the Gavi pledges (how much the campaign added and Save the Children's share of it), then the next dollar's share of the average and how much humanitarian spending a changed study improves. The result is mostly uncertainty: the plausible range runs from {{low}} to {{high}}.
 
 ### What isn't modelled
 
