@@ -1,7 +1,7 @@
 # Audit: tax-justice-network-charityevals, round 8 (verification of the compliance-cost rule 2.21, text fixes of round 7)
 Result: 0.002507 uov/$ = 1.253 years of healthy life per 1,000 dollars (unchanged from round 7). Verdict: pass.
 Verdict: pass
-Model-sha: ee04d950789719569ff8e20da23aa9194e992c94370569aa6fdcf9a8d641153a
+Model-sha: fd54c035e27e276c3c8b08c838c0c688478368a09c70ef73faa11c60adacb89a
 
 Scope: scoped verification of the label of `a_unmodelled_benefits_adj`. No formula changed.
 
@@ -24,9 +24,11 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: ee04d950789719569ff8e20da23aa9194e992c94370569aa6fdcf9a8d641153a
+Model-sha: fd54c035e27e276c3c8b08c838c0c688478368a09c70ef73faa11c60adacb89a
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 1807d315.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 3 rows changed, against HEAD.

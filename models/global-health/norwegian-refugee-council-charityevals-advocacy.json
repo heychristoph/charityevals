@@ -387,7 +387,7 @@
       "formula": "@humanitarian_response.ngo_funding_advocacy_aid_share"
     },
     {
-      "id": "fund_attribution_share",
+      "id": "fund_attribution_share_shared",
       "section": "adjustments",
       "label": "Funding: NRC's share of the NGOs' funding advocacy",
       "format": "percent",
@@ -398,6 +398,15 @@
       },
       "kind": "judgment",
       "explainer": "Judgment 5% (2-12%), anchored on a count: NRC's 2025 income, US$860m (NOK 8.9bn, board report), is about 5% of the US$16.6bn the appeals received, a measure of its weight in the humanitarian system; NRC's advocacy voice is larger than its budget share (its Secretary General is a former UN emergency relief coordinator; 170+ inter-agency leaders and coordinators, p. 41), but it advocates beside hundreds of NGOs and networks (ICVA, InterAction, VOICE) and the UN's own appeals."
+    },
+    {
+      "id": "fund_attribution_share",
+      "section": "adjustments",
+      "label": "Funding: share of credit used",
+      "format": "percent",
+      "formula": "fund_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "fund_displaced_share",
@@ -455,7 +464,7 @@
       "explainer": "Judgment 20% (5-50%): access in Sudan and the DRC moves mostly with the fighting, the parties' interests and the UN's own negotiations, so most of the gains would have come anyway; how long they last is in acc_gain_years. The best guess was always about whether the gains would have come, so it stays at 20% now that persistence has its own row."
     },
     {
-      "id": "acc_attribution_share",
+      "id": "acc_attribution_share_shared",
       "section": "adjustments",
       "label": "Access: NRC's share of the advocacy behind the gains",
       "format": "percent",
@@ -466,6 +475,14 @@
       },
       "kind": "judgment",
       "explainer": "Judgment 15% (5-35%): NRC worked with OCHA, UN agencies, other NGOs and donor governments on these negotiations (p. 40); it is one of the larger operational NGOs in both."
+    },
+    {
+      "id": "acc_attribution_share",
+      "section": "adjustments",
+      "label": "Access: share of credit used",
+      "format": "percent",
+      "formula": "acc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "acc_missing_data_adj",
@@ -534,7 +551,7 @@
       "section": "adjustments",
       "label": "NRC's share of the resources: outcome-weighted average of the branches",
       "format": "percent",
-      "formula": "(acc_value_per_year * acc_total_adj * acc_attribution_share + fund_value_per_year * fund_total_adj * fund_attribution_share) / (acc_value_per_year * acc_total_adj + fund_value_per_year * fund_total_adj)",
+      "formula": "(acc_value_per_year * acc_total_adj * acc_attribution_share_shared + fund_value_per_year * fund_total_adj * fund_attribution_share_shared) / (acc_value_per_year * acc_total_adj + fund_value_per_year * fund_total_adj)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -542,8 +559,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches' shares (acc_attribution_share, fund_attribution_share), for reading only: each branch applies its own."
+      "formula": "(acc_value_per_year * acc_total_adj * acc_attribution_share + fund_value_per_year * fund_total_adj * fund_attribution_share) / (acc_value_per_year * acc_total_adj + fund_value_per_year * fund_total_adj)",
+      "explainer": "The outcome-weighted average of the branches' shares (acc_attribution_share_shared, fund_attribution_share_shared), for reading only: each branch applies its own."
     },
     {
       "id": "missing_data_adj",
@@ -604,6 +621,14 @@
       "label": "Share of moved money that is new to giving",
       "format": "percent",
       "formula": "@meta.new_money_share"
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
     },
     {
       "id": "moved_dollar_net_value",
