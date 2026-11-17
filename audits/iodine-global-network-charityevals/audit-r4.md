@@ -1,6 +1,6 @@
 # Audit: iodine-global-network-charityevals, round 4 (verification)
 Result: 0.004813 uov/$ = 2.41 years of healthy life per 1,000 dollars (combined range 0.096-60.2). Verdict: pass.
-Model-sha: bfef29ab506dc6237bc2e4471d7cdda574726fe8e638a2bb832bcaa3160230e6
+Model-sha: 3a89d4442059f2320c43b4cde231837d5fb21605aab68e513fd0e0a195278b53
 Scope: only the changes of commit 480880ba: `dav_share_deficient_without` 0.4 (0.2-0.7) -> 0.5 (0.25-0.7) with a new explainer; explainer-only edits to `qa_persistence_years`, `dav_years_until_effect`, `net_years_until_effect`, `reg_years_until_effect`.
 Mechanical: preflight no high or medium lines (two lows: stale generated distributions, to be refreshed by summaries.ts); lint 0 high/0 medium; headline 2.406 -> 2.410.
 
@@ -25,3 +25,8 @@ Unchanged from round 3.
 Verdict: pass
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 480880ba.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combined; no value change). Mechanical: headline unchanged, against HEAD.

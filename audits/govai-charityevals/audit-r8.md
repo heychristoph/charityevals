@@ -1,6 +1,6 @@
 # Audit: govai-charityevals, round 8 (verification of the compliance-cost rule 2.21)
 Result: 0.001576 daly/$ = 1.576 years of healthy life per $1,000 (combined range 0.0416–59.73); cause median 5.255 (×0.30). Verdict: pass.
-Model-sha: 66135a4e5ecbd43145a17ca166a8a6e787a3c48d389b61a973347364e4ff45b2
+Model-sha: d1ce5f6bd47cc2775ec53798f4beed112f4b846ec316a0ab1155c3c468e7c504
 Scope: scoped verification of the changed rows (one sentence appended to the explainer of `pol_wins`); headline unchanged.
 Mechanical: `audit-model.ts` exit 0, no high or medium finding; invariants none (the peer lines are being removed elsewhere and ignored).
 Previous round: not applicable (verification of one changed row).
@@ -28,3 +28,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.

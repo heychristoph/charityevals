@@ -1175,7 +1175,7 @@
       "explainer": "Only whether another organisation would have run these fellowship places now: who would have reached the field anyway is in fb_share_working. Other AI policy fellowships (GovAI's, Horizon's, ERA, Pivotal) are also oversubscribed (over 5,600 applicants for 29 places here), so few of these places would have been offered elsewhere: 0.9, our judgment, 0.75 to 1."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1188,7 +1188,23 @@
       "explainer": "Most reports are IAPS staff's own; some are co-authored with outside researchers (verification for international AI governance), and its policy influence runs with partners and other think tanks pressing the same measures. Our judgment, 75% (60% to 90%)."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1201,7 +1217,15 @@
       "explainer": "Not used: the bio branch's cost share is 0 for IAPS; the template's range kept for the switched-on check."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1214,7 +1238,15 @@
       "explainer": "Not used: the nuclear branch's cost share is 0 for IAPS; the template's range kept for the switched-on check."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1227,7 +1259,16 @@
       "explainer": "Not used: the pol branch's cost share is 0 for IAPS; the template's range kept for the switched-on check."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1238,6 +1279,14 @@
       },
       "kind": "judgment",
       "explainer": "IAPS pays the fellows' stipends, the in-person programme and their mentors; outside speakers and host organisations give some time. Our judgment, 95% (85% to 100%). The alumni's employers' share is in fb_credit_share."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

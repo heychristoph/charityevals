@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
-import { applyWaivers, checkAll, inv10, inv11, inv13, inv14, inv16, inv17, inv18, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
+import { applyWaivers, checkAll, costsOutsideShare, inv10, inv11, inv13, inv14, inv16, inv17, inv18, inv22, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -271,6 +271,75 @@ describe("invariant checks", () => {
     const l = buildLibrary([base, bad, animal], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
     expect(l.errors).toEqual([]);
     expect(inv10(l).violations.map(keyOf)).toEqual(["bad $chicken_vs_person independent"]);
+  });
+
+  // INV-22 (docs/normalization.md 2.24): a win's used share reads the mobiliser's share, its cost with it, once.
+  describe("INV-22", () => {
+    const num = (id: string, value: number, label = id) => ({ id, label, value, kind: "judgment", explainer: "Test input." });
+    const SHARE = { id: "mobiliser_share", label: "Mobiliser's share", formula: "$mobiliser_share" };
+    // One of our builds with a win: benefit and compliance cost, each through the branch's used share.
+    const chance = (o: { chance?: boolean }) => (o.chance === false ? "" : " * p_success");
+    const win = (id: string, o: { used?: string; credit?: string; cost?: string; out?: string; chance?: boolean; share?: boolean } = {}) => ({
+      ...base, id, owner: "charityevals",
+      rows: [num("benefit", 10), num("harm", 3), ...(o.chance === false ? [] : [num("p_success", 0.5, "Probability the law passes")]), num("attribution_share_shared", 0.5),
+        ...(o.share === false ? [] : [SHARE]),
+        { id: "attribution_share", label: "Share used", formula: o.used ?? "attribution_share_shared * mobiliser_share", ...(o.credit === "" ? {} : { credit: o.credit ?? "win" }) },
+        { id: "compliance_uov", label: "Compliance cost", formula: o.cost ?? `-harm${chance(o)} * attribution_share` },
+        { id: "out", label: "out", formula: o.out ?? `benefit${chance(o)} * attribution_share + compliance_uov` }],
+    });
+    // An evaluator's model: our row after its bottom line, the evaluator view pinned to 1.
+    const imported = (id: string, o: { mobilised?: boolean; pin?: boolean; reads?: boolean; section?: string } = {}) => ({
+      ...base, id, owner: "givewell", ...(o.mobilised === undefined ? {} : { mobilised: o.mobilised }),
+      sections: [{ id: "cea", title: "CEA" }, { id: "credit", title: "Credit", kind: "ours" }],
+      rows: [{ ...num("x", 2), section: "cea" }, { id: "x_cash", label: "x cash", section: "cea", formula: "x", expected: 2 },
+        ...(o.reads === false ? [] : [{ ...SHARE, section: o.section ?? "credit" }]),
+        { id: "out", label: "out", section: "credit", formula: o.reads === false ? "x_cash" : "x_cash * mobiliser_share" }],
+      output: { ...base.output, native: { row: "x_cash", unit: "multiples of cash transfers" } },
+      evaluator: { name: "GiveWell", assumptions: o.pin === false ? {} : { mobiliser_share: 1 } },
+    });
+    const run = (...models: object[]) => {
+      const l = buildLibrary([base, ...models], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+      expect(l.errors).toEqual([]);
+      return { l, keys: inv22(l).violations.map(keyOf).filter((k) => !k.startsWith("base ")).sort() };
+    };
+
+    it("passes a win, a delivery branch and a mobilised import wired the one way", () => {
+      const { keys } = run(win("good"), win("served", { used: "attribution_share_shared", credit: "delivery", share: false }), imported("moved", { mobilised: true }), imported("delivered", { mobilised: false, reads: false, pin: false }));
+      expect(keys).toEqual([]);
+    });
+
+    it("reach: flags a win's share that reads no mobiliser's share, and an import that isn't classified or reads none", () => {
+      const { keys } = run(win("unreached", { used: "attribution_share_shared", credit: "", share: false }), win("classed", { used: "attribution_share_shared", share: false }),
+        imported("unclassified", { reads: false, pin: false }), imported("unread", { mobilised: true, reads: false, pin: false }));
+      expect(keys).toEqual(["classed reach win attribution_share", "unclassified mobilised", "unreached reach win attribution_share", "unread reach import"]);
+    });
+
+    it("once: flags a cost row left outside the share, and a share applied twice", () => {
+      const left = win("cost-left", { cost: "-harm * p_success * attribution_share_shared" });
+      const twice = win("twice", { out: "benefit * p_success * attribution_share * mobiliser_share + compliance_uov" });
+      const { l, keys } = run(left, twice);
+      expect(keys).toEqual(["cost-left once compliance_uov", "twice once", "twice once attribution_share"]);
+      expect(costsOutsideShare(l, l.models.get("cost-left")!).map((x) => x.row)).toEqual(["compliance_uov"]);
+      expect(costsOutsideShare(l, l.models.get("twice")!)).toEqual([]);
+    });
+
+    it("pins: flags an import that reads the share unpinned, or inside the evaluator's rows", () => {
+      const { keys } = run(imported("unpinned", { mobilised: true, pin: false }), imported("inside", { mobilised: true, section: "cea" }));
+      expect(keys).toEqual(["inside mobiliser_share section", "unpinned evaluator view", "unpinned evaluator.assumptions.mobiliser_share"]);
+    });
+
+    it("delivery: flags a model with nothing mobilised that moves with the share, a delivery share that reads it, and a second reader", () => {
+      const moves = win("moves", { chance: false, credit: "", used: "attribution_share_shared", cost: "-harm * attribution_share * mobiliser_share", out: "benefit * attribution_share * mobiliser_share + compliance_uov" });
+      const delivery = win("delivery", { credit: "delivery" });
+      const second = win("second", { used: "attribution_share_shared * $mobiliser_share", share: false });
+      const { keys } = run(moves, delivery, second, imported("own", { mobilised: false }));
+      expect(keys).toEqual(["delivery delivery attribution_share", "moves delivery $mobiliser_share", "own delivery $mobiliser_share", "second attribution_share $mobiliser_share"]);
+    });
+
+    it("low end: flags a result that isn't a number at the slider's floor", () => {
+      const { keys } = run(win("floor", { out: "benefit * p_success * attribution_share / (mobiliser_share - 0.05) + compliance_uov" }));
+      expect(keys).toContain("floor at 0.05");
+    });
   });
 
   it("INV-10 expects no shape of a money mover in the sliders its destinations read", () => {

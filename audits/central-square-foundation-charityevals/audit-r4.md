@@ -1,6 +1,6 @@
 # Audit: central-square-foundation-charityevals, round 4 (scoped to the round 3 low)
 Result: 0.001704 uov/$ = 0.852 years of healthy life per 1,000 dollars; cause median 0.0803 (x10.6). Verdict: pass (no high findings; 0 medium beyond the far-above judged right in rounds 2 and 3; 0 low).
-Model-sha: 8ad18f27bd5a2da41ff45a86973191424712324a3dba98be8b61ba4f4544b57f
+Model-sha: ec49b9a6946242f2dfc21a2dafbc94b4a3ad8ff889991584b299009fa271e301
 Scope: only the round 3 low (labels of `gov_value_per_student_year` and `gov_gain_sd`) and that no value changed.
 Mechanical: audit-model gives 0 high / 1 medium (far-above, same chain as rounds 2 and 3, still judged right) / 0 low. Headline 0.852, identical to round 3. generated/ was not rewritten (git status clean apart from the untracked scratch-rows.ts).
 Previous round:
@@ -16,3 +16,8 @@ None needed (label-only change; no figures touched).
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 39682758.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 7 rows changed, against HEAD.
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combined; no value change). Mechanical: headline unchanged, against HEAD.

@@ -759,7 +759,7 @@
       "explainer": "Judgment 30% (10-60%): the share of the decision due to the campaigners at all. Labour's child poverty taskforce, the strategy's targets and the fiscal room drove it; campaigners kept it on the agenda and, Save the Children says, families' testimony was 'instrumental'. Years brought forward are the shared $win_years_counted, not a second question here (Convention 5)."
     },
     {
-      "id": "tcl_attribution_share",
+      "id": "tcl_attribution_share_shared",
       "section": "adjustments",
       "label": "Two-child limit: Save the Children UK's share of the resources behind it",
       "format": "percent",
@@ -770,6 +770,15 @@
       },
       "kind": "judgment",
       "explainer": "Judgment 12% (5-25%): Save the Children UK's share of the campaigning resources: the End Child Poverty coalition (over 100 organisations), the Child Poverty Action Group, the Joseph Rowntree Foundation, the Resolution Foundation, Action for Children, Barnardo's, the Church of England's bishops; Save the Children was one of the largest and ran its own campaign."
+    },
+    {
+      "id": "tcl_attribution_share",
+      "section": "adjustments",
+      "label": "Two-child limit: share of credit used",
+      "format": "percent",
+      "formula": "tcl_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "tcl_missing_data_adj",
@@ -814,7 +823,7 @@
       "explainer": "Judgment 3% (1-8%) of the pledges added by civil society's campaign as a whole: donors set pledges in finance and foreign ministries against their aid budgets; advocacy moves the margin. Anchor: the 2025 pledges ($9bn) fell $3bn short of the $12bn target, with the US withdrawn; if the campaign moved a tenth of a gap of that size that donors might otherwise have left open, that is $0.3bn, 3% of the pledges. 1% if ministries had decided before the campaign, 8% if it held two or three large donors' pledges up. No study measures it."
     },
     {
-      "id": "gavi_attribution_share",
+      "id": "gavi_attribution_share_shared",
       "section": "adjustments",
       "label": "Gavi: Save the Children UK's share of the resources behind it",
       "format": "percent",
@@ -825,6 +834,15 @@
       },
       "kind": "judgment",
       "explainer": "Judgment 15% (5-30%): Save the Children UK's share of civil society's campaigning (it mobilised more than 200 organisations; ONE, Global Citizen, RESULTS and other Save the Children members campaigned too)."
+    },
+    {
+      "id": "gavi_attribution_share",
+      "section": "adjustments",
+      "label": "Gavi: share of credit used",
+      "format": "percent",
+      "formula": "gavi_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "gavi_missing_data_adj",
@@ -869,7 +887,7 @@
       "explainer": "Judgment 1% (0.3-4%): most summit commitments restate planned spending; the campaign adds a little at the margin."
     },
     {
-      "id": "n4g_attribution_share",
+      "id": "n4g_attribution_share_shared",
       "section": "adjustments",
       "label": "Nutrition for Growth: Save the Children UK's share of the resources behind it",
       "format": "percent",
@@ -880,6 +898,15 @@
       },
       "kind": "judgment",
       "explainer": "Judgment 10% (3-25%): Save the Children helped organise the summit and pulled together a joint movement commitment, among many governments, the host and other groups."
+    },
+    {
+      "id": "n4g_attribution_share",
+      "section": "adjustments",
+      "label": "Nutrition for Growth: share of credit used",
+      "format": "percent",
+      "formula": "n4g_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "n4g_missing_data_adj",
@@ -924,7 +951,7 @@
       "explainer": "Judgment 70% (40-90%): other funders (Wellcome, NIHR, USAID's research arms) would fund some of the same questions."
     },
     {
-      "id": "elrha_attribution_share",
+      "id": "elrha_attribution_share_shared",
       "section": "adjustments",
       "label": "Elrha: Save the Children UK's share of the resources behind it",
       "format": "percent",
@@ -935,6 +962,14 @@
       },
       "kind": "judgment",
       "explainer": "Judgment 70% (50-90%): the researchers' institutions and partners add their own time and money to each project."
+    },
+    {
+      "id": "elrha_attribution_share",
+      "section": "adjustments",
+      "label": "Elrha: share of credit used",
+      "format": "percent",
+      "formula": "elrha_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "elrha_missing_data_adj",
@@ -973,7 +1008,7 @@
       "section": "adjustments",
       "label": "Save the Children UK's share of the resources: outcome-weighted average of the branches",
       "format": "multiple",
-      "formula": "(tcl_value_per_year * tcl_total_adj * tcl_attribution_share + gavi_value_per_year * gavi_total_adj * gavi_attribution_share + n4g_value_per_year * n4g_total_adj * n4g_attribution_share + elrha_value_per_year * elrha_total_adj * elrha_attribution_share) / (tcl_value_per_year * tcl_total_adj + gavi_value_per_year * gavi_total_adj + n4g_value_per_year * n4g_total_adj + elrha_value_per_year * elrha_total_adj)",
+      "formula": "(tcl_value_per_year * tcl_total_adj * tcl_attribution_share_shared + gavi_value_per_year * gavi_total_adj * gavi_attribution_share_shared + n4g_value_per_year * n4g_total_adj * n4g_attribution_share_shared + elrha_value_per_year * elrha_total_adj * elrha_attribution_share_shared) / (tcl_value_per_year * tcl_total_adj + gavi_value_per_year * gavi_total_adj + n4g_value_per_year * n4g_total_adj + elrha_value_per_year * elrha_total_adj)",
       "explainer": "Each branch applies its own row; this is their outcome-weighted average of the branches, for reading only."
     },
     {
@@ -981,7 +1016,7 @@
       "section": "adjustments",
       "label": "Share of credit used (average of the branches)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(tcl_value_per_year * tcl_total_adj * tcl_attribution_share + gavi_value_per_year * gavi_total_adj * gavi_attribution_share + n4g_value_per_year * n4g_total_adj * n4g_attribution_share + elrha_value_per_year * elrha_total_adj * elrha_attribution_share) / (tcl_value_per_year * tcl_total_adj + gavi_value_per_year * gavi_total_adj + n4g_value_per_year * n4g_total_adj + elrha_value_per_year * elrha_total_adj)",
       "explainer": "The branches' average share of the resources, for reading only."
     },
     {
@@ -1049,12 +1084,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -1120,9 +1163,9 @@
       "section": "careers",
       "label": "Value of one career change (units of value)",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
       "unit": "units of value",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",

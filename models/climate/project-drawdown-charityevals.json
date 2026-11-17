@@ -520,12 +520,20 @@
       "explainer": "Our judgment, the shared rule for an organisation that moves money within a cause other than global health (climate). Shifted money was going to be given anyway, to an ordinary charity of the same cause; it is credited only for the gain. An ordinary charity stands to its cause's charities on the rankings as GiveDirectly (GiveWell's model, times a shared multiple, 1×, from 0 to 3×) stands to global health's: GiveDirectly's live result over the global-health charities' (#cause:global-health), times the climate charities' (#cause:climate), all live under your values."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "shifted_dollar_value",
       "section": "moved_money",
-      "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+      "label": "Value of a dollar all shifted (given anyway, now to a better use), at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "moved_dollar_value - prior_dollar_value",
-      "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+      "formula": "mobiliser_share * (moved_dollar_value - prior_dollar_value)",
+      "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed. Its owners spent it, so the organisation is credited its share of that gain (mobiliser_share)."
     },
     {
       "id": "informed_money_value",
@@ -726,8 +734,8 @@
       "section": "adjustments",
       "label": "Companies: Drawdown's share of credit used behind the reallocation",
       "format": "percent",
-      "formula": "corp_attribution_share_shared",
-      "explainer": "Its share of the resources; it applies whichever way credit is shared."
+      "formula": "corp_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "inv_attribution_drawdown",
@@ -755,8 +763,8 @@
       "section": "adjustments",
       "label": "Investors: Drawdown's share of credit used behind the reallocation",
       "format": "percent",
-      "formula": "inv_attribution_share_shared",
-      "explainer": "Its share of the resources; it applies whichever way credit is shared."
+      "formula": "inv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pub_attribution_drawdown",
@@ -784,8 +792,8 @@
       "section": "adjustments",
       "label": "Public: Drawdown's share of credit used behind the changes",
       "format": "percent",
-      "formula": "pub_attribution_share_shared",
-      "explainer": "Its share of the resources; it applies whichever way credit is shared."
+      "formula": "pub_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "missing_data_adj",
@@ -848,7 +856,7 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(abs(phil_downstream) * phil_counterfactual_adj * phil_attribution_share + abs(corp_downstream) * corp_counterfactual_adj * corp_attribution_share + abs(inv_downstream) * inv_counterfactual_adj * inv_attribution_share + abs(pub_downstream) * pub_counterfactual_adj * pub_attribution_share) / (abs(phil_downstream) * phil_counterfactual_adj + abs(corp_downstream) * corp_counterfactual_adj + abs(inv_downstream) * inv_counterfactual_adj + abs(pub_downstream) * pub_counterfactual_adj)",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {

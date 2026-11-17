@@ -1,6 +1,6 @@
 # Audit: project-drawdown-charityevals, round 7 (verification of the round 6 text fix)
 Result: -0.001300 tco2e/$ = -0.0007695 years of healthy life per $1,000, unchanged. Verdict: pass (no high or medium finding).
-Model-sha: 5ab099254aa4255f3f2b7fbd7ed6a89d2c88aeb08ab511f030fcb5cad7072966
+Model-sha: 7d750f505aa26fea7f08e1b89600f4926aa216a24681049145f5a67f53538b48
 Scope: round 6's one medium, the write-up's "What drives the result" sentence.
 Mechanical: check.ts all models valid; the model file is unchanged since round 6 (same sha).
 
@@ -18,3 +18,8 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combined; no value change). Mechanical: headline unchanged, against HEAD.

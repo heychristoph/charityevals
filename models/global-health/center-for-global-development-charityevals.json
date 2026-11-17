@@ -1152,12 +1152,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -1231,9 +1239,9 @@
       "section": "careers",
       "label": "Value of one career change (units of value)",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
       "unit": "units of value",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",
@@ -1290,12 +1298,20 @@
       "explainer": "Coalition credit by resources (Convention 2). CGD's Making Markets for Vaccines working group (2003-2005, co-chaired by Ruth Levine, Michael Kremer and Alice Albright) turned Kremer and Glennerster's idea into the design the G7 took up; the Gates Foundation, the Italian and UK governments, the World Bank and Gavi then did the financing, legal and procurement work. Anchor: a resource split over those seven contributors (CGD, Kremer and Glennerster's research, Gates, Italy, the UK, the World Bank, Gavi) gives about 14% each; CGD convened the design, so 15% (5% to 35%: a minor convener to the main design body)."
     },
     {
-      "id": "a_attribution_share",
+      "id": "a_attribution_share_shared",
       "section": "adjustments",
       "label": "AMC: CGD's credit for the faster spread of PCV",
       "format": "percent",
       "formula": "a_amc_share * a_cgd_share",
       "explainer": "The AMC's share of the acceleration times CGD's share of the AMC."
+    },
+    {
+      "id": "a_attribution_share",
+      "section": "adjustments",
+      "label": "AMC: share of credit used",
+      "format": "percent",
+      "formula": "a_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "a_evidence_adj",
@@ -1414,12 +1430,20 @@
       "explainer": "Coalition credit by resources (Convention 2). The Italian G20 presidency commissioned the review, its 14-member panel wrote it, the US Treasury and other shareholders pushed the World Bank's 'evolution', and rating agencies, ONE, the Rockefeller Foundation and others campaigned; CGD's experts sat on the panel and argued the case on risk. Judged 5% (2% to 12%)."
     },
     {
-      "id": "b_attribution_share",
+      "id": "b_attribution_share_shared",
       "section": "adjustments",
       "label": "MDB capital reforms: CGD's credit",
       "format": "percent",
       "formula": "b_cgd_share",
       "explainer": "CGD's share of the resources."
+    },
+    {
+      "id": "b_attribution_share",
+      "section": "adjustments",
+      "label": "MDB capital reforms: share of credit used",
+      "format": "percent",
+      "formula": "b_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "b_evidence_adj",
@@ -1500,12 +1524,20 @@
       "explainer": "Coalition credit by resources (Convention 2). CGD's Steven Radelet wrote the policymakers' guide to the Millennium Challenge Account (2003) and CGD ran the MCA Monitor; the Bush administration, the Treasury, Congress and other think tanks shaped the law. Judged 10% (3% to 25%) of the design, none of the money."
     },
     {
-      "id": "c_attribution_share",
+      "id": "c_attribution_share_shared",
       "section": "adjustments",
       "label": "MCC: CGD's credit",
       "format": "percent",
       "formula": "c_cgd_share",
       "explainer": "CGD's share of the resources."
+    },
+    {
+      "id": "c_attribution_share",
+      "section": "adjustments",
+      "label": "MCC: share of credit used",
+      "format": "percent",
+      "formula": "c_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "c_evidence_adj",
@@ -1583,7 +1615,7 @@
       "section": "adjustments",
       "label": "CGD's share of the credit (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(a_value * a_attribution_share + b_value * b_attribution_share + c_value * c_attribution_share) / downstream_value",
+      "formula": "(a_value * a_attribution_share_shared + b_value * b_attribution_share_shared + c_value * c_attribution_share_shared) / downstream_value",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1607,8 +1639,8 @@
       "section": "adjustments",
       "label": "CGD's share of the credit (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches' attribution shares (a_attribution_share, b_attribution_share, c_attribution_share), for reading only: each branch applies its own."
+      "formula": "(a_value * a_attribution_share + b_value * b_attribution_share + c_value * c_attribution_share) / downstream_value",
+      "explainer": "The outcome-weighted average of the branches' attribution shares (a_attribution_share_shared, b_attribution_share_shared, c_attribution_share_shared), for reading only: each branch applies its own."
     },
     {
       "id": "a_outcome",

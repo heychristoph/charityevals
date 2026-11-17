@@ -1054,7 +1054,7 @@
         "page": "'2025 in numbers': Raised from donors and collaborators $10.3 million (+40% from 2024); Commissioned research projects and consultations 13",
         "quote": "Raised from donors and collaborators"
       },
-      "explainer": "What clients paid for the work of 2025 (13 commissioned projects and consultations: FrontierMath Tier 4 for OpenAI, evaluations for xAI and Google DeepMind, 'AI in 2030' for Google DeepMind, a benchmark funded by METR, a report for EPRI, data for the AI Index, consultations for the UK DSIT, Sequoia Capital and Bridgewater Associates). Several were paid across 2024 and 2025 (the funding page dates OpenAI's FrontierMath, the Google DeepMind report, the AI Index, EPRI and DSIT '2024/25'), so the fees' share is taken over both years: raised $10.3M in 2025 and about $7.36M in 2024 ('+40% from 2024'), $17.66M, less the gifts the funding page dates to those years ($4.21M in 2024: Coefficient Giving $4,132,488, Sentinel Bio $80,000; $9.955M in 2025: Coefficient Giving $8.5M and $70,000, Jaan Tallinn $600,000, Likith Govindaiah $400,000, Leopold Aschenbrenner $200,000, Girish Sastry $100,000, Sentinel Bio $85,000), about $3.5M of fees, 19.8% of receipts, × the $5M spent = about $990,000. $350,000 (2025's receipts alone) to $1.9M (2024's unlisted receipts all fees and paid for 2025's work): gifts under $70,000 the page leaves out, or grants recognised in another year, move it either way; Epoch says it charges 'at least on par with industry consultants'. Paid work bought by clients is their resources behind the outputs, credited in ai_attribution_share."
+      "explainer": "What clients paid for the work of 2025 (13 commissioned projects and consultations: FrontierMath Tier 4 for OpenAI, evaluations for xAI and Google DeepMind, 'AI in 2030' for Google DeepMind, a benchmark funded by METR, a report for EPRI, data for the AI Index, consultations for the UK DSIT, Sequoia Capital and Bridgewater Associates). Several were paid across 2024 and 2025 (the funding page dates OpenAI's FrontierMath, the Google DeepMind report, the AI Index, EPRI and DSIT '2024/25'), so the fees' share is taken over both years: raised $10.3M in 2025 and about $7.36M in 2024 ('+40% from 2024'), $17.66M, less the gifts the funding page dates to those years ($4.21M in 2024: Coefficient Giving $4,132,488, Sentinel Bio $80,000; $9.955M in 2025: Coefficient Giving $8.5M and $70,000, Jaan Tallinn $600,000, Likith Govindaiah $400,000, Leopold Aschenbrenner $200,000, Girish Sastry $100,000, Sentinel Bio $85,000), about $3.5M of fees, 19.8% of receipts, × the $5M spent = about $990,000. $350,000 (2025's receipts alone) to $1.9M (2024's unlisted receipts all fees and paid for 2025's work): gifts under $70,000 the page leaves out, or grants recognised in another year, move it either way; Epoch says it charges 'at least on par with industry consultants'. Paid work bought by clients is their resources behind the outputs, credited in ai_attribution_share_shared."
     },
     {
       "id": "own_work_share",
@@ -1195,7 +1195,7 @@
       "explainer": "Not used: Epoch does no training (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, down to 0.5 if others would have done it."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1203,7 +1203,23 @@
       "formula": "(1 - earned_revenue / total_expenses) * own_work_share"
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1216,7 +1232,15 @@
       "explainer": "Not used: Epoch does no pandemic work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, down to 0.5 if others shared the work."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1229,7 +1253,15 @@
       "explainer": "Not used: Epoch does no nuclear work (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, down to 0.5 if others shared the work."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1242,7 +1274,16 @@
       "explainer": "Not used: Epoch does no policy campaign with a win in 2025 (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, down to 0.5 if others shared the work."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1253,6 +1294,14 @@
       },
       "kind": "judgment",
       "explainer": "Not used: Epoch does no training (the branch's cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, down to 0.5 if others shared the work."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

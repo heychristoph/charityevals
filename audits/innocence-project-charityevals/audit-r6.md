@@ -14,7 +14,7 @@ Mechanical pass as a ranked charity model: `audit-model.ts` shows two standing L
 Previous round: both lows resolved.
 
 Verdict: pass (no high, no medium; the two standing low notes only)
-Model-sha: b4adff723aecf992fca8de125758b6b7a8c6b25ab0a0f55e17feffb4ca6b482b
+Model-sha: 57577f61558b1cd78b058374661c21dc4f8a2f8d1b18a80748451217b97e927d
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000601 → 0.000489.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -24,3 +24,5 @@ Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against b10cf49b.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 2 rows changed, against cc9a04dd.

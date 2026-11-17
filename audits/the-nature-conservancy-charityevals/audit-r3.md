@@ -11,7 +11,7 @@ Checked:
 Findings: None.
 
 Verdict: pass
-Model-sha: 233151299388f2b565907d11206429adda94977802445dfcf95c01b18f46e18d
+Model-sha: 1dea471ba060ea1953219aa0228d24ad17df9fdb33bd95f20b2f68079b90c428
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 Re-stamped (15 Nov 2026): one explainer clause comparing with another evaluator's removed model dropped (text only; result unchanged)
 
@@ -20,3 +20,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 7 rows changed, against d150f0b2.

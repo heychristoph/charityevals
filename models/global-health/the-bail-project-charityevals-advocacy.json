@@ -564,7 +564,7 @@
       "explainer": "SJR 44 and SB 1318 passed the Senate (30-1 and 31-0) and were postponed on the House floor on the deadline day: partly a calendar death, which the opposition's floor work helped bring about. A share of an outcome already in, not a chance still to be drawn: 30% (10% to 60%), our judgment."
     },
     {
-      "id": "tx_attribution_share",
+      "id": "tx_attribution_share_shared",
       "section": "adjustments",
       "label": "Texas: the charity's share of the coalition's resources",
       "format": "percent",
@@ -575,6 +575,23 @@
       },
       "kind": "judgment",
       "explainer": "The named coalition members spent $21.5 million in their latest years (ACLU Foundation of Texas $4.1M, Texas Civil Rights Project $7.4M, Texas Appleseed $8.9M, Texas Fair Defense Project $1.1M; ProPublica Nonprofit Explorer, 2023 Forms 990), perhaps a tenth of it on bail and pretrial work, beside public defenders and national groups; the charity's own Texas share of its $1.2 million policy budget and of its research is about $0.5 million. Its share: 15% (5% to 30%)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "tx_attribution_share",
+      "section": "adjustments",
+      "label": "Texas: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "tx_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "tx_evidence_adj",
@@ -723,7 +740,7 @@
       "explainer": "SJR 87 and SJR 1 died in the House in 2025, where the Senate's bail measures have twice failed at the floor stage; the opposition's floor work is one reason among the calendar and the House's own priorities. A share of an outcome already in: 30% (10%, if they would have died anyway, to 60%, if the campaign turned the votes), as for the 2023 measures."
     },
     {
-      "id": "t25_attribution_share",
+      "id": "t25_attribution_share_shared",
       "section": "adjustments",
       "label": "Texas 2025: the charity's share of the coalition's resources",
       "format": "percent",
@@ -734,6 +751,15 @@
       },
       "kind": "judgment",
       "explainer": "The same coalition as in 2023, but the charity's annual report claims SJR 5, not these defeats, so a lower share: 8% (2% to 20%)."
+    },
+    {
+      "id": "t25_attribution_share",
+      "section": "adjustments",
+      "label": "Texas 2025: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "t25_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "t25_evidence_adj",
@@ -911,7 +937,7 @@
       "explainer": "The charity says it 'decisively blocked' the industry's 2025 bills; we found no public record naming them (the 2026 bills are on record), so the claim rests on its report. A share of an outcome already in: 30% (10% to 60%), our judgment."
     },
     {
-      "id": "cb_attribution_share",
+      "id": "cb_attribution_share_shared",
       "section": "adjustments",
       "label": "Florida and Oklahoma: the charity's share of the opposition's resources",
       "format": "percent",
@@ -922,6 +948,15 @@
       },
       "kind": "judgment",
       "explainer": "The bills targeted charitable bail and the charity is by far the largest fund in both states; local funds, defenders and civil-liberties groups joined: 40% (20% to 70%)."
+    },
+    {
+      "id": "cb_attribution_share",
+      "section": "adjustments",
+      "label": "Florida and Oklahoma: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "cb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "cb_evidence_adj",
@@ -1169,7 +1204,7 @@
       "section": "adjustments",
       "label": "The charity's share of resources (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(tx_weight / tx_total_adj * tx_attribution_share + t25_weight / t25_total_adj * t25_attribution_share + cb_weight / cb_total_adj * cb_attribution_share) / (tx_weight / tx_total_adj + t25_weight / t25_total_adj + cb_weight / cb_total_adj)",
+      "formula": "(tx_weight / tx_total_adj * tx_attribution_share_shared + t25_weight / t25_total_adj * t25_attribution_share_shared + cb_weight / cb_total_adj * cb_attribution_share_shared) / (tx_weight / tx_total_adj + t25_weight / t25_total_adj + cb_weight / cb_total_adj)",
       "explainer": "Each branch's own share, weighted by its incarceration avoided before adjustments."
     },
     {
@@ -1177,8 +1212,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of resources, the outcome-weighted average of the branches, for reading only."
+      "formula": "(tx_weight / tx_total_adj * tx_attribution_share + t25_weight / t25_total_adj * t25_attribution_share + cb_weight / cb_total_adj * cb_attribution_share) / (tx_weight / tx_total_adj + t25_weight / t25_total_adj + cb_weight / cb_total_adj)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

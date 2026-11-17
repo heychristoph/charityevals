@@ -1,6 +1,6 @@
 # Audit: st-jude-charityevals-research, round 3
 Result: 2.251e-6 daly/$ = 0.002251 years of healthy life per 1,000 dollars (combined range 0.000189–0.0268); cause median 0.1085 (×0.021). Verdict: pass.
-Model-sha: 602016d04c317ab23690b49893aa12fd9500114cd40638344e7696c0552bb7fb
+Model-sha: 587368d021cbb3cc7582509b2a04162b9bc52dbd937f3fa27bc241d9c8108285
 Scope: scoped verification of commit a1555789 (the corrected quote in `nc_flu_deaths_over5_per_year`) and round 2's items. Scope of the model (own-funded research, FY2025) unchanged.
 Mechanical: lint 0 high / 1 medium (`far-below`, explained in round 1's Drivers, unchanged) / 1 low (`spread`, the summary states it). Invariants: none. `scripts/check.ts st-jude-charityevals-research`: all models valid. normalization-audit and simulation-check not re-run (no structural change). generated/ untouched.
 Previous round: R2-1 not applied, and the reason holds (below); R2-2 resolved.
@@ -30,3 +30,5 @@ Re-stamped (15 Nov 2026): side-effect tag on unmodelled_benefits_adj (2.16, mech
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 6e174700.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 3 rows changed, against cc9a04dd.

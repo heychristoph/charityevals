@@ -3,6 +3,8 @@
 The template's chain and shared figures are in templates.md; this is the recipe for pressing a stock of
 existing pledges (`acc_` branch) beside new pledges (`new_`).
 
+- **Credit** (Convention 2): pledges are `"credit": "win"`: the used share is the share among the
+  campaigning groups × `mobiliser_share`; the companies' compliance spending is in no denominator.
 - **Accountability on a stock of existing pledges** (`acc_`): one year's pressure gets one year's share
   of the compliance it causes, anchored on the observed pace:
   - `acc_switched_per_year`: animals that came out of cages in the year under the pledges pressed (published

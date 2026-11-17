@@ -963,7 +963,7 @@
       "label": "Transparency standards: chance the win happened",
       "format": "percent",
       "formula": "1",
-      "explainer": "The standards are in force: automatic exchange under the Common Reporting Standard since 2017 (over 100 jurisdictions), beneficial-ownership requirements in the FATF and Global Forum standards, country-by-country reporting to tax authorities under BEPS Action 13 since 2016. The network's share of the credit is a_attribution_share."
+      "explainer": "The standards are in force: automatic exchange under the Common Reporting Standard since 2017 (over 100 jurisdictions), beneficial-ownership requirements in the FATF and Global Forum standards, country-by-country reporting to tax authorities under BEPS Action 13 since 2016. The network's share of the credit is a_attribution_share_shared."
     },
     {
       "id": "years_of_impact",
@@ -1178,12 +1178,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -1258,9 +1266,9 @@
       "section": "careers",
       "label": "Value of one career change (units of value)",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
       "unit": "units of value",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",
@@ -1358,12 +1366,21 @@
       "explainer": "Exchange on request came from the OECD's model agreements, which predate the network's proposals and which it criticised as too weak; the G20's 2009 push to enforce it drew on the same campaigns. Judged half the credit (20% to 100%)."
     },
     {
-      "id": "a_attribution_share",
+      "id": "a_attribution_share_shared",
       "section": "adjustments",
       "label": "Transparency standards: the network's share of the credit",
       "format": "percent",
       "formula": "a_tjn_movement_share * a_movement_credit * (1 - a_eoir_share * (1 - a_eoir_credit_ratio))",
       "explainer": "Its share of civil society's resources times civil society's share of all, with less credit for the part from exchange on request."
+    },
+    {
+      "id": "a_attribution_share",
+      "section": "adjustments",
+      "label": "Transparency standards: share of credit used",
+      "format": "percent",
+      "formula": "a_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "a_evidence_adj",
@@ -1499,12 +1516,21 @@
       "explainer": "Governments lead: the African Group's resolutions (2022, 2023), the UN's negotiating committee and its secretariat; civil society proposed a UN tax body for two decades and supplies analysis, statements and coordination. Judged 25% (10% to 50%); the network's share within it is b_tjn_movement_share."
     },
     {
-      "id": "b_attribution_share",
+      "id": "b_attribution_share_shared",
       "section": "adjustments",
       "label": "UN convention: the network's share of the credit",
       "format": "percent",
       "formula": "b_tjn_movement_share * b_movement_credit",
       "explainer": "Its share of civil society's resources times civil society's share of all."
+    },
+    {
+      "id": "b_attribution_share",
+      "section": "adjustments",
+      "label": "UN convention: share of credit used",
+      "format": "percent",
+      "formula": "b_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "b_evidence_adj",
@@ -1594,7 +1620,7 @@
       "section": "adjustments",
       "label": "The network's share of the credit, outcome-weighted average of the branches",
       "format": "percent",
-      "formula": "(a_value * a_attribution_share + b_value * b_attribution_share) / downstream_value",
+      "formula": "(a_value * a_attribution_share_shared + b_value * b_attribution_share_shared) / downstream_value",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1602,7 +1628,7 @@
       "section": "adjustments",
       "label": "Attribution share",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(a_value * a_attribution_share + b_value * b_attribution_share) / downstream_value",
       "explainer": "The shared attribution share: the outcome-weighted average of the branches, for reading only."
     },
     {
