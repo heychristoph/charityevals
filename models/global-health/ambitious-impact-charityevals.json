@@ -683,12 +683,20 @@
    "explainer": "Our judgment, the shared rule for an organisation whose money goes to several causes. Shifted money would have gone to an ordinary charity of the same cause: each cause's at the rule for a mover in that cause (GiveDirectly's live result, times a shared multiple, 1×, from 0 to 3×, over the global-health charities' on the rankings, times that cause's charities'), weighted by the organisation's own split, all live under your values."
   },
   {
+   "id": "mobiliser_share",
+   "section": "moved_money",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "shifted_dollar_value",
    "section": "moved_money",
-   "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+   "label": "Value of a dollar all shifted (given anyway, now to a better use), at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "moved_dollar_value - prior_dollar_value",
-   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+   "formula": "mobiliser_share * (moved_dollar_value - prior_dollar_value)",
+   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed. Its owners spent it, so the organisation is credited its share of that gain (mobiliser_share)."
   },
   {
    "id": "informed_money_value",
@@ -701,26 +709,26 @@
   {
    "id": "moved_dollar_net_value",
    "section": "moved_money",
-   "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+   "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+   "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
   },
   {
    "id": "gh_moved_dollar_net_value",
    "section": "moved_money",
-   "label": "Value of a dollar its giving organisations and companies move, net of where shifted money would have gone, units of value",
+   "label": "Value of a dollar its giving organisations and companies move, net of where shifted money would have gone, at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "new_money_share * gh_moved_dollar_value + (1 - new_money_share) * (gh_moved_dollar_value - gh_prior_dollar_value)",
-   "explainer": "The shared net value of a dollar moved, in the gh destination set (docs/normalization.md 2.8): new money in full, shifted money for its gain over where it would have gone."
+   "formula": "mobiliser_share * (new_money_share * gh_moved_dollar_value + (1 - new_money_share) * (gh_moved_dollar_value - gh_prior_dollar_value))",
+   "explainer": "The shared net value of a dollar moved, in the gh destination set (docs/normalization.md 2.8): new money in full, shifted money for its gain over where it would have gone, at the mobiliser's share (2.24)."
   },
   {
    "id": "egi_costs_value",
    "section": "effect",
    "label": "Value lost to the effective giving organisations' own running costs (units of value)",
    "format": "number",
-   "formula": "egi_orgs_launched * egi_budget_per_org * projected_wait_discount * founding_counterfactual_share * gh_prior_dollar_value",
-   "explainer": "Their lifetime spending, on the same wait and counterfactual share as their donations, at where that money would otherwise have gone (an ordinary global-health charity)."
+   "formula": "egi_orgs_launched * egi_budget_per_org * projected_wait_discount * founding_counterfactual_share * gh_prior_dollar_value * mobiliser_share",
+   "explainer": "Their lifetime spending, on the same wait and counterfactual share as their donations, at where that money would otherwise have gone (an ordinary global-health charity), at the mobiliser's share: a cost of the money they move, it takes the same share as that money (docs/normalization.md 2.24)."
   },
   {
    "id": "units_affected_per_year",
@@ -924,9 +932,9 @@
    "section": "careers",
    "label": "Value of one career change (units of value)",
    "format": "number",
-   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
    "unit": "units of value",
-   "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+   "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
   },
   {
    "id": "careers_missing_data_adj",
