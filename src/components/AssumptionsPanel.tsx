@@ -6,7 +6,7 @@ import { pickValue } from "../engine/model";
 import { COUNTRIES, byCode } from "../engine/countries";
 import { formatAssumption, formatShown, parseTyped } from "../lib/format";
 import { useAssumptionValues } from "../lib/use-results";
-import { setAssumption, resetAssumptions, useOverrides, PRESETS, applyPreset, presetOf } from "../lib/assumption-state";
+import { setAssumption, resetAssumptions, useOverrides, PRESETS, applyPreset, presetOf, shareUrl, sliderEnds } from "../lib/assumption-state";
 import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
 import type { Row } from "../engine/schema";
 import InfoTip, { WithTip } from "./InfoTip";
@@ -18,16 +18,11 @@ const STEPS = 400;
 const SNAP = 8;
 
 function scaleFor(r: Row) {
-  const best = pickValue(r.value);
-  const v = typeof r.value === "object" ? r.value : { best };
-  let low = r.slider?.low ?? v.low ?? best / 10;
-  let high = r.slider?.high ?? v.high ?? best * 10;
-  if (low === high) { low = best / 10; high = best * 10; }
+  const { low, high, zero } = sliderEnds(r);
   // Every positive range is a ratio, so it runs on a log scale: halving and doubling the default are the
   // same distance. A range that starts at zero (the discount rate) stays linear. A log scale with a
   // zero stop gives 0 the first step and the log scale the rest.
   const log = low > 0 && !r.slider?.linear;
-  const zero = log && !!r.slider?.zero;
   const first = zero ? 1 : 0;
   return {
     low,
@@ -370,7 +365,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
             type="button"
             className="link-button"
             onClick={() => {
-              navigator.clipboard?.writeText(window.location.href).then(() => {
+              navigator.clipboard?.writeText(shareUrl(window.location.href, undefined, { explicitDefault: true })).then(() => {
                 track("link_copy", { value: changedCount });
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1600);

@@ -5,6 +5,7 @@ import InfoTip from "../components/InfoTip.tsx";
 import { lib, modelUrl } from "../lib/data";
 import { formatAssumption, formatValue } from "../lib/format";
 import { pickValue } from "../engine/model";
+import { OWN_LICENCE } from "../lib/licence";
 
 const groups = new Map<string, typeof lib.facts extends Map<string, infer F> ? F[] : never>();
 // One group per place: "Kenya" and "Kenya (GiveWell's data)" are the same country, from two files.
@@ -35,6 +36,7 @@ const newSection = (rows: { section?: string }[], i: number) => rows[i].section 
           Most come from evidence. Some are judgments, marked as such below and on every model that reads them: they are fixed rather than sliders because each concerns only a few models or sits inside a range the evidence sets, and the site keeps one slider per concept. Their ranges feed the uncertainty bars. Corrections go through the repository, with a source or a reason.
         </InfoTip>
       </div>
+      <p class="small muted">Reuse under <a href={OWN_LICENCE.url} rel="license">CC BY 4.0</a>, crediting {OWN_LICENCE.attribution}; figures taken from an evaluator keep <a href="/terms">its terms</a>.</p>
     </header>
 
     <section class="fixed" aria-labelledby="fixed-title">
@@ -111,6 +113,13 @@ const newSection = (rows: { section?: string }[], i: number) => rows[i].section 
           </table>
         </details>
       ))}
+    </section>
+
+    <section class="download" aria-labelledby="download-title">
+      <h2 id="download-title">Download</h2>
+      <p class="small">
+        {[["/data/models.json", "Models"], ["/data/results.csv", "Results (CSV)"], ["/data/charities.json", "Charities"], ["/data/assumptions.json", "Assumptions"], ["/data/facts.json", "Facts"], ["/data/library.json", "Library"], ["/llms-full.txt", "All as text"]].map(([href, label], i) => <>{i > 0 && " · "}<a href={href}>{label}</a></>)}
+      </p>
     </section>
   </div>
 </Base>
@@ -253,5 +262,10 @@ const newSection = (rows: { section?: string }[], i: number) => rows[i].section 
   }
   .facts tr:target {
     background: var(--blue-wash);
+  }
+  .download {
+    margin-top: var(--s7);
+    display: grid;
+    gap: var(--s2);
   }
 </style>

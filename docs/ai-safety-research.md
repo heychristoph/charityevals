@@ -176,7 +176,7 @@ top, `$discount_rate` and the risk slider, and the summary must say so.
 
 | Input | Kind | Proposed value and evidence |
 |---|---|---|
-| `$ai_catastrophe_chance` | **slider** (a belief people disagree about) | 3% default (XPT experts' extinction figure), range 0.38% (XPT superforecasters) to 20% (80,000 Hours 10%, Grace survey mean 16%). Owner decision |
+| `$ai_catastrophe_chance` | **slider** (a belief people disagree about) | 5% default since 16 Nov 2026 (Grace et al. AI researchers' median; was XPT experts' 3%), range 0.38% (XPT superforecasters) to 50% (80,000 Hours 10%, Grace survey mean 16%). Owner decision |
 | `@ai_risk.extinction_share_of_catastrophe` | fact | XPT superforecasters 0.38/2.13 ≈ 0.18; range 0.1–0.7 (RP's 2:1 ratio ≈ 0.33) |
 | `cat_death_share` | fact | share dying in a non-extinction catastrophe, 0.1–0.5 (the XPT ≥10% threshold) |
 | `@ai_risk.field_cumulative_spend` | fact | $2–8B: philanthropy since 2014 (Open Phil alone $336M+ by 2024, $409M in 2025), labs' safety teams, AI security institutes. Labs counting in is an owner decision (3.6) |

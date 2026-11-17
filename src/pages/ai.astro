@@ -1,0 +1,151 @@
+---
+import Prose from "../layouts/Prose.astro";
+import { OWN_LICENCE } from "../lib/licence";
+import { repo } from "../lib/site";
+
+const mcp = "https://charityevals.org/mcp";
+const cursorConfig = `{
+  "mcpServers": {
+    "charityevals": { "url": "${mcp}" }
+  }
+}`;
+// The server's tools (worker/), one line each.
+const tools = [
+  ["search_charities(query, cause?)", "find charities and their model ids"],
+  ["get_model(id)", "a model's rows, with value, range, source and explanation"],
+  ["run_model(id, values?)", "recompute one model with your values"],
+  ["compare(ids, values?)", "several models side by side, with your values"],
+  ["rank(cause?, values?, limit?)", "every charity ranked, with your values"],
+  ["list_assumptions()", "the values you can change and the value sets"],
+];
+const prompts = [
+  "Rank the global health charities at a 1% discount rate.",
+  "Compare GiveDirectly and Helen Keller Intl under the AI-concerned value set.",
+  "Explain what drives the Against Malaria Foundation's result, and which input matters most.",
+];
+// The static files (src/pages/data/), built from the same library as the pages.
+const files = [
+  ["/data/charities.json", "JSON", "every charity"],
+  ["/data/models.json", "JSON", "one entry per model: charity, evaluator, cause, headline, range, licence, links"],
+  ["/data/models/<id>.json", "JSON", "one full model: every row, its computed value, headline and range"],
+  ["/data/assumptions.json", "JSON", "the values you can change, with ranges, and the value sets"],
+  ["/data/facts.json", "JSON", "the shared data every model reads"],
+  ["/data/results.csv", "CSV", "one row per model"],
+  ["/data/library.json", "JSON", "all the inputs above in one file, to recompute any model"],
+];
+---
+
+<Prose title="Use with AI" active="ai" description="Ask an AI assistant to rank, compare or explain charities with your own values, through our MCP server, plain-text files or open data.">
+  <p class="dek">Ask an AI assistant to rank, compare or explain the models here, with your own values. Its answers are estimates, not advice.</p>
+
+  <h2>Connect the MCP server</h2>
+  <p>Server URL: <code>{mcp}</code>. No sign-in.</p>
+  <ul>
+    <li>
+      <strong>Claude</strong> (claude.ai and Claude Desktop): Customize › Connectors › + Add › Add custom connector. Name it charityevals, paste the URL, choose No sign in, then Add. On Team and Enterprise, an owner adds it under Organization settings › Connectors. <a href="https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp">Anthropic's guide</a>
+    </li>
+    <li>
+      <strong>Claude Code</strong>: <a href="https://code.claude.com/docs/en/mcp">guide</a>
+      <pre class="code"><code>claude mcp add --transport http charityevals {mcp}</code></pre>
+    </li>
+    <li>
+      <strong>ChatGPT</strong> (on the web): open <a href="https://chatgpt.com/plugins">Plugins</a>, select + › Add custom MCP server, paste the URL under Connection, choose No authentication, confirm, then Create as a plugin and install it. <a href="https://developers.openai.com/api/docs/guides/custom-mcp-server">OpenAI's guide</a>
+    </li>
+    <li>
+      <strong>Cursor</strong>: add this to <code>~/.cursor/mcp.json</code>, or to <code>.cursor/mcp.json</code> in a project. <a href="https://cursor.com/docs/context/mcp">Cursor's guide</a>
+      <pre class="code"><code>{cursorConfig}</code></pre>
+    </li>
+    <li><strong>Other clients</strong>: any that connects to remote MCP servers over Streamable HTTP. Use the URL above.</li>
+  </ul>
+
+  <h3>Tools</h3>
+  <ul>
+    {tools.map(([name, does]) => <li><code>{name}</code>: {does}</li>)}
+  </ul>
+  <p><code>values</code> maps an assumption id to a number, or names a value set: <code>{"{ \"set\": \"ai-concerned\" }"}</code>.</p>
+
+  <h3>Try</h3>
+  <ul>
+    {prompts.map((p) => <li>“{p}”</li>)}
+  </ul>
+
+  <h2>Without setup</h2>
+  <p>
+    Give any AI chat this link: <a href="/llms-full.txt"><code>charityevals.org/llms-full.txt</code></a>. It has every charity's models, headline, range, main drivers and sources as plain text. <a href="/llms.txt"><code>/llms.txt</code></a> is a shorter map of the site.
+  </p>
+
+  <h2>Data files</h2>
+  <table class="files">
+    <tbody>
+      {files.map(([path, format, holds]) => (
+        <tr>
+          <th scope="row">{path.includes("<") ? <code>{path}</code> : <a href={path}><code>{path}</code></a>}</th>
+          <td class="muted">{format}</td>
+          <td>{holds}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p>Results are years of healthy life per $1,000 at the default values. The model files are also in the <a href={repo}>repository</a>.</p>
+
+  <h2>Share a view</h2>
+  <ul>
+    <li><code>?set=&lt;id&gt;</code> picks a value set, as in <a href="/?set=ai-concerned"><code>/?set=ai-concerned</code></a>.</li>
+    <li>
+      <code>?values=&lt;id&gt;:&lt;number&gt;,…</code> sets single values, written as in <code>/data/assumptions.json</code> (0.01 is 1%), as in <a href="/?values=discount_rate:0.01"><code>/?values=discount_rate:0.01</code></a>.
+    </li>
+  </ul>
+  <p>The Copy link button writes your current values into a link.</p>
+
+  <h2>Reuse</h2>
+  <p>
+    Our own models, write-ups and data are <a href={OWN_LICENCE.url}>{OWN_LICENCE.name}</a>: credit {OWN_LICENCE.attribution}. Models rebuilt from an evaluator's analysis keep that evaluator's terms. Every data file and tool answer names its licence. The code is MIT. See the <a href="/terms">terms</a>.
+  </p>
+</Prose>
+
+<style>
+  .dek {
+    font-size: 19px;
+    color: var(--ink-2);
+  }
+  h3 {
+    font-size: 17px;
+    margin: var(--s5) 0 var(--s2);
+  }
+  .code {
+    margin: var(--s2) 0 0;
+    padding: var(--s3);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+    font-size: 13px;
+    line-height: 1.45;
+    overflow-x: auto;
+  }
+  .code code {
+    background: none;
+    padding: 0;
+  }
+  .files {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  .files th,
+  .files td {
+    text-align: left;
+    vertical-align: top;
+    padding: var(--s2) var(--s3) var(--s2) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .files th {
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .files th {
+      white-space: normal;
+      word-break: break-all;
+    }
+  }
+</style>

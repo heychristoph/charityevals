@@ -1131,7 +1131,7 @@ them. Your values → Lives near and far:
 
 - "Where you live" (`$home_country`, a dropdown, not a slider: the assumption schema's `control: "country"`):
   an ISO 3166 numeric code, **0 = not set**, which means no distance weighting at all. Stored as a number, it
-  travels through the overrides, the URL (`?a.home_country=840`) and localStorage like any other value.
+  travels through the overrides, the URL (`?values=home_country:840`) and localStorage like any other value.
 - "Each step further from you, a life counts less by" (`$distance_discount`, judgment, **default 0%**, range
   0–90%). Steps: your country (weight 1), the rest of your world region (× (1 − d)), the rest of the world
   (× (1 − d)²). Regions are the UN M49 sub-regions, Africa and Latin America split into their M49 intermediate
@@ -1363,7 +1363,7 @@ values a charity's work as a cut in the yearly chance of catastrophes of three s
 facts/catastrophe.json. **Chances**: the Existential Risk Persuasion Tournament's medians by 2100 (Karger et al.
 2023), spread evenly over 2022-2100; the domain experts' figure is the best guess and the superforecasters' the low
 end, the rule the owner set for AI. Each area's extinction-level chance is a slider (Your values; owner, 15 November
-2026): `$ai_catastrophe_chance` (3%, 0.01-20%; catastrophes it survives × `ai_catastrophe_vs_extinction`),
+2026): `$ai_catastrophe_chance` (5%, 0.01-50%; AI researchers' 2023 median, from November 2026; catastrophes it survives × `ai_catastrophe_vs_extinction`),
 `$bio_catastrophe_chance` (1.01%) and `$nuclear_catastrophe_chance` (0.55%, both 0.01-3%; catastrophes the world
 survives are `<area>_catastrophe_by_2100` less the slider, at least 0). **Sizes**: extinction-level (all
 8.14 billion alive die and the future is lost); a catastrophe the world survives (over 10% die:

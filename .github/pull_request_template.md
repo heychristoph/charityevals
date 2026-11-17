@@ -12,3 +12,11 @@
 - [ ] Touches personal or customer data
 - [ ] Changes access: IAM, auth, secrets, OAuth scopes, public exposure
 - [ ] Needs a manual step or migration (how to roll back: ...)
+
+## Model changes
+
+- [ ] `npx tsx scripts/preflight.ts <id>` passes
+- [ ] Every number is sourced, or a ranged judgment with its reference class
+- [ ] New or changed models have an audit receipt in `audits/<id>/`
+- [ ] No comparisons with other charities in the text
+- [ ] Commits signed off (`git commit -s`)
