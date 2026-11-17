@@ -424,12 +424,20 @@
    "explainer": "Our judgment, the shared rule for an organisation that moves money within a cause other than global health (animal-welfare). Shifted money was going to be given anyway, to an ordinary charity of the same cause; it is credited only for the gain. An ordinary charity stands to its cause's charities on the rankings as GiveDirectly (GiveWell's model, times a shared multiple, 1×, from 0 to 3×) stands to global health's: GiveDirectly's live result over the global-health charities' (#cause:global-health), times the animal-welfare charities' (#cause:animal-welfare), all live under your values."
   },
   {
+   "id": "mobiliser_share",
+   "section": "moved_money",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "shifted_dollar_value",
    "section": "moved_money",
-   "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+   "label": "Value of a dollar all shifted (given anyway, now to a better use), at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "moved_dollar_value - prior_dollar_value",
-   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+   "formula": "mobiliser_share * (moved_dollar_value - prior_dollar_value)",
+   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed. Its owners spent it, so the organisation is credited its share of that gain (mobiliser_share)."
   },
   {
    "id": "informed_money_value",
@@ -575,9 +583,9 @@
    "section": "careers",
    "label": "Value of one career change (units of value)",
    "format": "number",
-   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
    "unit": "units of value",
-   "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+   "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
   },
   {
    "id": "careers_missing_data_adj",
