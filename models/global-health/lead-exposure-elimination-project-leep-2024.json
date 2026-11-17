@@ -431,7 +431,7 @@
     {
       "id": "govt_cost_uncounted",
       "section": "staff_pay",
-      "label": "Government money LEEP leaves out (the half it discounts), discounted",
+      "label": "Governments' enforcement spending in LEEP's cost figure (half of it), discounted",
       "format": "usd",
       "value": 269124,
       "kind": "estimate",
@@ -443,15 +443,15 @@
         "retrieved": "2026-11-15",
         "note": "Each government's yearly cost ($5,000 to $25,000) over the years enforcement is brought forward, 2021 onwards at 4%: $538,000 in all, of which LEEP counts half."
       },
-      "explainer": "LEEP counts the governments' enforcement costs at half, as that money would otherwise be spent less well. With credit by share of resources on, every contributor's money counts in full, so the other half joins the cost."
+      "explainer": "LEEP counts the governments' staff time to enforce the rules at half, as that money would otherwise be spent less well: this is the half inside its cost figure (the half it leaves out is the same amount)."
     },
     {
       "id": "donor_cost_share",
       "section": "staff_pay",
-      "label": "Share of the full cost paid in cash by LEEP's donors",
+      "label": "Share of the full cost paid in cash",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($resource_shares, (cost_total - govt_cost_uncounted) * salary_sacrifice + govt_cost_uncounted, 0))",
-      "explainer": "With credit by share of resources, staff's forgone pay and the governments' full spending count as part of the cost, and staff and governments get their share of the outcome. Off, this is 100%."
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources, staff's forgone pay counts as part of LEEP's cost, and staff get their share of the outcome. The governments act only because of LEEP, so they aren't co-funders: they are credited through the mobiliser's share (docs/normalization.md 2.24). Off, this is 100%."
     },
     {
       "id": "ours_vs_leep",
@@ -461,6 +461,33 @@
       "formula": "(health_dalys_ours + income_dalys_ours) / total_daly_equivalents",
       "published": 1,
       "explainer": "The health years with deaths valued by age plus the earnings valued the site's way, over LEEP's 901,000. The evaluator view keeps LEEP's (1)."
+    },
+    {
+      "id": "adopter_cost_out",
+      "section": "bottom_line",
+      "label": "Cost LEEP counts per dollar of its own (the governments' spending leaves the cost)",
+      "format": "number",
+      "formula": "cost_total / (cost_total - govt_cost_uncounted)",
+      "published": 1,
+      "explainer": "**Changed for consistency.** The governments that enforce the lead paint limits carry out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps LEEP's cost (1)."
+    },
+    {
+      "id": "govt_cost_counted_fraction",
+      "section": "bottom_line",
+      "label": "Share of the governments' enforcement spending that LEEP counts as a cost",
+      "format": "percent",
+      "value": 0.5,
+      "kind": "estimate",
+      "explainer": "LEEP's own rule: it counts government money at half, as that money would otherwise be spent less well (its 2021 documentation). Used here only to get back to the spending in full."
+    },
+    {
+      "id": "gov_cost_share_of_good",
+      "section": "bottom_line",
+      "label": "Governments' enforcement spending, at what the money would otherwise have done, as a share of the good done",
+      "format": "percent",
+      "formula": "govt_cost_uncounted / govt_cost_counted_fraction * @givewell_shared.cf_value_government / $uov_per_daly / (total_daly_equivalents * ours_vs_leep)",
+      "published": 0,
+      "explainer": "**Changed for consistency.** The governments' enforcement spending in full (the half LEEP counts, over that half), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over our healthy years gained. A cost of the resources LEEP mobilises: netted from the good before the mobiliser's share. The evaluator view counts half the spending in the cost instead (0 here)."
     },
     {
       "id": "mobiliser_share",
@@ -474,9 +501,9 @@
       "id": "dalys_per_dollar",
       "section": "bottom_line",
       "label": "DALYs averted per dollar",
-      "formula": "((1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share) * mobiliser_share",
+      "formula": "((1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share) * adopter_cost_out * (1 - gov_cost_share_of_good) * mobiliser_share",
       "unit": "DALYs / $",
-      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nLEEP's DALY-equivalents per dollar, valued the site's way, times the share of the full cost paid in cash when credit by share of resources is on."
+      "explainer": "LEEP's DALY-equivalents per dollar of the cost it counts, valued the site's way, per dollar of LEEP's own spending (adopter_cost_out), net of what the governments' enforcement money would otherwise have done, times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources on, times the share of LEEP's full cost paid in cash."
     }
   ],
   "output": {

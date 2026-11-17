@@ -1798,6 +1798,32 @@
    "explainer": "**Changed for consistency.** Ambitious Impact counts the Global Burden of Disease's DALYs for smoking in Mongolia: mostly years of life lost to deaths, at GBD's life expectancy, untouched by the value-of-life slider. Our view splits each DALY into the illness part (kept as DALYs) and the deaths behind the rest (36.5 DALYs per smoking death in Mongolia), and values those deaths by age like every death on the site (row above). The evaluator view keeps Ambitious Impact's DALYs (1)."
   },
   {
+   "id": "charity_discounted_costs",
+   "section": "bottom_line",
+   "label": "Charity's discounted costs",
+   "format": "usd",
+   "formula": "npv(discount_rate, charity_costs_expected, charity_costs_https_data_worldbank_org_indicator_ny_gdp_mktp, charity_costs, charity_costs_2, charity_costs_3, charity_costs_corrected_cell_was, charity_costs_4, charity_costs_calculation_excise_tax_rate_tax_rate_increase, charity_costs_5, charity_costs_6, charity_costs_7, charity_costs_8, charity_costs_9, charity_costs_10, charity_costs_11, charity_costs_12, charity_costs_13, charity_costs_14, charity_costs_15, charity_costs_16, charity_costs_17, charity_costs_18, charity_costs_19, charity_costs_20, charity_costs_21, charity_costs_22, charity_costs_23, charity_costs_24, charity_costs_25, charity_costs_26, charity_costs_27, charity_costs_28, charity_costs_29, charity_costs_30, charity_costs_31, charity_costs_32, charity_costs_33, charity_costs_34, charity_costs_35, charity_costs_36, charity_costs_37, charity_costs_38, charity_costs_39, charity_costs_40, charity_costs_41, charity_costs_42, charity_costs_43, charity_costs_44, charity_costs_45, charity_costs_46)",
+   "explainer": "The charity's part of Ambitious Impact's discounted cost (the first of the two sums in its total): the sheet's own rows."
+  },
+  {
+   "id": "adopter_cost_out",
+   "section": "bottom_line",
+   "label": "Cost Ambitious Impact counts per dollar of the charity's own (the government's costs leave the cost)",
+   "format": "number",
+   "formula": "total_charity_and_gov_discounted_costs / charity_discounted_costs",
+   "published": 1,
+   "explainer": "**Changed for consistency.** The government that would run the higher tobacco tax carry out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps Ambitious Impact's cost (1)."
+  },
+  {
+   "id": "gov_cost_share_of_good",
+   "section": "bottom_line",
+   "label": "Government's costs, at what the money would otherwise have done, as a share of the good done",
+   "format": "percent",
+   "formula": "(total_charity_and_gov_discounted_costs - charity_discounted_costs) * @givewell_shared.cf_value_government / $uov_per_daly / (discounted_health_benefit_dalys * gbd_daly_revaluation)",
+   "published": 0,
+   "explainer": "**Changed for consistency.** The government's discounted cost of running the tax (Ambitious Impact's figure, weighted by the chance of success), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over the healthy years gained. A cost of the resources the advocacy mobilises: netted from the good before the mobiliser's share. The tax's revenue isn't counted. The evaluator view counts the government's costs in the cost instead (0 here)."
+  },
+  {
    "id": "mobiliser_share",
    "section": "bottom_line",
    "label": "This charity's share of the good done with money, work or budgets it brings in",
@@ -1809,8 +1835,8 @@
    "id": "dalys_per_dollar",
    "section": "bottom_line",
    "label": "DALYs averted per dollar",
-   "formula": "((1 / charity_gov_cost_per_life_daly_averted_expected) * donor_cost_share * gbd_daly_revaluation) * mobiliser_share",
-   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). Times our value of each of Ambitious Impact's DALYs, with the deaths in them valued by age."
+   "formula": "((1 / charity_gov_cost_per_life_daly_averted_expected) * donor_cost_share * gbd_daly_revaluation) * adopter_cost_out * (1 - gov_cost_share_of_good) * mobiliser_share",
+   "explainer": "Ambitious Impact's DALYs per dollar of all costs, times our value of each DALY (deaths valued by age), per dollar of the charity's own costs (adopter_cost_out), net of what the government's costs would otherwise have done, times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the charity's full cost paid in cash (staff's forgone pay is the rest)."
   }
  ],
  "output": {

@@ -2271,7 +2271,7 @@
    "formula": "charity_discounted_costs / discounted_dalys_affected",
    "expected": 0.1239217494,
    "format": "usd",
-   "explainer": "Ambitious Impact's figure counting only the charity's costs, $0.12 per DALY (the report said $0.10). We rank on the figure counting governments' payments for new antibiotics too, which are almost all of the cost: without them the new drugs aren't developed."
+   "explainer": "Ambitious Impact's figure counting only the charity's costs, $0.12 per DALY (the report said $0.10). Our view starts from the figure counting governments' payments too and takes them out of the cost in the bottom line: the governments pay only if the advocacy succeeds, so they are credited through the mobiliser's share and their payments are netted from the good."
   },
   {
    "id": "staff_cost_share",
@@ -2287,7 +2287,7 @@
    "label": "Charity's share of all costs counted",
    "format": "percent",
    "formula": "charity_discounted_costs / total_charity_and_government_discounted_costs",
-   "explainer": "The bottom line divides by the charity's and governments' costs, but staff pay below market is part of the charity's costs only (about 0.1% of the total), so the staff share applies to that part."
+   "explainer": "The charity's costs are about 0.1% of the cost Ambitious Impact counts; the rest is what governments pay for the new antibiotics."
   },
   {
    "id": "salary_gap",
@@ -2300,9 +2300,9 @@
   {
    "id": "salary_sacrifice",
    "section": "staff_pay",
-   "label": "Salary forgone by staff per dollar of all costs (in-kind donation)",
+   "label": "Salary forgone by staff per dollar of the charity's costs (in-kind donation)",
    "format": "number",
-   "formula": "staff_cost_share * charity_share_of_costs * salary_gap / (1 - salary_gap)"
+   "formula": "staff_cost_share * salary_gap / (1 - salary_gap)"
   },
   {
    "id": "donor_cost_share",
@@ -2330,6 +2330,40 @@
    "explainer": "**Changed for consistency.** Ambitious Impact counts the Global Burden of Disease's DALYs for drug-resistant infections: mostly years of life lost to deaths, at GBD's life expectancy, untouched by the value-of-life slider. Our view splits each DALY into the illness part (kept as DALYs) and the deaths behind the rest (37.4 DALYs per attributable death (GRAM 2021)), and values those deaths by age like every death on the site (row above). The evaluator view keeps Ambitious Impact's DALYs (1)."
   },
   {
+   "id": "adopter_cost_out",
+   "section": "bottom_line",
+   "label": "Cost Ambitious Impact counts per dollar of the charity's own (governments' payments leave the cost)",
+   "format": "number",
+   "formula": "1 / charity_share_of_costs",
+   "published": 1,
+   "explainer": "**Changed for consistency.** The governments that would pay for the new antibiotics carry out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps Ambitious Impact's cost (1)."
+  },
+  {
+   "id": "public_payer_uov_per_dollar",
+   "section": "bottom_line",
+   "label": "Value lost per dollar of public money by those who pay it, units of value",
+   "format": "small",
+   "formula": "@public_funds.mcpf * $uov_per_ln_consumption / (@public_funds.us_federal_payer_multiple * @united_states.ce_expenditure_per_person_2024)",
+   "explainer": "Public money isn't free (docs/normalization.md 2.23): a dollar of it costs its payers the marginal cost of public funds, on the log scale over their consumption. The payers are taxpayers of the United States and other rich countries, taken at the site's figures for US federal taxes and US consumption per person."
+  },
+  {
+   "id": "gov_public_cost_uov",
+   "section": "bottom_line",
+   "label": "What the governments' payments cost those who pay them, units of value (negative)",
+   "format": "number",
+   "formula": "-government_discounted_costs * public_payer_uov_per_dollar",
+   "explainer": "The governments' discounted payments for new antibiotics (Ambitious Impact's figure, already weighted by the chance of success) at what they cost taxpayers. A cost of the resources the advocacy mobilises: it is netted from the good before the mobiliser's share."
+  },
+  {
+   "id": "gov_cost_share_of_good",
+   "section": "bottom_line",
+   "label": "Governments' payments, at their cost to taxpayers, as a share of the good done",
+   "format": "percent",
+   "formula": "-gov_public_cost_uov / $uov_per_daly / (discounted_dalys_affected * gbd_daly_revaluation)",
+   "published": 0,
+   "explainer": "**Changed for consistency.** The cost of the mobilised public money over the healthy years gained, both discounted: well under 1%, since rich countries' taxpayers lose little per dollar on the log scale. The evaluator view counts the payments in the cost instead (0 here)."
+  },
+  {
    "id": "mobiliser_share",
    "section": "bottom_line",
    "label": "This charity's share of the good done with money, work or budgets it brings in",
@@ -2341,8 +2375,8 @@
    "id": "dalys_per_dollar",
    "section": "bottom_line",
    "label": "DALYs averted per dollar",
-   "formula": "((1 / cost_daly_government_and_charity_costs) * donor_cost_share * gbd_daly_revaluation) * mobiliser_share",
-   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). Times our value of each of Ambitious Impact's DALYs, with the deaths in them valued by age."
+   "formula": "((1 / cost_daly_government_and_charity_costs) * donor_cost_share * gbd_daly_revaluation) * adopter_cost_out * (1 - gov_cost_share_of_good) * mobiliser_share",
+   "explainer": "Ambitious Impact's DALYs per dollar of all costs, times our value of each DALY (deaths valued by age), per dollar of the charity's own costs (adopter_cost_out), net of what the governments' payments cost taxpayers, times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the charity's full cost paid in cash (staff's forgone pay is the rest)."
   }
  ],
  "output": {
@@ -2364,7 +2398,7 @@
    "mobiliser_share": 1
   }
  },
- "summary": "Ambitious Impact's 2023 estimate for a new charity advocating for subscription-style pull incentives (the US PASTEUR Act, and similar schemes in other rich countries) that pay for new antibiotics against drug-resistant infections. The idea ARMoR was founded to run. A re-implementation of AIM's spreadsheet as it stands today, traced from its cost per DALY counting the charity's and governments' costs ($110). The report's summary gives $90.80 and its CEA section $112, both from earlier versions of the sheet; counting the charity's costs alone the sheet gives $0.12 (the report: $0.10).",
+ "summary": "Ambitious Impact's 2023 estimate for a new charity advocating for subscription-style pull incentives (the US PASTEUR Act, and similar schemes in other rich countries) that pay for new antibiotics against drug-resistant infections. The idea ARMoR was founded to run. A re-implementation of AIM's spreadsheet as it stands today, traced from its cost per DALY counting the charity's and governments' costs ($110). The report's summary gives $90.80 and its CEA section $112, both from earlier versions of the sheet; counting the charity's costs alone the sheet gives $0.12 (the report: $0.10). Our view counts the charity's costs alone, nets the governments' payments from the good at their cost to taxpayers, and credits the charity with the mobiliser's share of the result.",
  "theoretical": {
   "reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
   "runs": "ARMoR advocates for antibiotic pull incentives, its key ask an EU subscription model (November 2025); AIM modelled the US PASTEUR Act.",

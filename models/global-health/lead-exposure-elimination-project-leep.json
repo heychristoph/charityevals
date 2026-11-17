@@ -373,6 +373,46 @@
       "explainer": "The health years with deaths valued by age plus the earnings valued the site's way, over LEEP's 43,000. The evaluator view keeps LEEP's (1)."
     },
     {
+      "id": "govt_cost_share",
+      "section": "bottom_line",
+      "label": "Share of LEEP's cost figure that is the government's enforcement spending (counted at half)",
+      "format": "percent",
+      "value": {
+        "low": 0.38,
+        "best": 0.415,
+        "high": 0.45
+      },
+      "kind": "estimate",
+      "explainer": "Computed from the flows LEEP states: its own $80,000 a year for five years and the Malawi Bureau of Standards' $75,000 a year for eight, discounted at 4% a year, the government's counted at half: about $250,000 of about $610,000, 41.5% whether the years are discounted from their start or their end. LEEP publishes only the rounded total ($590,000), so the split is an estimate; range ours."
+    },
+    {
+      "id": "adopter_cost_out",
+      "section": "bottom_line",
+      "label": "Cost LEEP counts per dollar of its own (the government's spending leaves the cost)",
+      "format": "number",
+      "formula": "1 / (1 - govt_cost_share)",
+      "published": 1,
+      "explainer": "**Changed for consistency.** The Malawi Bureau of Standards, which enforces the standard, carry out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps LEEP's cost (1)."
+    },
+    {
+      "id": "govt_cost_counted_fraction",
+      "section": "bottom_line",
+      "label": "Share of the governments' enforcement spending that LEEP counts as a cost",
+      "format": "percent",
+      "value": 0.5,
+      "kind": "estimate",
+      "explainer": "LEEP's own rule: it counts government money at half, as that money would otherwise be spent less well (its 2021 documentation). Used here only to get back to the spending in full."
+    },
+    {
+      "id": "gov_cost_share_of_good",
+      "section": "bottom_line",
+      "label": "Government's enforcement spending, at what the money would otherwise have done, as a share of the good done",
+      "format": "percent",
+      "formula": "govt_cost_share * cost_total / govt_cost_counted_fraction * @givewell_shared.cf_value_government / $uov_per_daly / (total_daly_equivalents * ours_vs_leep)",
+      "published": 0,
+      "explainer": "**Changed for consistency.** The government's enforcement spending in full (the half LEEP counts, over that half), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over our healthy years gained. A cost of the resources LEEP mobilises: netted from the good before the mobiliser's share. The evaluator view counts half the spending in the cost instead (0 here)."
+    },
+    {
       "id": "mobiliser_share",
       "section": "bottom_line",
       "label": "This charity's share of the good done with money, work or budgets it brings in",
@@ -384,9 +424,9 @@
       "id": "dalys_per_dollar",
       "section": "bottom_line",
       "label": "DALYs averted per dollar",
-      "formula": "((1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share) * mobiliser_share",
+      "formula": "((1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share) * adopter_cost_out * (1 - gov_cost_share_of_good) * mobiliser_share",
       "unit": "DALYs / $",
-      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nLEEP's DALY-equivalents per dollar, valued the site's way, times the share of the full cost paid in cash when credit by share of resources is on."
+      "explainer": "LEEP's DALY-equivalents per dollar of the cost it counts, valued the site's way, per dollar of LEEP's own spending (adopter_cost_out), net of what the government's enforcement money would otherwise have done, times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources on, times the share of LEEP's full cost paid in cash."
     }
   ],
   "output": {
