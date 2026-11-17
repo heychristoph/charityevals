@@ -1,7 +1,7 @@
 # Audit: jesuit-refugee-service-charityevals-advocacy, round 4
 Re-stamped: `destination_reads` added for the shared moved-money rows (GiveWell's four top charities and the GiveDirectly prior, read as destinations at their figures on the rankings, docs/normalization.md 2.12); no formula or value changed and the result is unchanged (the money-moved branch is 0 here), so round 3's pass stands.
 Verdict: pass
-Model-sha: 4f0f8f555c31c4e7f267f396dd3d1f5e92bc856b9523219d76991aa926c4f4db
+Model-sha: abc324aa73013e6bf0fe4192016340af6018e63a6d732861c3977301cdada9de
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -19,3 +19,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against d150f0b2.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combined; no value change). Mechanical: headline unchanged, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ce8e784f.

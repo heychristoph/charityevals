@@ -7,7 +7,7 @@ Checked only the one edit made after the SecureBio round-1 finding 6 (`git diff 
 
 New findings: none.
 
-Model-sha: 0b6d623dd83a8f4dca1dde1c7ddee88af468ca96de6c081f58cc0d6b7e6af439
+Model-sha: 77edf4d21cd20d69b41cc636f34ea5d45600f6af190af3e7687bca58a6ee44db
 
 **Verdict: pass**
 
@@ -25,3 +25,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.

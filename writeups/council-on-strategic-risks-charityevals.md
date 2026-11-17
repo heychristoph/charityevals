@@ -26,7 +26,7 @@ The return doesn't split the Nolan Center's spending by area. The fellowships ar
 |---|---|---|---|---|
 | How far the effect applies | 0.8 | 0.7 (the lab's project 0.4) | 1 | 0.7 |
 | Work others would not have done now | 0.7 | 0.7 | 1 | 0.6 |
-| CSR's share of the resources | 0.8 | 0.9 | 0.95 | 0.7 |
+| CSR's share of the resources | 0.9 | 0.9 | 0.95 | 0.8 |
 
 Every part is discounted 50% for missing data. The Converging Risks Lab's climate-nuclear project counts at 0.4 because foresight research is a step further from the risk. The climate-security figure allows for past gains in US defence planning being undone.
 

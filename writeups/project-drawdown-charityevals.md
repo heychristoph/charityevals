@@ -28,17 +28,17 @@ Funders' giving would have gone to climate work anyway, so it is shifted money, 
 
 Companies' and investors' money is valued by the difference in tonnes per dollar between the new and old use. An ordinary corporate climate dollar is put at 0.01 tonnes (0.002 to 0.04), and Drawdown's advice makes it do 30% more. An invested dollar gains 0.0003 tonnes, since it comes back. These changes count for the shared years a won reform counts, after a year's wait.
 
-Each branch then takes the share that wouldn't have happened anyway (40-60%) and Drawdown's share of the work behind the change. Funders' own staff, advisers and other guides (ClimateWorks, Giving Green, Founders Pledge) do the rest. Donated services are others' resources: they are left out of the cost and lower Drawdown's share instead. Then come the shared evidence (70%) and missing-data steps and two side effects: other good not modelled, such as policy advice and research others cite (+15%), and companies using the partnership as cover (−3%). The total is divided by a typical year's spending in 2023-2025. The next dollar is valued at {{row:marginal_vs_past_average}} of that average. Drawdown holds about a year's cash, and new money goes to programmes not yet tried (Drawdown Capital, Explorer 2.0).
+Each branch then takes the share that wouldn't have happened anyway (40-60%) and Drawdown's share of the work behind the change. Other advisers and guides (ClimateWorks, Giving Green, Founders Pledge), grantees pitching to funders and consultants share the work; the funders, companies and fund managers who adopt a choice are not counted here but under the shared share for money and work it brings in. Donated services are others' resources: they are left out of the cost and lower Drawdown's share instead. Then come the shared evidence (70%) and missing-data steps and two side effects: other good not modelled, such as policy advice and research others cite (+15%), and companies using the partnership as cover (−3%). The total is divided by a typical year's spending in 2023-2025. The next dollar is valued at {{row:marginal_vs_past_average}} of that average. Drawdown holds about a year's cash, and new money goes to programmes not yet tried (Drawdown Capital, Explorer 2.0).
 
 ### What drives the result
 
-Funders' giving is the negative part of the result; companies' and investors' money is the positive part, about a third its size. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. A shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
+Funders' giving is the negative part of the result; companies' and investors' money is the positive part, about three fifths its size. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. A shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
 
 ### Biggest uncertainties
 
 - **How much money it really moves.** Drawdown says its work has "helped guide billions of dollars", but that is a total since 2017 and includes money that would have gone the same way. No funder has published what it changed.
 - **Whether its advice beats an ordinary climate charity.** The shared method values the money at the ranked climate charities' figures. Drawdown's rankings long favoured big, mature solutions that markets already fund.
-- **Drawdown's part.** Funders weigh many advisers; its share is our judgment, from 10% to 60%.
+- **Drawdown's part.** Funders weigh many advisers; its share is our judgment, from 20% to 70%.
 
 ### What isn't modelled
 

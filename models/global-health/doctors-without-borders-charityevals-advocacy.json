@@ -755,15 +755,15 @@
         "retrieved": "2026-11-04",
         "quote": "for a cost of delivery estimated at $785 million"
       },
-      "explainer": "Others' money behind the same DALYs: research gets its share of all the resources (Convention 2)."
+      "explainer": "Context, shown for reference: the health systems' cost of delivering the drugs. Not in the result: those who deliver are the adopters, under the mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "dndi_pdp_dalys_per_dollar",
       "section": "effect",
-      "label": "Healthy years averted per dollar of the partnership's R&D, its share of the resources",
+      "label": "Healthy years averted per dollar of the partnership's R&D",
       "format": "small",
-      "formula": "dndi_pdp_dalys / dndi_pdp_investment_usd * dndi_pdp_investment_usd / (dndi_pdp_investment_usd + dndi_pdp_delivery_usd)",
-      "explainer": "DALYs over all the money behind them (R&D and delivery), so the R&D dollar gets its share.",
+      "formula": "dndi_pdp_dalys / dndi_pdp_investment_usd",
+      "explainer": "The partnership's DALYs over its R&D money. The health systems that buy and deliver the drugs are the adopters: their part is the mobiliser's share, not a share of this figure (docs/normalization.md 2.24); their delivery cost is not netted yet (the rule's deferred netting of public money).",
       "unit": "DALYs / $"
     },
     {
@@ -847,7 +847,7 @@
         "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Time for $5 was coordinated by the MSF Access Campaign, Partners in Health and Treatment Action Group with more than 150 civil society organisations; the Xpert agreement was the Global Fund's, Stop TB's and USAID's with Danaher, and the bedaquiline price was negotiated by the Global Drug Facility with USAID and the Global Fund, with activists' patent challenges in India and South Africa. Our judgment, a quarter."
+      "explainer": "Time for $5 was coordinated by the MSF Access Campaign, Partners in Health and Treatment Action Group with more than 150 civil society organisations; the bedaquiline price followed the patent challenges of MSF and activists in India and South Africa. MSF's share among those campaigners: a quarter, from a tenth to half, since no source divides their work. The buyers and makers who carried the cuts out (the Global Fund, Stop TB, USAID, the Global Drug Facility, Cepheid) are not in this share: their part is under the mobiliser's share, and whether the cuts would have come anyway is acc_counterfactual_adj's."
     },
     {
       "id": "acc_attribution_share",
@@ -855,6 +855,7 @@
       "label": "MSF Access: share of credit used",
       "format": "percent",
       "formula": "acc_attribution_share_shared * mobiliser_share",
+      "credit": "win",
       "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
@@ -900,12 +901,12 @@
       "label": "Awareness: MSF's share of the resources behind the extra coverage",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.75,
+        "low": 0.5,
+        "best": 0.9,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The coverage is journalists' and editors' work too. No study divides the credit for news coverage between the NGOs that prompt it and the newsrooms: the one study found of NGOs in humanitarian news (Sunderland & Jackson 2026, International Journal of Communication, https://ijoc.org/index.php/ijoc/article/download/26567/5453/111865?inline=1) analyses their press releases, not the share of coverage they cause. Our judgment, three quarters, widened to 30-100% because nothing anchors it."
+      "explainer": "MSF's share among those who prompt the coverage it adds: other agencies brief journalists on the same crises. The journalists and editors who produce the coverage carry the result out: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). No study divides the credit for news coverage among the NGOs that prompt it: the one study found of NGOs in humanitarian news (Sunderland & Jackson 2026, International Journal of Communication, https://ijoc.org/index.php/ijoc/article/download/26567/5453/111865?inline=1) analyses their press releases, not the share of coverage they cause. Our judgment, nine tenths, widened to 50-100% because nothing anchors it. The coverage share above is MSF's own addition; this divides credit only where other agencies' briefings prompted the same extra coverage."
     },
     {
       "id": "aw_attribution_share",
@@ -913,6 +914,7 @@
       "label": "Awareness: share of credit used",
       "format": "percent",
       "formula": "aw_attribution_share_shared * mobiliser_share",
+      "credit": "win",
       "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
@@ -1005,7 +1007,8 @@
       "label": "DNDi: share of credit used",
       "format": "percent",
       "formula": "dndi_attribution_share_shared * mobiliser_share",
-      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+      "credit": "research",
+      "explainer": "DNDi's share among those who fund and carry out its R&D, times the mobiliser's share: the rest of the credit stays with those who adopt the treatments (docs/normalization.md 2.24)."
     },
     {
       "id": "dndi_missing_data_adj",

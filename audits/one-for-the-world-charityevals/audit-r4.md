@@ -1,6 +1,6 @@
 # Audit: one-for-the-world-charityevals, round 4 (scoped verification of the round-3 fixes)
 Result: 0.02566 uov/$ = 12.83 years of healthy life per 1,000 dollars (combined range 2.43–67.7); cause median 0.06519 (x197). Verdict: pass.
-Model-sha: 4db96bcb284a4d6a86ad01884b876ff7f00d3da06bca4f33ca2cdbf97dc25992
+Model-sha: 1ed59bf76e977afc0cace0f824f018ad91a6738460360aaa366e9fa78af2566c
 Scope: only the five round-3 fixes (new_pledge_size_adj, recurring_share explainer, corporate_pledge_moved, cohort_years_giving explainer, the summary and write-up driver lists) and the numbers in the summary, those explainers and the write-up. Everything else is as audited in rounds 2 and 3.
 Mechanical: audit-model reports 0 findings and no invariant violations; result 12.83 years per $1,000 (the summary's "about 13"). Row values recomputed with the engine (script in the scratchpad): new_pledge_size_adj 0.95, yearly_gift_per_pledger $1,074, active_pledger_years 828.7, pledge_persistence_years 6.23, pledge_moved $323.5K, corporate_pledge_moved $151.3K (= 55,000 x recording_adj x 6.23 x 0.5 x 1.65 x 0.5), oneoff_moved $248.8K, money_moved $723.6K, moved_per_dollar 0.955, cost_total $758,075.
 Previous round (round 3):
@@ -52,3 +52,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 593b1bba.

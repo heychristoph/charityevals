@@ -14,7 +14,7 @@ None.
 ## Notes (low, no model change needed)
 - The `informed_money` label starts "Money moved: funders' and organisations' spending whose allocation ... changed"; "Money moved:" is the old name now that `money_moved` means gross money moved. Optional wording: "Spending changed: funders' and organisations' spending whose allocation its 2025 cross-cause research and surveys changed (US$)".
 
-Model-sha: 530d4bea23b287f56dd08f400102d5d2555ee69d9db08306f793f1891a719ee5
+Model-sha: fb781ec5e6a18fca5600dd4ab90f50467bf7626c00b063133b2e1481b9b1cff7
 Verdict: pass
 Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-risk trims); no number changed
 
@@ -25,3 +25,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change of its own; the headline moves with the models it reads live, whose shares were re-judged). Mechanical: headline 0.03155 → 0.0327 (+3.6%), 11 rows changed, against 593b1bba.

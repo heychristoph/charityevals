@@ -719,8 +719,9 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The skeleton's policy branch, unused here (0): its share among co-advocates times the mobiliser's share (docs/normalization.md 2.24). The money moved and the careers take the mobiliser's share in their own rows."
     },
     {
       "id": "missing_data_adj",
@@ -743,7 +744,7 @@
       "section": "outcome",
       "label": "Total value (units of value)",
       "format": "number",
-      "formula": "downstream_value * total_adj + moved_value * attribution_share + careers_value",
+      "formula": "downstream_value * total_adj + moved_value * attribution_share_shared + careers_value",
       "unit": "units of value",
       "explainer": "The value of the money moved, times the charity's share of the resources behind it (the donated services it received); the policy and career branches are 0. The other adjustments stay with the policy branch, so nothing is counted twice."
     },

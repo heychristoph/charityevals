@@ -20,7 +20,7 @@ Bottom line 0.07019 (summary and headline 0.07). Own-range joint 0.001154 to 0.8
 Minor, no fix needed: the write-up says clients' fees are "about $1 million" for $990,000, which is a fair rounding.
 
 Verdict: PASS. No findings.
-Model-sha: 633ebec5311cff4c7605fdd6ef2392cb1c666d1a83d3a286d8b378cb7b962724
+Model-sha: 10689e014351c5397438d7fce79fd258832105fc6b870633762a012a387c7273
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
@@ -34,3 +34,5 @@ Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanica
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 6 rows changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.

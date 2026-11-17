@@ -25,7 +25,7 @@ The return doesn't split the research line by issue, so the model splits it by h
 |---|---|---|---|---|
 | How far the effect applies | 0.8 | 0.7 | 0.7 | 1 |
 | Work others would not have done now | 0.7 | 0.6 | 0.7 | 0.6 |
-| FAS's share of the resources | 0.9 | 0.9 | 0.8 | 0.7 |
+| FAS's share of the resources | 0.9 | 0.9 | 0.8 | 0.9 |
 
 Every part is discounted 50% for missing data. Ploughshares' grant to FAS ($90,000) is part of FAS's costs, so a donor here and Ploughshares each get credit only for their own dollars.
 

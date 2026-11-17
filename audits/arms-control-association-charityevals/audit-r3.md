@@ -14,7 +14,7 @@ Previous round:
 None needed; no source, figure or value changed.
 
 Verdict: pass (no findings)
-Model-sha: 2dd5bd90c2028a61870cbc31280269ac863a813d5623d5c4e23dcbcfab5359ec
+Model-sha: 5ba550b96bdc406743aa67c5132889ecd68c702cbeeee07f78c94345b8a6783a
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 
@@ -30,3 +30,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against 7dbeec92.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.

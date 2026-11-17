@@ -27,10 +27,10 @@ Coefficient Giving (formerly Open Philanthropy) aims to provide about 40% of its
 
 | Branch | Share of the result | Main adjustments |
 |---|---|---|
-| Pandemic work | 69% | Outputs 0.8 of a typical project; 0.7 would not have happened anyway; 0.8 its share |
-| Malaria vaccines | 17% | 0.8 trust in a modelled effect; 0.8 others would not have filled its part; 5% its share of the advocacy |
-| California far-UV win | 8% | 0.5 chance the bill would have passed without it; 0.35 its share |
-| Hepatitis C | 6% | 0.85 trust in its 1.5-year figure; 0.5 its share |
+| Pandemic work | 67% | Outputs 0.8 of a typical project; 0.7 would not have happened anyway; 0.8 its share |
+| Malaria vaccines | 16% | 0.8 trust in a modelled effect; 0.8 others would not have filled its part; 5% its share of the advocacy |
+| California far-UV win | 7% | 0.5 chance the bill would have passed without it; 0.35 its share |
+| Hepatitis C | 9% | 0.85 trust in its 1.5-year figure; 0.85 its share among those who pressed for the changes |
 
 Every branch takes the shared missing-data discount, since none of the effects is measured. Funging by the main funder is counted once, in the next-dollar figure.
 
