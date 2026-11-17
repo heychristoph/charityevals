@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "lead-research-for-action",
   "owner": "ambitious-impact",
+  "mobilised": true,
   "bulk": true,
   "source": {
     "publisher": "Ambitious Impact (Charity Entrepreneurship)",
@@ -25,7 +26,8 @@
       "resource_shares": 0,
       "discount_rate": 0.04,
       "uov_per_daly": 2.3,
-      "uov_per_ln_consumption": 1.4426950408889634
+      "uov_per_ln_consumption": 1.4426950408889634,
+      "mobiliser_share": 1
     }
   },
   "resources": [],
@@ -5223,11 +5225,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "dalys_per_dollar",
       "section": "bottom_line",
       "label": "DALYs averted per dollar",
-      "formula": "(1 / r6_cost_effectiveness_per_year_impact) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((1 / r6_cost_effectiveness_per_year_impact) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

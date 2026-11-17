@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "pallium-india",
   "owner": "hli",
+  "mobilised": true,
   "summary": "Builds palliative care services and opioid access in Indian states. The Happier Lives Institute's back-of-the-envelope range for Pallium India expanding into Karnataka (WELLBYs per $1,000), from its report; HLI gives only the range.",
   "source": {
     "publisher": "Happier Lives Institute",
@@ -42,7 +43,8 @@
     "assumptions": {
       "resource_shares": 0,
       "discount_rate": 0,
-      "daly_per_wellby": 0.575
+      "daly_per_wellby": 0.575,
+      "mobiliser_share": 1
     }
   },
   "sections": [
@@ -148,11 +150,20 @@
       "explainer": "The present value of an equal benefit each year over the years above, starting now, as a share of the undiscounted total: 1 at a 0% rate, lower the longer the benefit lasts."
     },
     {
+      "id": "mobiliser_share",
+      "section": "per_dollar",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "wellbys_per_dollar_discounted",
       "section": "per_dollar",
       "label": "WELLBYs per dollar, discounted",
       "format": "small",
-      "formula": "wellbys_per_1000 / 1000 * discount_factor"
+      "formula": "(wellbys_per_1000 / 1000 * discount_factor) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share)."
     },
     {
       "id": "staff_cost_share",

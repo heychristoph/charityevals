@@ -9,6 +9,7 @@
  "estimate_basis": "unit_cost",
  "charity": "malaria-consortium",
  "owner": "the-life-you-can-save",
+ "mobilised": true,
  "summary": "Malaria Consortium supported South Sudan's health ministry in moving its mass bednet campaigns from paper to phones, registering and geo-tagging households. The Life You Can Save credits it with the 13.55% more people the digital registration found than the projections, counts the cost of their nets as well as Malaria Consortium's own, and estimates $98 per DALY averted. Our view values each child's death averted by age the site's way and discounts the net's later years; the biggest uncertainty is whether the extra people found would otherwise have gone without nets.",
  "source": {
   "publisher": "The Life You Can Save",
@@ -47,7 +48,8 @@
   "assumptions": {
    "resource_shares": 0,
    "discount_rate": 0.03,
-   "uov_per_daly": 2
+   "uov_per_daly": 2,
+   "mobiliser_share": 1
   }
  },
  "sections": [
@@ -483,13 +485,21 @@
    "explainer": "With credit by share of resources on, staff's forgone pay counts as part of the cost. The sheet's costs already include everyone's money for the work it credits. Off, this is 100%."
   },
   {
+   "id": "mobiliser_share",
+   "section": "credit_ours",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "dalys_per_dollar",
    "section": "credit_ours",
    "label": "Healthy years gained per dollar",
    "format": "small",
    "unit": "DALYs per $",
-   "formula": "1 / cost_per_daly * ours_vs_tlycs * counterfactual_share * donor_cost_share",
-   "explainer": "The Life You Can Save's DALYs per dollar, with deaths valued by age, times the share due to Malaria Consortium and the share of the cost paid in cash."
+   "formula": "(1 / cost_per_daly * ours_vs_tlycs * counterfactual_share * donor_cost_share) * mobiliser_share",
+   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nThe Life You Can Save's DALYs per dollar, with deaths valued by age, times the share due to Malaria Consortium and the share of the cost paid in cash."
   }
  ],
  "output": {

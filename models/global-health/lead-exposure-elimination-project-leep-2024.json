@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "lead-exposure-elimination-project",
   "owner": "leep",
+  "mobilised": true,
   "summary": "The Lead Exposure Elimination Project tests paint on sale in low- and middle-income countries and helps governments bring in and enforce lead paint limits and manufacturers switch. LEEP's own 2024 analysis covers its 13 country programmes: each brings enforcement forward by four to eight years, so fewer homes are painted with lead paint and fewer children grow up in them, to 2100. It counts their health (from the Global Burden of Disease, raised by half for heart disease) and their later earnings. Our view keeps LEEP's costs, children and health years, values deaths by age, and values the earnings with the site's shared figures for IQ points per µg/dL, earnings per IQ point, working years and household sharing.",
   "source": {
     "publisher": "Lead Exposure Elimination Project",
@@ -48,7 +49,8 @@
     "assumptions": {
       "resource_shares": 0,
       "discount_rate": 0.04,
-      "uov_per_daly": 2.5
+      "uov_per_daly": 2.5,
+      "mobiliser_share": 1
     }
   },
   "sections": [
@@ -461,12 +463,20 @@
       "explainer": "The health years with deaths valued by age plus the earnings valued the site's way, over LEEP's 901,000. The evaluator view keeps LEEP's (1)."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "dalys_per_dollar",
       "section": "bottom_line",
       "label": "DALYs averted per dollar",
-      "formula": "(1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share",
+      "formula": "((1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share) * mobiliser_share",
       "unit": "DALYs / $",
-      "explainer": "LEEP's DALY-equivalents per dollar, valued the site's way, times the share of the full cost paid in cash when credit by share of resources is on."
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nLEEP's DALY-equivalents per dollar, valued the site's way, times the share of the full cost paid in cash when credit by share of resources is on."
     }
   ],
   "output": {

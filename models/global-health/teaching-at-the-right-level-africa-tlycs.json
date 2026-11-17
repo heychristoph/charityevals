@@ -9,6 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "teaching-at-the-right-level-africa",
   "owner": "the-life-you-can-save",
+  "mobilised": true,
   "summary": "TaRL Africa helps governments in Zambia, Nigeria, Côte d'Ivoire and other countries regroup primary pupils by learning level for daily reading and maths sessions. The Life You Can Save estimates 3.57 learning-adjusted years of schooling per $100 from TaRL Africa's 2024 costs, the governments' costs and pupils reached, with half the trials' learning gain kept at scale. Our view turns the learning gain into later earnings with the site's shared figure; the biggest uncertainties are how much of a childhood test gain lasts into adult earnings and how much of the learning the governments would have achieved without TaRL Africa.",
   "source": {
     "publisher": "The Life You Can Save",
@@ -62,7 +63,8 @@
     "name": "The Life You Can Save",
     "assumptions": {
       "resource_shares": 0,
-      "discount_rate": 0
+      "discount_rate": 0,
+      "mobiliser_share": 1
     }
   },
   "sections": [
@@ -1020,13 +1022,21 @@
       "explainer": "A side effect, our judgment 10% (0 to 30%): children who read and count better may also stay in school longer and, as adults, have healthier children; most of that evidence is about years of school rather than test gains, and part of it is already in the earnings figure, so it is counted small. Anchor: a placeholder kept small enough that its whole range moves the result by under a fifth (0% gives 0.91 of the result, 30% gives 1.18)."
     },
     {
+      "id": "mobiliser_share",
+      "section": "earnings",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar",
       "section": "earnings",
       "label": "Units of value per dollar",
       "format": "small",
       "unit": "uov per $",
-      "formula": "pupils_per_dollar * ln_gain_per_pupil * pv_factor * resource_sharing_multiplier * $uov_per_ln_consumption * counterfactual_adoption * (1 + non_income_gains_share)",
-      "explainer": "Pupils per dollar × the gain in log earnings each working year × the discounted working years × the household sharing it × the value of a unit of log consumption (Your values) × the share due to TaRL Africa, plus the gains beyond earnings."
+      "formula": "(pupils_per_dollar * ln_gain_per_pupil * pv_factor * resource_sharing_multiplier * $uov_per_ln_consumption * counterfactual_adoption * (1 + non_income_gains_share)) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nPupils per dollar × the gain in log earnings each working year × the discounted working years × the household sharing it × the value of a unit of log consumption (Your values) × the share due to TaRL Africa, plus the gains beyond earnings."
     }
   ],
   "output": {

@@ -9,8 +9,12 @@ weighted sum), divides by cost per person, and reports WELLBYs per $1,000.
 
     python3 scripts/convert-hli-psychotherapy.py smfb.xlsx --out models/global-health
 """
-import argparse, json, re
+import argparse, importlib.util, json, re
 from pathlib import Path
+
+# The model's class (mobilised or own delivery) and, if mobilised, the share's row and pin (docs/normalization.md 2.24).
+_lm = importlib.util.spec_from_file_location("link_mobiliser_share", Path(__file__).with_name("link-mobiliser-share.py"))
+lm = importlib.util.module_from_spec(_lm); _lm.loader.exec_module(lm)
 import openpyxl
 from openpyxl.utils import column_index_from_string, get_column_letter
 
@@ -118,5 +122,6 @@ for cid, c in CHARITIES.items():
     crec = json.loads(cpath.read_text()) if cpath.exists() else {"id": cid, "name": c["name"], "cause": "global-health"}
     crec.update({k: v for k, v in {"website": c["website"], "donate": c.get("donate")}.items() if v})
     cpath.write_text(json.dumps(crec, indent=2, ensure_ascii=False) + "\n")
+    lm.apply(model)
     Path(a.out, f"{cid}.json").write_text(json.dumps(model, indent=2, ensure_ascii=False) + "\n")
     print(cid, len(rows), "rows")

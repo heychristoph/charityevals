@@ -9,6 +9,7 @@
  "estimate_basis": "unit_cost",
  "charity": "evidence-action",
  "owner": "the-life-you-can-save",
+ "mobilised": true,
  "summary": "Evidence Action helps Liberia's health system test pregnant women for syphilis at antenatal visits and treat those infected with penicillin, to prevent stillbirths, newborn deaths and congenital syphilis. The Life You Can Save counts Evidence Action's estimate of the adverse birth outcomes averted from 2020 to 2024 and divides by the programme's cost to date, the Global Fund's tests and drugs included. Our view values the stillbirths and newborn deaths the site's way; the biggest uncertainties are Evidence Action's own estimate of outcomes averted and the split between stillbirths and newborn deaths.",
  "source": {
   "publisher": "The Life You Can Save",
@@ -48,7 +49,8 @@
    "resource_shares": 0,
    "discount_rate": 0.03,
    "uov_per_daly": 2,
-   "daly_per_child_death": 58.12631
+   "daly_per_child_death": 58.12631,
+   "mobiliser_share": 1
   }
  },
  "sections": [
@@ -540,13 +542,21 @@
    "explainer": "The cost counted, central costs, and with credit by share of resources on, staff's forgone pay."
   },
   {
+   "id": "mobiliser_share",
+   "section": "bottom_ours",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "dalys_per_dollar",
    "section": "bottom_ours",
    "label": "Healthy years gained per dollar",
    "format": "small",
    "unit": "DALYs per $",
-   "formula": "1 / cost_per_daly * ours_vs_tlycs / cost_multiplier",
-   "explainer": "The Life You Can Save's DALYs per dollar, deaths valued the site's way, with the mothers' gains and all costs."
+   "formula": "(1 / cost_per_daly * ours_vs_tlycs / cost_multiplier) * mobiliser_share",
+   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nThe Life You Can Save's DALYs per dollar, deaths valued the site's way, with the mothers' gains and all costs."
   }
  ],
  "output": {
