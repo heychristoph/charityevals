@@ -8,7 +8,7 @@ Besides its programmes, Save the Children UK spends about 13.5 million pounds a 
 
 **Elrha** (under a tenth). Its 2025 spending funds about 28 research and innovation projects a year (our judgment of $400,000 a project). Each has a 10% chance of changing what responders do, improving about $20 million a year of humanitarian spending by 10%, a humanitarian dollar valued at the site's shared figure, 0.2 of cash (what its relief models do per dollar), for the years a won change counts, after a three-year wait.
 
-**Nutrition for Growth** (about a seventh). The March 2025 summit's $27 billion of commitments, half of them spent, valued at the site's shared figure for a dollar of government spending, less the aid displaced; the campaign added 1% and Save the Children UK has 10% of the credit.
+**Nutrition for Growth** (about a fifth). The March 2025 summit's $27 billion of commitments, half of them spent, valued at the site's shared figure for a dollar of government spending, less the aid displaced; the campaign added 1% and Save the Children UK has 15% of the credit.
 
 **The two-child limit** (under a tenth). The UK government removes the two-child limit on Universal Credit from April 2026, costing £2.4 billion in its first year, about £5,000 a year for each of the 470,000 households affected. The gain is valued on the log-income scale at these families' consumption ({{row:tcl_consumption_share}} of the UK average per person), less the loss to those who pay for it (a side effect), for the years a won reform counts. Campaigners caused 30% of the decision, Save the Children UK has 12% of the coalition's resources, and the campaign ran about four years.
 
@@ -16,7 +16,7 @@ The three wins get 30% more for the year's other campaigns (aid cuts, debt, chil
 
 ### What drives the result
 
-The missing-data slider, the value of a healthy year in units of value, and the two judgments on the Gavi pledges (how much the campaign added and Save the Children's share of it), then the next dollar's share of the average and how much humanitarian spending a changed study improves. The result is mostly uncertainty: the combined range runs from 0.06 to 3.1.
+The missing-data slider, the value of a healthy year in units of value, and the two judgments on the Gavi pledges (how much the campaign added and Save the Children's share of it), then the next dollar's share of the average and how much humanitarian spending a changed study improves. The result is mostly uncertainty: the combined range runs from 0.04 to 5.4.
 
 ### What isn't modelled
 

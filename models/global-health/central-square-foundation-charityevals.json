@@ -901,7 +901,7 @@
       "format": "number",
       "formula": "gov_units_affected_per_year / gov_years_per_student * gov_value_per_student_year * p_success * discounted_years",
       "unit": "units of value",
-      "explainer": "New students a year (students ÷ the years each is covered) × the value of the gain per student × the chance the practice lasts × the discounted years a won reform counts. The reform's running costs (district staff's and teachers' time on the assessments and report cards) count in CSF's share of the resources and in the side effects' teacher-time harm, not again here."
+      "explainer": "New students a year (students ÷ the years each is covered) × the value of the gain per student × the chance the practice lasts × the discounted years a won reform counts. The reform's running costs (district staff's and teachers' time on the assessments and report cards) are a mobilised resource, valued only through the side effects' teacher-time harm (docs/normalization.md 2.24)."
     },
     {
       "id": "hps_units_affected_per_year",
@@ -1317,8 +1317,9 @@
       "section": "adjustments",
       "label": "FLN: share of credit used",
       "format": "percent",
-      "formula": "fln_attribution_share_shared * mobiliser_share",
-      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+      "formula": "fln_attribution_share_shared",
+      "credit": "delivery",
+      "explainer": "Own delivery beside the governments' and partners' programmes, which would have run without CSF: credit by share of the money only, no mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "ece_state_inr",
@@ -1360,8 +1361,9 @@
       "section": "adjustments",
       "label": "Early childhood: share of credit used",
       "format": "percent",
-      "formula": "ece_attribution_share_shared * mobiliser_share",
-      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+      "formula": "ece_attribution_share_shared",
+      "credit": "delivery",
+      "explainer": "Own delivery beside the governments' and partners' programmes, which would have run without CSF: credit by share of the money only, no mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "pal_share_of_edtech",
@@ -1396,6 +1398,7 @@
       "label": "Adaptive learning in Himachal Pradesh: CSF's share of the resources",
       "format": "percent",
       "formula": "pal_attribution_share",
+      "credit": "delivery",
       "explainer": "The same share as Andhra Pradesh's: the deployments' costs and CSF's support are counted together."
     },
     {
@@ -1411,8 +1414,9 @@
       "section": "adjustments",
       "label": "Adaptive learning: share of credit used",
       "format": "percent",
-      "formula": "pal_attribution_share_shared * mobiliser_share",
-      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+      "formula": "pal_attribution_share_shared",
+      "credit": "delivery",
+      "explainer": "Own delivery beside the governments' and partners' programmes, which would have run without CSF: credit by share of the money only, no mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "edo_partners_inr",
@@ -1441,43 +1445,22 @@
       "section": "adjustments",
       "label": "Other EdTech: share of credit used",
       "format": "percent",
-      "formula": "edo_attribution_share_shared * mobiliser_share",
-      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
-    },
-    {
-      "id": "gov_disclosure_share",
-      "section": "adjustments",
-      "label": "Share of CSF's governance spending on the disclosure pilots",
-      "format": "percent",
-      "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.6
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: the Jodhpur and Angul pilots against accreditation frameworks and school standards authorities in six states (pp. 44-45). 40% (20% to 60%)."
-    },
-    {
-      "id": "gov_district_inr",
-      "section": "adjustments",
-      "label": "Districts' yearly spending of staff and teachers' time on the assessments and report cards (₹)",
-      "format": "number",
-      "value": {
-        "low": 10000000,
-        "best": 30000000,
-        "high": 80000000
-      },
-      "kind": "judgment",
-      "explainer": "Our judgment: district officials, teachers and parent-teacher meetings in about 2,700 schools for one assessment and report-card round a year (pp. 44-45). ₹3 crore (₹1 to ₹8 crore).",
-      "unit": "₹"
+      "formula": "edo_attribution_share_shared",
+      "credit": "delivery",
+      "explainer": "Own delivery beside the governments' and partners' programmes, which would have run without CSF: credit by share of the money only, no mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "gov_attribution_share_shared",
       "section": "adjustments",
       "label": "School governance: CSF's share of the resources behind the disclosure reforms",
       "format": "percent",
-      "formula": "total_expenses_inr * gov_spend_share * gov_disclosure_share / (total_expenses_inr * gov_spend_share * gov_disclosure_share + gov_district_inr)",
-      "explainer": "CSF's spending on the pilots, with its share of overhead, over its own and the districts'."
+      "value": {
+        "low": 0.6,
+        "best": 0.85,
+        "high": 1
+      },
+      "explainer": "CSF designed the assessments, report cards and parent materials for the Jodhpur and Angul pilots (annual report pp. 44-46); the report names no co-advocate, and the rest allows for partners not named. The districts' officials and teachers who run the assessments and report cards are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 85% (60% to 100%), our judgment.",
+      "kind": "judgment"
     },
     {
       "id": "gov_attribution_share",
@@ -1485,6 +1468,7 @@
       "label": "School governance: share of credit used",
       "format": "percent",
       "formula": "gov_attribution_share_shared * mobiliser_share",
+      "credit": "win",
       "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
@@ -1527,8 +1511,9 @@
       "section": "adjustments",
       "label": "High-potential students: share of credit used",
       "format": "percent",
-      "formula": "hps_attribution_share_shared * mobiliser_share",
-      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+      "formula": "hps_attribution_share_shared",
+      "credit": "delivery",
+      "explainer": "Own delivery beside the governments' and partners' programmes, which would have run without CSF: credit by share of the money only, no mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "fln_missing_data_adj",

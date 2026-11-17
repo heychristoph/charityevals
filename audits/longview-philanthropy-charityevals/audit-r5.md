@@ -20,7 +20,9 @@ Mechanical: `scripts/preflight.ts`: passes, 2 low (simulation `@meta.prior_vs_ca
 
 No high or medium finding.
 
-Model-sha: d7d5ee2c026270e3fc8527b462a014cc582426af5d9a3fd3425ea1f1d38c28c9
+Model-sha: ad0c0ce7349bdb84e02567e67848e207c943bf03d16ff714b6c733f53609ed79
 Verdict: pass
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change of its own; the headline moves with the models it reads live, whose shares were re-judged). Mechanical: headline 1.437 → 1.471 (+2.4%), 12 rows changed, against 593b1bba.

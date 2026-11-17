@@ -853,15 +853,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch counts nothing for NTI in 2025 (pol_wins and fb_people are 0); the template's range kept for the switched-on check. the employers pay for the work itself: the training's cost over training plus the employers' cost of the work-years is the anchor (credit by share of resources); name it."
+      "explainer": "Not used: no one is trained or placed (fb_people is 0). The skeleton's figure: 1 when no other programme trained or placed the same people. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (attribution_share) covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_deaths_per_million",
@@ -971,12 +971,12 @@
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.85,
+        "low": 0.7,
+        "best": 0.9,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "NTI's share of the resources behind its projects: much is joint (the Deterrence Study Group and fail-safe reviews with governments' officials, the Bio Funders Compact with CEPI, partners' own staff time), the rest NTI's own. Our judgment, 0.85 (0.6 to 1)."
+      "explainer": "NTI's share of the resources behind its projects: some are joint (the Bio Funders Compact with CEPI, partners' own staff time), the rest NTI's own. The governments' officials in the Deterrence Study Group and the fail-safe reviews are the adopters: their time is under the mobiliser's share, not in this one (docs/normalization.md 2.24). Our judgment, 0.9 (0.7 to 1): the study group's and the reviews' participants are mainly officials, while the Compact's and the partners' staff are other funders' and NGOs' own time; no source sizes either, so the officials' part is judged a third of the outside time."
     },
     {
       "id": "mobiliser_share",
@@ -992,6 +992,7 @@
       "label": "Share of credit used",
       "format": "percent",
       "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
       "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {

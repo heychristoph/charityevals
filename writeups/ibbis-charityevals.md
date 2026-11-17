@@ -1,6 +1,6 @@
 ### Summary
 
-IBBIS works to stop DNA synthesis being used to make pandemic pathogens: it gives synthesis companies a free tool to screen what they are asked to make, and works on the standards and rules that make screening the norm. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 160.
+IBBIS works to stop DNA synthesis being used to make pandemic pathogens: it gives synthesis companies a free tool to screen what they are asked to make, and works on the standards and rules that make screening the norm. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.3 to about 240.
 
 ### What the charity does
 
@@ -29,7 +29,7 @@ All the work is valued as pandemic work. No law or standard was won in 2025: the
 |---|---|---|
 | How far a typical project's effect applies | 0.8 | Providers use commec and it passed an independent benchmark. But only a handful of providers use it, and the standards and rules aren't in force yet |
 | Work no one else would have done now | 0.7 | Others also build screening tools and standards. Few do outreach to providers outside the US and EU |
-| IBBIS's share of the resources | 0.75 | Unpaid expert time in its two consortia, Microsoft's lead on the 2025 study, NIST's test sets, workshop co-hosts |
+| IBBIS's share of the resources | 0.8 | Unpaid expert time in its two consortia, Microsoft's lead on the 2025 study, NIST's test sets, workshop co-hosts |
 | Missing data | slider | Nothing about IBBIS's effect on the risk is measured, and even its spending is estimated |
 
 Side effects: other benefits +5%. Screening also catches orders for toxins, and the map helps export-control authorities. The map also shows a would-be attacker where screening is missing, and the 2025 study showed AI could redesign toxins to get past screening, though tools were patched before it was published. That costs −3%.
@@ -38,13 +38,13 @@ IBBIS is raising money in small grants for named work, and Founders Pledge's 202
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 115. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 120. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
 
 ### Biggest uncertainties
 
-- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.8 to 25.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 4 to 49 for the pandemic figure.
-- **How much the next dollar does.** 26% to 95% of the past average: 3.6 to 13.
+- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.9 to 27.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 4.5 to 52 for the pandemic figure.
+- **How much the next dollar does.** 26% to 95% of the past average: 3.9 to 14.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 
 ### What isn't modelled

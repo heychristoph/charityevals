@@ -32,7 +32,7 @@ The deaths averted are valued like every death on the site, by age. A COVID-scal
 ### How the model works
 
 - **Pandemic work.** Everything except training, valued at a typical project's cut per dollar.
-- **Training.** The fellows and doctoral students who go on to work on these risks because of it: 10% of the fellows, who mostly work in the field already, and 30% of the students. Their added work-years are valued at the cost of a year of such work. The training gets its share of the credit by cost: what it cost, over that plus what employers pay for the work.
+- **Training.** The fellows and doctoral students who go on to work on these risks because of it: 10% of the fellows, who mostly work in the field already, and 30% of the students. Their added work-years are valued at the cost of a year of such work. The training gets the full credit for those work-years, since no other programme trained the same people (down to half if another fellowship shares them). The employers who pay for the work are not a co-funder: the site's setting for resources committed only because of the charity applies to them.
 - **A policy-win branch, set to zero.** No law or institution was won in 2025; the gene synthesis bills are still pending.
 
 The adjustments, each applied to its own branch:
@@ -41,7 +41,7 @@ The adjustments, each applied to its own branch:
 |---|---|---|
 | How far a typical project's effect applies | 0.9 for policy work and training, 0.4 for CORI (about 0.73 overall) | The Center's research is taken up widely. CORI is aimed at ordinary outbreaks, a thinner path to a catastrophe |
 | Work no one else would have done now | 0.7 | Other groups also work on biosecurity policy and outbreak analytics |
-| The Center's share of the resources | 0.85 | CORI works with CDC's own staff |
+| The Center's share of the resources | 0.9 | Exercises and meetings bring partners' staff time. CDC and the health departments use CORI's work: they are the adopters, under the site's setting for resources committed because of the charity |
 | Funging by large funders | 0.9 | Coefficient Giving dominates its unrestricted money |
 | Missing data | slider | Nothing about the Center's effect on the risk is measured |
 
@@ -57,7 +57,7 @@ Pandemics that end humanity's future bring about half the result, mostly through
 
 - **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 4 to 44.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.6 to 23.
-- **The Center's budget.** We built it from its grants. The result barely moves with it, because the cut is counted per dollar; only the training's share depends on it.
+- **The Center's budget.** We built it from its grants. The result barely moves with it, because the cut is counted per dollar.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 
 ### What isn't modelled

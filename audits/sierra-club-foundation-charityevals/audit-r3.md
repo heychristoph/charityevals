@@ -1,6 +1,6 @@
 # Audit: sierra-club-foundation-charityevals, round 3 (verification of the compliance-cost rule 2.21)
 Result: 0.01589 t CO₂e/$ = 0.005929 years of healthy life per $1,000 (combined range 2.149e-4–0.1636); cause median 0.001704 (×3.48). Verdict: pass.
-Model-sha: fedee000086c27275a33684543f27c9b01e17fcb0e30fa6778dd3a4ff6b91762
+Model-sha: a7712ddba0d24ba13b0f47e00ba40b339a85fe4ff400dc90507e3cd0efd8a65b
 Scope: scoped verification of the changed rows (usmeth/pwr/veh/accii_compliance_uov, compliance_uov_per_year, the `bridges` section's tco2e_from_uov, outcome_total, summary, write-up figure). Programmes and year as in earlier rounds, not re-audited.
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model exit 0, "Findings (0)"), invariants none, normalization-audit not re-run (changed rows only)
 Previous round: earlier findings not re-examined in this scoped round.
@@ -47,3 +47,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.

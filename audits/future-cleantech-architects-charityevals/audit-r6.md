@@ -1,6 +1,6 @@
 # Audit: future-cleantech-architects-charityevals, round 6 (verification of the two cost explainers only)
 Result: 0.001216 tco2e/$ = 7.275e-4 years of healthy life per 1,000 dollars (unchanged; combined range 1.573e-5 to 0.03364).
-Model-sha: 04fbcfaa8799e5dabfb41f061b7da6aa00578a47b6e1a90fa5737639e53de138
+Model-sha: 1c72dd757131d48249c19fbcec76edfb8845884869d98c381a18523c0eb3cfea
 Scope: the `ren_tonnes_per_year` and `h2_tonnes_per_year` explainers and the matching write-up sentences. Mechanical: `audit-model.ts` reproduces the result and range; `check.ts` all models valid. No value or formula changed.
 
 ## Checks
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.

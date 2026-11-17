@@ -66,8 +66,8 @@
   "checked": 494,
   "violations": [],
   "suppressed": {
-   "input equals a shared value but its label doesn't resemble the shared one's": 429033,
-   "input equals a house-constant fact but under another label": 25937,
+   "input equals a shared value but its label doesn't resemble the shared one's": 429087,
+   "input equals a house-constant fact but under another label": 25919,
    "round value (one significant digit) and labels only loosely alike": 531,
    "formula constant equals a shared value but is short (< 5 significant digits, or an integer) and the row label doesn't resemble it": 22928,
    "input equals a country fact but is about another place": 74,
@@ -203,7 +203,7 @@
   "id": "INV-14",
   "title": "No house constant without a shared fact",
   "status": "partial",
-  "checked": 13549,
+  "checked": 13545,
   "violations": [],
   "how": "Input rows on the path to the output (not variants) are grouped by whose figure it is (an evaluator, or charityevals; SoGive's copies of GiveWell's sheets count as GiveWell's), by label (significant words, place names and \"overall\" dropped) and by value: a group spanning five or more models is a constant copied by hand. It becomes a shared fact (facts/*.json) that every copy reads (GiveWell's: facts/givewell_common.json; our staff-pay defaults: facts/staff_pay.json). Round structural numbers lint allows in formulas (0, 1, 0.5, 100, 1000, 100000, 1000000, 12, 52, 365, 365.25, 0.000001: no adjustment, a hypothetical $1,000, months in a year) aren't house constants, nor is a number that defines its row (an arbitrary or hypothetical donation's size; a scenario whose label states its value, \"10x bar\" = 10). Rows reading a fact are formulas and never counted, nor are copies that can't move their model's result (a switched-off branch's placeholder); the same number under different labels, or from different evaluators, is a coincidence, not a copy.",
   "waived": 0,
@@ -274,109 +274,9 @@
   "title": "Mobilised resources take the mobiliser's share, once",
   "status": "checked",
   "checked": 494,
-  "violations": [
-   {
-    "inv": "INV-22",
-    "model": "80000-hours-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "ambitious-impact-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "animal-charity-evaluators-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "effektiv-spenden-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "founders-pledge-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "givewell-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "giving-what-we-can-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "longview-philanthropy-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "one-for-the-world-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "project-drawdown-charityevals",
-    "where": "reach win phil_attribution_share",
-    "detail": "phil_attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "rethink-priorities-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "rethink-priorities-charityevals-cross-cause",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "rethink-priorities-charityevals-global-health",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   },
-   {
-    "inv": "INV-22",
-    "model": "the-life-you-can-save-charityevals",
-    "where": "reach win attribution_share",
-    "detail": "attribution_share is a branch's used share in a model with wins, but doesn't read mobiliser_share: multiply the share among co-advocates by mobiliser_share, or mark the branch `\"credit\": \"delivery\"` (own services, grants or purchases)"
-   }
-  ],
+  "violations": [],
   "how": "Every model with a result in common units (not templates). Only the row mobiliser_share = $mobiliser_share reads the assumption. (a) Reach (not variants): every row *moved_dollar_net_value, *shifted_dollar_value and career_change_value on the path to the output reads mobiliser_share, itself or through its rows; a model that reads moved_dollar_value without them (a result already in counterfactual dollars) reads it somewhere on the path; in a charityevals model with a win (a row *p_success on the path, one reading $win_years_counted, or a share of class win or research) every used share on the path (attribution_share, <branch>_attribution_share) reads it or carries `\"credit\": \"delivery\"`; an imported model declares `mobilised`, and reads mobiliser_share on the path if true. (b) Once, for a model whose rows read it, the models it reads live held: the headline at the default, half and a quarter of the share lies on a straight line; the part of the headline behind each mobilised row (headline minus headline with the row at 0) halves exactly with the share, and so does the part behind each cost of mobilised resources (*compliance_uov, *public_cost_uov, not their sums, not a delivery branch's). (c) A model with an evaluator view that reads it pins it to 1, reads it only in rows of an ours section, and its evaluator headline is the same at half the share (the evaluator view also reads other models at 1). (d) A model with none of the patterns of (a) (an import: `mobilised` not true) reads no mobiliser_share, and a delivery share doesn't either. (e) Every model the share can move has a finite headline at the slider's low end.",
   "waived": 0,
-  "failing_models": [
-   "80000-hours-charityevals",
-   "ambitious-impact-charityevals",
-   "animal-charity-evaluators-charityevals",
-   "effektiv-spenden-charityevals",
-   "founders-pledge-charityevals",
-   "givewell-charityevals",
-   "giving-what-we-can-charityevals",
-   "longview-philanthropy-charityevals",
-   "one-for-the-world-charityevals",
-   "project-drawdown-charityevals",
-   "rethink-priorities-charityevals",
-   "rethink-priorities-charityevals-cross-cause",
-   "rethink-priorities-charityevals-global-health",
-   "the-life-you-can-save-charityevals"
-  ]
+  "failing_models": []
  }
 ]

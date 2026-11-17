@@ -1,7 +1,7 @@
 # Audit: norwegian-refugee-council-charityevals-advocacy, round 9
 Re-stamped: `destination_reads` added for the shared moved-money rows (GiveWell's four top charities and the GiveDirectly prior, read as destinations at their figures on the rankings, docs/normalization.md 2.12); no formula or value changed and the result is unchanged (the money-moved branch is 0 here), so round 8's pass stands.
 Verdict: pass
-Model-sha: c101df67ff5c2ce31825241d0ce6f629591309116b2d08eb6f7d932d2fd3d264
+Model-sha: f2d593b6ba1b38d3e7e255c9eac23cefc8923e75dfb64dfdfb9fbd447d5e1168
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -17,3 +17,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against d150f0b2.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combined; no value change). Mechanical: headline unchanged, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ce8e784f.

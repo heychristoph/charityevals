@@ -972,10 +972,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "The employers pay for the fellows' work, so the training gets credit by share of resources: everyone's spending on the fellowship (Ploughshares' about $305,000 with overhead, over its share of the fellowship's resources fb_attribution_share_shared, for Horizon 2045's part) over that plus the alumni's added work (fb_work_dollars): about 33%; fb_attribution_share_shared then gives Ploughshares its share of that.",
-      "formula": "(fb_cost_share * cost_total / fb_attribution_share_shared) / (fb_cost_share * cost_total / fb_attribution_share_shared + fb_work_dollars)"
+      "explainer": "1: Horizon 2045's part of the same fellowship is already in fb_attribution_share_shared. Two of the nine fellows list other programmes (the Arms Control Negotiation Academy, NTI's Emerging Nuclear Security Leaders); that overlap is cut once, in fb_counterfactual_adj. Down to 0.5 if another programme trained most of the same fellows. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1237,12 +1242,12 @@
       "label": "Fellowship: Ploughshares' share of the resources behind the fellowship",
       "format": "percent",
       "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.8
+        "low": 0.45,
+        "best": 0.65,
+        "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "The fellowship is a joint venture with Horizon 2045, which shares its design and coaching; the fellows' employers give their time. 0.6 (0.4 to 0.8), our judgment."
+      "explainer": "The fellowship is a joint venture with Horizon 2045, which shares its design and coaching. The fellows' employers, who give their time, are mobilised: under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.65 (0.45 to 0.85), our judgment: the old 0.6 less the employers' part, judged a small share beside Horizon 2045's."
     },
     {
       "id": "evidence_adj",
@@ -1282,6 +1287,7 @@
       "label": "Share of credit used",
       "format": "percent",
       "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
       "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {

@@ -30,7 +30,7 @@ All the work counts as work against AI escaping control. Some of its tasks are c
 |---|---|---|
 | How far a typical project's effect applies to METR's work | 1.2 | Labs run its evaluations on their models before release; the family's upper bound |
 | Work no one else would have done now | 0.65 | Government AI safety institutes and lab teams also test models before release |
-| METR's share of the resources behind its work | 0.7 | The companies give model access, staff time and free tokens |
+| METR's share of the resources behind its work | 0.8 | The companies give model access and free tokens |
 | Funging by its main funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about METR's effect on the risk is measured |
 

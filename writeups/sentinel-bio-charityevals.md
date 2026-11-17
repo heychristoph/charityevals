@@ -1,6 +1,6 @@
 ### Summary
 
-Sentinel Bio is a Washington DC grantmaker, founded in 2024, that pools philanthropists' money to prevent catastrophic pandemics. Our model of all it spent in its first tax year, May to December 2024, comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely a catastrophic pandemic is and on an estimate of what a typical dollar of work against it does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 60.
+Sentinel Bio is a Washington DC grantmaker, founded in 2024, that pools philanthropists' money to prevent catastrophic pandemics. Our model of all it spent in its first tax year, May to December 2024, comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely a catastrophic pandemic is and on an estimate of what a typical dollar of work against it does to the risk. Both are deeply uncertain, so the plausible range runs from about {{low}} to about {{high}}.
 
 ### What the charity does
 
@@ -22,7 +22,7 @@ Each grant counts at what its recipient does with a dollar:
 
 - **The Council on Strategic Risks and Epoch AI** have models on the site, so their grants count at those charities' figures on the rankings. Those figures already include each recipient's adjustments and next-dollar figure. The grants are part of each recipient's own spending, so they count once, here, per dollar.
 - **Three other grants** ($555,000) go to groups the site doesn't model. They count as a typical dollar of pandemic work, with adjustments of their own: 0.8 for how far a typical project's effect applies, 0.7 for work no other group would have done now, 0.8 for work the grantees' other funders would not have paid for, 0.9 for Sentinel's share of the resources, and the missing-data discount.
-- **The two fellowships** ($163,300) count through the work they add to the field. About 1 in 10 fellows is taken to stay in biosecurity longer because of it, over five years. The fellowship's share of the credit for that work is its cost against the fellows' added work, about two fifths.
+- **The two fellowships** ($163,300) count through the work they add to the field. About 1 in 10 fellows is taken to stay in biosecurity longer because of it, over five years. The fellowships take all the credit for that work, since no other programme trained these fellows; the employers who pay for the work are mobilised, so they sit under the mobiliser's share, not in a split of resources.
 - **The advised gift** counts as advice that changed where money went, the site's one method for it. Sentinel is taken to have caused 30% of it, the site's shared figure. That money was going to be given anyway, so it counts only for its gain over an ordinary catastrophic-risk charity, with the evidence and missing-data discounts. The Center counts at its figure on the rankings.
 
 Sentinel's own costs are in the cost, but earn nothing of their own. They are what it costs to choose and steer the grants and give the advice, so counting them again as typical pandemic work would count the grantees' work twice.
@@ -33,12 +33,12 @@ At the end of 2024 Sentinel held $9.1 million, six times what it spent from May 
 
 ### What drives the result
 
-The three grants valued as typical pandemic work bring about half of the result and the fellowships a fifth. The grant to the Council on Strategic Risks brings a quarter, and the advised gift a few percent. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 58.
+The grant to the Council on Strategic Risks brings about two fifths of the result, the three grants valued as typical pandemic work about three tenths, and the fellowships about a quarter; the advised gift brings a few percent. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 93.
 
 ### Biggest uncertainties
 
 - **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way.
-- **The discount rate and how many years a cut counts.** These are shared sliders, and they swing the result from about 1 to about 58.
+- **The discount rate and how many years a cut counts.** These are shared sliders, and they swing the result from about 1 to about 93.
 - **What the next dollar does.** Sentinel's spending has grown fast, so the room it has for more money is hard to judge. The figure runs from 17% to 90%.
 - **How far the grants beat or trail a typical project.** Their results weren't out by the end of 2024, and nothing about them is measured.
 
@@ -50,7 +50,7 @@ The three grants valued as typical pandemic work bring about half of the result 
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template. Grants to charities the site models are read live at their figures, and the advised gift goes through the shared money-moved rows. Round 1 of the independent audit found two high findings and one medium, all fixed. Round 2 passed with one medium finding, the branches' shares as this text first gave them (corrected above), and small fixes: the University of Maryland fellow counts for the share of the grant paid in 2024. Before that, the model had first counted Sentinel as a money mover, which kept the distance slider from reaching its own grants; it is now spread by world population, and the grants read live carry their recipients' own missing-data discounts. The advised gift had been counted as half new money; advice that changes where money goes counts as money shifted to a better use. The two fellowships moved into the field-building branch. The result stayed at about 4.7, then 4.6 once the advised gift took its missing-data discount only once. The rounds are in audits/sentinel-bio-charityevals/.
+The model was built from the catastrophic-risk template. Grants to charities the site models are read live at their figures, and the advised gift goes through the shared money-moved rows. Round 1 of the independent audit found two high findings and one medium, all fixed. Round 2 passed with one medium finding, the branches' shares as this text first gave them (corrected above), and small fixes: the University of Maryland fellow counts for the share of the grant paid in 2024. Before that, the model had first counted Sentinel as a money mover, which kept the distance slider from reaching its own grants; it is now spread by world population, and the grants read live carry their recipients' own missing-data discounts. The advised gift had been counted as half new money; advice that changes where money goes counts as money shifted to a better use. The two fellowships moved into the field-building branch. The result stayed at about 4.7, then 4.6 once the advised gift took its missing-data discount only once. The fellowships' credit then stopped cutting by the employers' pay (the mobiliser's share covers them), which lifted the result to about 7.8. The rounds are in audits/sentinel-bio-charityevals/.
 
 ### Sources
 

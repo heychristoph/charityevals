@@ -1,6 +1,6 @@
 # Audit: institute-for-ai-policy-and-strategy-charityevals, round 3 (verification round)
 Result: 0.001240 daly/$ = 1.24 years of healthy life per 1,000 dollars (combined range 0.028-55; model's own ranges 0.096-4.9); cause median 5.57 (x0.22). Verdict: pass.
-Model-sha: 3d88eae5c966200928e4dc3142826103b5a96e843468406e0215e795336c5bf6
+Model-sha: 7677afd5bd31020811373ffdb5cc1d2fbbe2de9c76ab65dbeb1b5c48b95eb032
 Scope: only round 2's finding 1 (the model's `summary`), the change in commit 1696f63 (the file's only change is the `summary` line); every number in the new summary was checked against audit-model and the model's rows.
 Mechanical: audit-model lint 0/0/0, findings (0). Not re-run this round (scoped): check.ts, normalization-audit, simulation-check. No file in generated/ was changed.
 
@@ -25,3 +25,5 @@ Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanica
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 6 rows changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.

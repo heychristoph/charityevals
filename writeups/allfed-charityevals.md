@@ -36,10 +36,10 @@ Then come the adjustments for the nuclear work:
 |---|---|
 | How far a typical project's effect applies | 0.8 |
 | Work other groups would not have done now | 0.75 |
-| ALLFED's share of the resources | 0.62 |
+| ALLFED's share of the resources | 0.66 |
 | Missing-data discount | 0.5 |
 
-The first is our judgment, with a wide range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' and its president's unpaid time and its co-authors' and partners' time.
+The first is our judgment, with a wide range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' and its president's unpaid time and its co-authors' time.
 
 Benefits not modelled add 25%. The largest part is the same food work after a volcanic winter: a large eruption has about a one-in-six chance this century. Smaller nuclear wars, the loss-of-industry work and ordinary food shocks make up the rest. One harm is counted: preparing for a war could make it seem more survivable, at −2%.
 

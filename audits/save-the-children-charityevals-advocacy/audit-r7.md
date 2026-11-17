@@ -1,7 +1,7 @@
 # Audit: save-the-children-charityevals-advocacy, round 7
 Re-stamped: `destination_reads` added for the shared moved-money rows (GiveWell's four top charities and the GiveDirectly prior, read as destinations at their figures on the rankings, docs/normalization.md 2.12); no formula or value changed and the result is unchanged (the money-moved branch is 0 here), so round 6's pass stands.
 Verdict: pass
-Model-sha: fc9803ea96045aefcb2164ba48bab919bb332e7a34e54e103230490943938657
+Model-sha: c89957cfe9fdf227a512a731f39d25989edcfbf3526cafc385c842fd530d0569
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.417 → 0.413.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -18,3 +18,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against d150f0b2.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combined; no value change). Mechanical: headline unchanged, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ce8e784f.

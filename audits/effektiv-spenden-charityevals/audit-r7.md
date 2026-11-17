@@ -12,7 +12,7 @@ Mechanical: audit-model lint 0 findings, no invariant violation (INV-12 incl. do
 ## Findings
 None.
 
-Model-sha: d485fac6dfc0103c8a996d0c1bb7ffc56b072ccd4294c73a1b316b7bd84f3711
+Model-sha: 9f70c80e5bb961d4fb48a9745cf7c31e0224d7199fb9840c502f38845b5f069c
 Verdict: pass
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline 23.75 → 23.88 (+0.56%), 11 rows changed, against 593b1bba.

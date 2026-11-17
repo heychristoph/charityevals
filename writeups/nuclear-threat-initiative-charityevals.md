@@ -38,7 +38,7 @@ The adjustments apply to all branches:
 |---|---|---|
 | How far a typical project's effect applies to NTI's work | 0.8 | Above typical for diplomacy with senior access; below for public education |
 | Work no one else would have done now | 0.7 | |
-| NTI's share of the resources behind its projects | 0.85 | |
+| NTI's share of the resources behind its projects | 0.9 | Counts co-advocates and partners only; the officials who adopt the work are under the mobiliser's share |
 | Funging by large funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about NTI's effect on the risk is measured |
 

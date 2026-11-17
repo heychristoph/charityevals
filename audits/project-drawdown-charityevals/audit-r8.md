@@ -1,0 +1,34 @@
+# Audit: project-drawdown-charityevals, round 8 (scoped verification of credit step 5, rule 2.24)
+Result: about -0.0010 tco2e per donor dollar (past average -0.00241) = -0.00060 years of healthy life per $1,000 (range and cause median not re-run, scoped round). Verdict: fix needed (one open medium: the model summary quotes the old result; two write-up mediums fixed in this round).
+Model-sha: 7f70ce06247fd3a11ca485b643224b6116fdde287af70224aba5047a757087d9
+Scope: phil_/corp_/inv_/pub_attribution_drawdown, the share rows and classes, the removal of phil_attribution_share, and the text that quotes them.
+Preflight: pass (no blocking problem; only the out-of-date distributions line, ignored as instructed).
+Previous round: round 7 had no open finding.
+
+Branch tonnes at the defaults (engine values, mobiliser_share 100%): funders -120,035 (tco2e_from_uov) x phil_total_adj 0.2500 = -30,014; companies 200,332 x 0.06807 = +13,636; investors 133,555 x 0.03890 = +5,195; public 6,678 x 0.08103 = +541; outcome_total -11,919. At mobiliser_share 50% the outcome turns positive (+12,309): the funders' branch is a difference near zero and moves with the share, as the brief expects.
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | medium (fixed in this round) | presentation | write-up, "What the model does" paragraph on shares | "Funders' own staff, advisers and other guides ... do the rest" put the funders' own staff back among the co-advocates, against the new row text and rule 2.24. | writeups/project-drawdown-charityevals.md line 31 | Done: now "Other advisers and guides (ClimateWorks, Giving Green, Founders Pledge), grantees pitching to funders and consultants share the work; the funders, companies and fund managers who adopt a choice are not counted here but under the shared share for money and work it brings in." | none (text) |
+| 2 | medium (fixed in this round) | presentation | write-up, "What drives the result" | "companies' and investors' money is the positive part, about a third its size" was right at the old shares (37%) but is stale: positive branches +19,372 against funders' -30,014 is 65%. | branch values above | Done: "about two thirds its size". | none (text) |
+| 3 | low | structure | phil_attribution_drawdown, inv_attribution_drawdown | The ranges are judgments naming their contributors but no reference class beyond that; fine for a best guess, but the phil row could say the 45% is roughly "Drawdown as one of about two comparable outside advisers" so a reader can see the arithmetic. | row text | Optional wording only. | none |
+| 4 | medium | presentation | model `summary` | Quotes the old result: "about −0.0013 tonnes of CO₂e, about −0.0008 years of healthy life per $1,000". The headline is now -0.0006 years per $1,000; the tonnes figure is the per-donor-dollar value, which also moved with the next-dollar factor. | headlines.ts: -0.000600554 | Replace with "about −0.0010 tonnes of CO₂e, about −0.0006 years of healthy life per $1,000" (recompute the tonnes figure as tco2e_per_donor_dollar at the defaults, or use a rendered placeholder as the other figures do). | none (text) |
+
+## Row checks
+1. **Denominators.** phil: row text now counts outside advisers and grantees pitching; funders and their staff out (taken in shifted_dollar_value). corp: consultants and other guides; company staff and employees out. inv: analysts and index providers; fund managers out. pub: other groups' outreach; the people changing are beneficiaries and not a resource, as stated. No named co-advocate dropped without reason (phil_counterfactual_adj, a different row, still lists ClimateWorks, Founders Pledge and Giving Green as other guides, consistent).
+2. **Facts.** The year-end report (fetched, PDF) says Carbon Collective used Drawdown as "guidepost" and that "it's literally imprinted into our investment strategy" (investor case study), calls Drawdown "a trusted advisor to many climate donors", and says Mars' Climate School training used its content. So the claims hold; the report also says other consultancies and firms were helped, supporting that consultants share the corporate work. The explainer's "through the Capital Coalition, some of the advice" rests on the 990's programme description (Drawdown Labs includes the Capital Coalition), not rechecked; not checkable from the year-end report text.
+3. **Values.** 45% (20-70), 35% (15-60), 30% (10-60) are best guesses for a share among co-advocates after the adopters left the denominator; each rose by roughly the share the adopters held (the old 30%, 15%, 10% were of a larger group). The Carbon Collective quote argues for the investor value being nearer the middle than low, and its 10-60 range covers a larger share; defensible, not optimistic. Corp 35% and phil 45% are consistent with "one input among several advisers". pub 50% (20-80) unchanged, consistent with its text.
+4. **Class and once.** Only mobiliser_share (reading $mobiliser_share), shifted_dollar_value, corp/inv/pub_attribution_share (class research) and the reading-only attribution_share read the slider. Philanthropy: phil_total_adj = phil_counterfactual_adj x phil_attribution_share_shared, no slider; the slider enters once in shifted_dollar_value, which informed_money_value reads (tco2e_from_uov is built from it). Corp, inv, pub: total_adj multiplies its used share (shared x mobiliser_share) once. Confirmed by computation at 100% and 50%. The removed row phil_attribution_share is referenced nowhere. The reading-only attribution_share multiplies the phil shared share by mobiliser_share, consistent.
+5. **Counterfactual.** Stays in the *_counterfactual_adj rows and p_success / discounted_years; the share rows do not repeat it. No double count found.
+6. **Text.** Model summary quotes -0.0013 tco2e and -0.0008 years; the live values are -0.0024 tco2e per dollar before the next-dollar factor, about -0.0006 years per $1,000. The summary says "about -0.0013 tonnes ... about -0.0008 years", now stale. See finding 4 (model summary; the write-up has no typed copy of the result).
+
+
+## Sources checked
+| Row | URL | Status | Note |
+|---|---|---|---|
+| inv_attribution_drawdown | drawdown.org Year-End Report 2025 PDF | verified | Carbon Collective "guidepost", "imprinted into our investment strategy" present (case study, near p. 10) |
+| phil_attribution_drawdown | same | verified | "trusted advisor to many climate donors" |
+| corp_attribution_drawdown | same | verified | Mars Climate School, consulting firms, job function guides |
+
+## Drivers
+Funders' giving (the shared money-moved rows and phil_share_followed), the funders' share (judgment), the corporate gain (judgment) and the shared prior multiple; at 50% share the sign flips, so the headline depends on the mobiliser setting. Best improvement: a source for how many outside advisers a funder uses.

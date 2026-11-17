@@ -1,6 +1,6 @@
 ### Summary
 
-The Institute for AI Policy and Strategy (IAPS) is a think tank in Washington. It researches policy on advanced AI and national security, briefs officials and runs an AI Policy Fellowship. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain: on the model's own ranges the result runs from about 0.1 to about 5, and wider with the shared assumptions.
+The Institute for AI Policy and Strategy (IAPS) is a think tank in Washington. It researches policy on advanced AI and national security, briefs officials and runs an AI Policy Fellowship. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain: on the model's own ranges the result runs from about 0.2 to about 40, and wider with the shared assumptions.
 
 ### What the charity does
 
@@ -22,9 +22,9 @@ The deaths averted are valued like every death on the site, across the world's a
 The model has two branches.
 
 - **Research and policy engagement**, valued as typical AI safety work. About a fifth of it is about US competitiveness and ordinary national security rather than catastrophes; it counts as a share of other benefits. None of the measures it worked on had become law or rule by the end of 2025, so there is no policy-win branch.
-- **The fellowship.** It counts the fellows who go on to work on AI risk because of it (20%), the years they stay (5), and the fellowship's share of the credit for that work (its cost against theirs, 16% at the defaults).
+- **The fellowship.** It counts the fellows who go on to work on AI risk because of it (20%), the years they stay (5), and the fellowship's share among those who trained the same people (all of it at the default: no other programme is known to have trained the same fellows). The employers who pay for the alumni's work are not in that share: their work is mobilised, and the site's one mobiliser setting covers it.
 
-The two give about half of the result each. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
+The fellowship gives most of the result (about 85% at the defaults), the research and policy work the rest. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
 
 | Adjustment | Research | Fellowship |
 |---|---|---|
@@ -45,7 +45,7 @@ At the end of 2025 about two years of spending was set aside for IAPS, and it ha
 - **How likely an AI catastrophe is.** The slider moves the result many-fold.
 - **How much a dollar of misuse work cuts the risk.** Rethink's figure runs ten times either way, and the share of IAPS's work counted as misuse moves the result almost in proportion.
 - **The discount rate and the years a cut counts.** Each moves the result several-fold.
-- **The fellowship's effect.** IAPS publishes no data on where its fellows went.
+- **The fellowship's effect.** It gives most of the result, and IAPS publishes no data on where its fellows went: the share who work on AI risk because of it (20%, 5% to 40%) moves the result more than any other judgment about the fellowship.
 
 ### What isn't modelled
 
@@ -54,7 +54,7 @@ At the end of 2025 about two years of spending was set aside for IAPS, and it ha
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template. The first audit round found no high-severity problem. It raised the share of work counted as misuse from 15% to 20%, since two of the year's eight major items are cyber work. It also corrected the fellowship's source, computed the fellowship's credit from its inputs, and narrowed the range of the sponsor's central costs so none are counted twice. Two verification rounds checked the changes. The audit rounds are in audits/institute-for-ai-policy-and-strategy-charityevals/.
+The model was built from the catastrophic-risk template. The first audit round found no high-severity problem. It raised the share of work counted as misuse from 15% to 20%, since two of the year's eight major items are cyber work. It also corrected the fellowship's source and narrowed the range of the sponsor's central costs so none are counted twice. Two verification rounds checked the changes. A later round (credit rule 2.24) took the employers out of the fellowship's pro-rata share and re-checked the branch shares. The audit rounds are in audits/institute-for-ai-policy-and-strategy-charityevals/.
 
 ### Sources
 
