@@ -9,6 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "greener-by-default",
   "owner": "ace",
+  "mobilised": true,
   "summary": "Helps hospitals, universities, stadiums and corporate cafeterias in the United States and United Kingdom serve plant-based meals by default. A re-implementation of Animal Charity Evaluators' 2026 cost-effectiveness sheet: its Healthcare, Business & Industry and College & University programmes against all of Greener by Default's 2025 to mid-2026 spending, research included. One hospital engagement carries about 90% of the modelled impact. ACE's own estimate is 2.1 SADs per dollar, and about 44% of it falls on shrimp, which count at a tenth of a chicken.",
   "source": {
     "publisher": "Animal Charity Evaluators",
@@ -849,12 +850,20 @@
       "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
     },
     {
+      "id": "mobiliser_share",
+      "section": "species",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "ced_per_donor_dollar",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give",
       "format": "number",
-      "formula": "ced_shrimp + ced_chicken + ced_fish + ced_pig",
-      "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+      "formula": "(ced_shrimp + ced_chicken + ced_fish + ced_pig) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nDays of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
     }
   ],
   "output": {
@@ -877,7 +886,8 @@
     "assumptions": {
       "discount_rate": 0.014,
       "resource_shares": 0,
-      "chicken_vs_person": 0.463966
+      "chicken_vs_person": 0.463966,
+      "mobiliser_share": 1
     }
   },
   "resources": [

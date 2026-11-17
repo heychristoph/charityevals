@@ -9,6 +9,7 @@
  "estimate_basis": "marginal",
  "charity": "animal-policy-international",
  "owner": "ambitious-impact",
+ "mobilised": true,
  "bulk": true,
  "summary": "Ambitious Impact's 2022 estimate for a new charity advocating for New Zealand to ban imports of animal products made below its own welfare standards (fish, meat, eggs, milk and wool from countries ranked D or worse on World Animal Protection's index). The idea Animal Policy International was founded to run. A re-implementation of AIM's spreadsheet as it stands today, traced from its welfare points per dollar of charity costs (168; the report gives 186 from an earlier version, and 23 counting the government's enforcement costs), with the discounting over 40 years rebuilt from the yearly rows. Fish are 96% of the welfare points. Welfare points have no exchange rate to the site's scale, so a bridge of ours turns them into days of pain for each species, weighed by Rethink Priorities' welfare ranges. AIM also lists a 3.4% a year chance that New Zealand would pass the ban anyway, but doesn't use it, so the result assumes it never would.",
  "source": {
@@ -24,7 +25,8 @@
   "name": "Ambitious Impact",
   "assumptions": {
    "resource_shares": 0,
-   "discount_rate": 0.04
+   "discount_rate": 0.04,
+   "mobiliser_share": 1
   }
  },
  "resources": [],
@@ -3461,12 +3463,20 @@
    "explainer": "The days of pain for cattle, sheep and goats, weighed by how much cattle can suffer relative to a chicken (Rethink Priorities' pig as the stand-in; we use it for sheep and goats too). The cattle weight is a stand-in, our judgment: Rethink Priorities didn't estimate cattle, sheep or goats, so the pig's weight stands in (facts: welfare_ranges.cattle_vs_chicken, kind judgment)."
   },
   {
+   "id": "mobiliser_share",
+   "section": "species",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "ced_per_donor_dollar",
    "section": "species",
    "label": "Chicken-equivalent pain days averted per dollar you give",
    "format": "number",
-   "formula": "ced_fish + ced_pig + ced_chicken + ced_cattle",
-   "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+   "formula": "(ced_fish + ced_pig + ced_chicken + ced_cattle) * mobiliser_share",
+   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nDays of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
   }
  ],
  "output": {

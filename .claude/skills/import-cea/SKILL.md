@@ -133,7 +133,8 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   row `mobiliser_share = $mobiliser_share` in an `ours` section, the row after `output.native`
   multiplied by it (the shared money rows already are), and `mobiliser_share: 1` in
   `evaluator.assumptions`. No double cut: a credit share with the adopter's own resources in its
-  denominator is re-judged to co-advocates only (theirs in `published`).
+  denominator is re-judged to co-advocates only (theirs in `published`). scripts/link-mobiliser-share.py
+  does the field, row and pin from its RULES (by evaluator and kind of programme): run it last.
 
 ## 5. Our steps to the scale (layers B and C)
 

@@ -9,6 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "sinergia-animal",
   "owner": "ace",
+  "mobilised": true,
   "summary": "Corporate campaigns for farmed animals in Latin America and Southeast Asia: cage-free egg commitments, pig welfare commitments in Brazil, and replacing meat in institutional meals. A re-implementation of Animal Charity Evaluators' cost-effectiveness sheet for its 2025 recommendation, covering three programs (about 84% of programme spending). Its cage-free commitments cover about 20.7 million hens a year in Latin America, 7.9 million credited to Sinergia, for about $0.9 million of campaign spending: some 31 hen-years out of cages per dollar before compliance, each counting the shared 17.5 SADs.",
   "source": {
     "publisher": "Animal Charity Evaluators",
@@ -679,12 +680,20 @@
       "explainer": "The SADs for fish with the fish weight built into the 2024 SADs ACE used (about 27% of a person's) taken out, and Rethink Priorities' estimate of how much fish can suffer relative to a chicken put in. The evaluator view keeps Ambitious Impact's weights, so ACE's own result reproduces. The fish weight is a stand-in, our judgment: Rethink Priorities estimated only carp and salmon, and their mean stands for every farmed and wild-caught fish (facts: welfare_ranges.fish_vs_chicken, kind judgment)."
     },
     {
+      "id": "mobiliser_share",
+      "section": "species",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "ced_per_donor_dollar",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give",
       "format": "number",
-      "formula": "ced_chicken + ced_pig + ced_fish",
-      "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+      "formula": "(ced_chicken + ced_pig + ced_fish) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nDays of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
     }
   ],
   "output": {
@@ -707,7 +716,8 @@
       "discount_rate": 0.04,
       "resource_shares": 0,
       "chicken_vs_person": 0.463966,
-      "rp_species_weights": 0
+      "rp_species_weights": 0,
+      "mobiliser_share": 1
     }
   },
   "resources": [

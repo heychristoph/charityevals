@@ -9,6 +9,7 @@
  "estimate_basis": "marginal",
  "charity": "alliance-for-reducing-microbial-resistance",
  "owner": "ambitious-impact",
+ "mobilised": true,
  "bulk": true,
  "source": {
   "publisher": "Ambitious Impact (Charity Entrepreneurship)",
@@ -2329,11 +2330,19 @@
    "explainer": "**Changed for consistency.** Ambitious Impact counts the Global Burden of Disease's DALYs for drug-resistant infections: mostly years of life lost to deaths, at GBD's life expectancy, untouched by the value-of-life slider. Our view splits each DALY into the illness part (kept as DALYs) and the deaths behind the rest (37.4 DALYs per attributable death (GRAM 2021)), and values those deaths by age like every death on the site (row above). The evaluator view keeps Ambitious Impact's DALYs (1)."
   },
   {
+   "id": "mobiliser_share",
+   "section": "bottom_line",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "dalys_per_dollar",
    "section": "bottom_line",
    "label": "DALYs averted per dollar",
-   "formula": "(1 / cost_daly_government_and_charity_costs) * donor_cost_share * gbd_daly_revaluation",
-   "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). Times our value of each of Ambitious Impact's DALYs, with the deaths in them valued by age."
+   "formula": "((1 / cost_daly_government_and_charity_costs) * donor_cost_share * gbd_daly_revaluation) * mobiliser_share",
+   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest). Times our value of each of Ambitious Impact's DALYs, with the deaths in them valued by age."
   }
  ],
  "output": {
@@ -2351,7 +2360,8 @@
    "resource_shares": 0,
    "discount_rate": 0.04,
    "daly_per_child_death": 50.54461739130435,
-   "uov_per_daly": 2.3
+   "uov_per_daly": 2.3,
+   "mobiliser_share": 1
   }
  },
  "summary": "Ambitious Impact's 2023 estimate for a new charity advocating for subscription-style pull incentives (the US PASTEUR Act, and similar schemes in other rich countries) that pay for new antibiotics against drug-resistant infections. The idea ARMoR was founded to run. A re-implementation of AIM's spreadsheet as it stands today, traced from its cost per DALY counting the charity's and governments' costs ($110). The report's summary gives $90.80 and its CEA section $112, both from earlier versions of the sheet; counting the charity's costs alone the sheet gives $0.12 (the report: $0.10).",

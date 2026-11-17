@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "evidence-action",
   "owner": "givewell",
+  "mobilised": true,
   "bulk": true,
   "summary": "Screens pregnant women for syphilis and treats them, to prevent stillbirths and infant deaths. GiveWell's spreadsheet \"Syphilis screen and treat in pregnant women cost-effectiveness analysis\", linked from 2 of its grant pages. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
   "source": {
@@ -25,7 +26,8 @@
     "assumptions": {
       "daly_per_child_death": 58.12631,
       "uov_per_daly": 2,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -465,11 +467,19 @@
       "expected": 0.005668805455
     },
     {
+      "id": "mobiliser_share",
+      "section": "staff_pay",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_donor_dollar",
       "label": "Units of value per dollar you give",
       "section": "staff_pay",
-      "formula": "units_of_value_per_dollar_donated_andrew * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "(units_of_value_per_dollar_donated_andrew * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

@@ -16,8 +16,12 @@ then reduced by the share of cost staff contribute through lower pay (charityeva
     python3 scripts/convert-ace.py ace.xlsx --id the-humane-league --name "The Humane League" \\
         --review URL --sheet-url URL --published 2025-11-04 --out models/animal-welfare
 """
-import argparse, json, re, sys, unicodedata
+import argparse, importlib.util, json, re, sys, unicodedata
 from pathlib import Path
+
+# The model's class (mobilised or own delivery) and, if mobilised, the share's row and pin (docs/normalization.md 2.24).
+_lm = importlib.util.spec_from_file_location("link_mobiliser_share", Path(__file__).with_name("link-mobiliser-share.py"))
+lm = importlib.util.module_from_spec(_lm); _lm.loader.exec_module(lm)
 import openpyxl
 
 p = argparse.ArgumentParser()
@@ -298,7 +302,7 @@ rows_out += [
      "formula": "sads_per_dollar * donor_cost_share"},
 ]
 sections += [{"id": "bottom", "title": "Bottom line", "explainer": f"{a.unit_label} per dollar across the programs ACE modelled. Programs ACE didn't model are left out, not assumed to be zero or equal."},
-             {"id": "donor", "title": "Your dollar's share", "explainer": "charityevals adjustments on top of ACE's model."}]
+             {"id": "donor", "title": "Your dollar's share", "kind": "ours", "explainer": "charityevals adjustments on top of ACE's model."}]
 # Discounting: ACE writes its annual discount rate into formulas as "(1 + 0.014)". Those use the shared
 # $discount_rate instead (floored just above zero: the annuity factors divide by the rate's effect and
 # are 0/0 at exactly 0%), with ACE's rate pinned in the evaluator view. Rates applied inside Google's NPV
@@ -347,5 +351,6 @@ cpath.write_text(json.dumps(crec, indent=2, ensure_ascii=False) + "\n")
 # carry over resources collected earlier (scripts/import-resources.sh), so a re-import keeps them
 _prev = out / f"{a.id}.json"
 if _prev.exists(): model["resources"] = json.loads(_prev.read_text()).get("resources", [])
+lm.apply(model)
 (out / f"{a.id}.json").write_text(json.dumps(model, indent=2, ensure_ascii=False) + "\n")
 print(f"{a.id}: {len(rows_out)} rows, {sum('expected' in r for r in rows_out)} expected, programs: {names}")

@@ -845,6 +845,12 @@ if __name__ == "__main__":
     book = Sheet(a.xlsx)
     for spec in specs if isinstance(specs, list) else [specs]:
         model, stats = build(book, spec)
+        # Mobilised or own delivery (docs/normalization.md 2.24); the share's row and pin follow once the model
+        # has our steps: python3 scripts/link-mobiliser-share.py.
+        import importlib.util
+        _lm = importlib.util.spec_from_file_location("link_mobiliser_share", Path(__file__).with_name("link-mobiliser-share.py"))
+        lm = importlib.util.module_from_spec(_lm); _lm.loader.exec_module(lm)
+        lm.apply(model, strict=False)
         Path(a.out, f"{model['id']}.json").write_text(json.dumps(model, indent=1, ensure_ascii=False) + "\n")
         stats["id"] = model["id"]
         print(json.dumps(stats))

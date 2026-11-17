@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "medicines-development-for-global-health",
   "owner": "givewell",
+  "mobilised": true,
   "bulk": true,
   "summary": "Works to bring moxidectin, a drug for river blindness, into mass drug administration. GiveWell's spreadsheet \"Moxidectin MDA for onchocerciasis rough CEA [September 2024]\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
   "source": {
@@ -25,7 +26,8 @@
     "assumptions": {
       "uov_per_daly": 2.3,
       "resource_shares": 0,
-      "discount_rate": 0.04
+      "discount_rate": 0.04,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -821,11 +823,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar",
       "label": "Units of value per dollar",
       "section": "bottom_line",
-      "formula": "(bottom_line_x_cash_1_year_speed_up * cash_benchmark) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((bottom_line_x_cash_1_year_speed_up * cash_benchmark) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {
