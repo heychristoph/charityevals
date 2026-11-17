@@ -501,11 +501,21 @@
       "explainer": "Industrious Labs counts Rules 1146.2 and 1153.1 as 'two landmark victories' it secured, organised the first rally for an industrial-boiler rule (Canary Media, 7 June 2024) and intervened to defend the rule with the People's Collective for Environmental Justice and the Sierra Club; Earthjustice was co-counsel, and the Coalition for Clean Air, the Natural Resources Defense Council, RMI and community groups pushed the district's 2022 plan that the rule carries out. Our judgment, 15% (5% to 35%)."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "s46_attribution_share",
       "section": "adjustments",
       "label": "Rule 1146.2: share of credit used",
       "format": "percent",
-      "formula": "s46_attribution_share_shared"
+      "formula": "s46_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "s46_implementation_adj",
@@ -546,7 +556,9 @@
       "section": "adjustments",
       "label": "Rule 1153.1: share of credit used",
       "format": "percent",
-      "formula": "s53_attribution_share_shared"
+      "formula": "s53_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "s53_implementation_adj",
@@ -592,7 +604,9 @@
       "section": "adjustments",
       "label": "EPA's 2024 iron and steel rule: share of credit used",
       "format": "percent",
-      "formula": "iis_attribution_share_shared"
+      "formula": "iis_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "iis_implementation_adj",
@@ -638,7 +652,9 @@
       "section": "adjustments",
       "label": "EPA's 2024 coke-oven rules: share of credit used",
       "format": "percent",
-      "formula": "coke_attribution_share_shared"
+      "formula": "coke_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "coke_implementation_adj",
@@ -696,7 +712,7 @@
       "section": "adjustments",
       "label": "Share of credit used (for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(s46_downstream * s46_attribution_share + s53_downstream * s53_attribution_share) / (s46_downstream + s53_downstream)",
       "explainer": "The outcome-weighted average of the branches with tonnes, for reading only; each branch uses its own share."
     },
     {

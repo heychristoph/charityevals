@@ -984,7 +984,7 @@
         "page": "Part III line 4a: expenses 2,947,497",
         "retrieved": "2026-11-14"
       },
-      "explainer": "The compute cluster's expenses, a weight in the AI work's attribution (ai_attribution_share)."
+      "explainer": "The compute cluster's expenses, a weight in the AI work's attribution (ai_attribution_share_shared)."
     },
     {
       "id": "spend_research",
@@ -999,7 +999,7 @@
         "page": "Part III line 4b: expenses 1,168,082",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Research's expenses, a weight in the AI work's attribution (ai_attribution_share)."
+      "explainer": "Research's expenses, a weight in the AI work's attribution (ai_attribution_share_shared)."
     },
     {
       "id": "spend_advocacy",
@@ -1014,7 +1014,7 @@
         "page": "Part III line 4d additional data: Advocacy, expenses 777,874",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Advocacy's expenses, a weight in the AI work's attribution (ai_attribution_share)."
+      "explainer": "Advocacy's expenses, a weight in the AI work's attribution (ai_attribution_share_shared)."
     },
     {
       "id": "attr_cluster",
@@ -1080,7 +1080,7 @@
       "explainer": "The branch's deaths averted in healthy years, plus its future healthy years kept: its share of the value, used to weight the adjustments so each applies to its own branch's value."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI work: CAIS's share of the resources behind it",
       "format": "percent",
@@ -1088,12 +1088,36 @@
       "explainer": "The cluster's, research's and advocacy's shares, weighted by their spending: within the AI branch a dollar of each counts the same before adjustments."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "attr_other * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
       "id": "attribution_share_shared",
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "explainer": "CAIS's share of the resources behind its outputs, branch by branch: the AI work at ai_attribution_share (the compute cluster, whose papers outside researchers write; research, benchmarks made with Scale AI and outside experts; advocacy, CAIS's own), the course at attr_other (CAIS's own). Weighted by each branch's healthy years (w_ai, w_fb), so each share applies to its own branch's value. About 0.61: half of CAIS's spending supports other people's research.",
-      "formula": "(w_ai * ai_attribution_share + w_fb * attr_other) / (w_ai + w_fb)"
+      "explainer": "CAIS's share of the resources behind its outputs, branch by branch: the AI work at ai_attribution_share_shared (the compute cluster, whose papers outside researchers write; research, benchmarks made with Scale AI and outside experts; advocacy, CAIS's own), the course at attr_other (CAIS's own). Weighted by each branch's healthy years (w_ai, w_fb), so each share applies to its own branch's value. About 0.61: half of CAIS's spending supports other people's research.",
+      "formula": "(w_ai * ai_attribution_share + w_fb * fb_attribution_share) / (w_ai + w_fb)"
     },
     {
       "id": "attribution_share",

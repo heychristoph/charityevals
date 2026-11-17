@@ -1171,6 +1171,14 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
       "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
@@ -1265,7 +1273,7 @@
         "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "The research on whether advocacy changes policy: Baumgartner, Berry, Hojnacki, Kimball and Leech (2009, Lobbying and Policy Change, 98 random US federal issues) find about 60% of campaigns change nothing, the status quo usually wins and resources explain under 5% of who wins; field experiments find constituent contacts organised by an advocacy coalition raise a Michigan legislator's support for a bill by about 12 percentage points (Bergan and Cole 2015, Political Behavior; Bergan 2009 for e-mail lobbying), while lobbyists' policy information alone moved no votes in four experiments (Camp et al. 2023, Journal of Experimental Political Science). Habitat's count includes every win it supported, many of them in coalitions with the realtors, homebuilders and state housing alliances, where the advocacy as a whole was pivotal for a minority of the money. 0.15, range 0.03 to 0.4. This is the counterfactual: the share that would not have come at all, or not for many years, without the coalition's advocacy (money that would merely have come a year or two later is in the other 85%, and counts nothing, as Convention 5 asks: one question); Habitat's share of the coalition is in us_attribution_share; how much of the reported money is real, in us_evidence_adj."
+      "explainer": "The research on whether advocacy changes policy: Baumgartner, Berry, Hojnacki, Kimball and Leech (2009, Lobbying and Policy Change, 98 random US federal issues) find about 60% of campaigns change nothing, the status quo usually wins and resources explain under 5% of who wins; field experiments find constituent contacts organised by an advocacy coalition raise a Michigan legislator's support for a bill by about 12 percentage points (Bergan and Cole 2015, Political Behavior; Bergan 2009 for e-mail lobbying), while lobbyists' policy information alone moved no votes in four experiments (Camp et al. 2023, Journal of Experimental Political Science). Habitat's count includes every win it supported, many of them in coalitions with the realtors, homebuilders and state housing alliances, where the advocacy as a whole was pivotal for a minority of the money. 0.15, range 0.03 to 0.4. This is the counterfactual: the share that would not have come at all, or not for many years, without the coalition's advocacy (money that would merely have come a year or two later is in the other 85%, and counts nothing, as Convention 5 asks: one question); Habitat's share of the coalition is in us_attribution_share_shared; how much of the reported money is real, in us_evidence_adj."
     },
     {
       "id": "us_evidence_adj",
@@ -1307,12 +1315,21 @@
       "explainer": "Within Habitat, local and state Habitat organisations do the advocacy that wins state and local money, with HFHI's staff, training and grants. In Cost of Home (FY2020-24) HFHI's campaign raised $6.8 million and Habitat organisations leveraged $23.7 million (the cumulative report's expenditure page, p. 18), so HFHI was about 22% of the campaign's money; HFHI's grants to affiliates ($2.3 million over five years) asked for match, and the affiliates' volunteers' unpaid advocacy is in neither figure. 0.2, range 0.1 to 0.4."
     },
     {
-      "id": "us_attribution_share",
+      "id": "us_attribution_share_shared",
       "section": "adjustments",
       "label": "US: HFHI's share of all the resources behind the wins",
       "format": "percent",
       "formula": "us_coalition_share * us_hfhi_share",
       "explainer": "Convention 2: the charity's share of everyone's resources behind the outcome, the coalition's partners and the Habitat network's own organisations and volunteers included."
+    },
+    {
+      "id": "us_attribution_share",
+      "section": "adjustments",
+      "label": "US: share of credit used",
+      "format": "percent",
+      "formula": "us_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "us_missing_data_adj",
@@ -1383,12 +1400,21 @@
       "explainer": "HFHI runs the campaign, its global policy staff and its area offices, and gives campaign grants; Habitat national organisations do most of the country advocacy with their own staff and donors. Reference class: in the US Cost of Home campaign HFHI was about 22% of the campaign's money (us_hfhi_share); Home Equals is run more centrally, with HFHI's area and country offices doing the advocacy where national organisations are small, so higher: 0.4, range 0.2 to 0.7."
     },
     {
-      "id": "he_attribution_share",
+      "id": "he_attribution_share_shared",
       "section": "adjustments",
       "label": "Home Equals: HFHI's share of all the resources behind the wins",
       "format": "percent",
       "formula": "he_coalition_share * he_hfhi_share",
       "explainer": "Convention 2: the charity's share of everyone's resources behind the outcome, the coalition's partners and the Habitat network's own organisations and volunteers included."
+    },
+    {
+      "id": "he_attribution_share",
+      "section": "adjustments",
+      "label": "Home Equals: share of credit used",
+      "format": "percent",
+      "formula": "he_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "he_missing_data_adj",
@@ -1427,7 +1453,7 @@
       "section": "adjustments",
       "label": "HFHI's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(us_value * us_attribution_share + he_value * he_attribution_share) / (us_value + he_value)",
+      "formula": "(us_value * us_attribution_share_shared + he_value * he_attribution_share_shared) / (us_value + he_value)",
       "explainer": "The outcome-weighted average of the branches' shares, for reading only; each branch applies its own."
     },
     {
@@ -1435,7 +1461,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(us_value * us_attribution_share + he_value * he_attribution_share) / (us_value + he_value)",
       "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared. Each branch applies its own."
     },
     {

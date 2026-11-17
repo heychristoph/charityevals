@@ -1067,7 +1067,7 @@
       "format": "percent",
       "value": 1,
       "kind": "observed",
-      "explainer": "1: the win happened in the year (the bill withdrawn); 1Day's part in it is in pol_counterfactual_adj and pol_attribution_share.",
+      "explainer": "1: the win happened in the year (the bill withdrawn); 1Day's part in it is in pol_counterfactual_adj and pol_attribution_share_shared.",
       "source": {
         "title": "1Day Sooner, Funding Proposal 2025-2026 to Open Philanthropy (lightly redacted public version, shared on the EA Forum 2 July 2025)",
         "url": "https://docs.google.com/document/d/1tm5QXyFBd0uQrU9NiUlsJaeadyVY7c5cCk34sAe88KA/edit",
@@ -1523,7 +1523,7 @@
       "formula": "1"
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1536,7 +1536,23 @@
       "explainer": "Not used: no spending on this area (its cost share is 0); the template range kept."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1549,7 +1565,15 @@
       "explainer": "1Day's share of the resources behind its pandemic outputs: co-authors and partners (the UK Pandemic Ethics Accelerator, the Day One think tank, former officials who co-wrote on the FDA programme) add their time. 0.8 (0.5 to 1), our judgment, the template's default."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1562,7 +1586,15 @@
       "explainer": "Not used: no spending on this area (its cost share is 0); the template range kept."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1575,12 +1607,29 @@
       "explainer": "1Day's share of the resources behind the defeat: its own campaign of about $100,000 (pol_cost_share) of the $300,000 or so behind it (pol_coalition_spend). 0.35 (0.2 to 0.6)."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
       "explainer": "Unused: no field-building (fb_people 0): fixed at 1, a branch with no spending.",
       "formula": "1"
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "hcv_evidence_adj",
@@ -1596,7 +1645,7 @@
       "explainer": "Whether the protocol's 1.5 years holds as written ('all else being equal'): protocols change before and during a study. Whether the time saved reaches the vaccine (the Health Canada resubmission, later delays) is in hcv_carry_share, and the self-report in the missing-data discount. 0.85 (0.6 to 1.1), our judgment."
     },
     {
-      "id": "hcv_attribution_share",
+      "id": "hcv_attribution_share_shared",
       "section": "adjustments",
       "label": "Hepatitis C: 1Day's share of the resources behind the design changes",
       "format": "percent",
@@ -1607,6 +1656,14 @@
       },
       "kind": "judgment",
       "explainer": "The study team at the University Health Network evaluated, approved and carries out the changes, with its own time and funding; 1Day proposed them and built the participants' case. Half (0.3 to 0.8), our judgment. (Whether the changes would have come anyway is in hcv_carry_share.)"
+    },
+    {
+      "id": "hcv_attribution_share",
+      "section": "adjustments",
+      "label": "Hepatitis C: share of credit used",
+      "format": "percent",
+      "formula": "hcv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "mal_evidence_adj",
@@ -1635,7 +1692,7 @@
       "explainer": "Whether 1Day's own part would have been done by others had it not acted (the field's counterfactual, what Gavi and countries would have done anyway, is already out of mal_field_children_added). Its niche, Western press and congressional attention for faster rollout plus part-time advocates in five countries, overlaps with Malaria No More's and PATH's advocacy, which could have absorbed some of it. 0.8 (0.5 to 1), our judgment."
     },
     {
-      "id": "mal_attribution_share",
+      "id": "mal_attribution_share_shared",
       "section": "adjustments",
       "label": "Malaria vaccines: 1Day's share of all advocacy resources for faster rollout",
       "format": "percent",
@@ -1646,6 +1703,14 @@
       },
       "kind": "judgment",
       "explainer": "About $630,000 of 1Day's spending (mal_cost_share) among the far larger malaria advocacy and technical-support budgets of PATH, the RBM Partnership, Malaria No More, WHO and the Gates Foundation's partners, and African governments' own work; 1Day's 2024 account says its efforts were 'marked more by frustration than success'. 5% (1% to 15%), our judgment."
+    },
+    {
+      "id": "mal_attribution_share",
+      "section": "adjustments",
+      "label": "Malaria vaccines: share of credit used",
+      "format": "percent",
+      "formula": "mal_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

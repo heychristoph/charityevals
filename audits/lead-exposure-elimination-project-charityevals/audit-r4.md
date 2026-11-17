@@ -1,6 +1,6 @@
 # Audit: lead-exposure-elimination-project-charityevals, round 4
 Result: 0.03040 uov/$ = 15.2 years of healthy life per 1,000 dollars, unchanged from round 3. Verdict: pass (no high findings; one low carried over).
-Model-sha: 1d21e92ee04fb881cfcdb36c9ff73f72a07553ac5efed708c3812a9f6573374a
+Model-sha: 72ef1672b7edfea49dca85f93f685f003e2cc21a5c4dee7fc1fdd45ded183a6a
 Scope: round 3's two lows only. The diff since round 3 is one sentence in the explainer of `adult_deaths_value_per_birth`; `git diff HEAD~1 -U0` shows no other line changed.
 Mechanical: audit-model 0 high / 1 medium (far-above, explained in round 2: reach) / 1 low (spread, accepted); result identical to round 3.
 
@@ -22,3 +22,5 @@ Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their re
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against a8d130f3.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.

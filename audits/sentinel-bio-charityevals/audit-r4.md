@@ -1,6 +1,6 @@
 # Audit: sentinel-bio-charityevals, round 4 (verification of the change to destination_reads)
 Result: 0.004575 daly/$ = 4.57 years of healthy life per 1,000 dollars (combined range 0.34–61.7; model's own ranges 1.6–10.6); cause median about 5.26 (×0.87, median from round 3, not recomputed). Verdict: pass.
-Model-sha: 8c7c45590edb56797d2878e1ad9fa31ce43d4f4833ff05fd5494da42f6b42f53
+Model-sha: a036c6b6a874184f5a08c7c54f96af55e2293e831a3e453d1fb2dc4d6fe63c7e
 Scope: unchanged (everything spent in the first tax year, 16 May to 31 December 2024). Only what changed since round 3 was checked: the engine's `destination_reads` and the model rows that changed with it. No source was fetched again.
 Mechanical: lint 0/0/1 (pol_cost_share unused, context), invariants none, normalization-audit 0 violations (generated/ restored), check.ts all models valid.
 
@@ -34,3 +34,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7dbeec92.
 
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 7 rows changed, against HEAD.

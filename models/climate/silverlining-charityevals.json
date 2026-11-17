@@ -908,12 +908,20 @@
       "kind": "judgment"
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "res_attribution_share",
       "section": "adjustments",
       "label": "Research: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "res_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "res_attribution_share_shared * mobiliser_share"
     },
     {
       "id": "dir_counterfactual_adj",
@@ -946,8 +954,8 @@
       "section": "adjustments",
       "label": "Directed money: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "dir_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "dir_attribution_share_shared * mobiliser_share"
     },
     {
       "id": "pol_counterfactual_adj",
@@ -1018,8 +1026,9 @@
       "section": "adjustments",
       "label": "Federal line: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "pol_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win"
     },
     {
       "id": "eng_counterfactual_adj",
@@ -1052,8 +1061,8 @@
       "section": "adjustments",
       "label": "Engagement: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "eng_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "eng_attribution_share_shared * mobiliser_share"
     },
     {
       "id": "missing_data_adj",
@@ -1113,7 +1122,7 @@
       "label": "Share of credit used (outcome-weighted average, for reading only)",
       "format": "percent",
       "explainer": "The outcome-weighted average of the branches' own rows, for reading only: each branch applies its own, and no row on the way to the outcome reads this one.",
-      "formula": "attribution_share_shared"
+      "formula": "(res_downstream * res_counterfactual_adj * res_attribution_share + eng_downstream * eng_counterfactual_adj * eng_attribution_share + dir_downstream * dir_counterfactual_adj * dir_attribution_share + pol_downstream * pol_counterfactual_adj * pol_attribution_share) / (res_downstream * res_counterfactual_adj + eng_downstream * eng_counterfactual_adj + dir_downstream * dir_counterfactual_adj + pol_downstream * pol_counterfactual_adj)"
     },
     {
       "id": "total_adj",

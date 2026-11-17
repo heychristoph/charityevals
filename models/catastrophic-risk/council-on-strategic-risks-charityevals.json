@@ -1325,7 +1325,7 @@
       "explainer": "Who would have entered anyway is already out of fb_share_working: 1 (0.8 to 1), the template's figure."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1338,7 +1338,23 @@
       "explainer": "Not used: the AI branch has no spending (weight 0). The template's figure kept."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1351,7 +1367,15 @@
       "explainer": "The dialogues and the tracker draw on allied officials' and outside experts' time beside CSR's staff: CSR's share 0.8 (0.6 to 1), our judgment."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1364,7 +1388,15 @@
       "explainer": "Research and reports mostly by CSR's own staff and fellows, in the cost; co-authors and event partners add some. 0.9 (0.75 to 1), our judgment."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1377,7 +1409,16 @@
       "explainer": "Not used: the branch has no spending (pol_cost_share is 0). The template's range kept."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1388,6 +1429,14 @@
       },
       "kind": "judgment",
       "explainer": "The fellows' own time and their employers' is in fb_credit_share; the share left is CSR's, 0.95 (0.7 to 1), the template's figure."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "gov_evidence_adj",
@@ -1416,7 +1465,7 @@
       "explainer": "Other groups work on climate and security (CNA's Military Advisory Board, the Wilson Center's Environmental Change and Security Program, the American Security Project, think tanks in allied countries); CSR's Center founded the field's main network of military leaders. 0.6 (0.3 to 0.9), our judgment, a crowded field."
     },
     {
-      "id": "gov_attribution_share",
+      "id": "gov_attribution_share_shared",
       "section": "adjustments",
       "label": "Climate security: CSR's share of the resources behind the change",
       "format": "percent",
@@ -1427,6 +1476,14 @@
       },
       "kind": "judgment",
       "explainer": "Militaries' and agencies' own staff carry out the changes, and the advisory board and the International Military Council's members give unpaid time: CSR's share of all resources behind a change, 0.7 (0.4 to 0.95), our judgment."
+    },
+    {
+      "id": "gov_attribution_share",
+      "section": "adjustments",
+      "label": "Climate security: share of credit used",
+      "format": "percent",
+      "formula": "gov_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",
