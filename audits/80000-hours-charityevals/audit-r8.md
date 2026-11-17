@@ -1,6 +1,6 @@
 # Audit: 80000-hours-charityevals, round 8 (scoped verification)
 Result: 0.002108 uov/$ = 1.054 years of healthy life per 1,000 dollars (combined range 0.0542–20.50). Verdict: **pass**.
-Model-sha: c4385ef12b60bb3f1046acda1390481a502ec3e228805977ece79b6c9b1f1c87
+Model-sha: 51bc1e82a744b6d12bac8a323165cb779f2bde6114230c88600c7834adb4dcf7
 Scope: only the text fix since round 7: the summary's range "0.06–24" now "0.05–21". Nothing else re-checked.
 
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline 1.311 → 1.32 (+0.65%), 10 rows changed, against 593b1bba.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

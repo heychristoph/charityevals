@@ -400,7 +400,7 @@
       "label": "Money moved per dollar of the charity's cost",
       "format": "multiple",
       "formula": "money_moved / cost_total",
-      "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+      "explainer": "Context."
     },
     {
       "id": "value_per_unit_year",
@@ -794,8 +794,8 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + donors_moved * new_money_share, 0))",
-      "explainer": "With credit by share of resources on, GiveWell's cost shares the outcome with its staff's forgone pay and the new money other donors gave through it; Open Philanthropy's money is all shifted, as it is valued, so it adds none."
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "With credit by share of resources on, GiveWell's cost shares the outcome with its staff's forgone pay. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24)."
     },
     {
       "id": "next_dollar_freed_for_grants",

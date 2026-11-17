@@ -732,15 +732,15 @@
       "label": "Donations influenced per dollar of CEARCH's cost",
       "format": "number",
       "formula": "(method1_weight * other_orgs_money_moved + method2_weight * avg(idea1_amount_moved, idea2_amount_moved, idea3_amount_moved) * (years_modelled - impact_delay_years)) / (method1_weight + method2_weight) / total_costs",
-      "explainer": "Donations influenced per dollar of CEARCH's cost (gross): what credit by share of resources counts as the donors' contribution (times the new-money share), the same formula as every meta model."
+      "explainer": "Donations influenced per dollar of CEARCH's cost (gross)."
     },
     {
       "id": "donor_cost_share",
       "section": "staff_pay",
       "label": "Share of the outcome credited to CEARCH's cash budget",
       "format": "percent",
-      "formula": "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))",
-      "explainer": "The site's one formula for every meta charity (src/engine/moved-money.ts): with credit by share of resources on, the donors whose new money the organisation moves are contributors too, alongside staff's forgone pay, so the outcome is shared with them. Off, this is 100%."
+      "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+      "explainer": "The site's one formula for every meta charity (src/engine/moved-money.ts): with credit by share of resources on, staff's forgone pay is a contribution too, so the outcome is shared with them. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24). Off, this is 100%."
     },
     {
       "id": "ea_dollars_per_donor_dollar",

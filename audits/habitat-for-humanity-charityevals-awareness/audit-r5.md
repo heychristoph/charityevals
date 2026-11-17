@@ -1,6 +1,6 @@
 # Audit r5: habitat-for-humanity-charityevals-awareness (scoped verification, credit rule 2.24)
 Result: 1.501e-5 uov/$ = 0.0075 years of healthy life per 1,000 dollars (combined range 1.1e-5 to 4.97; model's own ranges -0.078 to +4.47). Verdict: pass.
-Model-sha: 5cc0a5f3f65b2dae1751f66c2ef81105a241626649c4c1fa43823e810a10eb41
+Model-sha: 1d358628230bf1be024f61db23e558e51a883a9038c95e51c799dcc4f3632eef
 Scope: only the credit re-judgement for he_coalition_share, the unchanged shares us_coalition_share, us_hfhi_share, he_hfhi_share, and the classes on us_attribution_share and he_attribution_share.
 Preflight: pass (only low simulation notes and the stale generated/distributions.json, ignored).
 Previous round: r4 had no open high or medium.
@@ -23,3 +23,5 @@ Previous round: r4 had no open high or medium.
 
 ## Drivers
 Unchanged: he_recipient_share, he_counterfactual_adj, he_attribution_share (he_coalition_share times he_hfhi_share, all judgments), the public-money cost rows. The Home Equals coalition share is a judgment anchored on the US branch; the Year 3 funder list is the nearest document and could be cited.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

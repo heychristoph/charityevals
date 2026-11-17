@@ -1,6 +1,6 @@
 # Audit: founders-pledge-charityevals, round 3 (scoped verification of round 2's fixes)
 Result: 0.01591 uov/$ = 7.955 years of healthy life per 1,000 dollars (combined range 2.05–30.9; the model's own ranges alone 6.77–10.68); cause median 0.06519 (×122, explained in the summary: about sixteen dollars to recommended charities per dollar spent; INV-15 passes). Verdict: pass.
-Model-sha: a559482493a7ab10db1a8b170545a9015d0d6cbbdb5fcfbb0279ab26cb5843ab
+Model-sha: efe8e3ff60e2ddc53ca8bba30c8e22a2abfa8a04d38433d8aa5911c712aef290
 Scope: unchanged (whole group, 2025, costs £9,147,150 = $12.05M); only round 2's changed rows were checked.
 Mechanical: lint none shown by audit-model (no findings printed), invariants none; check.ts "all models valid"; simulation-check stable (5% 0.337×, 50% 1×, 95% 2.65× the best guess). normalization-audit not re-run (scoped round; no rule change).
 Previous round (round 2): finding 1 (donor_cost_share missing other giving's new money) resolved; finding 2 (SilverLining, Save the Children) resolved; finding 3 (£7.3M) resolved; finding 4 (Bandhan, Resolve to Save Lives in lists) resolved; finding 5 (93% anchor, system change / global security wording) resolved.
@@ -33,7 +33,7 @@ Previous round (round 2): finding 1 (donor_cost_share missing other giving's new
 5. The destination valuation and `other_giving_value`. A members' and partners' survey would improve the model most.
 
 Verdict: pass (no high or medium finding).
-Model-sha: a559482493a7ab10db1a8b170545a9015d0d6cbbdb5fcfbb0279ab26cb5843ab
+Model-sha: efe8e3ff60e2ddc53ca8bba30c8e22a2abfa8a04d38433d8aa5911c712aef290
 
 Re-stamped (orchestrator, 14 Nov 2026): on merge the summary's "more than ten times its peers" corrected to "about eight times" (7.9× the global-health median); no value changed.
 
@@ -44,3 +44,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline 8.222 → 8.284 (+0.75%), 12 rows changed, against 593b1bba.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

@@ -155,8 +155,7 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
 
 /** The model's own row read by informed_money_value: the spending its research or advice changed (US$),
  * kept apart from `money_moved` (money moved gross, valued net), so an organisation with both (funds and
- * advice) needs no row of its own. All shifted, it brings in no donors' new money: the credit by share of
- * resources never reads it. */
+ * advice) needs no row of its own. */
 export const INFORMED_MONEY = "informed_money";
 
 /** Rows written only for research or advice that changes how money is spent (`informed`): all shifted.
@@ -301,11 +300,11 @@ export const SUCCESS_ADJUSTMENT_FORMULA =
  * INV-18 checks that those models, and only those, read it. */
 export const MARGINAL_ASSUMPTION = "marginal_vs_past_average";
 
-/** Credit by share of resources (`$resource_shares`) for every meta model, one formula: when on, the
- * donors whose new money the organisation moves are co-contributors, alongside staff's forgone pay.
- * `moved_per_dollar` is the gross money moved (or influenced) per dollar of the organisation's cost; the
- * spending its research or advice changed (`informed_money`, all shifted) brings no new money and stays out. */
-export const META_DONOR_COST_SHARE_FORMULA = "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))";
+/** Credit by share of resources (`$resource_shares`) for every meta model, one formula: when on, staff's
+ * forgone pay is a co-contribution (and any genuine co-funder's gift, in the model's own row). The donors
+ * and funders whose money the organisation moves give because of it: they are mobilised, under
+ * `mobiliser_share`, never in this denominator (docs/normalization.md 2.24; INV-12 checks it). */
+export const META_DONOR_COST_SHARE_FORMULA = "1 / (1 + if($resource_shares, salary_sacrifice, 0))";
 
 /** The career-change step, the mirror of staff salary sacrifice (docs/normalization.md 2.8): a programme
  * that moves people into high-impact jobs gets, per career changed, their forgone pay for the years they

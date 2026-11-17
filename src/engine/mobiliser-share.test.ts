@@ -40,8 +40,8 @@ describe("the shared formulas", () => {
     expect(rows.some((r) => r.formula.includes("gh_mobiliser_share"))).toBe(false);
   });
 
-  it("the credit by share of resources still counts donors' new money (it leaves the toggle in a later step)", () => {
-    expect(META_DONOR_COST_SHARE_FORMULA).toBe("1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))");
+  it("the credit by share of resources counts co-funders only: the donors whose money is moved are under the share", () => {
+    expect(META_DONOR_COST_SHARE_FORMULA).toBe("1 / (1 + if($resource_shares, salary_sacrifice, 0))");
   });
 });
 

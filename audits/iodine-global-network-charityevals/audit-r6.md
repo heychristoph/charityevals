@@ -1,6 +1,6 @@
 # Audit: iodine-global-network-charityevals, round 6 (follow-up after wording fixes)
 Result: 0.006344 uov/$ = 3.17 years of healthy life per 1,000 dollars (combined range 0.094-107). Verdict: pass.
-Model-sha: 1ca17dcee25630cac87db129bee8d7d95ad2751746e7ed556eaf1d3af3cde19c
+Model-sha: e724713db6908f74314d10b28733b285750863963a14063ab7f36e4127fe09dd
 Scope: wording changes since round 5 only.
 Preflight: pass as in round 5 (not re-run; headline unchanged at 3.17176).
 Previous round: finding 1 (medium, summary quotes "about 2.4") resolved: the summary now reads "The result, about {{result}} years of healthy life per 1,000 dollars". Finding 2 (low, Davao partners unnamed) resolved: the explainer now says "its report names no other partner, and the rest allows for partners not named"; it reads correctly and adds no new factual claim.
@@ -18,3 +18,5 @@ None needed (no new factual claim).
 Unchanged.
 
 Verdict: pass
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

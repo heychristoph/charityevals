@@ -1,6 +1,6 @@
 # Audit: giving-what-we-can-charityevals, round 4 (scoped verification)
 Result: 0.1123 uov/$ = 56.17 years of healthy life per 1,000 dollars (combined range 10.9–289.7; joint low–high of the model's own ranges 27.2–105.0); cause median 0.06841 (×821). Verdict: pass.
-Model-sha: e5f988f7e4e4b5d95bff036ccac29b7964040f61e404f168ffb5325db0572b02
+Model-sha: d237a55e4ca2c545f6422ca989707963fa3a549cd4edcc2a48bd8a7bfa764ee4
 Scope: unchanged from rounds 1 to 3. Scoped verification round: only the change since round 3 (the catastrophic-risk part of `value_destinations`: hand-typed `avg(#charityevals:center-for-ai-safety, #charityevals:far-ai, #charityevals:machine-intelligence-research-institute, #charityevals:nuclear-threat-initiative)` replaced by `#cause:catastrophic-risk`, normalization.md 2.8 "November 2026: a cause's average, read live"; the explainer, summary and write-up that follow from it). No source changed, so none re-fetched.
 Mechanical: invariants none (check.ts "all models valid"; scripts/normalization-audit.ts on the full library: INV-18 and every other invariant 0 violations for this model); lint none. `scripts/audit-model.ts` prints one "high" INV-18 finding (NaN → NaN), a false positive of the script, not of the model (finding 1).
 Previous round: r3 had no findings; r2's one low (effective-share fact typed from the model's own defaults) is unchanged, still accepted.
@@ -36,3 +36,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline 55.63 → 55.71 (+0.15%), 9 rows changed, against 593b1bba.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

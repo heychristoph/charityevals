@@ -857,6 +857,9 @@ const CAREER = /\bcareer (change|plan|switch|shift)s?\b/i;
 /** A result an evaluator already states as counterfactual value, in dollars of effective donations (CEARCH). */
 const ALREADY_NET = /\beffective-giving donation value\b|\bequivalent donations\b/i;
 
+/** Rows a credit by share of resources may not read: the money an organisation moves is mobilised (2.24). */
+const DONOR_MONEY = /(^|_)(new_money_share|moved_per_dollar|money_moved|informed_money)$/;
+
 /** INV-12: every model that values money moved, raised or influenced, or career changes, goes through
  * the site's one method: the shared rows of src/engine/moved-money.ts, word for word, on the path, each
  * at the mobiliser's share (docs/normalization.md 2.24; INV-22 checks it is applied once). */
@@ -924,12 +927,12 @@ export function inv12(lib: Library): InvariantReport {
         const md = m.byId.get("missing_data_adj");
         if (!ev || !md || !sameFormula(md.formula, "$missing_data_discount"))
           violations.push({ inv: "INV-12", model: m.id, where: "informed_money_value steps", detail: `informed_money_value needs an evidence_adj row and missing_data_adj = $missing_data_discount (evidence_adj ${ev ? "present" : "missing"}, missing_data_adj ${md?.formula ?? "missing"})` });
-        // All shifted, the spending it changed brings in no donors' new money.
-        const feeding = m.byId.has("donor_cost_share") ? upstream(m, "donor_cost_share") : new Set<string>();
-        for (const p of informedSets)
-          if (feeding.has(`${p}${INFORMED_MONEY}`))
-            violations.push({ inv: "INV-12", model: m.id, where: `donor_cost_share ${p}${INFORMED_MONEY}`, detail: `donor_cost_share reads ${p}${INFORMED_MONEY} (spending its research or advice changed, all shifted): only money moved gross × new_money_share counts as donors' new money` });
       }
+      // The donors and funders whose money it moves are mobilised, under the mobiliser's share (2.24): the
+      // credit by share of resources (co-funders only) reads no money moved.
+      for (const id of m.byId.has("donor_cost_share") ? upstream(m, "donor_cost_share") : [])
+        if (DONOR_MONEY.test(id))
+          violations.push({ inv: "INV-12", model: m.id, where: `donor_cost_share ${id}`, detail: `donor_cost_share reads ${id}: the donors and funders whose money the organisation moves are mobilised (under ${MOBILISER_SHARE}, docs/normalization.md 2.24), not co-funders; the credit by share of resources counts staff's forgone pay and genuine co-funders only` });
       // Other rows read where shifted money would have gone only through the shared rows (the gain of
       // money all shifted is shifted_dollar_value).
       // A cost valued where the money would have gone (a product with the prior as a factor) is no gain.

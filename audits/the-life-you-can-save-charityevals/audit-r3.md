@@ -1,6 +1,6 @@
 # Audit: the-life-you-can-save-charityevals, round 3 (verification of the round-2 fix)
 Result: 14.03 years of healthy life per 1,000 dollars; cause median 0.0686 uov/$ (×204). Verdict: pass.
-Model-sha: ba849d7fd88e61dd4f6f0bb29b52339fdf87465b6afd6881ef50ac9217daf777
+Model-sha: b4732fd2459ad91562be7b2cac7d3af68c0f4a8c89ec1979c8ee53c5e8bf6b05
 Scope: only the round-2 finding (next-dollar figure), fixed in e683fb67.
 Mechanical: `scripts/audit-model.ts` shows one medium (far-above, judged in rounds 1 and 2), no high; the bottom line is 14.03 years per $1,000.
 Previous round: finding 1 (next-dollar room from the Australian balance sheet): resolved.
@@ -33,3 +33,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline 11.2 → 11.21 (+0.15%), 9 rows changed, against 593b1bba.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.
