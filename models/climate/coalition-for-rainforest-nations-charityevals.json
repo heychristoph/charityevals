@@ -451,7 +451,7 @@
         "page": "p. 3",
         "quote": "Just over USD 6.7 billion has been committed by multilateral climate funds and bilateral donors through REDD+, of which USD 4.6 billion went to results-based payments"
       },
-      "explainer": "Every results-based payment for reduced deforestation committed since 2010 (Norway, Germany, the Green Climate Fund, the World Bank's Carbon Fund and others), in every REDD+ country, not only those CfRN works with: the attribution row below sets CfRN's spending against all the resources in the same countries, so the countries' share cancels (it would scale the tonnes and the resources alike)."
+      "explainer": "Every results-based payment for reduced deforestation committed since 2010 (Norway, Germany, the Green Climate Fund, the World Bank's Carbon Fund and others), in every REDD+ country, not only those CfRN works with: the support row below sets CfRN's spending against the readiness support in the same countries, so the countries' share cancels (it would scale the tonnes and the resources alike)."
     },
     {
       "id": "readiness_committed_2010_2021",
@@ -468,22 +468,6 @@
         "quote": "the remaining USD 1.8 billion to readiness and implementation"
       },
       "explainer": "Grants for the kind of work CfRN does: helping countries build forest monitoring, reference levels and REDD+ strategies."
-    },
-    {
-      "id": "forest_country_redd_2010_2021",
-      "section": "reach",
-      "label": "Forest countries' own REDD+ spending committed, 2010-2021",
-      "format": "usd",
-      "value": 10100000000,
-      "kind": "observed",
-      "source": {
-        "title": "Forest Declaration Assessment (February 2022), Reward results by countries and jurisdictions",
-        "url": "https://forestdeclaration.org/wp-content/uploads/2022/08/Forest-rewards-Progress-since-2014-low-res.pdf",
-        "retrieved": "2026-11-15",
-        "page": "p. 3",
-        "quote": "USD 10.1 billion has been committed by forest country governments for activities under their REDD+ plans"
-      },
-      "explainer": "The forest countries' own budgets for their REDD+ plans: enforcement, land-use planning and forest agencies, the work that actually keeps forest standing. The assessment notes it is unclear how much was spent."
     },
     {
       "id": "fda_years",
@@ -511,25 +495,11 @@
       "explainer": "About $460 million a year. Commitments, not disbursements: some is paid years later or never (the shortfall sits in rbp_evidence_adj; the attribution row divides by commitments too)."
     },
     {
-      "id": "forest_country_spent_vs_donors",
+      "id": "redd_support_per_rbp_dollar",
       "section": "reach",
-      "label": "Forest countries' REDD+ spending as a share of their commitments, against donors'",
-      "format": "multiple",
-      "value": {
-        "low": 0.5,
-        "best": 1,
-        "high": 1.5
-      },
-      "kind": "judgment",
-      "explainer": "The assessment warns that it is \"unclear to what extent\" the forest countries' $10.1 billion was spent (p. 3), and that less than half of the climate funds' REDD+ pledges had been disbursed (p. 6). Donors' commitments and the countries' are both counted as committed, so what matters is whether the countries spent a smaller share of theirs than donors did. Our judgment: about the same (1), from half to one and a half times."
-    },
-    {
-      "id": "redd_resources_per_rbp_dollar",
-      "section": "reach",
-      "label": "All REDD+ resources per dollar of results-based payments",
-      "format": "multiple",
-      "formula": "(rbp_committed_2010_2021 + readiness_committed_2010_2021 + forest_country_redd_2010_2021 * forest_country_spent_vs_donors) / rbp_committed_2010_2021",
-      "explainer": "Payments, readiness grants and the forest countries' own budgets over payments, about 3.6: for each dollar paid for results, about $2.60 more of others' money works on the same forests. Used for both forest branches: the governments selling credits under Article 6 run the same REDD+ programmes, with the same readiness support."
+      "label": "Readiness and implementation support per dollar of results-based payments",
+      "formula": "readiness_committed_2010_2021 / rbp_committed_2010_2021",
+      "explainer": "Grants for the kind of work CfRN does (forest monitoring, reference levels, REDD+ strategies) over the payments for results: about $0.39 of support per dollar paid. The base of CfRN's share in both forest branches: the payers and the forest countries' own budgets, which carry out the protection, are under the mobiliser's share."
     },
     {
       "id": "itmo_finance_per_year",
@@ -1140,16 +1110,25 @@
       "section": "adjustments",
       "label": "Results-based finance: share of the outcome that wouldn't have happened anyway",
       "format": "percent",
-      "formula": "1",
-      "explainer": "1: the cost per tonne is from a comparison with a synthetic control, so the forest that would have stood anyway is already out of it; whether the money would have reached the countries without CfRN is its share of the resources (one question per adjustment)."
+      "formula": "@climate.advocacy_share_of_policy_win",
+      "explainer": "Whether the payments would have reached the countries without outside support at all: donors and forest governments had their own reasons to strike these deals. No study splits it; the reference class is the site's shared figure for the part of a won climate policy that is due to outside groups at all (facts: climate.advocacy_share_of_policy_win, 30%, 10% to 60%; Burstein & Linton 2002). The forest that would have stood anyway is already out of the cost per tonne (a synthetic control)."
+    },
+    {
+      "id": "rbf_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Results-based finance: CfRN's share of the support behind the payments",
+      "format": "percent",
+      "formula": "rbf_spend / (rbp_per_year * redd_support_per_rbp_dollar)",
+      "explainer": "CfRN's spending on this branch over all the readiness and implementation support a year that lets countries measure, report and claim payments (Forest Declaration Assessment 2022: $1.8 billion over ten years beside $4.6 billion of payments), the work done alongside it: under 1%. The donors who pay and the governments that do the protecting are under the mobiliser's share, not in this denominator. Measured over all REDD+ countries, which scales the tonnes alike."
     },
     {
       "id": "rbf_attribution_share",
       "section": "adjustments",
-      "label": "Results-based finance: CfRN's share of the resources behind the forest kept",
+      "label": "Results-based finance: share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "rbf_spend / (rbp_per_year * redd_resources_per_rbp_dollar)",
-      "explainer": "CfRN's spending on this branch over every REDD+ resource a year: the donors' payments, readiness grants and the forest countries' own budgets (Convention 2). About a tenth of a percent: the payers and the governments that do the protecting are almost all of it. Measured over all REDD+ countries, which scales the tonnes alike."
+      "formula": "rbf_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "rbf_implementation_adj",
@@ -1172,7 +1151,7 @@
       "section": "adjustments",
       "label": "Results-based finance: adjustments that read no shared value",
       "format": "multiple",
-      "formula": "rbf_evidence_adj * rbf_counterfactual_adj * rbf_attribution_share * rbf_implementation_adj",
+      "formula": "rbf_evidence_adj * rbf_counterfactual_adj * rbf_attribution_share_shared * rbf_implementation_adj",
       "explainer": "Split out so the share of fossil tonnes (fuel_share) can be weighted by branch without reading a shared value; the missing-data discount and next-dollar factor are the same for both forest branches."
     },
     {
@@ -1180,7 +1159,7 @@
       "section": "adjustments",
       "label": "Results-based finance: all adjustments",
       "format": "multiple",
-      "formula": "rbf_credit_before_shared * rbf_missing_data_adj"
+      "formula": "rbf_evidence_adj * rbf_counterfactual_adj * rbf_attribution_share * rbf_implementation_adj * rbf_missing_data_adj"
     },
     {
       "id": "rbf_credit",
@@ -1203,16 +1182,25 @@
       "section": "adjustments",
       "label": "Carbon markets: share of the outcome that wouldn't have happened anyway",
       "format": "percent",
-      "formula": "1",
-      "explainer": "1: as for results-based finance; whether the market would work without CfRN is its share of the resources."
+      "formula": "@climate.advocacy_share_of_policy_win",
+      "explainer": "As for results-based finance: whether the market would work without outside support at all, at the site's shared figure for the part of a won climate policy due to outside groups (facts: climate.advocacy_share_of_policy_win)."
+    },
+    {
+      "id": "itmo_attribution_share_shared",
+      "section": "adjustments",
+      "label": "Carbon markets: CfRN's share of the support behind the forest credit market",
+      "format": "percent",
+      "formula": "itmo_spend / (itmo_finance_per_year * redd_support_per_rbp_dollar)",
+      "explainer": "CfRN's spending on Article 6 negotiations and national implementation over all the support behind the forest credits sold a year, taken in the same proportion to the money paid as readiness support is to donors' payments (redd_support_per_rbp_dollar). The buyers who pay and the governments that run the programmes are under the mobiliser's share, not in this denominator. CfRN is one of many negotiating parties and groups on Article 6; that is inside this share."
     },
     {
       "id": "itmo_attribution_share",
       "section": "adjustments",
-      "label": "Carbon markets: CfRN's share of the resources behind the forest credit market",
+      "label": "Carbon markets: share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "itmo_spend / (itmo_finance_per_year * redd_resources_per_rbp_dollar)",
-      "explainer": "CfRN's spending on Article 6 negotiations and national implementation over all the resources behind the forest credits sold a year: the buyers' payments, the sellers' REDD+ programmes and readiness support, in the same proportion as for donors' payments (redd_resources_per_rbp_dollar). About a quarter of a percent at the best guesses. CfRN is one of many negotiating parties and groups on Article 6, so its share of the rules is small too; that is inside this share of all the market's resources."
+      "formula": "itmo_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "itmo_implementation_adj",
@@ -1235,14 +1223,14 @@
       "section": "adjustments",
       "label": "Carbon markets: adjustments that read no shared value",
       "format": "multiple",
-      "formula": "itmo_evidence_adj * itmo_counterfactual_adj * itmo_attribution_share * itmo_implementation_adj"
+      "formula": "itmo_evidence_adj * itmo_counterfactual_adj * itmo_attribution_share_shared * itmo_implementation_adj"
     },
     {
       "id": "itmo_total_adj",
       "section": "adjustments",
       "label": "Carbon markets: all adjustments",
       "format": "multiple",
-      "formula": "itmo_credit_before_shared * itmo_missing_data_adj"
+      "formula": "itmo_evidence_adj * itmo_counterfactual_adj * itmo_attribution_share * itmo_implementation_adj * itmo_missing_data_adj"
     },
     {
       "id": "itmo_credit",
@@ -1412,7 +1400,7 @@
       "section": "adjustments",
       "label": "CfRN's share of the resources: outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(rbf_dalys_raw * rbf_attribution_share + itmo_dalys_raw * itmo_attribution_share + fin_dalys_raw * fin_attribution_share_shared) / (rbf_dalys_raw + itmo_dalys_raw + fin_dalys_raw)",
+      "formula": "(rbf_dalys_raw * rbf_attribution_share_shared + itmo_dalys_raw * itmo_attribution_share_shared + fin_dalys_raw * fin_attribution_share_shared) / (rbf_dalys_raw + itmo_dalys_raw + fin_dalys_raw)",
       "explainer": "Weighted by each branch's healthy years before adjustments, ignoring sign; nothing upstream of the result reads it (Convention 4)."
     },
     {

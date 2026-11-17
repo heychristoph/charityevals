@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "global-alliance-for-improved-nutrition",
   "owner": "charityevals",
-  "summary": "GAIN, a Geneva foundation, spent 61.6 million dollars on programmes in its year to June 2025: helping governments and food companies fortify salt, flour, oil and rice (1.55 billion people reached, by its own count), building markets and small businesses for nutritious food in Africa and Asia, workplace nutrition, and food-systems planning and policy. We estimate about {{result}} years of healthy life per 1,000 dollars, almost all from fortification: children's later earnings from iodized salt and less anaemia from iron-fortified food. The biggest uncertainty is how much of the yearly benefit of long-running national fortification programmes depends on GAIN's support (we credit GAIN with about a tenth of the resources, and a quarter of the benefit as depending on support), and everything but the anaemia effect, which comes from evaluations of real fortification programmes, is discounted for missing data. The dollar is a past average (a year's spending over what it reached, not a price per item), so the result is scaled by our figure for GAIN's next dollar. With every judgment this uncertain, the result is mostly uncertainty: from a few hundredths to several years per 1,000 dollars.",
+  "summary": "GAIN, a Geneva foundation, spent 61.6 million dollars on programmes in its year to June 2025: helping governments and food companies fortify salt, flour, oil and rice (1.55 billion people reached, by its own count), building markets and small businesses for nutritious food in Africa and Asia, workplace nutrition, and food-systems planning and policy. We estimate about {{result}} years of healthy life per 1,000 dollars, almost all from fortification: children's later earnings from iodized salt and less anaemia from iron-fortified food. The biggest uncertainty is how much of the yearly benefit of long-running national fortification programmes depends on GAIN's support (we count a quarter of the benefit as depending on outside support, and credit GAIN with about {{row:ff_attribution_share_shared}} of that support), and everything but the anaemia effect, which comes from evaluations of real fortification programmes, is discounted for missing data. The dollar is a past average (a year's spending over what it reached, not a price per item), so the result is scaled by our figure for GAIN's next dollar. With every judgment this uncertain, the result is mostly uncertainty: from a few hundredths to several years per 1,000 dollars.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Global Alliance for Improved Nutrition (GAIN)",
@@ -781,7 +781,20 @@
         "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "Most of the 1.55 billion people would keep eating fortified food without this year's support: the laws, mills' equipment and premix supply are in place. Programmes do slip without monitoring, premix credit and technical help (salt iodization has reverted where support stopped, GiveWell notes). A quarter, from 10% to 50%, a judgment."
+      "explainer": "Most of the 1.55 billion people would keep eating fortified food without this year's outside support (GAIN's and the other organisations'): the laws, mills' equipment and premix supply are in place. Programmes do slip without monitoring, premix credit and technical help (salt iodization has reverted where support stopped, GiveWell notes). A quarter, from 10% to 50%, a judgment."
+    },
+    {
+      "id": "ff_others_vs_gain",
+      "section": "adjustments",
+      "label": "Other organisations' support for the same programmes, relative to GAIN's",
+      "format": "multiple",
+      "value": {
+        "low": 0.5,
+        "best": 0.7,
+        "high": 2
+      },
+      "kind": "judgment",
+      "explainer": "No published accounting splits the outside support for national fortification programmes among the organisations that give it, so there is no reference class. Other international and national organisations (UNICEF, Nutrition International, the Food Fortification Initiative, the Iodine Global Network and others) support many of the same programmes, and a programme typically has several outside supporters; GAIN's own spending is about a cent per person reached. Our judgment: together about 0.7 times GAIN's spending, from 0.5 to 2. Governments' regulating and monitoring is not counted here: it is under the mobiliser's share."
     },
     {
       "id": "ff_company_cost_per_person",
@@ -801,28 +814,24 @@
         "quote": "approximately $0.05/person/year for iodine and $0.12/person/year for iron fortification of wheat and maize flour",
         "retrieved": "2026-11-15"
       },
-      "explainer": "What salt producers and millers spend on the fortificant, equipment and processing: 5 cents for iodized salt, 12 cents for iron-fortified flour; 8 cents for GAIN's mix of foods, the two as the range."
+      "explainer": "What salt producers and millers spend on the fortificant, equipment and processing: 5 cents for iodized salt, 12 cents for iron-fortified flour; 8 cents for GAIN's mix of foods, the two as the range. The cost of the resources the support mobilises: netted from the benefit in ff_compliance_uov."
     },
     {
-      "id": "ff_others_vs_gain",
+      "id": "ff_attribution_share_shared",
       "section": "adjustments",
-      "label": "Other organisations' and governments' resources for the same programmes, relative to GAIN's",
-      "format": "multiple",
-      "value": {
-        "low": 0.5,
-        "best": 1,
-        "high": 2
-      },
-      "kind": "judgment",
-      "explainer": "No published accounting splits national fortification programmes' resources among the organisations that support them, so there is no reference class. Governments regulate and monitor, and other international and national organisations support many of the same programmes: together about as much as GAIN, from half to twice."
+      "label": "GAIN's share of the outside support behind the fortification programmes",
+      "format": "percent",
+      "formula": "1 / (1 + ff_others_vs_gain)",
+      "explainer": "GAIN's fortification spending over its own plus the other organisations' that support the same programmes. The governments that mandate and monitor and the food companies that fortify (about 8 cents a person a year, Horton, Mannar and Wesley 2008) are under the mobiliser's share, not in this denominator."
     },
     {
       "id": "ff_attribution_share",
       "section": "adjustments",
-      "label": "GAIN's share of the resources behind the fortification programmes",
+      "label": "Share of credit used: GAIN's share of the support behind the fortification programmes",
+      "credit": "win",
       "format": "percent",
-      "formula": "ff_spend / (ff_spend * (1 + ff_others_vs_gain) + ff_people * ff_company_cost_per_person)",
-      "explainer": "GAIN's fortification spending over everyone's: its own, the other organisations' and governments', and food companies' cost of fortifying for the 1.55 billion people (about 120 million dollars), about a tenth."
+      "formula": "ff_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ff_implementation_adj",
@@ -883,6 +892,7 @@
       "id": "vc_attribution_share",
       "section": "adjustments",
       "label": "GAIN's share of resources, value chains",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.3,
@@ -948,17 +958,26 @@
       "explainer": "Many of the companies (often large exporters and multinationals) have their own health programmes; half the change, from 30% to 80%, is due to the programmes GAIN helped start."
     },
     {
-      "id": "wf_attribution_share",
+      "id": "wf_attribution_share_shared",
       "section": "adjustments",
-      "label": "GAIN's share of resources, workforce",
+      "label": "GAIN's share of the technical help, workforce",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.25,
-        "high": 0.5
+        "low": 0.4,
+        "best": 0.7,
+        "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "The employers pay for the food and the programmes; GAIN gives technical help. A quarter, from 10% to 50%."
+      "explainer": "GAIN's share of the technical help behind the programmes. The employers, who pay for the food and the programmes, are under the mobiliser's share, not here. GAIN gives the help itself or through the Workforce Nutrition Alliance, which it runs with the Consumer Goods Forum. Our judgment: 70%, from 40% to 90%."
+    },
+    {
+      "id": "wf_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: GAIN's share of the technical help, workforce",
+      "credit": "win",
+      "format": "percent",
+      "formula": "wf_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "wf_missing_data_adj",
@@ -997,15 +1016,15 @@
     {
       "id": "pol_attribution_share_shared",
       "section": "adjustments",
-      "label": "GAIN's share of resources behind the plans",
+      "label": "GAIN's share among the partners behind the plans",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
+        "low": 0.1,
+        "best": 0.2,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Governments' own staff, FAO, GIZ, the World Bank and others work on the same plans: 15%, from 5% to 30%."
+      "explainer": "GAIN's share among the outside partners that help draft the plans: FAO, GIZ, the World Bank and others work on the same ones. Governments' own staff, who adopt and carry out the plans, are under the mobiliser's share, not here. Anchor: four or more partners in a typical country, an equal split of a quarter or less. 20%, from 10% to 40%."
     },
     {
       "id": "mobiliser_share",
@@ -1319,6 +1338,14 @@
       "explainer": "Fortification branch only: the children's later earnings, valued at the shared value of a doubled income."
     },
     {
+      "id": "ff_compliance_uov",
+      "section": "outcome",
+      "label": "Food companies' cost of fortifying, units of value (negative)",
+      "format": "number",
+      "formula": "-ff_people * ff_company_cost_per_person * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @survey_consumption.lmy_na_consumption_per_person_2024 * @survey_consumption.survey_to_na_world_median) * ff_counterfactual_adj * ff_attribution_share * ff_implementation_adj * leverage_funging_adj * wait_discount * ff_missing_data_adj",
+      "explainer": "The cost of the resources the support mobilises (docs/normalization.md 2.24): what producers spend fortifying (in 2008 dollars, so a little low), passed on to buyers, valued as money lost by those who pay (dollars over consumption per person in low- and middle-income countries on the survey scale, as for a won rule's costs, 2.21), with the branch's counterfactual, credit and delivery, not its evidence rows."
+    },
+    {
       "id": "uov_morbidity",
       "section": "outcome",
       "label": "Illness as a share",
@@ -1353,7 +1380,7 @@
       "section": "outcome",
       "label": "Units of value from a year of GAIN's work",
       "format": "number",
-      "formula": "(uov_deaths + uov_stillbirths + uov_income + uov_from_daly) * (1 + unmodelled_benefits_adj) + uov_morbidity",
+      "formula": "(uov_deaths + uov_stillbirths + uov_income + uov_from_daly) * (1 + unmodelled_benefits_adj) + uov_morbidity + ff_compliance_uov",
       "explainer": "The supplementary shares add to the modelled value through their value-weighted average, which gives each term its own shares."
     },
     {

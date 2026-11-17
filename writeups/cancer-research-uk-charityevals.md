@@ -38,7 +38,7 @@ The policy branch follows the government's impact assessment of the law. Its fig
 - **Effect:** 8 percentage points of each covered cohort kept from smoking.
 - **Health gain:** 3 healthy years lost per young smoker, arriving about 40 years later and discounted.
 - **Side effects:** less second-hand smoke ({{row:adv_secondhand_smoke_share}} more), less the harm of those who vape instead (3%).
-- **Credit:** a fifth of the whole campaign took place this year. Campaigning groups had 40% of the resources behind the law, and Cancer Research UK a quarter of theirs: a tenth in all.
+- **Credit:** a fifth of the whole campaign took place this year. Cancer Research UK has a quarter of the campaigning groups' resources behind the law; the government and Parliament that made it are credited through the mobiliser's share.
 - **Years counted:** the site's shared years a won reform counts.
 
 The information branch works at UK scale:
@@ -59,7 +59,7 @@ Each branch is multiplied by the shared "How much we count a programme whose res
 - **Years brought forward** (2 to 15) and **Cancer Research UK's share of the field** (0.3% to 1.2%).
 - **The next dollar against the past average:** 30% to 85%.
 
-Research is about 56% of the result, policy about 38% and information about 6%. Per pound, the policy work does about twenty times as well as research and the information work about twice as well, but together they are 7% of the spending.
+Research is about 34% of the result, policy about 62% and information about 4%. Per pound, the policy work does about sixty times as well as research and the information work about twice as well, but together they are 7% of the spending.
 
 ### Biggest uncertainties
 

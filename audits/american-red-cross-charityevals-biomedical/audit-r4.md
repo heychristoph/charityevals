@@ -1,6 +1,6 @@
 # Audit: american-red-cross-charityevals-biomedical, round 4
 Result: 3.621e-5 uov/$ = 0.0181 years of healthy life per 1,000 dollars (combined range 0.0027–0.121); cause median 0.1085 (×0.167). Verdict: pass.
-Model-sha: afc0445bee500ab25514f600ad6683367604645010a0188fd159812bc96eeb37
+Model-sha: 0df293db62500d920077869db21422ce157a87685053aaf39a9a7f3e2c7704cc
 Scope: scoped to the changes since round 3 (`git diff a0d083b9 b76ba3ed`): `bld_rbc_revenue_share` (0.6 → 0.55, range 0.5–0.7 → 0.45–0.7, explainer) and the write-up's headline 0.018, plus whether the summary's "about a third of the resources" and "about 3% of the raw outcome" still hold. Everything else is as in round 3 and not rechecked.
 Mechanical: lint 0 high / 0 medium / 1 low (the spread, which the summary states). Invariants: none. check.ts: all valid. Simulation stable: 5% 0.22×, 50% 1×, 95% 4.07× the best guess. Nothing written to generated/.
 Previous round: round-3 lows #1 and #3 (unsourced anchors) were left as stated judgments, which is acceptable: they are ranged judgment rows that name their anchors. No high or medium finding was open.
@@ -29,3 +29,5 @@ Verdict: pass
 Re-stamped (16 Nov 2026): Pre-audit gate cleanup: judgments' explainers name their reference class (sourced); bystanders per arrest read from @cardiac_arrest.ohca_bystanders_per_arrest and ln 2 from @givewell_shared.ln_consumption_per_doubling (same best values); some judgment ranges widened where no evidence anchors them; no peer-model comparisons in explainers. Mechanical: headline unchanged, against 14a782cd.
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.

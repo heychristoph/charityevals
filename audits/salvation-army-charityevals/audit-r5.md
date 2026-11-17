@@ -1,6 +1,6 @@
 # Audit: salvation-army-charityevals, round 5 (verification of fc4276a5)
 Result: 5.239e-6 daly/$ = 0.005239 years of healthy life per 1,000 dollars (combined range 0.000029-0.31 as check.ts prints it); cause median 0.1169 (x0.045). Verdict: pass.
-Model-sha: c9c78c4428689e027c84c18db0883966dbfbd588589fc5eb58d83c61096c360a
+Model-sha: ef5c2e7c796b86b2544abe0a50bcaa8dd7afd694a54738d4dbced42cb94ddd7d
 Scope: verification of fc4276a5 only; not a full re-audit. Changed row: inkind_cash_equivalence (formula).
 Mechanical: `npx tsx scripts/audit-model.ts models/global-health/salvation-army-charityevals.json` lint 0 high / 1 medium (far-below, 0.0448x the median; judged correct in earlier rounds) / 0 low, no invariant violations; `npx tsx scripts/check.ts salvation-army-charityevals` all models valid, 0.0052; `npx tsx scripts/simulation-check.ts salvation-army-charityevals` stable (5% 0.572, 50% 1, 95% 1.77 x best guess). normalization-audit not run (verification round).
 Previous round: audit-r4 finding 1 resolved (veterans_served * veterans_help_value is now in the services term of the numerator, times @aid_value.inkind_services_vs_cash, and in the denominator).
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read f
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b370f40.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.

@@ -46,9 +46,9 @@ The win is counted like every won policy on the site: the advocates' shared part
 - 20% of the clearing avoided as moved elsewhere;
 - half of Guyana's effect for other countries' payments, many of which reward results years after the fact.
 
-**Results-based payments.** Donors committed about $460 million a year (Forest Declaration Assessment 2022). Readiness grants and the forest countries' own budgets add about $2.60 for each dollar paid. CfRN's share of all those resources is about a tenth of a percent.
+**Results-based payments.** Donors committed about $460 million a year (Forest Declaration Assessment 2022). Readiness and implementation support adds about $0.39 for each dollar paid. CfRN's share of that support is about {{row:rbf_attribution_share_shared}}; the donors who pay and the governments that protect the forest are credited through the mobiliser's share. We count {{row:rbf_counterfactual_adj}} of the payments as due to outside support at all, the site's shared figure for a won climate policy.
 
-**Carbon markets.** CfRN's share of the resources behind the forest-credit market is set the same way, about a quarter of a percent; the market's size cancels out. Credits sell at about $15. We judge that half go to countries, half of whose credits replace their own cuts at home, with the smoke those cuts would have removed. Other buyers (airlines, taxed companies, voluntary buyers) would otherwise have bought another credit or paid a tax; we count only the real cuts in the credits they would have bought, 12%.
+**Carbon markets.** CfRN's share of the support behind the forest-credit market is set the same way, about {{row:itmo_attribution_share_shared}}; the market's size cancels out, and the counterfactual is the same 30%. Credits sell at about $15. We judge that half go to countries, half of whose credits replace their own cuts at home, with the smoke those cuts would have removed. Other buyers (airlines, taxed companies, voluntary buyers) would otherwise have bought another credit or paid a tax; we count only the real cuts in the credits they would have bought, 12%.
 
 **Pandemic risk.** The forest kept cuts the risk by the shared figures.
 

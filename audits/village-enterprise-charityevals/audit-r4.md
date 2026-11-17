@@ -17,10 +17,12 @@ Mechanical: audit-model reports no high finding; the one medium (far-above) is t
 No findings.
 
 Verdict: pass. Findings: 0 high, 0 medium, 0 low.
-Model-sha: 5b99ed2fd8810e7c7858c437293201f4f99249965bb63b76ec20fe45c349778e
+Model-sha: f905017dc7f412a7643f87e2babca615cf04354547d931d33b2cabf16f1ca2ef
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 32c25050.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.

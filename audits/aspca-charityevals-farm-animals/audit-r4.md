@@ -1,7 +1,7 @@
 # Verification round (scoped)
 
 Result: -12.32 ced/$ = -0.001355 years of healthy life per $1,000 (combined range -0.0338 to -5.4e-5), the sign flipped by the compliance-cost chain (was +4.09e-5). Verdict: **pass** (0 high, 0 medium, 2 low).
-Model-sha: f26d3a3209caadf9336869407c067209f203a76badd921bdaab95cf36551efef
+Model-sha: d42101e31cc69f8c30566b5b8fe15ba9b4c79405d86c65244137b3a85f4e7424
 
 Scope: only the rule change applied mechanically (docs/normalization.md 2.21 and 2.22): the compliance-cost chain (ca_pop_share, def_egg_states_vs_ca, def_cost_egg_share, def_compliance_uov, compliance_uov_per_donor_dollar, ced_from_uov, ced_per_donor_dollar), def_opposition_risk_cut replacing def_p_override_with, the shared facts in facts/farm_animal_laws.json, and the summary and write-up farm sentences. audit-model.ts: 0 findings; check.ts: all models valid.
 
@@ -33,3 +33,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 7c76c006.
