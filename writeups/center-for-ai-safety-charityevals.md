@@ -1,6 +1,6 @@
 ### Summary
 
-The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.03 to about 71.
+The Center for AI Safety (CAIS) works to lower the chance that AI causes a global catastrophe. It does research and builds benchmarks, runs a free compute cluster for outside safety researchers, advocates and trains newcomers. Our model of all its programmes in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about {{low}} to about {{high}}.
 
 ### What the charity does
 
@@ -24,15 +24,15 @@ The deaths averted are valued like every death on the site, across the world's a
 
 ### How the model works
 
-The research, compute cluster and advocacy are one branch, valued as typical AI safety work. The course is a training branch. It counts the students who go on to work on AI risk (5%, as a judgment), the years they stay in the work, and the course's share of the credit for that work (4%, its cost against theirs). A policy-win branch is set to zero, because CAIS itself won no law or standard in 2024.
+The research, compute cluster and advocacy are one branch, valued as typical AI safety work. The course is a training branch. It counts the students who go on to work on AI risk (5%, as a judgment), the years they stay in the work, and takes the course to be the cause of that work in full (their employers, who pay for it, are covered by the share credited to the charity below, not by splitting the credit). A policy-win branch is set to zero, because CAIS itself won no law or standard in 2024.
 
 The adjustments, each applied to its own branch:
 
 | Adjustment | Value | Reason |
 |---|---|---|
-| How far a typical project's effect applies to CAIS's work | 1.2 | Labs use its benchmarks; the cluster's projects vary in relevance |
-| Work no one else would have done now | 0.65 | 70% of cluster users said their projects needed it; others also build benchmarks |
-| CAIS's share of the resources behind its outputs | 0.58 for the AI work, 0.95 for the course (about 0.61 overall) | Outside researchers write the cluster's papers; benchmarks were made with Scale AI |
+| How far a typical project's effect applies to CAIS's work | 1.2 for the AI work, 1 for the course | Labs use its benchmarks; the cluster's projects vary in relevance; nothing is published on the alumni's roles |
+| Work no one else would have done now | 0.65 for the AI work, 1 for the course | 70% of cluster users said their projects needed it; others also build benchmarks |
+| CAIS's share of the resources behind its outputs | 0.58 for the AI work, 0.95 for the course (about 0.85 overall, since the course carries most of the value) | Outside researchers write the cluster's papers; benchmarks were made with Scale AI |
 | Funging by large funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about CAIS's effect on the risk is measured |
 
@@ -42,14 +42,15 @@ CAIS holds about a year and a half of spending in reserve after two years of sur
 
 ### What drives the result
 
-That is because Rethink's typical AI project cuts much less expected harm per dollar than its nuclear or pandemic projects; nothing particular to CAIS causes it. Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 3.3. The course adds under a tenth.
+Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 8.5. The course carries about four fifths of the result: the students who go on to work on AI risk, valued at a typical dollar of that work, are worth far more than the course costs.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.4% to 20% by 2100, which moves the result from 0.2 to 11.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.2 to 15, the largest swing.
-- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (0.7 to 2.5).
+- **How likely an AI catastrophe is.** The setting's range runs from 0.38% to 50% by 2100, which moves the result from 0.30 to 39.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.56 to 38, the largest swing.
+- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (1.7 to 6.2).
 - **The discount rate and the years a cut counts.** Each moves the result several-fold.
+- **How many course students go on to work on AI risk.** No alumni survey is published; the 5% we assume runs from 1% to 15% (1.3 to 10).
 - **How CAIS's work compares with a typical project.** Its benchmarks are widely used, but use isn't the same as lower risk.
 
 ### What isn't modelled

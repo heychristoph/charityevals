@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "evidence-action",
   "owner": "givewell",
+  "mobilised": true,
   "bulk": true,
   "summary": "Adds chlorine to piped water supplies in India so people drink safer water. GiveWell's spreadsheet \"In-line Chlorination CEA (Evidence Action, India), 2023\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values. Chlorinating a piped supply costs cents per person a year and GiveWell's sheet credits safer water with averting many young children's deaths from diarrhoea.",
   "source": {
@@ -25,7 +26,8 @@
     "assumptions": {
       "daly_per_child_death": 50.54461739130435,
       "uov_per_daly": 2.3,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -71657,7 +71659,8 @@
       "label": "Adjustment for value lost due to diverting funding away from alternative spending opportunities (\"leverage\")",
       "section": "simple_cea",
       "unit": "UoV",
-      "formula": "if($resource_shares, 1, (sum(total_additional_units_of_value_gained, total_additional_units_of_value_gained_2, total_additional_units_of_value_gained_3, total_additional_units_of_value_gained_4) / sum(total_units_of_value_gained_before_accounting_for_value_lost, total_units_of_value_gained_before_accounting_for_value_lost_2, total_units_of_value_gained_before_accounting_for_value_lost_3, total_units_of_value_gained_before_accounting_for_value_lost_4)))",
+      "formula": "sum(total_additional_units_of_value_gained, total_additional_units_of_value_gained_2, total_additional_units_of_value_gained_3, total_additional_units_of_value_gained_4) / sum(total_units_of_value_gained_before_accounting_for_value_lost, total_units_of_value_gained_before_accounting_for_value_lost_2, total_units_of_value_gained_before_accounting_for_value_lost_3, total_units_of_value_gained_before_accounting_for_value_lost_4)",
+      "explainer": "Credit by share of resources doesn't change this row: the states' spending, and the later GiveWell and Evidence Action money this grant commits, follow from the programme, so the value that money would otherwise have produced stays netted, and their part is under the charity's share of the good (mobiliser_share).",
       "expected": 0.4752464855,
       "format": "percent"
     },
@@ -71761,11 +71764,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar",
       "label": "Units of value per dollar",
       "section": "bottom_line",
-      "formula": "(final_cost_effectiveness_estimate_pulled_from_below_for_visi * cash_benchmark) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((final_cost_effectiveness_estimate_pulled_from_below_for_visi * cash_benchmark) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

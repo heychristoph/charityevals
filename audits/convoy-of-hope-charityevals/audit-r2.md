@@ -1,6 +1,6 @@
 # Audit: convoy-of-hope-charityevals, round 2
 Result: 5.926e-5 daly/$ = 0.0593 years of healthy life per 1,000 dollars (combined range 0.0127–0.277); cause median 0.0687 (×0.86). Verdict: pass.
-Model-sha: a40740d9cfd481b401c507d2e18cb5996ea04baebd5d5321758f1e731754f5a9
+Model-sha: 71ad5561a6dde097b0755a342eed76a99ff1148f0ae5e9918a73691242909810
 Scope: verification round on the 11 round-1 findings and the rows they changed; scope and accounts unchanged from round 1 (all four programme lines, cost = Convoy's own cash with overhead).
 Mechanical: lint 0/0/0; invariants none; check.ts valid (own build, no `expected` values); simulation stable (5% 0.566, 50% 1.00, 95% 1.77 × best guess); every formula constant in the changed rows is a row, `1`, or `365`.
 Previous round: round 1 (5 medium, 6 low). Branch shares now: children's feeding 66% (4,513 of 6,856 healthy years before the unmodelled share), agriculture and women 15%, partner resourcing 9%, disasters abroad 6%, medicines 2%.
@@ -48,3 +48,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.

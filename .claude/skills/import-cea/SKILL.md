@@ -127,6 +127,14 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
     defaults in `SECTORS`, scripts/link-resource-shares.py), `salary_gap`, `salary_sacrifice`,
     `donor_cost_share = … if($resource_shares, salary_sacrifice, 0)`, and the per-donor-dollar row.
   - For GiveWell models, scripts/link-resource-shares.py does all of this.
+- **Mobilised or own delivery** (`mobilised`; normalization.md 2.24, INV-22): `true` where the good is
+  done with resources others commit only because of the organisation (money moved, a government's or
+  company's delivery of what it advised or won, research adopted), `false` for own delivery. If true: a
+  row `mobiliser_share = $mobiliser_share` in an `ours` section, the row after `output.native`
+  multiplied by it (the shared money rows already are), and `mobiliser_share: 1` in
+  `evaluator.assumptions`. No double cut: a credit share with the adopter's own resources in its
+  denominator is re-judged to co-advocates only (theirs in `published`). scripts/link-mobiliser-share.py
+  does the field, row and pin from its RULES (by evaluator and kind of programme): run it last.
 
 ## 5. Our steps to the scale (layers B and C)
 
@@ -164,7 +172,7 @@ Impact) SADs models `chicken_vs_person: 0.463966` (`@aim_sads.chicken_2024`) wit
   `$win_years_counted` (the evaluator's years in `published`, or "date without the campaign" = expected date +
   `$win_years_counted`); the wait until it takes effect and the years counted are discounted at `$discount_rate`;
   cage-free and broiler pledges kept read `@sad_factors.commitment_fulfilment_cage_free` / `_broiler`; coalition
-  credit is `if($resource_shares, <charity's share of all groups' resources>, <evaluator's credit, kind judgment>)`.
+  credit is `if($resource_shares, <charity's share of the campaigning groups' resources>, <evaluator's credit, kind judgment>)`.
   Meals replaced or animals spared multiply by `@sad_factors.production_response` (`published` 1).
 - **Meta charities** (evaluators, fundraisers, effective-giving and research organisations: money
   moved, raised or influenced; INV-12, normalization.md 2.8): never the evaluator's own multiple of

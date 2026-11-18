@@ -1,0 +1,27 @@
+# Audit round 3 (scoped verification): Global Alliance for Improved Nutrition (GAIN)
+
+## Scope
+Credit rule 2.24, step 5: only the rows the re-judged shares touched. `ff_attribution_share_shared` and `ff_attribution_share` (class win), `ff_others_vs_gain`, the removed row `ff_company_cost_per_person`, `wf_attribution_share_shared` and `wf_attribution_share` (class win), `vc_attribution_share` (class delivery), `pol_attribution_share_shared`. The rest of the model was not re-audited.
+
+Result: 3.82 years of healthy life per 1,000 dollars at the defaults (mobiliser share 100%), up from 0.64. check.ts: all models valid. The move is almost all the fortification branch (its share of credit goes from about 10% to 59%, a factor of six).
+
+## Checked
+- Fortification denominator: now GAIN's fortification spending and other organisations' support only. Governments and food companies are out (they are the mobilised). ff_spend cancels in the formula, so the share is 1 / (1 + ff_others_vs_gain) = 59% (77% to 40%). No co-supporter dropped.
+- `ff_counterfactual_adj` asks a different question from the share. Its label is the share of the year's benefit that depends on the support programmes keep getting (all support, GAIN's and the others'); the share then splits that support. The laws and mills already in place (government and company commitments that would stand anyway) are cut in the counterfactual, not in the share. No party is cut twice and none is left out of both.
+- `ff_others_vs_gain` 0.7 (0.3 to 1.5): see finding 3.
+- Workforce: the employers who pay for the food are out of the denominator (they are also cut by `wf_counterfactual_adj`, 0.5, once). GAIN's technical help and the Workforce Nutrition Alliance (which it runs) are in. Class win fits (companies adopt programmes). The 0.7 is a stated judgment; the explainer says what it rests on.
+- Value chains: class delivery (GAIN's own grants and investments); the businesses' own money stays in the denominator as co-funders, with `vc_counterfactual_adj` separate. Acceptable; if the businesses' money is judged to come only because of GAIN's grants, it would be mobilised instead.
+- Policy: governments are out; the partners named (FAO, GIZ, World Bank) are in. Anchor in the explainer is an unsourced count of partners (finding 4).
+- Text rules: no peer comparison, no "effective altruism". Naming UNICEF, Nutrition International and others as supporters is not a comparison.
+
+## Findings
+| # | Severity | Row | Finding | Fix |
+|---|---|---|---|---|
+| 1 | medium | `summary` | Stale: says "we credit GAIN with about a tenth of the resources"; the fortification share used is now 59% of the outside support (before the mobiliser's share). | Reword: "we credit GAIN with about 60% of the outside support for these programmes, and a quarter of the benefit as depending on support". |
+| 2 | medium | `ff_company_cost_per_person` (removed) | Under 2.24 (costs) and 2.21, the mobilised resources' cost is netted from the benefit. The companies' fortifying cost (about 8 cents a person a year, about 120 million dollars a year, eight times GAIN's own fortification spending) left the denominator and is now in no row. Its size against the benefit is small (benefit-cost ratios for iodine and iron fortification are far above 1), roughly 1 to 3% of the fortification value, but the rule asks for the row, and the cited Horton, Mannar and Wesley figure now sits in an explainer with no source object. | Restore `ff_company_cost_per_person` (0.05, 0.08, 0.12, with its source, page and quote) and add a negative row valuing it as money lost by consumers (2.21's recipe, years and wait of the branch, read through `ff_attribution_share`), added to `uov` outside the evidence step. Or state in the explainer why it is passed on in prices and is negligible, if the owner decides so. |
+| 3 | low | `ff_others_vs_gain` | 0.7 is a judgment with no data anchor; the explainer says there is no reference class but not what 0.7 rests on. The low end (0.3, GAIN doing 77% of the outside support) is hard to defend for 1.55 billion people across many national programmes with several supporters each (GAIN's fortification spending is about 1 cent per person reached), and the high end (1.5) is lower than the old 2. Dropping governments from the old 1.0 justifies a lower best, so 0.7 is defensible; the share it gives (59%, 40% to 77%) is not over-credited by more than about 15% against 1.0. | Range 0.5 / 0.7 / 2; add to the explainer what it rests on: GAIN's own spending per person reached is small, and national programmes typically have several outside supporters (UNICEF, Nutrition International, Food Fortification Initiative, Iodine Global Network, bilateral donors). |
+| 4 | low | `pol_attribution_share_shared` | The anchor "four or more partners named in a typical country" has no source, and an equal split among four or more is 25% or less, so best 0.25 sits at the ceiling the explainer states while the range runs up to 45%. | Best 0.2, range 0.1 to 0.4, or cite where the partners are named. |
+| 5 | low | `ff_attribution_share_shared` | `ff_spend` cancels; the formula can be `1 / (1 + ff_others_vs_gain)` (same value). `ff_counterfactual_adj`'s explainer says "this year's support" without saying it means all support, the others' too. | Simplify the formula; add "GAIN's and the others'" to that explainer. |
+
+Verdict: fix needed
+Model-sha: 8da46231123574b7df39c74ff0d31fabdf7ca5ff44635500477516bf96c9411e

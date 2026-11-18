@@ -126,6 +126,7 @@ def main():
         p = ROOT / "models/grants/ambitious-impact" / f"{mid}.json"
         m = json.loads(p.read_text())
         if link(m, cfg):
+            import_module("link-mobiliser-share").apply(m)  # mobilised or own delivery (docs/normalization.md 2.24)
             p.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
             n += 1
     print(f"linked {n} models")

@@ -94,4 +94,4 @@ manifest_path.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + "\
 imported = [e["model_id"] for e in manifest if e.get("status") == "imported" and (not only or e["model_id"] in only)]
 if imported:
     subprocess.run([sys.executable, str(Path(__file__).with_name("link-parameters.py")), "--only", ",".join(imported)], check=True)
-    print("Next: python3 scripts/link-resource-shares.py, link-givewell-shared.py, link-fx.py, givewell-judgment-kinds.py")
+    print("Next: python3 scripts/link-resource-shares.py, link-givewell-shared.py, link-fx.py, givewell-judgment-kinds.py, link-mobiliser-share.py (last: it classes each import and gives the mobilised ones the share's row and pin)")

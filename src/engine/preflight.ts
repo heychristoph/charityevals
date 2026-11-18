@@ -3,7 +3,7 @@
 // hand (docs/normalization.md 2.7-2.10). Each returns problems; `high` blocks the audit.
 import { evaluate } from "./expr";
 import { ALLOWED_LITERALS, comparisons, namesFor } from "./lint";
-import { CONCEPTS, PREFLIGHT_CONCEPTS, likeness, measuredInOwnPopulation, words, type Waivers } from "./invariants";
+import { CONCEPTS, MOBILISED_COST, PREFLIGHT_CONCEPTS, costsOutsideShare, likeness, measuredInOwnPopulation, words, type Waivers } from "./invariants";
 import { assumptionValues, bottomLine, pickValue, type FactRow, type Library, type ResolvedModel, type ResolvedRow } from "./model";
 import { rowsFeeding, sensitivity } from "./sensitivity";
 import { unitIssues } from "./units";
@@ -53,6 +53,37 @@ export function unitProblems(lib: Library, m: ResolvedModel, exempt: (r: Resolve
     if (Math.abs(best) > 1.5 && !/\b(multiple|times|ratio|×)\b/i.test(r.label))
       out.push({ severity: Math.abs(best) >= 5 ? "high" : "medium", check: "units", where: r.id, message: `a percent-format input of ${fmt(best)} reads as ${fmt(best * 100)}%: a percent row holds a fraction (0.45 for 45%); divide the value by 100 or, for a multiple, use format "multiple"` });
   }
+  return out;
+}
+
+// --- The mobiliser's share: costs take it with the benefit ------------------------------------------
+
+/** Every row a row reads, itself included. */
+function feeding(m: ResolvedModel, id: string, seen = new Set<string>()): Set<string> {
+  if (seen.has(id)) return seen;
+  seen.add(id);
+  m.byId.get(id)?.deps.forEach((d) => feeding(m, d, seen));
+  return seen;
+}
+
+/** A win's or research result's costs (compliance costs 2.21, public money 2.23) are part of the good done
+ * with the mobilised resources, so the mobiliser's share applies to the benefit minus the cost
+ * (docs/normalization.md 2.24): each cost row of a win or research branch sits downstream of the branch's
+ * used share (it reads `<branch>_attribution_share`, itself or through a row such as total_adj), and its
+ * part of the headline halves when the share is halved. */
+export function creditProblems(lib: Library, m: ResolvedModel): Problem[] {
+  const out: Problem[] = [];
+  if (m.owner !== "charityevals" || !m.output) return out;
+  const path = rowsFeeding(m);
+  for (const r of m.rows) {
+    if (!path.has(r.id) || !MOBILISED_COST.test(r.id) || r.deps.some((d) => MOBILISED_COST.test(d))) continue;
+    const share = m.byId.get(r.id.replace(MOBILISED_COST, "$1attribution_share")) ?? m.byId.get("attribution_share");
+    if (!share || !share.credit || share.credit === "delivery") continue;
+    if (!feeding(m, r.id).has(share.id))
+      out.push({ severity: "high", check: "credit", where: r.id, message: `a cost of a ${share.credit} branch that doesn't read the branch's used share (${share.id}): the mobiliser's share applies to the benefit minus the cost, so multiply the cost by ${share.id} (or by the row that carries it, such as total_adj)` });
+  }
+  for (const x of costsOutsideShare(lib, m))
+    out.push({ severity: "high", check: "credit", where: x.row, message: `its part of the result is ${fmt(x.full)} at the default share and ${fmt(x.half)} at half the share, not half of it: the mobiliser's share must reach this cost exactly once, through its branch's used share` });
   return out;
 }
 

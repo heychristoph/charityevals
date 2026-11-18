@@ -872,15 +872,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Unused (fb_people 0); the template's figure. The template's range is kept so the branch works if switched on; at 0 spending it doesn't move the result."
+      "explainer": "Not used: no one is trained or placed (fb_people is 0). The skeleton's figure: 1 when no other programme trained or placed the same people. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_deaths_per_million",
@@ -1120,7 +1120,7 @@
       "formula": "1"
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1128,33 +1128,68 @@
       "formula": "1"
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic food work: ALLFED's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.45,
-        "best": 0.62,
-        "high": 0.85
+        "low": 0.5,
+        "best": 0.66,
+        "high": 0.88
       },
       "kind": "judgment",
-      "explainer": "As the nuclear branch: ALLFED's own spending beside its volunteers', its president's unpaid and its partners' time. 0.62 (0.45 to 0.85), our judgment."
+      "explainer": "As the nuclear branch: ALLFED's own spending beside its volunteers', its president's unpaid and its co-authors' time. 0.66 (0.5 to 0.88), our judgment."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic food work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear resilience work: ALLFED's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.45,
-        "best": 0.62,
-        "high": 0.85
+        "low": 0.5,
+        "best": 0.66,
+        "high": 0.88
       },
       "kind": "judgment",
-      "explainer": "ALLFED's share of all resources behind the work (Convention 2): its own $1.02M, beside its 61 volunteers (Part I line 6; at about 4 hours a week for 46 weeks at $25 an hour, about $0.28M), its president's unpaid time (54 hours a week, Part VII, no pay from ALLFED: at about $50 an hour for 50 weeks, about $0.135M), academic co-authors' time and the government staff in its workshops (about $0.2M, our judgment), so about 1.02 ÷ (1.02 + 0.28 + 0.135 + 0.2) = 0.62. 0.62 (0.45 to 0.85), our judgment; the low end if volunteers give a day a week, the high end if partners' time is small."
+      "explainer": "ALLFED's share of the resources of those who did the work (Convention 2): its own $1.02M, beside its 61 volunteers (Part I line 6; at about 4 hours a week for 46 weeks at $25 an hour, about $0.28M), its president's unpaid time (54 hours a week, Part VII, no pay from ALLFED: at about $50 an hour for 50 weeks, about $0.135M) and academic co-authors' time (about $0.1M, our judgment), so about 1.02 ÷ (1.02 + 0.28 + 0.135 + 0.1) = 0.66. The government staff in its workshops are the audience that may act on the work: their time is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.66 (0.5 to 0.88), our judgment; the low end if volunteers give a day a week, the high end if co-authors' time is small."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear resilience work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1162,12 +1197,30 @@
       "formula": "1"
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
       "explainer": "Unused: no field-building: fixed at 1, a branch with no spending.",
       "formula": "1"
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

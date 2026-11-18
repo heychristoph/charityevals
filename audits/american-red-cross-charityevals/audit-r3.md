@@ -1,6 +1,6 @@
 # Audit: american-red-cross-charityevals, round 3 (verification of the r2 fixes)
 Result: 4.296e-6 daly/$ = 0.004296 years of healthy life per 1,000 dollars (combined range 0.001812–0.01018); cause median 0.2028 (×0.021). Verdict: pass.
-Model-sha: 9a4c1c5ede5409c7ee2e6a6e224339f7e68e19ed79cd24c29234d09441bcacc7
+Model-sha: 944928d36398e8497c6795d223fbe0422dbf230b3073d953560e9c40c4aac8e3
 Scope: scoped to the two r2 fixes only: volunteer_hours (now 10,300,000, FY2025) and the hf_counterfactual_adj explainer (NFPA sentence).
 Mechanical: lint not rerun beyond audit-model (far-below medium as in r2, summary gives the reason), invariants none, check.ts all valid, simulation-check stable (5% 0.613, 50% 1, 95% 1.56 x best guess), normalization-audit not rerun (coordinator: none).
 Previous round: r2 finding 1 (volunteer_hours 9M vs 10.3M) resolved: row is 10,300,000, observed, FY2025 report with the quoted sentence; result 0.004428 to 0.004296 (-3.0%), as predicted. r2 finding 2 (unsourced NFPA 99%/16%) resolved: sentence removed, replaced by a sourced one. r2 finding 3: no action needed.
@@ -19,10 +19,14 @@ Previous round: r2 finding 1 (volunteer_hours 9M vs 10.3M) resolved: row is 10,3
 Unchanged: uov_per_daly, inc_cf_large, uov_per_ln_consumption, unmodelled_benefits_adj, large_vs_poorest_fifth. The explainers still make no comparison with other charities or models and no effective-altruism mention.
 
 Verdict: pass
-Model-sha: 9a4c1c5ede5409c7ee2e6a6e224339f7e68e19ed79cd24c29234d09441bcacc7
+Model-sha: 944928d36398e8497c6795d223fbe0422dbf230b3073d953560e9c40c4aac8e3
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the typed text or pointed at the evaluator view, and typed results in the summary made placeholders or recomputed at the 30% mobiliser share (no value moves). Mechanical: headline unchanged, against bc9e3979.

@@ -1345,15 +1345,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Not used: the field-building branch counts nothing for CEPI (fb_people is 0), so this row has no effect; the template's value and range are kept."
+      "explainer": "Not used: no one is trained or placed (fb_people is 0). The skeleton's figure: 1 when no other programme trained or placed the same people. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_deaths_per_million",
@@ -1598,7 +1598,7 @@
         "high": 2100000000
       },
       "kind": "judgment",
-      "explainer": "Anchored on CEPI's own plan, US$3.6 billion for 2027-2031 ('The full CEPI 3.0 strategy requires US$3.6 billion', cepi.net/investors), $720M a year, plus other public and philanthropic funders of the mission's vaccine, regulatory and manufacturing work (BARDA's and the EU's HERA's rapid-response vaccine programmes, the Gates Foundation, Wellcome, national institutes), which we put at about half as much again (no published total of the mission's funding exists): $1.05B a year, our judgment, $0.7B (CEPI's own spending and little else) to $2.1B (others twice CEPI). The developers' co-investment is left out: bio_attribution_share counts it."
+      "explainer": "Anchored on CEPI's own plan, US$3.6 billion for 2027-2031 ('The full CEPI 3.0 strategy requires US$3.6 billion', cepi.net/investors), $720M a year, plus other public and philanthropic funders of the mission's vaccine, regulatory and manufacturing work (BARDA's and the EU's HERA's rapid-response vaccine programmes, the Gates Foundation, Wellcome, national institutes), which we put at about half as much again (no published total of the mission's funding exists): $1.05B a year, our judgment, $0.7B (CEPI's own spending and little else) to $2.1B (others twice CEPI). The developers' co-investment is left out: bio_attribution_share_shared counts it."
     },
     {
       "id": "mission_effort_years",
@@ -1714,7 +1714,7 @@
       "explainer": "Not used: CEPI spends nothing in this branch (its cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, with the family's bounds as the range."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1727,17 +1727,43 @@
       "explainer": "Not used: CEPI spends nothing in this branch (its cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, with the family's bounds as the range."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.5,
-        "best": 0.7,
+        "low": 0.55,
+        "best": 0.75,
         "high": 0.9
       },
       "kind": "judgment",
-      "explainer": "CEPI's share of the resources behind the work it funds: its awardees (companies, universities, manufacturers) add their own staff, facilities and money, and governments and Gavi pay for trials' sites and later procurement. 0.7, our judgment, 0.5 to 0.9: CEPI's awardees are mostly firms that co-invest."
+      "explainer": "CEPI's share of the resources behind the work it funds: its awardees (companies, universities, manufacturers) add their own staff, facilities and money, and governments pay for some trial sites. Governments' and Gavi's later procurement is the adopters', under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.75, our judgment, 0.55 to 0.9: CEPI's awardees are mostly firms that co-invest. No published figure gives the awardees' co-investment, so the share has no reference class. The adopters' procurement and delivery costs are not netted from the branch (the rule's deferred netting of public money, docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "end_evidence_adj",
@@ -1766,20 +1792,29 @@
       "explainer": "1: that others would have made the vaccines later is end_years_brought_forward (Convention 5), so it isn't counted again here. Down to 0.8 for vaccines their makers would have developed now anyway with their own money (Bavarian Nordic's mpox vaccine was licensed before CEPI's trials)."
     },
     {
-      "id": "end_attribution_share",
+      "id": "end_attribution_share_shared",
       "section": "adjustments",
       "label": "Endemic branch: CEPI's share of the resources behind these vaccines",
       "format": "percent",
       "value": {
-        "low": 0.3,
-        "best": 0.5,
+        "low": 0.35,
+        "best": 0.55,
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "CEPI is the main funder of Lassa, Nipah and Rift Valley fever vaccines, but chikungunya and mpox vaccines were also paid for by their makers (Valneva, Bavarian Nordic), the EU and the US, and trial countries and Gavi pay for delivery. 0.5, our judgment, 0.3 to 0.8."
+      "explainer": "CEPI is the main funder of Lassa, Nipah and Rift Valley fever vaccines, but chikungunya and mpox vaccines were also paid for by their makers (Valneva, Bavarian Nordic), the EU and the US. Rollout after licensure by countries and Gavi is the adopters', under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.55, our judgment, 0.35 to 0.8."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "end_attribution_share",
+      "section": "adjustments",
+      "label": "Endemic branch: share of credit used",
+      "format": "percent",
+      "formula": "end_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1792,7 +1827,16 @@
       "explainer": "Not used: CEPI spends nothing in this branch (its cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, with the family's bounds as the range."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1805,7 +1849,16 @@
       "explainer": "Not used: CEPI spends nothing in this branch (its cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, with the family's bounds as the range."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1816,6 +1869,15 @@
       },
       "kind": "judgment",
       "explainer": "Not used: CEPI spends nothing in this branch (its cost share is 0), so its weight is 0 and this counts nothing. 1, a typical project's, the default for a branch without evidence either way, with the family's bounds as the range."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

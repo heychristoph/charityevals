@@ -1,7 +1,7 @@
 # Audit: american-cancer-society-charityevals, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 6.005e-6 daly/$ = 0.006005 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: 9816cddd822001b892a500e0444d6f085720edd065affb74ce62f98fce07f5fe
+Model-sha: 4bb6562d557902add03336057714146f2d4b10c5c3573c3dc8ba728199ed0f8e
 
 Scope: scoped verification of the line on `adv_share_burden_averted`. No formula changed.
 
@@ -23,7 +23,7 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 9816cddd822001b892a500e0444d6f085720edd065affb74ce62f98fce07f5fe
+Model-sha: 4bb6562d557902add03336057714146f2d4b10c5c3573c3dc8ba728199ed0f8e
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 
 Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against 1807d315.
@@ -33,3 +33,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 5724c36c.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.

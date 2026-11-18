@@ -22,7 +22,7 @@ def load(name):
     return mod
 
 
-cs, lp, lr = load("convert-sheet"), load("link-parameters"), load("link-resource-shares")
+cs, lp, lr, lm = load("convert-sheet"), load("link-parameters"), load("link-resource-shares"), load("link-mobiliser-share")
 sys.setrecursionlimit(20000)
 
 SHEET = "1jMzMHzilvceamu5UzyKdG_eZ8IJ5-6WOBs2nmZGeozE"
@@ -167,6 +167,7 @@ def main():
             if "formula" in r: r["formula"] = r["formula"].replace("0.6931471805599453", "ln(2)")
         m["evaluator"]["name"] = "SoGive"
         m["evaluator"]["assumptions"]["resource_shares"] = 0
+        lm.apply(m)  # mobilised or own delivery (docs/normalization.md 2.24)
         (OUT / f"{m['id']}.json").write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
         print(m["id"], st)
 

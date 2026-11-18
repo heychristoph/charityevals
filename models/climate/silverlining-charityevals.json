@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "silverlining",
   "owner": "charityevals",
-  "summary": "SilverLining (Washington, DC) funds and coordinates research on solar radiation modification (cooling the planet by reflecting a little sunlight) and works with governments and others on how it is researched and governed; this model values what it added to that field in 2019-2024: its own research grants and science, its engagement work and grants abroad, other funders' money it directed, and the US federal research line (NOAA's Earth's Radiation Budget, about $8M a year since 2020) its policy work helped start, against its spending over those years ($6.5M in 2024). A dollar of the field's work is worth a share of the heat deaths a use of cooling would avert, put into tonnes of CO₂ by how much a tonne warms: a 30% chance of a use this century, 0.6°C for 50 years, the field's work adding a tenth of its benefit by improving how it is used, over all the field's funding until then. At the defaults a dollar given averts the heat deaths of about 1.0 tonne of CO₂, about 0.19 years of healthy life per $1,000; cooling acts on the warming itself, so the decision the field informs weighs hundreds of billions of tonnes, and the field is small (about $44M a year). Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. The result is mostly uncertainty, resting on judgments no study settles (how much the field's work improves a use, whether there is one), and every branch is discounted for missing data.",
+  "summary": "SilverLining (Washington, DC) funds and coordinates research on solar radiation modification (cooling the planet by reflecting a little sunlight) and works with governments and others on how it is researched and governed; this model values what it added to that field in 2019-2024: its own research grants and science, its engagement work and grants abroad, other funders' money it directed, and the US federal research line (NOAA's Earth's Radiation Budget, about $8M a year since 2020) its policy work helped start, against its spending over those years ($6.5M in 2024). A dollar of the field's work is worth a share of the heat deaths a use of cooling would avert, put into tonnes of CO₂ by how much a tonne warms: a 30% chance of a use this century, 0.6°C for 50 years, the field's work adding a tenth of its benefit by improving how it is used, over all the field's funding until then. At the defaults a dollar given averts the heat deaths of about 0.3 tonnes of CO₂, about 0.060 years of healthy life per $1,000; cooling acts on the warming itself, so the decision the field informs weighs hundreds of billions of tonnes, and the field is small (about $44M a year). Whether cooling is used at all is one event, so at the default risk setting the counted figure is near zero. The result is mostly uncertainty, resting on judgments no study settles (how much the field's work improves a use, whether there is one), and every branch is discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: SilverLining",
@@ -908,12 +908,21 @@
       "kind": "judgment"
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "res_attribution_share",
       "section": "adjustments",
       "label": "Research: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "res_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "res_attribution_share_shared * mobiliser_share",
+      "credit": "research"
     },
     {
       "id": "dir_counterfactual_adj",
@@ -933,10 +942,10 @@
       "section": "adjustments",
       "label": "Directed money: its share of the work behind the funders' choices",
       "format": "percent",
-      "explainer": "Our judgment, 60% (30% to 90%): the funders' own staff and the researchers who pitched the projects share the credit for where the money went.",
+      "explainer": "Our judgment, 65% (40% to 90%): the researchers who pitched the projects and the host institutions' own staff, computing and overheads share the credit for the research the money paid for. The funders and their own staff, who chose and paid, are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24).",
       "value": {
-        "low": 0.3,
-        "best": 0.6,
+        "low": 0.4,
+        "best": 0.65,
         "high": 0.9
       },
       "kind": "judgment"
@@ -946,8 +955,9 @@
       "section": "adjustments",
       "label": "Directed money: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "dir_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "dir_attribution_share_shared * mobiliser_share",
+      "credit": "research"
     },
     {
       "id": "pol_counterfactual_adj",
@@ -1018,8 +1028,9 @@
       "section": "adjustments",
       "label": "Federal line: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "pol_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win"
     },
     {
       "id": "eng_counterfactual_adj",
@@ -1052,8 +1063,9 @@
       "section": "adjustments",
       "label": "Engagement: share of credit used",
       "format": "percent",
-      "explainer": "Its share of the resources behind the outcome; it applies whichever way credit is shared.",
-      "formula": "eng_attribution_share_shared"
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24).",
+      "formula": "eng_attribution_share_shared * mobiliser_share",
+      "credit": "research"
     },
     {
       "id": "missing_data_adj",
@@ -1113,7 +1125,7 @@
       "label": "Share of credit used (outcome-weighted average, for reading only)",
       "format": "percent",
       "explainer": "The outcome-weighted average of the branches' own rows, for reading only: each branch applies its own, and no row on the way to the outcome reads this one.",
-      "formula": "attribution_share_shared"
+      "formula": "(res_downstream * res_counterfactual_adj * res_attribution_share + eng_downstream * eng_counterfactual_adj * eng_attribution_share + dir_downstream * dir_counterfactual_adj * dir_attribution_share + pol_downstream * pol_counterfactual_adj * pol_attribution_share) / (res_downstream * res_counterfactual_adj + eng_downstream * eng_counterfactual_adj + dir_downstream * dir_counterfactual_adj + pol_downstream * pol_counterfactual_adj)"
     },
     {
       "id": "total_adj",

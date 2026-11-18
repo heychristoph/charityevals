@@ -13,14 +13,14 @@ Ideas become policy when governments and agencies adopt them. An advance market 
 ### How the model works
 
 - **Cost:** an average year of spending since 2002 from the audited accounts (CGD Europe included from 2014), in 2025 prices, with 2002-2004 judged before the shared price index begins. That comes to 80% of 2025's spending.
-- **Pneumococcal vaccine (about 80% of the result):**
+- **Pneumococcal vaccine (about 84% of the result):**
   - 33 million children a year got the vaccine with Gavi's support in 2015-2019; the AMC's evaluation estimates 260,000 child deaths averted for the first 49 million children;
   - each death averted is valued at the site's value of a child's death, with the children's later income gain and GiveWell's shared supplements (illness, treatment costs, investment of income, protection of the unvaccinated, less replacement by other strains), together about 80% more;
   - the money spent is subtracted at what it would otherwise have done: the doses (US$3.00 each) and the donors' US$1.5 billion top-up at GiveWell's figure for a dollar of Gavi spending, delivery at its figure for a country's own health spending;
-  - the AMC gets 40% of the credit for the faster spread (the evaluation names other causes too), CGD 15% of the AMC;
+  - the AMC gets 40% of the credit for the faster spread (the evaluation names other causes too), CGD 40% of the design work behind the AMC;
   - we trust the modelled deaths at 70%.
-- **Development banks' capital reforms (about 17%):** the banks' US$200 billion of extra lending capacity, trusted at 80%, lent over about ten years, 60% of it used; a dollar lent is worth its grant element, judged 15% of a dollar of aid, at the site's shared value of aid of unknown use; CGD gets 5% of the credit; extra debt risk takes away 5%.
-- **Millennium Challenge Corporation (3%):** its US$18 billion of compacts signed since 2005, about US$1.2 billion a year in 2025 prices, judged 10% better used than other aid because of the design CGD argued for, CGD credited with 10%; reforms countries make to qualify add 2% of MCC's whole value.
+- **Development banks' capital reforms (about 13%):** the banks' US$200 billion of extra lending capacity, trusted at 80%, lent over about ten years, 60% of it used; a dollar lent is worth its grant element, judged 15% of a dollar of aid, at the site's shared value of aid of unknown use; CGD gets 10% of the credit; extra debt risk takes away 5%.
+- **Millennium Challenge Corporation (4%):** its US$18 billion of compacts signed since 2005, about US$1.2 billion a year in 2025 prices, judged 10% better used than other aid because of the design CGD argued for, CGD credited with 30%; reforms countries make to qualify add 2% of MCC's whole value.
 - **All three** count for the years a won reform counts on the site, after a discounted wait, are spread over the 24 years of work, and are discounted by the shared missing-data slider, as no study measures CGD's part. Its other work (3ie, the Commitment to Development Index, labour mobility, Nigeria's debt relief, health technology assessment, education) adds a judged 40%, anchored on the spread of the three modelled wins.
 - **The next dollar** is valued at {{row:marginal_vs_past_average}} of the average: CGD holds about 21 months of spending in reserve and its biggest wins are behind it.
 
@@ -30,7 +30,7 @@ The years a won reform counts, the missing-data slider and the next dollar's val
 
 ### Biggest uncertainties
 
-- **Credit:** Michael Kremer and Rachel Glennerster's academic work, the Gates Foundation, Italy, the UK, the World Bank and Gavi all made the AMC happen; our 15% for CGD could be a third or twice that.
+- **Credit:** the AMC's design came from CGD's working group and Michael Kremer and Rachel Glennerster's research; our 40% for CGD's part of that design work could be half or one and a half times that. The funders and governments that adopted it (the Gates Foundation, Italy, the UK, the World Bank, Gavi) are not in that share; they come under the setting for work others carry out because of the charity.
 - **What the AMC changed:** the evaluation itself says the results can't be attributed to the AMC alone, and its deaths are modelled, not measured.
 - **The banks' lending:** the US$200 billion is the banks' own estimate of capacity, and what a dollar of non-concessional lending is worth to a borrower is a judgment.
 

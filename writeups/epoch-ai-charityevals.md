@@ -1,6 +1,6 @@
 ### Summary
 
-Epoch AI tracks and forecasts how AI is developing, and publishes data, benchmarks and research on it. Our model of its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so on the model's own ranges the result runs from about 0.001 to about 0.9.
+Epoch AI tracks and forecasts how AI is developing, and publishes data, benchmarks and research on it. Our model of its work in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -46,11 +46,11 @@ Only part of Epoch's work bears on catastrophic risk, it aims to inform rather t
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%; the result moves from 0.009 to 0.47.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the misuse figure alone moves the result from 0.026 to 0.51.
-- **How much of the work counts as misuse work.** At none the result is 0.021; at 8% of spending it is 0.25.
+- **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%; the result moves from 0.0027 to 0.35.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the misuse figure alone moves the result from 0.013 to 0.26.
+- **How much of the work counts as misuse work.** At none the result is 0.011; at 8% of spending it is 0.13.
 - **Whether Epoch's information makes AI safer or faster.** The speed-up harm runs from −1.5% to −18%, and the uptake from 0.3 to 1.2 of a typical project.
-- **The discount rate and the years a cut counts.** At a 0.1% discount rate the result is about 0.49.
+- **The discount rate and the years a cut counts.** At a 0.1% discount rate the result is about 0.24.
 
 ### What isn't modelled
 

@@ -62,7 +62,7 @@ St. Jude gets its share of each field's funding: about a fifth of childhood canc
 - How much better St. Jude's survival is than other US centres' once you allow for which patients it takes. The comparison is between trials; no children were randomised between centres.
 - How many children St. Jude Global's support reaches, and how much it improves their survival. There is no controlled evaluation, and St. Jude publishes no count.
 - The training, graduate-school and community branches rest on research about other programmes. They are small: together about 6% of the patient-care model's cost and 4% of its result.
-- The research chain is almost entirely judgment. Its plausible range spans about 140-fold, and the patient-care model's about sixtyfold.
+- The research chain is almost entirely judgment.
 
 ### What isn't modelled
 

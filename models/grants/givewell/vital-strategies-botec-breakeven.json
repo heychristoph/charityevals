@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "vital-strategies",
   "owner": "givewell",
+  "mobilised": true,
   "bulk": true,
   "summary": "Advocates for higher alcohol taxes to reduce drinking and the deaths it causes. GiveWell's spreadsheet \"Vital Strategies BOTEC_Breakeven\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
   "source": {
@@ -25,7 +26,8 @@
     "assumptions": {
       "daly_per_child_death": 58.12631,
       "uov_per_daly": 2,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -5050,7 +5052,7 @@
         "url": "https://docs.google.com/spreadsheets/d/1OxcTEeYpQuyP0-4FFIeca4k1TTH-9vFftoR40BisxS0/edit",
         "cell": "Assumptions_Overall!F29"
       },
-      "explainer": "2022 GiveWell cost-effectiveness analysis — version 4. Changed for consistency: GiveWell's sheet used 0.0034 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps {{row:givedirectly_units_of_value_generated_per_dollar_spent_befor}}."
+      "explainer": "2022 GiveWell cost-effectiveness analysis — version 4. Changed for consistency: GiveWell's sheet used 0.0034 units of value per dollar given to GiveDirectly here. The site values cash with one shared benchmark for every model (The cash benchmark, under Data), the same figure that turns this model's multiple of cash back into units of value: where the sheet divides by it to make its multiple, the benchmark cancels in our view, so our units of value are the sheet's before it divided by cash. The evaluator view keeps {{row:givedirectly_units_of_value_generated_per_dollar_spent_befor:evaluator}}."
     },
     {
       "id": "givedirectly_units_of_value_generated_per_dollar_spent",
@@ -5322,11 +5324,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar",
       "label": "Units of value per dollar",
       "section": "bottom_line",
-      "formula": "(multiples_of_cash_after_inclusion_exclusion * cash_benchmark) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((multiples_of_cash_after_inclusion_exclusion * cash_benchmark) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

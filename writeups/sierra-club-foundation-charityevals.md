@@ -39,7 +39,7 @@ The coal closings are about four fifths of the climate model's tonnes; the feder
 
 ### What isn't modelled
 
-Gas pipelines, export terminals and other climate work are a 50% share on top of the climate wins; the lands wins (national monuments, the Public Lands Rule and Western Arctic leasing limits, mostly rescinded in 2025, and species protections), clean-water cases and chapters' local work are a {{row:p_success}} share on the soot standard. The Sierra Club's opposition to nuclear power counts as a small harm.
+Gas pipelines, export terminals and other climate work are a 50% share on top of the climate wins; the lands wins (national monuments, the Public Lands Rule and Western Arctic leasing limits, mostly rescinded in 2025, and species protections), clean-water cases and chapters' local work are a 30% share on the soot standard. The Sierra Club's opposition to nuclear power counts as a small harm.
 
 ### How this model was checked
 

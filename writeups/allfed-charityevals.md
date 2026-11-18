@@ -1,6 +1,6 @@
 ### Summary
 
-ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from about 0.9 to about 750.
+ALLFED, the Alliance to Feed the Earth in Disasters, works on feeding everyone after a catastrophe that blocks the sun or breaks the food supply. The main case is the famine after a nuclear war, when soot from burning cities cools the climate. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on how many would starve after one, and on an estimate of what a typical dollar of such work achieves. All three are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -36,10 +36,10 @@ Then come the adjustments for the nuclear work:
 |---|---|
 | How far a typical project's effect applies | 0.8 |
 | Work other groups would not have done now | 0.75 |
-| ALLFED's share of the resources | 0.62 |
+| ALLFED's share of the resources | 0.66 |
 | Missing-data discount | 0.5 |
 
-The first is our judgment, with a wide range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' and its president's unpaid time and its co-authors' and partners' time.
+The first is our judgment, with a wide range. ALLFED is most of a small field, but its plans have to be carried out by governments in the chaos after a war. Few groups do this work, so less of it would happen anyway. ALLFED's share of the resources is below 1 because of its volunteers' and its president's unpaid time and its co-authors' time.
 
 Benefits not modelled add 25%. The largest part is the same food work after a volcanic winter: a large eruption has about a one-in-six chance this century. Smaller nuclear wars, the loss-of-industry work and ordinary food shocks make up the rest. One harm is counted: preparing for a war could make it seem more survivable, at −2%.
 
@@ -47,11 +47,11 @@ ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 
 
 ### What drives the result
 
-Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 52. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
+Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 17. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the deaths.** Rethink's figures are placeholders for work against the threat or severity of a nuclear war, not set with food resilience in mind, and the range runs ten times either way. This is the largest swing, from 3.4 to 250.
+- **How much a dollar of this work cuts the deaths.** Rethink's figures are placeholders for work against the threat or severity of a nuclear war, not set with food resilience in mind, and the range runs ten times either way. This is the largest swing, from 1.1 to 80.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely a nuclear war is, and how deadly.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 - **Whether food plans would work after a real war.** None has been tested, and governments would have to act fast amid chaos.

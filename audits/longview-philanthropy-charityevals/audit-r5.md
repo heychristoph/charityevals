@@ -20,5 +20,11 @@ Mechanical: `scripts/preflight.ts`: passes, 2 low (simulation `@meta.prior_vs_ca
 
 No high or medium finding.
 
-Model-sha: 70f010f3f975663e755ff00b3b33c3d7e10c6ff226d6aea6e85254ca3de25b89
+Model-sha: 95c4e79764edaedcf3114f52b2c90b90064ea2d9733292bc89be4b6b696b5fbe
 Verdict: pass
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change of its own; the headline moves with the models it reads live, whose shares were re-judged). Mechanical: headline 1.437 → 1.471 (+2.4%), 12 rows changed, against 593b1bba.
+
+Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

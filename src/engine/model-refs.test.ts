@@ -220,26 +220,26 @@ describe("INV-12: money moved is valued one way", () => {
     output: { row: "out", unit: "uov", label: "UoV per $", native: { row: "raised", unit: "dollars raised per dollar (gross)" } },
   });
   const raised = { id: "raised", label: "Dollars raised for effective charities per dollar received", value: 10, kind: "estimate", explainer: "Test input." };
-  const good = meta("good", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"], true), { id: "out", label: "out", formula: "raised * moved_dollar_net_value" }]);
+  const good = meta("good", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "mobiliser_share", "moved_dollar_net_value"], true), { id: "out", label: "out", formula: "raised * moved_dollar_net_value" }]);
   const own = meta("own", [raised, { id: "multiple", label: "Multiple of cash", value: 5, kind: "judgment", explainer: "Test input." }, { id: "out", label: "out", formula: "raised * 0.4 * multiple * @cash.uov_per_dollar" }]);
   const edited = meta("edited", [raised, ...shared(["value_global_health", "moved_dollar_value"], true).map((r) => (r.id === "value_global_health" ? { ...r, formula: "#against-malaria-foundation" } : r)), { id: "out", label: "out", formula: "raised * moved_dollar_value" }]);
   const success = meta("success", [raised, ...shared(["value_global_health", "moved_dollar_value"], true), { id: "p", label: "Probability of success", value: 0.6, kind: "judgment", explainer: "Test input." }, { id: "out", label: "out", formula: "raised * p * moved_dollar_value" }]);
   const career = { ...meta("career", [{ id: "careers", label: "Career changes per dollar", value: 0.001, kind: "estimate", explainer: "Test input." }, { id: "out", label: "out", formula: "careers * 50000 * #givedirectly" }]), output: { row: "out", unit: "uov", label: "UoV per $" } };
   // An animal mover: shifted money against an ordinary animal charity, or (wrongly) against GiveDirectly.
   const animal = (id: string, prior: { id: string; label: string; formula: string }, out = "raised * moved_dollar_net_value") =>
-    ({ ...meta(id, [raised, ...shared(["value_global_health", "moved_dollar_value"]), prior, ...shared(["new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: out }]), cause: "animal-welfare", beneficiaries: "destinations" });
+    ({ ...meta(id, [raised, ...shared(["value_global_health", "moved_dollar_value"]), prior, ...shared(["new_money_share", "mobiliser_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: out }]), cause: "animal-welfare", beneficiaries: "destinations" });
   const animalGood = animal("animal-good", priorDollarValue("animal-welfare"));
   const animalCash = animal("animal-cash", shared(["prior_dollar_value"])[0]);
   // A local counterfactual off the shared net row; and the gain of money all shifted, which is allowed.
-  const local = meta("local", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * (moved_dollar_value - 0.2 * prior_dollar_value)" }]);
-  const allShifted = meta("all-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value", "shifted_dollar_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * shifted_dollar_value" }]);
-  const inlineShifted = meta("inline-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * (moved_dollar_value - prior_dollar_value)" }]);
+  const local = meta("local", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "mobiliser_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * (moved_dollar_value - 0.2 * prior_dollar_value)" }]);
+  const allShifted = meta("all-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "mobiliser_share", "moved_dollar_net_value", "shifted_dollar_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * shifted_dollar_value" }]);
+  const inlineShifted = meta("inline-shifted", [raised, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "mobiliser_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value + raised * (moved_dollar_value - prior_dollar_value)" }]);
   // Spending research or advice changed, all shifted, with the evidence and missing-data steps (or without),
   // and (wrongly) counted as donors' new money in the credit by share of resources.
   const changed = { id: "informed_money", label: "Money moved: spending its research changed per dollar", value: 10, kind: "judgment", explainer: "Test input." };
   const evidence = { id: "evidence_adj", label: "Evidence adjustment", value: 0.6, kind: "judgment", explainer: "Test input." };
   const informedModel = (id: string, missing: string, out = "informed_money_value", more: { id: string; label: string; formula: string }[] = []) => ({
-    ...meta(id, [changed, evidence, { id: "missing_data_adj", label: "Missing data", formula: missing }, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "shifted_dollar_value", "informed_money_value"]), ...more, { id: "out", label: "out", formula: out }]),
+    ...meta(id, [changed, evidence, { id: "missing_data_adj", label: "Missing data", formula: missing }, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "mobiliser_share", "shifted_dollar_value", "informed_money_value"]), ...more, { id: "out", label: "out", formula: out }]),
     output: { row: "out", unit: "uov", label: "UoV per $" },
   });
   const informedGood = informedModel("informed-good", "$missing_data_discount");
@@ -251,17 +251,17 @@ describe("INV-12: money moved is valued one way", () => {
     { id: "value_destinations", label: "Value of a dollar to its causes", formula: `(${shares.map(([k, c]) => `@meta.${k} * #cause:${c}`).join(" + ")}) / (${shares.map(([k]) => `@meta.${k}`).join(" + ")})` },
     { id: "moved_dollar_value", label: OWN_SPLIT.label, formula: OWN_SPLIT.formula },
     { id: "prior_dollar_value", label: "prior", formula: prior },
-    ...shared(["new_money_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value" }]) });
+    ...shared(["new_money_share", "mobiliser_share", "moved_dollar_net_value"]), { id: "out", label: "out", formula: "raised * moved_dollar_net_value" }]) });
   const splitGood = crossCause("split-good", priorDollarValueMix(shares).formula);
   const splitForeign = crossCause("split-foreign", priorDollarValueMix([...shares, ["rp_cross_cause_share_ai", "ai"]]).formula);
   // A second destination set (gh): the main set's rows with the prefix, a cost valued at its prior (allowed),
   // or (wrongly) its net value restated by hand over the destination row.
   const ghMoved = { id: "gh_money_moved", label: "Dollars its giving organisations move per dollar", value: 3, kind: "estimate", explainer: "Test input." };
   const setModel = (id: string, edit: (r: { id: string; label: string; formula: string }) => { id: string; label: string; formula: string }) =>
-    meta(id, [raised, ghMoved, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "moved_dollar_net_value"]),
+    meta(id, [raised, ghMoved, ...shared(["value_global_health", "moved_dollar_value", "prior_dollar_value", "new_money_share", "mobiliser_share", "moved_dollar_net_value"]),
       ...destinationSetRows("gh", "value_global_health").filter((r) => r.id !== "gh_informed_money_value").map(({ id, label, formula }) => edit({ id, label, formula })),
       { id: "out", label: "out", formula: "raised * moved_dollar_net_value + gh_money_moved * gh_moved_dollar_net_value - 0.1 * raised * running_cost_value" },
-      { id: "running_cost_value", label: "Running costs valued where the money would have gone", formula: "2 * gh_prior_dollar_value" }]);
+      { id: "running_cost_value", label: "Running costs valued where the money would have gone", formula: "2 * gh_prior_dollar_value * mobiliser_share" }]);
   const setGood = setModel("set-good", (r) => r);
   const setEdited = setModel("set-edited", (r) => (r.id === "gh_moved_dollar_net_value" ? { ...r, formula: "new_money_share * value_global_health + (1 - new_money_share) * (value_global_health - gh_prior_dollar_value)" } : r));
   const extra = [animalGood, animalCash, local, allShifted, inlineShifted, informedGood, informedBare, informedCost, splitGood, splitForeign, setGood, setEdited];
@@ -287,10 +287,10 @@ describe("INV-12: money moved is valued one way", () => {
   it("values spending research changed as all shifted, with the evidence and missing-data steps", () => {
     const av = assumptionValues(l.assumptions);
     const v = compute(l, l.models.get("informed-good")!, av);
-    expect(v.shifted_dollar_value).toBeCloseTo(v.moved_dollar_value - v.prior_dollar_value, 12);
+    expect(v.shifted_dollar_value).toBeCloseTo(av.mobiliser_share * (v.moved_dollar_value - v.prior_dollar_value), 12);
     expect(v.out).toBeCloseTo(10 * v.shifted_dollar_value * 0.6 * av.missing_data_discount, 12);
     // No new money: the same spending counted as moved gross would be worth more.
-    expect(v.out).toBeLessThan(10 * (0.5 * v.moved_dollar_value + 0.5 * v.shifted_dollar_value) * 0.6 * av.missing_data_discount);
+    expect(v.out).toBeLessThan(10 * (0.5 * av.mobiliser_share * v.moved_dollar_value + 0.5 * v.shifted_dollar_value) * 0.6 * av.missing_data_discount);
   });
 
   it("compares a cross-cause mover's shifted money with each cause's ordinary charity, in its own shares", () => {
@@ -313,7 +313,7 @@ describe("INV-12: money moved is valued one way", () => {
     const av = assumptionValues(l.assumptions);
     const v = compute(l, m, av);
     expect(v.moved_dollar_value).toBeGreaterThan(v[`#${CASH_BENCHMARK}`]);
-    expect(v.moved_dollar_net_value).toBeCloseTo(0.5 * v.moved_dollar_value + 0.5 * (v.moved_dollar_value - v[`#${CASH_BENCHMARK}`]));
+    expect(v.moved_dollar_net_value).toBeCloseTo(av.mobiliser_share * (0.5 * v.moved_dollar_value + 0.5 * (v.moved_dollar_value - v[`#${CASH_BENCHMARK}`])), 12);
     // Each destination at its charity's figure on the rankings, never one of its location models alone.
     expect(GLOBAL_HEALTH_DESTINATIONS.every((d) => d.includes(":"))).toBe(true);
     const weights = ["gw_weight_amf", "gw_weight_smc", "gw_weight_vas", "gw_weight_ni"].map((k) => pickValue(l.facts.get(`meta.${k}`)!.value));

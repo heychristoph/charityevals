@@ -9,6 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "teaching-at-the-right-level-africa",
   "owner": "the-life-you-can-save",
+  "mobilised": true,
   "summary": "TaRL Africa helps governments in Zambia, Nigeria, Côte d'Ivoire and other countries regroup primary pupils by learning level for daily reading and maths sessions. The Life You Can Save estimates 3.57 learning-adjusted years of schooling per $100 from TaRL Africa's 2024 costs, the governments' costs and pupils reached, with half the trials' learning gain kept at scale. Our view turns the learning gain into later earnings with the site's shared figure; the biggest uncertainties are how much of a childhood test gain lasts into adult earnings and how much of the learning the governments would have achieved without TaRL Africa.",
   "source": {
     "publisher": "The Life You Can Save",
@@ -62,7 +63,8 @@
     "name": "The Life You Can Save",
     "assumptions": {
       "resource_shares": 0,
-      "discount_rate": 0
+      "discount_rate": 0,
+      "mobiliser_share": 1
     }
   },
   "sections": [
@@ -900,7 +902,7 @@
       "label": "Full cost per dollar of the sheet's costs",
       "format": "multiple",
       "formula": "(total_cost_core + nonprofit_cost_core * (1 + if($resource_shares, salary_sacrifice, 0)) * (1 + central_cost_share) - nonprofit_cost_core) / total_cost_core",
-      "explainer": "The sheet's costs plus TaRL Africa's central costs (above) and, with credit by share of resources on, its staff's forgone pay, over the sheet's costs. The governments' money is already counted in full, the sheet's own way of crediting: the dollar gets the learning of a dollar of all the programme's money. Off (the default) this is about 1.07."
+      "explainer": "The sheet's costs plus TaRL Africa's central costs (above) and, with credit by share of resources on, its staff's forgone pay, over the sheet's costs. The governments' money is counted here as the sheet counts it; the bottom line then takes it out of the cost (adopter_cost_out) and nets it from the good. Off (the default) this is about 1.07."
     },
     {
       "id": "sd_per_dollar",
@@ -1020,13 +1022,39 @@
       "explainer": "A side effect, our judgment 10% (0 to 30%): children who read and count better may also stay in school longer and, as adults, have healthier children; most of that evidence is about years of school rather than test gains, and part of it is already in the earnings figure, so it is counted small. Anchor: a placeholder kept small enough that its whole range moves the result by under a fifth (0% gives 0.91 of the result, 30% gives 1.18)."
     },
     {
+      "id": "adopter_cost_out",
+      "section": "earnings",
+      "label": "Full cost counted per dollar of TaRL Africa's own (the governments' money leaves the cost)",
+      "format": "number",
+      "formula": "cost_multiplier * total_cost_core / (cost_multiplier * total_cost_core - (total_cost_core - nonprofit_cost_core))",
+      "published": 1,
+      "explainer": "**Changed for consistency.** The governments that run the programme in their schools carry out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps The Life You Can Save's cost (1). TaRL Africa's own cost keeps its central costs and, with credit by share of resources on, its staff's forgone pay."
+    },
+    {
+      "id": "gov_cost_value_per_dollar",
+      "section": "earnings",
+      "label": "What the governments' money would otherwise have done, per dollar of the full cost counted, units of value",
+      "format": "small",
+      "formula": "(total_cost_core - nonprofit_cost_core) / (total_cost_core * cost_multiplier) * @givewell_shared.cf_value_government",
+      "published": 0,
+      "explainer": "**Changed for consistency.** The governments' spending on the programme (about two thirds of the sheet's cost), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20). A cost of the resources TaRL Africa mobilises: netted from the good before the share that wouldn't have happened without it and before the mobiliser's share. The evaluator view counts the governments' money in the cost instead (0 here)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "earnings",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar",
       "section": "earnings",
       "label": "Units of value per dollar",
       "format": "small",
       "unit": "uov per $",
-      "formula": "pupils_per_dollar * ln_gain_per_pupil * pv_factor * resource_sharing_multiplier * $uov_per_ln_consumption * counterfactual_adoption * (1 + non_income_gains_share)",
-      "explainer": "Pupils per dollar × the gain in log earnings each working year × the discounted working years × the household sharing it × the value of a unit of log consumption (Your values) × the share due to TaRL Africa, plus the gains beyond earnings."
+      "formula": "(pupils_per_dollar * ln_gain_per_pupil * pv_factor * resource_sharing_multiplier * $uov_per_ln_consumption * (1 + non_income_gains_share) - gov_cost_value_per_dollar) * counterfactual_adoption * adopter_cost_out * mobiliser_share",
+      "explainer": "Pupils per dollar × the gain in log earnings each working year × the discounted working years × the household sharing it × the value of a unit of log consumption (Your values), plus the gains beyond earnings, less what the governments' money would otherwise have done; × the share due to TaRL Africa, per dollar of TaRL Africa's own cost (adopter_cost_out), × the charity's share of the good that others carry out (mobiliser_share)."
     }
   ],
   "output": {

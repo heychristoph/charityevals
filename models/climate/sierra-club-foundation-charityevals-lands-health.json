@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "sierra-club-foundation",
   "owner": "charityevals",
-  "summary": "The Sierra Club Foundation's grants to the Sierra Club for public lands and waters, clean air and water and the outdoors programmes (its Our Wild America lands campaign and, by our judgment, half its other grants outside Beyond Coal; $35.2M in 2024) are modelled from what can be put on the site's scale in 2022-2024: the Sierra Club's share of EPA's 2024 fine-particle (soot) standard (about {{row:pm_deaths_per_year}} deaths a year avoided once in effect; upheld in court in 2026) and the 5,127 people a year on its Inspiring Connections Outdoors trips. At the defaults it gives about 0.0009 years of healthy life per $1,000 after the standard's compliance costs (EPA's own figure), nearly all from the soot standard; it is low because the Sierra Club is one of many groups behind the rule (4%), advocacy is credited with only part of it, the deaths are mostly of older adults and come years later, and the lands wins (monuments, the Public Lands Rule, Western Arctic leasing limits, mostly rescinded in 2025) count only in a share for other work, since their species and unleased oil and gas don't reach the scale. The biggest uncertainties are the share of the rule due to advocacy, the next dollar and how much of the rule is delivered; both branches are discounted for missing data.",
+  "summary": "The Sierra Club Foundation's grants to the Sierra Club for public lands and waters, clean air and water and the outdoors programmes (its Our Wild America lands campaign and, by our judgment, half its other grants outside Beyond Coal; $35.2M in 2024) are modelled from what can be put on the site's scale in 2022-2024: the Sierra Club's share of EPA's 2024 fine-particle (soot) standard (about {{row:pm_deaths_per_year}} deaths a year avoided once in effect; upheld in court in 2026) and the 5,127 people a year on its Inspiring Connections Outdoors trips. At the defaults it gives about {{result}} years of healthy life per $1,000 after the standard's compliance costs (EPA's own figure), nearly all from the soot standard; it is low because the Sierra Club is one of many groups behind the rule (4%), advocacy is credited with only part of it, the deaths are mostly of older adults and come years later, and the lands wins (monuments, the Public Lands Rule, Western Arctic leasing limits, mostly rescinded in 2025) count only in a share for other work, since their species and unleased oil and gas don't reach the scale. The biggest uncertainties are the share of the rule due to advocacy, the next dollar and how much of the rule is delivered; both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Sierra Club Foundation (lands, clean air and outdoors)",
@@ -257,7 +257,7 @@
       "label": "Share of the other programme grants that fund lands, clean-air and outdoors work",
       "format": "percent",
       "formula": "1 - @sierra_club_foundation.climate_share_other_grants",
-      "explainer": "The rest of the shared split for the Foundation's two models (facts: sierra_club_foundation.climate_share_other_grants, {{row:lands_share_other}} climate): its grants outside Beyond Coal are not split by campaign; this half funds public lands and waters, species, clean air and water, the outdoors programmes and the chapters' work on them."
+      "explainer": "The rest of the shared split for the Foundation's two models (facts: sierra_club_foundation.climate_share_other_grants, 50% climate): its grants outside Beyond Coal are not split by campaign; this half funds public lands and waters, species, clean air and water, the outdoors programmes and the chapters' work on them."
     },
     {
       "id": "lands_spend_2022",
@@ -694,11 +694,20 @@
       "explainer": "The Sierra Club's share × the Foundation's part of the Sierra Club's resources."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "pm_attribution_share",
       "section": "adjustments",
       "label": "EPA soot standard: share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "pm_attribution_share_shared"
+      "formula": "pm_attribution_share_shared * mobiliser_share"
     },
     {
       "id": "pm_implementation_adj",
@@ -740,6 +749,7 @@
       "id": "out_attribution_share",
       "section": "adjustments",
       "label": "Inspiring Connections Outdoors: the Foundation's share of the resources behind the trips",
+      "credit": "delivery",
       "format": "percent",
       "formula": "scf_share * out_paid_share",
       "explainer": "The trips are led by unpaid volunteers with the Sierra Club's staff and the Foundation's grants: the Foundation's part of the Sierra Club's resources (scf_share) × the paid share of all the resources behind the trips, the volunteers' time valued at the local wage counted as others' resources (templates.md Convention 2)."

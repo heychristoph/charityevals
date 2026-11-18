@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "80000-hours",
   "owner": "charityevals",
-  "summary": "80,000 Hours gives career research and advice (website, podcast, video, one-on-one advising, headhunting and a job board) to people who want to work on the most pressing problems, since 2025 mainly risks from advanced AI; it spent about $11.0M in 2025, nine months of it in its own audited accounts after leaving Effective Ventures. This model credits it with the careers it changed over 2012–2022 (its estimate of about 2,000 plan changes, against $18.8M spent), each valued by the site's shared career-change step: pay given up ({{row:career_forgone_pay}} a year for five years) × the share it caused (40%, from its own criterion) × the value of a dollar of work in the causes its work now moves people into, read live (AI safety 90%, biosecurity and nuclear 6%, global health 2%, animal welfare 0.5%, our judgment), counted at the missing-data discount, net of a backfire share for roles that speed up AI, and at {{row:marginal_vs_past_average}} for the next dollar against the 2012–2022 average. At the defaults it averts about {{result}} years of healthy life per $1,000 (0.05–21); most of that comes from the few careers outside AI. The biggest uncertainties are the missing-data discount, the split by cause, the site's AI-risk and win-years sliders, what a plan change gives up and how much 80,000 Hours caused it, and the next dollar (it now spends five times its 2012–2022 yearly average).",
+  "summary": "80,000 Hours gives career research and advice (website, podcast, video, one-on-one advising, headhunting and a job board) to people who want to work on the most pressing problems, since 2025 mainly risks from advanced AI; it spent about $11.0M in 2025, nine months of it in its own audited accounts after leaving Effective Ventures. This model credits it with the careers it changed over 2012–2022 (its estimate of about 2,000 plan changes, against $18.8M spent), each valued by the site's shared career-change step: pay given up ({{row:career_forgone_pay}} a year for five years) × the share it caused (40%, from its own criterion) × the value of a dollar of work in the causes its work now moves people into, read live (AI safety 90%, biosecurity and nuclear 6%, global health 2%, animal welfare 0.5%, our judgment), counted at the missing-data discount, net of a backfire share for roles that speed up AI, and at {{row:marginal_vs_past_average}} for the next dollar against the 2012–2022 average. At the defaults it averts about {{result}} years of healthy life per $1,000 ({{range}}); most of that comes from the few careers outside AI. The biggest uncertainties are the missing-data discount, the split by cause, the site's AI-risk and win-years sliders, what a plan change gives up and how much 80,000 Hours caused it, and the next dollar (it now spends five times its 2012–2022 yearly average).",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: 80,000 Hours",
@@ -333,7 +333,7 @@
       "label": "Money moved per dollar of the charity's cost",
       "format": "multiple",
       "formula": "money_moved / cost_total",
-      "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+      "explainer": "Context."
     },
     {
       "id": "value_per_unit_year",
@@ -448,12 +448,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -549,9 +557,9 @@
       "section": "careers",
       "label": "Value of one career change (units of value)",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
       "unit": "units of value",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "career_start_wait_years",
@@ -654,8 +662,9 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The skeleton's policy branch, unused here (0): its share among co-advocates times the mobiliser's share (docs/normalization.md 2.24). The money moved and the careers take the mobiliser's share in their own rows."
     },
     {
       "id": "missing_data_adj",
@@ -740,7 +749,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "uov_per_donor_dollar",

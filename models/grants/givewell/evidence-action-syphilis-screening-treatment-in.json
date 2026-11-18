@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "evidence-action",
   "owner": "givewell",
+  "mobilised": true,
   "bulk": true,
   "summary": "Keeps syphilis screening and treatment for pregnant women going in Zambia after cuts in foreign aid. GiveWell's spreadsheet \"CEA for Evidence Action Syphilis Screening and Treatment in Pregnancy in Zambia foreign aid gap filling grants (March 2025)\", linked from its grant page. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values. A cheap dual HIV and syphilis test, if adopted, screens most of Zambia's roughly 760,000 pregnant women at antenatal care each year for a decade, and each untreated maternal syphilis case carries a high chance of stillbirth or newborn death that a single course of treatment largely prevents.",
   "source": {
@@ -25,7 +26,8 @@
     "assumptions": {
       "daly_per_child_death": 58.12631,
       "uov_per_daly": 2,
-      "resource_shares": 0
+      "resource_shares": 0,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -880,17 +882,17 @@
       "id": "total_value_generated_after_leverage",
       "label": "Total value generated, after leverage",
       "section": "cea",
-      "formula": "if($resource_shares, total_value_generated_before_leverage, (total_value_generated_before_leverage + (total_counterfactual_value_of_spending_from_the_global_fund + total_counterfactual_value_of_spending_from_other_partners)))",
+      "formula": "total_value_generated_before_leverage + (total_counterfactual_value_of_spending_from_the_global_fund + total_counterfactual_value_of_spending_from_other_partners)",
       "expected": 714614.4545,
-      "explainer": "With credit by share of resources, this is GiveWell's figure before leverage and funging."
+      "explainer": "Credit by share of resources doesn't change this row: the Global Fund, PEPFAR and the government's partners pay for the tests and treatment because of the programme, so the value their money would otherwise have produced stays netted, and their part is under the charity's share of the good (mobiliser_share)."
     },
     {
       "id": "evidence_action_units_of_value_per_100k",
       "label": "Evidence Action units of value per 100K",
       "section": "cea",
-      "formula": "if($resource_shares, total_value_generated_before_leverage * (100000 / (costs_to_evidence_action + additional_costs_to_global_fund_pepfar + additional_costs_to_other_partners_guess)), (total_value_generated_after_leverage * (100000 / costs_to_evidence_action)))",
+      "formula": "total_value_generated_after_leverage * (100000 / costs_to_evidence_action)",
       "expected": 10141.77124,
-      "explainer": "With credit by share of resources, this is GiveWell's figure before leverage and funging."
+      "explainer": "Per $100,000 of Evidence Action's own cost, with credit by share of resources on or off: the Global Fund's, PEPFAR's and other partners' spending is netted in the value, not added to the cost."
     },
     {
       "id": "benchmark_units_of_value_per_100k",
@@ -955,11 +957,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar",
       "label": "Units of value per dollar",
       "section": "bottom_line",
-      "formula": "(cost_effectiveness_as_multiple_of_our_benchmark * cash_benchmark) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((cost_effectiveness_as_multiple_of_our_benchmark * cash_benchmark) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

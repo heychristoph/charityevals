@@ -10,7 +10,7 @@ import {
   pickValue, referencedModels, usedAssumptions, viewAssumptions,
   type Library, type ResolvedModel, type ResolvedRow,
 } from "./model";
-import { CAREER_CHANGE_FORMULA, INFORMED_MONEY, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SET_DESTINATIONS, SUCCESS_FACT, causeSplitShares, destinationSetRows, destinationSets, isDestinationMix, priorDollarValue, priorDollarValueMix, sameFormula } from "./moved-money";
+import { CAREER_CHANGE_FORMULA, INFORMED_MONEY, MOBILISER_SHARE, MOVED_DOLLAR_FORMULAS, MOVED_MONEY_ROWS, OWN_SPLIT, SET_DESTINATIONS, SUCCESS_FACT, causeSplitShares, destinationSetRows, destinationSets, isDestinationMix, priorDollarValue, priorDollarValueMix, sameFormula } from "./moved-money";
 import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
@@ -857,8 +857,12 @@ const CAREER = /\bcareer (change|plan|switch|shift)s?\b/i;
 /** A result an evaluator already states as counterfactual value, in dollars of effective donations (CEARCH). */
 const ALREADY_NET = /\beffective-giving donation value\b|\bequivalent donations\b/i;
 
+/** Rows a credit by share of resources may not read: the money an organisation moves is mobilised (2.24). */
+const DONOR_MONEY = /(^|_)(new_money_share|moved_per_dollar|money_moved|informed_money)$/;
+
 /** INV-12: every model that values money moved, raised or influenced, or career changes, goes through
- * the site's one method: the shared rows of src/engine/moved-money.ts, word for word, on the path. */
+ * the site's one method: the shared rows of src/engine/moved-money.ts, word for word, on the path, each
+ * at the mobiliser's share (docs/normalization.md 2.24; INV-22 checks it is applied once). */
 export function inv12(lib: Library): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "variant");
   const violations: Violation[] = [];
@@ -913,6 +917,9 @@ export function inv12(lib: Library): InvariantReport {
       const alreadyNet = ALREADY_NET.test(m.output!.native?.unit ?? "") || onPath.some((r) => ALREADY_NET.test(r.label));
       const informedSets = prefixes.filter((p) => path.has(`${p}informed_money_value`) && path.has(`${p}shifted_dollar_value`));
       const informed = informedSets.length > 0;
+      // A result already in counterfactual dollars multiplies by V and by the mobiliser's share (2.24).
+      if (v && path.has(v.id) && alreadyNet && !onPath.some((r) => r.deps.includes(MOBILISER_SHARE)))
+        violations.push({ inv: "INV-12", model: m.id, where: MOBILISER_SHARE, detail: `its result is already counterfactual dollars of effective donations, valued at moved_dollar_value, but no row on the path multiplies by ${MOBILISER_SHARE} (= $${MOBILISER_SHARE}, docs/normalization.md 2.24)` });
       if (v && path.has(v.id) && !alreadyNet && !informed && !path.has("moved_dollar_net_value"))
         violations.push({ inv: "INV-12", model: m.id, where: "moved_dollar_net_value", detail: `values money moved but neither moved_dollar_net_value nor (for spending research or advice changed) informed_money_value is on the path to the output: value it through the shared rows (python3 scripts/moved-money.py <model> <scope> net|informed)` });
       if (informed) {
@@ -920,12 +927,12 @@ export function inv12(lib: Library): InvariantReport {
         const md = m.byId.get("missing_data_adj");
         if (!ev || !md || !sameFormula(md.formula, "$missing_data_discount"))
           violations.push({ inv: "INV-12", model: m.id, where: "informed_money_value steps", detail: `informed_money_value needs an evidence_adj row and missing_data_adj = $missing_data_discount (evidence_adj ${ev ? "present" : "missing"}, missing_data_adj ${md?.formula ?? "missing"})` });
-        // All shifted, the spending it changed brings in no donors' new money.
-        const feeding = m.byId.has("donor_cost_share") ? upstream(m, "donor_cost_share") : new Set<string>();
-        for (const p of informedSets)
-          if (feeding.has(`${p}${INFORMED_MONEY}`))
-            violations.push({ inv: "INV-12", model: m.id, where: `donor_cost_share ${p}${INFORMED_MONEY}`, detail: `donor_cost_share reads ${p}${INFORMED_MONEY} (spending its research or advice changed, all shifted): only money moved gross × new_money_share counts as donors' new money` });
       }
+      // The donors and funders whose money it moves are mobilised, under the mobiliser's share (2.24): the
+      // credit by share of resources (co-funders only) reads no money moved.
+      for (const id of m.byId.has("donor_cost_share") ? upstream(m, "donor_cost_share") : [])
+        if (DONOR_MONEY.test(id))
+          violations.push({ inv: "INV-12", model: m.id, where: `donor_cost_share ${id}`, detail: `donor_cost_share reads ${id}: the donors and funders whose money the organisation moves are mobilised (under ${MOBILISER_SHARE}, docs/normalization.md 2.24), not co-funders; the credit by share of resources counts staff's forgone pay and genuine co-funders only` });
       // Other rows read where shifted money would have gone only through the shared rows (the gain of
       // money all shifted is shifted_dollar_value).
       // A cost valued where the money would have gone (a product with the prior as a factor) is no gain.
@@ -933,6 +940,11 @@ export function inv12(lib: Library): InvariantReport {
         for (const prior of prefixes.map((p) => `${p}prior_dollar_value`))
           if (!(r.id in shared) && !setRows.has(r.id) && r.deps.includes(prior) && /[+-]/.test(r.formula ?? ""))
             violations.push({ inv: "INV-12", model: m.id, where: `${r.id} ${prior}`, detail: `${r.id} reads ${prior} outside the shared rows (the gain of money all shifted is ${prior.replace("prior_dollar_value", "shifted_dollar_value")}; a cost valued where money would have gone multiplies it): ${r.formula}` });
+      // Such a cost is part of the good done with the mobilised money: it takes the share with it.
+      for (const r of onPath)
+        for (const prior of prefixes.map((p) => `${p}prior_dollar_value`))
+          if (!(r.id in shared) && !setRows.has(r.id) && r.deps.includes(prior) && !/[+-]/.test(r.formula ?? "") && !upstream(m, r.id).has(MOBILISER_SHARE))
+            violations.push({ inv: "INV-12", model: m.id, where: `${r.id} ${MOBILISER_SHARE}`, detail: `${r.id} is a cost valued where the money would have gone (${prior}) but doesn't multiply by ${MOBILISER_SHARE}: the share applies to the good net of its cost (docs/normalization.md 2.24)` });
       for (const r of onPath)
         if (ORG_SUCCESS.test(r.label) && !r.factDeps.includes(SUCCESS_FACT))
           violations.push({ inv: "INV-12", model: m.id, where: `${r.id} success`, detail: `"${r.label}" is a meta organisation's chance of success but reads ${r.formula ?? fmt(inputValue(r, "charityevals"))}, not @${SUCCESS_FACT} (evaluator's figure in \`published\`)` });
@@ -947,7 +959,7 @@ export function inv12(lib: Library): InvariantReport {
   }
   return {
     id: "INV-12", title: "Money moved and career changes are valued one way", status: "partial", checked, violations,
-    how: `Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or donations from effectiveness-focused donors must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (${Object.keys(MOVED_MONEY_ROWS).join(", ")}) must have the shared formula word for word (prior_dollar_value: GiveDirectly for a model filed under global health, an ordinary charity of its own cause for any other, ${priorDollarValue("<cause>").formula}); for a mover whose own split spans several causes, prior_dollar_value may instead be each cause's ordinary charity in the split's shares (${priorDollarValueMix([["<share>", "<cause>"]]).formula}); moved_dollar_net_value must be on the path, unless the result is already counterfactual dollars of effective donations (CEARCH) or is spending research or advice changed, all shifted, through informed_money_value = ${MOVED_MONEY_ROWS.informed_money_value.formula} (evidence_adj a row, missing_data_adj = $missing_data_discount, and the model's own ${INFORMED_MONEY}, the money changed, never read by donor_cost_share: all shifted, it brings no new money); no other row on the path may read prior_dollar_value but as a factor of a product (a cost valued where money would have gone; the gain of money all shifted is shifted_dollar_value); a second destination set (rows <set>_moved_dollar_value and the rest) has the main set's rows word for word with the prefix on every set row and on its own money rows, over ${SET_DESTINATIONS.join(", ")}, under the same rules; and every row on its path stating an organisation's chance of success must read @${SUCCESS_FACT}. A row on the path about career changes needs the shared career_change_value = ${CAREER_CHANGE_FORMULA}. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.`,
+    how: `Every model (not variants) whose native unit or a row on the path to the output names money moved, raised, influenced, affected or shifted, a leverage ratio, a gross multiplier or donations from effectiveness-focused donors must reach its output through the shared row moved_dollar_value, with the shared formula (destinations across causes, or global health only); every shared row it has (${Object.keys(MOVED_MONEY_ROWS).join(", ")}) must have the shared formula word for word (prior_dollar_value: GiveDirectly for a model filed under global health, an ordinary charity of its own cause for any other, ${priorDollarValue("<cause>").formula}); for a mover whose own split spans several causes, prior_dollar_value may instead be each cause's ordinary charity in the split's shares (${priorDollarValueMix([["<share>", "<cause>"]]).formula}); moved_dollar_net_value must be on the path, unless the result is already counterfactual dollars of effective donations (CEARCH) or is spending research or advice changed, all shifted, through informed_money_value = ${MOVED_MONEY_ROWS.informed_money_value.formula} (evidence_adj a row, missing_data_adj = $missing_data_discount, and the model's own ${INFORMED_MONEY}, the money changed, never read by donor_cost_share: all shifted, it brings no new money); no other row on the path may read prior_dollar_value but as a factor of a product (a cost valued where money would have gone, which then multiplies by ${MOBILISER_SHARE} too; the gain of money all shifted is shifted_dollar_value); a result already in counterfactual dollars multiplies by ${MOBILISER_SHARE} on its path (the net, shifted and career formulas carry it: docs/normalization.md 2.24, INV-22); a second destination set (rows <set>_moved_dollar_value and the rest) has the main set's rows word for word with the prefix on every set row and on its own money rows, over ${SET_DESTINATIONS.join(", ")}, under the same rules; and every row on its path stating an organisation's chance of success must read @${SUCCESS_FACT}. A row on the path about career changes needs the shared career_change_value = ${CAREER_CHANGE_FORMULA}. Labels stand in for meaning, so money moved under other words isn't seen, and a charity's own fundraising or a funder's value-of-information sheet is waived with its reason.`,
   };
 }
 
@@ -1462,10 +1474,206 @@ export function inv21(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   };
 }
 
+// --- INV-22: mobilised resources take the mobiliser's share, once (docs/normalization.md 2.24) ---------
+
+/** A branch's used share of credit: the row that carries its class (`credit`) and, for a win or research
+ * branch, the mobiliser's share. */
+export const USED_SHARE = /(^|_)attribution_share$/;
+/** What marks a win in charityevals' own models: a chance of success, or the shared years a win counts. */
+const WIN_CHANCE = /(^|_)p_success$/;
+const WIN_YEARS = "win_years_counted";
+/** Costs of the resources a win mobilises (compliance costs 2.21, public money 2.23): part of the good
+ * done with them, so they take the share with the benefit. */
+export const MOBILISED_COST = /(^|_)(compliance|public_cost)_uov$/;
+const MONEY_ANCHOR = /(^|_)moved_dollar_net_value$/;
+const SPENDING_ANCHOR = /(^|_)shifted_dollar_value$/;
+const CAREER_ANCHOR = "career_change_value";
+
+/** Whether a row reads the mobiliser's share, itself or through the rows it is computed from. */
+const readsShare = (m: ResolvedModel, id: string) => [...upstream(m, id)].some((x) => m.byId.get(x)?.assumptionDeps.includes(MOBILISER_SHARE));
+
+/** What a model mobilises, by pattern (2.24): the rows that must carry the share. `direct`: money valued
+ * at moved_dollar_value without the net or shifted rows (a result already in counterfactual dollars, CEARCH). */
+export function mobilisedPatterns(m: ResolvedModel, path = rowsFeeding(m)) {
+  const onPath = m.rows.filter((r) => path.has(r.id));
+  const ids = (re: RegExp) => onPath.filter((r) => re.test(r.id)).map((r) => r.id);
+  const money = ids(MONEY_ANCHOR), spending = ids(SPENDING_ANCHOR);
+  const careers = path.has(CAREER_ANCHOR) ? [CAREER_ANCHOR] : [];
+  const own = isOwnBuild(m);
+  const shares = own ? onPath.filter((r) => USED_SHARE.test(r.id)) : [];
+  const win = own && (onPath.some((r) => WIN_CHANCE.test(r.id) || r.assumptionDeps.includes(WIN_YEARS)) || shares.some((r) => r.credit === "win" || r.credit === "research"));
+  const direct = !money.length && !spending.length && path.has("moved_dollar_value");
+  return { money, spending, careers, win, shares, direct, any: money.length + spending.length + careers.length > 0 || win || direct };
+}
+
+/** Rows whose part of the headline doesn't halve when the share is halved, the models read live held:
+ * `rows` are the ones that should (a mobilised branch's value, a mobilised resource's cost). */
+function notHalved(lib: Library, m: ResolvedModel, av: Record<string, number>, held: Record<string, number>, rows: string[]): { row: string; full: number; half: number }[] {
+  const half = { ...av, [MOBILISER_SHARE]: av[MOBILISER_SHARE] / 2 };
+  const part = (a: Record<string, number>, row: string) => headline(lib, m, a, held) - headline(lib, m, a, { ...held, [row]: 0 });
+  const whole = Math.abs(headline(lib, m, av, held));
+  const out: { row: string; full: number; half: number }[] = [];
+  for (const row of rows) {
+    const full = part(av, row), h = part(half, row);
+    if (!Number.isFinite(full) || !Number.isFinite(h) || full === 0) continue;
+    // A part is a difference of two headlines: its rounding is the whole headline's.
+    if (!close(h, full / 2, Math.max(1e-9, 1e-9 * Math.abs(whole / full)))) out.push({ row, full, half: h });
+  }
+  return out;
+}
+
+/** A model's cost rows of mobilised resources (not their sums, not a delivery branch's) whose part of the
+ * headline doesn't take the share once: left outside it, or inside it twice. Only for a model that reads
+ * the share. Shared with src/engine/preflight.ts. */
+export function costsOutsideShare(lib: Library, m: ResolvedModel, av = assumptionValues(lib.assumptions)): { row: string; full: number; half: number }[] {
+  if (!(MOBILISER_SHARE in av) || !m.output || !m.rows.some((r) => r.assumptionDeps.includes(MOBILISER_SHARE))) return [];
+  const path = rowsFeeding(m);
+  const costs = m.rows.filter((r) => path.has(r.id) && MOBILISED_COST.test(r.id) && !r.deps.some((d) => MOBILISED_COST.test(d)));
+  const delivery = (id: string) => m.byId.get(id.replace(MOBILISED_COST, "$1attribution_share"))?.credit === "delivery";
+  const vals = compute(lib, m, av);
+  const held = Object.fromEntries(modelDepsOf(m).map((x) => [`#${x}`, vals[`#${x}`]]));
+  return notHalved(lib, m, av, held, costs.filter((r) => !delivery(r.id)).map((r) => r.id));
+}
+
+/** INV-22 (docs/normalization.md 2.24): resources another party commits only because of the organisation
+ * are credited at the mobiliser's share, once, in our view only. (a) Reach: every row that values them
+ * reads the share. (b) Once: the headline is a straight line in the share, and each mobilised branch's
+ * part and each mobilised resource's cost halves with it. (c) An import that reads it pins it to 1, in an
+ * ours row, and its evaluator view never moves. (d) A model, or a branch, of own delivery reads none.
+ * (e) No result breaks at the slider's low end. */
+export function inv22(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const S = MOBILISER_SHARE;
+  const title = "Mobilised resources take the mobiliser's share, once";
+  const violations: Violation[] = [];
+  if (!(S in av)) return { id: "INV-22", title, status: "not checked", checked: 0, violations, how: `No $${S} in the assumptions.` };
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
+  const low = pickValue(lib.assumptions.rows.find((r) => r.id === S)?.value, "low");
+  const flag = (m: ResolvedModel, where: string, detail: string) => violations.push({ inv: "INV-22", model: m.id, where, detail });
+  for (const m of models) {
+    const readers = m.rows.filter((r) => r.assumptionDeps.includes(S));
+    const variant = m.kind === "variant";
+    const path = rowsFeeding(m);
+    if (!variant) {
+      // One row reads the assumption; every formula reads the row.
+      for (const r of ownRows(m))
+        if (r.assumptionDeps.includes(S) && !(r.id === S && sameFormula(r.formula, `$${S}`)))
+          flag(m, `${r.id} $${S}`, `${r.id} reads $${S} itself: only the row ${S} = $${S} does, and formulas multiply by that row`);
+      const p = mobilisedPatterns(m, path);
+      const reads = m.rows.some((r) => path.has(r.id) && r.assumptionDeps.includes(S));
+      // (a) Reach.
+      for (const [pattern, anchors] of [["money", p.money], ["spending", p.spending], ["careers", p.careers]] as const)
+        for (const id of anchors)
+          if (!readsShare(m, id)) flag(m, `reach ${pattern} ${id}`, `${id} values ${pattern === "money" ? "money moved" : pattern === "spending" ? "spending its research or advice changed" : "career changes"} without the mobiliser's share: the shared formula multiplies by ${S} (src/engine/moved-money.ts)`);
+      if (p.direct && !reads) flag(m, "reach money", `values money at moved_dollar_value (a result already in counterfactual dollars) but no row on the path to the output reads ${S}`);
+      if (p.win) {
+        for (const r of p.shares) {
+          if (r.credit === "delivery") continue;
+          if (!readsShare(m, r.id)) flag(m, `reach win ${r.id}`, `${r.id} is a branch's used share in a model with wins${r.credit ? ` (class ${r.credit})` : ""}, but doesn't read ${S}: multiply the share among co-advocates by ${S}, or mark the branch \`"credit": "delivery"\` (own services, grants or purchases)`);
+        }
+        if (!p.shares.length && !reads) flag(m, "reach win", `has a win (a chance of success or $${WIN_YEARS}) but no used share on the path and no row reading ${S}`);
+      }
+      // An import says which side of the line it is on.
+      if (!isOwnBuild(m)) {
+        if (m.mobilised === undefined) flag(m, "mobilised", "an imported model with no `mobilised` classification: true where its good is done with resources others commit because of the organisation (money moved, a government's or company's delivery of what it advised or won, research adopted), false for own delivery");
+        else if (m.mobilised && !reads) flag(m, "reach import", `mobilised, but no row on the path to the output reads ${S}: add our row after output.native`);
+        else if (!m.mobilised && (p.money.length || p.spending.length || p.careers.length)) flag(m, "mobilised", `classified as own delivery, but it values ${[...p.money, ...p.spending, ...p.careers].join(", ")}`);
+      }
+      // (d) Own delivery reads none.
+      if (reads && !p.any && !m.mobilised) flag(m, `delivery $${S}`, `reads ${S} (${readers.map((r) => r.id).slice(0, 3).join(", ")}) but mobilises nothing: no money moved, changed spending, career change or win${isOwnBuild(m) ? "" : ", and `mobilised` isn't true"}`);
+      for (const r of p.shares) if (r.credit === "delivery" && readsShare(m, r.id)) flag(m, `delivery ${r.id}`, `${r.id} is a delivery branch's share but reads ${S}`);
+    }
+    if (!readers.length && !usedAssumptions(lib, m).includes(S)) continue;
+    const h0 = headline(lib, m, av);
+    // (e) Nothing breaks at the low end (a share of a total that falls to nothing).
+    if (Number.isFinite(h0) && !Number.isFinite(headline(lib, m, { ...av, [S]: low }))) flag(m, `at ${fmt(low)}`, `the headline is ${fmt(h0)} at the default and not a number at $${S} = ${fmt(low)}`);
+    if (!readers.length) continue;
+    // (c) The evaluator view: pinned to 1, read in our rows only, never moving.
+    if (m.evaluator) {
+      if (m.evaluator.assumptions[S] !== 1) flag(m, `evaluator.assumptions.${S}`, `reads $${S} but the evaluator view ${S in m.evaluator.assumptions ? `pins it to ${m.evaluator.assumptions[S]}` : "doesn't pin it"}: pin it to 1 (the evaluator credits the charity in full)`);
+      const ours = new Set(m.sections.filter((x) => x.kind === "ours").map((x) => x.id));
+      for (const r of readers) if (!(r.section && ours.has(r.section))) flag(m, `${r.id} section`, `${r.id} reads $${S} outside an ours section: the share is our step, after the evaluator's bottom line`);
+      const e0 = headline(lib, m, av, {}, "evaluator"), e1 = headline(lib, m, { ...av, [S]: av[S] / 2 }, {}, "evaluator");
+      if (!(close(e0, e1, 1e-12) || (Number.isNaN(e0) && Number.isNaN(e1)))) flag(m, "evaluator view", `the evaluator view moves with $${S}: ${fmt(e0)} at the default, ${fmt(e1)} at half`);
+    }
+    // (b) Once, with the models it reads live held (each brings its own share: shares compound along a chain).
+    if (variant || !Number.isFinite(h0)) continue;
+    const vals = compute(lib, m, av);
+    const held = Object.fromEntries(modelDepsOf(m).map((x) => [`#${x}`, vals[`#${x}`]]));
+    const at = (k: number) => headline(lib, m, { ...av, [S]: av[S] * k }, held);
+    const h1 = at(1), h2 = at(0.5), h4 = at(0.25);
+    if (!close(h1 - h2, 2 * (h2 - h4), Math.max(1e-9, 1e-9 * Math.abs(h1 / (h1 - h2)))) && !(h1 === h2 && h2 === h4))
+      flag(m, "once", `the headline isn't a straight line in $${S} (${fmt(h1)}, ${fmt(h2)} at half, ${fmt(h4)} at a quarter): the share is applied twice on some path, or something divides by it`);
+    const p = mobilisedPatterns(m, path);
+    const branches = [...p.money, ...p.spending, ...p.careers, ...p.shares.filter((r) => r.credit !== "delivery").map((r) => r.id)].filter((id) => readsShare(m, id));
+    for (const x of notHalved(lib, m, av, held, branches))
+      flag(m, `once ${x.row}`, `${x.row}'s part of the headline is ${fmt(x.full)} at the default and ${fmt(x.half)} at half the share, not half of it: the share reaches it twice, or only part of it`);
+    for (const x of costsOutsideShare(lib, m, av))
+      flag(m, `once ${x.row}`, `${x.row} (a cost of the mobilised resources) is ${fmt(x.full)} of the headline at the default and ${fmt(x.half)} at half the share, not half of it: the share applies to the benefit minus the cost, so the row must read its branch's used share`);
+  }
+  return {
+    id: "INV-22", title, status: "checked", checked: models.length, violations,
+    how: `Every model with a result in common units (not templates). Only the row ${S} = $${S} reads the assumption. (a) Reach (not variants): every row *moved_dollar_net_value, *shifted_dollar_value and career_change_value on the path to the output reads ${S}, itself or through its rows; a model that reads moved_dollar_value without them (a result already in counterfactual dollars) reads it somewhere on the path; in a charityevals model with a win (a row *p_success on the path, one reading $${WIN_YEARS}, or a share of class win or research) every used share on the path (attribution_share, <branch>_attribution_share) reads it or carries \`"credit": "delivery"\`; an imported model declares \`mobilised\`, and reads ${S} on the path if true. (b) Once, for a model whose rows read it, the models it reads live held: the headline at the default, half and a quarter of the share lies on a straight line; the part of the headline behind each mobilised row (headline minus headline with the row at 0) halves exactly with the share, and so does the part behind each cost of mobilised resources (*compliance_uov, *public_cost_uov, not their sums, not a delivery branch's). (c) A model with an evaluator view that reads it pins it to 1, reads it only in rows of an ours section, and its evaluator headline is the same at half the share (the evaluator view also reads other models at 1). (d) A model with none of the patterns of (a) (an import: \`mobilised\` not true) reads no ${S}, and a delivery share doesn't either. (e) Every model the share can move has a finite headline at the slider's low end.`,
+  };
+}
+
+// --- INV-23: an import that credits a won policy or commitment counts the shared years (2.9) -----------
+
+/** What marks a won policy or commitment in an evaluator's model: a chance that the campaign succeeds or
+ * that the change would have come anyway, a commitment or pledge, years brought forward or sustained. */
+const WON_REFORM = /\b(probability|chance|likelihood)\b[^.]{0,60}\b(success|succeed|pass|happens? anyway|come anyway)|\bcommitments?\b|\bpledges?\b|brought forward|counterfactually sustained|duration of impact/i;
+/** Mobilised imports whose rows read like a win but credit none for a number of years, each with its reason. */
+export const WON_REFORM_WAIVERS: Record<string, string> = {
+  "good-food-fund": "ACE counts people reached once by its kitchen, summit and youth programme; no commitment or policy is credited for a number of years",
+  "vegan-outreach-ace-2016": "one-off outreach to individuals; its years are years of suffering spared per person reached",
+  "pallium-india-hli": "its duration is the period its own palliative care service reaches patients, not a won policy",
+  "wild-animal-initiative": "ACE counts papers and grants; no commitment or policy is credited",
+  "cearch-aim": "money moved by research: its chance of success is the organisation's, valued by the shared money rows (2.8)",
+  "better-futures-guide-aim": "money moved by an evaluator: its chance of success is the organisation's, valued by the shared money rows (2.8)",
+  "dimagi-optionality-mother-baby-wellness": "the value of a pilot: its chance of success is the product's, no law, regulation or pledge is credited",
+  "evidence-action-india-water-pilot-expansion-2023": "the value of a pilot: its chance of success is the programme's, no law, regulation or pledge is credited",
+  "evidence-action-in-line-chlorination-india-2023": "technical assistance to a programme the states run: its chance is the programme's success, counted for GiveWell's programme years, not a law, regulation or pledge",
+  "evidence-action-maternal-syphilis-zambia-cameroon": "technical assistance: the chance a test is adopted in a health service, counted for GiveWell's programme years, not a law, regulation or pledge",
+  "evidence-action-syphilis-screening-treatment-in": "technical assistance: the chance a test is adopted in a health service, counted for GiveWell's programme years, not a law, regulation or pledge",
+  "innovations-for-poverty-action-ipa-m-e-msi-family-planning-outreach": "the value of an evaluation: contraception brought forward for clients, not a reform",
+};
+
+/** INV-23 (docs/normalization.md 2.9): every imported model that credits a won policy or commitment (a
+ * mobilised import with a row on the path that reads like one) reads $win_years_counted on the path to
+ * its output, the evaluator's years in `published`; its evaluator view doesn't move with the setting. */
+export function inv23(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const W = WIN_YEARS;
+  const title = "An import that credits a won policy or commitment counts the shared years";
+  const violations: Violation[] = [];
+  if (!(W in av)) return { id: "INV-23", title, status: "not checked", checked: 0, violations, how: `No $${W} in the assumptions.` };
+  const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && m.kind !== "variant" && !isOwnBuild(m) && m.mobilised && headlineConversion(lib, m.output.unit));
+  let checked = 0;
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    const onPath = m.rows.filter((r) => path.has(r.id));
+    const reads = onPath.some((r) => r.assumptionDeps.includes(W));
+    const sign = onPath.find((r) => WON_REFORM.test(r.label));
+    if (!sign && !reads) continue;
+    checked++;
+    if (m.id in WON_REFORM_WAIVERS) {
+      if (reads) violations.push({ inv: "INV-23", model: m.id, where: "waiver", detail: `waived (${WON_REFORM_WAIVERS[m.id]}) but reads $${W}: remove the waiver` });
+      continue;
+    }
+    if (!reads) { violations.push({ inv: "INV-23", model: m.id, where: W, detail: `credits a won policy or commitment ("${sign!.label}") but no row on the path to the output reads $${W}: count the win for the shared years in our view, the evaluator's years in \`published\` (docs/normalization.md 2.9), or waive it with a reason (WON_REFORM_WAIVERS)` }); continue; }
+    if (m.evaluator) {
+      const e0 = headline(lib, m, av, {}, "evaluator"), e1 = headline(lib, m, { ...av, [W]: av[W] * 2 }, {}, "evaluator");
+      if (!(close(e0, e1, 1e-12) || (Number.isNaN(e0) && Number.isNaN(e1)))) violations.push({ inv: "INV-23", model: m.id, where: "evaluator view", detail: `the evaluator view moves with $${W}: ${fmt(e0)} at the default, ${fmt(e1)} at twice the years; the evaluator's years belong in \`published\`` });
+    }
+  }
+  return {
+    id: "INV-23", title, status: "checked", checked, violations,
+    how: `Every imported model (not variants) classed mobilised with a result in common units and a row on the path to its output whose label names a chance of success or of the change coming anyway, a commitment or pledge, years brought forward or sustained, or a duration of impact: a row on the path reads $${W}, and the evaluator view is the same at twice the years. Waived with reasons (WON_REFORM_WAIVERS): outreach, services and money moved that credit no win for a number of years. charityevals' own builds read it through their templates (src/engine/templates.ts).`,
+  };
+}
+
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

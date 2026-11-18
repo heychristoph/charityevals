@@ -1,6 +1,6 @@
 # Audit: machine-intelligence-research-institute-charityevals, round 7 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 7.327e-5 daly/$ = 0.0733 years of healthy life per 1,000 dollars (combined range 0.0003–17.7); cause median 0.958 (×0.077). Verdict: pass.
-Model-sha: 2763338a44877b8c7f970e4836bd93465f3e81f3a153ac9276f8cac0fd93cdb1
+Model-sha: 12bad0689e59a3fd0ce11b4b0a6bb7a864f8fb18b5ec2dc1e66a5ce187e04825
 Scope: unchanged from round 4. Checks only that both merged changes are present together and consistent: (a) rows bio_covid_scale_share, covid_scale_deaths_averted, covid_value_per_death and uov_bridged (round 5); (b) leverage_funging_adj 1 with the explainer naming the next-dollar room factor (round 6).
 Mechanical: lint no high or medium (lows: ranges on small-catastrophe rows, unused pol_/fb_cost_share, far-below confirmed by the summary's reason), invariants none, normalization-audit none (all checks 0 violations; generated restored), scripts/check.ts passes, simulation-check stable (5% 0.065, 95% 9.18 × best guess; single events miss 0%).
 Previous round: rounds 5 and 6 had no open findings.
@@ -37,3 +37,9 @@ Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanica
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
 
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against 7dbeec92.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: fb_credit_share is the skeleton's row (unused here, or wording only): no value change. Mechanical: headline unchanged, 1 row changed, against 2b24b73c.

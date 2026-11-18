@@ -1040,10 +1040,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "Credit by share of resources: the training's cost over the training plus what employers pay for the work-years it adds (fb_work_dollars). About a quarter here.",
-      "formula": "cost_total * fb_cost_share / (cost_total * fb_cost_share + fb_work_dollars)"
+      "explainer": "1: no other programme trained the same fellows and doctoral students; down to 0.5 if another fellowship shares them. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1214,20 +1219,29 @@
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
       "value": {
-        "low": 0.6,
-        "best": 0.85,
+        "low": 0.7,
+        "best": 0.9,
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The Center's share of the resources behind its outputs: CORI works under a cooperative agreement with CDC's Center for Forecasting and Outbreak Analytics (CDC's own staff time) and with health departments; exercises and meetings bring partners' staff time; the rest is the Center's own. Our judgment, 0.85 (0.6 to 1)."
+      "explainer": "The Center's share of the resources behind its outputs: exercises and meetings bring partners' staff time; the rest is the Center's own. CDC's Center for Forecasting and Outbreak Analytics, which pays for CORI under a cooperative agreement (in the Center's spending) and uses its work with the health departments, is the adopter: its staff's time is under the mobiliser's share, not in this one (docs/normalization.md 2.24). Our judgment, 0.9 (0.7 to 1): the old 0.85 less CDC's and the health departments' part, judged a third of the outside time."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
     },
     {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leverage_funging_adj",
@@ -1269,7 +1283,7 @@
         "high": 0.2
       },
       "kind": "judgment",
-      "explainer": "Good beyond the pandemics counted: CORI's analytics and the Center's preparedness research help health departments in ordinary outbreaks (measles, mpox, H5N1), far smaller than COVID-scale and outside the chain, and the journal Health Security serves the field. No outbreak deaths averted are measured. Anchor: at 5% this is about 2 years of healthy life per $1,000 of CORI's spending, in the range of the site's rich-country services and research models (cancer research and refugee services about 2, the American Red Cross about 4.5); 0 to 20% (up to about 7.5), our judgment.",
+      "explainer": "Good beyond the pandemics counted: CORI's analytics and the Center's preparedness research help health departments in ordinary outbreaks (measles, mpox, H5N1), far smaller than COVID-scale and outside the chain, and the journal Health Security serves the field. No outbreak deaths averted are measured. Anchor: at 5% this is about 0.45 years of healthy life per $1,000 of CORI's spending; 0 to 20% (up to about 1.8), our judgment.",
       "side_effect": "added"
     },
     {

@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "feeding-america",
   "owner": "charityevals",
-  "summary": "Feeding America sources donated food from about 600 national food companies for the US network of more than 250 food banks and 60,000 pantries, funds and supports those food banks, and helps people apply for SNAP. In the year to June 2025 it spent $222 million of its own money on this and passed on {{row:household_size}} billion pounds of donated food (about 2 billion meals), which, valued at what it saves the households who eat it on the site's log-income scale and credited by Feeding America's small share of the resources behind it (the donors' food at about $5.7 billion at retail and the food banks' and pantries' cost of handing it out), with the SNAP enrolments its grants help cause and the landfill emissions the donated food avoids, comes to about {{result}} years of healthy life per $1,000. It is low because the people helped are in the US, where $90 of food a year is a small share of what even a poor household spends, and because most of the resources behind the food are others'. About three fifths is the food, the rest SNAP help; both branches are discounted for missing data. The biggest uncertainties are how much of the food would have reached people without Feeding America, how poor the people served are, and how many SNAP enrolments the help causes.",
+  "summary": "Feeding America sources donated food from about 600 national food companies for the US network of more than 250 food banks and 60,000 pantries, funds and supports those food banks, and helps people apply for SNAP. In the year to June 2025 it spent $222 million of its own money on this and passed on 2.4 billion pounds of donated food (about 2 billion meals), which, valued at what it saves the households who eat it on the site's log-income scale and credited by Feeding America's small share of the resources behind it (the donors' food at about $5.7 billion at retail and the food banks' and pantries' cost of handing it out), with the SNAP enrolments its grants help cause and the landfill emissions the donated food avoids, comes to about {{result}} years of healthy life per $1,000. It is low because the people helped are in the US, where $90 of food a year is a small share of what even a poor household spends, and because most of the resources behind the food are others'. About three fifths is the food, the rest SNAP help; both branches are discounted for missing data. The biggest uncertainties are how much of the food would have reached people without Feeding America, how poor the people served are, and how many SNAP enrolments the help causes.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Feeding America, food network programmes (FY2025)",
@@ -606,6 +606,7 @@
       "id": "food_attribution_share",
       "section": "adjustments",
       "label": "Food: Feeding America's share of the resources behind the food reaching people",
+      "credit": "delivery",
       "format": "percent",
       "formula": "cost_total * (1 - snap_program_share) / (cost_total * (1 - snap_program_share) + @feeding_america.donated_food_value_fy2025 * retail_vs_wholesale + fa_pounds * distribution_cost_per_lb)",
       "explainer": "Convention 2: Feeding America's own cash against the donors' food at its retail value (the audited wholesale value times the same retail mark-up the effect uses, as the family recipe asks) and the members' and pantries' cost of handing it out. Credit goes by share of resources, so Feeding America is credited with about 4% of the food's value. The programs line's child hunger and food-as-medicine grants pay for handing out network food to children and patients (backpacks, school and clinic pantries), so they are part of this branch's cost and its food."
@@ -640,6 +641,7 @@
       "id": "snap_attribution_share",
       "section": "adjustments",
       "label": "SNAP: Feeding America's share of the resources behind the network's SNAP help",
+      "credit": "delivery",
       "format": "percent",
       "explainer": "Feeding America's share of the resources behind the network's SNAP help: its own cost on SNAP over the cost of all the help (Convention 2), so the credit follows the cost assumed to go to SNAP.",
       "formula": "cost_total * snap_program_share / (snap_applications * cost_per_assisted_application)"
@@ -741,6 +743,7 @@
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
+      "credit": "delivery",
       "format": "percent",
       "formula": "attribution_share_shared"
     },

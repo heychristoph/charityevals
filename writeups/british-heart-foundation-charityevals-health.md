@@ -9,8 +9,8 @@ We estimate **{{result}} years of healthy life per $1,000** you give to this wor
 BHF's health spending was £54.2m. The accounts don't split it by activity, so the shares below are our estimates:
 
 - **Information and support, about {{row:info_share_of_health}}.** This covers the health information pages (35 million views), the Heart Matters magazine and printed guides (over 150,000 accessible copies), the nurse-led Heart Helpline (26,000 people), online peer support (9,000 active users a month) and awareness campaigns.
-- **CPR and defibrillators, about 15%.** The free RevivR app teaches CPR in about 15 minutes, and 190,000 people completed it in the year. The Circuit is the defibrillator map every UK ambulance service uses to send 999 callers to the nearest device. It lists 118,800 defibrillators.
-- **Policy (about 6%) and NHS implementation pilots (about 5%).** These are modelled in the main model.
+- **CPR and defibrillators, about {{row:cpr_share_of_health}}.** The free RevivR app teaches CPR in about 15 minutes, and 190,000 people completed it in the year. The Circuit is the defibrillator map every UK ambulance service uses to send 999 callers to the nearest device. It lists 118,800 defibrillators.
+- **Policy (about {{row:policy_share_of_health}}) and NHS implementation pilots (about {{row:hif_share_of_health}}).** These are modelled in the main model.
 
 ### How the model works
 
@@ -19,7 +19,7 @@ BHF's health spending was £54.2m. The accounts don't split it by activity, so t
 - **People reached:** the helpline's 26,000 callers and 9,000 peer-community users. Then the readers: 35 million page views, about two thirds from the UK, at about 3 pages per reader, plus about 300,000 readers of print. We count only the 22% of readers we judge to be patients with heart or circulatory disease, about 1.7 million people.
 - **Dose:** the trials gave programmes of education, from one 40-minute session with a follow-up call to weeks of sessions. We count a helpline call or peer support as a tenth of a trial programme, and reading a few pages as a hundredth. For comparison, five tailored mail-outs after a heart attack changed one behaviour a little and medication use not at all (the ISLAND trial). That comes to about 21,000 people's worth of a trial programme.
 - **Effect:** in the trials, education cut deaths by a fifth (risk ratio 0.80, 95% CI 0.60 to 1.05; Cochrane, 2017) among patients dying at about 3% a year. It also raised quality of life a little, which we count as 0.02 of a healthy year. Both effects are taken over the trials' follow-up, about a year and a half.
-- **Adjustments:** we put trust in the trials at 0.6, since the death effect is uncertain. The trials' control groups already had usual care, so only help from elsewhere counts against BHF: 55% of the benefit wouldn't have come from the NHS website or other charities anyway. BHF has 90% of the credit; Tesco and Royal Mail part-fund the printed information.
+- **Adjustments:** we put trust in the trials at 0.6, since the death effect is uncertain. The trials' control groups already had usual care, so only help from elsewhere counts against BHF: 55% of the benefit wouldn't have come from the NHS website or other charities anyway. BHF has {{row:info_attribution_share_shared}} of the credit; Tesco and Royal Mail part-fund the printed information.
 
 **RevivR:**
 - A trainee is at a cardiac arrest about once in 1,200 years. That comes from 54 arrests per 100,000 people a year, with 1.5 people present at each.

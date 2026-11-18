@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "pure-earth",
   "owner": "hli",
+  "mobilised": true,
   "bulk": true,
   "summary": "Advocates against lead in cosmetics in Ghana and monitors enforcement, to cut lead exposure. A re-implementation of the Happier Lives Institute's spreadsheet, traced cell by cell from its bottom line (WELLBYs per $1,000). Calculated rows reproduce the sheet's values.",
   "source": {
@@ -25,7 +26,8 @@
     "assumptions": {
       "resource_shares": 0,
       "discount_rate": 0,
-      "daly_per_wellby": 0.575
+      "daly_per_wellby": 0.575,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -247,10 +249,49 @@
       "expected": 10.0
     },
     {
+      "id": "counterfactual_years",
+      "label": "Counterfactual years",
+      "section": "ghana_cf_yrs_analysis",
+      "formula": "$win_years_counted",
+      "published": 8,
+      "unit": "years",
+      "explainer": "Changed for consistency. HLI counts 8 years of lower lead in cosmetics that would not have come without the work. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps HLI's 8."
+    },
+    {
+      "id": "years_until_effect",
+      "section": "ghana_cf_yrs_analysis",
+      "label": "Years until the regulation takes effect",
+      "format": "number",
+      "value": {
+        "low": 0,
+        "best": 2,
+        "high": 3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment, 2 years (0 to 3): the advocacy runs about two years before the rules are enforced. HLI doesn't model the wait."
+    },
+    {
+      "id": "wait_discount",
+      "section": "ghana_cf_yrs_analysis",
+      "label": "Discount for the wait until the regulation takes effect",
+      "format": "number",
+      "formula": "(1 + discount_rate_per_year) ^ -years_until_effect",
+      "published": 1,
+      "explainer": "Changed for consistency. The wait until a won reform takes effect is discounted at the shared rate in every such model (docs/normalization.md 2.9); HLI doesn't discount it, so the evaluator view keeps 1."
+    },
+    {
+      "id": "counterfactual_years_discounted",
+      "label": "Counterfactual years, the wait and later years discounted",
+      "section": "ghana_cf_yrs_analysis",
+      "formula": "pv_annuity_due(1, discount_rate_per_year, counterfactual_years) * wait_discount",
+      "unit": "years",
+      "explainer": "Changed for consistency. In our view each later year counts less, at the shared rate (Next year's good counts less by); HLI doesn't discount, so the evaluator view counts all 8 in full."
+    },
+    {
       "id": "counterfactual_years_adjusted_and_attributed",
       "label": "Counterfactual years [adjusted and attributed]",
       "section": "ghana_cf_yrs_analysis",
-      "formula": "8 * (advocacy_now + monitoring_and_enforcement_now) / full",
+      "formula": "counterfactual_years_discounted * (advocacy_now + monitoring_and_enforcement_now) / full",
       "expected": 4.0
     },
     {
@@ -665,11 +706,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "wellby_per_dollar",
       "label": "WELLBYs per dollar",
       "section": "bottom_line",
-      "formula": "(wellbys_per_1_000 / 1000) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((wellbys_per_1_000 / 1000) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

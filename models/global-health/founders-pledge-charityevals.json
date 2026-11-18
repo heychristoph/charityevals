@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "founders-pledge",
  "owner": "charityevals",
- "summary": "Founders Pledge runs a pledge community of entrepreneurs, researches where to give, advises members and ultra-wealthy Philanthropy Partners and runs donor-advised and public funds; this model covers its whole group's 2025 operating costs ($12.1M across its UK charity and US and German entities; the $317M of grants it passed on are the recipients' cost). At the defaults it averts about 8.0 years of healthy life per $1,000: of the $196M granted to its recommended charities in 2025, the site's shared share for a meta charity without a donor survey credits it with causing 30% of its funds' $55M and of its members' roughly $62M (half of that new money), and with redirecting 30% of its Philanthropy Partners' roughly $79M of advised giving, valued only for the gain and discounted for missing data (the one branch so discounted); each dollar is valued by its cause split, health (27.4%) at its grantees with a figure on the rankings (Evidence Action, Helen Keller Intl and four more), climate (31.5%) at Clean Air Task Force and SilverLining, catastrophic risks (2.8%) at SecureBio and education (31.1%) at the global-health charities, since none of its education grantees has a published model here. Its members' other giving it caused ($163M went to charities it doesn't recommend) adds about a quarter, at an ordinary charity's value. It moves about sixteen dollars to recommended charities for each dollar it spends. The result moves most with the next dollar ({{row:marginal_vs_past_average}} of the 2025 average) and the share of giving it caused; its climate third adds almost nothing.",
+ "summary": "Founders Pledge runs a pledge community of entrepreneurs, researches where to give, advises members and ultra-wealthy Philanthropy Partners and runs donor-advised and public funds; this model covers its whole group's 2025 operating costs ($12.1M across its UK charity and US and German entities; the $317M of grants it passed on are the recipients' cost). At the defaults it averts about {{result}} years of healthy life per $1,000: of the $196M granted to its recommended charities in 2025, the site's shared share for a meta charity without a donor survey credits it with causing 30% of its funds' $55M and of its members' roughly $62M (half of that new money), and with redirecting 30% of its Philanthropy Partners' roughly $79M of advised giving, valued only for the gain and discounted for missing data (the one branch so discounted); each dollar is valued by its cause split, health (27.4%) at its grantees with a figure on the rankings (Evidence Action, Helen Keller Intl and four more), climate (31.5%) at Clean Air Task Force and SilverLining, catastrophic risks (2.8%) at SecureBio and education (31.1%) at the global-health charities, since none of its education grantees has a published model here. Its members' other giving it caused ($163M went to charities it doesn't recommend) adds about a quarter, at an ordinary charity's value. It moves about sixteen dollars to recommended charities for each dollar it spends. The result moves most with the next dollar ({{row:marginal_vs_past_average}} of the 2025 average) and the share of giving it caused; its climate third adds almost nothing.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Founders Pledge",
@@ -574,12 +574,20 @@
    "explainer": "Our judgment, the shared rule for an organisation whose money goes to several causes. Shifted money would have gone to an ordinary charity of the same cause: each cause's at the rule for a mover in that cause (GiveDirectly's live result, times a shared multiple, 1×, from 0 to 3×, over the global-health charities' on the rankings, times that cause's charities'), weighted by the organisation's own split, all live under your values."
   },
   {
+   "id": "mobiliser_share",
+   "section": "moved_money",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "shifted_dollar_value",
    "section": "moved_money",
-   "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+   "label": "Value of a dollar all shifted (given anyway, now to a better use), at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "moved_dollar_value - prior_dollar_value",
-   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+   "formula": "mobiliser_share * (moved_dollar_value - prior_dollar_value)",
+   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed. Its owners spent it, so the organisation is credited its share of that gain (mobiliser_share)."
   },
   {
    "id": "informed_money_value",
@@ -592,10 +600,10 @@
   {
    "id": "moved_dollar_net_value",
    "section": "moved_money",
-   "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+   "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+   "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
   },
   {
    "id": "moved_value",
@@ -640,8 +648,9 @@
    "section": "adjustments",
    "label": "Share of credit used",
    "format": "percent",
-   "formula": "attribution_share_shared",
-   "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+   "formula": "attribution_share_shared * mobiliser_share",
+   "credit": "win",
+   "explainer": "The skeleton's policy branch, unused here (0): its share among co-advocates times the mobiliser's share (docs/normalization.md 2.24). The money moved and the careers take the mobiliser's share in their own rows."
   },
   {
    "id": "missing_data_adj",
@@ -715,9 +724,9 @@
    "section": "careers",
    "label": "Value of one career change (units of value)",
    "format": "number",
-   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
    "unit": "units of value",
-   "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+   "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
   },
   {
    "id": "careers_missing_data_adj",
@@ -790,8 +799,8 @@
    "section": "donor",
    "label": "Your dollar's share of the cost",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + (money_moved + other_moved) * new_money_share, 0))",
-   "explainer": "With credit by share of resources: staff's forgone pay and the new money its fund donors and members gave, to its recommended charities and to others, share the outcome with your dollar (the shared meta formula); advised money, all shifted, adds no resources."
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources: staff's forgone pay shares the outcome with your dollar. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24)."
   },
   {
    "id": "uov_per_donor_dollar",

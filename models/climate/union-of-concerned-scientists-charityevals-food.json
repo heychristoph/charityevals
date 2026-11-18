@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "union-of-concerned-scientists",
   "owner": "charityevals",
-  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, {{row:cost_total}} with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year was part of the case for the federal wetland protections (Swampbuster) that a court upheld in May 2025 against a challenge filed in 2024; its other work is a share. At the defaults a dollar given keeps about 0.0005 years of healthy life per $1,000 (flood damage averted, valued as consumption to the average American), from {{low}} to {{high}} on its plausible range. It is low because the challenge was unlikely to succeed, the government and four other groups fought the case (UCS, not a party, is credited with 1%), only farmed wetlands are at stake and drain slowly, and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the chance the challenge would have won and the drainage rate each move it several times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
+  "summary": "The Union of Concerned Scientists' Food and Environment programme ($4.5M in the year to September 2025, {{row:cost_total}} with overhead) does analysis and advocacy on farms and food: wetlands and the farm bill's conservation rules, fertilizer, groundwater, farm trade and farmworkers. This model counts its one win of the year with a value at stake: its estimate that the Upper Midwest's wetlands avert about $23 billion of flood damage a year was part of the case for the federal wetland protections (Swampbuster) that a court upheld in May 2025 against a challenge filed in 2024; its other work is a share. At the defaults a dollar given keeps about 0.00014 years of healthy life per $1,000 in expectation (flood damage averted, valued as consumption to the average American), from {{low}} to {{high}} on its plausible range. It is low because the challenge was unlikely to succeed, the government and four other groups fought the case (UCS, not a party, is credited with 1%), only farmed wetlands are at stake and drain slowly, and the money kept goes to US households, where a dollar does far less than in poor countries. The result is mostly uncertainty: the share credited to UCS, the chance the challenge would have won and the drainage rate each move it several times. The one branch is discounted for missing data: nothing about the work's outcome is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Union of Concerned Scientists (food and farms)",
@@ -376,12 +376,21 @@
       }
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "missing_data_adj",

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "metr",
   "owner": "charityevals",
-  "summary": "METR (Model Evaluation and Threat Research, Berkeley) measures what frontier AI agents can do on their own and whether their developers could lose control of them: in 2024, its first year as a charity of its own, it evaluated GPT-4o, o1-preview and Claude 3.5 Sonnet before release with OpenAI and Anthropic, built task suites calibrated on human experts and RE-Bench for AI research and development, and analysed companies' frontier safety policies. This model covers its one programme in its first return, May to December 2024 ($6.9M of $8.2M spent). At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.004 to 0.5 in 90% of the simulation's draws, so the result is mostly uncertainty: each dollar is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. All its work is against AI escaping its developers' control, and Rethink's typical misalignment project cuts the deaths in catastrophes the world survives far less per dollar than its typical misuse project; the next dollar counts at {{row:marginal_vs_past_average}} of the past average because commitments of about $71M arrived in 2026, and a tenth of the value is taken off for evaluations speeding the race. The chance of an AI catastrophe (the slider), the typical cut per dollar, the discount rate and the share of work counted as misuse (0 by default; counting its cybersecurity tasks as misuse work, 10%, would raise the result nine times) are the biggest swings; the one branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "METR (Model Evaluation and Threat Research, Berkeley) measures what frontier AI agents can do on their own and whether their developers could lose control of them: in 2024, its first year as a charity of its own, it evaluated GPT-4o, o1-preview and Claude 3.5 Sonnet before release with OpenAI and Anthropic, built task suites calibrated on human experts and RE-Bench for AI research and development, and analysed companies' frontier safety policies. This model covers its one programme in its first return, May to December 2024 ($6.9M of $8.2M spent). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} in 90% of the simulation's draws, so the result is mostly uncertainty: each dollar is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. All its work is against AI escaping its developers' control, and Rethink's typical misalignment project cuts the deaths in catastrophes the world survives far less per dollar than its typical misuse project; the next dollar counts at {{row:marginal_vs_past_average}} of the past average because commitments of about $71M arrived in 2026, and a tenth of the value is taken off for evaluations speeding the race. The chance of an AI catastrophe (the slider), the typical cut per dollar, the discount rate and the share of work counted as misuse (0 by default; counting its cybersecurity tasks as misuse work, 10%, would raise the result nine times) are the biggest swings; the one branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: METR (Model Evaluation and Threat Research)",
@@ -874,15 +874,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Not used: the field-building branch counts nothing for METR in 2024 (fb_people is 0); the template's range kept for the switched-on check."
+      "explainer": "Not used: no one is trained or placed (fb_people is 0). The skeleton's figure: 1 when no other programme trained or placed the same people. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (attribution_share) covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_deaths_per_million",
@@ -979,27 +979,36 @@
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",
-      "explainer": "METR's share of all resources behind its evaluations: the companies give it model access before release, their staff's time and free tokens ('These companies have also provided access and tokens, which we use for evaluations, research, and engineering', about page), none of which is in its accounts; METR's own cloud computing was $1.09M in 2024 (Part IX line 14). No fees (program service revenue $0, Part I line 9). 0.7, our judgment, 0.5 to 0.9: the work is METR's own but runs on the companies' models and tokens.",
+      "explainer": "METR's share of the resources behind its evaluations: the companies give it model access before release and free tokens ('METR has not accepted funding from AI companies, though we make use of significant free tokens, which we use for evaluations, research, and engineering, as noted above.', about page), in-kind inputs that are not in its accounts; METR's own cloud computing was $1.09M in 2024 (Part IX line 14). No fees (program service revenue $0, Part I line 9). The companies' staff time in taking up the evaluations is the adopters', under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.8, our judgment, 0.6 to 0.95: the work is METR's own but runs on the companies' models and tokens.",
       "value": {
-        "low": 0.5,
-        "best": 0.7,
-        "high": 0.9
+        "low": 0.6,
+        "best": 0.8,
+        "high": 0.95
       },
       "kind": "judgment",
       "source": {
         "title": "METR: About",
         "url": "https://metr.org/about",
-        "quote": "These companies have also provided access and tokens, which we use for evaluations, research, and engineering.",
-        "retrieved": "2026-11-14"
+        "quote": "METR has not accepted funding from AI companies, though we make use of significant free tokens, which we use for evaluations, research, and engineering, as noted above.",
+        "retrieved": "2026-11-17"
       }
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
     },
     {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The same as attribution_share_shared: no other credit split applies."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leverage_funging_adj",

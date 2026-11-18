@@ -1,6 +1,6 @@
 ### Summary
 
-SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.4 to about 94.
+SecureBio works to stop catastrophic pandemics: it builds early warning from sewage and airplane waste, tests how far AI models help with dangerous biology, and paid for SecureDNA's free DNA synthesis screening. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely catastrophic pandemics and AI disasters are, and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -35,7 +35,7 @@ The adjustments, each applied to its own branch:
 |---|---|---|
 | How far a typical project's effect applies | 1.2 for the AI evaluations, 0.75 for the pandemic work (about 0.84 overall) | AI developers use its evaluations. Neither the early-warning system nor SecureDNA was in routine use yet |
 | Work no one else would have done now | 0.7 | Others also screen DNA orders, test AI models and sequence wastewater |
-| SecureBio's share of the resources | 0.68 | Donated services, plus partners' work on samples, testing and model access |
+| SecureBio's share of the resources | 0.72 | Donated services, plus partners' work on samples, testing and model access |
 | Missing data | slider | Nothing about SecureBio's effect on the risk is measured |
 
 Side effects: other benefits +5%, from the Observatory's open data for tracking ordinary viruses. The Virology Capabilities Test is a benchmark AI developers could tune toward, at −2%. Published findings about where AI helps attackers cost −3%.
@@ -44,13 +44,13 @@ SecureBio held about a year of unrestricted reserves at the end of 2024, and its
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the pandemic work's share of the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 64. The pandemic work gives most of the result; a dollar of the AI evaluations averts about as many deaths as a dollar of pandemic work, but little of the future, because the misuse disasters it guards against are mostly ones the world survives.
+Pandemics that end humanity's future bring about half the pandemic work's share of the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 21. The pandemic work gives most of the result; a dollar of the AI evaluations averts about as many deaths as a dollar of pandemic work, but little of the future, because the misuse disasters it guards against are mostly ones the world survives.
 
 ### Biggest uncertainties
 
-- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.3 to 18.7.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 4 to 27 for the pandemic figure.
-- **How much the next dollar does.** 17% to 85% of the past average: 2.1 to 10.6.
+- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.7 to 23.6.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 1.6 to 9.1 for the pandemic figure.
+- **How much the next dollar does.** 17% to 85% of the past average: 2.7 to 13.4.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 
 ### What isn't modelled

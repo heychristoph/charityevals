@@ -9,6 +9,7 @@
  "estimate_basis": "marginal",
  "charity": "animal-policy-international",
  "owner": "ambitious-impact",
+ "mobilised": true,
  "bulk": true,
  "summary": "Ambitious Impact's 2022 estimate for a new charity advocating for New Zealand to ban imports of animal products made below its own welfare standards (fish, meat, eggs, milk and wool from countries ranked D or worse on World Animal Protection's index). The idea Animal Policy International was founded to run. A re-implementation of AIM's spreadsheet as it stands today, traced from its welfare points per dollar of charity costs (168; the report gives 186 from an earlier version, and 23 counting the government's enforcement costs), with the discounting over 40 years rebuilt from the yearly rows. Fish are 96% of the welfare points. Welfare points have no exchange rate to the site's scale, so a bridge of ours turns them into days of pain for each species, weighed by Rethink Priorities' welfare ranges. AIM also lists a 3.4% a year chance that New Zealand would pass the ban anyway, but doesn't use it, so the result assumes it never would.",
  "source": {
@@ -24,7 +25,8 @@
   "name": "Ambitious Impact",
   "assumptions": {
    "resource_shares": 0,
-   "discount_rate": 0.04
+   "discount_rate": 0.04,
+   "mobiliser_share": 1
   }
  },
  "resources": [],
@@ -81,7 +83,7 @@
    "id": "credit",
    "title": "Costs counted (ours)",
    "kind": "ours",
-   "explainer": "charityevals' step, not Ambitious Impact's. Ambitious Impact reports welfare points per dollar of the charity's costs, and separately per dollar of the charity's and the government's costs (the government pays to enforce the ban). With credit by share of resources on, the government's enforcement costs count as part of the cost, so your dollar gets the charity's share of the outcome."
+   "explainer": "charityevals' step, not Ambitious Impact's. Ambitious Impact reports welfare points per dollar of the charity's costs, and separately per dollar of the charity's and the government's costs (the government pays to enforce the ban). Our view keeps the figure per dollar of the charity's costs: the government acts only because of the campaign, so it is credited through the mobiliser's share, not as a co-funder."
   },
   {
    "id": "staff_pay",
@@ -3311,19 +3313,12 @@
    "explainer": "\"Best guess based on an estimate that this would happen in ~20 years without intervention\" (AIM, C11). AIM lists this counterfactual but no formula uses it, so AIM's result assumes the ban would never happen without the charity. Our view counts the ban only for the shared \"Years a won reform counts before it would have come anyway\" (row years_counted) instead, so this row stays for reference and doesn't feed the result."
   },
   {
-   "id": "charity_cost_share",
-   "section": "credit",
-   "label": "Charity's share of the full cost (charity and government)",
-   "format": "percent",
-   "formula": "if($resource_shares, charity_discounted_costs / (charity_discounted_costs + government_discounted_costs), 1)",
-   "explainer": "Off: 100%, Ambitious Impact's figure per dollar of charity costs. On: the charity's discounted costs as a share of its own and the government's (about 14%), which gives Ambitious Impact's 22.8 welfare points per dollar of all costs. Compliance costs (docs/normalization.md 2.21): none counted, as no analysis gives one: New Zealand has not proposed the ban, so no regulatory impact statement exists; Ambitious Impact counts only the government's enforcement."
-  },
-  {
    "id": "wp_per_dollar_credited",
    "section": "credit",
    "label": "Welfare points affected per dollar of the costs counted",
    "format": "number",
-   "formula": "wps_charity_costs * charity_cost_share"
+   "formula": "wps_charity_costs",
+   "explainer": "Ambitious Impact's figure per dollar of the charity's costs. The government would enforce the ban only because of the campaign, so it is no co-funder: it is credited through the mobiliser's share below (docs/normalization.md 2.24), and its enforcement costs stay out of the cost with credit by share of resources on or off (Ambitious Impact's figure per dollar of all costs is 22.8). Its enforcement money isn't netted from the good: welfare points have no money value (redirected public money outside money moved, aid and climate is not yet netted, 2.24). Compliance costs (docs/normalization.md 2.21): none counted, as no analysis gives one: New Zealand has not proposed the ban, so no regulatory impact statement exists."
   },
   {
    "id": "staff_cost_share",
@@ -3461,12 +3456,20 @@
    "explainer": "The days of pain for cattle, sheep and goats, weighed by how much cattle can suffer relative to a chicken (Rethink Priorities' pig as the stand-in; we use it for sheep and goats too). The cattle weight is a stand-in, our judgment: Rethink Priorities didn't estimate cattle, sheep or goats, so the pig's weight stands in (facts: welfare_ranges.cattle_vs_chicken, kind judgment)."
   },
   {
+   "id": "mobiliser_share",
+   "section": "species",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "ced_per_donor_dollar",
    "section": "species",
    "label": "Chicken-equivalent pain days averted per dollar you give",
    "format": "number",
-   "formula": "ced_fish + ced_pig + ced_chicken + ced_cattle",
-   "explainer": "Days of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
+   "formula": "(ced_fish + ced_pig + ced_chicken + ced_cattle) * mobiliser_share",
+   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nDays of disabling pain spared, all species, counted as a chicken's. The headline converts this into years of healthy life with the chicken slider and the healthy hours lost per day of disabling pain."
   }
  ],
  "output": {

@@ -1,6 +1,6 @@
 ### Summary
 
-The Nuclear Threat Initiative (NTI) works to lower the chance of nuclear war, nuclear terrorism and catastrophic pandemics, mostly through diplomacy, policy work and convening. Our model of all its programmes in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely these catastrophes are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 1 to about 450.
+The Nuclear Threat Initiative (NTI) works to lower the chance of nuclear war, nuclear terrorism and catastrophic pandemics, mostly through diplomacy, policy work and convening. Our model of all its programmes in 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely these catastrophes are and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -38,7 +38,7 @@ The adjustments apply to all branches:
 |---|---|---|
 | How far a typical project's effect applies to NTI's work | 0.8 | Above typical for diplomacy with senior access; below for public education |
 | Work no one else would have done now | 0.7 | |
-| NTI's share of the resources behind its projects | 0.85 | |
+| NTI's share of the resources behind its projects | 0.9 | Counts co-advocates and partners only; the officials who adopt the work are under the mobiliser's share |
 | Funging by large funders | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about NTI's effect on the risk is measured |
 
@@ -48,11 +48,11 @@ NTI holds about three years of spending in reserve and has run deficits, so the 
 
 ### What drives the result
 
-Nuclear work is most of the result: it is two thirds of the spending, and Rethink's typical nuclear project cuts its risk more per dollar than a biosecurity one. Catastrophes the world survives account for more than extinction does, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 100.
+Nuclear work is most of the result: it is two thirds of the spending, and Rethink's typical nuclear project cuts its risk more per dollar than a biosecurity one. Catastrophes the world survives account for more than extinction does, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 33.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 6 to 194.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 2.1 to 62.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely the catastrophes are.** The tournament's superforecasters put nuclear war at half the experts' chance, and engineered pandemics at a hundredth for extinction.
 - **How many people a catastrophe the world survives kills.** For nuclear war our judgment is 45%, with a range from 15% to 85% (Xia et al. 2022's regional and large wars).

@@ -9,7 +9,7 @@
   "estimate_basis": "unit_cost",
   "charity": "kids-in-need-of-defense",
   "owner": "charityevals",
-  "summary": "Kids in Need of Defense (KIND) represents unaccompanied migrant children in US immigration proceedings through its own lawyers and about 4,600 pro bono attorneys, and supports children in Mexico, Central America and Europe; in 2024 it served 8,500 children in the US and closed 580 cases with permanent relief (asylum, green cards, T and U visas). This model values a child's permanent status by a life in the US instead of removal to Guatemala, Honduras or El Salvador (for the 30% judged to be removed without it) or a life with status instead of undocumented, plus the danger at home avoided; with about half that relief judged not to have come without KIND and three quarters of the credit KIND's (the rest the pro bono lawyers' time at their own wage), it comes to about 0.013 years of healthy life per 1,000 dollars, because KIND's own spending comes to roughly $100,000 for each permanent relief and most children left without status are never removed. The biggest uncertainties are the chance of removal without status and what a lawyer changes, both judged from observational data, so all four branches (US casework, Central American Minors refugee applications, psychosocial support in Mexico and for Ukrainian children, and the other children served outside the US) are discounted by the shared missing-data slider; KIND's advocacy is a separate model.",
+  "summary": "Kids in Need of Defense (KIND) represents unaccompanied migrant children in US immigration proceedings through its own lawyers and about 4,600 pro bono attorneys, and supports children in Mexico, Central America and Europe; in 2024 it served 8,500 children in the US and closed 580 cases with permanent relief (asylum, green cards, T and U visas). This model values a child's permanent status by a life in the US instead of removal to Guatemala, Honduras or El Salvador (for the 30% judged to be removed without it) or a life with status instead of undocumented, plus the danger at home avoided; with about half that relief judged not to have come without KIND and three quarters of the credit KIND's (the rest the pro bono lawyers' time at their own wage), it comes to about {{result}} years of healthy life per 1,000 dollars, because KIND's own spending comes to roughly $100,000 for each permanent relief and most children left without status are never removed. The biggest uncertainties are the chance of removal without status and what a lawyer changes, both judged from observational data, so all four branches (US casework, Central American Minors refugee applications, psychosocial support in Mexico and for Ukrainian children, and the other children served outside the US) are discounted by the shared missing-data slider; KIND's advocacy is a separate model.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Kids in Need of Defense's legal services and regional work",
@@ -647,6 +647,7 @@
       "id": "us_attribution_share",
       "section": "adjustments",
       "label": "US casework: KIND's share of the resources behind the relief",
+      "credit": "delivery",
       "format": "percent",
       "formula": "us_cost / (us_cost + pro_bono_value + us_cost * other_resources_ratio)",
       "explainer": "KIND's cost over everyone's: its own, the volunteers' time and the others' resources above (Convention 2). About 0.75."
@@ -706,6 +707,7 @@
       "id": "cam_attribution_share",
       "section": "adjustments",
       "label": "CAM: KIND's share of the resources behind an arrival",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.3,
@@ -775,6 +777,7 @@
       "id": "psy_attribution_share",
       "section": "adjustments",
       "label": "Psychosocial support: KIND's share of the resources behind it",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.6,
@@ -817,6 +820,7 @@
       "id": "oth_attribution_share",
       "section": "adjustments",
       "label": "Other children: KIND's share of the resources behind it",
+      "credit": "delivery",
       "format": "percent",
       "value": {
         "low": 0.4,
@@ -911,6 +915,7 @@
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Attribution share",
+      "credit": "delivery",
       "format": "percent",
       "formula": "attribution_share_shared",
       "explainer": "KIND's share of the resources behind the outcome: the outcome-weighted average of the branches' shares, for reading only."

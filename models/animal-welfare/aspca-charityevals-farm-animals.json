@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "aspca",
   "owner": "charityevals",
-  "summary": "The ASPCA's farm animal welfare team, a small part of its $422m spending in 2025 (about $8m with its share of public education, our judgment), lobbied against federal and state rollbacks of the laws that keep hens out of cages and sows out of crates, and pushed shoppers, farmers and producers toward higher-welfare products and in-ovo sexed eggs. Defending the laws also keeps their compliance costs (the regulator's figure for California's Proposition 12, about $300 million a year net of retailers' margin), which at the site's values outweigh the animals' gain, so the result is below zero, about −0.001 years of healthy life per $1,000. Both are small per dollar: the defence is shared with a coalition in which the ASPCA's own spending (about $1.5m of lobbying and outreach) is a small part, its 2025 work removed only a share of the override risk, and its large reserves make the next dollar worth less than the average. The biggest uncertainties are that cost, the share of the risk the opposition removed, how many hens and sows would go back into cages if the laws fell, the coalition's total spending and the share of the ASPCA's policy spending that goes on farm animals, which the accounts don't give; the result is mostly uncertainty, spanning several orders of magnitude, and both branches are discounted for missing outcome data.",
+  "summary": "The ASPCA's farm animal welfare team, a small part of its $422m spending in 2025 (about $8m with its share of public education, our judgment), lobbied against federal and state rollbacks of the laws that keep hens out of cages and sows out of crates, and pushed shoppers, farmers and producers toward higher-welfare products and in-ovo sexed eggs. Defending the laws also keeps their compliance costs (the regulator's figure for California's Proposition 12, about $300 million a year net of retailers' margin), which at the site's values outweigh the animals' gain, so the result is below zero in expectation, about −0.0004 years of healthy life per $1,000. Both are small per dollar: the defence is shared with a coalition in which the ASPCA's own spending (about $1.5m of lobbying and outreach) is a small part, its 2025 work removed only a share of the override risk, and its large reserves make the next dollar worth less than the average. The biggest uncertainties are that cost, the share of the risk the opposition removed, how many hens and sows would go back into cages if the laws fell, the coalition's total spending and the share of the ASPCA's policy spending that goes on farm animals, which the accounts don't give; the result is mostly uncertainty, spanning several orders of magnitude, and both branches are discounted for missing outcome data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: ASPCA farm animal welfare (defending state cage and crate laws, higher-welfare market work, 2025)",
@@ -426,11 +426,20 @@
       "formula": "def_spend / (def_spend + def_others_spend)"
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "def_attribution_share",
       "section": "adjustments",
       "label": "Defence: share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "def_attribution_share_shared"
+      "formula": "def_attribution_share_shared * mobiliser_share"
     },
     {
       "id": "def_missing_data_adj",
@@ -528,7 +537,7 @@
     {
       "id": "mkt_attribution_share_shared",
       "section": "adjustments",
-      "label": "Market: the ASPCA's share of the resources behind the shift",
+      "label": "Market: the ASPCA's share among those promoting the shift",
       "format": "percent",
       "value": {
         "low": 0.2,
@@ -536,14 +545,16 @@
         "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Our judgment: certifiers, farmers, retailers and other groups invest far more; the ASPCA's guide and grants are one push among several. 40%, 20% to 70%."
+      "explainer": "The ASPCA's share among those who promote higher-welfare buying: the certifiers (whose labels its guide points to), other groups' guides and campaigns, and its own guide and grants. Farmers and retailers, who make and sell the products, are under the mobiliser's share, not here. No published accounting splits this work; our judgment, one push among several, 40% (20% to 70%)."
     },
     {
       "id": "mkt_attribution_share",
       "section": "adjustments",
       "label": "Market: share of credit used",
+      "credit": "win",
       "format": "percent",
-      "formula": "mkt_attribution_share_shared"
+      "formula": "mkt_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "mkt_implementation_adj",
@@ -682,7 +693,7 @@
       "label": "Attribution share (outcome-weighted average of the branches)",
       "format": "percent",
       "formula": "(def_raw * def_attribution_share + mkt_raw * mkt_attribution_share) / raw_total",
-      "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

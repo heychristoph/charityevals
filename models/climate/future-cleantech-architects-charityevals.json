@@ -837,12 +837,21 @@
       "explainer": "The target began as a European Parliament amendment in 2022, backed by the research centres' association EUREC (with which Future Cleantech Architects made four joint recommendations to lawmakers, by its own account, Milestones 2023), Ocean Energy Europe and the geothermal, airborne-wind and solar-thermal associations; Future Cleantech Architects then spent €0.6M-1.0M a year on all its work. Our judgment, 10% of all advocates' resources on this provision (3% to 25%)."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "ren_attribution_share",
       "section": "adjustments",
       "label": "5% target: share of credit used",
       "format": "percent",
-      "formula": "ren_attribution_share_shared",
-      "explainer": "Its share of the resources behind the win; it applies whichever way credit is shared."
+      "formula": "ren_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ren_implementation_adj",
@@ -888,8 +897,9 @@
       "section": "adjustments",
       "label": "Low-carbon fuels act: share of credit used",
       "format": "percent",
-      "formula": "h2_attribution_share_shared",
-      "explainer": "Its share of the resources behind the win; it applies whichever way credit is shared."
+      "formula": "h2_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "rc_attribution_share_shared",
@@ -904,8 +914,9 @@
       "section": "adjustments",
       "label": "Research consortia: share of credit used",
       "format": "percent",
-      "formula": "rc_attribution_share_shared",
-      "explainer": "Its share of the resources behind the consortia; it applies whichever way credit is shared."
+      "formula": "rc_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "rc_missing_data_adj",
@@ -968,7 +979,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(ren_downstream * ren_counterfactual_adj * ren_attribution_share + learn_downstream * ren_attribution_share + h2_downstream * h2_counterfactual_adj * h2_attribution_share) / (ren_downstream * ren_counterfactual_adj + learn_downstream + h2_downstream * h2_counterfactual_adj)",
       "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
     },
     {

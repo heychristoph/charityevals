@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "mats",
   "owner": "charityevals",
-  "summary": "MATS (ML Alignment & Theory Scholars, Berkeley and London) trains researchers for AI safety: scholars spend ten weeks on a research project with a mentor from an AI lab or safety group, and many then continue for four months or longer in an extension phase. This model covers all its work in 2024, its first full year as its own charity ($2.2M of programme spending, $2.9M in all, in its Form 990), when about 153 scholars took part (stipends paid by AI Safety Support, a co-funder). At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.07 to 4 on the model's own ranges, so the result is mostly uncertainty: the scholars who go on to work on AI risk because of MATS (25%, our judgment from its alumni data) are valued by their later work at a typical dollar of such work, credited by MATS's share of the resources behind the training (about 3%), and with their research during the programme, the extension's research as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate; the training gives nearly nine tenths of the result, and the next dollar counts at 31.5% of the past average. It is about two thirds of the Institute for AI Policy and Strategy's result, mainly because less of its work is aimed at misuse (10%) and AI Safety Support's stipends and mentors' time lower its share; the biggest swings are the chance of an AI catastrophe (the slider), Rethink's typical cut per dollar for misuse work, the years a cut counts and the missing-data discount, and every branch is discounted for missing data: no outcome of the work on the risk is measured and the alumni survey has no comparison group.",
+  "summary": "MATS (ML Alignment & Theory Scholars, Berkeley and London) trains researchers for AI safety: scholars spend ten weeks on a research project with a mentor from an AI lab or safety group, and many then continue for four months or longer in an extension phase. This model covers all its work in 2024, its first full year as its own charity ($2.2M of programme spending, $2.9M in all, in its Form 990), when about 153 scholars took part (stipends paid by AI Safety Support, a co-funder). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on the model's own ranges, so the result is mostly uncertainty: the scholars who go on to work on AI risk because of MATS (25%, our judgment from its alumni data) are valued by their later work at a typical dollar of such work, credited by MATS's share among those who paid for the training ({{row:fb_attribution_share_shared}}: its cost against AI Safety Support's stipends, mentors' time and donated compute) and with their research during the programme; the extension's research is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. The alumni's employers, who pay for the work itself, count only through the site's mobiliser setting. The training gives nearly all the result (98%), the next dollar counts at 31.5% of the past average, and the biggest swings are the chance of an AI catastrophe (the slider), Rethink's typical cut per dollar for misuse work, the mobiliser setting, the years a cut counts and the missing-data discount. Every branch is discounted for missing data: no outcome of the work on the risk is measured and the alumni survey has no comparison group.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: MATS (ML Alignment & Theory Scholars)",
@@ -118,7 +118,7 @@
         "page": "Part IX line 25, column B (programme services); Part III lines 4a and 4b",
         "quote": "THE MAIN GOAL OF MATS IS TO HELP SCHOLARS DEVELOP AS RESEARCHERS."
       },
-      "explainer": "All of MATS Research, Inc.'s programme spending in 2024, every programme modelled: the ML Alignment & Theory Scholars programme itself (Part III line 4a, $1,191,653: the Winter 2023-24 and Summer 2024 cohorts' research phases in Berkeley, with housing, travel, office and compute) and its programmes for alumni (line 4b, $1,024,181: the extension phase in London and Berkeley, and events). MATS became its own 501(c)(3) in 2024 (formation year 2023, a 990-N for 2023); 2024 is its first full return and the latest filed (the 2025 return isn't in the IRS index on 14 November 2026). The return says the accounts were audited; the audited statements aren't published. Scholars' stipends were paid by AI Safety Support, an Australian charity, and so aren't in this spending (fb_attribution_share)."
+      "explainer": "All of MATS Research, Inc.'s programme spending in 2024, every programme modelled: the ML Alignment & Theory Scholars programme itself (Part III line 4a, $1,191,653: the Winter 2023-24 and Summer 2024 cohorts' research phases in Berkeley, with housing, travel, office and compute) and its programmes for alumni (line 4b, $1,024,181: the extension phase in London and Berkeley, and events). MATS became its own 501(c)(3) in 2024 (formation year 2023, a 990-N for 2023); 2024 is its first full return and the latest filed (the 2025 return isn't in the IRS index on 14 November 2026). The return says the accounts were audited; the audited statements aren't published. Scholars' stipends were paid by AI Safety Support, an Australian charity, and so aren't in this spending (fb_attribution_share_shared)."
     },
     {
       "id": "total_expenses",
@@ -964,15 +964,20 @@
       "label": "Field-building: the scholars' research during the programme, in dollars of typical work",
       "format": "usd",
       "formula": "fb_people * fb_research_weeks / 52 * fb_research_value_share * @catastrophe.cost_per_work_year",
-      "explainer": "Scholars × the research phase in years × its value against a typical work-year × the shared cost of a work-year: about {{row:fb_research_dollars}} at the best guesses. Its resources are the training's (MATS's cost, the stipends that pay for the scholars' time, mentors), so MATS's credit is fb_attribution_share, applied with the branch's other adjustments; it isn't in fb_credit_share, which shares the alumni's later work with their employers."
+      "explainer": "Scholars × the research phase in years × its value against a typical work-year × the shared cost of a work-year: about {{row:fb_research_dollars}} at the best guesses. Its resources are the training's (MATS's cost, the stipends that pay for the scholars' time, mentors), so MATS's credit is fb_attribution_share_shared, applied with the branch's other adjustments; it isn't in fb_credit_share, which is the training's share among those who trained or placed the same people."
     },
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "The employers pay for the alumni's work itself, so the training gets credit by share of resources: everything spent on the training (MATS's cost and the co-funders') over that plus the alumni's added work (fb_work_dollars), computed so it moves with its inputs; MATS's own part of the training's resources is fb_attribution_share. At the best guesses about $3.8M against about $44M (153 × 25% × five discounted years at the shared $250,000 a work-year), about 8%.",
-      "formula": "(cost_total * fb_cost_share + fb_other_resources) / (cost_total * fb_cost_share + fb_other_resources + fb_work_dollars)"
+      "explainer": "1: the co-funders of the same training (AI Safety Support's stipends, mentors' time, donated compute) are already in fb_attribution_share_shared, and no other programme is counted for the same scholars; down to 0.5 if a later fellowship trains the same scholars (none is published). The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1283,7 +1288,7 @@
       "explainer": "Only whether another programme would have trained these scholars now: who would have reached the field anyway is in fb_share_working. Other AI safety research programmes (the Astra fellowship, SPAR, ERA, LASR Labs, PIBBSS) are smaller and also oversubscribed, so most of these places would not have been offered elsewhere: 0.85, our judgment, 0.7 to 1."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1302,7 +1307,24 @@
       }
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1315,7 +1337,16 @@
       "explainer": "Not used: the bio branch's cost share is 0 for MATS; the template's range kept for the switched-on check."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1328,7 +1359,16 @@
       "explainer": "Not used: the nuclear branch's cost share is 0 for MATS; the template's range kept for the switched-on check."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1341,12 +1381,30 @@
       "explainer": "Not used: the pol branch's cost share is 0 for MATS; the template's range kept for the switched-on check."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
-      "explainer": "MATS's share of the training's own resources: its cost of the main programme (with its share of management) over that plus AI Safety Support's stipends, mentors' time and donated compute (fb_other_resources): about {{row:fb_attribution_share}} at the best guesses. The alumni's employers' share is in fb_credit_share.",
+      "explainer": "MATS's share of the training's own resources: its cost of the main programme (with its share of management) over that plus AI Safety Support's stipends, mentors' time and donated compute (fb_other_resources): about {{row:fb_attribution_share_shared}} at the best guesses. The alumni's employers are mobilised, under the mobiliser's share (docs/normalization.md 2.24).",
       "formula": "cost_total * fb_cost_share / (cost_total * fb_cost_share + fb_other_resources)"
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

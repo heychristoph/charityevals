@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "the-humane-league",
   "owner": "charityevals",
-  "summary": "The Humane League's other programmes cost about $5.2 million in 2025, its programme spending less its grants and its accountability campaigns (two other lines): defending US state cage-free and crate-free laws against a federal override and supporting the Animal Policy Alliance's local campaigns, winning new corporate cage-free commitments (four companies, 1.6 million hens), running the Open Wing Alliance (its team, summits, trainings and Fair and Fowl report, credited with a share of the members' 216 new cage-free policies, 16 restored pledges and 18 broiler policies abroad), and mobilising volunteers and supporters to press companies to keep their commitments (a share of the 5.5 million hens out of cages at companies THL pressed itself). The money is split by THL's annual report and ACE's 2024 breakdown, and each part is built from THL's own counts and the site's shared figures per hen, broiler, sow and meal; every branch is discounted for missing data. Past wins count at THL's own next-dollar figure. Defending the state laws also keeps their compliance costs (the regulator's figure for California's Proposition 12, about $300 million a year net of retailers' margin), which at the site's values outweigh the animals' gain, so the result is below zero. The biggest uncertainties are that cost and the share of the override risk the opposition removed, how much grassroots pressure adds to what companies would do anyway, THL's share among the groups behind its new commitments, and the hens behind the Alliance's average new policy.",
+  "summary": "The Humane League's other programmes cost about $5.2 million in 2025, its programme spending less its grants and its accountability campaigns (two other lines): defending US state cage-free and crate-free laws against a federal override and supporting the Animal Policy Alliance's local campaigns, winning new corporate cage-free commitments (four companies, 1.6 million hens), running the Open Wing Alliance (its team, summits, trainings and Fair and Fowl report, credited with a share of the members' 216 new cage-free policies, 16 restored pledges and 18 broiler policies abroad), and mobilising volunteers and supporters to press companies to keep their commitments (a share of the 5.5 million hens out of cages at companies THL pressed itself). The money is split by THL's annual report and ACE's 2024 breakdown, and each part is built from THL's own counts and the site's shared figures per hen, broiler, sow and meal; every branch is discounted for missing data. Past wins count at THL's own next-dollar figure. Defending the state laws also keeps their compliance costs (the regulator's figure for California's Proposition 12, about $300 million a year net of retailers' margin), which at the site's values outweigh the animals' gain, so the result is below zero in expectation. The biggest uncertainties are that cost and the share of the override risk the opposition removed, how much grassroots pressure adds to what companies would do anyway, THL's share among the groups behind its new commitments, and the hens behind the Alliance's average new policy.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: The Humane League, policy, new commitments, volunteers and the Open Wing Alliance (2025)",
@@ -1256,7 +1256,7 @@
       "explainer": "1: a win that would have come later anyway is counted for the shared years only (one question per adjustment, Convention 5)."
     },
     {
-      "id": "new_attribution_share",
+      "id": "new_attribution_share_shared",
       "section": "adjustments",
       "label": "THL's share of the resources behind its new commitments",
       "format": "percent",
@@ -1267,6 +1267,23 @@
       },
       "kind": "judgment",
       "explainer": "Our judgment, anchored on ACE: other groups contribute 11% (US) to 15% (global) of THL's corporate work by ACE's estimates for THL, so THL's share is about 0.85; a little lower for commitments 'around the world', where Alliance members often press the same companies."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "new_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: THL's share of the resources behind its new commitments",
+      "credit": "win",
+      "format": "percent",
+      "formula": "new_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "owa_staff",
@@ -1310,12 +1327,21 @@
       "explainer": "ACE's estimates for the same campaigns: other groups contribute 11% of THL's US and 15% of its global accountability work (5-20% by ACE's bounds), so THL's share, weighted by the two programmes' costs ($3.37 million US, $1.60 million global), is about 0.87; the low end, 0.7, allows for Alliance members' part in THL's global campaigns. The switches at companies Alliance members pressed and THL UK's are taken out of the pool, so what is left is THL's own campaigns."
     },
     {
-      "id": "vol_attribution_share",
+      "id": "vol_attribution_share_shared",
       "section": "adjustments",
       "label": "Grassroots mobilisation's share of the resources behind those switches",
       "format": "percent",
       "formula": "thl_acc_share * vol_spend / (vol_spend + ace_line_spend + volunteer_value)",
       "explainer": "THL's share, times the mobilisation's share of THL's own resources on its own campaigns: its spending, the accountability line's costs and the volunteers' unpaid time (ACE's theory of change puts organising volunteers inside that programme). Our model of the accountability line takes that line's share of the same pool over the same total, so the hens aren't credited twice in our figures, and the volunteers' share goes to no dollar; ACE's own model of that line is ACE's figure, kept apart from ours."
+    },
+    {
+      "id": "vol_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: grassroots mobilisation's share of the resources behind those switches",
+      "credit": "win",
+      "format": "percent",
+      "formula": "vol_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "def_coalition_spend",
@@ -1334,12 +1360,21 @@
       "explainer": "The shared figure (facts/the_humane_league.json), one number in charityevals' THL models: credited in the grants line; inside the coalition total, so THL's own share comes from the same pool as the grants'."
     },
     {
-      "id": "def_attribution_share",
+      "id": "def_attribution_share_shared",
       "section": "adjustments",
       "label": "THL's share of the coalition's resources",
       "format": "percent",
       "formula": "def_spend / max(def_coalition_spend, def_spend + def_grant_federal)",
       "explainer": "Credit by share of resources: THL's policy spending over the whole coalition's (one shared figure), never less than THL's own and its grants' federal part."
+    },
+    {
+      "id": "def_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: THL's share of the coalition's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "def_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "apa_members_spend",
@@ -1355,12 +1390,21 @@
       "explainer": "Our judgment: 31 member groups in 21 states, most small; the 12 THL funds received $300K, and the campaigns behind ten wins drew on members' staff and volunteers several times that."
     },
     {
-      "id": "apa_attribution_share",
+      "id": "apa_attribution_share_shared",
       "section": "adjustments",
       "label": "THL's support's share of the resources behind the wins",
       "format": "percent",
       "formula": "apa_spend / (apa_spend + apa_grants + apa_members_spend)",
       "explainer": "Credit by share of resources: THL's strategy and staff support over all the money behind the campaigns (members' own, THL's grants, THL's support)."
+    },
+    {
+      "id": "apa_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: THL's support's share of the resources behind the wins",
+      "credit": "win",
+      "format": "percent",
+      "formula": "apa_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "apa_implementation_adj",
@@ -1465,7 +1509,7 @@
       "explainer": "Members' campaign staff abroad (paid partly by THL's grants, partly by other funders, whose money is therefore already here) and THL's own running of the alliance. With credit by share of resources, the pay the campaigners on both sides forgo counts as an in-kind share too (the shared advocacy pay share and gap). The same formula in THL's grants and other-programmes models."
     },
     {
-      "id": "owa_attribution_share",
+      "id": "owa_attribution_share_shared",
       "section": "adjustments",
       "label": "Alliance's wins abroad: the running's share of the resources behind them",
       "format": "percent",
@@ -1507,12 +1551,21 @@
       "explainer": "New pledges later pressed: the share of their switches credited to that later pressure is taken off (templates.md, corporate-campaign accountability), as in the grants line's model. That a pledge would have come anyway later is the shared years counted."
     },
     {
-      "id": "owanew_attribution_share",
+      "id": "owanew_attribution_share_shared",
       "section": "adjustments",
       "label": "New policies abroad: the running's share of the resources",
       "format": "percent",
-      "formula": "owa_attribution_share",
+      "formula": "owa_attribution_share_shared",
       "explainer": "The alliance's share above; it applies whichever way credit is shared."
+    },
+    {
+      "id": "owanew_attribution_share",
+      "section": "adjustments",
+      "label": "New policies abroad: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "owanew_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "owanew_implementation_adj",
@@ -1559,12 +1612,21 @@
       "explainer": "The same question as THL's own switches."
     },
     {
-      "id": "owaacc_attribution_share",
+      "id": "owaacc_attribution_share_shared",
       "section": "adjustments",
       "label": "Pledges restored abroad: the running's share of the resources",
       "format": "percent",
-      "formula": "owa_attribution_share",
+      "formula": "owa_attribution_share_shared",
       "explainer": "The alliance's share above; it applies whichever way credit is shared."
+    },
+    {
+      "id": "owaacc_attribution_share",
+      "section": "adjustments",
+      "label": "Pledges restored abroad: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "owaacc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "owaacc_implementation_adj",
@@ -1611,12 +1673,21 @@
       "explainer": "Implementation under pressure: the same question as the switches."
     },
     {
-      "id": "owabcc_attribution_share",
+      "id": "owabcc_attribution_share_shared",
       "section": "adjustments",
       "label": "Broiler policies abroad: the running's share of the resources",
       "format": "percent",
-      "formula": "owa_attribution_share",
+      "formula": "owa_attribution_share_shared",
       "explainer": "The alliance's share above; it applies whichever way credit is shared."
+    },
+    {
+      "id": "owabcc_attribution_share",
+      "section": "adjustments",
+      "label": "Broiler policies abroad: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "owabcc_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "owabcc_missing_data_adj",
@@ -1824,7 +1895,7 @@
       "section": "adjustments",
       "label": "THL's share of the resources, outcome-weighted average of the branches (for reading only)",
       "format": "percent",
-      "formula": "(new_outcome * new_attribution_share + owanew_outcome * owanew_attribution_share + owaacc_outcome * owaacc_attribution_share + owabcc_outcome * owabcc_attribution_share + vol_outcome * vol_attribution_share + def_outcome * def_attribution_share + apa_outcome * apa_attribution_share) / branch_sads",
+      "formula": "(new_outcome * new_attribution_share_shared + owanew_outcome * owanew_attribution_share_shared + owaacc_outcome * owaacc_attribution_share_shared + owabcc_outcome * owabcc_attribution_share_shared + vol_outcome * vol_attribution_share_shared + def_outcome * def_attribution_share_shared + apa_outcome * apa_attribution_share_shared) / branch_sads",
       "explainer": "Outcome-weighted average of the branch shares, for reading only; each branch applies its own, whichever way credit is shared."
     },
     {
@@ -1832,8 +1903,8 @@
       "section": "adjustments",
       "label": "Share of credit used (average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "Outcome-weighted average of the branches, for reading only."
+      "formula": "(new_outcome * new_attribution_share + owanew_outcome * owanew_attribution_share + owaacc_outcome * owaacc_attribution_share + owabcc_outcome * owabcc_attribution_share + vol_outcome * vol_attribution_share + def_outcome * def_attribution_share + apa_outcome * apa_attribution_share) / branch_sads",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",

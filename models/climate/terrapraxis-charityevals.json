@@ -701,23 +701,33 @@
         "high": 0.03
       },
       "kind": "judgment",
-      "explainer": "Its broader advanced nuclear work (the Ten-Terawatt Initiative, launched in 2024 and its white paper presented at Davos in January 2025, AI licensing tools with Microsoft, papers on industrial heat and shipping) is a small part of a large field: the Nuclear Energy Institute, Clean Air Task Force's $5 million a year on advanced nuclear, ClearPath, the Breakthrough Institute, Third Way, the World Nuclear Association, the IAEA and the OECD Nuclear Energy Agency, and governments' own deployment programmes. No source sizes the field's budgets, so the range is wide: our judgment, 0.6% (0.1% to 3%)."
+      "explainer": "Its broader advanced nuclear work (the Ten-Terawatt Initiative, launched in 2024 and its white paper presented at Davos in January 2025, AI licensing tools with Microsoft, papers on industrial heat and shipping) is a small part of a large field: the Nuclear Energy Institute, Clean Air Task Force's $5 million a year on advanced nuclear, ClearPath, the Breakthrough Institute, Third Way, the World Nuclear Association, the IAEA and the OECD Nuclear Energy Agency (governments' own deployment programmes are the adopters', under the mobiliser's share, not in this one (docs/normalization.md 2.24)). No source sizes the field's budgets, so the range is wide: our judgment, 0.6% (0.1% to 3%)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
     },
     {
       "id": "rep_attribution_share",
       "section": "adjustments",
       "label": "Coal repowering: share of credit used",
       "format": "percent",
-      "formula": "rep_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the work (Convention 2); it applies whichever way credit is shared."
+      "formula": "rep_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "nuc_attribution_share",
       "section": "adjustments",
       "label": "Advanced nuclear: share of credit used",
       "format": "percent",
-      "formula": "nuc_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the work (Convention 2); it applies whichever way credit is shared."
+      "formula": "nuc_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "missing_data_adj",
@@ -762,7 +772,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the lines, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(rep_downstream * rep_counterfactual_adj * rep_attribution_share + nuc_downstream * nuc_counterfactual_adj * nuc_attribution_share) / (rep_downstream * rep_counterfactual_adj + nuc_downstream * nuc_counterfactual_adj)",
       "explainer": "The same as the lines' average share of resources; the lines' own rows apply."
     },
     {

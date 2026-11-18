@@ -12,8 +12,12 @@ GiveDirectly: HLI's current estimate, 7.55 WELLBYs per $1,000, from its 2024 sum
 
     python3 scripts/convert-hli-amf.py amf.xlsx smfb.xlsx --out models/global-health
 """
-import argparse, json
+import argparse, importlib.util, json
 from pathlib import Path
+
+# The model's class (mobilised or own delivery) and, if mobilised, the share's row and pin (docs/normalization.md 2.24).
+_lm = importlib.util.spec_from_file_location("link_mobiliser_share", Path(__file__).with_name("link-mobiliser-share.py"))
+lm = importlib.util.module_from_spec(_lm); _lm.loader.exec_module(lm)
 import openpyxl
 
 p = argparse.ArgumentParser()
@@ -123,5 +127,6 @@ gd = {
     ],
 }
 for m in (amf, gd):
+    lm.apply(m)
     Path(a.out, f"{m['id']}.json").write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
     print(m["id"], len(m["rows"]), "rows")

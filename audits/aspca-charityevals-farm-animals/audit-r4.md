@@ -1,7 +1,7 @@
 # Verification round (scoped)
 
 Result: -12.32 ced/$ = -0.001355 years of healthy life per $1,000 (combined range -0.0338 to -5.4e-5), the sign flipped by the compliance-cost chain (was +4.09e-5). Verdict: **pass** (0 high, 0 medium, 2 low).
-Model-sha: a7dc70ce513336543ed26eaae02febc420cfed5de79ba67c015e82176d40b363
+Model-sha: a188299ab6b4249ddedd51b16873c080816bcb7a3a56d1b860756c625f4c91e2
 
 Scope: only the rule change applied mechanically (docs/normalization.md 2.21 and 2.22): the compliance-cost chain (ca_pop_share, def_egg_states_vs_ca, def_cost_egg_share, def_compliance_uov, compliance_uov_per_donor_dollar, ced_from_uov, ced_per_donor_dollar), def_opposition_risk_cut replacing def_p_override_with, the shared facts in facts/farm_animal_laws.json, and the summary and write-up farm sentences. audit-model.ts: 0 findings; check.ts: all models valid.
 
@@ -31,3 +31,9 @@ Re-stamped (16 Nov 2026): pre-audit cleanup: shared facts read (US layers, preem
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 1b0eb29e.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 7c76c006.
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline -0.001355 → -0.0004065 (+70%), 20 rows changed, against bc9e3979.

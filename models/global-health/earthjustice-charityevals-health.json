@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "earthjustice",
   "owner": "charityevals",
-  "summary": "Earthjustice's healthy-communities work, toxics in air and water (our judgment: 25% of its programme spending, $34.3M in the year to June 2025): this model counts EPA's 2024 fine-particle (PM2.5) air standard, which Earthjustice's clients pressed for and defended in court (upheld in June 2026), and the 2024 PFAS drinking-water standards it defends, by EPA's own estimates of deaths avoided (about {{row:pm_deaths_per_year}} a year for PM2.5, between EPA's two estimates for 2032; 9,600 over decades for PFAS), plus 50% for its other wins of fiscal 2022-2025 (chemical plants, coal ash, refineries, pesticides). At the defaults it comes to 0.0059 years of healthy life per $1,000, nearly all from the PM2.5 standard, after both rules' compliance costs (EPA's own figures; on this scale the PFAS standards' costs exceed the deaths they avert, so that branch counts below zero); it is low because the deaths come years after the rules, advocacy is one cause of a rule and Earthjustice one of many groups behind it, the deaths are mostly of people over 70, and both rules' survival is in doubt. The biggest uncertainties are the years a won rule counts, the share of a rule due to advocacy and Earthjustice's share; both branches are discounted for missing data.",
+  "summary": "Earthjustice's healthy-communities work, toxics in air and water (our judgment: 25% of its programme spending, $34.3M in the year to June 2025): this model counts EPA's 2024 fine-particle (PM2.5) air standard, which Earthjustice's clients pressed for and defended in court (upheld in June 2026), and the 2024 PFAS drinking-water standards it defends, by EPA's own estimates of deaths avoided (about {{row:pm_deaths_per_year}} a year for PM2.5, between EPA's two estimates for 2032; 9,600 over decades for PFAS), plus 50% for its other wins of fiscal 2022-2025 (chemical plants, coal ash, refineries, pesticides). At the defaults it comes to {{result}} years of healthy life per $1,000, nearly all from the PM2.5 standard, after both rules' compliance costs (EPA's own figures; on this scale the PFAS standards' costs exceed the deaths they avert, so that branch counts below zero); it is low because the deaths come years after the rules, advocacy is one cause of a rule and Earthjustice one of many groups behind it, the deaths are mostly of people over 70, and both rules' survival is in doubt. The biggest uncertainties are the years a won rule counts, the share of a rule due to advocacy and Earthjustice's share; both branches are discounted for missing data.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Earthjustice (healthy communities)",
@@ -753,18 +753,30 @@
       "explainer": "With credit by share of resources on, the donated legal work and advertising space count as others' resources behind the same wins (templates.md Convention 2). Off (the default), 1."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "pm_attribution_share",
       "section": "adjustments",
       "label": "PM2.5 standard: share of credit used",
       "format": "percent",
-      "formula": "pm_attribution_share_shared * own_resource_share"
+      "formula": "pm_attribution_share_shared * own_resource_share * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pfas_attribution_share",
       "section": "adjustments",
       "label": "PFAS standards: share of credit used",
       "format": "percent",
-      "formula": "pfas_attribution_share_shared * own_resource_share"
+      "formula": "pfas_attribution_share_shared * own_resource_share * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "missing_data_adj",
@@ -809,7 +821,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared * own_resource_share"
+      "formula": "attribution_share_shared * own_resource_share * mobiliser_share"
     },
     {
       "id": "implementation_adj",

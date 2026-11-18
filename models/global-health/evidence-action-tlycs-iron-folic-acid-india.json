@@ -9,6 +9,7 @@
  "estimate_basis": "unit_cost",
  "charity": "evidence-action",
  "owner": "the-life-you-can-save",
+ "mobilised": true,
  "summary": "Evidence Action helps Indian states give school-aged children and adolescents weekly iron and folic acid tablets to prevent anaemia. The Life You Can Save counts the anaemia cases and deaths Evidence Action estimates it averted in 2024 among the 4.7 million extra children it credits to its support, and divides by its 2024 cost. Our view values the deaths the site's way and adds the later gains of less anaemia; the biggest uncertainties are how many children are reached because of Evidence Action and what less anaemia is worth beyond health.",
  "source": {
   "publisher": "The Life You Can Save",
@@ -43,7 +44,8 @@
    "resource_shares": 0,
    "discount_rate": 0.03,
    "uov_per_daly": 2,
-   "daly_per_child_death": 58.12631
+   "daly_per_child_death": 58.12631,
+   "mobiliser_share": 1
   }
  },
  "sections": [
@@ -69,7 +71,7 @@
   {
    "id": "costs_ours",
    "title": "Costs the sheet leaves out",
-   "explainer": "charityevals' step: Evidence Action's central costs, and with credit by share of resources on, its staff's pay below market and the states' cost of the extra tablets.",
+   "explainer": "charityevals' step: Evidence Action's central costs, and with credit by share of resources on, its staff's pay below market.",
    "kind": "ours"
   },
   {
@@ -544,20 +546,6 @@
    "explainer": "The programme cost is what was billed to it; Evidence Action's headquarters, management and fundraising come on top. Our judgment, 10% (0 to 20%)."
   },
   {
-   "id": "others_cost_per_child",
-   "section": "costs_ours",
-   "label": "States' cost per extra child given tablets for a year",
-   "format": "usd",
-   "unit": "$ per child",
-   "value": {
-    "low": 0.05,
-    "best": 0.2,
-    "high": 0.5
-   },
-   "kind": "judgment",
-   "explainer": "The states buy and distribute the tablets; the sheet takes their extra cost as zero because their budgets didn't rise against 2020-21. With credit by share of resources on, their money spent on the extra children shares the outcome. Our judgment of the tablets and teachers' time per child-year."
-  },
-  {
    "id": "staff_cost_share",
    "section": "costs_ours",
    "label": "Staff pay as a share of programme cost",
@@ -586,8 +574,16 @@
    "section": "costs_ours",
    "label": "Full cost per dollar of the sheet's costs",
    "format": "multiple",
-   "formula": "(cost * (1 + central_cost_share) * (1 + if($resource_shares, salary_sacrifice, 0)) + if($resource_shares, others_cost_per_child * marginal_reached, 0)) / cost",
-   "explainer": "Central costs always; with credit by share of resources on, staff's forgone pay and the states' money as well."
+   "formula": "(1 + central_cost_share) * (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "Central costs always; with credit by share of resources on, staff's forgone pay as well. The states that buy and give out the tablets do so because of Evidence Action's support: their part is under the charity's share of the good (mobiliser_share), not a co-funder's share here."
+  },
+  {
+   "id": "mobiliser_share",
+   "section": "bottom_ours",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
   },
   {
    "id": "dalys_per_dollar",
@@ -595,8 +591,8 @@
    "label": "Healthy years gained per dollar",
    "format": "small",
    "unit": "DALYs per $",
-   "formula": "1 / cost_per_daly * ours_vs_tlycs / cost_multiplier",
-   "explainer": "The Life You Can Save's DALYs per dollar, deaths valued the site's way, with the later gains and all costs."
+   "formula": "(1 / cost_per_daly * ours_vs_tlycs / cost_multiplier) * mobiliser_share",
+   "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nThe Life You Can Save's DALYs per dollar, deaths valued the site's way, with the later gains and all costs."
   }
  ],
  "output": {

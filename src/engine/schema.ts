@@ -92,6 +92,11 @@ const rowShape = {
    * at a low risk and its full payoff at a high one. `true`, on its own; `{ with }`, events sharing the
    * key happen together as far as their chances allow (with and without the charity, the same event
    * under another funding bar); `{ one_of }`, exactly one of the key's scenarios happens. */
+  /** On a branch's used share of credit (`attribution_share`, `<branch>_attribution_share`): what kind of
+   * branch it is, for the mobiliser's share (docs/normalization.md 2.24, INV-22). `win`: a law, rule,
+   * pledge, budget or court order that others carry out; `research`: results others adopt; both read
+   * `mobiliser_share`. `delivery`: the organisation's own services, grants or purchases; reads none. */
+  credit: z.enum(["win", "research", "delivery"]).optional(),
   /** Drawn with another row of this model (its id): the same series in another year or place, from one
    * source, so the simulation moves them together instead of letting their differences swing. */
   drawn_with: z.string().optional(),
@@ -272,6 +277,13 @@ export const Model = z
      * own models never carry it: their branches' `missing_data_adj` rows apply the slider. Filled by
      * scripts/missing-data.ts. */
     missing_data: z.object({ thin_share: z.number().min(0).max(1), note: z.string().min(1) }).strict().optional(),
+    /** For an imported (evaluator's) model: whether its good is done with resources another party commits
+     * only because of the organisation (money it moves, a government's or company's delivery of what it
+     * advised or won, adoption of its research), so that our view credits it at `$mobiliser_share`
+     * (docs/normalization.md 2.24, INV-22): `true`, a row in an ours section multiplies the result by
+     * `mobiliser_share` and the evaluator view pins it to 1; `false`, own delivery, which reads none.
+     * Variants inherit it. charityevals' own models classify each branch on its share row (`credit`). */
+    mobilised: z.boolean().optional(),
     /** For charityevals' own models: the build-cea template family the model follows. */
     template: TemplateFamily.optional(),
     /** The charity this model is about (inherited by variants). */

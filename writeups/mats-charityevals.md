@@ -1,6 +1,6 @@
 ### Summary
 
-MATS (ML Alignment & Theory Scholars) trains researchers for AI safety in Berkeley and London. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on how many scholars MATS brings into the field. All three are deeply uncertain: on the model's own ranges the result runs from about 0.07 to about 4, and wider with the shared assumptions.
+MATS (ML Alignment & Theory Scholars) trains researchers for AI safety in Berkeley and London. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on a forecast of how likely an AI catastrophe is, on an estimate of what a typical dollar of AI safety work does to that risk, and on how many scholars MATS brings into the field. All three are deeply uncertain: the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -23,10 +23,10 @@ The deaths averted are valued like every death on the site, across the world's a
 
 The model has two branches.
 
-- **Training.** It counts the scholars who go on to work on AI risk because of MATS: 25%. MATS says 75% of its alumni work in AI safety, and many would have got there anyway. Each stays five years, and the work is valued at a typical dollar of AI safety work. MATS gets credit by its share of all the resources behind that work: the training (its own cost, the stipends, mentors' time) against the alumni's later work. That share comes to about 3%. The scholars' own research during the ten weeks counts here too, at a quarter of a typical work-year's value.
+- **Training.** It counts the scholars who go on to work on AI risk because of MATS: 25%. MATS says 75% of its alumni work in AI safety, and many would have got there anyway. Each stays five years, and the work is valued at a typical dollar of AI safety work. MATS gets credit as the training's share among those who paid for it: its own cost against the stipends, mentors' time and donated compute, about 42%. The alumni's employers, who pay for the work itself, count only through the site's setting for work others commit because of a charity, {{row:mobiliser_share}} by default. The scholars' own research during the ten weeks counts here too, at a quarter of a typical work-year's value.
 - **Extension research**, valued as typical AI safety research at 0.8 of a typical project, because it is early-career work.
 
-Training gives nearly nine tenths of the result. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
+Training gives nearly all of the result, about 98%. Each adjustment is set branch by branch and weighted by the healthy years each branch gives:
 
 | Adjustment | Extension research | Training |
 |---|---|---|
@@ -42,7 +42,7 @@ MATS ended 2024 with about a year of spending in reserve, and its main funder pa
 
 ### What drives the result
 
-Less of MATS's work is aimed at misuse, and stipends paid by AI Safety Support and mentors' time lower its share of the credit.
+Most of the result comes from the scholars who go on to work on AI risk because of MATS, and the years they work. Only 10% of MATS's research is aimed at misuse, and stipends paid by AI Safety Support and mentors' time lower its share of the credit.
 
 ### Biggest uncertainties
 

@@ -1,6 +1,6 @@
 # Audit: ibbis-charityevals, round 3
 Result: 0.008344 daly/$ = 8.34 years of healthy life per 1,000 dollars (combined range 0.43–160); cause median 1.50 (×5.6). Verdict: pass.
-Model-sha: 22747fc8d6e29a75868257baca5479b2f2940132da2a05c926561c0eb55f8d11
+Model-sha: 7ec18e65d8a4e254643fd8ae34500ec520b4e00b51cb0f45bc702e21921d12aa
 Scope: a scoped verification of the changes since round 2 (its two low findings and the newly written audit section of the write-up). No other part of the model was re-audited.
 Mechanical: audit-model.ts 0 high / 0 medium (only the low "estimate with no range" lines for the switched-off branches' point inputs, as in round 2); check.ts all models valid; result and combined range unchanged from round 2 (8.344, 0.43–160), as expected since spending does not enter the per-dollar result.
 
@@ -27,3 +27,7 @@ Re-stamped (16 Nov 2026): unit labels state per $1M (no value change). Mechanica
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against e8ecb2b3.
 
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against 7dbeec92.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 6 rows changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.

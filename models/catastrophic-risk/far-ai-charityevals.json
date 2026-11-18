@@ -868,15 +868,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Not used: the branch counts nothing for FAR.AI in 2024 (pol_wins and fb_people are 0); the template's range kept for the switched-on check."
+      "explainer": "Not used: no one is trained or placed (fb_people is 0). The skeleton's figure: 1 when no other programme trained or placed the same people. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (attribution_share) covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_deaths_per_million",
@@ -1155,12 +1155,21 @@
       "explainer": "FAR.AI's share of all resources behind its work: the share of its own spending not paid by fees (earned_revenue), times its share against outside contributors (partner_share): about 0.81."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leverage_funging_adj",

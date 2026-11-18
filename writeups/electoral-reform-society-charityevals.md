@@ -4,7 +4,7 @@ The Electoral Reform Society campaigns for proportional representation for the H
 
 ### What the charity does
 
-The Society was founded in 1884. It has offices in London, Edinburgh (ERS Scotland) and Cardiff (ERS Cymru), 18 staff and about 7,000 members. In the year to March 2025 it spent £2.4 million ($3.0 million), £{{row:pr_discounted_years}} million of it on campaign staff and campaigns. It publishes research on elections, briefs MPs and peers, runs petitions and convenes coalitions such as Democracy Group Cymru.
+The Society was founded in 1884. It has offices in London, Edinburgh (ERS Scotland) and Cardiff (ERS Cymru), 18 staff and about 7,000 members. In the year to March 2025 it spent £2.4 million ($3.0 million), £1.6 million of it on campaign staff and campaigns. It publishes research on elections, briefs MPs and peers, runs petitions and convenes coalitions such as Democracy Group Cymru.
 
 It is a company limited by guarantee owned by its members, not a registered charity. Gifts to it get no Gift Aid or tax relief. It is the only entity that takes donations, so it is what this models. Most of its spending is drawn from a £43 million capital fund, built from the 2018 sale of its former ballot-services business.
 
@@ -29,8 +29,8 @@ In every case the government or the Senedd made the change, with the Society as 
   - the Commons counted at 45% of a full switch of all a person's governments;
   - the gain: a judged 5% of the income becoming a democracy brings, at 0.6 for doubt;
   - the Society's half of the movement's money, spread over the campaign's years so far and until the win, about 15.
-- **The supplementary vote (about a fifth):** the 38 million people in England who will elect a mayor from 2028 (police and crime commissioners are being abolished). A mayor counts as 15% of a full switch. The gain is 0.6 of ranked-choice voting's judged 2%, with the Society's share 20%.
-- **Votes at 16, registration and finance rules, the hereditary peers, the 2020 franchise acts and a larger Senedd (about a third together):** each is a judged 0.05% to 0.3% of democracy's gain, with the Society's share 10% to 15%. The closed lists that came with the larger Senedd aren't credited to the Society, which opposed them.
+- **The supplementary vote (about a fifth):** the 38 million people in England who will elect a mayor from 2028 (police and crime commissioners are being abolished). A mayor counts as 15% of a full switch. The gain is 0.6 of ranked-choice voting's judged 2%, with the Society's share among the campaigners 50%.
+- **Votes at 16, registration and finance rules, the hereditary peers, the 2020 franchise acts and a larger Senedd (about a third together):** each is a judged 0.05% to 0.3% of democracy's gain, with the Society's share among the campaigners 25% to 40%. The governments and parliaments that make each change are credited through the mobiliser's share. The closed lists that came with the larger Senedd aren't credited to the Society, which opposed them.
 - **Years:** the gain builds over about 25 years. A win counts as brought forward by the site's five years, with a 3% yearly chance of repeal.
 - **Every branch** is discounted by the missing-data slider.
 - **Side effects:** the good of fairer elections beyond income (+20%) and the counter-measures reforms provoke (−10%), shared with the US voting-reform models. In 2022, for example, a new law switched mayors to first past the post.
@@ -49,7 +49,7 @@ In every case the government or the Senedd made the change, with the Society as 
 
 - No study measures how much a voting method changes how well a country is governed. The shares of democracy's gain are judgments.
 - The chance of proportional representation is a judgment. The two largest parties gain from first past the post, and the 2011 referendum on the alternative vote was lost two to one.
-- The Society's shares of the wins are judgments. Governments made each change for their own reasons.
+- The Society's shares among the campaigners are judgments.
 
 ### What isn't modelled
 

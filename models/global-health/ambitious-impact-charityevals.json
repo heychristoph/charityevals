@@ -8,7 +8,7 @@
  "estimate_basis": "past_average",
  "charity": "ambitious-impact",
  "owner": "charityevals",
- "summary": "Ambitious Impact (formerly Charity Entrepreneurship) researches intervention ideas and founds new charities to run the best of them; this model covers all its programmes in the year to March 2025: the nine charities and five effective giving organisations it launched, Founding to Give, its funding circles, grantmaker and research training, and its research, against its own spending of $2.5M (the seed grants it passed on are valued as money for the new charities). At the defaults it averts about {{result}} years of healthy life per $1,000: each charity founded is credited with the average lifetime fundraising of its charities ($107M raised by 60 so far, times 2.5 for the years to come), 60% of it caused by Ambitious Impact, valued at the figures the rankings give the charities it has launched, institutional funders' grants as all shifted and the rest half new money, each effective giving organisation and Founding to Give company with the donations it is expected to move, at GiveWell's Top Charities, less the giving organisations' running costs; the next dollar at {{row:marginal_vs_past_average}} of the past average. It creates charities that each go on to raise and spend several times its cost per charity, most of them in global health. The result moves most with the missing-data discount, where shifted money would otherwise have gone, the discount rate and the next-dollar figure; the projected part of its charities' future fundraising, the giving organisations' and companies' donations, the spending its grantmaker training and research changed and its fellows' careers are discounted for missing data.",
+ "summary": "Ambitious Impact (formerly Charity Entrepreneurship) researches intervention ideas and founds new charities to run the best of them; this model covers all its programmes in the year to March 2025: the nine charities and five effective giving organisations it launched, Founding to Give, its funding circles, grantmaker and research training, and its research, against its own spending of $2.5M (the seed grants it passed on are valued as money for the new charities). At the defaults it averts about {{result}} years of healthy life per $1,000: each charity founded is credited with the average lifetime fundraising of its charities ($107M raised by 60 so far, times 2.5 for the years to come), 60% of it caused by Ambitious Impact, valued at the figures the rankings give the charities it has launched, institutional funders' grants as all shifted and the rest half new money, each effective giving organisation and Founding to Give company with the donations it is expected to move, at GiveWell's Top Charities, less the giving organisations' running costs, the giving organisations' part at Ambitious Impact's share of the credit ({{row:egi_credit_share}}; the organisation that asks the donor takes the rest); the next dollar at {{row:marginal_vs_past_average}} of the past average. It creates charities that each go on to raise and spend several times its cost per charity, most of them in global health. The result moves most with the missing-data discount, where shifted money would otherwise have gone, the discount rate and the next-dollar figure; the projected part of its charities' future fundraising, the giving organisations' and companies' donations, the spending its grantmaker training and research changed and its fellows' careers are discounted for missing data.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Ambitious Impact",
@@ -430,12 +430,28 @@
    "explainer": "The shared missing-data step (docs/normalization.md 2.12): the five organisations' donations are a projection by judgment (egi_moved_per_org), not a count."
   },
   {
-   "id": "egi_money",
+   "id": "egi_credit_share",
+   "section": "reach",
+   "label": "Its share of the credit for the donations its effective giving organisations move",
+   "format": "percent",
+   "formula": "1 - @meta.shared_credit_donor_side",
+   "explainer": "The site's one split for a dollar two organisations both moved (docs/normalization.md 2.24, overlap): the giving organisation asks the donor and takes the donor's side, Ambitious Impact, which founded it, the rest, {{row:egi_credit_share}}. A different step from the share of their existence it caused, which removes what would have happened anyway."
+  },
+  {
+   "id": "egi_shared_moved",
    "section": "reach",
    "label": "Donations its effective giving organisations will move, caused by them and by it, discounted (US$)",
    "format": "usd",
    "formula": "egi_orgs_launched * egi_moved_per_org * egi_success_adj * @meta.own_effect_share * projected_wait_discount * founding_counterfactual_share * egi_missing_data_adj",
    "explainer": "Organisations × recorded donations × the success step × their own effect on the donations (the site's shared share for a meta charity without its own donor survey, 30%) × the wait (the middle of their giving about six years on, as for the charities' projected money) × the share of their existence the programme caused × the missing-data step."
+  },
+  {
+   "id": "egi_money",
+   "section": "reach",
+   "label": "Donations its effective giving organisations will move, credited to Ambitious Impact (US$)",
+   "format": "usd",
+   "formula": "egi_shared_moved * egi_credit_share",
+   "explainer": "The giving organisation and the incubator that founded it both moved these donations; Ambitious Impact takes its share of the credit."
   },
   {
    "id": "egi_budget_per_org",
@@ -546,7 +562,7 @@
    "section": "reach",
    "label": "Money raised for effective charities that it caused, per dollar of its cost",
    "format": "multiple",
-   "explainer": "Context. With credit by share of resources on, only the individual donors' part and the giving organisations' and companies' donations bring new money (donor_cost_share).",
+   "explainer": "Context.",
    "formula": "(raised_money + shifted_money + gh_money_moved) / cost_total"
   },
   {
@@ -683,12 +699,20 @@
    "explainer": "Our judgment, the shared rule for an organisation whose money goes to several causes. Shifted money would have gone to an ordinary charity of the same cause: each cause's at the rule for a mover in that cause (GiveDirectly's live result, times a shared multiple, 1×, from 0 to 3×, over the global-health charities' on the rankings, times that cause's charities'), weighted by the organisation's own split, all live under your values."
   },
   {
+   "id": "mobiliser_share",
+   "section": "moved_money",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "shifted_dollar_value",
    "section": "moved_money",
-   "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+   "label": "Value of a dollar all shifted (given anyway, now to a better use), at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "moved_dollar_value - prior_dollar_value",
-   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+   "formula": "mobiliser_share * (moved_dollar_value - prior_dollar_value)",
+   "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed. Its owners spent it, so the organisation is credited its share of that gain (mobiliser_share)."
   },
   {
    "id": "informed_money_value",
@@ -701,26 +725,26 @@
   {
    "id": "moved_dollar_net_value",
    "section": "moved_money",
-   "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+   "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+   "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
   },
   {
    "id": "gh_moved_dollar_net_value",
    "section": "moved_money",
-   "label": "Value of a dollar its giving organisations and companies move, net of where shifted money would have gone, units of value",
+   "label": "Value of a dollar its giving organisations and companies move, net of where shifted money would have gone, at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "new_money_share * gh_moved_dollar_value + (1 - new_money_share) * (gh_moved_dollar_value - gh_prior_dollar_value)",
-   "explainer": "The shared net value of a dollar moved, in the gh destination set (docs/normalization.md 2.8): new money in full, shifted money for its gain over where it would have gone."
+   "formula": "mobiliser_share * (new_money_share * gh_moved_dollar_value + (1 - new_money_share) * (gh_moved_dollar_value - gh_prior_dollar_value))",
+   "explainer": "The shared net value of a dollar moved, in the gh destination set (docs/normalization.md 2.8): new money in full, shifted money for its gain over where it would have gone, at the mobiliser's share (2.24)."
   },
   {
    "id": "egi_costs_value",
    "section": "effect",
    "label": "Value lost to the effective giving organisations' own running costs (units of value)",
    "format": "number",
-   "formula": "egi_orgs_launched * egi_budget_per_org * projected_wait_discount * founding_counterfactual_share * gh_prior_dollar_value",
-   "explainer": "Their lifetime spending, on the same wait and counterfactual share as their donations, at where that money would otherwise have gone (an ordinary global-health charity)."
+   "formula": "egi_orgs_launched * egi_budget_per_org * projected_wait_discount * founding_counterfactual_share * egi_credit_share * gh_prior_dollar_value * mobiliser_share",
+   "explainer": "Their lifetime spending, on the same wait and counterfactual share as their donations, at where that money would otherwise have gone (an ordinary global-health charity), at Ambitious Impact's share of the credit for their donations and the mobiliser's share: a cost of the money they move, it takes the same shares as that money (docs/normalization.md 2.24)."
   },
   {
    "id": "units_affected_per_year",
@@ -924,9 +948,9 @@
    "section": "careers",
    "label": "Value of one career change (units of value)",
    "format": "number",
-   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
    "unit": "units of value",
-   "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+   "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
   },
   {
    "id": "careers_missing_data_adj",
@@ -978,8 +1002,9 @@
    "section": "adjustments",
    "label": "Share of credit used",
    "format": "percent",
-   "formula": "attribution_share_shared",
-   "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+   "formula": "attribution_share_shared * mobiliser_share",
+   "credit": "win",
+   "explainer": "The skeleton's policy branch, unused here (0): its share among co-advocates times the mobiliser's share (docs/normalization.md 2.24). The money moved and the careers take the mobiliser's share in their own rows."
   },
   {
    "id": "missing_data_adj",
@@ -1068,8 +1093,8 @@
    "section": "donor",
    "label": "Share of the full cost paid by cash donations",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + (raised_money + gh_money_moved) * new_money_share, 0))",
-   "explainer": "With credit by share of resources: staff's forgone pay and the new money individual donors and its companies' founders put in are co-contributions; institutional funders' grants and the spending it informs are all shifted and add none."
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "With credit by share of resources: staff's forgone pay is a co-contribution. The donors and founders whose money it brings in give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24)."
   },
   {
    "id": "next_dollar_to_grants",

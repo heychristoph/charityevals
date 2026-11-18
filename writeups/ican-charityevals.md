@@ -1,6 +1,6 @@
 ### Summary
 
-ICAN, the International Campaign to Abolish Nuclear Weapons, is a Geneva-based coalition of over 700 groups that campaigns for states to join the Treaty on the Prohibition of Nuclear Weapons and against nuclear deterrence. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on an estimate of what a typical dollar of nuclear work does to the risk, and on our judgment of how much a treaty that no nuclear-armed state has joined can do. All three are deeply uncertain, so the plausible range runs from about 0.27 to about 220.
+ICAN, the International Campaign to Abolish Nuclear Weapons, is a Geneva-based coalition of over 700 groups that campaigns for states to join the Treaty on the Prohibition of Nuclear Weapons and against nuclear deterrence. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is, on an estimate of what a typical dollar of nuclear work does to the risk, and on our judgment of how much a treaty that no nuclear-armed state has joined can do. All three are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -31,7 +31,7 @@ The model has two branches.
 
 The first blends two parts. About 15% of the campaign is the treaty's implementation, valued at the treaty's own figure (below). The rest, the work on deterrence, spending, divestment and the media, counts at 0.3. ICAN's work is aimed mostly at states without nuclear weapons and at the public. No arsenal, doctrine or budget is shown to have moved because of it, and nuclear weapons spending rose 11% in 2024, by ICAN's own count. The share of resources is below 1 because partners do much of the work under ICAN's banner.
 
-**The year's new states parties (30% of the cost).** This includes the cities appeal and the parliamentary pledge, whose signers work for their country to join. We value the treaty against what typical nuclear work would achieve with the same resources. About $100 million has been spent on the treaty itself since 2010, by ICAN (about $14 million), its partners, the Red Cross and governments. We judge the treaty to do a tenth of what that much typical work would do, from all but nothing to as much. The nine nuclear-armed states and their allies stay outside it, and the treaty binds only states without weapons. Its effect comes through a legal norm against possession and deterrence. Even public support hasn't moved an allied government: three in four Japanese adults want their country to join, yet Japan stays out. Each new state party adds one 73rd of the treaty's cut, weighted at 0.6: the treaty needed only 50 states to exist, and three of 2024's four are small states outside any alliance, though Indonesia is the largest party. ICAN is credited with 60% of that, the share that wouldn't have happened in 2024 without the campaign, and then with a quarter of what remains, its share of the resources behind the four ratifications.
+**The year's new states parties (30% of the cost).** This includes the cities appeal and the parliamentary pledge, whose signers work for their country to join. We value the treaty against what typical nuclear work would achieve with the same resources. About $100 million has been spent on the treaty itself since 2010, by ICAN (about $14 million), its partners, the Red Cross and governments. We judge the treaty to do a tenth of what that much typical work would do, from all but nothing to as much. The nine nuclear-armed states and their allies stay outside it, and the treaty binds only states without weapons. Its effect comes through a legal norm against possession and deterrence. Even public support hasn't moved an allied government: three in four Japanese adults want their country to join, yet Japan stays out. Each new state party adds one 73rd of the treaty's cut, weighted at 0.6: the treaty needed only 50 states to exist, and three of 2024's four are small states outside any alliance, though Indonesia is the largest party. ICAN is credited with 60% of that, the share that wouldn't have happened in 2024 without the campaign, and then with 40% of what remains, its share of the campaigners' resources behind the four ratifications.
 
 The other 5% is the justice work, which cuts no risk of a future war and counts as a side effect. Side effects add 10% in all: a norm against any use also makes a single detonation or a limited war less likely, which has no shared forecast. The treaty is contested among the states it wants to persuade, so harm is allowed down to −10%. Every branch takes the missing-data discount (0.5).
 
@@ -39,13 +39,13 @@ ICAN's income fell from CHF 3.6 million in 2023 to 2.0 million in 2024, and it r
 
 ### What drives the result
 
-Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate the future counts for little; at 0.1% the result rises to about 26. The campaign brings about three-quarters of the result and the new states parties a quarter. The treaty that is ICAN's main achievement doesn't constrain the states whose weapons make up the risk.
+Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate the future counts for little; at 0.1% the result rises to about 9. The campaign brings about two-thirds of the result and the new states parties a third. The treaty that is ICAN's main achievement doesn't constrain the states whose weapons make up the risk.
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 1.5 to 69.
-- **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 6 to 26.
-- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 3 to 20.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 0.50 to 24.
+- **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 1.7 to 11.
+- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 1.2 to 6.5.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 

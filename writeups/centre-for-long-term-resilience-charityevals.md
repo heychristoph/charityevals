@@ -1,6 +1,6 @@
 ### Summary
 
-The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 85% of that comes from the biosecurity work, about half the cost. A tenth comes from the AI work and the rest from risk management. The plausible range runs from about 0.3 to about 95.
+The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 85% of that comes from the biosecurity work, about half the cost. A tenth comes from the AI work and the rest from risk management. The plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -24,7 +24,7 @@ No split by unit is published either. One senior adviser and some leadership tim
 |---|---|---|---|
 | How far the effect applies | 0.85 | 0.64 | 0.4 |
 | Work others would not have done now | 0.75 | 0.6 | 0.7 |
-| CLTR's share of the resources | 0.85 | 0.8 | 0.75 |
+| CLTR's share of the resources | 0.9 | 0.9 | 0.8 |
 
 The AI figure includes a 15% cut for its work on chronic and societal AI risks, which the forecasts don't cover. Risk management counts at 0.4 because better government planning is a step further from the risk, and much of its value is in ordinary emergencies. Every part is discounted 50% for missing data.
 
@@ -38,7 +38,7 @@ After each part's adjustments, the biosecurity work brings about 85% of the resu
 
 ### Biggest uncertainties
 
-- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 3 to 30.
+- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 1.2 to 9.8.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much the next dollar does.** From 21% to 90% of the past average.
 - **How far the typical project applies to the biosecurity work.** From 0.3 to 1.3.
@@ -51,7 +51,7 @@ After each part's adjustments, the biosecurity work brings about 85% of the resu
 
 ### How this model was checked
 
-The model was built from the catastrophic-risk template. Round 1 of the independent audit checked every source, recomputed the branch shares and passed. Its smaller findings were fixed: the staff share of costs is now taken from CLTR's own accounts (the tax owed at the year end and the year's surplus); employer costs include the advertised benefits; the other job adverts are linked. A verification round checked those fixes and passed. CLTR's share of the resources behind its biosecurity work was then raised from 0.8 to 0.85, since most of that work is its own staff's analysis; a second verification round checked that change. The rounds are in audits/centre-for-long-term-resilience-charityevals/.
+The model was built from the catastrophic-risk template. Round 1 of the independent audit checked every source, recomputed the branch shares and passed. Its smaller findings were fixed: the staff share of costs is now taken from CLTR's own accounts (the tax owed at the year end and the year's surplus); employer costs include the advertised benefits; the other job adverts are linked. A verification round checked those fixes and passed. CLTR's share of the resources behind its biosecurity work was then raised from 0.8 to 0.85, since most of that work is its own staff's analysis; a second verification round checked that change. The three shares were later re-judged to count only those who advised alongside CLTR, not the officials and companies who act on the advice (that part is the site's mobiliser setting): 0.9 for biosecurity and AI and 0.8 for risk management; a third verification round checked that. The rounds are in audits/centre-for-long-term-resilience-charityevals/.
 
 ### Sources
 

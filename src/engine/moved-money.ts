@@ -12,15 +12,22 @@
 //            for an organisation filed under another cause, an ordinary charity of that cause: the same
 //            multiple of GiveDirectly over #cause:global-health, times #cause:<cause> (priorDollarValue);
 //            for one whose money goes to several causes, each cause's in its own mix (priorDollarValueMix)
-//   net      new share × V + (1 − new share) × (V − V_before), on the path to the output (INV-12);
-//            money all shifted (a grantmaker's) earns shifted_dollar_value = V − V_before; spending
+//   s        the mobiliser's share (`mobiliser_share = $mobiliser_share`, docs/normalization.md 2.24): the
+//            donors, funders and people who change jobs commit their resources only because of the
+//            organisation, so it is credited s of the good done with them, net of where they would have
+//            gone; the rest stays with them. Once per link: a destination that is itself a mobiliser
+//            brings its own s in its live result (shares compound along a chain). INV-22 checks it.
+//   net      s × (new share × V + (1 − new share) × (V − V_before)), on the path to the output (INV-12);
+//            money all shifted (a grantmaker's) earns shifted_dollar_value = s × (V − V_before); spending
 //            research or advice changed (a judged share of the money it informed, the row
 //            informed_money) is all shifted, with the evidence and missing-data steps:
 //            informed_money_value, in place of net (money_moved, if the model also moves money gross)
 //   sets     money to a second destination set takes the same rows prefixed `<set>_` (destinationSetRows)
 //
 // A result an evaluator already states as counterfactual value in "dollars of current effective
-// donations" (CEARCH) is multiplied by V; money moved (gross) by `moved_dollar_net_value`.
+// donations" (CEARCH) is multiplied by V and by `mobiliser_share`; money moved (gross) by
+// `moved_dollar_net_value`. A cost valued where money would have gone (a product with
+// `prior_dollar_value`) is part of the good done with the mobilised money and takes `mobiliser_share` too.
 //
 // Every destination is read at the figure the site ranks its charity by: the charity's primary
 // evaluator's programme- and location-weighted figure, `#owner:charity` (src/engine/ranking.ts
@@ -86,6 +93,10 @@ export const TLYCS_DESTINATIONS: [string, string][] = [
   ["village_enterprise", "charityevals:village-enterprise"],
 ];
 
+/** The mobiliser's share (docs/normalization.md 2.24): the assumption, and the one row that reads it
+ * (`mobiliser_share = $mobiliser_share`), which every formula crediting mobilised resources multiplies by. */
+export const MOBILISER_SHARE = "mobiliser_share";
+
 export type TemplateRow = { id: string; label: string; format: "small" | "percent"; formula: string; explainer: string };
 
 const [amf, mc, hk, ni] = GLOBAL_HEALTH_DESTINATIONS;
@@ -119,16 +130,21 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
     label: "Share of money moved that is new money",
     explainer: "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%.",
   },
+  mobiliser_share: {
+    id: MOBILISER_SHARE, format: "percent", formula: `$${MOBILISER_SHARE}`,
+    label: "This charity's share of the good done with money, work or budgets it brings in",
+    explainer: "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work.",
+  },
   moved_dollar_net_value: {
     id: "moved_dollar_net_value", format: "small",
-    formula: "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-    label: "Value of a dollar moved, net of where shifted money would have gone, units of value",
-    explainer: "New money counts in full; shifted money counts for the gain over where it would have gone.",
+    formula: "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+    label: "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
+    explainer: "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share).",
   },
   shifted_dollar_value: {
-    id: "shifted_dollar_value", format: "small", formula: "moved_dollar_value - prior_dollar_value",
-    label: "Value of a dollar all shifted (given anyway, now to a better use), units of value",
-    explainer: "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed.",
+    id: "shifted_dollar_value", format: "small", formula: "mobiliser_share * (moved_dollar_value - prior_dollar_value)",
+    label: "Value of a dollar all shifted (given anyway, now to a better use), at the mobiliser's share, units of value",
+    explainer: "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed. Its owners spent it, so the organisation is credited its share of that gain (mobiliser_share).",
   },
   informed_money_value: {
     id: "informed_money_value", format: "small", formula: "informed_money * shifted_dollar_value * evidence_adj * missing_data_adj",
@@ -139,11 +155,11 @@ export const MOVED_MONEY_ROWS: Record<string, TemplateRow> = {
 
 /** The model's own row read by informed_money_value: the spending its research or advice changed (US$),
  * kept apart from `money_moved` (money moved gross, valued net), so an organisation with both (funds and
- * advice) needs no row of its own. All shifted, it brings in no donors' new money: the credit by share of
- * resources never reads it. */
+ * advice) needs no row of its own. */
 export const INFORMED_MONEY = "informed_money";
 
-/** Rows written only for research or advice that changes how money is spent (`informed`): all shifted. */
+/** Rows written only for research or advice that changes how money is spent (`informed`): all shifted.
+ * informed_money_value takes the mobiliser's share through shifted_dollar_value, once. */
 export const INFORMED_ROWS = ["shifted_dollar_value", "informed_money_value"] as const;
 
 /** `prior_dollar_value` for an organisation filed under a cause other than global health (its model's
@@ -228,7 +244,8 @@ export const MOVED_DOLLAR_FORMULAS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ON
  * Impact: its founded charities, and the global health charities its effective giving organisations
  * fund). The set's rows are the main set's, word for word, with `<set>_` before every set row's id; the
  * model's own money rows take the prefix too (`<set>_money_moved` gross, `<set>_informed_money` changed).
- * Its destination is one of the shared single-cause rows, so shifted money is compared with GiveDirectly. */
+ * Its destination is one of the shared single-cause rows, so shifted money is compared with GiveDirectly.
+ * `mobiliser_share` is the model's one row, never prefixed: every set takes the same share. */
 export const SET_ROWS = ["moved_dollar_value", "prior_dollar_value", "moved_dollar_net_value", "shifted_dollar_value", "informed_money_value"] as const;
 export const SET_DESTINATIONS = [GLOBAL_HEALTH_ONLY.formula, LIVELIHOODS_ONLY.formula, TLYCS_SPLIT.formula];
 const setIds = ["moved_dollar_value", "prior_dollar_value", "shifted_dollar_value", INFORMED_MONEY];
@@ -283,18 +300,18 @@ export const SUCCESS_ADJUSTMENT_FORMULA =
  * INV-18 checks that those models, and only those, read it. */
 export const MARGINAL_ASSUMPTION = "marginal_vs_past_average";
 
-/** Credit by share of resources (`$resource_shares`) for every meta model, one formula: when on, the
- * donors whose new money the organisation moves are co-contributors, alongside staff's forgone pay.
- * `moved_per_dollar` is the gross money moved (or influenced) per dollar of the organisation's cost; the
- * spending its research or advice changed (`informed_money`, all shifted) brings no new money and stays out. */
-export const META_DONOR_COST_SHARE_FORMULA = "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))";
+/** Credit by share of resources (`$resource_shares`) for every meta model, one formula: when on, staff's
+ * forgone pay is a co-contribution (and any genuine co-funder's gift, in the model's own row). The donors
+ * and funders whose money the organisation moves give because of it: they are mobilised, under
+ * `mobiliser_share`, never in this denominator (docs/normalization.md 2.24; INV-12 checks it). */
+export const META_DONOR_COST_SHARE_FORMULA = "1 / (1 + if($resource_shares, salary_sacrifice, 0))";
 
 /** The career-change step, the mirror of staff salary sacrifice (docs/normalization.md 2.8): a programme
  * that moves people into high-impact jobs gets, per career changed, their forgone pay for the years they
  * stay, valued at the new employer's live result per dollar, times the share of changes the programme
- * caused. `career_employer_value` reads the employer's model (`#id`) or `moved_dollar_value`. No model
- * uses it yet. */
-export const CAREER_CHANGE_FORMULA = "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share";
+ * caused, times the mobiliser's share (the person gives up the pay; docs/normalization.md 2.24).
+ * `career_employer_value` reads the employer's model (`#id`) or `moved_dollar_value`. */
+export const CAREER_CHANGE_FORMULA = "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share";
 
 const squash = (f: string) => f.replace(/\s+/g, "");
 export const sameFormula = (a: string | undefined, b: string) => a !== undefined && squash(a) === squash(b);

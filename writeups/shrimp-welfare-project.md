@@ -15,7 +15,7 @@ ACE lists retailer commitments (Tesco and others) as secondary effects it didn't
 
 ### What drives the result
 
-Beyond the exchange rates, **how much a shrimp can suffer relative to a chicken** (about 0.16 to 370 years of healthy life per $1,000 on its own: whether shrimp feel pain at all is very uncertain), then **suffering spared per stunned shrimp** (10 to 180; the high end is the figure ACE used for Aquatic Life Institute) and the likelihood stunners are deployed.
+Beyond the exchange rates, **how much a shrimp can suffer relative to a chicken** (about 0.0000047 to 0.011 years of healthy life per $1,000 on its own: whether shrimp feel pain at all is very uncertain), then **suffering spared per stunned shrimp** (0.00029 to 0.0041; the high end is the figure ACE used for Aquatic Life Institute) and the likelihood stunners are deployed.
 
 ### Where we differ from ACE
 

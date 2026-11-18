@@ -10,7 +10,7 @@
   "estimate_basis": "past_average",
   "charity": "sentinel-bio",
   "owner": "charityevals",
-  "summary": "Sentinel Bio (Washington DC, founded 2024) pools philanthropists' money and grants it for work against catastrophic pandemics, mostly on screening orders for synthetic DNA and on AI tools that can design biology; this model covers all it spent in its first tax year, May to December 2024 ($1.53M, $1.11M of it grants made in November and December), and the $1.08M it advised another donor to give the Johns Hopkins Center for Health Security. At the defaults it averts about {{result}} years of healthy life per $1,000 ({{low}} to {{high}} on its plausible range): about half from three grants valued as a typical dollar of pandemic work (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a fifth from two fellowships counted through the work they add to the field, a quarter from its grant to the Council on Strategic Risks, read at that charity's figure on this site, and a few percent from the advised gift, valued as money shifted to a better use; its own costs ({{row:own_cost_share}} of the spending) count only through the grants and advice they buy. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate, the years a cut counts and what its next dollar does (49%: its reserves were six years of 2024's spending, but its grants have since grown several times over). Every branch is discounted for missing data: no outcome of the grants or the advice on the risk is measured.",
+  "summary": "Sentinel Bio (Washington DC, founded 2024) pools philanthropists' money and grants it for work against catastrophic pandemics, mostly on screening orders for synthetic DNA and on AI tools that can design biology; this model covers all it spent in its first tax year, May to December 2024 ($1.53M, $1.11M of it grants made in November and December), and the $1.08M it advised another donor to give the Johns Hopkins Center for Health Security. At the defaults it averts about {{result}} years of healthy life per $1,000 ({{low}} to {{high}} on its plausible range): about two fifths from its grant to the Council on Strategic Risks, read at that charity's figure on this site, three tenths from three grants valued as a typical dollar of pandemic work (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), a quarter from two fellowships counted through the work they add to the field, and under 1% from the advised gift, valued as money shifted to a better use; its own costs ({{row:own_cost_share}} of the spending) count only through the grants and advice they buy. The biggest uncertainty is how much a dollar of such work cuts the risk (Rethink calls its figures placeholders; the range runs ten times either way); the result also moves with the discount rate, the years a cut counts and what its next dollar does (49%: its reserves were six years of 2024's spending, but its grants have since grown several times over). Every branch is discounted for missing data: no outcome of the grants or the advice on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Sentinel Bio",
@@ -942,10 +942,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "Credit by share of resources: the fellowships' cost over that plus what employers pay for the work-years they add (fb_work_dollars). The fellowship year's own work is part of what the fellowship cost buys, not counted again.",
-      "formula": "cost_total * fb_cost_share / (cost_total * fb_cost_share + fb_work_dollars)"
+      "explainer": "1: no other programme is named as training or placing these fellows (the grant pages name none); down to 0.5 if another fellowship shares them. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1352,7 +1357,7 @@
       "explainer": "Who would have entered the field anyway is already out of fb_share_working: 1 (0.8 to 1), the template's figure."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1365,7 +1370,16 @@
       "explainer": "Not used: ai_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1375,10 +1389,19 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "A grant buys its own share of a grantee's work: the cut is per dollar, so co-funders' dollars are already left out; only partners' unpaid time (providers and experts consulted on the stress-testing study and the EU roadmap) adds resources. 0.9, our judgment, 0.7 to 1."
+      "explainer": "A grant buys its own share of a grantee's work: the cut is per dollar, so co-funders' dollars are already left out; only partners' unpaid time (providers and experts consulted on the stress-testing study and the EU roadmap) adds resources. 0.9, our judgment, 0.7 to 1. The providers that adopt the findings and the EU institutions that legislate are mobilised: the mobiliser's share covers them (docs/normalization.md 2.24)."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1391,7 +1414,16 @@
       "explainer": "Not used: nuclear_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
     },
     {
-      "id": "climate_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "climate_attribution_share_shared",
       "section": "adjustments",
       "label": "Climate work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1404,7 +1436,16 @@
       "explainer": "Not used: climate_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "climate_attribution_share",
+      "section": "adjustments",
+      "label": "Climate work: share of credit used",
+      "format": "percent",
+      "formula": "climate_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1417,7 +1458,16 @@
       "explainer": "Not used: pol_cost_share is 0, so this branch counts nothing; the template's range kept for the switched-on check."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1427,7 +1477,16 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "The fellows' and employers' own time is in fb_credit_share; the hosts (Rosetta Commons, the University) give supervision Sentinel doesn't pay for: 0.95 (0.7 to 1), the template's figure."
+      "explainer": "The fellows' employers are mobilised, under the mobiliser's share (docs/normalization.md 2.24); the hosts (Rosetta Commons, the University) give supervision Sentinel doesn't pay for: 0.95 (0.7 to 1), the template's figure."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",
@@ -1679,12 +1738,20 @@
       "explainer": "Our judgment, the shared rule for an organisation that moves money within a cause other than global health (catastrophic-risk). Shifted money was going to be given anyway, to an ordinary charity of the same cause; it is credited only for the gain. An ordinary charity stands to its cause's charities on the rankings as GiveDirectly (GiveWell's model, times a shared multiple, 1×, from 0 to 3×) stands to global health's: GiveDirectly's live result over the global-health charities' (#cause:global-health), times the catastrophic-risk charities' (#cause:catastrophic-risk), all live under your values."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "shifted_dollar_value",
       "section": "moved_money",
-      "label": "Value of a dollar all shifted (given anyway, now to a better use), units of value",
+      "label": "Value of a dollar all shifted (given anyway, now to a better use), at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "moved_dollar_value - prior_dollar_value",
-      "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed."
+      "formula": "mobiliser_share * (moved_dollar_value - prior_dollar_value)",
+      "explainer": "Money that would have been given or spent anyway counts only for the gain over where it would have gone: a grantmaker's grants, or spending that research or advice changed. Its owners spent it, so the organisation is credited its share of that gain (mobiliser_share)."
     },
     {
       "id": "informed_money_value",

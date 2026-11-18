@@ -9,7 +9,7 @@
  "estimate_basis": "unit_cost",
  "charity": "american-cancer-society",
  "owner": "charityevals",
- "summary": "The American Cancer Society's patient services in the US, year to March 2026: free lodging at its Hope Lodge communities (565,000 nights), Road To Recovery volunteer rides to treatment (93,000 rides for 7,500 patients) and its 24/7 helpline (284,000 calls, chats, emails and texts) with online information and peer support, about $235m of its $426m patient-support line (the rest, prevention and screening promotion, is in the research-and-policy model). Lodging and rides are valued as money saved, on the site's log scale for patients' households, plus a small judged chance that they keep a patient's treatment on track; information and support as a small, short wellbeing gain scaled down from trials of psychosocial support for people with cancer. The result, about {{result}} years of healthy life per {{row:lodge_value_per_person}}, is low because a few thousand dollars saved is a small gain to a US household and a call is a small dose of support; every branch is discounted for missing data, since ACS counts nights, rides and contacts but measures no outcomes. How often lodging and rides keep treatment on track and how much a call or a page helps are the biggest uncertainties, and the result is mostly uncertainty.",
+ "summary": "The American Cancer Society's patient services in the US, year to March 2026: free lodging at its Hope Lodge communities (565,000 nights), Road To Recovery volunteer rides to treatment (93,000 rides for 7,500 patients) and its 24/7 helpline (284,000 calls, chats, emails and texts) with online information and peer support, about $235m of its $426m patient-support line (the rest, prevention and screening promotion, is in the research-and-policy model). Lodging and rides are valued as money saved, on the site's log scale for patients' households, plus a small judged chance that they keep a patient's treatment on track; information and support as a small, short wellbeing gain scaled down from trials of psychosocial support for people with cancer. The result, about {{result}} years of healthy life per $1,000, is low because a few thousand dollars saved is a small gain to a US household and a call is a small dose of support; every branch is discounted for missing data, since ACS counts nights, rides and contacts but measures no outcomes. How often lodging and rides keep treatment on track and how much a call or a page helps are the biggest uncertainties, and the result is mostly uncertainty.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: American Cancer Society: Hope Lodge, rides to treatment and the helpline (charityevals, 2025-26)",
@@ -702,6 +702,7 @@
    "id": "lodge_attribution_share",
    "section": "adjustments",
    "label": "Hope Lodge: ACS's share of the resources",
+   "credit": "delivery",
    "format": "percent",
    "formula": "1 - lodge_donated_share",
    "explainer": "Land leases and patient lodging given in kind are other people's resources (Convention 2)."
@@ -755,6 +756,7 @@
    "id": "rides_attribution_share",
    "section": "adjustments",
    "label": "Road To Recovery: ACS's share of the resources",
+   "credit": "delivery",
    "format": "percent",
    "formula": "program_spend * rides_share * overhead_ratio / (program_spend * rides_share * overhead_ratio + rides_volunteer_value)",
    "explainer": "ACS's cost over its cost plus the volunteer drivers' time (Convention 2)."
@@ -763,6 +765,7 @@
    "id": "info_attribution_share",
    "section": "adjustments",
    "label": "Helpline and information: ACS's share of the resources",
+   "credit": "delivery",
    "format": "percent",
    "formula": "1",
    "explainer": "Delivered by ACS's own staff."
@@ -779,6 +782,7 @@
    "id": "attribution_share",
    "section": "adjustments",
    "label": "Attribution share (outcome-weighted average of the branches, for reading only)",
+   "credit": "delivery",
    "format": "percent",
    "formula": "attribution_share_shared",
    "explainer": "The outcome-weighted average of the branches, for reading only; each branch applies its own."

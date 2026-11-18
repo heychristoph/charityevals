@@ -1,6 +1,6 @@
 ### Summary
 
-The Bulletin of the Atomic Scientists is a Chicago non-profit that publishes expert journalism on nuclear weapons, climate change, biological threats and AI, and sets the Doomsday Clock each January. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from about 0.8 to about 340.
+The Bulletin of the Atomic Scientists is a Chicago non-profit that publishes expert journalism on nuclear weapons, climate change, biological threats and AI, and sets the Doomsday Clock each January. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely a nuclear war is and on an estimate of what a typical dollar of such work does to the risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -41,14 +41,14 @@ The Bulletin had about six months of reserves at June 2025, after deficits of $0
 
 ### What drives the result
 
-The nuclear coverage brings 96% of the result, the pandemic coverage 4% and the AI coverage under 1%. The climate coverage adds almost nothing: a typical climate dollar averts far fewer deaths than a typical nuclear dollar. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 63.
+The nuclear coverage brings 96% of the result, the pandemic coverage 4% and the AI coverage under 1%. The climate coverage adds almost nothing: a typical climate dollar averts far fewer deaths than a typical nuclear dollar. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 19.
 
 Under half the Bulletin's spending is on nuclear risk, and journalism is further from decisions.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 4 to 141.
-- **How many years a cut counts.** The shared slider runs from 1 to 20 years, moving the result from 3 to 49.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 1.1 to 42.
+- **How many years a cut counts.** The shared slider runs from 1 to 20 years, moving the result from 1.1 to 15.
 - **How the spending splits between areas.** The accounts report one programme, so the split follows the year's articles.
 - **How far journalism beats or trails a typical project.** Nothing about it is measured.
 

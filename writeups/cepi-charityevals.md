@@ -1,6 +1,6 @@
 ### Summary
 
-CEPI funds vaccines against epidemics and pandemics, aiming to have a vaccine ready within 100 days of a new threat. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely catastrophic pandemics are, on what a typical dollar of pandemic work does to that risk, and on how much less a dollar does at CEPI's size. All three are deeply uncertain, so the plausible range runs from about 0.02 to about 13.
+CEPI funds vaccines against epidemics and pandemics, aiming to have a vaccine ready within 100 days of a new threat. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. The figure rests on forecasts of how likely catastrophic pandemics are, on what a typical dollar of pandemic work does to that risk, and on how much less a dollar does at CEPI's size. All three are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -32,9 +32,9 @@ All of CEPI's spending is pandemic work. The model's AI, nuclear, policy-win and
 | CEPI's outputs against a typical project | 1 | Concrete and used: licensed vaccines, phase 2 trials, an outbreak technology transfer |
 | A typical project's rate at CEPI's size | 0.07 | Worked out from the 100 Days Mission (below) |
 | Work no one else would have done now | 0.7 | CEPI is nearly the only funder for Lassa or Nipah; others also fund coronavirus, mpox and platform vaccines |
-| CEPI's share of the resources behind its work | 0.7 | Its awardees, mostly companies, add their own money and staff |
+| CEPI's share of the resources behind its work | 0.75 | Its awardees, mostly companies, add their own money and staff |
 | Outbreak vaccines: trust in the modelled impact | 0.8 | One modelling study for Lassa, judgment for the rest |
-| Outbreak vaccines: CEPI's share of their funding | 0.5 | Vaccine makers, the EU and the US paid for the chikungunya and mpox vaccines too |
+| Outbreak vaccines: CEPI's share of their funding | 0.55 | Vaccine makers, the EU and the US paid for the chikungunya and mpox vaccines too |
 | Funging | 1 | Counted once, in the next-dollar figure |
 | Missing data | slider | Nothing about CEPI's effect on the risk is measured |
 
@@ -46,15 +46,15 @@ CEPI is asking for $2.5 billion more for its 2027–2031 strategy, and aid budge
 
 ### What drives the result
 
-Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 7.5. Deaths of people alive now are about 90% of the value and the future lost about 10%. The outbreak vaccines add under 1%.
+Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 2.4. Deaths of people alive now are about 90% of the value and the future lost about 10%. The outbreak vaccines add under 1%.
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 7.7; at 8% it is about 0.4.
-- **The years a cut counts.** At one year the result is 0.11; at twenty it is 1.6.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.27 to 3.1.
-- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.17; at 60% it is 1.0. The mission's cost moves it from 0.26 to 1.0.
-- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.24 to 0.95.
+- **The discount rate.** At 0.1% the result is about 2.5; at 8% it is about 0.13.
+- **The years a cut counts.** At one year the result is 0.037; at twenty it is 0.51.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.086 to 0.98.
+- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.056; at 60% it is 0.33. The mission's cost moves it from 0.084 to 0.33.
+- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.077 to 0.30.
 
 ### What isn't modelled
 

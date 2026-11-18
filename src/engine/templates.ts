@@ -91,7 +91,16 @@ const COMMON_BOUNDS: Record<string, [number, number]> = {
   years_until_avoided: [0, 60],
   marginal_vs_past_average: [0, 1],
   missing_data_adj: [0, 1],
+  // The mobiliser's share (docs/normalization.md 2.24): the slider's own range.
+  mobiliser_share: [0.05, 1],
 };
+/** The canonical row for the mobiliser's share (docs/normalization.md 2.24): `mobiliser_share =
+ * $mobiliser_share`, read by the used share of every win or research branch and by the shared money and
+ * career formulas. Not yet required: models built before the rule carry it once migrated (INV-22's list). */
+export const MOBILISER_ROW = { id: "mobiliser_share", formula: "$mobiliser_share" };
+/** Families whose skeleton carries a class (`credit`: win, research or delivery) on its used share
+ * (`attribution_share`, `<branch>_attribution_share`): a win or research result others carry out. */
+export const MOBILISING_FAMILIES: Family[] = ["corporate-campaign", "diet-change", "policy-research-meta", "medical-research", "rights-advocacy", "catastrophic-risk"];
 /** Every family's staff-pay step (the gap is the site's judgment per kind of work). The missing-data
  * step reads its slider only where the outcome isn't measured: src/engine/lint.ts checks it per branch. */
 const STAFF_READS: Read[] = [

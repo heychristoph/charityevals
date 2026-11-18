@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "iodine-global-network",
   "owner": "charityevals",
-  "summary": "The Iodine Global Network (IGN) helps governments and salt producers keep salt iodized: in 2025, spending $1.32 million, it brought Lebanon's main producers back to national standards, improved small producers' salt in Bolivia, northern Argentina and Madagascar, gave evidence behind Vietnam's Ministry of Health recommending that iodized salt stay compulsory in processed foods (the final decree is still being drafted), helped Davao City restart salt enforcement, reviewed laws or applied its monitoring tools in 19 countries, and pressed for iodine policy in Europe, South Asia and North America. Each piece of work is valued by the births it moves from iodine deficiency to protection (the reviews and advocacy in new rules the size of Moldova's requirement of iodized salt in bread, one every two and every four years): 7.5 IQ points lost to deficiency, halved for the milder deficiency at stake, worth 0.67% higher earnings per point over 40 working years, plus goitre averted less hyperthyroidism caused, counted for the years a won change counts (producer support for two or three) and credited by IGN's share of the resources behind it. The result, about 2.4 years of healthy life per 1,000 dollars, is very uncertain and rests mostly on judgment (how many new rules the reviews and advocacy lead to, how much mild deficiency harms cognition, whether Vietnam's final decree keeps the requirement); every branch is discounted for missing data, since no change in iodine status is measured, and the next dollar counts at 56% of the past average.",
+  "summary": "The Iodine Global Network (IGN) helps governments and salt producers keep salt iodized: in 2025, spending $1.32 million, it brought Lebanon's main producers back to national standards, improved small producers' salt in Bolivia, northern Argentina and Madagascar, gave evidence behind Vietnam's Ministry of Health recommending that iodized salt stay compulsory in processed foods (the final decree is still being drafted), helped Davao City restart salt enforcement, reviewed laws or applied its monitoring tools in 19 countries, and pressed for iodine policy in Europe, South Asia and North America. Each piece of work is valued by the births it moves from iodine deficiency to protection (the reviews and advocacy in new rules the size of Moldova's requirement of iodized salt in bread, one every two and every four years): 7.5 IQ points lost to deficiency, halved for the milder deficiency at stake, worth 0.67% higher earnings per point over 40 working years, plus goitre averted less hyperthyroidism caused, counted for the years a won change counts (producer support for two or three) and credited by IGN's share of the resources behind it. The result, about {{result}} years of healthy life per 1,000 dollars, is very uncertain and rests mostly on judgment (how many new rules the reviews and advocacy lead to, how much mild deficiency harms cognition, whether Vietnam's final decree keeps the requirement); every branch is discounted for missing data, since no change in iodine status is measured, and the next dollar counts at 56% of the past average.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Iodine Global Network",
@@ -1210,7 +1210,7 @@
       "label": "Money moved per dollar of the charity's cost",
       "format": "multiple",
       "formula": "money_moved / cost_total",
-      "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+      "explainer": "Context."
     },
     {
       "id": "value_global_health",
@@ -1245,12 +1245,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Net value of a dollar moved, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_value",
@@ -1323,8 +1331,8 @@
       "section": "careers",
       "label": "Value per career changed, units of value",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",
@@ -1395,20 +1403,21 @@
       "label": "Lebanon: IGN's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.5
+        "low": 0.25,
+        "best": 0.45,
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Our judgment of IGN's share of everyone's resources behind the result: UNICEF, the American University of Beirut, the ministries and inspectors, the Tripoli Chamber of Commerce's testing, and the producers' own upgrades. IGN led the factory work, funded by a rapid-response grant; 30% (15% to 50%)."
+      "explainer": "Our judgment of IGN's share among those who worked for the result: UNICEF, the American University of Beirut and the Tripoli Chamber of Commerce's testing beside it. IGN led the factory work, funded by a rapid-response grant. The ministries and inspectors who enforce and the producers who paid for their own upgrades are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 45% (25% to 70%)."
     },
     {
       "id": "leb_attribution_share",
       "section": "adjustments",
       "label": "Lebanon: IGN's credit",
       "format": "percent",
-      "formula": "leb_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "leb_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leb_implementation_adj",
@@ -1487,20 +1496,21 @@
       "label": "Producer quality assurance: IGN's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.5
+        "low": 0.2,
+        "best": 0.45,
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Our judgment of IGN's share of the resources behind the gain: CENIN in Salta, the national and provincial laboratories, Bolivia's Ministry of Health, UNICEF and the Madagascar government, and the producers' own spending on mixers and iodate. 30% (10% to 50%)."
+      "explainer": "Our judgment of IGN's share among those who supported the producers: CENIN in Salta, the national and provincial laboratories and UNICEF beside it. Bolivia's Ministry of Health, the Madagascar government and the producers' own spending on mixers and iodate are the adopters', under the mobiliser's share, not in this one (docs/normalization.md 2.24). 45% (20% to 70%)."
     },
     {
       "id": "qa_attribution_share",
       "section": "adjustments",
       "label": "Producer quality assurance: IGN's credit",
       "format": "percent",
-      "formula": "qa_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "qa_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "qa_implementation_adj",
@@ -1592,8 +1602,9 @@
       "section": "adjustments",
       "label": "Vietnam: IGN's credit",
       "format": "percent",
-      "formula": "vnm_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "vnm_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "vnm_implementation_adj",
@@ -1672,20 +1683,21 @@
       "label": "Davao City: IGN's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.15,
-        "best": 0.3,
-        "high": 0.5
+        "low": 0.3,
+        "best": 0.6,
+        "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "Our judgment of IGN's share of the resources behind the plan: the city government, the Food and Drug Administration, the Department of Trade and Industry and other partners carry it out. 30% (15% to 50%)."
+      "explainer": "Our judgment of IGN's share among those who worked for the plan; its report names no other partner, and the rest allows for partners not named. The city government, the Food and Drug Administration and the Department of Trade and Industry, which carry it out, are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 60% (30% to 85%)."
     },
     {
       "id": "dav_attribution_share",
       "section": "adjustments",
       "label": "Davao City: IGN's credit",
       "format": "percent",
-      "formula": "dav_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "dav_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dav_implementation_adj",
@@ -1764,20 +1776,21 @@
       "label": "Policy reviews and tools: IGN's share of the resources behind it",
       "format": "percent",
       "value": {
-        "low": 0.2,
-        "best": 0.4,
-        "high": 0.7
+        "low": 0.3,
+        "best": 0.55,
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Our judgment of IGN's share of the resources behind the changes the tools and reviews lead to: the methods are IGN's (funded by the Gates Foundation through IGN), but ministries, national coordinators' unpaid time, WHO and UNICEF carry the reviews and changes. 40% (20% to 70%)."
+      "explainer": "Our judgment of IGN's share of the resources behind the changes the tools and reviews lead to: the methods are IGN's (funded by the Gates Foundation through IGN); national coordinators' unpaid time, WHO and UNICEF carry the reviews with it. The ministries that make the changes are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 55% (30% to 80%)."
     },
     {
       "id": "net_attribution_share",
       "section": "adjustments",
       "label": "Policy reviews and tools: IGN's credit",
       "format": "percent",
-      "formula": "net_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "net_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "net_implementation_adj",
@@ -1863,8 +1876,9 @@
       "section": "adjustments",
       "label": "Regional advocacy: IGN's credit",
       "format": "percent",
-      "formula": "reg_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "reg_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "reg_implementation_adj",
@@ -2037,7 +2051,7 @@
       "section": "donor",
       "label": "Share of the full cost paid in cash",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))",
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))",
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost. Off, this is 100%."
     },
     {

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "govai",
   "owner": "charityevals",
-  "summary": "The Centre for the Governance of AI (GovAI: a US charity with a UK subsidiary in London) researches how governments and AI companies can manage risks from advanced AI, advises them (in 2025 its director of policy was one of the chairs and vice-chairs who drafted the EU's Code of Practice for general-purpose AI) and trains people for the field (81 three-month fellows and 15 year-long scholars in 2025). This model covers all its work in 2025, its first full year as an independent charity ($11.9M spent, from its annual report; no audited statement for the year is public yet). At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.1 to 16 on the model's own ranges, so the result is mostly uncertainty: each dollar of research is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), the Code of Practice by GovAI's share of the resources behind it (about 1%) of a small cut in the risk (0.1%), the fellows' and scholars' later work at a typical dollar of such work, deaths valued like every death and the future lost counted through the discount rate; the research gives about half the result, the training two fifths and the Code a tenth, and the next dollar counts at 42% of the past average. A fifth of its catastrophe research is threat modelling of AI-enabled attacks, for which Rethink's typical misuse project cuts deaths far more per dollar than a misalignment one; the biggest swings are the chance of an AI catastrophe (the slider), the years a cut counts, the discount rate, that cut per dollar and the share of work counted as misuse, and every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Centre for the Governance of AI (GovAI: a US charity with a UK subsidiary in London) researches how governments and AI companies can manage risks from advanced AI, advises them (in 2025 its director of policy was one of the chairs and vice-chairs who drafted the EU's Code of Practice for general-purpose AI) and trains people for the field (81 three-month fellows and 15 year-long scholars in 2025). This model covers all its work in 2025, its first full year as an independent charity ($11.9M spent, from its annual report; no audited statement for the year is public yet). At the defaults it averts about {{result}} years of healthy life per $1,000, within a plausible range of {{low}} to {{high}}, so the result is mostly uncertainty: each dollar of research is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), the Code of Practice by GovAI's share of the resources behind it ({{row:attr_policy}}) of a small cut in the risk (0.1%), the fellows' and scholars' later work at a typical dollar of such work, deaths valued like every death and the future lost counted through the discount rate; the training gives about 78% of the result, the research about 14% and the Code about 8%, and the next dollar counts at 42% of the past average. A fifth of its catastrophe research is threat modelling of AI-enabled attacks, for which Rethink's typical misuse project cuts deaths far more per dollar than a misalignment one; the biggest swings are the chance of an AI catastrophe (the slider), the years a cut counts, the discount rate, that cut per dollar and the share of work counted as misuse, and every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Centre for the Governance of AI (GovAI)",
@@ -858,9 +858,9 @@
       "label": "Field-building: share who go on to work on these risks because of it",
       "format": "percent",
       "value": {
-        "low": 0.08,
-        "best": 0.22,
-        "high": 0.4
+        "low": 0.07,
+        "best": 0.17,
+        "high": 0.35
       },
       "kind": "judgment",
       "source": {
@@ -870,7 +870,7 @@
         "quote": "Recent data shows that about 60% of our alumni have settled into a longer-term role in AI governance a year after their fellowship ended",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Share of the fellows and scholars who go on to work on AI risk because of the programme. GovAI's alumni data: about 60% hold a longer-term AI governance role a year after the fellowship (scholars move on to the UK AI Security Institute, the Centre for Long-Term Resilience, Microsoft or stay as Research Fellows); its alumni survey (2024 Form 990, Part III) credits the fellowship with bringing careers forward by a year and raising alumni's future impact by 50%, so about a third of their later work. Most were selected from 18,000 applications and many would have entered the field anyway, and not every AI governance role is about catastrophic risk: 60% × about a third ≈ 20%, a little more with the scholars' year-long stays, 22%, our judgment, 8 to 40%, the family's 20% (5 to 40%) for selective fellowships."
+      "explainer": "Share of the fellows and scholars who go on to work on AI risk because of the programme. GovAI's alumni data: about 60% hold a longer-term AI governance role a year after the fellowship (scholars move on to the UK AI Security Institute, the Centre for Long-Term Resilience, Microsoft or stay as Research Fellows); its alumni survey (2024 Form 990, Part III) credits the fellowship with bringing careers forward by a year and raising alumni's future impact by 50%, so about a third of their later work. Most were selected from 18,000 applications and many would have entered the field anyway, and not every AI governance role is about catastrophic risk: 60% × about a third × 0.8 (the share of AI governance roles aimed at catastrophic risk, as catastrophe_relevant_share for the research) = 16%, a little more with the scholars' year-long stays, 17%, our judgment, 7 to 35%, below the family's 20% (5 to 40%) for selective fellowships because governance roles are broader than catastrophe work."
     },
     {
       "id": "fb_work_years",
@@ -892,10 +892,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "The employers pay for the work itself, so the training gets credit by share of resources: its spending over that plus the alumni's added work (fb_work_dollars), computed so it moves with its inputs. At the best guesses $3.45M against about $24.4M (96 × 22% × five discounted years at the shared $250,000 a work-year), about 12.4%.",
-      "formula": "cost_total * fb_cost_share / (cost_total * fb_cost_share + fb_work_dollars)"
+      "explainer": "1: the training's own part of the alumni's later work is already judged in fb_share_working, from GovAI's alumni survey, in which alumni say what the fellowship added to their impact against their other options (a third of their later work), so no further cut for other programmes that trained the same people is made; a report that other programmes share them would put it down to 0.5. The employers who pay for the work are not in this denominator: they are mobilised and the mobiliser's share covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1123,7 +1128,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "GovAI pays the fellows' and scholars' salaries, supervisors and office; outside speakers at the seminars and hosts of secondments give some time. Our judgment, 95% (85% to 100%). The alumni's employers' share is in fb_credit_share."
+      "explainer": "GovAI pays the fellows' and scholars' salaries, supervisors and office; outside speakers at the seminars and hosts of secondments give some time. Our judgment, 95% (85% to 100%). The alumni's employers are mobilised, under the mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "cf_policy",
@@ -1155,15 +1160,28 @@
         "quote": "a multi-stakeholder consultation with almost 430 submissions",
         "retrieved": "2026-11-14"
       },
-      "explainer": "Everyone's spending and in-kind time behind the chapter, from July 2024 to July 2025: the AI Office's drafting and policy staff (about 20 people for a year, about $3M), the 13 chairs and vice-chairs (part-time for a year, about $1.3M), almost 430 written submissions (about $4M at a few weeks' work each), plenaries and workshops with about a thousand participants (about $3M), and the providers' own policy and safety teams negotiating the text (about $5-10M): about $20M, our judgment, $5M to $50M."
+      "explainer": "Everyone's spending and in-kind time behind the chapter, from July 2024 to July 2025: the AI Office's drafting and policy staff (about 20 people for a year, about $3M), the 13 chairs and vice-chairs (part-time for a year, about $1.3M), almost 430 written submissions (about $4M at a few weeks' work each), plenaries and workshops with about a thousand participants (about $3M), and the providers' own policy and safety teams negotiating the text (about $5-10M): about $20M, our judgment, $5M to $50M. Context, not read by a formula: everyone's resources, the base for the anchor in pol_relative_cut."
+    },
+    {
+      "id": "code_coadvocate_resources",
+      "section": "adjustments",
+      "label": "Code of Practice: resources of those who drafted and advised alongside GovAI (dollars)",
+      "format": "usd",
+      "value": {
+        "low": 3000000,
+        "best": 7000000,
+        "high": 15000000
+      },
+      "kind": "judgment",
+      "explainer": "The 13 chairs and vice-chairs' time (about $1.3M), the written submissions of civil society, academics and others (a part of the $4M for almost 430), and the plenaries' and workshops' outside participants (a part of the $3M), without the AI Office's staff, who adopt and will enforce the Code, and the providers' own teams, who comply with it: both are mobilised (docs/normalization.md 2.24). About $7M, our judgment, $3M to $15M."
     },
     {
       "id": "attr_policy",
       "section": "adjustments",
       "label": "Code of Practice: GovAI's share of the resources behind the Safety and Security chapter",
       "format": "percent",
-      "explainer": "Credit by share of resources: GovAI's spending on the Code (pol_cost_share of its cost, about $240,000: its vice-chair's time and colleagues' input) over everyone's resources behind the chapter (code_resources): about {{row:attr_policy}}. Counting heads (1 of the chapter's 9 chairs and vice-chairs, 11%) would overstate it, because the AI Office, the submitters and the providers did most of the work.",
-      "formula": "pol_cost_share * cost_total / code_resources"
+      "explainer": "Credit by share of resources: GovAI's spending on the Code (pol_cost_share of its cost, about $240,000: its vice-chair's time and colleagues' input) over the resources of those who drafted and advised alongside it (code_coadvocate_resources): about {{row:attr_policy}}. The AI Office and the providers are not in it: they are mobilised, under the mobiliser's share.",
+      "formula": "pol_cost_share * cost_total / code_coadvocate_resources"
     },
     {
       "id": "attribution_share_shared",
@@ -1174,12 +1192,21 @@
       "formula": "(w_ai * catastrophe_relevant_share * research_uptake_adj * cf_research * attr_research + w_fb * talent_evidence_adj * cf_talent * attr_talent + w_pol * cf_policy * attr_policy) / ((w_ai + w_fb + w_pol) * evidence_adj * counterfactual_adj)"
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leverage_funging_adj",

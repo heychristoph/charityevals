@@ -965,15 +965,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Not used: fb_people is 0 (the fellows work outside the catastrophic risks and are valued in the gov branch); the template's range kept for the switched-on check. the employers pay for the work itself: the training's cost over training plus the employers' cost of the work-years is the anchor (credit by share of resources)."
+      "explainer": "Not used: no one is trained or placed (fb_people is 0). The skeleton's figure: 1 when no other programme trained or placed the same people. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (fb_attribution_share) covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_deaths_per_million",
@@ -1334,7 +1334,7 @@
       "explainer": "Not used: the branch has no spending (fb_cost_share is 0). The template's range kept."
     },
     {
-      "id": "ai_attribution_share",
+      "id": "ai_attribution_share_shared",
       "section": "adjustments",
       "label": "AI field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1347,7 +1347,24 @@
       "explainer": "FAS's share of the resources behind the work: the Day One proposals' outside authors write unpaid (beyond small stipends in the cost). 0.9 (0.7 to 1), our judgment."
     },
     {
-      "id": "bio_attribution_share",
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "ai_attribution_share",
+      "section": "adjustments",
+      "label": "AI field work: share of credit used",
+      "format": "percent",
+      "formula": "ai_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "bio_attribution_share_shared",
       "section": "adjustments",
       "label": "Pandemic field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1360,7 +1377,16 @@
       "explainer": "The program's workshops and sprints draw on outside experts' unpaid time beside the grant-paid staff and fellows: FAS's share 0.8 (0.6 to 1), our judgment, below the nuclear branch's 0.9 for a convening-heavy project."
     },
     {
-      "id": "nuclear_attribution_share",
+      "id": "bio_attribution_share",
+      "section": "adjustments",
+      "label": "Pandemic field work: share of credit used",
+      "format": "percent",
+      "formula": "bio_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "nuclear_attribution_share_shared",
       "section": "adjustments",
       "label": "Nuclear field work: this charity's share of the resources behind it",
       "format": "percent",
@@ -1373,7 +1399,16 @@
       "explainer": "FAS's share of the resources behind the work: its staff and grants are in the cost (Ploughshares' $90,000 in the year to June 2025, its 990 Schedule I: \"to support analysis the world's nuclear weapons, ongoing research projects, and consistent media outreach\", https://apps.irs.gov/pub/epostcard/990/xml/2026/2026_TEOS_XML_04A.zip, object 202620979349300102); co-authors at the Bulletin and SIPRI and the satellite-imagery firms whose images it uses add some. 0.9 (0.75 to 1), our judgment. Ploughshares' grant is in the cost, so it lowers nothing here."
     },
     {
-      "id": "pol_attribution_share",
+      "id": "nuclear_attribution_share",
+      "section": "adjustments",
+      "label": "Nuclear field work: share of credit used",
+      "format": "percent",
+      "formula": "nuclear_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "pol_attribution_share_shared",
       "section": "adjustments",
       "label": "Policy win: this charity's share of the resources behind it",
       "format": "percent",
@@ -1386,7 +1421,16 @@
       "explainer": "Not used: the branch has no spending (pol_cost_share is 0). The template's range kept."
     },
     {
-      "id": "fb_attribution_share",
+      "id": "pol_attribution_share",
+      "section": "adjustments",
+      "label": "Policy win: share of credit used",
+      "format": "percent",
+      "formula": "pol_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
+    },
+    {
+      "id": "fb_attribution_share_shared",
       "section": "adjustments",
       "label": "Field-building: this charity's share of the resources behind it",
       "format": "percent",
@@ -1397,6 +1441,15 @@
       },
       "kind": "judgment",
       "explainer": "Not used: the branch has no spending (fb_cost_share is 0). The template's range kept."
+    },
+    {
+      "id": "fb_attribution_share",
+      "section": "adjustments",
+      "label": "Field-building: share of credit used",
+      "format": "percent",
+      "formula": "fb_attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "gov_evidence_adj",
@@ -1425,17 +1478,26 @@
       "explainer": "Other groups do similar work (the American Association for the Advancement of Science's policy fellowships, the Partnership for Public Service, the Institute for Progress, the Niskanen Center, the Bipartisan Policy Center, the National Academies), and agencies could hire some of the fellows themselves: 0.6 (0.3 to 0.9), our judgment, as the AI branch's for a crowded field."
     },
     {
-      "id": "gov_attribution_share",
+      "id": "gov_attribution_share_shared",
       "section": "adjustments",
       "label": "Science policy and government capacity: FAS's share of the resources behind the change",
       "format": "percent",
       "value": {
-        "low": 0.4,
-        "best": 0.7,
-        "high": 0.95
+        "low": 0.7,
+        "best": 0.9,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Agencies' own staff supervise the fellows and carry out the changes, and the Day One memos' authors and the sponsored projects' partners give unpaid time: FAS's share of all resources behind a change, 0.7 (0.4 to 0.95), our judgment. Federal grants to FAS ($8.4M, 990 Part VIII line 1e) are in its cost, so they lower nothing here."
+      "explainer": "FAS's share among those who worked for the changes: the Day One memos' authors and the sponsored projects' partners give unpaid time beside FAS's staff and fellows. The agencies' own staff who supervise the fellows and carry out the changes are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.9 (0.7 to 1), our judgment. Federal grants to FAS ($8.4M, 990 Part VIII line 1e) are in its cost, so they lower nothing here."
+    },
+    {
+      "id": "gov_attribution_share",
+      "section": "adjustments",
+      "label": "Science policy and government capacity: share of credit used",
+      "format": "percent",
+      "formula": "gov_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "evidence_adj",

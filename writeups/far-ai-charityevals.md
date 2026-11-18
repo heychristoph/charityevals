@@ -1,6 +1,6 @@
 ### Summary
 
-FAR.AI works to make advanced AI safe. It does technical research on how AI systems can be attacked and broken, runs a research hub in Berkeley, holds workshops for alignment researchers and funds research by others. Our model of all four programmes in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from about 0.02 to about 47.
+FAR.AI works to make advanced AI safe. It does technical research on how AI systems can be attacked and broken, runs a research hub in Berkeley, holds workshops for alignment researchers and funds research by others. Our model of all four programmes in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -43,9 +43,9 @@ The main reason is the quarter of its work aimed at misuse. For catastrophes the
 
 ### Biggest uncertainties
 
-- **How much a dollar of misuse work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.13 to 9.2.
-- **How likely an AI catastrophe is.** The slider runs from 0.38% (the superforecasters) to 20%. Across that range the result moves from 0.12 to 6.4.
-- **How much of the work is against misuse.** FAR.AI publishes no split. From 11% to 40% moves the result from 0.40 to 1.4.
+- **How much a dollar of misuse work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.067 to 4.6.
+- **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.036 to 4.8.
+- **How much of the work is against misuse.** FAR.AI publishes no split. From 11% to 40% moves the result from 0.20 to 0.68.
 - **The years a cut counts and the discount rate.** These are shared sliders.
 
 ### What isn't modelled

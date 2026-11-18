@@ -827,15 +827,15 @@
         "high": 0.3
       },
       "kind": "judgment",
-      "explainer": "BHF part-funds ASH and campaigned itself; it says the law \"would not have materialised without constant pressure from ASH, ourselves and other partners\" (annual report p. 35). An eighth of the campaigning groups' resources, our judgment (smoking, the leading cause of cancer, is a larger part of Cancer Research UK's policy work; the rest is ASH's, the royal colleges' and the other groups'); 5% to 30%."
+      "explainer": "BHF part-funds ASH and campaigned itself; it says the law \"would not have materialised without constant pressure from ASH, ourselves and other partners\" (annual report p. 35). An eighth of the campaigning groups' resources, our judgment (the rest is ASH's, the royal colleges' and the other groups'); 5% to 30%."
     },
     {
       "id": "adv_attribution_share_shared",
       "section": "adjustments",
-      "label": "Advocacy: BHF's share of everyone's resources behind the law",
+      "label": "Advocacy: BHF's share among the campaigning groups behind the law",
       "format": "percent",
-      "explainer": "The campaigning groups' share of everyone's resources behind the law (shared, facts: tobacco: 40%, the government's and Parliament's work the rest) × BHF's share of the groups' (row above), so the credits of the charities modelled for the same Act sum within the groups' share.",
-      "formula": "@tobacco.uk_act_campaigners_share * adv_share_of_campaigners"
+      "explainer": "BHF's share of the campaigning groups' resources (row above). The government that drafted the law and the Parliament that passed it are under the mobiliser's share, not in this share; the credits of the charities modelled for the same Act sum within the groups' whole.",
+      "formula": "adv_share_of_campaigners"
     },
     {
       "id": "impl_evidence_adj",
@@ -912,28 +912,39 @@
       "explainer": "1: the years brought forward already say how much later the change of practice would have come without the pilot (Convention 5)."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "research_attribution_share",
       "section": "adjustments",
       "label": "Research: BHF's share of the credit",
+      "credit": "research",
       "format": "percent",
-      "formula": "research_attribution_share_shared",
-      "explainer": "BHF's share of the resources behind this branch's outcome; it applies whichever way credit is shared."
+      "formula": "research_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "adv_attribution_share",
       "section": "adjustments",
       "label": "Policy: BHF's share of the credit",
+      "credit": "win",
       "format": "percent",
-      "formula": "adv_attribution_share_shared",
-      "explainer": "BHF's share of the resources behind this branch's outcome; it applies whichever way credit is shared."
+      "formula": "adv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "impl_attribution_share",
       "section": "adjustments",
       "label": "Implementation pilots: BHF's share of the credit",
+      "credit": "research",
       "format": "percent",
-      "formula": "impl_attribution_share_shared",
-      "explainer": "BHF's share of the resources behind this branch's outcome; it applies whichever way credit is shared."
+      "formula": "impl_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "research_total_adj",
@@ -1045,7 +1056,7 @@
       "label": "Share of credit used",
       "format": "percent",
       "formula": "(research_dalys * research_attribution_share + advocacy_dalys * adv_attribution_share + impl_dalys * impl_attribution_share) / (research_dalys + advocacy_dalys + impl_dalys)",
-      "explainer": "The DALY-weighted average of the branches, for reading only: each branch applies its own share (research_, adv_, impl_attribution_share)."
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "evidence_adj",

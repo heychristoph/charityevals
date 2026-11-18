@@ -1,6 +1,6 @@
 ### Summary
 
-The Federation of American Scientists is a Washington DC science-policy organisation founded in 1945 by Manhattan Project scientists. It counts the world's nuclear arsenals in the open, ran a Global Risk Program on AI, nuclear and biological risk, and has a small team on AI safety and security. Most of its money goes to making US science policy and government work better. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. Almost all of that comes from the nuclear work, which is about 3% of the cost. The plausible range runs from about 0.07 to about 29.
+The Federation of American Scientists is a Washington DC science-policy organisation founded in 1945 by Manhattan Project scientists. It counts the world's nuclear arsenals in the open, ran a Global Risk Program on AI, nuclear and biological risk, and has a small team on AI safety and security. Most of its money goes to making US science policy and government work better. Our model of all its work in the year to June 2025 comes to **{{result}} years of healthy life per $1,000**. Almost all of that comes from the nuclear work, which is about 3% of the cost. The plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -25,7 +25,7 @@ The return doesn't split the research line by issue, so the model splits it by h
 |---|---|---|---|---|
 | How far the effect applies | 0.8 | 0.7 | 0.7 | 1 |
 | Work others would not have done now | 0.7 | 0.6 | 0.7 | 0.6 |
-| FAS's share of the resources | 0.9 | 0.9 | 0.8 | 0.7 |
+| FAS's share of the resources | 0.9 | 0.9 | 0.8 | 0.9 |
 
 Every part is discounted 50% for missing data. Ploughshares' grant to FAS ($90,000) is part of FAS's costs, so a donor here and Ploughshares each get credit only for their own dollars.
 
@@ -39,7 +39,7 @@ The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% 
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.35 to 12.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.12 to 3.7.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much of the research spending is on catastrophic risks.** The Nuclear Information Project's share is by headcount, from 10% to 22%; the Global Risk Program's comes from its grant and pay, from 8% to 20%.
 - **How much the science-policy work improves public spending.** That is a judgment with a range of a hundred times either way, but it moves the result very little.

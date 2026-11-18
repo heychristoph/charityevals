@@ -536,12 +536,21 @@
       "explainer": "About 3 of the provisions' 18 million tonnes a year come from the rebates and the rest from the credits (ira_household_share's explainer): 17% (10% to 30%), our judgment."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "ira_attribution_share",
       "section": "adjustments",
       "label": "Inflation Reduction Act's home-energy provisions: credit share used",
       "format": "percent",
-      "formula": "ira_attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "ira_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ira_household_delivery_vs_law",
@@ -641,7 +650,8 @@
       "label": "Tools and coaching: credit share used",
       "format": "percent",
       "formula": "tools_attribution_share_shared * tools_own_cost_share",
-      "explainer": "The charity's share of the resources behind the outcome: the tools' share of the work behind a switch, times Rewiring America's share of the tools' cost."
+      "credit": "delivery",
+      "explainer": "Own service to households (what they spend in using it is no party's resource): credit by share of the resources only, no mobiliser's share (docs/normalization.md 2.24)."
     },
     {
       "id": "missing_data_adj",
@@ -1028,9 +1038,9 @@
       "section": "adjustments",
       "label": "Public money won for households, units of value per year of the period (after the law's branch steps)",
       "format": "number",
-      "formula": "(rebate_uov * rebate_attribution_share_shared + credit_uov * credit_attribution_share_shared) * p_success * ira_counterfactual_adj * missing_data_adj / period_years",
+      "formula": "(rebate_uov * rebate_attribution_share_shared + credit_uov * credit_attribution_share_shared) * mobiliser_share * p_success * ira_counterfactual_adj * missing_data_adj / period_years",
       "unit": "uov",
-      "explainer": "The law's branch steps for the money: advocacy's share of the win, what wouldn't have come anyway, Rewiring America's share of the advocacy behind each (the rebates' and the credits' own) and the missing-data step, spread over the period's four years. The tonnes' evidence and delivery steps are left out: the money is a sum in the statute and the claims Treasury counted, its delivery in the paid share."
+      "explainer": "The law's branch steps for the money: advocacy's share of the win, what wouldn't have come anyway, Rewiring America's share of the advocacy behind each (the rebates' and the credits' own) and the missing-data step, spread over the period's four years. The tonnes' evidence and delivery steps are left out: the money is a sum in the statute and the claims Treasury counted, its delivery in the paid share. At the mobiliser's share, as the branch's tonnes are (docs/normalization.md 2.24)."
     },
     {
       "id": "uov_bridged",

@@ -16,8 +16,12 @@ Other columns become variants that extend the base model and override only what 
         --name "Against Malaria Foundation" --sheet-url URL --page-url URL \\
         --base-col J --out models/global-health
 """
-import argparse, json, re, sys, unicodedata
+import argparse, importlib.util, json, re, sys, unicodedata
 from pathlib import Path
+
+# The model's class (mobilised or own delivery) and, if mobilised, the share's row and pin (docs/normalization.md 2.24).
+_lm = importlib.util.spec_from_file_location("link_mobiliser_share", Path(__file__).with_name("link-mobiliser-share.py"))
+lm = importlib.util.module_from_spec(_lm); _lm.loader.exec_module(lm)
 import openpyxl
 from openpyxl.utils import column_index_from_string, get_column_letter
 
@@ -396,6 +400,9 @@ cpath.write_text(json.dumps(crec, indent=2, ensure_ascii=False) + "\n")
 # carry over resources collected earlier (scripts/import-resources.sh), so a re-import keeps them
 _prev = out / f"{a.id}.json"
 if _prev.exists(): model["resources"] = json.loads(_prev.read_text()).get("resources", [])
+# Not strict: this converter writes only the sheet's own sections; our steps (and with them the
+# mobiliser's share and its pin) are added by the linkers that run after it (link-mobiliser-share.py).
+lm.apply(model, strict=False)
 (out / f"{a.id}.json").write_text(json.dumps(model, indent=2, ensure_ascii=False) + "\n")
 print(f"{a.id}: {len(model['rows'])} rows, {sum('expected' in r for r in model['rows'])} expected")
 

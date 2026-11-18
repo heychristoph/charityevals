@@ -1,6 +1,6 @@
 # Audit: opportunity-green-charityevals, round 5 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.2352 tco2e/$ = -0.4376 years of healthy life per $1,000 (combined range -10.92 to -0.0175). Verdict: pass.
-Model-sha: 34ca1ca70c8fa4165e360dad28e537e8f51fbce370566819e98f33748fe8a494
+Model-sha: d61f409590b687c9b462d9466a9cc36c093949fc71f3eda382d1bedaa7ebda60
 Scope: only the rows changed in commit 7e73f6cd (imo_low_income_payer_consumption, new imo_levy_payer_uov, uov_per_year, explainers of imo_fund_revenue_per_year and imo_jet_uov, the bridge's side-effect-weight term) and the summary and write-up sentences stating the result.
 Mechanical: lint 0 findings (3 warn/info only), invariants none, normalization-audit none for this model; check.ts all models valid.
 Previous round: round-4 findings all resolved and unaffected.
@@ -23,3 +23,9 @@ Other checks, no finding: imo_low_income_payer_consumption = 3,109 × 0.68 = abo
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.
 
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.
+
+Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline -0.4376 → -0.1313 (+70%), 15 rows changed, against 2b24b73c.

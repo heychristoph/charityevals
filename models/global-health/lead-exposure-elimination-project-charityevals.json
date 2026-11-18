@@ -937,7 +937,7 @@
    "label": "Money moved per dollar of the charity's cost",
    "format": "multiple",
    "formula": "money_moved / cost_total",
-   "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+   "explainer": "Context."
   },
   {
    "id": "value_global_health",
@@ -972,12 +972,20 @@
    "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
   },
   {
+   "id": "mobiliser_share",
+   "section": "moved_money",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "moved_dollar_net_value",
    "section": "moved_money",
-   "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+   "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+   "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
   },
   {
    "id": "moved_value",
@@ -1050,9 +1058,9 @@
    "section": "careers",
    "label": "Value of one career change (units of value)",
    "format": "number",
-   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+   "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
    "unit": "units of value",
-   "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+   "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
   },
   {
    "id": "careers_missing_data_adj",
@@ -1102,20 +1110,21 @@
    "label": "LEEP's share of the resources behind the wins",
    "format": "percent",
    "value": {
-    "low": 0.25,
-    "best": 0.5,
-    "high": 0.8
+    "low": 0.5,
+    "best": 0.75,
+    "high": 0.9
    },
    "kind": "judgment",
-   "explainer": "LEEP ran the paint studies, worked with the regulators and manufacturers and paid for workshops and partners' advocacy (its grants are in its cost). Others' resources: the standards bureaus' and ministries' staff time drafting and enforcing the rules, partner NGOs' own work (IPEN members, Pure Earth), the UN Environment Programme's and WHO's alliance, and manufacturers' chemists. Our judgment, half (a quarter to four fifths); the same with credit by share of resources on or off, as the shares are of the work."
+   "explainer": "LEEP ran the paint studies, worked with the regulators and manufacturers and paid for workshops and partners' advocacy (its grants are in its cost). Others who worked for the rules: partner NGOs' own work (IPEN members, Pure Earth) and the UN Environment Programme's and WHO's alliance. The standards bureaus' and ministries' staff who draft and enforce the rules and the manufacturers' chemists who reformulate are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). The list of partners is our reading of LEEP's country pages; no count of their work exists. Our judgment, three quarters (a half to nine tenths); the same with credit by share of resources on or off, as the shares are of the work."
   },
   {
    "id": "attribution_share",
    "section": "adjustments",
    "label": "Share of credit used",
    "format": "percent",
-   "formula": "attribution_share_shared",
-   "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+   "formula": "attribution_share_shared * mobiliser_share",
+   "credit": "win",
+   "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
   },
   {
    "id": "reg_implementation_adj",
@@ -1287,7 +1296,7 @@
    "section": "donor",
    "label": "Share of the full cost paid by cash donations",
    "format": "percent",
-   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"
+   "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
   },
   {
    "id": "uov_per_donor_dollar",

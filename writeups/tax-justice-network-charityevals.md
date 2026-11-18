@@ -13,18 +13,18 @@ Tax havens let multinationals and wealthy people avoid tax. When tax authorities
 ### How the model works
 
 - **Cost:** an average year of spending since 2003, from the published accounts of 2005 to 2025 (hosted bodies left out) in 2025 prices, with a judged GBP 60,000 a year for 2003-2004, before the company had accounts. That comes to 45% of 2025's GBP 2.09 million.
-- **Transparency standards (about 51% of the result):**
+- **Transparency standards (about 54% of the result):**
   - tax authorities report EUR 4 billion a year of extra revenue from the transparency standards (2024, the OECD Global Forum), 70% of it in developing countries;
   - we judge 35% of the developing countries' share is in low and lower-middle income countries, 35% of that in India. That revenue is valued as GiveWell values a dollar of government spending: about 1.5 times cash in its African programme countries, a quarter of that in India. Revenue in upper-middle and high-income countries is valued as money spread over everyone's consumption, much less per dollar;
   - each dollar is net of what it costs the people who pay, judged to consume about four and a half times the UK average (a blend of multinationals' shareholders, at the shared 2.5 times, and offshore wealth's owners, at 20 times), with the shared extra cost of raising public money;
   - the win counts for the years a won reform counts on the site, less the shared yearly chance that such a reform is repealed;
-  - the network gets 8% of the movement's credit in the years the standards were won, and civil society 15% of all credit: governments, the US FATCA law and leaked documents did most. Exchange of information on request, which predates the network's proposals, gets half that credit. That makes {{row:a_attribution_share}};
+  - the network gets 8% of the movement's credit in the years the standards were won, and civil society 35% of the campaigners' credit: the governments that pushed for the standards on their own account and the journalists who published leaked documents did the rest. Exchange of information on request, which predates the network's proposals, gets half that credit. That makes {{row:a_attribution_share_shared}};
   - we trust the revenue figure at 70%, and judge 60% of the identified revenue is collected;
   - side effects: tax people now pay because evasion is harder adds half again, and revenue from the other two standards adds 10%; banks' reporting costs (the standards' compliance costs, counted in full) take away 2%.
-- **UN convention (about 49%):**
+- **UN convention (about 46%):**
   - lower-income countries lose US$47 billion a year to cross-border tax abuse (the network's own 2023 estimate); all countries lose US$480 billion;
   - the chance it comes into force with substance is the site's shared 40% for a contested policy issue. If it does, its rules would recover 5% of the losses if applied in full (an upper anchor: the OECD expected its global minimum tax to raise about a third as much as the losses), starting in about five years, and 60% is applied;
-  - civil society gets 25% of the credit (the African Group of governments leads), and the network 12% of that: 3%. Two thirds of the network's work on it is done; only that share is counted against past spending;
+  - civil society gets 50% of the campaigners' credit (the African Group of governments leads), and the network 12% of that: 6%. Two thirds of the network's work on it is done; only that share is counted against past spending;
   - we trust the loss estimate at 60%;
   - side effect: the shared 5% for counter-measures such work provokes.
 - **Both branches** are spread over the 23 years of work since 2003, and both are discounted by the shared missing-data slider, as no study measures the network's part.
@@ -36,7 +36,7 @@ The years a won reform counts, the missing-data slider, the next dollar's value 
 
 ### Biggest uncertainties
 
-- **Credit:** no one has measured how much the network's ideas and advocacy mattered against the G20, the OECD, FATCA and the leaks. Our 1% could be a third or twice that.
+- **Credit:** no one has measured how much the network's ideas and advocacy mattered against the G20, the OECD, FATCA and the leaks. Our {{row:a_attribution_share_shared}} for the standards could be a third or twice that.
 - **Where the revenue is:** no split of the Global Forum's revenue by income group or country is published. Lower-income revenue counts about 17 times more per dollar than upper-middle income revenue, so this split matters.
 - **The convention:** its text, its protocols and who will ratify them are all unknown. The losses it addresses are the network's own estimate.
 

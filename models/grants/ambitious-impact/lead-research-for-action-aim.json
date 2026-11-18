@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "lead-research-for-action",
   "owner": "ambitious-impact",
+  "mobilised": true,
   "bulk": true,
   "source": {
     "publisher": "Ambitious Impact (Charity Entrepreneurship)",
@@ -25,7 +26,8 @@
       "resource_shares": 0,
       "discount_rate": 0.04,
       "uov_per_daly": 2.3,
-      "uov_per_ln_consumption": 1.4426950408889634
+      "uov_per_ln_consumption": 1.4426950408889634,
+      "mobiliser_share": 1
     }
   },
   "resources": [],
@@ -4067,15 +4069,16 @@
       "id": "probability_change_happens_anyway_per_year_suggest_0_for_dir",
       "label": "Probability change happens anyway, per year [suggest: 0% for direct, suggest 1%-7% for policy]",
       "section": "main_model",
-      "value": 0.02,
-      "kind": "estimate",
+      "value": 0,
+      "kind": "judgment",
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1uibrG6wefd2DXqOgHy-cU5qpWsDl7YYfLTTIbHVQEKA/edit",
         "cell": "Main model!B87"
       },
-      "explainer": "% discounted This is about the probability of >mitigation activities<, not research per se. Subjective estimate.",
-      "format": "percent"
+      "explainer": "Changed for consistency. Ambitious Impact adds 2% a year to the discount rate of the impact for the chance that the mitigation happens anyway (its subjective estimate); kept in the evaluator view. Our view answers the same question with the years the change counts (the row above), so this is 0 and the same thing isn't cut twice.",
+      "format": "percent",
+      "published": 0.02
     },
     {
       "id": "impacted_population_growth_rate_if_relevant_e_g_5_if_interve",
@@ -4239,10 +4242,20 @@
       "format": "percent"
     },
     {
+      "id": "years_counted",
+      "section": "main_model",
+      "label": "Years the change counts before it would have come anyway",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "published": 31,
+      "unit": "years",
+      "explainer": "Changed for consistency: reads the shared \"Years a won reform counts before it would have come anyway\" (5 by default), like every model that credits a won reform. Ambitious Impact counts the action governments and others take on a lead source for every year of its sheet, years 1 to 30, and for ever after that (its last column), each year cut by its 2% chance that the action would have come anyway; 31 here switches every column on and is used in the evaluator view. Our view counts this many years from year 1, when Ambitious Impact's benefit begins, with the same discounting."
+    },
+    {
       "id": "total_impact_discounted_daly_equivelents",
       "label": "Total impact, discounted (DALY equivelents)",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (timeline_year_1 - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (timeline_year_1 - 1) * max(0, min(1, years_counted - 0))",
       "expected": 4178.24934
     },
     {
@@ -4283,7 +4296,7 @@
       "id": "total_impact_discounted",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_2 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (should_explain_this_row_207 - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_2 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (should_explain_this_row_207 - 1) * max(0, min(1, years_counted - 1))",
       "expected": 6914.904643
     },
     {
@@ -4323,7 +4336,7 @@
       "id": "total_impact_discounted_2",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_3 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_e207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_3 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_e207_on_main_model - 1) * max(0, min(1, years_counted - 2))",
       "expected": 9342.044875
     },
     {
@@ -4351,7 +4364,7 @@
       "id": "total_impact_discounted_3",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_4 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_f207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_4 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_f207_on_main_model - 1) * max(0, min(1, years_counted - 3))",
       "expected": 8834.780067
     },
     {
@@ -4379,7 +4392,7 @@
       "id": "total_impact_discounted_4",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_5 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_g207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_5 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_g207_on_main_model - 1) * max(0, min(1, years_counted - 4))",
       "expected": 8355.059292
     },
     {
@@ -4407,7 +4420,7 @@
       "id": "total_impact_discounted_5",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_6 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_h207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_6 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_h207_on_main_model - 1) * max(0, min(1, years_counted - 5))",
       "expected": 7901.386933
     },
     {
@@ -4435,7 +4448,7 @@
       "id": "total_impact_discounted_6",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_7 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_i207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_7 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_i207_on_main_model - 1) * max(0, min(1, years_counted - 6))",
       "expected": 7472.348582
     },
     {
@@ -4463,7 +4476,7 @@
       "id": "total_impact_discounted_7",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_8 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_j207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_8 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_j207_on_main_model - 1) * max(0, min(1, years_counted - 7))",
       "expected": 7066.606637
     },
     {
@@ -4491,7 +4504,7 @@
       "id": "total_impact_discounted_8",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_9 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_k207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_9 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_k207_on_main_model - 1) * max(0, min(1, years_counted - 8))",
       "expected": 6682.896121
     },
     {
@@ -4519,7 +4532,7 @@
       "id": "total_impact_discounted_9",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_10 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_l207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_10 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_l207_on_main_model - 1) * max(0, min(1, years_counted - 9))",
       "expected": 6320.020749
     },
     {
@@ -4547,7 +4560,7 @@
       "id": "total_impact_discounted_10",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_11 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_m207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_11 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_m207_on_main_model - 1) * max(0, min(1, years_counted - 10))",
       "expected": 5976.849189
     },
     {
@@ -4575,7 +4588,7 @@
       "id": "total_impact_discounted_11",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_12 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_n207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_12 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_n207_on_main_model - 1) * max(0, min(1, years_counted - 11))",
       "expected": 5652.311543
     },
     {
@@ -4603,7 +4616,7 @@
       "id": "total_impact_discounted_12",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_13 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_o207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_13 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_o207_on_main_model - 1) * max(0, min(1, years_counted - 12))",
       "expected": 5345.396006
     },
     {
@@ -4631,7 +4644,7 @@
       "id": "total_impact_discounted_13",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_14 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_p207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_14 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_p207_on_main_model - 1) * max(0, min(1, years_counted - 13))",
       "expected": 5055.145711
     },
     {
@@ -4659,7 +4672,7 @@
       "id": "total_impact_discounted_14",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_15 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_q207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_15 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_q207_on_main_model - 1) * max(0, min(1, years_counted - 14))",
       "expected": 4780.655752
     },
     {
@@ -4687,7 +4700,7 @@
       "id": "total_impact_discounted_15",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_16 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_r207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_16 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_r207_on_main_model - 1) * max(0, min(1, years_counted - 15))",
       "expected": 4521.070356
     },
     {
@@ -4715,7 +4728,7 @@
       "id": "total_impact_discounted_16",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_17 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_s207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_17 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_s207_on_main_model - 1) * max(0, min(1, years_counted - 16))",
       "expected": 4275.580218
     },
     {
@@ -4743,7 +4756,7 @@
       "id": "total_impact_discounted_17",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_18 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_t207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_18 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_t207_on_main_model - 1) * max(0, min(1, years_counted - 17))",
       "expected": 4043.419979
     },
     {
@@ -4771,7 +4784,7 @@
       "id": "total_impact_discounted_18",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_19 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_u207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_19 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_u207_on_main_model - 1) * max(0, min(1, years_counted - 18))",
       "expected": 3823.865836
     },
     {
@@ -4799,7 +4812,7 @@
       "id": "total_impact_discounted_19",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_20 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_v207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_20 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_v207_on_main_model - 1) * max(0, min(1, years_counted - 19))",
       "expected": 3616.233289
     },
     {
@@ -4827,7 +4840,7 @@
       "id": "total_impact_discounted_20",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_21 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_w207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_21 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_w207_on_main_model - 1) * max(0, min(1, years_counted - 20))",
       "expected": 3419.875007
     },
     {
@@ -4855,7 +4868,7 @@
       "id": "total_impact_discounted_21",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_22 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_x207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_22 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_x207_on_main_model - 1) * max(0, min(1, years_counted - 21))",
       "expected": 3234.178807
     },
     {
@@ -4883,7 +4896,7 @@
       "id": "total_impact_discounted_22",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_23 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_y207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_23 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_y207_on_main_model - 1) * max(0, min(1, years_counted - 22))",
       "expected": 3058.565747
     },
     {
@@ -4911,7 +4924,7 @@
       "id": "total_impact_discounted_23",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_24 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_z207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_24 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_z207_on_main_model - 1) * max(0, min(1, years_counted - 23))",
       "expected": 2892.488321
     },
     {
@@ -4939,7 +4952,7 @@
       "id": "total_impact_discounted_24",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_25 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_aa207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_25 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_aa207_on_main_model - 1) * max(0, min(1, years_counted - 24))",
       "expected": 2735.428753
     },
     {
@@ -4967,7 +4980,7 @@
       "id": "total_impact_discounted_25",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_26 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ab207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_26 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ab207_on_main_model - 1) * max(0, min(1, years_counted - 25))",
       "expected": 2586.897381
     },
     {
@@ -4995,7 +5008,7 @@
       "id": "total_impact_discounted_26",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_27 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ac207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_27 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ac207_on_main_model - 1) * max(0, min(1, years_counted - 26))",
       "expected": 2446.431132
     },
     {
@@ -5036,7 +5049,7 @@
       "id": "total_impact_discounted_27",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_28 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ad207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_28 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ad207_on_main_model - 1) * max(0, min(1, years_counted - 27))",
       "expected": 2313.592077
     },
     {
@@ -5077,7 +5090,7 @@
       "id": "total_impact_discounted_28",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_29 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ae207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_29 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ae207_on_main_model - 1) * max(0, min(1, years_counted - 28))",
       "expected": 2187.966065
     },
     {
@@ -5118,7 +5131,7 @@
       "id": "total_impact_discounted_29",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_30 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_af207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_30 * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_af207_on_main_model - 1) * max(0, min(1, years_counted - 29))",
       "expected": 2069.161435
     },
     {
@@ -5159,7 +5172,7 @@
       "id": "total_impact_discounted_30",
       "label": "Total impact, discounted",
       "section": "main_model",
-      "formula": "daly_equivelents_total_cost_benefit_total_impact_31 / effective_discount_rate_for_reach_of_consumption_impacts_ove * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ag207_on_main_model - 1)",
+      "formula": "daly_equivelents_total_cost_benefit_total_impact_31 / effective_discount_rate_for_reach_of_consumption_impacts_ove * (1 - effective_discount_rate_for_reach_of_consumption_impacts_ove) ^ (cell_ag207_on_main_model - 1) * max(0, min(1, years_counted - 30))",
       "expected": 36037.56054
     },
     {
@@ -5223,11 +5236,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "dalys_per_dollar",
       "section": "bottom_line",
       "label": "DALYs averted per dollar",
-      "formula": "(1 / r6_cost_effectiveness_per_year_impact) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((1 / r6_cost_effectiveness_per_year_impact) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

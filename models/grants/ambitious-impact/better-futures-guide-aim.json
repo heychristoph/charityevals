@@ -10,6 +10,7 @@
  "charity": "better-futures-guide",
  "owner": "ambitious-impact",
  "bulk": true,
+ "mobilised": true,
  "source": {
   "publisher": "Ambitious Impact (Charity Entrepreneurship)",
   "title": "Establishing a livelihoods non-profit evaluator (AIM 2025 report): CEA",
@@ -23,6 +24,7 @@
   "name": "Ambitious Impact",
   "assumptions": {
    "resource_shares": 0,
+   "mobiliser_share": 1,
    "discount_rate": 0.04
   }
  },
@@ -2300,12 +2302,20 @@
    "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
   },
   {
+   "id": "mobiliser_share",
+   "section": "moved_money",
+   "label": "This charity's share of the good done with money, work or budgets it brings in",
+   "format": "percent",
+   "formula": "$mobiliser_share",
+   "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+  },
+  {
    "id": "moved_dollar_net_value",
    "section": "moved_money",
-   "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+   "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
    "format": "small",
-   "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+   "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+   "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
   },
   {
    "id": "moved_money_revaluation",
@@ -2345,15 +2355,15 @@
    "label": "Money moved per dollar of Better Futures Guide's cost (expected, gross)",
    "format": "multiple",
    "formula": "(npv(this_cea_examines_the_cost_effectivess_of_a_charity_evaluato, money_raised_if_succesful_usd_2023, money_raised_if_succesful_note_we_still_use_givewell_s_pre_n, money_raised_if_succesful_coville_and_vivalt_s_2017, money_raised_if_succesful, money_raised_if_succesful_2) * probability_of_success + npv(this_cea_examines_the_cost_effectivess_of_a_charity_evaluato, money_raised_if_unsuccesful_usd_2023, money_raised_if_unsuccesful_note_we_still_use_givewell_s_pre, money_raised_if_unsuccesful_coville_and_vivalt_s_2017) * (1 - probability_of_success)) / expected_56_npv_costs",
-   "explainer": "Expected money moved over expected costs, both discounted as the sheet does: what credit by share of resources counts as the donors' contribution (times the new-money share), the same formula as every meta model."
+   "explainer": "Expected money moved over expected costs, both discounted as the sheet does."
   },
   {
    "id": "donor_cost_share",
    "section": "staff_pay",
    "label": "Share of the full cost paid in cash",
    "format": "percent",
-   "formula": "1 / (1 + if($resource_shares, salary_sacrifice + moved_per_dollar * new_money_share, 0))",
-   "explainer": "The site's one formula for every meta charity (src/engine/moved-money.ts): with credit by share of resources on, the donors whose new money the organisation moves are contributors too, alongside staff's forgone pay, so the outcome is shared with them. Off, this is 100%."
+   "formula": "1 / (1 + if($resource_shares, salary_sacrifice, 0))",
+   "explainer": "The site's one formula for every meta charity (src/engine/moved-money.ts): with credit by share of resources on, staff's forgone pay is a contribution too, so the outcome is shared with them. The donors whose money it moves give because of it: they are credited through the mobiliser's share, not here (docs/normalization.md 2.24). Off, this is 100%."
   },
   {
    "id": "uov_per_dollar",

@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "drug-policy-alliance",
   "owner": "charityevals",
-  "summary": "Drug Policy Alliance campaigns to end the war on drugs in the United States (12.2 million dollars spent by the 501(c)(3) in the year to May 2025; its 501(c)(4), Drug Policy Action, isn't tax-deductible and isn't counted). Its spending over fiscal years 2021-2025 is counted as a past average against the part of the period's wins its work in those years bought: marijuana legalisation in New York, New Jersey and New Mexico (about 40,000 possession arrests a year ended, about 380,000 people's records cleared and users' gains from legal supply, less the rise in cannabis use disorder and traffic deaths that legal sales may bring), New York City's overdose prevention centres and other harm-reduction laws (deaths averted), and Oregon's Measure 110 while it was in force (arrests ended, less the overdose deaths one study attributes to it); every branch is discounted for missing data. The result is a net harm of about 0.004 years of healthy life per 1,000 dollars: the harms counted outweigh the gains, but the result is mostly uncertainty, from about 0.03 years lost to 0.003 gained (5% to 95%). The biggest unknowns are what legal supply is worth to users, how much legal sales raise cannabis use disorder and traffic deaths, and whether Measure 110 caused any overdose deaths.",
+  "summary": "Drug Policy Alliance campaigns to end the war on drugs in the United States (12.2 million dollars spent by the 501(c)(3) in the year to May 2025; its 501(c)(4), Drug Policy Action, isn't tax-deductible and isn't counted). Its spending over fiscal years 2021-2025 is counted as a past average against the part of the period's wins its work in those years bought: marijuana legalisation in New York, New Jersey and New Mexico (about 40,000 possession arrests a year ended, about 380,000 people's records cleared and users' gains from legal supply, less the rise in cannabis use disorder and traffic deaths that legal sales may bring), New York City's overdose prevention centres and other harm-reduction laws (deaths averted), and Oregon's Measure 110 while it was in force (arrests ended, less the overdose deaths one study attributes to it); every branch is discounted for missing data. The result is a net harm, about {{result}} years of healthy life per 1,000 dollars: the harms counted outweigh the gains, but the result is mostly uncertainty, from {{low}} to {{high}} on its plausible range. The biggest unknowns are what legal supply is worth to users, how much legal sales raise cannabis use disorder and traffic deaths, and whether Measure 110 caused any overdose deaths.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Drug Policy Alliance",
@@ -373,6 +373,25 @@
       "explainer": "DPA also won or helped win Rhode Island's 2021 law for harm-reduction centres (Providence's centre opened in late 2024), Vermont's 2024 law for a Burlington centre (passed over the governor's veto; not yet open by May 2025), California's 2024 law decriminalising and expanding drug checking for fentanyl and xylazine, and test-strip laws in other states (DPA 2024 Year in Review). Most are smaller or later than New York's centres, and drug checking's effect on deaths is unmeasured. Our judgment: half the New York centres' deaths averted (0.15 to 1.5)."
     },
     {
+      "id": "od_centres_cost_per_year",
+      "section": "effect",
+      "label": "Running cost of New York City's two overdose prevention rooms a year (US$)",
+      "format": "usd",
+      "value": {
+        "low": 1500000,
+        "best": 3000000,
+        "high": 6000000
+      },
+      "kind": "judgment",
+      "source": {
+        "title": "CBS News, Inside OnPoint NYC's overdose prevention centers",
+        "url": "https://www.cbsnews.com/news/nyc-drug-addiction-onpoint-harm-reduction/",
+        "retrieved": "2026-11-17",
+        "note": "OnPoint's whole budget, about $19 million a year from city, state and private funds, covers its drop-in centres, outreach and clean-up as well as the two rooms; no source gives the rooms' cost alone."
+      },
+      "explainer": "What the operator spends running the consumption rooms, the resource the win mobilised (docs/normalization.md 2.24): its cost is netted from the deaths averted. OnPoint's whole budget is about $19 million a year, most of it from the city (CBS News), and the rooms are one part of two sites' services. Our judgment: $3 million a year ($1.5 to 6 million)."
+    },
+    {
       "id": "od_deaths_per_year",
       "section": "effect",
       "label": "Overdose deaths averted a year by the period's harm-reduction wins",
@@ -412,6 +431,15 @@
       "formula": "od_deaths_per_year * od_value_per_death * od_discounted_years / campaign_years",
       "unit": "UoV",
       "explainer": "Deaths averted a year, valued by age, over the years counted, spread over the five years of spending."
+    },
+    {
+      "id": "od_compliance_uov",
+      "section": "effect",
+      "label": "Harm reduction: the centres' running costs, units of value (negative)",
+      "format": "number",
+      "formula": "-od_centres_cost_per_year * (1 + od_other_multiple) * $uov_per_ln_consumption / (@public_funds.compliance_cost_payer_multiple * @united_states.ce_expenditure_per_person_2024) * od_discounted_years / campaign_years * od_credit_adj",
+      "unit": "UoV",
+      "explainer": "The cost of the resources the wins mobilised: the rooms' running costs, scaled to the other harm-reduction wins like the deaths, valued as money lost by those who pay (dollars over the payers' consumption on the log scale, as for a won rule's costs, 2.21), over the same years and with the branch's credit, not its evidence row."
     },
     {
       "id": "can_arrests_ny",
@@ -1423,17 +1451,34 @@
       "formula": "1"
     },
     {
-      "id": "od_attribution_share",
+      "id": "od_attribution_share_shared",
       "section": "adjustments",
-      "label": "Harm reduction: DPA's share of the resources behind it",
+      "label": "Harm reduction: DPA's share among the groups that campaigned for it",
       "format": "percent",
       "value": {
-        "low": 0.02,
-        "best": 0.05,
-        "high": 0.15
+        "low": 0.08,
+        "best": 0.2,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "The centres are paid for and run by OnPoint NYC (entirely from non-government funds for the consumption rooms) and were sanctioned by the city's health department under Mayor de Blasio; VOCAL-NY, Housing Works and the SIF NYC coalition campaigned beside DPA, which had pressed for them since about 2016. The resources behind the deaths averted are mostly the centres' running costs. Our judgment: 5% (2% to 15%)."
+      "explainer": "DPA's share among the groups that campaigned for the centres: VOCAL-NY, Housing Works and the SIF NYC coalition beside DPA, which had pressed for them since about 2016. OnPoint NYC, which pays for and runs the centres, and the city's health department, which sanctioned them, are under the mobiliser's share, not here. Anchor: four named campaigners, an equal split of 25%; DPA is a national group among New York ones. Our judgment: 20% (8% to 40%)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "od_attribution_share",
+      "section": "adjustments",
+      "label": "Harm reduction: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "od_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "od_period_share",
@@ -1502,17 +1547,26 @@
       "formula": "1"
     },
     {
-      "id": "can_attribution_share",
+      "id": "can_attribution_share_shared",
       "section": "adjustments",
-      "label": "Legalisation: DPA's share of the resources behind it",
+      "label": "Legalisation: DPA's share among the groups that campaigned for it",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.3
+        "low": 0.08,
+        "best": 0.2,
+        "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "DPA ran the Start SMART NY campaign and coalition for the New York law, helped draft and pass New Mexico's (its own press releases), and pressed New Jersey's decriminalisation and expungement terms after the 2020 ballot question its sister 501(c)(4)'s allies ran; VOCAL-NY, the NYCLU, Citizen Action, the cannabis industry's lobbyists and the governors' budget drives carried the same laws, and the c4's own spending isn't in the cost here. Our judgment: 15% (5% to 30%)."
+      "explainer": "DPA ran the Start SMART NY campaign and coalition for the New York law, helped draft and pass New Mexico's (its own press releases), and pressed New Jersey's decriminalisation and expungement terms after the 2020 ballot question its sister 501(c)(4)'s allies ran; VOCAL-NY, the NYCLU, Citizen Action and the cannabis industry's lobbyists campaigned for the same laws, and the c4's own spending isn't in the cost here. Governors and legislatures, who passed the laws, are under the mobiliser's share, not here. Anchor: about five named campaigning groups, the c4 among them, an equal split of 20%. Our judgment: 20% (8% to 35%)."
+    },
+    {
+      "id": "can_attribution_share",
+      "section": "adjustments",
+      "label": "Legalisation: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "can_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "can_period_share",
@@ -1581,7 +1635,7 @@
       "formula": "1"
     },
     {
-      "id": "m110_attribution_share",
+      "id": "m110_attribution_share_shared",
       "section": "adjustments",
       "label": "Measure 110: DPA's share of the resources behind it",
       "format": "percent",
@@ -1592,6 +1646,15 @@
       },
       "kind": "judgment",
       "explainer": "Measure 110 was put on the ballot and paid for by a campaign committee funded mostly by Drug Policy Action, the 501(c)(4), and Dr. Bronner's; the c3 counted here worked on its drafting, implementation and defence (DPA says it prevented full repeal in 2024 and protected funding for services) beside Oregon's Health Justice Recovery Alliance. Our judgment: 8% (2% to 20%)."
+    },
+    {
+      "id": "m110_attribution_share",
+      "section": "adjustments",
+      "label": "Measure 110: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "m110_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "m110_period_share",
@@ -1712,7 +1775,7 @@
       "section": "adjustments",
       "label": "DPA's share of the resources (outcome-weighted average, for reading only)",
       "format": "percent",
-      "formula": "(od_value_per_year * od_attribution_share + can_record_value_per_year * can_attribution_share) / (od_value_per_year + can_record_value_per_year)",
+      "formula": "(od_value_per_year * od_attribution_share_shared + can_record_value_per_year * can_attribution_share_shared) / (od_value_per_year + can_record_value_per_year)",
       "explainer": "The outcome-weighted average of the branches (harm reduction and records), for reading only: each branch applies its own."
     },
     {
@@ -1720,8 +1783,8 @@
       "section": "adjustments",
       "label": "DPA's share of the resources behind the wins",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches (the row above), for reading only: each branch applies its own share."
+      "formula": "(od_value_per_year * od_attribution_share + can_record_value_per_year * can_attribution_share) / (od_value_per_year + can_record_value_per_year)",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "implementation_adj",
@@ -1759,9 +1822,9 @@
     {
       "id": "od_uov",
       "section": "bridges",
-      "label": "Harm reduction: deaths averted, with adjustments and side effect",
+      "label": "Harm reduction: deaths averted, with adjustments and side effect, less the centres' running costs",
       "format": "number",
-      "formula": "od_value_per_year * od_total_adj * (1 + ue_od_other)",
+      "formula": "od_value_per_year * od_total_adj * (1 + ue_od_other) + od_compliance_uov",
       "unit": "UoV",
       "explainer": "The branch's value times its adjustments and its side effect."
     },

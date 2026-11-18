@@ -33,7 +33,7 @@ Unchanged from round 3: missing-data discount, `$uov_per_daly`, `livelihood_cons
 Findings by severity: high 0, medium 0, low 1.
 
 Verdict: pass
-Model-sha: 12118bc113993ade63b17d278778e6259d6e362333bc93853b1a01ea15676c02
+Model-sha: b2f400cfafd307597f00659385fc7ab8749055de3c3d11b5446bec8eb84983aa
 
 Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.331 → 0.332.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
@@ -44,3 +44,5 @@ Re-stamped (16 Nov 2026): Pre-audit gate cleanup: typed figures now read shared 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 52be53be.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.

@@ -13,7 +13,7 @@ In ACE's own view the model reproduces all 44 of ACE's intermediate figures.
 
 ### What drives the result
 
-After the cross-cause exchange rates and your weight on animal suffering, the largest levers are **how many years a won reform counts** (about 26 to 370 years of healthy life per $1,000 over the slider's 1 to 20 years), the **suffering spared per hen** (about 74 to 200; the low end is ACE's 7.9, restated as 10.6), the **share of pledges companies keep** (about 51 to 130) and the **share of impact ACE attributes to the year evaluated** rather than THL's work in other years.
+After the cross-cause exchange rates and your weight on animal suffering, the largest levers are **how many years a won reform counts** (about 0.00051 to 0.0072 years of healthy life per $1,000 over the slider's 1 to 20 years), the **suffering spared per hen** (about 0.0014 to 0.0039; the low end is ACE's 7.9, restated as 10.6), the **share of pledges companies keep** (about 0.0012 to 0.0029) and the **share of impact ACE attributes to the year evaluated** rather than THL's work in other years.
 
 ### Where we differ from ACE
 

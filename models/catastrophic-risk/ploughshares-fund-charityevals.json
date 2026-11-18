@@ -917,7 +917,7 @@
         "high": 0.07
       },
       "kind": "judgment",
-      "explainer": "The Nuclear Futures Fellowship's share of the cost: ten $10,000 capstone grants to the first cohort's organisations in fiscal 2025 ($100,000, 1.8% of programme spending; annual report pp. 34-38: ICAN, CSIS, the Council on Strategic Risks, The Elders, Middlebury, Chatham House, RootsAction, BASIC, the Center for International Policy, Carnegie) plus the staff time and the Washington intensive that launched the second cohort. 4% (2% to 7%), our judgment: the capstones alone are the floor. Other fellowships Ploughshares funds by grant (Scoville fellows, Middlebury's fellowship for Ukrainian experts, BASIC's Emerging Voices Network) publish no counts and are counted as typical nuclear work in nuclear_cost_share."
+      "explainer": "The Nuclear Futures Fellowship's share of the cost: ten $10,000 capstone grants to the first cohort's organisations in fiscal 2025 ($100,000, 1.8% of programme spending; annual report pp. 34-38: ICAN, CSIS, the Council on Strategic Risks, The Elders, Middlebury, Chatham House, RootsAction, BASIC, the Center for International Policy, Carnegie) plus the staff time and the Washington intensive that launched the second cohort. 4% (2% to 7%), our judgment: the capstones alone are the floor. It only keeps these dollars out of the nuclear branch; the fellowship's value is the people trained. Other fellowships Ploughshares funds by grant (Scoville fellows, Middlebury's fellowship for Ukrainian experts, BASIC's Emerging Voices Network) publish no counts and are counted as typical nuclear work in nuclear_cost_share."
     },
     {
       "id": "fb_people",
@@ -950,7 +950,7 @@
         "high": 0.25
       },
       "kind": "judgment",
-      "explainer": "The share who stay in or move into work on nuclear risk because of the fellowship: every fellow already works in the field (programme staff and researchers at nuclear organisations), so the fellowship can only keep some there longer or move them into more senior roles. 10% (3% to 25%), our judgment; below the template's 20% for training that brings new people in. No alumni survey is published."
+      "explainer": "The share who stay in or move into work on nuclear risk because of the fellowship: every fellow already works in the field (emerging and established staff at nuclear organisations), so the fellowship can only keep some there longer or move them into more senior roles. 10% (3% to 25%), our judgment; below the template's 20% for training that brings new people in. No alumni survey is published."
     },
     {
       "id": "fb_work_years",
@@ -972,10 +972,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
-      "explainer": "The employers pay for the fellows' work, so the training gets credit by share of resources: everyone's spending on the fellowship (Ploughshares' about $305,000 with overhead, over its share of the fellowship's resources fb_attribution_share_shared, for Horizon 2045's part) over that plus the alumni's added work (fb_work_dollars): about 33%; fb_attribution_share_shared then gives Ploughshares its share of that.",
-      "formula": "(fb_cost_share * cost_total / fb_attribution_share_shared) / (fb_cost_share * cost_total / fb_attribution_share_shared + fb_work_dollars)"
+      "explainer": "1: Horizon 2045's part of the same fellowship is already in fb_attribution_share_shared. Two of the nine fellows list other programmes (the Arms Control Negotiation Academy, NTI's Emerging Nuclear Security Leaders); that overlap is cut once, in fb_counterfactual_adj. Down to 0.5 if another programme trained most of the same fellows. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (attribution_share) covers them (docs/normalization.md 2.24).",
+      "value": {
+        "low": 0.5,
+        "best": 1,
+        "high": 1
+      },
+      "kind": "judgment"
     },
     {
       "id": "fb_deaths_per_million",
@@ -1203,7 +1208,7 @@
         "high": 0.95
       },
       "kind": "judgment",
-      "explainer": "Other nuclear fellowships exist (the Scoville fellowship, the Stanton fellowships, CSIS's Project on Nuclear Issues), but few for mid-career staff with a funded capstone. 0.8 (0.6 to 0.95), our judgment."
+      "explainer": "Other nuclear fellowships exist (the Scoville fellowship, the Stanton fellowships, CSIS's Project on Nuclear Issues), but few for staff already in the field with a funded capstone. This asks only whether those places were the alternative; fb_share_working is already net of what the fellows would have done anyway. 0.8 (0.6 to 0.95), our judgment."
     },
     {
       "id": "gr_attribution_share_shared",
@@ -1237,12 +1242,12 @@
       "label": "Fellowship: Ploughshares' share of the resources behind the fellowship",
       "format": "percent",
       "value": {
-        "low": 0.4,
-        "best": 0.6,
-        "high": 0.8
+        "low": 0.45,
+        "best": 0.65,
+        "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "The fellowship is a joint venture with Horizon 2045, which shares its design and coaching; the fellows' employers give their time. 0.6 (0.4 to 0.8), our judgment."
+      "explainer": "The fellowship is a joint venture with Horizon 2045, which shares its design and coaching. The fellows' employers, who give their time, are mobilised: under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.65 (0.45 to 0.85), our judgment: the old 0.6 less the employers' part, judged a small share beside Horizon 2045's."
     },
     {
       "id": "evidence_adj",
@@ -1269,12 +1274,21 @@
       "formula": "(w_gr * gr_relevant_share * gr_evidence_adj * gr_counterfactual_adj * gr_attribution_share_shared + w_own * (1 - own_grant_admin_share) * own_evidence_adj * own_counterfactual_adj * own_attribution_share_shared + w_fb * fb_evidence_adj * fb_counterfactual_adj * fb_attribution_share_shared) / ((w_gr + w_own + w_fb) * evidence_adj * counterfactual_adj)"
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leverage_funging_adj",

@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "lead-exposure-elimination-project",
   "owner": "leep",
+  "mobilised": true,
   "summary": "The Lead Exposure Elimination Project tested paint on sale in Malawi, found high lead levels and brought the results to the Malawi Bureau of Standards, which began enforcing its existing lead paint standard; LEEP then helped the four local manufacturers switch. LEEP's own analysis credits it with bringing enforcement forward by eight years and counts the children spared paint lead over the next 20 years: their health (from the Global Burden of Disease) and their later earnings. Our view keeps LEEP's costs, children and health years and values the earnings with the site's shared figures for blood lead, IQ points per µg/dL and earnings per IQ point.",
   "source": {
     "publisher": "Lead Exposure Elimination Project",
@@ -42,7 +43,8 @@
     "assumptions": {
       "resource_shares": 0,
       "discount_rate": 0.04,
-      "uov_per_daly": 2.8
+      "uov_per_daly": 2.8,
+      "mobiliser_share": 1
     }
   },
   "sections": [
@@ -110,6 +112,40 @@
         "retrieved": "2026-11-15"
       },
       "explainer": "LEEP counts the lead exposure averted over 20 years from when regulation is implemented, which its 2021 documentation calls a subjective choice, short for paint that lasts decades in homes."
+    },
+    {
+      "id": "leep_years_brought_forward",
+      "section": "leep",
+      "label": "Years LEEP brings enforcement forward",
+      "format": "number",
+      "value": 8,
+      "kind": "judgment",
+      "unit": "years",
+      "source": {
+        "title": "LEEP, How Cost-Effective Is LEEP's Malawi Program?",
+        "url": "https://leadelimination.org/malawi_cost-effectiveness_intro/",
+        "page": "How cost-effective is LEEP's Malawi program?",
+        "retrieved": "2026-11-15"
+      },
+      "explainer": "LEEP's assumption: the standard enforced after one year with LEEP, after nine without."
+    },
+    {
+      "id": "years_brought_forward",
+      "section": "leep",
+      "label": "Years enforcement is brought forward",
+      "format": "number",
+      "formula": "$win_years_counted",
+      "published": 8,
+      "unit": "years",
+      "explainer": "Changed for consistency. LEEP credits itself with eight years of earlier enforcement. Every model that credits a won reform reads one figure for how long the win counts before it would have come anyway: Years a won reform counts, under Your values (5 by default, 1–20). The evaluator view keeps LEEP's eight."
+    },
+    {
+      "id": "brought_forward_scale",
+      "section": "leep",
+      "label": "Years brought forward, as a share of LEEP's eight",
+      "format": "percent",
+      "formula": "years_brought_forward / leep_years_brought_forward",
+      "explainer": "Changed for consistency. LEEP publishes totals, not its yearly rows, so our view scales the children spared, the health years and the government's enforcement spending in proportion to the years brought forward. An approximation: the first years brought forward are discounted least and the paint stays on walls for a fixed time, so the true figure doesn't move exactly in proportion. LEEP's own spending and its 20 years of averted exposure stay as they are. 100% in the evaluator view."
     },
     {
       "id": "years_until_benefits",
@@ -214,8 +250,9 @@
       "section": "health",
       "label": "Health years gained, deaths valued by age",
       "format": "number",
-      "formula": "health_dalys * gbd_daly_revaluation",
-      "unit": "DALYs"
+      "formula": "health_dalys * gbd_daly_revaluation * brought_forward_scale",
+      "unit": "DALYs",
+      "explainer": "Scaled to the years enforcement is brought forward in our view (brought_forward_scale)."
     },
     {
       "id": "children_spared",
@@ -239,9 +276,9 @@
       "section": "income",
       "label": "Children spared, discounted to today",
       "format": "number",
-      "formula": "pv_annuity_due(children_spared / years_counted, $discount_rate, years_counted)",
+      "formula": "pv_annuity_due(children_spared / years_counted, $discount_rate, years_counted) * brought_forward_scale",
       "unit": "children",
-      "explainer": "LEEP's children spread evenly over its 20 years, each year's discounted at the shared rate."
+      "explainer": "LEEP's children spread evenly over its 20 years, each year's discounted at the shared rate, scaled to the years enforcement is brought forward in our view (brought_forward_scale)."
     },
     {
       "id": "child_bll",
@@ -371,12 +408,60 @@
       "explainer": "The health years with deaths valued by age plus the earnings valued the site's way, over LEEP's 43,000. The evaluator view keeps LEEP's (1)."
     },
     {
+      "id": "govt_cost_share",
+      "section": "bottom_line",
+      "label": "Share of LEEP's cost figure that is the government's enforcement spending (counted at half)",
+      "format": "percent",
+      "value": {
+        "low": 0.38,
+        "best": 0.415,
+        "high": 0.45
+      },
+      "kind": "estimate",
+      "explainer": "Computed from the flows LEEP states: its own $80,000 a year for five years and the Malawi Bureau of Standards' $75,000 a year for eight, discounted at 4% a year, the government's counted at half: about $250,000 of about $610,000, 41.5% whether the years are discounted from their start or their end. The stated flows add to $609,000 to $633,000 against LEEP's published $590,000, so the split is an estimate; the range covers that gap."
+    },
+    {
+      "id": "adopter_cost_out",
+      "section": "bottom_line",
+      "label": "Cost LEEP counts per dollar of its own (the government's spending leaves the cost)",
+      "format": "number",
+      "formula": "1 / (1 - govt_cost_share)",
+      "published": 1,
+      "explainer": "**Changed for consistency.** The Malawi Bureau of Standards, which enforces the standard, carries out the work only because of the charity, so they are credited through the share below (mobiliser_share), not by counting their money in the cost (docs/normalization.md 2.24): counted in both, they would be cut twice. The evaluator view keeps LEEP's cost (1)."
+    },
+    {
+      "id": "govt_cost_counted_fraction",
+      "section": "bottom_line",
+      "label": "Share of the government's enforcement spending that LEEP counts as a cost",
+      "format": "percent",
+      "value": 0.5,
+      "kind": "estimate",
+      "explainer": "LEEP's own rule: it counts government money at half, as that money would otherwise be spent less well (its 2021 documentation). Used here only to get back to the spending in full."
+    },
+    {
+      "id": "gov_cost_share_of_good",
+      "section": "bottom_line",
+      "label": "Government's enforcement spending, at what the money would otherwise have done, as a share of the good done",
+      "format": "percent",
+      "formula": "govt_cost_share * cost_total / govt_cost_counted_fraction * brought_forward_scale * @givewell_shared.cf_value_government / $uov_per_daly / (total_daly_equivalents * ours_vs_leep)",
+      "published": 0,
+      "explainer": "**Changed for consistency.** The government's enforcement spending in full, for the years enforcement is brought forward (LEEP's eight years of spending times brought_forward_scale), valued at GiveWell's figure for what a dollar a government in its programme countries spends would otherwise have done (@givewell_shared.cf_value_government, about 1.5 times cash), the site's one figure for redirected government money (docs/normalization.md 2.20), over our healthy years gained. A cost of the resources LEEP mobilises: netted from the good before the mobiliser's share. The evaluator view counts half the spending in the cost instead (0 here)."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "dalys_per_dollar",
       "section": "bottom_line",
       "label": "DALYs averted per dollar",
-      "formula": "(1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share",
+      "formula": "((1 / cost_per_daly_equivalent) * ours_vs_leep * donor_cost_share) * adopter_cost_out * (1 - gov_cost_share_of_good) * mobiliser_share",
       "unit": "DALYs / $",
-      "explainer": "LEEP's DALY-equivalents per dollar, valued the site's way, times the share of the full cost paid in cash when credit by share of resources is on."
+      "explainer": "LEEP's DALY-equivalents per dollar of the cost it counts, valued the site's way, per dollar of LEEP's own spending (adopter_cost_out), net of what the government's enforcement money would otherwise have done, times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources on, times the share of LEEP's full cost paid in cash."
     }
   ],
   "output": {

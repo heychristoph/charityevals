@@ -42,7 +42,9 @@ Why this shape:
 - **Specific outcomes** (a treaty, law, standard, institution launched) go in the policy branch, with
   their spending left out of the areas' shares (`cost_shares_total` must be 1). Calibrate
   `pol_relative_cut` per risk: everyone's resources behind the measure × the area's cuts per $1 million
-  (both sizes), then a named multiple. People trained go in field-building.
+  (both sizes), then a named multiple. People trained go in field-building. Credit (Convention 2):
+  field work and field-building `research`, the policy branch `win`; adopters (labs, governments,
+  employers) are in no denominator.
 - **Years.** Every cut counts `$win_years_counted` years (normalization.md 2.9), the wait discounted;
   someone else doing the work now is `counterfactual_adj`.
 

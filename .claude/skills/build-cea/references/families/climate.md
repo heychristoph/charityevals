@@ -11,7 +11,7 @@ capture) the climate skeleton with `unit_cost`.
 
 ```
 win:  tonnes_per_year (once in effect) × p_success × pv($win_years_counted) × (1+$discount_rate)^-wait
-      × counterfactual × attribution (the charity's share of all groups' resources) × implementation
+      × counterfactual × attribution (its share among co-advocates × mobiliser_share) × implementation
       × evidence_adj × missing_data_adj
 (sum of the period's wins) ÷ period years ÷ (cost × average_spend_vs_year) × @next_dollar.<charity>
 conversion (ours): fuel_share × fuel_smoke_factor = air_pollution_weight; extra_deaths_per_tco2e; methane_share
@@ -74,7 +74,8 @@ world (`lmy_na_consumption_per_person_2024` × the median survey ratio).
 - **Status since**: repeals, delays, court stays and weakening amendments set `implementation_adj`;
   a rule repealed keeps only the chance it is restored within the years counted.
 - **Share of the work**: the coalition behind each win and its budgets, for
-  `attribution_share_shared`.
+  `attribution_share_shared`; governments and firms that carry it out are under `mobiliser_share`
+  (`"credit": "win"`), with the win's cost rows.
 - **Fuel**: what the tonnes replace (coal, gas, oil, clean power), for `fuel_share` and the
   counterfactual.
 

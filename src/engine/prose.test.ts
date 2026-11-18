@@ -81,3 +81,68 @@ describe("typed numbers", () => {
     expect(cs.find((c) => c.placeholder === `{{row:${fact.id}}}`)?.note ?? "").not.toMatch(/an input/);
   });
 });
+
+// The scan's false positives (a law's number, a population, another unit, a source's figure) stay typed.
+describe("typed numbers that are not the model's", () => {
+  const shown = (id: string) => formatValue(compute(lib, m, av)[id], m.byId.get(id)!.format);
+  // Calculated rows: households and people reached (bare counts), the share consumed (a percentage).
+  const hh = shown("households"), people = shown("people_reached"), share = shown("share_consumed_y1"), size = shown("household_size");
+  const safe = (text: string, row?: string) => scanText(lib, m, text, { row, writeup: !row }).filter((c) => c.safe).map((c) => c.placeholder);
+
+  it("still finds a row's value where the text states it", () => {
+    expect(safe(`About ${hh} households get a transfer.`, "households")).toEqual(["{{row:households}}"]);
+    expect(safe(`The households receiving a transfer number about ${hh}.`)).toEqual(["{{row:households}}"]);
+    expect(safe(`The rest, ${share}, is consumed in the first year.`, "share_consumed_y1")).toEqual(["{{row:share_consumed_y1}}"]);
+  });
+
+  it("leaves a law's or a rule's number typed", () => {
+    for (const name of ["Measure", "Proposition", "Rule", "Amendment", "HB", "Act", "Phase", "Form"]) {
+      expect(safe(`Households receiving a transfer gained after ${name} ${hh} passed.`), name).toEqual([]);
+      expect(safe(`After ${name} ${hh} passed.`, "households"), name).toEqual([]);
+    }
+  });
+
+  it("leaves populations and counts in words typed", () => {
+    expect(safe(`The households receiving a transfer are among ${hh} million Kenyans.`)).toEqual([]);
+    expect(safe(`It passed on ${size} billion pounds of food to the average household.`, "household_size")).toEqual([]);
+    expect(safe(`A ${hh}-household pilot of households receiving a transfer.`)).toEqual([]);
+  });
+
+  it("leaves years typed, alone, in a range or as a decade", () => {
+    const text = "Households receiving a transfer in 2024, 2016-2025, FY2025, the 1990s and since 1960.";
+    expect(scanText(lib, m, text, { writeup: true })).toEqual([]);
+  });
+
+  it("leaves another currency and the headline's own denominator typed", () => {
+    expect(safe(`Households receiving a transfer cost £${hh} each.`)).toEqual([]);
+    expect(safe(`It spent €${size} million on the average household.`, "household_size")).toEqual([]);
+    expect(scanText(lib, m, "About 3 years of healthy life per $1,000, or per 1,000 dollars.", { writeup: true }).filter((c) => /1,000/.test(c.typed))).toEqual([]);
+  });
+
+  it("leaves a count of something else typed", () => {
+    expect(safe(`Its shoeboxes go to children in over ${hh} countries.`, "households")).toEqual([]);
+    expect(safe(`The households receiving a transfer live in ${hh} villages.`)).toEqual([]);
+    expect(safe(`It repeats ${hh} times.`, "households")).toEqual([]);
+  });
+
+  it("leaves a source's or another party's figure typed", () => {
+    expect(safe(`Your discount rate. The sheet uses ${share}.`, "share_consumed_y1")).toEqual([]);
+    expect(safe(`The evaluator view keeps ${share}.`, "share_consumed_y1")).toEqual([]);
+    expect(safe(`Neighbouring Uganda's households consume ${share} of it.`, "share_consumed_y1")).toEqual([]);
+    expect(safe(`The tab keeps the households' own ${share}.`, "share_consumed_y1")).toEqual([]);
+    expect(safe(`GBD 2021 puts it at ${share}.`, "share_consumed_y1")).toEqual([]);
+  });
+
+  it("leaves a bound and a past value typed", () => {
+    expect(safe(`The branch is under ${share} of the total.`, "share_consumed_y1")).toEqual([]);
+    expect(safe(`More than ${share} is consumed.`, "share_consumed_y1")).toEqual([]);
+    expect(safe(`The result moved from 0.18 to 0.20 and then ${result} years of healthy life per $1,000.`)).toEqual([]);
+    expect(safe(`## Model\n\nIt gives ${result} years of healthy life per $1,000.\n\n### How this model was checked\n\nIt gave ${result} years of healthy life per $1,000 after the second audit.\n`)).toEqual(["{{result}}"]);
+  });
+
+  it("wants two of a label's words before a write-up's sentence names the row", () => {
+    // "people" alone is not the row "People reached".
+    expect(safe(`Some people got ${people}.`)).toEqual([]);
+    expect(safe(`The people reached: ${people}.`)).toEqual(["{{row:people_reached}}"]);
+  });
+});

@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "global-alliance-for-improved-nutrition",
   "owner": "givewell",
+  "mobilised": true,
   "summary": "GAIN helps governments and salt producers iodize salt so that children grow up without the iodine deficiency that lowers IQ. GiveWell's salt iodization analysis (built in 2014 for GAIN and the Iodine Global Network, moral weights updated in 2021) values the higher earnings of children who grow up with iodized salt, at about 7 times cash transfers. GiveWell's 50% chance that GAIN's work makes a difference and the size of the IQ gain drive the result.",
   "source": {
     "publisher": "GiveWell",
@@ -22,7 +23,8 @@
   "evaluator": {
     "name": "GiveWell",
     "assumptions": {
-      "resource_shares": 0
+      "resource_shares": 0,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -173,9 +175,9 @@
       "section": "iodine",
       "label": "Leverage used",
       "format": "multiple",
-      "formula": "if($resource_shares, 1, leverage_givewell)",
+      "formula": "leverage_givewell",
       "expected": 1,
-      "explainer": "With credit by share of resources (How credit is shared), other funders' money gets its own share of the outcome instead of multiplying GAIN's, so leverage is 1; off, GiveWell's figure."
+      "explainer": "GiveWell's figure. The leverage is governments' spending on iodine brought in by GAIN's work, which is under the charity's share of the good (mobiliser_share), so credit by share of resources doesn't change it."
     },
     {
       "id": "lasting_share",
@@ -444,12 +446,20 @@
       "explainer": "Added for consistency: GiveWell's current sheets count a long-term income gain as shared with the household (the site's one figure, 2), as every model of the site that values such a gain does; this 2014 sheet counts the earner only, 1 in the evaluator view."
     },
     {
+      "id": "mobiliser_share",
+      "section": "ours",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar_gross",
       "section": "ours",
       "label": "Units of value per dollar, before staff pay",
       "format": "small",
-      "formula": "vs_cash * givedirectly_uov_per_100k / 1e5 * resource_sharing",
-      "explainer": "GiveWell's multiple of cash times its own cash benchmark (the sheet's units of value per $100,000 at the site's values, per dollar), with household sharing."
+      "formula": "(vs_cash * givedirectly_uov_per_100k / 1e5 * resource_sharing) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nGiveWell's multiple of cash times its own cash benchmark (the sheet's units of value per $100,000 at the site's values, per dollar), with household sharing."
     },
     {
       "id": "staff_cost_share",

@@ -9,6 +9,7 @@
   "estimate_basis": "marginal",
   "charity": "evidence-action",
   "owner": "givewell",
+  "mobilised": true,
   "bulk": true,
   "summary": "Helps Indian states give children and adolescents iron and folic acid supplements to prevent anemia. GiveWell's spreadsheet \"Evidence Action IFA supplementation CEA [2022]\", linked from 3 of its grant pages. Every number is traced from the sheet's bottom line; calculated rows reproduce the sheet's own values.",
   "source": {
@@ -26,7 +27,8 @@
       "uov_per_daly": 2.3,
       "uov_per_ln_consumption": 1.44,
       "resource_shares": 0,
-      "discount_rate": 0.04
+      "discount_rate": 0.04,
+      "mobiliser_share": 1
     }
   },
   "resources": [
@@ -2545,7 +2547,7 @@
         "cell": "IFA supplementation India!B30"
       },
       "format": "percent",
-      "explainer": "Your discount rate (Timing, under Your values). The sheet uses {{row:cognitive_benefits_in_children_discount_rate}}."
+      "explainer": "Your discount rate (Timing, under Your values). The sheet uses {{row:cognitive_benefits_in_children_discount_rate:evaluator}}."
     },
     {
       "id": "mean_number_of_years_between_supplementation_and_initial_con",
@@ -4183,9 +4185,9 @@
       "id": "cost_effectiveness_in_multiples_of_cash_transfers_after_all",
       "label": "Cost-effectiveness in multiples of cash transfers, after all adjustments",
       "section": "leverage_and_funging",
-      "formula": "if($resource_shares, program_units_of_value_per_dollar_before_leverage_and_fungin / (335 / 100000), (net_units_of_value_created_by_evac_s_spending_overall / upstream_costs_evac_cost_per_child_per_year / (335 / 100000)))",
+      "formula": "net_units_of_value_created_by_evac_s_spending_overall / upstream_costs_evac_cost_per_child_per_year / (335 / 100000)",
       "expected": 11.48630668,
-      "explainer": "With credit by share of resources, this is GiveWell's figure before leverage and funging."
+      "explainer": "Credit by share of resources doesn't change this row: the states buy and give out the tablets because of the programme, so the value their money would otherwise have produced stays netted, and their part is under the charity's share of the good (mobiliser_share). The cost counted stays Evidence Action's own."
     },
     {
       "id": "cost_effectiveness_multiples_of_cash_transfers_from_givedire",
@@ -4237,11 +4239,19 @@
       "explainer": "With credit by share of resources, staff's forgone pay counts as part of the cost, and staff get their share of the outcome. Off, this is 100%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "bottom_line",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "uov_per_dollar",
       "label": "Units of value per dollar",
       "section": "bottom_line",
-      "formula": "(cost_effectiveness_multiples_of_cash_transfers_from_givedire * cash_benchmark) * donor_cost_share",
-      "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
+      "formula": "((cost_effectiveness_multiples_of_cash_transfers_from_givedire * cash_benchmark) * donor_cost_share) * mobiliser_share",
+      "explainer": "Times the charity's share of the good that others carry out (mobiliser_share).\n\nWith credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],
   "output": {

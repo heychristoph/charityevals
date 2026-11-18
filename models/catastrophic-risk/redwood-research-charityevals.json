@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "redwood-research",
   "owner": "charityevals",
-  "summary": "Redwood Research (Berkeley) researches AI that works against its developers: it started AI control (keeping a model safe to use even if it tries to subvert its monitors), showed with Anthropic that a production model can fake alignment, and advises AI companies and the UK AI Security Institute. This model covers its one programme in 2024 ($2.9M spent), its own research and $0.68M that completed the spin-off of the Constellation research centre. At the defaults it averts about {{result}} years of healthy life per $1,000, from 0.005 to 0.7 in 90% of the simulation's draws, so the result is mostly uncertainty: each dollar is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. All its work is against misaligned AI, and Rethink's typical misalignment project cuts the deaths in catastrophes the world survives far less per dollar than its typical misuse project; the next dollar counts at 40% of the past average because 2024 ran on over two years of reserves, though it buys only research now the spin-off is done. The chance of an AI catastrophe (the slider), the typical cut per dollar, the discount rate and the share of work counted as misuse (0 by default; counting the paper on hidden capabilities as misuse work would raise the result 13 times) are the biggest swings; the one branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "Redwood Research (Berkeley) researches AI that works against its developers: it started AI control (keeping a model safe to use even if it tries to subvert its monitors), showed with Anthropic that a production model can fake alignment, and advises AI companies and the UK AI Security Institute. This model covers its one programme in 2024 ($2.9M spent), its own research and $0.68M that completed the spin-off of the Constellation research centre. At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} in 90% of the simulation's draws, so the result is mostly uncertainty: each dollar is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. All its work is against misaligned AI, and Rethink's typical misalignment project cuts the deaths in catastrophes the world survives far less per dollar than its typical misuse project; the next dollar counts at 40% of the past average because 2024 ran on over two years of reserves, though it buys only research now the spin-off is done. The chance of an AI catastrophe (the slider), the typical cut per dollar, the discount rate and the share of work counted as misuse (0 by default; counting the paper on hidden capabilities as misuse work would raise the result 13 times) are the biggest swings; the one branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Redwood Research",
@@ -861,15 +861,15 @@
     {
       "id": "fb_credit_share",
       "section": "effect",
-      "label": "Field-building: the training's share of the credit for that work",
+      "label": "Field-building: the training's share among those who trained or placed the same people",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.5,
+        "best": 1,
+        "high": 1
       },
       "kind": "judgment",
-      "explainer": "Not used: the field-building branch counts nothing for Redwood in 2024 (fb_people is 0); the template's range kept for the switched-on check."
+      "explainer": "Not used: no one is trained or placed (fb_people is 0). The skeleton's figure: 1 when no other programme trained or placed the same people. The employers who pay for the work itself are not in this denominator: they are mobilised, and the mobiliser's share (attribution_share) covers them (docs/normalization.md 2.24)."
     },
     {
       "id": "fb_deaths_per_million",
@@ -1109,12 +1109,21 @@
       "explainer": "Redwood's share of all resources behind its work: each part's partner share weighted by its spending times its evidence_adj, so the product with evidence_adj is each part's own (no fees: program service revenue $0, Part I line 9): about 0.67."
     },
     {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
       "id": "attribution_share",
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The charity's share of the resources behind the outcome; it applies whichever way credit is shared."
+      "formula": "attribution_share_shared * mobiliser_share",
+      "credit": "research",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "leverage_funging_adj",

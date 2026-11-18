@@ -23,7 +23,7 @@
     {
       "id": "accounting",
       "title": "How credit is shared",
-      "explainer": "Most good is paid for by more than one funder. By default each evaluator's own way of crediting a charity is kept; switch it to share credit by who paid for what."
+      "explainer": "Good is rarely one party's doing. One setting splits credit among funders who would each have paid anyway. The other says how much a charity gets for money, work or budgets that others commit only because of it."
     }
   ],
   "rows": [
@@ -31,7 +31,7 @@
       "id": "resource_shares",
       "section": "accounting",
       "label": "Give each funder credit for its share",
-      "technical": "Pro-rata attribution instead of counterfactual credit",
+      "technical": "Pro-rata attribution among co-funders (parties that would have committed their resources without the organisation) instead of counterfactual credit",
       "format": "toggle",
       "value": {
         "low": 0,
@@ -39,7 +39,26 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Most good is paid for by several funders: donors, governments, other charities. Off (the default), each charity evaluator's own way of crediting a charity is kept. On, credit is shared by who paid for what, so the shares add up to the whole and nothing is counted twice."
+      "explainer": "Many programmes are paid for by several funders who would each have paid anyway: donors, governments, other charities, staff who accept lower pay. Off (the default), a charity is credited with what its own money changed. On, each funder is credited in proportion to what it paid, so the shares add up to the whole."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "accounting",
+      "label": "A charity gets … % of the good done with money, work or budgets it brings in",
+      "technical": "Mobiliser's share of the good done with resources another party commits only because of the organisation: donations it moves, spending it changes, careers, and the budgets and compliance that carry out a win, each net of its cost (docs/normalization.md 2.24)",
+      "format": "percent",
+      "value": {
+        "low": 0.05,
+        "best": 0.3,
+        "high": 1
+      },
+      "slider": {
+        "low": 0.05,
+        "high": 1,
+        "linear": true
+      },
+      "kind": "judgment",
+      "explainer": "Fundraisers, advisers and campaigners do good through others: donors who give, people who change jobs, governments and companies that act. This is the share of that good credited to the charity; the rest stays with those who paid or did the work.\n\nAt 100% the charity gets all of it, as most evaluators count. Near 0% it gets almost none, so no fundraiser would be worth funding. The default, 30%, is near what finance standards give arrangers (33–50%)."
     },
     {
       "id": "home_country",

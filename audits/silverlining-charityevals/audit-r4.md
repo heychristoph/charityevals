@@ -1,6 +1,6 @@
 # Audit: silverlining-charityevals, round 4 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: 0.9885 tco2e/$ = 0.1944 years of healthy life per 1,000 dollars (combined range 0.0016-24.0 tco2e/$); cause median 0.001421 (x137, unchanged cause, see round 3). Verdict: pass
-Model-sha: e9fd0c5b59ba5e3f0e2fb0c15d49ec340f7c7ff905cdba172bdb7c5d618c00d2
+Model-sha: 3a939b44fb99fc53d2e4270c5a36c43e2af02bc65a27c6ecac8358a03fa4f832
 Scope: commit 7e73f6cd only: new rows `public_payer_uov_per_dollar`, `pol_public_cost_uov`, `public_cost_uov_per_year`, `tco2e_from_uov` (new `bridges` section), `outcome_total` (+ `tco2e_from_uov`); the non-death damage change (0.6, side effect) as it reaches the bridge copy; the summary and write-up sentences stating the result.
 Mechanical: lint 0 high / 1 medium (outlier, reason given in the summary, as round 3) / 1 low; invariants none; `check.ts` all models valid; normalization-audit not re-run (brief did not ask).
 
@@ -27,3 +27,5 @@ Mechanical: lint 0 high / 1 medium (outlier, reason given in the summary, as rou
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 1a9667aa.
 
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
+
+Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.

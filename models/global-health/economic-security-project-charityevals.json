@@ -512,7 +512,7 @@
       "label": "Money moved per dollar of the charity's cost",
       "format": "multiple",
       "formula": "money_moved / cost_total",
-      "explainer": "Context, and the donors' share of the resources with credit by share of resources on."
+      "explainer": "Context."
     },
     {
       "id": "ctc_lowest_quintile_share",
@@ -986,12 +986,20 @@
       "explainer": "The site's one figure for every meta charity: about half the money moved wouldn't otherwise have been given (Ambitious Impact's Effective Giving Incubation report), from 35% to 80%."
     },
     {
+      "id": "mobiliser_share",
+      "section": "moved_money",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): the charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work."
+    },
+    {
       "id": "moved_dollar_net_value",
       "section": "moved_money",
-      "label": "Value of a dollar moved, net of where shifted money would have gone, units of value",
+      "label": "Value of a dollar moved, net of where shifted money would have gone, at the mobiliser's share, units of value",
       "format": "small",
-      "formula": "new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value)",
-      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone."
+      "formula": "mobiliser_share * (new_money_share * moved_dollar_value + (1 - new_money_share) * (moved_dollar_value - prior_dollar_value))",
+      "explainer": "New money counts in full; shifted money counts for the gain over where it would have gone. The donors gave it, so the organisation is credited its share of that good (mobiliser_share)."
     },
     {
       "id": "moved_dollar_value",
@@ -1057,9 +1065,9 @@
       "section": "careers",
       "label": "Value of one career change (units of value)",
       "format": "number",
-      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share",
+      "formula": "career_forgone_pay * career_years * career_employer_value * career_counterfactual_share * mobiliser_share",
       "unit": "units of value",
-      "explainer": "The site's one career-change step (docs/normalization.md 2.8)."
+      "explainer": "The site's one career-change step (docs/normalization.md 2.8), at the mobiliser's share (2.24): the person gives up the pay."
     },
     {
       "id": "careers_missing_data_adj",
@@ -1091,7 +1099,7 @@
       "explainer": "The research on whether advocacy changes policy: Baumgartner, Berry, Hojnacki, Kimball and Leech (2009, Lobbying and Policy Change, 98 random US federal issues) find about 60% of campaigns change nothing and resources explain under 5% of who wins. The credits of 2022-2024 came as the expanded federal credit lapsed and states had record surpluses; governors and legislators who wanted them carried most, and the state campaigns for them shaped their size and refundability. 0.15, range 0.05 to 0.35."
     },
     {
-      "id": "ctc_attribution_share",
+      "id": "ctc_attribution_share_shared",
       "section": "adjustments",
       "label": "State tax credits: Economic Security Project's (501(c)(3)) share of the advocates' resources behind the credits",
       "format": "percent",
@@ -1102,6 +1110,15 @@
       },
       "kind": "judgment",
       "explainer": "The state campaigns were run by state fiscal policy institutes and anti-poverty coalitions (the Center on Budget and Policy Priorities' State Priorities Partnership of 40-odd state groups, the Institute on Taxation and Economic Policy, children's advocates), with Economic Security Project as funder, strategist and national coordinator ($0.69 million of its 2024 grants went through the campaigns line, plus staff, polling and messaging). Its sister 501(c)(4), Economic Security Project Action, lobbied for the same credits (about $1.8 million of its $3.6 million in 2024 on its campaigns line) and counts among the other advocates here, since only the 501(c)(3) is modelled. The 501(c)(3)'s campaign spending (about $2.5 million a year plus affiliate work) against the 501(c)(4)'s and tens of millions a year across the state groups: 0.13, range 0.04 to 0.27."
+    },
+    {
+      "id": "ctc_attribution_share",
+      "section": "adjustments",
+      "label": "State tax credits: share of credit used",
+      "format": "percent",
+      "formula": "ctc_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "ctc_evidence_adj",
@@ -1130,7 +1147,7 @@
       "explainer": "The research on whether advocacy changes policy: Baumgartner, Berry, Hojnacki, Kimball and Leech (2009, Lobbying and Policy Change, 98 random US federal issues) find about 60% of campaigns change nothing and resources explain under 5% of who wins. The Inflation Reduction Act of 2022 funded the IRS's study and Treasury chose to build it; a coalition of advocates (Code for America, the Center for American Progress, Economic Security Project and others) pressed for it for years against the tax-preparation industry. 0.3, range 0.1 to 0.6."
     },
     {
-      "id": "df_attribution_share",
+      "id": "df_attribution_share_shared",
       "section": "adjustments",
       "label": "IRS Direct File: Economic Security Project's share of the advocates' resources",
       "format": "percent",
@@ -1141,6 +1158,15 @@
       },
       "kind": "judgment",
       "explainer": "One of several national groups; Code for America built tools for it. 0.1, range 0.03 to 0.25."
+    },
+    {
+      "id": "df_attribution_share",
+      "section": "adjustments",
+      "label": "IRS Direct File: share of credit used",
+      "format": "percent",
+      "formula": "df_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "gi_counterfactual_adj",
@@ -1156,17 +1182,26 @@
       "explainer": "Cities chose to spend pandemic money on cash pilots because the movement (Stockton's pilot, which Economic Security Project funded, then Mayors for a Guaranteed Income) had made the case; some would have tried cash anyway after the federal stimulus. 0.5, range 0.2 to 0.8."
     },
     {
-      "id": "gi_attribution_share",
+      "id": "gi_attribution_share_shared",
       "section": "adjustments",
       "label": "Guaranteed income pilots: Economic Security Project's share of the movement's resources",
       "format": "percent",
       "value": {
-        "low": 0.02,
-        "best": 0.06,
-        "high": 0.15
+        "low": 0.05,
+        "best": 0.15,
+        "high": 0.35
       },
       "kind": "judgment",
-      "explainer": "In 2022-2024 the pilots were organised and funded by cities, Mayors for a Guaranteed Income (with Jack Dorsey's $18 million), GiveDirectly, OpenResearch and local funders; Economic Security Project, which seeded the first pilots, now convenes the national coalition, runs the Guaranteed Income Now conference and research, with about $1.8 million a year. 0.06, range 0.02 to 0.15."
+      "explainer": "Among those who organise and argue for the pilots: in 2022-2024 Mayors for a Guaranteed Income and local organisers (with GiveDirectly and others delivering) ran most of the pilots, and the OpenResearch study was independent; no count of the organisers' budgets was found; Economic Security Project, which seeded the first pilots, now convenes the national coalition, runs the Guaranteed Income Now conference and research, with about $1.8 million a year. The cities and funders whose money pays the transfers (philanthropic gifts such as Jack Dorsey's $18 million in 2020 among them) are the adopters: their part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.15, range 0.05 to 0.35."
+    },
+    {
+      "id": "gi_attribution_share",
+      "section": "adjustments",
+      "label": "Guaranteed income pilots: share of credit used",
+      "format": "percent",
+      "formula": "gi_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "gi_evidence_adj",
@@ -1195,17 +1230,26 @@
       "explainer": "Chicago's mayor and Venice's council drive the plans; the feasibility study and campaign made a public store an option they could fund through the state's grocery grants. 0.5, range 0.2 to 0.8."
     },
     {
-      "id": "am_attribution_share",
+      "id": "am_attribution_share_shared",
       "section": "adjustments",
       "label": "Public grocery stores: Economic Security Project's share of the advocates' resources",
       "format": "percent",
       "value": {
-        "low": 0.1,
-        "best": 0.3,
-        "high": 0.6
+        "low": 0.2,
+        "best": 0.5,
+        "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "It commissioned the feasibility study with HR&A for the city and campaigned for public grocery stores in Illinois; local community groups and the mayor's office did the rest. 0.3, range 0.1 to 0.6."
+      "explainer": "It commissioned the feasibility study with HR&A for the city and campaigned for public grocery stores in Illinois; its Illinois affiliate (outside these accounts) and local activists urged the city and state to fund stores. The mayor's office, which would open the store, is the adopter: its part is under the mobiliser's share, not in this one (docs/normalization.md 2.24). 0.5, range 0.2 to 0.8."
+    },
+    {
+      "id": "am_attribution_share",
+      "section": "adjustments",
+      "label": "Public grocery stores: share of credit used",
+      "format": "percent",
+      "formula": "am_attribution_share_shared * mobiliser_share",
+      "credit": "win",
+      "explainer": "The share among co-advocates times the mobiliser's share: the rest of the credit stays with those who carry out the result (docs/normalization.md 2.24)."
     },
     {
       "id": "am_evidence_adj",
@@ -1355,7 +1399,7 @@
       "section": "adjustments",
       "label": "Economic Security Project's share of the credit, outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "(ctc_value * ctc_attribution_share + df_value * df_attribution_share + gi_value * gi_attribution_share + am_value * am_attribution_share) / downstream_value",
+      "formula": "(ctc_value * ctc_attribution_share_shared + df_value * df_attribution_share_shared + gi_value * gi_attribution_share_shared + am_value * am_attribution_share_shared) / downstream_value",
       "explainer": ""
     },
     {
@@ -1363,7 +1407,7 @@
       "section": "adjustments",
       "label": "Share of credit used, outcome-weighted average of the branches, for reading only",
       "format": "percent",
-      "formula": "attribution_share_shared",
+      "formula": "(ctc_value * ctc_attribution_share + df_value * df_attribution_share + gi_value * gi_attribution_share + am_value * am_attribution_share) / downstream_value",
       "explainer": "The outcome-weighted average of the branches' shares of the resources behind each win, for reading only; each branch applies its own."
     },
     {
@@ -1459,7 +1503,7 @@
       "section": "donor",
       "label": "Share of the full cost paid by cash donations",
       "format": "percent",
-      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice + money_moved * new_money_share, 0))"
+      "formula": "cost_total / (cost_total + if($resource_shares, salary_sacrifice, 0))"
     },
     {
       "id": "uov_per_donor_dollar",

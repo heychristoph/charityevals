@@ -15,9 +15,9 @@ SilverLining spent $6.5 million in 2024, $5.3 million of it on programmes (Form 
 
 Cooling would not cut emissions. If it were used, it would hold back some warming, and the heat deaths that come with it, while it lasted. Research and engagement don't cool anything. They change when and how cooling is used: a careful, governed design instead of a crude one. SilverLining adds to that work in four ways, each a branch of the model:
 
-- **Research it funds or does** (about 29% of the result): its research grants and its own science.
+- **Research it funds or does** (about 28% of the result): its research grants and its own science.
 - **Engagement** (about 23%): its stakeholder-engagement programme and the grants abroad.
-- **Money from other funders it directed** to research it coordinates (about 28%): $15 million gross, as it reports it.
+- **Money from other funders it directed** to research it coordinates (about 30%): $15 million gross, as it reports it.
 - **The US federal research line** (about 20%). Congress began funding NOAA's Earth's Radiation Budget programme in late 2019: $4 million at first, about $9 million a year since. SilverLining was one of only two organisations to disclose lobbying on the subject in the decade to 2023. Its director advised Rep. McNerney's office on his bill for a formal NOAA programme. Advocates as a whole get the site's shared share of a won climate policy (30%), and SilverLining 60% of that. Only the part of the line that the field's funding tracker would count as cooling research is counted (55%). Its other policy results add 15%.
 
 ### How the model works

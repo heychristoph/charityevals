@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "electoral-reform-society",
   "owner": "charityevals",
-  "summary": "The Electoral Reform Society campaigns for proportional representation for the House of Commons and for other changes to how the UK votes and is governed, from offices in London, Edinburgh and Cardiff ($3.0 million spent in 2024-25). It is a company limited by guarantee, not a charity, so gifts to it get no Gift Aid or tax relief; it is the only entity that takes donations, and this models it. A dollar is counted as doing what the average year of its 2016-2026 work did: its share of the reforms won or nearly won in that decade (the supplementary vote restored for England's mayors, the hereditary peers removed, votes at 16 across the UK and pilots of automated registration, now in the Lords, and the Welsh and Scottish franchise and Senedd acts), plus its share of an 8% chance, a campaign still pending, that the Commons is elected proportionally within ten years; each is valued as a small share of the income democracy brings (Acemoglu et al. 2019), built up over 25 years and repealed at 3% a year, and proportional representation gives about half of the result. With its next dollar at {{row:marginal_vs_past_average}} of the average, because it holds about 18 years of spending in its capital fund, that comes to about 0.05 years of healthy life per 1,000 dollars. The biggest uncertainties are whether a voting method changes how well people are governed at all and the chance of proportional representation, both judgments; every branch is discounted by the shared missing-data slider.",
+  "summary": "The Electoral Reform Society campaigns for proportional representation for the House of Commons and for other changes to how the UK votes and is governed, from offices in London, Edinburgh and Cardiff ($3.0 million spent in 2024-25). It is a company limited by guarantee, not a charity, so gifts to it get no Gift Aid or tax relief; it is the only entity that takes donations, and this models it. A dollar is counted as doing what the average year of its 2016-2026 work did: its share of the reforms won or nearly won in that decade (the supplementary vote restored for England's mayors, the hereditary peers removed, votes at 16 across the UK and pilots of automated registration, now in the Lords, and the Welsh and Scottish franchise and Senedd acts), plus its share of an 8% chance, a campaign still pending, that the Commons is elected proportionally within ten years; each is valued as a small share of the income democracy brings (Acemoglu et al. 2019), built up over 25 years and repealed at 3% a year, and proportional representation gives about half of the result. With its next dollar at {{row:marginal_vs_past_average}} of the average, because it holds about 18 years of spending in its capital fund, that comes to about {{result}} years of healthy life per 1,000 dollars. The biggest uncertainties are whether a voting method changes how well people are governed at all and the chance of proportional representation, both judgments; every branch is discounted by the shared missing-data slider.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Electoral Reform Society",
@@ -1120,12 +1120,29 @@
       "unit": "years"
     },
     {
-      "id": "pr_attribution_share",
+      "id": "pr_attribution_share_shared",
       "section": "adjustments",
       "label": "Credit for one year of the Society's work, proportional representation",
       "format": "percent",
       "formula": "pr_ers_share / pr_campaign_years",
       "explainer": "The Society's share of the movement's money over the years the win is credited to."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "pr_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: credit for one year of the Society's work, proportional representation",
+      "credit": "win",
+      "format": "percent",
+      "formula": "pr_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "pr_commons_share",
@@ -1183,23 +1200,32 @@
     {
       "id": "sv_ers_share",
       "section": "adjustments",
-      "label": "The Society's share of the resources behind restoring the supplementary vote",
+      "label": "The Society's share among the campaigners for restoring the supplementary vote",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.2,
-        "high": 0.4
+        "low": 0.3,
+        "best": 0.5,
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "The Society opposed the 2022 switch to first past the post, argued for a preferential system before the bill was published and wrote to ministers after the May 2025 mayoral elections; the government announced the return in July 2025 ('We are delighted that the government listened', Annual Review 2025). Make Votes Matter and Unlock Democracy campaigned too, and the government had its own reasons after first-past-the-post mayoral results in 2025. 20% (5% to 40%): the main outside campaigner beside the government's own choice."
+      "explainer": "The Society's share among the campaigners. It opposed the 2022 switch to first past the post, argued for a preferential system before the bill was published and wrote to ministers after the May 2025 mayoral elections; the government announced the return in July 2025 ('We are delighted that the government listened', Annual Review 2025). Make Votes Matter and Unlock Democracy campaigned too. Anchor: the Society's judged share of the electoral-reform movement's money, about half (it spends about £1.0 million a year; the other groups are too small to file their spending). 50% (30% to 70%). The government and Parliament that made the change are under the mobiliser's share, not in this share; that the reform would have come some day is in the years a win counts."
     },
     {
-      "id": "sv_attribution_share",
+      "id": "sv_attribution_share_shared",
       "section": "adjustments",
       "label": "Credit for one year of the Society's work, supplementary vote",
       "format": "percent",
       "formula": "sv_ers_share / window_years",
       "explainer": "A past win: the Society's share of it, spread over the decade's years of spending."
+    },
+    {
+      "id": "sv_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: credit for one year of the Society's work, supplementary vote",
+      "credit": "win",
+      "format": "percent",
+      "formula": "sv_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "sv_local_share",
@@ -1270,23 +1296,32 @@
     {
       "id": "v16_ers_share",
       "section": "adjustments",
-      "label": "The Society's share of the resources behind votes at 16",
+      "label": "The Society's share among the campaigners for votes at 16",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.35
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.45
       },
       "kind": "judgment",
-      "explainer": "The Society is one of the Votes at 16 coalition's leading members (with the British Youth Council and others) and briefed MPs on the bill; Labour's 2024 manifesto commitment is the main reason it is law. 15% (5% to 35%)."
+      "explainer": "The Society's share among the campaigners: it is one of the Votes at 16 coalition's leading members (with the British Youth Council and others) and briefed MPs on the bill. Anchor: a coalition of several national youth and democracy organisations with a few leading members; a leading member's share is about a quarter. 25% (10% to 45%). The government and Parliament that made the change are under the mobiliser's share, not in this share; that the reform would have come some day is in the years a win counts."
     },
     {
-      "id": "v16_attribution_share",
+      "id": "v16_attribution_share_shared",
       "section": "adjustments",
       "label": "Credit for one year of the Society's work, votes at 16",
       "format": "percent",
       "formula": "v16_ers_share / window_years",
       "explainer": "The Society's share of the win, spread over the decade's years of spending."
+    },
+    {
+      "id": "v16_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: credit for one year of the Society's work, votes at 16",
+      "credit": "win",
+      "format": "percent",
+      "formula": "v16_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "reg_evidence_adj",
@@ -1307,23 +1342,32 @@
     {
       "id": "reg_ers_share",
       "section": "adjustments",
-      "label": "The Society's share of the resources behind the registration and finance reforms",
+      "label": "The Society's share among the campaigners for the registration and finance reforms",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.35
+        "low": 0.1,
+        "best": 0.25,
+        "high": 0.45
       },
       "kind": "judgment",
-      "explainer": "The same coalition and bill as votes at 16 (v16_ers_share): the Society briefed for automated registration and against the 2022 voter ID rules; the government's own July 2025 strategy is the main reason. 15% (5% to 35%)."
+      "explainer": "The same coalition and bill as votes at 16 (v16_ers_share): the Society briefed for automated registration and against the 2022 voter ID rules. Its share among the campaigners, as for votes at 16: 25% (10% to 45%). The government and Parliament that made the change are under the mobiliser's share, not in this share; that the reform would have come some day is in the years a win counts."
     },
     {
-      "id": "reg_attribution_share",
+      "id": "reg_attribution_share_shared",
       "section": "adjustments",
       "label": "Credit for one year of the Society's work, the registration and finance reforms",
       "format": "percent",
       "formula": "reg_ers_share / window_years",
       "explainer": "The Society's share of the win, spread over the decade's years of spending."
+    },
+    {
+      "id": "reg_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: credit for one year of the Society's work, the registration and finance reforms",
+      "credit": "win",
+      "format": "percent",
+      "formula": "reg_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "dev_evidence_adj",
@@ -1344,23 +1388,32 @@
     {
       "id": "dev_ers_share",
       "section": "adjustments",
-      "label": "The Society's share of the resources behind the 2020 devolved franchise acts",
+      "label": "The Society's share among the campaigners for the 2020 devolved franchise acts",
       "format": "percent",
       "value": {
-        "low": 0.05,
-        "best": 0.15,
-        "high": 0.35
+        "low": 0.12,
+        "best": 0.3,
+        "high": 0.5
       },
       "kind": "judgment",
-      "explainer": "ERS Cymru and ERS Scotland campaigned for the Welsh and Scottish acts beside the Senedd and Scottish Government's own commitments and youth groups. 15% (5% to 35%)."
+      "explainer": "ERS Cymru and ERS Scotland campaigned for the Welsh and Scottish acts beside youth groups. Two staffed Society offices beside volunteer-run youth groups; their share among the campaigners, our judgment: 30% (12% to 50%). The Senedd and the Scottish Government, which made the change, are under the mobiliser's share, not in this share."
     },
     {
-      "id": "dev_attribution_share",
+      "id": "dev_attribution_share_shared",
       "section": "adjustments",
       "label": "Credit for one year of the Society's work, the 2020 devolved franchise acts",
       "format": "percent",
       "formula": "dev_ers_share / window_years",
       "explainer": "The Society's share of the win, spread over the decade's years of spending."
+    },
+    {
+      "id": "dev_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: credit for one year of the Society's work, the 2020 devolved franchise acts",
+      "credit": "win",
+      "format": "percent",
+      "formula": "dev_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "lords_evidence_adj",
@@ -1381,23 +1434,32 @@
     {
       "id": "lords_ers_share",
       "section": "adjustments",
-      "label": "The Society's share of the resources behind removing the hereditary peers",
+      "label": "The Society's share among the campaigners for removing the hereditary peers",
       "format": "percent",
       "value": {
-        "low": 0.03,
-        "best": 0.1,
-        "high": 0.3
+        "low": 0.1,
+        "best": 0.3,
+        "high": 0.55
       },
       "kind": "judgment",
-      "explainer": "The Society has campaigned for an elected second chamber for about 26 years (its House of Lords petition passed 250,000 signatures), but the act carried out Labour's manifesto commitment, a reform pursued since 1999. 10% (3% to 30%)."
+      "explainer": "The Society has campaigned for an elected second chamber for about 26 years (its House of Lords petition passed 250,000 signatures), beside Unlock Democracy and other reform groups. Anchor: its judged share of the electoral-reform movement's money is about half; Lords reform has more campaigners and researchers, so lower. 30% (10% to 55%). The government and Parliament that made the change are under the mobiliser's share, not in this share; that the reform would have come some day is in the years a win counts."
     },
     {
-      "id": "lords_attribution_share",
+      "id": "lords_attribution_share_shared",
       "section": "adjustments",
       "label": "Credit for one year of the Society's work, removing the hereditary peers",
       "format": "percent",
       "formula": "lords_ers_share / window_years",
       "explainer": "The Society's share of the win, spread over the decade's years of spending."
+    },
+    {
+      "id": "lords_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: credit for one year of the Society's work, removing the hereditary peers",
+      "credit": "win",
+      "format": "percent",
+      "formula": "lords_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "sen_evidence_adj",
@@ -1418,23 +1480,32 @@
     {
       "id": "sen_ers_share",
       "section": "adjustments",
-      "label": "The Society's share of the resources behind the Senedd reform",
+      "label": "The Society's share among the campaigners for the Senedd reform",
       "format": "percent",
       "value": {
-        "low": 0.03,
-        "best": 0.1,
-        "high": 0.3
+        "low": 0.2,
+        "best": 0.4,
+        "high": 0.65
       },
       "kind": "judgment",
-      "explainer": "ERS Cymru convenes Democracy Group Cymru and argued for a larger Senedd for years; the reform was the Welsh Government's and Plaid Cymru's cooperation agreement. 10% (3% to 30%)."
+      "explainer": "ERS Cymru convenes Democracy Group Cymru and argued for a larger Senedd for years, beside the other Welsh civic groups in it. It is the group's convenor and its other members are small; its share among the campaigners, our judgment: 40% (20% to 65%). The Welsh Government and Plaid Cymru, whose cooperation agreement made the reform, are under the mobiliser's share, not in this share."
     },
     {
-      "id": "sen_attribution_share",
+      "id": "sen_attribution_share_shared",
       "section": "adjustments",
       "label": "Credit for one year of the Society's work, the Senedd reform",
       "format": "percent",
       "formula": "sen_ers_share / window_years",
       "explainer": "The Society's share of the win, spread over the decade's years of spending."
+    },
+    {
+      "id": "sen_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: credit for one year of the Society's work, the Senedd reform",
+      "credit": "win",
+      "format": "percent",
+      "formula": "sen_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "v16_implementation_adj",
@@ -1611,7 +1682,7 @@
       "section": "adjustments",
       "label": "The Society's credit for a year's work (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(pr_value * pr_attribution_share + sv_value * sv_attribution_share + v16_value * v16_attribution_share + reg_value * reg_attribution_share + dev_value * dev_attribution_share + lords_value * lords_attribution_share + sen_value * sen_attribution_share) / raw_total",
+      "formula": "(pr_value * pr_attribution_share_shared + sv_value * sv_attribution_share_shared + v16_value * v16_attribution_share_shared + reg_value * reg_attribution_share_shared + dev_value * dev_attribution_share_shared + lords_value * lords_attribution_share_shared + sen_value * sen_attribution_share_shared) / raw_total",
       "explainer": "Outcome-weighted average of the branches, for reading only."
     },
     {
@@ -1619,8 +1690,8 @@
       "section": "adjustments",
       "label": "Share of credit used",
       "format": "percent",
-      "formula": "attribution_share_shared",
-      "explainer": "The outcome-weighted average of the branches, for reading only: each branch applies its own share."
+      "formula": "(pr_value * pr_attribution_share + sv_value * sv_attribution_share + v16_value * v16_attribution_share + reg_value * reg_attribution_share + dev_value * dev_attribution_share + lords_value * lords_attribution_share + sen_value * sen_attribution_share) / raw_total",
+      "explainer": "The outcome-weighted average of the branches' used shares, for reading only: each branch applies its own."
     },
     {
       "id": "ue_democratic_goods",

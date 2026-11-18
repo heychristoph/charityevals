@@ -53,8 +53,8 @@ a `kind` and a `source` or `explainer`. Calculated rows have a `formula` over ot
   visitor's shared assumptions; where those move a result, the model page says so and offers a reset
   to the evaluator's own (the *evaluator view*). Where we disagree with an input, `published` keeps
   the evaluator's value.
-- **Accounting toggles:** staff salary sacrifice counted as an in-kind donation, and shared vs full
-  credit for outcomes several organisations contribute to.
+- **Credit:** two settings. Co-funders can be credited by what each paid (staff's forgone pay
+  counts). A charity gets 30% by default of the good done with money, work or budgets it brings in.
 - **History:** `/<id>/history` rebuilds the library at every commit that touched the model, its
   parents, assumptions or facts, and shows how the result and each row changed.
 - **Units:** each model reports per dollar in its own unit (`uov`, `sad`). `assumptions/default.json`

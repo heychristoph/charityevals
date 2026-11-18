@@ -4,12 +4,12 @@ The Global Alliance for Improved Nutrition (GAIN), a Geneva foundation, works wi
 
 ### What the charity does
 
-GAIN's audited accounts give 65.6 million dollars of spending, 61.6 million of it on programmes, but no split by programme. From its donors and annual report, its work falls into four parts (shares of spending are our judgments):
+GAIN's audited accounts give 65.6 million dollars of spending, 61.6 million of it on programmes, with no split by programme; its website gives one for 2023/24, from which we take the four parts' shares, spreading cross-cutting and structural costs in proportion:
 
-- **Food fortification** (about a quarter): technical help to governments and millers to add iodine to salt, iron, folic acid and vitamins to flour, oil and rice, a revolving fund that supplies the vitamin and mineral mix (the Premix Facility), biofortified crops, and multiple-micronutrient tablets for pregnant women in Bangladesh. GAIN counts 1.55 billion people reached in the year, by methods an audit reviewed.
-- **Nutritious food markets and businesses** (about 45%, mostly the Netherlands' programme): value chains for vegetables, eggs, fish and dairy in Kenya, Uganda, Benin, Mozambique, Ethiopia and Nigeria, trained vendors, rebuilt markets and a lending fund for small food firms; at least 9 million consumers targeted, 3 million reached by the funded firms.
-- **Workforce nutrition** (about 3%): 572,237 workers in about 100 workplaces whose employers adopted nutrition programmes.
-- **Policy, food-systems planning and evidence** (about a quarter): planning tools and support for national food-systems plans approved in five African countries, global advocacy, 36 evaluations and 43 papers.
+- **Food fortification** (about {{row:ff_share}}): technical help to governments and millers to add iodine to salt, iron, folic acid and vitamins to flour, oil and rice, a revolving fund that supplies the vitamin and mineral mix (the Premix Facility), biofortified crops, and multiple-micronutrient tablets for pregnant women in Bangladesh. GAIN counts 1.55 billion people reached in the year, by methods an audit reviewed.
+- **Nutritious food markets and businesses** (about {{row:vc_share}}): value chains for vegetables, eggs, fish and dairy in Kenya, Uganda, Benin, Mozambique, Ethiopia and Nigeria, trained vendors, rebuilt markets and a lending fund for small food firms; at least 9 million consumers targeted, 3 million reached by the funded firms.
+- **Workforce nutrition** (about {{row:wf_share}}): 572,237 workers in about 100 workplaces whose employers adopted nutrition programmes.
+- **Policy, food-systems planning and evidence** (about {{row:pol_share}}): planning tools and support for national food-systems plans approved in five African countries, global advocacy, 36 evaluations and 43 papers.
 
 ### How the impact happens
 
@@ -17,11 +17,11 @@ Fortified salt protects children's brain development from iodine deficiency, whi
 
 ### How the model works
 
-Each branch counts the people reached in the year and the healthy years or earnings one person gains. Fortification takes the fall in anaemia measured across real fortification programmes in poorer countries (34%, Keats et al. 2019) applied to the burden of iron deficiency, and the earnings gain from iodine at the site's shared figures for iodine's effect on IQ and the wait until earnings start, IQ and wages, discounting and the value of income. The diet branches take a small judged share of the healthy years the world loses to poor diets (255 million a year, GBD 2017). Then each branch asks what would have happened anyway, what share of all the resources behind it were GAIN's, and how many of those counted were really reached; each is discounted by the missing-data slider, as GAIN counts reach but measures no health outcomes; only the anaemia effect, measured across real fortification programmes like GAIN's, isn't. Last, the result is a year's spending over what it reached, so it is scaled by our figure for what GAIN's next dollar does against that average (60%: GAIN's cash and reserves fell sharply in the year).
+Each branch counts the people reached in the year and the healthy years or earnings one person gains. Fortification takes the fall in anaemia measured across real fortification programmes in poorer countries (34%, Keats et al. 2019) applied to the burden of iron deficiency, and the earnings gain from iodine at the site's shared figures for iodine's effect on IQ and the wait until earnings start, IQ and wages, discounting and the value of income. The diet branches take a small judged share of the healthy years the world loses to poor diets (255 million a year, GBD 2017). Then each branch asks what would have happened anyway, what share of the outside support behind it was GAIN's (those who adopt or carry out the result, governments and companies, are credited through the mobiliser's share), and how many of those counted were really reached; each is discounted by the missing-data slider, as GAIN counts reach but measures no health outcomes; only the anaemia effect, measured across real fortification programmes like GAIN's, isn't. Last, the result is a year's spending over what it reached, so it is scaled by our figure for what GAIN's next dollar does against that average (60%: GAIN's cash and reserves fell sharply in the year).
 
 ### What drives the result
 
-The missing-data slider, then GAIN's share of the resources behind fortification (food companies pay for the fortificant, governments regulate, other organisations support the same programmes: about a tenth is GAIN's, counting food companies' cost of fortifying at 5 to 12 cents a person) and how much of the year's benefit depends on continued support (a quarter). The earnings from iodine make up most of the value, so the discount rate and the value of a healthy year against income move the result too. The market, workplace and policy branches add little.
+The missing-data slider, then GAIN's share of the outside support behind fortification (other organisations back the same programmes: GAIN's is {{row:ff_attribution_share_shared}}; food companies' cost of fortifying, 5 to 12 cents a person, is netted from the benefit) and how much of the year's benefit depends on continued outside support (a quarter). The earnings from iodine make up most of the value, so the discount rate and the value of a healthy year against income move the result too. The market, workplace and policy branches add little.
 
 ### Biggest uncertainties
 
@@ -35,7 +35,7 @@ Folic acid's prevention of neural tube defects, vitamin A, goitre, stillbirths, 
 
 ### How this model was checked
 
-Independent audits (audits/global-alliance-for-improved-nutrition-charityevals/). Round 1 passed with no high findings; the fixes that followed: the anaemia term no longer takes the missing-data step (its effect is measured across real programmes), treatment costs averted apply only to the health terms and investment of income only to the earnings gain, GAIN's share of fortification resources is worked out from food companies' published cost of fortifying, external validity asks only about new versus established programmes, and the market branch's reach discount no longer applies to consumers already counted (0.6 to 0.7).
+Independent audits (audits/global-alliance-for-improved-nutrition-charityevals/). Round 1 passed with no high findings; the fixes that followed: the anaemia term no longer takes the missing-data step (its effect is measured across real programmes), treatment costs averted apply only to the health terms and investment of income only to the earnings gain, GAIN's share of fortification resources was worked out from food companies' published cost of fortifying (since changed: the share is now among outside supporters, with the companies' cost netted from the benefit), external validity asks only about new versus established programmes, and the market branch's reach discount no longer applies to consumers already counted (0.6 to 0.7).
 
 ### Sources
 

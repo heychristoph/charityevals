@@ -25,25 +25,25 @@ It is one model, with a branch for each programme.
   - GHAI: the world's burden from obesity and salty diets, 174 million DALYs, and 0.02% of it averted, plus half as much again for its other areas.
 - **Counting the wins**: a won policy counts for the site's standard number of years before it would have come anyway, after a year's wait until it takes effect. About half the cut in smoking comes from smokers who quit, whose health gains come about 8 years later; the other half from young people who never start, about 40 years later. For diet the lag is five years. Every wait is discounted. These lags, the US share averted, the US enforcement and evidence figures, the smoking and second-hand-smoke burdens and the harm of vaping are the site's shared tobacco figures.
 - **Deaths**: the DALYs are split into illness and the deaths behind them. The deaths are valued by age, from GBD's smoking deaths by age.
-- **Credit**: CTFK's share of everyone behind the wins. That is 12% in the US, where ACS CAN, the heart and lung associations, Truth Initiative, health departments and its own Action Fund also campaign. It is 15% abroad, where governments, the other Bloomberg partners and WHO do much of the work.
+- **Credit**: CTFK's share among the groups campaigning for the wins. That is {{row:us_attribution_share_shared}} in the US, where ACS CAN, the heart and lung associations, Truth Initiative and its own Action Fund also campaign, and {{row:glob_attribution_share_shared}} abroad, among the other Bloomberg partners, WHO and funders. Governments and agencies that adopt and carry out the laws are credited through the mobiliser's share.
 - **Adjustments**: enforcement ({{row:us_implementation_adj}} in the US, 75% abroad) and the validity of the effect sizes (0.8 for tobacco, 0.5 for GHAI). The missing-data discount applies to every branch, because no change in smoking from CTFK's own wins is measured.
 - **Side effects**, on the tobacco branches: second-hand smoke averted (the ratio of GBD's second-hand-smoke burden to smoking's: +38% in the ten countries, +10% in the US). Abroad also smokers kept from switching by the e-cigarette bans CTFK backs (−3%) and household money no longer spent on tobacco (+3%).
 - **The next dollar**: {{row:marginal_vs_past_average}} of the average dollar's result. Room for more money is 0.6: four months of unrestricted reserves, with most net assets restricted by donors. The use is the neutral 0.7, since nothing shows what an unrestricted dollar buys against the average.
 
 ### What drives the result
 
-About 72% of the result comes from the global branch, 18% from GHAI and 9% from the US. The biggest swings are:
+About 77% of the result comes from the global branch, 15% from GHAI and 7% from the US. The biggest swings are:
 
 - how many years a won policy counts;
 - the missing-data discount;
 - the next-dollar figure;
-- the share of the ten countries' smoking burden a year's wins avert (0.08 to 0.35 years per 1,000 dollars across its range);
+- the share of the ten countries' smoking burden a year's wins avert (0.034 to 0.17 years per 1,000 dollars across its range);
 - CTFK's share of the credit abroad.
 
 ### Biggest uncertainties
 
 - **How much a year's wins cut smoking.** No study measures this for CTFK's countries. The anchor is a model of what policies of a given strength should do (SimSmoke-style projections), and the recent rate of wins is lower than the 2007–2020 average.
-- **Credit.** Bloomberg's partners, governments and local groups all claim the same wins, and CTFK's share of the resources is a judgment.
+- **Credit.** Bloomberg's partners, governments and local groups all claim the same wins, and CTFK's share among them is a judgment.
 - **From fewer smokers to fewer deaths.** The model treats a lasting cut in smoking as an equal cut in the smoking burden, half of it reached after about 8 years and half after about 40.
 - **GHAI.** Its food policies' effect on weight and disease is much less sure than tobacco taxes' effect on smoking.
 

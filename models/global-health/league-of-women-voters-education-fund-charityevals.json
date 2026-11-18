@@ -659,12 +659,29 @@
       "explainer": "Institutional philanthropy × the whole field's multiple, weighted by each dollar's effect on a slide, in 2025 prices."
     },
     {
-      "id": "bs_attribution_share",
+      "id": "bs_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's share of the field's resources against a slide (direct work)",
       "format": "percent",
       "formula": "cost_total * bs_direct_share / bs_field_spending",
       "explainer": "Its direct work's own spending over the field's resources in direct-work dollars (Convention 2). Its voter-information dollars count in their own branch at the indirect weight, and its reform dollars only in the reform branches."
+    },
+    {
+      "id": "mobiliser_share",
+      "section": "adjustments",
+      "label": "This charity's share of the good done with money, work or budgets it brings in",
+      "format": "percent",
+      "formula": "$mobiliser_share",
+      "explainer": "The site's one setting for resources another party commits only because of the organisation (docs/normalization.md 2.24): governments' budgets and enforcement, companies' compliance, the use others make of research. The charity is credited this share of the good done with them, net of their cost; the rest stays with those who paid or did the work. Fixed."
+    },
+    {
+      "id": "bs_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Education Fund's share of the field's resources against a slide (direct work)",
+      "credit": "win",
+      "format": "percent",
+      "formula": "bs_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "bs_evidence_adj",
@@ -767,12 +784,21 @@
       "explainer": "Put into the prices of the Education Fund's year (Convention 8)."
     },
     {
-      "id": "maps_attribution_share",
+      "id": "maps_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's share of the redistricting movement's resources",
       "format": "percent",
       "formula": "cost_total * maps_spend_share / maps_movement_real",
       "explainer": "Its redistricting spending, with its overhead, over the movement's average year (Convention 2): a share by money, not an equal split. The movement's figure counts the League among the standing organisations behind commissions."
+    },
+    {
+      "id": "maps_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Education Fund's share of the redistricting movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "maps_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "maps_weak_delivery",
@@ -849,12 +875,21 @@
       "explainer": "The redistricting branch's side effects, each weighted by the side-effect slider."
     },
     {
-      "id": "oth_attribution_share",
+      "id": "oth_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's other reform spending over the redistricting movement's resources",
       "format": "percent",
       "formula": "cost_total * oth_spend_share / maps_movement_real",
       "explainer": "Its other reform spending in the units of oth_uov (a year of reform work the size of the redistricting movement), so the branch counts its own dollars at the relative effect."
+    },
+    {
+      "id": "oth_attribution_share",
+      "section": "adjustments",
+      "label": "Share of credit used: the Education Fund's other reform spending over the redistricting movement's resources",
+      "credit": "win",
+      "format": "percent",
+      "formula": "oth_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "oth_evidence_adj",
@@ -923,12 +958,21 @@
       "explainer": "The other-reforms branch's side effects, each weighted by the side-effect slider."
     },
     {
-      "id": "vi_attribution_share",
+      "id": "vi_attribution_share_shared",
       "section": "adjustments",
       "label": "The Education Fund's share of the field's resources against a slide (voter information)",
       "format": "percent",
       "formula": "cost_total * vi_spend_share * bs_indirect_relative_effect / bs_field_spending",
       "explainer": "Its voter-information spending at the field's indirect weight, over the field's resources in direct-work dollars (Convention 2): the same weight the field's denominator gives every turnout drive and civic-education dollar, so the shares of all the field's members add up to the field."
+    },
+    {
+      "id": "vi_attribution_share",
+      "section": "adjustments",
+      "label": "Voter information: share of credit used",
+      "credit": "win",
+      "format": "percent",
+      "formula": "vi_attribution_share_shared * mobiliser_share",
+      "explainer": "The share among those who paid for or did the same work, times the mobiliser's share: the rest of the credit stays with those who carry out or adopt the result (docs/normalization.md 2.24)."
     },
     {
       "id": "vi_evidence_adj",
@@ -1245,7 +1289,7 @@
       "section": "adjustments",
       "label": "The Education Fund's share of the resources behind the outcome (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "(bs_raw * bs_attribution_share + maps_raw * maps_attribution_share + oth_raw * oth_attribution_share + vi_raw * vi_attribution_share) / raw_total"
+      "formula": "(bs_raw * bs_attribution_share_shared + maps_raw * maps_attribution_share_shared + oth_raw * oth_attribution_share_shared + vi_raw * vi_attribution_share) / raw_total"
     },
     {
       "id": "missing_data_adj",
@@ -1266,7 +1310,7 @@
       "section": "adjustments",
       "label": "Share of credit used (outcome-weighted average of the branches, for reading only)",
       "format": "percent",
-      "formula": "attribution_share_shared"
+      "formula": "(bs_raw * bs_attribution_share + maps_raw * maps_attribution_share + oth_raw * oth_attribution_share + vi_raw * vi_attribution_share) / raw_total"
     },
     {
       "id": "unmodelled_benefits_adj",
