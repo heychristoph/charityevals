@@ -400,7 +400,9 @@ cpath.write_text(json.dumps(crec, indent=2, ensure_ascii=False) + "\n")
 # carry over resources collected earlier (scripts/import-resources.sh), so a re-import keeps them
 _prev = out / f"{a.id}.json"
 if _prev.exists(): model["resources"] = json.loads(_prev.read_text()).get("resources", [])
-lm.apply(model)
+# Not strict: this converter writes only the sheet's own sections; our steps (and with them the
+# mobiliser's share and its pin) are added by the linkers that run after it (link-mobiliser-share.py).
+lm.apply(model, strict=False)
 (out / f"{a.id}.json").write_text(json.dumps(model, indent=2, ensure_ascii=False) + "\n")
 print(f"{a.id}: {len(model['rows'])} rows, {sum('expected' in r for r in model['rows'])} expected")
 
