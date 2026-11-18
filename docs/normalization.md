@@ -1620,6 +1620,57 @@ catastrophic-risk family (2.19) and conservation's pandemic branch. At the defau
 counts, so 32 models fall, none by more than 15% (METR, Redwood Research and the Machine Intelligence
 Research Institute most): at the 4% discount rate the people alive now are most of an extinction's loss.
 
+**The lives a result adds** (rule lives-added). A death averted is more than the survivor's own years:
+parents have fewer later births, the survivor has children, and everyone who lives eats animals. These are
+second-order changes in the number of lives, so every model reads them at the one place it values the outcome,
+a shared figure, rewritten as the formula is read (src/engine/population.ts `withLivesAdded`), by the World Bank
+income groups of the model's beneficiaries (facts/countries.json `income`; a country with none, a "world"
+share, a model with no beneficiaries and one that moves money read the world's figures):
+
+| Outcome | Shared figure | What is added |
+|---|---|---|
+| A death averted | `@moral_weights.<age>` (the age in `DEATH_FACTS`) | the people below × their healthy years × `$never_started_weight`, less the animals eaten over the survivor's remaining years and those people's lives |
+| A stillbirth averted | `@givewell_shared.uov_per_stillbirth` | the rest of a newborn's value (`@moral_weights.givewell_neonatal`) × `$never_started_weight`: GiveWell's 21 always counts; then as a death averted at birth |
+| A year of contraception | `@givewell_shared.uov_per_cyp_<place>` | the 0.049 unwanted births it averts (`@lives.unwanted_births_averted_per_cyp`; mistimed births happen later) and their descendants: their healthy years lost × `$never_started_weight`, the animals they would eat spared; the deaths it averts as deaths |
+| A year of doubled income | `$uov_per_ln_consumption` | the animals eaten out of it: the income elasticity of demand for animal products (USDA: 0.66 low-income, 0.53 middle, 0.39 high) × a person-year's animals |
+| A tonne of CO₂'s deaths | the `tco2e` conversion's `@moral_weights.*` | as deaths, at the world's figures |
+
+People added by a death averted at age x: `children ahead(x) × descendants − [x < 5] × births forgone × (1 +
+descendants)`. Descendants (`$descendants_<g>`): each generation the last times the UN's net reproduction rate
+(2050, 2075, then 2100 for ever, at most 1), discounted a generation (28.2 years) further. Births forgone
+(`@lives.births_averted_per_child_death_<g>`): Roodman's review for GiveWell, about 1 where women have two
+children or fewer and 0.33 to 0.5 where couples hardly limit births, on a straight line by the group's
+fertility (0.67 low-income, 0.93 lower-middle, 1 above). Children ahead: all before 15, none from 50. A
+survivor's remaining years: a straight line from life expectancy at birth to that at 60 (WHO), to nothing at
+95. So where parents forgo a birth for each child saved, a child saved adds almost no one.
+
+Animals (`$animal_dalys_per_person_year_<g>`): ACE's 2,820 suffering-adjusted days for a year of the world's
+average diet (the sheet the meal models' species shares come from), scaled to the group's fish, poultry and pig
+meat (FAO), × the production response, through the species step (2.4). Their suffering always counts. Their
+good counts as `$never_started_weight × $pain_free_time_good ×` pain-free days (days alive less the days of
+disabling pain the SADs stand for; a broiler 42 to 47 days, a hen 72 to 80 weeks, a pig 22 to 24 weeks; farmed
+fish none counted: no lifespan we could source), a day at 1/365 of a healthy year × the species' weight.
+
+The whole term is `× $side_effect_weight`, and `× $lives_added`: 1 in our view, 0 in the evaluator view, so
+every sheet reproduces. A row's `assumptionDeps` stay what the row itself reads; the term's sliders are its
+`livesAdded`. The invariants read the models as written (the switch off, `asWritten`); INV-25 checks the term.
+
+**A future kept** (catastrophic risk, conservation's pandemic branch). The rows that value the deaths
+(`value_per_death`, `covid_value_per_death`, `catastrophe_value_per_death`) carry `descendants: false`: the
+model's own `future_dalys_averted` counts the people who would follow, so they are not counted twice (a
+catastrophe the world survives then adds no descendants either: under-counted where lives that never start
+count). Beside the future, `future_animal_harm`: each future person-year at the suffering of the animals an
+average person eats in a year today, a side effect.
+
+**What it does.** At the defaults no result moves by more than 0.2%: a chicken counts 1/10,000 of a person.
+With lives that never start at 100%: family planning turns negative (the 0.049 births a year of contraception
+averts are over 1 healthy year lost, against the 0.2 to 0.4 the year is worth), newborn and child survival fall by up to 45% (the births
+parents forgo), stillbirths averted rise, catastrophic risk gets its future back. With the Animal-focused value
+set the animals a person eats outweigh the person's own healthy year (about 8 years of healthy life a
+person-year in the world's average diet), so saving lives and raising incomes turn negative there, most in rich
+countries, and keeping humanity's future does too. Not counted: fertility effects of income or schooling,
+changes in what people will eat, wild animals (no sourced figures).
+
 ## 3. Invariants
 
 Each is a test over the built library (`buildLibrary`, as scripts/summaries.ts loads it). Put them
@@ -1655,6 +1706,7 @@ shrinks).
 | INV-21 | Missing outcome data: one rule for every model, in our view only (2.12). | Every model with a result in common units is classified: charityevals' own by their `missing_data_adj` rows (and no `missing_data` field), every import by `missing_data` (own or inherited) with a reason and no row reading `$missing_data_discount`. At 1 nothing moves (an import's factor is exactly 1; an own build's headline equals its headline with every marker at 1). With live reads held, an import's headline at the default and 10% is its headline at 1 × (1 − thin_share × (1 − d)); the evaluator view never moves. |
 | INV-22 | Mobilised resources take the mobiliser's share, once (2.24). | Every model with a result in common units. Only the row `mobiliser_share = $mobiliser_share` reads the setting. (a) Reach: every `*moved_dollar_net_value`, `*shifted_dollar_value` and `career_change_value` row on the path reads it; in a charityevals model with a win (a `*p_success` row, `$win_years_counted`, or a share classed win or research) every used share (`attribution_share`, `<branch>_attribution_share`) reads it or carries `"credit": "delivery"`; every imported model declares `mobilised`, and reads it on the path if true. (b) Once, the models read live held: the headline at the default, half and a quarter of the share lies on a straight line, and the part of the headline behind each mobilised row and each cost of mobilised resources (`*compliance_uov`, `*public_cost_uov`) halves exactly with the share. (c) A model with an evaluator view that reads it pins it to 1, in a row of an ours section, and its evaluator headline doesn't move (the evaluator view reads other models at 100% too). (d) A model that mobilises nothing, and a delivery share, read none. (e) No headline breaks at the slider's low end (5%). Models not yet wired are INV-22's entries in src/engine/normalization-allowlist.json, a list that only shrinks. Tiny-model checks in src/engine/normalization.test.ts; src/engine/mobiliser-share.test.ts holds every headline at 100% and over the slider's range. |
 | INV-23 | An import that credits a won policy or commitment counts the shared years (2.9). | Every imported model (not variants) classed mobilised with a result in common units and a row on the path whose label names a chance of success or of the change coming anyway, a commitment or pledge, years brought forward or sustained, or a duration of impact: a row on the path reads `$win_years_counted`, and the evaluator view is the same at twice the years. Waived with reasons (`WON_REFORM_WAIVERS`, src/engine/invariants.ts): outreach, services, pilots, technical assistance and money moved that credit no reform for a number of years. charityevals' own builds read it through their templates. |
+| INV-25 | Lives that never start are weighed where they are read, and never in the evaluator view (2.25). | Every row marked `never_started` is read by a row on the path; no row reads `$never_started_weight` itself; a row reading a piece of the lives a result adds (`$descendants_*`, `$newborn_*`, `$animal_dalys_per_person_year_*`) also reads `$lives_added`; the evaluator headline is the same with the weight, the pain-free setting and the switch off and on, unless the model pins the weight. |
 | INV-24 | Side-effect rows are tagged (2.16). | Every row on the path whose label or id names excluded effects, a spillover, additional benefits or GiveWell's supplemental intervention-level adjustments (not leverage, funging, costs, downsides or corrections for inflation and exchange rates; not a total of benefit streams that reads development effects) carries `side_effect`, reads a tagged row or is read by one. November 2026: 25 imports tagged (GiveWell's excluded-effects totals or, where a total holds development effects, its components; HLI's and SoGive's household spillovers, split out where folded into a total). |
 
 Engine changes these need: unit `ced`; assumptions `chicken_vs_person` (stored 0.332),

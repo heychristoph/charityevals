@@ -96,8 +96,8 @@ every `expected` (the sheet's cached values).
   `published` holds the evaluator's, and the explainer says "changed for consistency", their number
   and why. The evaluator view uses `published`, so the sheet still reproduces.
 - A programme that fits no step gets a bridge to the scale (normalization.md 2.6) with ranged judgments.
-- **Mark** (normalization.md 2.16, 2.18) side-effect rows `side_effect` where the effect enters, and a
-  chance that one event happens at all `single_event` (`{ with }` for chances that move together,
+- **Mark** (normalization.md 2.16, 2.18, 2.25) side-effect rows `side_effect` where it enters, lives
+  that never start `never_started`, and a one-off event's chance `single_event` (`{ with }` for chances that move together,
   `{ one_of }` for scenarios), never a yearly rate or a share of many.
 
 ## 4. Shared levers (layer A), pinned in the evaluator view

@@ -83,9 +83,9 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
     effect already net of care as usual (`counterfactual_adj` 1);
   - climate, money moved and careers: the shared rows (normalization.md 2.5, 2.8; INV-12, valued one way);
   - signs and one question per adjustment (Convention 5);
-  - every way the work does good or harm is a row: side effects estimated and tagged `side_effect`
-    (normalization.md 2.16), a step the evaluator leaves out given a row in our section; a known effect
-    left out is missing-adjustment;
+  - every way the work does good or harm is a row: side effects tagged `side_effect`
+    (normalization.md 2.16), never-started lives' good `never_started` (2.25), an evaluator's omitted
+    step a row in our section; a known effect left out is missing-adjustment;
   - the simulation (2.18): ranges' `interval` and `shape` as the source states; one-off chances tagged
     `single_event`, no yearly rate or share of many; no range on a year; no remainder of large figures;
   - a past average's `@next_dollar` figure sourced and dated within a year (2.10);

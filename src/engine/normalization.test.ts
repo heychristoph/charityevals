@@ -483,7 +483,7 @@ describe("climate conversion", () => {
     const l = buildLibrary([base, missing, outside, reads], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, walk(join(root, "facts")).map(read));
     expect(l.errors).toEqual(["missing: unit tco2e reads row air_pollution_weight, which the model doesn't define (docs/normalization.md 2.5)"]);
     expect(inv2b(l).violations.map(keyOf).sort()).toEqual(["outside air_pollution_weight section", "reads air_pollution_weight $discount_rate"]);
-    const av = assumptionValues(assumptions);
+    const av: Record<string, number> = { ...assumptionValues(assumptions), lives_added: 0 };
     const df = (1 + av.discount_rate) ** -av.climate_heat_death_delay, h = av.climate_heat_share;
     expect(headline(l, l.models.get("base")!, av)).toBeCloseTo(2 * av.deaths_per_tco2e * (h * df * heatDeathValue() + (1 - h) * 0.5 * airPollutionDeathValue()) * av.daly_per_child_death / (fact("moral_weights.uov_per_death_under5") as number) * 1000, 9);
   });

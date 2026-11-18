@@ -91,6 +91,10 @@ const rowShape = {
    * With `side_effect: "added"` both weights apply. The evaluator view counts none, unless the model
    * pins the weight (an evaluator who counted them). */
   never_started: z.literal(true).optional(),
+  /** `false`: the deaths this row values take with them the people who would have followed, and the model
+   * counts those in a `never_started` row of its own (a catastrophe that ends the future). The shared
+   * figures it reads then add only the survivors' own years (src/engine/population.ts). */
+  descendants: z.literal(false).optional(),
   /** What the row's range means (its low/high, or `range` on a calculated row): the share of the time the
    * true value lies inside it. Default 0.9; GiveWell's 25th–75th percentiles are 0.5. */
   interval: z.number().gt(0).lt(1).optional(),
@@ -404,6 +408,10 @@ export const Facts = z
             region: z.number().int(),
             population: z.number().int().nonnegative(),
             population_source: z.literal("wpp").optional(),
+            /** The World Bank's income group (low, lower-middle, upper-middle, high), where it classifies the
+             * country: the group whose demographic and diet figures a model's beneficiaries read
+             * (src/engine/population.ts). */
+            income: z.enum(["L", "LM", "UM", "H"]).optional(),
           })
           .strict(),
       )
