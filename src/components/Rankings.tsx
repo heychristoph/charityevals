@@ -125,7 +125,6 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
           return (
             <li key={c.id} ref={flipRef(c.id)} className="r-row" style={{ ["--cause" as string]: `var(--cause-${c.cause})` }}>
               <div className="r-name tip-host">
-                <span className="r-rank num">{i + 1}</span>
                 <CharityLogo id={c.id} name={c.name} size={32} lazy={i >= 6} className="r-logo" />
                 <div>
                   <a href={`/${c.id}`} className="r-link">{c.name}</a>

@@ -152,7 +152,8 @@ so the severity rests on a number.
 ```
 # Audit: <model id>, round <n>
 Result: <x> <unit>/$ = <y> years of healthy life per 1,000 dollars (combined range <lo>–<hi>); cause median <m> (×<r>). Verdict: <pass | fix needed>.
-Model-sha: <what `npx tsx scripts/audit-receipt.ts <id>` prints for the model you audited>
+Model-sha: <what `npx tsx scripts/audit-receipt.ts <id>` prints for the audited model>
+Rules: <first version in audits/versions.json>
 Scope: <programmes and year modelled, against the charity's spending breakdown>
 Preflight: <pass | blocking lines>
 Previous round: <each earlier high and medium: resolved / not resolved>
