@@ -612,7 +612,7 @@ const LATER_FACT = "givewell_shared.income_to_mortality_value_ratio";
  * less at a higher rate; a figure typed in at the evaluator's rate (GiveWell's 4%) stays at that rate
  * unless the model rescales it (`*_at_shared_values`). Per origin row (a row on the path labelled as a
  * later benefit that reads no other such row): moved ×1.1 at the default rate and at 1%, its part of our
- * headline must differ between the two. */
+ * headline (the part it brings, over the headline) must differ between the two. */
 export function inv9c(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
@@ -629,15 +629,18 @@ export function inv9c(lib: Library, av = assumptionValues(lib.assumptions)): Inv
       if (r.section === "givedirectly" && m.charity !== "givedirectly") continue;
       const v = vals[r.id];
       if (!Number.isFinite(v) || v === 0) continue;
-      const part = (a: Record<string, number>) => headline(lib, m, a, { [r.id]: v * 1.1 }) - headline(lib, m, a);
-      const p0 = part(av), p1 = part(low);
-      if (Number.isFinite(p0) && Math.abs(p0) > 1e-12 * Math.abs(headline(lib, m, av)) && close(p0, p1, 1e-9))
-        violations.push({ inv: "INV-9c", model: m.id, where: r.id, detail: `"${r.label}" = ${fmt(v)}: its part of our headline is the same at a ${fmt(av.discount_rate * 100)}% and a 1% discount rate, so a benefit that comes years later ignores $discount_rate; rescale it to the rate (an \`*_at_shared_values\` row: pv at $discount_rate over pv at the evaluator's rate)` });
+      // A row computed at the rate already is discounted itself.
+      if (!close(compute(lib, m, low)[r.id], v, 1e-12)) continue;
+      // Its share of the headline: the same at both rates when it moves only as the rest does (or not at all).
+      const share = (a: Record<string, number>) => { const h = headline(lib, m, a); return (headline(lib, m, a, { [r.id]: v * 1.1 }) - h) / h; };
+      const p0 = share(av), p1 = share(low);
+      if (Number.isFinite(p0) && Math.abs(p0) > 1e-12 && close(p0, p1, 1e-9))
+        violations.push({ inv: "INV-9c", model: m.id, where: r.id, detail: `"${r.label}" = ${fmt(v)}: its share of our headline is the same at a ${fmt(av.discount_rate * 100)}% and a 1% discount rate, so a benefit that comes years later ignores $discount_rate; rescale it to the rate (an \`*_at_shared_values\` row: pv at $discount_rate over pv at the evaluator's rate)` });
     }
   }
   return {
     id: "INV-9c", title: "Later-years benefits move with the discount rate", status: "partial", checked: models.length, violations,
-    how: "Every row on the path to the output whose label states a later benefit (development effects or benefits, long-term income, earnings or gains, income increases in later life, a present value of lifetime or future benefits, the share coming through income increases; not population shares, costs or downsides), or that reads GiveWell's income-to-mortality ratio, and that reads no other such row is an origin. Moved ×1.1 in our view at the default discount rate and at 1%, its part of the headline must differ between the two: if it is the same, the figure was typed in at the evaluator's rate and ignores $discount_rate. Heuristic on labels: later benefits under other words aren't seen.",
+    how: "Every row on the path to the output whose label states a later benefit (development effects or benefits, long-term income, earnings or gains, income increases in later life, a present value of lifetime or future benefits, the share coming through income increases; not population shares, costs or downsides), or that reads GiveWell's income-to-mortality ratio, and that reads no other such row is an origin. Unless it is computed at the rate itself, moved ×1.1 in our view at the default discount rate and at 1%, its share of the headline must differ between the two: if it is the same, the figure was typed in at the evaluator's rate and moves only as the rest of the model does. Heuristic on labels: later benefits under other words aren't seen.",
   };
 }
 
@@ -654,16 +657,19 @@ export function inv24(lib: Library): InvariantReport {
   const violations: Violation[] = [];
   for (const m of models) {
     const path = rowsFeeding(m);
+    const tagged = m.rows.filter((x) => x.side_effect).map((x) => x.id);
     for (const r of ownRows(m)) {
       const text = `${r.label} ${r.id.replace(/_/g, " ")}`;
       if (!path.has(r.id) || r.side_effect || !SIDE_EFFECT_LABEL.test(text) || NOT_SIDE_EFFECT.test(text)) continue;
       if ([...upstream(m, r.id)].some((d) => d !== r.id && m.byId.get(d)?.side_effect)) continue;
+      // A component of a tagged side effect (a spillover ratio its tagged spillover row reads) is weighted there.
+      if (tagged.some((t) => t !== r.id && upstream(m, t).has(r.id))) continue;
       violations.push({ inv: "INV-24", model: m.id, where: r.id, detail: `"${r.label}" reads like a side effect but carries no side_effect tag and reads no tagged row, so $side_effect_weight doesn't reach it: tag it (\`added\` for an amount or share added, \`factor\` for a multiplier), or its components` });
     }
   }
   return {
     id: "INV-24", title: "Side-effect rows are tagged", status: "partial", checked: models.length, violations,
-    how: "Every row on the path to the output whose label or id names excluded effects, a spillover, additional benefits or GiveWell's supplemental intervention-level adjustments (not leverage, funging or crowding in) carries `side_effect` or reads, at any depth, a row that does. Heuristic on labels: side effects under other words aren't seen, and a total with one tagged component passes.",
+    how: "Every row on the path to the output whose label or id names excluded effects, a spillover, additional benefits or GiveWell's supplemental intervention-level adjustments (not leverage, funging or crowding in) carries `side_effect`, reads at any depth a row that does, or is read by one (a component of a tagged side effect). Heuristic on labels: side effects under other words aren't seen, and a total with one tagged component passes.",
   };
 }
 
