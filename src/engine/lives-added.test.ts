@@ -116,6 +116,31 @@ describe("the lives a result adds", () => {
     expect(h("contraception", quiet)).toBeCloseTo((0.01 * fact("givewell_shared.uov_per_cyp_sierra_leone") * 1000) / av.uov_per_daly, 6);
   });
 
+  it("take the good days of the animals a replaced meal spares off the meal's figure, at the reader's two settings", () => {
+    const meal = toy("meal", { USA: 1 }, [input("meals", 2), { id: "out", label: "out", formula: "meals * @sad_factors.sads_per_meal_replaced" }]);
+    const l = buildLibrary([meal], { ...assumptions, common: { ...assumptions.common, benchmark: "meal" } }, facts);
+    expect(l.errors).toEqual([]);
+    const m = l.models.get("meal")!;
+    const at = (o: Record<string, number>, view: "charityevals" | "evaluator" = "charityevals") => headline(l, m, { ...av, ...o }, {}, view) / 1000 * av.uov_per_daly;
+    const sads = fact("sad_factors.sads_per_meal_replaced");
+    expect(at({})).toBeCloseTo(2 * sads, 9);
+    expect(at({ never_started_weight: 1 })).toBeCloseTo(2 * sads, 9);
+    expect(at({ pain_free_time_good: 1 })).toBeCloseTo(2 * sads, 9);
+    // By hand: the farmed birds and pigs among the animals of the world's average diet, their days alive
+    // less their days of pain, a day at 1/365 of a healthy year, in the meal's own suffering days.
+    const chicken = fact("aim_sads.chicken_2024"), pig = fact("aim_sads.pig_2024"), fish = fact("aim_sads.fish_2024");
+    const birdDays = (fact("lives.lifespan_days_broiler") - fact("lives.sads_per_broiler") / chicken + fact("lives.lifespan_days_laying_hen") - fact("lives.sads_per_laying_hen") / chicken) / 2;
+    const pigDays = (fact("lives.lifespan_days_pig") - fact("lives.sads_per_piglet") / pig) * fact("welfare_ranges.pig_vs_chicken");
+    const goodDays = (fact("lives.farmed_birds_per_person_year") * birdDays + fact("lives.farmed_mammals_per_person_year") * pigDays) / fact("lives.animals_per_person_year");
+    const cedPerSad = (fact("sad_factors.meal_sads_share_fish") / fish) * fact("welfare_ranges.fish_vs_chicken") + fact("sad_factors.meal_sads_share_chicken") / chicken + (fact("sad_factors.meal_sads_share_pig") / pig) * fact("welfare_ranges.pig_vs_chicken");
+    const good = (fact("sad_factors.animals_spared_per_meal_replaced") * goodDays) / (365 * av.daly_per_sad) / cedPerSad;
+    expect(at({ never_started_weight: 1, pain_free_time_good: 1 })).toBeCloseTo(2 * (sads - good), 6);
+    expect(at({ never_started_weight: 0.5, pain_free_time_good: 0.2 })).toBeCloseTo(2 * (sads - 0.1 * good), 6);
+    // Counted in full, a spared animal's good days outweigh its pain: sparing it is then a loss.
+    expect(good).toBeGreaterThan(sads);
+    expect(at({ never_started_weight: 1, pain_free_time_good: 1 }, "evaluator")).toBeCloseTo(2 * sads, 9);
+  });
+
   it("never reach the evaluator view, nor what a row itself is said to read", () => {
     const all = { ...av, never_started_weight: 1, pain_free_time_good: 1, chicken_vs_person: 0.332 };
     for (const m of models) {

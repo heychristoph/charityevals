@@ -7,6 +7,7 @@
 //   a stillbirth averted   @givewell_shared.uov_per_stillbirth
 //   a year of contraception @givewell_shared.uov_per_cyp_<place>
 //   a year of doubled income $uov_per_ln_consumption
+//   a meal replaced          @sad_factors.sads_per_meal_replaced (the good days of the animals never bred)
 // `withLivesAdded` rewrites a formula as written, before derived assumptions are expanded: each such
 // reference becomes the figure plus the term below, by the income groups of the model's beneficiaries.
 // The term is times $lives_added (1 in our view, 0 in the evaluator view, so a sheet still reproduces) and
@@ -77,6 +78,12 @@ export const CONTRACEPTION_FACTS: Record<string, { deaths: string; childShare: n
   "givewell_shared.uov_per_cyp_sierra_leone": { deaths: "givewell_shared.uov_per_cyp_deaths_sierra_leone", childShare: 0.6 },
 };
 export const INCOME_VALUE = "uov_per_ln_consumption";
+/** A meal with animal products replaced: the suffering-adjusted days it spares. The animals it spares are
+ * never bred, so the figure is read less their good days (pain-free days, at the reader's two settings), put
+ * into suffering-adjusted days so the species step every meal model takes turns them back. */
+export const MEAL_FACT = "sad_factors.sads_per_meal_replaced";
+const MEAL_ANIMALS = "@sad_factors.animals_spared_per_meal_replaced";
+const GOOD_DAYS = "good_days_per_animal_spared";
 
 const num = (x: number) => String(Number(x.toPrecision(10)));
 /** Years of 1 a year for `years` years, discounted at the shared rate. */
@@ -125,8 +132,11 @@ const weighed = (term: string) => `if($never_started_weight, $never_started_weig
 /** Whether a library carries the pieces the term reads: the switch among its assumptions and the figures
  * among its facts (an old commit's library, or a test's small one, doesn't). Set once when a library is built. */
 const enabled = new WeakSet<Assumptions>();
+const mealsEnabled = new WeakSet<Assumptions>();
 export function enableLivesAdded(a: Assumptions, hasFact: (key: string) => boolean): void {
-  if (a.rows.some((r) => r.id === LIVES_ADDED) && hasFact("lives.generation_years")) enabled.add(a);
+  if (!a.rows.some((r) => r.id === LIVES_ADDED) || !hasFact("lives.generation_years")) return;
+  enabled.add(a);
+  if (a.rows.some((r) => r.id === GOOD_DAYS) && hasFact(MEAL_FACT) && hasFact(MEAL_ANIMALS.slice(1))) mealsEnabled.add(a);
 }
 export const hasLivesAdded = (a: Assumptions): boolean => enabled.has(a);
 
@@ -137,7 +147,8 @@ const REF = /@([a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*)|\$([a-z_][a-z0-9_]*)/gi;
  * model counts the people who would follow in a row of its own (catastrophic risk), so only the survivors'
  * own years are added here. */
 export function withLivesAdded(a: Assumptions, formula: string, shares: Partial<Record<Group, number>>, descendants = true): string {
-  if (!hasLivesAdded(a) || !/@moral_weights\.|@givewell_shared\.uov_per_(stillbirth|cyp)|\$uov_per_ln_consumption/.test(formula)) return formula;
+  if (!hasLivesAdded(a) || !/@moral_weights\.|@givewell_shared\.uov_per_(stillbirth|cyp)|\$uov_per_ln_consumption|@sad_factors\.sads_per_meal_replaced/.test(formula)) return formula;
+  const meals = mealsEnabled.has(a);
   return formula.replace(REF, (ref, fact: string | undefined, assumption: string | undefined) => {
     if (assumption !== undefined) {
       if (assumption !== INCOME_VALUE) return ref;
@@ -145,6 +156,8 @@ export function withLivesAdded(a: Assumptions, formula: string, shares: Partial<
       return `(${ref} - ${second(`$uov_per_daly * ${overGroups(shares, (g) => `@lives.animal_food_income_elasticity_${g} * $animal_dalys_per_person_year_${g}`)}`)})`;
     }
     const key = fact!;
+    if (key === MEAL_FACT)
+      return meals ? `(${ref} - ${weighed(`$pain_free_time_good * ${MEAL_ANIMALS} * $${GOOD_DAYS} / (365 * $daly_per_sad) / $meal_ced_per_sad`)})` : ref;
     if (key in DEATH_FACTS) return `(${ref} + ${second(overGroups(shares, (g) => deathTerm(DEATH_FACTS[key], g, descendants)))} / $life_value_multiplier)`;
     if (key === STILLBIRTH_FACT)
       // A stillbirth averted is a life that starts: the rest of a newborn's value counts with the weight on

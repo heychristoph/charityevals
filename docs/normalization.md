@@ -1634,6 +1634,7 @@ share, a model with no beneficiaries and one that moves money read the world's f
 | A year of contraception | `@givewell_shared.uov_per_cyp_<place>` | the 0.049 unwanted births it averts (`@lives.unwanted_births_averted_per_cyp`; mistimed births happen later) and their descendants: their healthy years lost × `$never_started_weight`, the animals they would eat spared; the deaths it averts as deaths |
 | A year of doubled income | `$uov_per_ln_consumption` | the animals eaten out of it: the income elasticity of demand for animal products (USDA: 0.66 low-income, 0.53 middle, 0.39 high) × a person-year's animals |
 | A tonne of CO₂'s deaths | the `tco2e` conversion's `@moral_weights.*` | as deaths, at the world's figures |
+| A meal with animal products replaced | `@sad_factors.sads_per_meal_replaced` | less the good days of the animals it spares, which are never bred (rule animals-never-bred): `$never_started_weight × $pain_free_time_good ×` the animals per meal × `$good_days_per_animal_spared`, a day at 1/365 of a healthy year, in the meal's own suffering days (`$meal_ced_per_sad`) so the species step turns them back. Not a side effect: no `$side_effect_weight`, no `$lives_added` |
 
 People added by a death averted at age x: `children ahead(x) × descendants − [x < 5] × births forgone × (1 +
 descendants)`. Descendants (`$descendants_<g>`): each generation the last times the UN's net reproduction rate
@@ -1654,6 +1655,12 @@ fish none counted: no lifespan we could source), a day at 1/365 of a healthy yea
 The whole term is `× $side_effect_weight`, and `× $lives_added`: 1 in our view, 0 in the evaluator view, so
 every sheet reproduces. A row's `assumptionDeps` stay what the row itself reads; the term's sliders are its
 `livesAdded`. The invariants read the models as written (the switch off, `asWritten`); INV-25 checks the term.
+
+**Animals never bred.** With lives that never start at 100%, a replaced meal turns into a loss once pain-free
+time counts as more than about 11% good, and a caged hen's life is worth living above about 6% (62 days of
+disabling pain against 470 pain-free days in 76 weeks). At 0% on either setting the meal models are as they
+were. None counted, for want of a sourced lifespan or pain figure: farmed fish and shrimp never farmed, dogs
+and cats never born (neutering).
 
 **A future kept** (catastrophic risk, conservation's pandemic branch). The rows that value the deaths
 (`value_per_death`, `covid_value_per_death`, `catastrophe_value_per_death`) carry `descendants: false`: the
