@@ -1,7 +1,7 @@
 # Audit: labri-charityevals, round 2
 Result: 0.003157 uov/$ = 1.579 years of healthy life per 1,000 dollars (combined range 0.0207–120.3); cause median 0.1196 (×13.2). Verdict: **pass** (scoped verification: no open high or medium; 3 low for the builder).
 Model-sha: 076f80cc0cd8d61c1e71f5743cce022ec48da40eaf111a4f6434b079ce120524
-Rules: 0.3.0
+Rules: 0.3.1
 Scope: unchanged from round 1 (the whole charity, one programme, April 2025 to October 2026; no accounts exist). Not re-audited; only round 1's three mediums, the changes made for them and what those changes introduced.
 Preflight: pass (no blocking lines). One low: generated/distributions.json is out of date for this model.
 Previous round: finding 1 (implementation_adj double-counts legacy soil) resolved. Finding 2 (source_share below both whole-population estimates) resolved. Finding 3 (shared battery-smelting persistence and adult-exposure figures) resolved by a reason that holds. The eight lows are the builder's; their state is noted below.

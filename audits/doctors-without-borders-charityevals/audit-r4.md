@@ -2,7 +2,7 @@
 Result: 0.001677 uov/$ = 0.839 years of healthy life per 1,000 dollars (combined range 0.315–2.231); the cause median was not re-read in this scoped round. Verdict: pass.
 Verdict: pass
 Model-sha: f54edeae811d2bbb6814707eface6978ac71d7f54cc3459a52569cb3423781bd
-Rules: 0.3.0
+Rules: 0.3.1
 Scope: verification round only: commits 36d2fd53 and 1f524029 (g4 cleanup): ln 2 row replaced by @givewell_shared.ln_consumption_per_doubling; cholera and other-admissions 5-14 shares read @death_ages.crisis_share_5_14_of_over5; WASH death rate and reduction read the @humanitarian_response facts; wash_years format; eight rewritten explainers. Programmes, year and the rest of the model were not re-audited.
 Mechanical: audit-model: 0 findings, result 0.8386 (round 3: 0.8390, about -0.05%, the WASH facts); preflight passes, with two low "generated files out of date" lines (run npx tsx scripts/summaries.ts); other scripts not re-run.
 

@@ -740,10 +740,11 @@ below zero. The median and a 10% trimmed mean both drop the top (all three Rethi
 zero under either). So the mean stays equal-weight, a young net-harm charity included, as it counts like any
 other. Where money is spread over named charities in proportion to what they spend, a formula weighs them by
 `#spending:<charity>`, the charity's programme spending in USD from its accounts (`spending.programme`,
-ranking.ts `spendingOf`), in `wavg(w1, x1, w2, x2, ...)`, where a charity with none on record weighs the median
-of the others in the same average (a cause's median would be the large charities': seven young charities
-carried 96% of the first try): Ambitious Impact's average of the charities it launched, whose money each
-charity spends. A budget or plan is not spending and isn't recorded as it.
+ranking.ts `spendingOf`), in `wavg(w1, x1, w2, x2, ...)`: Ambitious Impact's average of the charities it launched, whose money each
+charity spends. Spending is recorded, never guessed: from the charity's accounts, or, without published
+accounts, the annual programme cost its evaluator's model is built on (the source names model and row).
+A reference to a charity with none is an error (a first try filled them with a cause median: seven young
+charities carried 96% of the weight).
 
 | Model | Our view before → after | Evaluator view |
 |---|---|---|

@@ -317,7 +317,9 @@ export function buildLibrary(
     for (const r of m.rows)
       for (const d of r.modelDeps) {
         if (isSpendingRef(d)) {
-          if (!charities.has(d.slice(SPENDING_PREFIX.length))) errors.push(`${m.id}.${r.id}: unknown charity #${d}`);
+          const c = charities.get(d.slice(SPENDING_PREFIX.length));
+          if (!c) errors.push(`${m.id}.${r.id}: unknown charity #${d}`);
+          else if (!c.spending?.programme) errors.push(`${m.id}.${r.id}: #${d} has no spending on record (charities/${c.id}.json): record it, from its accounts or its evaluator's model, never a guess`);
           continue;
         }
         if (isCauseRef(d)) {

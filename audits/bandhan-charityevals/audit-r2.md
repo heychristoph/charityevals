@@ -1,7 +1,7 @@
 # Audit: bandhan-charityevals, round 2
 Result: 0.01203 uov/$ = 6.017 years of healthy life per 1,000 dollars (combined range 1.885-19.21); cause median 0.0803 (x74.9). Verdict: pass (no high findings).
 Model-sha: 55b296669bd9cbe60db846ba72c5e1c72450d0ce3ec0d587d416babd84511c8a
-Rules: 0.3.0
+Rules: 0.3.1
 Scope: unchanged from round 1 and still right: fiscal year 2024-25, programme spending Rs 108.81 crore (expenditure less administration, scanned I&E account), the Rs 11.12 crore training sold to Bandhan Bank partly taken out, Targeting the Hardcore Poor plus six branches covering every programme heading of the annual report; charities/bandhan.json spending and lines match the accounts.
 Mechanical: lint 0 high / 1 medium (far-above, explained under Plausibility) / 1 low (unused baseline_consumption); invariants none; normalization-audit no violation for this model (INV-14 gone: `fl_years` is labelled as the financial-literacy branch's own duration); `check.ts` all models valid; simulation 5% 0.563, 50% 1, 95% 1.78 x best guess (stable). `summaries.ts --check` still reports generated/usage.json out of date: that is the batch rule (agents do not regenerate generated/; it is rebuilt once after the merge), so it is not a finding. generated/ restored with `git checkout -- generated`.
 Previous round:

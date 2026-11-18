@@ -1,7 +1,7 @@
 # Audit: terrapraxis-charityevals, round 7 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: 0.01493 years of healthy life per $1,000 (was 0.0219 after the non-death change); cause median 0.001421 (x10.5). Verdict: pass (no high or medium except the explained far-above; two lows).
 Model-sha: 888fb2c945e26bf126f5cc2d14b5380ed2fbb32fe95239633a4c763137d44cf0
-Rules: 0.3.0
+Rules: 0.3.1
 Scope: commit 7e73f6cd on this model and its write-up: (1) the tripling pathway read at the middle of the years counted (pathway_first_year, pathway_last_year, pathway_middle_year, pathway_counted_share and the four rows that multiply by it), (2) rate_position clamped to 3%-7%, (3) unmodelled_benefits_adj tagged side_effect: added, and the bridge's `1 + $side_effect_weight × ratio`. Rule 2.23 (public money) has no branch here. Row values dumped from the live model (temporary script, deleted).
 Mechanical: audit-model: 0 high, 1 medium (far-above, below), 3 low (the reading-only summary rows, already labelled). check.ts: all models valid. Receipt above.
 
