@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useReducer } from "react";
 import { lib, primaryOf, rankedCharities } from "./data";
 import { assumptionValues, bottomLine, headline, plausibleRange, ranks, unstableFlag, type ResolvedModel } from "../engine/model";
 import { combine, combineLocations, coverageFlag, nextDollarFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
@@ -62,9 +62,15 @@ export type CharityResult = {
   high: number;
 };
 
+// One values object per state of the overrides, shared by every island, so results cache by identity.
+let values: { overrides: object; av: Record<string, number> } | undefined;
+
 export function useAssumptionValues() {
   const overrides = useOverrides();
-  return useMemo(() => assumptionValues(lib.assumptions, overrides), [overrides]);
+  return useMemo(() => {
+    if (values?.overrides !== overrides) values = { overrides, av: assumptionValues(lib.assumptions, overrides) };
+    return values.av;
+  }, [overrides]);
 }
 
 /** Results for any set of models, e.g. a charity's variants. */
@@ -87,26 +93,76 @@ function resultOf(m: ResolvedModel, av: Record<string, number>): Result {
   return { model: m, native: bottomLine(lib, m, av).native, central: s.central, low: range.low, high: range.high, s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...(cover ? [cover] : []), ...(shaky ? [shaky] : []), ...(stale ? [stale] : [])] };
 }
 
+// A full result (sensitivity and plausible range) costs most of a second for the whole rankings, mostly
+// in models that read others live. While a slider moves, each model gets only its headline, with the
+// last full result's range scaled to it; the full results follow once the values have settled (SETTLE ms).
+const SETTLE = 250;
+const full = new Map<ResolvedModel, { av: Record<string, number>; r: Result }>();
+const quick = new Map<ResolvedModel, { av: Record<string, number>; central: number }>();
+
+function fullOf(m: ResolvedModel, av: Record<string, number>): Result {
+  const hit = full.get(m);
+  if (hit?.av === av) return hit.r;
+  const r = resultOf(m, av);
+  full.set(m, { av, r });
+  return r;
+}
+
+/** The headline at these values, with the last full result's range and flags scaled to it. */
+function quickOf(m: ResolvedModel, av: Record<string, number>): Result {
+  const last = full.get(m);
+  if (!last) return fullOf(m, av);
+  if (last.av === av) return last.r;
+  let q = quick.get(m);
+  if (q?.av !== av) quick.set(m, (q = { av, central: headline(lib, m, av) }));
+  const c = q.central, prev = last.r.central;
+  const ratio = prev !== 0 && Math.sign(prev) === Math.sign(c) ? c / prev : NaN;
+  const [low, high] = Number.isFinite(ratio) ? [last.r.low * ratio, last.r.high * ratio] : [c, c];
+  return { ...last.r, central: c, low: Math.min(low, high), high: Math.max(low, high) };
+}
+
 /** The full result for one model, including variants that aren't on the rankings. */
 export function useResultFor(m: ResolvedModel): Result {
   const av = useAssumptionValues();
-  return useMemo(() => resultOf(m, av), [m, av]);
+  const settled = useSettled(av);
+  return useMemo(() => (settled ? fullOf(m, av) : quickOf(m, av)), [m, av, settled]);
+}
+
+/** Whether the values have stopped changing for SETTLE ms: one timer for the page, every island re-rendered. */
+let settledAv: Record<string, number> | undefined;
+let timer: ReturnType<typeof setTimeout> | undefined;
+const settleListeners = new Set<() => void>();
+function useSettled(av: Record<string, number>): boolean {
+  const [, tick] = useReducer((x: number) => x + 1, 0);
+  useEffect(() => {
+    settleListeners.add(tick);
+    return () => void settleListeners.delete(tick);
+  }, []);
+  useEffect(() => {
+    if (settledAv === av) return;
+    clearTimeout(timer);
+    timer = setTimeout(() => { settledAv = av; settleListeners.forEach((l) => l()); }, SETTLE);
+  }, [av]);
+  // The first values on a page are settled: they are the ones it loaded with.
+  if (settledAv === undefined) settledAv = av;
+  return settledAv === av;
 }
 
 // Every island on a page (the rankings, the side panel's mini ranking, a model page's rank) asks for
 // the same rankings. They are a pure function of the shared overrides, so the last one computed is
 // kept here and reused: one computation per change instead of one per island.
-let shared: { overrides: object; value: ReturnType<typeof computeResults> } | undefined;
+let shared: { overrides: object; settled: boolean; value: ReturnType<typeof computeResults> } | undefined;
 
 export function useResults() {
   const overrides = useOverrides();
   const av = useAssumptionValues();
+  const settled = useSettled(av);
   return useMemo(() => {
-    if (shared?.overrides === overrides) return shared.value;
-    const value = computeResults(av);
-    shared = { overrides, value };
+    if (shared?.overrides === overrides && shared.settled === settled) return shared.value;
+    const value = computeResults(av, settled ? fullOf : quickOf);
+    shared = { overrides, settled, value };
     return value;
-  }, [overrides, av]);
+  }, [overrides, av, settled]);
 }
 
 const plans = new Map(rankedCharities.map((c) => [c.id, rankingPlan(lib, c.id)]));
@@ -130,7 +186,9 @@ export function figureOf(charity: string, owner: string, av: Record<string, numb
   })).central;
 }
 
-function programResult(c: Charity, program: string, m: ResolvedModel, weight: number | undefined, av: Record<string, number>): ProgramResult {
+type ResultFn = (m: ResolvedModel, av: Record<string, number>) => Result;
+
+function programResult(c: Charity, program: string, m: ResolvedModel, weight: number | undefined, av: Record<string, number>, resultOf: ResultFn): ProgramResult {
   const result = resultOf(m, av);
   const family = locationsOf(lib, m);
   const declared = declaredLocations(c, family);
@@ -149,12 +207,12 @@ function evaluatorResult(owner: string, programs: ProgramResult[]): EvaluatorRes
   return { owner, ...combine(programs), programs, flags, theoretical: programs.every((p) => !!p.result.model.theoretical) };
 }
 
-function computeResults(av: Record<string, number>) {
+function computeResults(av: Record<string, number>, resultOf: ResultFn) {
   // A charity's own pages show every programme, old estimates included; only the rankings leave them out.
   const pages = new Map<string, EvaluatorResult[]>();
   const results: CharityResult[] = rankedCharities.flatMap((c) => {
     const all = (plans.get(c.id) ?? []).map(({ owner, parts }) =>
-      evaluatorResult(owner, parts.map((p) => programResult(c, p.program, p.model, p.weight, av))));
+      evaluatorResult(owner, parts.map((p) => programResult(c, p.program, p.model, p.weight, av, resultOf))));
     pages.set(c.id, all);
     const evaluators = all.flatMap((e) => {
       const programs = e.programs.filter((p) => ranks(lib, p.result.model, av));
