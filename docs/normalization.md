@@ -183,10 +183,10 @@ ced_s = sads_s / @aim_sads.s_v * if($rp_species_weights, @welfare_ranges.s_vs_ch
                                                          @aim_sads.s_v / @aim_sads.chicken_2024)
 ```
 
-`v` is the SAD version (2024 or 2025) whose weights are built into the figure the row divides in
+`v` is the SAD version (2024, 2025 or 2026) whose weights are built into the figure the row divides in
 our view: AIM's weights changed between versions (a hen 46.4% of a person in 2024 SADs, 34.7% in
 2025), and dividing a 2025 figure by a 2024 weight would leave part of AIM's weight in. ACE's 2024
-sheets and its 2024 meal sheet use 2024 SADs; its 2025 sheets use 2025 SADs. Each `@sad_factors` fact
+sheets and its 2024 meal sheet use 2024 SADs; its 2025 sheets use 2025 SADs; its 2026 sheets use AIM's v2 SADs, intensity-weighted days with no species weight (`@aim_sads.<s>_2026` = 1). Each `@sad_factors` fact
 states its basis, and a range end from the other version is restated on it (×
 weight of its version / weight of the other). A model with figures of both versions for one species
 gets a second pair `sads_s_v` / `ced_s_v` (The Humane League: battery-cage hens on the shared 2024

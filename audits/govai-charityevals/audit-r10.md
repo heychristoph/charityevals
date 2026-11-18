@@ -1,7 +1,7 @@
 # Audit: govai-charityevals, round 10 (verification of round 9's findings)
 Result: 0.009032 daly/$ = 9.03 years of healthy life per $1,000. Verdict: pass.
 Model-sha: 7c69e27f153c743cf13b12b97c4a26fb9a15dc8446dea0194a768024ee8406ab
-Rules: 0.3.1
+Rules: 0.3.2
 Scope: scoped verification of round 9's four findings and what they introduced.
 Preflight: pass (lows only: unused code_resources, out-of-date distributions line).
 Previous round: finding 1 (high, attr_policy denominator) resolved; finding 2 (medium, fb_share_working) resolved; findings 3 and 4 (low) resolved.

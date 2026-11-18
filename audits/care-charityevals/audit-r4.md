@@ -34,7 +34,7 @@ Findings by severity: high 0, medium 0, low 1.
 
 Verdict: pass
 Model-sha: b2f400cfafd307597f00659385fc7ab8749055de3c3d11b5446bec8eb84983aa
-Rules: 0.3.1
+Rules: 0.3.2
 
 Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.331 → 0.332.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

@@ -15,7 +15,7 @@ No findings.
 
 Verdict: **pass**
 Model-sha: c6adb6297abe6f8097c3e8d9b1a3192bb6a5feeeda096c0e4308e62903379baa
-Rules: 0.3.1
+Rules: 0.3.2
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 Re-stamped (15 Nov 2026): pandemic and nuclear extinction chances read the new sliders (same defaults; mechanical)
