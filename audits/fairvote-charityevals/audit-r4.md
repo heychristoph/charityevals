@@ -1,7 +1,7 @@
 # Audit: fairvote-charityevals, round 4
 Result: 2.264e-5 daly/$ = 0.0226 years of healthy life per 1,000 dollars (combined range 0.0014–0.38); cause median 0.0693 (×0.33). Verdict: pass.
 Model-sha: 208440ad74865e48bda5fba6b335b93fb35bc870904d60ba512fd6e272f594af
-Rules: 0.1.0
+Rules: 0.1.1
 Scope: scoped verification of commit 61b6097 only (the answer to round 3's 3 low findings): facts/democracy.json (rcv_local_coverage, rcv_state_federal_coverage, us_pr_movement_resources_per_year, local_offices_weight explainer), the model's rcv_implementation_adj and the explainers that state its numbers, charities/fairvote.json summary, the write-up. Everything else as in rounds 1-3.
 Mechanical: audit-model lint 0 findings; invariants none; check.ts "all models valid" (this and protect-democracy-charityevals); simulation-check stable (5% 0.155×, 50% 1.00×, 95% 5.46× the best guess); normalization-audit not re-run (no row of the kinds it checks changed; scoped round). No script wrote generated/ (working tree clean). Result moved from 0.0230 to 0.0226 (-1.6%), no move above 2×.
 Previous round (r3):

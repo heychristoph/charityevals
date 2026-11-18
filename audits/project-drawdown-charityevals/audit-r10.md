@@ -1,7 +1,7 @@
 # Audit: project-drawdown-charityevals, round 10 (verification of the round 9 summary fix)
 Result: -0.0012552 tco2e per donor dollar = -0.000745 years of healthy life per $1,000. Verdict: pass (no open high or medium).
 Model-sha: f4ac0a7d84adc5a19e58308e1b10749124fd0df31881db162e158f6d14edbd57
-Rules: 0.1.0
+Rules: 0.1.1
 Scope: round 9's one open medium, the summary's two figures.
 Previous round: round 9 finding 1 (summary tonnes rounding) resolved.
 

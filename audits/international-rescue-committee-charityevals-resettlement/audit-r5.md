@@ -2,7 +2,7 @@
 
 Result: 8.355e-6 daly/$ = 0.00836 years of healthy life per $1,000 (combined range 0.00165-0.0423). Verdict: **pass** (no findings above low; none open).
 Model-sha: f3a2eaa04eb1f368719c2ff1c962bf1c86c7c5f0ad705a518eba22c78a6f7d22
-Rules: 0.1.0
+Rules: 0.1.1
 
 Scope: scoped verification of one change since round 4 (`git diff d38a65b~1`): `legal_undocumented_ln_gap` changed from a model-own judgment 0.15 (0.05-0.35) to the shared fact `@united_states.legal_status_ln_consumption_gain` (0.1, 0.04-0.25). The beneficiaries field was only reformatted.
 

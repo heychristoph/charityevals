@@ -1,7 +1,7 @@
 # Audit: bulletin-of-the-atomic-scientists-charityevals, round 5 (verification round)
 Result: 0.01615 daly/$ = 16.15 years of healthy life per 1,000 dollars (combined range 0.76-342), unchanged; cause median 1.576 (x10.25). Verdict: pass.
 Model-sha: f551575bbbc92cf5762c9dbd6471bc00362d52c31930c2ea68d215b256053201
-Rules: 0.1.0
+Rules: 0.1.1
 Scope: only the change in the `summary` line (the file's only change against main): the added sentence "It is more than ten times its peers because its nuclear coverage is valued at a typical nuclear project's cut per dollar, hundreds of times a typical AI misalignment project's, and most of its peers work on AI." The multiple is 10.25 against the median of all 25 catastrophic-risk models, just over the threshold; INV-15 (ranked peers only) shows no violation. The sentence sits between the nuclear-coverage description and "It is below the Arms Control Association, the Nuclear Threat Initiative and Ploughshares Fund", which does not contradict it (those are nuclear-only peers above the median).
 Mechanical: audit-model findings (0). normalization-audit INV-15 checked 247 models, 0 violations (generated/ restored with git checkout). Not re-run this round (scoped): check.ts, simulation-check. No file in generated/ was changed.
 

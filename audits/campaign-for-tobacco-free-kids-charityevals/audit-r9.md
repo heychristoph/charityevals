@@ -15,4 +15,4 @@ None.
 
 Verdict: pass
 Model-sha: 1b4f9df4a878a643ac07dc8d6565a7ba4c0896fd2a3c0bf6567a2d9aade6d843
-Rules: 0.1.0
+Rules: 0.1.1
