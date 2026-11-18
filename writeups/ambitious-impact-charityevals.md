@@ -46,11 +46,10 @@ Money raised = 9 charities × $1.8 million × 2.5 × the discounted waits × 60%
 
 - The charities' lifetime fundraising. The $107 million is Ambitious Impact's own count, and the multiple for the years to come is our judgment.
 - How much of each charity's existence it caused, which no study has measured.
-- The figures of its youngest charities, which are Ambitious Impact's own forecasts made before the charities ran.
 
 ### What isn't modelled
 
-- Its charities that the site doesn't model, such as LEEP (whose only model here is unpublished), FarmKind, Rahi Impact and Scale Welfare. They are valued at the average of their cause.
+- Its charities that the site doesn't model, such as LEEP (whose only model here is unpublished), FarmKind, Rahi Impact and Scale Welfare, and its youngest ones, whose only figure is an estimate from before they existed. They are valued at the average of their cause.
 
 ### How this model was checked
 
