@@ -1440,8 +1440,9 @@ side effects for the main chain (unchanged at the defaults). Each changed model 
 Animal laws, the same way: the fight against a federal override of state cage and crate laws keeps Proposition 12's
 cost (CDFA's analysis) in every model of it, with the judgments they share in facts/farm_animal_laws.json (the
 opposition's share of the risk, the share that would revert, the egg share, sows, one coalition pool) and THL's in
-facts/the_humane_league.json: the ASPCA's farm work 0.00004 → −0.0014. The puppy-mill laws, the UK dog import law and
-Animal Policy International's proposed import ban have no analysis giving a cost (one explainer line each).
+facts/the_humane_league.json: the ASPCA's farm work 0.00004 → −0.0014. The puppy-mill laws and the UK dog import law have
+no analysis giving a cost (one explainer line each); Animal Policy International's import rules carry the EU cage-free
+egg-import cost (facts/compliance_costs.json).
 ### 2.22 Net harm shows as a negative result (15 Nov 2026)
 
 Owner: "negative is allowed". A model whose honest result is net harm keeps a headline below zero; the lint

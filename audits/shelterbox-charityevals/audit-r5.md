@@ -13,7 +13,7 @@ None.
 
 Verdict: pass
 Model-sha: 24ac6819004cd13e7f6b74e1f9052b3f3106f631907af47382207187ced4afe1
-Rules: 0.2.0
+Rules: 0.2.1
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 

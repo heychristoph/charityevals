@@ -2,7 +2,7 @@
 
 Result: 2.110e-6 daly/$ = 0.002110 years of healthy life per $1,000 (combined range 4.1e-4 – 0.0108; joint low–high on the model's own ranges 8.4e-5 – 0.047); cause median 0.3585 (×0.0059). Verdict: pass.
 Model-sha: d768fb055c6d048b585faabc8e652ef56c06964e208e12da30318fe63b2fe9ee
-Rules: 0.2.0
+Rules: 0.2.1
 
 Scope: only the changes in commit 4cfb259 (model rows, write-up). Mechanical: audit-model.ts gives 0 high / 0 medium / 5 low, the same five as round 3 (evidence_adj diagnostic, three unused context rows, far-below with its explanation in the summary). The result moved from 2.111e-6 to 2.110e-6 daly/$ (under 0.1%), as expected from adding `wait_discount` to a branch worth about 4%. generated/ untouched (git status clean apart from this file).
 

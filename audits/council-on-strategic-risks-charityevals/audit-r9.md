@@ -19,4 +19,4 @@
 
 Verdict: pass
 Model-sha: 51a09e87c2b37e762f5791653cd1f090a8b1934c65565959e94b4366ccd434fe
-Rules: 0.2.0
+Rules: 0.2.1

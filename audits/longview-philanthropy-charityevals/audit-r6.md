@@ -1,7 +1,7 @@
 # Audit: longview-philanthropy-charityevals, round 6 (scoped verification)
 Result: 4.907e-4 uov/$ = 0.2453 years of healthy life per 1,000 dollars (was 0.2788; -12%). Combined range not re-run (scoped round). Verdict: pass.
 Model-sha: 95c4e79764edaedcf3114f52b2c90b90064ea2d9733292bc89be4b6b696b5fbe
-Rules: 0.2.0
+Rules: 0.2.1
 Scope: rule theoretical-cause-aggregates only (commit 65635d2e; inventory/rule-changes/theoretical-cause-aggregates.md). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 5.
 Previous round: round 5's findings stay as they were; this round adds none to the model.

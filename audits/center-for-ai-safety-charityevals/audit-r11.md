@@ -1,7 +1,7 @@
 # Audit: center-for-ai-safety-charityevals, round 11 (scoped verification of round 10's fixes)
 Result: 0.01307 daly/$ = 13.07 years of healthy life per 1,000 dollars at mobiliser_share 100% (round 10 predicted about 13.1). Verdict: pass.
 Model-sha: 7ab280d06fdf2d084e1ca7763ddd217acd550cadbd249ffc30f9c0e11683e78d
-Rules: 0.2.0
+Rules: 0.2.1
 Scope: only round 10's findings and the rows changed for them.
 Preflight: pass (low range lines and the out-of-date distributions line only).
 Previous round: finding 1 (medium) resolved; findings 2 and 3 (low) resolved.
