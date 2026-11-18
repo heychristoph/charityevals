@@ -31,6 +31,7 @@ const manifestPath = join(root, "generated/logos.json");
 
 const SIZE = 128; // output edge, px: over 3x the largest (40px) display
 const MIN_PX = 48; // smallest source edge worth showing
+const MIN_SOURCE_PX = 32; // a hand-picked --source: a site's own 32px favicon still shows sharp at the rankings' 32px
 const MAX_BYTES = 20 * 1024; // per output file
 const MAX_DOWNLOAD = 3 * 1024 * 1024;
 const TIMEOUT_MS = 15_000;
@@ -340,7 +341,7 @@ async function logoFromSource(c: { id: string }, url: string): Promise<{ entry: 
   const res = await get(url, "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8");
   const dec = await decode(res.body, res.type, res.url, 7);
   if (!dec) return { error: `could not decode ${url}, or its shape is beyond 7:1` };
-  if (dec.px !== "svg" && dec.px < MIN_PX) return { error: `image is only ${dec.px}px (${url})` };
+  if (dec.px !== "svg" && dec.px < MIN_SOURCE_PX) return { error: `image is only ${dec.px}px (${url})` };
   const colour = backgrounds.get(c.id);
   const data = colour ? await encodeOnColour(dec.img, colour) : await encode(dec.img);
   return {
