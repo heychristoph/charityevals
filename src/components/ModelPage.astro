@@ -11,6 +11,8 @@ import WholeCharity, { Locations } from "./WholeCharity.tsx";
 import ModelReuse from "./ModelReuse.astro";
 import { plainModelName } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf } from "../lib/data";
+import { similarTo } from "../lib/similar";
+import { auditOf, latestRules } from "../lib/audits";
 import { repo } from "../lib/site";
 import { modelMeta, modelSchema } from "../lib/seo";
 import { modelsOf, currentModelsOf } from "../engine/model";
@@ -84,6 +86,9 @@ const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, cha
 const whole = parts.length > 1;
 // One programme funded in several locations: its combined figure above the model (WholeCharity: Locations).
 const located = parts.length === 1 && locationsOf(lib, parts[0].model).length > 1;
+// A few charities doing similar work, to explore from (names only: src/lib/similar.ts).
+const similar = similarTo(lib, primaryOf, charity.id).map((id) => ({ name: lib.charities.get(id)!.name, url: modelUrl(lib, primaryOf(lib, id)!) }));
+const audit = auditOf(model.id);
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
 
@@ -175,6 +180,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         )}
         <p class="m-links small">
           <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
+              {audit && <> · <a href={`${repo}/blob/main/${audit.path}`} data-track-kind="audit">Audit</a>{audit.rules && <>, <a href="/changelog">rules {audit.rules}</a>{audit.behind && <span class="muted"> (latest {latestRules})</span>}</>}</>}
           <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
         </p>
         </>
@@ -191,6 +197,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             <p class="m-links">
               {model.source?.sheet && <><a href={model.source.sheet} data-track-kind="spreadsheet">Spreadsheet</a> · </>}
               <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
+              {audit && <> · <a href={`${repo}/blob/main/${audit.path}`} data-track-kind="audit">Audit</a>{audit.rules && <>, <a href="/changelog">rules {audit.rules}</a>{audit.behind && <span class="muted"> (latest {latestRules})</span>}</>}</>}
               <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
             </p>
           </Fragment>
@@ -215,6 +222,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             <p class="m-links">
               {model.source?.sheet && <><a href={model.source.sheet} data-track-kind="spreadsheet">Spreadsheet</a> · </>}
               <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
+              {audit && <> · <a href={`${repo}/blob/main/${audit.path}`} data-track-kind="audit">Audit</a>{audit.rules && <>, <a href="/changelog">rules {audit.rules}</a>{audit.behind && <span class="muted"> (latest {latestRules})</span>}</>}</>}
               <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
             </p>
           </Fragment>
@@ -246,6 +254,12 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
             </div>
           ))}
         </details>
+      )}
+      {similar.length > 0 && (
+        <nav class="similar" aria-labelledby="similar-title">
+          <h2 id="similar-title">Similar charities</h2>
+          <ul>{similar.map((s) => <li><a href={s.url} data-track-kind="similar">{s.name}</a></li>)}</ul>
+        </nav>
       )}
     </div>
     <aside class="side" aria-label="Assumptions">
@@ -476,6 +490,24 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
      above a group's heading than between the heading and its list. */
   .resources > p {
     margin: var(--s2) 0 var(--s4);
+  }
+  .similar {
+    margin-top: var(--s6);
+    padding-top: var(--s5);
+    border-top: 1px solid var(--rule);
+  }
+  .similar h2 {
+    font-size: 17px;
+    margin: 0 0 var(--s2);
+  }
+  .similar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s2) var(--s4);
+    font-size: 15px;
   }
   .res-group + .res-group {
     margin-top: var(--s5);
