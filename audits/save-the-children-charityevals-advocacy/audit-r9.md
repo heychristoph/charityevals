@@ -11,6 +11,6 @@ No findings.
 
 Verdict: pass
 Model-sha: a50b0bd5f26c159f41d52d970e547ea8fa7e67fde31dfca54e3980d8a06bb659
-Rules: 0.3.4
+Rules: 0.3.5
 
 Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.

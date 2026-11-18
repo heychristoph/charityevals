@@ -25,7 +25,7 @@ Unchanged: missing_data_discount, uov_per_daly, relief_counterfactual_adj, affec
 
 Verdict: pass
 Model-sha: 7247e37d449eea7164779abef2975725a18ed762d9744acbebee0da6dc78a825
-Rules: 0.3.4
+Rules: 0.3.5
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 

@@ -2,7 +2,7 @@
 Result: 0.0967 years of healthy life per $1,000 at mobiliser_share 100% (0.0953 in round 7).
 Verdict: pass
 Model-sha: 9677c62a15a83ce5a027e33f477bf3b5344adea4b8ea30c83a14c5fae21300fd
-Rules: 0.3.4
+Rules: 0.3.5
 
 Scope: round 7's one low finding, b_movement_credit, and the text that follows.
 

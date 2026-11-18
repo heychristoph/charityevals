@@ -2,7 +2,7 @@
 
 Result: 1.981e-5 wellby/$ = 0.001293 years of healthy life per $1,000 (combined range 2.98e-4 – 5.61e-3); cause median 0.3585 (×0.0036). Verdict: pass.
 Model-sha: 91ef3fc2e9f4cbaae6b533eaf0a6f1dee83fdcf6b693cdb1df5248ede93d3f5e
-Rules: 0.3.4
+Rules: 0.3.5
 
 Scope: unchanged and right (whole US network, fiscal 2024, programme services $201.4M, 16,295 wishes). Round 3 checks only the seven changes made after round 2.
 

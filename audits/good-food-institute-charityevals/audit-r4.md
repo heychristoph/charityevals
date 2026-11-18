@@ -21,7 +21,7 @@ Checks: (3) summary, model summary and write-up headline read 0.0016 against the
 
 Verdict: pass (no high findings; no medium; no low).
 Model-sha: 5b74d4da734669fb0c78548d39fd6e27689f7417ce1d71ef6fb73dbb4559a753
-Rules: 0.3.4
+Rules: 0.3.5
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 1a9667aa.

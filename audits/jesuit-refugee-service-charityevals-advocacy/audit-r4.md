@@ -2,7 +2,7 @@
 Re-stamped: `destination_reads` added for the shared moved-money rows (GiveWell's four top charities and the GiveDirectly prior, read as destinations at their figures on the rankings, docs/normalization.md 2.12); no formula or value changed and the result is unchanged (the money-moved branch is 0 here), so round 3's pass stands.
 Verdict: pass
 Model-sha: 94fed9234f23833d1eb90cf7ff27b70f58b35eaac45815549b89a7bdff359df8
-Rules: 0.3.4
+Rules: 0.3.5
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
