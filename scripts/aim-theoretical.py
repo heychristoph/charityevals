@@ -22,6 +22,7 @@ REMOVE = {
     "fortify-health-aim": OTHER.format("GiveWell's Fortify Health models and HLI's fortify-health-hli"),
     "healthy-futures-aim": OTHER.format("GiveWell, healthy-futures-phl-based-on-updated-23-feb-2026"),
     "lead-exposure-elimination-project-aim": OTHER.format("charityevals, lead-exposure-elimination-project-charityevals"),
+    "novah-aim": OTHER.format("charityevals, novah-charityevals"),
     "learning-alliance-aim": OTHER.format("charityevals, learning-alliance-charityevals"),
     "notify-health-aim": OTHER.format("GiveWell, notify-health-sms-feb-2025"),
     "spiro-aim": OTHER.format("GiveWell, spiro-community-based-tb-hcm-april-2025"),
@@ -65,8 +66,6 @@ KEEP = {
         "Lead Research for Action runs studies of lead in consumer products in Malawi and Kenya; AIM modelled West Africa."),
     "neev-aim": ("https://neev.earth",
         "Neev trains brick kiln owners in India's brick belt in better firing practice to cut coal use and air pollution."),
-    "novah-aim": ("https://novah.ngo",
-        "Novah broadcasts radio drama to prevent intimate partner violence in Rwanda, under an RCT; AIM modelled radio and TV in Angola."),
     "opal-health-aim": ("https://opalhealthafrica.org",
         "Opal Health trains government health workers in Uganda to run participatory learning and action sessions for pregnant women; AIM modelled Sierra Leone."),
     "oxygen-access-project-aim": ("https://www.oxygenaccessproject.org",
@@ -96,9 +95,11 @@ def main():
     for mid, (url, quote) in KEEP.items():
         p = DIR / f"{mid}.json"
         m = json.loads(p.read_text())
-        m["theoretical"] = {"reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
-                            "runs": quote, "url": url, "checked": "2026-10-31"}
-        p.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
+        flag = {"reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
+                "runs": quote, "url": url, "checked": "2026-10-31"}
+        if m.get("theoretical") != flag:  # only a real change rewrites the file (and its formatting)
+            m["theoretical"] = flag
+            p.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
         for e in inv:
             if e.get("model_id") == mid:
                 e["status"] = "imported"
