@@ -392,17 +392,32 @@ def later_benefits(files, log):
     `<id>_at_shared_values` beside it that every reader of the figure now reads (the sheet's figure in
     `published`, so the evaluator view reproduces); a side-effect tag moves to the new row."""
     changed = set()
+    tok = re.compile(r"(?<![@$.\w])[A-Za-z_]\w*")
     for p, m, ind in files:
         rows = m["rows"]
+        by = {r["id"]: r for r in rows}
+        deps = {r["id"]: {t for t in tok.findall(r.get("formula", "")) if t in by and t != r["id"]} for r in rows}
+
+        def upstream(i):
+            seen, stack = set(), list(deps.get(i, ()))
+            while stack:
+                d = stack.pop()
+                if d not in seen:
+                    seen.add(d); stack.extend(deps.get(d, ()))
+            return seen
+
+        def hit(rule, r):
+            return (re.search(rule["label"], r.get("label", ""), re.I) and not (rule.get("leaf") and "value" not in r)
+                    and not (rule.get("not_section") and re.search(rule["not_section"], r.get("section") or ""))
+                    and not (rule.get("models") and not re.search(rule["models"], m["id"])))
+        # Every matched row before any change: one built from another (a copy, a sum of countries' figures,
+        # a figure per child from one per treatment-year) is rescaled through it, never twice; so is one that
+        # already moves with the discount rate.
+        matched = {r["id"] for r in rows for rule in LATER_RULES if hit(rule, r)}
         for rule in LATER_RULES:
-            if rule.get("models") and not re.search(rule["models"], m["id"]): continue
-            hits = [r for r in rows if re.search(rule["label"], r.get("label", ""), re.I)]
-            ids = {r["id"] for r in hits}
-            for leaf in hits:
-                if rule.get("leaf") and "value" not in leaf: continue
-                # A copy of a matched row (`x = x_2`) is rescaled through the row it copies, not twice.
-                if any(t in ids and t != leaf["id"] for t in re.findall(r"(?<![@$.\w])[A-Za-z_]\w*", leaf.get("formula", ""))): continue
-                if rule.get("not_section") and re.search(rule["not_section"], leaf.get("section") or ""): continue
+            for leaf in [r for r in rows if hit(rule, r)]:
+                up = upstream(leaf["id"])
+                if up & matched or any(u.endswith("_at_shared_values") or "$discount_rate" in by[u].get("formula", "") for u in up) or "$discount_rate" in leaf.get("formula", ""): continue
                 new_id = f"{leaf['id']}_at_shared_values"
                 if any(r["id"] == new_id for r in rows): continue
                 pub = best(leaf.get("published", leaf.get("expected", leaf.get("value"))))
