@@ -1,7 +1,7 @@
 # Audit: redwood-research-charityevals, round 7 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 6.847e-5 daly/$ = 0.0685 years of healthy life per 1,000 dollars (simulation 5%-95%: 0.0046-0.655; audit-model's combined range is far wider); cause median 0.958 (x0.071). Verdict: pass.
 Model-sha: e42d42d957f732913bd32fb0278982f09c580ae39ae0513f65e5beeab7253ff2
-Rules: 0.3.0
+Rules: 0.3.1
 Scope: unchanged; scoped to the two merged changes, both present and consistent.
 Mechanical: lint 0 high / 0 medium (four range lows, two unused lows, far-below low whose reason the summary gives); invariants none; normalization-audit none (full run, 0 violations; generated output restored); check.ts passes; simulation-check stable (5% 0.067, 95% 9.57 x best guess).
 Previous round: round 6 had no open findings.

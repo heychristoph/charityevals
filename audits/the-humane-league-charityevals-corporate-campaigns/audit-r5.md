@@ -1,7 +1,7 @@
 # Verification round (scoped)
 Result: 3.213 ced/$ = 0.000353451 years of healthy life per $1,000 (was 0.000350880). Verdict: **pass**
 Model-sha: 10800bc0f86924c96a30df4dca0d463e0728f3582420333c8a82af225489acac
-Rules: 0.3.0
+Rules: 0.3.1
 Scope: the stock deduction (member_switches_in_count replaces owaacc_hens), uk_switches_in_count read from facts/the_humane_league.json, the new facts file, the write-up's double-counting bullet and summary.
 Mechanical: audit-model 0 findings; scripts/check.ts "all models valid".
 

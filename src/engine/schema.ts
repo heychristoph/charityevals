@@ -179,7 +179,9 @@ export const Charity = z
     donate_via: z.string().optional(),
     summary: z.string().optional(),
     resources: z.array(Resource).default([]),
-    /** What the charity spends on its programmes, from its accounts: the total its lines are part of. */
+    /** What the charity spends on its programmes in a year: from its accounts, or, for a charity without
+     * published accounts, the annual programme cost its evaluator's model is built on (named in `source`).
+     * Never an average or a guess. The total its lines are part of. */
     spending: z
       .object({
         /** Programme expenses (no fundraising or management), in USD, for the year named. */
