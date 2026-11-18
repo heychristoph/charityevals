@@ -13,9 +13,14 @@ the evaluator view still reproduces the sheet. A row whose number equals the sha
 vintages becomes a dated fact.
 
 It also values long-term income the way AMF and SMC do in sheets that state it as a fixed ratio of the
-value of deaths (`ratio_income`), and is safe to run again: a linked row is a formula and is skipped.
+value of deaths (`ratio_income`), rescales the other later-years benefits GiveWell types in at its 4%
+(development effects per SMC treatment-year, deworming's ln(consumption), development shares:
+`later_benefits`) to your discount rate, and is safe to run again: a linked row is a formula and is skipped.
 """
-import json, re, glob, math
+import json, re, glob, math, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from keep_json import dumps_like
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -262,10 +267,11 @@ def main():
                     FX_FILE.write_text(json.dumps(fx, indent=2, ensure_ascii=False) + "\n")
     ratio_income(files, log)
     deworming_multiples(files, log)
+    later_benefits(files, log)
     policy_years(files, log)
     mixed_counterfactual(files, log)
     for p, m, ind in files:
-        p.write_text(json.dumps(m, indent=ind, ensure_ascii=False) + "\n")
+        p.write_text(dumps_like(m, p.read_text(), ind))
     FACT_FILE.write_text(json.dumps({"id": "givewell_shared", "label": "GiveWell's house constants (one figure for every GiveWell model)", "rows": facts}, indent=2, ensure_ascii=False) + "\n")
     GBD_FILE.write_text(json.dumps({"id": "gbd_disability_weights", "label": "GBD 2019 disability weights", "rows": gbd}, indent=2, ensure_ascii=False) + "\n")
     print("\n".join(log))
@@ -336,6 +342,90 @@ def deworming_multiples(files, log):
         native["formula"] = f"({native['formula']}) * deworming_value_at_shared_values"
         rows.insert(rows.index(native), new)
         log.append(f"deworm  {m['id']}:{nat} x deworming_value_at_shared_values")
+
+
+def disc(basis):
+    """Present value of GiveWell's later income gains at your discount rate over the same at its 4%: 40 years of
+    gains starting `years_until_income_benefits_<basis>` years on. 1 at the defaults."""
+    y = f"@givewell_shared.years_until_income_benefits_{basis}"
+    return (f"pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ {y}"
+            f" / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ {y})")
+
+
+# Figures GiveWell types in for benefits that come years later (children's income as adults, development
+# effects), computed in another of its CEAs at its own values: 4% discounting, 1/ln 2 units of value per unit
+# of ln(consumption), its weight on a death. Each rule: a label pattern, what the figure is, and whose
+# timing it carries (`years_until_income_benefits_<basis>`):
+#   uov    units of value (development effects per SMC treatment-year): × the discount ratio × the income slider;
+#   ln     ln(consumption), or a share of a consumption gain (valued by the model's own rows): × the discount ratio;
+#   ratio  a share of the value of deaths averted: × the discount ratio × the income slider ÷ the weight on a life;
+#   share  a share of all benefits, the rest from deaths: its ratio to the rest rescaled as `ratio`.
+LATER_RULES = [
+    dict(label=r"^(overall )?units of value (per child treated )?(from|for|generated from) (development effects|long-term income increases) per treatment[- ]year (of|from|for people under age 15 receiving) (smc|seasonal malaria chemoprevention)", kind="uov", basis="smc",
+         what="units of value from development effects per child-year of SMC, from GiveWell's SMC CEA: income gains from 12.5 years on, discounted at 4% and valued at 1/ln 2"),
+    dict(label=r"^units of value from development (effects|benefits) per (counterfactually )?vaccinated infant", kind="uov", basis="malaria",
+         what="units of value from a vaccinated infant's later income, from GiveWell's New Incentives CEA: income gains from about 10 years on, discounted at 4% and valued at 1/ln 2"),
+    dict(label=r"^adjusted long-term benefits per year of deworming per person", kind="ln", basis="deworming",
+         what="the present value of a year of deworming's later income gains in ln(consumption), from GiveWell's deworming CEA: gains from 8 years on, discounted at 4%"),
+    dict(label=r"^present value of lifetime benefits from reducing prevalence from 1 to 0", kind="ln", basis="malaria", leaf=True,
+         what="the present value of the later income gains from a year without malaria in childhood, in ln(consumption), from GiveWell's AMF CEA: gains from 10 years on, discounted at 4%"),
+    dict(label=r"^developmental effects$", kind="ln", basis="malaria", models=r"^givedirectly$",
+         what="GiveWell's +5% for cash's effects on children's development, a share of the transfer's consumption value, counting income they earn as adults, discounted at 4%"),
+    dict(label=r"^(size of the developmental effect, as a proportion of the mortality effect|adjustment to account for developmental benefits \(long-term income increases\)|developmental benefits are what percent of under-5 mortality|developmental benefits raise benefits by what percentage|adjustment for developmental effects \(best guess|child disability averted and development effects$|supplemental intervention-level adjustments: developmental effects)",
+         kind="ratio", basis="malaria", not_section=r"^givedirectly$",
+         what="development effects as a share of the value of the deaths averted, at GiveWell's values: children's income as adults from about 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death"),
+    dict(label=r"^(estimated percentage of total benefits of treatment that come from development effects|development benefits as a % of overall benefits|developmental benefits \(long-term income increases\))", kind="share", basis="malaria", leaf=True,
+         what="development effects as a share of all the programme's benefits, the rest from deaths averted, at GiveWell's values: children's income as adults from about 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death"),
+]
+INCOME = " * $uov_per_ln_consumption * ln(2)"
+
+
+def later_scale(kind, basis, x):
+    k = disc(basis) + ("" if kind == "ln" else INCOME) + (" / $life_value_multiplier" if kind in ("ratio", "share") else "")
+    if kind == "share":
+        return f"{x} * {k} / (1 - {x} + {x} * {k})"
+    return f"{x} * {k}"
+
+
+def later_benefits(files, log):
+    """Our view discounts benefits that come years later at your rate: each figure a rule above matches gets a row
+    `<id>_at_shared_values` beside it that every reader of the figure now reads (the sheet's figure in
+    `published`, so the evaluator view reproduces); a side-effect tag moves to the new row."""
+    changed = set()
+    for p, m, ind in files:
+        rows = m["rows"]
+        for rule in LATER_RULES:
+            if rule.get("models") and not re.search(rule["models"], m["id"]): continue
+            hits = [r for r in rows if re.search(rule["label"], r.get("label", ""), re.I)]
+            ids = {r["id"] for r in hits}
+            for leaf in hits:
+                if rule.get("leaf") and "value" not in leaf: continue
+                # A copy of a matched row (`x = x_2`) is rescaled through the row it copies, not twice.
+                if any(t in ids and t != leaf["id"] for t in re.findall(r"(?<![@$.\w])[A-Za-z_]\w*", leaf.get("formula", ""))): continue
+                if rule.get("not_section") and re.search(rule["not_section"], leaf.get("section") or ""): continue
+                new_id = f"{leaf['id']}_at_shared_values"
+                if any(r["id"] == new_id for r in rows): continue
+                pub = best(leaf.get("published", leaf.get("expected", leaf.get("value"))))
+                new = {"id": new_id, "label": f"{leaf['label']}, at your discount rate and values", "section": leaf.get("section"),
+                       "formula": later_scale(rule["kind"], rule["basis"], leaf["id"]), **({"published": pub} if pub is not None else {}),
+                       "format": leaf.get("format", "number"),
+                       "explainer": (f"Changed for consistency. The sheet's figure is {rule['what']}. Typed in as a number, it ignored your discount rate"
+                                     + ("" if rule["kind"] == "ln" else " and the income slider") + (", and grew with the weight on a life" if rule["kind"] in ("ratio", "share") else "")
+                                     + ". Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%"
+                                     + ("" if rule["kind"] == "ln" else ", times the income slider over 1/ln 2") + (", divided by the weight on a life (the value of deaths it is set against already carries it)" if rule["kind"] in ("ratio", "share") else "")
+                                     + (", applied to its ratio to the rest of the benefits" if rule["kind"] == "share" else "")
+                                     + ". At the defaults it is the sheet's figure; the evaluator view keeps it.")}
+                if leaf.get("side_effect"):
+                    new["side_effect"] = leaf.pop("side_effect")
+                rx = re.compile(r"(?<![\w.@$#])" + re.escape(leaf["id"]) + r"(?!\w)")
+                n = 0
+                for r in rows:
+                    if r is leaf or "formula" not in r or not rx.search(r["formula"]): continue
+                    r["formula"] = rx.sub(new_id, r["formula"]); n += 1
+                rows.insert(rows.index(leaf) + 1, new)
+                changed.add(m["id"])
+                log.append(f"later   {m['id']}:{leaf['id']} -> {new_id} ({rule['kind']}, {rule['basis']}; {n} readers)")
+    return changed
 
 
 POLICY_MODELS = ["vital-strategies-model", "vital-strategies-botec-breakeven", "centre-for-pesticide-suicide-prevention-cpsp-skeleton"]

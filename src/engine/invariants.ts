@@ -310,6 +310,14 @@ export function inv3(lib: Library): InvariantReport {
           violations.push({ inv: "INV-3", model: m.id, where: r2.id, detail: !path.has(r2.id) ? `${r2.id} doesn't feed the output` : `${r2.id} isn't the standard template for version ${v}: ${r2.formula}` });
       }
     }
+    // Days of pain built from SADs: SADs carry a species weight of their version (1 for 2026), so the raw
+    // template (Rethink Priorities' range on top, toggle never read) only fits pain days counted directly.
+    for (const r of m.rows) {
+      if (!/^ced_/.test(r.id) || !path.has(r.id) || !r.formula || !r.factDeps.some((f) => f.startsWith("welfare_ranges.")) || r.assumptionDeps.includes("rp_species_weights")) continue;
+      const fromSads = [...upstream(m, r.id)].find((d) => d !== r.id && /\bsads?\b|suffering[- ]adjusted/i.test(`${m.byId.get(d)?.label ?? ""} ${d.replace(/_/g, " ")}`));
+      if (fromSads)
+        violations.push({ inv: "INV-3", model: m.id, where: `${r.id} rp switch`, detail: `${r.id} applies Rethink Priorities' welfare range to days built from SADs (${fromSads}) without the $rp_species_weights switch: take the AIM template, sads_<s> / @aim_sads.<s>_<v> * if($rp_species_weights, …)` });
+    }
     for (const r of m.rows)
       if (!/^ced_/.test(r.id) && r.factDeps.some(SPECIES_FACT))
         violations.push({ inv: "INV-3", model: m.id, where: `${r.id} species weight`, detail: `only ced_* rows may read species weights: ${r.formula}` });
@@ -589,6 +597,70 @@ export function inv9b(lib: Library, av = assumptionValues(lib.assumptions)): Inv
   return {
     id: "INV-9b", title: "Benefits over several years are discounted", status: "partial", checked: models.length, violations,
     how: "Every input row on the path to the output (variants: their overrides) whose label counts how long a benefit, change, coverage or flow of money lasts (years of change/impact/benefit/production/funding, number of years, duration of the effect) and is above 1 is moved ×1.25 in our view, once at a 0% discount rate and once at max(8%, twice the default): if the headline rises, and by the same factor at both rates, those years are added up at face value and must be discounted at $discount_rate. Heuristic on labels: years counted under other words aren't seen, and a frozen present value (a cached PV typed in as a number) isn't either.",
+  };
+}
+
+/** A row that states benefits that come years later: income gains in adult life, development effects, a
+ * present value of lifetime or future benefits. */
+export const LATER_BENEFIT = /\b(development(al)? (effects?|benefits?)|long[- ]term (income|benefits?|earnings|gains)|income (increases?|gains?) in later life|present value of (the )?(lifetime|future|all future)|lifetime (benefits?|income|earnings)|coming through income increases)\b/i;
+/** Rows that name a later benefit but count something else: who is counted, what it costs, a downside. */
+const NOT_LATER = /\bpercent(age)? of (the )?population\b|\btotal cost\b|\bdownside adjustment\b/i;
+/** GiveWell's ratio of later income to the value of deaths, at its own 4%: a later benefit whatever the row is called. */
+const LATER_FACT = "givewell_shared.income_to_mortality_value_ratio";
+
+/** INV-9c: later-years benefits move with the discount rate. A benefit that comes years later is worth
+ * less at a higher rate; a figure typed in at the evaluator's rate (GiveWell's 4%) stays at that rate
+ * unless the model rescales it (`*_at_shared_values`). Per origin row (a row on the path labelled as a
+ * later benefit that reads no other such row): moved ×1.1 at the default rate and at 1%, its part of our
+ * headline must differ between the two. */
+export function inv9c(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
+  const violations: Violation[] = [];
+  const low = { ...av, discount_rate: 0.01 };
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    let vals: Record<string, number>;
+    try { vals = compute(lib, m, av); } catch { continue; }
+    for (const r of ownRows(m)) {
+      const later = (x: ResolvedRow | undefined) => !!x && ((LATER_BENEFIT.test(x.label) && !NOT_LATER.test(x.label)) || x.factDeps.includes(LATER_FACT));
+      if (!path.has(r.id) || !later(r) || r.deps.some((d) => later(m.byId.get(d)))) continue;
+      const v = vals[r.id];
+      if (!Number.isFinite(v) || v === 0) continue;
+      const part = (a: Record<string, number>) => headline(lib, m, a, { [r.id]: v * 1.1 }) - headline(lib, m, a);
+      const p0 = part(av), p1 = part(low);
+      if (Number.isFinite(p0) && Math.abs(p0) > 1e-12 * Math.abs(headline(lib, m, av)) && close(p0, p1, 1e-9))
+        violations.push({ inv: "INV-9c", model: m.id, where: r.id, detail: `"${r.label}" = ${fmt(v)}: its part of our headline is the same at a ${fmt(av.discount_rate * 100)}% and a 1% discount rate, so a benefit that comes years later ignores $discount_rate; rescale it to the rate (an \`*_at_shared_values\` row: pv at $discount_rate over pv at the evaluator's rate)` });
+    }
+  }
+  return {
+    id: "INV-9c", title: "Later-years benefits move with the discount rate", status: "partial", checked: models.length, violations,
+    how: "Every row on the path to the output whose label states a later benefit (development effects or benefits, long-term income, earnings or gains, income increases in later life, a present value of lifetime or future benefits, the share coming through income increases; not population shares, costs or downsides), or that reads GiveWell's income-to-mortality ratio, and that reads no other such row is an origin. Moved ×1.1 in our view at the default discount rate and at 1%, its part of the headline must differ between the two: if it is the same, the figure was typed in at the evaluator's rate and ignores $discount_rate. Heuristic on labels: later benefits under other words aren't seen.",
+  };
+}
+
+/** A row that states effects beyond a programme's main chain, or a spillover to other people. */
+export const SIDE_EFFECT_LABEL = /\bexcluded effects?\b|\bspill-?overs?\b|\badditional (program(me)? )?benefits\b|\bsupplemental intervention-level adjustments?\b/i;
+const NOT_SIDE_EFFECT = /\bleverag\w*|\bfunging\b|\bcrowd(ed|ing)? (in|out)\b/i;
+
+/** INV-24: side-effect rows are tagged (docs/normalization.md 2.16). A row on the path named or labelled
+ * as excluded effects, spillovers, additional benefits or GiveWell's supplemental intervention-level
+ * adjustments carries `side_effect`, or reads a row that does (a total of tagged components); otherwise
+ * $side_effect_weight doesn't reach it. */
+export function inv24(lib: Library): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.output);
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    for (const r of ownRows(m)) {
+      const text = `${r.label} ${r.id.replace(/_/g, " ")}`;
+      if (!path.has(r.id) || r.side_effect || !SIDE_EFFECT_LABEL.test(text) || NOT_SIDE_EFFECT.test(text)) continue;
+      if ([...upstream(m, r.id)].some((d) => d !== r.id && m.byId.get(d)?.side_effect)) continue;
+      violations.push({ inv: "INV-24", model: m.id, where: r.id, detail: `"${r.label}" reads like a side effect but carries no side_effect tag and reads no tagged row, so $side_effect_weight doesn't reach it: tag it (\`added\` for an amount or share added, \`factor\` for a multiplier), or its components` });
+    }
+  }
+  return {
+    id: "INV-24", title: "Side-effect rows are tagged", status: "partial", checked: models.length, violations,
+    how: "Every row on the path to the output whose label or id names excluded effects, a spillover, additional benefits or GiveWell's supplemental intervention-level adjustments (not leverage, funging or crowding in) carries `side_effect` or reads, at any depth, a row that does. Heuristic on labels: side effects under other words aren't seen, and a total with one tagged component passes.",
   };
 }
 
