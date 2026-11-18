@@ -1,14 +1,14 @@
 import { lib } from "../lib/data";
 import { pickValue } from "../engine/model";
 import { useOverrides } from "../lib/assumption-state";
-import { CountrySelect, Slider, Toggle } from "./AssumptionsPanel";
+import { CountrySelect, Slider, Toggle, offered } from "./AssumptionsPanel";
 import "./assumptions.css";
 
 /** Some of Your values, live, where a page talks about them (the method page): the same controls as in
  * the panel, sharing its state, so moving one here moves it everywhere. */
 export default function Setting({ ids }: { ids: string[] }) {
   const overrides = useOverrides();
-  const rows = ids.map((id) => lib.assumptions.rows.find((r) => r.id === id)).filter((r) => r !== undefined);
+  const rows = ids.map((id) => lib.assumptions.rows.find((r) => r.id === id)).filter((r) => r !== undefined).filter((r) => offered(r, overrides));
   if (!rows.length) return null;
   return (
     <div className="assumptions compact setting-inline">

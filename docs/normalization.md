@@ -1283,7 +1283,7 @@ count. No unvalued lists.
 
 **How.** A row marked `side_effect` (`added`: an amount or share added to the result; `factor`: a
 multiplier) is read through the weight by every row that reads it: `$side_effect_weight × row`, or
-`1 + $side_effect_weight × (row − 1)` (src/engine/model.ts `withSideEffectWeight`). The row keeps its
+`1 + $side_effect_weight × (row − 1)` (src/engine/model.ts `withRowWeights`). The row keeps its
 own value, so an evaluator's sheet still reproduces, and the evaluator view counts it in full. A side
 effect computed from another is an error (it would be weighted twice).
 
@@ -1584,6 +1584,41 @@ empty). `$resource_shares` counts co-funders only: staff's
 forgone pay, volunteers, in-kind gifts, other philanthropic funders. A money mover's donors
 (`META_DONOR_COST_SHARE_FORMULA`, INV-12) and the governments and funders that carry out a technical-assistance
 or policy import's programme are under s, with their spending netted as in the default view, on or off.
+
+### 2.25 Lives that never start: one weight (18 November 2026)
+
+Owner decision (issue 33). Work that changes how many people or animals ever live was counted three ways:
+future generations after a catastrophe in full (2.19), animals never bred by their suffering only (2.4),
+births averted not at all. One rule now:
+
+- **Count, not identity.** The rule applies to a change in the number of lives. Better or longer lives for
+  the same number of individuals count in full as before (cage-free hens not yet hatched, climate deaths of
+  people not yet born).
+- **A life that never starts is worth `weight × good − suffering`.** The suffering in it always counts. Its
+  good counts times one slider, "Lives that never start count … %" (`$never_started_weight`, default 0%). For
+  a person the good is the healthy years of the life, discounted from its start. For an animal it is its
+  pain-free days times a second slider, "An animal's pain-free time counts as … % good"
+  (`$pain_free_time_good`, default 0%, one for every species, offered only while the first is above 0%), a
+  healthy day at the species' weight: research measures pain, not how good the rest is.
+- **Net-negative lives need no special case.** The sign comes out of the two terms: preventing a life is a
+  gain while its suffering outweighs its weighted good, and a loss once it does not (2.22).
+- **The discount rate is time preference only.** It still applies to every future year.
+- **Where it stops.** No sourced figure for the size or sign of a life's welfare is a row at 0 labelled "none
+  counted" (wild animals, insects). Biodiversity as such is not on the scale (issue 37).
+
+**How.** A row holding the good of lives that never start is marked `never_started`; every row that reads it
+reads `$never_started_weight × row` (src/engine/model.ts `withRowWeights`). With `side_effect: "added"` both
+weights apply (a second-order change in the number of lives, 2.16). A marked row computed from another marked
+row is an error. The row keeps its own value. The evaluator view counts none, unless the model pins the
+weight for an evaluator who counted them.
+
+**Why 0%.** Outside catastrophic risk it is what every model already assumed. The Long-run value set puts the
+weight at 100%.
+
+**Future generations** (rule never-started-weight): every model's `future_dalys_averted` is marked, in the
+catastrophic-risk family (2.19) and conservation's pandemic branch. At the default the future no longer
+counts, so 32 models fall, none by more than 15% (METR, Redwood Research and the Machine Intelligence
+Research Institute most): at the 4% discount rate the people alive now are most of an extinction's loss.
 
 ## 3. Invariants
 
@@ -1896,7 +1931,8 @@ Survey 2024), the anchor for how far below the mean a social service's clients c
 `@household_size.united_states` (2.4, BLS) and `@household_size.united_kingdom` (2.35, ONS 2024);
 `@welfare_ranges.dog_vs_chicken` and `cat_vs_chicken` (2.4). Shared assumption added:
 `$missing_data_discount` (2.12). A catastrophe's deaths (conservation's catastrophic-risk branch) are valued
-like every death, by age band × `$life_value_multiplier`. Future generations need no slider of their own:
+like every death, by age band × `$life_value_multiplier`. (Superseded 18 November 2026 by 2.25: future
+generations count times `$never_started_weight`.) Future generations need no slider of their own:
 the years of healthy life a catastrophe would take from every later year (`@catastrophe.world_population_long_run`,
 the UN's 2100 projection, × the share of the future lost) are discounted at `$discount_rate`, so the
 discount rate is how much they count; its floor is 0.1% (was 0), so an endless future stays finite

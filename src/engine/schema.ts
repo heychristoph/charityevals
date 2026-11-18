@@ -50,6 +50,9 @@ const rowShape = {
   /** Shared assumptions only: how the reader sets it, when not a slider. `country`: a list of countries,
    * the value an ISO 3166 numeric code (facts/countries.json), 0 for none. */
   control: z.enum(["country"]).optional(),
+  /** Shared assumptions only: the id of another assumption this one depends on. It is offered as a
+   * control only while that one is above 0, where it can change a result. */
+  shown_when: z.string().regex(/^[a-z][a-z0-9_]*$/).optional(),
   section: z.string().optional(),
   unit: z.string().optional(),
   format: Format.optional(),
@@ -77,10 +80,17 @@ const rowShape = {
   expected: z.number().optional(),
   /** A side effect: good or harm beyond the programme's main chain (spillovers to others, effects on
    * other outcomes, displacement, system effects). Every row that reads it reads it scaled by
-   * `$side_effect_weight` in our view (src/engine/model.ts withSideEffectWeight): `added`, an amount or
+   * `$side_effect_weight` in our view (src/engine/model.ts withRowWeights): `added`, an amount or
    * share added to the result, times the weight; `factor`, a multiplier, its excess over 1 times the
    * weight. The evaluator view counts it in full. */
   side_effect: z.enum(["added", "factor"]).optional(),
+  /** The good in lives that never start (docs/normalization.md 2.25): the healthy years or good days of
+   * people or animals the work adds or prevents (future generations, births averted, animals never
+   * bred), as an amount. Every row that reads it reads it times `$never_started_weight` in our view
+   * (src/engine/model.ts withRowWeights). The suffering in such lives is never marked: it always counts.
+   * With `side_effect: "added"` both weights apply. The evaluator view counts none, unless the model
+   * pins the weight (an evaluator who counted them). */
+  never_started: z.literal(true).optional(),
   /** What the row's range means (its low/high, or `range` on a calculated row): the share of the time the
    * true value lies inside it. Default 0.9; GiveWell's 25th–75th percentiles are 0.5. */
   interval: z.number().gt(0).lt(1).optional(),

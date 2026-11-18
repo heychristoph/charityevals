@@ -33,7 +33,9 @@ bridge applies the shared deaths per tonne, heat-death delay and value of a deat
 - `@moral_weights.*` by age band × `$life_value_multiplier` for catastrophe deaths: valued like every
   death, with no premium for their number. Future generations: the years a catastrophe would take
   from people not yet born (`future_share_lost`, 0 unless it shrinks or ends the future), discounted at
-  `$discount_rate` (`future_years_per_person`, the catastrophic-risk family's row).
+  `$discount_rate` (`future_years_per_person`, the catastrophic-risk family's row) and, as lives that
+  never start (`future_dalys_averted` is marked `never_started`), counted times `$never_started_weight`
+  (2.25).
 - `$uov_per_ln_consumption`, `@wellby_factors.wellbys_per_sd_year`, `@gbd_disability_weights.*`,
   `@welfare_ranges.*` (only in `ced_<s>`), `$discount_rate` on every year.
 
