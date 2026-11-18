@@ -13,7 +13,7 @@ Checks passed:
 
 Verdict: pass
 Model-sha: 283980e7dd8be9c3acf583c7b43f39f873ea10b3eb20ee8aae5cfa7aac97b50d
-Rules: 0.2.1
+Rules: 0.2.2
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)

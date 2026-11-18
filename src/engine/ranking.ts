@@ -272,6 +272,23 @@ function partsFigure(lib: Library, charity: string, parts: PlanPart[] | undefine
 }
 
 const causes = new WeakMap<Library, Map<string, [owner: string, charity: string][]>>();
+const medians = new WeakMap<Library, Map<string, number>>();
+
+/** A charity's weight in a mean over charities (`#spending:<charity>`): its programme spending in USD
+ * (`spending.programme`), or, where its record has none, the median of its cause's records. */
+export function spendingOf(lib: Library, charity: string): number {
+  const c = lib.charities.get(charity);
+  if (!c) return NaN;
+  if (c.spending?.programme) return c.spending.programme;
+  let cache = medians.get(lib);
+  if (!cache) medians.set(lib, (cache = new Map()));
+  if (!cache.has(c.cause)) {
+    const xs = [...lib.charities.values()].filter((x) => x.cause === c.cause && x.spending?.programme).map((x) => x.spending!.programme).sort((a, b) => a - b);
+    const mid = xs.length >> 1;
+    cache.set(c.cause, xs.length ? (xs.length % 2 ? xs[mid] : (xs[mid - 1] + xs[mid]) / 2) : NaN);
+  }
+  return cache.get(c.cause)!;
+}
 
 /** `#cause:x`: the charities on the rankings in cause (or area) x, each by its primary evaluator, the
  * figure the rankings show; money movers (`beneficiaries: "destinations"`) left out, and the reading

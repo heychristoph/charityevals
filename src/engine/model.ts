@@ -1,6 +1,6 @@
 import { parse, refs, evaluate, compile, type Compiled, type Env, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, Cause, type ModelFile, type RowPatch, type Range } from "./schema";
-import { causeFigure, causeModels, evaluatorFigure, evaluatorFigureModels } from "./ranking";
+import { causeFigure, causeModels, evaluatorFigure, evaluatorFigureModels, spendingOf } from "./ranking";
 import { byIso3 } from "./countries";
 import { MOBILISER_SHARE } from "./moved-money";
 
@@ -304,7 +304,7 @@ export function buildLibrary(
   // `#owner:charity`: a charity's figure from one evaluator, read through the models the rankings use;
   // `#cause:x`, the charities of a cause or area at theirs, the reader's own charity left out.
   const all: Library = { models: new Map([...(options.models ?? []), ...models]), charities, owners, assumptions, facts, errors: [] };
-  const targets = (d: string, reader?: string): string[] => (isCharityRef(d) || isCauseRef(d) ? refTargets(all, d, reader).map((t) => t.id) : [d]);
+  const targets = (d: string, reader?: string): string[] => (isSpendingRef(d) ? [] : isCharityRef(d) || isCauseRef(d) ? refTargets(all, d, reader).map((t) => t.id) : [d]);
   for (const m of models.values()) {
     // A reference read as a destination must be one the model reads; a money mover reads every one so.
     if (m.destination_reads?.length) {
@@ -316,6 +316,10 @@ export function buildLibrary(
   for (const m of models.values())
     for (const r of m.rows)
       for (const d of r.modelDeps) {
+        if (isSpendingRef(d)) {
+          if (!charities.has(d.slice(SPENDING_PREFIX.length))) errors.push(`${m.id}.${r.id}: unknown charity #${d}`);
+          continue;
+        }
         if (isCauseRef(d)) {
           const cause = d.slice(CAUSE_PREFIX.length);
           if (!(Cause.options as string[]).includes(cause) && ![...charities.values()].some((c) => c.area === cause)) errors.push(`${m.id}.${r.id}: unknown cause or area #${d}`);
@@ -350,16 +354,21 @@ export function modelDepsOf(m: ResolvedModel | undefined): string[] {
   return m ? [...new Set(m.rows.flatMap((r) => r.modelDeps ?? []))] : [];
 }
 
-/** `#cause:x`: the equal-weight mean of the ranked charities in a cause or area (ranking.ts causeFigure). */
+/** `#cause:x`: the ranked charities in a cause or area, combined (ranking.ts causeFigure). */
 export const CAUSE_PREFIX = "cause:";
 export const isCauseRef = (ref: string) => ref.startsWith(CAUSE_PREFIX);
+/** `#spending:<charity>`: the charity's weight in a mean over charities, its programme spending in USD
+ * (ranking.ts spendingOf); a number, not a model's result. */
+export const SPENDING_PREFIX = "spending:";
+export const isSpendingRef = (ref: string) => ref.startsWith(SPENDING_PREFIX);
 /** `#owner:charity`: a charity's figure from one evaluator (src/engine/ranking.ts evaluatorFigure). */
-export const isCharityRef = (ref: string) => ref.includes(":") && !isCauseRef(ref);
+export const isCharityRef = (ref: string) => ref.includes(":") && !isCauseRef(ref) && !isSpendingRef(ref);
 export const splitCharityRef = (ref: string) => ref.split(":") as [owner: string, charity: string];
 
 /** The models a reference reads: the model itself, or every model behind a charity's or a cause's figure.
  * `reader` is the reading model's charity, which a cause's figure leaves out. */
 export function refTargets(lib: Library, ref: string, reader?: string): ResolvedModel[] {
+  if (isSpendingRef(ref)) return [];
   if (isCauseRef(ref)) return causeModels(lib, ref.slice(CAUSE_PREFIX.length), reader);
   if (isCharityRef(ref)) return evaluatorFigureModels(lib, ...splitCharityRef(ref));
   const m = lib.models.get(ref);
@@ -401,6 +410,7 @@ export function modelResult(lib: Library, id: string, av: Record<string, number>
   const key = cause ? `${id}@${reader ?? ""}` : id;
   const hit = cache.get(key);
   if (hit !== undefined) return hit;
+  if (isSpendingRef(id)) return spendingOf(lib, id.slice(SPENDING_PREFIX.length));
   const m = cause || isCharityRef(id) ? undefined : lib.models.get(id);
   if ((!m && !cause && !isCharityRef(id)) || computing.has(key)) return NaN;
   computing.add(key);

@@ -1,7 +1,7 @@
 # Verification round (scoped)
 Result: -0.000428899 years of healthy life per $1,000 (ced per donor dollar -3.899). Verdict: **pass**.
 Model-sha: 97bee8689e49c3449bfe830c7662c538b0740a0a7c051a58fb2c79b10bf722a0
-Rules: 0.2.1
+Rules: 0.2.2
 Scope: only the mechanical round-5 changes (nine judgments moved into shared facts; one coalition pool with the grants' federal part in the denominator). audit-model.ts: 0 findings. check.ts: all models valid.
 
 Verdict: **pass**

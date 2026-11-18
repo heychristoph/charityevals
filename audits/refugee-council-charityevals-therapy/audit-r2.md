@@ -2,7 +2,7 @@
 Result: 4.023e-5 WELLBYs/$ = 0.002626 years of healthy life per $1,000 (combined range 0.00043-0.0161). Verdict: pass.
 Verdict: pass
 Model-sha: 43baf554f9003730531ffa493355ad3a5f8e535f2d1f3c0c9e5a8ea22f8a0740
-Rules: 0.2.1
+Rules: 0.2.2
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, summary gives the reason); simulation stable (5% 0.32, 95% 2.92 x best guess); normalization-audit printed no line for this model (generated/ reverted).
 
 Round-1 findings:

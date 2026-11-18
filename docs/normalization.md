@@ -733,6 +733,16 @@ left (no model moved: the causes read then held none; the animal cause, read sin
 unknown cause or area, an empty one and any cycle. Not changed: named recipients without shares
 (GiveWell's influenced money), CEARCH (GiveWell's Top Charities) and The Life You Can Save (its own split).
 
+*Why equal weights (decided 2026-11-18).* Money a meta charity moves goes towards the charities it rates best,
+so the cause's figure has to keep the top of the cause. Weighted by spending it becomes the mainstream mix
+(global health led by the Salvation Army and United Way, animal welfare by the ASPCA): 10 models fell, five
+below zero. The median and a 10% trimmed mean both drop the top (all three Rethink Priorities models below
+zero under either). So the mean stays equal-weight, a young net-harm charity included, as it counts like any
+other. Where money is spread over named charities in proportion to what they spend, a formula weighs them by
+`#spending:<charity>`, the charity's programme spending in USD (`spending.programme`; none on record: its
+cause's median; ranking.ts `spendingOf`): Ambitious Impact's average of the charities it launched, whose
+money each charity spends.
+
 | Model | Our view before → after | Evaluator view |
 |---|---|---|
 | Giving What We Can (ours) | 54.7 → 56.2 (catastrophic risk: 4 → 12 charities) | — |

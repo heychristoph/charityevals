@@ -1,7 +1,7 @@
 # Audit: novah-charityevals, round 2
 Result: 1.270e-4 uov/$ = 0.0635 years of healthy life per 1,000 dollars (combined range 0.0071–0.5677; joint low–high of the model's own ranges 8.73e-5–2.957); cause median about 0.117 (×0.54, from round 1's median). Verdict: pass.
 Model-sha: 7b06a540a61293559e64ac41abf629a84a7a2095745bc48be1908a8e1aff3111
-Rules: 0.2.1
+Rules: 0.2.2
 Scope: unchanged from round 1 (the Twubakane radio drama, all 2025 spending of $173,600, 2025's reach). Not re-audited; round 2 is a scoped verification.
 Preflight: pass (scratchpad/build/preflight-novah-r2.txt). Two lows, generated/distributions.json and generated/usage.json out of date, are refreshed by `npx tsx scripts/summaries.ts` before commit.
 Previous round: 
