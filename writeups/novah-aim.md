@@ -3,7 +3,7 @@ Ambitious Impact published one public model of this charity's work, in September
 
 | Model | By | Date | Years of healthy life per $1,000 | Cells reproduced |
 | --- | --- | --- | --- | --- |
-| [Novah: entertainment-led mass media to reduce intimate partner violence (Ambitious Impact, 2024 idea report)](/novah) | [AIM](/evaluators/ambitious-impact) | September 2023 | {{result}} | 588 |
+| [Novah: entertainment-led mass media to reduce intimate partner violence (Ambitious Impact, 2024 idea report)](/novah) | [AIM](/evaluators/ambitious-impact) | September 2023 | {{result}} | 590 |
 
 **Purely theoretical.** Ambitious Impact's estimate is of the idea, written before Novah existed, not of the charity's own results. It is shown because Novah runs the programme today ([checked October 2026](https://novah.ngo)) and no model of its actual work exists yet.
 
