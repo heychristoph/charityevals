@@ -16,5 +16,7 @@ Only the overlap change of docs/normalization.md 2.24 for the giving organisatio
 None.
 
 Verdict: pass
-Model-sha: dbd5143d60fc4fa19c24bfaf099ef66b02865512794dc855317670b859236e1c
+Model-sha: 99d57d502ebc15a023bd3fad79ace61df76c74b6ed3394157045cdd2012ca589
 Rules: 0.1.0
+
+Re-stamped (18 Nov 2026): two founded charities, LABRI and Lead Research for Action, are read at charityevals' new models of their actual work (#charityevals:), as the idea-stage estimates no longer rank once those exist; explainer count 13 → 11 idea-stage. Mechanical: headline 9.52 → 9.387 (−1.4%), 13 rows changed, against HEAD.
