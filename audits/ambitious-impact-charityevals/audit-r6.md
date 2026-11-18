@@ -16,5 +16,7 @@ Only the overlap change of docs/normalization.md 2.24 for the giving organisatio
 None.
 
 Verdict: pass
-Model-sha: dbd5143d60fc4fa19c24bfaf099ef66b02865512794dc855317670b859236e1c
+Model-sha: 8f0a2bb4e05047305821c004cb11c8bddd33061082199471edbdd8854fd2adb2
 Rules: 0.1.0
+
+Re-stamped (18 Nov 2026): NOVAH now has charityevals' own model (novah-charityevals), which the rankings show in place of Ambitious Impact's idea-stage estimate; value_destinations reads it (#charityevals:novah). Headline 9.52 → 9.35 (−1.7%). Mechanical: headline 9.52 → 9.354 (−1.7%), 13 rows changed, against HEAD.
