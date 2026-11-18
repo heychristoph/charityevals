@@ -84,8 +84,7 @@ for mid, p in sorted(paths.items()):
     if dumps_like(m, t) != t:
         # A file with hand-kept one-line fields deeper down: insert the tag line after the row's id line.
         assert mid not in SPLITS, p
-        lines = t.split("
-")
+        lines = t.split("\n")
         n = 0
         for form, ids in TAGS[mid].items():
             for i in ids:
@@ -94,8 +93,7 @@ for mid, p in sorted(paths.items()):
                 if lines[k[0] + 1].strip().startswith('"side_effect"'): continue
                 pad = lines[k[0]][: len(lines[k[0]]) - len(lines[k[0]].lstrip())]
                 lines.insert(k[0] + 1, f'{pad}"side_effect": "{form}",'); n += 1
-        out = "
-".join(lines)
+        out = "\n".join(lines)
         assert all(r.get("side_effect") == f for f, ids in TAGS[mid].items() for r in json.loads(out)["rows"] if r["id"] in ids)
         p.write_text(out)
         print(f"{mid}: {n} rows (text)")
