@@ -270,14 +270,15 @@ export function destinationSets(ids: Iterable<string>): Map<string, string[]> {
 }
 
 /** A `value_destinations` formula holds only the organisation's money by recipient or cause (`@meta.*`),
- * live results (`#id`, `#owner:charity`), the shared destination rows, `avg()`, 1 and arithmetic: no
+ * live results (`#id`, `#owner:charity`, weights `#spending:charity`), the shared destination rows, `avg()`,
+ * `wavg()`, 1 and arithmetic: no
  * typed value per dollar and no evaluator's multiplier. */
 export function isDestinationMix(formula: string | undefined): boolean {
   if (!formula || !/#[a-z]/.test(formula)) return false;
   const rest = formula
     .replace(/@meta\.[a-z0-9_]+/g, " ")
     .replace(/#[a-z0-9:-]+/g, " ")
-    .replace(/\b(value_global_health|value_livelihoods|avg)\b/g, " ")
+    .replace(/\b(value_global_health|value_livelihoods|avg|wavg)\b/g, " ")
     .replace(/\b1\b/g, " ");
   return /^[\s()+\-*/,]*$/.test(rest);
 }
