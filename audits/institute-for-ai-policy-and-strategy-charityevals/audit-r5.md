@@ -1,7 +1,7 @@
 # Audit: institute-for-ai-policy-and-strategy-charityevals, round 5 (verification round)
 Result: 0.007114 daly/$ = 7.114 years of healthy life per 1,000 dollars at mobiliser_share 100% (unchanged from round 4). Verdict: pass.
 Model-sha: 33c5d571dc419b73f77cb3a5603c57fbcd2bfea4a0a959e7b239c7312d920bba
-Rules: 0.3.10
+Rules: 0.3.11
 Scope: round 4's medium (stale `summary`) and low 2 (ai_attribution_share_shared wording). Preflight passes (distributions.json notice ignored). No value changed.
 
 | # | Round 4 finding | Status | Evidence |

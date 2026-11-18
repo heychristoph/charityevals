@@ -1,7 +1,7 @@
 # Audit: iodine-global-network-charityevals, round 6 (follow-up after wording fixes)
 Result: 0.006344 uov/$ = 3.17 years of healthy life per 1,000 dollars (combined range 0.094-107). Verdict: pass.
 Model-sha: e724713db6908f74314d10b28733b285750863963a14063ab7f36e4127fe09dd
-Rules: 0.3.10
+Rules: 0.3.11
 Scope: wording changes since round 5 only.
 Preflight: pass as in round 5 (not re-run; headline unchanged at 3.17176).
 Previous round: finding 1 (medium, summary quotes "about 2.4") resolved: the summary now reads "The result, about {{result}} years of healthy life per 1,000 dollars". Finding 2 (low, Davao partners unnamed) resolved: the explainer now says "its report names no other partner, and the rest allows for partners not named"; it reads correctly and adds no new factual claim.

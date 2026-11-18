@@ -1,7 +1,7 @@
 # Audit: cool-earth-charityevals, round 4 (verification of the round-3 fix)
 Result: 1.099e-4 daly/$ = 0.110 years of healthy life per 1,000 dollars (unchanged). Verdict: pass (no findings).
 Model-sha: 463156733cef2904e910e508b529111afc2f325c0aa63a8a778202833a4d48cc
-Rules: 0.3.10
+Rules: 0.3.11
 Mechanical: `scripts/audit-model.ts` reports 0 findings.
 
 ## Findings (0)

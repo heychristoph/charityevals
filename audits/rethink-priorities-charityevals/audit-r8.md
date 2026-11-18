@@ -1,7 +1,7 @@
 # Audit: rethink-priorities-charityevals, round 8 (scoped verification)
 Result: 0.000007386 years of healthy life per $1,000 (uov_per_donor_dollar 1.477e-8; was 0.000007276, +1.5%). Combined range not re-run (scoped round). Verdict: pass.
 Model-sha: 70c763acd1e6c144fc38cd0d0e49cf76cb85871db7c8b2116de763fb327ba89e
-Rules: 0.3.10
+Rules: 0.3.11
 Scope: rule pain-default-10h only (inventory/rule-changes/pain-default-10h.md): `daly_per_sad` 0.0011 to 0.0011416 (9.6 to 10 hours of healthy life per day of disabling pain; assumptions/default.json). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 7.
 Previous round: round 7 had no open high or medium finding; this round adds none.

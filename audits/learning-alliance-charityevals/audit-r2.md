@@ -1,7 +1,7 @@
 # Audit: learning-alliance-charityevals, round 2
 Result: 0.03881 uov/$ = 19.40 years of healthy life per 1,000 dollars (combined range 1.52–247.5); cause median 0.1169 (×166). Verdict: pass.
 Model-sha: c8de47d2aae10719a0649679cb2f2e0398bde24e95bb667a0c5a2c59fa291add
-Rules: 0.3.10
+Rules: 0.3.11
 Scope: unchanged from round 1 (one programme, calendar 2025, $240,000 all-in, over 20,000 pupils, 75 schools in Iganga District). Scoped verification: round 1's one medium and the changes made for it, plus any new high or medium those changes introduced. No full re-audit.
 Preflight: pass (la-preflight2.txt; no blocking lines).
 Previous round: finding 1 (medium, decoding_weight / learning_gain_sd): resolved. Findings 2–7 (low) were the builder's; each was also checked and is applied (below), none re-opens the round.

@@ -1,7 +1,7 @@
 # Audit: far-ai-charityevals, round 6 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 9.578e-4 daly/$ = 0.9578 years of healthy life per 1,000 dollars (combined range 0.0195–47.0); cause median 0.0733 (×13.1). Verdict: pass.
 Model-sha: cd1861311d06119c459cdbc333e7ce9f5e773e080d71efe837808effabae5c3e
-Rules: 0.3.10
+Rules: 0.3.11
 Scope: unchanged from round 3 (all four programmes, 2024); this round checks that the two changes verified on separate branches (round 4: COVID-scale death ages; round 5: `leverage_funging_adj` = 1) are both present in the merged model and consistent with each other.
 Mechanical: audit-model lint no high or medium; invariants none (INV-15 included); normalization-audit none (full run, "all models valid", 0 violations); `scripts/check.ts far-ai-charityevals` passes.
 Previous round: rounds 4 and 5 had no open findings; both changes are present.
