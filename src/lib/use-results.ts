@@ -62,14 +62,17 @@ export type CharityResult = {
   high: number;
 };
 
-// One values object per state of the overrides, shared by every island, so results cache by identity.
-let values: { overrides: object; av: Record<string, number> } | undefined;
+// One values object per overrides object, shared by every island, so results cache and settle by
+// identity: islands that hydrate at different times (each first seeing the empty server snapshot,
+// then the stored overrides) get the same object for the same overrides.
+const values = new WeakMap<object, Record<string, number>>();
 
 export function useAssumptionValues() {
   const overrides = useOverrides();
   return useMemo(() => {
-    if (values?.overrides !== overrides) values = { overrides, av: assumptionValues(lib.assumptions, overrides) };
-    return values.av;
+    let av = values.get(overrides);
+    if (!av) values.set(overrides, (av = assumptionValues(lib.assumptions, overrides)));
+    return av;
   }, [overrides]);
 }
 
