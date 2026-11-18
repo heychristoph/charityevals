@@ -2,6 +2,7 @@
 
 Result: pass (0 high, 0 medium findings of our own; audit-model's far-above medium is explained in round 2 #1 and unchanged)
 Model-sha: d56b7d106a590dcd2da5467655f431d603a237bdd15af649daf50eda59febfb6
+Rules: 0.1.0
 Verdict: pass
 
 Scope: the one change since round 2 (HEAD~1 to HEAD), the `effect_sd` explainer's Watson cross-check wording. `git diff` shows one line changed in the model file, in that explainer only. No value, range, formula or source change. `scripts/check.ts` reports all models valid; `scripts/audit-model.ts` gives the same result (51.9) and the same two findings as round 2 (far-above, explained; spread, low).
