@@ -31,8 +31,13 @@ export function simulationCheck(lib: Library, m: ResolvedModel, draws = 2000): S
     events.forEach((r) => ((r as { single_event?: unknown }).single_event = undefined));
     const s = simulate(lib, m, draws);
     events.forEach((r, i) => ((r as { single_event?: unknown }).single_event = saved[i]));
-    out.events = { count: events.length, misses: d.zero, mean: d.mean, smooth: s?.mean };
-    out.brokenEvents = d.zero >= 0.999 || (d.zero === 0 && d.q[0] / mid < 1e-3);
+    // A net harm (negative best guess, q stored with the largest multiple first) counts every draw at
+    // zero or below in `zero`, misses and harms alike, so `zero` is 1 whether or not the events happen:
+    // its misses are the draws at about nothing, read from the quantiles.
+    const harm = d.q[0] > d.q[d.q.length - 1];
+    const misses = harm ? d.q.filter((x) => Math.abs(x) <= 1e-6).length / d.q.length : d.zero;
+    out.events = { count: events.length, misses, mean: d.mean, smooth: s?.mean };
+    out.brokenEvents = harm ? misses >= 0.999 : d.zero >= 0.999 || (d.zero === 0 && d.q[0] / mid < 1e-3);
   }
   // One input at a time at each end of its range.
   const av = { ...assumptionValues(lib.assumptions), [RISK_QUANTILE]: RISK_OFF };

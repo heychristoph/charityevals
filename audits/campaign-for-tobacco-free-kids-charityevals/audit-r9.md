@@ -14,5 +14,7 @@ Only the round 8 findings: `us_attribution_share_shared`, the summary's typed sh
 None.
 
 Verdict: pass
-Model-sha: 1b4f9df4a878a643ac07dc8d6565a7ba4c0896fd2a3c0bf6567a2d9aade6d843
 Rules: 0.2.0
+Model-sha: 3cad0c10ffe2aa931c1f62dcc1270362811ed405e6b21f4cb8fd35cf7eb3b52f
+
+Re-stamped (18 Nov 2026): glob_evidence_adj now reads the shared facts/tobacco.json lmic_wins_evidence_adj (same 0.8, 0.5 to 1), which the Concentric Policies model also reads. Mechanical: headline unchanged, against HEAD.

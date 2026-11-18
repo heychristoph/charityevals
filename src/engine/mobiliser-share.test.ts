@@ -86,14 +86,14 @@ describe("views", () => {
 // Net harm is shared like credit: these headlines are below zero at every share and shrink towards zero
 // with it (a climate or welfare cost outweighs the good in our view).
 const NET_HARM = [
-  "aspca-charityevals-farm-animals", "carbon180-charityevals", "coalition-for-rainforest-nations-charityevals",
+  "animal-policy-international-charityevals", "aspca-charityevals-farm-animals", "carbon180-charityevals", "coalition-for-rainforest-nations-charityevals",
   "drug-policy-alliance-charityevals", "evergreen-collaborative-charityevals", "industrious-labs-charityevals",
   "opportunity-green-charityevals", "the-humane-league-charityevals-other-programmes",
   "union-of-concerned-scientists-charityevals-climate",
 ];
-// Mixed: money these two shift earns only the gain over where it would have gone (V − V_before, 2.8), and
+// Mixed: money this one shifts earns only the gain over where it would have gone (V − V_before, 2.8), and
 // the recipients' own value V falls with the share too (chains compound), so the gain can change sign.
-const MIXED = ["animal-charity-evaluators-charityevals", "project-drawdown-charityevals"];
+const MIXED = ["project-drawdown-charityevals"];
 const GRID = [1, 0.75, 0.5, 0.3, 0.15, 0.05];
 
 const lib = buildLibrary(walk(join(root, "models")).map(read), assumptions,

@@ -22,6 +22,8 @@ REMOVE = {
     "fortify-health-aim": OTHER.format("GiveWell's Fortify Health models and HLI's fortify-health-hli"),
     "healthy-futures-aim": OTHER.format("GiveWell, healthy-futures-phl-based-on-updated-23-feb-2026"),
     "lead-exposure-elimination-project-aim": OTHER.format("charityevals, lead-exposure-elimination-project-charityevals"),
+    "animal-policy-international-aim": OTHER.format("charityevals, animal-policy-international-charityevals"),
+    "concentric-policies-aim": OTHER.format("charityevals, concentric-policies-charityevals"),
     "kaya-guides-aim": OTHER.format("charityevals, kaya-guides-charityevals"),
     "first-embrace-aim": OTHER.format("charityevals, first-embrace-charityevals"),
     "cearch-aim": OTHER.format("charityevals, cearch-charityevals"),
@@ -52,14 +54,10 @@ REMOVE = {
 
 # Kept: the charity runs the modelled programme today (evidence), no actual-data model exists.
 KEEP = {
-    "animal-policy-international-aim": ("https://www.animalpolicyinternational.org/",
-        "Animal Policy International campaigns for import welfare standards in New Zealand (Stop Cruel Imports NZ), the UK and the EU."),
     "better-futures-guide-aim": ("https://betterfuturesguide.org/",
         "Better Futures Guide is setting up as a livelihoods charity evaluator; its first recommendations are planned before the end of 2026."),
     "better-season-project-aim": ("https://www.betterseasonproject.org/",
         "Better Season Project partners with Kenyan savings cooperatives to lend smallholders money for rainwater tanks secured on the tank (piloting)."),
-    "concentric-policies-aim": ("https://forum.effectivealtruism.org/posts/zdacfpQdQjfGNoavQ/marginal-funding-for-the-single-best-health-policy-in-the",
-        "Concentric Policies advocates for tobacco taxes in Liberia and Guinea-Bissau (November 2024, with plans through 2025); AIM modelled Mongolia."),
     "neev-aim": ("https://neev.earth",
         "Neev trains brick kiln owners in India's brick belt in better firing practice to cut coal use and air pollution."),
     "opal-health-aim": ("https://opalhealthafrica.org",
