@@ -2,7 +2,7 @@
 // a model's headline and plausible range, and a charity's figure as the rankings show it: each
 // evaluator's programmes over their locations, by funding, and the charity's primary evaluator's
 // figure as its number.
-import { headline, plausibleRange, tooOld, unstableFlag, type Library, type ResolvedModel } from "../../src/engine/model";
+import { headline, plausibleRange, ranks, unstableFlag, type Library, type ResolvedModel } from "../../src/engine/model";
 import { combine, combineLocations, coverageFlag, declaredLocations, locationsOf, locationWeights, nextDollarFlag, primaryModel, rankingPlan, type Basis, type EvaluatorPlan } from "../../src/engine/ranking";
 import { sensitivity, THEORETICAL_TEXT } from "../../src/engine/sensitivity";
 import type { Charity } from "../../src/engine/schema";
@@ -70,7 +70,7 @@ export function charityFigure(lib: Library, charity: string, av: Record<string, 
   const memo = new Map<ResolvedModel, Figure>();
   const fig = (m: ResolvedModel) => memo.get(m) ?? memo.set(m, modelFigure(lib, m, av)).get(m)!;
   const evaluators = plansOf(lib, charity).flatMap(({ owner, parts }) => {
-    const kept = rankings ? parts.filter((p) => !tooOld(lib, p.model, av)) : parts;
+    const kept = rankings ? parts.filter((p) => ranks(lib, p.model, av)) : parts;
     return kept.length ? [evaluatorFigure(owner, kept.map((p) => programmeFigure(lib, c, p.program, p.model, p.weight, fig)))] : [];
   });
   if (!evaluators.length) return undefined;

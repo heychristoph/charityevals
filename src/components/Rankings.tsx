@@ -4,7 +4,6 @@ import { lib } from "../lib/data";
 import { useResults } from "../lib/use-results";
 import type { Basis } from "../engine/ranking";
 import { useFigure, type Figure } from "../lib/metric";
-import { THEORETICAL_TEXT } from "../engine/sensitivity";
 import { DOMAIN, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import CharityLogo from "./CharityLogo";
 import InfoTip from "./InfoTip";
@@ -131,11 +130,6 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
                   <div className="r-meta small">
                     <a className="r-cause" href={`/causes/${c.cause}`}>{CAUSE_LABEL[c.cause]}</a>
                     <span className="muted"> · {owners.map((o, k) => <span key={o.id}>{k > 0 && ", "}<a className="r-owner" href={`/evaluators/${o.id}`}>{o.short}</a></span>)}</span>
-                    {r.evaluators.some((x) => x.theoretical) && (
-                      <span className="r-theory" title={THEORETICAL_TEXT}>
-                        {" "}· {multi ? `${owners.filter((_, k) => r.evaluators[k].theoretical).map((o) => o.short).join(", ")}: purely theoretical` : "purely theoretical"}
-                      </span>
-                    )}
                     {warns.length > 0 && (
                       <InfoTip
                         className="r-flags"
@@ -158,7 +152,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
               <div
                 className={`r-track ${multi ? "r-track-multi" : ""}`}
                 role="img"
-                aria-label={`${c.name}: ${r.evaluators.map((x, k) => `${owners[k].name} ${fig.format(x.central)}${x.theoretical ? " (purely theoretical)" : ""}`).join(", ")} ${fig.metric.unit.toLowerCase()}; range ${fig.format(r.low)} to ${fig.format(r.high)}`}
+                aria-label={`${c.name}: ${r.evaluators.map((x, k) => `${owners[k].name} ${fig.format(x.central)}`).join(", ")} ${fig.metric.unit.toLowerCase()}; range ${fig.format(r.low)} to ${fig.format(r.high)}`}
               >
                 {ticks.map((t) => (
                   <span key={t.label} className="r-grid" style={{ left: pct(t.at) }} />
@@ -169,7 +163,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
                 />
                 {r.evaluators.map((x, k) => (
                   <span key={x.owner} className="r-dot-layer" style={{ transform: `translateX(${pct(x.central)})`, ["--lane" as string]: multi ? `${k % 2 ? LANE : -LANE}px` : undefined }}>
-                    <span className={`r-dot ${multi ? "r-dot-owner" : ""} ${multi && x.owner !== r.primary ? "r-dot-other" : ""} ${x.theoretical ? "r-dot-theory" : ""}`} title={`${owners[k].name}: ${fig.format(x.central)}${BASIS[x.basis](x.programs.length)}${x.theoretical ? " (purely theoretical: an estimate made before the charity existed)" : ""}`}>
+                    <span className={`r-dot ${multi ? "r-dot-owner" : ""} ${multi && x.owner !== r.primary ? "r-dot-other" : ""}`} title={`${owners[k].name}: ${fig.format(x.central)}${BASIS[x.basis](x.programs.length)}`}>
                       {multi && <span className="r-dot-label">{owners[k].short}</span>}
                     </span>
                   </span>

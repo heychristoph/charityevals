@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { lib, primaryOf, rankedCharities } from "./data";
-import { assumptionValues, bottomLine, headline, plausibleRange, tooOld, unstableFlag, type ResolvedModel } from "../engine/model";
+import { assumptionValues, bottomLine, headline, plausibleRange, ranks, unstableFlag, type ResolvedModel } from "../engine/model";
 import { combine, combineLocations, coverageFlag, nextDollarFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
@@ -157,7 +157,7 @@ function computeResults(av: Record<string, number>) {
       evaluatorResult(owner, parts.map((p) => programResult(c, p.program, p.model, p.weight, av))));
     pages.set(c.id, all);
     const evaluators = all.flatMap((e) => {
-      const programs = e.programs.filter((p) => !tooOld(lib, p.result.model, av));
+      const programs = e.programs.filter((p) => ranks(lib, p.result.model, av));
       if (!programs.length) return [];
       return [programs.length === e.programs.length ? e : evaluatorResult(e.owner, programs)];
     });

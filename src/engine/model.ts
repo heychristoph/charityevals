@@ -846,6 +846,12 @@ export const IGNORE_OLD = "ignore_old_estimates";
  * estimate is older than the cutoff (docs/normalization.md 2.15). Only which models rank changes, and so
  * a cause's figure on the rankings (`#cause:x`); a model's own result, and a read of it or of its
  * charity (`#id`, `#owner:charity`), doesn't. */
+/** Whether a model counts in the rankings at values `a`: never a purely theoretical one (shown on its pages,
+ * never ranked: docs/normalization.md), nor one the reader leaves out as too old. */
+export function ranks(lib: Library, m: ResolvedModel, a: Record<string, number>): boolean {
+  return !m.theoretical && !tooOld(lib, m, a);
+}
+
 export function tooOld(lib: Library, m: ResolvedModel, a: Record<string, number>): boolean {
   const cutoff = lib.assumptions.common.old_estimate_years;
   if (!a[IGNORE_OLD] || cutoff === undefined) return false;

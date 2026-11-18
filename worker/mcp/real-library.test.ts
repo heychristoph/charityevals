@@ -71,6 +71,14 @@ describe("MCP server on the real library", () => {
     }
   });
 
+  it("never ranks a purely theoretical estimate, while its charity's page still shows it", () => {
+    const theory = [...site.models.values()].filter((m) => m.theoretical);
+    expect(theory.length).toBeGreaterThan(0);
+    const ranked = rankings(site, assumptionValues(site.assumptions));
+    for (const f of ranked) for (const e of f.evaluators) for (const p of e.programmes) expect(p.model.theoretical, `${f.charity.id}: ${p.model.id}`).toBeFalsy();
+    for (const m of theory) expect(charityFigure(site, m.charity, assumptionValues(site.assumptions), false), m.charity).toBeDefined();
+  });
+
   it("gives a charity with several evaluators the primary's figure and the range across all of them, as the rankings do", () => {
     const multi = rankings(loaded.lib, assumptionValues(loaded.lib.assumptions)).filter((f) => f.evaluators.length > 1);
     expect(multi.length).toBeGreaterThan(5);
