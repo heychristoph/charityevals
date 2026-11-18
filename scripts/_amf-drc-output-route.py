@@ -7,13 +7,15 @@ the sliders reach the result through the rows they move.
 
     python3 scripts/_amf-drc-output-route.py
 """
-import json
+import json, sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from keep_json import dumps_like
 
 p = Path(__file__).resolve().parent.parent / "models/grants/givewell/against-malaria-foundation-2023-amf-drc.json"
 text = p.read_text()
 m = json.loads(text)
-assert json.dumps(m, indent=2, ensure_ascii=False) + "\n" == text
+assert dumps_like(m, text) == text
 rows = m["rows"]
 by = {r["id"]: r for r in rows}
 leaf = by["total_units_of_value_generated_by_philanthropic_spending_aft"]
@@ -40,5 +42,5 @@ if "value" in leaf:
     leaf["explainer"] = ("The sheet's pasted total (AMF!B217) as the computed total times the sheet's leverage/funging ratio, so it "
                          "moves with the rows above it; at the sheet's values it is the sheet's figure.")
     rows.insert(rows.index(leaf), ratio)
-p.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
+p.write_text(dumps_like(m, text))
 print("amf-drc: total after leverage/funging = computed total x the sheet's ratio")
