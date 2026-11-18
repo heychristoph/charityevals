@@ -1,6 +1,6 @@
-"""Rule spending-weighted-means (owner, 18 Nov 2026): a mean over charities weighs each by its programme spending,
-not equally: `#cause:x` (ranking.ts causeFigure), and `#spending:<charity>` lets a formula do the same (Ambitious
-Impact's average of the charities it launched). A charity with no spending on record weighs its cause's median."""
+"""Rule spending-weighted-means (owner, 18 Nov 2026): `#spending:<charity>` lets a formula weigh charities by their
+programme spending (no spending on record: the cause's median); Ambitious Impact's average of the charities it launched
+uses it. MODE (env) picks the `#cause:x` statistic: equal (unchanged), median or trimmed (10% each end)."""
 import json, re
 from pathlib import Path
 
@@ -12,14 +12,15 @@ def rep(path, old, new):
     assert old in s, (path, old[:70])
     p.write_text(s.replace(old, new, 1))
 
-# --- ranking.ts: spending weights and the weighted cause mean -------------------------------------------
+# --- ranking.ts: spending weights (spendingOf), and the cause mean by MODE (equal | median | trimmed) ------
+import os
+MODE = os.environ.get("MODE", "equal")
 rep("src/engine/ranking.ts", "const causes = new WeakMap<Library, Map<string, [owner: string, charity: string][]>>();",
 """const causes = new WeakMap<Library, Map<string, [owner: string, charity: string][]>>();
 const medians = new WeakMap<Library, Map<string, number>>();
 
-/** A charity's weight in a mean over charities (`#cause:x`, `#spending:<charity>`): its programme spending in
- * USD (`spending.programme`), or, where its record has none, the median of its cause's records.
- * docs/normalization.md 2.8. */
+/** A charity's weight in a mean over charities (`#spending:<charity>`): its programme spending in USD
+ * (`spending.programme`), or, where its record has none, the median of its cause's records. */
 export function spendingOf(lib: Library, charity: string): number {
   const c = lib.charities.get(charity);
   if (!c) return NaN;
@@ -33,22 +34,21 @@ export function spendingOf(lib: Library, charity: string): number {
   }
   return cache.get(c.cause)!;
 }""")
-rep("src/engine/ranking.ts", """/** The equal-weight mean of a cause's charities at their figures on the rankings (`#cause:x`).""",
-"""/** The spending-weighted mean of a cause's charities at their figures on the rankings (`#cause:x`): each
- * charity weighs its programme spending (spendingOf).""")
-rep("src/engine/ranking.ts", """  const figures = causeMembers(lib, cause, reader).flatMap(([o, c]) => {
-    if (!hidden) return [evaluatorFigure(lib, o, c, figure)];
-    const shown = plansOf(lib, c).map((e) => e.parts.filter((p) => !hidden(p.model))).find((parts) => parts.length);
-    return shown ? [partsFigure(lib, c, shown, figure)] : [];
-  });
-  return figures.length ? figures.reduce((s, v) => s + v, 0) / figures.length : NaN;""",
-"""  const figures = causeMembers(lib, cause, reader).flatMap(([o, c]): [v: number, w: number][] => {
-    if (!hidden) return [[evaluatorFigure(lib, o, c, figure), spendingOf(lib, c)]];
-    const shown = plansOf(lib, c).map((e) => e.parts.filter((p) => !hidden(p.model))).find((parts) => parts.length);
-    return shown ? [[partsFigure(lib, c, shown, figure), spendingOf(lib, c)]] : [];
-  });
-  const total = figures.reduce((s, [, w]) => s + w, 0);
-  return figures.length && total > 0 ? figures.reduce((s, [v, w]) => s + v * w, 0) / total : NaN;""")
+if MODE != "equal":
+    old_ret = "  return figures.length ? figures.reduce((s, v) => s + v, 0) / figures.length : NaN;"
+    if MODE == "median":
+        new_ret = """  const xs = figures.filter(Number.isFinite).sort((a, b) => a - b);
+  const mid = xs.length >> 1;
+  return xs.length ? (xs.length % 2 ? xs[mid] : (xs[mid - 1] + xs[mid]) / 2) : NaN;"""
+        doc = "The median of a cause's charities at their figures on the rankings (`#cause:x`)"
+    else:
+        new_ret = """  const xs = figures.filter(Number.isFinite).sort((a, b) => a - b);
+  const cut = Math.floor(xs.length * 0.1);
+  const kept = xs.slice(cut, xs.length - cut);
+  return kept.length ? kept.reduce((s, v) => s + v, 0) / kept.length : NaN;"""
+        doc = "The 10% trimmed mean of a cause's charities at their figures on the rankings (`#cause:x`): the lowest and highest tenth left out"
+    rep("src/engine/ranking.ts", old_ret, new_ret)
+    rep("src/engine/ranking.ts", "/** The equal-weight mean of a cause's charities at their figures on the rankings (`#cause:x`).", "/** " + doc + ".")
 
 # --- model.ts: the #spending:<charity> reference ---------------------------------------------------------
 m = "src/engine/model.ts"
@@ -57,7 +57,7 @@ export const CAUSE_PREFIX = "cause:";
 export const isCauseRef = (ref: string) => ref.startsWith(CAUSE_PREFIX);
 /** `#owner:charity`: a charity's figure from one evaluator (src/engine/ranking.ts evaluatorFigure). */
 export const isCharityRef = (ref: string) => ref.includes(":") && !isCauseRef(ref);""",
-"""/** `#cause:x`: the spending-weighted mean of the ranked charities in a cause or area (ranking.ts causeFigure). */
+"""/** `#cause:x`: the ranked charities in a cause or area, combined (ranking.ts causeFigure). */
 export const CAUSE_PREFIX = "cause:";
 export const isCauseRef = (ref: string) => ref.startsWith(CAUSE_PREFIX);
 /** `#spending:<charity>`: the charity's weight in a mean over charities, its programme spending in USD
