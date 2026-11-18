@@ -1,7 +1,7 @@
 # Audit: industrious-labs-charityevals, round 4 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.006819 tco2e/$ = -0.001835 years of healthy life per 1,000 dollars (combined range -1.811 to -1.9e-6). Verdict: pass.
 Model-sha: 53c8f72c1466c9da167bec63233d36229132cd02ece3e187e5423f48c35c85a4
-Rules: 0.1.1
+Rules: 0.2.0
 Scope: the changed rows only: `uov_per_year`, the explainers of `air_morbidity_share` and `iis_deaths_per_year`, the tonnes bridge's damage-beyond-deaths factor, and the write-up's headline sentence. No public-money branch (its EPA and district rules carry compliance costs through the 2.21 compliance rows; no credit, grant or levy), so rule 2.23 adds no row here.
 Mechanical: audit-model 0 findings (warnings only: range runs from harm to good, 90% judgment share); check.ts all models valid; invariants none.
 Previous round: round 3 low #3 (morbidity share multiplied EPA's steel deaths): resolved.

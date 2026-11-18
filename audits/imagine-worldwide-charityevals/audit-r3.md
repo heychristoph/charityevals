@@ -1,7 +1,7 @@
 # Audit: imagine-worldwide-charityevals, round 3 (scoped to the changes since round 2)
 Result: 0.004626 uov/$ = 2.313 years of healthy life per 1,000 dollars, unchanged from round 2 (the shared facts have the same best values, 20% and 40%). Verdict: pass.
 Model-sha: 4955209748eb7e7b810b5594a4c97b03c6c4d3ad3f5d5e03260f14be9780b3b1
-Rules: 0.1.1
+Rules: 0.2.0
 Scope: only the changes since 4423e385 (tablets_in_service_2023, edu_earnings_per_sd, edu_persistence, write-up).
 Mechanical: audit-model 0 high, 1 medium (far-above, 28.8x the cause median; reasoning unchanged from rounds 1-2); the round-2 spread finding no longer appears. check.ts: all models valid. generated/ unchanged.
 

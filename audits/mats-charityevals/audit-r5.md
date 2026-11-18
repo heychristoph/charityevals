@@ -1,7 +1,7 @@
 # Audit: mats-charityevals, round 5 (verification of round 4)
 Result: 0.0104 daly/$ = 10.4 years of healthy life per 1,000 dollars (model's own ranges 0.22-71); cause median 7.73 (x1.34). Verdict: pass.
 Model-sha: 75af78c89682656c573d03e268ca31a1a15edc7d21383d896f35e65c9b40c250
-Rules: 0.1.1
+Rules: 0.2.0
 Scope: only round 4's findings and the text changes made for them.
 Preflight: pass (only the distributions.json notice, ignored).
 

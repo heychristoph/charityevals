@@ -407,7 +407,7 @@ export function modelResult(lib: Library, id: string, av: Record<string, number>
   try {
     const one = (t: ResolvedModel) => modelResult(lib, t.id, av);
     const v = m ? bottomLine(lib, m, av).common
-      : cause ? causeFigure(lib, id.slice(CAUSE_PREFIX.length), reader, one, (t) => tooOld(lib, t, av))
+      : cause ? causeFigure(lib, id.slice(CAUSE_PREFIX.length), reader, one, (t) => !ranks(lib, t, av))
       : evaluatorFigure(lib, ...splitCharityRef(id), one);
     cache.set(key, v);
     return v;

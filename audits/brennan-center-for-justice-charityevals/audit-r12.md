@@ -2,7 +2,7 @@
 
 Result: 0.07019 years of healthy life per $1,000 (7.019e-5 DALYs per dollar), up 0.1% from round 11 (0.0701159) (combined range 0.006484-0.7599); cause median 0.06519 (x1.08). Verdict: pass.
 Model-sha: ef3caa00c3c70c86947809764971a91b01cd811b34fe389baf641853a563e2cc
-Rules: 0.1.1
+Rules: 0.2.0
 Scope: scoped verification round, not a re-audit; only the two rows changed on this branch and the two facts they read.
 Mechanical: audit-model findings (0).
 Previous round: no open findings from round 11.

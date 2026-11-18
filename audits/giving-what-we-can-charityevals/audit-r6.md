@@ -19,4 +19,4 @@ Only the fixes to round 5: `value_destinations` reweighted by the credit share, 
 
 Verdict: pass
 Model-sha: 1a87adef5d1b18e83e448c9178c3e521935cd313e8366fb79af07a3e7f3c38a0
-Rules: 0.1.1
+Rules: 0.2.0

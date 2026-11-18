@@ -2,7 +2,7 @@
 
 Result: 4.834e-4 uov/$ = 0.2417 years of healthy life per $1,000 (combined range 0.041–1.415); global-health median 0.403 (×0.60). Verdict: pass (0 high).
 Model-sha: 34e3ef9d9ca4d7165d76009d928897a27ed9426400bdaac8c3fdeee052b0bdeb
-Rules: 0.1.1
+Rules: 0.2.0
 
 Scope: unchanged from round 2 (the "rabies" line, 20% of the 2025 international line, $6.877m; sister model takes the rest). Round 3 checks only the round-2 highs and mediums and what the changes introduced.
 

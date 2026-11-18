@@ -1,7 +1,7 @@
 # Audit: environmental-defense-fund-charityevals, round 15 (scoped verification of credit step 5, rule 2.24)
 Result: 0.001046 years of healthy life per $1,000 at mobiliser_share 100% (0.001033 before). Verdict: pass (no high or medium finding).
 Model-sha: 5f3cc9ad4c90d2993d42944b633defd10cb8d9cd26f21bd3e5b50358f844c974
-Rules: 0.1.1
+Rules: 0.2.0
 Scope: `msat_attribution_share_shared` (0.6 (0.4-0.8) -> 0.7 (0.5-0.85)), the `research` class on `msat_attribution_share`, and a read of the other branches' share explainers (eumr, usmeth, pwr, veh, ira) for adopters left in a denominator.
 Preflight: pass (only the out-of-date generated/distributions.json line, ignored as instructed).
 Previous round: round 14's two mediums were resolved; no open high or medium.

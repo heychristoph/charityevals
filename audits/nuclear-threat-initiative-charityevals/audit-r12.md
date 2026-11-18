@@ -1,7 +1,7 @@
 # Audit: nuclear-threat-initiative-charityevals, round 12 (scoped re-stamp after wording fixes)
 Result: 24.9 years of healthy life per $1,000 at mobiliser_share 100%, unchanged from round 11. Verdict: pass.
 Model-sha: b30bd682ece41c11591bdfc96aa67ac9afba8af7e8df432059cf384101b0e7df
-Rules: 0.1.1
+Rules: 0.2.0
 Scope: wording changes only.
 Preflight: pass.
 Previous round: finding 1 (low, anchor wording of attribution_share_shared) resolved: the explainer now says the study group's and reviews' participants are mainly officials, the Compact's and partners' staff are other funders' and NGOs' own time, no source sizes either, so the officials' part is judged a third of the outside time. Reads correctly, adds no new factual claim. Finding 2 (low, writeup 0.85) resolved in round 11.
