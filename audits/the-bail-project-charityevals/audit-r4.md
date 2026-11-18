@@ -1,7 +1,7 @@
 # Audit: the-bail-project-charityevals, round 4
 Result: 1.251e-5 daly/$ = 0.0125 years of healthy life per 1,000 dollars, unchanged from round 3. Verdict: pass (no high findings).
 Model-sha: 4954bbc90216601306943f831fc4075492899749f22a2bdb893f64e2e2912870
-Rules: 0.3.8
+Rules: 0.3.9
 Scope: scoped verification of the one round-3 low and the changed text only (facts `bailouts_fy2025` source note). No values changed.
 Mechanical: `audit-model.ts` on models/global-health/the-bail-project-charityevals.json: 0 findings.
 

@@ -1,7 +1,7 @@
 # Audit r4: habitat-for-humanity-charityevals-international (scoped verification)
 Result: 2.690e-4 uov/$ = 0.1345 years of healthy life per 1,000 dollars (combined range 0.0304-0.595). Verdict line below.
 Model-sha: 85d4c9a762b843d58421125703c987caabe9ddb4c60fb4e8d148ef7641c35c72
-Rules: 0.3.8
+Rules: 0.3.9
 Verdict: pass
 
 Scope: only the change of commit bc46382f to the model (`int_volunteer_hour_value` now a formula over the new judgment `int_household_work_hours`), plus whether r3's two other lows still stand. `audit-model.ts` shows no lint, invariant or peer problem; `check.ts` is valid; `simulation-check.ts` exits 0 and is stable (5% 0.55x, 50% 1x, 95% 1.86x). The result moved 0.134 to 0.1345, as the builder said (a lower volunteer value is a lower resource total, so a slightly higher result).

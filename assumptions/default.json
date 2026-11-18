@@ -168,7 +168,21 @@
         "high": 0.08
       },
       "kind": "judgment",
-      "explainer": "How much less good done a year from now counts than the same good today, compounding each year. It is also how much future generations count: the lower it is, the more the future counts.\n\nThe default, 4%, is what most charity evaluators use. At 0.1%, the lowest, people centuries from now count almost as much as people today."
+      "explainer": "How much less good done a year from now counts than the same good today, compounding each year.\n\nThe default, 4%, is what most charity evaluators use. At 0.1%, the lowest, good done centuries from now counts almost as much as good done today."
+    },
+    {
+      "id": "never_started_weight",
+      "section": "distance",
+      "label": "Lives that never start count … %",
+      "technical": "Weight on the good in lives the work adds or prevents (rows marked never_started: future generations, births averted, animals never bred); the suffering in such lives always counts; the evaluator view counts none unless the evaluator did (docs/normalization.md 2.25)",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Some work changes how many people or animals ever live: generations a catastrophe would prevent, births averted, animals never bred. This says how much the good years of such lives count. The suffering in them always counts.\n\nThe default, 0%, counts only the suffering. At 100% their good years count like anyone's."
     },
     {
       "id": "life_value_multiplier",
@@ -424,6 +438,21 @@
       "explainer": "How much healthy life a day of disabling pain costs, in hours. Animal charities' results are days of pain spared, so this turns them into healthy time, and it often decides whether they rank above health charities.\n\nThe default, about 10 hours, follows how health surveys weigh the worst human pain: a migraine attack counts as losing 10.6 hours of a healthy day, the most severe back pain 9.2 (Global Burden of Disease; Salomon et al. 2015). People rating a severe migraine during the attack put it at worse than death, about 29 hours.\n\nThe slider goes on to 240 hours for the hedonic view: pain counts by how bad it feels, not by what it stops you doing, so a day of disabling pain can outweigh a healthy day. Rethink Priorities puts a year of it at 2 to 10 years of healthy life (48 to 240 hours a day); the animal-focused values use the middle, about 107 hours."
     },
     {
+      "id": "pain_free_time_good",
+      "section": "animals",
+      "shown_when": "never_started_weight",
+      "label": "An animal's pain-free time counts as … % good",
+      "technical": "Share of an animal's time free of pain counted as good time, a healthy day at the species' weight; read only by the good of animal lives that never start (docs/normalization.md 2.25)",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0,
+        "high": 1
+      },
+      "kind": "judgment",
+      "explainer": "Research measures animals' pain, not how good the rest of their time is. This says how much of an animal's pain-free time counts as good, like a healthy day. It matters only for animals that would never live.\n\nThe default, 0%, treats pain-free time as neither good nor bad."
+    },
+    {
       "id": "daly_per_wellby",
       "section": "people",
       "label": "One point more life satisfaction for a year is worth … days of healthy life",
@@ -502,9 +531,10 @@
     {
       "id": "longtermist",
       "label": "Long-run",
-      "about": "Good done in the future counts almost as much as good done today: 0.1% less a year, not 4%.",
+      "about": "The future counts almost as much as today: good done later 0.1% less a year, not 4%, and lives that never start in full.",
       "values": {
-        "discount_rate": 0.001
+        "discount_rate": 0.001,
+        "never_started_weight": 1
       }
     },
     {

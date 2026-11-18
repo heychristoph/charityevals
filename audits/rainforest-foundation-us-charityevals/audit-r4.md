@@ -31,8 +31,8 @@ The headline 0.01157 rounds to the 0.012 in the summary and write-up.
 None.
 
 Verdict: pass (0 high, 0 medium, 0 low).
-Model-sha: 64f6b6c44057e43f0b5b43144eb6a2dce7010480b14b982bcb077409108e4591
-Rules: 0.3.8
+Model-sha: 098d5dab9b0b87e8a53afb8352eb15fe0ee397db8a6cec04cc513dc4d7c477bf
+Rules: 0.3.9
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): Local market spillover reads the new shared fact cash.local_market_spillover_share (same value and range). Mechanical: headline unchanged, against 2492e3fc.
@@ -48,3 +48,5 @@ Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the pag
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 2 rows changed, against d150f0b2.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 7c76c006.
+
+Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.

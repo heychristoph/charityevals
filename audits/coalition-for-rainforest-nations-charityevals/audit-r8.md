@@ -4,8 +4,8 @@ Result: -0.02525 years per $1,000 at the defaults (mobiliser share 100%), the sa
 
 Verdict: pass
 
-Model-sha: 318b438e0d9363b08c648239ef753ff168346ea432f71d9229bd94227fce5a3e
-Rules: 0.3.8
+Model-sha: b2baec83273672e9e5ab7db047a0cdc29b44ca03a021c577ab154672ae998d2c
+Rules: 0.3.9
 
 ## Scope
 
@@ -25,4 +25,6 @@ The mechanical rewiring after round 7 (credit rule 2.24, step 5): rows no longer
 None.
 
 Verdict: pass
-Model-sha: 318b438e0d9363b08c648239ef753ff168346ea432f71d9229bd94227fce5a3e
+Model-sha: b2baec83273672e9e5ab7db047a0cdc29b44ca03a021c577ab154672ae998d2c
+
+Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.

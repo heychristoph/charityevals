@@ -1,7 +1,7 @@
 # Audit: the-humane-league-charityevals-other-programmes, round 6 (scoped verification)
 Result: -0.0001231 years of healthy life per $1,000 (ced_per_donor_dollar -1.0782; was -0.0001287, magnitude -4.3%). Combined range not re-run (scoped round). Verdict: pass.
 Model-sha: 97bee8689e49c3449bfe830c7662c538b0740a0a7c051a58fb2c79b10bf722a0
-Rules: 0.3.8
+Rules: 0.3.9
 Scope: rule pain-default-10h only (inventory/rule-changes/pain-default-10h.md): `daly_per_sad` 0.0011 to 0.0011416 (9.6 to 10 hours of healthy life per day of disabling pain; assumptions/default.json). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 5.
 Previous round: round 5 had no open high or medium finding; this round adds none.

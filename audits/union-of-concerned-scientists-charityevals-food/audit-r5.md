@@ -2,7 +2,7 @@
 Result: 5.069e-7 uov/$ = 2.534e-4 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
 Model-sha: 9273f82fc881928f50a87e71dadd479a1e676647307df8dd32896432a5809482
-Rules: 0.3.8
+Rules: 0.3.9
 
 Scope: scoped verification of the compliance-cost sentence on `wetland_flood_damage_study`.
 

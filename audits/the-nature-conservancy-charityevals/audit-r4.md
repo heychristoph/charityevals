@@ -18,7 +18,9 @@ Findings:
 - Low: the new best guesses (0.4, 0.3, 0.15, 0.3, 0.25, 0.4, 0.5, 0.6, 0.6, 0.4, 0.6) are stated judgments anchored on who is named in the denominator, with no counts of co-advocates; the explainers say so. Acceptable.
 
 Verdict: pass
-Model-sha: 7365ef471c7bb3c9a7f622a9f09a81a0c7ddff62ff110114b883e4b9613a8d31
-Rules: 0.3.8
+Model-sha: 8505dd5ed3837ae4aecfe618c07af68b9f0623a3ca61d071c1f86c6be546ed34
+Rules: 0.3.9
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
+
+Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.

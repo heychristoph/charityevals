@@ -1,7 +1,7 @@
 # Audit: opportunity-green-charityevals, round 5 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.2352 tco2e/$ = -0.4376 years of healthy life per $1,000 (combined range -10.92 to -0.0175). Verdict: pass.
 Model-sha: d61f409590b687c9b462d9466a9cc36c093949fc71f3eda382d1bedaa7ebda60
-Rules: 0.3.8
+Rules: 0.3.9
 Scope: only the rows changed in commit 7e73f6cd (imo_low_income_payer_consumption, new imo_levy_payer_uov, uov_per_year, explainers of imo_fund_revenue_per_year and imo_jet_uov, the bridge's side-effect-weight term) and the summary and write-up sentences stating the result.
 Mechanical: lint 0 findings (3 warn/info only), invariants none, normalization-audit none for this model; check.ts all models valid.
 Previous round: round-4 findings all resolved and unaffected.

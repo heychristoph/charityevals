@@ -1,7 +1,7 @@
 # Audit: founders-pledge-charityevals, round 4 (scoped verification)
 Result: 7.2406e-3 uov/$ = 3.620 years of healthy life per 1,000 dollars (was 3.771; -4.0%). Combined range not re-run (scoped round). Verdict: pass.
 Model-sha: b52eab0ad71020c66d2b318cb4358e8bb008c82b638bfeec1969b3e8b68351e3
-Rules: 0.3.8
+Rules: 0.3.9
 Scope: rule theoretical-cause-aggregates only (commit 65635d2e; inventory/rule-changes/theoretical-cause-aggregates.md). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 3.
 Previous round: round 3's findings stay as they were; this round adds none to the model.
