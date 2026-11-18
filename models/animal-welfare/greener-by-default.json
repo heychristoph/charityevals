@@ -786,68 +786,68 @@
       "explainer": "Ours, from the same rough reckoning: farmed fish about a fifth of the non-shrimp SADs, mammals (pigs and cattle, counted as pigs, as the shared meal shares do) about a sixth. Range is ours."
     },
     {
-      "id": "pain_days_shrimp",
+      "id": "sads_shrimp",
       "section": "species",
-      "label": "Pain days averted per dollar you give: shrimp",
+      "label": "SADs averted per dollar you give: shrimp",
       "format": "number",
       "formula": "sads_per_donor_dollar * production_response * shrimp_share",
-      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain (`@aim_sads.<species>_2026` = 1)."
     },
     {
       "id": "ced_shrimp",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: shrimp",
       "format": "number",
-      "formula": "pain_days_shrimp * @welfare_ranges.shrimp_vs_chicken",
-      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+      "formula": "sads_shrimp / @aim_sads.shrimp_2026 * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp_2026 / @aim_sads.chicken_2024)",
+      "explainer": "The shared species step on 2026 SADs, whose species weight is 1: in our view days of this species' pain counted as a chicken's with Rethink Priorities' welfare range; in the evaluator view ACE's SADs count as SADs."
     },
     {
-      "id": "pain_days_chicken",
+      "id": "sads_chicken",
       "section": "species",
-      "label": "Pain days averted per dollar you give: chickens",
+      "label": "SADs averted per dollar you give: chickens",
       "format": "number",
       "formula": "sads_per_donor_dollar * production_response * (1 - shrimp_share) * chicken_share_rest",
-      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain (`@aim_sads.<species>_2026` = 1)."
     },
     {
       "id": "ced_chicken",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: chickens",
       "format": "number",
-      "formula": "pain_days_chicken * @welfare_ranges.chicken_vs_chicken",
-      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+      "formula": "sads_chicken / @aim_sads.chicken_2026 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2026 / @aim_sads.chicken_2024)",
+      "explainer": "The shared species step on 2026 SADs, whose species weight is 1: in our view days of this species' pain counted as a chicken's with Rethink Priorities' welfare range; in the evaluator view ACE's SADs count as SADs."
     },
     {
-      "id": "pain_days_fish",
+      "id": "sads_fish",
       "section": "species",
-      "label": "Pain days averted per dollar you give: fish",
+      "label": "SADs averted per dollar you give: fish",
       "format": "number",
       "formula": "sads_per_donor_dollar * production_response * (1 - shrimp_share) * (1 - chicken_share_rest) * fish_share_rest",
-      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain (`@aim_sads.<species>_2026` = 1)."
     },
     {
       "id": "ced_fish",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: fish",
       "format": "number",
-      "formula": "pain_days_fish * @welfare_ranges.fish_vs_chicken",
-      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+      "formula": "sads_fish / @aim_sads.fish_2026 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2026 / @aim_sads.chicken_2024)",
+      "explainer": "The shared species step on 2026 SADs, whose species weight is 1: in our view days of this species' pain counted as a chicken's with Rethink Priorities' welfare range; in the evaluator view ACE's SADs count as SADs."
     },
     {
-      "id": "pain_days_pig",
+      "id": "sads_pig",
       "section": "species",
-      "label": "Pain days averted per dollar you give: pigs and other mammals",
+      "label": "SADs averted per dollar you give: pigs and other mammals",
       "format": "number",
       "formula": "sads_per_donor_dollar * production_response * (1 - shrimp_share) * (1 - chicken_share_rest) * (1 - fish_share_rest)",
-      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain."
+      "explainer": "ACE's 2026 SADs are days of pain weighted by intensity only, with no species weight: every species' SADs in ACE's 2026 SADs summary add up its pain-scaled days alone (a battery-caged hen: 131.28 × 0.057 + 62.75 × 0.245 + 6.69 = 29.55), and Ambitious Impact made the unscaled figure its main output in April 2026. So they enter as days of this species' disabling pain (`@aim_sads.<species>_2026` = 1)."
     },
     {
       "id": "ced_pig",
       "section": "species",
       "label": "Chicken-equivalent pain days averted per dollar you give: pigs and other mammals",
       "format": "number",
-      "formula": "pain_days_pig * @welfare_ranges.pig_vs_chicken",
-      "explainer": "Days of this species' pain counted as a chicken's with Rethink Priorities' welfare range."
+      "formula": "sads_pig / @aim_sads.pig_2026 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2026 / @aim_sads.chicken_2024)",
+      "explainer": "The shared species step on 2026 SADs, whose species weight is 1: in our view days of this species' pain counted as a chicken's with Rethink Priorities' welfare range; in the evaluator view ACE's SADs count as SADs."
     },
     {
       "id": "mobiliser_share",
@@ -887,6 +887,7 @@
       "discount_rate": 0.014,
       "resource_shares": 0,
       "chicken_vs_person": 0.463966,
+      "rp_species_weights": 0,
       "mobiliser_share": 1
     }
   },

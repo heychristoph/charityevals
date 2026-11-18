@@ -19,4 +19,4 @@ Mechanical: scripts/check.ts valid (warnings on range and judgment share only, a
 
 Verdict: pass
 Model-sha: 5ff8990d1155bff1a1325070e0329cfb715fc1e18130848fca0a1130a73f4a17
-Rules: 0.3.1
+Rules: 0.3.7

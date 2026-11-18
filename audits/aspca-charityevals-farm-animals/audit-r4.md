@@ -2,7 +2,7 @@
 
 Result: -12.32 ced/$ = -0.001355 years of healthy life per $1,000 (combined range -0.0338 to -5.4e-5), the sign flipped by the compliance-cost chain (was +4.09e-5). Verdict: **pass** (0 high, 0 medium, 2 low).
 Model-sha: a188299ab6b4249ddedd51b16873c080816bcb7a3a56d1b860756c625f4c91e2
-Rules: 0.3.1
+Rules: 0.3.7
 
 Scope: only the rule change applied mechanically (docs/normalization.md 2.21 and 2.22): the compliance-cost chain (ca_pop_share, def_egg_states_vs_ca, def_cost_egg_share, def_compliance_uov, compliance_uov_per_donor_dollar, ced_from_uov, ced_per_donor_dollar), def_opposition_risk_cut replacing def_p_override_with, the shared facts in facts/farm_animal_laws.json, and the summary and write-up farm sentences. audit-model.ts: 0 findings; check.ts: all models valid.
 

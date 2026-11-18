@@ -4416,6 +4416,15 @@
       }
     },
     {
+      "id": "units_of_value_for_development_effects_per_treatment_year_fr_at_shared_values",
+      "label": "Units of value for development effects per treatment-year from seasonal malaria chemoprevention (Kenya), at your discount rate and values",
+      "section": "ilc_long_term",
+      "formula": "units_of_value_for_development_effects_per_treatment_year_fr * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_smc / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_smc) * $uov_per_ln_consumption * ln(2)",
+      "published": 0.126,
+      "format": "number",
+      "explainer": "Changed for consistency. The sheet's figure is units of value from development effects per child-year of SMC, from GiveWell's SMC CEA: income gains from 12.5 years on, discounted at 4% and valued at 1/ln 2. Typed in as a number, it ignored your discount rate and the income slider. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2. At the defaults it is the sheet's figure; the evaluator view keeps it."
+    },
+    {
       "id": "development_effects_of_in_line_chlorination_as_a_percentage_2",
       "label": "Development effects of in-line chlorination as a percentage of seasonal malaria chemoprevention (Kenya)",
       "section": "dsw_long_term",
@@ -4536,7 +4545,7 @@
       "id": "annual_units_of_value_per_100_000_covered_kenya",
       "label": "Annual units of value per 100,000 covered (Kenya)",
       "section": "ilc_long_term",
-      "formula": "(units_of_value_for_development_effects_per_treatment_year_fr * development_effects_of_in_line_chlorination_as_a_percentage * percent_of_population_that_is_under_5_2019_kenya_2 + units_of_value_for_development_effects_per_treatment_year_fr * development_effects_of_in_line_chlorination_as_a_percentage * percent_of_population_that_is_5_14_2019_kenya * per_capita_burden_of_enteric_infection_morbidity_in_5_14s_as) * 100000",
+      "formula": "(units_of_value_for_development_effects_per_treatment_year_fr_at_shared_values * development_effects_of_in_line_chlorination_as_a_percentage * percent_of_population_that_is_under_5_2019_kenya_2 + units_of_value_for_development_effects_per_treatment_year_fr_at_shared_values * development_effects_of_in_line_chlorination_as_a_percentage * percent_of_population_that_is_5_14_2019_kenya * per_capita_burden_of_enteric_infection_morbidity_in_5_14s_as) * 100000",
       "expected": 1249.540107
     },
     {

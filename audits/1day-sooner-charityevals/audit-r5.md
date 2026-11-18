@@ -1,7 +1,7 @@
 # Audit: 1day-sooner-charityevals, round 5 (verification of wording fixes)
 Result: 5.46 daly/$ = 5.464 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Model-sha: 224efc616ae91b9aa02125130b514ccfabd1a2c882182e49cf2437ce14559616
-Rules: 0.3.1
+Rules: 0.3.7
 Scope: wording changes since round 4 only.
 Preflight: pass.
 Previous round: round 4 lows: #1 summary "add about 23%" resolved (now "add about 25%"); #3 mal_counterfactual_adj explainer resolved (appended "That is how replaceable its part was; its pro rata share of the effort is in mal_attribution_share_shared"); #2 write-up typed sensitivities not resolved (low, builder's).

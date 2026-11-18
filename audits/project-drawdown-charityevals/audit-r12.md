@@ -1,7 +1,7 @@
 # Audit: project-drawdown-charityevals, round 12 (scoped verification)
 Result: 8.033e-4 tco2e per donor dollar = 0.0004767 years of healthy life per 1,000 dollars (unchanged from round 11). Combined range not re-run (scoped round). Verdict: pass
 Model-sha: 296ed7244b200b1d7dff02c745c3730f1fa572044ee2193993c34f9a20c4ec62
-Rules: 0.3.1
+Rules: 0.3.7
 Scope: wording fixes from round 11 only. No source or scope re-audit.
 Preflight: `npx tsx scripts/preflight.ts project-drawdown-charityevals` passes (no blocking problem; one low simulation note on @meta.prior_vs_cash, as before).
 Previous round: round 11's three findings (two prose, one model summary) are checked below.

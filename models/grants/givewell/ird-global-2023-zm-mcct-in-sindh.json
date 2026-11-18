@@ -6642,6 +6642,15 @@
       "explainer": "New Incentives CEA"
     },
     {
+      "id": "units_of_value_from_development_effects_per_counterfactually_2_at_shared_values",
+      "label": "Units of value from development effects per counterfactually vaccinated infant in cohort, New Incentives (High coverage districts), at your discount rate and values",
+      "section": "development_benefits",
+      "formula": "units_of_value_from_development_effects_per_counterfactually_2 * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2)",
+      "published": 0.4875575598,
+      "format": "number",
+      "explainer": "Changed for consistency. The sheet's figure is units of value from a vaccinated infant's later income, from GiveWell's New Incentives CEA: income gains from about 10 years on, discounted at 4% and valued at 1/ln 2. Typed in as a number, it ignored your discount rate and the income slider. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2. At the defaults it is the sheet's figure; the evaluator view keeps it."
+    },
+    {
       "id": "probabilty_of_death_from_vaccine_preventable_diseases_for_un",
       "label": "Probabilty of death from vaccine-preventable diseases for unvaccinated (High coverage districts)",
       "section": "development_benefits",
@@ -6674,7 +6683,7 @@
       "id": "units_of_value_from_development_effects_per_counterfactually",
       "label": "Units of value from development effects per counterfactually vaccinated infant in cohort, mCCTs (High coverage districts)",
       "section": "development_benefits",
-      "formula": "units_of_value_from_development_effects_per_counterfactually_2 * adjustment_factor_high_coverage_districts",
+      "formula": "units_of_value_from_development_effects_per_counterfactually_2_at_shared_values * adjustment_factor_high_coverage_districts",
       "expected": 0.219973746
     },
     {
@@ -6837,6 +6846,7 @@
     },
     {
       "id": "new_incentives_adjustment_factor",
+      "side_effect": "factor",
       "label": "New Incentives adjustment factor",
       "section": "inclusionexclusion",
       "value": 1.223,

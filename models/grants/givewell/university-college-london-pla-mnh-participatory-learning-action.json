@@ -649,7 +649,6 @@
     },
     {
       "id": "child_disability_averted_and_development_effects",
-      "side_effect": "added",
       "label": "Child disability averted and development effects",
       "section": "cea_summary",
       "value": 0.1,
@@ -660,6 +659,16 @@
         "cell": "CEA -- Summary!B97"
       },
       "format": "percent"
+    },
+    {
+      "id": "child_disability_averted_and_development_effects_at_shared_values",
+      "label": "Child disability averted and development effects, at your discount rate and values",
+      "section": "cea_summary",
+      "formula": "child_disability_averted_and_development_effects * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.1,
+      "format": "percent",
+      "explainer": "Changed for consistency. The sheet's figure is development effects as a share of the value of the deaths averted, at GiveWell's values: children's income as adults from about 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death. Typed in as a number, it ignored your discount rate and the income slider, and grew with the weight on a life. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (the value of deaths it is set against already carries it). At the defaults it is the sheet's figure; the evaluator view keeps it.",
+      "side_effect": "added"
     },
     {
       "id": "consumption_smoothing_from_risk_sharing",
@@ -694,7 +703,7 @@
       "id": "total_adjustment_factor_for_excluded_effects",
       "label": "Total adjustment factor for excluded effects",
       "section": "cea_summary",
-      "formula": "sum(1, infant_and_maternal_morbidity_averted, child_disability_averted_and_development_effects, consumption_smoothing_from_risk_sharing, treatment_costs_averted_from_prevention)",
+      "formula": "sum(1, infant_and_maternal_morbidity_averted, child_disability_averted_and_development_effects_at_shared_values, consumption_smoothing_from_risk_sharing, treatment_costs_averted_from_prevention)",
       "expected": 1.21,
       "format": "percent"
     },

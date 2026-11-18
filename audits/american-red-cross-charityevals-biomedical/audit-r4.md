@@ -1,7 +1,7 @@
 # Audit: american-red-cross-charityevals-biomedical, round 4
 Result: 3.621e-5 uov/$ = 0.0181 years of healthy life per 1,000 dollars (combined range 0.0027–0.121); cause median 0.1085 (×0.167). Verdict: pass.
 Model-sha: 0df293db62500d920077869db21422ce157a87685053aaf39a9a7f3e2c7704cc
-Rules: 0.3.1
+Rules: 0.3.7
 Scope: scoped to the changes since round 3 (`git diff a0d083b9 b76ba3ed`): `bld_rbc_revenue_share` (0.6 → 0.55, range 0.5–0.7 → 0.45–0.7, explainer) and the write-up's headline 0.018, plus whether the summary's "about a third of the resources" and "about 3% of the raw outcome" still hold. Everything else is as in round 3 and not rechecked.
 Mechanical: lint 0 high / 0 medium / 1 low (the spread, which the summary states). Invariants: none. check.ts: all valid. Simulation stable: 5% 0.22×, 50% 1×, 95% 4.07× the best guess. Nothing written to generated/.
 Previous round: round-3 lows #1 and #3 (unsourced anchors) were left as stated judgments, which is acceptable: they are ranged judgment rows that name their anchors. No high or medium finding was open.

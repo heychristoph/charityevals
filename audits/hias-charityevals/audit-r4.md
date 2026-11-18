@@ -1,6 +1,6 @@
 # Audit: hias-charityevals, round 4 (scoped)
 Model-sha: 8992558c54cb6105310ee9bc301f7150ce20d375a658e175e5b23a91bb04aec0
-Rules: 0.3.1
+Rules: 0.3.7
 Scope: only the explainer changes since 04a7b33 (leg_wait_years, leg_removed_if_lost, leg_remit_share) and the write-up's legal bullet and RSC line. No input changed, so the result is unchanged (3.133e-6 daly/$).
 Mechanical: audit-model 0 high / 0 medium / 2 low (far-below, spread; both stated in the summary, unchanged); no files rewritten.
 

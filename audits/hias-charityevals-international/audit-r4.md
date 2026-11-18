@@ -1,6 +1,6 @@
 # Audit: hias-charityevals-international, round 4 (scoped)
 Model-sha: eeba5375c158a1337e7baf481f61abdd950c145d1aa4db6acf2442fc4c2a5d36
-Rules: 0.3.1
+Rules: 0.3.7
 Scope: rsc_people (now 200, range 50-600) and the write-up's RSC line.
 Mechanical: audit-model 0 high / 0 medium / 0 low; no files rewritten.
 

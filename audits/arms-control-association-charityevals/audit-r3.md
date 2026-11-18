@@ -15,7 +15,7 @@ None needed; no source, figure or value changed.
 
 Verdict: pass (no findings)
 Model-sha: 3d80cda25e4aaff50d2f67f2d06e808af19fc63e834b46de70227388ca9d75a5
-Rules: 0.3.1
+Rules: 0.3.7
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 

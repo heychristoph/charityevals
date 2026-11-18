@@ -1,7 +1,7 @@
 # Audit: cearch-charityevals, round 3
 Result: 0.006531 uov/$ = 3.27 years of healthy life per 1,000 dollars (combined range 0.28–37.4); cause median 0.112 (×29.2). Verdict: pass.
 Model-sha: bf0a5089cc5ab227ff9db265da8a297bdd2b2424138b2c0e374737da5d9b4883
-Rules: 0.3.1
+Rules: 0.3.7
 Scope: unchanged from round 2 (all of CEARCH's work, October 2022 to May 2025). Scoped verification of round 2's one open medium (finding 11) only.
 Preflight: pass. Two low lines (generated/distributions.json, generated/usage.json stale): run `npx tsx scripts/summaries.ts` before commit.
 Previous round: finding 11 resolved. No other high or medium was open.

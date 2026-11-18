@@ -2,7 +2,7 @@
 
 Result: 3.630e-6 daly/$ = 0.00363 years of healthy life per $1,000 (combined range 8.4e-4 – 0.0157); cause median 0.338 (x0.011). Verdict: pass.
 Model-sha: 7ce0552def7026a69d1923fa887947896a7db08b63c3ab1dc3cfe00060a36fd1
-Rules: 0.3.1
+Rules: 0.3.7
 
 Mechanical: `scripts/audit-model.ts` gives 0 high, 0 medium, 1 low (far-below; the summary's reason still matches the rows). Result moved from 0.00378 to 0.00363 (-4%), inside the builder's stated 0.0038 to 0.0036. Peers unchanged (Red Cross 0.0045, Salvation Army 0.0052, Habitat 0.0054). Only the changes were checked; no new source other than Ambroggi was fetched.
 
