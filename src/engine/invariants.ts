@@ -646,7 +646,7 @@ export function inv9c(lib: Library, av = assumptionValues(lib.assumptions)): Inv
 
 /** A row that states effects beyond a programme's main chain, or a spillover to other people. */
 export const SIDE_EFFECT_LABEL = /\bexcluded effects?\b|\bspill-?overs?\b|\badditional (program(me)? )?benefits\b|\bsupplemental intervention-level adjustments?\b/i;
-const NOT_SIDE_EFFECT = /\bleverag\w*|\bfunging\b|\bcrowd(ed|ing)? (in|out)\b/i;
+const NOT_SIDE_EFFECT = /\bleverag\w*|\bfunging\b|\bcrowd(ed|ing)? (in|out)\b|\btotal cost\b|\bdownside adjustment\b|\binflation\b|\bexchange rates?\b|\bpurchasing power\b/i;
 
 /** INV-24: side-effect rows are tagged (docs/normalization.md 2.16). A row on the path named or labelled
  * as excluded effects, spillovers, additional benefits or GiveWell's supplemental intervention-level
@@ -662,6 +662,9 @@ export function inv24(lib: Library): InvariantReport {
       const text = `${r.label} ${r.id.replace(/_/g, " ")}`;
       if (!path.has(r.id) || r.side_effect || !SIDE_EFFECT_LABEL.test(text) || NOT_SIDE_EFFECT.test(text)) continue;
       if ([...upstream(m, r.id)].some((d) => d !== r.id && m.byId.get(d)?.side_effect)) continue;
+      // A total of benefit streams that includes development effects (New Incentives' "additional benefits":
+      // older children's deaths, development, consumption) is the main chain, not a side effect.
+      if (r.deps.some((d) => LATER_BENEFIT.test(m.byId.get(d)?.label ?? ""))) continue;
       // A component of a tagged side effect (a spillover ratio its tagged spillover row reads) is weighted there.
       if (tagged.some((t) => t !== r.id && upstream(m, t).has(r.id))) continue;
       violations.push({ inv: "INV-24", model: m.id, where: r.id, detail: `"${r.label}" reads like a side effect but carries no side_effect tag and reads no tagged row, so $side_effect_weight doesn't reach it: tag it (\`added\` for an amount or share added, \`factor\` for a multiplier), or its components` });
@@ -669,7 +672,7 @@ export function inv24(lib: Library): InvariantReport {
   }
   return {
     id: "INV-24", title: "Side-effect rows are tagged", status: "partial", checked: models.length, violations,
-    how: "Every row on the path to the output whose label or id names excluded effects, a spillover, additional benefits or GiveWell's supplemental intervention-level adjustments (not leverage, funging or crowding in) carries `side_effect`, reads at any depth a row that does, or is read by one (a component of a tagged side effect). Heuristic on labels: side effects under other words aren't seen, and a total with one tagged component passes.",
+    how: "Every row on the path to the output whose label or id names excluded effects, a spillover, additional benefits or GiveWell's supplemental intervention-level adjustments (not leverage, funging, crowding in, costs, downsides or corrections for inflation and exchange rates; not a total of benefit streams that reads development effects) carries `side_effect`, reads at any depth a row that does, or is read by one (a component of a tagged side effect). Heuristic on labels: side effects under other words aren't seen, and a total with one tagged component passes.",
   };
 }
 
