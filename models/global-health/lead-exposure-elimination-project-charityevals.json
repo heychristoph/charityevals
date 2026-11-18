@@ -3,7 +3,22 @@
  "name": "Lead Exposure Elimination Project (charityevals)",
  "kind": "charity",
  "cause": "global-health",
- "beneficiaries": {"PAK":0.4706,"NGA":0.1827,"MWI":0.0769,"NER":0.0533,"MDG":0.0487,"ZAF":0.0306,"PER":0.0263,"GHA":0.0229,"BDI":0.0224,"COL":0.0182,"SEN":0.0137,"ZWE":0.0128,"SLE":0.0126,"LBR":0.0083},
+ "beneficiaries": {
+  "PAK": 0.4706,
+  "NGA": 0.1827,
+  "MWI": 0.0769,
+  "NER": 0.0533,
+  "MDG": 0.0487,
+  "ZAF": 0.0306,
+  "PER": 0.0263,
+  "GHA": 0.0229,
+  "BDI": 0.0224,
+  "COL": 0.0182,
+  "SEN": 0.0137,
+  "ZWE": 0.0128,
+  "SLE": 0.0126,
+  "LBR": 0.0083
+ },
  "beneficiaries_note": "Our build: shares of the result at the defaults by country, each country's births times its branch's discounted years and its own delivery share (regulations 35%, Nigeria at half credit; market switches 65%, Pakistan at its measured 53%, Malawi 90%, the other five 20%).",
  "template": "policy-research-meta",
  "estimate_basis": "past_average",
@@ -421,18 +436,9 @@
    "section": "reach",
    "label": "Births a year, Malawi (2023)",
    "format": "integer",
-   "value": 662289,
-   "kind": "observed",
+   "formula": "@malawi.births_2023",
    "unit": "children / year",
-   "source": {
-    "title": "UN World Population Prospects 2024, births per year (Our World in Data grapher)",
-    "url": "https://ourworldindata.org/grapher/number-of-births-per-year",
-    "page": "Malawi, 2023 estimate: 662,289 births",
-    "note": "UN DESA, World Population Prospects 2024, estimates variant, via Our World in Data's 'Number of births per year'.",
-    "retrieved": "2026-11-15"
-   },
-   "explainer": "A country where testing shows manufacturers switching to lead-free paint after LEEP's study and industry work, without a new LEEP-supported regulation (Malawi and Pakistan enforce older standards): each year's newborns are the children it protects.",
-   "drawn_with": "births_mdg"
+   "explainer": "A country where testing shows manufacturers switching to lead-free paint after LEEP's study and industry work, without a new LEEP-supported regulation (Malawi and Pakistan enforce older standards): each year's newborns are the children it protects."
   },
   {
    "id": "births_zwe",
@@ -703,14 +709,9 @@
    "section": "effect",
    "label": "Years from a child's exposure to working age",
    "format": "number",
-   "value": {
-    "low": 14,
-    "best": 17,
-    "high": 20
-   },
-   "kind": "judgment",
+   "formula": "@lead.years_exposure_to_working_age",
    "unit": "years",
-   "explainer": "Lead harms the brain most before about age six (exposure centred near age three); earnings start at about 20. Our judgment, 17 years (14 to 20), as EDF's lead-pipe branch of ours takes 15 (10 to 20) for the same chain in older children."
+   "explainer": "The shared figure (facts: lead): lead harms the brain most before about age six, and earnings start at about 20."
   },
   {
    "id": "paint_exposure_pv",
@@ -755,15 +756,8 @@
    "section": "effect",
    "label": "Deaths attributed to lead exposure worldwide, 2023",
    "format": "integer",
-   "value": 3500000,
-   "kind": "observed",
+   "formula": "@lead.deaths_2023_world",
    "unit": "deaths / year",
-   "source": {
-    "title": "WHO, Lead poisoning and health, fact sheet (10 June 2026), citing IHME's Global Burden of Disease Study 2023",
-    "url": "https://www.who.int/news-room/fact-sheets/detail/lead-poisoning-and-health",
-    "quote": "more than 3.5 million deaths globally were attributed to lead exposure in 2023, primarily due to cardiovascular effects",
-    "retrieved": "2026-11-15"
-   },
    "explainer": "Lead's deaths from all sources, mostly adults' heart disease from a lifetime's exposure."
   },
   {
@@ -771,16 +765,52 @@
    "section": "effect",
    "label": "Births worldwide, 2023",
    "format": "integer",
-   "value": 132110264,
-   "kind": "observed",
+   "formula": "@lead.births_2023_world",
    "unit": "children / year",
-   "source": {
-    "title": "UN World Population Prospects 2024, births per year (Our World in Data grapher)",
-    "url": "https://ourworldindata.org/grapher/number-of-births-per-year",
-    "page": "World, 2023 estimate: 132,110,264 births",
-    "retrieved": "2026-11-15"
-   },
    "explainer": "Lead's deaths per year are put against a year's births, so that a birth cohort's worth of paint exposure averted carries a year's worth of paint's share of the deaths."
+  },
+  {
+   "id": "older_adults_protected",
+   "section": "effect",
+   "label": "People aged 65 or older in the 14 countries with a counted win (2023)",
+   "format": "integer",
+   "value": 34865740,
+   "kind": "observed",
+   "unit": "people",
+   "source": {
+    "title": "UN World Population Prospects 2024, population by broad age group (Our World in Data grapher)",
+    "url": "https://ourworldindata.org/grapher/population-young-working-elderly",
+    "page": "2023, aged 65+: Madagascar 1,040,394, Sierra Leone 271,295, Liberia 180,041, Burundi 343,641, Niger 672,581, Peru 3,041,088, Nigeria 6,900,487, Pakistan 10,385,763, Malawi 546,872, Zimbabwe 591,139, Ghana 1,227,069, Colombia 4,903,516, Senegal 649,053, South Africa 4,112,801; total 34,865,740",
+    "note": "UN DESA, World Population Prospects 2024, estimates variant, via Our World in Data's 'Population by broad age group', 2023.",
+    "retrieved": "2026-11-18"
+   },
+   "explainer": "Lead's deaths are mostly heart disease at older ages, so how many older adults the protected countries have per child born sets how many lead deaths a cut in their blood lead can avert."
+  },
+  {
+   "id": "births_protected",
+   "section": "effect",
+   "label": "Births a year in the 14 countries with a counted win (2023)",
+   "format": "integer",
+   "formula": "births_mdg + births_sle + births_lbr + births_bdi + births_ner + births_per + births_nga + births_pak + births_mwi + births_zwe + births_gha + births_col + births_sen + births_zaf",
+   "unit": "children / year",
+   "explainer": "The births rows above summed, each country in full."
+  },
+  {
+   "id": "older_adults_world",
+   "section": "effect",
+   "label": "People aged 65 or older, world (2023)",
+   "format": "integer",
+   "formula": "@lead.older_adults_2023_world",
+   "unit": "people",
+   "explainer": "The shared figure (facts: lead, UN World Population Prospects): the same for the world, whose lead deaths per birth the deaths row starts from."
+  },
+  {
+   "id": "age_structure_adj",
+   "section": "effect",
+   "label": "The protected countries' older adults per birth, relative to the world's",
+   "format": "multiple",
+   "formula": "(older_adults_protected / births_protected) / (older_adults_world / world_births_2023)",
+   "explainer": "The protected countries' populations are younger than the world's, so a year of lower blood lead there averts fewer of the heart-disease deaths that make up most of lead's death toll. Their people aged 65 or older per birth over the world's, all 14 countries pooled by their populations: a proxy for the ages at which lead's deaths come (50 and over); adults' blood lead is taken as the world's."
   },
   {
    "id": "adult_vs_child_paint_exposure",
@@ -810,9 +840,9 @@
    "label": "Side effect: adults' lead deaths averted, value per child born per year of protection (units of value)",
    "format": "small",
    "side_effect": "added",
-   "formula": "lead_deaths_2023 / world_births_2023 * paint_share * adult_vs_child_paint_exposure * lead_cvd_value_per_death * paint_exposure_pv * cohorts_per_win_year",
+   "formula": "lead_deaths_2023 / world_births_2023 * age_structure_adj * paint_share * adult_vs_child_paint_exposure * lead_cvd_value_per_death * paint_exposure_pv * cohorts_per_win_year",
    "unit": "units of value",
-   "explainer": "Lead paint dust also raises the blood lead of the adults in the same homes, which raises blood pressure and heart disease. Lead's deaths per birth, × paint's share of adults' blood lead (its share of children's × the adult ratio), valued at the shared value of a death by age, over the paint's life. The world's deaths over the world's births slightly understate the rate in the protected countries, where blood lead is higher, so this is a little conservative. Illness short of death, kidney disease and children's behaviour problems aren't counted: lead's burden is mostly deaths."
+   "explainer": "Lead paint dust also raises the blood lead of the adults in the same homes, which raises blood pressure and heart disease. Lead's deaths per birth worldwide, scaled to the protected countries' younger populations, × paint's share of adults' blood lead (its share of children's × the adult ratio), valued at the shared value of a death by age, over the paint's life. Illness short of death, kidney disease and children's behaviour problems aren't counted: lead's burden is mostly deaths."
   },
   {
    "id": "value_per_unit_year",
