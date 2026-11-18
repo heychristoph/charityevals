@@ -5,7 +5,10 @@
   "cause": "global-health",
   "beneficiaries": {"IND":1},
   "beneficiaries_note": "Nothing in the model says where; the charity's main country of operation, from its record: India.",
-  "missing_data": {"thin_share":1,"note":"Thin: a grant estimate for a new, scaled-up or partner-delivered programme: its reach is a projection, or its effect comes from research on other delivery (market or policy work, technical assistance to governments, new organisations)."},
+  "missing_data": {
+    "thin_share": 1,
+    "note": "Thin: a grant estimate for a new, scaled-up or partner-delivered programme: its reach is a projection, or its effect comes from research on other delivery (market or policy work, technical assistance to governments, new organisations)."
+  },
   "estimate_basis": "marginal",
   "charity": "rice-institute",
   "owner": "givewell",
@@ -281,14 +284,15 @@
       "id": "adjustment_for_morbidity_effects_lower_cost_estimate",
       "label": "Adjustment for morbidity effects (Lower cost estimate)",
       "section": "kmc",
-      "value": 0.1,
-      "kind": "estimate",
+      "formula": "@newborn_care.kmc_morbidity_share",
+      "published": 0.1,
       "source": {
         "title": "Source spreadsheet",
         "url": "https://docs.google.com/spreadsheets/d/1e2AoW8EBNJLUymWAqEdbcdb1aa3dfIFdL3xT2Jb99O8/edit",
         "cell": "KMC!B22"
       },
-      "format": "percent"
+      "format": "percent",
+      "explainer": "Changed for consistency. GiveWell's sheet types its kangaroo-care adjustment for illness averted (10%) here; every kangaroo-care model reads the site's one figure, @newborn_care.kmc_morbidity_share (GiveWell's own, from its Ansh analysis, with a range), so at the default the number is the same. The evaluator view keeps 0.1."
     },
     {
       "id": "adjustment_for_costs_saved_to_hospital_lower_cost_estimate",
