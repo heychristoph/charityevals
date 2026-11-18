@@ -21,7 +21,7 @@ Minor, no fix needed: the write-up says clients' fees are "about $1 million" for
 
 Verdict: PASS. No findings.
 Model-sha: 31375fd4f8b9dd507a7c9d02a00a403913411668e527452c2c2f01f3dd01159b
-Rules: 0.3.2
+Rules: 0.3.3
 
 Re-stamped: mechanical shared-fact change (INV-14): fb_work_years reads @catastrophe.field_work_years, the same 5 (2 to 10) every catastrophic-risk model had typed; result unchanged.
 

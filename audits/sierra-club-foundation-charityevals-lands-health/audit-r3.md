@@ -2,7 +2,7 @@
 Result: 9.286e-7 daly/$ = 0.0009286 years of healthy life per 1,000 dollars (combined range 6.1e-5 to 0.0142); cause median 0.001995 (x0.47). Round 2: 0.001075, so -14%. Verdict: pass.
 Verdict: pass
 Model-sha: c8bf33f1141c6bada4faf8f9e9de7c526175176c2ea1d031731d64ba63973631
-Rules: 0.3.2
+Rules: 0.3.3
 
 Scope: scoped verification of the changed rows (`pm_compliance_uov`, `uov_bridged`, `summary`, and the figure in writeups/sierra-club-foundation-charityevals.md). Unchanged rows not re-audited.
 

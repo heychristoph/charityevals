@@ -3,7 +3,7 @@
 Result: 0.1169 years of healthy life per $1,000 (0.001791 wellby/$), unchanged from round 4; the r4 low finding is fixed.
 Verdict: pass
 Model-sha: 7140f9474fa7a9fdf57e6a5e3e21628acb533a800ce99184bc97f1fd831e5884
-Rules: 0.3.2
+Rules: 0.3.3
 
 | # | Check | Outcome |
 |---|---|---|

@@ -1,7 +1,7 @@
 # Audit: federation-of-american-scientists-charityevals, round 4 (scoped verification, credit rule 2.24)
 Result: 0.001468 daly/$ = 1.468 years of healthy life per 1,000 dollars (combined range 0.052–41.3; model's own ranges 0.12–8.16). Verdict: pass.
 Model-sha: 6ee92927ccb8e4ff04bca3cb6c3a669c7188ab7aad15b5f230c4a4f6c3f38d57
-Rules: 0.3.2
+Rules: 0.3.3
 Scope: only gov_attribution_share_shared (0.7 (0.4-0.95) -> 0.9 (0.7-1)) and the classes on the used share rows.
 Preflight: pass (only the generated/distributions.json line, ignored as instructed).
 Previous round: round 3 had no open high or medium.

@@ -23,7 +23,7 @@ Unchanged from round 2: `$missing_data_discount`, `$uov_per_daly`, `resp_counter
 
 Verdict: pass. Findings: 0 high, 0 medium, 3 low.
 Model-sha: 8419e9519e581328d972045245df0ddf1c6094298ea05115863004642e84b4f3
-Rules: 0.3.2
+Rules: 0.3.3
 
 Re-stamped after merge: the summary low fixed ("about a fifth" → "about a quarter", computed 23%); no other change.
 

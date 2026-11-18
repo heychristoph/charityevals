@@ -1,7 +1,7 @@
 # Audit: carbon180-charityevals, round 6 (verification of the round 5 text fixes)
 Result: -0.01505 tco2e/$ = -0.002959 years of healthy life per $1,000, unchanged. Verdict: pass (no high or medium finding).
 Model-sha: 8df25eeb16efff80c01b86328720c2787c180f60ca4a56615c6d1032eeb58a2c
-Rules: 0.3.2
+Rules: 0.3.3
 Scope: round 5's mediums (1, 2) and lows (3, 4) only, in the uncommitted diff of the model and write-up.
 Mechanical: audit-model.ts 0 findings; check.ts all models valid, -0.002959.
 

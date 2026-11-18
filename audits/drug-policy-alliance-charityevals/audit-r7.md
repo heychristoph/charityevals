@@ -18,7 +18,7 @@ Findings:
 
 Verdict: pass
 Model-sha: 8f0cd3705bffacf35093909c69cd28562eececf2756575eed1aeabf5bb1f6952
-Rules: 0.3.2
+Rules: 0.3.3
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
 

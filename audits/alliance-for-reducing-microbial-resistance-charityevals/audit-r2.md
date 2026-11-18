@@ -1,7 +1,7 @@
 # Audit: alliance-for-reducing-microbial-resistance-charityevals, round 2
 Result: 1.012e-4 uov/$ = 0.0506 years of healthy life per 1,000 dollars (combined range 0.00045–5.75). Verdict: pass.
 Model-sha: ee4d0ca0e2bdf1251169d49f689e01233ba153858595595e952d9e78e04b3ba8
-Rules: 0.3.2
+Rules: 0.3.3
 Scope: unchanged from round 1 (scoped verification only).
 Preflight: pass (two low lines, generated files stale; regenerate with `npx tsx scripts/summaries.ts` before commit).
 
