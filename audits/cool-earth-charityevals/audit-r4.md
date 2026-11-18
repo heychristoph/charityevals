@@ -1,7 +1,7 @@
 # Audit: cool-earth-charityevals, round 4 (verification of the round-3 fix)
 Result: 1.099e-4 daly/$ = 0.110 years of healthy life per 1,000 dollars (unchanged). Verdict: pass (no findings).
-Model-sha: c0f9bfc83f05ef2482d84cfc4bb5b326dea028d28b4f8b50f0fbbb67a6da7f71
-Rules: 0.3.9
+Model-sha: 463156733cef2904e910e508b529111afc2f325c0aa63a8a778202833a4d48cc
+Rules: 0.3.10
 Mechanical: `scripts/audit-model.ts` reports 0 findings.
 
 ## Findings (0)
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 0.1103 → 0.1103 (−0.020%), 19 rows changed, against the tree before the rule.

@@ -185,6 +185,195 @@
       "explainer": "Some work changes how many people or animals ever live: generations a catastrophe would prevent, births averted, animals never bred. This says how much the good years of such lives count. The suffering in them always counts.\n\nThe default, 0%, counts only the suffering. At 100% their good years count like anyone's."
     },
     {
+      "id": "lives_added",
+      "label": "Count the people and animals a result adds",
+      "technical": "Switch on the lives a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept add besides the life itself (src/engine/population.ts)",
+      "format": "toggle",
+      "value": 1,
+      "kind": "judgment",
+      "explainer": "On (our view): a life saved also changes how many people are born later and how many animals are raised to feed them, and each shared value of a death, a stillbirth, a year of contraception and a year of doubled income is read with that (docs/normalization.md 2.25). Off (the evaluator view), so an evaluator's own results reproduce. Not offered as a control: \"Side effects count\" scales it, \"Lives that never start count\" weighs the people."
+    },
+    {
+      "id": "descendants_low_income",
+      "label": "Lives that follow from one life, low-income countries, discounted",
+      "technical": "Discounted descendants per person: each generation the last times the net reproduction rate; 0 where the sum has no end (a 0% discount rate, which only an evaluator's sheet pins)",
+      "unit": "lives",
+      "format": "number",
+      "formula": "iferror(@lives.reproduction_2050_low_income * (1 + $discount_rate) ^ -@lives.generation_years + @lives.reproduction_2050_low_income * @lives.reproduction_2075_low_income * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 2 + @lives.reproduction_2050_low_income * @lives.reproduction_2075_low_income * min(1, @lives.reproduction_2100_low_income) * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 3 / (1 - min(1, @lives.reproduction_2100_low_income) * (1 + $discount_rate) ^ -@lives.generation_years), 0)",
+      "explainer": "Not a slider. A person's children, grandchildren and so on, each generation the last times the UN's surviving daughters per woman and discounted a generation further (facts: lives.reproduction_*, lives.generation_years); from the third generation on at the 2100 figure, at most 1."
+    },
+    {
+      "id": "newborn_life_years_low_income",
+      "label": "Years a life lasts, low-income countries, discounted from birth",
+      "technical": "Present value of life expectancy at birth as a stream of years",
+      "unit": "years",
+      "format": "number",
+      "formula": "iferror((1 - (1 + $discount_rate) ^ -@lives.life_expectancy_low_income) / ln(1 + $discount_rate), @lives.life_expectancy_low_income)",
+      "explainer": "Not a slider. Life expectancy at birth as a stream of years, discounted at your rate: the years a person who is added eats animals for."
+    },
+    {
+      "id": "newborn_healthy_years_low_income",
+      "label": "Healthy years in a life, low-income countries, discounted from birth",
+      "technical": "Present value of healthy life expectancy (HALE) at birth",
+      "unit": "years of healthy life",
+      "format": "number",
+      "formula": "$newborn_life_years_low_income * @lives.healthy_life_expectancy_low_income / @lives.life_expectancy_low_income",
+      "explainer": "Not a slider. The good in a person's life that never starts otherwise, counted times \"Lives that never start count\"."
+    },
+    {
+      "id": "animal_dalys_per_person_year_low_income",
+      "label": "Suffering of the animals one person eats in a year, low-income countries, in years of healthy life",
+      "technical": "Healthy years (DALYs) of animal suffering per person-year of diet: suffering-adjusted days through the species step, net of farmed animals' weighted pain-free days",
+      "unit": "years of healthy life / person-year",
+      "format": "number",
+      "formula": "$chicken_vs_person * $daly_per_sad * @sad_factors.production_response * (@lives.sads_per_person_year * (@sad_factors.meal_sads_share_fish * @lives.fish_supply_low_income / @lives.fish_supply_world / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_chicken * @lives.poultry_supply_low_income / @lives.poultry_supply_world / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_pig * @lives.pig_supply_low_income / @lives.pig_supply_world / @aim_sads.pig_2024 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2024 / @aim_sads.chicken_2024)) - $never_started_weight * $pain_free_time_good / (365 * $daly_per_sad) * (@lives.farmed_birds_per_person_year * @lives.poultry_supply_low_income / @lives.poultry_supply_world * (@lives.lifespan_days_broiler - @lives.sads_per_broiler / @aim_sads.chicken_2024 + @lives.lifespan_days_laying_hen - @lives.sads_per_laying_hen / @aim_sads.chicken_2024) / 2 * @welfare_ranges.chicken_vs_chicken + @lives.farmed_mammals_per_person_year * @lives.pig_supply_low_income / @lives.pig_supply_world * (@lives.lifespan_days_pig - @lives.sads_per_piglet / @aim_sads.pig_2024) * @welfare_ranges.pig_vs_chicken + @lives.farmed_fish_per_person_year * @lives.fish_supply_low_income / @lives.fish_supply_world * @lives.pain_free_days_farmed_fish * @welfare_ranges.fish_vs_chicken))",
+      "explainer": "Not a slider. ACE's suffering-adjusted days for a year of the world's average diet, scaled to this group's fish, poultry and pig meat (FAO), times the fall in production per unit not eaten, through the species step every animal model takes (2.4), in a person's healthy time. Less the farmed animals' pain-free days, where you count them as good and count lives that never start."
+    },
+    {
+      "id": "descendants_lower_middle_income",
+      "label": "Lives that follow from one life, lower-middle-income countries, discounted",
+      "technical": "Discounted descendants per person: each generation the last times the net reproduction rate; 0 where the sum has no end (a 0% discount rate, which only an evaluator's sheet pins)",
+      "unit": "lives",
+      "format": "number",
+      "formula": "iferror(@lives.reproduction_2050_lower_middle_income * (1 + $discount_rate) ^ -@lives.generation_years + @lives.reproduction_2050_lower_middle_income * @lives.reproduction_2075_lower_middle_income * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 2 + @lives.reproduction_2050_lower_middle_income * @lives.reproduction_2075_lower_middle_income * min(1, @lives.reproduction_2100_lower_middle_income) * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 3 / (1 - min(1, @lives.reproduction_2100_lower_middle_income) * (1 + $discount_rate) ^ -@lives.generation_years), 0)",
+      "explainer": "Not a slider. A person's children, grandchildren and so on, each generation the last times the UN's surviving daughters per woman and discounted a generation further (facts: lives.reproduction_*, lives.generation_years); from the third generation on at the 2100 figure, at most 1."
+    },
+    {
+      "id": "newborn_life_years_lower_middle_income",
+      "label": "Years a life lasts, lower-middle-income countries, discounted from birth",
+      "technical": "Present value of life expectancy at birth as a stream of years",
+      "unit": "years",
+      "format": "number",
+      "formula": "iferror((1 - (1 + $discount_rate) ^ -@lives.life_expectancy_lower_middle_income) / ln(1 + $discount_rate), @lives.life_expectancy_lower_middle_income)",
+      "explainer": "Not a slider. Life expectancy at birth as a stream of years, discounted at your rate: the years a person who is added eats animals for."
+    },
+    {
+      "id": "newborn_healthy_years_lower_middle_income",
+      "label": "Healthy years in a life, lower-middle-income countries, discounted from birth",
+      "technical": "Present value of healthy life expectancy (HALE) at birth",
+      "unit": "years of healthy life",
+      "format": "number",
+      "formula": "$newborn_life_years_lower_middle_income * @lives.healthy_life_expectancy_lower_middle_income / @lives.life_expectancy_lower_middle_income",
+      "explainer": "Not a slider. The good in a person's life that never starts otherwise, counted times \"Lives that never start count\"."
+    },
+    {
+      "id": "animal_dalys_per_person_year_lower_middle_income",
+      "label": "Suffering of the animals one person eats in a year, lower-middle-income countries, in years of healthy life",
+      "technical": "Healthy years (DALYs) of animal suffering per person-year of diet: suffering-adjusted days through the species step, net of farmed animals' weighted pain-free days",
+      "unit": "years of healthy life / person-year",
+      "format": "number",
+      "formula": "$chicken_vs_person * $daly_per_sad * @sad_factors.production_response * (@lives.sads_per_person_year * (@sad_factors.meal_sads_share_fish * @lives.fish_supply_lower_middle_income / @lives.fish_supply_world / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_chicken * @lives.poultry_supply_lower_middle_income / @lives.poultry_supply_world / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_pig * @lives.pig_supply_lower_middle_income / @lives.pig_supply_world / @aim_sads.pig_2024 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2024 / @aim_sads.chicken_2024)) - $never_started_weight * $pain_free_time_good / (365 * $daly_per_sad) * (@lives.farmed_birds_per_person_year * @lives.poultry_supply_lower_middle_income / @lives.poultry_supply_world * (@lives.lifespan_days_broiler - @lives.sads_per_broiler / @aim_sads.chicken_2024 + @lives.lifespan_days_laying_hen - @lives.sads_per_laying_hen / @aim_sads.chicken_2024) / 2 * @welfare_ranges.chicken_vs_chicken + @lives.farmed_mammals_per_person_year * @lives.pig_supply_lower_middle_income / @lives.pig_supply_world * (@lives.lifespan_days_pig - @lives.sads_per_piglet / @aim_sads.pig_2024) * @welfare_ranges.pig_vs_chicken + @lives.farmed_fish_per_person_year * @lives.fish_supply_lower_middle_income / @lives.fish_supply_world * @lives.pain_free_days_farmed_fish * @welfare_ranges.fish_vs_chicken))",
+      "explainer": "Not a slider. ACE's suffering-adjusted days for a year of the world's average diet, scaled to this group's fish, poultry and pig meat (FAO), times the fall in production per unit not eaten, through the species step every animal model takes (2.4), in a person's healthy time. Less the farmed animals' pain-free days, where you count them as good and count lives that never start."
+    },
+    {
+      "id": "descendants_upper_middle_income",
+      "label": "Lives that follow from one life, upper-middle-income countries, discounted",
+      "technical": "Discounted descendants per person: each generation the last times the net reproduction rate; 0 where the sum has no end (a 0% discount rate, which only an evaluator's sheet pins)",
+      "unit": "lives",
+      "format": "number",
+      "formula": "iferror(@lives.reproduction_2050_upper_middle_income * (1 + $discount_rate) ^ -@lives.generation_years + @lives.reproduction_2050_upper_middle_income * @lives.reproduction_2075_upper_middle_income * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 2 + @lives.reproduction_2050_upper_middle_income * @lives.reproduction_2075_upper_middle_income * min(1, @lives.reproduction_2100_upper_middle_income) * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 3 / (1 - min(1, @lives.reproduction_2100_upper_middle_income) * (1 + $discount_rate) ^ -@lives.generation_years), 0)",
+      "explainer": "Not a slider. A person's children, grandchildren and so on, each generation the last times the UN's surviving daughters per woman and discounted a generation further (facts: lives.reproduction_*, lives.generation_years); from the third generation on at the 2100 figure, at most 1."
+    },
+    {
+      "id": "newborn_life_years_upper_middle_income",
+      "label": "Years a life lasts, upper-middle-income countries, discounted from birth",
+      "technical": "Present value of life expectancy at birth as a stream of years",
+      "unit": "years",
+      "format": "number",
+      "formula": "iferror((1 - (1 + $discount_rate) ^ -@lives.life_expectancy_upper_middle_income) / ln(1 + $discount_rate), @lives.life_expectancy_upper_middle_income)",
+      "explainer": "Not a slider. Life expectancy at birth as a stream of years, discounted at your rate: the years a person who is added eats animals for."
+    },
+    {
+      "id": "newborn_healthy_years_upper_middle_income",
+      "label": "Healthy years in a life, upper-middle-income countries, discounted from birth",
+      "technical": "Present value of healthy life expectancy (HALE) at birth",
+      "unit": "years of healthy life",
+      "format": "number",
+      "formula": "$newborn_life_years_upper_middle_income * @lives.healthy_life_expectancy_upper_middle_income / @lives.life_expectancy_upper_middle_income",
+      "explainer": "Not a slider. The good in a person's life that never starts otherwise, counted times \"Lives that never start count\"."
+    },
+    {
+      "id": "animal_dalys_per_person_year_upper_middle_income",
+      "label": "Suffering of the animals one person eats in a year, upper-middle-income countries, in years of healthy life",
+      "technical": "Healthy years (DALYs) of animal suffering per person-year of diet: suffering-adjusted days through the species step, net of farmed animals' weighted pain-free days",
+      "unit": "years of healthy life / person-year",
+      "format": "number",
+      "formula": "$chicken_vs_person * $daly_per_sad * @sad_factors.production_response * (@lives.sads_per_person_year * (@sad_factors.meal_sads_share_fish * @lives.fish_supply_upper_middle_income / @lives.fish_supply_world / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_chicken * @lives.poultry_supply_upper_middle_income / @lives.poultry_supply_world / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_pig * @lives.pig_supply_upper_middle_income / @lives.pig_supply_world / @aim_sads.pig_2024 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2024 / @aim_sads.chicken_2024)) - $never_started_weight * $pain_free_time_good / (365 * $daly_per_sad) * (@lives.farmed_birds_per_person_year * @lives.poultry_supply_upper_middle_income / @lives.poultry_supply_world * (@lives.lifespan_days_broiler - @lives.sads_per_broiler / @aim_sads.chicken_2024 + @lives.lifespan_days_laying_hen - @lives.sads_per_laying_hen / @aim_sads.chicken_2024) / 2 * @welfare_ranges.chicken_vs_chicken + @lives.farmed_mammals_per_person_year * @lives.pig_supply_upper_middle_income / @lives.pig_supply_world * (@lives.lifespan_days_pig - @lives.sads_per_piglet / @aim_sads.pig_2024) * @welfare_ranges.pig_vs_chicken + @lives.farmed_fish_per_person_year * @lives.fish_supply_upper_middle_income / @lives.fish_supply_world * @lives.pain_free_days_farmed_fish * @welfare_ranges.fish_vs_chicken))",
+      "explainer": "Not a slider. ACE's suffering-adjusted days for a year of the world's average diet, scaled to this group's fish, poultry and pig meat (FAO), times the fall in production per unit not eaten, through the species step every animal model takes (2.4), in a person's healthy time. Less the farmed animals' pain-free days, where you count them as good and count lives that never start."
+    },
+    {
+      "id": "descendants_high_income",
+      "label": "Lives that follow from one life, high-income countries, discounted",
+      "technical": "Discounted descendants per person: each generation the last times the net reproduction rate; 0 where the sum has no end (a 0% discount rate, which only an evaluator's sheet pins)",
+      "unit": "lives",
+      "format": "number",
+      "formula": "iferror(@lives.reproduction_2050_high_income * (1 + $discount_rate) ^ -@lives.generation_years + @lives.reproduction_2050_high_income * @lives.reproduction_2075_high_income * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 2 + @lives.reproduction_2050_high_income * @lives.reproduction_2075_high_income * min(1, @lives.reproduction_2100_high_income) * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 3 / (1 - min(1, @lives.reproduction_2100_high_income) * (1 + $discount_rate) ^ -@lives.generation_years), 0)",
+      "explainer": "Not a slider. A person's children, grandchildren and so on, each generation the last times the UN's surviving daughters per woman and discounted a generation further (facts: lives.reproduction_*, lives.generation_years); from the third generation on at the 2100 figure, at most 1."
+    },
+    {
+      "id": "newborn_life_years_high_income",
+      "label": "Years a life lasts, high-income countries, discounted from birth",
+      "technical": "Present value of life expectancy at birth as a stream of years",
+      "unit": "years",
+      "format": "number",
+      "formula": "iferror((1 - (1 + $discount_rate) ^ -@lives.life_expectancy_high_income) / ln(1 + $discount_rate), @lives.life_expectancy_high_income)",
+      "explainer": "Not a slider. Life expectancy at birth as a stream of years, discounted at your rate: the years a person who is added eats animals for."
+    },
+    {
+      "id": "newborn_healthy_years_high_income",
+      "label": "Healthy years in a life, high-income countries, discounted from birth",
+      "technical": "Present value of healthy life expectancy (HALE) at birth",
+      "unit": "years of healthy life",
+      "format": "number",
+      "formula": "$newborn_life_years_high_income * @lives.healthy_life_expectancy_high_income / @lives.life_expectancy_high_income",
+      "explainer": "Not a slider. The good in a person's life that never starts otherwise, counted times \"Lives that never start count\"."
+    },
+    {
+      "id": "animal_dalys_per_person_year_high_income",
+      "label": "Suffering of the animals one person eats in a year, high-income countries, in years of healthy life",
+      "technical": "Healthy years (DALYs) of animal suffering per person-year of diet: suffering-adjusted days through the species step, net of farmed animals' weighted pain-free days",
+      "unit": "years of healthy life / person-year",
+      "format": "number",
+      "formula": "$chicken_vs_person * $daly_per_sad * @sad_factors.production_response * (@lives.sads_per_person_year * (@sad_factors.meal_sads_share_fish * @lives.fish_supply_high_income / @lives.fish_supply_world / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_chicken * @lives.poultry_supply_high_income / @lives.poultry_supply_world / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_pig * @lives.pig_supply_high_income / @lives.pig_supply_world / @aim_sads.pig_2024 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2024 / @aim_sads.chicken_2024)) - $never_started_weight * $pain_free_time_good / (365 * $daly_per_sad) * (@lives.farmed_birds_per_person_year * @lives.poultry_supply_high_income / @lives.poultry_supply_world * (@lives.lifespan_days_broiler - @lives.sads_per_broiler / @aim_sads.chicken_2024 + @lives.lifespan_days_laying_hen - @lives.sads_per_laying_hen / @aim_sads.chicken_2024) / 2 * @welfare_ranges.chicken_vs_chicken + @lives.farmed_mammals_per_person_year * @lives.pig_supply_high_income / @lives.pig_supply_world * (@lives.lifespan_days_pig - @lives.sads_per_piglet / @aim_sads.pig_2024) * @welfare_ranges.pig_vs_chicken + @lives.farmed_fish_per_person_year * @lives.fish_supply_high_income / @lives.fish_supply_world * @lives.pain_free_days_farmed_fish * @welfare_ranges.fish_vs_chicken))",
+      "explainer": "Not a slider. ACE's suffering-adjusted days for a year of the world's average diet, scaled to this group's fish, poultry and pig meat (FAO), times the fall in production per unit not eaten, through the species step every animal model takes (2.4), in a person's healthy time. Less the farmed animals' pain-free days, where you count them as good and count lives that never start."
+    },
+    {
+      "id": "descendants_world",
+      "label": "Lives that follow from one life, the world, discounted",
+      "technical": "Discounted descendants per person: each generation the last times the net reproduction rate; 0 where the sum has no end (a 0% discount rate, which only an evaluator's sheet pins)",
+      "unit": "lives",
+      "format": "number",
+      "formula": "iferror(@lives.reproduction_2050_world * (1 + $discount_rate) ^ -@lives.generation_years + @lives.reproduction_2050_world * @lives.reproduction_2075_world * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 2 + @lives.reproduction_2050_world * @lives.reproduction_2075_world * min(1, @lives.reproduction_2100_world) * ((1 + $discount_rate) ^ -@lives.generation_years) ^ 3 / (1 - min(1, @lives.reproduction_2100_world) * (1 + $discount_rate) ^ -@lives.generation_years), 0)",
+      "explainer": "Not a slider. A person's children, grandchildren and so on, each generation the last times the UN's surviving daughters per woman and discounted a generation further (facts: lives.reproduction_*, lives.generation_years); from the third generation on at the 2100 figure, at most 1."
+    },
+    {
+      "id": "newborn_life_years_world",
+      "label": "Years a life lasts, the world, discounted from birth",
+      "technical": "Present value of life expectancy at birth as a stream of years",
+      "unit": "years",
+      "format": "number",
+      "formula": "iferror((1 - (1 + $discount_rate) ^ -@lives.life_expectancy_world) / ln(1 + $discount_rate), @lives.life_expectancy_world)",
+      "explainer": "Not a slider. Life expectancy at birth as a stream of years, discounted at your rate: the years a person who is added eats animals for."
+    },
+    {
+      "id": "newborn_healthy_years_world",
+      "label": "Healthy years in a life, the world, discounted from birth",
+      "technical": "Present value of healthy life expectancy (HALE) at birth",
+      "unit": "years of healthy life",
+      "format": "number",
+      "formula": "$newborn_life_years_world * @lives.healthy_life_expectancy_world / @lives.life_expectancy_world",
+      "explainer": "Not a slider. The good in a person's life that never starts otherwise, counted times \"Lives that never start count\"."
+    },
+    {
+      "id": "animal_dalys_per_person_year_world",
+      "label": "Suffering of the animals one person eats in a year, the world, in years of healthy life",
+      "technical": "Healthy years (DALYs) of animal suffering per person-year of diet: suffering-adjusted days through the species step, net of farmed animals' weighted pain-free days",
+      "unit": "years of healthy life / person-year",
+      "format": "number",
+      "formula": "$chicken_vs_person * $daly_per_sad * @sad_factors.production_response * (@lives.sads_per_person_year * (@sad_factors.meal_sads_share_fish / @aim_sads.fish_2024 * if($rp_species_weights, @welfare_ranges.fish_vs_chicken, @aim_sads.fish_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_chicken / @aim_sads.chicken_2024 * if($rp_species_weights, @welfare_ranges.chicken_vs_chicken, @aim_sads.chicken_2024 / @aim_sads.chicken_2024) + @sad_factors.meal_sads_share_pig / @aim_sads.pig_2024 * if($rp_species_weights, @welfare_ranges.pig_vs_chicken, @aim_sads.pig_2024 / @aim_sads.chicken_2024)) - $never_started_weight * $pain_free_time_good / (365 * $daly_per_sad) * (@lives.farmed_birds_per_person_year * (@lives.lifespan_days_broiler - @lives.sads_per_broiler / @aim_sads.chicken_2024 + @lives.lifespan_days_laying_hen - @lives.sads_per_laying_hen / @aim_sads.chicken_2024) / 2 * @welfare_ranges.chicken_vs_chicken + @lives.farmed_mammals_per_person_year * (@lives.lifespan_days_pig - @lives.sads_per_piglet / @aim_sads.pig_2024) * @welfare_ranges.pig_vs_chicken + @lives.farmed_fish_per_person_year * @lives.pain_free_days_farmed_fish * @welfare_ranges.fish_vs_chicken))",
+      "explainer": "Not a slider. ACE's suffering-adjusted days for a year of the world's average diet, scaled to this group's fish, poultry and pig meat (FAO), times the fall in production per unit not eaten, through the species step every animal model takes (2.4), in a person's healthy time. Less the farmed animals' pain-free days, where you count them as good and count lives that never start."
+    },
+    {
       "id": "life_value_multiplier",
       "label": "Multiplier on GiveWell's values of a life",
       "technical": "Life value multiplier on GiveWell's moral weights, worked out from the two sliders: $daly_per_child_death × $uov_per_daly over GiveWell's value of a death under five",

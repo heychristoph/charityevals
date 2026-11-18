@@ -1,7 +1,7 @@
 # Audit: american-red-cross-charityevals, round 3 (verification of the r2 fixes)
 Result: 4.296e-6 daly/$ = 0.004296 years of healthy life per 1,000 dollars (combined range 0.001812–0.01018); cause median 0.2028 (×0.021). Verdict: pass.
 Model-sha: 944928d36398e8497c6795d223fbe0422dbf230b3073d953560e9c40c4aac8e3
-Rules: 0.3.9
+Rules: 0.3.10
 Scope: scoped to the two r2 fixes only: volunteer_hours (now 10,300,000, FY2025) and the hf_counterfactual_adj explainer (NFPA sentence).
 Mechanical: lint not rerun beyond audit-model (far-below medium as in r2, summary gives the reason), invariants none, check.ts all valid, simulation-check stable (5% 0.613, 50% 1, 95% 1.56 x best guess), normalization-audit not rerun (coordinator: none).
 Previous round: r2 finding 1 (volunteer_hours 9M vs 10.3M) resolved: row is 10,300,000, observed, FY2025 report with the quoted sentence; result 0.004428 to 0.004296 (-3.0%), as predicted. r2 finding 2 (unsourced NFPA 99%/16%) resolved: sentence removed, replaced by a sourced one. r2 finding 3: no action needed.

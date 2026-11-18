@@ -18,6 +18,6 @@ Checked:
 
 Verdict: pass (0 high, 0 medium, 2 low)
 Model-sha: 09f102d3b50f602c936aae47f904c81e986cf2e2a47bb2c3c7553fc094958fb7
-Rules: 0.3.9
+Rules: 0.3.10
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.

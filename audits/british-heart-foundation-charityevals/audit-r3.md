@@ -18,6 +18,6 @@ Mechanical: scripts/check.ts valid (warnings on range and judgment share only); 
 
 Verdict: pass
 Model-sha: 060044728b5918447a0ea3f40f327d58353d72b5e5f72267b8dac86413b48e79
-Rules: 0.3.9
+Rules: 0.3.10
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.

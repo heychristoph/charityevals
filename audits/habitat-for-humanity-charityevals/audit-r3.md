@@ -2,7 +2,7 @@
 
 Result: 4.933e-6 daly/$ = 0.00493 years of healthy life per $1,000 (unchanged from r2; combined range 0.00112–0.0217).
 Model-sha: 82e7b3913b6ee9238f75d0d24d37a835e0c3848ef396aa845e9f06fd76025ef6
-Rules: 0.3.9
+Rules: 0.3.10
 Verdict: pass
 
 Scope: only the changes of commit 5f6554f1 to the model, its write-up and facts/habitat_for_humanity.json, checked against the four r2 lows, the move of the volunteer rows to shared facts, the result and the mechanical audit.

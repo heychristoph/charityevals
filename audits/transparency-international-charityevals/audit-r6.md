@@ -21,6 +21,6 @@ Credit rule 2.24, step 5: `pol_movement_share` re-judged (0.15 -> 0.35, range 0.
 
 Verdict: pass
 Model-sha: dfe757e26f3ef4c52eacec561834da9cb58b3ba044d72aa011480e576d78fe60
-Rules: 0.3.9
+Rules: 0.3.10
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.

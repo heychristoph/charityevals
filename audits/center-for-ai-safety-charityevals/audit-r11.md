@@ -1,7 +1,7 @@
 # Audit: center-for-ai-safety-charityevals, round 11 (scoped verification of round 10's fixes)
 Result: 0.01307 daly/$ = 13.07 years of healthy life per 1,000 dollars at mobiliser_share 100% (round 10 predicted about 13.1). Verdict: pass.
-Model-sha: 84b01f968e2735fc038a2990ce20550ca31a428686a5c567ecfd73748e5cdc27
-Rules: 0.3.9
+Model-sha: 0a6a7edf855cb365595e39557b3fabde8b25ce4ec1dd8f00e48f0cab2f587ca4
+Rules: 0.3.10
 Scope: only round 10's findings and the rows changed for them.
 Preflight: pass (low range lines and the out-of-date distributions line only).
 Previous round: finding 1 (medium) resolved; findings 2 and 3 (low) resolved.
@@ -16,3 +16,5 @@ No findings. Remaining observation (not a finding): the course carries about fou
 Adjustments table: evidence 1.2 for the AI work, 1 for the course; counterfactual 0.65 for the AI work, 1 for the course; overall share 0.83 -> 0.85. Swings: chance slider 0.4% to 20% now 1.0 to 52; misuse cut 1.9 to 125; misuse share 10% to 40% now 5.6 to 20.5; fb_share_working 1% to 15% now 4.4 to 35; 0.1% discount rate now 28. The "about four fifths" for the course still holds (about 82%).
 
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline 3.922 → 3.892 (−0.76%), 4 rows changed, against the tree before the rule.
+
+Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 3.892 → 3.892 (−0.0096%), 11 rows changed, against the tree before the rule.

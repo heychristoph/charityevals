@@ -18,9 +18,11 @@ Findings:
 - Low: the new best guesses (0.4, 0.3, 0.15, 0.3, 0.25, 0.4, 0.5, 0.6, 0.6, 0.4, 0.6) are stated judgments anchored on who is named in the denominator, with no counts of co-advocates; the explainers say so. Acceptable.
 
 Verdict: pass
-Model-sha: 8505dd5ed3837ae4aecfe618c07af68b9f0623a3ca61d071c1f86c6be546ed34
-Rules: 0.3.9
+Model-sha: f079b06b4db82099f9e220ac277b352f1bbbd806144f4cc4d75dc697e759f287
+Rules: 0.3.10
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
 
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 0.0002291 → 0.0002291 (−0.010%), 53 rows changed, against the tree before the rule.

@@ -1,7 +1,7 @@
 # Audit: institute-for-ai-policy-and-strategy-charityevals, round 5 (verification round)
 Result: 0.007114 daly/$ = 7.114 years of healthy life per 1,000 dollars at mobiliser_share 100% (unchanged from round 4). Verdict: pass.
-Model-sha: 294c665d2122c38450fb26711c0f9155a657c773ceab5c6b90175670d9941e52
-Rules: 0.3.9
+Model-sha: 33c5d571dc419b73f77cb3a5603c57fbcd2bfea4a0a959e7b239c7312d920bba
+Rules: 0.3.10
 Scope: round 4's medium (stale `summary`) and low 2 (ai_attribution_share_shared wording). Preflight passes (distributions.json notice ignored). No value changed.
 
 | # | Round 4 finding | Status | Evidence |
@@ -16,3 +16,5 @@ No new finding. Writeup (edited in round 4) agrees with the summary.
 Re-stamped (17 Nov 2026), rule mobiliser-share-30: the summary's typed range replaced by placeholders rendered from the model (the mobiliser's share now defaults to 30%). Mechanical: headline 7.114 → 2.134 (−70%), 12 rows changed, against 814eaf77.
 
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline 2.134 → 2.114 (−0.92%), 4 rows changed, against the tree before the rule.
+
+Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 2.114 → 2.114 (−0.0096%), 12 rows changed, against the tree before the rule.
