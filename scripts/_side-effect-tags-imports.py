@@ -81,7 +81,25 @@ assert not missing, missing
 for mid, p in sorted(paths.items()):
     t = p.read_text()
     m = json.loads(t)
-    assert dumps_like(m, t) == t, p
+    if dumps_like(m, t) != t:
+        # A file with hand-kept one-line fields deeper down: insert the tag line after the row's id line.
+        assert mid not in SPLITS, p
+        lines = t.split("
+")
+        n = 0
+        for form, ids in TAGS[mid].items():
+            for i in ids:
+                k = [j for j, l in enumerate(lines) if l.strip() == f'"id": "{i}",']
+                assert len(k) == 1, (mid, i, k)
+                if lines[k[0] + 1].strip().startswith('"side_effect"'): continue
+                pad = lines[k[0]][: len(lines[k[0]]) - len(lines[k[0]].lstrip())]
+                lines.insert(k[0] + 1, f'{pad}"side_effect": "{form}",'); n += 1
+        out = "
+".join(lines)
+        assert all(r.get("side_effect") == f for f, ids in TAGS[mid].items() for r in json.loads(out)["rows"] if r["id"] in ids)
+        p.write_text(out)
+        print(f"{mid}: {n} rows (text)")
+        continue
     by = {r["id"]: r for r in m["rows"]}
     n = 0
     for form, ids in TAGS.get(mid, {}).items():
