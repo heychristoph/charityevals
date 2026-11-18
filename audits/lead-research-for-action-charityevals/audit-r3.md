@@ -1,7 +1,7 @@
 # Audit: lead-research-for-action-charityevals, round 3
 Result: 2.630e-4 uov/$ = 0.1315 years of healthy life per 1,000 dollars (combined range 0.00128–13.55); cause median about 0.12 (round 1's figure, not re-printed; ×1.1). Verdict: **pass** (0 high, 0 medium, 0 new low; round 2's L2 and L3 remain with the builder).
 Model-sha: 8edeadef42af5c9d911f24118d783e61914ac94cd2dd0bf9b03c05059e2edb1a
-Rules: 0.3.11
+Rules: 0.3.12
 Scope: unchanged from round 2: the whole charity, one programme (market studies of lead in consumer products), October 2024 to October 2026, no accounts (charities/lead-research-for-action.json one line, $300,000 a year). Scoped verification: only round 2's two mediums and what they touched.
 Preflight: pass (no blocking lines; one low, generated/distributions.json out of date, which the builder regenerates before commit).
 Previous round: N1 resolved. N2 resolved. L1 no change needed (agreed). L2 kept with its reason (low, the builder's). L3 open as a low (summaries to be regenerated before commit); neither re-opens the round. Round 1's H1 deferred to the owner by instruction, not open against this model.

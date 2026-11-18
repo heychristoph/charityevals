@@ -1,7 +1,7 @@
 # Audit round 9 (scoped verification): Environmental Defense Fund (health and nature)
 Result: 0.000717 years of healthy life per 1,000 dollars at the defaults (was 0.000704). Verdict: pass.
 Model-sha: 491423674e2f704a3525b80da8a5d4b9d0a380a9b6afa9ec3c83da3c8da0e812
-Rules: 0.3.11
+Rules: 0.3.12
 
 ## Scope
 Credit rule 2.24, step 5 (re-judged shares): fish_attribution_share_shared (30% to 50%, range 25% to 80%), ag_attribution_share_shared (20% to 35%, range 15% to 60%) and the newly classed ag_attribution_share (credit win, formula share x mobiliser_share). Nothing else re-audited.

@@ -17,7 +17,7 @@ AI carries a yearly chance of catastrophe, spread evenly to 2100. By default the
 
 FAR.AI's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. Rethink has one typical project for work against misuse and one for work against AI that doesn't do what its makers intend. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -39,7 +39,7 @@ FAR.AI ended 2024 with net assets of $22.5 million, about two and a half years o
 
 ### What drives the result
 
-The main reason is the quarter of its work aimed at misuse. For catastrophes the world survives, Rethink's typical misuse project cuts the deaths about 450 times more per dollar than its typical misalignment project, because in its model most of those deaths come from misuse. So the misuse work carries almost all of the value. Deaths of people alive now are 99% of it: those catastrophes don't take the future, and at the default 4% discount rate the future counts for only about 8 years of the long-run population anyway.
+The main reason is the quarter of its work aimed at misuse. For catastrophes the world survives, Rethink's typical misuse project cuts the deaths about 450 times more per dollar than its typical misalignment project, because in its model most of those deaths come from misuse. So the misuse work carries almost all of the value. Deaths of people alive now are all of it: those catastrophes don't take the future, and by default the future does not count anyway (lives that never start: 0%).
 
 ### Biggest uncertainties
 

@@ -15,7 +15,7 @@ AI carries a yearly chance of catastrophe, spread evenly to 2100. By default the
 
 MIRI's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -35,7 +35,7 @@ MIRI roughly tripled its reserves in 2026 and is well above its two-year target,
 
 ### What drives the result
 
-The main reason is that Rethink's typical AI project cuts its risk far less per dollar than a typical nuclear or pandemic project: a 170th to a 260th as much for extinction, and about a thousandth as much for catastrophes the world survives. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment. In its model that is nine tenths of the risk of extinction from AI but only about a third of the deaths in catastrophes the world survives, most of which come from misuse. Deaths of people alive now are about 85% of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 0.77.
+The main reason is that Rethink's typical AI project cuts its risk far less per dollar than a typical nuclear or pandemic project: a 170th to a 260th as much for extinction, and about a thousandth as much for catastrophes the world survives. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment. In its model that is nine tenths of the risk of extinction from AI but only about a third of the deaths in catastrophes the world survives, most of which come from misuse. Deaths of people alive now are all of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because by default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 0.77.
 
 ### Biggest uncertainties
 

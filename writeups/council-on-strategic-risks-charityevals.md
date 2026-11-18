@@ -12,7 +12,7 @@ CSR spent $5.2 million in 2025 and had 23 employees. Its programmes cost $4.5 mi
 
 ### How the impact happens
 
-Nuclear war and pandemics carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+Nuclear war and pandemics carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 Fellows count through the work they add to the field: the share who go on to work on these risks because of the fellowship, valued at a typical dollar of that work. The fellowships are credited with that work in full, unless another programme trained the same people. The employers who pay the fellows are not part of the share: like any party that acts because of the charity, they come under the shared mobiliser setting.
 

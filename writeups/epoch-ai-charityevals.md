@@ -17,7 +17,7 @@ Most of its money comes from Coefficient Giving (formerly Open Philanthropy). Ep
 
 AI carries a yearly chance of catastrophe, spread evenly to 2100. By default there is a 3% chance by 2100 that AI ends humanity's future; this is a slider. The forecasting tournament's experts expect three AI catastrophes the world survives for every one that ends it. A catastrophe the world survives is taken to kill a quarter of people.
 
-Epoch's spending cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model, its chance of backfiring included. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted. Deaths are valued like every death on the site; the future lost counts only through the discount rate.
+Epoch's spending cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model, its chance of backfiring included. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted. Deaths are valued like every death on the site; the future lost counts only where you count lives that never start (0% by default).
 
 Epoch's work matters here when governments, labs and funders act on better information about AI: data on compute, chips and data centres, capability measures that show how fast dangerous abilities arrive, and forecasts that the field plans around.
 
@@ -42,7 +42,7 @@ Epoch raised $10.3 million in 2025 and spent $5 million. Since then Coefficient 
 
 ### What drives the result
 
-Only part of Epoch's work bears on catastrophic risk, it aims to inform rather than to reduce the risk, and its speed-up harm is among the family's largest. The small misuse share still gives about two thirds of the result: for catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its misalignment one. Deaths of people alive now are 95% of the value, the future lost 5%.
+Only part of Epoch's work bears on catastrophic risk, it aims to inform rather than to reduce the risk, and its speed-up harm is among the family's largest. The small misuse share still gives about two thirds of the result: for catastrophes the world survives, Rethink's typical misuse project cuts deaths far more per dollar than its misalignment one. Deaths of people alive now are all of the value at the defaults: the future lost counts only where you count lives that never start (0% by default).
 
 ### Biggest uncertainties
 
@@ -50,7 +50,7 @@ Only part of Epoch's work bears on catastrophic risk, it aims to inform rather t
 - **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the misuse figure alone moves the result from 0.013 to 0.26.
 - **How much of the work counts as misuse work.** At none the result is 0.011; at 8% of spending it is 0.13.
 - **Whether Epoch's information makes AI safer or faster.** The speed-up harm runs from −1.5% to −18%, and the uptake from 0.3 to 1.2 of a typical project.
-- **The discount rate and the years a cut counts.** At a 0.1% discount rate the result is about 0.24.
+- **The discount rate and the years a cut counts.** With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 0.24.
 
 ### What isn't modelled
 

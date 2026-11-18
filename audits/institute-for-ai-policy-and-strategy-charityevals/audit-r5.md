@@ -1,7 +1,7 @@
 # Audit: institute-for-ai-policy-and-strategy-charityevals, round 5 (verification round)
 Result: 0.007114 daly/$ = 7.114 years of healthy life per 1,000 dollars at mobiliser_share 100% (unchanged from round 4). Verdict: pass.
-Model-sha: 33c5d571dc419b73f77cb3a5603c57fbcd2bfea4a0a959e7b239c7312d920bba
-Rules: 0.3.11
+Model-sha: 86c4a2a515f45c8598252f927e0c25ab3205d97d18121cb0ec471e622b11f689
+Rules: 0.3.12
 Scope: round 4's medium (stale `summary`) and low 2 (ai_attribution_share_shared wording). Preflight passes (distributions.json notice ignored). No value changed.
 
 | # | Round 4 finding | Status | Evidence |
@@ -18,3 +18,5 @@ Re-stamped (17 Nov 2026), rule mobiliser-share-30: the summary's typed range rep
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline 2.134 → 2.114 (−0.92%), 4 rows changed, against the tree before the rule.
 
 Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 2.114 → 2.114 (−0.0096%), 12 rows changed, against the tree before the rule.
+
+Re-stamped (18 Nov 2026), rule never-started-prose: Wording: the summaries and write-ups of the models that count a future say it counts only where the reader counts lives that never start, give the Long-run value set's figure where they gave a 0.1% discount rate's, and Redwood Research states no range; no row or result changes. Mechanical: headline unchanged, against the tree before the rule.

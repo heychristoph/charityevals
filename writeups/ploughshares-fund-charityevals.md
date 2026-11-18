@@ -14,7 +14,7 @@ Ploughshares spent $7.6 million in the year to June 2025. Its one programme cost
 
 Nuclear war carries a yearly chance of catastrophe, taken from the domain experts' forecasts in the 2022 Existential Risk Persuasion Tournament and spread evenly to 2100: an 8% chance by 2100 of a war that kills over 10% of people, and 0.55% of one that ends humanity's future. The superforecasters' lower figures are the low end of each range.
 
-A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. A war the world survives is taken to kill 45% of people, mostly through famine, valued across the world's age groups like every death on the site. A war that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. A war the world survives is taken to kill 45% of people, mostly through famine, valued across the world's age groups like every death on the site. A war that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -38,7 +38,7 @@ Ploughshares holds almost no unrestricted reserves. It has drawn on its restrict
 
 ### What drives the result
 
-The grants bring about half of the result, Ploughshares' own work a quarter and the fellowship about a quarter. Catastrophes the world survives count for more than extinction does: at the default 4% discount rate, the future counts for about 8 years of the long-run population. At a 0.1% discount rate, the future counts far more and the result rises to about 30.
+The grants bring about half of the result, Ploughshares' own work a quarter and the fellowship about a quarter. Catastrophes the world survives count for more than extinction does: by default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 30.
 
 ### Biggest uncertainties
 

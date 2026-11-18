@@ -14,7 +14,7 @@ Grants grew to about $4 million in 2025, and over $10 million had been committed
 
 ### How the impact happens
 
-Pandemics carry a yearly chance of catastrophe, taken from the domain experts' forecasts in the Existential Risk Persuasion Tournament and spread evenly to 2100. One size is a pandemic that kills over 10% of people. Another ends humanity's future. A third is a COVID-scale pandemic, 2% a year. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), each year discounted. A catastrophe the world survives kills a share of everyone, valued across the world's age groups like every death on the site. A COVID-scale pandemic's deaths are valued at COVID-19's age mix. A catastrophe that ends humanity's future also takes everyone not yet born, who count only through the discount rate.
+Pandemics carry a yearly chance of catastrophe, taken from the domain experts' forecasts in the Existential Risk Persuasion Tournament and spread evenly to 2100. One size is a pandemic that kills over 10% of people. Another ends humanity's future. A third is a COVID-scale pandemic, 2% a year. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), each year discounted. A catastrophe the world survives kills a share of everyone, valued across the world's age groups like every death on the site. A COVID-scale pandemic's deaths are valued at COVID-19's age mix. A catastrophe that ends humanity's future also takes everyone not yet born, who count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -33,12 +33,12 @@ At the end of 2024 Sentinel held $9.1 million, six times what it spent from May 
 
 ### What drives the result
 
-The grant to the Council on Strategic Risks brings about two fifths of the result, the three grants valued as typical pandemic work about three tenths, and the fellowships about a quarter; the advised gift brings under 1%. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. At a 0.1% discount rate the future counts far more, and the result rises to about 26.
+The grant to the Council on Strategic Risks brings about two fifths of the result, the three grants valued as typical pandemic work about three tenths, and the fellowships about a quarter; the advised gift brings under 1%. Epoch AI's grant adds almost nothing, because Epoch's figure on the site is small: most of its work is on AI trends, not pandemics. Catastrophes the world survives count for more than extinction does. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 27.
 
 ### Biggest uncertainties
 
 - **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way.
-- **The discount rate and how many years a cut counts.** These are shared sliders, and they swing the result from about 0.49 to about 26.
+- **The discount rate and how many years a cut counts.** These are shared sliders: a cut counted for one year gives about 0.45, and the Long-run value set (a 0.1% discount rate, lives that never start in full) about 27.
 - **What the next dollar does.** Sentinel's spending has grown fast, so the room it has for more money is hard to judge. The figure runs from 17% to 90%.
 - **How far the grants beat or trail a typical project.** Their results weren't out by the end of 2024, and nothing about them is measured.
 

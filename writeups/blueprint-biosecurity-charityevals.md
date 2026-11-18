@@ -17,7 +17,7 @@ Most of its money comes from Coefficient Giving (formerly Open Philanthropy).
 
 Pandemics carry a yearly chance of catastrophe, spread evenly to 2100, from the experts in a forecasting tournament: about 1% that one ends humanity's future and about 4% that one kills more than a tenth of people. A pandemic as deadly as COVID-19 is also counted, with a 2% chance each year.
 
-Blueprint's spending cuts those risks by the share a typical pandemic project does per dollar, from Rethink Priorities' cross-cause model, its chance of backfiring included. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted. Deaths are valued like every death on the site; deaths in a COVID-scale pandemic are valued at COVID's ages, mostly older people. The future lost counts only through the discount rate.
+Blueprint's spending cuts those risks by the share a typical pandemic project does per dollar, from Rethink Priorities' cross-cause model, its chance of backfiring included. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted. Deaths are valued like every death on the site; deaths in a COVID-scale pandemic are valued at COVID's ages, mostly older people. The future lost counts only where you count lives that never start (0% by default).
 
 Blueprint's work matters if buildings, hospitals and governments have tools that cut airborne spread from the first day of an outbreak: lights and air cleaning already installed, and respirators already stockpiled for essential workers.
 
@@ -44,11 +44,11 @@ At the end of 2024 Blueprint had under three months of spending in hand. Since t
 
 ### What drives the result
 
-The result rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research comes a step before use, and its next dollar counts for less than the past average. Deaths of people alive now are 90% of the value, the future lost 10%.
+The result rests on Rethink's typical pandemic project, which averts many more deaths per dollar than a typical AI project. Blueprint's research comes a step before use, and its next dollar counts for less than the past average. Deaths of people alive now are all of the value at the defaults: the future lost counts only where you count lives that never start (0% by default).
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 25; at 8% it is about 1.4.
+- **The discount rate.** With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 25; at an 8% discount rate it is about 1.4.
 - **The years a cut counts.** At one year the result is 0.38; at twenty it is 5.4.
 - **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way; the extinction figure alone moves the result from 0.90 to 10.
 - **How much the next dollar does.** From 13.5% to 79% of the past average, the result moves from 0.64 to 3.8.

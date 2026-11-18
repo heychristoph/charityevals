@@ -1,7 +1,7 @@
 # Audit: rethink-priorities-charityevals-cross-cause, round 7 (scoped verification)
 Result: 9.522e-6 uov/$ = 0.004761 years of healthy life per 1,000 dollars (was 0.008805; -46%). Combined range not re-run (scoped round). Verdict: pass.
 Model-sha: a47dd143fd38f5f1c8a8bb210283599981111ba0006d0859bfc045b470003d05
-Rules: 0.3.11
+Rules: 0.3.12
 Scope: rule theoretical-cause-aggregates only (commit 65635d2e; inventory/rule-changes/theoretical-cause-aggregates.md). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 6.
 Previous round: round 6's findings stay as they were; this round adds none to the model.

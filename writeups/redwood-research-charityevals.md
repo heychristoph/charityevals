@@ -1,6 +1,6 @@
 ### Summary
 
-Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, so the plausible range runs from {{low}} to {{high}}.
+Redwood Research studies AI systems that might work against the people who build them. It started the field of AI control: ways to use a powerful model safely even if it is secretly trying to get around its monitors. Our model of its work in 2024 comes to **{{result}} years of healthy life per $1,000**. That figure rests on forecasts of how likely an AI catastrophe is and on an estimate of what a typical dollar of AI safety work does to that risk. Both are deeply uncertain, too much for the simulation to give a reliable range.
 
 ### What the charity does
 
@@ -15,7 +15,7 @@ AI carries a yearly chance of catastrophe, spread evenly to 2100. By default the
 
 Redwood's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. Rethink has one typical project for work against misuse and one for work against AI that doesn't do what its makers intend. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -44,7 +44,7 @@ All of Redwood's work is against misaligned AI. For catastrophes the world survi
 - **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.0026 to 0.34.
 - **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.0089 to 0.29.
 - **Whether any of the work counts as misuse work.** If the paper on hidden capabilities counted as misuse work (about 15% of the research), the result would be 0.45.
-- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 0.71.
+- **The discount rate and the years a cut counts.** These are shared sliders. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 0.71.
 
 ### What isn't modelled
 

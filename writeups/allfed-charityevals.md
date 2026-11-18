@@ -18,7 +18,7 @@ ALLFED doesn't change the chance of a nuclear war. It works on how many die if o
 
 A typical project cuts the deaths it targets by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The model applies that cut to the famine deaths after a war. A share of the deaths in a war is the same number of lives whether it comes from a lower chance of war or fewer deaths in one. Deaths are valued across the world's age groups like every death on the site. The cut counts for the years such progress would otherwise have taken to come (5 by default), each year discounted.
 
-A war that ends humanity's future also takes the lives of everyone not yet born. The model gives ALLFED 30% of that risk, the part that runs through the food supply. At the default 4% discount rate this part is under 1% of the result.
+A war that ends humanity's future also takes the lives of everyone not yet born. The model gives ALLFED 30% of that risk, the part that runs through the food supply. By default this part does not count (lives that never start: 0%).
 
 ### How the model works
 
@@ -47,7 +47,7 @@ ALLFED's main funder cut its support for 2025, and ALLFED appealed for $800,000 
 
 ### What drives the result
 
-Famine deaths in a war the world survives bring almost all of the result. At a 0.1% discount rate the result rises to about 17. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
+Famine deaths in a war the world survives bring almost all of the result. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 17. It is close to them because it uses the same typical nuclear dollar, applied here to deaths in a war rather than to its chance.
 
 ### Biggest uncertainties
 

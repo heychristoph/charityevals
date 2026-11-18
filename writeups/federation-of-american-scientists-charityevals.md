@@ -13,7 +13,7 @@ FAS spent $36.4 million in the year to June 2025 and had 116 employees. Its prog
 
 ### How the impact happens
 
-Nuclear war, pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+Nuclear war, pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 The rest of the work aims to make US public spending and regulation work better. A dollar of it is taken to bear on about $100 of public money a year in the programmes it touches. Rich countries' public investment loses about {{row:gov_efficiency_gap}} of its value to inefficiency. The work is taken to close 2% of that gap in what it touches. The public value gained is valued at what a dollar is worth to the average American.
 

@@ -44,7 +44,7 @@ Like theirs, most of it rests on Rethink's typical pandemic project. 1Day is sma
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 19; at 8% it is about 1.3.
+- **The discount rate.** With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 19; at an 8% discount rate it is about 1.2.
 - **The years a cut counts.** At one year the result is 0.48; at twenty it is 4.8.
 - **How much a typical pandemic dollar cuts the risk.** Rethink's figures run ten times either way: the extinction figure alone moves the result from 1.1 to 7.7.
 - **How much the next dollar does.** From 24% to 99% of the past average, the result moves from 0.70 to 2.9.

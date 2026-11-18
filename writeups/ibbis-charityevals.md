@@ -19,7 +19,7 @@ Pandemics carry a yearly chance of catastrophe, from the domain experts' forecas
 
 IBBIS's spending cuts that yearly risk by the share a typical biosecurity project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
 
-The deaths averted are valued like every death on the site, by age. A COVID-scale pandemic kills mostly older people, so its deaths take COVID's age mix. A catastrophe that kills a share of the world takes the world's age mix. One that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+The deaths averted are valued like every death on the site, by age. A COVID-scale pandemic kills mostly older people, so its deaths take COVID's age mix. A catastrophe that kills a share of the world takes the world's age mix. One that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -38,7 +38,7 @@ IBBIS is raising money in small grants for named work, and Founders Pledge's 202
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 37. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: by default the future of people not yet born does not count (lives that never start: 0%). Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 37. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
 
 ### Biggest uncertainties
 

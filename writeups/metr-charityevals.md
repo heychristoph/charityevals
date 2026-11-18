@@ -18,7 +18,7 @@ AI carries a yearly chance of catastrophe, spread evenly to 2100. By default the
 
 METR's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. Rethink has one typical project for work against misuse and one for work against AI that doesn't do what its makers intend. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -47,7 +47,7 @@ All of METR's work is against AI escaping control. For catastrophes the world su
 - **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.0025 to 0.32.
 - **How much a dollar of misalignment work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: from 0.0084 to 0.27.
 - **Whether any of the work counts as misuse work.** If the cybersecurity tasks counted as misuse work (about 10% of the work), the result would be 0.29.
-- **The discount rate and the years a cut counts.** These are shared sliders. At a 0.1% discount rate the result is about 0.65.
+- **The discount rate and the years a cut counts.** These are shared sliders. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 0.65.
 
 ### What isn't modelled
 

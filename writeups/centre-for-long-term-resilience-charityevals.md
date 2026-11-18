@@ -12,7 +12,7 @@ CLTR was founded in 2019. It is a non-profit company limited by guarantee (Alpen
 
 ### How the impact happens
 
-Pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+Pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 ### How the model works
 

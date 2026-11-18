@@ -18,7 +18,7 @@ AI carries a yearly chance of catastrophe: the site's shared 3% by 2100 that AI 
 
 GovAI's research cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model (its chance that a project backfires included). Rethink has two kinds of AI project. Work against misuse cuts the misuse part of the risk, which is most of the deaths in catastrophes the world survives. Other work cuts the misalignment part. We take a fifth of GovAI's catastrophe research as misuse work, mainly its Threat Modelling Team, and Rethink's misuse projects cut far more risk per dollar. The cut counts for the years such progress would otherwise have taken to come, each year discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 ### How the model works
 
