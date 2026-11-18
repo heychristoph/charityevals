@@ -1757,7 +1757,7 @@ export function inv23(lib: Library, av = assumptionValues(lib.assumptions)): Inv
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv9c(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av), inv24(lib)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
