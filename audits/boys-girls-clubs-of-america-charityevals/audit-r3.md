@@ -2,7 +2,7 @@
 Re-stamped: label-only change (wellbys_bridged and dalys_direct labels now say after the children's branch's adjustments, which their formulas apply); no formula or value changed since round 2, which passed.
 Verdict: pass
 Model-sha: 932e1735914f4fce6b4c1318243056e32d45e5cb9f43a0edbe4d5fb203ea427a
-Rules: 0.2.2
+Rules: 0.3.0
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 

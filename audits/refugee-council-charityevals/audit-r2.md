@@ -2,7 +2,7 @@
 Result: 1.835e-6 daly/$ = 0.001835 years of healthy life per 1,000 dollars (combined range 0.00037-0.0090). Verdict: pass.
 Verdict: pass
 Model-sha: 1382e3e034f07e370a2c84c1448685413814c93a88bd7b9a26e2884cd03309f2
-Rules: 0.2.2
+Rules: 0.3.0
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, summary gives the reason); simulation stable (5% 0.42, 95% 2.45 x best guess); normalization-audit printed no line for this model (generated/ reverted).
 
 Round-1 findings:

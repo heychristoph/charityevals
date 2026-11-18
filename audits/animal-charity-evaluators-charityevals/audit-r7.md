@@ -1,7 +1,7 @@
 # Audit: animal-charity-evaluators-charityevals, round 7 (scoped verification)
 Result: -3.906e-9 uov/$ = -1.953e-6 years of healthy life per 1,000 dollars (was 3.280e-5; -1.1e+2%, crossing zero). Combined range not re-run (scoped round). Verdict: pass.
 Model-sha: 701154d09126513662e90e46c1f3a33eb0925734ea9938ab225dd087e52296ba
-Rules: 0.2.2
+Rules: 0.3.0
 Scope: rule theoretical-cause-aggregates only (commit 65635d2e; inventory/rule-changes/theoretical-cause-aggregates.md). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 6.
 Previous round: round 6's findings stay as they were; this round adds none to the model.

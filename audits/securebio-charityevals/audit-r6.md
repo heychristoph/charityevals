@@ -1,7 +1,7 @@
 # Audit: securebio-charityevals, round 6 (follow-up to round 5: wording fixes only)
 Result: 7.73 years of healthy life per $1,000 at mobiliser_share 100% (unchanged from round 5). Verdict: pass.
 Model-sha: 71cc0b662a827d57edafd8b432cead791ca60c84f052b8ebc66536b2d2db0d38
-Rules: 0.2.2
+Rules: 0.3.0
 Scope: unchanged.
 Preflight: pass (as in round 5).
 Previous round: round 5 had no high or medium; its two lows are resolved (below).

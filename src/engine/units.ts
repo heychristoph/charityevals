@@ -178,6 +178,7 @@ export function unitIssues(lib: Library, m: ResolvedModel, exempt: (r: ResolvedR
         };
         switch (n.fn) {
           case "min": case "max": case "sum": case "avg": case "median": case "iferror": return fold(args);
+          case "wavg": return fold(args.filter((_, i) => i % 2 === 1));
           case "if": return fold(args.slice(1));
           case "abs": case "round": case "roundup": case "rounddown": return { ...args[0], literal: undefined };
           case "and": case "or": case "not": return DIMLESS;

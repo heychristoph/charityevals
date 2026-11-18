@@ -1,7 +1,7 @@
 # Audit: central-square-foundation-charityevals, round 6 (scoped to the round 5 lows)
 Result: 0.001757 uov/$ = 0.879 years of healthy life per 1,000 dollars. Verdict: pass (0 high, 0 medium, 0 low).
 Model-sha: 5c34085786dfce322f23782a58ed1fc345f98e161c6724fe05999c9e3de98efe
-Rules: 0.2.2
+Rules: 0.3.0
 Scope: only the two wording fixes from round 5 and that nothing else changed.
 Preflight: pass.
 Previous round:

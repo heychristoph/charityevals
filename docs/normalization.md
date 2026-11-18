@@ -739,9 +739,11 @@ so the cause's figure has to keep the top of the cause. Weighted by spending it 
 below zero. The median and a 10% trimmed mean both drop the top (all three Rethink Priorities models below
 zero under either). So the mean stays equal-weight, a young net-harm charity included, as it counts like any
 other. Where money is spread over named charities in proportion to what they spend, a formula weighs them by
-`#spending:<charity>`, the charity's programme spending in USD (`spending.programme`; none on record: its
-cause's median; ranking.ts `spendingOf`): Ambitious Impact's average of the charities it launched, whose
-money each charity spends.
+`#spending:<charity>`, the charity's programme spending in USD from its accounts (`spending.programme`,
+ranking.ts `spendingOf`), in `wavg(w1, x1, w2, x2, ...)`, where a charity with none on record weighs the median
+of the others in the same average (a cause's median would be the large charities': seven young charities
+carried 96% of the first try): Ambitious Impact's average of the charities it launched, whose money each
+charity spends. A budget or plan is not spending and isn't recorded as it.
 
 | Model | Our view before → after | Evaluator view |
 |---|---|---|

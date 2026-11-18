@@ -1,7 +1,7 @@
 # Audit: sentinel-bio-charityevals, round 6 (verification of round 5's findings)
 Result: 0.007824 daly/$ = 7.82 years of healthy life per 1,000 dollars at mobiliser_share = 100% (7.8235; round 5 saw 7.8243, the Council grant is read live). Verdict: pass.
 Model-sha: f2a6d838f5b26c1bc512351a20f1822b96f57ac5d177012a3d70cb21dfdf2e26
-Rules: 0.2.2
+Rules: 0.3.0
 Scope: round 5's three findings only. Preflight passes (only the out-of-date distributions line, ignored).
 
 Previous round (round 5):

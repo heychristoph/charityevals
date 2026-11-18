@@ -2,7 +2,7 @@
 Result: 0.005594 uov/$ = 2.797 years of healthy life per 1,000 dollars. Verdict: pass.
 Verdict: pass
 Model-sha: 2bad2fdbd3a2c0d88a56a6f4911e98b2308e9c81fb1ca1e25c21fec06a083709
-Rules: 0.2.2
+Rules: 0.3.0
 
 Previous round: finding 1 (medium) resolved: a_movement_credit 0.35 (0.2-0.6) and b_movement_credit 0.5 (0.3-0.8), governments that pushed on their own account (G20 2009, FATCA, EU directives; African Group) named as co-campaigners, only secretariats and applying/enforcing governments as adopters, as proposed. Finding 2 (low) resolved: the adjustments section explainer now reads "civil society's share among those who campaigned for it".
 

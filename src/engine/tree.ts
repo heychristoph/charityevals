@@ -15,7 +15,7 @@ export type Part = { op?: string; node: Node };
 export type Shape = { how?: string; parts: Part[] };
 
 const FN: Record<string, string> = {
-  avg: "the average", min: "the smaller part", max: "the larger part", median: "the median", ln: "natural log",
+  avg: "the average", min: "the smaller part", max: "the larger part", median: "the median", wavg: "the weighted average", ln: "natural log",
   log10: "log₁₀", exp: "exponential", abs: "absolute value", sqrt: "square root", round: "rounded",
   roundup: "rounded up", rounddown: "rounded down", pv: "present value", pv_annuity_due: "present value over the years",
   and: "1 if all hold", or: "1 if any holds", not: "the opposite",
