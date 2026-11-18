@@ -16,7 +16,7 @@ Previous round:
 
 Verdict: pass
 Model-sha: 3c5cbb8a4b3df5b2b695ad0fc8ec1c2772e5d02a80f32372c835719af2e178ad
-Rules: 0.3.3
+Rules: 0.3.4
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 

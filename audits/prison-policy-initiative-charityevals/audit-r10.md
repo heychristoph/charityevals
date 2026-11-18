@@ -1,7 +1,7 @@
 # Audit round 10 (scoped verification): Prison Policy Initiative
 Result: 0.0546 years of healthy life per 1,000 dollars at the defaults (was 0.05399). Verdict: pass.
 Model-sha: de7e1cf0e0ecfbc631f668cc666d4b97af9b021f7b6412f8b934e9391709c3ef
-Rules: 0.3.3
+Rules: 0.3.4
 
 ## Scope
 Credit rule 2.24, step 5 (re-judged shares): st_attribution_share_shared (4% to 5%, range 1.5% to 12%) and ger_attribution_share_shared (50% to 60%, range 35% to 85%). Both used shares already carry credit win and read mobiliser_share. Nothing else re-audited.

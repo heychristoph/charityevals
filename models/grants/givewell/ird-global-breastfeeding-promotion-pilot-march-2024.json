@@ -2919,10 +2919,19 @@
       "expected": 0.1
     },
     {
+      "id": "units_of_value_from_development_effects_per_treatment_year_o_at_shared_values",
+      "label": "Units of value from development effects per treatment-year of SMC, Nigeria (Trials), at your discount rate and values",
+      "section": "breastfeeding_promotion_treatme",
+      "formula": "units_of_value_from_development_effects_per_treatment_year_o * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_smc / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_smc) * $uov_per_ln_consumption * ln(2)",
+      "published": 0.1,
+      "format": "number",
+      "explainer": "Changed for consistency. The sheet's figure is units of value from development effects per child-year of SMC, from GiveWell's SMC CEA: income gains from 12.5 years on, discounted at 4% and valued at 1/ln 2. Typed in as a number, it ignored your discount rate and the income slider. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2. At the defaults it is the sheet's figure; the evaluator view keeps it."
+    },
+    {
       "id": "units_of_value_from_breastfeeding_promotion_per_treatment_ye_4",
       "label": "Units of value from breastfeeding promotion per treatment-year (based on SMC U5 intervention) (Trials)",
       "section": "breastfeeding_promotion_treatme",
-      "formula": "units_of_value_from_development_effects_from_breastfeeding_c * units_of_value_from_development_effects_per_treatment_year_o",
+      "formula": "units_of_value_from_development_effects_from_breastfeeding_c * units_of_value_from_development_effects_per_treatment_year_o_at_shared_values",
       "expected": 0.03023255814
     },
     {
@@ -2936,7 +2945,7 @@
       "id": "units_of_value_from_development_effects_per_treatment_year_o_2",
       "label": "Units of value from development effects per treatment-year of SMC, Nigeria (Trials)",
       "section": "breastfeeding_promotion_treatme",
-      "formula": "units_of_value_from_development_effects_per_treatment_year_o",
+      "formula": "units_of_value_from_development_effects_per_treatment_year_o_at_shared_values",
       "expected": 0.1
     },
     {

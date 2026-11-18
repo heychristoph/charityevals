@@ -1,7 +1,7 @@
 # Audit: ibbis-charityevals, round 5
 Result: 0.008900 daly/$ = 8.90 years of healthy life per 1,000 dollars (combined range 0.33–244). Verdict: pass.
 Model-sha: 5fe3b48bbdced37ac3d5f20a5f1606c75d625626b7250b4373d200da8e8aa489
-Rules: 0.3.3
+Rules: 0.3.4
 Scope: re-stamp after wording fixes to `bio_attribution_share_shared`'s explainer. Headline 8.89994 equals round 4; the row's value and range are still 0.8 (0.55 to 0.95); no formula or class was touched.
 
 Previous round (round 4, all low):

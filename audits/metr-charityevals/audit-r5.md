@@ -2,7 +2,7 @@
 
 Result: 0.108 years of healthy life per 1,000 dollars at mobiliser_share 100% (headline 0.107679, same as round 4). Verdict: pass (no findings).
 Model-sha: ea062e4ffad9ebddd26f2d69bfd9e3f913d952880769642a4cf385cef78a8595
-Rules: 0.3.3
+Rules: 0.3.4
 Scope: wording-only follow-up to round 4.
 Preflight: not re-run (wording only).
 Previous round: round 4 low 1 (stale source quote on `attribution_share_shared`): resolved.

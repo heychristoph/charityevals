@@ -1,7 +1,7 @@
 # Audit: ploughshares-fund-charityevals, round 11
 Result: 28.13 years of healthy life per $1,000 (unchanged from round 10; combined range as in round 10). Verdict: pass. Short re-stamp after wording fixes.
 Model-sha: 43a5728009588a977cbc64bab282eb6814559f35ec50e566524d3574b88a6ba7
-Rules: 0.3.3
+Rules: 0.3.4
 Scope: unchanged from round 10.
 Preflight: pass (as in round 10).
 Previous round (r10, no high or medium; four lows):

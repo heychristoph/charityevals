@@ -20,4 +20,4 @@ Only the fixes to round 8: `value_destinations` reweighted by the GiveWell credi
 
 Verdict: pass
 Model-sha: 2e5f4f9344520d78789f1915fc66305298f5b054d10bdaf9a524a15e594664fe
-Rules: 0.3.3
+Rules: 0.3.4

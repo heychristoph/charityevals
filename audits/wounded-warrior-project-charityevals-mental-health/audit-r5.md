@@ -2,7 +2,7 @@
 
 Result: 2.478e-5 wellby/$ = 0.001618 years of healthy life per 1,000 dollars (combined range 0.00036-0.0072); cause median 0.104 (x0.0155). Verdict: **pass** (no high findings).
 Model-sha: b0c67ced47b7a282e2a5e1d5b2c4b2fa0fc04ce6ae6f3fcf695e31d8cb513a21
-Rules: 0.3.3
+Rules: 0.3.4
 Scope: only the changes since round 4 (diff 09393a2..HEAD; main was merged in between, so the median moved).
 
 Mechanical: audit-model 0 high / 0 medium / 1 low (far-below; the summary gives the reason and "under a fiftieth" matches x0.0155). normalization-audit: no violation for this model; `git checkout -- generated` run afterwards.

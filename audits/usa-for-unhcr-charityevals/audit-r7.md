@@ -15,7 +15,7 @@ Checks passed:
 
 Verdict: pass
 Model-sha: c0bb9605e1ffba7474ae7f98a9b7c460d6e470ec2febcd8d4c7c8f1b87d6806b
-Rules: 0.3.3
+Rules: 0.3.4
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b148c62.
 

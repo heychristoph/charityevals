@@ -24,10 +24,17 @@
     "name": "HLI",
     "assumptions": {
       "resource_shares": 0,
-      "daly_per_wellby": 0.575
+      "daly_per_wellby": 0.575,
+      "discount_rate": 0
     }
   },
   "sections": [
+    {
+      "id": "per_dollar",
+      "title": "Recipient, household and discounting",
+      "kind": "ours",
+      "explainer": "charityevals' step, not HLI's. HLI's figure counts the recipient and the other members of the household together, and a year of better wellbeing the same whenever it comes. In our view the household's share is a side effect (the side-effects slider weighs it) and later years count less at the discount rate under Your values; the evaluator view counts both in full and sets the rate to 0, so HLI's figure is unchanged there."
+    },
     {
       "id": "staff_pay",
       "title": "Staff pay below market",
@@ -52,7 +59,75 @@
         "url": "https://docs.google.com/spreadsheets/d/1nwTW81QYNTSNZDKFj8ozwECARfILEktJp8uQGwSPBeU/edit",
         "cell": "B45"
       },
-      "explainer": "HLI's current figure for GiveDirectly, which it uses as the benchmark for its other charities. HLI's earlier, more detailed model (2022) put it at 8.2 WELLBYs per $1,000. HLI's report explains the meta-analysis behind it; the summary sheet publishes only the result, so this model has a single input."
+      "explainer": "HLI's current figure for GiveDirectly, which it uses as the benchmark for its other charities. HLI's earlier, more detailed model (2022) put it at 8.2 WELLBYs per $1,000. HLI's report explains the meta-analysis behind it; the summary sheet publishes only the result, and its December 2024 summary gives the recipient and household shares our steps below use."
+    },
+    {
+      "id": "recipient_share_of_household",
+      "section": "per_dollar",
+      "label": "Recipient's share of the household's WELLBYs",
+      "format": "percent",
+      "value": 0.227765726681128,
+      "kind": "estimate",
+      "source": {
+        "title": "HLI, GiveDirectly comprehensive summary (December 2024)",
+        "url": "https://www.happierlivesinstitute.org/research/charity-evaluations/givedirectly-comprehensive-summary/",
+        "quote": "a total effect over time of 2.10 WELLBYs on the recipient ... 7.12 WELLBYs for the other household members combined ... 9.22 WELLBYs for the whole household",
+        "retrieved": "2026-11-18"
+      },
+      "explainer": "HLI's $1,000 transfer gives the recipient 2.10 WELLBYs and the four other household members 7.12 together (each 86% of the recipient's benefit), 9.22 in all: the recipient's share is 2.10 / 9.22 = 23%."
+    },
+    {
+      "id": "wellbys_recipient_per_1000",
+      "section": "per_dollar",
+      "label": "WELLBYs per $1,000 for the recipients",
+      "format": "number",
+      "formula": "wellbys_per_1000 * recipient_share_of_household"
+    },
+    {
+      "id": "wellbys_household_spillover_per_1000",
+      "section": "per_dollar",
+      "label": "WELLBYs per $1,000 for the other household members (spillover)",
+      "format": "number",
+      "formula": "wellbys_per_1000 * (1 - recipient_share_of_household)",
+      "side_effect": "added",
+      "explainer": "The other household members' benefit, a spillover beyond the person given the cash: a side effect, weighed by the side-effects slider (docs/normalization.md 2.16)."
+    },
+    {
+      "id": "discount_rate_per_year",
+      "section": "per_dollar",
+      "label": "Discount rate on future wellbeing",
+      "format": "percent",
+      "formula": "$discount_rate",
+      "explainer": "The shared discount rate (Your values). HLI doesn't discount, so the evaluator view pins it at 0."
+    },
+    {
+      "id": "effect_duration_years",
+      "section": "per_dollar",
+      "label": "Years the benefits are spread over",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 4,
+        "best": 7,
+        "high": 12
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment from HLI's meta-analysis of cash transfers (McGuire, Kaiser and Bach-Mortensen, Nature Human Behaviour 2022): the effect on wellbeing fades linearly and is gone about seven years after the transfer; HLI's summary says only that the benefits dissipate linearly. Spread evenly over 7 years (4 to 12); an even spread discounts slightly more than a linear fade over the same years."
+    },
+    {
+      "id": "discount_factor",
+      "section": "per_dollar",
+      "label": "Discount factor for benefits spread evenly over those years",
+      "format": "number",
+      "formula": "pv_annuity_due(1, discount_rate_per_year, effect_duration_years) / effect_duration_years",
+      "explainer": "The present value of an equal benefit each year over the years above, starting with the transfer, as a share of the undiscounted total: 1 at a 0% rate."
+    },
+    {
+      "id": "wellbys_per_1000_discounted",
+      "section": "per_dollar",
+      "label": "WELLBYs per $1,000, discounted",
+      "format": "number",
+      "formula": "(wellbys_recipient_per_1000 + wellbys_household_spillover_per_1000) * discount_factor"
     },
     {
       "id": "staff_cost_share",
@@ -90,7 +165,7 @@
       "section": "staff_pay",
       "label": "WELLBYs per dollar",
       "format": "small",
-      "formula": "(wellbys_per_1000 / 1000) * donor_cost_share",
+      "formula": "(wellbys_per_1000_discounted / 1000) * donor_cost_share",
       "explainer": "With credit by share of resources, times the share of the full cost paid in cash (staff's forgone pay is the rest)."
     }
   ],

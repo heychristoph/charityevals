@@ -1232,6 +1232,15 @@
       "explainer": "Changed for consistency. GiveWell's sheet types its kangaroo-care adjustment for developmental effects (15%) here; every kangaroo-care model reads the site's one figure, @newborn_care.kmc_developmental_share (GiveWell's own, from its Ansh analysis, with a range), so at the default the number is the same. The evaluator view keeps 0.15."
     },
     {
+      "id": "adjustment_for_developmental_effects_best_guess_at_shared_values",
+      "label": "Adjustment for developmental effects (Best guess), at your discount rate and values",
+      "section": "cea",
+      "formula": "adjustment_for_developmental_effects_best_guess * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.15,
+      "format": "percent",
+      "explainer": "Changed for consistency. The sheet's figure is development effects as a share of the value of the deaths averted, at GiveWell's values: children's income as adults from about 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death. Typed in as a number, it ignored your discount rate and the income slider, and grew with the weight on a life. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (the value of deaths it is set against already carries it). At the defaults it is the sheet's figure; the evaluator view keeps it."
+    },
+    {
       "id": "adjustment_for_morbidity_effects_best_guess",
       "label": "Adjustment for morbidity effects (Best guess)",
       "section": "cea",
@@ -1262,7 +1271,7 @@
       "id": "total_adjustment_for_additional_benefits_including_cost_savi",
       "label": "Total adjustment for additional benefits, including cost savings to hospitals (Best guess)",
       "section": "cea",
-      "formula": "1 + sum(adjustment_for_developmental_effects_best_guess, adjustment_for_morbidity_effects_best_guess, adjustment_for_costs_saved_to_hospital_best_guess)",
+      "formula": "1 + sum(adjustment_for_developmental_effects_best_guess_at_shared_values, adjustment_for_morbidity_effects_best_guess, adjustment_for_costs_saved_to_hospital_best_guess)",
       "expected": 1.25,
       "format": "percent"
     },

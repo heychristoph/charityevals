@@ -1,7 +1,7 @@
 # Audit: st-jude-charityevals, round 3
 Result: 7.206e-6 uov/$ = 0.003603 years of healthy life per 1,000 dollars (combined range 0.00047–0.0276); cause median 0.1085 (×0.033). Verdict: pass.
 Model-sha: 062f901bc40ff8a908305830c680f1e38aec615d7f3d4cae4c9d152da7c469d0
-Rules: 0.3.3
+Rules: 0.3.4
 Scope: scoped verification of commit a1555789 (the two deleted rows and the three reworded explainers) and round 2's items. Scope of the model itself (FY2025, all programmes) unchanged since round 1 and not re-audited.
 Mechanical: lint 0 high / 1 medium (`far-below`, explained in round 1 #3, unchanged) / 1 low (`spread`, the summary states it); the two `unused` lows of round 2 are gone. Invariants: none. `scripts/check.ts st-jude-charityevals`: all models valid. normalization-audit and simulation-check not re-run (no shared-figure conversion touched). generated/ untouched (git status clean).
 Previous round: round 2's three lows (#13, #14, #15) all resolved (table below); no new findings.

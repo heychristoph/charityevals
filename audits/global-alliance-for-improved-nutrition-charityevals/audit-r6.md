@@ -18,6 +18,6 @@ None.
 
 Verdict: pass
 Model-sha: 8effc4eb4eab0e3f2bf862a6673251a3122b9f6ba71ffb2c6be123af715fd852
-Rules: 0.3.3
+Rules: 0.3.4
 
 Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 1.619 → 0.4863 (−70%), 20 rows changed, against b58659bd.

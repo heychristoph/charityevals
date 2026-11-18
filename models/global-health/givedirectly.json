@@ -535,7 +535,6 @@
     },
     {
       "id": "adj_development",
-      "side_effect": "added",
       "section": "supplementary",
       "label": "Developmental effects",
       "format": "percent",
@@ -545,6 +544,16 @@
         "cell": "New CEA!B60"
       },
       "explainer": "Long-run gains for children, e.g. from better nutrition."
+    },
+    {
+      "id": "adj_development_at_shared_values",
+      "label": "Developmental effects, at your discount rate and values",
+      "section": "supplementary",
+      "formula": "adj_development * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria)",
+      "published": 0.05,
+      "format": "percent",
+      "explainer": "Changed for consistency. The sheet's figure is GiveWell's +5% for cash's effects on children's development, a share of the transfer's consumption value, counting income they earn as adults, discounted at 4%. Typed in as a number, it ignored your discount rate. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%. At the defaults it is the sheet's figure; the evaluator view keeps it.",
+      "side_effect": "added"
     },
     {
       "id": "adj_leverage",
@@ -600,7 +609,7 @@
       "section": "supplementary",
       "label": "Total adjustment factor",
       "format": "percent",
-      "formula": "1 + adj_morbidity + adj_development + adj_leverage + adj_fraud + adj_fungibility + adj_psych_spillovers",
+      "formula": "1 + adj_morbidity + adj_development_at_shared_values + adj_leverage + adj_fraud + adj_fungibility + adj_psych_spillovers",
       "expected": 1.08
     },
     {
