@@ -22,6 +22,8 @@ REMOVE = {
     "fortify-health-aim": OTHER.format("GiveWell's Fortify Health models and HLI's fortify-health-hli"),
     "healthy-futures-aim": OTHER.format("GiveWell, healthy-futures-phl-based-on-updated-23-feb-2026"),
     "lead-exposure-elimination-project-aim": OTHER.format("charityevals, lead-exposure-elimination-project-charityevals"),
+    "respira-health-aim": OTHER.format("charityevals, respira-health-charityevals"),
+    "oxygen-access-project-aim": OTHER.format("charityevals, oxygen-access-project-charityevals"),
     "novah-aim": OTHER.format("charityevals, novah-charityevals"),
     "learning-alliance-aim": OTHER.format("charityevals, learning-alliance-charityevals"),
     "notify-health-aim": OTHER.format("GiveWell, notify-health-sms-feb-2025"),
@@ -68,10 +70,6 @@ KEEP = {
         "Neev trains brick kiln owners in India's brick belt in better firing practice to cut coal use and air pollution."),
     "opal-health-aim": ("https://opalhealthafrica.org",
         "Opal Health trains government health workers in Uganda to run participatory learning and action sessions for pregnant women; AIM modelled Sierra Leone."),
-    "oxygen-access-project-aim": ("https://www.oxygenaccessproject.org",
-        "Oxygen Access Project provides hospitals with oximeters, oxygen concentrators, maintenance and power (registered February 2025 for work in Nigeria)."),
-    "respira-health-aim": ("https://respirahealth.org",
-        "Respira Health runs an eight-week pulmonary rehabilitation programme for COPD over WhatsApp in India; AIM modelled an app partnership in Nepal."),
 }
 
 INV = ROOT / "inventory/ambitious-impact-models.json"
