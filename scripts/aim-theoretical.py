@@ -22,6 +22,8 @@ REMOVE = {
     "fortify-health-aim": OTHER.format("GiveWell's Fortify Health models and HLI's fortify-health-hli"),
     "healthy-futures-aim": OTHER.format("GiveWell, healthy-futures-phl-based-on-updated-23-feb-2026"),
     "lead-exposure-elimination-project-aim": OTHER.format("charityevals, lead-exposure-elimination-project-charityevals"),
+    "cearch-aim": OTHER.format("charityevals, cearch-charityevals"),
+    "alliance-for-reducing-microbial-resistance-aim": OTHER.format("charityevals, alliance-for-reducing-microbial-resistance-charityevals"),
     "lead-research-for-action-aim": OTHER.format("charityevals, lead-research-for-action-charityevals"),
     "labri-aim": OTHER.format("charityevals, labri-charityevals"),
     "respira-health-aim": OTHER.format("charityevals, respira-health-charityevals"),
@@ -48,16 +50,12 @@ REMOVE = {
 
 # Kept: the charity runs the modelled programme today (evidence), no actual-data model exists.
 KEEP = {
-    "alliance-for-reducing-microbial-resistance-aim": ("https://forum.effectivealtruism.org/posts/srjXGXhsecmZvpEdq/two-years-of-doing-advocacy-on-antimicrobial-resistance",
-        "ARMoR advocates for antibiotic pull incentives, its key ask an EU subscription model (November 2025); AIM modelled the US PASTEUR Act."),
     "animal-policy-international-aim": ("https://www.animalpolicyinternational.org/",
         "Animal Policy International campaigns for import welfare standards in New Zealand (Stop Cruel Imports NZ), the UK and the EU."),
     "better-futures-guide-aim": ("https://betterfuturesguide.org/",
         "Better Futures Guide is setting up as a livelihoods charity evaluator; its first recommendations are planned before the end of 2026."),
     "better-season-project-aim": ("https://www.betterseasonproject.org/",
         "Better Season Project partners with Kenyan savings cooperatives to lend smallholders money for rainwater tanks secured on the tank (piloting)."),
-    "cearch-aim": ("https://exploratory-altruism.org/",
-        "CEARCH researches causes and recommends interventions (800 causes long-listed, 20 in depth), with grantmaking and advisory work built on that research."),
     "concentric-policies-aim": ("https://forum.effectivealtruism.org/posts/zdacfpQdQjfGNoavQ/marginal-funding-for-the-single-best-health-policy-in-the",
         "Concentric Policies advocates for tobacco taxes in Liberia and Guinea-Bissau (November 2024, with plans through 2025); AIM modelled Mongolia."),
     "first-embrace-aim": ("https://forum.effectivealtruism.org/posts/wGXCuedzsubqNDAca/introducing-first-embrace-an-ambitious-impact-incubated",
