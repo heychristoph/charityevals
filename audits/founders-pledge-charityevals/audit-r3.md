@@ -1,6 +1,7 @@
 # Audit: founders-pledge-charityevals, round 3 (scoped verification of round 2's fixes)
 Result: 0.01591 uov/$ = 7.955 years of healthy life per 1,000 dollars (combined range 2.05–30.9; the model's own ranges alone 6.77–10.68); cause median 0.06519 (×122, explained in the summary: about sixteen dollars to recommended charities per dollar spent; INV-15 passes). Verdict: pass.
 Model-sha: b52eab0ad71020c66d2b318cb4358e8bb008c82b638bfeec1969b3e8b68351e3
+Rules: 0.1.1
 Scope: unchanged (whole group, 2025, costs £9,147,150 = $12.05M); only round 2's changed rows were checked.
 Mechanical: lint none shown by audit-model (no findings printed), invariants none; check.ts "all models valid"; simulation-check stable (5% 0.337×, 50% 1×, 95% 2.65× the best guess). normalization-audit not re-run (scoped round; no rule change).
 Previous round (round 2): finding 1 (donor_cost_share missing other giving's new money) resolved; finding 2 (SilverLining, Save the Children) resolved; finding 3 (£7.3M) resolved; finding 4 (Bandhan, Resolve to Save Lives in lists) resolved; finding 5 (93% anchor, system change / global security wording) resolved.

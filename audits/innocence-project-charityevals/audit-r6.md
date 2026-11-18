@@ -15,6 +15,7 @@ Previous round: both lows resolved.
 
 Verdict: pass (no high, no medium; the two standing low notes only)
 Model-sha: 57577f61558b1cd78b058374661c21dc4f8a2f8d1b18a80748451217b97e927d
+Rules: 0.3.0
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000601 → 0.000489.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

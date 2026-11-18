@@ -32,6 +32,7 @@ None.
 
 Verdict: pass (0 high, 0 medium, 0 low).
 Model-sha: 64f6b6c44057e43f0b5b43144eb6a2dce7010480b14b982bcb077409108e4591
+Rules: 0.3.0
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
 Re-stamped (16 Nov 2026): Local market spillover reads the new shared fact cash.local_market_spillover_share (same value and range). Mechanical: headline unchanged, against 2492e3fc.

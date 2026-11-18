@@ -733,6 +733,18 @@ left (no model moved: the causes read then held none; the animal cause, read sin
 unknown cause or area, an empty one and any cycle. Not changed: named recipients without shares
 (GiveWell's influenced money), CEARCH (GiveWell's Top Charities) and The Life You Can Save (its own split).
 
+*Why equal weights (decided 2026-11-18).* Money a meta charity moves goes towards the charities it rates best,
+so the cause's figure has to keep the top of the cause. Weighted by spending it becomes the mainstream mix
+(global health led by the Salvation Army and United Way, animal welfare by the ASPCA): 10 models fell, five
+below zero. The median and a 10% trimmed mean both drop the top (all three Rethink Priorities models below
+zero under either). So the mean stays equal-weight, a young net-harm charity included, as it counts like any
+other. Where money is spread over named charities in proportion to what they spend, a formula weighs them by
+`#spending:<charity>`, the charity's programme spending in USD from its accounts (`spending.programme`,
+ranking.ts `spendingOf`), in `wavg(w1, x1, w2, x2, ...)`, where a charity with none on record weighs the median
+of the others in the same average (a cause's median would be the large charities': seven young charities
+carried 96% of the first try): Ambitious Impact's average of the charities it launched, whose money each
+charity spends. A budget or plan is not spending and isn't recorded as it.
+
 | Model | Our view before → after | Evaluator view |
 |---|---|---|
 | Giving What We Can (ours) | 54.7 → 56.2 (catastrophic risk: 4 → 12 charities) | — |
@@ -1440,8 +1452,9 @@ side effects for the main chain (unchanged at the defaults). Each changed model 
 Animal laws, the same way: the fight against a federal override of state cage and crate laws keeps Proposition 12's
 cost (CDFA's analysis) in every model of it, with the judgments they share in facts/farm_animal_laws.json (the
 opposition's share of the risk, the share that would revert, the egg share, sows, one coalition pool) and THL's in
-facts/the_humane_league.json: the ASPCA's farm work 0.00004 → −0.0014. The puppy-mill laws, the UK dog import law and
-Animal Policy International's proposed import ban have no analysis giving a cost (one explainer line each).
+facts/the_humane_league.json: the ASPCA's farm work 0.00004 → −0.0014. The puppy-mill laws and the UK dog import law have
+no analysis giving a cost (one explainer line each); Animal Policy International's import rules carry the EU cage-free
+egg-import cost (facts/compliance_costs.json).
 ### 2.22 Net harm shows as a negative result (15 Nov 2026)
 
 Owner: "negative is allowed". A model whose honest result is net harm keeps a headline below zero; the lint
@@ -1720,8 +1733,10 @@ evaluator view still reproduces every `expected`. Every slider moves every model
    reports) is shown only if the charity runs the modelled programme today (cited on the model, `theoretical`) and
    no model of its actual work exists (another evaluator's or ours). Otherwise it is removed and listed in
    inventory/ambitious-impact-models.json as "not shown: <reason>" (scripts/aim-theoretical.py). Kept ones are
-   flagged "purely theoretical" on the model and charity pages, in the model lists and on the rankings (a hollow,
-   dashed dot and a caveat).
+   flagged "purely theoretical" on the model and charity pages and in the model lists, and never ranked
+   (decided 2026-11-18: an estimate of an idea says little about the charity running it; `ranks()` in
+   src/engine/model.ts leaves it out, and the rankings list such charities as not ranked). A charity with only
+   theoretical models gets our own model of its actual work where it has operating data to build one from.
 2. **Several programmes:** a kept model of a charity that runs more than one is weighted by funding share
    (`programs` with `weight_source`).
 3. **AIM's co-founder and funding counterfactuals** are left out of our view (no other evaluator subtracts what

@@ -1,6 +1,6 @@
 ### Summary
 
-Project Drawdown researches which climate solutions matter most and helps funders, companies and investors put their money there. Our model values that advice by the money it changed in 2023-2025. Each dollar counts only for how much better its new use is than its old one. Against what Drawdown spent over those years, that comes to **{{result}} years of healthy life per $1,000**. Most of it is foundation and family giving that follows its guidance, valued at the ranked climate charities' figures, which average below zero at the defaults. The result is very uncertain: nobody has counted the decisions it changed, so the money and Drawdown's part in it are our judgments.
+Project Drawdown researches which climate solutions matter most and helps funders, companies and investors put their money there. Our model values that advice by the money it changed in 2023-2025. Each dollar counts only for how much better its new use is than its old one. Against what Drawdown spent over those years, that comes to **{{result}} years of healthy life per $1,000**. A large part of it is foundation and family giving that follows its guidance, valued at the ranked climate charities' figures over an ordinary climate charity's. The result is very uncertain: nobody has counted the decisions it changed, so the money and Drawdown's part in it are our judgments.
 
 ### What the charity does
 
@@ -32,7 +32,7 @@ Each branch then takes the share that wouldn't have happened anyway (40-60%) and
 
 ### What drives the result
 
-Funders' giving is the negative part of the result; companies' and investors' money is the positive part, about three fifths its size. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. A shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
+Companies' money is the largest part of the result, about half; funders' giving is about a third, and investors' and the public's the rest. The biggest swings are how much giving follows its guidance, the shared multiple for an ordinary charity against the ranked ones, and Drawdown's share of the work behind a funder's choice. A shifted dollar is valued at the ranked climate charities' figures, and forest protection is among them.
 
 ### Biggest uncertainties
 

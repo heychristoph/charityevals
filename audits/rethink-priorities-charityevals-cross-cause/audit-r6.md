@@ -15,6 +15,7 @@ None.
 - The `informed_money` label starts "Money moved: funders' and organisations' spending whose allocation ... changed"; "Money moved:" is the old name now that `money_moved` means gross money moved. Optional wording: "Spending changed: funders' and organisations' spending whose allocation its 2025 cross-cause research and surveys changed (US$)".
 
 Model-sha: a47dd143fd38f5f1c8a8bb210283599981111ba0006d0859bfc045b470003d05
+Rules: 0.1.1
 Verdict: pass
 Re-stamped (15 Nov 2026): wording only (no effective-altruism mentions; listing-risk trims); no number changed
 

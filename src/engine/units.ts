@@ -134,7 +134,8 @@ export function unitIssues(lib: Library, m: ResolvedModel, exempt: (r: ResolvedR
         if (n.scope === "row") return dims.get(n.name) ?? UNKNOWN;
         if (n.scope === "fact") return factDim(n.name);
         if (n.scope === "assumption") return assumptionDim(n.name);
-        // Another model's result: per dollar, in its units.
+        // A charity's spending (`#spending:<charity>`) is dollars; another model's result is per dollar, in its units.
+        if (n.name.startsWith("spending:")) return { money: 1, time: 0, scale: 1 };
         return { money: -1, time: 0, scale: 1 };
       case "neg": return dimOf(n.arg, sums);
       case "bin": {
@@ -177,6 +178,7 @@ export function unitIssues(lib: Library, m: ResolvedModel, exempt: (r: ResolvedR
         };
         switch (n.fn) {
           case "min": case "max": case "sum": case "avg": case "median": case "iferror": return fold(args);
+          case "wavg": return fold(args.filter((_, i) => i % 2 === 1));
           case "if": return fold(args.slice(1));
           case "abs": case "round": case "roundup": case "rounddown": return { ...args[0], literal: undefined };
           case "and": case "or": case "not": return DIMLESS;

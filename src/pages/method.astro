@@ -130,7 +130,7 @@ const example = `{
     <strong>Templates.</strong> Every model of one kind of work starts from the same <a href={`${repo}/tree/main/.claude/skills/build-cea/templates`}>template</a>, so any two read side by side. There are 13: direct health, cash and income, wellbeing, humanitarian relief, domestic services, medical research, conservation, rights advocacy, catastrophic risk, corporate campaigns, diet change, companion animals, and policy, research and meta work (climate included). Each has the same <a href={`${repo}/blob/main/.claude/skills/build-cea/references/templates.md`}>sections</a>: the cost, the reach (people, animals or tonnes), the effect on each from the evidence, the adjustments (how sure the evidence is, what would have happened anyway, the charity's share of the credit), the outcome, and the steps to years of healthy life.
   </p>
   <p>
-    Every audit round is public in the <a href={`${repo}/tree/main/audits`}>audits folder</a>. Built blind for five charities evaluators have analysed, two landed within 3× of the evaluator (<a href={`${repo}/blob/main/docs/eval-skills.md`}>details</a>).
+    Every audit round is public in the <a href={`${repo}/tree/main/audits`}>audits folder</a>, with the <a href="/changelog">rules version</a> it checked.Built blind for five charities evaluators have analysed, two landed within 3× of the evaluator (<a href={`${repo}/blob/main/docs/eval-skills.md`}>details</a>).
   </p>
   <p id="views">
     Inputs are marked <strong>observed</strong>, <strong>estimate</strong> or <strong>judgment</strong>, and each model's history page shows every change. We keep each evaluator's analysis as published, so it still reproduces, but rank our version: the site's shared figures and your values in place of the evaluator's own. A row where we use a different number is marked "changed for consistency". Each model page starts from the evaluator's own final figure and shows, step by step, how it becomes ours.
@@ -174,7 +174,7 @@ const example = `{
 
   <h3 id="catastrophic">Catastrophic risks</h3>
   <p>
-    Work on AI, pandemics and nuclear war is valued by how much it cuts the chance of a catastrophe this century. How likely each catastrophe is, is yours to set; the defaults are the median expert forecasts in a 2022 forecasting tournament.
+    Work on AI, pandemics and nuclear war is valued by how much it cuts the chance of a catastrophe this century. How likely each catastrophe is, is yours to set. The default for AI is the median answer of 1,321 AI researchers in 2023; those for pandemics and nuclear war are the median expert forecasts in a 2022 forecasting tournament.
   </p>
   <Setting client:load ids={["ai_catastrophe_chance", "bio_catastrophe_chance", "nuclear_catastrophe_chance"]} />
 
@@ -224,7 +224,7 @@ const example = `{
   </p>
   <Setting client:load ids={["discount_rate", "home_country", "distance_discount"]} />
 
-  <h3>Credit</h3>
+  <h3 id="credit">Credit</h3>
   <p>
     Two settings, one test: would this party have paid or acted without the charity? Funders who would have paid anyway are co-funders, and credit can be split by who paid for what. Donors, governments and companies that act only because of the charity share the good with it: the charity gets 30% by default. Credit then roughly adds up to the whole.
   </p>
@@ -278,8 +278,8 @@ const example = `{
     <span class="eq-term"><b>2%</b> × 12<small>South Sudan</small></span><span class="eq-op">=</span>
     <span class="eq-term eq-result"><b>23</b><small>the charity</small></span>
   </div>
-  <p>
-    Each evaluator's figure stands on its own; we never blend evaluators. A charity analysed by several shows each as its own dot, and its number is the newest analysis from the first of them in a fixed order (GiveWell first, ours last). Where an evaluator's models cover less than 90% of the money behind a charity's programmes, the figure still ranks, with a warning naming what's missing. Charities that move money to others (fundraisers, effective-giving groups) are worth what that money does where it goes. Ambitious Impact estimates made before a charity existed are shown only if it runs that programme today, marked <a href="#theoretical">purely theoretical</a>.
+  <p id="theoretical">
+    Each evaluator's figure stands on its own; we never blend evaluators. A charity analysed by several shows each as its own dot, and its number is the newest analysis from the first of them in a fixed order (GiveWell first, ours last). Where an evaluator's models cover less than 90% of the money behind a charity's programmes, the figure still ranks, with a warning naming what's missing. Charities that move money to others (fundraisers, effective-giving groups) are worth what that money does where it goes; where the recipients aren't named, at the plain average of the cause's ranked charities, since the money goes to the best of them and an average weighted by size would value it at the largest.Ambitious Impact estimates made before a charity existed are shown, marked purely theoretical, while it runs that programme today and nothing models its actual work. They never rank: an estimate of an idea says little about the charity running it.
   </p>
 
   <h2 id="ranges">Ranges and warning signs</h2>
@@ -293,8 +293,8 @@ const example = `{
       <text x="190" y="14" text-anchor="middle" class="rf-t">the figure counted</text>
     </svg>
   </figure>
-  <p id="theoretical">
-    Rankings use the dot; the bar is the simulated range from 5% to 95%. Where small changes to a model's inputs swing its result wildly (a small difference of large numbers), the simulation isn't used: the figure stays at its best guess at every risk setting, and the bar runs from every input at its worst end to every input at its best. A warning sign marks a charity whose range spans over 100×, whose uncertainty is mostly judgment, whose analysis is over 18 months old, whose models leave programmes out, whose simulation can't be relied on, or whose model is purely theoretical. On each model page every number shows its share of the uncertainty.
+  <p>
+    Rankings use the dot; the bar is the simulated range from 5% to 95%. The list is sorted by the dot but has no rank numbers: neighbours' ranges usually overlap, so which of two close charities comes first is often a guess. The order still shows what the evidence supports: gaps of tenfold and more. Where small changes to a model's inputs swing its result wildly (a small difference of large numbers), the simulation isn't used: the figure stays at its best guess at every risk setting, and the bar runs from every input at its worst end to every input at its best. A warning sign marks a charity whose range spans over 100×, whose uncertainty is mostly judgment, whose analysis is over 18 months old, whose models leave programmes out, whose simulation can't be relied on, or whose model is purely theoretical. On each model page every number shows its share of the uncertainty.
   </p>
 
   <h2 id="judgments">Fixed judgments</h2>
@@ -329,6 +329,9 @@ const example = `{
   </ul>
   <p>
     In a formula, <code>$name</code> reads one of your values, <code>@file.row</code> a shared figure from <a href="/data">shared data</a>, and <code>#model-id</code> another model's result. The full format is defined in <a href={`${repo}/blob/main/src/engine/schema.ts`}>schema.ts</a>.
+  </p>
+  <p>
+    The same files, with every model's computed results, can be downloaded or used from an AI assistant: see <a href="/ai">Use with AI</a>. Our own work is free to reuse under CC BY 4.0; models rebuilt from an evaluator's analysis keep its terms (<a href="/terms">terms</a>).
   </p>
 </Prose>
 

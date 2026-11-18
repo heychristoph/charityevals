@@ -85,3 +85,5 @@ export function historyUrl(m: ResolvedModel): string {
 /** Charities on the rankings: those with at least one model that counts (src/engine/ranking.ts): in a
  * comparable unit, and a program's own estimate rather than a skeleton, breakeven or VOI sheet. */
 export const rankedCharities = [...lib.charities.values()].filter((c) => rankingPlan(lib, c.id).length > 0);
+/** Charities whose every model is purely theoretical: shown on their pages, never ranked. */
+export const theoreticalOnly = rankedCharities.filter((c) => rankingPlan(lib, c.id).every((e) => e.parts.every((p) => p.model.theoretical)));

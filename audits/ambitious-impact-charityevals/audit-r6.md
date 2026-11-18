@@ -16,4 +16,9 @@ Only the overlap change of docs/normalization.md 2.24 for the giving organisatio
 None.
 
 Verdict: pass
-Model-sha: dbd5143d60fc4fa19c24bfaf099ef66b02865512794dc855317670b859236e1c
+Rules: 0.2.0
+
+Re-stamped (18 Nov 2026): NOVAH now has charityevals' own model (novah-charityevals), which the rankings show in place of Ambitious Impact's idea-stage estimate; value_destinations reads it (#charityevals:novah). Headline 9.52 → 9.35 (−1.7%). Mechanical: headline 9.52 → 9.354 (−1.7%), 13 rows changed, against HEAD.
+Re-stamped (18 Nov 2026): two founded charities, LABRI and Lead Research for Action, are read at charityevals' new models of their actual work (#charityevals:), as the idea-stage estimates no longer rank once those exist; explainer count 13 → 11 idea-stage. Mechanical: headline 9.52 → 9.387 (−1.4%), 13 rows changed, against HEAD.
+Model-sha: 5d40e8b75dc03a477786e75742a43fd0b00feef8fc15dd1c25144b025af4d8ef
+Re-stamped (18 Nov 2026): Concentric Policies and Animal Policy International are now read at charityevals' own models of their work (#charityevals:...), which replace Ambitious Impact's idea-stage estimates on the rankings. Mechanical: headline 9.52 → 9.474 (−0.48%), 13 rows changed, against HEAD.

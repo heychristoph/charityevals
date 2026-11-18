@@ -22,6 +22,18 @@ REMOVE = {
     "fortify-health-aim": OTHER.format("GiveWell's Fortify Health models and HLI's fortify-health-hli"),
     "healthy-futures-aim": OTHER.format("GiveWell, healthy-futures-phl-based-on-updated-23-feb-2026"),
     "lead-exposure-elimination-project-aim": OTHER.format("charityevals, lead-exposure-elimination-project-charityevals"),
+    "animal-policy-international-aim": OTHER.format("charityevals, animal-policy-international-charityevals"),
+    "concentric-policies-aim": OTHER.format("charityevals, concentric-policies-charityevals"),
+    "kaya-guides-aim": OTHER.format("charityevals, kaya-guides-charityevals"),
+    "first-embrace-aim": OTHER.format("charityevals, first-embrace-charityevals"),
+    "cearch-aim": OTHER.format("charityevals, cearch-charityevals"),
+    "alliance-for-reducing-microbial-resistance-aim": OTHER.format("charityevals, alliance-for-reducing-microbial-resistance-charityevals"),
+    "lead-research-for-action-aim": OTHER.format("charityevals, lead-research-for-action-charityevals"),
+    "labri-aim": OTHER.format("charityevals, labri-charityevals"),
+    "respira-health-aim": OTHER.format("charityevals, respira-health-charityevals"),
+    "oxygen-access-project-aim": OTHER.format("charityevals, oxygen-access-project-charityevals"),
+    "novah-aim": OTHER.format("charityevals, novah-charityevals"),
+    "learning-alliance-aim": OTHER.format("charityevals, learning-alliance-charityevals"),
     "notify-health-aim": OTHER.format("GiveWell, notify-health-sms-feb-2025"),
     "spiro-aim": OTHER.format("GiveWell, spiro-community-based-tb-hcm-april-2025"),
     "shrimp-welfare-project-aim": "the Shrimp Welfare Project never ran the modelled aeration subsidies (it works on stunning at slaughter and stocking density), and ACE's model of its actual work exists (shrimp-welfare-project)",
@@ -42,38 +54,14 @@ REMOVE = {
 
 # Kept: the charity runs the modelled programme today (evidence), no actual-data model exists.
 KEEP = {
-    "alliance-for-reducing-microbial-resistance-aim": ("https://forum.effectivealtruism.org/posts/srjXGXhsecmZvpEdq/two-years-of-doing-advocacy-on-antimicrobial-resistance",
-        "ARMoR advocates for antibiotic pull incentives, its key ask an EU subscription model (November 2025); AIM modelled the US PASTEUR Act."),
-    "animal-policy-international-aim": ("https://www.animalpolicyinternational.org/",
-        "Animal Policy International campaigns for import welfare standards in New Zealand (Stop Cruel Imports NZ), the UK and the EU."),
     "better-futures-guide-aim": ("https://betterfuturesguide.org/",
         "Better Futures Guide is setting up as a livelihoods charity evaluator; its first recommendations are planned before the end of 2026."),
     "better-season-project-aim": ("https://www.betterseasonproject.org/",
         "Better Season Project partners with Kenyan savings cooperatives to lend smallholders money for rainwater tanks secured on the tank (piloting)."),
-    "cearch-aim": ("https://exploratory-altruism.org/",
-        "CEARCH researches causes and recommends interventions (800 causes long-listed, 20 in depth), with grantmaking and advisory work built on that research."),
-    "concentric-policies-aim": ("https://forum.effectivealtruism.org/posts/zdacfpQdQjfGNoavQ/marginal-funding-for-the-single-best-health-policy-in-the",
-        "Concentric Policies advocates for tobacco taxes in Liberia and Guinea-Bissau (November 2024, with plans through 2025); AIM modelled Mongolia."),
-    "first-embrace-aim": ("https://forum.effectivealtruism.org/posts/wGXCuedzsubqNDAca/introducing-first-embrace-an-ambitious-impact-incubated",
-        "First Embrace runs hospital-embedded kangaroo care in Kano State, Nigeria (since February 2026); AIM modelled Pakistan."),
-    "kaya-guides-aim": ("https://www.kayaguides.com/",
-        "Kaya Guides runs WHO Step-by-Step guided self-help for depression in India over WhatsApp, with short weekly calls from lay guides."),
-    "labri-aim": ("https://www.labrecyclinginitiative.com/post/q1-2026-newsletter",
-        "LABRI advocates for regulating used lead-acid battery recycling, mainly in the Philippines (2026); AIM modelled Thailand."),
-    "lead-research-for-action-aim": ("https://www.leadresearch.org/what-we-do",
-        "Lead Research for Action runs studies of lead in consumer products in Malawi and Kenya; AIM modelled West Africa."),
-    "learning-alliance-aim": ("https://www.learningalliance.net/",
-        "Learning Alliance runs structured pedagogy (lesson plans, teacher training, coaching) in 72 schools in Iganga District, Uganda."),
     "neev-aim": ("https://neev.earth",
         "Neev trains brick kiln owners in India's brick belt in better firing practice to cut coal use and air pollution."),
-    "novah-aim": ("https://novah.ngo",
-        "Novah broadcasts radio drama to prevent intimate partner violence in Rwanda, under an RCT; AIM modelled radio and TV in Angola."),
     "opal-health-aim": ("https://opalhealthafrica.org",
         "Opal Health trains government health workers in Uganda to run participatory learning and action sessions for pregnant women; AIM modelled Sierra Leone."),
-    "oxygen-access-project-aim": ("https://www.oxygenaccessproject.org",
-        "Oxygen Access Project provides hospitals with oximeters, oxygen concentrators, maintenance and power (registered February 2025 for work in Nigeria)."),
-    "respira-health-aim": ("https://respirahealth.org",
-        "Respira Health runs an eight-week pulmonary rehabilitation programme for COPD over WhatsApp in India; AIM modelled an app partnership in Nepal."),
 }
 
 INV = ROOT / "inventory/ambitious-impact-models.json"
@@ -97,9 +85,11 @@ def main():
     for mid, (url, quote) in KEEP.items():
         p = DIR / f"{mid}.json"
         m = json.loads(p.read_text())
-        m["theoretical"] = {"reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
-                            "runs": quote, "url": url, "checked": "2026-10-31"}
-        p.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
+        flag = {"reason": "Ambitious Impact's estimate of the idea, written before the charity existed; not based on the charity's own results.",
+                "runs": quote, "url": url, "checked": "2026-10-31"}
+        if m.get("theoretical") != flag:  # only a real change rewrites the file (and its formatting)
+            m["theoretical"] = flag
+            p.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n")
         for e in inv:
             if e.get("model_id") == mid:
                 e["status"] = "imported"

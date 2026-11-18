@@ -272,6 +272,11 @@ function partsFigure(lib: Library, charity: string, parts: PlanPart[] | undefine
 }
 
 const causes = new WeakMap<Library, Map<string, [owner: string, charity: string][]>>();
+/** A charity's weight in a mean over charities (`#spending:<charity>`): its programme spending in USD
+ * (`spending.programme`), or NaN where its record has none (`wavg` then gives it the median of the others). */
+export function spendingOf(lib: Library, charity: string): number {
+  return lib.charities.get(charity)?.spending?.programme ?? NaN;
+}
 
 /** `#cause:x`: the charities on the rankings in cause (or area) x, each by its primary evaluator, the
  * figure the rankings show; money movers (`beneficiaries: "destinations"`) left out, and the reading

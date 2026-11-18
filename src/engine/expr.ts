@@ -41,6 +41,18 @@ function pvAnnuityDue(amount: number, rate: number, years: number): number {
   return pv;
 }
 
+/** Weighted mean of pairs (weight, value); a weight that isn't a positive number takes the median of the
+ * others (all missing: equal weights). */
+function wavg(...a: number[]): number {
+  const w = a.filter((_, i) => i % 2 === 0), x = a.filter((_, i) => i % 2 === 1);
+  if (w.length !== x.length) return NaN;
+  const known = w.filter((v) => Number.isFinite(v) && v > 0);
+  const fill = known.length ? median(...known) : 1;
+  const ws = w.map((v) => (Number.isFinite(v) && v > 0 ? v : fill));
+  const total = ws.reduce((s, v) => s + v, 0);
+  return ws.reduce((s, v, i) => s + v * x[i], 0) / total;
+}
+
 function median(...a: number[]): number {
   const s = [...a].sort((x, y) => x - y);
   const m = s.length >> 1;
@@ -114,6 +126,7 @@ export const FUNCTIONS: Record<string, { arity: [number, number]; fn: (...a: num
   not: { arity: [1, 1], fn: (a) => (a ? 0 : 1), doc: "1 when the argument is 0" },
   product: { arity: [1, 99], fn: (...a) => a.reduce((s, x) => s * x, 1), doc: "product of arguments" },
   median: { arity: [1, 99], fn: median, doc: "median of arguments" },
+  wavg: { arity: [2, 98], fn: wavg, doc: "wavg(w1, x1, w2, x2, ...): mean of the x weighted by the w; a missing weight takes the median of the others" },
   sqrt: { arity: [1, 1], fn: Math.sqrt, doc: "square root" },
   round: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.round), doc: "round(x, digits), halves away from zero" },
   roundup: { arity: [1, 2], fn: (x, n = 0) => roundAway(x, n, Math.ceil), doc: "round away from zero" },
