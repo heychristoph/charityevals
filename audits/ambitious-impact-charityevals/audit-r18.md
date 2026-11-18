@@ -1,7 +1,7 @@
 # Audit: ambitious-impact-charityevals, round 18 (scoped verification)
 Result: 6.489 years of healthy life per 1,000 dollars at defaults (r17: 8.213; 6.203 after the five new spending records, 6.489 after rule spending-no-fallback); combined range and cause median not re-checked in this scoped round. Verdict: pass.
 Model-sha: 3693e4baab7ade49971c9cfe941472455029b56974cc28cc1b0b1fddaab5c569
-Rules: 0.3.7
+Rules: 0.3.8
 Scope: spending recorded from evaluators' costs; no guessed weights (rule spending-no-fallback)
 Preflight: pass. `npx tsx scripts/preflight.ts ambitious-impact-charityevals` prints "passes".
 Previous round: r17 had no high or medium finding.

@@ -2,7 +2,7 @@
 
 Result: 0.0225563 years of healthy life per $1,000, unchanged from round 2 (0.0226). Verdict: pass.
 Model-sha: 7f095778df399ac1f5102d1b29de98d11b78e3844332dd72c8a7396fbc8e993b
-Rules: 0.3.7
+Rules: 0.3.8
 Scope: scoped verification; only that eight rows now read shared facts in facts/democracy.json instead of holding their own values.
 Mechanical: audit-model findings (0); `npx tsx scripts/headlines.ts` gives 0.0225563 for this model (Brennan Center 0.0701159).
 

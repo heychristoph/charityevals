@@ -2,7 +2,7 @@
 Result: 7.148e-10 daly/$ = 7.148e-7 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
 Model-sha: b1216f0f0c8195e32bdc9e27e3fca110936d7070b156195fa3690faba5e377c8
-Rules: 0.3.7
+Rules: 0.3.8
 
 Scope: scoped verification of the compliance-cost sentence on `tongass_acres`.
 

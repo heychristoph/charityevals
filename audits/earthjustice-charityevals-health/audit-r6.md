@@ -2,7 +2,7 @@
 Result: 1.186e-5 uov/$ = 0.005932 years of healthy life per 1,000 dollars (unchanged from round 5). Verdict: pass.
 Verdict: pass
 Model-sha: cd05ec2df561b91998139cfe44c603f5c85a5734da3dd25ca721632921c9ac51
-Rules: 0.3.7
+Rules: 0.3.8
 
 Scope: scoped verification of the text fixes (`summary`, writeups/earthjustice-charityevals.md compliance line, facts/compliance_costs.json PM2.5 table label and power-plant url). No formula changed.
 
