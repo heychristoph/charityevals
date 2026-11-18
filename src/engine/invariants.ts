@@ -624,6 +624,9 @@ export function inv9c(lib: Library, av = assumptionValues(lib.assumptions)): Inv
     for (const r of ownRows(m)) {
       const later = (x: ResolvedRow | undefined) => !!x && ((LATER_BENEFIT.test(x.label) && !NOT_LATER.test(x.label)) || x.factDeps.includes(LATER_FACT));
       if (!path.has(r.id) || !later(r) || r.deps.some((d) => later(m.byId.get(d)))) continue;
+      // GiveWell's cash benchmark inside another charity's sheet (section "givedirectly") is calibrated to @cash,
+      // whatever its own supplemental rows say: not this programme's later benefit.
+      if (r.section === "givedirectly" && m.charity !== "givedirectly") continue;
       const v = vals[r.id];
       if (!Number.isFinite(v) || v === 0) continue;
       const part = (a: Record<string, number>) => headline(lib, m, a, { [r.id]: v * 1.1 }) - headline(lib, m, a);
