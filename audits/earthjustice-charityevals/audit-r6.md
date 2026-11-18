@@ -1,7 +1,7 @@
 # Audit: earthjustice-charityevals, round 6 (verification of the compliance-cost rule 2.21)
 Result: 0.004546 tco2e/$ = 0.001995 years of healthy life per 1,000 dollars (cause median 0.001704, x1.17), against 0.002409 in round 5 (-17%). Verdict: pass.
 Model-sha: db7146dec2ea3a6ecbd70e3855ba236df4133d355896522a8370b5076fcb2652
-Rules: 0.3.6
+Rules: 0.3.7
 Scope: scoped verification of the changed rows: usmeth_compliance_uov, pwr_compliance_uov, compliance_uov_per_year, the new `bridges` section and tco2e_from_uov, outcome_total, the summary and the write-up's figures (this model's and the health model's headline spans). Unchanged rows not re-audited.
 Mechanical: audit-model.ts exit 0, 0 findings (lint, invariants); normalization-audit and check.ts not re-run (scoped round).
 Previous round: not re-checked beyond the changed rows.

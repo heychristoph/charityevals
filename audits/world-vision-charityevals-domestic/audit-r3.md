@@ -2,7 +2,7 @@
 
 Result: 5.540e-6 daly/$ = 0.00554 years of healthy life per 1,000 dollars; global-health median 0.338 (x0.016). Verdict: pass (0 high)
 Model-sha: 2568cc5a6c9533a54f6bad6dfbc6777b81e276e4d67e5022758fe5c4e159e394
-Rules: 0.3.6
+Rules: 0.3.7
 
 Scope: unchanged. Only the changes after round 2 were checked.
 Mechanical: audit-model.ts 0 high or medium (one low, far-below, which the summary explains); check.ts all models valid.

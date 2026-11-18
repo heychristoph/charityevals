@@ -1,7 +1,7 @@
 # Audit: british-heart-foundation-charityevals-health, round 4
 Result: 8.420e-6 uov/$ = 0.00421 years of healthy life per 1,000 dollars (combined range 4.9e-4 to 0.036); cause median 0.1085 (x0.039). Verdict: pass.
 Model-sha: 3274d90eb024489ebe4b084b83fae7695aad2b7d93bd6fea1fbd86a31571f643
-Rules: 0.3.6
+Rules: 0.3.7
 Scope: unchanged since round 3 (health expenditure £54.2m, year to 31 March 2026, less policy and pilots; information and support 74%, RevivR and The Circuit 15%). Scoped round: only the changes in commit 5ebec4e3 were checked (new shared fact chd_remaining_life_ratio, row info_patient_life_share and its use, summary and write-up edits, the compliance-cost quote).
 Mechanical: lint 0 high / 1 medium (far-below, found and explained in round 3, finding 2) / 1 low (spread; the summary says so); invariants none; normalization-audit not run (by instruction).
 Previous round: finding 1 (medium, remaining-life ratio for heart patients): resolved (fact added, row added, applied in uov_deaths; result 0.00469 -> 0.00421, -10%, as predicted). Finding 2 (far-below, medium): evidence-supported, no change, still stands as noted. Finding 3 (stale figures, low): resolved (write-up now 1.7 million people, 21,000 trial programmes). Finding 4 (unit_cost basis, low): no change, stands.

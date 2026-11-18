@@ -1,7 +1,7 @@
 # Audit: johns-hopkins-center-for-health-security-charityevals, round 6 (wording re-check)
 Result: 0.01068 daly/$ = 10.7 years of healthy life per 1,000 dollars at mobiliser_share = 100%, unchanged from round 5. Verdict: pass.
 Model-sha: e974f930d5df310dac6632bc989153522982f432238a47750e11f97bf1606ae6
-Rules: 0.3.6
+Rules: 0.3.7
 Scope: wording fixes since round 5 only.
 
 Previous round: finding 6 (low), the fb_credit_share explainer named a non-existent "fb_attribution_share": resolved. It now reads "(attribution_share)", the row that exists, and the sentence is correct.

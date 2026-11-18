@@ -2,7 +2,7 @@
 Re-stamped: label-only change (summary 'far below' → 'below' the median (round 1's low)); no formula or value changed since round 1, which passed.
 Verdict: pass
 Model-sha: 0a4e8da3701ed3107bcac043440288967a45b45048a5668432d431a0784aaf89
-Rules: 0.3.6
+Rules: 0.3.7
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
