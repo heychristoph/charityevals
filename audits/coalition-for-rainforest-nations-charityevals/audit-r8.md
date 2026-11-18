@@ -5,6 +5,7 @@ Result: -0.02525 years per $1,000 at the defaults (mobiliser share 100%), the sa
 Verdict: pass
 
 Model-sha: 318b438e0d9363b08c648239ef753ff168346ea432f71d9229bd94227fce5a3e
+Rules: 0.1.0
 
 ## Scope
 
