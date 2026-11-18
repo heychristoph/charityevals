@@ -173,13 +173,14 @@ code {
 }
 
 /* The assumptions sidebar: sticky on wide screens, scrolls inside itself, and fades at the
-   bottom edge so cut-off content reads as "more below" rather than cropped. */
+   bottom edge so cut-off content reads as "more below" rather than cropped. Its scroll passes on
+   to the page at its end: until the page has scrolled the panel up to its sticky top, the panel's
+   bottom is below the window, and only the page's scroll brings it into view. */
 .side {
   position: sticky;
   top: var(--s4);
   max-height: calc(100vh - var(--s5));
   overflow-y: auto;
-  overscroll-behavior: contain;
   background: var(--paper-2);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
