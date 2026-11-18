@@ -16,5 +16,7 @@ Only the overlap change of docs/normalization.md 2.24 for the giving organisatio
 None.
 
 Verdict: pass
-Model-sha: dbd5143d60fc4fa19c24bfaf099ef66b02865512794dc855317670b859236e1c
+Model-sha: 5d40e8b75dc03a477786e75742a43fd0b00feef8fc15dd1c25144b025af4d8ef
 Rules: 0.1.0
+
+Re-stamped (18 Nov 2026): Concentric Policies and Animal Policy International are now read at charityevals' own models of their work (#charityevals:...), which replace Ambitious Impact's idea-stage estimates on the rankings. Mechanical: headline 9.52 → 9.474 (−0.48%), 13 rows changed, against HEAD.

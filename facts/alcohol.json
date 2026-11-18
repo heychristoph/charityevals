@@ -1,0 +1,118 @@
+{
+  "id": "alcohol",
+  "label": "Alcohol control (shared figures for every model that values heavy drinking averted)",
+  "rows": [
+    {
+      "id": "alcohol_deaths_lbr",
+      "label": "Deaths a year attributed to alcohol use, Liberia (GBD 2023)",
+      "unit": "deaths",
+      "format": "number",
+      "value": 888,
+      "kind": "observed",
+      "source": {
+        "title": "IHME, Global Burden of Disease 2023, deaths by risk factor, via Our World in Data",
+        "url": "https://ourworldindata.org/grapher/number-of-deaths-by-risk-factor?tab=table&time=2023&country=LBR~GNB",
+        "page": "High alcohol use deaths column, Liberia, 2023",
+        "quote": "Liberia ... 888 (High alcohol use deaths, 2023)",
+        "retrieved": "2026-11-18"
+      },
+      "explainer": "All deaths GBD attributes to alcohol use in Liberia: the burden a Liberian alcohol tax works on (charityevals' Concentric Policies model). Turned into DALYs with death_ages.alcohol_deaths_per_daly_west_africa."
+    },
+    {
+      "id": "harm_price_response",
+      "label": "Fall in alcohol's burden per 1% rise in alcohol prices (share of a percent)",
+      "unit": "share",
+      "format": "number",
+      "value": {
+        "low": 0.1,
+        "best": 0.28,
+        "high": 0.5
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "Wagenaar, Salois and Komro, Effects of beverage alcohol price and tax levels on drinking: a meta-analysis of 1003 estimates from 112 studies, Addiction 2009",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19149811/",
+        "quote": "Price/tax also affects heavy drinking significantly (mean reported elasticity = -0.28, individual-level r = -0.01, P < 0.01), but the magnitude of effect is smaller than effects on overall drinking.",
+        "retrieved": "2026-11-18"
+      },
+      "explainer": "Alcohol's harm comes mostly from heavy drinking, whose mean reported price elasticity is -0.28 (overall drinking falls more: -0.46 for beer, -0.69 for wine, -0.80 for spirits, the same meta-analysis). So 1% higher prices cut the burden about 0.28%. Range 0.1 (heavy drinkers responding least, as the meta-analysis finds them less responsive than drinkers overall) to 0.5 (the burden following overall drinking). Drinking that carries no tax (unrecorded alcohol) is each model's enforcement row, not here."
+    },
+    {
+      "id": "health_lag_years",
+      "label": "Years from less heavy drinking until the health gain",
+      "unit": "years",
+      "format": "number",
+      "value": {
+        "low": 0.5,
+        "best": 3,
+        "high": 8
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: injuries, violence and alcohol's part in tuberculosis fall within the year; cirrhosis and cancers over a decade or more. 3 years, from 0.5 to 8. Discounted at the shared rate."
+    },
+    {
+      "id": "harm_to_others_share",
+      "label": "Harm of alcohol to people other than the drinker, as a share of the drinker's own burden",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0,
+        "best": 0.1,
+        "high": 0.3
+      },
+      "kind": "judgment",
+      "explainer": "Our judgment: GBD counts the drinker's own burden (its road-injury deaths include some others killed by drink-drivers); violence, neglect, fetal alcohol harm and others' injuries fall outside it. No quantified estimate for poor countries was found (surveys of harm to others come from rich countries and count harms, not DALYs), so a modest share: 10%, from 0 to 30%. Read as a side effect of heavy drinking averted."
+    },
+    {
+      "id": "recorded_lbr_2023",
+      "label": "Recorded alcohol per person aged 15 and over, Liberia (litres of pure alcohol, three-year average, 2023)",
+      "unit": "litres",
+      "format": "number",
+      "value": 0.545013,
+      "kind": "observed",
+      "source": {
+        "title": "WHO Global Health Observatory, indicator SA_0000001747 (recorded alcohol per capita, three-year average)",
+        "url": "https://ghoapi.azureedge.net/api/SA_0000001747?$filter=SpatialDim%20eq%20'LBR'%20and%20TimeDim%20eq%202023",
+        "page": "Liberia, 2023",
+        "quote": "0.545012976 (0.5 [0.2 - 0.9])",
+        "retrieved": "2026-11-18"
+      },
+      "explainer": "Alcohol that passes through taxed, recorded channels (production, imports, sales)."
+    },
+    {
+      "id": "unrecorded_lbr_2023",
+      "label": "Unrecorded alcohol per person aged 15 and over, Liberia (litres of pure alcohol, three-year average, 2023)",
+      "unit": "litres",
+      "format": "number",
+      "value": 1.13718,
+      "kind": "observed",
+      "source": {
+        "title": "WHO Global Health Observatory, indicator SA_0000001821 (unrecorded alcohol per capita, three-year average)",
+        "url": "https://ghoapi.azureedge.net/api/SA_0000001821?$filter=SpatialDim%20eq%20'LBR'%20and%20TimeDim%20eq%202023",
+        "page": "Liberia, 2023",
+        "quote": "1.13717999 (1.1 [0.4 - 1.9])",
+        "retrieved": "2026-11-18"
+      },
+      "explainer": "Home-made and informal alcohol (cane spirits, palm wine) and smuggled drink, which carries no excise."
+    },
+    {
+      "id": "recorded_share_lbr",
+      "label": "Recorded (taxed) share of alcohol drunk, Liberia (2023)",
+      "unit": "share",
+      "format": "percent",
+      "value": {
+        "low": 0.2,
+        "best": 0.324,
+        "high": 0.5
+      },
+      "kind": "estimate",
+      "source": {
+        "title": "WHO Global Health Observatory, indicators SA_0000001747 and SA_0000001821",
+        "url": "https://ghoapi.azureedge.net/api/SA_0000001747?$filter=SpatialDim%20eq%20'LBR'",
+        "note": "0.545 recorded over 0.545 + 1.137 litres (recorded_lbr_2023, unrecorded_lbr_2023).",
+        "retrieved": "2026-11-18"
+      },
+      "explainer": "Recorded over recorded plus unrecorded drinking: 0.545 / 1.682 = 32%. WHO's own intervals are wide (recorded 0.2 to 0.9 litres, unrecorded 0.4 to 1.9), so 20% to 50%. Only this share carries a change in excise."
+    }
+  ]
+}
