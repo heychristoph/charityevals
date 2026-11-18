@@ -1,7 +1,7 @@
 # Audit: union-of-concerned-scientists-charityevals-climate, round 8 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.004510 t CO₂e/$ = -0.001514 years of healthy life per $1,000 (combined range -0.5057 to -4.534e-6), against 0.0018 after the non-death change (sign change). Verdict: pass.
 Model-sha: de68eeeeabe70da8ebc7ce4dd960ce55047e364fd912a628edf195b39b87d8cc
-Rules: 0.3.1
+Rules: 0.3.8
 Scope: the rows added or changed by commit 7e73f6cd: ira_public_usd_per_year, ira_public_cost_uov, uov_counted_per_year, the bridge row (0.6 side-effect form), the summary and the write-up sentence stating the result. Programmes and sources of earlier rounds not re-audited.
 Mechanical: audit-model exit 0, "Findings (0)"; check.ts all valid.
 Previous round: round 7's two lows were fixed earlier; not re-examined.

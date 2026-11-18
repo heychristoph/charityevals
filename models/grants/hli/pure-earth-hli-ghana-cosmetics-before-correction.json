@@ -529,10 +529,19 @@
       "explainer": "people Siblings spillovers are already captured by effect size, so only consider parents Guess"
     },
     {
+      "id": "household_spillover_wellbys",
+      "section": "ghana_cf_yrs_analysis",
+      "label": "Effect on the other household members per 1 BLL adjusted for exposure (WELLBYs)",
+      "format": "number",
+      "formula": "total_wellbeing_loss_avoided_wellbys_adjusted * spillover_ratio * no_of_non_recipients_affected_by_spillovers_per_household",
+      "side_effect": "added",
+      "explainer": "The household spillover HLI adds to the child's own effect: a side effect, weighed by the side-effects slider (docs/normalization.md 2.16)."
+    },
+    {
       "id": "overall_effect_on_household_per_1_bll_adjusted_for_exposure",
       "label": "Overall effect on household per 1 BLL adjusted for exposure (WELLBYs)",
       "section": "ghana_cf_yrs_analysis",
-      "formula": "total_wellbeing_loss_avoided_wellbys_adjusted * spillover_ratio * no_of_non_recipients_affected_by_spillovers_per_household + total_wellbeing_loss_avoided_wellbys_adjusted",
+      "formula": "household_spillover_wellbys + total_wellbeing_loss_avoided_wellbys_adjusted",
       "expected": 0.02474173993
     },
     {

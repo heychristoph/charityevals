@@ -1,7 +1,7 @@
 # Audit: campaign-legal-center-charityevals, round 3 (verification of round 2's two lows)
 Result: 1.444e-5 daly/$ = 0.0144 years of healthy life per 1,000 dollars (combined range 0.00076–0.274); cause median 0.0642 (×0.225). Verdict: pass.
 Model-sha: aae9ddc2813817be2086bc20796d54124fb612daf6090a1a86c2219173c91f88
-Rules: 0.3.1
+Rules: 0.3.8
 Scope: unchanged from rounds 1 and 2.
 Mechanical: audit-model run on the current model: result, range and joint ranges identical to round 2; no other script re-run (scoped verification of two wording lows).
 Previous round: finding 1 (summary and `ref_cost` explainer name the Common Cause Education Fund and Brennan Center models) resolved: both now say "the figures the Brennan Center model uses". Finding 2 (write-up drivers sentence against the tornado) resolved: see below.

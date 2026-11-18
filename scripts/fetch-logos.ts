@@ -3,6 +3,11 @@
 //   npx tsx scripts/fetch-logos.ts               every charity with a website
 //   npx tsx scripts/fetch-logos.ts --only <id>   one or more ids (repeat --only); others keep their entry
 //   npx tsx scripts/fetch-logos.ts --missing     only charities (and evaluators, "owner-<id>") without a logo yet
+//   npx tsx scripts/fetch-logos.ts --source <id>=<image url>   (repeatable) skip discovery for that id and take
+//                                                exactly that image; same decode, size checks and encode. A wide
+//                                                wordmark (up to 7:1) is fitted onto the square, not cropped.
+//   --bg <id>=#rrggbb   (repeatable) with --source: for a logo drawn for a dark ground (white text), composite it
+//                                                onto a square of that colour (the charity's own brand colour).
 //
 // Candidates, best first: the icons the homepage declares (apple-touch-icon, <link rel="icon"> with
 // sizes or an SVG) and the conventional /apple-touch-icon.png and /favicon.ico; only when none of
@@ -26,6 +31,7 @@ const manifestPath = join(root, "generated/logos.json");
 
 const SIZE = 128; // output edge, px: over 3x the largest (40px) display
 const MIN_PX = 48; // smallest source edge worth showing
+const MIN_SOURCE_PX = 32; // a hand-picked --source: a site's own 32px favicon still shows sharp at the rankings' 32px
 const MAX_BYTES = 20 * 1024; // per output file
 const MAX_DOWNLOAD = 3 * 1024 * 1024;
 const TIMEOUT_MS = 15_000;
@@ -41,9 +47,6 @@ const OVERRIDES: Record<string, string> = {
 
 /** Logos checked by eye and found unusable at 24-40px; these charities get the monogram instead. */
 const REJECTED: Record<string, string> = {
-  taimaka: "the site icon is a screenshot of small text, unreadable when shrunk",
-  "healthy-futures": "the only square image is a crop of the wordmark",
-  "the-humane-league": "the site icon is a white mark for dark backgrounds, invisible on the tile",
 };
 
 /** bleed: the logo fills its square to the corners (an app icon), so it is shown edge to edge
@@ -60,6 +63,23 @@ const GENERIC = [/\/wp-includes\/images\/w-logo/i, /static\d*\.squarespace\.com\
 const args = process.argv.slice(2);
 const only = args.flatMap((a, i) => (a === "--only" ? [args[i + 1]] : []));
 const missingOnly = args.includes("--missing");
+const backgrounds = new Map(
+  args.flatMap((a, i) => {
+    if (a !== "--bg") return [];
+    const m = (args[i + 1] ?? "").match(/^([^=]+)=#([0-9a-f]{6})$/i);
+    if (!m) throw new Error(`--bg expects <id>=#rrggbb, got "${args[i + 1]}"`);
+    return [[m[1], `#${m[2]}`] as [string, string]];
+  }),
+);
+const sources = new Map(
+  args.flatMap((a, i) => {
+    if (a !== "--source") return [];
+    const v = args[i + 1] ?? "";
+    const eq = v.indexOf("=");
+    if (eq < 1 || !/^https?:\/\//.test(v.slice(eq + 1))) throw new Error(`--source expects <id>=<http(s) image url>, got "${v}"`);
+    return [[v.slice(0, eq), v.slice(eq + 1)] as [string, string]];
+  }),
+);
 
 // Evaluators (owners.json) get logos too, keyed "owner-<id>" so they never collide with a charity's.
 const owners = (JSON.parse(readFileSync(join(root, "owners.json"), "utf8")) as { id: string; name: string; url?: string }[])
@@ -183,7 +203,7 @@ function fromIco(buf: Buffer): { input: Buffer; raw?: { width: number; height: n
 
 type Decoded = { img: Sharp; px: number | "svg" };
 
-async function decode(body: Buffer, type: string, url: string): Promise<Decoded | undefined> {
+async function decode(body: Buffer, type: string, url: string, maxRatio = 1.4): Promise<Decoded | undefined> {
   const head = body.subarray(0, 512).toString("utf8").trimStart().toLowerCase();
   const isSvg = /svg/.test(type) || head.startsWith("<svg") || (head.startsWith("<?xml") && head.includes("<svg"));
   if (isSvg) {
@@ -192,11 +212,12 @@ async function decode(body: Buffer, type: string, url: string): Promise<Decoded 
     if (!meta.width || !meta.height) return undefined;
     // Render the short edge at about twice the output size, whatever the SVG's nominal size.
     const ratio = meta.width / meta.height;
-    if (ratio > 1.4 || ratio < 1 / 1.4) return undefined; // a wordmark or banner, unreadable in a square
+    if (ratio > maxRatio || ratio < 1 / maxRatio) return undefined; // a wordmark or banner, unreadable in a square
     const density = Math.min(2400, Math.max(72, Math.round((72 * SIZE * 2) / Math.min(meta.width, meta.height))));
     return { img: sharp(body, { density, limitInputPixels: 8192 * 8192 }), px: "svg" };
   }
-  if (/\.ico(\?|$)/i.test(url) || /icon/.test(type) || (body.length > 4 && body.readUInt32LE(0) === 0x00010000)) {
+  const otherRaster = body.length > 4 && (body.readUInt32BE(0) === 0x89504e47 || body.readUInt32BE(0) === 0x52494646 || body.readUInt16BE(0) === 0xffd8); // PNG, WebP, JPEG served under an .ico name
+  if ((!otherRaster && (/\.ico(\?|$)/i.test(url) || /icon/.test(type))) || (body.length > 4 && body.readUInt32LE(0) === 0x00010000)) {
     const ico = fromIco(body);
     if (!ico) return undefined;
     const img = ico.raw ? sharp(ico.input, { raw: ico.raw }) : sharp(ico.input, { limitInputPixels: 4096 * 4096 });
@@ -207,8 +228,27 @@ async function decode(body: Buffer, type: string, url: string): Promise<Decoded 
   const meta = await img.metadata();
   if (!meta.width || !meta.height) return undefined;
   const ratio = meta.width / meta.height;
-  if (ratio > 1.4 || ratio < 1 / 1.4) return undefined; // a banner or wordmark, unreadable in a square
+  if (ratio > maxRatio || ratio < 1 / maxRatio) return undefined; // a banner or wordmark, unreadable in a square
   return { img, px: Math.min(meta.width, meta.height) };
+}
+
+/** A logo drawn for a dark ground: trimmed, fitted inside a margin and placed on a square of the brand colour. */
+async function encodeOnColour(img: Sharp, colour: string): Promise<Buffer> {
+  const flat = await img.rotate().png().toBuffer();
+  let mark = flat;
+  try {
+    mark = await sharp(flat).trim({ threshold: 12 }).png().toBuffer();
+  } catch {
+    // nothing to trim
+  }
+  const inner = Math.round(SIZE * 0.78);
+  const fitted = await sharp(mark).resize(inner, inner, { fit: "inside", kernel: "lanczos3" }).png().toBuffer();
+  const square = sharp({ create: { width: SIZE, height: SIZE, channels: 4, background: colour } }).composite([{ input: fitted, gravity: "centre" }]);
+  for (const quality of [88, 80, 70, 60, 50]) {
+    const out = await square.clone().webp({ quality, effort: 6 }).toBuffer();
+    if (out.length <= MAX_BYTES) return out;
+  }
+  throw new Error("could not fit under 20 KB");
 }
 
 async function encode(img: Sharp): Promise<Buffer> {
@@ -296,8 +336,25 @@ async function logoFor(c: { id: string; name: string; website: string }): Promis
   };
 }
 
+/** --source: exactly the given image, through the same decode, size check and encode. */
+async function logoFromSource(c: { id: string }, url: string): Promise<{ entry: Entry; data: Buffer } | { error: string }> {
+  const res = await get(url, "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8");
+  const dec = await decode(res.body, res.type, res.url, 7);
+  if (!dec) return { error: `could not decode ${url}, or its shape is beyond 7:1` };
+  if (dec.px !== "svg" && dec.px < MIN_SOURCE_PX) return { error: `image is only ${dec.px}px (${url})` };
+  const colour = backgrounds.get(c.id);
+  const data = colour ? await encodeOnColour(dec.img, colour) : await encode(dec.img);
+  return {
+    data,
+    entry: { file: `/logos/${c.id}.webp`, source: res.url, kind: colour ? `source on ${colour}` : "source", sourcePx: dec.px, bleed: await fillsCorners(data), fetched: new Date().toISOString().slice(0, 10) },
+  };
+}
+
 mkdirSync(outDir, { recursive: true });
-const todo = charities.filter((c) => c.website && !REJECTED[c.id] && (only.length ? only.includes(c.id) : missingOnly ? !manifest[c.id] : true));
+const known = new Set(charities.map((c) => c.id));
+for (const id of backgrounds.keys()) if (!sources.has(id)) throw new Error(`--bg ${id} needs a --source for it`);
+for (const id of sources.keys()) if (!known.has(id)) throw new Error(`--source: unknown id ${id}`);
+const todo = charities.filter((c) => c.website && !REJECTED[c.id] && !sources.has(c.id) && (only.length ? only.includes(c.id) : missingOnly ? !manifest[c.id] : sources.size === 0));
 const failures: string[] = [];
 const queue = [...todo];
 await Promise.all(
@@ -317,6 +374,16 @@ await Promise.all(
     }
   }),
 );
+for (const [id, url] of sources) {
+  const c = charities.find((x) => x.id === id)!;
+  const r = await logoFromSource(c, url).catch((e: Error) => ({ error: `processing failed: ${e.message}` }));
+  if ("error" in r) failures.push(`${id} (--source): ${r.error}`);
+  else {
+    writeFileSync(join(outDir, `${id}.webp`), r.data);
+    manifest[id] = r.entry;
+    console.log(`ok  ${id}  ${r.entry.sourcePx}${r.entry.sourcePx === "svg" ? "" : "px"}  ${(r.data.length / 1024).toFixed(1)} KB  ${r.entry.source}`);
+  }
+}
 // Our own models' evaluator page shows the site's own mark, rendered from its favicon.
 const OWN = "owner-charityevals";
 {

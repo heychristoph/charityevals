@@ -875,10 +875,10 @@
    "section": "deaths",
    "label": "Later earnings of children kept healthy, as a share of the deaths' value",
    "format": "percent",
-   "formula": "@givewell_shared.income_to_mortality_value_ratio",
+   "formula": "@givewell_shared.income_to_mortality_value_ratio * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * @givewell_shared.ln_consumption_per_doubling / $life_value_multiplier",
    "published": 0,
    "side_effect": "added",
-   "explainer": "The sheet counts only health. Children spared diarrhoea grow and learn better and earn more as adults; the site's shared figure (GiveWell's long-term income gains as a share of the value of the deaths averted)."
+   "explainer": "The sheet counts only health. Children spared diarrhoea grow and learn better and earn more as adults; the site's shared figure (GiveWell's long-term income gains as a share of the value of the deaths averted).\n\nChanged for consistency: GiveWell's ratio is at its own values (income from 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death). Like every other model that reads it, ours rescales it: the present value of those 40 years at your discount rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life. At the defaults it is GiveWell's ratio."
   },
   {
    "id": "over_five_share",

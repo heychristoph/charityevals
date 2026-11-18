@@ -278,7 +278,18 @@
       "format": "percent"
     },
     {
+      "id": "adjustment_for_developmental_effects_lower_cost_estimate_at_shared_values",
+      "side_effect": "added",
+      "label": "Adjustment for developmental effects (Lower cost estimate), at your discount rate and values",
+      "section": "kmc",
+      "formula": "adjustment_for_developmental_effects_lower_cost_estimate * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.2,
+      "format": "percent",
+      "explainer": "Changed for consistency. The sheet's figure is development effects as a share of the value of the deaths averted, at GiveWell's values: children's income as adults from about 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death. Typed in as a number, it ignored your discount rate and the income slider, and grew with the weight on a life. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (the value of deaths it is set against already carries it). At the defaults it is the sheet's figure; the evaluator view keeps it."
+    },
+    {
       "id": "adjustment_for_morbidity_effects_lower_cost_estimate",
+      "side_effect": "added",
       "label": "Adjustment for morbidity effects (Lower cost estimate)",
       "section": "kmc",
       "formula": "@newborn_care.kmc_morbidity_share",
@@ -293,6 +304,7 @@
     },
     {
       "id": "adjustment_for_costs_saved_to_hospital_lower_cost_estimate",
+      "side_effect": "added",
       "label": "Adjustment for costs saved to hospital (Lower cost estimate)",
       "section": "kmc",
       "value": 0.25,
@@ -308,7 +320,7 @@
       "id": "total_adjustment_for_additional_benefits_including_cost_savi",
       "label": "Total adjustment for additional benefits, including cost savings to hospitals (Lower cost estimate)",
       "section": "kmc",
-      "formula": "1 + sum(adjustment_for_developmental_effects_lower_cost_estimate, adjustment_for_morbidity_effects_lower_cost_estimate, adjustment_for_costs_saved_to_hospital_lower_cost_estimate)",
+      "formula": "1 + sum(adjustment_for_developmental_effects_lower_cost_estimate_at_shared_values, adjustment_for_morbidity_effects_lower_cost_estimate, adjustment_for_costs_saved_to_hospital_lower_cost_estimate)",
       "expected": 1.55,
       "format": "percent"
     },

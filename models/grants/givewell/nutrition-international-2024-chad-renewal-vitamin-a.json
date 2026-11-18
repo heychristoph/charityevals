@@ -232,11 +232,20 @@
       "format": "percent"
     },
     {
+      "id": "adjustment_to_account_for_developmental_benefits_long_term_i_at_shared_values",
+      "label": "Adjustment to account for developmental benefits (long-term income increases) (#VALUE!), at your discount rate and values",
+      "section": "simple_cea",
+      "formula": "adjustment_to_account_for_developmental_benefits_long_term_i * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.24517600000000003,
+      "format": "percent",
+      "explainer": "Changed for consistency. The sheet's figure is development effects as a share of the value of the deaths averted, at GiveWell's values: children's income as adults from about 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death. Typed in as a number, it ignored your discount rate and the income slider, and grew with the weight on a life. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (the value of deaths it is set against already carries it). At the defaults it is the sheet's figure; the evaluator view keeps it."
+    },
+    {
       "id": "developmental_benefits_long_term_income_increases_value",
       "label": "Developmental benefits (long-term income increases) (#VALUE!)",
       "section": "simple_cea",
       "unit": "%",
-      "formula": "adjustment_to_account_for_developmental_benefits_long_term_i / (1 * (1 + adjustment_to_account_for_developmental_benefits_long_term_i))",
+      "formula": "adjustment_to_account_for_developmental_benefits_long_term_i_at_shared_values / (1 * (1 + adjustment_to_account_for_developmental_benefits_long_term_i_at_shared_values))",
       "expected": 0.1969006791,
       "format": "percent"
     },
@@ -265,6 +274,7 @@
     },
     {
       "id": "adjustment_for_additional_program_benefits_and_downsides_val",
+      "side_effect": "added",
       "label": "Adjustment for additional program benefits and downsides (#VALUE!)",
       "section": "simple_cea",
       "unit": "%",

@@ -18,7 +18,7 @@ No findings.
 
 Verdict: pass. Findings: 0 high, 0 medium, 0 low.
 Model-sha: f905017dc7f412a7643f87e2babca615cf04354547d931d33b2cabf16f1ca2ef
-Rules: 0.3.1
+Rules: 0.3.8
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 32c25050.
 

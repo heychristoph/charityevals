@@ -16,9 +16,14 @@
       "explainer": "Whether good counts the same wherever and whenever it happens."
     },
     {
+      "id": "catastrophic-risk",
+      "title": "Catastrophic risks",
+      "explainer": "How likely each catastrophe is to end humanity's future by 2100."
+    },
+    {
       "id": "evidence",
-      "title": "How much to trust the estimates",
-      "explainer": "Estimates are often more optimistic than what a donation achieves today. These say how much to discount results nobody measured, estimates that are years old, an organisation's past average, and reforms that would have come anyway."
+      "title": "Evidence, age and risk",
+      "explainer": "How much to discount results nobody measured and estimates that are years old, how much side effects count, how much risk of a lower impact to accept, and how soon a won reform would have come anyway."
     },
     {
       "id": "accounting",
@@ -297,7 +302,7 @@
     },
     {
       "id": "ai_catastrophe_chance",
-      "section": "evidence",
+      "section": "catastrophic-risk",
       "label": "Chance AI ends humanity's future by 2100",
       "technical": "Probability of AI-caused extinction (fewer than 5,000 people left) or a similarly permanent loss of the future by 2100, read by every catastrophic-risk model's AI branch; catastrophes the world survives follow by @catastrophe.ai_catastrophe_vs_extinction",
       "format": "percent",
@@ -321,7 +326,7 @@
     },
     {
       "id": "bio_catastrophe_chance",
-      "section": "evidence",
+      "section": "catastrophic-risk",
       "label": "Chance pandemics end humanity's future by 2100",
       "technical": "Probability that pandemics (engineered or natural) cause extinction (fewer than 5,000 people left) or a similarly permanent loss of the future by 2100, read by every catastrophic-risk model's bio branch; catastrophes the world survives are @catastrophe.bio_catastrophe_by_2100 less this",
       "format": "percent",
@@ -346,7 +351,7 @@
     },
     {
       "id": "nuclear_catastrophe_chance",
-      "section": "evidence",
+      "section": "catastrophic-risk",
       "label": "Chance nuclear war ends humanity's future by 2100",
       "technical": "Probability that nuclear war cause extinction (fewer than 5,000 people left) or a similarly permanent loss of the future by 2100, read by every catastrophic-risk model's nuclear branch; catastrophes the world survives are @catastrophe.nuclear_catastrophe_by_2100 less this",
       "format": "percent",
@@ -401,7 +406,7 @@
     {
       "id": "daly_per_sad",
       "section": "animals",
-      "label": "A day of severe pain is as bad as losing … hours of healthy life",
+      "label": "A day of disabling pain is as bad as losing … hours of healthy life",
       "technical": "DALYs per suffering-adjusted day (SAD)",
       "shown_as": {
         "factor": 8760,
@@ -411,11 +416,12 @@
       "format": "percent",
       "value": {
         "low": 0.00027,
-        "best": 0.0011,
+        "best": 0.0011416,
         "high": 0.0027
       },
+      "slider": { "high": 0.0274 },
       "kind": "judgment",
-      "explainer": "How much healthy life a day of severe pain costs a person, in hours. Animal charities' results are days of pain spared, so this turns them into healthy time.\n\nThe default is about 10 hours. Nobody has measured this, so it's one of the least certain numbers on the site and often decides whether animal charities rank above health charities."
+      "explainer": "How much healthy life a day of disabling pain costs, in hours. Animal charities' results are days of pain spared, so this turns them into healthy time, and it often decides whether they rank above health charities.\n\nThe default, about 10 hours, follows how health surveys weigh the worst human pain: a migraine attack counts as losing 10.6 hours of a healthy day, the most severe back pain 9.2 (Global Burden of Disease; Salomon et al. 2015). People rating a severe migraine during the attack put it at worse than death, about 29 hours.\n\nThe slider goes on to 240 hours for the hedonic view: pain counts by how bad it feels, not by what it stops you doing, so a day of disabling pain can outweigh a healthy day. Rethink Priorities puts a year of it at 2 to 10 years of healthy life (48 to 240 hours a day); the animal-focused values use the middle, about 107 hours."
     },
     {
       "id": "daly_per_wellby",
@@ -487,9 +493,10 @@
     {
       "id": "animal-focused",
       "label": "Animal-focused",
-      "about": "A chicken's suffering counts at Rethink Priorities' median estimate of what a chicken can feel: a third of a person's, not a 10,000th.",
+      "about": "A chicken's suffering counts at Rethink Priorities' median estimate of what a chicken can feel: a third of a person's, not a 10,000th. A day of disabling pain counts by how bad it feels, about 107 hours of healthy life, not 10.",
       "values": {
-        "chicken_vs_person": 0.332
+        "chicken_vs_person": 0.332,
+        "daly_per_sad": 0.0122
       }
     },
     {

@@ -1867,10 +1867,19 @@
       "format": "percent"
     },
     {
+      "id": "size_of_the_developmental_effect_as_a_proportion_of_the_mort_at_shared_values",
+      "label": "Size of the developmental effect, as a proportion of the mortality effect, at your discount rate and values",
+      "section": "simple_cea_for_ca",
+      "formula": "size_of_the_developmental_effect_as_a_proportion_of_the_mort * pv($discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + $discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria / (pv(@givewell_shared.income_discount_rate, @givewell_shared.long_term_benefit_years, -1) / (1 + @givewell_shared.income_discount_rate) ^ @givewell_shared.years_until_income_benefits_malaria) * $uov_per_ln_consumption * ln(2) / $life_value_multiplier",
+      "published": 0.189666418,
+      "format": "percent",
+      "explainer": "Changed for consistency. The sheet's figure is development effects as a share of the value of the deaths averted, at GiveWell's values: children's income as adults from about 10 years on, discounted at 4%, valued at 1/ln 2, against its weight on a death. Typed in as a number, it ignored your discount rate and the income slider, and grew with the weight on a life. Our view rescales it the way AMF's and SMC's own income rows work: the present value of those years at your rate over the same at 4%, times the income slider over 1/ln 2, divided by the weight on a life (the value of deaths it is set against already carries it). At the defaults it is the sheet's figure; the evaluator view keeps it."
+    },
+    {
       "id": "units_of_value_from_under_5_mortality_and_developmental_effe",
       "label": "Units of value from under 5 mortality and developmental effects",
       "section": "simple_cea_for_ca",
-      "formula": "units_of_value_from_mortality_effect_for_children_under_5 * (100 / 100 + size_of_the_developmental_effect_as_a_proportion_of_the_mort)",
+      "formula": "units_of_value_from_mortality_effect_for_children_under_5 * (100 / 100 + size_of_the_developmental_effect_as_a_proportion_of_the_mort_at_shared_values)",
       "expected": 61271.20194
     },
     {

@@ -1,7 +1,7 @@
 # Audit: animal-policy-international-charityevals, round 2
 Result: -50.94 ced/$ = -0.005604 years of healthy life per 1,000 dollars (combined range -0.1178 to -0.000267); cause median 1.214e-4 (×-46). Verdict: pass.
 Model-sha: 355b18233424c2d638626f59d4edb01bf157b45a2741a39d7b03d7711f7b4642
-Rules: 0.3.1
+Rules: 0.3.8
 Scope: unchanged from round 1 (all of API's 2025 work as one programme line, with EU, UK and New Zealand branches); a scoped verification of round 1's highs and mediums.
 Preflight: pass (no blocking lines). Lows: generated/distributions.json and usage.json out of date (run `npx tsx scripts/summaries.ts`). audit-model: no invariant violations, one lint medium (`spread`, 5,622× on the model's own ranges), already answered by the summary's "mostly judgment".
 Previous round: #1 (high) resolved; #2 (medium) resolved; #3 (medium) resolved; #4 (medium) resolved; #5 (medium) not done in this model, by the owner's instruction (cross-model note, below). Lows #6 not done (reason accepted), #7-#13 done.

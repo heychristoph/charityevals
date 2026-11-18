@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { assumptionValues, buildLibrary, headline, toCommon } from "./model";
-import { applyWaivers, checkAll, costsOutsideShare, inv10, inv11, inv13, inv14, inv16, inv17, inv18, inv22, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, keyOf, type Allowlist, type Waivers } from "./invariants";
+import { applyWaivers, checkAll, costsOutsideShare, inv10, inv11, inv13, inv14, inv16, inv17, inv18, inv22, inv2b, inv2c, inv2d, inv3, inv5, inv5b, inv6, inv7, inv9b, inv9c, inv24, keyOf, type Allowlist, type Waivers } from "./invariants";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -228,7 +228,52 @@ describe("invariant checks", () => {
     const moverAnimals = { ...mover, id: "not-a-mover", beneficiaries: undefined };
     const l = buildLibrary([base, good, bad, mixed, mismatched, mover, moverAnimals], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
     expect(l.errors).toEqual([]);
-    expect(inv3(l).violations.map(keyOf)).toEqual(["bad ced_shrimp", "mismatched ced_chicken_2024", "not-a-mover model"]);
+    expect(inv3(l).violations.map(keyOf)).toEqual(["bad ced_shrimp", "bad ced_shrimp rp switch", "mismatched ced_chicken_2024", "not-a-mover model"]);
+  });
+
+  it("INV-3 flags Rethink Priorities' range put on days built from SADs without the switch, not on days of pain counted directly", () => {
+    const facts = [read(join(root, "facts/welfare_ranges.json")), read(join(root, "facts/aim_sads.json"))];
+    const m = (id: string, label: string, ced: string) => ({ ...animal, id, rows: [
+      { id: "src", label, value: 3, kind: "observed", explainer: "Test input." },
+      { id: "pain_days_shrimp", label: "Pain days averted: shrimp", formula: "src * 0.5" },
+      { id: "sads_shrimp", label: "SADs averted: shrimp", formula: "src * 0.5" },
+      { id: "ced_shrimp", label: "ced", formula: ced },
+      { id: "out", label: "out", formula: "ced_shrimp" },
+    ], output: { row: "out", unit: "ced", label: "x", species: ["shrimp"] } });
+    const fromSads = m("from-sads", "SADs averted per dollar", "pain_days_shrimp * @welfare_ranges.shrimp_vs_chicken");
+    const counted = m("counted", "Days of disabling pain spared per dollar", "pain_days_shrimp * @welfare_ranges.shrimp_vs_chicken");
+    const v2026 = m("v2026", "SADs averted per dollar", "sads_shrimp / @aim_sads.shrimp_2026 * if($rp_species_weights, @welfare_ranges.shrimp_vs_chicken, @aim_sads.shrimp_2026 / @aim_sads.chicken_2024)");
+    const l = buildLibrary([base, fromSads, counted, v2026], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } }, facts);
+    expect(l.errors).toEqual([]);
+    expect(inv3(l).violations.map(keyOf)).toEqual(["from-sads ced_shrimp rp switch"]);
+  });
+
+  it("INV-9c flags a later benefit typed in at the evaluator's rate, not one rescaled to $discount_rate or one computed at it", () => {
+    const m = (id: string, dev: object) => ({ ...base, id, rows: [
+      { id: "deaths", label: "Value of deaths averted per dollar", value: 1, kind: "observed", explainer: "Test input." },
+      { id: "dev", label: "Units of value from development effects per treatment-year of SMC", ...dev },
+      { id: "dev_at_shared_values", label: "scaled", formula: id === "typed" ? "dev" : "dev * (1 + $discount_rate) ^ -10 / 1.04 ^ -10" },
+      { id: "out", label: "out", formula: "deaths + dev_at_shared_values * 2" },
+    ] });
+    const lit = { value: 0.1, kind: "estimate", explainer: "Test input." };
+    const l = buildLibrary([base, m("typed", lit), m("rescaled", lit), m("computed", { formula: "0.1 * (1 + $discount_rate) ^ -10" })], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv9c(l).violations.map(keyOf)).toEqual(["typed dev"]);
+  });
+
+  it("INV-24 flags an untagged excluded effect or spillover, not a tagged one, its components, a total of tagged ones or a total of benefit streams with development effects", () => {
+    const input = (id: string, label: string, extra: object = {}) => ({ id, label, value: 0.1, kind: "estimate", explainer: "Test input.", ...extra });
+    const m = (id: string, rows: object[], sum: string) => ({ ...base, id, rows: [input("main", "Value per dollar"), ...rows, { id: "out", label: "out", formula: `main * (1 + ${sum})` }] });
+    const l = buildLibrary([base,
+      m("untagged", [input("excl", "Adjustment for excluded effects")], "excl"),
+      m("tagged", [input("excl", "Adjustment for excluded effects", { side_effect: "added" })], "excl"),
+      m("component", [input("ratio", "Household spillover ratio"), { id: "spill", label: "Benefit to the household", formula: "ratio * 4", side_effect: "added" }], "spill"),
+      m("total", [input("morb", "Morbidity", { side_effect: "added" }), { id: "tot", label: "Total adjustment for excluded effects", formula: "morb + 0" }], "tot"),
+      m("streams", [input("dev", "Units of value from development benefits"), { id: "add", label: "Units of value from additional benefits", formula: "dev * 2" }], "add"),
+      m("leverage", [input("lev", "Additional benefit (loss) from leverage/funging")], "lev"),
+    ], { ...assumptions, common: { ...assumptions.common, benchmark: "base" } });
+    expect(l.errors).toEqual([]);
+    expect(inv24(l).violations.map(keyOf)).toEqual(["untagged excl"]);
   });
 
   // An evaluator's model: native row `x_cash` (with `expected`), our staff-pay step after it.
