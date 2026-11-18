@@ -94,6 +94,8 @@ const OURS: Record<string, { b: Beneficiaries; note: string }> = {
   "make-a-wish-charityevals": { b: { USA: 1 }, note: "Our build: wishes granted by Make-A-Wish America's national office and 58 chapters to children in the US and its territories." },
   "macmillan-cancer-support-charityevals": { b: { GBR: 1 }, note: "Our build: Macmillan works only in the UK." },
   "refugee-council-charityevals": { b: { GBR: 1 }, note: "Our build: refugees and people seeking asylum in England, helped where they live now." },
+  "kaya-guides-charityevals": { b: { IND: 1 }, note: "Our build: young adults across India, mostly in Hindi-speaking states, reached on WhatsApp." },
+  "first-embrace-charityevals": { b: { NGA: 1 }, note: "Our build: small and premature newborns in public hospitals in Kano State, Nigeria." },
   "refugee-council-charityevals-therapy": { b: { GBR: 1 }, note: "Our build: refugees and people seeking asylum in England, helped where they live now." },
   "refugee-council-charityevals-advocacy": { b: { GBR: 1 }, note: "Our build: UK asylum and refugee policy, for people in the UK asylum system." },
   "action-for-happiness-charityevals": { b: { GBR: 0.46, USA: 0.2125, CAN: 0.051, AUS: 0.051, IRL: 0.0255, world: 0.2 }, note: "Our build, weighted by branch result: the courses and groups (about 15%) 80% in the UK (343 of the first 431 courses, Krekel et al. 2021) and the rest elsewhere, and the digital programme (about 85%), an English-language online audience, judged at 40% UK, 25% US, 6% each Canada and Australia, 3% Ireland and 20% elsewhere." },
