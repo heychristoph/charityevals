@@ -37,7 +37,7 @@ Money raised = 9 charities × $1.8 million × 2.5 × the discounted waits × 60%
 
 - **The missing-data discount.** It applies to the projected part of the charities' fundraising, the giving organisations' and companies' future donations.
 - **Where shifted money would otherwise have gone** (one times GiveDirectly, from 0 to 3 times). Most of its charities' money is institutional and counts only for this gain.
-- **The discount rate.** The charities' money comes over years, so at 0.1% the result is about three times higher.
+- **The discount rate.** The charities' money comes over years, so at 0.1% the result is about twice as high.
 - **The next dollar** ({{row:marginal_vs_past_average}}, from 15% to 75%).
 - **Founding to Give's expected donations** ($150,000 a company, from $15,000 to $1.5 million).
 - **How much of their existence it caused** (60%, from 30% to 85%) and **their lifetime fundraising** (2.5 times what they have raised so far, from 1.5 to 5).
