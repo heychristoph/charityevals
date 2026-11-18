@@ -1,0 +1,19 @@
+---
+import Prose from "../layouts/Prose.astro";
+import { repo } from "../lib/site";
+import { releases } from "../lib/audits";
+
+const fmt = (d: string) => new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Prose title="Rules changelog" description="Every version of the rules our audits check models against." updated={fmt(releases[0].date)}>
+  <p>
+    Each audit records the rules version it checked; a model page shows it next to the latest. A major version moves some result more than 2×, a minor one moves results less, a patch moves none. Before 1.0 the second number counts major changes.
+  </p>
+  {releases.map((r) => (
+    <section>
+      <h2 id={`v${r.version}`}>{r.version} <span class="muted small">{fmt(r.date)}</span></h2>
+      <p>{r.change}{r.log && <> <a href={`${repo}/blob/main/${r.log}`}>What moved</a>.</>}</p>
+    </section>
+  ))}
+</Prose>

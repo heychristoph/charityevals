@@ -1,6 +1,7 @@
 # Audit: wounded-warrior-project-charityevals, round 7 (verification)
 Result: 6.4620e-6 daly/$ = 0.006462 years of healthy life per 1,000 dollars. Verdict: pass.
 Model-sha: ce20d418095d9b6de059dc4fc1a960b0e0000bc6598da78ccfaab657ea76ec72
+Rules: 0.1.0
 Scope: only the change of commit 480880ba: `phys_event_years` 0.25 (0.05-0.5) -> 0.125 (0.05-0.25) with a new explainer.
 Mechanical: preflight no high or medium lines (two lows: a simulation note on the shared payer multiple, stale generated distributions); lint 0 high/0 medium; headline 0.0064628 -> 0.00646196.
 
