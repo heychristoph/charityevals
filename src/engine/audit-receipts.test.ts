@@ -7,6 +7,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { modelSha } from "../../scripts/audit-receipt";
+import { compare, readVersions, receiptRules, rulesSha } from "../../scripts/rules-version";
 
 const root = join(import.meta.dirname, "../..");
 const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
@@ -14,6 +15,8 @@ const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
   return statSync(p).isDirectory() ? walk(p) : f.endsWith(".json") ? [p] : [];
 });
 const ours = walk(join(root, "models")).map((p) => JSON.parse(readFileSync(p, "utf8"))).filter((m) => m.owner === "charityevals").map((m) => m.id as string);
+const versions = readVersions();
+const released = new Set(versions.releases.map((r) => r.version));
 const grandfathered = new Set<string>(JSON.parse(readFileSync(join(root, "audits/grandfathered.json"), "utf8")).models);
 
 /** The latest round's text, or undefined. */
@@ -31,7 +34,13 @@ describe("audit receipts", () => {
       expect(text, `no audits/${id}/audit-r<n>.md`).toBeDefined();
       expect(text!, "the latest round's verdict").toMatch(/Verdict:[\s*_]*pass\b/i);
       expect(/Model-sha:\s*([0-9a-f]{64})/.exec(text!)?.[1], "the model changed after the audit: run a verification round").toBe(modelSha(id));
+      expect(released.has(receiptRules(text!) ?? ""), `the round's "Rules: x.y.z" line, a version in audits/versions.json (now ${versions.releases[0].version})`).toBe(true);
     });
+
+  it("has a rules release for the rules and audit skill as they are now", () => {
+    expect(rulesSha(), `${versions.tracked.join(", ")} changed since rules ${versions.releases[0].version}: npx tsx scripts/rules-version.ts <major|minor|patch> --note "<what changed>"`).toBe(versions.releases[0].sha);
+    for (let i = 1; i < versions.releases.length; i++) expect(compare(versions.releases[i - 1].version, versions.releases[i].version)).toBeGreaterThan(0);
+  });
 
   it("lists only models that exist and lack a passing receipt", () => {
     for (const id of grandfathered) expect(ours, `${id} in audits/grandfathered.json`).toContain(id);
