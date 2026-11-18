@@ -116,11 +116,20 @@
       }
     },
     {
+      "id": "household_spillover_factor",
+      "section": "effects",
+      "label": "Household spillover: the household's WELLBYs per WELLBY of the patient's",
+      "format": "number",
+      "formula": "1 + household_spillover_ratio * other_household_members",
+      "side_effect": "factor",
+      "explainer": "The other household members' benefit, a spillover beyond the patient, as a multiplier on the patient's own: a side effect, weighed by the side-effects slider (docs/normalization.md 2.16). HLI multiplies it into the WELLBYs per patient."
+    },
+    {
       "id": "wellbys_per_patient",
       "section": "effects",
       "label": "WELLBYs per patient treated for a year",
       "format": "number",
-      "formula": "life_satisfaction_gain * (1 + household_spillover_ratio * other_household_members) * replication_adjustment",
+      "formula": "life_satisfaction_gain * household_spillover_factor * replication_adjustment",
       "expected": 0.9193905864,
       "explainer": "HLI: \"This gives an estimated 0.92 total adjusted WELLBYs per person treated\"."
     },

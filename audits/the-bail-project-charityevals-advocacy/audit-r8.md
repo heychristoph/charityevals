@@ -11,7 +11,7 @@ Previous round: round 7's low finding (explainer wording) resolved.
 
 Verdict: pass (no high, no medium, no low)
 Model-sha: 61c964339b7fb251c90f017d12bc56ea743dd86846b820b6219023ec04491143
-Rules: 0.3.5
+Rules: 0.3.6
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00283 → 0.00305.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.

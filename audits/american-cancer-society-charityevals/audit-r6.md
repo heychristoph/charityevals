@@ -18,6 +18,6 @@ Credit rule 2.24, step 5: `adv_attribution_share_shared`, `tob_attribution_share
 
 Verdict: pass
 Model-sha: 1ef0a962b55c918e6e6fe3801aca4186a4d5718e1689829d560240453b4be4c6
-Rules: 0.3.5
+Rules: 0.3.6
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.

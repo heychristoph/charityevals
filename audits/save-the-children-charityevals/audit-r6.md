@@ -10,7 +10,7 @@ No findings.
 
 Verdict: pass.
 Model-sha: cc654b301e05e36bc93be7a6e44f42152a026bf52bce63028e35f2ffcf0a2bdf
-Rules: 0.3.5
+Rules: 0.3.6
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 52be53be.
 

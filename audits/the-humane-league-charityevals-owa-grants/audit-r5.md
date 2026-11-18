@@ -1,7 +1,7 @@
 # Verification round (scoped)
 Result: 0.00021 years of healthy life per $1,000 (0.000210297; ced per donor dollar 1.912). Verdict: **pass**.
 Model-sha: 85968f574c9e391c75fc6a541b80d926756fd1bf1af40714a1f1d7b178005d6e
-Rules: 0.3.5
+Rules: 0.3.6
 Scope: only the mechanical move of shared judgments into facts/the_humane_league.json and facts/farm_animal_laws.json, and the single coalition pool (def_coalition_spend, apadef_coalition_share). audit-model.ts: 0 findings; check.ts: all models valid.
 
 Verdict: **pass**

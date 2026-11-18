@@ -1,7 +1,7 @@
 # Audit: respira-health-charityevals, round 2
 Result: 7.612e-6 uov/$ = 0.0038 years of healthy life per 1,000 dollars (combined range 0.00058–0.025). Verdict: pass.
 Model-sha: 9b1751e028b8127f577c2d8f4edba4c8499fb42c98586c2c31ac25a354566f54
-Rules: 0.3.5
+Rules: 0.3.6
 Scope: unchanged from round 1 (one programme, April 2025 to March 2026, estimated $170,000; no accounts exist; charities/respira-health.json matches). Scoped verification only.
 Preflight: pass (no blocking lines; re-run, "passes").
 Previous round: finding 1 (high, mortality_reduction filed as estimate): resolved. Finding 2 (high, validity corrections double-counted on deaths): resolved. Finding 3 (high, aim-theoretical.py KEEP to REMOVE): owner-reserved, out of this model's scope; the owner handles the AIM side after merging, so it is not an open finding against this model. There were no mediums.
