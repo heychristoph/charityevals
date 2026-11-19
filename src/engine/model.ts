@@ -586,9 +586,10 @@ export function withRowWeights(n: Node, marks: RowWeights): Node {
           ? { type: "bin", op: "+", left: one, right: { type: "bin", op: "*", left: w, right: { type: "bin", op: "-", left: x, right: one } } }
           : started;
       }
-      case "neg": return { ...x, arg: walk(x.arg) };
-      case "bin": return { ...x, left: walk(x.left), right: walk(x.right) };
-      case "call": return { ...x, args: x.args.map(walk) };
+      // A part that reads no marked row stays the node it was: shared parts and their names go by identity.
+      case "neg": { const a = walk(x.arg); return a === x.arg ? x : { ...x, arg: a }; }
+      case "bin": { const l = walk(x.left), r = walk(x.right); return l === x.left && r === x.right ? x : { ...x, left: l, right: r }; }
+      case "call": { const args = x.args.map(walk); return args.every((a, i) => a === x.args[i]) ? x : { ...x, args }; }
       default: return x;
     }
   };
