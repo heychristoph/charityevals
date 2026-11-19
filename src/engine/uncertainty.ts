@@ -187,7 +187,7 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
   // stays with that model (docs/normalization.md 2.8).
   const refModels = new Set<string>();
   for (const id of feeding) m.byId.get(id)?.modelDeps.forEach((x) => refModels.add(x));
-  if (refModels.size) for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((x) => assumptionIds.add(x));
+  if (refModels.size) for (const t of referencedModels(lib, m)) usedAssumptions(lib, t, "charityevals", false).forEach((x) => assumptionIds.add(x));
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads.
   if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY].forEach((x) => assumptionIds.delete(x));
   // Nor for missing data, unless the model's own rows read the slider (charityevals' builds have no evaluator view).
@@ -230,13 +230,16 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     const out: { scope: Scope; name: string; d: number }[] = [];
     const each = (scope: Scope, names: Set<string>) => {
       for (const name of names) {
+        // A setting or fact with no spread of its own passes nothing on (only leaves are read below): a
+        // row read with the lives it adds names dozens of them (src/engine/population.ts).
+        if ((scope === "assumption" || scope === "fact") && !leaves.has(`${scope}:${name}`)) continue;
         const v = leafVals(scope, name);
         if (!Number.isFinite(v)) continue;
         const leaf = leaves.get(`${scope}:${name}`);
         const step = v !== 0 ? Math.abs(v) * H : leaf?.absolute ? (leaf.high - leaf.low) * H : ZERO_STEP;
         let after: number;
         try {
-          after = evaluate(expr, (s, n) => (s === scope && n === name ? v + step : leafVals(s, n)));
+          after = evaluate(expr, (s, n) => (s === scope && n === name ? v + step : leafVals(s, n)), new Map());
         } catch {
           continue;
         }
@@ -333,14 +336,16 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
         const v = convLook(scope, name);
         const leaf = leaves.get(`${scope}:${name}`);
         const step = v !== 0 ? Math.abs(v) * H : leaf?.absolute ? (leaf.high - leaf.low) * H : ZERO_STEP;
-        return (evaluate(expr, (s, n) => (s === scope && n === name ? v + step : convLook(s, n))) - base) / step;
+        return (evaluate(expr, (s, n) => (s === scope && n === name ? v + step : convLook(s, n)), new Map()) - base) / step;
       };
       const r = refs(convNode);
       for (const name of r.assumptions) {
+        if (!leaves.has(`assumption:${name}`)) continue;
         const x = d(convNode, "assumption", name);
         if (Number.isFinite(x) && x !== 0) lnD.set(`assumption:${name}`, (lnD.get(`assumption:${name}`) ?? 0) + x / base);
       }
       for (const name of r.facts) {
+        if (!leaves.has(`fact:${name}`)) continue;
         const x = d(convNode, "fact", name);
         if (Number.isFinite(x) && x !== 0) lnD.set(`fact:${name}`, (lnD.get(`fact:${name}`) ?? 0) + x / base);
       }

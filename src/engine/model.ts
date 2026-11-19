@@ -1,4 +1,4 @@
-import { parse, refs, evaluate, compile, type Compiled, type Env, type Node, type Scope } from "./expr";
+import { parse, refs, evaluate, compile, shareParts, type Compiled, type Env, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, Cause, type ModelFile, type RowPatch, type Range } from "./schema";
 import { causeFigure, causeModels, evaluatorFigure, evaluatorFigureModels, spendingOf } from "./ranking";
 import { byIso3 } from "./countries";
@@ -163,7 +163,7 @@ export function buildLibrary(
     const read = withLivesAdded(assumptions, f, shares, descendants);
     const key = read === f ? f : `${where}|${descendants}|${f}`;
     let x = formulas.get(key);
-    if (!x) formulas.set(key, (x = { written: refs(parse(f)), node: parse(expandDerived(assumptions, read)), plain: read === f ? undefined : parse(expandDerived(assumptions, f)) }));
+    if (!x) formulas.set(key, (x = { written: refs(parse(f)), node: read === f ? parse(expandDerived(assumptions, f)) : labelLives(shareParts(parse(expandDerived(assumptions, read)))), plain: read === f ? undefined : parse(expandDerived(assumptions, f)) }));
     return x;
   };
 
@@ -668,7 +668,12 @@ function rowProgram(m: ResolvedModel): Program {
 
 /** Each formula compiled once (expr.ts compile). */
 function compiled(p: Program): (Compiled | undefined)[] {
-  return (p.fns ??= p.rows.map((r) => (r.node ? compile(r.node, (n) => p.at.get(n) ?? -1) : undefined)));
+  // A row read with the lives it adds repeats long parts: they are worked out once per run (expr.ts).
+  if (!p.fns) {
+    const share = new Map<number, { n: number }>();
+    p.fns = p.rows.map((r) => (r.node ? compile(r.node, (n) => p.at.get(n) ?? -1, r.livesAdded?.length ? share : undefined) : undefined));
+  }
+  return p.fns;
 }
 
 function graphOf(p: Program): Graph {
@@ -738,9 +743,11 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
     if (p.runs++ === 0) {
       // The first run walks the formulas: compiling pays only for a model computed again.
       const look = (scope: Scope, name: string) => (scope === "row" ? env.v[p.at.get(name) ?? -1] ?? NaN : scope === "assumption" ? a[name] ?? NaN : other(scope, name));
+      // Rows read with the lives they add share their long parts: worked out once for this run.
+      let walked: Map<Node, number> | undefined;
       for (let k = 0; k < n; k++) {
         const r = p.rows[k];
-        env.v[k] = inputs[r.id] ?? (formula(k) ? evaluate(r.node!, look) : inputValue(r, view));
+        env.v[k] = inputs[r.id] ?? (formula(k) ? evaluate(r.node!, look, r.livesAdded ? (walked ??= new Map()) : undefined) : inputValue(r, view));
       }
       return (byView[view] = { v: env.v, models });
     }
@@ -921,6 +928,24 @@ export const DISTANCE_DISCOUNT = "distance_discount";
 const factorLabels = new WeakMap<Node, string>();
 /** A name for a node of the distance weight or the missing-data factor, so the tree can show it. */
 export const distanceLabel = (n: Node) => factorLabels.get(n);
+
+/** Names for the parts a formula takes when it is read with the lives it adds (src/engine/population.ts):
+ * the tree shows each as one part with its name, not as the arithmetic behind it. */
+function labelLives(node: Node): Node {
+  const walk = (n: Node) => {
+    if (n.type === "call") {
+      const first = n.args[0];
+      if (n.fn === "if" && first?.type === "ref" && first.scope === "assumption") {
+        if (first.name === LIVES_ADDED) { factorLabels.set(n, "The people and animals this adds"); return; }
+        if (first.name === NEVER_STARTED_WEIGHT) { factorLabels.set(n, "The good of lives that never start, as far as you count it"); return; }
+      }
+      n.args.forEach(walk);
+    } else if (n.type === "bin") { walk(n.left); walk(n.right); }
+    else if (n.type === "neg") walk(n.arg);
+  };
+  walk(node);
+  return node;
+}
 const distanceNodes = new WeakMap<ResolvedModel, Node | null>();
 
 const num = (value: number): Node => ({ type: "num", value });
@@ -1214,15 +1239,16 @@ export function headline(
 }
 
 /** Assumptions that can change this model's headline in a view. */
-export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "charityevals"): string[] {
+export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "charityevals", lives = true): string[] {
   const used = new Set<string>();
   for (const r of m.rows) r.assumptionDeps.forEach((a) => used.add(a));
-  // The lives a result adds move it with the sliders they read, in our view.
-  if (view !== "evaluator") for (const r of m.rows) r.livesAdded?.forEach((a) => used.add(a));
+  // The lives a result adds move it with the sliders they read, in our view (`lives` false leaves them
+  // out: the uncertainty engine counts what the rows themselves read).
+  if (lives && view !== "evaluator") for (const r of m.rows) r.livesAdded?.forEach((a) => used.add(a));
   const conv = modelConversion(lib, m, view);
   if (conv) refs(conv).assumptions.forEach((a) => used.add(a));
   // A model read live (`#id`) moves with every assumption it reads, in our view.
-  for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
+  for (const t of referencedModels(lib, m)) usedAssumptions(lib, t, "charityevals", lives).forEach((a) => used.add(a));
   // A cause's figure (`#cause:x`) leaves out what the rankings leave out under `$ignore_old_estimates`.
   if (m.rows.some((r) => r.modelDeps.some(isCauseRef)) && lib.assumptions.rows.some((r) => r.id === IGNORE_OLD)) used.add(IGNORE_OLD);
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads, never
