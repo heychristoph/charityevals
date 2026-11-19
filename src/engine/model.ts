@@ -19,6 +19,8 @@ export type ResolvedRow = Row & {
   /** Sliders the row moves with only through the lives its shared figures add (src/engine/population.ts):
    * kept apart from assumptionDeps, which says what the row itself reads. */
   livesAdded?: string[];
+  /** Shared facts the row reads only through those lives (births parents forgo, what added people eat). */
+  livesFacts?: string[];
 };
 
 export type ResolvedModel = Omit<ModelFile, "rows" | "charity" | "owner"> & {
@@ -181,7 +183,7 @@ export function buildLibrary(
     }
 
     const rows: (RowPatch & Partial<ResolvedRow>)[] = parent
-      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, livesAdded: _l, expected: _e, range: _r, ...r }) => ({
+      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, livesAdded: _l, livesFacts: _lf, expected: _e, range: _r, ...r }) => ({
           ...r,
           inheritedFrom: r.inheritedFrom ?? parent!.id,
           overridden: undefined,
@@ -224,9 +226,11 @@ export function buildLibrary(
           const used = refs(row.node);
           row.deps = [...used.rows];
           // What the row itself reads: the lives its shared figures add are kept apart (livesAdded).
-          const own = plain ? refs(withRowWeights(plain, weighted)).assumptions : used.assumptions;
+          const itself = plain ? refs(withRowWeights(plain, weighted)) : used;
+          const own = itself.assumptions;
           row.assumptionDeps = [...new Set([...written.assumptions, ...own])];
           if (plain) row.livesAdded = [...used.assumptions].filter((a) => !own.has(a));
+          if (plain) row.livesFacts = [...used.facts].filter((f) => !itself.facts.has(f));
           row.factDeps = [...written.facts];
           if (rawFacts.length) for (const f of used.facts) if (!written.facts.has(f) && !facts.has(f)) errors.push(`${id}.${row.id}: a derived assumption it reads uses unknown fact @${f}`);
           row.modelDeps = [...used.models];
@@ -1289,8 +1293,10 @@ export function currentModelsOf(lib: Library, charity: string): ResolvedModel[] 
 
 /** Shared facts this model reads: in its rows, and, given the library, in its unit's conversion into
  * the headline (climate's `@climate.*`), which can move its headline just the same. */
-export function usedFacts(m: ResolvedModel, lib?: Library): string[] {
+export function usedFacts(m: ResolvedModel, lib?: Library, view: View = "charityevals"): string[] {
   const used = new Set(m.rows.flatMap((r) => r.factDeps));
+  // The lives a result adds move it with the facts they are read from, in our view.
+  if (view !== "evaluator") for (const r of m.rows) r.livesFacts?.forEach((f) => used.add(f));
   const conv = lib && m.output && headlineConversion(lib, m.output.unit);
   if (conv) refs(conv).facts.forEach((f) => used.add(f));
   // A derived assumption's own facts (GiveWell's value of a death under five) move the rows that read it.

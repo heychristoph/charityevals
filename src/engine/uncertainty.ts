@@ -175,6 +175,8 @@ export function uncertainty(lib: Library, m: ResolvedModel, values: Record<strin
     const r = m.byId.get(id);
     r?.assumptionDeps.forEach((x) => assumptionIds.add(x));
     r?.factDeps.forEach((x) => factIds.add(x));
+    // The lives a result adds, in our view: their facts' ranges count like any the row reads.
+    if (view !== "evaluator") r?.livesFacts?.forEach((x) => factIds.add(x));
   }
   // The unit's conversion and, in our view, the factor for the estimate's age (modelConversion).
   const convNode = modelConversion(lib, m, view);

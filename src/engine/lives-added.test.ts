@@ -5,7 +5,10 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { assumptionValues, buildLibrary, compute, headline, pickValue, usedAssumptions } from "./model";
+import { simulate } from "./montecarlo";
+import { assumptionValues, buildLibrary, compute, headline, pickValue, usedAssumptions, usedFacts } from "./model";
+import { sensitivity } from "./sensitivity";
+import { uncertainty } from "./uncertainty";
 import { groupShares, withLivesAdded } from "./population";
 
 const root = join(import.meta.dirname, "../..");
@@ -153,5 +156,25 @@ describe("the lives a result adds", () => {
     expect(usedAssumptions(lib, m)).toEqual(expect.arrayContaining(["never_started_weight", "chicken_vs_person"]));
     // A sheet pinned to a 0% discount rate still computes.
     expect(Number.isFinite(compute(lib, m, { ...av, discount_rate: 0, lives_added: 0 }).out)).toBe(true);
+  });
+
+  it("carry the ranges of the facts they are read from into the swings, the drivers and the simulated range", () => {
+    const births = "lives.births_averted_per_child_death_low_income";
+    const m = lib.models.get("child-poor")!;
+    const all = { ...av, never_started_weight: 1 };
+    expect(m.byId.get("value")!.factDeps).toEqual(["moral_weights.uov_per_death_under5"]);
+    expect(m.byId.get("value")!.livesFacts).toContain(births);
+    expect(usedFacts(m, lib)).toContain(births);
+    expect(usedFacts(m, lib, "evaluator")).not.toContain(births);
+    // More births forgone, fewer lives added: the result falls from the low end of the range to the high.
+    const swing = sensitivity(lib, m, all).swings.find((x) => x.id === `@${births}`)!;
+    expect(swing.atLow).toBeGreaterThan(swing.atHigh * 1.2);
+    expect(sensitivity(lib, m, all, "evaluator").swings.some((x) => x.id === `@${births}`)).toBe(false);
+    const drivers = (view: "charityevals" | "evaluator") => uncertainty(lib, m, compute(lib, m, all), all, view).drivers.map((d) => `${d.scope}:${d.id}`);
+    expect(drivers("charityevals")).toContain(`fact:${births}`);
+    expect(drivers("evaluator")).not.toContain(`fact:${births}`);
+    // The simulation draws it: with every other number fixed, the range is the fact's alone.
+    const width = (d: { q: number[] }) => d.q[d.q.length - 1] - d.q[0];
+    expect(width(simulate(lib, m, 1000, all)!)).toBeGreaterThan(width(simulate(lib, m, 1000, all, { [`@${births}`]: fact(births) })!));
   });
 });
