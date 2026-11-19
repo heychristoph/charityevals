@@ -16,7 +16,7 @@ The **CAIS Action Fund** is a separate 501(c)(4) lobbying organisation, and gift
 
 ### How the impact happens
 
-AI carries a yearly chance of catastrophe: the site's shared 5% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. Both are spread evenly over the years to 2100. You can move the 3% with a slider.
+AI carries a yearly chance of catastrophe: the site's shared 5% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. Both are spread evenly over the years to 2100. You can move the 5% with a slider.
 
 CAIS's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. Rethink has two kinds of AI project. Work against misuse, such as tests of dangerous knowledge and defences against attacks, cuts the misuse part of the risk. Other work cuts the misalignment part. In Rethink's model misuse is 10% of the risk that AI ends humanity's future, but about two thirds of the deaths in catastrophes the world survives, because misuse mostly kills part of humanity. We take about a quarter of CAIS's AI spending as misuse work: WMDP, circuit breakers and some of the cluster's projects. Rethink's misuse projects cut far more risk per dollar, so this quarter gives most of the result. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
 

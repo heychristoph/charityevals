@@ -1,6 +1,6 @@
 ### Summary
 
-The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 79% of that comes from the biosecurity work, about half the cost. About 16% comes from the AI work and the rest from risk management. The plausible range runs from {{low}} to {{high}}.
+The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 77% of that comes from the biosecurity work, about half the cost. About 17% comes from the AI work and the rest from risk management. The plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 

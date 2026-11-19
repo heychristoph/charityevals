@@ -14,7 +14,7 @@ The only audited accounts are the US entity's short first return for 2024 ($0.9 
 
 ### How the impact happens
 
-AI carries a yearly chance of catastrophe: the site's shared 5% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. You can move the 3% with a slider.
+AI carries a yearly chance of catastrophe: the site's shared 5% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. You can move the 5% with a slider.
 
 GovAI's research cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model (its chance that a project backfires included). Rethink has two kinds of AI project. Work against misuse cuts the misuse part of the risk, which is most of the deaths in catastrophes the world survives. Other work cuts the misalignment part. We take a fifth of GovAI's catastrophe research as misuse work, mainly its Threat Modelling Team, and Rethink's misuse projects cut far more risk per dollar. The cut counts for the years such progress would otherwise have taken to come, each year discounted.
 
