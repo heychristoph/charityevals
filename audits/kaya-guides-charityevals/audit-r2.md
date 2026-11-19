@@ -1,7 +1,7 @@
 # Audit: kaya-guides-charityevals, round 2
 Result: 0.01201 wellby/$ = 0.7841 years of healthy life per 1,000 dollars (combined range 0.2003–3.070); cause median 0.1196 (×6.56). Verdict: pass.
 Model-sha: 1e26a9456c19a03cc06b04db9a9768ae5e8ce65fe0ddc1758a70021fac92407a
-Rules: 0.3.12
+Rules: 0.3.13
 Scope: unchanged from round 1 (one programme, the 2025 WhatsApp course with guide calls, $166,981, 2,776 starters); scoped verification only.
 Preflight: pass (kaya-guides section of preflight-r2.txt).
 Previous round: finding 1 (high, effect_duration_years) resolved; finding 2 (high, shape normal) resolved; finding 3 (medium, implementation_adj) resolved; finding 4 (medium, suicide_rate) resolved; finding 5 (medium, evidence_adj) resolved. Lows 6, 7, 8 are the builder's (all addressed in the model text).

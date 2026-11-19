@@ -1,7 +1,7 @@
 # Audit: metr-charityevals, round 6 (scoped verification)
 Result: 0.02748 years of healthy life per $1,000 (was 0.03230, -14.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 80c0a550159cfa96abd9b4964906643d1d7d26fffe9822b3b0399a00c9cb6803
-Rules: 0.3.12
+Model-sha: 72b31e488dc757cee9524d3f41d8e033c3fa76703ed15c6029e8400caf6def7a
+Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (no blocking problem; only low lint notes)
 Previous round: round 5, pass, no findings (0.107679 at mobiliser_share 100%; wording only).
@@ -18,3 +18,5 @@ Summary: the future "counts only where you count lives that never start (0% by d
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline unchanged, 1 row changed, against the tree before the rule.

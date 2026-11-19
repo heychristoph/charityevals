@@ -1,7 +1,7 @@
 # Audit: americares-charityevals, round 2 (verification)
 Result: 2.964e-5 uov/$ = 0.0148 years of healthy life per 1,000 dollars (combined range 0.0026-0.0838); cause median 0.338 (x0.044). Verdict: pass (no high or medium finding).
 Model-sha: 0f9a307c3b3f4886cd13150c9a5f01ed7e606970455cfc24a4d6a391e3d688e6
-Rules: 0.3.12
+Rules: 0.3.13
 Scope: unchanged from round 1 (FY2025, Access to Medicine and Clinical Services and Community Health = 92,962k cash of the 133,068k programme total; Emergency is the separate model).
 Mechanical: lint 0 high / 0 medium / 4 low (attribution_share diagnostic, unused hs_clinic_share, far-below, spread), invariants none, normalization-audit none (generated/ reverted).
 Previous round:

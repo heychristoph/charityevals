@@ -1,7 +1,7 @@
 # Audit: allfed-charityevals, round 8 (wording check)
 Result: 0.02741 daly/$ = 27.4 years of healthy life per 1,000 dollars, unchanged from round 7. Verdict: pass.
-Model-sha: 9eadbc6587ad9d0ed9442bf18973e44ec3110a42a118862a422c04c8ad481c47
-Rules: 0.3.12
+Model-sha: 05c21280df86f8b515f261303f6b1305b7b829ac42806022d12d5434c63f2fed
+Rules: 0.3.13
 Scope: confirm the round 7 wording fix changed no value, range, formula or class.
 Preflight: not re-run (wording only).
 Previous round (round 7): finding 1 (high-end wording "partners' time") resolved: now "the high end if co-authors' time is small". Finding 2 (writeup "partners'") resolved: writeup reads "co-authors' time".
@@ -24,3 +24,5 @@ Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start coun
 Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 8.169 → 8.169 (−0.0095%), 12 rows changed, against the tree before the rule.
 
 Re-stamped (18 Nov 2026), rule never-started-prose: Wording: the summaries and write-ups of the models that count a future say it counts only where the reader counts lives that never start, give the Long-run value set's figure where they gave a 0.1% discount rate's, and Redwood Research states no range; no row or result changes. Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline 8.169 → 8.169 (−0.00013%), 8 rows changed, against the tree before the rule.

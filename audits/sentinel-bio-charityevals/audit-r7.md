@@ -1,7 +1,7 @@
 # Audit: sentinel-bio-charityevals, round 7 (scoped verification)
 Result: 2.097 years of healthy life per $1,000 (was 2.275, -7.8%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: d39653c181d67d08d6a9e7f433942b2e9f2fa2fea3b58c93f4821d0878216fa6
-Rules: 0.3.12
+Model-sha: d27f700ae14778956b602d545b8c4a5647df062e2d524806d81ee4952dcf742c
+Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
 Previous round: round 6 passed (verification of round 5's findings), re-stamped at rules 0.3.8.
@@ -18,3 +18,5 @@ Writeup: "only where you count lives that never start (0% by default)" is true (
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | 1 | low | verification | cause figure | Rules-off headline is 1.0% below origin/main, from other models' changes in the shared global-health figure the model reads | 2.252234 vs 2.275084; same for the unchanged old model | none for this model | none |
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline 2.097 → 2.093 (−0.20%), 14 rows changed, against the tree before the rule.

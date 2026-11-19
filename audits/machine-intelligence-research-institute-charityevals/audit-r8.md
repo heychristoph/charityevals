@@ -1,7 +1,7 @@
 # Audit: machine-intelligence-research-institute-charityevals, round 8 (scoped verification)
 Result: 0.0312 years of healthy life per $1,000 (was 0.0366, -14.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: c830ad4b8530acc7c41bf5d8d23bdc69cd53393138dae51d6dfd512c20480140
-Rules: 0.3.12
+Model-sha: f87655580e3f46d1af153eb210046cd7fda6ddde794234c274ff652bfbd385d0
+Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
 Previous round: round 7 (scoped, merged death-age rule and funging = 1) passed with no open findings.
@@ -17,3 +17,5 @@ Read the summary and writeups/machine-intelligence-research-institute-charityeva
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline unchanged, 1 row changed, against the tree before the rule.

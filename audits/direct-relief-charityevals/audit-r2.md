@@ -24,7 +24,7 @@ No high or medium finding.
 
 Verdict: **pass** (0 high, 0 medium, 2 low).
 Model-sha: 66b4a4edbfb1e40a0f5e1ed3eac64cf37371b81ca12ab2c6d0f0ed491103b807
-Rules: 0.3.12
+Rules: 0.3.13
 
 Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against migrate/data-model.
 

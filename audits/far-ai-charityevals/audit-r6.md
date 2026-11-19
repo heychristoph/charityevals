@@ -1,7 +1,7 @@
 # Audit: far-ai-charityevals, round 6 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 9.578e-4 daly/$ = 0.9578 years of healthy life per 1,000 dollars (combined range 0.0195–47.0); cause median 0.0733 (×13.1). Verdict: pass.
-Model-sha: fbd39baa3eef126c7745d369064a9083596c62bb8a73d20b64d03e82bd32f852
-Rules: 0.3.12
+Model-sha: a78a6a956b06f1b3cd7a2cce436557e8ffb74ef967d236efc1b6072e1daeba98
+Rules: 0.3.13
 Scope: unchanged from round 3 (all four programmes, 2024); this round checks that the two changes verified on separate branches (round 4: COVID-scale death ages; round 5: `leverage_funging_adj` = 1) are both present in the merged model and consistent with each other.
 Mechanical: audit-model lint no high or medium; invariants none (INV-15 included); normalization-audit none (full run, "all models valid", 0 violations); `scripts/check.ts far-ai-charityevals` passes.
 Previous round: rounds 4 and 5 had no open findings; both changes are present.
@@ -47,3 +47,5 @@ Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start coun
 Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 0.4756 → 0.4756 (−0.0096%), 9 rows changed, against the tree before the rule.
 
 Re-stamped (18 Nov 2026), rule never-started-prose: Wording: the summaries and write-ups of the models that count a future say it counts only where the reader counts lives that never start, give the Long-run value set's figure where they gave a 0.1% discount rate's, and Redwood Research states no range; no row or result changes. Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline unchanged, 1 row changed, against the tree before the rule.

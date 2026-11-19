@@ -1,7 +1,7 @@
 # Audit: doctors-without-borders-charityevals-advocacy, round 8 (scoped verification of round 7's findings)
 Result: 1.322e-4 uov/$ = 0.0661 years of healthy life per 1,000 dollars (combined range 0.0046-0.95). Verdict: pass.
 Model-sha: 6d719ade6e160d0f66a46ec57fb5a885fc06b3f516f49e6240f82703597d7ef7
-Rules: 0.3.12
+Rules: 0.3.13
 Verdict: pass
 Scope: only round 7's findings and the changes made for them.
 Preflight: pass (only the out-of-date distributions line, ignored).

@@ -381,7 +381,8 @@
       "label": "AI: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "bio_extinction_per_year",
@@ -522,7 +523,8 @@
       "label": "Pandemics: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "nuclear_extinction_per_year",
@@ -662,7 +664,8 @@
       "label": "Nuclear war: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "grants_paid",
@@ -905,7 +908,8 @@
       "label": "Policy win: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "fb_cost_share",
@@ -1015,7 +1019,8 @@
       "label": "Field-building: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "cost_shares_total",
@@ -1058,15 +1063,14 @@
       "label": "Future healthy years kept, every branch (expected, before adjustments)",
       "format": "number",
       "formula": "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys",
-      "unit": "DALYs",
-      "never_started": true
+      "unit": "DALYs"
     },
     {
         "id": "future_animal_harm",
         "section": "effect",
         "label": "Suffering of the farmed animals the people of that future would eat, in healthy years",
         "format": "number",
-        "formula": "-(ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys) * $lives_added * $animal_dalys_per_person_year_world",
+        "formula": "-((cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years) + (cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years) + (cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years) + (pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years) + (fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact))) * $lives_added * $animal_dalys_per_person_year_world",
         "unit": "DALYs",
         "explainer": "A future kept is also every animal raised to feed it: each future person-year at the suffering of the animals an average person eats in a year today (docs/normalization.md 2.25). Suffering always counts, whatever lives that never start count; the farmed animals' own good days count where you set them to. Held at today's diet: no forecast of what people will eat is used.",
         "side_effect": "added"

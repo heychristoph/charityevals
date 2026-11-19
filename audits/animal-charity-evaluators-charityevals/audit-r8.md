@@ -1,7 +1,7 @@
 # Audit: animal-charity-evaluators-charityevals, round 8 (scoped verification)
 Result: 0.00006490 years of healthy life per $1,000 (uov_per_donor_dollar 1.298e-7; was 0.00006038, +7.5%). Combined range not re-run (scoped round). Verdict: pass.
 Model-sha: 701154d09126513662e90e46c1f3a33eb0925734ea9938ab225dd087e52296ba
-Rules: 0.3.12
+Rules: 0.3.13
 Scope: rule pain-default-10h only (inventory/rule-changes/pain-default-10h.md): `daly_per_sad` 0.0011 to 0.0011416 (9.6 to 10 hours of healthy life per day of disabling pain; assumptions/default.json). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 7.
 Previous round: round 7 had no open high or medium finding; this round adds none.

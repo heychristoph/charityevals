@@ -1,7 +1,7 @@
 # Audit: ican-charityevals, round 6 (scoped verification)
 Result: 2.54515 years of healthy life per $1,000 (was 2.59357, -1.87%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: ffaad74cdb5e3868eeb397409b281c36b362e922924abca1e71e0f50f8211a16
-Rules: 0.3.12
+Model-sha: 7fcb7bb9a00b7f7c08b62151123e310b5567b74444fb8e45ee0df9a4da2bddcb
+Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
 Previous round: round 5 passed (re-stamp, headline 8.65 at the then-current rules); this round is on the current rules.
@@ -17,3 +17,5 @@ Summary: no sentence about the future, discounting or people not yet born; nothi
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline unchanged, 4 rows changed, against the tree before the rule.

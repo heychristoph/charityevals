@@ -1,7 +1,7 @@
 # Audit: epoch-ai-charityevals, round 4 (scoped verification)
 Result: 0.0335 years of healthy life per $1,000 (was 0.0351, -4.6%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 5f24d1ddc9208f775addeab23c129810b890b405afc872bc72690bd3a150893f
-Rules: 0.3.12
+Model-sha: 1eeff80ec8add566f8eaf9e35ef9ff4257c7040046833d9a855e9b84c982c563
+Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
 Previous round: r3, re-stamped 17 Nov 2026 for rule mobiliser-share-30 (headline 0.117 to 0.0351).
@@ -17,3 +17,5 @@ Summary: the future "counted only where you count lives that never start (0% by 
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline 0.03349 → 0.03349 (+4.4e-14%), 3 rows changed, against the tree before the rule.

@@ -1,7 +1,7 @@
 # Audit: oxygen-access-project-charityevals, round 2
 Result: 0.006910 uov/$ = 3.45 years of healthy life per 1,000 dollars (combined range 0.70–17.1; the model's own ranges, shared figures at their best, −0.024–27.4); cause median 0.110 (×31). Verdict: pass.
 Model-sha: 8668e0093aba5496f00b79493674816508715afdddc9e585cfab97fd29048ef7
-Rules: 0.3.12
+Rules: 0.3.13
 Scope: Unchanged from round 1 (oxygen care in 23 Gombe State facilities, 14 February to 31 December 2025, the whole £85,293 of the independently examined accounts). Round 2 is a scoped verification only.
 Preflight: pass (no blocking lines).
 Previous round:

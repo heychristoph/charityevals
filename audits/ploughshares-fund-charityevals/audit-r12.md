@@ -1,7 +1,7 @@
 # Audit: ploughshares-fund-charityevals, round 12 (scoped verification)
 Result: 8.282 years of healthy life per $1,000 (was 8.440 on origin/main, -1.87%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: d958e4b2a6e48c595b8a480290004c5924978a12d300c3a78cafa9560ceafbee
-Rules: 0.3.12
+Model-sha: c895107e66810d8ed23317fb5808054795615bab02f9de8e9863ea11e0c40ba2
+Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (no blocking problem; only low range lints)
 Previous round: r11, pass at 28.13 under rules 0.3.8 (wording re-stamp, no high or medium).
@@ -17,3 +17,5 @@ Summary: "future lost counted only where you count lives that never start (0% by
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline 8.282 → 8.282 (+0.00021%), 9 rows changed, against the tree before the rule.

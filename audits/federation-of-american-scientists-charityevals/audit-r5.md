@@ -1,7 +1,7 @@
 # Audit: federation-of-american-scientists-charityevals, round 5 (scoped verification)
 Result: 0.432 years of healthy life per $1,000 (was 0.440, -1.93%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: d5342bcd27a999dc53cc9bac845dca5f2ffc074b28bef993c9d7f546457f7c04
-Rules: 0.3.12
+Model-sha: 79b78c18cbc3a12ceeb0043ffb946311f52b167141d6130b69977dd97f7fecaf
+Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
 Previous round: round 4, pass (credit-rule re-stamp, headline unchanged).
@@ -17,3 +17,5 @@ The model's summary has no sentence about the future, so it needed no change and
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline 0.432 → 0.432 (+0.0099%), 13 rows changed, against the tree before the rule.
