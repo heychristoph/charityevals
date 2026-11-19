@@ -48,9 +48,9 @@ Pandemics that end humanity's future bring about half the pandemic work's share 
 
 ### Biggest uncertainties
 
-- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 0.47 to 6.6.
+- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 0.47 to 6.7.
 - **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 1.6 to 7.9 for the pandemic figure.
-- **How much the next dollar does.** 17% to 85% of the past average: 0.75 to 3.7.
+- **How much the next dollar does.** 17% to 85% of the past average: 0.76 to 3.8.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 
 ### What isn't modelled

@@ -34,11 +34,11 @@ CLTR holds about three months of spending in its own funds. Coefficient Giving o
 
 ### What drives the result
 
-After each part's adjustments, the biosecurity work brings about 79% of the result, the AI work about 16% and risk management about 6%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share.
+After each part's adjustments, the biosecurity work brings about 77% of the result, the AI work about 17% and risk management about 6%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share.
 
 ### Biggest uncertainties
 
-- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 1.1 to 8.4.
+- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 0.48 to 15.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much the next dollar does.** From 21% to 90% of the past average.
 - **How far the typical project applies to the biosecurity work.** From 0.3 to 1.3.

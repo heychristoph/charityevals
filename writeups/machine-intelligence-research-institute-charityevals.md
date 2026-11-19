@@ -11,7 +11,7 @@ MIRI spent $7.7 million in 2025, according to its audited statements. Of its $5.
 
 ### How the impact happens
 
-AI carries a yearly chance of catastrophe, spread evenly to 2100. By default there is a 3% chance by 2100 that AI ends humanity's future; this is a slider. The forecasting tournament's experts expect three AI catastrophes the world survives for every one that ends it. A catastrophe the world survives is taken to kill a quarter of people.
+AI carries a yearly chance of catastrophe, spread evenly to 2100. By default there is a 5% chance by 2100 that AI ends humanity's future; this is a slider. The forecasting tournament's experts expect three AI catastrophes the world survives for every one that ends it. A catastrophe the world survives is taken to kill a quarter of people.
 
 MIRI's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted.
 

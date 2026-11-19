@@ -15,7 +15,7 @@ Most of its money comes from Coefficient Giving (formerly Open Philanthropy). Ep
 
 ### How the impact happens
 
-AI carries a yearly chance of catastrophe, spread evenly to 2100. By default there is a 3% chance by 2100 that AI ends humanity's future; this is a slider. The forecasting tournament's experts expect three AI catastrophes the world survives for every one that ends it. A catastrophe the world survives is taken to kill a quarter of people.
+AI carries a yearly chance of catastrophe, spread evenly to 2100. By default there is a 5% chance by 2100 that AI ends humanity's future; this is a slider. The forecasting tournament's experts expect three AI catastrophes the world survives for every one that ends it. A catastrophe the world survives is taken to kill a quarter of people.
 
 Epoch's spending cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model, its chance of backfiring included. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted. Deaths are valued like every death on the site; the future lost counts only where you count lives that never start (0% by default).
 

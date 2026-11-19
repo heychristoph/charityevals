@@ -41,7 +41,7 @@ The Bulletin had about six months of reserves at June 2025, after deficits of $0
 
 ### What drives the result
 
-The nuclear coverage brings 95% of the result, the pandemic coverage 4% and the AI coverage about 1%. The climate coverage adds almost nothing: a typical climate dollar averts far fewer deaths than a typical nuclear dollar. By default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 19.
+The nuclear coverage brings 95% of the result, the pandemic coverage 3% and the AI coverage about 1%. The climate coverage adds almost nothing: a typical climate dollar averts far fewer deaths than a typical nuclear dollar. By default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 19.
 
 Under half the Bulletin's spending is on nuclear risk, and journalism is further from decisions.
 
