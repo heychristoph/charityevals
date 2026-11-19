@@ -18,7 +18,7 @@ The Bulletin has one editor each for nuclear affairs, climate change, disruptive
 
 Each risk carries a yearly chance of catastrophe, taken from the experts' forecasts in the 2022 Existential Risk Persuasion Tournament and spread evenly to 2100. For nuclear war that is an 8% chance by 2100 of a war that kills over 10% of people, and 0.55% of one that ends humanity's future.
 
-A typical project cuts each risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths are valued across the world's age groups like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, which count only through the discount rate.
+A typical project cuts each risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths are valued across the world's age groups like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, which count only where you count lives that never start (0% by default).
 
 Climate coverage is valued at the site's own average for a dollar of climate work: the mean of the climate charities on the rankings, whose tonnes of greenhouse gas kept out of the air are already turned into healthy years by the site's one conversion.
 
@@ -41,14 +41,14 @@ The Bulletin had about six months of reserves at June 2025, after deficits of $0
 
 ### What drives the result
 
-The nuclear coverage brings 96% of the result, the pandemic coverage 4% and the AI coverage under 1%. The climate coverage adds almost nothing: a typical climate dollar averts far fewer deaths than a typical nuclear dollar. At the default 4% discount rate, the future counts for little. At a 0.1% discount rate the result rises to about 19.
+The nuclear coverage brings 95% of the result, the pandemic coverage 3% and the AI coverage about 1%. The climate coverage adds almost nothing: a typical climate dollar averts far fewer deaths than a typical nuclear dollar. By default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 19.
 
 Under half the Bulletin's spending is on nuclear risk, and journalism is further from decisions.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 1.1 to 42.
-- **How many years a cut counts.** The shared slider runs from 1 to 20 years, moving the result from 1.1 to 15.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 1.0 to 42.
+- **How many years a cut counts.** The shared slider runs from 1 to 20 years, moving the result from 1.0 to 15.
 - **How the spending splits between areas.** The accounts report one programme, so the split follows the year's articles.
 - **How far journalism beats or trails a typical project.** Nothing about it is measured.
 

@@ -19,7 +19,7 @@ About 86% of its money comes from governments. The rest comes from the Gates Fou
 
 Pandemics carry a yearly chance of catastrophe, spread evenly to 2100. The figures come from the experts in a forecasting tournament: about 1% that a pandemic ends humanity's future, and about 4% that one kills more than a tenth of people. A pandemic as deadly as COVID-19 is also counted, at a 2% chance each year.
 
-A typical pandemic project cuts those risks by a share per dollar, taken from Rethink Priorities' cross-cause model, its chance of backfiring included. Each cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted. Deaths are valued like every death on the site. Deaths in a COVID-scale pandemic are valued at COVID's ages, mostly older people. The future lost counts only through the discount rate.
+A typical pandemic project cuts those risks by a share per dollar, taken from Rethink Priorities' cross-cause model, its chance of backfiring included. Each cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted. Deaths are valued like every death on the site. Deaths in a COVID-scale pandemic are valued at COVID's ages, mostly older people. The future lost counts only where you count lives that never start (0% by default).
 
 CEPI's vaccines against Lassa, mpox, chikungunya and the other priority pathogens would also be used against today's outbreaks, which kill thousands of people a year. That is counted too: a Lassa vaccine campaign would save about 330 lives a year (a CEPI-funded study), smaller shares of the deaths from mpox, Ebola-type viruses, Nipah and Rift Valley fever would be averted, and so would some of chikungunya's long-term illness. Each is weighted by the chance the vaccines are licensed and used (higher for the mpox and chikungunya vaccines, which already are) and by this year's share of what CEPI puts into them.
 
@@ -46,15 +46,15 @@ CEPI is asking for $2.5 billion more for its 2027–2031 strategy, and aid budge
 
 ### What drives the result
 
-Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 2.4. Deaths of people alive now are about 90% of the value and the future lost about 10%. The outbreak vaccines add under 1%.
+Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 2.2. Deaths of people alive now are all of the value at the defaults: the future lost counts only where you count lives that never start (0% by default). The outbreak vaccines add under 1%.
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 2.5; at 8% it is about 0.13.
-- **The years a cut counts.** At one year the result is 0.037; at twenty it is 0.51.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.086 to 0.98.
-- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.056; at 60% it is 0.33. The mission's cost moves it from 0.084 to 0.33.
-- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.077 to 0.30.
+- **The discount rate.** With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 2.5; at an 8% discount rate it is about 0.13.
+- **The years a cut counts.** At one year the result is 0.033; at twenty it is 0.46.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.084 to 0.82.
+- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.051; at 60% it is 0.30. The mission's cost moves it from 0.076 to 0.30.
+- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.069 to 0.27.
 
 ### What isn't modelled
 

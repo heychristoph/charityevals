@@ -27,7 +27,7 @@ Pandemics carry a yearly chance of catastrophe, from the domain experts' forecas
 
 The Center's spending cuts that yearly risk by the share a typical biosecurity project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
 
-The deaths averted are valued like every death on the site, by age. A COVID-scale pandemic kills mostly older people, so its deaths take COVID's age mix. A catastrophe that kills a share of the world takes the world's age mix. A pandemic the world survives is taken to kill 15% of people. One that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+The deaths averted are valued like every death on the site, by age. A COVID-scale pandemic kills mostly older people, so its deaths take COVID's age mix. A catastrophe that kills a share of the world takes the world's age mix. A pandemic the world survives is taken to kill 15% of people. One that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -51,12 +51,12 @@ The Center's main funder halved its general support in 2023, and that grant ends
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: at the default 4% discount rate the future of people not yet born counts for only about 8 years of the long-run population. Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. At a 0.1% discount rate the result rises to about 45.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: by default the future of people not yet born does not count (lives that never start: 0%). Catastrophes the world survives bring about 37% and COVID-scale pandemics the rest. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 45.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 1.6 to 19.
-- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.6 to 23.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 1.6 to 16.
+- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 0.62 to 8.8.
 - **The Center's budget.** We built it from its grants. The result barely moves with it, because the cut is counted per dollar.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 

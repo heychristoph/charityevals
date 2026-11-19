@@ -1,7 +1,7 @@
 # Audit: center-for-ai-safety-charityevals, round 11 (scoped verification of round 10's fixes)
 Result: 0.01307 daly/$ = 13.07 years of healthy life per 1,000 dollars at mobiliser_share 100% (round 10 predicted about 13.1). Verdict: pass.
-Model-sha: 7ab280d06fdf2d084e1ca7763ddd217acd550cadbd249ffc30f9c0e11683e78d
-Rules: 0.3.8
+Model-sha: 41cd83298f1ac4edbaeda7147d25110ed9e903fdea772022a1beb56c62edaa24
+Rules: 0.3.13
 Scope: only round 10's findings and the rows changed for them.
 Preflight: pass (low range lines and the out-of-date distributions line only).
 Previous round: finding 1 (medium) resolved; findings 2 and 3 (low) resolved.
@@ -14,3 +14,11 @@ No findings. Remaining observation (not a finding): the course carries about fou
 
 ## Edits to writeups/center-for-ai-safety-charityevals.md (bringing typed figures to 13.07)
 Adjustments table: evidence 1.2 for the AI work, 1 for the course; counterfactual 0.65 for the AI work, 1 for the course; overall share 0.83 -> 0.85. Swings: chance slider 0.4% to 20% now 1.0 to 52; misuse cut 1.9 to 125; misuse share 10% to 40% now 5.6 to 20.5; fb_share_working 1% to 15% now 4.4 to 35; 0.1% discount rate now 28. The "about four fifths" for the course still holds (about 82%).
+
+Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline 3.922 → 3.892 (−0.76%), 4 rows changed, against the tree before the rule.
+
+Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 3.892 → 3.892 (−0.0096%), 11 rows changed, against the tree before the rule.
+
+Re-stamped (18 Nov 2026), rule never-started-prose: Wording: the summaries and write-ups of the models that count a future say it counts only where the reader counts lives that never start, give the Long-run value set's figure where they gave a 0.1% discount rate's, and Redwood Research states no range; no row or result changes. Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline 3.892 → 3.892 (−2.2e-14%), 3 rows changed, against the tree before the rule.

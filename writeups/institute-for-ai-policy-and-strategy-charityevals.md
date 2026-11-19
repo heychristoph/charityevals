@@ -11,11 +11,11 @@ In 2025 IAPS was a project of Rethink Priorities, its fiscal sponsor. Rethink Pr
 
 ### How the impact happens
 
-AI carries a yearly chance of catastrophe: the site's shared 3% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. You can move the 3% with a slider.
+AI carries a yearly chance of catastrophe: the site's shared 5% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. You can move the 5% with a slider.
 
 IAPS's research cuts that yearly risk by the share a typical AI project does per dollar, from Rethink Priorities' cross-cause model (its chance that a project backfires included). Rethink has two kinds of AI project. Work against misuse cuts the misuse part of the risk, which is most of the deaths in catastrophes the world survives. Other work cuts the misalignment part. We count 20% of IAPS's catastrophe work as misuse work, mainly its cyber research. The cut counts for the years such progress would otherwise have taken to come, each year discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -44,7 +44,7 @@ At the end of 2025 about two years of spending was set aside for IAPS, and it ha
 
 - **How likely an AI catastrophe is.** The slider moves the result many-fold.
 - **How much a dollar of misuse work cuts the risk.** Rethink's figure runs ten times either way, and the share of IAPS's work counted as misuse moves the result almost in proportion.
-- **The discount rate and the years a cut counts.** Each moves the result several-fold.
+- **The years a cut counts and the discount rate.** The years move the result several-fold; the discount rate moves it little unless lives that never start count.
 - **The fellowship's effect.** It gives most of the result, and IAPS publishes no data on where its fellows went: the share who work on AI risk because of it (20%, 5% to 40%) moves the result more than any other judgment about the fellowship.
 
 ### What isn't modelled

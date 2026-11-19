@@ -1,7 +1,8 @@
-import { parse, refs, evaluate, compile, type Compiled, type Env, type Node, type Scope } from "./expr";
+import { parse, refs, evaluate, compile, shareParts, type Compiled, type Env, type Node, type Scope } from "./expr";
 import { Model, Row, Assumptions, Facts, Charity, Owner, Cause, type ModelFile, type RowPatch, type Range } from "./schema";
 import { causeFigure, causeModels, evaluatorFigure, evaluatorFigureModels, spendingOf } from "./ranking";
 import { byIso3 } from "./countries";
+import { LIVES_ADDED, enableLivesAdded, groupShares, sharesKey, withLivesAdded, type Group } from "./population";
 import { MOBILISER_SHARE } from "./moved-money";
 
 export type ResolvedRow = Row & {
@@ -15,6 +16,11 @@ export type ResolvedRow = Row & {
   factDeps: string[];
   /** Other models whose live result this row reads (`#model-id`). */
   modelDeps: string[];
+  /** Sliders the row moves with only through the lives its shared figures add (src/engine/population.ts):
+   * kept apart from assumptionDeps, which says what the row itself reads. */
+  livesAdded?: string[];
+  /** Shared facts the row reads only through those lives (births parents forgo, what added people eat). */
+  livesFacts?: string[];
 };
 
 export type ResolvedModel = Omit<ModelFile, "rows" | "charity" | "owner"> & {
@@ -147,13 +153,19 @@ export function buildLibrary(
   }
 
   const models = new Map<string, ResolvedModel>();
+  enableLivesAdded(assumptions, (key) => facts.has(key));
   const resolving = new Set<string>();
   // A formula as written and as read (derived assumptions expanded), parsed once: a variant inherits its
   // parent's rows, and many models share formulas. Nodes are never changed once parsed.
-  const formulas = new Map<string, { written: ReturnType<typeof refs>; node: Node }>();
-  const formulaOf = (f: string) => {
-    let x = formulas.get(f);
-    if (!x) formulas.set(f, (x = { written: refs(parse(f)), node: parse(expandDerived(assumptions, f)) }));
+  // The shared figures for a death, a stillbirth, a year of contraception and a year of doubled income are
+  // read with the lives they add, by where the model's beneficiaries live (src/engine/population.ts), so
+  // the node is the model's own where a formula names one of them.
+  const formulas = new Map<string, { written: ReturnType<typeof refs>; node: Node; plain?: Node }>();
+  const formulaOf = (f: string, shares: Partial<Record<Group, number>>, where: string, descendants: boolean) => {
+    const read = withLivesAdded(assumptions, f, shares, descendants);
+    const key = read === f ? f : `${where}|${descendants}|${f}`;
+    let x = formulas.get(key);
+    if (!x) formulas.set(key, (x = { written: refs(parse(f)), node: read === f ? parse(expandDerived(assumptions, f)) : labelLives(shareParts(parse(expandDerived(assumptions, read)))), plain: read === f ? undefined : parse(expandDerived(assumptions, f)) }));
     return x;
   };
 
@@ -171,7 +183,7 @@ export function buildLibrary(
     }
 
     const rows: (RowPatch & Partial<ResolvedRow>)[] = parent
-      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, expected: _e, range: _r, ...r }) => ({
+      ? parent.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, livesAdded: _l, livesFacts: _lf, expected: _e, range: _r, ...r }) => ({
           ...r,
           inheritedFrom: r.inheritedFrom ?? parent!.id,
           overridden: undefined,
@@ -190,7 +202,11 @@ export function buildLibrary(
       rows[i] = merged;
     }
 
+    const shares = groupShares(file.beneficiaries ?? parent?.beneficiaries);
+    const where = sharesKey(shares);
     const sideEffects = new Map(rows.filter((r) => r.side_effect).map((r) => [r.id, r.side_effect!]));
+    const neverStarted = new Set(rows.filter((r) => r.never_started).map((r) => r.id));
+    const weighted: RowWeights = new Map([...new Set([...sideEffects.keys(), ...neverStarted])].map((x) => [x, { side: sideEffects.get(x), neverStarted: neverStarted.has(x) }]));
     const resolved: ResolvedRow[] = [];
     for (const r of rows) {
       const { inheritedFrom, overridden, ...plain } = r;
@@ -205,11 +221,16 @@ export function buildLibrary(
           // A derived assumption reads as its formula, so every path sees the sliders it rests on;
           // assumptionDeps keeps the name the row wrote as well. factDeps are the facts the row wrote
           // (a derived assumption's own are the assumption's, checked below).
-          const { written, node } = formulaOf(row.formula);
-          row.node = withSideEffectWeight(node, sideEffects);
+          const { written, node, plain } = formulaOf(row.formula, shares, where, row.descendants !== false);
+          row.node = withRowWeights(node, weighted);
           const used = refs(row.node);
           row.deps = [...used.rows];
-          row.assumptionDeps = [...new Set([...written.assumptions, ...used.assumptions])];
+          // What the row itself reads: the lives its shared figures add are kept apart (livesAdded).
+          const itself = plain ? refs(withRowWeights(plain, weighted)) : used;
+          const own = itself.assumptions;
+          row.assumptionDeps = [...new Set([...written.assumptions, ...own])];
+          if (plain) row.livesAdded = [...used.assumptions].filter((a) => !own.has(a));
+          if (plain) row.livesFacts = [...used.facts].filter((f) => !itself.facts.has(f));
           row.factDeps = [...written.facts];
           if (rawFacts.length) for (const f of used.facts) if (!written.facts.has(f) && !facts.has(f)) errors.push(`${id}.${row.id}: a derived assumption it reads uses unknown fact @${f}`);
           row.modelDeps = [...used.models];
@@ -221,17 +242,21 @@ export function buildLibrary(
     }
 
     const byId = new Map(resolved.map((r) => [r.id, r]));
-    // A side effect computed from another would be weighted twice.
+    // A side effect computed from another would be weighted twice; so would the good of lives that
+    // never start computed from another such row. (One of each kind on a path is two weights, as meant.)
     for (const r of resolved) {
-      if (!r.side_effect) continue;
-      const seen = new Set<string>();
-      const stack = [...r.deps];
-      while (stack.length) {
-        const d = stack.pop()!;
-        if (seen.has(d)) continue;
-        seen.add(d);
-        if (sideEffects.has(d)) { errors.push(`${id}.${r.id}: a side effect computed from side effect ${d} would be weighted twice: mark only one`); break; }
-        stack.push(...(byId.get(d)?.deps ?? []));
+      if (r.never_started && r.side_effect === "factor") errors.push(`${id}.${r.id}: the good of lives that never start is an amount: side_effect "factor" can't carry never_started`);
+      for (const [mine, marked, what] of [[!!r.side_effect, sideEffects, "a side effect computed from side effect"], [!!r.never_started, neverStarted, "lives that never start computed from never-started row"]] as const) {
+        if (!mine) continue;
+        const seen = new Set<string>();
+        const stack = [...r.deps];
+        while (stack.length) {
+          const d = stack.pop()!;
+          if (seen.has(d)) continue;
+          seen.add(d);
+          if (marked.has(d)) { errors.push(`${id}.${r.id}: ${what} ${d} would be weighted twice: mark only one`); break; }
+          stack.push(...(byId.get(d)?.deps ?? []));
+        }
       }
     }
     for (const r of resolved) {
@@ -514,14 +539,21 @@ export function expandDerived(a: Assumptions, formula: string): string {
 /** A unit's conversion into the common unit as it is evaluated: derived assumptions expanded. */
 export function unitFormula(a: Assumptions, unit: string): string | undefined {
   const to = a.units[unit]?.to_common;
-  return to === undefined ? undefined : expandDerived(a, to);
+  // A unit's conversion values deaths wherever they fall (a tonne of CO₂'s): at the world's figures.
+  return to === undefined ? undefined : expandDerived(a, withLivesAdded(a, to, { world: 1 }));
 }
 
 /** The assumption values a view computes with: the evaluator view pins what the evaluator used. */
 export function viewAssumptions(m: ResolvedModel, av: Record<string, number>, view: View): Record<string, number> {
   if (view !== "evaluator") return av;
-  // The evaluator's own sheet counts its side effects in full.
-  const full: Record<string, number> = SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1 ? { [SIDE_EFFECT_WEIGHT]: 1 } : {};
+  // The evaluator's own sheet counts its side effects in full, and no life that never starts unless
+  // the model pins the weight (an evaluator who counted them).
+  const full: Record<string, number> = {
+    ...(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1 ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}),
+    ...(av[NEVER_STARTED_WEIGHT] ? { [NEVER_STARTED_WEIGHT]: 0 } : {}),
+    // Nor the people and animals a result adds (src/engine/population.ts): the sheet's own figures stand.
+    ...(av[LIVES_ADDED] ? { [LIVES_ADDED]: 0 } : {}),
+  };
   return m.evaluator ? { ...av, ...full, ...m.evaluator.assumptions } : { ...av, ...full };
 }
 
@@ -530,25 +562,38 @@ export function viewAssumptions(m: ResolvedModel, av: Record<string, number>, vi
 /** How much side effects count (rows marked `side_effect`): 1 in full, 0 not at all. */
 export const SIDE_EFFECT_WEIGHT = "side_effect_weight";
 
-/** A formula with every reference to a side-effect row of its model read through the weight:
- * `added` as $side_effect_weight × row, `factor` as 1 + $side_effect_weight × (row − 1). The rows
+/** How much the good in lives that never start counts (rows marked `never_started`, docs/normalization.md
+ * 2.25): 0 not at all (the suffering in them always counts), 1 like anyone's. */
+export const NEVER_STARTED_WEIGHT = "never_started_weight";
+
+/** The marks that make a row read through a weight: a side effect's form, the good of lives that never start. */
+export type RowWeights = Map<string, { side?: "added" | "factor"; neverStarted?: boolean }>;
+
+/** A formula with every reference to a marked row of its model read through the row's weight. A side
+ * effect: `added` as $side_effect_weight × row, `factor` as 1 + $side_effect_weight × (row − 1). The
+ * good of lives that never start: $never_started_weight × row; with `added`, both weights. The rows
  * themselves keep their own values (an evaluator's sheet still reproduces); what reads them moves. */
-export function withSideEffectWeight(n: Node, sideEffects: Map<string, "added" | "factor">): Node {
-  if (!sideEffects.size) return n;
+export function withRowWeights(n: Node, marks: RowWeights): Node {
+  if (!marks.size) return n;
   const w: Node = { type: "ref", scope: "assumption", name: SIDE_EFFECT_WEIGHT };
+  const life: Node = { type: "ref", scope: "assumption", name: NEVER_STARTED_WEIGHT };
   const walk = (x: Node): Node => {
     switch (x.type) {
       case "ref": {
-        const form = x.scope === "row" ? sideEffects.get(x.name) : undefined;
-        if (!form) return x;
+        const mark = x.scope === "row" ? marks.get(x.name) : undefined;
+        if (!mark) return x;
         const one: Node = { type: "num", value: 1 };
-        return form === "added"
-          ? { type: "bin", op: "*", left: w, right: x }
-          : { type: "bin", op: "+", left: one, right: { type: "bin", op: "*", left: w, right: { type: "bin", op: "-", left: x, right: one } } };
+        const started: Node = mark.neverStarted ? { type: "bin", op: "*", left: life, right: x } : x;
+        return mark.side === "added"
+          ? { type: "bin", op: "*", left: w, right: started }
+          : mark.side === "factor"
+          ? { type: "bin", op: "+", left: one, right: { type: "bin", op: "*", left: w, right: { type: "bin", op: "-", left: x, right: one } } }
+          : started;
       }
-      case "neg": return { ...x, arg: walk(x.arg) };
-      case "bin": return { ...x, left: walk(x.left), right: walk(x.right) };
-      case "call": return { ...x, args: x.args.map(walk) };
+      // A part that reads no marked row stays the node it was: shared parts and their names go by identity.
+      case "neg": { const a = walk(x.arg); return a === x.arg ? x : { ...x, arg: a }; }
+      case "bin": { const l = walk(x.left), r = walk(x.right); return l === x.left && r === x.right ? x : { ...x, left: l, right: r }; }
+      case "call": { const args = x.args.map(walk); return args.every((a, i) => a === x.args[i]) ? x : { ...x, args }; }
       default: return x;
     }
   };
@@ -628,7 +673,12 @@ function rowProgram(m: ResolvedModel): Program {
 
 /** Each formula compiled once (expr.ts compile). */
 function compiled(p: Program): (Compiled | undefined)[] {
-  return (p.fns ??= p.rows.map((r) => (r.node ? compile(r.node, (n) => p.at.get(n) ?? -1) : undefined)));
+  // A row read with the lives it adds repeats long parts: they are worked out once per run (expr.ts).
+  if (!p.fns) {
+    const share = new Map<number, { n: number }>();
+    p.fns = p.rows.map((r) => (r.node ? compile(r.node, (n) => p.at.get(n) ?? -1, r.livesAdded?.length ? share : undefined) : undefined));
+  }
+  return p.fns;
 }
 
 function graphOf(p: Program): Graph {
@@ -698,9 +748,11 @@ function run(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs:
     if (p.runs++ === 0) {
       // The first run walks the formulas: compiling pays only for a model computed again.
       const look = (scope: Scope, name: string) => (scope === "row" ? env.v[p.at.get(name) ?? -1] ?? NaN : scope === "assumption" ? a[name] ?? NaN : other(scope, name));
+      // Rows read with the lives they add share their long parts: worked out once for this run.
+      let walked: Map<Node, number> | undefined;
       for (let k = 0; k < n; k++) {
         const r = p.rows[k];
-        env.v[k] = inputs[r.id] ?? (formula(k) ? evaluate(r.node!, look) : inputValue(r, view));
+        env.v[k] = inputs[r.id] ?? (formula(k) ? evaluate(r.node!, look, r.livesAdded ? (walked ??= new Map()) : undefined) : inputValue(r, view));
       }
       return (byView[view] = { v: env.v, models });
     }
@@ -881,6 +933,24 @@ export const DISTANCE_DISCOUNT = "distance_discount";
 const factorLabels = new WeakMap<Node, string>();
 /** A name for a node of the distance weight or the missing-data factor, so the tree can show it. */
 export const distanceLabel = (n: Node) => factorLabels.get(n);
+
+/** Names for the parts a formula takes when it is read with the lives it adds (src/engine/population.ts):
+ * the tree shows each as one part with its name, not as the arithmetic behind it. */
+function labelLives(node: Node): Node {
+  const walk = (n: Node) => {
+    if (n.type === "call") {
+      const first = n.args[0];
+      if (n.fn === "if" && first?.type === "ref" && first.scope === "assumption") {
+        if (first.name === LIVES_ADDED) { factorLabels.set(n, "The people and animals this adds"); return; }
+        if (first.name === NEVER_STARTED_WEIGHT) { factorLabels.set(n, "The good of lives that never start, as far as you count it"); return; }
+      }
+      n.args.forEach(walk);
+    } else if (n.type === "bin") { walk(n.left); walk(n.right); }
+    else if (n.type === "neg") walk(n.arg);
+  };
+  walk(node);
+  return node;
+}
 const distanceNodes = new WeakMap<ResolvedModel, Node | null>();
 
 const num = (value: number): Node => ({ type: "num", value });
@@ -1103,9 +1173,9 @@ const readers = new WeakMap<Record<string, number>, Record<string, number>>();
 export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
   const riskMoves = RISK_QUANTILE in av && av[RISK_QUANTILE] !== RISK_OFF;
   const shareMoves = MOBILISER_SHARE in av && av[MOBILISER_SHARE] !== 1;
-  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1) && !riskMoves && !shareMoves)) return av;
+  if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1) && !av[NEVER_STARTED_WEIGHT] && !av[LIVES_ADDED] && !riskMoves && !shareMoves)) return av;
   let r = readers.get(av);
-  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: RISK_OFF } : {}), ...(MOBILISER_SHARE in av ? { [MOBILISER_SHARE]: 1 } : {}) }));
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(NEVER_STARTED_WEIGHT in av ? { [NEVER_STARTED_WEIGHT]: 0 } : {}), ...(LIVES_ADDED in av ? { [LIVES_ADDED]: 0 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: RISK_OFF } : {}), ...(MOBILISER_SHARE in av ? { [MOBILISER_SHARE]: 1 } : {}) }));
   return r;
 }
 
@@ -1174,18 +1244,23 @@ export function headline(
 }
 
 /** Assumptions that can change this model's headline in a view. */
-export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "charityevals"): string[] {
+export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "charityevals", lives = true): string[] {
   const used = new Set<string>();
   for (const r of m.rows) r.assumptionDeps.forEach((a) => used.add(a));
+  // The lives a result adds move it with the sliders they read, in our view (`lives` false leaves them
+  // out: the uncertainty engine counts what the rows themselves read).
+  if (lives && view !== "evaluator") for (const r of m.rows) r.livesAdded?.forEach((a) => used.add(a));
   const conv = modelConversion(lib, m, view);
   if (conv) refs(conv).assumptions.forEach((a) => used.add(a));
   // A model read live (`#id`) moves with every assumption it reads, in our view.
-  for (const t of referencedModels(lib, m)) usedAssumptions(lib, t).forEach((a) => used.add(a));
+  for (const t of referencedModels(lib, m)) usedAssumptions(lib, t, "charityevals", lives).forEach((a) => used.add(a));
   // A cause's figure (`#cause:x`) leaves out what the rankings leave out under `$ignore_old_estimates`.
   if (m.rows.some((r) => r.modelDeps.some(isCauseRef)) && lib.assumptions.rows.some((r) => r.id === IGNORE_OLD)) used.add(IGNORE_OLD);
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads, never
   // weighs it by distance and never discounts an imported model for missing data.
   if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT, RISK_QUANTILE].forEach((x) => used.delete(x));
+  // Nor does it count lives that never start, unless the evaluator did (the model pins the weight).
+  if (view === "evaluator" && !(m.evaluator && NEVER_STARTED_WEIGHT in m.evaluator.assumptions)) used.delete(NEVER_STARTED_WEIGHT);
   if (view === "evaluator" && !m.rows.some((r) => r.assumptionDeps.includes(MISSING_DATA_DISCOUNT))) used.delete(MISSING_DATA_DISCOUNT);
   // The evaluator view credits mobilised resources in full: its own rows by the pin (INV-22), the models it reads by readerValues.
   if (view === "evaluator" && (MOBILISER_SHARE in (m.evaluator?.assumptions ?? {}) || !m.rows.some((r) => r.assumptionDeps.includes(MOBILISER_SHARE)))) used.delete(MOBILISER_SHARE);
@@ -1218,8 +1293,10 @@ export function currentModelsOf(lib: Library, charity: string): ResolvedModel[] 
 
 /** Shared facts this model reads: in its rows, and, given the library, in its unit's conversion into
  * the headline (climate's `@climate.*`), which can move its headline just the same. */
-export function usedFacts(m: ResolvedModel, lib?: Library): string[] {
+export function usedFacts(m: ResolvedModel, lib?: Library, view: View = "charityevals"): string[] {
   const used = new Set(m.rows.flatMap((r) => r.factDeps));
+  // The lives a result adds move it with the facts they are read from, in our view.
+  if (view !== "evaluator") for (const r of m.rows) r.livesFacts?.forEach((f) => used.add(f));
   const conv = lib && m.output && headlineConversion(lib, m.output.unit);
   if (conv) refs(conv).facts.forEach((f) => used.add(f));
   // A derived assumption's own facts (GiveWell's value of a death under five) move the rows that read it.

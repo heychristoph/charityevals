@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "govai",
   "owner": "charityevals",
-  "summary": "The Centre for the Governance of AI (GovAI: a US charity with a UK subsidiary in London) researches how governments and AI companies can manage risks from advanced AI, advises them (in 2025 its director of policy was one of the chairs and vice-chairs who drafted the EU's Code of Practice for general-purpose AI) and trains people for the field (81 three-month fellows and 15 year-long scholars in 2025). This model covers all its work in 2025, its first full year as an independent charity ($11.9M spent, from its annual report; no audited statement for the year is public yet). At the defaults it averts about {{result}} years of healthy life per $1,000, within a plausible range of {{low}} to {{high}}, so the result is mostly uncertainty: each dollar of research is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), the Code of Practice by GovAI's share of the resources behind it ({{row:attr_policy}}) of a small cut in the risk (0.1%), the fellows' and scholars' later work at a typical dollar of such work, deaths valued like every death and the future lost counted through the discount rate; the training gives about 78% of the result, the research about 14% and the Code about 8%, and the next dollar counts at 42% of the past average. A fifth of its catastrophe research is threat modelling of AI-enabled attacks, for which Rethink's typical misuse project cuts deaths far more per dollar than a misalignment one; the biggest swings are the chance of an AI catastrophe (the slider), the years a cut counts, the discount rate, that cut per dollar and the share of work counted as misuse, and every branch is discounted for missing data: no outcome of the work on the risk is measured.",
+  "summary": "The Centre for the Governance of AI (GovAI: a US charity with a UK subsidiary in London) researches how governments and AI companies can manage risks from advanced AI, advises them (in 2025 its director of policy was one of the chairs and vice-chairs who drafted the EU's Code of Practice for general-purpose AI) and trains people for the field (81 three-month fellows and 15 year-long scholars in 2025). This model covers all its work in 2025, its first full year as an independent charity ($11.9M spent, from its annual report; no audited statement for the year is public yet). At the defaults it averts about {{result}} years of healthy life per $1,000, within a plausible range of {{low}} to {{high}}, so the result is mostly uncertainty: each dollar of research is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), the Code of Practice by GovAI's share of the resources behind it ({{row:attr_policy}}) of a small cut in the risk (0.1%), the fellows' and scholars' later work at a typical dollar of such work, deaths valued like every death and the future lost counted only where you count lives that never start (0% by default); the training gives about 79% of the result, the research about 14% and the Code about 7%, and the next dollar counts at 42% of the past average. A fifth of its catastrophe research is threat modelling of AI-enabled attacks, for which Rethink's typical misuse project cuts deaths far more per dollar than a misalignment one; the biggest swings are the chance of an AI catastrophe (the slider), the years a cut counts, the discount rate, that cut per dollar and the share of work counted as misuse, and every branch is discounted for missing data: no outcome of the work on the risk is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Centre for the Governance of AI (GovAI)",
@@ -208,7 +208,8 @@
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size."
+      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size.",
+      "descendants": false
     },
     {
       "id": "future_years_per_person",
@@ -226,7 +227,7 @@
       "format": "number",
       "formula": "@catastrophe.world_population_long_run * future_years_per_person",
       "unit": "DALYs",
-      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate: your discount rate is how much future generations count."
+      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate. These are lives that never start: the outcome counts them times your weight on such lives (docs/normalization.md 2.25)."
     },
     {
       "id": "years_of_impact",
@@ -396,7 +397,8 @@
       "label": "AI: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "bio_extinction_per_year",
@@ -538,7 +540,8 @@
       "label": "Pandemics: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "nuclear_extinction_per_year",
@@ -687,7 +690,8 @@
       "label": "Nuclear war: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "pol_cost_share",
@@ -811,7 +815,8 @@
       "label": "Policy win: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "fb_cost_share",
@@ -934,7 +939,8 @@
       "label": "Field-building: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "cost_shares_total",
@@ -968,7 +974,8 @@
       "format": "number",
       "formula": "(@death_ages.covid_scale_share_under5 * @moral_weights.uov_per_death_under5 + (1 - @death_ages.covid_scale_share_under5) * (@death_ages.covid_scale_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.covid_scale_share_5_14_of_over5) * (@death_ages.covid_scale_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - @death_ages.covid_scale_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed."
+      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed.",
+      "descendants": false
     },
     {
       "id": "future_dalys_averted",
@@ -977,6 +984,16 @@
       "format": "number",
       "formula": "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys",
       "unit": "DALYs"
+    },
+    {
+        "id": "future_animal_harm",
+        "section": "effect",
+        "label": "Suffering of the farmed animals the people of that future would eat, in healthy years",
+        "format": "number",
+        "formula": "-((cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years) + (cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years) + (cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years) + (pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years) + (fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact))) * $lives_added * $animal_dalys_per_person_year_world",
+        "unit": "DALYs",
+        "explainer": "A future kept is also every animal raised to feed it: each future person-year at the suffering of the animals an average person eats in a year today (docs/normalization.md 2.25). Suffering always counts, whatever lives that never start count; the farmed animals' own good days count where you set them to. Held at today's diet: no forecast of what people will eat is used.",
+        "side_effect": "added"
     },
     {
       "id": "w_ai",
@@ -1301,7 +1318,7 @@
       "section": "outcome",
       "label": "Healthy years counted directly (before adjustments)",
       "format": "number",
-      "formula": "future_dalys_averted",
+      "formula": "(future_dalys_averted + future_animal_harm)",
       "unit": "DALYs"
     },
     {

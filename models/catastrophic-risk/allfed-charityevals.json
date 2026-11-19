@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "allfed",
   "owner": "charityevals",
-  "summary": "ALLFED (the Alliance to Feed the Earth in Disasters) researches foods and food systems that could feed people after a catastrophe that blocks the sun or breaks the food supply, chiefly the famine after a nuclear war's soot cools the climate, and advises governments on plans for it; this model covers all its programmes in 2024 ($1.0M spent). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on its plausible range: each dollar is valued as a typical nuclear project's relative cut (Rethink Priorities' cross-cause model) applied not to the chance of a war but to the famine deaths if one comes (the Existential Risk Persuasion Tournament's experts for the chance, Xia et al. 2022 for the famine), with a small part for food in an extreme pandemic and a share of an extinction-level war's future. The biggest uncertainty is how much a dollar of such work cuts those deaths: Rethink calls its figures placeholders, the range runs ten times either way, and they were not set with food resilience in mind; the result also moves with the years a cut counts and the discount rate. Both branches, nuclear winter and pandemics, are discounted for missing data: no food plan has been tested in a catastrophe.",
+  "summary": "ALLFED (the Alliance to Feed the Earth in Disasters) researches foods and food systems that could feed people after a catastrophe that blocks the sun or breaks the food supply, chiefly the famine after a nuclear war's soot cools the climate, and advises governments on plans for it; this model covers all its programmes in 2024 ($1.0M spent). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on its plausible range: each dollar is valued as a typical nuclear project's relative cut (Rethink Priorities' cross-cause model) applied not to the chance of a war but to the famine deaths if one comes (the Existential Risk Persuasion Tournament's experts for the chance, Xia et al. 2022 for the famine), with a small part for food in an extreme pandemic and a share of an extinction-level war's future, counted only where you count lives that never start (0% by default). The biggest uncertainty is how much a dollar of such work cuts those deaths: Rethink calls its figures placeholders, the range runs ten times either way, and they were not set with food resilience in mind; the result also moves with the years a cut counts and the discount rate. Both branches, nuclear winter and pandemics, are discounted for missing data: no food plan has been tested in a catastrophe.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: ALLFED (Alliance to Feed the Earth in Disasters)",
@@ -191,7 +191,8 @@
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size."
+      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size.",
+      "descendants": false
     },
     {
       "id": "future_years_per_person",
@@ -209,7 +210,7 @@
       "format": "number",
       "formula": "@catastrophe.world_population_long_run * future_years_per_person",
       "unit": "DALYs",
-      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate: your discount rate is how much future generations count."
+      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate. These are lives that never start: the outcome counts them times your weight on such lives (docs/normalization.md 2.25)."
     },
     {
       "id": "years_of_impact",
@@ -368,7 +369,8 @@
       "label": "AI: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "bio_extinction_per_year",
@@ -546,7 +548,8 @@
       "label": "Pandemics: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "nuclear_extinction_per_year",
@@ -693,7 +696,8 @@
       "label": "Nuclear war: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "pol_cost_share",
@@ -807,7 +811,8 @@
       "label": "Policy win: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "fb_cost_share",
@@ -914,7 +919,8 @@
       "label": "Field-building: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "cost_shares_total",
@@ -948,7 +954,8 @@
       "format": "number",
       "formula": "(@death_ages.covid_scale_share_under5 * @moral_weights.uov_per_death_under5 + (1 - @death_ages.covid_scale_share_under5) * (@death_ages.covid_scale_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.covid_scale_share_5_14_of_over5) * (@death_ages.covid_scale_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - @death_ages.covid_scale_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed."
+      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed.",
+      "descendants": false
     },
     {
       "id": "future_dalys_averted",
@@ -957,6 +964,16 @@
       "format": "number",
       "formula": "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys",
       "unit": "DALYs"
+    },
+    {
+        "id": "future_animal_harm",
+        "section": "effect",
+        "label": "Suffering of the farmed animals the people of that future would eat, in healthy years",
+        "format": "number",
+        "formula": "-((cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years) + (cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years) + (cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years) + (pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years) + (fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact))) * $lives_added * $animal_dalys_per_person_year_world",
+        "unit": "DALYs",
+        "explainer": "A future kept is also every animal raised to feed it: each future person-year at the suffering of the animals an average person eats in a year today (docs/normalization.md 2.25). Suffering always counts, whatever lives that never start count; the farmed animals' own good days count where you set them to. Held at today's diet: no forecast of what people will eat is used.",
+        "side_effect": "added"
     },
     {
       "id": "dalys_per_death_value",
@@ -1347,7 +1364,7 @@
       "section": "outcome",
       "label": "Healthy years counted directly (before adjustments)",
       "format": "number",
-      "formula": "future_dalys_averted",
+      "formula": "(future_dalys_averted + future_animal_harm)",
       "unit": "DALYs"
     },
     {

@@ -28,14 +28,15 @@ describe("the value of a life", () => {
   const i = before.rows.findIndex((r) => r.id === "life_value_multiplier");
   before.rows[i] = { id: "life_value_multiplier", label: "x", value: { low: 0.6, best: 1, high: 1.4 }, kind: "judgment", explainer: "x" };
   const old = buildLibrary(models, before, facts, walk(join(root, "charities")).map(read), read(join(root, "owners.json")));
-  const av = assumptionValues(lib.assumptions);
+  // Without the lives a result adds (src/engine/population.ts): they are not what this slider is about.
+  const av: Record<string, number> = { ...assumptionValues(lib.assumptions), lives_added: 0 };
 
   it("is GiveWell's at the defaults: every model's headline, in both views, is what it was with the multiplier at 1", () => {
     expect(lib.errors).toEqual([]);
     expect(old.errors).toEqual([]);
     expect(av.daly_per_child_death * av.uov_per_daly).toBe(U5);
     expect("life_value_multiplier" in av).toBe(false);
-    const oav = assumptionValues(old.assumptions);
+    const oav = { ...assumptionValues(old.assumptions), lives_added: 0 };
     let n = 0;
     for (const m of lib.models.values()) {
       if (!m.output) continue;

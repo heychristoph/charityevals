@@ -3,7 +3,7 @@
 // every number on the path to the result is a sourced fact, a shared assumption, or a labelled
 // judgment with a range and a reason, formulas carry no unexplained constants, and the canonical
 // rows sit inside plausible bounds. `npm run check` fails on any high-severity finding.
-import type { Node } from "./expr";
+import { parse, type Node } from "./expr";
 import { assumptionValues, compute, hasRange, isCharityRef, readsAsDestination, type Library, type ResolvedModel } from "./model";
 import { MOVED_MONEY_SECTION } from "./moved-money";
 import { rowsFeeding } from "./sensitivity";
@@ -334,7 +334,9 @@ export function lintModel(lib: Library, m: ResolvedModel, today = new Date(), op
     const onPath = path.has(r.id);
     if ((r.explainer ?? "").includes("TEMPLATE")) add("high", "placeholder", "template placeholder text left in the explainer", "Replace it with what this number is, where it comes from and why it is that size.", r.id);
     if (r.node) {
-      const bad = [...new Set(literals(r.node).filter((v) => !ALLOWED_LITERALS.has(v)))];
+      // The formula as written: a derived assumption's own constants, and those of the lives a shared
+      // figure adds (src/engine/population.ts), are not the row's.
+      const bad = [...new Set(literals(r.formula !== undefined ? parse(r.formula) : r.node).filter((v) => !ALLOWED_LITERALS.has(v)))];
       if (bad.length) add("medium", "magic-number", `formula contains the constant(s) ${bad.join(", ")}`, "Move each constant into an input row with a source (or a judgment with a range and a reason), and reference the row.", r.id);
       continue;
     }

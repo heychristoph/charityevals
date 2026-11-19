@@ -2,7 +2,7 @@
 
 Result: 1.721e-4 daly/$ = 0.172 years of healthy life per $1,000 (combined range 0.032–0.940); global-health median 0.099 (×1.73). Verdict: pass (0 high, 0 medium, 1 low).
 Model-sha: c9b4f626c406b2a1bdec153d989a74ca9ab20a13950f160f718725b1b8b47ae0
-Rules: 0.3.8
+Rules: 0.3.13
 
 Scope: only commit 9a98fcc (`git show 9a98fcc -- models writeups`): the within-a-year transfer rule for relief and recovery, the anchor of `liv_participant_only_share`, summary and write-up figures.
 

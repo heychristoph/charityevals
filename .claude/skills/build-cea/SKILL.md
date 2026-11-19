@@ -124,7 +124,9 @@ Copy `templates/<family>.json` to the output path and fill it in.
   - animal families: the species step (templates.md), the species split a sourced fact or ranged judgment;
   - climate: the climate skeleton's `years_until_avoided` and `conversion` rows (normalization.md 2.5).
 - **Every way the work does good or harm is a row**: side effects are estimated rows tagged
-  `side_effect` (normalization.md 2.16), never a list.
+  `side_effect` (normalization.md 2.16), never a list. The good of lives that never start (future
+  people, births averted, animals never bred) is a row of its own tagged `never_started` (2.25), their
+  suffering untagged; the people and animals a death averted adds come with the shared figures.
 - **Ranges and the simulation** (normalization.md 2.18): each range's `interval` and `shape` as the
   source states; a chance that one event happens at all is `single_event` (`{ with }`, `{ one_of }`),
   never a yearly rate or a share of many; one series' figures from one source `drawn_with` its first;

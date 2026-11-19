@@ -924,7 +924,8 @@
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number."
+      "explainer": "A catastrophe's deaths are valued like every death on the site, by age band × your value of a life; no premium for their number.",
+      "descendants": false
     },
     {
       "id": "rbf_uov_pandemic",
@@ -1063,7 +1064,18 @@
       "label": "Catastrophic risk: future generations' healthy years",
       "format": "number",
       "formula": "(rbf_risk_years * rbf_credit + itmo_risk_years * itmo_credit) * future_share_lost * @catastrophe.world_population_long_run * future_years_per_person",
-      "explainer": "0 at the best guess (future_share_lost); credited by branch."
+      "explainer": "0 at the best guess (future_share_lost); credited by branch.",
+      "never_started": true
+    },
+    {
+        "id": "future_animal_harm",
+        "section": "effect",
+        "label": "Suffering of the farmed animals the people of that future would eat, in healthy years",
+        "format": "number",
+        "formula": "-((rbf_risk_years * rbf_credit + itmo_risk_years * itmo_credit) * future_share_lost * @catastrophe.world_population_long_run * future_years_per_person) * $lives_added * $animal_dalys_per_person_year_world",
+        "unit": "DALYs",
+        "explainer": "A future kept is also every animal raised to feed it: each future person-year at the suffering of the animals an average person eats in a year today (docs/normalization.md 2.25). Suffering always counts, whatever lives that never start count; the farmed animals' own good days count where you set them to. Held at today's diet: no forecast of what people will eat is used.",
+        "side_effect": "added"
     },
     {
       "id": "dalys_per_person_year",
@@ -1615,7 +1627,7 @@
       "section": "outcome",
       "label": "Healthy years counted directly",
       "format": "number",
-      "formula": "health_people * dalys_per_person_year * protection_years + future_dalys_averted"
+      "formula": "health_people * dalys_per_person_year * protection_years + (future_dalys_averted + future_animal_harm)"
     },
     {
       "id": "outcome_before_unmodelled",

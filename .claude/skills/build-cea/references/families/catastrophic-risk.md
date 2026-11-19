@@ -27,7 +27,8 @@ Why this shape:
 
 - **Sizes, not one risk.** A catastrophe the world survives kills a share of people, valued like any
   deaths. Only extinction-level ones take the future: people not yet born, through the one discount
-  rate (`future_years_per_person`). People alive now count as deaths, never twice.
+  rate (`future_years_per_person`). People alive now count as deaths, never twice. The future
+  × `$never_started_weight` (2.25).
 - **A typical dollar, then this charity.** The cut per dollar is Rethink Priorities' typical project per
   area. The charity enters through its spending and each branch's evidence multiplier (how far its
   outputs beat or trail a typical project); no free-hand multiplier. Spending far above a typical

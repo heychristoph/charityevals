@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "mats",
   "owner": "charityevals",
-  "summary": "MATS (ML Alignment & Theory Scholars, Berkeley and London) trains researchers for AI safety: scholars spend ten weeks on a research project with a mentor from an AI lab or safety group, and many then continue for four months or longer in an extension phase. This model covers all its work in 2024, its first full year as its own charity ($2.2M of programme spending, $2.9M in all, in its Form 990), when about 153 scholars took part (stipends paid by AI Safety Support, a co-funder). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on the model's own ranges, so the result is mostly uncertainty: the scholars who go on to work on AI risk because of MATS (25%, our judgment from its alumni data) are valued by their later work at a typical dollar of such work, credited by MATS's share among those who paid for the training ({{row:fb_attribution_share_shared}}: its cost against AI Safety Support's stipends, mentors' time and donated compute) and with their research during the programme; the extension's research is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted through the discount rate. The alumni's employers, who pay for the work itself, count only through the site's mobiliser setting. The training gives nearly all the result (98%), the next dollar counts at 31.5% of the past average, and the biggest swings are the chance of an AI catastrophe (the slider), Rethink's typical cut per dollar for misuse work, the mobiliser setting, the years a cut counts and the missing-data discount. Every branch is discounted for missing data: no outcome of the work on the risk is measured and the alumni survey has no comparison group.",
+  "summary": "MATS (ML Alignment & Theory Scholars, Berkeley and London) trains researchers for AI safety: scholars spend ten weeks on a research project with a mentor from an AI lab or safety group, and many then continue for four months or longer in an extension phase. This model covers all its work in 2024, its first full year as its own charity ($2.2M of programme spending, $2.9M in all, in its Form 990), when about 153 scholars took part (stipends paid by AI Safety Support, a co-funder). At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on the model's own ranges, so the result is mostly uncertainty: the scholars who go on to work on AI risk because of MATS (25%, our judgment from its alumni data) are valued by their later work at a typical dollar of such work, credited by MATS's share among those who paid for the training ({{row:fb_attribution_share_shared}}: its cost against AI Safety Support's stipends, mentors' time and donated compute) and with their research during the programme; the extension's research is valued as a typical project's cut in the forecast risk of an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), deaths valued like every death and the future lost counted only where you count lives that never start (0% by default). The alumni's employers, who pay for the work itself, count only through the site's mobiliser setting. The training gives nearly all the result (98%), the next dollar counts at 31.5% of the past average, and the biggest swings are the chance of an AI catastrophe (the slider), Rethink's typical cut per dollar for misuse work, the mobiliser setting, the years a cut counts and the missing-data discount. Every branch is discounted for missing data: no outcome of the work on the risk is measured and the alumni survey has no comparison group.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: MATS (ML Alignment & Theory Scholars)",
@@ -214,7 +214,8 @@
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size."
+      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size.",
+      "descendants": false
     },
     {
       "id": "future_years_per_person",
@@ -232,7 +233,7 @@
       "format": "number",
       "formula": "@catastrophe.world_population_long_run * future_years_per_person",
       "unit": "DALYs",
-      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate: your discount rate is how much future generations count."
+      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate. These are lives that never start: the outcome counts them times your weight on such lives (docs/normalization.md 2.25)."
     },
     {
       "id": "years_of_impact",
@@ -401,7 +402,8 @@
       "label": "AI: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "bio_extinction_per_year",
@@ -543,7 +545,8 @@
       "label": "Pandemics: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "nuclear_extinction_per_year",
@@ -691,7 +694,8 @@
       "label": "Nuclear war: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "pol_cost_share",
@@ -806,7 +810,8 @@
       "label": "Policy win: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "fb_line_spend",
@@ -1013,7 +1018,8 @@
       "format": "number",
       "formula": "(fb_work_dollars * fb_credit_share + fb_research_dollars) / 1e6 * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
       "unit": "DALYs",
-      "explainer": "As fb_deaths_averted, for the future healthy years kept."
+      "explainer": "As fb_deaths_averted, for the future healthy years kept.",
+      "never_started": true
     },
     {
       "id": "cost_shares_total",
@@ -1047,7 +1053,8 @@
       "format": "number",
       "formula": "(@death_ages.covid_scale_share_under5 * @moral_weights.uov_per_death_under5 + (1 - @death_ages.covid_scale_share_under5) * (@death_ages.covid_scale_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.covid_scale_share_5_14_of_over5) * (@death_ages.covid_scale_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - @death_ages.covid_scale_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed."
+      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed.",
+      "descendants": false
     },
     {
       "id": "future_dalys_averted",
@@ -1056,6 +1063,16 @@
       "format": "number",
       "formula": "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys",
       "unit": "DALYs"
+    },
+    {
+        "id": "future_animal_harm",
+        "section": "effect",
+        "label": "Suffering of the farmed animals the people of that future would eat, in healthy years",
+        "format": "number",
+        "formula": "-((cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years) + (cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years) + (cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years) + (pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years) + ((fb_work_dollars * fb_credit_share + fb_research_dollars) / 1e6 * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact))) * $lives_added * $animal_dalys_per_person_year_world",
+        "unit": "DALYs",
+        "explainer": "A future kept is also every animal raised to feed it: each future person-year at the suffering of the animals an average person eats in a year today (docs/normalization.md 2.25). Suffering always counts, whatever lives that never start count; the farmed animals' own good days count where you set them to. Held at today's diet: no forecast of what people will eat is used.",
+        "side_effect": "added"
     },
     {
       "id": "dalys_per_death_value",
@@ -1543,7 +1560,7 @@
       "section": "outcome",
       "label": "Healthy years counted directly (before adjustments)",
       "format": "number",
-      "formula": "future_dalys_averted",
+      "formula": "(future_dalys_averted + future_animal_harm)",
       "unit": "DALYs"
     },
     {

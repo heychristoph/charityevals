@@ -1,6 +1,6 @@
 ### Summary
 
-The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 85% of that comes from the biosecurity work, about half the cost. A tenth comes from the AI work and the rest from risk management. The plausible range runs from {{low}} to {{high}}.
+The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 77% of that comes from the biosecurity work, about half the cost. About 17% comes from the AI work and the rest from risk management. The plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -12,7 +12,7 @@ CLTR was founded in 2019. It is a non-profit company limited by guarantee (Alpen
 
 ### How the impact happens
 
-Pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+Pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -34,11 +34,11 @@ CLTR holds about three months of spending in its own funds. Coefficient Giving o
 
 ### What drives the result
 
-After each part's adjustments, the biosecurity work brings about 85% of the result, the AI work a tenth and risk management about 5%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share.
+After each part's adjustments, the biosecurity work brings about 77% of the result, the AI work about 17% and risk management about 6%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share.
 
 ### Biggest uncertainties
 
-- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 1.2 to 9.8.
+- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 0.48 to 15.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much the next dollar does.** From 21% to 90% of the past average.
 - **How far the typical project applies to the biosecurity work.** From 0.3 to 1.3.

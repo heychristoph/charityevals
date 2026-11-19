@@ -3,9 +3,9 @@
 // 3166 numeric code, so it travels through the assumptions, the URL and the overrides like any number.
 import data from "../../facts/countries.json";
 
-export type Country = { iso3: string; m49: number; name: string; region: number; population: number };
+export type Country = { iso3: string; m49: number; name: string; region: number; population: number; income?: "L" | "LM" | "UM" | "H" };
 
-export const COUNTRIES: Country[] = data.countries;
+export const COUNTRIES: Country[] = data.countries as Country[];
 export const REGIONS: { m49: number; name: string }[] = data.regions;
 
 export const byIso3 = new Map(COUNTRIES.map((c) => [c.iso3, c]));

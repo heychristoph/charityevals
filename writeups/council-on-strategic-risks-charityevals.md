@@ -1,6 +1,6 @@
 ### Summary
 
-The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. About 69% of that comes from the fellowships, 8% of the cost. About 23% comes from the nuclear work, about a quarter of the cost, and 8% from the biological work, about a third of the cost. The plausible range runs from {{low}} to {{high}}.
+The Council on Strategic Risks is a Washington DC security-policy institute founded in 2017. It works against biological weapons and pandemics, against nuclear risks, and on the security risks of climate change. Our model of all its work in 2025 comes to **{{result}} years of healthy life per $1,000**. About 68% of that comes from the fellowships, 8% of the cost. About 24% comes from the nuclear work, about a quarter of the cost, and 8% from the biological work, about a third of the cost. The plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -12,7 +12,7 @@ CSR spent $5.2 million in 2025 and had 23 employees. Its programmes cost $4.5 mi
 
 ### How the impact happens
 
-Nuclear war and pandemics carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+Nuclear war and pandemics carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site; a COVID-scale pandemic's deaths count at COVID's age mix. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 Fellows count through the work they add to the field: the share who go on to work on these risks because of the fellowship, valued at a typical dollar of that work. The fellowships are credited with that work in full, unless another programme trained the same people. The employers who pay the fellows are not part of the share: like any party that acts because of the charity, they come under the shared mobiliser setting.
 
@@ -36,14 +36,14 @@ CSR holds about two months of spending in unrestricted reserves, but most of its
 
 ### What drives the result
 
-After each part's adjustments, the fellowships bring 69% of the result, the nuclear work 23%, the biological work 8% and the climate-security work under 0.01%. The fellowships count for more than their 8% of the cost because the alumni's added work is valued at a typical dollar of the field's work, about ten dollars of it for each dollar the fellowships cost, and their adjustments are light. The result therefore rests on one share, the fellows who work on these risks because of the fellowship (10%), for which no alumni survey exists. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe.
+After each part's adjustments, the fellowships bring 68% of the result, the nuclear work 24%, the biological work 8% and the climate-security work under 0.01%. The fellowships count for more than their 8% of the cost because the alumni's added work is valued at a typical dollar of the field's work, about ten dollars of it for each dollar the fellowships cost, and their adjustments are light. The result therefore rests on one share, the fellows who work on these risks because of the fellowship (10%), for which no alumni survey exists. A typical dollar of nuclear work cuts more deaths in Rethink's model than a typical dollar of pandemic work. The climate-security work counts for so little because it helps rich countries' public spending, not lives at risk in a catastrophe.
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. From about 17 to 190.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. From about 4.5 to 55.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
-- **How the Nolan Center's spending splits between biological and nuclear work.** From 45% to 80% biological, which moves the result from about 10 to 8.8.
-- **How many fellows work on these risks because of the fellowships.** 10%, from 3% to 25%; no alumni survey is published. The result runs from about 5.0 to 19.
+- **How the Nolan Center's spending splits between biological and nuclear work.** From 45% to 80% biological, which moves the result from about 9.7 to 8.3.
+- **How many fellows work on these risks because of the fellowships.** 10%, from 3% to 25%; no alumni survey is published. The result runs from about 4.8 to 18.
 - **How much a dollar of pandemic work cuts the risk.** Also ten times either way.
 
 ### What isn't modelled

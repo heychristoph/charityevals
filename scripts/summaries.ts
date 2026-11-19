@@ -54,7 +54,7 @@ export function summaries({ raws, lib }: ReturnType<typeof library>, dist?: Reco
       // A ranged shared fact is uncertain too: folding it would drop it from the browser's ranges.
       const rangedFact = r.factDeps.some((f) => hasRange(lib.facts.get(f)?.value));
       // Another model's live result (`#id`) moves with the sliders: the stand-in keeps the reference.
-      if (r.single_event || r.assumptionDeps.length || r.modelDeps.length || rangedFact || typeof r.value === "object" || r.range || published.has(id) || r.deps.some((d) => live.has(d))) live.add(id);
+      if (r.single_event || r.assumptionDeps.length || r.livesAdded?.length || r.modelDeps.length || rangedFact || typeof r.value === "object" || r.range || published.has(id) || r.deps.some((d) => live.has(d))) live.add(id);
     }
     const seen = new Set<string>();
     const visit = (id: string) => {
@@ -72,8 +72,9 @@ export function summaries({ raws, lib }: ReturnType<typeof library>, dist?: Reco
         const { explainer: _e, source: _s, expected: _x, section: _c, format: _f, ...rest } = r;
         return { ...rest, label, ...("value" in rest || "published" in rest ? { explainer: "Input." } : {}) };
       }
-      // A side effect keeps its mark: what reads it still reads it through the weight.
-      return { id, label, value: values[id], kind: "estimate", explainer: "Folded.", ...(r.side_effect ? { side_effect: r.side_effect } : {}) };
+      // A side effect keeps its mark, and so does the good of lives that never start: what reads it
+      // still reads it through the weight.
+      return { id, label, value: values[id], kind: "estimate", explainer: "Folded.", ...(r.side_effect ? { side_effect: r.side_effect } : {}), ...(r.never_started ? { never_started: true } : {}) };
     });
     // Short ids: the browser never shows them. The bottom line keeps its own, for links and history.
     const short = new Map(rows.map((r, i) => [r.id as string, r.id === m.output!.row ? (r.id as string) : `r${i.toString(36)}`]));

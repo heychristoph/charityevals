@@ -106,7 +106,7 @@ export function modelJson(m: ResolvedModel) {
     output: m.output,
     drivers: f.drivers.map((s) => ({ id: s.id, label: s.label, scope: s.scope, low: s.low, high: s.high, at_low: num(s.atLow), at_high: num(s.atHigh) })),
     sections: m.sections,
-    rows: m.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, inheritedFrom: _i, overridden: _o, expected: _e, ...r }) => ({ ...r, computed: num(values[r.id]) })),
+    rows: m.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, livesAdded: _l, livesFacts: _lf, inheritedFrom: _i, overridden: _o, expected: _e, ...r }) => ({ ...r, computed: num(values[r.id]) })),
     resources: m.resources,
   };
 }

@@ -1,7 +1,7 @@
 # Audit: no-means-no-worldwide-charityevals, round 3 (scoped verification of the round-2 fixes)
 Result: 2.002e-4 uov/$ = 0.1001 years of healthy life per 1,000 dollars (combined range 0.015–0.665); cause median 0.0688 (×1.455). Verdict: pass.
 Model-sha: d911fa118d93723d69c5f77acfaa9b9ac8da015eba8ab0662ef8f8d81bb982a6
-Rules: 0.3.8
+Rules: 0.3.13
 Scope: only the changes in commit 9ff8fd19 (new fact anxiety_mild, rows ptsd_mild_share / ptsd_severe_share / ptsd_disability_weight, assault_rate explainer and quote, others_cost_per_youth wage label, summary and write-up numbers). Nothing else re-audited.
 Mechanical: audit-model lint 0 high / 0 medium / 1 low (spread, already answered in the summary); check.ts all valid; simulation-check stable (5% 0.122×, 50% 1×, 95% 6.56× the best guess).
 

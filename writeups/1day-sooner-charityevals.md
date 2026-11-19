@@ -1,6 +1,6 @@
 ### Summary
 
-1Day Sooner speaks for people who volunteer to be deliberately infected in medical studies (challenge studies), and uses that voice to push for faster vaccines and better pandemic preparedness. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. About 70% of that comes from its pandemic work, valued as a typical pandemic project's effect on the forecast risk. Its malaria vaccine campaign adds about a sixth, its hepatitis C work and its part in stopping a California bill against far-UV air cleaners the rest. Every part is uncertain, so the plausible range runs from {{low}} to {{high}}.
+1Day Sooner speaks for people who volunteer to be deliberately infected in medical studies (challenge studies), and uses that voice to push for faster vaccines and better pandemic preparedness. Our model of all its work in 2024 comes to **{{result}} years of healthy life per $1,000**. About 65% of that comes from its pandemic work, valued as a typical pandemic project's effect on the forecast risk. Its malaria vaccine campaign adds about a sixth, its hepatitis C work and its part in stopping a California bill against far-UV air cleaners the rest. Every part is uncertain, so the plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -27,10 +27,10 @@ Coefficient Giving (formerly Open Philanthropy) aims to provide about 40% of its
 
 | Branch | Share of the result | Main adjustments |
 |---|---|---|
-| Pandemic work | 67% | Outputs 0.8 of a typical project; 0.7 would not have happened anyway; 0.8 its share |
-| Malaria vaccines | 16% | 0.8 trust in a modelled effect; 0.8 others would not have filled its part; 5% its share of the advocacy |
+| Pandemic work | 65% | Outputs 0.8 of a typical project; 0.7 would not have happened anyway; 0.8 its share |
+| Malaria vaccines | 18% | 0.8 trust in a modelled effect; 0.8 others would not have filled its part; 5% its share of the advocacy |
 | California far-UV win | 7% | 0.5 chance the bill would have passed without it; 0.35 its share |
-| Hepatitis C | 9% | 0.85 trust in its 1.5-year figure; 0.85 its share among those who pressed for the changes |
+| Hepatitis C | 10% | 0.85 trust in its 1.5-year figure; 0.85 its share among those who pressed for the changes |
 
 Every branch takes the shared missing-data discount, since none of the effects is measured. Funging by the main funder is counted once, in the next-dollar figure.
 
@@ -44,11 +44,11 @@ Like theirs, most of it rests on Rethink's typical pandemic project. 1Day is sma
 
 ### Biggest uncertainties
 
-- **The discount rate.** At 0.1% the result is about 19; at 8% it is about 1.3.
-- **The years a cut counts.** At one year the result is 0.48; at twenty it is 4.8.
-- **How much a typical pandemic dollar cuts the risk.** Rethink's figures run ten times either way: the extinction figure alone moves the result from 1.1 to 7.7.
-- **How much the next dollar does.** From 24% to 99% of the past average, the result moves from 0.70 to 2.9.
-- **The malaria children added.** From 33,000 to 833,000 a year, the result moves from 1.5 to 2.8.
+- **The discount rate.** With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 19; at an 8% discount rate it is about 1.2.
+- **The years a cut counts.** At one year the result is 0.45; at twenty it is 4.3.
+- **How much a typical pandemic dollar cuts the risk.** Rethink's figures run ten times either way: the extinction figure alone moves the result from 1.0 to 6.4.
+- **How much the next dollar does.** From 24% to 99% of the past average, the result moves from 0.64 to 2.6.
+- **The malaria children added.** From 33,000 to 833,000 a year, the result moves from 1.3 to 2.6.
 
 ### What isn't modelled
 

@@ -15,7 +15,7 @@ ICAN spent CHF 2.2 million ($2.5 million) in 2024, the latest year with audited 
 
 Nuclear war carries a yearly chance of catastrophe, taken from the domain experts' forecasts in the 2022 Existential Risk Persuasion Tournament and spread evenly to 2100. They give an 8% chance by 2100 of a war that kills over 10% of people, and 0.55% of one that ends humanity's future. The superforecasters' lower figures are the low end of each range.
 
-A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. A war the world survives is taken to kill 45% of people, mostly through famine, valued across the world's age groups like every death on the site. A war that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. A war the world survives is taken to kill 45% of people, mostly through famine, valued across the world's age groups like every death on the site. A war that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -39,13 +39,13 @@ ICAN's income fell from CHF 3.6 million in 2023 to 2.0 million in 2024, and it r
 
 ### What drives the result
 
-Deaths in a war the world survives bring almost all of the result. At the default 4% discount rate the future counts for little; at 0.1% the result rises to about 9. The campaign brings about two-thirds of the result and the new states parties a third. The treaty that is ICAN's main achievement doesn't constrain the states whose weapons make up the risk.
+Deaths in a war the world survives bring almost all of the result. By default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 9. The campaign brings about two-thirds of the result and the new states parties a third. The treaty that is ICAN's main achievement doesn't constrain the states whose weapons make up the risk.
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 0.50 to 24.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 0.45 to 24.
 - **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 1.7 to 11.
-- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 1.2 to 6.5.
+- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 1.2 to 6.3.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 

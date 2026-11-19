@@ -218,7 +218,9 @@ persistence multiplier as well, or the same doubt gets counted twice (Convention
 
 - **Discount floor**: fits, and it's the right control. At 0.1% the future is 1,000 years of world
   population; at 4% it's 25. But `$discount_rate` currently mixes time preference, growth and
-  uncertainty (GiveWell's 4%) with "how much future generations count". **Owner decision**: keep one
+  uncertainty (GiveWell's 4%) with "how much future generations count". **Decided 18 November 2026** (normalization.md
+  2.25): the `future` branch is marked `never_started` and counts times `$never_started_weight` (0% by
+  default), so the discount rate is time preference only. The question as it stood: keep one
   slider, or split off `$future_generations_rate` for the `future` branch only. Splitting would stop
   the AI ranking moving when someone tunes the deworming discount.
 - **Background risk**: the endless future ÷ r ignores that later risks also cut the future short
@@ -242,7 +244,8 @@ persistence multiplier as well, or the same doubt gets counted twice (Convention
    (5%), or a blend. This decides where AI sits against GiveWell, by roughly 10×.
 2. Whether the headline counts future generations at the default discount (as conservation already
    does), or shows a "present people only" figure by default with the future as a toggle. My view is
-   to keep it counted: at 4% it's about half the total.
+   to keep it counted: at 4% it's about half the total. Decided 18 November 2026 (normalization.md 2.25):
+   present people only by default; the future counts times `$never_started_weight`.
 3. Whether labs' and governments' safety spending is in `field_spend`. It should be, since the
    denominator is all effort on the risk, but it's poorly measured.
 4. Whether c4 lobbying arms (CAIS Action Fund) are shown, given gifts to them aren't tax-deductible.

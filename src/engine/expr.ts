@@ -255,13 +255,66 @@ export type Lookup = (scope: Scope, name: string) => number;
 
 /** What a compiled formula reads: rows by position (`v`), assumptions by name, and facts or other
  * models through `other`. */
-export type Env = { v: number[]; a: Record<string, number>; other: (scope: Scope, name: string) => number };
+export type Env = { v: number[]; a: Record<string, number>; other: (scope: Scope, name: string) => number; /** Shared parts already worked out in this run (compile's `share`). */ c?: Map<number, number> };
 export type Compiled = (e: Env) => number;
+
+// Shared parts: a formula read with the lives it adds (src/engine/population.ts) repeats long parts that
+// read no row (a group's descendants, the animals a person eats) within a row and across a model's rows.
+// With `share` (one per model: how often each part occurs in its rows), a part of some size that occurs more
+// than once is worked out once per run (per Env) and read from there: the same operations on the same
+// values, so the same numbers. Parts are told apart by structure.
+const structures = new Map<string, number>();
+const structureId = (key: string): number => { let id = structures.get(key); if (id === undefined) structures.set(key, (id = structures.size)); return id; };
+const MIN_SHARED = 10;
+/** How often each structure occurs in one model's rows. */
+export type Shared = Map<number, { n: number }>;
+type Part = { fn: Compiled; /** The structure's id, -1 where the part reads a row. */ id: number; size: number };
+function once(p: Part, share: Shared): Part {
+  if (p.id < 0 || p.size < MIN_SHARED) return p;
+  const { fn, id } = p;
+  let seen = share.get(id);
+  if (!seen) share.set(id, (seen = { n: 0 }));
+  seen.n++;
+  const count = seen;
+  // Counted while the model's rows compile, read when they run: a part that occurs once runs as it is.
+  return { ...p, fn: (e) => { if (count.n < 2) return fn(e); const c = (e.c ??= new Map<number, number>()); let x = c.get(id); if (x === undefined) c.set(id, (x = fn(e))); return x; } };
+}
+function compileShared(node: Node, rowAt: (name: string) => number, share: Shared): Part {
+  switch (node.type) {
+    case "num": { const x = node.value; return { fn: () => x, id: structureId(`n${x}`), size: 1 }; }
+    case "ref": {
+      const name = node.name;
+      if (node.scope === "row") { const j = rowAt(name); return { fn: j < 0 ? () => NaN : (e) => e.v[j], id: -1, size: 1 }; }
+      if (node.scope === "assumption") return { fn: (e) => e.a[name] ?? NaN, id: structureId(`$${name}`), size: 1 };
+      const scope = node.scope;
+      return { fn: (e) => e.other(scope, name), id: structureId(`${scope}:${name}`), size: 1 };
+    }
+    case "neg": { const a = compileShared(node.arg, rowAt, share); const f = a.fn; return once({ fn: (e) => -f(e), id: a.id < 0 ? -1 : structureId(`-${a.id}`), size: a.size + 1 }, share); }
+    case "call": {
+      const fn = FUNCTIONS[node.fn].fn;
+      const parts = node.args.map((a) => compileShared(a, rowAt, share));
+      const args = parts.map((p) => p.fn);
+      const id = parts.some((p) => p.id < 0) ? -1 : structureId(`${node.fn}(${parts.map((p) => p.id).join(",")})`);
+      return once({ fn: (e) => fn(...args.map((f) => f(e))), id, size: parts.reduce((s, p) => s + p.size, 1) }, share);
+    }
+    case "bin": {
+      const a = compileShared(node.left, rowAt, share), b = compileShared(node.right, rowAt, share);
+      const l = a.fn, r = b.fn, op = node.op;
+      const f: Compiled =
+        op === "+" ? (e) => l(e) + r(e) : op === "-" ? (e) => l(e) - r(e) : op === "*" ? (e) => l(e) * r(e) : op === "/" ? (e) => l(e) / r(e) : op === "^" ? (e) => l(e) ** r(e)
+        : op === "=" ? (e) => (l(e) === r(e) ? 1 : 0) : op === "<>" ? (e) => (l(e) !== r(e) ? 1 : 0) : op === "<" ? (e) => (l(e) < r(e) ? 1 : 0) : op === ">" ? (e) => (l(e) > r(e) ? 1 : 0)
+        : op === "<=" ? (e) => (l(e) <= r(e) ? 1 : 0) : (e) => (l(e) >= r(e) ? 1 : 0);
+      return once({ fn: f, id: a.id < 0 || b.id < 0 ? -1 : structureId(`${op}${a.id},${b.id}`), size: a.size + b.size + 1 }, share);
+    }
+  }
+}
 
 /** A formula as nested closures, rows read by position (`rowAt` gives it, -1 for none): the same
  * operations in the same order as `evaluate`, so the same numbers, without walking the tree or
- * looking names up on every evaluation. */
-export function compile(node: Node, rowAt: (name: string) => number): Compiled {
+ * looking names up on every evaluation. `share`: its long parts that read no row are worked out once
+ * per run (see above). */
+export function compile(node: Node, rowAt: (name: string) => number, share?: Shared): Compiled {
+  if (share) return compileShared(node, rowAt, share).fn;
   switch (node.type) {
     case "num": { const x = node.value; return () => x; }
     case "ref": {
@@ -299,15 +352,68 @@ export function compile(node: Node, rowAt: (name: string) => number): Compiled {
   }
 }
 
-export function evaluate(node: Node, lookup: Lookup): number {
+// The same sharing for a formula that is walked, not compiled: `shareParts` makes every part of some size
+// that reads no row the one node of its structure, and `evaluate` given a `memo` works such a node out
+// once (one memo per set of values: a run, or one nudged lookup).
+const canonical = new Map<number, Node>();
+const sharedNodes = new WeakSet<Node>();
+export function shareParts(node: Node): Node {
+  type Walked = { node: Node; id: number; size: number };
+  const walk = (n: Node): Walked => {
+    let out: Walked;
+    switch (n.type) {
+      case "num": return { node: n, id: structureId(`n${n.value}`), size: 1 };
+      case "ref": return { node: n, id: n.scope === "row" ? -1 : structureId(n.scope === "assumption" ? `$${n.name}` : `${n.scope}:${n.name}`), size: 1 };
+      case "neg": {
+        const a = walk(n.arg);
+        out = { node: a.node === n.arg ? n : { ...n, arg: a.node }, id: a.id < 0 ? -1 : structureId(`-${a.id}`), size: a.size + 1 };
+        break;
+      }
+      case "call": {
+        const parts = n.args.map(walk);
+        out = {
+          node: parts.every((p, i) => p.node === n.args[i]) ? n : { ...n, args: parts.map((p) => p.node) },
+          id: parts.some((p) => p.id < 0) ? -1 : structureId(`${n.fn}(${parts.map((p) => p.id).join(",")})`),
+          size: parts.reduce((x, p) => x + p.size, 1),
+        };
+        break;
+      }
+      case "bin": {
+        const a = walk(n.left), b = walk(n.right);
+        out = { node: a.node === n.left && b.node === n.right ? n : { ...n, left: a.node, right: b.node }, id: a.id < 0 || b.id < 0 ? -1 : structureId(`${n.op}${a.id},${b.id}`), size: a.size + b.size + 1 };
+        break;
+      }
+    }
+    if (out.id < 0 || out.size < MIN_SHARED) return out;
+    const one = canonical.get(out.id);
+    if (one) return { ...out, node: one };
+    canonical.set(out.id, out.node);
+    sharedNodes.add(out.node);
+    return out;
+  };
+  return walk(node).node;
+}
+
+export function evaluate(node: Node, lookup: Lookup, memo?: Map<Node, number>): number {
+  if (memo && sharedNodes.has(node)) {
+    const hit = memo.get(node);
+    if (hit !== undefined) return hit;
+    const x = walkNode(node, lookup, memo);
+    memo.set(node, x);
+    return x;
+  }
+  return walkNode(node, lookup, memo);
+}
+
+function walkNode(node: Node, lookup: Lookup, memo?: Map<Node, number>): number {
   switch (node.type) {
     case "num": return node.value;
     case "ref": return lookup(node.scope, node.name);
-    case "neg": return -evaluate(node.arg, lookup);
-    case "call": return FUNCTIONS[node.fn].fn(...node.args.map((a) => evaluate(a, lookup)));
+    case "neg": return -evaluate(node.arg, lookup, memo);
+    case "call": return FUNCTIONS[node.fn].fn(...node.args.map((a) => evaluate(a, lookup, memo)));
     case "bin": {
-      const l = evaluate(node.left, lookup);
-      const r = evaluate(node.right, lookup);
+      const l = evaluate(node.left, lookup, memo);
+      const r = evaluate(node.right, lookup, memo);
       switch (node.op) {
         case "+": return l + r;
         case "-": return l - r;

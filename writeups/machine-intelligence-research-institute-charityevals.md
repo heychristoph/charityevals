@@ -11,11 +11,11 @@ MIRI spent $7.7 million in 2025, according to its audited statements. Of its $5.
 
 ### How the impact happens
 
-AI carries a yearly chance of catastrophe, spread evenly to 2100. By default there is a 3% chance by 2100 that AI ends humanity's future; this is a slider. The forecasting tournament's experts expect three AI catastrophes the world survives for every one that ends it. A catastrophe the world survives is taken to kill a quarter of people.
+AI carries a yearly chance of catastrophe, spread evenly to 2100. By default there is a 5% chance by 2100 that AI ends humanity's future; this is a slider. The forecasting tournament's experts expect three AI catastrophes the world survives for every one that ends it. A catastrophe the world survives is taken to kill a quarter of people.
 
 MIRI's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), and each year is discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -35,11 +35,11 @@ MIRI roughly tripled its reserves in 2026 and is well above its two-year target,
 
 ### What drives the result
 
-The main reason is that Rethink's typical AI project cuts its risk far less per dollar than a typical nuclear or pandemic project: a 170th to a 260th as much for extinction, and about a thousandth as much for catastrophes the world survives. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment. In its model that is nine tenths of the risk of extinction from AI but only about a third of the deaths in catastrophes the world survives, most of which come from misuse. Deaths of people alive now are about 85% of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 0.77.
+The main reason is that Rethink's typical AI project cuts its risk far less per dollar than a typical nuclear or pandemic project: a 170th to a 260th as much for extinction, and about a thousandth as much for catastrophes the world survives. Rethink scaled that figure down from the budget and expected effect of OpenAI's Superalignment team, and applies it only to misalignment. In its model that is nine tenths of the risk of extinction from AI but only about a third of the deaths in catastrophes the world survives, most of which come from misuse. Deaths of people alive now are all of the value, in catastrophes that end humanity's future and ones the world survives alike. This is because by default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 0.77.
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.0028 to 0.37.
+- **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.0024 to 0.31.
 - **How much a dollar of AI safety work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way.
 - **The discount rate and the years a cut counts.** These are shared sliders.
 - **Whether the book changes policy.** Its reach is measured; its effect on governments is not.

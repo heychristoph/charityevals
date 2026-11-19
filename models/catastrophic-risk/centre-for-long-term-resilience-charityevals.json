@@ -9,7 +9,7 @@
   "estimate_basis": "past_average",
   "charity": "centre-for-long-term-resilience",
   "owner": "charityevals",
-  "summary": "The Centre for Long-Term Resilience (CLTR, London) advises the UK government on extreme risks through three policy units: biosecurity (the UK's Biological Security Strategy, DNA synthesis screening, mirror life), AI (frontier AI regulation, misuse, incident response) and risk management (how government assesses and prepares for risks). This model covers all its work in its year to 30 November 2025, about $2.9M; its filed accounts leave out the income and expenditure account, so spending is built from its 19 staff and its advertised pay. At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on its plausible range: each dollar is valued as a typical project's cut in the forecast risks of a pandemic and an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted through the discount rate; after each branch's adjustments about 85% of the result is the biosecurity work (about half the cost), a tenth the AI work and the rest risk management, and no law or standard it worked on was won in the year. The biggest uncertainties are how much a dollar of pandemic work cuts the risk (Rethink calls its figures placeholders; ten times either way), the years a cut counts and the next-dollar figure ({{row:marginal_vs_past_average}}); every branch is discounted for missing data, since no outcome of the work is measured.",
+  "summary": "The Centre for Long-Term Resilience (CLTR, London) advises the UK government on extreme risks through three policy units: biosecurity (the UK's Biological Security Strategy, DNA synthesis screening, mirror life), AI (frontier AI regulation, misuse, incident response) and risk management (how government assesses and prepares for risks). This model covers all its work in its year to 30 November 2025, about $2.9M; its filed accounts leave out the income and expenditure account, so spending is built from its 19 staff and its advertised pay. At the defaults it averts about {{result}} years of healthy life per $1,000, from {{low}} to {{high}} on its plausible range: each dollar is valued as a typical project's cut in the forecast risks of a pandemic and an AI catastrophe (Rethink Priorities' cross-cause model, the Existential Risk Persuasion Tournament's experts), with deaths valued like every death and the future lost counted only where you count lives that never start (0% by default); after each branch's adjustments about 77% of the result is the biosecurity work (about half the cost), 17% the AI work and the rest risk management, and no law or standard it worked on was won in the year. The biggest uncertainties are how much a dollar of pandemic work cuts the risk (Rethink calls its figures placeholders; ten times either way), the years a cut counts and the next-dollar figure ({{row:marginal_vs_past_average}}); every branch is discounted for missing data, since no outcome of the work is measured.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Centre for Long-Term Resilience",
@@ -267,7 +267,8 @@
       "format": "number",
       "formula": "(share_under5 * @moral_weights.uov_per_death_under5 + (1 - share_under5) * (share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - share_5_14_of_over5) * (share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size."
+      "explainer": "GiveWell's moral weights by age band × your value of a life, the site's one value of a death; no premium for a catastrophe's size.",
+      "descendants": false
     },
     {
       "id": "future_years_per_person",
@@ -285,7 +286,7 @@
       "format": "number",
       "formula": "@catastrophe.world_population_long_run * future_years_per_person",
       "unit": "DALYs",
-      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate: your discount rate is how much future generations count."
+      "explainer": "The long-run world population's healthy years, of people not yet born, discounted at the shared rate. These are lives that never start: the outcome counts them times your weight on such lives (docs/normalization.md 2.25)."
     },
     {
       "id": "years_of_impact",
@@ -440,7 +441,8 @@
       "label": "AI: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "bio_extinction_per_year",
@@ -612,7 +614,8 @@
       "label": "Pandemics: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "nuclear_extinction_per_year",
@@ -745,7 +748,8 @@
       "label": "Nuclear war: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "rm_bio_share",
@@ -821,7 +825,8 @@
       "label": "Risk management: future healthy years kept",
       "format": "number",
       "unit": "DALYs",
-      "formula": "cost_total * rm_cost_share / 1e6 * rm_future_per_million * rm_discounted_years"
+      "formula": "cost_total * rm_cost_share / 1e6 * rm_future_per_million * rm_discounted_years",
+      "never_started": true
     },
     {
       "id": "pol_cost_share",
@@ -934,7 +939,8 @@
       "label": "Policy win: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "fb_people",
@@ -1041,7 +1047,8 @@
       "label": "Field-building: future healthy years kept (expected, before adjustments)",
       "format": "number",
       "formula": "fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)",
-      "unit": "DALYs"
+      "unit": "DALYs",
+      "never_started": true
     },
     {
       "id": "fb_covid_scale_share",
@@ -1083,7 +1090,8 @@
       "format": "number",
       "formula": "(@death_ages.covid_scale_share_under5 * @moral_weights.uov_per_death_under5 + (1 - @death_ages.covid_scale_share_under5) * (@death_ages.covid_scale_share_5_14_of_over5 * @moral_weights.uov_per_death_age_5_14 + (1 - @death_ages.covid_scale_share_5_14_of_over5) * (@death_ages.covid_scale_share_15_49_of_over15 * @moral_weights.uov_per_death_age_15_49 + (1 - @death_ages.covid_scale_share_15_49_of_over15) * @moral_weights.uov_per_death_age_50_74))) * $life_value_multiplier",
       "unit": "units of value",
-      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed."
+      "explainer": "As value_per_death, with the shared COVID-scale age mix (@death_ages.covid_scale_*): the one value of a death by age. Fixed.",
+      "descendants": false
     },
     {
       "id": "future_dalys_averted",
@@ -1092,6 +1100,16 @@
       "format": "number",
       "unit": "DALYs",
       "formula": "ai_future_dalys + bio_future_dalys + nuclear_future_dalys + pol_future_dalys + fb_future_dalys + rm_future_dalys"
+    },
+    {
+        "id": "future_animal_harm",
+        "section": "effect",
+        "label": "Suffering of the farmed animals the people of that future would eat, in healthy years",
+        "format": "number",
+        "formula": "-((cost_total * ai_cost_share / 1e6 * ai_future_per_million * ai_discounted_years) + (cost_total * bio_cost_share / 1e6 * bio_future_per_million * bio_discounted_years) + (cost_total * nuclear_cost_share / 1e6 * nuclear_future_per_million * nuclear_discounted_years) + (pol_wins * pol_p_success * pol_relative_cut * pol_future_per_year * pol_discounted_years) + (fb_work_dollars / 1e6 * fb_credit_share * fb_future_per_million * pv_annuity_due(1, $discount_rate, years_of_impact)) + (cost_total * rm_cost_share / 1e6 * rm_future_per_million * rm_discounted_years)) * $lives_added * $animal_dalys_per_person_year_world",
+        "unit": "DALYs",
+        "explainer": "A future kept is also every animal raised to feed it: each future person-year at the suffering of the animals an average person eats in a year today (docs/normalization.md 2.25). Suffering always counts, whatever lives that never start count; the farmed animals' own good days count where you set them to. Held at today's diet: no forecast of what people will eat is used.",
+        "side_effect": "added"
     },
     {
       "id": "dalys_per_death_value",
@@ -1610,7 +1628,7 @@
       "section": "outcome",
       "label": "Healthy years counted directly (before adjustments)",
       "format": "number",
-      "formula": "future_dalys_averted",
+      "formula": "(future_dalys_averted + future_animal_harm)",
       "unit": "DALYs"
     },
     {

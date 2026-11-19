@@ -16,7 +16,7 @@ UCS spent $49.8 million in the year to September 2025, $44.0 million of it on pr
 
 ### How the impact happens
 
-**Nuclear war.** A nuclear war carries a yearly chance of catastrophe, from the domain experts' forecasts in the 2022 Existential Risk Persuasion Tournament. A typical project cuts that risk by a share per dollar, from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken (5 by default), each year discounted. A war the world survives kills 45% of people, valued like every death on the site; a war that ends humanity's future also takes everyone not yet born, counted through the discount rate.
+**Nuclear war.** A nuclear war carries a yearly chance of catastrophe, from the domain experts' forecasts in the 2022 Existential Risk Persuasion Tournament. A typical project cuts that risk by a share per dollar, from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken (5 by default), each year discounted. A war the world survives kills 45% of people, valued like every death on the site; a war that ends humanity's future also takes everyone not yet born, counted only where you count lives that never start (0% by default).
 
 **Science and democracy.** This counts as better use of US public money: the federal budgets the work touches, the share of their value lost to waste, the small part of that the work closes, valued as a dollar to the average American.
 
@@ -48,7 +48,7 @@ About three-fifths of it comes from the Inflation Reduction Act, a fifth of it f
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: 0.91 to 43.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: 0.82 to 43.
 - **How many years a cut or a won policy counts.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The share of people who die in a war the world survives runs from 15% to 85%.
 - **UCS's share of each climate win, and how much of each survives.** These are judgments.

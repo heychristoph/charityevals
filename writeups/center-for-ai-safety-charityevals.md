@@ -16,11 +16,11 @@ The **CAIS Action Fund** is a separate 501(c)(4) lobbying organisation, and gift
 
 ### How the impact happens
 
-AI carries a yearly chance of catastrophe: the site's shared 3% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. Both are spread evenly over the years to 2100. You can move the 3% with a slider.
+AI carries a yearly chance of catastrophe: the site's shared 5% by 2100 that AI ends humanity's future, and three times that again for a catastrophe the world survives. Both are spread evenly over the years to 2100. You can move the 5% with a slider.
 
 CAIS's spending cuts that yearly risk by the share a typical AI project does per dollar. That share comes from Rethink Priorities' cross-cause model, including its chance that a project backfires. Rethink has two kinds of AI project. Work against misuse, such as tests of dangerous knowledge and defences against attacks, cuts the misuse part of the risk. Other work cuts the misalignment part. In Rethink's model misuse is 10% of the risk that AI ends humanity's future, but about two thirds of the deaths in catastrophes the world survives, because misuse mostly kills part of humanity. We take about a quarter of CAIS's AI spending as misuse work: WMDP, circuit breakers and some of the cluster's projects. Rethink's misuse projects cut far more risk per dollar, so this quarter gives most of the result. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted.
 
-The deaths averted are valued like every death on the site, across the world's age groups. An AI catastrophe the world survives is taken to kill 25% of people. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only through the discount rate.
+The deaths averted are valued like every death on the site, across the world's age groups. An AI catastrophe the world survives is taken to kill 25% of people. A catastrophe that ends humanity's future also takes the lives of everyone not yet born. Those future lives count only where you count lives that never start (0% by default).
 
 ### How the model works
 
@@ -42,14 +42,14 @@ CAIS holds about a year and a half of spending in reserve after two years of sur
 
 ### What drives the result
 
-Deaths among people alive now account for most of the result, because at the default 4% discount rate the future counts for about 8 years of the long-run population. At a 0.1% discount rate the result rises to about 8.5. The course carries about four fifths of the result: the students who go on to work on AI risk, valued at a typical dollar of that work, are worth far more than the course costs.
+Deaths among people alive now account for all of the result, because by default the future does not count (lives that never start: 0%). With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 8.5. The course carries about four fifths of the result: the students who go on to work on AI risk, valued at a typical dollar of that work, are worth far more than the course costs.
 
 ### Biggest uncertainties
 
 - **How likely an AI catastrophe is.** The setting's range runs from 0.38% to 50% by 2100, which moves the result from 0.30 to 39.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.56 to 38, the largest swing.
-- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (1.7 to 6.2).
-- **The discount rate and the years a cut counts.** Each moves the result several-fold.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.53 to 37, the largest swing.
+- **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (1.7 to 6.1).
+- **The years a cut counts and the discount rate.** The years move the result several-fold; the discount rate moves it little unless lives that never start count.
 - **How many course students go on to work on AI risk.** No alumni survey is published; the 5% we assume runs from 1% to 15% (1.3 to 10).
 - **How CAIS's work compares with a typical project.** Its benchmarks are widely used, but use isn't the same as lower risk.
 

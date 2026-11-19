@@ -43,6 +43,14 @@ function scaleFor(r: Row) {
   };
 }
 
+/** Whether a control is offered: one that depends on another (`shown_when`) only while that one is
+ * above 0, where it can change a result. */
+export function offered(row: Row, overrides: Record<string, number>): boolean {
+  if (!row.shown_when) return true;
+  const on = lib.assumptions.rows.find((r) => r.id === row.shown_when);
+  return (overrides[row.shown_when] ?? (on ? pickValue(on.value) : 0)) > 0;
+}
+
 /** How a shared assumption reads on screen: some are multipliers shown in the site's own terms. */
 function shownAs(row: Row) {
   const k = row.shown_as?.factor ?? 1;
@@ -389,7 +397,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
       <Measure />
       {shown.map((g) => {
         // Evidence-based rates aren't sliders: the side panel leaves them out, the full page lists them.
-        const rows = lib.assumptions.rows.filter((r) => r.section === g.id && !(compact && r.fixed));
+        const rows = lib.assumptions.rows.filter((r) => r.section === g.id && !(compact && r.fixed) && offered(r, overrides));
         if (!rows.length) return null;
         const shut = compact && !open[g.id];
         const changed = rows.filter((r) => overrides[r.id] !== undefined).length;

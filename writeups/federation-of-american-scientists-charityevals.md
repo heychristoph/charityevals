@@ -13,7 +13,7 @@ FAS spent $36.4 million in the year to June 2025 and had 116 employees. Its prog
 
 ### How the impact happens
 
-Nuclear war, pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only through the discount rate.
+Nuclear war, pandemics and AI carry a yearly chance of catastrophe, taken from the shared forecasts. A typical project cuts that risk by a share per dollar, taken from Rethink Priorities' cross-cause model. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths count across the world's age groups, like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, counted only where you count lives that never start (0% by default).
 
 The rest of the work aims to make US public spending and regulation work better. A dollar of it is taken to bear on about $100 of public money a year in the programmes it touches. Rich countries' public investment loses about {{row:gov_efficiency_gap}} of its value to inefficiency. The work is taken to close 2% of that gap in what it touches. The public value gained is valued at what a dollar is worth to the average American.
 
@@ -35,11 +35,11 @@ FAS holds about two months of spending in unrestricted reserves and ran a small 
 
 ### What drives the result
 
-The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% and the science-policy work under 1%. The science-policy work counts for so little because it helps Americans, who are far richer than the people a dollar helps most. Only about 5% of FAS's spending is on catastrophic risks.
+The nuclear work brings 91% of the result, the AI work 7%, the pandemic work 2% and the science-policy work under 1%. The science-policy work counts for so little because it helps Americans, who are far richer than the people a dollar helps most. Only about 5% of FAS's spending is on catastrophic risks.
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.12 to 3.7.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.11 to 3.7.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much of the research spending is on catastrophic risks.** The Nuclear Information Project's share is by headcount, from 10% to 22%; the Global Risk Program's comes from its grant and pay, from 8% to 20%.
 - **How much the science-policy work improves public spending.** That is a judgment with a range of a hundred times either way, but it moves the result very little.

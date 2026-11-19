@@ -16,6 +16,15 @@ import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
 import { rowsFeeding } from "./sensitivity";
 import { COUNTRIES as COUNTRY_LIST, byCode, byIso3, steps } from "./countries";
+import { LIVES_ADDED } from "./population";
+
+/** The sliders as the checks below read the models: as written, without the lives a result adds
+ * (src/engine/population.ts), which reach every model that values a death or an income through the animal
+ * and never-started sliders by design; INV-25 checks those. */
+export const asWritten = (lib: Library): Record<string, number> => {
+  const av = assumptionValues(lib.assumptions);
+  return LIVES_ADDED in av ? { ...av, [LIVES_ADDED]: 0 } : av;
+};
 
 export type Violation = {
   /** Invariant id, e.g. "INV-2b". */
@@ -115,7 +124,7 @@ export function inv1(lib: Library): InvariantReport {
 
 /** INV-2a: the headline is the native result times the unit's conversion times the factor for the
  * estimate's age (charityevals view). */
-export function inv2a(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv2a(lib: Library, av = asWritten(lib)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
@@ -217,7 +226,7 @@ export const CONVERSION_KINDS: [string, RegExp][] = [
  * version, the evaluator's figure kept in `published`. Found by perturbation: the input (or fact) is
  * moved ×1.25 in our view and the headline must not move, so a rate the model applies and undoes,
  * or one on a side calculation, passes. */
-export function inv2c(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv2c(lib: Library, av = asWritten(lib)): InvariantReport {
   const violations: Violation[] = [];
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const moves = (m: ResolvedModel, h0: number, inputs: Record<string, number>) => {
@@ -442,7 +451,7 @@ const noNative = (inv: string, m: ResolvedModel): Violation => ({
 
 /** INV-5: moving any assumption the evaluator's layer reads, in our view only, leaves the evaluator
  * view's numbers where they were. */
-export function inv5(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv5(lib: Library, av = asWritten(lib)): InvariantReport {
   const toggles = new Set(lib.assumptions.rows.filter((a) => a.format === "toggle").map((a) => a.id));
   const models = evaluatorModels(lib);
   const violations: Violation[] = [];
@@ -501,7 +510,7 @@ export function inv6(lib: Library): InvariantReport {
 }
 
 /** INV-8: the evaluator view's headline converts at the evaluator's pinned rates. */
-export function inv8(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv8(lib: Library, av = asWritten(lib)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.evaluator && m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
@@ -571,7 +580,7 @@ const YEARS_OF = /\b(years? of (the )?(change|impact|benefits?|effects?|producti
  * each input row on the path whose label counts the years a benefit lasts is moved ×1.25 in our
  * view at the default rate and at 0; if the headline moves by the same factor both times, those
  * years are added up undiscounted. */
-export function inv9b(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv9b(lib: Library, av = asWritten(lib)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   const r0 = av.discount_rate;
@@ -613,7 +622,7 @@ const LATER_FACT = "givewell_shared.income_to_mortality_value_ratio";
  * unless the model rescales it (`*_at_shared_values`). Per origin row (a row on the path labelled as a
  * later benefit that reads no other such row): moved ×1.1 at the default rate and at 1%, its part of our
  * headline (the part it brings, over the headline) must differ between the two. */
-export function inv9c(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv9c(lib: Library, av = asWritten(lib)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   const low = { ...av, discount_rate: 0.01 };
@@ -676,6 +685,43 @@ export function inv24(lib: Library): InvariantReport {
   };
 }
 
+/** INV-25: lives that never start and the lives a result adds (docs/normalization.md 2.25). (a) A row marked
+ * `never_started` is an amount another row reads: the mark acts where the row is read, so a marked output
+ * or an unread row is never weighed. (b) The pieces of the lives a result adds ($descendants_*, $newborn_*,
+ * $animal_dalys_per_person_year_*) reach a model through the shared figures (src/engine/population.ts); a row
+ * that reads one itself also reads $lives_added, so the evaluator view switches it off with the rest. (c) No
+ * row reads $never_started_weight itself: the mark does. (d) The evaluator view never moves with the weight,
+ * the pain-free setting or the switch, unless the model pins the weight for an evaluator who counted them. */
+const LIVES_PIECE = /^(descendants|newborn_life_years|newborn_healthy_years|animal_dalys_per_person_year)_/;
+export function inv25(lib: Library): InvariantReport {
+  const models = [...lib.models.values()].filter((m) => m.output);
+  const violations: Violation[] = [];
+  const base = assumptionValues(lib.assumptions);
+  const sliders = "never_started_weight" in base;
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    for (const r of ownRows(m)) {
+      if (r.never_started && (r.id === m.output!.row || !m.rows.some((x) => path.has(x.id) && x.deps.includes(r.id))))
+        violations.push({ inv: "INV-25", model: m.id, where: `${r.id} unread`, detail: `${r.id} is marked never_started but no row on the path to the output reads it, so the weight on lives that never start doesn't reach it` });
+      if (r.formula === undefined) continue;
+      const written = refs(parse(r.formula)).assumptions;
+      if ([...written].some((a) => LIVES_PIECE.test(a)) && !written.has(LIVES_ADDED))
+        violations.push({ inv: "INV-25", model: m.id, where: `${r.id} $${LIVES_ADDED}`, detail: `${r.id} reads a piece of the lives a result adds without $${LIVES_ADDED}, so the evaluator view can't switch it off: ${r.formula}` });
+      if (written.has("never_started_weight"))
+        violations.push({ inv: "INV-25", model: m.id, where: `${r.id} $never_started_weight`, detail: `${r.id} reads $never_started_weight itself: mark the row that holds the good of lives that never start never_started instead` });
+    }
+    if (!sliders || (m.evaluator && "never_started_weight" in m.evaluator.assumptions)) continue;
+    const off = headline(lib, m, { ...base, never_started_weight: 0, pain_free_time_good: 0, ...(LIVES_ADDED in base ? { [LIVES_ADDED]: 0 } : {}) }, {}, "evaluator");
+    const on = headline(lib, m, { ...base, never_started_weight: 1, pain_free_time_good: 1 }, {}, "evaluator");
+    if (Number.isFinite(off) && !(Math.abs(on - off) <= 1e-9 * Math.max(Math.abs(off), 1e-300)))
+      violations.push({ inv: "INV-25", model: m.id, where: "evaluator view", detail: `the evaluator view moves with the lives sliders: ${off} with them off, ${on} with lives that never start at 100%` });
+  }
+  return {
+    id: "INV-25", title: "Lives that never start are weighed where they are read, and never in the evaluator view", status: "checked", checked: models.length, violations,
+    how: "Every row marked never_started is read by a row on the path to the output; no row reads $never_started_weight itself; a row that reads a piece of the lives a result adds ($descendants_*, $newborn_*, $animal_dalys_per_person_year_*) also reads $lives_added; the evaluator headline is the same with the weight, the pain-free setting and the switch off and on, unless evaluator.assumptions pins the weight.",
+  };
+}
+
 /** INV-5b: every evaluator pin is read. A pin in evaluator.assumptions that no row (and not the
  * unit's conversion) reads does nothing: either the model has the concept and some row must read the
  * shared lever (a death valued without $life_value_multiplier), or the pin should go. */
@@ -714,7 +760,7 @@ function expectations(unit: string, animal: boolean): [string, Shape][] {
   return [...base, ["daly_per_wellby", "independent"]];
 }
 
-export function inv10(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv10(lib: Library, av = asWritten(lib)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
   for (const m of models) {
@@ -791,7 +837,7 @@ export type TransitionRow = { transition: string; model: string; row: string; la
 /** Input or formula rows in animal models that state SADs for one of the standard transitions, with
  * their value in our view at the defaults. Rows whose id ends in _shared (ACE's shared-cell copies)
  * and totals (no "per") are left out. */
-export function transitionRows(lib: Library, av = assumptionValues(lib.assumptions)): TransitionRow[] {
+export function transitionRows(lib: Library, av = asWritten(lib)): TransitionRow[] {
   const out: TransitionRow[] = [];
   for (const m of lib.models.values()) {
     if (m.cause !== "animal-welfare") continue;
@@ -813,7 +859,7 @@ export function transitionRows(lib: Library, av = assumptionValues(lib.assumptio
   return out;
 }
 
-export function sameChange(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function sameChange(lib: Library, av = asWritten(lib)): InvariantReport {
   const rows = transitionRows(lib, av);
   const violations: Violation[] = [];
   for (const tr of TRANSITIONS) {
@@ -1253,7 +1299,7 @@ export function inv14(lib: Library): InvariantReport {
   const violations: Violation[] = [];
   let checked = 0;
   // A copy that can't move its model's result (a switched-off branch's placeholder) isn't a constant anyone relies on.
-  const av = assumptionValues(lib.assumptions);
+  const av = asWritten(lib);
   const moves = (r: { model: string; row: string; value: number }) => {
     const m = lib.models.get(r.model)!;
     const base = bottomLine(lib, m, av).native;
@@ -1312,7 +1358,7 @@ export function inv16(lib: Library): InvariantReport {
 /** INV-17: a WELLBY model that counts deaths values them like every other model (@moral_weights ×
  * $life_value_multiplier, in units of value) and they don't move with the WELLBY rate: they enter the
  * WELLBYs only through uov_valued_outside_wellbys → wellbys_from_uov, which the unit's conversion cancels. */
-export function inv17(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv17(lib: Library, av = asWritten(lib)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output?.unit === "wellby" && m.kind !== "variant");
   const violations: Violation[] = [];
   for (const m of models) {
@@ -1357,7 +1403,7 @@ export function inv17(lib: Library, av = assumptionValues(lib.assumptions)): Inv
 /** INV-18 (docs/normalization.md 2.10): every model states what its dollar is (`estimate_basis`); every
  * past average reads its charity's next-dollar figure on the path to its output, in our view only; no
  * marginal or unit-cost estimate reads one, which would count diminishing returns twice. */
-export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv18(lib: Library, av = asWritten(lib)): InvariantReport {
   const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template");
   const violations: Violation[] = [];
   for (const m of models) {
@@ -1397,7 +1443,7 @@ export function inv18(lib: Library, av = assumptionValues(lib.assumptions)): Inv
  * model with a result in common units has a date; with the destinations it reads live (`#id`) held, its
  * headline at the slider's default and high end is its headline at 0 times exactly (1 + d)^−age; its
  * evaluator view doesn't move with the slider at all, destinations included. */
-export function inv19(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv19(lib: Library, av = asWritten(lib)): InvariantReport {
   const A = AGE_DISCOUNT;
   const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
@@ -1455,7 +1501,7 @@ export function expectedDistanceWeight(b: Record<string, number> | "world", home
  * it reads live held, the headline is its headline with no home country times exactly the weight worked
  * out country by country (1 for a model whose destinations bring their own); the evaluator view never
  * moves. */
-export function inv20(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv20(lib: Library, av = asWritten(lib)): InvariantReport {
   const H = HOME_COUNTRY, D = DISTANCE_DISCOUNT;
   const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
   const violations: Violation[] = [];
@@ -1512,7 +1558,7 @@ const MARKER = /(^|_)missing_data_adj$/;
  * moves: an import's factor is exactly 1, and an own build's headline is its headline with every marker
  * at 1. With the models it reads live held, an import's headline at the default and at 10% is its headline
  * at 1 times exactly 1 − thin_share × (1 − d). The evaluator view never moves. */
-export function inv21(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv21(lib: Library, av = asWritten(lib)): InvariantReport {
   const D = MISSING_DATA_DISCOUNT;
   const title = "Missing outcome data: one rule for every model, in our view only";
   const models = [...lib.models.values()].filter((m) => m.output && m.kind !== "template" && headlineConversion(lib, m.output.unit));
@@ -1609,7 +1655,7 @@ function notHalved(lib: Library, m: ResolvedModel, av: Record<string, number>, h
 /** A model's cost rows of mobilised resources (not their sums, not a delivery branch's) whose part of the
  * headline doesn't take the share once: left outside it, or inside it twice. Only for a model that reads
  * the share. Shared with src/engine/preflight.ts. */
-export function costsOutsideShare(lib: Library, m: ResolvedModel, av = assumptionValues(lib.assumptions)): { row: string; full: number; half: number }[] {
+export function costsOutsideShare(lib: Library, m: ResolvedModel, av = asWritten(lib)): { row: string; full: number; half: number }[] {
   if (!(MOBILISER_SHARE in av) || !m.output || !m.rows.some((r) => r.assumptionDeps.includes(MOBILISER_SHARE))) return [];
   const path = rowsFeeding(m);
   const costs = m.rows.filter((r) => path.has(r.id) && MOBILISED_COST.test(r.id) && !r.deps.some((d) => MOBILISED_COST.test(d)));
@@ -1625,7 +1671,7 @@ export function costsOutsideShare(lib: Library, m: ResolvedModel, av = assumptio
  * part and each mobilised resource's cost halves with it. (c) An import that reads it pins it to 1, in an
  * ours row, and its evaluator view never moves. (d) A model, or a branch, of own delivery reads none.
  * (e) No result breaks at the slider's low end. */
-export function inv22(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv22(lib: Library, av = asWritten(lib)): InvariantReport {
   const S = MOBILISER_SHARE;
   const title = "Mobilised resources take the mobiliser's share, once";
   const violations: Violation[] = [];
@@ -1724,7 +1770,7 @@ export const WON_REFORM_WAIVERS: Record<string, string> = {
 /** INV-23 (docs/normalization.md 2.9): every imported model that credits a won policy or commitment (a
  * mobilised import with a row on the path that reads like one) reads $win_years_counted on the path to
  * its output, the evaluator's years in `published`; its evaluator view doesn't move with the setting. */
-export function inv23(lib: Library, av = assumptionValues(lib.assumptions)): InvariantReport {
+export function inv23(lib: Library, av = asWritten(lib)): InvariantReport {
   const W = WIN_YEARS;
   const title = "An import that credits a won policy or commitment counts the shared years";
   const violations: Violation[] = [];
@@ -1756,8 +1802,8 @@ export function inv23(lib: Library, av = assumptionValues(lib.assumptions)): Inv
 
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
-  const av = assumptionValues(lib.assumptions);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv9c(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av), inv24(lib)];
+  const av = asWritten(lib);
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv9c(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av), inv24(lib), inv25(lib)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
