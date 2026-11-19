@@ -52,7 +52,7 @@ A fifth of GovAI's catastrophe research is aimed at misuse, which Rethink's typi
 - **What the Code does and how much of it is GovAI's.** Both are our judgments, but the Code gives only about 8% of the result.
 - **How much of the alumni's later work is the training's.** The share who work on these risks because of it (17%) and the years they stay: the training is now most of the result.
 - **How much a dollar of misuse work cuts the risk.** Rethink's figure runs ten times either way.
-- **The discount rate and the years a cut counts.** Each moves the result several-fold.
+- **The years a cut counts and the discount rate.** The years move the result several-fold; the discount rate moves it little unless lives that never start count.
 - **The 2025 figures.** No audited statement for 2025 is public yet, and the split between research and training is our estimate.
 
 ### What isn't modelled

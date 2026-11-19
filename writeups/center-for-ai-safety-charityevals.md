@@ -49,7 +49,7 @@ Deaths among people alive now account for all of the result, because by default 
 - **How likely an AI catastrophe is.** The setting's range runs from 0.38% to 50% by 2100, which moves the result from 0.30 to 39.
 - **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. For misuse work this moves the result from 0.56 to 38, the largest swing.
 - **How much of CAIS's work targets misuse.** CAIS publishes no split of its projects; our quarter runs from 10% to 40% (1.7 to 6.2).
-- **The discount rate and the years a cut counts.** Each moves the result several-fold.
+- **The years a cut counts and the discount rate.** The years move the result several-fold; the discount rate moves it little unless lives that never start count.
 - **How many course students go on to work on AI risk.** No alumni survey is published; the 5% we assume runs from 1% to 15% (1.3 to 10).
 - **How CAIS's work compares with a typical project.** Its benchmarks are widely used, but use isn't the same as lower risk.
 

@@ -44,7 +44,7 @@ At the end of 2025 about two years of spending was set aside for IAPS, and it ha
 
 - **How likely an AI catastrophe is.** The slider moves the result many-fold.
 - **How much a dollar of misuse work cuts the risk.** Rethink's figure runs ten times either way, and the share of IAPS's work counted as misuse moves the result almost in proportion.
-- **The discount rate and the years a cut counts.** Each moves the result several-fold.
+- **The years a cut counts and the discount rate.** The years move the result several-fold; the discount rate moves it little unless lives that never start count.
 - **The fellowship's effect.** It gives most of the result, and IAPS publishes no data on where its fellows went: the share who work on AI risk because of it (20%, 5% to 40%) moves the result more than any other judgment about the fellowship.
 
 ### What isn't modelled

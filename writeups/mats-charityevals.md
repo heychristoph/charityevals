@@ -48,7 +48,7 @@ Most of the result comes from the scholars who go on to work on AI risk because 
 
 - **How likely an AI catastrophe is.** The slider moves the result many-fold.
 - **How much a dollar of misuse work cuts the risk.** Rethink's figure runs ten times either way.
-- **The discount rate and the years a cut counts.** Each moves the result several-fold.
+- **The years a cut counts and the discount rate.** The years move the result several-fold; the discount rate moves it little unless lives that never start count.
 - **How many scholars MATS brings into the field.** The alumni data are self-reported, and many scholars were already headed there.
 
 ### What isn't modelled
