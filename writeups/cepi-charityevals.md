@@ -46,15 +46,15 @@ CEPI is asking for $2.5 billion more for its 2027–2031 strategy, and aid budge
 
 ### What drives the result
 
-Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 2.4. Deaths of people alive now are all of the value at the defaults: the future lost counts only where you count lives that never start (0% by default). The outbreak vaccines add under 1%.
+Those charities spend $3–14 million a year, so the typical-project rate applies to them. CEPI spends 30 to 150 times as much, and our size step puts it below them. Before that step it would be around 2.2. Deaths of people alive now are all of the value at the defaults: the future lost counts only where you count lives that never start (0% by default). The outbreak vaccines add under 1%.
 
 ### Biggest uncertainties
 
 - **The discount rate.** With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result is about 2.5; at an 8% discount rate it is about 0.13.
-- **The years a cut counts.** At one year the result is 0.037; at twenty it is 0.51.
-- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.086 to 0.98.
-- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.056; at 60% it is 0.33. The mission's cost moves it from 0.084 to 0.33.
-- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.077 to 0.30.
+- **The years a cut counts.** At one year the result is 0.033; at twenty it is 0.46.
+- **How much a typical dollar cuts the risk.** Rethink's figures run ten times either way. The size step replaces their level with the mission's estimate but keeps the ratio of the extinction cut to the catastrophe cut, which moves the result from 0.084 to 0.82.
+- **Whether the 100 Days Mission is achieved.** At a 10% chance the result is 0.051; at 60% it is 0.30. The mission's cost moves it from 0.076 to 0.30.
+- **How much the next dollar does.** From 22.5% to 89% of the past average, the result moves from 0.069 to 0.27.
 
 ### What isn't modelled
 

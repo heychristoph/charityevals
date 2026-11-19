@@ -51,12 +51,12 @@ The Center's main funder halved its general support in 2023, and that grant ends
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: by default the future of people not yet born does not count (lives that never start: 0%). Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 45.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: by default the future of people not yet born does not count (lives that never start: 0%). Catastrophes the world survives bring about 37% and COVID-scale pandemics the rest. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 45.
 
 ### Biggest uncertainties
 
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 1.6 to 19.
-- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.6 to 23.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: 1.6 to 16.
+- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 0.62 to 8.8.
 - **The Center's budget.** We built it from its grants. The result barely moves with it, because the cut is counted per dollar.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 

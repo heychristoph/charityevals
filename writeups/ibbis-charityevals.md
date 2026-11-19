@@ -38,13 +38,13 @@ IBBIS is raising money in small grants for named work, and Founders Pledge's 202
 
 ### What drives the result
 
-Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: by default the future of people not yet born does not count (lives that never start: 0%). Catastrophes the world survives bring about a third and COVID-scale pandemics the rest. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 37. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
+Pandemics that end humanity's future bring about half the result, mostly through the deaths of everyone then alive: by default the future of people not yet born does not count (lives that never start: 0%). Catastrophes the world survives bring about 37% and COVID-scale pandemics the rest. With the Long-run value set (a 0.1% discount rate, lives that never start in full) the result rises to about 37. The budget estimate hardly matters: every dollar is valued at the same rate, so a larger or smaller budget changes the cost and the benefit alike.
 
 ### Biggest uncertainties
 
-- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 1.9 to 27.
-- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 1.4 to 16 for the pandemic figure.
-- **How much the next dollar does.** 26% to 95% of the past average: 3.9 to 14.
+- **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years: 0.52 to 7.3.
+- **How much a dollar of this work cuts the risk.** Rethink's figures are placeholders and the range runs ten times either way: about 1.3 to 13 for the pandemic figure.
+- **How much the next dollar does.** 26% to 95% of the past average: 1.0 to 3.8.
 - **How likely catastrophic pandemics are.** The superforecasters put an extinction-level pandemic at about a hundredth of the experts' chance.
 
 ### What isn't modelled

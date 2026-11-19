@@ -48,7 +48,7 @@ About three-fifths of it comes from the Inflation Reduction Act, a fifth of it f
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: 0.91 to 43.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way: 0.82 to 43.
 - **How many years a cut or a won policy counts.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The share of people who die in a war the world survives runs from 15% to 85%.
 - **UCS's share of each climate win, and how much of each survives.** These are judgments.

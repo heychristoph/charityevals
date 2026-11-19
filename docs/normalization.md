@@ -1615,8 +1615,10 @@ weight for an evaluator who counted them.
 **Why 0%.** Outside catastrophic risk it is what every model already assumed. The Long-run value set puts the
 weight at 100%.
 
-**Future generations** (rule never-started-weight): every model's `future_dalys_averted` is marked, in the
-catastrophic-risk family (2.19) and conservation's pandemic branch. At the default the future no longer
+**Future generations** (rules never-started-weight, never-started-branches): the future's healthy years are
+marked, in the catastrophic-risk family (2.19) each branch's row (`<branch>_future_dalys`, so the branch
+weights that average the adjustments read the same weighted figures as the outcome) and in conservation's
+pandemic branch its one row (`future_dalys_averted`). At the default the future no longer
 counts, so 32 models fall, none by more than 15% (METR, Redwood Research and the Machine Intelligence
 Research Institute most): at the 4% discount rate the people alive now are most of an extinction's loss.
 

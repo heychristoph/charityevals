@@ -39,7 +39,7 @@ The main reason is that Rethink's typical AI project cuts its risk far less per 
 
 ### Biggest uncertainties
 
-- **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.0028 to 0.37.
+- **How likely an AI catastrophe is.** The setting's range runs from 0.38% (the superforecasters) to 50%. Across it the result moves from 0.0024 to 0.31.
 - **How much a dollar of AI safety work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way.
 - **The discount rate and the years a cut counts.** These are shared sliders.
 - **Whether the book changes policy.** Its reach is measured; its effect on governments is not.

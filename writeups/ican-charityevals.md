@@ -43,9 +43,9 @@ Deaths in a war the world survives bring almost all of the result. By default th
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 0.50 to 24.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from about 0.45 to 24.
 - **How much the treaty does.** From all but nothing to as much as typical work, the result moves from about 1.7 to 11.
-- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 1.2 to 6.5.
+- **How far the campaign beats or trails a typical project.** From 0.05 to 1, the result moves from about 1.2 to 6.3.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How likely and how deadly a nuclear war is.** The superforecasters put the chance at half the experts' figure. The share who die in a war the world survives runs from 15% to 85%.
 

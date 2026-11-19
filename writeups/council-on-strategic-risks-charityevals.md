@@ -40,10 +40,10 @@ After each part's adjustments, the fellowships bring 69% of the result, the nucl
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. From about 17 to 190.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. From about 4.5 to 55.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
-- **How the Nolan Center's spending splits between biological and nuclear work.** From 45% to 80% biological, which moves the result from about 10 to 8.8.
-- **How many fellows work on these risks because of the fellowships.** 10%, from 3% to 25%; no alumni survey is published. The result runs from about 5.0 to 19.
+- **How the Nolan Center's spending splits between biological and nuclear work.** From 45% to 80% biological, which moves the result from about 9.8 to 8.4.
+- **How many fellows work on these risks because of the fellowships.** 10%, from 3% to 25%; no alumni survey is published. The result runs from about 4.8 to 19.
 - **How much a dollar of pandemic work cuts the risk.** Also ten times either way.
 
 ### What isn't modelled

@@ -35,11 +35,11 @@ FAS holds about two months of spending in unrestricted reserves and ran a small 
 
 ### What drives the result
 
-The nuclear work brings 93% of the result, the AI work 4%, the pandemic work 2% and the science-policy work under 1%. The science-policy work counts for so little because it helps Americans, who are far richer than the people a dollar helps most. Only about 5% of FAS's spending is on catastrophic risks.
+The nuclear work brings 91% of the result, the AI work 7%, the pandemic work 2% and the science-policy work under 1%. The science-policy work counts for so little because it helps Americans, who are far richer than the people a dollar helps most. Only about 5% of FAS's spending is on catastrophic risks.
 
 ### Biggest uncertainties
 
-- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.12 to 3.7.
+- **How much a dollar of nuclear work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way. This is the largest swing, from 0.11 to 3.7.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much of the research spending is on catastrophic risks.** The Nuclear Information Project's share is by headcount, from 10% to 22%; the Global Risk Program's comes from its grant and pay, from 8% to 20%.
 - **How much the science-policy work improves public spending.** That is a judgment with a range of a hundred times either way, but it moves the result very little.

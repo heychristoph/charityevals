@@ -1,6 +1,6 @@
 ### Summary
 
-The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 85% of that comes from the biosecurity work, about half the cost. A tenth comes from the AI work and the rest from risk management. The plausible range runs from {{low}} to {{high}}.
+The Centre for Long-Term Resilience (CLTR) is a London think tank that advises the UK government on extreme risks, mainly pandemics and advanced AI. Our model of all its work in the year to 30 November 2025 comes to **{{result}} years of healthy life per $1,000**. About 79% of that comes from the biosecurity work, about half the cost. About 16% comes from the AI work and the rest from risk management. The plausible range runs from {{low}} to {{high}}.
 
 ### What the charity does
 
@@ -34,11 +34,11 @@ CLTR holds about three months of spending in its own funds. Coefficient Giving o
 
 ### What drives the result
 
-After each part's adjustments, the biosecurity work brings about 85% of the result, the AI work a tenth and risk management about 5%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share.
+After each part's adjustments, the biosecurity work brings about 79% of the result, the AI work about 16% and risk management about 6%. A typical dollar of pandemic work cuts far more deaths in Rethink's model than a typical dollar of AI work aimed at loss of control. The AI work's value comes mostly from its misuse share.
 
 ### Biggest uncertainties
 
-- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 1.2 to 9.8.
+- **How much a dollar of pandemic work cuts the risk.** Rethink's figures are placeholders, and the range runs ten times either way, moving the result from about 1.1 to 8.4.
 - **How many years a cut counts before it would have come anyway.** The shared slider runs from 1 to 20 years.
 - **How much the next dollar does.** From 21% to 90% of the past average.
 - **How far the typical project applies to the biosecurity work.** From 0.3 to 1.3.

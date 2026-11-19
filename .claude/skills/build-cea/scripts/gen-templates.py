@@ -1025,8 +1025,6 @@ for r in T["catastrophic-risk"]["rows"]:
 
 # Side effects (docs/normalization.md 2.16): rows that add good or harm beyond the programme's main chain,
 # read through $side_effect_weight in our view.
-# The good in lives that never start (docs/normalization.md 2.25): read through $never_started_weight in our view.
-NEVER_STARTED = {"future_dalys_averted"}
 FUTURE_ENDING_DEATHS = {"value_per_death", "covid_value_per_death", "catastrophe_value_per_death"}
 SIDE_EFFECTS = {"unmodelled_benefits_adj": "added", "uov_spillovers": "added", "household_multiplier": "factor", "speedup_harm_share": "added", "hazard_harm_share": "added"}
 
@@ -1041,7 +1039,6 @@ for name, m in T.items():
         T[name] = m
     for r in m["rows"]:
         if r["id"] in SIDE_EFFECTS: r["side_effect"] = SIDE_EFFECTS[r["id"]]
-        if r["id"] in NEVER_STARTED: r["never_started"] = True
         # Deaths that end the future add no descendants here: the model's own future row counts them (2.25).
         if r["id"] in FUTURE_ENDING_DEATHS and any(x["id"] == "future_dalys_averted" for x in m["rows"]): r["descendants"] = False
         if r["id"] in ("p_success", "adv_p_success"):
@@ -1050,12 +1047,18 @@ for name, m in T.items():
     ids = [r["id"] for r in m["rows"]]
     if "future_dalys_averted" in ids:
         future = m["rows"][ids.index("future_dalys_averted")]
+        # The mark sits on each branch's future row where the future is a sum of branches (the branch weights
+        # read those rows too), else on the one future row.
+        TOKEN = re.compile(r"(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()")
+        branches = [t for t in TOKEN.findall(future["formula"]) if t.endswith("_future_dalys") and t in ids]
+        for b in branches or ["future_dalys_averted"]: m["rows"][ids.index(b)]["never_started"] = True
+        unweighted = TOKEN.sub(lambda t: f"({m['rows'][ids.index(t.group(0))]['formula']})" if t.group(0) in branches else t.group(0), future["formula"])
         seen, stack = set(), ["future_dalys_averted"]
         while stack:
             for t in re.findall(r"(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()", m["rows"][ids.index(stack.pop())].get("formula", "")):
                 if t in ids and t not in seen: seen.add(t); stack.append(t)
         harm = {"id": "future_animal_harm", "section": future["section"], "label": "Suffering of the farmed animals the people of that future would eat, in healthy years", "format": "number",
-                "formula": f"-({future['formula']}) * $lives_added * $animal_dalys_per_person_year_world", "unit": "DALYs",
+                "formula": f"-({unweighted}) * $lives_added * $animal_dalys_per_person_year_world", "unit": "DALYs",
                 "explainer": "A future kept is also every animal raised to feed it: each future person-year at the suffering of the animals an average person eats in a year today (docs/normalization.md 2.25). Suffering always counts, whatever lives that never start count; the farmed animals' own good days count where you set them to. Held at today's diet: no forecast of what people will eat is used."}
         # Where the future's own formula already reads a side effect, a second mark would weigh it twice.
         if not any(m["rows"][ids.index(t)].get("side_effect") or t in SIDE_EFFECTS for t in seen): harm["side_effect"] = "added"
