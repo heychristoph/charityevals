@@ -4,7 +4,7 @@ import { lib } from "../lib/data";
 import { useResults } from "../lib/use-results";
 import type { Basis } from "../engine/ranking";
 import { useFigure, type Figure } from "../lib/metric";
-import { DOMAIN, xFor, tickLabel, clipSpan, pctStr } from "./scale";
+import { DOMAIN, ZONE, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import CharityLogo from "./CharityLogo";
 import InfoTip from "./InfoTip";
 import "./rankings.css";
@@ -34,10 +34,16 @@ function ticksFor(fig: Figure): { at: number; label: string; major: boolean }[] 
 /** Narrowest range bar, in % of the track: a range narrower than the dot would hide behind it. */
 const MIN_SPAN = 4;
 
-/** The range bar's ends in % of the track, widened around the row's figure to at least MIN_SPAN. */
-function barSpan(low: number, high: number, central: number): [number, number] {
-  let lo = xFor(Math.min(low, high), 100);
-  let hi = xFor(Math.max(low, high), 100);
+/** The range bar's ends on the log scale in % of the track, widened around the row's figure to at least
+ * MIN_SPAN; undefined when the whole range is at or below zero. A range reaching zero or harm starts at
+ * `barLow` (its lowest simulated 5% step above zero) and shows the rest as a stub in the ≤0 zone. */
+function barSpan(low: number, high: number, central: number, barLow?: number): [number, number] | undefined {
+  const a = Math.min(low, high), b = Math.max(low, high);
+  if (b <= 0) return undefined;
+  const start = a > 0 ? a : barLow;
+  if (start === undefined) return undefined;
+  let lo = xFor(start, 100);
+  let hi = xFor(b, 100);
   if (hi - lo < MIN_SPAN) {
     const mid = Math.min(Math.max(xFor(central, 100), MIN_SPAN / 2), 100 - MIN_SPAN / 2);
     lo = Math.min(lo, mid - MIN_SPAN / 2);
@@ -105,7 +111,9 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
           </InfoTip>
         </div>
         <div className="r-track" aria-hidden>
-          {ticks.map((t) => (
+          <span className="r-tick num r-tick-zero" style={{ left: 0, width: pctStr(ZONE) }}>≤0</span>
+          {/* The scale's first power of ten sits beside the ≤0 label: its gridline stays, its label goes. */}
+          {ticks.slice(1).map((t) => (
             <span key={t.label} className={`r-tick num ${t.major ? "" : "r-tick-minor"}`} style={{ left: pct(t.at) }}>{t.label}</span>
           ))}
         </div>
@@ -118,9 +126,10 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
           const multi = r.evaluators.length > 1;
           const warns = [...new Map(r.evaluators.flatMap((x) => x.flags.filter((f) => f.level === "warn")).map((f) => [f.short, f])).values()];
           const owners = r.evaluators.map((x) => lib.owners.get(x.owner)!);
-          const clampedLow = r.low < DOMAIN[0];
+          const clampedLow = (r.barLow ?? r.low) > 0 && (r.barLow ?? r.low) < DOMAIN[0];
+          const reachesZero = Math.min(r.low, r.high) <= 0;
           const clampedHigh = r.high > DOMAIN[1];
-          const [lo, hi] = barSpan(r.low, r.high, r.central);
+          const span = barSpan(r.low, r.high, r.central, r.barLow);
           return (
             <li key={c.id} ref={flipRef(c.id)} className="r-row" style={{ ["--cause" as string]: `var(--cause-${c.cause})` }}>
               <div className="r-name tip-host">
@@ -157,10 +166,14 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
                 {ticks.map((t) => (
                   <span key={t.label} className="r-grid" style={{ left: pct(t.at) }} />
                 ))}
-                <span
-                  className="r-bar"
-                  style={{ clipPath: clipSpan(lo, hi, clampedLow || clampedHigh ? `${clampedLow ? 0 : 4}px ${clampedHigh ? 0 : 4}px ${clampedHigh ? 0 : 4}px ${clampedLow ? 0 : 4}px` : "4px") }}
-                />
+                {/* The part of the range at or below zero: a stub across the ≤0 zone. */}
+                {reachesZero && <span className="r-bar" style={{ clipPath: clipSpan(0, ZONE, "4px") }} />}
+                {span && (
+                  <span
+                    className="r-bar"
+                    style={{ clipPath: clipSpan(span[0], span[1], clampedLow || clampedHigh ? `${clampedLow ? 0 : 4}px ${clampedHigh ? 0 : 4}px ${clampedHigh ? 0 : 4}px ${clampedLow ? 0 : 4}px` : "4px") }}
+                  />
+                )}
                 {r.evaluators.map((x, k) => (
                   <span key={x.owner} className="r-dot-layer" style={{ transform: `translateX(${pct(x.central)})`, ["--lane" as string]: multi ? `${k % 2 ? LANE : -LANE}px` : undefined }}>
                     <span className={`r-dot ${multi ? "r-dot-owner" : ""} ${multi && x.owner !== r.primary ? "r-dot-other" : ""}`} title={`${owners[k].name}: ${fig.format(x.central)}${BASIS[x.basis](x.programs.length)}`}>

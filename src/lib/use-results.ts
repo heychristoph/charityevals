@@ -13,6 +13,10 @@ export type Result = {
   central: number;
   low: number;
   high: number;
+  /** Where the range's bar starts on the chart's log scale: the low end, or for a range reaching zero or
+   * harm the lowest of the simulation's 5% steps above zero (the rest sits in the chart's ≤0 zone);
+   * undefined when none is above zero. */
+  barLow?: number;
   /** The one-at-a-time sensitivity: on a model's own result (useResultFor), not on the rankings'. */
   s?: Sensitivity;
   flags: Flag[];
@@ -60,6 +64,9 @@ export type CharityResult = {
   /** Lowest joint low and highest joint high across evaluators. */
   low: number;
   high: number;
+  /** Where the bar starts on the log scale (Result.barLow): the low end, or for a range reaching zero
+   * or harm the lowest such start among its programmes. */
+  barLow?: number;
 };
 
 // One values object per overrides object, shared by every island, so results cache and settle by
@@ -91,6 +98,15 @@ export function useResultsFor(models: ResolvedModel[]) {
   );
 }
 
+/** Result.barLow for a model's range, from its stored simulation (scaled as its high end is). */
+function barLowOf(m: ResolvedModel, range: { low: number; high: number }): number | undefined {
+  if (range.low > 0) return range.low;
+  const q = lib.distributions?.[m.id]?.q;
+  const top = q?.[q.length - 1];
+  const first = q?.find((x) => x > 0);
+  return q && top! > 0 && first !== undefined && range.high > 0 ? (range.high * first) / top! : undefined;
+}
+
 const extraFlags = (m: ResolvedModel) => [coverageFlag(lib, m), unstableFlag(lib, m), nextDollarFlag(lib, m)].filter((f) => !!f);
 
 /** A model as the rankings show it: its headline, the simulated 5% to 95% stored at build time
@@ -102,10 +118,12 @@ function rankedOf(m: ResolvedModel, av: Record<string, number>): Result {
   const hit = ranked.get(m);
   if (hit?.av === av) return hit.r;
   const central = headline(lib, m, av);
-  const range = plausibleRange(lib, m, central, av) ?? { low: central, high: central };
   const d = lib.distributions?.[m.id];
+  // An unstable simulation's range is every input at its worst and best end, stored at build time.
+  const joint = d?.joint ? [central * d.joint[0], central * d.joint[1]] : [central, central];
+  const range = plausibleRange(lib, m, central, av) ?? { low: Math.min(...joint), high: Math.max(...joint) };
   const stored = { central, jointLow: range.low, jointHigh: range.high, judgmentShare: d?.judgment ?? 0, pointInputs: Array.from({ length: d?.points ?? 0 }, () => "") } as Sensitivity;
-  const r: Result = { model: m, central, low: range.low, high: range.high, flags: [...flags(m, stored), ...extraFlags(m)] };
+  const r: Result = { model: m, central, low: range.low, high: range.high, barLow: barLowOf(m, range), flags: [...flags(m, stored), ...extraFlags(m)] };
   ranked.set(m, { av, r });
   return r;
 }
@@ -119,7 +137,7 @@ function fullOf(m: ResolvedModel, av: Record<string, number>): Result {
   // The plausible range is the model's simulated 5% to 95% (src/engine/montecarlo.ts), where it has one;
   // otherwise every ranged input at its end together.
   const range = plausibleRange(lib, m, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
-  const r: Result = { model: m, central: s.central, low: range.low, high: range.high, s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...extraFlags(m)] };
+  const r: Result = { model: m, central: s.central, low: range.low, high: range.high, barLow: barLowOf(m, range), s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...extraFlags(m)] };
   full.set(m, { av, r });
   return r;
 }
@@ -318,6 +336,12 @@ function charityResult(c: Charity, av: Record<string, number>, resultOf: ResultF
       central: lead.central,
       low: Math.min(...evaluators.map((r) => r.low)),
       high: Math.max(...evaluators.map((r) => r.high)),
+      barLow: (() => {
+        const low = Math.min(...evaluators.map((r) => r.low));
+        if (low > 0) return low;
+        const starts = evaluators.flatMap((e) => e.programs.map((p) => p.result.barLow)).filter((x): x is number => x !== undefined && x > 0);
+        return starts.length ? Math.min(...starts) : undefined;
+      })(),
     }];
   }
 }

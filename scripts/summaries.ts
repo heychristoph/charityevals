@@ -119,7 +119,8 @@ export function distributions(lib: Library): Record<string, Distribution> {
     const d = simulate(lib, m);
     if (!d) continue;
     const s = sensitivity(lib, m, defaults);
-    out[m.id] = { ...d, judgment: Math.round(s.judgmentShare * 100) / 100, points: s.pointInputs.length };
+    const joint: [number, number] | undefined = d.unstable && s.central !== 0 ? [s.jointLow / s.central, s.jointHigh / s.central] : undefined;
+    out[m.id] = { ...d, judgment: Math.round(s.judgmentShare * 100) / 100, points: s.pointInputs.length, ...(joint ? { joint: joint.map((x) => Number(x.toPrecision(4))) as [number, number] } : {}) };
   }
   return out;
 }

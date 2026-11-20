@@ -4,10 +4,18 @@
 export const DOMAIN: [number, number] = [1e-6, 1000];
 export const TICKS = [1e-6, 1e-5, 1e-4, 1e-3, 0.01, 0.1, 1, 10, 100, 1000];
 
+/** A log scale can't show zero or harm, so the left of every track is a zone for results at or below
+ * zero, ZONE % wide; after a GAP (the axis break) the log scale runs over the rest. */
+export const ZONE = 6;
+export const GAP = 2;
+const START = ZONE + GAP;
+
+/** Where a value sits: at or below zero, the middle of the zone; else on the log scale, clamped to it. */
 export function xFor(v: number, width: number, domain = DOMAIN): number {
+  if (v <= 0) return ((ZONE / 2) * width) / 100;
   const [a, b] = domain.map(Math.log10);
   const t = (Math.log10(Math.min(Math.max(v, domain[0]), domain[1])) - a) / (b - a);
-  return t * width;
+  return ((START + t * (100 - START)) * width) / 100;
 }
 
 /** CSS for a bar spanning [lo%, hi%] of its track, as a clip-path. Written the way browsers

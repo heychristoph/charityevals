@@ -1080,6 +1080,9 @@ export type Distribution = {
    * no range. Stored so the rankings show the flags without working out every model's sensitivity. */
   judgment?: number;
   points?: number;
+  /** For an unstable simulation: every input at its worst end and at its best, as multiples of the best
+   * guess ([worst, best]), the range the rankings show instead. */
+  joint?: number[];
 };
 
 /** What the risk factor divides by: the smooth middle (the best guess at 50% for a model without
