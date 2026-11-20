@@ -6,6 +6,7 @@ import ModelView from "./ModelView.tsx";
 import AssumptionsPanel from "./AssumptionsPanel.tsx";
 import VariantList from "./VariantList.tsx";
 import CharityLogo from "./CharityLogo.tsx";
+import SimilarCharities from "./SimilarCharities.tsx";
 import Headline from "./Headline.tsx";
 import WholeCharity, { Locations } from "./WholeCharity.tsx";
 import ModelReuse from "./ModelReuse.astro";
@@ -87,7 +88,10 @@ const whole = parts.length > 1;
 // One programme funded in several locations: its combined figure above the model (WholeCharity: Locations).
 const located = parts.length === 1 && locationsOf(lib, parts[0].model).length > 1;
 // A few charities doing similar work, to explore from (names only: src/lib/similar.ts).
-const similar = similarTo(lib, primaryOf, charity.id).map((id) => ({ name: lib.charities.get(id)!.name, url: modelUrl(lib, primaryOf(lib, id)!) }));
+const similar = similarTo(lib, primaryOf, charity.id).map((id) => {
+  const c = lib.charities.get(id)!;
+  return { id, name: c.name, summary: c.summary, url: modelUrl(lib, primaryOf(lib, id)!) };
+});
 const audit = auditOf(model.id);
 const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { year: "numeric", month: "long" }) : undefined);
 ---
@@ -258,7 +262,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       {similar.length > 0 && (
         <nav class="similar" aria-labelledby="similar-title">
           <h2 id="similar-title">Similar charities</h2>
-          <ul>{similar.map((s) => <li><a href={s.url} data-track-kind="similar">{s.name}</a></li>)}</ul>
+          <SimilarCharities client:visible items={similar} />
         </nav>
       )}
     </div>
@@ -499,15 +503,6 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   .similar h2 {
     font-size: 17px;
     margin: 0 0 var(--s2);
-  }
-  .similar ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s2) var(--s4);
-    font-size: 15px;
   }
   .res-group + .res-group {
     margin-top: var(--s5);

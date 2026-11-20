@@ -3,6 +3,9 @@ import { upgrade, presetOf, PRESETS, parseShare, serialise, shareUrl, shortNumbe
 import { assumptionValues } from "../engine/model";
 import assumptions from "../../assumptions/default.json";
 
+/** The Long-run value set's own values, as the share links carry them. */
+const LONG_RUN = PRESETS.find((p) => p.id === "longtermist")!.values;
+
 describe("old assumption links", () => {
   it("drop overrides for rates that are now fixed", () => {
     expect(upgrade({ climate_heat_share: 0.5, discount_rate: 0.02 })).toEqual({ discount_rate: 0.02 });
@@ -83,9 +86,9 @@ describe("share links", () => {
   });
 
   it("set a value set, single values on top of it", () => {
-    expect(parseShare("?set=longtermist")).toEqual({ discount_rate: 0.001, never_started_weight: 1 });
+    expect(parseShare("?set=longtermist")).toEqual(LONG_RUN);
     expect(parseShare("?set=default")).toEqual({});
-    expect(parseShare("?set=longtermist&values=chicken_vs_person:0.01")).toEqual({ discount_rate: 0.001, never_started_weight: 1, chicken_vs_person: 0.01 });
+    expect(parseShare("?set=longtermist&values=chicken_vs_person:0.01")).toEqual({ ...LONG_RUN, chicken_vs_person: 0.01 });
   });
 
   it("set nothing without state params, so the stored values apply", () => {
@@ -118,7 +121,7 @@ describe("share links", () => {
   it("keep the page's other params and hash, readable, and drop the old ones", () => {
     const href = "https://charityevals.org/givedirectly?m=wellby&n.cost=250&a.discount_rate=0.03&view=x&set=longtermist#flags";
     expect(shareUrl(href, { discount_rate: 0.02, uov_per_daly: 3 })).toBe("https://charityevals.org/givedirectly?m=wellby&n.cost=250&values=discount_rate:0.02,uov_per_daly:3#flags");
-    expect(shareUrl(href, { discount_rate: 0.001, never_started_weight: 1 })).toBe("https://charityevals.org/givedirectly?m=wellby&n.cost=250&set=longtermist#flags");
+    expect(shareUrl(href, LONG_RUN)).toBe("https://charityevals.org/givedirectly?m=wellby&n.cost=250&set=longtermist#flags");
     expect(shareUrl(href, {})).toBe("https://charityevals.org/givedirectly?m=wellby&n.cost=250#flags");
   });
 
@@ -126,7 +129,7 @@ describe("share links", () => {
     const href = "https://charityevals.org/givedirectly?set=longtermist";
     expect(shareUrl(href, {}, { explicitDefault: true })).toBe("https://charityevals.org/givedirectly?set=default");
     expect(parseShare("?set=default")).toEqual({});
-    expect(shareUrl(href, { discount_rate: 0.001, never_started_weight: 1 }, { explicitDefault: true })).toBe("https://charityevals.org/givedirectly?set=longtermist");
+    expect(shareUrl(href, LONG_RUN, { explicitDefault: true })).toBe("https://charityevals.org/givedirectly?set=longtermist");
   });
 });
 
@@ -148,7 +151,7 @@ describe("on load", () => {
     href = "https://charityevals.org/?set=longtermist";
     const s = await import("./assumption-state");
     expect(s.shareUrl(href)).toBe(href);
-    expect(JSON.parse(store.get("charityevals:assumptions")!)).toEqual({ discount_rate: 0.001, never_started_weight: 1 });
+    expect(JSON.parse(store.get("charityevals:assumptions")!)).toEqual(LONG_RUN);
   });
 
   it("without one, the stored values apply; each change rewrites the URL in place", async () => {
