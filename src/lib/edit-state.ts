@@ -99,8 +99,9 @@ export function editsFor(m: ResolvedModel, edits: Edits, lib?: Library): Edits {
   const out: Edits = {};
   keys.forEach((k, i) => { const t = where[i]; if (t && (t === k || !(t in edits))) out[t] = edits[k]; });
   // Only the page's own model rewrites the URL, and only once it has the model's real rows. A key
-  // that lands in another model the page shows (a sibling programme) is that model's, so it stays.
-  const elsewhere = (k: string) => pageModels.some((p) => p.m !== m && target(p.m, new Set(usedFacts(p.m, p.lib)), k) !== undefined);
+  // that lands in another model the page shows (a sibling programme) is that model's, so it stays; so
+  // does any key while a sibling is only a summary (its rows renamed), as it may be that sibling's.
+  const elsewhere = (k: string) => pageModels.some((p) => p.m !== m && (isSummary(p.m) || target(p.m, new Set(usedFacts(p.m, p.lib)), k) !== undefined));
   if (edits === current && typeof window !== "undefined" && !isSummary(m))
     queueMicrotask(() => {
       if (current !== edits) return;
