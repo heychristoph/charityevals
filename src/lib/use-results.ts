@@ -98,13 +98,21 @@ export function useResultsFor(models: ResolvedModel[]) {
   );
 }
 
-/** Result.barLow for a model's range, from its stored simulation (scaled as its high end is). */
+/** Result.barLow for a model's range, from its stored simulation. The stored steps are multiples of the
+ * best guess: plausibleRange's ends are k × the first and the last step, so every step is put in the
+ * range's units by the same k (negative for a net-harm best guess, which turns the steps round). Where
+ * that can't be read (an unstable simulation, a range not from the steps) the bar keeps running to the
+ * axis start. */
 function barLowOf(m: ResolvedModel, range: { low: number; high: number }): number | undefined {
-  if (range.low > 0) return range.low;
+  const low = Math.min(range.low, range.high), high = Math.max(range.low, range.high);
+  if (low > 0) return low;
+  if (!(high > 0)) return undefined;
   const q = lib.distributions?.[m.id]?.q;
-  const top = q?.[q.length - 1];
-  const first = q?.find((x) => x > 0);
-  return q && top! > 0 && first !== undefined && range.high > 0 ? (range.high * first) / top! : undefined;
+  const first = q?.[0], last = q?.[q.length - 1];
+  const k = q && last ? range.high / last : NaN;
+  if (!q || lib.distributions?.[m.id]?.unstable || !(Math.abs(range.low - k * first!) <= 1e-9 * Math.max(1, Math.abs(range.low)))) return Number.MIN_VALUE;
+  const positive = q.map((x) => k * x).filter((v) => v > 0);
+  return positive.length ? Math.min(...positive) : Number.MIN_VALUE;
 }
 
 const extraFlags = (m: ResolvedModel) => [coverageFlag(lib, m), unstableFlag(lib, m), nextDollarFlag(lib, m)].filter((f) => !!f);
@@ -212,7 +220,16 @@ function publish(av: object, value: Rankings) {
 }
 
 function schedule(av: Record<string, number>) {
-  if (shown?.av === av || running?.av === av) return;
+  if (running?.av === av) return;
+  if (shown?.av === av) {
+    // Back to the values on screen before a run for others finished: that run is abandoned.
+    if (running) {
+      run++;
+      running = undefined;
+      busy(false);
+    }
+    return;
+  }
   const id = ++run;
   if (initial && av === valuesOf(EMPTY)) return publish(av, initial);
   running = { av };
