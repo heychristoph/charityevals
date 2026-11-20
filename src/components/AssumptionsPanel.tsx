@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { RotateCcw, Link2, Check, ChevronRight } from "lucide-react";
-import MiniRanking from "./MiniRanking";
+import { createPortal } from "react-dom";
+import { RotateCcw, Link2, Check, ChevronRight, X } from "lucide-react";
 import { lib } from "../lib/data";
 import { pickValue } from "../engine/model";
 import { COUNTRIES, byCode } from "../engine/countries";
@@ -335,37 +335,47 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
   const [open, setOpen] = useState<Record<string, boolean>>({ people: true, animals: true });
   const changedCount = Object.keys(overrides).length;
   const shown = lib.assumptions.groups.filter((g) => !groups || groups.includes(g.id));
-  // On a phone the panel sits below everything else: a button stays at the bottom of the screen until
-  // the panel itself is in view.
+  // On a narrow screen the side panel is a sheet over the lower part of the screen (global.css, .side):
+  // a button at the bottom opens it, the page above stays in view, and closing it leaves the page where it was.
   const self = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(true);
+  const jump = useRef<HTMLButtonElement>(null);
+  const close = useRef<HTMLButtonElement>(null);
+  const [sheet, setSheet] = useState(false);
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
     if (!compact) return;
-    let frame = 0;
-    const check = () => {
-      frame = 0;
-      const el = self.current;
-      if (el) setInView(el.getBoundingClientRect().top < window.innerHeight);
-    };
-    const later = () => { if (!frame) frame = requestAnimationFrame(check); };
-    check();
-    window.addEventListener("scroll", later, { passive: true });
-    window.addEventListener("resize", later);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", later);
-      window.removeEventListener("resize", later);
-    };
+    setMounted(true);
+    const fromHash = () => { if (location.hash === "#your-assumptions") setSheet(true); };
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+    return () => window.removeEventListener("hashchange", fromHash);
   }, [compact]);
+  useEffect(() => {
+    if (!compact) return;
+    self.current?.closest(".side")?.toggleAttribute("data-open", sheet);
+    if (!sheet) return;
+    close.current?.focus({ preventScroll: true });
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setSheet(false); };
+    document.addEventListener("keydown", esc);
+    return () => document.removeEventListener("keydown", esc);
+  }, [sheet, compact]);
+  const shut = () => {
+    setSheet(false);
+    if (location.hash === "#your-assumptions") history.replaceState(null, "", location.pathname + location.search);
+    requestAnimationFrame(() => jump.current?.focus({ preventScroll: true }));
+  };
 
   return (
     <section id="your-assumptions" ref={self} className={`assumptions ${compact ? "compact" : ""}`} aria-labelledby="assumptions-title">
-      {compact && !inView && (
-        <a href="#your-assumptions" className="values-jump" onClick={() => track("values_jump", { value: changedCount })}>
+      {compact && mounted && !sheet && createPortal(
+        <button type="button" ref={jump} className="values-jump" aria-controls="your-assumptions" aria-expanded={false} onClick={() => {
+          track("values_jump", { value: changedCount });
+          setSheet(true);
+        }}>
           Your values{changedCount > 0 && <span className="values-jump-count"> · {changedCount} changed</span>}
-        </a>
+        </button>,
+        document.body,
       )}
-      {compact && <MiniRanking />}
       <div className="assumptions-top">
         <h2 id="assumptions-title" className={compact ? undefined : "visually-hidden"}>Your values</h2>
         <div className="assumptions-actions small">
@@ -391,6 +401,11 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
           }}>
             <RotateCcw size={14} aria-hidden /> Reset{changedCount ? ` (${changedCount})` : ""}
           </button>
+          {compact && (
+            <button type="button" ref={close} className="sheet-close" aria-label="Close your values" onClick={shut}>
+              <X size={18} aria-hidden />
+            </button>
+          )}
         </div>
       </div>
       {PRESETS.length > 0 && <Presets overrides={overrides} />}

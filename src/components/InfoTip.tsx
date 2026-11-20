@@ -19,7 +19,17 @@ export function WithTip({ text, children }: { text: string; children: React.Reac
 export default function InfoTip({ label, icon, className = "", children }: { label: string; icon?: React.ReactNode; className?: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLSpanElement>(null);
+  const bubble = useRef<HTMLDivElement>(null);
   const id = useId();
+  // A bubble that opens past the edge of the screen (or of the panel it sits in) scrolls into view.
+  useEffect(() => {
+    if (!open) return;
+    const frame = requestAnimationFrame(() => {
+      const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+      bubble.current?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: smooth ? "smooth" : "auto" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [open]);
   useEffect(() => {
     if (!open) return;
     const close = (e: Event) => {
@@ -37,7 +47,7 @@ export default function InfoTip({ label, icon, className = "", children }: { lab
       <button type="button" className="info-tip-button" aria-label={label} aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)}>
         {icon ?? <Info size={15} aria-hidden />}
       </button>
-      <div id={id} role="status" className="info-tip-bubble" hidden={!open}>
+      <div id={id} ref={bubble} role="status" className="info-tip-bubble" hidden={!open}>
         {open && children}
       </div>
     </span>

@@ -18,6 +18,7 @@
 }
 .assumptions-actions {
   display: flex;
+  align-items: center;
   gap: var(--s4);
 }
 .presets-pick {
@@ -248,37 +249,6 @@
   pointer-events: none;
 }
 
-.mini-ranking {
-  display: none;
-}
-@media (max-width: 1000px) {
-  .mini-ranking {
-    display: grid;
-    gap: 2px;
-    list-style: none;
-    margin: calc(var(--s5) * -1) calc(var(--s5) * -1) 0;
-    padding: var(--s3) var(--s5);
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    background: color-mix(in srgb, var(--paper-2) 94%, transparent);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--rule);
-  }
-  .mini-ranking li {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--s2);
-  }
-  .mini-name {
-    color: var(--cause);
-    font-weight: 600;
-  }
-  .mini-value {
-    font-weight: 600;
-  }
-}
-
 .toggle-label {
   font-size: 15px;
   line-height: 1.35;
@@ -360,7 +330,8 @@
 
 /* Phones: the panel comes after the rankings or the model, so a button at the bottom of the screen
    leads to it until it is in view. */
-.values-jump {
+.values-jump,
+.sheet-close {
   display: none;
 }
 @media (max-width: 1000px) {
@@ -388,6 +359,35 @@
   .values-jump-count {
     font-weight: 400;
     opacity: 0.85;
+  }
+  /* The sheet's header stays at its top while the values scroll beneath it. */
+  .side .assumptions-top {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    margin: calc(var(--s5) * -1) calc(var(--s5) * -1) 0;
+    padding: var(--s4) var(--s5);
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--rule);
+    align-items: center;
+  }
+  .sheet-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: -6px -8px -6px 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    background: none;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .sheet-close:hover {
+    color: var(--ink);
+    background: var(--rule);
   }
 }
 

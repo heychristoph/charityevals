@@ -195,15 +195,60 @@ code {
   background: linear-gradient(to bottom, transparent, var(--paper-2));
   pointer-events: none;
 }
+/* On a narrow screen the panel is a sheet over the lower part of the screen, opened by the "Your values"
+   button (AssumptionsPanel); the page above stays in view and scrollable while a slider moves. */
 @media (max-width: 1000px) {
   .side {
-    position: static;
+    position: fixed;
+    inset: auto 0 0;
+    top: auto;
+    z-index: 40;
+    height: min(58dvh, 560px);
     max-height: none;
-    overflow: visible;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-width: 1px 0 0;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -6px 20px rgb(29 36 51 / 0.16);
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 0.22s ease, visibility 0s 0.22s;
+  }
+  .side[data-open] {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.22s ease;
   }
   .side::after {
     display: none;
   }
+  /* Room to scroll the page's end above the open sheet. */
+  body:has(.side[data-open]) {
+    padding-bottom: min(58dvh, 560px);
+  }
+}
+
+/* While the rankings recompute after a change of values (src/lib/use-results.ts): a thin moving line
+   along the top of the screen, after 150ms so quick updates don't flash it. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent) no-repeat;
+  background-size: 40% 100%;
+  opacity: 0;
+}
+html[data-updating] body::before {
+  opacity: 1;
+  transition: opacity 0s 150ms;
+  animation: updating 1.1s linear infinite;
+}
+@keyframes updating {
+  from { background-position-x: -100%; }
+  to { background-position-x: 200%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

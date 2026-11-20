@@ -1,0 +1,131 @@
+/* The values walk-through: one full-height layer over the landing page, like the consent dialog. */
+.onboarding {
+  width: min(720px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100% - 32px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink-2);
+  flex-direction: column;
+}
+.onboarding[open] {
+  display: flex;
+}
+.onboarding::backdrop {
+  background: rgb(29 36 51 / 0.55);
+}
+html:has(dialog.onboarding[open]) {
+  overflow: hidden;
+}
+.onboarding-top {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s4) var(--s6);
+  border-bottom: 1px solid var(--rule);
+}
+.onboarding-progress {
+  flex: 1;
+  display: flex;
+  gap: var(--s1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.onboarding-progress li {
+  flex: 1;
+}
+.onboarding-progress button {
+  display: block;
+  width: 100%;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--rule);
+  cursor: pointer;
+}
+.onboarding-progress li.on button {
+  background: var(--blue);
+}
+.onboarding-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s6);
+}
+.onboarding-lead {
+  font-size: 19px;
+  line-height: 1.5;
+  margin: 0;
+}
+.onboarding-consent {
+  margin-top: var(--s6);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--rule);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.onboarding-consent h3 {
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 var(--s2);
+}
+.onboarding-consent p {
+  margin: 0;
+}
+.onboarding .assumptions.compact {
+  padding: 0;
+  background: none;
+  border: 0;
+}
+.onboarding h2 {
+  font-size: 26px;
+  color: var(--ink);
+  margin: 0 0 var(--s5);
+}
+.onboarding-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s4) var(--s6);
+  border-top: 1px solid var(--rule);
+}
+.onboarding-actions button {
+  font: 600 17px/1.2 var(--sans);
+  min-height: 48px;
+  padding: var(--s3) var(--s5);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.onboarding-back {
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  color: var(--ink);
+}
+.onboarding-next {
+  margin-left: auto;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  color: #fff;
+}
+.onboarding-next:hover {
+  background: var(--blue-ink);
+  border-color: var(--blue-ink);
+}
+@media (max-width: 640px) {
+  .onboarding {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  .onboarding-top,
+  .onboarding-body,
+  .onboarding-actions {
+    padding-left: var(--s4);
+    padding-right: var(--s4);
+  }
+}

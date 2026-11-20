@@ -172,6 +172,17 @@ export const presetOf = (o: Overrides) => presetIn(PRESETS, o);
 
 const EMPTY: Overrides = {};
 
+/** The current overrides and their changes, outside React: the rankings start their work from here. */
+export function getOverrides(): Overrides {
+  ensureLoaded();
+  return current;
+}
+
+export function subscribeOverrides(l: () => void): () => void {
+  listeners.add(l);
+  return () => void listeners.delete(l);
+}
+
 export function useOverrides(): Overrides {
   return useSyncExternalStore(
     (l) => {
