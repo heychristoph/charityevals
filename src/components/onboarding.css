@@ -61,6 +61,11 @@ html:has(dialog.onboarding[open]) {
   line-height: 1.5;
   margin: 0;
 }
+/* The first screen's two versions: asking the analytics question, or (already answered) only starting. */
+html:not([data-onboarding="ask"]) .onboarding .ob-ask,
+html[data-onboarding="ask"] .onboarding .ob-start {
+  display: none;
+}
 .onboarding-consent {
   margin-top: var(--s6);
   padding-top: var(--s5);

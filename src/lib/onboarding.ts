@@ -1,17 +1,19 @@
-import { parseShare } from "./assumption-state";
+import { shouldAsk } from "./analytics";
 
 // The walk through Your values on a first visit to the landing page. Only there, and only when the visit
 // starts there: a shared link (values in the address), a link to any other page, or a click back home
 // from inside the site goes straight to the page. Once finished or skipped it isn't shown again in this
 // browser (local storage, like the values themselves; the values chosen are also in the address).
+// Kept light (no React, no data): the page opens the walk-through from a small script before its islands load.
 
 export const ONBOARDED_KEY = "charityevals:onboarded";
 
 export function shouldOnboard(o: { path: string; search: string; referrer: string; origin: string; done: boolean }): boolean {
   if (o.done) return false;
   if (o.path !== "/" && o.path !== "/index.html") return false;
-  // A link that carries values (?set=…, ?values=…, or the old a.… form) opens straight on them.
-  if (parseShare(o.search) !== undefined) return false;
+  // A link that carries values (?set=…, ?values=…, or the old a.… form; src/lib/assumption-state.ts
+  // parseShare) opens straight on them.
+  if ([...new URLSearchParams(o.search).keys()].some((k) => k === "set" || k === "values" || k.startsWith("a."))) return false;
   try {
     // From another page of the site; a reload of the landing page itself still counts as arriving.
     const from = o.referrer ? new URL(o.referrer) : undefined;
@@ -25,6 +27,18 @@ export function shouldOnboard(o: { path: string; search: string; referrer: strin
 /** Whether this page load opens the walk-through. */
 export function onboardingDue(): boolean {
   return shouldOnboard({ path: location.pathname, search: location.search, referrer: document.referrer, origin: location.origin, done: onboarded() });
+}
+
+/** Opens the walk-through's first screen (server-rendered, in the Onboarding island) as soon as the page
+ * is parsed, before the island's code has loaded; html[data-onboarding] says whether that screen asks the
+ * analytics question ("ask") or only starts ("start"). The island takes over once it hydrates. */
+export function openOnboarding() {
+  const d = document.querySelector<HTMLDialogElement>("dialog.onboarding");
+  if (!d || d.open || !onboardingDue()) return;
+  document.documentElement.dataset.onboarding = shouldAsk() ? "ask" : "start";
+  // Before the island hydrates, Escape mustn't close it either.
+  d.addEventListener("cancel", (e) => e.preventDefault());
+  d.showModal();
 }
 
 export function onboarded(): boolean {
