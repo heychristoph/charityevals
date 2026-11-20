@@ -31,6 +31,7 @@ const { ask = true } = Astro.props;
 
 <script>
   import { getConsent, setConsent, shouldAsk, initAnalytics } from "../lib/analytics";
+  import { onboardingDue } from "../lib/onboarding";
 
   const dialog = document.getElementById("consent") as HTMLDialogElement;
   const state = document.getElementById("consent-state")!;
@@ -67,7 +68,8 @@ const { ask = true } = Astro.props;
 
   for (const b of document.querySelectorAll<HTMLElement>("[data-consent-open]")) b.addEventListener("click", () => open(false));
 
-  if (dialog.hasAttribute("data-ask") && shouldAsk()) open(true);
+  // On a first visit to the landing page, the values walk-through asks on its first screen instead.
+  if (dialog.hasAttribute("data-ask") && shouldAsk() && !onboardingDue()) open(true);
 
   initAnalytics();
 </script>

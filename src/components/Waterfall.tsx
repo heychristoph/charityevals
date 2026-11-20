@@ -208,6 +208,11 @@ export default function Waterfall({ model, av, edits, engine = lib }: { model: R
  * renders there), from the model's island, which has the model, the reader's values and their edits. */
 export function WaterfallInSlot(props: { model: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; engine?: Library }) {
   const [slot, setSlot] = useState<Element | null>(null);
-  useEffect(() => setSlot(document.querySelector(`[data-waterfall="${CSS.escape(props.model.id)}"]`)), [props.model.id]);
+  useEffect(() => {
+    const el = document.querySelector(`[data-waterfall="${CSS.escape(props.model.id)}"]`);
+    // The page's placeholder bars give way, whether or not this model has a waterfall to show.
+    el?.querySelector(".wf-skeleton")?.remove();
+    setSlot(el);
+  }, [props.model.id]);
   return slot ? createPortal(<Waterfall {...props} />, slot) : null;
 }

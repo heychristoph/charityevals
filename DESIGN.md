@@ -160,7 +160,7 @@ A cool, near-neutral paper-and-ink palette with one interactive blue, one judgme
 - **Judgment Amber** (warn): sensitivity flag icons, the judgment kind mark and label, and references to shared assumptions inside formulas. It means "this rests on a value judgment or needs caution", never "click here".
 
 ### Tertiary (categorical cause inks)
-- **Global Health Green** (cause-global-health), **Animal Welfare Rust** (cause-animal-welfare), **Catastrophic Risk Violet** (cause-catastrophic-risk): set as a local `--cause` custom property on a row or page and used for that cause's interval dot, its bar (mixed 32% into white on strips, 45% on tornado bars), its cause label, its bottom-line figure and its MiniRanking name.
+- **Global Health Green** (cause-global-health), **Animal Welfare Rust** (cause-animal-welfare), **Catastrophic Risk Violet** (cause-catastrophic-risk): set as a local `--cause` custom property on a row or page and used for that cause's interval dot, its bar (mixed 32% into white on strips, 45% on tornado bars), its cause label and its bottom-line figure.
 
 ### Neutral
 - **Paper** (paper): page ground, ranking rows, formula blocks, the slider thumb fill and the ring around interval dots.
@@ -194,7 +194,7 @@ A cool, near-neutral paper-and-ink palette with one interactive blue, one judgme
 - **Row figure** (600, 20px serif, tabular): the central multiple at the end of each ranking row.
 - **Dek** (400, 19px, 1.5, Slate, max 62ch): the one-sentence standfirst under a page title (18px on model pages).
 - **Body** (400, 17px, 1.55; 16px under 640px; max 68ch): prose, explainers, table cells.
-- **Label** (400, 14px, 1.45): notes, sources, footers, metadata, kind legends, MiniRanking.
+- **Label** (400, 14px, 1.45): notes, sources, footers, metadata, kind legends.
 - **Axis** (400, 13px, Pewter, tabular): tick labels on every strip and tornado; kind labels in tables use 13px weight 600.
 
 ### Named Rules
@@ -210,7 +210,7 @@ Spacing follows an eight-step scale (4, 8, 12, 16, 24, 32, 48, 72px). Ranking ro
 
 Responsive behaviour:
 - **Above 1000px:** the assumptions panel is sticky, scrolls within itself, and fades at its bottom edge to signal more content.
-- **At 1000px and below:** the panel stacks under the chart and a sticky MiniRanking pins to its top, so the visitor sees the order change while dragging a slider.
+- **At 1000px and below:** the panel is a sheet over the lower part of the screen, opened by a "Your values" button at the bottom, so the ranking above stays in view while a slider moves.
 - **At 760px and below:** ranking rows reflow to name and figure on one line, the strip full-width beneath, notes below that; the tornado drops to one column; the kind column hides.
 
 ### Named Rules
@@ -220,7 +220,7 @@ Responsive behaviour:
 
 ## Elevation & Depth
 
-The system is flat. Depth comes from tonal layering (Paper against Mist Paper) and hairline rules, not shadows. The only shadow-like values are functional: a 1px ring that outlines interval dots against their own bar, a faint drop under the WebKit slider thumb, and a translucent blurred backdrop on the sticky MiniRanking so rows scrolling beneath it stay legible.
+The system is flat. Depth comes from tonal layering (Paper against Mist Paper) and hairline rules, not shadows. The only shadow-like values are functional: a 1px ring that outlines interval dots against their own bar and a faint drop under the WebKit slider thumb.
 
 ### Shadow Vocabulary
 - **Dot ring** (`box-shadow: 0 0 0 1px var(--cause)`): with a 2px (3px on the bottom line) Paper border, separates an interval's central dot from its bar.
@@ -256,9 +256,6 @@ The site's result unit. A horizontal track on the shared log scale with light ve
 
 ### Ranking row
 Rank number in Pewter, serif charity name, cause label in its ink, the interval strip, the serif central figure with its low–high range, and a footer line with the native-unit value and an amber-iconed flag count linking to the model's flags. Rows are divided by hairlines, never boxed.
-
-### MiniRanking
-Below 1000px only: a sticky, one-line-per-charity list (rank, name in cause ink, multiple) pinned to the top of the assumptions panel on 94% Mist Paper with a 6px backdrop blur and a hairline beneath.
 
 ### Where the uncertainty comes from
 Replaces the tornado. A 12px split bar of the result's uncertainty by source (the evaluator's judgment

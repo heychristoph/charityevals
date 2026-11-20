@@ -7,6 +7,11 @@ import { Fragment, useEffect, useMemo, useRef, useState, type KeyboardEvent, typ
 import { AlertTriangle, ChevronRight, ExternalLink, Search, X } from "lucide-react";
 import usage from "../../generated/usage.json";
 import { lib, modelFile, modelUrl } from "../lib/data";
+import { repo } from "../lib/site";
+
+/** Where a shared figure (@file.row) or a fixed rate is kept, with its source: its file on GitHub. */
+const factHref = (key: string) => `${repo}/blob/main/facts/${key.split(".")[0]}.json`;
+const fixedHref = `${repo}/blob/main/assumptions/default.json`;
 import { comparable, hasRange, headlineExprOf, pickValue, type Library, type ResolvedModel } from "../engine/model";
 import type { Node } from "../engine/expr";
 import { Cause, type Row } from "../engine/schema";
@@ -55,7 +60,7 @@ export function Formula({ text, model }: { text: string; model: ResolvedModel })
         }
         if (p.startsWith("@")) {
           const f = lib.facts.get(p.slice(1));
-          return f ? <a key={i} href={`/data#f-${f.key}`} title={`Shared data: ${f.group}`} className="ref ref-f">{f.group}: {f.label}</a> : p;
+          return f ? <a key={i} href={factHref(f.key)} title={`Shared data: ${f.group}`} className="ref ref-f">{f.group}: {f.label}</a> : p;
         }
         if (p.startsWith("$")) {
           const a = lib.assumptions.rows.find((r) => r.id === p.slice(1));
@@ -248,8 +253,8 @@ function overwriteOf(ctx: Ctx, n: TreeNode): { theirs: number; ours: number; for
 function judgmentsRead(ctx: Ctx, n: TreeNode): { label: string; href: string }[] {
   const r = n.rowId ? ctx.m.byId.get(n.rowId) : n.named ? ctx.m.byId.get(n.named) : undefined;
   if (!r?.node) return [];
-  const facts = r.factDeps.map((k) => lib.facts.get(k)).filter((f) => f?.kind === "judgment").map((f) => ({ label: `${f!.group}: ${f!.label}`, href: `/data#f-${f!.key}` }));
-  const fixed = r.assumptionDeps.map(assumptionRow).filter((a) => a?.fixed && a.kind === "judgment").map((a) => ({ label: a!.label, href: `/data#a-${a!.id}` }));
+  const facts = r.factDeps.map((k) => lib.facts.get(k)).filter((f) => f?.kind === "judgment").map((f) => ({ label: `${f!.group}: ${f!.label}`, href: factHref(f!.key) }));
+  const fixed = r.assumptionDeps.map(assumptionRow).filter((a) => a?.fixed && a.kind === "judgment").map((a) => ({ label: a!.label, href: fixedHref }));
   return [...facts, ...fixed];
 }
 
@@ -262,7 +267,7 @@ function Tag({ ctx, n, id }: { ctx: Ctx; n: TreeNode; id: string }) {
   if (overwriteOf(ctx, n)) return <span id={id} className="tn-tag tn-tag-changed">changed for consistency</span>;
   if (n.type === "assumption" && assumptionRow(n.refId!)?.fixed) {
     const judgment = assumptionRow(n.refId!)?.kind === "judgment";
-    return <span id={id} className={`tn-tag ${judgment ? "tn-tag-judgment" : ""}`}><span className={`kind-dot kind-${judgment ? "judgment" : "estimate"}`} aria-hidden /><a href={`/data#a-${n.refId}`}>{judgment ? "fixed judgment" : "fixed rate"}</a></span>;
+    return <span id={id} className={`tn-tag ${judgment ? "tn-tag-judgment" : ""}`}><span className={`kind-dot kind-${judgment ? "judgment" : "estimate"}`} aria-hidden /><a href={fixedHref}>{judgment ? "fixed judgment" : "fixed rate"}</a></span>;
   }
   if (n.type === "assumption") return <span id={id} className="tn-tag tn-tag-a"><span className="kind-dot kind-judgment" aria-hidden />your value</span>;
   if (n.type === "model") return <span id={id} className="tn-tag tn-tag-f">live model</span>;
@@ -304,7 +309,7 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
   if (n.type === "assumption") {
     const a = assumptionRow(n.refId!);
     lines.push(a?.fixed
-      ? <p key="a">A fixed rate taken from evidence, shared by every model. <a href={`/data#a-${n.refId}`}>Its source</a>.</p>
+      ? <p key="a">A fixed rate taken from evidence, shared by every model. <a href={fixedHref}>Its source</a>.</p>
       : <p key="a">One of your values: every model uses it, and you can change it. <a href={`#a-${n.refId}`}>Adjust it</a>.</p>);
     if (a?.explainer) lines.push(<div key="ax" className="tn-explainer"><Markdown text={a.explainer} /></div>);
   } else if (n.type === "fact") {
@@ -313,7 +318,7 @@ function detailLines(ctx: Ctx, n: TreeNode, parentLabel?: string): ReactNode[] {
     const SHOWN = 3;
     lines.push(
       <p key="f">
-        Shared data from <a href={`/data#f-${f?.key ?? n.refId}`}>{f?.group ?? "the facts"}</a>
+        Shared data from <a href={factHref(f?.key ?? n.refId!)}>{f?.group ?? "the facts"}</a>
         {others.length > 0 && <>, also read by{" "}
           {others.slice(0, SHOWN).map((o, i) => <Fragment key={o.id}>{i ? (i === others.length - 1 ? " and " : ", ") : ""}<a href={modelUrl(lib, o)}>{o.name}</a></Fragment>)}
           {others.length > SHOWN && <> and {others.length - SHOWN} more</>}</>}.

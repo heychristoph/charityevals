@@ -35,7 +35,6 @@ Results are given in years of healthy life per $1,000 donated (DALYs averted, wi
 ## Key pages
 
 - [Rankings](${abs("/")}): every charity, ranked by good done per dollar, re-ranked live by your assumptions
-- [Shared data](${abs("/data")}): the fixed rates, the fixed judgments and the shared data every model reads; the adjustable values sit beside the rankings
 - [Use with AI](${abs("/ai")}): connect an AI assistant to the MCP server at ${abs("/mcp")}, or use the data files and share links
 - [Method](${abs("/method")}): how models are built, checked against their sources, and compared across causes
 - [About](${abs("/about")}): who runs the site and how to contribute

@@ -4,7 +4,8 @@
   "description": "Open, forkable cost-effectiveness analyses for charities across cause areas.",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run check && astro build",
+    "build": "npm run check && npm run og && astro build",
+    "og": "tsx scripts/og-image.ts",
     "preview": "astro preview",
     "check": "tsx scripts/check.ts && tsx scripts/summaries.ts --check",
     "test": "vitest run",
@@ -35,6 +36,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@fontsource/source-sans-3": "^5.3.1",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

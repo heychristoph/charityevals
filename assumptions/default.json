@@ -66,17 +66,6 @@
       "explainer": "Fundraisers, advisers and campaigners do good through others: donors who give, people who change jobs, governments and companies that act. This is the share of that good credited to the charity; the rest stays with those who paid or did the work.\n\nAt 100% the charity gets all of it, as most evaluators count. Near 0% it gets almost none, so no fundraiser would be worth funding. The default, 30%, is near what finance standards give arrangers (33–50%)."
     },
     {
-      "id": "home_country",
-      "section": "distance",
-      "label": "Where you live",
-      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
-      "control": "country",
-      "format": "integer",
-      "value": 0,
-      "kind": "judgment",
-      "explainer": "Choose your country if you want lives near you to count more. Leave it unset and every life counts the same wherever it is."
-    },
-    {
       "id": "distance_discount",
       "section": "distance",
       "label": "Lives in other countries count … % less",
@@ -90,6 +79,18 @@
       },
       "kind": "judgment",
       "explainer": "With your country set, a life in your country counts fully, a life elsewhere in your part of the world counts less by this much, and one in the rest of the world less again. At 50%: your country 1, your region 0.5, the rest of the world 0.25.\n\nThe default, 0%, counts every life the same, as every charity evaluator does."
+    },
+    {
+      "id": "home_country",
+      "section": "distance",
+      "label": "Where you live",
+      "technical": "Home country (ISO 3166 numeric code; 0 = not set)",
+      "control": "country",
+      "format": "integer",
+      "value": 0,
+      "kind": "judgment",
+      "explainer": "Choose your country if you want lives near you to count more. Leave it unset and every life counts the same wherever it is.",
+      "shown_when": "distance_discount"
     },
     {
       "id": "ignore_old_estimates",
@@ -640,7 +641,9 @@
         "best": 0.0011416,
         "high": 0.0027
       },
-      "slider": { "high": 0.0274 },
+      "slider": {
+        "high": 0.0274
+      },
       "kind": "judgment",
       "explainer": "How much healthy life a day of disabling pain costs, in hours. Animal charities' results are days of pain spared, so this turns them into healthy time, and it often decides whether they rank above health charities.\n\nThe default, about 10 hours, follows how health surveys weigh the worst human pain: a migraine attack counts as losing 10.6 hours of a healthy day, the most severe back pain 9.2 (Global Burden of Disease; Salomon et al. 2015). People rating a severe migraine during the attack put it at worse than death, about 29 hours.\n\nThe slider goes on to 240 hours for the hedonic view: pain counts by how bad it feels, not by what it stops you doing, so a day of disabling pain can outweigh a healthy day. Rethink Priorities puts a year of it at 2 to 10 years of healthy life (48 to 240 hours a day); the animal-focused values use the middle, about 107 hours."
     },
