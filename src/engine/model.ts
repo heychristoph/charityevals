@@ -1075,6 +1075,11 @@ export type Distribution = {
    * value instead of happening or not, as a multiple of the best guess. The risk factor divides by it, so
    * the shape around the best guess is the smooth one's and a long shot's yes/no sits on top. */
   middle?: number;
+  /** At the defaults, from the one-at-a-time sensitivity (src/engine/sensitivity.ts): the share of the
+   * uncertainty from judgment calls and shared assumptions, and how many inputs on the result's path have
+   * no range. Stored so the rankings show the flags without working out every model's sensitivity. */
+  judgment?: number;
+  points?: number;
 };
 
 /** What the risk factor divides by: the smooth middle (the best guess at 50% for a model without

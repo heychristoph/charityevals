@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer, useState, useSyncExternalStore } from "react";
 import { lib, primaryOf, rankedCharities } from "./data";
-import { assumptionValues, bottomLine, headline, plausibleRange, ranks, unstableFlag, type ResolvedModel } from "../engine/model";
+import { assumptionValues, headline, plausibleRange, ranks, unstableFlag, type ResolvedModel } from "../engine/model";
 import { combine, combineLocations, coverageFlag, nextDollarFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
@@ -8,13 +8,13 @@ import { getOverrides, subscribeOverrides, useOverrides } from "./assumption-sta
 
 export type Result = {
   model: ResolvedModel;
-  native: number;
   /** Everything below is in years of healthy life per $1,000 (a model in a unit that doesn't convert:
    * its own unit per dollar), under the same assumptions. */
   central: number;
   low: number;
   high: number;
-  s: Sensitivity;
+  /** The one-at-a-time sensitivity: on a model's own result (useResultFor), not on the rankings'. */
+  s?: Sensitivity;
   flags: Flag[];
 };
 
@@ -91,53 +91,49 @@ export function useResultsFor(models: ResolvedModel[]) {
   );
 }
 
-function resultOf(m: ResolvedModel, av: Record<string, number>): Result {
-  const s = sensitivity(lib, m, av);
-  const cover = coverageFlag(lib, m);
-  const shaky = unstableFlag(lib, m);
-  const stale = nextDollarFlag(lib, m);
-  // The plausible range is the model's simulated 5% to 95% (src/engine/montecarlo.ts), where it has one;
-  // otherwise every ranged input at its end together.
-  const range = plausibleRange(lib, m, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
-  return { model: m, native: bottomLine(lib, m, av).native, central: s.central, low: range.low, high: range.high, s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...(cover ? [cover] : []), ...(shaky ? [shaky] : []), ...(stale ? [stale] : [])] };
+const extraFlags = (m: ResolvedModel) => [coverageFlag(lib, m), unstableFlag(lib, m), nextDollarFlag(lib, m)].filter((f) => !!f);
+
+/** A model as the rankings show it: its headline, the simulated 5% to 95% stored at build time
+ * (generated/distributions.json) scaled to it, and the flags from the figures stored beside it. Cheap
+ * enough to work out for every model at every change: the one-at-a-time sensitivity, which costs seconds
+ * for the whole rankings (most in models that read others live), is left to a model's own page. */
+const ranked = new Map<ResolvedModel, { av: Record<string, number>; r: Result }>();
+function rankedOf(m: ResolvedModel, av: Record<string, number>): Result {
+  const hit = ranked.get(m);
+  if (hit?.av === av) return hit.r;
+  const central = headline(lib, m, av);
+  const range = plausibleRange(lib, m, central, av) ?? { low: central, high: central };
+  const d = lib.distributions?.[m.id];
+  const stored = { central, jointLow: range.low, jointHigh: range.high, judgmentShare: d?.judgment ?? 0, pointInputs: Array.from({ length: d?.points ?? 0 }, () => "") } as Sensitivity;
+  const r: Result = { model: m, central, low: range.low, high: range.high, flags: [...flags(m, stored), ...extraFlags(m)] };
+  ranked.set(m, { av, r });
+  return r;
 }
 
-// A full result (sensitivity and plausible range) costs most of a second for the whole rankings, mostly
-// in models that read others live. While a slider moves, each model gets only its headline, with the
-// last full result's range scaled to it; the full results follow once the values have settled (SETTLE ms).
-const SETTLE = 250;
+/** A model's full result, sensitivity included: for its own page. */
 const full = new Map<ResolvedModel, { av: Record<string, number>; r: Result }>();
-const quick = new Map<ResolvedModel, { av: Record<string, number>; central: number }>();
-
 function fullOf(m: ResolvedModel, av: Record<string, number>): Result {
   const hit = full.get(m);
   if (hit?.av === av) return hit.r;
-  const r = resultOf(m, av);
+  const s = sensitivity(lib, m, av);
+  // The plausible range is the model's simulated 5% to 95% (src/engine/montecarlo.ts), where it has one;
+  // otherwise every ranged input at its end together.
+  const range = plausibleRange(lib, m, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
+  const r: Result = { model: m, central: s.central, low: range.low, high: range.high, s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...extraFlags(m)] };
   full.set(m, { av, r });
   return r;
 }
 
-/** The headline at these values, with the last full result's range and flags scaled to it. */
-function quickOf(m: ResolvedModel, av: Record<string, number>): Result {
-  const last = full.get(m);
-  if (!last) return fullOf(m, av);
-  if (last.av === av) return last.r;
-  let q = quick.get(m);
-  if (q?.av !== av) quick.set(m, (q = { av, central: headline(lib, m, av) }));
-  const c = q.central, prev = last.r.central;
-  const ratio = prev !== 0 && Math.sign(prev) === Math.sign(c) ? c / prev : NaN;
-  const [low, high] = Number.isFinite(ratio) ? [last.r.low * ratio, last.r.high * ratio] : [c, c];
-  return { ...last.r, central: c, low: Math.min(low, high), high: Math.max(low, high) };
-}
-
-/** The full result for one model, including variants that aren't on the rankings. Worked out in its own
- * task after the values change, so a slider moves without waiting for it; a newer value cancels it. */
+/** The full result for one model, including variants that aren't on the rankings. While a slider moves
+ * it is the rankings' quick result; the sensitivity follows once the values settle (SETTLE ms), in its
+ * own task, so the slider never waits for it. */
+const SETTLE = 250;
 export function useResultFor(m: ResolvedModel): Result {
   const av = useAssumptionValues();
   const settled = useSettled(av);
   const [r, setR] = useState(() => fullOf(m, av));
   useEffect(() => {
-    const t = setTimeout(() => setR(settled ? fullOf(m, av) : quickOf(m, av)));
+    const t = setTimeout(() => setR(settled ? fullOf(m, av) : rankedOf(m, av)));
     return () => clearTimeout(t);
   }, [m, av, settled]);
   // Another model in the same island: its own result at once, not the last model's.
@@ -166,11 +162,11 @@ function useSettled(av: Record<string, number>): boolean {
 
 // Every island on a page (the rankings, a charity page's headline) asks for the same rankings: one
 // shared computation per change. It runs in slices of a few milliseconds between frames, so a slider
-// moves at once and the rankings follow; a newer value abandons an older run (the per-model caches keep
+// moves at once and the rankings follow; a newer value abandons an older run (the per-model cache keeps
 // what it finished). Islands show the last finished rankings meanwhile.
 type Rankings = ReturnType<typeof computeResults>;
-let shown: { av: object; settled: boolean; value: Rankings } | undefined;
-let running: { av: object; settled: boolean } | undefined;
+let shown: { av: object; value: Rankings } | undefined;
+let running: { av: object } | undefined;
 let run = 0;
 const rankingListeners = new Set<() => void>();
 const SLICE = 8;
@@ -190,30 +186,25 @@ function busy(on: boolean) {
   document.documentElement.toggleAttribute("data-updating", on);
 }
 
-function schedule(av: Record<string, number>, settled: boolean) {
-  if ((shown?.av === av && shown.settled === settled) || (running?.av === av && running.settled === settled)) return;
+function publish(av: object, value: Rankings) {
+  shown = { av, value };
+  running = undefined;
+  busy(false);
+  rankingListeners.forEach((l) => l());
+}
+
+function schedule(av: Record<string, number>) {
+  if (shown?.av === av || running?.av === av) return;
   const id = ++run;
-  if (initial && av === valuesOf(EMPTY)) {
-    running = undefined;
-    busy(false);
-    shown = { av, settled: true, value: initial };
-    rankingListeners.forEach((l) => l());
-    return;
-  }
-  running = { av, settled };
+  if (initial && av === valuesOf(EMPTY)) return publish(av, initial);
+  running = { av };
   busy(true);
-  const steps = computeSteps(av, settled ? fullOf : quickOf);
+  const steps = computeSteps(av, rankedOf);
   const slice = () => {
     if (id !== run) return;
     const start = performance.now();
     for (let next = steps.next(); ; next = steps.next()) {
-      if (next.done) {
-        shown = { av, settled, value: next.value };
-        running = undefined;
-        busy(false);
-        rankingListeners.forEach((l) => l());
-        return;
-      }
+      if (next.done) return publish(av, next.value);
       if (performance.now() - start > SLICE) return nextTask(slice);
     }
   };
@@ -222,24 +213,17 @@ function schedule(av: Record<string, number>, settled: boolean) {
 
 // The server renders, and the page hydrates, at the default values; the stored values follow from a run.
 let initial: Rankings | undefined;
-const atDefaults = () => (initial ??= computeResults(valuesOf(EMPTY), fullOf));
+const atDefaults = () => (initial ??= computeResults(valuesOf(EMPTY), rankedOf));
 
-/** Runs follow the values from outside React: a quick run at each change, the full one once they settle.
- * Islands re-render only when a run finishes, never on the slider tick itself. */
+/** Runs follow the values from outside React, one per change; islands re-render only when a run
+ * finishes, never on the slider tick itself. */
 let watching = false;
 function watch() {
   if (watching || typeof window === "undefined") return;
   watching = true;
-  let settle: ReturnType<typeof setTimeout> | undefined;
-  const changed = (first = false) => {
-    const av = valuesOf(getOverrides());
-    clearTimeout(settle);
-    if (first) return schedule(av, true);
-    schedule(av, false);
-    settle = setTimeout(() => schedule(av, true), SETTLE);
-  };
-  subscribeOverrides(() => changed());
-  changed(true);
+  const changed = () => schedule(valuesOf(getOverrides()));
+  subscribeOverrides(changed);
+  changed();
 }
 
 const subscribeRankings = (l: () => void) => {
