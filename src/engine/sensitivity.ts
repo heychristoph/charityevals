@@ -1,5 +1,5 @@
-// One-at-a-time sensitivity and joint bounds. No Monte Carlo: every input has low / best / high,
-// and we report the central case, a joint low and joint high (each input at whichever end hurts
+// One-at-a-time sensitivity and joint bounds (the Monte Carlo is montecarlo.ts): every input has
+// low / best / high, and we report the central case, a joint low and joint high (each input at whichever end hurts
 // or helps the result), and how far each input alone moves it.
 
 import type { Kind } from "./schema";

@@ -34,8 +34,8 @@ Every number is inspectable: each input has a source, a low/best/high range, a k
 
 ## Capabilities and Constraints
 
-- No Monte Carlo. Each result shows central, joint low and joint high, plus a one-at-a-time tornado. Rankings are "typical case", not expected value.
-- Units are native per cause (GiveWell units of value, suffering-adjusted days). Cross-cause comparison happens only through visible, user-set exchange rates.
+- Each result is a Monte Carlo of 1,000 draws (bar from 5% to 95%), plus a one-at-a-time tornado. Rankings use the figure at the visitor's risk setting (the median by default).
+- Every model ends on one scale, years of healthy life (DALYs averted); evaluators' units convert to it through visible, user-set rates.
 - Sensitivity flags: spread over 100×, share of uncertainty from judgment, inputs without ranges, stale sources (over 18 months), assumptions that flip the ranking.
 - Prefer "unmodelled" over forcing a model to fit.
 - Undecided: licensing of ACE-derived data; AI safety templates; feedback channel.
@@ -46,7 +46,7 @@ Name: charityevals (domain charityevals.org). Voice: rigorous, calm, transparent
 
 ## Evidence on Hand
 
-- Models: GiveDirectly Kenya and Malawi (GiveWell, Nov 2024), Sinergia Animal (ACE, 2025). All reproduce their sources' figures exactly.
+- Models: about 400 across some 225 charities, imported from evaluators (GiveWell, ACE, HLI, SoGive, The Life You Can Save, Ambitious Impact) or built by charityevals. Every imported one reproduces its source's figures.
 - No testimonials, users, partners or endorsements exist. Do not imply any. Do not imply GiveWell or ACE endorse this site.
 
 ## Product Principles
