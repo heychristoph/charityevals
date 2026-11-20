@@ -345,7 +345,22 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
   useEffect(() => {
     if (!compact) return;
     setMounted(true);
-    const fromHash = () => { if (location.hash === "#your-assumptions") setSheet(true); };
+    // A link to the panel (#your-assumptions) or to one value in it (#a-<id>) opens the sheet; one value
+    // also unfolds its group and is scrolled to.
+    const fromHash = () => {
+      if (location.hash === "#your-assumptions") return setSheet(true);
+      const row = location.hash.startsWith("#a-") ? lib.assumptions.rows.find((r) => r.id === location.hash.slice(3)) : undefined;
+      if (!row) return;
+      if (row.section) setOpen((o) => ({ ...o, [row.section!]: true }));
+      setSheet(true);
+      setTimeout(() => {
+        const el = document.getElementById(`a-${row.id}`);
+        const side = el?.closest<HTMLElement>(".side");
+        if (!el) return;
+        if (side && getComputedStyle(side).position === "fixed") side.scrollTop += el.getBoundingClientRect().top - side.getBoundingClientRect().top - 80;
+        else el.scrollIntoView({ block: "center" });
+      }, 50);
+    };
     fromHash();
     window.addEventListener("hashchange", fromHash);
     return () => window.removeEventListener("hashchange", fromHash);
@@ -361,7 +376,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
   }, [sheet, compact]);
   const shut = () => {
     setSheet(false);
-    if (location.hash === "#your-assumptions") history.replaceState(null, "", location.pathname + location.search);
+    if (location.hash === "#your-assumptions" || location.hash.startsWith("#a-")) history.replaceState(null, "", location.pathname + location.search);
     requestAnimationFrame(() => jump.current?.focus({ preventScroll: true }));
   };
 

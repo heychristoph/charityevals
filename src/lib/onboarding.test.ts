@@ -13,6 +13,8 @@ describe("the values walk-through", () => {
     expect(shouldOnboard({ ...base, done: true })).toBe(false);
     expect(shouldOnboard({ ...base, path: "/method" })).toBe(false);
     expect(shouldOnboard({ ...base, search: "?a.discount_rate=0.01" })).toBe(false);
+    expect(shouldOnboard({ ...base, search: "?set=default" })).toBe(false);
+    expect(shouldOnboard({ ...base, search: "?values=discount_rate:0.01" })).toBe(false);
     expect(shouldOnboard({ ...base, referrer: "https://charityevals.org/method" })).toBe(false);
   });
 });
