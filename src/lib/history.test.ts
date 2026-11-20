@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import { cpSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { modelHistory } from "./history";
+import { assumptionsKeyOf, modelHistory, runnableCode } from "./history";
 import { buildLibrary } from "../engine/model";
 
 const repo = join(import.meta.dirname, "../..");
@@ -38,4 +38,22 @@ describe("model history", () => {
     expect(h[1].changes[0]).toMatchObject({ before: "4", after: "6", kind: "value" });
     expect(h[1].ours!).toBeLessThan(h[0].ours!);
   }, 30_000); // runs git a dozen times; slow when other test files run alongside
+});
+
+describe("the history cache key", () => {
+  it("ignores comments and types in the engine, but not a change to what runs", () => {
+    const base = runnableCode("/** doc */ export type X = { a: number };\nexport function f(x: number): number { return x + 1; }");
+    expect(runnableCode("// note\nexport type X = { a: number; b?: string };\nexport function f(x: number) { /* c */ return x + 1; }")).toBe(base);
+    expect(runnableCode("export function f(x: number): number { return x + 2; }")).not.toBe(base);
+  });
+
+  it("ignores the assumptions' wording, order and groups, but not a value", () => {
+    const rows = [
+      { id: "a", label: "A", explainer: "Why", section: "people", value: { low: 1, best: 2, high: 4 } },
+      { id: "b", label: "B", value: 0, shown_when: "a", control: "country" },
+    ];
+    const base = assumptionsKeyOf({ rows, groups: [{ id: "people", title: "People" }], presets: [] });
+    expect(assumptionsKeyOf({ rows: [{ ...rows[1], label: "Where" }, { ...rows[0], explainer: "Other words" }], groups: [] })).toBe(base);
+    expect(assumptionsKeyOf({ rows: [{ ...rows[0], value: { low: 1, best: 3, high: 4 } }, rows[1]] })).not.toBe(base);
+  });
 });

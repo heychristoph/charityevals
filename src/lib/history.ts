@@ -5,6 +5,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { transformSync } from "esbuild";
 import { AGE_DISCOUNT, MISSING_DATA_DISCOUNT, buildLibrary, assumptionValues, comparable, compute, headline, type Library, type ResolvedModel } from "../engine/model";
 import { formatValue } from "./format";
 
@@ -135,18 +136,20 @@ function snapshot(lib: Library | undefined, id: string): Snapshot {
 
 /** On-disk cache of past commits' snapshots (.cache/history, kept between CI runs by actions/cache): a past
  * commit's files never change, so only a change to the engine or to this file (the hash) makes them
- * stale. Without it every build rebuilds the library at every commit that touched a model. */
+ * stale. Without it every build rebuilds the library at every commit that touched a model (about 40 minutes
+ * on CI). The hash reads code as it runs and data as it computes: comments, types and the assumptions'
+ * wording, order and grouping don't make the cache stale. */
 let cacheDir: string | null | undefined;
 function historyCache(root: string): string | null {
   if (cacheDir !== undefined) return cacheDir;
   try {
     const h = createHash("sha1");
     const engine = join(root, "src/engine");
-    for (const f of readdirSync(engine).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts")).sort()) h.update(f).update(readFileSync(join(engine, f)));
-    h.update(readFileSync(join(root, "src/lib/history.ts"))).update(readFileSync(join(root, "src/lib/format.ts")));
+    for (const f of readdirSync(engine).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts")).sort()) h.update(f).update(runnable(join(engine, f)));
+    h.update(runnable(join(root, "src/lib/history.ts"))).update(runnable(join(root, "src/lib/format.ts")));
     // Past versions are read with today's assumptions rows and missing-data classification (withAgeDiscount,
     // withMissingData), so those are part of the key too.
-    h.update(readFileSync(join(root, "assumptions/default.json")));
+    h.update(assumptionsKey(root));
     for (const m of jsonFilesWorking(root, "models") as { id?: string; missing_data?: unknown }[])
       if (m?.missing_data) h.update(`${m.id}:${JSON.stringify(m.missing_data)}`);
     const base = join(root, ".cache/history"), key = h.digest("hex").slice(0, 16);
@@ -159,6 +162,26 @@ function historyCache(root: string): string | null {
   }
   return cacheDir;
 }
+
+/** TypeScript as it runs: comments and types stripped (esbuild, which tsx and Vite bring). */
+export function runnableCode(source: string): string {
+  return transformSync(source, { loader: "ts" }).code;
+}
+const runnable = (file: string) => runnableCode(readFileSync(file, "utf8"));
+
+/** Wording on the assumptions that no computation reads: what a reader is shown, not what a model uses. */
+const WORDING = new Set(["label", "explainer", "technical", "section", "shown_when", "control"]);
+
+/** The assumptions as the models compute with them: the rows by id without their wording, the groups
+ * (titles and explainers) and the value sets (the panel's presets) left out. */
+export function assumptionsKeyOf(a: { rows: Record<string, unknown>[]; groups?: unknown; presets?: unknown } & Record<string, unknown>): string {
+  const rows = a.rows
+    .map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !WORDING.has(k)).sort(([x], [y]) => x.localeCompare(y))))
+    .sort((x, y) => String(x.id).localeCompare(String(y.id)));
+  const { groups: _groups, presets: _presets, rows: _rows, ...rest } = a;
+  return JSON.stringify({ ...rest, rows });
+}
+const assumptionsKey = (root: string) => assumptionsKeyOf(JSON.parse(readFileSync(join(root, "assumptions/default.json"), "utf8")));
 
 /** Snapshots of these models at a commit: from the cache when every one is there, else built and stored. */
 function snapshotsAt(root: string, sha: string, ids: string[]): Map<string, Snapshot> {
