@@ -80,4 +80,21 @@ describe("edits in the URL", () => {
     await Promise.resolve();
     expect(params()).toEqual({ "a.uov_per_daly": "3", "n.cost": "250" });
   });
+
+  it("keeps an edit that may belong to a sibling programme the page has only as a summary", async () => {
+    const { editsFor, readEdits, setPageModels } = await import("./edit-state");
+    const units = { groups: [], rows: [], units: { u: { label: "u", short: "u", to_common: "1" } }, common: { unit: "u", benchmark: "main" } };
+    const lib = buildLibrary([
+      { id: "main", name: "Main", cause: "global-health", kind: "charity", output: { row: "out", unit: "u", label: "x" },
+        rows: [{ id: "cost", label: "Cost", value: 200, kind: "observed", explainer: "x" }, { id: "out", label: "Out", formula: "1 / cost" }] },
+      // A sibling as the browser has it (lib/browser-models.ts): rows renamed and unlabelled but the output.
+      { id: "sibling", name: "Sibling", cause: "global-health", kind: "charity", output: { row: "out2", unit: "u", label: "x" },
+        rows: [{ id: "r0", label: "", value: 5, kind: "estimate", explainer: "Folded." }, { id: "out2", label: "Out", formula: "1 / r0" }] },
+    ], units as never, []);
+    setPageModels([lib.models.get("main")!, lib.models.get("sibling")!]);
+    href = "https://charityevals.org/main?n.sibling_only=7";
+    expect(editsFor(lib.models.get("main")!, readEdits())).toEqual({});
+    await Promise.resolve();
+    expect(params()).toEqual({ "n.sibling_only": "7" });
+  });
 });

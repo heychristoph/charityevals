@@ -1,17 +1,20 @@
 // Loads every model and the shared assumptions at build time. Both the static pages and the
-// React islands import this. Bulk imports (models/grants/) are the exception: the server loads them in
-// full, the browser gets them partially evaluated (generated/bulk-summaries.json): rows that read a
-// shared assumption stay live, the rest is folded into numbers. The islands compute identical results
-// under any assumptions without shipping tens of megabytes. A bulk model's own page
-// passes its full rows to the island (bulkRaw).
+// React islands import this. The server loads every model in full; the browser gets most of them
+// partially evaluated (src/lib/browser-models.ts: generated/browser-models.json and, for bulk imports,
+// generated/bulk-summaries.json): rows that read a shared assumption stay live, the rest is folded into
+// numbers, the text left out. The islands compute identical results under any assumptions without
+// shipping tens of megabytes. A summarised model's own page fetches its full file (fullRaw).
 import { buildLibrary, modelsOf, type Library, type ResolvedModel } from "../engine/model";
 import { primaryModel, rankingPlan } from "../engine/ranking";
 import { renderLibraryProse, renderRaw } from "../engine/prose";
 import assumptions from "../../assumptions/default.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
+import browserModels from "../../generated/browser-models.json";
+import { summarisedIds } from "./browser-models";
 import distributions from "../../generated/distributions.json";
 
-const files = import.meta.glob<{ default: unknown }>(["../../models/**/*.json", "!../../models/grants/**"], { eager: true });
+const files = import.meta.env.SSR ? import.meta.glob<{ default: { id: string } }>(["../../models/**/*.json", "!../../models/grants/**"], { eager: true }) : {};
+const own: unknown[] = import.meta.env.SSR ? Object.values(files).map((f) => f.default) : browserModels;
 const bulkFiles = import.meta.env.SSR ? import.meta.glob<{ default: { id: string } }>("../../models/grants/**/*.json", { eager: true }) : {};
 const bulk: unknown[] = import.meta.env.SSR ? Object.values(bulkFiles).map((f) => f.default) : bulkSummaries;
 const factFiles = import.meta.glob<{ default: unknown }>("../../facts/*.json", { eager: true });
@@ -23,7 +26,7 @@ import { repo } from "./site";
 export const rawFacts = Object.values(factFiles).map((f) => f.default);
 
 export const lib = buildLibrary(
-  [...Object.values(files).map((f) => f.default), ...bulk],
+  [...own, ...bulk],
   assumptions,
   rawFacts,
   Object.values(charityFiles).map((f) => f.default),
@@ -39,17 +42,21 @@ if (lib.errors.length) throw new Error(`Model errors (run npm run check):\n${lib
 const proseErrors = renderLibraryProse(lib);
 if (proseErrors.length) throw new Error(`Placeholders that name nothing (docs/prose-numbers.md):\n${proseErrors.join("\n")}`);
 
-const renderedBulk = new Map<string, unknown>();
-/** A bulk model's full file, its text rendered. On the server, from models/grants/; in the browser, the
+/** The models the browser has only as summaries (src/lib/browser-models.ts); the same set on the server. */
+const summarisedSet = summarisedIds([...lib.models.values()], distributions);
+export const summarised = (m: ResolvedModel | undefined) => !!m && summarisedSet.has(m.id);
+
+const rendered = new Map<string, unknown>();
+/** A summarised model's full file, its text rendered. On the server, from models/; in the browser, the
  * copy the page's client:model directive fetched before hydrating (lib/model-directive.ts), which the
  * server rendered (pages/models/[id].json.ts). */
-export function bulkRaw(id: string): unknown {
+export function fullRaw(id: string): unknown {
   if (!import.meta.env.SSR) return globalThis.__charityevalsModels?.[id];
-  if (!renderedBulk.has(id)) {
-    const raw = Object.values(bulkFiles).find((f) => f.default.id === id)?.default;
-    renderedBulk.set(id, raw && renderRaw(lib, raw));
+  if (!rendered.has(id)) {
+    const raw = [...Object.values(bulkFiles), ...Object.values(files)].find((f) => f.default.id === id)?.default;
+    rendered.set(id, raw && renderRaw(lib, raw));
   }
-  return renderedBulk.get(id);
+  return rendered.get(id);
 }
 
 /** Models with a page: charities and their variants, not templates. */

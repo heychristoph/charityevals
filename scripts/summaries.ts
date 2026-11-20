@@ -1,5 +1,7 @@
-// Writes generated/bulk-summaries.json: a compact stand-in for every bulk-imported model, and
-// generated/usage.json: which models read each shared fact (the browser's summaries fold facts away).
+// Writes generated/bulk-summaries.json: a compact stand-in for every bulk-imported model;
+// generated/browser-models.json: the models every page ships (src/lib/browser-models.ts): a stand-in for
+// each standalone model, variant families in full; and generated/usage.json: which models read each
+// shared fact (the browser's summaries fold facts away).
 //   npx tsx scripts/summaries.ts           write
 //   npx tsx scripts/summaries.ts --check   fail if the file is out of date (npm run check runs this)
 // Bulk models (models/grants/) are tens of megabytes of rows, too much for the browser. Each stand-in
@@ -15,9 +17,11 @@ import { simulate } from "../src/engine/montecarlo";
 import { sensitivity } from "../src/engine/sensitivity";
 import { isValueOfInformation } from "../src/engine/ranking";
 import { renderRaw } from "../src/engine/prose";
+import { summarisedIds } from "../src/lib/browser-models";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
+const browserOut = join(root, "generated/browser-models.json");
 const usageOut = join(root, "generated/usage.json");
 const distributionsOut = join(root, "generated/distributions.json");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -28,8 +32,9 @@ const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
 
 function library() {
   const raws = walk(join(root, "models/grants")).sort().map(read);
-  return { raws, lib: buildLibrary(
-    [...walk(join(root, "models")).filter((p) => !p.includes("/models/grants/")).map(read), ...raws],
+  const own = walk(join(root, "models")).filter((p) => !p.includes("/models/grants/")).sort().map(read);
+  return { raws, own, lib: buildLibrary(
+    [...own, ...raws],
     read(join(root, "assumptions/default.json")),
     walk(join(root, "facts")).map(read),
     walk(join(root, "charities")).map(read),
@@ -64,6 +69,9 @@ export function summaries({ raws, lib }: ReturnType<typeof library>, dist?: Reco
       if (live.has(id)) m.byId.get(id)!.deps.forEach(visit);
     };
     visit(m.output!.row);
+    // The rows the output unit's conversion reads by name (a climate model's air_pollution_weight,
+    // docs/normalization.md 2.5) are kept, under their own ids.
+    m.conversionRows.forEach(visit);
     const byId = new Map((raw.rows as { id: string }[]).map((r) => [r.id, r]));
     const rows: Record<string, unknown>[] = m.order.filter((id) => seen.has(id)).map((id) => {
       const r = byId.get(id) as Record<string, unknown>;
@@ -78,11 +86,19 @@ export function summaries({ raws, lib }: ReturnType<typeof library>, dist?: Reco
       return { id, label, value: values[id], kind: "estimate", explainer: "Folded.", ...(r.side_effect ? { side_effect: r.side_effect } : {}), ...(r.never_started ? { never_started: true } : {}) };
     });
     // Short ids: the browser never shows them. The bottom line keeps its own, for links and history.
-    const short = new Map(rows.map((r, i) => [r.id as string, r.id === m.output!.row ? (r.id as string) : `r${i.toString(36)}`]));
+    const named = new Set([m.output!.row, ...m.conversionRows]);
+    const short = new Map(rows.map((r, i) => [r.id as string, named.has(r.id as string) ? (r.id as string) : `r${i.toString(36)}`]));
     // Leaves `$assumption`, `@fact.row` and `#model-id` alone.
     const rename = (f: string) => f.replace(/#[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?|(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => (w.startsWith("#") ? w : short.get(w) ?? w));
     const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}), ...(typeof r.drawn_with === "string" ? { drawn_with: short.get(r.drawn_with) ?? r.drawn_with } : {}) }));
     const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
+    // A reference read as a destination stays one only where a kept row still reads it.
+    const reads = compact.map((r) => (typeof r.formula === "string" ? r.formula : "")).join(" ");
+    if (Array.isArray(meta.destination_reads)) {
+      const kept = (meta.destination_reads as string[]).filter((d) => new RegExp(`#${d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![\\w:-])`).test(reads));
+      if (kept.length) meta.destination_reads = kept;
+      else delete meta.destination_reads;
+    }
     // A stand-in folds the native and species rows away, so its output names only the bottom line.
     const { native: _native, species: _species, ...output } = (raw.output ?? {}) as Record<string, unknown>;
     return { ...meta, ...(raw.output ? { output } : {}), ...(isValueOfInformation(m) ? { value_of_information: true } : {}), rows: compact };
@@ -130,9 +146,16 @@ export function distributions(lib: Library): Record<string, Distribution> {
   return out;
 }
 
+/** The models every page ships: a stand-in for each summarised standalone model, the rest as written. */
+function browserModels(built: ReturnType<typeof library>, dist: Record<string, Distribution>): unknown[] {
+  const ids = summarisedIds(built.own, dist);
+  const stand = new Map((summaries({ ...built, raws: built.own.filter((r) => ids.has(r.id)) }, dist) as { id: string }[]).map((s) => [s.id, s]));
+  return built.own.map((r) => stand.get(r.id) ?? r);
+}
+
 const built = library();
 const dist = distributions(built.lib);
-for (const [file, fresh] of [[out, summaries(built, dist)], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
+for (const [file, fresh] of [[out, summaries(built, dist)], [browserOut, browserModels(built, dist)], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
       console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts${firstDiff ? `\n  first difference ${firstDiff}` : ""}`);

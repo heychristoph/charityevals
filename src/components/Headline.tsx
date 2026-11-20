@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { lib, rawFacts, bulkRaw } from "../lib/data";
+import { lib, rawFacts, fullRaw } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
 import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
 import { editsFor, setPageModels, useEdits } from "../lib/edit-state";
@@ -7,10 +7,11 @@ import { useFigure } from "../lib/metric";
 import { usePageDistribution, withPageDistribution } from "../lib/live-distribution";
 
 const built = new Map<string, ResolvedModel>();
-/** A bulk model in full (its page loads the file before hydrating); any other model as the library has it. */
+/** A summarised model in full (its page loads the file before hydrating, lib/browser-models.ts); any other
+ * model as the library has it. */
 function modelOf(id: string, bulk: boolean): ResolvedModel {
   if (!bulk) return lib.models.get(id)!;
-  const raw = bulkRaw(id);
+  const raw = fullRaw(id);
   if (!raw) return lib.models.get(id)!;
   let m = built.get(id);
   if (!m) built.set(id, (m = buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id)!));

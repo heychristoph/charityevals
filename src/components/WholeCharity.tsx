@@ -1,6 +1,6 @@
 import type React from "react";
 import { useMemo, useState } from "react";
-import { bulkRaw, lib, modelUrl, rawFacts } from "../lib/data";
+import { fullRaw, lib, modelUrl, rawFacts, summarised } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
 import { combine, declaredLocations, locationWeights, locationsOf } from "../engine/ranking";
 import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib/edit-state";
@@ -15,9 +15,9 @@ const pct = (x: number) => `${x >= 0.995 ? 100 : x < 0.01 ? (x * 100).toPrecisio
 /** A charity whose figure combines several programs, as one tree: the whole charity at the top (the
  * funding-weighted mean of src/engine/ranking.ts: combine, so the parts add up to it), each program's
  * model a branch that opens into that model's own tree. One branch is open at a time (each tree has
- * its own search and anchors); the main model's first. A bulk import's full file is fetched when its
- * branch opens, as its own page does (lib/model-directive.ts); the page hydrates this island with
- * client:model when the main model is one. `children`: the evaluation's write-up. */
+ * its own search and anchors); the main model's first. A summarised model's full file (lib/browser-models.ts)
+ * is fetched when its branch opens, as its own page does (lib/model-directive.ts); the page hydrates this
+ * island with client:model when the main model is one. `children`: the evaluation's write-up. */
 export default function WholeCharity({ id, children }: { id: string; children?: React.ReactNode }) {
   const model = lib.models.get(id)!;
   const { pages } = useResults();
@@ -28,7 +28,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     // An edit belongs to the programme it was made in: switching programmes starts from its own numbers
     // (two programmes can share a row id, and one's edit must not carry over to the other).
     if (open && Object.keys(readEdits()).length) clearEdits();
-    if (lib.models.get(mid)?.bulk && !bulkRaw(mid)) {
+    if (summarised(lib.models.get(mid)) && !fullRaw(mid)) {
       setLoading(mid);
       try {
         const r = await fetch(`/models/${mid}.json`);
@@ -52,10 +52,10 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     if (!evAll || !open || !Object.keys(urlEdits).length) return evAll;
     const part = evAll.programs.find((p) => p.result.model.id === open);
     if (!part) return evAll;
-    const raw = part.result.model.bulk ? bulkRaw(open) : undefined;
+    const raw = summarised(part.result.model) ? fullRaw(open) : undefined;
     const full: ResolvedModel | undefined = raw
       ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(open)
-      : part.result.model.bulk ? undefined : part.result.model;
+      : summarised(part.result.model) ? undefined : part.result.model;
     if (!full) return evAll;
     const edits = editsFor(full, urlEdits, lib);
     if (!Object.keys(edits).length) return evAll;
@@ -70,10 +70,10 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   // Every programme on the page keeps its own edits in the URL (edit-state: setPageModels); set while
   // rendering, as the headline's island may filter the edits before this one's effects run.
   if (ev && ev.programs.length > 1) setPageModels(ev.programs.map((p) => p.result.model), lib);
-  if (!ev || ev.programs.length < 2) return <ModelView id={id} bulk={!!model.bulk}>{children}</ModelView>;
+  if (!ev || ev.programs.length < 2) return <ModelView id={id} bulk={summarised(model)}>{children}</ModelView>;
   const charity = lib.charities.get(model.charity)!;
-  const mainRaw = model.bulk ? bulkRaw(id) : undefined;
-  const mainModel: ResolvedModel | undefined = model.bulk
+  const mainRaw = summarised(model) ? fullRaw(id) : undefined;
+  const mainModel: ResolvedModel | undefined = summarised(model)
     ? mainRaw ? buildLibrary([mainRaw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id) : undefined
     : model;
   const weighted = ev.basis === "weighted";
@@ -117,7 +117,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
                 <div className="whole-model">
                   <ModelView
                     id={mid}
-                    bulk={!!p.result.model.bulk}
+                    bulk={summarised(p.result.model)}
                     about={
                       <p>
                         <strong>{plainModelName(p.result.model.name)}</strong> by <a href={`/evaluators/${p.result.model.owner}`}>{lib.owners.get(p.result.model.owner)?.name ?? p.result.model.owner}</a>
