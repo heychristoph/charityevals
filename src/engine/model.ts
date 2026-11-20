@@ -1060,6 +1060,8 @@ export const QUANTILES = Array.from({ length: 19 }, (_, i) => (i + 1) / 20);
 const MIDDLE = 9;
 
 /** A model's result as a distribution, from its Monte Carlo at the defaults (generated/distributions.json). */
+export type JointEnds = { inputs: Record<string, number>; assumptions: Record<string, number> };
+
 export type Distribution = {
   /** The result at each of QUANTILES, as a multiple of the best guess (the model at its best values). */
   q: number[];
@@ -1080,9 +1082,10 @@ export type Distribution = {
    * no range. Stored so the rankings show the flags without working out every model's sensitivity. */
   judgment?: number;
   points?: number;
-  /** For an unstable simulation: every input at its worst end and at its best, as multiples of the best
-   * guess ([worst, best]), the range the rankings show instead. */
-  joint?: number[];
+  /** For an unstable simulation, whose range is every input at its worst end and at its best: which end
+   * each input takes in each case (from the sensitivity at the defaults; inputs by row id or @fact,
+   * assumptions by id), so the rankings work out both cases at the reader's values without the sensitivity. */
+  joint?: { low: JointEnds; high: JointEnds };
 };
 
 /** What the risk factor divides by: the smooth middle (the best guess at 50% for a model without

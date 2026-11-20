@@ -8,7 +8,8 @@ export const TICKS = [1e-6, 1e-5, 1e-4, 1e-3, 0.01, 0.1, 1, 10, 100, 1000];
  * zero, ZONE % wide; after a GAP (the axis break) the log scale runs over the rest. */
 export const ZONE = 6;
 export const GAP = 2;
-const START = ZONE + GAP;
+/** Where the log scale starts, in % of the track. */
+export const START = ZONE + GAP;
 
 /** Where a value sits: at or below zero, the middle of the zone; else on the log scale, clamped to it. */
 export function xFor(v: number, width: number, domain = DOMAIN): number {

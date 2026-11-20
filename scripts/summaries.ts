@@ -10,7 +10,7 @@
 // hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Distribution, type Library } from "../src/engine/model";
+import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Distribution, type JointEnds, type Library } from "../src/engine/model";
 import { simulate } from "../src/engine/montecarlo";
 import { sensitivity } from "../src/engine/sensitivity";
 import { isValueOfInformation } from "../src/engine/ranking";
@@ -119,8 +119,13 @@ export function distributions(lib: Library): Record<string, Distribution> {
     const d = simulate(lib, m);
     if (!d) continue;
     const s = sensitivity(lib, m, defaults);
-    const joint: [number, number] | undefined = d.unstable && s.central !== 0 ? [s.jointLow / s.central, s.jointHigh / s.central] : undefined;
-    out[m.id] = { ...d, judgment: Math.round(s.judgmentShare * 100) / 100, points: s.pointInputs.length, ...(joint ? { joint: joint.map((x) => Number(x.toPrecision(4))) as [number, number] } : {}) };
+    // An unstable model's range is the sensitivity's joint bounds: which end each input takes in each.
+    const ends = (wantHigh: boolean) => {
+      const e: JointEnds = { inputs: {}, assumptions: {} };
+      for (const w of s.swings) (w.scope === "assumption" ? e.assumptions : e.inputs)[w.id] = (w.atHigh >= w.atLow) === wantHigh ? w.high : w.low;
+      return e;
+    };
+    out[m.id] = { ...d, judgment: Math.round(s.judgmentShare * 100) / 100, points: s.pointInputs.length, ...(d.unstable ? { joint: { low: ends(false), high: ends(true) } } : {}) };
   }
   return out;
 }

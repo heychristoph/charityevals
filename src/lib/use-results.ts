@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer, useState, useSyncExternalStore } from "react";
 import { lib, primaryOf, rankedCharities } from "./data";
-import { assumptionValues, headline, plausibleRange, ranks, unstableFlag, type ResolvedModel } from "../engine/model";
+import { assumptionValues, headline, referencedModels, plausibleRange, ranks, unstableFlag, type ResolvedModel } from "../engine/model";
 import { combine, combineLocations, coverageFlag, nextDollarFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
 import type { Charity } from "../engine/schema";
 import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
@@ -127,13 +127,34 @@ function rankedOf(m: ResolvedModel, av: Record<string, number>): Result {
   if (hit?.av === av) return hit.r;
   const central = headline(lib, m, av);
   const d = lib.distributions?.[m.id];
-  // An unstable simulation's range is every input at its worst and best end, stored at build time.
-  const joint = d?.joint ? [central * d.joint[0], central * d.joint[1]] : [central, central];
-  const range = plausibleRange(lib, m, central, av) ?? { low: Math.min(...joint), high: Math.max(...joint) };
+  const range = plausibleRange(lib, m, central, av) ?? (d?.unstable ? unstableRange(m, av) : { low: central, high: central });
   const stored = { central, jointLow: range.low, jointHigh: range.high, judgmentShare: d?.judgment ?? 0, pointInputs: Array.from({ length: d?.points ?? 0 }, () => "") } as Sensitivity;
   const r: Result = { model: m, central, low: range.low, high: range.high, barLow: barLowOf(m, range), flags: [...flags(m, stored), ...extraFlags(m)] };
   ranked.set(m, { av, r });
   return r;
+}
+
+/** An unstable simulation's range is the sensitivity's joint bounds: every input at its worst end and at
+ * its best. Worked out exactly at the reader's values for a model that computes only itself (a few
+ * milliseconds); one that reads other models live takes seconds for that, so it uses the ends stored at
+ * build time (which end each input takes, from the sensitivity at the defaults). */
+const exact = new Map<ResolvedModel, { av: Record<string, number>; low: number; high: number }>();
+function unstableRange(m: ResolvedModel, av: Record<string, number>): { low: number; high: number } {
+  const hit = exact.get(m);
+  if (hit?.av === av) return hit;
+  const j = lib.distributions?.[m.id]?.joint;
+  let low: number, high: number;
+  if (!referencedModels(lib, m).length || !j) {
+    const s = sensitivity(lib, m, av);
+    [low, high] = [Math.min(s.jointLow, s.jointHigh), Math.max(s.jointLow, s.jointHigh)];
+  } else {
+    const at = (e: { inputs: Record<string, number>; assumptions: Record<string, number> }) => headline(lib, m, { ...av, ...e.assumptions }, e.inputs);
+    const ends = [at(j.low), at(j.high)];
+    [low, high] = [Math.min(...ends), Math.max(...ends)];
+  }
+  const v = { av, low, high };
+  exact.set(m, v);
+  return v;
 }
 
 /** A model's full result, sensitivity included: for its own page. */

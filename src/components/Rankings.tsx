@@ -4,7 +4,7 @@ import { lib } from "../lib/data";
 import { useResults } from "../lib/use-results";
 import type { Basis } from "../engine/ranking";
 import { useFigure, type Figure } from "../lib/metric";
-import { DOMAIN, ZONE, xFor, tickLabel, clipSpan, pctStr } from "./scale";
+import { DOMAIN, ZONE, START, xFor, tickLabel, clipSpan, pctStr } from "./scale";
 import CharityLogo from "./CharityLogo";
 import InfoTip from "./InfoTip";
 import "./rankings.css";
@@ -45,7 +45,10 @@ function barSpan(low: number, high: number, central: number, barLow?: number): [
   let lo = xFor(start, 100);
   let hi = xFor(b, 100);
   if (hi - lo < MIN_SPAN) {
-    const mid = Math.min(Math.max(xFor(central, 100), MIN_SPAN / 2), 100 - MIN_SPAN / 2);
+    // Around the figure when it is on the bar's span, else around the span itself (a net harm's positive
+    // tail), and never into the zero zone.
+    const centre = central >= start && central <= b ? xFor(central, 100) : (lo + hi) / 2;
+    const mid = Math.min(Math.max(centre, START + MIN_SPAN / 2), 100 - MIN_SPAN / 2);
     lo = Math.min(lo, mid - MIN_SPAN / 2);
     hi = Math.max(hi, mid + MIN_SPAN / 2);
   }
