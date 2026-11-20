@@ -82,9 +82,9 @@ function target(m: ResolvedModel, facts: Set<string>, key: string): string | und
   }
 }
 
-/** The browser's stand-in for a bulk model (generated/bulk-summaries.json) renames and folds its rows,
+/** The browser's stand-in for a summarised model (lib/browser-models.ts) renames and folds its rows,
  * so it can't tell which of the full model's rows an edit names. */
-const isSummary = (m: ResolvedModel) => !!m.bulk && m.rows.every((r) => r.id === m.output?.row || !r.label);
+const isSummary = (m: ResolvedModel) => m.rows.every((r) => r.id === m.output?.row || !r.label);
 
 /** The edits that apply to a model: its inputs by row id and the shared facts it reads by "@key", with
  * edits to pass-through rows moved to the input they copy. A key that applies nowhere is never applied
@@ -99,8 +99,9 @@ export function editsFor(m: ResolvedModel, edits: Edits, lib?: Library): Edits {
   const out: Edits = {};
   keys.forEach((k, i) => { const t = where[i]; if (t && (t === k || !(t in edits))) out[t] = edits[k]; });
   // Only the page's own model rewrites the URL, and only once it has the model's real rows. A key
-  // that lands in another model the page shows (a sibling programme) is that model's, so it stays.
-  const elsewhere = (k: string) => pageModels.some((p) => p.m !== m && target(p.m, new Set(usedFacts(p.m, p.lib)), k) !== undefined);
+  // that lands in another model the page shows (a sibling programme) is that model's, so it stays; so
+  // does any key while a sibling is only a summary (its rows renamed), as it may be that sibling's.
+  const elsewhere = (k: string) => pageModels.some((p) => p.m !== m && (isSummary(p.m) || target(p.m, new Set(usedFacts(p.m, p.lib)), k) !== undefined));
   if (edits === current && typeof window !== "undefined" && !isSummary(m))
     queueMicrotask(() => {
       if (current !== edits) return;

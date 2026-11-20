@@ -11,7 +11,7 @@ import Headline from "./Headline.tsx";
 import WholeCharity, { Locations } from "./WholeCharity.tsx";
 import ModelReuse from "./ModelReuse.astro";
 import { plainModelName } from "../lib/format";
-import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf } from "../lib/data";
+import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf, summarised } from "../lib/data";
 import { similarTo } from "../lib/similar";
 import { auditOf, latestRules } from "../lib/audits";
 import { repo } from "../lib/site";
@@ -103,7 +103,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       <header class="m-header">
         <div class="m-title">
           <h1><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</h1>
-          {model.bulk
+          {summarised(model)
             ? <Headline client:model={model.id} id={model.id} bulk place={placeText} main={main} />
             : <Headline client:load id={model.id} place={placeText} main={main} />}
         </div>
@@ -160,10 +160,11 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           </details>
         )}
       </div>
-      {/* A bulk model hydrates once its full file has loaded (client:model), rather than carrying it as a prop. */}
+      {/* A model the browser has only as a summary (lib/browser-models.ts) hydrates once its full file has
+          loaded (client:model), rather than carrying it as a prop. */}
       {whole ? (
         <>
-        {model.bulk ? (
+        {summarised(model) ? (
           <WholeCharity client:model={model.id} id={model.id}>
           <section class="writeup" aria-labelledby="writeup-title">
             <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
@@ -188,7 +189,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
         </p>
         </>
-      ) : model.bulk ? (
+      ) : summarised(model) ? (
         <>
         {located && <Locations client:load id={model.id} />}
         <ModelView client:model={model.id} id={model.id} bulk place={place}>

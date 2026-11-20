@@ -1,6 +1,6 @@
 import type React from "react";
 import { useMemo } from "react";
-import { lib, rawFacts, bulkRaw } from "../lib/data";
+import { lib, rawFacts, fullRaw } from "../lib/data";
 import { buildLibrary, compute, plausibleRange, unstableFlag, type Library } from "../engine/model";
 import { useAssumptionValues, useResultFor } from "../lib/use-results";
 import { useOverrides } from "../lib/assumption-state";
@@ -16,9 +16,9 @@ import "./model.css";
 /** `place`: the location the model covers, when it is one of several. `about`: who made the model and links to its spreadsheet, file and history, shown under the model.
  * `children`: the evaluation's write-up. Both come from the page as Astro slots. */
 export default function ModelView({ id, bulk = false, place, about, children, waterfall = true }: { id: string; bulk?: boolean; place?: string; about?: React.ReactNode; children?: React.ReactNode; waterfall?: boolean }) {
-  // Bulk models reach the browser as one-row summaries; their page loads the full file before
-  // hydrating (client:model, lib/model-directive.ts).
-  const raw = bulk ? bulkRaw(id) : undefined;
+  // `bulk`: the browser has only a summary of this model (lib/browser-models.ts); its page loads the full
+  // file before hydrating (client:model, lib/model-directive.ts).
+  const raw = bulk ? fullRaw(id) : undefined;
   const model = useMemo(
     () => (raw ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id)! : lib.models.get(id)!),
     [id, raw],
