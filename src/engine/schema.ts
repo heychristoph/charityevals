@@ -164,7 +164,8 @@ export const Owner = z
     id: z.string().regex(/^[a-z0-9-]+$/),
     name: z.string(),
     short: z.string(),
-    url: z.string().url(),
+    /** None for an umbrella owner, such as charities' own analyses. */
+    url: z.string().url().optional(),
     kind: z.enum(["evaluator", "charityevals"]),
     about: z.string().optional(),
     /** false: the evaluator has asked us not to publish its models yet. They stay in models/ but leave the
