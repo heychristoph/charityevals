@@ -372,11 +372,11 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
     close.current?.focus({ preventScroll: true });
     // Escape closes it the way the close button does, clearing a #your-assumptions or #a-<id> hash so
     // the same link opens it again.
-    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") shut(); };
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") closeSheet(); };
     document.addEventListener("keydown", esc);
     return () => document.removeEventListener("keydown", esc);
   }, [sheet, compact]);
-  const shut = () => {
+  const closeSheet = () => {
     setSheet(false);
     if (location.hash === "#your-assumptions" || location.hash.startsWith("#a-")) history.replaceState(null, "", location.pathname + location.search);
     requestAnimationFrame(() => jump.current?.focus({ preventScroll: true }));
@@ -419,7 +419,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
             <RotateCcw size={14} aria-hidden /> Reset{changedCount ? ` (${changedCount})` : ""}
           </button>
           {compact && (
-            <button type="button" ref={close} className="sheet-close" aria-label="Close your values" onClick={shut}>
+            <button type="button" ref={close} className="sheet-close" aria-label="Close your values" onClick={closeSheet}>
               <X size={18} aria-hidden />
             </button>
           )}
