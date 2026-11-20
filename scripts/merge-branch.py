@@ -14,7 +14,7 @@ merge of JSON can still drop or duplicate rows):
     (its audited version) and every other file keeps ours, each printed as CONFLICT. When the result equals
     one side, that side's text is kept byte for byte; otherwise every part equal to a side keeps that side's
     text and the rest is laid out as JSON.stringify(x, null, 2) would (a model's "beneficiaries" on one line).
-  - generated/ files the regeneration rewrites (bulk-summaries, distributions, usage, normalization-audit):
+  - generated/ files the regeneration rewrites (bulk-summaries, browser-models, distributions, usage, normalization-audit):
     ours, then regenerated.
   - audits/<id>/audit-r<n>.md added on both sides: ours keeps the number, the branch's moves to the next free one.
   - other text (scripts' registers such as the OURS table in beneficiary-countries.ts): each conflict hunk
@@ -31,7 +31,7 @@ fix, then `git commit --no-edit`.
 import json, os, re, subprocess, sys, tempfile
 from decimal import Decimal
 
-REGENERATED = {"generated/bulk-summaries.json", "generated/distributions.json", "generated/usage.json", "generated/normalization-audit.json"}
+REGENERATED = {"generated/bulk-summaries.json", "generated/browser-models.json", "generated/distributions.json", "generated/usage.json", "generated/normalization-audit.json"}
 UNMERGED = ("UU", "AA", "DU", "UD", "AU", "UA", "DD")
 MISSING = object()
 REPO = os.getcwd()

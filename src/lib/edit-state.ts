@@ -82,9 +82,9 @@ function target(m: ResolvedModel, facts: Set<string>, key: string): string | und
   }
 }
 
-/** The browser's stand-in for a bulk model (generated/bulk-summaries.json) renames and folds its rows,
+/** The browser's stand-in for a summarised model (lib/browser-models.ts) renames and folds its rows,
  * so it can't tell which of the full model's rows an edit names. */
-const isSummary = (m: ResolvedModel) => !!m.bulk && m.rows.every((r) => r.id === m.output?.row || !r.label);
+const isSummary = (m: ResolvedModel) => m.rows.every((r) => r.id === m.output?.row || !r.label);
 
 /** The edits that apply to a model: its inputs by row id and the shared facts it reads by "@key", with
  * edits to pass-through rows moved to the input they copy. A key that applies nowhere is never applied
