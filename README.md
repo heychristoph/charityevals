@@ -63,10 +63,14 @@ a `kind` and a `source` or `explainer`. Calculated rows have a `formula` over ot
 
 ## Sensitivity
 
-No Monte Carlo. Each result has a central value (all inputs at best), a joint low and joint high
-(each input at whichever end lowers or raises the result), a one-at-a-time sensitivity, and on model pages a breakdown of where the uncertainty comes from (default ranges by input type where none is published). Flags:
-joint spread over 100×, more than half the uncertainty from judgment, inputs without ranges and
-source older than 18 months.
+Each result is simulated: every uncertain input is drawn 1,000 times across its range (a default
+spread by input type where none is published), and the rankings show the 5–95% range. A single event
+a model rests on (a law passing, a new charity succeeding) is drawn as happens or doesn't. Where the
+simulation can't be relied on, the figure stays at its best guess and the bar runs from every input at
+its worse end to every input at its better end. Model pages add a one-at-a-time sensitivity and each
+input's share of the uncertainty. Flags: a range over 100×, uncertainty mostly from judgment, an
+analysis over 18 months old, programmes left out, a simulation that can't be relied on, a purely
+theoretical model.
 
 ## Commands
 
