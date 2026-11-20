@@ -370,7 +370,9 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
     self.current?.closest(".side")?.toggleAttribute("data-open", sheet);
     if (!sheet) return;
     close.current?.focus({ preventScroll: true });
-    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setSheet(false); };
+    // Escape closes it the way the close button does, clearing a #your-assumptions or #a-<id> hash so
+    // the same link opens it again.
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") shut(); };
     document.addEventListener("keydown", esc);
     return () => document.removeEventListener("keydown", esc);
   }, [sheet, compact]);
