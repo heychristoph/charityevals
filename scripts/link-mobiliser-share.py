@@ -80,8 +80,8 @@ RULES = {
         ("technical assistance", r"^pallium-india", "Builds palliative care and opioid access through state governments' and hospitals' own services (the model's staff-pay class is research and policy)."),
         ("delivery", r".", "The charity delivers the service or goods itself."),
     ],
-    "leep": [
-        ("policy", r".", "The good is done by governments' lead paint limits and the manufacturers that reformulate."),
+    "self": [
+        ("policy", r"^lead-exposure-elimination-project", "The good is done by governments' lead paint limits and the manufacturers that reformulate."),
     ],
     "sogive": [
         ("research", r"^breast-cancer-now|^motor-neurone-disease-association",

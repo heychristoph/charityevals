@@ -19,7 +19,7 @@ import { childrenOf, lookupFor, pathTo, pathToRef, rangedRowOf, rootOf, shapeOf,
 import { rowsFeeding } from "../engine/sensitivity";
 import type { Uncertainty } from "../engine/uncertainty";
 import { useAssumptionValues } from "../lib/use-results";
-import { formatValue, formatAssumption, formatYears, parseEdit, editText } from "../lib/format";
+import { formatValue, formatAssumption, formatShown, formatYears, parseEdit, editText } from "../lib/format";
 import { oneIn } from "../lib/comparables";
 import { track } from "../lib/analytics";
 import { clearEdits, setEdit } from "../lib/edit-state";
@@ -88,24 +88,46 @@ const modelLabel = (id: string) => {
 };
 const rowLabel = (m: ResolvedModel, id: string) => m.byId.get(id)?.label || id.replace(/_/g, " ");
 
-/** A sub-formula read in words: "Cost per net + Delivery cost", shortened when long. */
-function exprLabel(m: ResolvedModel, n: Node, depth = 0): string {
-  const s = (() => {
-    switch (n.type) {
-      case "num": return fmtNum(n.value);
-      case "ref": return n.scope === "row" ? rowLabel(m, n.name) : n.scope === "assumption" ? assumptionRow(n.name)?.label ?? n.name : n.scope === "model" ? modelLabel(n.name) : lib.facts.get(n.name)?.label ?? n.name;
-      case "neg": return `−${exprLabel(m, n.arg, depth + 1)}`;
-      default: {
-        // Deeper than one level of brackets, a formula stops reading as words: name the part instead.
-        if (depth >= 2) return "…";
-        const sh = shapeOf(n);
-        const inner = sh.parts.map((p, i) => `${p.op ? `${p.op} ` : i ? ", " : ""}${exprLabel(m, p.node, depth + 1)}`).join(" ").replace(/ ,/g, ",");
-        const body = sh.how && n.type === "call" ? `${sh.how} (${inner})` : inner;
-        return depth ? `(${body})` : body;
-      }
+/** A sub-formula read in words: "Cost per net + Delivery cost". */
+function exprWords(m: ResolvedModel, n: Node, depth = 0): string {
+  switch (n.type) {
+    case "num": return fmtNum(n.value);
+    case "ref": return n.scope === "row" ? rowLabel(m, n.name) : n.scope === "assumption" ? assumptionRow(n.name)?.label ?? n.name : n.scope === "model" ? modelLabel(n.name) : lib.facts.get(n.name)?.label ?? n.name;
+    case "neg": return `−${exprWords(m, n.arg, depth + 1)}`;
+    default: {
+      // Deeper than one level of brackets, a formula stops reading as words: name the part instead.
+      if (depth >= 2) return "…";
+      const sh = shapeOf(n);
+      const inner = sh.parts.map((p, i) => `${p.op ? `${p.op} ` : i ? ", " : ""}${exprWords(m, p.node, depth + 1)}`).join(" ").replace(/ ,/g, ",");
+      const body = sh.how && n.type === "call" ? `${sh.how} (${inner})` : inner;
+      return depth ? `(${body})` : body;
     }
-  })();
-  return depth === 0 && s.length > 90 ? `${s.slice(0, 88).trimEnd()}…` : s;
+  }
+}
+
+/** An unnamed sub-formula's label: its parts in words where that reads whole (short, nothing elided, no
+ * value left blank), else what it does to the parts listed under it. */
+function exprLabel(m: ResolvedModel, n: Node): string {
+  const words = exprWords(m, n);
+  if (words.length <= 70 && !words.includes("…")) return words;
+  const sh = shapeOf(n);
+  const k = sh.parts.length;
+  const ops = new Set(sh.parts.map((p) => p.op).filter(Boolean));
+  if (sh.how) return sh.how[0].toUpperCase() + sh.how.slice(1);
+  if (ops.has("if")) return "Depends on a condition";
+  if (ops.has("÷")) return `The ${k} parts below, multiplied and divided`;
+  if (ops.has("×")) return `The ${k} parts below, multiplied`;
+  if (ops.has("−") && k > 1) return `The ${k} parts below, added and subtracted`;
+  if (ops.has("+")) return `The ${k} parts below, added up`;
+  return words;
+}
+
+/** A value's label with its blank filled: "Lives that never start count … %" reads "… count 0%". */
+function filledLabel(row: Row, v: number): string {
+  if (!row.label.includes("…") || !Number.isFinite(v)) return row.label;
+  const shown = formatShown(row, v);
+  if (shown === "doesn't count") return row.label;
+  return row.label.replace(/…\s*%/, shown.endsWith("%") ? shown : `${shown}%`).replace("…", shown);
 }
 
 /** Evaluators' jargon in row labels, in plain words: "funging" and "leverage" are other funders'
@@ -124,7 +146,10 @@ function labelOf(m: ResolvedModel, n: TreeNode): string {
 function rawLabelOf(m: ResolvedModel, n: TreeNode): string {
   if (n.label) return n.label;
   if (n.named) return rowLabel(m, n.named);
-  if (n.type === "assumption") return assumptionRow(n.refId!)?.label ?? n.refId!;
+  if (n.type === "assumption") {
+    const a = assumptionRow(n.refId!);
+    return a ? filledLabel(a, n.value) : n.refId!;
+  }
   if (n.type === "fact") return lib.facts.get(n.refId!)?.label ?? n.refId!;
   if (n.type === "model") return modelLabel(n.refId!);
   // The headline's "× 1000" turns a value per dollar into one per $1,000.
@@ -457,7 +482,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
           </span>
           <span className="tn-text">
             <span id={`${id}-l`} className="tn-label"><Glossed text={label} seen={ctx.glossed} /></span>
-            {how && <span className="tn-how"> · {how}</span>}
+            {how && label.toLowerCase() !== how.toLowerCase() && <span className="tn-how"> · {how}</span>}
             <Tag ctx={ctx} n={n} id={`${id}-t`} />
             {root && ctx.flags.length > 0 && (
               // The sign opens its own list; it doesn't open or close the row.

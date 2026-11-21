@@ -22,7 +22,12 @@ const owners = [...lib.owners.values()].filter((o) => counts.has(o.id)).sort((a,
       const c = counts.get(o.id)!;
       return (
         <li>
-          <span class="ev-name"><CharityLogo id={`owner-${o.id}`} name={o.name} size={32} /><a href={`/evaluators/${o.id}`}>{o.name}</a></span> <span class="muted small">{c.charities.size} {c.charities.size === 1 ? "charity" : "charities"}, {c.models} {c.models === 1 ? "model" : "models"}</span>
+          <div class="ev-head">
+            <CharityLogo id={`owner-${o.id}`} name={o.name} size={32} />
+            <a href={`/evaluators/${o.id}`}>{o.name}</a>
+            <span class="chip num">{c.charities.size} {c.charities.size === 1 ? "charity" : "charities"}</span>
+            <span class="chip num">{c.models} {c.models === 1 ? "model" : "models"}</span>
+          </div>
           {o.about && <p class="small muted">{o.about}</p>}
         </li>
       );
@@ -37,13 +42,27 @@ const owners = [...lib.owners.values()].filter((o) => counts.has(o.id)).sort((a,
     display: grid;
     gap: var(--s4);
   }
-  .ev-name {
-    display: inline-flex;
+  .ev-head {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: var(--s2);
     font-size: 18px;
+    line-height: 1.2;
+  }
+  .ev-head a {
+    margin-right: var(--s1);
+  }
+  .chip {
+    padding: 2px var(--s2);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--paper-2);
+    font-size: 13px;
+    color: var(--ink-2);
+    white-space: nowrap;
   }
   .ev-list p {
-    margin: var(--s1) 0 0;
+    margin: var(--s2) 0 0 calc(32px + var(--s2));
   }
 </style>

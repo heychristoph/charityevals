@@ -37,7 +37,7 @@ const MIN_SPAN = 4;
 /** The range bar's ends on the log scale in % of the track, widened around the row's figure to at least
  * MIN_SPAN; undefined when the whole range is at or below zero. A range reaching zero or harm starts at
  * `barLow` (its lowest simulated 5% step above zero) and shows the rest as a stub in the ≤0 zone. */
-function barSpan(low: number, high: number, central: number, barLow?: number): [number, number] | undefined {
+export function barSpan(low: number, high: number, central: number, barLow?: number): [number, number] | undefined {
   const a = Math.min(low, high), b = Math.max(low, high);
   if (b <= 0) return undefined;
   const start = a > 0 ? a : barLow;

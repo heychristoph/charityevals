@@ -544,7 +544,7 @@
         "quote": "What probability do you put on future AI advances causing human extinction or similarly permanent and severe disempowerment of the human species? 1321; 16.2% (23%); 5% (19%)",
         "retrieved": "2026-11-16"
       },
-      "explainer": "How likely you think it is that AI wipes out humanity, or takes its future for good, this century. It decides how much work to make AI safe is worth.\n\nThe default, 5%, is the median answer of 1,321 AI researchers asked exactly this in late 2023 (their mean was 16%). Others: superforecasters in a 2022 tournament said 0.38% and its AI experts 3%; in mid-2026 experts on the Forecasting Research Institute's panel put a global AI catastrophe (not only extinction) by 2100 at 5% and superforecasters at 2.4%; AI safety leaders surveyed in February 2026 gave a median of 25% (a self-selected group)."
+      "explainer": "How likely you think it is that AI wipes out humanity, or takes its future for good, this century. It decides how much work to make AI safe is worth.\n\nThe default, 5%, is the median answer of 1,321 AI researchers asked exactly this in late 2023 (their mean was 16%). Others: superforecasters in a 2022 tournament said 0.38% and its AI experts 3%; in mid-2026 experts on the Forecasting Research Institute's panel put a global AI catastrophe (not only extinction) by 2100 at 5% and superforecasters at 2.4%; AI safety researchers surveyed in 2021 gave a median of 20% (a self-selected group); 25% is AI safety leaders' February 2026 median for the chance from all causes, not AI alone."
     },
     {
       "id": "bio_catastrophe_chance",
@@ -559,7 +559,7 @@
       },
       "slider": {
         "low": 0.0001,
-        "high": 0.03
+        "high": 0.5
       },
       "kind": "judgment",
       "source": {
@@ -584,7 +584,7 @@
       },
       "slider": {
         "low": 0.0001,
-        "high": 0.03
+        "high": 0.5
       },
       "kind": "judgment",
       "source": {
@@ -732,29 +732,37 @@
     {
       "id": "animal-focused",
       "label": "Animal-focused",
-      "about": "A chicken's suffering counts at Rethink Priorities' median estimate of what a chicken can feel: a third of a person's, not a 10,000th. A day of disabling pain counts by how bad it feels, about 107 hours of healthy life, not 10.",
+      "about": "A chicken's suffering counts at Rethink Priorities' estimate, a third of a person's, and a day of disabling pain as 107 hours of healthy life. A won reform counts 15 years, Rethink Priorities' estimate of how far campaigns bring it forward.",
       "values": {
         "chicken_vs_person": 0.332,
-        "daly_per_sad": 0.0122
+        "daly_per_sad": 0.0122,
+        "win_years_counted": 15
       }
     },
     {
       "id": "longtermist",
       "label": "Long-run",
-      "about": "The future counts almost as much as today: good done later 0.1% less a year, not 4%, and lives that never start in full.",
+      "about": "The future counts almost as much as today: 0.1% less a year, lives that never start in full, and Toby Ord's catastrophe chances (AI 10%, pandemics 3%, nuclear war 0.1%). Long shots and results nobody measured count in full.",
       "values": {
         "discount_rate": 0.001,
-        "never_started_weight": 1
+        "never_started_weight": 1,
+        "ai_catastrophe_chance": 0.1,
+        "bio_catastrophe_chance": 0.0334,
+        "nuclear_catastrophe_chance": 0.001,
+        "risk_quantile": 0.9,
+        "missing_data_discount": 1
       }
     },
     {
       "id": "evidence-first",
       "label": "Evidence-first",
-      "about": "Only what is measured counts in full: unmeasured results at 10%, no side effects, old estimates 15% less a year.",
+      "about": "Only what is measured counts in full: results nobody measured count 13%, and each charity counts at a figure it beats 7 times in 10. Catastrophe chances are superforecasters': AI 0.38%, pandemics 0.01%, nuclear war 0.07%.",
       "values": {
-        "missing_data_discount": 0.1,
-        "side_effect_weight": 0,
-        "estimate_age_discount": 0.15
+        "missing_data_discount": 0.13,
+        "risk_quantile": 0.3,
+        "ai_catastrophe_chance": 0.0038,
+        "bio_catastrophe_chance": 0.0001,
+        "nuclear_catastrophe_chance": 0.00074
       }
     },
     {
@@ -768,18 +776,24 @@
     {
       "id": "hits-based",
       "label": "Hits-based",
-      "about": "Long shots count: results nobody measured count in full, and each charity counts at a result it beats only 1 time in 5, so untested and high-upside work moves up.",
+      "about": "Long shots count: each charity counts at a result it beats only 1 time in 10, and results nobody measured count in full. A healthy year is worth 2.9 years of double income and a young child's life 51 healthy years, as Coefficient Giving values them.",
       "values": {
         "missing_data_discount": 1,
-        "risk_quantile": 0.8
+        "risk_quantile": 0.9,
+        "uov_per_daly": 2.885,
+        "daly_per_child_death": 51
       }
     },
     {
       "id": "ai-concerned",
       "label": "AI-concerned",
-      "about": "AI is a serious threat: a 25% chance it ends humanity's future by 2100, the median of AI safety leaders surveyed in February 2026, not the 5% of AI researchers in 2023.",
+      "about": "AI has a 20% chance of taking humanity's future, the median of AI safety researchers. The future counts almost in full, lives that never start too, and long shots and results nobody measured count in full.",
       "values": {
-        "ai_catastrophe_chance": 0.25
+        "ai_catastrophe_chance": 0.2,
+        "risk_quantile": 0.9,
+        "missing_data_discount": 1,
+        "discount_rate": 0.001,
+        "never_started_weight": 1
       }
     }
   ],

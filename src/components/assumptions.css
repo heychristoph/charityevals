@@ -117,20 +117,23 @@
   font-size: 15px;
   line-height: 1.35;
 }
+/* The value beside a slider looks like the box it becomes: type any number, not only the slider's. */
 .value-field {
-  padding: 0;
-  border: 0;
-  background: none;
+  min-width: 6ch;
+  padding: 1px 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--paper);
   font: inherit;
   font-weight: 600;
+  text-align: right;
   color: var(--ink);
   white-space: nowrap;
   cursor: text;
-  text-decoration: underline dotted 1px var(--ink-3);
-  text-underline-offset: 4px;
 }
-.value-field:hover {
-  text-decoration-color: var(--blue);
+.value-field:hover,
+.value-field:focus-visible {
+  border-color: var(--blue);
 }
 .assumption.changed .value-field {
   color: var(--blue);
@@ -147,8 +150,8 @@
   white-space: nowrap;
 }
 .value-edit input {
-  width: 6ch;
-  padding: 1px 4px;
+  width: 7ch;
+  padding: 1px 6px;
   border: 1px solid var(--blue);
   border-radius: 4px;
   font: inherit;
