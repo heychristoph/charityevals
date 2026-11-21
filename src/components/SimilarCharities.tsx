@@ -22,7 +22,7 @@ export default function SimilarCharities({ items }: { items: Item[] }) {
         return (
           <li key={s.id} style={cause ? { ["--cause" as string]: `var(--cause-${cause})` } : undefined}>
             <a href={s.url} className="sim-tile" data-track-kind="similar">
-              <span className="sim-head"><CharityLogo id={s.id} name={s.name} size={36} /><strong>{s.name}</strong></span>
+              <span className="sim-head"><CharityLogo id={s.id} name={s.name} size={32} /><strong>{s.name}</strong></span>
               {s.summary && <span className="sim-sub">{s.summary}</span>}
               {/* The bar alone: where it sits on the rankings' scale, without numbers to set side by side. */}
               {r && (
