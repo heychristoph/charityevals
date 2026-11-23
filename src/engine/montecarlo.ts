@@ -88,21 +88,11 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     kept.push(d);
     acc += d.contribution;
   }
-  // Shares the model takes the complement of (a row `1 - x`, x between 0 and 1 at the best guess): such a
-  // row and its x stay between 0 and 1 in every draw. An input x is drawn on its odds; a draw that pushes a
-  // computed one outside (an efficacy times an adjustment above 100%) is drawn again.
-  const bounds: string[] = [], shareInputs = new Set<string>();
-  for (const r of m.rows) {
-    const n = r.node;
-    if (!(n?.type === "bin" && n.op === "-" && n.left.type === "num" && n.left.value === 1)) continue;
-    if (!(values[r.id] >= 0 && values[r.id] <= 1)) continue;
-    bounds.push(r.id);
-    if (n.right.type === "ref" && n.right.scope === "row") shareInputs.add(n.right.name);
-  }
   // A difference that is positive at the best guess (an effect: a rate times a ratio minus the rate) stays
   // positive where only default spreads feed it: a default says how far a number may be off, never that
   // an effect reverses. A published range can still take it below zero (docs/normalization.md 2.18).
-  const published = new Set(kept.filter((d) => d.published).map((d) => d.id));
+  // Inputs with a published range (rows by id, shared facts by "@key"): what they can do, they may.
+  const published = new Set(kept.filter((d) => d.published).map((d) => (d.scope === "fact" ? `@${d.id}` : d.id)));
   const feeds = new Map<string, Set<string>>();
   const inputsOf = (id: string): Set<string> => {
     let out = feeds.get(id);
@@ -111,11 +101,27 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     const row = m.byId.get(id);
     if (!row) return out;
     if (!row.node) out.add(id);
+    for (const f of row.factDeps) out.add(`@${f}`);
     for (const dep of row.deps) inputsOf(dep).forEach((x) => out!.add(x));
     return out;
   };
+  const defaultOnly = (id: string) => ![...inputsOf(id)].some((x) => published.has(x));
+  // Shares the model takes the complement of (a row `1 - x`, x between 0 and 1 at the best guess): where
+  // only default spreads feed it, such a row and its x stay between 0 and 1 in every draw. An input x is
+  // drawn on its odds; a draw that pushes a computed one outside (an efficacy times an adjustment above
+  // 100%) is drawn again. A published range keeps its tails: 1 minus a relative risk whose interval runs
+  // past 1 is possible harm, not an impossible share.
+  const bounds: string[] = [], shareInputs = new Set<string>();
+  for (const r of m.rows) {
+    const n = r.node;
+    if (!(n?.type === "bin" && n.op === "-" && n.left.type === "num" && n.left.value === 1)) continue;
+    if (!(values[r.id] >= 0 && values[r.id] <= 1) || !defaultOnly(r.id)) continue;
+    bounds.push(r.id);
+    if (n.right.type === "ref" && n.right.scope === "row") shareInputs.add(n.right.name);
+  }
+
   const positive = m.rows
-    .filter((r) => r.node?.type === "bin" && r.node.op === "-" && values[r.id] > 0 && ![...inputsOf(r.id)].some((x) => published.has(x)))
+    .filter((r) => r.node?.type === "bin" && r.node.op === "-" && values[r.id] > 0 && defaultOnly(r.id))
     .map((r) => r.id);
   // A ratio whose effect is its distance from 1 (a relative risk of 1.11 in `rate × ratio − rate`): where
   // setting it to 1 zeroes such a difference, a default spread goes on that distance, so the effect keeps
