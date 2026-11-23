@@ -54,7 +54,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     if (!part) return evAll;
     const raw = summarised(part.result.model) ? fullRaw(open) : undefined;
     const full: ResolvedModel | undefined = raw
-      ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(open)
+      ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models, trusted: !import.meta.env.SSR }).models.get(open)
       : summarised(part.result.model) ? undefined : part.result.model;
     if (!full) return evAll;
     const edits = editsFor(full, urlEdits, lib);
@@ -74,7 +74,7 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   const charity = lib.charities.get(model.charity)!;
   const mainRaw = summarised(model) ? fullRaw(id) : undefined;
   const mainModel: ResolvedModel | undefined = summarised(model)
-    ? mainRaw ? buildLibrary([mainRaw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id) : undefined
+    ? mainRaw ? buildLibrary([mainRaw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models, trusted: !import.meta.env.SSR }).models.get(id) : undefined
     : model;
   const weighted = ev.basis === "weighted";
   const total = ev.programs.reduce((s, p) => s + (p.weight ?? 0), 0);

@@ -16,3 +16,18 @@ export function summarisedIds(models: ModelLike[], distributions: Record<string,
   const parents = new Set(models.map((m) => m.extends).filter((x): x is string => !!x));
   return new Set(models.filter((m) => m.bulk || (!m.extends && !parents.has(m.id) && !!m.output && !(distributions[m.id] as { unstable?: boolean } | undefined)?.unstable)).map((m) => m.id));
 }
+
+/** The text of a shared fact that no computation reads: where it comes from and why. The browser's
+ * copy of the facts leaves it out (generated/browser-facts.json); a model's page fetches it before its
+ * tree hydrates (/fact-text.json, lib/model-directive.ts). */
+export const FACT_TEXT = ["explainer", "source"] as const;
+
+type FactFile = { rows?: Record<string, unknown>[]; source?: unknown } & Record<string, unknown>;
+
+/** The facts as the browser carries them: every number, label and unit, without FACT_TEXT. */
+export function browserFacts(files: FactFile[]): FactFile[] {
+  return files.map(({ source: _source, rows, ...file }) => ({
+    ...file,
+    rows: (rows ?? []).map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !(FACT_TEXT as readonly string[]).includes(k)))),
+  }));
+}

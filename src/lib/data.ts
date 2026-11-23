@@ -10,6 +10,7 @@ import { renderLibraryProse, renderRaw } from "../engine/prose";
 import assumptions from "../../assumptions/default.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
 import browserModels from "../../generated/browser-models.json";
+import browserFactFiles from "../../generated/browser-facts.json";
 import { summarisedIds } from "./browser-models";
 import distributions from "../../generated/distributions.json";
 
@@ -17,13 +18,14 @@ const files = import.meta.env.SSR ? import.meta.glob<{ default: { id: string } }
 const own: unknown[] = import.meta.env.SSR ? Object.values(files).map((f) => f.default) : browserModels;
 const bulkFiles = import.meta.env.SSR ? import.meta.glob<{ default: { id: string } }>("../../models/grants/**/*.json", { eager: true }) : {};
 const bulk: unknown[] = import.meta.env.SSR ? Object.values(bulkFiles).map((f) => f.default) : bulkSummaries;
-const factFiles = import.meta.glob<{ default: unknown }>("../../facts/*.json", { eager: true });
+const factFiles = import.meta.env.SSR ? import.meta.glob<{ default: unknown }>("../../facts/*.json", { eager: true }) : {};
 const charityFiles = import.meta.glob<{ default: unknown }>("../../charities/*.json", { eager: true });
 import owners from "../../owners.json";
 import { repo } from "./site";
 
-/** The facts files as written, for rebuilding a single model in the browser (see ModelView). */
-export const rawFacts = Object.values(factFiles).map((f) => f.default);
+/** The facts files, for rebuilding a single model in the browser (see ModelView): as written on the server;
+ * in the browser without their text (lib/browser-models.ts FACT_TEXT), which addFactText puts back. */
+export const rawFacts: unknown[] = import.meta.env.SSR ? Object.values(factFiles).map((f) => f.default) : browserFactFiles;
 
 export const lib = buildLibrary(
   [...own, ...bulk],
@@ -41,6 +43,16 @@ if (lib.errors.length) throw new Error(`Model errors (run npm run check):\n${lib
 // at the default assumptions, before any page reads a summary or an explainer.
 const proseErrors = renderLibraryProse(lib);
 if (proseErrors.length) throw new Error(`Placeholders that name nothing (docs/prose-numbers.md):\n${proseErrors.join("\n")}`);
+
+/** The facts' text the browser's copy leaves out (explainers, sources), merged back in by a model's page
+ * before its tree hydrates (lib/model-directive.ts fetches /fact-text.json). */
+export function addFactText(text: Record<string, Record<string, unknown>>) {
+  for (const [key, t] of Object.entries(text)) {
+    const f = lib.facts.get(key);
+    if (f) Object.assign(f, t);
+  }
+}
+if (!import.meta.env.SSR) (globalThis as { __charityevalsAddFactText?: typeof addFactText }).__charityevalsAddFactText = addFactText;
 
 /** The models the browser has only as summaries (src/lib/browser-models.ts); the same set on the server. */
 const summarisedSet = summarisedIds([...lib.models.values()], distributions);

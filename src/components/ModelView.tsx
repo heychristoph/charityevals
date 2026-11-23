@@ -20,7 +20,7 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
   // file before hydrating (client:model, lib/model-directive.ts).
   const raw = bulk ? fullRaw(id) : undefined;
   const model = useMemo(
-    () => (raw ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models }).models.get(id)! : lib.models.get(id)!),
+    () => (raw ? buildLibrary([raw], lib.assumptions, rawFacts, [...lib.charities.values()], [...lib.owners.values()], { models: lib.models, trusted: !import.meta.env.SSR }).models.get(id)! : lib.models.get(id)!),
     [id, raw],
   );
   const av = useAssumptionValues();

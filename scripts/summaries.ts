@@ -1,6 +1,7 @@
 // Writes generated/bulk-summaries.json: a compact stand-in for every bulk-imported model;
 // generated/browser-models.json: the models every page ships (src/lib/browser-models.ts): a stand-in for
-// each standalone model, variant families in full; and generated/usage.json: which models read each
+// each standalone model, variant families in full; generated/browser-facts.json: the shared facts without
+// their text (explainers and sources); and generated/usage.json: which models read each
 // shared fact (the browser's summaries fold facts away).
 //   npx tsx scripts/summaries.ts           write
 //   npx tsx scripts/summaries.ts --check   fail if the file is out of date (npm run check runs this)
@@ -17,11 +18,12 @@ import { simulate } from "../src/engine/montecarlo";
 import { sensitivity } from "../src/engine/sensitivity";
 import { isValueOfInformation } from "../src/engine/ranking";
 import { renderRaw } from "../src/engine/prose";
-import { summarisedIds } from "../src/lib/browser-models";
+import { browserFacts, summarisedIds } from "../src/lib/browser-models";
 
 const root = join(import.meta.dirname, "..");
 const out = join(root, "generated/bulk-summaries.json");
 const browserOut = join(root, "generated/browser-models.json");
+const factsOut = join(root, "generated/browser-facts.json");
 const usageOut = join(root, "generated/usage.json");
 const distributionsOut = join(root, "generated/distributions.json");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -155,7 +157,7 @@ function browserModels(built: ReturnType<typeof library>, dist: Record<string, D
 
 const built = library();
 const dist = distributions(built.lib);
-for (const [file, fresh] of [[out, summaries(built, dist)], [browserOut, browserModels(built, dist)], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
+for (const [file, fresh] of [[out, summaries(built, dist)], [browserOut, browserModels(built, dist)], [factsOut, browserFacts(walk(join(root, "facts")).sort().map(read))], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
       console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts${firstDiff ? `\n  first difference ${firstDiff}` : ""}`);
