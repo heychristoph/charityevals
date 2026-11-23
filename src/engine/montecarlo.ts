@@ -137,6 +137,11 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     else if (n.type === "call") n.args.forEach(complements);
   };
   for (const r of m.rows) complements(r.node);
+  // Overlapping pairs (2007 / 2023 and 2020 / 2023) are one series: one draw for all of it.
+  const seriesParent = new Map<string, string>();
+  const seriesRoot = (x: string): string => { const p = seriesParent.get(x) ?? x; if (p === x) return x; const r = seriesRoot(p); seriesParent.set(x, r); return r; };
+  for (const [a, b] of series) { const ra = seriesRoot(a), rb = seriesRoot(b); if (ra !== rb) seriesParent.set(rb, ra); }
+  const inSeries = new Set(series.flat());
   for (const r of m.rows) {
     const n = r.node;
     if (!(n?.type === "bin" && n.op === "-" && n.left.type === "num" && n.left.value === 1)) continue;
@@ -174,8 +179,7 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
         : percentShares.has(d.id) && !d.published && best > 0 && best < 100
         ? { key: d.id, draw: (g: number) => 100 / (1 + Math.exp(-(odds(best / 100) + g * (d.spread / Z90)))) }
         : spec(d, best, r?.interval, r?.shape, !!share, r?.format === "percent", shareInputs.has(d.id));
-      const pair = series.find(([a, b]) => a === d.id || b === d.id);
-      const group = r?.drawn_with ?? (pair && !d.published ? `series:${pair[0]}` : undefined);
+      const group = r?.drawn_with ?? (inSeries.has(d.id) && !d.published ? `series:${seriesRoot(d.id)}` : undefined);
       if (s) specs.push({ ...s, key: d.id, ...(group ? { group } : {}) });
     } else if (d.scope === "fact") {
       const f = lib.facts.get(d.id);
