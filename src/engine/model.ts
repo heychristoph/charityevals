@@ -1081,6 +1081,9 @@ export type Distribution = {
    * values move the range by the change in the best guess, and the risk setting doesn't move it. */
   additive?: boolean;
   at?: number;
+  /** For `additive`: the headline per unit of the model's own result at the defaults, so factors applied
+   * after the model (the distance weight, an estimate's age) scale the range as they scale every draw. */
+  conv?: number;
   /** For a model with single-event chances: the middle of the same draws with each chance counted at its
    * value instead of happening or not, as a multiple of the best guess. The risk factor divides by it, so
    * the shape around the best guess is the smooth one's and a long shot's yes/no sits on top. */
@@ -1130,8 +1133,12 @@ export function unstableFlag(lib: Library, m: ResolvedModel): { level: "warn"; s
 export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>): { low: number; high: number } | undefined {
   const d = lib.distributions?.[m.id];
   if (d && !d.unstable && d.additive && d.at !== undefined) {
-    const shift = central - d.at;
-    return { low: d.q[0] + shift, high: d.q[QUANTILES.length - 1] + shift };
+    // The model's own spread around its best guess, times what turns its result into the headline now
+    // against at the defaults: a factor after the model scales every draw, the reader's other values move
+    // the centre.
+    const native = m.output ? compute(lib, m, a)[m.output.row] : NaN;
+    const k = d.conv && Number.isFinite(native) && native !== 0 && Number.isFinite(central / native) ? central / native / d.conv : 1;
+    return { low: central + (d.q[0] - d.at) * k, high: central + (d.q[QUANTILES.length - 1] - d.at) * k };
   }
   if (!d || d.unstable || !(anchorOf(d) > 0)) return undefined;
   // The best guess from the headline: undefined where the risk factor is 0 (a long shot below its chance).

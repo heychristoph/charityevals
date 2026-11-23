@@ -235,6 +235,9 @@ export function sampleDraws(lib: Library, m: ResolvedModel, n = 1000): { inputs:
   return out;
 }
 
+/** What turns the model's own result into its headline at the plan's values. */
+const convOf = (p: Plan) => p.central / compute(p.lib, p.m, p.av, p.edits)[p.m.output!.row];
+
 /** `n` draws into `xs` (and `smooth`); returns how many draws had to be drawn again. */
 function drawInto(p: Plan, n: number, xs: number[], smooth: number[]): number {
   let redrawn = 0;
@@ -291,7 +294,7 @@ function quantiles(xs: number[]) {
   return QUANTILES.map((p) => round(at(p)));
 }
 
-function summarise(xs: number[], smooth: number[], draws: number, central: number, redrawn = 0): Distribution | undefined {
+function summarise(xs: number[], smooth: number[], draws: number, central: number, redrawn = 0, conv?: number): Distribution | undefined {
   const negative = central < 0;
   if (xs.length < draws / 2) return undefined;
   // Multiples of the best guess, in ascending order: the result's order unless the best guess is below
@@ -316,6 +319,7 @@ function summarise(xs: number[], smooth: number[], draws: number, central: numbe
       zero: round(xs.filter((x) => (negative ? x >= -1e-6 : x <= 1e-6)).length / xs.length),
       additive: true,
       at: Number(central.toPrecision(6)),
+      ...(conv !== undefined && Number.isFinite(conv) ? { conv: Number(conv.toPrecision(6)) } : {}),
       ...(unstable ? { unstable: true } : {}),
     };
   }
@@ -337,7 +341,7 @@ export function simulate(lib: Library, m: ResolvedModel, draws = 1000, av?: Reco
   if (!p) return undefined;
   const xs: number[] = [], smooth: number[] = [];
   const redrawn = drawInto(p, draws, xs, smooth);
-  return summarise(xs, smooth, draws, p.central, redrawn);
+  return summarise(xs, smooth, draws, p.central, redrawn, convOf(p));
 }
 
 /** The same, in batches that give the page back between them (a model page re-simulating after the
@@ -353,5 +357,5 @@ export async function simulateInSteps(lib: Library, m: ResolvedModel, av: Record
     redrawn += drawInto(p, Math.min(batch, draws - done), xs, smooth);
     await new Promise((r) => setTimeout(r, 0));
   }
-  return cancelled() ? undefined : summarise(xs, smooth, draws, p.central, redrawn);
+  return cancelled() ? undefined : summarise(xs, smooth, draws, p.central, redrawn, convOf(p));
 }
