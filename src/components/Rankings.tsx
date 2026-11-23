@@ -55,6 +55,14 @@ export function barSpan(low: number, high: number, central: number, barLow?: num
   return [lo, hi];
 }
 
+/** The range in the right-hand column: "0.4–12", or "−0.2 to 3" where a dash would read as a minus. */
+function rangeText(fig: Figure, low: number, high: number): string {
+  const a = Math.min(low, high), b = Math.max(low, high);
+  const [x, y] = [fig.format(a), fig.format(b)];
+  if (x === y) return x;
+  return a < 0 || b < 0 ? `${x} to ${y}` : `${x}–${y}`;
+}
+
 /** Vertical offset of each evaluator's dot on a row with several, so they never sit on each other. */
 const LANE = 11;
 
@@ -187,7 +195,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
               </div>
 
               <div className="r-value">
-                <span className="r-central num">{fig.format(r.central)}</span>
+                <span className="r-central num" title={`Best guess ${fig.format(r.central)}`}>{rangeText(fig, r.low, r.high)}</span>
               </div>
 
             </li>
