@@ -132,6 +132,10 @@ so the severity rests on a number.
   charities, a median, an average or peers (the lint's `comparison` code). Never tune toward a peer's
   or an evaluator's number: the fix is the rule, not the result.
 
+- **Sanity check**: read the model as its page shows it (figure, range, chance of no good or harm,
+  flags, gap to the evaluator). Anything a donor would find odd is a finding until you've traced it
+  to its cause, wherever that is: an input, a shared figure, or the site's own code.
+
 ## 6. Severity
 
 - **high**: wrong or unsupported number on a top-5 driver; unit error; double counting or a missing
@@ -143,7 +147,7 @@ so the severity rests on a number.
   charities, a median, an average or peers; any blocking preflight line.
 - **medium**: moves the result 10–25%; weak source for a top-10 driver; judgment without a reference
   class; range clearly too narrow or wide; a gap with peers (over 10× or under a tenth of the cause's
-  median) whose row isn't found; a sign convention broken; a write-up with a stale or non-live result, or a result
+  median) whose row isn't found; an odd result whose cause isn't found; a sign convention broken; a write-up with a stale or non-live result, or a result
   as a multiple of GiveDirectly.
 - **low**: wording, context, cosmetic structure, better sources.
 
