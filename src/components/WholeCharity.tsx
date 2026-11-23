@@ -2,7 +2,7 @@ import type React from "react";
 import { useMemo, useState } from "react";
 import { fullRaw, lib, modelUrl, rawFacts, summarised } from "../lib/data";
 import { buildLibrary, headline, type ResolvedModel } from "../engine/model";
-import { combine, declaredLocations, locationWeights, locationsOf } from "../engine/ranking";
+import { combine } from "../engine/ranking";
 import { clearEdits, editsFor, readEdits, setPageModels, useEdits } from "../lib/edit-state";
 import { pageEvaluator, useAssumptionValues, useResults } from "../lib/use-results";
 import { plainModelName } from "../lib/format";
@@ -63,9 +63,8 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
     const r = headline(lib, full, av, edits) / headline(lib, full, av);
     if (!Number.isFinite(r)) return evAll;
     const programs = evAll.programs.map((p) => (p === part ? { ...p, central: p.central * r } : p));
-    const w = programs.reduce((s, p) => s + (p.weight ?? 0), 0);
-    const central = evAll.basis === "weighted" && w > 0 ? programs.reduce((s, p) => s + (p.weight ?? 0) * p.central, 0) / w : evAll.central;
-    return { ...evAll, programs, central };
+    // Recombined the way every figure is (weights, else the median), so an edit moves either.
+    return { ...evAll, programs, central: combine(programs).central };
   }, [evAll, open, urlEdits, av]);
   // Every programme on the page keeps its own edits in the URL (edit-state: setPageModels); set while
   // rendering, as the headline's island may filter the edits before this one's effects run.
@@ -140,27 +139,6 @@ export default function WholeCharity({ id, children }: { id: string; children?: 
   );
 }
 
-/** A programme's funded locations, each with its share of the funding and its own figure, the way the
- * rankings weigh them (use-results.ts: programResult). */
-function locationParts(m: ResolvedModel, av: Record<string, number>): { label: string; share?: number; central: number }[] | undefined {
-  const family = locationsOf(lib, m);
-  const figure = (x: ResolvedModel) => headline(lib, x, av);
-  const declared = declaredLocations(lib.charities.get(m.charity), family);
-  const named = (x: ResolvedModel) => x.name.replace(lib.charities.get(m.charity)?.name ?? "", "").trim().replace(/^\((.*)\)$/, "$1") || x.name;
-  const parts = declared
-    ? declared.map((d) => ({ label: d.label, weight: d.weight, central: combine(d.models.map((x) => { const v = figure(x); return { central: v, low: v, high: v }; })).central }))
-    : (() => {
-        const ws = locationWeights(lib, family);
-        return ws ? family.map((x, i) => ({ label: named(x), weight: ws[i], central: figure(x) })) : undefined;
-      })();
-  if (!parts) return undefined;
-  const total = parts.reduce((t, x) => t + x.weight, 0);
-  return parts
-    .filter((x) => x.weight > 0)
-    .map((x) => ({ label: x.label, share: total > 0 ? x.weight / total : undefined, central: x.central }))
-    .sort((a, b) => (b.share ?? 0) - (a.share ?? 0));
-}
-
 /** On the main page of a charity whose one programme is funded in several locations: the
  * funding-weighted figure the rankings show for the whole charity, and each location's share and
  * figure, above the model of the location the page is about. */
@@ -171,7 +149,12 @@ export function Locations({ id }: { id: string }) {
   const fig = useFigure(lib, av);
   const ev = pageEvaluator(pages, model.charity, model.owner);
   const p = ev?.programs.length === 1 ? ev.programs[0] : undefined;
-  const locations = useMemo(() => (p?.locationBasis === "weighted" ? locationParts(p.result.model, av) : undefined), [p, av]);
+  // Each location's share and figure, as the charity's figure combines them (src/engine/ranking.ts programmeFigure).
+  const locations = useMemo(() => {
+    const parts = p?.locationBasis === "weighted" ? p.parts?.filter((x) => x.weight > 0) : undefined;
+    const total = parts?.reduce((t, x) => t + x.weight, 0) ?? 0;
+    return parts?.map((x) => ({ label: x.label, share: total > 0 ? x.weight / total : undefined, central: x.central })).sort((a, b) => (b.share ?? 0) - (a.share ?? 0));
+  }, [p]);
   if (!ev || !locations) return null;
   return (
     <div className="whole whole-locations" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>

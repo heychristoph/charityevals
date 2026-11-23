@@ -6,6 +6,7 @@ import { assumptionValues, comparable, headline, modelsOf, type ResolvedModel } 
 import { formatYears, plainModelName } from "./format";
 import { publisher, repo } from "./site";
 import { licenceOf } from "./licence";
+import { charityHeadline } from "../engine/figures";
 
 export const SITE = "https://charityevals.org";
 export const SITE_NAME = "charityevals";
@@ -49,6 +50,15 @@ export function defaultYears(m: ResolvedModel): number | undefined {
   const v = headline(lib, m, av);
   // Below zero too: a net harm shows as one (docs/normalization.md 2.21).
   return Number.isFinite(v) && v !== 0 ? v : undefined;
+}
+
+/** A charity's figure as its main page leads with it (every programme, each over its locations,
+ * src/engine/figures.ts), default assumptions, our view; undefined where nothing converts. */
+export function charityDefaultYears(charity: string): number | undefined {
+  const main = primaryOf(lib, charity);
+  if (!main || !comparable(lib, main)) return undefined;
+  const v = charityHeadline(lib, charity, assumptionValues(lib.assumptions));
+  return v !== undefined && Number.isFinite(v) && v !== 0 ? v : undefined;
 }
 
 const spaced = (s: string) => s.replace(/\s+/g, " ").trim();
@@ -98,7 +108,8 @@ export function modelMeta(m: ResolvedModel) {
   if (primary && evaluators > 1) candidates.shift();
   const title = candidates.find((t) => t.length <= TITLE_MAX) ?? candidates.at(-1)!;
 
-  const x = defaultYears(m);
+  // A charity's main page leads with the charity's figure; any other model page with its model's.
+  const x = primary ? charityDefaultYears(charity.id) : defaultYears(m);
   const unit = m.output ? lib.assumptions.units[m.output.unit]?.label : undefined;
   const when = monthYear(m.source?.published);
   const by = owner.kind === "charityevals" ? "charityevals' own model" : `${owner.name}'s model${when ? ` (${when})` : ""}`;

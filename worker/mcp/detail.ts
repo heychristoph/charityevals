@@ -5,7 +5,7 @@
 import { compute, headline, pickValue, usedAssumptions, type Library, type ResolvedModel } from "../../src/engine/model";
 import { renderText } from "../../src/engine/prose";
 import { sensitivity, type Swing } from "../../src/engine/sensitivity";
-import { cheapFlags } from "./figures";
+import { caveats } from "./figures";
 import { YEARS, type Catalogue, type Figures } from "./catalogue";
 import { abs, charityItem, figure, licence, modelLicence, modelPath, ownerName, r3, short, type Json } from "./items";
 import { DEFAULTS, settable } from "./values";
@@ -65,7 +65,7 @@ function modelDetail(lib: Library, cat: Catalogue, figs: Figures, m: ResolvedMod
     at: "default values",
     ...(evaluatorView !== undefined ? { evaluator_view: { result: evaluatorView, note: "The evaluator's model as published, at its own values and conversions, in the same unit." } } : {}),
     summary: rendered(lib, m, (x) => x.summary),
-    caveats: cheapFlags(lib, m),
+    caveats: caveats(lib, m, av),
     top_drivers: top.map((x) => driver(lib, m, x, vals, av)),
     assumptions_used: usedAssumptions(lib, m).filter((id) => sets.has(id)),
     ...(m.source ? { source: { publisher: m.source.publisher, title: m.source.title, url: m.source.url, ...(m.source.published ? { published: m.source.published } : {}) } } : {}),
@@ -73,6 +73,8 @@ function modelDetail(lib: Library, cat: Catalogue, figs: Figures, m: ResolvedMod
     history: abs(`${modelPath(cat, m.id)}/history`),
     full_model: abs(`/data/models/${m.id}.json`),
     licence: licence(modelLicence(cat, m.id)),
+    // As the model page and /data/models/<id>.json show it: the evaluator's permission beside its licence.
+    ...(lib.owners.get(m.owner)?.permission ? { permission: lib.owners.get(m.owner)!.permission } : {}),
   };
 }
 

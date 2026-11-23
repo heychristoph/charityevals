@@ -13,7 +13,7 @@
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Distribution, type JointEnds, type Library } from "../src/engine/model";
-import { simulate } from "../src/engine/montecarlo";
+import { storedDistribution } from "../src/engine/figures";
 import { sensitivity } from "../src/engine/sensitivity";
 import { isValueOfInformation } from "../src/engine/ranking";
 import { renderRaw } from "../src/engine/prose";
@@ -129,19 +129,9 @@ let firstDiff = "";
  * ranges read (docs/normalization.md 2.18). Seeded by model id, so the file only changes when a model does. */
 export function distributions(lib: Library): Record<string, Distribution> {
   const out: Record<string, Distribution> = {};
-  const defaults = assumptionValues(lib.assumptions, {});
   for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id))) {
-    if (!comparable(lib, m)) continue;
-    const d = simulate(lib, m);
-    if (!d) continue;
-    const s = sensitivity(lib, m, defaults);
-    // An unstable model's range is the sensitivity's joint bounds: which end each input takes in each.
-    const ends = (wantHigh: boolean) => {
-      const e: JointEnds = { inputs: {}, assumptions: {} };
-      for (const w of s.swings) (w.scope === "assumption" ? e.assumptions : e.inputs)[w.id] = (w.atHigh >= w.atLow) === wantHigh ? w.high : w.low;
-      return e;
-    };
-    out[m.id] = { ...d, judgment: Math.round(s.judgmentShare * 100) / 100, points: s.pointInputs.length, ...(d.unstable ? { joint: { low: ends(false), high: ends(true) } } : {}) };
+    const d = storedDistribution(lib, m);
+    if (d) out[m.id] = d;
   }
   return out;
 }

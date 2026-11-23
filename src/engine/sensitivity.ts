@@ -11,6 +11,7 @@ import {
   usedAssumptions,
   usedFacts,
   viewAssumptions,
+  estimateAge,
   type Library,
   type ResolvedModel,
   type View,
@@ -38,8 +39,6 @@ export type Sensitivity = {
   jointLow: number;
   jointHigh: number;
   swings: Swing[];
-  /** Share of total log swing that comes from judgment inputs and assumptions. */
-  judgmentShare: number;
   /** Inputs on the result's path that have only a point value. */
   pointInputs: string[];
 };
@@ -109,19 +108,11 @@ export function sensitivity(lib: Library, m: ResolvedModel, av: Record<string, n
     return headline(lib, mm, a, inputs, view);
   };
 
-  // A swing through zero has no log measure: then every swing is measured in the result's own units.
-  const measure = swings.some((s) => s.logSwing === Infinity) ? width : (s: Swing) => s.logSwing;
-  const total = swings.reduce((t, s) => t + measure(s), 0);
-  const judgment = swings
-    .filter((s) => s.kind === "judgment" || s.scope === "assumption")
-    .reduce((t, s) => t + measure(s), 0);
-
   return {
     central,
     jointLow: joint(false),
     jointHigh: joint(true),
     swings: swings.filter((s) => s.logSwing > 1e-9),
-    judgmentShare: total > 0 ? judgment / total : 0,
     pointInputs,
   };
 }
@@ -148,7 +139,8 @@ export function rowsFeeding(m: ResolvedModel): Set<string> {
 
 export type Flag = { level: "warn" | "info"; short: string; text: string };
 
-const STALE_MONTHS = 18;
+/** Older than this, an evaluator's analysis carries the stale-source caveat. */
+export const STALE_YEARS = 1.5;
 
 /** One significant figure: a caveat states a size, not a measurement. */
 const roughly = (x: number) => Number(x.toPrecision(1)).toLocaleString("en-US");
@@ -156,21 +148,26 @@ const roughly = (x: number) => Number(x.toPrecision(1)).toLocaleString("en-US");
 /** The caveat every purely theoretical model carries (schema: `theoretical`), first in its list. */
 export const THEORETICAL_TEXT = "Purely theoretical: an estimate of the idea, written before the charity existed, not of the charity's own results";
 
-export function flags(m: ResolvedModel, s: Sensitivity, today = new Date()): Flag[] {
+/** What the caveats read: the range shown, the share of the uncertainty from judgment calls and shared
+ * assumptions (the page's breakdown, src/engine/uncertainty.ts), and how many inputs on the result's path
+ * have no published range. src/engine/figures.ts `modelFlags` is the one caller the pages use. */
+export type FlagInputs = { low: number; high: number; judgment: number; points: number };
+
+export function flags(lib: Library, m: ResolvedModel, f: FlagInputs): Flag[] {
   const out: Flag[] = [];
   if (m.theoretical) out.push({ level: "warn", short: "purely theoretical", text: THEORETICAL_TEXT });
   // A range below zero (net harm) spans the ratio of its ends' sizes; one through zero runs from harm to good.
-  const lo = Math.min(s.jointLow, s.jointHigh), hi = Math.max(s.jointLow, s.jointHigh);
+  const lo = Math.min(f.low, f.high), hi = Math.max(f.low, f.high);
   const spread = hi < 0 ? lo / hi : hi / lo;
   if (lo < 0 && hi > 0) out.push({ level: "warn", short: "wide range", text: "The plausible range runs from harm to good" });
   else if (spread > 100) out.push({ level: "warn", short: "wide range", text: `The plausible range spans about ${roughly(spread)}×` });
-  if (s.judgmentShare > 0.5) out.push({ level: "warn", short: "mostly judgment", text: `About ${Math.round(s.judgmentShare * 10) * 10}% of the uncertainty comes from judgment calls and shared assumptions` });
-  if (s.pointInputs.length) out.push({ level: "info", short: "point inputs", text: `${s.pointInputs.length} inputs on the result's path have no published range, so this range leaves them out` });
-  const published = m.source?.published ? new Date(m.source.published) : undefined;
-  if (published) {
-    const months = (today.getFullYear() - published.getFullYear()) * 12 + today.getMonth() - published.getMonth();
-    const age = months < 36 ? `about ${Math.round(months / 12 * 2) / 2} years` : `about ${Math.round(months / 12)} years`;
-    if (months > STALE_MONTHS) out.push({ level: "warn", short: "stale source", text: `The source analysis is ${age} old` });
+  if (f.judgment > 0.5) out.push({ level: "warn", short: "mostly judgment", text: `About ${Math.round(f.judgment * 10) * 10}% of the uncertainty comes from judgment calls and shared assumptions` });
+  if (f.points) out.push({ level: "info", short: "point inputs", text: `${f.points} inputs on the result's path have no published range; the range gives them a default spread` });
+  // Counted to the date the site's data is counted to, as the age discount is (model.ts estimateAge).
+  const years = estimateAge(lib, m);
+  if (years !== undefined && years > STALE_YEARS) {
+    const age = years < 3 ? `about ${Math.round(years * 2) / 2} years` : `about ${Math.round(years)} years`;
+    out.push({ level: "warn", short: "stale source", text: `The source analysis is ${age} old` });
   }
   return out;
 }

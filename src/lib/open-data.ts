@@ -5,6 +5,7 @@
 import { lib, modelUrl, primaryOf, rankable, rawFacts } from "./data";
 import { assumptionValues, comparable, headline, plausibleRange, compute, type ResolvedModel } from "../engine/model";
 import { sensitivity, type Swing } from "../engine/sensitivity";
+import { modelRange } from "../engine/figures";
 import { licenceOf, OWN_LICENCE } from "./licence";
 import { abs } from "./seo";
 import { formatYears } from "./format";
@@ -28,14 +29,14 @@ export function unitOf(m: ResolvedModel): string {
 export type Figure = { headline: number; low: number; high: number; drivers: Swing[] };
 
 const figures = new Map<string, Figure>();
-/** A model's figure as its page shows it at the default assumptions: the headline, the plausible range
- * (its simulated 5% to 95%, else every ranged input at its end together) and what drives it most. */
+/** A model's figure as its page shows it at the default assumptions: the headline, its range
+ * (src/engine/figures.ts modelRange) and what drives it most. */
 export function figureOf(m: ResolvedModel): Figure {
   let f = figures.get(m.id);
   if (!f) {
     const av = assumptionValues(lib.assumptions);
     const s = sensitivity(lib, m, av);
-    const range = plausibleRange(lib, m, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
+    const range = modelRange(lib, m, s.central, av);
     figures.set(m.id, (f = { headline: s.central, low: range.low, high: range.high, drivers: s.swings.slice(0, 5) }));
   }
   return f;

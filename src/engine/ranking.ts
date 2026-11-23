@@ -256,19 +256,31 @@ export function evaluatorFigure(lib: Library, owner: string, charity: string, fi
   return partsFigure(lib, charity, planOf(lib, owner, charity)?.parts, figure);
 }
 
+/** One programme's figure over its locations, the way every figure on the site combines them: declared
+ * funding (the charity's `locations`), else the sheet's own grant sizes, else the model itself. `parts`
+ * lists each location with its share of the weight, for pages that show the sum. */
+export type LocationShare = Figure & { label: string; weight: number };
+export type ProgrammeCombination = Figure & { basis: Basis; locations: number; locationBasis: Basis; parts?: LocationShare[] };
+export function programmeFigure(lib: Library, c: Charity | undefined, m: ResolvedModel, figure: (m: ResolvedModel) => Figure): ProgrammeCombination {
+  const family = locationsOf(lib, m);
+  const declared = declaredLocations(c, family);
+  if (declared) {
+    const parts = declared.map((d) => ({ label: d.label, weight: d.weight, ...combine(d.models.map(figure)) }));
+    return { ...combine(parts), locations: family.length, locationBasis: "weighted", parts };
+  }
+  const weights = locationWeights(lib, family);
+  if (!weights) return { ...combine([figure(m)]), locations: family.length, locationBasis: "single" };
+  const named = (x: ResolvedModel) => x.name.replace(c?.name ?? "", "").trim().replace(/^\((.*)\)$/, "$1") || x.name;
+  const parts = family.map((x, i) => ({ label: named(x), weight: weights[i], ...figure(x) }));
+  return { ...combine(parts), locations: family.length, locationBasis: "weighted", parts };
+}
+
 /** Programmes' figure, the way the rankings combine them (evaluatorFigure). NaN without programmes. */
 function partsFigure(lib: Library, charity: string, parts: PlanPart[] | undefined, figure: (m: ResolvedModel) => number): number {
   const c = lib.charities.get(charity);
   if (!c || !parts?.length) return NaN;
   const one = (m: ResolvedModel): Figure => { const v = figure(m); return { central: v, low: v, high: v }; };
-  return combine(parts.map((p) => {
-    const family = locationsOf(lib, p.model);
-    const declared = declaredLocations(c, family);
-    if (declared) return { ...combineLocations(declared, one), weight: p.weight };
-    const weights = locationWeights(lib, family);
-    if (!weights) return { ...one(p.model), weight: p.weight };
-    return { ...combine(family.map((x, i) => ({ ...one(x), weight: weights[i] }))), weight: p.weight };
-  })).central;
+  return combine(parts.map((p) => ({ ...programmeFigure(lib, c, p.model, one), weight: p.weight }))).central;
 }
 
 const causes = new WeakMap<Library, Map<string, [owner: string, charity: string][]>>();

@@ -53,8 +53,8 @@ describe("net harm", () => {
     const s = sensitivity(lib, m, av);
     expect(s.swings.every((w) => Number.isFinite(w.logSwing))).toBe(true);
     expect(s.swings[0].id).toBe("b");
-    expect(flags(m, { ...s, jointLow: -1, jointHigh: 2 }).map((f) => f.text)).toContain("The plausible range runs from harm to good");
-    expect(flags(m, { ...s, jointLow: -1000, jointHigh: -1 }).map((f) => f.short)).toContain("wide range");
+    expect(flags(lib, m, { low: -1, high: 2, judgment: 0, points: 0 }).map((f) => f.text)).toContain("The plausible range runs from harm to good");
+    expect(flags(lib, m, { low: -1000, high: -1, judgment: 0, points: 0 }).map((f) => f.short)).toContain("wide range");
   });
   it("shows the figure with a minus sign, before any prefix", () => {
     expect(formatYears(-0.0023)).toBe("−0.0023");
