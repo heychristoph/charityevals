@@ -1,6 +1,6 @@
 # Audit: ambitious-impact-charityevals, round 18 (scoped verification)
 Result: 6.489 years of healthy life per 1,000 dollars at defaults (r17: 8.213; 6.203 after the five new spending records, 6.489 after rule spending-no-fallback); combined range and cause median not re-checked in this scoped round. Verdict: pass.
-Model-sha: 3693e4baab7ade49971c9cfe941472455029b56974cc28cc1b0b1fddaab5c569
+Model-sha: a550f6a77831989c4d4ddc542067e504fe3e94fcd986f04615b82290c077bf09
 Rules: 0.3.13
 Scope: spending recorded from evaluators' costs; no guessed weights (rule spending-no-fallback)
 Preflight: pass. `npx tsx scripts/preflight.ts ambitious-impact-charityevals` prints "passes".
@@ -31,3 +31,5 @@ Spiro, Ansh, Healthy Futures and Fortify Health: the model rows named in each so
 Unchanged from round 17, except that the weights are now all recorded spending. The result depends mostly on the figures of Suvita, Family Empowerment Media, Lafiya Nigeria and Ansh on the rankings, and on Fortify Health's large weight at a low figure.
 
 Verdict: pass (no high or medium remains).
+
+Re-stamped (23 Nov 2026), rule cause-portfolios: Money to a cause with no named recipient (#cause:x) is valued at the cause's portfolio: named charities weighted by a published fund's grants (assumptions portfolios), not the average of the charities on the site, so adding a charity moves no other figure (normalization 2.8). Mechanical: headline 6.49 → 6.49 (+0.00033%), 8 rows changed, against the tree before the rule.

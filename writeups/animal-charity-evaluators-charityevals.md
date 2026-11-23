@@ -18,7 +18,7 @@ The model starts from the $13.5 million of giving ACE traced in the year, plus a
 
 Each dollar moved is valued at ACE's Recommended Charities, read live from their figures on this site. They are weighted by what its Recommended Charity Fund paid each in the year. Eight have a figure on the rankings. The others, and the Movement Grants' small groups, take their average. Those figures are ACE's own evaluations, because that is what the rankings show, so this model is not an independent check of ACE's choices.
 
-Half of donors' money counts as new giving. The rest, and all of the grantmakers' money, counts only for what it gains over an ordinary animal charity. By the site's rule for an organisation outside global health, an ordinary animal charity is to the animal charities on the rankings as GiveDirectly is to the global-health ones: about 75% of their average.
+Half of donors' money counts as new giving. The rest, and all of the grantmakers' money, counts only for what it gains over an ordinary animal charity. By the site's rule for an organisation outside global health, an ordinary animal charity is to the animal portfolio (the charities ACE's Recommended Charity Fund paid in 2026, weighted by its grants) as GiveDirectly is to the global-health one.
 
 A further dollar is assumed to do 30% as much as ACE's average dollar so far.
 

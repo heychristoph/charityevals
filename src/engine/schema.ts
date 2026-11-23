@@ -423,6 +423,17 @@ export type Facts = z.infer<typeof Facts>;
 
 export const AssumptionGroup = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional() }).strict();
 
+/** Where money given to a cause goes when its recipients aren't named (`#cause:x`): named charities with
+ * weights from a published allocation of real money (a fund's grants), so the figure moves with the
+ * reader's values but never with which other charities are on the site. docs/normalization.md 2.8. */
+export const Portfolio = z
+  .object({
+    source: z.object({ title: z.string(), url: z.string().url(), published: z.string().optional() }).strict(),
+    note: z.string().optional(),
+    members: z.array(z.object({ charity: z.string(), weight: z.number().positive() }).strict()).min(1),
+  })
+  .strict();
+
 export const Assumptions = z
   .object({
     groups: z.array(AssumptionGroup),
@@ -431,6 +442,7 @@ export const Assumptions = z
      * the defaults. A reader who moves a slider from a set is on Custom. */
     presets: z.array(z.object({ id: z.string(), label: z.string(), about: z.string(), values: z.record(z.string(), z.number()) }).strict()).optional(),
     units: z.record(z.string(), Unit),
+    portfolios: z.record(z.string(), Portfolio).optional(),
     common: z.object({
       unit: z.string(),
       benchmark: z.string(),

@@ -3,7 +3,7 @@
 // source states it (`interval`, `shape`; a 90% log-normal by default), the model computed for each
 // draw. Run at build time (scripts/summaries.ts → generated/distributions.json); the browser only scales
 // the stored shape with the reader's values, so the risk slider and the ranges cost nothing to move.
-import { normInv } from "./expr";
+import { normInv, type Node } from "./expr";
 import { QUANTILES, RISK_OFF, RISK_QUANTILE, assumptionValues, compute, headline, headlineAndRows, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
 import { uncertainty, type Driver } from "./uncertainty";
 
@@ -114,6 +114,16 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
   // 100%) is drawn again. A published range keeps its tails: 1 minus a relative risk whose interval runs
   // past 1 is possible harm, not an impossible share.
   const bounds: string[] = [], shareInputs = new Set<string>();
+  // An input the model takes 1 minus anywhere (`1 - x`, or inside `1 - (1 - x) ^ (1/52)`) is a share.
+  const complements = (n: Node | undefined): void => {
+    if (!n) return;
+    if (n.type === "bin") {
+      if (n.op === "-" && n.left.type === "num" && n.left.value === 1 && n.right.type === "ref" && n.right.scope === "row") shareInputs.add(n.right.name);
+      complements(n.left); complements(n.right);
+    } else if (n.type === "neg") complements(n.arg);
+    else if (n.type === "call") n.args.forEach(complements);
+  };
+  for (const r of m.rows) complements(r.node);
   for (const r of m.rows) {
     const n = r.node;
     if (!(n?.type === "bin" && n.op === "-" && n.left.type === "num" && n.left.value === 1)) continue;
@@ -263,7 +273,8 @@ function quantiles(xs: number[]) {
   return QUANTILES.map((p) => round(at(p)));
 }
 
-function summarise(xs: number[], smooth: number[], draws: number, negative = false, redrawn = 0): Distribution | undefined {
+function summarise(xs: number[], smooth: number[], draws: number, central: number, redrawn = 0): Distribution | undefined {
+  const negative = central < 0;
   if (xs.length < draws / 2) return undefined;
   // Multiples of the best guess, in ascending order: the result's order unless the best guess is below
   // zero (net harm, docs/normalization.md 2.21), where the largest multiple is the most harm. Stored in the
@@ -273,9 +284,23 @@ function summarise(xs: number[], smooth: number[], draws: number, negative = fal
   // Reliability is judged on the smooth draws: a long shot's yes/no is meant to swing.
   const s = smooth.length ? quantiles(smooth) : up;
   const mid = s[9], lo = s[0], hi = s[s.length - 1];
-  // Broken, not just wide: the middle far from the best guess, or an end more than 100× from it (either
-  // way, harm included: a grant can do worse than the money's alternative).
-  const unstable = !(mid > 1 / 3 && mid < 3) || hi / mid > 100 || (lo > 0 ? mid / lo > 100 : -lo / mid > 100) || redrawn / (redrawn + draws) > MAX_IMPOSSIBLE;
+  // Broken: most of what the default spreads would draw is impossible. Wide is not broken (the wide-range
+  // caveat says so), and a middle far from the best guess is a result near zero (a net of large opposite
+  // effects): its range is stored in the result's own units, the reader's values moving it by the change in
+  // the best guess, since multiples of a best guess near zero mean nothing.
+  const unstable = redrawn / (redrawn + draws) > MAX_IMPOSSIBLE;
+  void lo; void hi;
+  if (!(mid > 1 / 3 && mid < 3)) {
+    const abs = quantiles(xs.map((x) => x * central));
+    return {
+      q: abs,
+      mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
+      zero: round(xs.filter((x) => (negative ? x >= -1e-6 : x <= 1e-6)).length / xs.length),
+      additive: true,
+      at: Number(central.toPrecision(6)),
+      ...(unstable ? { unstable: true } : {}),
+    };
+  }
   return {
     q,
     mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
@@ -294,7 +319,7 @@ export function simulate(lib: Library, m: ResolvedModel, draws = 1000, av?: Reco
   if (!p) return undefined;
   const xs: number[] = [], smooth: number[] = [];
   const redrawn = drawInto(p, draws, xs, smooth);
-  return summarise(xs, smooth, draws, p.central < 0, redrawn);
+  return summarise(xs, smooth, draws, p.central, redrawn);
 }
 
 /** The same, in batches that give the page back between them (a model page re-simulating after the
@@ -310,5 +335,5 @@ export async function simulateInSteps(lib: Library, m: ResolvedModel, av: Record
     redrawn += drawInto(p, Math.min(batch, draws - done), xs, smooth);
     await new Promise((r) => setTimeout(r, 0));
   }
-  return cancelled() ? undefined : summarise(xs, smooth, draws, p.central < 0, redrawn);
+  return cancelled() ? undefined : summarise(xs, smooth, draws, p.central, redrawn);
 }

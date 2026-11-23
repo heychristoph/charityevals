@@ -57,7 +57,11 @@ describe("net harm", () => {
     expect(flags(lib, m, { low: -1000, high: -1, judgment: 0, points: 0 }).map((f) => f.short)).toContain("wide range");
   });
   it("shows the figure with a minus sign, before any prefix", () => {
-    expect(formatYears(-0.0023)).toBe("−0.0023");
+    expect(formatYears(-0.23)).toBe("−0.23");
+    // Below a tenth either way, the site's precision ends.
+    expect(formatYears(-0.0023)).toBe("> −0.1");
+    expect(formatYears(0.0023)).toBe("<0.1");
+    expect(figureIn(METRICS.find((x) => x.id === "dollars")!, 0.001).format(-3)).toBe("> −$0.1");
     expect(formatYears(-250)).toBe("−250");
     const dollars = METRICS.find((x) => x.id === "dollars")!;
     expect(figureIn(dollars, 2).format(-3)).toBe("−$6.0");

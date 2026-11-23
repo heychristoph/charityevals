@@ -23,8 +23,8 @@ Each career change is valued by the site's one rule for careers. A person who mo
 
 The value of a dollar of work depends on the cause. A donation now buys today's careers, and since 2025 those are mostly in AI. 80,000 Hours publishes no split by cause, so the split is our judgment, anchored on its job board. Since the 2025 change, 88% of users click only or mostly AI roles and 4% a balance. AI safety takes 90%, biosecurity and nuclear security 6%, global health 2% and animal welfare 0.5%. The remaining 1.5% goes to community building and research on priorities, and is valued at the weighted average of the four. Each cause is read live at the figures the rankings show:
 
-- **AI safety**: the AI charities on the rankings, weighted equally.
-- **Biosecurity and nuclear security**: the biosecurity and the nuclear charities on the rankings, each area weighted equally and its charities too.
+- **AI safety**: the AI portfolio, the charities Coefficient Giving's AI funds paid, weighted by their grants.
+- **Biosecurity and nuclear security**: the biosecurity portfolio (Coefficient Giving's biosecurity funds) and the nuclear one (the Carnegie Corporation's 2025 grants), each area weighted equally, its charities by their grants.
 - **Global health**: GiveWell's top charities.
 - **Animal welfare**: The Humane League, at ACE's figure.
 
@@ -45,7 +45,7 @@ The value of a dollar of work depends on the cause. A donation now buys today's 
 - **The AI sliders**: how likely an AI catastrophe is, and how many years a win counts, move the AI models and so this one.
 - **Pay given up, years stayed and the share caused**: each moves the result threefold to sixfold across its range.
 - **The next dollar**: 15% to 75% moves it fivefold.
-- **The split by cause**: a career in biosecurity or global health counts far more than one in AI safety. Most of the result comes from the tenth of careers outside AI; biosecurity and nuclear careers alone carry about half of it.
+- **The split by cause**: a career in biosecurity or global health counts far more than one in AI safety. About two fifths of the result comes from global health careers, two fifths from AI and a fifth from biosecurity and nuclear.
 
 ### Biggest uncertainties
 
