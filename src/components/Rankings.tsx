@@ -55,13 +55,10 @@ export function barSpan(low: number, high: number, central: number, barLow?: num
   return [lo, hi];
 }
 
-/** The range in the right-hand column: "0.4–12", or "−0.2 to 3" where a dash would read as a minus.
- * Screen readers get " to " throughout, so "0.4–12" isn't read as a subtraction. */
-function rangeText(fig: Figure, low: number, high: number, dash = "–"): string {
-  const a = Math.min(low, high), b = Math.max(low, high);
-  const [x, y] = [fig.format(a), fig.format(b)];
-  if (x === y) return x;
-  return a < 0 || b < 0 ? `${x} to ${y}` : `${x}${dash}${y}`;
+/** The range in the right-hand column: "0.4 to 12", one way for every range. */
+function rangeText(fig: Figure, low: number, high: number): string {
+  const [x, y] = [fig.format(Math.min(low, high)), fig.format(Math.max(low, high))];
+  return x === y ? x : `${x} to ${y}`;
 }
 
 /** Vertical offset of each evaluator's dot on a row with several, so they never sit on each other. */
@@ -200,7 +197,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
               </div>
 
               <div className="r-value">
-                <span className="r-central num" title={`Best guess ${fig.format(r.central)}`} aria-label={`${rangeText(fig, r.low, r.high, " to ")}, best guess ${fig.format(r.central)}`}>{rangeText(fig, r.low, r.high)}</span>
+                <span className="r-central num" title={`Best guess ${fig.format(r.central)}`} aria-label={`${rangeText(fig, r.low, r.high)}, best guess ${fig.format(r.central)}`}>{rangeText(fig, r.low, r.high)}</span>
               </div>
 
             </li>
