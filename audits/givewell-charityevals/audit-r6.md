@@ -15,5 +15,7 @@ Only the overlap change of docs/normalization.md 2.24: rows `effective_giving_th
 None.
 
 Verdict: pass
-Model-sha: 94c0f41c46ba1acf140e2ebd5be96205c161b262e5a1d2bbdcc01f277087389f
+Model-sha: 08ac4220df2e8fd1059aaf4f12b7eaeb080e62bd8b6c4c54a9708e71eecc722d
 Rules: 0.3.13
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

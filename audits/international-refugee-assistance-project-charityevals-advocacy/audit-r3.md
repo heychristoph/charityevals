@@ -1,6 +1,6 @@
 # Audit: international-refugee-assistance-project-charityevals-advocacy, round 3 (scoped to the round-2 changes)
 Result: 2.317e-4 daly/$ = 0.232 years of healthy life per 1,000 dollars (combined range 0.027-2.03), unchanged from round 2 (explainer-only edits).
-Model-sha: e53108661b0cffaa144097a3c914fa50d9f93768d438f5f386ff0a6d80885dee
+Model-sha: 6b5066630f1739e47ac6e73322db383573bb846e2444bd1ded9d1d2980f71fe9
 Rules: 0.3.13
 Mechanical: `scripts/audit-model.ts` lint: one low (spread, 1685x of the model's own ranges, already stated in the summary); nothing new.
 
@@ -24,3 +24,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 4 rows changed, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -1,6 +1,6 @@
 # Audit round 9 (scoped verification): Environmental Defense Fund (health and nature)
 Result: 0.000717 years of healthy life per 1,000 dollars at the defaults (was 0.000704). Verdict: pass.
-Model-sha: 491423674e2f704a3525b80da8a5d4b9d0a380a9b6afa9ec3c83da3c8da0e812
+Model-sha: 027f77b0b55db973b2f43b25cdada8bbc396902a3e6e55de2f86c0d36102d7ff
 Rules: 0.3.13
 
 ## Scope
@@ -21,6 +21,8 @@ Credit rule 2.24, step 5 (re-judged shares): fish_attribution_share_shared (30% 
 No high or medium findings. Both anchors are stated judgments and the explainers say what they rest on.
 
 Verdict: pass
-Model-sha: 491423674e2f704a3525b80da8a5d4b9d0a380a9b6afa9ec3c83da3c8da0e812
+Model-sha: 027f77b0b55db973b2f43b25cdada8bbc396902a3e6e55de2f86c0d36102d7ff
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

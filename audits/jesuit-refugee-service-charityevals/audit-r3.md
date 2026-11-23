@@ -1,6 +1,6 @@
 # Audit: jesuit-refugee-service-charityevals, round 3 (scoped verification)
 Result: 3.696e-4 daly/$ = 0.370 years of healthy life per 1,000 dollars (combined range 0.028–4.9), unchanged from round 2. Verdict: **PASS** (no findings).
-Model-sha: 170377e0b1089291d2aba81700faede4dd91cc96126f71b00b1578d2cac0ce33
+Model-sha: 94a97d10a34ab2c36294fa8ad746081590b5c2f4f454d1a0f5b624a5a365a107
 Rules: 0.3.13
 Scope: the text change since round 2 only (the two page citations); nothing else re-verified.
 Mechanical: `audit-model` lint 0 high / 0 medium / 1 low (spread 2,739× on the model's own ranges; the summary says so), result identical to round 2. A field-by-field comparison of the JSON against `HEAD~1` shows exactly two differences, both explainer text: `edu_spend` (row 0) and `edu_access_share` (row 47). The `beneficiaries` block was only re-indented; its values are identical.
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against d150f0b2.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

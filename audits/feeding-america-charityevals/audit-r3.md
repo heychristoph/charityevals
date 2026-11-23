@@ -23,7 +23,7 @@ Round 2 findings: all low or resolved; the round-2 low about `fuel_share` having
 None.
 
 Verdict: pass
-Model-sha: e5bc38dfbdf6c4a4b5ae9fa7b81c914826945ed8712b86a228209d9b7ca7d441
+Model-sha: 13d2cce561584273ca139cfa3f5a204a9ef9bb5502681301a5f0b80b511f5e3c
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0183 → 0.0169.
@@ -42,3 +42,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the typed text or pointed at the evaluator view, and typed results in the summary made placeholders or recomputed at the 30% mobiliser share (no value moves). Mechanical: headline unchanged, against bc9e3979.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -17,9 +17,11 @@ Findings:
 | 1 | low | od_centres_cost_per_year | Source note says funds are "city, state and private"; the CBS article also says the city's contracts are about $17m of the $19m, so the city funds most of it. The rooms' share may be city-paid. No effect on the formula (cost is valued regardless of payer). | Optional: add "the city funds most of it" to the source note. |
 
 Verdict: pass
-Model-sha: 8f0cd3705bffacf35093909c69cd28562eececf2756575eed1aeabf5bb1f6952
+Model-sha: fb5443fa2655413eadfcef239a6d1d97972373910cac76908cd67da0234f8167
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
 
 Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline -0.004563 → -0.001369 (+70%), 26 rows changed, against bc9e3979.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

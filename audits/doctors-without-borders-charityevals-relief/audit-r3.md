@@ -15,7 +15,7 @@ Previous round:
 (none)
 
 Verdict: pass
-Model-sha: 3c5cbb8a4b3df5b2b695ad0fc8ec1c2772e5d02a80f32372c835719af2e178ad
+Model-sha: 470cb70efdc98118b2d744d8469870f2cf9ddc49ccaa3c77ae1dde217ecd9559
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -29,3 +29,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

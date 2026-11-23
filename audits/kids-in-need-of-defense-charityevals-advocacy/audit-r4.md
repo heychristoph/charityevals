@@ -14,5 +14,7 @@ Findings:
 | 1 | low | dc_attribution_share_shared | The anchor counts "kinds of group", not groups; the real number of D.C. legal-aid and youth groups in the coalition is not given. | If the coalition's member list is found, name the count; otherwise leave (stated judgment). |
 
 Verdict: pass
-Model-sha: 98eab411dd564684cf7464d22cb22dd7dd4a0d719d4ba687ed91b31a44e6d814
+Model-sha: b8252c39a7e3e4d5c5d9308c1bf8417e7ebfb6befa828a13763fb204176f16b2
 Rules: 0.3.13
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -1,6 +1,6 @@
 # Audit: no-means-no-worldwide-charityevals, round 3 (scoped verification of the round-2 fixes)
 Result: 2.002e-4 uov/$ = 0.1001 years of healthy life per 1,000 dollars (combined range 0.015–0.665); cause median 0.0688 (×1.455). Verdict: pass.
-Model-sha: d911fa118d93723d69c5f77acfaa9b9ac8da015eba8ab0662ef8f8d81bb982a6
+Model-sha: 649abe363009e0e0f391d7672c5c6fa79052acc27daf8555bc41c298bcdebda7
 Rules: 0.3.13
 Scope: only the changes in commit 9ff8fd19 (new fact anxiety_mild, rows ptsd_mild_share / ptsd_severe_share / ptsd_disability_weight, assault_rate explainer and quote, others_cost_per_youth wage label, summary and write-up numbers). Nothing else re-audited.
 Mechanical: audit-model lint 0 high / 0 medium / 1 low (spread, already answered in the summary); check.ts all valid; simulation-check stable (5% 0.122×, 50% 1×, 95% 6.56× the best guess).
@@ -29,3 +29,5 @@ Counts: 0 high, 0 medium, 2 low. Round 2's two mediums are resolved (finding 1 d
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 94da5a14.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

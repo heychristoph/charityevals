@@ -17,7 +17,9 @@ Mechanical: scripts/check.ts valid (warnings on range and judgment share only); 
 | 3 | low | generated/usage.json | Tracked index still lists the removed fact. | Regenerate it. |
 
 Verdict: pass
-Model-sha: 060044728b5918447a0ea3f40f327d58353d72b5e5f72267b8dac86413b48e79
+Model-sha: 6ff84e7e209b095ed4f4bd127579c19e1e05a3e2e0ad3dcd389afb4d02a77310
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

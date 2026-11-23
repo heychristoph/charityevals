@@ -14,7 +14,7 @@ Mechanical pass as a ranked charity model: `audit-model.ts` shows two standing L
 Previous round: both lows resolved.
 
 Verdict: pass (no high, no medium; the two standing low notes only)
-Model-sha: 57577f61558b1cd78b058374661c21dc4f8a2f8d1b18a80748451217b97e927d
+Model-sha: ea8f3d1148f0044dbc83651477fbdec41106b916bdf42115729f04374dd15d3c
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.000601 → 0.000489.
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 2 rows changed, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

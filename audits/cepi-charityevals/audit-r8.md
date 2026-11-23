@@ -1,6 +1,6 @@
 # Audit: cepi-charityevals, round 8 (scoped verification)
 Result: 0.1508 years of healthy life per $1,000 (was 0.1673, -9.8%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 159f30a74e13969a2f05dd26530e4a1c73fd12d03cb19c52b7a522056cdbc60c
+Model-sha: 86c8ca116ae7097ffe1adada0e86bb2ca271c78a719f5a49df56976bb167a6bd
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -19,3 +19,5 @@ Summary read: no claim about the future, none stale. Write-up read: the future s
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

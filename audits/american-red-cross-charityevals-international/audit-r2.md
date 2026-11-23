@@ -1,7 +1,7 @@
 # Audit: american-red-cross-charityevals-international, round 2
 Re-stamped: label-only change (summary 'far below' → 'below' the median (round 1's low)); no formula or value changed since round 1, which passed.
 Verdict: pass
-Model-sha: 0a4e8da3701ed3107bcac043440288967a45b45048a5668432d431a0784aaf89
+Model-sha: 105114c680012fcdd635e1a86ab45729c3754e2e66580b9df1fdea3396f15e0a
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -15,3 +15,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the typed text or pointed at the evaluator view, and typed results in the summary made placeholders or recomputed at the 30% mobiliser share (no value moves). Mechanical: headline unchanged, against bc9e3979.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

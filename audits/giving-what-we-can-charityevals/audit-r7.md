@@ -1,6 +1,6 @@
 # Audit: giving-what-we-can-charityevals, round 7 (scoped verification)
 Result: 9.907 years of healthy life per $1,000 (uov/$ 0.01981; was 10.21, -3.0%). Range 3.546 to 26.25, 0% of draws at or below zero; cause median 1.019 (x9.72). Verdict: pass.
-Model-sha: 7f666f75dcf0bd281babd8322ec9fe856c613150a5626a7fbb3470fb63c08632
+Model-sha: abae62fe5b54887c0eab996d36cf5de086b92963f4c2fc2562704f6b383f97a1
 Rules: 0.4.0
 Scope: rule cause-portfolios only (inventory/rule-changes/cause-portfolios.md; docs/normalization.md "November 2026: a cause's portfolio"; assumptions/default.json `portfolios`). The model file is unchanged by the rule except wording; no source or scope re-audit.
 Preflight: passes (no blocking problem); one low (stored simulation out of date).
@@ -24,3 +24,5 @@ Scoped round: the portfolios' sources are in assumptions/default.json `portfolio
 
 ## Drivers
 Discount rate (pledges pay over decades), next dollar, the named GiveWell charities' figures.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -23,7 +23,7 @@ New changes (deaths split by age): `deaths_averted_per_person` and `grt_deaths` 
 No high or medium finding.
 
 Verdict: **pass** (0 high, 0 medium, 2 low).
-Model-sha: 66b4a4edbfb1e40a0f5e1ed3eac64cf37371b81ca12ab2c6d0f0ed491103b807
+Model-sha: 1f3566b2794d7aae1e312565d3f49585c0250334dabba2462e8f91dbc63effe6
 Rules: 0.3.13
 
 Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their reference class (or say plainly there is none); labels and unit labels say what the rows are; no value changed. Mechanical: headline unchanged, against migrate/data-model.
@@ -31,3 +31,5 @@ Re-stamped (16 Nov 2026): Preflight cleanup: judgments' explainers name their re
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 480880ba.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

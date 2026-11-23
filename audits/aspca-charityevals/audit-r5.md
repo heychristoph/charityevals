@@ -14,7 +14,9 @@ Checked:
 | 1 | low | source | pol_attribution_share_shared | "About four groups in New York" understates the public sponsor list (six or more); the California sponsors are not named. | Governor's/ALDF/CAPS pages for S1130/A4283. | Say "one lead of six or more groups in New York" or name them in a `source`; the value stands. | none |
 
 Verdict: pass (0 high, 0 medium, 1 low)
-Model-sha: c8d67f65682c479cfb76c8cedb8584938fd2e0f094cc21a9a49a9ffd76804e65
+Model-sha: 63fda23458e1201b15f2a1111a53a746a1efb3ab872394e01b1da515e8547fb7
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

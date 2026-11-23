@@ -1,7 +1,7 @@
 # Audit: refugees-international-charityevals, round 5
 Re-stamped: `destination_reads` added for the shared moved-money rows (GiveWell's four top charities and the GiveDirectly prior, read as destinations at their figures on the rankings, docs/normalization.md 2.12); no formula or value changed and the result is unchanged (the money-moved branch is 0 here), so round 4's pass stands.
 Verdict: pass
-Model-sha: 66e2e1c5418eca782dd4e154b76440debbb631599bf93bf851b3fe649563d85b
+Model-sha: f4d27647c9fe15f5e0e3e86710b35913b189a1a363cc109cb2d382bb8ad92f5e
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -20,3 +20,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (steps 2 and 3a combin
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ce8e784f.
 
 Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

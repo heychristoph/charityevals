@@ -1,6 +1,6 @@
 # Audit: union-of-concerned-scientists-charityevals-climate, round 8 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.004510 t CO₂e/$ = -0.001514 years of healthy life per $1,000 (combined range -0.5057 to -4.534e-6), against 0.0018 after the non-death change (sign change). Verdict: pass.
-Model-sha: de68eeeeabe70da8ebc7ce4dd960ce55047e364fd912a628edf195b39b87d8cc
+Model-sha: 139800a5ede31a98567ec238ffb56c17ee65f95f6ff4c209c42cee349c9b97bf
 Rules: 0.3.13
 Scope: the rows added or changed by commit 7e73f6cd: ira_public_usd_per_year, ira_public_cost_uov, uov_counted_per_year, the bridge row (0.6 side-effect form), the summary and the write-up sentence stating the result. Programmes and sources of earlier rounds not re-audited.
 Mechanical: audit-model exit 0, "Findings (0)"; check.ts all valid.
@@ -23,7 +23,7 @@ Previous round: round 7's two lows were fixed earlier; not re-examined.
 The law's public cost (cost figure, payer multiple) against the value of its tonnes; UCS's attribution share cancels between them (it scales both), the sign rests on the cost per tonne.
 
 Verdict: pass (no high or medium finding; two lows).
-Model-sha: de68eeeeabe70da8ebc7ce4dd960ce55047e364fd912a628edf195b39b87d8cc
+Model-sha: 139800a5ede31a98567ec238ffb56c17ee65f95f6ff4c209c42cee349c9b97bf
 Re-stamped (15 Nov 2026): round 8's low fixed: summary's gross tonnes per dollar 0.0052 -> 0.0053 (text only)
 
 Re-stamped (16 Nov 2026): EPA methane rule and Advanced Clean Cars II dates read the shared facts (climate.us_oil_gas_methane_rule_*_year, climate.ca_advanced_clean_cars_ii_*_year); same values. Mechanical: headline unchanged, against 2492e3fc.
@@ -35,3 +35,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 7224423b.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against HEAD.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

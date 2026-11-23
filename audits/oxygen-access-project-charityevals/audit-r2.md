@@ -1,6 +1,6 @@
 # Audit: oxygen-access-project-charityevals, round 2
 Result: 0.006910 uov/$ = 3.45 years of healthy life per 1,000 dollars (combined range 0.70–17.1; the model's own ranges, shared figures at their best, −0.024–27.4); cause median 0.110 (×31). Verdict: pass.
-Model-sha: 8668e0093aba5496f00b79493674816508715afdddc9e585cfab97fd29048ef7
+Model-sha: f8e63dc8e6d7c640d86f162171de1e3baf0642bd0624148043760d0dc77bad47
 Rules: 0.3.13
 Scope: Unchanged from round 1 (oxygen care in 23 Gombe State facilities, 14 February to 31 December 2025, the whole £85,293 of the independently examined accounts). Round 2 is a scoped verification only.
 Preflight: pass (no blocking lines).
@@ -32,3 +32,5 @@ No new high or medium was introduced by the changes. The round-1 estimate (3.46)
 
 ## Drivers
 Unchanged in kind: `$missing_data_discount` (shared slider), `internal_validity_adj` (judgment, anchored on the trial's all-child result), `neonatal_mortality_reduction` (sourced, interval stated), `daly_per_child_death` (shared) and `child_mortality_reduction` (sourced). The best remaining improvement is the charity's own data on how many recorded children got oxygen and how many died, by age, and Gombe's oximetry and oxygen coverage before April 2025. The gap to the cause's median (×31) comes from reach (each recorded child is a hypoxaemic admission at a 19–26% risk of death), as in round 1: supported, not a finding.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

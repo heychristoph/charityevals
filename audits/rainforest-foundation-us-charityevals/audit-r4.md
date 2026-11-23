@@ -31,7 +31,7 @@ The headline 0.01157 rounds to the 0.012 in the summary and write-up.
 None.
 
 Verdict: pass (0 high, 0 medium, 0 low).
-Model-sha: 3f198ead09aa8bc395e0c4481b62736bc7c7ef667cd895a725b9170641de2917
+Model-sha: c0fa33b7adf5d7576c96bb7ff2179ef79caf6dc6254eff08aa21f6707ca3679b
 Rules: 0.3.13
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
@@ -52,3 +52,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline 0.01222 → 0.01222 (−0.015%), 26 rows changed, against the tree before the rule.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

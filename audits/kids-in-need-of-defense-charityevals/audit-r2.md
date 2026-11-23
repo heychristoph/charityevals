@@ -1,6 +1,6 @@
 # Audit: kids-in-need-of-defense-charityevals, round 2
 Result: 1.354e-5 daly/$ = 0.0135 years of healthy life per 1,000 dollars (combined range 0.0016–0.118); cause median 0.0866 (x0.16). Verdict: **pass** (no high finding; one low residual, F3).
-Model-sha: f6b19418441339c55672dce1203f6712bf03e874ad455d5834d68489f9e94f13
+Model-sha: a1a37bcf08839689c4f957385b9298afc302f4348617c081d36899800d87471d
 Rules: 0.3.13
 Scope: scoped verification of round 1's F1-F8 and the changed rows only; scope of the model unchanged (2024, legal services plus regional columns with overhead, now including the other children served outside the US).
 Mechanical: lint 0/0/0 (audit-model: Findings (0)), invariants none, simulation stable (5% 0.351, 95% 2.7 x best guess). normalization-audit not re-run (scoped round; no standard-step row changed).
@@ -43,3 +43,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the typed text or pointed at the evaluator view, and typed results in the summary made placeholders or recomputed at the 30% mobiliser share (no value moves). Mechanical: headline unchanged, against bc9e3979.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

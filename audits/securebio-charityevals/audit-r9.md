@@ -1,6 +1,6 @@
 # Audit: securebio-charityevals, round 9 (scoped verification)
 Result: 2.181 years of healthy life per $1,000. Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 408ae7012096cb5ac488bac2e8ef589402f6b699a07d53c49e8224f0923cdeca
+Model-sha: e4f9233ecbe19bad33e5c550b3c2d66832997bf3e9ec86cfe3f67c3d1d3f7ee7
 Rules: 0.3.13
 Scope: the previous round's findings only (rules never-started-weight, lives-added, never-started-prose and never-started-branches). No source or scope re-audit.
 Preflight: passes (low lint range lines only)
@@ -13,3 +13,5 @@ Previous round: round 8, fix needed: survivable catastrophes' share typed as two
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

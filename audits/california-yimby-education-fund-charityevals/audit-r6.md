@@ -12,5 +12,7 @@ Findings:
 
 Verdict: pass
 
-Model-sha: a089843c46d0d828334e3bba24572e1f7c329a5d40e60f338303556dcb25705c
+Model-sha: bcc6bac68bab23c7d011a9d4c67bfb3145043c2fecff14ddebf67fcddb35703f
 Rules: 0.3.13
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

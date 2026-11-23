@@ -1,6 +1,6 @@
 # Audit: redwood-research-charityevals, round 9 (scoped verification)
 Result: 0.02913 years of healthy life per $1,000 (was 0.03423, -14.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 654e54b794dd453486d04d54f80287e9da75a203963aa73cc3f1b58be45cc719
+Model-sha: 995dcdba7b9ac6b2bd0ae46cbec883ae23168b12c6cb4c06a7d1706d24738d40
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -18,3 +18,5 @@ Summary: future "counted only where you count lives that never start (0% by defa
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

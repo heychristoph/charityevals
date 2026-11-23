@@ -24,7 +24,7 @@ Summary and write-up: both match the live result (0.29, about three times the me
 Unchanged: missing_data_discount, uov_per_daly, relief_counterfactual_adj, affected_consumption_share, health_cost_per_child. The aid multiple is not among them.
 
 Verdict: pass
-Model-sha: 7247e37d449eea7164779abef2975725a18ed762d9744acbebee0da6dc78a825
+Model-sha: d1ac3564ab4558eb158c3d2ee907a83aa1875a0e0b3d637b8c0f24f3013b577a
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -42,3 +42,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against c42a537d.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
