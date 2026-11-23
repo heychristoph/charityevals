@@ -1347,7 +1347,9 @@ values move it by the change in the best guess, and the risk setting doesn't mov
 best guess near zero mean nothing. Earlier causes, fixed for every model: calendar years drawn as uncertain; a
 negative number added to 1 only where the row is a percentage; a share stated as certain stays so; a row
 compared with a timeline year is never drawn; one series from one source shares one draw (`drawn_with`);
-a number the model takes 1 minus anywhere (inside `1 - (1 - x) ^ (1/52)` too) drawn as a share. None is
+a number the model takes 1 minus anywhere (inside `1 - (1 - x) ^ (1/52)` too, or `1 - x / 100` for a
+percentage written 0 to 100) drawn as a share; two figures of one series (labels the same but for a year)
+that a formula divides or subtracts drawn together. None is
 broken (November 2026). Where one is, it counts at its best guess, its range falls back to every input at its
 end, and it carries a caveat.
 

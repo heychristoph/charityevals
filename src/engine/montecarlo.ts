@@ -113,12 +113,25 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
   // drawn on its odds; a draw that pushes a computed one outside (an efficacy times an adjustment above
   // 100%) is drawn again. A published range keeps its tails: 1 minus a relative risk whose interval runs
   // past 1 is possible harm, not an impossible share.
-  const bounds: string[] = [], shareInputs = new Set<string>();
-  // An input the model takes 1 minus anywhere (`1 - x`, or inside `1 - (1 - x) ^ (1/52)`) is a share.
+  const bounds: string[] = [], shareInputs = new Set<string>(), percentShares = new Set<string>();
+  // Two figures of one series (labels the same but for a year) that a formula divides or subtracts, a trend
+  // or a change: drawn together, as `drawn_with` does, so the trend isn't made of two independent errors.
+  const yearless = (id: string) => m.byId.get(id)?.label?.replace(/\b(19|20)\d\d\b/g, "Y");
+  const series: [string, string][] = [];
+  // An input the model takes 1 minus anywhere (`1 - x`, inside `1 - (1 - x) ^ (1/52)`, or `1 - x / 100`
+  // for a percentage written 0 to 100) is a share.
   const complements = (n: Node | undefined): void => {
     if (!n) return;
     if (n.type === "bin") {
-      if (n.op === "-" && n.left.type === "num" && n.left.value === 1 && n.right.type === "ref" && n.right.scope === "row") shareInputs.add(n.right.name);
+      if (n.op === "-" && n.left.type === "num" && n.left.value === 1) {
+        const x = n.right;
+        if (x.type === "ref" && x.scope === "row") shareInputs.add(x.name);
+        else if (x.type === "bin" && x.op === "/" && x.left.type === "ref" && x.left.scope === "row" && x.right.type === "num" && x.right.value === 100) percentShares.add(x.left.name);
+      }
+      if ((n.op === "/" || n.op === "-") && n.left.type === "ref" && n.right.type === "ref" && n.left.scope === "row" && n.right.scope === "row" && n.left.name !== n.right.name) {
+        const a = yearless(n.left.name), b = yearless(n.right.name);
+        if (a && a === b && a !== m.byId.get(n.left.name)?.label) series.push([n.left.name, n.right.name]);
+      }
       complements(n.left); complements(n.right);
     } else if (n.type === "neg") complements(n.arg);
     else if (n.type === "call") n.args.forEach(complements);
@@ -155,10 +168,15 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
       const r = m.byId.get(d.id);
       const best = values[d.id];
       const share = r?.format === "percent" && best >= 0 && best <= 1 && (typeof r.value !== "object" || (r.value.high ?? 1) <= 1);
+      const odds = (p: number) => Math.log(p / (1 - p));
       const s = ratioInputs.has(d.id)
         ? { key: d.id, draw: (g: number) => 1 + (best - 1) * Math.exp(g * (d.spread / Z90)) }
+        : percentShares.has(d.id) && !d.published && best > 0 && best < 100
+        ? { key: d.id, draw: (g: number) => 100 / (1 + Math.exp(-(odds(best / 100) + g * (d.spread / Z90)))) }
         : spec(d, best, r?.interval, r?.shape, !!share, r?.format === "percent", shareInputs.has(d.id));
-      if (s) specs.push({ ...s, key: d.id, ...(r?.drawn_with ? { group: r.drawn_with } : {}) });
+      const pair = series.find(([a, b]) => a === d.id || b === d.id);
+      const group = r?.drawn_with ?? (pair && !d.published ? `series:${pair[0]}` : undefined);
+      if (s) specs.push({ ...s, key: d.id, ...(group ? { group } : {}) });
     } else if (d.scope === "fact") {
       const f = lib.facts.get(d.id);
       const s = f && spec(d, pickValue(f.value), f.interval, f.shape, false, f.format === "percent");
