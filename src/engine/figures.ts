@@ -75,9 +75,10 @@ export function barLow(lib: Library, m: ResolvedModel, range: Range): number | u
   if (!(high > 0)) return undefined;
   const d = lib.distributions?.[m.id];
   if (d?.additive && !d.unstable) {
-    // Stored in the result's units: the steps move with the range.
-    const shift = range.high - d.q[d.q.length - 1];
-    const positive = d.q.map((x) => x + shift).filter((v) => v > 0);
+    // Stored in the result's units: every step maps the way the range's ends do (scaled and moved).
+    const q0 = d.q[0], q1 = d.q[d.q.length - 1];
+    const k = q1 !== q0 ? (Math.max(range.low, range.high) - Math.min(range.low, range.high)) / (q1 - q0) : 1;
+    const positive = d.q.map((x) => Math.min(range.low, range.high) + (x - q0) * k).filter((v) => v > 0);
     return positive.length ? Math.min(...positive) : Number.MIN_VALUE;
   }
   const q = d?.q;
