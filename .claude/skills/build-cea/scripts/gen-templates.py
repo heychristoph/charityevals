@@ -48,15 +48,25 @@ PUBLISHED = "2026-11-04"  # the build date; on or after src/engine/lint.ts MISSI
 def src(title, page="REPLACE: page/table", quote="REPLACE: verbatim sentence"):
     return {"title": f"TEMPLATE: {title}", "url": EX, "page": page, "quote": quote, "retrieved": D}
 
+# What kind of number each input is (schema `domain`, docs/normalization.md 2.18): the simulation draws it
+# by its kind; INV-27 fails a model whose input states none or whose value doesn't fit. A new input gets one here.
+DOMAINS = {
+    **dict.fromkeys(["health_people", "nature_people"], "positive"),
+    **dict.fromkeys(["adv_p_success", "ai_attribution_share_shared", "ai_cost_share", "ai_counterfactual_adj", "ai_misuse_cost_share", "annual_risk_reduction", "attribution_share_shared", "bio_attribution_share_shared", "bio_cost_share", "bio_counterfactual_adj", "climate_attribution_share_shared", "climate_cost_share", "climate_counterfactual_adj", "counterfactual_adj", "deaths_averted_per_person", "evidence_adj", "external_validity_adj", "fade_rate", "fb_attribution_share_shared", "fb_cost_share", "fb_counterfactual_adj", "fb_credit_share", "fb_share_working", "fuel_share", "future_share_lost", "gain_ratio", "implementation_adj", "later_gain_share_per_year", "mortality_reduction", "mortality_uov_ratio", "nuclear_attribution_share_shared", "nuclear_cost_share", "nuclear_counterfactual_adj", "p_success", "pol_attribution_share_shared", "pol_cost_share", "pol_counterfactual_adj", "pol_p_success", "pol_relative_cut", "recipients_consumption_share", "share_15_49_of_over15", "share_5_14_of_over5", "share_burden_addressable", "share_consumed_y1", "share_dog", "share_excess_averted", "share_not_yet_compliant", "share_under5", "spillover_ratio", "stillbirths_averted_per_person", "suffering_share_avoided", "transfers_share_of_cost", "y1_share"], "share"),
+    **dict.fromkeys(["adv_dalys_per_person_year", "adv_people_affected_per_year", "adv_years_until_effect", "ai_evidence_adj", "ai_smaller_deaths", "ai_smaller_per_year", "ai_years_until_effect", "animals_helped", "animals_per_year", "baseline_consumption", "baseline_mortality_rate", "bio_evidence_adj", "bio_years_until_effect", "births_averted_per_neuter", "careers_changed", "catastrophe_deaths", "climate_evidence_adj", "crisis_mortality_rate", "dalys_averted_per_person", "dalys_illness_averted_per_person", "dalys_illness_per_person", "dalys_per_person_year", "delay_years", "disease_dalys_per_year", "effect_duration_years", "fb_evidence_adj", "fb_people", "fuel_smoke_factor", "gift_to_grant_years", "hectares_protected", "households_reached", "income_years", "initial_effect_sd", "later_years", "leverage_funging_adj", "livelihood_people", "ln_income_gain_per_year", "ls_effect_years", "ls_gain_per_person_year", "meal_mix_vs_reference", "meals_replaced_per_year", "measured_years", "money_moved", "neuters", "nuclear_evidence_adj", "nuclear_smaller_deaths", "nuclear_smaller_per_year", "nuclear_years_until_effect", "pain_days_per_unowned_life", "people_affected_per_year", "people_reached", "pol_evidence_adj", "pol_wins", "pol_years_until_effect", "program_expenses", "program_spend", "released_ls_gain_per_year", "released_people", "released_years", "tail_years", "tco2e_per_hectare_year", "tonnes_per_year_if_won", "total_expenses", "transfer_per_household", "units_affected_per_year", "value_delivered_per_person", "value_per_person", "value_per_unit_year", "wild_animal_years", "years_better_life", "years_brought_forward", "years_exposed", "years_of_coverage", "years_protected", "years_until_avoided", "years_until_effect"], "positive"),
+    **dict.fromkeys(["hazard_harm_share", "ln_gain_per_person_year", "other_unmodelled_share", "speedup_harm_share", "unmodelled_benefits_adj", "wild_pain_days_per_animal_year"], "signed"),
+}
+
 def inp(id, section, label, value, kind, explainer, fmt="number", unit=None, source=None):
-    r = {"id": id, "section": section, "label": label, "format": fmt, "value": value, "kind": kind}
+    r = {"id": id, "domain": DOMAINS[id], "section": section, "label": label, "format": fmt, "value": value, "kind": kind}
     if unit: r["unit"] = unit
     if source: r["source"] = source
     r["explainer"] = "TEMPLATE: " + explainer
     return r
 
-def f(id, section, label, formula, explainer=None, fmt="number", unit=None, published=None, credit=None):
+def f(id, section, label, formula, explainer=None, fmt="number", unit=None, published=None, credit=None, domain=None):
     r = {"id": id, "section": section, "label": label, "format": fmt, "formula": formula}
+    if domain: r["domain"] = domain
     if credit: r["credit"] = credit
     if unit: r["unit"] = unit
     if published is not None: r["published"] = published
@@ -713,7 +723,7 @@ T["companion-animals"] = model("companion-animals", "companion animals", "ced", 
         f("pain_days_per_dollar", "outcome", "Days of pain spared per dollar", "outcome_total / cost_total", None, "small", "days / $"),
         inp("share_dog", "species", "Share of the days spared that are dogs'", {"low": 0.3, "best": 0.5, "high": 0.7}, "estimate",
             "dogs' share of the animals helped, weighted by days spared, from the charity's intake figures; the rest are cats.", "percent", source=src("charity annual report")),
-        f("share_cat", "species", "Share of the days spared that are cats'", "1 - share_dog", None, "percent"),
+        f("share_cat", "species", "Share of the days spared that are cats'", "1 - share_dog", None, "percent", domain="share"),
     ] + donor_rows("pain_days", "Days of pain spared", "services") + donor_tail("pain_days", "Days of pain spared", unit="ced", animal=True),
     "what the charity does, where, " + BOTTOM, "unit_cost")
 T["companion-animals"]["rows"] += raw_species_rows([("dog", "share_dog"), ("cat", "share_cat")])

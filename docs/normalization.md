@@ -1327,11 +1327,13 @@ The uncertainty engine reads every range at its interval.
 seeded by model id): at the defaults, in our view, 1,000 draws of the inputs that carry 99.9% of the
 model's variance, the reader's own value judgments (the sliders) held fixed. Each input is split at its
 best guess, so an asymmetric range stays asymmetric. Inputs without a range take the default spread by
-kind (judgment ×1.5, estimate ×1.3, data ×1.1), bounded to what the number can be: a share (a percentage,
-or a number the model takes 1 minus) on its odds so it stays between 0 and 1; a ratio whose effect is its
-distance from 1 (a relative risk in rate × ratio − rate) with the spread on that distance, so the effect keeps
-its sign; a negative share (an adjustment of −40%, a decline of 2.5% a year) scaled by its own size, never
-below −100%: a default changes a number's size, never its sign. A draw that pushes a computed share (a row `1 - x`) outside 0–1 is drawn again; where
+kind of source (judgment ×1.5, estimate ×1.3, data ×1.1), bounded by the kind of number the input states
+(`domain`, INV-27; every input row and shared fact): a `share` (0–1) on its odds so it stays between 0 and 1;
+a `percent` (0–100) the same; a `ratio` whose effect is its distance from 1 (a relative risk) with the spread
+on that distance, so the effect keeps its sign; `positive` log-normal; `signed` scaled by its own size, a
+negative percentage (an adjustment of −40%) never below −100%: a default changes a number's size, never its
+sign. A published range is clipped to the kind. A draw that pushes a calculated share (a row stated `domain:
+share`, as every `1 - x` between 0 and 1 is) outside 0–1 is drawn again; where
 over three in four draws would be impossible, the defaults don't fit the model and the simulation counts
 as unstable; calendar years never vary (a row or fact named a year, a whole number from 1950 to 2150 without
 a published range, such a number named for a time, or a row in unit "Year": a sheet's timeline index). Stored per model: the result at 5%, 10%, …, 95% and its average, as
@@ -1347,8 +1349,9 @@ values move it by the change in the best guess, and the risk setting doesn't mov
 best guess near zero mean nothing. Earlier causes, fixed for every model: calendar years drawn as uncertain; a
 negative number added to 1 only where the row is a percentage; a share stated as certain stays so; a row
 compared with a timeline year is never drawn; one series from one source shares one draw (`drawn_with`);
-a number the model takes 1 minus anywhere (inside `1 - (1 - x) ^ (1/52)` too, or `1 - x / 100` for a
-percentage written 0 to 100) drawn as a share; two figures of one series (labels the same but for a year)
+kinds of number read from the formulas' shapes, missing a percentage written 0 to 100 (Dansk Vegetarisk
+Forening): every input now states its kind, checked against its value and every formula that takes 1 minus
+it (scripts/domains.ts wrote the first ones); two figures of one series (labels the same but for a year)
 that a formula divides or subtracts drawn together. None is
 broken (November 2026). Where one is, it counts at its best guess, its range falls back to every input at its
 end, and it carries a caveat.

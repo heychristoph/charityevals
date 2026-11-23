@@ -114,6 +114,13 @@ const rowShape = {
   /** Drawn with another row of this model (its id): the same series in another year or place, from one
    * source, so the simulation moves them together instead of letting their differences swing. */
   drawn_with: z.string().optional(),
+  /** What kind of number an input is, so the simulation keeps every draw within what it can be (an
+   * input's default spread, and a range drawn on its scale): `share`, a part of a whole from 0 to 1 (a
+   * probability, an efficacy, a coverage); `percent`, the same written 0 to 100; `ratio`, a multiplier
+   * whose effect is its distance from 1 (a relative risk of 1.11 in `rate × ratio − rate`); `positive`, a
+   * count, an amount of money or time, a rate or factor above zero; `signed`, a change or adjustment that
+   * can be either side of zero. Every input states it (INV-27); docs/normalization.md 2.18. */
+  domain: z.enum(["share", "percent", "ratio", "positive", "signed"]).optional(),
   single_event: z.union([z.literal(true), z.object({ with: z.string() }).strict(), z.object({ one_of: z.string() }).strict()]).optional(),
 };
 

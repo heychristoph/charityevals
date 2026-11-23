@@ -15,6 +15,7 @@ import { isSideSheet, rankingPlan } from "./ranking";
 import { RANKED_UNITS, bridgeRows, bridgesOf } from "./bridges";
 export { bridgeFormula, bridgesOf, type Bridge } from "./bridges";
 import { rowsFeeding } from "./sensitivity";
+import { complementUses, fits } from "./domains";
 import { COUNTRIES as COUNTRY_LIST, byCode, byIso3, steps } from "./countries";
 import { LIVES_ADDED } from "./population";
 
@@ -1171,6 +1172,52 @@ export function inv26(lib: Library): InvariantReport {
   };
 }
 
+// --- INV-27: every input states what kind of number it is ---------------------------------------------
+
+/** Every input row (models and shared facts) states its kind (`domain`), its value and range fit it, and a
+ * formula that takes 1 minus it agrees; a calculated `1 - x` between 0 and 1 states share. */
+export function inv27(lib: Library): InvariantReport {
+  const violations: Violation[] = [];
+  const ends = (v: unknown) => (v === undefined ? [] : typeof v === "object" ? [pickValue(v as never, "low"), pickValue(v as never), pickValue(v as never, "high")] : [v as number]);
+  const factsUsedAs = new Map<string, Set<string>>();
+  for (const [key, f] of lib.facts) {
+    if (f.value === undefined || f.format === "toggle") continue;
+    if (!f.domain) violations.push({ inv: "INV-27", model: "facts", where: key, detail: `@${key} states no kind (domain: share, percent, ratio, positive or signed)` });
+    else if (!fits(f.domain, ...ends(f.value))) violations.push({ inv: "INV-27", model: "facts", where: key, detail: `@${key} is ${JSON.stringify(f.value)}, not a ${f.domain}` });
+  }
+  const models = [...lib.models.values()];
+  for (const m of models) {
+    const uses = complementUses(m);
+    for (const [set, ok] of [[uses.share, ["share", "signed"]], [uses.percent, ["percent", "signed"]]] as const) {
+      for (const x of set) {
+        const d = x.startsWith("@") ? lib.facts.get(x.slice(1))?.domain : m.byId.get(x)?.domain;
+        if (d && !(ok as readonly string[]).includes(d)) {
+          if (x.startsWith("@")) (factsUsedAs.get(x) ?? factsUsedAs.set(x, new Set()).get(x)!).add(m.id);
+          else violations.push({ inv: "INV-27", model: m.id, where: x, detail: `a formula takes ${set === uses.percent ? "1 minus it / 100" : "1 minus it"}, so it is a ${ok[0]}, not ${d}` });
+        }
+      }
+    }
+    const values = (() => { try { return compute(lib, m, assumptionValues(lib.assumptions)); } catch { return {} as Record<string, number>; } })();
+    for (const r of ownRows(m)) {
+      if (r.format === "toggle") continue;
+      if (!r.node) {
+        if (r.value === undefined) continue;
+        if (!r.domain) violations.push({ inv: "INV-27", model: m.id, where: r.id, detail: "the input states no kind (domain: share, percent, ratio, positive or signed)" });
+        else if (!fits(r.domain, ...ends(r.value), ...ends(r.published))) violations.push({ inv: "INV-27", model: m.id, where: r.id, detail: `${JSON.stringify(r.value)} is not a ${r.domain}` });
+      } else {
+        const n = r.node;
+        const complement = n.type === "bin" && n.op === "-" && n.left.type === "num" && n.left.value === 1;
+        if (complement && values[r.id] >= 0 && values[r.id] <= 1 && r.domain !== "share" && r.domain !== "signed") violations.push({ inv: "INV-27", model: m.id, where: r.id, detail: "a calculated 1 − x between 0 and 1 states domain share, so the simulation keeps it a share" });
+      }
+    }
+  }
+  for (const [x, ids] of factsUsedAs) violations.push({ inv: "INV-27", model: "facts", where: x.slice(1), detail: `${[...ids].slice(0, 3).join(", ")} take 1 minus it, so it is a share, not ${lib.facts.get(x.slice(1))?.domain}` });
+  return {
+    id: "INV-27", title: "Every input states what kind of number it is", status: "checked", checked: models.length, violations,
+    how: "Every input row of every model (variants: their overrides) and every shared fact, toggles left out, states `domain`; its value, range and published value fit it (share 0–1, percent 0–100, ratio above 0, positive 0 or more). An input a formula takes 1 minus (`1 - x`) is a share or signed; `1 - x / 100`, a percent or signed. A calculated `1 - x` between 0 and 1 at the defaults states share.",
+  };
+}
+
 // --- INV-13: same concept, same value ---------------------------------------------------------------
 
 /** Concepts several evaluators' models state, each with its shared version. A literal row naming the
@@ -1833,7 +1880,7 @@ export function inv23(lib: Library, av = asWritten(lib)): InvariantReport {
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = asWritten(lib);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv9c(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av), inv24(lib), inv25(lib), inv26(lib)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv9c(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av), inv24(lib), inv25(lib), inv26(lib), inv27(lib)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */
