@@ -123,7 +123,8 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
   const ratioInputs = new Set<string>();
   if (positive.length) {
     for (const d of kept) {
-      if (d.scope !== "row" || d.published || !(values[d.id] > 0) || values[d.id] === 1) continue;
+      // A share the model takes 1 minus is drawn on its odds; setting it to 1 zeroes its complement too.
+      if (d.scope !== "row" || d.published || shareInputs.has(d.id) || !(values[d.id] > 0) || values[d.id] === 1) continue;
       const fed = positive.filter((id) => inputsOf(id).has(d.id));
       if (!fed.length) continue;
       const at1 = headlineAndRows(lib, m, av, { ...edits, [d.id]: 1 }, "charityevals", fed).rows;

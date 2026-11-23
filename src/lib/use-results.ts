@@ -71,7 +71,7 @@ function fullOf(m: ResolvedModel, av: Record<string, number>): Result {
   const hit = full.get(m);
   if (hit?.av === av) return hit.r;
   const s = sensitivity(lib, m, av);
-  const range = modelRange(lib, m, s.central, av);
+  const range = modelRange(lib, m, s.central, av, { low: s.jointLow, high: s.jointHigh });
   const r: Result = { model: m, central: s.central, ...range, barLow: barLow(lib, m, range), s, flags: modelFlags(lib, m, range, { judgment: judgmentShare(lib, m, av), points: s.pointInputs.length }) };
   full.set(m, { av, r });
   return r;
