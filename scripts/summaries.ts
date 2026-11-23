@@ -148,9 +148,11 @@ export function distributions(lib: Library): Record<string, Distribution> {
 
 /** The models every page ships: a stand-in for each summarised standalone model, the rest as written. */
 function browserModels(built: ReturnType<typeof library>, dist: Record<string, Distribution>): unknown[] {
-  const ids = summarisedIds(built.own, dist);
-  const stand = new Map((summaries({ ...built, raws: built.own.filter((r) => ids.has(r.id)) }, dist) as { id: string }[]).map((s) => [s.id, s]));
-  return built.own.map((r) => stand.get(r.id) ?? r);
+  // Only models in the library: an unpublished owner's (owners.json `published: false`) never ship.
+  const own = built.own.filter((r) => built.lib.models.has(r.id));
+  const ids = summarisedIds(own, dist);
+  const stand = new Map((summaries({ ...built, raws: own.filter((r) => ids.has(r.id)) }, dist) as { id: string }[]).map((s) => [s.id, s]));
+  return own.map((r) => stand.get(r.id) ?? r);
 }
 
 const built = library();

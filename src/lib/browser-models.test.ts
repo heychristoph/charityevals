@@ -22,8 +22,10 @@ const library = (models: unknown[]) => buildLibrary([...models, ...bulk], read(j
 
 describe("browser models", () => {
   const full = library(own);
+  // An unpublished owner's models (owners.json `published: false`) leave the library and never ship.
+  const shipped = own.filter((m) => full.models.has(m.id));
   const browser = library(read(join(root, "generated/browser-models.json")));
-  const ids = summarisedIds(own, distributions);
+  const ids = summarisedIds(shipped, distributions);
 
   it("are valid models, the same set as the full library", () => {
     expect(browser.errors).toEqual([]);
@@ -32,7 +34,7 @@ describe("browser models", () => {
 
   it("are summaries for standalone models and the files as written for variant families", () => {
     expect(ids.size).toBeGreaterThan(100);
-    for (const m of own) if (!ids.has(m.id)) expect(m.extends || own.some((x) => x.extends === m.id) || distributions[m.id]?.unstable).toBeTruthy();
+    for (const m of shipped) if (!ids.has(m.id)) expect(m.extends || shipped.some((x) => x.extends === m.id) || distributions[m.id]?.unstable).toBeTruthy();
   });
 
   it("match the full models under other assumptions, in both views and on the headline", () => {
