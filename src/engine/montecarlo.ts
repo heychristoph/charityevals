@@ -138,8 +138,13 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
   // Overlapping pairs (2007 / 2023 and 2020 / 2023) are one series: one draw for all of it.
   const seriesParent = new Map<string, string>();
   const seriesRoot = (x: string): string => { const p = seriesParent.get(x) ?? x; if (p === x) return x; const r = seriesRoot(p); seriesParent.set(x, r); return r; };
-  for (const [a, b] of series) { const ra = seriesRoot(a), rb = seriesRoot(b); if (ra !== rb) seriesParent.set(rb, ra); }
-  const inSeries = new Set(series.flat());
+  const join = (a: string, b: string) => { const ra = seriesRoot(a), rb = seriesRoot(b); if (ra !== rb) seriesParent.set(rb, ra); };
+  // A series from default spreads only (a published range is the source's own); a row `drawn_with` another
+  // joins that row's draw, so a series and an explicit link to it are one draw.
+  const isPublished = (id: string) => published.has(id);
+  const linked = new Set<string>();
+  for (const [a, b] of series) if (!isPublished(a) && !isPublished(b)) (join(a, b), linked.add(a), linked.add(b));
+  for (const r of m.rows) if (r.drawn_with) (join(r.id, r.drawn_with), linked.add(r.id), linked.add(r.drawn_with));
   // Each input drawn by its kind; one that doesn't state it (INV-27 fails the build) as a positive number.
   const specs: Spec[] = [];
   for (const d of kept) {
@@ -147,7 +152,7 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
       const r = m.byId.get(d.id);
       const best = values[d.id];
       const s = spec(d, best, r?.interval, r?.shape, r?.domain ?? "positive", r?.format === "percent");
-      const group = r?.drawn_with ?? (inSeries.has(d.id) && !d.published ? `series:${seriesRoot(d.id)}` : undefined);
+      const group = linked.has(d.id) ? `draw:${seriesRoot(d.id)}` : undefined;
       if (s) specs.push({ ...s, key: d.id, ...(group ? { group } : {}) });
     } else if (d.scope === "fact") {
       const f = lib.facts.get(d.id);
