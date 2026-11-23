@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildLibrary, assumptionValues, bottomLine, headline } from "../engine/model";
-import { summarisedIds } from "./browser-models";
+import { FACT_TEXT, summarisedIds } from "./browser-models";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -50,5 +50,26 @@ describe("browser models", () => {
       if (!close(x, y)) diffs.push(`${id} headline: ${x} vs ${y}`);
     }
     expect(diffs).toEqual([]);
+  });
+
+  it("ship the facts without their text and give the same results with them", () => {
+    const facts = walk(join(root, "facts")).map(read);
+    const slim = read(join(root, "generated/browser-facts.json"));
+    const text = JSON.stringify(slim);
+    for (const k of FACT_TEXT) expect(text.includes(`"${k}":`)).toBe(false);
+    const withSlim = buildLibrary([...read(join(root, "generated/browser-models.json")), ...bulk], read(join(root, "assumptions/default.json")),
+      slim, walk(join(root, "charities")).map(read), read(join(root, "owners.json")), { distributions, trusted: true });
+    const av = assumptionValues(full.assumptions, { daly_per_child_death: 80, discount_rate: 0.01 });
+    const diffs: string[] = [];
+    for (const [id, m] of full.models) {
+      if (m.kind === "template" || !m.output) continue;
+      const x = headline(full, m, av), y = headline(withSlim, withSlim.models.get(id)!, av);
+      if (!((Number.isNaN(x) && Number.isNaN(y)) || Math.abs(x - y) <= 1e-9 * Math.max(1, Math.abs(x)))) diffs.push(`${id}: ${x} vs ${y}`);
+    }
+    expect(diffs).toEqual([]);
+    // What the page fetches back (/fact-text.json) is every stripped field.
+    const stripped = facts.flatMap((f: { id: string; rows: Record<string, unknown>[] }) => f.rows.flatMap((r) => FACT_TEXT.filter((k) => r[k] !== undefined).map((k) => `${f.id}.${r.id}:${k}`)));
+    const served = [...full.facts].flatMap(([key, f]) => FACT_TEXT.filter((k) => (f as Record<string, unknown>)[k] !== undefined).map((k) => `${key}:${k}`));
+    expect(new Set(served)).toEqual(new Set(stripped));
   });
 }, 300_000);
