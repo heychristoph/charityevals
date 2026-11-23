@@ -92,4 +92,10 @@ describe("a result near zero (additive)", () => {
     expect(r.low).toBeCloseTo(central + live.q[0] - live.at!, 9);
     expect(r.high).toBeCloseTo(central + live.q[18] - live.at!, 9);
   });
+  it("keeps a tiny result's spread: only a miss stores as zero", () => {
+    const tiny = simulate(base, m0, 2000, av, { c: 1e-13 })!;
+    expect(tiny.additive).toBe(true);
+    expect(tiny.q[0]).toBeLessThan(0);
+    expect(tiny.q[18]).toBeGreaterThan(0);
+  });
 });

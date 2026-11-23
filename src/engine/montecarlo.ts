@@ -261,14 +261,16 @@ function drawInto(p: Plan, n: number, xs: number[], smooth: number[]): number {
 const MAX_IMPOSSIBLE = 0.75;
 
 // A miss drawn as a vanishing chance stores as 0.
-const round = (x: number) => (Math.abs(x) < 1e-6 ? 0 : Number(x.toPrecision(4)));
-function quantiles(xs: number[]) {
+// `scale`: what 1 is in (the best guess, for steps stored in the result's own units), so the cutoff is a
+// miss, never a small result.
+const round = (x: number, scale = 1) => (Math.abs(x) < 1e-6 * Math.abs(scale) ? 0 : Number(x.toPrecision(4)));
+function quantiles(xs: number[], scale = 1) {
   xs.sort((a, b) => a - b);
   const at = (p: number) => {
     const k = p * (xs.length - 1), i = Math.floor(k), f = k - i;
     return i + 1 < xs.length ? xs[i] * (1 - f) + xs[i + 1] * f : xs[i];
   };
-  return QUANTILES.map((p) => round(at(p)));
+  return QUANTILES.map((p) => round(at(p), scale));
 }
 
 function summarise(xs: number[], smooth: number[], draws: number, central: number, redrawn = 0, conv?: number): Distribution | undefined {
@@ -289,7 +291,7 @@ function summarise(xs: number[], smooth: number[], draws: number, central: numbe
   const unstable = redrawn / (redrawn + draws) > MAX_IMPOSSIBLE;
   void lo; void hi;
   if (!(mid > 1 / 3 && mid < 3)) {
-    const abs = quantiles(xs.map((x) => x * central));
+    const abs = quantiles(xs.map((x) => x * central), central);
     return {
       q: abs,
       mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
