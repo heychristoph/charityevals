@@ -59,9 +59,9 @@ export function jointRange(lib: Library, m: ResolvedModel, av: Record<string, nu
 
 /** A model's range around its headline `central`: the simulated 5% to 95% (src/engine/montecarlo.ts),
  * else every input at its ends together. `joint`: those ends already worked out, with the reader's edits
- * (a model page's sensitivity), used instead of the stored ones. */
-export function modelRange(lib: Library, m: ResolvedModel, central: number, av: Record<string, number>, joint?: Range): Range {
-  return plausibleRange(lib, m, central, av) ?? (joint ? { low: Math.min(joint.low, joint.high), high: Math.max(joint.low, joint.high) } : jointRange(lib, m, av));
+ * (a model page's sensitivity), used instead of the stored ones. `edits`: the reader's own numbers, as `central` carries them. */
+export function modelRange(lib: Library, m: ResolvedModel, central: number, av: Record<string, number>, joint?: Range, edits: Record<string, number> = {}): Range {
+  return plausibleRange(lib, m, central, av, edits) ?? (joint ? { low: Math.min(joint.low, joint.high), high: Math.max(joint.low, joint.high) } : jointRange(lib, m, av));
 }
 
 /** Where a range's bar starts on the rankings' log scale: its low end, or for a range reaching zero or

@@ -1121,8 +1121,6 @@ export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityev
   return n;
 }
 
-/** A model's plausible range (5% to 95% of its simulation) around a headline `central` that already
- * carries the reader's risk factor: undefined without a simulation. */
 /** The caveat on a model whose simulation can't be relied on. */
 export function unstableFlag(lib: Library, m: ResolvedModel): { level: "warn"; short: string; text: string } | undefined {
   return lib.distributions?.[m.id]?.unstable
@@ -1130,20 +1128,22 @@ export function unstableFlag(lib: Library, m: ResolvedModel): { level: "warn"; s
     : undefined;
 }
 
-export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>): { low: number; high: number } | undefined {
+/** A model's plausible range (5% to 95% of its simulation) around a headline `central` that already
+ * carries the reader's risk factor and `edits` (the reader's own numbers): undefined without a simulation. */
+export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>, edits: Record<string, number> = {}): { low: number; high: number } | undefined {
   const d = lib.distributions?.[m.id];
   if (d && !d.unstable && d.additive && d.at !== undefined) {
     // The model's own spread around its best guess, times what turns its result into the headline now
     // against at the defaults: a factor after the model scales every draw, the reader's other values move
     // the centre.
-    const native = m.output ? compute(lib, m, a)[m.output.row] : NaN;
+    const native = m.output ? compute(lib, m, a, edits)[m.output.row] : NaN;
     const k = d.conv && Number.isFinite(native) && native !== 0 && Number.isFinite(central / native) ? central / native / d.conv : 1;
     return { low: central + (d.q[0] - d.at) * k, high: central + (d.q[QUANTILES.length - 1] - d.at) * k };
   }
   if (!d || d.unstable || !(anchorOf(d) > 0)) return undefined;
   // The best guess from the headline: undefined where the risk factor is 0 (a long shot below its chance).
   const f = riskFactor(lib, m, a);
-  const best = f > 0 ? central / f : headline(lib, m, { ...a, [RISK_QUANTILE]: RISK_OFF });
+  const best = f > 0 ? central / f : headline(lib, m, { ...a, [RISK_QUANTILE]: RISK_OFF }, edits);
   return { low: (best * d.q[0]) / anchorOf(d), high: (best * d.q[QUANTILES.length - 1]) / anchorOf(d) };
 }
 

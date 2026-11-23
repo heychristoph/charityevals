@@ -74,3 +74,22 @@ describe("net harm", () => {
     expect(lintModel(l, models[0]).map((f) => f.code)).not.toContain("non-positive");
   }, 60_000);
 });
+
+describe("a result near zero (additive)", () => {
+  const near = { id: "near", name: "near", kind: "charity", cause: "global-health", output: { row: "out", unit: "u", label: "per $" },
+    rows: [input("a", { low: 1, best: 10, high: 100 }), input("b", { low: 1, best: 9.9, high: 98 }), { ...input("c", 1), domain: "positive" }, { id: "out", label: "out", formula: "c * (a - b)" }] };
+  const base = buildLibrary([near], assumptions);
+  const m0 = base.models.get("near")!;
+  const av = assumptionValues(base.assumptions);
+  it("keeps an edited model's range on its own simulation: the edit isn't applied to the spread twice", () => {
+    const edits = { c: 0.5 };
+    const live = simulate(base, m0, 2000, av, edits)!;
+    expect(live.additive).toBe(true);
+    const lib = buildLibrary([near], assumptions, [], [], [], { distributions: { near: live } });
+    const m = lib.models.get("near")!;
+    const central = headline(lib, m, av, edits);
+    const r = plausibleRange(lib, m, central, av, edits)!;
+    expect(r.low).toBeCloseTo(central + live.q[0] - live.at!, 9);
+    expect(r.high).toBeCloseTo(central + live.q[18] - live.at!, 9);
+  });
+});
